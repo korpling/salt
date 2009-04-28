@@ -82,15 +82,6 @@ public interface SaltPackage extends EPackage {
 	int STOKEN__NAME = SaltCorePackage.SELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STOKEN__TYPE = SaltCorePackage.SELEMENT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -98,15 +89,6 @@ public interface SaltPackage extends EPackage {
 	 * @ordered
 	 */
 	int STOKEN__ID = SaltCorePackage.SELEMENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STOKEN__SELEMENT_PATH = SaltCorePackage.SELEMENT__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -272,15 +254,6 @@ public interface SaltPackage extends EPackage {
 	int SDATA_SOURCE__NAME = SaltCorePackage.SELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDATA_SOURCE__TYPE = SaltCorePackage.SELEMENT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -288,15 +261,6 @@ public interface SaltPackage extends EPackage {
 	 * @ordered
 	 */
 	int SDATA_SOURCE__ID = SaltCorePackage.SELEMENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDATA_SOURCE__SELEMENT_PATH = SaltCorePackage.SELEMENT__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -444,15 +408,6 @@ public interface SaltPackage extends EPackage {
 	int STEXTUAL_DATA_SOURCE__NAME = SDATA_SOURCE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEXTUAL_DATA_SOURCE__TYPE = SDATA_SOURCE__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -460,15 +415,6 @@ public interface SaltPackage extends EPackage {
 	 * @ordered
 	 */
 	int STEXTUAL_DATA_SOURCE__ID = SDATA_SOURCE__ID;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEXTUAL_DATA_SOURCE__SELEMENT_PATH = SDATA_SOURCE__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -896,24 +842,6 @@ public interface SaltPackage extends EPackage {
 	int STEXTUAL_RELATION__NAME = SaltCorePackage.SRELATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEXTUAL_RELATION__TYPE = SaltCorePackage.SRELATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEXTUAL_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
-
-	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1086,15 +1014,6 @@ public interface SaltPackage extends EPackage {
 	int SSTRUCTURE__NAME = SaltCorePackage.SELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSTRUCTURE__TYPE = SaltCorePackage.SELEMENT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1102,15 +1021,6 @@ public interface SaltPackage extends EPackage {
 	 * @ordered
 	 */
 	int SSTRUCTURE__ID = SaltCorePackage.SELEMENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSTRUCTURE__SELEMENT_PATH = SaltCorePackage.SELEMENT__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -1319,24 +1229,6 @@ public interface SaltPackage extends EPackage {
 	 * @ordered
 	 */
 	int SSPAN_RELATION__NAME = SaltCorePackage.SRELATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSPAN_RELATION__TYPE = SaltCorePackage.SRELATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSPAN_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -1548,15 +1440,6 @@ public interface SaltPackage extends EPackage {
 	int SCORPUS__NAME = SaltCorePackage.SELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORPUS__TYPE = SaltCorePackage.SELEMENT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1564,15 +1447,6 @@ public interface SaltPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCORPUS__ID = SaltCorePackage.SELEMENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORPUS__SELEMENT_PATH = SaltCorePackage.SELEMENT__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -1883,15 +1757,6 @@ public interface SaltPackage extends EPackage {
 	int SDOCUMENT__NAME = SaltCorePackage.SELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDOCUMENT__TYPE = SaltCorePackage.SELEMENT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1899,15 +1764,6 @@ public interface SaltPackage extends EPackage {
 	 * @ordered
 	 */
 	int SDOCUMENT__ID = SaltCorePackage.SELEMENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDOCUMENT__SELEMENT_PATH = SaltCorePackage.SELEMENT__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -2127,24 +1983,6 @@ public interface SaltPackage extends EPackage {
 	int SCORPUS_RELATION__NAME = SaltCorePackage.SRELATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORPUS_RELATION__TYPE = SaltCorePackage.SRELATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORPUS_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
-
-	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2351,24 +2189,6 @@ public interface SaltPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCORP_DOC_RELATION__NAME = SaltCorePackage.SRELATION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORP_DOC_RELATION__TYPE = SaltCorePackage.SRELATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORP_DOC_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -2579,24 +2399,6 @@ public interface SaltPackage extends EPackage {
 	int SDOMINANCE_RELATION__NAME = SaltCorePackage.SRELATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDOMINANCE_RELATION__TYPE = SaltCorePackage.SRELATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDOMINANCE_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
-
-	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2787,24 +2589,6 @@ public interface SaltPackage extends EPackage {
 	int SPOINTING_RELATION__NAME = SaltCorePackage.SRELATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPOINTING_RELATION__TYPE = SaltCorePackage.SRELATION__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPOINTING_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
-
-	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2921,6 +2705,7 @@ public interface SaltPackage extends EPackage {
 	 * @generated
 	 */
 	int SSTEREOTYPES = 15;
+
 
 	/**
 	 * Returns the meta object for class '{@link de.corpling.salt.model.salt.SToken <em>SToken</em>}'.
@@ -3454,6 +3239,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STOKEN = eINSTANCE.getSToken();
+
 		/**
 		 * The meta object literal for the '<em><b>SLeft</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
@@ -3461,6 +3247,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STOKEN__SLEFT = eINSTANCE.getSToken_SLeft();
+
 		/**
 		 * The meta object literal for the '<em><b>SRight</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
@@ -3468,6 +3255,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STOKEN__SRIGHT = eINSTANCE.getSToken_SRight();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
@@ -3475,6 +3263,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STOKEN__SDOCUMENT_GRAPH = eINSTANCE.getSToken_SDocumentGraph();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SDataSourceImpl <em>SData Source</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3484,6 +3273,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SDATA_SOURCE = eINSTANCE.getSDataSource();
+
 		/**
 		 * The meta object literal for the '<em><b>SData Source</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
@@ -3491,6 +3281,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SDATA_SOURCE__SDATA_SOURCE = eINSTANCE.getSDataSource_SDataSource();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.STextualDataSourceImpl <em>STextual Data Source</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3500,6 +3291,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STEXTUAL_DATA_SOURCE = eINSTANCE.getSTextualDataSource();
+
 		/**
 		 * The meta object literal for the '<em><b>SText</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
@@ -3507,6 +3299,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STEXTUAL_DATA_SOURCE__STEXT = eINSTANCE.getSTextualDataSource_SText();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
@@ -3514,6 +3307,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STEXTUAL_DATA_SOURCE__SDOCUMENT_GRAPH = eINSTANCE.getSTextualDataSource_SDocumentGraph();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SDocumentGraphImpl <em>SDocument Graph</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3523,6 +3317,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SDOCUMENT_GRAPH = eINSTANCE.getSDocumentGraph();
+
 		/**
 		 * The meta object literal for the '<em><b>STokens</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3530,6 +3325,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT_GRAPH__STOKENS = eINSTANCE.getSDocumentGraph_STokens();
+
 		/**
 		 * The meta object literal for the '<em><b>STextual Relations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3537,6 +3333,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT_GRAPH__STEXTUAL_RELATIONS = eINSTANCE.getSDocumentGraph_STextualRelations();
+
 		/**
 		 * The meta object literal for the '<em><b>STextual Data Sources</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3544,6 +3341,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT_GRAPH__STEXTUAL_DATA_SOURCES = eINSTANCE.getSDocumentGraph_STextualDataSources();
+
 		/**
 		 * The meta object literal for the '<em><b>SStructures</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3551,6 +3349,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT_GRAPH__SSTRUCTURES = eINSTANCE.getSDocumentGraph_SStructures();
+
 		/**
 		 * The meta object literal for the '<em><b>Span Relations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3558,6 +3357,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT_GRAPH__SPAN_RELATIONS = eINSTANCE.getSDocumentGraph_SpanRelations();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocument</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
@@ -3565,6 +3365,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT_GRAPH__SDOCUMENT = eINSTANCE.getSDocumentGraph_SDocument();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.STextualRelationImpl <em>STextual Relation</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3574,6 +3375,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STEXTUAL_RELATION = eINSTANCE.getSTextualRelation();
+
 		/**
 		 * The meta object literal for the '<em><b>SToken</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
@@ -3581,6 +3383,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STEXTUAL_RELATION__STOKEN = eINSTANCE.getSTextualRelation_SToken();
+
 		/**
 		 * The meta object literal for the '<em><b>STextual Data Source</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
@@ -3588,6 +3391,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STEXTUAL_RELATION__STEXTUAL_DATA_SOURCE = eINSTANCE.getSTextualRelation_STextualDataSource();
+
 		/**
 		 * The meta object literal for the '<em><b>SLeft Pos</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
@@ -3595,6 +3399,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STEXTUAL_RELATION__SLEFT_POS = eINSTANCE.getSTextualRelation_SLeftPos();
+
 		/**
 		 * The meta object literal for the '<em><b>SRight Pos</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
@@ -3602,6 +3407,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STEXTUAL_RELATION__SRIGHT_POS = eINSTANCE.getSTextualRelation_SRightPos();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
@@ -3609,6 +3415,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STEXTUAL_RELATION__SDOCUMENT_GRAPH = eINSTANCE.getSTextualRelation_SDocumentGraph();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SStructureImpl <em>SStructure</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3618,6 +3425,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SSTRUCTURE = eINSTANCE.getSStructure();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
@@ -3625,6 +3433,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SSTRUCTURE__SDOCUMENT_GRAPH = eINSTANCE.getSStructure_SDocumentGraph();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SSpanRelationImpl <em>SSpan Relation</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3634,6 +3443,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SSPAN_RELATION = eINSTANCE.getSSpanRelation();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
@@ -3641,6 +3451,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SSPAN_RELATION__SDOCUMENT_GRAPH = eINSTANCE.getSSpanRelation_SDocumentGraph();
+
 		/**
 		 * The meta object literal for the '<em><b>SStructure</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
@@ -3648,6 +3459,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SSPAN_RELATION__SSTRUCTURE = eINSTANCE.getSSpanRelation_SStructure();
+
 		/**
 		 * The meta object literal for the '<em><b>SToken</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
@@ -3655,6 +3467,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SSPAN_RELATION__STOKEN = eINSTANCE.getSSpanRelation_SToken();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SProjectImpl <em>SProject</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3664,6 +3477,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SPROJECT = eINSTANCE.getSProject();
+
 		/**
 		 * The meta object literal for the '<em><b>SCorpus Graphs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3671,6 +3485,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SPROJECT__SCORPUS_GRAPHS = eINSTANCE.getSProject_SCorpusGraphs();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SCorpusImpl <em>SCorpus</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3680,6 +3495,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCORPUS = eINSTANCE.getSCorpus();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SCorpusGraphImpl <em>SCorpus Graph</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3689,6 +3505,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCORPUS_GRAPH = eINSTANCE.getSCorpusGraph();
+
 		/**
 		 * The meta object literal for the '<em><b>SCorpora</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3696,6 +3513,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCORPUS_GRAPH__SCORPORA = eINSTANCE.getSCorpusGraph_SCorpora();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocuments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3703,6 +3521,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCORPUS_GRAPH__SDOCUMENTS = eINSTANCE.getSCorpusGraph_SDocuments();
+
 		/**
 		 * The meta object literal for the '<em><b>SCorpus Relations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -3710,6 +3529,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCORPUS_GRAPH__SCORPUS_RELATIONS = eINSTANCE.getSCorpusGraph_SCorpusRelations();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SDocumentImpl <em>SDocument</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3719,6 +3539,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SDOCUMENT = eINSTANCE.getSDocument();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
@@ -3726,6 +3547,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT__SDOCUMENT_GRAPH = eINSTANCE.getSDocument_SDocumentGraph();
+
 		/**
 		 * The meta object literal for the '<em><b>SCorpus Graph</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
@@ -3733,6 +3555,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT__SCORPUS_GRAPH = eINSTANCE.getSDocument_SCorpusGraph();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SCorpusRelationImpl <em>SCorpus Relation</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3742,6 +3565,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCORPUS_RELATION = eINSTANCE.getSCorpusRelation();
+
 		/**
 		 * The meta object literal for the '<em><b>SSuper Corpus</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
@@ -3749,6 +3573,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCORPUS_RELATION__SSUPER_CORPUS = eINSTANCE.getSCorpusRelation_SSuperCorpus();
+
 		/**
 		 * The meta object literal for the '<em><b>SSub Corpus</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
@@ -3756,6 +3581,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCORPUS_RELATION__SSUB_CORPUS = eINSTANCE.getSCorpusRelation_SSubCorpus();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SCorpDocRelationImpl <em>SCorp Doc Relation</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3765,6 +3591,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCORP_DOC_RELATION = eINSTANCE.getSCorpDocRelation();
+
 		/**
 		 * The meta object literal for the '<em><b>SCorpus</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
@@ -3772,6 +3599,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCORP_DOC_RELATION__SCORPUS = eINSTANCE.getSCorpDocRelation_SCorpus();
+
 		/**
 		 * The meta object literal for the '<em><b>SDocument</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
@@ -3779,6 +3607,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCORP_DOC_RELATION__SDOCUMENT = eINSTANCE.getSCorpDocRelation_SDocument();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SDominanceRelationImpl <em>SDominance Relation</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3788,6 +3617,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SDOMINANCE_RELATION = eINSTANCE.getSDominanceRelation();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.impl.SPointingRelationImpl <em>SPointing Relation</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -3797,6 +3627,7 @@ public interface SaltPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SPOINTING_RELATION = eINSTANCE.getSPointingRelation();
+
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.salt.SSTEREOTYPES <em>SSTEREOTYPES</em>}' enum.
 		 * <!-- begin-user-doc -->
@@ -3809,4 +3640,4 @@ public interface SaltPackage extends EPackage {
 
 	}
 
-} //SaltConcretePackage
+} //SaltPackage

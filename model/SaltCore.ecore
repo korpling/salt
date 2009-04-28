@@ -3,27 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="saltCore"
     nsURI="www.corpling.de/salt/saltCore" nsPrefix="saltCore">
-  <eClassifiers xsi:type="ecore:EClass" name="SElementPath">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sElement" lowerBound="1"
-        eType="#//SIdentifiableElement" eOpposite="#//SIdentifiableElement/sElementPath"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true" defaultValueLiteral="" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementType" eType="#//SELEMENT_TYPE"
-        volatile="true" transient="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SIdentifiableElement" eSuperTypes="#//SNamedElement #//STypedElement Graph.ecore#//IdentifiableElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sElementPath" lowerBound="1"
-        eType="#//SElementPath" containment="true" eOpposite="#//SElementPath/sElement"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="SELEMENT_TYPE">
-    <eLiterals name="CORPUS"/>
-    <eLiterals name="DOCUMENT" value="1"/>
-    <eLiterals name="DATASOURCE" value="2"/>
-    <eLiterals name="TOKEN" value="3"/>
-    <eLiterals name="STRUCTURE" value="4"/>
-    <eLiterals name="ANNOTATION" value="5"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SIdentifiableElement" eSuperTypes="#//SNamedElement Graph.ecore#//IdentifiableElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="SElement" eSuperTypes="#//SIdentifiableElement #//SAnnotatableElement #//SStereotypeableElement #//SProcessingAnnotatableElement Graph.ecore#//Node">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sSterotypeableElement"
         lowerBound="1" eType="#//SStereotypeableElement" containment="true"/>
@@ -62,9 +42,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SNamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="STypedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SELEMENT_TYPE"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SStereotypeableElement" eSuperTypes="Graph.ecore#//LabelableElement">
     <eOperations name="addSFeature">

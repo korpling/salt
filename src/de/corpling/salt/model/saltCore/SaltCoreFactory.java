@@ -26,15 +26,6 @@ public interface SaltCoreFactory extends EFactory {
 	SaltCoreFactory eINSTANCE = de.corpling.salt.model.saltCore.impl.SaltCoreFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>SElement Path</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SElement Path</em>'.
-	 * @generated
-	 */
-	SElementPath createSElementPath();
-
-	/**
 	 * Returns a new object of class '<em>SIdentifiable Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,15 +78,6 @@ public interface SaltCoreFactory extends EFactory {
 	 * @generated
 	 */
 	SNamedElement createSNamedElement();
-
-	/**
-	 * Returns a new object of class '<em>STyped Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>STyped Element</em>'.
-	 * @generated
-	 */
-	STypedElement createSTypedElement();
 
 	/**
 	 * Returns a new object of class '<em>SStereotypeable Element</em>'.

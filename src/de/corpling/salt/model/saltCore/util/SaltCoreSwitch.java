@@ -96,17 +96,10 @@ public class SaltCoreSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case SaltCorePackage.SELEMENT_PATH: {
-				SElementPath sElementPath = (SElementPath)theEObject;
-				T result = caseSElementPath(sElementPath);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case SaltCorePackage.SIDENTIFIABLE_ELEMENT: {
 				SIdentifiableElement sIdentifiableElement = (SIdentifiableElement)theEObject;
 				T result = caseSIdentifiableElement(sIdentifiableElement);
 				if (result == null) result = caseSNamedElement(sIdentifiableElement);
-				if (result == null) result = caseSTypedElement(sIdentifiableElement);
 				if (result == null) result = caseIdentifiableElement(sIdentifiableElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -120,7 +113,6 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseSProcessingAnnotatableElement(sElement);
 				if (result == null) result = caseNode(sElement);
 				if (result == null) result = caseSNamedElement(sElement);
-				if (result == null) result = caseSTypedElement(sElement);
 				if (result == null) result = caseIdentifiableElement(sElement);
 				if (result == null) result = caseLabelableElement(sElement);
 				if (result == null) result = defaultCase(theEObject);
@@ -151,19 +143,12 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseIdentifiableElement(sRelation);
 				if (result == null) result = caseLabelableElement(sRelation);
 				if (result == null) result = caseSNamedElement(sRelation);
-				if (result == null) result = caseSTypedElement(sRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SaltCorePackage.SNAMED_ELEMENT: {
 				SNamedElement sNamedElement = (SNamedElement)theEObject;
 				T result = caseSNamedElement(sNamedElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SaltCorePackage.STYPED_ELEMENT: {
-				STypedElement sTypedElement = (STypedElement)theEObject;
-				T result = caseSTypedElement(sTypedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -239,21 +224,6 @@ public class SaltCoreSwitch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>SElement Path</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>SElement Path</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSElementPath(SElementPath object) {
-		return null;
 	}
 
 	/**
@@ -343,21 +313,6 @@ public class SaltCoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseSNamedElement(SNamedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>STyped Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>STyped Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSTypedElement(STypedElement object) {
 		return null;
 	}
 

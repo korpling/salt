@@ -18,7 +18,6 @@ import de.corpling.salt.model.saltCore.SProcessingAnnotatableElement;
 import de.corpling.salt.model.saltCore.SRelation;
 import de.corpling.salt.model.saltCore.SStereotypeContainer;
 import de.corpling.salt.model.saltCore.SStereotypeableElement;
-import de.corpling.salt.model.saltCore.STypedElement;
 
 import de.util.graph.Edge;
 import de.util.graph.Graph;
@@ -117,7 +116,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseSProcessingAnnotatableElement(sToken);
 				if (result == null) result = caseNode(sToken);
 				if (result == null) result = caseSNamedElement(sToken);
-				if (result == null) result = caseSTypedElement(sToken);
 				if (result == null) result = caseIdentifiableElement(sToken);
 				if (result == null) result = caseLabelableElement(sToken);
 				if (result == null) result = defaultCase(theEObject);
@@ -133,7 +131,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseSProcessingAnnotatableElement(sDataSource);
 				if (result == null) result = caseNode(sDataSource);
 				if (result == null) result = caseSNamedElement(sDataSource);
-				if (result == null) result = caseSTypedElement(sDataSource);
 				if (result == null) result = caseIdentifiableElement(sDataSource);
 				if (result == null) result = caseLabelableElement(sDataSource);
 				if (result == null) result = defaultCase(theEObject);
@@ -150,7 +147,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseSProcessingAnnotatableElement(sTextualDataSource);
 				if (result == null) result = caseNode(sTextualDataSource);
 				if (result == null) result = caseSNamedElement(sTextualDataSource);
-				if (result == null) result = caseSTypedElement(sTextualDataSource);
 				if (result == null) result = caseIdentifiableElement(sTextualDataSource);
 				if (result == null) result = caseLabelableElement(sTextualDataSource);
 				if (result == null) result = defaultCase(theEObject);
@@ -180,7 +176,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseIdentifiableElement(sTextualRelation);
 				if (result == null) result = caseLabelableElement(sTextualRelation);
 				if (result == null) result = caseSNamedElement(sTextualRelation);
-				if (result == null) result = caseSTypedElement(sTextualRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -194,7 +189,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseSProcessingAnnotatableElement(sStructure);
 				if (result == null) result = caseNode(sStructure);
 				if (result == null) result = caseSNamedElement(sStructure);
-				if (result == null) result = caseSTypedElement(sStructure);
 				if (result == null) result = caseIdentifiableElement(sStructure);
 				if (result == null) result = caseLabelableElement(sStructure);
 				if (result == null) result = defaultCase(theEObject);
@@ -212,7 +206,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseIdentifiableElement(sSpanRelation);
 				if (result == null) result = caseLabelableElement(sSpanRelation);
 				if (result == null) result = caseSNamedElement(sSpanRelation);
-				if (result == null) result = caseSTypedElement(sSpanRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -234,7 +227,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpus);
 				if (result == null) result = caseNode(sCorpus);
 				if (result == null) result = caseSNamedElement(sCorpus);
-				if (result == null) result = caseSTypedElement(sCorpus);
 				if (result == null) result = caseIdentifiableElement(sCorpus);
 				if (result == null) result = caseLabelableElement(sCorpus);
 				if (result == null) result = defaultCase(theEObject);
@@ -262,7 +254,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseSProcessingAnnotatableElement(sDocument);
 				if (result == null) result = caseNode(sDocument);
 				if (result == null) result = caseSNamedElement(sDocument);
-				if (result == null) result = caseSTypedElement(sDocument);
 				if (result == null) result = caseIdentifiableElement(sDocument);
 				if (result == null) result = caseLabelableElement(sDocument);
 				if (result == null) result = defaultCase(theEObject);
@@ -280,7 +271,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseIdentifiableElement(sCorpusRelation);
 				if (result == null) result = caseLabelableElement(sCorpusRelation);
 				if (result == null) result = caseSNamedElement(sCorpusRelation);
-				if (result == null) result = caseSTypedElement(sCorpusRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -296,7 +286,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseIdentifiableElement(sCorpDocRelation);
 				if (result == null) result = caseLabelableElement(sCorpDocRelation);
 				if (result == null) result = caseSNamedElement(sCorpDocRelation);
-				if (result == null) result = caseSTypedElement(sCorpDocRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -312,7 +301,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseIdentifiableElement(sDominanceRelation);
 				if (result == null) result = caseLabelableElement(sDominanceRelation);
 				if (result == null) result = caseSNamedElement(sDominanceRelation);
-				if (result == null) result = caseSTypedElement(sDominanceRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -328,7 +316,6 @@ public class SaltSwitch<T> {
 				if (result == null) result = caseIdentifiableElement(sPointingRelation);
 				if (result == null) result = caseLabelableElement(sPointingRelation);
 				if (result == null) result = caseSNamedElement(sPointingRelation);
-				if (result == null) result = caseSTypedElement(sPointingRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -573,21 +560,6 @@ public class SaltSwitch<T> {
 	 * @generated
 	 */
 	public T caseSNamedElement(SNamedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>STyped Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>STyped Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSTypedElement(STypedElement object) {
 		return null;
 	}
 

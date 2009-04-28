@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface STypedElement extends EObject {
+
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link de.corpling.salt.model.saltCore.SELEMENT_TYPE}.

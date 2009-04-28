@@ -156,10 +156,6 @@ public class SaltAdapterFactory extends AdapterFactoryImpl {
 				return createSNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseSTypedElement(STypedElement object) {
-				return createSTypedElementAdapter();
-			}
-			@Override
 			public Adapter caseIdentifiableElement(IdentifiableElement object) {
 				return createIdentifiableElementAdapter();
 			}
@@ -464,20 +460,6 @@ public class SaltAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSNamedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.corpling.salt.model.saltCore.STypedElement <em>STyped Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.corpling.salt.model.saltCore.STypedElement
-	 * @generated
-	 */
-	public Adapter createSTypedElementAdapter() {
 		return null;
 	}
 

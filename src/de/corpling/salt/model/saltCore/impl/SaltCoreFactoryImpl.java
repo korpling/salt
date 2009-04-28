@@ -82,14 +82,12 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case SaltCorePackage.SELEMENT_PATH: return createSElementPath();
 			case SaltCorePackage.SIDENTIFIABLE_ELEMENT: return createSIdentifiableElement();
 			case SaltCorePackage.SELEMENT: return createSElement();
 			case SaltCorePackage.SANNOTATION: return createSAnnotation();
 			case SaltCorePackage.SANNOTATABLE_ELEMENT: return createSAnnotatableElement();
 			case SaltCorePackage.SRELATION: return createSRelation();
 			case SaltCorePackage.SNAMED_ELEMENT: return createSNamedElement();
-			case SaltCorePackage.STYPED_ELEMENT: return createSTypedElement();
 			case SaltCorePackage.SSTEREOTYPEABLE_ELEMENT: return createSStereotypeableElement();
 			case SaltCorePackage.SFEATURE: return createSFeature();
 			case SaltCorePackage.SSTEREOTYPE: return createSStereotype();
@@ -112,8 +110,6 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case SaltCorePackage.SELEMENT_TYPE:
-				return createSELEMENT_TYPEFromString(eDataType, initialValue);
 			case SaltCorePackage.STRAVERSAL_MODE:
 				return createSTRAVERSAL_MODEFromString(eDataType, initialValue);
 			case SaltCorePackage.PROPERTIES:
@@ -131,8 +127,6 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case SaltCorePackage.SELEMENT_TYPE:
-				return convertSELEMENT_TYPEToString(eDataType, instanceValue);
 			case SaltCorePackage.STRAVERSAL_MODE:
 				return convertSTRAVERSAL_MODEToString(eDataType, instanceValue);
 			case SaltCorePackage.PROPERTIES:
@@ -140,16 +134,6 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SElementPath createSElementPath() {
-		SElementPathImpl sElementPath = new SElementPathImpl();
-		return sElementPath;
 	}
 
 	/**
@@ -210,16 +194,6 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	public SNamedElement createSNamedElement() {
 		SNamedElementImpl sNamedElement = new SNamedElementImpl();
 		return sNamedElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public STypedElement createSTypedElement() {
-		STypedElementImpl sTypedElement = new STypedElementImpl();
-		return sTypedElement;
 	}
 
 	/**
@@ -310,26 +284,6 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	public SProcessingAnnotation createSProcessingAnnotation() {
 		SProcessingAnnotationImpl sProcessingAnnotation = new SProcessingAnnotationImpl();
 		return sProcessingAnnotation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SELEMENT_TYPE createSELEMENT_TYPEFromString(EDataType eDataType, String initialValue) {
-		SELEMENT_TYPE result = SELEMENT_TYPE.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertSELEMENT_TYPEToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

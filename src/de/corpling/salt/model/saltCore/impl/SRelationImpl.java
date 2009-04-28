@@ -48,8 +48,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.corpling.salt.model.saltCore.impl.SRelationImpl#getName <em>Name</em>}</li>
- *   <li>{@link de.corpling.salt.model.saltCore.impl.SRelationImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.corpling.salt.model.saltCore.impl.SRelationImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.corpling.salt.model.saltCore.impl.SRelationImpl#getSAnnotations <em>SAnnotations</em>}</li>
  *   <li>{@link de.corpling.salt.model.saltCore.impl.SRelationImpl#getSStereotype <em>SStereotype</em>}</li>
  *   <li>{@link de.corpling.salt.model.saltCore.impl.SRelationImpl#getSFeatures <em>SFeatures</em>}</li>
@@ -88,36 +86,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final SELEMENT_TYPE TYPE_EDEFAULT = SELEMENT_TYPE.CORPUS;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected SELEMENT_TYPE type = TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSElementPath() <em>SElement Path</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSElementPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected SElementPath sElementPath;
 
 	/**
 	 * The cached value of the '{@link #getSStereotype() <em>SStereotype</em>}' reference.
@@ -230,70 +198,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SRELATION__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SELEMENT_TYPE getType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(SELEMENT_TYPE newType) {
-		SELEMENT_TYPE oldType = type;
-		type = newType == null ? TYPE_EDEFAULT : newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SRELATION__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SElementPath getSElementPath() {
-		return sElementPath;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSElementPath(SElementPath newSElementPath, NotificationChain msgs) {
-		SElementPath oldSElementPath = sElementPath;
-		sElementPath = newSElementPath;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SaltCorePackage.SRELATION__SELEMENT_PATH, oldSElementPath, newSElementPath);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSElementPath(SElementPath newSElementPath) {
-		if (newSElementPath != sElementPath) {
-			NotificationChain msgs = null;
-			if (sElementPath != null)
-				msgs = ((InternalEObject)sElementPath).eInverseRemove(this, SaltCorePackage.SELEMENT_PATH__SELEMENT, SElementPath.class, msgs);
-			if (newSElementPath != null)
-				msgs = ((InternalEObject)newSElementPath).eInverseAdd(this, SaltCorePackage.SELEMENT_PATH__SELEMENT, SElementPath.class, msgs);
-			msgs = basicSetSElementPath(newSElementPath, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SRELATION__SELEMENT_PATH, newSElementPath, newSElementPath));
 	}
 
 	/**
@@ -667,26 +571,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SaltCorePackage.SRELATION__SELEMENT_PATH:
-				if (sElementPath != null)
-					msgs = ((InternalEObject)sElementPath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SaltCorePackage.SRELATION__SELEMENT_PATH, null, msgs);
-				return basicSetSElementPath((SElementPath)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SaltCorePackage.SRELATION__SELEMENT_PATH:
-				return basicSetSElementPath(null, msgs);
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				return ((InternalEList<?>)getSAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SRELATION__SFEATURES:
@@ -727,10 +613,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 		switch (featureID) {
 			case SaltCorePackage.SRELATION__NAME:
 				return getName();
-			case SaltCorePackage.SRELATION__TYPE:
-				return getType();
-			case SaltCorePackage.SRELATION__SELEMENT_PATH:
-				return getSElementPath();
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				return getSAnnotations();
 			case SaltCorePackage.SRELATION__SSTEREOTYPE:
@@ -771,12 +653,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 		switch (featureID) {
 			case SaltCorePackage.SRELATION__NAME:
 				setName((String)newValue);
-				return;
-			case SaltCorePackage.SRELATION__TYPE:
-				setType((SELEMENT_TYPE)newValue);
-				return;
-			case SaltCorePackage.SRELATION__SELEMENT_PATH:
-				setSElementPath((SElementPath)newValue);
 				return;
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				getSAnnotations().clear();
@@ -829,12 +705,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 			case SaltCorePackage.SRELATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case SaltCorePackage.SRELATION__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
-			case SaltCorePackage.SRELATION__SELEMENT_PATH:
-				setSElementPath((SElementPath)null);
-				return;
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				getSAnnotations().clear();
 				return;
@@ -882,10 +752,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 		switch (featureID) {
 			case SaltCorePackage.SRELATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case SaltCorePackage.SRELATION__TYPE:
-				return type != TYPE_EDEFAULT;
-			case SaltCorePackage.SRELATION__SELEMENT_PATH:
-				return sElementPath != null;
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				return !getSAnnotations().isEmpty();
 			case SaltCorePackage.SRELATION__SSTEREOTYPE:
@@ -925,15 +791,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 				default: return -1;
 			}
 		}
-		if (baseClass == STypedElement.class) {
-			switch (derivedFeatureID) {
-				case SaltCorePackage.SRELATION__TYPE: return SaltCorePackage.STYPED_ELEMENT__TYPE;
-				default: return -1;
-			}
-		}
 		if (baseClass == SIdentifiableElement.class) {
 			switch (derivedFeatureID) {
-				case SaltCorePackage.SRELATION__SELEMENT_PATH: return SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH;
 				default: return -1;
 			}
 		}
@@ -972,15 +831,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 				default: return -1;
 			}
 		}
-		if (baseClass == STypedElement.class) {
-			switch (baseFeatureID) {
-				case SaltCorePackage.STYPED_ELEMENT__TYPE: return SaltCorePackage.SRELATION__TYPE;
-				default: return -1;
-			}
-		}
 		if (baseClass == SIdentifiableElement.class) {
 			switch (baseFeatureID) {
-				case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH: return SaltCorePackage.SRELATION__SELEMENT_PATH;
 				default: return -1;
 			}
 		}
@@ -1019,8 +871,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", type: ");
-		result.append(type);
 		result.append(", sType: ");
 		result.append(sType);
 		result.append(')');

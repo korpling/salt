@@ -64,61 +64,6 @@ public interface SaltCorePackage extends EPackage {
 	SaltCorePackage eINSTANCE = de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.impl.SElementPathImpl <em>SElement Path</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.corpling.salt.model.saltCore.impl.SElementPathImpl
-	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSElementPath()
-	 * @generated
-	 */
-	int SELEMENT_PATH = 0;
-
-	/**
-	 * The feature id for the '<em><b>Parent Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELEMENT_PATH__PARENT_PATH = 0;
-
-	/**
-	 * The feature id for the '<em><b>SElement</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELEMENT_PATH__SELEMENT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELEMENT_PATH__NAME = 2;
-
-	/**
-	 * The feature id for the '<em><b>Element Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELEMENT_PATH__ELEMENT_TYPE = 3;
-
-	/**
-	 * The number of structural features of the '<em>SElement Path</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELEMENT_PATH_FEATURE_COUNT = 4;
-
-	/**
 	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.impl.SNamedElementImpl <em>SNamed Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,7 +71,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSNamedElement()
 	 * @generated
 	 */
-	int SNAMED_ELEMENT = 6;
+	int SNAMED_ELEMENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -154,7 +99,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSIdentifiableElement()
 	 * @generated
 	 */
-	int SIDENTIFIABLE_ELEMENT = 1;
+	int SIDENTIFIABLE_ELEMENT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -166,31 +111,13 @@ public interface SaltCorePackage extends EPackage {
 	int SIDENTIFIABLE_ELEMENT__NAME = SNAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIDENTIFIABLE_ELEMENT__TYPE = SNAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIDENTIFIABLE_ELEMENT__ID = SNAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIDENTIFIABLE_ELEMENT__SELEMENT_PATH = SNAMED_ELEMENT_FEATURE_COUNT + 2;
+	int SIDENTIFIABLE_ELEMENT__ID = SNAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>SIdentifiable Element</em>' class.
@@ -199,7 +126,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIDENTIFIABLE_ELEMENT_FEATURE_COUNT = SNAMED_ELEMENT_FEATURE_COUNT + 3;
+	int SIDENTIFIABLE_ELEMENT_FEATURE_COUNT = SNAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.impl.SElementImpl <em>SElement</em>}' class.
@@ -209,7 +136,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSElement()
 	 * @generated
 	 */
-	int SELEMENT = 2;
+	int SELEMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -221,15 +148,6 @@ public interface SaltCorePackage extends EPackage {
 	int SELEMENT__NAME = SIDENTIFIABLE_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELEMENT__TYPE = SIDENTIFIABLE_ELEMENT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -237,15 +155,6 @@ public interface SaltCorePackage extends EPackage {
 	 * @ordered
 	 */
 	int SELEMENT__ID = SIDENTIFIABLE_ELEMENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SELEMENT__SELEMENT_PATH = SIDENTIFIABLE_ELEMENT__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -372,7 +281,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSAnnotation()
 	 * @generated
 	 */
-	int SANNOTATION = 3;
+	int SANNOTATION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -436,7 +345,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSAnnotatableElement()
 	 * @generated
 	 */
-	int SANNOTATABLE_ELEMENT = 4;
+	int SANNOTATABLE_ELEMENT = 3;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -482,7 +391,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSRelation()
 	 * @generated
 	 */
-	int SRELATION = 5;
+	int SRELATION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -557,31 +466,13 @@ public interface SaltCorePackage extends EPackage {
 	int SRELATION__NAME = GraphPackage.EDGE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SRELATION__TYPE = GraphPackage.EDGE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>SElement Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SRELATION__SELEMENT_PATH = GraphPackage.EDGE_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SANNOTATIONS = GraphPackage.EDGE_FEATURE_COUNT + 3;
+	int SRELATION__SANNOTATIONS = GraphPackage.EDGE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>SStereotype</b></em>' reference.
@@ -590,7 +481,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SSTEREOTYPE = GraphPackage.EDGE_FEATURE_COUNT + 4;
+	int SRELATION__SSTEREOTYPE = GraphPackage.EDGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
@@ -599,7 +490,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SFEATURES = GraphPackage.EDGE_FEATURE_COUNT + 5;
+	int SRELATION__SFEATURES = GraphPackage.EDGE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
@@ -608,7 +499,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SPROCESSING_ANNOTATIONS = GraphPackage.EDGE_FEATURE_COUNT + 6;
+	int SRELATION__SPROCESSING_ANNOTATIONS = GraphPackage.EDGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>SSource Element</b></em>' reference.
@@ -617,7 +508,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SSOURCE_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 7;
+	int SRELATION__SSOURCE_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>SDestination Element</b></em>' reference.
@@ -626,7 +517,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SDESTINATION_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 8;
+	int SRELATION__SDESTINATION_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>SStereotypable Element</b></em>' containment reference.
@@ -635,7 +526,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SSTEREOTYPABLE_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 9;
+	int SRELATION__SSTEREOTYPABLE_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotatable Element</b></em>' containment reference.
@@ -644,7 +535,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SANNOTATABLE_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 10;
+	int SRELATION__SANNOTATABLE_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>SProcessing Annotatable Element</b></em>' containment reference.
@@ -653,7 +544,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SPROCESSING_ANNOTATABLE_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 11;
+	int SRELATION__SPROCESSING_ANNOTATABLE_ELEMENT = GraphPackage.EDGE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' container reference.
@@ -662,7 +553,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SGRAPH = GraphPackage.EDGE_FEATURE_COUNT + 12;
+	int SRELATION__SGRAPH = GraphPackage.EDGE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>SType</b></em>' attribute.
@@ -671,7 +562,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__STYPE = GraphPackage.EDGE_FEATURE_COUNT + 13;
+	int SRELATION__STYPE = GraphPackage.EDGE_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>SRelation</em>' class.
@@ -680,35 +571,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION_FEATURE_COUNT = GraphPackage.EDGE_FEATURE_COUNT + 14;
-
-	/**
-	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.impl.STypedElementImpl <em>STyped Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.corpling.salt.model.saltCore.impl.STypedElementImpl
-	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSTypedElement()
-	 * @generated
-	 */
-	int STYPED_ELEMENT = 7;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYPED_ELEMENT__TYPE = 0;
-
-	/**
-	 * The number of structural features of the '<em>STyped Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYPED_ELEMENT_FEATURE_COUNT = 1;
+	int SRELATION_FEATURE_COUNT = GraphPackage.EDGE_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.impl.SStereotypeableElementImpl <em>SStereotypeable Element</em>}' class.
@@ -718,7 +581,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSStereotypeableElement()
 	 * @generated
 	 */
-	int SSTEREOTYPEABLE_ELEMENT = 8;
+	int SSTEREOTYPEABLE_ELEMENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -773,7 +636,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSFeature()
 	 * @generated
 	 */
-	int SFEATURE = 9;
+	int SFEATURE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -837,7 +700,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSStereotype()
 	 * @generated
 	 */
-	int SSTEREOTYPE = 10;
+	int SSTEREOTYPE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -892,7 +755,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSFeatureDescription()
 	 * @generated
 	 */
-	int SFEATURE_DESCRIPTION = 11;
+	int SFEATURE_DESCRIPTION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -920,7 +783,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSGraph()
 	 * @generated
 	 */
-	int SGRAPH = 12;
+	int SGRAPH = 10;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1065,7 +928,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSStereotypeContainer()
 	 * @generated
 	 */
-	int SSTEREOTYPE_CONTAINER = 14;
+	int SSTEREOTYPE_CONTAINER = 12;
 
 	/**
 	 * The feature id for the '<em><b>SStereotypes</b></em>' containment reference list.
@@ -1093,7 +956,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSCoreProject()
 	 * @generated
 	 */
-	int SCORE_PROJECT = 13;
+	int SCORE_PROJECT = 11;
 
 	/**
 	 * The feature id for the '<em><b>SStereotypes</b></em>' containment reference list.
@@ -1139,7 +1002,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSProcessingAnnotatableElement()
 	 * @generated
 	 */
-	int SPROCESSING_ANNOTATABLE_ELEMENT = 15;
+	int SPROCESSING_ANNOTATABLE_ELEMENT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -1185,7 +1048,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSProcessingAnnotation()
 	 * @generated
 	 */
-	int SPROCESSING_ANNOTATION = 16;
+	int SPROCESSING_ANNOTATION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -1249,7 +1112,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSTraversalObject()
 	 * @generated
 	 */
-	int STRAVERSAL_OBJECT = 17;
+	int STRAVERSAL_OBJECT = 15;
 
 	/**
 	 * The number of structural features of the '<em>STraversal Object</em>' class.
@@ -1261,16 +1124,6 @@ public interface SaltCorePackage extends EPackage {
 	int STRAVERSAL_OBJECT_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.SELEMENT_TYPE <em>SELEMENT TYPE</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.corpling.salt.model.saltCore.SELEMENT_TYPE
-	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSELEMENT_TYPE()
-	 * @generated
-	 */
-	int SELEMENT_TYPE = 18;
-
-	/**
 	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.STRAVERSAL_MODE <em>STRAVERSAL MODE</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1278,7 +1131,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSTRAVERSAL_MODE()
 	 * @generated
 	 */
-	int STRAVERSAL_MODE = 19;
+	int STRAVERSAL_MODE = 16;
 
 	/**
 	 * The meta object id for the '<em>Properties</em>' data type.
@@ -1288,62 +1141,8 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 20;
+	int PROPERTIES = 17;
 
-
-	/**
-	 * Returns the meta object for class '{@link de.corpling.salt.model.saltCore.SElementPath <em>SElement Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>SElement Path</em>'.
-	 * @see de.corpling.salt.model.saltCore.SElementPath
-	 * @generated
-	 */
-	EClass getSElementPath();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.corpling.salt.model.saltCore.SElementPath#getParentPath <em>Parent Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Parent Path</em>'.
-	 * @see de.corpling.salt.model.saltCore.SElementPath#getParentPath()
-	 * @see #getSElementPath()
-	 * @generated
-	 */
-	EAttribute getSElementPath_ParentPath();
-
-	/**
-	 * Returns the meta object for the container reference '{@link de.corpling.salt.model.saltCore.SElementPath#getSElement <em>SElement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>SElement</em>'.
-	 * @see de.corpling.salt.model.saltCore.SElementPath#getSElement()
-	 * @see #getSElementPath()
-	 * @generated
-	 */
-	EReference getSElementPath_SElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.corpling.salt.model.saltCore.SElementPath#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.corpling.salt.model.saltCore.SElementPath#getName()
-	 * @see #getSElementPath()
-	 * @generated
-	 */
-	EAttribute getSElementPath_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.corpling.salt.model.saltCore.SElementPath#getElementType <em>Element Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Element Type</em>'.
-	 * @see de.corpling.salt.model.saltCore.SElementPath#getElementType()
-	 * @see #getSElementPath()
-	 * @generated
-	 */
-	EAttribute getSElementPath_ElementType();
 
 	/**
 	 * Returns the meta object for class '{@link de.corpling.salt.model.saltCore.SIdentifiableElement <em>SIdentifiable Element</em>}'.
@@ -1354,17 +1153,6 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSIdentifiableElement();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.corpling.salt.model.saltCore.SIdentifiableElement#getSElementPath <em>SElement Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>SElement Path</em>'.
-	 * @see de.corpling.salt.model.saltCore.SIdentifiableElement#getSElementPath()
-	 * @see #getSIdentifiableElement()
-	 * @generated
-	 */
-	EReference getSIdentifiableElement_SElementPath();
 
 	/**
 	 * Returns the meta object for class '{@link de.corpling.salt.model.saltCore.SElement <em>SElement</em>}'.
@@ -1558,27 +1346,6 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSNamedElement_Name();
-
-	/**
-	 * Returns the meta object for class '{@link de.corpling.salt.model.saltCore.STypedElement <em>STyped Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>STyped Element</em>'.
-	 * @see de.corpling.salt.model.saltCore.STypedElement
-	 * @generated
-	 */
-	EClass getSTypedElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.corpling.salt.model.saltCore.STypedElement#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see de.corpling.salt.model.saltCore.STypedElement#getType()
-	 * @see #getSTypedElement()
-	 * @generated
-	 */
-	EAttribute getSTypedElement_Type();
 
 	/**
 	 * Returns the meta object for class '{@link de.corpling.salt.model.saltCore.SStereotypeableElement <em>SStereotypeable Element</em>}'.
@@ -1835,16 +1602,6 @@ public interface SaltCorePackage extends EPackage {
 	EClass getSTraversalObject();
 
 	/**
-	 * Returns the meta object for enum '{@link de.corpling.salt.model.saltCore.SELEMENT_TYPE <em>SELEMENT TYPE</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>SELEMENT TYPE</em>'.
-	 * @see de.corpling.salt.model.saltCore.SELEMENT_TYPE
-	 * @generated
-	 */
-	EEnum getSELEMENT_TYPE();
-
-	/**
 	 * Returns the meta object for enum '{@link de.corpling.salt.model.saltCore.STRAVERSAL_MODE <em>STRAVERSAL MODE</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1888,48 +1645,6 @@ public interface SaltCorePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.impl.SElementPathImpl <em>SElement Path</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.corpling.salt.model.saltCore.impl.SElementPathImpl
-		 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSElementPath()
-		 * @generated
-		 */
-		EClass SELEMENT_PATH = eINSTANCE.getSElementPath();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent Path</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SELEMENT_PATH__PARENT_PATH = eINSTANCE.getSElementPath_ParentPath();
-
-		/**
-		 * The meta object literal for the '<em><b>SElement</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SELEMENT_PATH__SELEMENT = eINSTANCE.getSElementPath_SElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SELEMENT_PATH__NAME = eINSTANCE.getSElementPath_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Element Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SELEMENT_PATH__ELEMENT_TYPE = eINSTANCE.getSElementPath_ElementType();
-
-		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.impl.SIdentifiableElementImpl <em>SIdentifiable Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1938,14 +1653,6 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass SIDENTIFIABLE_ELEMENT = eINSTANCE.getSIdentifiableElement();
-
-		/**
-		 * The meta object literal for the '<em><b>SElement Path</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIDENTIFIABLE_ELEMENT__SELEMENT_PATH = eINSTANCE.getSIdentifiableElement_SElementPath();
 
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.impl.SElementImpl <em>SElement</em>}' class.
@@ -2100,24 +1807,6 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SNAMED_ELEMENT__NAME = eINSTANCE.getSNamedElement_Name();
-
-		/**
-		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.impl.STypedElementImpl <em>STyped Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.corpling.salt.model.saltCore.impl.STypedElementImpl
-		 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSTypedElement()
-		 * @generated
-		 */
-		EClass STYPED_ELEMENT = eINSTANCE.getSTypedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute STYPED_ELEMENT__TYPE = eINSTANCE.getSTypedElement_Type();
 
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.impl.SStereotypeableElementImpl <em>SStereotypeable Element</em>}' class.
@@ -2330,16 +2019,6 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass STRAVERSAL_OBJECT = eINSTANCE.getSTraversalObject();
-
-		/**
-		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.SELEMENT_TYPE <em>SELEMENT TYPE</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.corpling.salt.model.saltCore.SELEMENT_TYPE
-		 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSELEMENT_TYPE()
-		 * @generated
-		 */
-		EEnum SELEMENT_TYPE = eINSTANCE.getSELEMENT_TYPE();
 
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.STRAVERSAL_MODE <em>STRAVERSAL MODE</em>}' enum.

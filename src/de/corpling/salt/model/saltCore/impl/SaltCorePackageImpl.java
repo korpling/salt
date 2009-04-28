@@ -55,13 +55,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass sElementPathEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass sIdentifiableElementEClass = null;
 
 	/**
@@ -98,13 +91,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * @generated
 	 */
 	private EClass sNamedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass sTypedElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,13 +161,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * @generated
 	 */
 	private EClass sTraversalObjectEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum selemenT_TYPEEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,62 +254,8 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSElementPath() {
-		return sElementPathEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSElementPath_ParentPath() {
-		return (EAttribute)sElementPathEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSElementPath_SElement() {
-		return (EReference)sElementPathEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSElementPath_Name() {
-		return (EAttribute)sElementPathEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSElementPath_ElementType() {
-		return (EAttribute)sElementPathEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSIdentifiableElement() {
 		return sIdentifiableElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSIdentifiableElement_SElementPath() {
-		return (EReference)sIdentifiableElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -493,24 +418,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 */
 	public EAttribute getSNamedElement_Name() {
 		return (EAttribute)sNamedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getSTypedElement() {
-		return sTypedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSTypedElement_Type() {
-		return (EAttribute)sTypedElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -734,15 +641,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getSELEMENT_TYPE() {
-		return selemenT_TYPEEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getSTRAVERSAL_MODE() {
 		return straversaL_MODEEEnum;
 	}
@@ -784,14 +682,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		isCreated = true;
 
 		// Create classes and their features
-		sElementPathEClass = createEClass(SELEMENT_PATH);
-		createEAttribute(sElementPathEClass, SELEMENT_PATH__PARENT_PATH);
-		createEReference(sElementPathEClass, SELEMENT_PATH__SELEMENT);
-		createEAttribute(sElementPathEClass, SELEMENT_PATH__NAME);
-		createEAttribute(sElementPathEClass, SELEMENT_PATH__ELEMENT_TYPE);
-
 		sIdentifiableElementEClass = createEClass(SIDENTIFIABLE_ELEMENT);
-		createEReference(sIdentifiableElementEClass, SIDENTIFIABLE_ELEMENT__SELEMENT_PATH);
 
 		sElementEClass = createEClass(SELEMENT);
 		createEReference(sElementEClass, SELEMENT__SSTEROTYPEABLE_ELEMENT);
@@ -815,9 +706,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		sNamedElementEClass = createEClass(SNAMED_ELEMENT);
 		createEAttribute(sNamedElementEClass, SNAMED_ELEMENT__NAME);
-
-		sTypedElementEClass = createEClass(STYPED_ELEMENT);
-		createEAttribute(sTypedElementEClass, STYPED_ELEMENT__TYPE);
 
 		sStereotypeableElementEClass = createEClass(SSTEREOTYPEABLE_ELEMENT);
 		createEReference(sStereotypeableElementEClass, SSTEREOTYPEABLE_ELEMENT__SSTEREOTYPE);
@@ -854,7 +742,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sTraversalObjectEClass = createEClass(STRAVERSAL_OBJECT);
 
 		// Create enums
-		selemenT_TYPEEEnum = createEEnum(SELEMENT_TYPE);
 		straversaL_MODEEEnum = createEEnum(STRAVERSAL_MODE);
 
 		// Create data types
@@ -893,7 +780,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		// Add supertypes to classes
 		sIdentifiableElementEClass.getESuperTypes().add(this.getSNamedElement());
-		sIdentifiableElementEClass.getESuperTypes().add(this.getSTypedElement());
 		sIdentifiableElementEClass.getESuperTypes().add(theGraphPackage.getIdentifiableElement());
 		sElementEClass.getESuperTypes().add(this.getSIdentifiableElement());
 		sElementEClass.getESuperTypes().add(this.getSAnnotatableElement());
@@ -915,14 +801,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sProcessingAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(sElementPathEClass, SElementPath.class, "SElementPath", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSElementPath_ParentPath(), ecorePackage.getEString(), "parentPath", null, 0, 1, SElementPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSElementPath_SElement(), this.getSIdentifiableElement(), this.getSIdentifiableElement_SElementPath(), "sElement", null, 1, 1, SElementPath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSElementPath_Name(), ecorePackage.getEString(), "name", "", 0, 1, SElementPath.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSElementPath_ElementType(), this.getSELEMENT_TYPE(), "elementType", null, 0, 1, SElementPath.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(sIdentifiableElementEClass, SIdentifiableElement.class, "SIdentifiableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSIdentifiableElement_SElementPath(), this.getSElementPath(), this.getSElementPath_SElement(), "sElementPath", null, 1, 1, SIdentifiableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sElementEClass, SElement.class, "SElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSElement_SSterotypeableElement(), this.getSStereotypeableElement(), null, "sSterotypeableElement", null, 1, 1, SElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -952,9 +831,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		initEClass(sNamedElementEClass, SNamedElement.class, "SNamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, SNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(sTypedElementEClass, STypedElement.class, "STypedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSTypedElement_Type(), this.getSELEMENT_TYPE(), "type", null, 0, 1, STypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sStereotypeableElementEClass, SStereotypeableElement.class, "SStereotypeableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSStereotypeableElement_SStereotype(), this.getSStereotype(), null, "sStereotype", null, 1, 1, SStereotypeableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1077,14 +953,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, ecorePackage.getELong(), "order", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(selemenT_TYPEEEnum, de.corpling.salt.model.saltCore.SELEMENT_TYPE.class, "SELEMENT_TYPE");
-		addEEnumLiteral(selemenT_TYPEEEnum, de.corpling.salt.model.saltCore.SELEMENT_TYPE.CORPUS);
-		addEEnumLiteral(selemenT_TYPEEEnum, de.corpling.salt.model.saltCore.SELEMENT_TYPE.DOCUMENT);
-		addEEnumLiteral(selemenT_TYPEEEnum, de.corpling.salt.model.saltCore.SELEMENT_TYPE.DATASOURCE);
-		addEEnumLiteral(selemenT_TYPEEEnum, de.corpling.salt.model.saltCore.SELEMENT_TYPE.TOKEN);
-		addEEnumLiteral(selemenT_TYPEEEnum, de.corpling.salt.model.saltCore.SELEMENT_TYPE.STRUCTURE);
-		addEEnumLiteral(selemenT_TYPEEEnum, de.corpling.salt.model.saltCore.SELEMENT_TYPE.ANNOTATION);
-
 		initEEnum(straversaL_MODEEEnum, de.corpling.salt.model.saltCore.STRAVERSAL_MODE.class, "STRAVERSAL_MODE");
 		addEEnumLiteral(straversaL_MODEEEnum, de.corpling.salt.model.saltCore.STRAVERSAL_MODE.DEPTH_FIRST);
 		addEEnumLiteral(straversaL_MODEEEnum, de.corpling.salt.model.saltCore.STRAVERSAL_MODE.BOTTOM_UP);
