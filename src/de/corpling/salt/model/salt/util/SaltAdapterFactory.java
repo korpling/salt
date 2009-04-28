@@ -18,7 +18,6 @@ import de.corpling.salt.model.saltCore.SProcessingAnnotatableElement;
 import de.corpling.salt.model.saltCore.SRelation;
 import de.corpling.salt.model.saltCore.SStereotypeContainer;
 import de.corpling.salt.model.saltCore.SStereotypeableElement;
-import de.corpling.salt.model.saltCore.STypedElement;
 
 import de.util.graph.Edge;
 import de.util.graph.Graph;

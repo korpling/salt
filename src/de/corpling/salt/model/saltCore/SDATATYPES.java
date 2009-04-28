@@ -14,171 +14,171 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>DATATYPES</b></em>',
+ * A representation of the literals of the enumeration '<em><b>SDATATYPES</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.corpling.salt.model.saltCore.SaltCorePackage#getDATATYPES()
+ * @see de.corpling.salt.model.saltCore.SaltCorePackage#getSDATATYPES()
  * @model
  * @generated
  */
-public enum DATATYPES implements Enumerator {
+public enum SDATATYPES implements Enumerator {
 	/**
-	 * The '<em><b>NUMBER</b></em>' literal object.
+	 * The '<em><b>SNUMBER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #NUMBER_VALUE
+	 * @see #SNUMBER_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	NUMBER(0, "NUMBER", "NUMBER"),
+	SNUMBER(0, "SNUMBER", "SNUMBER"),
 
 	/**
-	 * The '<em><b>REAL</b></em>' literal object.
+	 * The '<em><b>SREAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #REAL_VALUE
+	 * @see #SREAL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	REAL(1, "REAL", "REAL"),
+	SREAL(1, "SREAL", "SREAL"),
 
 	/**
-	 * The '<em><b>TEXT</b></em>' literal object.
+	 * The '<em><b>STEXT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #TEXT_VALUE
+	 * @see #STEXT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	TEXT(2, "TEXT", "TEXT"),
+	STEXT(2, "STEXT", "STEXT"),
 
 	/**
-	 * The '<em><b>URL</b></em>' literal object.
+	 * The '<em><b>SURL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #URL_VALUE
+	 * @see #SURL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	URL(3, "URL", "URL"),
+	SURL(3, "SURL", "SURL"),
 
 	/**
-	 * The '<em><b>OBJECT</b></em>' literal object.
+	 * The '<em><b>SOBJECT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #OBJECT_VALUE
+	 * @see #SOBJECT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	OBJECT(4, "OBJECT", "OBJECT");
+	SOBJECT(4, "SOBJECT", "SOBJECT");
 
 	/**
-	 * The '<em><b>NUMBER</b></em>' literal value.
+	 * The '<em><b>SNUMBER</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>NUMBER</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>SNUMBER</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #NUMBER
+	 * @see #SNUMBER
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NUMBER_VALUE = 0;
+	public static final int SNUMBER_VALUE = 0;
 
 	/**
-	 * The '<em><b>REAL</b></em>' literal value.
+	 * The '<em><b>SREAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>REAL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>SREAL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #REAL
+	 * @see #SREAL
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int REAL_VALUE = 1;
+	public static final int SREAL_VALUE = 1;
 
 	/**
-	 * The '<em><b>TEXT</b></em>' literal value.
+	 * The '<em><b>STEXT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>TEXT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>STEXT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #TEXT
+	 * @see #STEXT
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TEXT_VALUE = 2;
+	public static final int STEXT_VALUE = 2;
 
 	/**
-	 * The '<em><b>URL</b></em>' literal value.
+	 * The '<em><b>SURL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>URL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>SURL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #URL
+	 * @see #SURL
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int URL_VALUE = 3;
+	public static final int SURL_VALUE = 3;
 
 	/**
-	 * The '<em><b>OBJECT</b></em>' literal value.
+	 * The '<em><b>SOBJECT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>OBJECT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>SOBJECT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #OBJECT
+	 * @see #SOBJECT
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OBJECT_VALUE = 4;
+	public static final int SOBJECT_VALUE = 4;
 
 	/**
-	 * An array of all the '<em><b>DATATYPES</b></em>' enumerators.
+	 * An array of all the '<em><b>SDATATYPES</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final DATATYPES[] VALUES_ARRAY =
-		new DATATYPES[] {
-			NUMBER,
-			REAL,
-			TEXT,
-			URL,
-			OBJECT,
+	private static final SDATATYPES[] VALUES_ARRAY =
+		new SDATATYPES[] {
+			SNUMBER,
+			SREAL,
+			STEXT,
+			SURL,
+			SOBJECT,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>DATATYPES</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>SDATATYPES</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<DATATYPES> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<SDATATYPES> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>DATATYPES</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>SDATATYPES</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static DATATYPES get(String literal) {
+	public static SDATATYPES get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			DATATYPES result = VALUES_ARRAY[i];
+			SDATATYPES result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -187,14 +187,14 @@ public enum DATATYPES implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>DATATYPES</b></em>' literal with the specified name.
+	 * Returns the '<em><b>SDATATYPES</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static DATATYPES getByName(String name) {
+	public static SDATATYPES getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			DATATYPES result = VALUES_ARRAY[i];
+			SDATATYPES result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -203,18 +203,18 @@ public enum DATATYPES implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>DATATYPES</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>SDATATYPES</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static DATATYPES get(int value) {
+	public static SDATATYPES get(int value) {
 		switch (value) {
-			case NUMBER_VALUE: return NUMBER;
-			case REAL_VALUE: return REAL;
-			case TEXT_VALUE: return TEXT;
-			case URL_VALUE: return URL;
-			case OBJECT_VALUE: return OBJECT;
+			case SNUMBER_VALUE: return SNUMBER;
+			case SREAL_VALUE: return SREAL;
+			case STEXT_VALUE: return STEXT;
+			case SURL_VALUE: return SURL;
+			case SOBJECT_VALUE: return SOBJECT;
 		}
 		return null;
 	}
@@ -246,7 +246,7 @@ public enum DATATYPES implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private DATATYPES(int value, String name, String literal) {
+	private SDATATYPES(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -290,4 +290,4 @@ public enum DATATYPES implements Enumerator {
 		return literal;
 	}
 	
-} //DATATYPES
+} //SDATATYPES

@@ -329,13 +329,22 @@ public interface SaltCorePackage extends EPackage {
 	int SANNOTATION__LABEL_OWNER = GraphPackage.LABEL__LABEL_OWNER;
 
 	/**
+	 * The feature id for the '<em><b>SType</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SANNOTATION__STYPE = GraphPackage.LABEL_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>SAnnotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 0;
+	int SANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.
@@ -1134,6 +1143,16 @@ public interface SaltCorePackage extends EPackage {
 	int STRAVERSAL_MODE = 16;
 
 	/**
+	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.SDATATYPES <em>SDATATYPES</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.corpling.salt.model.saltCore.SDATATYPES
+	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSDATATYPES()
+	 * @generated
+	 */
+	int SDATATYPES = 17;
+
+	/**
 	 * The meta object id for the '<em>Properties</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1141,7 +1160,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 17;
+	int PROPERTIES = 18;
 
 
 	/**
@@ -1217,6 +1236,17 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSAnnotation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.corpling.salt.model.saltCore.SAnnotation#getSType <em>SType</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SType</em>'.
+	 * @see de.corpling.salt.model.saltCore.SAnnotation#getSType()
+	 * @see #getSAnnotation()
+	 * @generated
+	 */
+	EAttribute getSAnnotation_SType();
 
 	/**
 	 * Returns the meta object for class '{@link de.corpling.salt.model.saltCore.SAnnotatableElement <em>SAnnotatable Element</em>}'.
@@ -1612,6 +1642,16 @@ public interface SaltCorePackage extends EPackage {
 	EEnum getSTRAVERSAL_MODE();
 
 	/**
+	 * Returns the meta object for enum '{@link de.corpling.salt.model.saltCore.SDATATYPES <em>SDATATYPES</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>SDATATYPES</em>'.
+	 * @see de.corpling.salt.model.saltCore.SDATATYPES
+	 * @generated
+	 */
+	EEnum getSDATATYPES();
+
+	/**
 	 * Returns the meta object for data type '{@link java.util.Properties <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1705,6 +1745,14 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EClass SANNOTATION = eINSTANCE.getSAnnotation();
+
+		/**
+		 * The meta object literal for the '<em><b>SType</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SANNOTATION__STYPE = eINSTANCE.getSAnnotation_SType();
 
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.
@@ -2029,6 +2077,16 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum STRAVERSAL_MODE = eINSTANCE.getSTRAVERSAL_MODE();
+
+		/**
+		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.SDATATYPES <em>SDATATYPES</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.corpling.salt.model.saltCore.SDATATYPES
+		 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getSDATATYPES()
+		 * @generated
+		 */
+		EEnum SDATATYPES = eINSTANCE.getSDATATYPES();
 
 		/**
 		 * The meta object literal for the '<em>Properties</em>' data type.

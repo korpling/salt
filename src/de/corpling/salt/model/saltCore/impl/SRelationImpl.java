@@ -10,9 +10,7 @@ import de.corpling.salt.model.saltCore.SaltCoreFactory;
 import de.corpling.salt.model.saltCore.SaltCorePackage;
 import de.corpling.salt.model.saltCore.SAnnotatableElement;
 import de.corpling.salt.model.saltCore.SAnnotation;
-import de.corpling.salt.model.saltCore.SELEMENT_TYPE;
 import de.corpling.salt.model.saltCore.SElement;
-import de.corpling.salt.model.saltCore.SElementPath;
 import de.corpling.salt.model.saltCore.SFeature;
 import de.corpling.salt.model.saltCore.SGraph;
 import de.corpling.salt.model.saltCore.SIdentifiableElement;
@@ -23,7 +21,6 @@ import de.corpling.salt.model.saltCore.SRelation;
 import de.corpling.salt.model.saltCore.SStereotype;
 import de.corpling.salt.model.saltCore.SStereotypeableElement;
 
-import de.corpling.salt.model.saltCore.STypedElement;
 import de.util.graph.impl.EdgeImpl;
 import java.util.Collection;
 

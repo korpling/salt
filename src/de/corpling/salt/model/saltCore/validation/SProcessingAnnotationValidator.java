@@ -6,8 +6,6 @@
  */
 package de.corpling.salt.model.saltCore.validation;
 
-import de.corpling.salt.model.saltCore.DATATYPES;
-
 
 /**
  * A sample validator interface for {@link de.corpling.salt.model.saltCore.SProcessingAnnotation}.
@@ -17,7 +15,5 @@ import de.corpling.salt.model.saltCore.DATATYPES;
  */
 public interface SProcessingAnnotationValidator {
 	boolean validate();
-
-	boolean validateSType(DATATYPES value);
 
 }

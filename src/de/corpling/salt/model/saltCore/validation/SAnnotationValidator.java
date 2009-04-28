@@ -6,7 +6,7 @@
  */
 package de.corpling.salt.model.saltCore.validation;
 
-import de.corpling.salt.model.saltCore.DATATYPES;
+import de.corpling.salt.model.saltCore.SDATATYPES;
 
 
 /**
@@ -18,6 +18,6 @@ import de.corpling.salt.model.saltCore.DATATYPES;
 public interface SAnnotationValidator {
 	boolean validate();
 
-	boolean validateSType(DATATYPES value);
+	boolean validateSType(SDATATYPES value);
 
 }

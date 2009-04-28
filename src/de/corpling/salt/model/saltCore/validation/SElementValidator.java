@@ -7,7 +7,6 @@
 package de.corpling.salt.model.saltCore.validation;
 
 import de.corpling.salt.model.saltCore.SAnnotatableElement;
-import de.corpling.salt.model.saltCore.SElementPath;
 import de.corpling.salt.model.saltCore.SGraph;
 import de.corpling.salt.model.saltCore.SProcessingAnnotatableElement;
 import de.corpling.salt.model.saltCore.SStereotypeableElement;
@@ -28,6 +27,4 @@ public interface SElementValidator {
 	boolean validateSProcessingAnnotatableElement(SProcessingAnnotatableElement value);
 
 	boolean validateSGraph(SGraph value);
-
-	boolean validateSElementPath(SElementPath value);
 }

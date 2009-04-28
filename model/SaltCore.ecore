@@ -14,7 +14,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
         volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sElements"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SAnnotation" eSuperTypes="Graph.ecore#//Label"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SAnnotation" eSuperTypes="Graph.ecore#//Label">
+    <eOperations name="getValueSNumber"/>
+    <eOperations name="getValueSReal"/>
+    <eOperations name="getValueSText"/>
+    <eOperations name="getValueSURL"/>
+    <eOperations name="getValueSObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sType" eType="#//SDATATYPES"
+        defaultValueLiteral="TEXT"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAnnotatableElement" eSuperTypes="Graph.ecore#//LabelableElement">
     <eOperations name="addSAnnotation">
       <eParameters name="sAnnotation" eType="#//SAnnotation"/>
@@ -178,5 +186,12 @@
       <eParameters name="currSElement" eType="#//SElement"/>
       <eParameters name="order" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
     </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SDATATYPES">
+    <eLiterals name="SNUMBER"/>
+    <eLiterals name="SREAL" value="1"/>
+    <eLiterals name="STEXT" value="2"/>
+    <eLiterals name="SURL" value="3"/>
+    <eLiterals name="SOBJECT" value="4"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -10,7 +10,6 @@ import de.corpling.salt.model.saltCore.SAnnotatableElement;
 import de.corpling.salt.model.saltCore.SAnnotation;
 import de.corpling.salt.model.saltCore.SCoreProject;
 import de.corpling.salt.model.saltCore.SElement;
-import de.corpling.salt.model.saltCore.SElementPath;
 import de.corpling.salt.model.saltCore.SFeature;
 import de.corpling.salt.model.saltCore.SFeatureDescription;
 import de.corpling.salt.model.saltCore.SGraph;
@@ -23,7 +22,6 @@ import de.corpling.salt.model.saltCore.SStereotype;
 import de.corpling.salt.model.saltCore.SStereotypeContainer;
 import de.corpling.salt.model.saltCore.SStereotypeableElement;
 import de.corpling.salt.model.saltCore.STraversalObject;
-import de.corpling.salt.model.saltCore.STypedElement;
 import de.corpling.salt.model.saltCore.SaltCoreFactory;
 import de.corpling.salt.model.saltCore.SaltCorePackage;
 
@@ -174,6 +172,13 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EEnum sdatatypesEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType propertiesEDataType = null;
 
 	/**
@@ -310,6 +315,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 */
 	public EClass getSAnnotation() {
 		return sAnnotationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSAnnotation_SType() {
+		return (EAttribute)sAnnotationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -650,6 +664,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getSDATATYPES() {
+		return sdatatypesEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getProperties() {
 		return propertiesEDataType;
 	}
@@ -691,6 +714,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEReference(sElementEClass, SELEMENT__SGRAPH);
 
 		sAnnotationEClass = createEClass(SANNOTATION);
+		createEAttribute(sAnnotationEClass, SANNOTATION__STYPE);
 
 		sAnnotatableElementEClass = createEClass(SANNOTATABLE_ELEMENT);
 		createEReference(sAnnotatableElementEClass, SANNOTATABLE_ELEMENT__SANNOTATIONS);
@@ -743,6 +767,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		// Create enums
 		straversaL_MODEEEnum = createEEnum(STRAVERSAL_MODE);
+		sdatatypesEEnum = createEEnum(SDATATYPES);
 
 		// Create data types
 		propertiesEDataType = createEDataType(PROPERTIES);
@@ -810,6 +835,17 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEReference(getSElement_SGraph(), this.getSGraph(), this.getSGraph_SElements(), "sGraph", null, 0, 1, SElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sAnnotationEClass, SAnnotation.class, "SAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSAnnotation_SType(), this.getSDATATYPES(), "sType", "TEXT", 0, 1, SAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(sAnnotationEClass, null, "getValueSNumber", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAnnotationEClass, null, "getValueSReal", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAnnotationEClass, null, "getValueSText", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAnnotationEClass, null, "getValueSURL", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAnnotationEClass, null, "getValueSObject", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sAnnotatableElementEClass, SAnnotatableElement.class, "SAnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSAnnotatableElement_SAnnotations(), this.getSAnnotation(), null, "sAnnotations", null, 0, -1, SAnnotatableElement.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -956,6 +992,13 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEEnum(straversaL_MODEEEnum, de.corpling.salt.model.saltCore.STRAVERSAL_MODE.class, "STRAVERSAL_MODE");
 		addEEnumLiteral(straversaL_MODEEEnum, de.corpling.salt.model.saltCore.STRAVERSAL_MODE.DEPTH_FIRST);
 		addEEnumLiteral(straversaL_MODEEEnum, de.corpling.salt.model.saltCore.STRAVERSAL_MODE.BOTTOM_UP);
+
+		initEEnum(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.class, "SDATATYPES");
+		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SNUMBER);
+		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SREAL);
+		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.STEXT);
+		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SURL);
+		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SOBJECT);
 
 		// Initialize data types
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

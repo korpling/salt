@@ -10,9 +10,7 @@ import de.corpling.salt.model.saltCore.*;
 import de.corpling.salt.model.saltCore.SAnnotatableElement;
 import de.corpling.salt.model.saltCore.SAnnotation;
 import de.corpling.salt.model.saltCore.SCoreProject;
-import de.corpling.salt.model.saltCore.SELEMENT_TYPE;
 import de.corpling.salt.model.saltCore.SElement;
-import de.corpling.salt.model.saltCore.SElementPath;
 import de.corpling.salt.model.saltCore.SFeature;
 import de.corpling.salt.model.saltCore.SFeatureDescription;
 import de.corpling.salt.model.saltCore.SGraph;
@@ -24,7 +22,6 @@ import de.corpling.salt.model.saltCore.SRelation;
 import de.corpling.salt.model.saltCore.SStereotype;
 import de.corpling.salt.model.saltCore.SStereotypeContainer;
 import de.corpling.salt.model.saltCore.SStereotypeableElement;
-import de.corpling.salt.model.saltCore.STypedElement;
 import de.corpling.salt.model.saltCore.SaltCoreFactory;
 import de.corpling.salt.model.saltCore.SaltCorePackage;
 
@@ -112,6 +109,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 		switch (eDataType.getClassifierID()) {
 			case SaltCorePackage.STRAVERSAL_MODE:
 				return createSTRAVERSAL_MODEFromString(eDataType, initialValue);
+			case SaltCorePackage.SDATATYPES:
+				return createSDATATYPESFromString(eDataType, initialValue);
 			case SaltCorePackage.PROPERTIES:
 				return createPropertiesFromString(eDataType, initialValue);
 			default:
@@ -129,6 +128,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 		switch (eDataType.getClassifierID()) {
 			case SaltCorePackage.STRAVERSAL_MODE:
 				return convertSTRAVERSAL_MODEToString(eDataType, instanceValue);
+			case SaltCorePackage.SDATATYPES:
+				return convertSDATATYPESToString(eDataType, instanceValue);
 			case SaltCorePackage.PROPERTIES:
 				return convertPropertiesToString(eDataType, instanceValue);
 			default:
@@ -303,6 +304,26 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	 * @generated
 	 */
 	public String convertSTRAVERSAL_MODEToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SDATATYPES createSDATATYPESFromString(EDataType eDataType, String initialValue) {
+		SDATATYPES result = SDATATYPES.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSDATATYPESToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

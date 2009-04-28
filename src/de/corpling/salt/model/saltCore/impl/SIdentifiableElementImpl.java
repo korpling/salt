@@ -8,10 +8,7 @@ package de.corpling.salt.model.saltCore.impl;
 
 import de.util.graph.GraphPackage;
 import de.util.graph.IdentifiableElement;
-import de.corpling.salt.model.saltCore.SELEMENT_TYPE;
-import de.corpling.salt.model.saltCore.SElementPath;
 import de.corpling.salt.model.saltCore.SIdentifiableElement;
-import de.corpling.salt.model.saltCore.STypedElement;
 import de.corpling.salt.model.saltCore.SaltCorePackage;
 
 

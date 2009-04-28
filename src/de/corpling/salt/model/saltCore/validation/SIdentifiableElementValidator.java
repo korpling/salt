@@ -6,8 +6,6 @@
  */
 package de.corpling.salt.model.saltCore.validation;
 
-import de.corpling.salt.model.saltCore.SElementPath;
-
 /**
  * A sample validator interface for {@link de.corpling.salt.model.saltCore.SIdentifiableElement}.
  * This doesn't really do anything, and it's not a real EMF artifact.
@@ -17,6 +15,5 @@ import de.corpling.salt.model.saltCore.SElementPath;
 public interface SIdentifiableElementValidator {
 	boolean validate();
 
-	boolean validateSElementPath(SElementPath value);
 	boolean validateName(String value);
 }
