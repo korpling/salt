@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="saltFW"
+    nsURI="www.corpling.de/saltFW" nsPrefix="saltFW">
+  <eClassifiers xsi:type="ecore:EClass" name="SaltProject" eSuperTypes="Salt.ecore#//SProject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="saltGraphs" upperBound="-1"
+        eType="#//SaltGraph" volatile="true" transient="true" derived="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sModules" upperBound="-1"
+        eType="#//SaltModule" containment="true" eOpposite="#//SaltModule/saltProject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SaltGraph" eSuperTypes="Salt.ecore#//SCorpusGraph"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SaltModule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="saltProject" eType="#//SaltProject"
+        eOpposite="#//SaltProject/sModules"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SaltAccessorModule" eSuperTypes="#//SaltModule Graph.ecore#//TraversalObject">
+    <eOperations name="getTokenByPos" upperBound="-1" eType="ecore:EClass Salt.ecore#//SToken">
+      <eParameters name="sDocument" eType="ecore:EClass Salt.ecore#//SDocument"/>
+    </eOperations>
+    <eOperations name="getOverlapedText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="sElement" eType="ecore:EClass SaltCore.ecore#//SElement"/>
+    </eOperations>
+    <eOperations name="getSTextualDataSource" eType="ecore:EClass Salt.ecore#//STextualDataSource">
+      <eParameters name="sElement" eType="ecore:EClass SaltCore.ecore#//SElement"/>
+    </eOperations>
+    <eOperations name="getSLeftPos" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject">
+      <eParameters name="sElement" eType="ecore:EClass SaltCore.ecore#//SElement"/>
+    </eOperations>
+    <eOperations name="getSRightPos" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject">
+      <eParameters name="sElement" eType="ecore:EClass SaltCore.ecore#//SElement"/>
+    </eOperations>
+    <eOperations name="isContinuous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="sElement" eType="ecore:EClass SaltCore.ecore#//SElement"/>
+    </eOperations>
+    <eOperations name="getDominancedTokens" upperBound="-1" eType="ecore:EClass Salt.ecore#//SToken">
+      <eParameters name="sStructure" eType="ecore:EClass Salt.ecore#//SStructure"/>
+    </eOperations>
+  </eClassifiers>
+</ecore:EPackage>
