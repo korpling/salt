@@ -1164,6 +1164,28 @@ public interface SaltCorePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>URL</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.net.URL
+	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getURL()
+	 * @generated
+	 */
+	int URL = 19;
+
+
+	/**
+	 * The meta object id for the '<em>Object</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Object
+	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getObject()
+	 * @generated
+	 */
+	int OBJECT = 20;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.corpling.salt.model.saltCore.SIdentifiableElement <em>SIdentifiable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1663,6 +1685,28 @@ public interface SaltCorePackage extends EPackage {
 	EDataType getProperties();
 
 	/**
+	 * Returns the meta object for data type '{@link java.net.URL <em>URL</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>URL</em>'.
+	 * @see java.net.URL
+	 * @model instanceClass="java.net.URL"
+	 * @generated
+	 */
+	EDataType getURL();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.Object <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Object</em>'.
+	 * @see java.lang.Object
+	 * @model instanceClass="java.lang.Object"
+	 * @generated
+	 */
+	EDataType getObject();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2097,6 +2141,26 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EDataType PROPERTIES = eINSTANCE.getProperties();
+
+		/**
+		 * The meta object literal for the '<em>URL</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.net.URL
+		 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getURL()
+		 * @generated
+		 */
+		EDataType URL = eINSTANCE.getURL();
+
+		/**
+		 * The meta object literal for the '<em>Object</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Object
+		 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getObject()
+		 * @generated
+		 */
+		EDataType OBJECT = eINSTANCE.getObject();
 
 	}
 

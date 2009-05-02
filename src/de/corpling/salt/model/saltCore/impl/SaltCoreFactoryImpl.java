@@ -7,6 +7,7 @@
 package de.corpling.salt.model.saltCore.impl;
 
 import de.corpling.salt.model.saltCore.*;
+import java.net.URL;
 import de.corpling.salt.model.saltCore.SAnnotatableElement;
 import de.corpling.salt.model.saltCore.SAnnotation;
 import de.corpling.salt.model.saltCore.SCoreProject;
@@ -113,6 +114,10 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 				return createSDATATYPESFromString(eDataType, initialValue);
 			case SaltCorePackage.PROPERTIES:
 				return createPropertiesFromString(eDataType, initialValue);
+			case SaltCorePackage.URL:
+				return createURLFromString(eDataType, initialValue);
+			case SaltCorePackage.OBJECT:
+				return createObjectFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -132,6 +137,10 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 				return convertSDATATYPESToString(eDataType, instanceValue);
 			case SaltCorePackage.PROPERTIES:
 				return convertPropertiesToString(eDataType, instanceValue);
+			case SaltCorePackage.URL:
+				return convertURLToString(eDataType, instanceValue);
+			case SaltCorePackage.OBJECT:
+				return convertObjectToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -342,6 +351,42 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	 * @generated
 	 */
 	public String convertPropertiesToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public URL createURLFromString(EDataType eDataType, String initialValue) {
+		return (URL)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertURLToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object createObjectFromString(EDataType eDataType, String initialValue) {
+		return super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertObjectToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

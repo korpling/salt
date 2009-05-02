@@ -21,11 +21,11 @@ Package saltCore <www.corpling.de/salt/saltCore>
 
   Class SAnnotation -> Label
     Attribute sType : SDATATYPES
-    Operation getValueSNumber() : void
-    Operation getValueSReal() : void
-    Operation getValueSText() : void
-    Operation getValueSURL() : void
-    Operation getValueSObject() : void
+    Operation getValueSNumber() : ELongObject
+    Operation getValueSReal() : EDoubleObject
+    Operation getValueSText() : EString
+    Operation getValueSURL() : URL
+    Operation getValueSObject() : EJavaObject
 
   Class SAnnotatableElement -> LabelableElement
     Reference /sAnnotations : SAnnotation<<0..*>>
@@ -113,6 +113,10 @@ Package saltCore <www.corpling.de/salt/saltCore>
     Literal SOBJECT = 4
 
   DataType Properties <java.util.Properties>
+
+  DataType URL <java.net.URL>
+
+  DataType Object <java.lang.Object>
 
 Package graph <www.corpling.de/util/graph>
 

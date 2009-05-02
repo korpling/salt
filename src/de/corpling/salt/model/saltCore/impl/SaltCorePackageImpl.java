@@ -182,6 +182,20 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	private EDataType propertiesEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType urlEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType objectEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -682,6 +696,24 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getURL() {
+		return urlEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getObject() {
+		return objectEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SaltCoreFactory getSaltCoreFactory() {
 		return (SaltCoreFactory)getEFactoryInstance();
 	}
@@ -771,6 +803,8 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		// Create data types
 		propertiesEDataType = createEDataType(PROPERTIES);
+		urlEDataType = createEDataType(URL);
+		objectEDataType = createEDataType(OBJECT);
 	}
 
 	/**
@@ -835,17 +869,17 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEReference(getSElement_SGraph(), this.getSGraph(), this.getSGraph_SElements(), "sGraph", null, 0, 1, SElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sAnnotationEClass, SAnnotation.class, "SAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSAnnotation_SType(), this.getSDATATYPES(), "sType", "TEXT", 0, 1, SAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSAnnotation_SType(), this.getSDATATYPES(), "sType", "STEXT", 0, 1, SAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(sAnnotationEClass, null, "getValueSNumber", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(sAnnotationEClass, ecorePackage.getELongObject(), "getValueSNumber", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(sAnnotationEClass, null, "getValueSReal", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(sAnnotationEClass, ecorePackage.getEDoubleObject(), "getValueSReal", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(sAnnotationEClass, null, "getValueSText", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(sAnnotationEClass, ecorePackage.getEString(), "getValueSText", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(sAnnotationEClass, null, "getValueSURL", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(sAnnotationEClass, this.getURL(), "getValueSURL", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(sAnnotationEClass, null, "getValueSObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(sAnnotationEClass, ecorePackage.getEJavaObject(), "getValueSObject", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sAnnotatableElementEClass, SAnnotatableElement.class, "SAnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSAnnotatableElement_SAnnotations(), this.getSAnnotation(), null, "sAnnotations", null, 0, -1, SAnnotatableElement.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1002,6 +1036,8 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		// Initialize data types
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(urlEDataType, java.net.URL.class, "URL", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(objectEDataType, Object.class, "Object", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

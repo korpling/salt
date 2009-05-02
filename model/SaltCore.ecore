@@ -15,13 +15,13 @@
         volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sElements"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAnnotation" eSuperTypes="Graph.ecore#//Label">
-    <eOperations name="getValueSNumber"/>
-    <eOperations name="getValueSReal"/>
-    <eOperations name="getValueSText"/>
-    <eOperations name="getValueSURL"/>
-    <eOperations name="getValueSObject"/>
+    <eOperations name="getValueSNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    <eOperations name="getValueSReal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eOperations name="getValueSText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getValueSURL" eType="#//URL"/>
+    <eOperations name="getValueSObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sType" eType="#//SDATATYPES"
-        defaultValueLiteral="TEXT"/>
+        defaultValueLiteral="STEXT"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAnnotatableElement" eSuperTypes="Graph.ecore#//LabelableElement">
     <eOperations name="addSAnnotation">
@@ -194,4 +194,6 @@
     <eLiterals name="SURL" value="3"/>
     <eLiterals name="SOBJECT" value="4"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="URL" instanceClassName="java.net.URL"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
 </ecore:EPackage>

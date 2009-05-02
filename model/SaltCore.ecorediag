@@ -453,6 +453,13 @@
     <element xmi:type="ecore:EEnum" href="SaltCore.ecore#//SDATATYPES"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_cPxCIjQDEd6aj4Z5o9uKZA" x="40" y="210" width="116" height="121"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_ClnT8DQKEd6aj4Z5o9uKZA" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_ClnT8zQKEd6aj4Z5o9uKZA" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_ClnT9DQKEd6aj4Z5o9uKZA" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ClnT8TQKEd6aj4Z5o9uKZA" fontHeight="10" fillColor="13761016" lineColor="0"/>
+    <element xmi:type="ecore:EDataType" href="SaltCore.ecore#//URL"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ClnT8jQKEd6aj4Z5o9uKZA" x="30" y="80" width="106" height="61"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_AnKwgTC4Ed6MZsow-TJ9Fw"/>
   <element xmi:type="ecore:EPackage" href="SaltCore.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_AoUAGjC4Ed6MZsow-TJ9Fw" type="3003" source="_An1e8jC4Ed6MZsow-TJ9Fw" target="_An7lyjC4Ed6MZsow-TJ9Fw">

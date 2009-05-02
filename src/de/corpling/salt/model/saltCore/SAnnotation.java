@@ -7,6 +7,8 @@
 package de.corpling.salt.model.saltCore;
 
 import de.util.graph.Label;
+import java.net.URL;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +30,7 @@ public interface SAnnotation extends Label {
 
 	/**
 	 * Returns the value of the '<em><b>SType</b></em>' attribute.
-	 * The default value is <code>"TEXT"</code>.
+	 * The default value is <code>"STEXT"</code>.
 	 * The literals are from the enumeration {@link de.corpling.salt.model.saltCore.SDATATYPES}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -40,7 +42,7 @@ public interface SAnnotation extends Label {
 	 * @see de.corpling.salt.model.saltCore.SDATATYPES
 	 * @see #setSType(SDATATYPES)
 	 * @see de.corpling.salt.model.saltCore.SaltCorePackage#getSAnnotation_SType()
-	 * @model default="TEXT"
+	 * @model default="STEXT"
 	 * @generated
 	 */
 	SDATATYPES getSType();
@@ -62,7 +64,7 @@ public interface SAnnotation extends Label {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	void getValueSNumber();
+	Long getValueSNumber();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,7 +72,7 @@ public interface SAnnotation extends Label {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	void getValueSReal();
+	Double getValueSReal();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,7 +80,15 @@ public interface SAnnotation extends Label {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	void getValueSText();
+	String getValueSText();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="de.corpling.salt.model.saltCore.URL"
+	 * @generated
+	 */
+	URL getValueSURL();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,13 +96,5 @@ public interface SAnnotation extends Label {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	void getValueSURL();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	void getValueSObject();
+	Object getValueSObject();
 } // SAnnotation
