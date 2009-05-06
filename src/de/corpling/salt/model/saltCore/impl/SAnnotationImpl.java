@@ -7,7 +7,12 @@
 package de.corpling.salt.model.saltCore.impl;
 
 import de.util.graph.impl.LabelImpl;
+
+import java.io.File;
+import java.net.URI;
 import java.net.URL;
+
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import de.corpling.salt.model.saltCore.SAnnotation;
 import de.corpling.salt.model.saltCore.SDATATYPES;
@@ -32,8 +37,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class SAnnotationImpl extends LabelImpl implements SAnnotation 
 {
-	
+	private Logger logger= Logger.getLogger(SAnnotationImpl.class);
 	private static final String MSG_ERR=	"Error("+SAnnotation.class+")";
+	private static final String MSG_WARN=	"Warning("+SAnnotation.class+")";
 	/**
 	 * The default value of the '{@link #getSType() <em>SType</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -118,19 +124,22 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation
 			else if (this.getSType()== SDATATYPES.STEXT)
 			{
 				if (!String.class.isInstance(newValue))
-					throw new NullPointerException(MSG_ERR+"Cannot set the given value for SAnnotation, because it is not compatible with datatype "+SDATATYPES.SREAL+ ".");
+					throw new NullPointerException(MSG_ERR+"Cannot set the given value for SAnnotation, because it is not compatible with datatype "+SDATATYPES.STEXT+ ".");
 			}
-			//SURL
-			else if (this.getSType()== SDATATYPES.SURL)
+			//SURI
+			else if (this.getSType()== SDATATYPES.SURI)
 			{
-				if (!URL.class.isInstance(newValue))
-					throw new NullPointerException(MSG_ERR+"Cannot set the given value for SAnnotation, because it is not compatible with datatype "+SDATATYPES.SREAL+ ".");
+				if (!URI.class.isInstance(newValue))
+					throw new NullPointerException(MSG_ERR+"Cannot set the given value for SAnnotation, because it is not compatible with datatype "+SDATATYPES.SURI+ ".");
+				File sourceFile= new File(((URI)newValue).getPath());
+				if (!sourceFile.isAbsolute())
+					this.logger.warn(MSG_WARN + "The uri value of this annotation doesn´t have an absolute path: "+newValue);				
 			}
 			//SOBJECT
 			else if (this.getSType()== SDATATYPES.SOBJECT)
 			{
 				if (!Object.class.isInstance(newValue))
-					throw new NullPointerException(MSG_ERR+"Cannot set the given value for SAnnotation, because it is not compatible with datatype "+SDATATYPES.SREAL+ ".");
+					throw new NullPointerException(MSG_ERR+"Cannot set the given value for SAnnotation, because it is not compatible with datatype "+SDATATYPES.SOBJECT+ ".");
 			}
 		}
 		super.setValue(newValue);
@@ -194,19 +203,19 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public URL getValueSURL() 
+	public URI getValueSURI() 
 	{
-		URL retVal= null;
+		URI retVal= null;
 		
-		if (this.sType== SDATATYPES.SURL)
+		if (this.sType== SDATATYPES.SURI)
 		{
 			if (this.getValue()== null)
 				retVal= null;
-			else if (URL.class.isInstance(this.getValue()))
-				retVal= (URL)this.getValue();
+			else if (URI.class.isInstance(this.getValue()))
+				retVal= (URI)this.getValue();
 			else throw new NullPointerException(MSG_ERR + "The value is not of type long, especially it is of type SNUMBER.");
 		}	
-		else throw new NullPointerException(MSG_ERR + "The value is not of type SURL.");
+		else throw new NullPointerException(MSG_ERR + "The value is not of type SURI.");
 		return(retVal);
 	}
 

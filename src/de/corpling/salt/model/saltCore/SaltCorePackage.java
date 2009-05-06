@@ -1164,15 +1164,14 @@ public interface SaltCorePackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '<em>URL</em>' data type.
+	 * The meta object id for the '<em>URI</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see java.net.URL
-	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getURL()
+	 * @see java.net.URI
+	 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getURI()
 	 * @generated
 	 */
-	int URL = 19;
-
+	int URI = 19;
 
 	/**
 	 * The meta object id for the '<em>Object</em>' data type.
@@ -1685,15 +1684,15 @@ public interface SaltCorePackage extends EPackage {
 	EDataType getProperties();
 
 	/**
-	 * Returns the meta object for data type '{@link java.net.URL <em>URL</em>}'.
+	 * Returns the meta object for data type '{@link java.net.URI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>URL</em>'.
-	 * @see java.net.URL
-	 * @model instanceClass="java.net.URL"
+	 * @return the meta object for data type '<em>URI</em>'.
+	 * @see java.net.URI
+	 * @model instanceClass="java.net.URI"
 	 * @generated
 	 */
-	EDataType getURL();
+	EDataType getURI();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Object <em>Object</em>}'.
@@ -2143,14 +2142,14 @@ public interface SaltCorePackage extends EPackage {
 		EDataType PROPERTIES = eINSTANCE.getProperties();
 
 		/**
-		 * The meta object literal for the '<em>URL</em>' data type.
+		 * The meta object literal for the '<em>URI</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.net.URL
-		 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getURL()
+		 * @see java.net.URI
+		 * @see de.corpling.salt.model.saltCore.impl.SaltCorePackageImpl#getURI()
 		 * @generated
 		 */
-		EDataType URL = eINSTANCE.getURL();
+		EDataType URI = eINSTANCE.getURI();
 
 		/**
 		 * The meta object literal for the '<em>Object</em>' data type.

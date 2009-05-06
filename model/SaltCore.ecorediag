@@ -57,7 +57,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_9YWzoTQDEd6aj4Z5o9uKZA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_-_l3MDQDEd6aj4Z5o9uKZA" type="2002">
-        <element xmi:type="ecore:EOperation" href="SaltCore.ecore#//SAnnotation/getValueSURL"/>
+        <element xmi:type="ecore:EOperation" href="SaltCore.ecore#//SAnnotation/getValueSURI"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_-_l3MTQDEd6aj4Z5o9uKZA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_BDMtsDQEEd6aj4Z5o9uKZA" type="2002">
@@ -438,7 +438,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_g9FF0TQDEd6aj4Z5o9uKZA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_iURiQDQDEd6aj4Z5o9uKZA" type="2006">
-        <element xmi:type="ecore:EEnumLiteral" href="SaltCore.ecore#//SDATATYPES/SURL"/>
+        <element xmi:type="ecore:EEnumLiteral" href="SaltCore.ecore#//SDATATYPES/SURI"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_iURiQTQDEd6aj4Z5o9uKZA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_jVmcYDQDEd6aj4Z5o9uKZA" type="2006">
@@ -457,7 +457,7 @@
     <children xmi:type="notation:Node" xmi:id="_ClnT8zQKEd6aj4Z5o9uKZA" type="4008"/>
     <children xmi:type="notation:Node" xmi:id="_ClnT9DQKEd6aj4Z5o9uKZA" type="4009"/>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_ClnT8TQKEd6aj4Z5o9uKZA" fontHeight="10" fillColor="13761016" lineColor="0"/>
-    <element xmi:type="ecore:EDataType" href="SaltCore.ecore#//URL"/>
+    <element xmi:type="ecore:EDataType" href="SaltCore.ecore#//URI"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ClnT8jQKEd6aj4Z5o9uKZA" x="30" y="80" width="106" height="61"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_AnKwgTC4Ed6MZsow-TJ9Fw"/>

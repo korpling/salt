@@ -18,7 +18,7 @@
     <eOperations name="getValueSNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
     <eOperations name="getValueSReal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
     <eOperations name="getValueSText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getValueSURL" eType="#//URL"/>
+    <eOperations name="getValueSURI" eType="#//URI"/>
     <eOperations name="getValueSObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sType" eType="#//SDATATYPES"
         defaultValueLiteral="STEXT"/>
@@ -191,9 +191,9 @@
     <eLiterals name="SNUMBER"/>
     <eLiterals name="SREAL" value="1"/>
     <eLiterals name="STEXT" value="2"/>
-    <eLiterals name="SURL" value="3"/>
+    <eLiterals name="SURI" value="3"/>
     <eLiterals name="SOBJECT" value="4"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="URL" instanceClassName="java.net.URL"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="java.net.URI"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
 </ecore:EPackage>

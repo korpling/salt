@@ -7,6 +7,8 @@
 package de.corpling.salt.model.saltCore;
 
 import de.util.graph.Label;
+
+import java.net.URI;
 import java.net.URL;
 import org.eclipse.emf.ecore.EObject;
 
@@ -85,10 +87,10 @@ public interface SAnnotation extends Label {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="de.corpling.salt.model.saltCore.URL"
+	 * @model kind="operation" dataType="de.corpling.salt.model.saltCore.URI"
 	 * @generated
 	 */
-	URL getValueSURL();
+	URI getValueSURI();
 
 	/**
 	 * <!-- begin-user-doc -->

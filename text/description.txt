@@ -24,7 +24,7 @@ Package saltCore <www.corpling.de/salt/saltCore>
     Operation getValueSNumber() : ELongObject
     Operation getValueSReal() : EDoubleObject
     Operation getValueSText() : EString
-    Operation getValueSURL() : URL
+    Operation getValueSURI() : URI
     Operation getValueSObject() : EJavaObject
 
   Class SAnnotatableElement -> LabelableElement
@@ -109,12 +109,12 @@ Package saltCore <www.corpling.de/salt/saltCore>
     Literal SNUMBER = 0
     Literal SREAL = 1
     Literal STEXT = 2
-    Literal SURL = 3
+    Literal SURI = 3
     Literal SOBJECT = 4
 
   DataType Properties <java.util.Properties>
 
-  DataType URL <java.net.URL>
+  DataType URI <java.net.URI>
 
   DataType Object <java.lang.Object>
 

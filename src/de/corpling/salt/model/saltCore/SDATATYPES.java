@@ -53,14 +53,14 @@ public enum SDATATYPES implements Enumerator {
 	STEXT(2, "STEXT", "STEXT"),
 
 	/**
-	 * The '<em><b>SURL</b></em>' literal object.
+	 * The '<em><b>SURI</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SURL_VALUE
+	 * @see #SURI_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SURL(3, "SURL", "SURL"),
+	SURI(3, "SURI", "SURI"),
 
 	/**
 	 * The '<em><b>SOBJECT</b></em>' literal object.
@@ -118,19 +118,19 @@ public enum SDATATYPES implements Enumerator {
 	public static final int STEXT_VALUE = 2;
 
 	/**
-	 * The '<em><b>SURL</b></em>' literal value.
+	 * The '<em><b>SURI</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SURL</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>SURI</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SURL
+	 * @see #SURI
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SURL_VALUE = 3;
+	public static final int SURI_VALUE = 3;
 
 	/**
 	 * The '<em><b>SOBJECT</b></em>' literal value.
@@ -158,7 +158,7 @@ public enum SDATATYPES implements Enumerator {
 			SNUMBER,
 			SREAL,
 			STEXT,
-			SURL,
+			SURI,
 			SOBJECT,
 		};
 
@@ -213,7 +213,7 @@ public enum SDATATYPES implements Enumerator {
 			case SNUMBER_VALUE: return SNUMBER;
 			case SREAL_VALUE: return SREAL;
 			case STEXT_VALUE: return STEXT;
-			case SURL_VALUE: return SURL;
+			case SURI_VALUE: return SURI;
 			case SOBJECT_VALUE: return SOBJECT;
 		}
 		return null;

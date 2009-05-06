@@ -7,6 +7,7 @@
 package de.corpling.salt.model.saltCore.impl;
 
 import de.corpling.salt.model.saltCore.*;
+import java.net.URI;
 import java.net.URL;
 import de.corpling.salt.model.saltCore.SAnnotatableElement;
 import de.corpling.salt.model.saltCore.SAnnotation;
@@ -114,8 +115,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 				return createSDATATYPESFromString(eDataType, initialValue);
 			case SaltCorePackage.PROPERTIES:
 				return createPropertiesFromString(eDataType, initialValue);
-			case SaltCorePackage.URL:
-				return createURLFromString(eDataType, initialValue);
+			case SaltCorePackage.URI:
+				return createURIFromString(eDataType, initialValue);
 			case SaltCorePackage.OBJECT:
 				return createObjectFromString(eDataType, initialValue);
 			default:
@@ -137,8 +138,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 				return convertSDATATYPESToString(eDataType, instanceValue);
 			case SaltCorePackage.PROPERTIES:
 				return convertPropertiesToString(eDataType, instanceValue);
-			case SaltCorePackage.URL:
-				return convertURLToString(eDataType, instanceValue);
+			case SaltCorePackage.URI:
+				return convertURIToString(eDataType, instanceValue);
 			case SaltCorePackage.OBJECT:
 				return convertObjectToString(eDataType, instanceValue);
 			default:
@@ -359,8 +360,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public URL createURLFromString(EDataType eDataType, String initialValue) {
-		return (URL)super.createFromString(eDataType, initialValue);
+	public URI createURIFromString(EDataType eDataType, String initialValue) {
+		return (URI)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -368,7 +369,7 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertURLToString(EDataType eDataType, Object instanceValue) {
+	public String convertURIToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

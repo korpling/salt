@@ -186,7 +186,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType urlEDataType = null;
+	private EDataType uriEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -696,8 +696,8 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getURL() {
-		return urlEDataType;
+	public EDataType getURI() {
+		return uriEDataType;
 	}
 
 	/**
@@ -803,7 +803,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		// Create data types
 		propertiesEDataType = createEDataType(PROPERTIES);
-		urlEDataType = createEDataType(URL);
+		uriEDataType = createEDataType(URI);
 		objectEDataType = createEDataType(OBJECT);
 	}
 
@@ -877,7 +877,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		addEOperation(sAnnotationEClass, ecorePackage.getEString(), "getValueSText", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(sAnnotationEClass, this.getURL(), "getValueSURL", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(sAnnotationEClass, this.getURI(), "getValueSURI", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(sAnnotationEClass, ecorePackage.getEJavaObject(), "getValueSObject", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1031,12 +1031,12 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SNUMBER);
 		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SREAL);
 		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.STEXT);
-		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SURL);
+		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SURI);
 		addEEnumLiteral(sdatatypesEEnum, de.corpling.salt.model.saltCore.SDATATYPES.SOBJECT);
 
 		// Initialize data types
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(urlEDataType, java.net.URL.class, "URL", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(uriEDataType, java.net.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(objectEDataType, Object.class, "Object", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
