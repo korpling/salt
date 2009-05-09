@@ -329,13 +329,49 @@ public interface SaltCorePackage extends EPackage {
 	int SANNOTATION__LABEL_OWNER = GraphPackage.LABEL__LABEL_OWNER;
 
 	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SANNOTATION__LABELS = GraphPackage.LABEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Num Of Labels</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SANNOTATION__NUM_OF_LABELS = GraphPackage.LABEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SANNOTATION__SANNOTATIONS = GraphPackage.LABEL_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>SType</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SANNOTATION__STYPE = GraphPackage.LABEL_FEATURE_COUNT + 0;
+	int SANNOTATION__STYPE = GraphPackage.LABEL_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Super Annotatable Element</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SANNOTATION__SUPER_ANNOTATABLE_ELEMENT = GraphPackage.LABEL_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>SAnnotation</em>' class.
@@ -344,7 +380,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 1;
+	int SANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.corpling.salt.model.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.
@@ -1270,6 +1306,17 @@ public interface SaltCorePackage extends EPackage {
 	EAttribute getSAnnotation_SType();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link de.corpling.salt.model.saltCore.SAnnotation#getSuperAnnotatableElement <em>Super Annotatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Super Annotatable Element</em>'.
+	 * @see de.corpling.salt.model.saltCore.SAnnotation#getSuperAnnotatableElement()
+	 * @see #getSAnnotation()
+	 * @generated
+	 */
+	EReference getSAnnotation_SuperAnnotatableElement();
+
+	/**
 	 * Returns the meta object for class '{@link de.corpling.salt.model.saltCore.SAnnotatableElement <em>SAnnotatable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1796,6 +1843,14 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SANNOTATION__STYPE = eINSTANCE.getSAnnotation_SType();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Annotatable Element</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SANNOTATION__SUPER_ANNOTATABLE_ELEMENT = eINSTANCE.getSAnnotation_SuperAnnotatableElement();
 
 		/**
 		 * The meta object literal for the '{@link de.corpling.salt.model.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.

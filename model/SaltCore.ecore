@@ -14,7 +14,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
         volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sElements"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SAnnotation" eSuperTypes="Graph.ecore#//Label">
+  <eClassifiers xsi:type="ecore:EClass" name="SAnnotation" eSuperTypes="Graph.ecore#//Label #//SAnnotatableElement">
     <eOperations name="getValueSNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
     <eOperations name="getValueSReal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
     <eOperations name="getValueSText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -22,6 +22,8 @@
     <eOperations name="getValueSObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sType" eType="#//SDATATYPES"
         defaultValueLiteral="STEXT"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superAnnotatableElement"
+        lowerBound="1" eType="#//SAnnotatableElement" changeable="false" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAnnotatableElement" eSuperTypes="Graph.ecore#//LabelableElement">
     <eOperations name="addSAnnotation">

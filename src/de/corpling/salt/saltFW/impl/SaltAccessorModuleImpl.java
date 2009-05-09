@@ -188,9 +188,11 @@ public class SaltAccessorModuleImpl extends SaltModuleImpl implements SaltAccess
 			{
 				if (((SRelation) edge).getSStereotype().getName().equals(SSTEREOTYPES.STEXTUAL_RELATION.toString()))
 				{
-					int left= ((STextualRelation) edge).getSLeftPos().intValue();
-					int right= ((STextualRelation) edge).getSRightPos().intValue();
-					retStr= ((STextualDataSource)edge.getDestination()).getSText().substring(left, right);
+					Long left= ((STextualRelation) edge).getSLeftPos();
+					Long right= ((STextualRelation) edge).getSRightPos();
+					if ((left== null) || (right== null))
+						throw new NullPointerException(MSG_ERR +"Cannot return overlaped text, because left or right value of given textual data source aren´t set.");
+					retStr= ((STextualDataSource)edge.getDestination()).getSText().substring(left.intValue(), right.intValue());
 					break;
 				}
 			}

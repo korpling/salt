@@ -122,6 +122,8 @@ public class SaltCoreSwitch<T> {
 				SAnnotation sAnnotation = (SAnnotation)theEObject;
 				T result = caseSAnnotation(sAnnotation);
 				if (result == null) result = caseLabel(sAnnotation);
+				if (result == null) result = caseSAnnotatableElement(sAnnotation);
+				if (result == null) result = caseLabelableElement(sAnnotation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

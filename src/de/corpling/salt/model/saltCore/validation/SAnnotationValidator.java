@@ -6,6 +6,7 @@
  */
 package de.corpling.salt.model.saltCore.validation;
 
+import de.corpling.salt.model.saltCore.SAnnotatableElement;
 import de.corpling.salt.model.saltCore.SDATATYPES;
 
 
@@ -19,5 +20,7 @@ public interface SAnnotationValidator {
 	boolean validate();
 
 	boolean validateSType(SDATATYPES value);
+
+	boolean validateSuperAnnotatableElement(SAnnotatableElement value);
 
 }

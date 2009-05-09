@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.corpling.salt.model.saltCore.SAnnotation#getSType <em>SType</em>}</li>
+ *   <li>{@link de.corpling.salt.model.saltCore.SAnnotation#getSuperAnnotatableElement <em>Super Annotatable Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SAnnotation extends Label {
+public interface SAnnotation extends Label, SAnnotatableElement {
 
 	/**
 	 * Returns the value of the '<em><b>SType</b></em>' attribute.
@@ -59,6 +60,21 @@ public interface SAnnotation extends Label {
 	 * @generated
 	 */
 	void setSType(SDATATYPES value);
+
+	/**
+	 * Returns the value of the '<em><b>Super Annotatable Element</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Super Annotatable Element</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Super Annotatable Element</em>' containment reference.
+	 * @see de.corpling.salt.model.saltCore.SaltCorePackage#getSAnnotation_SuperAnnotatableElement()
+	 * @model containment="true" required="true" changeable="false"
+	 * @generated
+	 */
+	SAnnotatableElement getSuperAnnotatableElement();
 
 	/**
 	 * <!-- begin-user-doc -->

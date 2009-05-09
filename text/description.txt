@@ -19,8 +19,9 @@ Package saltCore <www.corpling.de/salt/saltCore>
     Reference sProcessingAnnotatableElement : SProcessingAnnotatableElement
     Reference /sGraph : SGraph
 
-  Class SAnnotation -> Label
+  Class SAnnotation -> Label, SAnnotatableElement
     Attribute sType : SDATATYPES
+    Reference superAnnotatableElement : SAnnotatableElement<<1..1>>
     Operation getValueSNumber() : ELongObject
     Operation getValueSReal() : EDoubleObject
     Operation getValueSText() : EString

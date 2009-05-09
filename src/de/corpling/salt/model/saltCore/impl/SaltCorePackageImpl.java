@@ -345,6 +345,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSAnnotation_SuperAnnotatableElement() {
+		return (EReference)sAnnotationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSAnnotatableElement() {
 		return sAnnotatableElementEClass;
 	}
@@ -747,6 +756,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		sAnnotationEClass = createEClass(SANNOTATION);
 		createEAttribute(sAnnotationEClass, SANNOTATION__STYPE);
+		createEReference(sAnnotationEClass, SANNOTATION__SUPER_ANNOTATABLE_ELEMENT);
 
 		sAnnotatableElementEClass = createEClass(SANNOTATABLE_ELEMENT);
 		createEReference(sAnnotatableElementEClass, SANNOTATABLE_ELEMENT__SANNOTATIONS);
@@ -846,6 +856,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sElementEClass.getESuperTypes().add(this.getSProcessingAnnotatableElement());
 		sElementEClass.getESuperTypes().add(theGraphPackage.getNode());
 		sAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
+		sAnnotationEClass.getESuperTypes().add(this.getSAnnotatableElement());
 		sAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
 		sRelationEClass.getESuperTypes().add(theGraphPackage.getEdge());
 		sRelationEClass.getESuperTypes().add(this.getSIdentifiableElement());
@@ -870,6 +881,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		initEClass(sAnnotationEClass, SAnnotation.class, "SAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSAnnotation_SType(), this.getSDATATYPES(), "sType", "STEXT", 0, 1, SAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSAnnotation_SuperAnnotatableElement(), this.getSAnnotatableElement(), null, "superAnnotatableElement", null, 1, 1, SAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(sAnnotationEClass, ecorePackage.getELongObject(), "getValueSNumber", 0, 1, IS_UNIQUE, IS_ORDERED);
 
