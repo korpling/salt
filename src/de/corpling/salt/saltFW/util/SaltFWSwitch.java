@@ -13,6 +13,7 @@ import de.corpling.salt.model.saltCore.SCoreProject;
 import de.corpling.salt.model.saltCore.SGraph;
 import de.corpling.salt.model.saltCore.SStereotypeContainer;
 
+import de.corpling.salt.model.saltCore.STraversalObject;
 import de.corpling.salt.saltFW.*;
 
 import de.util.graph.Graph;
@@ -132,7 +133,7 @@ public class SaltFWSwitch<T> {
 				SaltAccessorModule saltAccessorModule = (SaltAccessorModule)theEObject;
 				T result = caseSaltAccessorModule(saltAccessorModule);
 				if (result == null) result = caseSaltModule(saltAccessorModule);
-				if (result == null) result = caseTraversalObject(saltAccessorModule);
+				if (result == null) result = caseSTraversalObject(saltAccessorModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -347,6 +348,21 @@ public class SaltFWSwitch<T> {
 	 * @generated
 	 */
 	public T caseSCorpusGraph(SCorpusGraph object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>STraversal Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>STraversal Object</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSTraversalObject(STraversalObject object) {
 		return null;
 	}
 

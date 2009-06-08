@@ -274,7 +274,6 @@ public class SaltFWPackageImpl extends EPackageImpl implements SaltFWPackage {
 
 		// Obtain other dependent packages
 		SaltPackage theSaltPackage = (SaltPackage)EPackage.Registry.INSTANCE.getEPackage(SaltPackage.eNS_URI);
-		GraphPackage theGraphPackage = (GraphPackage)EPackage.Registry.INSTANCE.getEPackage(GraphPackage.eNS_URI);
 		SaltCorePackage theSaltCorePackage = (SaltCorePackage)EPackage.Registry.INSTANCE.getEPackage(SaltCorePackage.eNS_URI);
 
 		// Create type parameters
@@ -285,7 +284,7 @@ public class SaltFWPackageImpl extends EPackageImpl implements SaltFWPackage {
 		saltProjectEClass.getESuperTypes().add(theSaltPackage.getSProject());
 		saltGraphEClass.getESuperTypes().add(theSaltPackage.getSCorpusGraph());
 		saltAccessorModuleEClass.getESuperTypes().add(this.getSaltModule());
-		saltAccessorModuleEClass.getESuperTypes().add(theGraphPackage.getTraversalObject());
+		saltAccessorModuleEClass.getESuperTypes().add(theSaltCorePackage.getSTraversalObject());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(saltProjectEClass, SaltProject.class, "SaltProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -319,6 +318,9 @@ public class SaltFWPackageImpl extends EPackageImpl implements SaltFWPackage {
 
 		op = addEOperation(saltAccessorModuleEClass, theSaltPackage.getSToken(), "getDominancedTokens", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltPackage.getSStructure(), "sStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(saltAccessorModuleEClass, theSaltCorePackage.getSElement(), "getCorpusPathAsList", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getSElement(), "sElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

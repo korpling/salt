@@ -12,6 +12,7 @@ import de.corpling.salt.model.salt.STextualDataSource;
 import de.corpling.salt.model.salt.SToken;
 import de.corpling.salt.model.saltCore.SElement;
 
+import de.corpling.salt.model.saltCore.STraversalObject;
 import de.util.graph.TraversalObject;
 import org.eclipse.emf.common.util.EList;
 
@@ -26,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface SaltAccessorModule extends SaltModule, TraversalObject {
+public interface SaltAccessorModule extends SaltModule, STraversalObject {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,4 +84,12 @@ public interface SaltAccessorModule extends SaltModule, TraversalObject {
 	 * @generated
 	 */
 	EList<SToken> getDominancedTokens(SStructure sStructure);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<SElement> getCorpusPathAsList(SElement sElement);
 } // SaltAccessorModule

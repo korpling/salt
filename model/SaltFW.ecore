@@ -14,7 +14,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="saltProject" eType="#//SaltProject"
         eOpposite="#//SaltProject/sModules"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SaltAccessorModule" eSuperTypes="#//SaltModule Graph.ecore#//TraversalObject">
+  <eClassifiers xsi:type="ecore:EClass" name="SaltAccessorModule" eSuperTypes="#//SaltModule SaltCore.ecore#//STraversalObject">
     <eOperations name="getTokenByPos" upperBound="-1" eType="ecore:EClass Salt.ecore#//SToken">
       <eParameters name="sDocument" eType="ecore:EClass Salt.ecore#//SDocument"/>
     </eOperations>
@@ -35,6 +35,9 @@
     </eOperations>
     <eOperations name="getDominancedTokens" upperBound="-1" eType="ecore:EClass Salt.ecore#//SToken">
       <eParameters name="sStructure" eType="ecore:EClass Salt.ecore#//SStructure"/>
+    </eOperations>
+    <eOperations name="getCorpusPathAsList" upperBound="-1" eType="ecore:EClass SaltCore.ecore#//SElement">
+      <eParameters name="sElement" eType="ecore:EClass SaltCore.ecore#//SElement"/>
     </eOperations>
   </eClassifiers>
 </ecore:EPackage>

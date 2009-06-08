@@ -6,6 +6,9 @@
  */
 package de.corpling.salt.saltFW.impl;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
+
+import de.corpling.salt.model.salt.SCorpus;
 import de.corpling.salt.model.salt.SDocument;
 import de.corpling.salt.model.salt.SDocumentGraph;
 import de.corpling.salt.model.salt.SSTEREOTYPES;
@@ -15,6 +18,7 @@ import de.corpling.salt.model.salt.STextualRelation;
 import de.corpling.salt.model.salt.SToken;
 import de.corpling.salt.model.saltCore.SElement;
 import de.corpling.salt.model.saltCore.SRelation;
+import de.corpling.salt.model.saltCore.STRAVERSAL_MODE;
 import de.corpling.salt.saltFW.SaltAccessorModule;
 import de.corpling.salt.saltFW.SaltFWPackage;
 import de.util.graph.Edge;
@@ -36,7 +40,7 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class SaltAccessorModuleImpl extends SaltModuleImpl implements SaltAccessorModule 
 {
-	private enum TRAVERSAL_REASON {TOKENS, TEXTUAL_DS};
+	private enum TRAVERSAL_REASON {TOKENS, TEXTUAL_DS, CORPUS_PATH};
 	private TRAVERSAL_REASON currTraversalReason= null;
 	
 	private static String MSG_ERR= 	"Error("+SaltAccessorModuleImpl.class+"): ";
@@ -240,7 +244,7 @@ public class SaltAccessorModuleImpl extends SaltModuleImpl implements SaltAccess
 		else if (sElement.getSStereotype().getName().equals(SSTEREOTYPES.SSTRUCTURE.toString()))
 		{
 			this.currTraversalReason= TRAVERSAL_REASON.TEXTUAL_DS;
-			sElement.getSGraph().traverseGraph(TRAVERSAL_MODE.DEPTH_FIRST, sElement, this);
+			sElement.getSGraph().traverseSGraph(STRAVERSAL_MODE.DEPTH_FIRST, sElement, this, null);
 			retVal= this.dominatedText;
 		}
 		else
@@ -390,16 +394,72 @@ public class SaltAccessorModuleImpl extends SaltModuleImpl implements SaltAccess
 		{
 			this.dominancedTokens= new BasicEList<SToken>();
 			this.currTraversalReason= TRAVERSAL_REASON.TOKENS;
-			sDocument.getSDocumentGraph().traverseGraph(TRAVERSAL_MODE.DEPTH_FIRST, sStructure, this);
+			sDocument.getSDocumentGraph().traverseSGraph(STRAVERSAL_MODE.DEPTH_FIRST, sStructure, this, null);
 			dominancedTokens= this.sortTokenList(dominancedTokens);
 		}
 		return(this.dominancedTokens);
 	}
 
-	public boolean checkConstraint(TRAVERSAL_MODE traversalMode, Edge edge,
-			Node currNode, long order) 
+	/**
+	 * Stores a corpus path if it shall be created.
+	 */
+	private EList<SElement> currCorpusPath= null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public EList<SElement> getCorpusPathAsList(SElement sElement) 
 	{
-		SElement currSElement= (SElement) currNode;
+		EList<SElement> path= null;
+		if ((sElement instanceof SDocument) || (sElement instanceof SCorpus))
+		{
+			this.currCorpusPath= new BasicEList<SElement>();
+			this.currTraversalReason= TRAVERSAL_REASON.CORPUS_PATH;
+			sElement.getSGraph().traverseSGraph(STRAVERSAL_MODE.BOTTOM_UP, sElement, this, null);
+			if (this.currCorpusPath!= null)
+			{
+				path= this.currCorpusPath;
+			}	
+		}	
+		return(path);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void sElementReached(STRAVERSAL_MODE traversalMode, SElement currSElement, SRelation sRelation, SElement fromSElement, long order) 
+	{
+		//searching for dominanced token
+		if (this.currTraversalReason== TRAVERSAL_REASON.TOKENS)
+		{
+			if (currSElement.getSStereotype().getName().equals(SSTEREOTYPES.STOKEN.toString()))
+			{
+				if (!this.dominancedTokens.contains((SToken)currSElement))
+						this.dominancedTokens.add((SToken)currSElement);
+			}
+		}
+		else if (this.currTraversalReason== TRAVERSAL_REASON.CORPUS_PATH)
+		{
+			this.currCorpusPath.add(0,currSElement);
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void sElementLeft(STRAVERSAL_MODE traversalMode, SElement currSElement, SRelation sRelation, SElement fromSElement, long order) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public boolean checkConstraint(STRAVERSAL_MODE traversalMode, SRelation sRelation, SElement currSElement, long order) 
+	{
 		if (this.currTraversalReason== TRAVERSAL_REASON.TEXTUAL_DS)
 		{
 			if (currSElement.getSStereotype().getName().equals(SSTEREOTYPES.STEXTUAL_DATASOURCE.toString()))
@@ -411,25 +471,44 @@ public class SaltAccessorModuleImpl extends SaltModuleImpl implements SaltAccess
 		return true;
 	}
 
-	public void nodeLeft(TRAVERSAL_MODE traversalMode, Node currNode,
-			Edge edge, Node fromNode, long order) {
-		// TODO Auto-generated method stub
+	public boolean checkConstraint(TRAVERSAL_MODE traversalMode, Edge edge,
+			Node currNode, long order) 
+	{
+		throw new UnsupportedOperationException();
 		
+//		SElement currSElement= (SElement) currNode;
+//		if (this.currTraversalReason== TRAVERSAL_REASON.TEXTUAL_DS)
+//		{
+//			if (currSElement.getSStereotype().getName().equals(SSTEREOTYPES.STEXTUAL_DATASOURCE.toString()))
+//			{
+//				this.dominatedText= (STextualDataSource)currSElement;
+//				return(false);
+//			}
+//		}
+//		return true;
+	}
+
+	public void nodeLeft(TRAVERSAL_MODE traversalMode, Node currNode,
+			Edge edge, Node fromNode, long order) 
+	{
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 
 	public void nodeReached(TRAVERSAL_MODE traversalMode, Node currNode,
 			Edge edge, Node fromNode, long order) 
 	{
-		SElement currSElement= (SElement) currNode;
-		//searching for dominanced token
-		if (this.currTraversalReason== TRAVERSAL_REASON.TOKENS)
-		{
-			if (currSElement.getSStereotype().getName().equals(SSTEREOTYPES.STOKEN.toString()))
-			{
-				if (!this.dominancedTokens.contains((SToken)currNode))
-						this.dominancedTokens.add((SToken)currSElement);
-			}
-		}
+		throw new UnsupportedOperationException();
+//		SElement currSElement= (SElement) currNode;
+//		//searching for dominanced token
+//		if (this.currTraversalReason== TRAVERSAL_REASON.TOKENS)
+//		{
+//			if (currSElement.getSStereotype().getName().equals(SSTEREOTYPES.STOKEN.toString()))
+//			{
+//				if (!this.dominancedTokens.contains((SToken)currNode))
+//						this.dominancedTokens.add((SToken)currSElement);
+//			}
+//		}
 		
 	}
 

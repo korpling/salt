@@ -13,6 +13,7 @@ import de.corpling.salt.model.saltCore.SCoreProject;
 import de.corpling.salt.model.saltCore.SGraph;
 import de.corpling.salt.model.saltCore.SStereotypeContainer;
 
+import de.corpling.salt.model.saltCore.STraversalObject;
 import de.corpling.salt.saltFW.*;
 
 import de.util.graph.Graph;
@@ -139,6 +140,10 @@ public class SaltFWAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSCorpusGraph(SCorpusGraph object) {
 				return createSCorpusGraphAdapter();
+			}
+			@Override
+			public Adapter caseSTraversalObject(STraversalObject object) {
+				return createSTraversalObjectAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -353,6 +358,20 @@ public class SaltFWAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSCorpusGraphAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.corpling.salt.model.saltCore.STraversalObject <em>STraversal Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.corpling.salt.model.saltCore.STraversalObject
+	 * @generated
+	 */
+	public Adapter createSTraversalObjectAdapter() {
 		return null;
 	}
 
