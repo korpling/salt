@@ -396,18 +396,29 @@ public class SGraphImpl extends GraphImpl implements SGraph
 		{	
 			this.internalStraversalMode= INTERNAL_STRAVERSAL_MODE.STEREOTYPE;
 			//init stack of traversal objects
-			if (this.currStereotype== null)
+//			if (this.currStereotype== null)
+//			if (this.currStereotype== null)
+			//replaced through
+			if ((this.sTraversalStack== null)||(this.sTraversalStack.size()== 0))
+			{	
 				this.sTraversalStack= new Stack<STraversalObject>();
+			}	
 			this.sTraversalStack.push(sTraversalObject);
 			this.currStereotype= sStereotype;
 			super.traverseGraph(traversalMode, ((EList<Node>)(EList<? extends Node>)startSElements), this);
-			this.sTraversalStack.pop();
+//			if (sTraversalStack.size()!= 0)
+				this.sTraversalStack.pop();
 		}
 		else 
 		{
 			//init stack of traversal objects
-			if (this.currStereotype== null)
+			//old since 09.06.09
+//			if (this.currStereotype== null)
+			//replaced through
+			if ((this.sTraversalStack== null)||(this.sTraversalStack.size()== 0))
+			{	
 				this.sTraversalStack= new Stack<STraversalObject>();
+			}
 			this.currStereotype= sStereotype;
 			this.internalStraversalMode= INTERNAL_STRAVERSAL_MODE.ALL;
 			this.sTraversalStack.push(sTraversalObject);
