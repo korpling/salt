@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="saltCommon"
+            class="de.hub.corpling.salt.saltCommon.SaltCommonPackage"
+            genModel="model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="corpusStructure"
+            class="de.hub.corpling.salt.saltCommon.sCorpusStructure.CorpusStructurePackage"
+            genModel="model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="documentStructure"
+            class="de.hub.corpling.salt.saltCommon.sDocumentStructure.DocumentStructurePackage"
+            genModel="model/saltCommon.genmodel"/>
+   </extension>
+
+</plugin>
