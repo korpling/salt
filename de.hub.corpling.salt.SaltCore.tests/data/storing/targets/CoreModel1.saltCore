@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saltCore:SGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:saltCore="saltCore">
+  <sAnnotations SName="anno1" SValue="someGraphanno"/>
+  <sRelations name="relFrom1To2" sourceSNode="//@sNodes.0" targetSNode="//@sNodes.1">
+    <sAnnotations SName="anno1" SValue="relAnno"/>
+  </sRelations>
+  <sRelations name="relFrom1To3" sourceSNode="//@sNodes.0" targetSNode="//@sNodes.2"/>
+  <sNodes name="node1">
+    <sAnnotations SName="anno1" SValue="someNodeAnno"/>
+    <sAnnotations SName="anno2" SValue="anotherNodeAnno"/>
+    <sElementId sElementPath="nodeId1"/>
+  </sNodes>
+  <sNodes name="node2">
+    <sElementId sElementPath="nodeId2"/>
+  </sNodes>
+  <sNodes name="node3">
+    <sElementId sElementPath="nodeId3"/>
+  </sNodes>
+</saltCore:SGraph>
