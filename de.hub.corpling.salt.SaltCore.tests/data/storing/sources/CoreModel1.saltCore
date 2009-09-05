@@ -8,12 +8,12 @@
   <sNodes name="node1">
     <sAnnotations SName="anno1" SValue="someNodeAnno"/>
     <sAnnotations SName="anno2" SValue="anotherNodeAnno"/>
-    <sElementId sElementPath="nodeId1"/>
+    <sElementId sId="nodeId1"/>
   </sNodes>
   <sNodes name="node2">
-    <sElementId sElementPath="nodeId2"/>
+    <sElementId sId="nodeId2"/>
   </sNodes>
   <sNodes name="node3">
-    <sElementId sElementPath="nodeId3"/>
+    <sElementId sId="nodeId3"/>
   </sNodes>
 </saltCore:SGraph>
