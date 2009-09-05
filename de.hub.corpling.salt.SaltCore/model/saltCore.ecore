@@ -37,11 +37,11 @@
         containment="true" eOpposite="#//SElementId/sIdentifiableElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SElementId">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sIdentifiableElement" eType="#//SIdentifiableElement"
         eOpposite="#//SIdentifiableElement/sElementId"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sElementPath" eType="#//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sElementPath" eType="#//URI"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI"/>
 </ecore:EPackage>

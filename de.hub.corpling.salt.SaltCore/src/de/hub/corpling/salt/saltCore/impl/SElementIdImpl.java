@@ -6,9 +6,12 @@
  */
 package de.hub.corpling.salt.saltCore.impl;
 
+import javax.annotation.Generated;
+
 import de.hub.corpling.salt.saltCore.SElementId;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
+import de.hub.corpling.salt.saltExceptions.SaltException;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -48,6 +51,16 @@ public class SElementIdImpl extends EObjectImpl implements SElementId {
 	protected static final String SID_EDEFAULT = null;
 
 	/**
+	 * The cached value of the '{@link #getSId() <em>SId</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String sId = SID_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getSElementPath() <em>SElement Path</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -56,16 +69,6 @@ public class SElementIdImpl extends EObjectImpl implements SElementId {
 	 * @ordered
 	 */
 	protected static final URI SELEMENT_PATH_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSElementPath() <em>SElement Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSElementPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected URI sElementPath = SELEMENT_PATH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,19 +92,24 @@ public class SElementIdImpl extends EObjectImpl implements SElementId {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	public String getSId() 
 	{
-		return(this.getSElementPath().toString());
+		return sId;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	public void setSId(String newSId) 
 	{
-		this.setSElementPath(URI.createURI(newSId));
+		String oldSId = sId;
+		sId = newSId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SELEMENT_ID__SID, oldSId, sId));
 	}
 
 	/**
@@ -148,22 +156,28 @@ public class SElementIdImpl extends EObjectImpl implements SElementId {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public URI getSElementPath() {
-		return sElementPath;
+	public URI getSElementPath() 
+	{
+		URI uri= null;
+		try
+		{
+			uri= URI.createURI(this.getSId());
+		}
+		catch (java.lang.IllegalArgumentException e) 
+		{
+			throw new SaltException("Cannot return id of element as element-path, because it is not convertable to an uri.", e);
+		}
+		return(uri);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setSElementPath(URI newSElementPath) {
-		URI oldSElementPath = sElementPath;
-		sElementPath = newSElementPath;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SELEMENT_ID__SELEMENT_PATH, oldSElementPath, sElementPath));
+	public void setSElementPath(URI newSElementPath) 
+	{
+		this.setSId(newSElementPath.toString());
 	}
 
 	/**
@@ -279,11 +293,11 @@ public class SElementIdImpl extends EObjectImpl implements SElementId {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SaltCorePackage.SELEMENT_ID__SID:
-				return SID_EDEFAULT == null ? getSId() != null : !SID_EDEFAULT.equals(getSId());
+				return SID_EDEFAULT == null ? sId != null : !SID_EDEFAULT.equals(sId);
 			case SaltCorePackage.SELEMENT_ID__SIDENTIFIABLE_ELEMENT:
 				return getSIdentifiableElement() != null;
 			case SaltCorePackage.SELEMENT_ID__SELEMENT_PATH:
-				return SELEMENT_PATH_EDEFAULT == null ? sElementPath != null : !SELEMENT_PATH_EDEFAULT.equals(sElementPath);
+				return SELEMENT_PATH_EDEFAULT == null ? getSElementPath() != null : !SELEMENT_PATH_EDEFAULT.equals(getSElementPath());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -298,8 +312,8 @@ public class SElementIdImpl extends EObjectImpl implements SElementId {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sElementPath: ");
-		result.append(sElementPath);
+		result.append(" (sId: ");
+		result.append(sId);
 		result.append(')');
 		return result.toString();
 	}

@@ -39,7 +39,7 @@ public interface SElementId extends EObject {
 	 * @return the value of the '<em>SId</em>' attribute.
 	 * @see #setSId(String)
 	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSElementId_SId()
-	 * @model transient="true" volatile="true" derived="true"
+	 * @model
 	 * @generated
 	 */
 	String getSId();
@@ -93,7 +93,7 @@ public interface SElementId extends EObject {
 	 * @return the value of the '<em>SElement Path</em>' attribute.
 	 * @see #setSElementPath(URI)
 	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSElementId_SElementPath()
-	 * @model dataType="de.hub.corpling.salt.saltCore.URI"
+	 * @model dataType="de.hub.corpling.salt.saltCore.URI" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	URI getSElementPath();

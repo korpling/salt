@@ -22,3 +22,4 @@ Export-Package: de.hub.corpling.salt.saltCore;uses:="org.eclipse.emf.ecore,org.e
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Import-Package: de.hub.corpling.salt.saltExceptions
