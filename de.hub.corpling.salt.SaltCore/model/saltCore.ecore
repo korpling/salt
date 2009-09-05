@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="saltCore"
+    nsURI="saltCore" nsPrefix="saltCore">
+  <eClassifiers xsi:type="ecore:EClass" name="SNode" eSuperTypes="#//SAnnotatableElement #//SNamedElement #//SIdentifiableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
+        eOpposite="#//SGraph/sNodes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SRelation" eSuperTypes="#//SAnnotatableElement #//SNamedElement #//SIdentifiableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceSNode" eType="#//SNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetSNode" eType="#//SNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
+        eOpposite="#//SGraph/sRelations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SAnnotatableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sAnnotations" upperBound="-1"
+        eType="#//SAnnotation" containment="true" eOpposite="#//SAnnotation/sAnnotatbaleElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SAnnotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sAnnotatbaleElement" eType="#//SAnnotatableElement"
+        eOpposite="#//SAnnotatableElement/sAnnotations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SGraph" eSuperTypes="#//SNamedElement #//SAnnotatableElement #//SIdentifiableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sRelations" upperBound="-1"
+        eType="#//SRelation" containment="true" eOpposite="#//SRelation/sGraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sNodes" upperBound="-1"
+        eType="#//SNode" containment="true" eOpposite="#//SNode/sGraph"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SIdentifiableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sElementId" eType="#//SElementId"
+        containment="true" eOpposite="#//SElementId/sIdentifiableElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SElementId">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sIdentifiableElement" eType="#//SIdentifiableElement"
+        eOpposite="#//SIdentifiableElement/sElementId"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sElementPath" eType="#//URI"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI"/>
+</ecore:EPackage>
