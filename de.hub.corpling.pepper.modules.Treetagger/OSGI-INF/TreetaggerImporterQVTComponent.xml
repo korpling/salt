@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<component name="TreetaggerImporterQVTComponent" factory="PepperImporterComponentFactory">
+	<implementation class="de.hub.corpling.pepper.modules.treetagger.qvt.TreetaggerImporterQVT"/>
+ <service>
+    <provide interface="de.hub.corpling.pepper.pepperInterface.PepperImporter"/>
+ </service>
+	
+</component>

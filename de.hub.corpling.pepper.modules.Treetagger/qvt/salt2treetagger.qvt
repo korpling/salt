@@ -1,0 +1,371 @@
+transformation salt2treetagger(salt:saltCommon, tt:treetagger) 
+{
+	top relation SDocumentGraph2Document
+	{
+		documentName: String;
+		
+		checkonly domain salt saltDocGraph:saltCommon::sDocumentStructure::SDocumentGraph 
+		{
+		};
+		
+		enforce domain tt tDocument: treetagger::Document 
+		{
+			name = documentName
+		};
+		where
+		{
+			documentName= getDocumentName(saltDocGraph);
+		} 
+	}
+	
+	query getDocumentName(sDocGraph:saltCommon::sDocumentStructure::SDocumentGraph):String
+	{
+		sDocGraph.name
+		/*
+		if not (sDocGraph.sDocument.name='')
+			then sDocGraph.sDocument.name
+		else
+			sDocGraph.name
+		endif
+		*/
+	}
+	
+	top relation SToken2Token
+	{
+	
+		tDocument: treetagger::Document;
+		sDocGraph: saltCommon::sDocumentStructure::SDocumentGraph;
+		text:String;
+		
+		checkonly domain salt sToken:saltCommon::sDocumentStructure::SToken
+		{
+			sDocumentGraph= sDocGraph
+		};
+		
+		enforce domain tt tToken:treetagger::Token
+		{
+			document= tDocument,
+			text= text
+		};
+		
+		when 
+		{
+			SDocumentGraph2Document(sDocGraph,tDocument);
+		}
+		where
+		{
+			text= getText(sToken);
+		}
+	}
+	
+	top relation SAnnotation2POSAnnotation
+	{
+		sToken:saltCommon::sDocumentStructure::SToken;
+		tToken:treetagger::Token;
+		annoValue: String;
+		
+		checkonly domain salt sAnnotation:saltCore::SAnnotation
+		{
+			sName='pos',
+			sValue= annoValue,
+			sAnnotatbaleElement= sToken
+		};
+		
+		enforce domain tt tPosAnnotation:treetagger::POSAnnotation
+		{
+			name= 'pos',
+			value= annoValue,
+			token= tToken
+		}; 
+		
+		when 
+		{
+			SToken2Token(sToken, tToken);
+		}
+	}
+	
+	top relation SAnnotation2LemmaAnnotation
+	{
+		sToken:saltCommon::sDocumentStructure::SToken;
+		tToken:treetagger::Token;
+		annoValue: String;
+		
+		checkonly domain salt sAnnotation:saltCore::SAnnotation
+		{
+			sName='lemma',
+			sValue= annoValue,
+			sAnnotatbaleElement= sToken
+		};
+		
+		enforce domain tt tLemmaAnnotation:treetagger::LemmaAnnotation
+		{
+			name= 'lemma',
+			value= annoValue,
+			token= tToken
+		}; 
+		
+		when 
+		{
+			SToken2Token(sToken, tToken);
+		}
+	}
+	
+	query getText(sToken: saltCommon::sDocumentStructure::SToken):String
+	{
+		sToken.sDocumentGraph.sTextualRelations->iterate 	
+				(itrRel; result : String = '' | 
+						if itrRel.sToken = sToken
+							then itrRel.sTextualDS.sText.substring(itrRel.sStart+1,itrRel.sEnd)
+						else	result
+						endif)
+	}
+	
+	/*
+	top relation SAnnotation2AnyAnnotation
+	{
+		sToken:saltCommon::sDocumentStructure::SToken;
+		tToken:treetagger::Token;
+		annoValue: String;
+		annoName: String;
+		
+		checkonly domain salt sAnnotation:saltCore::SAnnotation
+		{
+			sName= annoName,
+			sValue= annoValue,
+			sAnnotatbaleElement= sToken
+		};
+		
+		enforce domain tt tAnyAnnotation:treetagger::AnyAnnotation
+		{
+			value= annoValue,
+			token= tToken
+			
+		}; 
+		
+		when 
+		{
+			SToken2Token(sToken, tToken);
+		}
+	}
+	*/
+	
+/*
+	top relation Document2SDocumentGraph 
+	{
+		documentName: String;
+		
+		checkonly domain tt tDocument: treetagger::Document 
+		{
+			name = documentName
+		};
+		
+		enforce domain salt saltDocument:saltCommon::sDocumentStructure::SDocumentGraph 
+		{
+			name = documentName + '_graph'
+		};
+	}
+	
+	top relation Document2STextualDS
+	{
+		--tDocument: treetagger::Document;
+		sDocGraph: saltCommon::sDocumentStructure::SDocumentGraph;
+		
+		checkonly domain tt tDocument: treetagger::Document 
+		{}; 
+		
+		enforce domain salt sTextualDS: saltCommon::sDocumentStructure::STextualDS
+		{
+			sDocumentGraph= sDocGraph,
+			name= tDocument.name,
+			sText= getText(tDocument)
+		};
+		
+		when 
+		{
+			Document2SDocumentGraph(tDocument, sDocGraph);
+		}
+	}
+	
+	top relation Token2SToken
+	{
+		sDocGraph: saltCommon::sDocumentStructure::SDocumentGraph;
+		tDocument: treetagger::Document;
+		sTokenId: Integer;
+		sTokenIdStr: String;
+		
+		checkonly domain tt tToken: treetagger::Token 
+		{
+			document= tDocument
+		}; 
+		
+		
+		enforce domain salt sToken: saltCommon::sDocumentStructure::SToken
+		{
+			sDocumentGraph= sDocGraph,
+			name= 'tok_'+sTokenIdStr
+			--+1.oclAsType(String) --.oclIsType(String)--.oclAsType(String)
+		};
+		
+		when 
+		{
+			Document2SDocumentGraph(tDocument, sDocGraph);
+		}
+		where	
+		{
+			sTokenId= getPositionOfToken(sToken, sDocGraph);
+			sTokenIdStr= toString(sTokenId);
+		}
+	}
+
+	top relation Annotation2SAnnotation
+	{
+		sToken:saltCommon::sDocumentStructure::SToken;
+		tToken:treetagger::Token;
+		annoName: String;
+		annoValue: String;
+		
+		checkonly domain tt tAnnotation:treetagger::Annotation
+		{
+			 name= annoName,
+			 value= annoValue,
+			 token= tToken	
+		};
+		
+		enforce domain salt sAnnotation : saltCore::SAnnotation
+		{
+			sName= name,
+			sValue= value,
+			sAnnotatbaleElement= sToken
+		};
+		
+		when 
+		{
+			Token2SToken(tToken, sToken);
+		}
+	}
+	
+	top relation Token2STextualRelation
+	{
+		sDocGraph: saltCommon::sDocumentStructure::SDocumentGraph;
+		tDocument: treetagger::Document;
+		sToken:saltCommon::sDocumentStructure::SToken;
+		sTextualDS:saltCommon::sDocumentStructure::STextualDS;
+		
+		checkonly domain tt tToken: treetagger::Token 
+		{
+			document= tDocument
+		};
+		
+		enforce domain salt sTextRel: saltCommon::sDocumentStructure::STextualRelation
+		{
+			sDocumentGraph= sDocGraph,
+			name= sToken.name +'_2_'+ sTextualDS.name,
+			sToken= sToken,
+			sTextualDS= sTextualDS,
+			sStart= getSStartPosition(tToken, tDocument),
+			sEnd= getSEndPosition(tToken, sStart)
+		}; 
+		
+		when 
+		{
+			Document2SDocumentGraph(tDocument, sDocGraph);
+			Token2SToken(tToken, sToken);
+			Document2STextualDS(tDocument, sTextualDS);
+		}
+	}
+	*/
+	/*
+	*	 Returns concatenated text in tokens of given treetagger::document. 
+	*/
+	query  getText(tDocument: treetagger::Document) : String 
+	{
+		tDocument.tokens->iterate	(itrToken; result : String = '' | 
+										if tDocument.tokens->indexOf(itrToken)= 1
+											then	result + itrToken.text
+											else	result+' '+itrToken.text
+										endif)
+	}
+	
+	/*
+	 * Returns the position of the given Token in the given document graph. 
+	 * Starting with 0 or 1???.
+	 */
+	query getPositionOfToken(sToken:saltCommon::sDocumentStructure::SToken, sDocGraph:saltCommon::sDocumentStructure::SDocumentGraph): Integer
+	{
+		sDocGraph.sTokens->indexOf(sToken)
+	}
+	
+	/*
+	 * Returns the start position for a textual relation referring to a textual data
+	 * source. The returned position is the start position of anchor to primary text. 
+	 */
+	query getSStartPosition(tToken:treetagger::Token, tDocument:treetagger::Document):Integer
+	{
+		tDocument.tokens->iterate	(itrToken; result : Integer = 0 | 
+										if (tDocument.tokens->indexOf(itrToken) < tDocument.tokens->indexOf(tToken)) 
+											then result + itrToken.text.size() +1
+											//then tokens->indexOf(itrToken)
+											//then result + tToken.text.size()
+										else result
+										endif)
+	}
+	
+	/*
+	 * Returns the end position for a textual relation referring to a textual data
+	 * source. The returned position is the start position of anchor to primary text. 
+	 */
+	query getSEndPosition(tToken:treetagger::Token, startPos: Integer):Integer
+	{
+		tToken.text.size() + startPos
+	}
+	
+	/*
+	 * Returns a string value out of a given Integer value.
+	 * see http://wiki.eclipse.org/OCLSnippets
+	 */
+	query toString(val:Integer) : String 
+	{
+		OrderedSet{1000000, 10000, 1000, 100, 10, 1}->iterate(d: Integer; s:String = '' | 
+        let numberAsString : String =  
+        OrderedSet{'0','1','2','3','4','5','6','7','8','9'}->at(modulo(divide(val,d),(10)) + 1)
+--          OrderedSet{'0','1','2','3','4','5','6','7','8','9'}->at(val.div(d).mod(10) + 1)
+        in
+        if s='' and numberAsString = '0' 
+        then
+        	s
+        else
+        	s.concat(numberAsString)
+		endif
+      )
+	}
+	
+	query divide (d1:Integer,d2:Integer) : Integer 
+	{
+		(d1 / d2).floor()
+    }
+	query modulo (d1:Integer,d2:Integer) : Integer 
+	{
+		d1 - (d1 / d2).floor() * d2
+    }
+
+/*
+	query toString(value: Integer) : String 
+	{ 
+		 OrderedSet{1000000, 10000, 1000, 100, 10, 1}->iterate(
+            denominator : Integer;
+            s : String = ''|
+            let numberAsString : String = OrderedSet
+            	{
+                    '0','1','2','3','4','5','6','7','8','9'
+                }->at((1))
+                --->at(value.div(denominator).mod(10) + 1)
+            in
+                if s='' and numberAsString = '0' then
+                    s
+                else
+                    s.concat(numberAsString)
+                endif
+        )
+	}
+*/
+}

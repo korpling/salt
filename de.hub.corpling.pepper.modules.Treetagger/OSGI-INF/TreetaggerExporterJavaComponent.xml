@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<component name="TreetaggerExporterJavaComponent" factory="PepperExporterComponentFactory">
+	<implementation class="de.hub.corpling.pepper.modules.treetagger.java.TreetaggerExporterJava"/>
+ <service>
+    <provide interface="de.hub.corpling.pepper.pepperInterface.PepperExporter"/>
+ </service>
+	
+</component>
+<!--
+<component name="TestExporter1Component"  factory="PepperExporterComponentFactory">
+	<implementation class="de.hub.corpling.pepper.testModules.test1.TestExporter1"/>
+	<service>
+    	<provide interface="de.hub.corpling.pepper.pepperInterface.PepperExporter"/>
+ 	</service>
+</component>
+-->
