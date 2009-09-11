@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.hub.corpling.salt.SaltCore/src"
+    modelPluginID="de.hub.corpling.salt.saltCore" modelName="SaltCore" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" interfaceNamePattern="">
+  <foreignModel>saltCore.ecore</foreignModel>
+  <genPackages prefix="SaltCore" basePackage="de.hub.corpling.salt" disposableProviderFactory="true"
+      fileExtensions="saltCore" ecorePackage="saltCore.ecore#/">
+    <genDataTypes ecoreDataType="saltCore.ecore#//URI"/>
+    <genClasses ecoreClass="saltCore.ecore#//SNode">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCore.ecore#//SNode/sGraph"/>
+    </genClasses>
+    <genClasses ecoreClass="saltCore.ecore#//SRelation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference saltCore.ecore#//SRelation/sourceSNode"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference saltCore.ecore#//SRelation/targetSNode"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCore.ecore#//SRelation/sGraph"/>
+    </genClasses>
+    <genClasses ecoreClass="saltCore.ecore#//SAnnotatableElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCore.ecore#//SAnnotatableElement/sAnnotations"/>
+    </genClasses>
+    <genClasses ecoreClass="saltCore.ecore#//SAnnotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCore.ecore#//SAnnotation/SName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCore.ecore#//SAnnotation/SValue"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCore.ecore#//SAnnotation/sAnnotatbaleElement"/>
+    </genClasses>
+    <genClasses ecoreClass="saltCore.ecore#//SGraph">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCore.ecore#//SGraph/sRelations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCore.ecore#//SGraph/sNodes"/>
+    </genClasses>
+    <genClasses ecoreClass="saltCore.ecore#//SNamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCore.ecore#//SNamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="saltCore.ecore#//SIdentifiableElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCore.ecore#//SIdentifiableElement/sElementId"/>
+    </genClasses>
+    <genClasses ecoreClass="saltCore.ecore#//SElementId">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCore.ecore#//SElementId/sId"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCore.ecore#//SElementId/sIdentifiableElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCore.ecore#//SElementId/sElementPath"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Graph" ecorePackage="../../de.hub.corpling.graph/model/Graph.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="../../de.hub.corpling.graph/model/Graph.ecore#//TRAVERSAL_MODE">
+      <genEnumLiterals ecoreEnumLiteral="../../de.hub.corpling.graph/model/Graph.ecore#//TRAVERSAL_MODE/DEPTH_FIRST"/>
+      <genEnumLiterals ecoreEnumLiteral="../../de.hub.corpling.graph/model/Graph.ecore#//TRAVERSAL_MODE/BOTTOM_UP"/>
+    </genEnums>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//IdentifiableElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//IdentifiableElement/id"/>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//Graph">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Graph/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Graph/edges"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//Graph/numOfNodes"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//Graph/numOfEdges"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Graph/labelableElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Graph/indexMgr"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/addNode">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/addNode/node"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getNode">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getNode/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/removeNodeById">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/removeNodeById/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/removeNodes"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/addEdge">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/addEdge/edge"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getEdge">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getEdge/edgeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getEdges">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getEdges/nodeId1"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getEdges/nodeId2"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getInEdges">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getInEdges/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getOutEdges">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getOutEdges/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/removeEdgeById">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/removeEdgeById/edgeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/removeEdges"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/traverseGraph">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/traverseGraph/traversalMode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/traverseGraph/startNode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/traverseGraph/traversalObject"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/traverseGraph.1">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/traverseGraph.1/traversalMode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/traverseGraph.1/startNodes"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/traverseGraph.1/traversalObject"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Graph/getRoots"/>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//Node">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Node/graph"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Node/labelableElement"/>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//Edge">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Edge/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Edge/destination"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Edge/graph"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Edge/labelableElement"/>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/labels"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/numOfLabels"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/addLabel">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/addLabel/label"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/getLabel">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/getLabel/fullName"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/getLabel.1">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/getLabel.1/namespace"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/getLabel.1/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/removeLabel">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/removeLabel/fullName"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/removeLabel.1">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/removeLabel.1/namespace"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/removeLabel.1/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/hasLabel">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/hasLabel/fullName"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/hasLabel.1">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/hasLabel.1/namespace"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/hasLabel.1/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/removeAll"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/getLabelsByNamespace">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//LabelableElement/getLabelsByNamespace/namespace"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//Label">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//Label/namespace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//Label/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//Label/fullName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//Label/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//Label/labelOwner"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Label/getNSSeperator"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject">
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeReached">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeReached/traversalMode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeReached/currNode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeReached/edge"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeReached/fromNode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeReached/order"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeLeft">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeLeft/traversalMode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeLeft/currNode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeLeft/edge"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeLeft/fromNode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/nodeLeft/order"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/checkConstraint">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/checkConstraint/traversalMode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/checkConstraint/edge"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/checkConstraint/currNode"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//TraversalObject/checkConstraint/order"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//Index">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//Index/numOfElements"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Index/addElement">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Index/addElement/elementId"/>
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Index/addElement/element"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Index/hasElement">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Index/hasElement/elementId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Index/removeElement">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//Index/removeElement/elementId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//Index/removeAll"/>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//SimpleIndex">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//SimpleIndex/idxTable"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//SimpleIndex/getElement">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//SimpleIndex/getElement/elementId"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/indexes"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/numOfIndexes"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/addIndex">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/addIndex/index"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/hasIndex">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/hasIndex/indexId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/getIndex">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/getIndex/indexId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/removeIndex">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/removeIndex/indexId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/removeAll"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/removeElement">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//IndexMgr/removeElement/element"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/idxTable"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute ../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/numOfSlots"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/hasSlot">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/hasSlot/slotId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/getSlot">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/getSlot/slotId"/>
+      </genOperations>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/getSlotIds"/>
+      <genOperations ecoreOperation="../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/removeSlot">
+        <genParameters ecoreParameter="../../de.hub.corpling.graph/model/Graph.ecore#//ComplexIndex/removeSlot/slotId"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="../../de.hub.corpling.graph/model/Graph.ecore#//IndexableElement"/>
+  </genPackages>
+</genmodel:GenModel>
