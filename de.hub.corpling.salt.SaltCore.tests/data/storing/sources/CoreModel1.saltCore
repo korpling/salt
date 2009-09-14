@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <saltCore:SGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:saltCore="saltCore">
+  <labelableElement/>
   <sAnnotations SName="anno1" SValue="someGraphanno"/>
   <sRelations name="relFrom1To2" sourceSNode="//@sNodes.0" targetSNode="//@sNodes.1">
     <sAnnotations SName="anno1" SValue="relAnno"/>

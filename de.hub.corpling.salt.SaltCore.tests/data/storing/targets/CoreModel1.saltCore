@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<saltCore:SGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:saltCore="saltCore">
-  <sAnnotations SName="anno1" SValue="someGraphanno"/>
-  <sRelations name="relFrom1To2" sourceSNode="//@sNodes.0" targetSNode="//@sNodes.1">
-    <sAnnotations SName="anno1" SValue="relAnno"/>
-  </sRelations>
-  <sRelations name="relFrom1To3" sourceSNode="//@sNodes.0" targetSNode="//@sNodes.2"/>
-  <sNodes name="node1">
-    <sAnnotations SName="anno1" SValue="someNodeAnno"/>
-    <sAnnotations SName="anno2" SValue="anotherNodeAnno"/>
-    <sElementId sId="nodeId1"/>
-  </sNodes>
-  <sNodes name="node2">
-    <sElementId sId="nodeId2"/>
-  </sNodes>
-  <sNodes name="node3">
-    <sElementId sId="nodeId3"/>
-  </sNodes>
+<saltCore:SGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:saltCore="saltCore">
+  <nodes xsi:type="saltCore:SNode"/>
+  <nodes xsi:type="saltCore:SNode"/>
+  <nodes xsi:type="saltCore:SNode"/>
+  <nodes xsi:type="saltCore:SNode"/>
+  <nodes xsi:type="saltCore:SNode"/>
+  <edges xsi:type="saltCore:SRelation" source="//@nodes.1"/>
+  <edges xsi:type="saltCore:SRelation" source="//@nodes.2"/>
+  <edges xsi:type="saltCore:SRelation" source="//@nodes.2"/>
+  <edges xsi:type="saltCore:SRelation" source="//@nodes.4"/>
+  <labelableElement/>
 </saltCore:SGraph>
