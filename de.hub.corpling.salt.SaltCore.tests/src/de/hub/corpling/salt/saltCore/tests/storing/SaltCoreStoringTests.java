@@ -36,6 +36,10 @@ public class SaltCoreStoringTests extends TestSuite {
 	public static Test suite() {
 		TestSuite suite = new SaltCoreStoringTests("saltCoreStoring Tests");
 		suite.addTestSuite(SAnnotationStoringTest.class);
+		suite.addTestSuite(SGraphStoringTest.class);
+		suite.addTestSuite(SIdentifiableElementStoringTest.class);
+		suite.addTestSuite(SNodeStoringTest.class);
+		suite.addTestSuite(SRelationStoringTest.class);
 		return suite;
 	}
 
