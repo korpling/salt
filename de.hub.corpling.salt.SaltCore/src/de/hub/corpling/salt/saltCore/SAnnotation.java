@@ -6,7 +6,7 @@
  */
 package de.hub.corpling.salt.saltCore;
 
-import org.eclipse.emf.ecore.EObject;
+import de.hub.corpling.graph.Label;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotation#getSName <em>SName</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotation#getSValue <em>SValue</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatbaleElement <em>SAnnotatbale Element</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatableElement <em>SAnnotatable Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,8 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SAnnotation extends EObject {
-
+public interface SAnnotation extends Label {
 	/**
 	 * Returns the value of the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -39,7 +38,7 @@ public interface SAnnotation extends EObject {
 	 * @return the value of the '<em>SName</em>' attribute.
 	 * @see #setSName(String)
 	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSAnnotation_SName()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getSName();
@@ -63,12 +62,12 @@ public interface SAnnotation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>SValue</em>' attribute.
-	 * @see #setSValue(String)
+	 * @see #setSValue(Object)
 	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSAnnotation_SValue()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	String getSValue();
+	Object getSValue();
 
 	/**
 	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SAnnotation#getSValue <em>SValue</em>}' attribute.
@@ -78,33 +77,34 @@ public interface SAnnotation extends EObject {
 	 * @see #getSValue()
 	 * @generated
 	 */
-	void setSValue(String value);
+	void setSValue(Object value);
 
 	/**
-	 * Returns the value of the '<em><b>SAnnotatbale Element</b></em>' container reference.
+	 * Returns the value of the '<em><b>SAnnotatable Element</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations <em>SAnnotations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SAnnotatbale Element</em>' container reference isn't clear,
+	 * If the meaning of the '<em>SAnnotatable Element</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SAnnotatbale Element</em>' container reference.
-	 * @see #setSAnnotatbaleElement(SAnnotatableElement)
-	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSAnnotation_SAnnotatbaleElement()
+	 * @return the value of the '<em>SAnnotatable Element</em>' container reference.
+	 * @see #setSAnnotatableElement(SAnnotatableElement)
+	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSAnnotation_SAnnotatableElement()
 	 * @see de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations
-	 * @model opposite="sAnnotations" transient="false"
+	 * @model opposite="sAnnotations" volatile="true"
 	 * @generated
 	 */
-	SAnnotatableElement getSAnnotatbaleElement();
+	SAnnotatableElement getSAnnotatableElement();
 
 	/**
-	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatbaleElement <em>SAnnotatbale Element</em>}' container reference.
+	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatableElement <em>SAnnotatable Element</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SAnnotatbale Element</em>' container reference.
-	 * @see #getSAnnotatbaleElement()
+	 * @param value the new value of the '<em>SAnnotatable Element</em>' container reference.
+	 * @see #getSAnnotatableElement()
 	 * @generated
 	 */
-	void setSAnnotatbaleElement(SAnnotatableElement value);
+	void setSAnnotatableElement(SAnnotatableElement value);
+
 } // SAnnotation

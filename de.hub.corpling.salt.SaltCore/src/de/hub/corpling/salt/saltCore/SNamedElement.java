@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.SNamedElement#getName <em>Name</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SNamedElement#getSName <em>SName</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,29 +26,29 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface SNamedElement extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>SName</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSNamedElement_Name()
+	 * @return the value of the '<em>SName</em>' attribute.
+	 * @see #setSName(String)
+	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSNamedElement_SName()
 	 * @model
 	 * @generated
 	 */
-	String getName();
+	String getSName();
 
 	/**
-	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SNamedElement#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SNamedElement#getSName <em>SName</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * @param value the new value of the '<em>SName</em>' attribute.
+	 * @see #getSName()
 	 * @generated
 	 */
-	void setName(String value);
+	void setSName(String value);
 
 } // SNamedElement

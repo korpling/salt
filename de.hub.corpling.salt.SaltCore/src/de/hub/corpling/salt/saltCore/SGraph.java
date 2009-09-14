@@ -6,6 +6,8 @@
  */
 package de.hub.corpling.salt.saltCore;
 
+import de.hub.corpling.graph.Graph;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -25,41 +27,73 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface SGraph extends SNamedElement, SAnnotatableElement, SIdentifiableElement {
+public interface SGraph extends Graph, SNamedElement, SAnnotatableElement, SIdentifiableElement, SProcessingAnnotatableElement {
 	/**
-	 * Returns the value of the '<em><b>SRelations</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>SRelations</b></em>' reference list.
 	 * The list contents are of type {@link de.hub.corpling.salt.saltCore.SRelation}.
 	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph <em>SGraph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SRelations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>SRelations</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SRelations</em>' containment reference list.
+	 * @return the value of the '<em>SRelations</em>' reference list.
 	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSGraph_SRelations()
 	 * @see de.hub.corpling.salt.saltCore.SRelation#getSGraph
-	 * @model opposite="sGraph" containment="true"
+	 * @model opposite="sGraph" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<SRelation> getSRelations();
 
 	/**
-	 * Returns the value of the '<em><b>SNodes</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>SNodes</b></em>' reference list.
 	 * The list contents are of type {@link de.hub.corpling.salt.saltCore.SNode}.
 	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SNode#getSGraph <em>SGraph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SNodes</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>SNodes</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SNodes</em>' containment reference list.
+	 * @return the value of the '<em>SNodes</em>' reference list.
 	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSGraph_SNodes()
 	 * @see de.hub.corpling.salt.saltCore.SNode#getSGraph
-	 * @model opposite="sGraph" containment="true"
+	 * @model opposite="sGraph" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<SNode> getSNodes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addSNode(SNode sNode);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	SNode getSNode(String sNodeId);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addSRelation(SRelation sRelation);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	SRelation getSRelation(String sRelationId);
 
 } // SGraph

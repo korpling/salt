@@ -6,6 +6,7 @@
  */
 package de.hub.corpling.salt.saltCore;
 
+import de.hub.corpling.graph.Edge;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,8 +16,8 @@ package de.hub.corpling.salt.saltCore;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSourceSNode <em>Source SNode</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getTargetSNode <em>Target SNode</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSSource <em>SSource</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTarget <em>STarget</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph <em>SGraph</em>}</li>
  * </ul>
  * </p>
@@ -25,82 +26,82 @@ package de.hub.corpling.salt.saltCore;
  * @model
  * @generated
  */
-public interface SRelation extends SAnnotatableElement, SNamedElement, SIdentifiableElement {
+public interface SRelation extends Edge, SAnnotatableElement, SNamedElement, SIdentifiableElement, SProcessingAnnotatableElement {
 	/**
-	 * Returns the value of the '<em><b>Source SNode</b></em>' reference.
+	 * Returns the value of the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Source SNode</em>' reference isn't clear,
+	 * If the meaning of the '<em>SSource</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source SNode</em>' reference.
-	 * @see #setSourceSNode(SNode)
-	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSRelation_SourceSNode()
-	 * @model
+	 * @return the value of the '<em>SSource</em>' reference.
+	 * @see #setSSource(SNode)
+	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSRelation_SSource()
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	SNode getSourceSNode();
+	SNode getSSource();
 
 	/**
-	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SRelation#getSourceSNode <em>Source SNode</em>}' reference.
+	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SRelation#getSSource <em>SSource</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source SNode</em>' reference.
-	 * @see #getSourceSNode()
+	 * @param value the new value of the '<em>SSource</em>' reference.
+	 * @see #getSSource()
 	 * @generated
 	 */
-	void setSourceSNode(SNode value);
+	void setSSource(SNode value);
 
 	/**
-	 * Returns the value of the '<em><b>Target SNode</b></em>' reference.
+	 * Returns the value of the '<em><b>STarget</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Target SNode</em>' reference isn't clear,
+	 * If the meaning of the '<em>STarget</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target SNode</em>' reference.
-	 * @see #setTargetSNode(SNode)
-	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSRelation_TargetSNode()
-	 * @model
+	 * @return the value of the '<em>STarget</em>' reference.
+	 * @see #setSTarget(SNode)
+	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSRelation_STarget()
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	SNode getTargetSNode();
+	SNode getSTarget();
 
 	/**
-	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SRelation#getTargetSNode <em>Target SNode</em>}' reference.
+	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SRelation#getSTarget <em>STarget</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target SNode</em>' reference.
-	 * @see #getTargetSNode()
+	 * @param value the new value of the '<em>STarget</em>' reference.
+	 * @see #getSTarget()
 	 * @generated
 	 */
-	void setTargetSNode(SNode value);
+	void setSTarget(SNode value);
 
 	/**
-	 * Returns the value of the '<em><b>SGraph</b></em>' container reference.
+	 * Returns the value of the '<em><b>SGraph</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SGraph#getSRelations <em>SRelations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SGraph</em>' container reference isn't clear,
+	 * If the meaning of the '<em>SGraph</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SGraph</em>' container reference.
+	 * @return the value of the '<em>SGraph</em>' reference.
 	 * @see #setSGraph(SGraph)
 	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSRelation_SGraph()
 	 * @see de.hub.corpling.salt.saltCore.SGraph#getSRelations
-	 * @model opposite="sRelations" transient="false"
+	 * @model opposite="sRelations" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SGraph getSGraph();
 
 	/**
-	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph <em>SGraph</em>}' container reference.
+	 * Sets the value of the '{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph <em>SGraph</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SGraph</em>' container reference.
+	 * @param value the new value of the '<em>SGraph</em>' reference.
 	 * @see #getSGraph()
 	 * @generated
 	 */

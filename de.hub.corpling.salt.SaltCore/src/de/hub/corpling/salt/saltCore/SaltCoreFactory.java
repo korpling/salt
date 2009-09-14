@@ -89,13 +89,22 @@ public interface SaltCoreFactory extends EFactory {
 	SIdentifiableElement createSIdentifiableElement();
 
 	/**
-	 * Returns a new object of class '<em>SElement Id</em>'.
+	 * Returns a new object of class '<em>SProcessing Annotation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SElement Id</em>'.
+	 * @return a new object of class '<em>SProcessing Annotation</em>'.
 	 * @generated
 	 */
-	SElementId createSElementId();
+	SProcessingAnnotation createSProcessingAnnotation();
+
+	/**
+	 * Returns a new object of class '<em>SProcessing Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SProcessing Annotatable Element</em>'.
+	 * @generated
+	 */
+	SProcessingAnnotatableElement createSProcessingAnnotatableElement();
 
 	/**
 	 * Returns the package supported by this factory.

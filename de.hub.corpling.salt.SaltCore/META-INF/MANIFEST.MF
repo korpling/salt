@@ -22,4 +22,9 @@ Export-Package: de.hub.corpling.salt.saltCore;uses:="org.eclipse.emf.ecore,org.e
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Import-Package: de.hub.corpling.salt.saltExceptions
+Import-Package: de.hub.corpling.graph,
+ de.hub.corpling.graph.exceptions,
+ de.hub.corpling.graph.impl,
+ de.hub.corpling.graph.index,
+ de.hub.corpling.graph.index.impl,
+ de.hub.corpling.salt.saltExceptions

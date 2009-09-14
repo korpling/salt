@@ -6,9 +6,9 @@
  */
 package de.hub.corpling.salt.saltCore;
 
-import org.eclipse.emf.common.util.EList;
+import de.hub.corpling.graph.LabelableElement;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,11 +26,11 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SAnnotatableElement extends EObject {
+public interface SAnnotatableElement extends LabelableElement {
 	/**
 	 * Returns the value of the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * The list contents are of type {@link de.hub.corpling.salt.saltCore.SAnnotation}.
-	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatbaleElement <em>SAnnotatbale Element</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatableElement <em>SAnnotatable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SAnnotations</em>' containment reference list isn't clear,
@@ -39,10 +39,26 @@ public interface SAnnotatableElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>SAnnotations</em>' containment reference list.
 	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSAnnotatableElement_SAnnotations()
-	 * @see de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatbaleElement
-	 * @model opposite="sAnnotatbaleElement" containment="true"
+	 * @see de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatableElement
+	 * @model opposite="sAnnotatableElement" containment="true" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<SAnnotation> getSAnnotations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addSAnnotation(SAnnotation sAnnotation);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	SAnnotation getSAnnotation(String fullName);
 
 } // SAnnotatableElement
