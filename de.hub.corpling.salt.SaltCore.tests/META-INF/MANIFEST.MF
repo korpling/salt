@@ -11,5 +11,7 @@ Export-Package: de.hub.corpling.salt.saltCore.tests
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport,
- de.hub.corpling.salt.SaltCore;bundle-version="1.0.0"
+ de.hub.corpling.salt.SaltCore;bundle-version="1.0.0",
+ de.hub.corpling.Graph;bundle-version="1.0.0",
+ de.hub.corpling.Graph.tests;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
