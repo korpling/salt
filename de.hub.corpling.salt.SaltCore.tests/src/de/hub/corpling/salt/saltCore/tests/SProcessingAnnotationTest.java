@@ -6,35 +6,37 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
-import junit.framework.TestCase;
-import junit.textui.TestRunner;
-import de.hub.corpling.salt.saltCore.SAnnotatableElement;
-import de.hub.corpling.salt.saltCore.SAnnotation;
+import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
+import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
+
+import junit.framework.TestCase;
+
+import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>SAnnotation</b></em>'.
+ * A test case for the model object '<em><b>SProcessing Annotation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotation#getSName() <em>SName</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotation#getSValue() <em>SValue</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatableElement() <em>SAnnotatable Element</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSProcessingAnnotatableElement() <em>SProcessing Annotatable Element</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSName() <em>SName</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSValue() <em>SValue</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class SAnnotationTest extends TestCase {
+public class SProcessingAnnotationTest extends TestCase {
 
 	/**
-	 * The fixture for this SAnnotation test case.
+	 * The fixture for this SProcessing Annotation test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SAnnotation fixture = null;
+	protected SProcessingAnnotation fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -42,36 +44,36 @@ public class SAnnotationTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(SAnnotationTest.class);
+		TestRunner.run(SProcessingAnnotationTest.class);
 	}
 
 	/**
-	 * Constructs a new SAnnotation test case with the given name.
+	 * Constructs a new SProcessing Annotation test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SAnnotationTest(String name) {
+	public SProcessingAnnotationTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Sets the fixture for this SAnnotation test case.
+	 * Sets the fixture for this SProcessing Annotation test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(SAnnotation fixture) {
+	protected void setFixture(SProcessingAnnotation fixture) {
 		this.fixture = fixture;
 	}
 
 	/**
-	 * Returns the fixture for this SAnnotation test case.
+	 * Returns the fixture for this SProcessing Annotation test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SAnnotation getFixture() {
+	protected SProcessingAnnotation getFixture() {
 		return fixture;
 	}
 
@@ -83,7 +85,7 @@ public class SAnnotationTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(SaltCoreFactory.eINSTANCE.createSAnnotation());
+		setFixture(SaltCoreFactory.eINSTANCE.createSProcessingAnnotation());
 	}
 
 	/**
@@ -96,7 +98,30 @@ public class SAnnotationTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
-	
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSProcessingAnnotatableElement() <em>SProcessing Annotatable Element</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSProcessingAnnotatableElement()
+	 */
+	public void testGetSProcessingAnnotatableElement() {
+		SProcessingAnnotatableElement sPAElement= SaltCoreFactory.eINSTANCE.createSProcessingAnnotatableElement();
+		this.getFixture().setSProcessingAnnotatableElement(sPAElement);
+		assertEquals(sPAElement, this.getFixture().getSProcessingAnnotatableElement());
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#setSProcessingAnnotatableElement(de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement) <em>SProcessing Annotatable Element</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SProcessingAnnotation#setSProcessingAnnotatableElement(de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement)
+	 */
+	public void testSetSProcessingAnnotatableElement() 
+	{
+		this.testGetSProcessingAnnotatableElement();
+	}
+
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSName() <em>SName</em>}' feature getter.
 	 * <!-- begin-user-doc -->
@@ -153,29 +178,4 @@ public class SAnnotationTest extends TestCase {
 		this.testGetSValue();
 	}
 
-	
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatableElement() <em>SAnnotatable Element</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SAnnotation#getSAnnotatableElement()
-	 */
-	public void testGetSAnnotatableElement() 
-	{
-		SAnnotatableElement sAElement= SaltCoreFactory.eINSTANCE.createSAnnotatableElement();
-		this.getFixture().setSAnnotatableElement(sAElement);
-		assertEquals(sAElement, this.getFixture().getSAnnotatableElement());
-	}
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotation#setSAnnotatableElement(de.hub.corpling.salt.saltCore.SAnnotatableElement) <em>SAnnotatable Element</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SAnnotation#setSAnnotatableElement(de.hub.corpling.salt.saltCore.SAnnotatableElement)
-	 */
-	public void testSetSAnnotatableElement() 
-	{
-		this.testGetSAnnotatableElement();
-	}
-} //SAnnotationTest
+} //SProcessingAnnotationTest

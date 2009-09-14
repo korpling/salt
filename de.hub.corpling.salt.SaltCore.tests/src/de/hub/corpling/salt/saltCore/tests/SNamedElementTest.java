@@ -89,5 +89,12 @@ public class SNamedElementTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	public void testGetName()
+	{
+		String name= "name";
+		this.getFixture().setSName(name);
+		assertEquals(name, this.getFixture().getSName());
+	}
 
 } //SNamedElementTest

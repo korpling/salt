@@ -6,17 +6,25 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
+
+import org.eclipse.emf.common.util.URI;
+
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>SIdentifiable Element</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class SIdentifiableElementTest extends TestCase {
@@ -89,5 +97,55 @@ public class SIdentifiableElementTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId()
+	 */
+	public void testGetSId() 
+	{
+		String id= "id1";
+		this.getFixture().setSId(id);
+		assertEquals(id, this.getFixture().getSId());
+		assertEquals(id, this.getFixture().getId());
+	}
 
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#setSId(java.lang.String) <em>SId</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#setSId(java.lang.String)
+	 */
+	public void testSetSId() 
+	{
+		this.testGetSId();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath()
+	 */
+	public void testGetSElementPath() 
+	{
+		URI elementPath= URI.createURI("salt:/element1");
+		this.getFixture().setSElementPath(elementPath);
+		assertEquals(elementPath, this.getFixture().getSElementPath());
+		assertEquals(elementPath.toString(), this.getFixture().getSId());
+		assertEquals(elementPath.toString(), this.getFixture().getId());
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementPath(org.eclipse.emf.common.util.URI) <em>SElement Path</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementPath(org.eclipse.emf.common.util.URI)
+	 */
+	public void testSetSElementPath() 
+	{
+		this.testGetSElementPath();
+	}
 } //SIdentifiableElementTest

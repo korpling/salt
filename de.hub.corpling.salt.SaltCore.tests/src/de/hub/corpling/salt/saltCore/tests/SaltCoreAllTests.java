@@ -6,6 +6,7 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
+import de.hub.corpling.salt.saltCore.tests.storing.SaltCoreStoringTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -31,10 +32,11 @@ public class SaltCoreAllTests extends TestSuite {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public static Test suite() {
 		TestSuite suite = new SaltCoreAllTests("SaltCore Tests");
+		suite.addTest(SaltCoreTests.suite());
+		suite.addTest(SaltCoreStoringTests.suite());
 		return suite;
 	}
 

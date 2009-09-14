@@ -35,6 +35,14 @@ public class SaltCoreTests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new SaltCoreTests("saltCore Tests");
+		suite.addTestSuite(SNodeTest.class);
+		suite.addTestSuite(SRelationTest.class);
+		suite.addTestSuite(SAnnotatableElementTest.class);
+		suite.addTestSuite(SAnnotationTest.class);
+		suite.addTestSuite(SGraphTest.class);
+		suite.addTestSuite(SIdentifiableElementTest.class);
+		suite.addTestSuite(SProcessingAnnotationTest.class);
+		suite.addTestSuite(SProcessingAnnotatableElementTest.class);
 		return suite;
 	}
 

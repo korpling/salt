@@ -6,18 +6,48 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
-import de.hub.corpling.salt.saltCore.SNode;
-import de.hub.corpling.salt.saltCore.SaltCoreFactory;
-
+import junit.framework.TestCase;
 import junit.textui.TestRunner;
+import de.hub.corpling.salt.saltCore.SAnnotation;
+import de.hub.corpling.salt.saltCore.SGraph;
+import de.hub.corpling.salt.saltCore.SNode;
+import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
+import de.hub.corpling.salt.saltCore.SaltCoreFactory;
 
 /**
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>SNode</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations() <em>SProcessing Annotations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SNode#getSGraph() <em>SGraph</em>}</li>
+ * </ul>
+ * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hub.corpling.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String) <em>Get SProcessing Annotation</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#addSAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Add SAnnotation</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotation(java.lang.String) <em>Get SAnnotation</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
-public class SNodeTest extends SAnnotatableElementTest {
+public class SNodeTest extends TestCase {
+
+	/**
+	 * The fixture for this SNode test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected SNode fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -39,14 +69,23 @@ public class SNodeTest extends SAnnotatableElementTest {
 	}
 
 	/**
+	 * Sets the fixture for this SNode test case.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void setFixture(SNode fixture) {
+		this.fixture = fixture;
+	}
+
+	/**
 	 * Returns the fixture for this SNode test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	protected SNode getFixture() {
-		return (SNode)fixture;
+		return fixture;
 	}
 
 	/**
@@ -70,5 +109,240 @@ public class SNodeTest extends SAnnotatableElementTest {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+// ========================= start: testing SIdentifiableElement
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+		 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId()
+	 */
+	public void testGetSId() throws Exception 
+	{
+		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
+		identTest.setUp();
+		identTest.setFixture(this.getFixture());
+		identTest.testGetSId();
+		identTest.tearDown();
+	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#setSId(java.lang.String) <em>SId</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#setSId(java.lang.String)
+	 */
+	public void testSetSId() throws Exception 
+	{
+		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
+		identTest.setUp();
+		identTest.setFixture(this.getFixture());
+		identTest.testSetSId();
+		identTest.tearDown();
+	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath()
+	 */
+	public void testGetSElementPath() throws Exception 
+	{
+		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
+		identTest.setUp();
+		identTest.setFixture(this.getFixture());
+		identTest.testGetSElementPath();
+		identTest.tearDown();
+	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementPath(org.eclipse.emf.common.util.URI) <em>SElement Path</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementPath(org.eclipse.emf.common.util.URI)
+	 */
+	public void testSetSElementPath() throws Exception 
+	{
+		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
+		identTest.setUp();
+		identTest.setFixture(this.getFixture());
+		identTest.testSetSElementPath();
+		identTest.tearDown();
+	}
+//========================= end: testing SIdentifiableElement
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph() <em>SGraph</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SRelation#getSGraph()
+	 */
+	public void testGetSGraph() 
+	{
+		SGraph sGraph= SaltCoreFactory.eINSTANCE.createSGraph();
+		this.getFixture().setSGraph(sGraph);
+		assertEquals(sGraph, sGraph);
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#setSGraph(de.hub.corpling.salt.saltCore.SGraph) <em>SGraph</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SRelation#setSGraph(de.hub.corpling.salt.saltCore.SGraph)
+	 */
+	public void testSetSGraph() 
+	{
+		this.testGetSGraph();
+	}
+
+	// ========================= start: testing SAnnotatableElement
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations()
+	 */
+	public void testGetSAnnotations() throws Exception 
+	{
+		SAnnotatableElementTest sPATest= new SAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testGetSAnnotations();
+		sPATest.tearDown();
+	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#addSAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Add SAnnotation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SAnnotatableElement#addSAnnotation(de.hub.corpling.salt.saltCore.SAnnotation)
+	 */
+	public void testAddSAnnotation__SAnnotation() throws Exception 
+	{
+		SAnnotatableElementTest sPATest= new SAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testAddSAnnotation__SAnnotation();
+		sPATest.tearDown();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotation(java.lang.String) <em>Get SAnnotation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotation(java.lang.String)
+	 */
+	public void testGetSAnnotation__String() throws Exception 
+	{
+		SAnnotatableElementTest sPATest= new SAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testGetSAnnotation__String();
+		sPATest.tearDown();
+	}
+// ========================= end: testing SAnnotatableElement	
+// ========================= start: testing SProcessingAnnotatableElement
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations() <em>SProcessing Annotations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations()
+	 */
+	public void testGetSProcessingAnnotations() throws Exception 
+	{
+		SProcessingAnnotatableElementTest sPATest= new SProcessingAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testGetSProcessingAnnotations();
+		sPATest.tearDown();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hub.corpling.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hub.corpling.salt.saltCore.SProcessingAnnotation)
+	 */
+	public void testAddSProcessingAnnotation__SProcessingAnnotation() throws Exception 
+	{
+		SProcessingAnnotatableElementTest sPATest= new SProcessingAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testAddSProcessingAnnotation__SProcessingAnnotation();
+		sPATest.tearDown();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String) <em>Get SProcessing Annotation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String)
+	 */
+	public void testGetSProcessingAnnotation__String() throws Exception 
+	{
+		SProcessingAnnotatableElementTest sPATest= new SProcessingAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testGetSProcessingAnnotation__String();
+		sPATest.tearDown();
+	}
+	public void testReverseGetSProcessingAnnotation() throws Exception
+	{
+		SProcessingAnnotatableElementTest sPATest= new SProcessingAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testReverseGetSProcessingAnnotation();
+		sPATest.tearDown();
+	}
+	
+	/**
+	 * Checks if the equals mezhod is correctly implemented.
+	 */
+	public void testEquals()
+	{
+		{//adding id
+			String id= "salt:/node1";
+			this.getFixture().setSId(id);
+		}
+		
+		{//adding annotations
+			SAnnotation sAnno= null;
+			sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
+			sAnno.setFullName("ns1::annoName1");
+			sAnno.setSValue("annoValue1");
+			this.getFixture().addSAnnotation(sAnno);
+			
+			sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
+			sAnno.setFullName("ns2::annoName2");
+			sAnno.setSValue("annoValue2");
+			this.getFixture().addSAnnotation(sAnno);
+		}
+		
+		{//adding Processing-Annotations
+			SProcessingAnnotation sPAnno= null;
+			sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
+			sPAnno.setFullName("procAnnos::annoName1");
+			sPAnno.setSValue("pAnnoValue1");
+			this.getFixture().addSProcessingAnnotation(sPAnno);
+			
+			sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
+			sPAnno.setFullName("procAnnos::annoName2");
+			sPAnno.setSValue("pAnnoValue2");
+			this.getFixture().addSProcessingAnnotation(sPAnno);
+		}
+		assertEquals(this.getFixture(), this.getFixture());
+	}
+// ========================= end: testing SProcessingAnnotatableElement	
 
 } //SNodeTest
