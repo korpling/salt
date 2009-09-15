@@ -187,6 +187,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 					return(false);
 			}	
 		}
+		//TODO check nodes
 		return(true);
 	}
 	
