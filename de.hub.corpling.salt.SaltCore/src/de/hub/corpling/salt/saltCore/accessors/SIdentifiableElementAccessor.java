@@ -2,6 +2,7 @@ package de.hub.corpling.salt.saltCore.accessors;
 
 import org.eclipse.emf.common.util.URI;
 
+import de.hub.corpling.salt.saltCore.SElementId;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 
 public class SIdentifiableElementAccessor 
@@ -44,4 +45,22 @@ public class SIdentifiableElementAccessor
 	{
 		sIdentElem.setId(newSElementPath.toString());
 	}
+	
+	public SElementId getSElementId(SIdentifiableElement sIdentElem) 
+	{
+		SElementId retVal= null;
+		if (sIdentElem.getIdentifier() instanceof SElementId)
+			retVal= (SElementId)sIdentElem.getIdentifier();
+		return(retVal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void setSElementId(SIdentifiableElement sIdentElem, SElementId newSElementId) 
+	{
+		sIdentElem.setIdentifier(newSElementId);
+	}
+
 }

@@ -9,6 +9,7 @@ package de.hub.corpling.salt.saltCore.util;
 import de.hub.corpling.graph.Edge;
 import de.hub.corpling.graph.Graph;
 import de.hub.corpling.graph.IdentifiableElement;
+import de.hub.corpling.graph.Identifier;
 import de.hub.corpling.graph.Label;
 import de.hub.corpling.graph.LabelableElement;
 import de.hub.corpling.graph.Node;
@@ -115,6 +116,10 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 				return createSProcessingAnnotatableElementAdapter();
 			}
 			@Override
+			public Adapter caseSElementId(SElementId object) {
+				return createSElementIdAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -137,6 +142,10 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseGraph(Graph object) {
 				return createGraphAdapter();
+			}
+			@Override
+			public Adapter caseIdentifier(Identifier object) {
+				return createIdentifierAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -285,6 +294,20 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SElementId <em>SElement Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SElementId
+	 * @generated
+	 */
+	public Adapter createSElementIdAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.LabelableElement <em>Labelable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -365,6 +388,20 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGraphAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.Identifier <em>Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.graph.Identifier
+	 * @generated
+	 */
+	public Adapter createIdentifierAdapter() {
 		return null;
 	}
 

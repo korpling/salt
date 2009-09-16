@@ -72,6 +72,7 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 			case SaltCorePackage.SIDENTIFIABLE_ELEMENT: return createSIdentifiableElement();
 			case SaltCorePackage.SPROCESSING_ANNOTATION: return createSProcessingAnnotation();
 			case SaltCorePackage.SPROCESSING_ANNOTATABLE_ELEMENT: return createSProcessingAnnotatableElement();
+			case SaltCorePackage.SELEMENT_ID: return createSElementId();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -195,6 +196,16 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	public SProcessingAnnotatableElement createSProcessingAnnotatableElement() {
 		SProcessingAnnotatableElementImpl sProcessingAnnotatableElement = new SProcessingAnnotatableElementImpl();
 		return sProcessingAnnotatableElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SElementId createSElementId() {
+		SElementIdImpl sElementId = new SElementIdImpl();
+		return sElementId;
 	}
 
 	/**

@@ -58,6 +58,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SIdentifiableElement" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//IdentifiableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sElementId" eType="#//SElementId"
+        volatile="true" transient="true" derived="true" eOpposite="#//SElementId/sIdentifiableElement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sElementPath" eType="#//URI"
@@ -83,5 +85,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sProcessingAnnotations"
         upperBound="-1" eType="#//SProcessingAnnotation" changeable="false" volatile="true"
         transient="true" derived="true" containment="true" eOpposite="#//SProcessingAnnotation/sProcessingAnnotatableElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SElementId" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Identifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sIdentifiableElement" eType="#//SIdentifiableElement"
+        volatile="true" transient="true" derived="true" eOpposite="#//SIdentifiableElement/sElementId"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sElementPath" eType="#//URI"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
 </ecore:EPackage>

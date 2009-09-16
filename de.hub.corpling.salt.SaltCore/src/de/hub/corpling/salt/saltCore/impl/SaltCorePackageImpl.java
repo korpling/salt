@@ -10,6 +10,7 @@ import de.hub.corpling.graph.GraphPackage;
 
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
+import de.hub.corpling.salt.saltCore.SElementId;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -98,6 +99,13 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * @generated
 	 */
 	private EClass sProcessingAnnotatableElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sElementIdEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -337,8 +345,17 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSIdentifiableElement_SElementId() {
+		return (EReference)sIdentifiableElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getSIdentifiableElement_SId() {
-		return (EAttribute)sIdentifiableElementEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)sIdentifiableElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -347,7 +364,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * @generated
 	 */
 	public EAttribute getSIdentifiableElement_SElementPath() {
-		return (EAttribute)sIdentifiableElementEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)sIdentifiableElementEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -402,6 +419,42 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 */
 	public EReference getSProcessingAnnotatableElement_SProcessingAnnotations() {
 		return (EReference)sProcessingAnnotatableElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSElementId() {
+		return sElementIdEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSElementId_SIdentifiableElement() {
+		return (EReference)sElementIdEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSElementId_SId() {
+		return (EAttribute)sElementIdEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSElementId_SElementPath() {
+		return (EAttribute)sElementIdEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -465,6 +518,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEAttribute(sNamedElementEClass, SNAMED_ELEMENT__SNAME);
 
 		sIdentifiableElementEClass = createEClass(SIDENTIFIABLE_ELEMENT);
+		createEReference(sIdentifiableElementEClass, SIDENTIFIABLE_ELEMENT__SELEMENT_ID);
 		createEAttribute(sIdentifiableElementEClass, SIDENTIFIABLE_ELEMENT__SID);
 		createEAttribute(sIdentifiableElementEClass, SIDENTIFIABLE_ELEMENT__SELEMENT_PATH);
 
@@ -475,6 +529,11 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		sProcessingAnnotatableElementEClass = createEClass(SPROCESSING_ANNOTATABLE_ELEMENT);
 		createEReference(sProcessingAnnotatableElementEClass, SPROCESSING_ANNOTATABLE_ELEMENT__SPROCESSING_ANNOTATIONS);
+
+		sElementIdEClass = createEClass(SELEMENT_ID);
+		createEReference(sElementIdEClass, SELEMENT_ID__SIDENTIFIABLE_ELEMENT);
+		createEAttribute(sElementIdEClass, SELEMENT_ID__SID);
+		createEAttribute(sElementIdEClass, SELEMENT_ID__SELEMENT_PATH);
 
 		// Create data types
 		uriEDataType = createEDataType(URI);
@@ -531,6 +590,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sIdentifiableElementEClass.getESuperTypes().add(theGraphPackage.getIdentifiableElement());
 		sProcessingAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
 		sProcessingAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
+		sElementIdEClass.getESuperTypes().add(theGraphPackage.getIdentifier());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sNodeEClass, SNode.class, "SNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -575,6 +635,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEAttribute(getSNamedElement_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sIdentifiableElementEClass, SIdentifiableElement.class, "SIdentifiableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSIdentifiableElement_SElementId(), this.getSElementId(), this.getSElementId_SIdentifiableElement(), "sElementId", null, 0, 1, SIdentifiableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSIdentifiableElement_SId(), ecorePackage.getEString(), "sId", null, 0, 1, SIdentifiableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSIdentifiableElement_SElementPath(), this.getURI(), "sElementPath", null, 0, 1, SIdentifiableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
@@ -591,6 +652,11 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		op = addEOperation(sProcessingAnnotatableElementEClass, this.getSProcessingAnnotation(), "getSProcessingAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "fullName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(sElementIdEClass, SElementId.class, "SElementId", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSElementId_SIdentifiableElement(), this.getSIdentifiableElement(), this.getSIdentifiableElement_SElementId(), "sIdentifiableElement", null, 0, 1, SElementId.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSElementId_SId(), ecorePackage.getEString(), "sId", null, 0, 1, SElementId.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSElementId_SElementPath(), this.getURI(), "sElementPath", null, 0, 1, SElementId.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -21,6 +21,7 @@ import de.hub.corpling.graph.Graph;
 import de.hub.corpling.graph.impl.NodeImpl;
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
+import de.hub.corpling.salt.saltCore.SElementId;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -41,6 +42,7 @@ import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAcce
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSAnnotations <em>SAnnotations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSName <em>SName</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSElementId <em>SElement Id</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSId <em>SId</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
@@ -143,6 +145,16 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public SElementId getSElementId() {
+		SElementId sElementId = basicGetSElementId();
+		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SGraph getSGraph() {
 		SGraph sGraph = basicGetSGraph();
 		return sGraph != null && sGraph.eIsProxy() ? (SGraph)eResolveProxy((InternalEObject)sGraph) : sGraph;
@@ -175,6 +187,25 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * Delegatee for SIdentifiableElement
 	 */
 	private SIdentifiableElementAccessor sIdentAccessor= null;
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SElementId basicGetSElementId() 
+	{
+		return(sIdentAccessor.getSElementId(this));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void setSElementId(SElementId newSElementId) 
+	{
+		sIdentAccessor.setSElementId(this, newSElementId);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -372,6 +403,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return getSAnnotations();
 			case SaltCorePackage.SNODE__SNAME:
 				return getSName();
+			case SaltCorePackage.SNODE__SELEMENT_ID:
+				if (resolve) return getSElementId();
+				return basicGetSElementId();
 			case SaltCorePackage.SNODE__SID:
 				return getSId();
 			case SaltCorePackage.SNODE__SELEMENT_PATH:
@@ -401,6 +435,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 			case SaltCorePackage.SNODE__SNAME:
 				setSName((String)newValue);
 				return;
+			case SaltCorePackage.SNODE__SELEMENT_ID:
+				setSElementId((SElementId)newValue);
+				return;
 			case SaltCorePackage.SNODE__SID:
 				setSId((String)newValue);
 				return;
@@ -428,6 +465,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 			case SaltCorePackage.SNODE__SNAME:
 				setSName(SNAME_EDEFAULT);
 				return;
+			case SaltCorePackage.SNODE__SELEMENT_ID:
+				setSElementId((SElementId)null);
+				return;
 			case SaltCorePackage.SNODE__SID:
 				setSId(SID_EDEFAULT);
 				return;
@@ -453,6 +493,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return !getSAnnotations().isEmpty();
 			case SaltCorePackage.SNODE__SNAME:
 				return SNAME_EDEFAULT == null ? sName != null : !SNAME_EDEFAULT.equals(sName);
+			case SaltCorePackage.SNODE__SELEMENT_ID:
+				return basicGetSElementId() != null;
 			case SaltCorePackage.SNODE__SID:
 				return SID_EDEFAULT == null ? getSId() != null : !SID_EDEFAULT.equals(getSId());
 			case SaltCorePackage.SNODE__SELEMENT_PATH:
@@ -486,6 +528,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		}
 		if (baseClass == SIdentifiableElement.class) {
 			switch (derivedFeatureID) {
+				case SaltCorePackage.SNODE__SELEMENT_ID: return SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_ID;
 				case SaltCorePackage.SNODE__SID: return SaltCorePackage.SIDENTIFIABLE_ELEMENT__SID;
 				case SaltCorePackage.SNODE__SELEMENT_PATH: return SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH;
 				default: return -1;
@@ -521,6 +564,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		}
 		if (baseClass == SIdentifiableElement.class) {
 			switch (baseFeatureID) {
+				case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_ID: return SaltCorePackage.SNODE__SELEMENT_ID;
 				case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SID: return SaltCorePackage.SNODE__SID;
 				case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH: return SaltCorePackage.SNODE__SELEMENT_PATH;
 				default: return -1;

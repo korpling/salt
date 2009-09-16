@@ -9,6 +9,7 @@ package de.hub.corpling.salt.saltCore.util;
 import de.hub.corpling.graph.Edge;
 import de.hub.corpling.graph.Graph;
 import de.hub.corpling.graph.IdentifiableElement;
+import de.hub.corpling.graph.Identifier;
 import de.hub.corpling.graph.Label;
 import de.hub.corpling.graph.LabelableElement;
 import de.hub.corpling.graph.Node;
@@ -174,6 +175,14 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SaltCorePackage.SELEMENT_ID: {
+				SElementId sElementId = (SElementId)theEObject;
+				T result = caseSElementId(sElementId);
+				if (result == null) result = caseIdentifier(sElementId);
+				if (result == null) result = caseLabel(sElementId);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -314,6 +323,21 @@ public class SaltCoreSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SElement Id</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SElement Id</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSElementId(SElementId object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Labelable Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -400,6 +424,21 @@ public class SaltCoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseGraph(Graph object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Identifier</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Identifier</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIdentifier(Identifier object) {
 		return null;
 	}
 

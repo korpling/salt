@@ -8,30 +8,30 @@ package de.hub.corpling.salt.saltCore.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
-import de.hub.corpling.graph.impl.IdentifiableElementImpl;
+
+import de.hub.corpling.graph.IdentifiableElement;
+import de.hub.corpling.graph.impl.IdentifierImpl;
 import de.hub.corpling.salt.saltCore.SElementId;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
-import de.hub.corpling.salt.saltCore.accessors.SIdentifiableElementAccessor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>SIdentifiable Element</b></em>'.
+ * An implementation of the model object '<em><b>SElement Id</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SIdentifiableElementImpl#getSElementId <em>SElement Id</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SIdentifiableElementImpl#getSId <em>SId</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SIdentifiableElementImpl#getSElementPath <em>SElement Path</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SElementIdImpl#getSIdentifiableElement <em>SIdentifiable Element</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SElementIdImpl#getSId <em>SId</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SElementIdImpl#getSElementPath <em>SElement Path</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SIdentifiableElementImpl extends IdentifiableElementImpl implements SIdentifiableElement {
+public class SElementIdImpl extends IdentifierImpl implements SElementId {
 	/**
 	 * The default value of the '{@link #getSId() <em>SId</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -41,6 +41,7 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	 * @ordered
 	 */
 	protected static final String SID_EDEFAULT = null;
+
 	/**
 	 * The default value of the '{@link #getSElementPath() <em>SElement Path</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -50,17 +51,14 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	 * @ordered
 	 */
 	protected static final URI SELEMENT_PATH_EDEFAULT = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	protected SIdentifiableElementImpl() {
-		init();
-	}
-	
-	private void init()
-	{
-		this.sIdentAccessor= new SIdentifiableElementAccessor();
+	protected SElementIdImpl() {
+		super();
 	}
 
 	/**
@@ -70,49 +68,49 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SaltCorePackage.Literals.SIDENTIFIABLE_ELEMENT;
+		return SaltCorePackage.Literals.SELEMENT_ID;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public SElementId getSElementId() {
-		SElementId sElementId = basicGetSElementId();
-		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
+	public SIdentifiableElement getSIdentifiableElement() 
+	{
+		SIdentifiableElement sIdentifiableElement = basicGetSIdentifiableElement();
+		return sIdentifiableElement != null && sIdentifiableElement.eIsProxy() ? (SIdentifiableElement)eResolveProxy((InternalEObject)sIdentifiableElement) : sIdentifiableElement;
 	}
 
-		/**
-	 * Delegatee for SIdentifiableElement
-	 */
-	private SIdentifiableElementAccessor sIdentAccessor= null;
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SElementId basicGetSElementId() 
+	public SIdentifiableElement basicGetSIdentifiableElement() 
 	{
-		return(sIdentAccessor.getSElementId(this));
+		SIdentifiableElement retVal= null;
+		IdentifiableElement identElem= super.getIdentifiableElement();
+		if (identElem instanceof SIdentifiableElement)
+			retVal= (SIdentifiableElement) identElem;
+		return(retVal);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public void setSElementId(SElementId newSElementId) 
+	public void setSIdentifiableElement(SIdentifiableElement newSIdentifiableElement) 
 	{
-		sIdentAccessor.setSElementId(this, newSElementId);
+		super.setIdentifiableElement(newSIdentifiableElement);
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	public String getSId() 
 	{
-		return(this.sIdentAccessor.getSId(this));
+		return(super.getId());
 	}
 
 	/**
@@ -121,7 +119,7 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	 */
 	public void setSId(String newSId) 
 	{
-		this.sIdentAccessor.setSId(this, newSId);
+		super.setId(newSId);
 	}
 
 	/**
@@ -130,7 +128,10 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	 */
 	public URI getSElementPath() 
 	{
-		return(this.sIdentAccessor.getSElementPath(this));
+		URI retVal= null;
+		String id= this.getSId();
+		retVal= URI.createURI(id);
+		return(retVal);
 	}
 
 	/**
@@ -139,7 +140,7 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	 */
 	public void setSElementPath(URI newSElementPath) 
 	{
-		this.sIdentAccessor.setSElementPath(this, newSElementPath);
+		super.setId(newSElementPath.toString());
 	}
 
 	/**
@@ -150,12 +151,12 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_ID:
-				if (resolve) return getSElementId();
-				return basicGetSElementId();
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SID:
+			case SaltCorePackage.SELEMENT_ID__SIDENTIFIABLE_ELEMENT:
+				if (resolve) return getSIdentifiableElement();
+				return basicGetSIdentifiableElement();
+			case SaltCorePackage.SELEMENT_ID__SID:
 				return getSId();
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH:
+			case SaltCorePackage.SELEMENT_ID__SELEMENT_PATH:
 				return getSElementPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -169,13 +170,13 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_ID:
-				setSElementId((SElementId)newValue);
+			case SaltCorePackage.SELEMENT_ID__SIDENTIFIABLE_ELEMENT:
+				setSIdentifiableElement((SIdentifiableElement)newValue);
 				return;
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SID:
+			case SaltCorePackage.SELEMENT_ID__SID:
 				setSId((String)newValue);
 				return;
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH:
+			case SaltCorePackage.SELEMENT_ID__SELEMENT_PATH:
 				setSElementPath((URI)newValue);
 				return;
 		}
@@ -190,13 +191,13 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_ID:
-				setSElementId((SElementId)null);
+			case SaltCorePackage.SELEMENT_ID__SIDENTIFIABLE_ELEMENT:
+				setSIdentifiableElement((SIdentifiableElement)null);
 				return;
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SID:
+			case SaltCorePackage.SELEMENT_ID__SID:
 				setSId(SID_EDEFAULT);
 				return;
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH:
+			case SaltCorePackage.SELEMENT_ID__SELEMENT_PATH:
 				setSElementPath(SELEMENT_PATH_EDEFAULT);
 				return;
 		}
@@ -211,14 +212,14 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_ID:
-				return basicGetSElementId() != null;
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SID:
+			case SaltCorePackage.SELEMENT_ID__SIDENTIFIABLE_ELEMENT:
+				return basicGetSIdentifiableElement() != null;
+			case SaltCorePackage.SELEMENT_ID__SID:
 				return SID_EDEFAULT == null ? getSId() != null : !SID_EDEFAULT.equals(getSId());
-			case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH:
+			case SaltCorePackage.SELEMENT_ID__SELEMENT_PATH:
 				return SELEMENT_PATH_EDEFAULT == null ? getSElementPath() != null : !SELEMENT_PATH_EDEFAULT.equals(getSElementPath());
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //SIdentifiableElementImpl
+} //SElementIdImpl

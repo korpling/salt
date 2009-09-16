@@ -23,6 +23,7 @@ import de.hub.corpling.graph.Node;
 import de.hub.corpling.graph.impl.GraphImpl;
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
+import de.hub.corpling.salt.saltCore.SElementId;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -45,6 +46,7 @@ import de.hub.corpling.salt.saltExceptions.SaltException;
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSName <em>SName</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSAnnotations <em>SAnnotations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSElementId <em>SElement Id</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSId <em>SId</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
@@ -366,6 +368,16 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SElementId getSElementId() {
+		SElementId sElementId = basicGetSElementId();
+		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	public void addSAnnotation(SAnnotation SAnnotation) 
 	{
@@ -386,6 +398,24 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 * Delegatee for SProcessingAnnotatableElement
 	 */
 	private SProcessingAnnotatableElementAccessor sProcAnnoAccessor= null;
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SElementId basicGetSElementId() 
+	{
+		return(sIdentAccessor.getSElementId(this));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void setSElementId(SElementId newSElementId) 
+	{
+		sIdentAccessor.setSElementId(this, newSElementId);
+	}
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -442,6 +472,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return getSName();
 			case SaltCorePackage.SGRAPH__SANNOTATIONS:
 				return getSAnnotations();
+			case SaltCorePackage.SGRAPH__SELEMENT_ID:
+				if (resolve) return getSElementId();
+				return basicGetSElementId();
 			case SaltCorePackage.SGRAPH__SID:
 				return getSId();
 			case SaltCorePackage.SGRAPH__SELEMENT_PATH:
@@ -472,6 +505,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				getSAnnotations().clear();
 				getSAnnotations().addAll((Collection<? extends SAnnotation>)newValue);
 				return;
+			case SaltCorePackage.SGRAPH__SELEMENT_ID:
+				setSElementId((SElementId)newValue);
+				return;
 			case SaltCorePackage.SGRAPH__SID:
 				setSId((String)newValue);
 				return;
@@ -496,6 +532,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 			case SaltCorePackage.SGRAPH__SANNOTATIONS:
 				getSAnnotations().clear();
 				return;
+			case SaltCorePackage.SGRAPH__SELEMENT_ID:
+				setSElementId((SElementId)null);
+				return;
 			case SaltCorePackage.SGRAPH__SID:
 				setSId(SID_EDEFAULT);
 				return;
@@ -518,6 +557,8 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return SNAME_EDEFAULT == null ? sName != null : !SNAME_EDEFAULT.equals(sName);
 			case SaltCorePackage.SGRAPH__SANNOTATIONS:
 				return !getSAnnotations().isEmpty();
+			case SaltCorePackage.SGRAPH__SELEMENT_ID:
+				return basicGetSElementId() != null;
 			case SaltCorePackage.SGRAPH__SID:
 				return SID_EDEFAULT == null ? getSId() != null : !SID_EDEFAULT.equals(getSId());
 			case SaltCorePackage.SGRAPH__SELEMENT_PATH:
@@ -553,6 +594,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		}
 		if (baseClass == SIdentifiableElement.class) {
 			switch (derivedFeatureID) {
+				case SaltCorePackage.SGRAPH__SELEMENT_ID: return SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_ID;
 				case SaltCorePackage.SGRAPH__SID: return SaltCorePackage.SIDENTIFIABLE_ELEMENT__SID;
 				case SaltCorePackage.SGRAPH__SELEMENT_PATH: return SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH;
 				default: return -1;
@@ -588,6 +630,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		}
 		if (baseClass == SIdentifiableElement.class) {
 			switch (baseFeatureID) {
+				case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_ID: return SaltCorePackage.SGRAPH__SELEMENT_ID;
 				case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SID: return SaltCorePackage.SGRAPH__SID;
 				case SaltCorePackage.SIDENTIFIABLE_ELEMENT__SELEMENT_PATH: return SaltCorePackage.SGRAPH__SELEMENT_PATH;
 				default: return -1;
