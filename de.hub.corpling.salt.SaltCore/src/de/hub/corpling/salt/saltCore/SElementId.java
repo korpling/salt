@@ -6,10 +6,9 @@
  */
 package de.hub.corpling.salt.saltCore;
 
-import de.hub.corpling.graph.Identifier;
-import de.hub.corpling.graph.IdentifiableElement;
-
 import org.eclipse.emf.common.util.URI;
+
+import de.hub.corpling.graph.Identifier;
 
 /**
  * <!-- begin-user-doc -->
