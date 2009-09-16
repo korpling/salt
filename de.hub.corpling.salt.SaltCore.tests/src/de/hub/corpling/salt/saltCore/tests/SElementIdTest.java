@@ -6,36 +6,39 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
-import junit.framework.TestCase;
-import junit.textui.TestRunner;
-
 import org.eclipse.emf.common.util.URI;
 
 import de.hub.corpling.salt.saltCore.SElementId;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
 
+import junit.framework.TestCase;
+
+import junit.textui.TestRunner;
+
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>SIdentifiable Element</b></em>'.
+ * A test case for the model object '<em><b>SElement Id</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SElementId#getSIdentifiableElement() <em>SIdentifiable Element</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SElementId#getSId() <em>SId</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SElementId#getSElementPath() <em>SElement Path</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class SIdentifiableElementTest extends TestCase {
+public class SElementIdTest extends TestCase {
 
 	/**
-	 * The fixture for this SIdentifiable Element test case.
+	 * The fixture for this SElement Id test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SIdentifiableElement fixture = null;
+	protected SElementId fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -43,36 +46,36 @@ public class SIdentifiableElementTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(SIdentifiableElementTest.class);
+		TestRunner.run(SElementIdTest.class);
 	}
 
 	/**
-	 * Constructs a new SIdentifiable Element test case with the given name.
+	 * Constructs a new SElement Id test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SIdentifiableElementTest(String name) {
+	public SElementIdTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Sets the fixture for this SIdentifiable Element test case.
+	 * Sets the fixture for this SElement Id test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(SIdentifiableElement fixture) {
+	protected void setFixture(SElementId fixture) {
 		this.fixture = fixture;
 	}
 
 	/**
-	 * Returns the fixture for this SIdentifiable Element test case.
+	 * Returns the fixture for this SElement Id test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SIdentifiableElement getFixture() {
+	protected SElementId getFixture() {
 		return fixture;
 	}
 
@@ -84,7 +87,7 @@ public class SIdentifiableElementTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(SaltCoreFactory.eINSTANCE.createSIdentifiableElement());
+		setFixture(SaltCoreFactory.eINSTANCE.createSElementId());
 	}
 
 	/**
@@ -97,31 +100,31 @@ public class SIdentifiableElementTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SElementId#getSIdentifiableElement() <em>SIdentifiable Element</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SElementId#getSIdentifiableElement()
+	 */
+	public void testGetSIdentifiableElement() 
+	{
+		SIdentifiableElement identElem= SaltCoreFactory.eINSTANCE.createSIdentifiableElement();
+		this.getFixture().setSIdentifiableElement(identElem);
+		assertEquals(identElem, this.getFixture().getSIdentifiableElement());
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SElementId#setSIdentifiableElement(de.hub.corpling.salt.saltCore.SIdentifiableElement) <em>SIdentifiable Element</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SElementId#setSIdentifiableElement(de.hub.corpling.salt.saltCore.SIdentifiableElement)
+	 */
+	public void testSetSIdentifiableElement() 
+	{
+		this.testGetSElementPath();
+	}
 	
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId()
-	 */
-	public void testGetSElementId() 
-	{
-		SElementId sElementId= SaltCoreFactory.eINSTANCE.createSElementId();
-		this.getFixture().setSElementId(sElementId);
-		assertEquals(sElementId, this.getFixture().getSElementId());
-	}
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementId(de.hub.corpling.salt.saltCore.SElementId) <em>SElement Id</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementId(de.hub.corpling.salt.saltCore.SElementId)
-	 */
-	public void testSetSElementId() 
-	{
-		this.testGetSElementId();
-	}
-
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}' feature getter.
 	 * <!-- begin-user-doc -->
@@ -172,4 +175,5 @@ public class SIdentifiableElementTest extends TestCase {
 	{
 		this.testGetSElementPath();
 	}
-} //SIdentifiableElementTest
+
+} //SElementIdTest

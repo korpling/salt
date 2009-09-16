@@ -25,6 +25,7 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations() <em>SProcessing Annotations</em>}</li>
@@ -366,6 +367,38 @@ public class SGraphTest extends TestCase {
 		identTest.testSetSElementPath();
 		identTest.tearDown();
 	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId()
+	 */
+	public void testGetSElementId() throws Exception 
+	{
+		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
+		identTest.setUp();
+		identTest.setFixture(this.getFixture());
+		identTest.testGetSElementId();
+		identTest.tearDown();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementId(de.hub.corpling.salt.saltCore.SElementId) <em>SElement Id</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementId(de.hub.corpling.salt.saltCore.SElementId)
+	 */
+	public void testSetSElementId() throws Exception 
+	{
+		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
+		identTest.setUp();
+		identTest.setFixture(this.getFixture());
+		identTest.testSetSElementId();
+		identTest.tearDown();
+	}
 //========================= end: testing SIdentifiableElement
 // ========================= start: testing SAnnotatableElement
 	/**
@@ -383,7 +416,7 @@ public class SGraphTest extends TestCase {
 		sPATest.testGetSAnnotations();
 		sPATest.tearDown();
 	}
-	
+
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#addSAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Add SAnnotation</em>}' operation.
 	 * <!-- begin-user-doc -->
