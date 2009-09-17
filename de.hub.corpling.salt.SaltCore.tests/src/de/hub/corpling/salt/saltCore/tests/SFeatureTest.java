@@ -24,6 +24,7 @@ import junit.textui.TestRunner;
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeature#getSName() <em>SName</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeature#getSValue() <em>SValue</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeature#getSFeaturableElement() <em>SFeaturable Element</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SFeature#getSNS() <em>SNS</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -123,6 +124,32 @@ public class SFeatureTest extends TestCase {
 		this.testGetSFeaturableElement();
 	}
 	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeature#getSNS() <em>SNS</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SFeature#getSNS()
+	 */
+	public void testGetSNS() 
+	{
+		assertNull(this.getFixture().getSNS());
+		
+		String ns= "ns";
+		this.getFixture().setSNS(ns);
+		assertEquals(ns, this.getFixture().getSNS());
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeature#setSNS(java.lang.String) <em>SNS</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SFeature#setSNS(java.lang.String)
+	 */
+	public void testSetSNS() 
+	{
+		this.testGetSNS();
+	}
+
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSName() <em>SName</em>}' feature getter.
 	 * <!-- begin-user-doc -->
