@@ -27,6 +27,7 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations() <em>SProcessing Annotations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSSource() <em>SSource</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTarget() <em>STarget</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph() <em>SGraph</em>}</li>
@@ -35,6 +36,8 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  * <p>
  * The following operations are tested:
  * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hub.corpling.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String) <em>Get SProcessing Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#addSAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Add SAnnotation</em>}</li>
@@ -285,8 +288,8 @@ public class SRelationTest extends TestCase {
 	{
 		this.testGetSGraph();
 	}
-	
-// ========================= start: testing SAnnotatableElement
+
+	// ========================= start: testing SAnnotatableElement
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}' feature getter.
 	 * <!-- begin-user-doc -->
@@ -392,7 +395,55 @@ public class SRelationTest extends TestCase {
 		sPATest.tearDown();
 	}
 // ========================= end: testing SProcessingAnnotatableElement	
+// ========================= start: testing SFeaturableElement	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeatures()
+	 */
+	public void testGetSFeatures() throws Exception 
+	{
+		SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
+		sFeatTest.setUp();
+		sFeatTest.setFixture(this.getFixture());
+		sFeatTest.testGetSFeatures();
+		sFeatTest.tearDown();
+	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature) <em>Add SFeature</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature)
+	 */
+	public void testAddSFeature__SFeature() throws Exception 
+	{
+		SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
+		sFeatTest.setUp();
+		sFeatTest.setFixture(this.getFixture());
+		sFeatTest.testAddSFeature__SFeature();
+		sFeatTest.tearDown();
+	}
 
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String)
+	 */
+	public void testGetSFeature__String() throws Exception 
+	{
+		SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
+		sFeatTest.setUp();
+		sFeatTest.setFixture(this.getFixture());
+		sFeatTest.testGetSFeature__String();
+		sFeatTest.tearDown();
+	}
+// ========================= end: testing SFeaturableElement
 	/**
 	 * Checks if the equals mezhod is correctly implemented.
 	 */

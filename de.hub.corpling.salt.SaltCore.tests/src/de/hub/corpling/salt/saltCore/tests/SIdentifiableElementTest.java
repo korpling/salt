@@ -23,6 +23,8 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}</li>
  * </ul>
  * </p>
  * @generated
