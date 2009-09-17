@@ -6,14 +6,21 @@
  */
 package de.hub.corpling.salt.saltCommon.sCorpusStructure.util;
 
+import de.hub.corpling.graph.Edge;
+import de.hub.corpling.graph.Graph;
+import de.hub.corpling.graph.IdentifiableElement;
+import de.hub.corpling.graph.LabelableElement;
+import de.hub.corpling.graph.Node;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.*;
 
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
+import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 import de.hub.corpling.salt.saltCore.SNode;
 
+import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SRelation;
 import java.util.List;
 
@@ -98,9 +105,14 @@ public class SCorpusStructureSwitch<T> {
 				SCorpusGraph sCorpusGraph = (SCorpusGraph)theEObject;
 				T result = caseSCorpusGraph(sCorpusGraph);
 				if (result == null) result = caseSGraph(sCorpusGraph);
+				if (result == null) result = caseGraph(sCorpusGraph);
 				if (result == null) result = caseSNamedElement(sCorpusGraph);
 				if (result == null) result = caseSAnnotatableElement(sCorpusGraph);
 				if (result == null) result = caseSIdentifiableElement(sCorpusGraph);
+				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusGraph);
+				if (result == null) result = caseSFeaturableElement(sCorpusGraph);
+				if (result == null) result = caseLabelableElement(sCorpusGraph);
+				if (result == null) result = caseIdentifiableElement(sCorpusGraph);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -108,9 +120,14 @@ public class SCorpusStructureSwitch<T> {
 				SDocument sDocument = (SDocument)theEObject;
 				T result = caseSDocument(sDocument);
 				if (result == null) result = caseSNode(sDocument);
+				if (result == null) result = caseNode(sDocument);
 				if (result == null) result = caseSAnnotatableElement(sDocument);
 				if (result == null) result = caseSNamedElement(sDocument);
 				if (result == null) result = caseSIdentifiableElement(sDocument);
+				if (result == null) result = caseSProcessingAnnotatableElement(sDocument);
+				if (result == null) result = caseSFeaturableElement(sDocument);
+				if (result == null) result = caseLabelableElement(sDocument);
+				if (result == null) result = caseIdentifiableElement(sDocument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -118,9 +135,14 @@ public class SCorpusStructureSwitch<T> {
 				SCorpus sCorpus = (SCorpus)theEObject;
 				T result = caseSCorpus(sCorpus);
 				if (result == null) result = caseSNode(sCorpus);
+				if (result == null) result = caseNode(sCorpus);
 				if (result == null) result = caseSAnnotatableElement(sCorpus);
 				if (result == null) result = caseSNamedElement(sCorpus);
 				if (result == null) result = caseSIdentifiableElement(sCorpus);
+				if (result == null) result = caseSProcessingAnnotatableElement(sCorpus);
+				if (result == null) result = caseSFeaturableElement(sCorpus);
+				if (result == null) result = caseLabelableElement(sCorpus);
+				if (result == null) result = caseIdentifiableElement(sCorpus);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -128,9 +150,14 @@ public class SCorpusStructureSwitch<T> {
 				SCorpusRelation sCorpusRelation = (SCorpusRelation)theEObject;
 				T result = caseSCorpusRelation(sCorpusRelation);
 				if (result == null) result = caseSRelation(sCorpusRelation);
+				if (result == null) result = caseEdge(sCorpusRelation);
 				if (result == null) result = caseSAnnotatableElement(sCorpusRelation);
 				if (result == null) result = caseSNamedElement(sCorpusRelation);
 				if (result == null) result = caseSIdentifiableElement(sCorpusRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusRelation);
+				if (result == null) result = caseSFeaturableElement(sCorpusRelation);
+				if (result == null) result = caseLabelableElement(sCorpusRelation);
+				if (result == null) result = caseIdentifiableElement(sCorpusRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -138,9 +165,14 @@ public class SCorpusStructureSwitch<T> {
 				SCorpusDocumentRelation sCorpusDocumentRelation = (SCorpusDocumentRelation)theEObject;
 				T result = caseSCorpusDocumentRelation(sCorpusDocumentRelation);
 				if (result == null) result = caseSRelation(sCorpusDocumentRelation);
+				if (result == null) result = caseEdge(sCorpusDocumentRelation);
 				if (result == null) result = caseSAnnotatableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseSNamedElement(sCorpusDocumentRelation);
 				if (result == null) result = caseSIdentifiableElement(sCorpusDocumentRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusDocumentRelation);
+				if (result == null) result = caseSFeaturableElement(sCorpusDocumentRelation);
+				if (result == null) result = caseLabelableElement(sCorpusDocumentRelation);
+				if (result == null) result = caseIdentifiableElement(sCorpusDocumentRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -224,6 +256,51 @@ public class SCorpusStructureSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Labelable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Labelable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLabelableElement(LabelableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Identifiable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Identifiable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIdentifiableElement(IdentifiableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Graph</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Graph</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGraph(Graph object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>SNamed Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -269,6 +346,36 @@ public class SCorpusStructureSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SProcessing Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SProcessing Annotatable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSProcessingAnnotatableElement(SProcessingAnnotatableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SFeaturable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SFeaturable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSFeaturableElement(SFeaturableElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>SGraph</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -284,6 +391,21 @@ public class SCorpusStructureSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNode(Node object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>SNode</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -295,6 +417,21 @@ public class SCorpusStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSNode(SNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEdge(Edge object) {
 		return null;
 	}
 

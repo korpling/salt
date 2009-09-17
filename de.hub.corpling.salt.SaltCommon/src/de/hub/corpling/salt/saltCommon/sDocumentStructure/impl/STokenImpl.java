@@ -6,27 +6,13 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
-
 import de.hub.corpling.salt.saltCore.impl.SNodeImpl;
-import org.eclipse.emf.common.notify.Notification;
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,75 +48,24 @@ public class STokenImpl extends SNodeImpl implements SToken {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * Returns the document-graph, to which this object contains.
+	 * @return containing document graph 
 	 */
-	public SDocumentGraph getSDocumentGraph() {
-		if (eContainerFeatureID() != SDocumentStructurePackage.STOKEN__SDOCUMENT_GRAPH) return null;
-		return (SDocumentGraph)eContainer();
+	public SDocumentGraph getSDocumentGraph() 
+	{
+		SDocumentGraph retVal= null;
+		if (super.getSGraph() instanceof SDocumentGraph)
+			retVal= (SDocumentGraph) super.getSGraph();
+		return(retVal);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * Sets the document graph, to which this object contains.
+	 * @param newSDocumentGraph the document graph
 	 */
-	public NotificationChain basicSetSDocumentGraph(SDocumentGraph newSDocumentGraph, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newSDocumentGraph, SDocumentStructurePackage.STOKEN__SDOCUMENT_GRAPH, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSDocumentGraph(SDocumentGraph newSDocumentGraph) {
-		if (newSDocumentGraph != eInternalContainer() || (eContainerFeatureID() != SDocumentStructurePackage.STOKEN__SDOCUMENT_GRAPH && newSDocumentGraph != null)) {
-			if (EcoreUtil.isAncestor(this, newSDocumentGraph))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newSDocumentGraph != null)
-				msgs = ((InternalEObject)newSDocumentGraph).eInverseAdd(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS, SDocumentGraph.class, msgs);
-			msgs = basicSetSDocumentGraph(newSDocumentGraph, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SDocumentStructurePackage.STOKEN__SDOCUMENT_GRAPH, newSDocumentGraph, newSDocumentGraph));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SDocumentStructurePackage.STOKEN__SDOCUMENT_GRAPH:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetSDocumentGraph((SDocumentGraph)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SDocumentStructurePackage.STOKEN__SDOCUMENT_GRAPH:
-				return basicSetSDocumentGraph(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setSDocumentGraph(SDocumentGraph newSDocumentGraph) 
+	{
+		super.setSGraph(newSDocumentGraph);
 	}
 
 	/**
@@ -166,7 +101,6 @@ public class STokenImpl extends SNodeImpl implements SToken {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

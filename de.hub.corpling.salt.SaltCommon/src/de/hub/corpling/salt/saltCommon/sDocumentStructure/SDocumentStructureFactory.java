@@ -80,6 +80,15 @@ public interface SDocumentStructureFactory extends EFactory {
 	SSequentialDS createSSequentialDS();
 
 	/**
+	 * Returns a new object of class '<em>STimeline</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>STimeline</em>'.
+	 * @generated
+	 */
+	STimeline createSTimeline();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

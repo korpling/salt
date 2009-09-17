@@ -7,7 +7,6 @@
 package de.hub.corpling.salt.saltCommon.sCorpusStructure;
 
 import de.hub.corpling.salt.saltCore.SRelation;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

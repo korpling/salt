@@ -26,7 +26,7 @@ import de.hub.corpling.salt.saltCore.SNode;
  * @model
  * @generated
  */
-public interface STextualDS extends SSequentialDS, SNode {
+public interface STextualDS extends SSequentialDS {
 	/**
 	 * Returns the value of the '<em><b>SText</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,7 +38,7 @@ public interface STextualDS extends SSequentialDS, SNode {
 	 * @return the value of the '<em>SText</em>' attribute.
 	 * @see #setSText(String)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTextualDS_SText()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getSText();
@@ -66,7 +66,7 @@ public interface STextualDS extends SSequentialDS, SNode {
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTextualDS_SDocumentGraph()
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTextualDSs
-	 * @model opposite="sTextualDSs" transient="false"
+	 * @model opposite="sTextualDSs" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDocumentGraph getSDocumentGraph();

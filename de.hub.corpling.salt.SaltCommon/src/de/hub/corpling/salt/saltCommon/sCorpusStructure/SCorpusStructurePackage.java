@@ -71,13 +71,85 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_GRAPH = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCORPUS_GRAPH__NAME = SaltCorePackage.SGRAPH__NAME;
+	int SCORPUS_GRAPH__LABELS = SaltCorePackage.SGRAPH__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__ID = SaltCorePackage.SGRAPH__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__IDENTIFIER = SaltCorePackage.SGRAPH__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Index Mgr</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__INDEX_MGR = SaltCorePackage.SGRAPH__INDEX_MGR;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__NODES = SaltCorePackage.SGRAPH__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__EDGES = SaltCorePackage.SGRAPH__EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Num Of Nodes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__NUM_OF_NODES = SaltCorePackage.SGRAPH__NUM_OF_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Num Of Edges</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__NUM_OF_EDGES = SaltCorePackage.SGRAPH__NUM_OF_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__SNAME = SaltCorePackage.SGRAPH__SNAME;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -89,7 +161,7 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_GRAPH__SANNOTATIONS = SaltCorePackage.SGRAPH__SANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>SElement Id</b></em>' containment reference.
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -98,7 +170,43 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_GRAPH__SELEMENT_ID = SaltCorePackage.SGRAPH__SELEMENT_ID;
 
 	/**
-	 * The feature id for the '<em><b>SRelations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__SID = SaltCorePackage.SGRAPH__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__SELEMENT_PATH = SaltCorePackage.SGRAPH__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__SPROCESSING_ANNOTATIONS = SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__SFEATURES = SaltCorePackage.SGRAPH__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SRelations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -107,7 +215,7 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_GRAPH__SRELATIONS = SaltCorePackage.SGRAPH__SRELATIONS;
 
 	/**
-	 * The feature id for the '<em><b>SNodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>SNodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -180,6 +288,42 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SDOCUMENT = 1;
 
 	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__LABELS = SaltCorePackage.SNODE__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__ID = SaltCorePackage.SNODE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__IDENTIFIER = SaltCorePackage.SNODE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__GRAPH = SaltCorePackage.SNODE__GRAPH;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -189,16 +333,16 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SDOCUMENT__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SDOCUMENT__NAME = SaltCorePackage.SNODE__NAME;
+	int SDOCUMENT__SNAME = SaltCorePackage.SNODE__SNAME;
 
 	/**
-	 * The feature id for the '<em><b>SElement Id</b></em>' containment reference.
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -207,7 +351,43 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SDOCUMENT__SELEMENT_ID = SaltCorePackage.SNODE__SELEMENT_ID;
 
 	/**
-	 * The feature id for the '<em><b>SGraph</b></em>' container reference.
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__SID = SaltCorePackage.SNODE__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__SELEMENT_PATH = SaltCorePackage.SNODE__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -254,6 +434,42 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__LABELS = SaltCorePackage.SNODE__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__ID = SaltCorePackage.SNODE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__IDENTIFIER = SaltCorePackage.SNODE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__GRAPH = SaltCorePackage.SNODE__GRAPH;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -263,16 +479,16 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCORPUS__NAME = SaltCorePackage.SNODE__NAME;
+	int SCORPUS__SNAME = SaltCorePackage.SNODE__SNAME;
 
 	/**
-	 * The feature id for the '<em><b>SElement Id</b></em>' containment reference.
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -281,7 +497,43 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS__SELEMENT_ID = SaltCorePackage.SNODE__SELEMENT_ID;
 
 	/**
-	 * The feature id for the '<em><b>SGraph</b></em>' container reference.
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__SID = SaltCorePackage.SNODE__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__SELEMENT_PATH = SaltCorePackage.SNODE__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -318,6 +570,60 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_RELATION = 3;
 
 	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__LABELS = SaltCorePackage.SRELATION__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__ID = SaltCorePackage.SRELATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__IDENTIFIER = SaltCorePackage.SRELATION__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__GRAPH = SaltCorePackage.SRELATION__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__SOURCE = SaltCorePackage.SRELATION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -327,16 +633,16 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCORPUS_RELATION__NAME = SaltCorePackage.SRELATION__NAME;
+	int SCORPUS_RELATION__SNAME = SaltCorePackage.SRELATION__SNAME;
 
 	/**
-	 * The feature id for the '<em><b>SElement Id</b></em>' containment reference.
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -345,25 +651,61 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_RELATION__SELEMENT_ID = SaltCorePackage.SRELATION__SELEMENT_ID;
 
 	/**
-	 * The feature id for the '<em><b>Source SNode</b></em>' reference.
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCORPUS_RELATION__SOURCE_SNODE = SaltCorePackage.SRELATION__SOURCE_SNODE;
+	int SCORPUS_RELATION__SID = SaltCorePackage.SRELATION__SID;
 
 	/**
-	 * The feature id for the '<em><b>Target SNode</b></em>' reference.
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCORPUS_RELATION__TARGET_SNODE = SaltCorePackage.SRELATION__TARGET_SNODE;
+	int SCORPUS_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
 
 	/**
-	 * The feature id for the '<em><b>SGraph</b></em>' container reference.
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SSource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__SSOURCE = SaltCorePackage.SRELATION__SSOURCE;
+
+	/**
+	 * The feature id for the '<em><b>STarget</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__STARGET = SaltCorePackage.SRELATION__STARGET;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -418,6 +760,60 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_DOCUMENT_RELATION = 4;
 
 	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__LABELS = SaltCorePackage.SRELATION__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__ID = SaltCorePackage.SRELATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__IDENTIFIER = SaltCorePackage.SRELATION__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__GRAPH = SaltCorePackage.SRELATION__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__SOURCE = SaltCorePackage.SRELATION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -427,16 +823,16 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_DOCUMENT_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCORPUS_DOCUMENT_RELATION__NAME = SaltCorePackage.SRELATION__NAME;
+	int SCORPUS_DOCUMENT_RELATION__SNAME = SaltCorePackage.SRELATION__SNAME;
 
 	/**
-	 * The feature id for the '<em><b>SElement Id</b></em>' containment reference.
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -445,25 +841,61 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_DOCUMENT_RELATION__SELEMENT_ID = SaltCorePackage.SRELATION__SELEMENT_ID;
 
 	/**
-	 * The feature id for the '<em><b>Source SNode</b></em>' reference.
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCORPUS_DOCUMENT_RELATION__SOURCE_SNODE = SaltCorePackage.SRELATION__SOURCE_SNODE;
+	int SCORPUS_DOCUMENT_RELATION__SID = SaltCorePackage.SRELATION__SID;
 
 	/**
-	 * The feature id for the '<em><b>Target SNode</b></em>' reference.
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCORPUS_DOCUMENT_RELATION__TARGET_SNODE = SaltCorePackage.SRELATION__TARGET_SNODE;
+	int SCORPUS_DOCUMENT_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
 
 	/**
-	 * The feature id for the '<em><b>SGraph</b></em>' container reference.
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SSource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__SSOURCE = SaltCorePackage.SRELATION__SSOURCE;
+
+	/**
+	 * The feature id for the '<em><b>STarget</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__STARGET = SaltCorePackage.SRELATION__STARGET;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

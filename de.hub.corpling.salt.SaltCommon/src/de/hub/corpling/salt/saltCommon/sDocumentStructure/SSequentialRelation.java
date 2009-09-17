@@ -6,6 +6,8 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure;
 
+import de.hub.corpling.salt.saltCore.SRelation;
+import de.hub.corpling.salt.saltCore.SNode;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -25,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SSequentialRelation extends EObject {
+public interface SSequentialRelation extends SRelation {
 	/**
 	 * Returns the value of the '<em><b>SStart</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -37,7 +39,7 @@ public interface SSequentialRelation extends EObject {
 	 * @return the value of the '<em>SStart</em>' attribute.
 	 * @see #setSStart(Integer)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSequentialRelation_SStart()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	Integer getSStart();
@@ -63,7 +65,7 @@ public interface SSequentialRelation extends EObject {
 	 * @return the value of the '<em>SEnd</em>' attribute.
 	 * @see #setSEnd(Integer)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSequentialRelation_SEnd()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	Integer getSEnd();

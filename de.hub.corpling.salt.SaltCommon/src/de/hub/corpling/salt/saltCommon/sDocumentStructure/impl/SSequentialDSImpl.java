@@ -6,15 +6,14 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS;
-
-import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
+import de.hub.corpling.salt.saltCommon.SaltCommonPackage;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS;
+import de.hub.corpling.salt.saltCore.SFeature;
+import de.hub.corpling.salt.saltCore.impl.SNodeImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +28,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class SSequentialDSImpl extends EObjectImpl implements SSequentialDS {
+public class SSequentialDSImpl extends SNodeImpl implements SSequentialDS {
 	/**
 	 * The default value of the '{@link #getSData() <em>SData</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -39,16 +38,6 @@ public class SSequentialDSImpl extends EObjectImpl implements SSequentialDS {
 	 * @ordered
 	 */
 	protected static final Object SDATA_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSData() <em>SData</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSData()
-	 * @generated
-	 * @ordered
-	 */
-	protected Object sData = SDATA_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,25 +58,40 @@ public class SSequentialDSImpl extends EObjectImpl implements SSequentialDS {
 		return SDocumentStructurePackage.Literals.SSEQUENTIAL_DS;
 	}
 
+	public String KW_SDATA= "SDATA";
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public Object getSData() {
-		return sData;
+	public Object getSData() 
+	{
+		Object retVal= null;
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SDATA;
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature!= null)
+		{
+			retVal= sFeature.getSValue();
+		}
+		return(retVal);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setSData(Object newSData) {
-		Object oldSData = sData;
-		sData = newSData;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SDocumentStructurePackage.SSEQUENTIAL_DS__SDATA, oldSData, sData));
+	public void setSData(Object newSData) 
+	{
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SDATA; 
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature== null)
+		{//create a new sFeature
+			sFeature= SaltCommonFactory.eINSTANCE.createSFeature();
+			sFeature.setSNS(SaltCommonPackage.eNS_PREFIX);
+			sFeature.setSName(KW_SDATA);
+			this.addSFeature(sFeature);
+		}	
+		sFeature.setSValue(newSData);
 	}
 
 	/**
@@ -143,25 +147,9 @@ public class SSequentialDSImpl extends EObjectImpl implements SSequentialDS {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SDocumentStructurePackage.SSEQUENTIAL_DS__SDATA:
-				return SDATA_EDEFAULT == null ? sData != null : !SDATA_EDEFAULT.equals(sData);
+				return SDATA_EDEFAULT == null ? getSData() != null : !SDATA_EDEFAULT.equals(getSData());
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sData: ");
-		result.append(sData);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SSequentialDSImpl

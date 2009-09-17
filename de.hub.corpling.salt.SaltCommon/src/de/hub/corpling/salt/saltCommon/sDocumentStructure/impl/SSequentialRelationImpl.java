@@ -6,15 +6,16 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
+import de.hub.corpling.salt.saltCommon.SaltCommonPackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialRelation;
-
-import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+import de.hub.corpling.salt.saltCore.SFeature;
+import de.hub.corpling.salt.saltCore.impl.SRelationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class SSequentialRelationImpl extends EObjectImpl implements SSequentialRelation {
+public class SSequentialRelationImpl extends SRelationImpl implements SSequentialRelation {
 	/**
 	 * The default value of the '{@link #getSStart() <em>SStart</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -42,16 +43,6 @@ public class SSequentialRelationImpl extends EObjectImpl implements SSequentialR
 	protected static final Integer SSTART_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSStart() <em>SStart</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSStart()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer sStart = SSTART_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getSEnd() <em>SEnd</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,16 +51,6 @@ public class SSequentialRelationImpl extends EObjectImpl implements SSequentialR
 	 * @ordered
 	 */
 	protected static final Integer SEND_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSEnd() <em>SEnd</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSEnd()
-	 * @generated
-	 * @ordered
-	 */
-	protected Integer sEnd = SEND_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,46 +71,74 @@ public class SSequentialRelationImpl extends EObjectImpl implements SSequentialR
 		return SDocumentStructurePackage.Literals.SSEQUENTIAL_RELATION;
 	}
 
+	public String KW_SSTART= "SSTART";
+	public String KW_SEND= "SEND";
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public Integer getSStart() {
-		return sStart;
+	public Integer getSStart() 
+	{
+		Integer retVal= null;
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SSTART;
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature!= null)
+		{
+			retVal= Integer.decode(sFeature.getSValue().toString());
+		}
+		return(retVal);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setSStart(Integer newSStart) {
-		Integer oldSStart = sStart;
-		sStart = newSStart;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SDocumentStructurePackage.SSEQUENTIAL_RELATION__SSTART, oldSStart, sStart));
+	public void setSStart(Integer newSStart) 
+	{
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SSTART; 
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature== null)
+		{//create a new sFeature
+			sFeature= SaltCommonFactory.eINSTANCE.createSFeature();
+			sFeature.setSNS(SaltCommonPackage.eNS_PREFIX);
+			sFeature.setSName(KW_SSTART);
+			this.addSFeature(sFeature);
+		}	
+		sFeature.setSValue(newSStart);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public Integer getSEnd() {
-		return sEnd;
+	public Integer getSEnd() 
+	{
+		Integer retVal= null;
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SEND;
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature!= null)
+		{
+			retVal= Integer.decode(sFeature.getSValue().toString());
+		}
+		return(retVal);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setSEnd(Integer newSEnd) {
-		Integer oldSEnd = sEnd;
-		sEnd = newSEnd;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SDocumentStructurePackage.SSEQUENTIAL_RELATION__SEND, oldSEnd, sEnd));
+	public void setSEnd(Integer newSEnd) 
+	{
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SEND; 
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature== null)
+		{//create a new sFeature
+			sFeature= SaltCommonFactory.eINSTANCE.createSFeature();
+			sFeature.setSNS(SaltCommonPackage.eNS_PREFIX);
+			sFeature.setSName(KW_SEND);
+			this.addSFeature(sFeature);
+		}	
+		sFeature.setSValue(newSEnd);
 	}
 
 	/**
@@ -193,29 +202,11 @@ public class SSequentialRelationImpl extends EObjectImpl implements SSequentialR
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SDocumentStructurePackage.SSEQUENTIAL_RELATION__SSTART:
-				return SSTART_EDEFAULT == null ? sStart != null : !SSTART_EDEFAULT.equals(sStart);
+				return SSTART_EDEFAULT == null ? getSStart() != null : !SSTART_EDEFAULT.equals(getSStart());
 			case SDocumentStructurePackage.SSEQUENTIAL_RELATION__SEND:
-				return SEND_EDEFAULT == null ? sEnd != null : !SEND_EDEFAULT.equals(sEnd);
+				return SEND_EDEFAULT == null ? getSEnd() != null : !SEND_EDEFAULT.equals(getSEnd());
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sStart: ");
-		result.append(sStart);
-		result.append(", sEnd: ");
-		result.append(sEnd);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SSequentialRelationImpl

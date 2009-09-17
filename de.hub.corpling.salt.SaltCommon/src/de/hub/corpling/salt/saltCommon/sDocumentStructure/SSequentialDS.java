@@ -6,6 +6,7 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure;
 
+import de.hub.corpling.salt.saltCore.SNode;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -24,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SSequentialDS extends EObject {
+public interface SSequentialDS extends SNode {
 	/**
 	 * Returns the value of the '<em><b>SData</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,7 +37,7 @@ public interface SSequentialDS extends EObject {
 	 * @return the value of the '<em>SData</em>' attribute.
 	 * @see #setSData(Object)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSequentialDS_SData()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	Object getSData();

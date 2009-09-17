@@ -21,14 +21,19 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
 import de.hub.corpling.salt.saltCore.SElementId;
+import de.hub.corpling.salt.saltCore.SFeaturableElement;
+import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 import de.hub.corpling.salt.saltCore.SNode;
+import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
+import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SRelation;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
@@ -155,6 +160,28 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	}
 
 	@Override
+	public SProcessingAnnotatableElement createSProcessingAnnotatableElement() 
+	{
+		return(this.saltCoreFactory.createSProcessingAnnotatableElement());
+	}
+
+	@Override
+	public SProcessingAnnotation createSProcessingAnnotation() 
+	{
+		return(this.saltCoreFactory.createSProcessingAnnotation());
+	}
+	@Override
+	public SFeaturableElement createSFeaturableElement() 
+	{
+		return(this.saltCoreFactory.createSFeaturableElement());
+	}
+
+	@Override
+	public SFeature createSFeature() 
+	{
+		return(this.saltCoreFactory.createSFeature());
+	}
+	@Override
 	public SElementId createSElementId() 
 	{
 		return(this.saltCoreFactory.createSElementId());
@@ -274,13 +301,16 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	}
 	
 	@Override
+	public STimeline createSTimeline() {
+		return(this.sDocumentStructureFactory.createSTimeline());
+	}
+	
+	@Override
 	public SDocumentStructurePackage getSDocumentStructurePackage() {
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
+	
 // ===================================== end: SDocumentStructureFactory
 
-	
-
-	
 
 } //SaltCommonFactoryImpl

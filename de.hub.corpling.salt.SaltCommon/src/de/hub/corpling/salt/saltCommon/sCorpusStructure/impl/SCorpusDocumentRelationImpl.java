@@ -6,23 +6,19 @@
  */
 package de.hub.corpling.salt.saltCommon.sCorpusStructure.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusDocumentRelation;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument;
-
 import de.hub.corpling.salt.saltCore.impl.SRelationImpl;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->

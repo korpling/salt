@@ -6,29 +6,34 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
-import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
-import de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument;
-
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
-
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
-import de.hub.corpling.salt.saltCore.impl.SGraphImpl;
-
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import de.hub.corpling.graph.Edge;
+import de.hub.corpling.graph.Node;
+import de.hub.corpling.graph.index.ComplexIndex;
+import de.hub.corpling.graph.index.Index;
+import de.hub.corpling.graph.index.IndexFactory;
+import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
+import de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
+import de.hub.corpling.salt.saltCore.SNode;
+import de.hub.corpling.salt.saltCore.SRelation;
+import de.hub.corpling.salt.saltCore.impl.SGraphImpl;
+import de.hub.corpling.salt.saltExceptions.SaltException;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,12 +46,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTextualDSs <em>STextual DSs</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTextualRelations <em>STextual Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTokens <em>STokens</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTimeline <em>STimeline</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
+	/**
+	 * name of index for node-types
+	 */
+	protected static final String IDX_SNODETYPE=	"idx_sNodeType";
+	/**
+	 * name of index for relation-types
+	 */
+	protected static final String IDX_SRELATIONTYPE=	"idx_sRelationType";
+	
 	/**
 	 * The cached value of the '{@link #getSDocument() <em>SDocument</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -58,41 +73,31 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	protected SDocument sDocument;
 
 	/**
-	 * The cached value of the '{@link #getSTextualDSs() <em>STextual DSs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSTextualDSs()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<STextualDS> sTextualDSs;
-	/**
-	 * The cached value of the '{@link #getSTextualRelations() <em>STextual Relations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSTextualRelations()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<STextualRelation> sTextualRelations;
-
-	/**
-	 * The cached value of the '{@link #getSTokens() <em>STokens</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSTokens()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<SToken> sTokens;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected SDocumentGraphImpl() {
 		super();
+		this.init();
+	}
+	
+	private void init()
+	{
+		{//creating indexes
+			Index index= null;
+			
+			{//creating node-type index
+				index= IndexFactory.eINSTANCE.createComplexIndex();
+				index.setId(IDX_SNODETYPE);
+				this.getIndexMgr().addIndex(index);
+			}
+			
+			{//creating relation-type index
+				index= IndexFactory.eINSTANCE.createComplexIndex();
+				index.setId(IDX_SRELATIONTYPE);
+				this.getIndexMgr().addIndex(index);
+			}
+		}
 	}
 
 	/**
@@ -105,6 +110,55 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		return SDocumentStructurePackage.Literals.SDOCUMENT_GRAPH;
 	}
 
+// ============================ start: handling relations
+	/**
+	 * Calls the super method an puts the given relation into a relation type index.
+	 * an exception will be thrown.
+	 * @param edge to add
+	 */
+	protected void basicAddEdge(Edge edge)
+	{
+		if (!(edge instanceof SRelation))
+			throw new SaltException("Cannot insert an edge, which is not a SRelation object: "+ edge);
+		super.basicAddEdge(edge);
+		String slotId= null;
+		{//compute slot id
+			if (edge instanceof STextualRelation)
+				slotId= STextualRelation.class.getName();
+			else
+				slotId= (String) edge.getClass().getName();
+		}
+		
+		this.getIndexMgr().getIndex(IDX_SRELATIONTYPE).addElement(slotId, edge);
+	}
+// ============================ end: handling relations
+// ============================ start: handling nodes
+	/**
+	 * Calls the super method an puts the given node into a node type index.
+	 * an exception will be thrown.
+	 * @param node to add
+	 */
+	protected void basicAddNode(Node node)
+	{
+		if (!(node instanceof SNode))
+			throw new SaltException("Cannot insert a node, which is not a SNode object: "+ node);
+		super.basicAddNode(node);
+		
+		String slotId= null;
+		{//compute slot id
+			if (node instanceof SToken)
+				slotId= SToken.class.getName();
+			else if (node instanceof STextualDS)
+				slotId= STextualDS.class.getName();
+			else if (node instanceof STimeline)
+				slotId= STimeline.class.getName();
+			else
+				slotId= (String) node.getClass().getName();
+		}
+		
+		this.getIndexMgr().getIndex(IDX_SNODETYPE).addElement(slotId, node);
+	}
+// ============================ end: handling nodes
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -168,45 +222,101 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<STextualDS> getSTextualDSs() {
-		if (sTextualDSs == null) {
-			sTextualDSs = new EObjectContainmentWithInverseEList<STextualDS>(STextualDS.class, this, SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_DSS, SDocumentStructurePackage.STEXTUAL_DS__SDOCUMENT_GRAPH);
-		}
-		return sTextualDSs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<STextualRelation> getSTextualRelations() {
-		if (sTextualRelations == null) {
-			sTextualRelations = new EObjectContainmentWithInverseEList<STextualRelation>(STextualRelation.class, this, SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_RELATIONS, SDocumentStructurePackage.STEXTUAL_RELATION__SDOCUMENT_GRAPH);
-		}
-		return sTextualRelations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<SToken> getSTokens() {
-		if (sTokens == null) {
-			sTokens = new EObjectContainmentWithInverseEList<SToken>(SToken.class, this, SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS, SDocumentStructurePackage.STOKEN__SDOCUMENT_GRAPH);
-		}
-		return sTokens;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
+	public EList<STextualDS> getSTextualDSs() 
+	{
+		EList<STextualDS> retVal= null;
+		EList<Node> nodes= (EList<Node>)(EList<? extends Node>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(STextualDS.class.getName());
+		if (nodes!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualDSs(),
+					nodes.size(), nodes.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualDSs(), 0, (Object[]) null);
+		
+		return(retVal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<STextualRelation> getSTextualRelations() 
+	{
+		EList<STextualRelation> retVal= null;
+		EList<Node> nodes= (EList<Node>)(EList<? extends Node>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(STextualRelation.class.getName());
+		
+		if (nodes!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations(),
+					nodes.size(), nodes.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations(), 0, (Object[]) null);
+		
+		return(retVal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SToken> getSTokens() 
+	{
+		EList<SToken> retVal= null;
+		EList<Node> nodes= (EList<Node>)(EList<? extends Node>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SToken.class.getName());
+		if (nodes!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens(),
+					nodes.size(), nodes.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens(), 0, (Object[]) null);
+		return(retVal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public STimeline getSTimeline() {
+		STimeline sTimeline = basicGetSTimeline();
+		return sTimeline != null && sTimeline.eIsProxy() ? (STimeline)eResolveProxy((InternalEObject)sTimeline) : sTimeline;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public STimeline basicGetSTimeline() 
+	{
+		STimeline retVal= null;
+		EList<Node> nodes= (EList<Node>)(EList<? extends Node>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(STimeline.class.getName());
+		if (	(nodes!= null)&&
+				(nodes.size()> 0))
+		{	
+			retVal= (STimeline)nodes.get(0);
+		}
+		return(retVal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void setSTimeline(STimeline newSTimeline) 
+	{
+		this.addSNode(newSTimeline);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -214,12 +324,6 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				if (sDocument != null)
 					msgs = ((InternalEObject)sDocument).eInverseRemove(this, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, SDocument.class, msgs);
 				return basicSetSDocument((SDocument)otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_DSS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSTextualDSs()).basicAdd(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_RELATIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSTextualRelations()).basicAdd(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSTokens()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -261,6 +365,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return getSTextualRelations();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS:
 				return getSTokens();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE:
+				if (resolve) return getSTimeline();
+				return basicGetSTimeline();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -289,6 +396,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				getSTokens().clear();
 				getSTokens().addAll((Collection<? extends SToken>)newValue);
 				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE:
+				setSTimeline((STimeline)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -313,6 +423,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS:
 				getSTokens().clear();
 				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE:
+				setSTimeline((STimeline)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -328,11 +441,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT:
 				return sDocument != null;
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_DSS:
-				return sTextualDSs != null && !sTextualDSs.isEmpty();
+				return !getSTextualDSs().isEmpty();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_RELATIONS:
-				return sTextualRelations != null && !sTextualRelations.isEmpty();
+				return !getSTextualRelations().isEmpty();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS:
-				return sTokens != null && !sTokens.isEmpty();
+				return !getSTokens().isEmpty();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE:
+				return basicGetSTimeline() != null;
 		}
 		return super.eIsSet(featureID);
 	}

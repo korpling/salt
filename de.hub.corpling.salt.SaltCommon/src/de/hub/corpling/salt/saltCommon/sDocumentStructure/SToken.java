@@ -7,9 +7,6 @@
 package de.hub.corpling.salt.saltCommon.sDocumentStructure;
 
 import de.hub.corpling.salt.saltCore.SNode;
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +38,7 @@ public interface SToken extends SNode {
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSToken_SDocumentGraph()
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTokens
-	 * @model opposite="sTokens" transient="false"
+	 * @model opposite="sTokens" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDocumentGraph getSDocumentGraph();

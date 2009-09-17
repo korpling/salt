@@ -66,6 +66,7 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 			case SDocumentStructurePackage.STEXTUAL_RELATION: return createSTextualRelation();
 			case SDocumentStructurePackage.SSEQUENTIAL_RELATION: return createSSequentialRelation();
 			case SDocumentStructurePackage.SSEQUENTIAL_DS: return createSSequentialDS();
+			case SDocumentStructurePackage.STIMELINE: return createSTimeline();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,6 +130,16 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	public SSequentialDS createSSequentialDS() {
 		SSequentialDSImpl sSequentialDS = new SSequentialDSImpl();
 		return sSequentialDS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public STimeline createSTimeline() {
+		STimelineImpl sTimeline = new STimelineImpl();
+		return sTimeline;
 	}
 
 	/**

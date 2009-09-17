@@ -6,14 +6,22 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.util;
 
+import de.hub.corpling.graph.Edge;
+import de.hub.corpling.graph.Graph;
+import de.hub.corpling.graph.IdentifiableElement;
+import de.hub.corpling.graph.LabelableElement;
+import de.hub.corpling.graph.Node;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.*;
 
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
+import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 
 import de.hub.corpling.salt.saltCore.SNode;
+import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
+import de.hub.corpling.salt.saltCore.SRelation;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -102,6 +110,22 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 				return createSSequentialDSAdapter();
 			}
 			@Override
+			public Adapter caseSTimeline(STimeline object) {
+				return createSTimelineAdapter();
+			}
+			@Override
+			public Adapter caseLabelableElement(LabelableElement object) {
+				return createLabelableElementAdapter();
+			}
+			@Override
+			public Adapter caseIdentifiableElement(IdentifiableElement object) {
+				return createIdentifiableElementAdapter();
+			}
+			@Override
+			public Adapter caseGraph(Graph object) {
+				return createGraphAdapter();
+			}
+			@Override
 			public Adapter caseSNamedElement(SNamedElement object) {
 				return createSNamedElementAdapter();
 			}
@@ -114,12 +138,32 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 				return createSIdentifiableElementAdapter();
 			}
 			@Override
+			public Adapter caseSProcessingAnnotatableElement(SProcessingAnnotatableElement object) {
+				return createSProcessingAnnotatableElementAdapter();
+			}
+			@Override
+			public Adapter caseSFeaturableElement(SFeaturableElement object) {
+				return createSFeaturableElementAdapter();
+			}
+			@Override
 			public Adapter caseSGraph(SGraph object) {
 				return createSGraphAdapter();
 			}
 			@Override
+			public Adapter caseNode(Node object) {
+				return createNodeAdapter();
+			}
+			@Override
 			public Adapter caseSNode(SNode object) {
 				return createSNodeAdapter();
+			}
+			@Override
+			public Adapter caseEdge(Edge object) {
+				return createEdgeAdapter();
+			}
+			@Override
+			public Adapter caseSRelation(SRelation object) {
+				return createSRelationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -226,6 +270,62 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline <em>STimeline</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline
+	 * @generated
+	 */
+	public Adapter createSTimelineAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.LabelableElement <em>Labelable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.graph.LabelableElement
+	 * @generated
+	 */
+	public Adapter createLabelableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.IdentifiableElement <em>Identifiable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.graph.IdentifiableElement
+	 * @generated
+	 */
+	public Adapter createIdentifiableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.Graph <em>Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.graph.Graph
+	 * @generated
+	 */
+	public Adapter createGraphAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SNamedElement <em>SNamed Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -268,6 +368,34 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement <em>SProcessing Annotatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement
+	 * @generated
+	 */
+	public Adapter createSProcessingAnnotatableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SFeaturableElement <em>SFeaturable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SFeaturableElement
+	 * @generated
+	 */
+	public Adapter createSFeaturableElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SGraph <em>SGraph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -282,6 +410,20 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.Node <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.graph.Node
+	 * @generated
+	 */
+	public Adapter createNodeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SNode <em>SNode</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -292,6 +434,34 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.Edge <em>Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.graph.Edge
+	 * @generated
+	 */
+	public Adapter createEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SRelation <em>SRelation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SRelation
+	 * @generated
+	 */
+	public Adapter createSRelationAdapter() {
 		return null;
 	}
 

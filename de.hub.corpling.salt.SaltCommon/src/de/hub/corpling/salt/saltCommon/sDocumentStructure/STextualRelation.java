@@ -27,7 +27,7 @@ import de.hub.corpling.salt.saltCore.SNode;
  * @model
  * @generated
  */
-public interface STextualRelation extends SSequentialRelation, SNode {
+public interface STextualRelation extends SSequentialRelation {
 	/**
 	 * Returns the value of the '<em><b>SToken</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public interface STextualRelation extends SSequentialRelation, SNode {
 	 * @return the value of the '<em>SToken</em>' reference.
 	 * @see #setSToken(SToken)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTextualRelation_SToken()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SToken getSToken();
@@ -65,7 +65,7 @@ public interface STextualRelation extends SSequentialRelation, SNode {
 	 * @return the value of the '<em>STextual DS</em>' reference.
 	 * @see #setSTextualDS(STextualDS)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTextualRelation_STextualDS()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	STextualDS getSTextualDS();
@@ -93,7 +93,7 @@ public interface STextualRelation extends SSequentialRelation, SNode {
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTextualRelation_SDocumentGraph()
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTextualRelations
-	 * @model opposite="sTextualRelations" transient="false"
+	 * @model opposite="sTextualRelations" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDocumentGraph getSDocumentGraph();
