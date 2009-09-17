@@ -17,6 +17,12 @@ import junit.textui.TestRunner;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>SSequential DS</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS#getSData() <em>SData</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class SSequentialDSTest extends TestCase {
@@ -88,6 +94,34 @@ public class SSequentialDSTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS#getSText() <em>SText</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS#getSText()
+	 */
+	public void testGetSData() 
+	{
+		Object data= new Object();
+		this.getFixture().setSData(data);
+		assertEquals(data, this.getFixture().getSData());
+		
+		String text= "text";
+		this.getFixture().setSData(text);
+		assertEquals(text, this.getFixture().getSData());
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS#setSText(java.lang.String) <em>SText</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS#setSText(java.lang.String)
+	 */
+	public void testSetSData() 
+	{
+		this.testGetSData();
 	}
 
 } //SSequentialDSTest

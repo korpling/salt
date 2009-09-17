@@ -36,6 +36,10 @@ public class SCorpusStructureTests extends TestSuite {
 	public static Test suite() {
 		TestSuite suite = new SCorpusStructureTests("sCorpusStructure Tests");
 		suite.addTestSuite(SCorpusGraphTest.class);
+		suite.addTestSuite(SDocumentTest.class);
+		suite.addTestSuite(SCorpusTest.class);
+		suite.addTestSuite(SCorpusRelationTest.class);
+		suite.addTestSuite(SCorpusDocumentRelationTest.class);
 		return suite;
 	}
 

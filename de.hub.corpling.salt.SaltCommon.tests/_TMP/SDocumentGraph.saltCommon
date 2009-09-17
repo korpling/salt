@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sDocumentStructure:SDocumentGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sDocumentStructure="sDocumentStructure" xmlns:saltCore="saltCore">
+  <labels xsi:type="saltCore:SAnnotation" namespace="ns1" name="annoName1" valueString="annoValue1"/>
+  <labels xsi:type="saltCore:SAnnotation" namespace="ns2" name="annoName2" valueString="annoValue2"/>
+  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName1" valueString="pAnnoValue1"/>
+  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName2" valueString="pAnnoValue2"/>
+  <identifier id="salt:/graph1"/>
+  <nodes xsi:type="sDocumentStructure:STextualDS">
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SDATA" valueString="This is text1."/>
+    <identifier id="text1"/>
+  </nodes>
+  <nodes xsi:type="sDocumentStructure:STextualDS">
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SDATA" valueString="This is text2."/>
+    <identifier id="text2"/>
+  </nodes>
+  <nodes xsi:type="sDocumentStructure:SToken">
+    <labels xsi:type="saltCore:SAnnotation" name="pos" valueString="N"/>
+    <identifier id="tok1"/>
+  </nodes>
+  <nodes xsi:type="sDocumentStructure:SToken">
+    <labels xsi:type="saltCore:SAnnotation" name="pos" valueString="N"/>
+    <identifier id="tok2"/>
+  </nodes>
+  <nodes xsi:type="sDocumentStructure:SToken">
+    <identifier id="tok3"/>
+  </nodes>
+  <nodes xsi:type="sDocumentStructure:SToken">
+    <identifier id="tok4"/>
+  </nodes>
+  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.0" target="//@nodes.2">
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
+    <labels xsi:type="saltCore:SAnnotation" name="edgeType" valueString="k.a."/>
+    <identifier id="textRel1"/>
+  </edges>
+  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.0" target="//@nodes.3">
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
+    <identifier id="textRel2"/>
+  </edges>
+  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.1" target="//@nodes.4">
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
+    <identifier id="textRel3"/>
+  </edges>
+  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.1" target="//@nodes.5">
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
+    <identifier id="textRel4"/>
+  </edges>
+</sDocumentStructure:SDocumentGraph>

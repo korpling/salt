@@ -8,6 +8,8 @@ package de.hub.corpling.salt.saltCommon.tests;
 
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.tests.SCorpusStructureTests;
 
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.tests.SDocumentStructureTests;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.tests.storing.SDocumentStructureStoringTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -38,6 +40,7 @@ public class SaltCommonAllTests extends TestSuite {
 	public static Test suite() {
 		TestSuite suite = new SaltCommonAllTests("SaltCommon Tests");
 		suite.addTest(SCorpusStructureTests.suite());
+		suite.addTest(SDocumentStructureTests.suite());
 		return suite;
 	}
 

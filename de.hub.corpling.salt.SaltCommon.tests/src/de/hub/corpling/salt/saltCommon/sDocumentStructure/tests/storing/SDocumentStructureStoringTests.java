@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package de.hub.corpling.salt.saltCommon.sDocumentStructure.tests;
+package de.hub.corpling.salt.saltCommon.sDocumentStructure.tests.storing;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -17,7 +17,7 @@ import junit.textui.TestRunner;
  * <!-- end-user-doc -->
  * @generated
  */
-public class SDocumentStructureTests extends TestSuite {
+public class SDocumentStructureStoringTests extends TestSuite {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -34,14 +34,9 @@ public class SDocumentStructureTests extends TestSuite {
 	 * @generated
 	 */
 	public static Test suite() {
-		TestSuite suite = new SDocumentStructureTests("sDocumentStructure Tests");
-		suite.addTestSuite(SDocumentGraphTest.class);
-		suite.addTestSuite(STextualDSTest.class);
-		suite.addTestSuite(STokenTest.class);
-		suite.addTestSuite(STextualRelationTest.class);
-		suite.addTestSuite(SSequentialRelationTest.class);
-		suite.addTestSuite(SSequentialDSTest.class);
-		suite.addTestSuite(STimelineTest.class);
+		TestSuite suite = new SDocumentStructureStoringTests("sDocumentStructure Tests");
+		suite.addTestSuite(SDocumentGraphStoringTest.class);
+		suite.addTestSuite(STimelineStoringTest.class);
 		return suite;
 	}
 
@@ -50,7 +45,7 @@ public class SDocumentStructureTests extends TestSuite {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SDocumentStructureTests(String name) {
+	public SDocumentStructureStoringTests(String name) {
 		super(name);
 	}
 
