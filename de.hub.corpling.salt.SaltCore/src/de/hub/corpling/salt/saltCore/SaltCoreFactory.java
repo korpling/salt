@@ -116,6 +116,24 @@ public interface SaltCoreFactory extends EFactory {
 	SElementId createSElementId();
 
 	/**
+	 * Returns a new object of class '<em>SFeature</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SFeature</em>'.
+	 * @generated
+	 */
+	SFeature createSFeature();
+
+	/**
+	 * Returns a new object of class '<em>SFeaturable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SFeaturable Element</em>'.
+	 * @generated
+	 */
+	SFeaturableElement createSFeaturableElement();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -73,6 +73,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 			case SaltCorePackage.SPROCESSING_ANNOTATION: return createSProcessingAnnotation();
 			case SaltCorePackage.SPROCESSING_ANNOTATABLE_ELEMENT: return createSProcessingAnnotatableElement();
 			case SaltCorePackage.SELEMENT_ID: return createSElementId();
+			case SaltCorePackage.SFEATURE: return createSFeature();
+			case SaltCorePackage.SFEATURABLE_ELEMENT: return createSFeaturableElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -206,6 +208,26 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	public SElementId createSElementId() {
 		SElementIdImpl sElementId = new SElementIdImpl();
 		return sElementId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SFeature createSFeature() {
+		SFeatureImpl sFeature = new SFeatureImpl();
+		return sFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SFeaturableElement createSFeaturableElement() {
+		SFeaturableElementImpl sFeaturableElement = new SFeaturableElementImpl();
+		return sFeaturableElement;
 	}
 
 	/**

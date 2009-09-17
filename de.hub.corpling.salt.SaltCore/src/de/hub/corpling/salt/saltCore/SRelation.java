@@ -26,7 +26,7 @@ import de.hub.corpling.graph.Edge;
  * @model
  * @generated
  */
-public interface SRelation extends Edge, SAnnotatableElement, SNamedElement, SIdentifiableElement, SProcessingAnnotatableElement {
+public interface SRelation extends Edge, SAnnotatableElement, SNamedElement, SIdentifiableElement, SProcessingAnnotatableElement, SFeaturableElement {
 	/**
 	 * Returns the value of the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->

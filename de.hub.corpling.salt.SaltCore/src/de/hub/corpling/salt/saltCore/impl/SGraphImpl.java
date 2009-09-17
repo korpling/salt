@@ -24,6 +24,8 @@ import de.hub.corpling.graph.impl.GraphImpl;
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
 import de.hub.corpling.salt.saltCore.SElementId;
+import de.hub.corpling.salt.saltCore.SFeaturableElement;
+import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -33,6 +35,7 @@ import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SRelation;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
 import de.hub.corpling.salt.saltCore.accessors.SAnnotatableElementAccessor;
+import de.hub.corpling.salt.saltCore.accessors.SFeaturableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SIdentifiableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAccessor;
 import de.hub.corpling.salt.saltExceptions.SaltException;
@@ -50,6 +53,7 @@ import de.hub.corpling.salt.saltExceptions.SaltException;
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSId <em>SId</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSRelations <em>SRelations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSNodes <em>SNodes</em>}</li>
  * </ul>
@@ -112,6 +116,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		this.sAnnoAccessor= new SAnnotatableElementAccessor();
 		this.sProcAnnoAccessor= new SProcessingAnnotatableElementAccessor();
 		this.sIdentAccessor= new SIdentifiableElementAccessor();
+		this.sFeatAccessor= new SFeaturableElementAccessor();
 	}
 
 	/**
@@ -308,6 +313,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		retVal= (SRelation) edge;
 		return(retVal);
 	}
+
 //=================== end: handling SRelation
 //=================== start: handling SIdentifiableElement	
 	/**
@@ -444,6 +450,40 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
 	}
 //=================== end: handling SProcessingAnnotatableElement
+//=================== start: handling SFeaturableElement
+	/**
+	 * Delegatee for SFeaturableElementAccessor
+	 */
+	private SFeaturableElementAccessor sFeatAccessor= null;
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public EList<SFeature> getSFeatures() 
+	{
+		return(this.sFeatAccessor.getSFeatures(this));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addSFeature(SFeature sFeature) 
+	{
+		this.sFeatAccessor.addSFeature(this, sFeature);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SFeature getSFeature(String sFeatureId) 
+	{
+		return(this.sFeatAccessor.getSFeature(this, sFeatureId));
+	}
+//=================== end: handling SFeaturableElement	
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -456,6 +496,8 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return ((InternalEList<?>)getSAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS:
 				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -481,6 +523,8 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return getSElementPath();
 			case SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS:
 				return getSProcessingAnnotations();
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				return getSFeatures();
 			case SaltCorePackage.SGRAPH__SRELATIONS:
 				return getSRelations();
 			case SaltCorePackage.SGRAPH__SNODES:
@@ -514,6 +558,10 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 			case SaltCorePackage.SGRAPH__SELEMENT_PATH:
 				setSElementPath((URI)newValue);
 				return;
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				getSFeatures().clear();
+				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -541,6 +589,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 			case SaltCorePackage.SGRAPH__SELEMENT_PATH:
 				setSElementPath(SELEMENT_PATH_EDEFAULT);
 				return;
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				getSFeatures().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -565,6 +616,8 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return SELEMENT_PATH_EDEFAULT == null ? getSElementPath() != null : !SELEMENT_PATH_EDEFAULT.equals(getSElementPath());
 			case SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS:
 				return !getSProcessingAnnotations().isEmpty();
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SGRAPH__SRELATIONS:
 				return !getSRelations().isEmpty();
 			case SaltCorePackage.SGRAPH__SNODES:
@@ -606,6 +659,12 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				default: return -1;
 			}
 		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (derivedFeatureID) {
+				case SaltCorePackage.SGRAPH__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -639,6 +698,12 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		if (baseClass == SProcessingAnnotatableElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SPROCESSING_ANNOTATABLE_ELEMENT__SPROCESSING_ANNOTATIONS: return SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (baseFeatureID) {
+				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SGRAPH__SFEATURES;
 				default: return -1;
 			}
 		}

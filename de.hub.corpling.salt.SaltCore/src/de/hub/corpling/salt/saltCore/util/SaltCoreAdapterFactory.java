@@ -120,6 +120,14 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 				return createSElementIdAdapter();
 			}
 			@Override
+			public Adapter caseSFeature(SFeature object) {
+				return createSFeatureAdapter();
+			}
+			@Override
+			public Adapter caseSFeaturableElement(SFeaturableElement object) {
+				return createSFeaturableElementAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -304,6 +312,34 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSElementIdAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SFeature <em>SFeature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SFeature
+	 * @generated
+	 */
+	public Adapter createSFeatureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SFeaturableElement <em>SFeaturable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SFeaturableElement
+	 * @generated
+	 */
+	public Adapter createSFeaturableElementAdapter() {
 		return null;
 	}
 

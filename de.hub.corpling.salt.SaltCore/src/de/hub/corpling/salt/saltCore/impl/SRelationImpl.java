@@ -23,6 +23,8 @@ import de.hub.corpling.graph.impl.EdgeImpl;
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
 import de.hub.corpling.salt.saltCore.SElementId;
+import de.hub.corpling.salt.saltCore.SFeaturableElement;
+import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -32,6 +34,7 @@ import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SRelation;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
 import de.hub.corpling.salt.saltCore.accessors.SAnnotatableElementAccessor;
+import de.hub.corpling.salt.saltCore.accessors.SFeaturableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SIdentifiableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAccessor;
 
@@ -48,6 +51,7 @@ import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAcce
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSId <em>SId</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSSource <em>SSource</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSTarget <em>STarget</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSGraph <em>SGraph</em>}</li>
@@ -111,6 +115,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		this.sAnnoAccessor= new SAnnotatableElementAccessor();
 		this.sProcAnnoAccessor= new SProcessingAnnotatableElementAccessor();
 		this.sIdentAccessor= new SIdentifiableElementAccessor();
+		this.sFeatAccessor= new SFeaturableElementAccessor();
 	}
 	
 	/**
@@ -320,6 +325,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		return(this.sProcAnnoAccessor.getSProcessingAnnotations(this));
 	}
 
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -338,7 +344,40 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
 	}
 //=================== end: handling SProcessingAnnotatableElement
+//=================== start: handling SFeaturableElement
+	/**
+	 * Delegatee for SFeaturableElementAccessor
+	 */
+	private SFeaturableElementAccessor sFeatAccessor= null;
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public EList<SFeature> getSFeatures() 
+	{
+		return(this.sFeatAccessor.getSFeatures(this));
+	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addSFeature(SFeature sFeature) 
+	{
+		this.sFeatAccessor.addSFeature(this, sFeature);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SFeature getSFeature(String sFeatureId) 
+	{
+		return(this.sFeatAccessor.getSFeature(this, sFeatureId));
+	}
+//=================== end: handling SFeaturableElement
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -435,6 +474,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		super.setGraph(newSGraph);
 	}
 
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -447,6 +487,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return ((InternalEList<?>)getSAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS:
 				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
+			case SaltCorePackage.SRELATION__SFEATURES:
+				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -472,6 +514,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return getSElementPath();
 			case SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS:
 				return getSProcessingAnnotations();
+			case SaltCorePackage.SRELATION__SFEATURES:
+				return getSFeatures();
 			case SaltCorePackage.SRELATION__SSOURCE:
 				if (resolve) return getSSource();
 				return basicGetSSource();
@@ -510,6 +554,10 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 			case SaltCorePackage.SRELATION__SELEMENT_PATH:
 				setSElementPath((URI)newValue);
 				return;
+			case SaltCorePackage.SRELATION__SFEATURES:
+				getSFeatures().clear();
+				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
+				return;
 			case SaltCorePackage.SRELATION__SSOURCE:
 				setSSource((SNode)newValue);
 				return;
@@ -546,6 +594,9 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 			case SaltCorePackage.SRELATION__SELEMENT_PATH:
 				setSElementPath(SELEMENT_PATH_EDEFAULT);
 				return;
+			case SaltCorePackage.SRELATION__SFEATURES:
+				getSFeatures().clear();
+				return;
 			case SaltCorePackage.SRELATION__SSOURCE:
 				setSSource((SNode)null);
 				return;
@@ -579,6 +630,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return SELEMENT_PATH_EDEFAULT == null ? getSElementPath() != null : !SELEMENT_PATH_EDEFAULT.equals(getSElementPath());
 			case SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS:
 				return !getSProcessingAnnotations().isEmpty();
+			case SaltCorePackage.SRELATION__SFEATURES:
+				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SRELATION__SSOURCE:
 				return basicGetSSource() != null;
 			case SaltCorePackage.SRELATION__STARGET:
@@ -622,6 +675,12 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				default: return -1;
 			}
 		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (derivedFeatureID) {
+				case SaltCorePackage.SRELATION__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -655,6 +714,12 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		if (baseClass == SProcessingAnnotatableElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SPROCESSING_ANNOTATABLE_ELEMENT__SPROCESSING_ANNOTATIONS: return SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (baseFeatureID) {
+				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SRELATION__SFEATURES;
 				default: return -1;
 			}
 		}

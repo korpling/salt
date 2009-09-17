@@ -22,6 +22,8 @@ import de.hub.corpling.graph.impl.NodeImpl;
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
 import de.hub.corpling.salt.saltCore.SElementId;
+import de.hub.corpling.salt.saltCore.SFeaturableElement;
+import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -30,6 +32,7 @@ import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
 import de.hub.corpling.salt.saltCore.accessors.SAnnotatableElementAccessor;
+import de.hub.corpling.salt.saltCore.accessors.SFeaturableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SIdentifiableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAccessor;
 
@@ -46,6 +49,7 @@ import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAcce
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSId <em>SId</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SNodeImpl#getSGraph <em>SGraph</em>}</li>
  * </ul>
  * </p>
@@ -107,6 +111,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		this.sAnnoAccessor= new SAnnotatableElementAccessor();
 		this.sProcAnnoAccessor= new SProcessingAnnotatableElementAccessor();
 		this.sIdentAccessor= new SIdentifiableElementAccessor();
+		this.sFeatAccessor= new SFeaturableElementAccessor();
 	}
 
 	/**
@@ -182,7 +187,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		super.setGraph(newSGraph);
 	}
 
-//=================== start: handling SIdentifiableElement	
+	//=================== start: handling SIdentifiableElement	
 	/**
 	 * Delegatee for SIdentifiableElement
 	 */
@@ -289,7 +294,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	{
 		return(this.sProcAnnoAccessor.getSProcessingAnnotations(this));
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -308,6 +313,39 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
 	}
 //=================== end: handling SProcessingAnnotatableElement
+//=================== start: handling SFeaturableElement
+	/**
+	 * Delegatee for SFeaturableElementAccessor
+	 */
+	private SFeaturableElementAccessor sFeatAccessor= null;
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public EList<SFeature> getSFeatures() 
+	{
+		return(this.sFeatAccessor.getSFeatures(this));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addSFeature(SFeature sFeature) 
+	{
+		this.sFeatAccessor.addSFeature(this, sFeature);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SFeature getSFeature(String sFeatureId) 
+	{
+		return(this.sFeatAccessor.getSFeature(this, sFeatureId));
+	}
+//=================== end: handling SFeaturableElement
 	
 	/**
 	 * Checks if a given SNode has the same entries as this SNode-object. 
@@ -387,6 +425,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return ((InternalEList<?>)getSAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS:
 				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
+			case SaltCorePackage.SNODE__SFEATURES:
+				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -412,6 +452,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return getSElementPath();
 			case SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS:
 				return getSProcessingAnnotations();
+			case SaltCorePackage.SNODE__SFEATURES:
+				return getSFeatures();
 			case SaltCorePackage.SNODE__SGRAPH:
 				if (resolve) return getSGraph();
 				return basicGetSGraph();
@@ -444,6 +486,10 @@ public class SNodeImpl extends NodeImpl implements SNode {
 			case SaltCorePackage.SNODE__SELEMENT_PATH:
 				setSElementPath((URI)newValue);
 				return;
+			case SaltCorePackage.SNODE__SFEATURES:
+				getSFeatures().clear();
+				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
+				return;
 			case SaltCorePackage.SNODE__SGRAPH:
 				setSGraph((SGraph)newValue);
 				return;
@@ -474,6 +520,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 			case SaltCorePackage.SNODE__SELEMENT_PATH:
 				setSElementPath(SELEMENT_PATH_EDEFAULT);
 				return;
+			case SaltCorePackage.SNODE__SFEATURES:
+				getSFeatures().clear();
+				return;
 			case SaltCorePackage.SNODE__SGRAPH:
 				setSGraph((SGraph)null);
 				return;
@@ -501,6 +550,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return SELEMENT_PATH_EDEFAULT == null ? getSElementPath() != null : !SELEMENT_PATH_EDEFAULT.equals(getSElementPath());
 			case SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS:
 				return !getSProcessingAnnotations().isEmpty();
+			case SaltCorePackage.SNODE__SFEATURES:
+				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SNODE__SGRAPH:
 				return basicGetSGraph() != null;
 		}
@@ -540,6 +591,12 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				default: return -1;
 			}
 		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (derivedFeatureID) {
+				case SaltCorePackage.SNODE__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -573,6 +630,12 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (baseClass == SProcessingAnnotatableElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SPROCESSING_ANNOTATABLE_ELEMENT__SPROCESSING_ANNOTATIONS: return SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (baseFeatureID) {
+				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SNODE__SFEATURES;
 				default: return -1;
 			}
 		}

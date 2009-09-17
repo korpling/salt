@@ -103,6 +103,7 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseSNamedElement(sNode);
 				if (result == null) result = caseSIdentifiableElement(sNode);
 				if (result == null) result = caseSProcessingAnnotatableElement(sNode);
+				if (result == null) result = caseSFeaturableElement(sNode);
 				if (result == null) result = caseLabelableElement(sNode);
 				if (result == null) result = caseIdentifiableElement(sNode);
 				if (result == null) result = defaultCase(theEObject);
@@ -116,6 +117,7 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseSNamedElement(sRelation);
 				if (result == null) result = caseSIdentifiableElement(sRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sRelation);
+				if (result == null) result = caseSFeaturableElement(sRelation);
 				if (result == null) result = caseLabelableElement(sRelation);
 				if (result == null) result = caseIdentifiableElement(sRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -143,6 +145,7 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseSAnnotatableElement(sGraph);
 				if (result == null) result = caseSIdentifiableElement(sGraph);
 				if (result == null) result = caseSProcessingAnnotatableElement(sGraph);
+				if (result == null) result = caseSFeaturableElement(sGraph);
 				if (result == null) result = caseLabelableElement(sGraph);
 				if (result == null) result = caseIdentifiableElement(sGraph);
 				if (result == null) result = defaultCase(theEObject);
@@ -180,6 +183,20 @@ public class SaltCoreSwitch<T> {
 				T result = caseSElementId(sElementId);
 				if (result == null) result = caseIdentifier(sElementId);
 				if (result == null) result = caseLabel(sElementId);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SaltCorePackage.SFEATURE: {
+				SFeature sFeature = (SFeature)theEObject;
+				T result = caseSFeature(sFeature);
+				if (result == null) result = caseLabel(sFeature);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SaltCorePackage.SFEATURABLE_ELEMENT: {
+				SFeaturableElement sFeaturableElement = (SFeaturableElement)theEObject;
+				T result = caseSFeaturableElement(sFeaturableElement);
+				if (result == null) result = caseLabelableElement(sFeaturableElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -334,6 +351,36 @@ public class SaltCoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseSElementId(SElementId object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SFeature</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SFeature</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSFeature(SFeature object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SFeaturable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SFeaturable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSFeaturableElement(SFeaturableElement object) {
 		return null;
 	}
 

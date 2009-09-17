@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface SGraph extends Graph, SNamedElement, SAnnotatableElement, SIdentifiableElement, SProcessingAnnotatableElement {
+public interface SGraph extends Graph, SNamedElement, SAnnotatableElement, SIdentifiableElement, SProcessingAnnotatableElement, SFeaturableElement {
 	/**
 	 * Returns the value of the '<em><b>SRelations</b></em>' reference list.
 	 * The list contents are of type {@link de.hub.corpling.salt.saltCore.SRelation}.
