@@ -512,6 +512,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSFeature_SNS() {
+		return (EAttribute)sFeatureEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSFeaturableElement() {
 		return sFeaturableElementEClass;
 	}
@@ -607,6 +616,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEAttribute(sFeatureEClass, SFEATURE__SNAME);
 		createEAttribute(sFeatureEClass, SFEATURE__SVALUE);
 		createEReference(sFeatureEClass, SFEATURE__SFEATURABLE_ELEMENT);
+		createEAttribute(sFeatureEClass, SFEATURE__SNS);
 
 		sFeaturableElementEClass = createEClass(SFEATURABLE_ELEMENT);
 		createEReference(sFeaturableElementEClass, SFEATURABLE_ELEMENT__SFEATURES);
@@ -743,6 +753,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEAttribute(getSFeature_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SFeature.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSFeature_SValue(), ecorePackage.getEJavaObject(), "sValue", null, 0, 1, SFeature.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSFeature_SFeaturableElement(), this.getSFeaturableElement(), this.getSFeaturableElement_SFeatures(), "sFeaturableElement", null, 0, 1, SFeature.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSFeature_SNS(), ecorePackage.getEString(), "sNS", null, 0, 1, SFeature.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sFeaturableElementEClass, SFeaturableElement.class, "SFeaturableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSFeaturableElement_SFeatures(), this.getSFeature(), this.getSFeature_SFeaturableElement(), "sFeatures", null, 0, -1, SFeaturableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

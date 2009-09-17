@@ -1100,13 +1100,22 @@ public interface SaltCorePackage extends EPackage {
 	int SFEATURE__SFEATURABLE_ELEMENT = GraphPackage.LABEL_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SFEATURE__SNS = GraphPackage.LABEL_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>SFeature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SFEATURE_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 3;
+	int SFEATURE_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SFeaturableElementImpl <em>SFeaturable Element</em>}' class.
@@ -1531,6 +1540,17 @@ public interface SaltCorePackage extends EPackage {
 	EReference getSFeature_SFeaturableElement();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.hub.corpling.salt.saltCore.SFeature#getSNS <em>SNS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SNS</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SFeature#getSNS()
+	 * @see #getSFeature()
+	 * @generated
+	 */
+	EAttribute getSFeature_SNS();
+
+	/**
 	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SFeaturableElement <em>SFeaturable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1885,6 +1905,14 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SFEATURE__SFEATURABLE_ELEMENT = eINSTANCE.getSFeature_SFeaturableElement();
+
+		/**
+		 * The meta object literal for the '<em><b>SNS</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SFEATURE__SNS = eINSTANCE.getSFeature_SNS();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SFeaturableElementImpl <em>SFeaturable Element</em>}' class.
