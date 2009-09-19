@@ -42,6 +42,9 @@ public class SDocumentStructureTests extends TestSuite {
 		suite.addTestSuite(SSequentialRelationTest.class);
 		suite.addTestSuite(SSequentialDSTest.class);
 		suite.addTestSuite(STimelineTest.class);
+		suite.addTestSuite(STimelineRelationTest.class);
+		suite.addTestSuite(SSpanTest.class);
+		suite.addTestSuite(SSpanningRelationTest.class);
 		return suite;
 	}
 

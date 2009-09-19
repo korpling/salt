@@ -30,7 +30,7 @@ import junit.textui.TestRunner;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline#addSPointOfTime(java.lang.Double) <em>Add SPoint Of Time</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline#addSPointOfTime(java.lang.String) <em>Add SPoint Of Time</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -97,13 +97,13 @@ public class STimelineTest extends SSequentialDSTest {
 	 */
 	public void testGetSPointsOfTime() 
 	{
-		EList<Double> timeline= new BasicEList<Double>();
-		timeline.add(1.0);
-		timeline.add(1.1);
-		timeline.add(1.2);
-		timeline.add(1.3);
-		timeline.add(1.4);
-		for (Double point: timeline)
+		EList<String> timeline= new BasicEList<String>();
+		timeline.add("1.0");
+		timeline.add("1.1");
+		timeline.add("1.2");
+		timeline.add("1.3");
+		timeline.add("1.4");
+		for (String point: timeline)
 			this.getFixture().addSPointOfTime(point);
 		assertTrue(timeline.containsAll(this.getFixture().getSPointsOfTime()));
 		assertTrue(this.getFixture().getSPointsOfTime().containsAll(timeline));
@@ -135,12 +135,12 @@ public class STimelineTest extends SSequentialDSTest {
 	}
 
 	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline#addSPointOfTime(java.lang.Double) <em>Add SPoint Of Time</em>}' operation.
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline#addSPointOfTime(java.lang.String) <em>Add SPoint Of Time</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline#addSPointOfTime(java.lang.Double)
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline#addSPointOfTime(java.lang.String)
 	 */
-	public void testAddSPointOfTime__Double() 
+	public void testAddSPointOfTime__String() 
 	{
 		this.testGetSPointsOfTime();
 	}

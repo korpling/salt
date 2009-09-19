@@ -5,26 +5,26 @@
   <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName1" valueString="pAnnoValue1"/>
   <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName2" valueString="pAnnoValue2"/>
   <identifier id="salt:/graph1"/>
-  <nodes xsi:type="sDocumentStructure:STextualDS">
+  <nodes xsi:type="sDocumentStructure:STextualDS" sName="text1">
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SDATA" valueString="This is text1."/>
     <identifier id="text1"/>
   </nodes>
-  <nodes xsi:type="sDocumentStructure:STextualDS">
+  <nodes xsi:type="sDocumentStructure:STextualDS" sName="text2">
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SDATA" valueString="This is text2."/>
     <identifier id="text2"/>
   </nodes>
-  <nodes xsi:type="sDocumentStructure:SToken">
+  <nodes xsi:type="sDocumentStructure:SToken" sName="tok1">
     <labels xsi:type="saltCore:SAnnotation" name="pos" valueString="N"/>
     <identifier id="tok1"/>
   </nodes>
-  <nodes xsi:type="sDocumentStructure:SToken">
+  <nodes xsi:type="sDocumentStructure:SToken" sName="tok2">
     <labels xsi:type="saltCore:SAnnotation" name="pos" valueString="N"/>
     <identifier id="tok2"/>
   </nodes>
-  <nodes xsi:type="sDocumentStructure:SToken">
+  <nodes xsi:type="sDocumentStructure:SToken" sName="tok3">
     <identifier id="tok3"/>
   </nodes>
-  <nodes xsi:type="sDocumentStructure:SToken">
+  <nodes xsi:type="sDocumentStructure:SToken" sName="tok4">
     <identifier id="tok4"/>
   </nodes>
   <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.0" target="//@nodes.2">

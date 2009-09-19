@@ -12,9 +12,12 @@ import org.eclipse.emf.common.util.EList;
 import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
 
 import junit.framework.TestCase;
@@ -32,6 +35,9 @@ import junit.textui.TestRunner;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTextualRelations() <em>STextual Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTokens() <em>STokens</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline() <em>STimeline</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations() <em>STimeline Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpanningRelations() <em>SSpanning Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpans() <em>SSpans</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -146,7 +152,6 @@ public class SDocumentGraphTest extends TestCase {
 			this.getFixture().addSRelation(textRel);
 			textRels.add(textRel);
 		}	
-		
 		assertTrue(textRels.containsAll(this.getFixture().getSTextualRelations()));
 		assertTrue(this.getFixture().getSTextualRelations().containsAll(textRels));
 	}
@@ -182,21 +187,21 @@ public class SDocumentGraphTest extends TestCase {
 	public void testGetSTimeline() 
 	{
 		STimeline sTimeline= SaltCommonFactory.eINSTANCE.createSTimeline();
-		EList<Double> timeline= new BasicEList<Double>();
-		timeline.add(1.0);
-		timeline.add(1.1);
-		timeline.add(1.2);
-		timeline.add(1.3);
-		timeline.add(1.4);
-		for (Double point: timeline)
+		EList<String> timeline= new BasicEList<String>();
+		timeline.add("1.0");
+		timeline.add("1.1");
+		timeline.add("1.2");
+		timeline.add("1.3");
+		timeline.add("1.4");
+		for (String point: timeline)
 			sTimeline.addSPointOfTime(point);
 		this.getFixture().setSTimeline(sTimeline);
 		assertNotNull(this.getFixture().getSTimeline());
 		assertNotNull(this.getFixture().getSTimeline().getSPointsOfTime());
-		for (Double point1: timeline)
+		for (String point1: timeline)
 		{
 			boolean hasOpponend= false;
-			for (Double point2: this.getFixture().getSTimeline().getSPointsOfTime())
+			for (String point2: this.getFixture().getSTimeline().getSPointsOfTime())
 			{
 				if (point1.equals(point2))
 					hasOpponend= true;
@@ -216,6 +221,66 @@ public class SDocumentGraphTest extends TestCase {
 	public void testSetSTimeline() 
 	{
 		this.testGetSTimeline();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations() <em>STimeline Relations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations()
+	 */
+	public void testGetSTimelineRelations() 
+	{
+		EList<STimelineRelation> timeRels= new BasicEList<STimelineRelation>();
+		for (int i= 0; i< 10; i++)
+		{
+			STimelineRelation sTimeRel= SaltCommonFactory.eINSTANCE.createSTimelineRelation();
+			timeRels.add(sTimeRel);
+			this.getFixture().addSRelation(sTimeRel);
+		}	
+		assertTrue(timeRels.containsAll(this.getFixture().getSTimelineRelations()));
+		assertTrue(this.getFixture().getSTimelineRelations().containsAll(timeRels));
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpanningRelations() <em>SSpanning Relations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpanningRelations()
+	 */
+	public void testGetSSpanningRelations() 
+	{
+		EList<SSpanningRelation> spanRels= new BasicEList<SSpanningRelation>();
+		for (int i= 0; i< 10; i++)
+		{
+			SSpanningRelation sTimeRel= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+			spanRels.add(sTimeRel);
+			this.getFixture().addSRelation(sTimeRel);
+		}	
+		assertTrue(spanRels.containsAll(this.getFixture().getSSpanningRelations()));
+		assertTrue(this.getFixture().getSSpanningRelations().containsAll(spanRels));
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpans() <em>SSpans</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpans()
+	 */
+	public void testGetSSpans() 
+	{
+		String[] names= {"salt:/graph1#span1", "salt:/graph1#span2", "salt:/graph1#span3", "salt:/graph1#span4"};
+		EList<SSpan> spans= new BasicEList<SSpan>();
+		for (String name: names)
+		{
+			SSpan span= SaltCommonFactory.eINSTANCE.createSSpan();
+			span.setSName(name);
+			this.getFixture().addSNode(span);
+			spans.add(span);
+		}	
+		
+		assertTrue(spans.containsAll(this.getFixture().getSSpans()));
+		assertTrue(this.getFixture().getSSpans().containsAll(spans));
 	}
 
 } //SDocumentGraphTest

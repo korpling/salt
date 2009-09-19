@@ -120,13 +120,13 @@ public class STimelineStoringTest extends TestCase {
 		}
 		
 		{//creating points of time
-			EList<Double> timeline= new BasicEList<Double>();
-			timeline.add(1.0);
-			timeline.add(1.1);
-			timeline.add(1.2);
-			timeline.add(1.3);
-			timeline.add(1.4);
-			for (Double point: timeline)
+			EList<String> timeline= new BasicEList<String>();
+			timeline.add("1.0");
+			timeline.add("1.1");
+			timeline.add("1.2");
+			timeline.add("1.3");
+			timeline.add("1.4");
+			for (String point: timeline)
 				this.getFixture().addSPointOfTime(point);
 		}
 		
