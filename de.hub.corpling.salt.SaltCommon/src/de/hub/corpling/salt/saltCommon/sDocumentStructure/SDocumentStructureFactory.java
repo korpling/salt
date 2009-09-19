@@ -89,6 +89,33 @@ public interface SDocumentStructureFactory extends EFactory {
 	STimeline createSTimeline();
 
 	/**
+	 * Returns a new object of class '<em>STimeline Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>STimeline Relation</em>'.
+	 * @generated
+	 */
+	STimelineRelation createSTimelineRelation();
+
+	/**
+	 * Returns a new object of class '<em>SSpan</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SSpan</em>'.
+	 * @generated
+	 */
+	SSpan createSSpan();
+
+	/**
+	 * Returns a new object of class '<em>SSpanning Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SSpanning Relation</em>'.
+	 * @generated
+	 */
+	SSpanningRelation createSSpanningRelation();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

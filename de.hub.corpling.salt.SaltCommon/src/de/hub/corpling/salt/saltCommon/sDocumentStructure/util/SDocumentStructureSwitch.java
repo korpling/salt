@@ -209,6 +209,52 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SDocumentStructurePackage.STIMELINE_RELATION: {
+				STimelineRelation sTimelineRelation = (STimelineRelation)theEObject;
+				T result = caseSTimelineRelation(sTimelineRelation);
+				if (result == null) result = caseSSequentialRelation(sTimelineRelation);
+				if (result == null) result = caseSRelation(sTimelineRelation);
+				if (result == null) result = caseEdge(sTimelineRelation);
+				if (result == null) result = caseSAnnotatableElement(sTimelineRelation);
+				if (result == null) result = caseSNamedElement(sTimelineRelation);
+				if (result == null) result = caseSIdentifiableElement(sTimelineRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sTimelineRelation);
+				if (result == null) result = caseSFeaturableElement(sTimelineRelation);
+				if (result == null) result = caseLabelableElement(sTimelineRelation);
+				if (result == null) result = caseIdentifiableElement(sTimelineRelation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SDocumentStructurePackage.SSPAN: {
+				SSpan sSpan = (SSpan)theEObject;
+				T result = caseSSpan(sSpan);
+				if (result == null) result = caseSNode(sSpan);
+				if (result == null) result = caseNode(sSpan);
+				if (result == null) result = caseSAnnotatableElement(sSpan);
+				if (result == null) result = caseSNamedElement(sSpan);
+				if (result == null) result = caseSIdentifiableElement(sSpan);
+				if (result == null) result = caseSProcessingAnnotatableElement(sSpan);
+				if (result == null) result = caseSFeaturableElement(sSpan);
+				if (result == null) result = caseLabelableElement(sSpan);
+				if (result == null) result = caseIdentifiableElement(sSpan);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SDocumentStructurePackage.SSPANNING_RELATION: {
+				SSpanningRelation sSpanningRelation = (SSpanningRelation)theEObject;
+				T result = caseSSpanningRelation(sSpanningRelation);
+				if (result == null) result = caseSRelation(sSpanningRelation);
+				if (result == null) result = caseEdge(sSpanningRelation);
+				if (result == null) result = caseSAnnotatableElement(sSpanningRelation);
+				if (result == null) result = caseSNamedElement(sSpanningRelation);
+				if (result == null) result = caseSIdentifiableElement(sSpanningRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sSpanningRelation);
+				if (result == null) result = caseSFeaturableElement(sSpanningRelation);
+				if (result == null) result = caseLabelableElement(sSpanningRelation);
+				if (result == null) result = caseIdentifiableElement(sSpanningRelation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -315,6 +361,51 @@ public class SDocumentStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSTimeline(STimeline object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>STimeline Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>STimeline Relation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSTimelineRelation(STimelineRelation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SSpan</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SSpan</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSSpan(SSpan object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SSpanning Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SSpanning Relation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSSpanningRelation(SSpanningRelation object) {
 		return null;
 	}
 

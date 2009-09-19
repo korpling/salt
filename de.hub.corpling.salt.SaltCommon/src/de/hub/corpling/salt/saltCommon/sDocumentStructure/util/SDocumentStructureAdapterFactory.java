@@ -114,6 +114,18 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 				return createSTimelineAdapter();
 			}
 			@Override
+			public Adapter caseSTimelineRelation(STimelineRelation object) {
+				return createSTimelineRelationAdapter();
+			}
+			@Override
+			public Adapter caseSSpan(SSpan object) {
+				return createSSpanAdapter();
+			}
+			@Override
+			public Adapter caseSSpanningRelation(SSpanningRelation object) {
+				return createSSpanningRelationAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -280,6 +292,48 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSTimelineAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation <em>STimeline Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation
+	 * @generated
+	 */
+	public Adapter createSTimelineRelationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan <em>SSpan</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan
+	 * @generated
+	 */
+	public Adapter createSSpanAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation <em>SSpanning Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation
+	 * @generated
+	 */
+	public Adapter createSSpanningRelationAdapter() {
 		return null;
 	}
 

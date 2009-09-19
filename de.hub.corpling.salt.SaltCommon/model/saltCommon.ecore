@@ -64,7 +64,16 @@
           eType="#//sDocumentStructure/SToken" volatile="true" transient="true" derived="true"
           containment="true" eOpposite="#//sDocumentStructure/SToken/sDocumentGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTimeline" eType="#//sDocumentStructure/STimeline"
-          volatile="true" transient="true" derived="true"/>
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/STimeline/sDocumentGraph"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sTimelineRelations" upperBound="-1"
+          eType="#//sDocumentStructure/STimelineRelation" volatile="true" transient="true"
+          derived="true" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sSpanningRelations" upperBound="-1"
+          eType="#//sDocumentStructure/SSpanningRelation" volatile="true" transient="true"
+          derived="true" containment="true" eOpposite="#//sDocumentStructure/SSpanningRelation/sDocumentGraph"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sSpans" upperBound="-1"
+          eType="#//sDocumentStructure/SSpan" volatile="true" transient="true" derived="true"
+          containment="true" eOpposite="#//sDocumentStructure/SSpan/sDocumentGraph"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="STextualDS" eSuperTypes="#//sDocumentStructure/SSequentialDS">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -96,13 +105,33 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="STimeline" eSuperTypes="#//sDocumentStructure/SSequentialDS">
       <eOperations name="addSPointOfTime">
-        <eParameters name="sPointOfTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+        <eParameters name="sPointOfTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sPointsOfTime" upperBound="-1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sTimeline"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="STimelineRelation" eSuperTypes="#//sDocumentStructure/SSequentialRelation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sTimeline" eType="#//sDocumentStructure/STimeline"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sToken" eType="#//sDocumentStructure/SToken"
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SSpan" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SNode">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sSpans"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SSpanningRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sToken" eType="#//sDocumentStructure/SToken"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sSpan" eType="#//sDocumentStructure/SSpan"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sSpanningRelations"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

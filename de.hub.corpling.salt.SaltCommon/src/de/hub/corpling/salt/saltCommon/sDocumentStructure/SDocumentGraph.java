@@ -24,6 +24,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTextualRelations <em>STextual Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTokens <em>STokens</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline <em>STimeline</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations <em>STimeline Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpanningRelations <em>SSpanning Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpans <em>SSpans</em>}</li>
  * </ul>
  * </p>
  *
@@ -116,6 +119,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns the value of the '<em><b>STimeline</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph <em>SDocument Graph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>STimeline</em>' reference isn't clear,
@@ -125,7 +129,8 @@ public interface SDocumentGraph extends SGraph {
 	 * @return the value of the '<em>STimeline</em>' reference.
 	 * @see #setSTimeline(STimeline)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_STimeline()
-	 * @model transient="true" volatile="true" derived="true"
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	STimeline getSTimeline();
@@ -139,5 +144,57 @@ public interface SDocumentGraph extends SGraph {
 	 * @generated
 	 */
 	void setSTimeline(STimeline value);
+
+	/**
+	 * Returns the value of the '<em><b>STimeline Relations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>STimeline Relations</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>STimeline Relations</em>' containment reference list.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_STimelineRelations()
+	 * @model containment="true" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<STimelineRelation> getSTimelineRelations();
+
+	/**
+	 * Returns the value of the '<em><b>SSpanning Relations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation}.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SSpanning Relations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SSpanning Relations</em>' containment reference list.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SSpanningRelations()
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SSpanningRelation> getSSpanningRelations();
+
+	/**
+	 * Returns the value of the '<em><b>SSpans</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan}.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SSpans</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SSpans</em>' containment reference list.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SSpans()
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SSpan> getSSpans();
 
 } // SDocumentGraph

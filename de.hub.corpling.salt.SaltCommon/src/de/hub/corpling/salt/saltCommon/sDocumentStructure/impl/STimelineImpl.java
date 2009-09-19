@@ -8,6 +8,7 @@ package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -17,6 +18,7 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
+import de.hub.corpling.salt.saltExceptions.SaltException;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,19 +60,19 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 	 * <!-- end-user-doc -->
 	 */
 	@SuppressWarnings("unchecked")
-	public EList<Double> getSPointsOfTime()  
+	public EList<String> getSPointsOfTime()  
 	{
 		String timelineStr= (String) super.getSData();
 		String[] timelineStrArr= timelineStr.split("#");
 		
-		Double[] doubleArr= new Double[timelineStrArr.length];
-		for (int i= 0; i< timelineStrArr.length; i++)
-			doubleArr[i]= Double.parseDouble(timelineStrArr[i]);
+//		Double[] doubleArr= new Double[timelineStrArr.length];
+//		for (int i= 0; i< timelineStrArr.length; i++)
+//			doubleArr[i]= Double.parseDouble(timelineStrArr[i]);
 			
-		EList<Double> retVal= null;
+		EList<String> retVal= null;
 		retVal= new EcoreEList.UnmodifiableEList(this,
 				SaltCorePackage.eINSTANCE.getSFeaturableElement_SFeatures(),
-				doubleArr.length, doubleArr);
+				timelineStrArr.length, timelineStrArr);
 		return(retVal);
 	}
 
@@ -109,8 +111,10 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public void addSPointOfTime(Double sPointOfTime) 
+	public void addSPointOfTime(String sPointOfTime) 
 	{
+		if (sPointOfTime== null)
+			throw new SaltException("Cannot add an empty point of time.");
 		String timeline= (String) super.getSData();
 		if (timeline== null)
 			timeline= sPointOfTime.toString();
@@ -163,7 +167,7 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 		switch (featureID) {
 			case SDocumentStructurePackage.STIMELINE__SPOINTS_OF_TIME:
 				getSPointsOfTime().clear();
-				getSPointsOfTime().addAll((Collection<? extends Double>)newValue);
+				getSPointsOfTime().addAll((Collection<? extends String>)newValue);
 				return;
 			case SDocumentStructurePackage.STIMELINE__SDOCUMENT_GRAPH:
 				setSDocumentGraph((SDocumentGraph)newValue);

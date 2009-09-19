@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
 public interface STimeline extends SSequentialDS {
 	/**
 	 * Returns the value of the '<em><b>SPoints Of Time</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Double}.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SPoints Of Time</em>' attribute list isn't clear,
@@ -40,10 +40,11 @@ public interface STimeline extends SSequentialDS {
 	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<Double> getSPointsOfTime();
+	EList<String> getSPointsOfTime();
 
 	/**
 	 * Returns the value of the '<em><b>SDocument Graph</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline <em>STimeline</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SDocument Graph</em>' reference isn't clear,
@@ -53,7 +54,8 @@ public interface STimeline extends SSequentialDS {
 	 * @return the value of the '<em>SDocument Graph</em>' reference.
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTimeline_SDocumentGraph()
-	 * @model transient="true" volatile="true" derived="true"
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline
+	 * @model opposite="sTimeline" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDocumentGraph getSDocumentGraph();
@@ -74,6 +76,6 @@ public interface STimeline extends SSequentialDS {
 	 * @model
 	 * @generated
 	 */
-	void addSPointOfTime(Double sPointOfTime);
+	void addSPointOfTime(String sPointOfTime);
 
 } // STimeline

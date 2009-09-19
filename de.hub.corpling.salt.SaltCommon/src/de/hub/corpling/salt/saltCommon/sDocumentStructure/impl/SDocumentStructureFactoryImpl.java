@@ -67,6 +67,9 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 			case SDocumentStructurePackage.SSEQUENTIAL_RELATION: return createSSequentialRelation();
 			case SDocumentStructurePackage.SSEQUENTIAL_DS: return createSSequentialDS();
 			case SDocumentStructurePackage.STIMELINE: return createSTimeline();
+			case SDocumentStructurePackage.STIMELINE_RELATION: return createSTimelineRelation();
+			case SDocumentStructurePackage.SSPAN: return createSSpan();
+			case SDocumentStructurePackage.SSPANNING_RELATION: return createSSpanningRelation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -140,6 +143,36 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	public STimeline createSTimeline() {
 		STimelineImpl sTimeline = new STimelineImpl();
 		return sTimeline;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public STimelineRelation createSTimelineRelation() {
+		STimelineRelationImpl sTimelineRelation = new STimelineRelationImpl();
+		return sTimelineRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SSpan createSSpan() {
+		SSpanImpl sSpan = new SSpanImpl();
+		return sSpan;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SSpanningRelation createSSpanningRelation() {
+		SSpanningRelationImpl sSpanningRelation = new SSpanningRelationImpl();
+		return sSpanningRelation;
 	}
 
 	/**

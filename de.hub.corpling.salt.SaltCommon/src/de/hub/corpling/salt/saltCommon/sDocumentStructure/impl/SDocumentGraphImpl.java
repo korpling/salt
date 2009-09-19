@@ -26,9 +26,12 @@ import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
 import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SRelation;
@@ -47,6 +50,9 @@ import de.hub.corpling.salt.saltExceptions.SaltException;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTextualRelations <em>STextual Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTokens <em>STokens</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTimeline <em>STimeline</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTimelineRelations <em>STimeline Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSSpanningRelations <em>SSpanning Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSSpans <em>SSpans</em>}</li>
  * </ul>
  * </p>
  *
@@ -125,6 +131,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		{//compute slot id
 			if (edge instanceof STextualRelation)
 				slotId= STextualRelation.class.getName();
+			else if (edge instanceof STimelineRelation)
+				slotId= STimelineRelation.class.getName();
+			else if (edge instanceof SSpanningRelation)
+				slotId= SSpanningRelation.class.getName();
 			else
 				slotId= (String) edge.getClass().getName();
 		}
@@ -142,6 +152,23 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	{
 		if (!(node instanceof SNode))
 			throw new SaltException("Cannot insert a node, which is not a SNode object: "+ node);
+		
+		if (	(((SNode)node).getSName()== null)||
+				(((SNode)node).getSName().equalsIgnoreCase("")))
+		{//create a name if none exists
+			if ( node instanceof STextualDS)
+				((SNode)node).setSName("text"+ (this.getSTextualDSs().size()+1));
+			else if ( node instanceof SToken)
+				((SNode)node).setSName("tok"+ (this.getSTokens().size()+1));
+			else if ( node instanceof STimeline)
+				((SNode)node).setSName("timeline"+ (this.getSTokens().size()+1));
+			else if ( node instanceof SSpan)
+				((SNode)node).setSName("span"+ (this.getSSpans().size()+1));
+		}
+			
+		if (	(((SNode)node).getSId()== null)||
+				(((SNode)node).getSId().equalsIgnoreCase("")))
+			((SNode)node).setSId(this.getSId() + "#"+ ((SNode)node).getSName());
 		super.basicAddNode(node);
 		
 		String slotId= null;
@@ -152,6 +179,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				slotId= STextualDS.class.getName();
 			else if (node instanceof STimeline)
 				slotId= STimeline.class.getName();
+			else if (node instanceof SSpan)
+				slotId= SSpan.class.getName();
 			else
 				slotId= (String) node.getClass().getName();
 		}
@@ -219,6 +248,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			eNotify(new ENotificationImpl(this, Notification.SET, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, newSDocument, newSDocument));
 	}
 
+// ============================ start: handling specific nodes
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -237,27 +268,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		
 		return(retVal);
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@SuppressWarnings("unchecked")
-	public EList<STextualRelation> getSTextualRelations() 
-	{
-		EList<STextualRelation> retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Node>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(STextualRelation.class.getName());
-		
-		if (nodes!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations(),
-					nodes.size(), nodes.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations(), 0, (Object[]) null);
-		
-		return(retVal);
-	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -275,7 +286,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens(), 0, (Object[]) null);
 		return(retVal);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -311,7 +322,89 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	{
 		this.addSNode(newSTimeline);
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SSpan> getSSpans() 
+	{
+		EList<SSpan> retVal= null;
+		EList<Node> nodes= (EList<Node>)(EList<? extends Node>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SSpan.class.getName());
+		if (nodes!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpans(),
+					nodes.size(), nodes.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpans(), 0, (Object[]) null);
+		return(retVal);
+	}
+// ============================ end: handling specific nodes
+// ============================ start: handling specific relations
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<STextualRelation> getSTextualRelations() 
+	{
+		EList<STextualRelation> retVal= null;
+		EList<Edge> edges= (EList<Edge>)(EList<? extends Edge>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(STextualRelation.class.getName());
+		
+		if (edges!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations(),
+					edges.size(), edges.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations(), 0, (Object[]) null);
+		
+		return(retVal);
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<STimelineRelation> getSTimelineRelations() 
+	{
 
+		EList<STimelineRelation> retVal= null;
+		EList<Edge> edges= (EList<Edge>)(EList<? extends Edge>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(STimelineRelation.class.getName());
+		
+		if (edges!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STimelineRelations(),
+					edges.size(), edges.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STimelineRelations(), 0, (Object[]) null);
+		
+		return(retVal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SSpanningRelation> getSSpanningRelations() 
+	{
+		EList<SSpanningRelation> retVal= null;
+		EList<Edge> edges= (EList<Edge>)(EList<? extends Edge>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SSpanningRelation.class.getName());
+		
+		if (edges!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpanningRelations(),
+					edges.size(), edges.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpanningRelations(), 0, (Object[]) null);
+		
+		return(retVal);
+	}
+// ============================ end: handling specific relations
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -344,6 +437,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return ((InternalEList<?>)getSTextualRelations()).basicRemove(otherEnd, msgs);
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS:
 				return ((InternalEList<?>)getSTokens()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE_RELATIONS:
+				return ((InternalEList<?>)getSTimelineRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANNING_RELATIONS:
+				return ((InternalEList<?>)getSSpanningRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
+				return ((InternalEList<?>)getSSpans()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -368,6 +467,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE:
 				if (resolve) return getSTimeline();
 				return basicGetSTimeline();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE_RELATIONS:
+				return getSTimelineRelations();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANNING_RELATIONS:
+				return getSSpanningRelations();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
+				return getSSpans();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -399,6 +504,18 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE:
 				setSTimeline((STimeline)newValue);
 				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE_RELATIONS:
+				getSTimelineRelations().clear();
+				getSTimelineRelations().addAll((Collection<? extends STimelineRelation>)newValue);
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANNING_RELATIONS:
+				getSSpanningRelations().clear();
+				getSSpanningRelations().addAll((Collection<? extends SSpanningRelation>)newValue);
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
+				getSSpans().clear();
+				getSSpans().addAll((Collection<? extends SSpan>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -426,6 +543,15 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE:
 				setSTimeline((STimeline)null);
 				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE_RELATIONS:
+				getSTimelineRelations().clear();
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANNING_RELATIONS:
+				getSSpanningRelations().clear();
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
+				getSSpans().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -448,6 +574,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return !getSTokens().isEmpty();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE:
 				return basicGetSTimeline() != null;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE_RELATIONS:
+				return !getSTimelineRelations().isEmpty();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANNING_RELATIONS:
+				return !getSSpanningRelations().isEmpty();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
+				return !getSSpans().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

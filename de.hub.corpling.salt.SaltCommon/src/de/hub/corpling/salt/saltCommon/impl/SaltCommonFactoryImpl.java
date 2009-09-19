@@ -19,9 +19,12 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFact
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
@@ -306,11 +309,27 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	}
 	
 	@Override
+	public STimelineRelation createSTimelineRelation() 
+	{
+		return(this.sDocumentStructureFactory.createSTimelineRelation());
+	}
+	
+	@Override
+	public SSpan createSSpan() 
+	{
+		return(this.sDocumentStructureFactory.createSSpan());
+	}
+
+	@Override
+	public SSpanningRelation createSSpanningRelation() 
+	{
+		return(this.sDocumentStructureFactory.createSSpanningRelation());
+	}
+	
+	@Override
 	public SDocumentStructurePackage getSDocumentStructurePackage() {
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
-	
 // ===================================== end: SDocumentStructureFactory
-
 
 } //SaltCommonFactoryImpl
