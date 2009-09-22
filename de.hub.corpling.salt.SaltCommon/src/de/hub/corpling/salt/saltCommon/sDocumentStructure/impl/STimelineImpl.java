@@ -62,17 +62,17 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 	@SuppressWarnings("unchecked")
 	public EList<String> getSPointsOfTime()  
 	{
-		String timelineStr= (String) super.getSData();
-		String[] timelineStrArr= timelineStr.split("#");
-		
-//		Double[] doubleArr= new Double[timelineStrArr.length];
-//		for (int i= 0; i< timelineStrArr.length; i++)
-//			doubleArr[i]= Double.parseDouble(timelineStrArr[i]);
-			
 		EList<String> retVal= null;
-		retVal= new EcoreEList.UnmodifiableEList(this,
-				SaltCorePackage.eINSTANCE.getSFeaturableElement_SFeatures(),
-				timelineStrArr.length, timelineStrArr);
+		String timelineStr= (String) super.getSData();
+		if (timelineStr!= null)
+		{	
+			String[] timelineStrArr= timelineStr.split("#");
+				
+			
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SaltCorePackage.eINSTANCE.getSFeaturableElement_SFeatures(),
+					timelineStrArr.length, timelineStrArr);
+		}
 		return(retVal);
 	}
 

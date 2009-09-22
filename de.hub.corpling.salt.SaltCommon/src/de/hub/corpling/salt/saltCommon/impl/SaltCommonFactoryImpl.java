@@ -6,7 +6,15 @@
  */
 package de.hub.corpling.salt.saltCommon.impl;
 
-import de.hub.corpling.salt.saltCommon.*;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
+import de.hub.corpling.salt.saltCommon.SaltCommonPackage;
+import de.hub.corpling.salt.saltCommon.SaltProject;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusDocumentRelation;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph;
@@ -21,6 +29,7 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
@@ -40,14 +49,6 @@ import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SRelation;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -325,11 +326,19 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	{
 		return(this.sDocumentStructureFactory.createSSpanningRelation());
 	}
+
+	@Override
+	public STextOverlappingRelation createSTextOverlappingRelation() 
+	{
+		return(this.sDocumentStructureFactory.createSTextOverlappingRelation());
+	}
 	
 	@Override
 	public SDocumentStructurePackage getSDocumentStructurePackage() {
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
 // ===================================== end: SDocumentStructureFactory
+
+	
 
 } //SaltCommonFactoryImpl

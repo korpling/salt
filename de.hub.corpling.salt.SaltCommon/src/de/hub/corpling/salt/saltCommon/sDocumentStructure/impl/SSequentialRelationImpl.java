@@ -6,9 +6,7 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
 import de.hub.corpling.salt.saltCommon.SaltCommonPackage;

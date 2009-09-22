@@ -6,36 +6,32 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import de.hub.corpling.salt.saltCommon.SaltCommonPackage;
-
 import de.hub.corpling.salt.saltCommon.impl.SaltCommonPackageImpl;
-
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
-
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.impl.SCorpusStructurePackageImpl;
-
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
-
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,6 +105,20 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * @generated
 	 */
 	private EClass sSpanningRelationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sTextOverlappingRelationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum sfeaturE_NAMESEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -511,6 +521,24 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSTextOverlappingRelation() {
+		return sTextOverlappingRelationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getSFEATURE_NAMES() {
+		return sfeaturE_NAMESEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SDocumentStructureFactory getSDocumentStructureFactory() {
 		return (SDocumentStructureFactory)getEFactoryInstance();
 	}
@@ -579,6 +607,11 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		createEReference(sSpanningRelationEClass, SSPANNING_RELATION__STOKEN);
 		createEReference(sSpanningRelationEClass, SSPANNING_RELATION__SSPAN);
 		createEReference(sSpanningRelationEClass, SSPANNING_RELATION__SDOCUMENT_GRAPH);
+
+		sTextOverlappingRelationEClass = createEClass(STEXT_OVERLAPPING_RELATION);
+
+		// Create enums
+		sfeaturE_NAMESEEnum = createEEnum(SFEATURE_NAMES);
 	}
 
 	/**
@@ -617,12 +650,15 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		sTextualDSEClass.getESuperTypes().add(this.getSSequentialDS());
 		sTokenEClass.getESuperTypes().add(theSaltCorePackage.getSNode());
 		sTextualRelationEClass.getESuperTypes().add(this.getSSequentialRelation());
+		sTextualRelationEClass.getESuperTypes().add(this.getSTextOverlappingRelation());
 		sSequentialRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
 		sSequentialDSEClass.getESuperTypes().add(theSaltCorePackage.getSNode());
 		sTimelineEClass.getESuperTypes().add(this.getSSequentialDS());
 		sTimelineRelationEClass.getESuperTypes().add(this.getSSequentialRelation());
 		sSpanEClass.getESuperTypes().add(theSaltCorePackage.getSNode());
 		sSpanningRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
+		sSpanningRelationEClass.getESuperTypes().add(this.getSTextOverlappingRelation());
+		sTextOverlappingRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sDocumentGraphEClass, SDocumentGraph.class, "SDocumentGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -673,6 +709,18 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEReference(getSSpanningRelation_SToken(), this.getSToken(), null, "sToken", null, 0, 1, SSpanningRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSSpanningRelation_SSpan(), this.getSSpan(), null, "sSpan", null, 0, 1, SSpanningRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSSpanningRelation_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_SSpanningRelations(), "sDocumentGraph", null, 0, 1, SSpanningRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sTextOverlappingRelationEClass, STextOverlappingRelation.class, "STextOverlappingRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(sTextOverlappingRelationEClass, ecorePackage.getEBooleanObject(), "isSTextOverlapping", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.class, "SFEATURE_NAMES");
+		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.STEXT_OVERLAPPING);
+		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.SSTART);
+		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.SEND);
+		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.STEXT);
+		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.SDATA);
 	}
 
 } //SDocumentStructurePackageImpl

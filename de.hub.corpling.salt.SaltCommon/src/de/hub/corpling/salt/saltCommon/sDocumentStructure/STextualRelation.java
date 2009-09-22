@@ -27,7 +27,7 @@ import de.hub.corpling.salt.saltCore.SNode;
  * @model
  * @generated
  */
-public interface STextualRelation extends SSequentialRelation {
+public interface STextualRelation extends SSequentialRelation, STextOverlappingRelation {
 	/**
 	 * Returns the value of the '<em><b>SToken</b></em>' reference.
 	 * <!-- begin-user-doc -->

@@ -126,6 +126,10 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 				return createSSpanningRelationAdapter();
 			}
 			@Override
+			public Adapter caseSTextOverlappingRelation(STextOverlappingRelation object) {
+				return createSTextOverlappingRelationAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -334,6 +338,20 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSSpanningRelationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation <em>SText Overlapping Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation
+	 * @generated
+	 */
+	public Adapter createSTextOverlappingRelationAdapter() {
 		return null;
 	}
 

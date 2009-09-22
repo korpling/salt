@@ -15,6 +15,7 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePack
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.accessors.STextOverlappingRelationAccessor;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,12 +36,18 @@ public class STextualRelationImpl extends SSequentialRelationImpl implements STe
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	protected STextualRelationImpl() {
+	protected STextualRelationImpl() 
+	{
 		super();
+		init();
 	}
 
+	private void init()
+	{
+		this.sTextOverlappingRelAccessor= new STextOverlappingRelationAccessor();
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -136,6 +143,22 @@ public class STextualRelationImpl extends SSequentialRelationImpl implements STe
 		super.setSGraph(newSDocumentGraph);
 	}
 
+// ======================= start: delegating for feature textOverlapping	
+	/**
+	 * delegatee for textoverlapping
+	 */
+	private STextOverlappingRelationAccessor sTextOverlappingRelAccessor= null; 
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public Boolean isSTextOverlapping() 
+	{
+		return(this.sTextOverlappingRelAccessor.isSTextOverlapping(this));
+	}
+// ======================= end: delegating for feature textOverlapping
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

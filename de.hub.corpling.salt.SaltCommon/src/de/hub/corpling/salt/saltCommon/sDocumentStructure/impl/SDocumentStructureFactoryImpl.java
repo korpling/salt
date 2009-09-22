@@ -9,6 +9,7 @@ package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -70,8 +71,39 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 			case SDocumentStructurePackage.STIMELINE_RELATION: return createSTimelineRelation();
 			case SDocumentStructurePackage.SSPAN: return createSSpan();
 			case SDocumentStructurePackage.SSPANNING_RELATION: return createSSpanningRelation();
+			case SDocumentStructurePackage.STEXT_OVERLAPPING_RELATION: return createSTextOverlappingRelation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case SDocumentStructurePackage.SFEATURE_NAMES:
+				return createSFEATURE_NAMESFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case SDocumentStructurePackage.SFEATURE_NAMES:
+				return convertSFEATURE_NAMESToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -173,6 +205,36 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	public SSpanningRelation createSSpanningRelation() {
 		SSpanningRelationImpl sSpanningRelation = new SSpanningRelationImpl();
 		return sSpanningRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public STextOverlappingRelation createSTextOverlappingRelation() {
+		STextOverlappingRelationImpl sTextOverlappingRelation = new STextOverlappingRelationImpl();
+		return sTextOverlappingRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SFEATURE_NAMES createSFEATURE_NAMESFromString(EDataType eDataType, String initialValue) {
+		SFEATURE_NAMES result = SFEATURE_NAMES.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSFEATURE_NAMESToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

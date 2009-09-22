@@ -151,6 +151,7 @@ public class SDocumentStructureSwitch<T> {
 				STextualRelation sTextualRelation = (STextualRelation)theEObject;
 				T result = caseSTextualRelation(sTextualRelation);
 				if (result == null) result = caseSSequentialRelation(sTextualRelation);
+				if (result == null) result = caseSTextOverlappingRelation(sTextualRelation);
 				if (result == null) result = caseSRelation(sTextualRelation);
 				if (result == null) result = caseEdge(sTextualRelation);
 				if (result == null) result = caseSAnnotatableElement(sTextualRelation);
@@ -243,6 +244,7 @@ public class SDocumentStructureSwitch<T> {
 			case SDocumentStructurePackage.SSPANNING_RELATION: {
 				SSpanningRelation sSpanningRelation = (SSpanningRelation)theEObject;
 				T result = caseSSpanningRelation(sSpanningRelation);
+				if (result == null) result = caseSTextOverlappingRelation(sSpanningRelation);
 				if (result == null) result = caseSRelation(sSpanningRelation);
 				if (result == null) result = caseEdge(sSpanningRelation);
 				if (result == null) result = caseSAnnotatableElement(sSpanningRelation);
@@ -252,6 +254,21 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSFeaturableElement(sSpanningRelation);
 				if (result == null) result = caseLabelableElement(sSpanningRelation);
 				if (result == null) result = caseIdentifiableElement(sSpanningRelation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SDocumentStructurePackage.STEXT_OVERLAPPING_RELATION: {
+				STextOverlappingRelation sTextOverlappingRelation = (STextOverlappingRelation)theEObject;
+				T result = caseSTextOverlappingRelation(sTextOverlappingRelation);
+				if (result == null) result = caseSRelation(sTextOverlappingRelation);
+				if (result == null) result = caseEdge(sTextOverlappingRelation);
+				if (result == null) result = caseSAnnotatableElement(sTextOverlappingRelation);
+				if (result == null) result = caseSNamedElement(sTextOverlappingRelation);
+				if (result == null) result = caseSIdentifiableElement(sTextOverlappingRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sTextOverlappingRelation);
+				if (result == null) result = caseSFeaturableElement(sTextOverlappingRelation);
+				if (result == null) result = caseLabelableElement(sTextOverlappingRelation);
+				if (result == null) result = caseIdentifiableElement(sTextOverlappingRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -406,6 +423,21 @@ public class SDocumentStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSSpanningRelation(SSpanningRelation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SText Overlapping Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SText Overlapping Relation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSTextOverlappingRelation(STextOverlappingRelation object) {
 		return null;
 	}
 

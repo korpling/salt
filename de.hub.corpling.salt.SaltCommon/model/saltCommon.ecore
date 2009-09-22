@@ -85,7 +85,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sTokens"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="STextualRelation" eSuperTypes="#//sDocumentStructure/SSequentialRelation">
+    <eClassifiers xsi:type="ecore:EClass" name="STextualRelation" eSuperTypes="#//sDocumentStructure/SSequentialRelation #//sDocumentStructure/STextOverlappingRelation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sToken" eType="#//sDocumentStructure/SToken"
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTextualDS" eType="#//sDocumentStructure/STextualDS"
@@ -125,13 +125,23 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sSpans"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SSpanningRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
+    <eClassifiers xsi:type="ecore:EClass" name="SSpanningRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation #//sDocumentStructure/STextOverlappingRelation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sToken" eType="#//sDocumentStructure/SToken"
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sSpan" eType="#//sDocumentStructure/SSpan"
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sSpanningRelations"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="SFEATURE_NAMES">
+      <eLiterals name="STEXT_OVERLAPPING" literal="salt::STEXT_OVERLAPPING"/>
+      <eLiterals name="SSTART" value="1"/>
+      <eLiterals name="SEND" value="2"/>
+      <eLiterals name="STEXT" value="3"/>
+      <eLiterals name="SDATA" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="STextOverlappingRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
+      <eOperations name="isSTextOverlapping" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

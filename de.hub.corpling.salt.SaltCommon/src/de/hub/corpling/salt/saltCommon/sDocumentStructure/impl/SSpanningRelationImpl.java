@@ -6,18 +6,17 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
-
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.accessors.STextOverlappingRelationAccessor;
 import de.hub.corpling.salt.saltCore.impl.SRelationImpl;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,12 +37,16 @@ public class SSpanningRelationImpl extends SRelationImpl implements SSpanningRel
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected SSpanningRelationImpl() {
 		super();
+		init();
 	}
 
+	private void init()
+	{
+		this.sTextOverlappingRelAccessor= new STextOverlappingRelationAccessor();
+	}
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -136,6 +139,22 @@ public class SSpanningRelationImpl extends SRelationImpl implements SSpanningRel
 	{
 		super.setSGraph(newSDocumentGraph);
 	}
+
+// ======================= start: delegating for feature textOverlapping	
+	/**
+	 * delegatee for textoverlapping
+	 */
+	private STextOverlappingRelationAccessor sTextOverlappingRelAccessor= null; 
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public Boolean isSTextOverlapping() 
+	{
+		return(this.sTextOverlappingRelAccessor.isSTextOverlapping(this));
+	}
+// ======================= end: delegating for feature textOverlapping
 
 	/**
 	 * <!-- begin-user-doc -->
