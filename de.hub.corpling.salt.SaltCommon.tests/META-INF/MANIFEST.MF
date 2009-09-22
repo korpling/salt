@@ -11,9 +11,9 @@ Export-Package: de.hub.corpling.salt.saltCommon.sCorpusStructure.tests,
  de.hub.corpling.salt.saltCommon.sDocumentStructure.tests,
  de.hub.corpling.salt.saltCommon.tests
 Require-Bundle: org.eclipse.core.runtime,
- de.hub.corpling.salt.SaltCommon;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport,
- de.hub.corpling.salt.SaltCore;bundle-version="1.0.0"
+ de.hub.corpling.salt.SaltCore;bundle-version="1.0.0",
+ de.hub.corpling.salt.SaltCommon;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: de.hub.corpling.graph

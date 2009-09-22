@@ -6,14 +6,12 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.tests;
 
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
 import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -121,5 +119,4 @@ public class STokenTest extends TestCase {
 	{
 		this.testGetSDocumentGraph();
 	}
-
 } //STokenTest

@@ -26,6 +26,12 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation#getSDocumentGraph() <em>SDocument Graph</em>}</li>
  * </ul>
  * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation#isSTextOverlapping() <em>Is SText Overlapping</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class STextualRelationTest extends SSequentialRelationTest {
@@ -152,6 +158,17 @@ public class STextualRelationTest extends SSequentialRelationTest {
 	public void testSetSDocumentGraph() 
 	{
 		this.testGetSDocumentGraph();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation#isSTextOverlapping() <em>Is SText Overlapping</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation#isSTextOverlapping()
+	 */
+	public void testIsSTextOverlapping() 
+	{
+		assertTrue(this.getFixture().isSTextOverlapping());
 	}
 
 } //STextualRelationTest

@@ -27,23 +27,23 @@
   <nodes xsi:type="sDocumentStructure:SToken" sName="tok4">
     <identifier id="tok4"/>
   </nodes>
-  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.0" target="//@nodes.2">
+  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.2" target="//@nodes.0">
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
     <labels xsi:type="saltCore:SAnnotation" name="edgeType" valueString="k.a."/>
     <identifier id="textRel1"/>
   </edges>
-  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.0" target="//@nodes.3">
+  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.3" target="//@nodes.0">
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
     <identifier id="textRel2"/>
   </edges>
-  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.1" target="//@nodes.4">
+  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.4" target="//@nodes.1">
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
     <identifier id="textRel3"/>
   </edges>
-  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.1" target="//@nodes.5">
+  <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.5" target="//@nodes.1">
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
     <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
     <identifier id="textRel4"/>
