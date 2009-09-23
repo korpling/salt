@@ -46,6 +46,7 @@ public class SDocumentStructureTests extends TestSuite {
 		suite.addTestSuite(SSpanTest.class);
 		suite.addTestSuite(SSpanningRelationTest.class);
 		suite.addTestSuite(STextOverlappingRelationTest.class);
+		suite.addTestSuite(STimeOverlappingRelationTest.class);
 		return suite;
 	}
 

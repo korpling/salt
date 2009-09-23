@@ -26,6 +26,12 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph() <em>SDocument Graph</em>}</li>
  * </ul>
  * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation#isSTimeOverlapping() <em>Is STime Overlapping</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class STimelineRelationTest extends SSequentialRelationTest {
@@ -200,6 +206,17 @@ public class STimelineRelationTest extends SSequentialRelationTest {
 	public void testSetSDocumentGraph() 
 	{
 		this.testGetSDocumentGraph();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation#isSTimeOverlapping() <em>Is STime Overlapping</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation#isSTimeOverlapping()
+	 */
+	public void testIsSTimeOverlapping() 
+	{
+		assertTrue(this.getFixture().isSTimeOverlapping());
 	}
 
 } //STimelineRelationTest
