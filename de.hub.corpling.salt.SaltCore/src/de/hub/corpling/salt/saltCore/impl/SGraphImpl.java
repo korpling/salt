@@ -33,6 +33,7 @@ import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SRelation;
+import de.hub.corpling.salt.saltCore.SaltCoreFactory;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
 import de.hub.corpling.salt.saltCore.accessors.SAnnotatableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SFeaturableElementAccessor;
@@ -225,6 +226,22 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	}
 	
 //=================== start: handling SNode
+	@Override
+	protected void basicAddNode(Node node)
+	{
+		if (!(node instanceof SNode))
+			throw new SaltException("Cannot insert a node, which is not a SNode object: "+ node);
+		
+		if (((SNode)node).getSElementId()== null)
+		{
+			String nodeId= node.getId();
+			SElementId sElementId= SaltCoreFactory.eINSTANCE.createSElementId();
+			((SNode)node).setSElementId(sElementId);
+			node.setId(nodeId);
+		}
+		super.basicAddNode(node);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -270,6 +287,22 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	}
 //=================== end: handling SNode
 //=================== start: handling SRelation
+	@Override
+	protected void basicAddEdge(Edge edge)
+	{
+		if (!(edge instanceof SRelation))
+			throw new SaltException("Cannot insert a edge, which is not a SRelation object: "+ edge);
+		
+		if (((SRelation)edge).getSElementId()== null)
+		{
+			String edgeId= edge.getId();
+			SElementId sElementId= SaltCoreFactory.eINSTANCE.createSElementId();
+			((SRelation)edge).setSElementId(sElementId);
+			edge.setId(edgeId);
+		}
+		super.basicAddEdge(edge);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
