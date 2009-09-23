@@ -214,6 +214,7 @@ public class SDocumentStructureSwitch<T> {
 				STimelineRelation sTimelineRelation = (STimelineRelation)theEObject;
 				T result = caseSTimelineRelation(sTimelineRelation);
 				if (result == null) result = caseSSequentialRelation(sTimelineRelation);
+				if (result == null) result = caseSTimeOverlappingRelation(sTimelineRelation);
 				if (result == null) result = caseSRelation(sTimelineRelation);
 				if (result == null) result = caseEdge(sTimelineRelation);
 				if (result == null) result = caseSAnnotatableElement(sTimelineRelation);
@@ -245,6 +246,7 @@ public class SDocumentStructureSwitch<T> {
 				SSpanningRelation sSpanningRelation = (SSpanningRelation)theEObject;
 				T result = caseSSpanningRelation(sSpanningRelation);
 				if (result == null) result = caseSTextOverlappingRelation(sSpanningRelation);
+				if (result == null) result = caseSTimeOverlappingRelation(sSpanningRelation);
 				if (result == null) result = caseSRelation(sSpanningRelation);
 				if (result == null) result = caseEdge(sSpanningRelation);
 				if (result == null) result = caseSAnnotatableElement(sSpanningRelation);
@@ -269,6 +271,21 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSFeaturableElement(sTextOverlappingRelation);
 				if (result == null) result = caseLabelableElement(sTextOverlappingRelation);
 				if (result == null) result = caseIdentifiableElement(sTextOverlappingRelation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SDocumentStructurePackage.STIME_OVERLAPPING_RELATION: {
+				STimeOverlappingRelation sTimeOverlappingRelation = (STimeOverlappingRelation)theEObject;
+				T result = caseSTimeOverlappingRelation(sTimeOverlappingRelation);
+				if (result == null) result = caseSRelation(sTimeOverlappingRelation);
+				if (result == null) result = caseEdge(sTimeOverlappingRelation);
+				if (result == null) result = caseSAnnotatableElement(sTimeOverlappingRelation);
+				if (result == null) result = caseSNamedElement(sTimeOverlappingRelation);
+				if (result == null) result = caseSIdentifiableElement(sTimeOverlappingRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sTimeOverlappingRelation);
+				if (result == null) result = caseSFeaturableElement(sTimeOverlappingRelation);
+				if (result == null) result = caseLabelableElement(sTimeOverlappingRelation);
+				if (result == null) result = caseIdentifiableElement(sTimeOverlappingRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -438,6 +455,21 @@ public class SDocumentStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSTextOverlappingRelation(STextOverlappingRelation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>STime Overlapping Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>STime Overlapping Relation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSTimeOverlappingRelation(STimeOverlappingRelation object) {
 		return null;
 	}
 

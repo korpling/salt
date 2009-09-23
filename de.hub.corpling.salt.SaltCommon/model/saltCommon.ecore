@@ -113,7 +113,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sTimeline"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="STimelineRelation" eSuperTypes="#//sDocumentStructure/SSequentialRelation">
+    <eClassifiers xsi:type="ecore:EClass" name="STimelineRelation" eSuperTypes="#//sDocumentStructure/SSequentialRelation #//sDocumentStructure/STimeOverlappingRelation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTimeline" eType="#//sDocumentStructure/STimeline"
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sToken" eType="#//sDocumentStructure/SToken"
@@ -125,7 +125,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sSpans"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SSpanningRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation #//sDocumentStructure/STextOverlappingRelation">
+    <eClassifiers xsi:type="ecore:EClass" name="SSpanningRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation #//sDocumentStructure/STextOverlappingRelation #//sDocumentStructure/STimeOverlappingRelation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sToken" eType="#//sDocumentStructure/SToken"
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sSpan" eType="#//sDocumentStructure/SSpan"
@@ -139,9 +139,13 @@
       <eLiterals name="SEND" value="2"/>
       <eLiterals name="STEXT" value="3"/>
       <eLiterals name="SDATA" value="4"/>
+      <eLiterals name="STIME_OVERLAPPING" value="5"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="STextOverlappingRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
       <eOperations name="isSTextOverlapping" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="STimeOverlappingRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
+      <eOperations name="isSTimeOverlapping" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

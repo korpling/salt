@@ -1978,6 +1978,169 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXT_OVERLAPPING_RELATION_FEATURE_COUNT = SaltCorePackage.SRELATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.STimeOverlappingRelationImpl <em>STime Overlapping Relation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.STimeOverlappingRelationImpl
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSTimeOverlappingRelation()
+	 * @generated
+	 */
+	int STIME_OVERLAPPING_RELATION = 11;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__LABELS = SaltCorePackage.SRELATION__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__ID = SaltCorePackage.SRELATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__IDENTIFIER = SaltCorePackage.SRELATION__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__GRAPH = SaltCorePackage.SRELATION__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SOURCE = SaltCorePackage.SRELATION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SNAME = SaltCorePackage.SRELATION__SNAME;
+
+	/**
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SELEMENT_ID = SaltCorePackage.SRELATION__SELEMENT_ID;
+
+	/**
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SID = SaltCorePackage.SRELATION__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SSource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SSOURCE = SaltCorePackage.SRELATION__SSOURCE;
+
+	/**
+	 * The feature id for the '<em><b>STarget</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__STARGET = SaltCorePackage.SRELATION__STARGET;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SGRAPH = SaltCorePackage.SRELATION__SGRAPH;
+
+	/**
+	 * The number of structural features of the '<em>STime Overlapping Relation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION_FEATURE_COUNT = SaltCorePackage.SRELATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1985,7 +2148,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSFEATURE_NAMES()
 	 * @generated
 	 */
-	int SFEATURE_NAMES = 11;
+	int SFEATURE_NAMES = 12;
 
 
 	/**
@@ -2385,6 +2548,16 @@ public interface SDocumentStructurePackage extends EPackage {
 	EClass getSTextOverlappingRelation();
 
 	/**
+	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation <em>STime Overlapping Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>STime Overlapping Relation</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation
+	 * @generated
+	 */
+	EClass getSTimeOverlappingRelation();
+
+	/**
 	 * Returns the meta object for enum '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2733,6 +2906,16 @@ public interface SDocumentStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EClass STEXT_OVERLAPPING_RELATION = eINSTANCE.getSTextOverlappingRelation();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.STimeOverlappingRelationImpl <em>STime Overlapping Relation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.STimeOverlappingRelationImpl
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSTimeOverlappingRelation()
+		 * @generated
+		 */
+		EClass STIME_OVERLAPPING_RELATION = eINSTANCE.getSTimeOverlappingRelation();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}' enum.

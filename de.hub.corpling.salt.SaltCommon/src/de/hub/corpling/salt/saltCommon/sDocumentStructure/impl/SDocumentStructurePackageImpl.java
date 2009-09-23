@@ -28,6 +28,7 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
@@ -112,6 +113,13 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * @generated
 	 */
 	private EClass sTextOverlappingRelationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sTimeOverlappingRelationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -530,6 +538,15 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSTimeOverlappingRelation() {
+		return sTimeOverlappingRelationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSFEATURE_NAMES() {
 		return sfeaturE_NAMESEEnum;
 	}
@@ -610,6 +627,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 
 		sTextOverlappingRelationEClass = createEClass(STEXT_OVERLAPPING_RELATION);
 
+		sTimeOverlappingRelationEClass = createEClass(STIME_OVERLAPPING_RELATION);
+
 		// Create enums
 		sfeaturE_NAMESEEnum = createEEnum(SFEATURE_NAMES);
 	}
@@ -655,10 +674,13 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		sSequentialDSEClass.getESuperTypes().add(theSaltCorePackage.getSNode());
 		sTimelineEClass.getESuperTypes().add(this.getSSequentialDS());
 		sTimelineRelationEClass.getESuperTypes().add(this.getSSequentialRelation());
+		sTimelineRelationEClass.getESuperTypes().add(this.getSTimeOverlappingRelation());
 		sSpanEClass.getESuperTypes().add(theSaltCorePackage.getSNode());
 		sSpanningRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
 		sSpanningRelationEClass.getESuperTypes().add(this.getSTextOverlappingRelation());
+		sSpanningRelationEClass.getESuperTypes().add(this.getSTimeOverlappingRelation());
 		sTextOverlappingRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
+		sTimeOverlappingRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sDocumentGraphEClass, SDocumentGraph.class, "SDocumentGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -714,6 +736,10 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 
 		addEOperation(sTextOverlappingRelationEClass, ecorePackage.getEBooleanObject(), "isSTextOverlapping", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(sTimeOverlappingRelationEClass, STimeOverlappingRelation.class, "STimeOverlappingRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(sTimeOverlappingRelationEClass, ecorePackage.getEBooleanObject(), "isSTimeOverlapping", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.class, "SFEATURE_NAMES");
 		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.STEXT_OVERLAPPING);
@@ -721,6 +747,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.SEND);
 		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.STEXT);
 		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.SDATA);
+		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.STIME_OVERLAPPING);
 	}
 
 } //SDocumentStructurePackageImpl

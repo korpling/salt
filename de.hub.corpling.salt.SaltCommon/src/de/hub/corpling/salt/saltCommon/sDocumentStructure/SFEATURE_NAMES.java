@@ -62,7 +62,15 @@ public enum SFEATURE_NAMES implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SDATA(4, "SDATA", "SDATA");
+	SDATA(4, "SDATA", "SDATA"), /**
+	 * The '<em><b>STIME OVERLAPPING</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #STIME_OVERLAPPING_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	STIME_OVERLAPPING(5, "STIME_OVERLAPPING", "STIME_OVERLAPPING");
 
 	/**
 	 * The '<em><b>STEXT OVERLAPPING</b></em>' literal value.
@@ -140,6 +148,21 @@ public enum SFEATURE_NAMES implements Enumerator {
 	public static final int SDATA_VALUE = 4;
 
 	/**
+	 * The '<em><b>STIME OVERLAPPING</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>STIME OVERLAPPING</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #STIME_OVERLAPPING
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STIME_OVERLAPPING_VALUE = 5;
+
+	/**
 	 * An array of all the '<em><b>SFEATURE NAMES</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -152,6 +175,7 @@ public enum SFEATURE_NAMES implements Enumerator {
 			SEND,
 			STEXT,
 			SDATA,
+			STIME_OVERLAPPING,
 		};
 
 	/**
@@ -207,6 +231,7 @@ public enum SFEATURE_NAMES implements Enumerator {
 			case SEND_VALUE: return SEND;
 			case STEXT_VALUE: return STEXT;
 			case SDATA_VALUE: return SDATA;
+			case STIME_OVERLAPPING_VALUE: return STIME_OVERLAPPING;
 		}
 		return null;
 	}

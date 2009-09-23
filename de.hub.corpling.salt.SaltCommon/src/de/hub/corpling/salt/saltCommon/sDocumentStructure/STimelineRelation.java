@@ -26,7 +26,7 @@ import de.hub.corpling.salt.saltCore.SRelation;
  * @model
  * @generated
  */
-public interface STimelineRelation extends SSequentialRelation {
+public interface STimelineRelation extends SSequentialRelation, STimeOverlappingRelation {
 	/**
 	 * Returns the value of the '<em><b>STimeline</b></em>' reference.
 	 * <!-- begin-user-doc -->

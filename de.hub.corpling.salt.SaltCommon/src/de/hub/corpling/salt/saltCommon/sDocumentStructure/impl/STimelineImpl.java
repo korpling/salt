@@ -8,7 +8,6 @@ package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -117,9 +116,25 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 			throw new SaltException("Cannot add an empty point of time.");
 		String timeline= (String) super.getSData();
 		if (timeline== null)
-			timeline= sPointOfTime.toString();
+		{	
+			String pot= null;
+			if (sPointOfTime.equalsIgnoreCase(""))
+				pot= "0";
+			else pot= sPointOfTime;
+			
+			timeline= pot;
+		}	
 		else
-			timeline= timeline+ timeLineSeperator + sPointOfTime;
+		{
+			String pot= null;
+			if (sPointOfTime.equalsIgnoreCase(""))
+			{
+				pot= this.getSPointsOfTime().size()+ "";
+			}
+			else pot= sPointOfTime;
+			
+			timeline= timeline+ timeLineSeperator + pot;
+		}
 		super.setSData(timeline);
 //		SFeature sFeature= super.getSData(); 
 //		String timeline= null;

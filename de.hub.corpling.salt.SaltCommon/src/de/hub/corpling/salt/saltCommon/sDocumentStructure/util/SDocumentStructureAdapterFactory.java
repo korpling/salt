@@ -130,6 +130,10 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 				return createSTextOverlappingRelationAdapter();
 			}
 			@Override
+			public Adapter caseSTimeOverlappingRelation(STimeOverlappingRelation object) {
+				return createSTimeOverlappingRelationAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -352,6 +356,20 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSTextOverlappingRelationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation <em>STime Overlapping Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation
+	 * @generated
+	 */
+	public Adapter createSTimeOverlappingRelationAdapter() {
 		return null;
 	}
 

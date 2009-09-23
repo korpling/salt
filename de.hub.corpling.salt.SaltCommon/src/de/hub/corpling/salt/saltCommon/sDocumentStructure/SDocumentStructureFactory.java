@@ -125,6 +125,15 @@ public interface SDocumentStructureFactory extends EFactory {
 	STextOverlappingRelation createSTextOverlappingRelation();
 
 	/**
+	 * Returns a new object of class '<em>STime Overlapping Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>STime Overlapping Relation</em>'.
+	 * @generated
+	 */
+	STimeOverlappingRelation createSTimeOverlappingRelation();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

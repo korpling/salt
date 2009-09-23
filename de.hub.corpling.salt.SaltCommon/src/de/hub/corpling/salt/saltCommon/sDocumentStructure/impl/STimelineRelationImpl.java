@@ -14,6 +14,7 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePack
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.accessors.STimeOverlappingRelationAccessor;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,10 +35,15 @@ public class STimelineRelationImpl extends SSequentialRelationImpl implements ST
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected STimelineRelationImpl() {
 		super();
+		init();
+	}
+	
+	private void init()
+	{
+		this.sTimeOverlappingRelAccessor= new STimeOverlappingRelationAccessor();
 	}
 
 	/**
@@ -142,6 +148,21 @@ public class STimelineRelationImpl extends SSequentialRelationImpl implements ST
 	{
 		super.setSGraph(newSDocumentGraph);
 	}
+// ======================= start: delegating for feature textOverlapping	
+	/**
+	 * delegatee for textoverlapping
+	 */
+	private STimeOverlappingRelationAccessor sTimeOverlappingRelAccessor= null; 
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public Boolean isSTimeOverlapping() 
+	{
+		return(this.sTimeOverlappingRelAccessor.isSTimeOverlapping(this));
+	}
+// ======================= end: delegating for feature textOverlapping
 
 	/**
 	 * <!-- begin-user-doc -->

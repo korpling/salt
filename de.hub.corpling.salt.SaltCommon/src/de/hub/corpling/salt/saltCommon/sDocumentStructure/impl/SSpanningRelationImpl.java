@@ -16,6 +16,7 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.accessors.STextOverlappingRelationAccessor;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.accessors.STimeOverlappingRelationAccessor;
 import de.hub.corpling.salt.saltCore.impl.SRelationImpl;
 
 /**
@@ -46,6 +47,7 @@ public class SSpanningRelationImpl extends SRelationImpl implements SSpanningRel
 	private void init()
 	{
 		this.sTextOverlappingRelAccessor= new STextOverlappingRelationAccessor();
+		this.sTimeOverlappingRelAccessor= new STimeOverlappingRelationAccessor();
 	}
 	/**
 	 * <!-- begin-user-doc -->
@@ -139,6 +141,22 @@ public class SSpanningRelationImpl extends SRelationImpl implements SSpanningRel
 	{
 		super.setSGraph(newSDocumentGraph);
 	}
+
+// ======================= start: delegating for feature textOverlapping	
+	/**
+	 * delegatee for textoverlapping
+	 */
+	private STimeOverlappingRelationAccessor sTimeOverlappingRelAccessor= null; 
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public Boolean isSTimeOverlapping() 
+	{
+		return(this.sTimeOverlappingRelAccessor.isSTimeOverlapping(this));
+	}
+// ======================= end: delegating for feature textOverlapping
 
 // ======================= start: delegating for feature textOverlapping	
 	/**

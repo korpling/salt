@@ -26,7 +26,7 @@ import de.hub.corpling.salt.saltCore.SRelation;
  * @model
  * @generated
  */
-public interface SSpanningRelation extends SRelation, STextOverlappingRelation {
+public interface SSpanningRelation extends SRelation, STextOverlappingRelation, STimeOverlappingRelation {
 	/**
 	 * Returns the value of the '<em><b>SToken</b></em>' reference.
 	 * <!-- begin-user-doc -->

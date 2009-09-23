@@ -6,6 +6,7 @@
  */
 package de.hub.corpling.salt.saltCommon.impl;
 
+import de.hub.corpling.salt.saltCommon.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -32,6 +33,7 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
@@ -334,10 +336,17 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	}
 	
 	@Override
+	public STimeOverlappingRelation createSTimeOverlappingRelation() {
+		return(this.sDocumentStructureFactory.createSTimeOverlappingRelation());
+	}
+	
+	@Override
 	public SDocumentStructurePackage getSDocumentStructurePackage() {
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
 // ===================================== end: SDocumentStructureFactory
+
+	
 
 	
 

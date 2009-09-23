@@ -72,6 +72,7 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 			case SDocumentStructurePackage.SSPAN: return createSSpan();
 			case SDocumentStructurePackage.SSPANNING_RELATION: return createSSpanningRelation();
 			case SDocumentStructurePackage.STEXT_OVERLAPPING_RELATION: return createSTextOverlappingRelation();
+			case SDocumentStructurePackage.STIME_OVERLAPPING_RELATION: return createSTimeOverlappingRelation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -215,6 +216,16 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	public STextOverlappingRelation createSTextOverlappingRelation() {
 		STextOverlappingRelationImpl sTextOverlappingRelation = new STextOverlappingRelationImpl();
 		return sTextOverlappingRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public STimeOverlappingRelation createSTimeOverlappingRelation() {
+		STimeOverlappingRelationImpl sTimeOverlappingRelation = new STimeOverlappingRelationImpl();
+		return sTimeOverlappingRelation;
 	}
 
 	/**
