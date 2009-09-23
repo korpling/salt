@@ -39,14 +39,13 @@ public class SDocumentStructureTests extends TestSuite {
 		suite.addTestSuite(STextualDSTest.class);
 		suite.addTestSuite(STokenTest.class);
 		suite.addTestSuite(STextualRelationTest.class);
-		suite.addTestSuite(SSequentialRelationTest.class);
-		suite.addTestSuite(SSequentialDSTest.class);
 		suite.addTestSuite(STimelineTest.class);
 		suite.addTestSuite(STimelineRelationTest.class);
 		suite.addTestSuite(SSpanTest.class);
 		suite.addTestSuite(SSpanningRelationTest.class);
-		suite.addTestSuite(STextOverlappingRelationTest.class);
-		suite.addTestSuite(STimeOverlappingRelationTest.class);
+		suite.addTestSuite(SStructureTest.class);
+		suite.addTestSuite(SPointingRelationTest.class);
+		suite.addTestSuite(SDominanceRelationTest.class);
 		return suite;
 	}
 

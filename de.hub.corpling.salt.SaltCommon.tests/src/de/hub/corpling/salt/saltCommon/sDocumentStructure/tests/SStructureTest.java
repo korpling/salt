@@ -6,25 +6,26 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.tests;
 
-import junit.textui.TestRunner;
 import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure;
+
+import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>SToken</b></em>'.
+ * A test case for the model object '<em><b>SStructure</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken#getSDocumentGraph() <em>SDocument Graph</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph() <em>SDocument Graph</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class STokenTest extends SStructuredNodeTest {
+public class SStructureTest extends SStructuredNodeTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -32,28 +33,28 @@ public class STokenTest extends SStructuredNodeTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(STokenTest.class);
+		TestRunner.run(SStructureTest.class);
 	}
 
 	/**
-	 * Constructs a new SToken test case with the given name.
+	 * Constructs a new SStructure test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public STokenTest(String name) {
+	public SStructureTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Returns the fixture for this SToken test case.
+	 * Returns the fixture for this SStructure test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	protected SToken getFixture() {
-		return (SToken)fixture;
+	protected SStructure getFixture() {
+		return (SStructure)fixture;
 	}
 
 	/**
@@ -64,7 +65,7 @@ public class STokenTest extends SStructuredNodeTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(SDocumentStructureFactory.eINSTANCE.createSToken());
+		setFixture(SDocumentStructureFactory.eINSTANCE.createSStructure());
 	}
 
 	/**
@@ -79,10 +80,10 @@ public class STokenTest extends SStructuredNodeTest {
 	}
 
 	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation#getSDocumentGraph() <em>SDocument Graph</em>}' feature getter.
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph() <em>SDocument Graph</em>}' feature getter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation#getSDocumentGraph()
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph()
 	 */
 	public void testGetSDocumentGraph() 
 	{
@@ -92,13 +93,14 @@ public class STokenTest extends SStructuredNodeTest {
 	}
 
 	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation#setSDocumentGraph(de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph) <em>SDocument Graph</em>}' feature setter.
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#setSDocumentGraph(de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph) <em>SDocument Graph</em>}' feature setter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation#setSDocumentGraph(de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph)
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#setSDocumentGraph(de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph)
 	 */
 	public void testSetSDocumentGraph() 
 	{
 		this.testGetSDocumentGraph();
 	}
-} //STokenTest
+
+} //SStructureTest

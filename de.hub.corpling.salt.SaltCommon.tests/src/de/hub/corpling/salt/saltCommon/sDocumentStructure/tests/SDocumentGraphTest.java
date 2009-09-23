@@ -12,8 +12,11 @@ import org.eclipse.emf.common.util.EList;
 import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
@@ -38,6 +41,9 @@ import junit.textui.TestRunner;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations() <em>STimeline Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpanningRelations() <em>SSpanning Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpans() <em>SSpans</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures() <em>SStructures</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations() <em>SDominance Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations() <em>SPointing Relations</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -253,9 +259,9 @@ public class SDocumentGraphTest extends TestCase {
 		EList<SSpanningRelation> spanRels= new BasicEList<SSpanningRelation>();
 		for (int i= 0; i< 10; i++)
 		{
-			SSpanningRelation sTimeRel= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
-			spanRels.add(sTimeRel);
-			this.getFixture().addSRelation(sTimeRel);
+			SSpanningRelation sSpanRel= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+			spanRels.add(sSpanRel);
+			this.getFixture().addSRelation(sSpanRel);
 		}	
 		assertTrue(spanRels.containsAll(this.getFixture().getSSpanningRelations()));
 		assertTrue(this.getFixture().getSSpanningRelations().containsAll(spanRels));
@@ -281,6 +287,66 @@ public class SDocumentGraphTest extends TestCase {
 		
 		assertTrue(spans.containsAll(this.getFixture().getSSpans()));
 		assertTrue(this.getFixture().getSSpans().containsAll(spans));
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures() <em>SStructures</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures()
+	 */
+	public void testGetSStructures() 
+	{
+		String[] names= {"salt:/graph1#structure1", "salt:/graph1#structure2", "salt:/graph1#structure3", "salt:/graph1#structure4"};
+		EList<SStructure> structures= new BasicEList<SStructure>();
+		for (String name: names)
+		{
+			SStructure structure= SaltCommonFactory.eINSTANCE.createSStructure();
+			structure.setSName(name);
+			this.getFixture().addSNode(structure);
+			structures.add(structure);
+		}	
+		
+		assertTrue(structures.containsAll(this.getFixture().getSStructures()));
+		assertTrue(this.getFixture().getSStructures().containsAll(structures));
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations() <em>SDominance Relations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations()
+	 */
+	public void testGetSDominanceRelations() 
+	{
+		EList<SDominanceRelation> domRels= new BasicEList<SDominanceRelation>();
+		for (int i= 0; i< 10; i++)
+		{
+			SDominanceRelation sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			domRels.add(sDomRel);
+			this.getFixture().addSRelation(sDomRel);
+		}	
+		assertTrue(domRels.containsAll(this.getFixture().getSDominanceRelations()));
+		assertTrue(this.getFixture().getSDominanceRelations().containsAll(domRels));
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations() <em>SPointing Relations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations()
+	 */
+	public void testGetSPointingRelations() 
+	{
+		EList<SPointingRelation> pointingRels= new BasicEList<SPointingRelation>();
+		for (int i= 0; i< 10; i++)
+		{
+			SPointingRelation sDomRel= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			pointingRels.add(sDomRel);
+			this.getFixture().addSRelation(sDomRel);
+		}	
+		assertTrue(pointingRels.containsAll(this.getFixture().getSPointingRelations()));
+		assertTrue(this.getFixture().getSPointingRelations().containsAll(pointingRels));
 	}
 
 } //SDocumentGraphTest

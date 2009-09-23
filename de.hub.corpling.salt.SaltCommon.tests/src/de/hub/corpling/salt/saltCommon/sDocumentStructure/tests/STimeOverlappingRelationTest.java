@@ -25,7 +25,7 @@ import junit.textui.TestRunner;
  * </p>
  * @generated
  */
-public class STimeOverlappingRelationTest extends TestCase {
+public abstract class STimeOverlappingRelationTest extends TestCase {
 
 	/**
 	 * The fixture for this STime Overlapping Relation test case.
@@ -34,15 +34,6 @@ public class STimeOverlappingRelationTest extends TestCase {
 	 * @generated
 	 */
 	protected STimeOverlappingRelation fixture = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(STimeOverlappingRelationTest.class);
-	}
 
 	/**
 	 * Constructs a new STime Overlapping Relation test case with the given name.
@@ -72,28 +63,6 @@ public class STimeOverlappingRelationTest extends TestCase {
 	 */
 	protected STimeOverlappingRelation getFixture() {
 		return fixture;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(SDocumentStructureFactory.eINSTANCE.createSTimeOverlappingRelation());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
 	}
 
 	/**

@@ -6,7 +6,9 @@
  */
 package de.hub.corpling.salt.saltCommon.sCorpusStructure.tests;
 
+import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpus;
+import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 
 import junit.framework.TestCase;
@@ -17,6 +19,12 @@ import junit.textui.TestRunner;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>SCorpus</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpus#getSCorpusGraph() <em>SCorpus Graph</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class SCorpusTest extends TestCase {
@@ -88,6 +96,30 @@ public class SCorpusTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusRelation#getSCorpusGraph() <em>SCorpus Graph</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusRelation#getSCorpusGraph()
+	 */
+	public void testGetSCorpusGraph() 
+	{
+		SCorpusGraph sSCorpusGraph= SaltCommonFactory.eINSTANCE.createSCorpusGraph();
+		this.getFixture().setSCorpusGraph(sSCorpusGraph);
+		assertEquals(sSCorpusGraph, this.getFixture().getSCorpusGraph());
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusRelation#setSCorpusGraph(de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph) <em>SCorpus Graph</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusRelation#setSCorpusGraph(de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph)
+	 */
+	public void testSetSCorpusGraph() 
+	{
+		this.testGetSCorpusGraph();
 	}
 
 } //SCorpusTest

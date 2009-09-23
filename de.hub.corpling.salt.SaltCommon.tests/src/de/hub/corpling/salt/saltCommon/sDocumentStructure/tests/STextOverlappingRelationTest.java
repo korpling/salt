@@ -6,12 +6,8 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.tests;
 
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
-
 import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +21,7 @@ import junit.textui.TestRunner;
  * </p>
  * @generated
  */
-public class STextOverlappingRelationTest extends TestCase {
+public abstract class STextOverlappingRelationTest extends TestCase {
 
 	/**
 	 * The fixture for this SText Overlapping Relation test case.
@@ -34,15 +30,6 @@ public class STextOverlappingRelationTest extends TestCase {
 	 * @generated
 	 */
 	protected STextOverlappingRelation fixture = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(STextOverlappingRelationTest.class);
-	}
 
 	/**
 	 * Constructs a new SText Overlapping Relation test case with the given name.
@@ -72,28 +59,6 @@ public class STextOverlappingRelationTest extends TestCase {
 	 */
 	protected STextOverlappingRelation getFixture() {
 		return fixture;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(SDocumentStructureFactory.eINSTANCE.createSTextOverlappingRelation());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
 	}
 
 	/**

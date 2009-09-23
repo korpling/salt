@@ -6,14 +6,11 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.tests;
 
+import junit.textui.TestRunner;
 import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,15 +24,7 @@ import junit.textui.TestRunner;
  * </p>
  * @generated
  */
-public class SSpanTest extends TestCase {
-
-	/**
-	 * The fixture for this SSpan test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SSpan fixture = null;
+public class SSpanTest extends SStructuredNodeTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -57,23 +46,14 @@ public class SSpanTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this SSpan test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(SSpan fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this SSpan test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected SSpan getFixture() {
-		return fixture;
+		return (SSpan)fixture;
 	}
 
 	/**

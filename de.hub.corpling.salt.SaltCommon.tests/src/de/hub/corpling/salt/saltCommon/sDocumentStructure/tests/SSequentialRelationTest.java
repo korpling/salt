@@ -26,7 +26,7 @@ import junit.textui.TestRunner;
  * </p>
  * @generated
  */
-public class SSequentialRelationTest extends TestCase {
+public abstract class SSequentialRelationTest extends TestCase {
 
 	/**
 	 * The fixture for this SSequential Relation test case.
@@ -35,15 +35,6 @@ public class SSequentialRelationTest extends TestCase {
 	 * @generated
 	 */
 	protected SSequentialRelation fixture = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(SSequentialRelationTest.class);
-	}
 
 	/**
 	 * Constructs a new SSequential Relation test case with the given name.
@@ -75,28 +66,6 @@ public class SSequentialRelationTest extends TestCase {
 		return fixture;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(SDocumentStructureFactory.eINSTANCE.createSSequentialRelation());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
-	
 	public void testGetSStart() 
 	{
 		Integer start= 1;
