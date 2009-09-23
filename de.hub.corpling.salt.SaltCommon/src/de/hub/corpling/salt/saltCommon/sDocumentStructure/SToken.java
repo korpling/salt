@@ -6,7 +6,6 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure;
 
-import de.hub.corpling.salt.saltCore.SNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +23,7 @@ import de.hub.corpling.salt.saltCore.SNode;
  * @model
  * @generated
  */
-public interface SToken extends SNode {
+public interface SToken extends SStructuredNode {
 	/**
 	 * Returns the value of the '<em><b>SDocument Graph</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTokens <em>STokens</em>}'.

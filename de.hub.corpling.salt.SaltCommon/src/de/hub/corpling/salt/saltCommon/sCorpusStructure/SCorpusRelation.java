@@ -38,7 +38,7 @@ public interface SCorpusRelation extends SRelation {
 	 * @return the value of the '<em>SSuper Corpus</em>' reference.
 	 * @see #setSSuperCorpus(SCorpus)
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusRelation_SSuperCorpus()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SCorpus getSSuperCorpus();
@@ -64,7 +64,7 @@ public interface SCorpusRelation extends SRelation {
 	 * @return the value of the '<em>SSub Corpus</em>' reference.
 	 * @see #setSSubCorpus(SCorpus)
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusRelation_SSubCorpus()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SCorpus getSSubCorpus();
@@ -92,7 +92,7 @@ public interface SCorpusRelation extends SRelation {
 	 * @see #setSCorpusGraph(SCorpusGraph)
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusRelation_SCorpusGraph()
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSCorpusRelations
-	 * @model opposite="sCorpusRelations" transient="false"
+	 * @model opposite="sCorpusRelations" volatile="true" derived="true"
 	 * @generated
 	 */
 	SCorpusGraph getSCorpusGraph();

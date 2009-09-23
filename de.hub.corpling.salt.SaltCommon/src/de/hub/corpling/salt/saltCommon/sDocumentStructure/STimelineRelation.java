@@ -6,7 +6,6 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure;
 
-import de.hub.corpling.salt.saltCore.SRelation;
 
 /**
  * <!-- begin-user-doc -->

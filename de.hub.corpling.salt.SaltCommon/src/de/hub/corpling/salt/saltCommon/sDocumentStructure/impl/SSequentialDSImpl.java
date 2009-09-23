@@ -28,7 +28,7 @@ import de.hub.corpling.salt.saltCore.impl.SNodeImpl;
  *
  * @generated
  */
-public class SSequentialDSImpl extends SNodeImpl implements SSequentialDS {
+public abstract class SSequentialDSImpl extends SNodeImpl implements SSequentialDS {
 	/**
 	 * The default value of the '{@link #getSData() <em>SData</em>}' attribute.
 	 * <!-- begin-user-doc -->

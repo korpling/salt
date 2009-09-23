@@ -6,15 +6,12 @@
  */
 package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
-
-import de.hub.corpling.salt.saltCore.impl.SNodeImpl;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +26,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class SSpanImpl extends SNodeImpl implements SSpan {
+public class SSpanImpl extends SStructuredNodeImpl implements SSpan {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -38,7 +38,7 @@ public interface SCorpusDocumentRelation extends SRelation {
 	 * @return the value of the '<em>SCorpus</em>' reference.
 	 * @see #setSCorpus(SCorpus)
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusDocumentRelation_SCorpus()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SCorpus getSCorpus();
@@ -64,7 +64,7 @@ public interface SCorpusDocumentRelation extends SRelation {
 	 * @return the value of the '<em>SDocument</em>' reference.
 	 * @see #setSDocument(SDocument)
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusDocumentRelation_SDocument()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDocument getSDocument();
@@ -92,7 +92,7 @@ public interface SCorpusDocumentRelation extends SRelation {
 	 * @see #setSCorpusGraph(SCorpusGraph)
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusDocumentRelation_SCorpusGraph()
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSCorpusDocumentRelations
-	 * @model opposite="sCorpusDocumentRelations" transient="false"
+	 * @model opposite="sCorpusDocumentRelations" volatile="true" derived="true"
 	 * @generated
 	 */
 	SCorpusGraph getSCorpusGraph();

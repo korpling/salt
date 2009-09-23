@@ -9,24 +9,24 @@ package de.hub.corpling.salt.saltCommon.sDocumentStructure;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>SSpan</b></em>'.
+ * A representation of the model object '<em><b>SStructure</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan#getSDocumentGraph <em>SDocument Graph</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph <em>SDocument Graph</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSpan()
+ * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSStructure()
  * @model
  * @generated
  */
-public interface SSpan extends SStructuredNode {
+public interface SStructure extends SStructuredNode {
 	/**
 	 * Returns the value of the '<em><b>SDocument Graph</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpans <em>SSpans</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures <em>SStructures</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SDocument Graph</em>' container reference isn't clear,
@@ -35,15 +35,15 @@ public interface SSpan extends SStructuredNode {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>SDocument Graph</em>' container reference.
 	 * @see #setSDocumentGraph(SDocumentGraph)
-	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSpan_SDocumentGraph()
-	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpans
-	 * @model opposite="sSpans" volatile="true" derived="true"
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSStructure_SDocumentGraph()
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures
+	 * @model opposite="sStructures" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDocumentGraph getSDocumentGraph();
 
 	/**
-	 * Sets the value of the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan#getSDocumentGraph <em>SDocument Graph</em>}' container reference.
+	 * Sets the value of the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph <em>SDocument Graph</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>SDocument Graph</em>' container reference.
@@ -52,4 +52,4 @@ public interface SSpan extends SStructuredNode {
 	 */
 	void setSDocumentGraph(SDocumentGraph value);
 
-} // SSpan
+} // SStructure

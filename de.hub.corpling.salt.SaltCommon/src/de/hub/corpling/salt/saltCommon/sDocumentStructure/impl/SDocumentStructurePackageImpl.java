@@ -21,10 +21,14 @@ import de.hub.corpling.salt.saltCommon.sCorpusStructure.impl.SCorpusStructurePac
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructuredNode;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
@@ -120,6 +124,34 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * @generated
 	 */
 	private EClass sTimeOverlappingRelationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sStructuredNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sStructureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sPointingRelationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sDominanceRelationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -279,6 +311,33 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 */
 	public EReference getSDocumentGraph_SSpans() {
 		return (EReference)sDocumentGraphEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSDocumentGraph_SStructures() {
+		return (EReference)sDocumentGraphEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSDocumentGraph_SDominanceRelations() {
+		return (EReference)sDocumentGraphEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSDocumentGraph_SPointingRelations() {
+		return (EReference)sDocumentGraphEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -547,6 +606,105 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSStructuredNode() {
+		return sStructuredNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSStructure() {
+		return sStructureEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSStructure_SDocumentGraph() {
+		return (EReference)sStructureEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSPointingRelation() {
+		return sPointingRelationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSPointingRelation_SStructuredSource() {
+		return (EReference)sPointingRelationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSPointingRelation_SStructuredTarget() {
+		return (EReference)sPointingRelationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSPointingRelation_SDocumentGraph() {
+		return (EReference)sPointingRelationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSDominanceRelation() {
+		return sDominanceRelationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSDominanceRelation_SStructure() {
+		return (EReference)sDominanceRelationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSDominanceRelation_SStructuredTarget() {
+		return (EReference)sDominanceRelationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSDominanceRelation_SDocumentGraph() {
+		return (EReference)sDominanceRelationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSFEATURE_NAMES() {
 		return sfeaturE_NAMESEEnum;
 	}
@@ -588,6 +746,9 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__STIMELINE_RELATIONS);
 		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SSPANNING_RELATIONS);
 		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SSPANS);
+		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SSTRUCTURES);
+		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS);
+		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SPOINTING_RELATIONS);
 
 		sTextualDSEClass = createEClass(STEXTUAL_DS);
 		createEAttribute(sTextualDSEClass, STEXTUAL_DS__STEXT);
@@ -629,6 +790,21 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 
 		sTimeOverlappingRelationEClass = createEClass(STIME_OVERLAPPING_RELATION);
 
+		sStructuredNodeEClass = createEClass(SSTRUCTURED_NODE);
+
+		sStructureEClass = createEClass(SSTRUCTURE);
+		createEReference(sStructureEClass, SSTRUCTURE__SDOCUMENT_GRAPH);
+
+		sPointingRelationEClass = createEClass(SPOINTING_RELATION);
+		createEReference(sPointingRelationEClass, SPOINTING_RELATION__SSTRUCTURED_SOURCE);
+		createEReference(sPointingRelationEClass, SPOINTING_RELATION__SSTRUCTURED_TARGET);
+		createEReference(sPointingRelationEClass, SPOINTING_RELATION__SDOCUMENT_GRAPH);
+
+		sDominanceRelationEClass = createEClass(SDOMINANCE_RELATION);
+		createEReference(sDominanceRelationEClass, SDOMINANCE_RELATION__SSTRUCTURE);
+		createEReference(sDominanceRelationEClass, SDOMINANCE_RELATION__SSTRUCTURED_TARGET);
+		createEReference(sDominanceRelationEClass, SDOMINANCE_RELATION__SDOCUMENT_GRAPH);
+
 		// Create enums
 		sfeaturE_NAMESEEnum = createEEnum(SFEATURE_NAMES);
 	}
@@ -667,7 +843,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		// Add supertypes to classes
 		sDocumentGraphEClass.getESuperTypes().add(theSaltCorePackage.getSGraph());
 		sTextualDSEClass.getESuperTypes().add(this.getSSequentialDS());
-		sTokenEClass.getESuperTypes().add(theSaltCorePackage.getSNode());
+		sTokenEClass.getESuperTypes().add(this.getSStructuredNode());
 		sTextualRelationEClass.getESuperTypes().add(this.getSSequentialRelation());
 		sTextualRelationEClass.getESuperTypes().add(this.getSTextOverlappingRelation());
 		sSequentialRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
@@ -675,12 +851,17 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		sTimelineEClass.getESuperTypes().add(this.getSSequentialDS());
 		sTimelineRelationEClass.getESuperTypes().add(this.getSSequentialRelation());
 		sTimelineRelationEClass.getESuperTypes().add(this.getSTimeOverlappingRelation());
-		sSpanEClass.getESuperTypes().add(theSaltCorePackage.getSNode());
+		sSpanEClass.getESuperTypes().add(this.getSStructuredNode());
 		sSpanningRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
 		sSpanningRelationEClass.getESuperTypes().add(this.getSTextOverlappingRelation());
 		sSpanningRelationEClass.getESuperTypes().add(this.getSTimeOverlappingRelation());
 		sTextOverlappingRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
 		sTimeOverlappingRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
+		sStructuredNodeEClass.getESuperTypes().add(theSaltCorePackage.getSNode());
+		sStructureEClass.getESuperTypes().add(this.getSStructuredNode());
+		sPointingRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
+		sDominanceRelationEClass.getESuperTypes().add(this.getSTextOverlappingRelation());
+		sDominanceRelationEClass.getESuperTypes().add(this.getSTimeOverlappingRelation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sDocumentGraphEClass, SDocumentGraph.class, "SDocumentGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -692,6 +873,9 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEReference(getSDocumentGraph_STimelineRelations(), this.getSTimelineRelation(), null, "sTimelineRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_SSpanningRelations(), this.getSSpanningRelation(), this.getSSpanningRelation_SDocumentGraph(), "sSpanningRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_SSpans(), this.getSSpan(), this.getSSpan_SDocumentGraph(), "sSpans", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSDocumentGraph_SStructures(), this.getSStructure(), this.getSStructure_SDocumentGraph(), "sStructures", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSDocumentGraph_SDominanceRelations(), this.getSDominanceRelation(), this.getSDominanceRelation_SDocumentGraph(), "sDominanceRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSDocumentGraph_SPointingRelations(), this.getSPointingRelation(), this.getSPointingRelation_SDocumentGraph(), "sPointingRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sTextualDSEClass, STextualDS.class, "STextualDS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSTextualDS_SText(), ecorePackage.getEString(), "sText", null, 0, 1, STextualDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -705,11 +889,11 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEReference(getSTextualRelation_STextualDS(), this.getSTextualDS(), null, "sTextualDS", null, 0, 1, STextualRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSTextualRelation_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_STextualRelations(), "sDocumentGraph", null, 0, 1, STextualRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEClass(sSequentialRelationEClass, SSequentialRelation.class, "SSequentialRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(sSequentialRelationEClass, SSequentialRelation.class, "SSequentialRelation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSSequentialRelation_SStart(), ecorePackage.getEIntegerObject(), "sStart", null, 0, 1, SSequentialRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSSequentialRelation_SEnd(), ecorePackage.getEIntegerObject(), "sEnd", null, 0, 1, SSequentialRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEClass(sSequentialDSEClass, SSequentialDS.class, "SSequentialDS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(sSequentialDSEClass, SSequentialDS.class, "SSequentialDS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSSequentialDS_SData(), ecorePackage.getEJavaObject(), "sData", null, 0, 1, SSequentialDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sTimelineEClass, STimeline.class, "STimeline", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -732,13 +916,28 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEReference(getSSpanningRelation_SSpan(), this.getSSpan(), null, "sSpan", null, 0, 1, SSpanningRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSSpanningRelation_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_SSpanningRelations(), "sDocumentGraph", null, 0, 1, SSpanningRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(sTextOverlappingRelationEClass, STextOverlappingRelation.class, "STextOverlappingRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(sTextOverlappingRelationEClass, STextOverlappingRelation.class, "STextOverlappingRelation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		addEOperation(sTextOverlappingRelationEClass, ecorePackage.getEBooleanObject(), "isSTextOverlapping", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(sTimeOverlappingRelationEClass, STimeOverlappingRelation.class, "STimeOverlappingRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(sTimeOverlappingRelationEClass, STimeOverlappingRelation.class, "STimeOverlappingRelation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		addEOperation(sTimeOverlappingRelationEClass, ecorePackage.getEBooleanObject(), "isSTimeOverlapping", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(sStructuredNodeEClass, SStructuredNode.class, "SStructuredNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(sStructureEClass, SStructure.class, "SStructure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSStructure_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_SStructures(), "sDocumentGraph", null, 0, 1, SStructure.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(sPointingRelationEClass, SPointingRelation.class, "SPointingRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSPointingRelation_SStructuredSource(), this.getSStructuredNode(), null, "SStructuredSource", null, 0, 1, SPointingRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSPointingRelation_SStructuredTarget(), this.getSStructuredNode(), null, "SStructuredTarget", null, 0, 1, SPointingRelation.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSPointingRelation_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_SPointingRelations(), "sDocumentGraph", null, 0, 1, SPointingRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(sDominanceRelationEClass, SDominanceRelation.class, "SDominanceRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSDominanceRelation_SStructure(), this.getSStructure(), null, "sStructure", null, 0, 1, SDominanceRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSDominanceRelation_SStructuredTarget(), this.getSStructuredNode(), null, "sStructuredTarget", null, 0, 1, SDominanceRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSDominanceRelation_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_SDominanceRelations(), "sDocumentGraph", null, 0, 1, SDominanceRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.class, "SFEATURE_NAMES");

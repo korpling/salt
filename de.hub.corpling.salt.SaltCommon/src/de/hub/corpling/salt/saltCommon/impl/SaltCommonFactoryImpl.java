@@ -26,14 +26,13 @@ import de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialDS;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSequentialRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
-import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
@@ -281,15 +280,15 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.createSDocumentGraph());
 	}
 
-	@Override
-	public SSequentialDS createSSequentialDS() {
-		return(this.sDocumentStructureFactory.createSSequentialDS());
-	}
+//	@Override
+//	public SSequentialDS createSSequentialDS() {
+//		return(this.sDocumentStructureFactory.createSSequentialDS());
+//	}
 
-	@Override
-	public SSequentialRelation createSSequentialRelation() {
-		return(this.sDocumentStructureFactory.createSSequentialRelation());
-	}
+//	@Override
+//	public SSequentialRelation createSSequentialRelation() {
+//		return(this.sDocumentStructureFactory.createSSequentialRelation());
+//	}
 
 	@Override
 	public STextualDS createSTextualDS() {
@@ -329,25 +328,45 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.createSSpanningRelation());
 	}
 
-	@Override
-	public STextOverlappingRelation createSTextOverlappingRelation() 
-	{
-		return(this.sDocumentStructureFactory.createSTextOverlappingRelation());
-	}
+//	@Override
+//	public STextOverlappingRelation createSTextOverlappingRelation() 
+//	{
+//		return(this.sDocumentStructureFactory.createSTextOverlappingRelation());
+//	}
+//	
+//	@Override
+//	public STimeOverlappingRelation createSTimeOverlappingRelation() {
+//		return(this.sDocumentStructureFactory.createSTimeOverlappingRelation());
+//	}
 	
 	@Override
-	public STimeOverlappingRelation createSTimeOverlappingRelation() {
-		return(this.sDocumentStructureFactory.createSTimeOverlappingRelation());
+	public SDominanceRelation createSDominanceRelation() 
+	{
+		return(this.sDocumentStructureFactory.createSDominanceRelation());
 	}
+
+	@Override
+	public SPointingRelation createSPointingRelation() 
+	{
+		return(this.sDocumentStructureFactory.createSPointingRelation());
+	}
+
+	@Override
+	public SStructure createSStructure() 
+	{
+		return(this.sDocumentStructureFactory.createSStructure());
+	}
+
+//	@Override
+//	public SStructuredNode createSStructuredNode() 
+//	{
+//		return(this.sDocumentStructureFactory.createSStructuredNode());
+//	}
 	
 	@Override
 	public SDocumentStructurePackage getSDocumentStructurePackage() {
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
 // ===================================== end: SDocumentStructureFactory
-
-	
-
-	
 
 } //SaltCommonFactoryImpl

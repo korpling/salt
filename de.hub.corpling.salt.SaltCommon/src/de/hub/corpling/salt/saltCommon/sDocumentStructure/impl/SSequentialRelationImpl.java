@@ -29,7 +29,7 @@ import de.hub.corpling.salt.saltCore.impl.SRelationImpl;
  *
  * @generated
  */
-public class SSequentialRelationImpl extends SRelationImpl implements SSequentialRelation {
+public abstract class SSequentialRelationImpl extends SRelationImpl implements SSequentialRelation {
 	/**
 	 * The default value of the '{@link #getSStart() <em>SStart</em>}' attribute.
 	 * <!-- begin-user-doc -->

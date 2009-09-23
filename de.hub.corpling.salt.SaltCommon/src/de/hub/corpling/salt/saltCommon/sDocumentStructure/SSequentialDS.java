@@ -7,7 +7,6 @@
 package de.hub.corpling.salt.saltCommon.sDocumentStructure;
 
 import de.hub.corpling.salt.saltCore.SNode;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSequentialDS()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface SSequentialDS extends SNode {

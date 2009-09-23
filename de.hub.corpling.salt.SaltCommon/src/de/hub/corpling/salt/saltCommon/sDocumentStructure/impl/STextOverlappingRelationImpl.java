@@ -22,7 +22,7 @@ import de.hub.corpling.salt.saltCore.impl.SRelationImpl;
  *
  * @generated
  */
-public class STextOverlappingRelationImpl extends SRelationImpl implements STextOverlappingRelation {
+public abstract class STextOverlappingRelationImpl extends SRelationImpl implements STextOverlappingRelation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

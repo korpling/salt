@@ -15,7 +15,7 @@ import de.hub.corpling.salt.saltCore.SRelation;
  *
  *
  * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTextOverlappingRelation()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface STextOverlappingRelation extends SRelation {

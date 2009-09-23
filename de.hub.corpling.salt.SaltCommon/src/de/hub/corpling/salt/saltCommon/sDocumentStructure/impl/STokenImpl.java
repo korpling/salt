@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EClass;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
-import de.hub.corpling.salt.saltCore.impl.SNodeImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +26,7 @@ import de.hub.corpling.salt.saltCore.impl.SNodeImpl;
  *
  * @generated
  */
-public class STokenImpl extends SNodeImpl implements SToken {
+public class STokenImpl extends SStructuredNodeImpl implements SToken {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

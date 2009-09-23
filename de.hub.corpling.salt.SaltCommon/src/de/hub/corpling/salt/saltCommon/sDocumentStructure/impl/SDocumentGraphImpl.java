@@ -26,8 +26,11 @@ import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STimeline;
@@ -53,6 +56,9 @@ import de.hub.corpling.salt.saltExceptions.SaltException;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSTimelineRelations <em>STimeline Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSSpanningRelations <em>SSpanning Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSSpans <em>SSpans</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSStructures <em>SStructures</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSDominanceRelations <em>SDominance Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSPointingRelations <em>SPointing Relations</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,7 +132,27 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	{
 		if (!(edge instanceof SRelation))
 			throw new SaltException("Cannot insert an edge, which is not a SRelation object: "+ edge);
+		
+		{//create a name if none exists
+			if (	(((SRelation)edge).getSName()== null)||
+					(((SRelation)edge).getSName().equalsIgnoreCase("")))
+			{
+				if ( edge instanceof STextualRelation)
+					((SRelation)edge).setSName("textRel"+ (this.getSTextualRelations().size()+1));
+				else if ( edge instanceof STimelineRelation)
+					((SRelation)edge).setSName("timeRel"+ (this.getSTimelineRelations().size()+1));
+				else if ( edge instanceof SSpanningRelation)
+					((SRelation)edge).setSName("spanRel"+ (this.getSSpanningRelations().size()+1));
+				else if ( edge instanceof SPointingRelation)
+					((SRelation)edge).setSName("pointingRel"+ (this.getSPointingRelations().size()+1));
+				else if ( edge instanceof SDominanceRelation)
+					((SRelation)edge).setSName("domRel"+ (this.getSDominanceRelations().size()+1));
+				else ((SRelation)edge).setSName("rel"+ (this.getSRelations().size()+1));
+			}
+		}	
+		
 		super.basicAddEdge(edge);
+		
 		String slotId= null;
 		{//compute slot id
 			if (edge instanceof STextualRelation)
@@ -135,6 +161,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				slotId= STimelineRelation.class.getName();
 			else if (edge instanceof SSpanningRelation)
 				slotId= SSpanningRelation.class.getName();
+			else if (edge instanceof SPointingRelation)
+				slotId= SPointingRelation.class.getName();
+			else if (edge instanceof SDominanceRelation)
+				slotId= SDominanceRelation.class.getName();
 			else
 				slotId= (String) edge.getClass().getName();
 		}
@@ -153,19 +183,24 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (!(node instanceof SNode))
 			throw new SaltException("Cannot insert a node, which is not a SNode object: "+ node);
 		
-		if (	(((SNode)node).getSName()== null)||
-				(((SNode)node).getSName().equalsIgnoreCase("")))
 		{//create a name if none exists
-			if ( node instanceof STextualDS)
-				((SNode)node).setSName("text"+ (this.getSTextualDSs().size()+1));
-			else if ( node instanceof SToken)
-				((SNode)node).setSName("tok"+ (this.getSTokens().size()+1));
-			else if ( node instanceof STimeline)
-				((SNode)node).setSName("timeline"+ (this.getSTokens().size()+1));
-			else if ( node instanceof SSpan)
-				((SNode)node).setSName("span"+ (this.getSSpans().size()+1));
-		}
-			
+			if (	(((SNode)node).getSName()== null)||
+					(((SNode)node).getSName().equalsIgnoreCase("")))
+			{
+				if ( node instanceof STextualDS)
+					((SNode)node).setSName("text"+ (this.getSTextualDSs().size()+1));
+				else if ( node instanceof SToken)
+					((SNode)node).setSName("tok"+ (this.getSTokens().size()+1));
+				else if ( node instanceof STimeline)
+					((SNode)node).setSName("timeline"+ (this.getSTokens().size()+1));
+				else if ( node instanceof SSpan)
+					((SNode)node).setSName("span"+ (this.getSSpans().size()+1));
+				else if ( node instanceof SStructure)
+					((SNode)node).setSName("structure"+ (this.getSStructures().size()+1));
+				else ((SNode)node).setSName("node"+ (this.getSNodes().size()+1));
+			}
+		}	
+		
 		if (	(((SNode)node).getSId()== null)||
 				(((SNode)node).getSId().equalsIgnoreCase("")))
 			((SNode)node).setSId(this.getSId() + "#"+ ((SNode)node).getSName());
@@ -181,6 +216,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				slotId= STimeline.class.getName();
 			else if (node instanceof SSpan)
 				slotId= SSpan.class.getName();
+			else if (node instanceof SStructure)
+				slotId= SStructure.class.getName();
 			else
 				slotId= (String) node.getClass().getName();
 		}
@@ -340,6 +377,25 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpans(), 0, (Object[]) null);
 		return(retVal);
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SStructure> getSStructures() 
+	{
+		EList<SStructure> retVal= null;
+		EList<Node> nodes= (EList<Node>)(EList<? extends Node>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SStructure.class.getName());
+		if (nodes!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SStructures(),
+					nodes.size(), nodes.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SStructures(), 0, (Object[]) null);
+		return(retVal);
+	}
+
 // ============================ end: handling specific nodes
 // ============================ start: handling specific relations
 	
@@ -403,6 +459,46 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		
 		return(retVal);
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SDominanceRelation> getSDominanceRelations() 
+	{
+		EList<SDominanceRelation> retVal= null;
+		EList<Edge> edges= (EList<Edge>)(EList<? extends Edge>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SDominanceRelation.class.getName());
+		
+		if (edges!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SDominanceRelations(),
+					edges.size(), edges.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SDominanceRelations(), 0, (Object[]) null);
+		
+		return(retVal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SPointingRelation> getSPointingRelations() 
+	{
+		EList<SPointingRelation> retVal= null;
+		EList<Edge> edges= (EList<Edge>)(EList<? extends Edge>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SPointingRelation.class.getName());
+		
+		if (edges!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SPointingRelations(),
+					edges.size(), edges.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SPointingRelations(), 0, (Object[]) null);
+		
+		return(retVal);
+	}
 // ============================ end: handling specific relations
 	
 	/**
@@ -443,6 +539,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return ((InternalEList<?>)getSSpanningRelations()).basicRemove(otherEnd, msgs);
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
 				return ((InternalEList<?>)getSSpans()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSTRUCTURES:
+				return ((InternalEList<?>)getSStructures()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS:
+				return ((InternalEList<?>)getSDominanceRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
+				return ((InternalEList<?>)getSPointingRelations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -473,6 +575,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return getSSpanningRelations();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
 				return getSSpans();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSTRUCTURES:
+				return getSStructures();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS:
+				return getSDominanceRelations();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
+				return getSPointingRelations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -516,6 +624,18 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				getSSpans().clear();
 				getSSpans().addAll((Collection<? extends SSpan>)newValue);
 				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSTRUCTURES:
+				getSStructures().clear();
+				getSStructures().addAll((Collection<? extends SStructure>)newValue);
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS:
+				getSDominanceRelations().clear();
+				getSDominanceRelations().addAll((Collection<? extends SDominanceRelation>)newValue);
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
+				getSPointingRelations().clear();
+				getSPointingRelations().addAll((Collection<? extends SPointingRelation>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -552,6 +672,15 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
 				getSSpans().clear();
 				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSTRUCTURES:
+				getSStructures().clear();
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS:
+				getSDominanceRelations().clear();
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
+				getSPointingRelations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -580,6 +709,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return !getSSpanningRelations().isEmpty();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
 				return !getSSpans().isEmpty();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSTRUCTURES:
+				return !getSStructures().isEmpty();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS:
+				return !getSDominanceRelations().isEmpty();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
+				return !getSPointingRelations().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

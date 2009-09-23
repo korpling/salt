@@ -27,6 +27,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations <em>STimeline Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpanningRelations <em>SSpanning Relations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSSpans <em>SSpans</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures <em>SStructures</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations <em>SDominance Relations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations <em>SPointing Relations</em>}</li>
  * </ul>
  * </p>
  *
@@ -196,5 +199,59 @@ public interface SDocumentGraph extends SGraph {
 	 * @generated
 	 */
 	EList<SSpan> getSSpans();
+
+	/**
+	 * Returns the value of the '<em><b>SStructures</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure}.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SStructures</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SStructures</em>' containment reference list.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SStructures()
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SStructure> getSStructures();
+
+	/**
+	 * Returns the value of the '<em><b>SDominance Relations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation}.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SDominance Relations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SDominance Relations</em>' containment reference list.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SDominanceRelations()
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SDominanceRelation> getSDominanceRelations();
+
+	/**
+	 * Returns the value of the '<em><b>SPointing Relations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation}.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SPointing Relations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SPointing Relations</em>' containment reference list.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SPointingRelations()
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true"
+	 * @generated
+	 */
+	EList<SPointingRelation> getSPointingRelations();
 
 } // SDocumentGraph

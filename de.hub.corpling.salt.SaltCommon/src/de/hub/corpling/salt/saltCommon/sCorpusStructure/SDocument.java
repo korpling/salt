@@ -41,7 +41,7 @@ public interface SDocument extends SNode {
 	 * @see #setSCorpusGraph(SCorpusGraph)
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSDocument_SCorpusGraph()
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSDocuments
-	 * @model opposite="sDocuments" transient="false"
+	 * @model opposite="sDocuments" volatile="true" derived="true"
 	 * @generated
 	 */
 	SCorpusGraph getSCorpusGraph();

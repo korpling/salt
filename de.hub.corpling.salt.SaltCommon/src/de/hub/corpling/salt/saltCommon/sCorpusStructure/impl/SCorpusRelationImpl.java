@@ -6,12 +6,9 @@
  */
 package de.hub.corpling.salt.saltCommon.sCorpusStructure.impl;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph;
@@ -35,26 +32,6 @@ import de.hub.corpling.salt.saltCore.impl.SRelationImpl;
  * @generated
  */
 public class SCorpusRelationImpl extends SRelationImpl implements SCorpusRelation {
-	/**
-	 * The cached value of the '{@link #getSSuperCorpus() <em>SSuper Corpus</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSSuperCorpus()
-	 * @generated
-	 * @ordered
-	 */
-	protected SCorpus sSuperCorpus;
-
-	/**
-	 * The cached value of the '{@link #getSSubCorpus() <em>SSub Corpus</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSSubCorpus()
-	 * @generated
-	 * @ordered
-	 */
-	protected SCorpus sSubCorpus;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,36 +57,29 @@ public class SCorpusRelationImpl extends SRelationImpl implements SCorpusRelatio
 	 * @generated
 	 */
 	public SCorpus getSSuperCorpus() {
-		if (sSuperCorpus != null && sSuperCorpus.eIsProxy()) {
-			InternalEObject oldSSuperCorpus = (InternalEObject)sSuperCorpus;
-			sSuperCorpus = (SCorpus)eResolveProxy(oldSSuperCorpus);
-			if (sSuperCorpus != oldSSuperCorpus) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SCorpusStructurePackage.SCORPUS_RELATION__SSUPER_CORPUS, oldSSuperCorpus, sSuperCorpus));
-			}
-		}
-		return sSuperCorpus;
+		SCorpus sSuperCorpus = basicGetSSuperCorpus();
+		return sSuperCorpus != null && sSuperCorpus.eIsProxy() ? (SCorpus)eResolveProxy((InternalEObject)sSuperCorpus) : sSuperCorpus;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public SCorpus basicGetSSuperCorpus() {
-		return sSuperCorpus;
+	public SCorpus basicGetSSuperCorpus() 
+	{
+		SCorpus retVal= null;
+		if (super.getSSource() instanceof SCorpus)
+			retVal= (SCorpus) super.getSource();
+		return(retVal);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setSSuperCorpus(SCorpus newSSuperCorpus) {
-		SCorpus oldSSuperCorpus = sSuperCorpus;
-		sSuperCorpus = newSSuperCorpus;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SCorpusStructurePackage.SCORPUS_RELATION__SSUPER_CORPUS, oldSSuperCorpus, sSuperCorpus));
+	public void setSSuperCorpus(SCorpus newSSuperCorpus) 
+	{
+		super.setSource(newSSuperCorpus);
 	}
 
 	/**
@@ -118,107 +88,50 @@ public class SCorpusRelationImpl extends SRelationImpl implements SCorpusRelatio
 	 * @generated
 	 */
 	public SCorpus getSSubCorpus() {
-		if (sSubCorpus != null && sSubCorpus.eIsProxy()) {
-			InternalEObject oldSSubCorpus = (InternalEObject)sSubCorpus;
-			sSubCorpus = (SCorpus)eResolveProxy(oldSSubCorpus);
-			if (sSubCorpus != oldSSubCorpus) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SCorpusStructurePackage.SCORPUS_RELATION__SSUB_CORPUS, oldSSubCorpus, sSubCorpus));
-			}
-		}
-		return sSubCorpus;
+		SCorpus sSubCorpus = basicGetSSubCorpus();
+		return sSubCorpus != null && sSubCorpus.eIsProxy() ? (SCorpus)eResolveProxy((InternalEObject)sSubCorpus) : sSubCorpus;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public SCorpus basicGetSSubCorpus() {
-		return sSubCorpus;
+	public SCorpus basicGetSSubCorpus() 
+	{
+		SCorpus retVal= null;
+		if (super.getSTarget() instanceof SCorpus)
+			retVal= (SCorpus) super.getTarget();
+		return(retVal);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public void setSSubCorpus(SCorpus newSSubCorpus) {
-		SCorpus oldSSubCorpus = sSubCorpus;
-		sSubCorpus = newSSubCorpus;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SCorpusStructurePackage.SCORPUS_RELATION__SSUB_CORPUS, oldSSubCorpus, sSubCorpus));
+	public void setSSubCorpus(SCorpus newSSubCorpus) 
+	{
+		super.setSTarget(newSSubCorpus);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public SCorpusGraph getSCorpusGraph() {
-		if (eContainerFeatureID() != SCorpusStructurePackage.SCORPUS_RELATION__SCORPUS_GRAPH) return null;
-		return (SCorpusGraph)eContainer();
+	public SCorpusGraph getSCorpusGraph() 
+	{
+		SCorpusGraph retVal= null;
+		if (super.getSGraph() instanceof SCorpusGraph)
+			retVal= (SCorpusGraph) super.getSGraph();
+		return(retVal);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public NotificationChain basicSetSCorpusGraph(SCorpusGraph newSCorpusGraph, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newSCorpusGraph, SCorpusStructurePackage.SCORPUS_RELATION__SCORPUS_GRAPH, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSCorpusGraph(SCorpusGraph newSCorpusGraph) {
-		if (newSCorpusGraph != eInternalContainer() || (eContainerFeatureID() != SCorpusStructurePackage.SCORPUS_RELATION__SCORPUS_GRAPH && newSCorpusGraph != null)) {
-			if (EcoreUtil.isAncestor(this, newSCorpusGraph))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newSCorpusGraph != null)
-				msgs = ((InternalEObject)newSCorpusGraph).eInverseAdd(this, SCorpusStructurePackage.SCORPUS_GRAPH__SCORPUS_RELATIONS, SCorpusGraph.class, msgs);
-			msgs = basicSetSCorpusGraph(newSCorpusGraph, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SCorpusStructurePackage.SCORPUS_RELATION__SCORPUS_GRAPH, newSCorpusGraph, newSCorpusGraph));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SCorpusStructurePackage.SCORPUS_RELATION__SCORPUS_GRAPH:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetSCorpusGraph((SCorpusGraph)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SCorpusStructurePackage.SCORPUS_RELATION__SCORPUS_GRAPH:
-				return basicSetSCorpusGraph(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setSCorpusGraph(SCorpusGraph newSCorpusGraph) 
+	{
+		super.setSGraph(newSCorpusGraph);
 	}
 
 	/**
@@ -306,9 +219,9 @@ public class SCorpusRelationImpl extends SRelationImpl implements SCorpusRelatio
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SCorpusStructurePackage.SCORPUS_RELATION__SSUPER_CORPUS:
-				return sSuperCorpus != null;
+				return basicGetSSuperCorpus() != null;
 			case SCorpusStructurePackage.SCORPUS_RELATION__SSUB_CORPUS:
-				return sSubCorpus != null;
+				return basicGetSSubCorpus() != null;
 			case SCorpusStructurePackage.SCORPUS_RELATION__SCORPUS_GRAPH:
 				return getSCorpusGraph() != null;
 		}

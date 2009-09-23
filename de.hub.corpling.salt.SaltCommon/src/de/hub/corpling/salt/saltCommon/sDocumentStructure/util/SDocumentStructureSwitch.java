@@ -135,6 +135,7 @@ public class SDocumentStructureSwitch<T> {
 			case SDocumentStructurePackage.STOKEN: {
 				SToken sToken = (SToken)theEObject;
 				T result = caseSToken(sToken);
+				if (result == null) result = caseSStructuredNode(sToken);
 				if (result == null) result = caseSNode(sToken);
 				if (result == null) result = caseNode(sToken);
 				if (result == null) result = caseSAnnotatableElement(sToken);
@@ -230,6 +231,7 @@ public class SDocumentStructureSwitch<T> {
 			case SDocumentStructurePackage.SSPAN: {
 				SSpan sSpan = (SSpan)theEObject;
 				T result = caseSSpan(sSpan);
+				if (result == null) result = caseSStructuredNode(sSpan);
 				if (result == null) result = caseSNode(sSpan);
 				if (result == null) result = caseNode(sSpan);
 				if (result == null) result = caseSAnnotatableElement(sSpan);
@@ -286,6 +288,69 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSFeaturableElement(sTimeOverlappingRelation);
 				if (result == null) result = caseLabelableElement(sTimeOverlappingRelation);
 				if (result == null) result = caseIdentifiableElement(sTimeOverlappingRelation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SDocumentStructurePackage.SSTRUCTURED_NODE: {
+				SStructuredNode sStructuredNode = (SStructuredNode)theEObject;
+				T result = caseSStructuredNode(sStructuredNode);
+				if (result == null) result = caseSNode(sStructuredNode);
+				if (result == null) result = caseNode(sStructuredNode);
+				if (result == null) result = caseSAnnotatableElement(sStructuredNode);
+				if (result == null) result = caseSNamedElement(sStructuredNode);
+				if (result == null) result = caseSIdentifiableElement(sStructuredNode);
+				if (result == null) result = caseSProcessingAnnotatableElement(sStructuredNode);
+				if (result == null) result = caseSFeaturableElement(sStructuredNode);
+				if (result == null) result = caseLabelableElement(sStructuredNode);
+				if (result == null) result = caseIdentifiableElement(sStructuredNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SDocumentStructurePackage.SSTRUCTURE: {
+				SStructure sStructure = (SStructure)theEObject;
+				T result = caseSStructure(sStructure);
+				if (result == null) result = caseSStructuredNode(sStructure);
+				if (result == null) result = caseSNode(sStructure);
+				if (result == null) result = caseNode(sStructure);
+				if (result == null) result = caseSAnnotatableElement(sStructure);
+				if (result == null) result = caseSNamedElement(sStructure);
+				if (result == null) result = caseSIdentifiableElement(sStructure);
+				if (result == null) result = caseSProcessingAnnotatableElement(sStructure);
+				if (result == null) result = caseSFeaturableElement(sStructure);
+				if (result == null) result = caseLabelableElement(sStructure);
+				if (result == null) result = caseIdentifiableElement(sStructure);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SDocumentStructurePackage.SPOINTING_RELATION: {
+				SPointingRelation sPointingRelation = (SPointingRelation)theEObject;
+				T result = caseSPointingRelation(sPointingRelation);
+				if (result == null) result = caseSRelation(sPointingRelation);
+				if (result == null) result = caseEdge(sPointingRelation);
+				if (result == null) result = caseSAnnotatableElement(sPointingRelation);
+				if (result == null) result = caseSNamedElement(sPointingRelation);
+				if (result == null) result = caseSIdentifiableElement(sPointingRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sPointingRelation);
+				if (result == null) result = caseSFeaturableElement(sPointingRelation);
+				if (result == null) result = caseLabelableElement(sPointingRelation);
+				if (result == null) result = caseIdentifiableElement(sPointingRelation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SDocumentStructurePackage.SDOMINANCE_RELATION: {
+				SDominanceRelation sDominanceRelation = (SDominanceRelation)theEObject;
+				T result = caseSDominanceRelation(sDominanceRelation);
+				if (result == null) result = caseSTextOverlappingRelation(sDominanceRelation);
+				if (result == null) result = caseSTimeOverlappingRelation(sDominanceRelation);
+				if (result == null) result = caseSRelation(sDominanceRelation);
+				if (result == null) result = caseEdge(sDominanceRelation);
+				if (result == null) result = caseSAnnotatableElement(sDominanceRelation);
+				if (result == null) result = caseSNamedElement(sDominanceRelation);
+				if (result == null) result = caseSIdentifiableElement(sDominanceRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sDominanceRelation);
+				if (result == null) result = caseSFeaturableElement(sDominanceRelation);
+				if (result == null) result = caseLabelableElement(sDominanceRelation);
+				if (result == null) result = caseIdentifiableElement(sDominanceRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -470,6 +535,66 @@ public class SDocumentStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSTimeOverlappingRelation(STimeOverlappingRelation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SStructured Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SStructured Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSStructuredNode(SStructuredNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SStructure</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SStructure</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSStructure(SStructure object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SPointing Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SPointing Relation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSPointingRelation(SPointingRelation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SDominance Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SDominance Relation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSDominanceRelation(SDominanceRelation object) {
 		return null;
 	}
 

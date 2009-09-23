@@ -65,14 +65,13 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 			case SDocumentStructurePackage.STEXTUAL_DS: return createSTextualDS();
 			case SDocumentStructurePackage.STOKEN: return createSToken();
 			case SDocumentStructurePackage.STEXTUAL_RELATION: return createSTextualRelation();
-			case SDocumentStructurePackage.SSEQUENTIAL_RELATION: return createSSequentialRelation();
-			case SDocumentStructurePackage.SSEQUENTIAL_DS: return createSSequentialDS();
 			case SDocumentStructurePackage.STIMELINE: return createSTimeline();
 			case SDocumentStructurePackage.STIMELINE_RELATION: return createSTimelineRelation();
 			case SDocumentStructurePackage.SSPAN: return createSSpan();
 			case SDocumentStructurePackage.SSPANNING_RELATION: return createSSpanningRelation();
-			case SDocumentStructurePackage.STEXT_OVERLAPPING_RELATION: return createSTextOverlappingRelation();
-			case SDocumentStructurePackage.STIME_OVERLAPPING_RELATION: return createSTimeOverlappingRelation();
+			case SDocumentStructurePackage.SSTRUCTURE: return createSStructure();
+			case SDocumentStructurePackage.SPOINTING_RELATION: return createSPointingRelation();
+			case SDocumentStructurePackage.SDOMINANCE_RELATION: return createSDominanceRelation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -153,26 +152,6 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SSequentialRelation createSSequentialRelation() {
-		SSequentialRelationImpl sSequentialRelation = new SSequentialRelationImpl();
-		return sSequentialRelation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SSequentialDS createSSequentialDS() {
-		SSequentialDSImpl sSequentialDS = new SSequentialDSImpl();
-		return sSequentialDS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public STimeline createSTimeline() {
 		STimelineImpl sTimeline = new STimelineImpl();
 		return sTimeline;
@@ -213,9 +192,9 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public STextOverlappingRelation createSTextOverlappingRelation() {
-		STextOverlappingRelationImpl sTextOverlappingRelation = new STextOverlappingRelationImpl();
-		return sTextOverlappingRelation;
+	public SStructure createSStructure() {
+		SStructureImpl sStructure = new SStructureImpl();
+		return sStructure;
 	}
 
 	/**
@@ -223,9 +202,19 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public STimeOverlappingRelation createSTimeOverlappingRelation() {
-		STimeOverlappingRelationImpl sTimeOverlappingRelation = new STimeOverlappingRelationImpl();
-		return sTimeOverlappingRelation;
+	public SPointingRelation createSPointingRelation() {
+		SPointingRelationImpl sPointingRelation = new SPointingRelationImpl();
+		return sPointingRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SDominanceRelation createSDominanceRelation() {
+		SDominanceRelationImpl sDominanceRelation = new SDominanceRelationImpl();
+		return sDominanceRelation;
 	}
 
 	/**

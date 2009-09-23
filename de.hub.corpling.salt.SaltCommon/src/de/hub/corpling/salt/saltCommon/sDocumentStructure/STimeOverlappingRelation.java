@@ -15,7 +15,7 @@ import de.hub.corpling.salt.saltCore.SRelation;
  *
  *
  * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTimeOverlappingRelation()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface STimeOverlappingRelation extends SRelation {

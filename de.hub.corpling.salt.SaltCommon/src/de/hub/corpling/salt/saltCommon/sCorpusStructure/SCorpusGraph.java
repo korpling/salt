@@ -47,7 +47,7 @@ public interface SCorpusGraph extends SGraph {
 	 * @return the value of the '<em>SDocuments</em>' containment reference list.
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusGraph_SDocuments()
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument#getSCorpusGraph
-	 * @model opposite="sCorpusGraph" containment="true"
+	 * @model opposite="sCorpusGraph" containment="true" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<SDocument> getSDocuments();
@@ -93,7 +93,7 @@ public interface SCorpusGraph extends SGraph {
 	 * @return the value of the '<em>SCorpora</em>' containment reference list.
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusGraph_SCorpora()
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpus#getSCorpusGraph
-	 * @model opposite="sCorpusGraph" containment="true"
+	 * @model opposite="sCorpusGraph" containment="true" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<SCorpus> getSCorpora();
@@ -111,7 +111,7 @@ public interface SCorpusGraph extends SGraph {
 	 * @return the value of the '<em>SCorpus Relations</em>' containment reference list.
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusGraph_SCorpusRelations()
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusRelation#getSCorpusGraph
-	 * @model opposite="sCorpusGraph" containment="true"
+	 * @model opposite="sCorpusGraph" containment="true" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<SCorpusRelation> getSCorpusRelations();
@@ -129,7 +129,7 @@ public interface SCorpusGraph extends SGraph {
 	 * @return the value of the '<em>SCorpus Document Relations</em>' containment reference list.
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpusGraph_SCorpusDocumentRelations()
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusDocumentRelation#getSCorpusGraph
-	 * @model opposite="sCorpusGraph" containment="true"
+	 * @model opposite="sCorpusGraph" containment="true" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<SCorpusDocumentRelation> getSCorpusDocumentRelations();

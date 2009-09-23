@@ -16,38 +16,45 @@
         <eParameters name="sDocumentId" eType="ecore:EClass ../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SElementId"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocuments" upperBound="-1"
-          eType="#//sCorpusStructure/SDocument" containment="true" eOpposite="#//sCorpusStructure/SDocument/sCorpusGraph"/>
+          eType="#//sCorpusStructure/SDocument" volatile="true" transient="true" derived="true"
+          containment="true" eOpposite="#//sCorpusStructure/SDocument/sCorpusGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="saltProject" eType="#//SaltProject"
           eOpposite="#//SaltProject/sCorpusGraphs"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpora" upperBound="-1"
-          eType="#//sCorpusStructure/SCorpus" containment="true" eOpposite="#//sCorpusStructure/SCorpus/sCorpusGraph"/>
+          eType="#//sCorpusStructure/SCorpus" volatile="true" transient="true" derived="true"
+          containment="true" eOpposite="#//sCorpusStructure/SCorpus/sCorpusGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusRelations" upperBound="-1"
-          eType="#//sCorpusStructure/SCorpusRelation" containment="true" eOpposite="#//sCorpusStructure/SCorpusRelation/sCorpusGraph"/>
+          eType="#//sCorpusStructure/SCorpusRelation" volatile="true" transient="true"
+          derived="true" containment="true" eOpposite="#//sCorpusStructure/SCorpusRelation/sCorpusGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusDocumentRelations"
-          upperBound="-1" eType="#//sCorpusStructure/SCorpusDocumentRelation" containment="true"
-          eOpposite="#//sCorpusStructure/SCorpusDocumentRelation/sCorpusGraph"/>
+          upperBound="-1" eType="#//sCorpusStructure/SCorpusDocumentRelation" volatile="true"
+          transient="true" derived="true" containment="true" eOpposite="#//sCorpusStructure/SCorpusDocumentRelation/sCorpusGraph"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SDocument" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"
-          eOpposite="#//sCorpusStructure/SCorpusGraph/sDocuments"/>
+          volatile="true" transient="true" derived="true" eOpposite="#//sCorpusStructure/SCorpusGraph/sDocuments"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           eOpposite="#//sDocumentStructure/SDocumentGraph/sDocument"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SCorpus" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"
-          eOpposite="#//sCorpusStructure/SCorpusGraph/sCorpora"/>
+          volatile="true" transient="true" derived="true" eOpposite="#//sCorpusStructure/SCorpusGraph/sCorpora"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SCorpusRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="sSuperCorpus" eType="#//sCorpusStructure/SCorpus"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="sSubCorpus" eType="#//sCorpusStructure/SCorpus"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sSuperCorpus" eType="#//sCorpusStructure/SCorpus"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sSubCorpus" eType="#//sCorpusStructure/SCorpus"
+          volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"
-          eOpposite="#//sCorpusStructure/SCorpusGraph/sCorpusRelations"/>
+          volatile="true" transient="true" derived="true" eOpposite="#//sCorpusStructure/SCorpusGraph/sCorpusRelations"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SCorpusDocumentRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpus" eType="#//sCorpusStructure/SCorpus"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpus" eType="#//sCorpusStructure/SCorpus"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
+          volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"
-          eOpposite="#//sCorpusStructure/SCorpusGraph/sCorpusDocumentRelations"/>
+          volatile="true" transient="true" derived="true" eOpposite="#//sCorpusStructure/SCorpusGraph/sCorpusDocumentRelations"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="sDocumentStructure" nsURI="sDocumentStructure" nsPrefix="sDocumentStructure">
@@ -74,6 +81,15 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sSpans" upperBound="-1"
           eType="#//sDocumentStructure/SSpan" volatile="true" transient="true" derived="true"
           containment="true" eOpposite="#//sDocumentStructure/SSpan/sDocumentGraph"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sStructures" upperBound="-1"
+          eType="#//sDocumentStructure/SStructure" volatile="true" transient="true"
+          derived="true" containment="true" eOpposite="#//sDocumentStructure/SStructure/sDocumentGraph"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDominanceRelations"
+          upperBound="-1" eType="#//sDocumentStructure/SDominanceRelation" volatile="true"
+          transient="true" derived="true" containment="true" eOpposite="#//sDocumentStructure/SDominanceRelation/sDocumentGraph"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sPointingRelations" upperBound="-1"
+          eType="#//sDocumentStructure/SPointingRelation" volatile="true" transient="true"
+          containment="true" eOpposite="#//sDocumentStructure/SPointingRelation/sDocumentGraph"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="STextualDS" eSuperTypes="#//sDocumentStructure/SSequentialDS">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -81,7 +97,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sTextualDSs"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SToken" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SNode">
+    <eClassifiers xsi:type="ecore:EClass" name="SToken" eSuperTypes="#//sDocumentStructure/SStructuredNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sTokens"/>
     </eClassifiers>
@@ -93,13 +109,14 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sTextualRelations"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SSequentialRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
+    <eClassifiers xsi:type="ecore:EClass" name="SSequentialRelation" abstract="true"
+        eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
           volatile="true" transient="true" derived="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SSequentialDS" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SNode">
+    <eClassifiers xsi:type="ecore:EClass" name="SSequentialDS" abstract="true" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SNode">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
           volatile="true" transient="true" derived="true"/>
     </eClassifiers>
@@ -121,7 +138,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SSpan" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SNode">
+    <eClassifiers xsi:type="ecore:EClass" name="SSpan" eSuperTypes="#//sDocumentStructure/SStructuredNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sSpans"/>
     </eClassifiers>
@@ -141,11 +158,34 @@
       <eLiterals name="SDATA" value="4"/>
       <eLiterals name="STIME_OVERLAPPING" value="5"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="STextOverlappingRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
+    <eClassifiers xsi:type="ecore:EClass" name="STextOverlappingRelation" abstract="true"
+        eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
       <eOperations name="isSTextOverlapping" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="STimeOverlappingRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
+    <eClassifiers xsi:type="ecore:EClass" name="STimeOverlappingRelation" abstract="true"
+        eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
       <eOperations name="isSTimeOverlapping" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SStructuredNode" abstract="true" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SStructure" eSuperTypes="#//sDocumentStructure/SStructuredNode">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sStructures"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SPointingRelation" eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="SStructuredSource" eType="#//sDocumentStructure/SStructuredNode"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="SStructuredTarget" eType="#//sDocumentStructure/SStructuredNode"
+          volatile="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sPointingRelations"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SDominanceRelation" eSuperTypes="#//sDocumentStructure/STextOverlappingRelation #//sDocumentStructure/STimeOverlappingRelation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sStructure" eType="#//sDocumentStructure/SStructure"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sStructuredTarget" eType="#//sDocumentStructure/SStructuredNode"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sDominanceRelations"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

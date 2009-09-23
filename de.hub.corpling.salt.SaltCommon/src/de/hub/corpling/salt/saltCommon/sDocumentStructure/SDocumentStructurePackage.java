@@ -298,13 +298,40 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOCUMENT_GRAPH__SSPANS = SaltCorePackage.SGRAPH_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>SStructures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__SSTRUCTURES = SaltCorePackage.SGRAPH_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>SDominance Relations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS = SaltCorePackage.SGRAPH_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>SPointing Relations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__SPOINTING_RELATIONS = SaltCorePackage.SGRAPH_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>SDocument Graph</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SDOCUMENT_GRAPH_FEATURE_COUNT = SaltCorePackage.SGRAPH_FEATURE_COUNT + 8;
+	int SDOCUMENT_GRAPH_FEATURE_COUNT = SaltCorePackage.SGRAPH_FEATURE_COUNT + 11;
 
 
 	/**
@@ -598,6 +625,133 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXTUAL_DS_FEATURE_COUNT = SSEQUENTIAL_DS_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructuredNodeImpl <em>SStructured Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructuredNodeImpl
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSStructuredNode()
+	 * @generated
+	 */
+	int SSTRUCTURED_NODE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__LABELS = SaltCorePackage.SNODE__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__ID = SaltCorePackage.SNODE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__IDENTIFIER = SaltCorePackage.SNODE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__GRAPH = SaltCorePackage.SNODE__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SNAME = SaltCorePackage.SNODE__SNAME;
+
+	/**
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SELEMENT_ID = SaltCorePackage.SNODE__SELEMENT_ID;
+
+	/**
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SID = SaltCorePackage.SNODE__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SELEMENT_PATH = SaltCorePackage.SNODE__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SGRAPH = SaltCorePackage.SNODE__SGRAPH;
+
+	/**
+	 * The number of structural features of the '<em>SStructured Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE_FEATURE_COUNT = SaltCorePackage.SNODE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.STokenImpl <em>SToken</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -614,7 +768,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__LABELS = SaltCorePackage.SNODE__LABELS;
+	int STOKEN__LABELS = SSTRUCTURED_NODE__LABELS;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -623,7 +777,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__ID = SaltCorePackage.SNODE__ID;
+	int STOKEN__ID = SSTRUCTURED_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -632,7 +786,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__IDENTIFIER = SaltCorePackage.SNODE__IDENTIFIER;
+	int STOKEN__IDENTIFIER = SSTRUCTURED_NODE__IDENTIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Graph</b></em>' container reference.
@@ -641,7 +795,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__GRAPH = SaltCorePackage.SNODE__GRAPH;
+	int STOKEN__GRAPH = SSTRUCTURED_NODE__GRAPH;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -650,7 +804,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
+	int STOKEN__SANNOTATIONS = SSTRUCTURED_NODE__SANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
@@ -659,7 +813,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SNAME = SaltCorePackage.SNODE__SNAME;
+	int STOKEN__SNAME = SSTRUCTURED_NODE__SNAME;
 
 	/**
 	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
@@ -668,7 +822,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SELEMENT_ID = SaltCorePackage.SNODE__SELEMENT_ID;
+	int STOKEN__SELEMENT_ID = SSTRUCTURED_NODE__SELEMENT_ID;
 
 	/**
 	 * The feature id for the '<em><b>SId</b></em>' attribute.
@@ -677,7 +831,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SID = SaltCorePackage.SNODE__SID;
+	int STOKEN__SID = SSTRUCTURED_NODE__SID;
 
 	/**
 	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
@@ -686,7 +840,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SELEMENT_PATH = SaltCorePackage.SNODE__SELEMENT_PATH;
+	int STOKEN__SELEMENT_PATH = SSTRUCTURED_NODE__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
@@ -695,7 +849,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
+	int STOKEN__SPROCESSING_ANNOTATIONS = SSTRUCTURED_NODE__SPROCESSING_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
@@ -704,7 +858,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+	int STOKEN__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
@@ -713,7 +867,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SGRAPH = SaltCorePackage.SNODE__SGRAPH;
+	int STOKEN__SGRAPH = SSTRUCTURED_NODE__SGRAPH;
 
 	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
@@ -722,7 +876,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN__SDOCUMENT_GRAPH = SaltCorePackage.SNODE_FEATURE_COUNT + 0;
+	int STOKEN__SDOCUMENT_GRAPH = SSTRUCTURED_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>SToken</em>' class.
@@ -731,7 +885,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STOKEN_FEATURE_COUNT = SaltCorePackage.SNODE_FEATURE_COUNT + 1;
+	int STOKEN_FEATURE_COUNT = SSTRUCTURED_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SSequentialRelationImpl <em>SSequential Relation</em>}' class.
@@ -1504,7 +1658,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__LABELS = SaltCorePackage.SNODE__LABELS;
+	int SSPAN__LABELS = SSTRUCTURED_NODE__LABELS;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1513,7 +1667,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__ID = SaltCorePackage.SNODE__ID;
+	int SSPAN__ID = SSTRUCTURED_NODE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
@@ -1522,7 +1676,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__IDENTIFIER = SaltCorePackage.SNODE__IDENTIFIER;
+	int SSPAN__IDENTIFIER = SSTRUCTURED_NODE__IDENTIFIER;
 
 	/**
 	 * The feature id for the '<em><b>Graph</b></em>' container reference.
@@ -1531,7 +1685,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__GRAPH = SaltCorePackage.SNODE__GRAPH;
+	int SSPAN__GRAPH = SSTRUCTURED_NODE__GRAPH;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -1540,7 +1694,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
+	int SSPAN__SANNOTATIONS = SSTRUCTURED_NODE__SANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
@@ -1549,7 +1703,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SNAME = SaltCorePackage.SNODE__SNAME;
+	int SSPAN__SNAME = SSTRUCTURED_NODE__SNAME;
 
 	/**
 	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
@@ -1558,7 +1712,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SELEMENT_ID = SaltCorePackage.SNODE__SELEMENT_ID;
+	int SSPAN__SELEMENT_ID = SSTRUCTURED_NODE__SELEMENT_ID;
 
 	/**
 	 * The feature id for the '<em><b>SId</b></em>' attribute.
@@ -1567,7 +1721,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SID = SaltCorePackage.SNODE__SID;
+	int SSPAN__SID = SSTRUCTURED_NODE__SID;
 
 	/**
 	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
@@ -1576,7 +1730,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SELEMENT_PATH = SaltCorePackage.SNODE__SELEMENT_PATH;
+	int SSPAN__SELEMENT_PATH = SSTRUCTURED_NODE__SELEMENT_PATH;
 
 	/**
 	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
@@ -1585,7 +1739,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
+	int SSPAN__SPROCESSING_ANNOTATIONS = SSTRUCTURED_NODE__SPROCESSING_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
@@ -1594,7 +1748,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+	int SSPAN__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
@@ -1603,7 +1757,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SGRAPH = SaltCorePackage.SNODE__SGRAPH;
+	int SSPAN__SGRAPH = SSTRUCTURED_NODE__SGRAPH;
 
 	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
@@ -1612,7 +1766,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN__SDOCUMENT_GRAPH = SaltCorePackage.SNODE_FEATURE_COUNT + 0;
+	int SSPAN__SDOCUMENT_GRAPH = SSTRUCTURED_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>SSpan</em>' class.
@@ -1621,7 +1775,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SSPAN_FEATURE_COUNT = SaltCorePackage.SNODE_FEATURE_COUNT + 1;
+	int SSPAN_FEATURE_COUNT = SSTRUCTURED_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SSpanningRelationImpl <em>SSpanning Relation</em>}' class.
@@ -2141,6 +2295,522 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIME_OVERLAPPING_RELATION_FEATURE_COUNT = SaltCorePackage.SRELATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructureImpl <em>SStructure</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructureImpl
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSStructure()
+	 * @generated
+	 */
+	int SSTRUCTURE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__LABELS = SSTRUCTURED_NODE__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__ID = SSTRUCTURED_NODE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__IDENTIFIER = SSTRUCTURED_NODE__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__GRAPH = SSTRUCTURED_NODE__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SANNOTATIONS = SSTRUCTURED_NODE__SANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SNAME = SSTRUCTURED_NODE__SNAME;
+
+	/**
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SELEMENT_ID = SSTRUCTURED_NODE__SELEMENT_ID;
+
+	/**
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SID = SSTRUCTURED_NODE__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SELEMENT_PATH = SSTRUCTURED_NODE__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SPROCESSING_ANNOTATIONS = SSTRUCTURED_NODE__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SGRAPH = SSTRUCTURED_NODE__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SDOCUMENT_GRAPH = SSTRUCTURED_NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>SStructure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE_FEATURE_COUNT = SSTRUCTURED_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SPointingRelationImpl <em>SPointing Relation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SPointingRelationImpl
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSPointingRelation()
+	 * @generated
+	 */
+	int SPOINTING_RELATION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__LABELS = SaltCorePackage.SRELATION__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__ID = SaltCorePackage.SRELATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__IDENTIFIER = SaltCorePackage.SRELATION__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__GRAPH = SaltCorePackage.SRELATION__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SOURCE = SaltCorePackage.SRELATION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SNAME = SaltCorePackage.SRELATION__SNAME;
+
+	/**
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SELEMENT_ID = SaltCorePackage.SRELATION__SELEMENT_ID;
+
+	/**
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SID = SaltCorePackage.SRELATION__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SSource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SSOURCE = SaltCorePackage.SRELATION__SSOURCE;
+
+	/**
+	 * The feature id for the '<em><b>STarget</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__STARGET = SaltCorePackage.SRELATION__STARGET;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SGRAPH = SaltCorePackage.SRELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SStructured Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SSTRUCTURED_SOURCE = SaltCorePackage.SRELATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SStructured Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SSTRUCTURED_TARGET = SaltCorePackage.SRELATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SDOCUMENT_GRAPH = SaltCorePackage.SRELATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>SPointing Relation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION_FEATURE_COUNT = SaltCorePackage.SRELATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDominanceRelationImpl <em>SDominance Relation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDominanceRelationImpl
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSDominanceRelation()
+	 * @generated
+	 */
+	int SDOMINANCE_RELATION = 15;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__LABELS = STEXT_OVERLAPPING_RELATION__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__ID = STEXT_OVERLAPPING_RELATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__IDENTIFIER = STEXT_OVERLAPPING_RELATION__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__GRAPH = STEXT_OVERLAPPING_RELATION__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SOURCE = STEXT_OVERLAPPING_RELATION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__TARGET = STEXT_OVERLAPPING_RELATION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SANNOTATIONS = STEXT_OVERLAPPING_RELATION__SANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SNAME = STEXT_OVERLAPPING_RELATION__SNAME;
+
+	/**
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SELEMENT_ID = STEXT_OVERLAPPING_RELATION__SELEMENT_ID;
+
+	/**
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SID = STEXT_OVERLAPPING_RELATION__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SELEMENT_PATH = STEXT_OVERLAPPING_RELATION__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SPROCESSING_ANNOTATIONS = STEXT_OVERLAPPING_RELATION__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SFEATURES = STEXT_OVERLAPPING_RELATION__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SSource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SSOURCE = STEXT_OVERLAPPING_RELATION__SSOURCE;
+
+	/**
+	 * The feature id for the '<em><b>STarget</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__STARGET = STEXT_OVERLAPPING_RELATION__STARGET;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SGRAPH = STEXT_OVERLAPPING_RELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SStructure</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SSTRUCTURE = STEXT_OVERLAPPING_RELATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SStructured Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SSTRUCTURED_TARGET = STEXT_OVERLAPPING_RELATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SDOCUMENT_GRAPH = STEXT_OVERLAPPING_RELATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>SDominance Relation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION_FEATURE_COUNT = STEXT_OVERLAPPING_RELATION_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2148,7 +2818,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSFEATURE_NAMES()
 	 * @generated
 	 */
-	int SFEATURE_NAMES = 12;
+	int SFEATURE_NAMES = 16;
 
 
 	/**
@@ -2248,6 +2918,39 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSDocumentGraph_SSpans();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures <em>SStructures</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>SStructures</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures()
+	 * @see #getSDocumentGraph()
+	 * @generated
+	 */
+	EReference getSDocumentGraph_SStructures();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations <em>SDominance Relations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>SDominance Relations</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations()
+	 * @see #getSDocumentGraph()
+	 * @generated
+	 */
+	EReference getSDocumentGraph_SDominanceRelations();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations <em>SPointing Relations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>SPointing Relations</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations()
+	 * @see #getSDocumentGraph()
+	 * @generated
+	 */
+	EReference getSDocumentGraph_SPointingRelations();
 
 	/**
 	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS <em>STextual DS</em>}'.
@@ -2558,6 +3261,123 @@ public interface SDocumentStructurePackage extends EPackage {
 	EClass getSTimeOverlappingRelation();
 
 	/**
+	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructuredNode <em>SStructured Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SStructured Node</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructuredNode
+	 * @generated
+	 */
+	EClass getSStructuredNode();
+
+	/**
+	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure <em>SStructure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SStructure</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure
+	 * @generated
+	 */
+	EClass getSStructure();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>SDocument Graph</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph()
+	 * @see #getSStructure()
+	 * @generated
+	 */
+	EReference getSStructure_SDocumentGraph();
+
+	/**
+	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation <em>SPointing Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SPointing Relation</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation
+	 * @generated
+	 */
+	EClass getSPointingRelation();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation#getSStructuredSource <em>SStructured Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SStructured Source</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation#getSStructuredSource()
+	 * @see #getSPointingRelation()
+	 * @generated
+	 */
+	EReference getSPointingRelation_SStructuredSource();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation#getSStructuredTarget <em>SStructured Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SStructured Target</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation#getSStructuredTarget()
+	 * @see #getSPointingRelation()
+	 * @generated
+	 */
+	EReference getSPointingRelation_SStructuredTarget();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>SDocument Graph</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation#getSDocumentGraph()
+	 * @see #getSPointingRelation()
+	 * @generated
+	 */
+	EReference getSPointingRelation_SDocumentGraph();
+
+	/**
+	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation <em>SDominance Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SDominance Relation</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation
+	 * @generated
+	 */
+	EClass getSDominanceRelation();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSStructure <em>SStructure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SStructure</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSStructure()
+	 * @see #getSDominanceRelation()
+	 * @generated
+	 */
+	EReference getSDominanceRelation_SStructure();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSStructuredTarget <em>SStructured Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SStructured Target</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSStructuredTarget()
+	 * @see #getSDominanceRelation()
+	 * @generated
+	 */
+	EReference getSDominanceRelation_SStructuredTarget();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>SDocument Graph</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSDocumentGraph()
+	 * @see #getSDominanceRelation()
+	 * @generated
+	 */
+	EReference getSDominanceRelation_SDocumentGraph();
+
+	/**
 	 * Returns the meta object for enum '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2662,6 +3482,30 @@ public interface SDocumentStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT_GRAPH__SSPANS = eINSTANCE.getSDocumentGraph_SSpans();
+
+		/**
+		 * The meta object literal for the '<em><b>SStructures</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDOCUMENT_GRAPH__SSTRUCTURES = eINSTANCE.getSDocumentGraph_SStructures();
+
+		/**
+		 * The meta object literal for the '<em><b>SDominance Relations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS = eINSTANCE.getSDocumentGraph_SDominanceRelations();
+
+		/**
+		 * The meta object literal for the '<em><b>SPointing Relations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDOCUMENT_GRAPH__SPOINTING_RELATIONS = eINSTANCE.getSDocumentGraph_SPointingRelations();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.STextualDSImpl <em>STextual DS</em>}' class.
@@ -2916,6 +3760,102 @@ public interface SDocumentStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EClass STIME_OVERLAPPING_RELATION = eINSTANCE.getSTimeOverlappingRelation();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructuredNodeImpl <em>SStructured Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructuredNodeImpl
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSStructuredNode()
+		 * @generated
+		 */
+		EClass SSTRUCTURED_NODE = eINSTANCE.getSStructuredNode();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructureImpl <em>SStructure</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructureImpl
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSStructure()
+		 * @generated
+		 */
+		EClass SSTRUCTURE = eINSTANCE.getSStructure();
+
+		/**
+		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SSTRUCTURE__SDOCUMENT_GRAPH = eINSTANCE.getSStructure_SDocumentGraph();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SPointingRelationImpl <em>SPointing Relation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SPointingRelationImpl
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSPointingRelation()
+		 * @generated
+		 */
+		EClass SPOINTING_RELATION = eINSTANCE.getSPointingRelation();
+
+		/**
+		 * The meta object literal for the '<em><b>SStructured Source</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPOINTING_RELATION__SSTRUCTURED_SOURCE = eINSTANCE.getSPointingRelation_SStructuredSource();
+
+		/**
+		 * The meta object literal for the '<em><b>SStructured Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPOINTING_RELATION__SSTRUCTURED_TARGET = eINSTANCE.getSPointingRelation_SStructuredTarget();
+
+		/**
+		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SPOINTING_RELATION__SDOCUMENT_GRAPH = eINSTANCE.getSPointingRelation_SDocumentGraph();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDominanceRelationImpl <em>SDominance Relation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDominanceRelationImpl
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSDominanceRelation()
+		 * @generated
+		 */
+		EClass SDOMINANCE_RELATION = eINSTANCE.getSDominanceRelation();
+
+		/**
+		 * The meta object literal for the '<em><b>SStructure</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDOMINANCE_RELATION__SSTRUCTURE = eINSTANCE.getSDominanceRelation_SStructure();
+
+		/**
+		 * The meta object literal for the '<em><b>SStructured Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDOMINANCE_RELATION__SSTRUCTURED_TARGET = eINSTANCE.getSDominanceRelation_SStructuredTarget();
+
+		/**
+		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDOMINANCE_RELATION__SDOCUMENT_GRAPH = eINSTANCE.getSDominanceRelation_SDocumentGraph();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}' enum.

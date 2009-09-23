@@ -134,6 +134,22 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 				return createSTimeOverlappingRelationAdapter();
 			}
 			@Override
+			public Adapter caseSStructuredNode(SStructuredNode object) {
+				return createSStructuredNodeAdapter();
+			}
+			@Override
+			public Adapter caseSStructure(SStructure object) {
+				return createSStructureAdapter();
+			}
+			@Override
+			public Adapter caseSPointingRelation(SPointingRelation object) {
+				return createSPointingRelationAdapter();
+			}
+			@Override
+			public Adapter caseSDominanceRelation(SDominanceRelation object) {
+				return createSDominanceRelationAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -370,6 +386,62 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSTimeOverlappingRelationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructuredNode <em>SStructured Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructuredNode
+	 * @generated
+	 */
+	public Adapter createSStructuredNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure <em>SStructure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure
+	 * @generated
+	 */
+	public Adapter createSStructureAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation <em>SPointing Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation
+	 * @generated
+	 */
+	public Adapter createSPointingRelationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation <em>SDominance Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation
+	 * @generated
+	 */
+	public Adapter createSDominanceRelationAdapter() {
 		return null;
 	}
 

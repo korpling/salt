@@ -4,36 +4,36 @@
  *
  * $Id$
  */
-package de.hub.corpling.salt.saltCommon.sCorpusStructure.impl;
+package de.hub.corpling.salt.saltCommon.sDocumentStructure.impl;
+
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructure;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
 
-import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpus;
-import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph;
-import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
-import de.hub.corpling.salt.saltCore.impl.SNodeImpl;
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>SCorpus</b></em>'.
+ * An implementation of the model object '<em><b>SStructure</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCommon.sCorpusStructure.impl.SCorpusImpl#getSCorpusGraph <em>SCorpus Graph</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SStructureImpl#getSDocumentGraph <em>SDocument Graph</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SCorpusImpl extends SNodeImpl implements SCorpus {
+public class SStructureImpl extends SStructuredNodeImpl implements SStructure {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SCorpusImpl() {
+	protected SStructureImpl() {
 		super();
 	}
 
@@ -44,18 +44,18 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SCorpusStructurePackage.Literals.SCORPUS;
+		return SDocumentStructurePackage.Literals.SSTRUCTURE;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SCorpusGraph getSCorpusGraph() 
+	public SDocumentGraph getSDocumentGraph() 
 	{
-		SCorpusGraph retVal= null;
-		if (super.getSGraph() instanceof SCorpusGraph)
-			retVal= (SCorpusGraph) super.getSGraph();
+		SDocumentGraph retVal= null;
+		if (super.getSGraph() instanceof SDocumentGraph)
+			retVal= (SDocumentGraph) super.getSGraph();
 		return(retVal);
 	}
 
@@ -63,9 +63,9 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public void setSCorpusGraph(SCorpusGraph newSCorpusGraph) 
+	public void setSDocumentGraph(SDocumentGraph newSDocumentGraph) 
 	{
-		super.setSGraph(newSCorpusGraph);
+		super.setSGraph(newSDocumentGraph);
 	}
 
 	/**
@@ -76,8 +76,8 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case SCorpusStructurePackage.SCORPUS__SCORPUS_GRAPH:
-				return eInternalContainer().eInverseRemove(this, SCorpusStructurePackage.SCORPUS_GRAPH__SCORPORA, SCorpusGraph.class, msgs);
+			case SDocumentStructurePackage.SSTRUCTURE__SDOCUMENT_GRAPH:
+				return eInternalContainer().eInverseRemove(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__SSTRUCTURES, SDocumentGraph.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -90,8 +90,8 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SCorpusStructurePackage.SCORPUS__SCORPUS_GRAPH:
-				return getSCorpusGraph();
+			case SDocumentStructurePackage.SSTRUCTURE__SDOCUMENT_GRAPH:
+				return getSDocumentGraph();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -104,8 +104,8 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SCorpusStructurePackage.SCORPUS__SCORPUS_GRAPH:
-				setSCorpusGraph((SCorpusGraph)newValue);
+			case SDocumentStructurePackage.SSTRUCTURE__SDOCUMENT_GRAPH:
+				setSDocumentGraph((SDocumentGraph)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -119,8 +119,8 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SCorpusStructurePackage.SCORPUS__SCORPUS_GRAPH:
-				setSCorpusGraph((SCorpusGraph)null);
+			case SDocumentStructurePackage.SSTRUCTURE__SDOCUMENT_GRAPH:
+				setSDocumentGraph((SDocumentGraph)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -134,10 +134,10 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SCorpusStructurePackage.SCORPUS__SCORPUS_GRAPH:
-				return getSCorpusGraph() != null;
+			case SDocumentStructurePackage.SSTRUCTURE__SDOCUMENT_GRAPH:
+				return getSDocumentGraph() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //SCorpusImpl
+} //SStructureImpl

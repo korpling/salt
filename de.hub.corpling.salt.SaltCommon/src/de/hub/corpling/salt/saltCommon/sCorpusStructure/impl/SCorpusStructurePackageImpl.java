@@ -410,11 +410,11 @@ public class SCorpusStructurePackageImpl extends EPackageImpl implements SCorpus
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sCorpusGraphEClass, SCorpusGraph.class, "SCorpusGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSCorpusGraph_SDocuments(), this.getSDocument(), this.getSDocument_SCorpusGraph(), "sDocuments", null, 0, -1, SCorpusGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusGraph_SDocuments(), this.getSDocument(), this.getSDocument_SCorpusGraph(), "sDocuments", null, 0, -1, SCorpusGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSCorpusGraph_SaltProject(), theSaltCommonPackage.getSaltProject(), theSaltCommonPackage.getSaltProject_SCorpusGraphs(), "saltProject", null, 0, 1, SCorpusGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSCorpusGraph_SCorpora(), this.getSCorpus(), this.getSCorpus_SCorpusGraph(), "sCorpora", null, 0, -1, SCorpusGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSCorpusGraph_SCorpusRelations(), this.getSCorpusRelation(), this.getSCorpusRelation_SCorpusGraph(), "sCorpusRelations", null, 0, -1, SCorpusGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSCorpusGraph_SCorpusDocumentRelations(), this.getSCorpusDocumentRelation(), this.getSCorpusDocumentRelation_SCorpusGraph(), "sCorpusDocumentRelations", null, 0, -1, SCorpusGraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusGraph_SCorpora(), this.getSCorpus(), this.getSCorpus_SCorpusGraph(), "sCorpora", null, 0, -1, SCorpusGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusGraph_SCorpusRelations(), this.getSCorpusRelation(), this.getSCorpusRelation_SCorpusGraph(), "sCorpusRelations", null, 0, -1, SCorpusGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusGraph_SCorpusDocumentRelations(), this.getSCorpusDocumentRelation(), this.getSCorpusDocumentRelation_SCorpusGraph(), "sCorpusDocumentRelations", null, 0, -1, SCorpusGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(sCorpusGraphEClass, this.getSCorpus(), "getSCorpus", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getSElementId(), "sCorpusId", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -423,21 +423,21 @@ public class SCorpusStructurePackageImpl extends EPackageImpl implements SCorpus
 		addEParameter(op, theSaltCorePackage.getSElementId(), "sDocumentId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sDocumentEClass, SDocument.class, "SDocument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSDocument_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SDocuments(), "sCorpusGraph", null, 0, 1, SDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSDocument_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SDocuments(), "sCorpusGraph", null, 0, 1, SDocument.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocument_SDocumentGraph(), theSDocumentStructurePackage.getSDocumentGraph(), theSDocumentStructurePackage.getSDocumentGraph_SDocument(), "sDocumentGraph", null, 0, 1, SDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sCorpusEClass, SCorpus.class, "SCorpus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSCorpus_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SCorpora(), "sCorpusGraph", null, 0, 1, SCorpus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpus_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SCorpora(), "sCorpusGraph", null, 0, 1, SCorpus.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sCorpusRelationEClass, SCorpusRelation.class, "SCorpusRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSCorpusRelation_SSuperCorpus(), this.getSCorpus(), null, "sSuperCorpus", null, 0, 1, SCorpusRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSCorpusRelation_SSubCorpus(), this.getSCorpus(), null, "sSubCorpus", null, 0, 1, SCorpusRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSCorpusRelation_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SCorpusRelations(), "sCorpusGraph", null, 0, 1, SCorpusRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusRelation_SSuperCorpus(), this.getSCorpus(), null, "sSuperCorpus", null, 0, 1, SCorpusRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusRelation_SSubCorpus(), this.getSCorpus(), null, "sSubCorpus", null, 0, 1, SCorpusRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusRelation_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SCorpusRelations(), "sCorpusGraph", null, 0, 1, SCorpusRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sCorpusDocumentRelationEClass, SCorpusDocumentRelation.class, "SCorpusDocumentRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSCorpusDocumentRelation_SCorpus(), this.getSCorpus(), null, "sCorpus", null, 0, 1, SCorpusDocumentRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSCorpusDocumentRelation_SDocument(), this.getSDocument(), null, "sDocument", null, 0, 1, SCorpusDocumentRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSCorpusDocumentRelation_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SCorpusDocumentRelations(), "sCorpusGraph", null, 0, 1, SCorpusDocumentRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusDocumentRelation_SCorpus(), this.getSCorpus(), null, "sCorpus", null, 0, 1, SCorpusDocumentRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusDocumentRelation_SDocument(), this.getSDocument(), null, "sDocument", null, 0, 1, SCorpusDocumentRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSCorpusDocumentRelation_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SCorpusDocumentRelations(), "sCorpusGraph", null, 0, 1, SCorpusDocumentRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 	}
 
 } //SCorpusStructurePackageImpl

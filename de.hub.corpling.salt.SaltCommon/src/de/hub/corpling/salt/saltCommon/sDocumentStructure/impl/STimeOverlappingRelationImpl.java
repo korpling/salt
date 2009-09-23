@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class STimeOverlappingRelationImpl extends SRelationImpl implements STimeOverlappingRelation {
+public abstract class STimeOverlappingRelationImpl extends SRelationImpl implements STimeOverlappingRelation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

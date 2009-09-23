@@ -6,24 +6,18 @@
  */
 package de.hub.corpling.salt.saltCommon.sCorpusStructure.impl;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument;
-
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
-
 import de.hub.corpling.salt.saltCore.impl.SNodeImpl;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -72,42 +66,22 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public SCorpusGraph getSCorpusGraph() {
-		if (eContainerFeatureID() != SCorpusStructurePackage.SDOCUMENT__SCORPUS_GRAPH) return null;
-		return (SCorpusGraph)eContainer();
+	public SCorpusGraph getSCorpusGraph() 
+	{
+		SCorpusGraph retVal= null;
+		if (super.getSGraph() instanceof SCorpusGraph)
+			retVal= (SCorpusGraph) super.getSGraph();
+		return(retVal);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public NotificationChain basicSetSCorpusGraph(SCorpusGraph newSCorpusGraph, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newSCorpusGraph, SCorpusStructurePackage.SDOCUMENT__SCORPUS_GRAPH, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSCorpusGraph(SCorpusGraph newSCorpusGraph) {
-		if (newSCorpusGraph != eInternalContainer() || (eContainerFeatureID() != SCorpusStructurePackage.SDOCUMENT__SCORPUS_GRAPH && newSCorpusGraph != null)) {
-			if (EcoreUtil.isAncestor(this, newSCorpusGraph))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newSCorpusGraph != null)
-				msgs = ((InternalEObject)newSCorpusGraph).eInverseAdd(this, SCorpusStructurePackage.SCORPUS_GRAPH__SDOCUMENTS, SCorpusGraph.class, msgs);
-			msgs = basicSetSCorpusGraph(newSCorpusGraph, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SCorpusStructurePackage.SDOCUMENT__SCORPUS_GRAPH, newSCorpusGraph, newSCorpusGraph));
+	public void setSCorpusGraph(SCorpusGraph newSCorpusGraph) 
+	{
+		super.setSGraph(newSCorpusGraph);
 	}
 
 	/**
@@ -178,10 +152,6 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SCorpusStructurePackage.SDOCUMENT__SCORPUS_GRAPH:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetSCorpusGraph((SCorpusGraph)otherEnd, msgs);
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
 				if (sDocumentGraph != null)
 					msgs = ((InternalEObject)sDocumentGraph).eInverseRemove(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, SDocumentGraph.class, msgs);
@@ -198,8 +168,6 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SCorpusStructurePackage.SDOCUMENT__SCORPUS_GRAPH:
-				return basicSetSCorpusGraph(null, msgs);
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
 				return basicSetSDocumentGraph(null, msgs);
 		}

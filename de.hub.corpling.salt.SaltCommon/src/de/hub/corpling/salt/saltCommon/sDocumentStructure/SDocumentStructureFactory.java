@@ -62,24 +62,6 @@ public interface SDocumentStructureFactory extends EFactory {
 	STextualRelation createSTextualRelation();
 
 	/**
-	 * Returns a new object of class '<em>SSequential Relation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SSequential Relation</em>'.
-	 * @generated
-	 */
-	SSequentialRelation createSSequentialRelation();
-
-	/**
-	 * Returns a new object of class '<em>SSequential DS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SSequential DS</em>'.
-	 * @generated
-	 */
-	SSequentialDS createSSequentialDS();
-
-	/**
 	 * Returns a new object of class '<em>STimeline</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,22 +98,31 @@ public interface SDocumentStructureFactory extends EFactory {
 	SSpanningRelation createSSpanningRelation();
 
 	/**
-	 * Returns a new object of class '<em>SText Overlapping Relation</em>'.
+	 * Returns a new object of class '<em>SStructure</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>SText Overlapping Relation</em>'.
+	 * @return a new object of class '<em>SStructure</em>'.
 	 * @generated
 	 */
-	STextOverlappingRelation createSTextOverlappingRelation();
+	SStructure createSStructure();
 
 	/**
-	 * Returns a new object of class '<em>STime Overlapping Relation</em>'.
+	 * Returns a new object of class '<em>SPointing Relation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>STime Overlapping Relation</em>'.
+	 * @return a new object of class '<em>SPointing Relation</em>'.
 	 * @generated
 	 */
-	STimeOverlappingRelation createSTimeOverlappingRelation();
+	SPointingRelation createSPointingRelation();
+
+	/**
+	 * Returns a new object of class '<em>SDominance Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SDominance Relation</em>'.
+	 * @generated
+	 */
+	SDominanceRelation createSDominanceRelation();
 
 	/**
 	 * Returns the package supported by this factory.

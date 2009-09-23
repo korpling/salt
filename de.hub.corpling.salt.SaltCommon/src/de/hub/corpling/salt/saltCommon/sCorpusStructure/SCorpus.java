@@ -38,7 +38,7 @@ public interface SCorpus extends SNode {
 	 * @see #setSCorpusGraph(SCorpusGraph)
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSCorpus_SCorpusGraph()
 	 * @see de.hub.corpling.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSCorpora
-	 * @model opposite="sCorpora" transient="false"
+	 * @model opposite="sCorpora" volatile="true" derived="true"
 	 * @generated
 	 */
 	SCorpusGraph getSCorpusGraph();
