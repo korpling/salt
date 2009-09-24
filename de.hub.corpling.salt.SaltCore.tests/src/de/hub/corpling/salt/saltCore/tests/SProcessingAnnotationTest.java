@@ -24,6 +24,7 @@ import junit.textui.TestRunner;
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSProcessingAnnotatableElement() <em>SProcessing Annotatable Element</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSName() <em>SName</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSValue() <em>SValue</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSNS() <em>SNS</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -176,6 +177,33 @@ public class SProcessingAnnotationTest extends TestCase {
 	public void testSetSValue() 
 	{
 		this.testGetSValue();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SMetaAnnotation#getSNS() <em>SNS</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotation#getSNS()
+	 */
+	public void testGetSNS() 
+	{
+
+		assertNull(this.getFixture().getSNS());
+		
+		String ns= "namespace";
+		this.getFixture().setSNS(ns);
+		assertEquals(ns, this.getFixture().getSNS());
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SMetaAnnotation#setSNS(java.lang.String) <em>SNS</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotation#setSNS(java.lang.String)
+	 */
+	public void testSetSNS() 
+	{
+		this.testGetSNS();
 	}
 
 } //SProcessingAnnotationTest
