@@ -128,6 +128,14 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 				return createSFeaturableElementAdapter();
 			}
 			@Override
+			public Adapter caseSMetaAnnotatableElement(SMetaAnnotatableElement object) {
+				return createSMetaAnnotatableElementAdapter();
+			}
+			@Override
+			public Adapter caseSMetaAnnotation(SMetaAnnotation object) {
+				return createSMetaAnnotationAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -340,6 +348,34 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSFeaturableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement <em>SMeta Annotatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotatableElement
+	 * @generated
+	 */
+	public Adapter createSMetaAnnotatableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SMetaAnnotation <em>SMeta Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotation
+	 * @generated
+	 */
+	public Adapter createSMetaAnnotationAdapter() {
 		return null;
 	}
 

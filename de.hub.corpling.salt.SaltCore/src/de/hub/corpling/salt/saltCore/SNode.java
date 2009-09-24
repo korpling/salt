@@ -24,7 +24,7 @@ import de.hub.corpling.graph.Node;
  * @model
  * @generated
  */
-public interface SNode extends Node, SAnnotatableElement, SNamedElement, SIdentifiableElement, SProcessingAnnotatableElement, SFeaturableElement {
+public interface SNode extends Node, SAnnotatableElement, SNamedElement, SIdentifiableElement, SProcessingAnnotatableElement, SFeaturableElement, SMetaAnnotatableElement {
 	/**
 	 * Returns the value of the '<em><b>SGraph</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SGraph#getSNodes <em>SNodes</em>}'.

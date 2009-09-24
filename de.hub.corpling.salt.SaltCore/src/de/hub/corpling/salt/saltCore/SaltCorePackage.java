@@ -172,13 +172,22 @@ public interface SaltCorePackage extends EPackage {
 	int SNODE__SFEATURES = GraphPackage.NODE_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNODE__SMETA_ANNOTATIONS = GraphPackage.NODE_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SNODE__SGRAPH = GraphPackage.NODE_FEATURE_COUNT + 7;
+	int SNODE__SGRAPH = GraphPackage.NODE_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>SNode</em>' class.
@@ -187,7 +196,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SNODE_FEATURE_COUNT = GraphPackage.NODE_FEATURE_COUNT + 8;
+	int SNODE_FEATURE_COUNT = GraphPackage.NODE_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl <em>SRelation</em>}' class.
@@ -317,13 +326,22 @@ public interface SaltCorePackage extends EPackage {
 	int SRELATION__SFEATURES = GraphPackage.EDGE_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SRELATION__SMETA_ANNOTATIONS = GraphPackage.EDGE_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SSOURCE = GraphPackage.EDGE_FEATURE_COUNT + 7;
+	int SRELATION__SSOURCE = GraphPackage.EDGE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>STarget</b></em>' reference.
@@ -332,7 +350,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__STARGET = GraphPackage.EDGE_FEATURE_COUNT + 8;
+	int SRELATION__STARGET = GraphPackage.EDGE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
@@ -341,7 +359,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SGRAPH = GraphPackage.EDGE_FEATURE_COUNT + 9;
+	int SRELATION__SGRAPH = GraphPackage.EDGE_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>SRelation</em>' class.
@@ -350,7 +368,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION_FEATURE_COUNT = GraphPackage.EDGE_FEATURE_COUNT + 10;
+	int SRELATION_FEATURE_COUNT = GraphPackage.EDGE_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.
@@ -398,6 +416,15 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	int SANNOTATION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SANNOTATION__LABELS = GraphPackage.LABEL__LABELS;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -635,13 +662,22 @@ public interface SaltCorePackage extends EPackage {
 	int SGRAPH__SFEATURES = GraphPackage.GRAPH_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SGRAPH__SMETA_ANNOTATIONS = GraphPackage.GRAPH_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>SRelations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH__SRELATIONS = GraphPackage.GRAPH_FEATURE_COUNT + 7;
+	int SGRAPH__SRELATIONS = GraphPackage.GRAPH_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>SNodes</b></em>' reference list.
@@ -650,7 +686,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH__SNODES = GraphPackage.GRAPH_FEATURE_COUNT + 8;
+	int SGRAPH__SNODES = GraphPackage.GRAPH_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>SGraph</em>' class.
@@ -659,7 +695,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH_FEATURE_COUNT = GraphPackage.GRAPH_FEATURE_COUNT + 9;
+	int SGRAPH_FEATURE_COUNT = GraphPackage.GRAPH_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SNamedElementImpl <em>SNamed Element</em>}' class.
@@ -762,6 +798,15 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	int SPROCESSING_ANNOTATION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPROCESSING_ANNOTATION__LABELS = GraphPackage.LABEL__LABELS;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -901,6 +946,15 @@ public interface SaltCorePackage extends EPackage {
 	int SELEMENT_ID = 9;
 
 	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELEMENT_ID__LABELS = GraphPackage.IDENTIFIER__LABELS;
+
+	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1017,6 +1071,15 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	int SFEATURE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SFEATURE__LABELS = GraphPackage.LABEL__LABELS;
 
 	/**
 	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -1155,6 +1218,161 @@ public interface SaltCorePackage extends EPackage {
 	int SFEATURABLE_ELEMENT_FEATURE_COUNT = GraphPackage.LABELABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SMetaAnnotatableElementImpl <em>SMeta Annotatable Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.impl.SMetaAnnotatableElementImpl
+	 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getSMetaAnnotatableElement()
+	 * @generated
+	 */
+	int SMETA_ANNOTATABLE_ELEMENT = 12;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATABLE_ELEMENT__LABELS = GraphPackage.LABELABLE_ELEMENT__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS = GraphPackage.LABELABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>SMeta Annotatable Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATABLE_ELEMENT_FEATURE_COUNT = GraphPackage.LABELABLE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SMetaAnnotationImpl <em>SMeta Annotation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.impl.SMetaAnnotationImpl
+	 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getSMetaAnnotation()
+	 * @generated
+	 */
+	int SMETA_ANNOTATION = 13;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__LABELS = GraphPackage.LABEL__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__NAMESPACE = GraphPackage.LABEL__NAMESPACE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__NAME = GraphPackage.LABEL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Full Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__FULL_NAME = GraphPackage.LABEL__FULL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__VALUE = GraphPackage.LABEL__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Labelable Element</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__LABELABLE_ELEMENT = GraphPackage.LABEL__LABELABLE_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Value String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__VALUE_STRING = GraphPackage.LABEL__VALUE_STRING;
+
+	/**
+	 * The feature id for the '<em><b>SMeta Annotatable Element</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__SMETA_ANNOTATABLE_ELEMENT = GraphPackage.LABEL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__SNS = GraphPackage.LABEL_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__SNAME = GraphPackage.LABEL_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>SValue</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION__SVALUE = GraphPackage.LABEL_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>SMeta Annotation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SMETA_ANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 4;
+
+	/**
 	 * The meta object id for the '<em>URI</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1162,7 +1380,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 12;
+	int URI = 14;
 
 
 	/**
@@ -1572,6 +1790,81 @@ public interface SaltCorePackage extends EPackage {
 	EReference getSFeaturableElement_SFeatures();
 
 	/**
+	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement <em>SMeta Annotatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SMeta Annotatable Element</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotatableElement
+	 * @generated
+	 */
+	EClass getSMetaAnnotatableElement();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations <em>SMeta Annotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>SMeta Annotations</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations()
+	 * @see #getSMetaAnnotatableElement()
+	 * @generated
+	 */
+	EReference getSMetaAnnotatableElement_SMetaAnnotations();
+
+	/**
+	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SMetaAnnotation <em>SMeta Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SMeta Annotation</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotation
+	 * @generated
+	 */
+	EClass getSMetaAnnotation();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.hub.corpling.salt.saltCore.SMetaAnnotation#getSMetaAnnotatableElement <em>SMeta Annotatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>SMeta Annotatable Element</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotation#getSMetaAnnotatableElement()
+	 * @see #getSMetaAnnotation()
+	 * @generated
+	 */
+	EReference getSMetaAnnotation_SMetaAnnotatableElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hub.corpling.salt.saltCore.SMetaAnnotation#getSNS <em>SNS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SNS</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotation#getSNS()
+	 * @see #getSMetaAnnotation()
+	 * @generated
+	 */
+	EAttribute getSMetaAnnotation_SNS();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hub.corpling.salt.saltCore.SMetaAnnotation#getSName <em>SName</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SName</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotation#getSName()
+	 * @see #getSMetaAnnotation()
+	 * @generated
+	 */
+	EAttribute getSMetaAnnotation_SName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hub.corpling.salt.saltCore.SMetaAnnotation#getSValue <em>SValue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SValue</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotation#getSValue()
+	 * @see #getSMetaAnnotation()
+	 * @generated
+	 */
+	EAttribute getSMetaAnnotation_SValue();
+
+	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1931,6 +2224,66 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SFEATURABLE_ELEMENT__SFEATURES = eINSTANCE.getSFeaturableElement_SFeatures();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SMetaAnnotatableElementImpl <em>SMeta Annotatable Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCore.impl.SMetaAnnotatableElementImpl
+		 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getSMetaAnnotatableElement()
+		 * @generated
+		 */
+		EClass SMETA_ANNOTATABLE_ELEMENT = eINSTANCE.getSMetaAnnotatableElement();
+
+		/**
+		 * The meta object literal for the '<em><b>SMeta Annotations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS = eINSTANCE.getSMetaAnnotatableElement_SMetaAnnotations();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SMetaAnnotationImpl <em>SMeta Annotation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCore.impl.SMetaAnnotationImpl
+		 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getSMetaAnnotation()
+		 * @generated
+		 */
+		EClass SMETA_ANNOTATION = eINSTANCE.getSMetaAnnotation();
+
+		/**
+		 * The meta object literal for the '<em><b>SMeta Annotatable Element</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SMETA_ANNOTATION__SMETA_ANNOTATABLE_ELEMENT = eINSTANCE.getSMetaAnnotation_SMetaAnnotatableElement();
+
+		/**
+		 * The meta object literal for the '<em><b>SNS</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SMETA_ANNOTATION__SNS = eINSTANCE.getSMetaAnnotation_SNS();
+
+		/**
+		 * The meta object literal for the '<em><b>SName</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SMETA_ANNOTATION__SNAME = eINSTANCE.getSMetaAnnotation_SName();
+
+		/**
+		 * The meta object literal for the '<em><b>SValue</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SMETA_ANNOTATION__SVALUE = eINSTANCE.getSMetaAnnotation_SValue();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.

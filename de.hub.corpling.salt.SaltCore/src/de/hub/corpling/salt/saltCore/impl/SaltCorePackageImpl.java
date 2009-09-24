@@ -22,6 +22,8 @@ import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotation;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
@@ -120,6 +122,20 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * @generated
 	 */
 	private EClass sFeaturableElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sMetaAnnotatableElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sMetaAnnotationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -539,6 +555,69 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSMetaAnnotatableElement() {
+		return sMetaAnnotatableElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSMetaAnnotatableElement_SMetaAnnotations() {
+		return (EReference)sMetaAnnotatableElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSMetaAnnotation() {
+		return sMetaAnnotationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSMetaAnnotation_SMetaAnnotatableElement() {
+		return (EReference)sMetaAnnotationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSMetaAnnotation_SNS() {
+		return (EAttribute)sMetaAnnotationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSMetaAnnotation_SName() {
+		return (EAttribute)sMetaAnnotationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSMetaAnnotation_SValue() {
+		return (EAttribute)sMetaAnnotationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getURI() {
 		return uriEDataType;
 	}
@@ -621,6 +700,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sFeaturableElementEClass = createEClass(SFEATURABLE_ELEMENT);
 		createEReference(sFeaturableElementEClass, SFEATURABLE_ELEMENT__SFEATURES);
 
+		sMetaAnnotatableElementEClass = createEClass(SMETA_ANNOTATABLE_ELEMENT);
+		createEReference(sMetaAnnotatableElementEClass, SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS);
+
+		sMetaAnnotationEClass = createEClass(SMETA_ANNOTATION);
+		createEReference(sMetaAnnotationEClass, SMETA_ANNOTATION__SMETA_ANNOTATABLE_ELEMENT);
+		createEAttribute(sMetaAnnotationEClass, SMETA_ANNOTATION__SNS);
+		createEAttribute(sMetaAnnotationEClass, SMETA_ANNOTATION__SNAME);
+		createEAttribute(sMetaAnnotationEClass, SMETA_ANNOTATION__SVALUE);
+
 		// Create data types
 		uriEDataType = createEDataType(URI);
 	}
@@ -662,12 +750,14 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sNodeEClass.getESuperTypes().add(this.getSIdentifiableElement());
 		sNodeEClass.getESuperTypes().add(this.getSProcessingAnnotatableElement());
 		sNodeEClass.getESuperTypes().add(this.getSFeaturableElement());
+		sNodeEClass.getESuperTypes().add(this.getSMetaAnnotatableElement());
 		sRelationEClass.getESuperTypes().add(theGraphPackage.getEdge());
 		sRelationEClass.getESuperTypes().add(this.getSAnnotatableElement());
 		sRelationEClass.getESuperTypes().add(this.getSNamedElement());
 		sRelationEClass.getESuperTypes().add(this.getSIdentifiableElement());
 		sRelationEClass.getESuperTypes().add(this.getSProcessingAnnotatableElement());
 		sRelationEClass.getESuperTypes().add(this.getSFeaturableElement());
+		sRelationEClass.getESuperTypes().add(this.getSMetaAnnotatableElement());
 		sAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
 		sAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
 		sGraphEClass.getESuperTypes().add(theGraphPackage.getGraph());
@@ -676,12 +766,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sGraphEClass.getESuperTypes().add(this.getSIdentifiableElement());
 		sGraphEClass.getESuperTypes().add(this.getSProcessingAnnotatableElement());
 		sGraphEClass.getESuperTypes().add(this.getSFeaturableElement());
+		sGraphEClass.getESuperTypes().add(this.getSMetaAnnotatableElement());
 		sIdentifiableElementEClass.getESuperTypes().add(theGraphPackage.getIdentifiableElement());
 		sProcessingAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
 		sProcessingAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
 		sElementIdEClass.getESuperTypes().add(theGraphPackage.getIdentifier());
 		sFeatureEClass.getESuperTypes().add(theGraphPackage.getLabel());
 		sFeaturableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
+		sMetaAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
+		sMetaAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sNodeEClass, SNode.class, "SNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -763,6 +856,21 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		op = addEOperation(sFeaturableElementEClass, this.getSFeature(), "getSFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "sFeatureId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(sMetaAnnotatableElementEClass, SMetaAnnotatableElement.class, "SMetaAnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSMetaAnnotatableElement_SMetaAnnotations(), this.getSMetaAnnotation(), this.getSMetaAnnotation_SMetaAnnotatableElement(), "sMetaAnnotations", null, 0, -1, SMetaAnnotatableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(sMetaAnnotatableElementEClass, null, "addSMetaAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getSMetaAnnotation(), "sMetaAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(sMetaAnnotatableElementEClass, this.getSMetaAnnotation(), "getSMetaAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "fullName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(sMetaAnnotationEClass, SMetaAnnotation.class, "SMetaAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSMetaAnnotation_SMetaAnnotatableElement(), this.getSMetaAnnotatableElement(), this.getSMetaAnnotatableElement_SMetaAnnotations(), "sMetaAnnotatableElement", null, 0, 1, SMetaAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMetaAnnotation_SNS(), ecorePackage.getEString(), "sNS", null, 0, 1, SMetaAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMetaAnnotation_SName(), ecorePackage.getEString(), "SName", null, 0, 1, SMetaAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSMetaAnnotation_SValue(), ecorePackage.getEJavaObject(), "SValue", null, 0, 1, SMetaAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

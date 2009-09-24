@@ -28,6 +28,8 @@ import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotation;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
@@ -38,6 +40,7 @@ import de.hub.corpling.salt.saltCore.SaltCorePackage;
 import de.hub.corpling.salt.saltCore.accessors.SAnnotatableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SFeaturableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SIdentifiableElementAccessor;
+import de.hub.corpling.salt.saltCore.accessors.SMetaAnnotatableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAccessor;
 import de.hub.corpling.salt.saltExceptions.SaltException;
 
@@ -55,6 +58,7 @@ import de.hub.corpling.salt.saltExceptions.SaltException;
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSFeatures <em>SFeatures</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSMetaAnnotations <em>SMeta Annotations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSRelations <em>SRelations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl#getSNodes <em>SNodes</em>}</li>
  * </ul>
@@ -115,6 +119,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	private void init()
 	{
 		this.sAnnoAccessor= new SAnnotatableElementAccessor();
+		this.sMetaAnnoAccessor= new SMetaAnnotatableElementAccessor();
 		this.sProcAnnoAccessor= new SProcessingAnnotatableElementAccessor();
 		this.sIdentAccessor= new SIdentifiableElementAccessor();
 		this.sFeatAccessor= new SFeaturableElementAccessor();
@@ -388,6 +393,16 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	{
 		this.sIdentAccessor.setSElementPath(this, newSElementPath);
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SElementId getSElementId() {
+		SElementId sElementId = basicGetSElementId();
+		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
+	}
 //=================== end: handling SIdentifiableElement	
 //=================== start: handling SAnnotatableElement	
 	/**
@@ -402,16 +417,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	public EList<SAnnotation> getSAnnotations() 
 	{
 		return(this.sAnnoAccessor.getSAnnotations(this));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SElementId getSElementId() {
-		SElementId sElementId = basicGetSElementId();
-		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
 	}
 
 	/**
@@ -432,6 +437,39 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		return(this.sAnnoAccessor.getSAnnotation(this, fullName));
 	}
 //=================== end: handling SAnnotatableElement
+//=================== start: handling SMetaAnnotatableElement	
+	/**
+	 * Delegatee for SMetaAnnotatableElement
+	 */
+	private SMetaAnnotatableElementAccessor sMetaAnnoAccessor= null;
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public EList<SMetaAnnotation> getSMetaAnnotations() 
+	{
+		return(this.sMetaAnnoAccessor.getSMetaAnnotations(this));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addSMetaAnnotation(SMetaAnnotation SMetaAnnotation) 
+	{
+		this.sMetaAnnoAccessor.addSMetaAnnotation(this, SMetaAnnotation);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SMetaAnnotation getSMetaAnnotation(String fullName) 
+	{
+		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, fullName));
+	}
+//=================== end: handling SMetaAnnotatableElement
 //=================== start: handling SProcessingAnnotatableElement
 	/**
 	 * Delegatee for SProcessingAnnotatableElement
@@ -531,6 +569,8 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SGRAPH__SFEATURES:
 				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
+			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
+				return ((InternalEList<?>)getSMetaAnnotations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -558,6 +598,8 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return getSProcessingAnnotations();
 			case SaltCorePackage.SGRAPH__SFEATURES:
 				return getSFeatures();
+			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
+				return getSMetaAnnotations();
 			case SaltCorePackage.SGRAPH__SRELATIONS:
 				return getSRelations();
 			case SaltCorePackage.SGRAPH__SNODES:
@@ -595,6 +637,10 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				getSFeatures().clear();
 				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
 				return;
+			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
+				getSMetaAnnotations().clear();
+				getSMetaAnnotations().addAll((Collection<? extends SMetaAnnotation>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -625,6 +671,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 			case SaltCorePackage.SGRAPH__SFEATURES:
 				getSFeatures().clear();
 				return;
+			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
+				getSMetaAnnotations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -651,6 +700,8 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return !getSProcessingAnnotations().isEmpty();
 			case SaltCorePackage.SGRAPH__SFEATURES:
 				return !getSFeatures().isEmpty();
+			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
+				return !getSMetaAnnotations().isEmpty();
 			case SaltCorePackage.SGRAPH__SRELATIONS:
 				return !getSRelations().isEmpty();
 			case SaltCorePackage.SGRAPH__SNODES:
@@ -698,6 +749,12 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				default: return -1;
 			}
 		}
+		if (baseClass == SMetaAnnotatableElement.class) {
+			switch (derivedFeatureID) {
+				case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS: return SaltCorePackage.SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -737,6 +794,12 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		if (baseClass == SFeaturableElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SGRAPH__SFEATURES;
+				default: return -1;
+			}
+		}
+		if (baseClass == SMetaAnnotatableElement.class) {
+			switch (baseFeatureID) {
+				case SaltCorePackage.SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS: return SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS;
 				default: return -1;
 			}
 		}

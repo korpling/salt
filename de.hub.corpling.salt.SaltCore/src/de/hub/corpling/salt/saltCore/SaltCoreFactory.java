@@ -134,6 +134,24 @@ public interface SaltCoreFactory extends EFactory {
 	SFeaturableElement createSFeaturableElement();
 
 	/**
+	 * Returns a new object of class '<em>SMeta Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SMeta Annotatable Element</em>'.
+	 * @generated
+	 */
+	SMetaAnnotatableElement createSMetaAnnotatableElement();
+
+	/**
+	 * Returns a new object of class '<em>SMeta Annotation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SMeta Annotation</em>'.
+	 * @generated
+	 */
+	SMetaAnnotation createSMetaAnnotation();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
