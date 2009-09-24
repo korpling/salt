@@ -27,12 +27,15 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations() <em>SProcessing Annotations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations() <em>SMeta Annotations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SNode#getSGraph() <em>SGraph</em>}</li>
  * </ul>
  * </p>
  * <p>
  * The following operations are tested:
  * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hub.corpling.salt.saltCore.SMetaAnnotation) <em>Add SMeta Annotation</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hub.corpling.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}</li>
@@ -236,7 +239,56 @@ public class SNodeTest extends TestCase {
 		this.testGetSGraph();
 	}
 
-		// ========================= start: testing SAnnotatableElement
+// ========================= start: testing SMetaAnnotatableElement
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations() <em>SMetaAnnotations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations()
+	 */
+	public void testGetSMetaAnnotations() throws Exception 
+	{
+		SMetaAnnotatableElementTest sPATest= new SMetaAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testGetSMetaAnnotations();
+		sPATest.tearDown();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hub.corpling.salt.saltCore.SMetaAnnotation) <em>Add SMetaAnnotation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hub.corpling.salt.saltCore.SMetaAnnotation)
+	 */
+	public void testAddSMetaAnnotation__SMetaAnnotation() throws Exception 
+	{
+		SMetaAnnotatableElementTest sPATest= new SMetaAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testAddSMetaAnnotation__SMetaAnnotation();
+		sPATest.tearDown();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMetaAnnotation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String)
+	 */
+	public void testGetSMetaAnnotation__String() throws Exception 
+	{
+		SMetaAnnotatableElementTest sPATest= new SMetaAnnotatableElementTest(this.getName());
+		sPATest.setUp();
+		sPATest.setFixture(this.getFixture());
+		sPATest.testGetSMetaAnnotation__String();
+		sPATest.tearDown();
+	}
+// ========================= end: testing SMetaAnnotatableElement	
+// ========================= start: testing SAnnotatableElement
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}' feature getter.
 	 * <!-- begin-user-doc -->
