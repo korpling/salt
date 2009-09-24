@@ -321,6 +321,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSAnnotation_SNS() {
+		return (EAttribute)sAnnotationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSGraph() {
 		return sGraphEClass;
 	}
@@ -431,6 +440,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 */
 	public EAttribute getSProcessingAnnotation_SValue() {
 		return (EAttribute)sProcessingAnnotationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSProcessingAnnotation_SNS() {
+		return (EAttribute)sProcessingAnnotationEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -665,6 +683,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEAttribute(sAnnotationEClass, SANNOTATION__SNAME);
 		createEAttribute(sAnnotationEClass, SANNOTATION__SVALUE);
 		createEReference(sAnnotationEClass, SANNOTATION__SANNOTATABLE_ELEMENT);
+		createEAttribute(sAnnotationEClass, SANNOTATION__SNS);
 
 		sGraphEClass = createEClass(SGRAPH);
 		createEReference(sGraphEClass, SGRAPH__SRELATIONS);
@@ -682,6 +701,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEReference(sProcessingAnnotationEClass, SPROCESSING_ANNOTATION__SPROCESSING_ANNOTATABLE_ELEMENT);
 		createEAttribute(sProcessingAnnotationEClass, SPROCESSING_ANNOTATION__SNAME);
 		createEAttribute(sProcessingAnnotationEClass, SPROCESSING_ANNOTATION__SVALUE);
+		createEAttribute(sProcessingAnnotationEClass, SPROCESSING_ANNOTATION__SNS);
 
 		sProcessingAnnotatableElementEClass = createEClass(SPROCESSING_ANNOTATABLE_ELEMENT);
 		createEReference(sProcessingAnnotatableElementEClass, SPROCESSING_ANNOTATABLE_ELEMENT__SPROCESSING_ANNOTATIONS);
@@ -798,6 +818,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEAttribute(getSAnnotation_SName(), ecorePackage.getEString(), "SName", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSAnnotation_SValue(), ecorePackage.getEJavaObject(), "SValue", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSAnnotation_SAnnotatableElement(), this.getSAnnotatableElement(), this.getSAnnotatableElement_SAnnotations(), "sAnnotatableElement", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSAnnotation_SNS(), ecorePackage.getEString(), "SNS", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sGraphEClass, SGraph.class, "SGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSGraph_SRelations(), this.getSRelation(), this.getSRelation_SGraph(), "sRelations", null, 0, -1, SGraph.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -827,6 +848,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEReference(getSProcessingAnnotation_SProcessingAnnotatableElement(), this.getSProcessingAnnotatableElement(), this.getSProcessingAnnotatableElement_SProcessingAnnotations(), "sProcessingAnnotatableElement", null, 0, 1, SProcessingAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSProcessingAnnotation_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SProcessingAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSProcessingAnnotation_SValue(), ecorePackage.getEJavaObject(), "sValue", null, 0, 1, SProcessingAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSProcessingAnnotation_SNS(), ecorePackage.getEString(), "SNS", null, 0, 1, SProcessingAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sProcessingAnnotatableElementEClass, SProcessingAnnotatableElement.class, "SProcessingAnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSProcessingAnnotatableElement_SProcessingAnnotations(), this.getSProcessingAnnotation(), this.getSProcessingAnnotation_SProcessingAnnotatableElement(), "sProcessingAnnotations", null, 0, -1, SProcessingAnnotatableElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

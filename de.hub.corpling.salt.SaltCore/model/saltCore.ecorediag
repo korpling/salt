@@ -59,6 +59,10 @@
   <children xmi:type="notation:Node" xmi:id="_a3Bt3IjXEd6X5oQchPkMiQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_a3Bt34jXEd6X5oQchPkMiQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_a3Bt4IjXEd6X5oQchPkMiQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_EJ9YMKkREd669Micl0m_WQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="saltCore.ecore#//SAnnotation/SNS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EJ9YMakREd669Micl0m_WQ"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_e3QrAY5nEd6uletLczQNuw" type="2001">
         <element xmi:type="ecore:EAttribute" href="saltCore.ecore#//SAnnotation/SName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_e3QrAo5nEd6uletLczQNuw"/>
@@ -166,6 +170,10 @@
   <children xmi:type="notation:Node" xmi:id="_3H_T4J-SEd6EOdKJl5VVtw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_3H_T45-SEd6EOdKJl5VVtw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_3H_T5J-SEd6EOdKJl5VVtw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_GunGQKkREd669Micl0m_WQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="saltCore.ecore#//SProcessingAnnotation/SNS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GunGQakREd669Micl0m_WQ"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_2FZ-EJ-pEd6wqdVF8e_BCg" type="2001">
         <element xmi:type="ecore:EAttribute" href="saltCore.ecore#//SProcessingAnnotation/sName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_2FZ-EZ-pEd6wqdVF8e_BCg"/>
@@ -185,7 +193,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_3H_T4Z-SEd6EOdKJl5VVtw" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="saltCore.ecore#//SProcessingAnnotation"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3H_T4p-SEd6EOdKJl5VVtw" x="100" y="-110" width="168" height="68"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3H_T4p-SEd6EOdKJl5VVtw" x="100" y="-110" width="168" height="82"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_-uIl4J-SEd6EOdKJl5VVtw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_-uIl45-SEd6EOdKJl5VVtw" type="4001"/>

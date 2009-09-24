@@ -508,13 +508,22 @@ public interface SaltCorePackage extends EPackage {
 	int SANNOTATION__SANNOTATABLE_ELEMENT = GraphPackage.LABEL_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SANNOTATION__SNS = GraphPackage.LABEL_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>SAnnotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 3;
+	int SANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl <em>SGraph</em>}' class.
@@ -890,13 +899,22 @@ public interface SaltCorePackage extends EPackage {
 	int SPROCESSING_ANNOTATION__SVALUE = GraphPackage.LABEL_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPROCESSING_ANNOTATION__SNS = GraphPackage.LABEL_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>SProcessing Annotation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPROCESSING_ANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 3;
+	int SPROCESSING_ANNOTATION_FEATURE_COUNT = GraphPackage.LABEL_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotatableElementImpl <em>SProcessing Annotatable Element</em>}' class.
@@ -1512,6 +1530,17 @@ public interface SaltCorePackage extends EPackage {
 	EReference getSAnnotation_SAnnotatableElement();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.hub.corpling.salt.saltCore.SAnnotation#getSNS <em>SNS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SNS</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SAnnotation#getSNS()
+	 * @see #getSAnnotation()
+	 * @generated
+	 */
+	EAttribute getSAnnotation_SNS();
+
+	/**
 	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SGraph <em>SGraph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1649,6 +1678,17 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSProcessingAnnotation_SValue();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSNS <em>SNS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SNS</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSNS()
+	 * @see #getSProcessingAnnotation()
+	 * @generated
+	 */
+	EAttribute getSProcessingAnnotation_SNS();
 
 	/**
 	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement <em>SProcessing Annotatable Element</em>}'.
@@ -2002,6 +2042,14 @@ public interface SaltCorePackage extends EPackage {
 		EReference SANNOTATION__SANNOTATABLE_ELEMENT = eINSTANCE.getSAnnotation_SAnnotatableElement();
 
 		/**
+		 * The meta object literal for the '<em><b>SNS</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SANNOTATION__SNS = eINSTANCE.getSAnnotation_SNS();
+
+		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SGraphImpl <em>SGraph</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2112,6 +2160,14 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SPROCESSING_ANNOTATION__SVALUE = eINSTANCE.getSProcessingAnnotation_SValue();
+
+		/**
+		 * The meta object literal for the '<em><b>SNS</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SPROCESSING_ANNOTATION__SNS = eINSTANCE.getSProcessingAnnotation_SNS();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotatableElementImpl <em>SProcessing Annotatable Element</em>}' class.

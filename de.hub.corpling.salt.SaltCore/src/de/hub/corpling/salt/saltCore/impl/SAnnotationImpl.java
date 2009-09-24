@@ -25,6 +25,7 @@ import de.hub.corpling.salt.saltCore.SaltCorePackage;
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SAnnotationImpl#getSName <em>SName</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SAnnotationImpl#getSValue <em>SValue</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SAnnotationImpl#getSAnnotatableElement <em>SAnnotatable Element</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SAnnotationImpl#getSNS <em>SNS</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +51,16 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation {
 	 * @ordered
 	 */
 	protected static final Object SVALUE_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getSNS() <em>SNS</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSNS()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SNS_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,6 +101,24 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation {
 	public void setSAnnotatableElement(SAnnotatableElement newSAnnotatableElement) 
 	{
 		super.setLabelableElement(newSAnnotatableElement);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public String getSNS() 
+	{
+		return(super.getNamespace());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void setSNS(String newSNS) 
+	{
+		super.setNamespace(newSNS);
 	}
 
 	/**
@@ -156,6 +185,8 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation {
 				return getSValue();
 			case SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT:
 				return getSAnnotatableElement();
+			case SaltCorePackage.SANNOTATION__SNS:
+				return getSNS();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -176,6 +207,9 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation {
 				return;
 			case SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT:
 				setSAnnotatableElement((SAnnotatableElement)newValue);
+				return;
+			case SaltCorePackage.SANNOTATION__SNS:
+				setSNS((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -198,6 +232,9 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation {
 			case SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT:
 				setSAnnotatableElement((SAnnotatableElement)null);
 				return;
+			case SaltCorePackage.SANNOTATION__SNS:
+				setSNS(SNS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -216,6 +253,8 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation {
 				return SVALUE_EDEFAULT == null ? getSValue() != null : !SVALUE_EDEFAULT.equals(getSValue());
 			case SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT:
 				return getSAnnotatableElement() != null;
+			case SaltCorePackage.SANNOTATION__SNS:
+				return SNS_EDEFAULT == null ? getSNS() != null : !SNS_EDEFAULT.equals(getSNS());
 		}
 		return super.eIsSet(featureID);
 	}

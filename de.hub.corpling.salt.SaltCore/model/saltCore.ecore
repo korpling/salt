@@ -33,6 +33,8 @@
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sAnnotatableElement" eType="#//SAnnotatableElement"
         volatile="true" transient="true" eOpposite="#//SAnnotatableElement/sAnnotations"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SGraph" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Graph #//SNamedElement #//SAnnotatableElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
     <eOperations name="addSNode">
@@ -73,6 +75,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SProcessingAnnotatableElement" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//LabelableElement">

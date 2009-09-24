@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EClass;
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotationImpl#getSProcessingAnnotatableElement <em>SProcessing Annotatable Element</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotationImpl#getSName <em>SName</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotationImpl#getSValue <em>SValue</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotationImpl#getSNS <em>SNS</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,6 +52,16 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 	 * @ordered
 	 */
 	protected static final Object SVALUE_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getSNS() <em>SNS</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSNS()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SNS_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,6 +144,24 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 */
+	public String getSNS() 
+	{
+		return(super.getNamespace());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void setSNS(String newSNS) 
+	{
+		super.setNamespace(newSNS);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -158,6 +187,8 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 				return getSName();
 			case SaltCorePackage.SPROCESSING_ANNOTATION__SVALUE:
 				return getSValue();
+			case SaltCorePackage.SPROCESSING_ANNOTATION__SNS:
+				return getSNS();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -178,6 +209,9 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 				return;
 			case SaltCorePackage.SPROCESSING_ANNOTATION__SVALUE:
 				setSValue(newValue);
+				return;
+			case SaltCorePackage.SPROCESSING_ANNOTATION__SNS:
+				setSNS((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -200,6 +234,9 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 			case SaltCorePackage.SPROCESSING_ANNOTATION__SVALUE:
 				setSValue(SVALUE_EDEFAULT);
 				return;
+			case SaltCorePackage.SPROCESSING_ANNOTATION__SNS:
+				setSNS(SNS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -218,6 +255,8 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 				return SNAME_EDEFAULT == null ? getSName() != null : !SNAME_EDEFAULT.equals(getSName());
 			case SaltCorePackage.SPROCESSING_ANNOTATION__SVALUE:
 				return SVALUE_EDEFAULT == null ? getSValue() != null : !SVALUE_EDEFAULT.equals(getSValue());
+			case SaltCorePackage.SPROCESSING_ANNOTATION__SNS:
+				return SNS_EDEFAULT == null ? getSNS() != null : !SNS_EDEFAULT.equals(getSNS());
 		}
 		return super.eIsSet(featureID);
 	}
