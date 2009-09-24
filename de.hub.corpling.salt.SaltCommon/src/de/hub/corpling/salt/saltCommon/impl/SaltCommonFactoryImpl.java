@@ -6,7 +6,6 @@
  */
 package de.hub.corpling.salt.saltCommon.impl;
 
-import de.hub.corpling.salt.saltCommon.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -43,6 +42,8 @@ import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotation;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
@@ -222,6 +223,18 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.saltCoreFactory.createSRelation());
 	}
 
+	@Override
+	public SMetaAnnotatableElement createSMetaAnnotatableElement() 
+	{
+		return(this.saltCoreFactory.createSMetaAnnotatableElement());
+	}
+
+	@Override
+	public SMetaAnnotation createSMetaAnnotation() 
+	{
+		return(this.saltCoreFactory.createSMetaAnnotation());
+	}
+	
 	@Override
 	public SaltCorePackage getSaltCorePackage() 
 	{

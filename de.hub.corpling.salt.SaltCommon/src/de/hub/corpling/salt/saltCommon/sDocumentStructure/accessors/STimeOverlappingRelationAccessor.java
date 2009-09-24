@@ -8,14 +8,14 @@ import de.hub.corpling.salt.saltCore.SFeature;
 public class STimeOverlappingRelationAccessor 
 {
 	/**
-	 * Returns truw, if this relation transports the feature time_overlapping. Means,
-	 * that if the target has a text, the, source also have this text.
+	 * Returns true, if this relation transports the feature time_overlapping. Means,
+	 * that if the target has a time, the, source also have this time.
 	 * @return true, iff the feature STIME_OVERLAPPING is true
 	 */
 	public Boolean isSTimeOverlapping(STimeOverlappingRelation delegateeObject) 
 	{
 		Boolean retVal= false;
-		if (delegateeObject.getSFeature(SFEATURE_NAMES.STEXT_OVERLAPPING.toString())== null)
+		if (delegateeObject.getSFeature(SFEATURE_NAMES.STIME_OVERLAPPING.toString())== null)
 		{//create new feature
 			SFeature feature= SaltCommonFactory.eINSTANCE.createSFeature();
 			feature.setFullName(SFEATURE_NAMES.STIME_OVERLAPPING.toString());
