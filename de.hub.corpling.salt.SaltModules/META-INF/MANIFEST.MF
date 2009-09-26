@@ -4,7 +4,12 @@ Bundle-Name: SaltModules
 Bundle-SymbolicName: de.hub.corpling.salt.SaltModules
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: de.hub.corpling.salt.saltCommon,
+Import-Package: de.hub.corpling.graph,
+ de.hub.corpling.graph.exceptions,
+ de.hub.corpling.graph.impl,
+ de.hub.corpling.graph.index,
+ de.hub.corpling.graph.index.impl,
+ de.hub.corpling.salt.saltCommon,
  de.hub.corpling.salt.saltCommon.sCorpusStructure,
  de.hub.corpling.salt.saltCommon.sDocumentStructure,
  de.hub.corpling.salt.saltCore,
