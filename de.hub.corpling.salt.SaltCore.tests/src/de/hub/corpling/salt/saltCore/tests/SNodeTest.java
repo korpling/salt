@@ -9,6 +9,7 @@ package de.hub.corpling.salt.saltCore.tests;
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 import de.hub.corpling.salt.saltCore.SAnnotation;
+import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
@@ -38,6 +39,7 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hub.corpling.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String) <em>Get SProcessing Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#addSAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Add SAnnotation</em>}</li>
@@ -480,6 +482,21 @@ public class SNodeTest extends TestCase {
 		sFeatTest.setFixture(this.getFixture());
 		sFeatTest.testGetSFeature__String();
 		sFeatTest.tearDown();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String)
+	 */
+	public void testGetSFeature__String_String() 
+	{
+		SFeature sFeature= SaltCoreFactory.eINSTANCE.createSFeature();
+		sFeature.setSNS("sNS");
+		sFeature.setSName("name");
+		this.getFixture().addSFeature(sFeature);
+		assertEquals(sFeature, this.getFixture().getSFeature(sFeature.getSNS(), sFeature.getSName()));
 	}
 // ========================= end: testing SFeaturableElement
 } //SNodeTest

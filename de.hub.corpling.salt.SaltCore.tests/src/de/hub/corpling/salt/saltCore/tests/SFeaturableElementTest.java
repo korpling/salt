@@ -30,6 +30,7 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -159,6 +160,21 @@ public class SFeaturableElementTest extends TestCase {
 	public void testGetSFeature__String() 
 	{
 		this.testAddSFeature__SFeature();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String)
+	 */
+	public void testGetSFeature__String_String() 
+	{
+		SFeature sFeature= SaltCoreFactory.eINSTANCE.createSFeature();
+		sFeature.setSNS("sNS");
+		sFeature.setSName("name");
+		this.getFixture().addSFeature(sFeature);
+		assertEquals(sFeature, this.getFixture().getSFeature(sFeature.getSNS(), sFeature.getSName()));
 	}
 
 } //SFeaturableElementTest
