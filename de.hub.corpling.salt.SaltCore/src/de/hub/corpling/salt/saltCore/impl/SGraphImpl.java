@@ -553,7 +553,17 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	{
 		return(this.sFeatAccessor.getSFeature(this, sFeatureId));
 	}
-//=================== end: handling SFeaturableElement	
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SFeature getSFeature(String sNamespace, String sFeatureName) 
+	{
+		return(this.sFeatAccessor.getSFeature(this, sNamespace, sFeatureName));
+	}
+
+	//=================== end: handling SFeaturableElement	
 	
 	/**
 	 * <!-- begin-user-doc -->

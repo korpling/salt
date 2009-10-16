@@ -59,6 +59,14 @@ public interface SFeaturableElement extends LabelableElement {
 	 * @model
 	 * @generated
 	 */
-	SFeature getSFeature(String sFeatureId);
+	SFeature getSFeature(String sFeatureName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	SFeature getSFeature(String sNamespace, String sFeatureName);
 
 } // SFeaturableElement

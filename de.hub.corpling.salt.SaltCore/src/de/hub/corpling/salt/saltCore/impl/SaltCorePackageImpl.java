@@ -877,7 +877,11 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, this.getSFeature(), "sFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sFeaturableElementEClass, this.getSFeature(), "getSFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "sFeatureId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "sFeatureName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(sFeaturableElementEClass, this.getSFeature(), "getSFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "sNamespace", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "sFeatureName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sMetaAnnotatableElementEClass, SMetaAnnotatableElement.class, "SMetaAnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSMetaAnnotatableElement_SMetaAnnotations(), this.getSMetaAnnotation(), this.getSMetaAnnotation_SMetaAnnotatableElement(), "sMetaAnnotations", null, 0, -1, SMetaAnnotatableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

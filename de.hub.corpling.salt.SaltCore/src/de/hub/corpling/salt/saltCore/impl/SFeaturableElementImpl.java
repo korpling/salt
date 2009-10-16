@@ -93,6 +93,15 @@ public class SFeaturableElementImpl extends LabelableElementImpl implements SFea
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 */
+	public SFeature getSFeature(String sNamespace, String sFeatureName) 
+	{
+		return(this.sFeatAccessor.getSFeature(this, sNamespace, sFeatureName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

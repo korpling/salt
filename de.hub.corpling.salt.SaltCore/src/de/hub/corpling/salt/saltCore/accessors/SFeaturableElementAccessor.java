@@ -14,13 +14,13 @@ import de.hub.corpling.salt.saltCore.SaltCorePackage;
 public class SFeaturableElementAccessor 
 {
 	public void addSFeature(	SFeaturableElement sFeatElem,
-											SFeature SFeature) 
+								SFeature SFeature) 
 	{
 		sFeatElem.addLabel(SFeature);
 	}
 
 	public SFeature getSFeature(	SFeaturableElement sFeatElem,
-															String fullName) 
+									String fullName) 
 	{
 		SFeature sFeatAnno= null;
 		Label label= sFeatElem.getLabel(fullName);
@@ -43,5 +43,21 @@ public class SFeaturableElementAccessor
 												SaltCorePackage.eINSTANCE.getSFeaturableElement_SFeatures(),
 												sFeatAnnosList.size(), sFeatAnnosList.toArray());
 		return(sFeatAnnos);	
+	}
+	
+	/**
+	 * Returns a SFeature-object with the given namespace and name.
+	 * @param sNamespace namespace of searched feature 
+	 * @param sFeatureName name of searched feature 
+	 */
+	public SFeature getSFeature(	SFeaturableElement sFeatElem, 
+									String sNamespace, 
+									String sFeatureName) 
+	{
+		SFeature retVal= null;
+		Label label= sFeatElem.getLabel(sNamespace, sFeatureName);
+		if (label instanceof SFeature)
+			retVal= (SFeature) label;
+		return(retVal);
 	}
 }

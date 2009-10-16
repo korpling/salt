@@ -383,7 +383,17 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	{
 		return(this.sFeatAccessor.getSFeature(this, sFeatureId));
 	}
-//=================== end: handling SFeaturableElement
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SFeature getSFeature(String sNamespace, String sFeatureName) 
+	{
+		return(this.sFeatAccessor.getSFeature(this, sNamespace, sFeatureName));
+	}
+
+	//=================== end: handling SFeaturableElement
 	
 	/**
 	 * Checks if a given SNode has the same entries as this SNode-object. 
