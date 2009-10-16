@@ -62,7 +62,10 @@ public class SLemmaAnnotationImpl extends SAnnotationImpl implements SLemmaAnnot
 	public Boolean isSLemmaAnnotation(SAnnotation sAnnotation) 
 	{
 		Boolean retVal= false;
-		if (	(sAnnotation.getName().equalsIgnoreCase(this.getSName()))&&
+		if (	(sAnnotation != null) &&
+				(sAnnotation.getSName()!= null) &&
+				(sAnnotation.getNamespace()!= null) &&
+				(sAnnotation.getName().equalsIgnoreCase(this.getSName()))&&
 				(sAnnotation.getSNS().equalsIgnoreCase(SaltSemanticsPackage.eNS_PREFIX)))
 			retVal= true;
 		return(retVal);
