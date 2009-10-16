@@ -317,7 +317,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		
 		for (SCorpus sCorpus: this.getSCorpora())
 		{
-			if (sCorpus.getSElementId()== sCorpusId)
+			if (sCorpus.getSElementId().equals(sCorpusId))
 			{
 				retVal= sCorpus;
 				break;
