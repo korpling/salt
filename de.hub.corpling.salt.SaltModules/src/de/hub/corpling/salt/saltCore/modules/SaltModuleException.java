@@ -1,4 +1,4 @@
-package de.hub.corpling.salt.modules;
+package de.hub.corpling.salt.saltCore.modules;
 
 import de.hub.corpling.salt.saltExceptions.SaltException;
 

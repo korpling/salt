@@ -1,13 +1,19 @@
-package de.hub.corpling.salt.modules;
+package de.hub.corpling.salt.saltCore.modules;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
+import de.hub.corpling.graph.Edge;
 import de.hub.corpling.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SToken;
 import de.hub.corpling.salt.saltCore.SElementId;
+import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SNode;
 
 public class SAccessorModule 
 {
+//TODO check if the following is used anywhere, because it is not the correct position for this, it has to be put in SDocumentStructureAccessor in de.hub.corpling.salt.SaltCommonModules
 // === fixing a document to work with 	
 	private SDocument sDocument= null;
 	
@@ -62,6 +68,6 @@ public class SAccessorModule
 			throw new SaltModuleException("Cannot return overlapped text, because the given SElementId-object does not belong to a SNode-object.");
 		return(this.getOverlappedText(sDocument, (SNode)sElementId.getSIdentifiableElement()));
 	}
+//TODO check if the above is used anywhere, because it is not the correct position for this, it has to be put in SDocumentStructureAccessor in de.hub.corpling.salt.SaltCommonModules
 
-	
 }
