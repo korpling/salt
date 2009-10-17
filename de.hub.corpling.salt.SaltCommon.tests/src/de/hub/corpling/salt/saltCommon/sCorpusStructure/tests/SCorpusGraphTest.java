@@ -249,4 +249,16 @@ public class SCorpusGraphTest extends TestCase {
 		}
 	}
 
+	public void testCheckElementId()
+	{
+		SCorpus sCorpus = SaltCommonFactory.eINSTANCE.createSCorpus();
+		this.getFixture().addSNode(sCorpus);
+		assertEquals("salt:/corp1", sCorpus.getSId());
+		
+		SDocument sDocument = SaltCommonFactory.eINSTANCE.createSDocument();
+		this.getFixture().addSNode(sDocument);
+		assertEquals("salt:/doc1", sDocument.getSId());
+		
+		//TODO check, for corpora and documents with relations salt:/corp1/corp2 ...
+	}
 } //SCorpusGraphTest
