@@ -52,8 +52,9 @@ import de.hub.corpling.salt.saltExceptions.SaltException;
  * </ul>
  * </p>
  *
- * @generated
+ * @author Florian Zipser
  */
+//TODO correct SElementID handling for corpora and documents with relations salt:/corp1/corp2 ... has to be done in addSRelation, in addSNode. roblematically, because it is not clear, that node comes before relation, and that relation always comes with source and target, so notification has to be used
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/**
 	 * name of index for node-types
@@ -155,7 +156,9 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		
 		if (	(((SNode)node).getSId()== null)||
 				(((SNode)node).getSId().equalsIgnoreCase("")))
-			((SNode)node).setSId(this.getSId() + "#"+ ((SNode)node).getSName());
+		{	
+			((SNode)node).setSId("salt:/"+((SNode)node).getSName());
+		}
 		super.basicAddNode(node);
 		
 		String slotId= null;
@@ -308,40 +311,30 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns an SCorpus element corresponding to sCorpusId. If non exists, null will be returned. 
+	 * Null will also be returned, if sCorpusId is null or the id belongs to a SNode-object, which is
+	 * not of type SCorpus. 
 	 */
 	public SCorpus getSCorpus(SElementId sCorpusId) 
 	{
 		SCorpus retVal= null;
-		
-		for (SCorpus sCorpus: this.getSCorpora())
-		{
-			if (sCorpus.getSElementId().equals(sCorpusId))
-			{
-				retVal= sCorpus;
-				break;
-			}
-		}
+		SNode sNode= this.getSNode(sCorpusId.getSId());
+		if (sNode instanceof SCorpus)
+			retVal= (SCorpus) sNode;
 		return retVal;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns an SDocument element corresponding to SDocumentId. If non exists, null will be returned. 
+	 * Null will also be returned, if SDocumentId is null or the id belongs to a SNode-object, which is
+	 * not of type SDocument. 
 	 */
 	public SDocument getSDocument(SElementId sDocumentId) 
 	{
 		SDocument retVal= null;
-		
-		for (SDocument sDocument: this.getSDocuments())
-		{
-			if (sDocument.getSElementId()== sDocumentId)
-			{
-				retVal= sDocument;
-				break;
-			}
-		}
+		SNode sNode= this.getSNode(sDocumentId.getSId());
+		if (sNode instanceof SDocument)
+			retVal= (SDocument) sNode;
 		return retVal;
 	}
 
