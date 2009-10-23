@@ -6,6 +6,9 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 import de.hub.corpling.salt.saltCore.SAnnotation;
@@ -33,11 +36,13 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSSource() <em>SSource</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTarget() <em>STarget</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph() <em>SGraph</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTypes() <em>STypes</em>}</li>
  * </ul>
  * </p>
  * <p>
  * The following operations are tested:
  * <ul>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#addSType(java.lang.String) <em>Add SType</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hub.corpling.salt.saltCore.SMetaAnnotation) <em>Add SMeta Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
@@ -294,7 +299,38 @@ public class SRelationTest extends TestCase {
 		this.testGetSGraph();
 	}
 
-// ========================= start: testing SMetaAnnotatableElement
+/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#getSTypes() <em>STypes</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SRelation#getSTypes()
+	 */
+	public void testGetSTypes() 
+	{
+		
+		EList<String> types= new BasicEList<String>();
+		types.add("type1");
+		types.add("type2");
+		types.add("type3");
+		types.add("type4");
+		for (String type: types)
+			this.getFixture().addSType(type);
+		assertTrue(types.containsAll(this.getFixture().getSTypes()));
+		assertTrue(this.getFixture().getSTypes().containsAll(types));
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#addSType(java.lang.String) <em>Add SType</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SRelation#addSType(java.lang.String)
+	 */
+	public void testAddSType__String() 
+	{
+		this.testGetSTypes();
+	}
+
+	// ========================= start: testing SMetaAnnotatableElement
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations() <em>SMetaAnnotations</em>}' feature getter.
 	 * <!-- begin-user-doc -->
