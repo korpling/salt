@@ -19,11 +19,19 @@
   <children xmi:type="notation:Node" xmi:id="_a27nPIjXEd6X5oQchPkMiQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_a27nP4jXEd6X5oQchPkMiQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_a27nQIjXEd6X5oQchPkMiQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_xaLlob_VEd63JZA5eQnjfQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="saltCore.ecore#//SRelation/sTypes"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xaLlor_VEd63JZA5eQnjfQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_a27nQYjXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_a27nQojXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_a27nQ4jXEd6X5oQchPkMiQ"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_a27nRIjXEd6X5oQchPkMiQ" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_AuL-YL_aEd63JZA5eQnjfQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SRelation/addSType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_AuL-Yb_aEd63JZA5eQnjfQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_a27nRYjXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_a27nRojXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_a27nR4jXEd6X5oQchPkMiQ"/>

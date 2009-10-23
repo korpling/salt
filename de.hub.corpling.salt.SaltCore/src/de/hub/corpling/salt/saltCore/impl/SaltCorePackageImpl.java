@@ -267,6 +267,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSRelation_STypes() {
+		return (EAttribute)sRelationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSAnnotatableElement() {
 		return sAnnotatableElementEClass;
 	}
@@ -675,6 +684,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEReference(sRelationEClass, SRELATION__SSOURCE);
 		createEReference(sRelationEClass, SRELATION__STARGET);
 		createEReference(sRelationEClass, SRELATION__SGRAPH);
+		createEAttribute(sRelationEClass, SRELATION__STYPES);
 
 		sAnnotatableElementEClass = createEClass(SANNOTATABLE_ELEMENT);
 		createEReference(sAnnotatableElementEClass, SANNOTATABLE_ELEMENT__SANNOTATIONS);
@@ -804,11 +814,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEReference(getSRelation_SSource(), this.getSNode(), null, "sSource", null, 0, 1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSRelation_STarget(), this.getSNode(), null, "sTarget", null, 0, 1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSRelation_SGraph(), this.getSGraph(), this.getSGraph_SRelations(), "sGraph", null, 0, 1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSRelation_STypes(), ecorePackage.getEString(), "sTypes", null, 0, -1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		EOperation op = addEOperation(sRelationEClass, null, "addSType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "sType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sAnnotatableElementEClass, SAnnotatableElement.class, "SAnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSAnnotatableElement_SAnnotations(), this.getSAnnotation(), this.getSAnnotation_SAnnotatableElement(), "sAnnotations", null, 0, -1, SAnnotatableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(sAnnotatableElementEClass, null, "addSAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(sAnnotatableElementEClass, null, "addSAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getSAnnotation(), "sAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sAnnotatableElementEClass, this.getSAnnotation(), "getSAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);

@@ -7,6 +7,7 @@
 package de.hub.corpling.salt.saltCore;
 
 import de.hub.corpling.graph.Edge;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,6 +20,7 @@ import de.hub.corpling.graph.Edge;
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSSource <em>SSource</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTarget <em>STarget</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph <em>SGraph</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTypes <em>STypes</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,5 +108,29 @@ public interface SRelation extends Edge, SAnnotatableElement, SNamedElement, SId
 	 * @generated
 	 */
 	void setSGraph(SGraph value);
+
+	/**
+	 * Returns the value of the '<em><b>STypes</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>STypes</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>STypes</em>' attribute list.
+	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSRelation_STypes()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<String> getSTypes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addSType(String sType);
 
 } // SRelation

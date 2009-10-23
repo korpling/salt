@@ -8,12 +8,18 @@
         volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sNodes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SRelation" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Edge #//SAnnotatableElement #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
+    <eOperations name="addSType">
+      <eParameters name="sType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sSource" eType="#//SNode"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sTarget" eType="#//SNode"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
         volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sRelations"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sTypes" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAnnotatableElement" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//LabelableElement">
     <eOperations name="addSAnnotation">

@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -34,6 +35,7 @@ import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SRelation;
+import de.hub.corpling.salt.saltCore.SaltCoreFactory;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
 import de.hub.corpling.salt.saltCore.accessors.SAnnotatableElementAccessor;
 import de.hub.corpling.salt.saltCore.accessors.SFeaturableElementAccessor;
@@ -59,6 +61,7 @@ import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAcce
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSSource <em>SSource</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSTarget <em>STarget</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSGraph <em>SGraph</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSTypes <em>STypes</em>}</li>
  * </ul>
  * </p>
  *
@@ -424,8 +427,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		return(this.sFeatAccessor.getSFeature(this, sNamespace, sFeatureName));
 	}
 
-	//=================== end: handling SFeaturableElement
-	
+//=================== end: handling SFeaturableElement
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -522,6 +524,56 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		super.setGraph(newSGraph);
 	}
 
+	
+//---------------------------- start sTypes	
+	public static String KW_STYPE= "RANAMEPACE";
+	public static String KW_STYPE_SEP= "::";
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public EList<String> getSTypes() 
+	{
+		EList<String> retVal= null;
+		SFeature sFeature= this.getSFeature(SaltCorePackage.eNS_PREFIX, KW_STYPE);
+		if (sFeature!= null)
+		{
+			String parts[]=sFeature.getSValue().toString().split(KW_STYPE_SEP); 
+			retVal = new BasicEList<String>();
+			for (String part: parts)
+				retVal.add(part);
+				
+		}
+		return(retVal);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addSType(String sType) 
+	{
+		if (	(sType!= null) &&
+				(!sType.equalsIgnoreCase("")))
+		{	
+			SFeature sFeature= this.getSFeature(SaltCorePackage.eNS_PREFIX, KW_STYPE);
+			if (sFeature== null)
+			{
+				sFeature= SaltCoreFactory.eINSTANCE.createSFeature();
+				sFeature.setSNS(SaltCorePackage.eNS_PREFIX);
+				sFeature.setSName(KW_STYPE);
+				this.addSFeature(sFeature);
+			}
+			if (sFeature.getSValue()== null)
+			{	
+				sFeature.setSValue(sType);
+			}
+			else 
+				sFeature.setSValue(sFeature.getSValue() + KW_STYPE_SEP + sType);
+		}
+	}
+//---------------------------- end sTypes
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -576,6 +628,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 			case SaltCorePackage.SRELATION__SGRAPH:
 				if (resolve) return getSGraph();
 				return basicGetSGraph();
+			case SaltCorePackage.SRELATION__STYPES:
+				return getSTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -698,6 +752,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return basicGetSTarget() != null;
 			case SaltCorePackage.SRELATION__SGRAPH:
 				return basicGetSGraph() != null;
+			case SaltCorePackage.SRELATION__STYPES:
+				return !getSTypes().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

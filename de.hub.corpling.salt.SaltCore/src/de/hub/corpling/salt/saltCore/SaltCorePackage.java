@@ -362,13 +362,22 @@ public interface SaltCorePackage extends EPackage {
 	int SRELATION__SGRAPH = GraphPackage.EDGE_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SRELATION__STYPES = GraphPackage.EDGE_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>SRelation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION_FEATURE_COUNT = GraphPackage.EDGE_FEATURE_COUNT + 11;
+	int SRELATION_FEATURE_COUNT = GraphPackage.EDGE_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.
@@ -1466,6 +1475,17 @@ public interface SaltCorePackage extends EPackage {
 	EReference getSRelation_SGraph();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link de.hub.corpling.salt.saltCore.SRelation#getSTypes <em>STypes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>STypes</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SRelation#getSTypes()
+	 * @see #getSRelation()
+	 * @generated
+	 */
+	EAttribute getSRelation_STypes();
+
+	/**
 	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement <em>SAnnotatable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1988,6 +2008,14 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SRELATION__SGRAPH = eINSTANCE.getSRelation_SGraph();
+
+		/**
+		 * The meta object literal for the '<em><b>STypes</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SRELATION__STYPES = eINSTANCE.getSRelation_STypes();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.
