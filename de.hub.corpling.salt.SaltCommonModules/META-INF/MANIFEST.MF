@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SaltCommonModules
+Bundle-SymbolicName: de.hub.corpling.salt.SaltCommonModules
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.5.0"
+Import-Package: de.hub.corpling.graph,
+ de.hub.corpling.graph.modules,
+ de.hub.corpling.salt.saltCommon.sCorpusStructure,
+ de.hub.corpling.salt.saltCommon.sDocumentStructure,
+ de.hub.corpling.salt.saltCore,
+ de.hub.corpling.salt.saltExceptions
+Export-Package: de.hub.corpling.salt.saltCommon.modules
