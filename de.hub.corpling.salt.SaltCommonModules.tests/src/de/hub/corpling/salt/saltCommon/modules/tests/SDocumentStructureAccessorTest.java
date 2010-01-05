@@ -8,6 +8,7 @@ import de.hub.corpling.pepper.modules.dot.Salt2DOT;
 import de.hub.corpling.salt.saltCommon.SaltCommonFactory;
 import de.hub.corpling.salt.saltCommon.modules.SDocumentStructureAccessor;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
@@ -196,6 +197,39 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 			assertEquals(sSpanRel, this.getFixture().getSDocumentGraph().getSRelation(sSpanRel.getSId()));
 		}//SSpanningRelation
 		
+		{//SDominanceRelation
+			SDominanceRelation sDomRel= null;
+			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel.setSStructure(struct1);
+			sDomRel.setSStructuredTarget(tok1);
+			this.getFixture().getSDocumentGraph().addSRelation(sDomRel);
+			assertEquals(sDomRel, this.getFixture().getSDocumentGraph().getSRelation(sDomRel.getSId()));
+			
+			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel.setSStructure(struct1);
+			sDomRel.setSStructuredTarget(span1);
+			this.getFixture().getSDocumentGraph().addSRelation(sDomRel);
+			assertEquals(sDomRel, this.getFixture().getSDocumentGraph().getSRelation(sDomRel.getSId()));
+			
+			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel.setSStructure(struct2);
+			sDomRel.setSStructuredTarget(struct1);
+			this.getFixture().getSDocumentGraph().addSRelation(sDomRel);
+			assertEquals(sDomRel, this.getFixture().getSDocumentGraph().getSRelation(sDomRel.getSId()));
+			
+			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel.setSStructure(struct2);
+			sDomRel.setSStructuredTarget(span1);
+			this.getFixture().getSDocumentGraph().addSRelation(sDomRel);
+			assertEquals(sDomRel, this.getFixture().getSDocumentGraph().getSRelation(sDomRel.getSId()));
+			
+			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel.setSStructure(struct2);
+			sDomRel.setSStructuredTarget(span2);
+			this.getFixture().getSDocumentGraph().addSRelation(sDomRel);
+			assertEquals(sDomRel, this.getFixture().getSDocumentGraph().getSRelation(sDomRel.getSId()));
+		}//SDominanceRelation
+		
 		{//SPointingRelation
 			SPointingRelation sPRel= null;
 			sPRel= SaltCommonFactory.eINSTANCE.createSPointingRelation();
@@ -233,18 +267,77 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 		
 		{//check SDominanceRelation
 			roots= new BasicEList<SNode>();
-			roots.add(struct1);
-			System.out.println("");
-			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(SSpanningRelation.class)));
-			assertTrue(this.getFixture().getRootsBySRelation(SSpanningRelation.class).containsAll(roots));
+			roots.add(struct2);
+			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(SDominanceRelation.class)));
+			assertTrue(this.getFixture().getRootsBySRelation(SDominanceRelation.class).containsAll(roots));
 		}//check SDominanceRelation
 		
 		{//check SPointingRelation
 			roots= new BasicEList<SNode>();
 			roots.add(tok1);
 			roots.add(tok3);
-			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(SSpanningRelation.class)));
-			assertTrue(this.getFixture().getRootsBySRelation(SSpanningRelation.class).containsAll(roots));
+			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(SPointingRelation.class)));
+			assertTrue(this.getFixture().getRootsBySRelation(SPointingRelation.class).containsAll(roots));
 		}//check SPointingRelation
+	}
+	
+	public void testGetSTokensSortedByText()
+	{
+		EList<SToken> sTokens= new BasicEList<SToken>();
+		
+		STextualRelation sTextualRelation= null;
+		
+		SToken sToken1= SaltCommonFactory.eINSTANCE.createSToken();
+		this.getFixture().getSDocumentGraph().addSNode(sToken1);
+		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
+		sTextualRelation.setSToken(sToken1);
+		sTextualRelation.setSStart(1);
+		sTextualRelation.setSStart(3);
+		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
+		
+		SToken sToken2= SaltCommonFactory.eINSTANCE.createSToken();
+		this.getFixture().getSDocumentGraph().addSNode(sToken2);
+		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
+		sTextualRelation.setSToken(sToken2);
+		sTextualRelation.setSStart(0);
+		sTextualRelation.setSStart(1);
+		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
+		
+		SToken sToken3= SaltCommonFactory.eINSTANCE.createSToken();
+		this.getFixture().getSDocumentGraph().addSNode(sToken3);
+		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
+		sTextualRelation.setSToken(sToken3);
+		sTextualRelation.setSStart(4);
+		sTextualRelation.setSStart(5);
+		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
+		
+		SToken sToken4= SaltCommonFactory.eINSTANCE.createSToken();
+		this.getFixture().getSDocumentGraph().addSNode(sToken4);
+		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
+		sTextualRelation.setSToken(sToken4);
+		sTextualRelation.setSStart(2);
+		sTextualRelation.setSStart(3);
+		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
+		
+		SToken sToken5= SaltCommonFactory.eINSTANCE.createSToken();
+		this.getFixture().getSDocumentGraph().addSNode(sToken5);
+		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
+		sTextualRelation.setSToken(sToken5);
+		sTextualRelation.setSStart(3);
+		sTextualRelation.setSStart(4);
+		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
+		
+		sTokens.add(sToken2);
+		sTokens.add(sToken1);
+		sTokens.add(sToken4);
+		sTokens.add(sToken5);
+		sTokens.add(sToken3);
+		
+		assertTrue(sTokens.containsAll(this.getFixture().getSTokensSortedByText()));
+		assertTrue(this.getFixture().getSTokensSortedByText().containsAll(sTokens));
+		for (SToken currSToken: sTokens)
+		{
+			assertEquals(sTokens.indexOf(currSToken), this.getFixture().getSTokensSortedByText().indexOf(currSToken));
+		}
 	}
 }
