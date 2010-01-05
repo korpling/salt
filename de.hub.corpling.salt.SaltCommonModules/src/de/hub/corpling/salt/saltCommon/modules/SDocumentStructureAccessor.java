@@ -1,5 +1,7 @@
 package de.hub.corpling.salt.saltCommon.modules;
 
+import java.util.Collections;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
@@ -13,6 +15,7 @@ import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hub.corpling.salt.saltCommon.sDocumentStructure.SStructuredNode;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualRelation;
@@ -25,7 +28,7 @@ import de.hub.corpling.salt.saltExceptions.SaltModuleException;
 
 public class SDocumentStructureAccessor extends SDocumentStructureModule implements TraversalObject
 {
-	private enum TRAVERSAL_TYPE {OVERLAPPED_TEXT, OVERLAPPED_TIME};
+	private enum TRAVERSAL_TYPE {OVERLAPPED_TEXT, OVERLAPPED_TIME, OVERLAPPED_TOKENS_BY_TEXTUALRELATION};
 	
 	/**
 	 * This object stores a pair of id and traversal type.
@@ -129,8 +132,9 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		}
 		return(nodes);
 	}
+	
 	/**
-	 * This class stores a pair of points of time. A start pot and an end pot.
+	 * This class stores a pair of points of time (pot) or points of text. A start pot and an end pot.
 	 * @author Administrator
 	 *
 	 */
@@ -165,6 +169,63 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		potPair= this.currPOTPair;
 		return(potPair);
 	}
+// ======================== start: getting text interval ========================
+	/**
+	 * Returns a pair of starting and ending point of text corresponding to the given SNode-object.
+	 * @param sNode the node to which the pair has to be searched
+	 * @return pair of points of text
+	 */
+	public POTPair getSTextPOT(SNode sNode)
+	{
+		POTPair potPair= null;
+		this.currPOTPair= new POTPair();
+		
+		GraphTraverser graphTraverser= new GraphTraverser();
+		graphTraverser.setGraph(this.getSDocumentGraph());
+		GraphTraverserObject travObj= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this);
+		this.addTTid(travObj.getId(), TRAVERSAL_TYPE.OVERLAPPED_TEXT);
+		travObj.start(sNode);
+		travObj.waitUntilFinished();
+		if (	(this.sTextDS!= null) &&
+				(this.sTextDS.getSText()!= null) &&
+				(!this.sTextDS.getSText().equalsIgnoreCase("")))
+		{
+			this.currPOTPair.startPOT= this.startTextPos;
+			this.currPOTPair.endPOT= this.endTextPos;
+//			retString= this.sTextDS.getSText().substring(this.startTextPos, this.endTextPos);
+		}
+		
+		potPair= this.currPOTPair;
+		return(potPair);
+	}
+// ======================== end: getting text interval ========================
+	/**
+	 * a list in which the textual overlapped tokens will be stored 
+	 */
+	private EList<SToken> sOverlappedTokens= null;
+	
+	/**
+	 * Returns a list of tokens wchich are indirectly related to the given sStructuredNode-object 
+	 * by STextualOverlapplingRelation.
+	 * @param sStructuredNode node whos subtree has to be searched for tokens
+	 * @return list of Stoken-objects
+	 */
+	public EList<SToken> getSTextualOverlappedTokens(SStructuredNode sStructuredNode)
+	{
+		EList<SToken> retList= null;
+		this.sOverlappedTokens= new BasicEList<SToken>();
+		GraphTraverser graphTraverser= new GraphTraverser();
+		graphTraverser.setGraph(this.getSDocumentGraph());
+		GraphTraverserObject travObj= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this);
+		this.addTTid(travObj.getId(), TRAVERSAL_TYPE.OVERLAPPED_TOKENS_BY_TEXTUALRELATION);
+		travObj.start(sStructuredNode);
+		travObj.waitUntilFinished();
+		if (	(this.sOverlappedTokens!= null) && 
+				(this.sOverlappedTokens.size()!= 0))
+			retList= this.sOverlappedTokens;
+		return(retList);
+	}
+	
 //========================= start: getting overlapped text =========================	
 	
 	/**
@@ -187,6 +248,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 */
 	public String getSOverlappedText(SNode sNode)
 	{
+		//TODO can be replaced by calling getTextPOT(SNode sNode) and getting the text by substring with pot 
 		String retString= null;
 		{//init for run
 			sTextDS= null;
@@ -206,7 +268,130 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		return(retString);
 	}
 //========================= end: getting overlapped text =========================
+	/**
+	 * Returns true, if the given list of tokens is continuous in order of start position
+	 * related to textual resource.
+	 * @param sTokenList list to check against sTokens of sDocumentGraph
+	 * @return true, if list is continuous
+	 */
+	public Boolean getContinuously(EList<SToken> sTokenList)
+	{
+		Boolean retVal= null;
+		//compute sorted list of overlapped tokens by the given sStructuredNode
+		EList<SToken> overlappedSTokens= getSTokensSortedByText(sTokenList);
+		//compute a sort list of all tokens
+		EList<SToken> allTokens= getSTokensSortedByText();
+		
+		retVal= true;
+		Integer posOfSTokenInAllTokens= null;
+		for (SToken sToken: overlappedSTokens)
+		{
+			Integer newPosition= allTokens.indexOf(sToken);
+			if (posOfSTokenInAllTokens!= null)
+			{	
+				if (newPosition != posOfSTokenInAllTokens +1)
+				{
+					retVal= false;
+					break;
+				}
+			}
+			posOfSTokenInAllTokens= newPosition;
+		}
+		
+		return(retVal);
+	}
 	
+	
+	/**
+	 * Returns all SToken-objects contained in given list in order  
+	 * of start-position of text. This method will sort the list of tokens by bubble sort.
+	 * @return list of tokens in order of left text position
+	 */
+	public EList<SToken> getSTokensSortedByText(EList<SToken> sTokens2sort)
+	{
+		if (this.getSDocumentGraph()== null)
+			new SaltModuleException("Cannot start method please set the document graph first.");
+		
+		STokenSStartComparator comparator= new STokenSStartComparator();
+		comparator.setsDocumentGraph(this.getSDocumentGraph());
+		EList<SToken> retVal= new BasicEList<SToken>(sTokens2sort);
+		//sort tokens
+		Collections.sort(retVal, comparator);
+		
+		return(retVal);
+	}
+	
+	/**
+	 * Returns all SToken-objects contained by settet SDocumentGraph in order 
+	 * of start-position of text. This method will sort the list of tokens by bubble sort.
+	 * @return list of tokens in order of left text position
+	 */
+	public EList<SToken> getSTokensSortedByText()
+	{
+		if (this.getSDocumentGraph()== null)
+			new SaltModuleException("Cannot start method please set the document graph first.");
+		
+		return(this.getSTokensSortedByText(this.getSDocumentGraph().getSTokens()));
+//		EList<SToken> retVal= null;
+//		if (this.getSDocumentGraph()== null)
+//			new SaltModuleException("Cannot start method please set the document graph first.");
+//		
+//		Object[][] tokenPosArray= new Object[this.getSDocumentGraph().getSTokens().size()][3];
+//		int posArrayIdx= 0;
+//		//search through all tokens in document, and store them with left and right span info in an array
+////		SDocumentGraph contentDocGraph= null;
+//		for (SToken sToken : this.getSDocumentGraph().getSTokens())
+//		{
+//			tokenPosArray[posArrayIdx][0]= sToken;
+//			for (Edge edge : this.getSDocumentGraph().getOutEdges(sToken.getId()))
+//			{
+//				if (edge instanceof STextualRelation)
+//				{
+//					tokenPosArray[posArrayIdx][1]= ((STextualRelation)edge).getSStart();
+//					tokenPosArray[posArrayIdx][2]= ((STextualRelation)edge).getSEnd();
+//				}
+//					
+//			}
+//			posArrayIdx++;
+//			
+//		}
+//		retVal= new BasicEList<SToken>();
+//		
+//		long numOfTok= tokenPosArray.length;
+//		boolean changed= false;
+//		do
+//		{
+//			changed= false;
+//			for (int i= 0; i< tokenPosArray.length-1; i++)
+//			{
+//				if (((Integer)tokenPosArray[i][1]) > ((Integer)tokenPosArray[i+1][1]))
+//				{
+//					//temprorary data
+//					SToken tmpToken= (SToken)tokenPosArray[i][0];
+//					Integer tmpLeft= (Integer) tokenPosArray[i][1];
+//					Integer tmpRight= (Integer) tokenPosArray[i][2];
+//					//override
+//					tokenPosArray[i][0]= tokenPosArray[i+1][0];
+//					tokenPosArray[i][1]= tokenPosArray[i+1][1];
+//					tokenPosArray[i][2]= tokenPosArray[i+1][2];
+//					//write back temprorary data
+//					tokenPosArray[i+1][0]= tmpToken;
+//					tokenPosArray[i+1][1]= tmpLeft;
+//					tokenPosArray[i+1][2]= tmpRight;
+//					changed= true;
+//				}
+//				numOfTok--;
+//			}
+//		} while ((changed) && (numOfTok >= 1));
+//		
+//		for (int i= 0; i < tokenPosArray.length; i++)
+//		{
+//			retVal.add((SToken)tokenPosArray[i][0]);
+//		}
+//
+//		
+//		return(retVal);
+	}
 //========================= start: getting roots for given Relation type (Class) =========================
 	
 	/**
@@ -306,7 +491,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 			else
 				retVal= false;
 		}
-		//traversal type is OVERLAPPED_TEXT
+		//traversal type is OVERLAPPED_TIME
 		else if (currTType.equals(TRAVERSAL_TYPE.OVERLAPPED_TIME))
 		{
 			if (relation== null)
@@ -316,7 +501,23 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 				retVal= ((STimeOverlappingRelation)relation).isSTimeOverlapping();
 			}
 			else
+			{
 				retVal= false;
+			}
+		}
+		//traversal type is OVERLAPPED_TOKENS_BY_TEXTUALRELATION
+		else if (currTType.equals(TRAVERSAL_TYPE.OVERLAPPED_TOKENS_BY_TEXTUALRELATION))
+		{
+			if (relation== null)
+				retVal= true;
+			else if (relation instanceof STextOverlappingRelation)
+			{
+				retVal= ((STextOverlappingRelation)relation).isSTextOverlapping();
+			}
+			else
+			{
+				retVal= false;
+			}
 		}
 //		System.out.println("checkConstraint(traversalMode: "+ traversalMode+ ", currNode: "+ currNode.getId()+ ")-->"+retVal);
 		return(retVal);
@@ -388,6 +589,19 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 					this.currPOTPair.startPOT= ((STimelineRelation)relation).getSStart(); 
 				if (((STimelineRelation)relation).getSEnd() > this.currPOTPair.endPOT)
 					this.currPOTPair.endPOT= ((STimelineRelation)relation).getSEnd(); 
+			}
+		}
+		//traversal type is OVERLAPPED_TIME
+		else if (currTType.equals(TRAVERSAL_TYPE.OVERLAPPED_TOKENS_BY_TEXTUALRELATION))
+		{
+			if (relation instanceof STextOverlappingRelation)
+			{
+				// if node is a token, put it into list
+				if (currSNode instanceof SToken) 
+				{
+					if (!this.sOverlappedTokens.contains((SToken) currSNode))
+						this.sOverlappedTokens.add((SToken) currSNode);
+				}
 			}
 		}
 	}
