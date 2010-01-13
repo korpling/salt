@@ -526,7 +526,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 
 	
 //---------------------------- start sTypes	
-	public static String KW_STYPE= "RANAMEPACE";
+	public static String KW_STYPE= "STYPE";
 	public static String KW_STYPE_SEP= "::";
 	
 	/**
