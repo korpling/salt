@@ -979,7 +979,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_oA0VYagiEd6LBeof3wd3ig" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_oA0VYqgiEd6LBeof3wd3ig"/>
     <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oA0VY6giEd6LBeof3wd3ig" points="[50, -24, -583, 245]$[50, -110, -583, 159]$[510, -110, -123, 159]$[510, -244, -123, 25]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oA0VY6giEd6LBeof3wd3ig" points="[39, -24, -669, 245]$[39, -110, -669, 159]$[560, -110, -148, 159]$[560, -244, -148, 25]"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_l-AowKglEd6LBeof3wd3ig" type="3003" source="_sBKk4KR-Ed6vL4rH-3u1iw" target="_gz0jMagiEd6LBeof3wd3ig">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_l-AowaglEd6LBeof3wd3ig" routing="Rectilinear" lineColor="4210752"/>

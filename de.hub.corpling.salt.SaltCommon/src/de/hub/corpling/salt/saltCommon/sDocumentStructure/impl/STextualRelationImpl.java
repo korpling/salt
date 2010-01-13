@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import de.hub.corpling.graph.Graph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hub.corpling.salt.saltCommon.sDocumentStructure.STextualDS;
@@ -58,6 +59,27 @@ public class STextualRelationImpl extends SSequentialRelationImpl implements STe
 		return SDocumentStructurePackage.Literals.STEXTUAL_RELATION;
 	}
 
+	/**
+	 * Checks if a given SGraph has the same entries as this SNode-object. 
+	 * @return if all values are equals.
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		boolean retVal= false;
+		if (!(obj instanceof STextualRelation))
+			retVal= false;
+		else
+		{
+			retVal= super.equals(obj);
+			if (retVal)
+			{	
+				STextualRelation textRel2= (STextualRelation) obj;
+				retVal= this.isSTextOverlapping().equals(textRel2.isSTextOverlapping());
+			}
+		}
+		return(retVal);
+	}	
 	//============================ start: handling source and target
 	/**
 	 * <!-- begin-user-doc -->
