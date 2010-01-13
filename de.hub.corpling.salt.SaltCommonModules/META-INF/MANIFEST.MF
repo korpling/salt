@@ -10,5 +10,6 @@ Import-Package: de.hub.corpling.graph,
  de.hub.corpling.salt.saltCommon.sCorpusStructure,
  de.hub.corpling.salt.saltCommon.sDocumentStructure,
  de.hub.corpling.salt.saltCore,
+ de.hub.corpling.salt.saltCore.modules,
  de.hub.corpling.salt.saltExceptions
 Export-Package: de.hub.corpling.salt.saltCommon.modules
