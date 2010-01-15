@@ -26,12 +26,15 @@ public class SCorpusStructureAccessor extends SCorpusStructureModule implements 
 		SGraphAccessorModule acc= new SGraphAccessorModule();
 		acc.setSGraph(this.getSCorpusGraph());
 		
-		for (SNode sNode: acc.getSRoots())
-		{
-			if (retVal== null)
-				retVal= new BasicEList<SCorpus>();
-			retVal.add((SCorpus) sNode);
-		}
+		if (acc.getSRoots()!= null)
+		{//if graph contains nodes 	
+			for (SNode sNode: acc.getSRoots())
+			{
+				if (retVal== null)
+					retVal= new BasicEList<SCorpus>();
+				retVal.add((SCorpus) sNode);
+			}
+		}//if graph contains nodes
 		return(retVal);
 	}
 
