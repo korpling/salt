@@ -10,7 +10,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
 import de.hub.corpling.graph.LabelableElement;
-import de.hub.corpling.graph.impl.LabelImpl;
 import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
@@ -22,46 +21,13 @@ import de.hub.corpling.salt.saltCore.SaltCorePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SFeatureImpl#getSName <em>SName</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SFeatureImpl#getSValue <em>SValue</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SFeatureImpl#getSFeaturableElement <em>SFeaturable Element</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SFeatureImpl#getSNS <em>SNS</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SFeatureImpl extends LabelImpl implements SFeature {
-	/**
-	 * The default value of the '{@link #getSName() <em>SName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SNAME_EDEFAULT = null;
-
-	/**
-	 * The default value of the '{@link #getSValue() <em>SValue</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Object SVALUE_EDEFAULT = null;
-
-	/**
-	 * The default value of the '{@link #getSNS() <em>SNS</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSNS()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SNS_EDEFAULT = null;
-
+public class SFeatureImpl extends SAbstractAnnotationImpl implements SFeature {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,42 +45,6 @@ public class SFeatureImpl extends LabelImpl implements SFeature {
 	@Override
 	protected EClass eStaticClass() {
 		return SaltCorePackage.Literals.SFEATURE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public String getSName() 
-	{
-		return(super.getName());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSName(String newSName) 
-	{
-		super.setName(newSName);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public Object getSValue() 
-	{
-		return(super.getValue());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSValue(Object newSValue) 
-	{
-		super.setValue(newSValue);
 	}
 
 	/**
@@ -142,24 +72,6 @@ public class SFeatureImpl extends LabelImpl implements SFeature {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 */
-	public String getSNS() 
-	{
-		return(super.getNamespace());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSNS(String newSNS) 
-	{
-		super.setNamespace(newSNS);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -179,14 +91,8 @@ public class SFeatureImpl extends LabelImpl implements SFeature {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SaltCorePackage.SFEATURE__SNAME:
-				return getSName();
-			case SaltCorePackage.SFEATURE__SVALUE:
-				return getSValue();
 			case SaltCorePackage.SFEATURE__SFEATURABLE_ELEMENT:
 				return getSFeaturableElement();
-			case SaltCorePackage.SFEATURE__SNS:
-				return getSNS();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,17 +105,8 @@ public class SFeatureImpl extends LabelImpl implements SFeature {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SaltCorePackage.SFEATURE__SNAME:
-				setSName((String)newValue);
-				return;
-			case SaltCorePackage.SFEATURE__SVALUE:
-				setSValue(newValue);
-				return;
 			case SaltCorePackage.SFEATURE__SFEATURABLE_ELEMENT:
 				setSFeaturableElement((SFeaturableElement)newValue);
-				return;
-			case SaltCorePackage.SFEATURE__SNS:
-				setSNS((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,17 +120,8 @@ public class SFeatureImpl extends LabelImpl implements SFeature {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SaltCorePackage.SFEATURE__SNAME:
-				setSName(SNAME_EDEFAULT);
-				return;
-			case SaltCorePackage.SFEATURE__SVALUE:
-				setSValue(SVALUE_EDEFAULT);
-				return;
 			case SaltCorePackage.SFEATURE__SFEATURABLE_ELEMENT:
 				setSFeaturableElement((SFeaturableElement)null);
-				return;
-			case SaltCorePackage.SFEATURE__SNS:
-				setSNS(SNS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -247,14 +135,8 @@ public class SFeatureImpl extends LabelImpl implements SFeature {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SaltCorePackage.SFEATURE__SNAME:
-				return SNAME_EDEFAULT == null ? getSName() != null : !SNAME_EDEFAULT.equals(getSName());
-			case SaltCorePackage.SFEATURE__SVALUE:
-				return SVALUE_EDEFAULT == null ? getSValue() != null : !SVALUE_EDEFAULT.equals(getSValue());
 			case SaltCorePackage.SFEATURE__SFEATURABLE_ELEMENT:
 				return getSFeaturableElement() != null;
-			case SaltCorePackage.SFEATURE__SNS:
-				return SNS_EDEFAULT == null ? getSNS() != null : !SNS_EDEFAULT.equals(getSNS());
 		}
 		return super.eIsSet(featureID);
 	}

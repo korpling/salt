@@ -9,12 +9,14 @@ package de.hub.corpling.salt.saltCore.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import de.hub.corpling.graph.GraphPackage;
+import de.hub.corpling.salt.saltCore.SAbstractAnnotation;
 import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SAnnotation;
 import de.hub.corpling.salt.saltCore.SElementId;
@@ -136,6 +138,20 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * @generated
 	 */
 	private EClass sMetaAnnotationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sAbstractAnnotationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum sdatatypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,35 +319,8 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSAnnotation_SName() {
-		return (EAttribute)sAnnotationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSAnnotation_SValue() {
-		return (EAttribute)sAnnotationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getSAnnotation_SAnnotatableElement() {
-		return (EReference)sAnnotationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSAnnotation_SNS() {
-		return (EAttribute)sAnnotationEClass.getEStructuralFeatures().get(3);
+		return (EReference)sAnnotationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -438,33 +427,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSProcessingAnnotation_SName() {
-		return (EAttribute)sProcessingAnnotationEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSProcessingAnnotation_SValue() {
-		return (EAttribute)sProcessingAnnotationEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSProcessingAnnotation_SNS() {
-		return (EAttribute)sProcessingAnnotationEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSProcessingAnnotatableElement() {
 		return sProcessingAnnotatableElementEClass;
 	}
@@ -528,35 +490,8 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSFeature_SName() {
-		return (EAttribute)sFeatureEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSFeature_SValue() {
-		return (EAttribute)sFeatureEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getSFeature_SFeaturableElement() {
-		return (EReference)sFeatureEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSFeature_SNS() {
-		return (EAttribute)sFeatureEClass.getEStructuralFeatures().get(3);
+		return (EReference)sFeatureEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -618,8 +553,8 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSMetaAnnotation_SNS() {
-		return (EAttribute)sMetaAnnotationEClass.getEStructuralFeatures().get(1);
+	public EClass getSAbstractAnnotation() {
+		return sAbstractAnnotationEClass;
 	}
 
 	/**
@@ -627,8 +562,8 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSMetaAnnotation_SName() {
-		return (EAttribute)sMetaAnnotationEClass.getEStructuralFeatures().get(2);
+	public EAttribute getSAbstractAnnotation_SNS() {
+		return (EAttribute)sAbstractAnnotationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -636,8 +571,35 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSMetaAnnotation_SValue() {
-		return (EAttribute)sMetaAnnotationEClass.getEStructuralFeatures().get(3);
+	public EAttribute getSAbstractAnnotation_SName() {
+		return (EAttribute)sAbstractAnnotationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSAbstractAnnotation_SValue() {
+		return (EAttribute)sAbstractAnnotationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSAbstractAnnotation_SValueType() {
+		return (EAttribute)sAbstractAnnotationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getSDATATYPE() {
+		return sdatatypeEEnum;
 	}
 
 	/**
@@ -690,10 +652,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEReference(sAnnotatableElementEClass, SANNOTATABLE_ELEMENT__SANNOTATIONS);
 
 		sAnnotationEClass = createEClass(SANNOTATION);
-		createEAttribute(sAnnotationEClass, SANNOTATION__SNAME);
-		createEAttribute(sAnnotationEClass, SANNOTATION__SVALUE);
 		createEReference(sAnnotationEClass, SANNOTATION__SANNOTATABLE_ELEMENT);
-		createEAttribute(sAnnotationEClass, SANNOTATION__SNS);
 
 		sGraphEClass = createEClass(SGRAPH);
 		createEReference(sGraphEClass, SGRAPH__SRELATIONS);
@@ -709,9 +668,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		sProcessingAnnotationEClass = createEClass(SPROCESSING_ANNOTATION);
 		createEReference(sProcessingAnnotationEClass, SPROCESSING_ANNOTATION__SPROCESSING_ANNOTATABLE_ELEMENT);
-		createEAttribute(sProcessingAnnotationEClass, SPROCESSING_ANNOTATION__SNAME);
-		createEAttribute(sProcessingAnnotationEClass, SPROCESSING_ANNOTATION__SVALUE);
-		createEAttribute(sProcessingAnnotationEClass, SPROCESSING_ANNOTATION__SNS);
 
 		sProcessingAnnotatableElementEClass = createEClass(SPROCESSING_ANNOTATABLE_ELEMENT);
 		createEReference(sProcessingAnnotatableElementEClass, SPROCESSING_ANNOTATABLE_ELEMENT__SPROCESSING_ANNOTATIONS);
@@ -722,10 +678,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEAttribute(sElementIdEClass, SELEMENT_ID__SELEMENT_PATH);
 
 		sFeatureEClass = createEClass(SFEATURE);
-		createEAttribute(sFeatureEClass, SFEATURE__SNAME);
-		createEAttribute(sFeatureEClass, SFEATURE__SVALUE);
 		createEReference(sFeatureEClass, SFEATURE__SFEATURABLE_ELEMENT);
-		createEAttribute(sFeatureEClass, SFEATURE__SNS);
 
 		sFeaturableElementEClass = createEClass(SFEATURABLE_ELEMENT);
 		createEReference(sFeaturableElementEClass, SFEATURABLE_ELEMENT__SFEATURES);
@@ -735,9 +688,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		sMetaAnnotationEClass = createEClass(SMETA_ANNOTATION);
 		createEReference(sMetaAnnotationEClass, SMETA_ANNOTATION__SMETA_ANNOTATABLE_ELEMENT);
-		createEAttribute(sMetaAnnotationEClass, SMETA_ANNOTATION__SNS);
-		createEAttribute(sMetaAnnotationEClass, SMETA_ANNOTATION__SNAME);
-		createEAttribute(sMetaAnnotationEClass, SMETA_ANNOTATION__SVALUE);
+
+		sAbstractAnnotationEClass = createEClass(SABSTRACT_ANNOTATION);
+		createEAttribute(sAbstractAnnotationEClass, SABSTRACT_ANNOTATION__SNS);
+		createEAttribute(sAbstractAnnotationEClass, SABSTRACT_ANNOTATION__SNAME);
+		createEAttribute(sAbstractAnnotationEClass, SABSTRACT_ANNOTATION__SVALUE);
+		createEAttribute(sAbstractAnnotationEClass, SABSTRACT_ANNOTATION__SVALUE_TYPE);
+
+		// Create enums
+		sdatatypeEEnum = createEEnum(SDATATYPE);
 
 		// Create data types
 		uriEDataType = createEDataType(URI);
@@ -789,7 +748,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sRelationEClass.getESuperTypes().add(this.getSFeaturableElement());
 		sRelationEClass.getESuperTypes().add(this.getSMetaAnnotatableElement());
 		sAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
-		sAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
+		sAnnotationEClass.getESuperTypes().add(this.getSAbstractAnnotation());
 		sGraphEClass.getESuperTypes().add(theGraphPackage.getGraph());
 		sGraphEClass.getESuperTypes().add(this.getSNamedElement());
 		sGraphEClass.getESuperTypes().add(this.getSAnnotatableElement());
@@ -798,13 +757,14 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sGraphEClass.getESuperTypes().add(this.getSFeaturableElement());
 		sGraphEClass.getESuperTypes().add(this.getSMetaAnnotatableElement());
 		sIdentifiableElementEClass.getESuperTypes().add(theGraphPackage.getIdentifiableElement());
-		sProcessingAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
+		sProcessingAnnotationEClass.getESuperTypes().add(this.getSAbstractAnnotation());
 		sProcessingAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
 		sElementIdEClass.getESuperTypes().add(theGraphPackage.getIdentifier());
-		sFeatureEClass.getESuperTypes().add(theGraphPackage.getLabel());
+		sFeatureEClass.getESuperTypes().add(this.getSAbstractAnnotation());
 		sFeaturableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
 		sMetaAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
-		sMetaAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
+		sMetaAnnotationEClass.getESuperTypes().add(this.getSAbstractAnnotation());
+		sAbstractAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sNodeEClass, SNode.class, "SNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -829,10 +789,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, ecorePackage.getEString(), "fullName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sAnnotationEClass, SAnnotation.class, "SAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSAnnotation_SName(), ecorePackage.getEString(), "SName", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSAnnotation_SValue(), ecorePackage.getEJavaObject(), "SValue", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSAnnotation_SAnnotatableElement(), this.getSAnnotatableElement(), this.getSAnnotatableElement_SAnnotations(), "sAnnotatableElement", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSAnnotation_SNS(), ecorePackage.getEString(), "SNS", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sGraphEClass, SGraph.class, "SGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSGraph_SRelations(), this.getSRelation(), this.getSRelation_SGraph(), "sRelations", null, 0, -1, SGraph.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -860,9 +817,6 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		initEClass(sProcessingAnnotationEClass, SProcessingAnnotation.class, "SProcessingAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSProcessingAnnotation_SProcessingAnnotatableElement(), this.getSProcessingAnnotatableElement(), this.getSProcessingAnnotatableElement_SProcessingAnnotations(), "sProcessingAnnotatableElement", null, 0, 1, SProcessingAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSProcessingAnnotation_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SProcessingAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSProcessingAnnotation_SValue(), ecorePackage.getEJavaObject(), "sValue", null, 0, 1, SProcessingAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSProcessingAnnotation_SNS(), ecorePackage.getEString(), "SNS", null, 0, 1, SProcessingAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sProcessingAnnotatableElementEClass, SProcessingAnnotatableElement.class, "SProcessingAnnotatableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSProcessingAnnotatableElement_SProcessingAnnotations(), this.getSProcessingAnnotation(), this.getSProcessingAnnotation_SProcessingAnnotatableElement(), "sProcessingAnnotations", null, 0, -1, SProcessingAnnotatableElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -879,10 +833,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEAttribute(getSElementId_SElementPath(), this.getURI(), "sElementPath", null, 0, 1, SElementId.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sFeatureEClass, SFeature.class, "SFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSFeature_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SFeature.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSFeature_SValue(), ecorePackage.getEJavaObject(), "sValue", null, 0, 1, SFeature.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSFeature_SFeaturableElement(), this.getSFeaturableElement(), this.getSFeaturableElement_SFeatures(), "sFeaturableElement", null, 0, 1, SFeature.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSFeature_SNS(), ecorePackage.getEString(), "sNS", null, 0, 1, SFeature.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sFeaturableElementEClass, SFeaturableElement.class, "SFeaturableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSFeaturableElement_SFeatures(), this.getSFeature(), this.getSFeature_SFeaturableElement(), "sFeatures", null, 0, -1, SFeaturableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -908,9 +859,33 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 
 		initEClass(sMetaAnnotationEClass, SMetaAnnotation.class, "SMetaAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSMetaAnnotation_SMetaAnnotatableElement(), this.getSMetaAnnotatableElement(), this.getSMetaAnnotatableElement_SMetaAnnotations(), "sMetaAnnotatableElement", null, 0, 1, SMetaAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSMetaAnnotation_SNS(), ecorePackage.getEString(), "sNS", null, 0, 1, SMetaAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSMetaAnnotation_SName(), ecorePackage.getEString(), "SName", null, 0, 1, SMetaAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSMetaAnnotation_SValue(), ecorePackage.getEJavaObject(), "SValue", null, 0, 1, SMetaAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(sAbstractAnnotationEClass, SAbstractAnnotation.class, "SAbstractAnnotation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSAbstractAnnotation_SNS(), ecorePackage.getEString(), "SNS", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSAbstractAnnotation_SName(), ecorePackage.getEString(), "SName", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSAbstractAnnotation_SValue(), ecorePackage.getEJavaObject(), "SValue", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSAbstractAnnotation_SValueType(), this.getSDATATYPE(), "SValueType", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		addEOperation(sAbstractAnnotationEClass, ecorePackage.getEString(), "getSValueSTEXT", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAbstractAnnotationEClass, ecorePackage.getEBooleanObject(), "getSValueSBOOLEAN", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAbstractAnnotationEClass, ecorePackage.getELongObject(), "getSValueSNUMERIC", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAbstractAnnotationEClass, ecorePackage.getEDoubleObject(), "getSValueSFLOAT", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAbstractAnnotationEClass, this.getURI(), "getSValueSURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sAbstractAnnotationEClass, ecorePackage.getEJavaObject(), "getSValueSOBJECT", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(sdatatypeEEnum, de.hub.corpling.salt.saltCore.SDATATYPE.class, "SDATATYPE");
+		addEEnumLiteral(sdatatypeEEnum, de.hub.corpling.salt.saltCore.SDATATYPE.STEXT);
+		addEEnumLiteral(sdatatypeEEnum, de.hub.corpling.salt.saltCore.SDATATYPE.SBOOLEAN);
+		addEEnumLiteral(sdatatypeEEnum, de.hub.corpling.salt.saltCore.SDATATYPE.SNUMERIC);
+		addEEnumLiteral(sdatatypeEEnum, de.hub.corpling.salt.saltCore.SDATATYPE.SFLOAT);
+		addEEnumLiteral(sdatatypeEEnum, de.hub.corpling.salt.saltCore.SDATATYPE.SURI);
+		addEEnumLiteral(sdatatypeEEnum, de.hub.corpling.salt.saltCore.SDATATYPE.SOBJECT);
 
 		// Initialize data types
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

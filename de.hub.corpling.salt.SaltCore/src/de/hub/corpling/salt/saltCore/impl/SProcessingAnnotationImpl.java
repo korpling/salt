@@ -6,16 +6,13 @@
  */
 package de.hub.corpling.salt.saltCore.impl;
 
-import de.hub.corpling.graph.LabelableElement;
-import de.hub.corpling.graph.impl.LabelImpl;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
 
+import de.hub.corpling.graph.LabelableElement;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SaltCorePackage;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,44 +22,12 @@ import org.eclipse.emf.ecore.EClass;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotationImpl#getSProcessingAnnotatableElement <em>SProcessing Annotatable Element</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotationImpl#getSName <em>SName</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotationImpl#getSValue <em>SValue</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.impl.SProcessingAnnotationImpl#getSNS <em>SNS</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingAnnotation {
-	/**
-	 * The default value of the '{@link #getSName() <em>SName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SNAME_EDEFAULT = null;
-	/**
-	 * The default value of the '{@link #getSValue() <em>SValue</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Object SVALUE_EDEFAULT = null;
-
-	/**
-	 * The default value of the '{@link #getSNS() <em>SNS</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSNS()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SNS_EDEFAULT = null;
-
+public class SProcessingAnnotationImpl extends SAbstractAnnotationImpl implements SProcessingAnnotation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,61 +72,6 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 */
-	public String getSName() 
-	{
-		return(super.getName());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSName(String newSName) 
-	{
-		super.setName(newSName);
-	}
-
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public Object getSValue() 
-	{
-		return(super.getValue());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSValue(Object newSValue) 
-	{
-		super.setValue(newSValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public String getSNS() 
-	{
-		return(super.getNamespace());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSNS(String newSNS) 
-	{
-		super.setNamespace(newSNS);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -183,12 +93,6 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 		switch (featureID) {
 			case SaltCorePackage.SPROCESSING_ANNOTATION__SPROCESSING_ANNOTATABLE_ELEMENT:
 				return getSProcessingAnnotatableElement();
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SNAME:
-				return getSName();
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SVALUE:
-				return getSValue();
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SNS:
-				return getSNS();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,15 +107,6 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 		switch (featureID) {
 			case SaltCorePackage.SPROCESSING_ANNOTATION__SPROCESSING_ANNOTATABLE_ELEMENT:
 				setSProcessingAnnotatableElement((SProcessingAnnotatableElement)newValue);
-				return;
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SNAME:
-				setSName((String)newValue);
-				return;
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SVALUE:
-				setSValue(newValue);
-				return;
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SNS:
-				setSNS((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -228,15 +123,6 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 			case SaltCorePackage.SPROCESSING_ANNOTATION__SPROCESSING_ANNOTATABLE_ELEMENT:
 				setSProcessingAnnotatableElement((SProcessingAnnotatableElement)null);
 				return;
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SNAME:
-				setSName(SNAME_EDEFAULT);
-				return;
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SVALUE:
-				setSValue(SVALUE_EDEFAULT);
-				return;
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SNS:
-				setSNS(SNS_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -251,12 +137,6 @@ public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingA
 		switch (featureID) {
 			case SaltCorePackage.SPROCESSING_ANNOTATION__SPROCESSING_ANNOTATABLE_ELEMENT:
 				return getSProcessingAnnotatableElement() != null;
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SNAME:
-				return SNAME_EDEFAULT == null ? getSName() != null : !SNAME_EDEFAULT.equals(getSName());
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SVALUE:
-				return SVALUE_EDEFAULT == null ? getSValue() != null : !SVALUE_EDEFAULT.equals(getSValue());
-			case SaltCorePackage.SPROCESSING_ANNOTATION__SNS:
-				return SNS_EDEFAULT == null ? getSNS() != null : !SNS_EDEFAULT.equals(getSNS());
 		}
 		return super.eIsSet(featureID);
 	}

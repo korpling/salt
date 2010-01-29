@@ -32,15 +32,9 @@
         eType="#//SAnnotation" volatile="true" transient="true" derived="true" containment="true"
         eOpposite="#//SAnnotation/sAnnotatableElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SAnnotation" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Label">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
-        volatile="true" transient="true" derived="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SAnnotation" eSuperTypes="#//SAbstractAnnotation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sAnnotatableElement" eType="#//SAnnotatableElement"
         volatile="true" transient="true" eOpposite="#//SAnnotatableElement/sAnnotations"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SGraph" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Graph #//SNamedElement #//SAnnotatableElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
     <eOperations name="addSNode">
@@ -74,16 +68,10 @@
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SProcessingAnnotation" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Label">
+  <eClassifiers xsi:type="ecore:EClass" name="SProcessingAnnotation" eSuperTypes="#//SAbstractAnnotation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sProcessingAnnotatableElement"
         eType="#//SProcessingAnnotatableElement" volatile="true" transient="true"
         derived="true" eOpposite="#//SProcessingAnnotatableElement/sProcessingAnnotations"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
-        volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SProcessingAnnotatableElement" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//LabelableElement">
     <eOperations name="addSProcessingAnnotation">
@@ -104,15 +92,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sElementPath" eType="#//URI"
         volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SFeature" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Label">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
-        volatile="true" transient="true" derived="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SFeature" eSuperTypes="#//SAbstractAnnotation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sFeaturableElement" eType="#//SFeaturableElement"
         volatile="true" transient="true" derived="true" eOpposite="#//SFeaturableElement/sFeatures"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SFeaturableElement" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//LabelableElement">
     <eOperations name="addSFeature">
@@ -140,15 +122,34 @@
         eType="#//SMetaAnnotation" volatile="true" transient="true" derived="true"
         containment="true" eOpposite="#//SMetaAnnotation/sMetaAnnotatableElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SMetaAnnotation" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Label">
+  <eClassifiers xsi:type="ecore:EClass" name="SMetaAnnotation" eSuperTypes="#//SAbstractAnnotation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sMetaAnnotatableElement"
         eType="#//SMetaAnnotatableElement" volatile="true" transient="true" derived="true"
         eOpposite="#//SMetaAnnotatableElement/sMetaAnnotations"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SAbstractAnnotation" abstract="true"
+      eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Label">
+    <eOperations name="getSValueSTEXT" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getSValueSBOOLEAN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eOperations name="getSValueSNUMERIC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    <eOperations name="getSValueSFLOAT" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eOperations name="getSValueSURI" eType="#//URI"/>
+    <eOperations name="getSValueSOBJECT" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="SName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="SValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
         volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SValueType" eType="#//SDATATYPE"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SDATATYPE">
+    <eLiterals name="STEXT"/>
+    <eLiterals name="SBOOLEAN" value="1"/>
+    <eLiterals name="SNUMERIC" value="2"/>
+    <eLiterals name="SFLOAT" value="3"/>
+    <eLiterals name="SURI" value="4"/>
+    <eLiterals name="SOBJECT" value="5"/>
   </eClassifiers>
 </ecore:EPackage>

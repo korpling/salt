@@ -90,6 +90,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case SaltCorePackage.SDATATYPE:
+				return createSDATATYPEFromString(eDataType, initialValue);
 			case SaltCorePackage.URI:
 				return createURIFromString(eDataType, initialValue);
 			default:
@@ -105,6 +107,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case SaltCorePackage.SDATATYPE:
+				return convertSDATATYPEToString(eDataType, instanceValue);
 			case SaltCorePackage.URI:
 				return convertURIToString(eDataType, instanceValue);
 			default:
@@ -143,9 +147,7 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * Creates a new SAnnotation object.
 	 */
 	public SAnnotation createSAnnotation() {
 		SAnnotationImpl sAnnotation = new SAnnotationImpl();
@@ -250,6 +252,26 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	public SMetaAnnotation createSMetaAnnotation() {
 		SMetaAnnotationImpl sMetaAnnotation = new SMetaAnnotationImpl();
 		return sMetaAnnotation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SDATATYPE createSDATATYPEFromString(EDataType eDataType, String initialValue) {
+		SDATATYPE result = SDATATYPE.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSDATATYPEToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

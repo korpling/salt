@@ -135,6 +135,7 @@ public class SaltCoreSwitch<T> {
 			case SaltCorePackage.SANNOTATION: {
 				SAnnotation sAnnotation = (SAnnotation)theEObject;
 				T result = caseSAnnotation(sAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sAnnotation);
 				if (result == null) result = caseLabel(sAnnotation);
 				if (result == null) result = caseLabelableElement(sAnnotation);
 				if (result == null) result = defaultCase(theEObject);
@@ -171,6 +172,7 @@ public class SaltCoreSwitch<T> {
 			case SaltCorePackage.SPROCESSING_ANNOTATION: {
 				SProcessingAnnotation sProcessingAnnotation = (SProcessingAnnotation)theEObject;
 				T result = caseSProcessingAnnotation(sProcessingAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sProcessingAnnotation);
 				if (result == null) result = caseLabel(sProcessingAnnotation);
 				if (result == null) result = caseLabelableElement(sProcessingAnnotation);
 				if (result == null) result = defaultCase(theEObject);
@@ -195,6 +197,7 @@ public class SaltCoreSwitch<T> {
 			case SaltCorePackage.SFEATURE: {
 				SFeature sFeature = (SFeature)theEObject;
 				T result = caseSFeature(sFeature);
+				if (result == null) result = caseSAbstractAnnotation(sFeature);
 				if (result == null) result = caseLabel(sFeature);
 				if (result == null) result = caseLabelableElement(sFeature);
 				if (result == null) result = defaultCase(theEObject);
@@ -217,8 +220,17 @@ public class SaltCoreSwitch<T> {
 			case SaltCorePackage.SMETA_ANNOTATION: {
 				SMetaAnnotation sMetaAnnotation = (SMetaAnnotation)theEObject;
 				T result = caseSMetaAnnotation(sMetaAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sMetaAnnotation);
 				if (result == null) result = caseLabel(sMetaAnnotation);
 				if (result == null) result = caseLabelableElement(sMetaAnnotation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SaltCorePackage.SABSTRACT_ANNOTATION: {
+				SAbstractAnnotation sAbstractAnnotation = (SAbstractAnnotation)theEObject;
+				T result = caseSAbstractAnnotation(sAbstractAnnotation);
+				if (result == null) result = caseLabel(sAbstractAnnotation);
+				if (result == null) result = caseLabelableElement(sAbstractAnnotation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -433,6 +445,21 @@ public class SaltCoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseSMetaAnnotation(SMetaAnnotation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SAbstract Annotation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SAbstract Annotation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSAbstractAnnotation(SAbstractAnnotation object) {
 		return null;
 	}
 
