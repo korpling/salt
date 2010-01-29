@@ -6,13 +6,10 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
+import junit.textui.TestRunner;
 import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,23 +18,12 @@ import junit.textui.TestRunner;
  * <p>
  * The following features are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.SFeature#getSName() <em>SName</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SFeature#getSValue() <em>SValue</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeature#getSFeaturableElement() <em>SFeaturable Element</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SFeature#getSNS() <em>SNS</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class SFeatureTest extends TestCase {
-
-	/**
-	 * The fixture for this SFeature test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SFeature fixture = null;
+public class SFeatureTest extends SAbstractAnnotationTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -59,23 +45,14 @@ public class SFeatureTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this SFeature test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(SFeature fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this SFeature test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected SFeature getFixture() {
-		return fixture;
+		return (SFeature)fixture;
 	}
 
 	/**

@@ -6,13 +6,10 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
+import junit.textui.TestRunner;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,22 +19,11 @@ import junit.textui.TestRunner;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSProcessingAnnotatableElement() <em>SProcessing Annotatable Element</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSName() <em>SName</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSValue() <em>SValue</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotation#getSNS() <em>SNS</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class SProcessingAnnotationTest extends TestCase {
-
-	/**
-	 * The fixture for this SProcessing Annotation test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SProcessingAnnotation fixture = null;
+public class SProcessingAnnotationTest extends SAbstractAnnotationTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -59,23 +45,14 @@ public class SProcessingAnnotationTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this SProcessing Annotation test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(SProcessingAnnotation fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this SProcessing Annotation test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected SProcessingAnnotation getFixture() {
-		return fixture;
+		return (SProcessingAnnotation)fixture;
 	}
 
 	/**
