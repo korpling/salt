@@ -1,6 +1,8 @@
 package de.hub.corpling.salt.saltCommon.modules;
 
 import java.util.Collections;
+import java.util.Hashtable;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -28,7 +30,7 @@ import de.hub.corpling.salt.saltExceptions.SaltModuleException;
 
 public class SDocumentStructureAccessor extends SDocumentStructureModule implements TraversalObject
 {
-	private enum TRAVERSAL_TYPE {OVERLAPPED_TEXT, OVERLAPPED_TIME, OVERLAPPED_TOKENS_BY_TEXTUALRELATION};
+	private enum TRAVERSAL_TYPE {OVERLAPPED_TEXT, OVERLAPPED_TIME, OVERLAPPED_TOKENS_BY_TEXTUALRELATION, ROOTS_BY_RELATION_STYPE};
 	
 	/**
 	 * This object stores a pair of id and traversal type.
@@ -332,65 +334,6 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 			new SaltModuleException("Cannot start method please set the document graph first.");
 		
 		return(this.getSTokensSortedByText(this.getSDocumentGraph().getSTokens()));
-//		EList<SToken> retVal= null;
-//		if (this.getSDocumentGraph()== null)
-//			new SaltModuleException("Cannot start method please set the document graph first.");
-//		
-//		Object[][] tokenPosArray= new Object[this.getSDocumentGraph().getSTokens().size()][3];
-//		int posArrayIdx= 0;
-//		//search through all tokens in document, and store them with left and right span info in an array
-////		SDocumentGraph contentDocGraph= null;
-//		for (SToken sToken : this.getSDocumentGraph().getSTokens())
-//		{
-//			tokenPosArray[posArrayIdx][0]= sToken;
-//			for (Edge edge : this.getSDocumentGraph().getOutEdges(sToken.getId()))
-//			{
-//				if (edge instanceof STextualRelation)
-//				{
-//					tokenPosArray[posArrayIdx][1]= ((STextualRelation)edge).getSStart();
-//					tokenPosArray[posArrayIdx][2]= ((STextualRelation)edge).getSEnd();
-//				}
-//					
-//			}
-//			posArrayIdx++;
-//			
-//		}
-//		retVal= new BasicEList<SToken>();
-//		
-//		long numOfTok= tokenPosArray.length;
-//		boolean changed= false;
-//		do
-//		{
-//			changed= false;
-//			for (int i= 0; i< tokenPosArray.length-1; i++)
-//			{
-//				if (((Integer)tokenPosArray[i][1]) > ((Integer)tokenPosArray[i+1][1]))
-//				{
-//					//temprorary data
-//					SToken tmpToken= (SToken)tokenPosArray[i][0];
-//					Integer tmpLeft= (Integer) tokenPosArray[i][1];
-//					Integer tmpRight= (Integer) tokenPosArray[i][2];
-//					//override
-//					tokenPosArray[i][0]= tokenPosArray[i+1][0];
-//					tokenPosArray[i][1]= tokenPosArray[i+1][1];
-//					tokenPosArray[i][2]= tokenPosArray[i+1][2];
-//					//write back temprorary data
-//					tokenPosArray[i+1][0]= tmpToken;
-//					tokenPosArray[i+1][1]= tmpLeft;
-//					tokenPosArray[i+1][2]= tmpRight;
-//					changed= true;
-//				}
-//				numOfTok--;
-//			}
-//		} while ((changed) && (numOfTok >= 1));
-//		
-//		for (int i= 0; i < tokenPosArray.length; i++)
-//		{
-//			retVal.add((SToken)tokenPosArray[i][0]);
-//		}
-//
-//		
-//		return(retVal);
 	}
 //========================= start: getting roots for given Relation type (Class) =========================
 	
@@ -417,7 +360,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		if (	(!clazz.equals(SPointingRelation.class)) &&
 				(!clazz.equals(SSpanningRelation.class)) &&
 				(!clazz.equals(SDominanceRelation.class)))
-		{// if the subtype isn´t supported throw exception
+		{// if the relation type isn´t supported throw exception
 			throw new SaltModuleException("Cannot compute roots for given SRelation subtype '"+clazz+"', because it isn´t supported yet. Supported subtypes are only: SPointingRelation, SSpanningRelation and SDominanceRelation");
 		}// if the subtype isn´t supported throw exception
 			
@@ -450,6 +393,108 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 			}
 		}
 		return (retVal);
+	}
+	
+	
+	/**
+	 * map of sTypes and corresponding list of SNodes, for method getRootsBySRelationSType
+	 */
+	private Hashtable<String, EList<SNode>> sType2Roots= null;
+	
+	/**
+	 * puts an sType and an SNode in the map for storing them for method getRootsBySRelationSType.
+	 * @param sType
+	 * @param sNode
+	 */
+	private void storeSType2SNode(String sType, SNode sNode)
+	{
+		if (sType2Roots== null)
+			sType2Roots= new Hashtable<String, EList<SNode>>();
+		EList<SNode> vector= sType2Roots.get(sType);
+		if (vector==null)
+		{	
+			vector= new BasicEList<SNode>();
+			this.sType2Roots.put(sType, vector);
+		}
+		if (!vector.contains(sNode))
+			vector.add(sNode);
+	}
+	
+	/**
+	 * Returns all nodes, which are roots for the given relation-class respects to the given SType of the traversed
+	 * relation. The following example shows the different to the method getRootsBySRelation():
+	 * Imagine the following graphFor example: node1 ->t1 node2, node2 ->t2-> node3.
+	 * Also imagine, that -> is a relation of same class with sType=t1 respectivly sType=t2
+	 * The returned roots will be node1 and node 2, because of node1 is the root of a subgraph for 
+	 * relation.sType=t1 and node2 is the root of the subgraph for relation.sType=t2. Whereas the returned 
+	 * nodes of getRootsBySRelation() is only node1. 
+	 * Complexity: |Eclass| * d(N), where |EClass| is the number of edges of the given class d(N) 
+	 * is the average degree for each node in N
+	 * @param clazz class of Relation to be traversed for seacrhing roots
+	 * @return a map of types, with corresponding lists of root nodes
+	 */
+	@SuppressWarnings("unchecked")
+	public Hashtable<String, EList<SNode>> getRootsBySRelationSType(Class<? extends SRelation> clazz)
+	{
+		Hashtable<String, EList<SNode>> retVal= null;
+		EList<SRelation> relations= null;
+		{//compute all relations
+			if (clazz.equals(SPointingRelation.class)) 
+				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSPointingRelations();
+			else if (clazz.equals(SDominanceRelation.class)) 
+				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSDominanceRelations();
+			else if (clazz.equals(SSpanningRelation.class)) 
+				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSSpanningRelations();
+		}//compute all relations
+		for (SRelation currentRel: relations)
+		{//walk through all pointing relations
+			//stores if one of the parents is of same class
+			boolean parentHasSameClass= false;
+			//a table to notice, for which sTypes a relation has to be stored
+			Hashtable<String, Boolean> storeSType= new Hashtable<String, Boolean>();
+			for (Edge edge: this.getSDocumentGraph().getInEdges(currentRel.getSSource().getSId()))
+			{//walk through all incoming relations of currentRelation.sSource
+				if (edge instanceof SPointingRelation)
+				{//regard PR only 		
+					parentHasSameClass= true;
+					SRelation parentRelation= (SRelation) edge;
+					for (String sType: currentRel.getSTypes())
+					{//store the source node of current relation for every type, which is not contained by parent relation
+						if (parentRelation.getSTypes().contains(sType))
+						{//don´t store source, if any parent Relation has not all types of current relation
+							storeSType.put(sType, false);
+						}//store node, if parent Relation has not all types of current relation
+						else
+						{	
+							if (storeSType.get(sType)== null)
+							{
+								storeSType.put(sType, true);
+							}
+						}
+					}//store the source node of current relation for every type, which is not contained by parent relation
+				}//regard PR only
+			}//walk through all incoming relations of currentRelation.sSource
+			if (storeSType.size()> 0)
+			{
+				for (String sType: currentRel.getSTypes())
+				{
+					if (storeSType.get(sType))
+					{
+						this.storeSType2SNode(sType, currentRel.getSSource());
+					}
+				}
+			}
+			if (!parentHasSameClass)
+			{//there was no parent of class PR --> store source of current node
+				for (String sType: currentRel.getSTypes())
+				{
+					this.storeSType2SNode(sType, currentRel.getSSource());
+				}
+			}//there was no parent of class PR --> store source of current node
+		}//walk through all pointing relations
+		retVal= this.sType2Roots;
+		
+		return(retVal);
 	}
 //========================= end: getting roots for given Relation type (Class) =========================
 	
@@ -520,6 +565,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 			}
 		}
 //		System.out.println("checkConstraint(traversalMode: "+ traversalMode+ ", currNode: "+ currNode.getId()+ ")-->"+retVal);
+//		System.out.println("edge: "+ edge);
 		return(retVal);
 	}
 
@@ -527,17 +573,45 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	public void nodeLeft(GRAPH_TRAVERSE_MODE traversalMode, Long traversalId,
 			Node currNode, Edge edge, Node fromNode, long order) 
 	{
-//		System.out.println("nodeLeft(traversalMode: "+ traversalMode+ ", currNode: "+ currNode.getId()+ ")");
-		// TODO Auto-generated method stub
-		
+//		TRAVERSAL_TYPE currTType= null;
+//		{//search for current traversal type
+//			for (TraversalTypeId ttId: this.typeIDList)
+//			{
+//				if (ttId.id.equals(traversalId))
+//				{
+//					currTType= ttId.travType;
+//					break;
+//				}
+//			}
+//		}
+//		System.out.println("nodeLeft(traversalMode: "+ traversalMode+ ", traversal type:"+currTType+", currNode: "+ currNode.getId()+ ")");
+//		System.out.println("curr relation: "+ edge);
+//		SRelation relation= null;
+//		if (edge== null);
+//		else if (!(edge instanceof SRelation))
+//			throw new SaltModuleException("Cannot traverse the given SDocumentGraph, because there is an edge, which is not of type SRelation: "+edge.getId()+ ".");
+//		else relation= (SRelation) edge;
+//		if (!(currNode instanceof SNode))
+//			throw new SaltModuleException("Cannot traverse the given SDocumentGraph, because there is an edge, which is not of type SNode: "+currNode.getId()+ ".");
+//		
+////		SNode currSNode= (SNode) currNode;
+//		SNode fromSNode= null;
+//		if (fromNode!= null)
+//			fromSNode= (SNode) fromNode;
 	}
 
+	/**
+	 * stores a list of sType of current relation in case of ROOTS_BY_RELATION_STYPE
+	 */
+	private EList<String> currSTypes= null;
+	
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_MODE traversalMode,
 			Long traversalId, Node currNode, Edge edge, Node fromNode,
 			long order) 
 	{
 //		System.out.println("nodeReached(traversalMode: "+ traversalMode+ ", currNode: "+ currNode.getId()+ ")");
+//		System.out.println("relation: "+ edge);
 		SRelation relation= null;
 		if (edge== null);
 		else if (!(edge instanceof SRelation))
@@ -547,6 +621,9 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 			throw new SaltModuleException("Cannot traverse the given SDocumentGraph, because there is an edge, which is not of type SNode: "+currNode.getId()+ ".");
 		
 		SNode currSNode= (SNode) currNode;
+//		SNode fromSNode= null;
+//		if (fromNode!= null)
+//			fromSNode= (SNode) fromNode;
 		
 		TRAVERSAL_TYPE currTType= null;
 		{//search for current traversal type
