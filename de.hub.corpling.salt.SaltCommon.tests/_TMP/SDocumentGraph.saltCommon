@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sDocumentStructure:SDocumentGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sDocumentStructure="sDocumentStructure" xmlns:saltCore="saltCore">
-  <labels xsi:type="saltCore:SAnnotation" namespace="ns1" name="annoName1" valueString="annoValue1"/>
-  <labels xsi:type="saltCore:SAnnotation" namespace="ns2" name="annoName2" valueString="annoValue2"/>
-  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName1" valueString="pAnnoValue1"/>
-  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName2" valueString="pAnnoValue2"/>
+  <labels xsi:type="saltCore:SAnnotation" namespace="ns1" name="annoName1" valueString="annoValue1">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SAnnotation" namespace="ns2" name="annoName2" valueString="annoValue2">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName1" valueString="pAnnoValue1">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName2" valueString="pAnnoValue2">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
   <identifier id="salt:/graph1"/>
   <nodes xsi:type="sDocumentStructure:STextualDS" sName="text1">
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SDATA" valueString="This is text1."/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SDATA" valueString="This is text1.">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
     <identifier xsi:type="saltCore:SElementId" id="text1"/>
   </nodes>
   <nodes xsi:type="sDocumentStructure:STextualDS" sName="text2">
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SDATA" valueString="This is text2."/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SDATA" valueString="This is text2.">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
     <identifier xsi:type="saltCore:SElementId" id="text2"/>
   </nodes>
   <nodes xsi:type="sDocumentStructure:SToken" sName="tok1">
-    <labels xsi:type="saltCore:SAnnotation" name="pos" valueString="N"/>
+    <labels xsi:type="saltCore:SAnnotation" name="pos" valueString="N">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
     <identifier xsi:type="saltCore:SElementId" id="tok1"/>
   </nodes>
   <nodes xsi:type="sDocumentStructure:SToken" sName="tok2">
-    <labels xsi:type="saltCore:SAnnotation" name="pos" valueString="N"/>
+    <labels xsi:type="saltCore:SAnnotation" name="pos" valueString="N">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
     <identifier xsi:type="saltCore:SElementId" id="tok2"/>
   </nodes>
   <nodes xsi:type="sDocumentStructure:SToken" sName="tok3">
@@ -28,24 +44,42 @@
     <identifier xsi:type="saltCore:SElementId" id="tok4"/>
   </nodes>
   <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.2" target="//@nodes.0" sName="textRel1">
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
-    <labels xsi:type="saltCore:SAnnotation" name="edgeType" valueString="k.a."/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0">
+      <labels name="SVAL_TYPE" valueString="SNUMERIC"/>
+    </labels>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4">
+      <labels name="SVAL_TYPE" valueString="SNUMERIC"/>
+    </labels>
+    <labels xsi:type="saltCore:SAnnotation" name="edgeType" valueString="k.a.">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
     <identifier xsi:type="saltCore:SElementId" id="textRel1"/>
   </edges>
   <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.3" target="//@nodes.0" sName="textRel2">
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0">
+      <labels name="SVAL_TYPE" valueString="SNUMERIC"/>
+    </labels>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4">
+      <labels name="SVAL_TYPE" valueString="SNUMERIC"/>
+    </labels>
     <identifier xsi:type="saltCore:SElementId" id="textRel2"/>
   </edges>
   <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.4" target="//@nodes.1" sName="textRel3">
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0">
+      <labels name="SVAL_TYPE" valueString="SNUMERIC"/>
+    </labels>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4">
+      <labels name="SVAL_TYPE" valueString="SNUMERIC"/>
+    </labels>
     <identifier xsi:type="saltCore:SElementId" id="textRel3"/>
   </edges>
   <edges xsi:type="sDocumentStructure:STextualRelation" source="//@nodes.5" target="//@nodes.1" sName="textRel4">
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0"/>
-    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4"/>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SSTART" valueString="0">
+      <labels name="SVAL_TYPE" valueString="SNUMERIC"/>
+    </labels>
+    <labels xsi:type="saltCore:SFeature" namespace="saltCommon" name="SEND" valueString="4">
+      <labels name="SVAL_TYPE" valueString="SNUMERIC"/>
+    </labels>
     <identifier xsi:type="saltCore:SElementId" id="textRel4"/>
   </edges>
 </sDocumentStructure:SDocumentGraph>
