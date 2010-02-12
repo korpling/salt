@@ -549,8 +549,9 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Adds a type for the relation. If no tapes are still set, it will create a new list for
+	 * types also.
+	 * @param sType the relation type to add
 	 */
 	public void addSType(String sType) 
 	{
