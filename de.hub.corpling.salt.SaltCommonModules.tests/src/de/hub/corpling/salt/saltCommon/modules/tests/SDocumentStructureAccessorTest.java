@@ -281,6 +281,285 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 		}//check SPointingRelation
 	}
 	
+	/**
+	 * Checks the method getRootsBySRelationSType().
+	 * Just for SPointingRelation
+	 */
+	public void testGetRootsBySRelationSTypePR1()
+	{
+		{//checking for SPointingRelation
+			SNode node1= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node1);
+			SNode node2= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node2);
+			SNode node3= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node3);
+			
+			String type1= "type1";
+			String type2= "type2";
+			
+			SPointingRelation rel1= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel1.addSType(type1);
+			rel1.setSSource(node1);
+			rel1.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel1);
+			
+			SPointingRelation rel2= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel2.addSType(type2);
+			rel2.setSSource(node2);
+			rel2.setSTarget(node1);
+			this.getFixture().getSDocumentGraph().addSRelation(rel2);
+			
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type1));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type2));
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type2).size());
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).contains(node1));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type2).contains(node2));
+		}//checking for SPointingRelation
+	}
+	
+	/**
+	 * Checks the method getRootsBySRelationSType().
+	 * Just for SPointingRelation
+	 */
+	public void testGetRootsBySRelationSTypePR2()
+	{
+		{//checking for SPointingRelation
+			SNode node1= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node1);
+			SNode node2= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node2);
+			SNode node3= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node3);
+			
+			String type1= "type1";
+			String type2= "type2";
+			
+			SPointingRelation rel1= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel1.addSType(type1);
+			rel1.setSSource(node1);
+			rel1.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel1);
+			
+			SPointingRelation rel2= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel2.addSType(type1);
+			rel2.setSSource(node2);
+			rel2.setSTarget(node3);
+			this.getFixture().getSDocumentGraph().addSRelation(rel2);
+			
+			SPointingRelation rel3= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel3.addSType(type2);
+			rel3.setSSource(node3);
+			rel3.setSTarget(node1);
+			this.getFixture().getSDocumentGraph().addSRelation(rel3);
+			
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type1));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type2));
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type2).size());
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).contains(node1));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type2).contains(node3));
+		}//checking for SPointingRelation
+	}
+	
+	/**
+	 * tests a chain of pr with the same type.
+	 * node1 ->t1 node2 ->t1 node3
+	 */
+	public void testGetRootsBySRelationSTypePR3()
+	{
+		{//checking for SPointingRelation
+			SNode node1= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node1);
+			SNode node2= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node2);
+			SNode node3= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node3);
+			
+			String type1= "type1";
+			
+			SPointingRelation rel1= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel1.addSType(type1);
+			rel1.setSSource(node1);
+			rel1.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel1);
+			
+			SPointingRelation rel2= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel2.addSType(type1);
+			rel2.setSSource(node2);
+			rel2.setSTarget(node3);
+			this.getFixture().getSDocumentGraph().addSRelation(rel2);
+						
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type1));
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).contains(node1));
+		}//checking for SPointingRelation
+	}
+	
+	/**
+	 * tests a chain of pr with the same type. But all nodes have one other incoming edge
+	 * node1 ->t1 node2 ->t1 node3
+	 */
+	public void testGetRootsBySRelationSTypePR4()
+	{
+		{//checking for SPointingRelation
+			SNode node1= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node1);
+			SNode node2= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node2);
+			SNode node3= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node3);
+			
+			SNode node4= SaltCommonFactory.eINSTANCE.createSStructure();
+			this.getFixture().getSDocumentGraph().addSNode(node4);
+			
+			String type1= "type1";
+			
+			SPointingRelation rel1= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel1.addSType(type1);
+			rel1.setSSource(node1);
+			rel1.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel1);
+			
+			SPointingRelation rel2= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel2.addSType(type1);
+			rel2.setSSource(node2);
+			rel2.setSTarget(node3);
+			this.getFixture().getSDocumentGraph().addSRelation(rel2);
+			
+			SDominanceRelation dom1= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			dom1.setSSource(node4);
+			dom1.setSTarget(node1);
+			this.getFixture().getSDocumentGraph().addSRelation(dom1);
+			
+			SDominanceRelation dom2= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			dom2.setSSource(node4);
+			dom2.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(dom2);
+			
+			SDominanceRelation dom3= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			dom3.setSSource(node4);
+			dom3.setSTarget(node3);
+			this.getFixture().getSDocumentGraph().addSRelation(dom3);
+						
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type1));
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).contains(node1));
+		}//checking for SPointingRelation
+	}
+	
+	/**
+	 * tests a chain of pr with the same type, and one cycle pr with another type.
+	 * node1 ->t1 node2 ->t1 node3 ->t1 node4 ->t2 node1
+	 */
+	public void testGetRootsBySRelationSTypePR5()
+	{
+		{//checking for SPointingRelation
+			SNode node1= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node1);
+			SNode node2= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node2);
+			SNode node3= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node3);
+			SNode node4= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node4);
+			
+			String type1= "type1";
+			String type2= "type2";
+			
+			SPointingRelation rel1= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel1.addSType(type1);
+			rel1.setSSource(node1);
+			rel1.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel1);
+			
+			SPointingRelation rel2= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel2.addSType(type1);
+			rel2.setSSource(node2);
+			rel2.setSTarget(node3);
+			this.getFixture().getSDocumentGraph().addSRelation(rel2);
+			
+			SPointingRelation rel3= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel3.addSType(type1);
+			rel3.setSSource(node3);
+			rel3.setSTarget(node4);
+			this.getFixture().getSDocumentGraph().addSRelation(rel3);
+			
+			SPointingRelation rel4= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel4.addSType(type2);
+			rel4.setSSource(node4);
+			rel4.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel4);
+						
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type1));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type2));
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).contains(node1));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type2).contains(node4));
+		}//checking for SPointingRelation
+	}
+	
+	/**
+	 * tests a chain of pr with the same type, except one, it has two types. And one cycle pr with 
+	 * another type exists.
+	 * node1 ->t1 node2 ->t1, t2 node3 ->t1 node4 ->t2 node1
+	 */
+	public void testGetRootsBySRelationSTypePR6()
+	{
+		{//checking for SPointingRelation
+			SNode node1= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node1);
+			SNode node2= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node2);
+			SNode node3= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node3);
+			SNode node4= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(node4);
+			
+			String type1= "type1";
+			String type2= "type2";
+			String type3= "type3";
+			
+			SPointingRelation rel1= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel1.addSType(type1);
+			rel1.setSSource(node1);
+			rel1.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel1);
+			
+			SPointingRelation rel2= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel2.addSType(type1);
+			rel2.addSType(type3);
+			rel2.setSSource(node2);
+			rel2.setSTarget(node3);
+			this.getFixture().getSDocumentGraph().addSRelation(rel2);
+			
+			SPointingRelation rel3= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel3.addSType(type1);
+			rel3.setSSource(node3);
+			rel3.setSTarget(node4);
+			this.getFixture().getSDocumentGraph().addSRelation(rel3);
+			
+			SPointingRelation rel4= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			rel4.addSType(type2);
+			rel4.setSSource(node4);
+			rel4.setSTarget(node2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel4);
+						
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type1));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type2));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type3));
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).contains(node1));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type2).contains(node4));
+			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type3).contains(node2));
+		}//checking for SPointingRelation
+	}
+	
+	
 	public void testGetSTokensSortedByText()
 	{
 		EList<SToken> sTokens= new BasicEList<SToken>();
