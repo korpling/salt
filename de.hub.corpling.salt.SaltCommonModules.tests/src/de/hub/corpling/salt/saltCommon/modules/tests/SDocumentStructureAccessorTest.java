@@ -398,7 +398,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	}
 	
 	/**
-	 * tests a chain of pr with the same type. But all nodes have one other incoming edge
+	 * tests a chain of pr with the same type. But all nodes have a second incoming relation of another type.
 	 * node1 ->t1 node2 ->t1 node3
 	 */
 	public void testGetRootsBySRelationSTypePR4()
@@ -551,11 +551,85 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type2));
 			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).containsKey(type3));
 			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
-			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
-			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type2).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type3).size());
 			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type1).contains(node1));
 			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type2).contains(node4));
 			assertTrue(this.getFixture().getRootsBySRelationSType(SPointingRelation.class).get(type3).contains(node2));
+		}//checking for SPointingRelation
+	}
+	
+	/**
+	 * tests a tree of dominance relations 
+	 * 		struct1
+	 * 	/	|		\		\
+	 * tok1	tok2	tok3	struct2
+	 * 						|		\
+	 * 						tok4	tok5
+	 */
+	public void testGetRootsBySRelationSTypeDR1()
+	{
+		{//checking for SPointingRelation
+			SNode tok1= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(tok1);
+			SNode tok2= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(tok2);
+			SNode tok3= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(tok3);
+			SNode tok4= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(tok4);
+			SNode tok5= SaltCommonFactory.eINSTANCE.createSToken();
+			this.getFixture().getSDocumentGraph().addSNode(tok5);
+			
+			SNode struct1= SaltCommonFactory.eINSTANCE.createSStructure();
+			this.getFixture().getSDocumentGraph().addSNode(struct1);
+			SNode struct2= SaltCommonFactory.eINSTANCE.createSStructure();
+			this.getFixture().getSDocumentGraph().addSNode(struct2);
+			
+			String type1= "type1";
+			
+			SDominanceRelation rel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			rel.addSType(type1);
+			rel.setSSource(struct1);
+			rel.setSTarget(tok1);
+			this.getFixture().getSDocumentGraph().addSRelation(rel);
+			
+			rel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			rel.addSType(type1);
+			rel.setSSource(struct1);
+			rel.setSTarget(tok2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel);
+			
+			rel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			rel.addSType(type1);
+			rel.setSSource(struct1);
+			rel.setSTarget(tok3);
+			this.getFixture().getSDocumentGraph().addSRelation(rel);
+			
+			rel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			rel.addSType(type1);
+			rel.setSSource(struct1);
+			rel.setSTarget(struct2);
+			this.getFixture().getSDocumentGraph().addSRelation(rel);
+			
+			rel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			rel.addSType(type1);
+			rel.setSSource(struct2);
+			rel.setSTarget(tok4);
+			this.getFixture().getSDocumentGraph().addSRelation(rel);
+			
+			rel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			rel.addSType(type1);
+			rel.setSSource(struct2);
+			rel.setSTarget(tok5);
+			this.getFixture().getSDocumentGraph().addSRelation(rel);
+			this.getFixture().getRootsBySRelationSType(SDominanceRelation.class);
+			
+			assertTrue(this.getFixture().getRootsBySRelationSType(SDominanceRelation.class).containsKey(type1));
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SDominanceRelation.class).get(type1).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SDominanceRelation.class).get(type1).size());
+			assertEquals(1, this.getFixture().getRootsBySRelationSType(SDominanceRelation.class).get(type1).size());
+			assertTrue(this.getFixture().getRootsBySRelationSType(SDominanceRelation.class).get(type1).contains(struct1));
 		}//checking for SPointingRelation
 	}
 	
