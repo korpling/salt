@@ -420,6 +420,8 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 			vector.add(sNode);
 	}
 	
+	private Class<? extends SRelation> currRelationType= null; 
+	
 	/**
 	 * Returns all nodes, which are roots for the given relation-class respects to the given SType of the traversed
 	 * relation. The following example shows the different to the method getRootsBySRelation():
@@ -436,6 +438,9 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	@SuppressWarnings("unchecked")
 	public Hashtable<String, EList<SNode>> getRootsBySRelationSType(Class<? extends SRelation> clazz)
 	{
+		if (clazz== null)
+			throw new SaltModuleException("Cannot compute roots types of relations, because no type is given.");
+		this.currRelationType= clazz;
 		Hashtable<String, EList<SNode>> retVal= null;
 		EList<SRelation> relations= null;
 		{//compute all relations
@@ -447,15 +452,15 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSSpanningRelations();
 		}//compute all relations
 		for (SRelation currentRel: relations)
-		{//walk through all pointing relations
+		{//walk through relations
 			//stores if one of the parents is of same class
 			boolean parentHasSameClass= false;
 			//a table to notice, for which sTypes a relation has to be stored
 			Hashtable<String, Boolean> storeSType= new Hashtable<String, Boolean>();
 			for (Edge edge: this.getSDocumentGraph().getInEdges(currentRel.getSSource().getSId()))
 			{//walk through all incoming relations of currentRelation.sSource
-				if (edge instanceof SPointingRelation)
-				{//regard PR only 		
+				if (this.currRelationType.isInstance(edge))
+				{//regard only current relation type 		
 					parentHasSameClass= true;
 					SRelation parentRelation= (SRelation) edge;
 					for (String sType: currentRel.getSTypes())
@@ -472,7 +477,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 							}
 						}
 					}//store the source node of current relation for every type, which is not contained by parent relation
-				}//regard PR only
+				}//regard only current relation type
 			}//walk through all incoming relations of currentRelation.sSource
 			if (storeSType.size()> 0)
 			{
@@ -485,15 +490,15 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 				}
 			}
 			if (!parentHasSameClass)
-			{//there was no parent of class PR --> store source of current node
+			{//there was no parent of class --> store source of current node
 				for (String sType: currentRel.getSTypes())
 				{
 					this.storeSType2SNode(sType, currentRel.getSSource());
 				}
-			}//there was no parent of class PR --> store source of current node
-		}//walk through all pointing relations
+			}//there was no parent of class --> store source of current node
+		}//walk through all relations
 		retVal= this.sType2Roots;
-		
+	
 		return(retVal);
 	}
 //========================= end: getting roots for given Relation type (Class) =========================
