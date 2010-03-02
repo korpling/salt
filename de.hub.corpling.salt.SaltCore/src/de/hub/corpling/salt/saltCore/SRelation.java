@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTarget <em>STarget</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph <em>SGraph</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTypes <em>STypes</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSLayers <em>SLayers</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,6 +125,24 @@ public interface SRelation extends Edge, SAnnotatableElement, SNamedElement, SId
 	 * @generated
 	 */
 	EList<String> getSTypes();
+
+	/**
+	 * Returns the value of the '<em><b>SLayers</b></em>' reference list.
+	 * The list contents are of type {@link de.hub.corpling.salt.saltCore.SLayer}.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SLayer#getSRelations <em>SRelations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SLayers</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SLayers</em>' reference list.
+	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSRelation_SLayers()
+	 * @see de.hub.corpling.salt.saltCore.SLayer#getSRelations
+	 * @model opposite="sRelations" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SLayer> getSLayers();
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -152,6 +152,15 @@ public interface SaltCoreFactory extends EFactory {
 	SMetaAnnotation createSMetaAnnotation();
 
 	/**
+	 * Returns a new object of class '<em>SLayer</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SLayer</em>'.
+	 * @generated
+	 */
+	SLayer createSLayer();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -7,6 +7,7 @@
 package de.hub.corpling.salt.saltCore;
 
 import de.hub.corpling.graph.Node;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,6 +18,7 @@ import de.hub.corpling.graph.Node;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.hub.corpling.salt.saltCore.SNode#getSGraph <em>SGraph</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SNode#getSLayers <em>SLayers</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,4 +54,22 @@ public interface SNode extends Node, SAnnotatableElement, SNamedElement, SIdenti
 	 * @generated
 	 */
 	void setSGraph(SGraph value);
+
+	/**
+	 * Returns the value of the '<em><b>SLayers</b></em>' reference list.
+	 * The list contents are of type {@link de.hub.corpling.salt.saltCore.SLayer}.
+	 * It is bidirectional and its opposite is '{@link de.hub.corpling.salt.saltCore.SLayer#getSNodes <em>SNodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SLayers</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SLayers</em>' reference list.
+	 * @see de.hub.corpling.salt.saltCore.SaltCorePackage#getSNode_SLayers()
+	 * @see de.hub.corpling.salt.saltCore.SLayer#getSNodes
+	 * @model opposite="sNodes" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SLayer> getSLayers();
 } // SNode

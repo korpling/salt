@@ -12,6 +12,7 @@ import de.hub.corpling.graph.IdentifiableElement;
 import de.hub.corpling.graph.Identifier;
 import de.hub.corpling.graph.Label;
 import de.hub.corpling.graph.LabelableElement;
+import de.hub.corpling.graph.Layer;
 import de.hub.corpling.graph.Node;
 
 import de.hub.corpling.salt.saltCore.*;
@@ -140,6 +141,10 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 				return createSAbstractAnnotationAdapter();
 			}
 			@Override
+			public Adapter caseSLayer(SLayer object) {
+				return createSLayerAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -166,6 +171,10 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseIdentifier(Identifier object) {
 				return createIdentifierAdapter();
+			}
+			@Override
+			public Adapter caseLayer(Layer object) {
+				return createLayerAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -398,6 +407,20 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SLayer <em>SLayer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SLayer
+	 * @generated
+	 */
+	public Adapter createSLayerAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.LabelableElement <em>Labelable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -492,6 +515,20 @@ public class SaltCoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIdentifierAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.Layer <em>Layer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.graph.Layer
+	 * @generated
+	 */
+	public Adapter createLayerAdapter() {
 		return null;
 	}
 

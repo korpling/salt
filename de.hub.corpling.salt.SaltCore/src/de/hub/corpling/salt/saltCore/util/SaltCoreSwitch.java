@@ -12,6 +12,7 @@ import de.hub.corpling.graph.IdentifiableElement;
 import de.hub.corpling.graph.Identifier;
 import de.hub.corpling.graph.Label;
 import de.hub.corpling.graph.LabelableElement;
+import de.hub.corpling.graph.Layer;
 import de.hub.corpling.graph.Node;
 
 import de.hub.corpling.salt.saltCore.*;
@@ -231,6 +232,21 @@ public class SaltCoreSwitch<T> {
 				T result = caseSAbstractAnnotation(sAbstractAnnotation);
 				if (result == null) result = caseLabel(sAbstractAnnotation);
 				if (result == null) result = caseLabelableElement(sAbstractAnnotation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SaltCorePackage.SLAYER: {
+				SLayer sLayer = (SLayer)theEObject;
+				T result = caseSLayer(sLayer);
+				if (result == null) result = caseLayer(sLayer);
+				if (result == null) result = caseSNamedElement(sLayer);
+				if (result == null) result = caseSIdentifiableElement(sLayer);
+				if (result == null) result = caseSProcessingAnnotatableElement(sLayer);
+				if (result == null) result = caseSAnnotatableElement(sLayer);
+				if (result == null) result = caseSMetaAnnotatableElement(sLayer);
+				if (result == null) result = caseSFeaturableElement(sLayer);
+				if (result == null) result = caseLabelableElement(sLayer);
+				if (result == null) result = caseIdentifiableElement(sLayer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -464,6 +480,21 @@ public class SaltCoreSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SLayer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SLayer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSLayer(SLayer object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Labelable Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -565,6 +596,21 @@ public class SaltCoreSwitch<T> {
 	 * @generated
 	 */
 	public T caseIdentifier(Identifier object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Layer</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Layer</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLayer(Layer object) {
 		return null;
 	}
 

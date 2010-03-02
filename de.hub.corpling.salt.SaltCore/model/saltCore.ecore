@@ -6,6 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="SNode" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Node #//SAnnotatableElement #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
         volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sLayers" upperBound="-1"
+        eType="#//SLayer" volatile="true" transient="true" derived="true" eOpposite="#//SLayer/sNodes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SRelation" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Edge #//SAnnotatableElement #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
     <eOperations name="addSType">
@@ -20,6 +22,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sTypes" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
         volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sLayers" upperBound="-1"
+        eType="#//SLayer" volatile="true" transient="true" derived="true" eOpposite="#//SLayer/sRelations"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAnnotatableElement" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//LabelableElement">
     <eOperations name="addSAnnotation">
@@ -55,6 +59,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sNodes" upperBound="-1"
         eType="#//SNode" changeable="false" volatile="true" transient="true" derived="true"
         eOpposite="#//SNode/sGraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sLayers" upperBound="-1"
+        eType="#//SLayer" volatile="true" transient="true" derived="true" eOpposite="#//SLayer/sGraph"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SNamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -151,5 +157,13 @@
     <eLiterals name="SFLOAT" value="3"/>
     <eLiterals name="SURI" value="4"/>
     <eLiterals name="SOBJECT" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SLayer" eSuperTypes="../../de.hub.corpling.Graph/model/graph.ecore#//Layer #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SAnnotatableElement #//SMetaAnnotatableElement #//SFeaturableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sRelations" upperBound="-1"
+        eType="#//SRelation" volatile="true" transient="true" derived="true" eOpposite="#//SRelation/sLayers"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sNodes" upperBound="-1"
+        eType="#//SNode" volatile="true" transient="true" derived="true" eOpposite="#//SNode/sLayers"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
+        volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sLayers"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -24,6 +24,7 @@ import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SLayer;
 import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SMetaAnnotation;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -151,6 +152,13 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass sLayerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum sdatatypeEEnum = null;
 
 	/**
@@ -247,6 +255,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSNode_SLayers() {
+		return (EReference)sNodeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSRelation() {
 		return sRelationEClass;
 	}
@@ -285,6 +302,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 */
 	public EAttribute getSRelation_STypes() {
 		return (EAttribute)sRelationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSRelation_SLayers() {
+		return (EReference)sRelationEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -348,6 +374,15 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 */
 	public EReference getSGraph_SNodes() {
 		return (EReference)sGraphEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSGraph_SLayers() {
+		return (EReference)sGraphEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -598,6 +633,42 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSLayer() {
+		return sLayerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSLayer_SRelations() {
+		return (EReference)sLayerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSLayer_SNodes() {
+		return (EReference)sLayerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSLayer_SGraph() {
+		return (EReference)sLayerEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSDATATYPE() {
 		return sdatatypeEEnum;
 	}
@@ -641,12 +712,14 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		// Create classes and their features
 		sNodeEClass = createEClass(SNODE);
 		createEReference(sNodeEClass, SNODE__SGRAPH);
+		createEReference(sNodeEClass, SNODE__SLAYERS);
 
 		sRelationEClass = createEClass(SRELATION);
 		createEReference(sRelationEClass, SRELATION__SSOURCE);
 		createEReference(sRelationEClass, SRELATION__STARGET);
 		createEReference(sRelationEClass, SRELATION__SGRAPH);
 		createEAttribute(sRelationEClass, SRELATION__STYPES);
+		createEReference(sRelationEClass, SRELATION__SLAYERS);
 
 		sAnnotatableElementEClass = createEClass(SANNOTATABLE_ELEMENT);
 		createEReference(sAnnotatableElementEClass, SANNOTATABLE_ELEMENT__SANNOTATIONS);
@@ -657,6 +730,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sGraphEClass = createEClass(SGRAPH);
 		createEReference(sGraphEClass, SGRAPH__SRELATIONS);
 		createEReference(sGraphEClass, SGRAPH__SNODES);
+		createEReference(sGraphEClass, SGRAPH__SLAYERS);
 
 		sNamedElementEClass = createEClass(SNAMED_ELEMENT);
 		createEAttribute(sNamedElementEClass, SNAMED_ELEMENT__SNAME);
@@ -694,6 +768,11 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		createEAttribute(sAbstractAnnotationEClass, SABSTRACT_ANNOTATION__SNAME);
 		createEAttribute(sAbstractAnnotationEClass, SABSTRACT_ANNOTATION__SVALUE);
 		createEAttribute(sAbstractAnnotationEClass, SABSTRACT_ANNOTATION__SVALUE_TYPE);
+
+		sLayerEClass = createEClass(SLAYER);
+		createEReference(sLayerEClass, SLAYER__SRELATIONS);
+		createEReference(sLayerEClass, SLAYER__SNODES);
+		createEReference(sLayerEClass, SLAYER__SGRAPH);
 
 		// Create enums
 		sdatatypeEEnum = createEEnum(SDATATYPE);
@@ -765,16 +844,25 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sMetaAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
 		sMetaAnnotationEClass.getESuperTypes().add(this.getSAbstractAnnotation());
 		sAbstractAnnotationEClass.getESuperTypes().add(theGraphPackage.getLabel());
+		sLayerEClass.getESuperTypes().add(theGraphPackage.getLayer());
+		sLayerEClass.getESuperTypes().add(this.getSNamedElement());
+		sLayerEClass.getESuperTypes().add(this.getSIdentifiableElement());
+		sLayerEClass.getESuperTypes().add(this.getSProcessingAnnotatableElement());
+		sLayerEClass.getESuperTypes().add(this.getSAnnotatableElement());
+		sLayerEClass.getESuperTypes().add(this.getSMetaAnnotatableElement());
+		sLayerEClass.getESuperTypes().add(this.getSFeaturableElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sNodeEClass, SNode.class, "SNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSNode_SGraph(), this.getSGraph(), this.getSGraph_SNodes(), "sGraph", null, 0, 1, SNode.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSNode_SLayers(), this.getSLayer(), this.getSLayer_SNodes(), "sLayers", null, 0, -1, SNode.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sRelationEClass, SRelation.class, "SRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSRelation_SSource(), this.getSNode(), null, "sSource", null, 0, 1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSRelation_STarget(), this.getSNode(), null, "sTarget", null, 0, 1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSRelation_SGraph(), this.getSGraph(), this.getSGraph_SRelations(), "sGraph", null, 0, 1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSRelation_STypes(), ecorePackage.getEString(), "sTypes", null, 0, -1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSRelation_SLayers(), this.getSLayer(), this.getSLayer_SRelations(), "sLayers", null, 0, -1, SRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(sRelationEClass, null, "addSType", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "sType", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -794,6 +882,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEClass(sGraphEClass, SGraph.class, "SGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSGraph_SRelations(), this.getSRelation(), this.getSRelation_SGraph(), "sRelations", null, 0, -1, SGraph.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSGraph_SNodes(), this.getSNode(), this.getSNode_SGraph(), "sNodes", null, 0, -1, SGraph.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSGraph_SLayers(), this.getSLayer(), this.getSLayer_SGraph(), "sLayers", null, 0, -1, SGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(sGraphEClass, null, "addSNode", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getSNode(), "sNode", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -877,6 +966,11 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEOperation(sAbstractAnnotationEClass, this.getURI(), "getSValueSURI", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(sAbstractAnnotationEClass, ecorePackage.getEJavaObject(), "getSValueSOBJECT", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(sLayerEClass, SLayer.class, "SLayer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSLayer_SRelations(), this.getSRelation(), this.getSRelation_SLayers(), "sRelations", null, 0, -1, SLayer.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSLayer_SNodes(), this.getSNode(), this.getSNode_SLayers(), "sNodes", null, 0, -1, SLayer.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSLayer_SGraph(), this.getSGraph(), this.getSGraph_SLayers(), "sGraph", null, 0, 1, SLayer.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sdatatypeEEnum, de.hub.corpling.salt.saltCore.SDATATYPE.class, "SDATATYPE");

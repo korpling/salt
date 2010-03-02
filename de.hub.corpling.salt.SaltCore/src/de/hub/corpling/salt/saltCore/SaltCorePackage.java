@@ -110,6 +110,15 @@ public interface SaltCorePackage extends EPackage {
 	int SNODE__GRAPH = GraphPackage.NODE__GRAPH;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNODE__LAYERS = GraphPackage.NODE__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,13 +200,22 @@ public interface SaltCorePackage extends EPackage {
 	int SNODE__SGRAPH = GraphPackage.NODE_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNODE__SLAYERS = GraphPackage.NODE_FEATURE_COUNT + 9;
+
+	/**
 	 * The number of structural features of the '<em>SNode</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SNODE_FEATURE_COUNT = GraphPackage.NODE_FEATURE_COUNT + 9;
+	int SNODE_FEATURE_COUNT = GraphPackage.NODE_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl <em>SRelation</em>}' class.
@@ -262,6 +280,15 @@ public interface SaltCorePackage extends EPackage {
 	 * @ordered
 	 */
 	int SRELATION__TARGET = GraphPackage.EDGE__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SRELATION__LAYERS = GraphPackage.EDGE__LAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -372,13 +399,22 @@ public interface SaltCorePackage extends EPackage {
 	int SRELATION__STYPES = GraphPackage.EDGE_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SRELATION__SLAYERS = GraphPackage.EDGE_FEATURE_COUNT + 12;
+
+	/**
 	 * The number of structural features of the '<em>SRelation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION_FEATURE_COUNT = GraphPackage.EDGE_FEATURE_COUNT + 12;
+	int SRELATION_FEATURE_COUNT = GraphPackage.EDGE_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.
@@ -835,6 +871,15 @@ public interface SaltCorePackage extends EPackage {
 	int SGRAPH__NUM_OF_EDGES = GraphPackage.GRAPH__NUM_OF_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SGRAPH__LAYERS = GraphPackage.GRAPH__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -925,13 +970,22 @@ public interface SaltCorePackage extends EPackage {
 	int SGRAPH__SNODES = GraphPackage.GRAPH_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SGRAPH__SLAYERS = GraphPackage.GRAPH_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>SGraph</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH_FEATURE_COUNT = GraphPackage.GRAPH_FEATURE_COUNT + 10;
+	int SGRAPH_FEATURE_COUNT = GraphPackage.GRAPH_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
@@ -1555,6 +1609,178 @@ public interface SaltCorePackage extends EPackage {
 	int SMETA_ANNOTATION_FEATURE_COUNT = SABSTRACT_ANNOTATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.impl.SLayerImpl <em>SLayer</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.impl.SLayerImpl
+	 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getSLayer()
+	 * @generated
+	 */
+	int SLAYER = 15;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__LABELS = GraphPackage.LAYER__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__ID = GraphPackage.LAYER__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__IDENTIFIER = GraphPackage.LAYER__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__GRAPH = GraphPackage.LAYER__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__NODES = GraphPackage.LAYER__NODES;
+
+	/**
+	 * The feature id for the '<em><b>Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__EDGES = GraphPackage.LAYER__EDGES;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SNAME = GraphPackage.LAYER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SELEMENT_ID = GraphPackage.LAYER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SID = GraphPackage.LAYER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SELEMENT_PATH = GraphPackage.LAYER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SPROCESSING_ANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SMETA_ANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SFEATURES = GraphPackage.LAYER_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>SRelations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SRELATIONS = GraphPackage.LAYER_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>SNodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SNODES = GraphPackage.LAYER_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SGRAPH = GraphPackage.LAYER_FEATURE_COUNT + 10;
+
+	/**
+	 * The number of structural features of the '<em>SLayer</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER_FEATURE_COUNT = GraphPackage.LAYER_FEATURE_COUNT + 11;
+
+	/**
 	 * The meta object id for the '{@link de.hub.corpling.salt.saltCore.SDATATYPE <em>SDATATYPE</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1562,7 +1788,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getSDATATYPE()
 	 * @generated
 	 */
-	int SDATATYPE = 15;
+	int SDATATYPE = 16;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -1572,7 +1798,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 16;
+	int URI = 17;
 
 
 	/**
@@ -1595,6 +1821,17 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSNode_SGraph();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.hub.corpling.salt.saltCore.SNode#getSLayers <em>SLayers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>SLayers</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SNode#getSLayers()
+	 * @see #getSNode()
+	 * @generated
+	 */
+	EReference getSNode_SLayers();
 
 	/**
 	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SRelation <em>SRelation</em>}'.
@@ -1649,6 +1886,17 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSRelation_STypes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.hub.corpling.salt.saltCore.SRelation#getSLayers <em>SLayers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>SLayers</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SRelation#getSLayers()
+	 * @see #getSRelation()
+	 * @generated
+	 */
+	EReference getSRelation_SLayers();
 
 	/**
 	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement <em>SAnnotatable Element</em>}'.
@@ -1723,6 +1971,17 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSGraph_SNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.hub.corpling.salt.saltCore.SGraph#getSLayers <em>SLayers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>SLayers</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SGraph#getSLayers()
+	 * @see #getSGraph()
+	 * @generated
+	 */
+	EReference getSGraph_SLayers();
 
 	/**
 	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SNamedElement <em>SNamed Element</em>}'.
@@ -2012,6 +2271,49 @@ public interface SaltCorePackage extends EPackage {
 	EAttribute getSAbstractAnnotation_SValueType();
 
 	/**
+	 * Returns the meta object for class '{@link de.hub.corpling.salt.saltCore.SLayer <em>SLayer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SLayer</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SLayer
+	 * @generated
+	 */
+	EClass getSLayer();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.hub.corpling.salt.saltCore.SLayer#getSRelations <em>SRelations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>SRelations</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SLayer#getSRelations()
+	 * @see #getSLayer()
+	 * @generated
+	 */
+	EReference getSLayer_SRelations();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.hub.corpling.salt.saltCore.SLayer#getSNodes <em>SNodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>SNodes</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SLayer#getSNodes()
+	 * @see #getSLayer()
+	 * @generated
+	 */
+	EReference getSLayer_SNodes();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.hub.corpling.salt.saltCore.SLayer#getSGraph <em>SGraph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SGraph</em>'.
+	 * @see de.hub.corpling.salt.saltCore.SLayer#getSGraph()
+	 * @see #getSLayer()
+	 * @generated
+	 */
+	EReference getSLayer_SGraph();
+
+	/**
 	 * Returns the meta object for enum '{@link de.hub.corpling.salt.saltCore.SDATATYPE <em>SDATATYPE</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2073,6 +2375,14 @@ public interface SaltCorePackage extends EPackage {
 		EReference SNODE__SGRAPH = eINSTANCE.getSNode_SGraph();
 
 		/**
+		 * The meta object literal for the '<em><b>SLayers</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SNODE__SLAYERS = eINSTANCE.getSNode_SLayers();
+
+		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl <em>SRelation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2113,6 +2423,14 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SRELATION__STYPES = eINSTANCE.getSRelation_STypes();
+
+		/**
+		 * The meta object literal for the '<em><b>SLayers</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SRELATION__SLAYERS = eINSTANCE.getSRelation_SLayers();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SAnnotatableElementImpl <em>SAnnotatable Element</em>}' class.
@@ -2175,6 +2493,14 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SGRAPH__SNODES = eINSTANCE.getSGraph_SNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>SLayers</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SGRAPH__SLAYERS = eINSTANCE.getSGraph_SLayers();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SNamedElementImpl <em>SNamed Element</em>}' class.
@@ -2411,6 +2737,40 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SABSTRACT_ANNOTATION__SVALUE_TYPE = eINSTANCE.getSAbstractAnnotation_SValueType();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.impl.SLayerImpl <em>SLayer</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCore.impl.SLayerImpl
+		 * @see de.hub.corpling.salt.saltCore.impl.SaltCorePackageImpl#getSLayer()
+		 * @generated
+		 */
+		EClass SLAYER = eINSTANCE.getSLayer();
+
+		/**
+		 * The meta object literal for the '<em><b>SRelations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SLAYER__SRELATIONS = eINSTANCE.getSLayer_SRelations();
+
+		/**
+		 * The meta object literal for the '<em><b>SNodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SLAYER__SNODES = eINSTANCE.getSLayer_SNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>SGraph</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SLAYER__SGRAPH = eINSTANCE.getSLayer_SGraph();
 
 		/**
 		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCore.SDATATYPE <em>SDATATYPE</em>}' enum.

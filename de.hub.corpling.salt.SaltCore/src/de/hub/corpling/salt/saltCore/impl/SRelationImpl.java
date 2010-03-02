@@ -28,6 +28,7 @@ import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SLayer;
 import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SMetaAnnotation;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -62,6 +63,7 @@ import de.hub.corpling.salt.saltCore.accessors.SProcessingAnnotatableElementAcce
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSTarget <em>STarget</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSGraph <em>SGraph</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSTypes <em>STypes</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.impl.SRelationImpl#getSLayers <em>SLayers</em>}</li>
  * </ul>
  * </p>
  *
@@ -549,6 +551,16 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SLayer> getSLayers() 
+	{
+		return((EList<SLayer>) (EList<? extends SLayer>)super.getLayers());
+	}
+
+	/**
 	 * Adds a type for the relation. If no tapes are still set, it will create a new list for
 	 * types also.
 	 * @param sType the relation type to add
@@ -631,6 +643,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return basicGetSGraph();
 			case SaltCorePackage.SRELATION__STYPES:
 				return getSTypes();
+			case SaltCorePackage.SRELATION__SLAYERS:
+				return getSLayers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -677,6 +691,10 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 			case SaltCorePackage.SRELATION__SGRAPH:
 				setSGraph((SGraph)newValue);
 				return;
+			case SaltCorePackage.SRELATION__SLAYERS:
+				getSLayers().clear();
+				getSLayers().addAll((Collection<? extends SLayer>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -719,6 +737,9 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 			case SaltCorePackage.SRELATION__SGRAPH:
 				setSGraph((SGraph)null);
 				return;
+			case SaltCorePackage.SRELATION__SLAYERS:
+				getSLayers().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -755,6 +776,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return basicGetSGraph() != null;
 			case SaltCorePackage.SRELATION__STYPES:
 				return !getSTypes().isEmpty();
+			case SaltCorePackage.SRELATION__SLAYERS:
+				return !getSLayers().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
