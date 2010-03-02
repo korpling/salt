@@ -48,6 +48,7 @@ public class SaltCoreTests extends TestSuite {
 		suite.addTestSuite(SFeaturableElementTest.class);
 		suite.addTestSuite(SMetaAnnotatableElementTest.class);
 		suite.addTestSuite(SMetaAnnotationTest.class);
+		suite.addTestSuite(SLayerTest.class);
 		return suite;
 	}
 

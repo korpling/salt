@@ -6,67 +6,63 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
-import junit.framework.TestCase;
-import junit.textui.TestRunner;
-import de.hub.corpling.salt.saltCore.SAnnotation;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SLayer;
 import de.hub.corpling.salt.saltCore.SNode;
-import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SRelation;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
 
 /**
  * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>SRelation</b></em>'.
+ * A test case for the model object '<em><b>SLayer</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations() <em>SProcessing Annotations</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations() <em>SMeta Annotations</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSSource() <em>SSource</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTarget() <em>STarget</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph() <em>SGraph</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSTypes() <em>STypes</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#getSLayers() <em>SLayers</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SLayer#getSRelations() <em>SRelations</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SLayer#getSNodes() <em>SNodes</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SLayer#getSGraph() <em>SGraph</em>}</li>
  * </ul>
  * </p>
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltCore.SRelation#addSType(java.lang.String) <em>Add SType</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hub.corpling.salt.saltCore.SMetaAnnotation) <em>Add SMeta Annotation</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hub.corpling.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}</li>
- *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String) <em>Get SProcessing Annotation</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hub.corpling.salt.saltCore.SMetaAnnotation) <em>Add SMeta Annotation</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#addSAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Add SAnnotation</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotation(java.lang.String) <em>Get SAnnotation</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hub.corpling.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String) <em>Get SProcessing Annotation</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class SRelationTest extends TestCase {
+public class SLayerTest extends TestCase {
 
 	/**
-	 * The fixture for this SRelation test case.
+	 * The fixture for this SLayer test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SRelation fixture = null;
+	protected SLayer fixture = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,36 +70,36 @@ public class SRelationTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
-		TestRunner.run(SRelationTest.class);
+		TestRunner.run(SLayerTest.class);
 	}
 
 	/**
-	 * Constructs a new SRelation test case with the given name.
+	 * Constructs a new SLayer test case with the given name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SRelationTest(String name) {
+	public SLayerTest(String name) {
 		super(name);
 	}
 
 	/**
-	 * Sets the fixture for this SRelation test case.
+	 * Sets the fixture for this SLayer test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void setFixture(SRelation fixture) {
+	protected void setFixture(SLayer fixture) {
 		this.fixture = fixture;
 	}
 
 	/**
-	 * Returns the fixture for this SRelation test case.
+	 * Returns the fixture for this SLayer test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SRelation getFixture() {
+	protected SLayer getFixture() {
 		return fixture;
 	}
 
@@ -115,7 +111,7 @@ public class SRelationTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(SaltCoreFactory.eINSTANCE.createSRelation());
+		setFixture(SaltCoreFactory.eINSTANCE.createSLayer());
 	}
 
 	/**
@@ -129,40 +125,58 @@ public class SRelationTest extends TestCase {
 		setFixture(null);
 	}
 
-	
-// ========================= start: testing SIdentifiableElement
 	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}' feature getter.
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SLayer#getSRelations() <em>SRelations</em>}' feature getter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @throws Exception 
-	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId()
+	 * @see de.hub.corpling.salt.saltCore.SLayer#getSRelations()
+	 * @generated
 	 */
-	public void testGetSElementId() throws Exception 
+	public void testGetSRelations() 
 	{
-		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
-		identTest.setUp();
-		identTest.setFixture(this.getFixture());
-		identTest.testGetSElementId();
-		identTest.tearDown();
+		//edges
+		String[] sRelNames= {"sEdge1", "sEdge2", "sEdge3", "sEdge4", "sEdge5"};
+		EList<SRelation> sRels= new BasicEList<SRelation>();
+		SRelation sRel= null;
+		for (String sEdgeName: sRelNames)
+		{
+			sRel= SaltCoreFactory.eINSTANCE.createSRelation();
+			sRel.setSId(sEdgeName);
+			sRels.add(sRel);
+			this.getFixture().getSRelations().add(sRel);
+		}
+		
+		//checking if all nodes are there
+		assertTrue(this.getFixture().getSRelations().containsAll(sRels));
+		assertTrue(sRels.containsAll(this.getFixture().getSRelations()));
 	}
 
 	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementId(de.hub.corpling.salt.saltCore.SElementId) <em>SElement Id</em>}' feature setter.
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SLayer#getSNodes() <em>SNodes</em>}' feature getter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @throws Exception 
-	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementId(de.hub.corpling.salt.saltCore.SElementId)
+	 * @see de.hub.corpling.salt.saltCore.SLayer#getSNodes()
+	 * @generated
 	 */
-	public void testSetSElementId() throws Exception 
+	public void testGetSNodes() 
 	{
-		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
-		identTest.setUp();
-		identTest.setFixture(this.getFixture());
-		identTest.testSetSElementId();
-		identTest.tearDown();
+		String[] sNodeNames= {"sNode1", "sNode2", "sNode3", "sNode4", "sNode5"};
+		EList<SNode> sNodes= new BasicEList<SNode>(); 
+		SNode sNode= null;
+		for (String sNodeName: sNodeNames)
+		{
+			sNode= SaltCoreFactory.eINSTANCE.createSNode();
+			sNode.setSId(sNodeName);
+			sNodes.add(sNode);
+			this.getFixture().getSNodes().add(sNode);
+		}	
+		
+		//checking if all nodes are there
+		assertTrue(this.getFixture().getSNodes().containsAll(sNodes));
+		assertTrue(sNodes.containsAll(this.getFixture().getSNodes()));
 	}
-	
+
+	// ========================= start: testing SIdentifiableElement
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}' feature getter.
 	 * <!-- begin-user-doc -->
@@ -226,57 +240,40 @@ public class SRelationTest extends TestCase {
 		identTest.testSetSElementPath();
 		identTest.tearDown();
 	}
+	
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#getSElementId()
+	 */
+	public void testGetSElementId() throws Exception 
+	{
+		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
+		identTest.setUp();
+		identTest.setFixture(this.getFixture());
+		identTest.testGetSElementId();
+		identTest.tearDown();
+	}
+
+	/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementId(de.hub.corpling.salt.saltCore.SElementId) <em>SElement Id</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @throws Exception 
+	 * @see de.hub.corpling.salt.saltCore.SIdentifiableElement#setSElementId(de.hub.corpling.salt.saltCore.SElementId)
+	 */
+	public void testSetSElementId() throws Exception 
+	{
+		SIdentifiableElementTest identTest= new SIdentifiableElementTest(this.getName());
+		identTest.setUp();
+		identTest.setFixture(this.getFixture());
+		identTest.testSetSElementId();
+		identTest.tearDown();
+	}
 //========================= end: testing SIdentifiableElement
-
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#getSSource() <em>SSource</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SRelation#getSSource()
-	 */
-	public void testGetSSource() 
-	{
-		SNode sNode= SaltCoreFactory.eINSTANCE.createSNode();
-		this.getFixture().setSSource(sNode);
-		assertEquals(sNode, this.getFixture().getSSource());
-	}
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#setSSource(de.hub.corpling.salt.saltCore.SNode) <em>SSource</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SRelation#setSSource(de.hub.corpling.salt.saltCore.SNode)
-	 */
-	public void testSetSSource() 
-	{
-		this.testGetSSource();
-	}
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#getSTarget() <em>STarget</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SRelation#getSTarget()
-	 */
-	public void testGetSTarget() 
-	{
-		SNode sNode= SaltCoreFactory.eINSTANCE.createSNode();
-		this.getFixture().setSTarget(sNode);
-		assertEquals(sNode, this.getFixture().getSTarget());
-	}
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#setSTarget(de.hub.corpling.salt.saltCore.SNode) <em>STarget</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SRelation#setSTarget(de.hub.corpling.salt.saltCore.SNode)
-	 */
-	public void testSetSTarget() 
-	{
-		this.testGetSTarget();
-	}
-
+	
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#getSGraph() <em>SGraph</em>}' feature getter.
 	 * <!-- begin-user-doc -->
@@ -299,58 +296,6 @@ public class SRelationTest extends TestCase {
 	public void testSetSGraph() 
 	{
 		this.testGetSGraph();
-	}
-
-/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#getSTypes() <em>STypes</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SRelation#getSTypes()
-	 */
-	public void testGetSTypes() 
-	{
-		
-		EList<String> types= new BasicEList<String>();
-		types.add("type1");
-		types.add("type2");
-		types.add("type3");
-		types.add("type4");
-		for (String type: types)
-			this.getFixture().addSType(type);
-		assertTrue(types.containsAll(this.getFixture().getSTypes()));
-		assertTrue(this.getFixture().getSTypes().containsAll(types));
-	}
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#getSLayers() <em>SLayers</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SRelation#getSLayers()
-	 */
-	public void testGetSLayers() 
-	{
-		assertEquals(0, this.getFixture().getSLayers().size());
-		
-		EList<SLayer> layers= new BasicEList<SLayer>();
-		for (int i= 1; i< 5; i++)
-		{
-			SLayer layer= SaltCoreFactory.eINSTANCE.createSLayer(); 
-			layers.add(layer);
-			this.getFixture().getSLayers().add(layer);
-		}
-		assertTrue(layers.containsAll(this.getFixture().getSLayers()));
-		assertTrue(this.getFixture().getSLayers().containsAll(layers));
-	}
-
-	/**
-	 * Tests the '{@link de.hub.corpling.salt.saltCore.SRelation#addSType(java.lang.String) <em>Add SType</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hub.corpling.salt.saltCore.SRelation#addSType(java.lang.String)
-	 */
-	public void testAddSType__String() 
-	{
-		this.testGetSTypes();
 	}
 
 	// ========================= start: testing SMetaAnnotatableElement
@@ -402,7 +347,6 @@ public class SRelationTest extends TestCase {
 		sPATest.tearDown();
 	}
 // ========================= end: testing SMetaAnnotatableElement	
-
 // ========================= start: testing SAnnotatableElement
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}' feature getter.
@@ -419,8 +363,8 @@ public class SRelationTest extends TestCase {
 		sPATest.testGetSAnnotations();
 		sPATest.tearDown();
 	}
-
-	/**
+	
+		/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SAnnotatableElement#addSAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Add SAnnotation</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -452,6 +396,7 @@ public class SRelationTest extends TestCase {
 		sPATest.tearDown();
 	}
 // ========================= end: testing SAnnotatableElement	
+	
 // ========================= start: testing SProcessingAnnotatableElement
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations() <em>SProcessing Annotations</em>}' feature getter.
@@ -500,6 +445,7 @@ public class SRelationTest extends TestCase {
 		sPATest.testGetSProcessingAnnotation__String();
 		sPATest.tearDown();
 	}
+	
 	public void testReverseGetSProcessingAnnotation() throws Exception
 	{
 		SProcessingAnnotatableElementTest sPATest= new SProcessingAnnotatableElementTest(this.getName());
@@ -508,7 +454,7 @@ public class SRelationTest extends TestCase {
 		sPATest.testReverseGetSProcessingAnnotation();
 		sPATest.tearDown();
 	}
-// ========================= end: testing SProcessingAnnotatableElement	
+// ========================= end: testing SProcessingAnnotatableElement
 // ========================= start: testing SFeaturableElement	
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}' feature getter.
@@ -525,7 +471,7 @@ public class SRelationTest extends TestCase {
 		sFeatTest.testGetSFeatures();
 		sFeatTest.tearDown();
 	}
-
+	
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeaturableElement#addSFeature(de.hub.corpling.salt.saltCore.SFeature) <em>Add SFeature</em>}' operation.
 	 * <!-- begin-user-doc -->
@@ -557,7 +503,8 @@ public class SRelationTest extends TestCase {
 		sFeatTest.testGetSFeature__String();
 		sFeatTest.tearDown();
 	}
-/**
+
+	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -571,53 +518,6 @@ public class SRelationTest extends TestCase {
 		this.getFixture().addSFeature(sFeature);
 		assertEquals(sFeature, this.getFixture().getSFeature(sFeature.getSNS(), sFeature.getSName()));
 	}
+// ========================= end: testing SFeaturableElement
 
-	// ========================= end: testing SFeaturableElement
-	/**
-	 * Checks if the equals mezhod is correctly implemented.
-	 */
-	public void testEquals()
-	{
-		{//adding id
-			String id= "salt:/rel1";
-			this.getFixture().setSId(id);
-		}
-		
-		{//adding annotations
-			SAnnotation sAnno= null;
-			sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-			sAnno.setFullName("ns1::annoName1");
-			sAnno.setSValue("annoValue1");
-			this.getFixture().addSAnnotation(sAnno);
-			
-			sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-			sAnno.setFullName("ns2::annoName2");
-			sAnno.setSValue("annoValue2");
-			this.getFixture().addSAnnotation(sAnno);
-		}
-		
-		{//adding Processing-Annotations
-			SProcessingAnnotation sPAnno= null;
-			sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-			sPAnno.setFullName("procAnnos::annoName1");
-			sPAnno.setSValue("pAnnoValue1");
-			this.getFixture().addSProcessingAnnotation(sPAnno);
-			
-			sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-			sPAnno.setFullName("procAnnos::annoName2");
-			sPAnno.setSValue("pAnnoValue2");
-			this.getFixture().addSProcessingAnnotation(sPAnno);
-		}
-		{//setting source node
-			SNode sNode= SaltCoreFactory.eINSTANCE.createSNode();
-			sNode.setId("salt:/sNode1");
-			this.getFixture().setSSource(sNode);
-		}
-		{//setting target node
-			SNode sNode= SaltCoreFactory.eINSTANCE.createSNode();
-			sNode.setId("salt:/sNode2");
-			this.getFixture().setSTarget(sNode);
-		}
-		assertSame(this.getFixture(), this.getFixture());
-	}
-} //SRelationTest
+} //SLayerTest

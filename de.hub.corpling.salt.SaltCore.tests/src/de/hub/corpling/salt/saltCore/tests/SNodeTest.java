@@ -6,11 +6,15 @@
  */
 package de.hub.corpling.salt.saltCore.tests;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 import de.hub.corpling.salt.saltCore.SAnnotation;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
+import de.hub.corpling.salt.saltCore.SLayer;
 import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SaltCoreFactory;
@@ -30,6 +34,7 @@ import de.hub.corpling.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hub.corpling.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations() <em>SMeta Annotations</em>}</li>
  *   <li>{@link de.hub.corpling.salt.saltCore.SNode#getSGraph() <em>SGraph</em>}</li>
+ *   <li>{@link de.hub.corpling.salt.saltCore.SNode#getSLayers() <em>SLayers</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -241,7 +246,28 @@ public class SNodeTest extends TestCase {
 		this.testGetSGraph();
 	}
 
-// ========================= start: testing SMetaAnnotatableElement
+/**
+	 * Tests the '{@link de.hub.corpling.salt.saltCore.SNode#getSLayers() <em>SLayers</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCore.SNode#getSLayers()
+	 */
+	public void testGetSLayers() 
+	{
+		assertEquals(0, this.getFixture().getSLayers().size());
+		
+		EList<SLayer> layers= new BasicEList<SLayer>();
+		for (int i= 1; i< 5; i++)
+		{
+			SLayer layer= SaltCoreFactory.eINSTANCE.createSLayer(); 
+			layers.add(layer);
+			this.getFixture().getSLayers().add(layer);
+		}
+		assertTrue(layers.containsAll(this.getFixture().getSLayers()));
+		assertTrue(this.getFixture().getSLayers().containsAll(layers));
+	}
+
+	// ========================= start: testing SMetaAnnotatableElement
 	/**
 	 * Tests the '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations() <em>SMetaAnnotations</em>}' feature getter.
 	 * <!-- begin-user-doc -->
