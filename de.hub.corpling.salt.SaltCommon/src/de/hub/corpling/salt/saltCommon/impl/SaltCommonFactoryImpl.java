@@ -42,6 +42,7 @@ import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SFeature;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SLayer;
 import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SMetaAnnotation;
 import de.hub.corpling.salt.saltCore.SNamedElement;
@@ -224,6 +225,11 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	}
 
 	@Override
+	public SLayer createSLayer() {
+		return(this.saltCoreFactory.createSLayer());
+	}
+	
+	@Override
 	public SMetaAnnotatableElement createSMetaAnnotatableElement() 
 	{
 		return(this.saltCoreFactory.createSMetaAnnotatableElement());
@@ -381,5 +387,4 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
 // ===================================== end: SDocumentStructureFactory
-
 } //SaltCommonFactoryImpl
