@@ -518,6 +518,38 @@ public class SLayerTest extends TestCase {
 		this.getFixture().addSFeature(sFeature);
 		assertEquals(sFeature, this.getFixture().getSFeature(sFeature.getSNS(), sFeature.getSName()));
 	}
+	
+	/**
+	 * Tests when adding a node to a layer, if the node also contains the layer and vice versa. 
+	 */
+	public void testReverseSetSNode()
+	{
+		SNode sNode= null;
+		
+		sNode= SaltCoreFactory.eINSTANCE.createSNode();
+		this.getFixture().getSNodes().add(sNode);
+		assertTrue(sNode.getSLayers().contains(this.getFixture()));
+		
+		sNode= SaltCoreFactory.eINSTANCE.createSNode();
+		sNode.getSLayers().add(this.getFixture());
+		assertTrue(this.getFixture().getSNodes().contains(sNode));
+	}
+	
+	/**
+	 * Tests when adding a node to a layer, if the node also contains the layer and vice versa. 
+	 */
+	public void testReverseSetSRelation()
+	{
+		SRelation sRel= null;
+		
+		sRel= SaltCoreFactory.eINSTANCE.createSRelation();
+		this.getFixture().getSRelations().add(sRel);
+		assertTrue(sRel.getSLayers().contains(this.getFixture()));
+		
+		sRel= SaltCoreFactory.eINSTANCE.createSRelation();
+		sRel.getSLayers().add(this.getFixture());
+		assertTrue(this.getFixture().getSRelations().contains(sRel));
+	}
 // ========================= end: testing SFeaturableElement
 
 } //SLayerTest
