@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import de.hub.corpling.salt.saltCore.SAnnotation;
 import de.hub.corpling.salt.saltCore.SGraph;
+import de.hub.corpling.salt.saltCore.SLayer;
 import de.hub.corpling.salt.saltCore.SNode;
 import de.hub.corpling.salt.saltCore.SProcessingAnnotation;
 import de.hub.corpling.salt.saltCore.SRelation;
@@ -60,6 +61,9 @@ public class SGraphStoringTest extends TestCase
 	 * 				|
 	 * 				node4
 	 * 		
+	 * layer1:	node1;
+	 * layer2:	node2, node 2;
+	 * layer3:	node4
 	 * @throws IOException
 	 */
 	public void testStoring1() throws IOException
@@ -229,6 +233,31 @@ public class SGraphStoringTest extends TestCase
 					rel3.setSSource(node4);
 				}
 			}
+			
+			{//putting nodes and relations into layers
+				//layer 1
+				SLayer layer1= SaltCoreFactory.eINSTANCE.createSLayer();
+				layer1.setSName("layer1");
+				this.getFixture().getSLayers().add(layer1);
+				layer1.getSNodes().add(node1);
+				layer1.getSRelations().add(rel1);
+				layer1.getSRelations().add(rel2);
+				
+				//layer 2
+				SLayer layer2= SaltCoreFactory.eINSTANCE.createSLayer();
+				layer2.setSName("layer2");
+				this.getFixture().getSLayers().add(layer2);
+				layer2.getSNodes().add(node2);
+				layer2.getSNodes().add(node3);
+				layer2.getSRelations().add(rel3);
+				
+				//layer 3
+				SLayer layer3= SaltCoreFactory.eINSTANCE.createSLayer();
+				layer3.setSName("layer3");
+				this.getFixture().getSLayers().add(layer3);
+				layer3.getSNodes().add(node4);
+				
+			}//putting nodes and relations into layers
 		}
 		
 		{//save and reload
