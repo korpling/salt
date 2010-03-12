@@ -463,20 +463,23 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 				{//regard only current relation type 		
 					parentHasSameClass= true;
 					SRelation parentRelation= (SRelation) edge;
-					for (String sType: currentRel.getSTypes())
-					{//store the source node of current relation for every type, which is not contained by parent relation
-						if (parentRelation.getSTypes().contains(sType))
-						{//don´t store source, if any parent Relation has not all types of current relation
-							storeSType.put(sType, false);
-						}//store node, if parent Relation has not all types of current relation
-						else
-						{	
-							if (storeSType.get(sType)== null)
-							{
-								storeSType.put(sType, true);
+					if (currentRel.getSTypes()!= null)
+					{	
+						for (String sType: currentRel.getSTypes())
+						{//store the source node of current relation for every type, which is not contained by parent relation
+							if (parentRelation.getSTypes().contains(sType))
+							{//don´t store source, if any parent Relation has not all types of current relation
+								storeSType.put(sType, false);
+							}//store node, if parent Relation has not all types of current relation
+							else
+							{	
+								if (storeSType.get(sType)== null)
+								{
+									storeSType.put(sType, true);
+								}
 							}
-						}
-					}//store the source node of current relation for every type, which is not contained by parent relation
+						}//store the source node of current relation for every type, which is not contained by parent relation
+					}
 				}//regard only current relation type
 			}//walk through all incoming relations of currentRelation.sSource
 			if (storeSType.size()> 0)
@@ -491,9 +494,12 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 			}
 			if (!parentHasSameClass)
 			{//there was no parent of class --> store source of current node
-				for (String sType: currentRel.getSTypes())
-				{
-					this.storeSType2SNode(sType, currentRel.getSSource());
+				if (currentRel.getSTypes()!= null)
+				{	
+					for (String sType: currentRel.getSTypes())
+					{
+						this.storeSType2SNode(sType, currentRel.getSSource());
+					}
 				}
 			}//there was no parent of class --> store source of current node
 		}//walk through all relations

@@ -32,7 +32,10 @@ public class SCorpusStructureAccessor extends SCorpusStructureModule implements 
 			{
 				if (retVal== null)
 					retVal= new BasicEList<SCorpus>();
-				retVal.add((SCorpus) sNode);
+				if (sNode instanceof SCorpus)
+					retVal.add((SCorpus) sNode);
+//				else
+//					throw new SaltException("Cannot convert the SDocument-object '"+sNode.getSName()+"' into an SCorpus-object. This exception can be caused by a document which has no corpus as parent. ");
 			}
 		}//if graph contains nodes
 		return(retVal);
