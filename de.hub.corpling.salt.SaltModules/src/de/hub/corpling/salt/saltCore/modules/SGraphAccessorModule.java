@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.EList;
 import de.hub.corpling.graph.Edge;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SNode;
+import de.hub.corpling.salt.saltCore.modules.util.CycleChecker;
 
 /**
  * This class provides some accessor methods for a given SGraph-object. It makes it easier to get some data
@@ -58,4 +59,26 @@ public class SGraphAccessorModule
 		}
 		return(retVal);
 	}
+	
+// ----------------------------- start: cycle detection
+	/**
+	 * This method finds cycles in the given SGraph object (via setSGraph). Cycles can occurs
+	 * in three different levels. 
+	 * <ol>
+	 * 	<li>ignoring the type (class) of relation and ignoring the sType</li>
+	 * 	<li>ignoring the sType of relations</li>
+	 * 	<li>searching for cycles for the type and sSType of relation</li>
+	 * </ol>
+	 * This method has no return type, therefore the notification for cycles will be done
+	 * via callbacks for every cycle. Thus makes it necessary to give this method an Object
+	 * of type CycleCheckerListener.
+	 * @param listener the listener which will be noticed if a cycle has been found.
+	 */
+	public void findCycles(CycleCheckerListener listener)
+	{
+		CycleChecker cycleChecker= new CycleChecker();
+		cycleChecker.setSGraph(this.getSGraph());
+		cycleChecker.start(listener);
+	}
+// ----------------------------- end: cycle detection
 }
