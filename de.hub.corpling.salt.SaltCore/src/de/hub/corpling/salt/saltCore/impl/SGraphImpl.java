@@ -288,6 +288,12 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 */
 	public void addSNode(SNode sNode) 
 	{
+//		if (	(sNode!= null) &&
+//				(sNode.getSName()!= null)&&
+//				(!sNode.getSName().equalsIgnoreCase("")))
+//		{
+////			sNode.setId(value);
+//		}
 		super.addNode(sNode);
 	}
 

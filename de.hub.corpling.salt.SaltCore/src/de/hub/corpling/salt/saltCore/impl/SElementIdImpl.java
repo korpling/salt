@@ -142,7 +142,34 @@ public class SElementIdImpl extends IdentifierImpl implements SElementId {
 	{
 		super.setId(newSElementPath.toString());
 	}
-
+	
+	/**
+	 * Checks if a given SElementId has the same entries as this SElementId-object. 
+	 * @return if all values are equal.
+	 */
+	@Override
+	public boolean equals(Object obj)
+	{
+		boolean retVal= false;
+		if (obj instanceof SElementId)
+		{	
+			SElementId sElementId2= (SElementId) obj;
+			if (this.getSId()!= null)
+			{
+				if (this.getSId().equalsIgnoreCase(sElementId2.getSId()))
+					retVal= true;
+				else return(false);
+			}
+			else
+			{
+				if (sElementId2== null)
+					retVal= true;
+				else return(false);
+			}
+		}
+		return(retVal);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
