@@ -173,6 +173,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 // ============================ end: handling relations
 // ============================ start: handling nodes
+		
 	/**
 	 * Calls the super method an puts the given node into a node type index.
 	 * an exception will be thrown.
@@ -351,6 +352,15 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		return(retVal);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addSNode(SNode sNode) 
+	{
+		super.addNode(sNode);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
