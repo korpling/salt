@@ -115,7 +115,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 				else ((SRelation)edge).setSName("rel"+ (this.getSRelations().size()+1));
 			}
 		}	
-		
+		if (	(((SRelation)edge).getSId()== null)||
+				(((SRelation)edge).getSId().equalsIgnoreCase("")))
+		{	
+			((SRelation)edge).setSId("salt:/"+((SRelation)edge).getSName());
+		}
 		super.basicAddEdge(edge);
 		
 		String slotId= null;
