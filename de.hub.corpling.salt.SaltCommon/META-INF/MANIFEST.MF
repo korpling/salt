@@ -22,6 +22,7 @@ Import-Package: de.hub.corpling.graph,
  de.hub.corpling.salt.saltExceptions
 Export-Package: de.hub.corpling.salt.saltCommon,
  de.hub.corpling.salt.saltCommon.impl,
+ de.hub.corpling.salt.saltCommon.resources,
  de.hub.corpling.salt.saltCommon.sCorpusStructure,
  de.hub.corpling.salt.saltCommon.sCorpusStructure.impl,
  de.hub.corpling.salt.saltCommon.sCorpusStructure.util,
