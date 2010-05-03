@@ -22,6 +22,10 @@ public class SCorpusStructureAccessor extends SCorpusStructureModule implements 
 	{
 		if (this.getSCorpusGraph()== null)
 			throw new SaltModuleException("Cannot return root corpora, because no corpus graph is set. Please call setSCorpusGraph() first.");
+		if (	(this.getSCorpusGraph().getSCorpora()== null)||
+				(this.getSCorpusGraph().getSCorpora().size()== 0))
+			return(null);
+			
 		EList<SCorpus> retVal= null;
 		SGraphAccessorModule acc= new SGraphAccessorModule();
 		acc.setSGraph(this.getSCorpusGraph());
@@ -37,7 +41,7 @@ public class SCorpusStructureAccessor extends SCorpusStructureModule implements 
 //				else
 //					throw new SaltException("Cannot convert the SDocument-object '"+sNode.getSName()+"' into an SCorpus-object. This exception can be caused by a document which has no corpus as parent. ");
 			}
-		}//if graph contains nodes
+		}
 		return(retVal);
 	}
 

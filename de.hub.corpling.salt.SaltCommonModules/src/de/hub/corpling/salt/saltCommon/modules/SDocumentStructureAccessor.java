@@ -2,7 +2,6 @@ package de.hub.corpling.salt.saltCommon.modules;
 
 import java.util.Collections;
 import java.util.Hashtable;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -171,6 +170,42 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		potPair= this.currPOTPair;
 		return(potPair);
 	}
+	
+	/**
+	 * Returns all SToken objects of the setted sDocumentGraph, which refers by STextualRelation
+	 * to the given STextualDS-object.
+	 * @param sTextualDS - text to which returned tokens shall belong
+	 * @return tokens which refer to given text-object
+	 */
+	public EList<SToken> getSTokens(STextualDS sTextualDS)
+	{
+		if (this.getSDocumentGraph()== null)
+			new SaltModuleException("Cannot start method 'getSTokens(STextualDS)' please set the document graph first.");
+		
+		EList<SToken> retVal= null;
+		
+		if (sTextualDS!= null)
+		{
+			EList<Edge> inEdges= this.getSDocumentGraph().getInEdges(sTextualDS.getSId());
+			if (	(inEdges!= null) &&
+					(inEdges.size()> 0))
+			{
+				retVal= new BasicEList<SToken>();
+				for (Edge edge: inEdges)
+				{// walk through all edges
+					if (edge instanceof STextualRelation)
+					{
+						retVal.add(((STextualRelation)edge).getSToken());
+					}
+				}
+			}
+		}
+		//set retVal to null, if it has no entry
+		if (	(retVal!= null) &&
+				(retVal.size()== 0))
+				retVal= null;
+		return(retVal);
+	}
 // ======================== start: getting text interval ========================
 	/**
 	 * Returns a pair of starting and ending point of text corresponding to the given SNode-object.
@@ -271,24 +306,26 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	}
 //========================= end: getting overlapped text =========================
 	/**
-	 * Returns true, if the given list of tokens is continuous in order of start position
-	 * related to textual resource.
-	 * @param sTokenList list to check against sTokens of sDocumentGraph
+	 * Returns true, if the given list of tokens (subSTokenList) is continuous in order of start position
+	 * related with respect to the given fullSTokenList.
+	 * @param subSTokenList list to check against fullSTokenList
+	 * @param fullSTokenList list which contains all token in correct order
 	 * @return true, if list is continuous
 	 */
-	public Boolean getContinuously(EList<SToken> sTokenList)
+	public Boolean getContinuously(EList<SToken> subSTokenList, EList<SToken> fullSTokenList)
 	{
+		if (this.getSDocumentGraph()== null)
+			new SaltModuleException("Cannot start method 'getContinuously(EList<SToken>, EList<SToken>)' please set the document graph first.");
+		
 		Boolean retVal= null;
 		//compute sorted list of overlapped tokens by the given sStructuredNode
-		EList<SToken> overlappedSTokens= getSTokensSortedByText(sTokenList);
-		//compute a sort list of all tokens
-		EList<SToken> allTokens= getSTokensSortedByText();
-		
+		EList<SToken> overlappedSTokens= getSTokensSortedByText(subSTokenList);
+
 		retVal= true;
 		Integer posOfSTokenInAllTokens= null;
 		for (SToken sToken: overlappedSTokens)
 		{
-			Integer newPosition= allTokens.indexOf(sToken);
+			Integer newPosition= fullSTokenList.indexOf(sToken);
 			if (posOfSTokenInAllTokens!= null)
 			{	
 				if (newPosition != posOfSTokenInAllTokens +1)
@@ -303,6 +340,17 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		return(retVal);
 	}
 	
+	/**
+	 * Returns true, if the given list of tokens is continuous in order of start position
+	 * related to textual resource.
+	 * @param sTokenList list to check against sTokens of sDocumentGraph
+	 * @return true, if list is continuous
+	 */
+	public Boolean getContinuously(EList<SToken> sTokenList)
+	{
+		return(this.getContinuously(sTokenList, this.getSTokensSortedByText()));
+	}
+	
 	
 	/**
 	 * Returns all SToken-objects contained in given list in order  
@@ -314,26 +362,45 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		if (this.getSDocumentGraph()== null)
 			new SaltModuleException("Cannot start method please set the document graph first.");
 		
-		STokenSStartComparator comparator= new STokenSStartComparator();
-		comparator.setsDocumentGraph(this.getSDocumentGraph());
-		EList<SToken> retVal= new BasicEList<SToken>(sTokens2sort);
-		//sort tokens
-		Collections.sort(retVal, comparator);
-		
+		EList<SToken> retVal= null;
+		if (sTokens2sort!= null)
+		{	
+			STokenSStartComparator comparator= new STokenSStartComparator();
+			comparator.setsDocumentGraph(this.getSDocumentGraph());
+			retVal= new BasicEList<SToken>(sTokens2sort);
+			//sort tokens
+			Collections.sort(retVal, comparator);
+		}
 		return(retVal);
 	}
 	
 	/**
 	 * Returns all SToken-objects contained by settet SDocumentGraph in order 
-	 * of start-position of text. This method will sort the list of tokens by bubble sort.
+	 * of start-position and in order of STextualDS-object in SDocumentGraph-object. If there are two texts
+	 * in the graph, first all tokens of text one and last all tokens of text2 will be stored in returned 
+	 * list.  
+	 * This method will sort the list of tokens by bubble sort.
 	 * @return list of tokens in order of left text position
 	 */
 	public EList<SToken> getSTokensSortedByText()
 	{
+		EList<SToken> retVal= null;
 		if (this.getSDocumentGraph()== null)
 			new SaltModuleException("Cannot start method please set the document graph first.");
 		
-		return(this.getSTokensSortedByText(this.getSDocumentGraph().getSTokens()));
+		if (	(this.getSDocumentGraph().getSTextualDSs()!= null)&&
+				(this.getSDocumentGraph().getSTextualDSs().size()> 0))
+		{
+			retVal= new BasicEList<SToken>();
+			for (STextualDS sTextualDS: this.getSDocumentGraph().getSTextualDSs())
+			{	
+				EList<SToken> sTokens= this.getSTokens(sTextualDS);
+				if (sTokens!= null)
+					retVal.addAll(this.getSTokensSortedByText(sTokens));
+			}
+		}
+		
+		return(retVal);
 	}
 //========================= start: getting roots for given Relation type (Class) =========================
 	
@@ -614,7 +681,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	/**
 	 * stores a list of sType of current relation in case of ROOTS_BY_RELATION_STYPE
 	 */
-	private EList<String> currSTypes= null;
+//	private EList<String> currSTypes= null;
 	
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_MODE traversalMode,
