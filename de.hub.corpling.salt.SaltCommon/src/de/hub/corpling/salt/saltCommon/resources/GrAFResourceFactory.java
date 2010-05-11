@@ -9,6 +9,7 @@ public class GrAFResourceFactory extends ResourceFactoryImpl
 {
 	public Resource createResource(URI uri)
 	{
+		System.out.println("=============> GrAFResourceFactory.createResource() was called");
 		Resource resource=new GrAFResource();
 		resource.setURI(uri);
 		return(resource);

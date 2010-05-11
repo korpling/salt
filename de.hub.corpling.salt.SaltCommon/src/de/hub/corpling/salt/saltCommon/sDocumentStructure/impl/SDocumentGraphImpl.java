@@ -138,16 +138,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 					(((SRelation)edge).getSName().equalsIgnoreCase("")))
 			{
 				if ( edge instanceof STextualRelation)
-					((SRelation)edge).setSName("textRel"+ (this.getSTextualRelations().size()+1));
+					((SRelation)edge).setSName("sTextRel"+ (this.getSTextualRelations().size()+1));
 				else if ( edge instanceof STimelineRelation)
-					((SRelation)edge).setSName("timeRel"+ (this.getSTimelineRelations().size()+1));
+					((SRelation)edge).setSName("sTimeRel"+ (this.getSTimelineRelations().size()+1));
 				else if ( edge instanceof SSpanningRelation)
-					((SRelation)edge).setSName("spanRel"+ (this.getSSpanningRelations().size()+1));
+					((SRelation)edge).setSName("sSpanRel"+ (this.getSSpanningRelations().size()+1));
 				else if ( edge instanceof SPointingRelation)
-					((SRelation)edge).setSName("pointingRel"+ (this.getSPointingRelations().size()+1));
+					((SRelation)edge).setSName("sPointingRel"+ (this.getSPointingRelations().size()+1));
 				else if ( edge instanceof SDominanceRelation)
-					((SRelation)edge).setSName("domRel"+ (this.getSDominanceRelations().size()+1));
-				else ((SRelation)edge).setSName("rel"+ (this.getSRelations().size()+1));
+					((SRelation)edge).setSName("sDomRel"+ (this.getSDominanceRelations().size()+1));
+				else ((SRelation)edge).setSName("sRel"+ (this.getSRelations().size()+1));
 			}
 		}	
 		
@@ -189,16 +189,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 					(((SNode)node).getSName().equalsIgnoreCase("")))
 			{
 				if ( node instanceof STextualDS)
-					((SNode)node).setSName("text"+ (this.getSTextualDSs().size()+1));
+					((SNode)node).setSName("sText"+ (this.getSTextualDSs().size()+1));
 				else if ( node instanceof SToken)
-					((SNode)node).setSName("tok"+ (this.getSTokens().size()+1));
+					((SNode)node).setSName("sTok"+ (this.getSTokens().size()+1));
 				else if ( node instanceof STimeline)
-					((SNode)node).setSName("timeline"+ (this.getSTokens().size()+1));
+					((SNode)node).setSName("sTimeline"+ (this.getSTokens().size()+1));
 				else if ( node instanceof SSpan)
-					((SNode)node).setSName("span"+ (this.getSSpans().size()+1));
+					((SNode)node).setSName("sSpan"+ (this.getSSpans().size()+1));
 				else if ( node instanceof SStructure)
 					((SNode)node).setSName("structure"+ (this.getSStructures().size()+1));
-				else ((SNode)node).setSName("node"+ (this.getSNodes().size()+1));
+				else ((SNode)node).setSName("sNode"+ (this.getSNodes().size()+1));
 			}
 		}	
 		

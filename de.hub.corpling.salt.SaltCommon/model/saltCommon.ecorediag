@@ -330,6 +330,10 @@
             <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/STIME_OVERLAPPING"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_kyuBsagiEd6LBeof3wd3ig"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_lV6HgFrNEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/STYPE_SRELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_lV6HgVrNEd-nlKwtzNGozg"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_jdPUQqaoEd6xVd51Lpyhfw"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_jdPUQ6aoEd6xVd51Lpyhfw"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_jdPURKaoEd6xVd51Lpyhfw"/>
@@ -441,6 +445,49 @@
         <styles xmi:type="notation:ShapeStyle" xmi:id="_eUlxkagrEd6LBeof3wd3ig" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
         <element xmi:type="ecore:EClass" href="saltCommon.ecore#//sDocumentStructure/SDominanceRelation"/>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eUlxkqgrEd6LBeof3wd3ig" x="390" y="1013" width="150" height="50"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_HKL-gVrHEd-nlKwtzNGozg" type="2005">
+        <children xmi:type="notation:Node" xmi:id="_HKSFIFrHEd-nlKwtzNGozg" type="4005"/>
+        <children xmi:type="notation:Node" xmi:id="_HKSFIVrHEd-nlKwtzNGozg" type="5006">
+          <children xmi:type="notation:Node" xmi:id="_LJj-IFrHEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/STEXTUAL_DS"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_LJj-IVrHEd-nlKwtzNGozg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_Rdc-EFrHEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/STOKEN"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_Rdc-EVrHEd-nlKwtzNGozg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_TzTbIFrHEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SSPAN"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TzTbIVrHEd-nlKwtzNGozg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_VtczoFrHEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SSTRUCTURE"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_VtczoVrHEd-nlKwtzNGozg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_ZUADkFrHEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/STEXTUAL_RELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_ZUADkVrHEd-nlKwtzNGozg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_ciGXQFrHEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SSPANNING_RELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_ciGXQVrHEd-nlKwtzNGozg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_fYadEFrHEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SDOMINANCE_RELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_fYadEVrHEd-nlKwtzNGozg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_LCsrsFrIEd-nlKwtzNGozg" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SPOINTING_RELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_LCsrsVrIEd-nlKwtzNGozg"/>
+          </children>
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_HKSFIlrHEd-nlKwtzNGozg"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_HKSFI1rHEd-nlKwtzNGozg"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_HKSFJFrHEd-nlKwtzNGozg"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_HKL-glrHEd-nlKwtzNGozg" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+        <element xmi:type="ecore:EEnum" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HKL-g1rHEd-nlKwtzNGozg" x="27" y="270" width="171"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ipRXlojWEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_ipRXl4jWEd6X5oQchPkMiQ"/>

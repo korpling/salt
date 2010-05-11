@@ -17,6 +17,7 @@ import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 import de.hub.corpling.salt.saltCore.SNode;
 
@@ -136,6 +137,10 @@ public class SCorpusStructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSFeaturableElement(SFeaturableElement object) {
 				return createSFeaturableElementAdapter();
+			}
+			@Override
+			public Adapter caseSMetaAnnotatableElement(SMetaAnnotatableElement object) {
+				return createSMetaAnnotatableElementAdapter();
 			}
 			@Override
 			public Adapter caseSGraph(SGraph object) {
@@ -356,6 +361,20 @@ public class SCorpusStructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSFeaturableElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SMetaAnnotatableElement <em>SMeta Annotatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hub.corpling.salt.saltCore.SMetaAnnotatableElement
+	 * @generated
+	 */
+	public Adapter createSMetaAnnotatableElementAdapter() {
 		return null;
 	}
 

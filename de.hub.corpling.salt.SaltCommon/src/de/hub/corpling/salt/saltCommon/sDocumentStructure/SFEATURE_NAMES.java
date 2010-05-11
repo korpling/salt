@@ -70,7 +70,15 @@ public enum SFEATURE_NAMES implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	STIME_OVERLAPPING(5, "STIME_OVERLAPPING", "STIME_OVERLAPPING");
+	STIME_OVERLAPPING(5, "STIME_OVERLAPPING", "STIME_OVERLAPPING"), /**
+	 * The '<em><b>STYPE SRELATION</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #STYPE_SRELATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	STYPE_SRELATION(6, "STYPE_SRELATION", "SType");
 
 	/**
 	 * The '<em><b>STEXT OVERLAPPING</b></em>' literal value.
@@ -163,6 +171,21 @@ public enum SFEATURE_NAMES implements Enumerator {
 	public static final int STIME_OVERLAPPING_VALUE = 5;
 
 	/**
+	 * The '<em><b>STYPE SRELATION</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>STYPE SRELATION</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #STYPE_SRELATION
+	 * @model literal="SType"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STYPE_SRELATION_VALUE = 6;
+
+	/**
 	 * An array of all the '<em><b>SFEATURE NAMES</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,6 +199,7 @@ public enum SFEATURE_NAMES implements Enumerator {
 			STEXT,
 			SDATA,
 			STIME_OVERLAPPING,
+			STYPE_SRELATION,
 		};
 
 	/**
@@ -232,6 +256,7 @@ public enum SFEATURE_NAMES implements Enumerator {
 			case STEXT_VALUE: return STEXT;
 			case SDATA_VALUE: return SDATA;
 			case STIME_OVERLAPPING_VALUE: return STIME_OVERLAPPING;
+			case STYPE_SRELATION_VALUE: return STYPE_SRELATION;
 		}
 		return null;
 	}

@@ -17,6 +17,7 @@ import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 import de.hub.corpling.salt.saltCore.SNode;
 
@@ -111,6 +112,7 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sCorpusGraph);
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusGraph);
 				if (result == null) result = caseSFeaturableElement(sCorpusGraph);
+				if (result == null) result = caseSMetaAnnotatableElement(sCorpusGraph);
 				if (result == null) result = caseLabelableElement(sCorpusGraph);
 				if (result == null) result = caseIdentifiableElement(sCorpusGraph);
 				if (result == null) result = defaultCase(theEObject);
@@ -126,6 +128,7 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sDocument);
 				if (result == null) result = caseSProcessingAnnotatableElement(sDocument);
 				if (result == null) result = caseSFeaturableElement(sDocument);
+				if (result == null) result = caseSMetaAnnotatableElement(sDocument);
 				if (result == null) result = caseLabelableElement(sDocument);
 				if (result == null) result = caseIdentifiableElement(sDocument);
 				if (result == null) result = defaultCase(theEObject);
@@ -141,6 +144,7 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sCorpus);
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpus);
 				if (result == null) result = caseSFeaturableElement(sCorpus);
+				if (result == null) result = caseSMetaAnnotatableElement(sCorpus);
 				if (result == null) result = caseLabelableElement(sCorpus);
 				if (result == null) result = caseIdentifiableElement(sCorpus);
 				if (result == null) result = defaultCase(theEObject);
@@ -156,6 +160,7 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sCorpusRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusRelation);
 				if (result == null) result = caseSFeaturableElement(sCorpusRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sCorpusRelation);
 				if (result == null) result = caseLabelableElement(sCorpusRelation);
 				if (result == null) result = caseIdentifiableElement(sCorpusRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -171,6 +176,7 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseSFeaturableElement(sCorpusDocumentRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseLabelableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseIdentifiableElement(sCorpusDocumentRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -372,6 +378,21 @@ public class SCorpusStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSFeaturableElement(SFeaturableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SMeta Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SMeta Annotatable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSMetaAnnotatableElement(SMetaAnnotatableElement object) {
 		return null;
 	}
 

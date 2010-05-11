@@ -157,6 +157,7 @@
       <eLiterals name="STEXT" value="3"/>
       <eLiterals name="SDATA" value="4"/>
       <eLiterals name="STIME_OVERLAPPING" value="5"/>
+      <eLiterals name="STYPE_SRELATION" value="6" literal="SType"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="STextOverlappingRelation" abstract="true"
         eSuperTypes="../../de.hub.corpling.salt.SaltCore/model/saltCore.ecore#//SRelation">
@@ -186,6 +187,16 @@
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sDominanceRelations"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="STYPE_NAME">
+      <eLiterals name="STEXTUAL_DS" literal="STextualDS"/>
+      <eLiterals name="STOKEN" value="1" literal="SToken"/>
+      <eLiterals name="SSPAN" value="2" literal="SSpan"/>
+      <eLiterals name="SSTRUCTURE" value="3" literal="SStructure"/>
+      <eLiterals name="STEXTUAL_RELATION" value="4" literal="STextualRelation"/>
+      <eLiterals name="SSPANNING_RELATION" value="5" literal="SSpanningRelation"/>
+      <eLiterals name="SDOMINANCE_RELATION" value="6" literal="SDominanceRelation"/>
+      <eLiterals name="SPOINTING_RELATION" value="7" literal="SPointingRelation"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

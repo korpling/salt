@@ -145,6 +145,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOCUMENT_GRAPH__NUM_OF_EDGES = SaltCorePackage.SGRAPH__NUM_OF_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__LAYERS = SaltCorePackage.SGRAPH__LAYERS;
+
+	/**
+	 * The feature id for the '<em><b>Num Of Layers</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__NUM_OF_LAYERS = SaltCorePackage.SGRAPH__NUM_OF_LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,6 +226,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOCUMENT_GRAPH__SFEATURES = SaltCorePackage.SGRAPH__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__SMETA_ANNOTATIONS = SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SRelations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -224,6 +251,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SDOCUMENT_GRAPH__SNODES = SaltCorePackage.SGRAPH__SNODES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__SLAYERS = SaltCorePackage.SGRAPH__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SDocument</b></em>' reference.
@@ -381,6 +417,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSEQUENTIAL_DS__GRAPH = SaltCorePackage.SNODE__GRAPH;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_DS__LAYERS = SaltCorePackage.SNODE__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -444,6 +489,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSEQUENTIAL_DS__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_DS__SMETA_ANNOTATIONS = SaltCorePackage.SNODE__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -451,6 +505,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSEQUENTIAL_DS__SGRAPH = SaltCorePackage.SNODE__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_DS__SLAYERS = SaltCorePackage.SNODE__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SData</b></em>' attribute.
@@ -517,6 +580,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXTUAL_DS__GRAPH = SSEQUENTIAL_DS__GRAPH;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_DS__LAYERS = SSEQUENTIAL_DS__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -580,6 +652,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXTUAL_DS__SFEATURES = SSEQUENTIAL_DS__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_DS__SMETA_ANNOTATIONS = SSEQUENTIAL_DS__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -587,6 +668,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STEXTUAL_DS__SGRAPH = SSEQUENTIAL_DS__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_DS__SLAYERS = SSEQUENTIAL_DS__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SData</b></em>' attribute.
@@ -671,6 +761,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSTRUCTURED_NODE__GRAPH = SaltCorePackage.SNODE__GRAPH;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__LAYERS = SaltCorePackage.SNODE__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -734,6 +833,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSTRUCTURED_NODE__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SMETA_ANNOTATIONS = SaltCorePackage.SNODE__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -741,6 +849,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSTRUCTURED_NODE__SGRAPH = SaltCorePackage.SNODE__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SLAYERS = SaltCorePackage.SNODE__SLAYERS;
 
 	/**
 	 * The number of structural features of the '<em>SStructured Node</em>' class.
@@ -796,6 +913,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STOKEN__GRAPH = SSTRUCTURED_NODE__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STOKEN__LAYERS = SSTRUCTURED_NODE__LAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -861,6 +987,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STOKEN__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STOKEN__SMETA_ANNOTATIONS = SSTRUCTURED_NODE__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -868,6 +1003,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STOKEN__SGRAPH = SSTRUCTURED_NODE__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STOKEN__SLAYERS = SSTRUCTURED_NODE__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
@@ -962,6 +1106,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSEQUENTIAL_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_RELATION__LAYERS = SaltCorePackage.SRELATION__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1025,6 +1178,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSEQUENTIAL_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_RELATION__SMETA_ANNOTATIONS = SaltCorePackage.SRELATION__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1050,6 +1212,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSEQUENTIAL_RELATION__SGRAPH = SaltCorePackage.SRELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_RELATION__STYPES = SaltCorePackage.SRELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_RELATION__SLAYERS = SaltCorePackage.SRELATION__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SStart</b></em>' attribute.
@@ -1133,6 +1313,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXTUAL_RELATION__TARGET = SSEQUENTIAL_RELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_RELATION__LAYERS = SSEQUENTIAL_RELATION__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1196,6 +1385,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXTUAL_RELATION__SFEATURES = SSEQUENTIAL_RELATION__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_RELATION__SMETA_ANNOTATIONS = SSEQUENTIAL_RELATION__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1221,6 +1419,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STEXTUAL_RELATION__SGRAPH = SSEQUENTIAL_RELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_RELATION__STYPES = SSEQUENTIAL_RELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_RELATION__SLAYERS = SSEQUENTIAL_RELATION__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SStart</b></em>' attribute.
@@ -1324,6 +1540,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE__GRAPH = SSEQUENTIAL_DS__GRAPH;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE__LAYERS = SSEQUENTIAL_DS__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1387,6 +1612,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE__SFEATURES = SSEQUENTIAL_DS__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE__SMETA_ANNOTATIONS = SSEQUENTIAL_DS__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1394,6 +1628,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STIMELINE__SGRAPH = SSEQUENTIAL_DS__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE__SLAYERS = SSEQUENTIAL_DS__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SData</b></em>' attribute.
@@ -1497,6 +1740,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE_RELATION__TARGET = SSEQUENTIAL_RELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE_RELATION__LAYERS = SSEQUENTIAL_RELATION__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1560,6 +1812,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE_RELATION__SFEATURES = SSEQUENTIAL_RELATION__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE_RELATION__SMETA_ANNOTATIONS = SSEQUENTIAL_RELATION__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1585,6 +1846,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STIMELINE_RELATION__SGRAPH = SSEQUENTIAL_RELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE_RELATION__STYPES = SSEQUENTIAL_RELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE_RELATION__SLAYERS = SSEQUENTIAL_RELATION__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SStart</b></em>' attribute.
@@ -1688,6 +1967,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSPAN__GRAPH = SSTRUCTURED_NODE__GRAPH;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPAN__LAYERS = SSTRUCTURED_NODE__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1751,6 +2039,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSPAN__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPAN__SMETA_ANNOTATIONS = SSTRUCTURED_NODE__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1758,6 +2055,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSPAN__SGRAPH = SSTRUCTURED_NODE__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPAN__SLAYERS = SSTRUCTURED_NODE__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
@@ -1842,6 +2148,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSPANNING_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPANNING_RELATION__LAYERS = SaltCorePackage.SRELATION__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1905,6 +2220,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSPANNING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPANNING_RELATION__SMETA_ANNOTATIONS = SaltCorePackage.SRELATION__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1930,6 +2254,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSPANNING_RELATION__SGRAPH = SaltCorePackage.SRELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPANNING_RELATION__STYPES = SaltCorePackage.SRELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPANNING_RELATION__SLAYERS = SaltCorePackage.SRELATION__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SToken</b></em>' reference.
@@ -2033,6 +2375,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXT_OVERLAPPING_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXT_OVERLAPPING_RELATION__LAYERS = SaltCorePackage.SRELATION__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2096,6 +2447,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXT_OVERLAPPING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXT_OVERLAPPING_RELATION__SMETA_ANNOTATIONS = SaltCorePackage.SRELATION__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2121,6 +2481,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STEXT_OVERLAPPING_RELATION__SGRAPH = SaltCorePackage.SRELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXT_OVERLAPPING_RELATION__STYPES = SaltCorePackage.SRELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXT_OVERLAPPING_RELATION__SLAYERS = SaltCorePackage.SRELATION__SLAYERS;
 
 	/**
 	 * The number of structural features of the '<em>SText Overlapping Relation</em>' class.
@@ -2196,6 +2574,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIME_OVERLAPPING_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__LAYERS = SaltCorePackage.SRELATION__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2259,6 +2646,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIME_OVERLAPPING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SMETA_ANNOTATIONS = SaltCorePackage.SRELATION__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2284,6 +2680,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STIME_OVERLAPPING_RELATION__SGRAPH = SaltCorePackage.SRELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__STYPES = SaltCorePackage.SRELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SLAYERS = SaltCorePackage.SRELATION__SLAYERS;
 
 	/**
 	 * The number of structural features of the '<em>STime Overlapping Relation</em>' class.
@@ -2339,6 +2753,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSTRUCTURE__GRAPH = SSTRUCTURED_NODE__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__LAYERS = SSTRUCTURED_NODE__LAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -2404,6 +2827,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSTRUCTURE__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SMETA_ANNOTATIONS = SSTRUCTURED_NODE__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SGraph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2411,6 +2843,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSTRUCTURE__SGRAPH = SSTRUCTURED_NODE__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SLAYERS = SSTRUCTURED_NODE__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
@@ -2495,6 +2936,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SPOINTING_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__LAYERS = SaltCorePackage.SRELATION__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2558,6 +3008,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SPOINTING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SMETA_ANNOTATIONS = SaltCorePackage.SRELATION__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2583,6 +3042,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SPOINTING_RELATION__SGRAPH = SaltCorePackage.SRELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__STYPES = SaltCorePackage.SRELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SLAYERS = SaltCorePackage.SRELATION__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SStructured Source</b></em>' reference.
@@ -2685,6 +3162,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOMINANCE_RELATION__TARGET = STEXT_OVERLAPPING_RELATION__TARGET;
 
 	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__LAYERS = STEXT_OVERLAPPING_RELATION__LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2748,6 +3234,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOMINANCE_RELATION__SFEATURES = STEXT_OVERLAPPING_RELATION__SFEATURES;
 
 	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SMETA_ANNOTATIONS = STEXT_OVERLAPPING_RELATION__SMETA_ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>SSource</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2773,6 +3268,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SDOMINANCE_RELATION__SGRAPH = STEXT_OVERLAPPING_RELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__STYPES = STEXT_OVERLAPPING_RELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SLAYERS = STEXT_OVERLAPPING_RELATION__SLAYERS;
 
 	/**
 	 * The feature id for the '<em><b>SStructure</b></em>' reference.
@@ -2819,6 +3332,17 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 */
 	int SFEATURE_NAMES = 16;
+
+
+	/**
+	 * The meta object id for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME <em>STYPE NAME</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSTYPE_NAME()
+	 * @generated
+	 */
+	int STYPE_NAME = 17;
 
 
 	/**
@@ -3388,6 +3912,16 @@ public interface SDocumentStructurePackage extends EPackage {
 	EEnum getSFEATURE_NAMES();
 
 	/**
+	 * Returns the meta object for enum '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME <em>STYPE NAME</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>STYPE NAME</em>'.
+	 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME
+	 * @generated
+	 */
+	EEnum getSTYPE_NAME();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3866,6 +4400,16 @@ public interface SDocumentStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum SFEATURE_NAMES = eINSTANCE.getSFEATURE_NAMES();
+
+		/**
+		 * The meta object literal for the '{@link de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME <em>STYPE NAME</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME
+		 * @see de.hub.corpling.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSTYPE_NAME()
+		 * @generated
+		 */
+		EEnum STYPE_NAME = eINSTANCE.getSTYPE_NAME();
 
 	}
 

@@ -17,6 +17,7 @@ import de.hub.corpling.salt.saltCore.SAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SFeaturableElement;
 import de.hub.corpling.salt.saltCore.SGraph;
 import de.hub.corpling.salt.saltCore.SIdentifiableElement;
+import de.hub.corpling.salt.saltCore.SMetaAnnotatableElement;
 import de.hub.corpling.salt.saltCore.SNamedElement;
 
 import de.hub.corpling.salt.saltCore.SNode;
@@ -111,6 +112,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sDocumentGraph);
 				if (result == null) result = caseSProcessingAnnotatableElement(sDocumentGraph);
 				if (result == null) result = caseSFeaturableElement(sDocumentGraph);
+				if (result == null) result = caseSMetaAnnotatableElement(sDocumentGraph);
 				if (result == null) result = caseLabelableElement(sDocumentGraph);
 				if (result == null) result = caseIdentifiableElement(sDocumentGraph);
 				if (result == null) result = defaultCase(theEObject);
@@ -127,6 +129,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sTextualDS);
 				if (result == null) result = caseSProcessingAnnotatableElement(sTextualDS);
 				if (result == null) result = caseSFeaturableElement(sTextualDS);
+				if (result == null) result = caseSMetaAnnotatableElement(sTextualDS);
 				if (result == null) result = caseLabelableElement(sTextualDS);
 				if (result == null) result = caseIdentifiableElement(sTextualDS);
 				if (result == null) result = defaultCase(theEObject);
@@ -143,6 +146,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sToken);
 				if (result == null) result = caseSProcessingAnnotatableElement(sToken);
 				if (result == null) result = caseSFeaturableElement(sToken);
+				if (result == null) result = caseSMetaAnnotatableElement(sToken);
 				if (result == null) result = caseLabelableElement(sToken);
 				if (result == null) result = caseIdentifiableElement(sToken);
 				if (result == null) result = defaultCase(theEObject);
@@ -160,6 +164,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sTextualRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sTextualRelation);
 				if (result == null) result = caseSFeaturableElement(sTextualRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sTextualRelation);
 				if (result == null) result = caseLabelableElement(sTextualRelation);
 				if (result == null) result = caseIdentifiableElement(sTextualRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -175,6 +180,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sSequentialRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sSequentialRelation);
 				if (result == null) result = caseSFeaturableElement(sSequentialRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sSequentialRelation);
 				if (result == null) result = caseLabelableElement(sSequentialRelation);
 				if (result == null) result = caseIdentifiableElement(sSequentialRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -190,6 +196,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sSequentialDS);
 				if (result == null) result = caseSProcessingAnnotatableElement(sSequentialDS);
 				if (result == null) result = caseSFeaturableElement(sSequentialDS);
+				if (result == null) result = caseSMetaAnnotatableElement(sSequentialDS);
 				if (result == null) result = caseLabelableElement(sSequentialDS);
 				if (result == null) result = caseIdentifiableElement(sSequentialDS);
 				if (result == null) result = defaultCase(theEObject);
@@ -206,6 +213,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sTimeline);
 				if (result == null) result = caseSProcessingAnnotatableElement(sTimeline);
 				if (result == null) result = caseSFeaturableElement(sTimeline);
+				if (result == null) result = caseSMetaAnnotatableElement(sTimeline);
 				if (result == null) result = caseLabelableElement(sTimeline);
 				if (result == null) result = caseIdentifiableElement(sTimeline);
 				if (result == null) result = defaultCase(theEObject);
@@ -223,6 +231,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sTimelineRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sTimelineRelation);
 				if (result == null) result = caseSFeaturableElement(sTimelineRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sTimelineRelation);
 				if (result == null) result = caseLabelableElement(sTimelineRelation);
 				if (result == null) result = caseIdentifiableElement(sTimelineRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -239,6 +248,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sSpan);
 				if (result == null) result = caseSProcessingAnnotatableElement(sSpan);
 				if (result == null) result = caseSFeaturableElement(sSpan);
+				if (result == null) result = caseSMetaAnnotatableElement(sSpan);
 				if (result == null) result = caseLabelableElement(sSpan);
 				if (result == null) result = caseIdentifiableElement(sSpan);
 				if (result == null) result = defaultCase(theEObject);
@@ -256,6 +266,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sSpanningRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sSpanningRelation);
 				if (result == null) result = caseSFeaturableElement(sSpanningRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sSpanningRelation);
 				if (result == null) result = caseLabelableElement(sSpanningRelation);
 				if (result == null) result = caseIdentifiableElement(sSpanningRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -271,6 +282,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sTextOverlappingRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sTextOverlappingRelation);
 				if (result == null) result = caseSFeaturableElement(sTextOverlappingRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sTextOverlappingRelation);
 				if (result == null) result = caseLabelableElement(sTextOverlappingRelation);
 				if (result == null) result = caseIdentifiableElement(sTextOverlappingRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -286,6 +298,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sTimeOverlappingRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sTimeOverlappingRelation);
 				if (result == null) result = caseSFeaturableElement(sTimeOverlappingRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sTimeOverlappingRelation);
 				if (result == null) result = caseLabelableElement(sTimeOverlappingRelation);
 				if (result == null) result = caseIdentifiableElement(sTimeOverlappingRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -301,6 +314,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sStructuredNode);
 				if (result == null) result = caseSProcessingAnnotatableElement(sStructuredNode);
 				if (result == null) result = caseSFeaturableElement(sStructuredNode);
+				if (result == null) result = caseSMetaAnnotatableElement(sStructuredNode);
 				if (result == null) result = caseLabelableElement(sStructuredNode);
 				if (result == null) result = caseIdentifiableElement(sStructuredNode);
 				if (result == null) result = defaultCase(theEObject);
@@ -317,6 +331,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sStructure);
 				if (result == null) result = caseSProcessingAnnotatableElement(sStructure);
 				if (result == null) result = caseSFeaturableElement(sStructure);
+				if (result == null) result = caseSMetaAnnotatableElement(sStructure);
 				if (result == null) result = caseLabelableElement(sStructure);
 				if (result == null) result = caseIdentifiableElement(sStructure);
 				if (result == null) result = defaultCase(theEObject);
@@ -332,6 +347,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sPointingRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sPointingRelation);
 				if (result == null) result = caseSFeaturableElement(sPointingRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sPointingRelation);
 				if (result == null) result = caseLabelableElement(sPointingRelation);
 				if (result == null) result = caseIdentifiableElement(sPointingRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -349,6 +365,7 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = caseSIdentifiableElement(sDominanceRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sDominanceRelation);
 				if (result == null) result = caseSFeaturableElement(sDominanceRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sDominanceRelation);
 				if (result == null) result = caseLabelableElement(sDominanceRelation);
 				if (result == null) result = caseIdentifiableElement(sDominanceRelation);
 				if (result == null) result = defaultCase(theEObject);
@@ -715,6 +732,21 @@ public class SDocumentStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSFeaturableElement(SFeaturableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SMeta Annotatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SMeta Annotatable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSMetaAnnotatableElement(SMetaAnnotatableElement object) {
 		return null;
 	}
 

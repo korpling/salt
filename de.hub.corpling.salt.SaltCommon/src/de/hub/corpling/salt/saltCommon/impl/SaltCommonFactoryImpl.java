@@ -6,6 +6,7 @@
  */
 package de.hub.corpling.salt.saltCommon.impl;
 
+import de.hub.corpling.salt.saltCommon.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;

@@ -87,6 +87,8 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 		switch (eDataType.getClassifierID()) {
 			case SDocumentStructurePackage.SFEATURE_NAMES:
 				return createSFEATURE_NAMESFromString(eDataType, initialValue);
+			case SDocumentStructurePackage.STYPE_NAME:
+				return createSTYPE_NAMEFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -102,6 +104,8 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 		switch (eDataType.getClassifierID()) {
 			case SDocumentStructurePackage.SFEATURE_NAMES:
 				return convertSFEATURE_NAMESToString(eDataType, instanceValue);
+			case SDocumentStructurePackage.STYPE_NAME:
+				return convertSTYPE_NAMEToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -234,6 +238,26 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	 * @generated
 	 */
 	public String convertSFEATURE_NAMESToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public STYPE_NAME createSTYPE_NAMEFromString(EDataType eDataType, String initialValue) {
+		STYPE_NAME result = STYPE_NAME.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSTYPE_NAMEToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -161,6 +161,13 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	private EEnum sfeaturE_NAMESEEnum = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum stypE_NAMEEEnum = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -714,6 +721,15 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getSTYPE_NAME() {
+		return stypE_NAMEEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SDocumentStructureFactory getSDocumentStructureFactory() {
 		return (SDocumentStructureFactory)getEFactoryInstance();
 	}
@@ -807,6 +823,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 
 		// Create enums
 		sfeaturE_NAMESEEnum = createEEnum(SFEATURE_NAMES);
+		stypE_NAMEEEnum = createEEnum(STYPE_NAME);
 	}
 
 	/**
@@ -947,6 +964,17 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.STEXT);
 		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.SDATA);
 		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.STIME_OVERLAPPING);
+		addEEnumLiteral(sfeaturE_NAMESEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.STYPE_SRELATION);
+
+		initEEnum(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.class, "STYPE_NAME");
+		addEEnumLiteral(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.STEXTUAL_DS);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.STOKEN);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.SSPAN);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.SSTRUCTURE);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.STEXTUAL_RELATION);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.SSPANNING_RELATION);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.SDOMINANCE_RELATION);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hub.corpling.salt.saltCommon.sDocumentStructure.STYPE_NAME.SPOINTING_RELATION);
 	}
 
 } //SDocumentStructurePackageImpl
