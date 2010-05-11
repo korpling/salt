@@ -115,4 +115,20 @@ public interface SGraph extends Graph, SNamedElement, SAnnotatableElement, SIden
 	 */
 	SRelation getSRelation(String sRelationId);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addSLayer(SLayer sLayer);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	SLayer getSLayer(String sLayerId);
+
 } // SGraph

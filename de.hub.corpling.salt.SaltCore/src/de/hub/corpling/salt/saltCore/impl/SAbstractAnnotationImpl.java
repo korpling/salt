@@ -187,7 +187,10 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 		
 		Label label= super.getLabel(KW_SVAL_TYPE);
 		if (label!= null)
+		{
 			retVal= SDATATYPE.valueOf(label.getValueString()); 
+		}
+//		else retVal= SVALUE_TYPE_EDEFAULT;
 		return(retVal);
 	}
 

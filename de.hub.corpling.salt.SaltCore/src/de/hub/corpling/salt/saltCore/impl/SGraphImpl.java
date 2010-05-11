@@ -236,6 +236,11 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	}
 	
 //=================== start: handling SNode
+	/**
+	 * A counter for nodes whose name already exists in graph. This counter gives a new artificial
+	 * Postfix for the node id.
+	 */
+	private long artificialNodeCounter= 0l;
 	@Override
 	protected void basicAddNode(Node node)
 	{
@@ -244,10 +249,18 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		
 		if (((SNode)node).getSElementId()== null)
 		{
-			String nodeId= node.getId();
+			StringBuilder nodeId= new StringBuilder(); 
+			nodeId.append(node.getId());
+			if (this.getSNode(nodeId.toString())!= null)
+			{//if node still exists
+				nodeId.append("_");
+				nodeId.append(this.artificialNodeCounter);
+				this.artificialNodeCounter++;
+			}//if node still exists
+				
 			SElementId sElementId= SaltCoreFactory.eINSTANCE.createSElementId();
 			((SNode)node).setSElementId(sElementId);
-			node.setId(nodeId);
+			node.setId(nodeId.toString());
 		}
 		super.basicAddNode(node);
 	}
@@ -373,7 +386,38 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		return(retVal);
 	}
 
-//=================== end: handling SRelation
+/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void addSLayer(SLayer sLayer) 
+	{
+		if (sLayer== null)
+			throw new SaltException("Cannot add given SLayer-object, because it is null.");
+		this.getSLayers().add(sLayer);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public SLayer getSLayer(String sLayerId) 
+	{
+		if (sLayerId== null)
+			throw new SaltException("Cannot search for SLayer-object, because given sLayer-id is null.");
+		
+		SLayer retVal= null;
+		for (SLayer sLayer : this.getSLayers())
+		{
+			if (sLayer.getSId().equalsIgnoreCase(sLayerId))
+			{
+				retVal= sLayer;
+			}
+		}
+		return(retVal);
+	}
+
+	//=================== end: handling SRelation
 //=================== start: handling SIdentifiableElement	
 	/**
 	 * Delegatee for SIdentifiableElement

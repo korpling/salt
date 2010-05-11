@@ -880,6 +880,15 @@ public interface SaltCorePackage extends EPackage {
 	int SGRAPH__LAYERS = GraphPackage.GRAPH__LAYERS;
 
 	/**
+	 * The feature id for the '<em><b>Num Of Layers</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SGRAPH__NUM_OF_LAYERS = GraphPackage.GRAPH__NUM_OF_LAYERS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

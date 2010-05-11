@@ -104,6 +104,14 @@
         <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/getSRelation"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_KK63gZ69Ed6mwrnNATxO3A"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_qAdAQFj6Ed-BkZDnO17OHA" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/addSLayer"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qAdAQVj6Ed-BkZDnO17OHA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_t76JMFj6Ed-BkZDnO17OHA" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/getSLayer"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_t76JMVj6Ed-BkZDnO17OHA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_a3H0dojXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_a3H0d4jXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_a3H0eIjXEd6X5oQchPkMiQ"/>
