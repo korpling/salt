@@ -109,6 +109,7 @@ public class SIdentifiableElementTest extends TestCase {
 	public void testGetSElementId() 
 	{
 		SElementId sElementId= SaltCoreFactory.eINSTANCE.createSElementId();
+		sElementId.setSId("myId");
 		this.getFixture().setSElementId(sElementId);
 		assertEquals(sElementId, this.getFixture().getSElementId());
 	}
