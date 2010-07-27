@@ -168,71 +168,73 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof SGraph))
-			return(false);
-		SGraph sGraph2= (SGraph) obj;
-		{//check ids
-			if (this.getSId()!= null)
-			{	
-				if (sGraph2.getSId()== null)
-					return(false);
-				if (!this.getSId().equalsIgnoreCase(sGraph2.getSId()))
-					return(false);
-			}
-		}
-		{//check SProcessingAnnotations
-			for(SProcessingAnnotation sProcAnno1: this.getSProcessingAnnotations())
-			{
-				boolean hasOpponend= false;
-				for(SProcessingAnnotation sProcAnno2: sGraph2.getSProcessingAnnotations())
-				{
-					if (sProcAnno1.equals(sProcAnno2))
-						hasOpponend= true;
-				}
-				if (!hasOpponend)
-					return(false);
-			}	
-		}
-		{//check SAnnotations
-			for(SAnnotation sAnno1: this.getSAnnotations())
-			{
-				boolean hasOpponend= false;
-				for(SAnnotation sAnno2: sGraph2.getSAnnotations())
-				{
-					if (sAnno1.equals(sAnno2))
-						hasOpponend= true;
-				}
-				if (!hasOpponend)
-					return(false);
-			}	
-		}
-		{//check nodes
-			for (SNode sNode1: this.getSNodes())
-			{
-				boolean hasOpponend= false;
-				for (SNode sNode2: sGraph2.getSNodes())
-				{
-					if (sNode1.equals(sNode2))
-						hasOpponend= true;
-				}	
-				if (!hasOpponend)
-					return(false);
-			}	
-		}
-		{//check relations
-			for (SRelation sRel1: this.getSRelations())
-			{
-				boolean hasOpponend= false;
-				for (SRelation sRel2: sGraph2.getSRelations())
-				{
-					if (sRel1.equals(sRel2))
-						hasOpponend= true;
-				}	
-				if (!hasOpponend)
-					return(false);
-			}	
-		}
-		return(true);
+		return(super.equals(obj));
+		//TODO outcommented on 26th of June 2010
+//		if (!(obj instanceof SGraph))
+//			return(false);
+//		SGraph sGraph2= (SGraph) obj;
+//		{//check ids
+//			if (this.getSId()!= null)
+//			{	
+//				if (sGraph2.getSId()== null)
+//					return(false);
+//				if (!this.getSId().equalsIgnoreCase(sGraph2.getSId()))
+//					return(false);
+//			}
+//		}
+//		{//check SProcessingAnnotations
+//			for(SProcessingAnnotation sProcAnno1: this.getSProcessingAnnotations())
+//			{
+//				boolean hasOpponend= false;
+//				for(SProcessingAnnotation sProcAnno2: sGraph2.getSProcessingAnnotations())
+//				{
+//					if (sProcAnno1.equals(sProcAnno2))
+//						hasOpponend= true;
+//				}
+//				if (!hasOpponend)
+//					return(false);
+//			}	
+//		}
+//		{//check SAnnotations
+//			for(SAnnotation sAnno1: this.getSAnnotations())
+//			{
+//				boolean hasOpponend= false;
+//				for(SAnnotation sAnno2: sGraph2.getSAnnotations())
+//				{
+//					if (sAnno1.equals(sAnno2))
+//						hasOpponend= true;
+//				}
+//				if (!hasOpponend)
+//					return(false);
+//			}	
+//		}
+//		{//check nodes
+//			for (SNode sNode1: this.getSNodes())
+//			{
+//				boolean hasOpponend= false;
+//				for (SNode sNode2: sGraph2.getSNodes())
+//				{
+//					if (sNode1.equals(sNode2))
+//						hasOpponend= true;
+//				}	
+//				if (!hasOpponend)
+//					return(false);
+//			}	
+//		}
+//		{//check relations
+//			for (SRelation sRel1: this.getSRelations())
+//			{
+//				boolean hasOpponend= false;
+//				for (SRelation sRel2: sGraph2.getSRelations())
+//				{
+//					if (sRel1.equals(sRel2))
+//						hasOpponend= true;
+//				}	
+//				if (!hasOpponend)
+//					return(false);
+//			}	
+//		}
+//		return(true);
 	}
 	
 //=================== start: handling SNode

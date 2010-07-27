@@ -204,7 +204,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 		if (label== null)
 		{	
 			label= GraphFactory.eINSTANCE.createLabel();
-			label.setFullName(KW_SVAL_TYPE);
+			label.setQName(KW_SVAL_TYPE);
 			this.addLabel(label);
 		}
 		label.setValueString(newSValueType.toString());

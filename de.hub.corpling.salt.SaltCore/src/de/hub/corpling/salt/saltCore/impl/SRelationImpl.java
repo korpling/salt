@@ -176,55 +176,57 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof SRelation))
-			return(false);
-		SRelation sRelation2= (SRelation) obj;
-		{//check ids
-			if (this.getSId()!= null)
-			{	
-				if (sRelation2.getSId()== null)
-					return(false);
-				if (!this.getSId().equalsIgnoreCase(sRelation2.getSId()))
-					return(false);
-			}
-		}
-		{//check SProcessingAnnotations
-			for(SProcessingAnnotation sProcAnno1: this.getSProcessingAnnotations())
-			{
-				boolean hasOpponend= false;
-				for(SProcessingAnnotation sProcAnno2: sRelation2.getSProcessingAnnotations())
-				{
-					if (sProcAnno1. equals(sProcAnno2))
-						hasOpponend= true;
-				}
-				if (!hasOpponend)
-					return(false);
-			}	
-		}
-		{//check SAnnotations
-			for(SAnnotation sAnno1: this.getSAnnotations())
-			{
-				boolean hasOpponend= false;
-				for(SAnnotation sAnno2: sRelation2.getSAnnotations())
-				{
-					if (sAnno1. equals(sAnno2))
-						hasOpponend= true;
-				}
-				if (!hasOpponend)
-					return(false);
-			}	
-		}
-		{//checking source
-			if (this.getSSource()!= null)
-				if (!this.getSSource().equals(sRelation2.getSSource()))
-					return(false);
-		}
-		{//checking target
-			if (this.getSTarget()!= null)
-				if (!this.getSTarget().equals(sRelation2.getSTarget()))
-					return(false);
-		}
-		return(true);
+		return(super.equals(obj));
+		//TODO outcommented on 26th of June 2010
+//		if (!(obj instanceof SRelation))
+//			return(false);
+//		SRelation sRelation2= (SRelation) obj;
+//		{//check ids
+//			if (this.getSId()!= null)
+//			{	
+//				if (sRelation2.getSId()== null)
+//					return(false);
+//				if (!this.getSId().equalsIgnoreCase(sRelation2.getSId()))
+//					return(false);
+//			}
+//		}
+//		{//check SProcessingAnnotations
+//			for(SProcessingAnnotation sProcAnno1: this.getSProcessingAnnotations())
+//			{
+//				boolean hasOpponend= false;
+//				for(SProcessingAnnotation sProcAnno2: sRelation2.getSProcessingAnnotations())
+//				{
+//					if (sProcAnno1. equals(sProcAnno2))
+//						hasOpponend= true;
+//				}
+//				if (!hasOpponend)
+//					return(false);
+//			}	
+//		}
+//		{//check SAnnotations
+//			for(SAnnotation sAnno1: this.getSAnnotations())
+//			{
+//				boolean hasOpponend= false;
+//				for(SAnnotation sAnno2: sRelation2.getSAnnotations())
+//				{
+//					if (sAnno1. equals(sAnno2))
+//						hasOpponend= true;
+//				}
+//				if (!hasOpponend)
+//					return(false);
+//			}	
+//		}
+//		{//checking source
+//			if (this.getSSource()!= null)
+//				if (!this.getSSource().equals(sRelation2.getSSource()))
+//					return(false);
+//		}
+//		{//checking target
+//			if (this.getSTarget()!= null)
+//				if (!this.getSTarget().equals(sRelation2.getSTarget()))
+//					return(false);
+//		}
+//		return(true);
 	}
 	
 //=================== start: handling SIdentifiableElement	

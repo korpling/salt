@@ -414,45 +414,47 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof SNode))
-			return(false);
-		SNode sNode2= (SNode) obj;
-		{//check ids
-			if (this.getSId()!= null)
-			{	
-				if (sNode2.getSId()== null)
-					return(false);
-				if (!this.getSId().equalsIgnoreCase(sNode2.getSId()))
-					return(false);
-			}
-		}
-		{//check SProcessingAnnotations
-			for(SProcessingAnnotation sProcAnno1: this.getSProcessingAnnotations())
-			{
-				boolean hasOpponend= false;
-				for(SProcessingAnnotation sProcAnno2: sNode2.getSProcessingAnnotations())
-				{
-					if (sProcAnno1. equals(sProcAnno2))
-						hasOpponend= true;
-				}
-				if (!hasOpponend)
-					return(false);
-			}	
-		}
-		{//check SAnnotations
-			for(SAnnotation sAnno1: this.getSAnnotations())
-			{
-				boolean hasOpponend= false;
-				for(SAnnotation sAnno2: sNode2.getSAnnotations())
-				{
-					if (sAnno1. equals(sAnno2))
-						hasOpponend= true;
-				}
-				if (!hasOpponend)
-					return(false);
-			}	
-		}
-		return(true);
+		return(super.equals(obj));
+		//TODO outcommented on 26th of June 2010
+//		if (!(obj instanceof SNode))
+//			return(false);
+//		SNode sNode2= (SNode) obj;
+//		{//check ids
+//			if (this.getSId()!= null)
+//			{	
+//				if (sNode2.getSId()== null)
+//					return(false);
+//				if (!this.getSId().equalsIgnoreCase(sNode2.getSId()))
+//					return(false);
+//			}
+//		}
+//		{//check SProcessingAnnotations
+//			for(SProcessingAnnotation sProcAnno1: this.getSProcessingAnnotations())
+//			{
+//				boolean hasOpponend= false;
+//				for(SProcessingAnnotation sProcAnno2: sNode2.getSProcessingAnnotations())
+//				{
+//					if (sProcAnno1. equals(sProcAnno2))
+//						hasOpponend= true;
+//				}
+//				if (!hasOpponend)
+//					return(false);
+//			}	
+//		}
+//		{//check SAnnotations
+//			for(SAnnotation sAnno1: this.getSAnnotations())
+//			{
+//				boolean hasOpponend= false;
+//				for(SAnnotation sAnno2: sNode2.getSAnnotations())
+//				{
+//					if (sAnno1. equals(sAnno2))
+//						hasOpponend= true;
+//				}
+//				if (!hasOpponend)
+//					return(false);
+//			}	
+//		}
+//		return(true);
 	}
 	
 //	public boolean equals(SNode sNode2)

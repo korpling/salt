@@ -607,7 +607,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SABSTRACT_ANNOTATION__FULL_NAME = GraphPackage.LABEL__FULL_NAME;
+	int SABSTRACT_ANNOTATION__FULL_NAME = GraphPackage.LABEL__QNAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1246,7 +1246,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SELEMENT_ID__FULL_NAME = GraphPackage.IDENTIFIER__FULL_NAME;
+	int SELEMENT_ID__QNAME = GraphPackage.IDENTIFIER__QNAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
