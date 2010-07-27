@@ -114,12 +114,12 @@ public class SMetaAnnotatableElementTest extends TestCase {
 	 */
 	public void testGetSMetaAnnotations() 
 	{
-		String[] fullNames= {"ns::name1", "ns::name2", "ns::name3", "ns::name4"};
+		String[] QNames= {"ns::name1", "ns::name2", "ns::name3", "ns::name4"};
 		EList<SMetaAnnotation> sProcMetaAnnos= new BasicEList<SMetaAnnotation>();
-		for (String fullName: fullNames)
+		for (String QName: QNames)
 		{	
 			SMetaAnnotation sProcMetaAnno1= SaltCoreFactory.eINSTANCE.createSMetaAnnotation();
-			sProcMetaAnno1.setFullName(fullName);
+			sProcMetaAnno1.setQName(QName);
 			this.getFixture().addSMetaAnnotation(sProcMetaAnno1);
 			sProcMetaAnnos.add(sProcMetaAnno1);
 		}
@@ -136,11 +136,11 @@ public class SMetaAnnotatableElementTest extends TestCase {
 	 */
 	public void testAddSMetaAnnotation__SMetaAnnotation() 
 	{
-		String fullName= "ns::name";
+		String QName= "ns::name";
 		SMetaAnnotation sProcMetaAnno= SaltCoreFactory.eINSTANCE.createSMetaAnnotation();
-		sProcMetaAnno.setFullName(fullName);
+		sProcMetaAnno.setQName(QName);
 		this.getFixture().addSMetaAnnotation(sProcMetaAnno);
-		assertEquals(sProcMetaAnno, this.getFixture().getSMetaAnnotation(fullName));
+		assertEquals(sProcMetaAnno, this.getFixture().getSMetaAnnotation(QName));
 	}
 
 	/**

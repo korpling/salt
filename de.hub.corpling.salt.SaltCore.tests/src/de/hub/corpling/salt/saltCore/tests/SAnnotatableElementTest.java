@@ -114,12 +114,12 @@ public class SAnnotatableElementTest extends TestCase {
 	 */
 	public void testGetSAnnotations() 
 	{
-		String[] fullNames= {"ns::name1", "ns::name2", "ns::name3", "ns::name4"};
+		String[] QNames= {"ns::name1", "ns::name2", "ns::name3", "ns::name4"};
 		EList<SAnnotation> sProcAnnos= new BasicEList<SAnnotation>();
-		for (String fullName: fullNames)
+		for (String QName: QNames)
 		{	
 			SAnnotation sProcAnno1= SaltCoreFactory.eINSTANCE.createSAnnotation();
-			sProcAnno1.setFullName(fullName);
+			sProcAnno1.setQName(QName);
 			this.getFixture().addSAnnotation(sProcAnno1);
 			sProcAnnos.add(sProcAnno1);
 		}
@@ -136,11 +136,11 @@ public class SAnnotatableElementTest extends TestCase {
 	 */
 	public void testAddSAnnotation__SAnnotation() 
 	{
-		String fullName= "ns::name";
+		String QName= "ns::name";
 		SAnnotation sProcAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-		sProcAnno.setFullName(fullName);
+		sProcAnno.setQName(QName);
 		this.getFixture().addSAnnotation(sProcAnno);
-		assertEquals(sProcAnno, this.getFixture().getSAnnotation(fullName));
+		assertEquals(sProcAnno, this.getFixture().getSAnnotation(QName));
 	}
 
 	/**

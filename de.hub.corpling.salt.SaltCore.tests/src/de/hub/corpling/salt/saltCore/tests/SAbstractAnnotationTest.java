@@ -92,7 +92,7 @@ public abstract class SAbstractAnnotationTest extends TestCase {
 		Long value= 1L;
 		String name= "numeric";
 		
-		this.getFixture().setFullName(name);
+		this.getFixture().setQName(name);
 		
 		//case 1
 		this.getFixture().setSValue(value);
@@ -125,13 +125,13 @@ public abstract class SAbstractAnnotationTest extends TestCase {
 		Double value= 1.0;
 		String name= "float";
 		
-		this.getFixture().setFullName(name);
+		this.getFixture().setQName(name);
 		this.getFixture().setSValue(value);
 		assertEquals(value, this.getFixture().getSValueSFLOAT());
 		
 		//setting float
 		Float floatVal= 1.0F;
-		this.getFixture().setFullName(name);
+		this.getFixture().setQName(name);
 		this.getFixture().setSValue(floatVal);
 		assertEquals(value, this.getFixture().getSValueSFLOAT());
 		
@@ -157,7 +157,7 @@ public abstract class SAbstractAnnotationTest extends TestCase {
 		String value= "Text";
 		String name= "Text";
 		
-		this.getFixture().setFullName(name);
+		this.getFixture().setQName(name);
 		this.getFixture().setSValue(value);
 		assertEquals(value, this.getFixture().getSValueSTEXT());
 		
@@ -178,7 +178,7 @@ public abstract class SAbstractAnnotationTest extends TestCase {
 		Boolean value= true;
 		String name= "Text";
 		
-		this.getFixture().setFullName(name);
+		this.getFixture().setQName(name);
 		this.getFixture().setSValue(value);
 		assertEquals(value, this.getFixture().getSValueSBOOLEAN());
 		
@@ -204,7 +204,7 @@ public abstract class SAbstractAnnotationTest extends TestCase {
 		Object value= new Object();
 		String name= "Object";
 		
-		this.getFixture().setFullName(name);
+		this.getFixture().setQName(name);
 		this.getFixture().setSValue(value);
 		assertEquals(value, this.getFixture().getSValueSOBJECT());
 		
@@ -235,7 +235,7 @@ public abstract class SAbstractAnnotationTest extends TestCase {
 		URI value= null;
 		String name= "URI";
 		
-		this.getFixture().setFullName(name);
+		this.getFixture().setQName(name);
 		this.getFixture().setSValue(value);
 		assertEquals(value, this.getFixture().getSValueSURI());
 	}

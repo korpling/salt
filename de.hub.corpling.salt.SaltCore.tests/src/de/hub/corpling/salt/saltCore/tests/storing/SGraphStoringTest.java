@@ -79,12 +79,12 @@ public class SGraphStoringTest extends TestCase
 		{//adding annotations
 			SAnnotation sAnno= null;
 			sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-			sAnno.setFullName("ns1::annoName1");
+			sAnno.setQName("ns1::annoName1");
 			sAnno.setSValue("annoValue1");
 			this.getFixture().addSAnnotation(sAnno);
 			
 			sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-			sAnno.setFullName("ns2::annoName2");
+			sAnno.setQName("ns2::annoName2");
 			sAnno.setSValue("annoValue2");
 			this.getFixture().addSAnnotation(sAnno);
 		}
@@ -92,12 +92,12 @@ public class SGraphStoringTest extends TestCase
 		{//adding Processing-Annotations
 			SProcessingAnnotation sPAnno= null;
 			sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-			sPAnno.setFullName("procAnnos::annoName1");
+			sPAnno.setQName("procAnnos::annoName1");
 			sPAnno.setSValue("pAnnoValue1");
 			this.getFixture().addSProcessingAnnotation(sPAnno);
 			
 			sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-			sPAnno.setFullName("procAnnos::annoName2");
+			sPAnno.setQName("procAnnos::annoName2");
 			sPAnno.setSValue("pAnnoValue2");
 			this.getFixture().addSProcessingAnnotation(sPAnno);
 		}
@@ -118,12 +118,12 @@ public class SGraphStoringTest extends TestCase
 				{//adding annotations
 					SAnnotation sAnno= null;
 					sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-					sAnno.setFullName("ns1::annoName1");
+					sAnno.setQName("ns1::annoName1");
 					sAnno.setSValue("annoValue1");
 					node1.addSAnnotation(sAnno);
 					
 					sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-					sAnno.setFullName("ns2::annoName2");
+					sAnno.setQName("ns2::annoName2");
 					sAnno.setSValue("annoValue2");
 					node1.addSAnnotation(sAnno);
 				}
@@ -131,12 +131,12 @@ public class SGraphStoringTest extends TestCase
 				{//adding Processing-Annotations
 					SProcessingAnnotation sPAnno= null;
 					sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-					sPAnno.setFullName("procAnnos::annoName1");
+					sPAnno.setQName("procAnnos::annoName1");
 					sPAnno.setSValue("pAnnoValue1");
 					node1.addSProcessingAnnotation(sPAnno);
 					
 					sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-					sPAnno.setFullName("procAnnos::annoName2");
+					sPAnno.setQName("procAnnos::annoName2");
 					sPAnno.setSValue("pAnnoValue2");
 					node1.addSProcessingAnnotation(sPAnno);
 				}
@@ -180,12 +180,12 @@ public class SGraphStoringTest extends TestCase
 				{//adding annotations
 					SAnnotation sAnno= null;
 					sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-					sAnno.setFullName("ns1::annoName1");
+					sAnno.setQName("ns1::annoName1");
 					sAnno.setSValue("annoValue1");
 					rel1.addSAnnotation(sAnno);
 					
 					sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
-					sAnno.setFullName("ns2::annoName2");
+					sAnno.setQName("ns2::annoName2");
 					sAnno.setSValue("annoValue2");
 					rel1.addSAnnotation(sAnno);
 				}
@@ -193,12 +193,12 @@ public class SGraphStoringTest extends TestCase
 				{//adding Processing-Annotations
 					SProcessingAnnotation sPAnno= null;
 					sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-					sPAnno.setFullName("procAnnos::annoName1");
+					sPAnno.setQName("procAnnos::annoName1");
 					sPAnno.setSValue("pAnnoValue1");
 					rel1.addSProcessingAnnotation(sPAnno);
 					
 					sPAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-					sPAnno.setFullName("procAnnos::annoName2");
+					sPAnno.setQName("procAnnos::annoName2");
 					sPAnno.setSValue("pAnnoValue2");
 					rel1.addSProcessingAnnotation(sPAnno);
 				}

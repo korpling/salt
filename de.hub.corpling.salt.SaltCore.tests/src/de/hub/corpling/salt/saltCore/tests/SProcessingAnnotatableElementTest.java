@@ -115,12 +115,12 @@ public class SProcessingAnnotatableElementTest extends TestCase {
 	 */
 	public void testGetSProcessingAnnotations() 
 	{
-		String[] fullNames= {"ns::name1", "ns::name2", "ns::name3", "ns::name4"};
+		String[] QNames= {"ns::name1", "ns::name2", "ns::name3", "ns::name4"};
 		EList<SProcessingAnnotation> sProcAnnos= new BasicEList<SProcessingAnnotation>();
-		for (String fullName: fullNames)
+		for (String QName: QNames)
 		{	
 			SProcessingAnnotation sProcAnno1= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-			sProcAnno1.setFullName(fullName);
+			sProcAnno1.setQName(QName);
 			this.getFixture().addSProcessingAnnotation(sProcAnno1);
 			sProcAnnos.add(sProcAnno1);
 		}
@@ -137,11 +137,11 @@ public class SProcessingAnnotatableElementTest extends TestCase {
 	 */
 	public void testAddSProcessingAnnotation__SProcessingAnnotation() 
 	{
-		String fullName= "ns::name";
+		String QName= "ns::name";
 		SProcessingAnnotation sProcAnno= SaltCoreFactory.eINSTANCE.createSProcessingAnnotation();
-		sProcAnno.setFullName(fullName);
+		sProcAnno.setQName(QName);
 		this.getFixture().addSProcessingAnnotation(sProcAnno);
-		assertEquals(sProcAnno, this.getFixture().getSProcessingAnnotation(fullName));
+		assertEquals(sProcAnno, this.getFixture().getSProcessingAnnotation(QName));
 	}
 
 	/**
