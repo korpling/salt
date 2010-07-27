@@ -18,7 +18,7 @@ public class STextOverlappingRelationAccessor
 		if (delegateeObject.getSFeature(SFEATURE_NAMES.STEXT_OVERLAPPING.toString())== null)
 		{//create new feature
 			SFeature feature= SaltCommonFactory.eINSTANCE.createSFeature();
-			feature.setFullName(SFEATURE_NAMES.STEXT_OVERLAPPING.toString());
+			feature.setQName(SFEATURE_NAMES.STEXT_OVERLAPPING.toString());
 			feature.setValue(new Boolean(true));
 			delegateeObject.addSFeature(feature);
 		}
