@@ -9,11 +9,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
-  <!-- 
   <scm>
-    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/annis/trunk</developerConnection>
+    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/trunk</developerConnection>
   </scm>
- -->
  
   <licenses>
     <license>
