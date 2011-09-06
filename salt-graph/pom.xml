@@ -11,7 +11,7 @@
   </parent>
   <!-- 	
   <scm>
-    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/trunk/salt-graph/</developerConnection>
+    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/trunk/salt-graph</developerConnection>
   </scm>
    -->
    <build>
@@ -22,7 +22,7 @@
        <version>2.1</version>
        <configuration>
          <tagBase>
-           https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/tags/salt-graph
+           https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/tags/salt-graph
          </tagBase>
          <releaseProfiles>release</releaseProfiles>
      		<goals>deploy assembly:single</goals>
