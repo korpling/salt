@@ -1,0 +1,46 @@
+Manifest-Version: 1.0
+Export-Package: de.hu_berlin.german.korpling.saltnpepper.salt.saltCore
+ ;uses:="de.hu_berlin.german.korpling.saltnpepper.salt.graph,org.eclip
+ se.emf.common.util,org.eclipse.emf.ecore,de.hu_berlin.german.korpling
+ .saltnpepper.salt.saltCore.impl",de.hu_berlin.german.korpling.saltnpe
+ pper.salt.saltCore.impl;uses:="org.eclipse.emf.ecore,de.hu_berlin.ger
+ man.korpling.saltnpepper.salt.graph,org.eclipse.emf.common.util,de.hu
+ _berlin.german.korpling.saltnpepper.salt.saltCore,de.hu_berlin.german
+ .korpling.saltnpepper.salt.graph.impl,org.eclipse.emf.ecore.util,de.h
+ u_berlin.german.korpling.saltnpepper.salt.saltCore.accessors,org.ecli
+ pse.emf.common.notify,de.hu_berlin.german.korpling.saltnpepper.salt.s
+ altCore.exceptions,org.eclipse.emf.ecore.impl,org.eclipse.emf.ecore.p
+ lugin,org.eclipse.emf.ecore.resource",de.hu_berlin.german.korpling.sa
+ ltnpepper.salt.saltCore.accessors;uses:="org.eclipse.emf.ecore.util,o
+ rg.eclipse.emf.ecore,de.hu_berlin.german.korpling.saltnpepper.salt.gr
+ aph,org.eclipse.emf.common.util,de.hu_berlin.german.korpling.saltnpep
+ per.salt.saltCore",de.hu_berlin.german.korpling.saltnpepper.salt.salt
+ Core.exceptions,de.hu_berlin.german.korpling.saltnpepper.salt.saltCor
+ e.modules;uses:="de.hu_berlin.german.korpling.saltnpepper.salt.saltCo
+ re,de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions,
+ org.eclipse.emf.common.util"
+Built-By: Florian Zipser
+Tool: Bnd-0.0.357
+Bundle-Name: salt-saltCore
+Created-By: Apache Maven Bundle Plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Build-Jdk: 1.6.0_21
+Bundle-Version: 1.1.2.SNAPSHOT
+Bnd-LastModified: 1315318028995
+Bundle-ManifestVersion: 2
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Import-Package: de.hu_berlin.german.korpling.saltnpepper.salt.graph,de
+ .hu_berlin.german.korpling.saltnpepper.salt.graph.impl,de.hu_berlin.g
+ erman.korpling.saltnpepper.salt.graph.modules,de.hu_berlin.german.kor
+ pling.saltnpepper.salt.graph.modules.exceptions,de.hu_berlin.german.k
+ orpling.saltnpepper.salt.saltCore,de.hu_berlin.german.korpling.saltnp
+ epper.salt.saltCore.accessors,de.hu_berlin.german.korpling.saltnpeppe
+ r.salt.saltCore.exceptions,de.hu_berlin.german.korpling.saltnpepper.s
+ alt.saltCore.impl,de.hu_berlin.german.korpling.saltnpepper.salt.saltC
+ ore.modules,org.eclipse.emf.common.notify,org.eclipse.emf.common.noti
+ fy.impl,org.eclipse.emf.common.util,org.eclipse.emf.ecore,org.eclipse
+ .emf.ecore.impl,org.eclipse.emf.ecore.plugin,org.eclipse.emf.ecore.re
+ source,org.eclipse.emf.ecore.util,org.osgi.service.log;version="1.3"
+Bundle-SymbolicName: de.hu_berlin.german.korpling.saltnpepper.salt-sal
+ tCore;singleton:=true
+

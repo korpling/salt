@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sCorpusStructure:SCorpusGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:graph="graph" xmlns:sCorpusStructure="sCorpusStructure" xmlns:saltCore="saltCore">
+  <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="salt:/graph1"/>
+  <labels xsi:type="saltCore:SAnnotation" namespace="ns1" name="annoName1" valueString="annoValue1">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SAnnotation" namespace="ns2" name="annoName2" valueString="annoValue2">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName1" valueString="pAnnoValue1">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName2" valueString="pAnnoValue2">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <nodes xsi:type="sCorpusStructure:SCorpus" sName="corp1">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corp1"/>
+  </nodes>
+  <nodes xsi:type="sCorpusStructure:SCorpus" sName="corp2">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corp2"/>
+  </nodes>
+  <nodes xsi:type="sCorpusStructure:SCorpus" sName="corp3">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corp3"/>
+  </nodes>
+  <nodes xsi:type="sCorpusStructure:SCorpus" sName="corp4">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corp4"/>
+  </nodes>
+  <nodes xsi:type="sCorpusStructure:SDocument" sName="doc1">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/doc1"/>
+  </nodes>
+  <nodes xsi:type="sCorpusStructure:SDocument" sName="doc2">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/doc2"/>
+  </nodes>
+  <nodes xsi:type="sCorpusStructure:SDocument" sName="doc3">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/doc3"/>
+  </nodes>
+  <nodes xsi:type="sCorpusStructure:SDocument" sName="doc4">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/doc4"/>
+  </nodes>
+  <edges xsi:type="sCorpusStructure:SCorpusRelation" source="//@nodes.0" target="//@nodes.1" sName="corpRel1">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corpRel1"/>
+  </edges>
+  <edges xsi:type="sCorpusStructure:SCorpusRelation" source="//@nodes.1" target="//@nodes.2" sName="corpRel2">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corpRel2"/>
+  </edges>
+  <edges xsi:type="sCorpusStructure:SCorpusRelation" source="//@nodes.0" target="//@nodes.3" sName="corpRel3">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corpRel3"/>
+  </edges>
+  <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@nodes.2" target="//@nodes.4" sName="corpDocRel1">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corpDocRel1"/>
+  </edges>
+  <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@nodes.1" target="//@nodes.5" sName="corpDocRel2">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corpDocRel2"/>
+  </edges>
+  <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@nodes.3" target="//@nodes.6" sName="corpDocRel3">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corpDocRel3"/>
+  </edges>
+  <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@nodes.3" target="//@nodes.7" sName="corpDocRel4">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/corpDocRel4"/>
+  </edges>
+</sCorpusStructure:SCorpusGraph>

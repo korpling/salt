@@ -1,0 +1,84 @@
+<graph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.xces.org/ns/GrAF/0.99/" xmlns:graf="http://www.xces.org/ns/GrAF/0.99/"
+    xsi:schemaLocation="http://www.xces.org/ns/GrAF/0.99/ http://www.xces.org/ns/GrAF/0.99/graf-0.99.xsd">
+    <header>
+      <dependencies>
+	<dependsOn type="xle" ann.loc="partdlf-nachrichten-200703260000-xle.graf"/>
+      </dependencies>
+    </header>
+    <node xml:id="n218570_25720"/>
+    <node xml:id="n218571_25720"/>
+    <node xml:id="n218572_25720"/>
+    <node xml:id="n218573_25720"/>
+    <node xml:id="n218574_25720"/>
+    <edge to="n197851_22628" from="n218570_25720" xml:id="e169519"/>
+    <edge to="n197872_22628" from="n218571_25720" xml:id="e169520"/>
+    <edge to="n197857_22628" from="n218572_25720" xml:id="e169521"/>
+    <edge to="n197860_22628" from="n218573_25720" xml:id="e169522"/>
+    <edge to="n197862_22628" from="n218574_25720" xml:id="e169523"/>
+    <edge to="n197837_22628" from="n218570_25720" xml:id="e169524"/>
+    <edge to="n197836_22628" from="n218570_25720" xml:id="e169525"/>
+    <edge to="n197856_22628" from="n218571_25720" xml:id="e169526"/>
+    <edge to="n197866_22628" from="n218573_25720" xml:id="e169527"/>
+    <edge to="n197869_22628" from="n218574_25720" xml:id="e169528"/>
+    <a ref="n218570_25720" label="node_structural">
+        <fs>
+            <f value="s1057_f5" name="node_descr"/>
+            <f value="147" name="node_type"/>
+            <f value="salsaXML_node" name="grp"/>
+        </fs>
+    </a>
+    <a ref="n218571_25720" label="node_structural">
+        <fs>
+            <f value="s1057_f2" name="node_descr"/>
+            <f value="147" name="node_type"/>
+            <f value="salsaXML_node" name="grp"/>
+        </fs>
+    </a>
+    <a ref="n218572_25720" label="node_structural">
+        <fs>
+            <f value="s1057_f3" name="node_descr"/>
+            <f value="147" name="node_type"/>
+            <f value="salsaXML_node" name="grp"/>
+        </fs>
+    </a>
+    <a ref="n218573_25720" label="node_structural">
+        <fs>
+            <f value="s1057_f4" name="node_descr"/>
+            <f value="147" name="node_type"/>
+            <f value="salsaXML_node" name="grp"/>
+        </fs>
+    </a>
+    <a ref="n218574_25720" label="node_structural">
+        <fs>
+            <f value="s1057_f1" name="node_descr"/>
+            <f value="147" name="node_type"/>
+            <f value="salsaXML_node" name="grp"/>
+        </fs>
+    </a>
+    <a ref="n218570_25720" label="a1_is_scheme">
+        <fs xml:id="fs374284">
+            <f value="INDEF-PARTITIVE-CONTAINED" name="name"/>
+        </fs>
+    </a>
+    <a ref="n218571_25720" label="a1_is_scheme">
+        <fs xml:id="fs374285">
+            <f value="GIVEN-SHORT" name="name"/>
+        </fs>
+    </a>
+    <a ref="n218572_25720" label="a1_is_scheme">
+        <fs xml:id="fs374286">
+            <f value="GIVEN-REFLEXIVE" name="name"/>
+        </fs>
+    </a>
+    <a ref="n218573_25720" label="a1_is_scheme">
+        <fs xml:id="fs374287">
+            <f value="GIVEN-SHORT" name="name"/>
+        </fs>
+    </a>
+    <a ref="n218574_25720" label="a1_is_scheme">
+        <fs xml:id="fs374288">
+            <f value="UNUSED-KNOWN" name="name"/>
+        </fs>
+    </a>
+</graph>

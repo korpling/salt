@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saltCore:SIdentifiableElement xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:graph="graph" xmlns:saltCore="saltCore">
+  <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="salt:/id1"/>
+</saltCore:SIdentifiableElement>

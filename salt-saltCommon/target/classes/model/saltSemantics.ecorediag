@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_XKejIKkOEd669Micl0m_WQ" type="EcoreTools" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_Z7vJ0KkOEd669Micl0m_WQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_Z7vJ06kOEd669Micl0m_WQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_Z7vJ1KkOEd669Micl0m_WQ" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Z7vJ1akOEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Z7vJ1qkOEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Z7vJ16kOEd669Micl0m_WQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_Z71QcKkOEd669Micl0m_WQ" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_se9NYKkOEd669Micl0m_WQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltSemantics.ecore#//SPOSAnnotation/isSPOSAnnotation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_se9NYakOEd669Micl0m_WQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Z71QcakOEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Z71QcqkOEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Z71Qc6kOEd669Micl0m_WQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_Z7vJ0akOEd669Micl0m_WQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="saltSemantics.ecore#//SPOSAnnotation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Z7vJ0qkOEd669Micl0m_WQ" x="10" y="90" width="328" height="76"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_dHQDkKkOEd669Micl0m_WQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_dHQDk6kOEd669Micl0m_WQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_dHQDlKkOEd669Micl0m_WQ" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_dHQDlakOEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dHQDlqkOEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dHQDl6kOEd669Micl0m_WQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_dHQDmKkOEd669Micl0m_WQ" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_yhLOgKkOEd669Micl0m_WQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltSemantics.ecore#//SLemmaAnnotation/isSLemmaAnnotation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_yhLOgakOEd669Micl0m_WQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_dHQDmakOEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_dHQDmqkOEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_dHQDm6kOEd669Micl0m_WQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_dHQDkakOEd669Micl0m_WQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="saltSemantics.ecore#//SLemmaAnnotation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dHQDkqkOEd669Micl0m_WQ" x="10" y="185" width="338" height="76"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_aZckEKkPEd669Micl0m_WQ" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_aZiqsKkPEd669Micl0m_WQ" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_aZu38KkPEd669Micl0m_WQ" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_jzBikKkPEd669Micl0m_WQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltSemantics.ecore#//SALT_SEMANTIC_NAMES/POS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jzBikakPEd669Micl0m_WQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_lCxTMKkPEd669Micl0m_WQ" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltSemantics.ecore#//SALT_SEMANTIC_NAMES/LEMMA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_lCxTMakPEd669Micl0m_WQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_a5JRkKnwEd6tYf_a78hZZA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltSemantics.ecore#//SALT_SEMANTIC_NAMES/CAT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_a5JRkanwEd6tYf_a78hZZA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_bv4FQKnwEd6tYf_a78hZZA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltSemantics.ecore#//SALT_SEMANTIC_NAMES/TYPE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bv4FQanwEd6tYf_a78hZZA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_HliikKqjEd6DvJxu7Ckf1w" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltSemantics.ecore#//SALT_SEMANTIC_NAMES/TEXT_UNIT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_HliikaqjEd6DvJxu7Ckf1w"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_BAXv8KqkEd6DvJxu7Ckf1w" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltSemantics.ecore#//SALT_SEMANTIC_NAMES/TEXT_UNIT_WORD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_BAXv8aqkEd6DvJxu7Ckf1w"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_CrhqMKqkEd6DvJxu7Ckf1w" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltSemantics.ecore#//SALT_SEMANTIC_NAMES/TEXT_UNIT_SENTENCE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CrhqMaqkEd6DvJxu7Ckf1w"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_aZu38akPEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_aZu38qkPEd669Micl0m_WQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_aZu386kPEd669Micl0m_WQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_aZckEakPEd669Micl0m_WQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="saltSemantics.ecore#//SALT_SEMANTIC_NAMES"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aZckEqkPEd669Micl0m_WQ" x="-220" y="5" width="183" height="188"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_6rxyManvEd6tYf_a78hZZA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_6rxyNKnvEd6tYf_a78hZZA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_6rxyNanvEd6tYf_a78hZZA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_6rxyNqnvEd6tYf_a78hZZA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_6rxyN6nvEd6tYf_a78hZZA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_6rxyOKnvEd6tYf_a78hZZA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_6rxyOanvEd6tYf_a78hZZA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_8U66QKnvEd6tYf_a78hZZA" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltSemantics.ecore#//SCatAnnotation/isSCatAnnotation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8U66QanvEd6tYf_a78hZZA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_6rxyOqnvEd6tYf_a78hZZA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_6rxyO6nvEd6tYf_a78hZZA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_6rxyPKnvEd6tYf_a78hZZA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_6rxyMqnvEd6tYf_a78hZZA" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="saltSemantics.ecore#//SCatAnnotation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6rxyM6nvEd6tYf_a78hZZA" x="15" y="295" width="331" height="51"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_ExrEIKnwEd6tYf_a78hZZA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_ExxKwKnwEd6tYf_a78hZZA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_ExxKwanwEd6tYf_a78hZZA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ExxKwqnwEd6tYf_a78hZZA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ExxKw6nwEd6tYf_a78hZZA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ExxKxKnwEd6tYf_a78hZZA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ExxKxanwEd6tYf_a78hZZA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_GARlQKnwEd6tYf_a78hZZA" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltSemantics.ecore#//STypeAnnotation/isSTypeAnnotation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GARlQanwEd6tYf_a78hZZA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ExxKxqnwEd6tYf_a78hZZA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ExxKx6nwEd6tYf_a78hZZA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ExxKyKnwEd6tYf_a78hZZA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ExrEIanwEd6tYf_a78hZZA" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="saltSemantics.ecore#//STypeAnnotation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ExrEIqnwEd6tYf_a78hZZA" x="475" y="90" width="266" height="61"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_sK_PwaqTEd6DvJxu7Ckf1w" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_sK_PxKqTEd6DvJxu7Ckf1w" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_sLFWYKqTEd6DvJxu7Ckf1w" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_sLFWYaqTEd6DvJxu7Ckf1w"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_sLFWYqqTEd6DvJxu7Ckf1w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_sLFWY6qTEd6DvJxu7Ckf1w"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_sLFWZKqTEd6DvJxu7Ckf1w" type="5002">
+      <children xmi:type="notation:Node" xmi:id="__EyCcKqiEd6DvJxu7Ckf1w" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltSemantics.ecore#//SWordAnnotation/isSWordAnnotation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__EyCcaqiEd6DvJxu7Ckf1w"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_sLFWZaqTEd6DvJxu7Ckf1w"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_sLFWZqqTEd6DvJxu7Ckf1w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_sLFWZ6qTEd6DvJxu7Ckf1w"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_sK_PwqqTEd6DvJxu7Ckf1w" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="saltSemantics.ecore#//SWordAnnotation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sK_Pw6qTEd6DvJxu7Ckf1w" x="15" y="445" width="348" height="51"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_H88ggKqkEd6DvJxu7Ckf1w" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_H9CnIKqkEd6DvJxu7Ckf1w" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_H9CnIaqkEd6DvJxu7Ckf1w" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_H9CnIqqkEd6DvJxu7Ckf1w"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_H9CnI6qkEd6DvJxu7Ckf1w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_H9CnJKqkEd6DvJxu7Ckf1w"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_H9CnJaqkEd6DvJxu7Ckf1w" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_JTqb0KqkEd6DvJxu7Ckf1w" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltSemantics.ecore#//SSentenceAnnotation/isSSentenceAnnotation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JTqb0aqkEd6DvJxu7Ckf1w"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_H9CnJqqkEd6DvJxu7Ckf1w"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_H9CnJ6qkEd6DvJxu7Ckf1w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_H9CnKKqkEd6DvJxu7Ckf1w"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_H88ggaqkEd6DvJxu7Ckf1w" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="saltSemantics.ecore#//SSentenceAnnotation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_H88ggqqkEd6DvJxu7Ckf1w" x="15" y="515" width="348" height="56"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_XKejIakOEd669Micl0m_WQ"/>
+  <element xmi:type="ecore:EPackage" href="saltSemantics.ecore#/"/>
+</notation:Diagram>

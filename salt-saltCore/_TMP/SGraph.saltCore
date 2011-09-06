@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saltCore:SGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:graph="graph" xmlns:saltCore="saltCore">
+  <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="salt:/graph1"/>
+  <labels xsi:type="saltCore:SAnnotation" namespace="ns1" name="annoName1" valueString="annoValue1">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SAnnotation" namespace="ns2" name="annoName2" valueString="annoValue2">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName1" valueString="pAnnoValue1">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName2" valueString="pAnnoValue2">
+    <labels name="SVAL_TYPE" valueString="STEXT"/>
+  </labels>
+  <nodes xsi:type="saltCore:SNode" layers="//@layers.0">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/node4"/>
+    <labels xsi:type="saltCore:SAnnotation" namespace="ns1" name="annoName1" valueString="annoValue1">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
+    <labels xsi:type="saltCore:SAnnotation" namespace="ns2" name="annoName2" valueString="annoValue2">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
+    <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName1" valueString="pAnnoValue1">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
+    <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName2" valueString="pAnnoValue2">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
+  </nodes>
+  <nodes xsi:type="saltCore:SNode" layers="//@layers.1">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/node2"/>
+  </nodes>
+  <nodes xsi:type="saltCore:SNode" layers="//@layers.1">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="null"/>
+  </nodes>
+  <nodes xsi:type="saltCore:SNode" layers="//@layers.2">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="null_0"/>
+  </nodes>
+  <edges xsi:type="saltCore:SRelation" source="//@nodes.0" target="//@nodes.1" layers="//@layers.0">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/rel1"/>
+    <labels xsi:type="saltCore:SAnnotation" namespace="ns1" name="annoName1" valueString="annoValue1">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
+    <labels xsi:type="saltCore:SAnnotation" namespace="ns2" name="annoName2" valueString="annoValue2">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
+    <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName1" valueString="pAnnoValue1">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
+    <labels xsi:type="saltCore:SProcessingAnnotation" namespace="procAnnos" name="annoName2" valueString="pAnnoValue2">
+      <labels name="SVAL_TYPE" valueString="STEXT"/>
+    </labels>
+  </edges>
+  <edges xsi:type="saltCore:SRelation" source="//@nodes.2" layers="//@layers.0">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/rel2"/>
+  </edges>
+  <edges xsi:type="saltCore:SRelation" source="//@nodes.3" layers="//@layers.1">
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" valueString="salt:/rel3"/>
+  </edges>
+  <layers xsi:type="saltCore:SLayer" nodes="//@nodes.0" edges="//@edges.0 //@edges.1" sName="layer1">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="layer1"/>
+  </layers>
+  <layers xsi:type="saltCore:SLayer" nodes="//@nodes.1 //@nodes.2" edges="//@edges.2" sName="layer2">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="layer2"/>
+  </layers>
+  <layers xsi:type="saltCore:SLayer" nodes="//@nodes.3" sName="layer3">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="layer3"/>
+  </layers>
+</saltCore:SGraph>

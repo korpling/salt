@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saltCore:SAnnotation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:saltCore="saltCore" name="annoName" valueString="annoValue">
+  <labels name="SVAL_TYPE" valueString="STEXT"/>
+</saltCore:SAnnotation>
