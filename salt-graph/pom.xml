@@ -9,11 +9,9 @@
   	<artifactId>salt</artifactId>
   	<version>1.1.2-SNAPSHOT</version>
   </parent>
-  <!-- 	
   <scm>
     <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/trunk/salt-graph</developerConnection>
   </scm>
-   -->
    <build>
     <plugins>
     <!-- start: Plugin for automatic releasing -->
