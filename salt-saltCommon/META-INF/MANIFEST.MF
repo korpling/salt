@@ -48,8 +48,8 @@ Bundle-Name: salt-saltCommon
 Created-By: Apache Maven Bundle Plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Build-Jdk: 1.6.0_21
-Bundle-Version: 1.1.2.SNAPSHOT
-Bnd-LastModified: 1315391184065
+Bundle-Version: 1.1.3.SNAPSHOT
+Bnd-LastModified: 1315493416100
 Bundle-ManifestVersion: 2
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Import-Package: de.hu_berlin.german.korpling.saltnpepper.salt,de.hu_be
