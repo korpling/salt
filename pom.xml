@@ -4,7 +4,7 @@
   <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
   <artifactId>salt</artifactId>
   <packaging>pom</packaging>
-  <version>1.1.3-SNAPSHOT</version>
+  <version>1.1.2-SNAPSHOT</version>
   <modules>
     <module>salt-graph</module>
     <module>salt-saltCore</module>
@@ -94,9 +94,12 @@
     <plugins>
       <!-- start: site plugin -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.0-beta-3</version>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-site-plugin</artifactId>
+	    <version>3.0</version>
+	    <configuration>
+        	<outputDirectory>${basedir}/docs/site</outputDirectory>
+        </configuration>
       </plugin>
       <!-- end: site plugin -->
       <!-- start: assembly plugin -->
@@ -114,6 +117,21 @@
         </configuration>
       </plugin>
       <!-- end: assembly plugin -->
+      <!-- start: Plugin for automatic releasing -->
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <tagBase>
+
+           https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/tags/
+
+         </tagBase>
+          <releaseProfiles>release</releaseProfiles>
+          <goals>deploy assembly:single</goals>
+        </configuration>
+      </plugin>
+      <!-- end: Plugin for automatic releasing -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
