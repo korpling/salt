@@ -17,7 +17,7 @@
     </license>
   </licenses>
   <scm>
-    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/trunk</developerConnection>
+    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk</developerConnection>
   </scm>
   <distributionManagement>
     <repository>
@@ -124,7 +124,7 @@
         <configuration>
           <tagBase>
 
-           https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/tags/
+           https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/
 
           </tagBase>
           <releaseProfiles>release</releaseProfiles>

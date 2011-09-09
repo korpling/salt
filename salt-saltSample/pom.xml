@@ -10,7 +10,7 @@
     <version>1.1.2-SNAPSHOT</version>
   </parent>
   <scm>
-    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/trunk/salt-saltSample</developerConnection>
+    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk/salt-saltSample</developerConnection>
   </scm>
   <dependencies>
     <dependency>
