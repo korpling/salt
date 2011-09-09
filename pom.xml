@@ -9,6 +9,7 @@
     <module>salt-graph</module>
     <module>salt-saltCore</module>
     <module>salt-saltCommon</module>
+    <module>salt-saltSample</module>
   </modules>
   <licenses>
     <license>
