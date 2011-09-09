@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sDocumentStructure:STextualRelation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sDocumentStructure="sDocumentStructure" xmlns:saltCore="saltCore">
-  <labels xsi:type="saltCore:SFeature" namespace="salt" name="STEXT_OVERLAPPING" valueString="true"/>
-  <identifier id="salt:/graph1#textualRelation1"/>
-  <source href="_TMP/SNode.saltCommon#/"/>
-  <target href="_TMP/SNode.saltCommon#/"/>
-</sDocumentStructure:STextualRelation>

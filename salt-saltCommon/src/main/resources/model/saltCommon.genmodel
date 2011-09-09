@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/salt.SaltCommon/src/main/java"
+    modelPluginID="de.hu_berlin.german.korpling.saltnpepper.salt.SaltCommon" modelName="SaltCommon"
+    modelPluginClass="" testsDirectory="/salt.SaltCommon/src/test/java" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../../../../salt.Graph/src/main/resources/model/graph.genmodel#//graph ../../../../../salt.SaltCore/src/main/resources/model/saltCore.genmodel#//saltCore">
+  <foreignModel>saltCommon.ecore</foreignModel>
+  <genPackages prefix="SaltCommon" basePackage="de.hu_berlin.german.korpling.saltnpepper.salt"
+      disposableProviderFactory="true" ecorePackage="saltCommon.ecore#/">
+    <genClasses ecoreClass="saltCommon.ecore#//SaltProject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//SaltProject/sCorpusGraphs"/>
+    </genClasses>
+    <nestedGenPackages prefix="SCorpusStructure" disposableProviderFactory="true"
+        ecorePackage="saltCommon.ecore#//sCorpusStructure">
+      <genClasses ecoreClass="saltCommon.ecore#//sCorpusStructure/SCorpusGraph">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusGraph/sDocuments"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusGraph/saltProject"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusGraph/sCorpora"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusGraph/sCorpusRelations"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusGraph/sCorpusDocumentRelations"/>
+        <genOperations ecoreOperation="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/getSCorpus">
+          <genParameters ecoreParameter="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/getSCorpus/sCorpusId"/>
+        </genOperations>
+        <genOperations ecoreOperation="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/getSDocument">
+          <genParameters ecoreParameter="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/getSDocument/sDocumentId"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sCorpusStructure/SDocument">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SDocument/sCorpusGraph"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SDocument/sDocumentGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sCorpusStructure/SCorpus">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpus/sCorpusGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sCorpusStructure/SCorpusRelation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusRelation/sSuperCorpus"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusRelation/sSubCorpus"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusRelation/sCorpusGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sCorpusStructure/SCorpusDocumentRelation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusDocumentRelation/sCorpus"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusDocumentRelation/sDocument"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sCorpusStructure/SCorpusDocumentRelation/sCorpusGraph"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="SDocumentStructure" disposableProviderFactory="true"
+        ecorePackage="saltCommon.ecore#//sDocumentStructure">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES">
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/STEXT_OVERLAPPING"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/SSTART"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/SEND"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/STEXT"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/SDATA"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/STIME_OVERLAPPING"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/SFEATURE_NAMES/STYPE_SRELATION"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="saltCommon.ecore#//sDocumentStructure/STYPE_NAME">
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/STEXTUAL_DS"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/STOKEN"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SSPAN"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SSTRUCTURE"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/STEXTUAL_RELATION"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SSPANNING_RELATION"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SDOMINANCE_RELATION"/>
+        <genEnumLiterals ecoreEnumLiteral="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SPOINTING_RELATION"/>
+      </genEnums>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SDocumentGraph">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sDocument"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sTextualDSs"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sTextualRelations"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sTokens"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sTimeline"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sTimelineRelations"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sSpanningRelations"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sSpans"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sStructures"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sDominanceRelations"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sPointingRelations"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/STextualDS">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCommon.ecore#//sDocumentStructure/STextualDS/sText"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/STextualDS/sDocumentGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SToken">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SToken/sDocumentGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/STextualRelation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/STextualRelation/sToken"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/STextualRelation/sTextualDS"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/STextualRelation/sDocumentGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SSequentialRelation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCommon.ecore#//sDocumentStructure/SSequentialRelation/sStart"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCommon.ecore#//sDocumentStructure/SSequentialRelation/sEnd"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SSequentialDS">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCommon.ecore#//sDocumentStructure/SSequentialDS/sData"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/STimeline">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute saltCommon.ecore#//sDocumentStructure/STimeline/sPointsOfTime"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/STimeline/sDocumentGraph"/>
+        <genOperations ecoreOperation="saltCommon.ecore#//sDocumentStructure/STimeline/addSPointOfTime">
+          <genParameters ecoreParameter="saltCommon.ecore#//sDocumentStructure/STimeline/addSPointOfTime/sPointOfTime"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/STimelineRelation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/STimelineRelation/sTimeline"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/STimelineRelation/sToken"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/STimelineRelation/sDocumentGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SSpan">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SSpan/sDocumentGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SSpanningRelation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SSpanningRelation/sToken"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SSpanningRelation/sSpan"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SSpanningRelation/sDocumentGraph"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="saltCommon.ecore#//sDocumentStructure/STextOverlappingRelation">
+        <genOperations ecoreOperation="saltCommon.ecore#//sDocumentStructure/STextOverlappingRelation/isSTextOverlapping"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="saltCommon.ecore#//sDocumentStructure/STimeOverlappingRelation">
+        <genOperations ecoreOperation="saltCommon.ecore#//sDocumentStructure/STimeOverlappingRelation/isSTimeOverlapping"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="saltCommon.ecore#//sDocumentStructure/SStructuredNode"/>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SStructure">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SStructure/sDocumentGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SPointingRelation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SPointingRelation/SStructuredSource"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SPointingRelation/SStructuredTarget"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SPointingRelation/sDocumentGraph"/>
+      </genClasses>
+      <genClasses ecoreClass="saltCommon.ecore#//sDocumentStructure/SDominanceRelation">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDominanceRelation/sStructure"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDominanceRelation/sStructuredTarget"/>
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference saltCommon.ecore#//sDocumentStructure/SDominanceRelation/sDocumentGraph"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

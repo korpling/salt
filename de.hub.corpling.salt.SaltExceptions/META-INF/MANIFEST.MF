@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: SaltExceptions
-Bundle-SymbolicName: de.hub.corpling.salt.SaltExceptions
-Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.hub.corpling.salt.saltExceptions

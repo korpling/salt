@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<sDocumentStructure:SDocumentGraph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sDocumentStructure="sDocumentStructure" name="">
-  <sNodes xsi:type="sDocumentStructure:SToken" name="tok1"/>
-  <sNodes xsi:type="sDocumentStructure:STextualRelation" sStart="3" sEnd="0" name="tok1ToText1" sToken="//@sNodes.0" sTextualDS="//@sTextualDSs.0"/>
-  <sDocument href="Model1.saltcommon#//@sCorpusGraphs.0/@sDocuments.0"/>
-  <sTextualDSs name="text1" sText="This is a sample text"/>
-</sDocumentStructure:SDocumentGraph>

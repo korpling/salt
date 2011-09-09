@@ -1,0 +1,10 @@
+<cesHeader xmlns="http://www.xces.org/ns/GrAF/0.99/">
+  <fileDesc></fileDesc>
+  <profileDesc>
+    <annotations>
+      <annotation ann.loc="partdlf-nachrichten-200703260000-is.graf" type="is" />
+      <annotation ann.loc="partdlf-nachrichten-200703260000-xle.graf" type="xle" />
+      <annotation ann.loc="partdlf-nachrichten-200703260000-prosody.graf" type="prosody" />
+    </annotations>
+  </profileDesc>
+</cesHeader>
