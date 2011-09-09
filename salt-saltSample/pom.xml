@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
+  <artifactId>salt-saltSample</artifactId>
+  <packaging>bundle</packaging>
+  <parent>
+    <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
+    <artifactId>salt</artifactId>
+    <version>1.1.2</version>
+  </parent>
+  <scm>
+    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/salt-1.1.2/salt-saltSample</developerConnection>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
+      <artifactId>salt-saltCommon</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

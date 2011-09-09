@@ -10,7 +10,7 @@
     <version>1.1.2</version>
   </parent>
   <scm>
-    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/tags/salt-1.1.2/salt-saltCommon</developerConnection>
+    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/salt-1.1.2/salt-saltCommon</developerConnection>
   </scm>
   <dependencies>
     <dependency>
@@ -36,7 +36,7 @@
         <configuration>
           <tagBase>
 
-           https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/tags/salt-saltCommon
+           https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/salt-saltCommon
 
          </tagBase>
           <releaseProfiles>release</releaseProfiles>
