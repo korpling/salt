@@ -42,14 +42,14 @@ Export-Package: de.hu_berlin.german.korpling.saltnpepper.salt;uses:="d
  pper.salt.saltCore,de.hu_berlin.german.korpling.saltnpepper.salt.grap
  h.modules,de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.mo
  dules,org.eclipse.emf.ecore.xmi.impl"
-Built-By: Florian Zipser
+Built-By: annis
 Tool: Bnd-0.0.357
 Bundle-Name: salt-saltCommon
 Created-By: Apache Maven Bundle Plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Build-Jdk: 1.6.0_21
-Bundle-Version: 1.1.3.SNAPSHOT
-Bnd-LastModified: 1315493416100
+Build-Jdk: 1.6.0_20
+Bundle-Version: 1.1.3
+Bnd-LastModified: 1315493727147
 Bundle-ManifestVersion: 2
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Import-Package: de.hu_berlin.german.korpling.saltnpepper.salt,de.hu_be

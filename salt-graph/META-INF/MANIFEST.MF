@@ -19,14 +19,14 @@ Export-Package: de.hu_berlin.german.korpling.saltnpepper.salt.graph;us
  in.german.korpling.saltnpepper.salt.graph.exceptions",de.hu_berlin.ge
  rman.korpling.saltnpepper.salt.graph.modules.exceptions;uses:="de.hu_
  berlin.german.korpling.saltnpepper.salt.graph.exceptions"
-Built-By: Florian Zipser
+Built-By: annis
 Tool: Bnd-0.0.357
 Bundle-Name: salt-graph
 Created-By: Apache Maven Bundle Plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Build-Jdk: 1.6.0_21
-Bundle-Version: 1.1.3.SNAPSHOT
-Bnd-LastModified: 1315493397746
+Build-Jdk: 1.6.0_20
+Bundle-Version: 1.1.3
+Bnd-LastModified: 1315493719015
 Bundle-ManifestVersion: 2
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Import-Package: de.hu_berlin.german.korpling.saltnpepper.salt.graph,de
