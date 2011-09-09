@@ -7,10 +7,10 @@
   <parent>
     <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
     <artifactId>salt</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6-SNAPSHOT</version>
   </parent>
   <scm>
-    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/tags/salt-1.1.5/salt-saltCore</developerConnection>
+    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/Salt/Salt/trunk/salt-saltCore</developerConnection>
   </scm>
   <dependencies>
     <dependency>
