@@ -396,12 +396,8 @@ public class SaltSample
 		sPointingRelation.setSStructuredTarget(sSpan);
 		//adding the created relation to the document-graph
 		sDocument.getSDocumentGraph().addSRelation(sPointingRelation);
-		//creating an annotation
-		SAnnotation sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-		sAnno.setSName("anaphoric");
-		sAnno.setSValue("antecedent");
-		//adding the annotation to the relation
-		sPointingRelation.addSAnnotation(sAnno);
+		//adding the type to the relation
+		sPointingRelation.addSType("anaphoric");
 		//creating an anaphoric relation with the use of pointing relations between the Tokens {"it"} and {"this", "example"}
 		
 	}

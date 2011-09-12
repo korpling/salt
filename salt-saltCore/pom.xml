@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
   <artifactId>salt-saltCore</artifactId>
   <packaging>bundle</packaging>
   <parent>
     <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
     <artifactId>salt</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.1.2</version>
+	<relativePath>../pom.xml</relativePath>
   </parent>
   <scm>
     <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk/salt-saltCore</developerConnection>
@@ -22,23 +22,6 @@
   </dependencies>
   <build>
     <plugins>
-      <!-- start: Plugin for automatic releasing -->
-      <!-- 
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.1</version>
-        <configuration>
-          <tagBase>
-
-          https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/salt-saltCore
-
-         </tagBase>
-          <releaseProfiles>release</releaseProfiles>
-          <goals>deploy assembly:single</goals>
-        </configuration>
-      </plugin>
-       -->
-      <!-- end: Plugin for automatic releasing -->
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
