@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<graph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:graph="graph">
+  <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="graph1"/>
+  <nodes>
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="n1"/>
+    <labels name="color" valueString="red"/>
+  </nodes>
+  <nodes layers="//@layers.0">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="n2"/>
+    <labels name="color" valueString="green"/>
+  </nodes>
+  <nodes layers="//@layers.1">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="n3"/>
+    <labels name="color" valueString="red"/>
+  </nodes>
+  <nodes layers="//@layers.1">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="n4"/>
+    <labels name="color" valueString="red"/>
+  </nodes>
+  <edges source="//@nodes.0" target="//@nodes.1">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="e1"/>
+    <labels name="costs" valueString="5"/>
+  </edges>
+  <edges source="//@nodes.1" target="//@nodes.2" layers="//@layers.0">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="e2"/>
+  </edges>
+  <edges source="//@nodes.1" target="//@nodes.3" layers="//@layers.0">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="e3"/>
+  </edges>
+  <layers nodes="//@nodes.1" edges="//@edges.1 //@edges.2" subLayers="//@layers.1">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="layer1"/>
+  </layers>
+  <layers nodes="//@nodes.2 //@nodes.3" superLayer="//@layers.0">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="layer2"/>
+  </layers>
+</graph:Graph>

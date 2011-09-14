@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<graph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:graph="graph">
+  <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="graph1"/>
+  <nodes>
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="node1"/>
+  </nodes>
+  <nodes>
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="node2"/>
+  </nodes>
+  <nodes>
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="node3"/>
+  </nodes>
+  <nodes>
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="node4"/>
+  </nodes>
+  <edges source="//@nodes.0" target="//@nodes.3">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="edge1"/>
+  </edges>
+  <edges source="//@nodes.1" target="//@nodes.2">
+    <labels xsi:type="graph:Identifier" namespace="graph" name="id" valueString="edge2"/>
+  </edges>
+</graph:Graph>
