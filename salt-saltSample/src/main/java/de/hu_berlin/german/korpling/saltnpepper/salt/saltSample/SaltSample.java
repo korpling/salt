@@ -44,6 +44,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
 
+
 /**
  * This class shows the usage of the linguistic meta model Salt. 
  * Therefore we create a linguistic corpus with direct use of the Salt object model. We here show how to store this model to disk and
@@ -176,7 +177,6 @@ public class SaltSample
 		createToken(49,51,sTextualDS,sDocument,morphLayer);
 		//creating tokenization for the token 'be' and adding it to the morphology layer
 		createToken(52,54,sTextualDS,sDocument,morphLayer);
-		
 	}
 	
 	public static void createToken(int start, int end, STextualDS sTextualDS, SDocument sDocument, SLayer layer){
@@ -267,8 +267,6 @@ public class SaltSample
 		sAnno.setSName("Inf-Struct");
 		sAnno.setSValue("topic");
 		sDocument.getSDocumentGraph().getSSpans().get(1).addSAnnotation(sAnno);
-		
-		
 	}
 	
 	public static void createSyntaxStructure(SDocument sDocument){
@@ -396,12 +394,8 @@ public class SaltSample
 		sPointingRelation.setSStructuredTarget(sSpan);
 		//adding the created relation to the document-graph
 		sDocument.getSDocumentGraph().addSRelation(sPointingRelation);
-		//creating an annotation
-		SAnnotation sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-		sAnno.setSName("anaphoric");
-		sAnno.setSValue("antecedent");
-		//adding the annotation to the relation
-		sPointingRelation.addSAnnotation(sAnno);
+		//adding the type to the relation
+		sPointingRelation.addSType("anaphoric");
 		//creating an anaphoric relation with the use of pointing relations between the Tokens {"it"} and {"this", "example"}
 		
 	}
