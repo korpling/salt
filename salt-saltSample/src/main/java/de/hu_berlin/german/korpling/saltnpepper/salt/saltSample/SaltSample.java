@@ -177,7 +177,6 @@ public class SaltSample
 		createToken(49,51,sTextualDS,sDocument,morphLayer);
 		//creating tokenization for the token 'be' and adding it to the morphology layer
 		createToken(52,54,sTextualDS,sDocument,morphLayer);
-		
 	}
 	
 	public static void createToken(int start, int end, STextualDS sTextualDS, SDocument sDocument, SLayer layer){
@@ -268,8 +267,6 @@ public class SaltSample
 		sAnno.setSName("Inf-Struct");
 		sAnno.setSValue("topic");
 		sDocument.getSDocumentGraph().getSSpans().get(1).addSAnnotation(sAnno);
-		
-		
 	}
 	
 	public static void createSyntaxStructure(SDocument sDocument){
