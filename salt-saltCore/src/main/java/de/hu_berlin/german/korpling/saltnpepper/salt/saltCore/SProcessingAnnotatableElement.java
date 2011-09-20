@@ -17,9 +17,10 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 
 import org.eclipse.emf.common.util.EList;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 
 /**
  * <!-- begin-user-doc -->

@@ -17,9 +17,9 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer;
-
 import org.eclipse.emf.common.util.EList;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer;
 
 /**
  * <!-- begin-user-doc -->

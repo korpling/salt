@@ -17,8 +17,9 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import org.eclipse.emf.common.util.URI;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 
 /**
  * <!-- begin-user-doc -->
