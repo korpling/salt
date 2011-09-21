@@ -34,8 +34,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.CycleCheckerListener;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.SGraphAccessorModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.CycleCheckerListener.CYCLE_LEVELS;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.SGraphAccessorModule;
 
 public class CycleChecker implements TraversalObject
 {

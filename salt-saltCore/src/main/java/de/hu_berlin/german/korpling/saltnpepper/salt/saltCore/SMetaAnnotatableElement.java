@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>SMeta Annotatable Element</b></em>'.

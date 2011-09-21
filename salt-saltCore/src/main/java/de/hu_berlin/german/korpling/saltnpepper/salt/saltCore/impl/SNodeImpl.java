@@ -28,6 +28,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.NodeImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
@@ -50,8 +52,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SFeatura
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SIdentifiableElementAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SMetaAnnotatableElementAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcessingAnnotatableElementAccessor;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.NodeImpl;
 
 /**
  * <!-- begin-user-doc -->

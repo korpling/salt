@@ -17,16 +17,15 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.LabelImpl;
-import org.eclipse.emf.common.util.URI;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 
 /**
  * <!-- begin-user-doc -->

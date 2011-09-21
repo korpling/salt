@@ -17,7 +17,11 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.util;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.*;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+import org.eclipse.emf.ecore.EObject;
+
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
@@ -26,14 +30,23 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notifier;
-
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
-import org.eclipse.emf.ecore.EObject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SIdentifiableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 
 /**
  * <!-- begin-user-doc -->
