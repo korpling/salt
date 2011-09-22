@@ -188,37 +188,45 @@ public class GrAFReader extends DefaultHandler2
 			STextualRelation sTextualRelation = SaltFactory.eINSTANCE.createSTextualRelation();
 			sTextualRelation.setSToken(sToken);
 			sTextualRelation.setSTextualDS(currentSTextualDS);
-			// handle region attributes: xml:id - Name 
-			sToken.setSName(attributes.getValue("xml:id"));
-			// handle region attributes: atype - label
-			String atype = attributes.getValue("atype");
-			if (atype != null)
-			{// optional attribute atype is given 
-				//TODO add label  
-			}// optional attribute atype is given
-			// handle region attributes: anchors 
-			String[] anchors= attributes.getValue("anchors").split(" ");
-			if(anchors.length == 2)
-			{// two anchors for region
-				//DEBUG System.out.println(anchors[0]+","+anchors[1]);
-				Integer start = null;
-				Integer end = null;
-				try {
-					start= new Integer(anchors[0]);
-					end= new Integer(anchors[1]);
-				}catch (NumberFormatException e) 
-				{
-					throw new SaltResourceException("Cannot read given GrAF-file '"+this.getFileResource().getAbsolutePath()+"', because the start and end position of region is not convertable to a number.", e);
-				}
-				sTextualRelation.setSStart(start);
-				sTextualRelation.setSEnd(end);
-			}// two anchors for region
-			else
-			{
-				throw new SaltResourceException("Only pairs of integer values are supported as region anchors by this version. They are interpreted as character-offsets to start and end position of region.");
+			// handle region attributes
+			int rAttNum = attributes.getLength();
+			for(int i=0; i<=rAttNum; i++){
+				String regionAtt = attributes.getQName(i);
+				//if(regionAtt.equalsIgnoreCase("xml:id"))
+				//{// handle region attributes: xml:id - Name 
+				//	sToken.setSName(attributes.getValue("xml:id"));
+				//}
+				//else if(regionAtt.equalsIgnoreCase("anchors"))
+				//{// handle region attributes: anchors 
+				//	String[] anchors= attributes.getValue("anchors").split(" ");
+				//	if(anchors.length == 2)
+				//	{// two anchors for region
+				//		//DEBUG System.out.println(anchors[0]+","+anchors[1]);
+				//		Integer start = null;
+				//		Integer end = null;
+				//		try {
+				//			start= new Integer(anchors[0]);
+				//			end= new Integer(anchors[1]);
+				//		}catch (NumberFormatException e) 
+				//		{
+				//			throw new SaltResourceException("Cannot read given GrAF-file '"+this.getFileResource().getAbsolutePath()+"', because the start and end position of region is not convertable to a number.", e);
+				//		}
+				//		sTextualRelation.setSStart(start);
+				//		sTextualRelation.setSEnd(end);
+				//	}// two anchors for region
+				//	else
+				//	{
+				//		throw new SaltResourceException("Only pairs of integer values are supported as region anchors by this version. They are interpreted as character-offsets to start and end position of region.");
+				//	}
+				//}
+				//else
+				//{// Warn if other attributes are specified
+				//	//TODO: Warning instead of exception
+				//	throw new SaltResourceException("Attribute "+regionAtt+" of element "+ELEMENT_REGION+" is not handled by this version.");
+				//}
 			}
 			getsDocumentGraph().addSNode(sToken);
-			getsDocumentGraph().addSRelation(sTextualRelation);
+			getsDocumentGraph().addSRelation(sTextualRelation);		
 		}//xml-element is region
 		else if(qName.equalsIgnoreCase(ELEMENT_NODE))
 		{//xml-element is node
