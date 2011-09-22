@@ -4,7 +4,7 @@
   <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
   <artifactId>salt</artifactId>
   <packaging>pom</packaging>
-  <version>1.1.3-SNAPSHOT</version>
+  <version>1.1.2-SNAPSHOT</version>
   <modules>
     <module>salt-graph</module>
     <module>salt-saltCore</module>
@@ -129,7 +129,7 @@
 
           </tagBase>
           <releaseProfiles>release</releaseProfiles>
-          <goals>assembly:single deploy</goals>
+          <goals>package assembly:single deploy</goals>
         </configuration>
       </plugin>
       <!-- end: Plugin for automatic releasing -->
