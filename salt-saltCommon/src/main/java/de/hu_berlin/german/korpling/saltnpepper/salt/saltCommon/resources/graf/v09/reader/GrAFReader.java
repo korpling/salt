@@ -190,40 +190,43 @@ public class GrAFReader extends DefaultHandler2
 			sTextualRelation.setSTextualDS(currentSTextualDS);
 			// handle region attributes
 			int rAttNum = attributes.getLength();
-			for(int i=0; i<=rAttNum; i++){
-				String regionAtt = attributes.getQName(i);
-				//if(regionAtt.equalsIgnoreCase("xml:id"))
-				//{// handle region attributes: xml:id - Name 
-				//	sToken.setSName(attributes.getValue("xml:id"));
-				//}
-				//else if(regionAtt.equalsIgnoreCase("anchors"))
-				//{// handle region attributes: anchors 
-				//	String[] anchors= attributes.getValue("anchors").split(" ");
-				//	if(anchors.length == 2)
-				//	{// two anchors for region
-				//		//DEBUG System.out.println(anchors[0]+","+anchors[1]);
-				//		Integer start = null;
-				//		Integer end = null;
-				//		try {
-				//			start= new Integer(anchors[0]);
-				//			end= new Integer(anchors[1]);
-				//		}catch (NumberFormatException e) 
-				//		{
-				//			throw new SaltResourceException("Cannot read given GrAF-file '"+this.getFileResource().getAbsolutePath()+"', because the start and end position of region is not convertable to a number.", e);
-				//		}
-				//		sTextualRelation.setSStart(start);
-				//		sTextualRelation.setSEnd(end);
-				//	}// two anchors for region
-				//	else
-				//	{
-				//		throw new SaltResourceException("Only pairs of integer values are supported as region anchors by this version. They are interpreted as character-offsets to start and end position of region.");
-				//	}
-				//}
-				//else
-				//{// Warn if other attributes are specified
-				//	//TODO: Warning instead of exception
-				//	throw new SaltResourceException("Attribute "+regionAtt+" of element "+ELEMENT_REGION+" is not handled by this version.");
-				//}
+			// Index is zerobased
+			for(int i=0; i < rAttNum; i++){
+				//TODO local or qualified Attribute Name?
+				//String regionAtt = attributes.getQName(i);
+				String regionAtt = attributes.getLocalName(i);
+				//DEBUG System.out.println(i+" "+regionAtt);
+				if(regionAtt.equalsIgnoreCase("xml:id"))
+				{// handle region attributes: xml:id - Name 
+					sToken.setSName(attributes.getValue("xml:id"));
+				}
+				else if(regionAtt.equalsIgnoreCase("anchors"))
+				{// handle region attributes: anchors 
+					String[] anchors= attributes.getValue("anchors").split(" ");
+					if(anchors.length == 2)
+					{// two anchors for region
+						//DEBUG System.out.println(anchors[0]+","+anchors[1]);
+						Integer start = null;
+						Integer end = null;
+						try {
+							start= new Integer(anchors[0]);
+							end= new Integer(anchors[1]);
+						}catch (NumberFormatException e) 
+						{
+							throw new SaltResourceException("Cannot read given GrAF-file '"+this.getFileResource().getAbsolutePath()+"', because the start and end position of region is not convertable to a number.", e);
+						}
+						sTextualRelation.setSStart(start);
+						sTextualRelation.setSEnd(end);
+					}// two anchors for region
+					else
+					{
+						throw new SaltResourceException("Only pairs of integer values are supported as region anchors by this version. They are interpreted as character-offsets to start and end position of region.");
+					}
+				}
+				else
+				{// Warn if other attributes are specified
+					System.out.println("Attribute "+regionAtt+" of element "+ELEMENT_REGION+" is not handled by this version.");
+				}
 			}
 			getsDocumentGraph().addSNode(sToken);
 			getsDocumentGraph().addSRelation(sTextualRelation);		
@@ -242,7 +245,7 @@ public class GrAFReader extends DefaultHandler2
 			}//xml-element has to be mapped to a SStructure
 			else if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.POINTER.toString()))
 			{//xml-element cannot be mapped, pointing relations do not specify a node type
-				//TODO Node Mapping Type vs. Edge Mapping Type? Mapping Type pointer means 'edge-only' files?
+				throw new SaltResourceException("Cannot handle mapping type "+config_map_type+" for nodes.");
 			}//xml-element cannot be mapped, pointing relations do not specify a node type
 			else
 			{//xml-element cannot be mapped
@@ -250,22 +253,73 @@ public class GrAFReader extends DefaultHandler2
 			}//xml-element cannot be mapped
 			if (sNode!= null)
 			{//to some general things for every node
-				sNode.setSName(attributes.getValue("xml:id"));
+				// handle node attributes
+				int nAttNum = attributes.getLength();
+				// Index is zerobased
+				for(int i=0; i < nAttNum; i++){
+					//TODO local or qualified Attribute Name?
+					//String nodeAtt = attributes.getQName(i);
+					String nodeAtt = attributes.getLocalName(i);
+					//DEBUG System.out.println(i+" "+nodeAtt);
+					if(nodeAtt.equalsIgnoreCase("xml:id"))
+					{// handle node attributes: xml:id - Name 
+						sNode.setSName(attributes.getValue("xml:id"));
+					}
+					else
+					{// Warn if other attributes are specified
+						System.out.println("Attribute "+nodeAtt+" of element "+ELEMENT_NODE+" is not handled by this version.");
+					}
+				}
 				this.node_stack.push(sNode);
 //				if (this.currentSLayer!= null)
 //					this.currentSLayer.getSNodes().add(sNode);
 //				this.currentSNode= sNode;
 //				this.nodeId2SNode.put(attributes.getValue("id"), sNode);
-				this.getsDocumentGraph().addSNode(sNode);
+				//DEBUG System.out.println(sNode.getSId()+" "+sNode.getSName());
+				this.getsDocumentGraph().addSNode(sNode);			
 			}//to some general things for every node
 		}
 		else if(qName.equalsIgnoreCase(ELEMENT_GRAPH))
 		{//xml-element is graph
 			// do nothing
+			// attributes
+			int gAttNum = attributes.getLength();
+			// Index is zerobased
+			for(int i=0; i < gAttNum; i++){
+				//TODO local or qualified Attribute Name?
+				//String graphAtt = attributes.getQName(i);
+				String graphAtt = attributes.getLocalName(i);
+				//DEBUG System.out.println(i+" "+graphAtt);		
+				//TODO find more appropriate output statement
+				System.out.println("Attribute "+graphAtt+" of element "+ELEMENT_GRAPH+" is not processed by this version.");
+			}
 		}//xml-element is graph
 		else if(qName.equalsIgnoreCase(ELEMENT_LINK))
 		{//xml-element is link
-			//System.out.println(node_stack.peek());
+			SRelation sRelation = null;
+			// map links to SSpanningRelation or SDominanceRelation	
+			if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.SPAN.toString()))
+			{//xml-element has to be mapped to SSpanningRelation
+				sRelation= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+			}//xml-element has to be mapped to SSpanningRelation
+			else if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.HIERARCHIE.toString()))
+			{//xml-element has to be mapped to SDominanceRelation
+				sRelation= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			}//xml-element has to be mapped to SDominanceRelation
+			else if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.POINTER.toString()))
+			{
+				throw new SaltResourceException("Cannot handle mapping type "+config_map_type+" for links.");
+			}
+			else
+			{//xml-element cannot be mapped
+				throw new SaltResourceException("Cannot handle mapping type "+config_map_type+". Only mapping types "+GRAF_MAPPING_TYPE.SPAN.toString()+", "+GRAF_MAPPING_TYPE.HIERARCHIE.toString()+", "+GRAF_MAPPING_TYPE.POINTER.toString()+" are handled by this version.");
+			}//xml-element cannot be mapped
+			if (sRelation!= null)
+			{//to some general things for every link
+				//TODO handle attributes, for each target prepare relation
+				//set Source
+				sRelation.setSSource(node_stack.peek());
+			}
 		}//xml-element is link
 		else if(qName.equalsIgnoreCase(ELEMENT_EDGE))
 		{//xml-element is edge
@@ -296,7 +350,7 @@ public class GrAFReader extends DefaultHandler2
 				if(edgeId!= null){
 					sRelation.setSName(attributes.getValue("xml:id"));
 				}
-				System.out.println(sRelation.getSId()+" "+sRelation.getSName());
+				//System.out.println(sRelation.getSId()+" "+sRelation.getSName());
 				this.getsDocumentGraph().addSRelation(sRelation);
 			}//to some general things for every edge
 		}//xml-element is edge
