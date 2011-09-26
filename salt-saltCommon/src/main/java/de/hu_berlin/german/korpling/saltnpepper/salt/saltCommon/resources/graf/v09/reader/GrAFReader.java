@@ -18,6 +18,8 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.graf.v09.reader;
 
 import java.io.File;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Stack;
 
@@ -34,6 +36,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
@@ -76,7 +79,22 @@ public class GrAFReader extends DefaultHandler2
 	 * Stores node, for links
 	 */
 //	private SNode currentSNode= null;
-	private Stack<SNode> node_stack= new Stack<SNode>();  	
+	/**
+	 * Stack for current nodes
+	 */
+	private Stack<SNode> node_stack= new Stack<SNode>();
+	/**
+	 * Hashtable containing link relations and their target identifier
+	 */
+	private Hashtable<SRelation,String> link_table= new Hashtable<SRelation,String>();
+	/**
+	 * Hashtable containing edge relations and their start identifier
+	 */
+	private Hashtable<SRelation,String> edge_from = new Hashtable<SRelation,String>();
+	/**
+	 * Hashtable containing edge relations and their target identifier
+	 */
+	private Hashtable<SRelation,String> edge_to = new Hashtable<SRelation,String>();
 	/**
 	 * the SDocumentGraph object, where all nodes, relations annotations etc. are supposed to be mapped in.
 	 */
@@ -245,7 +263,7 @@ public class GrAFReader extends DefaultHandler2
 			}//xml-element has to be mapped to a SStructure
 			else if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.POINTER.toString()))
 			{//xml-element cannot be mapped, pointing relations do not specify a node type
-				throw new SaltResourceException("Cannot handle mapping type "+config_map_type+" for nodes.");
+				throw new SaltResourceException("Cannot handle mapping type "+config_map_type+" for element "+ELEMENT_NODE+".");
 			}//xml-element cannot be mapped, pointing relations do not specify a node type
 			else
 			{//xml-element cannot be mapped
@@ -262,7 +280,7 @@ public class GrAFReader extends DefaultHandler2
 					String nodeAtt = attributes.getLocalName(i);
 					//DEBUG System.out.println(i+" "+nodeAtt);
 					if(nodeAtt.equalsIgnoreCase("xml:id"))
-					{// handle node attributes: xml:id - Name 
+					{// handle node attributes: xml:id - Name and Identifier
 						sNode.setSName(attributes.getValue("xml:id"));
 					}
 					else
@@ -296,30 +314,54 @@ public class GrAFReader extends DefaultHandler2
 		}//xml-element is graph
 		else if(qName.equalsIgnoreCase(ELEMENT_LINK))
 		{//xml-element is link
-			SRelation sRelation = null;
-			// map links to SSpanningRelation or SDominanceRelation	
-			if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.SPAN.toString()))
-			{//xml-element has to be mapped to SSpanningRelation
-				sRelation= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
-			}//xml-element has to be mapped to SSpanningRelation
-			else if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.HIERARCHIE.toString()))
-			{//xml-element has to be mapped to SDominanceRelation
-				sRelation= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
-			}//xml-element has to be mapped to SDominanceRelation
-			else if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.POINTER.toString()))
+			//Introduces a Relation for every link target
+			//Therefore handle attributes first
+			int lAttNum = attributes.getLength();
+			// Index is zerobased
+			for(int i=0; i < lAttNum; i++)
 			{
-				throw new SaltResourceException("Cannot handle mapping type "+config_map_type+" for links.");
-			}
-			else
-			{//xml-element cannot be mapped
-				throw new SaltResourceException("Cannot handle mapping type "+config_map_type+". Only mapping types "+GRAF_MAPPING_TYPE.SPAN.toString()+", "+GRAF_MAPPING_TYPE.HIERARCHIE.toString()+", "+GRAF_MAPPING_TYPE.POINTER.toString()+" are handled by this version.");
-			}//xml-element cannot be mapped
-			if (sRelation!= null)
-			{//to some general things for every link
-				//TODO handle attributes, for each target prepare relation
-				//set Source
-				sRelation.setSSource(node_stack.peek());
-			}
+				//TODO local or qualified Attribute Name?
+				//String linkAtt = attributes.getQName(i);
+				String linkAtt = attributes.getLocalName(i);
+				//DEBUG System.out.println(i+" "+linkAtt);
+				if(linkAtt.equalsIgnoreCase("targets"))
+				{// handle link attributes: targets - one relation each 
+					String[] targets= attributes.getValue("targets").split(" ");
+					for(String target : targets)
+					{
+						//DEBUG System.out.println(target);
+						SRelation sRelation = null;
+						// map links to SSpanningRelation or SDominanceRelation	
+						if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.SPAN.toString()))
+						{//xml-element has to be mapped to SSpanningRelation
+							sRelation= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+						}//xml-element has to be mapped to SSpanningRelation
+						else if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.HIERARCHIE.toString()))
+						{//xml-element has to be mapped to SDominanceRelation
+							sRelation= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+						}//xml-element has to be mapped to SDominanceRelation
+						else if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.POINTER.toString()))
+						{
+							throw new SaltResourceException("Cannot handle mapping type "+config_map_type+" for "+ELEMENT_LINK+" elements.");
+						}
+						else
+						{//xml-element cannot be mapped
+							throw new SaltResourceException("Cannot handle mapping type "+config_map_type+". Only mapping types "+GRAF_MAPPING_TYPE.SPAN.toString()+", "+GRAF_MAPPING_TYPE.HIERARCHIE.toString()+", "+GRAF_MAPPING_TYPE.POINTER.toString()+" are handled by this version.");
+						}//xml-element cannot be mapped
+						if (sRelation!= null)
+						{//to some general things for every link
+							//set Source
+							sRelation.setSSource(node_stack.peek());
+							//push relation and expected target on stack
+							link_table.put(sRelation, target);
+						}
+					}
+				}
+				else
+				{// Warn if other attributes are specified
+					System.out.println("Attribute "+linkAtt+" of element "+ELEMENT_LINK+" is not handled by this version.");
+				}
+			}		
 		}//xml-element is link
 		else if(qName.equalsIgnoreCase(ELEMENT_EDGE))
 		{//xml-element is edge
@@ -344,19 +386,38 @@ public class GrAFReader extends DefaultHandler2
 			//System.out.println(getsDocumentGraph().getSNodes());
 			if (sRelation!= null)
 			{//to some general things for every edge
-				//id is optional for edges - it if has one, it might be annotated
-				String edgeId= null;
-				edgeId= attributes.getValue("xml:id");
-				if(edgeId!= null){
-					sRelation.setSName(attributes.getValue("xml:id"));
+				// handle edge attributes
+				int eAttNum = attributes.getLength();
+				// Index is zerobased
+				for(int i=0; i < eAttNum; i++){
+					//TODO local or qualified Attribute Name?
+					//String edgeAtt = attributes.getQName(i);
+					String edgeAtt = attributes.getLocalName(i);
+					//DEBUG System.out.println(i+" "+edgeAtt);
+					if(edgeAtt.equalsIgnoreCase("xml:id"))
+					{// handle edge attributes: xml:id - Name
+						//id was optional for edges - it if has one, it might be annotated
+						sRelation.setSName(attributes.getValue("xml:id"));
+					}
+					else if(edgeAtt.equalsIgnoreCase("from"))
+					{// handle edge attributes: start node
+						edge_from.put(sRelation, attributes.getValue("from"));
+					}
+					else if(edgeAtt.equalsIgnoreCase("to"))
+					{// handle edge attributes: target node
+						edge_to.put(sRelation, attributes.getValue("to"));
+					}
+					else
+					{// Warn if other attributes are specified
+						System.out.println("Attribute "+edgeAtt+" of element "+ELEMENT_EDGE+" is not handled by this version.");
+					}
 				}
-				//System.out.println(sRelation.getSId()+" "+sRelation.getSName());
-				this.getsDocumentGraph().addSRelation(sRelation);
+				//DEBUG System.out.println(sRelation.getSId()+" "+sRelation.getSName());
 			}//to some general things for every edge
 		}//xml-element is edge
 		else if(qName.equalsIgnoreCase(ELEMENT_ANNOTATION))
 		{//xml-element is annot
-			//TODO handle annotation
+			//SAnnotation sAnnotation = ;
 		}//xml-element is annot
 		else if(qName.equalsIgnoreCase(ELEMENT_FEATURE_STRUCTURE))
 		{//xml-element is fs
@@ -377,9 +438,44 @@ public class GrAFReader extends DefaultHandler2
             					String localName,
             					String qName) throws SAXException
     {
-		if (ELEMENT_REGION.equalsIgnoreCase(qName))
+		if (ELEMENT_NODE.equalsIgnoreCase(qName))
 		{
-			//TODO do something
+			node_stack.pop();
+		}
+		else if (ELEMENT_GRAPH.equalsIgnoreCase(qName))
+		{
+			//Insert link relations
+			Enumeration<SRelation> l = link_table.keys();
+			while(l.hasMoreElements())
+			{
+				SRelation link = l.nextElement();
+				String region = link_table.get(link);
+				//SToken token = getsDocumentGraph().getS
+			}
+			//Insert edge relations
+			Enumeration<SRelation> r = edge_from.keys();
+			//only keys of edge_from: if from-node is not available it is not relevant to check for target node
+			while(r.hasMoreElements())
+			{
+				SRelation edge = r.nextElement();
+				String start = edge_from.get(edge);
+				String target = edge_to.get(edge);
+				SNode start_node = this.getsDocumentGraph().getSNode(start);
+				SNode target_node = this.getsDocumentGraph().getSNode(target);
+				if ((start_node != null) & (target_node != null))
+				{
+					edge.setSSource(start_node);
+					edge.setSTarget(target_node);
+					this.getsDocumentGraph().addSRelation(edge);
+				}
+				else
+				{
+					throw new SaltResourceException("Cannot insert edge because at least one of the connected nodes ("+start+","+target+") is missing.");
+
+				}
+			}
+			//Insert annotations
+			//TODO
 		}
     }
 
