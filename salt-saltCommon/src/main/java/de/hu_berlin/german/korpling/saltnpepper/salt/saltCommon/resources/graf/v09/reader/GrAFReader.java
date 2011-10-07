@@ -86,6 +86,10 @@ public class GrAFReader extends DefaultHandler2
 	 */
 	private Stack<SNode> node_stack= new Stack<SNode>();
 	/**
+	 * Stack for current a element
+	 */
+	private Stack<SAnnotation> a_stack= new Stack<SAnnotation>();
+	/**
 	 * Hashtable containing link relations and their target identifier
 	 */
 	private Hashtable<SRelation,String> link_table= new Hashtable<SRelation,String>();
@@ -100,7 +104,7 @@ public class GrAFReader extends DefaultHandler2
 	/**
 	 * Hashtable containing mapping from GrAF xml:id of regions, nodes and edges to internal id
 	 */
-	private Hashtable<String,String> grafId2Id = new Hashtable<String,String>();
+	private static Hashtable<String,String> grafId2Id = new Hashtable<String,String>();
 	/**
 	 * the SDocumentGraph object, where all nodes, relations annotations etc. are supposed to be mapped in.
 	 */
@@ -223,7 +227,7 @@ public class GrAFReader extends DefaultHandler2
 				if(regionAtt.equalsIgnoreCase("xml:id"))
 				{// handle region attributes: xml:id - Name 
 					sToken.setSName(attributes.getValue("xml:id"));
-					System.out.println(attributes.getValue("xml:id"));
+					//DEBUG System.out.println(attributes.getValue("xml:id"));
 				}
 				else if(regionAtt.equalsIgnoreCase("anchors"))
 				{// handle region attributes: anchors 
@@ -255,7 +259,7 @@ public class GrAFReader extends DefaultHandler2
 			}
 			this.getsDocumentGraph().addSNode(sToken);
 			//xml:id is a required attribute for regions
-			this.grafId2Id.put(attributes.getValue("xml:id"), sToken.getSId());
+			grafId2Id.put(attributes.getValue("xml:id"), sToken.getSId());
 			this.getsDocumentGraph().addSRelation(sTextualRelation);		
 		}//xml-element is region
 		else if(qName.equalsIgnoreCase(ELEMENT_NODE))
@@ -297,7 +301,7 @@ public class GrAFReader extends DefaultHandler2
 						System.out.println("Attribute "+nodeAtt+" of element "+ELEMENT_NODE+" is not handled by this version.");
 					}
 				}
-				this.node_stack.push(sNode);
+				node_stack.push(sNode);
 //TODO: Layer handling needed?
 //				if (this.currentSLayer!= null)
 //					this.currentSLayer.getSNodes().add(sNode);
@@ -306,7 +310,7 @@ public class GrAFReader extends DefaultHandler2
 				//DEBUG System.out.println(sNode.getSId()+" "+sNode.getSName());
 				this.getsDocumentGraph().addSNode(sNode);
 				//xml:id is a required attribute for nodes
-				this.grafId2Id.put(attributes.getValue("xml:id"), sNode.getSId());
+				grafId2Id.put(attributes.getValue("xml:id"), sNode.getSId());
 			}//to some general things for every node
 		}
 		else if(qName.equalsIgnoreCase(ELEMENT_GRAPH))
@@ -340,7 +344,8 @@ public class GrAFReader extends DefaultHandler2
 					String[] targets= attributes.getValue("targets").split(" ");
 					for(String target : targets)
 					{
-						//DEBUG System.out.println(target);
+						//DEBUG 
+						System.out.println("Target:"+target);
 						SRelation sRelation = null;
 						// map links to SSpanningRelation or SDominanceRelation	
 						if (config_map_type.equalsIgnoreCase(GRAF_MAPPING_TYPE.SPAN.toString()))
@@ -364,7 +369,9 @@ public class GrAFReader extends DefaultHandler2
 							//set Source
 							sRelation.setSSource(node_stack.peek());
 							//push relation and expected target on stack
-							this.link_table.put(sRelation, target);
+							//TODO: warning, if two edges have same source: -> same key on hashtable -> overwrite
+							link_table.put(sRelation, target);
+							System.out.println(link_table.size());
 						}
 					}
 				}
@@ -412,11 +419,16 @@ public class GrAFReader extends DefaultHandler2
 					}
 					else if(edgeAtt.equalsIgnoreCase("from"))
 					{// handle edge attributes: start node
+						System.out.println(attributes.getValue("from"));
+						//TODO: overwrites instead of adding -> change
 						edge_from.put(sRelation, attributes.getValue("from"));
+						System.out.println("from size: "+edge_from.size());
 					}
 					else if(edgeAtt.equalsIgnoreCase("to"))
 					{// handle edge attributes: target node
+						//TODO: overwrites instead of adding -> change
 						edge_to.put(sRelation, attributes.getValue("to"));
+						System.out.println("to size: "+edge_to.size());
 					}
 					else
 					{// Warn if other attributes are specified
@@ -428,7 +440,9 @@ public class GrAFReader extends DefaultHandler2
 		}//xml-element is edge
 		else if(qName.equalsIgnoreCase(ELEMENT_ANNOTATION))
 		{//xml-element is annot
-			//SAnnotation sAnnotation = ;
+			SAnnotation sAnnotation = SaltFactory.eINSTANCE.createSAnnotation();
+			a_stack.push(sAnnotation);
+			//DEBUG System.out.println(a_stack.size());
 		}//xml-element is annot
 		else if(qName.equalsIgnoreCase(ELEMENT_FEATURE_STRUCTURE))
 		{//xml-element is fs
@@ -453,36 +467,49 @@ public class GrAFReader extends DefaultHandler2
 		{//end of xml-element node
 			node_stack.pop();
 		}//end of xml-element node
+		else if (ELEMENT_ANNOTATION.equalsIgnoreCase(qName))
+		{//end of xml-element a
+			a_stack.pop();
+		}//end of xml-element a
 		else if (ELEMENT_GRAPH.equalsIgnoreCase(qName))
 		{//end of xml-element graph
 			//Insert link relations
-			Enumeration<SRelation> l = this.link_table.keys();
+			Enumeration<SRelation> l = link_table.keys();
 			while(l.hasMoreElements())
-			{
+			{//loop through pending links, check if target region is available
+				//DEBUG System.out.println(link_table.get(l.nextElement()));
 				SRelation link = l.nextElement();
-				String regionXmlId = this.link_table.get(link);
-				String regionId = this.grafId2Id.get(regionXmlId);
+				//DEBUG System.out.println(link_table.get(link));
+				String regionXmlId = link_table.get(link);
+				//DEBUG 
+				System.out.println(link.getSSource().getSName()+","+regionXmlId);
+				System.out.println(grafId2Id.get(regionXmlId));
+				String regionId = grafId2Id.get(regionXmlId);
 				if (regionId != null)
 				{
 					SNode region = this.getsDocumentGraph().getSNode(regionId);
 					link.setSTarget(region);
+					this.getsDocumentGraph().addSRelation(link);
+					System.out.println("Link to region "+regionXmlId+" added.");
 				}
+				else
 				{
 					throw new SaltResourceException("Cannot insert link because target region ("+regionXmlId+") is missing.");
 				}
-				
-			}
+			} //loop through pending links, check if target region is available
 			//Insert edge relations
 			Enumeration<SRelation> r = edge_from.keys();
 			//only keys of edge_from: if from-node is not available it is not relevant to check for target node
 			while(r.hasMoreElements())
-			{
+			{//loop through pending edges, check if start and target nodes are available
+				System.out.println(edge_from.size());
 				SRelation edge = r.nextElement();
 				String startXmlId = edge_from.get(edge);
 				System.out.println(startXmlId);
 				String targetXmlId = edge_to.get(edge);
-				String startId = this.grafId2Id.get(startXmlId);
-				String targetId = this.grafId2Id.get(targetXmlId);
+				System.out.println(targetXmlId);
+				String startId = grafId2Id.get(startXmlId);
+				String targetId = grafId2Id.get(targetXmlId);
 				if ((startId != null) & (targetId != null))
 				{
 					SNode start_node = this.getsDocumentGraph().getSNode(startId);
@@ -496,7 +523,7 @@ public class GrAFReader extends DefaultHandler2
 				{
 					throw new SaltResourceException("Cannot insert edge because at least one of the connected nodes ("+startXmlId+","+targetXmlId+") is missing.");
 				}
-			}
+			}//loop through pending edges, check if start and target nodes are available
 			//Insert annotations
 			//TODO
 		}//end of xml-element graph
