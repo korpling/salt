@@ -147,7 +147,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node
 
 	/**
 	 * {@inheritDoc}
-	 * @generated
 	 */
 	public Object clone() 
 	{
