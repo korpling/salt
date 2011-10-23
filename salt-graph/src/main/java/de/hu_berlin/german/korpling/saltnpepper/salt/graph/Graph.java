@@ -323,4 +323,38 @@ public interface Graph extends IdentifiableElement {
 	 */
 	Layer getLayer(String layerId);
 
+	/**
+	 * Returns all root nodes, if exists. A root node is a node, which has no ingoing edges.
+	 * @return list of nodes being roots in the given graph.
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<Node> getRoots();
+
+	/**
+	 * Returns all leaf nodes, if exists. A leaf node is a node, which has no outgoing edges.
+	 * @return list of nodes being leafs in the given graph.
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<Node> getLeafs();
+
+	/**
+	 * Traverses a graph in the given order traverseType and starts traversing with the given startNodes. When a node is reached, 
+	 * first this method will invoke the method {@link GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_MODE, String, Edge, Node, long)} 
+	 * of the given callback handler traverseHandler, second the method {@link GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)}
+	 * is invoked. When a node was left, the method {@link GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)} 
+	 * is invoked. When calling these methods, the traverseId will be passed, so that the callback handler knows which traversal is meant.
+	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
+	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
+	 * node twice.
+	 * @param startNodes list of nodes at which the traversal shall start
+	 * @param traverseType type of traversing
+	 * @param traverseId identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler
+	 * @param traverseHandler callback handler, on which the three methods will be invoked
+	 * @model startNodesMany="true" traverseHandlerDataType="de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"
+	 * @generated
+	 */
+	void traverse(EList<Node> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler);
+
 } // Graph

@@ -20,6 +20,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -81,6 +82,40 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 			case GraphPackage.LAYER: return createLayer();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case GraphPackage.GRAPH_TRAVERSE_TYPE:
+				return createGRAPH_TRAVERSE_TYPEFromString(eDataType, initialValue);
+			case GraphPackage.GRAPH_TRAVERSE_HANDLER:
+				return createGraphTraverseHandlerFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case GraphPackage.GRAPH_TRAVERSE_TYPE:
+				return convertGRAPH_TRAVERSE_TYPEToString(eDataType, instanceValue);
+			case GraphPackage.GRAPH_TRAVERSE_HANDLER:
+				return convertGraphTraverseHandlerToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -162,6 +197,44 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 	public Layer createLayer() {
 		LayerImpl layer = new LayerImpl();
 		return layer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GRAPH_TRAVERSE_TYPE createGRAPH_TRAVERSE_TYPEFromString(EDataType eDataType, String initialValue) {
+		GRAPH_TRAVERSE_TYPE result = GRAPH_TRAVERSE_TYPE.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertGRAPH_TRAVERSE_TYPEToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GraphTraverseHandler createGraphTraverseHandlerFromString(EDataType eDataType, String initialValue) {
+		return (GraphTraverseHandler)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertGraphTraverseHandlerToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

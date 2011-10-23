@@ -128,6 +128,14 @@
     <eOperations name="getLayer" eType="#//Layer">
       <eParameters name="layerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="getRoots" upperBound="-1" eType="#//Node"/>
+    <eOperations name="getLeafs" upperBound="-1" eType="#//Node"/>
+    <eOperations name="traverse">
+      <eParameters name="startNodes" upperBound="-1" eType="#//Node"/>
+      <eParameters name="traverseType" eType="#//GRAPH_TRAVERSE_TYPE"/>
+      <eParameters name="traverseId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="traverseHandler" eType="#//GraphTraverseHandler"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="indexMgr" eType="#//index/IndexMgr"
         volatile="true" transient="true" eOpposite="#//index/IndexMgr/graph"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
@@ -163,6 +171,13 @@
         eOpposite="#//Layer/subLayers"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subLayers" upperBound="-1"
         eType="#//Layer" eOpposite="#//Layer/superLayer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="GraphTraverseHandler" instanceClassName="de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="GRAPH_TRAVERSE_TYPE">
+    <eLiterals name="TOP_DOWN_DEPTH_FIRST"/>
+    <eLiterals name="TOP_DOWN_BREADTH_FIRST" value="1"/>
+    <eLiterals name="BOTTOM_UP_DEPTH_FIRST" value="2"/>
+    <eLiterals name="BOTTOM_UP_BREADTH_FIRST" value="3"/>
   </eClassifiers>
   <eSubpackages name="index" nsURI="index" nsPrefix="index">
     <eClassifiers xsi:type="ecore:EClass" name="Index" abstract="true" interface="true"

@@ -34,7 +34,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
-
+@Deprecated
 public class GraphTraverserObject implements Runnable
 {
 	private static Long idCounter= 0l;

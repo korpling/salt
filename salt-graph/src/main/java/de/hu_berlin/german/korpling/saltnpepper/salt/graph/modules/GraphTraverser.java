@@ -34,6 +34,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphExcep
  * @author Florian Zipser
  *
  */
+@Deprecated
 public class GraphTraverser extends GraphModule
 {
 // ================================================ start: LogService	

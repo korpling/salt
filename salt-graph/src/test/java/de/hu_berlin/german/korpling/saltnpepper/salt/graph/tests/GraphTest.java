@@ -35,6 +35,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphExcep
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.tests.GraphTraverserModuleTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,6 +72,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addEdge(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge, de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer) <em>Add Edge</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addLayer(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer) <em>Add Layer</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getLayer(java.lang.String) <em>Get Layer</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getRoots() <em>Get Roots</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getLeafs() <em>Get Leafs</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler) <em>Traverse</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -1121,7 +1125,7 @@ public class GraphTest extends IdentifiableElementTest {
 		}//adding layer second time shall fail
 		
 	}
-
+	
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getLayer(java.lang.String) <em>Get Layer</em>}' operation.
 	 * <!-- begin-user-doc -->
@@ -1137,6 +1141,241 @@ public class GraphTest extends IdentifiableElementTest {
 		layer.setId(id);
 		this.getFixture().addLayer(layer);
 		assertEquals(layer, this.getFixture().getLayer(id));
+	}
+
+// ============================================== start: create dummy graphs
+	/**
+	 * Fills the given graph, containing nodes having the names as given in nodeNames list and connects them with edges as
+	 * given in the edgeNames list.
+	 * The edge names list contains of entries as follows:
+	 * [[SOURCE_NODE_NAME, TARGET_NODE_NAME, EDGE_NAME],...]
+	 * @param nodeNames
+	 * @param edgeNames
+	 */
+	public static void createGraph(	Graph graph,
+								String[] nodeNames,
+								String[][] edgeNames)
+	{
+		Vector<Node> nodes= new Vector<Node>();
+		for (String nodeName: nodeNames)
+		{
+			Node node= GraphFactory.eINSTANCE.createNode();
+			node.setId(nodeName);
+			nodes.add((node));
+			graph.addNode(node);
+		}
+		
+		//Kantenliste erstellen
+		Vector<Edge> edges= new Vector<Edge>();
+		Edge edge= null;
+		for (int i= 0; i < edgeNames.length; i++)
+		{
+			for (Node srcNode: nodes)
+			{
+				if (((String)srcNode.getId()).equalsIgnoreCase(edgeNames[i][0]))
+				{
+					for (Node dstNode: nodes)
+					{
+						if (((String)dstNode.getId()).equalsIgnoreCase(edgeNames[i][1]))
+						{
+							edge= GraphFactory.eINSTANCE.createEdge();
+							edge.setId(edgeNames[i][2]);
+							edge.setSource(srcNode);
+							edge.setTarget(dstNode);
+							edges.add(edge);
+							graph.addEdge(edge);
+							break;
+						}
+					}
+					break;
+				}
+			}
+		}	
+	}
+	
+	/**
+	 * Creates the following graph: <br/>
+	 * 				node1					<br/>
+	 *			/		\		\			<br/>
+	 *		node2		node4	node7		<br/>
+	 *		/		\	|					<br/>
+	 *	node3	node6	node5				<br/>
+	 **/
+	public static Graph createGraph_Tree()
+	{
+		Graph graph= GraphFactory.eINSTANCE.createGraph();
+		graph.setId("createGraph_Tree");
+		String[] nodeNames= {"node1", "node2", "node3", "node4", "node5", "node6", "node7"};
+		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
+								{"node1", "node4", "edge3"},{"node4", "node5", "edge4"},
+								{"node2", "node6", "edge5"}, {"node1", "node7", "edge6"}};
+	
+		createGraph(graph, nodeNames, edgeNames);
+		return(graph);
+	}
+	
+	/**
+	 * Creates the following graph: <br/>
+	 * 	node1	node4				<br/>
+	 *		\	/					<br/>
+	 *		node2					<br/>
+	 *		/	\					<br/>
+	 *	node3	node6				<br/>
+	 **/
+	public static Graph createGraph_DAG()
+	{
+		Graph graph= GraphFactory.eINSTANCE.createGraph();
+		graph.setId("createGraph_DAG");
+		
+		String[] nodeNames= {"node1", "node2", "node3", "node4","node6",};
+		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
+								{"node2", "node6", "edge3"}, {"node4", "node2", "edge4"}};
+	
+		createGraph(graph, nodeNames, edgeNames);
+		return(graph);
+	}
+	
+	/**
+	 * Creates the following graph including a cycle: <br/>
+	 * 	node1	node4					<br/>
+	 *		\	/						<br/>
+	 *		node2						<br/>
+	 *		/	\						<br/>
+	 *	node3	node6 					<br/>
+	 *				\					<br/>
+	 *				 node 7				<br/>
+	 * node 7 -> node2					<br/>
+	 **/
+	public static Graph createGraph_Cycle()
+	{
+		Graph graph= GraphFactory.eINSTANCE.createGraph();
+		graph.setId("createGraph_Cycle");
+		String[] nodeNames= {"node1", "node2", "node3", "node4","node6", "node7"};
+		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
+								{"node2", "node6", "edge3"}, {"node4", "node2", "edge4"},
+								{"node6", "node7", "edge5"}, {"node7", "node2", "edge6"}};
+	
+		createGraph(graph, nodeNames, edgeNames);
+		return(graph);
+	}	
+// ============================================== end: create dummy graphs	
+	
+	/**
+ 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getRoots() <em>Get Roots</em>}' operation.
+	 * Tests the method {@link GraphTraverserModule#getRoots()} and checks if the correct roots are returned, using the several graph types.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getRoots()
+	 */
+	public void testGetRoots()
+	{
+		EList<Node> expectedRoots= null;
+		EList<Node> roots= null;
+		Graph graph= null;
+		
+		{//test 1
+			graph= createGraph_Tree();
+			this.setFixture(graph);
+			expectedRoots= new BasicEList<Node>();
+			expectedRoots.add(graph.getNode("node1"));
+			roots= this.getFixture().getRoots();
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
+			for (Node expectedRoot: expectedRoots)
+			{
+				assertTrue("The list of returned roots does not contain expected root '"+expectedRoot.getId()+"'.", roots.contains(expectedRoot));
+			}
+		}//test 1
+		
+		{//test 2
+			graph= createGraph_DAG();
+			this.setFixture(graph);
+			expectedRoots= new BasicEList<Node>();
+			expectedRoots.add(graph.getNode("node1"));
+			expectedRoots.add(graph.getNode("node4"));
+			roots= this.getFixture().getRoots();
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
+			for (Node expectedRoot: expectedRoots)
+			{
+				assertTrue("The list of returned roots does not contain expected root '"+expectedRoot.getId()+"'.", roots.contains(expectedRoot));
+			}
+		}//test 2
+		
+		{//test 3
+			graph= createGraph_Cycle();
+			this.setFixture(graph);
+			expectedRoots= new BasicEList<Node>();
+			expectedRoots.add(graph.getNode("node1"));
+			expectedRoots.add(graph.getNode("node4"));
+			roots= this.getFixture().getRoots();
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
+			for (Node expectedRoot: expectedRoots)
+			{
+				assertTrue("The list of returned roots does not contain expected root '"+expectedRoot.getId()+"'.", roots.contains(expectedRoot));
+			}
+		}//test 3
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getLeafs() <em>Get Leafs</em>}' operation.
+	 * Tests the method {@link GraphTraverserModule#getLeafs()} and checks if the correct leafs are returned, using the several graph types.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getLeafs()
+	 */
+	public void testGetLeafs()
+	{
+		EList<Node> expectedLeafs= null;
+		EList<Node> leafs= null;
+		Graph graph= null;
+		
+		{//test 1
+			graph= createGraph_Tree();
+			this.setFixture(graph);
+			expectedLeafs= new BasicEList<Node>();
+			expectedLeafs.add(graph.getNode("node3"));
+			expectedLeafs.add(graph.getNode("node6"));
+			expectedLeafs.add(graph.getNode("node5"));
+			expectedLeafs.add(graph.getNode("node7"));
+			leafs= this.getFixture().getLeafs();
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
+			for (Node expectedLeaf: expectedLeafs)
+			{
+				assertTrue("The list of returned roots does not contain expected leaf '"+expectedLeaf.getId()+"'.", leafs.contains(expectedLeaf));
+			}
+		}//test 1
+		
+		{//test 2
+			graph= createGraph_DAG();
+			this.setFixture(graph);
+			expectedLeafs= new BasicEList<Node>();
+			expectedLeafs.add(graph.getNode("node3"));
+			expectedLeafs.add(graph.getNode("node6"));
+			leafs= this.getFixture().getLeafs();
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
+			for (Node expectedLeaf: expectedLeafs)
+			{
+				assertTrue("The list of returned leafs does not contain expected leaf '"+expectedLeaf.getId()+"'.", leafs.contains(expectedLeaf));
+			}
+		}//test 2
+		
+		{//test 3
+			graph= createGraph_Cycle();
+			this.setFixture(graph);
+			expectedLeafs= new BasicEList<Node>();
+			expectedLeafs.add(graph.getNode("node3"));
+			leafs= this.getFixture().getLeafs();
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
+			for (Node expectedLeaf: expectedLeafs)
+			{
+				assertTrue("The list of returned roots does not contain expected leaf '"+expectedLeaf.getId()+"'.", leafs.contains(expectedLeaf));
+			}
+		}//test 3
+	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler) <em>Traverse</em>}' operation.
+	 * This method do not check anything, instead of using these pleasse the traverse test methods in {@link GraphTraverserModuleTest}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler)
+	 */
+	public void testTraverse__EList_GRAPH_TRAVERSE_TYPE_String_GraphTraverseHandler() 
+	{
+		//delegated 
 	}
 
 	public void testRemoveEdge__EdgeByList() 
@@ -1172,23 +1411,23 @@ public class GraphTest extends IdentifiableElementTest {
 	 */
 	public void testRemoveAllEdge() throws Exception
 	{
-		//Knoten in den Graphen einf�gen
+		//add node to graph
 		this.insertNodes(nodes);
-		//Kanten in den Graphen einf�gen
+		//add edges to graph
 		this.insertEdges(edges);
-		//Pr�fen ob Kanten eingef�gt wurden
+		//check if edges have been added
 		for (Edge edge: edges)
 		{
 			assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));
 		}
-		//alle Kanten l�schen
+		//remove old edge
 		this.getFixture().removeEdges();
-		//neue Kanten einf�gen
+		//add new edge
 		for (Edge edge: edges )
 		{
-			//Kante einf�gen
+			//add edge
 			this.getFixture().addEdge(edge);
-			//Pr�fen ob Kante da ist
+			//check if edge exists
 			assertEquals("created edge has to be there", this.getFixture().getEdge(edge.getId()), edge);
 		}
 	}

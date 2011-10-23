@@ -19,6 +19,8 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -678,6 +680,27 @@ public interface GraphPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE <em>GRAPH TRAVERSE TYPE</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphPackageImpl#getGRAPH_TRAVERSE_TYPE()
+	 * @generated
+	 */
+	int GRAPH_TRAVERSE_TYPE = 8;
+
+	/**
+	 * The meta object id for the '<em>Traverse Handler</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphPackageImpl#getGraphTraverseHandler()
+	 * @generated
+	 */
+	int GRAPH_TRAVERSE_HANDLER = 9;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node <em>Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1077,6 +1100,27 @@ public interface GraphPackage extends EPackage {
 	EReference getLayer_SubLayers();
 
 	/**
+	 * Returns the meta object for enum '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE <em>GRAPH TRAVERSE TYPE</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>GRAPH TRAVERSE TYPE</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE
+	 * @generated
+	 */
+	EEnum getGRAPH_TRAVERSE_TYPE();
+
+	/**
+	 * Returns the meta object for data type '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler <em>Traverse Handler</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Traverse Handler</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler
+	 * @model instanceClass="de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"
+	 * @generated
+	 */
+	EDataType getGraphTraverseHandler();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1409,6 +1453,26 @@ public interface GraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LAYER__SUB_LAYERS = eINSTANCE.getLayer_SubLayers();
+
+		/**
+		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE <em>GRAPH TRAVERSE TYPE</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphPackageImpl#getGRAPH_TRAVERSE_TYPE()
+		 * @generated
+		 */
+		EEnum GRAPH_TRAVERSE_TYPE = eINSTANCE.getGRAPH_TRAVERSE_TYPE();
+
+		/**
+		 * The meta object literal for the '<em>Traverse Handler</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphPackageImpl#getGraphTraverseHandler()
+		 * @generated
+		 */
+		EDataType GRAPH_TRAVERSE_HANDLER = eINSTANCE.getGraphTraverseHandler();
 
 	}
 

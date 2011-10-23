@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -34,8 +35,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.service.log.LogService;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer;
@@ -47,6 +50,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserModule;
 
 /**
  * <!-- begin-user-doc -->
@@ -1112,6 +1116,76 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			}
 		}
 		return(retVal);
+	}
+
+	/**
+	 * {@inheritDoc Graph#getRoots()}
+	 */
+	public EList<Node> getRoots() {
+		EList<Node> retList= null;
+		retList= new BasicEList<Node>();
+		if (this.getNodes().size()==1)
+		{//if corpusGraph only contains one corpus it shall not need to be traversed
+			retList.add(this.getNodes().get(0)); 
+		}//if corpusGraph only contains one corpus it shall not need to be traversed
+		else
+		{	
+			for (Node node: Collections.synchronizedCollection(this.getNodes()))
+			{
+				//checking if node has ingoing edges
+				EList<Edge> inEdges= this.getInEdges(node.getId());
+				if (	(inEdges == null) ||
+						(inEdges.size() == 0))
+				{
+					retList.add(node);
+				}
+			}
+		}
+		if (retList.size()== 0)
+			retList= null;
+		return(retList);
+	}
+
+	/**
+	 * {@inheritDoc Graph#getLeafs()}
+	 */
+	public EList<Node> getLeafs() 
+	{
+		EList<Node> retList= null;
+		retList= new BasicEList<Node>();
+		if (this.getNodes().size()==1)
+		{//if corpusGraph only contains one corpus it shall not need to be traversed
+			retList.add(this.getNodes().get(0)); 
+		}//if corpusGraph only contains one corpus it shall not need to be traversed
+		else
+		{	
+			for (Node node: Collections.synchronizedCollection(this.getNodes()))
+			{
+				//checking if node has ingoing edges
+				EList<Edge> outEdges= this.getOutEdges(node.getId());
+				if (	(outEdges == null) ||
+						(outEdges.size() == 0))
+				{
+					retList.add(node);
+				}
+			}
+		}
+		if (retList.size()== 0)
+			retList= null;
+		return(retList);
+	}
+
+	/**
+	 * {@inheritDoc Graph#traverse(EList, GRAPH_TRAVERSE_TYPE, String, GraphTraverseHandler)}
+	 */
+	public void traverse(	EList<Node> startNodes, 
+							GRAPH_TRAVERSE_TYPE traverseType, 
+							String traverseId, 
+							GraphTraverseHandler traverseHandler) 
+	{
+		GraphTraverserModule traverserModule= new GraphTraverserModule();
+		traverserModule.setGraph(this);
+		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler);
 	}
 
 	//====================== end: edge-handling

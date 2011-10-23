@@ -15,11 +15,8 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.graph.tests;
+package de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.tests;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.tests.IndexTests;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.tests.ModuleTests;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.storing.tests.StoringTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -27,11 +24,11 @@ import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
- * A test suite for the '<em><b>Graph</b></em>' model.
+ * A test suite for the '<em><b>index</b></em>' package.
  * <!-- end-user-doc -->
  * @generated
  */
-public class GraphAllTests extends TestSuite {
+public class ModuleTests extends TestSuite {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -45,13 +42,13 @@ public class GraphAllTests extends TestSuite {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	*/
+	 * @generated
+	 */
 	public static Test suite() {
-		TestSuite suite = new GraphAllTests("Graph Tests");
-		suite.addTest(GraphTests.suite());
-		suite.addTest(IndexTests.suite());
-		suite.addTest(StoringTests.suite());
-		suite.addTest(ModuleTests.suite());
+		TestSuite suite = new ModuleTests("module Tests");
+		suite.addTestSuite(GraphModuleTest.class);
+		suite.addTestSuite(GraphTraverserModuleTest.class);
+		suite.addTestSuite(GraphTraverserTest.class);
 		return suite;
 	}
 
@@ -60,8 +57,8 @@ public class GraphAllTests extends TestSuite {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GraphAllTests(String name) {
+	public ModuleTests(String name) {
 		super(name);
 	}
 
-} //GraphAllTests
+} //IndexTests
