@@ -36,6 +36,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
  * The following operations are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getNSSeperator() <em>Get NS Seperator</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone() <em>Clone</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -328,6 +329,17 @@ public class LabelTest extends LabelableElementTest {
 	public void testGetNSSeperator() 
 	{
 		assertEquals(this.getFixture().getNSSeperator(),Label.NS_SEPERATOR);
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone() <em>Clone</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone()
+	 */
+	public void testClone() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
 	}
 
 	/**
