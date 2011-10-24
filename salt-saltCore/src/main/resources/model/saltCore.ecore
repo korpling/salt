@@ -3,13 +3,13 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="saltCore"
     nsURI="saltCore" nsPrefix="saltCore">
-  <eClassifiers xsi:type="ecore:EClass" name="SNode" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//Node #//SAnnotatableElement #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SNode" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//Node #//SAnnotatableElement #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
         volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sLayers" upperBound="-1"
         eType="#//SLayer" volatile="true" transient="true" derived="true" eOpposite="#//SLayer/sNodes"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SRelation" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//Edge #//SAnnotatableElement #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SRelation" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//Edge #//SAnnotatableElement #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
     <eOperations name="addSType">
       <eParameters name="sType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -25,7 +25,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sLayers" upperBound="-1"
         eType="#//SLayer" volatile="true" transient="true" derived="true" eOpposite="#//SLayer/sRelations"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SAnnotatableElement" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//LabelableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SAnnotatableElement" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//LabelableElement">
     <eOperations name="addSAnnotation">
       <eParameters name="sAnnotation" eType="#//SAnnotation"/>
     </eOperations>
@@ -51,7 +51,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sAnnotatableElement" eType="#//SAnnotatableElement"
         volatile="true" transient="true" eOpposite="#//SAnnotatableElement/sAnnotations"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SGraph" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//Graph #//SNamedElement #//SAnnotatableElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SGraph" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//Graph #//SNamedElement #//SAnnotatableElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
     <eOperations name="addSNode">
       <eParameters name="sNode" eType="#//SNode"/>
     </eOperations>
@@ -82,7 +82,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="SNamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SIdentifiableElement" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//IdentifiableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SIdentifiableElement" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//IdentifiableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sElementId" eType="#//SElementId"
         volatile="true" transient="true" derived="true" eOpposite="#//SElementId/sIdentifiableElement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -96,7 +96,7 @@
         eType="#//SProcessingAnnotatableElement" volatile="true" transient="true"
         derived="true" eOpposite="#//SProcessingAnnotatableElement/sProcessingAnnotations"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SProcessingAnnotatableElement" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//LabelableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SProcessingAnnotatableElement" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//LabelableElement">
     <eOperations name="addSProcessingAnnotation">
       <eParameters name="sProcessingAnnotation" eType="#//SProcessingAnnotation"/>
     </eOperations>
@@ -118,7 +118,7 @@
         upperBound="-1" eType="#//SProcessingAnnotation" changeable="false" volatile="true"
         transient="true" derived="true" containment="true" eOpposite="#//SProcessingAnnotation/sProcessingAnnotatableElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SElementId" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//Identifier">
+  <eClassifiers xsi:type="ecore:EClass" name="SElementId" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//Identifier">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sIdentifiableElement" eType="#//SIdentifiableElement"
         volatile="true" transient="true" derived="true" eOpposite="#//SIdentifiableElement/sElementId"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -130,7 +130,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sFeaturableElement" eType="#//SFeaturableElement"
         volatile="true" transient="true" derived="true" eOpposite="#//SFeaturableElement/sFeatures"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SFeaturableElement" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//LabelableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SFeaturableElement" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//LabelableElement">
     <eOperations name="addSFeature">
       <eParameters name="sFeature" eType="#//SFeature"/>
     </eOperations>
@@ -156,7 +156,7 @@
         eType="#//SFeature" volatile="true" transient="true" derived="true" containment="true"
         eOpposite="#//SFeature/sFeaturableElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SMetaAnnotatableElement" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//LabelableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SMetaAnnotatableElement" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//LabelableElement">
     <eOperations name="addSMetaAnnotation">
       <eParameters name="sMetaAnnotation" eType="#//SMetaAnnotation"/>
     </eOperations>
@@ -184,7 +184,7 @@
         eOpposite="#//SMetaAnnotatableElement/sMetaAnnotations"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SAbstractAnnotation" abstract="true"
-      eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//Label">
+      eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//Label">
     <eOperations name="getSValueSTEXT" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eOperations name="getSValueSBOOLEAN" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
     <eOperations name="getSValueSNUMERIC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
@@ -208,7 +208,7 @@
     <eLiterals name="SURI" value="4"/>
     <eLiterals name="SOBJECT" value="5"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SLayer" eSuperTypes="../../../../../salt.Graph/src/main/resources/model/graph.ecore#//Layer #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SAnnotatableElement #//SMetaAnnotatableElement #//SFeaturableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SLayer" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//Layer #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SAnnotatableElement #//SMetaAnnotatableElement #//SFeaturableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sRelations" upperBound="-1"
         eType="#//SRelation" volatile="true" transient="true" derived="true" eOpposite="#//SRelation/sLayers"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sNodes" upperBound="-1"
