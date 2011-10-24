@@ -579,9 +579,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	// ============================ end: handling specific relations
 	
-	protected void finalize() throws Throwable {
+	protected void finalize() throws Throwable 
+	{
 	    try {
-	        System.out.println("------------------------> finalized SDocumentGraph: "+ this.getSId());
 	    } finally {
 	        super.finalize();
 	    }
