@@ -499,7 +499,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * @generated
 	 */
 	public EAttribute getSTimeline_SPointsOfTime() {
-		return (EAttribute)sTimelineEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)sTimelineEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -508,7 +508,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * @generated
 	 */
 	public EReference getSTimeline_SDocumentGraph() {
-		return (EReference)sTimelineEClass.getEStructuralFeatures().get(1);
+		return (EReference)sTimelineEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -797,8 +797,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		createEAttribute(sSequentialDSEClass, SSEQUENTIAL_DS__SDATA);
 
 		sTimelineEClass = createEClass(STIMELINE);
-		createEAttribute(sTimelineEClass, STIMELINE__SPOINTS_OF_TIME);
 		createEReference(sTimelineEClass, STIMELINE__SDOCUMENT_GRAPH);
+		createEAttribute(sTimelineEClass, STIMELINE__SPOINTS_OF_TIME);
 
 		sTimelineRelationEClass = createEClass(STIMELINE_RELATION);
 		createEReference(sTimelineRelationEClass, STIMELINE_RELATION__STIMELINE);
@@ -898,7 +898,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEReference(getSDocumentGraph_STextualRelations(), this.getSTextualRelation(), this.getSTextualRelation_SDocumentGraph(), "sTextualRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_STokens(), this.getSToken(), this.getSToken_SDocumentGraph(), "sTokens", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_STimeline(), this.getSTimeline(), this.getSTimeline_SDocumentGraph(), "sTimeline", null, 0, 1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getSDocumentGraph_STimelineRelations(), this.getSTimelineRelation(), null, "sTimelineRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSDocumentGraph_STimelineRelations(), this.getSTimelineRelation(), this.getSTimelineRelation_SDocumentGraph(), "sTimelineRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_SSpanningRelations(), this.getSSpanningRelation(), this.getSSpanningRelation_SDocumentGraph(), "sSpanningRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_SSpans(), this.getSSpan(), this.getSSpan_SDocumentGraph(), "sSpans", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_SStructures(), this.getSStructure(), this.getSStructure_SDocumentGraph(), "sStructures", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -930,8 +930,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEAttribute(getSSequentialDS_SData(), ecorePackage.getEJavaObject(), "sData", null, 0, 1, SSequentialDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sTimelineEClass, STimeline.class, "STimeline", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSTimeline_SPointsOfTime(), ecorePackage.getEString(), "sPointsOfTime", null, 0, -1, STimeline.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSTimeline_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_STimeline(), "sDocumentGraph", null, 0, 1, STimeline.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSTimeline_SPointsOfTime(), ecorePackage.getEString(), "sPointsOfTime", null, 0, -1, STimeline.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(sTimelineEClass, null, "addSPointOfTime", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "sPointOfTime", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -939,7 +939,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEClass(sTimelineRelationEClass, STimelineRelation.class, "STimelineRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSTimelineRelation_STimeline(), this.getSTimeline(), null, "sTimeline", null, 0, 1, STimelineRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSTimelineRelation_SToken(), this.getSToken(), null, "sToken", null, 0, 1, STimelineRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getSTimelineRelation_SDocumentGraph(), this.getSDocumentGraph(), null, "sDocumentGraph", null, 0, 1, STimelineRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSTimelineRelation_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_STimelineRelations(), "sDocumentGraph", null, 0, 1, STimelineRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sSpanEClass, SSpan.class, "SSpan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSSpan_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_SSpans(), "sDocumentGraph", null, 0, 1, SSpan.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

@@ -20,6 +20,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;

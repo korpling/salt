@@ -1664,22 +1664,22 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE__SDATA = SSEQUENTIAL_DS__SDATA;
 
 	/**
-	 * The feature id for the '<em><b>SPoints Of Time</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STIMELINE__SPOINTS_OF_TIME = SSEQUENTIAL_DS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STIMELINE__SDOCUMENT_GRAPH = SSEQUENTIAL_DS_FEATURE_COUNT + 1;
+	int STIMELINE__SDOCUMENT_GRAPH = SSEQUENTIAL_DS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SPoints Of Time</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE__SPOINTS_OF_TIME = SSEQUENTIAL_DS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>STimeline</em>' class.
@@ -1918,7 +1918,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE_RELATION__STOKEN = SSEQUENTIAL_RELATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>SDocument Graph</b></em>' reference.
+	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3706,10 +3706,10 @@ public interface SDocumentStructurePackage extends EPackage {
 	EReference getSTimelineRelation_SToken();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * Returns the meta object for the container reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>SDocument Graph</em>'.
+	 * @return the meta object for the container reference '<em>SDocument Graph</em>'.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph()
 	 * @see #getSTimelineRelation()
 	 * @generated
@@ -4232,7 +4232,7 @@ public interface SDocumentStructurePackage extends EPackage {
 		EReference STIMELINE_RELATION__STOKEN = eINSTANCE.getSTimelineRelation_SToken();
 
 		/**
-		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

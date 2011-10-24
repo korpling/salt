@@ -167,6 +167,7 @@ public interface SDocumentGraph extends SGraph {
 	/**
 	 * Returns the value of the '<em><b>STimeline Relations</b></em>' containment reference list.
 	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation}.
+	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>STimeline Relations</em>' containment reference isn't clear,
@@ -175,7 +176,8 @@ public interface SDocumentGraph extends SGraph {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>STimeline Relations</em>' containment reference list.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_STimelineRelations()
-	 * @model containment="true" transient="true" volatile="true" derived="true"
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	EList<STimelineRelation> getSTimelineRelations();
