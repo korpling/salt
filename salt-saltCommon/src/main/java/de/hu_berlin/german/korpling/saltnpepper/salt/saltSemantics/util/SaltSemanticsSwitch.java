@@ -24,7 +24,9 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.*;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SCatAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
@@ -43,7 +45,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemantics
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see de.hub.corpling.salt.saltSemantics.SaltSemanticsPackage
+ * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage
  * @generated
  */
 public class SaltSemanticsSwitch<T> {
@@ -111,6 +113,7 @@ public class SaltSemanticsSwitch<T> {
 				SPOSAnnotation sposAnnotation = (SPOSAnnotation)theEObject;
 				T result = caseSPOSAnnotation(sposAnnotation);
 				if (result == null) result = caseSAnnotation(sposAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sposAnnotation);
 				if (result == null) result = caseLabel(sposAnnotation);
 				if (result == null) result = caseLabelableElement(sposAnnotation);
 				if (result == null) result = defaultCase(theEObject);
@@ -120,6 +123,7 @@ public class SaltSemanticsSwitch<T> {
 				SLemmaAnnotation sLemmaAnnotation = (SLemmaAnnotation)theEObject;
 				T result = caseSLemmaAnnotation(sLemmaAnnotation);
 				if (result == null) result = caseSAnnotation(sLemmaAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sLemmaAnnotation);
 				if (result == null) result = caseLabel(sLemmaAnnotation);
 				if (result == null) result = caseLabelableElement(sLemmaAnnotation);
 				if (result == null) result = defaultCase(theEObject);
@@ -129,6 +133,7 @@ public class SaltSemanticsSwitch<T> {
 				SCatAnnotation sCatAnnotation = (SCatAnnotation)theEObject;
 				T result = caseSCatAnnotation(sCatAnnotation);
 				if (result == null) result = caseSAnnotation(sCatAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sCatAnnotation);
 				if (result == null) result = caseLabel(sCatAnnotation);
 				if (result == null) result = caseLabelableElement(sCatAnnotation);
 				if (result == null) result = defaultCase(theEObject);
@@ -138,6 +143,7 @@ public class SaltSemanticsSwitch<T> {
 				STypeAnnotation sTypeAnnotation = (STypeAnnotation)theEObject;
 				T result = caseSTypeAnnotation(sTypeAnnotation);
 				if (result == null) result = caseSAnnotation(sTypeAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sTypeAnnotation);
 				if (result == null) result = caseLabel(sTypeAnnotation);
 				if (result == null) result = caseLabelableElement(sTypeAnnotation);
 				if (result == null) result = defaultCase(theEObject);
@@ -147,6 +153,7 @@ public class SaltSemanticsSwitch<T> {
 				SWordAnnotation sWordAnnotation = (SWordAnnotation)theEObject;
 				T result = caseSWordAnnotation(sWordAnnotation);
 				if (result == null) result = caseSAnnotation(sWordAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sWordAnnotation);
 				if (result == null) result = caseLabel(sWordAnnotation);
 				if (result == null) result = caseLabelableElement(sWordAnnotation);
 				if (result == null) result = defaultCase(theEObject);
@@ -156,6 +163,7 @@ public class SaltSemanticsSwitch<T> {
 				SSentenceAnnotation sSentenceAnnotation = (SSentenceAnnotation)theEObject;
 				T result = caseSSentenceAnnotation(sSentenceAnnotation);
 				if (result == null) result = caseSAnnotation(sSentenceAnnotation);
+				if (result == null) result = caseSAbstractAnnotation(sSentenceAnnotation);
 				if (result == null) result = caseLabel(sSentenceAnnotation);
 				if (result == null) result = caseLabelableElement(sSentenceAnnotation);
 				if (result == null) result = defaultCase(theEObject);
@@ -282,6 +290,21 @@ public class SaltSemanticsSwitch<T> {
 	 * @generated
 	 */
 	public T caseLabel(Label object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SAbstract Annotation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SAbstract Annotation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSAbstractAnnotation(SAbstractAnnotation object) {
 		return null;
 	}
 

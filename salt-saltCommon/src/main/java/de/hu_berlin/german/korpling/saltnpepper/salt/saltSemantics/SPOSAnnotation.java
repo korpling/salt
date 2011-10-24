@@ -25,7 +25,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
  * <!-- end-user-doc -->
  *
  *
- * @see de.hub.corpling.salt.saltSemantics.SaltSemanticsPackage#getSPOSAnnotation()
+ * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage#getSPOSAnnotation()
  * @model
  * @generated
  */
