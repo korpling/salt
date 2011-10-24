@@ -332,11 +332,11 @@ public class GraphTraverserModuleTest extends TestCase
 	}
 	 
 	/**
-	 * Starts 3 threads to traverse the graph and checks, that no problem concerning the use of threads occurs. Uses TOP_DOWN_DEPTH_FIRST as
+	 * Starts 3 threads to traverse the graph and checks, that no problem concerning the use of threads occurs. Uses {@link GRAPH_TRAVERSE_TYPE#TOP_DOWN_DEPTH_FIRST} as
 	 * traverse order.
 	 * @throws InterruptedException 
 	 */
-	public void testThreading() throws InterruptedException
+	public void testThreading_TOP_DOWN_DEPTH_FIRST() throws InterruptedException
 	{
 		//uses the tree as graph
 		this.getFixture().setGraph(GraphTest.createGraph_Tree());
@@ -353,10 +353,11 @@ public class GraphTraverserModuleTest extends TestCase
 		TraverserChecker traverseChecker2= null;
 		TraverserChecker traverseChecker3= null;
 		
+		String[] nodeOrderWayThere= {"node1", "node2", "node3", "node6", "node4", "node5", "node7"};
+		String[] nodeOrderWayBack= {"node3", "node6", "node2", "node5", "node4", "node7", "node1"};
+		
 		{//thread 1
 			traverseId= "testThreading_1";
-			String[] nodeOrderWayThere= {"node1", "node2", "node3", "node6", "node4", "node5", "node7"};
-			String[] nodeOrderWayBack= {"node3", "node6", "node2", "node5", "node4", "node7", "node1"};
 			traverseChecker1= new TraverserChecker();
 			traverseChecker1.nodeOrderWayThere= nodeOrderWayThere;
 			traverseChecker1.nodeOrderWayBack= nodeOrderWayBack;
@@ -365,8 +366,6 @@ public class GraphTraverserModuleTest extends TestCase
 		
 		{//thread 2
 			traverseId= "testThreading_2";
-			String[] nodeOrderWayThere= {"node1", "node2", "node3", "node6", "node4", "node5", "node7"};
-			String[] nodeOrderWayBack= {"node3", "node6", "node2", "node5", "node4", "node7", "node1"};
 			traverseChecker2= new TraverserChecker();
 			traverseChecker2.nodeOrderWayThere= nodeOrderWayThere;
 			traverseChecker2.nodeOrderWayBack= nodeOrderWayBack;
@@ -375,8 +374,6 @@ public class GraphTraverserModuleTest extends TestCase
 		
 		{//thread 3
 			traverseId= "testThreading_3";
-			String[] nodeOrderWayThere= {"node1", "node2", "node3", "node6", "node4", "node5", "node7"};
-			String[] nodeOrderWayBack= {"node3", "node6", "node2", "node5", "node4", "node7", "node1"};
 			traverseChecker3= new TraverserChecker();
 			traverseChecker3.nodeOrderWayThere= nodeOrderWayThere;
 			traverseChecker3.nodeOrderWayBack= nodeOrderWayBack;
@@ -502,6 +499,76 @@ public class GraphTraverserModuleTest extends TestCase
 			fail("The graph contains a cycle, that shall invoke an exception.");
 		} catch (Exception e) {
 		}
+	}
+	
+	/**
+	 * Starts 3 threads to traverse the graph and checks, that no problem concerning the use of threads occurs. Uses {@link GRAPH_TRAVERSE_TYPE#BOTTOM_UP_DEPTH_FIRST} as
+	 * traverse order.
+	 * @throws InterruptedException 
+	 */
+	public void testThreading_BOTTOM_UP_DEPTH_FIRST() throws InterruptedException
+	{
+		//uses the tree as graph
+		this.getFixture().setGraph(GraphTest.createGraph_Tree());
 		
+		EList<Node> startNodes= null;
+		GRAPH_TRAVERSE_TYPE traverseType= null;
+		String traverseId= null;
+		this.getFixture().setGraph(GraphTest.createGraph_Tree());
+		
+		startNodes= this.getFixture().getGraph().getLeafs();
+		traverseType= GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST;
+		
+		TraverserChecker traverseChecker1= null;
+		TraverserChecker traverseChecker2= null;
+		TraverserChecker traverseChecker3= null;
+		String[] nodeOrderWayThere= {"node3", "node2", "node1", "node5", "node4", "node1", "node6", "node2", "node1", "node7", "node1"};
+		String[] nodeOrderWayBack= {"node1", "node2", "node3", "node1", "node4", "node5", "node1", "node2", "node6", "node1", "node7"};
+		
+		{//thread 1
+			traverseId= "testThreading_1";
+			traverseChecker1= new TraverserChecker();
+			traverseChecker1.nodeOrderWayThere= nodeOrderWayThere;
+			traverseChecker1.nodeOrderWayBack= nodeOrderWayBack;
+			traverseChecker1.start(startNodes, traverseType, traverseId);
+		}//thread 1
+		
+		{//thread 2
+			traverseId= "testThreading_2";
+			traverseChecker2= new TraverserChecker();
+			traverseChecker2.nodeOrderWayThere= nodeOrderWayThere;
+			traverseChecker2.nodeOrderWayBack= nodeOrderWayBack;
+			traverseChecker2.start(startNodes, traverseType, traverseId);
+		}//thread 2
+		
+		{//thread 3
+			traverseId= "testThreading_3";
+			traverseChecker3= new TraverserChecker();
+			traverseChecker3.nodeOrderWayThere= nodeOrderWayThere;
+			traverseChecker3.nodeOrderWayBack= nodeOrderWayBack;
+			traverseChecker3.start(startNodes, traverseType, traverseId);
+		}//thread 3
+		
+		
+		while (	(traverseChecker1.runs< 1 )||
+				(traverseChecker2.runs< 1 ) ||
+				(traverseChecker3.runs< 1 ))
+		{
+			Thread.sleep(100);
+		}
+		
+		EList<TraverserChecker> traverseCheckers= new BasicEList<GraphTraverserModuleTest.TraverserChecker>();
+		traverseCheckers.add(traverseChecker1);
+		traverseCheckers.add(traverseChecker2);
+		traverseCheckers.add(traverseChecker3);
+		
+		for (TraverserChecker traverseChecker: traverseCheckers)
+		{
+			if (	(traverseChecker.exception!= null))
+			{
+				traverseChecker.exception.printStackTrace();
+				fail("Any exception occurs while travershan one thread.");
+			}
+		}
 	}
 }
