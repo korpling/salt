@@ -120,13 +120,29 @@
         <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/getSLayer"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_t76JMVj6Ed-BkZDnO17OHA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_ftxPAP4kEeCvb4UTOyTEow" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/getSRoots"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ftxPAf4kEeCvb4UTOyTEow"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_0UL5YP4kEeCvb4UTOyTEow" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/getSLeafs"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0UL5Yf4kEeCvb4UTOyTEow"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Bnjz8P4lEeCvb4UTOyTEow" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/traverse"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Bnjz8f4lEeCvb4UTOyTEow"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_byEIQP5BEeCvb4UTOyTEow" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/traverse.1"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_byEIQf5BEeCvb4UTOyTEow"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_a3H0dojXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_a3H0d4jXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_a3H0eIjXEd6X5oQchPkMiQ"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_a3Bt6YjXEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="saltCore.ecore#//SGraph"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_a3Bt6ojXEd6X5oQchPkMiQ" x="40" y="845"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_a3Bt6ojXEd6X5oQchPkMiQ" x="40" y="845" width="553" height="188"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_a3H0eYjXEd6X5oQchPkMiQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_a3H0fIjXEd6X5oQchPkMiQ" type="4001"/>
@@ -442,7 +458,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_-9kHYQteEd-F7bUaikpy4Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EEnum" href="saltCore.ecore#//SDATATYPE"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-9kHYgteEd-F7bUaikpy4Q" x="-1240" y="-385" width="189" height="138"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-9kHYgteEd-F7bUaikpy4Q" x="-1245" y="-345" width="189" height="138"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_mrClMSYZEd-4G6f5Qli9DQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_mrOycCYZEd-4G6f5Qli9DQ" type="4001"/>
@@ -459,6 +475,13 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_mrClMiYZEd-4G6f5Qli9DQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="saltCore.ecore#//SLayer"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mrClMyYZEd-4G6f5Qli9DQ" x="50" y="600" width="222" height="87"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_NcFx8P4lEeCvb4UTOyTEow" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_NcGZAP4lEeCvb4UTOyTEow" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_NcGZAf4lEeCvb4UTOyTEow" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_NcFx8f4lEeCvb4UTOyTEow" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="saltCore.ecore#//SGraphTraverseHandler"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NcFx8v4lEeCvb4UTOyTEow" x="-1240" y="-460" width="367" height="66"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_a2W_cYjXEd6X5oQchPkMiQ"/>
   <element xmi:type="ecore:EPackage" href="saltCore.ecore#/"/>

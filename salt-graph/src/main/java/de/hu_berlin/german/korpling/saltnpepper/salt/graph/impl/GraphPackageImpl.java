@@ -798,6 +798,13 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		addEParameter(op, ecorePackage.getEString(), "traverseId", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getGraphTraverseHandler(), "traverseHandler", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(graphEClass, null, "traverse", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNode(), "startNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getGRAPH_TRAVERSE_TYPE(), "traverseType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "traverseId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getGraphTraverseHandler(), "traverseHandler", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "isCycleSafe", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(identifierEClass, Identifier.class, "Identifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIdentifier_IdentifiableElement(), this.getIdentifiableElement(), this.getIdentifiableElement_Identifier(), "identifiableElement", null, 0, 1, Identifier.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", null, 0, 1, Identifier.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

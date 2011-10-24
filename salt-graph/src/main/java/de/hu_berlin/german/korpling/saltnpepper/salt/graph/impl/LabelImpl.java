@@ -385,65 +385,6 @@ public class LabelImpl extends LabelableElementImpl implements Label
 			this.setName(name.toString());
 	}
 
-//	/**
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 */
-//	public String getFullName() 
-//	{
-//		StringBuffer retVal= new StringBuffer();
-//		
-//		if ((this.getNamespace()== null) && (this.getName()== null))
-//			retVal= null;
-//		else if ((this.getNamespace()== null)  || (this.getNamespace().equals("")))
-//			retVal.append(this.getName());
-//		else if ((this.getName()== null) || (this.getName().equals("")))
-//			retVal.append(this.getNamespace());
-//		else
-//		{	
-//			retVal.append(this.getNamespace());
-//			retVal.append(Label.NS_SEPERATOR);
-//			retVal.append(this.getName());
-//		}
-//		
-//		if (retVal!= null)
-//			return(retVal.toString());
-//		else return(null);
-//	}
-
-//	/**
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 */
-//	public void setFullName(String newFullName) 
-//	{
-//		if ((newFullName == null) || (newFullName.equals("")))
-//			throw new GraphException("Cannot set new name, because it�s null or empty. ");
-//		String[] fullName= newFullName.split(GET_NS_SEPERATOR());
-//		StringBuffer ns= new StringBuffer();
-//		String name= null;
-//		for (int i= 0; i < fullName.length; i++)
-//		{
-//			//last part of fullname reached
-//			if (i == fullName.length-1)
-//				name= fullName[i];
-//			else 
-//			{					
-//				if ((ns== null) || (ns.toString().equals("")))
-//					ns.append(fullName[i]);
-//				else 
-//				{
-//					ns.append(GET_NS_SEPERATOR());
-//					ns.append(fullName[i]);
-//				}
-//			}	
-//		}
-//		if (ns.length()!=0)
-//			this.setNamespace(ns.toString());
-//		if (name.length()!=0)
-//			this.setName(name.toString());
-//	}
-
 	private Object value= null;
 	/**
 	 * <!-- begin-user-doc -->

@@ -347,7 +347,7 @@ public interface Graph extends IdentifiableElement {
 	 * is invoked. When calling these methods, the traverseId will be passed, so that the callback handler knows which traversal is meant.
 	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
 	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
-	 * node twice.
+	 * node twice. This method is threadsafe.
 	 * @param startNodes list of nodes at which the traversal shall start
 	 * @param traverseType type of traversing
 	 * @param traverseId identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler
@@ -356,5 +356,13 @@ public interface Graph extends IdentifiableElement {
 	 * @generated
 	 */
 	void traverse(EList<Node> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler);
+
+	/**
+	 * {@inheritDoc #traverse(EList, GRAPH_TRAVERSE_TYPE, String, GraphTraverseHandler)}
+	 * Attention: When isCycleSafe is set to false, this method does not take care about cycles, and it eventually runs into endless loops.
+	 * @model startNodesMany="true" traverseHandlerDataType="de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"
+	 * @generated
+	 */
+	void traverse(EList<Node> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 
 } // Graph

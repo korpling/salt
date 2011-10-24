@@ -42,6 +42,12 @@ public class GraphTraverserModuleTest extends TestCase
 	class TraverserChecker implements GraphTraverseHandler, Runnable
 	{//class TraverserChecker
 		/**
+		 * determines if current run is cyclesafe. If this value is true, each cycle will be traversed two times, 
+		 * than the method {@link #checkConstraint(GRAPH_TRAVERSE_TYPE, String, Edge, Node, long)} will return false;
+		 */
+		public boolean isCycleSafe= true;
+		
+		/**
 		 * The names of the nodes in order of how they shall be visited in current traversal mode on the way there. 
 		 */
 		private String[] nodeOrderWayThere;
@@ -67,6 +73,7 @@ public class GraphTraverserModuleTest extends TestCase
 									long order) 
 		{
 //			System.out.println("nodeReached(), node: '"+currNode.getId()+"', traverseId: '"+traversalId+"' ");
+			currentPath.add(currNode);
 			if (!currNode.getId().equalsIgnoreCase(nodeOrderWayThere[posInWayThere]))
 			{
 				String path= null;
@@ -89,6 +96,8 @@ public class GraphTraverserModuleTest extends TestCase
 								Node fromNode, 
 								long order) 
 		{
+//			System.out.println("nodeLeft(), node: '"+currNode.getId()+"', traverseId: '"+traversalId+"' ");
+			currentPath.remove(currentPath.size()-1);
 			if (!currNode.getId().equalsIgnoreCase(nodeOrderWayBack[posInWayBack]))
 			{
 				String path= null;
@@ -103,13 +112,34 @@ public class GraphTraverserModuleTest extends TestCase
 			}
 			posInWayBack++;			
 		}
-	
+		/**
+		 * Stores the current node path
+		 */
+		private EList<Node> currentPath= new BasicEList<Node>();
+		
 		public boolean checkConstraint(	GRAPH_TRAVERSE_TYPE traversalType,
 										String traversalId, 
 										Edge edge, 
 										Node currNode, 
-										long order) {
-			return true;
+										long order) 
+		{
+			boolean retVal= true;
+			
+			if (isCycleSafe== false) 
+			{//checks if a path in currentPath is contained two times
+				Integer numOfOccurences= 0;
+				for (int i= 0; i < currentPath.size(); i++)
+				{
+					if (currentPath.get(i).equals(currNode))
+					{
+						numOfOccurences++;
+					}
+				}
+				if (numOfOccurences== 2)
+					retVal= false;
+			}//checks if a path in currentPath is contained two times
+			
+			return retVal;
 		}
 
 		private EList<Node> startNodes= null;
@@ -450,6 +480,22 @@ public class GraphTraverserModuleTest extends TestCase
 			fail("The graph contains a cycle, that shall invoke an exception.");
 		} catch (Exception e) {
 		}
+	}
+	
+	/**
+	 * Tests the traversing of top-down, depth first of graph_Cycle. 
+	 */
+	public void testTraverse_TOP_DOWN_DEPTH_FIRST_CycleUnsafe()
+	{
+		Graph graph= GraphTest.createGraph_SimpleCycle();
+		String[] nodeOrderWayThere= {"node1", "node2", "node3", "node6", "node7", "node2", "node3", "node6", "node7"};
+		String[] nodeOrderWayBack= {"node3", "node3", "node7", "node6", "node2", "node7", "node6", "node2", "node1"};
+		TraverserChecker checker= new TraverserChecker();
+		checker.nodeOrderWayThere= nodeOrderWayThere;
+		checker.nodeOrderWayBack= nodeOrderWayBack;
+		checker.isCycleSafe= false;
+		this.getFixture().setGraph(graph);
+		this.getFixture().traverse(this.getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_Cycle", checker, false);
 	}
 	
 	/**

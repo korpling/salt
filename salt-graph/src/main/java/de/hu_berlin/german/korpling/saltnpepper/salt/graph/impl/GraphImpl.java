@@ -1183,6 +1183,14 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 							String traverseId, 
 							GraphTraverseHandler traverseHandler) 
 	{
+		this.traverse(startNodes, traverseType, traverseId, traverseHandler, true);
+	}
+
+	/**
+	 * {@inheritDoc {@link Graph#traverse(EList, GRAPH_TRAVERSE_TYPE, String, GraphTraverseHandler, boolean)}}
+	 */
+	public void traverse(EList<Node> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe) 
+	{
 		GraphTraverserModule traverserModule= new GraphTraverserModule();
 		traverserModule.setGraph(this);
 		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler);

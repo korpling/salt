@@ -70,6 +70,21 @@
     <eOperations name="getSLayer" eType="#//SLayer">
       <eParameters name="sLayerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="getSRoots" upperBound="-1" eType="#//SNode"/>
+    <eOperations name="getSLeafs" upperBound="-1" eType="#//SNode"/>
+    <eOperations name="traverse">
+      <eParameters name="startSNodes" upperBound="-1" eType="#//SNode"/>
+      <eParameters name="traverseType" eType="ecore:EEnum ../../../../../salt-graph/src/main/resources/model/graph.ecore#//GRAPH_TRAVERSE_TYPE"/>
+      <eParameters name="traverseId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="traverseHandler" eType="#//SGraphTraverseHandler"/>
+    </eOperations>
+    <eOperations name="traverse">
+      <eParameters name="startSNodes" upperBound="-1" eType="#//SNode"/>
+      <eParameters name="traverseType" eType="ecore:EEnum ../../../../../salt-graph/src/main/resources/model/graph.ecore#//GRAPH_TRAVERSE_TYPE"/>
+      <eParameters name="traverseId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="traverseHandler" eType="#//SGraphTraverseHandler"/>
+      <eParameters name="isCycleSafe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sRelations" upperBound="-1"
         eType="#//SRelation" changeable="false" volatile="true" transient="true" derived="true"
         eOpposite="#//SRelation/sGraph"/>
@@ -220,4 +235,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sSuperLayer" eType="#//SLayer"
         volatile="true" transient="true" derived="true" eOpposite="#//SLayer/sSubLayers"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="SGraphTraverseHandler" instanceClassName="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler"/>
 </ecore:EPackage>

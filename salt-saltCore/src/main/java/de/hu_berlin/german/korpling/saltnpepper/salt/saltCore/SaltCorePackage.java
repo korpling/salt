@@ -1867,6 +1867,17 @@ public interface SaltCorePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>SGraph Traverse Handler</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SaltCorePackageImpl#getSGraphTraverseHandler()
+	 * @generated
+	 */
+	int SGRAPH_TRAVERSE_HANDLER = 18;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode <em>SNode</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2422,6 +2433,17 @@ public interface SaltCorePackage extends EPackage {
 	EDataType getURI();
 
 	/**
+	 * Returns the meta object for data type '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler <em>SGraph Traverse Handler</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>SGraph Traverse Handler</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler
+	 * @model instanceClass="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler"
+	 * @generated
+	 */
+	EDataType getSGraphTraverseHandler();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2894,6 +2916,16 @@ public interface SaltCorePackage extends EPackage {
 		 * @generated
 		 */
 		EDataType URI = eINSTANCE.getURI();
+
+		/**
+		 * The meta object literal for the '<em>SGraph Traverse Handler</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SaltCorePackageImpl#getSGraphTraverseHandler()
+		 * @generated
+		 */
+		EDataType SGRAPH_TRAVERSE_HANDLER = eINSTANCE.getSGraphTraverseHandler();
 
 	}
 

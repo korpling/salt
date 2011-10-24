@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
@@ -39,6 +41,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SIdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
@@ -450,8 +453,78 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		}
 		return(retVal);
 	}
+//=================== end: handling SRelation
+	
+	/**
+	 * {@inheritDoc SGraph#getRoots()}
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SNode> getSRoots() 
+	{
+		EList<Node> retVal= super.getRoots();
+		if (retVal!= null)
+			return((EList<SNode>)(EList<? extends Node>) retVal);
+		else return(null);
+	}
 
-	//=================== end: handling SRelation
+	/**
+	 * {@inheritDoc SGraph#getLeafs()}
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SNode> getSLeafs() {
+		EList<Node> retVal= super.getLeafs();
+		if (retVal!= null)
+			return((EList<SNode>)(EList<? extends Node>) retVal);
+		else return(null);
+	}
+
+	/**
+	 * {@inheritDoc SGraph#traverse(EList, GRAPH_TRAVERSE_TYPE, String, SGraphTraverseHandler)}
+	 */
+	public void traverse(EList<SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler) 
+	{
+		this.traverse(startSNodes, traverseType, traverseId, traverseHandler, true);
+	}
+	
+	/**
+	 * {@inheritDoc SGraph#traverse(SNode, GRAPH_TRAVERSE_TYPE, String, SGraphTraverseHandler, boolean)}
+	 */
+	@SuppressWarnings("unchecked")
+	public void traverse(EList<SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler, boolean isCycleSafe) 
+	{
+		TraverseHandlerWrapper wrapper= new TraverseHandlerWrapper();
+		wrapper.traverseHandler= traverseHandler;
+		super.traverse(((EList<Node>)(EList<? extends Node>)startSNodes), traverseType, traverseId, wrapper);
+	}
+
+	class TraverseHandlerWrapper implements GraphTraverseHandler
+	{
+		SGraphTraverseHandler traverseHandler= null;
+		@Override
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
+				String traversalId, Node currNode, Edge edge, Node fromNode,
+				long order) 
+		{
+			traverseHandler.nodeReached(traversalType, traversalId, (SNode)currNode, (SRelation)edge, (SNode)fromNode, order);
+		}
+
+		@Override
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType,
+				String traversalId, Node currNode, Edge edge, Node fromNode,
+				long order) 
+		{
+			traverseHandler.nodeLeft(traversalType, traversalId, (SNode) currNode, (SRelation) edge, (SNode) fromNode, order);
+		}
+
+		@Override
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
+				String traversalId, Edge edge, Node currNode, long order) 
+		{
+			return (traverseHandler.checkConstraint(traversalType, traversalId, (SRelation) edge, (SNode)currNode, order));
+		}
+		
+	}
+	
 //=================== start: handling SIdentifiableElement	
 	/**
 	 * Delegatee for SIdentifiableElement

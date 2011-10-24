@@ -136,6 +136,13 @@
       <eParameters name="traverseId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="traverseHandler" eType="#//GraphTraverseHandler"/>
     </eOperations>
+    <eOperations name="traverse">
+      <eParameters name="startNodes" upperBound="-1" eType="#//Node"/>
+      <eParameters name="traverseType" eType="#//GRAPH_TRAVERSE_TYPE"/>
+      <eParameters name="traverseId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="traverseHandler" eType="#//GraphTraverseHandler"/>
+      <eParameters name="isCycleSafe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="indexMgr" eType="#//index/IndexMgr"
         volatile="true" transient="true" eOpposite="#//index/IndexMgr/graph"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"

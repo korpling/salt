@@ -47,6 +47,30 @@ public class GraphTraverserModule extends GraphModule
 							String traverseId,
 							GraphTraverseHandler traverseHandler)
 	{
+		this.traverse(startNodes, traverseType, traverseId, traverseHandler, true);
+	}
+	
+	/**
+	 * Traverses a graph in the given order traverseType and starts traversing with the given startNodes. When a node is reached, 
+	 * first this method will invoke the method {@link GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_MODE, String, Edge, Node, long)} 
+	 * of the given callback handler traverseHandler, second the method {@link GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)}
+	 * is invoked. When a node was left, the method {@link GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)} 
+	 * is invoked. When calling these methods, the traverseId will be passed, so that the callback handler knows which traversal is meant.
+	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
+	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
+	 * node twice.
+	 * @param startNodes list of nodes at which the traversal shall start
+	 * @param traverseType type of traversing
+	 * @param traverseId identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler
+	 * @param traverseHandler callback handler, on which the three methods will be invoked
+	 * @param isCycleSafe if this value is false, this method does not take care about cycles. This can invoke endless loops.
+	 */
+	public void traverse(	EList<Node> startNodes,
+							GRAPH_TRAVERSE_TYPE traverseType, 
+							String traverseId,
+							GraphTraverseHandler traverseHandler,
+							boolean isCycleSafe)
+	{
 		if (this.getGraph()== null)
 			throw new GraphTraverserException("Cannot start traversing graph, because the graph is null.");
 		if (	(startNodes== null)||
@@ -89,6 +113,7 @@ public class GraphTraverserModule extends GraphModule
 		traverser.traverseType= traverseType;
 		traverser.traverseId= traverseId;
 		traverser.traverseHandler= traverseHandler;
+		traverser.isCycleSafe= isCycleSafe;
 		traverser.setGraph(this.getGraph());
 		
 		Thread traverserThread= new Thread(traverser, "GraphTraverserThread_"+ traverseId);
@@ -98,8 +123,7 @@ public class GraphTraverserModule extends GraphModule
 			traverser.traverseFinished.await();
 		} catch (InterruptedException e) {
 			throw new GraphTraverserException("An exception occurs while traversing the graph '"+this.getGraph().getId()+"'." ,e);
-		}
-		finally
+		} finally
 		{
 			traverser.traverselock.unlock();
 		}
@@ -146,6 +170,11 @@ public class GraphTraverserModule extends GraphModule
 		 * The callback handler on which the methods while traversal will be invoked.
 		 */
 		GraphTraverseHandler traverseHandler= null;
+		
+		/**
+		 * If value is false, this object does not take care about cycles in traversion.
+		 */
+		boolean isCycleSafe= true;
 		
 		/**
 		 * In Case of an exception occurs during traversal, it will be stored here, so that the calling method can check if the 
@@ -262,8 +291,11 @@ public class GraphTraverserModule extends GraphModule
 					for(Edge childEdge: childEdges)
 					{
 						Node childNode= childEdge.getTarget();
-						if (this.currentNodePath.contains(childNode))
+						if (	(this.isCycleSafe)&&
+								(this.currentNodePath.contains(childNode)))
+						{
 							throw new GraphTraverserException("A cycle in graph '"+graph.getId()+"' has been detected, while traversing with type '"+traverseType+"'. The cycle has been detected when visiting node '"+childNode+"' while current path was '"+ this.currentNodePath+"'.");
+						}
 						
 						this.currentNodePath.add(childNode);
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, childEdge, childNode, order))
@@ -311,7 +343,8 @@ public class GraphTraverserModule extends GraphModule
 					for(Edge parentEdge: parentEdges)
 					{
 						Node parentNode= parentEdge.getSource();
-						if (this.currentNodePath.contains(parentNode))
+						if (	(this.isCycleSafe)&&
+								(this.currentNodePath.contains(parentNode)))
 							throw new GraphTraverserException("A cycle in graph '"+graph.getId()+"' has been detected, while traversing with type '"+traverseType+"'. The cycle has been detected when visiting node '"+parentNode+"' while current path was '"+ this.currentNodePath+"'.");
 						
 						this.currentNodePath.add(parentNode);

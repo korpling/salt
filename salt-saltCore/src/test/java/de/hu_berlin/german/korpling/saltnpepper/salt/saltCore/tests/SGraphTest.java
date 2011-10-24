@@ -62,6 +62,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRelation(java.lang.String) <em>Get SRelation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#addSLayer(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer) <em>Add SLayer</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayer(java.lang.String) <em>Get SLayer</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRoots() <em>Get SRoots</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLeafs() <em>Get SLeafs</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler) <em>Traverse</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler, boolean) <em>Traverse</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation) <em>Add SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#createSMetaAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SMeta Annotation</em>}</li>
@@ -312,6 +316,51 @@ public class SGraphTest extends TestCase {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayer(java.lang.String)
 	 */
 	public void testGetSLayer__String() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRoots() <em>Get SRoots</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRoots()
+	 */
+	public void testGetSRoots() 
+	{
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLeafs() <em>Get SLeafs</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLeafs()
+	 */
+	public void testGetSLeafs() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler) <em>Traverse</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler)
+	 */
+	public void testTraverse__EList_GRAPH_TRAVERSE_TYPE_String_SGraphTraverseHandler() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler, boolean) <em>Traverse</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler, boolean)
+	 */
+	public void testTraverse__EList_GRAPH_TRAVERSE_TYPE_String_SGraphTraverseHandler_boolean() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 	}

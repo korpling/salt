@@ -75,6 +75,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.tests.GraphTr
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getRoots() <em>Get Roots</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getLeafs() <em>Get Leafs</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler) <em>Traverse</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler, boolean) <em>Traverse</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -1258,6 +1259,30 @@ public class GraphTest extends IdentifiableElementTest {
 		createGraph(graph, nodeNames, edgeNames);
 		return(graph);
 	}	
+	
+	/**
+	 * Creates the following graph including a cycle: <br/>
+	 * 	node1							<br/>
+	 *		\							<br/>
+	 *		node2						<br/>
+	 *		/	\						<br/>
+	 *	node3	node6 					<br/>
+	 *				\					<br/>
+	 *				 node 7				<br/>
+	 * node 7 -> node2					<br/>
+	 **/
+	public static Graph createGraph_SimpleCycle()
+	{
+		Graph graph= GraphFactory.eINSTANCE.createGraph();
+		graph.setId("createGraph_Cycle");
+		String[] nodeNames= {"node1", "node2", "node3", "node6", "node7"};
+		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
+								{"node2", "node6", "edge3"}, {"node6", "node7", "edge5"}, 
+								{"node7", "node2", "edge6"}};
+	
+		createGraph(graph, nodeNames, edgeNames);
+		return(graph);
+	}	
 // ============================================== end: create dummy graphs	
 	
 	/**
@@ -1376,6 +1401,15 @@ public class GraphTest extends IdentifiableElementTest {
 	public void testTraverse__EList_GRAPH_TRAVERSE_TYPE_String_GraphTraverseHandler() 
 	{
 		//delegated 
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler, boolean) <em>Traverse</em>}' operation.
+	 * This method do not check anything, instead of using these pleasse the traverse test methods in {@link GraphTraverserModuleTest}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler, boolean)
+	 */
+	public void testTraverse__EList_GRAPH_TRAVERSE_TYPE_String_GraphTraverseHandler_boolean() {
+		//delegated
 	}
 
 	public void testRemoveEdge__EdgeByList() 
