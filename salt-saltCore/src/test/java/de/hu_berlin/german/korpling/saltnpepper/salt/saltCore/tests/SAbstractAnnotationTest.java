@@ -317,8 +317,6 @@ public abstract class SAbstractAnnotationTest extends TestCase {
 	 */
 	public void testGetSValueType() 
 	{
-		assertNull(this.getFixture().getSValueType());
-		
 		SDATATYPE dataType= null;
 				
 		dataType= SDATATYPE.SBOOLEAN;

@@ -213,7 +213,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="SValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="SValueType" eType="#//SDATATYPE"
-        changeable="false" volatile="true" transient="true" derived="true"/>
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SDATATYPE">
     <eLiterals name="STEXT"/>

@@ -1069,7 +1069,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		initEAttribute(getSAbstractAnnotation_SNS(), ecorePackage.getEString(), "SNS", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSAbstractAnnotation_SName(), ecorePackage.getEString(), "SName", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSAbstractAnnotation_SValue(), ecorePackage.getEJavaObject(), "SValue", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSAbstractAnnotation_SValueType(), this.getSDATATYPE(), "SValueType", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSAbstractAnnotation_SValueType(), this.getSDATATYPE(), "SValueType", null, 0, 1, SAbstractAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(sAbstractAnnotationEClass, ecorePackage.getEString(), "getSValueSTEXT", 0, 1, IS_UNIQUE, IS_ORDERED);
 

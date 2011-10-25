@@ -150,44 +150,34 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	}
 
 	/**
-	 * Sets the value of the sValue attribute.
-	 * This method also sets the sValueType attribute to one of the supported Datatypes in SDATATYPE.
-	 * null--> SOBJECT
-	 * String --> STEXT
-	 * Boolean --> SBOOLEAN
-	 * Integer --> SNUMERIC
-	 * Long --> SNUMERIC
-	 * Double --> SFLOAT
-	 * Float --> SFLOAT
-	 * URI --> SURI
-	 * else --> SOBJECT
+	 * {@inheritDoc SAbstractAnnotation#setSValue(Object)}}
 	 */
 	public void setSValue(Object newSValue) 
 	{
 		super.setValue(newSValue);
-		{//setting sValueType
-			if (newSValue == null)
-				this.setSValueType(SDATATYPE.SOBJECT);
-			else if (newSValue instanceof String)
-				this.setSValueType(SDATATYPE.STEXT);
-			else if (newSValue instanceof Boolean)
-				this.setSValueType(SDATATYPE.SBOOLEAN);
-			else if (newSValue instanceof Integer)
-				this.setSValueType(SDATATYPE.SNUMERIC);
-			else if (newSValue instanceof Long)
-				this.setSValueType(SDATATYPE.SNUMERIC);
-			else if (newSValue instanceof Float)
-				this.setSValueType(SDATATYPE.SFLOAT);
-			else if (newSValue instanceof Double)
-				this.setSValueType(SDATATYPE.SFLOAT);
-			else if (newSValue instanceof URI)
-				this.setSValueType(SDATATYPE.SURI);
-			else this.setSValueType(SDATATYPE.SOBJECT);
-		}//setting sValueType
+//		{//setting sValueType
+//			if (newSValue == null)
+//				this.setSValueType(SDATATYPE.SOBJECT);
+//			else if (newSValue instanceof String)
+//				this.setSValueType(SDATATYPE.STEXT);
+//			else if (newSValue instanceof Boolean)
+//				this.setSValueType(SDATATYPE.SBOOLEAN);
+//			else if (newSValue instanceof Integer)
+//				this.setSValueType(SDATATYPE.SNUMERIC);
+//			else if (newSValue instanceof Long)
+//				this.setSValueType(SDATATYPE.SNUMERIC);
+//			else if (newSValue instanceof Float)
+//				this.setSValueType(SDATATYPE.SFLOAT);
+//			else if (newSValue instanceof Double)
+//				this.setSValueType(SDATATYPE.SFLOAT);
+//			else if (newSValue instanceof URI)
+//				this.setSValueType(SDATATYPE.SURI);
+//			else this.setSValueType(SDATATYPE.SOBJECT);
+//		}//setting sValueType
 	}
 
 // ============================= start: SValueType	
-	private static final String KW_SVAL_TYPE="SVAL_TYPE";
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -201,15 +191,34 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 		{
 			retVal= SDATATYPE.valueOf(label.getValueString()); 
 		}
-//		else retVal= SVALUE_TYPE_EDEFAULT;
+		else
+		{//compute value type
+			
+			if (this.getValue() == null)
+				retVal= SDATATYPE.SOBJECT;
+			else if (this.getValue() instanceof String)
+				retVal= SDATATYPE.STEXT;
+			else if (this.getValue() instanceof Boolean)
+				retVal= SDATATYPE.SBOOLEAN;
+			else if (this.getValue() instanceof Integer)
+				retVal= SDATATYPE.SNUMERIC;
+			else if (this.getValue() instanceof Long)
+				retVal= SDATATYPE.SNUMERIC;
+			else if (this.getValue() instanceof Float)
+				retVal= SDATATYPE.SFLOAT;
+			else if (this.getValue() instanceof Double)
+				retVal= SDATATYPE.SFLOAT;
+			else if (this.getValue() instanceof URI)
+				retVal= SDATATYPE.SURI;
+			else retVal= SDATATYPE.SOBJECT;
+		}//compute value type 	
 		return(retVal);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SAbstractAnnotation#setSValueType(SDATATYPE)}
 	 */
-	private void setSValueType(SDATATYPE newSValueType) 
+	public void setSValueType(SDATATYPE newSValueType) 
 	{
 		Label label= super.getLabel(KW_SVAL_TYPE);
 		if (label== null)
@@ -220,6 +229,22 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 		}
 		label.setValueString(newSValueType.toString());
 	}
+
+	//	/**
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 */
+//	private void setSValueType(SDATATYPE newSValueType) 
+//	{
+//		Label label= super.getLabel(KW_SVAL_TYPE);
+//		if (label== null)
+//		{	
+//			label= GraphFactory.eINSTANCE.createLabel();
+//			label.setQName(KW_SVAL_TYPE);
+//			this.addLabel(label);
+//		}
+//		label.setValueString(newSValueType.toString());
+//	}
 	
 	/**
 	 * Returns the sValue attribute of this object as String representation. If the sValue is of
@@ -364,6 +389,9 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 			case SaltCorePackage.SABSTRACT_ANNOTATION__SVALUE:
 				setSValue(newValue);
 				return;
+			case SaltCorePackage.SABSTRACT_ANNOTATION__SVALUE_TYPE:
+				setSValueType((SDATATYPE)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -384,6 +412,9 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 				return;
 			case SaltCorePackage.SABSTRACT_ANNOTATION__SVALUE:
 				setSValue(SVALUE_EDEFAULT);
+				return;
+			case SaltCorePackage.SABSTRACT_ANNOTATION__SVALUE_TYPE:
+				setSValueType(SVALUE_TYPE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);

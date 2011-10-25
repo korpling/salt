@@ -42,6 +42,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
  */
 public interface SAbstractAnnotation extends Label {
 	/**
+	 * QName of label for storing a new label determining the salt-data type of the value of this label. 
+	 */
+	public static final String KW_SVAL_TYPE="SVAL_TYPE";
+	
+	/**
 	 * Returns the value of the '<em><b>SNS</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -111,16 +116,6 @@ public interface SAbstractAnnotation extends Label {
 
 	/**
 	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValue <em>SValue</em>}' attribute.
-	 * This method also sets the sValueType attribute to one of the supported Datatypes in SDATATYPE.
-	 * null--> SOBJECT
-	 * String --> STEXT
-	 * Boolean --> SBOOLEAN
-	 * Integer --> SNUMERIC
-	 * Long --> SNUMERIC
-	 * Double --> SFLOAT
-	 * Float --> SFLOAT
-	 * URI --> SURI
-	 * else --> SOBJECT
 	 * @param value the new value of the '<em>SValue</em>' attribute.
 	 * @see #getSValue()
 	 * @generated
@@ -130,19 +125,36 @@ public interface SAbstractAnnotation extends Label {
 	/**
 	 * Returns the value of the '<em><b>SValue Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SValue Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * If no {@link SDATATYPE} was set, a value will be computed. Here is the list of how java objects will be 
+	 * mapped to a {@link SDATATYPE} value.
+	 * <ul>
+	 * 	<li>null--> SOBJECT</li>
+	 * 	<li>String --> STEXT</li>
+	 * 	<li>Boolean --> SBOOLEAN</li>
+	 * 	<li>Integer --> SNUMERIC</li>
+	 * 	<li>Long --> SNUMERIC</li>
+	 * 	<li>Double --> SFLOAT</li>
+	 * 	<li>Float --> SFLOAT</li>
+	 * 	<li>URI --> SURI</li>
+	 * 	<li>else --> SOBJECT</li>
+	 * </ul>
 	 * @return the value of the '<em>SValue Type</em>' attribute.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE
+	 * @see #setSValueType(SDATATYPE)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage#getSAbstractAnnotation_SValueType()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDATATYPE getSValueType();
+
+	/**
+	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType <em>SValue Type</em>}' attribute.
+	 * @param value the new value of the '<em>SValue Type</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE
+	 * @see #getSValueType()
+	 * @generated
+	 */
+	void setSValueType(SDATATYPE value);
 
 	/**
 	 * Returns the sValue attribute of this object as String representation. If the sValue is of
