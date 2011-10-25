@@ -894,7 +894,7 @@ public class SaltProjectTest extends TestCase {
 					DifferenceListener myDifferenceListener = new IgnoreTextAndAttributeValuesDifferenceListener();
 				    Diff myDiff = new Diff(controlSequence.toString().replace("\r", "").replace("\n", "").replace("\t", ""), testSequence.toString().replace("\r", "").replace("\n", "").replace("\t", "")); 
 				    myDiff.overrideDifferenceListener(myDifferenceListener);
-				    assertTrue("XML does not matches control skeleton XML", myDiff.similar());
+				    assertTrue("XML does not matches control skeleton XML of '"+file1.getAbsolutePath()+"' and '"+file2.getAbsolutePath()+"'", myDiff.similar());
 				}//compare salt files
 			}
 		}//compare all files and subdirectories
