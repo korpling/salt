@@ -115,24 +115,14 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	protected static final Object VALUE_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getValueString() <em>Value String</em>}' attribute.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValueString()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_STRING_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValueString() <em>Value String</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValueString()
-	 * @generated
-	 * @ordered
-	 */
-	protected String valueString = VALUE_STRING_EDEFAULT;
+	protected Object value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -385,29 +375,58 @@ public class LabelImpl extends LabelableElementImpl implements Label
 			this.setName(name.toString());
 	}
 
-	private Object value= null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public Object getValue() 
-	{
-		return(this.value);
+	public Object getValue() {
+		return value;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public void setValue(Object newValue) 
-	{
-		this.value= newValue;
-		
-		//synchronize with valueString
-		if (value!= null)
-			this.valueString= this.value.toString();
-		else this.valueString= null;
+	public void setValue(Object newValue) {
+		Object oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__VALUE, oldValue, value));
 	}
+
+	/**
+	 * The default value of the '{@link #getValueString() <em>Value String</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValueString()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VALUE_STRING_EDEFAULT = null;
+//	/**
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 */
+//	public Object getValue() 
+//	{
+//		return(this.value);
+//	}
+//
+//	/**
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 */
+//	public void setValue(Object newValue) 
+//	{
+//		this.value= newValue;
+//		
+//		//synchronize with valueString
+//		if (value!= null)
+//			this.valueString= this.value.toString();
+//		else this.valueString= null;
+//	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -451,27 +470,36 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc Label#getValueString()}
 	 */
-	public String getValueString() {
-		return valueString;
+	public String getValueString() 
+	{
+		if (this.getValue()!= null)
+			return(this.getValue().toString());
+		else return(null);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc Label#setValueString(String)}
 	 */
-	public void setValueString(String newValueString) {
-		String oldValueString = valueString;
-		valueString = newValueString;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__VALUE_STRING, oldValueString, valueString));
-		
-		//synchronize with value
-		this.setValue(newValueString);
+	public void setValueString(String newValueString) 
+	{
+		//empty
 	}
+
+	//	/**
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 */
+//	public void setValueString(String newValueString) {
+//		String oldValueString = valueString;
+//		valueString = newValueString;
+//		if (eNotificationRequired())
+//			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__VALUE_STRING, oldValueString, valueString));
+//		
+//		//synchronize with value
+//		this.setValue(newValueString);
+//	}
 
 	// ------------------------------ start: static ns_seperator
 	
@@ -659,11 +687,11 @@ public class LabelImpl extends LabelableElementImpl implements Label
 			case GraphPackage.LABEL__QNAME:
 				return QNAME_EDEFAULT == null ? getQName() != null : !QNAME_EDEFAULT.equals(getQName());
 			case GraphPackage.LABEL__VALUE:
-				return VALUE_EDEFAULT == null ? getValue() != null : !VALUE_EDEFAULT.equals(getValue());
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case GraphPackage.LABEL__LABELABLE_ELEMENT:
 				return getLabelableElement() != null;
 			case GraphPackage.LABEL__VALUE_STRING:
-				return VALUE_STRING_EDEFAULT == null ? valueString != null : !VALUE_STRING_EDEFAULT.equals(valueString);
+				return VALUE_STRING_EDEFAULT == null ? getValueString() != null : !VALUE_STRING_EDEFAULT.equals(getValueString());
 		}
 		return super.eIsSet(featureID);
 	}
@@ -682,8 +710,8 @@ public class LabelImpl extends LabelableElementImpl implements Label
 		result.append(namespace);
 		result.append(", name: ");
 		result.append(name);
-		result.append(", valueString: ");
-		result.append(valueString);
+		result.append(", value: ");
+		result.append(value);
 		result.append(')');
 		return result.toString();
 	}
