@@ -29,7 +29,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getQName() <em>QName</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValue() <em>Value</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString() <em>Value String</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -318,6 +318,16 @@ public class LabelTest extends LabelableElementTest {
 		String value= "value";
 		this.getFixture().setValue(value);
 		assertEquals(value, this.getFixture().getValueString());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#setValueString(java.lang.String) <em>Value String</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#setValueString(java.lang.String)
+	 */
+	public void testSetValueString() {
+		//nothing to test, because method does nothing
 	}
 
 	/**
