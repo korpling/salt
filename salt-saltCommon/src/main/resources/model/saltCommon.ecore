@@ -111,6 +111,22 @@
         <eParameters name="targetSNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
         <eParameters name="sRelationType" eType="#//sDocumentStructure/STYPE_NAME"/>
       </eOperations>
+      <eOperations name="getTextSequence" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eParameters name="sNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+      </eOperations>
+      <eOperations name="getTextSequenceBorders">
+        <eParameters name="sNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+      </eOperations>
+      <eOperations name="getSTokensByText" upperBound="-1" eType="#//sDocumentStructure/SToken">
+        <eParameters name="sTextualDS" eType="#//sDocumentStructure/STextualDS"/>
+      </eOperations>
+      <eOperations name="isContinuous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="subSTokenList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+      </eOperations>
+      <eOperations name="isContinuous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="subSTokenList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+        <eParameters name="fullSTokenList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
           eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTextualDSs" upperBound="-1"

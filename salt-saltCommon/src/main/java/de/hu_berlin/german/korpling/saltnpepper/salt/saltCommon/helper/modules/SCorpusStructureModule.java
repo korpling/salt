@@ -15,42 +15,31 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules;
+package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.helper.modules.SGraphModule;
 
 /**
- * @deprecated since Salt 1.1.3
+ * An abstract class for deriving specific modules for the {@link SCorpusGraph}. 
  * @author Florian Zipser
  *
  */
-@Deprecated
-public abstract class SCorpusStructureModule 
+public abstract class SCorpusStructureModule extends SGraphModule
 {
-	/**
-	 * The document structure graph, which shall be traversed.
-	 * @deprecated since Salt 1.1.3
-	 */
-	@Deprecated
-	private SCorpusGraph sCorpusGraph= null;
-
 	/**
 	 * Sets the current graph to work on.
 	 * @param graph graph to traverse
-	 * @deprecated since Salt 1.1.3
 	 */
-	@Deprecated
 	public void setSCorpusGraph(SCorpusGraph sCorpusGraph) {
-		this.sCorpusGraph = sCorpusGraph;
+		super.setSGraph(sCorpusGraph);
 	}
 
 	/**
 	 * Returns the current graph to work on.
 	 * @return the current graph
-	 * @deprecated since Salt 1.1.3
 	 */
-	@Deprecated
 	public SCorpusGraph getSCorpusGraph() {
-		return sCorpusGraph ;
+		return((SCorpusGraph) super.getSGraph());
 	}
 }

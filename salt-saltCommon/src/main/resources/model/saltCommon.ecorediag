@@ -187,6 +187,26 @@
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/addSNode"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_wubTonVsEeCXQ9RnU_WgtA"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_kL4LkP_xEeCMi-eCfVkSrQ" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getTextSequence"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_kL4Lkf_xEeCMi-eCfVkSrQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_QVWbIP_zEeCMi-eCfVkSrQ" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getTextSequenceBorders"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_QVWbIf_zEeCMi-eCfVkSrQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_IykJsP_0EeCMi-eCfVkSrQ" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getSTokensByText"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_IykJsf_0EeCMi-eCfVkSrQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_54KxgP_0EeCMi-eCfVkSrQ" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/isContinuous"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_54Kxgf_0EeCMi-eCfVkSrQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_7ZJcEP_0EeCMi-eCfVkSrQ" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/isContinuous.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_7ZJcEf_0EeCMi-eCfVkSrQ"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_vw8YeIjWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_vw8YeYjWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_vw8YeojWEd6X5oQchPkMiQ"/>

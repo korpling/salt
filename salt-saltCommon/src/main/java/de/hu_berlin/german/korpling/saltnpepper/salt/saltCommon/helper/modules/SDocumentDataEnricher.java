@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules;
+package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -30,13 +30,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 
-/**
- * 
- * @author Florian Zipser
- * @deprecated since Salt 1.1.3
- *
- */
-@Deprecated
 public class SDocumentDataEnricher extends SDocumentStructureModule 
 {
 	
@@ -47,9 +40,7 @@ public class SDocumentDataEnricher extends SDocumentStructureModule
 	 * STextualDS in graph.
 	 *   
 	 * Note: STimeline-object is created only iff there is none already.
-	 * @deprecated since Salt 1.1.3
 	 */
-	@Deprecated
 	public void createSTimeline()
 	{
 		if (this.getSDocumentGraph().getSTimeline()== null)

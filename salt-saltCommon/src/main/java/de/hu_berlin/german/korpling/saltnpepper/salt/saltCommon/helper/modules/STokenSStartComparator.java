@@ -15,40 +15,21 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules;
+package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules;
 
 import java.util.Comparator;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 
 /**
  * 
  * @author Florian Zipser
- * @deprecated since Salt 1.1.3
  */
-@Deprecated
-public class STokenSStartComparator implements Comparator<SToken> {
-
-	private SDocumentGraph sDocumentGraph= null;
-	
-	/**
-	 * @param sDocumentGraph the sDocumentGraph to set
-	 */
-	public void setsDocumentGraph(SDocumentGraph sDocumentGraph) {
-		this.sDocumentGraph = sDocumentGraph;
-	}
-
-	/**
-	 * @return the sDocumentGraph
-	 */
-	public SDocumentGraph getsDocumentGraph() {
-		return sDocumentGraph;
-	}
-	
+public class STokenSStartComparator extends SDocumentStructureModule implements Comparator<SToken> 
+{
 	/**
 	 * Returns -1 if o1 has less text position than o2, 0 if both have equal positions and
 	 * 1 if o1 has higher text position than o2. 
@@ -63,7 +44,7 @@ public class STokenSStartComparator implements Comparator<SToken> {
 			new SaltModuleException("Cannot compare the given SToken-objects, bacause second one is null.");
 		
 		STextualRelation sTextRelO1= null;
-		for (Edge edge : this.getsDocumentGraph().getOutEdges(o1.getId()))
+		for (Edge edge : this.getSDocumentGraph().getOutEdges(o1.getId()))
 		{
 			if (edge instanceof STextualRelation)
 			{
@@ -73,7 +54,7 @@ public class STokenSStartComparator implements Comparator<SToken> {
 		}
 		
 		STextualRelation sTextRelO2= null;
-		for (Edge edge : this.getsDocumentGraph().getOutEdges(o2.getId()))
+		for (Edge edge : this.getSDocumentGraph().getOutEdges(o2.getId()))
 		{
 			if (edge instanceof STextualRelation)
 			{
