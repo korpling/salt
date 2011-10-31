@@ -31,8 +31,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.util.Cycle
  * just by one method.
  * 
  * @author Florian Zipser
- *
+ * @deprecated since Salt 1.1.3
  */
+@Deprecated
 public class SGraphAccessorModule 
 {
 	// ---------------- start: SGraph to work on
@@ -59,6 +60,7 @@ public class SGraphAccessorModule
 	 * node is a node without incoming edges. 
 	 * @return a list of root nodes
 	 */
+	@Deprecated
 	public EList<SNode> getSRoots()
 	{
 		EList<SNode> retVal= null;

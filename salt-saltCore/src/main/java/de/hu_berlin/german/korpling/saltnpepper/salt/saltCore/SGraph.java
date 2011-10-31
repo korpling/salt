@@ -175,9 +175,8 @@ public interface SGraph extends Graph, SNamedElement, SAnnotatableElement, SIden
 	 * @param traverseId identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler
 	 * @param traverseHandler callback handler, on which the three methods will be invoked
 	 * @model startSNodesMany="true" traverseHandlerDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SSGraphTraverseHandler"
-	 * @generated
 	 */
-	void traverse(EList<SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler);
+	void traverse(EList<? extends SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler);
 
 	/**
 	 * {@inheritDoc #traverse(SNode, GRAPH_TRAVERSE_TYPE, String, SGraphTraverseHandler, boolean)}
@@ -186,6 +185,6 @@ public interface SGraph extends Graph, SNamedElement, SAnnotatableElement, SIden
 	 * @model startSNodesMany="true" traverseHandlerDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler"
 	 * @generated
 	 */
-	void traverse(EList<SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler, boolean isCycleSafe);
+	void traverse(EList<? extends SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler, boolean isCycleSafe);
 
 } // SGraph

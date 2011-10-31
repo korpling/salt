@@ -481,7 +481,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	/**
 	 * {@inheritDoc SGraph#traverse(EList, GRAPH_TRAVERSE_TYPE, String, SGraphTraverseHandler)}
 	 */
-	public void traverse(EList<SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler) 
+	public void traverse(EList<? extends SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler) 
 	{
 		this.traverse(startSNodes, traverseType, traverseId, traverseHandler, true);
 	}
@@ -490,7 +490,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 * {@inheritDoc SGraph#traverse(SNode, GRAPH_TRAVERSE_TYPE, String, SGraphTraverseHandler, boolean)}
 	 */
 	@SuppressWarnings("unchecked")
-	public void traverse(EList<SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler, boolean isCycleSafe) 
+	public void traverse(EList<? extends  SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler, boolean isCycleSafe) 
 	{
 		TraverseHandlerWrapper wrapper= new TraverseHandlerWrapper();
 		wrapper.traverseHandler= traverseHandler;

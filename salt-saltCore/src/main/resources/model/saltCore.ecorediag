@@ -142,7 +142,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_a3Bt6YjXEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="saltCore.ecore#//SGraph"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_a3Bt6ojXEd6X5oQchPkMiQ" x="40" y="845" width="553" height="188"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_a3Bt6ojXEd6X5oQchPkMiQ" x="40" y="845" width="553" height="198"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_a3H0eYjXEd6X5oQchPkMiQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_a3H0fIjXEd6X5oQchPkMiQ" type="4001"/>
