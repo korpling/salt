@@ -18,14 +18,26 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.impl;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonFactoryImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SCatAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
@@ -141,5 +153,46 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	@Override
 	public SaltSemanticsPackage getSaltSemanticsPackage() {
 		return(SaltSemanticsPackage.eINSTANCE);
+	}
+	
+	/**
+	 * Initializes the map of {@link STYPE_NAME} and {@link Class}.
+	 */
+	private void initSType2ClazzMap()
+	{
+		this.sType2clazzMap= Collections.synchronizedMap(new HashMap<STYPE_NAME, Class<? extends EObject>>());
+		sType2clazzMap.put(STYPE_NAME.SDOMINANCE_RELATION, SDominanceRelation.class);
+		sType2clazzMap.put(STYPE_NAME.SPOINTING_RELATION, SPointingRelation.class);
+		sType2clazzMap.put(STYPE_NAME.SSPANNING_RELATION, SSpanningRelation.class);
+		sType2clazzMap.put(STYPE_NAME.STEXT_OVERLAPPING_RELATION, STextOverlappingRelation.class);
+		sType2clazzMap.put(STYPE_NAME.STIME_OVERLAPPING_RELATION, STimeOverlappingRelation.class);
+		sType2clazzMap.put(STYPE_NAME.SSEQUENTIAL_RELATION, SSequentialRelation.class);
+	}
+	/**
+	 * the map of {@link STYPE_NAME} and {@link Class}.
+	 */
+	private Map<STYPE_NAME, Class<? extends EObject>> sType2clazzMap= null;
+	
+	@Override
+	public STYPE_NAME convertClazzToSTypeName(Class<? extends EObject> clazz) 
+	{
+		if (this.sType2clazzMap== null)
+			this.initSType2ClazzMap();
+		
+		Set<STYPE_NAME> keys= this.sType2clazzMap.keySet();
+		for (STYPE_NAME sType: keys)
+		{
+			Class<? extends EObject> clazz1= sType2clazzMap.get(sType); 
+			if (clazz1.equals(clazz))
+				return(sType);
+		}
+		return null;
+	}
+
+	@Override
+	public Class<? extends EObject> convertSTypeNameToClazz(STYPE_NAME sType) {
+		if (this.sType2clazzMap== null)
+			this.initSType2ClazzMap();
+		return(this.sType2clazzMap.get(sType));
 	}
 }
