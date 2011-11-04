@@ -83,6 +83,7 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 			case SDocumentStructurePackage.SSTRUCTURE: return createSStructure();
 			case SDocumentStructurePackage.SPOINTING_RELATION: return createSPointingRelation();
 			case SDocumentStructurePackage.SDOMINANCE_RELATION: return createSDominanceRelation();
+			case SDocumentStructurePackage.SDATA_SOURCE_SEQUENCE: return createSDataSourceSequence();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -230,6 +231,16 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	public SDominanceRelation createSDominanceRelation() {
 		SDominanceRelationImpl sDominanceRelation = new SDominanceRelationImpl();
 		return sDominanceRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SDataSourceSequence createSDataSourceSequence() {
+		SDataSourceSequenceImpl sDataSourceSequence = new SDataSourceSequenceImpl();
+		return sDataSourceSequence;
 	}
 
 	/**
