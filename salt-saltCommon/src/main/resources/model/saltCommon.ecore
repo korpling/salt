@@ -111,21 +111,69 @@
         <eParameters name="targetSNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
         <eParameters name="sRelationType" eType="#//sDocumentStructure/STYPE_NAME"/>
       </eOperations>
-      <eOperations name="getTextSequence" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eOperations name="getSSpanBySequence" upperBound="-1" eType="#//sDocumentStructure/SSpan">
+        <eParameters name="sequence" eType="#//sDocumentStructure/SDataSourceSequence"/>
+      </eOperations>
+      <eOperations name="createSTextualDS" eType="#//sDocumentStructure/STextualDS">
+        <eParameters name="sText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="createSToken" eType="#//sDocumentStructure/SToken">
+        <eParameters name="sDSSequences" upperBound="-1" eType="#//sDocumentStructure/SDataSourceSequence"/>
+      </eOperations>
+      <eOperations name="createSToken" eType="#//sDocumentStructure/SToken">
+        <eParameters name="sDSSequence" eType="#//sDocumentStructure/SDataSourceSequence"/>
+      </eOperations>
+      <eOperations name="createSTimeline" eType="#//sDocumentStructure/STimeline"/>
+      <eOperations name="getSTokensBySequence" upperBound="-1" eType="#//sDocumentStructure/SToken">
+        <eParameters name="sequence" eType="#//sDocumentStructure/SDataSourceSequence"/>
+      </eOperations>
+      <eOperations name="getSStructureBySequence" upperBound="-1" eType="#//sDocumentStructure/SStructure">
+        <eParameters name="sequence" eType="#//sDocumentStructure/SDataSourceSequence"/>
+      </eOperations>
+      <eOperations name="getSNodeBySequence" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode">
+        <eParameters name="sequence" eType="#//sDocumentStructure/SDataSourceSequence"/>
+      </eOperations>
+      <eOperations name="getOverlappedDSSequences" upperBound="-1" eType="#//sDocumentStructure/SDataSourceSequence">
         <eParameters name="sNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+        <eParameters name="sRelationTypes" upperBound="-1" eType="#//sDocumentStructure/STYPE_NAME"/>
       </eOperations>
-      <eOperations name="getTextSequenceBorders">
-        <eParameters name="sNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+      <eOperations name="getOverlappedDSSequences" upperBound="-1" eType="#//sDocumentStructure/SDataSourceSequence">
+        <eParameters name="sNode" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+        <eParameters name="sRelationTypes" upperBound="-1" eType="#//sDocumentStructure/STYPE_NAME"/>
       </eOperations>
-      <eOperations name="getSTokensByText" upperBound="-1" eType="#//sDocumentStructure/SToken">
-        <eParameters name="sTextualDS" eType="#//sDocumentStructure/STextualDS"/>
+      <eOperations name="isContinuousByText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="subSNodeList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+        <eParameters name="fullSNodeList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
       </eOperations>
-      <eOperations name="isContinuous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-        <eParameters name="subSTokenList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+      <eOperations name="isContinuousByText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="subSNodeList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
       </eOperations>
-      <eOperations name="isContinuous" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-        <eParameters name="subSTokenList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
-        <eParameters name="fullSTokenList" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+      <eOperations name="getSortedSTokenByText" upperBound="-1" eType="#//sDocumentStructure/SToken">
+        <eParameters name="sTokens2sort" upperBound="-1" eType="#//sDocumentStructure/SToken"/>
+      </eOperations>
+      <eOperations name="getSortedSTokenByText" upperBound="-1" eType="#//sDocumentStructure/SToken"/>
+      <eOperations name="createSSpan" eType="#//sDocumentStructure/SSpan">
+        <eParameters name="sourceSToken" eType="#//sDocumentStructure/SToken"/>
+      </eOperations>
+      <eOperations name="createSSpan" eType="#//sDocumentStructure/SSpan">
+        <eParameters name="sTokens" upperBound="-1" eType="#//sDocumentStructure/SToken"/>
+      </eOperations>
+      <eOperations name="createSStructure" eType="#//sDocumentStructure/SStructure">
+        <eParameters name="sourceSNode" eType="#//sDocumentStructure/SStructuredNode"/>
+      </eOperations>
+      <eOperations name="sortSTokenByText"/>
+      <eOperations name="createSStructure" eType="#//sDocumentStructure/SStructure">
+        <eParameters name="sStructures" upperBound="-1" eType="#//sDocumentStructure/SStructuredNode"/>
+      </eOperations>
+      <eOperations name="getRootsBySRelation" upperBound="-1" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode">
+        <eParameters name="sType" eType="#//sDocumentStructure/STYPE_NAME"/>
+      </eOperations>
+      <eOperations name="getRootsBySRelationSType">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments/>
+          <eTypeArguments/>
+        </eGenericType>
+        <eParameters name="sType" eType="#//sDocumentStructure/STYPE_NAME"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
           eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
@@ -265,6 +313,15 @@
       <eLiterals name="SSPANNING_RELATION" value="5" literal="SSpanningRelation"/>
       <eLiterals name="SDOMINANCE_RELATION" value="6" literal="SDominanceRelation"/>
       <eLiterals name="SPOINTING_RELATION" value="7" literal="SPointingRelation"/>
+      <eLiterals name="STEXT_OVERLAPPING_RELATION" value="8"/>
+      <eLiterals name="STIME_OVERLAPPING_RELATION" value="9"/>
+      <eLiterals name="SSEQUENTIAL_RELATION" value="10"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SDataSourceSequence">
+      <eOperations name="validate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sSequentialDS" eType="#//sDocumentStructure/SSequentialDS"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
