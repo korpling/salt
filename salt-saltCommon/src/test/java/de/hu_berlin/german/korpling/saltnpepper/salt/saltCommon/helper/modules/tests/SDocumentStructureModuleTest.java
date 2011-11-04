@@ -15,19 +15,13 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.tests;
+package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentStructureModule;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import junit.framework.TestCase;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentStructureModule;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 
-/**
- * @deprecated since Salt 1.1.3
- * @author Florian Zipser
- *
- */
-@Deprecated
 public class SDocumentStructureModuleTest extends TestCase 
 {
 	private SDocumentStructureModule fixture= null;
@@ -62,6 +56,7 @@ public class SDocumentStructureModuleTest extends TestCase
 	}
 	
 	/**
+	 * Tests setting and getting the {@link SDocumentGraph} object.
 	 */
 	public void testGetGraph() 
 	{

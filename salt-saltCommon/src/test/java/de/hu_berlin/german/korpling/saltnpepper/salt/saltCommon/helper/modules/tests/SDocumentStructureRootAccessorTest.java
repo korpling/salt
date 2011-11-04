@@ -1,52 +1,30 @@
-/**
- * Copyright 2009 Humboldt University of Berlin, INRIA.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- *
- */
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.tests;
+package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests.SDataSourceAccessorTest;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests.SDocumentStructureRootAccessorTest;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentStructureAccessor;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentStructureRootAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 
-/**
- * @deprecated since Salt 1.1.3
- * @author Florian Zipser
- * {@link SDocumentStructureRootAccessorTest} and {@link SDataSourceAccessorTest}
- *
- */
-@Deprecated
-public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest 
+public class SDocumentStructureRootAccessorTest extends SDocumentStructureModuleTest
 {
-	public SDocumentStructureAccessor getFixture() {
-		return((SDocumentStructureAccessor)super.getFixture());
+	private SDocumentStructureRootAccessor fixture= null;
+
+	public void setFixture(SDocumentStructureRootAccessor fixture) {
+		this.fixture = fixture;
+	}
+
+	public SDocumentStructureRootAccessor getFixture() {
+		return fixture;
 	} 
 	
 	/**
@@ -57,68 +35,18 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	@Override
 	protected void setUp() throws Exception 
 	{
-		setFixture(new SDocumentStructureAccessor());
-		SDocumentGraph sDocGraph= SaltCommonFactory.eINSTANCE.createSDocumentGraph();
-		this.getFixture().setSDocumentGraph(sDocGraph);
+		setFixture(new SDocumentStructureRootAccessor());
+		this.getFixture().setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
 	}
 	
 	/**
-	 * 
-	 * 		span1
-	 * 		/		\
-	 * 	tok1		tok2
-	 * 	|			|
-	 * 	This		is
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#tearDown()
 	 */
-	//copied
-	public void testGetSText()
-	{
-		//text
-		STextualDS sText= SaltCommonFactory.eINSTANCE.createSTextualDS();
-		sText.setSText("This is a sample text.");
-		this.getFixture().getSDocumentGraph().addSNode(sText);
-		
-		//tok1
-		SToken tok1= SaltCommonFactory.eINSTANCE.createSToken();
-		this.getFixture().getSDocumentGraph().addSNode(tok1);
-		//tok2
-		SToken tok2= SaltCommonFactory.eINSTANCE.createSToken();
-		this.getFixture().getSDocumentGraph().addSNode(tok2);
-		//textlRel1
-		STextualRelation textRel1= SaltCommonFactory.eINSTANCE.createSTextualRelation();
-		textRel1.setSTextualDS(sText);
-		textRel1.setSToken(tok1);
-		textRel1.setSStart(0);
-		textRel1.setSEnd(4);
-		this.getFixture().getSDocumentGraph().addSRelation(textRel1);
-		
-		//textlRel1
-		STextualRelation textRel2= SaltCommonFactory.eINSTANCE.createSTextualRelation();
-		textRel2.setSTextualDS(sText);
-		textRel2.setSToken(tok2);
-		textRel2.setSStart(5);
-		textRel2.setSEnd(7);
-		this.getFixture().getSDocumentGraph().addSRelation(textRel2);
-		
-		//span1 
-		SSpan span= SaltCommonFactory.eINSTANCE.createSSpan();
-		this.getFixture().getSDocumentGraph().addSNode(span);
-		
-		//spanRel1
-		SSpanningRelation spanRel1= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
-		spanRel1.setSSpan(span);
-		spanRel1.setSToken(tok1);
-		this.getFixture().getSDocumentGraph().addSRelation(spanRel1);
-		
-		//spanRel2
-		SSpanningRelation spanRel2= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
-		spanRel2.setSSpan(span);
-		spanRel2.setSToken(tok2);
-		this.getFixture().getSDocumentGraph().addSRelation(spanRel2);
-		
-		assertEquals("This", this.getFixture().getSOverlappedText(tok1));
-		assertEquals("is", this.getFixture().getSOverlappedText(tok2));
-		assertEquals("This is", this.getFixture().getSOverlappedText(span));
+	@Override
+	protected void tearDown() throws Exception {
+		setFixture(null);
 	}
 	
 	/**
@@ -131,9 +59,8 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * 	|	/	\	/					\
 	 * tok1		tok2		tok3		tok4		tok5
 	 * 
-	 * PR�s tok1-> tok2; tok3-> tok4; tok4->tok2
+	 * PR's tok1-> tok2; tok3-> tok4; tok4->tok2
 	 */
-	//copied
 	public void testGetRootsBySRelation()
 	{
 		SToken tok1= null;
@@ -288,23 +215,23 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 			roots= new BasicEList<SNode>();
 			roots.add(span1);
 			roots.add(span2);
-			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(SSpanningRelation.class)));
-			assertTrue(this.getFixture().getRootsBySRelation(SSpanningRelation.class).containsAll(roots));
+			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(STYPE_NAME.SSPANNING_RELATION)));
+			assertTrue(this.getFixture().getRootsBySRelation(STYPE_NAME.SSPANNING_RELATION).containsAll(roots));
 		}//check SSpanningRelation
 		
 		{//check SDominanceRelation
 			roots= new BasicEList<SNode>();
 			roots.add(struct2);
-			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(SDominanceRelation.class)));
-			assertTrue(this.getFixture().getRootsBySRelation(SDominanceRelation.class).containsAll(roots));
+			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(STYPE_NAME.SDOMINANCE_RELATION)));
+			assertTrue(this.getFixture().getRootsBySRelation(STYPE_NAME.SDOMINANCE_RELATION).containsAll(roots));
 		}//check SDominanceRelation
 		
 		{//check SPointingRelation
 			roots= new BasicEList<SNode>();
 			roots.add(tok1);
 			roots.add(tok3);
-			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(SPointingRelation.class)));
-			assertTrue(this.getFixture().getRootsBySRelation(SPointingRelation.class).containsAll(roots));
+			assertTrue(roots.containsAll(this.getFixture().getRootsBySRelation(STYPE_NAME.SPOINTING_RELATION)));
+			assertTrue(this.getFixture().getRootsBySRelation(STYPE_NAME.SPOINTING_RELATION).containsAll(roots));
 		}//check SPointingRelation
 	}
 	
@@ -312,7 +239,6 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * Checks the method getRootsBySRelationSType().
 	 * Just for SPointingRelation
 	 */
-	//copied
 	public void testGetRootsBySRelationSTypePR1()
 	{
 		{//checking for SPointingRelation
@@ -351,7 +277,6 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * Checks the method getRootsBySRelationSType().
 	 * Just for SPointingRelation
 	 */
-	//copied
 	public void testGetRootsBySRelationSTypePR2()
 	{
 		{//checking for SPointingRelation
@@ -396,7 +321,6 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * tests a chain of pr with the same type.
 	 * node1 ->t1 node2 ->t1 node3
 	 */
-	//copied
 	public void testGetRootsBySRelationSTypePR3()
 	{
 		{//checking for SPointingRelation
@@ -431,7 +355,6 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * tests a chain of pr with the same type. But all nodes have a second incoming relation of another type.
 	 * node1 ->t1 node2 ->t1 node3
 	 */
-	//copied
 	public void testGetRootsBySRelationSTypePR4()
 	{
 		{//checking for SPointingRelation
@@ -484,7 +407,6 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * tests a chain of pr with the same type, and one cycle pr with another type.
 	 * node1 ->t1 node2 ->t1 node3 ->t1 node4 ->t2 node1
 	 */
-	//copied
 	public void testGetRootsBySRelationSTypePR5()
 	{
 		{//checking for SPointingRelation
@@ -538,7 +460,6 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * another type exists.
 	 * node1 ->t1 node2 ->t1, t2 node3 ->t1 node4 ->t2 node1
 	 */
-	//copied
 	public void testGetRootsBySRelationSTypePR6()
 	{
 		{//checking for SPointingRelation
@@ -600,7 +521,6 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * 						|		\
 	 * 						tok4	tok5
 	 */
-	//copied
 	public void testGetRootsBySRelationSTypeDR1()
 	{
 		{//checking for SPointingRelation
@@ -665,67 +585,5 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 			assertEquals(1, this.getFixture().getRootsBySRelationSType(SDominanceRelation.class).get(type1).size());
 			assertTrue(this.getFixture().getRootsBySRelationSType(SDominanceRelation.class).get(type1).contains(struct1));
 		}//checking for SPointingRelation
-	}
-	
-	//copied
-	public void testGetSTokensSortedByText()
-	{
-		EList<SToken> sTokens= new BasicEList<SToken>();
-		
-		STextualRelation sTextualRelation= null;
-		
-		SToken sToken1= SaltCommonFactory.eINSTANCE.createSToken();
-		this.getFixture().getSDocumentGraph().addSNode(sToken1);
-		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
-		sTextualRelation.setSToken(sToken1);
-		sTextualRelation.setSStart(1);
-		sTextualRelation.setSStart(3);
-		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
-		
-		SToken sToken2= SaltCommonFactory.eINSTANCE.createSToken();
-		this.getFixture().getSDocumentGraph().addSNode(sToken2);
-		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
-		sTextualRelation.setSToken(sToken2);
-		sTextualRelation.setSStart(0);
-		sTextualRelation.setSStart(1);
-		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
-		
-		SToken sToken3= SaltCommonFactory.eINSTANCE.createSToken();
-		this.getFixture().getSDocumentGraph().addSNode(sToken3);
-		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
-		sTextualRelation.setSToken(sToken3);
-		sTextualRelation.setSStart(4);
-		sTextualRelation.setSStart(5);
-		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
-		
-		SToken sToken4= SaltCommonFactory.eINSTANCE.createSToken();
-		this.getFixture().getSDocumentGraph().addSNode(sToken4);
-		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
-		sTextualRelation.setSToken(sToken4);
-		sTextualRelation.setSStart(2);
-		sTextualRelation.setSStart(3);
-		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
-		
-		SToken sToken5= SaltCommonFactory.eINSTANCE.createSToken();
-		this.getFixture().getSDocumentGraph().addSNode(sToken5);
-		sTextualRelation= SaltCommonFactory.eINSTANCE.createSTextualRelation();
-		sTextualRelation.setSToken(sToken5);
-		sTextualRelation.setSStart(3);
-		sTextualRelation.setSStart(4);
-		this.getFixture().getSDocumentGraph().addSRelation(sTextualRelation);
-		
-		sTokens.add(sToken2);
-		sTokens.add(sToken1);
-		sTokens.add(sToken4);
-		sTokens.add(sToken5);
-		sTokens.add(sToken3);
-		
-		//FIXME uncomment next lines and make the test run
-//		assertTrue(sTokens.containsAll(this.getFixture().getSTokensSortedByText()));
-//		assertTrue(this.getFixture().getSTokensSortedByText().containsAll(sTokens));
-		for (SToken currSToken: sTokens)
-		{
-//			assertEquals(sTokens.indexOf(currSToken), this.getFixture().getSTokensSortedByText().indexOf(currSToken));
-		}
 	}
 }
