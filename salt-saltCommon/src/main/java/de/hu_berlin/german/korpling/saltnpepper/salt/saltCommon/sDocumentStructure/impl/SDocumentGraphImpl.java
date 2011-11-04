@@ -18,9 +18,12 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl;
 
 import java.util.Collection;
+import java.util.Hashtable;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -36,17 +39,25 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltElementNotContainedInGraphException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltEmptyParameterException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltImproperSTypeException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDataSourceAccessor;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentStructureRootAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructuredNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
@@ -81,15 +92,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
  * @generated
  */
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
-	/**
-	 * name of index for node-types
-	 */
-	protected static final String IDX_SNODETYPE=	"idx_sNodeType";
-	/**
-	 * name of index for relation-types
-	 */
-	protected static final String IDX_SRELATIONTYPE=	"idx_sRelationType";
-	
 	/**
 	 * The cached value of the '{@link #getSDocument() <em>SDocument</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -417,6 +419,340 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	    }
 	    this.addSRelation(retVal);
 	    return retVal;
+	}
+	
+	/**
+	 * {@inheritDoc SDocumentGraph#addSText(String)}
+	 */
+	public STextualDS createSTextualDS(String sText) 
+	{
+		STextualDS sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
+		sTextualDS.setSText(sText);
+		this.addSNode(sTextualDS);
+		return(sTextualDS);
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#addSToken(EList)}
+	 */
+	public SToken createSToken(EList<SDataSourceSequence> sDSSequences) 
+	{
+		if (sDSSequences== null)
+			throw new SaltEmptyParameterException("sDSSequences", "addSToken", this.getClass());
+		if (sDSSequences.size()>0)
+		{
+			SToken sToken= SaltFactory.eINSTANCE.createSToken();
+			this.addSNode(sToken);
+			for (SDataSourceSequence sDSSequence: sDSSequences)
+			{
+				this.addSToken(sToken, sDSSequence);
+			}
+			return(sToken);
+		}
+		else return(null);
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#createSToken(SDataSourceSequence)}
+	 */
+	public SToken createSToken(SDataSourceSequence sDSSequence) 
+	{
+		SToken sToken= SaltFactory.eINSTANCE.createSToken();
+		this.addSNode(sToken);
+		this.addSToken(sToken, sDSSequence);
+		return(sToken);
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#createSTimeline()}
+	 */
+	public STimeline createSTimeline() 
+	{
+		STimeline retVal= null;
+		if (this.getSTimeline()== null)
+		{
+			STimeline sTimeline= SDocumentStructureFactory.eINSTANCE.createSTimeline();
+			this.addSNode(sTimeline);
+			EList<STimelineRelation> sTimeRelList= new BasicEList<STimelineRelation>();
+			Map<STextualDS, EList<STimelineRelation>> sTimeRelTable= new Hashtable<STextualDS, EList<STimelineRelation>>();
+			for (STextualRelation sTextRel: this.getSTextualRelations())
+			{
+				STimelineRelation sTimeRel= SDocumentStructureFactory.eINSTANCE.createSTimelineRelation();
+				sTimeRel.setSTimeline(sTimeline);
+				sTimeRel.setSToken(sTextRel.getSToken());
+				
+				{//put STimelineRelation into sTimeRelTable
+					if (sTimeRelTable.get(sTextRel.getSTextualDS())== null)
+						sTimeRelTable.put(sTextRel.getSTextualDS(), new BasicEList<STimelineRelation>());
+					//TODO not only adding the timeRel, sorting for left and right textual position
+					sTimeRelTable.get(sTextRel.getSTextualDS()).add(sTimeRel);
+				}
+			}
+			for (STextualDS sTextualDS: this.getSTextualDSs())
+			{
+				sTimeRelList.addAll(sTimeRelTable.get(sTextualDS));
+			}
+			Integer pot= 0;
+			sTimeline.addSPointOfTime(pot.toString());
+			for (STimelineRelation sTimeRelation: sTimeRelList)
+			{
+				sTimeRelation.setSStart(pot);
+				pot++;
+				sTimeline.addSPointOfTime(pot.toString());
+				sTimeRelation.setSEnd(pot);
+				this.addSRelation(sTimeRelation);
+			}
+			retVal= sTimeline;
+		}
+		else retVal= this.getSTimeline();
+		
+		return(retVal);
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#getSTokensBySequence(SDataSourceSequence)}
+	 */
+	public EList<SToken> getSTokensBySequence(SDataSourceSequence sequence) 
+	{
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.getSTokensBySequence(sequence));
+	}
+
+	/**
+	 *{@inheritDoc SDocumentGraph#getSSpanBySequence(SDataSourceSequence)}
+	 */
+	public EList<SSpan> getSSpanBySequence(SDataSourceSequence sequence) 
+	{
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.getSSpanBySequence(sequence));
+	}
+	
+	/**
+	 * {@inheritDoc SDocumentGraph#getSStructureBySequence(SDataSourceSequence)}
+	 */
+	public EList<SStructure> getSStructureBySequence(SDataSourceSequence sequence) {
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.getSStructureBySequence(sequence));
+	}
+
+	/**
+	 *{@inheritDoc SDocumentGraph#getSNodeBySequence(SDataSourceSequence)}
+	 */
+	@SuppressWarnings("unchecked")
+	public EList<SNode> getSNodeBySequence(SDataSourceSequence sequence) {
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return((EList<SNode>)sDatasourceAccessor.getSNodeBySequence(sequence));
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#getOverlappedDSSequences(SNode, EList)}
+	 */
+	public EList<SDataSourceSequence> getOverlappedDSSequences(SNode sNode, EList<STYPE_NAME> sRelationTypes) {
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.getOverlappedDSSequences(sNode, sRelationTypes));
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#getOverlappedDSSequences(SNode, EList)}
+	 */
+	public EList<SDataSourceSequence> getOverlappedDSSequences(EList<SNode> sNode, EList<STYPE_NAME> sRelationTypes) {
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.getOverlappedDSSequences(sNode, sRelationTypes));
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#isContinuousByText(EList)}
+	 */
+	public boolean isContinuousByText(EList<SNode> subSNodeList, EList<SNode> fullSNodeList) 
+	{
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.isContinuousByText(subSNodeList, fullSNodeList));
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#isContinuousByText(EList)}
+	 */
+	public boolean isContinuousByText(EList<SNode> subSNodeList) 
+	{
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.isContinuousByText(subSNodeList));
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#getSortedSTokenByText(SToken)}
+	 */
+	public EList<SToken> getSortedSTokenByText(EList<SToken> sTokens2sort) 
+	{
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.getSortedSTokenByText(sTokens2sort));
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#getSortedSTokenByText(SToken)}
+	 */
+	public EList<SToken> getSortedSTokenByText() 
+	{
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.getSortedSTokenByText());
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#sortSTokenByText()}
+	 */
+	public void sortSTokenByText() 
+	{
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		sDatasourceAccessor.sortSTokenByText();
+	}
+	
+	/**
+	 * {@inheritDoc SDocumentGraph#createSSpan(SToken)}
+	 */
+	public SSpan createSSpan(SToken sourceSToken) 
+	{
+		if (sourceSToken== null)
+			throw new SaltEmptyParameterException("addSSpan", "sourceSToken", this.getClass());
+		SSpan sSpan= SaltFactory.eINSTANCE.createSSpan();
+		this.addSNode(sSpan);
+		SSpanningRelation sSpanningRel= SaltFactory.eINSTANCE.createSSpanningRelation();
+		sSpanningRel.setSSpan(sSpan);
+		sSpanningRel.setSToken(sourceSToken);
+		this.addSRelation(sSpanningRel);
+		return(sSpan);
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#addSSpan(EList)}
+	 */
+	public SSpan createSSpan(EList<SToken> sTokens) 
+	{
+		SSpan retVal= null;
+		if (sTokens!= null)
+		{
+			for (SToken sToken: sTokens)
+			{
+				if (sToken!= null)
+				{
+					if (retVal==  null)
+					{
+						retVal= SaltFactory.eINSTANCE.createSSpan();
+						this.addSNode(retVal);
+					}
+					SSpanningRelation sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
+					sSpanRel.setSSpan(retVal);
+					sSpanRel.setSToken(sToken);
+					this.addSRelation(sSpanRel);
+				}
+			}
+		}
+		return(retVal);
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#addSStructure(SStructuredNode)}
+	 */
+	public SStructure createSStructure(SStructuredNode sourceSNode) 
+	{
+		if (sourceSNode== null)
+			throw new SaltEmptyParameterException("addSStructure", "sourceSNode", this.getClass());
+		SStructure sStruct= SaltFactory.eINSTANCE.createSStructure();
+		this.addSNode(sStruct);
+		SDominanceRelation sDomRel= SaltFactory.eINSTANCE.createSDominanceRelation();
+		sDomRel.setSStructure(sStruct);
+		sDomRel.setSStructuredTarget(sourceSNode);
+		this.addSRelation(sDomRel);
+		return(sStruct);
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#createSStructure(EList)}
+	 */
+	public SStructure createSStructure(EList<SStructuredNode> sStructuredNodes) 
+	{
+		SStructure retVal= null;
+		if (sStructuredNodes!= null)
+		{
+			for (SStructuredNode sStructuredNode: sStructuredNodes)
+			{
+				if (sStructuredNode!= null)
+				{
+					if (retVal==  null)
+					{
+						retVal= SaltFactory.eINSTANCE.createSStructure();
+						this.addSNode(retVal);
+					}
+					SDominanceRelation sDomRel= SaltFactory.eINSTANCE.createSDominanceRelation();
+					sDomRel.setSSource(retVal);
+					sDomRel.setSTarget(sStructuredNode);
+					this.addSRelation(sDomRel);
+				}
+			}
+		}
+		return(retVal);
+	}
+	
+	/**
+	 * {@inheritDoc SDocumentGraph#getRootsBySRelation(STYPE_NAME)}
+	 */
+	public EList<SNode> getRootsBySRelation(STYPE_NAME sType) {
+		SDocumentStructureRootAccessor module= new SDocumentStructureRootAccessor();
+		module.setSDocumentGraph(this);
+		return(module.getRootsBySRelation(sType));
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#getRootsBySRelationSType(STYPE_NAME)}
+	 */
+	public Map<String, EList<SNode>> getRootsBySRelationSType(STYPE_NAME sType)
+	{
+		SDocumentStructureRootAccessor module= new SDocumentStructureRootAccessor();
+		module.setSDocumentGraph(this);
+		return(module.getRootsBySRelationSType(sType));
+	}
+
+	/**
+	 * Connects the given {@link SToken} object to the given {@link SSequentialDS} object.
+	 * @param sToken token to connect to the {@link SSequentialDS} object
+	 * @param sDSSequence object containing the {@link SSequentialDS} object and the borders, to which the token points to
+	 */
+	private void addSToken(SToken sToken, SDataSourceSequence sDSSequence)
+	{
+		if (sDSSequence== null)
+			throw new SaltEmptyParameterException("sDSSequence", "addSToken", this.getClass());
+		if (sDSSequence.getSSequentialDS()== null)
+			throw new SaltEmptyParameterException("sDSSequences.getSSequentialDS()", "addSToken", this.getClass());
+		if (sDSSequence.getSStart()== null)
+			throw new SaltEmptyParameterException("sDSSequences.getSStart()", "addSToken", this.getClass());
+		if (sDSSequence.getSEnd()== null)
+			throw new SaltEmptyParameterException("sDSSequences.getSEnd()", "addSToken", this.getClass());
+		
+		SSequentialRelation seqRel= null;
+		
+		if (sDSSequence.getSSequentialDS() instanceof STextualDS)
+		{
+			seqRel= SaltFactory.eINSTANCE.createSTextualRelation();
+			((STextualRelation)seqRel).setSTextualDS((STextualDS) sDSSequence.getSSequentialDS());
+		}
+		else if (sDSSequence.getSSequentialDS() instanceof STimeline)
+		{
+			seqRel= SaltFactory.eINSTANCE.createSTimelineRelation();
+			((STimelineRelation)seqRel).setSTimeline((STimeline) sDSSequence.getSSequentialDS());
+		}
+		seqRel.setSSource(sToken);
+		seqRel.setSStart(sDSSequence.getSStart());
+		seqRel.setSEnd(sDSSequence.getSEnd());
+		this.addSRelation(seqRel);
 	}
 	
 	/**
@@ -805,5 +1141,4 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}
 		return super.eIsSet(featureID);
 	}
-
 } //SDocumentGraphImpl
