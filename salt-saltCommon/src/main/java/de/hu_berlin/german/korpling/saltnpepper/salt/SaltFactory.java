@@ -18,9 +18,11 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
 
 public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
@@ -39,6 +41,20 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * The file ending for xml files to store a SALT model.
 	 */
 	public final String GRAF_FILE_ENDING= "graf"; 
+	
+	/**
+	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.
+	 * @param class to convert
+	 * @return {@link STYPE_NAME} of given class
+	 */
+	public STYPE_NAME convertClazzToSTypeName(Class<? extends EObject> clazz); 
+	
+	/**
+	 * Converts the given {@link STYPE_NAME}, into the corresponding class.
+	 * @param type to convert
+	 * @return corresponding class
+	 */
+	public Class<? extends EObject> convertSTypeNameToClazz(STYPE_NAME sType);
 	
 	/**
 	 * Loads a SaltProject from given uri and returns it as object structure.
