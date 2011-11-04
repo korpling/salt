@@ -26,6 +26,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
@@ -435,6 +436,11 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.createSStructure());
 	}
 
+	@Override
+	public SDataSourceSequence createSDataSourceSequence() {
+		return(this.sDocumentStructureFactory.createSDataSourceSequence());
+	}
+	
 //	@Override
 //	public SStructuredNode createSStructuredNode() 
 //	{
@@ -446,4 +452,6 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
 // ===================================== end: SDocumentStructureFactory
+
+	
 } //SaltCommonFactoryImpl
