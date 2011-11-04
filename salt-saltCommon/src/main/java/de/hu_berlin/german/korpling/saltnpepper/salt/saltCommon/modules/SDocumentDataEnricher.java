@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentStructureModule;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
@@ -47,7 +48,7 @@ public class SDocumentDataEnricher extends SDocumentStructureModule
 	 * STextualDS in graph.
 	 *   
 	 * Note: STimeline-object is created only iff there is none already.
-	 * @deprecated since Salt 1.1.3
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#createSTimeline()} instead
 	 */
 	@Deprecated
 	public void createSTimeline()

@@ -18,7 +18,9 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDataSourceAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
@@ -28,6 +30,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
  * 
  * @author Florian Zipser
  * @deprecated since Salt 1.1.3
+ * 
  */
 @Deprecated
 public class SAccessorModule 
@@ -45,7 +48,7 @@ public class SAccessorModule
 	}
 // === fixing a document to work with
 	/**
-	 * @deprecated since Salt 1.1.3
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#getOverlappedDSSequences(SNode, org.eclipse.emf.common.util.EList)} instead
 	 */
 	@Deprecated
 	public String getOverlappedText(SElementId sElementId)
@@ -59,7 +62,7 @@ public class SAccessorModule
 	 * @param sDocument
 	 * @param sNode
 	 * @return
-	 * @deprecated since Salt 1.1.3
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#getOverlappedDSSequences(SNode, org.eclipse.emf.common.util.EList)} instead
 	 */
 	@Deprecated
 	public String getOverlappedText(SDocument sDocument, SNode sNode)
@@ -94,7 +97,7 @@ public class SAccessorModule
 	 * @param sDocument
 	 * @param sElementId
 	 * @return
-	 * @deprecated since Salt 1.1.3
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#getOverlappedDSSequences(SNode, org.eclipse.emf.common.util.EList)} instead
 	 */
 	@Deprecated
 	public String getOverlappedText(SDocument sDocument, SElementId sElementId)

@@ -29,6 +29,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObje
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SCorpusStructureModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 
 /**
  * 
@@ -41,7 +42,7 @@ public class SCorpusStructureAccessor extends SCorpusStructureModule implements 
 	/**
 	 * Returns all SCorpus-objects which are root corpora.
 	 * @return root corpora
-	 * @deprecated since Salt 1.1.3
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#getSRoots()} instead
 	 */
 	@Deprecated
 	public EList<SCorpus> getSRootCorpora()
