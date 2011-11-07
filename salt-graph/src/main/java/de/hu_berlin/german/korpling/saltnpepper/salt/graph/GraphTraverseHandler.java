@@ -25,7 +25,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph;
  * If the traversal reaches a new {@link Node} object being contained in the {@link Graph} object, the method
  * {@link #checkConstraint(GRAPH_TRAVERSE_TYPE, String, Edge, Node, long)} will be invoked. If this method returns true, it means
  * that this node and eventually its sub-graph will also be traversed. When true is returned, the method {@link #nodeReached(GRAPH_TRAVERSE_TYPE, String, Node, Edge, Node, long)}
- * will be invoked, when reaching the node and {@link #nodeLeft(GRAPH_TRAVERSE_TYPE, String, Node, Edge, Node, long)} when lefting
+ * will be invoked, when reaching the node and {@link #nodeLeft(GRAPH_TRAVERSE_TYPE, String, Node, Edge, Node, long)} when leaving
  * the node. 
  * 
  * @author Florian Zipser

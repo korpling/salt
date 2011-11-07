@@ -496,9 +496,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	/**
 	 * This method returns the given object. It adds all properties of this to the given object.
 	 * @param clone the clone to which all properties of this shall be copied to
-	 * @return
+	 * @return the extended given object
 	 */
-	protected Object clone(SNode clone)
+	public Object clone(SNode clone)
 	{
 		super.clone(clone);
 		return(clone);

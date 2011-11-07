@@ -23,11 +23,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
 
@@ -75,6 +78,25 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		return SCorpusStructurePackage.Literals.SDOCUMENT;
 	}
 
+	/**
+	 * {@inheritDoc SDocument#clone()}
+	 */
+	@Override
+	public Object clone() 
+	{
+		return(this.clone(SaltFactory.eINSTANCE.createSDocument()));
+	}
+
+	/**
+	 * {@inheritDoc SDocument#clone()}
+	 */
+	@Override
+	public Object clone(SDocument clone)
+	{
+		super.clone(clone);
+		return(clone);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
