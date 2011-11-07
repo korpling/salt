@@ -147,11 +147,20 @@
 	    <version>2.7</version>
 	</plugin>
 	<!-- end: plugin to deploy project to maven repo -->
+	<!-- start: plugin to create a source-jar -->
 	<plugin>
 	    <groupId>org.apache.maven.plugins</groupId>
 	    <artifactId>maven-source-plugin</artifactId>
 	    <version>2.1.2</version>
+	    <executions>
+	        <execution>
+	            <goals>
+	                <goal>jar</goal>
+	            </goals>
+	        </execution>
+        </executions>
 	</plugin>
+	<!-- end: plugin to create a source-jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
