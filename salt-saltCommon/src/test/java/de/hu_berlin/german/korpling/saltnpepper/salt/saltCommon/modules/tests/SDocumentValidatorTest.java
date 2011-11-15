@@ -258,8 +258,8 @@ public class SDocumentValidatorTest extends TestCase
 		scg.addSNode(corpus);
 		sP.getSCorpusGraphs().add(scg);
 		scg.addSDocument(corpus, sDoc);
-		sP.saveSaltProject_DOT(URI.createFileURI(new File("D:/Test/tuebadz2/").getAbsolutePath()));
-		
+		//sP.saveSaltProject_DOT(URI.createFileURI(new File("D:/Test/tuebadz2/").getAbsolutePath()));
+		//sP.saveSaltProject_DOT(URI.createFileURI(new File("./Test/tuebadz2/").getAbsolutePath()));
 		assertNull("expected no errors", this.getFixture().connectedToSTextualDS());
 	}
 }
