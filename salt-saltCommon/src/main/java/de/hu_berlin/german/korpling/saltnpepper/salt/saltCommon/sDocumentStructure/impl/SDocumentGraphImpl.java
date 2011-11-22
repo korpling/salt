@@ -469,15 +469,19 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public STimeline createSTimeline() 
 	{
 		STimeline retVal= null;
-		if (this.getSTimeline()== null)
+		System.out.println("-----------> create HERE 1");
+		if (	(this.getSTimeline()== null)||
+				(this.getSTimeline().getSPointsOfTime()== null)||
+				(this.getSTimeline().getSPointsOfTime().size()==0))
 		{
-			STimeline sTimeline= SDocumentStructureFactory.eINSTANCE.createSTimeline();
+			System.out.println("-----------> create HERE 2");
+			STimeline sTimeline= SaltFactory.eINSTANCE.createSTimeline();
 			this.addSNode(sTimeline);
 			EList<STimelineRelation> sTimeRelList= new BasicEList<STimelineRelation>();
 			Map<STextualDS, EList<STimelineRelation>> sTimeRelTable= new Hashtable<STextualDS, EList<STimelineRelation>>();
 			for (STextualRelation sTextRel: this.getSTextualRelations())
-			{
-				STimelineRelation sTimeRel= SDocumentStructureFactory.eINSTANCE.createSTimelineRelation();
+			{//for each token create a STimeline object 
+				STimelineRelation sTimeRel= SaltFactory.eINSTANCE.createSTimelineRelation();
 				sTimeRel.setSTimeline(sTimeline);
 				sTimeRel.setSToken(sTextRel.getSToken());
 				
@@ -486,8 +490,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 						sTimeRelTable.put(sTextRel.getSTextualDS(), new BasicEList<STimelineRelation>());
 					//TODO not only adding the timeRel, sorting for left and right textual position
 					sTimeRelTable.get(sTextRel.getSTextualDS()).add(sTimeRel);
-				}
-			}
+				}//put STimelineRelation into sTimeRelTable
+			}//for each token create a STimeline object 
 			for (STextualDS sTextualDS: this.getSTextualDSs())
 			{
 				sTimeRelList.addAll(sTimeRelTable.get(sTextualDS));

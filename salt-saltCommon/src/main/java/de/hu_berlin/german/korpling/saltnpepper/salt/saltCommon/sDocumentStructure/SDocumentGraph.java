@@ -17,15 +17,14 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
-
-import java.util.Hashtable;
-import java.util.Map;
 
 /**
  * <!-- begin-user-doc -->
@@ -366,8 +365,11 @@ public interface SDocumentGraph extends SGraph {
 	 */
 	SStructure createSStructure(EList<SStructuredNode> sStructures);
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates an {@link STimeline} object being contained in this {@link SDocumentGraph} object. The new {@link STimeline} object
+	 * is filled with points of time computed out of the {@link STextualRelation} objects being contained by this {@link SDocumentGraph} object.
+	 * For each {@link STextualDS} object, for each {@link STextualRelation} object one point of time would be created. If this object already contains
+	 * a not empty {@link STimeline} object the already existing one would be returned.
+	 * @return returns a new created and automatically filled {@link STimeline} object if no one exists yet 
 	 * @model
 	 * @generated
 	 */
