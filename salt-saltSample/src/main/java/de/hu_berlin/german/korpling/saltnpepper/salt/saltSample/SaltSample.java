@@ -130,32 +130,61 @@ public class SaltSample
 		return(sCorpGraph);
 	}
 	
+	/**
+	 * The primary text, which is used for the samples.
+	 */
+	public static String PRIMARY_TEXT= "Is this example more complicated than it appears to be?";
+	/**
+	 * The name of the morphologic layer containing the tokens. 
+	 */
+	public static String MORPHOLOGY_LAYER="morphology";
+	
+	/**
+	 * Creates a {@link STextualDS} object containing the primary text {@link SaltSample#PRIMARY_TEXT} and adds the object
+	 * to the {@link SDocumentGraph} being contained by the given {@link SDocument} object.
+	 * 
+	 * @param sDocument the document, to which the created {@link STextualDS} object will be added
+	 */
 	public static void createPrimaryData(SDocument sDocument){
+		if (sDocument== null)
+			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+		if (sDocument.getSDocumentGraph()== null)
+			throw new SaltSampleException("Cannot create example, because the given sDocument does not contain an SDocumentGraph.");
 		STextualDS sTextualDS = null;
 		{//creating the primary text
 			sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
-			sTextualDS.setSText("Is this example more complicated than it appears to be?");
+			sTextualDS.setSText(PRIMARY_TEXT);
 			//sTextualDS.setSText("This is a sample text, which is very short.");
 			//adding the text to the document-graph
 			sDocument.getSDocumentGraph().addSNode(sTextualDS);
 		}//creating the primary text
-		
-		
 	}
 	
+	/**
+	 * Creates a set of {@link SToken} objects tokenizing the primary text {@link SaltSample#PRIMARY_TEXT} in to the 
+	 * following tokens:
+	 * <ul>
+	 *	<li>Is</li>
+	 *	<li>this</li>
+	 *	<li>example</li>
+	 * 	<li>more</li>
+	 * 	<li>complicated</li>
+	 *	<li>than</li>
+	 * 	<li>it</li>
+	 * 	<li>appears</li>
+	 * 	<li>to</li>
+	 * 	<li>be</li>
+	 * 	<li>?</li>
+	 * </ul>
+	 * The created {@link SToken} objects and corresponding {@link STextualRelation} objects are added to the given {@link SDocument} object.
+	 * @param sDocument the document, to which the created {@link SToken} objects will be added
+	 */
 	public static void createTokens(SDocument sDocument){
 		STextualDS sTextualDS = sDocument.getSDocumentGraph().getSTextualDSs().get(0);
-		/**
-		 * add Datasource to layer source
-		 */
-		/*SLayer textLayer = SaltFactory.eINSTANCE.createSLayer();
-		textLayer.setSName("source");
-		sDocument.getSDocumentGraph().addSLayer(textLayer);
-		textLayer.getSNodes().add(sTextualDS);*/
 		//as a means to group elements, layers (SLayer) can be used. here, a layer
 		//named "morphology" is created and the tokens will be added to it
 		SLayer morphLayer = SaltFactory.eINSTANCE.createSLayer();
-		morphLayer.setSName("morphology");
+		morphLayer.setSName(MORPHOLOGY_LAYER);
 		sDocument.getSDocumentGraph().addSLayer(morphLayer);
 
 		createToken(0,2,sTextualDS,sDocument,morphLayer);	
@@ -191,6 +220,24 @@ public class SaltSample
 		sDocument.getSDocumentGraph().addSRelation(sTextRel);
 	}
 	
+	/**
+	 * Creates morphological annotations (pos and lemma) for the tokenized sample and adds them to each {@link SToken} object as
+	 * {@link SPOSAnnotation} or {@link SLemmaAnnotation} object.
+	 * <table>
+	 * 	<tr><td>token</td><td>pos</td><td>lemma</td></tr>
+	 * 	<tr><td>Is</td><td>VBZ</td><td>be</td></tr>
+	 * 	<tr><td>this</td><td>DT</td><td>this</td></tr>
+	 * 	<tr><td>example</td><td>NN</td><td>example</td></tr>
+	 * 	<tr><td>more</td><td>ABR</td><td>more</td></tr>
+	 * 	<tr><td>complicated</td><td>JJ</td><td>complicated</td></tr>
+	 * 	<tr><td>than</td><td>IN</td><td>than</td></tr>
+	 * 	<tr><td>it</td><td>PRP</td><td>it</td></tr>
+	 * 	<tr><td>appears</td><td>VBZ</td><td>appear</td></tr>
+	 * 	<tr><td>to</td><td>TO</td><td>to</td></tr>
+	 * 	<tr><td>be</td><td>VB</td><td>be</td></tr>
+	 * </table>
+	 * @param sDocument the document containing the {@link SToken} and {@link STextualDS} objects
+	 */
 	public static void createMorphologyAnnotations(SDocument sDocument){
 		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
 		
@@ -222,6 +269,10 @@ public class SaltSample
 				
 	}
 	
+	/**
+	 * Creates {@link SSpan} object above the tokenization.
+	 * @param sDocument
+	 */
 	public static void createInformationStructureSpan(SDocument sDocument){
 		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
 		
@@ -252,6 +303,10 @@ public class SaltSample
 		}
 	}
 	
+	/**
+	 * Annotates the {@link SSpan} objects above the tokenization with information structural annotations.
+	 * @param sDocument
+	 */
 	public static void createInformationStructureAnnotations(SDocument sDocument){
 		SAnnotation sAnno= null;
 		
@@ -269,6 +324,10 @@ public class SaltSample
 		sDocument.getSDocumentGraph().getSSpans().get(1).addSAnnotation(sAnno);
 	}
 	
+	/**
+	 * 
+	 * @param sDocument
+	 */
 	public static void createSyntaxStructure(SDocument sDocument){
 		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
 		
@@ -349,6 +408,10 @@ public class SaltSample
 		syntaxLayer.getSNodes().add(vp3);				
 	}
 	
+	/**
+	 * 
+	 * @param sDocument
+	 */
 	public static void createSyntaxAnnotations(SDocument sDocument){
 		List<SStructure> sStructures= Collections.synchronizedList(sDocument.getSDocumentGraph().getSStructures());
 		String [] annotations = {"SQ","NP","ADJP","ADJP","SBar","S","NP","VP","S","VP","VP"};
@@ -367,6 +430,10 @@ public class SaltSample
 	
 	}
 	
+	/**
+	 * 
+	 * @param sDocument
+	 */
 	public static void createAnaphoricAnnotations(SDocument sDocument){
 		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
 		
@@ -400,6 +467,10 @@ public class SaltSample
 		
 	}
 	
+	/**
+	 * 
+	 * @param sDocument
+	 */
 	public static void createSDocumentStructure(SDocument sDocument){
 		
 		
