@@ -979,6 +979,9 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, this.getSGraphTraverseHandler(), "traverseHandler", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "isCycleSafe", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(sGraphEClass, this.getSLayer(), "getSLayerByName", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "layerName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(sNamedElementEClass, SNamedElement.class, "SNamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSNamedElement_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

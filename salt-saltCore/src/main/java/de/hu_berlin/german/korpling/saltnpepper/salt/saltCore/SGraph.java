@@ -179,12 +179,11 @@ public interface SGraph extends Graph, SNamedElement, SAnnotatableElement, SIden
 	void traverse(EList<? extends SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler);
 
 	/**
-	 * {@inheritDoc #traverse(SNode, GRAPH_TRAVERSE_TYPE, String, SGraphTraverseHandler, boolean)}
-	 * Attention, when isCycleSafe is set to false, the method will not take care about cycle safeness and eventually
-	 * run into an endless loop.
-	 * @model startSNodesMany="true" traverseHandlerDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler"
-	 * @generated
+	 * Searches for a layer having the given layer name.
+	 * @param layerName Name of the layer to search for
+	 * @return A complete list of all matching layers. Is never null.
+	 * @model
 	 */
-	void traverse(EList<? extends SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler, boolean isCycleSafe);
+	EList<SLayer> getSLayerByName(String layerName);
 
 } // SGraph

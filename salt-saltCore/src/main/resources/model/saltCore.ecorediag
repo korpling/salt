@@ -120,6 +120,10 @@
         <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/getSLayer"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_t76JMVj6Ed-BkZDnO17OHA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_3_fYoRXtEeGlfs3LY6NpZQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/getSLayerByName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3_f_sBXtEeGlfs3LY6NpZQ"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_ftxPAP4kEeCvb4UTOyTEow" type="2002">
         <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SGraph/getSRoots"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ftxPAf4kEeCvb4UTOyTEow"/>
@@ -142,7 +146,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_a3Bt6YjXEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="saltCore.ecore#//SGraph"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_a3Bt6ojXEd6X5oQchPkMiQ" x="40" y="845" width="553" height="198"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_a3Bt6ojXEd6X5oQchPkMiQ" x="40" y="845" width="583" height="268"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_a3H0eYjXEd6X5oQchPkMiQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_a3H0fIjXEd6X5oQchPkMiQ" type="4001"/>

@@ -85,6 +85,9 @@
       <eParameters name="traverseHandler" eType="#//SGraphTraverseHandler"/>
       <eParameters name="isCycleSafe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
+    <eOperations name="getSLayerByName" upperBound="-1" eType="#//SLayer">
+      <eParameters name="layerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sRelations" upperBound="-1"
         eType="#//SRelation" changeable="false" volatile="true" transient="true" derived="true"
         eOpposite="#//SRelation/sGraph"/>

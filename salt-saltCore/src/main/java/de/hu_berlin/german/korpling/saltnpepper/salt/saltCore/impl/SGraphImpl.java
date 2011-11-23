@@ -22,6 +22,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -495,6 +496,25 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		TraverseHandlerWrapper wrapper= new TraverseHandlerWrapper();
 		wrapper.traverseHandler= traverseHandler;
 		super.traverse(((EList<Node>)(EList<? extends Node>)startSNodes), traverseType, traverseId, wrapper);
+	}
+
+	/**
+	 * {@inheritDoc SGraph#getSLayerByName(String)}
+	 */
+	public EList<SLayer> getSLayerByName(String layerName) 
+	{
+		EList<SLayer> result = new BasicEList<SLayer>();
+		if(layerName != null)
+		{
+			for(SLayer l : getSLayers())
+			{
+				if(layerName.equals(l.getSName()))
+				{
+					result.add(l);
+				}
+			}
+		}
+		return result;
 	}
 
 	class TraverseHandlerWrapper implements GraphTraverseHandler

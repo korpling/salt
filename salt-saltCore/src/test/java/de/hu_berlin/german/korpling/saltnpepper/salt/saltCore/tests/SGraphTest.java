@@ -66,6 +66,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLeafs() <em>Get SLeafs</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler) <em>Traverse</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler, boolean) <em>Traverse</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String) <em>Get SLayer By Name</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation) <em>Add SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#createSMetaAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SMeta Annotation</em>}</li>
@@ -363,6 +364,45 @@ public class SGraphTest extends TestCase {
 	public void testTraverse__EList_GRAPH_TRAVERSE_TYPE_String_SGraphTraverseHandler_boolean() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String) <em>Get SLayer By Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String)
+	 */
+	public void testGetSLayerByName__String() 
+	{
+		SLayer l1 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l2 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l3 = SaltCoreFactory.eINSTANCE.createSLayer();
+		
+		l1.setSName("l1");
+		l2.setSName("l2");
+		l3.setSName("l3");
+		
+		this.getFixture().addSLayer(l1);
+		this.getFixture().addSLayer(l3);
+		this.getFixture().addSLayer(l2);
+		
+		assertEquals(1, this.getFixture().getSLayerByName("l2").size());
+		assertEquals(1, this.getFixture().getSLayerByName("l1").size());
+		assertEquals(1, this.getFixture().getSLayerByName("l3").size());
+		assertEquals(0, this.getFixture().getSLayerByName("l4").size());
+		
+		assertEquals(l1, this.getFixture().getSLayerByName("l1").get(0));
+		assertEquals(l2, this.getFixture().getSLayerByName("l2").get(0));
+		assertEquals(l3, this.getFixture().getSLayerByName("l3").get(0));
+		
+		SLayer l1_2 = SaltCoreFactory.eINSTANCE.createSLayer();
+		l1_2.setSName("l1");
+		this.getFixture().addSLayer(l1_2);		
+		assertEquals(2, this.getFixture().getSLayerByName("l1").size());
+		assertTrue(this.getFixture().getSLayerByName("l1").contains(l1));
+		assertTrue(this.getFixture().getSLayerByName("l1").contains(l1_2));
+		
+		assertEquals(1, this.getFixture().getSLayerByName("l2").size());
 	}
 
 	/**
