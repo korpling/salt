@@ -141,8 +141,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@link Inherited SAbstractAnnotation#getSValue()}
 	 */
 	public Object getSValue() 
 	{
@@ -179,8 +178,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 // ============================= start: SValueType	
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@link Inherited SAbstractAnnotation#getSValueType()}
 	 */
 	public SDATATYPE getSValueType() 
 	{
@@ -247,10 +245,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 //	}
 	
 	/**
-	 * Returns the sValue attribute of this object as String representation. If the sValue is of
-	 * type String it will be returned, else the toString()-method will be called. If no value is given,
-	 * null will be returned.
-	 * @return String representation of the sValue attribute.  
+	 * {@link Inherited SAbstractAnnotation#getSValueSTEXT()}
 	 */
 	public String getSValueSTEXT() 
 	{
@@ -265,9 +260,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	}
 
 	/**
-	 * Returns the sValue attribute of this object as Boolean if possible. If the value is
-	 * not of type Boolean or is empty, null will be returned.
-	 * @return Boolean representation of the sValue attribute. 
+	 * {@link Inherited SAbstractAnnotation#getSValueSBOOLEAN()}
 	 */
 	public Boolean getSValueSBOOLEAN() 
 	{
@@ -281,11 +274,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	}
 
 	/**
-	 * Returns the sValue attribute of this object as Long if possible. If the value is
-	 * not of type Long or is empty, null will be returned.
-	 * Attention: If value was of type Integer, than not the original 
-	 * value will be returned. Instead a casted value will be returned.
-	 * @return Long representation of the sValue attribute. 
+	 * {@link Inherited SAbstractAnnotation#getSValueSNUMERIC()}
 	 */
 	public Long getSValueSNUMERIC() 
 	{
@@ -301,11 +290,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	}
 
 	/**
-	 * Returns the sValue attribute of this object as Float if possible. If the value is
-	 * not of type Float or is empty, null will be returned.
-	 * Attention: If value was of type Float, than not the original 
-	 * value will be returned. Instead a casted value will be returned.
-	 * @return Float representation of the sValue attribute. 
+	 * {@link Inherited SAbstractAnnotation#getSValueSFLOAT()}
 	 */
 	public Double getSValueSFLOAT() 
 	{
@@ -325,9 +310,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	}
 
 	/**
-	 * Returns the sValue attribute of this object as URI if possible. If the value is
-	 * not of type URI or is empty, null will be returned.
-	 * @return URI representation of the sValue attribute. 
+	 * {@link Inherited SAbstractAnnotation#getSValueSURI()}
 	 */
 	public URI getSValueSURI() 
 	{
@@ -341,9 +324,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	}
 
 	/**
-	 * Returns the the sValue attribute of this object as the original object. This will always work
-	 * as long as sValue is not empty. If the sValue attribute is empty null will be returned. 
-	 * @return Object representation of the sValue attribute
+	 *{@link Inherited SAbstractAnnotation#getSValueSOBJECT()}
 	 */
 	public Object getSValueSOBJECT() 
 	{

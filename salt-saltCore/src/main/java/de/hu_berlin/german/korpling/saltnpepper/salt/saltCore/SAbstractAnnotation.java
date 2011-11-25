@@ -128,15 +128,15 @@ public interface SAbstractAnnotation extends Label {
 	 * If no {@link SDATATYPE} was set, a value will be computed. Here is the list of how java objects will be 
 	 * mapped to a {@link SDATATYPE} value.
 	 * <ul>
-	 * 	<li>null--> SOBJECT</li>
-	 * 	<li>String --> STEXT</li>
-	 * 	<li>Boolean --> SBOOLEAN</li>
-	 * 	<li>Integer --> SNUMERIC</li>
-	 * 	<li>Long --> SNUMERIC</li>
-	 * 	<li>Double --> SFLOAT</li>
-	 * 	<li>Float --> SFLOAT</li>
-	 * 	<li>URI --> SURI</li>
-	 * 	<li>else --> SOBJECT</li>
+	 * 	<li>null--> {@link SDATATYPE#SOBJECT}</li>
+	 * 	<li>String --> {@link SDATATYPE#STEXT}</li>
+	 * 	<li>Boolean --> {@link SDATATYPE#SBOOLEAN}</li>
+	 * 	<li>Integer --> {@link SDATATYPE#SNUMERIC}</li>
+	 * 	<li>Long --> {@link SDATATYPE#SNUMERIC}</li>
+	 * 	<li>Double --> {@link SDATATYPE#SFLOAT}</li>
+	 * 	<li>Float --> {@link SDATATYPE#SFLOAT}</li>
+	 * 	<li>URI --> {@link SDATATYPE#SURI}</li>
+	 * 	<li>else --> {@link SDATATYPE#SOBJECT}</li>
 	 * </ul>
 	 * @return the value of the '<em>SValue Type</em>' attribute.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE
@@ -157,50 +157,50 @@ public interface SAbstractAnnotation extends Label {
 	void setSValueType(SDATATYPE value);
 
 	/**
-	 * Returns the sValue attribute of this object as String representation. If the sValue is of
-	 * type String it will be returned, else the toString()-method will be called. If no value is given,
+	 * Returns the <em>sValue</em> attribute of this object as String representation. If the <em>sValue</em> is of
+	 * type {@link String} it will be returned, else the {@link #toString()} method will be called. If no value is given,
 	 * null will be returned.
-	 * @return String representation of the sValue attribute.
+	 * @return {@link String} representation of the <em>sValue</em> attribute.
 	 * @generated  
 	 */
 	String getSValueSTEXT();
 
 	/**
-	 * Returns the sValue attribute of this object as Boolean if possible. If the value is
-	 * not of type Boolean or is empty, null will be returned.
-	 * @return Boolean representation of the sValue attribute.
+	 * Returns the <em>sValue</em> attribute of this object as {@link Boolean} if possible. If the value is
+	 * not of type {@link Boolean} or is empty, null will be returned.
+	 * @return {@link Boolean} representation of the <em>sValue</em> attribute.
 	 * @generated 
 	 */
 	Boolean getSValueSBOOLEAN();
 
 	/**
-	 * Returns the sValue attribute of this object as Long if possible. If the value is
-	 * not of type Long or is empty, null will be returned.
-	 * @return Long representation of the sValue attribute. 
+	 * Returns the <em>sValue</em> attribute of this object as {@link Long} if possible. If the value is
+	 * not of type {@link Long} or is empty, null will be returned.
+	 * @return {@link Long} representation of the <em>sValue</em> attribute. 
 	 * @generated
 	 */
 	Long getSValueSNUMERIC();
 
 	/**
-	 * Returns the sValue attribute of this object as Float if possible. If the value is
-	 * not of type Float or is empty, null will be returned.
-	 * @return Float representation of the sValue attribute. 
+	 * Returns the <em>sValue</em> attribute of this object as {@link Float} if possible. If the value is
+	 * not of type {@link Float} or is empty, null will be returned.
+	 * @return {@link Float} representation of the <em>sValue</em> attribute. 
 	 * @generated
 	 */
 	Double getSValueSFLOAT();
 
 	/**
-	 * Returns the sValue attribute of this object as URI if possible. If the value is
-	 * not of type URI or is empty, null will be returned.
-	 * @return URI representation of the sValue attribute. 
+	 * Returns the <em>sValue</em> attribute of this object as {@link URI} if possible. If the value is
+	 * not of type {@link URI} or is empty, null will be returned.
+	 * @return {@link URI} representation of the <em>sValue</em> attribute. 
 	 * @generated
 	 */
 	URI getSValueSURI();
 
 	/**
-	 * Returns the the sValue attribute of this object as the original object. This will always work
-	 * as long as sValue is not empty. If the sValue attribute is empty null will be returned. 
-	 * @return Object representation of the sValue attribute
+	 * Returns the the <em>sValue</em> attribute of this object as the original object. This will always work
+	 * as long as <em>sValue</em> is not empty. If the <em>sValue</em> attribute is empty null will be returned. 
+	 * @return {@link Object} representation of the <em>sValue</em> attribute
 	 * @generated
 	 */
 	Object getSValueSOBJECT();
