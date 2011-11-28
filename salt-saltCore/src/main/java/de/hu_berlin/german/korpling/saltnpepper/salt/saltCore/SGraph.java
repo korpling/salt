@@ -170,13 +170,31 @@ public interface SGraph extends Graph, SNamedElement, SAnnotatableElement, SIden
 	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
 	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
 	 * node twice.
-	 * @param startNodes list of nodes at which the traversal shall start
+	 * @param startSNodes list of nodes at which the traversal shall start
 	 * @param traverseType type of traversing
 	 * @param traverseId identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler
 	 * @param traverseHandler callback handler, on which the three methods will be invoked
 	 * @model startSNodesMany="true" traverseHandlerDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SSGraphTraverseHandler"
 	 */
 	void traverse(EList<? extends SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler);
+
+	/**
+	 * Traverses a graph in the given order traverseType and starts traversing with the given startNodes. When a node is reached, 
+	 * first this method will invoke the method {@link SGraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_TYPE, String, SRelation, SNode, long)} 
+	 * of the given callback handler traverseHandler, second the method {@link SGraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_TYPE, String, SNode, SRelation, SNode, long)}
+	 * is invoked. When a node was left, the method {@link SGraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_TYPE, String, SNode, SRelation, SNode, long)} 
+	 * is invoked. When calling these methods, the traverseId will be passed, so that the callback handler knows which traversal is meant.
+	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
+	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
+	 * node twice.
+	 * @param startSNodes list of nodes at which the traversal shall start
+	 * @param traverseType type of traversing
+	 * @param traverseId identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler
+	 * @param traverseHandler callback handler, on which the three methods will be invoked
+	 * @param isCycleSafe sets if the traversal mechanism shall take care of cycles or not. If false is set, the calling method has to handle not to run in an endless loop/ recursion.
+	 * @model startSNodesMany="true" traverseHandlerDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler"
+	 */
+	void traverse(EList<? extends SNode> startSNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, SGraphTraverseHandler traverseHandler, boolean isCycleSafe);
 
 	/**
 	 * Searches for a layer having the given layer name.
