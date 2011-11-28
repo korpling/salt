@@ -388,6 +388,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
+	@Override
 	public void addSNode(SNode sNode) 
 	{
 		super.addNode(sNode);
@@ -397,6 +398,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
+	@Override
 	public SRelation addSNode(SNode sourceSNode, SNode targetSNode, STYPE_NAME sRelationType) {
 		if (!this.getSNodes().contains(sourceSNode)) {
 			throw new SaltElementNotContainedInGraphException("Given SNode cannot be used as source node, because it is not contained in the SDocumentGraph");
@@ -424,6 +426,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#addSText(String)}
 	 */
+	@Override
 	public STextualDS createSTextualDS(String sText) 
 	{
 		STextualDS sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
@@ -435,6 +438,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#addSToken(EList)}
 	 */
+	@Override
 	public SToken createSToken(EList<SDataSourceSequence> sDSSequences) 
 	{
 		if (sDSSequences== null)
@@ -455,6 +459,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#createSToken(SDataSourceSequence)}
 	 */
+	@Override
 	public SToken createSToken(SDataSourceSequence sDSSequence) 
 	{
 		SToken sToken= SaltFactory.eINSTANCE.createSToken();
@@ -466,15 +471,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#createSTimeline()}
 	 */
+	@Override
 	public STimeline createSTimeline() 
 	{
 		STimeline retVal= null;
-		System.out.println("-----------> create HERE 1");
 		if (	(this.getSTimeline()== null)||
 				(this.getSTimeline().getSPointsOfTime()== null)||
 				(this.getSTimeline().getSPointsOfTime().size()==0))
 		{
-			System.out.println("-----------> create HERE 2");
 			STimeline sTimeline= SaltFactory.eINSTANCE.createSTimeline();
 			this.addSNode(sTimeline);
 			EList<STimelineRelation> sTimeRelList= new BasicEList<STimelineRelation>();
@@ -516,6 +520,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#getSTokensBySequence(SDataSourceSequence)}
 	 */
+	@Override
 	public EList<SToken> getSTokensBySequence(SDataSourceSequence sequence) 
 	{
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
@@ -526,6 +531,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 *{@inheritDoc SDocumentGraph#getSSpanBySequence(SDataSourceSequence)}
 	 */
+	@Override
 	public EList<SSpan> getSSpanBySequence(SDataSourceSequence sequence) 
 	{
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
@@ -546,6 +552,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 *{@inheritDoc SDocumentGraph#getSNodeBySequence(SDataSourceSequence)}
 	 */
 	@SuppressWarnings("unchecked")
+	@Override
 	public EList<SNode> getSNodeBySequence(SDataSourceSequence sequence) {
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
 		sDatasourceAccessor.setSDocumentGraph(this);
@@ -555,6 +562,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#getOverlappedDSSequences(SNode, EList)}
 	 */
+	@Override
 	public EList<SDataSourceSequence> getOverlappedDSSequences(SNode sNode, EList<STYPE_NAME> sRelationTypes) {
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
 		sDatasourceAccessor.setSDocumentGraph(this);
@@ -564,6 +572,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#getOverlappedDSSequences(SNode, EList)}
 	 */
+	@Override
 	public EList<SDataSourceSequence> getOverlappedDSSequences(EList<SNode> sNode, EList<STYPE_NAME> sRelationTypes) {
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
 		sDatasourceAccessor.setSDocumentGraph(this);
@@ -573,6 +582,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#isContinuousByText(EList)}
 	 */
+	@Override
 	public boolean isContinuousByText(EList<SNode> subSNodeList, EList<SNode> fullSNodeList) 
 	{
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
@@ -583,6 +593,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#isContinuousByText(EList)}
 	 */
+	@Override
 	public boolean isContinuousByText(EList<SNode> subSNodeList) 
 	{
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
@@ -593,6 +604,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#getSortedSTokenByText(SToken)}
 	 */
+	@Override
 	public EList<SToken> getSortedSTokenByText(EList<SToken> sTokens2sort) 
 	{
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();

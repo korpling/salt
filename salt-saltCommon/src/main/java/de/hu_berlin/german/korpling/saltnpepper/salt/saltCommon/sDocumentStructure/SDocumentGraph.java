@@ -443,7 +443,6 @@ public interface SDocumentGraph extends SGraph {
 	 * @param fullSNodeList list which contains all nodes in correct order
 	 * @return true, if list is continuous
 	 * @model subSNodeListMany="true" fullSNodeListMany="true"
-	 * @generated
 	 */
 	boolean isContinuousByText(EList<SNode> subSNodeList, EList<SNode> fullSNodeList);
 
