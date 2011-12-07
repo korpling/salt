@@ -32,7 +32,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphExcep
 
 /**
  * This class offers some methods to traverse a given graph.
- * Deprecated since salt 1.3. Please see SGraph#traverse
+ * @deprecated since salt 1.3 Please see SGraph#traverse
  * @author Florian Zipser
  *
  */
