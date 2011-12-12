@@ -25,12 +25,7 @@ import java.io.UnsupportedEncodingException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserObject;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model.DOTEdge;
@@ -42,6 +37,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
@@ -52,7 +48,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  * @author Florian Zipser
  *
  */
-public class SCorpusGraphDOTWriter implements TraversalObject
+public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 {
 	private URI outputURI= null;
 	public void setOutputURI(URI outputURI) {
@@ -99,13 +95,9 @@ public class SCorpusGraphDOTWriter implements TraversalObject
 		//if documentgraph isn�t  null print it 
 		if (this.getSCorpusGraph()!= null)
 		{
-			GraphTraverser graphTraverser= new GraphTraverser();
-			graphTraverser.setGraph(this.getSCorpusGraph());
-			GraphTraverserObject travObj= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this);
-			EList<Node> startNodes= graphTraverser.getRoots();
-							
-			travObj.start(startNodes);
-			travObj.waitUntilFinished();
+			this.getSCorpusGraph().traverse(this.getSCorpusGraph().getSRootCorpus(), 
+					GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "", this);
+			
 		}
 		else 
 		{
@@ -140,9 +132,7 @@ public class SCorpusGraphDOTWriter implements TraversalObject
 		String anno= null;
 		if (sAnno.getSValue()!= null)
 			anno= sAnno.getSValue().toString().replace("\"", "\\\"");
-		if ((retStr!= null) && (!retStr.equalsIgnoreCase("")))		
-				retStr= (sAnno.getQName()+"= "+anno+"\\{"+retStr+"\\}");
-		else	retStr= (sAnno.getQName()+"= "+anno);
+		retStr= (sAnno.getQName()+"= "+anno);
 		
 		return(retStr);
 	}
@@ -158,29 +148,24 @@ public class SCorpusGraphDOTWriter implements TraversalObject
 	protected static final String KW_DOT_STORED=	KW_DOT_NS+"stored";
 	
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_MODE traversalMode,
-			Long traversalId, Edge edge, Node currNode, long order) {
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
+			String traversalId, SRelation edge, SNode currNode, long order) {
 		return true;
 	}
 
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_MODE traversalMode, Long traversalId,
-			Node currNode, Edge edge, Node fromNode, long order) 
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
+			SNode currNode, SRelation edge, SNode fromNode, long order)
 	{
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_MODE traversalMode,
-			Long traversalId, Node currNode, Edge edge, Node fromNode,
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
+			String traversalId, SNode currSNode, SRelation sRelation, SNode fromSNode,
 			long order) 
 	{
-		SRelation relation= null;
-		SNode currSNode= (SNode) currNode;
-		SNode fromSNode= null;
-		if (edge!= null)
-			relation= (SRelation) edge;
-		if (fromNode!= null)
-			fromSNode= (SNode) fromNode;
+		System.out.println("From-Node: "+fromSNode);
+		System.out.println("Current-Node: "+currSNode);
 		
 			
 		DOTNode dotNode= new DOTNode();
@@ -226,13 +211,19 @@ public class SCorpusGraphDOTWriter implements TraversalObject
 		}
 		
 		//print relation, if exists
-		if (relation!= null)
+		if (sRelation!= null)
 		{
 			DOTEdge dotEdge= new DOTEdge();
 			dotEdge.fromId= fromSNode.getId().toString();
+//			if ( fromSNode instanceof SDocument){
+//				dotEdge.fromId= sRelation.getSSource().getId().toString();
+//			} else {
+//				dotEdge.fromId= fromSNode.getId().toString();
+//			}
 			dotEdge.toId= currSNode.getId().toString();	
+			
 			{//print edge type, if exists
-				EList<String> sTypes= relation.getSTypes(); 
+				EList<String> sTypes= sRelation.getSTypes(); 
 				if (	(sTypes!= null) &&
 						(sTypes.size() > 0))
 				{
@@ -248,26 +239,26 @@ public class SCorpusGraphDOTWriter implements TraversalObject
 					dotEdge.labels.add(dotString);
 				}
 			}
-			for (SAnnotation sAnno: relation.getSAnnotations())
+			for (SAnnotation sAnno: sRelation.getSAnnotations())
 			{
 				dotEdge.labels.add(sAnno.getQName()+"= "+sAnno.getValue().toString());
 			}
 			
 			
 			//SCORPUS_RELATION
-			if (relation instanceof SCorpusRelation)
+			if (sRelation instanceof SCorpusRelation)
 			{
 				dotEdge.color= "gray28";
 				dotEdge.style= "filled";
 			}
 			//SCORPDOC_RELATION
-			else if (relation instanceof SCorpusDocumentRelation)
-			{
+			else if (sRelation instanceof SCorpusDocumentRelation)
+			{	//System.out.println("found SCorpusDocumentRelation");
 				dotEdge.color= "gray";
 				dotEdge.style= "filled";
 			}
 			//if relation is already stored don�t store again
-			if (relation.getSProcessingAnnotation(KW_DOT_STORED)!= null);
+			if (sRelation.getSProcessingAnnotation(KW_DOT_STORED)!= null);
 			else
 			{
 				this.currOutputStream.println(dotEdge.toString());
@@ -275,9 +266,15 @@ public class SCorpusGraphDOTWriter implements TraversalObject
 				{
 					SProcessingAnnotation spAnno= SaltCommonFactory.eINSTANCE.createSProcessingAnnotation();
 					spAnno.setQName(KW_DOT_STORED);
-					relation.addSProcessingAnnotation(spAnno);
+					sRelation.addSProcessingAnnotation(spAnno);
 				}
 			}
 		}
 	}
+
+	
+
+	
+
+	
 }
