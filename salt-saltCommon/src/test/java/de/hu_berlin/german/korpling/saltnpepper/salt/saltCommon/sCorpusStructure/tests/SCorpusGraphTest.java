@@ -25,6 +25,9 @@ import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
@@ -33,6 +36,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,7 +67,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
  * </p>
  * @generated
  */
-public class SCorpusGraphTest extends TestCase {
+public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 
 	/**
 	 * The fixture for this SCorpus Graph test case.
@@ -458,5 +465,91 @@ public class SCorpusGraphTest extends TestCase {
 		assertEquals("salt:/doc1", sDocument.getSId());
 		
 		//TODO check, for corpora and documents with relations salt:/corp1/corp2 ...
+	}
+	
+	//TODO @Mario fix NPE when traversing over CorpusRoots (start nodes are empty!!!)
+	public void GraphTraversion()
+	{
+		this.getFixture().setSaltProject(SaltCommonFactory.eINSTANCE.createSaltProject());
+		SCorpusGraph sCorpusGraph = null;
+		SDocument sDocument = this.createCorpusStructure(sCorpusGraph);
+		//sDocument.setSDocumentGraph(null);
+		this.getFixture()
+			.traverse(this.getFixture().getSRootCorpus(),	
+					GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "",this);
+	}
+	
+	/**
+	 * Creates a corpus structure with one corpus and one document. It returns the created document.
+	 * 		corp1
+	 *		|
+	 *		doc1
+	 * @param corpGraph 
+	 * @return
+	 */
+	private SDocument createCorpusStructure(SCorpusGraph corpGraph)
+	{
+		{//creating corpus structure
+			corpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
+			this.getFixture().getSaltProject().getSCorpusGraphs().add(corpGraph);
+			//		corp1
+			//		|
+			//		doc1
+			
+			//corp1
+			SElementId sElementId= SaltFactory.eINSTANCE.createSElementId();
+			sElementId.setSId("corp1");
+			SCorpus corp1= SaltFactory.eINSTANCE.createSCorpus();
+			corp1.setSName("corp1");
+			corp1.setId("corp1");
+			corp1.setSElementId(sElementId);
+			corpGraph.addSNode(corp1);
+			
+			
+			//doc1
+			SDocument doc1= SaltFactory.eINSTANCE.createSDocument();
+			sElementId= SaltFactory.eINSTANCE.createSElementId();
+			sElementId.setSId("corp1/doc1");
+			doc1.setSElementId(sElementId);
+			doc1.setSName("doc1");
+			corpGraph.addSNode(doc1);
+			doc1.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
+			//CorpDocRel
+			SCorpusDocumentRelation corpDocRel1= SaltFactory.eINSTANCE.createSCorpusDocumentRelation();
+			sElementId= SaltFactory.eINSTANCE.createSElementId();
+			sElementId.setSId("rel1");
+			corpDocRel1.setSElementId(sElementId);
+			corpDocRel1.setSName("rel1");
+			corpDocRel1.setSCorpus(corp1);
+			corpDocRel1.setSDocument(doc1);
+			corpGraph.addSRelation(corpDocRel1);
+			return(doc1);
+		}
+	}
+
+	
+
+	@Override
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
+			String traversalId, SNode currNode, SRelation edge, SNode fromNode,
+			long order) {
+		boolean fromNullToCorpus =  fromNode == null && currNode instanceof SCorpus;
+		boolean fromCorpusToDocument = fromNode instanceof SCorpus && currNode instanceof SDocument;
+		assertTrue("Error in SCorpusGraphTest!", fromNullToCorpus || fromCorpusToDocument);
+		
+	}
+
+	@Override
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
+			SNode currNode, SRelation edge, SNode fromNode, long order) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
+			String traversalId, SRelation edge, SNode currNode, long order) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 } //SCorpusGraphTest
