@@ -164,10 +164,6 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 			String traversalId, SNode currSNode, SRelation sRelation, SNode fromSNode,
 			long order) 
 	{
-		System.out.println("From-Node: "+fromSNode);
-		System.out.println("Current-Node: "+currSNode);
-		
-			
 		DOTNode dotNode= new DOTNode();
 		dotNode.id= currSNode.getId().toString();
 		

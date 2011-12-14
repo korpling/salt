@@ -76,6 +76,7 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 	 * @generated
 	 */
 	protected SCorpusGraph fixture = null;
+	private EList<SNode> traversedNodes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -467,16 +468,20 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		//TODO check, for corpora and documents with relations salt:/corp1/corp2 ...
 	}
 	
-	//TODO @Mario fix NPE when traversing over CorpusRoots (start nodes are empty!!!)
-	public void GraphTraversion()
+	
+	public void testGraphTraversion()
 	{
-		this.getFixture().setSaltProject(SaltCommonFactory.eINSTANCE.createSaltProject());
-		SCorpusGraph sCorpusGraph = null;
-		SDocument sDocument = this.createCorpusStructure(sCorpusGraph);
-		//sDocument.setSDocumentGraph(null);
+		this.traversedNodes = new BasicEList<SNode>();
+		SDocument sDocument = this.createCorpusStructure(this.getFixture());
 		this.getFixture()
 			.traverse(this.getFixture().getSRootCorpus(),	
 					GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "",this);
+		
+		assertTrue("GraphTraversionTest: First traversed object is not null, but "+this.traversedNodes.get(0)+"!", this.traversedNodes.get(0) == null); 
+		assertTrue("GraphTraversionTest: Second traversed object is not the corpus, but "+this.traversedNodes.get(1)+"!",this.traversedNodes.get(1) instanceof SCorpus);
+		assertTrue("GraphTraversionTest: Third traversed object is not the corpus, but "+this.traversedNodes.get(2)+"!",this.traversedNodes.get(2) instanceof SCorpus );
+		assertTrue("GraphTraversionTest: Fourth traversed object is not the document, but "+this.traversedNodes.get(3)+"!",this.traversedNodes.get(3) instanceof SDocument);
+	
 	}
 	
 	/**
@@ -490,8 +495,8 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 	private SDocument createCorpusStructure(SCorpusGraph corpGraph)
 	{
 		{//creating corpus structure
-			corpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
-			this.getFixture().getSaltProject().getSCorpusGraphs().add(corpGraph);
+			//corpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
+			//this.getFixture().getSaltProject().getSCorpusGraphs().add(corpGraph);
 			//		corp1
 			//		|
 			//		doc1
@@ -533,10 +538,11 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
 			String traversalId, SNode currNode, SRelation edge, SNode fromNode,
 			long order) {
-		boolean fromNullToCorpus =  fromNode == null && currNode instanceof SCorpus;
-		boolean fromCorpusToDocument = fromNode instanceof SCorpus && currNode instanceof SDocument;
-		assertTrue("Error in SCorpusGraphTest!", fromNullToCorpus || fromCorpusToDocument);
 		
+		this.traversedNodes.add(fromNode);
+		this.traversedNodes.add(currNode);
+		
+
 	}
 
 	@Override
@@ -550,6 +556,6 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
 			String traversalId, SRelation edge, SNode currNode, long order) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 } //SCorpusGraphTest

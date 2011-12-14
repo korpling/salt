@@ -295,7 +295,7 @@ public class GraphTraverserModule extends GraphModule
 			Node parent= null;
 			if (this.currentNodePath.size()>1)
 			{//if current path is larger then 1, than a parent node exists
-				parent= this.currentNodePath.get(this.currentNodePath.size()-1);
+				parent= this.currentNodePath.get(this.currentNodePath.size()-2);
 			}//if current path is larger then 1, than a parent node exists
 			
 			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, edge, parent, order);
@@ -317,6 +317,7 @@ public class GraphTraverserModule extends GraphModule
 						this.currentNodePath.add(childNode);
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, childEdge, childNode, order))
 						{
+							//i++;
 							this.topDownDepthFirstRec(childEdge, i);
 							i++;
 						}
