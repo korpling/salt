@@ -102,7 +102,6 @@ public class GraphTraverserModule extends GraphModule
 		if (	(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST.equals(traverseType))||
 				(GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST.equals(traverseType)))
 			throw new UnsupportedOperationException("We are very sorry, but this type has not been implemented yet. The supported types are TD_DF and BU_DF.");
-		
 		{//check if traverseId is already in use
 			 synchronized (traverseIdTable) 
 			 {
@@ -124,7 +123,6 @@ public class GraphTraverserModule extends GraphModule
 				}
 			}
 		}//check if traverseId is already in use
-		
 		Traverser traverser= new Traverser();
 		traverser.startNodes= startNodes;
 		traverser.traverseType= traverseType;
@@ -132,10 +130,13 @@ public class GraphTraverserModule extends GraphModule
 		traverser.traverseHandler= traverseHandler;
 		traverser.isCycleSafe= isCycleSafe;
 		traverser.setGraph(this.getGraph());
-		
 		Thread traverserThread= new Thread(traverser, "GraphTraverserThread_"+ traverseId);
-		traverserThread.start();
+
+		
 		traverser.traverselock.lock();
+		
+		traverserThread.start();
+		//traverserThread.join();
 		try {
 			traverser.traverseFinished.await();
 		} catch (InterruptedException e) {
@@ -224,6 +225,9 @@ public class GraphTraverserModule extends GraphModule
 		}
 		
 		Lock traverselock= new ReentrantLock();
+		/**
+		 * a condition which is signaled, when a traversion has been finished.
+		 */
 		Condition traverseFinished= traverselock.newCondition();
 		
 		/**
@@ -231,11 +235,12 @@ public class GraphTraverserModule extends GraphModule
 		 */
 		public void run() 
 		{
+			this.traverselock.lock();
 			try {
 				if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST.equals(this.traverseType))
 				{//TOP_DOWN_DEPTH_FIRST traversal
 					for (Node startNode: startNodes)
-					{	
+					{
 						//TODO replace EList with HashEList
 						this.currentNodePath= new BasicEList<Node>();
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, null, startNode, 0l))
@@ -248,7 +253,7 @@ public class GraphTraverserModule extends GraphModule
 				else if (GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST.equals(this.traverseType))
 				{//BOTTOM_UP_DEPTH_FIRST traversal
 					for (Node startNode: startNodes)
-					{	
+					{
 						//TODO replace EList with HashEList
 						this.currentNodePath= new BasicEList<Node>();
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, null, startNode, 0l))
@@ -258,15 +263,24 @@ public class GraphTraverserModule extends GraphModule
 						}
 					}
 				}//BOTTOM_UP_DEPTH_FIRST traversal
+				
+				
 			} catch (Exception e) 
 			{
+				GraphTraverserException ex= null;
 				if (e instanceof GraphTraverserException)
-					this.setException((GraphTraverserException)e);
-				else this.setException(new GraphTraverserException("An exception occured while traversing the graph '"+graph.getId()+"' with path '"+currentNodePath+"'.",e));
+				{
+					ex= (GraphTraverserException)e;
+					this.setException(ex);
+				}
+				else {
+					ex= new GraphTraverserException("An exception occured while traversing the graph '"+graph.getId()+"' with path '"+currentNodePath+"'.",e);
+					this.setException(ex);
+				}
 			}
 			finally
 			{
-				this.traverselock.lock();
+				//signal all waiting threads in case of no exception until here occurs
 				this.traverseFinished.signalAll();
 				this.traverselock.unlock();
 			}
@@ -297,9 +311,7 @@ public class GraphTraverserModule extends GraphModule
 			{//if current path is larger then 1, than a parent node exists
 				parent= this.currentNodePath.get(this.currentNodePath.size()-2);
 			}//if current path is larger then 1, than a parent node exists
-			
 			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, edge, parent, order);
-			
 			{//walk through all childs of this node
 				EList<Edge> childEdges= this.getGraph().getOutEdges(currNode.getId());
 				if (childEdges != null)
@@ -327,9 +339,9 @@ public class GraphTraverserModule extends GraphModule
 				}//walk through all childs of this node
 			}
 			
-			
 			traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, edge, parent,  order);
 		}
+		
 		/**
 		 * A recursive method, which traverses through the graph in bottom-up and depth-first order. That means, it walk through
 		 * the graph in opposite direction of the edges and always expands the node i first, before a node i+1 will be expanded. 
