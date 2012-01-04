@@ -110,7 +110,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						identifiableElement= identifier.getIdentifiableElement();
 					}//an id has changed
 					else
-						throw new NullPointerException("THIS CAN`T HAPPEN!!!");
+						throw new GraphException("THIS CAN`T HAPPEN!!!");
 					
 					if (identifiableElement== null)
 					{
