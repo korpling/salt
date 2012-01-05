@@ -199,6 +199,10 @@
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSToken.1"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_19gRQAOuEeGEtpuQg2tYFw"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_XKA4MTeeEeGXl6e6Yx4KwQ" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSToken.2"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_XKA4MjeeEeGXl6e6Yx4KwQ"/>
+          </children>
           <children xmi:type="notation:Node" xmi:id="_gBFVAASlEeG9Ra8stJsLQw" type="2002">
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSSpan"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_gBFVAQSlEeG9Ra8stJsLQw"/>

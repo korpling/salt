@@ -90,6 +90,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSStructure(org.eclipse.emf.common.util.EList) <em>Create SStructure</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getRootsBySRelation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME) <em>Get Roots By SRelation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getRootsBySRelationSType(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME) <em>Get Roots By SRelation SType</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSToken(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS, java.lang.Integer, java.lang.Integer) <em>Create SToken</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -1556,5 +1557,51 @@ public class SDocumentGraphTest extends TestCase {
 			assertTrue(this.getFixture().getRootsBySRelationSType(STYPE_NAME.SPOINTING_RELATION).get(type1).contains(node1));
 			assertTrue(this.getFixture().getRootsBySRelationSType(STYPE_NAME.SPOINTING_RELATION).get(type2).contains(node2));
 		//checking for SPointingRelation
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSToken(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS, java.lang.Integer, java.lang.Integer) <em>Create SToken</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSToken(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS, java.lang.Integer, java.lang.Integer)
+	 */
+	public void testCreateSToken__SSequentialDS_Integer_Integer() 
+	{
+		String sampleText= "This is a sample.";
+		STextualDS primaryText= this.getFixture().createSTextualDS(sampleText);
+		SToken tok1= this.getFixture().createSToken(primaryText, 0, 4);
+		SToken tok2= this.getFixture().createSToken(primaryText, 5, 7);
+		SToken tok3= this.getFixture().createSToken(primaryText, 8, 9);
+		SToken tok4= this.getFixture().createSToken(primaryText, 10, 16);
+		SToken tok5= this.getFixture().createSToken(primaryText, 16, 17);
+		
+		EList<STYPE_NAME> relations= new BasicEList<STYPE_NAME>();
+		relations.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);
+		SDataSourceSequence sequence= null;
+		
+		sequence= this.getFixture().getOverlappedDSSequences(tok1, relations).get(0);
+		assertEquals(Integer.valueOf(0), sequence.getSStart());
+		assertEquals(Integer.valueOf(4), sequence.getSEnd());
+		assertEquals(primaryText, sequence.getSSequentialDS());
+		
+		sequence= this.getFixture().getOverlappedDSSequences(tok2, relations).get(0);
+		assertEquals(Integer.valueOf(5), sequence.getSStart());
+		assertEquals(Integer.valueOf(7), sequence.getSEnd());
+		assertEquals(primaryText, sequence.getSSequentialDS());
+		
+		sequence= this.getFixture().getOverlappedDSSequences(tok3, relations).get(0);
+		assertEquals(Integer.valueOf(8), sequence.getSStart());
+		assertEquals(Integer.valueOf(9), sequence.getSEnd());
+		assertEquals(primaryText, sequence.getSSequentialDS());
+		
+		sequence= this.getFixture().getOverlappedDSSequences(tok4, relations).get(0);
+		assertEquals(Integer.valueOf(10), sequence.getSStart());
+		assertEquals(Integer.valueOf(16), sequence.getSEnd());
+		assertEquals(primaryText, sequence.getSSequentialDS());
+		
+		sequence= this.getFixture().getOverlappedDSSequences(tok5, relations).get(0);
+		assertEquals(Integer.valueOf(16), sequence.getSStart());
+		assertEquals(Integer.valueOf(17), sequence.getSEnd());
+		assertEquals(primaryText, sequence.getSSequentialDS());
 	}
 } //SDocumentGraphTest

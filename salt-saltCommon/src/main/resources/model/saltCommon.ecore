@@ -175,6 +175,11 @@
         </eGenericType>
         <eParameters name="sType" eType="#//sDocumentStructure/STYPE_NAME"/>
       </eOperations>
+      <eOperations name="createSToken" eType="#//sDocumentStructure/SToken">
+        <eParameters name="sSequentialDS" eType="#//sDocumentStructure/SSequentialDS"/>
+        <eParameters name="sStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+        <eParameters name="sEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
           eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTextualDSs" upperBound="-1"

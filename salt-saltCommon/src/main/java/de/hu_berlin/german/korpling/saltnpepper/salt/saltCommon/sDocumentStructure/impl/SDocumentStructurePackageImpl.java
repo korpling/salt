@@ -1029,6 +1029,11 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
+		op = addEOperation(sDocumentGraphEClass, this.getSToken(), "createSToken", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getSSequentialDS(), "sSequentialDS", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEIntegerObject(), "sStart", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEIntegerObject(), "sEnd", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(sTextualDSEClass, STextualDS.class, "STextualDS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSTextualDS_SText(), ecorePackage.getEString(), "sText", null, 0, 1, STextualDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSTextualDS_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_STextualDSs(), "sDocumentGraph", null, 0, 1, STextualDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

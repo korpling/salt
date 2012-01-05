@@ -516,6 +516,14 @@ public interface SDocumentGraph extends SGraph {
 	
 
 	/**
+	 * Creates a new {@link SToken} object and adds it to the graph. The {@link SToken} object will be
+	 * connected with the given {@link SSequentialDS} object. The created relation get the passed positions.
+	 * @model
+	 * @generated
+	 */
+	SToken createSToken(SSequentialDS sSequentialDS, Integer sStart, Integer sEnd);
+
+	/**
 	 * What is this???
 	 */
 	void basicSetSElementId(); 

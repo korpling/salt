@@ -738,11 +738,26 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/**
-	 * Connects the given {@link SToken} object to the given {@link SSequentialDS} object.
+	 * {@inheritDoc SDocumentGraph#createSToken(SSequentialDS, Integer, Integer)}
+	 */
+	public SToken createSToken(SSequentialDS sSequentialDS, Integer sStart, Integer sEnd) 
+	{
+		SToken sTok= SaltFactory.eINSTANCE.createSToken();
+		SDataSourceSequence sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+		sequence.setSStart(sStart);
+		sequence.setSEnd(sEnd);
+		sequence.setSSequentialDS(sSequentialDS);
+		this.addSToken(sTok, sequence);
+		return(sTok);
+	}
+
+	/**
+	 * Connects the given {@link SToken} object to the given {@link SSequentialDS} object. If the given 
+	 * {@link SToken} object is not already add to the graph, it will be added.
 	 * @param sToken token to connect to the {@link SSequentialDS} object
 	 * @param sDSSequence object containing the {@link SSequentialDS} object and the borders, to which the token points to
 	 */
-	private void addSToken(SToken sToken, SDataSourceSequence sDSSequence)
+	private void addSToken(SToken sToken, SDataSourceSequence sDSSequence) 
 	{
 		if (sDSSequence== null)
 			throw new SaltEmptyParameterException("sDSSequence", "addSToken", this.getClass());
@@ -752,6 +767,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			throw new SaltEmptyParameterException("sDSSequences.getSStart()", "addSToken", this.getClass());
 		if (sDSSequence.getSEnd()== null)
 			throw new SaltEmptyParameterException("sDSSequences.getSEnd()", "addSToken", this.getClass());
+		if (	(sToken.getSElementId()== null)||
+				(this.getNode(sToken.getSElementId().getSId())== null))
+			this.addSNode(sToken);
 		
 		SSequentialRelation seqRel= null;
 		
