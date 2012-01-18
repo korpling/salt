@@ -323,7 +323,6 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 			else return false;
 		}
 		if (!(obj instanceof LabelableElement))
-//		if (!this.getClass().equals(obj.getClass()))
 		{
 			if (differences!= null)
 			{
@@ -346,7 +345,7 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 			if (this.getLabels().size()!= other.getLabels().size())
 			{
 				if (differences!= null)
-					differences.add("The number of labels for both objects is not the same.");
+					differences.add("The number of labels for both objects is not the same. For this object it is '"+this.getLabels().size()+"', for the object to compare it is '"+other.getLabels().size()+"'.");
 				else return false;
 			}
 			for (int i= 0; i< this.getLabels().size(); i++)
@@ -360,54 +359,8 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 			}
 		}
 		return true;
-		
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//		{
-//			if (differences!= null)
-//				differences.add("The given object is null.");
-//			else return false;
-//		}
-//
-//		if (getClass() != obj.getClass())
-//		{
-//			if (differences!= null)
-//				differences.add("The given object is not of type '"+getClass()+"'.");
-//			else return false;
-//		}
-//		LabelableElementImpl other = (LabelableElementImpl) obj;
-//		if (this.getLabels() == null) 
-//		{
-//			if (other.getLabels() != null)
-//			{
-//				if (differences!= null)
-//					differences.add("This object contains no labels, but the given one does.");
-//				else return false;
-//			}
-//		} 
-//		else 
-//		{
-//			if (this.getLabels().size()!= other.getLabels().size())
-//			{
-//				if (differences!= null)
-//					differences.add("The number of labels for both objects is not the same.");
-//				else return false;
-//			}
-//			for (int i= 0; i< this.getLabels().size(); i++)
-//			{
-//				if (!this.getLabels().get(i).equals(other.getLabels().get(i)))
-//				{
-//					if (differences!= null)
-//						differences.add("Two labels does not match. The one coming from this '"+this.getLabels().get(i)+"' and the one comming from the given object '"+other.getLabels().get(i)+"'.");
-//					else return false;
-//				}
-//			}
-//		}
-//		return true;
 	}
-	
-//	private volatile Boolean equalsInProcess= false; 
+	 
 	/**
 	 * Checks the equality of this object and a given one basing on the id-value
 	 * of both objects. The objects are only equal, if the String- comparisons for the id-value
@@ -420,44 +373,6 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 	{
 		boolean retVal= this.equals(null, obj);
 		return(retVal);
-//		if (!differencesInProcess)
-//		{
-//			synchronized (equalsInProcess) 
-//			{
-//				differencesInProcess= true;
-//				boolean retVal= this.equals(null, obj);
-//				differencesInProcess= false;
-//				return(retVal);
-//			}
-//		}
-		
-		
-		
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		LabelableElementImpl other = (LabelableElementImpl) obj;
-//		if (this.getLabels() == null) 
-//		{
-//			if (other.getLabels() != null)
-//				return false;
-//		} 
-//		else 
-//		{
-//			if (this.getLabels().size()!= other.getLabels().size())
-//				return(false);
-//			for (int i= 0; i< this.getLabels().size(); i++)
-//			{
-//				if (!this.getLabels().get(i).equals(other.getLabels().get(i)))
-//				{
-//					return(false);
-//				}
-//			}
-//		}
-//		return true;
 	}
 
 	/**
