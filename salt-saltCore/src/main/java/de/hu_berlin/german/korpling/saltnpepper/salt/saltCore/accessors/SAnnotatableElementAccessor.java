@@ -39,10 +39,10 @@ public class SAnnotatableElementAccessor
 	}
 
 	public SAnnotation getSAnnotation(	SAnnotatableElement sProcElem,
-															String fullName) 
+															String qName) 
 	{
 		SAnnotation sProcAnno= null;
-		Label label= sProcElem.getLabel(fullName);
+		Label label= sProcElem.getLabel(qName);
 		if (label instanceof SAnnotation)
 			sProcAnno= (SAnnotation) label;
 		return(sProcAnno);

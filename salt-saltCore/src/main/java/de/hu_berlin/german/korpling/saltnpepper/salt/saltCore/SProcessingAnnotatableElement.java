@@ -71,7 +71,7 @@ public interface SProcessingAnnotatableElement extends LabelableElement {
 	 * @model
 	 * @generated
 	 */
-	SProcessingAnnotation getSProcessingAnnotation(String fullName);
+	SProcessingAnnotation getSProcessingAnnotation(String qName);
 
 	/**
 	 * <!-- begin-user-doc -->

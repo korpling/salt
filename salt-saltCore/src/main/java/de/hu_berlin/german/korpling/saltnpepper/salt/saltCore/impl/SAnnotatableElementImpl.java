@@ -96,9 +96,9 @@ public class SAnnotatableElementImpl extends LabelableElementImpl implements SAn
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SAnnotation getSAnnotation(String fullName) 
+	public SAnnotation getSAnnotation(String qName) 
 	{
-		return(this.sAnnoAccessor.getSAnnotation(this, fullName));
+		return(this.sAnnoAccessor.getSAnnotation(this, qName));
 	}
 
 	/**

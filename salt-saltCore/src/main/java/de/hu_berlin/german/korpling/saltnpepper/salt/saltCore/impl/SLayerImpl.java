@@ -60,6 +60,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcess
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSName <em>SName</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSElementId <em>SElement Id</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSId <em>SId</em>}</li>
@@ -67,7 +68,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcess
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSAnnotations <em>SAnnotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSMetaAnnotations <em>SMeta Annotations</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSRelations <em>SRelations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSNodes <em>SNodes</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SLayerImpl#getSGraph <em>SGraph</em>}</li>
@@ -88,16 +88,6 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	 * @ordered
 	 */
 	protected static final String SNAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSName() <em>SName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String sName = SNAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSId() <em>SId</em>}' attribute.
@@ -141,6 +131,25 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	}
 
 	/**
+	 * Adds this object to the list of to be notified objects for all possible notifiers. 
+	 */
+	@Override
+	public boolean eNotificationRequired() {
+		return true;
+	}
+	
+	/**
+	 * Delegates the notification to others
+	 * {@inheritDoc SNamedElementImpl#eNotify(SNamedElement, Notification)}
+	 */
+	@Override
+	public void eNotify(Notification notification) 
+	{
+		SNamedElementImpl.eNotify(this, notification);
+		super.eNotify(notification);
+	}
+	
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -151,24 +160,18 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#getSName()}
 	 */
 	public String getSName() {
-		return sName;
+		return(SNamedElementImpl.getSName(this));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#setSName(String)}
 	 */
-	public void setSName(String newSName) {
-		String oldSName = sName;
-		sName = newSName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SLAYER__SNAME, oldSName, sName));
+	public void setSName(String newSName) 
+	{
+		SNamedElementImpl.setSName(this, newSName);
 	}
 
 	/**
@@ -339,9 +342,9 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SAnnotation getSAnnotation(String fullName) 
+	public SAnnotation getSAnnotation(String qName) 
 	{
-		return(this.sAnnoAccessor.getSAnnotation(this, fullName));
+		return(this.sAnnoAccessor.getSAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -388,9 +391,9 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SMetaAnnotation getSMetaAnnotation(String fullName) 
+	public SMetaAnnotation getSMetaAnnotation(String qName) 
 	{
-		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, fullName));
+		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, qName));
 	}
 	
 	/**
@@ -456,9 +459,9 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SProcessingAnnotation getSProcessingAnnotation(String fullName) 
+	public SProcessingAnnotation getSProcessingAnnotation(String qName) 
 	{
-		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
+		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, qName));
 	}
 
 	/**
@@ -549,14 +552,14 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SaltCorePackage.SLAYER__SFEATURES:
+				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SLAYER__SPROCESSING_ANNOTATIONS:
 				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SLAYER__SANNOTATIONS:
 				return ((InternalEList<?>)getSAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SLAYER__SMETA_ANNOTATIONS:
 				return ((InternalEList<?>)getSMetaAnnotations()).basicRemove(otherEnd, msgs);
-			case SaltCorePackage.SLAYER__SFEATURES:
-				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -569,6 +572,8 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case SaltCorePackage.SLAYER__SFEATURES:
+				return getSFeatures();
 			case SaltCorePackage.SLAYER__SNAME:
 				return getSName();
 			case SaltCorePackage.SLAYER__SELEMENT_ID:
@@ -584,8 +589,6 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 				return getSAnnotations();
 			case SaltCorePackage.SLAYER__SMETA_ANNOTATIONS:
 				return getSMetaAnnotations();
-			case SaltCorePackage.SLAYER__SFEATURES:
-				return getSFeatures();
 			case SaltCorePackage.SLAYER__SRELATIONS:
 				return getSRelations();
 			case SaltCorePackage.SLAYER__SNODES:
@@ -611,6 +614,10 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SaltCorePackage.SLAYER__SFEATURES:
+				getSFeatures().clear();
+				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
+				return;
 			case SaltCorePackage.SLAYER__SNAME:
 				setSName((String)newValue);
 				return;
@@ -630,10 +637,6 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 			case SaltCorePackage.SLAYER__SMETA_ANNOTATIONS:
 				getSMetaAnnotations().clear();
 				getSMetaAnnotations().addAll((Collection<? extends SMetaAnnotation>)newValue);
-				return;
-			case SaltCorePackage.SLAYER__SFEATURES:
-				getSFeatures().clear();
-				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
 				return;
 			case SaltCorePackage.SLAYER__SRELATIONS:
 				getSRelations().clear();
@@ -665,6 +668,9 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SaltCorePackage.SLAYER__SFEATURES:
+				getSFeatures().clear();
+				return;
 			case SaltCorePackage.SLAYER__SNAME:
 				setSName(SNAME_EDEFAULT);
 				return;
@@ -682,9 +688,6 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 				return;
 			case SaltCorePackage.SLAYER__SMETA_ANNOTATIONS:
 				getSMetaAnnotations().clear();
-				return;
-			case SaltCorePackage.SLAYER__SFEATURES:
-				getSFeatures().clear();
 				return;
 			case SaltCorePackage.SLAYER__SRELATIONS:
 				getSRelations().clear();
@@ -713,8 +716,10 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case SaltCorePackage.SLAYER__SFEATURES:
+				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SLAYER__SNAME:
-				return SNAME_EDEFAULT == null ? sName != null : !SNAME_EDEFAULT.equals(sName);
+				return SNAME_EDEFAULT == null ? getSName() != null : !SNAME_EDEFAULT.equals(getSName());
 			case SaltCorePackage.SLAYER__SELEMENT_ID:
 				return basicGetSElementId() != null;
 			case SaltCorePackage.SLAYER__SID:
@@ -727,8 +732,6 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 				return !getSAnnotations().isEmpty();
 			case SaltCorePackage.SLAYER__SMETA_ANNOTATIONS:
 				return !getSMetaAnnotations().isEmpty();
-			case SaltCorePackage.SLAYER__SFEATURES:
-				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SLAYER__SRELATIONS:
 				return !getSRelations().isEmpty();
 			case SaltCorePackage.SLAYER__SNODES:
@@ -750,6 +753,12 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == SFeaturableElement.class) {
+			switch (derivedFeatureID) {
+				case SaltCorePackage.SLAYER__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == SNamedElement.class) {
 			switch (derivedFeatureID) {
 				case SaltCorePackage.SLAYER__SNAME: return SaltCorePackage.SNAMED_ELEMENT__SNAME;
@@ -782,12 +791,6 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 				default: return -1;
 			}
 		}
-		if (baseClass == SFeaturableElement.class) {
-			switch (derivedFeatureID) {
-				case SaltCorePackage.SLAYER__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -798,6 +801,12 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == SFeaturableElement.class) {
+			switch (baseFeatureID) {
+				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SLAYER__SFEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == SNamedElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SNAMED_ELEMENT__SNAME: return SaltCorePackage.SLAYER__SNAME;
@@ -830,29 +839,7 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 				default: return -1;
 			}
 		}
-		if (baseClass == SFeaturableElement.class) {
-			switch (baseFeatureID) {
-				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SLAYER__SFEATURES;
-				default: return -1;
-			}
-		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sName: ");
-		result.append(sName);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SLayerImpl

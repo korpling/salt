@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.tests.storing;
 
+import java.io.File;
 import java.io.IOException;
 
 import junit.framework.TestCase;
@@ -71,6 +72,73 @@ public class SGraphStoringTest extends TestCase
 	}
 	
 	/**
+	 * Stores the given {@link SGraph} object and loads it again. The loaded {@link SGraph} will be put to a different instance
+	 * and returned.
+	 * @param sGraph2store
+	 * @return
+	 * @throws IOException 
+	 */
+	private SGraph storeAndLoadSGraph(SGraph sGraph2store, File tmpOutput) throws IOException
+	{
+		// create resource set and resource 
+		ResourceSet resourceSet = new ResourceSetImpl();
+
+		// Register XML resource factory
+		resourceSet.getPackageRegistry().put(SaltCorePackage.eINSTANCE.getNsURI(), SaltCorePackage.eINSTANCE);
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("salt",new XMIResourceFactoryImpl());
+		
+		URI outURI= URI.createFileURI(tmpOutput.getAbsolutePath());
+		
+		//save resources
+		XMLResource resourceOut = (XMLResource)resourceSet.createResource(outURI);
+		resourceOut.getContents().add(sGraph2store);
+		resourceOut.setEncoding("UTF-8");
+		resourceOut.save(null);
+		
+		
+		//load resource 
+		Resource resource = resourceSet.createResource(URI.createFileURI(tmpOutput.getAbsolutePath()));
+		
+		if (resource== null)
+			throw new NullPointerException("The resource is null.");
+		resource.load(null);
+		SGraph sGraph2= null; 
+		sGraph2= (SGraph) resource.getContents().get(0);
+		return(sGraph2);
+	}
+	
+	/**
+	 * Stores a {@link SGraph} object containing just one {@link SNode} object.
+	 * @throws IOException
+	 */
+	public void testStoring1() throws IOException
+	{
+		SGraph sGraph2= null;
+		File tmpOutput= new File("./_TMP/SGraph1.salt");
+		
+		//start: adding sName
+		String sName= "myGraph1";
+		this.getFixture().setSName(sName);
+		//start: adding id
+		String id= "salt:/"+ sName;
+		this.getFixture().setSId(id);
+		SNode node1= null;
+		
+		//start: adding SNode1
+			node1= SaltCoreFactory.eINSTANCE.createSNode();
+			this.getFixture().addSNode(node1);
+			//adding sName
+			sName= "myNode1";
+			node1.setSName(sName);
+		//end: adding SNode1
+			
+		//save and reload
+		sGraph2= this.storeAndLoadSGraph(this.getFixture(), tmpOutput);	
+		//check if equals
+		assertEquals(this.getFixture(), sGraph2);
+	}
+	
+	/**
 	 * graph:
 	 * 		node1
 	 * 	/			\
@@ -83,15 +151,20 @@ public class SGraphStoringTest extends TestCase
 	 * layer3:	node4
 	 * @throws IOException
 	 */
-	public void testStoring1() throws IOException
+	public void testStoring2() throws IOException
 	{
 		SGraph sGraph2= null;
-		String tmpFileName= "_TMP/SGraph.saltCore";
+		File tmpOutput= new File("./_TMP/SGraph.salt");
 		
-		{//adding id
-			String id= "salt:/graph1";
+		//start: adding sName
+			String sName= "myGraph1";
+			this.getFixture().setSName(sName);
+		//end: adding sName
+
+		//start: adding id
+			String id= "salt:/"+ sName;
 			this.getFixture().setSId(id);
-		}
+		//end: adding id
 		
 		{//adding annotations
 			SAnnotation sAnno= null;
@@ -127,10 +200,14 @@ public class SGraphStoringTest extends TestCase
 			{//node 1
 				node1= SaltCoreFactory.eINSTANCE.createSNode();
 				this.getFixture().addSNode(node1);
-				{//adding id
-					String id= "salt:/node1";
-					node1.setSId(id);
-				}
+				//adding sName
+				sName= "myNode1";
+				node1.setSName(sName);
+				
+				//adding id
+				id= "salt:/"+ sName;
+				node1.setSId(id);
+				
 				
 				{//adding annotations
 					SAnnotation sAnno= null;
@@ -161,26 +238,37 @@ public class SGraphStoringTest extends TestCase
 			{//node2
 				node2= SaltCoreFactory.eINSTANCE.createSNode();
 				this.getFixture().addSNode(node2);
-				{//adding id
-					String id= "salt:/node2";
-					node2.setSId(id);
-				}
+				
+				//adding sName
+				sName= "myNode2";
+				node2.setSName(sName);
+				
+				//adding id
+				id= "salt:/"+ sName;
+				node2.setSId(id);
+				
 			}
 			{//node3
 				node3= SaltCoreFactory.eINSTANCE.createSNode();
 				this.getFixture().addSNode(node3);
-				{//adding id
-					String id= "salt:/node3";
-					node1.setSId(id);
-				}
+				//adding sName
+				sName= "myNode3";
+				node3.setSName(sName);
+				
+				//adding id
+				id= "salt:/"+ sName;
+				node3.setSId(id);
 			}
 			{//node4
 				node4= SaltCoreFactory.eINSTANCE.createSNode();
 				this.getFixture().addSNode(node4);
-				{//adding id
-					String id= "salt:/node4";
-					node1.setSId(id);
-				}
+				//adding sName
+				sName= "myNode4";
+				node4.setSName(sName);
+				
+				//adding id
+				id= "salt:/"+ sName;
+				node4.setSId(id);
 			}
 		}
 		SRelation rel1= null;
@@ -190,7 +278,7 @@ public class SGraphStoringTest extends TestCase
 			{//relation1
 				rel1= SaltCoreFactory.eINSTANCE.createSRelation();
 				{//adding id
-					String id= "salt:/rel1";
+					id= "salt:/rel1";
 					rel1.setSId(id);
 				}
 				this.getFixture().addSRelation(rel1);
@@ -229,7 +317,7 @@ public class SGraphStoringTest extends TestCase
 			{//rel2
 				rel2= SaltCoreFactory.eINSTANCE.createSRelation();
 				{//adding id
-					String id= "salt:/rel2";
+					id= "salt:/rel2";
 					rel2.setSId(id);
 				}
 				this.getFixture().addSRelation(rel2);
@@ -241,7 +329,7 @@ public class SGraphStoringTest extends TestCase
 			{//rel3
 				rel3= SaltCoreFactory.eINSTANCE.createSRelation();
 				{//adding id
-					String id= "salt:/rel3";
+					id= "salt:/rel3";
 					rel3.setSId(id);
 				}
 				this.getFixture().addSRelation(rel3);
@@ -277,34 +365,10 @@ public class SGraphStoringTest extends TestCase
 			}//putting nodes and relations into layers
 		}
 		
-		{//save and reload
-			// create resource set and resource 
-			ResourceSet resourceSet = new ResourceSetImpl();
-
-			// Register XML resource factory
-			resourceSet.getPackageRegistry().put(SaltCorePackage.eINSTANCE.getNsURI(), SaltCorePackage.eINSTANCE);
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("saltCore",new XMIResourceFactoryImpl());
-			
-			URI outURI= URI.createFileURI(tmpFileName);
-			
-			//save resources
-			XMLResource resourceOut = (XMLResource)resourceSet.createResource(outURI);
-			resourceOut.getContents().add(this.getFixture());
-			resourceOut.setEncoding("UTF-8");
-			resourceOut.save(null);
-			
-			
-			//load resource 
-			Resource resource = resourceSet.createResource(URI.createFileURI(tmpFileName));
-			
-			if (resource== null)
-				throw new NullPointerException("The resource is null.");
-			resource.load(null);
-			sGraph2= (SGraph) resource.getContents().get(0);
-		}
+		//save and reload
+		sGraph2= this.storeAndLoadSGraph(this.getFixture(), tmpOutput);
 		
-		{//check if equals
-			assertEquals(this.getFixture(), sGraph2);
-		}
+		//check if equals
+		assertEquals(this.getFixture(), sGraph2);
 	}
 }

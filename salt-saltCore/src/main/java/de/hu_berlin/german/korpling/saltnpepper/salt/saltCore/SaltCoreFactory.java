@@ -28,6 +28,19 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface SaltCoreFactory extends EFactory {
+	
+	/**
+	 * An enumeration of all fields in SaltCore represented by a {@link SFeature} object.
+	 * 
+	 * @author Florian Zipser
+	 */
+	public enum SALT_CORE_SFEATURES {SNAME, STYPE};
+	
+	/**
+	 * The namespace used for {@link SFeature} objects. 
+	 */
+	public final String SALT_CORE_NAMESPACE="salt";
+	
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->

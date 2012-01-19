@@ -35,28 +35,26 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SNamedElement extends EObject {
+public interface SNamedElement extends SFeaturableElement {
 	/**
-	 * Returns the value of the '<em><b>SName</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SName</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SName</em>' attribute.
+	 * Returns the given name as name of this object. In a graph environment (when this object is contained in a {@link SGraph} object), 
+	 * this name is used to generate the {@link SElementId} of this object. The value sName is a derived value and will
+	 * be stored in a {@link SFeature} object. The name of the {@link SFeature} is set to 'sName', the namespace of 
+	 * the {@link SFeature} is set to 'salt'.
+	 * @return sName of this object.
 	 * @see #setSName(String)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage#getSNamedElement_SName()
-	 * @model
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getSName();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName <em>SName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SName</em>' attribute.
+	 * Sets the given name as name of this object. In a graph environment (when this object is contained in a {@link SGraph} object), 
+	 * this name is used to generate the {@link SElementId} of this object. The value sName is a derived value and will
+	 * be stored in a {@link SFeature} object. The name of the {@link SFeature} is set to 'sName', the namespace of 
+	 * the {@link SFeature} is set to 'salt'.
+	 * @param value represents the name of this object
 	 * @see #getSName()
 	 * @generated
 	 */

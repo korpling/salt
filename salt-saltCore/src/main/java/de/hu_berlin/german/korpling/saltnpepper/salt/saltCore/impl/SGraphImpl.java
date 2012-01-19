@@ -68,13 +68,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCor
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSName <em>SName</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSAnnotations <em>SAnnotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSElementId <em>SElement Id</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSId <em>SId</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSMetaAnnotations <em>SMeta Annotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSRelations <em>SRelations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl#getSNodes <em>SNodes</em>}</li>
@@ -94,16 +94,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 * @ordered
 	 */
 	protected static final String SNAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSName() <em>SName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String sName = SNAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSId() <em>SId</em>}' attribute.
@@ -157,24 +147,18 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#getSName()}
 	 */
 	public String getSName() {
-		return sName;
+		return(SNamedElementImpl.getSName(this));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#setSName(String)}
 	 */
-	public void setSName(String newSName) {
-		String oldSName = sName;
-		sName = newSName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SGRAPH__SNAME, oldSName, sName));
+	public void setSName(String newSName) 
+	{
+		SNamedElementImpl.setSName(this, newSName);
 	}
 	
 	/**
@@ -188,9 +172,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	{
 		if (differences!= null)
 		{
-//			EList<String> diffs= super.differences(obj);
-//			if (diffs!= null)
-//				differences.addAll(diffs);
 			super.equals(differences, obj);
 		}
 		else return(super.equals(differences, obj));
@@ -206,73 +187,25 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	{
 		boolean retVal= this.equals(null, obj); 
 		return(retVal);
-
-		//TODO outcommented on 26th of June 2010
-//		if (!(obj instanceof SGraph))
-//			return(false);
-//		SGraph sGraph2= (SGraph) obj;
-//		{//check ids
-//			if (this.getSId()!= null)
-//			{	
-//				if (sGraph2.getSId()== null)
-//					return(false);
-//				if (!this.getSId().equalsIgnoreCase(sGraph2.getSId()))
-//					return(false);
-//			}
-//		}
-//		{//check SProcessingAnnotations
-//			for(SProcessingAnnotation sProcAnno1: this.getSProcessingAnnotations())
-//			{
-//				boolean hasOpponend= false;
-//				for(SProcessingAnnotation sProcAnno2: sGraph2.getSProcessingAnnotations())
-//				{
-//					if (sProcAnno1.equals(sProcAnno2))
-//						hasOpponend= true;
-//				}
-//				if (!hasOpponend)
-//					return(false);
-//			}	
-//		}
-//		{//check SAnnotations
-//			for(SAnnotation sAnno1: this.getSAnnotations())
-//			{
-//				boolean hasOpponend= false;
-//				for(SAnnotation sAnno2: sGraph2.getSAnnotations())
-//				{
-//					if (sAnno1.equals(sAnno2))
-//						hasOpponend= true;
-//				}
-//				if (!hasOpponend)
-//					return(false);
-//			}	
-//		}
-//		{//check nodes
-//			for (SNode sNode1: this.getSNodes())
-//			{
-//				boolean hasOpponend= false;
-//				for (SNode sNode2: sGraph2.getSNodes())
-//				{
-//					if (sNode1.equals(sNode2))
-//						hasOpponend= true;
-//				}	
-//				if (!hasOpponend)
-//					return(false);
-//			}	
-//		}
-//		{//check relations
-//			for (SRelation sRel1: this.getSRelations())
-//			{
-//				boolean hasOpponend= false;
-//				for (SRelation sRel2: sGraph2.getSRelations())
-//				{
-//					if (sRel1.equals(sRel2))
-//						hasOpponend= true;
-//				}	
-//				if (!hasOpponend)
-//					return(false);
-//			}	
-//		}
-//		return(true);
+	}
+	
+	/**
+	 * Adds this object to the list of to be notified objects for all possible notifiers. 
+	 */
+	@Override
+	public boolean eNotificationRequired() {
+		return true;
+	}
+	
+	/**
+	 * Delegates the notification to others
+	 * {@inheritDoc SNamedElementImpl#eNotify(SNamedElement, Notification)}
+	 */
+	@Override
+	public void eNotify(Notification notification) 
+	{
+		SNamedElementImpl.eNotify(this, notification);
+		super.eNotify(notification);
 	}
 	
 //=================== start: handling SNode
@@ -340,12 +273,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 */
 	public void addSNode(SNode sNode) 
 	{
-//		if (	(sNode!= null) &&
-//				(sNode.getSName()!= null)&&
-//				(!sNode.getSName().equals("")))
-//		{
-////			sNode.setId(value);
-//		}
 		super.addNode(sNode);
 	}
 
@@ -624,9 +551,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SAnnotation getSAnnotation(String fullName) 
+	public SAnnotation getSAnnotation(String qName) 
 	{
-		return(this.sAnnoAccessor.getSAnnotation(this, fullName));
+		return(this.sAnnoAccessor.getSAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -673,9 +600,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SMetaAnnotation getSMetaAnnotation(String fullName) 
+	public SMetaAnnotation getSMetaAnnotation(String qName) 
 	{
-		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, fullName));
+		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -740,9 +667,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SProcessingAnnotation getSProcessingAnnotation(String fullName) 
+	public SProcessingAnnotation getSProcessingAnnotation(String qName) 
 	{
-		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
+		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -829,12 +756,12 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SGRAPH__SANNOTATIONS:
 				return ((InternalEList<?>)getSAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS:
 				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
-			case SaltCorePackage.SGRAPH__SFEATURES:
-				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
 				return ((InternalEList<?>)getSMetaAnnotations()).basicRemove(otherEnd, msgs);
 		}
@@ -849,6 +776,8 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				return getSFeatures();
 			case SaltCorePackage.SGRAPH__SNAME:
 				return getSName();
 			case SaltCorePackage.SGRAPH__SANNOTATIONS:
@@ -862,8 +791,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return getSElementPath();
 			case SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS:
 				return getSProcessingAnnotations();
-			case SaltCorePackage.SGRAPH__SFEATURES:
-				return getSFeatures();
 			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
 				return getSMetaAnnotations();
 			case SaltCorePackage.SGRAPH__SRELATIONS:
@@ -885,6 +812,10 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				getSFeatures().clear();
+				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
+				return;
 			case SaltCorePackage.SGRAPH__SNAME:
 				setSName((String)newValue);
 				return;
@@ -900,10 +831,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return;
 			case SaltCorePackage.SGRAPH__SELEMENT_PATH:
 				setSElementPath((URI)newValue);
-				return;
-			case SaltCorePackage.SGRAPH__SFEATURES:
-				getSFeatures().clear();
-				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
 				return;
 			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
 				getSMetaAnnotations().clear();
@@ -925,6 +852,9 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				getSFeatures().clear();
+				return;
 			case SaltCorePackage.SGRAPH__SNAME:
 				setSName(SNAME_EDEFAULT);
 				return;
@@ -939,9 +869,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return;
 			case SaltCorePackage.SGRAPH__SELEMENT_PATH:
 				setSElementPath(SELEMENT_PATH_EDEFAULT);
-				return;
-			case SaltCorePackage.SGRAPH__SFEATURES:
-				getSFeatures().clear();
 				return;
 			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
 				getSMetaAnnotations().clear();
@@ -961,8 +888,10 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case SaltCorePackage.SGRAPH__SFEATURES:
+				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SGRAPH__SNAME:
-				return SNAME_EDEFAULT == null ? sName != null : !SNAME_EDEFAULT.equals(sName);
+				return SNAME_EDEFAULT == null ? getSName() != null : !SNAME_EDEFAULT.equals(getSName());
 			case SaltCorePackage.SGRAPH__SANNOTATIONS:
 				return !getSAnnotations().isEmpty();
 			case SaltCorePackage.SGRAPH__SELEMENT_ID:
@@ -973,8 +902,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				return SELEMENT_PATH_EDEFAULT == null ? getSElementPath() != null : !SELEMENT_PATH_EDEFAULT.equals(getSElementPath());
 			case SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS:
 				return !getSProcessingAnnotations().isEmpty();
-			case SaltCorePackage.SGRAPH__SFEATURES:
-				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS:
 				return !getSMetaAnnotations().isEmpty();
 			case SaltCorePackage.SGRAPH__SRELATIONS:
@@ -994,6 +921,12 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == SFeaturableElement.class) {
+			switch (derivedFeatureID) {
+				case SaltCorePackage.SGRAPH__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == SNamedElement.class) {
 			switch (derivedFeatureID) {
 				case SaltCorePackage.SGRAPH__SNAME: return SaltCorePackage.SNAMED_ELEMENT__SNAME;
@@ -1020,12 +953,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				default: return -1;
 			}
 		}
-		if (baseClass == SFeaturableElement.class) {
-			switch (derivedFeatureID) {
-				case SaltCorePackage.SGRAPH__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
-				default: return -1;
-			}
-		}
 		if (baseClass == SMetaAnnotatableElement.class) {
 			switch (derivedFeatureID) {
 				case SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS: return SaltCorePackage.SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS;
@@ -1042,6 +969,12 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == SFeaturableElement.class) {
+			switch (baseFeatureID) {
+				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SGRAPH__SFEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == SNamedElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SNAMED_ELEMENT__SNAME: return SaltCorePackage.SGRAPH__SNAME;
@@ -1068,12 +1001,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 				default: return -1;
 			}
 		}
-		if (baseClass == SFeaturableElement.class) {
-			switch (baseFeatureID) {
-				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SGRAPH__SFEATURES;
-				default: return -1;
-			}
-		}
 		if (baseClass == SMetaAnnotatableElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS: return SaltCorePackage.SGRAPH__SMETA_ANNOTATIONS;
@@ -1081,22 +1008,6 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sName: ");
-		result.append(sName);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SGraphImpl

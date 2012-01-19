@@ -39,10 +39,10 @@ public class SProcessingAnnotatableElementAccessor
 	}
 
 	public SProcessingAnnotation getSProcessingAnnotation(	SProcessingAnnotatableElement sProcElem,
-															String fullName) 
+															String qName) 
 	{
 		SProcessingAnnotation sProcAnno= null;
-		Label label= sProcElem.getLabel(fullName);
+		Label label= sProcElem.getLabel(qName);
 		if (label instanceof SProcessingAnnotation)
 			sProcAnno= (SProcessingAnnotation) label;
 		return(sProcAnno);

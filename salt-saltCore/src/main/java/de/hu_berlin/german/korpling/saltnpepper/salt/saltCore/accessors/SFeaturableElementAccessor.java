@@ -39,16 +39,15 @@ public class SFeaturableElementAccessor
 	}
 
 	public SFeature getSFeature(	SFeaturableElement sFeatElem,
-									String fullName) 
+									String qName) 
 	{
 		SFeature sFeatAnno= null;
-		Label label= sFeatElem.getLabel(fullName);
+		Label label= sFeatElem.getLabel(qName);
 		if (label instanceof SFeature)
 			sFeatAnno= (SFeature) label;
 		return(sFeatAnno);
 	}
 
-	@SuppressWarnings("unchecked")
 	public EList<SFeature> getSFeatures(SFeaturableElement sFeatElem) 
 	{
 		EList<SFeature> sFeatAnnos= null;
@@ -58,7 +57,7 @@ public class SFeaturableElementAccessor
 			if (label instanceof SFeature)
 				sFeatAnnosList.add((SFeature) label);
 		}
-		sFeatAnnos= new EcoreEList.UnmodifiableEList((InternalEObject)sFeatElem,
+		sFeatAnnos= new EcoreEList.UnmodifiableEList<SFeature>((InternalEObject)sFeatElem,
 												SaltCorePackage.eINSTANCE.getSFeaturableElement_SFeatures(),
 												sFeatAnnosList.size(), sFeatAnnosList.toArray());
 		return(sFeatAnnos);	

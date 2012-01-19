@@ -39,10 +39,10 @@ public class SMetaAnnotatableElementAccessor
 	}
 
 	public SMetaAnnotation getSMetaAnnotation(	SMetaAnnotatableElement sProcElem,
-															String fullName) 
+															String qName) 
 	{
 		SMetaAnnotation sProcMetaAnno= null;
-		Label label= sProcElem.getLabel(fullName);
+		Label label= sProcElem.getLabel(qName);
 		if (label instanceof SMetaAnnotation)
 			sProcMetaAnno= (SMetaAnnotation) label;
 		return(sProcMetaAnno);

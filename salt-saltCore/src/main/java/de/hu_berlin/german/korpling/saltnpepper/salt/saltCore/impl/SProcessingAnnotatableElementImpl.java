@@ -95,9 +95,9 @@ public class SProcessingAnnotatableElementImpl extends LabelableElementImpl impl
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SProcessingAnnotation getSProcessingAnnotation(String fullName) 
+	public SProcessingAnnotation getSProcessingAnnotation(String qName) 
 	{
-		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
+		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, qName));
 	}
 
 	/**

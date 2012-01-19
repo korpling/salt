@@ -98,9 +98,9 @@ public class SMetaAnnotatableElementImpl extends LabelableElementImpl implements
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SMetaAnnotation getSMetaAnnotation(String fullName) 
+	public SMetaAnnotation getSMetaAnnotation(String qName) 
 	{
-		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, fullName));
+		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->

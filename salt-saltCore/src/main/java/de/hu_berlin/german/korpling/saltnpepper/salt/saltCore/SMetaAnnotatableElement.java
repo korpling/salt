@@ -71,7 +71,7 @@ public interface SMetaAnnotatableElement extends LabelableElement {
 	 * @model
 	 * @generated
 	 */
-	SMetaAnnotation getSMetaAnnotation(String fullName);
+	SMetaAnnotation getSMetaAnnotation(String qName);
 
 	/**
 	 * <!-- begin-user-doc -->

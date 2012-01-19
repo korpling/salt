@@ -30,7 +30,7 @@
       <eParameters name="sAnnotation" eType="#//SAnnotation"/>
     </eOperations>
     <eOperations name="getSAnnotation" eType="#//SAnnotation">
-      <eParameters name="fullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="qName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="createSAnnotation" eType="#//SAnnotation">
       <eParameters name="sNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -97,8 +97,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="sLayers" upperBound="-1"
         eType="#//SLayer" volatile="true" transient="true" derived="true" eOpposite="#//SLayer/sGraph"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SNamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SNamedElement" eSuperTypes="#//SFeaturableElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SIdentifiableElement" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//IdentifiableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sElementId" eType="#//SElementId"
@@ -119,7 +120,7 @@
       <eParameters name="sProcessingAnnotation" eType="#//SProcessingAnnotation"/>
     </eOperations>
     <eOperations name="getSProcessingAnnotation" eType="#//SProcessingAnnotation">
-      <eParameters name="fullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="qName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="createSProcessingAnnotation" eType="#//SProcessingAnnotation">
       <eParameters name="sNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -153,7 +154,7 @@
       <eParameters name="sFeature" eType="#//SFeature"/>
     </eOperations>
     <eOperations name="getSFeature" eType="#//SFeature">
-      <eParameters name="sFeatureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="qName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="getSFeature" eType="#//SFeature">
       <eParameters name="sNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -179,7 +180,7 @@
       <eParameters name="sMetaAnnotation" eType="#//SMetaAnnotation"/>
     </eOperations>
     <eOperations name="getSMetaAnnotation" eType="#//SMetaAnnotation">
-      <eParameters name="fullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="qName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="createSMetaAnnotation" eType="#//SMetaAnnotation">
       <eParameters name="sNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

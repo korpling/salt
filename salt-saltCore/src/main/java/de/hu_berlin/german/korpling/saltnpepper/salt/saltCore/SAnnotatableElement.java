@@ -70,7 +70,7 @@ public interface SAnnotatableElement extends LabelableElement {
 	 * @model
 	 * @generated
 	 */
-	SAnnotation getSAnnotation(String fullName);
+	SAnnotation getSAnnotation(String qName);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -115,9 +115,9 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseSNamedElement(sNode);
 				if (result == null) result = caseSIdentifiableElement(sNode);
 				if (result == null) result = caseSProcessingAnnotatableElement(sNode);
-				if (result == null) result = caseSFeaturableElement(sNode);
 				if (result == null) result = caseSMetaAnnotatableElement(sNode);
 				if (result == null) result = caseIdentifiableElement(sNode);
+				if (result == null) result = caseSFeaturableElement(sNode);
 				if (result == null) result = caseLabelableElement(sNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -130,9 +130,9 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseSNamedElement(sRelation);
 				if (result == null) result = caseSIdentifiableElement(sRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sRelation);
-				if (result == null) result = caseSFeaturableElement(sRelation);
 				if (result == null) result = caseSMetaAnnotatableElement(sRelation);
 				if (result == null) result = caseIdentifiableElement(sRelation);
+				if (result == null) result = caseSFeaturableElement(sRelation);
 				if (result == null) result = caseLabelableElement(sRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -161,9 +161,9 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseSAnnotatableElement(sGraph);
 				if (result == null) result = caseSIdentifiableElement(sGraph);
 				if (result == null) result = caseSProcessingAnnotatableElement(sGraph);
-				if (result == null) result = caseSFeaturableElement(sGraph);
 				if (result == null) result = caseSMetaAnnotatableElement(sGraph);
 				if (result == null) result = caseIdentifiableElement(sGraph);
+				if (result == null) result = caseSFeaturableElement(sGraph);
 				if (result == null) result = caseLabelableElement(sGraph);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -171,6 +171,8 @@ public class SaltCoreSwitch<T> {
 			case SaltCorePackage.SNAMED_ELEMENT: {
 				SNamedElement sNamedElement = (SNamedElement)theEObject;
 				T result = caseSNamedElement(sNamedElement);
+				if (result == null) result = caseSFeaturableElement(sNamedElement);
+				if (result == null) result = caseLabelableElement(sNamedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -256,8 +258,8 @@ public class SaltCoreSwitch<T> {
 				if (result == null) result = caseSProcessingAnnotatableElement(sLayer);
 				if (result == null) result = caseSAnnotatableElement(sLayer);
 				if (result == null) result = caseSMetaAnnotatableElement(sLayer);
-				if (result == null) result = caseSFeaturableElement(sLayer);
 				if (result == null) result = caseIdentifiableElement(sLayer);
+				if (result == null) result = caseSFeaturableElement(sLayer);
 				if (result == null) result = caseLabelableElement(sLayer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

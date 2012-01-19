@@ -139,13 +139,22 @@ public interface SaltCorePackage extends EPackage {
 	int SNODE__SANNOTATIONS = GraphPackage.NODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNODE__SFEATURES = GraphPackage.NODE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SNODE__SNAME = GraphPackage.NODE_FEATURE_COUNT + 1;
+	int SNODE__SNAME = GraphPackage.NODE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
@@ -154,7 +163,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SNODE__SELEMENT_ID = GraphPackage.NODE_FEATURE_COUNT + 2;
+	int SNODE__SELEMENT_ID = GraphPackage.NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>SId</b></em>' attribute.
@@ -163,7 +172,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SNODE__SID = GraphPackage.NODE_FEATURE_COUNT + 3;
+	int SNODE__SID = GraphPackage.NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
@@ -172,7 +181,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SNODE__SELEMENT_PATH = GraphPackage.NODE_FEATURE_COUNT + 4;
+	int SNODE__SELEMENT_PATH = GraphPackage.NODE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
@@ -181,16 +190,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SNODE__SPROCESSING_ANNOTATIONS = GraphPackage.NODE_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SNODE__SFEATURES = GraphPackage.NODE_FEATURE_COUNT + 6;
+	int SNODE__SPROCESSING_ANNOTATIONS = GraphPackage.NODE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -311,13 +311,22 @@ public interface SaltCorePackage extends EPackage {
 	int SRELATION__SANNOTATIONS = GraphPackage.EDGE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SRELATION__SFEATURES = GraphPackage.EDGE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SNAME = GraphPackage.EDGE_FEATURE_COUNT + 1;
+	int SRELATION__SNAME = GraphPackage.EDGE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
@@ -326,7 +335,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SELEMENT_ID = GraphPackage.EDGE_FEATURE_COUNT + 2;
+	int SRELATION__SELEMENT_ID = GraphPackage.EDGE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>SId</b></em>' attribute.
@@ -335,7 +344,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SID = GraphPackage.EDGE_FEATURE_COUNT + 3;
+	int SRELATION__SID = GraphPackage.EDGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
@@ -344,7 +353,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SELEMENT_PATH = GraphPackage.EDGE_FEATURE_COUNT + 4;
+	int SRELATION__SELEMENT_PATH = GraphPackage.EDGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
@@ -353,16 +362,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SRELATION__SPROCESSING_ANNOTATIONS = GraphPackage.EDGE_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SRELATION__SFEATURES = GraphPackage.EDGE_FEATURE_COUNT + 6;
+	int SRELATION__SPROCESSING_ANNOTATIONS = GraphPackage.EDGE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -900,13 +900,22 @@ public interface SaltCorePackage extends EPackage {
 	int SGRAPH__NUM_OF_LAYERS = GraphPackage.GRAPH__NUM_OF_LAYERS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SGRAPH__SFEATURES = GraphPackage.GRAPH_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH__SNAME = GraphPackage.GRAPH_FEATURE_COUNT + 0;
+	int SGRAPH__SNAME = GraphPackage.GRAPH_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -915,7 +924,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH__SANNOTATIONS = GraphPackage.GRAPH_FEATURE_COUNT + 1;
+	int SGRAPH__SANNOTATIONS = GraphPackage.GRAPH_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
@@ -924,7 +933,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH__SELEMENT_ID = GraphPackage.GRAPH_FEATURE_COUNT + 2;
+	int SGRAPH__SELEMENT_ID = GraphPackage.GRAPH_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>SId</b></em>' attribute.
@@ -933,7 +942,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH__SID = GraphPackage.GRAPH_FEATURE_COUNT + 3;
+	int SGRAPH__SID = GraphPackage.GRAPH_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
@@ -942,7 +951,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH__SELEMENT_PATH = GraphPackage.GRAPH_FEATURE_COUNT + 4;
+	int SGRAPH__SELEMENT_PATH = GraphPackage.GRAPH_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
@@ -951,16 +960,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SGRAPH__SPROCESSING_ANNOTATIONS = GraphPackage.GRAPH_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SGRAPH__SFEATURES = GraphPackage.GRAPH_FEATURE_COUNT + 6;
+	int SGRAPH__SPROCESSING_ANNOTATIONS = GraphPackage.GRAPH_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -1008,13 +1008,58 @@ public interface SaltCorePackage extends EPackage {
 	int SGRAPH_FEATURE_COUNT = GraphPackage.GRAPH_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SFEATURABLE_ELEMENT__LABELS = GraphPackage.LABELABLE_ELEMENT__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SFEATURABLE_ELEMENT__SFEATURES = GraphPackage.LABELABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>SFeaturable Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SFEATURABLE_ELEMENT_FEATURE_COUNT = GraphPackage.LABELABLE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNAMED_ELEMENT__LABELS = SFEATURABLE_ELEMENT__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SNAMED_ELEMENT__SFEATURES = SFEATURABLE_ELEMENT__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SNAMED_ELEMENT__SNAME = 0;
+	int SNAMED_ELEMENT__SNAME = SFEATURABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>SNamed Element</em>' class.
@@ -1023,7 +1068,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SNAMED_ELEMENT_FEATURE_COUNT = 1;
+	int SNAMED_ELEMENT_FEATURE_COUNT = SFEATURABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
@@ -1473,33 +1518,6 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SFEATURABLE_ELEMENT__LABELS = GraphPackage.LABELABLE_ELEMENT__LABELS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SFEATURABLE_ELEMENT__SFEATURES = GraphPackage.LABELABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>SFeaturable Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SFEATURABLE_ELEMENT_FEATURE_COUNT = GraphPackage.LABELABLE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
 	int SMETA_ANNOTATABLE_ELEMENT__LABELS = GraphPackage.LABELABLE_ELEMENT__LABELS;
 
 	/**
@@ -1720,13 +1738,22 @@ public interface SaltCorePackage extends EPackage {
 	int SLAYER__SUB_LAYERS = GraphPackage.LAYER__SUB_LAYERS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLAYER__SFEATURES = GraphPackage.LAYER_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SLAYER__SNAME = GraphPackage.LAYER_FEATURE_COUNT + 0;
+	int SLAYER__SNAME = GraphPackage.LAYER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
@@ -1735,7 +1762,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SLAYER__SELEMENT_ID = GraphPackage.LAYER_FEATURE_COUNT + 1;
+	int SLAYER__SELEMENT_ID = GraphPackage.LAYER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>SId</b></em>' attribute.
@@ -1744,7 +1771,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SLAYER__SID = GraphPackage.LAYER_FEATURE_COUNT + 2;
+	int SLAYER__SID = GraphPackage.LAYER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
@@ -1753,7 +1780,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SLAYER__SELEMENT_PATH = GraphPackage.LAYER_FEATURE_COUNT + 3;
+	int SLAYER__SELEMENT_PATH = GraphPackage.LAYER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
@@ -1762,7 +1789,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SLAYER__SPROCESSING_ANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 4;
+	int SLAYER__SPROCESSING_ANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
@@ -1771,7 +1798,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SLAYER__SANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 5;
+	int SLAYER__SANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -1780,16 +1807,7 @@ public interface SaltCorePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SLAYER__SMETA_ANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SLAYER__SFEATURES = GraphPackage.LAYER_FEATURE_COUNT + 7;
+	int SLAYER__SMETA_ANNOTATIONS = GraphPackage.LAYER_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>SRelations</b></em>' reference list.

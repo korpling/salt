@@ -884,6 +884,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		sGraphEClass.getESuperTypes().add(this.getSProcessingAnnotatableElement());
 		sGraphEClass.getESuperTypes().add(this.getSFeaturableElement());
 		sGraphEClass.getESuperTypes().add(this.getSMetaAnnotatableElement());
+		sNamedElementEClass.getESuperTypes().add(this.getSFeaturableElement());
 		sIdentifiableElementEClass.getESuperTypes().add(theGraphPackage.getIdentifiableElement());
 		sProcessingAnnotationEClass.getESuperTypes().add(this.getSAbstractAnnotation());
 		sProcessingAnnotatableElementEClass.getESuperTypes().add(theGraphPackage.getLabelableElement());
@@ -923,7 +924,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, this.getSAnnotation(), "sAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sAnnotatableElementEClass, this.getSAnnotation(), "getSAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "fullName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sAnnotatableElementEClass, this.getSAnnotation(), "createSAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "sNS", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -983,7 +984,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, ecorePackage.getEString(), "layerName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sNamedElementEClass, SNamedElement.class, "SNamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSNamedElement_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SNamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSNamedElement_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SNamedElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sIdentifiableElementEClass, SIdentifiableElement.class, "SIdentifiableElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSIdentifiableElement_SElementId(), this.getSElementId(), this.getSElementId_SIdentifiableElement(), "sElementId", null, 0, 1, SIdentifiableElement.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1000,7 +1001,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, this.getSProcessingAnnotation(), "sProcessingAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sProcessingAnnotatableElementEClass, this.getSProcessingAnnotation(), "getSProcessingAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "fullName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sProcessingAnnotatableElementEClass, this.getSProcessingAnnotation(), "createSProcessingAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "sNS", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1028,7 +1029,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, this.getSFeature(), "sFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sFeaturableElementEClass, this.getSFeature(), "getSFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "sFeatureName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sFeaturableElementEClass, this.getSFeature(), "getSFeature", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "sNamespace", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1052,7 +1053,7 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, this.getSMetaAnnotation(), "sMetaAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sMetaAnnotatableElementEClass, this.getSMetaAnnotation(), "getSMetaAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "fullName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(sMetaAnnotatableElementEClass, this.getSMetaAnnotation(), "createSMetaAnnotation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "sNS", 0, 1, IS_UNIQUE, IS_ORDERED);
