@@ -78,6 +78,9 @@ public class NodeImpl extends IdentifiableElementImpl implements Node
 	}
 	
 
+	/**
+	 * Initializes objects of this class. 
+	 */
 	private void init()
 	{
 	}
