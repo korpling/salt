@@ -619,22 +619,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			i++;
 		}//if node already exists, create new Id
 		
-		//old since 19.08.2010
-//		//if node with the given id already exists
-//		if (this.getIndexMgr().getIndex(IDX_NODENAME).hasElement(node.getId())) 
-//			throw new GraphInsertException("A node with the given name already exists: "+ node.getId());
-
 		this.getNodes().add(node);
 		this.getIndexMgr().getIndex(IDX_NODENAME).addElement(node.getId(), node);
 		{//create a notifier for changes in node
 			node.eAdapters().add(this.graphAdapter);
 			node.getIdentifier().eAdapters().add(this.graphAdapter);
 		}
-		
-//		if (this.logService!= null) 
-//		{	
-//			this.logService.log(LogService.LOG_DEBUG,"node '"+node.getId()+"' inserted");
-//		}
 	}
 	
 	/**
@@ -671,8 +661,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= false;
 		if ( (node!= null) && (node.getId()!= null))
 		{
-			//this.changeOperation(true); //gibt an ob Funktion die Graph-Struktur 'ndert
-			
 			if (this.getIndexMgr().getIndex(IDX_NODENAME).hasElement(node.getId()))
 			{	
 				//deleting all outgoing edges
@@ -690,9 +678,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				this.getNodes().remove(this.getNode(node.getId()));
 				//removing node from all indexes
 				this.getIndexMgr().removeElement(this.getNode(node.getId()));
-				
-//				if (this.logService != null) 
-//					this.logService.log(LogService.LOG_DEBUG, "node '"+node.getId()+"' removed");
 			}
 			retVal= true;
 		}
@@ -778,29 +763,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			edge.setId(edge.getId()+"_"+(getNumOfEdges() +i));
 			i++;
 		}//if edge already exists, create new Id
-		
-		//old since 19.08.2010
-//		if (this.getEdge(edge.getId())!= null)
-//		{//if edge already exists, create new Id
-//			edge.setId("edge"+getNumOfEdges());
-//		}//if edge already exists, expand id
-			
+					
 		//put new edge into edge list
 		this.getEdges().add(edge);
 		//put edge into naming index
 		this.getIndexMgr().getIndex(IDX_EDGENAME).addElement(edge.getId(), edge);
-		
-		//if edge has no source or no target, put it into an incomplete edge list
-//		if (	(edge.getSource()== null)||
-//				(edge.getTarget()== null))
-//		{
-//			//must be outcommented, because of automatic loading of EMF, first edge will be added to graph, secong source and target will be set 
-//			if (edge.getSource()== null)
-//				throw new GraphException("Cannot insert the given edge, because source of the given edge ('"+edge.getId()+"') is empty.");
-//			if (edge.getTarget()== null)
-//				throw new GraphException("Cannot insert the given edge, because target of the given edge ('"+edge.getId()+"') is empty.");
-//		}
-		
+				
 		//if source is not null
 		if (edge.getSource()!= null)
 		{
@@ -820,17 +788,16 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		}	
 		
 		{//create a notifier for changes in edge
-			//System.out.println("basicAddEdge:");
 			edge.eAdapters().add(this.graphAdapter);
 			edge.getIdentifier().eAdapters().add(this.graphAdapter);
 		}//create a notifier for changes in edge
 		
-		if (	(edge.getSource()!= null) &&
-				(edge.getTarget()!= null))
-		{	
-//			if (this.logService!= null)
-//				this.logService.log(LogService.LOG_DEBUG, "create edge from: "+edge.getSource().getId() + "\t, to: "+ edge.getTarget().getId()+")");
-		}
+//		if (	(edge.getSource()!= null) &&
+//				(edge.getTarget()!= null))
+//		{	
+////			if (this.logService!= null)
+////				this.logService.log(LogService.LOG_DEBUG, "create edge from: "+edge.getSource().getId() + "\t, to: "+ edge.getTarget().getId()+")");
+//		}
 	}
 	
 	/**
@@ -921,8 +888,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= false;
 		if (edge!= null)
 		{
-//			if (this.logService!= null)
-//				this.logService.log(LogService.LOG_DEBUG, "removing edge: "+ edge);
 			//removing edge from all indexes
 			this.getIndexMgr().removeElement(edge);
 			//removing edge from internal list
@@ -1223,26 +1188,26 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			{
 				if (other.getLayers()!= null)
 				{	if (differences!= null)
-						differences.add("The number of layers of this graph and the given one differs. "+this.getId()+": null, "+other.getId()+": "+other.getLayers().size()+".");
+						differences.add(this.getClass().getSimpleName()+": The number of layers of this graph and the given one differs. "+this.getId()+": null, "+other.getId()+": "+other.getLayers().size()+".");
 					else return false;
 				}
 			}
 			else if (other.getLayers()== null)
 			if (other.getLayers()!= null)
 			{	if (differences!= null)
-					differences.add("The number of layers of this graph and the given one differs. "+this.getId()+": "+this.getLayers().size()+", "+other.getId()+": null.");
+					differences.add(this.getClass().getSimpleName()+": The number of layers of this graph and the given one differs. "+this.getId()+": "+this.getLayers().size()+", "+other.getId()+": null.");
 				else return false;
 			}
 			else if (this.getLayers().hashCode()!= other.getLayers().hashCode())
 			{	
 				if (differences!= null)
-					differences.add("The hashcode of layers is not the same.");
+					differences.add(this.getClass().getSimpleName()+": The hashcode of layers is not the same.");
 				else return false;
 			}
 			if (this.getLayers().size()!= other.getLayers().size())
 			{//check size of sublayers
 				if (differences!= null)
-					differences.add("The number of layers of this graph and the given one differs. "+this.getId()+": "+this.getLayers().size()+", "+other.getId()+": "+other.getLayers().size()+".");
+					differences.add(this.getClass().getSimpleName()+": The number of layers of this graph and the given one differs. "+this.getId()+": "+this.getLayers().size()+", "+other.getId()+": "+other.getLayers().size()+".");
 				else return(false);
 			}//check size of sublayers
 		//end: check layers
@@ -1252,14 +1217,14 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				if (other.getNodes()!= null)
 				{	
 					if (differences!= null)
-						differences.add("The number of nodes of this graph and the given one differs. "+this.getId()+": null, "+other.getId()+": "+other.getNodes().size()+".");
+						differences.add(this.getClass().getSimpleName()+": The number of nodes of this graph and the given one differs. "+this.getId()+": null, "+other.getId()+": "+other.getNodes().size()+".");
 					else return false;
 				}
 			}
 			else if (other.getNodes()== null)
 			{
 				if (differences!= null)
-					differences.add("The number of nodes of this graph and the given one differs. "+this.getId()+": "+this.getNodes().size()+", "+other.getId()+": null.");
+					differences.add(this.getClass().getSimpleName()+": The number of nodes of this graph and the given one differs. "+this.getId()+": "+this.getNodes().size()+", "+other.getId()+": null.");
 				else return false;
 			}
 			else 
@@ -1267,20 +1232,17 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				if (this.getNodes().size()!= other.getNodes().size())
 				{//check size of nodes
 					if (differences!= null)
-						differences.add("The number of nodes of this graph and the given one differs. "+this.getId()+": "+this.getNodes().size()+", "+other.getId()+": "+other.getNodes().size()+".");
+						differences.add(this.getClass().getSimpleName()+": The number of nodes of this graph and the given one differs. "+this.getId()+": "+this.getNodes().size()+", "+other.getId()+": "+other.getNodes().size()+".");
 					else return(false);
 				}//check size of nodes
 				
-				for (int i= 0; i< this.getNodes().size(); i++)
-				{
-					if (differences!= null)
-					{
-						this.getNodes().get(i).equals(differences, other.getNodes().get(i));
-					}
-					else
-					{
-						if (!this.getNodes().get(i).equals(differences, other.getNodes().get(i)))
-							return(false);
+				// TODO: remove this when hashEList is part of GraphImpl
+				HashSet<Node> thisNodes = new HashSet<Node>(this.getNodes());
+				for (Node node : other.getNodes()){
+					if (! thisNodes.contains(node)){
+						if (differences!= null)
+							differences.add(this.getClass().getSimpleName()+": Node "+node.getId()+" in "+ other.getId() + " has no equivalent in "+ this.getId());
+						else return false;
 					}
 				}
 			}
@@ -1292,14 +1254,14 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				if (other.getEdges()!= null)
 				{	
 					if (differences!= null)
-						differences.add("The number of edges of this graph and the given one differs. "+this.getId()+": null, "+other.getId()+": "+other.getEdges().size()+".");
+						differences.add(this.getClass().getSimpleName()+": The number of edges of this graph and the given one differs. "+this.getId()+": null, "+other.getId()+": "+other.getEdges().size()+".");
 					else return false;
 				}
 			}
 			else if (other.getEdges()== null)
 			{
 				if (differences!= null)
-					differences.add("The number of edges of this graph and the given one differs. "+this.getId()+": "+this.getEdges().size()+", "+other.getId()+": null.");
+					differences.add(this.getClass().getSimpleName()+": The number of edges of this graph and the given one differs. "+this.getId()+": "+this.getEdges().size()+", "+other.getId()+": null.");
 				else return false;
 			}
 			else 
@@ -1307,19 +1269,18 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				if (this.getEdges().size()!= other.getEdges().size())
 				{//check size of edges
 					if (differences!= null)
-						differences.add("The number of edges of this graph and the given one differs. "+this.getId()+": "+this.getEdges().size()+", "+other.getId()+": "+other.getEdges().size()+".");
+						differences.add(this.getClass().getSimpleName()+": The number of edges of this graph and the given one differs. "+this.getId()+": "+this.getEdges().size()+", "+other.getId()+": "+other.getEdges().size()+".");
 					else return(false);
 				}//check size of edges
-				for (int i= 0; i< this.getEdges().size(); i++)
-				{
-					if (differences!= null)
-					{
-						this.getEdges().get(i).equals(differences, other.getEdges().get(i));
-					}
-					else
-					{
-						if (!this.getEdges().get(i).equals(differences, other.getEdges().get(i)))
-							return(false);
+				// TODO: remove this when hashEList is part of GraphImpl
+				HashSet<Edge> thisEdges = new HashSet<Edge>(this.getEdges());
+				for (Edge edge: other.getEdges()){
+					if (! thisEdges.contains(edge)){
+
+
+						if (differences!= null)	
+							differences.add(this.getClass().getSimpleName()+": Edge "+edge.getId()+" in "+ other.getId() + " has no equivalent in "+ this.getId());
+						else return false;
 					}
 				}
 			}

@@ -151,7 +151,7 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 	public void setId(String newId) 
 	{
 		if (	(newId== null)||
-				(newId.equals("")))
+				(newId.isEmpty()))
 			throw new GraphException("Cannot not add an empty id to an element of type '"+this.getClass()+"'.");
 		this.identAccessor.setId(this, newId);
 	}

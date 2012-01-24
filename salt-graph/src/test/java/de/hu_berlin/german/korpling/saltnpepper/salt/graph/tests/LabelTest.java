@@ -422,7 +422,6 @@ public class LabelTest extends LabelableElementTest {
 			assertNull(this.getFixture().differences(this.getFixture()));
 			assertNotNull(this.getFixture().differences(label));
 			label.setNamespace(ns);
-			System.out.println("------------>"+ this.getFixture().differences(label));
 			assertNull(this.getFixture().differences(label));
 		}//namespace
 		

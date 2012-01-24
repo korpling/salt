@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -96,7 +97,7 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 	{
 		if (label== null)
 			throw new GraphException("Cannot add an empty label object.");
-		if ((label.getName()== null) || (label.getName().equals("")))
+		if ((label.getName()== null) || (label.getName().isEmpty()))
 			throw new GraphException("Cannot add a label object without a name.");
 		//checking if QName already exists
 		boolean exists= false;
@@ -126,7 +127,7 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 	private String getQName(String namespace, String name)
 	{
 		String retVal= null;
-		if ((namespace!= null) && (!namespace.equals("")))
+		if ((namespace!= null) && (!namespace.isEmpty()))
 			retVal= namespace + LabelImpl.GET_NS_SEPERATOR();
 		retVal= retVal + name;
 		return(retVal);
@@ -147,7 +148,7 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 	 */
 	public Label getLabel(String QName) 
 	{
-		if ((QName== null) || (QName.equals("")))
+		if ((QName== null) || (QName.isEmpty()))
 				return(null);
 		Label retLabel= null;
 		for (Label label: this.getLabels())
@@ -237,7 +238,7 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 	public boolean hasLabel(String QName) 
 	{
 		boolean retVal= false;
-		if ((QName== null) || (QName.equals("")))
+		if ((QName== null) || (QName.isEmpty()))
 			retVal= false;
 		else
 		{
@@ -279,7 +280,6 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 		return result;
 	}
 
-//	private volatile Boolean differencesInProcess= false; 
 	/**
 	 * Returns all the differences between this object and the given one as a list of strings. This method uses the same
 	 * comparisons as the equals method. 
@@ -319,14 +319,14 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 		if (obj == null)
 		{
 			if (differences!= null)
-				differences.add("The given object is null.");
+				differences.add(this.getClass().getSimpleName()+": The given object is null.");
 			else return false;
 		}
 		if (!(obj instanceof LabelableElement))
 		{
 			if (differences!= null)
 			{
-				differences.add("The given object is not of type '"+getClass()+"', it is of type '"+obj.getClass()+"'.");
+				differences.add(this.getClass().getSimpleName()+": The given object is not of type '"+getClass()+"', it is of type '"+obj.getClass()+"'.");
 			}
 			return false;
 		}
@@ -336,7 +336,7 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 			if (other.getLabels() != null)
 			{
 				if (differences!= null)
-					differences.add("This object contains no labels, but the given one does.");
+					differences.add(this.getClass().getSimpleName()+": This object contains no labels, but the given one does.");
 				else return false;
 			}
 		} 
@@ -345,15 +345,18 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 			if (this.getLabels().size()!= other.getLabels().size())
 			{
 				if (differences!= null)
-					differences.add("The number of labels for both objects is not the same. For this object it is '"+this.getLabels().size()+"', for the object to compare it is '"+other.getLabels().size()+"'.");
+					differences.add(this.getClass().getSimpleName()+": The number of labels for both objects is not the same, this object has '"+this.getLabels().size()+"' labels, whereas the other object contains '"+other.getLabels().size()+"'.");
 				else return false;
 			}
-			for (int i= 0; i< this.getLabels().size(); i++)
+			// TODO: remove this when hashEList is part of labelableElementImpl
+			HashSet<Label> thisLabels = new HashSet<Label>(this.getLabels());
+			for (Label label : other.getLabels())
 			{
-				if (!this.getLabels().get(i).equals(differences, other.getLabels().get(i)))
-				{
+			// for label l in this.getLabels: get equivalent label in hashedEList
+				// if not existant: >> Differences
+				if (! thisLabels.contains(label)){
 					if (differences!= null)
-						differences.add("Two labels does not match. The one coming from this '"+this.getLabels().get(i)+"' and the one comming from the given object '"+other.getLabels().get(i)+"'.");
+						differences.add(this.getClass().getSimpleName()+": Label "+label.getQName()+" in "+this+" has no equivalent in"+other);
 					else return false;
 				}
 			}

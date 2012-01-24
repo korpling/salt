@@ -179,12 +179,11 @@ public class LabelImpl extends LabelableElementImpl implements Label
 		}
 		if (differences!= null)
 		{//needs only to be checked if differences shall be found, because in that case, super returned with false, but method goes on
-//			if (obj.getClass()!= getClass())
 			if (!(obj instanceof Label))
 				return(false);
 		}//needs only to be checked if differences shall be found, because in that case, super returned with false, but method goes on
 		Label other = (Label) obj;
-		{//namespace
+		//start: namespace
 			if (this.getNamespace() == null) 
 			{
 				if (other.getNamespace()!= null)
@@ -206,8 +205,8 @@ public class LabelImpl extends LabelableElementImpl implements Label
 					differences.add("The values of both namespaces differs, the namespace of this label is '"+this.getNamespace()+"', whereas the namespace of the given label is '"+other.getNamespace()+"'.");
 				else return false;
 			}
-		}//namespace
-		{//name
+		//end: namespace
+		//start: name
 			if (this.getName() == null) 
 			{
 				if (other.getName()!= null)
@@ -229,8 +228,8 @@ public class LabelImpl extends LabelableElementImpl implements Label
 					differences.add("The values of both names differs, the name of this label is '"+this.getName()+"', whereas the name of the given label is '"+other.getName()+"'.");
 				else return false;
 			}
-		}//name
-		{//value
+		//end: name
+		//start: value
 			if (this.getValue() == null) 
 			{
 				if (other.getValue()!= null)
@@ -252,7 +251,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 					differences.add("The values of both values differs, the value of this label is '"+this.getValue()+"', whereas the value of the given label is '"+other.getValue()+"'.");
 				else return false;
 			}
-		}//value
+		//end: value
 		return true;
 	}
 	
@@ -306,7 +305,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	 */
 	public void setName(String newName) 
 	{
-		if ((newName== null) || (newName.equals("")))
+		if ((newName== null) || (newName.isEmpty()))
 			throw new GraphException("Cannot set the name of this label object, because it is empty.");
 		if (newName.contains(GET_NS_SEPERATOR()))
 			throw new GraphException("Cannot set the name to the given, because a namespace with namespace seperaor is illegal.");
@@ -326,9 +325,9 @@ public class LabelImpl extends LabelableElementImpl implements Label
 		
 		if ((this.getNamespace()== null) && (this.getName()== null))
 			retVal= null;
-		else if ((this.getNamespace()== null)  || (this.getNamespace().equals("")))
+		else if ((this.getNamespace()== null)  || (this.getNamespace().isEmpty()))
 			retVal.append(this.getName());
-		else if ((this.getName()== null) || (this.getName().equals("")))
+		else if ((this.getName()== null) || (this.getName().isEmpty()))
 			retVal.append(this.getNamespace());
 		else
 		{	
@@ -348,7 +347,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	 */
 	public void setQName(String newQName) 
 	{
-		if ((newQName == null) || (newQName.equals("")))
+		if ((newQName == null) || (newQName.isEmpty()))
 			throw new GraphException("Cannot set new name, because it�s null or empty. ");
 		String[] fullName= newQName.split(GET_NS_SEPERATOR());
 		StringBuffer ns= new StringBuffer();
@@ -360,7 +359,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 				name= fullName[i];
 			else 
 			{					
-				if ((ns== null) || (ns.toString().equals("")))
+				if ((ns== null) || (ns.toString().isEmpty()))
 					ns.append(fullName[i]);
 				else 
 				{
@@ -405,28 +404,6 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	 * @ordered
 	 */
 	protected static final String VALUE_STRING_EDEFAULT = null;
-//	/**
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 */
-//	public Object getValue() 
-//	{
-//		return(this.value);
-//	}
-//
-//	/**
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 */
-//	public void setValue(Object newValue) 
-//	{
-//		this.value= newValue;
-//		
-//		//synchronize with valueString
-//		if (value!= null)
-//			this.valueString= this.value.toString();
-//		else this.valueString= null;
-//	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -486,20 +463,6 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	{
 		//empty
 	}
-
-	//	/**
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 */
-//	public void setValueString(String newValueString) {
-//		String oldValueString = valueString;
-//		valueString = newValueString;
-//		if (eNotificationRequired())
-//			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__VALUE_STRING, oldValueString, valueString));
-//		
-//		//synchronize with value
-//		this.setValue(newValueString);
-//	}
 
 	// ------------------------------ start: static ns_seperator
 	
