@@ -32,6 +32,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNamedElementImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
 
 /**
@@ -187,10 +188,10 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * <!-- end-user-doc -->
 	 */
 	public void setSName(String newSName) {
-		String oldSName = sName;
-		sName = newSName;
+		String oldSName = this.getSName();
+		SNamedElementImpl.setSName(this, newSName);
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SNODE__SNAME, oldSName, sName));
+			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SNODE__SNAME, oldSName, newSName));
 		if (this.getSDocumentGraph()!=null) {
 			this.getSDocumentGraph().basicSetSElementId();
 		}

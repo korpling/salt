@@ -129,7 +129,7 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 		if (timeline== null)
 		{	
 			String pot= null;
-			if (sPointOfTime.equals(""))
+			if (sPointOfTime.isEmpty())
 				pot= "0";
 			else pot= sPointOfTime;
 			
@@ -138,7 +138,7 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 		else
 		{
 			String pot= null;
-			if (sPointOfTime.equals(""))
+			if (sPointOfTime.isEmpty())
 			{
 				pot= this.getSPointsOfTime().size()+ "";
 			}
@@ -147,22 +147,6 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 			timeline= timeline+ timeLineSeperator + pot;
 		}
 		super.setSData(timeline);
-//		SFeature sFeature= super.getSData(); 
-//		String timeline= null;
-//		
-//		if (sFeature == null)
-//		{
-//			sFeature= SaltCommonFactory.eINSTANCE.createSFeature();
-//			sFeature.setSName(KW_TIMELINE);
-//			this.addSFeature(sFeature);
-//		}
-//		else 
-//			timeline= (String) sFeature.getSValue();
-//		if (timeline== null)
-//			timeline= sPointOfTime.toString();
-//		else
-//			timeline= timeline+ timeLineSeperator + sPointOfTime;
-//		sFeature.setSValue(timeline);	
 	}
 
 	/**

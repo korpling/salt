@@ -523,6 +523,13 @@ public interface SDocumentGraph extends SGraph {
 	 */
 	SToken createSToken(SSequentialDS sSequentialDS, Integer sStart, Integer sEnd);
 
+	
+	/**
+	 * Sets the SName of the SDocumentGraphImpl, but the parameter newSName is just a dummy. The SName of the corresponding SDocument plus "_graph" will be the SName.
+	 * @param newSName this value will be ignored
+	 */
+	public void setSName(String newSName);
+	
 	/**
 	 * What is this???
 	 */

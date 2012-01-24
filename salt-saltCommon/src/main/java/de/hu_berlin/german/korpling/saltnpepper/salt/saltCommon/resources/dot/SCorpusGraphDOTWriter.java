@@ -226,7 +226,7 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 					String dotString= "";
 					for (String sType: sTypes)
 					{	
-						if (dotString.equalsIgnoreCase(""))
+						if (dotString.isEmpty())
 							dotString= sType;
 						else dotString= dotString + sType+ ", ";
 					}

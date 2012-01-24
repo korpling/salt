@@ -342,7 +342,6 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 	 */
 	public void testEquals_Identtical_Empty()
 	{
-		System.out.println(this.getFixture().differences(getFixture()));
 		assertTrue(this.getFixture().equals(this.getFixture()));
 		assertTrue(this.getFixture().equals(SaltFactory.eINSTANCE.createSCorpusGraph()));
 	}

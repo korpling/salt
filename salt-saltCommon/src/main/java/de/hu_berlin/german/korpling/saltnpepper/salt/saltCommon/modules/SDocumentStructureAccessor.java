@@ -266,7 +266,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		travObj.waitUntilFinished();
 		if (	(this.sTextDS!= null) &&
 				(this.sTextDS.getSText()!= null) &&
-				(!this.sTextDS.getSText().equals("")))
+				(!this.sTextDS.getSText().isEmpty()))
 		{
 			this.currPOTPair.startPOT= this.startTextPos;
 			this.currPOTPair.endPOT= this.endTextPos;
@@ -347,7 +347,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		travObj.waitUntilFinished();
 		if (	(this.sTextDS!= null) &&
 				(this.sTextDS.getSText()!= null) &&
-				(!this.sTextDS.getSText().equals("")))
+				(!this.sTextDS.getSText().isEmpty()))
 			retString= this.sTextDS.getSText().substring(this.startTextPos, this.endTextPos);
 		return(retString);
 	}

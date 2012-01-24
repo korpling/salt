@@ -19,8 +19,8 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStruct
 
 import java.util.Collection;
 import java.util.Hashtable;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -48,7 +48,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
@@ -153,7 +152,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		
 		{//create a name if none exists
 			if (	(((SRelation)edge).getSName()== null)||
-					(((SRelation)edge).getSName().equals("")))
+					(((SRelation)edge).getSName().isEmpty()))
 			{
 				if ( edge instanceof STextualRelation)
 					((SRelation)edge).setSName("sTextRel"+ (this.getSTextualRelations().size()+1));
@@ -204,7 +203,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		
 		{//create a name if none exists
 			if (	(((SNode)node).getSName()== null)||
-					(((SNode)node).getSName().equals("")))
+					(((SNode)node).getSName().isEmpty()))
 			{
 				if ( node instanceof STextualDS)
 					((SNode)node).setSName("sText"+ (this.getSTextualDSs().size()+1));
@@ -221,7 +220,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}	
 		
 		if (	(((SNode)node).getSId()== null)||
-				(((SNode)node).getSId().equals("")))
+				(((SNode)node).getSId().isEmpty()))
 			((SNode)node).setSId(this.getSId() + "#"+ ((SNode)node).getSName());
 		super.basicAddNode(node);
 		
@@ -794,7 +793,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 */
 	public void setSName(String newSName) {
 		if (this.getSDocument()!=null) {
-			this.sName = this.getSDocument().getSName() + SDocumentStructurePackage.SDOCUMENTGRAPH_ENDING;
+			super.setSName(this.getSDocument().getSName() + SDocumentStructurePackage.SDOCUMENTGRAPH_ENDING);
 		}
 	}
 	

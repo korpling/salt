@@ -149,7 +149,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 					if (sCorpusGraph.getSElementId()== null)
 						sCorpusGraph.setSElementId(SaltCommonFactory.eINSTANCE.createSElementId());
 					if (	(sCorpusGraph.getSId()== null)||
-							(sCorpusGraph.getSId().equals("")))
+							(sCorpusGraph.getSId().isEmpty()))
 					{
 						this.numOfSCorpusGraphs++;
 						sCorpusGraph.setSId(KW_SCORPUS_GRAPH_ID + numOfSCorpusGraphs);

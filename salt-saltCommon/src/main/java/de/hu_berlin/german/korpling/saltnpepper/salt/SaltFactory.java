@@ -27,7 +27,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemantics
 
 public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	/**
-	 * The singleton instance of the SaltFactory. This factory creates all objects defined by the Salt model.
+	 * The singleton instance of the SaltFactory class. This factory creates all objects defined by the Salt model.
 	 * @generated
 	 */
 	SaltFactory eINSTANCE = de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl.init();
