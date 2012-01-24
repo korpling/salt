@@ -72,10 +72,15 @@ public class SRelationStoringTest extends TestCase
 		SRelation sRel2= null;
 		String tmpFileName= "_TMP/SRelation.saltCore";
 		
-		{//adding id
-			String id= "salt:/rel1";
+		//start: adding sName
+			String sName= "rel1";
+			this.getFixture().setSName(sName);
+		//end: adding sName
+	
+		//start: adding id
+			String id= "salt:/"+ sName;
 			this.getFixture().setSId(id);
-		}
+		//end: adding id
 		
 		{//adding annotations
 			SAnnotation sAnno= null;

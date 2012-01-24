@@ -51,7 +51,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  * </ul>
  * @author Florian Zipser
  *
+ * @deprecated since Salt 1.1.3
  */
+@Deprecated
 public class SDocumentValidator extends SAccessorModule implements TraversalObject
 {
 	/**

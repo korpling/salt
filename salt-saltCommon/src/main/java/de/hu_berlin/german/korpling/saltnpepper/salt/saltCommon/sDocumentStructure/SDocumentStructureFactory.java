@@ -136,6 +136,15 @@ public interface SDocumentStructureFactory extends EFactory {
 	SDominanceRelation createSDominanceRelation();
 
 	/**
+	 * Returns a new object of class '<em>SData Source Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SData Source Sequence</em>'.
+	 * @generated
+	 */
+	SDataSourceSequence createSDataSourceSequence();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

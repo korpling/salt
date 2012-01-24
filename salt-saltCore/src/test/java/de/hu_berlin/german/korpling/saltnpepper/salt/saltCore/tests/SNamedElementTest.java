@@ -28,17 +28,15 @@ import junit.textui.TestRunner;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>SNamed Element</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName() <em>SName</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
-public class SNamedElementTest extends TestCase {
-
-	/**
-	 * The fixture for this SNamed Element test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SNamedElement fixture = null;
+public class SNamedElementTest extends SFeaturableElementTest {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -60,23 +58,14 @@ public class SNamedElementTest extends TestCase {
 	}
 
 	/**
-	 * Sets the fixture for this SNamed Element test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(SNamedElement fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
 	 * Returns the fixture for this SNamed Element test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected SNamedElement getFixture() {
-		return fixture;
+		return (SNamedElement)fixture;
 	}
 
 	/**
@@ -101,11 +90,26 @@ public class SNamedElementTest extends TestCase {
 		setFixture(null);
 	}
 	
-	public void testGetName()
-	{
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName() <em>SName</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName()
+	 */
+	public void testGetSName() {
 		String name= "name";
 		this.getFixture().setSName(name);
 		assertEquals(name, this.getFixture().getSName());
 	}
 
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#setSName(java.lang.String) <em>SName</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#setSName(java.lang.String)
+	 */
+	public void testSetSName() 
+	{
+		this.testGetSName();
+	}
 } //SNamedElementTest

@@ -56,8 +56,8 @@ public class GrAFStarter
 			throw new FileNotFoundException("Cannot run test, because file does not exist: "+ file.getAbsolutePath());
 		Properties props = new Properties();
 		props.put(GrAFResource.PROP_GRAF_HEADER_FILE_ENDING, "pdh");
-		props.put(GrAFResource.PROP_GRAF_LAYER_TO_TYPE+".is", GRAF_MAPPING_TYPE.POINTER);
 		props.put(GrAFResource.PROP_GRAF_LAYER_TO_TYPE+".xle", GRAF_MAPPING_TYPE.HIERARCHIE);
+		props.put(GrAFResource.PROP_GRAF_LAYER_TO_TYPE+".is", GRAF_MAPPING_TYPE.HIERARCHIE);
 		props.put(GrAFResource.PROP_GRAF_LAYER_TO_TYPE+".prosody", GRAF_MAPPING_TYPE.HIERARCHIE);
 		
 		project.loadSaltProject_GrAF(URI.createFileURI(file.getAbsolutePath()),props);

@@ -34,7 +34,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
-
+@Deprecated
 public class GraphTraverserObject implements Runnable
 {
 	private static Long idCounter= 0l;
@@ -314,12 +314,7 @@ public class GraphTraverserObject implements Runnable
 							} catch (StackOverflowError e) 
 							{
 								System.out.println("\n\nCycle detected, cannot raise an error\n\n");
-//								System.err.println("An exception occurs while traversing the graph '"+this.getGraph().getId()+"'. This exception can be caused by a cycle, last visited nodes: '"+father.getId()+"-> "+currNode.getId()+"'.");
 								System.exit(-1);
-								//GraphModuleRecursionException ex= new GraphModuleRecursionException("An exception occurs while traversing the graph '"+this.getGraph().getId()+"'. This exception can be caused by a cycle, last visited nodes: '"+father.getId()+"-> "+currNode.getId()+"'. Original message: ");
-								//if (this.getLogService()!= null)
-								//	this.getLogService().log(LogService.LOG_ERROR, ex.toString());
-								//this.getExceptions().add(ex);
 							}
 							i++;
 						}

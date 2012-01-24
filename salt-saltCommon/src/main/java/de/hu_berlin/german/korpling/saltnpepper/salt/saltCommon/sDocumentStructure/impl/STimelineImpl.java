@@ -37,8 +37,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.STimelineImpl#getSPointsOfTime <em>SPoints Of Time</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.STimelineImpl#getSDocumentGraph <em>SDocument Graph</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.STimelineImpl#getSPointsOfTime <em>SPoints Of Time</em>}</li>
  * </ul>
  * </p>
  *
@@ -129,7 +129,7 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 		if (timeline== null)
 		{	
 			String pot= null;
-			if (sPointOfTime.equals(""))
+			if (sPointOfTime.isEmpty())
 				pot= "0";
 			else pot= sPointOfTime;
 			
@@ -138,7 +138,7 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 		else
 		{
 			String pot= null;
-			if (sPointOfTime.equals(""))
+			if (sPointOfTime.isEmpty())
 			{
 				pot= this.getSPointsOfTime().size()+ "";
 			}
@@ -147,22 +147,6 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 			timeline= timeline+ timeLineSeperator + pot;
 		}
 		super.setSData(timeline);
-//		SFeature sFeature= super.getSData(); 
-//		String timeline= null;
-//		
-//		if (sFeature == null)
-//		{
-//			sFeature= SaltCommonFactory.eINSTANCE.createSFeature();
-//			sFeature.setSName(KW_TIMELINE);
-//			this.addSFeature(sFeature);
-//		}
-//		else 
-//			timeline= (String) sFeature.getSValue();
-//		if (timeline== null)
-//			timeline= sPointOfTime.toString();
-//		else
-//			timeline= timeline+ timeLineSeperator + sPointOfTime;
-//		sFeature.setSValue(timeline);	
 	}
 
 	/**
@@ -173,11 +157,11 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SDocumentStructurePackage.STIMELINE__SPOINTS_OF_TIME:
-				return getSPointsOfTime();
 			case SDocumentStructurePackage.STIMELINE__SDOCUMENT_GRAPH:
 				if (resolve) return getSDocumentGraph();
 				return basicGetSDocumentGraph();
+			case SDocumentStructurePackage.STIMELINE__SPOINTS_OF_TIME:
+				return getSPointsOfTime();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,12 +175,12 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SDocumentStructurePackage.STIMELINE__SDOCUMENT_GRAPH:
+				setSDocumentGraph((SDocumentGraph)newValue);
+				return;
 			case SDocumentStructurePackage.STIMELINE__SPOINTS_OF_TIME:
 				getSPointsOfTime().clear();
 				getSPointsOfTime().addAll((Collection<? extends String>)newValue);
-				return;
-			case SDocumentStructurePackage.STIMELINE__SDOCUMENT_GRAPH:
-				setSDocumentGraph((SDocumentGraph)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -210,11 +194,11 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SDocumentStructurePackage.STIMELINE__SPOINTS_OF_TIME:
-				getSPointsOfTime().clear();
-				return;
 			case SDocumentStructurePackage.STIMELINE__SDOCUMENT_GRAPH:
 				setSDocumentGraph((SDocumentGraph)null);
+				return;
+			case SDocumentStructurePackage.STIMELINE__SPOINTS_OF_TIME:
+				getSPointsOfTime().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -228,10 +212,10 @@ public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SDocumentStructurePackage.STIMELINE__SPOINTS_OF_TIME:
-				return !getSPointsOfTime().isEmpty();
 			case SDocumentStructurePackage.STIMELINE__SDOCUMENT_GRAPH:
 				return basicGetSDocumentGraph() != null;
+			case SDocumentStructurePackage.STIMELINE__SPOINTS_OF_TIME:
+				return !getSPointsOfTime().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

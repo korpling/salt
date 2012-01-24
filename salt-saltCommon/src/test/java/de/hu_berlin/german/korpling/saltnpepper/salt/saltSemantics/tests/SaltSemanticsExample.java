@@ -87,7 +87,7 @@ public class SaltSemanticsExample {
 				// Otherwise, it's directly treated as a URL.
 				//
 				File file = new File(args[i]);
-				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()): URI.createURI(args[0]);
+				URI uri = file.isFile() ? URI.createFileURI(file.getAbsolutePath()): URI.createURI(args[i]);
 
 				try {
 					// Demand load resource for this file.

@@ -44,10 +44,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
  * @generated
  */
 public class IdentifiableElementImpl extends LabelableElementImpl implements IdentifiableElement 
-{
-	//TODO to delete
-	public static Long equalTime= 0l;
-	
+{	
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -184,7 +181,6 @@ public class IdentifiableElementImpl extends LabelableElementImpl implements Ide
 		}
 		if (differences!= null)
 		{//needs only to be checked if differences shall be found, because in that case, super returned with false, but method goes on
-//			if (!this.getClass().equals(obj.getClass()))
 			if (!(obj instanceof IdentifiableElement))
 				return(false);
 		}//needs only to be checked if differences shall be found, because in that case, super returned with false, but method goes on
@@ -235,7 +231,7 @@ public class IdentifiableElementImpl extends LabelableElementImpl implements Ide
 	@Override
 	public void eNotify(Notification notification) 
 	{
-		if(notification.getFeature().equals(GraphPackage.Literals.LABELABLE_ELEMENT__LABELS)) 
+		if(GraphPackage.Literals.LABELABLE_ELEMENT__LABELS.equals(notification.getFeature())) 
 		{//if change happens in LabelableElement.getLabels()
 			switch (notification.getEventType()) 
 			{
@@ -355,8 +351,8 @@ public class IdentifiableElementImpl extends LabelableElementImpl implements Ide
 				if (!(label instanceof Identifier))
 				{	
 					if (label.getNamespace()!= null)
-						strBuffer.append(label.getNamespace()+"::");
-					strBuffer.append(label.getName()+"::");
+						strBuffer.append(label.getNamespace()+":");
+					strBuffer.append(label.getName()+"=");
 					strBuffer.append(label.getValue());
 					strBuffer.append(", ");
 				}

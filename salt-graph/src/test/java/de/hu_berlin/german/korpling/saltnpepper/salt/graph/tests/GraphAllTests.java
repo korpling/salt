@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.tests;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.tests.IndexTests;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.tests.ModuleTests;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.storing.tests.StoringTests;
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -50,6 +51,7 @@ public class GraphAllTests extends TestSuite {
 		suite.addTest(GraphTests.suite());
 		suite.addTest(IndexTests.suite());
 		suite.addTest(StoringTests.suite());
+		suite.addTest(ModuleTests.suite());
 		return suite;
 	}
 

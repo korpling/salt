@@ -100,7 +100,7 @@ public class SaltSemanticsPackageImpl extends EPackageImpl implements SaltSemant
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see de.hub.corpling.salt.saltSemantics.SaltSemanticsPackage#eNS_URI
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

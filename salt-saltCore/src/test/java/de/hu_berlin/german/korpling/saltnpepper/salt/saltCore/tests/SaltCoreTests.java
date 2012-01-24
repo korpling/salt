@@ -51,6 +51,7 @@ public class SaltCoreTests extends TestSuite {
 		suite.addTestSuite(SAnnotatableElementTest.class);
 		suite.addTestSuite(SAnnotationTest.class);
 		suite.addTestSuite(SGraphTest.class);
+		suite.addTestSuite(SNamedElementTest.class);
 		suite.addTestSuite(SIdentifiableElementTest.class);
 		suite.addTestSuite(SProcessingAnnotationTest.class);
 		suite.addTestSuite(SProcessingAnnotatableElementTest.class);

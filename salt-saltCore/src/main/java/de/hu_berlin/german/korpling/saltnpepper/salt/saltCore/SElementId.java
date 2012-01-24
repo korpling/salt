@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier;
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>SElement Id</b></em>'.

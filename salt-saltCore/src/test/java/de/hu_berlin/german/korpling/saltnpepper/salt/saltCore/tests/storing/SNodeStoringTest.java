@@ -72,10 +72,15 @@ public class SNodeStoringTest extends TestCase
 		SNode sNode2= null;
 		String tmpFileName= "_TMP/SNode.saltCore";
 		
-		{//adding id
-			String id= "salt:/node1";
+		//start: adding sName
+			String sName= "node1";
+			this.getFixture().setSName(sName);
+		//end: adding sName
+		
+		//start: adding id
+			String id= "salt:/"+ sName;
 			this.getFixture().setSId(id);
-		}
+		//end: adding id
 		
 		{//adding annotations
 			SAnnotation sAnno= null;
@@ -103,7 +108,7 @@ public class SNodeStoringTest extends TestCase
 			this.getFixture().addSProcessingAnnotation(sPAnno);
 		}
 		
-		{//save and reload
+		//start: save and reload
 			// create resource set and resource 
 			ResourceSet resourceSet = new ResourceSetImpl();
 
@@ -127,7 +132,7 @@ public class SNodeStoringTest extends TestCase
 				throw new NullPointerException("The resource is null.");
 			resource.load(null);
 			sNode2= (SNode) resource.getContents().get(0);
-		}
+		//end: save and reload
 		
 		{//check if equals
 			assertEquals(this.getFixture(), sNode2);

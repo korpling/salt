@@ -203,27 +203,20 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 				return(false);
 		}
 		if (differences!= null)
-		{//must be checked in case of differences is given
-//			if (!this.getClass().equals(obj.getClass()))
+		{//start: must be checked in case of differences is given
 			if (!(obj instanceof Label))
 				return(false);
-		}//must be checked in case of differences is given
-		Identifier other = (Identifier) obj;
-//		if (!Identifier.NAMESPACE_DEFAULT.equals(other.getNamespace()))
-//		{
-//			if (differences!= null)
-//				differences.add("The namesspace of the given element is not the namespace of an Identifier ('"+Identifier.NAMESPACE_DEFAULT+"'), it is '"+other.getNamespace()+"'.");
-//			else
-//				return(false);
-//		}
-//		if (!Identifier.NAME_DEFAULT.equals(other.getName()))
-//		{
-//			if (differences!= null)
-//				differences.add("The name of the given element is not the name of an Identifier ('"+Identifier.NAME_DEFAULT+"'), it is '"+other.getName()+"'.");
-//			else
-//				return(false);
-//		}
-		{//id
+		}//end: must be checked in case of differences is given
+		Identifier other= null;
+		try{
+			other = (Identifier) obj;
+		}catch (ClassCastException e) {
+			if (differences!= null)
+				differences.add("The given object shall be compared with an object of type '"+this.getClass()+"', but is of type '"+obj.getClass()+"'.");
+			return(false);
+		}
+
+		//start: check id
 			if (this.getId() == null) 
 			{
 				if (other.getId() != null)
@@ -245,7 +238,7 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 					differences.add("The hascode of the id of both objects isn't the same.");
 				else return false;
 			}
-		}//id
+		//end: check id
 		return true;
 	}
 	
@@ -261,47 +254,7 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 	{
 		boolean retVal= this.equals(null, obj); 
 		return(retVal);
-//		//TODO to remove
-////		Long eTime= System.nanoTime();
-//		
-//		boolean retVal= basicEquals(obj); 
-//		
-//		//TODO to remove
-////		equalTime= equalTime + (System.nanoTime() -eTime);
-//		
-//		return(retVal);
 	}
-
-//	/**
-//	 * Implements the real functionality of the equals() method.
-//	 * @param obj
-//	 * @return
-//	 */
-//	public boolean basicEquals(Object obj) 
-//	{
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (!(obj instanceof Identifier))
-//		{
-//			return false;
-//		}
-//		Identifier other = (Identifier) obj;
-//		{//id
-//			if (this.getId() == null) 
-//			{
-//				if (other.getId() != null)
-//					return false;
-//			} 
-//			else if (other.getId()== null)
-//				return(false);
-//			else if (this.getId().hashCode()!= other.getId().hashCode())
-//				return false;
-//		}//id
-//		
-//		return true;
-//	}
 	
 	/**
 	 * Returns the LabelableElement object containing this object.

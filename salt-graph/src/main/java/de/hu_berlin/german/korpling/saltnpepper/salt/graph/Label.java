@@ -135,7 +135,7 @@ public interface Label extends LabelableElement
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(Object)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Value()
-	 * @model transient="true" volatile="true"
+	 * @model
 	 * @generated
 	 */
 	Object getValue();
@@ -179,25 +179,19 @@ public interface Label extends LabelableElement
 	void setLabelableElement(LabelableElement value);
 
 	/**
-	 * Returns the value of the '<em><b>Value String</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value String</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * Returns the value of {@link #getValue()} as its string representation. The value valueString only exists
+	 * for persisting the model. 
 	 * @return the value of the '<em>Value String</em>' attribute.
 	 * @see #setValueString(String)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_ValueString()
-	 * @model
+	 * @model volatile="true" derived="true"
 	 * @generated
 	 */
 	String getValueString();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString <em>Value String</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Attention this method does nothing, the given value will not be stored anyway. This method only exists 
+	 * for persisting the model.
 	 * @param value the new value of the '<em>Value String</em>' attribute.
 	 * @see #getValueString()
 	 * @generated

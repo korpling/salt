@@ -35,7 +35,7 @@ import junit.textui.TestRunner;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltSemantics.SSentenceAnnotation#isSSentenceAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Is SSentence Annotation</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SSentenceAnnotation#isSSentenceAnnotation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation) <em>Is SSentence Annotation</em>}</li>
  * </ul>
  * </p>
  * @generated

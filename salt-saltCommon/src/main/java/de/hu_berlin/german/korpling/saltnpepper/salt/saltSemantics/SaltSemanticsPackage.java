@@ -109,13 +109,13 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SPOS_ANNOTATION__NAME = SaltCorePackage.SANNOTATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Full Name</b></em>' attribute.
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPOS_ANNOTATION__FULL_NAME = SaltCorePackage.SANNOTATION__QNAME;
+	int SPOS_ANNOTATION__QNAME = SaltCorePackage.SANNOTATION__QNAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -145,6 +145,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SPOS_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOS_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -163,6 +172,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SPOS_ANNOTATION__SVALUE = SaltCorePackage.SANNOTATION__SVALUE;
 
 	/**
+	 * The feature id for the '<em><b>SValue Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOS_ANNOTATION__SVALUE_TYPE = SaltCorePackage.SANNOTATION__SVALUE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotatable Element</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -170,15 +188,6 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SPOS_ANNOTATION__SANNOTATABLE_ELEMENT = SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>SNS</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPOS_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
 
 	/**
 	 * The number of structural features of the '<em>SPOS Annotation</em>' class.
@@ -227,13 +236,13 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SLEMMA_ANNOTATION__NAME = SaltCorePackage.SANNOTATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Full Name</b></em>' attribute.
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SLEMMA_ANNOTATION__FULL_NAME = SaltCorePackage.SANNOTATION__QNAME;
+	int SLEMMA_ANNOTATION__QNAME = SaltCorePackage.SANNOTATION__QNAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -263,6 +272,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SLEMMA_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLEMMA_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -281,6 +299,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SLEMMA_ANNOTATION__SVALUE = SaltCorePackage.SANNOTATION__SVALUE;
 
 	/**
+	 * The feature id for the '<em><b>SValue Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLEMMA_ANNOTATION__SVALUE_TYPE = SaltCorePackage.SANNOTATION__SVALUE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotatable Element</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -288,15 +315,6 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SLEMMA_ANNOTATION__SANNOTATABLE_ELEMENT = SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>SNS</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SLEMMA_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
 
 	/**
 	 * The number of structural features of the '<em>SLemma Annotation</em>' class.
@@ -346,13 +364,13 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SCAT_ANNOTATION__NAME = SaltCorePackage.SANNOTATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Full Name</b></em>' attribute.
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCAT_ANNOTATION__FULL_NAME = SaltCorePackage.SANNOTATION__QNAME;
+	int SCAT_ANNOTATION__QNAME = SaltCorePackage.SANNOTATION__QNAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -382,6 +400,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SCAT_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCAT_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -400,6 +427,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SCAT_ANNOTATION__SVALUE = SaltCorePackage.SANNOTATION__SVALUE;
 
 	/**
+	 * The feature id for the '<em><b>SValue Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCAT_ANNOTATION__SVALUE_TYPE = SaltCorePackage.SANNOTATION__SVALUE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotatable Element</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -407,15 +443,6 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCAT_ANNOTATION__SANNOTATABLE_ELEMENT = SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>SNS</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCAT_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
 
 	/**
 	 * The number of structural features of the '<em>SCat Annotation</em>' class.
@@ -464,13 +491,13 @@ public interface SaltSemanticsPackage extends EPackage {
 	int STYPE_ANNOTATION__NAME = SaltCorePackage.SANNOTATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Full Name</b></em>' attribute.
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STYPE_ANNOTATION__FULL_NAME = SaltCorePackage.SANNOTATION__QNAME;
+	int STYPE_ANNOTATION__QNAME = SaltCorePackage.SANNOTATION__QNAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -500,6 +527,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int STYPE_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYPE_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -518,6 +554,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int STYPE_ANNOTATION__SVALUE = SaltCorePackage.SANNOTATION__SVALUE;
 
 	/**
+	 * The feature id for the '<em><b>SValue Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYPE_ANNOTATION__SVALUE_TYPE = SaltCorePackage.SANNOTATION__SVALUE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotatable Element</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -525,15 +570,6 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STYPE_ANNOTATION__SANNOTATABLE_ELEMENT = SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>SNS</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYPE_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
 
 	/**
 	 * The number of structural features of the '<em>SType Annotation</em>' class.
@@ -582,13 +618,13 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SWORD_ANNOTATION__NAME = SaltCorePackage.SANNOTATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Full Name</b></em>' attribute.
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWORD_ANNOTATION__FULL_NAME = SaltCorePackage.SANNOTATION__QNAME;
+	int SWORD_ANNOTATION__QNAME = SaltCorePackage.SANNOTATION__QNAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -618,6 +654,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SWORD_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWORD_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -636,6 +681,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SWORD_ANNOTATION__SVALUE = SaltCorePackage.SANNOTATION__SVALUE;
 
 	/**
+	 * The feature id for the '<em><b>SValue Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWORD_ANNOTATION__SVALUE_TYPE = SaltCorePackage.SANNOTATION__SVALUE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotatable Element</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -643,15 +697,6 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SWORD_ANNOTATION__SANNOTATABLE_ELEMENT = SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>SNS</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWORD_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
 
 	/**
 	 * The number of structural features of the '<em>SWord Annotation</em>' class.
@@ -700,13 +745,13 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SSENTENCE_ANNOTATION__NAME = SaltCorePackage.SANNOTATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Full Name</b></em>' attribute.
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SSENTENCE_ANNOTATION__FULL_NAME = SaltCorePackage.SANNOTATION__QNAME;
+	int SSENTENCE_ANNOTATION__QNAME = SaltCorePackage.SANNOTATION__QNAME;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -736,6 +781,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SSENTENCE_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
+	 * The feature id for the '<em><b>SNS</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSENTENCE_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -754,6 +808,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SSENTENCE_ANNOTATION__SVALUE = SaltCorePackage.SANNOTATION__SVALUE;
 
 	/**
+	 * The feature id for the '<em><b>SValue Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSENTENCE_ANNOTATION__SVALUE_TYPE = SaltCorePackage.SANNOTATION__SVALUE_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>SAnnotatable Element</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -761,15 +824,6 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SSENTENCE_ANNOTATION__SANNOTATABLE_ELEMENT = SaltCorePackage.SANNOTATION__SANNOTATABLE_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>SNS</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSENTENCE_ANNOTATION__SNS = SaltCorePackage.SANNOTATION__SNS;
 
 	/**
 	 * The number of structural features of the '<em>SSentence Annotation</em>' class.

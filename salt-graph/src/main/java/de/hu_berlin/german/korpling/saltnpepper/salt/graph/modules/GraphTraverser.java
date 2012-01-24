@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules;
 
+import java.awt.font.ShapeGraphicAttribute;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -31,9 +32,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphExcep
 
 /**
  * This class offers some methods to traverse a given graph.
+ * @deprecated since salt 1.3 Please see SGraph#traverse
  * @author Florian Zipser
  *
  */
+@Deprecated
 public class GraphTraverser extends GraphModule
 {
 // ================================================ start: LogService	

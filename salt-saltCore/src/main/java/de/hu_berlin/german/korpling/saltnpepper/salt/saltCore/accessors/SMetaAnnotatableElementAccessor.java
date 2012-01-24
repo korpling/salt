@@ -23,12 +23,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreEList;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 
 public class SMetaAnnotatableElementAccessor 
 {
@@ -39,10 +39,10 @@ public class SMetaAnnotatableElementAccessor
 	}
 
 	public SMetaAnnotation getSMetaAnnotation(	SMetaAnnotatableElement sProcElem,
-															String fullName) 
+															String qName) 
 	{
 		SMetaAnnotation sProcMetaAnno= null;
-		Label label= sProcElem.getLabel(fullName);
+		Label label= sProcElem.getLabel(qName);
 		if (label instanceof SMetaAnnotation)
 			sProcMetaAnno= (SMetaAnnotation) label;
 		return(sProcMetaAnno);

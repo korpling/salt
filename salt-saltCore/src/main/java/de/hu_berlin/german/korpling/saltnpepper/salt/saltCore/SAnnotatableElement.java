@@ -17,9 +17,9 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
-
 import org.eclipse.emf.common.util.EList;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -70,7 +70,7 @@ public interface SAnnotatableElement extends LabelableElement {
 	 * @model
 	 * @generated
 	 */
-	SAnnotation getSAnnotation(String fullName);
+	SAnnotation getSAnnotation(String qName);
 
 	/**
 	 * <!-- begin-user-doc -->

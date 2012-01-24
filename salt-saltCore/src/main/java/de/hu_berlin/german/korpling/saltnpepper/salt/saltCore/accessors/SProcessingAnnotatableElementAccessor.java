@@ -23,12 +23,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreEList;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 
 public class SProcessingAnnotatableElementAccessor 
 {
@@ -39,10 +39,10 @@ public class SProcessingAnnotatableElementAccessor
 	}
 
 	public SProcessingAnnotation getSProcessingAnnotation(	SProcessingAnnotatableElement sProcElem,
-															String fullName) 
+															String qName) 
 	{
 		SProcessingAnnotation sProcAnno= null;
-		Label label= sProcElem.getLabel(fullName);
+		Label label= sProcElem.getLabel(qName);
 		if (label instanceof SProcessingAnnotation)
 			sProcAnno= (SProcessingAnnotation) label;
 		return(sProcAnno);

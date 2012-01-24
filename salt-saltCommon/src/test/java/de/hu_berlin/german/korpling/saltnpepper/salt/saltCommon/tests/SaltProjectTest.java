@@ -19,13 +19,11 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.tests;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Properties;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
@@ -41,8 +39,6 @@ import org.xml.sax.SAXException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.graf.v09.GrAFResource;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.graf.v09.GrAFResource.GRAF_MAPPING_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
@@ -69,6 +65,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotatio
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#differences(java.lang.Object) <em>Differences</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusGraph_GrAF(org.eclipse.emf.common.util.URI, java.util.Properties) <em>Load SCorpus Graph Gr AF</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentGraph_GrAF(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, java.util.Properties) <em>Load SDocument Graph Gr AF</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSCorpusGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SCorpus Graph DOT</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject_DOT(org.eclipse.emf.common.util.URI) <em>Save Salt Project DOT</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSDocumentGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SDocument Graph DOT</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -142,6 +141,30 @@ public class SaltProjectTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject(org.eclipse.emf.common.util.URI) <em>Save Salt Project</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject(org.eclipse.emf.common.util.URI)
+	 */
+	public void testSaveSaltProject__URI() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+//		fail();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI) <em>Load Salt Project</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoadSaltProject__URI() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+//		fail();
 	}
 
 	String resourceDir= "./src/test/resources/SaltProjectTest/";
@@ -254,7 +277,6 @@ public class SaltProjectTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_GrAF(org.eclipse.emf.common.util.URI, java.util.Properties)
-	 * @generated
 	 */
 	public void testLoadSaltProject_GrAF__URI_Properties() {
 //		// TODO: implement this operation test method
@@ -298,11 +320,10 @@ public class SaltProjectTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#differences(java.lang.Object)
-	 * @generated
 	 */
 	public void testDifferences__Object() {
-//		// TODO: implement this operation test method
-//		// Ensure that you remove @generated or mark it @generated NOT
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
 //		fail();
 	}
 
@@ -311,11 +332,10 @@ public class SaltProjectTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusGraph_GrAF(org.eclipse.emf.common.util.URI, java.util.Properties)
-	 * @generated
 	 */
 	public void testLoadSCorpusGraph_GrAF__URI_Properties() {
-//		// TODO: implement this operation test method
-//		// Ensure that you remove @generated or mark it @generated NOT
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
 //		fail();
 	}
 
@@ -324,11 +344,46 @@ public class SaltProjectTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentGraph_GrAF(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, java.util.Properties)
-	 * @generated
 	 */
 	public void testLoadSDocumentGraph_GrAF__URI_SDocument_Properties() {
-//		// TODO: implement this operation test method
-//		// Ensure that you remove @generated or mark it @generated NOT
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+//		fail();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSCorpusGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SCorpus Graph DOT</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSCorpusGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId)
+	 */
+	public void testSaveSCorpusGraph_DOT__URI_SElementId() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+//		fail();
+	}
+
+		/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject_DOT(org.eclipse.emf.common.util.URI) <em>Save Salt Project DOT</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject_DOT(org.eclipse.emf.common.util.URI)
+	 */
+	public void testSaveSaltProject_DOT__URI() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+//		fail();
+	}
+
+		/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSDocumentGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SDocument Graph DOT</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSDocumentGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId)
+	 */
+	public void testSaveSDocumentGraph_DOT__URI_SElementId() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
 //		fail();
 	}
 
@@ -839,7 +894,7 @@ public class SaltProjectTest extends TestCase {
 					DifferenceListener myDifferenceListener = new IgnoreTextAndAttributeValuesDifferenceListener();
 				    Diff myDiff = new Diff(controlSequence.toString().replace("\r", "").replace("\n", "").replace("\t", ""), testSequence.toString().replace("\r", "").replace("\n", "").replace("\t", "")); 
 				    myDiff.overrideDifferenceListener(myDifferenceListener);
-				    assertTrue("XML does not matches control skeleton XML", myDiff.similar());
+				    assertTrue("XML does not matches control skeleton XML of '"+file1.getAbsolutePath()+"' and '"+file2.getAbsolutePath()+"'", myDiff.similar());
 				}//compare salt files
 			}
 		}//compare all files and subdirectories

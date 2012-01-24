@@ -31,7 +31,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
  * A representation of the literals of the enumeration '<em><b>SALT SEMANTIC NAMES</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.hub.corpling.salt.saltSemantics.SaltSemanticsPackage#getSALT_SEMANTIC_NAMES()
+ * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage#getSALT_SEMANTIC_NAMES()
  * @model
  * @generated
  */

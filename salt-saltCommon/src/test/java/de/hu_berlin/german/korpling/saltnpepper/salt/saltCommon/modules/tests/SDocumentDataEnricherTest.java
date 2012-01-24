@@ -25,6 +25,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 
+/**
+ * @deprecated since Salt 1.1.3
+ * @author Florian Zipser
+ *
+ */
+@Deprecated
 public class SDocumentDataEnricherTest extends SDocumentStructureModuleTest
 {
 	

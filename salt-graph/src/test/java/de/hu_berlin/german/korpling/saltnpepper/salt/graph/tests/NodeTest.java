@@ -26,6 +26,12 @@ import junit.textui.TestRunner;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>Node</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node#clone() <em>Clone</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class NodeTest extends IdentifiableElementTest 
@@ -89,6 +95,17 @@ public class NodeTest extends IdentifiableElementTest
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node#clone() <em>Clone</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node#clone()
+	 */
+	public void testClone() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
 	}
 
 	/**
