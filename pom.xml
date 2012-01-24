@@ -11,6 +11,17 @@
     <module>salt-saltCommon</module>
     <module>salt-saltSample</module>
   </modules>
+  <description>Salt is an abstract and graph based meta model for dealing with linguistic annotated data. Salt describes a minimum of semantic and only handles the structure of linguistic data.</description>
+  <url>https://korpling.german.hu-berlin.de/p/projects/salt</url>
+  <issueManagement>
+  	<system>Redmine</system>
+  	<url>https://korpling.german.hu-berlin.de/p/projects/salt/issues</url>
+  </issueManagement>
+  <ciManagement>
+  	<system>Jenkins</system>
+  	<url>https://korpling.german.hu-berlin.de/jenkins/</url>
+  </ciManagement>
+  <inceptionYear>2009</inceptionYear>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -19,36 +30,9 @@
   </licenses>
   <scm>
     <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk</developerConnection>
+    <tag>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags</tag>
+    <url>https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/</url>
   </scm>
-  <!-- 
-
-  <distributionManagement>
-
-    <repository>
-
-      <id>SaltNPepper Repository</id>
-
-      <name>SaltNPepper Repository</name>
-
-      <url>file:///home/annis/public_html/maven2/saltnpepper</url>
-
-    </repository>
-
-  </distributionManagement>
-
-  <repositories>
-
-    <repository>
-
-      <id>SaltNPepper Repository</id>
-
-      <url>https://korpling.german.hu-berlin.de/~annis/maven2/saltnpepper/</url>
-
-    </repository>
-
-  </repositories>
-
-   -->
   <distributionManagement>
     <repository>
       <id>korpling</id>
@@ -121,16 +105,18 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
+  <organization>
+  	<name>Humboldt Univerity of Berlin, INRIA</name>
+  </organization>
   <build>
-  	 <extensions>
-  	    <!-- Enabling the use of FTP -->
+    <extensions>
+      <!-- Enabling the use of FTP -->
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
         <artifactId>wagon-ssh-external</artifactId>
         <version>1.0</version>
       </extension>
     </extensions>
-  	
     <plugins>
       <!-- start: site plugin -->
       <plugin>
@@ -163,7 +149,9 @@
         <version>2.1</version>
         <configuration>
           <tagBase>
+
            https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/
+
           </tagBase>
           <releaseProfiles>release</releaseProfiles>
           <goals>package assembly:single deploy</goals>
