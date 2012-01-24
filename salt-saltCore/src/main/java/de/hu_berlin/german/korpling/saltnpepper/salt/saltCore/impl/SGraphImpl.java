@@ -555,7 +555,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	{
 		return(this.sAnnoAccessor.getSAnnotation(this, qName));
 	}
-/**
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

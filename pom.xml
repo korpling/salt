@@ -20,17 +20,47 @@
   <scm>
     <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk</developerConnection>
   </scm>
+  <!-- 
+
+  <distributionManagement>
+
+    <repository>
+
+      <id>SaltNPepper Repository</id>
+
+      <name>SaltNPepper Repository</name>
+
+      <url>file:///home/annis/public_html/maven2/saltnpepper</url>
+
+    </repository>
+
+  </distributionManagement>
+
+  <repositories>
+
+    <repository>
+
+      <id>SaltNPepper Repository</id>
+
+      <url>https://korpling.german.hu-berlin.de/~annis/maven2/saltnpepper/</url>
+
+    </repository>
+
+  </repositories>
+
+   -->
   <distributionManagement>
     <repository>
-      <id>SaltNPepper Repository</id>
-      <name>SaltNPepper Repository</name>
-      <url>file:///home/annis/public_html/maven2/saltnpepper</url>
+      <id>korpling</id>
+      <name>korpling maven repo</name>
+      <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url>
     </repository>
   </distributionManagement>
   <repositories>
     <repository>
-      <id>SaltNPepper Repository</id>
-      <url>https://korpling.german.hu-berlin.de/~annis/maven2/saltnpepper/</url>
+      <id>korpling</id>
+      <name>korpling maven repo</name>
+      <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url>
     </repository>
   </repositories>
   <properties>
@@ -95,11 +125,11 @@
     <plugins>
       <!-- start: site plugin -->
       <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-site-plugin</artifactId>
-	    <version>3.0</version>
-	    <configuration>
-        	<outputDirectory>${basedir}/docs/site</outputDirectory>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <outputDirectory>${basedir}/docs/site</outputDirectory>
         </configuration>
       </plugin>
       <!-- end: site plugin -->
@@ -124,9 +154,7 @@
         <version>2.1</version>
         <configuration>
           <tagBase>
-
            https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/
-
           </tagBase>
           <releaseProfiles>release</releaseProfiles>
           <goals>package assembly:single deploy</goals>
@@ -135,32 +163,32 @@
       <!-- end: Plugin for automatic releasing -->
       <!-- start: plugin to generate javadoc -->
       <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-javadoc-plugin</artifactId>
-	    <version>2.8</version>
-	</plugin>
-	<!-- end: plugin to generate javadoc -->
-	<!-- start: plugin to deploy project to maven repo -->
-	<plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-deploy-plugin</artifactId>
-	    <version>2.7</version>
-	</plugin>
-	<!-- end: plugin to deploy project to maven repo -->
-	<!-- start: plugin to create a source-jar -->
-	<plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-source-plugin</artifactId>
-	    <version>2.1.2</version>
-	    <executions>
-	        <execution>
-	            <goals>
-	                <goal>jar</goal>
-	            </goals>
-	        </execution>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8</version>
+      </plugin>
+      <!-- end: plugin to generate javadoc -->
+      <!-- start: plugin to deploy project to maven repo -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.7</version>
+      </plugin>
+      <!-- end: plugin to deploy project to maven repo -->
+      <!-- start: plugin to create a source-jar -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
         </executions>
-	</plugin>
-	<!-- end: plugin to create a source-jar -->
+      </plugin>
+      <!-- end: plugin to create a source-jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
