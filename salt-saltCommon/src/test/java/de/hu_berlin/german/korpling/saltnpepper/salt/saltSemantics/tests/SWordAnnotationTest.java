@@ -34,7 +34,7 @@ import junit.textui.TestRunner;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link de.hub.corpling.salt.saltSemantics.SWordAnnotation#isSWordAnnotation(de.hub.corpling.salt.saltCore.SAnnotation) <em>Is SWord Annotation</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SWordAnnotation#isSWordAnnotation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation) <em>Is SWord Annotation</em>}</li>
  * </ul>
  * </p>
  * @generated

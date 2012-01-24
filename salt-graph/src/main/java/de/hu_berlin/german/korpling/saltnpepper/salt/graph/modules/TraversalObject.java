@@ -20,7 +20,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-
+@Deprecated
 public interface TraversalObject 
 {
 	/**

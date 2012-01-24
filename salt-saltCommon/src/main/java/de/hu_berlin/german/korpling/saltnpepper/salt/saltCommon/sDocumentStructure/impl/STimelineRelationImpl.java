@@ -25,6 +25,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import org.eclipse.emf.common.notify.NotificationChain;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.accessors.STimeOverlappingRelationAccessor;
 
 /**
@@ -132,7 +133,6 @@ public class STimelineRelationImpl extends SSequentialRelationImpl implements ST
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public SDocumentGraph getSDocumentGraph() {
 		SDocumentGraph sDocumentGraph = basicGetSDocumentGraph();
@@ -173,7 +173,21 @@ public class STimelineRelationImpl extends SSequentialRelationImpl implements ST
 	{
 		return(this.sTimeOverlappingRelAccessor.isSTimeOverlapping(this));
 	}
-// ======================= end: delegating for feature textOverlapping
+/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case SDocumentStructurePackage.STIMELINE_RELATION__SDOCUMENT_GRAPH:
+				return eInternalContainer().eInverseRemove(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE_RELATIONS, SDocumentGraph.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	// ======================= end: delegating for feature textOverlapping
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,8 +204,7 @@ public class STimelineRelationImpl extends SSequentialRelationImpl implements ST
 				if (resolve) return getSToken();
 				return basicGetSToken();
 			case SDocumentStructurePackage.STIMELINE_RELATION__SDOCUMENT_GRAPH:
-				if (resolve) return getSDocumentGraph();
-				return basicGetSDocumentGraph();
+				return getSDocumentGraph();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -251,7 +264,7 @@ public class STimelineRelationImpl extends SSequentialRelationImpl implements ST
 			case SDocumentStructurePackage.STIMELINE_RELATION__STOKEN:
 				return basicGetSToken() != null;
 			case SDocumentStructurePackage.STIMELINE_RELATION__SDOCUMENT_GRAPH:
-				return basicGetSDocumentGraph() != null;
+				return getSDocumentGraph() != null;
 		}
 		return super.eIsSet(featureID);
 	}

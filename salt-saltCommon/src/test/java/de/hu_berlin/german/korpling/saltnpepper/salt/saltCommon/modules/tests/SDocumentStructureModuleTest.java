@@ -22,6 +22,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumen
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import junit.framework.TestCase;
 
+/**
+ * @deprecated since Salt 1.1.3
+ * @author Florian Zipser
+ *
+ */
+@Deprecated
 public class SDocumentStructureModuleTest extends TestCase 
 {
 	private SDocumentStructureModule fixture= null;

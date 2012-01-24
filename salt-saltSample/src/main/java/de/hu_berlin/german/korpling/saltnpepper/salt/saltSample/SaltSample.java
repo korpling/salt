@@ -44,6 +44,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
 
+
 /**
  * This class shows the usage of the linguistic meta model Salt. 
  * Therefore we create a linguistic corpus with direct use of the Salt object model. We here show how to store this model to disk and
@@ -57,6 +58,31 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotatio
  */
 public class SaltSample 
 {
+	private SCorpusGraph sCorpusGraph=null;
+	
+	
+	public SaltSample(){
+		//Creating a new salt project, this is the main object and contains all the others. 
+		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
+		{//creating a corpus structure for salt project
+			System.out.print("creating a corpus structure for salt project...");
+			createCorpusStructure(saltProject);
+			System.out.println("OK");
+		}//creating a corpus structure for salt project
+
+		{//filling all of the documents in the corpus structure with document structure data
+			System.out.print("filling all of the documents in the corpus structure with document structure data...");
+			//this works, because after createCorpusStructure() was called, only one graph exists in salt project
+			sCorpusGraph= saltProject.getSCorpusGraphs().get(0);
+			for (SDocument sDocument: sCorpusGraph.getSDocuments())
+			{//filling all of the documents in the corpus structure with document structure data	
+				createSDocumentStructure(sDocument);
+			}//filling all of the documents in the corpus structure with document structure data
+			System.out.println("OK");
+			
+		}//filling all of the documents in the corpus structure with document structure data
+	}
+	
 	/**
 	 * Creates the following corpus structure and adds it to the given salt project.
 	 * 
@@ -104,614 +130,372 @@ public class SaltSample
 		return(sCorpGraph);
 	}
 	
+	/**
+	 * The primary text, which is used for the samples.
+	 */
+	public static String PRIMARY_TEXT= "Is this example more complicated than it appears to be?";
+	/**
+	 * The name of the morphologic layer containing the tokens. 
+	 */
+	public static String MORPHOLOGY_LAYER="morphology";
+	
+	/**
+	 * Creates a {@link STextualDS} object containing the primary text {@link SaltSample#PRIMARY_TEXT} and adds the object
+	 * to the {@link SDocumentGraph} being contained by the given {@link SDocument} object.
+	 * 
+	 * @param sDocument the document, to which the created {@link STextualDS} object will be added
+	 */
 	public static void createPrimaryData(SDocument sDocument){
-		STextualDS sTextualDS= null;
-		
+		if (sDocument== null)
+			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+		if (sDocument.getSDocumentGraph()== null)
+			throw new SaltSampleException("Cannot create example, because the given sDocument does not contain an SDocumentGraph.");
+		STextualDS sTextualDS = null;
 		{//creating the primary text
 			sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
-			sTextualDS.setSText("Is this example more complicated than it appears to be?");
+			sTextualDS.setSText(PRIMARY_TEXT);
 			//sTextualDS.setSText("This is a sample text, which is very short.");
 			//adding the text to the document-graph
 			sDocument.getSDocumentGraph().addSNode(sTextualDS);
 		}//creating the primary text
-		
 	}
 	
+	/**
+	 * Creates a set of {@link SToken} objects tokenizing the primary text {@link SaltSample#PRIMARY_TEXT} in to the 
+	 * following tokens:
+	 * <ul>
+	 *	<li>Is</li>
+	 *	<li>this</li>
+	 *	<li>example</li>
+	 * 	<li>more</li>
+	 * 	<li>complicated</li>
+	 *	<li>than</li>
+	 * 	<li>it</li>
+	 * 	<li>appears</li>
+	 * 	<li>to</li>
+	 * 	<li>be</li>
+	 * 	<li>?</li>
+	 * </ul>
+	 * The created {@link SToken} objects and corresponding {@link STextualRelation} objects are added to the given {@link SDocument} object.
+	 * @param sDocument the document, to which the created {@link SToken} objects will be added
+	 */
 	public static void createTokens(SDocument sDocument){
-		{//creating tokenization (token objects and relations between tokens and the primary data object)
-			//placeholder object representing a token
-			SToken sToken= null;
-			//object to connect a token to a primary text
-			STextualRelation sTextRel= null;
-			
-			//adding the created token to the document-graph
-			sToken= SaltFactory.eINSTANCE.createSToken();
-			sDocument.getSDocumentGraph().addSNode(sToken);
-			
-			sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-			//adding the token as source of this relation
-			sTextRel.setSToken(sToken);
-			//adding the primary text as target of this relation
-			sTextRel.setSTextualDS(sTextualDS);
-			//adding the start-position of the token in the primary text 
-			sTextRel.setSStart(0);
-			//adding the end-position of the token in the primary text (start-position of the token + length of the token) 
-			sTextRel.setSEnd(2);
-			//adding the textual relation between token and primary text to document graph
-			sDocument.getSDocumentGraph().addSRelation(sTextRel);
-			
-			{//creating the rest of the tokenization, this can also be done automatically
+		STextualDS sTextualDS = sDocument.getSDocumentGraph().getSTextualDSs().get(0);
+		//as a means to group elements, layers (SLayer) can be used. here, a layer
+		//named "morphology" is created and the tokens will be added to it
+		SLayer morphLayer = SaltFactory.eINSTANCE.createSLayer();
+		morphLayer.setSName(MORPHOLOGY_LAYER);
+		sDocument.getSDocumentGraph().addSLayer(morphLayer);
 
-				//as a means to group elements, layers (SLayer) can be used. here, a layer
-				//named "morphology" is created and the tokens will be added to it
-				SLayer morphLayer = SaltFactory.eINSTANCE.createSLayer();
-				morphLayer.setSName("morphology");
-				sDocument.getSDocumentGraph().addSLayer(morphLayer);
-
-				//add the first token to the layers SNodes list
-				morphLayer.getSNodes().add(sToken);
-				
-				//creating tokenization for the token 'this' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);
-
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(3);
-				sTextRel.setSEnd(7);	
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-			
-				//creating tokenization for the token 'example' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(8);
-				sTextRel.setSEnd(15);
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				//creating tokenization for the token 'more' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(16);
-				sTextRel.setSEnd(20);
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				//creating tokenization for the token 'complicated' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);					
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(21);
-				sTextRel.setSEnd(32);
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				//creating tokenization for the token 'than' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(33);
-				sTextRel.setSEnd(37);
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				//creating tokenization for the token 'it' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(38);
-				sTextRel.setSEnd(40);
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				//creating tokenization for the token 'appears' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(41);
-				sTextRel.setSEnd(48);
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				//creating tokenization for the token 'to' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(49);
-				sTextRel.setSEnd(51);
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				//creating tokenization for the token 'be' and adding it to the morphology layer
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				morphLayer.getSNodes().add(sToken);
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				sTextRel.setSToken(sToken);
-				sTextRel.setSTextualDS(sTextualDS);
-				sTextRel.setSStart(52);
-				sTextRel.setSEnd(54);
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-			}//creating the rest of the tokenization, this can also be done automatically
-		}
+		createToken(0,2,sTextualDS,sDocument,morphLayer);	
+		//creating tokenization for the token 'this' and adding it to the morphology layer
+		createToken(3,7,sTextualDS,sDocument,morphLayer);	
+		//creating tokenization for the token 'example' and adding it to the morphology layer
+		createToken(8,15,sTextualDS,sDocument,morphLayer);		
+		//creating tokenization for the token 'more' and adding it to the morphology layer
+		createToken(16,20,sTextualDS,sDocument,morphLayer);		
+		//creating tokenization for the token 'complicated' and adding it to the morphology layer
+		createToken(21,32,sTextualDS,sDocument,morphLayer);
+		//creating tokenization for the token 'than' and adding it to the morphology layer
+		createToken(33,37,sTextualDS,sDocument,morphLayer);		
+		//creating tokenization for the token 'it' and adding it to the morphology layer
+		createToken(38,40,sTextualDS,sDocument,morphLayer);	
+		//creating tokenization for the token 'appears' and adding it to the morphology layer
+		createToken(41,48,sTextualDS,sDocument,morphLayer);
+		//creating tokenization for the token 'to' and adding it to the morphology layer
+		createToken(49,51,sTextualDS,sDocument,morphLayer);
+		//creating tokenization for the token 'be' and adding it to the morphology layer
+		createToken(52,54,sTextualDS,sDocument,morphLayer);
 	}
 	
+	public static void createToken(int start, int end, STextualDS sTextualDS, SDocument sDocument, SLayer layer){
+		SToken sToken= SaltFactory.eINSTANCE.createSToken();
+		sDocument.getSDocumentGraph().addSNode(sToken);
+		layer.getSNodes().add(sToken);
+		STextualRelation sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
+		sTextRel.setSToken(sToken);
+		sTextRel.setSTextualDS(sTextualDS);
+		sTextRel.setSStart(start);
+		sTextRel.setSEnd(end);
+		sDocument.getSDocumentGraph().addSRelation(sTextRel);
+	}
+	
+	/**
+	 * Creates morphological annotations (pos and lemma) for the tokenized sample and adds them to each {@link SToken} object as
+	 * {@link SPOSAnnotation} or {@link SLemmaAnnotation} object.
+	 * <table>
+	 * 	<tr><td>token</td><td>pos</td><td>lemma</td></tr>
+	 * 	<tr><td>Is</td><td>VBZ</td><td>be</td></tr>
+	 * 	<tr><td>this</td><td>DT</td><td>this</td></tr>
+	 * 	<tr><td>example</td><td>NN</td><td>example</td></tr>
+	 * 	<tr><td>more</td><td>ABR</td><td>more</td></tr>
+	 * 	<tr><td>complicated</td><td>JJ</td><td>complicated</td></tr>
+	 * 	<tr><td>than</td><td>IN</td><td>than</td></tr>
+	 * 	<tr><td>it</td><td>PRP</td><td>it</td></tr>
+	 * 	<tr><td>appears</td><td>VBZ</td><td>appear</td></tr>
+	 * 	<tr><td>to</td><td>TO</td><td>to</td></tr>
+	 * 	<tr><td>be</td><td>VB</td><td>be</td></tr>
+	 * </table>
+	 * @param sDocument the document containing the {@link SToken} and {@link STextualDS} objects
+	 */
 	public static void createMorphologyAnnotations(SDocument sDocument){
 		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
 		
-		{//adding some annotations, part-of-speech and lemma (for part-of speech and lemma annotations a special annotation in Salt exists)
-			{//adding part-of speech annotations
-				SPOSAnnotation sPOSAnno= null;
+		{//adding part-of speech annotations
+			SPOSAnnotation sPOSAnno= null;
 				
-				
-				//a list of all part-of-speech annotations for the words Is (VBZ), this (DT) ... be (VB)
-				String[] posAnnotations={"VBZ", "DT", "NN", "ABR", "JJ", "IN", "PRP", "VBZ", "TO", "VB"}; 
-				for (int i= 0; i< sTokens.size();i++)
-				{
-					sPOSAnno= SaltFactory.eINSTANCE.createSPOSAnnotation();
-					sPOSAnno.setSValue(posAnnotations[i]);
-					sTokens.get(i).addSAnnotation(sPOSAnno);
-				}
-			}//adding part-of speech annotations
+			//a list of all part-of-speech annotations for the words Is (VBZ), this (DT) ... be (VB)
+			String[] posAnnotations={"VBZ", "DT", "NN", "ABR", "JJ", "IN", "PRP", "VBZ", "TO", "VB"}; 
+			for (int i= 0; i< sTokens.size();i++)
+			{
+				sPOSAnno= SaltFactory.eINSTANCE.createSPOSAnnotation();
+				sPOSAnno.setSValue(posAnnotations[i]);
+				sTokens.get(i).addSAnnotation(sPOSAnno);
+			}
+		}//adding part-of speech annotations
 			
-			{//adding lemma annotations
-				SLemmaAnnotation sLemmaAnno= null;
-				
-				
-				//a list of all lemma annotations for the words Is (be), this (this) ... be (be)
-				String[] posAnnotations={"be", "this", "example", "more", "complicated", "than", "it", "appear", "to", "be"}; 
-				for (int i= 0; i< sTokens.size();i++)
-				{
-					sLemmaAnno= SaltFactory.eINSTANCE.createSLemmaAnnotation();
-					sLemmaAnno.setSValue(posAnnotations[i]);
-					sTokens.get(i).addSAnnotation(sLemmaAnno);
-				}
-			}//adding lemma annotations
+		{//adding lemma annotations
+			SLemmaAnnotation sLemmaAnno= null;
 			
-			{//creating annotations for information structure with the use of spans: "Is"= contrast-focus,"this example more complicated than it appears to be"= Topic 
-				SSpan sSpan= null;
-				SSpanningRelation sSpanRel= null;
-				SAnnotation sAnno= null;
+			//a list of all lemma annotations for the words Is (be), this (this) ... be (be)
+			String[] posAnnotations={"be", "this", "example", "more", "complicated", "than", "it", "appear", "to", "be"}; 
+			for (int i= 0; i< sTokens.size();i++)
+			{
+				sLemmaAnno= SaltFactory.eINSTANCE.createSLemmaAnnotation();
+				sLemmaAnno.setSValue(posAnnotations[i]);
+				sTokens.get(i).addSAnnotation(sLemmaAnno);
+			}
+		}//adding lemma annotations
 				
-				//creating a span node as placeholder for information-structure annotation
-				sSpan= SaltFactory.eINSTANCE.createSSpan();
-				//adding the created span to the document-graph
-				sDocument.getSDocumentGraph().addSNode(sSpan);
-				//creating an annotation for information-structure
-				sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-				//setting the name of the annotation
-				sAnno.setSName("Inf-Struct");
-				//setting the value of the annotation
-				sAnno.setSValue("contrast-focus");
-				//adding the annotation to the placeholder span
-				sSpan.addSAnnotation(sAnno);
-				
-				//creating a relation to connect a token with the span
-				sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-				//setting the span as source of the relation
-				sSpanRel.setSSpan(sSpan);
-				//setting the first token as target of the relation
-				sSpanRel.setSToken(sTokens.get(0));
-				//adding the created relation to the document-graph
-				sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-				
-				{//creating the second span
-					sSpan= SaltFactory.eINSTANCE.createSSpan();
-					sDocument.getSDocumentGraph().addSNode(sSpan);
-					sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-					sAnno.setSName("Inf-Struct");
-					sAnno.setSValue("topic");
-					sSpan.addSAnnotation(sAnno);
-					for (int i= 1; i< sTokens.size(); i++)
-					{
-						sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-						sSpanRel.setSSpan(sSpan);
-						sSpanRel.setSToken(sTokens.get(i));
-						sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-					}
-				}//creating the second span
-				
-			}//creating annotations for information structure with the use of spans
+	}
+	
+	/**
+	 * Creates {@link SSpan} object above the tokenization.
+	 * @param sDocument
+	 */
+	public static void createInformationStructureSpan(SDocument sDocument){
+		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
+		
+		SSpan sSpan= null;
+		SSpanningRelation sSpanRel= null;
+		//creating a span node as placeholder for information-structure annotation
+		sSpan= SaltFactory.eINSTANCE.createSSpan();
+		//adding the created span to the document-graph
+		sDocument.getSDocumentGraph().addSNode(sSpan);
+		//creating an annotation for information-structure
+		//creating a relation to connect a token with the span
+		sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
+		//setting the span as source of the relation
+		sSpanRel.setSSpan(sSpan);
+		//setting the first token as target of the relation
+		sSpanRel.setSToken(sTokens.get(0));
+		//adding the created relation to the document-graph
+		sDocument.getSDocumentGraph().addSRelation(sSpanRel);
 			
-		}//adding some annotations, part-of-speech and lemma (for part-of speech and lemma annotations a special annotation in Salt exists)
+		sSpan= SaltFactory.eINSTANCE.createSSpan();
+		sDocument.getSDocumentGraph().addSNode(sSpan);
+		for (int i= 1; i< sTokens.size(); i++)
+		{
+			sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
+			sSpanRel.setSSpan(sSpan);
+			sSpanRel.setSToken(sTokens.get(i));
+			sDocument.getSDocumentGraph().addSRelation(sSpanRel);
+		}
+	}
+	
+	/**
+	 * Annotates the {@link SSpan} objects above the tokenization with information structural annotations.
+	 * @param sDocument
+	 */
+	public static void createInformationStructureAnnotations(SDocument sDocument){
+		SAnnotation sAnno= null;
+		
+		sAnno= SaltFactory.eINSTANCE.createSAnnotation();
+		//setting the name of the annotation
+		sAnno.setSName("Inf-Struct");
+		//setting the value of the annotation
+		sAnno.setSValue("contrast-focus");
+		//adding the annotation to the placeholder span
+		sDocument.getSDocumentGraph().getSSpans().get(0).addSAnnotation(sAnno);
+		
+		sAnno= SaltFactory.eINSTANCE.createSAnnotation();
+		sAnno.setSName("Inf-Struct");
+		sAnno.setSValue("topic");
+		sDocument.getSDocumentGraph().getSSpans().get(1).addSAnnotation(sAnno);
+	}
+	
+	/**
+	 * 
+	 * @param sDocument
+	 */
+	public static void createSyntaxStructure(SDocument sDocument){
+		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
+		
+		// creating variables for the eInstance of the SaltFactory and for the SDocumentGraph 
+		// (this is just for convenience)
+		SaltFactory sf = SaltFactory.eINSTANCE;
+		SDocumentGraph docGraph = sDocument.getSDocumentGraph();
+		
+		// creating the constituent nodes of the syntax tree
+		// these nodes are of the type SStructure
+		SStructure sq    = sf.createSStructure();
+		SStructure np1   = sf.createSStructure();
+		SStructure adjp1 = sf.createSStructure();
+		SStructure adjp2 = sf.createSStructure();
+		SStructure sbar  = sf.createSStructure();
+		SStructure s1    = sf.createSStructure();
+		SStructure np2   = sf.createSStructure();
+		SStructure vp1   = sf.createSStructure();
+		SStructure s2    = sf.createSStructure();
+		SStructure vp2   = sf.createSStructure();
+		SStructure vp3   = sf.createSStructure();
+		
+		// there are two methods named "addSNode" for a SDocumentGraph
+		// the first one simply adds the single parameter of the type SNode to the SDocumentGraph
+		// the second one requires three arguments: two SNodes and a STYPE_NAME
+		// this method will create a SRelation between the two SNodes. The type of the SRelation is determined by
+		// the STYPE_NAME, but only four STYPE_NAMEs are allowed: SDOMINANCE_RELATION, SPOINTING_RELATION,
+		// SSPANNING_RELATION and STEXTUAL_RELATION. For the hierarchical structure that is intended to build, SDOMINANCE_RELATION is used.
+		// the first SNode (the source of the relation) is required to be contained in the SDocumentGraph already, so when building such
+		// a tree, the root node has to be added to the SDocumentGraph before establishing the relations between the other nodes.
+			
+		// creating a variable for the type of relation between the constituents (dominance relation)
+		// (this is just for convenience)
+		STYPE_NAME domRel = STYPE_NAME.SDOMINANCE_RELATION;
+
+		// adding the root SNode to the SDocumentGraph
+		docGraph.addSNode(sq);				
+		
+		// adding the target nodes to the SDocumentGraph and creating SDominanceRelations between the respective nodes
+		// (addSNode returns the created SDominanceRelation, but it it not used here)
+		docGraph.addSNode(sq,    sTokens.get(0),  domRel); // "Is"
+		docGraph.addSNode(sq,    np1,             domRel);
+		docGraph.addSNode(np1,   sTokens.get(1),  domRel); // "this"
+		docGraph.addSNode(np1,   sTokens.get(2),  domRel); // "example"
+		docGraph.addSNode(sq,    adjp1,           domRel);
+		docGraph.addSNode(adjp1, adjp2,           domRel);
+		docGraph.addSNode(adjp2, sTokens.get(3),  domRel); // "more"
+		docGraph.addSNode(adjp2, sTokens.get(4),  domRel); // "complicated"				
+		docGraph.addSNode(adjp1, sbar,            domRel);
+		docGraph.addSNode(sbar,  sTokens.get(5),  domRel); // "than"
+		docGraph.addSNode(sbar,  s1,              domRel);				
+		docGraph.addSNode(s1,    np2,             domRel);				
+		docGraph.addSNode(np2,   sTokens.get(6),  domRel); // "it"
+		docGraph.addSNode(s1,    vp1,             domRel);
+		docGraph.addSNode(vp1,   sTokens.get(7),  domRel); // "appears"				
+		docGraph.addSNode(vp1,   s2,              domRel);				
+		docGraph.addSNode(s2,    vp2,             domRel);
+		docGraph.addSNode(vp2,   sTokens.get(8),  domRel); // "to"				
+		docGraph.addSNode(vp2,   vp3,             domRel);
+		docGraph.addSNode(vp3,   sTokens.get(9),  domRel); // "be"
+			
+		// creating a layer named "syntax" for the constituents of the tree
+		SLayer syntaxLayer = SaltFactory.eINSTANCE.createSLayer();
+		syntaxLayer.setSName("syntax");
+		docGraph.addSLayer(syntaxLayer);
+
+		// adding the constituents to the syntax layer
+		syntaxLayer.getSNodes().add(sq);
+		syntaxLayer.getSNodes().add(np1);
+		syntaxLayer.getSNodes().add(adjp1);				
+		syntaxLayer.getSNodes().add(adjp2);
+		syntaxLayer.getSNodes().add(sbar);				
+		syntaxLayer.getSNodes().add(s1);
+		syntaxLayer.getSNodes().add(np2);				
+		syntaxLayer.getSNodes().add(vp1);
+		syntaxLayer.getSNodes().add(s2);				
+		syntaxLayer.getSNodes().add(vp2);
+		syntaxLayer.getSNodes().add(vp3);				
+	}
+	
+	/**
+	 * 
+	 * @param sDocument
+	 */
+	public static void createSyntaxAnnotations(SDocument sDocument){
+		List<SStructure> sStructures= Collections.synchronizedList(sDocument.getSDocumentGraph().getSStructures());
+		String [] annotations = {"SQ","NP","ADJP","ADJP","SBar","S","NP","VP","S","VP","VP"};
+		String annoNS   = null;     // no namespace used in this example
+		String annoName = "const";  // our name for a constituent
+		SAnnotation sAnno= null;
+		int i = 0;
+		for (SStructure sStructure : sStructures){
+			sAnno= SaltFactory.eINSTANCE.createSAnnotation();
+			sAnno.setNamespace(annoNS);
+			sAnno.setSName(annoName);
+			sAnno.setSValue(annotations[i]);
+			i++;
+			sStructure.addSAnnotation(sAnno);
+		}
+	
+	}
+	
+	/**
+	 * 
+	 * @param sDocument
+	 */
+	public static void createAnaphoricAnnotations(SDocument sDocument){
+		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
+		
+		//creating a span as placeholder, which contains the tokens for "this" and "example"
+		SSpan sSpan= SaltFactory.eINSTANCE.createSSpan();
+		//adding the created span to the document-graph
+		sDocument.getSDocumentGraph().addSNode(sSpan);
+		
+		//creating a relation between the span and the tokens
+		SSpanningRelation sSpanRel= null;
+		sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
+		sSpanRel.setSSpan(sSpan);
+		sSpanRel.setSToken(sTokens.get(1));
+		sDocument.getSDocumentGraph().addSRelation(sSpanRel);
+		sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
+		sSpanRel.setSSpan(sSpan);
+		sSpanRel.setSToken(sTokens.get(2));
+		sDocument.getSDocumentGraph().addSRelation(sSpanRel);
+		
+		//creating a pointing relations
+		SPointingRelation sPointingRelation= SaltFactory.eINSTANCE.createSPointingRelation();
+		//setting token "it" as source of this relation
+		sPointingRelation.setSStructuredSource(sTokens.get(6));
+		//setting span "this example" as target of this relation
+		sPointingRelation.setSStructuredTarget(sSpan);
+		//adding the created relation to the document-graph
+		sDocument.getSDocumentGraph().addSRelation(sPointingRelation);
+		//adding the type to the relation
+		sPointingRelation.addSType("anaphoric");
+		//creating an anaphoric relation with the use of pointing relations between the Tokens {"it"} and {"this", "example"}
 		
 	}
 	
 	/**
-	 * This method creates the content of a document (the primary text, the tokenization and all structures and annotations above them) for 
-	 * the given SDocument object.
 	 * 
-	 * primary text: 		Is this example more complicated than it appears to be?
-	 * tokens:				{"Is", "this", "example", "more", "complicated", "than", "it", "appears", "to", "be"}
-	 * anaphoric relation:	{"it"} --> {"this", "example"}
-	 * 
-	 * @param sDocument the document for which the structure has to be created.
+	 * @param sDocument
 	 */
-	public static void createSDocumentStructure(SDocument sDocument)
-	{
+	public static void createSDocumentStructure(SDocument sDocument){
+		
+		
 		//create SDocumentGraph object and set it to SDocument object
 		sDocument.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
-		{//creating the document structure
-			//an object for the primary text
-			/*
-			STextualDS sTextualDS= null;
-			
-			{//creating the primary text
-				sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
-				sTextualDS.setSText("Is this example more complicated than it appears to be?");
-//				sTextualDS.setSText("This is a sample text, which is very short.");
-				//adding the text to the document-graph
-				sDocument.getSDocumentGraph().addSNode(sTextualDS);
-			}//creating the primary text
-			*/
-			/*
-			{//creating tokenization (token objects and relations between tokens and the primary data object)
-				//placeholder object representing a token
-				SToken sToken= null;
-				//object to connect a token to a primary text
-				STextualRelation sTextRel= null;
-				
-				//adding the created token to the document-graph
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				//adding the token as source of this relation
-				sTextRel.setSToken(sToken);
-				//adding the primary text as target of this relation
-				sTextRel.setSTextualDS(sTextualDS);
-				//adding the start-position of the token in the primary text 
-				sTextRel.setSStart(0);
-				//adding the end-position of the token in the primary text (start-position of the token + length of the token) 
-				sTextRel.setSEnd(2);
-				//adding the textual relation between token and primary text to document graph
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				{//creating the rest of the tokenization, this can also be done automatically
-
-					//as a means to group elements, layers (SLayer) can be used. here, a layer
-					//named "morphology" is created and the tokens will be added to it
-					SLayer morphLayer = SaltFactory.eINSTANCE.createSLayer();
-					morphLayer.setSName("morphology");
-					sDocument.getSDocumentGraph().addSLayer(morphLayer);
-
-					//add the first token to the layers SNodes list
-					morphLayer.getSNodes().add(sToken);
-					
-					//creating tokenization for the token 'this' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);
-
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(3);
-					sTextRel.setSEnd(7);	
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-					//creating tokenization for the token 'example' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(8);
-					sTextRel.setSEnd(15);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'more' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(16);
-					sTextRel.setSEnd(20);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'complicated' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);					
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(21);
-					sTextRel.setSEnd(32);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'than' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(33);
-					sTextRel.setSEnd(37);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'it' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(38);
-					sTextRel.setSEnd(40);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'appears' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(41);
-					sTextRel.setSEnd(48);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'to' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(49);
-					sTextRel.setSEnd(51);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'be' and adding it to the morphology layer
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					morphLayer.getSNodes().add(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(52);
-					sTextRel.setSEnd(54);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				}//creating the rest of the tokenization, this can also be done automatically
-			}//creating tokenization (token objects and relations between tokens and the primary data object)
-			*/
-			// a synchronized list of all tokens to walk through
-			/*
-			List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
-			
-			{//adding some annotations, part-of-speech and lemma (for part-of speech and lemma annotations a special annotation in Salt exists)
-				{//adding part-of speech annotations
-					SPOSAnnotation sPOSAnno= null;
-					
-					
-					//a list of all part-of-speech annotations for the words Is (VBZ), this (DT) ... be (VB)
-					String[] posAnnotations={"VBZ", "DT", "NN", "ABR", "JJ", "IN", "PRP", "VBZ", "TO", "VB"}; 
-					for (int i= 0; i< sTokens.size();i++)
-					{
-						sPOSAnno= SaltFactory.eINSTANCE.createSPOSAnnotation();
-						sPOSAnno.setSValue(posAnnotations[i]);
-						sTokens.get(i).addSAnnotation(sPOSAnno);
-					}
-				}//adding part-of speech annotations
-				
-				{//adding lemma annotations
-					SLemmaAnnotation sLemmaAnno= null;
-					
-					
-					//a list of all lemma annotations for the words Is (be), this (this) ... be (be)
-					String[] posAnnotations={"be", "this", "example", "more", "complicated", "than", "it", "appear", "to", "be"}; 
-					for (int i= 0; i< sTokens.size();i++)
-					{
-						sLemmaAnno= SaltFactory.eINSTANCE.createSLemmaAnnotation();
-						sLemmaAnno.setSValue(posAnnotations[i]);
-						sTokens.get(i).addSAnnotation(sLemmaAnno);
-					}
-				}//adding lemma annotations
-				
-				{//creating annotations for information structure with the use of spans: "Is"= contrast-focus,"this example more complicated than it appears to be"= Topic 
-					SSpan sSpan= null;
-					SSpanningRelation sSpanRel= null;
-					SAnnotation sAnno= null;
-					
-					//creating a span node as placeholder for information-structure annotation
-					sSpan= SaltFactory.eINSTANCE.createSSpan();
-					//adding the created span to the document-graph
-					sDocument.getSDocumentGraph().addSNode(sSpan);
-					//creating an annotation for information-structure
-					sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-					//setting the name of the annotation
-					sAnno.setSName("Inf-Struct");
-					//setting the value of the annotation
-					sAnno.setSValue("contrast-focus");
-					//adding the annotation to the placeholder span
-					sSpan.addSAnnotation(sAnno);
-					
-					//creating a relation to connect a token with the span
-					sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-					//setting the span as source of the relation
-					sSpanRel.setSSpan(sSpan);
-					//setting the first token as target of the relation
-					sSpanRel.setSToken(sTokens.get(0));
-					//adding the created relation to the document-graph
-					sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-					
-					{//creating the second span
-						sSpan= SaltFactory.eINSTANCE.createSSpan();
-						sDocument.getSDocumentGraph().addSNode(sSpan);
-						sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-						sAnno.setSName("Inf-Struct");
-						sAnno.setSValue("topic");
-						sSpan.addSAnnotation(sAnno);
-						for (int i= 1; i< sTokens.size(); i++)
-						{
-							sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-							sSpanRel.setSSpan(sSpan);
-							sSpanRel.setSToken(sTokens.get(i));
-							sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-						}
-					}//creating the second span
-					
-				}//creating annotations for information structure with the use of spans
-				
-			}//adding some annotations, part-of-speech and lemma (for part-of speech and lemma annotations a special annotation in Salt exists)
-			*/
-			{//creating an anaphoric relation with the use of pointing relations between the Tokens {"it"} and {"this", "example"}
-				//creating a span as placeholder, which contains the tokens for "this" and "example"
-				SSpan sSpan= SaltFactory.eINSTANCE.createSSpan();
-				//adding the created span to the document-graph
-				sDocument.getSDocumentGraph().addSNode(sSpan);
-				
-				//creating a relation between the span and the tokens
-				SSpanningRelation sSpanRel= null;
-				sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-				sSpanRel.setSSpan(sSpan);
-				sSpanRel.setSToken(sTokens.get(1));
-				sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-				sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-				sSpanRel.setSSpan(sSpan);
-				sSpanRel.setSToken(sTokens.get(2));
-				sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-				
-				//creating a pointing relations
-				SPointingRelation sPointingRelation= SaltFactory.eINSTANCE.createSPointingRelation();
-				//setting token "it" as source of this relation
-				sPointingRelation.setSStructuredSource(sTokens.get(6));
-				//setting span "this example" as target of this relation
-				sPointingRelation.setSStructuredTarget(sSpan);
-				//adding the created relation to the document-graph
-				sDocument.getSDocumentGraph().addSRelation(sPointingRelation);
-				//creating an annotation
-				SAnnotation sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-				sAnno.setSName("anaphoric");
-				sAnno.setSValue("antecedent");
-				//adding the annotation to the relation
-				sPointingRelation.addSAnnotation(sAnno);
-			}//creating an anaphoric relation with the use of pointing relations between the Tokens {"it"} and {"this", "example"}
-
-			{//creating a syntax tree in a layer
-				
-				// creating variables for the eInstance of the SaltFactory and for the SDocumentGraph 
-				// (this is just for convenience)
-				SaltFactory sf = SaltFactory.eINSTANCE;
-				SDocumentGraph docGraph = sDocument.getSDocumentGraph();
-				
-				// creating the constituent nodes of the syntax tree
-				// these nodes are of the type SStructure
-				SStructure sq    = sf.createSStructure();
-				SStructure np1   = sf.createSStructure();
-				SStructure adjp1 = sf.createSStructure();
-				SStructure adjp2 = sf.createSStructure();
-				SStructure sbar  = sf.createSStructure();
-				SStructure s1    = sf.createSStructure();
-				SStructure np2   = sf.createSStructure();
-				SStructure vp1   = sf.createSStructure();
-				SStructure s2    = sf.createSStructure();
-				SStructure vp2   = sf.createSStructure();
-				SStructure vp3   = sf.createSStructure();
-				
-				// each constituent will get an SAnnotation - namespace and name are all the same, so these variables will be used 
-				String annoNS   = null;     // no namespace used in this example
-				String annoName = "const";  // our name for a constituent
-				
-				// creating SAnnotations on the constituent nodes,
-				// parameters are the namespace, name and value (constituent type) of the SAnnotation
-				// this is a shortcut for creating an SAnnotation, setting its namespace, name and value and then adding it to the constituent
-				sq.   createSAnnotation(annoNS, annoName, "SQ");
-				np1.  createSAnnotation(annoNS, annoName, "NP");
-				adjp1.createSAnnotation(annoNS, annoName, "ADJP");
-				adjp2.createSAnnotation(annoNS, annoName, "ADJP");
-				sbar. createSAnnotation(annoNS, annoName, "SBar"); 
-				s1.   createSAnnotation(annoNS, annoName, "S");
-				np2.  createSAnnotation(annoNS, annoName, "NP"); 
-				vp1.  createSAnnotation(annoNS, annoName, "VP");
-				s2.   createSAnnotation(annoNS, annoName, "S"); 
-				vp2.  createSAnnotation(annoNS, annoName, "VP");
-				vp3.  createSAnnotation(annoNS, annoName, "VP");
-
-				// there are two methods named "addSNode" for a SDocumentGraph
-				// the first one simply adds the single parameter of the type SNode to the SDocumentGraph
-				// the second one requires three arguments: two SNodes and a STYPE_NAME
-				// this method will create a SRelation between the two SNodes. The type of the SRelation is determined by
-				// the STYPE_NAME, but only four STYPE_NAMEs are allowed: SDOMINANCE_RELATION, SPOINTING_RELATION,
-				// SSPANNING_RELATION and STEXTUAL_RELATION. For the hierarchical structure that is intended to build, SDOMINANCE_RELATION is used.
-				// the first SNode (the source of the relation) is required to be contained in the SDocumentGraph already, so when building such
-				// a tree, the root node has to be added to the SDocumentGraph before establishing the relations between the other nodes.
-				
-				// creating a variable for the type of relation between the constituents (dominance relation)
-				// (this is just for convenience)
-				STYPE_NAME domRel = STYPE_NAME.SDOMINANCE_RELATION;
-
-				// adding the root SNode to the SDocumentGraph
-				docGraph.addSNode(sq);				
-				
-				// adding the target nodes to the SDocumentGraph and creating SDominanceRelations between the respective nodes
-				// (addSNode returns the created SDominanceRelation, but it it not used here)
-				docGraph.addSNode(sq,    sTokens.get(0),  domRel); // "Is"
-				docGraph.addSNode(sq,    np1,             domRel);
-				docGraph.addSNode(np1,   sTokens.get(1),  domRel); // "this"
-				docGraph.addSNode(np1,   sTokens.get(2),  domRel); // "example"
-				docGraph.addSNode(sq,    adjp1,           domRel);
-				docGraph.addSNode(adjp1, adjp2,           domRel);
-				docGraph.addSNode(adjp2, sTokens.get(3),  domRel); // "more"
-				docGraph.addSNode(adjp2, sTokens.get(4),  domRel); // "complicated"				
-				docGraph.addSNode(adjp1, sbar,            domRel);
-				docGraph.addSNode(sbar,  sTokens.get(5),  domRel); // "than"
-				docGraph.addSNode(sbar,  s1,              domRel);				
-				docGraph.addSNode(s1,    np2,             domRel);				
-				docGraph.addSNode(np2,   sTokens.get(6),  domRel); // "it"
-				docGraph.addSNode(s1,    vp1,             domRel);
-				docGraph.addSNode(vp1,   sTokens.get(7),  domRel); // "appears"				
-				docGraph.addSNode(vp1,   s2,              domRel);				
-				docGraph.addSNode(s2,    vp2,             domRel);
-				docGraph.addSNode(vp2,   sTokens.get(8),  domRel); // "to"				
-				docGraph.addSNode(vp2,   vp3,             domRel);
-				docGraph.addSNode(vp3,   sTokens.get(9),  domRel); // "be"
-				
-				// creating a layer named "syntax" for the constituents of the tree
-				SLayer syntaxLayer = SaltFactory.eINSTANCE.createSLayer();
-				syntaxLayer.setSName("syntax");
-				docGraph.addSLayer(syntaxLayer);
-
-				// adding the constituents to the syntax layer
-				syntaxLayer.getSNodes().add(sq);
-				syntaxLayer.getSNodes().add(np1);
-				syntaxLayer.getSNodes().add(adjp1);				
-				syntaxLayer.getSNodes().add(adjp2);
-				syntaxLayer.getSNodes().add(sbar);				
-				syntaxLayer.getSNodes().add(s1);
-				syntaxLayer.getSNodes().add(np2);				
-				syntaxLayer.getSNodes().add(vp1);
-				syntaxLayer.getSNodes().add(s2);				
-				syntaxLayer.getSNodes().add(vp2);
-				syntaxLayer.getSNodes().add(vp3);				
-				
-			}//creating a syntax tree in a layer
+		// create the primary text
+		createPrimaryData(sDocument);
+		// create tokenization
+		createTokens(sDocument);
+		// create token Annotations
+		createMorphologyAnnotations(sDocument);
+		// create spans
+		createInformationStructureSpan(sDocument);
+		// create span annotations
+		createInformationStructureAnnotations(sDocument);
+		// create Structures
+		createSyntaxStructure(sDocument);
+		// create Structure annotations
+		createSyntaxAnnotations(sDocument);
+		// create pointing relations
+		createAnaphoricAnnotations(sDocument);
 		
-		}//creating the document structure
 	}
+	
+	
 	
 	public static String tmpPathName= "./_tmp/";
 	
@@ -737,6 +521,12 @@ public class SaltSample
 		retVal.append("*** Bye from SaltSample.                                                 ***\n");
 		retVal.append("****************************************************************************\n");
 		return(retVal.toString());
+	}
+	
+	public SCorpusGraph getCorpus(){
+		
+		
+		return sCorpusGraph;
 	}
 	
 	/**

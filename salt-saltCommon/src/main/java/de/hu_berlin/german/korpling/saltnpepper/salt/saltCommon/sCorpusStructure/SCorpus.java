@@ -63,5 +63,19 @@ public interface SCorpus extends SNode {
 	 * @generated
 	 */
 	void setSCorpusGraph(SCorpusGraph value);
+	
+	/**
+	 * Returns a {@link SCorpus} object having the same properties like this. This means, all labels (annotations, meta-annotations and so on)
+	 * will also be cloned. These clones will be set to the cloned {@link SCorpus} object.   
+	 * @return {@link SCorpus} object as copy of this 
+	 */
+	Object clone(); 
+	
+	/**
+	 * This method returns the given object. It adds all properties of this to the given object.
+	 * @param clone the clone to which all properties of this shall be copied to
+	 * @return the extended given object
+	 */
+	Object clone(SCorpus clone);
 
 } // SCorpus

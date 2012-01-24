@@ -41,12 +41,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  * <p>
  * The following features are tested:
  * <ul>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName() <em>SName</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#getSAnnotations() <em>SAnnotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SIdentifiableElement#getSElementId() <em>SElement Id</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SIdentifiableElement#getSId() <em>SId</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SIdentifiableElement#getSElementPath() <em>SElement Path</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotations() <em>SProcessing Annotations</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeatures() <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotations() <em>SMeta Annotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRelations() <em>SRelations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSNodes() <em>SNodes</em>}</li>
@@ -62,15 +63,15 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRelation(java.lang.String) <em>Get SRelation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#addSLayer(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer) <em>Add SLayer</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayer(java.lang.String) <em>Get SLayer</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRoots() <em>Get SRoots</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLeafs() <em>Get SLeafs</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler) <em>Traverse</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler, boolean) <em>Traverse</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String) <em>Get SLayer By Name</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation) <em>Add SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#createSMetaAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#createSMetaAnnotation(java.lang.String, java.lang.String, java.lang.String) <em>Create SMeta Annotation</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#addSFeature(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#createSFeature(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SFeature</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#createSFeature(java.lang.String, java.lang.String, java.lang.String) <em>Create SFeature</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String) <em>Get SProcessing Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement#createSProcessingAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SProcessing Annotation</em>}</li>
@@ -79,11 +80,16 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#getSAnnotation(java.lang.String) <em>Get SAnnotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SAnnotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotation(java.lang.String, java.lang.String, java.lang.String) <em>Create SAnnotation</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#addSFeature(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#createSFeature(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SFeature</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#createSFeature(java.lang.String, java.lang.String, java.lang.String) <em>Create SFeature</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
-public class SGraphTest extends TestCase {
+public class SGraphTest extends SNamedElementTest {
 
 	/**
 	 * The fixture for this SGraph test case.
@@ -153,7 +159,7 @@ public class SGraphTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
-	
+
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSNodes() <em>SNodes</em>}' feature getter.
 	 * <!-- begin-user-doc -->
@@ -314,6 +320,90 @@ public class SGraphTest extends TestCase {
 	public void testGetSLayer__String() {
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRoots() <em>Get SRoots</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRoots()
+	 */
+	public void testGetSRoots() 
+	{
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLeafs() <em>Get SLeafs</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLeafs()
+	 */
+	public void testGetSLeafs() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler) <em>Traverse</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler)
+	 */
+	public void testTraverse__EList_GRAPH_TRAVERSE_TYPE_String_SGraphTraverseHandler() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler, boolean) <em>Traverse</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#traverse(org.eclipse.emf.common.util.EList, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE, java.lang.String, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler, boolean)
+	 */
+	public void testTraverse__EList_GRAPH_TRAVERSE_TYPE_String_SGraphTraverseHandler_boolean() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String) <em>Get SLayer By Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String)
+	 */
+	public void testGetSLayerByName__String() 
+	{
+		SLayer l1 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l2 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l3 = SaltCoreFactory.eINSTANCE.createSLayer();
+		
+		l1.setSName("l1");
+		l2.setSName("l2");
+		l3.setSName("l3");
+		
+		this.getFixture().addSLayer(l1);
+		this.getFixture().addSLayer(l3);
+		this.getFixture().addSLayer(l2);
+		
+		assertEquals(1, this.getFixture().getSLayerByName("l2").size());
+		assertEquals(1, this.getFixture().getSLayerByName("l1").size());
+		assertEquals(1, this.getFixture().getSLayerByName("l3").size());
+		assertEquals(0, this.getFixture().getSLayerByName("l4").size());
+		
+		assertEquals(l1, this.getFixture().getSLayerByName("l1").get(0));
+		assertEquals(l2, this.getFixture().getSLayerByName("l2").get(0));
+		assertEquals(l3, this.getFixture().getSLayerByName("l3").get(0));
+		
+		SLayer l1_2 = SaltCoreFactory.eINSTANCE.createSLayer();
+		l1_2.setSName("l1");
+		this.getFixture().addSLayer(l1_2);		
+		assertEquals(2, this.getFixture().getSLayerByName("l1").size());
+		assertTrue(this.getFixture().getSLayerByName("l1").contains(l1));
+		assertTrue(this.getFixture().getSLayerByName("l1").contains(l1_2));
+		
+		assertEquals(1, this.getFixture().getSLayerByName("l2").size());
 	}
 
 	/**
@@ -718,13 +808,18 @@ public class SGraphTest extends TestCase {
 	 * @throws Exception 
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeatures()
 	 */
-	public void testGetSFeatures() throws Exception 
+	public void testGetSFeatures() 
 	{
-		SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
-		sFeatTest.setUp();
-		sFeatTest.setFixture(this.getFixture());
-		sFeatTest.testGetSFeatures();
-		sFeatTest.tearDown();
+		try
+		{
+			SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testGetSFeatures();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -734,13 +829,18 @@ public class SGraphTest extends TestCase {
 	 * @throws Exception 
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#addSFeature(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature)
 	 */
-	public void testAddSFeature__SFeature() throws Exception 
+	public void testAddSFeature__SFeature() 
 	{
-		SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
-		sFeatTest.setUp();
-		sFeatTest.setFixture(this.getFixture());
-		sFeatTest.testAddSFeature__SFeature();
-		sFeatTest.tearDown();
+		try 
+		{
+			SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testAddSFeature__SFeature();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**
@@ -750,13 +850,18 @@ public class SGraphTest extends TestCase {
 	 * @throws Exception 
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String)
 	 */
-	public void testGetSFeature__String() throws Exception 
+	public void testGetSFeature__String() 
 	{
-		SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
-		sFeatTest.setUp();
-		sFeatTest.setFixture(this.getFixture());
-		sFeatTest.testGetSFeature__String();
-		sFeatTest.tearDown();
+		try
+		{
+			SFeaturableElementTest sFeatTest= new SFeaturableElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testGetSFeature__String();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

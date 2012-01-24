@@ -20,6 +20,12 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 
 
+/**
+ * 
+ * @author Florian Zipser
+ * @deprecated since Salt 1.1.3
+*/
+@Deprecated
 public class SDocumentStructureModule 
 {
 	/**

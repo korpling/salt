@@ -21,11 +21,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.IdentifierImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SIdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.IdentifierImpl;
 
 /**
  * <!-- begin-user-doc -->

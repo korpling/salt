@@ -162,6 +162,10 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 				return createSDominanceRelationAdapter();
 			}
 			@Override
+			public Adapter caseSDataSourceSequence(SDataSourceSequence object) {
+				return createSDataSourceSequenceAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -458,6 +462,20 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSDominanceRelationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence <em>SData Source Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence
+	 * @generated
+	 */
+	public Adapter createSDataSourceSequenceAdapter() {
 		return null;
 	}
 

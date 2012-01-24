@@ -29,13 +29,22 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObje
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SCorpusStructureModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 
+/**
+ * 
+ * @author Florian Zipser
+ * @deprecated since Salt 1.1.3
+ */
+@Deprecated
 public class SCorpusStructureAccessor extends SCorpusStructureModule implements TraversalObject
 {
 	/**
 	 * Returns all SCorpus-objects which are root corpora.
 	 * @return root corpora
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#getSRoots()} instead
 	 */
+	@Deprecated
 	public EList<SCorpus> getSRootCorpora()
 	{
 		if (this.getSCorpusGraph()== null)
@@ -63,6 +72,9 @@ public class SCorpusStructureAccessor extends SCorpusStructureModule implements 
 		return(retVal);
 	}
 
+	/**
+	 * @deprecated since Salt 1.1.3
+	 */
 	@Override
 	public boolean checkConstraint(GRAPH_TRAVERSE_MODE traversalMode,
 			Long traversalId, Edge edge, Node currNode, long order) {
@@ -70,6 +82,9 @@ public class SCorpusStructureAccessor extends SCorpusStructureModule implements 
 		return false;
 	}
 
+	/**
+	 * @deprecated since Salt 1.1.3
+	 */
 	@Override
 	public void nodeLeft(GRAPH_TRAVERSE_MODE traversalMode, Long traversalId,
 			Node currNode, Edge edge, Node fromNode, long order) {
@@ -77,6 +92,9 @@ public class SCorpusStructureAccessor extends SCorpusStructureModule implements 
 		
 	}
 
+	/**
+	 * @deprecated since Salt 1.1.3
+	 */
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_MODE traversalMode,
 			Long traversalId, Node currNode, Edge edge, Node fromNode,

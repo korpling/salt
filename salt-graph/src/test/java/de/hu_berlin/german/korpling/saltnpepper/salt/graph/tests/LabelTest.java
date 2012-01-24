@@ -29,13 +29,14 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getQName() <em>QName</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValue() <em>Value</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString() <em>Value String</em>}</li>
  * </ul>
  * </p>
  * <p>
  * The following operations are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getNSSeperator() <em>Get NS Seperator</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone() <em>Clone</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -320,6 +321,16 @@ public class LabelTest extends LabelableElementTest {
 	}
 
 	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#setValueString(java.lang.String) <em>Value String</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#setValueString(java.lang.String)
+	 */
+	public void testSetValueString() {
+		//nothing to test, because method does nothing
+	}
+
+	/**
 	 * Tests the '{@link de.util.graph.Label#getNSSeperator() <em>Get NS Seperator</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -328,6 +339,17 @@ public class LabelTest extends LabelableElementTest {
 	public void testGetNSSeperator() 
 	{
 		assertEquals(this.getFixture().getNSSeperator(),Label.NS_SEPERATOR);
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone() <em>Clone</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone()
+	 */
+	public void testClone() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
 	}
 
 	/**
@@ -400,7 +422,6 @@ public class LabelTest extends LabelableElementTest {
 			assertNull(this.getFixture().differences(this.getFixture()));
 			assertNotNull(this.getFixture().differences(label));
 			label.setNamespace(ns);
-			System.out.println("------------>"+ this.getFixture().differences(label));
 			assertNull(this.getFixture().differences(label));
 		}//namespace
 		

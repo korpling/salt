@@ -1664,22 +1664,22 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE__SDATA = SSEQUENTIAL_DS__SDATA;
 
 	/**
-	 * The feature id for the '<em><b>SPoints Of Time</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STIMELINE__SPOINTS_OF_TIME = SSEQUENTIAL_DS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STIMELINE__SDOCUMENT_GRAPH = SSEQUENTIAL_DS_FEATURE_COUNT + 1;
+	int STIMELINE__SDOCUMENT_GRAPH = SSEQUENTIAL_DS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SPoints Of Time</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE__SPOINTS_OF_TIME = SSEQUENTIAL_DS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>STimeline</em>' class.
@@ -1918,7 +1918,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE_RELATION__STOKEN = SSEQUENTIAL_RELATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>SDocument Graph</b></em>' reference.
+	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3340,6 +3340,52 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOMINANCE_RELATION_FEATURE_COUNT = STEXT_OVERLAPPING_RELATION_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDataSourceSequenceImpl <em>SData Source Sequence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDataSourceSequenceImpl
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSDataSourceSequence()
+	 * @generated
+	 */
+	int SDATA_SOURCE_SEQUENCE = 16;
+
+	/**
+	 * The feature id for the '<em><b>SStart</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDATA_SOURCE_SEQUENCE__SSTART = 0;
+
+	/**
+	 * The feature id for the '<em><b>SEnd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDATA_SOURCE_SEQUENCE__SEND = 1;
+
+	/**
+	 * The feature id for the '<em><b>SSequential DS</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDATA_SOURCE_SEQUENCE__SSEQUENTIAL_DS = 2;
+
+	/**
+	 * The number of structural features of the '<em>SData Source Sequence</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDATA_SOURCE_SEQUENCE_FEATURE_COUNT = 3;
+
+	/**
 	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3347,7 +3393,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSFEATURE_NAMES()
 	 * @generated
 	 */
-	int SFEATURE_NAMES = 16;
+	int SFEATURE_NAMES = 17;
 
 
 	/**
@@ -3358,7 +3404,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSTYPE_NAME()
 	 * @generated
 	 */
-	int STYPE_NAME = 17;
+	int STYPE_NAME = 18;
 
 
 	/**
@@ -3706,10 +3752,10 @@ public interface SDocumentStructurePackage extends EPackage {
 	EReference getSTimelineRelation_SToken();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * Returns the meta object for the container reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>SDocument Graph</em>'.
+	 * @return the meta object for the container reference '<em>SDocument Graph</em>'.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph()
 	 * @see #getSTimelineRelation()
 	 * @generated
@@ -3916,6 +3962,49 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSDominanceRelation_SDocumentGraph();
+
+	/**
+	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence <em>SData Source Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SData Source Sequence</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence
+	 * @generated
+	 */
+	EClass getSDataSourceSequence();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence#getSStart <em>SStart</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SStart</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence#getSStart()
+	 * @see #getSDataSourceSequence()
+	 * @generated
+	 */
+	EAttribute getSDataSourceSequence_SStart();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence#getSEnd <em>SEnd</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SEnd</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence#getSEnd()
+	 * @see #getSDataSourceSequence()
+	 * @generated
+	 */
+	EAttribute getSDataSourceSequence_SEnd();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence#getSSequentialDS <em>SSequential DS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SSequential DS</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence#getSSequentialDS()
+	 * @see #getSDataSourceSequence()
+	 * @generated
+	 */
+	EReference getSDataSourceSequence_SSequentialDS();
 
 	/**
 	 * Returns the meta object for enum '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}'.
@@ -4232,7 +4321,7 @@ public interface SDocumentStructurePackage extends EPackage {
 		EReference STIMELINE_RELATION__STOKEN = eINSTANCE.getSTimelineRelation_SToken();
 
 		/**
-		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -4406,6 +4495,40 @@ public interface SDocumentStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOMINANCE_RELATION__SDOCUMENT_GRAPH = eINSTANCE.getSDominanceRelation_SDocumentGraph();
+
+		/**
+		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDataSourceSequenceImpl <em>SData Source Sequence</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDataSourceSequenceImpl
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSDataSourceSequence()
+		 * @generated
+		 */
+		EClass SDATA_SOURCE_SEQUENCE = eINSTANCE.getSDataSourceSequence();
+
+		/**
+		 * The meta object literal for the '<em><b>SStart</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SDATA_SOURCE_SEQUENCE__SSTART = eINSTANCE.getSDataSourceSequence_SStart();
+
+		/**
+		 * The meta object literal for the '<em><b>SEnd</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SDATA_SOURCE_SEQUENCE__SEND = eINSTANCE.getSDataSourceSequence_SEnd();
+
+		/**
+		 * The meta object literal for the '<em><b>SSequential DS</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDATA_SOURCE_SEQUENCE__SSEQUENTIAL_DS = eINSTANCE.getSDataSourceSequence_SSequentialDS();
 
 		/**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}' enum.

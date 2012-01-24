@@ -25,6 +25,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 
+/**
+ * 
+ * @author Florian Zipser
+ * @deprecated since Salt 1.1.3 use {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.STokenSStartComparator} instead
+ */
+@Deprecated  
 public class STokenSStartComparator implements Comparator<SToken> {
 
 	private SDocumentGraph sDocumentGraph= null;

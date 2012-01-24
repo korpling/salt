@@ -96,5 +96,19 @@ public interface SDocument extends SNode {
 	 * @generated
 	 */
 	void setSDocumentGraph(SDocumentGraph value);
+	
+	/**
+	 * Returns a {@link SDocument} object having the same properties like this. This means, all labels (annotations, meta-annotations and so on)
+	 * will also be cloned. These clones will be set to the cloned {@link SDocument} object.   
+	 * @return {@link SDocument} object as copy of this 
+	 */
+	Object clone(); 
+	
+	/**
+	 * This method returns the given object. It adds all properties of this to the given object.
+	 * @param clone the clone to which all properties of this shall be copied to
+	 * @return the extended given object
+	 */
+	Object clone(SDocument clone);
 
 } // SDocument

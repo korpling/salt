@@ -20,6 +20,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -148,7 +149,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 					if (sCorpusGraph.getSElementId()== null)
 						sCorpusGraph.setSElementId(SaltCommonFactory.eINSTANCE.createSElementId());
 					if (	(sCorpusGraph.getSId()== null)||
-							(sCorpusGraph.getSId().equals("")))
+							(sCorpusGraph.getSId().isEmpty()))
 					{
 						this.numOfSCorpusGraphs++;
 						sCorpusGraph.setSId(KW_SCORPUS_GRAPH_ID + numOfSCorpusGraphs);

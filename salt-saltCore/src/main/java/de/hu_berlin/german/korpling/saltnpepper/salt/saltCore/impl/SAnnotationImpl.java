@@ -20,14 +20,11 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
 
 /**
  * <!-- begin-user-doc -->

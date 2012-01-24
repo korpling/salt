@@ -103,7 +103,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 		this.currOutputStream.println("digraph G {");
 		this.currOutputStream.println("ordering= out;");
 		
-		//if documentgraph isn�t  null print it 
+		//if documentgraph isn't  null print it 
 		if (this.getSDocumentGraph()!= null)
 		{
 			GraphTraverser graphTraverser= new GraphTraverser();
@@ -124,8 +124,8 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			travObj.waitUntilFinished();
 			{//some nodes have no roots for example if they are part of a cycle, they have to be still stored
 				if (visitedNodes.size() != this.getSDocumentGraph().getSNodes().size())
-				{//if both lists doesn�t have the same size create difference
-					//contains all nodes, which wasn� t visited while first traversal
+				{//if both lists doesn't have the same size create difference
+					//contains all nodes, which wasn' t visited while first traversal
 					EList<Node> forgottenNodes= new BasicEList<Node>();
 					for (Node node: this.getSDocumentGraph().getSNodes())
 					{
@@ -133,7 +133,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 							forgottenNodes.add(node);
 					}
 					if (forgottenNodes.size()== 0)
-						throw new SaltResourceException("There are some nodes, which hasn� t been printed because of an unknown reason.");
+						throw new SaltResourceException("There are some nodes, which hasn' t been printed because of an unknown reason.");
 					else
 					{//traverse again
 						graphTraverser= new GraphTraverser();
@@ -142,7 +142,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 						travObj.start(forgottenNodes);
 						travObj.waitUntilFinished();
 					}//traverse again
-				}//if both lists doesn�t have the same size create difference
+				}//if both lists doesn't have the same size create difference
 			}//some nodes have no roots for example if they are part of a cycle, they have to be still stored
 			//callback to traverse graph 
 //			this.getSDocumentGraph().traverseSGraph(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this.getSDocumentGraph().getSRoots(), this, null);
@@ -180,7 +180,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 		String anno= null;
 		if (sAnno.getSValue()!= null)
 			anno= sAnno.getSValue().toString().replace("\"", "\\\"");
-		if ((retStr!= null) && (!retStr.equalsIgnoreCase("")))		
+		if ((retStr!= null) && (!retStr.isEmpty()))		
 				retStr= (sAnno.getQName()+"= "+anno+"\\{"+retStr+"\\}");
 		else	retStr= (sAnno.getQName()+"= "+anno);
 		
@@ -290,7 +290,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			dotNode.shape= "Mrecord";
 			dotNode.style= "filled";
 		}		
-		//if element is already stored don�t store again
+		//if element is already stored don't store again
 		if (currSNode.getSProcessingAnnotation(KW_DOT_STORED)!= null);
 		else
 		{
@@ -319,7 +319,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 					String dotString= "";
 					for (String sType: sTypes)
 					{	
-						if (dotString.equalsIgnoreCase(""))
+						if (dotString.isEmpty())
 							dotString= sType;
 						else dotString= dotString + sType+ ", ";
 					}
@@ -363,7 +363,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 				dotEdge.color= "blue";
 				dotEdge.style= "filled";
 			}
-			//if relation is already stored don�t store again
+			//if relation is already stored don't store again
 			if (relation.getSProcessingAnnotation(KW_DOT_STORED)!= null);
 			else
 			{

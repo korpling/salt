@@ -187,13 +187,101 @@
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/addSNode"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_wubTonVsEeCXQ9RnU_WgtA"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_hgSt8AGEEeGsJtYaUYTaYA" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSTextualDS"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_hgSt8QGEEeGsJtYaUYTaYA"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_qL6H8AOtEeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSToken"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_qL6H8QOtEeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_19fqMAOuEeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSToken.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_19gRQAOuEeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_XKA4MTeeEeGXl6e6Yx4KwQ" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSToken.2"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_XKA4MjeeEeGXl6e6Yx4KwQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_gBFVAASlEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSSpan"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_gBFVAQSlEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_p5dPcAVBEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSSpan.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_p5dPcQVBEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_h91VkASlEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSStructure"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_h91VkQSlEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_bOAWkAVgEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSStructure.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_bOAWkQVgEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_m5qrMAYKEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSTimeline"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_m5qrMQYKEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_iJPbgAR9EeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getSTokensBySequence"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_iJPbgQR9EeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_v-YmYAR9EeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getSSpanBySequence"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_v-YmYQR9EeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_4jbwoAR9EeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getSStructureBySequence"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_4jbwoQR9EeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_-pkocAR9EeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getSNodeBySequence"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_-pkocQR9EeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_dF-gsQSjEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getOverlappedDSSequences.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_dF-gsgSjEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_xroWEASjEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getOverlappedDSSequences"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_xroWEQSjEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_G4FPEASLEeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/isContinuousByText"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_G4FPEQSLEeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_eakpAASLEeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/isContinuousByText.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_eakpAQSLEeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_uDq2EASREeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getSortedSTokenByText"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uDq2EQSREeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_3p2GIASREeGEtpuQg2tYFw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getSortedSTokenByText.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_3p2GIQSREeGEtpuQg2tYFw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_vne_sAU1EeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sortSTokenByText"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_vne_sQU1EeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_hUHUwAYGEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getRootsBySRelation"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_hUHUwQYGEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_klkecAYGEeG9Ra8stJsLQw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getRootsBySRelationSType"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_klkecQYGEeG9Ra8stJsLQw"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_vw8YeIjWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_vw8YeYjWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_vw8YeojWEd6X5oQchPkMiQ"/>
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_vw8YcIjWEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
         <element xmi:type="ecore:EClass" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vw8YcYjWEd6X5oQchPkMiQ" x="250" y="548" width="358" height="163"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vw8YcYjWEd6X5oQchPkMiQ" x="154" y="548" width="454" height="422"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_uoINgI18Ed6gH4-RkEY2gA" type="2003">
         <children xmi:type="notation:Node" xmi:id="_uoINg418Ed6gH4-RkEY2gA" type="4002"/>
@@ -545,13 +633,53 @@
             <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SPOINTING_RELATION"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_LCsrsVrIEd-nlKwtzNGozg"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_ho700AVvEeG9Ra8stJsLQw" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/STEXT_OVERLAPPING_RELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_ho700QVvEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_ofT2wAVvEeG9Ra8stJsLQw" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/STIME_OVERLAPPING_RELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_ofT2wQVvEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_qU4RQAVvEeG9Ra8stJsLQw" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SSEQUENTIAL_RELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_qU4RQQVvEeG9Ra8stJsLQw"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_HKSFIlrHEd-nlKwtzNGozg"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_HKSFI1rHEd-nlKwtzNGozg"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_HKSFJFrHEd-nlKwtzNGozg"/>
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_HKL-glrHEd-nlKwtzNGozg" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
         <element xmi:type="ecore:EEnum" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HKL-g1rHEd-nlKwtzNGozg" x="25" y="13" width="205" height="191"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HKL-g1rHEd-nlKwtzNGozg" x="25" y="13" width="287" height="243"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Qw-00QGAEeGsJtYaUYTaYA" type="2003">
+        <children xmi:type="notation:Node" xmi:id="_QxgZQAGAEeGsJtYaUYTaYA" type="4002"/>
+        <children xmi:type="notation:Node" xmi:id="_QxhnYAGAEeGsJtYaUYTaYA" type="5004">
+          <children xmi:type="notation:Node" xmi:id="_ZmqcEAGAEeGsJtYaUYTaYA" type="2001">
+            <element xmi:type="ecore:EAttribute" href="saltCommon.ecore#//sDocumentStructure/SDataSourceSequence/sStart"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_ZmqcEQGAEeGsJtYaUYTaYA"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_ceb6cAGAEeGsJtYaUYTaYA" type="2001">
+            <element xmi:type="ecore:EAttribute" href="saltCommon.ecore#//sDocumentStructure/SDataSourceSequence/sEnd"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_cechgAGAEeGsJtYaUYTaYA"/>
+          </children>
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_QxhnYQGAEeGsJtYaUYTaYA"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_QxhnYgGAEeGsJtYaUYTaYA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_QxhnYwGAEeGsJtYaUYTaYA"/>
+        </children>
+        <children xmi:type="notation:Node" xmi:id="_Qxi1gAGAEeGsJtYaUYTaYA" type="5005">
+          <children xmi:type="notation:Node" xmi:id="_x0suAAOcEeGsJtYaUYTaYA" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDataSourceSequence/validate"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_x0tVEAOcEeGsJtYaUYTaYA"/>
+          </children>
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_Qxi1gQGAEeGsJtYaUYTaYA"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_Qxi1ggGAEeGsJtYaUYTaYA"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_Qxi1gwGAEeGsJtYaUYTaYA"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_Qw_b4AGAEeGsJtYaUYTaYA" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+        <element xmi:type="ecore:EClass" href="saltCommon.ecore#//sDocumentStructure/SDataSourceSequence"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Qw_b4QGAEeGsJtYaUYTaYA" x="1235" y="13" width="202" height="93"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ipRXlojWEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_ipRXl4jWEd6X5oQchPkMiQ"/>
@@ -1287,5 +1415,19 @@
     <element xsi:nil="true"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_b8dxs6gtEd6LBeof3wd3ig" points="[29, 10, -650, 339]$[785, 10, 106, 339]$[785, -304, 106, 25]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_b8j4UKgtEd6LBeof3wd3ig" id="(0.8066666666666666,0.5)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_e7vDUAGAEeGsJtYaUYTaYA" type="3002" source="_Qw-00QGAEeGsJtYaUYTaYA" target="_-EOIEI18Ed6gH4-RkEY2gA">
+    <children xmi:type="notation:Node" xmi:id="_e7w4gAGAEeGsJtYaUYTaYA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_e7xfkAGAEeGsJtYaUYTaYA" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_e7yGoAGAEeGsJtYaUYTaYA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_e7yGoQGAEeGsJtYaUYTaYA" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_e7vDUQGAEeGsJtYaUYTaYA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_e7vqYAGAEeGsJtYaUYTaYA" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="saltCommon.ecore#//sDocumentStructure/SDataSourceSequence/sSequentialDS"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_e7vqYQGAEeGsJtYaUYTaYA" points="[-24, -3, 132, 20]$[-154, -10, 2, 13]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_e740UAGAEeGsJtYaUYTaYA" id="(0.17679558011049723,0.7407407407407407)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_e740UQGAEeGsJtYaUYTaYA" id="(0.8289473684210527,0.6470588235294118)"/>
   </edges>
 </notation:Diagram>

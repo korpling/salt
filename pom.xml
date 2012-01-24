@@ -9,7 +9,19 @@
     <module>salt-graph</module>
     <module>salt-saltCore</module>
     <module>salt-saltCommon</module>
+    <module>salt-saltSample</module>
   </modules>
+  <description>Salt is an abstract and graph based meta model for dealing with linguistic annotated data. Salt describes a minimum of semantic and only handles the structure of linguistic data.</description>
+  <url>https://korpling.german.hu-berlin.de/p/projects/salt</url>
+  <issueManagement>
+  	<system>Redmine</system>
+  	<url>https://korpling.german.hu-berlin.de/p/projects/salt/issues</url>
+  </issueManagement>
+  <ciManagement>
+  	<system>Jenkins</system>
+  	<url>https://korpling.german.hu-berlin.de/jenkins/</url>
+  </ciManagement>
+  <inceptionYear>2009</inceptionYear>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -18,18 +30,21 @@
   </licenses>
   <scm>
     <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/salt-1.1.3</developerConnection>
+    <tag>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags</tag>
+    <url>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/salt-1.1.3</url>
   </scm>
   <distributionManagement>
     <repository>
-      <id>SaltNPepper Repository</id>
-      <name>SaltNPepper Repository</name>
-      <url>file:///home/annis/public_html/maven2/saltnpepper</url>
+      <id>korpling</id>
+      <name>korpling maven repo</name>
+      <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url>
     </repository>
   </distributionManagement>
   <repositories>
     <repository>
-      <id>SaltNPepper Repository</id>
-      <url>https://korpling.german.hu-berlin.de/~annis/maven2/saltnpepper/</url>
+      <id>korpling</id>
+      <name>korpling maven repo</name>
+      <url>http://korpling.german.hu-berlin.de/maven2</url>
     </repository>
   </repositories>
   <properties>
@@ -49,7 +64,7 @@
     <dependency>
       <groupId>org.apache.felix</groupId>
       <artifactId>org.osgi.compendium</artifactId>
-      <version>1.0.0</version>
+      <version>1.4.0</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -90,15 +105,26 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
+  <organization>
+  	<name>Humboldt Univerity of Berlin, INRIA</name>
+  </organization>
   <build>
+    <extensions>
+      <!-- Enabling the use of FTP -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh-external</artifactId>
+        <version>1.0</version>
+      </extension>
+    </extensions>
     <plugins>
       <!-- start: site plugin -->
       <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-site-plugin</artifactId>
-	    <version>3.0</version>
-	    <configuration>
-        	<outputDirectory>${basedir}/docs/site</outputDirectory>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <outputDirectory>${basedir}/docs/site</outputDirectory>
         </configuration>
       </plugin>
       <!-- end: site plugin -->
@@ -128,29 +154,38 @@
 
           </tagBase>
           <releaseProfiles>release</releaseProfiles>
-          <goals>assembly:single deploy</goals>
+          <goals>package assembly:single deploy</goals>
         </configuration>
       </plugin>
       <!-- end: Plugin for automatic releasing -->
       <!-- start: plugin to generate javadoc -->
       <plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-javadoc-plugin</artifactId>
-	    <version>2.8</version>
-	</plugin>
-	<!-- end: plugin to generate javadoc -->
-	<!-- start: plugin to deploy project to maven repo -->
-	<plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-deploy-plugin</artifactId>
-	    <version>2.7</version>
-	</plugin>
-	<!-- end: plugin to deploy project to maven repo -->
-	<plugin>
-	    <groupId>org.apache.maven.plugins</groupId>
-	    <artifactId>maven-source-plugin</artifactId>
-	    <version>2.1.2</version>
-	</plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8</version>
+      </plugin>
+      <!-- end: plugin to generate javadoc -->
+      <!-- start: plugin to deploy project to maven repo -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.7</version>
+      </plugin>
+      <!-- end: plugin to deploy project to maven repo -->
+      <!-- start: plugin to create a source-jar -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- end: plugin to create a source-jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

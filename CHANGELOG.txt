@@ -1,0 +1,38 @@
+***********************************************************************************
+***								CHANGELOG for Salt								***
+***********************************************************************************
+*	groupId:		de.hu_berlin.german.korpling.saltnpepper					  *
+*	artifactId:		salt												          *
+*													                              *
+*	sub-projects:												                  *
+*	-------------                                                                 *
+*	artifactId:		salt-graph                                                    *
+*	artifactId:		salt-saltCore												  *
+*	artifactId:		salt-saltCommon												  *
+*	artifactId:		salt-saltSample												  *
+***********************************************************************************
+
+Version 1.1.3
+=============
+
+  salt-graph
+  ---------------
+	* = switched the traversing to a more visual place (switched to Graph) and made traversing easier
+
+  salt-saltCore
+  ---------------
+	* = switched the overriden traversing from Graph to a more visual place (switched to SGraph) and made traversing easier
+
+  salt-saltCommon
+  ---------------
+	* + added new create methods for creating and adding nodes and relations to the SDocumentGraph class
+	* = switched accessing methods to a more visual place (switched to SDocumentGraph or SCorpusGraph)
+
+	
+	
+Version 1.1.2
+=============
+salt-saltCommon
+---------------
+	* + added new create methods for creating corpus nodes, document nodes and to structuring them to the SDocumentGraph class
+	

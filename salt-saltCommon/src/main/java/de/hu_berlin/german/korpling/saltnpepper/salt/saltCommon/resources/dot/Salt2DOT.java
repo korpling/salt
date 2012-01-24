@@ -91,11 +91,17 @@ public class Salt2DOT
 				SCorpusGraph sCorpusGraph = ((SaltProject)obj).getSCorpusGraphs().get(corpIndex);
 				URI corpURI = outputURI.appendSegments((String[])sCorpusGraph.getSElementId().getSElementPath().segmentsList().toArray());
 				saveResource(sCorpusGraph, corpURI.appendFileExtension("dot"), resourceSet);
-				for (int docIndex=0;docIndex<sCorpusGraph.getSDocuments().size();docIndex++) {
+				//when calling saveResource(), the sCorpusGraph object will be attached to the resource and therefore removed from list of SaltProject, therefore the graph must be artificially added again  
+				((SaltProject)obj).getSCorpusGraphs().add(corpIndex, sCorpusGraph);
+				for (int docIndex=0;docIndex<sCorpusGraph.getSDocuments().size();docIndex++) 
+				{
 				//for (SDocument sDocument:sCorpusGraph.getSDocuments()) {
 					SDocument sDocument = sCorpusGraph.getSDocuments().get(docIndex);
 					URI docURI = corpURI.appendSegments((String[])sDocument.getSDocumentGraph().getSElementId().getSElementPath().segmentsList().toArray());
-					saveResource(sDocument.getSDocumentGraph(), docURI.appendFileExtension("dot"), resourceSet);
+					SDocumentGraph sDocGraph= sDocument.getSDocumentGraph(); 
+					saveResource(sDocGraph, docURI.appendFileExtension("dot"), resourceSet);
+					//when calling saveResource(), the sCorpusGraph object will be attached to the resource and therefore removed from list of SaltProject, therefore the graph must be artificially added again  
+					sDocument.setSDocumentGraph(sDocGraph);
 				}
 			}
 		} 

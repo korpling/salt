@@ -382,6 +382,12 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SDocumentStructurePackage.SDATA_SOURCE_SEQUENCE: {
+				SDataSourceSequence sDataSourceSequence = (SDataSourceSequence)theEObject;
+				T result = caseSDataSourceSequence(sDataSourceSequence);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -623,6 +629,21 @@ public class SDocumentStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSDominanceRelation(SDominanceRelation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SData Source Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SData Source Sequence</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSDataSourceSequence(SDataSourceSequence object) {
 		return null;
 	}
 

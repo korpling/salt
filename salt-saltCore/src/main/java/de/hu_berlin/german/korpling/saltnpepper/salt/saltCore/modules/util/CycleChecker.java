@@ -34,8 +34,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.CycleCheckerListener;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.SGraphAccessorModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.CycleCheckerListener.CYCLE_LEVELS;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules.SGraphAccessorModule;
 
 public class CycleChecker implements TraversalObject
 {
@@ -135,8 +135,6 @@ public class CycleChecker implements TraversalObject
 				
 				if (rootNodes!= null)
 				{//if some roots exists, start with them	
-					System.out.println("==================> checking cycles by roots");
-					
 					GraphTraverser graphTraverser= new GraphTraverser();
 					graphTraverser.setLogService(this.getLogService());
 					graphTraverser.setGraph(this.getSGraph());
@@ -161,7 +159,6 @@ public class CycleChecker implements TraversalObject
 					}//compute list of not yet visited nodes
 					while (notVisitedRelations.size()!= 0)
 					{//do until all nodes has been visited
-						System.out.println("==================> checking cycles with no roots");
 						int numOfNotVisitedRelations= this.notVisitedRelations.size();
 						GraphTraverser graphTraverser= new GraphTraverser();
 						graphTraverser.setLogService(this.getLogService());
@@ -190,22 +187,20 @@ public class CycleChecker implements TraversalObject
 		SNode[] shortCycle= null;
 		int lastIndex= longCycle.lastIndexOf(duplicatedSRelation);
 		
-		{//debug
-			System.out.print("longCycle: ");
-			for (SRelation sRelation: longCycle)
-				System.out.print("longCycle: "+sRelation.getSSource().getSId()+ "-->"+ sRelation.getSTarget().getSId()+"; ");
-			System.out.println();
-		}//debug
+//		{//debug
+//			System.out.print("longCycle: ");
+//			for (SRelation sRelation: longCycle)
+//				System.out.print("longCycle: "+sRelation.getSSource().getSId()+ "-->"+ sRelation.getSTarget().getSId()+"; ");
+//			System.out.println();
+//		}//debug
 		
 		shortCycle= new SNode[(longCycle.size()-lastIndex)+1];
 		int arrayIdx= 0;
 		for (int i= lastIndex; i< longCycle.size(); i++)
 		{
-			System.out.println("adding node to cycle: "+ longCycle.get(i).getSSource());
 			shortCycle[arrayIdx]= longCycle.get(i).getSSource();
 			arrayIdx++;
 		}
-		System.out.println("adding node to cycle: "+ duplicatedSRelation.getSTarget());
 		shortCycle[arrayIdx]= duplicatedSRelation.getSTarget();
 		
 		return(shortCycle);
@@ -214,7 +209,6 @@ public class CycleChecker implements TraversalObject
 	/**
 	 * stores the visited nodes for level-1: nodes
 	 */
-//	private EList<SNode> VisitedRelationsLevel1= null;
 	private EList<SRelation> visitedRelationsLevel1= null;
 	/**
 	 * stores the visited nodes for level-2: class-name, nodes
@@ -244,16 +238,16 @@ public class CycleChecker implements TraversalObject
 			currRelClass= sRelation.getClass().getSimpleName();
 		}
 		
-		if (sRelation== null)
-			System.out.println("null --> "+currNode.getId());
-		else
-			System.out.println(edge.getSource().getId()+" -["+sRelation.getClass().getSimpleName()+"|"+sRelation.getSTypes()+"]-> "+currNode.getId());
+//		if (sRelation== null)
+//			System.out.println("null --> "+currNode.getId());
+//		else
+//			System.out.println(edge.getSource().getId()+" -["+sRelation.getClass().getSimpleName()+"|"+sRelation.getSTypes()+"]-> "+currNode.getId());
 		 		
-		{//checking level-1 cycles
-			System.out.println("visited relations of level-1: "+visitedRelationsLevel1);
+		//start: checking level-1 cycles
+//			System.out.println("visited relations of level-1: "+visitedRelationsLevel1);
 			if (visitedRelationsLevel1.contains(sRelation))
 			{//node has been visited
-				System.out.println("cycle-1 DETECTED");
+//				System.out.println("cycle-1 DETECTED");
 				this.listener.cycleDetected(CYCLE_LEVELS.LEVEL_1, null, null, this.getShortCycle(visitedRelationsLevel1, sRelation));
 				retVal= false;
 			}//node has been visited
@@ -269,8 +263,8 @@ public class CycleChecker implements TraversalObject
 			{
 				visitedRelationsLevel1.add(sRelation);
 			}
-		}//checking level-1 cycles
-		{//checking level-2 cylces
+		//end: checking level-1 cycles
+		//start: checking level-2 cylces
 			if (sRelation!= null)
 			{
 				EList<SRelation> slot= this.visitedRelationsLevel2.get(currRelClass);
@@ -292,8 +286,8 @@ public class CycleChecker implements TraversalObject
 						slot.add(sRelation);
 				}//if the last element of slot is not the source of current relation, add the source of current relation
 			}
-		}//checking level-2 cylces
-		{//checking level-3 cylces
+		//end: checking level-2 cylces
+		//start: checking level-3 cylces
 			if (sRelation!= null)
 			{
 				if (	(sRelation.getSTypes()!= null)&&
@@ -330,7 +324,7 @@ public class CycleChecker implements TraversalObject
 					}//for every sType of sRelation
 				}
 			}
-		}//checking level-3 cylces
+		//end: checking level-3 cylces
 		return(retVal);
 	}
 

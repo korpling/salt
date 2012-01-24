@@ -39,7 +39,6 @@ public class SWordAnnotationImpl extends SAnnotationImpl implements SWordAnnotat
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	protected SWordAnnotationImpl() {
 		super();

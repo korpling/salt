@@ -23,14 +23,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcessingAnnotatableElementAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.LabelableElementImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcessingAnnotatableElementAccessor;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,9 +95,9 @@ public class SProcessingAnnotatableElementImpl extends LabelableElementImpl impl
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SProcessingAnnotation getSProcessingAnnotation(String fullName) 
+	public SProcessingAnnotation getSProcessingAnnotation(String qName) 
 	{
-		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
+		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, qName));
 	}
 
 	/**
