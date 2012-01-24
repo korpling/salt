@@ -789,7 +789,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 	
 	/**
-	 * Sets the SName of the SDocumentGraphImpl, but the parameter newSName is just a dummy. The SName of the corresponding SDocument plus "_graph" will be the SName.
+	 * Sets the SName of the {@link SDocumentGraphImpl}, but the parameter newSName is just a dummy. The SName of the corresponding SDocument plus "_graph" will be the SName.
 	 */
 	public void setSName(String newSName) {
 		if (this.getSDocument()!=null) {
