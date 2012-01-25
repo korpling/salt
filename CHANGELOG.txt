@@ -14,10 +14,12 @@
 
 Version 1.1.3
 =============
+	* + new equals() and differences() method, to compare model objects like graphs, nodes, edges and so on on equality or differences
 
   salt-graph
   ---------------
 	* = switched the traversing to a more visual place (switched to Graph) and made traversing easier
+	
 
   salt-saltCore
   ---------------
@@ -26,6 +28,7 @@ Version 1.1.3
   salt-saltCommon
   ---------------
 	* + added new create methods for creating and adding nodes and relations to the SDocumentGraph class
+	* + added persisting methods via the SaltProject, to store an entire SaltProject without using EMF Resource methods 
 	* = switched accessing methods to a more visual place (switched to SDocumentGraph or SCorpusGraph)
 
 	
