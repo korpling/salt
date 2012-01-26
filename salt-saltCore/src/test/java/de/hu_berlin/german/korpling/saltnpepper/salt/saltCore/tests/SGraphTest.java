@@ -427,8 +427,7 @@ public class SGraphTest extends SNamedElementTest {
 	}
 	
 	/**
-	 * Creates three layers l1, l2 and l3 and adds them to the fixture. It will be checked, if they can be found via their 
-	 * names.
+	 * Adds a layer having a null name and checks if it works.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String)
 	 */
 	public void testGetSLayerByName__String3() 
