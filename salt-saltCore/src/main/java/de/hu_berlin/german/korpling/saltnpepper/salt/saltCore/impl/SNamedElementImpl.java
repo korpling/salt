@@ -58,7 +58,7 @@ public class SNamedElementImpl extends SFeaturableElementImpl implements SNamedE
 		SFeature sNameFeature= sNamedElement.getSFeature(SaltCoreFactory.SALT_CORE_NAMESPACE, SaltCoreFactory.SALT_CORE_SFEATURES.SNAME.toString());
 		if (sNameFeature!= null)
 		{
-			return(sNameFeature.getSValue().toString());
+			return(sNameFeature.getSValueSTEXT());
 		}
 		else return(null);
 	}

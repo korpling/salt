@@ -368,9 +368,8 @@ public class SGraphTest extends SNamedElementTest {
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String) <em>Get SLayer By Name</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates three layers l1, l2 and l3 and adds them to the fixture. It will be checked, if they can be found via their 
+	 * names.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String)
 	 */
 	public void testGetSLayerByName__String() 
@@ -404,6 +403,55 @@ public class SGraphTest extends SNamedElementTest {
 		assertTrue(this.getFixture().getSLayerByName("l1").contains(l1_2));
 		
 		assertEquals(1, this.getFixture().getSLayerByName("l2").size());
+	}
+	
+	/**
+	 * Checks the method using an empty param
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String)
+	 */
+	public void testGetSLayerByName__String1() 
+	{
+		assertNull(this.getFixture().getSLayerByName(null));
+		assertNull(this.getFixture().getSLayerByName(""));
+	}
+	
+	/**
+	 * Adds a layer having no name and tries to find it via its name.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String)
+	 */
+	public void testGetSLayerByName__String2() 
+	{
+		SLayer l1 = SaltCoreFactory.eINSTANCE.createSLayer();
+		this.getFixture().addSLayer(l1);
+		assertEquals(0, this.getFixture().getSLayerByName("someName").size());
+	}
+	
+	/**
+	 * Creates three layers l1, l2 and l3 and adds them to the fixture. It will be checked, if they can be found via their 
+	 * names.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String)
+	 */
+	public void testGetSLayerByName__String3() 
+	{
+		SLayer l1 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l2 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l3 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l4 = SaltCoreFactory.eINSTANCE.createSLayer();
+		
+		String unknownName= "UNKNOWN";
+		l1.setSName("tiger");
+		l2.setSName(unknownName);
+		l3.setSName(null);
+		l4.setSName(null);
+		
+		this.getFixture().addSLayer(l1);
+		this.getFixture().addSLayer(l2);
+		this.getFixture().addSLayer(l3);
+		this.getFixture().addSLayer(l4);
+		
+		assertNotNull(this.getFixture().getSLayerByName(unknownName));
+		assertTrue(this.getFixture().getSLayerByName(unknownName).contains(l2));
+		
 	}
 
 	/**
