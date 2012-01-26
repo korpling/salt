@@ -36,7 +36,8 @@
     <repository>
       <id>korpling</id>
       <name>korpling maven repo</name>
-      <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url>
+      <url>file:///srv/www/maven2/</url>
+      <!-- <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url>-->
     </repository>
   </distributionManagement>
   <repositories>
@@ -110,11 +111,13 @@
   <build>
     <extensions>
       <!-- Enabling the use of FTP -->
+      <!-- 
       <extension>
         <groupId>org.apache.maven.wagon</groupId>
         <artifactId>wagon-ssh-external</artifactId>
         <version>1.0</version>
       </extension>
+       -->
     </extensions>
     <plugins>
       <!-- start: site plugin -->
