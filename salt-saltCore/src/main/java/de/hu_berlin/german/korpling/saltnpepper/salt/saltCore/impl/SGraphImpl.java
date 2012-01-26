@@ -430,15 +430,24 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 */
 	public EList<SLayer> getSLayerByName(String layerName) 
 	{
+		if (	(layerName== null)||
+				(layerName.isEmpty()))
+			return(null);
+		
 		EList<SLayer> result = new BasicEList<SLayer>();
 		if(layerName != null)
 		{
 			for(SLayer l : getSLayers())
 			{
-				if(layerName.equals(l.getSName()))
+				if (	(l.getSName()== null)||
+						(l.getSName().isEmpty()))
 				{
-					result.add(l);
+					break;
 				}
+					if(layerName.equals(l.getSName()))
+					{
+						result.add(l);
+					}
 			}
 		}
 		return result;
