@@ -425,6 +425,34 @@ public class SGraphTest extends SNamedElementTest {
 		this.getFixture().addSLayer(l1);
 		assertEquals(0, this.getFixture().getSLayerByName("someName").size());
 	}
+	
+	/**
+	 * Creates three layers l1, l2 and l3 and adds them to the fixture. It will be checked, if they can be found via their 
+	 * names.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSLayerByName(java.lang.String)
+	 */
+	public void testGetSLayerByName__String3() 
+	{
+		SLayer l1 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l2 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l3 = SaltCoreFactory.eINSTANCE.createSLayer();
+		SLayer l4 = SaltCoreFactory.eINSTANCE.createSLayer();
+		
+		String unknownName= "UNKNOWN";
+		l1.setSName("tiger");
+		l2.setSName(unknownName);
+		l3.setSName(null);
+		l4.setSName(null);
+		
+		this.getFixture().addSLayer(l1);
+		this.getFixture().addSLayer(l2);
+		this.getFixture().addSLayer(l3);
+		this.getFixture().addSLayer(l4);
+		
+		assertNotNull(this.getFixture().getSLayerByName(unknownName));
+		assertTrue(this.getFixture().getSLayerByName(unknownName).contains(l2));
+		
+	}
 
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph#getSRelations() <em>SRelations</em>}' feature getter.
