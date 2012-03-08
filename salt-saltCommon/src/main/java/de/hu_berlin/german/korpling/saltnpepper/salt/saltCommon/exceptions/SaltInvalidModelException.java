@@ -17,28 +17,24 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDataSourceAccessor;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentStructureRootAccessor;
-
 /**
- * Is thrown in case of an exception in one of the several Salt modules (e.g. {@link SDataSourceAccessor},
- * {@link SDocumentStructureRootAccessor} etc.) occurs.
+ * Is used, in case of a Salt model is not valid respecting the constraints of Salt.
  * @author Florian Zipser
  *
  */
-public class SaltModuleException extends SaltException
+public class SaltInvalidModelException extends SaltException 
 {
 	/**
 	 * generated serialVersionUID
 	 */
-	private static final long serialVersionUID = 7152733137873010658L;
+	private static final long serialVersionUID = 7152733137673010658L;
 
-	public SaltModuleException()
+	public SaltInvalidModelException()
 	{ super(); }
 	
-    public SaltModuleException(String s)
+    public SaltInvalidModelException(String s)
     { super(s); }
     
-	public SaltModuleException(String s, Throwable ex)
+	public SaltInvalidModelException(String s, Throwable ex)
 	{super(s, ex); }
 }
