@@ -151,6 +151,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			}//do only in case of notifier is Identifier or IdentifiableElement
 		}
 		
+		/**
+		 * This method is called, if any value in one of the observed objects has changed. This method ensures, that all indexes of
+		 * the owning graph will be kept up-to-date.
+		 */
 		public void notifyChanged(Notification notification) 
 		{
 			if (notification.getFeature() instanceof EAttribute)
@@ -184,8 +188,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				}
 				else if (GraphPackage.Literals.EDGE__TARGET.equals(notification.getFeature()))
 				{
-					if (notification.getOldValue()!=null) {
-						changeEdgeTarget(((Edge)notification.getNotifier()).getId(), ((Node)notification.getNewValue()).getId());
+					if (notification.getOldValue()!=null) 
+					{
+						String id= null;
+						if (((Node)notification.getNewValue())!= null)
+							id= ((Node)notification.getNewValue()).getId();
+						changeEdgeTarget(((Edge)notification.getNotifier()).getId(), id);
 					}
 					//create entry in outgoing index
 					else graph.getIndexMgr().getIndex(IDX_INEDGES).addElement(((Edge)notification.getNotifier()).getTarget().getId(), ((Edge)notification.getNotifier()));
@@ -678,6 +686,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				this.getNodes().remove(this.getNode(node.getId()));
 				//removing node from all indexes
 				this.getIndexMgr().removeElement(this.getNode(node.getId()));
+				
+				//remove observers on edge
+				node.eAdapters().remove(this.graphAdapter);
+				node.getIdentifier().eAdapters().remove(this.graphAdapter);
 			}
 			retVal= true;
 		}
@@ -892,6 +904,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			this.getIndexMgr().removeElement(edge);
 			//removing edge from internal list
 			this.getEdges().remove(edge);
+			
+			//remove observers on edge
+			edge.eAdapters().remove(this.graphAdapter);
+			edge.getIdentifier().eAdapters().remove(this.graphAdapter);
 			
 			retVal= true;
 		}
