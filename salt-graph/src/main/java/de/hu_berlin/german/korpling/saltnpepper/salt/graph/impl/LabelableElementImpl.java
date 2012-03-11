@@ -348,7 +348,6 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 					differences.add(this.getClass().getSimpleName()+": The number of labels for both objects is not the same, this object has '"+this.getLabels().size()+"' labels, whereas the other object contains '"+other.getLabels().size()+"'.");
 				else return false;
 			}
-			System.out.println("---------------------------> HELLO");
 			// TODO: remove this when hashEList is part of labelableElementImpl
 			HashSet<Label> thisLabels = new HashSet<Label>(this.getLabels());
 			for (Label label : other.getLabels())
@@ -357,7 +356,6 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 				// if not existent: >> Differences
 				if (! thisLabels.contains(label))
 				{
-					System.out.println("label "+label+" is not contained.");
 					if (differences!= null)
 						differences.add(this.getClass().getSimpleName()+": The label object '"+label.getQName()+"' in "+this+" has no equivalent in "+other+".");
 					else return false;

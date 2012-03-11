@@ -986,6 +986,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	public void changeEdgeTarget(String edgeId, String nodeId) 
 	{
 		Edge edge= this.getEdge(edgeId);
+		if (edge== null)
+			throw new GraphException("Cannot change target of given edge, because no edge with given id '"+edgeId+"' was found in graph.");
 		if (edge.getTarget()== null) 
 			throw new GraphException("Cannot insert the given edge, the destination (node to wich the edge goes) is empty. Edge: "+edge);
 
