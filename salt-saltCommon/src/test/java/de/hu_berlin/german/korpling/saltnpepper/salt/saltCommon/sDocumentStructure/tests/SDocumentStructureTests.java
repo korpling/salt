@@ -70,6 +70,9 @@ public class SDocumentStructureTests extends TestSuite {
 		suite.addTestSuite(SPointingRelationTest.class);
 		suite.addTestSuite(SDominanceRelationTest.class);
 		suite.addTestSuite(SDataSourceSequenceTest.class);
+		suite.addTestSuite(SAudioDataSourceTest.class);
+		suite.addTestSuite(SAudioDSRelationTest.class);
+		suite.addTestSuite(SOrderRelationTest.class);
 		return suite;
 	}
 

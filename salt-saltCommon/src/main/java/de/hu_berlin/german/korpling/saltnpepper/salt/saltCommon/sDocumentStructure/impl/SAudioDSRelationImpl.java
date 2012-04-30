@@ -192,7 +192,7 @@ public class SAudioDSRelationImpl extends SRelationImpl implements SAudioDSRelat
 	 */
 	public SAudioDataSource basicGetSAudioDS() {
 		SAudioDataSource retVal= null;
-		if (super.getSTarget() instanceof STextualDS)
+		if (super.getSTarget() instanceof SAudioDataSource)
 			retVal= (SAudioDataSource) super.getSTarget();
 		return(retVal);
 	}

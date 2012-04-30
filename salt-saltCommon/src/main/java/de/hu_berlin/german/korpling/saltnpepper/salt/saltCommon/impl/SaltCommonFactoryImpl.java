@@ -33,6 +33,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
@@ -408,17 +409,6 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	{
 		return(this.sDocumentStructureFactory.createSSpanningRelation());
 	}
-
-//	@Override
-//	public STextOverlappingRelation createSTextOverlappingRelation() 
-//	{
-//		return(this.sDocumentStructureFactory.createSTextOverlappingRelation());
-//	}
-//	
-//	@Override
-//	public STimeOverlappingRelation createSTimeOverlappingRelation() {
-//		return(this.sDocumentStructureFactory.createSTimeOverlappingRelation());
-//	}
 	
 	@Override
 	public SDominanceRelation createSDominanceRelation() 
@@ -453,11 +443,11 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.createSAudioDSRelation());
 	}
 	
-//	@Override
-//	public SStructuredNode createSStructuredNode() 
-//	{
-//		return(this.sDocumentStructureFactory.createSStructuredNode());
-//	}
+	@Override
+	public SOrderRelation createSOrderRelation() {
+		return(this.sDocumentStructureFactory.createSOrderRelation());
+	}
+
 	
 	@Override
 	public SDocumentStructurePackage getSDocumentStructurePackage() {

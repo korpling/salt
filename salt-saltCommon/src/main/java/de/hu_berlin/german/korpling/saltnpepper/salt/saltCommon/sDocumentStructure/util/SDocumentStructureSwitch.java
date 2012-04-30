@@ -421,6 +421,22 @@ public class SDocumentStructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SDocumentStructurePackage.SORDER_RELATION: {
+				SOrderRelation sOrderRelation = (SOrderRelation)theEObject;
+				T result = caseSOrderRelation(sOrderRelation);
+				if (result == null) result = caseSRelation(sOrderRelation);
+				if (result == null) result = caseEdge(sOrderRelation);
+				if (result == null) result = caseSAnnotatableElement(sOrderRelation);
+				if (result == null) result = caseSNamedElement(sOrderRelation);
+				if (result == null) result = caseSIdentifiableElement(sOrderRelation);
+				if (result == null) result = caseSProcessingAnnotatableElement(sOrderRelation);
+				if (result == null) result = caseSMetaAnnotatableElement(sOrderRelation);
+				if (result == null) result = caseIdentifiableElement(sOrderRelation);
+				if (result == null) result = caseSFeaturableElement(sOrderRelation);
+				if (result == null) result = caseLabelableElement(sOrderRelation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -707,6 +723,21 @@ public class SDocumentStructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseSAudioDSRelation(SAudioDSRelation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>SOrder Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>SOrder Relation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSOrderRelation(SOrderRelation object) {
 		return null;
 	}
 

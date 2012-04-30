@@ -217,6 +217,9 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sAudioDataSources" upperBound="-1"
           eType="#//sDocumentStructure/SAudioDataSource" volatile="true" transient="true"
           derived="true" containment="true" eOpposite="#//sDocumentStructure/SAudioDataSource/sDocumentGraph"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sOrderRelations" upperBound="-1"
+          eType="#//sDocumentStructure/SOrderRelation" volatile="true" transient="true"
+          derived="true" containment="true" eOpposite="#//sDocumentStructure/SOrderRelation/sDocumentGraph"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="STextualDS" eSuperTypes="#//sDocumentStructure/SSequentialDS">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -351,6 +354,10 @@
           volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sAudioDSRelations"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SOrderRelation" eSuperTypes="../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SRelation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sOrderRelations"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

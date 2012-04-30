@@ -65,7 +65,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSRootCorpus() <em>Get SRoot Corpus</em>}</li>
  * </ul>
  * </p>
- * @generated
+ * 
  */
 public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 

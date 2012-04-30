@@ -48,6 +48,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations <em>SPointing Relations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations <em>SAudio DS Relations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources <em>SAudio Data Sources</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSOrderRelations <em>SOrder Relations</em>}</li>
  * </ul>
  * </p>
  *
@@ -320,6 +321,24 @@ public interface SDocumentGraph extends SGraph {
 	EList<SAudioDataSource> getSAudioDataSources();
 
 	/**
+	 * Returns the value of the '<em><b>SOrder Relations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation}.
+	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SOrder Relations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SOrder Relations</em>' containment reference list.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SOrderRelations()
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SOrderRelation> getSOrderRelations();
+
+	/**
 	 * Creates and returns a '<em><b>SRelation</b></em>' of the type given by sRelationType between sourceSNode and targetSNode.
 	 * Note that the sourceSNode is required to be in the SDocumentGraph already and that the sRelationType may
 	 * only be one of STEXTUAL_RELATION, SSPANNING_RELATION, SDOMINANCE_RELATION and SPOINTING_RELATION.
@@ -551,7 +570,6 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a map of types, with corresponding lists of root nodes
 	 * @model keyType="java.lang.String" valueType="java.lang.String"
 	 */
-	//Map<String, EList<SNode>>
 	Map<String, EList<SNode>> getRootsBySRelationSType(STYPE_NAME sType);
 	
 

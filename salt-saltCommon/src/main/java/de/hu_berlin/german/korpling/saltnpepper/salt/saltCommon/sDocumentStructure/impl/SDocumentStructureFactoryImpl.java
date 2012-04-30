@@ -86,6 +86,7 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 			case SDocumentStructurePackage.SDATA_SOURCE_SEQUENCE: return createSDataSourceSequence();
 			case SDocumentStructurePackage.SAUDIO_DATA_SOURCE: return createSAudioDataSource();
 			case SDocumentStructurePackage.SAUDIO_DS_RELATION: return createSAudioDSRelation();
+			case SDocumentStructurePackage.SORDER_RELATION: return createSOrderRelation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -263,6 +264,16 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	public SAudioDSRelation createSAudioDSRelation() {
 		SAudioDSRelationImpl sAudioDSRelation = new SAudioDSRelationImpl();
 		return sAudioDSRelation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SOrderRelation createSOrderRelation() {
+		SOrderRelationImpl sOrderRelation = new SOrderRelationImpl();
+		return sOrderRelation;
 	}
 
 	/**

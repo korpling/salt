@@ -89,7 +89,8 @@ public class SAudioDataSourceImpl extends SSequentialDSImpl implements SAudioDat
 		URI retVal= null;
 		String name= SaltCommonPackage.eNS_PREFIX + "::" + FEAT_SAUDIO_REFERNCE;
 		SFeature sFeature= this.getSFeature(name);
-		if (sFeature!= null)
+		if (	(sFeature!= null)&&
+				(sFeature.getSValue()!= null))
 		{
 			retVal= URI.createURI(sFeature.getSValue().toString());
 		}

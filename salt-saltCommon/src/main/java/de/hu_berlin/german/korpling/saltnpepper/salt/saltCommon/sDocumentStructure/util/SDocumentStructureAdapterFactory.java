@@ -174,6 +174,10 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 				return createSAudioDSRelationAdapter();
 			}
 			@Override
+			public Adapter caseSOrderRelation(SOrderRelation object) {
+				return createSOrderRelationAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -512,6 +516,20 @@ public class SDocumentStructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSAudioDSRelationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation <em>SOrder Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation
+	 * @generated
+	 */
+	public Adapter createSOrderRelationAdapter() {
 		return null;
 	}
 

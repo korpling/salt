@@ -28,6 +28,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltElementNotContainedInGraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentDataEnricher;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
@@ -63,6 +65,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures() <em>SStructures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations() <em>SDominance Relations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations() <em>SPointing Relations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations() <em>SAudio DS Relations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources() <em>SAudio Data Sources</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -388,12 +392,44 @@ public class SDocumentGraphTest extends TestCase {
 		EList<SPointingRelation> pointingRels= new BasicEList<SPointingRelation>();
 		for (int i= 0; i< 10; i++)
 		{
-			SPointingRelation sDomRel= SaltCommonFactory.eINSTANCE.createSPointingRelation();
-			pointingRels.add(sDomRel);
-			this.getFixture().addSRelation(sDomRel);
+			SPointingRelation sPointRel= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			pointingRels.add(sPointRel);
+			this.getFixture().addSRelation(sPointRel);
 		}	
 		assertTrue(pointingRels.containsAll(this.getFixture().getSPointingRelations()));
 		assertTrue(this.getFixture().getSPointingRelations().containsAll(pointingRels));
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations() <em>SAudio DS Relations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations()
+	 */
+	public void testGetSAudioDSRelations() 
+	{
+		EList<SAudioDSRelation> sAudioRels= new BasicEList<SAudioDSRelation>();
+		for (int i= 0; i< 10; i++)
+		{
+			SAudioDSRelation sAudioRel= SaltCommonFactory.eINSTANCE.createSAudioDSRelation();
+			sAudioRels.add(sAudioRel);
+			this.getFixture().addSRelation(sAudioRel);
+		}	
+		assertTrue(sAudioRels.containsAll(this.getFixture().getSAudioDSRelations()));
+		assertTrue(this.getFixture().getSAudioDSRelations().containsAll(sAudioRels));
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources() <em>SAudio Data Sources</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources()
+	 */
+	public void testGetSAudioDataSources() 
+	{
+		SAudioDataSource sAudioDS= SaltFactory.eINSTANCE.createSAudioDataSource();
+		this.getFixture().addSNode(sAudioDS);
+		assertTrue(this.getFixture().getSAudioDataSources().contains(sAudioDS));
 	}
 
 	/**
