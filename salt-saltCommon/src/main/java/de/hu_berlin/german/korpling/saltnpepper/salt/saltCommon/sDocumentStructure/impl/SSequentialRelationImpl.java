@@ -80,16 +80,13 @@ public abstract class SSequentialRelationImpl extends SRelationImpl implements S
 		return SDocumentStructurePackage.Literals.SSEQUENTIAL_RELATION;
 	}
 
-	public String KW_SSTART= "SSTART";
-	public String KW_SEND= "SEND";
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SSequentialRelation#getSStart()}
 	 */
 	public Integer getSStart() 
 	{
 		Integer retVal= null;
-		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SSTART;
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + FEAT_SSTART;
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature!= null)
 		{
@@ -99,31 +96,29 @@ public abstract class SSequentialRelationImpl extends SRelationImpl implements S
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SSequentialRelation#setSStart(Integer)}
 	 */
 	public void setSStart(Integer newSStart) 
 	{
-		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SSTART; 
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + FEAT_SSTART; 
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature== null)
 		{//create a new sFeature
 			sFeature= SaltCommonFactory.eINSTANCE.createSFeature();
 			sFeature.setSNS(SaltCommonPackage.eNS_PREFIX);
-			sFeature.setSName(KW_SSTART);
+			sFeature.setSName(FEAT_SSTART);
 			this.addSFeature(sFeature);
 		}	
 		sFeature.setSValue(newSStart);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SSequentialRelation#getSEnd()}
 	 */
 	public Integer getSEnd() 
 	{
 		Integer retVal= null;
-		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SEND;
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + FEAT_SEND;
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature!= null)
 		{
@@ -133,18 +128,17 @@ public abstract class SSequentialRelationImpl extends SRelationImpl implements S
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SSequentialRelation#setSEnd(Integer)}
 	 */
 	public void setSEnd(Integer newSEnd) 
 	{
-		String name= SaltCommonPackage.eNS_PREFIX + "::" + KW_SEND; 
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + FEAT_SEND; 
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature== null)
 		{//create a new sFeature
 			sFeature= SaltCommonFactory.eINSTANCE.createSFeature();
 			sFeature.setSNS(SaltCommonPackage.eNS_PREFIX);
-			sFeature.setSName(KW_SEND);
+			sFeature.setSName(FEAT_SEND);
 			this.addSFeature(sFeature);
 		}	
 		sFeature.setSValue(newSEnd);

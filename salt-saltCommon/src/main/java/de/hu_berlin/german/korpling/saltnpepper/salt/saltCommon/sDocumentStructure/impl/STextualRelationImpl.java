@@ -84,10 +84,6 @@ public class STextualRelationImpl extends SSequentialRelationImpl implements STe
 	{
 		if (differences!= null)
 		{
-//			EList<String> diffs= super.differences(obj);
-//			if (	(diffs!= null)&&
-//					(diffs.size()>0))
-//				differences.addAll(diffs);
 			super.equals(differences, obj);
 		}
 		else
@@ -127,20 +123,6 @@ public class STextualRelationImpl extends SSequentialRelationImpl implements STe
 	{
 		boolean retVal= this.equals(null, obj); 
 		return(retVal);
-		
-//		boolean retVal= false;
-//		if (!(obj instanceof STextualRelation))
-//			retVal= false;
-//		else
-//		{
-//			retVal= super.equals(obj);
-//			if (retVal)
-//			{	
-//				STextualRelation textRel2= (STextualRelation) obj;
-//				retVal= this.isSTextOverlapping().equals(textRel2.isSTextOverlapping());
-//			}
-//		}
-//		return(retVal);
 	}	
 	//============================ start: handling source and target
 	/**

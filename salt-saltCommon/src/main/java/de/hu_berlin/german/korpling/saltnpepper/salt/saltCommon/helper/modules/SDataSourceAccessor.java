@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltInvalidModelException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
@@ -148,7 +149,9 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 		if (sDataSourceSequence.getSSequentialDS() instanceof STextualDS)
 			sSeqRels= this.getSDocumentGraph().getSTextualRelations();
 		else if (sDataSourceSequence.getSSequentialDS() instanceof STimeline)
-			this.getSDocumentGraph().getSTimelineRelations();
+			sSeqRels=this.getSDocumentGraph().getSTimelineRelations();
+		else 
+			throw new SaltModuleException("Cannot compute overlaped nodes, because the given dataSource is not supported by this method.");
 		for (SSequentialRelation sSeqRel: sSeqRels)
 		{//walk through all time-relations
 			if (	(sSeqRel.getSStart() >= sDataSourceSequence.getSStart()) &&

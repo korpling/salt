@@ -30,6 +30,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackag
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonPackageImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl.SCorpusStructurePackageImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
@@ -172,6 +174,20 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * @generated
 	 */
 	private EClass sDataSourceSequenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sAudioDataSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sAudioDSRelationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -365,6 +381,24 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 */
 	public EReference getSDocumentGraph_SPointingRelations() {
 		return (EReference)sDocumentGraphEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSDocumentGraph_SAudioDSRelations() {
+		return (EReference)sDocumentGraphEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSDocumentGraph_SAudioDataSources() {
+		return (EReference)sDocumentGraphEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -768,6 +802,87 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSAudioDataSource() {
+		return sAudioDataSourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSAudioDataSource_SDocumentGraph() {
+		return (EReference)sAudioDataSourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSAudioDataSource_SAudioReference() {
+		return (EAttribute)sAudioDataSourceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSAudioDSRelation() {
+		return sAudioDSRelationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSAudioDSRelation_SStart() {
+		return (EAttribute)sAudioDSRelationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSAudioDSRelation_SEnd() {
+		return (EAttribute)sAudioDSRelationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSAudioDSRelation_SToken() {
+		return (EReference)sAudioDSRelationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSAudioDSRelation_SAudioDS() {
+		return (EReference)sAudioDSRelationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSAudioDSRelation_SDocumentGraph() {
+		return (EReference)sAudioDSRelationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getSFEATURE_NAMES() {
 		return sfeaturE_NAMESEEnum;
 	}
@@ -821,6 +936,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SSTRUCTURES);
 		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS);
 		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SPOINTING_RELATIONS);
+		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS);
+		createEReference(sDocumentGraphEClass, SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES);
 
 		sTextualDSEClass = createEClass(STEXTUAL_DS);
 		createEAttribute(sTextualDSEClass, STEXTUAL_DS__STEXT);
@@ -882,6 +999,17 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		createEAttribute(sDataSourceSequenceEClass, SDATA_SOURCE_SEQUENCE__SEND);
 		createEReference(sDataSourceSequenceEClass, SDATA_SOURCE_SEQUENCE__SSEQUENTIAL_DS);
 
+		sAudioDataSourceEClass = createEClass(SAUDIO_DATA_SOURCE);
+		createEReference(sAudioDataSourceEClass, SAUDIO_DATA_SOURCE__SDOCUMENT_GRAPH);
+		createEAttribute(sAudioDataSourceEClass, SAUDIO_DATA_SOURCE__SAUDIO_REFERENCE);
+
+		sAudioDSRelationEClass = createEClass(SAUDIO_DS_RELATION);
+		createEAttribute(sAudioDSRelationEClass, SAUDIO_DS_RELATION__SSTART);
+		createEAttribute(sAudioDSRelationEClass, SAUDIO_DS_RELATION__SEND);
+		createEReference(sAudioDSRelationEClass, SAUDIO_DS_RELATION__STOKEN);
+		createEReference(sAudioDSRelationEClass, SAUDIO_DS_RELATION__SAUDIO_DS);
+		createEReference(sAudioDSRelationEClass, SAUDIO_DS_RELATION__SDOCUMENT_GRAPH);
+
 		// Create enums
 		sfeaturE_NAMESEEnum = createEEnum(SFEATURE_NAMES);
 		stypE_NAMEEEnum = createEEnum(STYPE_NAME);
@@ -940,6 +1068,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		sPointingRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
 		sDominanceRelationEClass.getESuperTypes().add(this.getSTextOverlappingRelation());
 		sDominanceRelationEClass.getESuperTypes().add(this.getSTimeOverlappingRelation());
+		sAudioDataSourceEClass.getESuperTypes().add(this.getSSequentialDS());
+		sAudioDSRelationEClass.getESuperTypes().add(theSaltCorePackage.getSRelation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sDocumentGraphEClass, SDocumentGraph.class, "SDocumentGraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -954,6 +1084,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEReference(getSDocumentGraph_SStructures(), this.getSStructure(), this.getSStructure_SDocumentGraph(), "sStructures", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_SDominanceRelations(), this.getSDominanceRelation(), this.getSDominanceRelation_SDocumentGraph(), "sDominanceRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocumentGraph_SPointingRelations(), this.getSPointingRelation(), this.getSPointingRelation_SDocumentGraph(), "sPointingRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSDocumentGraph_SAudioDSRelations(), this.getSAudioDSRelation(), this.getSAudioDSRelation_SDocumentGraph(), "sAudioDSRelations", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSDocumentGraph_SAudioDataSources(), this.getSAudioDataSource(), this.getSAudioDataSource_SDocumentGraph(), "sAudioDataSources", null, 0, -1, SDocumentGraph.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(sDocumentGraphEClass, theSaltCorePackage.getSRelation(), "addSNode", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getSNode(), "sourceSNode", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1102,6 +1234,17 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		initEReference(getSDataSourceSequence_SSequentialDS(), this.getSSequentialDS(), null, "sSequentialDS", null, 0, 1, SDataSourceSequence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(sDataSourceSequenceEClass, ecorePackage.getEBooleanObject(), "validate", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(sAudioDataSourceEClass, SAudioDataSource.class, "SAudioDataSource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSAudioDataSource_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_SAudioDataSources(), "sDocumentGraph", null, 0, 1, SAudioDataSource.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSAudioDataSource_SAudioReference(), theSaltCorePackage.getURI(), "sAudioReference", null, 0, 1, SAudioDataSource.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(sAudioDSRelationEClass, SAudioDSRelation.class, "SAudioDSRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSAudioDSRelation_SStart(), ecorePackage.getEDoubleObject(), "sStart", null, 0, 1, SAudioDSRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSAudioDSRelation_SEnd(), ecorePackage.getEDoubleObject(), "sEnd", null, 0, 1, SAudioDSRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSAudioDSRelation_SToken(), this.getSToken(), null, "sToken", null, 0, 1, SAudioDSRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSAudioDSRelation_SAudioDS(), this.getSAudioDataSource(), null, "sAudioDS", null, 0, 1, SAudioDSRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSAudioDSRelation_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_SAudioDSRelations(), "sDocumentGraph", null, 0, 1, SAudioDSRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sfeaturE_NAMESEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES.class, "SFEATURE_NAMES");

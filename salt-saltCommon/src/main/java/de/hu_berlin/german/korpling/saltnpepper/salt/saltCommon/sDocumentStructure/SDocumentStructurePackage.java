@@ -179,6 +179,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOCUMENT_GRAPH__NUM_OF_LAYERS = SaltCorePackage.SGRAPH__NUM_OF_LAYERS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__SFEATURES = SaltCorePackage.SGRAPH__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -231,15 +240,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SDOCUMENT_GRAPH__SPROCESSING_ANNOTATIONS = SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDOCUMENT_GRAPH__SFEATURES = SaltCorePackage.SGRAPH__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -377,13 +377,31 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOCUMENT_GRAPH__SPOINTING_RELATIONS = SaltCorePackage.SGRAPH_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>SAudio DS Relations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS = SaltCorePackage.SGRAPH_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>SAudio Data Sources</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES = SaltCorePackage.SGRAPH_FEATURE_COUNT + 12;
+
+	/**
 	 * The number of structural features of the '<em>SDocument Graph</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SDOCUMENT_GRAPH_FEATURE_COUNT = SaltCorePackage.SGRAPH_FEATURE_COUNT + 11;
+	int SDOCUMENT_GRAPH_FEATURE_COUNT = SaltCorePackage.SGRAPH_FEATURE_COUNT + 13;
 
 
 	/**
@@ -451,6 +469,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSEQUENTIAL_DS__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_DS__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -494,15 +521,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSEQUENTIAL_DS__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSEQUENTIAL_DS__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -614,6 +632,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXTUAL_DS__SANNOTATIONS = SSEQUENTIAL_DS__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_DS__SFEATURES = SSEQUENTIAL_DS__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -657,15 +684,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STEXTUAL_DS__SPROCESSING_ANNOTATIONS = SSEQUENTIAL_DS__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEXTUAL_DS__SFEATURES = SSEQUENTIAL_DS__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -795,6 +813,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSTRUCTURED_NODE__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURED_NODE__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -838,15 +865,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSTRUCTURED_NODE__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSTRUCTURED_NODE__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -949,6 +967,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STOKEN__SANNOTATIONS = SSTRUCTURED_NODE__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STOKEN__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -992,15 +1019,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STOKEN__SPROCESSING_ANNOTATIONS = SSTRUCTURED_NODE__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STOKEN__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -1140,6 +1158,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSEQUENTIAL_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1183,15 +1210,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSEQUENTIAL_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSEQUENTIAL_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -1347,6 +1365,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXTUAL_RELATION__SANNOTATIONS = SSEQUENTIAL_RELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_RELATION__SFEATURES = SSEQUENTIAL_RELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1390,15 +1417,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STEXTUAL_RELATION__SPROCESSING_ANNOTATIONS = SSEQUENTIAL_RELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEXTUAL_RELATION__SFEATURES = SSEQUENTIAL_RELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -1574,6 +1592,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE__SANNOTATIONS = SSEQUENTIAL_DS__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE__SFEATURES = SSEQUENTIAL_DS__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1617,15 +1644,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STIMELINE__SPROCESSING_ANNOTATIONS = SSEQUENTIAL_DS__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STIMELINE__SFEATURES = SSEQUENTIAL_DS__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -1774,6 +1792,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIMELINE_RELATION__SANNOTATIONS = SSEQUENTIAL_RELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE_RELATION__SFEATURES = SSEQUENTIAL_RELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1817,15 +1844,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STIMELINE_RELATION__SPROCESSING_ANNOTATIONS = SSEQUENTIAL_RELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STIMELINE_RELATION__SFEATURES = SSEQUENTIAL_RELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -2001,6 +2019,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSPAN__SANNOTATIONS = SSTRUCTURED_NODE__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPAN__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2044,15 +2071,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSPAN__SPROCESSING_ANNOTATIONS = SSTRUCTURED_NODE__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSPAN__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -2182,6 +2200,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSPANNING_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSPANNING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2225,15 +2252,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSPANNING_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSPANNING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -2409,6 +2427,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STEXT_OVERLAPPING_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXT_OVERLAPPING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2452,15 +2479,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STEXT_OVERLAPPING_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STEXT_OVERLAPPING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -2608,6 +2626,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int STIME_OVERLAPPING_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIME_OVERLAPPING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2651,15 +2678,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STIME_OVERLAPPING_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STIME_OVERLAPPING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -2789,6 +2807,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSTRUCTURE__SANNOTATIONS = SSTRUCTURED_NODE__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSTRUCTURE__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2832,15 +2859,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SSTRUCTURE__SPROCESSING_ANNOTATIONS = SSTRUCTURED_NODE__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SSTRUCTURE__SFEATURES = SSTRUCTURED_NODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -2970,6 +2988,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SPOINTING_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOINTING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3013,15 +3040,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SPOINTING_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPOINTING_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -3196,6 +3214,15 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDOMINANCE_RELATION__SANNOTATIONS = STEXT_OVERLAPPING_RELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOMINANCE_RELATION__SFEATURES = STEXT_OVERLAPPING_RELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3239,15 +3266,6 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SDOMINANCE_RELATION__SPROCESSING_ANNOTATIONS = STEXT_OVERLAPPING_RELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDOMINANCE_RELATION__SFEATURES = STEXT_OVERLAPPING_RELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -3386,6 +3404,431 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SDATA_SOURCE_SEQUENCE_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SAudioDataSourceImpl <em>SAudio Data Source</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SAudioDataSourceImpl
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSAudioDataSource()
+	 * @generated
+	 */
+	int SAUDIO_DATA_SOURCE = 17;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__LABELS = SSEQUENTIAL_DS__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__ID = SSEQUENTIAL_DS__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__IDENTIFIER = SSEQUENTIAL_DS__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__GRAPH = SSEQUENTIAL_DS__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__LAYERS = SSEQUENTIAL_DS__LAYERS;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SANNOTATIONS = SSEQUENTIAL_DS__SANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SFEATURES = SSEQUENTIAL_DS__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SNAME = SSEQUENTIAL_DS__SNAME;
+
+	/**
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SELEMENT_ID = SSEQUENTIAL_DS__SELEMENT_ID;
+
+	/**
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SID = SSEQUENTIAL_DS__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SELEMENT_PATH = SSEQUENTIAL_DS__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SPROCESSING_ANNOTATIONS = SSEQUENTIAL_DS__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SMETA_ANNOTATIONS = SSEQUENTIAL_DS__SMETA_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SGRAPH = SSEQUENTIAL_DS__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SLAYERS = SSEQUENTIAL_DS__SLAYERS;
+
+	/**
+	 * The feature id for the '<em><b>SData</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SDATA = SSEQUENTIAL_DS__SDATA;
+
+	/**
+	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SDOCUMENT_GRAPH = SSEQUENTIAL_DS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SAudio Reference</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SAUDIO_REFERENCE = SSEQUENTIAL_DS_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>SAudio Data Source</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE_FEATURE_COUNT = SSEQUENTIAL_DS_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SAudioDSRelationImpl <em>SAudio DS Relation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SAudioDSRelationImpl
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSAudioDSRelation()
+	 * @generated
+	 */
+	int SAUDIO_DS_RELATION = 18;
+
+	/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__LABELS = SaltCorePackage.SRELATION__LABELS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__ID = SaltCorePackage.SRELATION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__IDENTIFIER = SaltCorePackage.SRELATION__IDENTIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__GRAPH = SaltCorePackage.SRELATION__GRAPH;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SOURCE = SaltCorePackage.SRELATION__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__TARGET = SaltCorePackage.SRELATION__TARGET;
+
+	/**
+	 * The feature id for the '<em><b>Layers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__LAYERS = SaltCorePackage.SRELATION__LAYERS;
+
+	/**
+	 * The feature id for the '<em><b>SAnnotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
+	 * The feature id for the '<em><b>SName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SNAME = SaltCorePackage.SRELATION__SNAME;
+
+	/**
+	 * The feature id for the '<em><b>SElement Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SELEMENT_ID = SaltCorePackage.SRELATION__SELEMENT_ID;
+
+	/**
+	 * The feature id for the '<em><b>SId</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SID = SaltCorePackage.SRELATION__SID;
+
+	/**
+	 * The feature id for the '<em><b>SElement Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SELEMENT_PATH = SaltCorePackage.SRELATION__SELEMENT_PATH;
+
+	/**
+	 * The feature id for the '<em><b>SProcessing Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SMETA_ANNOTATIONS = SaltCorePackage.SRELATION__SMETA_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>SSource</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SSOURCE = SaltCorePackage.SRELATION__SSOURCE;
+
+	/**
+	 * The feature id for the '<em><b>STarget</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__STARGET = SaltCorePackage.SRELATION__STARGET;
+
+	/**
+	 * The feature id for the '<em><b>SGraph</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SGRAPH = SaltCorePackage.SRELATION__SGRAPH;
+
+	/**
+	 * The feature id for the '<em><b>STypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__STYPES = SaltCorePackage.SRELATION__STYPES;
+
+	/**
+	 * The feature id for the '<em><b>SLayers</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SLAYERS = SaltCorePackage.SRELATION__SLAYERS;
+
+	/**
+	 * The feature id for the '<em><b>SStart</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SSTART = SaltCorePackage.SRELATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>SEnd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SEND = SaltCorePackage.SRELATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>SToken</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__STOKEN = SaltCorePackage.SRELATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>SAudio DS</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SAUDIO_DS = SaltCorePackage.SRELATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION__SDOCUMENT_GRAPH = SaltCorePackage.SRELATION_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>SAudio DS Relation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DS_RELATION_FEATURE_COUNT = SaltCorePackage.SRELATION_FEATURE_COUNT + 5;
+
+	/**
 	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3393,7 +3836,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSFEATURE_NAMES()
 	 * @generated
 	 */
-	int SFEATURE_NAMES = 17;
+	int SFEATURE_NAMES = 19;
 
 
 	/**
@@ -3404,7 +3847,7 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSTYPE_NAME()
 	 * @generated
 	 */
-	int STYPE_NAME = 18;
+	int STYPE_NAME = 20;
 
 
 	/**
@@ -3537,6 +3980,28 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSDocumentGraph_SPointingRelations();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations <em>SAudio DS Relations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>SAudio DS Relations</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations()
+	 * @see #getSDocumentGraph()
+	 * @generated
+	 */
+	EReference getSDocumentGraph_SAudioDSRelations();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources <em>SAudio Data Sources</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>SAudio Data Sources</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources()
+	 * @see #getSDocumentGraph()
+	 * @generated
+	 */
+	EReference getSDocumentGraph_SAudioDataSources();
 
 	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS <em>STextual DS</em>}'.
@@ -4007,6 +4472,103 @@ public interface SDocumentStructurePackage extends EPackage {
 	EReference getSDataSourceSequence_SSequentialDS();
 
 	/**
+	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource <em>SAudio Data Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SAudio Data Source</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource
+	 * @generated
+	 */
+	EClass getSAudioDataSource();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>SDocument Graph</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource#getSDocumentGraph()
+	 * @see #getSAudioDataSource()
+	 * @generated
+	 */
+	EReference getSAudioDataSource_SDocumentGraph();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource#getSAudioReference <em>SAudio Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SAudio Reference</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource#getSAudioReference()
+	 * @see #getSAudioDataSource()
+	 * @generated
+	 */
+	EAttribute getSAudioDataSource_SAudioReference();
+
+	/**
+	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation <em>SAudio DS Relation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>SAudio DS Relation</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation
+	 * @generated
+	 */
+	EClass getSAudioDSRelation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSStart <em>SStart</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SStart</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSStart()
+	 * @see #getSAudioDSRelation()
+	 * @generated
+	 */
+	EAttribute getSAudioDSRelation_SStart();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSEnd <em>SEnd</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SEnd</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSEnd()
+	 * @see #getSAudioDSRelation()
+	 * @generated
+	 */
+	EAttribute getSAudioDSRelation_SEnd();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSToken <em>SToken</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SToken</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSToken()
+	 * @see #getSAudioDSRelation()
+	 * @generated
+	 */
+	EReference getSAudioDSRelation_SToken();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSAudioDS <em>SAudio DS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>SAudio DS</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSAudioDS()
+	 * @see #getSAudioDSRelation()
+	 * @generated
+	 */
+	EReference getSAudioDSRelation_SAudioDS();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>SDocument Graph</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSDocumentGraph()
+	 * @see #getSAudioDSRelation()
+	 * @generated
+	 */
+	EReference getSAudioDSRelation_SDocumentGraph();
+
+	/**
 	 * Returns the meta object for enum '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4145,6 +4707,22 @@ public interface SDocumentStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT_GRAPH__SPOINTING_RELATIONS = eINSTANCE.getSDocumentGraph_SPointingRelations();
+
+		/**
+		 * The meta object literal for the '<em><b>SAudio DS Relations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS = eINSTANCE.getSDocumentGraph_SAudioDSRelations();
+
+		/**
+		 * The meta object literal for the '<em><b>SAudio Data Sources</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES = eINSTANCE.getSDocumentGraph_SAudioDataSources();
 
 		/**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.STextualDSImpl <em>STextual DS</em>}' class.
@@ -4529,6 +5107,82 @@ public interface SDocumentStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDATA_SOURCE_SEQUENCE__SSEQUENTIAL_DS = eINSTANCE.getSDataSourceSequence_SSequentialDS();
+
+		/**
+		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SAudioDataSourceImpl <em>SAudio Data Source</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SAudioDataSourceImpl
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSAudioDataSource()
+		 * @generated
+		 */
+		EClass SAUDIO_DATA_SOURCE = eINSTANCE.getSAudioDataSource();
+
+		/**
+		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SAUDIO_DATA_SOURCE__SDOCUMENT_GRAPH = eINSTANCE.getSAudioDataSource_SDocumentGraph();
+
+		/**
+		 * The meta object literal for the '<em><b>SAudio Reference</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SAUDIO_DATA_SOURCE__SAUDIO_REFERENCE = eINSTANCE.getSAudioDataSource_SAudioReference();
+
+		/**
+		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SAudioDSRelationImpl <em>SAudio DS Relation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SAudioDSRelationImpl
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl#getSAudioDSRelation()
+		 * @generated
+		 */
+		EClass SAUDIO_DS_RELATION = eINSTANCE.getSAudioDSRelation();
+
+		/**
+		 * The meta object literal for the '<em><b>SStart</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SAUDIO_DS_RELATION__SSTART = eINSTANCE.getSAudioDSRelation_SStart();
+
+		/**
+		 * The meta object literal for the '<em><b>SEnd</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SAUDIO_DS_RELATION__SEND = eINSTANCE.getSAudioDSRelation_SEnd();
+
+		/**
+		 * The meta object literal for the '<em><b>SToken</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SAUDIO_DS_RELATION__STOKEN = eINSTANCE.getSAudioDSRelation_SToken();
+
+		/**
+		 * The meta object literal for the '<em><b>SAudio DS</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SAUDIO_DS_RELATION__SAUDIO_DS = eINSTANCE.getSAudioDSRelation_SAudioDS();
+
+		/**
+		 * The meta object literal for the '<em><b>SDocument Graph</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SAUDIO_DS_RELATION__SDOCUMENT_GRAPH = eINSTANCE.getSAudioDSRelation_SDocumentGraph();
 
 		/**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SFEATURE_NAMES <em>SFEATURE NAMES</em>}' enum.

@@ -172,6 +172,15 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_GRAPH__NUM_OF_LAYERS = SaltCorePackage.SGRAPH__NUM_OF_LAYERS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_GRAPH__SFEATURES = SaltCorePackage.SGRAPH__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -224,15 +233,6 @@ public interface SCorpusStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCORPUS_GRAPH__SPROCESSING_ANNOTATIONS = SaltCorePackage.SGRAPH__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORPUS_GRAPH__SFEATURES = SaltCorePackage.SGRAPH__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -389,6 +389,15 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SDOCUMENT__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -432,15 +441,6 @@ public interface SCorpusStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SDOCUMENT__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SDOCUMENT__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -562,6 +562,15 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS__SANNOTATIONS = SaltCorePackage.SNODE__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -605,15 +614,6 @@ public interface SCorpusStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCORPUS__SPROCESSING_ANNOTATIONS = SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORPUS__SFEATURES = SaltCorePackage.SNODE__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -743,6 +743,15 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -786,15 +795,6 @@ public interface SCorpusStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCORPUS_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORPUS_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.
@@ -969,6 +969,15 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SCORPUS_DOCUMENT_RELATION__SANNOTATIONS = SaltCorePackage.SRELATION__SANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCORPUS_DOCUMENT_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
+
+	/**
 	 * The feature id for the '<em><b>SName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1012,15 +1021,6 @@ public interface SCorpusStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCORPUS_DOCUMENT_RELATION__SPROCESSING_ANNOTATIONS = SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>SFeatures</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCORPUS_DOCUMENT_RELATION__SFEATURES = SaltCorePackage.SRELATION__SFEATURES;
 
 	/**
 	 * The feature id for the '<em><b>SMeta Annotations</b></em>' containment reference list.

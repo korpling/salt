@@ -46,6 +46,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.S
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentStructureRootAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
@@ -85,6 +87,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSStructures <em>SStructures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSDominanceRelations <em>SDominance Relations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSPointingRelations <em>SPointing Relations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSAudioDSRelations <em>SAudio DS Relations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentGraphImpl#getSAudioDataSources <em>SAudio Data Sources</em>}</li>
  * </ul>
  * </p>
  *
@@ -112,21 +116,21 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	
 	private void init()
 	{
-		{//creating indexes
+		//start: creating indexes
 			Index index= null;
 			
-			{//creating node-type index
+			//start: creating node-type index
 				index= IndexFactory.eINSTANCE.createComplexIndex();
 				index.setId(IDX_SNODETYPE);
 				this.getIndexMgr().addIndex(index);
-			}
+			//end: creating node-type index
 			
-			{//creating relation-type index
+			//start: creating relation-type index
 				index= IndexFactory.eINSTANCE.createComplexIndex();
 				index.setId(IDX_SRELATIONTYPE);
 				this.getIndexMgr().addIndex(index);
-			}
-		}
+			//end: creating relation-type index
+		//end: creating indexes
 	}
 
 	/**
@@ -150,7 +154,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (!(edge instanceof SRelation))
 			throw new SaltException("Cannot insert an edge, which is not a SRelation object: "+ edge);
 		
-		{//create a name if none exists
+		//start: create a name if none exists
 			if (	(((SRelation)edge).getSName()== null)||
 					(((SRelation)edge).getSName().isEmpty()))
 			{
@@ -164,14 +168,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 					((SRelation)edge).setSName("sPointingRel"+ (this.getSPointingRelations().size()+1));
 				else if ( edge instanceof SDominanceRelation)
 					((SRelation)edge).setSName("sDomRel"+ (this.getSDominanceRelations().size()+1));
+				else if ( edge instanceof SAudioDSRelation)
+					((SRelation)edge).setSName("sAudioRel"+ (this.getSAudioDSRelations().size()+1));
 				else ((SRelation)edge).setSName("sRel"+ (this.getSRelations().size()+1));
 			}
-		}	
+		//end: create a name if none exists
 		
 		super.basicAddEdge(edge);
 		
 		String slotId= null;
-		{//compute slot id
+		//start: compute slot id
 			if (edge instanceof STextualRelation)
 				slotId= STextualRelation.class.getName();
 			else if (edge instanceof STimelineRelation)
@@ -182,9 +188,11 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				slotId= SPointingRelation.class.getName();
 			else if (edge instanceof SDominanceRelation)
 				slotId= SDominanceRelation.class.getName();
+			else if (edge instanceof SAudioDSRelation)
+				slotId= SAudioDSRelation.class.getName();
 			else
 				slotId= (String) edge.getClass().getName();
-		}
+		//end: compute slot id
 		
 		this.getIndexMgr().getIndex(IDX_SRELATIONTYPE).addElement(slotId, edge);
 	}
@@ -201,7 +209,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (!(node instanceof SNode))
 			throw new SaltException("Cannot insert a node, which is not a SNode object: "+ node);
 		
-		{//create a name if none exists
+		//start: create a name if none exists
 			if (	(((SNode)node).getSName()== null)||
 					(((SNode)node).getSName().isEmpty()))
 			{
@@ -215,9 +223,11 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 					((SNode)node).setSName("sSpan"+ (this.getSSpans().size()+1));
 				else if ( node instanceof SStructure)
 					((SNode)node).setSName("structure"+ (this.getSStructures().size()+1));
+				else if ( node instanceof SAudioDataSource)
+					((SNode)node).setSName("audio"+ (this.getSAudioDataSources().size()+1));
 				else ((SNode)node).setSName("sNode"+ (this.getSNodes().size()+1));
 			}
-		}	
+		//end: create a name if none exists
 		
 		if (	(((SNode)node).getSId()== null)||
 				(((SNode)node).getSId().isEmpty()))
@@ -225,7 +235,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		super.basicAddNode(node);
 		
 		String slotId= null;
-		{//compute slot id
+		//start: compute slot id
 			if (node instanceof SToken)
 				slotId= SToken.class.getName();
 			else if (node instanceof STextualDS)
@@ -236,9 +246,11 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				slotId= SSpan.class.getName();
 			else if (node instanceof SStructure)
 				slotId= SStructure.class.getName();
+			else if (node instanceof SAudioDataSource)
+				slotId= SAudioDataSource.class.getName();
 			else
 				slotId= (String) node.getClass().getName();
-		}
+		//end: compute slot id
 		
 		this.getIndexMgr().getIndex(IDX_SNODETYPE).addElement(slotId, node);
 	}
@@ -488,12 +500,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				sTimeRel.setSTimeline(sTimeline);
 				sTimeRel.setSToken(sTextRel.getSToken());
 				
-				{//put STimelineRelation into sTimeRelTable
+				//start: put STimelineRelation into sTimeRelTable
 					if (sTimeRelTable.get(sTextRel.getSTextualDS())== null)
 						sTimeRelTable.put(sTextRel.getSTextualDS(), new BasicEList<STimelineRelation>());
 					//TODO not only adding the timeRel, sorting for left and right textual position
 					sTimeRelTable.get(sTextRel.getSTextualDS()).add(sTimeRel);
-				}//put STimelineRelation into sTimeRelTable
+				//end: put STimelineRelation into sTimeRelTable
 			}//for each token create a STimeline object 
 			for (STextualDS sTextualDS: this.getSTextualDSs())
 			{
@@ -825,8 +837,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SDocumentGraph#getSStructures()}
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<SStructure> getSStructures() 
@@ -839,6 +850,22 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 					nodes.size(), nodes.toArray());
 		else retVal= new EcoreEList.UnmodifiableEList(this,
 				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SStructures(), 0, (Object[]) null);
+		return(retVal);
+	}
+	
+	/**
+	 * {@inheritDoc SDocumentGraph#getSAudioDataSources()}
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public EList<SAudioDataSource> getSAudioDataSources() {
+		EList<SAudioDataSource> retVal= null;
+		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SAudioDataSource.class.getName());
+		if (nodes!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDataSources(),
+					nodes.size(), nodes.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDataSources(), 0, (Object[]) null);
 		return(retVal);
 	}
 
@@ -927,8 +954,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SDocumentGraph#getSPointingRelations()}
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<SPointingRelation> getSPointingRelations() 
@@ -946,7 +972,24 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		return(retVal);
 	}
 
-	// ============================ end: handling specific relations
+	/**
+	 * {@inheritDoc SDocumentGraph#getSAudioDSRelations()}
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public EList<SAudioDSRelation> getSAudioDSRelations() {
+		EList<SAudioDSRelation> retVal= null;
+		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SAudioDSRelation.class.getName());
+		
+		if (edges!= null)
+			retVal= new EcoreEList.UnmodifiableEList(this,
+					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDSRelations(),
+					edges.size(), edges.toArray());
+		else retVal= new EcoreEList.UnmodifiableEList(this,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDSRelations(), 0, (Object[]) null);
+		
+		return(retVal);
+	}
+// ============================ end: handling specific relations
 	
 	protected void finalize() throws Throwable 
 	{
@@ -1001,6 +1044,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return ((InternalEList<?>)getSDominanceRelations()).basicRemove(otherEnd, msgs);
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
 				return ((InternalEList<?>)getSPointingRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS:
+				return ((InternalEList<?>)getSAudioDSRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES:
+				return ((InternalEList<?>)getSAudioDataSources()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1037,6 +1084,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return getSDominanceRelations();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
 				return getSPointingRelations();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS:
+				return getSAudioDSRelations();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES:
+				return getSAudioDataSources();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1092,6 +1143,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				getSPointingRelations().clear();
 				getSPointingRelations().addAll((Collection<? extends SPointingRelation>)newValue);
 				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS:
+				getSAudioDSRelations().clear();
+				getSAudioDSRelations().addAll((Collection<? extends SAudioDSRelation>)newValue);
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES:
+				getSAudioDataSources().clear();
+				getSAudioDataSources().addAll((Collection<? extends SAudioDataSource>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1137,6 +1196,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
 				getSPointingRelations().clear();
 				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS:
+				getSAudioDSRelations().clear();
+				return;
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES:
+				getSAudioDataSources().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1171,6 +1236,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				return !getSDominanceRelations().isEmpty();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
 				return !getSPointingRelations().isEmpty();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS:
+				return !getSAudioDSRelations().isEmpty();
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES:
+				return !getSAudioDataSources().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

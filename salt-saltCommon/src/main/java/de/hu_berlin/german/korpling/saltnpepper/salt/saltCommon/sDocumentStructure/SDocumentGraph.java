@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure;
 
+import java.util.Hashtable;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
@@ -45,6 +46,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures <em>SStructures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations <em>SDominance Relations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations <em>SPointing Relations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations <em>SAudio DS Relations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources <em>SAudio Data Sources</em>}</li>
  * </ul>
  * </p>
  *
@@ -281,6 +284,42 @@ public interface SDocumentGraph extends SGraph {
 	EList<SPointingRelation> getSPointingRelations();
 
 	/**
+	 * Returns the value of the '<em><b>SAudio DS Relations</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation}.
+	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SAudio DS Relations</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SAudio DS Relations</em>' containment reference list.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SAudioDSRelations()
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SAudioDSRelation> getSAudioDSRelations();
+
+	/**
+	 * Returns the value of the '<em><b>SAudio Data Sources</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource}.
+	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource#getSDocumentGraph <em>SDocument Graph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>SAudio Data Sources</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>SAudio Data Sources</em>' containment reference list.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SAudioDataSources()
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource#getSDocumentGraph
+	 * @model opposite="sDocumentGraph" containment="true" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	EList<SAudioDataSource> getSAudioDataSources();
+
+	/**
 	 * Creates and returns a '<em><b>SRelation</b></em>' of the type given by sRelationType between sourceSNode and targetSNode.
 	 * Note that the sourceSNode is required to be in the SDocumentGraph already and that the sRelationType may
 	 * only be one of STEXTUAL_RELATION, SSPANNING_RELATION, SDOMINANCE_RELATION and SPOINTING_RELATION.
@@ -512,7 +551,8 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a map of types, with corresponding lists of root nodes
 	 * @model keyType="java.lang.String" valueType="java.lang.String"
 	 */
-	 Map<String, EList<SNode>> getRootsBySRelationSType(STYPE_NAME sType);
+	//Map<String, EList<SNode>>
+	Map<String, EList<SNode>> getRootsBySRelationSType(STYPE_NAME sType);
 	
 
 	/**

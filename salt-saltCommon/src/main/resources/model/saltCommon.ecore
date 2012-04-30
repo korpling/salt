@@ -211,6 +211,12 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sPointingRelations" upperBound="-1"
           eType="#//sDocumentStructure/SPointingRelation" volatile="true" transient="true"
           containment="true" eOpposite="#//sDocumentStructure/SPointingRelation/sDocumentGraph"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sAudioDSRelations" upperBound="-1"
+          eType="#//sDocumentStructure/SAudioDSRelation" volatile="true" transient="true"
+          derived="true" containment="true" eOpposite="#//sDocumentStructure/SAudioDSRelation/sDocumentGraph"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sAudioDataSources" upperBound="-1"
+          eType="#//sDocumentStructure/SAudioDataSource" volatile="true" transient="true"
+          derived="true" containment="true" eOpposite="#//sDocumentStructure/SAudioDataSource/sDocumentGraph"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="STextualDS" eSuperTypes="#//sDocumentStructure/SSequentialDS">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -327,6 +333,24 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sSequentialDS" eType="#//sDocumentStructure/SSequentialDS"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SAudioDataSource" eSuperTypes="#//sDocumentStructure/SSequentialDS">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sAudioDataSources"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sAudioReference" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"
+          volatile="true" transient="true" derived="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SAudioDSRelation" eSuperTypes="../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SRelation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sToken" eType="#//sDocumentStructure/SToken"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sAudioDS" eType="#//sDocumentStructure/SAudioDataSource"
+          volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
+          volatile="true" transient="true" derived="true" eOpposite="#//sDocumentStructure/SDocumentGraph/sAudioDSRelations"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

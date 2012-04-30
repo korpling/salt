@@ -26,6 +26,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
@@ -441,6 +443,16 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.createSDataSourceSequence());
 	}
 	
+	@Override
+	public SAudioDataSource createSAudioDataSource() {
+		return(this.sDocumentStructureFactory.createSAudioDataSource());
+	}
+
+	@Override
+	public SAudioDSRelation createSAudioDSRelation() {
+		return(this.sDocumentStructureFactory.createSAudioDSRelation());
+	}
+	
 //	@Override
 //	public SStructuredNode createSStructuredNode() 
 //	{
@@ -452,6 +464,5 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
 // ===================================== end: SDocumentStructureFactory
-
 	
 } //SaltCommonFactoryImpl
