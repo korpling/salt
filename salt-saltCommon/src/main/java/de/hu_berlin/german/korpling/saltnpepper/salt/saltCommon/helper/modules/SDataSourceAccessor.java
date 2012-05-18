@@ -27,6 +27,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltInvalidModelException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS;
@@ -128,7 +129,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 	}
 	
 	/**
-	 * Searches for all {@link SNode} objects of the given node type, which overlap the given sequence.  
+	 * Searches for all {@link SNode} objects of the given node type, which cover the given sequence.  
 	 * @param sDataSourceSequence sequence, which is overlapped
 	 * @param nodeClasses type of nodes to be returned
 	 * @return nodes, which overlaps the given sequence
@@ -153,10 +154,11 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 		else 
 			throw new SaltModuleException("Cannot compute overlaped nodes, because the given dataSource is not supported by this method.");
 		for (SSequentialRelation sSeqRel: sSeqRels)
-		{//walk through all time-relations
-			if (	(sSeqRel.getSStart() >= sDataSourceSequence.getSStart()) &&
+		{//walk through all sequential relations
+			if (	(sDataSourceSequence.getSSequentialDS().equals(sSeqRel.getSTarget()))&&
+					(sSeqRel.getSStart() >= sDataSourceSequence.getSStart()) &&
 					(sSeqRel.getSEnd() <= sDataSourceSequence.getSEnd()))
-			{//timeRel is in the interval
+			{//sequential relation is in the interval
 				for (Class<? extends SNode> nodeClass: nodeClasses)
 				{
 					if (nodes== null)
@@ -166,8 +168,8 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 						nodes.add(sSeqRel.getSSource());
 					}
 				}
-			}
-		}
+			}//sequential relation is in the interval
+		}//walk through all sequential relations
 		return(nodes);
 	}
 	

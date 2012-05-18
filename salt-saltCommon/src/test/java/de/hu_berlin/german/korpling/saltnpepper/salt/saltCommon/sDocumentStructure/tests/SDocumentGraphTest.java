@@ -746,15 +746,120 @@ public class SDocumentGraphTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSNodeBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence) <em>Get SNode By Sequence</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSNodeBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence)
+	 * Tests if tokens are correctly returned to corresponding {@link SDataSourceSequence} objects.
+	 * text1: tok2, tok6, tok1, tok4, tok5, tok3
+	 * text2: tok3, tok2, tok1
+	 * 
+	 * test11: covers tok1 of text 1
+	 * test12: covers tok2, tok3, tok4 of text 1
+	 * test13: covers all tokens of text 1
+	 * test14: covers all tokens of text 2
 	 */
 	public void testGetSNodeBySequence__SDataSourceSequence() {
-		//TODO more to come a simple testis in SDataSourceAccessorTest
+		String text1= "This is a sample text.";
+		String text2= "A sample text.";
+		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+		
+		//start: create sample graph
+			//start: sTokens for sText1
+				STextualDS sText1= this.getFixture().createSTextualDS(text1);
+				dsSequence.setSSequentialDS(sText1);
+	
+				SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
+				tok2.setSName("tok2");
+				
+				SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
+				tok6.setSName("tok6");
+				
+				SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
+				tok1.setSName("tok1");
+				
+				SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
+				tok4.setSName("tok4");
+				
+				SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
+				tok5.setSName("tok5");
+				
+				SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
+				tok3.setSName("tok3");
+			//end: sTokens for sText1
+			//start: sTokens for sText2
+				STextualDS sText2= this.getFixture().createSTextualDS(text2);
+				dsSequence.setSSequentialDS(sText2);
+	
+				SToken tok3_1= this.getFixture().createSToken(sText2, 9, 13);
+				tok3_1.setSName("tok3_1");
+				
+				SToken tok2_1= this.getFixture().createSToken(sText2, 2, 8);
+				tok2_1.setSName("tok2_1");
+				
+				SToken tok1_1= this.getFixture().createSToken(sText2, 0, 1);
+				tok1_1.setSName("tok1_1");
+			//end: sTokens for sText1	
+		//end: create sample graph
+		
+		SDataSourceSequence sequence= null;
+		EList<SNode> coveredSTokens= null;
+		
+		//start: test1 
+			sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+			sequence.setSSequentialDS(sText1);
+			sequence.setSStart(0);
+			sequence.setSEnd(4);
+			
+			coveredSTokens= this.getFixture().getSNodeBySequence(sequence);
+			assertNotNull(coveredSTokens);
+			assertEquals("covered tokens are: "+ coveredSTokens, 1, coveredSTokens.size());
+			assertTrue(coveredSTokens.contains(tok1));
+		//end: test 1
+			
+		//start: test2 
+			sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+			sequence.setSSequentialDS(sText1);
+			sequence.setSStart(5);
+			sequence.setSEnd(16);
+			
+			coveredSTokens= this.getFixture().getSNodeBySequence(sequence);
+			assertNotNull(coveredSTokens);
+			assertEquals(3, coveredSTokens.size());
+			assertTrue(coveredSTokens.contains(tok2));
+			assertTrue(coveredSTokens.contains(tok3));
+			assertTrue(coveredSTokens.contains(tok4));
+		//end: test 2
+			
+		//start: test3 
+			sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+			sequence.setSSequentialDS(sText1);
+			sequence.setSStart(0);
+			sequence.setSEnd(sText1.getSText().length());
+			
+			coveredSTokens= this.getFixture().getSNodeBySequence(sequence);
+			assertNotNull(coveredSTokens);
+			assertEquals(6, coveredSTokens.size());
+			assertTrue(coveredSTokens.contains(tok1));
+			assertTrue(coveredSTokens.contains(tok2));
+			assertTrue(coveredSTokens.contains(tok3));
+			assertTrue(coveredSTokens.contains(tok4));
+			assertTrue(coveredSTokens.contains(tok5));
+			assertTrue(coveredSTokens.contains(tok6));
+		//end: test 3
+		
+		//start: test3 
+			sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+			sequence.setSSequentialDS(sText2);
+			sequence.setSStart(0);
+			sequence.setSEnd(sText2.getSText().length());
+			
+			coveredSTokens= this.getFixture().getSNodeBySequence(sequence);
+			assertNotNull(coveredSTokens);
+			assertEquals(3, coveredSTokens.size());
+			assertTrue(coveredSTokens.contains(tok1_1));
+			assertTrue(coveredSTokens.contains(tok2_1));
+			assertTrue(coveredSTokens.contains(tok3_1));
+		//end: test 3
 	}
-
+	
+	
 	/**
 	 * Tests the following graph, and checks if the correct sequences are overlapped:
 	 * 		struct1			struct3
@@ -1024,41 +1129,29 @@ public class SDocumentGraphTest extends TestCase {
 	 */
 	public void testSortSTokenByText() {
 		EList<SToken> sTokens= new BasicEList<SToken>();
-		String text= "This is a sample text.";
+		String text1= "This is a sample text.";
 		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 		
 		//start: create sample graph
-			STextualDS sText= this.getFixture().createSTextualDS(text);
-			dsSequence.setSSequentialDS(sText);
-
-			dsSequence.setSStart(5);
-			dsSequence.setSEnd(7);
-			SToken tok2= this.getFixture().createSToken(dsSequence);
+			STextualDS sText1= this.getFixture().createSTextualDS(text1);
+			dsSequence.setSSequentialDS(sText1);
+	
+			SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
 			tok2.setSName("tok2");
 			
-			dsSequence.setSStart(21);
-			dsSequence.setSEnd(22);
-			SToken tok6= this.getFixture().createSToken(dsSequence);
+			SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
 			tok6.setSName("tok6");
 			
-			dsSequence.setSStart(0);
-			dsSequence.setSEnd(4);
-			SToken tok1= this.getFixture().createSToken(dsSequence);
+			SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
 			tok1.setSName("tok1");
 			
-			dsSequence.setSStart(10);
-			dsSequence.setSEnd(16);
-			SToken tok4= this.getFixture().createSToken(dsSequence);
+			SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
 			tok4.setSName("tok4");
 			
-			dsSequence.setSStart(17);
-			dsSequence.setSEnd(21);
-			SToken tok5= this.getFixture().createSToken(dsSequence);
+			SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
 			tok5.setSName("tok5");
 			
-			dsSequence.setSStart(8);
-			dsSequence.setSEnd(9);
-			SToken tok3= this.getFixture().createSToken(dsSequence);
+			SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
 			tok3.setSName("tok3");
 		//end: create sample graph
 		sTokens.add(tok1);
@@ -1083,41 +1176,29 @@ public class SDocumentGraphTest extends TestCase {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#sortSTokenByText(org.eclipse.emf.common.util.EList)
 	 */
 	public void testGetSortedSTokenByText__EList() {
-		String text= "This is a sample text.";
+		String text1= "This is a sample text.";
 		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 		
 		//start: create sample graph
-			STextualDS sText= this.getFixture().createSTextualDS(text);
-			dsSequence.setSSequentialDS(sText);
-
-			dsSequence.setSStart(5);
-			dsSequence.setSEnd(7);
-			SToken tok2= this.getFixture().createSToken(dsSequence);
+			STextualDS sText1= this.getFixture().createSTextualDS(text1);
+			dsSequence.setSSequentialDS(sText1);
+	
+			SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
 			tok2.setSName("tok2");
 			
-			dsSequence.setSStart(21);
-			dsSequence.setSEnd(22);
-			SToken tok6= this.getFixture().createSToken(dsSequence);
+			SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
 			tok6.setSName("tok6");
 			
-			dsSequence.setSStart(0);
-			dsSequence.setSEnd(4);
-			SToken tok1= this.getFixture().createSToken(dsSequence);
+			SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
 			tok1.setSName("tok1");
 			
-			dsSequence.setSStart(10);
-			dsSequence.setSEnd(16);
-			SToken tok4= this.getFixture().createSToken(dsSequence);
+			SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
 			tok4.setSName("tok4");
 			
-			dsSequence.setSStart(17);
-			dsSequence.setSEnd(21);
-			SToken tok5= this.getFixture().createSToken(dsSequence);
+			SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
 			tok5.setSName("tok5");
 			
-			dsSequence.setSStart(8);
-			dsSequence.setSEnd(9);
-			SToken tok3= this.getFixture().createSToken(dsSequence);
+			SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
 			tok3.setSName("tok3");
 		//end: create sample graph
 		
@@ -1141,41 +1222,29 @@ public class SDocumentGraphTest extends TestCase {
 	 */
 	public void testGetSortedSTokenByText() { 
 		EList<SToken> sTokens= new BasicEList<SToken>();
-		String text= "This is a sample text.";
+		String text1= "This is a sample text.";
 		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 		
 		//start: create sample graph
-			STextualDS sText= this.getFixture().createSTextualDS(text);
-			dsSequence.setSSequentialDS(sText);
-
-			dsSequence.setSStart(5);
-			dsSequence.setSEnd(7);
-			SToken tok2= this.getFixture().createSToken(dsSequence);
+			STextualDS sText1= this.getFixture().createSTextualDS(text1);
+			dsSequence.setSSequentialDS(sText1);
+	
+			SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
 			tok2.setSName("tok2");
 			
-			dsSequence.setSStart(21);
-			dsSequence.setSEnd(22);
-			SToken tok6= this.getFixture().createSToken(dsSequence);
+			SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
 			tok6.setSName("tok6");
 			
-			dsSequence.setSStart(0);
-			dsSequence.setSEnd(4);
-			SToken tok1= this.getFixture().createSToken(dsSequence);
+			SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
 			tok1.setSName("tok1");
 			
-			dsSequence.setSStart(10);
-			dsSequence.setSEnd(16);
-			SToken tok4= this.getFixture().createSToken(dsSequence);
+			SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
 			tok4.setSName("tok4");
 			
-			dsSequence.setSStart(17);
-			dsSequence.setSEnd(21);
-			SToken tok5= this.getFixture().createSToken(dsSequence);
+			SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
 			tok5.setSName("tok5");
 			
-			dsSequence.setSStart(8);
-			dsSequence.setSEnd(9);
-			SToken tok3= this.getFixture().createSToken(dsSequence);
+			SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
 			tok3.setSName("tok3");
 		//end: create sample graph
 		sTokens.add(tok1);
@@ -1184,6 +1253,77 @@ public class SDocumentGraphTest extends TestCase {
 		sTokens.add(tok4);
 		sTokens.add(tok5);
 		sTokens.add(tok6);
+		
+		
+		EList<SToken> sortedSTokens= this.getFixture().getSortedSTokenByText();
+		
+		assertNotNull(sortedSTokens);
+		assertEquals(sTokens.size(), sortedSTokens.size());
+		for (int i=0; i< 6; i++)
+		{
+			assertEquals(sTokens.get(i), sortedSTokens.get(i));
+		}
+	}
+	
+	/**
+	 * Tests the sorting of tokens covering different {@link STextualDS} objcts
+	 * text1: tok2, tok6, tok1, tok4, tok5, tok3
+	 * text2: tok3, tok2, tok1
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#sortSTokenByText()
+	 */
+	public void testGetSortedSTokenByText_2() { 
+		EList<SToken> sTokens= new BasicEList<SToken>();
+		String text1= "This is a sample text.";
+		String text2= "A sample text.";
+		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+		
+		//start: create sample graph
+			//start: sTokens for sText1
+				STextualDS sText1= this.getFixture().createSTextualDS(text1);
+				dsSequence.setSSequentialDS(sText1);
+	
+				SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
+				tok2.setSName("tok2");
+				
+				SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
+				tok6.setSName("tok6");
+				
+				SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
+				tok1.setSName("tok1");
+				
+				SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
+				tok4.setSName("tok4");
+				
+				SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
+				tok5.setSName("tok5");
+				
+				SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
+				tok3.setSName("tok3");
+			//end: sTokens for sText1
+			//start: sTokens for sText2
+				STextualDS sText2= this.getFixture().createSTextualDS(text2);
+				dsSequence.setSSequentialDS(sText2);
+	
+				SToken tok3_1= this.getFixture().createSToken(sText2, 9, 13);
+				tok3_1.setSName("tok3_1");
+				
+				SToken tok2_1= this.getFixture().createSToken(sText2, 2, 8);
+				tok2_1.setSName("tok2_1");
+				
+				SToken tok1_1= this.getFixture().createSToken(sText2, 0, 1);
+				tok1_1.setSName("tok1_1");
+			//end: sTokens for sText1	
+		//end: create sample graph
+				
+		sTokens.add(tok1);
+		sTokens.add(tok2);
+		sTokens.add(tok3);
+		sTokens.add(tok4);
+		sTokens.add(tok5);
+		sTokens.add(tok6);
+		sTokens.add(tok1_1);
+		sTokens.add(tok2_1);
+		sTokens.add(tok3_1);
 		
 		
 		EList<SToken> sortedSTokens= this.getFixture().getSortedSTokenByText();
