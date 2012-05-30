@@ -293,7 +293,7 @@ public class GrAFFileDelegator {
 	public STextualDS start(File grafFile)
 	{
 		STextualDS retVal= null;
-		if (!grafFile.getName().endsWith(SaltFactory.GRAF_FILE_ENDING))
+		if (!grafFile.getName().endsWith(SaltFactory.FILE_ENDING_GRAF))
 		{//file must be a primary data file
 			retVal= this.readPrimaryDataFile(grafFile);
 		}//file must be a primary data file

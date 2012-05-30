@@ -35,12 +35,17 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	/**
 	 * The file ending for xml files to store a SALT model.
 	 */
-	public final String SALT_FILE_ENDING= "salt"; 
+	public final String FILE_ENDING_SALT= "salt"; 
+	
+	/**
+	 * The file ending to store a dot model.
+	 */
+	public final String FILE_ENDING_DOT= "dot";
 	
 	/**
 	 * The file ending for xml files to store a SALT model.
 	 */
-	public final String GRAF_FILE_ENDING= "graf"; 
+	public final String FILE_ENDING_GRAF= "graf"; 
 	
 	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.

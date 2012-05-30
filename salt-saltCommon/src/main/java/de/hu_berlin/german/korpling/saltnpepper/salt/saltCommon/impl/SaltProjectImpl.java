@@ -424,7 +424,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 				{
 					resourceSet= new ResourceSetImpl();
 					resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
-					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.SALT_FILE_ENDING, new XMIResourceFactoryImpl());
+					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
 				}
 			}
 		}
@@ -450,7 +450,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		if (!saltProjectPath.exists())
 			saltProjectPath.mkdirs();
 		
-		URI saltProjectFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ "saltProject"+"."+ SaltFactory.SALT_FILE_ENDING);
+		URI saltProjectFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ "saltProject"+"."+ SaltFactory.FILE_ENDING_SALT);
 		
 //		ResourceSet resourceSet= null;
 //		resourceSet= new ResourceSetImpl();
@@ -487,7 +487,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 							{
 								//as long as sId starts with scheme, replace(...) must be there
 								String corpusPath= fatherCorpus.getSId().replace("salt:", "");
-								sDocumentFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ corpusPath+"/"+ sDocument.getSName()+"."+ SaltFactory.SALT_FILE_ENDING);
+								sDocumentFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ corpusPath+"/"+ sDocument.getSName()+"."+ SaltFactory.FILE_ENDING_SALT);
 								
 								resource= this.getResourceSet().createResource(sDocumentFileURI);
 								if (resource== null)
@@ -626,7 +626,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 			else if (currNode instanceof SDocument)
 			{
 				SDocument sDocument= (SDocument) currNode;
-				File sDocumentPath= new File(this.pathStack.peek()+"/"+sDocument.getSName()+ "."+SaltFactory.SALT_FILE_ENDING);
+				File sDocumentPath= new File(this.pathStack.peek()+"/"+sDocument.getSName()+ "."+SaltFactory.FILE_ENDING_SALT);
 				if (!sDocumentPath.exists())
 				{
 					//TODO put a log message (debug), that no document graph was found for document 
@@ -853,7 +853,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		{
 			if (!subFile.isDirectory())
 			{//if file is not a directory, map it to SDocument
-				if (subFile.getName().endsWith("."+SaltFactory.GRAF_FILE_ENDING))
+				if (subFile.getName().endsWith("."+SaltFactory.FILE_ENDING_GRAF))
 					hasGrafFiles= true;
 			}//if file is not a directory, map it to SDocument
 			else

@@ -37,7 +37,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
@@ -570,25 +569,27 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SCorpus> getSRootCorpus() 
 	{
-		//TODO may be a root corpus can be marked when adding new corpora???
-		EList<SCorpus> retVal= null;
-		GraphTraverser graphTraverser= new GraphTraverser();
-		graphTraverser.setGraph(this);
-		EList<Node> roots= graphTraverser.getRoots();
-		if (roots!= null)
-		{
-			try {
-				retVal= (EList<SCorpus>) (EList<? extends Node>) roots;
-			} catch (ClassCastException e) {
-				for (Node node: Collections.synchronizedCollection(roots))
-				{
-					if (node instanceof SCorpus)
-						retVal.add((SCorpus) node);
-				}
-			}
-			
-		}
-		return(retVal);
+		return( (EList<SCorpus>) (EList<? extends Node>)this.getSRoots());
+		
+//		//TODO may be a root corpus can be marked when adding new corpora???
+//		EList<SCorpus> retVal= null;
+//		GraphTraverser graphTraverser= new GraphTraverser();
+//		graphTraverser.setGraph(this);
+//		EList<Node> roots= graphTraverser.getRoots();
+//		if (roots!= null)
+//		{
+//			try {
+//				retVal= (EList<SCorpus>) (EList<? extends Node>) roots;
+//			} catch (ClassCastException e) {
+//				for (Node node: Collections.synchronizedCollection(roots))
+//				{
+//					if (node instanceof SCorpus)
+//						retVal.add((SCorpus) node);
+//				}
+//			}
+//			
+//		}
+//		return(retVal);
 	}
 
 	/**
