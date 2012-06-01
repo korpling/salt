@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
@@ -56,7 +57,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSCorpusGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SCorpus Graph DOT</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject_DOT(org.eclipse.emf.common.util.URI) <em>Save Salt Project DOT</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSDocumentGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SDocument Graph DOT</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_SCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load Salt Project SCorpus Structure</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load SCorpus Structure</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI) <em>Load SDocument Structure</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -149,6 +151,25 @@ public class SaltProjectTest extends TestCase {
 //		fail();
 	}
 	
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI) <em>Load SDocument Structure</em>}' operation.
+	 * Checks loading of just the document structure of a document.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoadSDocumentStructure__SDocument_URI() 
+	{
+		File sDocumentFile= new File(FILE_RESOURCE_DIR+ "case4/doc1."+SaltFactory.FILE_ENDING_SALT);
+		URI sDocumentURI= URI.createFileURI(sDocumentFile.getAbsolutePath());
+		SDocument sDocument= SaltFactory.eINSTANCE.createSDocument();
+		this.getFixture().loadSDocumentStructure(sDocument, sDocumentURI);
+				
+		SDocument template_sDocument= SaltFactory.eINSTANCE.createSDocument();
+		SampleGenerator.createSDocumentStructure(template_sDocument);
+		
+		assertEquals(template_sDocument, sDocument);
+	}
+
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_SCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load Salt Project SCorpus Structure</em>}' operation.
 	 * Implementation is found in {@link #testLoadSaltProject_SCorpusStructure__URI_simple()} and
@@ -160,15 +181,61 @@ public class SaltProjectTest extends TestCase {
 	}
 	
 	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load SCorpus Structure</em>}' operation.
+	 * Only tests, if the created map is correct. Further tests can be found in {@link #testLoadSaltProject_SCorpusStructure__URI_simple()} and
+	 * {@link #testLoadSaltProject_SCorpusStructure__URI_complex()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusStructure(org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoadSCorpusStructure__URI() 
+	{
+		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case5/");
+		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
+		Map<SDocument, URI> sDocumentMap= this.getFixture().loadSCorpusStructure(saltProjectURI);
+		
+		assertNotNull(this.getFixture().getSCorpusGraphs());
+		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0));
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments());
+		assertEquals(4, this.getFixture().getSCorpusGraphs().get(0).getSDocuments().size());
+		
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0));
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(1));
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(2));
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(3));
+		
+		SDocument sDoc1= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0);
+		SDocument sDoc2= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(1);
+		SDocument sDoc3= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(2);
+		SDocument sDoc4= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(3);
+		
+		File sDoc1File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc1."+SaltFactory.FILE_ENDING_SALT);
+		File sDoc2File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc2."+SaltFactory.FILE_ENDING_SALT);
+		File sDoc3File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc3."+SaltFactory.FILE_ENDING_SALT);
+		File sDoc4File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc4."+SaltFactory.FILE_ENDING_SALT);
+		
+		assertNotNull(sDocumentMap.get(sDoc1));
+		assertNotNull(sDocumentMap.get(sDoc2));
+		assertNotNull(sDocumentMap.get(sDoc3));
+		assertNotNull(sDocumentMap.get(sDoc4));
+		
+		assertEquals(sDoc1File, new File(sDocumentMap.get(sDoc1).toFileString()));
+		assertEquals(sDoc2File, new File(sDocumentMap.get(sDoc2).toFileString()));
+		assertEquals(sDoc3File, new File(sDocumentMap.get(sDoc3).toFileString()));
+		assertEquals(sDoc4File, new File(sDocumentMap.get(sDoc4).toFileString()));
+		
+
+	}
+	
+	/**
 	 * Tests the loading of the corpus structure as created by {@link SampleGenerator#createSimpleCorpusStructure(SaltProject)}.
 	 */
 	public void testLoadSaltProject_SCorpusStructure__URI_simple() 
 	{
 		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case7/");
 		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
-		this.getFixture().loadSaltProject_SCorpusStructure(saltProjectURI);
+//		this.getFixture().loadSaltProject_SCorpusStructure(saltProjectURI);
+		this.getFixture().loadSCorpusStructure(saltProjectURI);
 		assertNotNull(this.getFixture().getSCorpusGraphs());
-		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
 		SCorpusGraph sCorpusGraph= this.getFixture().getSCorpusGraphs().get(0);
 		
@@ -183,9 +250,9 @@ public class SaltProjectTest extends TestCase {
 	{
 		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case5/");
 		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
-		this.getFixture().loadSaltProject_SCorpusStructure(saltProjectURI);
+//		this.getFixture().loadSaltProject_SCorpusStructure(saltProjectURI);
+		this.getFixture().loadSCorpusStructure(saltProjectURI);
 		assertNotNull(this.getFixture().getSCorpusGraphs());
-		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
 		SCorpusGraph sCorpusGraph= this.getFixture().getSCorpusGraphs().get(0);
 		

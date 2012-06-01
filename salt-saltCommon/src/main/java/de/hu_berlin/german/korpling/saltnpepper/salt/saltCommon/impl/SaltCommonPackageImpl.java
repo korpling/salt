@@ -35,6 +35,7 @@ import java.util.Properties;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -282,8 +283,18 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 		addEParameter(op, theSaltCorePackage.getURI(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getSElementId(), "sElementID", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(saltProjectEClass, null, "loadSaltProject_SCorpusStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(saltProjectEClass, null, "loadSCorpusStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getURI(), "saltProjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(theSCorpusStructurePackage.getSDocument());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(theSaltCorePackage.getURI());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(saltProjectEClass, null, "loadSDocumentStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSCorpusStructurePackage.getSDocument(), "sDocument", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "sDocumentURI", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

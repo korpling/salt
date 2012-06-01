@@ -20,6 +20,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -456,12 +457,12 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	}
 // ====================================================== end: saving to SaltXML resource	
 // ====================================================== start: loading SaltXML resource	
+	
 	/**
-	 * Reads a saltProject.salt file and imports the contained corpus structure, without importing the document-structure
-	 * corresponding to the imported {@link SDocument} nodes.
-	 * @param saltProjectURI the uri to the location of the folder containing the saltProject.salt file.
+	 * {@inheritDoc SaltProject#loadSCorpusStructure(URI)}
 	 */
-	public synchronized void loadSaltProject_SCorpusStructure(URI saltProjectURI) {
+	public synchronized Map<SDocument, URI> loadSCorpusStructure(URI saltProjectURI) 
+	{
 		if (saltProjectURI== null)
 			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the given uri is null.");
 		File saltProjectPath= null;
@@ -505,17 +506,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 			SaltProject saltProject= (SaltProject) xmlResource.getContents().get(0);
 			this.getSCorpusGraphs().addAll(saltProject.getSCorpusGraphs());
 		}
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@SuppressWarnings("unchecked")
-	public synchronized void loadSaltProject(URI saltProjectURI) 
-	{
-		loadSaltProject_SCorpusStructure(saltProjectURI);
-		File saltProjectPath= new File(saltProjectURI.toFileString());
+		Map<SDocument, URI> sDocumentMap= null;
 		{//load SDocumentGraph-objects belonging to the SDocument objects of all SCorpusGraphs
 			//TODO this is a workaround, because the mechanism of EMF does not work correctly here, but it would be better to do this automatically by EMF, because the given approach uses the SElementId for retrieval, which can be incorrect!!! But when using EMF take care for relative pathes.
 			if (	(this.getSCorpusGraphs()!= null)&&
@@ -535,20 +526,107 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 					} catch (InterruptedException e) {
 						throw new SaltResourceException("This seems to be a bug, it is not possible to wait for a thread.");
 					}}
+					if (sDocumentMap== null)
+						sDocumentMap= loadingTraverser.sDocumentMap;
+					else
+						sDocumentMap.putAll(loadingTraverser.sDocumentMap);
 				}
 			}
 		}//load SDocumentGraph-objects belonging to the SDocument objects of all SCorpusGraphs
+		return(sDocumentMap);
 	}
 
+	/**
+	 * {@inheritDoc SaltProject#loadSDocumentStructure(SDocument, URI)}
+	 */
+	public void loadSDocumentStructure(SDocument sDocument, URI sDocumentURI) 
+	{
+		Resource resource= getResourceSet().createResource(sDocumentURI);
+		if (resource== null)
+			throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
+		if (!(resource instanceof XMLResource))
+			throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
+		XMLResource xmlResource= null;
+		xmlResource= (XMLResource)resource;
+		xmlResource.setEncoding("UTF-8");	
+		try 
+		{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
+			xmlResource.load(null);
+		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
+		catch (IOException e) 
+		{
+			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"'.", e);
+		}
+		Object obj= xmlResource.getContents().get(0);
+		if (obj== null)
+			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"', because it seems to be empty.");
+		else if (!(obj instanceof SDocumentGraph))
+			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"', because the loaded object is not of type SaltProject.");
+		else
+		{
+			SDocumentGraph sDocumentGraph= (SDocumentGraph) xmlResource.getContents().get(0);
+			sDocument.setSDocumentGraph(sDocumentGraph);
+		}
+	}
+
+	/**
+	 * {@inheritDoc SaltProject#loadSaltProject(URI)}
+	 */
+	public synchronized void loadSaltProject(URI saltProjectURI) 
+	{
+		Map<SDocument, URI> sDocumentMap= this.loadSCorpusStructure(saltProjectURI);
+		for (SDocument sDoc:sDocumentMap.keySet())
+		{
+			this.loadSDocumentStructure(sDoc, sDocumentMap.get(sDoc));
+		}		
+	}
+
+	/**
+	 * Loads the document structure into the given {@link SDocument} object coming from file located at the given
+	 * uri. 
+	 * @param sDocument
+	 * @param sDocumentURI
+	 */
+	public void loadSaltProject_SDocumentStructure(SDocument sDocument, URI sDocumentURI)
+	{
+		Resource resource= getResourceSet().createResource(sDocumentURI);
+		if (resource== null)
+			throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
+		if (!(resource instanceof XMLResource))
+			throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
+		XMLResource xmlResource= null;
+		xmlResource= (XMLResource)resource;
+		xmlResource.setEncoding("UTF-8");	
+		try 
+		{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
+			xmlResource.load(null);
+		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
+		catch (IOException e) 
+		{
+			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"'.", e);
+		}
+		Object obj= xmlResource.getContents().get(0);
+		if (obj== null)
+			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"', because it seems to be empty.");
+		else if (!(obj instanceof SDocumentGraph))
+			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"', because the loaded object is not of type SaltProject.");
+		else
+		{
+			SDocumentGraph sDocumentGraph= (SDocumentGraph) xmlResource.getContents().get(0);
+			sDocument.setSDocumentGraph(sDocumentGraph);
+		}
+	}
 
 	private class SaltLoadingTraverser implements TraversalObject
 	{
 		private Stack<String> pathStack= null;
 		private String saltProjectPath= null;
+		public Map<SDocument, URI> sDocumentMap= null;
 		
 		public SaltLoadingTraverser()
 		{
 			this.pathStack= new Stack<String>();
+			this.sDocumentMap= new HashMap<SDocument, URI>();
 		}
 		
 		@Override
@@ -556,10 +634,6 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 								Long traversalId, Node currNode, Edge edge, Node fromNode,
 								long order) 
 		{
-			//TODO: what about this warning? is the wrong one used in the rest of the method? --hildebax 
-			SNode currSNode= null;
-			if (currNode instanceof SNode)
-				currSNode= (SNode) currNode;
 			if (pathStack.size()==0)
 				pathStack.push(saltProjectPath);
 			if (currNode instanceof SCorpus)
@@ -579,32 +653,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 				else
 				{
 					URI sDocumentURI= URI.createFileURI(sDocumentPath.getAbsolutePath());
-					Resource resource= getResourceSet().createResource(sDocumentURI);
-					if (resource== null)
-						throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
-					if (!(resource instanceof XMLResource))
-						throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
-					XMLResource xmlResource= null;
-					xmlResource= (XMLResource)resource;
-					xmlResource.setEncoding("UTF-8");	
-					try 
-					{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
-						xmlResource.load(null);
-					}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
-					catch (IOException e) 
-					{
-						throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"'.", e);
-					}
-					Object obj= xmlResource.getContents().get(0);
-					if (obj== null)
-						throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"', because it seems to be empty.");
-					else if (!(obj instanceof SDocumentGraph))
-						throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"', because the loaded object is not of type SaltProject.");
-					else
-					{
-						SDocumentGraph sDocumentGraph= (SDocumentGraph) xmlResource.getContents().get(0);
-						sDocument.setSDocumentGraph(sDocumentGraph);
-					}
+					this.sDocumentMap.put(sDocument, sDocumentURI);
 				}
 			}
 		}

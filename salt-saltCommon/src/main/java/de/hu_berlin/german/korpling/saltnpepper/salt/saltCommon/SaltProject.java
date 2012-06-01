@@ -186,12 +186,30 @@ public interface SaltProject extends EObject {
 	 */
 	void saveSDocumentGraph_DOT(URI uri, SElementId sElementID);
 
+//	/**
+//	 * Reads a saltProject.salt file and imports the contained corpus structure, without importing the document-structure
+//	 * corresponding to the imported {@link SDocument} nodes.
+//	 * @param saltProjectURI the uri to the location of the folder containing the saltProject.salt file.
+//	 * @model saltProjectURIDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+//	 * @generated
+//	 */
+//	void loadSaltProject_SCorpusStructure(URI saltProjectURI);
+
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Reads a saltProject.salt file and imports the contained corpus structure, without importing the document-structure
+	 * corresponding to the imported {@link SDocument} nodes.
+	 * @param saltProjectURI the uri to the location of the folder containing the saltProject.salt file.
 	 * @model saltProjectURIDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
 	 * @generated
 	 */
-	void loadSaltProject_SCorpusStructure(URI saltProjectURI);
+	Map<SDocument, URI> loadSCorpusStructure(URI saltProjectURI);
+
+	/**
+	 * Loads the content given by the SaltXML file located at <code>sDocumentURI</code> into the given {@link SDocument}
+	 * object.
+	 * @model sDocumentURIDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void loadSDocumentStructure(SDocument sDocument, URI sDocumentURI);
 
 } // SaltProject

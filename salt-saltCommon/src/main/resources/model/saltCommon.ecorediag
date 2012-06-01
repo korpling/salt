@@ -20,9 +20,13 @@
         <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//SaltProject/loadSaltProject"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_4JK_8WdgEeCcXPCI2Wz9-Q"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_eGGqEKstEeGWkOuKFjhKcQ" type="2002">
-        <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//SaltProject/loadSaltProject_SCorpusStructure"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_eGGqEastEeGWkOuKFjhKcQ"/>
+      <children xmi:type="notation:Node" xmi:id="_GZGN4awMEeG-9PscWGlxYQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//SaltProject/loadSCorpusStructure"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GZGN4qwMEeG-9PscWGlxYQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_NbpDkKwMEeG-9PscWGlxYQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//SaltProject/loadSDocumentStructure"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NbpDkawMEeG-9PscWGlxYQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_hpHBMXHFEeCvbt8V4jMOhQ" type="2002">
         <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//SaltProject/loadSaltProject_GrAF"/>
@@ -58,7 +62,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_akr2EYjWEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="saltCommon.ecore#//SaltProject"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_akr2EojWEd6X5oQchPkMiQ" x="-30" y="-405" width="383" height="208"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_akr2EojWEd6X5oQchPkMiQ" x="-30" y="-405" width="383" height="232"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_g3nMsIjWEd6X5oQchPkMiQ" type="1002">
     <children xmi:type="notation:Node" xmi:id="_g3tTUIjWEd6X5oQchPkMiQ" type="4006"/>
