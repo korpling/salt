@@ -68,6 +68,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -304,70 +305,6 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	{
 		boolean retVal= this.equals(null, obj); 
 		return(retVal);
-		
-//		if (obj== null)
-//			return(false);
-//		else
-//		{
-//			if (this== obj)
-//				return(true);
-//			else
-//			{
-//				if (!(obj instanceof SaltProject))
-//					return(false);
-//				SaltProject other= (SaltProject)obj;
-//				if (this.getSName()!= null)
-//				{
-//					if (!this.getSName().equals(other.getSName()))
-//						return(false);
-//				}
-//				else 
-//				{
-//					if (other.getSName()!= null)
-//						return(false);
-//				}
-//				if (this.getSCorpusGraphs()!= null)
-//				{
-//					if (this.getSCorpusGraphs().size()!= other.getSCorpusGraphs().size())
-//						return(false);
-//					else
-//					{
-//						boolean containsAllSubGraphs= false;
-//						{//this is a workaround, because containsAll() and contains does not seem to work
-//							for (SCorpusGraph sCorpusGraph: this.getSCorpusGraphs())
-//							{//run through all SCorpusGraph objects belonging to this and check if there is an equal one in other graph
-//								if (sCorpusGraph!= null)
-//								{
-//									//TODO: rememeber which graphs of other have a corresponding graph in this, they do not have to be checked again, this will increase speed because of they do not need to be doublechecked 
-//									boolean foundEqualGraph= false;
-//									for (SCorpusGraph otherGraph: other.getSCorpusGraphs())
-//									{//run through all SCorpusGraph objects belonging to other
-//										if (sCorpusGraph.equals(otherGraph))
-//										{
-//											foundEqualGraph= true;
-//											break;
-//										}
-//									}//run through all SCorpusGraph objects belonging to other
-//									if (!foundEqualGraph)
-//										containsAllSubGraphs= false;
-//									else
-//										containsAllSubGraphs= true;
-//									if (!containsAllSubGraphs)
-//										break;
-//								}
-//							}//run through all SCorpusGraph objects belonging to this and check if there is an equal one in other graph
-//						}//this is a workaround, because containsAll() and contains does not seem to work
-//						return(containsAllSubGraphs);
-//					}
-//				}
-//				else 
-//				{
-//					if (other.getSCorpusGraphs()== null)
-//						return(true);
-//					else return(false);
-//				}
-//			}
-//		}
 	}
 	
 	/**
@@ -424,6 +361,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 				{
 					resourceSet= new ResourceSetImpl();
 					resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
+					resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(), SaltSemanticsPackage.eINSTANCE);
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
 				}
 			}
@@ -452,10 +390,6 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		
 		URI saltProjectFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ "saltProject"+"."+ SaltFactory.FILE_ENDING_SALT);
 		
-//		ResourceSet resourceSet= null;
-//		resourceSet= new ResourceSetImpl();
-//		resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
-//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.SALT_FILE_ENDING, new XMIResourceFactoryImpl());
 		Resource resource= this.getResourceSet().createResource(saltProjectFileURI);
 		if (resource== null)
 			throw new SaltResourceException("Cannot save salt project to given uri '"+saltProjectURI+"'.");
@@ -523,12 +457,11 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 // ====================================================== end: saving to SaltXML resource	
 // ====================================================== start: loading SaltXML resource	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Reads a saltProject.salt file and imports the contained corpus structure, without importing the document-structure
+	 * corresponding to the imported {@link SDocument} nodes.
+	 * @param saltProjectURI the uri to the location of the folder containing the saltProject.salt file.
 	 */
-	@SuppressWarnings("unchecked")
-	public synchronized void loadSaltProject(URI saltProjectURI) 
-	{
+	public synchronized void loadSaltProject_SCorpusStructure(URI saltProjectURI) {
 		if (saltProjectURI== null)
 			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the given uri is null.");
 		File saltProjectPath= null;
@@ -541,7 +474,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		if (!saltProjectPath.exists())
 			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the given uri '"+saltProjectURI+"' does not exists.");
 		
-		File saltProjectFile= new File(saltProjectURI.toFileString()+"/saltProject.salt");
+		File saltProjectFile= new File(saltProjectURI.toFileString()+"/"+SaltFactory.FILE_SALT_PROJECT);
 		if (!saltProjectFile.exists())
 			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the file for saltProject '"+saltProjectFile+"' does not exists.");
 		URI saltProjectFileURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
@@ -572,6 +505,17 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 			SaltProject saltProject= (SaltProject) xmlResource.getContents().get(0);
 			this.getSCorpusGraphs().addAll(saltProject.getSCorpusGraphs());
 		}
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@SuppressWarnings("unchecked")
+	public synchronized void loadSaltProject(URI saltProjectURI) 
+	{
+		loadSaltProject_SCorpusStructure(saltProjectURI);
+		File saltProjectPath= new File(saltProjectURI.toFileString());
 		{//load SDocumentGraph-objects belonging to the SDocument objects of all SCorpusGraphs
 			//TODO this is a workaround, because the mechanism of EMF does not work correctly here, but it would be better to do this automatically by EMF, because the given approach uses the SElementId for retrieval, which can be incorrect!!! But when using EMF take care for relative pathes.
 			if (	(this.getSCorpusGraphs()!= null)&&
@@ -670,9 +614,13 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 				Long traversalId, Node currNode, Edge edge, Node fromNode,
 				long order) 
 		{
-			if (	(this.pathStack!= null)&&
-					(this.pathStack.size()>0))
-				this.pathStack.pop();
+			if (	(currNode != null)&&
+					(!(currNode instanceof SDocument)))
+			{
+				if (	(this.pathStack!= null)&&
+						(this.pathStack.size()>0))
+					this.pathStack.pop();
+			}
 		}
 
 		@Override

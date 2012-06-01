@@ -94,7 +94,7 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
 	}
 
-		/**
+	/**
 	 * Delegatee for SIdentifiableElement
 	 */
 	private SIdentifiableElementAccessor sIdentAccessor= null;

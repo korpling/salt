@@ -53,7 +53,7 @@ public interface SGraphTraverseHandler {
 	public void nodeReached(	GRAPH_TRAVERSE_TYPE traversalType, 
 								String traversalId,
 								SNode currNode, 
-								SRelation edge, 
+								SRelation sRelation, 
 								SNode fromNode, 
 								long order);
 

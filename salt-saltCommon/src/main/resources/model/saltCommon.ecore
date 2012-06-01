@@ -37,6 +37,9 @@
       <eParameters name="uri" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
       <eParameters name="sElementID" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SElementId"/>
     </eOperations>
+    <eOperations name="loadSaltProject_SCorpusStructure">
+      <eParameters name="saltProjectURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraphs" upperBound="-1"
         eType="#//sCorpusStructure/SCorpusGraph" containment="true" eOpposite="#//sCorpusStructure/SCorpusGraph/saltProject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -48,6 +48,12 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	public final String FILE_ENDING_GRAF= "graf"; 
 	
 	/**
+	 * Default name of the saltProject file.
+	 */
+	public final String FILE_SALT_PROJECT= "saltProject"+"."+FILE_ENDING_SALT; 
+	
+	
+	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.
 	 * @param class to convert
 	 * @return {@link STYPE_NAME} of given class

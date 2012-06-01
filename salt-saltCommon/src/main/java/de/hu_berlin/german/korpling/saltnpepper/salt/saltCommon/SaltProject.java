@@ -186,4 +186,12 @@ public interface SaltProject extends EObject {
 	 */
 	void saveSDocumentGraph_DOT(URI uri, SElementId sElementID);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model saltProjectURIDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void loadSaltProject_SCorpusStructure(URI saltProjectURI);
+
 } // SaltProject

@@ -1199,6 +1199,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			if (!super.equals(differences, obj))
 				return(false);
 		}
+		if (obj== null)
+			return(false);
+		
 		Graph other= (Graph) obj;
 		
 		//start: check layers

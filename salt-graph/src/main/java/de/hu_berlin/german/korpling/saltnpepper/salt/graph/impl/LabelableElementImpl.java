@@ -326,7 +326,7 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 		{
 			if (differences!= null)
 			{
-				differences.add(this.getClass().getSimpleName()+": The given object is not of type '"+getClass()+"', it is of type '"+obj.getClass()+"'.");
+				differences.add(this.getClass().getSimpleName()+": The given object is not of type '"+getClass()+"', it is of type '"+((obj!= null)?obj.getClass():obj)+"'.");
 			}
 			return false;
 		}
@@ -352,8 +352,6 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 			HashSet<Label> thisLabels = new HashSet<Label>(this.getLabels());
 			for (Label label : other.getLabels())
 			{
-			// for label l in this.getLabels: get equivalent label in hashedEList
-				// if not existent: >> Differences
 				if (! thisLabels.contains(label))
 				{
 					if (differences!= null)

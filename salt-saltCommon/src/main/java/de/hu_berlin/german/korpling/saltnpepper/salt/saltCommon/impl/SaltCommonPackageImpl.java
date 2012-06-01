@@ -282,6 +282,9 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 		addEParameter(op, theSaltCorePackage.getURI(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getSElementId(), "sElementID", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(saltProjectEClass, null, "loadSaltProject_SCorpusStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "saltProjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize data types
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
