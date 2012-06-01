@@ -84,24 +84,60 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 		return SaltCorePackage.Literals.SIDENTIFIABLE_ELEMENT;
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SElementId getSElementId() {
-		SElementId sElementId = basicGetSElementId();
-		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
-	}
-
+//=================== start: handling SIdentifiableElement	
 	/**
 	 * Delegatee for SIdentifiableElement
 	 */
 	private SIdentifiableElementAccessor sIdentAccessor= null;
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
+	 */
+	@Override
+	public void setId(String newSId) 
+	{
+		this.sIdentAccessor.setSId(this, newSId);
+	}
+	
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSId(SIdentifiableElement)}
+	 */
+	@Override
+	public String getSId() 
+	{
+		return(this.sIdentAccessor.getSId(this));
+	}
+
+	
+	/**
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
+	 */
+	@Override
+	public void setSId(String newSId) 
+	{
+		this.sIdentAccessor.setSId(this, newSId);
+	}
+
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSElementPath(SIdentifiableElement)}
+	 */
+	@Override
+	public URI getSElementPath() 
+	{
+		return(this.sIdentAccessor.getSElementPath(this));
+	}
+
+	/**
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementPath(SIdentifiableElement, URI)}
+	 */
+	@Override
+	public void setSElementPath(URI newSElementPath) 
+	{
+		this.sIdentAccessor.setSElementPath(this, newSElementPath);
+	}
+	
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSElementId(SIdentifiableElement)}
 	 */
 	public SElementId basicGetSElementId() 
 	{
@@ -109,8 +145,7 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
 	 */
 	public void setSElementId(SElementId newSElementId) 
 	{
@@ -120,38 +155,13 @@ public class SIdentifiableElementImpl extends IdentifiableElementImpl implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public String getSId() 
-	{
-		return(this.sIdentAccessor.getSId(this));
+	public SElementId getSElementId() {
+		SElementId sElementId = basicGetSElementId();
+		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSId(String newSId) 
-	{
-		this.sIdentAccessor.setSId(this, newSId);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public URI getSElementPath() 
-	{
-		return(this.sIdentAccessor.getSElementPath(this));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSElementPath(URI newSElementPath) 
-	{
-		this.sIdentAccessor.setSElementPath(this, newSElementPath);
-	}
+//=================== end: handling SIdentifiableElement
 
 	/**
 	 * <!-- begin-user-doc -->
