@@ -597,6 +597,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		return layers;
 	}
 	
+	/**
+	 * Sets an id to the given layer object.
+	 * @param layer
+	 */
 	protected void basicAddLayer(Layer layer)
 	{
 		//if node has no id a new id will be given to node
