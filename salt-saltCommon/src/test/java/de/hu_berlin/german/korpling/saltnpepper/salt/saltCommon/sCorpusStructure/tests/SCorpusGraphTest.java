@@ -17,19 +17,20 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests;
 
+import java.io.File;
+
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
@@ -40,6 +41,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.tests.SaltFactoryImplTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,6 +71,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  */
 public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 
+	public static final String FILE_RESOURCE_DIR= SaltFactoryImplTest.FILE_RESOURCE_DIR_GENERAL+"SCorpusGraphTest/";
+	public static final String FILE_TMP_DIR= "./_TMP/";
+	
 	/**
 	 * The fixture for this SCorpus Graph test case.
 	 * <!-- begin-user-doc -->

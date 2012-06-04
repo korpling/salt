@@ -233,7 +233,6 @@ public class SaltProjectTest extends TestCase {
 	{
 		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case7/");
 		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
-//		this.getFixture().loadSaltProject_SCorpusStructure(saltProjectURI);
 		this.getFixture().loadSCorpusStructure(saltProjectURI);
 		assertNotNull(this.getFixture().getSCorpusGraphs());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
@@ -250,7 +249,6 @@ public class SaltProjectTest extends TestCase {
 	{
 		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case5/");
 		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
-//		this.getFixture().loadSaltProject_SCorpusStructure(saltProjectURI);
 		this.getFixture().loadSCorpusStructure(saltProjectURI);
 		assertNotNull(this.getFixture().getSCorpusGraphs());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
@@ -549,71 +547,6 @@ public class SaltProjectTest extends TestCase {
 		assertEquals(saltProject2, this.getFixture());
 	}
 
-	/**
-	 * This method creates the content of a document (the primary text, the tokenization and all structures and annotations above them) for 
-	 * the given SDocument object.
-	 * 
-	 * primary text: 		Is this example more complicated than it appears to be?
-	 * tokens:				{"Is", "this", "example", "more", "complicated", "than", "it", "appears", "to", "be"}
-	 * anaphoric relation:	{"it"} --> {"this", "example"}
-	 * 
-	 * @param sDocument the document for which the structure has to be created.
-	 */
-	//TODO fixme
-//	public void testLoadSaltProject_DocumentGraph() 
-//	{
-//		String saltProjectPathResource= resourceDir+"case2/";
-//		
-//		//the object, which contains the primary data, the tokenization and all structures and annotations above them
-//		SDocument sDoc= null;
-//		
-//		SaltProject saltProject2= SaltFactory.eINSTANCE.createSaltProject();
-//		sDoc= this.createSimpleCorpusStructure(saltProject2);
-//		this.createSDocumentStructure(sDoc);
-//		
-//		System.out.println("Hello");
-//		
-//		for (SCorpusGraph sCorpusGraph: saltProject2.getSCorpusGraphs())
-//		{
-//			System.out.println(sCorpusGraph);
-//			for (SCorpus sCorpus: sCorpusGraph.getSCorpora())
-//			{
-//				System.out.println(sCorpus);
-//			}
-//			for (SDocument sDocument: sCorpusGraph.getSDocuments())
-//			{
-//				System.out.println(sDocument.getSDocumentGraph());
-//			}
-//		}
-//		
-//		this.getFixture().loadSaltProject(URI.createFileURI(new File(saltProjectPathResource).getAbsolutePath()));
-//		
-//		System.out.println("------------- fixture");
-//		for (SCorpusGraph sCorpusGraph: this.getFixture().getSCorpusGraphs())
-//		{
-//			System.out.println(sCorpusGraph);
-//			for (SCorpus sCorpus: sCorpusGraph.getSCorpora())
-//			{
-//				System.out.println(sCorpus);
-//			}
-//			for (SDocument sDocument: sCorpusGraph.getSDocuments())
-//			{
-//				System.out.println(sDocument.getSDocumentGraph());
-//			}
-//		}
-//		System.out.println("------------- go on");
-//		System.out.println(this.getFixture().getSCorpusGraphs().get(0));
-//		System.out.println(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0));
-//		
-//		System.out.println("tokens: "+ this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0).getSDocumentGraph().getSTokens());
-//		//TODO go on with implementing method differences until the difference between both SaltProjects is found
-//		System.out.println("----------------------- start differences -----------------------");
-//		System.out.println(saltProject2.differences(this.getFixture()));
-//		System.out.println("----------------------- end differences -----------------------");
-//		System.out.println("assertEquals");
-//		
-//		assertEquals(saltProject2, this.getFixture());
-//	}
 
 	public void testSCorpusGraphs()
 	{

@@ -19,9 +19,13 @@ package de.hu_berlin.german.korpling.saltnpepper.salt;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
 
@@ -31,6 +35,12 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * @generated
 	 */
 	SaltFactory eINSTANCE = de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl.init();
+	
+	/**
+	 * Returns a {@link ResourceSet} object, which is initialized with all {@link Resource} objects to load
+	 * and store Salt object into the different available formats. 
+	 */
+	ResourceSet resourceSet= SaltFactoryImpl.getResourceSet();
 	
 	/**
 	 * The file ending for xml files to store a SALT model.
@@ -52,7 +62,6 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 */
 	public final String FILE_SALT_PROJECT= "saltProject"+"."+FILE_ENDING_SALT; 
 	
-	
 	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.
 	 * @param class to convert
@@ -68,8 +77,35 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	public Class<? extends EObject> convertSTypeNameToClazz(STYPE_NAME sType);
 	
 	/**
+	 * Loads an object coming from a SaltXML (.{@link SaltFactory#FILE_ENDING_SALT}) and returns it.
+	 * @param objectURI {@link URI} to SaltXML file containing the object
+	 * @return loaded object
+	 */
+	public Object load(URI objectURI);
+	
+	/**
 	 * Loads a SaltProject from given uri and returns it as object structure.
 	 * @return returns a saltProject, which is filled with data comming from corpus in uri 
 	 */
 	public SaltProject loadSaltProject(URI saltProjectPath);
+	
+	/**
+	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT}) into this object. If the 
+	 * given SaltXML file does not contain a {@link SCorpusGraph} object persisting, an exception
+	 * will be thrown. If the SaltXML file contains persistings for more than one {@link SCorpusGraph}
+	 * object, the first one will be load (analog to {@link #load(URI, 0)}).
+	 * @param sCorpusGraphUri the {@link URI} to locate the SaltXML file  
+	 */
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphURI);
+
+	/**
+	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT}) into this object. If the 
+	 * given SaltXML file does not contain a {@link SCorpusGraph} object persisting, an exception
+	 * will be thrown. The parameter <code>numOfSCorpusGraph</code> determines which object shall
+	 * be load, in case of the given SaltXML file contains more than one persisting of
+	 * {@link SCorpusGraph} objects.
+	 * @param sCorpusGraphUri the {@link URI} to locate the SaltXML file
+	 * @param numOfSCorpusGraph number of graph to be load, note that the list of graphs starts with 0
+	 */
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph);
 }

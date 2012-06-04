@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
@@ -25,6 +26,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 
 /**
  * In Salt it is possible to create a treelike corpus structure to create hierarchies between corpora. A hierarchie means that one corpus 

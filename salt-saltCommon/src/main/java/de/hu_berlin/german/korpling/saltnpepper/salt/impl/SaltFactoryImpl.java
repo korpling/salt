@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,12 +26,19 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonFactoryImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialRelation;
@@ -72,11 +80,83 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		return(saltFactory);
 	}
 	
+	/**
+	 * {@link ResourceSet} to load data from different resources.
+	 */
+	private static ResourceSet resourceSet= null;
+	
+	/**
+	 * Sets the internal resource set to load data from different resources to the given one.
+	 * @param resourceSet
+	 */
+	public static void setResourceSet(ResourceSet resourceSet) {
+		SaltFactoryImpl.resourceSet = resourceSet;
+	}
+	/**
+	 * Lock for initializing resourceSet
+	 */
+	private static Object resourceSetLock= new Object();
+
+	/**
+	 * Returns an initialized resourceSet object for storing salt-models.
+	 * @return
+	 */
+	public static ResourceSet getResourceSet() 
+	{
+		if (resourceSet==  null)
+		{
+			synchronized (resourceSetLock) 
+			{
+				if (resourceSet==  null)
+				{
+					resourceSet= new ResourceSetImpl();
+					resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
+					resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(), SaltSemanticsPackage.eINSTANCE);
+					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
+				}
+			}
+		}
+		return resourceSet;
+	}
+	
 	private SaltFactoryImpl()
 	{
 		super();
 	}
 
+	/**
+	 * {@inheritDoc SaltFactory#load(URI)}
+	 */
+	public Object load(URI objectURI)
+	{
+		if (objectURI== null)
+			throw new SaltResourceNotFoundException("Cannot load object, because the given uri is null.");
+		
+		File objectFile= new File(objectURI.toFileString());
+		if (!objectFile.exists())
+			throw new SaltResourceNotFoundException("Cannot load Object, because the file '"+objectFile+"' does not exists.");
+		
+		Resource resource= getResourceSet().createResource(objectURI);
+		if (resource== null)
+			throw new SaltResourceException("Cannot load object to given uri '"+objectURI+"'.");
+		if (!(resource instanceof XMLResource))
+			throw new SaltResourceException("Cannot load object to given uri '"+objectURI+"'.");
+		XMLResource xmlResource= null;
+		xmlResource= (XMLResource)resource;
+		xmlResource.setEncoding("UTF-8");	
+		try 
+		{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
+			xmlResource.load(null);
+		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
+		catch (IOException e) 
+		{
+			throw new SaltResourceException("Cannot load salt-project from given uri '"+objectURI+"'.", e);
+		}
+		Object obj= xmlResource.getContents().get(0);
+		
+		return(obj);
+	}
+	
 	@Override
 	public SaltProject loadSaltProject(URI saltProjectURI) 
 	{
@@ -97,6 +177,32 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		
 		
 		return(saltProject);
+	}
+	
+	/**
+	 * {@inheritDoc SaltFactory#loadSCorpusGraph(URI)}
+	 */
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri) {
+		return(loadSCorpusGraph(sCorpusGraphUri, 0));
+	}
+
+	/**
+	 * {@inheritDoc SaltFactory#loadSCorpusGraph(URI, Integer)}
+	 */
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph) {
+		SCorpusGraph retVal= null;
+		Object obj= load(sCorpusGraphUri);
+		if (obj instanceof SCorpusGraph)
+			retVal= (SCorpusGraph) obj;
+		else if (obj instanceof SaltProject)
+		{
+			if (	(((SaltProject) obj).getSCorpusGraphs()!= null)&&
+					(((SaltProject) obj).getSCorpusGraphs().size()>=numOfSCorpusGraph))
+					retVal= ((SaltProject) obj).getSCorpusGraphs().get(numOfSCorpusGraph);
+		}
+		if (retVal== null)
+			throw new SaltResourceException("No '"+SCorpusGraph.class.getName()+"' object was found in resource '"+sCorpusGraphUri+"'.");
+		return(retVal);
 	}
 	
 	/**

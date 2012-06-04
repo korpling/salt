@@ -446,6 +446,13 @@ public class SCorpusStructurePackageImpl extends EPackageImpl implements SCorpus
 
 		addEOperation(sCorpusGraphEClass, this.getSCorpus(), "getSRootCorpus", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(sCorpusGraphEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "sCorpusGraphURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(sCorpusGraphEClass, null, "load", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "sCorpusGraphUri", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEIntegerObject(), "numOfSCorpusGraph", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(sDocumentEClass, SDocument.class, "SDocument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSDocument_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SDocuments(), "sCorpusGraph", null, 0, 1, SDocument.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSDocument_SDocumentGraph(), theSDocumentStructurePackage.getSDocumentGraph(), theSDocumentStructurePackage.getSDocumentGraph_SDocument(), "sDocumentGraph", null, 0, 1, SDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -20,11 +20,11 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Stack;
 
@@ -39,12 +39,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
@@ -68,8 +65,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -342,33 +337,33 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 			eNotify(new ENotificationImpl(this, Notification.SET, SaltCommonPackage.SALT_PROJECT__SNAME, oldSName, sName));
 	}
 
-	private ResourceSet resourceSet= null;
-	
-	public void setResourceSet(ResourceSet resourceSet) {
-		this.resourceSet = resourceSet;
-	}
-
-	/**
-	 * Returns an initialized resourceSet object for storing salt-models.
-	 * @return
-	 */
-	public ResourceSet getResourceSet() 
-	{
-		if (resourceSet==  null)
-		{
-			synchronized (this) 
-			{
-				if (resourceSet==  null)
-				{
-					resourceSet= new ResourceSetImpl();
-					resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
-					resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(), SaltSemanticsPackage.eINSTANCE);
-					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
-				}
-			}
-		}
-		return resourceSet;
-	}
+//	private ResourceSet resourceSet= null;
+//	
+//	public void setResourceSet(ResourceSet resourceSet) {
+//		this.resourceSet = resourceSet;
+//	}
+//
+//	/**
+//	 * Returns an initialized resourceSet object for storing salt-models.
+//	 * @return
+//	 */
+//	public ResourceSet getResourceSet() 
+//	{
+//		if (resourceSet==  null)
+//		{
+//			synchronized (this) 
+//			{
+//				if (resourceSet==  null)
+//				{
+//					resourceSet= new ResourceSetImpl();
+//					resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
+//					resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(), SaltSemanticsPackage.eINSTANCE);
+//					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
+//				}
+//			}
+//		}
+//		return resourceSet;
+//	}
 	
 // ====================================================== start: saving to SaltXML resource	
 	/**
@@ -391,7 +386,9 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		
 		URI saltProjectFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ "saltProject"+"."+ SaltFactory.FILE_ENDING_SALT);
 		
-		Resource resource= this.getResourceSet().createResource(saltProjectFileURI);
+//		Resource resource= this.getResourceSet().createResource(saltProjectFileURI);
+		Resource resource= SaltFactory.resourceSet.createResource(saltProjectFileURI);
+		
 		if (resource== null)
 			throw new SaltResourceException("Cannot save salt project to given uri '"+saltProjectURI+"'.");
 		if (!(resource instanceof XMLResource))
@@ -424,7 +421,9 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 								String corpusPath= fatherCorpus.getSId().replace("salt:", "");
 								sDocumentFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ corpusPath+"/"+ sDocument.getSName()+"."+ SaltFactory.FILE_ENDING_SALT);
 								
-								resource= this.getResourceSet().createResource(sDocumentFileURI);
+								//resource= this.getResourceSet().createResource(sDocumentFileURI);
+								resource= SaltFactory.resourceSet.createResource(sDocumentFileURI);
+								
 								if (resource== null)
 									throw new SaltResourceException("Cannot save the SDocument object '"+sDocument.getSElementId()+"' to given uri '"+sDocumentFileURI+"'.");
 								if (!(resource instanceof XMLResource))
@@ -463,49 +462,29 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	 */
 	public synchronized Map<SDocument, URI> loadSCorpusStructure(URI saltProjectURI) 
 	{
-		if (saltProjectURI== null)
-			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the given uri is null.");
-		File saltProjectPath= null;
-		try
-		{
-			saltProjectPath= new File(saltProjectURI.toFileString());
-		}catch (Exception e) {
-			throw new SaltResourceNotFoundException("Cannot load SaltProject.",e);
-		}
-		if (!saltProjectPath.exists())
-			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the given uri '"+saltProjectURI+"' does not exists.");
+		File saltProjectPath= new File(saltProjectURI.toFileString());
+
+		if (!saltProjectURI.toFileString().endsWith(SaltFactory.FILE_SALT_PROJECT))
+			saltProjectURI= saltProjectURI.appendSegment(SaltFactory.FILE_SALT_PROJECT);
 		
-		File saltProjectFile= new File(saltProjectURI.toFileString()+"/"+SaltFactory.FILE_SALT_PROJECT);
-		if (!saltProjectFile.exists())
-			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the file for saltProject '"+saltProjectFile+"' does not exists.");
-		URI saltProjectFileURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
-		
-		Resource resource= this.getResourceSet().createResource(saltProjectFileURI);
-		if (resource== null)
-			throw new SaltResourceException("Cannot load salt project to given uri '"+saltProjectFileURI+"'.");
-		if (!(resource instanceof XMLResource))
-			throw new SaltResourceException("Cannot load salt project to given uri '"+saltProjectFileURI+"'.");
-		XMLResource xmlResource= null;
-		xmlResource= (XMLResource)resource;
-		xmlResource.setEncoding("UTF-8");	
+		Object obj= null;
 		try 
-		{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
-			xmlResource.load(null);
-		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
-		catch (IOException e) 
 		{
-			throw new SaltResourceException("Cannot load salt-project from given uri '"+saltProjectURI+"'.", e);
+			obj= SaltFactory.eINSTANCE.load(saltProjectURI);
+		}catch (SaltResourceException e) {
+			throw new SaltResourceException("Cannot load salt-project from given uri '"+saltProjectURI+"', because of "+e.getMessage()+".", e);
 		}
-		Object obj= xmlResource.getContents().get(0);
 		if (obj== null)
 			throw new SaltResourceException("Cannot load salt-project from given uri '"+saltProjectURI+"', because it seems to be empty.");
 		if (!(obj instanceof SaltProject))
 			throw new SaltResourceException("Cannot load salt-project from given uri '"+saltProjectURI+"', because the loaded object is not of type SaltProject.");
 		else
 		{
-			SaltProject saltProject= (SaltProject) xmlResource.getContents().get(0);
+			SaltProject saltProject= (SaltProject) obj;
 			this.getSCorpusGraphs().addAll(saltProject.getSCorpusGraphs());
 		}
+		
+		
 		Map<SDocument, URI> sDocumentMap= null;
 		{//load SDocumentGraph-objects belonging to the SDocument objects of all SCorpusGraphs
 			//TODO this is a workaround, because the mechanism of EMF does not work correctly here, but it would be better to do this automatically by EMF, because the given approach uses the SElementId for retrieval, which can be incorrect!!! But when using EMF take care for relative pathes.
@@ -541,11 +520,12 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	 */
 	public void loadSDocumentStructure(SDocument sDocument, URI sDocumentURI) 
 	{
-		Resource resource= getResourceSet().createResource(sDocumentURI);
+//		Resource resource= getResourceSet().createResource(sDocumentURI);
+		Resource resource= SaltFactory.resourceSet.createResource(sDocumentURI);
 		if (resource== null)
-			throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
+			throw new SaltResourceException("Cannot load "+SDocument.class.getName()+" object to given uri '"+sDocumentURI+"'.");
 		if (!(resource instanceof XMLResource))
-			throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
+			throw new SaltResourceException("Cannot load "+SDocument.class.getName()+" object to given uri '"+sDocumentURI+"'.");
 		XMLResource xmlResource= null;
 		xmlResource= (XMLResource)resource;
 		xmlResource.setEncoding("UTF-8");	
@@ -555,13 +535,13 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
 		catch (IOException e) 
 		{
-			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"'.", e);
+			throw new SaltResourceException("Cannot load "+SDocument.class.getName()+" object from given uri '"+sDocumentURI+"'.", e);
 		}
 		Object obj= xmlResource.getContents().get(0);
 		if (obj== null)
-			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"', because it seems to be empty.");
+			throw new SaltResourceException("Cannot load "+SDocument.class.getName()+" object from given uri '"+sDocumentURI+"', because it seems to be empty.");
 		else if (!(obj instanceof SDocumentGraph))
-			throw new SaltResourceException("Cannot load SDocument object from given uri '"+sDocumentURI+"', because the loaded object is not of type SaltProject.");
+			throw new SaltResourceException("Cannot load "+SDocument.class.getName()+" object from given uri '"+sDocumentURI+"', because the loaded object is not of type "+SaltProject.class.getName()+".");
 		else
 		{
 			SDocumentGraph sDocumentGraph= (SDocumentGraph) xmlResource.getContents().get(0);
@@ -583,13 +563,15 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 
 	/**
 	 * Loads the document structure into the given {@link SDocument} object coming from file located at the given
-	 * uri. 
+	 * {@link URI}. 
 	 * @param sDocument
 	 * @param sDocumentURI
 	 */
 	public void loadSaltProject_SDocumentStructure(SDocument sDocument, URI sDocumentURI)
 	{
-		Resource resource= getResourceSet().createResource(sDocumentURI);
+//		Resource resource= getResourceSet().createResource(sDocumentURI);
+		Resource resource= SaltFactory.resourceSet.createResource(sDocumentURI);
+		
 		if (resource== null)
 			throw new SaltResourceException("Cannot load SDocument object to given uri '"+sDocumentURI+"'.");
 		if (!(resource instanceof XMLResource))

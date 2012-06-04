@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saltCommon:SaltProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:saltCommon="saltCommon" xmlns:saltCore="saltCore">
+  <sCorpusGraphs>
+    <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000F6D7953436F72707573477261706831" valueString="mySCorpusGraph1"/>
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574000C636F72707573477261706831" valueString="corpusGraph1"/>
+  </sCorpusGraphs>
+</saltCommon:SaltProject>
