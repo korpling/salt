@@ -337,34 +337,6 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 			eNotify(new ENotificationImpl(this, Notification.SET, SaltCommonPackage.SALT_PROJECT__SNAME, oldSName, sName));
 	}
 
-//	private ResourceSet resourceSet= null;
-//	
-//	public void setResourceSet(ResourceSet resourceSet) {
-//		this.resourceSet = resourceSet;
-//	}
-//
-//	/**
-//	 * Returns an initialized resourceSet object for storing salt-models.
-//	 * @return
-//	 */
-//	public ResourceSet getResourceSet() 
-//	{
-//		if (resourceSet==  null)
-//		{
-//			synchronized (this) 
-//			{
-//				if (resourceSet==  null)
-//				{
-//					resourceSet= new ResourceSetImpl();
-//					resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
-//					resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(), SaltSemanticsPackage.eINSTANCE);
-//					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
-//				}
-//			}
-//		}
-//		return resourceSet;
-//	}
-	
 // ====================================================== start: saving to SaltXML resource	
 	/**
 	 * <!-- begin-user-doc -->
@@ -386,7 +358,6 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		
 		URI saltProjectFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ "saltProject"+"."+ SaltFactory.FILE_ENDING_SALT);
 		
-//		Resource resource= this.getResourceSet().createResource(saltProjectFileURI);
 		Resource resource= SaltFactory.resourceSet.createResource(saltProjectFileURI);
 		
 		if (resource== null)
