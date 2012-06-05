@@ -146,20 +146,31 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		xmlResource.setEncoding("UTF-8");	
 		try 
 		{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
+			System.out.println("load resource: "+ objectURI);
 			xmlResource.load(null);
+			
 		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
 		catch (IOException e) 
 		{
 			throw new SaltResourceException("Cannot load salt-project from given uri '"+objectURI+"'.", e);
 		}
-		Object obj= xmlResource.getContents().get(0);
-		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> after load");
+		EObject obj= xmlResource.getContents().get(0);
+		xmlResource.getContents().remove(obj);
 		return(obj);
 	}
 	
 	@Override
 	public SaltProject loadSaltProject(URI saltProjectURI) 
 	{
+		if (!saltProjectURI.toFileString().endsWith(SaltFactory.FILE_ENDING_SALT))
+		{
+			//looks weird, but is necessary in case of uri ends with /
+			if (saltProjectURI.toString().endsWith("/"))
+				saltProjectURI= saltProjectURI.trimSegments(1);
+			saltProjectURI= saltProjectURI.appendSegment(SaltFactory.FILE_SALT_PROJECT);
+		}
+		
 		SaltProject saltProject= null;
 		if (saltProjectURI== null)
 			throw new SaltResourceNotFoundException("Can not load SaltProject, because the given uri is null.");
@@ -191,6 +202,15 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	 */
 	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph) {
 		SCorpusGraph retVal= null;
+		
+		if (!sCorpusGraphUri.toFileString().endsWith(SaltFactory.FILE_ENDING_SALT))
+		{
+			//looks weird, but is necessary in case of uri ends with /
+			if (sCorpusGraphUri.toString().endsWith("/"))
+				sCorpusGraphUri= sCorpusGraphUri.trimSegments(1);
+			sCorpusGraphUri= sCorpusGraphUri.appendSegment(SaltFactory.FILE_SALT_PROJECT);
+		}
+		
 		Object obj= load(sCorpusGraphUri);
 		if (obj instanceof SCorpusGraph)
 			retVal= (SCorpusGraph) obj;

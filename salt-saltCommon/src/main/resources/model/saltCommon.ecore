@@ -4,9 +4,6 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="saltCommon"
     nsURI="saltCommon" nsPrefix="saltCommon">
   <eClassifiers xsi:type="ecore:EClass" name="SaltProject">
-    <eOperations name="saveSaltProject">
-      <eParameters name="saltProjectURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
-    </eOperations>
     <eOperations name="loadSaltProject">
       <eParameters name="saltProjectURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
     </eOperations>
@@ -30,6 +27,9 @@
       <eParameters name="uri" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
       <eParameters name="sElementID" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SElementId"/>
     </eOperations>
+    <eOperations name="saveSaltProject">
+      <eParameters name="saltProjectURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+    </eOperations>
     <eOperations name="saveSaltProject_DOT">
       <eParameters name="uri" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
     </eOperations>
@@ -48,11 +48,15 @@
       <eParameters name="sDocument" eType="#//sCorpusStructure/SDocument"/>
       <eParameters name="sDocumentURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
     </eOperations>
+    <eOperations name="getSDocumentGraphLocations"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraphs" upperBound="-1"
         eType="#//sCorpusStructure/SCorpusGraph" containment="true" eOpposite="#//sCorpusStructure/SCorpusGraph/saltProject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Properties" instanceClassName="java.util.Properties"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="SFEATURE_NAME">
+    <eLiterals name="SDOCUMENT_GRAPH_LOCATION"/>
+  </eClassifiers>
   <eSubpackages name="sCorpusStructure" nsURI="sCorpusStructure" nsPrefix="sCorpusStructure">
     <eClassifiers xsi:type="ecore:EClass" name="SCorpusGraph" eSuperTypes="../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SGraph">
       <eOperations name="getSCorpus" eType="#//sCorpusStructure/SCorpus">

@@ -435,8 +435,13 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	{
 		File saltProjectPath= new File(saltProjectURI.toFileString());
 
-		if (!saltProjectURI.toFileString().endsWith(SaltFactory.FILE_SALT_PROJECT))
+		if (!saltProjectURI.toFileString().endsWith(SaltFactory.FILE_ENDING_SALT))
+		{
+			//looks weird, but is necessary in case of uri ends with /
+			if (saltProjectURI.toString().endsWith("/"))
+				saltProjectURI= saltProjectURI.trimSegments(1);
 			saltProjectURI= saltProjectURI.appendSegment(SaltFactory.FILE_SALT_PROJECT);
+		}
 		
 		Object obj= null;
 		try 
