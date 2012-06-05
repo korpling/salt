@@ -174,7 +174,6 @@ public class STextualRelationImpl extends SSequentialRelationImpl implements STe
 	 * <!-- end-user-doc -->
 	 */
 	public void setSTarget(SNode sTarget) {
-		//System.out.println("STextualRelationImpl.setSTarget");
 		if (sTarget instanceof STextualDS) {
 			this.setSTextualDS((STextualDS)sTarget);
 		}
@@ -211,7 +210,6 @@ public class STextualRelationImpl extends SSequentialRelationImpl implements STe
 	 */
 	public void setSTextualDS(STextualDS newSTextualDS) 
 	{
-		//System.out.println("STextualRelationImpl.setSTextualDS");
 		super.setSTarget(newSTextualDS);
 	}
 //============================ end: handling source and target

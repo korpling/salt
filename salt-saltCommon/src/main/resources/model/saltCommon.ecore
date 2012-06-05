@@ -38,17 +38,18 @@
       <eParameters name="sElementID" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SElementId"/>
     </eOperations>
     <eOperations name="loadSCorpusStructure">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-        <eTypeArguments eClassifier="#//sCorpusStructure/SDocument"/>
-        <eTypeArguments eClassifier="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
-      </eGenericType>
       <eParameters name="saltProjectURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
     </eOperations>
     <eOperations name="loadSDocumentStructure">
       <eParameters name="sDocument" eType="#//sCorpusStructure/SDocument"/>
       <eParameters name="sDocumentURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
     </eOperations>
-    <eOperations name="getSDocumentGraphLocations"/>
+    <eOperations name="getSDocumentGraphLocations">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SElementId"/>
+        <eTypeArguments eClassifier="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eGenericType>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraphs" upperBound="-1"
         eType="#//sCorpusStructure/SCorpusGraph" containment="true" eOpposite="#//sCorpusStructure/SCorpusGraph/saltProject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -93,10 +94,20 @@
           transient="true" derived="true" containment="true" eOpposite="#//sCorpusStructure/SCorpusDocumentRelation/sCorpusGraph"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SDocument" eSuperTypes="../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode">
+      <eOperations name="saveSDocumentGraph">
+        <eParameters name="sDocumentGraphLocation" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eOperations>
+      <eOperations name="loadSDocumentGraph"/>
+      <eOperations name="loadSDocumentGraph">
+        <eParameters name="sDocumentGraphLocation" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sCorpusStructure/SCorpusGraph/sDocuments"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
           eOpposite="#//sDocumentStructure/SDocumentGraph/sDocument"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="SDocumentGraphLocation"
+          eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"
+          volatile="true" transient="true" derived="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SCorpus" eSuperTypes="../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"

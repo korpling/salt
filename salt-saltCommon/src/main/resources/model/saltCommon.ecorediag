@@ -114,18 +114,34 @@
       <children xmi:type="notation:Node" xmi:id="_mr_mIIjWEd6X5oQchPkMiQ" type="2003">
         <children xmi:type="notation:Node" xmi:id="_msFswIjWEd6X5oQchPkMiQ" type="4002"/>
         <children xmi:type="notation:Node" xmi:id="_msFswYjWEd6X5oQchPkMiQ" type="5004">
+          <children xmi:type="notation:Node" xmi:id="_aGSOIK8VEeGksebmK-oU-Q" type="2001">
+            <element xmi:type="ecore:EAttribute" href="saltCommon.ecore#//sCorpusStructure/SDocument/SDocumentGraphLocation"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_aGSOIa8VEeGksebmK-oU-Q"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_msFswojWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_msFsw4jWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_msFsxIjWEd6X5oQchPkMiQ"/>
         </children>
         <children xmi:type="notation:Node" xmi:id="_msFsxYjWEd6X5oQchPkMiQ" type="5005">
+          <children xmi:type="notation:Node" xmi:id="_IUKzYK9BEeGksebmK-oU-Q" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SDocument/saveSDocumentGraph"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_IUKzYa9BEeGksebmK-oU-Q"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_NxL1sK9BEeGksebmK-oU-Q" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SDocument/loadSDocumentGraph"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_NxL1sa9BEeGksebmK-oU-Q"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_O2X8IK9BEeGksebmK-oU-Q" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SDocument/loadSDocumentGraph.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_O2X8Ia9BEeGksebmK-oU-Q"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_msFsxojWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_msFsx4jWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_msFsyIjWEd6X5oQchPkMiQ"/>
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_mr_mIYjWEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
         <element xmi:type="ecore:EClass" href="saltCommon.ecore#//sCorpusStructure/SDocument"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mr_mIojWEd6X5oQchPkMiQ" x="595" y="403" width="177" height="48"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mr_mIojWEd6X5oQchPkMiQ" x="589" y="363" width="259" height="102"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_tFRHMIwJEd6Q4I-FdTGpNQ" type="2003">
         <children xmi:type="notation:Node" xmi:id="_tFRHM4wJEd6Q4I-FdTGpNQ" type="4002"/>

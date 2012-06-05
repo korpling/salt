@@ -19,18 +19,19 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructur
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNamedElementImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
@@ -44,6 +45,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl.SDocumentImpl#getSCorpusGraph <em>SCorpus Graph</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl.SDocumentImpl#getSDocumentGraph <em>SDocument Graph</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl.SDocumentImpl#getSDocumentGraphLocation <em>SDocument Graph Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +61,16 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * @ordered
 	 */
 	protected SDocumentGraph sDocumentGraph;
+
+	/**
+	 * The default value of the '{@link #getSDocumentGraphLocation() <em>SDocument Graph Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSDocumentGraphLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final URI SDOCUMENT_GRAPH_LOCATION_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,6 +196,69 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 
 
 	/**
+	 *{@inheritDoc SDocument#getSDocumentGraphLocation()}
+	 */
+	@Override
+	public URI getSDocumentGraphLocation() {
+		URI retVal= null;
+		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION;
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature!= null)
+		{
+			Object obj= sFeature.getSValue();
+			if (obj instanceof URI)
+				retVal= (URI) obj;
+			else retVal= URI.createURI(obj.toString());
+		}
+		return(retVal);
+	}
+
+	/**
+	 *{@inheritDoc SDocument#setSDocumentGraph(SDocumentGraph)}
+	 */
+	@Override
+	public void setSDocumentGraphLocation(URI newSDocumentGraphLocation) {
+		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION; 
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature== null)
+		{//create a new sFeature
+			sFeature= SaltFactory.eINSTANCE.createSFeature();
+			sFeature.setSNS(SaltFactory.NAMESPACE_SALT);
+			sFeature.setSName(SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION.toString());
+			this.addSFeature(sFeature);
+		}	
+		sFeature.setSValue(newSDocumentGraphLocation.toString());
+	}
+
+	/**
+	 * {@inheritDoc SDocument#save(URI)}
+	 */
+	@Override
+	public void saveSDocumentGraph(URI sDocumentGraphLocation) {
+		SaltFactory.eINSTANCE.saveSDocumentGraph(this.getSDocumentGraph(), sDocumentGraphLocation);
+		this.setSDocumentGraph(null);
+	}
+
+	/**
+	 * {@inheritDoc SDocument#load()}
+	 */
+	@Override
+	public void loadSDocumentGraph() {
+		this.loadSDocumentGraph(this.getSDocumentGraphLocation());
+	}
+
+	/**
+	 * {@inheritDoc SDocument#load(URI)}
+	 */
+	@Override
+	public void loadSDocumentGraph(URI sDocumentGraphLocation) {
+		SDocumentGraph sDocumentGraph= SaltFactory.eINSTANCE.loadSDocumentGraph(sDocumentGraphLocation);
+		this.setSDocumentGraph(sDocumentGraph);
+		//remove SFeature containing location of where SaltXML file containing the loaded object  
+		this.removeLabel(SaltFactory.NAMESPACE_SALT, SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION.toString());
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
@@ -255,6 +330,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
 				if (resolve) return getSDocumentGraph();
 				return basicGetSDocumentGraph();
+			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH_LOCATION:
+				return getSDocumentGraphLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -272,6 +349,9 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 				return;
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
 				setSDocumentGraph((SDocumentGraph)newValue);
+				return;
+			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH_LOCATION:
+				setSDocumentGraphLocation((URI)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -291,6 +371,9 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
 				setSDocumentGraph((SDocumentGraph)null);
 				return;
+			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH_LOCATION:
+				setSDocumentGraphLocation(SDOCUMENT_GRAPH_LOCATION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -307,6 +390,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 				return getSCorpusGraph() != null;
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
 				return sDocumentGraph != null;
+			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH_LOCATION:
+				return SDOCUMENT_GRAPH_LOCATION_EDEFAULT == null ? getSDocumentGraphLocation() != null : !SDOCUMENT_GRAPH_LOCATION_EDEFAULT.equals(getSDocumentGraphLocation());
 		}
 		return super.eIsSet(featureID);
 	}

@@ -20,6 +20,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -110,6 +111,16 @@ public interface SaltCommonPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME <em>SFEATURE NAME</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonPackageImpl#getSFEATURE_NAME()
+	 * @generated
+	 */
+	int SFEATURE_NAME = 1;
+
+	/**
 	 * The meta object id for the '<em>Properties</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,7 +128,7 @@ public interface SaltCommonPackage extends EPackage {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonPackageImpl#getProperties()
 	 * @generated
 	 */
-	int PROPERTIES = 1;
+	int PROPERTIES = 2;
 
 
 	/**
@@ -151,6 +162,16 @@ public interface SaltCommonPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSaltProject_SName();
+
+	/**
+	 * Returns the meta object for enum '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME <em>SFEATURE NAME</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>SFEATURE NAME</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME
+	 * @generated
+	 */
+	EEnum getSFEATURE_NAME();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Properties <em>Properties</em>}'.
@@ -210,6 +231,16 @@ public interface SaltCommonPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SALT_PROJECT__SNAME = eINSTANCE.getSaltProject_SName();
+
+		/**
+		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME <em>SFEATURE NAME</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonPackageImpl#getSFEATURE_NAME()
+		 * @generated
+		 */
+		EEnum SFEATURE_NAME = eINSTANCE.getSFEATURE_NAME();
 
 		/**
 		 * The meta object literal for the '<em>Properties</em>' data type.

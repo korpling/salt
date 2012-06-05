@@ -35,6 +35,7 @@ import java.util.Properties;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -55,6 +56,13 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 	 * @generated
 	 */
 	private EClass saltProjectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum sfeaturE_NAMEEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -167,6 +175,15 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getSFEATURE_NAME() {
+		return sfeaturE_NAMEEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getProperties() {
 		return propertiesEDataType;
 	}
@@ -202,6 +219,9 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 		saltProjectEClass = createEClass(SALT_PROJECT);
 		createEReference(saltProjectEClass, SALT_PROJECT__SCORPUS_GRAPHS);
 		createEAttribute(saltProjectEClass, SALT_PROJECT__SNAME);
+
+		// Create enums
+		sfeaturE_NAMEEEnum = createEEnum(SFEATURE_NAME);
 
 		// Create data types
 		propertiesEDataType = createEDataType(PROPERTIES);
@@ -250,10 +270,7 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 		initEReference(getSaltProject_SCorpusGraphs(), theSCorpusStructurePackage.getSCorpusGraph(), theSCorpusStructurePackage.getSCorpusGraph_SaltProject(), "sCorpusGraphs", null, 0, -1, SaltProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSaltProject_SName(), ecorePackage.getEString(), "sName", null, 0, 1, SaltProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(saltProjectEClass, null, "saveSaltProject", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theSaltCorePackage.getURI(), "saltProjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(saltProjectEClass, null, "loadSaltProject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(saltProjectEClass, null, "loadSaltProject", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getURI(), "saltProjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(saltProjectEClass, null, "loadSaltProject_GrAF", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -276,6 +293,9 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 		addEParameter(op, theSaltCorePackage.getURI(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getSElementId(), "sElementID", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(saltProjectEClass, null, "saveSaltProject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "saltProjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		op = addEOperation(saltProjectEClass, null, "saveSaltProject_DOT", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getURI(), "uri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -285,16 +305,22 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 
 		op = addEOperation(saltProjectEClass, null, "loadSCorpusStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getURI(), "saltProjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(saltProjectEClass, null, "loadSDocumentStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSCorpusStructurePackage.getSDocument(), "sDocument", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "sDocumentURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(saltProjectEClass, null, "getSDocumentGraphLocations", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
-		EGenericType g2 = createEGenericType(theSCorpusStructurePackage.getSDocument());
+		EGenericType g2 = createEGenericType(theSaltCorePackage.getSElementId());
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(theSaltCorePackage.getURI());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = addEOperation(saltProjectEClass, null, "loadSDocumentStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theSCorpusStructurePackage.getSDocument(), "sDocument", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theSaltCorePackage.getURI(), "sDocumentURI", 0, 1, IS_UNIQUE, IS_ORDERED);
+		// Initialize enums and add enum literals
+		initEEnum(sfeaturE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME.class, "SFEATURE_NAME");
+		addEEnumLiteral(sfeaturE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION);
 
 		// Initialize data types
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

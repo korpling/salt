@@ -24,6 +24,8 @@ import org.eclipse.emf.common.util.URI;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.tests.SampleGenerator;
 import junit.framework.TestCase;
 
 public class SaltFactoryImplTest extends TestCase 
@@ -56,8 +58,8 @@ public class SaltFactoryImplTest extends TestCase
 	 * This method tests: 
 	 * <ol>
 	 * <li>the loading of a graph in a SaltProject file containing no {@link SCorpusGraph} object</li>
-	 * <li>the loading of a graph in a SaltProject file containing exactly one {@link SCorpusGraph} object</li>
-	 * <li>the loading of a graph in a SaltProject file containing more than one {@link SCorpusGraph} objects</li>
+	 * <li>the loading of a graph in a SaltProject file containing exactly one empty {@link SCorpusGraph} object</li>
+	 * <li>the loading of a graph in a SaltProject file containing more than one empty {@link SCorpusGraph} objects</li>
 	 * </ol> 
 	*/
 	public void testLoadSCorpusGraph__URI() 
@@ -104,6 +106,24 @@ public class SaltFactoryImplTest extends TestCase
 		
 		sCorpusGraph= SaltFactory.eINSTANCE.loadSCorpusGraph(URI.createFileURI(testFile.getAbsolutePath()), 2);
 		assertEquals("mySCorpusGraph3", sCorpusGraph.getSName());
+	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI) <em>Load SDocument Structure</em>}' operation.
+	 * Checks loading of just the document structure of a document.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoadSDocumentGraph_URI() 
+	{
+		File sDocumentFile= new File(FILE_RESOURCE_DIR+ "case5/doc1."+SaltFactory.FILE_ENDING_SALT);
+		URI sDocumentURI= URI.createFileURI(sDocumentFile.getAbsolutePath());
+		SDocument sDocument= SaltFactory.eINSTANCE.createSDocument();
+		this.getFixture().loadSDocumentGraph(sDocumentURI);
+				
+		SDocument template_sDocument= SaltFactory.eINSTANCE.createSDocument();
+		SampleGenerator.createSDocumentStructure(template_sDocument);
+		
+		assertEquals(template_sDocument, sDocument);
 	}
 	
 }

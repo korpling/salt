@@ -23,7 +23,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -33,12 +35,21 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserObject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonFactoryImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialRelation;
@@ -127,18 +138,22 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	/**
 	 * {@inheritDoc SaltFactory#load(URI)}
 	 */
-	public Object load(URI objectURI)
+	@Override
+	public EObject load(URI objectURI)
 	{
 		if (objectURI== null)
 			throw new SaltResourceNotFoundException("Cannot load object, because the given uri is null.");
 		
-		File objectFile= new File(objectURI.toFileString());
+//		if (objectURI.toFileString()== null)
+//			throw new SaltResourceNotFoundException("Cannot load object, because the given uri is not a file uri: "+ objectURI);
+		
+		File objectFile= new File((objectURI.toFileString()==null)?objectURI.toString():objectURI.toFileString());
 		if (!objectFile.exists())
 			throw new SaltResourceNotFoundException("Cannot load Object, because the file '"+objectFile+"' does not exists.");
 		
-		Resource resource= getResourceSet().createResource(objectURI);
+		Resource resource= getResourceSet().createResource(URI.createFileURI(objectFile.getAbsolutePath()));
 		if (resource== null)
-			throw new SaltResourceException("Cannot load object to given uri '"+objectURI+"'.");
+			throw new SaltResourceException("Cannot load object to given uri '"+objectURI+"', because no handler for resource was found.");
 		if (!(resource instanceof XMLResource))
 			throw new SaltResourceException("Cannot load object to given uri '"+objectURI+"'.");
 		XMLResource xmlResource= null;
@@ -146,7 +161,6 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		xmlResource.setEncoding("UTF-8");	
 		try 
 		{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
-			System.out.println("load resource: "+ objectURI);
 			xmlResource.load(null);
 			
 		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
@@ -154,7 +168,6 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		{
 			throw new SaltResourceException("Cannot load salt-project from given uri '"+objectURI+"'.", e);
 		}
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> after load");
 		EObject obj= xmlResource.getContents().get(0);
 		xmlResource.getContents().remove(obj);
 		return(obj);
@@ -191,6 +204,58 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	}
 	
 	/**
+	 * {@inheritDoc SaltFactoryt#save(URI)}
+	 */
+	@Override
+	public void saveSDocumentGraph(	SDocumentGraph sDocumentGraph, 
+									URI sDocumentGraphLocation) 
+	{
+		Resource resource= SaltFactory.resourceSet.createResource(sDocumentGraphLocation);
+			
+		if (resource== null)
+			throw new SaltResourceException("Cannot save the "+SDocumentGraph.class.getName()+" object '"+sDocumentGraph.getSElementId()+"' to given uri '"+sDocumentGraphLocation+"'.");
+		if (!(resource instanceof XMLResource))
+			throw new SaltResourceException("Cannot save the "+SDocumentGraph.class.getName()+" object '"+sDocumentGraph.getSElementId()+"' to given uri '"+sDocumentGraphLocation+"'.");
+		else
+		{
+			SDocument sDoc= sDocumentGraph.getSDocument();
+			if (sDoc!= null)
+			{//store location of where file is persist  				
+				sDoc.setSDocumentGraphLocation(sDocumentGraphLocation);
+				sDoc.setSDocumentGraph(null);
+			}//store location of where file is persist 
+			
+			XMLResource xmlResource= (XMLResource) resource;
+			xmlResource.getContents().add(sDocumentGraph);
+			xmlResource.setEncoding("UTF-8");	
+			try {
+				xmlResource.save(null);
+			} catch (IOException e) 
+			{
+				throw new SaltResourceException("Cannot save "+SDocumentGraph.class.getName()+" to given uri '"+sDocumentGraphLocation+"'.", e);
+			}
+			sDoc.setSDocumentGraph(sDocumentGraph);
+		}
+	}
+
+	/**
+	 * {@inheritDoc SaltFactory#loadSDocumentGraph(URI)
+	 */
+	@Override
+	public SDocumentGraph loadSDocumentGraph(URI sDocumentGraphLocation) {
+		SDocumentGraph retVal= null;
+		EObject obj= this.load(sDocumentGraphLocation);
+		if (obj== null)
+			throw new SaltResourceException("Cannot load the requested "+SDocumentGraph.class.getName()+", because file located at contains no such object, the returned object was null.");
+		else if (obj instanceof SDocumentGraph)
+		{
+			retVal= (SDocumentGraph) obj; 
+		}
+		else throw new SaltResourceException("Cannot load the requested "+SDocumentGraph.class.getName()+", because file located at contains no such object. It contains: "+ obj.getClass());
+		return(retVal);
+	}
+	
+	/**
 	 * {@inheritDoc SaltFactory#loadSCorpusGraph(URI)}
 	 */
 	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri) {
@@ -222,6 +287,31 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 		if (retVal== null)
 			throw new SaltResourceException("No '"+SCorpusGraph.class.getName()+"' object was found in resource '"+sCorpusGraphUri+"'.");
+		
+		
+		{//TODO all this can be removed, when feature request Feature #117 is done
+			GraphTraverser graphTraverser= new GraphTraverser();
+			graphTraverser.setGraph(retVal);
+			SaltLoadingTraverser loadingTraverser= new SaltLoadingTraverser();
+			loadingTraverser.saltProjectPath= sCorpusGraphUri.toFileString();
+			GraphTraverserObject traverser= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, loadingTraverser);
+			EList<Node> startNodes= (EList<Node>)(EList<? extends Node>)retVal.getSRootCorpus();
+			if (	(startNodes!= null)&&
+					(startNodes.size()>0))
+			{
+				traverser.start(startNodes);
+				while(!traverser.isFinished())
+				{ 
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						throw new SaltResourceException("This seems to be a bug, it is not possible to wait for a thread.");
+					}
+				}
+			}
+		}//TODO all this can be removed, when feature request Feature #117 is done
+		
+		
 		return(retVal);
 	}
 	
@@ -321,4 +411,67 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			this.initSType2ClazzMap();
 		return(this.sType2clazzMap.get(sType));
 	}
+
+// ====================================================== end: loading SaltXML resource
+	//TODO all this can be removed, when feature request Feature #117 is done
+	private class SaltLoadingTraverser implements TraversalObject
+	{
+		private Stack<String> pathStack= null;
+		private String saltProjectPath= null;
+		
+		public SaltLoadingTraverser()
+		{
+			this.pathStack= new Stack<String>();
+		}
+		
+		@Override
+		public void nodeReached(GRAPH_TRAVERSE_MODE traversalMode,
+								Long traversalId, Node currNode, Edge edge, Node fromNode,
+								long order) 
+		{
+			if (pathStack.size()==0)
+				pathStack.push(saltProjectPath);
+			if (currNode instanceof SCorpus)
+			{
+				SCorpus sCorpus= (SCorpus) currNode;
+				pathStack.push(pathStack.peek()+"/"+sCorpus.getSName());
+			}
+			else if (currNode instanceof SDocument)
+			{
+				SDocument sDocument= (SDocument) currNode;
+				File sDocumentPath= new File(this.pathStack.peek()+"/"+sDocument.getSName()+ "."+SaltFactory.FILE_ENDING_SALT);
+				if (!sDocumentPath.exists())
+				{
+					//TODO put a log message (debug), that no document graph was found for document 
+//					throw new SaltResourceException("Cannot load SDocument object '"+sDocument.getSName()+"', because resource '"+sDocumentPath.getAbsolutePath()+"' does not exists.");
+				}
+				else
+				{
+					URI sDocumentURI= URI.createFileURI(sDocumentPath.getAbsolutePath());
+					sDocument.setSDocumentGraphLocation(sDocumentURI);
+				}
+			}
+		}
+
+		@Override
+		public void nodeLeft(GRAPH_TRAVERSE_MODE traversalMode,
+				Long traversalId, Node currNode, Edge edge, Node fromNode,
+				long order) 
+		{
+			if (	(currNode != null)&&
+					(!(currNode instanceof SDocument)))
+			{
+				if (	(this.pathStack!= null)&&
+						(this.pathStack.size()>0))
+					this.pathStack.pop();
+			}
+		}
+
+		@Override
+		public boolean checkConstraint(GRAPH_TRAVERSE_MODE traversalMode,
+				Long traversalId, Edge edge, Node currNode, long order) {
+			return true;
+		}
+	}
+// ====================================================== end: loading SaltXML resource
 }

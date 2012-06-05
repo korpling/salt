@@ -140,6 +140,8 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case SaltCommonPackage.SFEATURE_NAME:
+				return createSFEATURE_NAMEFromString(eDataType, initialValue);
 			case SaltCommonPackage.PROPERTIES:
 				return createPropertiesFromString(eDataType, initialValue);
 			default:
@@ -155,6 +157,8 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case SaltCommonPackage.SFEATURE_NAME:
+				return convertSFEATURE_NAMEToString(eDataType, instanceValue);
 			case SaltCommonPackage.PROPERTIES:
 				return convertPropertiesToString(eDataType, instanceValue);
 			default:
@@ -170,6 +174,26 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	public SaltProject createSaltProject() {
 		SaltProjectImpl saltProject = new SaltProjectImpl();
 		return saltProject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SFEATURE_NAME createSFEATURE_NAMEFromString(EDataType eDataType, String initialValue) {
+		SFEATURE_NAME result = SFEATURE_NAME.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSFEATURE_NAMEToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

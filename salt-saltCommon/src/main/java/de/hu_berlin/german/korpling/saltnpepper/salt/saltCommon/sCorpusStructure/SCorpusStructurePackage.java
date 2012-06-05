@@ -19,6 +19,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructur
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -488,13 +489,22 @@ public interface SCorpusStructurePackage extends EPackage {
 	int SDOCUMENT__SDOCUMENT_GRAPH = SaltCorePackage.SNODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>SDocument Graph Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SDOCUMENT__SDOCUMENT_GRAPH_LOCATION = SaltCorePackage.SNODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>SDocument</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SDOCUMENT_FEATURE_COUNT = SaltCorePackage.SNODE_FEATURE_COUNT + 2;
+	int SDOCUMENT_FEATURE_COUNT = SaltCorePackage.SNODE_FEATURE_COUNT + 3;
 
 
 	/**
@@ -1211,6 +1221,17 @@ public interface SCorpusStructurePackage extends EPackage {
 	EReference getSDocument_SDocumentGraph();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#getSDocumentGraphLocation <em>SDocument Graph Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SDocument Graph Location</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#getSDocumentGraphLocation()
+	 * @see #getSDocument()
+	 * @generated
+	 */
+	EAttribute getSDocument_SDocumentGraphLocation();
+
+	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus <em>SCorpus</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1414,6 +1435,14 @@ public interface SCorpusStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SDOCUMENT__SDOCUMENT_GRAPH = eINSTANCE.getSDocument_SDocumentGraph();
+
+		/**
+		 * The meta object literal for the '<em><b>SDocument Graph Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SDOCUMENT__SDOCUMENT_GRAPH_LOCATION = eINSTANCE.getSDocument_SDocumentGraphLocation();
 
 		/**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl.SCorpusImpl <em>SCorpus</em>}' class.

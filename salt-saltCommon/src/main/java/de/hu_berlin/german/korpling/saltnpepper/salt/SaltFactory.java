@@ -26,7 +26,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
 
 public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
@@ -45,22 +48,27 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	/**
 	 * The file ending for xml files to store a SALT model.
 	 */
-	public final String FILE_ENDING_SALT= "salt"; 
+	public static final String FILE_ENDING_SALT= "salt"; 
 	
 	/**
 	 * The file ending to store a dot model.
 	 */
-	public final String FILE_ENDING_DOT= "dot";
+	public static final String FILE_ENDING_DOT= "dot";
 	
 	/**
 	 * The file ending for xml files to store a SALT model.
 	 */
-	public final String FILE_ENDING_GRAF= "graf"; 
+	public static final String FILE_ENDING_GRAF= "graf"; 
 	
 	/**
 	 * Default name of the saltProject file.
 	 */
-	public final String FILE_SALT_PROJECT= "saltProject"+"."+FILE_ENDING_SALT; 
+	public static final String FILE_SALT_PROJECT= "saltProject"+"."+FILE_ENDING_SALT; 
+	
+	/**
+	 * Namespace of e.g. {@link SFeature} objects used by salt. 
+	 */
+	public static final String NAMESPACE_SALT= "salt";
 	
 	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.
@@ -70,7 +78,7 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	public STYPE_NAME convertClazzToSTypeName(Class<? extends EObject> clazz); 
 	
 	/**
-	 * Converts the given {@link STYPE_NAME}, into the corresponding class.
+	 * Converts the given {@link STYPE_NAME}, into the corresponding class. 
 	 * @param type to convert
 	 * @return corresponding class
 	 */
@@ -81,7 +89,7 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * @param objectURI {@link URI} to SaltXML file containing the object
 	 * @return loaded object
 	 */
-	public Object load(URI objectURI);
+	public EObject load(URI objectURI);
 	
 	/**
 	 * Loads a SaltProject from given uri and returns it as object structure.
@@ -108,4 +116,22 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * @param numOfSCorpusGraph number of graph to be load, note that the list of graphs starts with 0
 	 */
 	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph);
+	
+	/**
+	 * Persists the given {@link SDocumentGraph} object as SaltXML file at the 
+	 * location given by the passed {@link URI} object. 
+	 * The {@link URI} of where the {@link SDocumentGraph} is stored as {@link SFeature} by calling 
+	 * {@link SDocument#setSDocumentGraphLocation(URI)}, in case of the given {@link SDocumentGraph} is contained
+	 * by an {@link SDocument} object. 
+	 * @param sDocumentGraph {@link SDocumentGraph} object to persist
+	 * @param sDocumentGraphLocation location of where to persist object as {@link URI}
+	 */
+	public void saveSDocumentGraph(SDocumentGraph sDocumentGraph, URI sDocumentGraphLocation);
+
+	/**
+	 * Loads a {@link SDocumentGraph} object and returns it. The location of where to find the SaltXML containing 
+	 * the {@link SDocumentGraph} object is given by the passed {@link URI} object.
+	 * @param sDocumentGraphLocation location of SaltXML to load {@link SDocumentGraph} object.
+	 */
+	public SDocumentGraph loadSDocumentGraph(URI sDocumentGraphLocation);
 }
