@@ -20,10 +20,6 @@
         <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//SaltProject/loadSCorpusStructure"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_GZGN4qwMEeG-9PscWGlxYQ"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_NbpDkKwMEeG-9PscWGlxYQ" type="2002">
-        <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//SaltProject/loadSDocumentStructure"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_NbpDkawMEeG-9PscWGlxYQ"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_hpHBMXHFEeCvbt8V4jMOhQ" type="2002">
         <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//SaltProject/loadSaltProject_GrAF"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_hpHBMnHFEeCvbt8V4jMOhQ"/>

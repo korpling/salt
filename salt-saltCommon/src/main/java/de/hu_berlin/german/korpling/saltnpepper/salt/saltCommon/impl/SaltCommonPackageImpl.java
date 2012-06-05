@@ -306,10 +306,6 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 		op = addEOperation(saltProjectEClass, null, "loadSCorpusStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getURI(), "saltProjectURI", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(saltProjectEClass, null, "loadSDocumentStructure", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theSCorpusStructurePackage.getSDocument(), "sDocument", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theSaltCorePackage.getURI(), "sDocumentURI", 0, 1, IS_UNIQUE, IS_ORDERED);
-
 		op = addEOperation(saltProjectEClass, null, "getSDocumentGraphLocations", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
 		EGenericType g2 = createEGenericType(theSaltCorePackage.getSElementId());

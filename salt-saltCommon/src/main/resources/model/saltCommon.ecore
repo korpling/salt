@@ -40,10 +40,6 @@
     <eOperations name="loadSCorpusStructure">
       <eParameters name="saltProjectURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
     </eOperations>
-    <eOperations name="loadSDocumentStructure">
-      <eParameters name="sDocument" eType="#//sCorpusStructure/SDocument"/>
-      <eParameters name="sDocumentURI" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
-    </eOperations>
     <eOperations name="getSDocumentGraphLocations">
       <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
         <eTypeArguments eClassifier="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SElementId"/>
