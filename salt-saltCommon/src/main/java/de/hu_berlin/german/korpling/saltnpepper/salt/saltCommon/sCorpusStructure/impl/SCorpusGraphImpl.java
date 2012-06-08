@@ -47,8 +47,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
@@ -571,26 +576,24 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	public EList<SCorpus> getSRootCorpus() 
 	{
 		return( (EList<SCorpus>) (EList<? extends Node>)this.getSRoots());
+	}
+
+	/**
+	 * Loads the content of this object by reading the SaltXML file located by the given {@link URI}. 
+	 * The SaltXML file can either contain a {@link SaltProject}, than the first {@link SCorpusGraph} 
+	 * object is loaded or just a {@link SCorpusGraph} object.
+	 * <br/>
+	 * The method delegates to {@link SaltFactory#loadSCorpusGraph(URI)}.
+	 * <br/>
+	 * Caution: The loading is done by creating a new {@link SCorpusGraph} object and copying its values
+	 * to this object. This will need longer than a direct load.
+	 * @param sCorpusGraphUri location of the SaltXML file
+	 */
+	public void load(URI sCorpusGraphUri) {
+		SCorpusGraph sCorpusGraph= SaltFactory.eINSTANCE.loadSCorpusGraph(sCorpusGraphUri);
 		
-//		//TODO may be a root corpus can be marked when adding new corpora???
-//		EList<SCorpus> retVal= null;
-//		GraphTraverser graphTraverser= new GraphTraverser();
-//		graphTraverser.setGraph(this);
-//		EList<Node> roots= graphTraverser.getRoots();
-//		if (roots!= null)
-//		{
-//			try {
-//				retVal= (EList<SCorpus>) (EList<? extends Node>) roots;
-//			} catch (ClassCastException e) {
-//				for (Node node: Collections.synchronizedCollection(roots))
-//				{
-//					if (node instanceof SCorpus)
-//						retVal.add((SCorpus) node);
-//				}
-//			}
-//			
-//		}
-//		return(retVal);
+		//moves content of loaded SCorpusgraph object to this
+		SaltFactory.eINSTANCE.move(sCorpusGraph, this);
 	}
 
 	/**

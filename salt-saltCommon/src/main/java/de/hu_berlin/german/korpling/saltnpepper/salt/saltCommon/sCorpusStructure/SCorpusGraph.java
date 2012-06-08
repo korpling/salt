@@ -231,4 +231,14 @@ public interface SCorpusGraph extends SGraph {
 	 */
 	EList<SCorpus> getSRootCorpus();
 
+	/**
+	 * Loads the content of this object by reading the SaltXML file located by the given {@link URI}. 
+	 * The SaltXML file can either contain a {@link SaltProject}, than the first {@link SCorpusGraph} 
+	 * object is loaded or just a {@link SCorpusGraph} object.
+	 * @param sCorpusGraphUri loaction of the SaltXML file
+	 * @model sCorpusGraphUriDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void load(URI sCorpusGraphUri);
+
 } // SCorpusGraph

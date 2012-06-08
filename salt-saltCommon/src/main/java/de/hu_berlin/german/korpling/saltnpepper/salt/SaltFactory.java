@@ -134,4 +134,14 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * @param sDocumentGraphLocation location of SaltXML to load {@link SDocumentGraph} object.
 	 */
 	public SDocumentGraph loadSDocumentGraph(URI sDocumentGraphLocation);
+	
+	/**
+	 * moves the content of <code>source</code> to <code>target</code>. 
+	 * Caution: Object contained in <code>source</code> will be moved, which from <code>target</code>
+	 * to <code>source</code>, which will mean, that object are not content of <code>source</code>
+	 * any more after using {@link #move(SCorpusGraph, SCorpusGraph)}.   
+	 * @param source {@link SCorpusGraph} delivering the content to move
+	 * @param target {@link SCorpusGraph} object to where the content will be moved
+	 */
+	public void move(SCorpusGraph source, SCorpusGraph target);
 }

@@ -51,12 +51,20 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SCatAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
@@ -103,28 +111,21 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	public static void setResourceSet(ResourceSet resourceSet) {
 		SaltFactoryImpl.resourceSet = resourceSet;
 	}
-	/**
-	 * Lock for initializing resourceSet
-	 */
-	private static Object resourceSetLock= new Object();
 
 	/**
 	 * Returns an initialized resourceSet object for storing salt-models.
 	 * @return
 	 */
-	public static ResourceSet getResourceSet() 
+	public static synchronized ResourceSet getResourceSet() 
 	{
 		if (resourceSet==  null)
 		{
-			synchronized (resourceSetLock) 
+			if (resourceSet==  null)
 			{
-				if (resourceSet==  null)
-				{
-					resourceSet= new ResourceSetImpl();
-					resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
-					resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(), SaltSemanticsPackage.eINSTANCE);
-					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
-				}
+				resourceSet= new ResourceSetImpl();
+				resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
+				resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(), SaltSemanticsPackage.eINSTANCE);
+				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
 			}
 		}
 		return resourceSet;
@@ -144,9 +145,6 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		if (objectURI== null)
 			throw new SaltResourceNotFoundException("Cannot load object, because the given uri is null.");
 		
-//		if (objectURI.toFileString()== null)
-//			throw new SaltResourceNotFoundException("Cannot load object, because the given uri is not a file uri: "+ objectURI);
-		
 		File objectFile= new File((objectURI.toFileString()==null)?objectURI.toString():objectURI.toFileString());
 		if (!objectFile.exists())
 			throw new SaltResourceNotFoundException("Cannot load Object, because the file '"+objectFile+"' does not exists.");
@@ -162,7 +160,6 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		try 
 		{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
 			xmlResource.load(null);
-			
 		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
 		catch (IOException e) 
 		{
@@ -287,13 +284,12 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 		if (retVal== null)
 			throw new SaltResourceException("No '"+SCorpusGraph.class.getName()+"' object was found in resource '"+sCorpusGraphUri+"'.");
-		
-		
+				
 		{//TODO all this can be removed, when feature request Feature #117 is done
 			GraphTraverser graphTraverser= new GraphTraverser();
 			graphTraverser.setGraph(retVal);
 			SaltLoadingTraverser loadingTraverser= new SaltLoadingTraverser();
-			loadingTraverser.saltProjectPath= sCorpusGraphUri.toFileString();
+			loadingTraverser.saltProjectPath= sCorpusGraphUri.toFileString().replace(SaltFactory.FILE_SALT_PROJECT, "");
 			GraphTraverserObject traverser= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, loadingTraverser);
 			EList<Node> startNodes= (EList<Node>)(EList<? extends Node>)retVal.getSRootCorpus();
 			if (	(startNodes!= null)&&
@@ -313,6 +309,54 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		
 		
 		return(retVal);
+	}
+	
+	/**
+	 * {@inheritDoc SaltFactory#move(SCorpusGraph, SCorpusGraph)}
+	 */
+	public void move(SCorpusGraph source, SCorpusGraph target)
+	{
+		//copy all sRelations and source and target SNode as well from loaded graph into existing one
+		for (SRelation sRelation: source.getSRelations())
+		{
+			if (target.getNode(sRelation.getSSource().getSId())== null)
+				target.addSNode(sRelation.getSSource());
+			if (target.getNode(sRelation.getSTarget().getSId())== null)
+				target.addSNode(sRelation.getSTarget());
+			target.addSRelation(sRelation);
+		}
+		
+		//copy all sNodes from loaded graph into existing one
+		for (SNode sNode: source.getSNodes())
+		{
+			if (target.getNode(sNode.getSId())== null)
+				target.addSNode(sNode);
+			target.addSNode(sNode);
+		}
+
+		//copy all sAnnotation from loaded graph into existing one
+		for (SAnnotation sAnno: source.getSAnnotations())
+			target.addSAnnotation(sAnno);
+	
+		//copy all sMetaAnnotation from loaded graph into existing one
+		for (SMetaAnnotation sMetaAnno: source.getSMetaAnnotations())
+			target.addSMetaAnnotation(sMetaAnno);
+		//copy all sProcessingAnnotation from loaded graph into existing one
+		for (SProcessingAnnotation sProcAnno: source.getSProcessingAnnotations())
+			target.addSProcessingAnnotation(sProcAnno);
+		
+		//copy all SFeature from loaded graph into existing one
+		for (SFeature sfeature: source.getSFeatures())
+		{
+			target.addSFeature(sfeature);
+		}
+		
+		//copy SElementId
+		target.setSElementId(source.getSElementId());
+		
+		//copy all sLayer from loaded graph into existing one
+		for (SLayer sLayer: source.getSLayers())
+			target.addSLayer(sLayer);
 	}
 	
 	/**
@@ -383,6 +427,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		sType2clazzMap.put(STYPE_NAME.STEXT_OVERLAPPING_RELATION, STextOverlappingRelation.class);
 		sType2clazzMap.put(STYPE_NAME.STIME_OVERLAPPING_RELATION, STimeOverlappingRelation.class);
 		sType2clazzMap.put(STYPE_NAME.SSEQUENTIAL_RELATION, SSequentialRelation.class);
+		sType2clazzMap.put(STYPE_NAME.SORDER_RELATION, SOrderRelation.class);
 	}
 	/**
 	 * the map of {@link STYPE_NAME} and {@link Class}.
@@ -443,7 +488,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				if (!sDocumentPath.exists())
 				{
 					//TODO put a log message (debug), that no document graph was found for document 
-//					throw new SaltResourceException("Cannot load SDocument object '"+sDocument.getSName()+"', because resource '"+sDocumentPath.getAbsolutePath()+"' does not exists.");
+					throw new SaltResourceException("Cannot load SDocument object '"+sDocument.getSName()+"', because resource '"+sDocumentPath.getAbsolutePath()+"' does not exists.");
 				}
 				else
 				{

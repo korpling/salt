@@ -30,6 +30,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltE
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltInvalidModelException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
@@ -177,6 +178,8 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSDominanceRelations();
 			else if (clazz.equals(SSpanningRelation.class)) 
 				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSSpanningRelations();
+			else if (clazz.equals(SOrderRelation.class)) 
+				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSOrderRelations();
 		}//compute all relations
 		for (SRelation currentRel: relations)
 		{//walk through relations

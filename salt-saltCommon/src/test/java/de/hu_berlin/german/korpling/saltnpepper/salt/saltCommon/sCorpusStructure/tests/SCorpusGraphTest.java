@@ -37,6 +37,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.tests.SampleGenerator;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
@@ -457,6 +458,28 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		
 		assertTrue(this.getFixture().getSRootCorpus().contains(sCorp1));
 		assertEquals(1, this.getFixture().getSRootCorpus().size());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#load(org.eclipse.emf.common.util.URI) <em>Load</em>}' operation.
+	 * Tests the loading of a {@link SCorpusGraph} object contained in a {@link SaltProject} object persist in a
+	 * SaltXML file. The used corpus structure is created via {@link SampleGenerator#createCorpusStructure()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#load(org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoad__URI() 
+	{
+		SCorpusGraph template = SampleGenerator.createCorpusStructure();
+		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
+		saltProject.getSCorpusGraphs().add(template);
+		String tmpDir = System.getProperty("java.io.tmpdir")+ this.getClass().getName();
+		File tmpFile= new File(tmpDir);
+		URI tmpUri= URI.createFileURI(tmpFile.getAbsolutePath());
+		saltProject.saveSaltProject(tmpUri);
+		assertTrue("Cannot run test, because file does not exists: "+ tmpFile.getAbsolutePath(), tmpFile.exists());
+		
+		this.getFixture().load(tmpUri);
+		assertNotNull(this.getFixture());
+		assertEquals("differences: "+ template.differences(this.getFixture()), template, this.getFixture());
 	}
 
 	public void testCheckElementId()

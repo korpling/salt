@@ -647,7 +647,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	public void addNode(Node node) 
 	{
 		if (!this.getNodes().add(node))
-			throw new GraphInsertException("Cannot add the given node, because of unknown reason. Maybe it was already added. node: "+ node.getId() + "("+node+")");
+		{
+			if (this.getNodes().contains(node))
+				throw new GraphInsertException("Cannot add the given node with id, because it does already exists in graph '"+this.getId()+"'. node: "+ node.getId() + "("+node+")");
+			else
+				throw new GraphInsertException("Cannot add the given node, because of unknown reason. Maybe it was already added. node: "+ node.getId() + "("+node+")");
+		}
 	}
 
 	/**
@@ -768,7 +773,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	protected void basicAddEdge(Edge edge)
 	{
 		if (edge== null) 
-			throw new GraphException("Cannot insert the given edge, beaceuse the edge is empty.");
+			throw new GraphInsertException("Cannot insert the given edge, beaceuse the edge is empty.");
 		
 		//if edge has no id a new id will be given to edge
 		if (edge.getId()== null) 
@@ -785,21 +790,22 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		//put edge into naming index
 		this.getIndexMgr().getIndex(IDX_EDGENAME).addElement(edge.getId(), edge);
 				
-		//if source is not null
+		//throw exception, if source isn't null, but is not added to graph 
 		if (edge.getSource()!= null)
 		{
 			if ((this.getNode(edge.getSource().getId())== null))
 			{
-				throw new GraphException("Cannot insert the given edge, because source of edge does not belong to list of nodes in graph: "+ edge.getSource().getId());
+				throw new GraphInsertException("Cannot insert the given edge, because source of edge does not belong to list of nodes in graph: "+ edge.getSource().getId());
 			}
-			//put edge into outEdges
+			//insert edge into index outEdges
 			this.getIndexMgr().getIndex(IDX_OUTEDGES).addElement(edge.getSource().getId(), edge);
-		}	
+		}
+		//throw exception, if target isn't null, but is not added to graph
 		if (edge.getTarget()!= null)
 		{
 			if ((this.getNode(edge.getTarget().getId())== null))
 				throw new GraphException("Cannot insert the given edge, because destination of edge  does not belong to list of nodes in graph: "+ edge.getTarget());
-			//Kante in inEdges eintragen
+			//insert edge in index inEdges
 			this.getIndexMgr().getIndex(IDX_INEDGES).addElement(edge.getTarget().getId(), edge);
 		}	
 		
@@ -807,13 +813,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			edge.eAdapters().add(this.graphAdapter);
 			edge.getIdentifier().eAdapters().add(this.graphAdapter);
 		}//create a notifier for changes in edge
-		
-//		if (	(edge.getSource()!= null) &&
-//				(edge.getTarget()!= null))
-//		{	
-////			if (this.logService!= null)
-////				this.logService.log(LogService.LOG_DEBUG, "create edge from: "+edge.getSource().getId() + "\t, to: "+ edge.getTarget().getId()+")");
-//		}
 	}
 	
 	/**

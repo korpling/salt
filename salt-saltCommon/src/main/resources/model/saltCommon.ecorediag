@@ -99,6 +99,10 @@
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/getSRootCorpus"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_mGpo0W26EeC87N2mhOJSSQ"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_Il7jMLB9EeGksebmK-oU-Q" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/load"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_Il7jMbB9EeGksebmK-oU-Q"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_kxpZVYjWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_kxpZVojWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_kxpZV4jWEd6X5oQchPkMiQ"/>
@@ -668,6 +672,10 @@
           <children xmi:type="notation:Node" xmi:id="_qU4RQAVvEeG9Ra8stJsLQw" type="2006">
             <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SSEQUENTIAL_RELATION"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_qU4RQQVvEeG9Ra8stJsLQw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_tRfKsbC1EeGnV96BSfr67w" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SORDER_RELATION"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_tRfKsrC1EeGnV96BSfr67w"/>
           </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_HKSFIlrHEd-nlKwtzNGozg"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_HKSFI1rHEd-nlKwtzNGozg"/>

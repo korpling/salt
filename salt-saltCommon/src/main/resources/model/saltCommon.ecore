@@ -74,6 +74,9 @@
         <eParameters name="sDocument" eType="#//sCorpusStructure/SDocument"/>
       </eOperations>
       <eOperations name="getSRootCorpus" upperBound="-1" eType="#//sCorpusStructure/SCorpus"/>
+      <eOperations name="load">
+        <eParameters name="sCorpusGraphUri" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocuments" upperBound="-1"
           eType="#//sCorpusStructure/SDocument" volatile="true" transient="true" derived="true"
           containment="true" eOpposite="#//sCorpusStructure/SDocument/sCorpusGraph"/>
@@ -352,6 +355,7 @@
       <eLiterals name="STEXT_OVERLAPPING_RELATION" value="8"/>
       <eLiterals name="STIME_OVERLAPPING_RELATION" value="9"/>
       <eLiterals name="SSEQUENTIAL_RELATION" value="10"/>
+      <eLiterals name="SORDER_RELATION" value="11"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SDataSourceSequence">
       <eOperations name="validate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
