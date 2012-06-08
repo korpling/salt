@@ -471,7 +471,7 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		SCorpusGraph template = SampleGenerator.createCorpusStructure();
 		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
 		saltProject.getSCorpusGraphs().add(template);
-		String tmpDir = System.getProperty("java.io.tmpdir")+ this.getClass().getName();
+		String tmpDir = System.getProperty("java.io.tmpdir")+"/"+ this.getClass().getName();
 		File tmpFile= new File(tmpDir);
 		URI tmpUri= URI.createFileURI(tmpFile.getAbsolutePath());
 		saltProject.saveSaltProject(tmpUri);
