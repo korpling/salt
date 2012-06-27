@@ -275,7 +275,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 				SDataSourceSequence sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 				sequence.setSSequentialDS(sTextualDS);
 				sequence.setSStart(0);
-				sequence.setSEnd(sTextualDS.getSText().length());
+				sequence.setSEnd((sTextualDS.getSText()!= null)?sTextualDS.getSText().length():0);
 				EList<SToken> sTokens= this.getSTokensBySequence(sequence);
 				if (sTokens!= null)
 					retVal.addAll(this.getSortedSTokenByText(sTokens));
