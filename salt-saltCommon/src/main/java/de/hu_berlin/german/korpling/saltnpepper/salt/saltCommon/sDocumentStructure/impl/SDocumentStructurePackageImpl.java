@@ -1196,10 +1196,12 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		op = addEOperation(sDocumentGraphEClass, null, "getRootsBySRelationSType", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getSTYPE_NAME(), "sType", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
-		EGenericType g2 = createEGenericType();
+		EGenericType g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType();
+		g2 = createEGenericType(ecorePackage.getEEList());
 		g1.getETypeArguments().add(g2);
+		EGenericType g3 = createEGenericType(theSaltCorePackage.getSNode());
+		g2.getETypeArguments().add(g3);
 		initEOperation(op, g1);
 
 		op = addEOperation(sDocumentGraphEClass, this.getSToken(), "createSToken", 0, 1, IS_UNIQUE, IS_ORDERED);

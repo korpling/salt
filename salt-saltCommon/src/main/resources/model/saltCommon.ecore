@@ -195,8 +195,10 @@
       </eOperations>
       <eOperations name="getRootsBySRelationSType">
         <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
-          <eTypeArguments/>
-          <eTypeArguments/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+            <eTypeArguments eClassifier="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+          </eTypeArguments>
         </eGenericType>
         <eParameters name="sType" eType="#//sDocumentStructure/STYPE_NAME"/>
       </eOperations>
