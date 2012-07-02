@@ -41,7 +41,23 @@ public enum SFEATURE_NAME implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SDOCUMENT_GRAPH_LOCATION(0, "SDOCUMENT_GRAPH_LOCATION", "SDOCUMENT_GRAPH_LOCATION");
+	SDOCUMENT_GRAPH_LOCATION(0, "SDOCUMENT_GRAPH_LOCATION", "SDOCUMENT_GRAPH_LOCATION"), /**
+	 * The '<em><b>SDOCUMENT GRAPH</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SDOCUMENT_GRAPH_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SDOCUMENT_GRAPH(1, "SDOCUMENT_GRAPH", "SDOCUMENT_GRAPH"), /**
+	 * The '<em><b>SDOCUMENT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SDOCUMENT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SDOCUMENT(2, "SDOCUMENT", "SDOCUMENT");
 
 	/**
 	 * The '<em><b>SDOCUMENT GRAPH LOCATION</b></em>' literal value.
@@ -59,6 +75,36 @@ public enum SFEATURE_NAME implements Enumerator {
 	public static final int SDOCUMENT_GRAPH_LOCATION_VALUE = 0;
 
 	/**
+	 * The '<em><b>SDOCUMENT GRAPH</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SDOCUMENT GRAPH</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SDOCUMENT_GRAPH
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SDOCUMENT_GRAPH_VALUE = 1;
+
+	/**
+	 * The '<em><b>SDOCUMENT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SDOCUMENT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SDOCUMENT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SDOCUMENT_VALUE = 2;
+
+	/**
 	 * An array of all the '<em><b>SFEATURE NAME</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,6 +113,8 @@ public enum SFEATURE_NAME implements Enumerator {
 	private static final SFEATURE_NAME[] VALUES_ARRAY =
 		new SFEATURE_NAME[] {
 			SDOCUMENT_GRAPH_LOCATION,
+			SDOCUMENT_GRAPH,
+			SDOCUMENT,
 		};
 
 	/**
@@ -118,6 +166,8 @@ public enum SFEATURE_NAME implements Enumerator {
 	public static SFEATURE_NAME get(int value) {
 		switch (value) {
 			case SDOCUMENT_GRAPH_LOCATION_VALUE: return SDOCUMENT_GRAPH_LOCATION;
+			case SDOCUMENT_GRAPH_VALUE: return SDOCUMENT_GRAPH;
+			case SDOCUMENT_VALUE: return SDOCUMENT;
 		}
 		return null;
 	}

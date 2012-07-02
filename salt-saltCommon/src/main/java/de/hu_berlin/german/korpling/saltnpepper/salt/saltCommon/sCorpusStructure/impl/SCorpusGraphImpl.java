@@ -47,6 +47,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
@@ -59,9 +60,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCor
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>SCorpus Graph</b></em>'.
- * <!-- end-user-doc -->
+ * 
  * <p>
  * The following features are implemented:
  * <ul>

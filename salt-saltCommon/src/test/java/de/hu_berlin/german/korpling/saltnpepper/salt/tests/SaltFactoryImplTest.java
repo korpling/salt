@@ -110,7 +110,7 @@ public class SaltFactoryImplTest extends TestCase
 	
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI) <em>Load SDocument Structure</em>}' operation.
-	 * Checks loading of just the document structure of a document.
+	 * Checks loading of just the document structure of one document.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI)
 	 */
 	public void testLoadSDocumentGraph_URI() 
@@ -118,12 +118,12 @@ public class SaltFactoryImplTest extends TestCase
 		File sDocumentFile= new File(FILE_RESOURCE_DIR+ "case5/doc1."+SaltFactory.FILE_ENDING_SALT);
 		URI sDocumentURI= URI.createFileURI(sDocumentFile.getAbsolutePath());
 		SDocument sDocument= SaltFactory.eINSTANCE.createSDocument();
-		this.getFixture().loadSDocumentGraph(sDocumentURI);
+		sDocument.setSDocumentGraph(this.getFixture().loadSDocumentGraph(sDocumentURI));
 				
 		SDocument template_sDocument= SaltFactory.eINSTANCE.createSDocument();
 		SampleGenerator.createSDocumentStructure(template_sDocument);
 		
-		assertEquals(template_sDocument, sDocument);
+		assertEquals("differences: "+ template_sDocument.differences(sDocument),template_sDocument, sDocument);
 	}
 	
 }

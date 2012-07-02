@@ -317,6 +317,8 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 		// Initialize enums and add enum literals
 		initEEnum(sfeaturE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME.class, "SFEATURE_NAME");
 		addEEnumLiteral(sfeaturE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION);
+		addEEnumLiteral(sfeaturE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME.SDOCUMENT_GRAPH);
+		addEEnumLiteral(sfeaturE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME.SDOCUMENT);
 
 		// Initialize data types
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

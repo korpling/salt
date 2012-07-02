@@ -86,7 +86,7 @@ public interface SDocument extends SNode {
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSDocument_SDocumentGraph()
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDocument
-	 * @model opposite="sDocument"
+	 * @model opposite="sDocument" resolveProxies="false" transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDocumentGraph getSDocumentGraph();

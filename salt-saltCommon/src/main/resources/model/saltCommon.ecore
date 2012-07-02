@@ -53,6 +53,8 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Properties" instanceClassName="java.util.Properties"/>
   <eClassifiers xsi:type="ecore:EEnum" name="SFEATURE_NAME">
     <eLiterals name="SDOCUMENT_GRAPH_LOCATION"/>
+    <eLiterals name="SDOCUMENT_GRAPH" value="1"/>
+    <eLiterals name="SDOCUMENT" value="2"/>
   </eClassifiers>
   <eSubpackages name="sCorpusStructure" nsURI="sCorpusStructure" nsPrefix="sCorpusStructure">
     <eClassifiers xsi:type="ecore:EClass" name="SCorpusGraph" eSuperTypes="../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SGraph">
@@ -103,7 +105,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sCorpusStructure/SCorpusGraph/sDocuments"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
-          eOpposite="#//sDocumentStructure/SDocumentGraph/sDocument"/>
+          volatile="true" transient="true" derived="true" resolveProxies="false" eOpposite="#//sDocumentStructure/SDocumentGraph/sDocument"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="SDocumentGraphLocation"
           eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"
           volatile="true" transient="true" derived="true"/>
@@ -208,7 +210,7 @@
         <eParameters name="sEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
-          eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
+          volatile="true" transient="true" derived="true" resolveProxies="false" eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTextualDSs" upperBound="-1"
           eType="#//sDocumentStructure/STextualDS" volatile="true" transient="true"
           derived="true" containment="true" eOpposite="#//sDocumentStructure/STextualDS/sDocumentGraph"/>

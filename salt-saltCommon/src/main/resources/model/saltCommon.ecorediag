@@ -798,6 +798,14 @@
         <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//SFEATURE_NAME/SDOCUMENT_GRAPH_LOCATION"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Z13pAa8UEeGksebmK-oU-Q"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_zMInkMH1EeGgHarzVNhMFw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//SFEATURE_NAME/SDOCUMENT_GRAPH"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zMInkcH1EeGgHarzVNhMFw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1COmgMH1EeGgHarzVNhMFw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//SFEATURE_NAME/SDOCUMENT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1COmgcH1EeGgHarzVNhMFw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_WsL7Qa8UEeGksebmK-oU-Q"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_WsL7Qq8UEeGksebmK-oU-Q"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_WsL7Q68UEeGksebmK-oU-Q"/>
@@ -846,9 +854,9 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_y9tPYYjWEd6X5oQchPkMiQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_y9tPYojWEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="saltCommon.ecore#//sCorpusStructure/SDocument/sDocumentGraph"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_y9tPY4jWEd6X5oQchPkMiQ" points="[0, 23, 404, -647]$[0, 211, 404, -459]$[-409, 211, -5, -459]$[-404, 667, 0, -3]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__puxYIXrEeC6FNV3_XY3dw" id="(0.5,0.5)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__pvYcIXrEeC6FNV3_XY3dw" id="(0.3324022346368715,0.024539877300613498)"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_y9tPY4jWEd6X5oQchPkMiQ" points="[1, 50, 493, -641]$[7, 225, 499, -466]$[-468, 225, 24, -466]$[-491, 680, 1, -11]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Bk9gkMHxEeGgHarzVNhMFw" id="(0.5,0.5)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Bk9gkcHxEeGgHarzVNhMFw" id="(0.3324022346368715,0.024539877300613498)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_0IY50IjWEd6X5oQchPkMiQ" type="3002" source="_vw2R0IjWEd6X5oQchPkMiQ" target="_mr_mIIjWEd6X5oQchPkMiQ">
     <children xmi:type="notation:Node" xmi:id="_0IY51IjWEd6X5oQchPkMiQ" type="4011">
@@ -860,7 +868,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_0IY50YjWEd6X5oQchPkMiQ" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_0IY50ojWEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/sDocument"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0IY504jWEd6X5oQchPkMiQ" points="[0, -3, -404, 667]$[-5, -459, -409, 211]$[404, -459, 0, 211]$[404, -647, 0, 23]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_0IY504jWEd6X5oQchPkMiQ" points="[1, -11, -491, 680]$[24, -466, -468, 225]$[499, -466, 7, 225]$[493, -641, 1, 50]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_0IY52IjWEd6X5oQchPkMiQ" id="(0.3324022346368715,0.024539877300613498)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SJNEwIXpEeC6FNV3_XY3dw" id="(0.5,0.5)"/>
   </edges>

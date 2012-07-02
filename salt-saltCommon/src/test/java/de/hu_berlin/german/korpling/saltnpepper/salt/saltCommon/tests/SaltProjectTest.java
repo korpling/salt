@@ -154,7 +154,6 @@ public class SaltProjectTest extends TestCase {
 			SampleGenerator.createSDocumentStructure(sDoc);
 		}
 		
-//		File tmpDir = new File(System.getProperty("java.io.tmpdir").replace(" ", "%20")+this.getClass().getName());
 		File tmpDir = new File(FILE_TMP_DIR+this.getClass().getName());
 		URI tmpURI= URI.createFileURI(tmpDir.getAbsolutePath());
 		this.getFixture().saveSaltProject(tmpURI);
@@ -168,24 +167,6 @@ public class SaltProjectTest extends TestCase {
 		assertEquals(this.getFixture(), saltProject);
 	}
 	
-
-//	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI) <em>Load SDocument Structure</em>}' operation.
-//	 * Checks loading of just the document structure of a document.
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentStructure(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, org.eclipse.emf.common.util.URI)
-//	 */
-//	public void testLoadSDocumentStructure__SDocument_URI() 
-//	{
-//		File sDocumentFile= new File(FILE_RESOURCE_DIR+ "case4/doc1."+SaltFactory.FILE_ENDING_SALT);
-//		URI sDocumentURI= URI.createFileURI(sDocumentFile.getAbsolutePath());
-//		SDocument sDocument= SaltFactory.eINSTANCE.createSDocument();
-//		this.getFixture().loadSDocumentStructure(sDocument, sDocumentURI);
-//				
-//		SDocument template_sDocument= SaltFactory.eINSTANCE.createSDocument();
-//		SampleGenerator.createSDocumentStructure(template_sDocument);
-//		
-//		assertEquals(template_sDocument, sDocument);
-//	}
 
 		/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_SCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load Salt Project SCorpus Structure</em>}' operation.

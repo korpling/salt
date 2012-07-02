@@ -25,7 +25,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
@@ -37,9 +40,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNamedElement
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>SDocument</b></em>'.
- * <!-- end-user-doc -->
+ * Please note, that the flag @generated of the  methods {@link #eInverseAdd(InternalEObject, int, Class, NotificationChain)} and 
+ * {@link #eInverseRemove(InternalEObject, int, NotificationChain)} have been removed. This was done to delegate the 
+ * connection to the {@link SDocumentGraph} object via an {@link SFeature} and still using the notification mechanism provided by EMF. 
+ * 
+ * 
+ * 
  * <p>
  * The following features are implemented:
  * <ul>
@@ -53,16 +59,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
  */
 public class SDocumentImpl extends SNodeImpl implements SDocument {
 	/**
-	 * The cached value of the '{@link #getSDocumentGraph() <em>SDocument Graph</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSDocumentGraph()
-	 * @generated
-	 * @ordered
-	 */
-	protected SDocumentGraph sDocumentGraph;
-
-	/**
 	 * The default value of the '{@link #getSDocumentGraphLocation() <em>SDocument Graph Location</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,12 +69,12 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	protected static final URI SDOCUMENT_GRAPH_LOCATION_EDEFAULT = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * Initializes this object and creates a {@link SFeature} object for relation to a 
+	 * {@link SDocumentGraph} object. The initial value is null.
 	 */
 	protected SDocumentImpl() {
 		super();
+		this.setSDocumentGraph(null);
 	}
 
 	/**
@@ -131,45 +127,22 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		super.setSGraph(newSCorpusGraph);
 	}
 
+// =========================================== start: relation to SDocumentGraph	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public SDocumentGraph getSDocumentGraph() {
-		if (sDocumentGraph != null && sDocumentGraph.eIsProxy()) {
-			InternalEObject oldSDocumentGraph = (InternalEObject)sDocumentGraph;
-			sDocumentGraph = (SDocumentGraph)eResolveProxy(oldSDocumentGraph);
-			if (sDocumentGraph != oldSDocumentGraph) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, oldSDocumentGraph, sDocumentGraph));
-			}
+		SDocumentGraph retVal= null;
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH;
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature!= null)
+		{
+			Object obj= sFeature.getSValue();
+			if (obj instanceof SDocumentGraph)
+				retVal= (SDocumentGraph) obj;
 		}
-		return sDocumentGraph;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SDocumentGraph basicGetSDocumentGraph() {
-		return sDocumentGraph;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSDocumentGraph(SDocumentGraph newSDocumentGraph, NotificationChain msgs) {
-		SDocumentGraph oldSDocumentGraph = sDocumentGraph;
-		sDocumentGraph = newSDocumentGraph;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, oldSDocumentGraph, newSDocumentGraph);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+		return(retVal);
 	}
 
 	/**
@@ -177,10 +150,10 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * <!-- end-user-doc -->
 	 */
 	public void setSDocumentGraph(SDocumentGraph newSDocumentGraph) {
-		if (newSDocumentGraph != sDocumentGraph) {
+		if (newSDocumentGraph != this.getSDocumentGraph()) {
 			NotificationChain msgs = null;
-			if (sDocumentGraph != null)
-				msgs = ((InternalEObject)sDocumentGraph).eInverseRemove(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, SDocumentGraph.class, msgs);
+			if (this.getSDocumentGraph() != null)
+				msgs = ((InternalEObject)this.getSDocumentGraph()).eInverseRemove(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, SDocumentGraph.class, msgs);
 			if (newSDocumentGraph != null)
 				msgs = ((InternalEObject)newSDocumentGraph).eInverseAdd(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, SDocumentGraph.class, msgs);
 			msgs = basicSetSDocumentGraph(newSDocumentGraph, msgs);
@@ -193,8 +166,68 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			this.getSDocumentGraph().basicSetSElementId();
 		}
 	}
+	
+	/**
+	 * This method really sets the internal {@link SDocumentGraph} object to the given one. The two method
+	 * mechanism is necessary, for inverse methods like {@link #eInverseRemove(InternalEObject, int, NotificationChain)},
+	 * to not start a never ending notification process. It also removes the {@link SFeature} object
+	 * containing a {@link URI} to a referenced {@link SDocumentGraph} object (namely {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}).
+	 * @param newSDocumentGraph {@link SDocumentGraph} object to be set
+	 * @param msgs Messages
+	 */
+	public NotificationChain basicSetSDocumentGraph(SDocumentGraph newSDocumentGraph, NotificationChain msgs) {
+		SDocumentGraph oldSDocumentGraph = this.getSDocumentGraph();
+		
+		String name= SaltCommonPackage.eNS_PREFIX + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH; 
+		SFeature sFeature= this.getSFeature(name);
+		if (sFeature== null)
+		{//create a new sFeature
+			sFeature= SaltFactory.eINSTANCE.createSFeature();
+			sFeature.setSNS(SaltCommonPackage.eNS_PREFIX);
+			sFeature.setSName(SFEATURE_NAME.SDOCUMENT_GRAPH.toString());
+			this.addSFeature(sFeature);
+		}	
+		sFeature.setSValue(newSDocumentGraph);
+		this.removeLabel(SaltFactory.NAMESPACE_SALT, SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION.toString());
+		
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, oldSDocumentGraph, newSDocumentGraph);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
+				if (this.getSDocumentGraph() != null) {
+					msgs = ((InternalEObject)this.getSDocumentGraph()).eInverseRemove(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, SDocumentGraph.class, msgs);
+					this.getSDocumentGraph().basicSetSElementId();					
+				}
+				return basicSetSDocumentGraph((SDocumentGraph)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
+				return basicSetSDocumentGraph(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+// =========================================== end: relation to SDocumentGraph
+	
 	/**
 	 *{@inheritDoc SDocument#getSDocumentGraphLocation()}
 	 */
@@ -236,7 +269,10 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	@Override
 	public void saveSDocumentGraph(URI sDocumentGraphLocation) {
 		SaltFactory.eINSTANCE.saveSDocumentGraph(this.getSDocumentGraph(), sDocumentGraphLocation);
+		//remove sDocumentGrpah and double linking 
 		this.setSDocumentGraph(null);
+		//remove results removing of SDocumentGraphLocation, therefore set location again
+		this.setSDocumentGraphLocation(sDocumentGraphLocation);
 	}
 
 	/**
@@ -271,37 +307,6 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			this.getSDocumentGraph().basicSetSElementId();
 		}
 	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
-				if (sDocumentGraph != null) {
-					msgs = ((InternalEObject)sDocumentGraph).eInverseRemove(this, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, SDocumentGraph.class, msgs);
-					this.getSDocumentGraph().basicSetSElementId();					
-				}
-				return basicSetSDocumentGraph((SDocumentGraph)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
-				return basicSetSDocumentGraph(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -328,8 +333,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			case SCorpusStructurePackage.SDOCUMENT__SCORPUS_GRAPH:
 				return getSCorpusGraph();
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
-				if (resolve) return getSDocumentGraph();
-				return basicGetSDocumentGraph();
+				return getSDocumentGraph();
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH_LOCATION:
 				return getSDocumentGraphLocation();
 		}
@@ -389,11 +393,40 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			case SCorpusStructurePackage.SDOCUMENT__SCORPUS_GRAPH:
 				return getSCorpusGraph() != null;
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH:
-				return sDocumentGraph != null;
+				return getSDocumentGraph() != null;
 			case SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH_LOCATION:
 				return SDOCUMENT_GRAPH_LOCATION_EDEFAULT == null ? getSDocumentGraphLocation() != null : !SDOCUMENT_GRAPH_LOCATION_EDEFAULT.equals(getSDocumentGraphLocation());
 		}
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * Returns a String representation for this object. 
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuffer strBuffer= new StringBuffer();
+		strBuffer.append("["+this.getClass().getSimpleName());
+		strBuffer.append("("+ this.getId()+")");
+		if (this.getLabels()!= null)
+		{
+			strBuffer.append(": ");
+			for (Label label: this.getLabels())
+			{
+				if (	(!(label instanceof Identifier))&&
+						(!(SaltCommonPackage.eNS_PREFIX + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH).equals(label.getQName())))
+				{	
+					if (label.getNamespace()!= null)
+						strBuffer.append(label.getNamespace()+":");
+					strBuffer.append(label.getName()+"=");
+					strBuffer.append(label.getValue());
+					strBuffer.append(", ");
+				}
+			}
+		}
+		strBuffer.append("]");
+		return(strBuffer.toString());
+	}
+	
 } //SDocumentImpl
