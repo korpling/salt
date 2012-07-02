@@ -19,6 +19,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructur
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
@@ -46,14 +47,7 @@ import org.eclipse.emf.common.util.URI;
  */
 public interface SDocument extends SNode {
 	/**
-	 * Returns the value of the '<em><b>SCorpus Graph</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSDocuments <em>SDocuments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SCorpus Graph</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * Returns the {@link SCorpusGraph} in which this node is contained.
 	 * @return the value of the '<em>SCorpus Graph</em>' container reference.
 	 * @see #setSCorpusGraph(SCorpusGraph)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSDocument_SCorpusGraph()
@@ -74,14 +68,9 @@ public interface SDocument extends SNode {
 	void setSCorpusGraph(SCorpusGraph value);
 
 	/**
-	 * Returns the value of the '<em><b>SDocument Graph</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDocument <em>SDocument</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SDocument Graph</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * Returns the contained {@link SDocumentGraph} object reference. The returned {@link SDocumentGraph}
+	 * object is linked via a {@link SFeature} object having the namespace {@value SaltFactory#NAMESPACE_SALT} and
+	 * the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH}.
 	 * @return the value of the '<em>SDocument Graph</em>' reference.
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSDocument_SDocumentGraph()
@@ -92,9 +81,11 @@ public interface SDocument extends SNode {
 	SDocumentGraph getSDocumentGraph();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#getSDocumentGraph <em>SDocument Graph</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the contained {@link SDocumentGraph} object reference to the given object. Calling this method will
+	 * result in setting the internal location of a {@link SDocumentGraph} to null (means, the method 
+	 * {@link #getSDocumentGraphLocation()} will return null). The given {@link SDocumentGraph}
+	 * object is linked via a {@link SFeature} object having the namespace {@value SaltFactory#NAMESPACE_SALT} and
+	 * the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH}.
 	 * @param value the new value of the '<em>SDocument Graph</em>' reference.
 	 * @see #getSDocumentGraph()
 	 * @generated
@@ -104,8 +95,8 @@ public interface SDocument extends SNode {
 	/**
 	 * Returns the value of the '<em><b>SDocument Graph Location</b></em>' attribute.
 	 * Returns the location of the contained {@link SDocumentGraph} object, in case it is persisted.
-	 * The location is stored as {@link SFeature} object under the name 
-	 * {@value SaltFactory#NAMESPACE_SALT}:: {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
+	 * The location is stored via a {@link SFeature} object having the namespace 
+	 * {@value SaltFactory#NAMESPACE_SALT} and the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
 	 * @return location of persisted {@link SDocumentGraph} object as {@link URI}
 	 * @see #setSDocumentGraphLocation(URI)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSDocument_SDocumentGraphLocation()
@@ -116,8 +107,8 @@ public interface SDocument extends SNode {
 
 	/**
 	 * Sets the location as {@link URI}, of where the contained {@link SDocumentGraph} object is persisted.
-	 * The location is stored as {@link SFeature} object under the name 
-	 * {@value SaltFactory#NAMESPACE_SALT}:: {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
+	 * The location is stored as {@link SFeature} having the namespace
+	 * {@value SaltFactory#NAMESPACE_SALT} and the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
 	 * @param newSDocumentGraphLocation location as {@link URI} 
 	 * @see #getSDocumentGraphLocation()
 	 * @generated

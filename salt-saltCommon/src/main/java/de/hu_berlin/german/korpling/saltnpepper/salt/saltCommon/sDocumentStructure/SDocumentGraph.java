@@ -22,7 +22,10 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
@@ -67,14 +70,9 @@ public interface SDocumentGraph extends SGraph {
 	public static final String IDX_SRELATIONTYPE=	"idx_sRelationType";
 	
 	/**
-	 * Returns the value of the '<em><b>SDocument</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#getSDocumentGraph <em>SDocument Graph</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SDocument</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * Returns the {@link SDocument} object containing this graph object. The {@link SDocument}
+	 * object is linked via a {@link SFeature} object having the namespace {@value SaltFactory#NAMESPACE_SALT} and
+	 * the name {@value SFEATURE_NAME#SDOCUMENT}.
 	 * @return the value of the '<em>SDocument</em>' reference.
 	 * @see #setSDocument(SDocument)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SDocument()
@@ -85,9 +83,12 @@ public interface SDocumentGraph extends SGraph {
 	SDocument getSDocument();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDocument <em>SDocument</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the {@link SDocument} object as a container for this graph. The given {@link SDocument}
+	 * object is linked via a {@link SFeature} object having the namespace {@value SaltFactory#NAMESPACE_SALT} and
+	 * the name {@value SFEATURE_NAME#SDOCUMENT}.
+	 * @param value the new value of the '<em>SDocument Graph</em>' reference.
+	 * @see #getSDocumentGraph()
+	 * @generated
 	 * @param value the new value of the '<em>SDocument</em>' reference.
 	 * @see #getSDocument()
 	 * @generated

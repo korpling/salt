@@ -41,7 +41,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
 
 /**
  * Please note, that the flag @generated of the  methods {@link #eInverseAdd(InternalEObject, int, Class, NotificationChain)} and 
- * {@link #eInverseRemove(InternalEObject, int, NotificationChain)} have been removed. This was done to delegate the 
+ * {@link #eInverseRemove(InternalEObject, int, NotificationChain)} was removed. This was done to delegate the 
  * connection to the {@link SDocumentGraph} object via an {@link SFeature} and still using the notification mechanism provided by EMF. 
  * 
  * 
@@ -129,12 +129,11 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 
 // =========================================== start: relation to SDocumentGraph	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SDocument#getSDocumentGraph()}
 	 */
 	public SDocumentGraph getSDocumentGraph() {
 		SDocumentGraph retVal= null;
-		String name= SaltCommonPackage.eNS_PREFIX + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH;
+		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH;
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature!= null)
 		{
@@ -146,8 +145,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SDocument#setSDocumentGraph(SDocumentGraph)}
 	 */
 	public void setSDocumentGraph(SDocumentGraph newSDocumentGraph) {
 		if (newSDocumentGraph != this.getSDocumentGraph()) {
@@ -171,19 +169,19 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * This method really sets the internal {@link SDocumentGraph} object to the given one. The two method
 	 * mechanism is necessary, for inverse methods like {@link #eInverseRemove(InternalEObject, int, NotificationChain)},
 	 * to not start a never ending notification process. It also removes the {@link SFeature} object
-	 * containing a {@link URI} to a referenced {@link SDocumentGraph} object (namely {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}).
+	 * containing a {@link URI} to a referenced {@link SDocumentGraph} object (having the namespace {@value SaltFactory#NAMESPACE_SALT} and the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}).
 	 * @param newSDocumentGraph {@link SDocumentGraph} object to be set
 	 * @param msgs Messages
 	 */
 	public NotificationChain basicSetSDocumentGraph(SDocumentGraph newSDocumentGraph, NotificationChain msgs) {
 		SDocumentGraph oldSDocumentGraph = this.getSDocumentGraph();
 		
-		String name= SaltCommonPackage.eNS_PREFIX + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH; 
+		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH; 
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature== null)
 		{//create a new sFeature
 			sFeature= SaltFactory.eINSTANCE.createSFeature();
-			sFeature.setSNS(SaltCommonPackage.eNS_PREFIX);
+			sFeature.setSNS(SaltFactory.NAMESPACE_SALT);
 			sFeature.setSName(SFEATURE_NAME.SDOCUMENT_GRAPH.toString());
 			this.addSFeature(sFeature);
 		}	
@@ -198,8 +196,10 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Necessary for reference to {@link SDocumentGraph}. Generated and removed @generated flag, to also invoke 
+	 * the adding of the reference at the opposite object. This was done to delegate the connection to the 
+	 * {@link SDocumentGraph} object via an {@link SFeature} and still using the notification mechanism provided 
+	 * by EMF.   
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -215,8 +215,9 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Necessary for reference to {@link SDocumentGraph}. Generated and removed @generated flag, to also invoke 
+	 * the removing of the reference at the opposite object. This was done to delegate the connection to the 
+	 * {@link SDocumentGraph} object via an {@link SFeature} and still using the notification mechanism provided by EMF. 
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -415,7 +416,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			for (Label label: this.getLabels())
 			{
 				if (	(!(label instanceof Identifier))&&
-						(!(SaltCommonPackage.eNS_PREFIX + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH).equals(label.getQName())))
+						(!(SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH).equals(label.getQName())))
 				{	
 					if (label.getNamespace()!= null)
 						strBuffer.append(label.getNamespace()+":");

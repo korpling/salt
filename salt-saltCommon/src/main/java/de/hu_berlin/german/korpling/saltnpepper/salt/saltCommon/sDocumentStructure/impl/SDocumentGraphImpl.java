@@ -260,12 +260,11 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 // =========================================== start: relation to SDocument
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SDocumentGraph#getSDocument()}
 	 */
 	public SDocument getSDocument() {
 		SDocument retVal= null;
-		String name= SaltCommonPackage.eNS_PREFIX + "::" + SFEATURE_NAME.SDOCUMENT;
+		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT;
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature!= null)
 		{
@@ -277,8 +276,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SDocumentGraph#setSDocument(SDocument)}
 	 */
 	public void setSDocument(SDocument newSDocument) {
 		if (newSDocument != this.getSDocument()) {
@@ -306,12 +304,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public NotificationChain basicSetSDocument(SDocument newSDocument, NotificationChain msgs) {
 		SDocument oldSDocument = this.getSDocument();
 		
-		String name= SaltCommonPackage.eNS_PREFIX + "::" + SFEATURE_NAME.SDOCUMENT; 
+		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT; 
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature== null)
 		{//create a new sFeature
 			sFeature= SaltFactory.eINSTANCE.createSFeature();
-			sFeature.setSNS(SaltCommonPackage.eNS_PREFIX);
+			sFeature.setSNS(SaltFactory.NAMESPACE_SALT);
 			sFeature.setSName(SFEATURE_NAME.SDOCUMENT.toString());
 			this.addSFeature(sFeature);
 		}	
@@ -325,8 +323,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Necessary for reference to {@link SDocument}. Generated and removed @generated flag, to also invoke 
+	 * the adding of the reference at the opposite object. This was done to delegate the connection to the 
+	 * {@link SDocument} object via an {@link SFeature} and still using the notification mechanism provided 
+	 * by EMF.   
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -342,8 +342,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Necessary for reference to {@link SDocument}. Generated and removed @generated flag, to also invoke 
+	 * the removing of the reference at the opposite object. This was done to delegate the connection to the 
+	 * {@link SDocument} object via an {@link SFeature} and still using the notification mechanism provided by EMF. 
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
