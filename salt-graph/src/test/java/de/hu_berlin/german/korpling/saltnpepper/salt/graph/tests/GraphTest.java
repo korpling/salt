@@ -418,16 +418,16 @@ public class GraphTest extends IdentifiableElementTest {
 	public void testGettingNodes() throws Exception
 	{
 			
-			//Knoten in den Graphen einf�gen
-			this.insertNodes(nodes);
-			assertNotNull(nodes);
-			assertNotSame(0, nodes.size());
-			//Knoten aus dem Graph auslesen
-			for(Node node: nodes)
-			{
-				assertNotNull(this.getFixture().getNode(node.getId()));
-				assertEquals(node, this.getFixture().getNode(node.getId()));
-			}
+		//Knoten in den Graphen einf�gen
+		this.insertNodes(nodes);
+		assertNotNull(nodes);
+		assertNotSame(0, nodes.size());
+		//Knoten aus dem Graph auslesen
+		for(Node node: nodes)
+		{
+			assertNotNull(this.getFixture().getNode(node.getId()));
+			assertEquals(node, this.getFixture().getNode(node.getId()));
+		}
 	}
 	/**
 	 * Testet das Einf�gen von Knoten in den Graphen.
@@ -435,15 +435,15 @@ public class GraphTest extends IdentifiableElementTest {
 	 */
 	public void testGettingAllNodes() throws Exception
 	{
-			this.insertNodes(nodes);
-			Collection<Node> returnedNodes= this.getFixture().getNodes();
-			boolean hasAllNodes= true;
-			for (Node node: nodes)
-			{
-				if (!returnedNodes.contains(node))
-				 hasAllNodes= false;
-			}
-			assertTrue("not all nodes are returned back by getNodes()", hasAllNodes);
+		this.insertNodes(nodes);
+		Collection<Node> returnedNodes= this.getFixture().getNodes();
+		boolean hasAllNodes= true;
+		for (Node node: nodes)
+		{
+			if (!returnedNodes.contains(node))
+			 hasAllNodes= false;
+		}
+		assertTrue("not all nodes are returned back by getNodes()", hasAllNodes);
 	}
 	
 	/**
