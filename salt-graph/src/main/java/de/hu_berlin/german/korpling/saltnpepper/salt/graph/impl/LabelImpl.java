@@ -316,8 +316,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc Label#getQName()}
 	 */
 	public String getQName() 
 	{
@@ -342,8 +341,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc Label#setQName(String)}
 	 */
 	public void setQName(String newQName) 
 	{
