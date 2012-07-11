@@ -34,6 +34,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphInsertException;
 
 /**
  * <!-- begin-user-doc -->
@@ -112,9 +113,9 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 		if (exists)
 		{
 			if (this instanceof IdentifiableElement)	
-				throw new GraphException("Cannot add the given label '"+label+"' object to LabelableElement '"+((IdentifiableElement)this).getId()+"', because a label with this QName already exists: "+ label.getQName());
+				throw new GraphInsertException("Cannot add the given label '"+label+"' object to LabelableElement '"+((IdentifiableElement)this).getId()+"', because a label with this QName already exists: "+ label.getQName());
 			else
-				throw new GraphException("Cannot add the given label object, because a label with this QName already exists: "+ label.getQName());
+				throw new GraphInsertException("Cannot add the given label object, because a label with this QName already exists: "+ label.getQName());
 		}
 		this.getLabels().add(label);
 	}

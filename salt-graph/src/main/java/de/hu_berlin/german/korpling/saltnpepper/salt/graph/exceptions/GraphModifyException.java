@@ -18,14 +18,12 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions;
 
 /**
- * A {@link GraphInsertException} is thrown if an object can not be inserted or added to
- * another object. Such an exception can be thrown if an insert or into a list fails and 
- * even if a set of the object fails. 
+ * A {@link GraphModifyException} is thrown if an object cannot be modified.
  * 
  * @author Florian Zipser
  *
  */
-public class GraphInsertException extends GraphException
+public class GraphModifyException extends GraphException
 {
 
 	/**
@@ -33,12 +31,12 @@ public class GraphInsertException extends GraphException
 	 */
 	private static final long serialVersionUID = -4559500051239383871L;
 
-	public GraphInsertException()
+	public GraphModifyException()
 	{ super(); }
 	
-    public GraphInsertException(String s)
+    public GraphModifyException(String s)
     { super(s); }
     
-	public GraphInsertException(String s, Throwable ex)
+	public GraphModifyException(String s, Throwable ex)
 	{super(s, ex); }
 }
