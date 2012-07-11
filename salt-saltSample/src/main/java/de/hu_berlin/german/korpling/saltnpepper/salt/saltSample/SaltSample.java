@@ -47,12 +47,17 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotatio
 
 /**
  * This class shows the usage of the linguistic meta model Salt. 
- * Therefore we create a linguistic corpus with direct use of the Salt object model. We here show how to store this model to disk and
- * how to load a model from disk into main memory. 
+ * Therefore we create a linguistic corpus with direct use of the Salt object model. We here show how to store this model 
+ * to disk and how to load a model from disk into main memory. 
  * 
- * The method creatingSCorpusStructure() shows how to create a corpus structure.
- * The method creatingSDocumentStructure() shows how to create a document structure.
- * 
+ * The sample is divided into two main parts, the handling of the corpus-structure and the handling of the document-structure:
+ * <ol>
+ * <li>The method {@link #createCorpusStructure(SaltProject)}shows how to create a corpus structure.</li>
+ * <li>The method {@link #createSDocumentStructure(SDocument)} shows how to create a document structure.</li>
+ * <ol>
+ * Both of them are again divided into parts creating the different layers of an annotation graph. Please see the javadoc
+ * of the named methods to get more information. 
+ *  
  * @author Florian Zipser
  *
  */
