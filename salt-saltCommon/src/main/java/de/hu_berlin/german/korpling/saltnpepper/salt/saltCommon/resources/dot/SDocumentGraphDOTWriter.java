@@ -184,7 +184,6 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			anno= anno.replace("\n", "\\n");
 			anno= anno.replace("\r", "\\r");
 		}
-		System.out.println("-----> anno: "+ anno);
 		
 		
 		if ((retStr!= null) && (!retStr.isEmpty()))		
