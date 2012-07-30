@@ -193,17 +193,7 @@ public class SDocumentTest extends TestCase {
 		
 		SDocument sDocument= SaltFactory.eINSTANCE.createSDocument();
 		sDocument.loadSDocumentGraph(tmpUri);
-<<<<<<< .mine
 		assertEquals("differences: "+template.differences(sDocument.getSDocumentGraph()), template, sDocument.getSDocumentGraph());
-=======
-		this.getFixture().setSDocumentGraph(template);
-		
-		System.out.println("sDocument: "+sDocument.getSDocumentGraph().getSFeatures());
-		System.out.println("template : "+template.getSFeatures());
-		
-		assertEquals("differences: "+ template.differences(sDocument.getSDocumentGraph()), template, sDocument.getSDocumentGraph());
-		assertEquals("differences: "+ this.getFixture().differences(sDocument), this.getFixture(), sDocument);
->>>>>>> .r6878
 	}
 
 	/**
