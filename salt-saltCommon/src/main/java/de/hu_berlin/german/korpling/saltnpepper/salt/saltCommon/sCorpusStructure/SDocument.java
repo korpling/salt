@@ -95,8 +95,13 @@ public interface SDocument extends SNode {
 	/**
 	 * Returns the value of the '<em><b>SDocument Graph Location</b></em>' attribute.
 	 * Returns the location of the contained {@link SDocumentGraph} object, in case it is persisted.
+<<<<<<< .mine
+	 *  The location is stored via a {@link SFeature} object having the namespace 
+	 * {@value SaltFactory#NAMESPACE_SALT} and the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
+=======
 	 * The location is stored via a {@link SFeature} object having the namespace 
 	 * {@value SaltFactory#NAMESPACE_SALT} and the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
+>>>>>>> .r6878
 	 * @return location of persisted {@link SDocumentGraph} object as {@link URI}
 	 * @see #setSDocumentGraphLocation(URI)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSDocument_SDocumentGraphLocation()

@@ -129,7 +129,12 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 
 // =========================================== start: relation to SDocumentGraph	
 	/**
+<<<<<<< .mine
 	 * {@inheritDoc SDocument#getSDocumentGraph()}
+	 * @generated
+=======
+	 * {@inheritDoc SDocument#getSDocumentGraph()}
+>>>>>>> .r6878
 	 */
 	public SDocumentGraph getSDocumentGraph() {
 		SDocumentGraph retVal= null;
@@ -196,10 +201,14 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	}
 
 	/**
+<<<<<<< .mine
+	 * {@inheritDoc SDocument#setSDocumentGraph(SDocumentGraph)}
+=======
 	 * Necessary for reference to {@link SDocumentGraph}. Generated and removed @generated flag, to also invoke 
 	 * the adding of the reference at the opposite object. This was done to delegate the connection to the 
 	 * {@link SDocumentGraph} object via an {@link SFeature} and still using the notification mechanism provided 
 	 * by EMF.   
+>>>>>>> .r6878
 	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
