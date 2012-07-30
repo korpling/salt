@@ -364,7 +364,6 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		if (!(resource instanceof XMLResource))
 			throw new SaltResourceException("Cannot save salt project to given uri '"+saltProjectURI+"'.");
 		
-		
 		if (	(this.getSCorpusGraphs()!= null)&&
 				(this.getSCorpusGraphs().size()> 0))
 		{//store all documents if exist

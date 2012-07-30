@@ -462,7 +462,7 @@ public class SCorpusStructurePackageImpl extends EPackageImpl implements SCorpus
 
 		initEClass(sDocumentEClass, SDocument.class, "SDocument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSDocument_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SDocuments(), "sCorpusGraph", null, 0, 1, SDocument.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getSDocument_SDocumentGraph(), theSDocumentStructurePackage.getSDocumentGraph(), theSDocumentStructurePackage.getSDocumentGraph_SDocument(), "sDocumentGraph", null, 0, 1, SDocument.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSDocument_SDocumentGraph(), theSDocumentStructurePackage.getSDocumentGraph(), theSDocumentStructurePackage.getSDocumentGraph_SDocument(), "sDocumentGraph", null, 0, 1, SDocument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSDocument_SDocumentGraphLocation(), theSaltCorePackage.getURI(), "SDocumentGraphLocation", null, 0, 1, SDocument.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(sDocumentEClass, null, "saveSDocumentGraph", 0, 1, IS_UNIQUE, IS_ORDERED);

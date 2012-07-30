@@ -38,9 +38,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltElementNotContainedInGraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltEmptyParameterException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
@@ -69,15 +67,14 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
 
 /**
- * Please note, that the flag @generated of the  methods {@link #eInverseAdd(InternalEObject, int, Class, NotificationChain)} and 
- * {@link #eInverseRemove(InternalEObject, int, NotificationChain)} have been removed. This was done to delegate the 
- * connection to the {@link SDocument} object via an {@link SFeature} and still using the notification mechanism provided by EMF. 
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>SDocument Graph</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -101,6 +98,16 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
  * @generated
  */
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
+	/**
+	 * The cached value of the '{@link #getSDocument() <em>SDocument</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSDocument()
+	 * @generated
+	 * @ordered
+	 */
+	protected SDocument sDocument;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -138,7 +145,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	protected EClass eStaticClass() {
 		return SDocumentStructurePackage.Literals.SDOCUMENT_GRAPH;
 	}
-	
+
 // ============================ start: handling relations
 	/**
 	 * Calls the super method an puts the given relation into a relation type index.
@@ -255,130 +262,44 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		this.getIndexMgr().getIndex(IDX_SNODETYPE).addElement(slotId, node);
 	}
 // ============================ end: handling nodes
-	
-	
-// =========================================== start: relation to SDocument
-	
 	/**
 	 * {@inheritDoc SDocumentGraph#getSDocument()}
 	 */
 	public SDocument getSDocument() {
-		SDocument retVal= null;
-		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT;
-		SFeature sFeature= this.getSFeature(name);
-		if (sFeature!= null)
-		{
-			Object obj= sFeature.getSValue();
-			if (obj instanceof SDocument)
-				retVal= (SDocument) obj;
+		if (sDocument != null && sDocument.eIsProxy()) {
+			InternalEObject oldSDocument = (InternalEObject)sDocument;
+			sDocument = (SDocument)eResolveProxy(oldSDocument);
+			if (sDocument != oldSDocument) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, oldSDocument, sDocument));
+			}
 		}
-		return(retVal);
+		return sDocument;
 	}
 	
 	/**
-	 * {@inheritDoc SDocumentGraph#setSDocument(SDocument)}
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public void setSDocument(SDocument newSDocument) {
-		if (newSDocument != this.getSDocument()) {
-			NotificationChain msgs = null;
-			if (this.getSDocument() != null)
-				msgs = ((InternalEObject)this.getSDocument()).eInverseRemove(this, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, SDocument.class, msgs);
-			if (newSDocument != null)
-				msgs = ((InternalEObject)newSDocument).eInverseAdd(this, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, SDocument.class, msgs);
-			msgs = basicSetSDocument(newSDocument, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, newSDocument, newSDocument));
-
-		this.basicSetSElementId();
+	public SDocument basicGetSDocument() {
+		return sDocument;
 	}
-	
+
 	/**
-	 * This method really sets the internal {@link SDocument} object to the given one. The two method
-	 * mechanism is necessary, for inverse methods like {@link #eInverseRemove(InternalEObject, int, NotificationChain)},
-	 * to not start a never ending notification process.
-	 * @param newSDocument {@link SDocument} object to be set
-	 * @param msgs Messages
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	public NotificationChain basicSetSDocument(SDocument newSDocument, NotificationChain msgs) {
-		SDocument oldSDocument = this.getSDocument();
-		
-		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT; 
-		SFeature sFeature= this.getSFeature(name);
-		if (sFeature== null)
-		{//create a new sFeature
-			sFeature= SaltFactory.eINSTANCE.createSFeature();
-			sFeature.setSNS(SaltFactory.NAMESPACE_SALT);
-			sFeature.setSName(SFEATURE_NAME.SDOCUMENT.toString());
-			this.addSFeature(sFeature);
-		}	
-		sFeature.setSValue(newSDocument);
-		
+		SDocument oldSDocument = sDocument;
+		sDocument = newSDocument;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, oldSDocument, newSDocument);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
-	
-	/**
-	 * Necessary for reference to {@link SDocument}. Generated and removed @generated flag, to also invoke 
-	 * the adding of the reference at the opposite object. This was done to delegate the connection to the 
-	 * {@link SDocument} object via an {@link SFeature} and still using the notification mechanism provided 
-	 * by EMF.   
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT:
-				if (this.getSDocument() != null) {
-					msgs = ((InternalEObject)this.getSDocument()).eInverseRemove(this, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, SDocument.class, msgs);
-					this.basicSetSElementId();
-				}
-				return basicSetSDocument((SDocument)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * Necessary for reference to {@link SDocument}. Generated and removed @generated flag, to also invoke 
-	 * the removing of the reference at the opposite object. This was done to delegate the connection to the 
-	 * {@link SDocument} object via an {@link SFeature} and still using the notification mechanism provided by EMF. 
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT:
-				return basicSetSDocument(null, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_DSS:
-				return ((InternalEList<?>)getSTextualDSs()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_RELATIONS:
-				return ((InternalEList<?>)getSTextualRelations()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS:
-				return ((InternalEList<?>)getSTokens()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE_RELATIONS:
-				return ((InternalEList<?>)getSTimelineRelations()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANNING_RELATIONS:
-				return ((InternalEList<?>)getSSpanningRelations()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
-				return ((InternalEList<?>)getSSpans()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSTRUCTURES:
-				return ((InternalEList<?>)getSStructures()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS:
-				return ((InternalEList<?>)getSDominanceRelations()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
-				return ((InternalEList<?>)getSPointingRelations()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS:
-				return ((InternalEList<?>)getSAudioDSRelations()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES:
-				return ((InternalEList<?>)getSAudioDataSources()).basicRemove(otherEnd, msgs);
-			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SORDER_RELATIONS:
-				return ((InternalEList<?>)getSOrderRelations()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-// =========================================== end: relation to SDocument
 
 	/**
 	 * calls setSName and sets Id for SElementId of this. 
@@ -392,6 +313,27 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			this.getSElementId().setId(this.getSDocument().getSId() + "/" + this.getSName());
 		else this.getSElementId().setId("/" + this.getSName());
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	public void setSDocument(SDocument newSDocument) {
+		if (newSDocument != sDocument) {
+			NotificationChain msgs = null;
+			if (sDocument != null)
+				msgs = ((InternalEObject)sDocument).eInverseRemove(this, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, SDocument.class, msgs);
+			if (newSDocument != null)
+				msgs = ((InternalEObject)newSDocument).eInverseAdd(this, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, SDocument.class, msgs);
+			msgs = basicSetSDocument(newSDocument, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT, newSDocument, newSDocument));
+
+		this.basicSetSElementId();
+	}
+
 // ============================ start: handling specific nodes
 	
 	/**
@@ -1082,6 +1024,61 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	        super.finalize();
 	    }
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT:
+				if (sDocument != null) {
+					msgs = ((InternalEObject)sDocument).eInverseRemove(this, SCorpusStructurePackage.SDOCUMENT__SDOCUMENT_GRAPH, SDocument.class, msgs);
+					this.basicSetSElementId();
+				}
+				return basicSetSDocument((SDocument)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT:
+				return basicSetSDocument(null, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_DSS:
+				return ((InternalEList<?>)getSTextualDSs()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_RELATIONS:
+				return ((InternalEList<?>)getSTextualRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STOKENS:
+				return ((InternalEList<?>)getSTokens()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STIMELINE_RELATIONS:
+				return ((InternalEList<?>)getSTimelineRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANNING_RELATIONS:
+				return ((InternalEList<?>)getSSpanningRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSPANS:
+				return ((InternalEList<?>)getSSpans()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SSTRUCTURES:
+				return ((InternalEList<?>)getSStructures()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOMINANCE_RELATIONS:
+				return ((InternalEList<?>)getSDominanceRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SPOINTING_RELATIONS:
+				return ((InternalEList<?>)getSPointingRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DS_RELATIONS:
+				return ((InternalEList<?>)getSAudioDSRelations()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SAUDIO_DATA_SOURCES:
+				return ((InternalEList<?>)getSAudioDataSources()).basicRemove(otherEnd, msgs);
+			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SORDER_RELATIONS:
+				return ((InternalEList<?>)getSOrderRelations()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1092,7 +1089,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT:
-				return getSDocument();
+				if (resolve) return getSDocument();
+				return basicGetSDocument();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_DSS:
 				return getSTextualDSs();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_RELATIONS:
@@ -1254,7 +1252,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__SDOCUMENT:
-				return getSDocument() != null;
+				return sDocument != null;
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_DSS:
 				return !getSTextualDSs().isEmpty();
 			case SDocumentStructurePackage.SDOCUMENT_GRAPH__STEXTUAL_RELATIONS:
