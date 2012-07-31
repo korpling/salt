@@ -375,6 +375,8 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 		{//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 			if (currSNode instanceof SSequentialDS)
 			{//check if current start and end value is smaller or bigger, than reset
+				if (sRelation== null)
+					throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the given SSequentialRelation targeting node '"+currSNode.getSId()+"' is null.");
 				SSequentialRelation seqRel= (SSequentialRelation) sRelation;
 				try{
 					if (	(this.lastSeenDS.getSStart()== null)||
@@ -389,9 +391,9 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 					}
 				}catch (NullPointerException e) {
 					if (seqRel.getSStart()== null)
-						throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '"+seqRel+"' is not set.");
+						throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '"+seqRel+"' is not set.", e);
 					else if (seqRel.getSEnd()== null)
-						throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '"+seqRel+"' is not set.");
+						throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '"+seqRel+"' is not set.", e);
 					else throw e;
 				}
 			}//check if current start and end value is smaller or bigger, than reset
