@@ -323,7 +323,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 	/**
 	 * in case of traversion type is {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES}, stores the last seen data source
 	 */
-	private SDataSourceSequence lastSeenDS= null;
+	private SDataSourceSequence lastSeenDSSequence= null;
 	
 	@Override
 	public void nodeReached(	GRAPH_TRAVERSE_TYPE traversalType,
@@ -347,7 +347,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 					if (dsSequence.getSSequentialDS().equals(dataSource))
 					{
 						sequence=dsSequence;
-						this.lastSeenDS= dsSequence;
+						this.lastSeenDSSequence= dsSequence;
 						break;
 					}
 				}//search for correct sequence, containing the datasource if it was already found
@@ -355,13 +355,16 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 				{//sequence haven't been visit -> create it
 					sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 					sequence.setSSequentialDS(dataSource);
-					this.lastSeenDS= sequence;
+					this.lastSeenDSSequence= sequence;
 					this.sDataSourceSequences.add(sequence);
 				}//sequence haven't been visit -> create it
 			}
 		}//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void nodeLeft(	GRAPH_TRAVERSE_TYPE traversalType, 
 							String traversalId,
@@ -375,19 +378,27 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 		{//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 			if (currSNode instanceof SSequentialDS)
 			{//check if current start and end value is smaller or bigger, than reset
-				if (sRelation== null)
-					throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the given SSequentialRelation targeting node '"+currSNode.getSId()+"' is null.");
 				SSequentialRelation seqRel= (SSequentialRelation) sRelation;
 				try{
-					if (	(this.lastSeenDS.getSStart()== null)||
-							(seqRel.getSStart()< this.lastSeenDS.getSStart()))
+					if (	(sRelation== null)&&
+							(currSNode instanceof SSequentialDS))
 					{
-						this.lastSeenDS.setSStart(seqRel.getSStart());
+						this.lastSeenDSSequence.setSSequentialDS((SSequentialDS)currSNode);
+						this.lastSeenDSSequence.setSStart(((SSequentialDS)currSNode).getSStart());
+						this.lastSeenDSSequence.setSEnd(((SSequentialDS)currSNode).getSEnd());
 					}
-					if ( 	(this.lastSeenDS.getSEnd()== null)||
-							(seqRel.getSEnd()> this.lastSeenDS.getSEnd()))
+					else
 					{
-						this.lastSeenDS.setSEnd(seqRel.getSEnd());
+						if (	(this.lastSeenDSSequence.getSStart()== null)||
+								(seqRel.getSStart()< this.lastSeenDSSequence.getSStart()))
+						{//if start value wasn't set or is higher than current one
+							this.lastSeenDSSequence.setSStart(seqRel.getSStart());
+						}
+						if ( 	(this.lastSeenDSSequence.getSEnd()== null)||
+								(seqRel.getSEnd()> this.lastSeenDSSequence.getSEnd()))
+						{//if end value wasn't set or is higher than current one
+							this.lastSeenDSSequence.setSEnd(seqRel.getSEnd());
+						}
 					}
 				}catch (NullPointerException e) {
 					if (seqRel.getSStart()== null)

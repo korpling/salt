@@ -138,5 +138,47 @@ public class STextualDSTest extends SSequentialDSTest {
 	{
 		this.testGetSDocumentGraph();
 	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSStart() <em>SStart</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSStart()
+	 */
+	public void testGetSStart() {
+		String sampleText=null;
+		
+		assertNull(this.getFixture().getSStart());
+		assertNull(this.getFixture().getSEnd());
+		
+		this.getFixture().setSText(sampleText);
+		assertNull(this.getFixture().getSStart());
+		assertNull(this.getFixture().getSEnd());
+		
+		sampleText= "";
+		this.getFixture().setSText(sampleText);
+		assertEquals(Integer.valueOf(0), this.getFixture().getSStart());
+		assertEquals(Integer.valueOf(sampleText.length()), this.getFixture().getSEnd());
+		
+		sampleText= "This is a sample text.";
+		this.getFixture().setSText(sampleText);
+		assertEquals(Integer.valueOf(0), this.getFixture().getSStart());
+		assertEquals(Integer.valueOf(sampleText.length()), this.getFixture().getSEnd());
+		
+		sampleText= null;
+		this.getFixture().setSText(sampleText);
+		assertNull(this.getFixture().getSStart());
+		assertNull(this.getFixture().getSEnd());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSEnd() <em>SEnd</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSEnd()
+	 */
+	public void testGetSEnd() {
+		this.testGetSStart();
+	}
 
 } //STextualDSTest

@@ -28,6 +28,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSData <em>SData</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSStart <em>SStart</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSEnd <em>SEnd</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,5 +63,33 @@ public interface SSequentialDS extends SNode {
 	 * @generated
 	 */
 	void setSData(Object value);
+
+	/**
+	 * Returns the value of the '<em><b>SStart</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This value represents the  first position of where the data starts. In generel this value is 0. In case of the {@link SSequentialDS} is a {@link STextualDS}, this value determines the position where the text starts.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>SStart</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSequentialDS_SStart()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Integer getSStart();
+
+	/**
+	 * Returns the value of the '<em><b>SEnd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This value represents the  last position of where the data ends. In case of the {@link SSequentialDS} is a {@link STextualDS}, this value determines the position of the last character of the text.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>SEnd</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSequentialDS_SEnd()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Integer getSEnd();
 
 } // SSequentialDS

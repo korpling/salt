@@ -568,13 +568,31 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SSEQUENTIAL_DS__SDATA = SaltCorePackage.SNODE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>SStart</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_DS__SSTART = SaltCorePackage.SNODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>SEnd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSEQUENTIAL_DS__SEND = SaltCorePackage.SNODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>SSequential DS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SSEQUENTIAL_DS_FEATURE_COUNT = SaltCorePackage.SNODE_FEATURE_COUNT + 1;
+	int SSEQUENTIAL_DS_FEATURE_COUNT = SaltCorePackage.SNODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.STextualDSImpl <em>STextual DS</em>}' class.
@@ -729,6 +747,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STEXTUAL_DS__SDATA = SSEQUENTIAL_DS__SDATA;
+
+	/**
+	 * The feature id for the '<em><b>SStart</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_DS__SSTART = SSEQUENTIAL_DS__SSTART;
+
+	/**
+	 * The feature id for the '<em><b>SEnd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STEXTUAL_DS__SEND = SSEQUENTIAL_DS__SEND;
 
 	/**
 	 * The feature id for the '<em><b>SText</b></em>' attribute.
@@ -1689,6 +1725,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int STIMELINE__SDATA = SSEQUENTIAL_DS__SDATA;
+
+	/**
+	 * The feature id for the '<em><b>SStart</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE__SSTART = SSEQUENTIAL_DS__SSTART;
+
+	/**
+	 * The feature id for the '<em><b>SEnd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STIMELINE__SEND = SSEQUENTIAL_DS__SEND;
 
 	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' reference.
@@ -3567,6 +3621,24 @@ public interface SDocumentStructurePackage extends EPackage {
 	int SAUDIO_DATA_SOURCE__SDATA = SSEQUENTIAL_DS__SDATA;
 
 	/**
+	 * The feature id for the '<em><b>SStart</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SSTART = SSEQUENTIAL_DS__SSTART;
+
+	/**
+	 * The feature id for the '<em><b>SEnd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAUDIO_DATA_SOURCE__SEND = SSEQUENTIAL_DS__SEND;
+
+	/**
 	 * The feature id for the '<em><b>SDocument Graph</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4381,6 +4453,28 @@ public interface SDocumentStructurePackage extends EPackage {
 	EAttribute getSSequentialDS_SData();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSStart <em>SStart</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SStart</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSStart()
+	 * @see #getSSequentialDS()
+	 * @generated
+	 */
+	EAttribute getSSequentialDS_SStart();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSEnd <em>SEnd</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>SEnd</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSEnd()
+	 * @see #getSSequentialDS()
+	 * @generated
+	 */
+	EAttribute getSSequentialDS_SEnd();
+
+	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline <em>STimeline</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5102,6 +5196,22 @@ public interface SDocumentStructurePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SSEQUENTIAL_DS__SDATA = eINSTANCE.getSSequentialDS_SData();
+
+		/**
+		 * The meta object literal for the '<em><b>SStart</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SSEQUENTIAL_DS__SSTART = eINSTANCE.getSSequentialDS_SStart();
+
+		/**
+		 * The meta object literal for the '<em><b>SEnd</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SSEQUENTIAL_DS__SEND = eINSTANCE.getSSequentialDS_SEnd();
 
 		/**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.STimelineImpl <em>STimeline</em>}' class.

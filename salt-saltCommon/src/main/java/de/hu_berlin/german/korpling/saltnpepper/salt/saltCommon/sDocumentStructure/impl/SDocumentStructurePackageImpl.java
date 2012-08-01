@@ -549,6 +549,24 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSSequentialDS_SStart() {
+		return (EAttribute)sSequentialDSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSSequentialDS_SEnd() {
+		return (EAttribute)sSequentialDSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSTimeline() {
 		return sTimelineEClass;
 	}
@@ -993,6 +1011,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 
 		sSequentialDSEClass = createEClass(SSEQUENTIAL_DS);
 		createEAttribute(sSequentialDSEClass, SSEQUENTIAL_DS__SDATA);
+		createEAttribute(sSequentialDSEClass, SSEQUENTIAL_DS__SSTART);
+		createEAttribute(sSequentialDSEClass, SSEQUENTIAL_DS__SEND);
 
 		sTimelineEClass = createEClass(STIMELINE);
 		createEReference(sTimelineEClass, STIMELINE__SDOCUMENT_GRAPH);
@@ -1227,6 +1247,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 
 		initEClass(sSequentialDSEClass, SSequentialDS.class, "SSequentialDS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSSequentialDS_SData(), ecorePackage.getEJavaObject(), "sData", null, 0, 1, SSequentialDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSSequentialDS_SStart(), ecorePackage.getEIntegerObject(), "sStart", null, 0, 1, SSequentialDS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSSequentialDS_SEnd(), ecorePackage.getEIntegerObject(), "sEnd", null, 0, 1, SSequentialDS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(sTimelineEClass, STimeline.class, "STimeline", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSTimeline_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_STimeline(), "sDocumentGraph", null, 0, 1, STimeline.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

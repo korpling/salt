@@ -982,6 +982,25 @@ public class SDocumentGraphTest extends TestCase {
 	}
 
 	/**
+	 * Checks that when given a {@link STextualDS} as node, if the entire data source is returned. 
+	 */
+	public void testGetOverlappedDSSequences__STextualDS_EList() {
+		STextualDS sTextualDs= SaltFactory.eINSTANCE.createSTextualDS();
+		this.getFixture().addSNode(sTextualDs);
+		EList<STYPE_NAME> relations= new BasicEList<STYPE_NAME>();
+		relations.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);
+		SDataSourceSequence sequence= this.getFixture().getOverlappedDSSequences(sTextualDs, relations).get(0);
+		assertEquals(sTextualDs, sequence.getSSequentialDS());
+		
+		sTextualDs.setSText("This is a sample text.");
+		
+		sequence= this.getFixture().getOverlappedDSSequences(sTextualDs, relations).get(0);
+		assertEquals(sTextualDs, sequence.getSSequentialDS());
+		assertEquals(sTextualDs, sequence.getSSequentialDS());
+		assertEquals(Integer.valueOf(0), sequence.getSStart());
+		assertEquals(Integer.valueOf(sTextualDs.getSText().length()), sequence.getSEnd());
+	}
+	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedDSSequences(org.eclipse.emf.common.util.EList, org.eclipse.emf.common.util.EList) <em>Get Overlapped DS Sequences</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -396,6 +396,14 @@
             <element xmi:type="ecore:EAttribute" href="saltCommon.ecore#//sDocumentStructure/SSequentialDS/sData"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_WRrxoY19Ed6gH4-RkEY2gA"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_HJl6kdvLEeGByvY33d_4XQ" type="2001">
+            <element xmi:type="ecore:EAttribute" href="saltCommon.ecore#//sDocumentStructure/SSequentialDS/sStart"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_HJl6ktvLEeGByvY33d_4XQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_I458ENvLEeGByvY33d_4XQ" type="2001">
+            <element xmi:type="ecore:EAttribute" href="saltCommon.ecore#//sDocumentStructure/SSequentialDS/sEnd"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_I458EdvLEeGByvY33d_4XQ"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_-EUOso18Ed6gH4-RkEY2gA"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_-EUOs418Ed6gH4-RkEY2gA"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_-EUOtI18Ed6gH4-RkEY2gA"/>
@@ -407,7 +415,7 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_-EOIEY18Ed6gH4-RkEY2gA" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
         <element xmi:type="ecore:EClass" href="saltCommon.ecore#//sDocumentStructure/SSequentialDS"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-EOIEo18Ed6gH4-RkEY2gA" x="875" y="28" width="228" height="51"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-EOIEo18Ed6gH4-RkEY2gA" x="875" y="2" width="228" height="99"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_NTaUcKOJEd6JP8FwJOQ-DA" type="2003">
         <children xmi:type="notation:Node" xmi:id="_NTgbEKOJEd6JP8FwJOQ-DA" type="4002"/>

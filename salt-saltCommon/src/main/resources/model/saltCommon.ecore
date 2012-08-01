@@ -276,6 +276,18 @@
     <eClassifiers xsi:type="ecore:EClass" name="SSequentialDS" abstract="true" eSuperTypes="../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="sData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
           volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+          changeable="false" volatile="true" transient="true" derived="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This value represents the  first position of where the data starts. In general this value is 0. In case of the {@link SSequentialDS} is a {@link STextualDS}, this value determines the position where the text starts. This value is null if the value {@link #SData} is null."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+          changeable="false" volatile="true" transient="true" derived="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This value represents the  last position of where the data ends. In case of the {@link SSequentialDS} is a {@link STextualDS}, this value determines the position of the last character of the text. This value is null if the value {@link #SData} is null."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="STimeline" eSuperTypes="#//sDocumentStructure/SSequentialDS">
       <eOperations name="addSPointOfTime">
