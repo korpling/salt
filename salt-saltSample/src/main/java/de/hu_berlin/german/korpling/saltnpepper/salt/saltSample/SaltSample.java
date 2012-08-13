@@ -64,6 +64,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotatio
  * of the named methods to get more information. 
  *  
  * @author Florian Zipser
+ * @author Andreas Hildebrandt
+ * @author Mario Frank
  *
  */
 public class SaltSample 
