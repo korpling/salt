@@ -107,6 +107,16 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	protected Map<Object, EList<Object>>   invIdxTable;
 	protected Map<Object, HashSet<Object>> idxSet;
 	
+	protected Map<String, Object>          invIdxKeyManager;
+	
+	protected Map<String, Object> getInvIdxKeyManager() {
+		return invIdxKeyManager;
+	}
+
+	protected void setInvIdxKeyManager(Map<String, Object> invIdxKeyManager) {
+		this.invIdxKeyManager = invIdxKeyManager;
+	}
+	
 	protected Map<Object, HashSet<Object>> getIdxSet() {
 		return idxSet;
 	}
@@ -115,15 +125,13 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		this.idxSet = idxTableObjSet;
 	}
 
-	protected Map<Object, EList<Object>> getInvIdxTable() {
+	protected Map<Object, EList<Object>> dxTable() {
 		return invIdxTable;
 	}
 
 	protected void setInvIdxTable(HashMap<Object, EList<Object>> InvIdxTable) {
 		this.invIdxTable = InvIdxTable;
 	}
-	
-	
 
 	public Long getNumOfSlots() 
 	{
@@ -144,6 +152,7 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		//update index set, inverse index table and set new number of elements
 		this.setIdxSet(new Hashtable<Object, HashSet<Object>>());
 		this.setInvIdxTable(new HashMap<Object,EList<Object>>());
+		this.setInvIdxKeyManager(new HashMap<String, Object>());
 		
 		long elementCount= 0;
 
@@ -162,7 +171,7 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 					else {
 						slotSet.add(element);
 						EList<Object> idList = new BasicEList<Object>();
-						this.getInvIdxTable().put(element, idList);
+						invIdx_put(element, idList);
 						idList.add(id);
 					}
 				}
@@ -172,6 +181,75 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		this.setNumOfElements(elementCount);
 	}
 	
+	
+	//============================================================================================================
+	// invIdxKeyManager
+	//============================================================================================================	
+	
+	private boolean invIdx_containsKey(Object key)
+	{
+		String keyStr = key.toString();
+		
+		//object is known under this name; return true
+		if (dxTable().containsKey(keyStr))
+			return true;
+
+		//object is unknown; return false
+		if (!getInvIdxKeyManager().containsValue(key))
+			return false;
+		
+		//object is known under a different name; rename and return true
+		return invIdx_rename(key);
+	}
+
+	
+	private void invIdx_put(Object key, EList<Object> value)
+	{
+		String keyStr = key.toString();
+		getInvIdxKeyManager().put(keyStr, key);
+		dxTable().put(keyStr, value);
+	}
+	
+	private EList<Object> invIdx_get(Object key)
+	{
+		if (!invIdx_containsKey(key))
+			return null;
+		return dxTable().get(key.toString());
+	}
+	
+	private EList<Object> invIdx_remove(Object key)
+	{
+		if (!invIdx_containsKey(key))
+			return null;
+		EList<Object> retVal = invIdx_get(key);
+		getInvIdxKeyManager().remove(key.toString());
+		dxTable().remove(key.toString());
+		return retVal;
+	}
+	
+	
+	private boolean invIdx_rename(Object key)
+	{
+		String oldKeyStr = null;
+		for (String iteratorKeyStr : getInvIdxKeyManager().keySet())
+		{
+			Object obj = getInvIdxKeyManager().get(iteratorKeyStr);
+			if (obj.equals(key))
+			{
+				oldKeyStr = iteratorKeyStr;
+				break;
+			}
+		}
+
+		if (oldKeyStr==null)
+			return false;
+
+		EList<Object> value = dxTable().get(oldKeyStr);
+		dxTable().remove(oldKeyStr);
+		getInvIdxKeyManager().remove(oldKeyStr);
+		invIdx_put(key, value);
+		return true;
+	}
 	
 	
 	
@@ -215,13 +293,13 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		}
 		
 		//update inverse index table
-		if (!this.getInvIdxTable().containsKey(element)) {
+		if (!invIdx_containsKey(element)) {	
 			EList<Object> idList = new BasicEList<Object>();
-			this.getInvIdxTable().put(element, idList);
+			invIdx_put(element, idList);
 			idList.add(id);
 		}
 		else {
-			this.getInvIdxTable().get(element).add(id);
+			invIdx_get(element).add(id);
 		}
 		this.setNumOfElements(this.getNumOfElements()+1);
 	}
@@ -248,10 +326,10 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		long numOfElementsInSlot = this.getIdxTable().get(id).size();  
 		
 		for (Object element : this.getIdxTable().get(id)) {
-			EList<Object> idList = this.getInvIdxTable().get(element);
+			EList<Object> idList = invIdx_get(element);
 			idList.remove(id);
 			if (idList.isEmpty()) {
-				this.getInvIdxTable().remove(element);
+				invIdx_remove(element);
 			}
 		}
 		this.getIdxSet().remove(id);
@@ -273,7 +351,7 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 			throw new GraphException("Cannot search for the given entry, because an empty element was given.");
 		}
 
-		EList<Object> idList = this.getInvIdxTable().get(element);
+		EList<Object> idList = invIdx_get(element);
 		
 		if (idList==null) {
 			return false;
@@ -289,8 +367,8 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 				this.getIdxSet().remove(id);
 			}
 		}
-		this.setNumOfElements(this.getNumOfElements()-this.getInvIdxTable().get(element).size());
-		this.getInvIdxTable().remove(element);
+		this.setNumOfElements(this.getNumOfElements()- invIdx_get(element).size());		
+		invIdx_remove(element);
 		return true;
 	}
 
@@ -321,7 +399,7 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		if (element== null) {
 			throw new GraphException("Cannot search for the given element, because it is empty.");
 		}
-		return this.getInvIdxTable().containsKey(element);
+		return invIdx_containsKey(element);
 	}
 
 	/**
