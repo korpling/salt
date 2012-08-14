@@ -568,9 +568,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	public EList<SCorpus> getSRootCorpus() 
 	{
 		EList<SCorpus> retVal = new BasicEList<SCorpus>();
-		for (Node node : this.getSRoots())
-			if (node instanceof SCorpus)
-				retVal.add((SCorpus)node);
+		EList<SNode> sRoots = this.getSRoots(); 
+		if (sRoots!=null)
+			for (Node node : sRoots)
+				if (node instanceof SCorpus)
+					retVal.add((SCorpus)node);
 		return retVal;
 	}
 	/**
