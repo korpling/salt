@@ -22,6 +22,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -37,7 +38,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
@@ -47,13 +47,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
@@ -570,12 +565,14 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 * @model kind="operation"
 	 * @return a list of corpus objects being root corpora
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<SCorpus> getSRootCorpus() 
 	{
-		return( (EList<SCorpus>) (EList<? extends Node>)this.getSRoots());
+		EList<SCorpus> retVal = new BasicEList<SCorpus>();
+		for (Node node : this.getSRoots())
+			if (node instanceof SCorpus)
+				retVal.add((SCorpus)node);
+		return retVal;
 	}
-
 	/**
 	 * Loads the content of this object by reading the SaltXML file located by the given {@link URI}. 
 	 * The SaltXML file can either contain a {@link SaltProject}, than the first {@link SCorpusGraph} 
