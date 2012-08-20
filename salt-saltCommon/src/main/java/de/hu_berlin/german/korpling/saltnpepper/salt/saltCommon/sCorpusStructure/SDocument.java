@@ -129,7 +129,7 @@ public interface SDocument extends SNode {
 	 * location given by the passed {@link URI} object.
 	 * The {@link URI} is stored as {@link SFeature} by calling {@link #setSDocumentGraphLocation(URI)}. 
 	 * The containment relation of {@link SDocument} and given {@link SDocumentGraph} will be removed. 
-	 * @param sDocumentGraphLocation location of where to persist object as {@link URI}
+	 * @param sDocumentGraphLocation location of where to persist object as SaltXML file (must have the ending {@value SaltFactory#FILE_ENDING_SALT}) in {@link URI} syntax
 	 * @model sDocumentGraphLocationDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
 	 * @generated
 	 */

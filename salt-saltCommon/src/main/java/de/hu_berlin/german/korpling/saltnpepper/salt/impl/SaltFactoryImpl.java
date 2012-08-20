@@ -210,7 +210,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		Resource resource= SaltFactory.resourceSet.createResource(sDocumentGraphLocation);
 			
 		if (resource== null)
-			throw new SaltResourceException("Cannot save the "+SDocumentGraph.class.getName()+" object '"+sDocumentGraph.getSElementId()+"' to given uri '"+sDocumentGraphLocation+"'.");
+			throw new SaltResourceException("Cannot save the "+SDocumentGraph.class.getName()+" object '"+sDocumentGraph.getSElementId()+"' to given uri '"+sDocumentGraphLocation+"', because no resource was found.");
 		if (!(resource instanceof XMLResource))
 			throw new SaltResourceException("Cannot save the "+SDocumentGraph.class.getName()+" object '"+sDocumentGraph.getSElementId()+"' to given uri '"+sDocumentGraphLocation+"'.");
 		else
