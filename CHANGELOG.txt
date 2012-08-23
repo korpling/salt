@@ -12,6 +12,16 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 1.1.4
+=============
+	* = bug fixes
+	* + more javaDoc comments
+	
+  salt-saltCommon
+  ---------------
+  	* + added SOrderRelation to give an explicit precedence to tokens, spans or other structures
+  	* + added SAudioDS and SAudioRelation for using audio data as data sources
+	
 Version 1.1.3
 =============
 	* + new equals() and differences() method, to compare model objects like graphs, nodes, edges and so on on equality or differences

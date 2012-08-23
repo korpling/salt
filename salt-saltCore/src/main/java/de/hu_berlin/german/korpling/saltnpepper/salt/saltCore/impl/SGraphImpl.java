@@ -422,7 +422,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	{
 		TraverseHandlerWrapper wrapper= new TraverseHandlerWrapper();
 		wrapper.traverseHandler= traverseHandler;
-		super.traverse(((EList<Node>)(EList<? extends Node>)startSNodes), traverseType, traverseId, wrapper);
+		super.traverse(((EList<Node>)(EList<? extends Node>)startSNodes), traverseType, traverseId, wrapper, isCycleSafe);
 	}
 
 	/**

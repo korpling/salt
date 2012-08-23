@@ -1179,7 +1179,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	{
 		GraphTraverserModule traverserModule= new GraphTraverserModule();
 		traverserModule.setGraph(this);
-		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler);
+		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);
 	}
 
 	//====================== end: edge-handling
