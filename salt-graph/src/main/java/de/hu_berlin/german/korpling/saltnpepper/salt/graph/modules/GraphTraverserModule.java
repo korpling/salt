@@ -32,6 +32,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphTraverserException;
 
+
 /**
  * Handles the traversal of a graph.
  * @author Florian Zipser
@@ -158,10 +159,10 @@ public class GraphTraverserModule extends GraphModule
 				}//remove whole entry
 			}
 		}//clean up traverseIdTable
-		
+
 		if (traverser.getException()!= null)
 		{//ckecks if an error occurs while traversal and throws it
-			throw traverser.getException();
+			throw new GraphTraverserException("Traversal of graph produced an exception. ", traverser.getException());
 		}//ckecks if an error occurs while traversal and throws it
 	}
 	

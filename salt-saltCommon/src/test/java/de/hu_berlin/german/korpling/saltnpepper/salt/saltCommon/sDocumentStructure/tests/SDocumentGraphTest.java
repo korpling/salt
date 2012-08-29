@@ -25,13 +25,15 @@ import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltElementNotContainedInGraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentDataEnricher;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
@@ -63,6 +65,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSStructures() <em>SStructures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSDominanceRelations() <em>SDominance Relations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSPointingRelations() <em>SPointing Relations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations() <em>SAudio DS Relations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources() <em>SAudio Data Sources</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSOrderRelations() <em>SOrder Relations</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -178,7 +183,7 @@ public class SDocumentGraphTest extends TestCase {
 		EList<STextualDS> textDSs= new BasicEList<STextualDS>();
 		for (String id: ids)
 		{
-			STextualDS textDs= SaltCommonFactory.eINSTANCE.createSTextualDS();
+			STextualDS textDs= SaltFactory.eINSTANCE.createSTextualDS();
 			textDs.setSId(id);
 			this.getFixture().addSNode(textDs);
 			textDSs.add(textDs);
@@ -200,7 +205,7 @@ public class SDocumentGraphTest extends TestCase {
 		EList<STextualRelation> textRels= new BasicEList<STextualRelation>();
 		for (String id: ids)
 		{
-			STextualRelation textRel= SaltCommonFactory.eINSTANCE.createSTextualRelation();
+			STextualRelation textRel= SaltFactory.eINSTANCE.createSTextualRelation();
 			textRel.setSId(id);
 			this.getFixture().addSRelation(textRel);
 			textRels.add(textRel);
@@ -221,7 +226,7 @@ public class SDocumentGraphTest extends TestCase {
 		EList<SToken> toks= new BasicEList<SToken>();
 		for (String id: ids)
 		{
-			SToken tok= SaltCommonFactory.eINSTANCE.createSToken();
+			SToken tok= SaltFactory.eINSTANCE.createSToken();
 			tok.setSId(id);
 			this.getFixture().addSNode(tok);
 			toks.add(tok);
@@ -239,7 +244,7 @@ public class SDocumentGraphTest extends TestCase {
 	 */
 	public void testGetSTimeline() 
 	{
-		STimeline sTimeline= SaltCommonFactory.eINSTANCE.createSTimeline();
+		STimeline sTimeline= SaltFactory.eINSTANCE.createSTimeline();
 		EList<String> timeline= new BasicEList<String>();
 		timeline.add("1.0");
 		timeline.add("1.1");
@@ -287,7 +292,7 @@ public class SDocumentGraphTest extends TestCase {
 		EList<STimelineRelation> timeRels= new BasicEList<STimelineRelation>();
 		for (int i= 0; i< 10; i++)
 		{
-			STimelineRelation sTimeRel= SaltCommonFactory.eINSTANCE.createSTimelineRelation();
+			STimelineRelation sTimeRel= SaltFactory.eINSTANCE.createSTimelineRelation();
 			timeRels.add(sTimeRel);
 			this.getFixture().addSRelation(sTimeRel);
 		}	
@@ -306,7 +311,7 @@ public class SDocumentGraphTest extends TestCase {
 		EList<SSpanningRelation> spanRels= new BasicEList<SSpanningRelation>();
 		for (int i= 0; i< 10; i++)
 		{
-			SSpanningRelation sSpanRel= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+			SSpanningRelation sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
 			spanRels.add(sSpanRel);
 			this.getFixture().addSRelation(sSpanRel);
 		}	
@@ -326,7 +331,7 @@ public class SDocumentGraphTest extends TestCase {
 		EList<SSpan> spans= new BasicEList<SSpan>();
 		for (String name: names)
 		{
-			SSpan span= SaltCommonFactory.eINSTANCE.createSSpan();
+			SSpan span= SaltFactory.eINSTANCE.createSSpan();
 			span.setSName(name);
 			this.getFixture().addSNode(span);
 			spans.add(span);
@@ -348,7 +353,7 @@ public class SDocumentGraphTest extends TestCase {
 		EList<SStructure> structures= new BasicEList<SStructure>();
 		for (String name: names)
 		{
-			SStructure structure= SaltCommonFactory.eINSTANCE.createSStructure();
+			SStructure structure= SaltFactory.eINSTANCE.createSStructure();
 			structure.setSName(name);
 			this.getFixture().addSNode(structure);
 			structures.add(structure);
@@ -369,7 +374,7 @@ public class SDocumentGraphTest extends TestCase {
 		EList<SDominanceRelation> domRels= new BasicEList<SDominanceRelation>();
 		for (int i= 0; i< 10; i++)
 		{
-			SDominanceRelation sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			SDominanceRelation sDomRel= SaltFactory.eINSTANCE.createSDominanceRelation();
 			domRels.add(sDomRel);
 			this.getFixture().addSRelation(sDomRel);
 		}	
@@ -388,12 +393,62 @@ public class SDocumentGraphTest extends TestCase {
 		EList<SPointingRelation> pointingRels= new BasicEList<SPointingRelation>();
 		for (int i= 0; i< 10; i++)
 		{
-			SPointingRelation sDomRel= SaltCommonFactory.eINSTANCE.createSPointingRelation();
-			pointingRels.add(sDomRel);
-			this.getFixture().addSRelation(sDomRel);
+			SPointingRelation sPointRel= SaltFactory.eINSTANCE.createSPointingRelation();
+			pointingRels.add(sPointRel);
+			this.getFixture().addSRelation(sPointRel);
 		}	
 		assertTrue(pointingRels.containsAll(this.getFixture().getSPointingRelations()));
 		assertTrue(this.getFixture().getSPointingRelations().containsAll(pointingRels));
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations() <em>SAudio DS Relations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDSRelations()
+	 */
+	public void testGetSAudioDSRelations() 
+	{
+		EList<SAudioDSRelation> sAudioRels= new BasicEList<SAudioDSRelation>();
+		for (int i= 0; i< 10; i++)
+		{
+			SAudioDSRelation sAudioRel= SaltFactory.eINSTANCE.createSAudioDSRelation();
+			sAudioRels.add(sAudioRel);
+			this.getFixture().addSRelation(sAudioRel);
+		}	
+		assertTrue(sAudioRels.containsAll(this.getFixture().getSAudioDSRelations()));
+		assertTrue(this.getFixture().getSAudioDSRelations().containsAll(sAudioRels));
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources() <em>SAudio Data Sources</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSAudioDataSources()
+	 */
+	public void testGetSAudioDataSources() 
+	{
+		SAudioDataSource sAudioDS= SaltFactory.eINSTANCE.createSAudioDataSource();
+		this.getFixture().addSNode(sAudioDS);
+		assertTrue(this.getFixture().getSAudioDataSources().contains(sAudioDS));
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSOrderRelations() <em>SOrder Relations</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSOrderRelations()
+	 */
+	public void testGetSOrderRelations() {
+		EList<SOrderRelation> orderRels= new BasicEList<SOrderRelation>();
+		for (int i= 0; i< 10; i++)
+		{
+			SOrderRelation sOrderRel= SaltFactory.eINSTANCE.createSOrderRelation();
+			orderRels.add(sOrderRel);
+			this.getFixture().addSRelation(sOrderRel);
+		}	
+		assertTrue(orderRels.containsAll(this.getFixture().getSOrderRelations()));
+		assertTrue(this.getFixture().getSOrderRelations().containsAll(orderRels));
 	}
 
 	/**
@@ -406,8 +461,8 @@ public class SDocumentGraphTest extends TestCase {
 
 		// test for SPOINTING_RELATION
 		{
-			SToken source = SaltCommonFactory.eINSTANCE.createSToken();
-			SToken target = SaltCommonFactory.eINSTANCE.createSToken();
+			SToken source = SaltFactory.eINSTANCE.createSToken();
+			SToken target = SaltFactory.eINSTANCE.createSToken();
 			//calling addSNode now should throw an SaltElementNotContainedInGraphException
 			try { this.getFixture().addSNode(source, target, STYPE_NAME.SPOINTING_RELATION); fail(); } 
 			catch (SaltElementNotContainedInGraphException e) {}
@@ -418,8 +473,8 @@ public class SDocumentGraphTest extends TestCase {
 
 		// test for STEXTUAL_RELATION
 		{
-			SToken     source = SaltCommonFactory.eINSTANCE.createSToken();
-			STextualDS target = SaltCommonFactory.eINSTANCE.createSTextualDS();
+			SToken     source = SaltFactory.eINSTANCE.createSToken();
+			STextualDS target = SaltFactory.eINSTANCE.createSTextualDS();
 			//calling addSNode now should throw an SaltElementNotContainedInGraphException
 			try { this.getFixture().addSNode(source, target, STYPE_NAME.STEXTUAL_RELATION); fail(); } 
 			catch (SaltElementNotContainedInGraphException e) {}
@@ -430,8 +485,8 @@ public class SDocumentGraphTest extends TestCase {
 
 		// test for SDOMINANCE_RELATION
 		{
-			SStructure source = SaltCommonFactory.eINSTANCE.createSStructure();
-			SToken     target = SaltCommonFactory.eINSTANCE.createSToken();
+			SStructure source = SaltFactory.eINSTANCE.createSStructure();
+			SToken     target = SaltFactory.eINSTANCE.createSToken();
 			//calling addSNode now should throw an SaltElementNotContainedInGraphException
 			try { this.getFixture().addSNode(source, target, STYPE_NAME.SDOMINANCE_RELATION); fail(); } 
 			catch (SaltElementNotContainedInGraphException e) {}
@@ -442,8 +497,8 @@ public class SDocumentGraphTest extends TestCase {
 
 		// test for SSPANNING_RELATION
 		{
-			SSpan  source = SaltCommonFactory.eINSTANCE.createSSpan();
-			SToken target = SaltCommonFactory.eINSTANCE.createSToken();
+			SSpan  source = SaltFactory.eINSTANCE.createSSpan();
+			SToken target = SaltFactory.eINSTANCE.createSToken();
 			//calling addSNode now should throw an SaltElementNotContainedInGraphException
 			try { this.getFixture().addSNode(source, target, STYPE_NAME.SSPANNING_RELATION); fail(); } 
 			catch (SaltElementNotContainedInGraphException e) {}
@@ -674,7 +729,7 @@ public class SDocumentGraphTest extends TestCase {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTokensBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence)
 	 */
 	public void testGetSTokensBySequence__SDataSourceSequence() {
-		//TODO more to come a simple testis in SDataSourceAccessorTest
+		//TODO more to come a simple tests in SDataSourceAccessorTest
 	}
 
 	/**
@@ -710,15 +765,120 @@ public class SDocumentGraphTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSNodeBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence) <em>Get SNode By Sequence</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSNodeBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence)
+	 * Tests if tokens are correctly returned to corresponding {@link SDataSourceSequence} objects.
+	 * text1: tok2, tok6, tok1, tok4, tok5, tok3
+	 * text2: tok3, tok2, tok1
+	 * 
+	 * test11: covers tok1 of text 1
+	 * test12: covers tok2, tok3, tok4 of text 1
+	 * test13: covers all tokens of text 1
+	 * test14: covers all tokens of text 2
 	 */
 	public void testGetSNodeBySequence__SDataSourceSequence() {
-		//TODO more to come a simple testis in SDataSourceAccessorTest
+		String text1= "This is a sample text.";
+		String text2= "A sample text.";
+		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+		
+		//start: create sample graph
+			//start: sTokens for sText1
+				STextualDS sText1= this.getFixture().createSTextualDS(text1);
+				dsSequence.setSSequentialDS(sText1);
+	
+				SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
+				tok2.setSName("tok2");
+				
+				SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
+				tok6.setSName("tok6");
+				
+				SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
+				tok1.setSName("tok1");
+				
+				SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
+				tok4.setSName("tok4");
+				
+				SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
+				tok5.setSName("tok5");
+				
+				SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
+				tok3.setSName("tok3");
+			//end: sTokens for sText1
+			//start: sTokens for sText2
+				STextualDS sText2= this.getFixture().createSTextualDS(text2);
+				dsSequence.setSSequentialDS(sText2);
+	
+				SToken tok3_1= this.getFixture().createSToken(sText2, 9, 13);
+				tok3_1.setSName("tok3_1");
+				
+				SToken tok2_1= this.getFixture().createSToken(sText2, 2, 8);
+				tok2_1.setSName("tok2_1");
+				
+				SToken tok1_1= this.getFixture().createSToken(sText2, 0, 1);
+				tok1_1.setSName("tok1_1");
+			//end: sTokens for sText1	
+		//end: create sample graph
+		
+		SDataSourceSequence sequence= null;
+		EList<SNode> coveredSTokens= null;
+		
+		//start: test1 
+			sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+			sequence.setSSequentialDS(sText1);
+			sequence.setSStart(0);
+			sequence.setSEnd(4);
+			
+			coveredSTokens= this.getFixture().getSNodeBySequence(sequence);
+			assertNotNull(coveredSTokens);
+			assertEquals("covered tokens are: "+ coveredSTokens, 1, coveredSTokens.size());
+			assertTrue(coveredSTokens.contains(tok1));
+		//end: test 1
+			
+		//start: test2 
+			sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+			sequence.setSSequentialDS(sText1);
+			sequence.setSStart(5);
+			sequence.setSEnd(16);
+			
+			coveredSTokens= this.getFixture().getSNodeBySequence(sequence);
+			assertNotNull(coveredSTokens);
+			assertEquals(3, coveredSTokens.size());
+			assertTrue(coveredSTokens.contains(tok2));
+			assertTrue(coveredSTokens.contains(tok3));
+			assertTrue(coveredSTokens.contains(tok4));
+		//end: test 2
+			
+		//start: test3 
+			sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+			sequence.setSSequentialDS(sText1);
+			sequence.setSStart(0);
+			sequence.setSEnd(sText1.getSText().length());
+			
+			coveredSTokens= this.getFixture().getSNodeBySequence(sequence);
+			assertNotNull(coveredSTokens);
+			assertEquals(6, coveredSTokens.size());
+			assertTrue(coveredSTokens.contains(tok1));
+			assertTrue(coveredSTokens.contains(tok2));
+			assertTrue(coveredSTokens.contains(tok3));
+			assertTrue(coveredSTokens.contains(tok4));
+			assertTrue(coveredSTokens.contains(tok5));
+			assertTrue(coveredSTokens.contains(tok6));
+		//end: test 3
+		
+		//start: test3 
+			sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+			sequence.setSSequentialDS(sText2);
+			sequence.setSStart(0);
+			sequence.setSEnd(sText2.getSText().length());
+			
+			coveredSTokens= this.getFixture().getSNodeBySequence(sequence);
+			assertNotNull(coveredSTokens);
+			assertEquals(3, coveredSTokens.size());
+			assertTrue(coveredSTokens.contains(tok1_1));
+			assertTrue(coveredSTokens.contains(tok2_1));
+			assertTrue(coveredSTokens.contains(tok3_1));
+		//end: test 3
 	}
-
+	
+	
 	/**
 	 * Tests the following graph, and checks if the correct sequences are overlapped:
 	 * 		struct1			struct3
@@ -821,6 +981,25 @@ public class SDocumentGraphTest extends TestCase {
 		assertEquals((Integer)21, sequence.getSEnd());
 	}
 
+	/**
+	 * Checks that when given a {@link STextualDS} as node, if the entire data source is returned. 
+	 */
+	public void testGetOverlappedDSSequences__STextualDS_EList() {
+		STextualDS sTextualDs= SaltFactory.eINSTANCE.createSTextualDS();
+		this.getFixture().addSNode(sTextualDs);
+		EList<STYPE_NAME> relations= new BasicEList<STYPE_NAME>();
+		relations.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);
+		SDataSourceSequence sequence= this.getFixture().getOverlappedDSSequences(sTextualDs, relations).get(0);
+		assertEquals(sTextualDs, sequence.getSSequentialDS());
+		
+		sTextualDs.setSText("This is a sample text.");
+		
+		sequence= this.getFixture().getOverlappedDSSequences(sTextualDs, relations).get(0);
+		assertEquals(sTextualDs, sequence.getSSequentialDS());
+		assertEquals(sTextualDs, sequence.getSSequentialDS());
+		assertEquals(Integer.valueOf(0), sequence.getSStart());
+		assertEquals(Integer.valueOf(sTextualDs.getSText().length()), sequence.getSEnd());
+	}
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedDSSequences(org.eclipse.emf.common.util.EList, org.eclipse.emf.common.util.EList) <em>Get Overlapped DS Sequences</em>}' operation.
 	 * <!-- begin-user-doc -->
@@ -988,41 +1167,29 @@ public class SDocumentGraphTest extends TestCase {
 	 */
 	public void testSortSTokenByText() {
 		EList<SToken> sTokens= new BasicEList<SToken>();
-		String text= "This is a sample text.";
+		String text1= "This is a sample text.";
 		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 		
 		//start: create sample graph
-			STextualDS sText= this.getFixture().createSTextualDS(text);
-			dsSequence.setSSequentialDS(sText);
-
-			dsSequence.setSStart(5);
-			dsSequence.setSEnd(7);
-			SToken tok2= this.getFixture().createSToken(dsSequence);
+			STextualDS sText1= this.getFixture().createSTextualDS(text1);
+			dsSequence.setSSequentialDS(sText1);
+	
+			SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
 			tok2.setSName("tok2");
 			
-			dsSequence.setSStart(21);
-			dsSequence.setSEnd(22);
-			SToken tok6= this.getFixture().createSToken(dsSequence);
+			SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
 			tok6.setSName("tok6");
 			
-			dsSequence.setSStart(0);
-			dsSequence.setSEnd(4);
-			SToken tok1= this.getFixture().createSToken(dsSequence);
+			SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
 			tok1.setSName("tok1");
 			
-			dsSequence.setSStart(10);
-			dsSequence.setSEnd(16);
-			SToken tok4= this.getFixture().createSToken(dsSequence);
+			SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
 			tok4.setSName("tok4");
 			
-			dsSequence.setSStart(17);
-			dsSequence.setSEnd(21);
-			SToken tok5= this.getFixture().createSToken(dsSequence);
+			SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
 			tok5.setSName("tok5");
 			
-			dsSequence.setSStart(8);
-			dsSequence.setSEnd(9);
-			SToken tok3= this.getFixture().createSToken(dsSequence);
+			SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
 			tok3.setSName("tok3");
 		//end: create sample graph
 		sTokens.add(tok1);
@@ -1047,41 +1214,29 @@ public class SDocumentGraphTest extends TestCase {
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#sortSTokenByText(org.eclipse.emf.common.util.EList)
 	 */
 	public void testGetSortedSTokenByText__EList() {
-		String text= "This is a sample text.";
+		String text1= "This is a sample text.";
 		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 		
 		//start: create sample graph
-			STextualDS sText= this.getFixture().createSTextualDS(text);
-			dsSequence.setSSequentialDS(sText);
-
-			dsSequence.setSStart(5);
-			dsSequence.setSEnd(7);
-			SToken tok2= this.getFixture().createSToken(dsSequence);
+			STextualDS sText1= this.getFixture().createSTextualDS(text1);
+			dsSequence.setSSequentialDS(sText1);
+	
+			SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
 			tok2.setSName("tok2");
 			
-			dsSequence.setSStart(21);
-			dsSequence.setSEnd(22);
-			SToken tok6= this.getFixture().createSToken(dsSequence);
+			SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
 			tok6.setSName("tok6");
 			
-			dsSequence.setSStart(0);
-			dsSequence.setSEnd(4);
-			SToken tok1= this.getFixture().createSToken(dsSequence);
+			SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
 			tok1.setSName("tok1");
 			
-			dsSequence.setSStart(10);
-			dsSequence.setSEnd(16);
-			SToken tok4= this.getFixture().createSToken(dsSequence);
+			SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
 			tok4.setSName("tok4");
 			
-			dsSequence.setSStart(17);
-			dsSequence.setSEnd(21);
-			SToken tok5= this.getFixture().createSToken(dsSequence);
+			SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
 			tok5.setSName("tok5");
 			
-			dsSequence.setSStart(8);
-			dsSequence.setSEnd(9);
-			SToken tok3= this.getFixture().createSToken(dsSequence);
+			SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
 			tok3.setSName("tok3");
 		//end: create sample graph
 		
@@ -1105,41 +1260,29 @@ public class SDocumentGraphTest extends TestCase {
 	 */
 	public void testGetSortedSTokenByText() { 
 		EList<SToken> sTokens= new BasicEList<SToken>();
-		String text= "This is a sample text.";
+		String text1= "This is a sample text.";
 		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 		
 		//start: create sample graph
-			STextualDS sText= this.getFixture().createSTextualDS(text);
-			dsSequence.setSSequentialDS(sText);
-
-			dsSequence.setSStart(5);
-			dsSequence.setSEnd(7);
-			SToken tok2= this.getFixture().createSToken(dsSequence);
+			STextualDS sText1= this.getFixture().createSTextualDS(text1);
+			dsSequence.setSSequentialDS(sText1);
+	
+			SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
 			tok2.setSName("tok2");
 			
-			dsSequence.setSStart(21);
-			dsSequence.setSEnd(22);
-			SToken tok6= this.getFixture().createSToken(dsSequence);
+			SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
 			tok6.setSName("tok6");
 			
-			dsSequence.setSStart(0);
-			dsSequence.setSEnd(4);
-			SToken tok1= this.getFixture().createSToken(dsSequence);
+			SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
 			tok1.setSName("tok1");
 			
-			dsSequence.setSStart(10);
-			dsSequence.setSEnd(16);
-			SToken tok4= this.getFixture().createSToken(dsSequence);
+			SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
 			tok4.setSName("tok4");
 			
-			dsSequence.setSStart(17);
-			dsSequence.setSEnd(21);
-			SToken tok5= this.getFixture().createSToken(dsSequence);
+			SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
 			tok5.setSName("tok5");
 			
-			dsSequence.setSStart(8);
-			dsSequence.setSEnd(9);
-			SToken tok3= this.getFixture().createSToken(dsSequence);
+			SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
 			tok3.setSName("tok3");
 		//end: create sample graph
 		sTokens.add(tok1);
@@ -1148,6 +1291,77 @@ public class SDocumentGraphTest extends TestCase {
 		sTokens.add(tok4);
 		sTokens.add(tok5);
 		sTokens.add(tok6);
+		
+		
+		EList<SToken> sortedSTokens= this.getFixture().getSortedSTokenByText();
+		
+		assertNotNull(sortedSTokens);
+		assertEquals(sTokens.size(), sortedSTokens.size());
+		for (int i=0; i< 6; i++)
+		{
+			assertEquals(sTokens.get(i), sortedSTokens.get(i));
+		}
+	}
+	
+	/**
+	 * Tests the sorting of tokens covering different {@link STextualDS} objcts
+	 * text1: tok2, tok6, tok1, tok4, tok5, tok3
+	 * text2: tok3, tok2, tok1
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#sortSTokenByText()
+	 */
+	public void testGetSortedSTokenByText_2() { 
+		EList<SToken> sTokens= new BasicEList<SToken>();
+		String text1= "This is a sample text.";
+		String text2= "A sample text.";
+		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
+		
+		//start: create sample graph
+			//start: sTokens for sText1
+				STextualDS sText1= this.getFixture().createSTextualDS(text1);
+				dsSequence.setSSequentialDS(sText1);
+	
+				SToken tok2= this.getFixture().createSToken(sText1, 5, 7);
+				tok2.setSName("tok2");
+				
+				SToken tok6= this.getFixture().createSToken(sText1, 21, 22);
+				tok6.setSName("tok6");
+				
+				SToken tok1= this.getFixture().createSToken(sText1, 0, 4);
+				tok1.setSName("tok1");
+				
+				SToken tok4= this.getFixture().createSToken(sText1, 10, 16);
+				tok4.setSName("tok4");
+				
+				SToken tok5= this.getFixture().createSToken(sText1, 17, 21);
+				tok5.setSName("tok5");
+				
+				SToken tok3= this.getFixture().createSToken(sText1, 8, 9);
+				tok3.setSName("tok3");
+			//end: sTokens for sText1
+			//start: sTokens for sText2
+				STextualDS sText2= this.getFixture().createSTextualDS(text2);
+				dsSequence.setSSequentialDS(sText2);
+	
+				SToken tok3_1= this.getFixture().createSToken(sText2, 9, 13);
+				tok3_1.setSName("tok3_1");
+				
+				SToken tok2_1= this.getFixture().createSToken(sText2, 2, 8);
+				tok2_1.setSName("tok2_1");
+				
+				SToken tok1_1= this.getFixture().createSToken(sText2, 0, 1);
+				tok1_1.setSName("tok1_1");
+			//end: sTokens for sText1	
+		//end: create sample graph
+				
+		sTokens.add(tok1);
+		sTokens.add(tok2);
+		sTokens.add(tok3);
+		sTokens.add(tok4);
+		sTokens.add(tok5);
+		sTokens.add(tok6);
+		sTokens.add(tok1_1);
+		sTokens.add(tok2_1);
+		sTokens.add(tok3_1);
 		
 		
 		EList<SToken> sortedSTokens= this.getFixture().getSortedSTokenByText();
@@ -1361,50 +1575,50 @@ public class SDocumentGraphTest extends TestCase {
 		SStructure struct1= null;
 		SStructure struct2= null;
 		{//Token
-			tok1= SaltCommonFactory.eINSTANCE.createSToken();
+			tok1= SaltFactory.eINSTANCE.createSToken();
 			tok1.setSName("tok1");
 			this.getFixture().addSNode(tok1);
 			assertEquals(tok1, this.getFixture().getSNode(tok1.getSId()));
 			
-			tok2= SaltCommonFactory.eINSTANCE.createSToken();
+			tok2= SaltFactory.eINSTANCE.createSToken();
 			tok2.setSName("tok2");
 			this.getFixture().addSNode(tok2);
 			assertEquals(tok2, this.getFixture().getSNode(tok2.getSId()));
 			
-			tok3= SaltCommonFactory.eINSTANCE.createSToken();
+			tok3= SaltFactory.eINSTANCE.createSToken();
 			tok3.setSName("tok3");
 			this.getFixture().addSNode(tok3);
 			assertEquals(tok3, this.getFixture().getSNode(tok3.getSId()));
 			
-			tok4= SaltCommonFactory.eINSTANCE.createSToken();
+			tok4= SaltFactory.eINSTANCE.createSToken();
 			tok4.setSName("tok4");
 			this.getFixture().addSNode(tok4);
 			assertEquals(tok4, this.getFixture().getSNode(tok4.getSId()));
 			
-			tok5= SaltCommonFactory.eINSTANCE.createSToken();
+			tok5= SaltFactory.eINSTANCE.createSToken();
 			tok5.setSName("tok5");
 			this.getFixture().addSNode(tok5);
 			assertEquals(tok5, this.getFixture().getSNode(tok5.getSId()));
 		}//SToken
 		{//SSpan
-			span1= SaltCommonFactory.eINSTANCE.createSSpan();
+			span1= SaltFactory.eINSTANCE.createSSpan();
 			span1.setSName("span1");
 			this.getFixture().addSNode(span1);
 			assertEquals(span1, this.getFixture().getSNode(span1.getSId()));
 			
-			span2= SaltCommonFactory.eINSTANCE.createSSpan();
+			span2= SaltFactory.eINSTANCE.createSSpan();
 			span2.setSName("span2");
 			this.getFixture().addSNode(span2);
 			assertEquals(span2, this.getFixture().getSNode(span2.getSId()));
 		}//SSpan
 		
 		{//SStructure
-			struct1= SaltCommonFactory.eINSTANCE.createSStructure();
+			struct1= SaltFactory.eINSTANCE.createSStructure();
 			struct1.setSName("struct1");
 			this.getFixture().addSNode(struct1);
 			assertEquals(struct1, this.getFixture().getSNode(struct1.getSId()));
 			
-			struct2= SaltCommonFactory.eINSTANCE.createSStructure();
+			struct2= SaltFactory.eINSTANCE.createSStructure();
 			struct2.setSName("struct2");
 			this.getFixture().addSNode(struct2);
 			assertEquals(struct2, this.getFixture().getSNode(struct2.getSId()));
@@ -1412,25 +1626,25 @@ public class SDocumentGraphTest extends TestCase {
 		
 		{//SSpanningRelation
 			SSpanningRelation sSpanRel= null;
-			sSpanRel= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+			sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
 			sSpanRel.setSToken(tok1);
 			sSpanRel.setSSpan(span1);
 			this.getFixture().addSRelation(sSpanRel);
 			assertEquals(sSpanRel, this.getFixture().getSRelation(sSpanRel.getSId()));
 			
-			sSpanRel= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+			sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
 			sSpanRel.setSToken(tok2);
 			sSpanRel.setSSpan(span1);
 			this.getFixture().addSRelation(sSpanRel);
 			assertEquals(sSpanRel, this.getFixture().getSRelation(sSpanRel.getSId()));
 			
-			sSpanRel= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+			sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
 			sSpanRel.setSToken(tok2);
 			sSpanRel.setSSpan(span2);
 			this.getFixture().addSRelation(sSpanRel);
 			assertEquals(sSpanRel, this.getFixture().getSRelation(sSpanRel.getSId()));
 			
-			sSpanRel= SaltCommonFactory.eINSTANCE.createSSpanningRelation();
+			sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
 			sSpanRel.setSToken(tok4);
 			sSpanRel.setSSpan(span2);
 			this.getFixture().addSRelation(sSpanRel);
@@ -1439,31 +1653,31 @@ public class SDocumentGraphTest extends TestCase {
 		
 		{//SDominanceRelation
 			SDominanceRelation sDomRel= null;
-			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel= SaltFactory.eINSTANCE.createSDominanceRelation();
 			sDomRel.setSStructure(struct1);
 			sDomRel.setSStructuredTarget(tok1);
 			this.getFixture().addSRelation(sDomRel);
 			assertEquals(sDomRel, this.getFixture().getSRelation(sDomRel.getSId()));
 			
-			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel= SaltFactory.eINSTANCE.createSDominanceRelation();
 			sDomRel.setSStructure(struct1);
 			sDomRel.setSStructuredTarget(span1);
 			this.getFixture().addSRelation(sDomRel);
 			assertEquals(sDomRel, this.getFixture().getSRelation(sDomRel.getSId()));
 			
-			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel= SaltFactory.eINSTANCE.createSDominanceRelation();
 			sDomRel.setSStructure(struct2);
 			sDomRel.setSStructuredTarget(struct1);
 			this.getFixture().addSRelation(sDomRel);
 			assertEquals(sDomRel, this.getFixture().getSRelation(sDomRel.getSId()));
 			
-			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel= SaltFactory.eINSTANCE.createSDominanceRelation();
 			sDomRel.setSStructure(struct2);
 			sDomRel.setSStructuredTarget(span1);
 			this.getFixture().addSRelation(sDomRel);
 			assertEquals(sDomRel, this.getFixture().getSRelation(sDomRel.getSId()));
 			
-			sDomRel= SaltCommonFactory.eINSTANCE.createSDominanceRelation();
+			sDomRel= SaltFactory.eINSTANCE.createSDominanceRelation();
 			sDomRel.setSStructure(struct2);
 			sDomRel.setSStructuredTarget(span2);
 			this.getFixture().addSRelation(sDomRel);
@@ -1472,19 +1686,19 @@ public class SDocumentGraphTest extends TestCase {
 		
 		{//SPointingRelation
 			SPointingRelation sPRel= null;
-			sPRel= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			sPRel= SaltFactory.eINSTANCE.createSPointingRelation();
 			sPRel.setSStructuredSource(tok1);
 			sPRel.setSStructuredTarget(tok2);
 			this.getFixture().addSRelation(sPRel);
 			assertEquals(sPRel, this.getFixture().getSRelation(sPRel.getSId()));
 			
-			sPRel= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			sPRel= SaltFactory.eINSTANCE.createSPointingRelation();
 			sPRel.setSStructuredSource(tok3);
 			sPRel.setSStructuredTarget(tok4);
 			this.getFixture().addSRelation(sPRel);
 			assertEquals(sPRel, this.getFixture().getSRelation(sPRel.getSId()));
 			
-			sPRel= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			sPRel= SaltFactory.eINSTANCE.createSPointingRelation();
 			sPRel.setSStructuredSource(tok4);
 			sPRel.setSStructuredTarget(tok2);
 			this.getFixture().addSRelation(sPRel);
@@ -1528,23 +1742,23 @@ public class SDocumentGraphTest extends TestCase {
 	 */
 	public void testGetRootsBySRelationSType__STYPE_NAME() {
 		//checking for SPointingRelation
-			SNode node1= SaltCommonFactory.eINSTANCE.createSToken();
+			SNode node1= SaltFactory.eINSTANCE.createSToken();
 			this.getFixture().addSNode(node1);
-			SNode node2= SaltCommonFactory.eINSTANCE.createSToken();
+			SNode node2= SaltFactory.eINSTANCE.createSToken();
 			this.getFixture().addSNode(node2);
-			SNode node3= SaltCommonFactory.eINSTANCE.createSToken();
+			SNode node3= SaltFactory.eINSTANCE.createSToken();
 			this.getFixture().addSNode(node3);
 			
 			String type1= "type1";
 			String type2= "type2";
 			
-			SPointingRelation rel1= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			SPointingRelation rel1= SaltFactory.eINSTANCE.createSPointingRelation();
 			rel1.addSType(type1);
 			rel1.setSSource(node1);
 			rel1.setSTarget(node2);
 			this.getFixture().addSRelation(rel1);
 			
-			SPointingRelation rel2= SaltCommonFactory.eINSTANCE.createSPointingRelation();
+			SPointingRelation rel2= SaltFactory.eINSTANCE.createSPointingRelation();
 			rel2.addSType(type2);
 			rel2.setSSource(node2);
 			rel2.setSTarget(node1);

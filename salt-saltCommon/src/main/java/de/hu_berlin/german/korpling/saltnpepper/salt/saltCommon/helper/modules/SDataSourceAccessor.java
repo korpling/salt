@@ -25,7 +25,9 @@ import org.eclipse.emf.common.util.EList;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltInvalidModelException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS;
@@ -127,7 +129,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 	}
 	
 	/**
-	 * Searches for all {@link SNode} objects of the given node type, which overlap the given sequence.  
+	 * Searches for all {@link SNode} objects of the given node type, which cover the given sequence.  
 	 * @param sDataSourceSequence sequence, which is overlapped
 	 * @param nodeClasses type of nodes to be returned
 	 * @return nodes, which overlaps the given sequence
@@ -148,12 +150,15 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 		if (sDataSourceSequence.getSSequentialDS() instanceof STextualDS)
 			sSeqRels= this.getSDocumentGraph().getSTextualRelations();
 		else if (sDataSourceSequence.getSSequentialDS() instanceof STimeline)
-			this.getSDocumentGraph().getSTimelineRelations();
+			sSeqRels=this.getSDocumentGraph().getSTimelineRelations();
+		else 
+			throw new SaltModuleException("Cannot compute overlaped nodes, because the given dataSource is not supported by this method.");
 		for (SSequentialRelation sSeqRel: sSeqRels)
-		{//walk through all time-relations
-			if (	(sSeqRel.getSStart() >= sDataSourceSequence.getSStart()) &&
+		{//walk through all sequential relations
+			if (	(sDataSourceSequence.getSSequentialDS().equals(sSeqRel.getSTarget()))&&
+					(sSeqRel.getSStart() >= sDataSourceSequence.getSStart()) &&
 					(sSeqRel.getSEnd() <= sDataSourceSequence.getSEnd()))
-			{//timeRel is in the interval
+			{//sequential relation is in the interval
 				for (Class<? extends SNode> nodeClass: nodeClasses)
 				{
 					if (nodes== null)
@@ -163,8 +168,8 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 						nodes.add(sSeqRel.getSSource());
 					}
 				}
-			}
-		}
+			}//sequential relation is in the interval
+		}//walk through all sequential relations
 		return(nodes);
 	}
 	
@@ -270,7 +275,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 				SDataSourceSequence sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 				sequence.setSSequentialDS(sTextualDS);
 				sequence.setSStart(0);
-				sequence.setSEnd(sTextualDS.getSText().length());
+				sequence.setSEnd((sTextualDS.getSText()!= null)?sTextualDS.getSText().length():0);
 				EList<SToken> sTokens= this.getSTokensBySequence(sequence);
 				if (sTokens!= null)
 					retVal.addAll(this.getSortedSTokenByText(sTokens));
@@ -318,7 +323,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 	/**
 	 * in case of traversion type is {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES}, stores the last seen data source
 	 */
-	private SDataSourceSequence lastSeenDS= null;
+	private SDataSourceSequence lastSeenDSSequence= null;
 	
 	@Override
 	public void nodeReached(	GRAPH_TRAVERSE_TYPE traversalType,
@@ -342,7 +347,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 					if (dsSequence.getSSequentialDS().equals(dataSource))
 					{
 						sequence=dsSequence;
-						this.lastSeenDS= dsSequence;
+						this.lastSeenDSSequence= dsSequence;
 						break;
 					}
 				}//search for correct sequence, containing the datasource if it was already found
@@ -350,13 +355,16 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 				{//sequence haven't been visit -> create it
 					sequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
 					sequence.setSSequentialDS(dataSource);
-					this.lastSeenDS= sequence;
+					this.lastSeenDSSequence= sequence;
 					this.sDataSourceSequences.add(sequence);
 				}//sequence haven't been visit -> create it
 			}
 		}//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public void nodeLeft(	GRAPH_TRAVERSE_TYPE traversalType, 
 							String traversalId,
@@ -372,21 +380,31 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 			{//check if current start and end value is smaller or bigger, than reset
 				SSequentialRelation seqRel= (SSequentialRelation) sRelation;
 				try{
-					if (	(this.lastSeenDS.getSStart()== null)||
-							(seqRel.getSStart()< this.lastSeenDS.getSStart()))
+					if (	(sRelation== null)&&
+							(currSNode instanceof SSequentialDS))
 					{
-						this.lastSeenDS.setSStart(seqRel.getSStart());
+						this.lastSeenDSSequence.setSSequentialDS((SSequentialDS)currSNode);
+						this.lastSeenDSSequence.setSStart(((SSequentialDS)currSNode).getSStart());
+						this.lastSeenDSSequence.setSEnd(((SSequentialDS)currSNode).getSEnd());
 					}
-					if ( 	(this.lastSeenDS.getSEnd()== null)||
-							(seqRel.getSEnd()> this.lastSeenDS.getSEnd()))
+					else
 					{
-						this.lastSeenDS.setSEnd(seqRel.getSEnd());
+						if (	(this.lastSeenDSSequence.getSStart()== null)||
+								(seqRel.getSStart()< this.lastSeenDSSequence.getSStart()))
+						{//if start value wasn't set or is higher than current one
+							this.lastSeenDSSequence.setSStart(seqRel.getSStart());
+						}
+						if ( 	(this.lastSeenDSSequence.getSEnd()== null)||
+								(seqRel.getSEnd()> this.lastSeenDSSequence.getSEnd()))
+						{//if end value wasn't set or is higher than current one
+							this.lastSeenDSSequence.setSEnd(seqRel.getSEnd());
+						}
 					}
 				}catch (NullPointerException e) {
 					if (seqRel.getSStart()== null)
-						throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '"+seqRel+"' is not set.");
+						throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '"+seqRel+"' is not set.", e);
 					else if (seqRel.getSEnd()== null)
-						throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '"+seqRel+"' is not set.");
+						throw new SaltModuleException("Cannot return overlapped SDataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '"+seqRel+"' is not set.", e);
 					else throw e;
 				}
 			}//check if current start and end value is smaller or bigger, than reset

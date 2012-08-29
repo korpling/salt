@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.xml.sax.SAXException;
 
@@ -30,6 +32,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
@@ -41,19 +44,28 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
 
 
 /**
  * This class shows the usage of the linguistic meta model Salt. 
- * Therefore we create a linguistic corpus with direct use of the Salt object model. We here show how to store this model to disk and
- * how to load a model from disk into main memory. 
+ * Therefore we create a linguistic corpus with direct use of the Salt object model. We here demonstrate how to store this model 
+ * to disk and how to load a model from disk into main memory. After that we demonstrate how to access model
+ * elements in a Salt model. 
  * 
- * The method creatingSCorpusStructure() shows how to create a corpus structure.
- * The method creatingSDocumentStructure() shows how to create a document structure.
- * 
+ * The sample is divided into two main parts, the handling of the corpus-structure and the handling of the document-structure:
+ * <ol>
+ * <li>The method {@link #createCorpusStructure(SaltProject)}shows how to create a corpus structure.</li>
+ * <li>The method {@link #createSDocumentStructure(SDocument)} shows how to create a document structure.</li>
+ * <ol>
+ * Both of them are again divided into parts creating the different layers of an annotation graph. Please see the javadoc
+ * of the named methods to get more information. 
+ *  
  * @author Florian Zipser
+ * @author Andreas Hildebrandt
+ * @author Mario Frank
  *
  */
 public class SaltSample 
@@ -530,6 +542,75 @@ public class SaltSample
 	}
 	
 	/**
+	 * Retrieves some information about a Salt model and returns them as a String. These information
+	 * are formated for printing.
+	 * @param saltProject
+	 * @return
+	 */
+	public static String retrieveInformation(SaltProject saltProject)
+	{
+		StringBuffer retStr= new StringBuffer();
+		//print all corpora
+		retStr.append("all corpora: "+ saltProject.getSCorpusGraphs().get(0).getSCorpora()+"\n");
+		//print all documents
+		retStr.append("all documents: "+ saltProject.getSCorpusGraphs().get(0).getSDocuments()+"\n");
+		//for all documents print some properties
+		for (SDocument sDocument: saltProject.getSCorpusGraphs().get(0).getSDocuments())
+		{
+			retStr.append("============ "+ sDocument.getSName()+ " ============\n");
+			retStr.append("root nodes\t: "+ sDocument.getSDocumentGraph().getSRoots()+"\n");
+			
+			{//print some information for tokens
+				for (SToken sToken: sDocument.getSDocumentGraph().getSTokens())
+				{
+					retStr.append("\ttoken-id\t\t: "+ sToken.getSId()+"\n");
+					retStr.append("\ttoken-name\t\t: "+ sToken.getSName()+"\n");
+					//only search for sequences by traversing relations inheriting text
+					EList<STYPE_NAME> interestingRelations= new BasicEList<STYPE_NAME>();
+					interestingRelations.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);
+					//first SDataSource, because in this example, we use only one SDataSource 
+					SDataSourceSequence sequence= sDocument.getSDocumentGraph().getOverlappedDSSequences(sToken, interestingRelations).get(0);
+					retStr.append("\toverlapping text\t: "+ ((STextualDS)sequence.getSSequentialDS()).getSText().substring(sequence.getSStart(), sequence.getSEnd())+"\n");
+				}
+			}//print some information for tokens
+			
+			retStr.append("----------------------------------------\n");
+			
+			{//print some information for spans
+				for (SSpan sSpan: sDocument.getSDocumentGraph().getSSpans())
+				{
+					retStr.append("\tspan-id\t\t\t: "+ sSpan.getSId()+"\n");
+					retStr.append("\tspan-name\t\t: "+ sSpan.getSName()+"\n");
+					//only search for sequences by traversing relations inheriting text
+					EList<STYPE_NAME> interestingRelations= new BasicEList<STYPE_NAME>();
+					interestingRelations.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);
+					//first SDataSource, because in this example, we use only one SDataSource 
+					SDataSourceSequence sequence= sDocument.getSDocumentGraph().getOverlappedDSSequences(sSpan, interestingRelations).get(0);
+					retStr.append("\toverlapping text\t: "+ ((STextualDS)sequence.getSSequentialDS()).getSText().substring(sequence.getSStart(), sequence.getSEnd())+"\n");
+				}
+			}//print some information for spans
+			
+			retStr.append("----------------------------------------\n");
+			
+			{//print some information for structs
+				for (SStructure sStruct: sDocument.getSDocumentGraph().getSStructures())
+				{
+					retStr.append("\tstructure-id\t\t: "+ sStruct.getSId()+"\n");
+					retStr.append("\tstructure-name\t\t: "+ sStruct.getSName()+"\n");
+					//only search for sequences by traversing relations inheriting text
+					EList<STYPE_NAME> interestingRelations= new BasicEList<STYPE_NAME>();
+					interestingRelations.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);
+					//first SDataSource, because in this example, we use only one SDataSource 
+					SDataSourceSequence sequence= sDocument.getSDocumentGraph().getOverlappedDSSequences(sStruct, interestingRelations).get(0);
+					retStr.append("\toverlapping text\t: "+ ((STextualDS)sequence.getSSequentialDS()).getSText().substring(sequence.getSStart(), sequence.getSEnd())+"\n");
+				}
+			}//print some information for structs
+			retStr.append("================================================\n");
+		}
+		return(retStr.toString());
+	}
+	
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args)
@@ -580,6 +661,10 @@ public class SaltSample
 				saltProject.saveSaltProject_DOT(uri);
 				System.out.println("OK");
 			}//store salt project in DOT format
+			
+			{//accessing a Salt model
+				System.out.println(retrieveInformation(saltProject));
+			}//accessing a Salt model	
 			
 			System.out.println();
 		}

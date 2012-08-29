@@ -129,6 +129,10 @@ public class SCorpusStructureAdapterFactory extends AdapterFactoryImpl {
 				return createGraphAdapter();
 			}
 			@Override
+			public Adapter caseSFeaturableElement(SFeaturableElement object) {
+				return createSFeaturableElementAdapter();
+			}
+			@Override
 			public Adapter caseSNamedElement(SNamedElement object) {
 				return createSNamedElementAdapter();
 			}
@@ -143,10 +147,6 @@ public class SCorpusStructureAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSProcessingAnnotatableElement(SProcessingAnnotatableElement object) {
 				return createSProcessingAnnotatableElementAdapter();
-			}
-			@Override
-			public Adapter caseSFeaturableElement(SFeaturableElement object) {
-				return createSFeaturableElementAdapter();
 			}
 			@Override
 			public Adapter caseSMetaAnnotatableElement(SMetaAnnotatableElement object) {

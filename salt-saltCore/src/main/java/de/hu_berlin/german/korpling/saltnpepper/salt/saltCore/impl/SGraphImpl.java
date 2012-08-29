@@ -422,7 +422,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	{
 		TraverseHandlerWrapper wrapper= new TraverseHandlerWrapper();
 		wrapper.traverseHandler= traverseHandler;
-		super.traverse(((EList<Node>)(EList<? extends Node>)startSNodes), traverseType, traverseId, wrapper);
+		super.traverse(((EList<Node>)(EList<? extends Node>)startSNodes), traverseType, traverseId, wrapper, isCycleSafe);
 	}
 
 	/**
@@ -430,15 +430,24 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 */
 	public EList<SLayer> getSLayerByName(String layerName) 
 	{
+		if (	(layerName== null)||
+				(layerName.isEmpty()))
+			return(null);
+		
 		EList<SLayer> result = new BasicEList<SLayer>();
 		if(layerName != null)
 		{
 			for(SLayer l : getSLayers())
 			{
-				if(layerName.equals(l.getSName()))
+				if (	(l.getSName()== null)||
+						(l.getSName().isEmpty()))
 				{
-					result.add(l);
+					break;
 				}
+					if(layerName.equals(l.getSName()))
+					{
+						result.add(l);
+					}
 			}
 		}
 		return result;
@@ -477,40 +486,67 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 * Delegatee for SIdentifiableElement
 	 */
 	private SIdentifiableElementAccessor sIdentAccessor= null;
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
 	 */
+	@Override
+	public void setId(String newSId) 
+	{
+		this.sIdentAccessor.setSId(this, newSId);
+	}
+	
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSId(SIdentifiableElement)}
+	 */
+	@Override
 	public String getSId() 
 	{
 		return(this.sIdentAccessor.getSId(this));
 	}
 
+	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
 	 */
+	@Override
 	public void setSId(String newSId) 
 	{
 		this.sIdentAccessor.setSId(this, newSId);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSElementPath(SIdentifiableElement)}
 	 */
+	@Override
 	public URI getSElementPath() 
 	{
 		return(this.sIdentAccessor.getSElementPath(this));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementPath(SIdentifiableElement, URI)}
 	 */
+	@Override
 	public void setSElementPath(URI newSElementPath) 
 	{
 		this.sIdentAccessor.setSElementPath(this, newSElementPath);
+	}
+	
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSElementId(SIdentifiableElement)}
+	 */
+	public SElementId basicGetSElementId() 
+	{
+		return(sIdentAccessor.getSElementId(this));
+	}
+
+	/**
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
+	 */
+	public void setSElementId(SElementId newSElementId) 
+	{
+		sIdentAccessor.setSElementId(this, newSElementId);
 	}
 	
 	/**
@@ -522,7 +558,7 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		SElementId sElementId = basicGetSElementId();
 		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
 	}
-//=================== end: handling SIdentifiableElement	
+//=================== end: handling SIdentifiableElement
 //=================== start: handling SAnnotatableElement	
 	/**
 	 * Delegatee for SAnnotatableElement
@@ -620,30 +656,13 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 		return this.createSMetaAnnotation(sNS, sName, sValueString, SDATATYPE.STEXT);
 	}
 
-	//=================== end: handling SMetaAnnotatableElement
+//=================== end: handling SMetaAnnotatableElement
 //=================== start: handling SProcessingAnnotatableElement
 	/**
 	 * Delegatee for SProcessingAnnotatableElement
 	 */
 	private SProcessingAnnotatableElementAccessor sProcAnnoAccessor= null;
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public SElementId basicGetSElementId() 
-	{
-		return(sIdentAccessor.getSElementId(this));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSElementId(SElementId newSElementId) 
-	{
-		sIdentAccessor.setSElementId(this, newSElementId);
-	}
 	
 	/**
 	 * <!-- begin-user-doc -->

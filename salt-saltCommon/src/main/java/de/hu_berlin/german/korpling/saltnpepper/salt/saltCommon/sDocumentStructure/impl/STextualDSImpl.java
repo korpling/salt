@@ -111,6 +111,26 @@ public class STextualDSImpl extends SSequentialDSImpl implements STextualDS {
 	}
 
 	/**
+	 * {@inheritDoc SSequentialDS#getSStart()}. Always returns null.
+	 */
+	public Integer getSStart() {
+		if (this.getSText()!= null)
+			return(0);
+		else return(null);
+	}
+
+	/**
+	 * {@inheritDoc SSequentialDS#getSEnd()}. This method throws an exception, and has to be overridden by 
+	 * 
+	 */
+	public Integer getSEnd() {
+		String sText= this.getSText(); 
+		if (sText!= null)
+			return(sText.length());
+		else return(null);
+	}
+	
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

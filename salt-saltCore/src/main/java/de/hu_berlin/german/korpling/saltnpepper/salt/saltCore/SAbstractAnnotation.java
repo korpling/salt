@@ -50,8 +50,7 @@ public interface SAbstractAnnotation extends Label {
 	 * Returns the value of the '<em><b>SNS</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SNS</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * Returns the namespace of this annotation. This method is derived from {@link Label#getNamespace()}.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>SNS</em>' attribute.
@@ -65,6 +64,7 @@ public interface SAbstractAnnotation extends Label {
 	/**
 	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSNS <em>SNS</em>}' attribute.
 	 * <!-- begin-user-doc -->
+	 * Sets the namespace of this annotation. This method is derived from {@link Label#setNamespace(String)}.
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>SNS</em>' attribute.
 	 * @see #getSNS()

@@ -235,7 +235,7 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 			else if (this.getId().hashCode()!= other.getId().hashCode())
 			{
 				if (differences!= null)
-					differences.add("The hascode of the id of both objects isn't the same.");
+					differences.add("The hashcode of the id of both objects isn't the same.");
 				else return false;
 			}
 		//end: check id

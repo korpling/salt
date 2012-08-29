@@ -22,8 +22,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
@@ -39,18 +38,9 @@ import org.xml.sax.SAXException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,21 +49,28 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotatio
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject(org.eclipse.emf.common.util.URI) <em>Save Salt Project</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI) <em>Load Salt Project</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_GrAF(org.eclipse.emf.common.util.URI, java.util.Properties) <em>Load Salt Project Gr AF</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#differences(java.lang.Object) <em>Differences</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusGraph_GrAF(org.eclipse.emf.common.util.URI, java.util.Properties) <em>Load SCorpus Graph Gr AF</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSDocumentGraph_GrAF(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument, java.util.Properties) <em>Load SDocument Graph Gr AF</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSCorpusGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SCorpus Graph DOT</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject(org.eclipse.emf.common.util.URI) <em>Save Salt Project</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject_DOT(org.eclipse.emf.common.util.URI) <em>Save Salt Project DOT</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSDocumentGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SDocument Graph DOT</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load SCorpus Structure</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#getSDocumentGraphLocations() <em>Get SDocument Graph Locations</em>}</li>
  * </ul>
  * </p>
  * @generated
  */
 public class SaltProjectTest extends TestCase {
 
+	
+	public static final String FILE_RESOURCE_DIR= "./src/test/resources/SaltProjectTest/";
+	public static final String FILE_TMP_DIR= "./_TMP/";
+	
+	
 	/**
 	 * The fixture for this Salt Project test case.
 	 * <!-- begin-user-doc -->
@@ -145,48 +142,180 @@ public class SaltProjectTest extends TestCase {
 
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject(org.eclipse.emf.common.util.URI) <em>Save Salt Project</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Checks storing and loading of a {@link SaltProject}.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject(org.eclipse.emf.common.util.URI)
 	 */
-	public void testSaveSaltProject__URI() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-//		fail();
+	public void testSaveSaltProject__URI() 
+	{
+		SCorpusGraph template_sCorpusGraph= SampleGenerator.createCorpusStructure();
+		this.getFixture().getSCorpusGraphs().add(template_sCorpusGraph);
+		for (SDocument sDoc: template_sCorpusGraph.getSDocuments())
+		{
+			SampleGenerator.createSDocumentStructure(sDoc);
+		}
+		
+		File tmpDir = new File(FILE_TMP_DIR+this.getClass().getName());
+		URI tmpURI= URI.createFileURI(tmpDir.getAbsolutePath());
+		this.getFixture().saveSaltProject(tmpURI);
+		for (SDocument sDoc: template_sCorpusGraph.getSDocuments())
+		{
+			sDoc.loadSDocumentGraph();
+		}
+		
+		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
+		saltProject.loadSaltProject(tmpURI);
+		assertEquals(this.getFixture(), saltProject);
 	}
+	
 
+		/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_SCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load Salt Project SCorpus Structure</em>}' operation.
+	 * Implementation is found in {@link #testLoadSaltProject_SCorpusStructure__URI_simple()} and
+	 * {@link #testLoadSaltProject_SCorpusStructure__URI_complex()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_SCorpusStructure(org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoadSaltProject_SCorpusStructure__URI()
+	{
+	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#getSDocumentGraphLocations() <em>Get SDocument Graph Locations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#getSDocumentGraphLocations()
+	 */
+	public void testGetSDocumentGraphLocations() {
+		//nothing to do, see testLoadSCorpusStructure__URI()
+	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load SCorpus Structure</em>}' operation.
+	 * Only tests, if the created map is correct. Further tests can be found in {@link #testLoadSaltProject_SCorpusStructure__URI_simple()} and
+	 * {@link #testLoadSaltProject_SCorpusStructure__URI_complex()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusStructure(org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoadSCorpusStructure__URI() 
+	{
+		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case5/");
+		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
+		this.getFixture().loadSCorpusStructure(saltProjectURI);
+		Map<SElementId, URI> sDocumentMap= this.getFixture().getSDocumentGraphLocations();
+		
+		assertNotNull(this.getFixture().getSCorpusGraphs());
+		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0));
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments());
+		assertEquals(4, this.getFixture().getSCorpusGraphs().get(0).getSDocuments().size());
+		
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0));
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(1));
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(2));
+		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(3));
+		
+		SDocument sDoc1= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0);
+		SDocument sDoc2= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(1);
+		SDocument sDoc3= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(2);
+		SDocument sDoc4= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(3);
+		
+		File sDoc1File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc1."+SaltFactory.FILE_ENDING_SALT);
+		File sDoc2File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc2."+SaltFactory.FILE_ENDING_SALT);
+		File sDoc3File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc3."+SaltFactory.FILE_ENDING_SALT);
+		File sDoc4File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc4."+SaltFactory.FILE_ENDING_SALT);
+				
+		assertNotNull(sDocumentMap.get(sDoc1.getSElementId()));
+		assertNotNull(sDocumentMap.get(sDoc2.getSElementId()));
+		assertNotNull(sDocumentMap.get(sDoc3.getSElementId()));
+		assertNotNull(sDocumentMap.get(sDoc4.getSElementId()));
+		
+		assertEquals(sDoc1File, new File(sDocumentMap.get(sDoc1.getSElementId()).toFileString()));
+		assertEquals(sDoc2File, new File(sDocumentMap.get(sDoc2.getSElementId()).toFileString()));
+		assertEquals(sDoc3File, new File(sDocumentMap.get(sDoc3.getSElementId()).toFileString()));
+		assertEquals(sDoc4File, new File(sDocumentMap.get(sDoc4.getSElementId()).toFileString()));
+	}
+	
+	/**
+	 * Tests the loading of the corpus structure as created by {@link SampleGenerator#createSimpleCorpusStructure(SaltProject)}.
+	 */
+	public void testLoadSaltProject_SCorpusStructure__URI_simple() 
+	{
+		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case8/");
+		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
+		this.getFixture().loadSCorpusStructure(saltProjectURI);
+		assertNotNull(this.getFixture().getSCorpusGraphs());
+		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
+		SCorpusGraph sCorpusGraph= this.getFixture().getSCorpusGraphs().get(0);
+	
+		SCorpusGraph template_sCorpusGraph= SampleGenerator.createCorpusStructure_simple();
+		assertEquals("differences:\n"+template_sCorpusGraph.differences(sCorpusGraph), template_sCorpusGraph, sCorpusGraph);
+	}
+	
+	/**
+	 * Tests the loading of the corpus structure as created by {@link SampleGenerator#createCorpusStructure(SaltProject)}.
+	 */
+	public void testLoadSaltProject_SCorpusStructure__URI_complex() 
+	{
+		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case9/");
+		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
+		this.getFixture().loadSCorpusStructure(saltProjectURI);
+		assertNotNull(this.getFixture().getSCorpusGraphs());
+		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
+		SCorpusGraph sCorpusGraph= this.getFixture().getSCorpusGraphs().get(0);
+		
+		SCorpusGraph template_sCorpusGraph= SampleGenerator.createCorpusStructure();
+		assertEquals("differences:\n"+template_sCorpusGraph.differences(sCorpusGraph), template_sCorpusGraph, sCorpusGraph);
+	}
+	
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI) <em>Load Salt Project</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI)
 	 */
-	public void testLoadSaltProject__URI() {
-		// TODO: implement this operation test method
-		// Ensure that you remove @generated or mark it @generated NOT
-//		fail();
+	public void testLoadSaltProject__URI() 
+	{
+		URI saltProjectURI= URI.createFileURI(FILE_RESOURCE_DIR+ "case5/");
+		this.getFixture().loadSaltProject(saltProjectURI);
+		assertNotNull(this.getFixture().getSCorpusGraphs());
+		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
+		
+		SaltProject template_saltProject= SampleGenerator.createCompleteSaltproject();
+		
+		assertEquals("differences:\n"+template_saltProject.differences(this.getFixture()), template_saltProject, this.getFixture());
 	}
-
-	String resourceDir= "./src/test/resources/SaltProjectTest/";
-	String tmpDir= "./_TMP/";
-	
-	
 	
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject(org.eclipse.emf.common.util.URI) <em>Save Salt Project</em>}' operation.
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI) <em>Load Salt Project</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @throws SAXException 
-	 * @throws IOException 
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSaltProject(org.eclipse.emf.common.util.URI)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI)
 	 */
-	//TODO fixme
-//	public void testSaveSaltProject__URI() throws IOException, SAXException 
-//	{
-//		this.testSaveSaltProject_CorpusGraph();
-//		this.testSaveSaltProject_DocumentGraph();
-//	}
+	public void testLoadSaltProject__URI_simple() 
+	{
+		URI saltProjectURI= URI.createFileURI(FILE_RESOURCE_DIR+ "case7/");
+		this.getFixture().loadSaltProject(saltProjectURI);
+		assertNotNull(this.getFixture().getSCorpusGraphs());
+		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
+		
+		//Creating a new salt project, this is the main object and contains all the others. 
+		SaltProject template_saltProject= SaltFactory.eINSTANCE.createSaltProject();
 	
+		{//creating a corpus structure for salt project
+			template_saltProject.getSCorpusGraphs().add(SampleGenerator.createCorpusStructure_simple());
+		}//creating a corpus structure for salt project
+	
+		{//filling all of the documents in the corpus structure with document structure data
+			//this works, because after createCorpusStructure() was called, only one graph exists in salt project
+			SCorpusGraph sCorpusGraph= template_saltProject.getSCorpusGraphs().get(0);
+			for (SDocument sDocument: sCorpusGraph.getSDocuments())
+			{//filling all of the documents in the corpus structure with document structure data	
+				SampleGenerator.createSDocumentStructure(sDocument);
+			}//filling all of the documents in the corpus structure with document structure data
+		}//filling all of the documents in the corpus structure with document structure data
+		
+		
+		assertEquals("differences:\n"+template_saltProject.differences(this.getFixture()), template_saltProject, this.getFixture());
+	}
+		
 	/**
 	 * Tests following structure:
 	 * 
@@ -200,77 +329,16 @@ public class SaltProjectTest extends TestCase {
 	 */
 	public void testSaveSaltProject_CorpusGraph() throws IOException, SAXException 
 	{
-		String saltProjectPathResource= resourceDir+"case1/";
-		String saltProjectPathTMP= tmpDir+ "case1/";
+		String saltProjectPathResource= FILE_RESOURCE_DIR+"case1/";
+		String saltProjectPathTMP= FILE_TMP_DIR+ "case1/";
 		
-		this.createCorpusStructure(this.getFixture());
+		SampleGenerator.createCorpusStructure(this.getFixture());
 		
 		this.getFixture().saveSaltProject(URI.createFileURI(new File(saltProjectPathTMP).getAbsolutePath()));
 		
 		//compare directories via XMLUnit
 		this.compareDirectories(new File(saltProjectPathTMP), new File(saltProjectPathResource));
 	}
-	
-	
-	/**
-	 * This method creates the content of a document (the primary text, the tokenization and all structures and annotations above them) for 
-	 * the given SDocument object.
-	 * 
-	 * primary text: 		Is this example more complicated than it appears to be?
-	 * tokens:				{"Is", "this", "example", "more", "complicated", "than", "it", "appears", "to", "be"}
-	 * anaphoric relation:	{"it"} --> {"this", "example"}
-	 * 
-	 * @param sDocument the document for which the structure has to be created.
-	 */
-	//TODO fixme
-//	public void testSaveSaltProject_DocumentGraph() throws IOException, SAXException 
-//	{
-//		String saltProjectPathResource= resourceDir+"case2/";
-//		String saltProjectPathTMP= tmpDir+ "case2/";
-//		
-//		//the object, which contains the primary data, the tokenization and all structures and annotations above them
-//		SDocument sDoc= null;
-//		
-//		sDoc= this.createSimpleCorpusStructure(this.getFixture());
-//		
-////		{//creating the corpus-structure
-////			SCorpusGraph sCorpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
-////			this.getFixture().getSCorpusGraphs().add(sCorpGraph);
-////			SCorpus sCorpus1= SaltFactory.eINSTANCE.createSCorpus();
-////			sCorpus1.setSName("rootCorpus");
-////			sCorpGraph.addSNode(sCorpus1);
-////			
-////			sDoc= SaltFactory.eINSTANCE.createSDocument();
-////			sDoc.setSName("doc1");
-////			sCorpGraph.addSDocument(sCorpus1, sDoc);
-////			
-////			//creating a graph containing the tokenization and all structures and annotations above them 
-////			sDoc.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
-////		}//creating the corpus-structure
-//		
-//		this.createSDocumentStructure(sDoc);
-//		
-//		{//storing the document
-//			this.getFixture().saveSaltProject(URI.createFileURI(new File(saltProjectPathTMP).getAbsolutePath()));
-//		}//storing the document
-//		
-//		//compare directories via XMLUnit
-//		this.compareDirectories(new File(saltProjectPathTMP), new File(saltProjectPathResource));
-//	}
-	
-	
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI) <em>Load Salt Project</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject(org.eclipse.emf.common.util.URI)
-	 */
-	//TODO fixme
-//	public void testLoadSaltProject__URI() 
-//	{
-//		this.testLoadSaltProject_CorpusGraph();
-//		this.testLoadSaltProject_DocumentGraph();
-//	}
 	
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_GrAF(org.eclipse.emf.common.util.URI, java.util.Properties) <em>Load Salt Project Gr AF</em>}' operation.
@@ -285,37 +353,6 @@ public class SaltProjectTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_GrAF(org.eclipse.emf.common.util.URI, java.util.Properties) <em>Load Salt Project From Gr AF</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @throws FileNotFoundException 
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSaltProject_GrAF(org.eclipse.emf.common.util.URI, java.util.Properties)
-	 */
-	//TODO fixme
-//	public void testLoadSaltProjectFromGrAF__URI_Properties() throws FileNotFoundException 
-//	{
-//		String saltProjectPathResource= resourceDir+"case3/";
-//		File file= new File(saltProjectPathResource);
-//		if (!file.exists())
-//			throw new FileNotFoundException("Cannot run test, because file does not exists: "+ file.getAbsolutePath());
-//		Properties props= new Properties();
-//		props.put(GrAFResource.PROP_GRAF_HEADER_FILE_ENDING, "pdh");
-//		props.put(GrAFResource.PROP_GRAF_LAYER_TO_TYPE+".is", GRAF_MAPPING_TYPE.POINTER);
-//		props.put(GrAFResource.PROP_GRAF_LAYER_TO_TYPE+".xle", GRAF_MAPPING_TYPE.HIERARCHIE);
-//		props.put(GrAFResource.PROP_GRAF_LAYER_TO_TYPE+".prosody", GRAF_MAPPING_TYPE.HIERARCHIE);
-//
-//		this.getFixture().loadSaltProject_GrAF(URI.createFileURI(file.getAbsolutePath()),props);
-//		
-//		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
-//		assertEquals(4, this.getFixture().getSCorpusGraphs().get(0).getSCorpora().size());
-//		assertEquals(1, this.getFixture().getSCorpusGraphs().get(0).getSDocuments().size());
-//		assertEquals(2, this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0).getSDocumentGraph().getSTextualDSs().size());
-//		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0).getSDocumentGraph().getSTokens().size());
-//		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0).getSDocumentGraph().getSStructures().size());
-//		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0).getSDocumentGraph().getSPointingRelations().size());
-//	}
-
-		/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#differences(java.lang.Object) <em>Differences</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -400,81 +437,17 @@ public class SaltProjectTest extends TestCase {
 	 */
 	public void testLoadSaltProject_CorpusGraph() 
 	{
-		String saltProjectPathResource= resourceDir+"case1/";
+		String saltProjectPathResource= FILE_RESOURCE_DIR+"case1/";
 		
 		SaltProject saltProject2= SaltFactory.eINSTANCE.createSaltProject();
-		this.createCorpusStructure(saltProject2);
-				
-		this.getFixture().loadSaltProject(URI.createFileURI(new File(saltProjectPathResource).getAbsolutePath()));
+		SampleGenerator.createCorpusStructure(saltProject2);
+		File file= new File(saltProjectPathResource);
+		assertTrue("cannot run test, because resource '"+file.getAbsolutePath()+"' does not exists.",file.exists());
+		this.getFixture().loadSCorpusStructure(URI.createFileURI(file.getAbsolutePath()));
 		
 		assertEquals(saltProject2, this.getFixture());
 	}
 
-	/**
-	 * This method creates the content of a document (the primary text, the tokenization and all structures and annotations above them) for 
-	 * the given SDocument object.
-	 * 
-	 * primary text: 		Is this example more complicated than it appears to be?
-	 * tokens:				{"Is", "this", "example", "more", "complicated", "than", "it", "appears", "to", "be"}
-	 * anaphoric relation:	{"it"} --> {"this", "example"}
-	 * 
-	 * @param sDocument the document for which the structure has to be created.
-	 */
-	//TODO fixme
-//	public void testLoadSaltProject_DocumentGraph() 
-//	{
-//		String saltProjectPathResource= resourceDir+"case2/";
-//		
-//		//the object, which contains the primary data, the tokenization and all structures and annotations above them
-//		SDocument sDoc= null;
-//		
-//		SaltProject saltProject2= SaltFactory.eINSTANCE.createSaltProject();
-//		sDoc= this.createSimpleCorpusStructure(saltProject2);
-//		this.createSDocumentStructure(sDoc);
-//		
-//		System.out.println("Hello");
-//		
-//		for (SCorpusGraph sCorpusGraph: saltProject2.getSCorpusGraphs())
-//		{
-//			System.out.println(sCorpusGraph);
-//			for (SCorpus sCorpus: sCorpusGraph.getSCorpora())
-//			{
-//				System.out.println(sCorpus);
-//			}
-//			for (SDocument sDocument: sCorpusGraph.getSDocuments())
-//			{
-//				System.out.println(sDocument.getSDocumentGraph());
-//			}
-//		}
-//		
-//		this.getFixture().loadSaltProject(URI.createFileURI(new File(saltProjectPathResource).getAbsolutePath()));
-//		
-//		System.out.println("------------- fixture");
-//		for (SCorpusGraph sCorpusGraph: this.getFixture().getSCorpusGraphs())
-//		{
-//			System.out.println(sCorpusGraph);
-//			for (SCorpus sCorpus: sCorpusGraph.getSCorpora())
-//			{
-//				System.out.println(sCorpus);
-//			}
-//			for (SDocument sDocument: sCorpusGraph.getSDocuments())
-//			{
-//				System.out.println(sDocument.getSDocumentGraph());
-//			}
-//		}
-//		System.out.println("------------- go on");
-//		System.out.println(this.getFixture().getSCorpusGraphs().get(0));
-//		System.out.println(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0));
-//		
-//		System.out.println("tokens: "+ this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0).getSDocumentGraph().getSTokens());
-//		//TODO go on with implementing method differences until the difference between both SaltProjects is found
-//		System.out.println("----------------------- start differences -----------------------");
-//		System.out.println(saltProject2.differences(this.getFixture()));
-//		System.out.println("----------------------- end differences -----------------------");
-//		System.out.println("assertEquals");
-//		
-//		assertEquals(saltProject2, this.getFixture());
-//	}
 
 	public void testSCorpusGraphs()
 	{
@@ -489,336 +462,7 @@ public class SaltProjectTest extends TestCase {
 		assertTrue(corpGraphs.containsAll(this.getFixture().getSCorpusGraphs()));
 		assertTrue(this.getFixture().getSCorpusGraphs().containsAll(corpGraphs));
 	}
-	
-	/**
-	 * Tests following structure:
-	 * 
-	 * 	rootCorpus
-	 * 		|
-	 * 		doc1
-	 * 	
-	 * @throws IOException 
-	 * @throws SAXException 
-	 */
-	public SDocument createSimpleCorpusStructure(SaltProject saltProject) 
-	{
-		SCorpusGraph sCorpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
-		saltProject.getSCorpusGraphs().add(sCorpGraph);
-		SCorpus sCorpus1= SaltFactory.eINSTANCE.createSCorpus();
-		sCorpus1.setSName("rootCorpus");
-		sCorpGraph.addSNode(sCorpus1);
-		
-		SDocument sDoc= null;
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc1");
-		sCorpGraph.addSDocument(sCorpus1, sDoc);
-		
-		//creating a graph containing the tokenization and all structures and annotations above them 
-		sDoc.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
-		
-		return(sDoc);
-	}
-	
-	/**
-	 * Tests following structure:
-	 * 
-	 * 				rootCorpus
-	 * 		/					\
-	 * 	subCorp1				subCorp2
-	 * 	/		\				/		\
-	 * doc1		doc2		doc3		doc4
-	 * @throws IOException 
-	 * @throws SAXException 
-	 */
-	public SCorpusGraph createCorpusStructure(SaltProject saltProject) 
-	{
-		SCorpusGraph sCorpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
-		saltProject.getSCorpusGraphs().add(sCorpGraph);
-		SCorpus sCorpus1= SaltFactory.eINSTANCE.createSCorpus();
-		sCorpus1.setSName("rootCorpus");
-		sCorpGraph.addSNode(sCorpus1);
-		SCorpus sCorpus2= SaltFactory.eINSTANCE.createSCorpus();
-		sCorpus2.setSName("subCorpus1");
-		SCorpus sCorpus3= SaltFactory.eINSTANCE.createSCorpus();
-		sCorpus3.setSName("subCorpus2");
-		
-		sCorpGraph.addSSubCorpus(sCorpus1, sCorpus2);
-		sCorpGraph.addSSubCorpus(sCorpus1, sCorpus3);
-		
-		SDocument sDoc= null;
-		
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc1");
-		sCorpGraph.addSDocument(sCorpus2, sDoc);
-		
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc2");
-		sCorpGraph.addSDocument(sCorpus2, sDoc);
-		
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc3");
-		sCorpGraph.addSDocument(sCorpus2, sDoc);
-		
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc4");
-		sCorpGraph.addSDocument(sCorpus2, sDoc);
-		
-		return(sCorpGraph);
-	}
-	
-	/**
-	 * This method creates the content of a document (the primary text, the tokenization and all structures and annotations above them) for 
-	 * the given SDocument object.
-	 * 
-	 * primary text: 		Is this example more complicated than it appears to be?
-	 * tokens:				{"Is", "this", "example", "more", "complicated", "than", "it", "appears", "to", "be"}
-	 * anaphoric relation:	{"it"} --> {"this", "example"}
-	 * 
-	 * @param sDocument the document for which the structure has to be created.
-	 */
-	public void createSDocumentStructure(SDocument sDocument)
-	{
-		{//creating the document structure
-			//an object for the primary text
-			STextualDS sTextualDS= null;
-			
-			{//creating the primary text
-				sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
-				sTextualDS.setSText("Is this example more complicated than it appears to be?");
-//				sTextualDS.setSText("This is a sample text, which is very short.");
-				//adding the text to the document-graph
-				sDocument.getSDocumentGraph().addSNode(sTextualDS);
-			}//creating the primary text
-			
-			{//creating tokenization (token objects and relations between tokens and the primary data object)
-				//placeholder object representing a token
-				SToken sToken= null;
-				//object to connect a token to a primary text
-				STextualRelation sTextRel= null;
-				
-				//adding the created token to the document-graph
-				sToken= SaltFactory.eINSTANCE.createSToken();
-				sDocument.getSDocumentGraph().addSNode(sToken);
-				
-				sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-				//adding the token as source of this relation
-				sTextRel.setSToken(sToken);
-				//adding the primary text as target of this relation
-				sTextRel.setSTextualDS(sTextualDS);
-				//adding the start-position of the token in the primary text 
-				sTextRel.setSStart(0);
-				//adding the end-position of the token in the primary text (start-position of the token + length of the token) 
-				sTextRel.setSEnd(2);
-				//adding the textual relation between token and primary text to document graph
-				sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				
-				{//creating the rest of the tokenization, this can also be done automatically
-					//creating tokenization for the token 'this'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(3);
-					sTextRel.setSEnd(7);	
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'example'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(8);
-					sTextRel.setSEnd(15);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'more'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(16);
-					sTextRel.setSEnd(20);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'complicated'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(21);
-					sTextRel.setSEnd(32);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'than'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(33);
-					sTextRel.setSEnd(37);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'it'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(38);
-					sTextRel.setSEnd(40);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'appears'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(41);
-					sTextRel.setSEnd(48);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'to'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(49);
-					sTextRel.setSEnd(51);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-					
-					//creating tokenization for the token 'be'
-					sToken= SaltFactory.eINSTANCE.createSToken();
-					sDocument.getSDocumentGraph().addSNode(sToken);
-					sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
-					sTextRel.setSToken(sToken);
-					sTextRel.setSTextualDS(sTextualDS);
-					sTextRel.setSStart(52);
-					sTextRel.setSEnd(54);
-					sDocument.getSDocumentGraph().addSRelation(sTextRel);
-				}//creating the rest of the tokenization, this can also be done automatically
-			}//creating tokenization (token objects and relations between tokens and the primary data object)
-			
-			// a synchronized list of all tokens to walk through
-			List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
-			
-			{//adding some annotations, part-of-speech and lemma (for part-of speech and lemma annotations a special annotation in Salt exists)
-				{//adding part-of speech annotations
-					SPOSAnnotation sPOSAnno= null;
-					
-					
-					//a list of all part-of-speech annotations for the words Is (VBZ), this (DT) ... be (VB)
-					String[] posAnnotations={"VBZ", "DT", "NN", "ABR", "JJ", "IN", "PRP", "VBZ", "TO", "VB"}; 
-					for (int i= 0; i< sTokens.size();i++)
-					{
-						sPOSAnno= SaltFactory.eINSTANCE.createSPOSAnnotation();
-						sPOSAnno.setSValue(posAnnotations[i]);
-						sTokens.get(i).addSAnnotation(sPOSAnno);
-					}
-				}//adding part-of speech annotations
-				
-				{//adding lemma annotations
-					SLemmaAnnotation sLemmaAnno= null;
-					
-					
-					//a list of all lemma annotations for the words Is (be), this (this) ... be (be)
-					String[] posAnnotations={"be", "this", "example", "more", "complicated", "than", "it", "appears", "to", "be"}; 
-					for (int i= 0; i< sTokens.size();i++)
-					{
-						sLemmaAnno= SaltFactory.eINSTANCE.createSLemmaAnnotation();
-						sLemmaAnno.setSValue(posAnnotations[i]);
-						sTokens.get(i).addSAnnotation(sLemmaAnno);
-					}
-				}//adding lemma annotations
-				
-				{//creating annotations for information structure with the use of spans: "Is"= contrast-focus,"this example more complicated than it appears to be"= Topic 
-					SSpan sSpan= null;
-					SSpanningRelation sSpanRel= null;
-					SAnnotation sAnno= null;
-					
-					//creating a span node as placeholder for information-structure annotation
-					sSpan= SaltFactory.eINSTANCE.createSSpan();
-					//adding the created span to the document-graph
-					sDocument.getSDocumentGraph().addSNode(sSpan);
-					//creating an annottaion for information-structure
-					sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-					//setting the name of the annotation
-					sAnno.setSName("Inf-Struct");
-					//setting the value of the annotation
-					sAnno.setSValue("contrast-focus");
-					//adding the annotation to the placeholder span
-					sSpan.addSAnnotation(sAnno);
-					
-					//creating a relation to connect a token with the span
-					sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-					//setting the span as source of the relation
-					sSpanRel.setSSpan(sSpan);
-					//setting the first token as target of the relation
-					sSpanRel.setSToken(sTokens.get(0));
-					//adding the created relation to the document-graph
-					sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-					
-					{//creating the second span
-						sSpan= SaltFactory.eINSTANCE.createSSpan();
-						sDocument.getSDocumentGraph().addSNode(sSpan);
-						sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-						sAnno.setSName("Inf-Struct");
-						sAnno.setSValue("topic");
-						sSpan.addSAnnotation(sAnno);
-						for (int i= 1; i< sTokens.size(); i++)
-						{
-							sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-							sSpanRel.setSSpan(sSpan);
-							sSpanRel.setSToken(sTokens.get(i));
-							sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-						}
-					}//creating the second span
-					
-				}//creating annotations for information structure with the use of spans
-				
-			}//adding some annotations, part-of-speech and lemma (for part-of speech and lemma annotations a special annotation in Salt exists)
-			
-			{//creating an anaphoric relation with the use of pointing relations between the Tokens {"it"} and {"this", "example"}
-				//creating a span as placeholder, which contains the tokens for "this" and "example"
-				SSpan sSpan= SaltFactory.eINSTANCE.createSSpan();
-				//adding the created span to the document-graph
-				sDocument.getSDocumentGraph().addSNode(sSpan);
-				
-				//creating a relation between the span and the tokens
-				SSpanningRelation sSpanRel= null;
-				sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-				sSpanRel.setSSpan(sSpan);
-				sSpanRel.setSToken(sTokens.get(1));
-				sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-				sSpanRel= SaltFactory.eINSTANCE.createSSpanningRelation();
-				sSpanRel.setSSpan(sSpan);
-				sSpanRel.setSToken(sTokens.get(2));
-				sDocument.getSDocumentGraph().addSRelation(sSpanRel);
-				
-				//creating a pointing relations
-				SPointingRelation sPointingRelation= SaltFactory.eINSTANCE.createSPointingRelation();
-				//setting token "it" as source of this relation
-				sPointingRelation.setSStructuredSource(sTokens.get(6));
-				//setting span "this example" as target of this relation
-				sPointingRelation.setSStructuredTarget(sSpan);
-				//adding the created relation to the document-graph
-				sDocument.getSDocumentGraph().addSRelation(sPointingRelation);
-				//creating an annotation
-				SAnnotation sAnno= SaltFactory.eINSTANCE.createSAnnotation();
-				sAnno.setSName("anaphoric");
-				sAnno.setSValue("antecedent");
-				//adding the annotation to the relation
-				sPointingRelation.addSAnnotation(sAnno);
-			}//creating an anaphoric relation with the use of pointing relations between the Tokens {"it"} and {"this", "example"}
-			//TODO more to do
-		}//creating the document structure
-	}
+
 	
 	/**
 	 * Compares two directories and their content recursive. All conteined XML files will be checked for equality (via XMLUnit).

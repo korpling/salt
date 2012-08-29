@@ -146,7 +146,7 @@ public class GrAFResource extends ResourceImpl{
 					if (parts.length> 0)
 					{
 						String ending= parts[parts.length-1];
-						if (SaltFactory.GRAF_FILE_ENDING.equalsIgnoreCase(ending))
+						if (SaltFactory.FILE_ENDING_GRAF.equalsIgnoreCase(ending))
 						{
 							hasGrafFiles= true;
 							this.getGrafFiles().add(subFile);
@@ -155,7 +155,7 @@ public class GrAFResource extends ResourceImpl{
 				}
 			}
 			if (!hasGrafFiles)
-				throw new SaltResourceException("Cannot load GrAF resource, because the directory does not have files with ending '"+SaltFactory.GRAF_FILE_ENDING+"'.");
+				throw new SaltResourceException("Cannot load GrAF resource, because the directory does not have files with ending '"+SaltFactory.FILE_ENDING_GRAF+"'.");
 		}//collect all files having the ending graf
 		
 		SDocumentGraph sDocumentGraph= SaltFactory.eINSTANCE.createSDocumentGraph();

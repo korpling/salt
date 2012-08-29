@@ -17,29 +17,32 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests;
 
+import java.io.File;
+
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.tests.SampleGenerator;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.tests.SaltFactoryImplTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,10 +68,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSRootCorpus() <em>Get SRoot Corpus</em>}</li>
  * </ul>
  * </p>
- * @generated
+ * 
  */
 public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 
+	public static final String FILE_RESOURCE_DIR= SaltFactoryImplTest.FILE_RESOURCE_DIR_GENERAL+"SCorpusGraphTest/";
+	public static final String FILE_TMP_DIR= "./_TMP/";
+	
 	/**
 	 * The fixture for this SCorpus Graph test case.
 	 * <!-- begin-user-doc -->
@@ -452,6 +458,28 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		
 		assertTrue(this.getFixture().getSRootCorpus().contains(sCorp1));
 		assertEquals(1, this.getFixture().getSRootCorpus().size());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#load(org.eclipse.emf.common.util.URI) <em>Load</em>}' operation.
+	 * Tests the loading of a {@link SCorpusGraph} object contained in a {@link SaltProject} object persist in a
+	 * SaltXML file. The used corpus structure is created via {@link SampleGenerator#createCorpusStructure()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#load(org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoad__URI() 
+	{
+		SCorpusGraph template = SampleGenerator.createCorpusStructure();
+		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
+		saltProject.getSCorpusGraphs().add(template);
+		String tmpDir = System.getProperty("java.io.tmpdir")+"/"+ this.getClass().getName();
+		File tmpFile= new File(tmpDir);
+		URI tmpUri= URI.createFileURI(tmpFile.getAbsolutePath());
+		saltProject.saveSaltProject(tmpUri);
+		assertTrue("Cannot run test, because file does not exists: "+ tmpFile.getAbsolutePath(), tmpFile.exists());
+		
+		this.getFixture().load(tmpUri);
+		assertNotNull(this.getFixture());
+		assertEquals("differences: "+ template.differences(this.getFixture()), template, this.getFixture());
 	}
 
 	public void testCheckElementId()

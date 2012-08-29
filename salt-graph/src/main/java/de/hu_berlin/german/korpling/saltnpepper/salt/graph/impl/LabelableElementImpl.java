@@ -34,6 +34,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphInsertException;
 
 /**
  * <!-- begin-user-doc -->
@@ -112,9 +113,9 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 		if (exists)
 		{
 			if (this instanceof IdentifiableElement)	
-				throw new GraphException("Cannot add the given label '"+label+"' object to LabelableElement '"+((IdentifiableElement)this).getId()+"', because a label with this QName already exists: "+ label.getQName());
+				throw new GraphInsertException("Cannot add the given label '"+label+"' object to LabelableElement '"+((IdentifiableElement)this).getId()+"', because a label with this QName already exists: "+ label.getQName());
 			else
-				throw new GraphException("Cannot add the given label object, because a label with this QName already exists: "+ label.getQName());
+				throw new GraphInsertException("Cannot add the given label object, because a label with this QName already exists: "+ label.getQName());
 		}
 		this.getLabels().add(label);
 	}
@@ -326,7 +327,7 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 		{
 			if (differences!= null)
 			{
-				differences.add(this.getClass().getSimpleName()+": The given object is not of type '"+getClass()+"', it is of type '"+obj.getClass()+"'.");
+				differences.add(this.getClass().getSimpleName()+": The given object is not of type '"+getClass()+"', it is of type '"+((obj!= null)?obj.getClass():obj)+"'.");
 			}
 			return false;
 		}
@@ -352,11 +353,10 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 			HashSet<Label> thisLabels = new HashSet<Label>(this.getLabels());
 			for (Label label : other.getLabels())
 			{
-			// for label l in this.getLabels: get equivalent label in hashedEList
-				// if not existant: >> Differences
-				if (! thisLabels.contains(label)){
+				if (! thisLabels.contains(label))
+				{
 					if (differences!= null)
-						differences.add(this.getClass().getSimpleName()+": Label "+label.getQName()+" in "+this+" has no equivalent in"+other);
+						differences.add(this.getClass().getSimpleName()+": The label object '"+label.getQName()+"' in "+this+" has no equivalent in "+other+".");
 					else return false;
 				}
 			}

@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
@@ -25,6 +26,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 
 /**
  * In Salt it is possible to create a treelike corpus structure to create hierarchies between corpora. A hierarchie means that one corpus 
@@ -228,5 +230,15 @@ public interface SCorpusGraph extends SGraph {
 	 * @generated
 	 */
 	EList<SCorpus> getSRootCorpus();
+
+	/**
+	 * Loads the content of this object by reading the SaltXML file located by the given {@link URI}. 
+	 * The SaltXML file can either contain a {@link SaltProject}, than the first {@link SCorpusGraph} 
+	 * object is loaded or just a {@link SCorpusGraph} object.
+	 * @param sCorpusGraphUri loaction of the SaltXML file
+	 * @model sCorpusGraphUriDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void load(URI sCorpusGraphUri);
 
 } // SCorpusGraph

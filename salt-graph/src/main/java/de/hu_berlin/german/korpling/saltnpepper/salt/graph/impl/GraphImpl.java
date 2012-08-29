@@ -151,6 +151,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			}//do only in case of notifier is Identifier or IdentifiableElement
 		}
 		
+		/**
+		 * This method is called, if any value in one of the observed objects has changed. This method ensures, that all indexes of
+		 * the owning graph will be kept up-to-date.
+		 */
 		public void notifyChanged(Notification notification) 
 		{
 			if (notification.getFeature() instanceof EAttribute)
@@ -184,8 +188,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				}
 				else if (GraphPackage.Literals.EDGE__TARGET.equals(notification.getFeature()))
 				{
-					if (notification.getOldValue()!=null) {
-						changeEdgeTarget(((Edge)notification.getNotifier()).getId(), ((Node)notification.getNewValue()).getId());
+					if (notification.getOldValue()!=null) 
+					{
+						String id= null;
+						if (((Node)notification.getNewValue())!= null)
+							id= ((Node)notification.getNewValue()).getId();
+						changeEdgeTarget(((Edge)notification.getNotifier()).getId(), id);
 					}
 					//create entry in outgoing index
 					else graph.getIndexMgr().getIndex(IDX_INEDGES).addElement(((Edge)notification.getNotifier()).getTarget().getId(), ((Edge)notification.getNotifier()));
@@ -589,6 +597,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		return layers;
 	}
 	
+	/**
+	 * Sets an id to the given layer object.
+	 * @param layer
+	 */
 	protected void basicAddLayer(Layer layer)
 	{
 		//if node has no id a new id will be given to node
@@ -635,7 +647,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	public void addNode(Node node) 
 	{
 		if (!this.getNodes().add(node))
-			throw new GraphInsertException("Cannot add the given node, because of unknown reason. Maybe it was already added. node: "+ node.getId() + "("+node+")");
+		{
+			if (this.getNodes().contains(node))
+				throw new GraphInsertException("Cannot add the given node with id, because it does already exists in graph '"+this.getId()+"'. node: "+ node.getId() + "("+node+")");
+			else
+				throw new GraphInsertException("Cannot add the given node, because of unknown reason. Maybe it was already added. node: "+ node.getId() + "("+node+")");
+		}
 	}
 
 	/**
@@ -678,6 +695,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				this.getNodes().remove(this.getNode(node.getId()));
 				//removing node from all indexes
 				this.getIndexMgr().removeElement(this.getNode(node.getId()));
+				
+				//remove observers on edge
+				node.eAdapters().remove(this.graphAdapter);
+				node.getIdentifier().eAdapters().remove(this.graphAdapter);
 			}
 			retVal= true;
 		}
@@ -752,7 +773,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	protected void basicAddEdge(Edge edge)
 	{
 		if (edge== null) 
-			throw new GraphException("Cannot insert the given edge, beaceuse the edge is empty.");
+			throw new GraphInsertException("Cannot insert the given edge, beaceuse the edge is empty.");
 		
 		//if edge has no id a new id will be given to edge
 		if (edge.getId()== null) 
@@ -769,21 +790,22 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		//put edge into naming index
 		this.getIndexMgr().getIndex(IDX_EDGENAME).addElement(edge.getId(), edge);
 				
-		//if source is not null
+		//throw exception, if source isn't null, but is not added to graph 
 		if (edge.getSource()!= null)
 		{
 			if ((this.getNode(edge.getSource().getId())== null))
 			{
-				throw new GraphException("Cannot insert the given edge, because source of edge does not belong to list of nodes in graph: "+ edge.getSource().getId());
+				throw new GraphInsertException("Cannot insert the given edge, because source of edge does not belong to list of nodes in graph: "+ edge.getSource().getId());
 			}
-			//put edge into outEdges
+			//insert edge into index outEdges
 			this.getIndexMgr().getIndex(IDX_OUTEDGES).addElement(edge.getSource().getId(), edge);
-		}	
+		}
+		//throw exception, if target isn't null, but is not added to graph
 		if (edge.getTarget()!= null)
 		{
 			if ((this.getNode(edge.getTarget().getId())== null))
 				throw new GraphException("Cannot insert the given edge, because destination of edge  does not belong to list of nodes in graph: "+ edge.getTarget());
-			//Kante in inEdges eintragen
+			//insert edge in index inEdges
 			this.getIndexMgr().getIndex(IDX_INEDGES).addElement(edge.getTarget().getId(), edge);
 		}	
 		
@@ -791,13 +813,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			edge.eAdapters().add(this.graphAdapter);
 			edge.getIdentifier().eAdapters().add(this.graphAdapter);
 		}//create a notifier for changes in edge
-		
-//		if (	(edge.getSource()!= null) &&
-//				(edge.getTarget()!= null))
-//		{	
-////			if (this.logService!= null)
-////				this.logService.log(LogService.LOG_DEBUG, "create edge from: "+edge.getSource().getId() + "\t, to: "+ edge.getTarget().getId()+")");
-//		}
 	}
 	
 	/**
@@ -893,6 +908,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			//removing edge from internal list
 			this.getEdges().remove(edge);
 			
+			//remove observers on edge
+			edge.eAdapters().remove(this.graphAdapter);
+			edge.getIdentifier().eAdapters().remove(this.graphAdapter);
+			
 			retVal= true;
 		}
 		return(retVal);
@@ -986,6 +1005,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	public void changeEdgeTarget(String edgeId, String nodeId) 
 	{
 		Edge edge= this.getEdge(edgeId);
+		if (edge== null)
+			throw new GraphException("Cannot change target of given edge, because no edge with given id '"+edgeId+"' was found in graph.");
 		if (edge.getTarget()== null) 
 			throw new GraphException("Cannot insert the given edge, the destination (node to wich the edge goes) is empty. Edge: "+edge);
 
@@ -1158,7 +1179,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	{
 		GraphTraverserModule traverserModule= new GraphTraverserModule();
 		traverserModule.setGraph(this);
-		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler);
+		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);
 	}
 
 	//====================== end: edge-handling
@@ -1181,6 +1202,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			if (!super.equals(differences, obj))
 				return(false);
 		}
+		if (obj== null)
+			return(false);
+		
 		Graph other= (Graph) obj;
 		
 		//start: check layers

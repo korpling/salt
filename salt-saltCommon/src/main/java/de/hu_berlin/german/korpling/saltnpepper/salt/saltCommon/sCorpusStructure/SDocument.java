@@ -17,8 +17,12 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import org.eclipse.emf.common.util.URI;
 
 
 /**
@@ -97,6 +101,61 @@ public interface SDocument extends SNode {
 	 */
 	void setSDocumentGraph(SDocumentGraph value);
 	
+	/**
+	 * Returns the value of the '<em><b>SDocument Graph Location</b></em>' attribute.
+	 * Returns the location of the contained {@link SDocumentGraph} object, in case it is persisted.
+	 *  The location is stored via a {@link SFeature} object having the namespace 
+	 * {@value SaltFactory#NAMESPACE_SALT} and the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
+	 * @return location of persisted {@link SDocumentGraph} object as {@link URI}
+	 * @see #setSDocumentGraphLocation(URI)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage#getSDocument_SDocumentGraphLocation()
+	 * @model dataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI" transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
+	URI getSDocumentGraphLocation();
+
+	/**
+	 * Sets the location as {@link URI}, of where the contained {@link SDocumentGraph} object is persisted.
+	 * The location is stored as {@link SFeature} having the namespace
+	 * {@value SaltFactory#NAMESPACE_SALT} and the name {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
+	 * @param newSDocumentGraphLocation location as {@link URI} 
+	 * @see #getSDocumentGraphLocation()
+	 * @generated
+	 */
+	void setSDocumentGraphLocation(URI value);
+
+	/**
+	 * Persists the {@link SDocumentGraph} object contained by this object as SaltXML file at the 
+	 * location given by the passed {@link URI} object.
+	 * The {@link URI} is stored as {@link SFeature} by calling {@link #setSDocumentGraphLocation(URI)}. 
+	 * The containment relation of {@link SDocument} and given {@link SDocumentGraph} will be removed. 
+	 * @param sDocumentGraphLocation location of where to persist object as SaltXML file (must have the ending {@value SaltFactory#FILE_ENDING_SALT}) in {@link URI} syntax
+	 * @model sDocumentGraphLocationDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void saveSDocumentGraph(URI sDocumentGraphLocation);
+
+	/**
+	 * Loads a {@link SDocumentGraph} object and sets it to the contained {@link SDocumentGraph} object. The
+	 * location of where to find the SaltXML containing the {@link SDocumentGraph} object must be given as 
+	 * {@link SFeature}. It will be read via calling {@link #getSDocumentGraphLocation()}. 
+	 * After loading, the feature accessible via {@link #getSDocumentGraphLocation()} will be removed.
+	 * @model
+	 * @generated
+	 */
+	void loadSDocumentGraph();
+
+	/**
+	 * Loads a {@link SDocumentGraph} object and sets it to the contained {@link SDocumentGraph} object. The
+	 * location of where to find the SaltXML containing the {@link SDocumentGraph} object is given by the
+	 * passed {@link URI} object.
+	 * After loading, the feature accessible via {@link #getSDocumentGraphLocation()} if exist will be removed.
+	 * @param sDocumentGraphLocation location of SaltXML to load {@link SDocumentGraph} object.
+	 * @model sDocumentGraphLocationDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void loadSDocumentGraph(URI sDocumentGraphLocation);
+
 	/**
 	 * Returns a {@link SDocument} object having the same properties like this. This means, all labels (annotations, meta-annotations and so on)
 	 * will also be cloned. These clones will be set to the cloned {@link SDocument} object.   

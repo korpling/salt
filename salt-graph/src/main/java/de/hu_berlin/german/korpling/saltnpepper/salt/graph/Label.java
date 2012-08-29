@@ -17,6 +17,8 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph;
 
+import javax.xml.stream.events.Namespace;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -102,8 +104,9 @@ public interface Label extends LabelableElement
 	 * Returns the value of the '<em><b>QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>QName</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * Returns the full qualified name of this {@link Label} object. A full qualified name contains of the following:
+	 * {@link #getNamespace()})+{@value #NS_SEPERATOR}+{@link #getName()}
+	 * 
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>QName</em>' attribute.
@@ -116,8 +119,9 @@ public interface Label extends LabelableElement
 
 	/**
 	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getQName <em>QName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the full qualified name of this {@link Label} object. A full qualified name contains of the following:
+	 * {@link #getNamespace()})+{@link #NS_SEPERATOR}+{@link #getName()}
+	 * Therefore the two parts of it are set via {@link #setNamespace(String)} and {@link #setName(String)}.
 	 * @param value the new value of the '<em>QName</em>' attribute.
 	 * @see #getQName()
 	 * @generated

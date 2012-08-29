@@ -19,10 +19,17 @@ package de.hu_berlin.german.korpling.saltnpepper.salt;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
 
 public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
@@ -33,14 +40,35 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	SaltFactory eINSTANCE = de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl.init();
 	
 	/**
-	 * The file ending for xml files to store a SALT model.
+	 * Returns a {@link ResourceSet} object, which is initialized with all {@link Resource} objects to load
+	 * and store Salt object into the different available formats. 
 	 */
-	public final String SALT_FILE_ENDING= "salt"; 
+	ResourceSet resourceSet= SaltFactoryImpl.getResourceSet();
 	
 	/**
 	 * The file ending for xml files to store a SALT model.
 	 */
-	public final String GRAF_FILE_ENDING= "graf"; 
+	public static final String FILE_ENDING_SALT= "salt"; 
+	
+	/**
+	 * The file ending to store a dot model.
+	 */
+	public static final String FILE_ENDING_DOT= "dot";
+	
+	/**
+	 * The file ending for xml files to store a SALT model.
+	 */
+	public static final String FILE_ENDING_GRAF= "graf"; 
+	
+	/**
+	 * Default name of the saltProject file.
+	 */
+	public static final String FILE_SALT_PROJECT= "saltProject"+"."+FILE_ENDING_SALT; 
+	
+	/**
+	 * Namespace of e.g. {@link SFeature} objects used by salt. 
+	 */
+	public static final String NAMESPACE_SALT= "salt";
 	
 	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.
@@ -50,15 +78,70 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	public STYPE_NAME convertClazzToSTypeName(Class<? extends EObject> clazz); 
 	
 	/**
-	 * Converts the given {@link STYPE_NAME}, into the corresponding class.
+	 * Converts the given {@link STYPE_NAME}, into the corresponding class. 
 	 * @param type to convert
 	 * @return corresponding class
 	 */
 	public Class<? extends EObject> convertSTypeNameToClazz(STYPE_NAME sType);
 	
 	/**
+	 * Loads an object coming from a SaltXML (.{@link SaltFactory#FILE_ENDING_SALT}) and returns it.
+	 * @param objectURI {@link URI} to SaltXML file containing the object
+	 * @return loaded object
+	 */
+	public EObject load(URI objectURI);
+	
+	/**
 	 * Loads a SaltProject from given uri and returns it as object structure.
 	 * @return returns a saltProject, which is filled with data comming from corpus in uri 
 	 */
 	public SaltProject loadSaltProject(URI saltProjectPath);
+	
+	/**
+	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT}) into this object. If the 
+	 * given SaltXML file does not contain a {@link SCorpusGraph} object persisting, an exception
+	 * will be thrown. If the SaltXML file contains persistings for more than one {@link SCorpusGraph}
+	 * object, the first one will be load (analog to {@link #load(URI, 0)}).
+	 * @param sCorpusGraphUri the {@link URI} to locate the SaltXML file  
+	 */
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphURI);
+
+	/**
+	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT}) into this object. If the 
+	 * given SaltXML file does not contain a {@link SCorpusGraph} object persisting, an exception
+	 * will be thrown. The parameter <code>numOfSCorpusGraph</code> determines which object shall
+	 * be load, in case of the given SaltXML file contains more than one persisting of
+	 * {@link SCorpusGraph} objects.
+	 * @param sCorpusGraphUri the {@link URI} to locate the SaltXML file
+	 * @param numOfSCorpusGraph number of graph to be load, note that the list of graphs starts with 0
+	 */
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph);
+	
+	/**
+	 * Persists the given {@link SDocumentGraph} object as SaltXML file at the 
+	 * location given by the passed {@link URI} object. 
+	 * The {@link URI} of where the {@link SDocumentGraph} is stored as {@link SFeature} by calling 
+	 * {@link SDocument#setSDocumentGraphLocation(URI)}, in case of the given {@link SDocumentGraph} is contained
+	 * by an {@link SDocument} object. 
+	 * @param sDocumentGraph {@link SDocumentGraph} object to persist
+	 * @param sDocumentGraphLocation location of where to persist object as {@link URI}
+	 */
+	public void saveSDocumentGraph(SDocumentGraph sDocumentGraph, URI sDocumentGraphLocation);
+
+	/**
+	 * Loads a {@link SDocumentGraph} object and returns it. The location of where to find the SaltXML containing 
+	 * the {@link SDocumentGraph} object is given by the passed {@link URI} object.
+	 * @param sDocumentGraphLocation location of SaltXML to load {@link SDocumentGraph} object.
+	 */
+	public SDocumentGraph loadSDocumentGraph(URI sDocumentGraphLocation);
+	
+	/**
+	 * moves the content of <code>source</code> to <code>target</code>. 
+	 * Caution: Object contained in <code>source</code> will be moved, which from <code>target</code>
+	 * to <code>source</code>, which will mean, that object are not content of <code>source</code>
+	 * any more after using {@link #move(SCorpusGraph, SCorpusGraph)}.   
+	 * @param source {@link SCorpusGraph} delivering the content to move
+	 * @param target {@link SCorpusGraph} object to where the content will be moved
+	 */
+	public void move(SCorpusGraph source, SCorpusGraph target);
 }

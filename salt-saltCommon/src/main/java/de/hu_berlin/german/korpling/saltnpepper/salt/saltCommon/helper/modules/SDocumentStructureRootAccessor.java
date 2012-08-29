@@ -26,8 +26,11 @@ import org.eclipse.emf.common.util.EList;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltEmptyParameterException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltInvalidModelException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
@@ -162,6 +165,8 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 	{
 		if (clazz== null)
 			throw new SaltEmptyParameterException("clazz", "getRootsBySRelationSType", this.getClass());
+		if (this.getSDocumentGraph()== null)
+			throw new SaltException("Cannot compute roots, because there is no SDocumentGraph set to traverse.");
 		Class<? extends SRelation> currRelationType= null; 
 		currRelationType= clazz;
 		Hashtable<String, EList<SNode>> retVal= null;
@@ -173,6 +178,8 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSDominanceRelations();
 			else if (clazz.equals(SSpanningRelation.class)) 
 				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSSpanningRelations();
+			else if (clazz.equals(SOrderRelation.class)) 
+				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSOrderRelations();
 		}//compute all relations
 		for (SRelation currentRel: relations)
 		{//walk through relations
@@ -180,6 +187,8 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 			boolean parentHasSameClass= false;
 			//a table to notice, for which sTypes a relation has to be stored
 			Hashtable<String, Boolean> storeSType= new Hashtable<String, Boolean>();
+			if (currentRel.getSource()== null)
+				throw new SaltInvalidModelException("Cannot compute roots, because there is a SRelation object '"+currentRel.getSId()+"' having no source node.");
 			for (Edge edge: this.getSDocumentGraph().getInEdges(currentRel.getSSource().getSId()))
 			{//walk through all incoming relations of currentRelation.sSource
 				if (currRelationType.isInstance(edge))

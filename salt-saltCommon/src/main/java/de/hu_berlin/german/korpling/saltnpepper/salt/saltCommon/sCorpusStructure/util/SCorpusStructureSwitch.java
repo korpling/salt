@@ -122,9 +122,9 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSAnnotatableElement(sCorpusGraph);
 				if (result == null) result = caseSIdentifiableElement(sCorpusGraph);
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusGraph);
-				if (result == null) result = caseSFeaturableElement(sCorpusGraph);
 				if (result == null) result = caseSMetaAnnotatableElement(sCorpusGraph);
 				if (result == null) result = caseIdentifiableElement(sCorpusGraph);
+				if (result == null) result = caseSFeaturableElement(sCorpusGraph);
 				if (result == null) result = caseLabelableElement(sCorpusGraph);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -138,9 +138,9 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSNamedElement(sDocument);
 				if (result == null) result = caseSIdentifiableElement(sDocument);
 				if (result == null) result = caseSProcessingAnnotatableElement(sDocument);
-				if (result == null) result = caseSFeaturableElement(sDocument);
 				if (result == null) result = caseSMetaAnnotatableElement(sDocument);
 				if (result == null) result = caseIdentifiableElement(sDocument);
+				if (result == null) result = caseSFeaturableElement(sDocument);
 				if (result == null) result = caseLabelableElement(sDocument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -154,9 +154,9 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSNamedElement(sCorpus);
 				if (result == null) result = caseSIdentifiableElement(sCorpus);
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpus);
-				if (result == null) result = caseSFeaturableElement(sCorpus);
 				if (result == null) result = caseSMetaAnnotatableElement(sCorpus);
 				if (result == null) result = caseIdentifiableElement(sCorpus);
+				if (result == null) result = caseSFeaturableElement(sCorpus);
 				if (result == null) result = caseLabelableElement(sCorpus);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -170,9 +170,9 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSNamedElement(sCorpusRelation);
 				if (result == null) result = caseSIdentifiableElement(sCorpusRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusRelation);
-				if (result == null) result = caseSFeaturableElement(sCorpusRelation);
 				if (result == null) result = caseSMetaAnnotatableElement(sCorpusRelation);
 				if (result == null) result = caseIdentifiableElement(sCorpusRelation);
+				if (result == null) result = caseSFeaturableElement(sCorpusRelation);
 				if (result == null) result = caseLabelableElement(sCorpusRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -186,9 +186,9 @@ public class SCorpusStructureSwitch<T> {
 				if (result == null) result = caseSNamedElement(sCorpusDocumentRelation);
 				if (result == null) result = caseSIdentifiableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseSProcessingAnnotatableElement(sCorpusDocumentRelation);
-				if (result == null) result = caseSFeaturableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseSMetaAnnotatableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseIdentifiableElement(sCorpusDocumentRelation);
+				if (result == null) result = caseSFeaturableElement(sCorpusDocumentRelation);
 				if (result == null) result = caseLabelableElement(sCorpusDocumentRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
