@@ -4,7 +4,7 @@
   <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
   <artifactId>salt</artifactId>
   <packaging>pom</packaging>
-  <version>1.1.4</version>
+  <version>1.1.5-SNAPSHOT</version>
   <modules>
     <module>salt-graph</module>
     <module>salt-saltCore</module>
@@ -29,8 +29,8 @@
     </license>
   </licenses>
   <scm>
-    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/salt-1.1.4</developerConnection>
-    <url>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/salt-1.1.4</url>
+    <developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk/</developerConnection>
+    <url>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/</url>
   </scm>
   <distributionManagement>
     <repository>
