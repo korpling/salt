@@ -105,7 +105,7 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 	 * @generated
 	 */
 	public ComplexIndex createComplexIndex() {
-		ComplexIndexImpl complexIndex = new ComplexIndexImpl();
+		SlimComplexIndexImpl complexIndex = new SlimComplexIndexImpl();
 		return complexIndex;
 	}
 
