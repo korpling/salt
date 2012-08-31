@@ -381,9 +381,9 @@ public class GraphTraverserModuleTest extends TestCase
 	/**
 	 * Starts 3 threads to traverse the graph and checks, that no problem concerning the use of threads occurs. Uses {@link GRAPH_TRAVERSE_TYPE#TOP_DOWN_DEPTH_FIRST} as
 	 * traverse order.
-	 * @throws InterruptedException 
+	 * @throws Exception 
 	 */
-	public void testThreading_TOP_DOWN_DEPTH_FIRST() throws InterruptedException
+	public void testThreading_TOP_DOWN_DEPTH_FIRST() throws Exception
 	{
 		//uses the tree as graph
 		this.getFixture().setGraph(GraphTest.createGraph_Tree());
@@ -444,8 +444,7 @@ public class GraphTraverserModuleTest extends TestCase
 		{
 			if (	(traverseChecker.exception!= null))
 			{
-				traverseChecker.exception.printStackTrace();
-				fail("Any exception occurs while travershan one thread.");
+				throw traverseChecker.exception;
 			}
 		}
 	}
@@ -567,9 +566,9 @@ public class GraphTraverserModuleTest extends TestCase
 	/**
 	 * Starts 3 threads to traverse the graph and checks, that no problem concerning the use of threads occurs. Uses {@link GRAPH_TRAVERSE_TYPE#BOTTOM_UP_DEPTH_FIRST} as
 	 * traverse order.
-	 * @throws InterruptedException 
+	 * @throws Exception 
 	 */
-	public void testThreading_BOTTOM_UP_DEPTH_FIRST() throws InterruptedException
+	public void testThreading_BOTTOM_UP_DEPTH_FIRST() throws Exception
 	{
 		//uses the tree as graph
 		this.getFixture().setGraph(GraphTest.createGraph_Tree());
@@ -629,8 +628,7 @@ public class GraphTraverserModuleTest extends TestCase
 		{
 			if (	(traverseChecker.exception!= null))
 			{
-				traverseChecker.exception.printStackTrace();
-				fail("Any exception occurs while travershan one thread.");
+				throw traverseChecker.exception;
 			}
 		}
 	}
