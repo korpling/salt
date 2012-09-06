@@ -25,9 +25,8 @@ import org.eclipse.emf.common.util.EList;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltInvalidModelException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS;
@@ -229,10 +228,28 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 		{
 			STokenSStartComparator comparator= new STokenSStartComparator();
 			comparator.setSDocumentGraph(this.getSDocumentGraph());
+	
 			//sort tokens
-			@SuppressWarnings("unchecked")
-			EList<SToken> nodes= (EList<SToken>)(EList<? extends Object>)((ComplexIndex)this.getSDocumentGraph().getIndexMgr().getIndex(SDocumentGraph.IDX_SNODETYPE)).getSlot(SToken.class.getName());
-			Collections.sort(nodes, comparator);
+			Object slotId = SToken.class.getName();
+			ComplexIndex complexIndex = ((ComplexIndex)this.getSDocumentGraph().getIndexMgr().getIndex(SDocumentGraph.IDX_SNODETYPE));
+
+			if (complexIndex instanceof SlimComplexIndexImpl)
+			{
+				//In SlimComplexIndex, a LinkedHashSet is used, so no sorting is possible. Remove the whole slot and recreate it in 
+				//the desired order.
+				@SuppressWarnings("unchecked")
+				EList<SToken> tokens = new BasicEList<SToken>((EList<SToken>)(EList<? extends Object>)complexIndex.getSlot(slotId));
+				Collections.sort(tokens, comparator);
+				complexIndex.removeSlot(slotId);
+				for (SToken token : tokens)
+					complexIndex.addElement(slotId, token);
+			}
+			else
+			{
+				@SuppressWarnings("unchecked")
+				EList<SToken> tokens = ((EList<SToken>)(EList<? extends Object>)complexIndex.getSlot(slotId));
+				Collections.sort(tokens, comparator);
+			}
 		}
 	}
 	
