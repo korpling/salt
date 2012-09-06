@@ -299,7 +299,10 @@ public class SlimComplexIndexImpl extends IdentifiableElementImpl implements Com
 	 */
 	public EList<Object> getSlot(Object id)
 	{
-		return new BasicEList<Object>(getIdxTable().get(id));		
+		LinkedHashSet<Object> slot = getIdxTable().get(id);
+		if (slot==null)
+			return new BasicEList<Object>();
+		return new BasicEList<Object>(slot);
 	}
 
 	/**
