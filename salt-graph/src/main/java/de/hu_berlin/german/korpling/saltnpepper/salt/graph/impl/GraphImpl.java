@@ -363,8 +363,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	@Override
 	public void eNotify(Notification notification) 
 	{
-		super.eNotify(notification);		
-		
 		if (notification.getFeature() instanceof EReference) {
 			EReference ref = (EReference) notification.getFeature();
 			if(ref.equals(GraphPackage.Literals.GRAPH__NODES)) {
@@ -487,7 +485,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						break;
 				}
 			}//when a layers of graph has been changed
-		}		
+		}	
+		super.eNotify(notification);		
 	}
 	@Override
 	public boolean eNotificationRequired() {
