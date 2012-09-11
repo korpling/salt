@@ -29,92 +29,92 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface GraphFactory extends EFactory {
 	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	GraphFactory eINSTANCE = de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Node</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Node</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Node</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Node</em>'.
+     * @generated
+     */
 	Node createNode();
 
 	/**
-	 * Returns a new object of class '<em>Labelable Element</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Labelable Element</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Labelable Element</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Labelable Element</em>'.
+     * @generated
+     */
 	LabelableElement createLabelableElement();
 
 	/**
-	 * Returns a new object of class '<em>Edge</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Edge</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Edge</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Edge</em>'.
+     * @generated
+     */
 	Edge createEdge();
 
 	/**
-	 * Returns a new object of class '<em>Identifiable Element</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Identifiable Element</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Identifiable Element</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Identifiable Element</em>'.
+     * @generated
+     */
 	IdentifiableElement createIdentifiableElement();
 
 	/**
-	 * Returns a new object of class '<em>Label</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Label</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Label</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Label</em>'.
+     * @generated
+     */
 	Label createLabel();
 
 	/**
-	 * Returns a new object of class '<em>Graph</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Graph</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Graph</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Graph</em>'.
+     * @generated
+     */
 	Graph createGraph();
 
 	/**
-	 * Returns a new object of class '<em>Identifier</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Identifier</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Identifier</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Identifier</em>'.
+     * @generated
+     */
 	Identifier createIdentifier();
 
 	/**
-	 * Returns a new object of class '<em>Layer</em>'.
-	 * <!-- begin-user-doc -->
+     * Returns a new object of class '<em>Layer</em>'.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Layer</em>'.
-	 * @generated
-	 */
+     * @return a new object of class '<em>Layer</em>'.
+     * @generated
+     */
 	Layer createLayer();
 
 	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
+     * @return the package supported by this factory.
+     * @generated
+     */
 	GraphPackage getGraphPackage();
 
 } //GraphFactory

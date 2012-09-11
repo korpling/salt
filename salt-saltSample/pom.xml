@@ -35,6 +35,13 @@
       <type>bundle</type>
       <scope>compile</scope>
     </dependency>
+     <dependency>
+      <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
+      <artifactId>salt-saltSample</artifactId>
+      <version>${project.version}</version>
+      <type>bundle</type>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

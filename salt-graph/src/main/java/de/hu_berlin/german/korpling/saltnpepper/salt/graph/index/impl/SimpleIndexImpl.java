@@ -45,13 +45,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
 public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIndex 
 {	
 	/**
-	 * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNumOfElements()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getNumOfElements()
+     * @generated
+     * @ordered
+     */
 	protected static final Long NUM_OF_ELEMENTS_EDEFAULT = null;
 
 	protected Map<Object, Object> idxTable;
@@ -71,14 +71,14 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return IndexPackage.Literals.SIMPLE_INDEX;
-	}
+        return IndexPackage.Literals.SIMPLE_INDEX;
+    }
 
 	
 	/**
@@ -210,35 +210,37 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case IndexPackage.SIMPLE_INDEX__NUM_OF_ELEMENTS:
-				return getNumOfElements();
-			case IndexPackage.SIMPLE_INDEX__IDX_TABLE:
-				return getIdxTable();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID)
+        {
+            case IndexPackage.SIMPLE_INDEX__NUM_OF_ELEMENTS:
+                return getNumOfElements();
+            case IndexPackage.SIMPLE_INDEX__IDX_TABLE:
+                return getIdxTable();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case IndexPackage.SIMPLE_INDEX__NUM_OF_ELEMENTS:
-				return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
-			case IndexPackage.SIMPLE_INDEX__IDX_TABLE:
-				return getIdxTable() != null;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID)
+        {
+            case IndexPackage.SIMPLE_INDEX__NUM_OF_ELEMENTS:
+                return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
+            case IndexPackage.SIMPLE_INDEX__IDX_TABLE:
+                return getIdxTable() != null;
+        }
+        return super.eIsSet(featureID);
+    }
 
 } //SimpleIndexImpl

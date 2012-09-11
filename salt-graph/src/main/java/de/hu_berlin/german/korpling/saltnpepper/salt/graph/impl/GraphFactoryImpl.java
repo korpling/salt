@@ -36,226 +36,232 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static GraphFactory init() {
-		try {
-			GraphFactory theGraphFactory = (GraphFactory)EPackage.Registry.INSTANCE.getEFactory("graph"); 
-			if (theGraphFactory != null) {
-				return theGraphFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new GraphFactoryImpl();
-	}
+        try
+        {
+            GraphFactory theGraphFactory = (GraphFactory)EPackage.Registry.INSTANCE.getEFactory("graph"); 
+            if (theGraphFactory != null)
+            {
+                return theGraphFactory;
+            }
+        }
+        catch (Exception exception)
+        {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new GraphFactoryImpl();
+    }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public GraphFactoryImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case GraphPackage.NODE: return createNode();
-			case GraphPackage.LABELABLE_ELEMENT: return createLabelableElement();
-			case GraphPackage.EDGE: return createEdge();
-			case GraphPackage.IDENTIFIABLE_ELEMENT: return createIdentifiableElement();
-			case GraphPackage.LABEL: return createLabel();
-			case GraphPackage.GRAPH: return createGraph();
-			case GraphPackage.IDENTIFIER: return createIdentifier();
-			case GraphPackage.LAYER: return createLayer();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eClass.getClassifierID())
+        {
+            case GraphPackage.NODE: return createNode();
+            case GraphPackage.LABELABLE_ELEMENT: return createLabelableElement();
+            case GraphPackage.EDGE: return createEdge();
+            case GraphPackage.IDENTIFIABLE_ELEMENT: return createIdentifiableElement();
+            case GraphPackage.LABEL: return createLabel();
+            case GraphPackage.GRAPH: return createGraph();
+            case GraphPackage.IDENTIFIER: return createIdentifier();
+            case GraphPackage.LAYER: return createLayer();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case GraphPackage.GRAPH_TRAVERSE_TYPE:
-				return createGRAPH_TRAVERSE_TYPEFromString(eDataType, initialValue);
-			case GraphPackage.GRAPH_TRAVERSE_HANDLER:
-				return createGraphTraverseHandlerFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eDataType.getClassifierID())
+        {
+            case GraphPackage.GRAPH_TRAVERSE_TYPE:
+                return createGRAPH_TRAVERSE_TYPEFromString(eDataType, initialValue);
+            case GraphPackage.GRAPH_TRAVERSE_HANDLER:
+                return createGraphTraverseHandlerFromString(eDataType, initialValue);
+            default:
+                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case GraphPackage.GRAPH_TRAVERSE_TYPE:
-				return convertGRAPH_TRAVERSE_TYPEToString(eDataType, instanceValue);
-			case GraphPackage.GRAPH_TRAVERSE_HANDLER:
-				return convertGraphTraverseHandlerToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
+        switch (eDataType.getClassifierID())
+        {
+            case GraphPackage.GRAPH_TRAVERSE_TYPE:
+                return convertGRAPH_TRAVERSE_TYPEToString(eDataType, instanceValue);
+            case GraphPackage.GRAPH_TRAVERSE_HANDLER:
+                return convertGraphTraverseHandlerToString(eDataType, instanceValue);
+            default:
+                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+        }
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Node createNode() {
-		NodeImpl node = new NodeImpl();
-		return node;
-	}
+        NodeImpl node = new NodeImpl();
+        return node;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public LabelableElement createLabelableElement() {
-		LabelableElementImpl labelableElement = new LabelableElementImpl();
-		return labelableElement;
-	}
+        LabelableElementImpl labelableElement = new LabelableElementImpl();
+        return labelableElement;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Edge createEdge() {
-		EdgeImpl edge = new EdgeImpl();
-		return edge;
-	}
+        EdgeImpl edge = new EdgeImpl();
+        return edge;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IdentifiableElement createIdentifiableElement() {
-		IdentifiableElementImpl identifiableElement = new IdentifiableElementImpl();
-		return identifiableElement;
-	}
+        IdentifiableElementImpl identifiableElement = new IdentifiableElementImpl();
+        return identifiableElement;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Label createLabel() {
-		LabelImpl label = new LabelImpl();
-		return label;
-	}
+        LabelImpl label = new LabelImpl();
+        return label;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Graph createGraph() {
-		GraphImpl graph = new GraphImpl();
-		return graph;
-	}
+        GraphImpl graph = new GraphImpl();
+        return graph;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Identifier createIdentifier() {
-		IdentifierImpl identifier = new IdentifierImpl();
-		return identifier;
-	}
+        IdentifierImpl identifier = new IdentifierImpl();
+        return identifier;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Layer createLayer() {
-		LayerImpl layer = new LayerImpl();
-		return layer;
-	}
+        LayerImpl layer = new LayerImpl();
+        return layer;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public GRAPH_TRAVERSE_TYPE createGRAPH_TRAVERSE_TYPEFromString(EDataType eDataType, String initialValue) {
-		GRAPH_TRAVERSE_TYPE result = GRAPH_TRAVERSE_TYPE.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
+        GRAPH_TRAVERSE_TYPE result = GRAPH_TRAVERSE_TYPE.get(initialValue);
+        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+        return result;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String convertGRAPH_TRAVERSE_TYPEToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
+        return instanceValue == null ? null : instanceValue.toString();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public GraphTraverseHandler createGraphTraverseHandlerFromString(EDataType eDataType, String initialValue) {
-		return (GraphTraverseHandler)super.createFromString(eDataType, initialValue);
-	}
+        return (GraphTraverseHandler)super.createFromString(eDataType, initialValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String convertGraphTraverseHandlerToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
+        return super.convertToString(eDataType, instanceValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public GraphPackage getGraphPackage() {
-		return (GraphPackage)getEPackage();
-	}
+        return (GraphPackage)getEPackage();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+     * @deprecated
+     * @generated
+     */
 	@Deprecated
 	public static GraphPackage getPackage() {
-		return GraphPackage.eINSTANCE;
-	}
+        return GraphPackage.eINSTANCE;
+    }
 	
 
 } //GraphFactoryImpl

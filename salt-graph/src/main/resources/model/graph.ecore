@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="graph"
-    nsURI="graph" nsPrefix="graph">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="graph" nsURI="graph" nsPrefix="graph">
   <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//IdentifiableElement">
     <eOperations name="clone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="graph" eType="#//Graph"
@@ -252,6 +250,8 @@
           changeable="false" volatile="true" transient="true" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="idxTable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"
           volatile="true" transient="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sortable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          changeable="false" defaultValueLiteral="false"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

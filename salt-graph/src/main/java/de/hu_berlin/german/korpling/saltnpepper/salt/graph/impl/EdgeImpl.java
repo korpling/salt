@@ -59,32 +59,32 @@ public class EdgeImpl extends IdentifiableElementImpl implements Edge {
 	public static Long eFalses= 0l;
 	
 	/**
-	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSource()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getSource()
+     * @generated
+     * @ordered
+     */
 	protected Node source;
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getTarget()
+     * @generated
+     * @ordered
+     */
 	protected Node target;
 
 	/**
-	 * The cached value of the '{@link #getLayers() <em>Layers</em>}' reference list.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getLayers() <em>Layers</em>}' reference list.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLayers()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getLayers()
+     * @generated
+     * @ordered
+     */
 	protected EList<Layer> layers;
 
 	/**
@@ -101,14 +101,14 @@ public class EdgeImpl extends IdentifiableElementImpl implements Edge {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return GraphPackage.Literals.EDGE;
-	}
+        return GraphPackage.Literals.EDGE;
+    }
 	
 	/**
 	 * Finds all differences between this and the given object. 
@@ -308,71 +308,74 @@ public class EdgeImpl extends IdentifiableElementImpl implements Edge {
 //	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Graph getGraph() {
-		if (eContainerFeatureID() != GraphPackage.EDGE__GRAPH) return null;
-		return (Graph)eContainer();
-	}
+        if (eContainerFeatureID() != GraphPackage.EDGE__GRAPH) return null;
+        return (Graph)eContainer();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public NotificationChain basicSetGraph(Graph newGraph, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newGraph, GraphPackage.EDGE__GRAPH, msgs);
-		return msgs;
-	}
+        msgs = eBasicSetContainer((InternalEObject)newGraph, GraphPackage.EDGE__GRAPH, msgs);
+        return msgs;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setGraph(Graph newGraph) {
-		if (newGraph != eInternalContainer() || (eContainerFeatureID() != GraphPackage.EDGE__GRAPH && newGraph != null)) {
-			if (EcoreUtil.isAncestor(this, newGraph))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newGraph != null)
-				msgs = ((InternalEObject)newGraph).eInverseAdd(this, GraphPackage.GRAPH__EDGES, Graph.class, msgs);
-			msgs = basicSetGraph(newGraph, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.EDGE__GRAPH, newGraph, newGraph));
-	}
+        if (newGraph != eInternalContainer() || (eContainerFeatureID() != GraphPackage.EDGE__GRAPH && newGraph != null))
+        {
+            if (EcoreUtil.isAncestor(this, newGraph))
+                throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+            NotificationChain msgs = null;
+            if (eInternalContainer() != null)
+                msgs = eBasicRemoveFromContainer(msgs);
+            if (newGraph != null)
+                msgs = ((InternalEObject)newGraph).eInverseAdd(this, GraphPackage.GRAPH__EDGES, Graph.class, msgs);
+            msgs = basicSetGraph(newGraph, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.EDGE__GRAPH, newGraph, newGraph));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Node getSource() {
-		if (source != null && source.eIsProxy()) {
-			InternalEObject oldSource = (InternalEObject)source;
-			source = (Node)eResolveProxy(oldSource);
-			if (source != oldSource) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GraphPackage.EDGE__SOURCE, oldSource, source));
-			}
-		}
-		return source;
-	}
+        if (source != null && source.eIsProxy())
+        {
+            InternalEObject oldSource = (InternalEObject)source;
+            source = (Node)eResolveProxy(oldSource);
+            if (source != oldSource)
+            {
+                if (eNotificationRequired())
+                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, GraphPackage.EDGE__SOURCE, oldSource, source));
+            }
+        }
+        return source;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Node basicGetSource() {
-		return source;
-	}
+        return source;
+    }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -390,30 +393,32 @@ public class EdgeImpl extends IdentifiableElementImpl implements Edge {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Node getTarget() {
-		if (target != null && target.eIsProxy()) {
-			InternalEObject oldTarget = (InternalEObject)target;
-			target = (Node)eResolveProxy(oldTarget);
-			if (target != oldTarget) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GraphPackage.EDGE__TARGET, oldTarget, target));
-			}
-		}
-		return target;
-	}
+        if (target != null && target.eIsProxy())
+        {
+            InternalEObject oldTarget = (InternalEObject)target;
+            target = (Node)eResolveProxy(oldTarget);
+            if (target != oldTarget)
+            {
+                if (eNotificationRequired())
+                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, GraphPackage.EDGE__TARGET, oldTarget, target));
+            }
+        }
+        return target;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Node basicGetTarget() {
-		return target;
-	}
+        return target;
+    }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -430,155 +435,163 @@ public class EdgeImpl extends IdentifiableElementImpl implements Edge {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public EList<Layer> getLayers() {
-		if (layers == null) {
-			layers = new EObjectWithInverseResolvingEList.ManyInverse<Layer>(Layer.class, this, GraphPackage.EDGE__LAYERS, GraphPackage.LAYER__EDGES);
-		}
-		return layers;
-	}
+        if (layers == null)
+        {
+            layers = new EObjectWithInverseResolvingEList.ManyInverse<Layer>(Layer.class, this, GraphPackage.EDGE__LAYERS, GraphPackage.LAYER__EDGES);
+        }
+        return layers;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case GraphPackage.EDGE__GRAPH:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetGraph((Graph)otherEnd, msgs);
-			case GraphPackage.EDGE__LAYERS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLayers()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.EDGE__GRAPH:
+                if (eInternalContainer() != null)
+                    msgs = eBasicRemoveFromContainer(msgs);
+                return basicSetGraph((Graph)otherEnd, msgs);
+            case GraphPackage.EDGE__LAYERS:
+                return ((InternalEList<InternalEObject>)(InternalEList<?>)getLayers()).basicAdd(otherEnd, msgs);
+        }
+        return super.eInverseAdd(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case GraphPackage.EDGE__GRAPH:
-				return basicSetGraph(null, msgs);
-			case GraphPackage.EDGE__LAYERS:
-				return ((InternalEList<?>)getLayers()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.EDGE__GRAPH:
+                return basicSetGraph(null, msgs);
+            case GraphPackage.EDGE__LAYERS:
+                return ((InternalEList<?>)getLayers()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case GraphPackage.EDGE__GRAPH:
-				return eInternalContainer().eInverseRemove(this, GraphPackage.GRAPH__EDGES, Graph.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
+        switch (eContainerFeatureID())
+        {
+            case GraphPackage.EDGE__GRAPH:
+                return eInternalContainer().eInverseRemove(this, GraphPackage.GRAPH__EDGES, Graph.class, msgs);
+        }
+        return super.eBasicRemoveFromContainerFeature(msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case GraphPackage.EDGE__GRAPH:
-				return getGraph();
-			case GraphPackage.EDGE__SOURCE:
-				if (resolve) return getSource();
-				return basicGetSource();
-			case GraphPackage.EDGE__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
-			case GraphPackage.EDGE__LAYERS:
-				return getLayers();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.EDGE__GRAPH:
+                return getGraph();
+            case GraphPackage.EDGE__SOURCE:
+                if (resolve) return getSource();
+                return basicGetSource();
+            case GraphPackage.EDGE__TARGET:
+                if (resolve) return getTarget();
+                return basicGetTarget();
+            case GraphPackage.EDGE__LAYERS:
+                return getLayers();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case GraphPackage.EDGE__GRAPH:
-				setGraph((Graph)newValue);
-				return;
-			case GraphPackage.EDGE__SOURCE:
-				setSource((Node)newValue);
-				return;
-			case GraphPackage.EDGE__TARGET:
-				setTarget((Node)newValue);
-				return;
-			case GraphPackage.EDGE__LAYERS:
-				getLayers().clear();
-				getLayers().addAll((Collection<? extends Layer>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.EDGE__GRAPH:
+                setGraph((Graph)newValue);
+                return;
+            case GraphPackage.EDGE__SOURCE:
+                setSource((Node)newValue);
+                return;
+            case GraphPackage.EDGE__TARGET:
+                setTarget((Node)newValue);
+                return;
+            case GraphPackage.EDGE__LAYERS:
+                getLayers().clear();
+                getLayers().addAll((Collection<? extends Layer>)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case GraphPackage.EDGE__GRAPH:
-				setGraph((Graph)null);
-				return;
-			case GraphPackage.EDGE__SOURCE:
-				setSource((Node)null);
-				return;
-			case GraphPackage.EDGE__TARGET:
-				setTarget((Node)null);
-				return;
-			case GraphPackage.EDGE__LAYERS:
-				getLayers().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.EDGE__GRAPH:
+                setGraph((Graph)null);
+                return;
+            case GraphPackage.EDGE__SOURCE:
+                setSource((Node)null);
+                return;
+            case GraphPackage.EDGE__TARGET:
+                setTarget((Node)null);
+                return;
+            case GraphPackage.EDGE__LAYERS:
+                getLayers().clear();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case GraphPackage.EDGE__GRAPH:
-				return getGraph() != null;
-			case GraphPackage.EDGE__SOURCE:
-				return source != null;
-			case GraphPackage.EDGE__TARGET:
-				return target != null;
-			case GraphPackage.EDGE__LAYERS:
-				return layers != null && !layers.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.EDGE__GRAPH:
+                return getGraph() != null;
+            case GraphPackage.EDGE__SOURCE:
+                return source != null;
+            case GraphPackage.EDGE__TARGET:
+                return target != null;
+            case GraphPackage.EDGE__LAYERS:
+                return layers != null && !layers.isEmpty();
+        }
+        return super.eIsSet(featureID);
+    }
 } //EdgeImpl

@@ -389,4 +389,11 @@ public class SlimComplexIndexImpl extends IdentifiableElementImpl implements Com
 		return super.eIsSet(featureID);
 	}
 
+	/** Returns always false since a HashMap is used internally */
+    @Override
+    public boolean isSortable()
+    {
+        return false;
+    }
+
 } //ComplexIndexImpl

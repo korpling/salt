@@ -61,19 +61,19 @@ public interface SimpleIndex extends Index {
 	void setIdxTable(Map<Object, Object> value);
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+     * @model
+     * @generated
+     */
 	Object getElement(Object elementId);
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+     * @model
+     * @generated
+     */
 	Boolean removeElementById(Object elementId);
 
 } // SimpleIndex

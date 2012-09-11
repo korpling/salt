@@ -46,13 +46,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 public class IdentifiableElementImpl extends LabelableElementImpl implements IdentifiableElement 
 {	
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getId()
+     * @generated
+     * @ordered
+     */
 	protected static final String ID_EDEFAULT = null;
 
 	/**
@@ -73,14 +73,14 @@ public class IdentifiableElementImpl extends LabelableElementImpl implements Ide
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return GraphPackage.Literals.IDENTIFIABLE_ELEMENT;
-	}
+        return GraphPackage.Literals.IDENTIFIABLE_ELEMENT;
+    }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,14 +103,14 @@ public class IdentifiableElementImpl extends LabelableElementImpl implements Ide
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Identifier getIdentifier() {
-		Identifier identifier = basicGetIdentifier();
-		return identifier != null && identifier.eIsProxy() ? (Identifier)eResolveProxy((InternalEObject)identifier) : identifier;
-	}
+        Identifier identifier = basicGetIdentifier();
+        return identifier != null && identifier.eIsProxy() ? (Identifier)eResolveProxy((InternalEObject)identifier) : identifier;
+    }
 
 	/**
 	 * An extra reference to the Identifier, for faster access, than searching in list of labels.
@@ -266,73 +266,77 @@ public class IdentifiableElementImpl extends LabelableElementImpl implements Ide
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case GraphPackage.IDENTIFIABLE_ELEMENT__ID:
-				return getId();
-			case GraphPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
-				if (resolve) return getIdentifier();
-				return basicGetIdentifier();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.IDENTIFIABLE_ELEMENT__ID:
+                return getId();
+            case GraphPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
+                if (resolve) return getIdentifier();
+                return basicGetIdentifier();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case GraphPackage.IDENTIFIABLE_ELEMENT__ID:
-				setId((String)newValue);
-				return;
-			case GraphPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
-				setIdentifier((Identifier)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.IDENTIFIABLE_ELEMENT__ID:
+                setId((String)newValue);
+                return;
+            case GraphPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
+                setIdentifier((Identifier)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case GraphPackage.IDENTIFIABLE_ELEMENT__ID:
-				setId(ID_EDEFAULT);
-				return;
-			case GraphPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
-				setIdentifier((Identifier)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.IDENTIFIABLE_ELEMENT__ID:
+                setId(ID_EDEFAULT);
+                return;
+            case GraphPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
+                setIdentifier((Identifier)null);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case GraphPackage.IDENTIFIABLE_ELEMENT__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
-			case GraphPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
-				return basicGetIdentifier() != null;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.IDENTIFIABLE_ELEMENT__ID:
+                return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+            case GraphPackage.IDENTIFIABLE_ELEMENT__IDENTIFIER:
+                return basicGetIdentifier() != null;
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
 	 * Returns a String representation for this object. 

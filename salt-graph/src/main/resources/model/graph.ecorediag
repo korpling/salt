@@ -278,6 +278,10 @@
             <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/ComplexIndex/idxTable"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_ZcKs0Zx0Ed625-Uq6sOdNQ"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_kNFAMPw-EeGT7YNhO3oX2Q" type="2001">
+            <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/ComplexIndex/sortable"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_kNFAMfw-EeGT7YNhO3oX2Q"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_N150UZx0Ed625-Uq6sOdNQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_N150Upx0Ed625-Uq6sOdNQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_N150U5x0Ed625-Uq6sOdNQ"/>

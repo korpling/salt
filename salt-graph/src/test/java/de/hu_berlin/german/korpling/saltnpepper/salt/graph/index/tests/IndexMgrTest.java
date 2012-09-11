@@ -59,51 +59,51 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
 public class IndexMgrTest extends TestCase {
 
 	/**
-	 * The fixture for this Mgr test case.
-	 * <!-- begin-user-doc -->
+     * The fixture for this Mgr test case.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected IndexMgr fixture = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static void main(String[] args) {
-		TestRunner.run(IndexMgrTest.class);
-	}
+        TestRunner.run(IndexMgrTest.class);
+    }
 
 	/**
-	 * Constructs a new Mgr test case with the given name.
-	 * <!-- begin-user-doc -->
+     * Constructs a new Mgr test case with the given name.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public IndexMgrTest(String name) {
-		super(name);
-	}
+        super(name);
+    }
 
 	/**
-	 * Sets the fixture for this Mgr test case.
-	 * <!-- begin-user-doc -->
+     * Sets the fixture for this Mgr test case.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected void setFixture(IndexMgr fixture) {
-		this.fixture = fixture;
-	}
+        this.fixture = fixture;
+    }
 
 	/**
-	 * Returns the fixture for this Mgr test case.
-	 * <!-- begin-user-doc -->
+     * Returns the fixture for this Mgr test case.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected IndexMgr getFixture() {
-		return fixture;
-	}
+        return fixture;
+    }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,15 +124,15 @@ public class IndexMgrTest extends TestCase {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
+     * @see junit.framework.TestCase#tearDown()
+     * @generated
+     */
 	@Override
 	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
+        setFixture(null);
+    }
 	
 	/**
 	 * Namen der einzuf�genden Indexe

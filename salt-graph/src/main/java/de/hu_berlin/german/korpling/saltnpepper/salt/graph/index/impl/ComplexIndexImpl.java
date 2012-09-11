@@ -22,10 +22,12 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.IdentifiableElementImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
@@ -41,6 +43,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getNumOfElements <em>Num Of Elements</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getNumOfSlots <em>Num Of Slots</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getIdxTable <em>Idx Table</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#isSortable <em>Sortable</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,34 +51,53 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage;
  */
 public class ComplexIndexImpl extends IdentifiableElementImpl implements ComplexIndex {
 	/**
-	 * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNumOfElements()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getNumOfElements()
+     * @generated
+     * @ordered
+     */
 	protected static final Long NUM_OF_ELEMENTS_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getNumOfSlots() <em>Num Of Slots</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getNumOfSlots() <em>Num Of Slots</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNumOfSlots()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getNumOfSlots()
+     * @generated
+     * @ordered
+     */
 	protected static final Long NUM_OF_SLOTS_EDEFAULT = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isSortable()
+     * @ordered
+     */
+    protected static final boolean SORTABLE_EDEFAULT = true;
+
+    /**
+     * The cached value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isSortable()
+     * @generated
+     * @ordered
+     */
+    protected boolean sortable = SORTABLE_EDEFAULT;
+
+    /**
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return IndexPackage.Literals.COMPLEX_INDEX;
-	}
+        return IndexPackage.Literals.COMPLEX_INDEX;
+    }
 	
 	protected ComplexIndexImpl() {
 		super();
@@ -177,7 +199,17 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	
 	
 	
-	//============================================================================================================
+	/**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public boolean isSortable()
+    {
+        return sortable;
+    }
+
+    //============================================================================================================
 	// ADD
 	//============================================================================================================
 	
@@ -354,22 +386,25 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
-				return getNumOfElements();
-			case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
-				return getNumOfSlots();
-			case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
-				return getIdxTable();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID)
+        {
+            case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
+                return getNumOfElements();
+            case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
+                return getNumOfSlots();
+            case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
+                return getIdxTable();
+            case IndexPackage.COMPLEX_INDEX__SORTABLE:
+                return isSortable();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -401,21 +436,43 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
-				return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
-			case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
-				return NUM_OF_SLOTS_EDEFAULT == null ? getNumOfSlots() != null : !NUM_OF_SLOTS_EDEFAULT.equals(getNumOfSlots());
-			case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
-				return getIdxTable() != null;
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID)
+        {
+            case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
+                return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
+            case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
+                return NUM_OF_SLOTS_EDEFAULT == null ? getNumOfSlots() != null : !NUM_OF_SLOTS_EDEFAULT.equals(getNumOfSlots());
+            case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
+                return getIdxTable() != null;
+            case IndexPackage.COMPLEX_INDEX__SORTABLE:
+                return sortable != SORTABLE_EDEFAULT;
+        }
+        return super.eIsSet(featureID);
+    }
+	
 
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString()
+    {
+        if (eIsProxy()) return super.toString();
+
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (sortable: ");
+        result.append(sortable);
+        result.append(')');
+        return result.toString();
+    }
+    
+    
 } //ComplexIndexImpl

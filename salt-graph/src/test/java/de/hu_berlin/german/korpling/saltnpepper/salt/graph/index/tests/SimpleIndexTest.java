@@ -53,56 +53,56 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
 public class SimpleIndexTest extends IdentifiableElementTest {
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public static void main(String[] args) {
-		TestRunner.run(SimpleIndexTest.class);
-	}
+        TestRunner.run(SimpleIndexTest.class);
+    }
 
 	/**
-	 * Constructs a new Simple Index test case with the given name.
-	 * <!-- begin-user-doc -->
+     * Constructs a new Simple Index test case with the given name.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public SimpleIndexTest(String name) {
-		super(name);
-	}
+        super(name);
+    }
 
 	/**
-	 * Returns the fixture for this Simple Index test case.
-	 * <!-- begin-user-doc -->
+     * Returns the fixture for this Simple Index test case.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected SimpleIndex getFixture() {
-		return (SimpleIndex)fixture;
-	}
+        return (SimpleIndex)fixture;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
+     * @see junit.framework.TestCase#setUp()
+     * @generated
+     */
 	@Override
 	protected void setUp() throws Exception {
-		setFixture(IndexFactory.eINSTANCE.createSimpleIndex());
-	}
+        setFixture(IndexFactory.eINSTANCE.createSimpleIndex());
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
+     * @see junit.framework.TestCase#tearDown()
+     * @generated
+     */
 	@Override
 	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
+        setFixture(null);
+    }
 
 	/**
 	 * Tests the '{@link de.util.graph.Index#getNumOfElements() <em>Num Of Elements</em>}' feature getter.

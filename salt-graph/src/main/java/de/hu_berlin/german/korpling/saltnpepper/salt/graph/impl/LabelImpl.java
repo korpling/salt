@@ -55,93 +55,93 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	public static Long equalTime= 0l;
 	
 	/**
-	 * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNamespace()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getNamespace()
+     * @generated
+     * @ordered
+     */
 	protected static final String NAMESPACE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNamespace()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getNamespace()
+     * @generated
+     * @ordered
+     */
 	protected String namespace = NAMESPACE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getName()
+     * @generated
+     * @ordered
+     */
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getName()
+     * @generated
+     * @ordered
+     */
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getQName() <em>QName</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getQName() <em>QName</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQName()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getQName()
+     * @generated
+     * @ordered
+     */
 	protected static final String QNAME_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getValue()
+     * @generated
+     * @ordered
+     */
 	protected static final Object VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getValue()
+     * @generated
+     * @ordered
+     */
 	protected Object value = VALUE_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	protected LabelImpl() {
-		super();
-	}
+        super();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	protected EClass eStaticClass() {
-		return GraphPackage.Literals.LABEL;
-	}
+        return GraphPackage.Literals.LABEL;
+    }
 	
 	/**
 	 * Returns a hashcode, created  out of the namespace, the name and the value of this object.
@@ -270,34 +270,34 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getNamespace() {
-		return namespace;
-	}
+        return namespace;
+    }
 	
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setNamespace(String newNamespace) {
-		String oldNamespace = namespace;
-		namespace = newNamespace;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__NAMESPACE, oldNamespace, namespace));
-	}
+        String oldNamespace = namespace;
+        namespace = newNamespace;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__NAMESPACE, oldNamespace, namespace));
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public String getName() {
-		return name;
-	}
+        return name;
+    }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -373,76 +373,77 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public Object getValue() {
-		return value;
-	}
+        return value;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setValue(Object newValue) {
-		Object oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__VALUE, oldValue, value));
-	}
+        Object oldValue = value;
+        value = newValue;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__VALUE, oldValue, value));
+    }
 
 	/**
-	 * The default value of the '{@link #getValueString() <em>Value String</em>}' attribute.
-	 * <!-- begin-user-doc -->
+     * The default value of the '{@link #getValueString() <em>Value String</em>}' attribute.
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValueString()
-	 * @generated
-	 * @ordered
-	 */
+     * @see #getValueString()
+     * @generated
+     * @ordered
+     */
 	protected static final String VALUE_STRING_EDEFAULT = null;
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public LabelableElement getLabelableElement() {
-		if (eContainerFeatureID() != GraphPackage.LABEL__LABELABLE_ELEMENT) return null;
-		return (LabelableElement)eContainer();
-	}
+        if (eContainerFeatureID() != GraphPackage.LABEL__LABELABLE_ELEMENT) return null;
+        return (LabelableElement)eContainer();
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public NotificationChain basicSetLabelableElement(LabelableElement newLabelableElement, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newLabelableElement, GraphPackage.LABEL__LABELABLE_ELEMENT, msgs);
-		return msgs;
-	}
+        msgs = eBasicSetContainer((InternalEObject)newLabelableElement, GraphPackage.LABEL__LABELABLE_ELEMENT, msgs);
+        return msgs;
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	public void setLabelableElement(LabelableElement newLabelableElement) {
-		if (newLabelableElement != eInternalContainer() || (eContainerFeatureID() != GraphPackage.LABEL__LABELABLE_ELEMENT && newLabelableElement != null)) {
-			if (EcoreUtil.isAncestor(this, newLabelableElement))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newLabelableElement != null)
-				msgs = ((InternalEObject)newLabelableElement).eInverseAdd(this, GraphPackage.LABELABLE_ELEMENT__LABELS, LabelableElement.class, msgs);
-			msgs = basicSetLabelableElement(newLabelableElement, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__LABELABLE_ELEMENT, newLabelableElement, newLabelableElement));
-	}
+        if (newLabelableElement != eInternalContainer() || (eContainerFeatureID() != GraphPackage.LABEL__LABELABLE_ELEMENT && newLabelableElement != null))
+        {
+            if (EcoreUtil.isAncestor(this, newLabelableElement))
+                throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+            NotificationChain msgs = null;
+            if (eInternalContainer() != null)
+                msgs = eBasicRemoveFromContainer(msgs);
+            if (newLabelableElement != null)
+                msgs = ((InternalEObject)newLabelableElement).eInverseAdd(this, GraphPackage.LABELABLE_ELEMENT__LABELS, LabelableElement.class, msgs);
+            msgs = basicSetLabelableElement(newLabelableElement, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__LABELABLE_ELEMENT, newLabelableElement, newLabelableElement));
+    }
 	
 	/**
 	 * {@inheritDoc Label#getValueString()}
@@ -506,175 +507,182 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	// ------------------------------ end: static ns_seperator
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case GraphPackage.LABEL__LABELABLE_ELEMENT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetLabelableElement((LabelableElement)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.LABEL__LABELABLE_ELEMENT:
+                if (eInternalContainer() != null)
+                    msgs = eBasicRemoveFromContainer(msgs);
+                return basicSetLabelableElement((LabelableElement)otherEnd, msgs);
+        }
+        return super.eInverseAdd(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case GraphPackage.LABEL__LABELABLE_ELEMENT:
-				return basicSetLabelableElement(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.LABEL__LABELABLE_ELEMENT:
+                return basicSetLabelableElement(null, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case GraphPackage.LABEL__LABELABLE_ELEMENT:
-				return eInternalContainer().eInverseRemove(this, GraphPackage.LABELABLE_ELEMENT__LABELS, LabelableElement.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
+        switch (eContainerFeatureID())
+        {
+            case GraphPackage.LABEL__LABELABLE_ELEMENT:
+                return eInternalContainer().eInverseRemove(this, GraphPackage.LABELABLE_ELEMENT__LABELS, LabelableElement.class, msgs);
+        }
+        return super.eBasicRemoveFromContainerFeature(msgs);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case GraphPackage.LABEL__NAMESPACE:
-				return getNamespace();
-			case GraphPackage.LABEL__NAME:
-				return getName();
-			case GraphPackage.LABEL__QNAME:
-				return getQName();
-			case GraphPackage.LABEL__VALUE:
-				return getValue();
-			case GraphPackage.LABEL__LABELABLE_ELEMENT:
-				return getLabelableElement();
-			case GraphPackage.LABEL__VALUE_STRING:
-				return getValueString();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.LABEL__NAMESPACE:
+                return getNamespace();
+            case GraphPackage.LABEL__NAME:
+                return getName();
+            case GraphPackage.LABEL__QNAME:
+                return getQName();
+            case GraphPackage.LABEL__VALUE:
+                return getValue();
+            case GraphPackage.LABEL__LABELABLE_ELEMENT:
+                return getLabelableElement();
+            case GraphPackage.LABEL__VALUE_STRING:
+                return getValueString();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case GraphPackage.LABEL__NAMESPACE:
-				setNamespace((String)newValue);
-				return;
-			case GraphPackage.LABEL__NAME:
-				setName((String)newValue);
-				return;
-			case GraphPackage.LABEL__QNAME:
-				setQName((String)newValue);
-				return;
-			case GraphPackage.LABEL__VALUE:
-				setValue(newValue);
-				return;
-			case GraphPackage.LABEL__LABELABLE_ELEMENT:
-				setLabelableElement((LabelableElement)newValue);
-				return;
-			case GraphPackage.LABEL__VALUE_STRING:
-				setValueString((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.LABEL__NAMESPACE:
+                setNamespace((String)newValue);
+                return;
+            case GraphPackage.LABEL__NAME:
+                setName((String)newValue);
+                return;
+            case GraphPackage.LABEL__QNAME:
+                setQName((String)newValue);
+                return;
+            case GraphPackage.LABEL__VALUE:
+                setValue(newValue);
+                return;
+            case GraphPackage.LABEL__LABELABLE_ELEMENT:
+                setLabelableElement((LabelableElement)newValue);
+                return;
+            case GraphPackage.LABEL__VALUE_STRING:
+                setValueString((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case GraphPackage.LABEL__NAMESPACE:
-				setNamespace(NAMESPACE_EDEFAULT);
-				return;
-			case GraphPackage.LABEL__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case GraphPackage.LABEL__QNAME:
-				setQName(QNAME_EDEFAULT);
-				return;
-			case GraphPackage.LABEL__VALUE:
-				setValue(VALUE_EDEFAULT);
-				return;
-			case GraphPackage.LABEL__LABELABLE_ELEMENT:
-				setLabelableElement((LabelableElement)null);
-				return;
-			case GraphPackage.LABEL__VALUE_STRING:
-				setValueString(VALUE_STRING_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.LABEL__NAMESPACE:
+                setNamespace(NAMESPACE_EDEFAULT);
+                return;
+            case GraphPackage.LABEL__NAME:
+                setName(NAME_EDEFAULT);
+                return;
+            case GraphPackage.LABEL__QNAME:
+                setQName(QNAME_EDEFAULT);
+                return;
+            case GraphPackage.LABEL__VALUE:
+                setValue(VALUE_EDEFAULT);
+                return;
+            case GraphPackage.LABEL__LABELABLE_ELEMENT:
+                setLabelableElement((LabelableElement)null);
+                return;
+            case GraphPackage.LABEL__VALUE_STRING:
+                setValueString(VALUE_STRING_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case GraphPackage.LABEL__NAMESPACE:
-				return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
-			case GraphPackage.LABEL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case GraphPackage.LABEL__QNAME:
-				return QNAME_EDEFAULT == null ? getQName() != null : !QNAME_EDEFAULT.equals(getQName());
-			case GraphPackage.LABEL__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case GraphPackage.LABEL__LABELABLE_ELEMENT:
-				return getLabelableElement() != null;
-			case GraphPackage.LABEL__VALUE_STRING:
-				return VALUE_STRING_EDEFAULT == null ? getValueString() != null : !VALUE_STRING_EDEFAULT.equals(getValueString());
-		}
-		return super.eIsSet(featureID);
-	}
+        switch (featureID)
+        {
+            case GraphPackage.LABEL__NAMESPACE:
+                return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
+            case GraphPackage.LABEL__NAME:
+                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+            case GraphPackage.LABEL__QNAME:
+                return QNAME_EDEFAULT == null ? getQName() != null : !QNAME_EDEFAULT.equals(getQName());
+            case GraphPackage.LABEL__VALUE:
+                return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+            case GraphPackage.LABEL__LABELABLE_ELEMENT:
+                return getLabelableElement() != null;
+            case GraphPackage.LABEL__VALUE_STRING:
+                return VALUE_STRING_EDEFAULT == null ? getValueString() != null : !VALUE_STRING_EDEFAULT.equals(getValueString());
+        }
+        return super.eIsSet(featureID);
+    }
 
 	/**
-	 * <!-- begin-user-doc -->
+     * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+     * @generated
+     */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+        if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (namespace: ");
-		result.append(namespace);
-		result.append(", name: ");
-		result.append(name);
-		result.append(", value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuffer result = new StringBuffer(super.toString());
+        result.append(" (namespace: ");
+        result.append(namespace);
+        result.append(", name: ");
+        result.append(name);
+        result.append(", value: ");
+        result.append(value);
+        result.append(')');
+        return result.toString();
+    }
 
 } //LabelImpl
