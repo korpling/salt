@@ -337,10 +337,21 @@ public class SaltSample
 	}
 	
 	/**
-	 * 
+	 * Creates a syntax structure for the given {@link SDocument} object. If it does not already 
+	 * contain a primary text and a tokenization, this method calls {@link #createPrimaryData(SDocument)} and
+	 * {@link #createTokens(SDocument)}. 
 	 * @param sDocument
 	 */
 	public static void createSyntaxStructure(SDocument sDocument){
+		if (sDocument.getSDocumentGraph()== null)
+			sDocument.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
+		
+		if (sDocument.getSDocumentGraph().getSTokens()== null)
+		{
+			if (sDocument.getSDocumentGraph().getSTextualDSs()== null)
+				SaltSample.createPrimaryData(sDocument);
+			SaltSample.createTokens(sDocument);
+		}
 		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
 		
 		// creating variables for the eInstance of the SaltFactory and for the SDocumentGraph 
