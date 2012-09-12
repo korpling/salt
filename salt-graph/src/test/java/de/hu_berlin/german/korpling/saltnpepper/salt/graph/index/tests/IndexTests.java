@@ -31,34 +31,34 @@ import junit.textui.TestRunner;
 public class IndexTests extends TestSuite {
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static void main(String[] args) {
-        TestRunner.run(suite());
-    }
+		TestRunner.run(suite());
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static Test suite() {
-        TestSuite suite = new IndexTests("index Tests");
-        suite.addTestSuite(SimpleIndexTest.class);
-        suite.addTestSuite(IndexMgrTest.class);
-        suite.addTestSuite(ComplexIndexTest.class);
-        return suite;
-    }
+		TestSuite suite = new IndexTests("index Tests");
+		suite.addTestSuite(SimpleIndexTest.class);
+		suite.addTestSuite(IndexMgrTest.class);
+		suite.addTestSuite(ComplexIndexTest.class);
+		return suite;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public IndexTests(String name) {
-        super(name);
-    }
+		super(name);
+	}
 
 } //IndexTests

@@ -34,13 +34,13 @@ import junit.textui.TestRunner;
 public class GraphAllTests extends TestSuite {
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static void main(String[] args) {
-        TestRunner.run(suite());
-    }
+		TestRunner.run(suite());
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -56,12 +56,12 @@ public class GraphAllTests extends TestSuite {
 	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public GraphAllTests(String name) {
-        super(name);
-    }
+		super(name);
+	}
 
 } //GraphAllTests

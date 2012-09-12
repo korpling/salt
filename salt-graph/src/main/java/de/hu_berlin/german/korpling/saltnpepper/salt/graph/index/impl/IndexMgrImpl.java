@@ -54,56 +54,55 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class IndexMgrImpl extends EObjectImpl implements IndexMgr {
 	/**
-     * The cached value of the '{@link #getIndexes() <em>Indexes</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getIndexes() <em>Indexes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getIndexes()
-     * @generated
-     * @ordered
-     */
+	 * @see #getIndexes()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<Index> indexes;
 
 	/**
-     * The default value of the '{@link #getNumOfIndexes() <em>Num Of Indexes</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getNumOfIndexes() <em>Num Of Indexes</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getNumOfIndexes()
-     * @generated
-     * @ordered
-     */
+	 * @see #getNumOfIndexes()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Long NUM_OF_INDEXES_EDEFAULT = null;
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected IndexMgrImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return IndexPackage.Literals.INDEX_MGR;
-    }
+		return IndexPackage.Literals.INDEX_MGR;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList<Index> getIndexes() {
-        if (indexes == null)
-        {
-            indexes = new EObjectContainmentEList<Index>(Index.class, this, IndexPackage.INDEX_MGR__INDEXES);
-        }
-        return indexes;
-    }
+		if (indexes == null) {
+			indexes = new EObjectContainmentEList<Index>(Index.class, this, IndexPackage.INDEX_MGR__INDEXES);
+		}
+		return indexes;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,14 +114,14 @@ public class IndexMgrImpl extends EObjectImpl implements IndexMgr {
 	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Graph getGraph() {
-        Graph graph = basicGetGraph();
-        return graph != null && graph.eIsProxy() ? (Graph)eResolveProxy((InternalEObject)graph) : graph;
-    }
+		Graph graph = basicGetGraph();
+		return graph != null && graph.eIsProxy() ? (Graph)eResolveProxy((InternalEObject)graph) : graph;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -224,97 +223,92 @@ public class IndexMgrImpl extends EObjectImpl implements IndexMgr {
 	}
 	
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID)
-        {
-            case IndexPackage.INDEX_MGR__INDEXES:
-                return ((InternalEList<?>)getIndexes()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case IndexPackage.INDEX_MGR__INDEXES:
+				return ((InternalEList<?>)getIndexes()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID)
-        {
-            case IndexPackage.INDEX_MGR__INDEXES:
-                return getIndexes();
-            case IndexPackage.INDEX_MGR__NUM_OF_INDEXES:
-                return getNumOfIndexes();
-            case IndexPackage.INDEX_MGR__GRAPH:
-                if (resolve) return getGraph();
-                return basicGetGraph();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case IndexPackage.INDEX_MGR__INDEXES:
+				return getIndexes();
+			case IndexPackage.INDEX_MGR__NUM_OF_INDEXES:
+				return getNumOfIndexes();
+			case IndexPackage.INDEX_MGR__GRAPH:
+				if (resolve) return getGraph();
+				return basicGetGraph();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-        switch (featureID)
-        {
-            case IndexPackage.INDEX_MGR__INDEXES:
-                getIndexes().clear();
-                getIndexes().addAll((Collection<? extends Index>)newValue);
-                return;
-            case IndexPackage.INDEX_MGR__GRAPH:
-                setGraph((Graph)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case IndexPackage.INDEX_MGR__INDEXES:
+				getIndexes().clear();
+				getIndexes().addAll((Collection<? extends Index>)newValue);
+				return;
+			case IndexPackage.INDEX_MGR__GRAPH:
+				setGraph((Graph)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-        switch (featureID)
-        {
-            case IndexPackage.INDEX_MGR__INDEXES:
-                getIndexes().clear();
-                return;
-            case IndexPackage.INDEX_MGR__GRAPH:
-                setGraph((Graph)null);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case IndexPackage.INDEX_MGR__INDEXES:
+				getIndexes().clear();
+				return;
+			case IndexPackage.INDEX_MGR__GRAPH:
+				setGraph((Graph)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-        switch (featureID)
-        {
-            case IndexPackage.INDEX_MGR__INDEXES:
-                return indexes != null && !indexes.isEmpty();
-            case IndexPackage.INDEX_MGR__NUM_OF_INDEXES:
-                return NUM_OF_INDEXES_EDEFAULT == null ? getNumOfIndexes() != null : !NUM_OF_INDEXES_EDEFAULT.equals(getNumOfIndexes());
-            case IndexPackage.INDEX_MGR__GRAPH:
-                return basicGetGraph() != null;
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case IndexPackage.INDEX_MGR__INDEXES:
+				return indexes != null && !indexes.isEmpty();
+			case IndexPackage.INDEX_MGR__NUM_OF_INDEXES:
+				return NUM_OF_INDEXES_EDEFAULT == null ? getNumOfIndexes() != null : !NUM_OF_INDEXES_EDEFAULT.equals(getNumOfIndexes());
+			case IndexPackage.INDEX_MGR__GRAPH:
+				return basicGetGraph() != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //IndexMgrImpl

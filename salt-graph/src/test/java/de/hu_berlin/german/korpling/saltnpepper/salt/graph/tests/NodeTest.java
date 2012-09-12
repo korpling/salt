@@ -41,34 +41,34 @@ public class NodeTest extends IdentifiableElementTest
 	protected IdentifiableElementTest identifiableElementTest= null;
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static void main(String[] args) {
-        TestRunner.run(NodeTest.class);
-    }
+		TestRunner.run(NodeTest.class);
+	}
 
 	/**
-     * Constructs a new Node test case with the given name.
-     * <!-- begin-user-doc -->
+	 * Constructs a new Node test case with the given name.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NodeTest(String name) {
-        super(name);
-    }
+		super(name);
+	}
 
 	/**
-     * Returns the fixture for this Node test case.
-     * <!-- begin-user-doc -->
+	 * Returns the fixture for this Node test case.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected Node getFixture() {
-        return (Node)fixture;
-    }
+		return (Node)fixture;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -87,15 +87,15 @@ public class NodeTest extends IdentifiableElementTest
 	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see junit.framework.TestCase#tearDown()
-     * @generated
-     */
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
 	@Override
 	protected void tearDown() throws Exception {
-        setFixture(null);
-    }
+		setFixture(null);
+	}
 
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node#clone() <em>Clone</em>}' operation.

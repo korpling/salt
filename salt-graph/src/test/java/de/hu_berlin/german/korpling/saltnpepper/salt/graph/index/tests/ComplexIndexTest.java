@@ -58,56 +58,56 @@ import junit.textui.TestRunner;
 public class ComplexIndexTest extends IdentifiableElementTest {
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static void main(String[] args) {
-        TestRunner.run(ComplexIndexTest.class);
-    }
+		TestRunner.run(ComplexIndexTest.class);
+	}
 
 	/**
-     * Constructs a new Complex Index test case with the given name.
-     * <!-- begin-user-doc -->
+	 * Constructs a new Complex Index test case with the given name.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public ComplexIndexTest(String name) {
-        super(name);
-    }
+		super(name);
+	}
 
 	/**
-     * Returns the fixture for this Complex Index test case.
-     * <!-- begin-user-doc -->
+	 * Returns the fixture for this Complex Index test case.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected ComplexIndex getFixture() {
-        return (ComplexIndex)fixture;
-    }
+		return (ComplexIndex)fixture;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see junit.framework.TestCase#setUp()
-     * @generated
-     */
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
 	@Override
 	protected void setUp() throws Exception {
-        setFixture(IndexFactory.eINSTANCE.createComplexIndex());
-    }
+		setFixture(IndexFactory.eINSTANCE.createComplexIndex());
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see junit.framework.TestCase#tearDown()
-     * @generated
-     */
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
 	@Override
 	protected void tearDown() throws Exception {
-        setFixture(null);
-    }
+		setFixture(null);
+	}
 
 	private String idxName= "Index"; 
 	private String[] ids=		{"id1", "id2", "id3"};

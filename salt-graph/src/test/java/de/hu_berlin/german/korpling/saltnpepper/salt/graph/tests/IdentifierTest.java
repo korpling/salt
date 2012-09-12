@@ -39,35 +39,35 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 public class IdentifierTest extends LabelTest {
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static void main(String[] args) {
-        TestRunner.run(IdentifierTest.class);
-    }
+		TestRunner.run(IdentifierTest.class);
+	}
 
 	/**
-     * Constructs a new Identifier test case with the given name.
-     * <!-- begin-user-doc -->
+	 * Constructs a new Identifier test case with the given name.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public IdentifierTest(String name) {
-        super(name);
-    }
+		super(name);
+	}
 
 	/**
-     * Returns the fixture for this Identifier test case.
-     * <!-- begin-user-doc -->
+	 * Returns the fixture for this Identifier test case.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected Identifier getFixture() 
 	{
-        return (Identifier)fixture;
-    }
+		return (Identifier)fixture;
+	}
 
 	/**
 	 * Tests the '{@link de.util.graph.Label#getFullName() <em>Full Name</em>}' feature getter.
@@ -92,26 +92,26 @@ public class IdentifierTest extends LabelTest {
 	}
 	
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see junit.framework.TestCase#setUp()
-     * @generated
-     */
+	 * @see junit.framework.TestCase#setUp()
+	 * @generated
+	 */
 	@Override
 	protected void setUp() throws Exception {
-        setFixture(GraphFactory.eINSTANCE.createIdentifier());
-    }
+		setFixture(GraphFactory.eINSTANCE.createIdentifier());
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see junit.framework.TestCase#tearDown()
-     * @generated
-     */
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
 	@Override
 	protected void tearDown() throws Exception {
-        setFixture(null);
-    }
+		setFixture(null);
+	}
 
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier#getIdentifiableElement() <em>Identifiable Element</em>}' feature getter.

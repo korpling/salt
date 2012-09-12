@@ -29,47 +29,47 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface IndexFactory extends EFactory {
 	/**
-     * The singleton instance of the factory.
-     * <!-- begin-user-doc -->
+	 * The singleton instance of the factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	IndexFactory eINSTANCE = de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexFactoryImpl.init();
 
 	/**
-     * Returns a new object of class '<em>Simple Index</em>'.
-     * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Simple Index</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @return a new object of class '<em>Simple Index</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>Simple Index</em>'.
+	 * @generated
+	 */
 	SimpleIndex createSimpleIndex();
 
 	/**
-     * Returns a new object of class '<em>Mgr</em>'.
-     * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Mgr</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @return a new object of class '<em>Mgr</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>Mgr</em>'.
+	 * @generated
+	 */
 	IndexMgr createIndexMgr();
 
 	/**
-     * Returns a new object of class '<em>Complex Index</em>'.
-     * <!-- begin-user-doc -->
+	 * Returns a new object of class '<em>Complex Index</em>'.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @return a new object of class '<em>Complex Index</em>'.
-     * @generated
-     */
+	 * @return a new object of class '<em>Complex Index</em>'.
+	 * @generated
+	 */
 	ComplexIndex createComplexIndex();
 
 	/**
-     * Returns the package supported by this factory.
-     * <!-- begin-user-doc -->
+	 * Returns the package supported by this factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @return the package supported by this factory.
-     * @generated
-     */
+	 * @return the package supported by this factory.
+	 * @generated
+	 */
 	IndexPackage getIndexPackage();
 
 } //IndexFactory

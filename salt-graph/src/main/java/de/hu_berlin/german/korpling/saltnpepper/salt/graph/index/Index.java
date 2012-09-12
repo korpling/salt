@@ -38,49 +38,49 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 public interface Index extends IdentifiableElement {
 
 	/**
-     * Returns the value of the '<em><b>Num Of Elements</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Num Of Elements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Num Of Elements</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Num Of Elements</em>' attribute.
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_NumOfElements()
-     * @model changeable="false" volatile="true" derived="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Num Of Elements</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_NumOfElements()
+	 * @model changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
 	Long getNumOfElements();
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
 	void addElement(Object elementId, Object element);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
 	Boolean hasElement(Object elementId);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
 	Boolean removeElement(Object element);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
 	Boolean removeAll();
 } // Index

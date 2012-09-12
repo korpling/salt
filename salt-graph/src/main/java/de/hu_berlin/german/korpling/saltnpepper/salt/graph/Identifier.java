@@ -47,57 +47,57 @@ public interface Identifier extends Label
 	 */
 	public static final String NAME_DEFAULT="id";
 	/**
-     * Returns the value of the '<em><b>Id</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Id</em>' attribute.
-     * @see #setId(String)
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getIdentifier_Id()
-     * @model transient="true" volatile="true" derived="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Id</em>' attribute.
+	 * @see #setId(String)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getIdentifier_Id()
+	 * @model transient="true" volatile="true" derived="true"
+	 * @generated
+	 */
 	String getId();
 
 	/**
-     * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier#getId <em>Id</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier#getId <em>Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Id</em>' attribute.
-     * @see #getId()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Id</em>' attribute.
+	 * @see #getId()
+	 * @generated
+	 */
 	void setId(String value);
 
 	/**
-     * Returns the value of the '<em><b>Identifiable Element</b></em>' reference.
-     * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement#getIdentifier <em>Identifier</em>}'.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Identifiable Element</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement#getIdentifier <em>Identifier</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Identifiable Element</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Identifiable Element</em>' reference.
-     * @see #setIdentifiableElement(IdentifiableElement)
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getIdentifier_IdentifiableElement()
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement#getIdentifier
-     * @model opposite="identifier" transient="true" volatile="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Identifiable Element</em>' reference.
+	 * @see #setIdentifiableElement(IdentifiableElement)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getIdentifier_IdentifiableElement()
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement#getIdentifier
+	 * @model opposite="identifier" transient="true" volatile="true"
+	 * @generated
+	 */
 	IdentifiableElement getIdentifiableElement();
 
 	/**
-     * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier#getIdentifiableElement <em>Identifiable Element</em>}' reference.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier#getIdentifiableElement <em>Identifiable Element</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Identifiable Element</em>' reference.
-     * @see #getIdentifiableElement()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Identifiable Element</em>' reference.
+	 * @see #getIdentifiableElement()
+	 * @generated
+	 */
 	void setIdentifiableElement(IdentifiableElement value);
 
 } // Identifier

@@ -40,18 +40,18 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ComplexIndex extends Index {
 	/**
-     * Returns the value of the '<em><b>Num Of Slots</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Num Of Slots</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Num Of Slots</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Num Of Slots</em>' attribute.
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex_NumOfSlots()
-     * @model transient="true" changeable="false" volatile="true" derived="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Num Of Slots</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex_NumOfSlots()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
 	Long getNumOfSlots();
 
 	/**
@@ -79,51 +79,51 @@ public interface ComplexIndex extends Index {
 	void setIdxTable(Map<Object, EList<Object>> value);
 
 	/**
-     * Returns the value of the '<em><b>Sortable</b></em>' attribute.
-     * The default value is <code>"false"</code>.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Sortable</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Sortable</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Sortable</em>' attribute.
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex_Sortable()
-     * @model default="false" changeable="false"
-     * @generated
-     */
+	 * @return the value of the '<em>Sortable</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex_Sortable()
+	 * @model default="false" changeable="false"
+	 * @generated
+	 */
     boolean isSortable();
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
 	Boolean hasSlot(Object elementId);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
 	EList<Object> getSlot(Object elementId);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @model kind="operation"
-     * @generated
-     */
+	 * @model kind="operation"
+	 * @generated
+	 */
 	EList<Object> getSlotIds();
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @model
-     * @generated
-     */
+	 * @model
+	 * @generated
+	 */
 	Boolean removeSlot(Object elementId);
 
 } // ComplexIndex

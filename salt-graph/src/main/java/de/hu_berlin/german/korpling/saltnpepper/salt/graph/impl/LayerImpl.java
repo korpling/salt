@@ -64,43 +64,43 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 	public static  Long equalTime= 0l;
 	
 	/**
-     * The cached value of the '{@link #getNodes() <em>Nodes</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getNodes()
-     * @generated
-     * @ordered
-     */
+	 * @see #getNodes()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<Node> nodes;
 
 	/**
-     * The cached value of the '{@link #getEdges() <em>Edges</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getEdges()
-     * @generated
-     * @ordered
-     */
+	 * @see #getEdges()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<Edge> edges;
 
 	/**
-     * The cached value of the '{@link #getSuperLayer() <em>Super Layer</em>}' reference.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSuperLayer() <em>Super Layer</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getSuperLayer()
-     * @generated
-     * @ordered
-     */
+	 * @see #getSuperLayer()
+	 * @generated
+	 * @ordered
+	 */
 	protected Layer superLayer;
 
 	/**
-     * The cached value of the '{@link #getSubLayers() <em>Sub Layers</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSubLayers() <em>Sub Layers</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getSubLayers()
-     * @generated
-     * @ordered
-     */
+	 * @see #getSubLayers()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<Layer> subLayers;
 
 	/**
@@ -120,14 +120,14 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return GraphPackage.Literals.LAYER;
-    }
+		return GraphPackage.Literals.LAYER;
+	}
 
 // ================ start id-handling delegation	
 	/**
@@ -158,46 +158,45 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 // ================ end id-handling delegation
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Graph getGraph() {
-        if (eContainerFeatureID() != GraphPackage.LAYER__GRAPH) return null;
-        return (Graph)eContainer();
-    }
+		if (eContainerFeatureID() != GraphPackage.LAYER__GRAPH) return null;
+		return (Graph)eContainer();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NotificationChain basicSetGraph(Graph newGraph, NotificationChain msgs) {
-        msgs = eBasicSetContainer((InternalEObject)newGraph, GraphPackage.LAYER__GRAPH, msgs);
-        return msgs;
-    }
+		msgs = eBasicSetContainer((InternalEObject)newGraph, GraphPackage.LAYER__GRAPH, msgs);
+		return msgs;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setGraph(Graph newGraph) {
-        if (newGraph != eInternalContainer() || (eContainerFeatureID() != GraphPackage.LAYER__GRAPH && newGraph != null))
-        {
-            if (EcoreUtil.isAncestor(this, newGraph))
-                throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-            NotificationChain msgs = null;
-            if (eInternalContainer() != null)
-                msgs = eBasicRemoveFromContainer(msgs);
-            if (newGraph != null)
-                msgs = ((InternalEObject)newGraph).eInverseAdd(this, GraphPackage.GRAPH__LAYERS, Graph.class, msgs);
-            msgs = basicSetGraph(newGraph, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LAYER__GRAPH, newGraph, newGraph));
-    }
+		if (newGraph != eInternalContainer() || (eContainerFeatureID() != GraphPackage.LAYER__GRAPH && newGraph != null)) {
+			if (EcoreUtil.isAncestor(this, newGraph))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newGraph != null)
+				msgs = ((InternalEObject)newGraph).eInverseAdd(this, GraphPackage.GRAPH__LAYERS, Graph.class, msgs);
+			msgs = basicSetGraph(newGraph, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LAYER__GRAPH, newGraph, newGraph));
+	}
 
 	/**
 	 * Finds all differences between this and the given object. 
@@ -778,111 +777,104 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 	}
 	
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList<Node> getNodes() {
-        if (nodes == null)
-        {
-            nodes = new EObjectWithInverseResolvingEList.ManyInverse<Node>(Node.class, this, GraphPackage.LAYER__NODES, GraphPackage.NODE__LAYERS);
-        }
-        return nodes;
-    }
+		if (nodes == null) {
+			nodes = new EObjectWithInverseResolvingEList.ManyInverse<Node>(Node.class, this, GraphPackage.LAYER__NODES, GraphPackage.NODE__LAYERS);
+		}
+		return nodes;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList<Edge> getEdges() {
-        if (edges == null)
-        {
-            edges = new EObjectWithInverseResolvingEList.ManyInverse<Edge>(Edge.class, this, GraphPackage.LAYER__EDGES, GraphPackage.EDGE__LAYERS);
-        }
-        return edges;
-    }
+		if (edges == null) {
+			edges = new EObjectWithInverseResolvingEList.ManyInverse<Edge>(Edge.class, this, GraphPackage.LAYER__EDGES, GraphPackage.EDGE__LAYERS);
+		}
+		return edges;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Layer getSuperLayer() {
-        if (superLayer != null && superLayer.eIsProxy())
-        {
-            InternalEObject oldSuperLayer = (InternalEObject)superLayer;
-            superLayer = (Layer)eResolveProxy(oldSuperLayer);
-            if (superLayer != oldSuperLayer)
-            {
-                if (eNotificationRequired())
-                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, GraphPackage.LAYER__SUPER_LAYER, oldSuperLayer, superLayer));
-            }
-        }
-        return superLayer;
-    }
+		if (superLayer != null && superLayer.eIsProxy()) {
+			InternalEObject oldSuperLayer = (InternalEObject)superLayer;
+			superLayer = (Layer)eResolveProxy(oldSuperLayer);
+			if (superLayer != oldSuperLayer) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GraphPackage.LAYER__SUPER_LAYER, oldSuperLayer, superLayer));
+			}
+		}
+		return superLayer;
+	}
 
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Layer basicGetSuperLayer() {
-        return superLayer;
-    }
+		return superLayer;
+	}
 
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NotificationChain basicSetSuperLayer(Layer newSuperLayer, NotificationChain msgs) {
-        Layer oldSuperLayer = superLayer;
-        superLayer = newSuperLayer;
-        if (eNotificationRequired())
-        {
-            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GraphPackage.LAYER__SUPER_LAYER, oldSuperLayer, newSuperLayer);
-            if (msgs == null) msgs = notification; else msgs.add(notification);
-        }
-        return msgs;
-    }
+		Layer oldSuperLayer = superLayer;
+		superLayer = newSuperLayer;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GraphPackage.LAYER__SUPER_LAYER, oldSuperLayer, newSuperLayer);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setSuperLayer(Layer newSuperLayer) {
-        if (newSuperLayer != superLayer)
-        {
-            NotificationChain msgs = null;
-            if (superLayer != null)
-                msgs = ((InternalEObject)superLayer).eInverseRemove(this, GraphPackage.LAYER__SUB_LAYERS, Layer.class, msgs);
-            if (newSuperLayer != null)
-                msgs = ((InternalEObject)newSuperLayer).eInverseAdd(this, GraphPackage.LAYER__SUB_LAYERS, Layer.class, msgs);
-            msgs = basicSetSuperLayer(newSuperLayer, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LAYER__SUPER_LAYER, newSuperLayer, newSuperLayer));
-    }
+		if (newSuperLayer != superLayer) {
+			NotificationChain msgs = null;
+			if (superLayer != null)
+				msgs = ((InternalEObject)superLayer).eInverseRemove(this, GraphPackage.LAYER__SUB_LAYERS, Layer.class, msgs);
+			if (newSuperLayer != null)
+				msgs = ((InternalEObject)newSuperLayer).eInverseAdd(this, GraphPackage.LAYER__SUB_LAYERS, Layer.class, msgs);
+			msgs = basicSetSuperLayer(newSuperLayer, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LAYER__SUPER_LAYER, newSuperLayer, newSuperLayer));
+	}
 
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList<Layer> getSubLayers() {
-        if (subLayers == null)
-        {
-            subLayers = new EObjectWithInverseResolvingEList<Layer>(Layer.class, this, GraphPackage.LAYER__SUB_LAYERS, GraphPackage.LAYER__SUPER_LAYER);
-        }
-        return subLayers;
-    }
+		if (subLayers == null) {
+			subLayers = new EObjectWithInverseResolvingEList<Layer>(Layer.class, this, GraphPackage.LAYER__SUB_LAYERS, GraphPackage.LAYER__SUPER_LAYER);
+		}
+		return subLayers;
+	}
 
 	/**
 	 * Listen on adding a Layer to the subLayers of this object, and checks, that a layer cannot 
@@ -1016,176 +1008,169 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID)
-        {
-            case GraphPackage.LAYER__GRAPH:
-                if (eInternalContainer() != null)
-                    msgs = eBasicRemoveFromContainer(msgs);
-                return basicSetGraph((Graph)otherEnd, msgs);
-            case GraphPackage.LAYER__NODES:
-                return ((InternalEList<InternalEObject>)(InternalEList<?>)getNodes()).basicAdd(otherEnd, msgs);
-            case GraphPackage.LAYER__EDGES:
-                return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
-            case GraphPackage.LAYER__SUPER_LAYER:
-                if (superLayer != null)
-                    msgs = ((InternalEObject)superLayer).eInverseRemove(this, GraphPackage.LAYER__SUB_LAYERS, Layer.class, msgs);
-                return basicSetSuperLayer((Layer)otherEnd, msgs);
-            case GraphPackage.LAYER__SUB_LAYERS:
-                return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubLayers()).basicAdd(otherEnd, msgs);
-        }
-        return super.eInverseAdd(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case GraphPackage.LAYER__GRAPH:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetGraph((Graph)otherEnd, msgs);
+			case GraphPackage.LAYER__NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getNodes()).basicAdd(otherEnd, msgs);
+			case GraphPackage.LAYER__EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
+			case GraphPackage.LAYER__SUPER_LAYER:
+				if (superLayer != null)
+					msgs = ((InternalEObject)superLayer).eInverseRemove(this, GraphPackage.LAYER__SUB_LAYERS, Layer.class, msgs);
+				return basicSetSuperLayer((Layer)otherEnd, msgs);
+			case GraphPackage.LAYER__SUB_LAYERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSubLayers()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID)
-        {
-            case GraphPackage.LAYER__GRAPH:
-                return basicSetGraph(null, msgs);
-            case GraphPackage.LAYER__NODES:
-                return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
-            case GraphPackage.LAYER__EDGES:
-                return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
-            case GraphPackage.LAYER__SUPER_LAYER:
-                return basicSetSuperLayer(null, msgs);
-            case GraphPackage.LAYER__SUB_LAYERS:
-                return ((InternalEList<?>)getSubLayers()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case GraphPackage.LAYER__GRAPH:
+				return basicSetGraph(null, msgs);
+			case GraphPackage.LAYER__NODES:
+				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
+			case GraphPackage.LAYER__EDGES:
+				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
+			case GraphPackage.LAYER__SUPER_LAYER:
+				return basicSetSuperLayer(null, msgs);
+			case GraphPackage.LAYER__SUB_LAYERS:
+				return ((InternalEList<?>)getSubLayers()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-        switch (eContainerFeatureID())
-        {
-            case GraphPackage.LAYER__GRAPH:
-                return eInternalContainer().eInverseRemove(this, GraphPackage.GRAPH__LAYERS, Graph.class, msgs);
-        }
-        return super.eBasicRemoveFromContainerFeature(msgs);
-    }
+		switch (eContainerFeatureID()) {
+			case GraphPackage.LAYER__GRAPH:
+				return eInternalContainer().eInverseRemove(this, GraphPackage.GRAPH__LAYERS, Graph.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID)
-        {
-            case GraphPackage.LAYER__GRAPH:
-                return getGraph();
-            case GraphPackage.LAYER__NODES:
-                return getNodes();
-            case GraphPackage.LAYER__EDGES:
-                return getEdges();
-            case GraphPackage.LAYER__SUPER_LAYER:
-                if (resolve) return getSuperLayer();
-                return basicGetSuperLayer();
-            case GraphPackage.LAYER__SUB_LAYERS:
-                return getSubLayers();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case GraphPackage.LAYER__GRAPH:
+				return getGraph();
+			case GraphPackage.LAYER__NODES:
+				return getNodes();
+			case GraphPackage.LAYER__EDGES:
+				return getEdges();
+			case GraphPackage.LAYER__SUPER_LAYER:
+				if (resolve) return getSuperLayer();
+				return basicGetSuperLayer();
+			case GraphPackage.LAYER__SUB_LAYERS:
+				return getSubLayers();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-        switch (featureID)
-        {
-            case GraphPackage.LAYER__GRAPH:
-                setGraph((Graph)newValue);
-                return;
-            case GraphPackage.LAYER__NODES:
-                getNodes().clear();
-                getNodes().addAll((Collection<? extends Node>)newValue);
-                return;
-            case GraphPackage.LAYER__EDGES:
-                getEdges().clear();
-                getEdges().addAll((Collection<? extends Edge>)newValue);
-                return;
-            case GraphPackage.LAYER__SUPER_LAYER:
-                setSuperLayer((Layer)newValue);
-                return;
-            case GraphPackage.LAYER__SUB_LAYERS:
-                getSubLayers().clear();
-                getSubLayers().addAll((Collection<? extends Layer>)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case GraphPackage.LAYER__GRAPH:
+				setGraph((Graph)newValue);
+				return;
+			case GraphPackage.LAYER__NODES:
+				getNodes().clear();
+				getNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case GraphPackage.LAYER__EDGES:
+				getEdges().clear();
+				getEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case GraphPackage.LAYER__SUPER_LAYER:
+				setSuperLayer((Layer)newValue);
+				return;
+			case GraphPackage.LAYER__SUB_LAYERS:
+				getSubLayers().clear();
+				getSubLayers().addAll((Collection<? extends Layer>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-        switch (featureID)
-        {
-            case GraphPackage.LAYER__GRAPH:
-                setGraph((Graph)null);
-                return;
-            case GraphPackage.LAYER__NODES:
-                getNodes().clear();
-                return;
-            case GraphPackage.LAYER__EDGES:
-                getEdges().clear();
-                return;
-            case GraphPackage.LAYER__SUPER_LAYER:
-                setSuperLayer((Layer)null);
-                return;
-            case GraphPackage.LAYER__SUB_LAYERS:
-                getSubLayers().clear();
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case GraphPackage.LAYER__GRAPH:
+				setGraph((Graph)null);
+				return;
+			case GraphPackage.LAYER__NODES:
+				getNodes().clear();
+				return;
+			case GraphPackage.LAYER__EDGES:
+				getEdges().clear();
+				return;
+			case GraphPackage.LAYER__SUPER_LAYER:
+				setSuperLayer((Layer)null);
+				return;
+			case GraphPackage.LAYER__SUB_LAYERS:
+				getSubLayers().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-        switch (featureID)
-        {
-            case GraphPackage.LAYER__GRAPH:
-                return getGraph() != null;
-            case GraphPackage.LAYER__NODES:
-                return nodes != null && !nodes.isEmpty();
-            case GraphPackage.LAYER__EDGES:
-                return edges != null && !edges.isEmpty();
-            case GraphPackage.LAYER__SUPER_LAYER:
-                return superLayer != null;
-            case GraphPackage.LAYER__SUB_LAYERS:
-                return subLayers != null && !subLayers.isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case GraphPackage.LAYER__GRAPH:
+				return getGraph() != null;
+			case GraphPackage.LAYER__NODES:
+				return nodes != null && !nodes.isEmpty();
+			case GraphPackage.LAYER__EDGES:
+				return edges != null && !edges.isEmpty();
+			case GraphPackage.LAYER__SUPER_LAYER:
+				return superLayer != null;
+			case GraphPackage.LAYER__SUB_LAYERS:
+				return subLayers != null && !subLayers.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //LayerImpl

@@ -72,210 +72,204 @@ public enum GRAPH_TRAVERSE_TYPE implements Enumerator {
 	BOTTOM_UP_BREADTH_FIRST(3, "BOTTOM_UP_BREADTH_FIRST", "BOTTOM_UP_BREADTH_FIRST");
 
 	/**
-     * The '<em><b>TOP DOWN DEPTH FIRST</b></em>' literal value.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>TOP DOWN DEPTH FIRST</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>TOP DOWN DEPTH FIRST</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @see #TOP_DOWN_DEPTH_FIRST
-     * @model
-     * @generated
-     * @ordered
-     */
+	 * @see #TOP_DOWN_DEPTH_FIRST
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
 	public static final int TOP_DOWN_DEPTH_FIRST_VALUE = 0;
 
 	/**
-     * The '<em><b>TOP DOWN BREADTH FIRST</b></em>' literal value.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>TOP DOWN BREADTH FIRST</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>TOP DOWN BREADTH FIRST</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @see #TOP_DOWN_BREADTH_FIRST
-     * @model
-     * @generated
-     * @ordered
-     */
+	 * @see #TOP_DOWN_BREADTH_FIRST
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
 	public static final int TOP_DOWN_BREADTH_FIRST_VALUE = 1;
 
 	/**
-     * The '<em><b>BOTTOM UP DEPTH FIRST</b></em>' literal value.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>BOTTOM UP DEPTH FIRST</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>BOTTOM UP DEPTH FIRST</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @see #BOTTOM_UP_DEPTH_FIRST
-     * @model
-     * @generated
-     * @ordered
-     */
+	 * @see #BOTTOM_UP_DEPTH_FIRST
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
 	public static final int BOTTOM_UP_DEPTH_FIRST_VALUE = 2;
 
 	/**
-     * The '<em><b>BOTTOM UP BREADTH FIRST</b></em>' literal value.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>BOTTOM UP BREADTH FIRST</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>BOTTOM UP BREADTH FIRST</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @see #BOTTOM_UP_BREADTH_FIRST
-     * @model
-     * @generated
-     * @ordered
-     */
+	 * @see #BOTTOM_UP_BREADTH_FIRST
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
 	public static final int BOTTOM_UP_BREADTH_FIRST_VALUE = 3;
 
 	/**
-     * An array of all the '<em><b>GRAPH TRAVERSE TYPE</b></em>' enumerators.
-     * <!-- begin-user-doc -->
+	 * An array of all the '<em><b>GRAPH TRAVERSE TYPE</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private static final GRAPH_TRAVERSE_TYPE[] VALUES_ARRAY =
-		new GRAPH_TRAVERSE_TYPE[]
-        {
-            TOP_DOWN_DEPTH_FIRST,
-            TOP_DOWN_BREADTH_FIRST,
-            BOTTOM_UP_DEPTH_FIRST,
-            BOTTOM_UP_BREADTH_FIRST,
-        };
+		new GRAPH_TRAVERSE_TYPE[] {
+			TOP_DOWN_DEPTH_FIRST,
+			TOP_DOWN_BREADTH_FIRST,
+			BOTTOM_UP_DEPTH_FIRST,
+			BOTTOM_UP_BREADTH_FIRST,
+		};
 
 	/**
-     * A public read-only list of all the '<em><b>GRAPH TRAVERSE TYPE</b></em>' enumerators.
-     * <!-- begin-user-doc -->
+	 * A public read-only list of all the '<em><b>GRAPH TRAVERSE TYPE</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static final List<GRAPH_TRAVERSE_TYPE> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-     * Returns the '<em><b>GRAPH TRAVERSE TYPE</b></em>' literal with the specified literal value.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>GRAPH TRAVERSE TYPE</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static GRAPH_TRAVERSE_TYPE get(String literal) {
-        for (int i = 0; i < VALUES_ARRAY.length; ++i)
-        {
-            GRAPH_TRAVERSE_TYPE result = VALUES_ARRAY[i];
-            if (result.toString().equals(literal))
-            {
-                return result;
-            }
-        }
-        return null;
-    }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			GRAPH_TRAVERSE_TYPE result = VALUES_ARRAY[i];
+			if (result.toString().equals(literal)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
 	/**
-     * Returns the '<em><b>GRAPH TRAVERSE TYPE</b></em>' literal with the specified name.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>GRAPH TRAVERSE TYPE</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static GRAPH_TRAVERSE_TYPE getByName(String name) {
-        for (int i = 0; i < VALUES_ARRAY.length; ++i)
-        {
-            GRAPH_TRAVERSE_TYPE result = VALUES_ARRAY[i];
-            if (result.getName().equals(name))
-            {
-                return result;
-            }
-        }
-        return null;
-    }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			GRAPH_TRAVERSE_TYPE result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
 	/**
-     * Returns the '<em><b>GRAPH TRAVERSE TYPE</b></em>' literal with the specified integer value.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>GRAPH TRAVERSE TYPE</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static GRAPH_TRAVERSE_TYPE get(int value) {
-        switch (value)
-        {
-            case TOP_DOWN_DEPTH_FIRST_VALUE: return TOP_DOWN_DEPTH_FIRST;
-            case TOP_DOWN_BREADTH_FIRST_VALUE: return TOP_DOWN_BREADTH_FIRST;
-            case BOTTOM_UP_DEPTH_FIRST_VALUE: return BOTTOM_UP_DEPTH_FIRST;
-            case BOTTOM_UP_BREADTH_FIRST_VALUE: return BOTTOM_UP_BREADTH_FIRST;
-        }
-        return null;
-    }
+		switch (value) {
+			case TOP_DOWN_DEPTH_FIRST_VALUE: return TOP_DOWN_DEPTH_FIRST;
+			case TOP_DOWN_BREADTH_FIRST_VALUE: return TOP_DOWN_BREADTH_FIRST;
+			case BOTTOM_UP_DEPTH_FIRST_VALUE: return BOTTOM_UP_DEPTH_FIRST;
+			case BOTTOM_UP_BREADTH_FIRST_VALUE: return BOTTOM_UP_BREADTH_FIRST;
+		}
+		return null;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private final int value;
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private final String name;
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private final String literal;
 
 	/**
-     * Only this class can construct instances.
-     * <!-- begin-user-doc -->
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private GRAPH_TRAVERSE_TYPE(int value, String name, String literal) {
-        this.value = value;
-        this.name = name;
-        this.literal = literal;
-    }
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public int getValue() {
-      return value;
-    }
+	  return value;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getName() {
-      return name;
-    }
+	  return name;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getLiteral() {
-      return literal;
-    }
+	  return literal;
+	}
 
 	/**
-     * Returns the literal value of the enumerator, which is its string representation.
-     * <!-- begin-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-        return literal;
-    }
+		return literal;
+	}
 	
 } //GRAPH_TRAVERSE_TYPE

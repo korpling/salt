@@ -51,23 +51,23 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage;
  */
 public class ComplexIndexImpl extends IdentifiableElementImpl implements ComplexIndex {
 	/**
-     * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getNumOfElements()
-     * @generated
-     * @ordered
-     */
+	 * @see #getNumOfElements()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Long NUM_OF_ELEMENTS_EDEFAULT = null;
 
 	/**
-     * The default value of the '{@link #getNumOfSlots() <em>Num Of Slots</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getNumOfSlots() <em>Num Of Slots</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getNumOfSlots()
-     * @generated
-     * @ordered
-     */
+	 * @see #getNumOfSlots()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Long NUM_OF_SLOTS_EDEFAULT = null;
 
 	/**
@@ -80,24 +80,24 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
     protected static final boolean SORTABLE_EDEFAULT = true;
 
     /**
-     * The cached value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isSortable()
-     * @generated
-     * @ordered
-     */
+	 * @see #isSortable()
+	 * @generated
+	 * @ordered
+	 */
     protected boolean sortable = SORTABLE_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return IndexPackage.Literals.COMPLEX_INDEX;
-    }
+		return IndexPackage.Literals.COMPLEX_INDEX;
+	}
 	
 	protected ComplexIndexImpl() {
 		super();
@@ -200,14 +200,14 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	
 	
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean isSortable()
     {
-        return sortable;
-    }
+		return sortable;
+	}
 
     //============================================================================================================
 	// ADD
@@ -386,25 +386,24 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID)
-        {
-            case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
-                return getNumOfElements();
-            case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
-                return getNumOfSlots();
-            case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
-                return getIdxTable();
-            case IndexPackage.COMPLEX_INDEX__SORTABLE:
-                return isSortable();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
+				return getNumOfElements();
+			case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
+				return getNumOfSlots();
+			case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
+				return getIdxTable();
+			case IndexPackage.COMPLEX_INDEX__SORTABLE:
+				return isSortable();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -436,43 +435,42 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-        switch (featureID)
-        {
-            case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
-                return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
-            case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
-                return NUM_OF_SLOTS_EDEFAULT == null ? getNumOfSlots() != null : !NUM_OF_SLOTS_EDEFAULT.equals(getNumOfSlots());
-            case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
-                return getIdxTable() != null;
-            case IndexPackage.COMPLEX_INDEX__SORTABLE:
-                return sortable != SORTABLE_EDEFAULT;
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
+				return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
+			case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
+				return NUM_OF_SLOTS_EDEFAULT == null ? getNumOfSlots() != null : !NUM_OF_SLOTS_EDEFAULT.equals(getNumOfSlots());
+			case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
+				return getIdxTable() != null;
+			case IndexPackage.COMPLEX_INDEX__SORTABLE:
+				return sortable != SORTABLE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 	
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString()
     {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (sortable: ");
-        result.append(sortable);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (sortable: ");
+		result.append(sortable);
+		result.append(')');
+		return result.toString();
+	}
     
     
 } //ComplexIndexImpl

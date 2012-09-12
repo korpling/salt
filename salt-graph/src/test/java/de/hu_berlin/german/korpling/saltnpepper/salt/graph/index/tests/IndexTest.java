@@ -43,76 +43,76 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 public abstract class IndexTest extends IdentifiableElementTest {
 
 	/**
-     * Constructs a new Index test case with the given name.
-     * <!-- begin-user-doc -->
+	 * Constructs a new Index test case with the given name.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public IndexTest(String name) {
-        super(name);
-    }
+		super(name);
+	}
 
 	/**
-     * Returns the fixture for this Index test case.
-     * <!-- begin-user-doc -->
+	 * Returns the fixture for this Index test case.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected Index getFixture() {
-        return (Index)fixture;
-    }
+		return (Index)fixture;
+	}
 
 	/**
-     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElements() <em>Num Of Elements</em>}' feature getter.
-     * <!-- begin-user-doc -->
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElements() <em>Num Of Elements</em>}' feature getter.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElements()
-     * @generated
-     */
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElements()
+	 * @generated
+	 */
 	public void testGetNumOfElements() {
-        // TODO: implement this feature getter test method
-        // Ensure that you remove @generated or mark it @generated NOT
-        fail();
-    }
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 	/**
-     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#addElement(java.lang.Object, java.lang.Object) <em>Add Element</em>}' operation.
-     * <!-- begin-user-doc -->
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#addElement(java.lang.Object, java.lang.Object) <em>Add Element</em>}' operation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#addElement(java.lang.Object, java.lang.Object)
-     * @generated
-     */
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#addElement(java.lang.Object, java.lang.Object)
+	 * @generated
+	 */
 	public void testAddElement__Object_Object() {
-        // TODO: implement this operation test method
-        // Ensure that you remove @generated or mark it @generated NOT
-        fail();
-    }
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 	/**
-     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasElement(java.lang.Object) <em>Has Element</em>}' operation.
-     * <!-- begin-user-doc -->
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasElement(java.lang.Object) <em>Has Element</em>}' operation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasElement(java.lang.Object)
-     * @generated
-     */
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasElement(java.lang.Object)
+	 * @generated
+	 */
 	public void testHasElement__Object() {
-        // TODO: implement this operation test method
-        // Ensure that you remove @generated or mark it @generated NOT
-        fail();
-    }
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 	/**
-     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#removeElement(java.lang.Object) <em>Remove Element</em>}' operation.
-     * <!-- begin-user-doc -->
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#removeElement(java.lang.Object) <em>Remove Element</em>}' operation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#removeElement(java.lang.Object)
-     * @generated
-     */
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#removeElement(java.lang.Object)
+	 * @generated
+	 */
 	public void testRemoveElement__Object() {
-        // TODO: implement this operation test method
-        // Ensure that you remove @generated or mark it @generated NOT
-        fail();
-    }
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
 
 } //IndexTest

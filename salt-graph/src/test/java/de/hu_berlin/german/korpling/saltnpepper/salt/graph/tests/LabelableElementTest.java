@@ -53,51 +53,51 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 public class LabelableElementTest extends TestCase {
 
 	/**
-     * The fixture for this Labelable Element test case.
-     * <!-- begin-user-doc -->
+	 * The fixture for this Labelable Element test case.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected LabelableElement fixture = null;
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static void main(String[] args) {
-        TestRunner.run(LabelableElementTest.class);
-    }
+		TestRunner.run(LabelableElementTest.class);
+	}
 
 	/**
-     * Constructs a new Labelable Element test case with the given name.
-     * <!-- begin-user-doc -->
+	 * Constructs a new Labelable Element test case with the given name.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public LabelableElementTest(String name) {
-        super(name);
-    }
+		super(name);
+	}
 
 	/**
-     * Sets the fixture for this Labelable Element test case.
-     * <!-- begin-user-doc -->
+	 * Sets the fixture for this Labelable Element test case.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected void setFixture(LabelableElement fixture) {
-        this.fixture = fixture;
-    }
+		this.fixture = fixture;
+	}
 
 	/**
-     * Returns the fixture for this Labelable Element test case.
-     * <!-- begin-user-doc -->
+	 * Returns the fixture for this Labelable Element test case.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected LabelableElement getFixture() {
-        return fixture;
-    }
+		return fixture;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -110,15 +110,15 @@ public class LabelableElementTest extends TestCase {
 	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see junit.framework.TestCase#tearDown()
-     * @generated
-     */
+	 * @see junit.framework.TestCase#tearDown()
+	 * @generated
+	 */
 	@Override
 	protected void tearDown() throws Exception {
-        setFixture(null);
-    }
+		setFixture(null);
+	}
 
 	
 	public void testAddingGettingLabels()

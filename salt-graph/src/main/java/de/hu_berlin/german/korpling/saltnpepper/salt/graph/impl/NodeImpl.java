@@ -60,13 +60,13 @@ public class NodeImpl extends IdentifiableElementImpl implements Node
 	public static Long eFalses= 0l;
 	
 	/**
-     * The cached value of the '{@link #getLayers() <em>Layers</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getLayers() <em>Layers</em>}' reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getLayers()
-     * @generated
-     * @ordered
-     */
+	 * @see #getLayers()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<Layer> layers;
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,67 +86,65 @@ public class NodeImpl extends IdentifiableElementImpl implements Node
 	}
 	
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return GraphPackage.Literals.NODE;
-    }
+		return GraphPackage.Literals.NODE;
+	}
 		
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Graph getGraph() {
-        if (eContainerFeatureID() != GraphPackage.NODE__GRAPH) return null;
-        return (Graph)eContainer();
-    }
+		if (eContainerFeatureID() != GraphPackage.NODE__GRAPH) return null;
+		return (Graph)eContainer();
+	}
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public NotificationChain basicSetGraph(Graph newGraph, NotificationChain msgs) {
-        msgs = eBasicSetContainer((InternalEObject)newGraph, GraphPackage.NODE__GRAPH, msgs);
-        return msgs;
-    }
+		msgs = eBasicSetContainer((InternalEObject)newGraph, GraphPackage.NODE__GRAPH, msgs);
+		return msgs;
+	}
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setGraph(Graph newGraph) {
-        if (newGraph != eInternalContainer() || (eContainerFeatureID() != GraphPackage.NODE__GRAPH && newGraph != null))
-        {
-            if (EcoreUtil.isAncestor(this, newGraph))
-                throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-            NotificationChain msgs = null;
-            if (eInternalContainer() != null)
-                msgs = eBasicRemoveFromContainer(msgs);
-            if (newGraph != null)
-                msgs = ((InternalEObject)newGraph).eInverseAdd(this, GraphPackage.GRAPH__NODES, Graph.class, msgs);
-            msgs = basicSetGraph(newGraph, msgs);
-            if (msgs != null) msgs.dispatch();
-        }
-        else if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.NODE__GRAPH, newGraph, newGraph));
-    }
+		if (newGraph != eInternalContainer() || (eContainerFeatureID() != GraphPackage.NODE__GRAPH && newGraph != null)) {
+			if (EcoreUtil.isAncestor(this, newGraph))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newGraph != null)
+				msgs = ((InternalEObject)newGraph).eInverseAdd(this, GraphPackage.GRAPH__NODES, Graph.class, msgs);
+			msgs = basicSetGraph(newGraph, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.NODE__GRAPH, newGraph, newGraph));
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList<Layer> getLayers() {
-        if (layers == null)
-        {
-            layers = new EObjectWithInverseResolvingEList.ManyInverse<Layer>(Layer.class, this, GraphPackage.NODE__LAYERS, GraphPackage.LAYER__NODES);
-        }
-        return layers;
-    }
+		if (layers == null) {
+			layers = new EObjectWithInverseResolvingEList.ManyInverse<Layer>(Layer.class, this, GraphPackage.NODE__LAYERS, GraphPackage.LAYER__NODES);
+		}
+		return layers;
+	}
 
 	
 
@@ -178,128 +176,121 @@ public class NodeImpl extends IdentifiableElementImpl implements Node
 
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID)
-        {
-            case GraphPackage.NODE__GRAPH:
-                if (eInternalContainer() != null)
-                    msgs = eBasicRemoveFromContainer(msgs);
-                return basicSetGraph((Graph)otherEnd, msgs);
-            case GraphPackage.NODE__LAYERS:
-                return ((InternalEList<InternalEObject>)(InternalEList<?>)getLayers()).basicAdd(otherEnd, msgs);
-        }
-        return super.eInverseAdd(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case GraphPackage.NODE__GRAPH:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetGraph((Graph)otherEnd, msgs);
+			case GraphPackage.NODE__LAYERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLayers()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID)
-        {
-            case GraphPackage.NODE__GRAPH:
-                return basicSetGraph(null, msgs);
-            case GraphPackage.NODE__LAYERS:
-                return ((InternalEList<?>)getLayers()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case GraphPackage.NODE__GRAPH:
+				return basicSetGraph(null, msgs);
+			case GraphPackage.NODE__LAYERS:
+				return ((InternalEList<?>)getLayers()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-        switch (eContainerFeatureID())
-        {
-            case GraphPackage.NODE__GRAPH:
-                return eInternalContainer().eInverseRemove(this, GraphPackage.GRAPH__NODES, Graph.class, msgs);
-        }
-        return super.eBasicRemoveFromContainerFeature(msgs);
-    }
+		switch (eContainerFeatureID()) {
+			case GraphPackage.NODE__GRAPH:
+				return eInternalContainer().eInverseRemove(this, GraphPackage.GRAPH__NODES, Graph.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID)
-        {
-            case GraphPackage.NODE__GRAPH:
-                return getGraph();
-            case GraphPackage.NODE__LAYERS:
-                return getLayers();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case GraphPackage.NODE__GRAPH:
+				return getGraph();
+			case GraphPackage.NODE__LAYERS:
+				return getLayers();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-        switch (featureID)
-        {
-            case GraphPackage.NODE__GRAPH:
-                setGraph((Graph)newValue);
-                return;
-            case GraphPackage.NODE__LAYERS:
-                getLayers().clear();
-                getLayers().addAll((Collection<? extends Layer>)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case GraphPackage.NODE__GRAPH:
+				setGraph((Graph)newValue);
+				return;
+			case GraphPackage.NODE__LAYERS:
+				getLayers().clear();
+				getLayers().addAll((Collection<? extends Layer>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-        switch (featureID)
-        {
-            case GraphPackage.NODE__GRAPH:
-                setGraph((Graph)null);
-                return;
-            case GraphPackage.NODE__LAYERS:
-                getLayers().clear();
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case GraphPackage.NODE__GRAPH:
+				setGraph((Graph)null);
+				return;
+			case GraphPackage.NODE__LAYERS:
+				getLayers().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-        switch (featureID)
-        {
-            case GraphPackage.NODE__GRAPH:
-                return getGraph() != null;
-            case GraphPackage.NODE__LAYERS:
-                return layers != null && !layers.isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case GraphPackage.NODE__GRAPH:
+				return getGraph() != null;
+			case GraphPackage.NODE__LAYERS:
+				return layers != null && !layers.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //NodeImpl
