@@ -286,6 +286,18 @@ public class SaltSample
 	 * @param sDocument
 	 */
 	public static void createInformationStructureSpan(SDocument sDocument){
+		if (sDocument.getSDocumentGraph()== null)
+			sDocument.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
+		
+		if (	(sDocument.getSDocumentGraph().getSTokens()== null)||
+				(sDocument.getSDocumentGraph().getSTokens().size()== 0))
+		{
+			if (	(sDocument.getSDocumentGraph().getSTextualDSs()== null)||
+					(sDocument.getSDocumentGraph().getSTextualDSs().size()==0))
+				SaltSample.createPrimaryData(sDocument);
+			SaltSample.createTokens(sDocument);
+		}
+		
 		List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
 		
 		SSpan sSpan= null;
@@ -346,9 +358,11 @@ public class SaltSample
 		if (sDocument.getSDocumentGraph()== null)
 			sDocument.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
 		
-		if (sDocument.getSDocumentGraph().getSTokens()== null)
+		if (	(sDocument.getSDocumentGraph().getSTokens()== null)||
+				(sDocument.getSDocumentGraph().getSTokens().size()== 0))
 		{
-			if (sDocument.getSDocumentGraph().getSTextualDSs()== null)
+			if (	(sDocument.getSDocumentGraph().getSTextualDSs()== null)||
+					(sDocument.getSDocumentGraph().getSTextualDSs().size()==0))
 				SaltSample.createPrimaryData(sDocument);
 			SaltSample.createTokens(sDocument);
 		}
