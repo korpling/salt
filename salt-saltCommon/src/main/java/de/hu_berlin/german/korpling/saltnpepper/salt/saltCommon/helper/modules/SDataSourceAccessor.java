@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.EList;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
@@ -233,22 +232,22 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 			Object slotId = SToken.class.getName();
 			ComplexIndex complexIndex = ((ComplexIndex)this.getSDocumentGraph().getIndexMgr().getIndex(SDocumentGraph.IDX_SNODETYPE));
 
-			if (complexIndex instanceof SlimComplexIndexImpl)
+			if (complexIndex.isSortable())
 			{
-				//In SlimComplexIndex, a LinkedHashSet is used, so no sorting is possible. Remove the whole slot and recreate it in 
-				//the desired order.
-				@SuppressWarnings("unchecked")
-				EList<SToken> tokens = new BasicEList<SToken>((EList<SToken>)(EList<? extends Object>)complexIndex.getSlot(slotId));
-				Collections.sort(tokens, comparator);
-				complexIndex.removeSlot(slotId);
-				for (SToken token : tokens)
-					complexIndex.addElement(slotId, token);
+                @SuppressWarnings("unchecked")
+                EList<SToken> tokens = ((EList<SToken>)(EList<? extends Object>)complexIndex.getSlot(slotId));
+                Collections.sort(tokens, comparator);
 			}
 			else
 			{
-				@SuppressWarnings("unchecked")
-				EList<SToken> tokens = ((EList<SToken>)(EList<? extends Object>)complexIndex.getSlot(slotId));
-				Collections.sort(tokens, comparator);
+	             //In SlimComplexIndex, a LinkedHashSet is used, so no sorting is possible. Remove the whole slot and recreate it in 
+                //the desired order.
+                @SuppressWarnings("unchecked")
+                EList<SToken> tokens = new BasicEList<SToken>((EList<SToken>)(EList<? extends Object>)complexIndex.getSlot(slotId));
+                Collections.sort(tokens, comparator);
+                complexIndex.removeSlot(slotId);
+                for (SToken token : tokens)
+                    complexIndex.addElement(slotId, token);
 			}
 		}
 	}
