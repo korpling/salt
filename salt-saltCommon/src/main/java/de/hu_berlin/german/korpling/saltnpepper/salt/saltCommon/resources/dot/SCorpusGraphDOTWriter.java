@@ -90,7 +90,7 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 		catch (UnsupportedEncodingException e) 
 		{ throw new NullPointerException(e.getMessage()); }
 		this.currOutputStream.println("digraph G {");
-		this.currOutputStream.println("ordering= out;");
+		this.currOutputStream.println("ordering=out;");
 		
 		//if documentgraph isn�t  null print it 
 		if (this.getSCorpusGraph()!= null)
@@ -101,7 +101,7 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 		}
 		else 
 		{
-			this.currOutputStream.println("<empty>[color= red, style = filled]");
+			this.currOutputStream.println("<empty>[color=red,style=filled]");
 		}	
 		this.currOutputStream.println("}");
 		//close and flusch stream
@@ -230,7 +230,7 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 							dotString= sType;
 						else dotString= dotString + sType+ ", ";
 					}
-					dotString= "sTypes= ["+ dotString +"]";
+					dotString= "sTypes=["+ dotString +"]";
 					
 					dotEdge.labels.add(dotString);
 				}

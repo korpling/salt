@@ -35,7 +35,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObje
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentStructureAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model.DOTEdge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model.DOTNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
@@ -53,6 +52,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class SDocumentGraphDOTWriter implements TraversalObject
 {
@@ -81,6 +82,13 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 	 */
 	private EList<Node> visitedNodes= null;
 	
+	private Set<SToken> tokenList;
+	private Set<SSpan> spanList;
+	private Set<STimeline> timelineList;
+	private Set<SStructure> structureList;
+	private Set<STextualDS> textList;
+	private Set<SNode> otherNodeList;
+	
 	public void save()
 	{
 		if (outputURI == null)
@@ -101,15 +109,25 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 		catch (UnsupportedEncodingException e) 
 		{ throw new NullPointerException(e.getMessage()); }
 		this.currOutputStream.println("digraph G {");
-		this.currOutputStream.println("ordering= out;");
+		this.currOutputStream.println("ordering=out;");
 		
 		//if documentgraph isn't  null print it 
-		if (this.getSDocumentGraph()!= null)
+		SDocumentGraph docGraph = getSDocumentGraph();
+		if (docGraph != null)
 		{
+		    
 			GraphTraverser graphTraverser= new GraphTraverser();
-			graphTraverser.setGraph(this.getSDocumentGraph());
+			graphTraverser.setGraph(docGraph);
 			GraphTraverserObject travObj= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this);
+			
 			this.visitedNodes= new BasicEList<Node>(); 
+			this.spanList = new LinkedHashSet<SSpan>();
+			this.structureList = new LinkedHashSet<SStructure>();
+			this.textList = new LinkedHashSet<STextualDS>();
+			this.timelineList = new LinkedHashSet<STimeline>();
+			this.tokenList = new LinkedHashSet<SToken>();
+			this.otherNodeList = new LinkedHashSet<SNode>();
+			
 			EList<Node> startNodes= graphTraverser.getRoots();
 			if (startNodes== null)
 			{
@@ -121,7 +139,69 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			if (	(startNodes!= null)&&
 					(startNodes.size() >0))
 				travObj.start(startNodes);
+			
 			travObj.waitUntilFinished();
+			
+			// primary texts should be on the bottom
+		    if(textList.size() > 0)
+			{
+				currOutputStream.println("{");
+				currOutputStream.println("rank=max;");
+				for(STextualDS n : textList)
+				{
+					printSTextualDS(n);
+				}
+				currOutputStream.println("}");
+			}
+			
+			// put timeline on separate layer
+			if(timelineList.size() > 0)
+			{
+				currOutputStream.println("{");
+				currOutputStream.println("rank=same;");
+				for(STimeline n : timelineList)
+				{
+					printSTimeline(n);
+				}
+				currOutputStream.println("}");
+			}
+			
+			// put all token on same layer
+			if(tokenList.size() > 0)
+			{
+				currOutputStream.println("{");
+				currOutputStream.println("rank=same;");
+				for(SToken n : tokenList)
+				{
+					printSToken(n);
+				}
+				currOutputStream.println("}");
+			}
+			
+			// put all spans on same layer
+		    if(spanList.size() > 0)
+			{
+				currOutputStream.println("{");
+				currOutputStream.println("rank=same;");
+				for(SSpan n : spanList)
+				{
+					printSSpan(n);
+				}
+				currOutputStream.println("}");
+			}
+			
+			// no specific ordering for structured nodes and other nodes
+			for(SStructure n : structureList)
+			{
+				printSStructure(n);
+			}
+			
+			for(SNode n : otherNodeList)
+			{
+				printSNode(n);
+			}
+			
+			
 			{//some nodes have no roots for example if they are part of a cycle, they have to be still stored
 				if (visitedNodes.size() != this.getSDocumentGraph().getSNodes().size())
 				{//if both lists doesn't have the same size create difference
@@ -144,8 +224,6 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 					}//traverse again
 				}//if both lists doesn't have the same size create difference
 			}//some nodes have no roots for example if they are part of a cycle, they have to be still stored
-			//callback to traverse graph 
-//			this.getSDocumentGraph().traverseSGraph(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this.getSDocumentGraph().getSRoots(), this, null);
 		}
 		else 
 		{
@@ -167,16 +245,6 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 	{
 		String retStr= null;
 		
-		//checks if sAnno has metaAnnos
-		//TODO Label has to be of superType LabelableElement
-//		EList<SAnnotation> metaAnnos= sAnno.getSAnnotations();
-//		if (metaAnnos!= null)
-//		{	
-//			for (SAnnotation metaAnno: metaAnnos)
-//			{
-//				retStr= this.createAnnotations(metaAnno);
-//			}	
-//		}
 		String anno= null;
 		if (sAnno.getSValue()!= null)
 		{
@@ -185,10 +253,14 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			anno= anno.replace("\r", "\\r");
 		}
 		
-		
 		if ((retStr!= null) && (!retStr.isEmpty()))		
-				retStr= (sAnno.getQName()+"= "+anno+"\\{"+retStr+"\\}");
-		else	retStr= (sAnno.getQName()+"= "+anno);
+		{
+				retStr= (sAnno.getQName()+"="+anno+"\\{"+retStr+"\\}");
+		}
+		else	
+		{
+			retStr= (sAnno.getQName()+"="+anno);
+		}
 		
 		return(retStr);
 	}
@@ -213,7 +285,99 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 	public void nodeLeft(GRAPH_TRAVERSE_MODE traversalMode, Long traversalId,
 			Node currNode, Edge edge, Node fromNode, long order) {
 	}
+	
+	
+	private DOTNode getDOTNode(SNode currSNode)
+	{
+		DOTNode dotNode= new DOTNode();
+		dotNode.id= currSNode.getId().toString();
+				
+		//create all annotations incl. meta annotations
+		for (SAnnotation sAnno: currSNode.getSAnnotations())
+		{
+			dotNode.labels.add(this.createAnnotations(sAnno));
+		}
+		
+		visitedNodes.add(currSNode);
+		return dotNode;
+	}
+	
+	private void printDOTNode(DOTNode dotNode)
+	{
+		this.currOutputStream.println(dotNode.toString());
+	}
+	
+	private void printSTextualDS(STextualDS t)
+	{
+		DOTNode dotNode = getDOTNode(t);
+		
+		dotNode.color= "yellow"; 
+		dotNode.style = "filled";
+		dotNode.shape = "Mrecord";
+		String text = t.getSText();
+		if (text != null) {//preparing text for dot
+			//replace " with \"
+			text = text.replace("\"", "\\\"");
+			//replace " with \n"
+			text = text.replace("\n", "");
+			text = text.replace("\r", "");
+		}//preparing text for dot   
+		dotNode.labels.add("text=" + text);
+		printDOTNode(dotNode);
+	}
+	
+	private void printSToken(SToken currSNode)
+	{
+		DOTNode dotNode = getDOTNode(currSNode);
+		
+		dotNode.color = "turquoise";
+		dotNode.style = "filled";
+		dotNode.shape = "Mrecord";
+		printDOTNode(dotNode);
+	}
+	
+	private void printSTimeline(STimeline currSNode)
+	{
+		DOTNode dotNode = getDOTNode(currSNode);
+		
+		dotNode.color = "gray";
+		dotNode.style = "filled";
+		dotNode.shape = "Mrecord";
+		dotNode.labels.add("time=" + ((STimeline) currSNode).getSPointsOfTime());
+		printDOTNode(dotNode);
+	}
+	
+	private void printSSpan(SSpan currSNode)
+	{
+		DOTNode dotNode = getDOTNode(currSNode);
 
+		dotNode.color = "dodgerblue3";
+		dotNode.style = "filled";
+		dotNode.shape = "Mrecord";
+		printDOTNode(dotNode);
+	}
+		
+	private void printSStructure(SStructure currSNode)
+	{
+		DOTNode dotNode = getDOTNode(currSNode);
+
+		dotNode.color = "seagreen";
+		dotNode.style = "filled";
+		dotNode.shape = "Mrecord";
+		printDOTNode(dotNode);
+	}
+	
+	private void printSNode(SNode currSNode)
+	{
+		DOTNode dotNode = getDOTNode(currSNode);
+
+		dotNode.color = "red";
+		dotNode.shape = "Mrecord";
+		dotNode.style = "filled";
+		printDOTNode(dotNode);
+	}
+		
+	
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_MODE traversalMode,
 			Long traversalId, Node currNode, Edge edge, Node fromNode,
@@ -222,94 +386,45 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 		SRelation relation= null;
 		SNode currSNode= (SNode) currNode;
 		SNode fromSNode= null;
-		if (edge!= null)
-			relation= (SRelation) edge;
-		if (fromNode!= null)
-			fromSNode= (SNode) fromNode;
-		
-			
-		DOTNode dotNode= new DOTNode();
-		dotNode.id= currSNode.getId().toString();
-		
-		//create all annotations incl. meta annotations
-		for (SAnnotation sAnno: currSNode.getSAnnotations())
+		if (edge!= null) 
 		{
-			dotNode.labels.add(this.createAnnotations(sAnno));
+			relation= (SRelation) edge;
 		}
+		if (fromNode!= null) 
+		{
+			fromSNode= (SNode) fromNode;
+		}
+		
 		//------------------------------- Elements of a document
 		//STEXTUAL_DATASOURCE
 		if (currSNode instanceof STextualDS)
 		{
-			dotNode.color= "yellow"; 
-			dotNode.style= "filled";
-			dotNode.shape= "Mrecord";
-			String text= ((STextualDS)currSNode).getSText();
-			if (text!= null)
-			{//preparing text for dot
-				//replace " with \"
-				text= text.replace("\"", "\\\"");
-				//replace " with \n"
-				text= text.replace("\n", "");
-				text= text.replace("\r", "");
-			}//preparing text for dot
-			dotNode.labels.add("text= "+ text);
+			textList.add((STextualDS) currSNode);
 		}
 		//STIMELINE
 		else if (currSNode instanceof STimeline)
 		{
-			dotNode.color= "gray"; 
-			dotNode.style= "filled";
-			dotNode.shape= "Mrecord";
-			dotNode.labels.add("time= "+ ((STimeline)currSNode).getSPointsOfTime());
+			timelineList.add((STimeline) currSNode);
 		}
 		//STOKEN
 		else if (currSNode instanceof SToken)
 		{
-			dotNode.color= "turquoise"; 
-			dotNode.style= "filled";
-			dotNode.shape= "Mrecord";
-			//dotNode.labels.add("textPos= ("+currSNode.getSFeature("left").getValue()+".."+")");
-//			dotNode.labels.add("textPos= ("+this.accessor.getSLeftPos(currSNode)+".."+this.accessor.getSRightPos(currSNode)+")");
-			SDocumentStructureAccessor sdAccessor= new SDocumentStructureAccessor();
-			sdAccessor.setSDocumentGraph(this.getSDocumentGraph());
-//			String text= sdAccessor.getSOverlappedText(currSNode).replace("\"", "\\\"");;
-//			String text=this.accessor.getOverlapedText(currSNode).replace("\"", "\\\"");
-//			dotNode.labels.add("text= "+ text);
+			tokenList.add((SToken) currSNode);
 		}
 		//SSpan
 		else if (currSNode instanceof SSpan)
 		{
-			dotNode.color= "dodgerblue3"; 
-			dotNode.style= "filled";
-			dotNode.shape= "Mrecord";
+			spanList.add((SSpan) currSNode);
 		}
 		//SSTRUCTURE
 		else if (currSNode instanceof SStructure)
 		{
-			dotNode.color= "seagreen"; 
-			dotNode.style= "filled";
-			dotNode.shape= "Mrecord";
+			structureList.add((SStructure) currSNode);
 		}
 		else 
 		{
-			dotNode.color= "red"; 
-			dotNode.shape= "Mrecord";
-			dotNode.style= "filled";
+			otherNodeList.add(currSNode);
 		}		
-		//if element is already stored don't store again
-		if (currSNode.getSProcessingAnnotation(KW_DOT_STORED)!= null);
-		else
-		{
-			this.visitedNodes.add(currNode);
-			this.currOutputStream.println(dotNode.toString());
-			
-			//flag the current element
-			{
-				SProcessingAnnotation spAnno= SaltCommonFactory.eINSTANCE.createSProcessingAnnotation();
-				spAnno.setQName(KW_DOT_STORED);
-				currSNode.addSProcessingAnnotation(spAnno);
-			}
-		}
 		
 		//print relation, if exists
 		if (relation!= null)
@@ -325,9 +440,14 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 					String dotString= "";
 					for (String sType: sTypes)
 					{	
-						if (dotString.isEmpty())
+						if (dotString.isEmpty()) 
+						{
 							dotString= sType;
-						else dotString= dotString + sType+ ", ";
+						}
+						else 
+						{
+							dotString= dotString + sType+ ", ";
+						}
 					}
 					dotString= "sTypes= ["+ dotString +"]";
 					
@@ -374,7 +494,6 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			else
 			{
 				this.currOutputStream.println(dotEdge.toString());
-//				this.currOutputStream.println("<" + fromElement.getId() + "> -> <" + currSNode.getId() +">");
 				//flag the current element
 				{
 					SProcessingAnnotation spAnno= SaltCommonFactory.eINSTANCE.createSProcessingAnnotation();
