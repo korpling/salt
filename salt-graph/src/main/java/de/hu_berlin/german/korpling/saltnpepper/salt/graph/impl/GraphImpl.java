@@ -121,8 +121,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						if (identifiableElement instanceof Node)
 						{//owner of identifier is a node
 							//refresh node name index
-//							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).removeElementById(oldId);
-//							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).addElement(identifier.getId(), identifier.getIdentifiableElement());
 							this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE).removeElement(identifiableElement);
 							this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE).addElement(identifier.getId(), identifier.getIdentifiableElement());
 							
@@ -142,6 +140,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						else if (identifiableElement instanceof Edge)
 						{//owner of identifier is an edge
 							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE)).removeElementById(oldId);
+							this.graph.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE).removeElement(identifiableElement);
 							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE)).addElement(identifier.getId(), identifier.getIdentifiableElement());
 						}
 						else 
