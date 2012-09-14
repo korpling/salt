@@ -154,22 +154,19 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 		boolean retVal= false;
 		long numOfElem= this.getNumOfElements();
 		//TODO is contains check necessary?
-//		//if table contains element
-//		if (this.getIdxTable().containsValue(element))
-//		{
-			//searching for element to remove
-			Set<Object> keys= this.getIdxTable().keySet();
-			Object foundKey= null;
-			for (Object key: keys)
-			{
-				if (this.getIdxTable().get(key).equals(element))
-				{	
-					foundKey= key;
-					break;
-				}
+		//searching for element to remove
+		Set<Object> keys= this.getIdxTable().keySet();
+		Object foundKey= null;
+		for (Object key: keys)
+		{
+			if (this.getIdxTable().get(key).equals(element))
+			{	
+				foundKey= key;
+				break;
 			}
+		}
+		if (foundKey!= null)
 			this.getIdxTable().remove(foundKey);
-//		}
 		
 		if (this.getNumOfElements()== numOfElem -1)
 			retVal= true;
