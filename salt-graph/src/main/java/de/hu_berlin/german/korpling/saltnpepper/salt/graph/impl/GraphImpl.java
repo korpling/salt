@@ -121,8 +121,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						if (identifiableElement instanceof Node)
 						{//owner of identifier is a node
 							//refresh node name index
-							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).removeElementById(oldId);
-							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).addElement(identifier.getId(), identifier.getIdentifiableElement());
+//							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).removeElementById(oldId);
+//							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).addElement(identifier.getId(), identifier.getIdentifiableElement());
+							this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE).removeElement(identifiableElement);
+							this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE).addElement(identifier.getId(), identifier.getIdentifiableElement());
 							
 							if (((ComplexIndex)this.graph.getIndexMgr().getIndex(IDX_OUTEDGES)).hasSlot(identifier.getId()))
 							{//refresh node outgoing index	
@@ -310,14 +312,27 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		//creating index manager and all needed indexes
 		this.indexMgr= IndexFactory.eINSTANCE.createIndexMgr();
 		
-		//node index
+		
+//		Index index= null;
+//		node index
+//		index= IndexFactory.eINSTANCE.createSimpleIndex();
+//		index.setId(IDX_NODE_ID_NODE);
+//		this.getIndexMgr().addIndex(index);
+//		
+//		//edge index
+//		index= IndexFactory.eINSTANCE.createSimpleIndex();
+//		index.setId(IDX_EDGE_ID_EDGE);
+//		this.getIndexMgr().addIndex(index);
+		
 		Index index= null;
-		index= IndexFactory.eINSTANCE.createSimpleIndex();
+		
+		//node index
+		index= IndexFactory.eINSTANCE.createIdentifiableElementIndex();
 		index.setId(IDX_NODE_ID_NODE);
 		this.getIndexMgr().addIndex(index);
 		
 		//edge index
-		index= IndexFactory.eINSTANCE.createSimpleIndex();
+		index= IndexFactory.eINSTANCE.createIdentifiableElementIndex();
 		index.setId(IDX_EDGE_ID_EDGE);
 		this.getIndexMgr().addIndex(index);
 		

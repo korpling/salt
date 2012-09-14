@@ -194,11 +194,6 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		this.setNumOfElements(elementCount);
 	}
 	
-	
-	
-	
-	
-	
 	/**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

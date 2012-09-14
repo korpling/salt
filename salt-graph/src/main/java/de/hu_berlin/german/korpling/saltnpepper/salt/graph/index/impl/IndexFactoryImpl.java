@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.*;
 
 import org.eclipse.emf.ecore.EClass;
@@ -89,6 +90,16 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 		return simpleIndex;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IdentifiableElementIndex<? extends IdentifiableElement> createIdentifiableElementIndex() {
+		IdentifiableElementIndex index = new IdentifiableElementIndex();
+		return index;
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
