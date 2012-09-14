@@ -121,8 +121,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						if (identifiableElement instanceof Node)
 						{//owner of identifier is a node
 							//refresh node name index
-							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODENAME)).removeElementById(oldId);
-							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODENAME)).addElement(identifier.getId(), identifier.getIdentifiableElement());
+							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).removeElementById(oldId);
+							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).addElement(identifier.getId(), identifier.getIdentifiableElement());
 							
 							if (((ComplexIndex)this.graph.getIndexMgr().getIndex(IDX_OUTEDGES)).hasSlot(identifier.getId()))
 							{//refresh node outgoing index	
@@ -139,8 +139,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						}
 						else if (identifiableElement instanceof Edge)
 						{//owner of identifier is an edge
-							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_EDGENAME)).removeElementById(oldId);
-							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_EDGENAME)).addElement(identifier.getId(), identifier.getIdentifiableElement());
+							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE)).removeElementById(oldId);
+							((SimpleIndex)this.graph.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE)).addElement(identifier.getId(), identifier.getIdentifiableElement());
 						}
 						else 
 						{
@@ -218,19 +218,19 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		}
 	}
 	/**
-	 * name of index for nodes
+	 * Name of index to store id and corresponding {@link Node} object
 	 */
-	public static final String IDX_NODENAME=	"idx_nodename";
+	public static final String IDX_NODE_ID_NODE=	"idx_nodename";
 	/**
-	 * name of index for edges
+	 * Name of index to store id and corresponding {@link EDGE} object
 	 */
-	public static final String IDX_EDGENAME=	"idx_edgename";
+	public static final String IDX_EDGE_ID_EDGE=	"idx_edgename";
 	/**
-	 * name of index for all outgoing edges ( id= Knotenname, value= all outgoing edges
+	 * Name of index containing a nodeId and the outgoing {@link Edge} objects of the corresponding {@link Node} object.
 	 */
 	public static final String IDX_OUTEDGES=	"idx_outedges";
 	/**
-	 * name of index for all ingoing edges ( id= Knotenname, value= all ingoing edges
+	 * Name of index containing a nodeId and the ingoing {@link Edge} objects of the corresponding {@link Node} object.
 	 */
 	public static final String IDX_INEDGES=	"idx_inedges";
 	
@@ -313,12 +313,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		//node index
 		Index index= null;
 		index= IndexFactory.eINSTANCE.createSimpleIndex();
-		index.setId(IDX_NODENAME);
+		index.setId(IDX_NODE_ID_NODE);
 		this.getIndexMgr().addIndex(index);
 		
 		//edge index
 		index= IndexFactory.eINSTANCE.createSimpleIndex();
-		index.setId(IDX_EDGENAME);
+		index.setId(IDX_EDGE_ID_EDGE);
 		this.getIndexMgr().addIndex(index);
 		
 		//outgoing edge index
@@ -631,7 +631,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		}//if node already exists, create new Id
 		
 		this.getNodes().add(node);
-		this.getIndexMgr().getIndex(IDX_NODENAME).addElement(node.getId(), node);
+		this.getIndexMgr().getIndex(IDX_NODE_ID_NODE).addElement(node.getId(), node);
 		{//create a notifier for changes in node
 			node.eAdapters().add(this.graphAdapter);
 			node.getIdentifier().eAdapters().add(this.graphAdapter);
@@ -662,7 +662,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	public Node getNode(String nodeId)
 	{ 
 		Node retNode= null;
-		retNode= (Node)((SimpleIndex)this.getIndexMgr().getIndex(IDX_NODENAME)).getElement(nodeId);
+		retNode= (Node)((SimpleIndex)this.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).getElement(nodeId);
 		return(retNode);
 	}
 
@@ -677,7 +677,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= false;
 		if ( (node!= null) && (node.getId()!= null))
 		{
-			if (this.getIndexMgr().getIndex(IDX_NODENAME).hasElement(node.getId()))
+			if (this.getIndexMgr().getIndex(IDX_NODE_ID_NODE).hasElement(node.getId()))
 			{	
 				//deleting all outgoing edges
 				for (Edge edge: this.getOutEdges(node.getId()))
@@ -737,7 +737,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= true;
 		
 		//clearing index for edges
-		this.getIndexMgr().getIndex(IDX_NODENAME).removeAll();
+		this.getIndexMgr().getIndex(IDX_NODE_ID_NODE).removeAll();
 		
 		//clearing other indexes 
 		for (Node node: this.getNodes())	
@@ -787,7 +787,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		//put new edge into edge list
 		this.getEdges().add(edge);
 		//put edge into naming index
-		this.getIndexMgr().getIndex(IDX_EDGENAME).addElement(edge.getId(), edge);
+		this.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE).addElement(edge.getId(), edge);
 				
 		//throw exception, if source isn't null, but is not added to graph 
 		if (edge.getSource()!= null)
@@ -832,7 +832,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	public Edge getEdge(String edgeId) 
 	{
 		Edge retEdge= null;
-		retEdge= (Edge)((SimpleIndex)this.getIndexMgr().getIndex(IDX_EDGENAME)).getElement(edgeId);
+		retEdge= (Edge)((SimpleIndex)this.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE)).getElement(edgeId);
 		return(retEdge);
 	}
 
@@ -937,7 +937,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= true;
 		
 		//clearing index for edges
-		this.getIndexMgr().getIndex(IDX_EDGENAME).removeAll();
+		this.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE).removeAll();
 		this.getIndexMgr().getIndex(IDX_OUTEDGES).removeAll();
 		this.getIndexMgr().getIndex(IDX_INEDGES).removeAll();
 		

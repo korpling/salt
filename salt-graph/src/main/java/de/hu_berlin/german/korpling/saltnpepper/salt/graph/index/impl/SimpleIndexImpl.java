@@ -153,9 +153,10 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 			throw new GraphException("Cannot remove element from index '"+this.getId()+"', because element is null.");
 		boolean retVal= false;
 		long numOfElem= this.getNumOfElements();
-		//if table contains element
-		if (this.getIdxTable().containsValue(element))
-		{
+		//TODO is contains check necessary?
+//		//if table contains element
+//		if (this.getIdxTable().containsValue(element))
+//		{
 			//searching for element to remove
 			Set<Object> keys= this.getIdxTable().keySet();
 			Object foundKey= null;
@@ -168,7 +169,7 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 				}
 			}
 			this.getIdxTable().remove(foundKey);
-		}
+//		}
 		
 		if (this.getNumOfElements()== numOfElem -1)
 			retVal= true;
