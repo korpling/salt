@@ -82,6 +82,7 @@ public class IdentifiableElementIndex<V extends IdentifiableElement> extends Sim
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
+	@Override
 	public Boolean hasElement(Object elementId) 
 	{
 		if (elementId== null)
@@ -97,11 +98,16 @@ public class IdentifiableElementIndex<V extends IdentifiableElement> extends Sim
 	 * @return true, if removing was successful 
 	 * @model
 	 */
-	public Boolean removeElement(V element) 
+	@Override
+	public Boolean removeElement(Object element) 
 	{
-		return(this.removeElementById(element.getId()));
+		if(element instanceof IdentifiableElement)
+		{
+			return this.removeElementById(((IdentifiableElement) element).getId());
+		}
+		return false; // nothing removed since type was not applicable
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
