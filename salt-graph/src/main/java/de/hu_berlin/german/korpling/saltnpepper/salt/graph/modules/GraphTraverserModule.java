@@ -17,7 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -31,6 +31,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphTraverserException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 
 
 /**
@@ -44,7 +45,7 @@ public class GraphTraverserModule extends GraphModule
 	 * Stores all used traverseIds to the corresponding traverse callback handler. This is used, to check, that an id is not used
 	 * twice.
 	 */
-	private volatile Hashtable<GraphTraverseHandler, EList<String>> traverseIdTable= new Hashtable<GraphTraverseHandler, EList<String>>();
+	private volatile HashMap<GraphTraverseHandler, EList<String>> traverseIdTable= new HashMap<GraphTraverseHandler, EList<String>>();
 	
 	/**
 	 * Traverses a graph in the given order traverseType and starts traversing with the given startNodes. When a node is reached, 

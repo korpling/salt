@@ -28,6 +28,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElements() <em>Num Of Elements</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds() <em>Num Of Element Ids</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap() <em>Index Map</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -59,8 +61,8 @@ public abstract class IndexTest extends IdentifiableElementTest {
 	 * @generated
 	 */
 	@Override
-	protected Index getFixture() {
-		return (Index)fixture;
+	protected Index<?, ?> getFixture() {
+		return (Index<?, ?>)fixture;
 	}
 
 	/**
@@ -72,6 +74,45 @@ public abstract class IndexTest extends IdentifiableElementTest {
 	 */
 	public void testGetNumOfElements() {
 		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds() <em>Num Of Element Ids</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds()
+	 * @generated
+	 */
+	public void testGetNumOfElementIds() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap() <em>Index Map</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap()
+	 * @generated
+	 */
+	public void testGetIndexMap() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#setIndexMap(java.util.Map) <em>Index Map</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#setIndexMap(java.util.Map)
+	 * @generated
+	 */
+	public void testSetIndexMap() {
+		// TODO: implement this feature setter test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
 	}

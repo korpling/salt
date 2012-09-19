@@ -17,9 +17,6 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index;
 
-import java.util.HashSet;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -38,46 +35,7 @@ import org.eclipse.emf.common.util.EList;
  * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex()
  * @model
  */
-public interface ComplexIndex extends Index {
-	/**
-	 * Returns the value of the '<em><b>Num Of Slots</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Num Of Slots</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Num Of Slots</em>' attribute.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex_NumOfSlots()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	Long getNumOfSlots();
-
-	/**
-	 * Returns the value of the '<em><b>Idx Table</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Idx Table</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Idx Table</em>' attribute.
-	 * @see #setIdxTable(Map)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex_IdxTable()
-	 * @model transient="true" volatile="true"
-	 */
-	Map getIdxTable();
-
-	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getIdxTable <em>Idx Table</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Idx Table</em>' attribute.
-	 * @see #getIdxTable()
-	 */
-	void setIdxTable(Map<Object, EList<Object>> value);
-
+public interface ComplexIndex<K, V> extends Index<K, V> {
 	/**
 	 * Returns the value of the '<em><b>Sortable</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
@@ -97,26 +55,35 @@ public interface ComplexIndex extends Index {
     /**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This method returns if index has a slot with the given id.
+	 * @param id Object - identifier for slot
+	 * @return true, if there exists a slot with given id
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
-	Boolean hasSlot(Object elementId);
+	Boolean hasSlot(K elementId);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This method returns a slot matching to the given id. If id does not exists in index returned list is empty.
+	 * @return matching slot
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
-	EList<Object> getSlot(Object elementId);
+	EList<V> getSlot(K elementId);
 
-	/**
+				/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
-	EList<Object> getSlotIds();
+	EList<K> getSlotIds();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,6 +91,6 @@ public interface ComplexIndex extends Index {
 	 * @model
 	 * @generated
 	 */
-	Boolean removeSlot(Object elementId);
+	Boolean removeSlot(K elementId);
 
 } // ComplexIndex

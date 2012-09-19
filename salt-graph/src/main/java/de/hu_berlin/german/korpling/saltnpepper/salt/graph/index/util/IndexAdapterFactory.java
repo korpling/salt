@@ -86,11 +86,11 @@ public class IndexAdapterFactory extends AdapterFactoryImpl {
 	protected IndexSwitch<Adapter> modelSwitch =
 		new IndexSwitch<Adapter>() {
 			@Override
-			public Adapter caseIndex(Index object) {
+			public <K, V> Adapter caseIndex(Index<K, V> object) {
 				return createIndexAdapter();
 			}
 			@Override
-			public Adapter caseSimpleIndex(SimpleIndex object) {
+			public <K, V> Adapter caseSimpleIndex(SimpleIndex<K, V> object) {
 				return createSimpleIndexAdapter();
 			}
 			@Override
@@ -98,7 +98,7 @@ public class IndexAdapterFactory extends AdapterFactoryImpl {
 				return createIndexMgrAdapter();
 			}
 			@Override
-			public Adapter caseComplexIndex(ComplexIndex object) {
+			public <K, V> Adapter caseComplexIndex(ComplexIndex<K, V> object) {
 				return createComplexIndexAdapter();
 			}
 			@Override

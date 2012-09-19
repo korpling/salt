@@ -15,33 +15,27 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index;
-
+package de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Simple Index</b></em>'.
- * <!-- end-user-doc -->
+ * This class is highest exception. All PepperExceptions are derived from this class. 
+ * It can be instantiated, if no other Exception maps to the problem.
+ * @author Florian Zipser
  *
- *
- * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getSimpleIndex()
- * @model
- * @generated
  */
-public interface SimpleIndex<K, V> extends Index<K, V> {
+public class GraphIndexException extends java.lang.RuntimeException
+{
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
+	 * generated serialVersionUID
 	 */
-	V getElement(K elementId);
+	private static final long serialVersionUID = 7152733138673010658L;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Boolean removeElementById(K elementId);
-} // SimpleIndex
+	public GraphIndexException()
+	{ super(); }
+	
+    public GraphIndexException(String s)
+    { super(s); }
+    
+	public GraphIndexException(String s, Throwable ex)
+	{super(s, ex); }
+}

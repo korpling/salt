@@ -17,13 +17,15 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Map;
+import org.eclipse.emf.common.notify.Notification;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphIndexException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.IdentifiableElementImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
@@ -36,13 +38,15 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SimpleIndexImpl#getNumOfElements <em>Num Of Elements</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SimpleIndexImpl#getIdxTable <em>Idx Table</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SimpleIndexImpl#getNumOfElementIds <em>Num Of Element Ids</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SimpleIndexImpl#getIndexMap <em>Index Map</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SimpleIndexImpl#getEstimatedCapacity <em>Estimated Capacity</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIndex 
+public class SimpleIndexImpl<K, V> extends IdentifiableElementImpl implements SimpleIndex<K, V> 
 {	
 	/**
 	 * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
@@ -54,8 +58,36 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 	 */
 	protected static final Long NUM_OF_ELEMENTS_EDEFAULT = null;
 
-	protected Map<Object, Object> idxTable;
+	/**
+	 * The default value of the '{@link #getNumOfElementIds() <em>Num Of Element Ids</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNumOfElementIds()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long NUM_OF_ELEMENT_IDS_EDEFAULT = null;
 	
+	/**
+	 * The default value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEstimatedCapacity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer ESTIMATED_CAPACITY_EDEFAULT = new Integer(10000);
+
+	/**
+	 * The cached value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEstimatedCapacity()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer estimatedCapacity = ESTIMATED_CAPACITY_EDEFAULT;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,7 +99,7 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 
 	private void init()
 	{
-		this.idxTable= new Hashtable<Object, Object>();
+		this.setIndexMap(new HashMap<K, V>(this.getEstimatedCapacity()));
 	}
 
 	/**
@@ -85,87 +117,125 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
+	@Override
 	public Long getNumOfElements() 
 	{
-		return(new Long(this.getIdxTable().size()));
+		return(new Long(this.getIndexMap().size()));
+	}
+
+	/**
+	 * {@inheritDoc Index#getNumOfElementIds()}
+	 */
+	@Override
+	public Long getNumOfElementIds() {
+		return(Long.valueOf(this.getIndexMap().size()));
+	}
+
+	/**
+	 * Map to store the index, this object is the core of tis class.
+	 */
+	protected Map<K, V> indexMap=null;
+	
+	/**
+	 *{@inheritDoc Index#getIndexMap()}
+	 */
+	@Override
+	public Map<K, V> getIndexMap() {
+		return(this.indexMap);
+	}
+
+	/**
+	 * {@inheritDoc Index#setIndexMap(Map)}
+	 */
+	public void setIndexMap(Map<K, V> newIndexMap) {
+		this.indexMap= newIndexMap;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public Map<Object, Object> getIdxTable() {
-		return idxTable;
+	public Integer getEstimatedCapacity() {
+		return estimatedCapacity;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public Object getElement(Object elementId) 
-	{
+	public void setEstimatedCapacity(Integer newEstimatedCapacity) {
+		Integer oldEstimatedCapacity = estimatedCapacity;
+		estimatedCapacity = newEstimatedCapacity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IndexPackage.SIMPLE_INDEX__ESTIMATED_CAPACITY, oldEstimatedCapacity, estimatedCapacity));
+	}
+
+	/**
+	 * {@inheritDoc SimpleIndex#getElement(Object)}
+	 */
+	@Override
+	public V getElement(K elementId) {
 		if (elementId== null)
-			throw new GraphException("Cannot search for elementId in index, because it is null.");
-		return(this.getIdxTable().get(elementId));
+			throw new GraphIndexException("Cannot search for elementId in index, because it is null.");
+		return(this.getIndexMap().get(elementId));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *{@inheritDoc SimpleIndex#removeElementById(Object)}
 	 */
-	public long getNumOfEntries() 
-	{
-		return(this.getIdxTable().size());
+	@Override
+	public Boolean removeElementById(K elementId) {
+		Boolean retVal= false;
+		int oldLength= this.getIndexMap().size();
+		this.getIndexMap().remove(elementId);
+		retVal= !(oldLength== this.getIndexMap().size());
+		return(retVal);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc Index#addElement(Object, Object)}
 	 */
-	public void addElement(Object elementId, Object element) 
-	{
-		this.getIdxTable().put(elementId, element);
-		
+	@Override
+	public void addElement(K elementId, V element) {
+		this.getIndexMap().put(elementId, element);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc Index#hasElement(Object)}
 	 */
-	public Boolean hasElement(Object elementId) 
-	{
+	@Override
+	public Boolean  hasElement(K elementId) {
 		if (elementId== null)
-			throw new GraphException("Cannot search for an empty element.");
-		if(this.idxTable.get(elementId)!= null)
+			throw new GraphIndexException("Cannot search for an empty element.");
+		if(this.getIndexMap().get(elementId)!= null)
 			return(true);
 		else return(false);
 	}
 
 	/**
-	 * Removes the given element from this index.
-	 * @param element - the element which shall be removed
-	 * @return true, if removing was successful 
-	 * @model
+	 * {@inheritDoc Index#removeElement(Object)}
 	 */
-	public Boolean removeElement(Object element) 
-	{
+	@Override
+	public Boolean removeElement(V element) {
 		if (element== null)
-			throw new GraphException("Cannot remove element from index '"+this.getId()+"', because element is null.");
+			throw new GraphIndexException("Cannot remove element from index '"+this.getId()+"', because element is null.");
 		boolean retVal= false;
 		long numOfElem= this.getNumOfElements();
 		//searching for element to remove
-		Set<Object> keys= this.getIdxTable().keySet();
+		Set<K> keys= this.getIndexMap().keySet();
 		Object foundKey= null;
 		for (Object key: keys)
 		{
-			if (this.getIdxTable().get(key).equals(element))
+			if (this.getIndexMap().get(key).equals(element))
 			{	
 				foundKey= key;
 				break;
 			}
 		}
 		if (foundKey!= null)
-			this.getIdxTable().remove(foundKey);
+			this.getIndexMap().remove(foundKey);
 		
 		if (this.getNumOfElements()== numOfElem -1)
 			retVal= true;
@@ -174,36 +244,13 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc Index#removeAll()}
 	 */
+	@Override
 	public Boolean removeAll() 
 	{
-		this.setIdxTable(new Hashtable<Object, Object>());
-		return(this.getIdxTable().size()== 0);
-	}
-	
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public Boolean removeElementById(Object elementId) 
-	{
-		Boolean retVal= false;
-		int oldLength= this.getIdxTable().size();
-		this.getIdxTable().remove(elementId);
-		retVal= !(oldLength== this.getIdxTable().size());
-		return(retVal);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setIdxTable(Map<Object, Object> newIdxTable) 
-	{
-		this.idxTable= newIdxTable;
+		this.init();
+		return(this.getIndexMap().size()== 0);
 	}
 
 	/**
@@ -216,10 +263,51 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 		switch (featureID) {
 			case IndexPackage.SIMPLE_INDEX__NUM_OF_ELEMENTS:
 				return getNumOfElements();
-			case IndexPackage.SIMPLE_INDEX__IDX_TABLE:
-				return getIdxTable();
+			case IndexPackage.SIMPLE_INDEX__NUM_OF_ELEMENT_IDS:
+				return getNumOfElementIds();
+			case IndexPackage.SIMPLE_INDEX__INDEX_MAP:
+				return getIndexMap();
+			case IndexPackage.SIMPLE_INDEX__ESTIMATED_CAPACITY:
+				return getEstimatedCapacity();
 		}
 		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case IndexPackage.SIMPLE_INDEX__INDEX_MAP:
+				setIndexMap((Map<K, V>)newValue);
+				return;
+			case IndexPackage.SIMPLE_INDEX__ESTIMATED_CAPACITY:
+				setEstimatedCapacity((Integer)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case IndexPackage.SIMPLE_INDEX__INDEX_MAP:
+				setIndexMap((Map<K, V>)null);
+				return;
+			case IndexPackage.SIMPLE_INDEX__ESTIMATED_CAPACITY:
+				setEstimatedCapacity(ESTIMATED_CAPACITY_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -232,10 +320,30 @@ public class SimpleIndexImpl extends IdentifiableElementImpl implements SimpleIn
 		switch (featureID) {
 			case IndexPackage.SIMPLE_INDEX__NUM_OF_ELEMENTS:
 				return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
-			case IndexPackage.SIMPLE_INDEX__IDX_TABLE:
-				return getIdxTable() != null;
+			case IndexPackage.SIMPLE_INDEX__NUM_OF_ELEMENT_IDS:
+				return NUM_OF_ELEMENT_IDS_EDEFAULT == null ? getNumOfElementIds() != null : !NUM_OF_ELEMENT_IDS_EDEFAULT.equals(getNumOfElementIds());
+			case IndexPackage.SIMPLE_INDEX__INDEX_MAP:
+				return getIndexMap() != null;
+			case IndexPackage.SIMPLE_INDEX__ESTIMATED_CAPACITY:
+				return ESTIMATED_CAPACITY_EDEFAULT == null ? estimatedCapacity != null : !ESTIMATED_CAPACITY_EDEFAULT.equals(estimatedCapacity);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (estimatedCapacity: ");
+		result.append(estimatedCapacity);
+		result.append(')');
+		return result.toString();
 	}
 
 } //SimpleIndexImpl

@@ -162,9 +162,21 @@
       <children xmi:type="notation:Node" xmi:id="_KQC1MJo1Ed6Ex8f7L1NZYQ" type="2003">
         <children xmi:type="notation:Node" xmi:id="_KQC1M5o1Ed6Ex8f7L1NZYQ" type="4002"/>
         <children xmi:type="notation:Node" xmi:id="_KQC1NJo1Ed6Ex8f7L1NZYQ" type="5004">
+          <children xmi:type="notation:Node" xmi:id="_DjqAMAAeEeKkhM4SMB_ICw" type="2001">
+            <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/Index/numOfElementIds"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_DjqAMQAeEeKkhM4SMB_ICw"/>
+          </children>
           <children xmi:type="notation:Node" xmi:id="_3S-BoJxtEd625-Uq6sOdNQ" type="2001">
             <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/Index/numOfElements"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_3S-BoZxtEd625-Uq6sOdNQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_TV8pwJo1Ed6Ex8f7L1NZYQ" type="2001">
+            <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/Index/indexMap"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TV8pwZo1Ed6Ex8f7L1NZYQ"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_htYsUAJtEeKNoZUz9cD4QQ" type="2001">
+            <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/Index/estimatedCapacity"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_htYsUQJtEeKNoZUz9cD4QQ"/>
           </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_KQC1NZo1Ed6Ex8f7L1NZYQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_KQC1Npo1Ed6Ex8f7L1NZYQ"/>
@@ -193,15 +205,11 @@
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_KQC1MZo1Ed6Ex8f7L1NZYQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
         <element xmi:type="ecore:EClass" href="graph.ecore#//index/Index"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KQC1Mpo1Ed6Ex8f7L1NZYQ" x="510" y="48" width="313" height="127"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KQC1Mpo1Ed6Ex8f7L1NZYQ" x="510" y="13" width="313" height="183"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_OE61AJo1Ed6Ex8f7L1NZYQ" type="2003">
         <children xmi:type="notation:Node" xmi:id="_OE61A5o1Ed6Ex8f7L1NZYQ" type="4002"/>
         <children xmi:type="notation:Node" xmi:id="_OE61BJo1Ed6Ex8f7L1NZYQ" type="5004">
-          <children xmi:type="notation:Node" xmi:id="_TV8pwJo1Ed6Ex8f7L1NZYQ" type="2001">
-            <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/SimpleIndex/idxTable"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_TV8pwZo1Ed6Ex8f7L1NZYQ"/>
-          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_OE61BZo1Ed6Ex8f7L1NZYQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_OE61Bpo1Ed6Ex8f7L1NZYQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_OE61B5o1Ed6Ex8f7L1NZYQ"/>
@@ -270,14 +278,6 @@
       <children xmi:type="notation:Node" xmi:id="_N1ztsJx0Ed625-Uq6sOdNQ" type="2003">
         <children xmi:type="notation:Node" xmi:id="_N1zts5x0Ed625-Uq6sOdNQ" type="4002"/>
         <children xmi:type="notation:Node" xmi:id="_N150UJx0Ed625-Uq6sOdNQ" type="5004">
-          <children xmi:type="notation:Node" xmi:id="_SsGuQJx0Ed625-Uq6sOdNQ" type="2001">
-            <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/ComplexIndex/numOfSlots"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_SsGuQZx0Ed625-Uq6sOdNQ"/>
-          </children>
-          <children xmi:type="notation:Node" xmi:id="_ZcKs0Jx0Ed625-Uq6sOdNQ" type="2001">
-            <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/ComplexIndex/idxTable"/>
-            <layoutConstraint xmi:type="notation:Location" xmi:id="_ZcKs0Zx0Ed625-Uq6sOdNQ"/>
-          </children>
           <children xmi:type="notation:Node" xmi:id="_kNFAMPw-EeGT7YNhO3oX2Q" type="2001">
             <element xmi:type="ecore:EAttribute" href="graph.ecore#//index/ComplexIndex/sortable"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_kNFAMfw-EeGT7YNhO3oX2Q"/>

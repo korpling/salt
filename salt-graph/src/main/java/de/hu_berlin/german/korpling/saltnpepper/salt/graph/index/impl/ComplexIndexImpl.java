@@ -17,9 +17,9 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphIndexException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.IdentifiableElementImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage;
@@ -41,15 +41,16 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getNumOfElements <em>Num Of Elements</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getNumOfSlots <em>Num Of Slots</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getIdxTable <em>Idx Table</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getNumOfElementIds <em>Num Of Element Ids</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getIndexMap <em>Index Map</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getEstimatedCapacity <em>Estimated Capacity</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#isSortable <em>Sortable</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ComplexIndexImpl extends IdentifiableElementImpl implements ComplexIndex {
+public class ComplexIndexImpl<K, V> extends IdentifiableElementImpl implements ComplexIndex<K, V> {
 	/**
 	 * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -61,14 +62,34 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	protected static final Long NUM_OF_ELEMENTS_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getNumOfSlots() <em>Num Of Slots</em>}' attribute.
+	 * The default value of the '{@link #getNumOfElementIds() <em>Num Of Element Ids</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNumOfSlots()
+	 * @see #getNumOfElementIds()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long NUM_OF_SLOTS_EDEFAULT = null;
+	protected static final Long NUM_OF_ELEMENT_IDS_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEstimatedCapacity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer ESTIMATED_CAPACITY_EDEFAULT = new Integer(10000);
+
+	/**
+	 * The cached value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEstimatedCapacity()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer estimatedCapacity = ESTIMATED_CAPACITY_EDEFAULT;
 
 	/**
      * The default value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
@@ -106,10 +127,7 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	
 	private void init()
 	{
-		this.setIdxTable(new Hashtable<Object, EList<Object>>());
-		//this is not necessary here, it is already done in setIdxTable() 
-		//this.setIdxTableObjSet(new Hashtable<Object, HashSet<Object>>());
-		//this.setAllElements(new Hashtable<Object,Integer>());
+		this.setIndexMap(new HashMap<K, V>(this.getEstimatedCapacity()));
 		this.setNumOfElements(new Long(0));
 	}
 	
@@ -123,17 +141,102 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	public Long getNumOfElements() {
 		return numOfElements;
 	}
+	/**
+	 * {@inheritDoc ComplexIndex#getNumOfElementIds()}
+	 */
+	public Long getNumOfElementIds() {
+		return(Long.valueOf(this.getIndexMap_Complex().size()));
+	}
+
+	/**
+	 * {@inheritDoc ComplexIndex#getIndexMap()}
+	 */
+	@SuppressWarnings("unchecked")
+	public Map<K, V> getIndexMap() {
+		return((Map<K, V>)indexMap);
+	}
+	
+	/**
+	 * returns the real index map, without casting stuff.
+	 */
+	public Map<K, EList<V>> getIndexMap_Complex() {
+		return(indexMap);
+	}
+
+	/**
+	 * {@inheritDoc ComplexIndex#setIndexMap(Map)}
+	 */
+	@SuppressWarnings("unchecked")
+	public void setIndexMap(Map<K, V> newIndexMap) {
+		//in this method, idxSet and invIdxTable are built according to newIdxTable
+		//the addElement method must not be called from this method!
+		this.indexMap= (Map<K, EList<V>>) newIndexMap;
+
+		//update index set, inverse index table and set new number of elements
+		this.setIdxSet(new HashMap<K, HashSet<V>>());
+		this.setInvIdxTable(new HashMap<Object,EList<Object>>());
+		
+		long elementCount= 0;
+
+		for (Object id : this.getIndexMap_Complex().keySet().toArray()) {
+			EList<V> slotList = this.getIndexMap_Complex().get(id);
+			
+			if (this.getIdxSet().containsKey(id)) {
+				throw new GraphIndexException("Index table illegaly contains duplicate index");
+			}
+			else {
+				HashSet<V> slotSet = this.getIdxSet().put((K)id, new HashSet<V>());				
+				for (V element : slotList) {
+					if (slotSet.contains(element)) {
+						throw new GraphIndexException("Index table illegaly contains duplicate element");
+					}
+					else {
+						slotSet.add(element);
+						EList<Object> idList = new BasicEList<Object>();
+						this.getInvIdxTable().put(element, idList);
+						idList.add(id);
+					}
+				}
+			}
+			elementCount= elementCount + slotList.size();
+		}
+		this.setNumOfElements(elementCount);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getEstimatedCapacity() {
+		return estimatedCapacity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEstimatedCapacity(Integer newEstimatedCapacity) {
+		Integer oldEstimatedCapacity = estimatedCapacity;
+		estimatedCapacity = newEstimatedCapacity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IndexPackage.COMPLEX_INDEX__ESTIMATED_CAPACITY, oldEstimatedCapacity, estimatedCapacity));
+	}
+
 	//----------------------------------------------------------------------
-	
-	protected Map<Object, EList<Object>>   idxTable;
+	/**
+	 * Real index storing ids and the corresponding set of values.
+	 */
+	protected Map<K, EList<V>>   indexMap;
 	protected Map<Object, EList<Object>>   invIdxTable;
-	protected Map<Object, HashSet<Object>> idxSet;
+	protected Map<K, HashSet<V>> idxSet;
 	
-	protected Map<Object, HashSet<Object>> getIdxSet() {
+	protected Map<K, HashSet<V>> getIdxSet() {
 		return idxSet;
 	}
 
-	protected void setIdxSet(Map<Object, HashSet<Object>> idxTableObjSet) {
+	protected void setIdxSet(Map<K, HashSet<V>> idxTableObjSet) {
 		this.idxSet = idxTableObjSet;
 	}
 
@@ -149,49 +252,7 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 
 	public Long getNumOfSlots() 
 	{
-		return(new Long(this.getIdxTable().size()));
-	}
-
-	public Map<Object, EList<Object>> getIdxTable() 
-	{
-		return(this.idxTable);
-	}
-
-	public void setIdxTable(Map<Object, EList<Object>> newIdxTable) 
-	{
-		//in this method, idxSet and invIdxTable are built according to newIdxTable
-		//the addElement method must not be called from this method!
-		this.idxTable= newIdxTable;
-
-		//update index set, inverse index table and set new number of elements
-		this.setIdxSet(new Hashtable<Object, HashSet<Object>>());
-		this.setInvIdxTable(new HashMap<Object,EList<Object>>());
-		
-		long elementCount= 0;
-
-		for (Object id : this.getIdxTable().keySet().toArray()) {
-			EList<Object> slotList = this.getIdxTable().get(id);
-			
-			if (this.getIdxSet().containsKey(id)) {
-				throw new GraphException("Index table illegaly contains duplicate index");
-			}
-			else {
-				HashSet<Object> slotSet = this.getIdxSet().put(id, new HashSet<Object>());				
-				for (Object element : slotList) {
-					if (slotSet.contains(element)) {
-						throw new GraphException("Index table illegaly contains duplicate element");
-					}
-					else {
-						slotSet.add(element);
-						EList<Object> idList = new BasicEList<Object>();
-						this.getInvIdxTable().put(element, idList);
-						idList.add(id);
-					}
-				}
-			}
-			elementCount= elementCount + slotList.size();
-		}
-		this.setNumOfElements(elementCount);
+		return(Long.valueOf(this.getIndexMap_Complex().size()));
 	}
 	
 	/**
@@ -204,51 +265,47 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		return sortable;
 	}
 
-    //============================================================================================================
+	//============================================================================================================
 	// ADD
 	//============================================================================================================
 	
-	/**
-	 * This method adds an element to slot with given id. If no slot exists it will
-	 * be created. No element will ever be inserted into the same slot more than once.
-	 * @param id Object - identifier for slot
-	 * @param element Object - adding element  
+    /**
+	 * {@inheritDoc Index#addElement(Object, Object)}
 	 */
-	public void addElement(Object id, Object element)
-	{
-		if (id== null) {
-			throw new GraphException("Cannot add the given entry, because the given id is empty.");
+	public void addElement(K elementId, V element) {
+		if (elementId== null) {
+			throw new GraphIndexException("Cannot add the given entry, because the given id is empty.");
 		}
 		
 		if (element== null) {
-			throw new GraphException("Cannot add the given entry, because the given element is empty.");
+			throw new GraphIndexException("Cannot add the given entry, because the given element is empty.");
 		}
 		
 		//update index table and index set
-		if (!this.getIdxTable().containsKey(id)) {
-			EList<Object>   slotList = new BasicEList<Object>();
-			HashSet<Object> slotSet  = new HashSet<Object>();
-			this.getIdxTable().put(id, slotList);
-			this.getIdxSet().put(id, slotSet);
+		if (!this.getIndexMap().containsKey(elementId)) {
+			EList<V>   slotList = new BasicEList<V>();
+			HashSet<V> slotSet  = new HashSet<V>();
+			this.getIndexMap_Complex().put(elementId, slotList);
+			this.getIdxSet().put(elementId, slotSet);
 			slotList.add(element);
 			slotSet.add(element);
 		}
-		else if (this.getIdxSet().get(id).contains(element))	{
-			throw new GraphException("Slot may not contain element more than once.");
+		else if (this.getIdxSet().get(elementId).contains(element))	{
+			throw new GraphIndexException("Slot may not contain element more than once.");
 		}
 		else {
-			this.getIdxTable().get(id).add(element);
-			this.getIdxSet().get(id).add(element);
+			this.getIndexMap_Complex().get(elementId).add(element);
+			this.getIdxSet().get(elementId).add(element);
 		}
 		
 		//update inverse index table
 		if (!this.getInvIdxTable().containsKey(element)) {
 			EList<Object> idList = new BasicEList<Object>();
 			this.getInvIdxTable().put(element, idList);
-			idList.add(id);
+			idList.add(elementId);
 		}
 		else {
-			this.getInvIdxTable().get(element).add(id);
+			this.getInvIdxTable().get(element).add(elementId);
 		}
 		this.setNumOfElements(this.getNumOfElements()+1);
 	}
@@ -258,46 +315,37 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	//============================================================================================================
 
 	/**
-	 * This method removes a slot matching to the given id.
-	 * @param id Object - identifier for slot
-	 * @return true, if slot is removed, false else
+	 * {@inheritDoc ComplexIndex#removeSlot(Object)}
 	 */
-	public Boolean removeSlot(Object id)
-	{
-		if (id== null) {
-			throw new GraphException("Cannot remove the given entry, because the given id is empty.");
+	public Boolean removeSlot(K elementId) {
+			if (elementId== null) {
+			throw new GraphIndexException("Cannot remove the given entry, because the given id is empty.");
 		}
 			
-		if (!this.getIdxTable().containsKey(id)) {
+		if (!this.getIndexMap_Complex().containsKey(elementId)) {
 			return false; 
 		}
 		
-		long numOfElementsInSlot = this.getIdxTable().get(id).size();  
+		long numOfElementsInSlot = this.getIndexMap_Complex().get(elementId).size();  
 		
-		for (Object element : this.getIdxTable().get(id)) {
+		for (Object element : this.getIndexMap_Complex().get(elementId)) {
 			EList<Object> idList = this.getInvIdxTable().get(element);
-			idList.remove(id);
+			idList.remove(elementId);
 			if (idList.isEmpty()) {
 				this.getInvIdxTable().remove(element);
 			}
 		}
-		this.getIdxSet().remove(id);
-		this.getIdxTable().remove(id);
+		this.getIdxSet().remove(elementId);
+		this.getIndexMap_Complex().remove(elementId);
 		this.setNumOfElements(this.getNumOfElements()-numOfElementsInSlot);
 		return true;
 	}
-
-		
-	
 	/**
-	 * This method searches the given element and removes it from index.
-	 * @param element the element which shall be searches
-	 * @return true, if removing was successful
+	 * {@inheritDoc Index##removeElement(Object)}
 	 */
-	public Boolean removeElement(Object element)
-	{
+	public Boolean removeElement(V element) {
 		if (element== null) {
-			throw new GraphException("Cannot search for the given entry, because an empty element was given.");
+			throw new GraphIndexException("Cannot search for the given entry, because an empty element was given.");
 		}
 
 		EList<Object> idList = this.getInvIdxTable().get(element);
@@ -307,12 +355,12 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		}
 
 		for (Object id : idList) {
-			EList<Object>   entryList = this.getIdxTable().get(id); 
-			HashSet<Object> entrySet  = this.getIdxSet().get(id);			
+			EList<V>   entryList = this.getIndexMap_Complex().get(id); 
+			HashSet<V> entrySet  = this.getIdxSet().get(id);			
 			entryList.remove(element);
 			entrySet.remove(element);
 			if (entryList.isEmpty()) {
-				this.getIdxTable().remove(id);
+				this.getIndexMap_Complex().remove(id);
 				this.getIdxSet().remove(id);
 			}
 		}
@@ -320,64 +368,56 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		this.getInvIdxTable().remove(element);
 		return true;
 	}
-
 	
-	
+	/**
+	 * {@inheritDoc ComplexIndex#removeAll()}
+	 */
+	public Boolean removeAll()
+	{
+		this.init();
+		return(true);
+	}
 	
 	//============================================================================================================
 	// HAS
 	//============================================================================================================
 	/**
-	 * This method returns if index has a slot with the given id.
-	 * @param id Object - identifier for slot
-	 * @return true, if there exists a slot with given id
-	 * @throws Exception
+	 * {@inheritDoc ComplexIndex#hasSlot(Object)}
 	 */
-	public Boolean hasSlot(Object id) 
+	@Override
+	public Boolean hasSlot(K elementId) 
 	{
-		return (this.getIdxTable().containsKey(id));
+		return (this.getIndexMap_Complex().containsKey(elementId));
 	}
 	
 	/**
-	 * This method returns if the given element exists in this index. 
-	 * @param element Object - element which shall be searched
-	 * @return true, if value exists in index
+	 * {@inheritDoc Index#hasElement(Object)}
 	 */
-	public Boolean hasElement(Object element)
-	{
-		if (element== null) {
-			throw new GraphException("Cannot search for the given element, because it is empty.");
+	public Boolean hasElement(K elementId) {
+		if (elementId== null) {
+			throw new GraphIndexException("Cannot search for the given element, because it is empty.");
 		}
-		return this.getInvIdxTable().containsKey(element);
+		return this.getInvIdxTable().containsKey(elementId);
 	}
 
 	/**
-	 * This method returns a slot matching to the given id. If id does not exists in
-	 * index returnd list is empty.
-	 * @return matching slot
+	 * {@inheritDoc ComplexIndex#getSlot(Object)}
 	 */
-	public EList<Object> getSlot(Object id)
+	@SuppressWarnings("unchecked")
+	@Override
+	public EList<V> getSlot(K elementid)
 	{
-		return this.getIdxTable().get(id);	
+		return (EList<V>) this.getIndexMap().get(elementid);	
 	}
 
 	/**
 	 * Returns a list of all IDs which are related to a slot.  
 	 * @return a list of all IDs which are related to a slot.
 	 */
-	public EList<Object> getSlotIds()
+	@Override
+	public EList<K> getSlotIds()
 	{
-		return new BasicEList<Object>(this.getIdxTable().keySet());
-	}
-
-	/**
-	 * This method resets this index, it removes all elements and all slots.
-	 * @return true, if removing was successful
-	 */
-	public Boolean removeAll()
-	{
-		this.init();
-		return(true);
+		return new BasicEList<K>(this.getIndexMap_Complex().keySet());
 	}
 
 	/**
@@ -390,10 +430,12 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		switch (featureID) {
 			case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
 				return getNumOfElements();
-			case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
-				return getNumOfSlots();
-			case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
-				return getIdxTable();
+			case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENT_IDS:
+				return getNumOfElementIds();
+			case IndexPackage.COMPLEX_INDEX__INDEX_MAP:
+				return getIndexMap();
+			case IndexPackage.COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				return getEstimatedCapacity();
 			case IndexPackage.COMPLEX_INDEX__SORTABLE:
 				return isSortable();
 		}
@@ -403,13 +445,17 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
-				setIdxTable((Map<Object, EList<Object>>)newValue);
+			case IndexPackage.COMPLEX_INDEX__INDEX_MAP:
+				setIndexMap((Map<K, V>)newValue);
+				return;
+			case IndexPackage.COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				setEstimatedCapacity((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -418,12 +464,16 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
-				setIdxTable((Map<Object, EList<Object>>)null);
+			case IndexPackage.COMPLEX_INDEX__INDEX_MAP:
+				setIndexMap((Map<K, V>)null);
+				return;
+			case IndexPackage.COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				setEstimatedCapacity(ESTIMATED_CAPACITY_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -439,10 +489,12 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		switch (featureID) {
 			case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENTS:
 				return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
-			case IndexPackage.COMPLEX_INDEX__NUM_OF_SLOTS:
-				return NUM_OF_SLOTS_EDEFAULT == null ? getNumOfSlots() != null : !NUM_OF_SLOTS_EDEFAULT.equals(getNumOfSlots());
-			case IndexPackage.COMPLEX_INDEX__IDX_TABLE:
-				return getIdxTable() != null;
+			case IndexPackage.COMPLEX_INDEX__NUM_OF_ELEMENT_IDS:
+				return NUM_OF_ELEMENT_IDS_EDEFAULT == null ? getNumOfElementIds() != null : !NUM_OF_ELEMENT_IDS_EDEFAULT.equals(getNumOfElementIds());
+			case IndexPackage.COMPLEX_INDEX__INDEX_MAP:
+				return getIndexMap() != null;
+			case IndexPackage.COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				return ESTIMATED_CAPACITY_EDEFAULT == null ? estimatedCapacity != null : !ESTIMATED_CAPACITY_EDEFAULT.equals(estimatedCapacity);
 			case IndexPackage.COMPLEX_INDEX__SORTABLE:
 				return sortable != SORTABLE_EDEFAULT;
 		}
@@ -461,7 +513,9 @@ public class ComplexIndexImpl extends IdentifiableElementImpl implements Complex
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sortable: ");
+		result.append(" (estimatedCapacity: ");
+		result.append(estimatedCapacity);
+		result.append(", sortable: ");
 		result.append(sortable);
 		result.append(')');
 		return result.toString();

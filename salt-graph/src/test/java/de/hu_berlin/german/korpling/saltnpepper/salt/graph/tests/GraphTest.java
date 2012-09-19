@@ -617,8 +617,8 @@ public class GraphTest extends IdentifiableElementTest {
 //		assertTrue(this.getFixture().getInEdges(node2.getId()).contains(edge1));		
 		
 //		System.out.println("node1 contains these InEdges:\t" + this.getFixture().getInEdges(node1.getId()));
-		System.out.println("node1 contains these OutEdges:\t" + this.getFixture().getOutEdges(node1.getId()));
-		System.out.println("node2 contains these InEdges:\t" + this.getFixture().getInEdges(node2.getId()));
+//		System.out.println("node1 contains these OutEdges:\t" + this.getFixture().getOutEdges(node1.getId()));
+//		System.out.println("node2 contains these InEdges:\t" + this.getFixture().getInEdges(node2.getId()));
 //		System.out.println("node2 contains these OutEdges:\t" + this.getFixture().getOutEdges(node2.getId()));
 		
 		edge1.setSource(node2);
@@ -627,10 +627,10 @@ public class GraphTest extends IdentifiableElementTest {
 //		assertTrue(this.getFixture().getInEdges(node1.getId()).contains(edge1));
 //		assertTrue(this.getFixture().getOutEdges(node2.getId()).contains(edge1));		
 		
-		System.out.println("node1 contains these InEdges:\t" + this.getFixture().getInEdges(node1.getId()));
+//		System.out.println("node1 contains these InEdges:\t" + this.getFixture().getInEdges(node1.getId()));
 //		System.out.println("node1 contains these OutEdges:\t" + this.getFixture().getOutEdges(node1.getId()));
 //		System.out.println("node2 contains these InEdges:\t" + this.getFixture().getInEdges(node2.getId()));
-		System.out.println("node2 contains these OutEdges:\t" + this.getFixture().getOutEdges(node2.getId()));
+//		System.out.println("node2 contains these OutEdges:\t" + this.getFixture().getOutEdges(node2.getId()));
 	}
 		
 	/**

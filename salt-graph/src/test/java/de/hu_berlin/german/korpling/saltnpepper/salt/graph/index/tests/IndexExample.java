@@ -75,7 +75,7 @@ public class IndexExample {
 			System.out.println("Enter a list of file paths or URIs that have content like this:");
 			try {
 				Resource resource = resourceSet.createResource(URI.createURI("http:///My.index"));
-				SimpleIndex root = IndexFactory.eINSTANCE.createSimpleIndex();
+				SimpleIndex<?, ?> root = IndexFactory.eINSTANCE.createSimpleIndex();
 				resource.getContents().add(root);
 				resource.save(System.out, null);
 			}

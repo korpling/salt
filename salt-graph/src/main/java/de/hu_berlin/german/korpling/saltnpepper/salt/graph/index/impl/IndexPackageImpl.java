@@ -30,10 +30,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -160,8 +162,8 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSimpleIndex() {
-		return simpleIndexEClass;
+	public EAttribute getIndex_NumOfElementIds() {
+		return (EAttribute)indexEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -169,8 +171,26 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSimpleIndex_IdxTable() {
-		return (EAttribute)simpleIndexEClass.getEStructuralFeatures().get(0);
+	public EAttribute getIndex_IndexMap() {
+		return (EAttribute)indexEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIndex_EstimatedCapacity() {
+		return (EAttribute)indexEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSimpleIndex() {
+		return simpleIndexEClass;
 	}
 
 	/**
@@ -220,30 +240,12 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getComplexIndex_NumOfSlots() {
-		return (EAttribute)complexIndexEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getComplexIndex_IdxTable() {
-		return (EAttribute)complexIndexEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
 	 */
     public EAttribute getComplexIndex_Sortable()
     {
-		return (EAttribute)complexIndexEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)complexIndexEClass.getEStructuralFeatures().get(0);
 	}
 
     /**
@@ -276,9 +278,11 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		// Create classes and their features
 		indexEClass = createEClass(INDEX);
 		createEAttribute(indexEClass, INDEX__NUM_OF_ELEMENTS);
+		createEAttribute(indexEClass, INDEX__NUM_OF_ELEMENT_IDS);
+		createEAttribute(indexEClass, INDEX__INDEX_MAP);
+		createEAttribute(indexEClass, INDEX__ESTIMATED_CAPACITY);
 
 		simpleIndexEClass = createEClass(SIMPLE_INDEX);
-		createEAttribute(simpleIndexEClass, SIMPLE_INDEX__IDX_TABLE);
 
 		indexMgrEClass = createEClass(INDEX_MGR);
 		createEReference(indexMgrEClass, INDEX_MGR__INDEXES);
@@ -286,8 +290,6 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		createEReference(indexMgrEClass, INDEX_MGR__GRAPH);
 
 		complexIndexEClass = createEClass(COMPLEX_INDEX);
-		createEAttribute(complexIndexEClass, COMPLEX_INDEX__NUM_OF_SLOTS);
-		createEAttribute(complexIndexEClass, COMPLEX_INDEX__IDX_TABLE);
 		createEAttribute(complexIndexEClass, COMPLEX_INDEX__SORTABLE);
 	}
 
@@ -318,38 +320,69 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		GraphPackage theGraphPackage = (GraphPackage)EPackage.Registry.INSTANCE.getEPackage(GraphPackage.eNS_URI);
 
 		// Create type parameters
+		ETypeParameter indexEClass_K = addETypeParameter(indexEClass, "K");
+		ETypeParameter indexEClass_V = addETypeParameter(indexEClass, "V");
+		ETypeParameter simpleIndexEClass_K = addETypeParameter(simpleIndexEClass, "K");
+		ETypeParameter simpleIndexEClass_V = addETypeParameter(simpleIndexEClass, "V");
+		ETypeParameter complexIndexEClass_K = addETypeParameter(complexIndexEClass, "K");
+		ETypeParameter complexIndexEClass_V = addETypeParameter(complexIndexEClass, "V");
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
 		indexEClass.getESuperTypes().add(theGraphPackage.getIdentifiableElement());
-		simpleIndexEClass.getESuperTypes().add(this.getIndex());
-		complexIndexEClass.getESuperTypes().add(this.getIndex());
+		EGenericType g1 = createEGenericType(this.getIndex());
+		EGenericType g2 = createEGenericType(simpleIndexEClass_K);
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(simpleIndexEClass_V);
+		g1.getETypeArguments().add(g2);
+		simpleIndexEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getIndex());
+		g2 = createEGenericType(complexIndexEClass_K);
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(complexIndexEClass_V);
+		g1.getETypeArguments().add(g2);
+		complexIndexEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(indexEClass, Index.class, "Index", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getIndex_NumOfElements(), ecorePackage.getELongObject(), "numOfElements", null, 0, 1, Index.class, !IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIndex_NumOfElements(), ecorePackage.getELongObject(), "numOfElements", null, 0, 1, Index.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIndex_NumOfElementIds(), ecorePackage.getELongObject(), "numOfElementIds", null, 0, 1, Index.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(indexEClass_K);
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(indexEClass_V);
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getIndex_IndexMap(), g1, "indexMap", null, 0, 1, Index.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIndex_EstimatedCapacity(), ecorePackage.getEIntegerObject(), "estimatedCapacity", "10000", 0, 1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(indexEClass, null, "addElement", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(indexEClass_K);
+		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(indexEClass_V);
+		addEParameter(op, g1, "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(indexEClass, ecorePackage.getEBooleanObject(), "hasElement", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(indexEClass_K);
+		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = addEOperation(indexEClass, ecorePackage.getEBooleanObject(), "removeElement", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(indexEClass_V);
+		addEParameter(op, g1, "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(indexEClass, ecorePackage.getEBooleanObject(), "removeAll", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(simpleIndexEClass, SimpleIndex.class, "SimpleIndex", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSimpleIndex_IdxTable(), ecorePackage.getEMap(), "idxTable", null, 0, 1, SimpleIndex.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(simpleIndexEClass, ecorePackage.getEJavaObject(), "getElement", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(simpleIndexEClass, null, "getElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(simpleIndexEClass_K);
+		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(simpleIndexEClass_V);
+		initEOperation(op, g1);
 
 		op = addEOperation(simpleIndexEClass, ecorePackage.getEBooleanObject(), "removeElementById", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(simpleIndexEClass_K);
+		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(indexMgrEClass, IndexMgr.class, "IndexMgr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIndexMgr_Indexes(), this.getIndex(), null, "indexes", null, 0, -1, IndexMgr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -374,20 +407,25 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(complexIndexEClass, ComplexIndex.class, "ComplexIndex", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getComplexIndex_NumOfSlots(), ecorePackage.getELongObject(), "numOfSlots", null, 0, 1, ComplexIndex.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getComplexIndex_IdxTable(), ecorePackage.getEMap(), "idxTable", null, 0, 1, ComplexIndex.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getComplexIndex_Sortable(), ecorePackage.getEBoolean(), "sortable", "false", 0, 1, ComplexIndex.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(complexIndexEClass, ecorePackage.getEBooleanObject(), "hasSlot", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(complexIndexEClass_K);
+		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(complexIndexEClass, ecorePackage.getEJavaObject(), "getSlot", 0, -1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(complexIndexEClass, null, "getSlot", 0, -1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(complexIndexEClass_K);
+		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(complexIndexEClass_V);
+		initEOperation(op, g1);
 
-		addEOperation(complexIndexEClass, ecorePackage.getEJavaObject(), "getSlotIds", 0, -1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(complexIndexEClass, null, "getSlotIds", 0, -1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(complexIndexEClass_K);
+		initEOperation(op, g1);
 
 		op = addEOperation(complexIndexEClass, ecorePackage.getEBooleanObject(), "removeSlot", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(complexIndexEClass_K);
+		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
 	}
 
 } //IndexPackageImpl

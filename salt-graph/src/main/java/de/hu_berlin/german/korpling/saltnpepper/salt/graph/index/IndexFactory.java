@@ -46,7 +46,7 @@ public interface IndexFactory extends EFactory {
 	 * @return a new object of class '<em>Simple Index</em>'.
 	 * @generated
 	 */
-	SimpleIndex createSimpleIndex();
+	<K, V> SimpleIndex<K, V> createSimpleIndex();
 	
 	/**
 	 * Returns a new object of class '<em>Simple Index</em>'.
@@ -54,7 +54,7 @@ public interface IndexFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Simple Index</em>'.
 	 */
-	IdentifiableElementIndex<? extends IdentifiableElement> createIdentifiableElementIndex();
+	<V extends IdentifiableElement> IdentifiableElementIndex<V> createIdentifiableElementIndex();
 
 	/**
 	 * Returns a new object of class '<em>Mgr</em>'.
@@ -72,7 +72,7 @@ public interface IndexFactory extends EFactory {
 	 * @return a new object of class '<em>Complex Index</em>'.
 	 * @generated
 	 */
-	ComplexIndex createComplexIndex();
+	<K, V> ComplexIndex<K, V> createComplexIndex();
 
 	/**
 	 * Returns the package supported by this factory.

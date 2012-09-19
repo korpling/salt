@@ -17,7 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -26,14 +26,14 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.osgi.service.log.LogService;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.exceptions.GraphModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.exceptions.GraphModuleException;
 @Deprecated
 public class GraphTraverserObject implements Runnable
 {
@@ -123,7 +123,7 @@ public class GraphTraverserObject implements Runnable
 	{
 		this.id= getNewId();
 //		visitedEdges= new BasicEList<Edge>();
-		visitedEdges= new Hashtable<Edge, Object>();
+		visitedEdges= new HashMap<Edge, Object>();
 	}
 	
 	/**
@@ -384,7 +384,7 @@ public class GraphTraverserObject implements Runnable
 	private static String KW_NS= "graphTraverseObject";
 	private static String KW_VISITED= "visited";
 	//private EList<Edge> visitedEdges= null;
-	private Hashtable<Edge, Object> visitedEdges= null;
+	private HashMap<Edge, Object> visitedEdges= null;
 	/**
 	 * Marks the given node as visited.
 	 * Attention: this method is not thread safe

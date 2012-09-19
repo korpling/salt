@@ -486,10 +486,7 @@ public class LabelableElementTest extends TestCase {
 	}
 
 	public void testDifferences()
-	{
-		System.out.println("testing: "+ this.getFixture());
-		System.out.println(this.getFixture().differences(this.getFixture()));
-		
+	{		
 		assertNull(this.getFixture().differences(this.getFixture()));
 	}
 } //LabelableElementTest
