@@ -25,6 +25,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Labelable Element</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * @export java.io.Serializable
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
