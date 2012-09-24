@@ -79,7 +79,6 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 	 * Returns the fixture for this Complex Index test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	protected ComplexIndex<String, String> getFixture() {
@@ -288,7 +287,6 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap()
-	 * @generated
 	 */
 	public void testGetIndexMap() {
 		HashMap<Object, EList<Object>> idxTable= new HashMap<Object, EList<Object>>();
@@ -301,7 +299,6 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#setIndexMap(java.util.Map)
-	 * @generated
 	 */
 	public void testSetIndexMap() {
 		this.testGetIndexMap();

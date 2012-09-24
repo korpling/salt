@@ -78,7 +78,6 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 	 * Returns the fixture for this Simple Index test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	protected SimpleIndex<String, String> getFixture() {
