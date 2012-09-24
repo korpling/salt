@@ -315,42 +315,126 @@ public abstract class SAbstractAnnotationTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType()
 	 */
-	public void testGetSValueType() 
+	public void testGetSValueType_SBOOLEAN() 
 	{
 		SDATATYPE dataType= null;
 				
 		dataType= SDATATYPE.SBOOLEAN;
 		this.getFixture().setSValue(true);
 		assertEquals(dataType, this.getFixture().getSValueType());
-		
-		dataType= SDATATYPE.STEXT;
-		this.getFixture().setSValue("String");
-		assertEquals(dataType, this.getFixture().getSValueType());
-		
-		dataType= SDATATYPE.SNUMERIC;
-		this.getFixture().setSValue(1);
-		
-		dataType= SDATATYPE.SNUMERIC;
-		this.getFixture().setSValue(1l);
-		assertEquals(dataType, this.getFixture().getSValueType());
-		
-		dataType= SDATATYPE.SFLOAT;
-		this.getFixture().setSValue(1.0F);
-		assertEquals(dataType, this.getFixture().getSValueType());
-		
-		dataType= SDATATYPE.SFLOAT;
-		this.getFixture().setSValue(1.0);
-		assertEquals(dataType, this.getFixture().getSValueType());
-		
-		dataType= SDATATYPE.SURI;
-		this.getFixture().setSValue(URI.createFileURI(""));
-		assertEquals(dataType, this.getFixture().getSValueType());
-		
-		dataType= SDATATYPE.SOBJECT;
-		this.getFixture().setSValue(new Object());
-		assertEquals(dataType, this.getFixture().getSValueType());
 	}
+	
+	/**
+     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType() <em>SValue Type</em>}' feature getter.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType()
+     */
+    public void testGetSValueType_STEXT() 
+    {
+        SDATATYPE dataType= null;
+                
+        dataType= SDATATYPE.STEXT;
+        this.getFixture().setSValue("String");
+        assertEquals(dataType, this.getFixture().getSValueType());
+    }
+    
+    /**
+     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType() <em>SValue Type</em>}' feature getter.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType()
+     */
+    public void testGetSValueType_SNUMERIC() 
+    {
+        SDATATYPE dataType= null;
+                
+        dataType= SDATATYPE.SNUMERIC;
+        this.getFixture().setSValue(1);
+        
+        dataType= SDATATYPE.SNUMERIC;
+        this.getFixture().setSValue(1l);
+        assertEquals(dataType, this.getFixture().getSValueType());
+    }
+    
+    /**
+     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType() <em>SValue Type</em>}' feature getter.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType()
+     */
+    public void testGetSValueType_SFLOAT() 
+    {
+        SDATATYPE dataType= null;
+                
+        dataType= SDATATYPE.SFLOAT;
+        this.getFixture().setSValue(1.0F);
+        assertEquals(dataType, this.getFixture().getSValueType());
+        
+        dataType= SDATATYPE.SFLOAT;
+        this.getFixture().setSValue(1.0);
+        assertEquals(dataType, this.getFixture().getSValueType());
+    }
+    
+    /**
+     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType() <em>SValue Type</em>}' feature getter.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType()
+     */
+    public void testGetSValueType_SURI() 
+    {
+        SDATATYPE dataType= null;
+        
+        dataType= SDATATYPE.SURI;
+        this.getFixture().setSValue(URI.createFileURI(""));
+        assertEquals(dataType, this.getFixture().getSValueType());
+    }
+    
+    /**
+     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType() <em>SValue Type</em>}' feature getter.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType()
+     */
+    public void testGetSValueType_SOBJECT() 
+    {
+        SDATATYPE dataType= null;
+        
+        dataType= SDATATYPE.SOBJECT;
+        this.getFixture().setSValue(new Object());
+        assertEquals(dataType, this.getFixture().getSValueType());
+    }
+    
+    /**
+     * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType() <em>SValue Type</em>}' feature getter.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType()
+     */
+    public void testGetSValueType() 
+    {
+       this.testGetSValueType_SBOOLEAN();
+       this.testGetSValueType_SFLOAT();
+       this.testGetSValueType_SNUMERIC();
+       this.testGetSValueType_SOBJECT();
+       this.testGetSValueType_STEXT();
+       this.testGetSValueType_SURI();
+    }
 
+    /**
+     * tests user created failure
+     */
+    public void testGetSValueType2() 
+    {
+        SDATATYPE dataType= null;
+        
+        dataType= SDATATYPE.SURI;
+        this.getFixture().setSValue(URI.createFileURI(""));
+        this.getFixture().setSValueType(null);
+        assertEquals(dataType, this.getFixture().getSValueType());
+    }
+    
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#setSValueType(de.hub.corpling.salt.saltCore.SDATATYPES) <em>SValue Type</em>}' feature setter.
 	 * <!-- begin-user-doc -->

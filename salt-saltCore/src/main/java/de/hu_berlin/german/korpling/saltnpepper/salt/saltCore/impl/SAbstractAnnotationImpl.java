@@ -176,6 +176,26 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	}
 
 // ============================= start: SValueType	
+	private SDATATYPE computeSValueType()
+	{
+	    if (this.getValue() == null)
+            return(SDATATYPE.SOBJECT);
+        else if (this.getValue() instanceof String)
+            return(SDATATYPE.STEXT);
+        else if (this.getValue() instanceof Boolean)
+            return(SDATATYPE.SBOOLEAN);
+        else if (this.getValue() instanceof Integer)
+            return(SDATATYPE.SNUMERIC);
+        else if (this.getValue() instanceof Long)
+            return(SDATATYPE.SNUMERIC);
+        else if (this.getValue() instanceof Float)
+            return(SDATATYPE.SFLOAT);
+        else if (this.getValue() instanceof Double)
+            return(SDATATYPE.SFLOAT);
+        else if (this.getValue() instanceof URI)
+            return(SDATATYPE.SURI);
+        else return(SDATATYPE.SOBJECT);
+	}
 	
 	/**
 	 * {@link Inherited SAbstractAnnotation#getSValueType()}
@@ -187,28 +207,17 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 		Label label= super.getLabel(KW_SVAL_TYPE);
 		if (label!= null)
 		{
-			retVal= SDATATYPE.valueOf(label.getValueString()); 
+		    if (  (label.getValue()== null)&&
+		            (this.getSValue()!= null))
+		    { 
+		      label.setValue(computeSValueType());  
+		    }
+	        retVal= SDATATYPE.valueOf(label.getValueString()); 
 		}
 		else
 		{//compute value type
+		    retVal= computeSValueType();
 			
-			if (this.getValue() == null)
-				retVal= SDATATYPE.SOBJECT;
-			else if (this.getValue() instanceof String)
-				retVal= SDATATYPE.STEXT;
-			else if (this.getValue() instanceof Boolean)
-				retVal= SDATATYPE.SBOOLEAN;
-			else if (this.getValue() instanceof Integer)
-				retVal= SDATATYPE.SNUMERIC;
-			else if (this.getValue() instanceof Long)
-				retVal= SDATATYPE.SNUMERIC;
-			else if (this.getValue() instanceof Float)
-				retVal= SDATATYPE.SFLOAT;
-			else if (this.getValue() instanceof Double)
-				retVal= SDATATYPE.SFLOAT;
-			else if (this.getValue() instanceof URI)
-				retVal= SDATATYPE.SURI;
-			else retVal= SDATATYPE.SOBJECT;
 		}//compute value type 	
 		return(retVal);
 	}
@@ -225,24 +234,10 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 			label.setQName(KW_SVAL_TYPE);
 			this.addLabel(label);
 		}
-		label.setValueString(newSValueType.toString());
+		if (newSValueType== null)
+		    label.setValueString(null);
+		else label.setValueString(newSValueType.toString());
 	}
-
-	//	/**
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 */
-//	private void setSValueType(SDATATYPE newSValueType) 
-//	{
-//		Label label= super.getLabel(KW_SVAL_TYPE);
-//		if (label== null)
-//		{	
-//			label= GraphFactory.eINSTANCE.createLabel();
-//			label.setQName(KW_SVAL_TYPE);
-//			this.addLabel(label);
-//		}
-//		label.setValueString(newSValueType.toString());
-//	}
 	
 	/**
 	 * {@link Inherited SAbstractAnnotation#getSValueSTEXT()}

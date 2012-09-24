@@ -28,8 +28,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.NodeImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
