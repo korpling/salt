@@ -326,13 +326,13 @@ public class LabelImpl extends LabelableElementImpl implements Label
 			retVal= null;
 		else if ((this.getNamespace()== null)  || (this.getNamespace().isEmpty()))
 			retVal.append(this.getName());
-		else if ((this.getName()== null) || (this.getName().isEmpty()))
-			retVal.append(this.getNamespace());
 		else
 		{	
 			retVal.append(this.getNamespace());
 			retVal.append(Label.NS_SEPERATOR);
-			retVal.append(this.getName());
+			if (	(this.getName()!= null)&&
+					(!this.getName().isEmpty()))
+				retVal.append(this.getName());
 		}
 		
 		if (retVal!= null)

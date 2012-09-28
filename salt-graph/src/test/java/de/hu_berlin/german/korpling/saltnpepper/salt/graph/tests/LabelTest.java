@@ -102,23 +102,14 @@ public class LabelTest extends LabelableElementTest {
 	 * <!-- end-user-doc -->
 	 * @see de.util.graph.Label#getQName()
 	 */
-	public void testGetQName() {
-	}
-
-	/**
-	 * Tests the '{@link de.util.graph.Label#getQName() <em>Full Name</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.util.graph.Label#getQName()
-	 */
-	public void testQNameHandling() 
+	public void testGetQName()
 	{
 		Label label= this.getFixture();
 		String qName= null; 
 		qName=label.getQName();
 		assertEquals(qName, label.getQName());
 		
-		//shouldn�t be ok
+		//shouldn't be ok
 		label= this.getFixture();
 		qName= null;
 		try {
@@ -127,7 +118,7 @@ public class LabelTest extends LabelableElementTest {
 		} catch (Exception e) 
 		{}
 		
-		//shouldn�t be ok
+		//shouldn't be ok
 		label= this.getFixture();
 		qName= "";
 		try {
@@ -137,7 +128,6 @@ public class LabelTest extends LabelableElementTest {
 		{}
 		
 		//should be ok
-//		label= this.getFixture();
 		label= GraphFactory.eINSTANCE.createLabel();
 		qName= "any name";
 		label.setQName(qName);
@@ -167,6 +157,31 @@ public class LabelTest extends LabelableElementTest {
 		qName= "ns::ns::name";
 		label.setQName(qName);
 		assertEquals(qName, label.getQName());
+	}
+	
+	/**
+	 * Checks if qname is returned correctly, if name or namespace is missing.
+	 * <ol>
+	 * 	<li>qName= name if namespace is missing</li>
+	 *  <li>qName= namespace + {@value Label#NS_SEPERATOR}, if name is missing</li>
+	 *  <li>qName= namespace + {@value Label#NS_SEPERATOR} + name, if both is given</li>
+	 * </ol>
+	 */
+	public void testGetQName2()
+	{
+		assertNull(this.getFixture().getQName());
+		String name= "name";
+		String namespace= "namespace";
+		
+		this.getFixture().setName(name);
+		assertEquals(name, this.getFixture().getQName());
+		
+		this.setFixture(GraphFactory.eINSTANCE.createLabel());
+		this.getFixture().setNamespace(namespace);
+		assertEquals(namespace+Label.NS_SEPERATOR, this.getFixture().getQName());
+		
+		this.getFixture().setName(name);
+		assertEquals(namespace+Label.NS_SEPERATOR+name, this.getFixture().getQName());
 	}
 	
 	/**
