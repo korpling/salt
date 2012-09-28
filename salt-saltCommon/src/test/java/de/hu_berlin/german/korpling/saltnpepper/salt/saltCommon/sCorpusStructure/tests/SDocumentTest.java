@@ -17,10 +17,17 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests;
 
+import java.io.File;
+
+import org.eclipse.emf.common.util.URI;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.tests.SampleGenerator;
 
 import junit.framework.TestCase;
 
@@ -34,6 +41,15 @@ import junit.textui.TestRunner;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#getSCorpusGraph() <em>SCorpus Graph</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#getSDocumentGraphLocation() <em>SDocument Graph Location</em>}</li>
+ * </ul>
+ * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#saveSDocumentGraph(org.eclipse.emf.common.util.URI) <em>Save SDocument Graph</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#loadSDocumentGraph() <em>Load SDocument Graph</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#loadSDocumentGraph(org.eclipse.emf.common.util.URI) <em>Load SDocument Graph</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -131,6 +147,71 @@ public class SDocumentTest extends TestCase {
 	public void testSetSCorpusGraph() 
 	{
 		this.testGetSCorpusGraph();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#getSDocumentGraphLocation() <em>SDocument Graph Location</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#getSDocumentGraphLocation()
+	 */
+	public void testGetSDocumentGraphLocation() 
+	{
+		assertNull(this.getFixture().getSDocumentGraphLocation());
+		File file= new File("/home/saltnpepper/bla.salt");
+		URI graphLocation= URI.createFileURI(file.getAbsolutePath());
+		this.getFixture().setSDocumentGraphLocation(graphLocation);
+		
+		assertEquals(graphLocation, this.getFixture().getSDocumentGraphLocation());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#setSDocumentGraphLocation(org.eclipse.emf.common.util.URI) <em>SDocument Graph Location</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#setSDocumentGraphLocation(org.eclipse.emf.common.util.URI)
+	 */
+	public void testSetSDocumentGraphLocation() {
+		this.testGetSDocumentGraphLocation();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#saveSDocumentGraph(org.eclipse.emf.common.util.URI) <em>Save SDocument Graph</em>}' operation.
+	 * Tests the persisting of a sample {@link SDocumentGraph} object created by {@link SampleGenerator#createSDocumentStructure(SDocument)} and checks correct
+	 * storing, by calling {@link SDocument#loadSDocumentGraph()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#saveSDocumentGraph(org.eclipse.emf.common.util.URI)
+	 */
+	public void testSaveSDocumentGraph__URI() 
+	{
+		SampleGenerator.createSDocumentStructure(this.getFixture());
+		File tmpFile = new File(System.getProperty("java.io.tmpdir")+"/testDoc."+ SaltFactory.FILE_ENDING_SALT);
+		
+		System.out.println(tmpFile);
+		URI tmpUri = URI.createFileURI(tmpFile.getAbsolutePath());
+		SDocumentGraph template= this.getFixture().getSDocumentGraph();
+		this.getFixture().saveSDocumentGraph(tmpUri);
+		
+		SDocument sDocument= SaltFactory.eINSTANCE.createSDocument();
+		sDocument.loadSDocumentGraph(tmpUri);
+		assertEquals("differences: "+template.differences(sDocument.getSDocumentGraph()), template, sDocument.getSDocumentGraph());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#loadSDocumentGraph() <em>Load SDocument Graph</em>}' operation.
+	 * Implementation at @see {@link #testSaveSDocumentGraph__URI()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#loadSDocumentGraph()
+	 */
+	public void testLoadSDocumentGraph() {
+		this.testSaveSDocumentGraph__URI();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#loadSDocumentGraph(org.eclipse.emf.common.util.URI) <em>Load SDocument Graph</em>}' operation.
+	 * Implementation at @see {@link #testSaveSDocumentGraph__URI()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#loadSDocumentGraph(org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoadSDocumentGraph__URI() {
+		this.testSaveSDocumentGraph__URI();
 	}
 
 } //SDocumentTest

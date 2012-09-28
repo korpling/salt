@@ -211,7 +211,6 @@ public class SFeaturableElementTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#createSFeature(java.lang.String, java.lang.String, java.lang.String)
-	 * @generated
 	 */
 	public void testCreateSFeature__String_String_String() {
 		this.testCreateSFeature__String_String_Object_SDATATYPE();

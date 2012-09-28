@@ -17,22 +17,32 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests;
 
+import java.io.File;
+
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.tests.SampleGenerator;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.tests.SaltFactoryImplTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,10 +68,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSRootCorpus() <em>Get SRoot Corpus</em>}</li>
  * </ul>
  * </p>
- * @generated
+ * 
  */
-public class SCorpusGraphTest extends TestCase {
+public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 
+	public static final String FILE_RESOURCE_DIR= SaltFactoryImplTest.FILE_RESOURCE_DIR_GENERAL+"SCorpusGraphTest/";
+	public static final String FILE_TMP_DIR= "./_TMP/";
+	
 	/**
 	 * The fixture for this SCorpus Graph test case.
 	 * <!-- begin-user-doc -->
@@ -69,6 +82,7 @@ public class SCorpusGraphTest extends TestCase {
 	 * @generated
 	 */
 	protected SCorpusGraph fixture = null;
+	private EList<SNode> traversedNodes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -334,7 +348,6 @@ public class SCorpusGraphTest extends TestCase {
 	 */
 	public void testEquals_Identtical_Empty()
 	{
-		System.out.println(this.getFixture().differences(getFixture()));
 		assertTrue(this.getFixture().equals(this.getFixture()));
 		assertTrue(this.getFixture().equals(SaltFactory.eINSTANCE.createSCorpusGraph()));
 	}
@@ -447,6 +460,28 @@ public class SCorpusGraphTest extends TestCase {
 		assertEquals(1, this.getFixture().getSRootCorpus().size());
 	}
 
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#load(org.eclipse.emf.common.util.URI) <em>Load</em>}' operation.
+	 * Tests the loading of a {@link SCorpusGraph} object contained in a {@link SaltProject} object persist in a
+	 * SaltXML file. The used corpus structure is created via {@link SampleGenerator#createCorpusStructure()}
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#load(org.eclipse.emf.common.util.URI)
+	 */
+	public void testLoad__URI() 
+	{
+		SCorpusGraph template = SampleGenerator.createCorpusStructure();
+		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
+		saltProject.getSCorpusGraphs().add(template);
+		String tmpDir = System.getProperty("java.io.tmpdir")+"/"+ this.getClass().getName();
+		File tmpFile= new File(tmpDir);
+		URI tmpUri= URI.createFileURI(tmpFile.getAbsolutePath());
+		saltProject.saveSaltProject(tmpUri);
+		assertTrue("Cannot run test, because file does not exists: "+ tmpFile.getAbsolutePath(), tmpFile.exists());
+		
+		this.getFixture().load(tmpUri);
+		assertNotNull(this.getFixture());
+		assertEquals("differences: "+ template.differences(this.getFixture()), template, this.getFixture());
+	}
+
 	public void testCheckElementId()
 	{
 		SCorpus sCorpus = SaltCommonFactory.eINSTANCE.createSCorpus();
@@ -458,5 +493,96 @@ public class SCorpusGraphTest extends TestCase {
 		assertEquals("salt:/doc1", sDocument.getSId());
 		
 		//TODO check, for corpora and documents with relations salt:/corp1/corp2 ...
+	}
+	
+	
+	public void testGraphTraversion()
+	{
+		this.traversedNodes = new BasicEList<SNode>();
+		SDocument sDocument = this.createCorpusStructure(this.getFixture());
+		this.getFixture()
+			.traverse(this.getFixture().getSRootCorpus(),	
+					GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "",this);
+		
+		assertTrue("GraphTraversionTest: First traversed object is not null, but "+this.traversedNodes.get(0)+"!", this.traversedNodes.get(0) == null); 
+		assertTrue("GraphTraversionTest: Second traversed object is not the corpus, but "+this.traversedNodes.get(1)+"!",this.traversedNodes.get(1) instanceof SCorpus);
+		assertTrue("GraphTraversionTest: Third traversed object is not the corpus, but "+this.traversedNodes.get(2)+"!",this.traversedNodes.get(2) instanceof SCorpus );
+		assertTrue("GraphTraversionTest: Fourth traversed object is not the document, but "+this.traversedNodes.get(3)+"!",this.traversedNodes.get(3) instanceof SDocument);
+	
+	}
+	
+	/**
+	 * Creates a corpus structure with one corpus and one document. It returns the created document.
+	 * 		corp1
+	 *		|
+	 *		doc1
+	 * @param corpGraph 
+	 * @return
+	 */
+	private SDocument createCorpusStructure(SCorpusGraph corpGraph)
+	{
+		{//creating corpus structure
+			//corpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
+			//this.getFixture().getSaltProject().getSCorpusGraphs().add(corpGraph);
+			//		corp1
+			//		|
+			//		doc1
+			
+			//corp1
+			SElementId sElementId= SaltFactory.eINSTANCE.createSElementId();
+			sElementId.setSId("corp1");
+			SCorpus corp1= SaltFactory.eINSTANCE.createSCorpus();
+			corp1.setSName("corp1");
+			corp1.setId("corp1");
+			corp1.setSElementId(sElementId);
+			corpGraph.addSNode(corp1);
+			
+			
+			//doc1
+			SDocument doc1= SaltFactory.eINSTANCE.createSDocument();
+			sElementId= SaltFactory.eINSTANCE.createSElementId();
+			sElementId.setSId("corp1/doc1");
+			doc1.setSElementId(sElementId);
+			doc1.setSName("doc1");
+			corpGraph.addSNode(doc1);
+			doc1.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
+			//CorpDocRel
+			SCorpusDocumentRelation corpDocRel1= SaltFactory.eINSTANCE.createSCorpusDocumentRelation();
+			sElementId= SaltFactory.eINSTANCE.createSElementId();
+			sElementId.setSId("rel1");
+			corpDocRel1.setSElementId(sElementId);
+			corpDocRel1.setSName("rel1");
+			corpDocRel1.setSCorpus(corp1);
+			corpDocRel1.setSDocument(doc1);
+			corpGraph.addSRelation(corpDocRel1);
+			return(doc1);
+		}
+	}
+
+	
+
+	@Override
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
+			String traversalId, SNode currNode, SRelation edge, SNode fromNode,
+			long order) {
+		
+		this.traversedNodes.add(fromNode);
+		this.traversedNodes.add(currNode);
+		
+
+	}
+
+	@Override
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
+			SNode currNode, SRelation edge, SNode fromNode, long order) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
+			String traversalId, SRelation edge, SNode currNode, long order) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 } //SCorpusGraphTest

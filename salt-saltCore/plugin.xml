@@ -8,7 +8,7 @@
  $Id$
 -->
 
-<plugin>
+<plugin id="de.hu_berlin.german.korpling.saltnpepper.salt.salt-saltCore" name="salt-saltCore" version="1.1.3">
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package

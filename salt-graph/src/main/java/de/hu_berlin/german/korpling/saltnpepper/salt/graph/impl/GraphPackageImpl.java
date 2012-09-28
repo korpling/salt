@@ -21,6 +21,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
@@ -32,6 +33,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexPacka
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -100,6 +103,20 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * @generated
 	 */
 	private EClass layerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum grapH_TRAVERSE_TYPEEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType graphTraverseHandlerEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -505,6 +522,24 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getGRAPH_TRAVERSE_TYPE() {
+		return grapH_TRAVERSE_TYPEEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getGraphTraverseHandler() {
+		return graphTraverseHandlerEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GraphFactory getGraphFactory() {
 		return (GraphFactory)getEFactoryInstance();
 	}
@@ -572,6 +607,12 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		createEReference(layerEClass, LAYER__EDGES);
 		createEReference(layerEClass, LAYER__SUPER_LAYER);
 		createEReference(layerEClass, LAYER__SUB_LAYERS);
+
+		// Create enums
+		grapH_TRAVERSE_TYPEEEnum = createEEnum(GRAPH_TRAVERSE_TYPE);
+
+		// Create data types
+		graphTraverseHandlerEDataType = createEDataType(GRAPH_TRAVERSE_HANDLER);
 	}
 
 	/**
@@ -670,9 +711,9 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		initEAttribute(getLabel_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabel_QName(), ecorePackage.getEString(), "qName", null, 0, 1, Label.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLabel_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Label.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabel_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLabel_LabelableElement(), this.getLabelableElement(), this.getLabelableElement_Labels(), "labelableElement", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLabel_ValueString(), ecorePackage.getEString(), "valueString", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabel_ValueString(), ecorePackage.getEString(), "valueString", null, 0, 1, Label.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(labelEClass, ecorePackage.getEString(), "getNSSeperator", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -747,6 +788,23 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		op = addEOperation(graphEClass, this.getLayer(), "getLayer", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "layerId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(graphEClass, this.getNode(), "getRoots", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(graphEClass, this.getNode(), "getLeafs", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(graphEClass, null, "traverse", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNode(), "startNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getGRAPH_TRAVERSE_TYPE(), "traverseType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "traverseId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getGraphTraverseHandler(), "traverseHandler", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(graphEClass, null, "traverse", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getNode(), "startNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getGRAPH_TRAVERSE_TYPE(), "traverseType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "traverseId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getGraphTraverseHandler(), "traverseHandler", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEBoolean(), "isCycleSafe", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(identifierEClass, Identifier.class, "Identifier", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIdentifier_IdentifiableElement(), this.getIdentifiableElement(), this.getIdentifiableElement_Identifier(), "identifiableElement", null, 0, 1, Identifier.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIdentifier_Id(), ecorePackage.getEString(), "id", null, 0, 1, Identifier.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -763,6 +821,16 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		addEOperation(layerEClass, this.getNode(), "getAllIncludedNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(layerEClass, this.getEdge(), "getAllIncludedEdges", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(grapH_TRAVERSE_TYPEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE.class, "GRAPH_TRAVERSE_TYPE");
+		addEEnumLiteral(grapH_TRAVERSE_TYPEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST);
+		addEEnumLiteral(grapH_TRAVERSE_TYPEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST);
+		addEEnumLiteral(grapH_TRAVERSE_TYPEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST);
+		addEEnumLiteral(grapH_TRAVERSE_TYPEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST);
+
+		// Initialize data types
+		initEDataType(graphTraverseHandlerEDataType, GraphTraverseHandler.class, "GraphTraverseHandler", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -18,7 +18,9 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
 import junit.framework.TestCase;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SSequentialDSImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,6 +73,25 @@ public class SSequentialDSTest extends TestCase {
 		return fixture;
 	}
 
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see junit.framework.TestCase#setUp()
+	 */
+	@Override
+	protected void setUp() throws Exception {
+		setFixture(new SSequentialDSInstance());
+	}
+	/**
+	 * A Dummy class just for testing some methods of the fixture.
+	 * @author Florian Zipser
+	 *
+	 */
+	class SSequentialDSInstance extends SSequentialDSImpl{
+		
+	}
+	
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSData() <em>SData</em>}' feature getter.
 	 * <!-- begin-user-doc -->
@@ -102,8 +123,33 @@ public class SSequentialDSTest extends TestCase {
 		this.testGetSData();
 	}
 
-	public void testNothingToTest()
-	{
-		
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSStart() <em>SStart</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSStart()
+	 */
+	public void testGetSStart() {
+		try
+		{
+			this.getFixture().getSStart();
+			fail("Calling this method shall invoke an unsupported operation exception");
+		}catch (UnsupportedOperationException e) {
+		}
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSEnd() <em>SEnd</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS#getSEnd()
+	 */
+	public void testGetSEnd() {
+		try
+		{
+			this.getFixture().getSEnd();
+			fail("Calling this method shall invoke an unsupported operation exception");
+		}catch (UnsupportedOperationException e) {
+		}
 	}
 } //SSequentialDSTest

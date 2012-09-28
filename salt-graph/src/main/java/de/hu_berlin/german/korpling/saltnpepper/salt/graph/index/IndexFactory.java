@@ -19,6 +19,9 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index;
 
 import org.eclipse.emf.ecore.EFactory;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IdentifiableElementIndex;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
@@ -43,7 +46,15 @@ public interface IndexFactory extends EFactory {
 	 * @return a new object of class '<em>Simple Index</em>'.
 	 * @generated
 	 */
-	SimpleIndex createSimpleIndex();
+	<K, V> SimpleIndex<K, V> createSimpleIndex();
+	
+	/**
+	 * Returns a new object of class '<em>Simple Index</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Index</em>'.
+	 */
+	<V extends IdentifiableElement> IdentifiableElementIndex<V> createIdentifiableElementIndex();
 
 	/**
 	 * Returns a new object of class '<em>Mgr</em>'.
@@ -61,7 +72,7 @@ public interface IndexFactory extends EFactory {
 	 * @return a new object of class '<em>Complex Index</em>'.
 	 * @generated
 	 */
-	ComplexIndex createComplexIndex();
+	<K, V> ComplexIndex<K, V> createComplexIndex();
 
 	/**
 	 * Returns the package supported by this factory.

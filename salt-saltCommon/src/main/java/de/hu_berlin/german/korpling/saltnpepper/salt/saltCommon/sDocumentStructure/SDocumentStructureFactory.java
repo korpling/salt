@@ -136,6 +136,42 @@ public interface SDocumentStructureFactory extends EFactory {
 	SDominanceRelation createSDominanceRelation();
 
 	/**
+	 * Returns a new object of class '<em>SData Source Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SData Source Sequence</em>'.
+	 * @generated
+	 */
+	SDataSourceSequence createSDataSourceSequence();
+
+	/**
+	 * Returns a new object of class '<em>SAudio Data Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SAudio Data Source</em>'.
+	 * @generated
+	 */
+	SAudioDataSource createSAudioDataSource();
+
+	/**
+	 * Returns a new object of class '<em>SAudio DS Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SAudio DS Relation</em>'.
+	 * @generated
+	 */
+	SAudioDSRelation createSAudioDSRelation();
+
+	/**
+	 * Returns a new object of class '<em>SOrder Relation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>SOrder Relation</em>'.
+	 * @generated
+	 */
+	SOrderRelation createSOrderRelation();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

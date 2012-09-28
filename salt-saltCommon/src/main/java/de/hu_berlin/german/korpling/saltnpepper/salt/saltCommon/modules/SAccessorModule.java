@@ -18,12 +18,21 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDataSourceAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 
+/**
+ * 
+ * @author Florian Zipser
+ * @deprecated since Salt 1.1.3
+ * 
+ */
+@Deprecated
 public class SAccessorModule 
 {
 //TODO check if the following is used anywhere, because it is not the correct position for this, it has to be put in SDocumentStructureAccessor in de.hub.corpling.salt.SaltCommonModules
@@ -38,14 +47,24 @@ public class SAccessorModule
 		return sDocument;
 	}
 // === fixing a document to work with
-	
+	/**
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#getOverlappedDSSequences(SNode, org.eclipse.emf.common.util.EList)} instead
+	 */
+	@Deprecated
 	public String getOverlappedText(SElementId sElementId)
 	{
 		if (this.sDocument == null)
 			throw new SaltModuleException("Cannot return overlapped text, because no SDocument-object is settet. Please set SDocument-object first or call 'getOverlappedText(SDocument, SElementId)'.");
 		return(this.getOverlappedText(this.getSDocument(), sElementId));
 	}
-	
+	/**
+	 * 
+	 * @param sDocument
+	 * @param sNode
+	 * @return
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#getOverlappedDSSequences(SNode, org.eclipse.emf.common.util.EList)} instead
+	 */
+	@Deprecated
 	public String getOverlappedText(SDocument sDocument, SNode sNode)
 	{
 		String overlappedText= null;
@@ -73,6 +92,14 @@ public class SAccessorModule
 		return(overlappedText);
 	}
 	
+	/**
+	 * 
+	 * @param sDocument
+	 * @param sElementId
+	 * @return
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#getOverlappedDSSequences(SNode, org.eclipse.emf.common.util.EList)} instead
+	 */
+	@Deprecated
 	public String getOverlappedText(SDocument sDocument, SElementId sElementId)
 	{
 		if (sElementId == null)

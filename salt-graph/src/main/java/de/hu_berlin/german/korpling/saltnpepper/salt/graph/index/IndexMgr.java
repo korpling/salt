@@ -28,6 +28,10 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Mgr</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This class manages a set of Index objects, for faster access on {@link Graph} members. Such an {@link Index} object indexes a single object (so called value) or a set of objects (so called values) by using a unique key for indexing them. In case of the {@link Index} object is of type  {@link SimpleIndex}, each key has exactly one value in case of the {@link Index} object is of type {@link ComplexIndex}, each key has a list of values.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

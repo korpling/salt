@@ -35,6 +35,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObje
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentStructureModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.STokenSStartComparator;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
@@ -47,6 +48,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 
+/**
+ * 
+ * @author Florian Zipser
+ * @deprecated since Salt 1.1.3
+ */
+@Deprecated
 public class SDocumentStructureAccessor extends SDocumentStructureModule implements TraversalObject
 {
 	private enum TRAVERSAL_TYPE {OVERLAPPED_TEXT, OVERLAPPED_TIME, OVERLAPPED_TOKENS_BY_TEXTUALRELATION, ROOTS_BY_RELATION_STYPE};
@@ -87,6 +94,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 * @param sStart
 	 * @param sEnd
 	 * @return
+	 * @deprecated since Salt 1.1.3, use {@link SDocumentGraph#getSTokensBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence)} instead
 	 */
 	@SuppressWarnings("unchecked")
 	public EList<SToken> getSTokensByTimeInterval(Integer sStart, Integer sEnd)
@@ -103,6 +111,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 * @param sStart
 	 * @param sEnd
 	 * @return
+	 * @deprecated since Salt 1.1.3, use {@link SDocumentGraph#getSSpanBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence)} instead
 	 */
 	@SuppressWarnings("unchecked")
 	public EList<SSpan> getSSpanByTimeInterval(Integer sStart, Integer sEnd)
@@ -119,6 +128,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 * @param sStart
 	 * @param sEnd
 	 * @return
+	 * @deprecated since Salt 1.1.3, use {@link SDocumentGraph#getSNodeBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence)} instead
 	 */
 	@SuppressWarnings("unchecked")
 	public EList<SNode> getSNodeByTimeInterval(Integer sStart, Integer sEnd)
@@ -130,6 +140,14 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		return(sNodes);
 	}
 	
+	/**
+	 * 
+	 * @param sStart
+	 * @param sEnd
+	 * @param nodeClasses
+	 * @return
+	 * @deprecated since Salt 1.1.3
+	 */
 	//TODO this method has to traverse graph
 	private EList<SNode> getSNodesByTimeInterval(Integer sStart, Integer sEnd, EList<Class<? extends SNode>> nodeClasses)
 	{
@@ -198,6 +216,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 * to the given STextualDS-object.
 	 * @param sTextualDS - text to which returned tokens shall belong
 	 * @return tokens which refer to given text-object
+	 * @deprecated since Salt 1.1.3, use {@link SDocumentGraph#getSTokensBySequence(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence)} with sequence borders 0 and length of data source
 	 */
 	public EList<SToken> getSTokens(STextualDS sTextualDS)
 	{
@@ -247,7 +266,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		travObj.waitUntilFinished();
 		if (	(this.sTextDS!= null) &&
 				(this.sTextDS.getSText()!= null) &&
-				(!this.sTextDS.getSText().equals("")))
+				(!this.sTextDS.getSText().isEmpty()))
 		{
 			this.currPOTPair.startPOT= this.startTextPos;
 			this.currPOTPair.endPOT= this.endTextPos;
@@ -328,7 +347,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 		travObj.waitUntilFinished();
 		if (	(this.sTextDS!= null) &&
 				(this.sTextDS.getSText()!= null) &&
-				(!this.sTextDS.getSText().equals("")))
+				(!this.sTextDS.getSText().isEmpty()))
 			retString= this.sTextDS.getSText().substring(this.startTextPos, this.endTextPos);
 		return(retString);
 	}
@@ -339,6 +358,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 * @param subSTokenList list to check against fullSTokenList
 	 * @param fullSTokenList list which contains all token in correct order
 	 * @return true, if list is continuous
+	 * @deprecated since Salt 1.1.3, use {@link SDocumentGraph#isContinuousByText(EList, EList)}
 	 */
 	public Boolean getContinuously(EList<SToken> subSTokenList, EList<SToken> fullSTokenList)
 	{
@@ -391,6 +411,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 * related to textual resource.
 	 * @param sTokenList list to check against sTokens of sDocumentGraph
 	 * @return true, if list is continuous
+	 * @deprecated since Salt 1.1.3, use {@link SDocumentGraph#isContinuousByText(SNode)}
 	 */
 	public Boolean getContinuously(EList<SToken> sTokenList)
 	{
@@ -402,6 +423,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 * Returns all SToken-objects contained in given list in order  
 	 * of start-position of text. This method will sort the list of tokens by bubble sort.
 	 * @return list of tokens in order of left text position
+	 * @deprecated since Salt 1.1.3, use {@link SDocumentGraph#sortSTokenByText(EList)}
 	 */
 	public EList<SToken> getSTokensSortedByText(EList<SToken> sTokens2sort)
 	{
@@ -427,6 +449,7 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	 * list.  
 	 * This method will sort the list of tokens by bubble sort.
 	 * @return list of tokens in order of left text position
+	 * @deprecated since Salt 1.1.3, use {@link SDocumentGraph#sortSTokenByText()}
 	 */
 	public EList<SToken> getSTokensSortedByText()
 	{

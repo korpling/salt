@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
 /**
@@ -37,6 +38,14 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  * @generated
  */
 public interface SSequentialRelation extends SRelation {
+	/**
+	 * The name of the {@link SFeature} for the start value.
+	 */
+	public static final String FEAT_SSTART= "SSTART";
+	/**
+	 * The name of the {@link SFeature} for the end value.
+	 */
+	public static final String FEAT_SEND= "SEND";
 	/**
 	 * Returns the value of the '<em><b>SStart</b></em>' attribute.
 	 * <!-- begin-user-doc -->

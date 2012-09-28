@@ -26,10 +26,14 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
@@ -136,6 +140,8 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case SaltCommonPackage.SFEATURE_NAME:
+				return createSFEATURE_NAMEFromString(eDataType, initialValue);
 			case SaltCommonPackage.PROPERTIES:
 				return createPropertiesFromString(eDataType, initialValue);
 			default:
@@ -151,6 +157,8 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case SaltCommonPackage.SFEATURE_NAME:
+				return convertSFEATURE_NAMEToString(eDataType, instanceValue);
 			case SaltCommonPackage.PROPERTIES:
 				return convertPropertiesToString(eDataType, instanceValue);
 			default:
@@ -166,6 +174,26 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	public SaltProject createSaltProject() {
 		SaltProjectImpl saltProject = new SaltProjectImpl();
 		return saltProject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SFEATURE_NAME createSFEATURE_NAMEFromString(EDataType eDataType, String initialValue) {
+		SFEATURE_NAME result = SFEATURE_NAME.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSFEATURE_NAMEToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
@@ -405,17 +433,6 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	{
 		return(this.sDocumentStructureFactory.createSSpanningRelation());
 	}
-
-//	@Override
-//	public STextOverlappingRelation createSTextOverlappingRelation() 
-//	{
-//		return(this.sDocumentStructureFactory.createSTextOverlappingRelation());
-//	}
-//	
-//	@Override
-//	public STimeOverlappingRelation createSTimeOverlappingRelation() {
-//		return(this.sDocumentStructureFactory.createSTimeOverlappingRelation());
-//	}
 	
 	@Override
 	public SDominanceRelation createSDominanceRelation() 
@@ -435,15 +452,31 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 		return(this.sDocumentStructureFactory.createSStructure());
 	}
 
-//	@Override
-//	public SStructuredNode createSStructuredNode() 
-//	{
-//		return(this.sDocumentStructureFactory.createSStructuredNode());
-//	}
+	@Override
+	public SDataSourceSequence createSDataSourceSequence() {
+		return(this.sDocumentStructureFactory.createSDataSourceSequence());
+	}
+	
+	@Override
+	public SAudioDataSource createSAudioDataSource() {
+		return(this.sDocumentStructureFactory.createSAudioDataSource());
+	}
+
+	@Override
+	public SAudioDSRelation createSAudioDSRelation() {
+		return(this.sDocumentStructureFactory.createSAudioDSRelation());
+	}
+	
+	@Override
+	public SOrderRelation createSOrderRelation() {
+		return(this.sDocumentStructureFactory.createSOrderRelation());
+	}
+
 	
 	@Override
 	public SDocumentStructurePackage getSDocumentStructurePackage() {
 		return(this.sDocumentStructureFactory.getSDocumentStructurePackage());
 	}
 // ===================================== end: SDocumentStructureFactory
+	
 } //SaltCommonFactoryImpl

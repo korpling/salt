@@ -33,6 +33,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 
+@Deprecated
 public class GraphTraverserTest extends GraphModuleTest implements TraversalObject 
 {
 	public GraphTraverser getFixture() {

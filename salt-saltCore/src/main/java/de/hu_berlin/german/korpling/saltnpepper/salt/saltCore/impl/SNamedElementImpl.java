@@ -17,7 +17,11 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -40,7 +44,91 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *
  * @generated
  */
-public class SNamedElementImpl extends EObjectImpl implements SNamedElement {
+public class SNamedElementImpl extends SFeaturableElementImpl implements SNamedElement 
+{
+	
+	/**
+	 * This is a static version of the method:
+	 * {@inheritDoc SNamedElement#getSName()}
+	 * 
+	 * This static method is necessary for multiple inheritance, to not rewrite the code in each class 
+	 * extending this class.
+	 */
+	public static String getSName(SNamedElement sNamedElement) {
+		SFeature sNameFeature= sNamedElement.getSFeature(SaltCoreFactory.SALT_CORE_NAMESPACE, SaltCoreFactory.SALT_CORE_SFEATURES.SNAME.toString());
+		if (sNameFeature!= null)
+		{
+			return(sNameFeature.getSValueSTEXT());
+		}
+		else return(null);
+	}
+
+	/**
+	 * This is a static version of the method:
+	 * {@inheritDoc SNamedElement#setSName(String)}
+	 * 
+	 * This static method is necessary for multiple inheritance, to not rewrite the code in each class 
+	 * extending this class. 
+	 */
+	public static void setSName(SNamedElement sNamedElement, String newSName) 
+	{
+		SFeature sNameFeature= sNamedElement.getSFeature(SaltCoreFactory.SALT_CORE_NAMESPACE, SaltCoreFactory.SALT_CORE_SFEATURES.SNAME.toString());
+		if (sNameFeature== null)
+			sNameFeature= sNamedElement.createSFeature(SaltCoreFactory.SALT_CORE_NAMESPACE, SaltCoreFactory.SALT_CORE_SFEATURES.SNAME.toString(), newSName);
+		else
+			sNameFeature.setSValue(newSName);
+	}
+	
+	/**
+	 * Takes notifications important concerning the SName handling.
+	 * Checks if a label equal to sName is contained twice in the list of labels (this occurs, when the model is loaded from XML file), 
+	 * in such a case, the first found label having the namespace salt and the name SNAME is the real one. In such a case copy the value of the
+	 * new given feature to the already existing label and remove the new given feature
+	 * 
+	 * @param notifiedElement the {@link SNamedElement} object delegating the method
+	 * @param notification the notification to be handled
+	 */
+	public static void eNotify(SNamedElement notifiedElement, Notification notification)
+	{
+		if(GraphPackage.Literals.LABELABLE_ELEMENT__LABELS.equals(notification.getFeature())) 
+		{//if change happens in LabelableElement.getLabels()
+			switch (notification.getEventType()) 
+			{
+				case Notification.ADD:
+				{//if Label is added
+					if (notification.getNewValue() instanceof SFeature)
+					{//if added Label is Identifier
+						SFeature sFeature= (SFeature) notification.getNewValue();
+						if (	(SaltCoreFactory.SALT_CORE_SFEATURES.SNAME.toString().equals(sFeature.getSName()))&&
+								(SaltCoreFactory.SALT_CORE_NAMESPACE.equals(sFeature.getSNS())))
+						{
+							//start: check if sName is contained twice
+								//check if a label equal to sName is contained twice in list, in such a case, the first found label
+								//having the namespace salt and the name SNAME is the real one. In such a case copy the value of the
+								//new given feature to the already existing label and remove the new given feature
+								boolean toRemove=false;
+								for (Label label: notifiedElement.getLabels())
+								{
+									if (	(SaltCoreFactory.SALT_CORE_SFEATURES.SNAME.toString().equals(label.getName()))&&
+											(SaltCoreFactory.SALT_CORE_NAMESPACE.equals(label.getNamespace())))
+									{
+										if (label!= sFeature)
+										{
+											label.setValue(sFeature.getSValue());
+											toRemove= true;
+										}
+									}
+								}
+								if (toRemove)
+									notifiedElement.getLabels().remove(sFeature);
+							//end: check if sName is contained twice
+						}
+					}//if added Label is Identifier
+				}//if Label is added
+			}
+		}//if change happens in LabelableElement.getLabels()
+	}
+	
 	/**
 	 * The default value of the '{@link #getSName() <em>SName</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -50,16 +138,6 @@ public class SNamedElementImpl extends EObjectImpl implements SNamedElement {
 	 * @ordered
 	 */
 	protected static final String SNAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSName() <em>SName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String sName = SNAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,24 +159,18 @@ public class SNamedElementImpl extends EObjectImpl implements SNamedElement {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#getSName()}
 	 */
 	public String getSName() {
-		return sName;
+		return(SNamedElementImpl.getSName(this));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#setSName(String)}
 	 */
-	public void setSName(String newSName) {
-		String oldSName = sName;
-		sName = newSName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SNAMED_ELEMENT__SNAME, oldSName, sName));
+	public void setSName(String newSName) 
+	{
+		SNamedElementImpl.setSName(this, newSName);
 	}
 
 	/**
@@ -154,25 +226,9 @@ public class SNamedElementImpl extends EObjectImpl implements SNamedElement {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SaltCorePackage.SNAMED_ELEMENT__SNAME:
-				return SNAME_EDEFAULT == null ? sName != null : !SNAME_EDEFAULT.equals(sName);
+				return SNAME_EDEFAULT == null ? getSName() != null : !SNAME_EDEFAULT.equals(getSName());
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sName: ");
-		result.append(sName);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SNamedElementImpl

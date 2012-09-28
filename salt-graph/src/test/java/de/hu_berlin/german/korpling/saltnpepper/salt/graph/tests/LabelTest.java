@@ -29,13 +29,14 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getQName() <em>QName</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValue() <em>Value</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString() <em>Value String</em>}</li>
  * </ul>
  * </p>
  * <p>
  * The following operations are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getNSSeperator() <em>Get NS Seperator</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone() <em>Clone</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -101,23 +102,14 @@ public class LabelTest extends LabelableElementTest {
 	 * <!-- end-user-doc -->
 	 * @see de.util.graph.Label#getQName()
 	 */
-	public void testGetQName() {
-	}
-
-	/**
-	 * Tests the '{@link de.util.graph.Label#getQName() <em>Full Name</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.util.graph.Label#getQName()
-	 */
-	public void testQNameHandling() 
+	public void testGetQName()
 	{
 		Label label= this.getFixture();
 		String qName= null; 
 		qName=label.getQName();
 		assertEquals(qName, label.getQName());
 		
-		//shouldn�t be ok
+		//shouldn't be ok
 		label= this.getFixture();
 		qName= null;
 		try {
@@ -126,7 +118,7 @@ public class LabelTest extends LabelableElementTest {
 		} catch (Exception e) 
 		{}
 		
-		//shouldn�t be ok
+		//shouldn't be ok
 		label= this.getFixture();
 		qName= "";
 		try {
@@ -136,7 +128,6 @@ public class LabelTest extends LabelableElementTest {
 		{}
 		
 		//should be ok
-//		label= this.getFixture();
 		label= GraphFactory.eINSTANCE.createLabel();
 		qName= "any name";
 		label.setQName(qName);
@@ -166,6 +157,31 @@ public class LabelTest extends LabelableElementTest {
 		qName= "ns::ns::name";
 		label.setQName(qName);
 		assertEquals(qName, label.getQName());
+	}
+	
+	/**
+	 * Checks if qname is returned correctly, if name or namespace is missing.
+	 * <ol>
+	 * 	<li>qName= name if namespace is missing</li>
+	 *  <li>qName= namespace + {@value Label#NS_SEPERATOR}, if name is missing</li>
+	 *  <li>qName= namespace + {@value Label#NS_SEPERATOR} + name, if both is given</li>
+	 * </ol>
+	 */
+	public void testGetQName2()
+	{
+		assertNull(this.getFixture().getQName());
+		String name= "name";
+		String namespace= "namespace";
+		
+		this.getFixture().setName(name);
+		assertEquals(name, this.getFixture().getQName());
+		
+		this.setFixture(GraphFactory.eINSTANCE.createLabel());
+		this.getFixture().setNamespace(namespace);
+		assertEquals(namespace+Label.NS_SEPERATOR, this.getFixture().getQName());
+		
+		this.getFixture().setName(name);
+		assertEquals(namespace+Label.NS_SEPERATOR+name, this.getFixture().getQName());
 	}
 	
 	/**
@@ -320,6 +336,16 @@ public class LabelTest extends LabelableElementTest {
 	}
 
 	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#setValueString(java.lang.String) <em>Value String</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#setValueString(java.lang.String)
+	 */
+	public void testSetValueString() {
+		//nothing to test, because method does nothing
+	}
+
+	/**
 	 * Tests the '{@link de.util.graph.Label#getNSSeperator() <em>Get NS Seperator</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -328,6 +354,17 @@ public class LabelTest extends LabelableElementTest {
 	public void testGetNSSeperator() 
 	{
 		assertEquals(this.getFixture().getNSSeperator(),Label.NS_SEPERATOR);
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone() <em>Clone</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#clone()
+	 */
+	public void testClone() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
 	}
 
 	/**
@@ -400,7 +437,6 @@ public class LabelTest extends LabelableElementTest {
 			assertNull(this.getFixture().differences(this.getFixture()));
 			assertNotNull(this.getFixture().differences(label));
 			label.setNamespace(ns);
-			System.out.println("------------>"+ this.getFixture().differences(label));
 			assertNull(this.getFixture().differences(label));
 		}//namespace
 		

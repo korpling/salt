@@ -78,6 +78,9 @@ public class NodeImpl extends IdentifiableElementImpl implements Node
 	}
 	
 
+	/**
+	 * Initializes objects of this class. 
+	 */
 	private void init()
 	{
 	}
@@ -147,7 +150,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node
 
 	/**
 	 * {@inheritDoc}
-	 * @generated
 	 */
 	public Object clone() 
 	{
@@ -171,71 +173,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node
 		}
 		return(clone);
 	}
-
-	//	/**
-//	 * Checks if a given SNode has the same entries as this SNode-object. 
-//	 * @return if all values are equals.
-//	 */
-//	@Override
-//	public boolean equals(Object obj)
-//	{
-//		//TODO to remove
-//		Long eTime= System.nanoTime();
-//		
-//		boolean retVal= true;
-//		
-//		if (obj== null)
-//			retVal= false;
-//		if 	(	(retVal) &&
-//				(this==obj))
-//			retVal= true;
-//		else
-//		{//objects are not exactly the same	
-//			if 	(	(retVal) &&
-//					(!(obj instanceof Node)))
-//				retVal= false;
-//			
-//			Node node2= null;
-//			if (retVal)
-//				node2= (Node) obj;
-//			if (retVal)
-//			{//check ids
-//				if (this.getId()!= null)
-//				{	
-//					if (!this.getIdentifier().equals(node2.getIdentifier()))
-//						retVal= false;
-//				}
-//			}//check ids
-//			if (retVal)
-//			{//check Labels
-//				if (this.getLabels().size()!= node2.getLabels().size())
-//					retVal= false;
-//				else
-//				{	
-//					for(Label label1: this.getLabels())
-//					{
-//						boolean hasOpponend= false;
-//						for(Label label2: node2.getLabels())
-//						{
-//							if (label1. equals(label2))
-//								hasOpponend= true;
-//						}
-//						if (!hasOpponend)
-//						{	
-//							retVal= false;
-//							break;
-//						}
-//					}
-//				}
-//			}//check Labels
-//		}//objects are not exactly the same
-//		//TODO to remove
-//		equalTime= equalTime + (System.nanoTime() -eTime);
-//		if (retVal) eTrues++;
-//		else eFalses++;
-//		
-//		return(retVal);
-//	}
 
 
 	/**

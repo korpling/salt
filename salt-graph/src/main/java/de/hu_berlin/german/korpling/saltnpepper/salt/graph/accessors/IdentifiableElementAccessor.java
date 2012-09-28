@@ -42,9 +42,6 @@ public class IdentifiableElementAccessor
 	 */
 	public void setId(IdentifiableElement identElem, String newId) 
 	{
-//		if (	(newId== null)||
-//				(newId.equals("")))
-//			throw new GraphException("Cannot not add an empty id to an element of type '"+identElem.getClass()+"'.");
 		if (identElem.getIdentifier()== null)
 		{
 			Identifier identifier= GraphFactory.eINSTANCE.createIdentifier();

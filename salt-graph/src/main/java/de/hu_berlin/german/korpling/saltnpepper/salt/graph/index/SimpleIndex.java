@@ -17,48 +17,25 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index;
 
-import java.util.Map;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Simple Index</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * <ul>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#getIdxTable <em>Idx Table</em>}</li>
- * </ul>
- * </p>
  *
  * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getSimpleIndex()
  * @model
  * @generated
  */
-public interface SimpleIndex extends Index {
+public interface SimpleIndex<K, V> extends Index<K, V> {
 	/**
-	 * Returns the value of the '<em><b>Idx Table</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Idx Table</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Idx Table</em>' attribute.
-	 * @see #setIdxTable(Map)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getSimpleIndex_IdxTable()
-	 * @model transient="true" volatile="true"
-	 */
-	Map getIdxTable();
-
-	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#getIdxTable <em>Idx Table</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Idx Table</em>' attribute.
-	 * @see #getIdxTable()
+	 * @model
+	 * @generated
 	 */
-	void setIdxTable(Map<Object, Object> value);
+	V getElement(K elementId);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -66,14 +43,5 @@ public interface SimpleIndex extends Index {
 	 * @model
 	 * @generated
 	 */
-	Object getElement(Object elementId);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Boolean removeElementById(Object elementId);
-
+	Boolean removeElementById(K elementId);
 } // SimpleIndex

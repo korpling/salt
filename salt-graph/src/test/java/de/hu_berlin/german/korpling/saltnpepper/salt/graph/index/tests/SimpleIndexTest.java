@@ -18,12 +18,14 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.tests;
 
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Vector;
 
 import junit.textui.TestRunner;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.tests.IdentifiableElementTest;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
 
@@ -35,7 +37,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElements() <em>Num Of Elements</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#getIdxTable() <em>Idx Table</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds() <em>Num Of Element Ids</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap() <em>Index Map</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -75,11 +78,10 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 	 * Returns the fixture for this Simple Index test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
-	protected SimpleIndex getFixture() {
-		return (SimpleIndex)fixture;
+	protected SimpleIndex<String, String> getFixture() {
+		return (SimpleIndex<String, String>)fixture;
 	}
 
 	/**
@@ -118,6 +120,46 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 			this.getFixture().addElement(entry[0], entry[1]);
 		}
 		assertEquals(new Long(entries.length), this.getFixture().getNumOfElements());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds() <em>Num Of Element Ids</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds()
+	 */
+	public void testGetNumOfElementIds() {
+		String entry= null;
+		String id= null;
+		for (int i=1; i<100;i++)
+		{
+			entry= "entry"+ i;
+			id="id"+i;
+			this.getFixture().addElement(entry, id);
+			assertEquals(Long.valueOf(i), this.getFixture().getNumOfElementIds());
+		}
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap() <em>Index Map</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap()
+	 */
+	public void testGetIndexMap() {
+		Hashtable<Object, Object> idxTable= new Hashtable<Object, Object>();
+		this.getFixture().setIndexMap((Map)idxTable);
+		assertEquals(idxTable, this.getFixture().getIndexMap());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#setIndexMap(java.util.Map) <em>Index Map</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#setIndexMap(java.util.Map)
+	 */
+	public void testSetIndexMap() {
+		this.testGetIndexMap();
 	}
 
 	/**
@@ -304,28 +346,16 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 	{
 		Node node= GraphFactory.eINSTANCE.createNode();
 		node.setId("node1");
-		this.getFixture().addElement(node.getId(), node);
-		assertEquals(1, this.getFixture().getIdxTable().size());
-		this.getFixture().removeElementById("node1");
-		assertEquals(0, this.getFixture().getIdxTable().size());
-		this.getFixture().addElement(node.getId(), node);
-		assertEquals(1, this.getFixture().getIdxTable().size());
+		SimpleIndex<String, Node> index= IndexFactory.eINSTANCE.createSimpleIndex();
+		index.addElement(node.getId(), node);
+		assertEquals(1, index.getIndexMap().size());
+		index.removeElementById("node1");
+		assertEquals(0, index.getIndexMap().size());
+		index.addElement(node.getId(), node);
+		assertEquals(1, index.getIndexMap().size());
 		String id= "node1";
-		this.getFixture().removeElementById(id);
-		assertEquals(0, this.getFixture().getIdxTable().size());
-	}
-	
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#getIdxTable() <em>Idx Table</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#getIdxTable()
-	 */
-	public void testGetIdxTable() 
-	{
-		Hashtable<Object, Object> idxTable= new Hashtable<Object, Object>();
-		this.getFixture().setIdxTable(idxTable);
-		assertEquals(idxTable, this.getFixture().getIdxTable());
+		index.removeElementById(id);
+		assertEquals(0, index.getIndexMap().size());
 	}
 
 	/**

@@ -113,6 +113,24 @@ public class IdentifierTest extends LabelTest {
 		setFixture(null);
 	}
 
+	
+	/**
+	 * Just to override {@link LabelTest#testGetQName2()}, because case cannot occur in for this fixture.
+	 */
+	public void testGetQName2()
+	{
+		//do nothing
+	}
+	/**
+	 * Overrides parent test {@link LabelTest#testGetQName()}.
+	 */
+	public void testGetQName()
+	{
+		String qname= Identifier.NAMESPACE_DEFAULT+ Label.NS_SEPERATOR+ Identifier.NAME_DEFAULT;
+		assertEquals(qname, this.getFixture().getQName());
+		this.getFixture().setName("something");
+		assertEquals(qname, this.getFixture().getQName());
+	}
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier#getIdentifiableElement() <em>Identifiable Element</em>}' feature getter.
 	 * <!-- begin-user-doc -->

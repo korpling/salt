@@ -20,6 +20,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructur
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
@@ -79,6 +80,25 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 		super.setSGraph(newSCorpusGraph);
 	}
 
+	/**
+	 * {@inheritDoc SCorpus#clone()}
+	 */
+	@Override
+	public Object clone() 
+	{
+		return(this.clone(SaltFactory.eINSTANCE.createSCorpus()));
+	}
+
+	/**
+	 * {@inheritDoc SCorpus#clone()}
+	 */
+	@Override
+	public Object clone(SCorpus clone)
+	{
+		super.clone(clone);
+		return(clone);
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

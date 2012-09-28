@@ -94,7 +94,7 @@ public interface SaltProject extends EObject {
 	void setSName(String value);
 
 	/**
-	 * Stores a this SaltProject object to the given URI in saltXML format. 
+	 * Persists this {@link SaltProject} object to the location given by the passed {@link URI} object as SaltXML. 
 	 * @model saltProjectURIDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
 	 * @generated
 	 */
@@ -185,5 +185,26 @@ public interface SaltProject extends EObject {
 	 * @generated
 	 */
 	void saveSDocumentGraph_DOT(URI uri, SElementId sElementID);
+
+	/**
+	 * Reads a saltProject.salt file and imports the contained corpus structure, without importing the document-structure
+	 * corresponding to the imported {@link SDocument} nodes.
+	 * @param saltProjectURI the uri to the location of the folder containing the saltProject.salt file.
+	 * @model saltProjectURIDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void loadSCorpusStructure(URI saltProjectURI);
+
+	/**
+	 * This method extracts the location of all {@link SDocumentGraph} objects, which are persist in a file
+	 * and are currently not loaded as model into main memory. The returned value is a map, containing the
+	 * {@link SElementId} as an identifier and the location of the {@link SDocumentGraph} object as an {@link URI}.
+	 * To extract the locations, the method runs through all {@link SDocument} objects (being contained in the 
+	 * current {@link SaltProject}) containing the {@link SDocumentGraph} objects and checks if the {@link SDocumentGraph} 
+	 * object is loaded or peristed.
+	 * @return a map of {@link SElementId} of {@link SDocument} objects and the corresponding location as {@link URI}, an empty {@link Map}, if no {@link SDocumentGraph} object is persisted
+	 * @model kind="operation"
+	 */
+	Map<SElementId, URI> getSDocumentGraphLocations();
 
 } // SaltProject

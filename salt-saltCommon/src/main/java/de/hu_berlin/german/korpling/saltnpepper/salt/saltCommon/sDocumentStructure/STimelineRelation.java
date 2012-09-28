@@ -90,26 +90,28 @@ public interface STimelineRelation extends SSequentialRelation, STimeOverlapping
 	void setSToken(SToken value);
 
 	/**
-	 * Returns the value of the '<em><b>SDocument Graph</b></em>' reference.
+	 * Returns the value of the '<em><b>SDocument Graph</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations <em>STimeline Relations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SDocument Graph</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>SDocument Graph</em>' reference.
+	 * @return the value of the '<em>SDocument Graph</em>' container reference.
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTimelineRelation_SDocumentGraph()
-	 * @model transient="true" volatile="true" derived="true"
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations
+	 * @model opposite="sTimelineRelations" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDocumentGraph getSDocumentGraph();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}' reference.
+	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SDocument Graph</em>' reference.
+	 * @param value the new value of the '<em>SDocument Graph</em>' container reference.
 	 * @see #getSDocumentGraph()
 	 * @generated
 	 */

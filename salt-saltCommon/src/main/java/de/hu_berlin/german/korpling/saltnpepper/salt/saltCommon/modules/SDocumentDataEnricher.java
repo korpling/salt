@@ -24,12 +24,20 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentStructureModule;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 
+/**
+ * 
+ * @author Florian Zipser
+ * @deprecated since Salt 1.1.3
+ *
+ */
+@Deprecated
 public class SDocumentDataEnricher extends SDocumentStructureModule 
 {
 	
@@ -40,7 +48,9 @@ public class SDocumentDataEnricher extends SDocumentStructureModule
 	 * STextualDS in graph.
 	 *   
 	 * Note: STimeline-object is created only iff there is none already.
+	 * @deprecated since Salt 1.1.3 use {@link SDocumentGraph#createSTimeline()} instead
 	 */
+	@Deprecated
 	public void createSTimeline()
 	{
 		if (this.getSDocumentGraph().getSTimeline()== null)

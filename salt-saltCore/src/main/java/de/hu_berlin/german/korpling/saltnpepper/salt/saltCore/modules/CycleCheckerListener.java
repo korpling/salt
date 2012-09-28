@@ -20,6 +20,11 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
+/**
+ * 
+ * @author Florian Zipser
+ * @deprecated since Salt 1.1.3
+ */
 public interface CycleCheckerListener 
 {
 	/**

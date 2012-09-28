@@ -19,7 +19,9 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.util;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.*;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SCatAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
@@ -39,7 +41,7 @@ import org.eclipse.emf.ecore.EObject;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see de.hub.corpling.salt.saltSemantics.SaltSemanticsPackage
+ * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage
  * @generated
  */
 public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
@@ -123,6 +125,10 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 				return createLabelAdapter();
 			}
 			@Override
+			public Adapter caseSAbstractAnnotation(SAbstractAnnotation object) {
+				return createSAbstractAnnotationAdapter();
+			}
+			@Override
 			public Adapter caseSAnnotation(SAnnotation object) {
 				return createSAnnotationAdapter();
 			}
@@ -147,13 +153,13 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltSemantics.SPOSAnnotation <em>SPOS Annotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation <em>SPOS Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.salt.saltSemantics.SPOSAnnotation
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation
 	 * @generated
 	 */
 	public Adapter createSPOSAnnotationAdapter() {
@@ -161,13 +167,13 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltSemantics.SLemmaAnnotation <em>SLemma Annotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation <em>SLemma Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.salt.saltSemantics.SLemmaAnnotation
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation
 	 * @generated
 	 */
 	public Adapter createSLemmaAnnotationAdapter() {
@@ -175,13 +181,13 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltSemantics.SCatAnnotation <em>SCat Annotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SCatAnnotation <em>SCat Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.salt.saltSemantics.SCatAnnotation
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SCatAnnotation
 	 * @generated
 	 */
 	public Adapter createSCatAnnotationAdapter() {
@@ -189,13 +195,13 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltSemantics.STypeAnnotation <em>SType Annotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.STypeAnnotation <em>SType Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.salt.saltSemantics.STypeAnnotation
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.STypeAnnotation
 	 * @generated
 	 */
 	public Adapter createSTypeAnnotationAdapter() {
@@ -203,13 +209,13 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltSemantics.SWordAnnotation <em>SWord Annotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SWordAnnotation <em>SWord Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.salt.saltSemantics.SWordAnnotation
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SWordAnnotation
 	 * @generated
 	 */
 	public Adapter createSWordAnnotationAdapter() {
@@ -217,13 +223,13 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltSemantics.SSentenceAnnotation <em>SSentence Annotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SSentenceAnnotation <em>SSentence Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.salt.saltSemantics.SSentenceAnnotation
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SSentenceAnnotation
 	 * @generated
 	 */
 	public Adapter createSSentenceAnnotationAdapter() {
@@ -231,13 +237,13 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.LabelableElement <em>Labelable Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement <em>Labelable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.graph.LabelableElement
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement
 	 * @generated
 	 */
 	public Adapter createLabelableElementAdapter() {
@@ -245,13 +251,13 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.graph.Label <em>Label</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label <em>Label</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.graph.Label
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label
 	 * @generated
 	 */
 	public Adapter createLabelAdapter() {
@@ -259,13 +265,27 @@ public class SaltSemanticsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.hub.corpling.salt.saltCore.SAnnotation <em>SAnnotation</em>}'.
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation <em>SAbstract Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see de.hub.corpling.salt.saltCore.SAnnotation
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation
+	 * @generated
+	 */
+	public Adapter createSAbstractAnnotationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation <em>SAnnotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation
 	 * @generated
 	 */
 	public Adapter createSAnnotationAdapter() {

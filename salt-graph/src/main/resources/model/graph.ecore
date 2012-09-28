@@ -11,6 +11,9 @@
         eType="#//Layer" eOpposite="#//Layer/nodes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LabelableElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="@export java.io.Serializable"/>
+    </eAnnotations>
     <eOperations name="addLabel">
       <eParameters name="label" eType="#//Label"/>
     </eOperations>
@@ -63,11 +66,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="qName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
-        volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="labelableElement" eType="#//LabelableElement"
         eOpposite="#//LabelableElement/labels"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Graph" eSuperTypes="#//IdentifiableElement">
     <eOperations name="addNode">
@@ -128,6 +131,21 @@
     <eOperations name="getLayer" eType="#//Layer">
       <eParameters name="layerId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="getRoots" upperBound="-1" eType="#//Node"/>
+    <eOperations name="getLeafs" upperBound="-1" eType="#//Node"/>
+    <eOperations name="traverse">
+      <eParameters name="startNodes" upperBound="-1" eType="#//Node"/>
+      <eParameters name="traverseType" eType="#//GRAPH_TRAVERSE_TYPE"/>
+      <eParameters name="traverseId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="traverseHandler" eType="#//GraphTraverseHandler"/>
+    </eOperations>
+    <eOperations name="traverse">
+      <eParameters name="startNodes" upperBound="-1" eType="#//Node"/>
+      <eParameters name="traverseType" eType="#//GRAPH_TRAVERSE_TYPE"/>
+      <eParameters name="traverseId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="traverseHandler" eType="#//GraphTraverseHandler"/>
+      <eParameters name="isCycleSafe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="indexMgr" eType="#//index/IndexMgr"
         volatile="true" transient="true" eOpposite="#//index/IndexMgr/graph"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
@@ -164,34 +182,87 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="subLayers" upperBound="-1"
         eType="#//Layer" eOpposite="#//Layer/superLayer"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="GraphTraverseHandler" instanceClassName="de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="GRAPH_TRAVERSE_TYPE">
+    <eLiterals name="TOP_DOWN_DEPTH_FIRST"/>
+    <eLiterals name="TOP_DOWN_BREADTH_FIRST" value="1"/>
+    <eLiterals name="BOTTOM_UP_DEPTH_FIRST" value="2"/>
+    <eLiterals name="BOTTOM_UP_BREADTH_FIRST" value="3"/>
+  </eClassifiers>
   <eSubpackages name="index" nsURI="index" nsPrefix="index">
     <eClassifiers xsi:type="ecore:EClass" name="Index" abstract="true" interface="true"
         eSuperTypes="#//IdentifiableElement">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A class implementing this interface provides an index for a faster access on indexed objects. An {@link Index} object indexes a single object (so called value or element) or a set of objects (so called values or elements) by using a unique key (also called elementId) for indexing them. In case of the {@link Index} object is of type  {@link SimpleIndex}, each key has exactly one value in case of the {@link Index} object is of type {@link ComplexIndex}, each key has a list of values."/>
+      </eAnnotations>
+      <eTypeParameters name="K"/>
+      <eTypeParameters name="V"/>
       <eOperations name="addElement">
-        <eParameters name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-        <eParameters name="element" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This method adds an element to slot with given id. If no slot exists it will be created. No element will ever be inserted into the same slot more than once.&#xD;&#xA;@param id Object - identifier for slot&#xD;&#xA;@param element Object - adding element  "/>
+        </eAnnotations>
+        <eParameters name="elementId">
+          <eGenericType eTypeParameter="#//index/Index/K"/>
+        </eParameters>
+        <eParameters name="element">
+          <eGenericType eTypeParameter="#//index/Index/V"/>
+        </eParameters>
       </eOperations>
       <eOperations name="hasElement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
-        <eParameters name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eParameters name="elementId">
+          <eGenericType eTypeParameter="#//index/Index/K"/>
+        </eParameters>
       </eOperations>
       <eOperations name="removeElement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
-        <eParameters name="element" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Removes the given element from this index.&#xD;&#xA;@param element - the element which shall be removed&#xD;&#xA;@return true, if removing was successful "/>
+        </eAnnotations>
+        <eParameters name="element">
+          <eGenericType eTypeParameter="#//index/Index/V"/>
+        </eParameters>
       </eOperations>
       <eOperations name="removeAll" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="numOfElements" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
-          changeable="false" volatile="true" derived="true"/>
+          changeable="false" volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="numOfElementIds" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
+          changeable="false" volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="indexMap" volatile="true"
+          transient="true">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eTypeParameter="#//index/Index/K"/>
+          <eTypeArguments eTypeParameter="#//index/Index/V"/>
+        </eGenericType>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="estimatedCapacity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+          defaultValueLiteral="10000">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Determines the estimated size of this index. For instance this value can be used by implemnting calsses as inital cpacity for e.g. {@link HashMap} objects etc.. The default value is set to {@value #ESTIMATED_CAPACITY_EDEFAULT}. A reset currently is ineffective."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SimpleIndex" eSuperTypes="#//index/Index">
-      <eOperations name="getElement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
-        <eParameters name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SimpleIndex">
+      <eTypeParameters name="K"/>
+      <eTypeParameters name="V"/>
+      <eOperations name="getElement">
+        <eGenericType eTypeParameter="#//index/SimpleIndex/V"/>
+        <eParameters name="elementId">
+          <eGenericType eTypeParameter="#//index/SimpleIndex/K"/>
+        </eParameters>
       </eOperations>
       <eOperations name="removeElementById" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
-        <eParameters name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eParameters name="elementId">
+          <eGenericType eTypeParameter="#//index/SimpleIndex/K"/>
+        </eParameters>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="idxTable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"
-          changeable="false" volatile="true" transient="true"/>
+      <eGenericSuperTypes eClassifier="#//index/Index">
+        <eTypeArguments eTypeParameter="#//index/SimpleIndex/K"/>
+        <eTypeArguments eTypeParameter="#//index/SimpleIndex/V"/>
+      </eGenericSuperTypes>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IndexMgr">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This class manages a set of Index objects, for faster access on {@link Graph} members. Such an {@link Index} object indexes a single object (so called value) or a set of objects (so called values) by using a unique key for indexing them. In case of the {@link Index} object is of type  {@link SimpleIndex}, each key has exactly one value in case of the {@link Index} object is of type {@link ComplexIndex}, each key has a list of values."/>
+      </eAnnotations>
       <eOperations name="addIndex">
         <eParameters name="index" eType="#//index/Index"/>
       </eOperations>
@@ -215,21 +286,43 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="graph" eType="#//Graph"
           volatile="true" transient="true" eOpposite="#//Graph/indexMgr"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ComplexIndex" eSuperTypes="#//index/Index">
+    <eClassifiers xsi:type="ecore:EClass" name="ComplexIndex">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@link ComplexIndex} object refers a key (or elementId) to a set of values (or elements). Such a set is stored in a {@link EList} object."/>
+      </eAnnotations>
+      <eTypeParameters name="K"/>
+      <eTypeParameters name="V"/>
       <eOperations name="hasSlot" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
-        <eParameters name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This method returns if index has a slot with the given id.&#xD;&#xA;@param id Object - identifier for slot&#xD;&#xA;@return true, if there exists a slot with given id"/>
+        </eAnnotations>
+        <eParameters name="elementId">
+          <eGenericType eTypeParameter="#//index/ComplexIndex/K"/>
+        </eParameters>
       </eOperations>
-      <eOperations name="getSlot" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
-        <eParameters name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eOperations name="getSlot" upperBound="-1">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This method returns a slot matching to the given id. If id does not exists in index returned list is empty.&#xD;&#xA;@return matching slot"/>
+        </eAnnotations>
+        <eGenericType eTypeParameter="#//index/ComplexIndex/V"/>
+        <eParameters name="elementId">
+          <eGenericType eTypeParameter="#//index/ComplexIndex/K"/>
+        </eParameters>
       </eOperations>
-      <eOperations name="getSlotIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      <eOperations name="getSlotIds" upperBound="-1">
+        <eGenericType eTypeParameter="#//index/ComplexIndex/K"/>
+      </eOperations>
       <eOperations name="removeSlot" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
-        <eParameters name="elementId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        <eParameters name="elementId">
+          <eGenericType eTypeParameter="#//index/ComplexIndex/K"/>
+        </eParameters>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="numOfSlots" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
-          changeable="false" volatile="true" transient="true" derived="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="idxTable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"
-          volatile="true" transient="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sortable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          changeable="false" defaultValueLiteral="false"/>
+      <eGenericSuperTypes eClassifier="#//index/Index">
+        <eTypeArguments eTypeParameter="#//index/ComplexIndex/K"/>
+        <eTypeArguments eTypeParameter="#//index/ComplexIndex/V"/>
+      </eGenericSuperTypes>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

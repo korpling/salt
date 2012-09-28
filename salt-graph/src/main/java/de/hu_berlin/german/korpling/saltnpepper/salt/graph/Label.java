@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Label</b></em>'.
@@ -102,8 +103,9 @@ public interface Label extends LabelableElement
 	 * Returns the value of the '<em><b>QName</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>QName</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * Returns the full qualified name of this {@link Label} object. A full qualified name contains of the following:
+	 * {@link #getNamespace()})+{@value #NS_SEPERATOR}+{@link #getName()}
+	 * 
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>QName</em>' attribute.
@@ -116,8 +118,13 @@ public interface Label extends LabelableElement
 
 	/**
 	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getQName <em>QName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the full qualified name of this {@link Label} object. A full qualified name contains of the following:
+	 * <ol>
+	 * 	<li>qName= {@link #getName()} if namespace is missing</li>
+	 *  <li>qName= {@link #getNamespace()} + {@value Label#NS_SEPERATOR}, if name is missing</li>
+	 *  <li>qName= {@link #getNamespace()} + {@value Label#NS_SEPERATOR} + {@link #getName()}, if both is given</li>
+	 * </ol>
+	 * Therefore the two parts of it are set via {@link #setNamespace(String)} and {@link #setName(String)}.
 	 * @param value the new value of the '<em>QName</em>' attribute.
 	 * @see #getQName()
 	 * @generated
@@ -135,7 +142,7 @@ public interface Label extends LabelableElement
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(Object)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Value()
-	 * @model transient="true" volatile="true"
+	 * @model
 	 * @generated
 	 */
 	Object getValue();
@@ -179,25 +186,19 @@ public interface Label extends LabelableElement
 	void setLabelableElement(LabelableElement value);
 
 	/**
-	 * Returns the value of the '<em><b>Value String</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value String</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * Returns the value of {@link #getValue()} as its string representation. The value valueString only exists
+	 * for persisting the model. 
 	 * @return the value of the '<em>Value String</em>' attribute.
 	 * @see #setValueString(String)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_ValueString()
-	 * @model
+	 * @model volatile="true" derived="true"
 	 * @generated
 	 */
 	String getValueString();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString <em>Value String</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Attention this method does nothing, the given value will not be stored anyway. This method only exists 
+	 * for persisting the model.
 	 * @param value the new value of the '<em>Value String</em>' attribute.
 	 * @see #getValueString()
 	 * @generated

@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SIdentifiableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 
 public class SIdentifiableElementAccessor 
 {
@@ -34,12 +35,20 @@ public class SIdentifiableElementAccessor
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Sets the id of the given <code>sIdentElem</code> object. If this object does not already have an {@link SElementId}
+	 * object, a new one will be created. If it already has one, the {@link SElementId#setSId(String)} method will be called
+	 * to delegate setting of the identifier.
 	 */
 	public void setSId(SIdentifiableElement sIdentElem, String newSId) 
 	{
-		sIdentElem.setId(newSId);
+		if (sIdentElem.getSElementId()== null)
+		{
+			SElementId sElementId= SaltCoreFactory.eINSTANCE.createSElementId();
+			sElementId.setSId(newSId);
+			sIdentElem.setSElementId(sElementId);
+		}
+		else
+			sIdentElem.getSElementId().setSId(newSId);
 	}
 
 	/**

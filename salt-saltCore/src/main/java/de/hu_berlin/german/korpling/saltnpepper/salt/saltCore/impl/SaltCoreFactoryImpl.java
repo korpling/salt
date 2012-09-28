@@ -121,6 +121,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 				return createSDATATYPEFromString(eDataType, initialValue);
 			case SaltCorePackage.URI:
 				return createURIFromString(eDataType, initialValue);
+			case SaltCorePackage.SGRAPH_TRAVERSE_HANDLER:
+				return createSGraphTraverseHandlerFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -138,6 +140,8 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 				return convertSDATATYPEToString(eDataType, instanceValue);
 			case SaltCorePackage.URI:
 				return convertURIToString(eDataType, instanceValue);
+			case SaltCorePackage.SGRAPH_TRAVERSE_HANDLER:
+				return convertSGraphTraverseHandlerToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -326,6 +330,24 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	 * @generated
 	 */
 	public String convertURIToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SGraphTraverseHandler createSGraphTraverseHandlerFromString(EDataType eDataType, String initialValue) {
+		return (SGraphTraverseHandler)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSGraphTraverseHandlerToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

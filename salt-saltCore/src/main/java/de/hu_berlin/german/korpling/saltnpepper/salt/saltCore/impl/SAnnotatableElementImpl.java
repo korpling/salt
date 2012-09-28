@@ -25,13 +25,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.LabelableElementImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SAnnotatableElementAccessor;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.LabelableElementImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,9 +96,9 @@ public class SAnnotatableElementImpl extends LabelableElementImpl implements SAn
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SAnnotation getSAnnotation(String fullName) 
+	public SAnnotation getSAnnotation(String qName) 
 	{
-		return(this.sAnnoAccessor.getSAnnotation(this, fullName));
+		return(this.sAnnoAccessor.getSAnnotation(this, qName));
 	}
 
 	/**

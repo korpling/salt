@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests.SDataSourceAccessorTest;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests.SDocumentStructureRootAccessorTest;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentStructureAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
@@ -34,6 +36,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 
+/**
+ * @deprecated since Salt 1.1.3
+ * @author Florian Zipser
+ * {@link SDocumentStructureRootAccessorTest} and {@link SDataSourceAccessorTest}
+ *
+ */
+@Deprecated
 public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest 
 {
 	public SDocumentStructureAccessor getFixture() {
@@ -61,6 +70,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * 	|			|
 	 * 	This		is
 	 */
+	//copied
 	public void testGetSText()
 	{
 		//text
@@ -123,6 +133,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * 
 	 * PR�s tok1-> tok2; tok3-> tok4; tok4->tok2
 	 */
+	//copied
 	public void testGetRootsBySRelation()
 	{
 		SToken tok1= null;
@@ -301,6 +312,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * Checks the method getRootsBySRelationSType().
 	 * Just for SPointingRelation
 	 */
+	//copied
 	public void testGetRootsBySRelationSTypePR1()
 	{
 		{//checking for SPointingRelation
@@ -339,6 +351,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * Checks the method getRootsBySRelationSType().
 	 * Just for SPointingRelation
 	 */
+	//copied
 	public void testGetRootsBySRelationSTypePR2()
 	{
 		{//checking for SPointingRelation
@@ -383,6 +396,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * tests a chain of pr with the same type.
 	 * node1 ->t1 node2 ->t1 node3
 	 */
+	//copied
 	public void testGetRootsBySRelationSTypePR3()
 	{
 		{//checking for SPointingRelation
@@ -417,6 +431,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * tests a chain of pr with the same type. But all nodes have a second incoming relation of another type.
 	 * node1 ->t1 node2 ->t1 node3
 	 */
+	//copied
 	public void testGetRootsBySRelationSTypePR4()
 	{
 		{//checking for SPointingRelation
@@ -469,6 +484,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * tests a chain of pr with the same type, and one cycle pr with another type.
 	 * node1 ->t1 node2 ->t1 node3 ->t1 node4 ->t2 node1
 	 */
+	//copied
 	public void testGetRootsBySRelationSTypePR5()
 	{
 		{//checking for SPointingRelation
@@ -522,6 +538,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * another type exists.
 	 * node1 ->t1 node2 ->t1, t2 node3 ->t1 node4 ->t2 node1
 	 */
+	//copied
 	public void testGetRootsBySRelationSTypePR6()
 	{
 		{//checking for SPointingRelation
@@ -583,6 +600,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 	 * 						|		\
 	 * 						tok4	tok5
 	 */
+	//copied
 	public void testGetRootsBySRelationSTypeDR1()
 	{
 		{//checking for SPointingRelation
@@ -649,7 +667,7 @@ public class SDocumentStructureAccessorTest extends SDocumentStructureModuleTest
 		}//checking for SPointingRelation
 	}
 	
-	
+	//copied
 	public void testGetSTokensSortedByText()
 	{
 		EList<SToken> sTokens= new BasicEList<SToken>();

@@ -19,6 +19,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.util;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
+
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.*;
 
 import java.util.List;
@@ -101,7 +102,7 @@ public class IndexSwitch<T> {
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case IndexPackage.INDEX: {
-				Index index = (Index)theEObject;
+				Index<?, ?> index = (Index<?, ?>)theEObject;
 				T result = caseIndex(index);
 				if (result == null) result = caseIdentifiableElement(index);
 				if (result == null) result = caseLabelableElement(index);
@@ -109,7 +110,7 @@ public class IndexSwitch<T> {
 				return result;
 			}
 			case IndexPackage.SIMPLE_INDEX: {
-				SimpleIndex simpleIndex = (SimpleIndex)theEObject;
+				SimpleIndex<?, ?> simpleIndex = (SimpleIndex<?, ?>)theEObject;
 				T result = caseSimpleIndex(simpleIndex);
 				if (result == null) result = caseIndex(simpleIndex);
 				if (result == null) result = caseIdentifiableElement(simpleIndex);
@@ -124,7 +125,7 @@ public class IndexSwitch<T> {
 				return result;
 			}
 			case IndexPackage.COMPLEX_INDEX: {
-				ComplexIndex complexIndex = (ComplexIndex)theEObject;
+				ComplexIndex<?, ?> complexIndex = (ComplexIndex<?, ?>)theEObject;
 				T result = caseComplexIndex(complexIndex);
 				if (result == null) result = caseIndex(complexIndex);
 				if (result == null) result = caseIdentifiableElement(complexIndex);
@@ -147,7 +148,7 @@ public class IndexSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIndex(Index object) {
+	public <K, V> T caseIndex(Index<K, V> object) {
 		return null;
 	}
 
@@ -162,7 +163,7 @@ public class IndexSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSimpleIndex(SimpleIndex object) {
+	public <K, V> T caseSimpleIndex(SimpleIndex<K, V> object) {
 		return null;
 	}
 
@@ -192,7 +193,7 @@ public class IndexSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseComplexIndex(ComplexIndex object) {
+	public <K, V> T caseComplexIndex(ComplexIndex<K, V> object) {
 		return null;
 	}
 

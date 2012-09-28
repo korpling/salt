@@ -131,7 +131,7 @@ public class GraphStoringTest extends TestCase {
 	 */
 	public void testSaving1() throws IOException
 	{
-		this.outputFileName= "./src/test/resources/data/output/graphSaving1.graph";
+		this.outputFileName= "./_TMP/output/graphSaving1.graph";
 		
 		this.getFixture().setId("graph1");
 		
@@ -169,7 +169,7 @@ public class GraphStoringTest extends TestCase {
 	 */
 	public void testSaving2() throws IOException
 	{
-		this.outputFileName= "./src/test/resources/data/output/graphSaving2.graph";
+		this.outputFileName= "./_TMP/output/graphSaving2.graph";
 		this.getFixture().setId("graph1");
 		
 		Node node1= GraphFactory.eINSTANCE.createNode();

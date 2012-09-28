@@ -19,17 +19,27 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 
+/**
+ * @deprecated since Salt 1.1.3
+ * @author Florian Zipser
+ *
+ */
+@Deprecated
 public abstract class SCorpusStructureModule 
 {
 	/**
 	 * The document structure graph, which shall be traversed.
+	 * @deprecated since Salt 1.1.3
 	 */
+	@Deprecated
 	private SCorpusGraph sCorpusGraph= null;
 
 	/**
 	 * Sets the current graph to work on.
 	 * @param graph graph to traverse
+	 * @deprecated since Salt 1.1.3
 	 */
+	@Deprecated
 	public void setSCorpusGraph(SCorpusGraph sCorpusGraph) {
 		this.sCorpusGraph = sCorpusGraph;
 	}
@@ -37,7 +47,9 @@ public abstract class SCorpusStructureModule
 	/**
 	 * Returns the current graph to work on.
 	 * @return the current graph
+	 * @deprecated since Salt 1.1.3
 	 */
+	@Deprecated
 	public SCorpusGraph getSCorpusGraph() {
 		return sCorpusGraph ;
 	}

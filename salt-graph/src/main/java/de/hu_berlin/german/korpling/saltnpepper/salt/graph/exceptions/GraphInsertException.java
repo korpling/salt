@@ -18,8 +18,10 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions;
 
 /**
- * This class is highest exception. All PepperExceptions are derived from this class. 
- * It can be instantiated, if no other Exception maps to the problem.
+ * A {@link GraphInsertException} is thrown if an object can not be inserted or added to
+ * another object. Such an exception can be thrown if an insert or into a list fails and 
+ * even if a set of the object fails. 
+ * 
  * @author Florian Zipser
  *
  */

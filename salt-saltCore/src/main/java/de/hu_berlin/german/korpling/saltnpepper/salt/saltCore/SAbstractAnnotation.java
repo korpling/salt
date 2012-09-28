@@ -17,8 +17,9 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import org.eclipse.emf.common.util.URI;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,11 +42,15 @@ import org.eclipse.emf.common.util.URI;
  */
 public interface SAbstractAnnotation extends Label {
 	/**
+	 * QName of label for storing a new label determining the salt-data type of the value of this label. 
+	 */
+	public static final String KW_SVAL_TYPE="SVAL_TYPE";
+	
+	/**
 	 * Returns the value of the '<em><b>SNS</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SNS</em>' attribute isn't clear,
-	 * there really should be more of a description here...
+	 * Returns the namespace of this annotation. This method is derived from {@link Label#getNamespace()}.
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>SNS</em>' attribute.
@@ -59,6 +64,7 @@ public interface SAbstractAnnotation extends Label {
 	/**
 	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSNS <em>SNS</em>}' attribute.
 	 * <!-- begin-user-doc -->
+	 * Sets the namespace of this annotation. This method is derived from {@link Label#setNamespace(String)}.
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>SNS</em>' attribute.
 	 * @see #getSNS()
@@ -110,16 +116,6 @@ public interface SAbstractAnnotation extends Label {
 
 	/**
 	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValue <em>SValue</em>}' attribute.
-	 * This method also sets the sValueType attribute to one of the supported Datatypes in SDATATYPE.
-	 * null--> SOBJECT
-	 * String --> STEXT
-	 * Boolean --> SBOOLEAN
-	 * Integer --> SNUMERIC
-	 * Long --> SNUMERIC
-	 * Double --> SFLOAT
-	 * Float --> SFLOAT
-	 * URI --> SURI
-	 * else --> SOBJECT
 	 * @param value the new value of the '<em>SValue</em>' attribute.
 	 * @see #getSValue()
 	 * @generated
@@ -129,65 +125,82 @@ public interface SAbstractAnnotation extends Label {
 	/**
 	 * Returns the value of the '<em><b>SValue Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SValue Type</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * If no {@link SDATATYPE} was set, a value will be computed. Here is the list of how java objects will be 
+	 * mapped to a {@link SDATATYPE} value.
+	 * <ul>
+	 * 	<li>null--> {@link SDATATYPE#SOBJECT}</li>
+	 * 	<li>String --> {@link SDATATYPE#STEXT}</li>
+	 * 	<li>Boolean --> {@link SDATATYPE#SBOOLEAN}</li>
+	 * 	<li>Integer --> {@link SDATATYPE#SNUMERIC}</li>
+	 * 	<li>Long --> {@link SDATATYPE#SNUMERIC}</li>
+	 * 	<li>Double --> {@link SDATATYPE#SFLOAT}</li>
+	 * 	<li>Float --> {@link SDATATYPE#SFLOAT}</li>
+	 * 	<li>URI --> {@link SDATATYPE#SURI}</li>
+	 * 	<li>else --> {@link SDATATYPE#SOBJECT}</li>
+	 * </ul>
 	 * @return the value of the '<em>SValue Type</em>' attribute.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE
+	 * @see #setSValueType(SDATATYPE)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage#getSAbstractAnnotation_SValueType()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
 	SDATATYPE getSValueType();
 
 	/**
-	 * Returns the sValue attribute of this object as String representation. If the sValue is of
-	 * type String it will be returned, else the toString()-method will be called. If no value is given,
+	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation#getSValueType <em>SValue Type</em>}' attribute.
+	 * @param value the new value of the '<em>SValue Type</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE
+	 * @see #getSValueType()
+	 * @generated
+	 */
+	void setSValueType(SDATATYPE value);
+
+	/**
+	 * Returns the <em>sValue</em> attribute of this object as String representation. If the <em>sValue</em> is of
+	 * type {@link String} it will be returned, else the {@link #toString()} method will be called. If no value is given,
 	 * null will be returned.
-	 * @return String representation of the sValue attribute.
+	 * @return {@link String} representation of the <em>sValue</em> attribute.
 	 * @generated  
 	 */
 	String getSValueSTEXT();
 
 	/**
-	 * Returns the sValue attribute of this object as Boolean if possible. If the value is
-	 * not of type Boolean or is empty, null will be returned.
-	 * @return Boolean representation of the sValue attribute.
+	 * Returns the <em>sValue</em> attribute of this object as {@link Boolean} if possible. If the value is
+	 * not of type {@link Boolean} or is empty, null will be returned.
+	 * @return {@link Boolean} representation of the <em>sValue</em> attribute.
 	 * @generated 
 	 */
 	Boolean getSValueSBOOLEAN();
 
 	/**
-	 * Returns the sValue attribute of this object as Long if possible. If the value is
-	 * not of type Long or is empty, null will be returned.
-	 * @return Long representation of the sValue attribute. 
+	 * Returns the <em>sValue</em> attribute of this object as {@link Long} if possible. If the value is
+	 * not of type {@link Long} or is empty, null will be returned.
+	 * @return {@link Long} representation of the <em>sValue</em> attribute. 
 	 * @generated
 	 */
 	Long getSValueSNUMERIC();
 
 	/**
-	 * Returns the sValue attribute of this object as Float if possible. If the value is
-	 * not of type Float or is empty, null will be returned.
-	 * @return Float representation of the sValue attribute. 
+	 * Returns the <em>sValue</em> attribute of this object as {@link Float} if possible. If the value is
+	 * not of type {@link Float} or is empty, null will be returned.
+	 * @return {@link Float} representation of the <em>sValue</em> attribute. 
 	 * @generated
 	 */
 	Double getSValueSFLOAT();
 
 	/**
-	 * Returns the sValue attribute of this object as URI if possible. If the value is
-	 * not of type URI or is empty, null will be returned.
-	 * @return URI representation of the sValue attribute. 
+	 * Returns the <em>sValue</em> attribute of this object as {@link URI} if possible. If the value is
+	 * not of type {@link URI} or is empty, null will be returned.
+	 * @return {@link URI} representation of the <em>sValue</em> attribute. 
 	 * @generated
 	 */
 	URI getSValueSURI();
 
 	/**
-	 * Returns the the sValue attribute of this object as the original object. This will always work
-	 * as long as sValue is not empty. If the sValue attribute is empty null will be returned. 
-	 * @return Object representation of the sValue attribute
+	 * Returns the the <em>sValue</em> attribute of this object as the original object. This will always work
+	 * as long as <em>sValue</em> is not empty. If the <em>sValue</em> attribute is empty null will be returned. 
+	 * @return {@link Object} representation of the <em>sValue</em> attribute
 	 * @generated
 	 */
 	Object getSValueSOBJECT();

@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
@@ -64,18 +65,22 @@ public class Salt2DOT
 	private void actualSalt2Dot(EObject obj, URI outputURI) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getPackageRegistry().put(SDocumentStructurePackage.eINSTANCE.getNsURI(), SDocumentStructurePackage.eINSTANCE);
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("dot",new DOTResourceFactory());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_DOT,new DOTResourceFactory());
 		if (obj instanceof SCorpus)
 		{
 			SCorpus sCorpus= (SCorpus) obj;
 			if (sCorpus.getSCorpusGraph()!= null)
 				obj= sCorpus.getSCorpusGraph();
+			else
+				throw new SaltResourceException("Cannot save Salt model to DOT format, because the given "+SCorpus.class.getSimpleName()+" does not contain a "+SCorpusGraph.class.getSimpleName()+" object");
 		}
 		else if (obj instanceof SDocument)
 		{
 			SDocument sDocument= (SDocument) obj;
 			if (sDocument.getSDocumentGraph()!= null)
 				obj= sDocument.getSDocumentGraph();
+			else
+				throw new SaltResourceException("Cannot save Salt model to DOT format, because the given "+SDocument.class.getSimpleName()+" does not contain a "+SDocumentGraph.class.getSimpleName()+" object");
 		}
 		
 		//if obj is a SDocumentGraph or SCorpusGraph, outputURI does not have to be changed 
@@ -90,17 +95,23 @@ public class Salt2DOT
 			//for (SCorpusGraph sCorpusGraph:((SaltProject)obj).getSCorpusGraphs()) {
 				SCorpusGraph sCorpusGraph = ((SaltProject)obj).getSCorpusGraphs().get(corpIndex);
 				URI corpURI = outputURI.appendSegments((String[])sCorpusGraph.getSElementId().getSElementPath().segmentsList().toArray());
-				saveResource(sCorpusGraph, corpURI.appendFileExtension("dot"), resourceSet);
-				for (int docIndex=0;docIndex<sCorpusGraph.getSDocuments().size();docIndex++) {
+				saveResource(sCorpusGraph, corpURI.appendFileExtension(SaltFactory.FILE_ENDING_DOT), resourceSet);
+				//when calling saveResource(), the sCorpusGraph object will be attached to the resource and therefore removed from list of SaltProject, therefore the graph must be artificially added again  
+				((SaltProject)obj).getSCorpusGraphs().add(corpIndex, sCorpusGraph);
+				for (int docIndex=0;docIndex<sCorpusGraph.getSDocuments().size();docIndex++) 
+				{
 				//for (SDocument sDocument:sCorpusGraph.getSDocuments()) {
 					SDocument sDocument = sCorpusGraph.getSDocuments().get(docIndex);
 					URI docURI = corpURI.appendSegments((String[])sDocument.getSDocumentGraph().getSElementId().getSElementPath().segmentsList().toArray());
-					saveResource(sDocument.getSDocumentGraph(), docURI.appendFileExtension("dot"), resourceSet);
+					SDocumentGraph sDocGraph= sDocument.getSDocumentGraph(); 
+					saveResource(sDocGraph, docURI.appendFileExtension(SaltFactory.FILE_ENDING_DOT), resourceSet);
+					//when calling saveResource(), the sCorpusGraph object will be attached to the resource and therefore removed from list of SaltProject, therefore the graph must be artificially added again  
+					sDocument.setSDocumentGraph(sDocGraph);
 				}
 			}
 		} 
 		else {
-			throw new SaltResourceException("Cannot save Salt model to DOT format, because object is neither SCorpusGraph, SDocumentGraph nor SaltProject object. The given object is of type: '"+obj.getClass()+"'.");
+			throw new SaltResourceException("Cannot save Salt model to DOT format, because object is neither "+SCorpusGraph.class.getSimpleName()+", "+SDocumentGraph.class.getSimpleName()+" nor "+SaltProject.class.getSimpleName()+" object. The given object is of type: '"+obj.getClass()+"'.");
 		} 
 	}
 	
@@ -189,12 +200,12 @@ public class Salt2DOT
 			// create resource set and resource 
 			ResourceSet resourceSet = new ResourceSetImpl();
 	
-			//important for registering the package, because somehow this hasn�t happend
+			//important for registering the package, because somehow this has't happend
 			resourceSet.getPackageRegistry().put(SDocumentStructurePackage.eINSTANCE.getNsURI(), SDocumentStructurePackage.eINSTANCE);
 			// Register XML resource factory
 			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("saltCommon",new XMIResourceFactoryImpl());
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("dot",new DOTResourceFactory());
+			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT,new XMIResourceFactoryImpl());
+			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_DOT,new DOTResourceFactory());
 	
 			//load resource 
 			Resource resource = resourceSet.createResource(URI.createFileURI(inputFile));

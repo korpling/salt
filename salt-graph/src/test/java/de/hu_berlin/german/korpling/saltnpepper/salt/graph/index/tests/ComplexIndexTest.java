@@ -17,17 +17,16 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.tests;
 
-import java.util.HashSet;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
+
+import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.EList;
 
-
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.tests.IdentifiableElementTest;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
-
-import junit.textui.TestRunner;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.tests.IdentifiableElementTest;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,8 +36,8 @@ import junit.textui.TestRunner;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElements() <em>Num Of Elements</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getNumOfSlots() <em>Num Of Slots</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getIdxTable() <em>Idx Table</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds() <em>Num Of Element Ids</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap() <em>Index Map</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -80,11 +79,10 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 	 * Returns the fixture for this Complex Index test case.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
-	protected ComplexIndex getFixture() {
-		return (ComplexIndex)fixture;
+	protected ComplexIndex<String, String> getFixture() {
+		return (ComplexIndex<String, String>)fixture;
 	}
 
 	/**
@@ -123,7 +121,7 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 	}
 	
 	/**
-	 * Testet ob der Index mit Eintr�gen gef�llt werden kann.
+	 * Tests if index can be filled with entries.
 	 */
 	public void testFillIdx() throws Exception
 	{
@@ -150,7 +148,7 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 	public void testGetSlotIds() throws Exception
 	{
 		this.fillIdx();
-		EList<Object> ids= this.getFixture().getSlotIds();
+		EList<String> ids= this.getFixture().getSlotIds();
 		for (String id: this.ids)
 		{
 			assertTrue("the index should contain the id '"+id+"'", ids.contains(id));
@@ -249,7 +247,7 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 		//trying again
 		assertTrue(this.getFixture().removeAll());
 		assertEquals(new Long(0), this.getFixture().getNumOfElements());
-		assertEquals(new Long(0), this.getFixture().getNumOfSlots());
+		assertEquals(new Long(0), this.getFixture().getNumOfElementIds());
 		//Slots sollten auch gel�scht sein
 		for (int i= 0; i< entries.length; i++)
 		{
@@ -278,10 +276,32 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 	 * @throws Exception 
 	 * @see de.util.graph.ComplexIndex#getNumOfSlots()
 	 */
-	public void testGetNumOfSlots() throws Exception {
+	public void testGetNumOfElementIds() throws Exception {
 		assertEquals(new Long(0), this.getFixture().getNumOfElements());
 		this.fillIdx();
-		assertEquals(new Long(ids.length), this.getFixture().getNumOfSlots());
+		assertEquals(new Long(ids.length), this.getFixture().getNumOfElementIds());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap() <em>Index Map</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap()
+	 */
+	public void testGetIndexMap() {
+		HashMap<Object, EList<Object>> idxTable= new HashMap<Object, EList<Object>>();
+		this.getFixture().setIndexMap((Map)idxTable);
+		assertEquals(idxTable, this.getFixture().getIndexMap());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#setIndexMap(java.util.Map) <em>Index Map</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#setIndexMap(java.util.Map)
+	 */
+	public void testSetIndexMap() {
+		this.testGetIndexMap();
 	}
 
 	/**
@@ -335,32 +355,6 @@ public class ComplexIndexTest extends IdentifiableElementTest {
 		this.fillIdx();
 		for (String[] entry: entries)
 			assertTrue(this.getFixture().hasElement(entry[1]));
-	}
-		
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getIdxTable() <em>Idx Table</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getIdxTable()
-	 */
-	public void testGetIdxTable() 
-	{
-		Hashtable<Object, EList<Object>> idxTable= new Hashtable<Object, EList<Object>>();
-		this.getFixture().setIdxTable(idxTable);
-		assertEquals(idxTable, this.getFixture().getIdxTable());
-	}
-
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#setIdxTable(java.util.Map) <em>Idx Table</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#setIdxTable(java.util.Map)
-	 */
-	public void testSetIdxTable() 
-	{
-		Hashtable<Object, EList<Object>> idxTable= new Hashtable<Object, EList<Object>>();
-		this.getFixture().setIdxTable(idxTable);
-		assertEquals(idxTable, this.getFixture().getIdxTable());
 	}
 	
 	/**

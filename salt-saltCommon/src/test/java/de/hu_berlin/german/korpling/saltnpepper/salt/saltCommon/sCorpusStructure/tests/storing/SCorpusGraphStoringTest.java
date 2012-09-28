@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests.storing;
 
+import java.io.File;
 import java.io.IOException;
 
 import junit.framework.TestCase;
@@ -29,7 +30,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
@@ -37,9 +41,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreException;
 
 /**
  * <!-- begin-user-doc -->
@@ -125,13 +132,96 @@ public class SCorpusGraphStoringTest extends TestCase {
 	protected void tearDown() throws Exception {
 		setFixture(null);
 	}
+	
+	/**
+	 * Stores the given {@link SCorpusGraph} object and loads it again. The loaded {@link SCorpusGraph} will be put to a different instance
+	 * and returned.
+	 * @param sGraph2store
+	 * @return
+	 * @throws IOException 
+	 */
+	private SCorpusGraph storeAndLoadSCorpusGraph(SCorpusGraph sGraph2store, File tmpOutput) throws IOException
+	{
+		// create resource set and resource 
+		ResourceSet resourceSet = new ResourceSetImpl();
 
+		// Register XML resource factory
+		resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("salt",new XMIResourceFactoryImpl());
+		
+		URI outURI= URI.createFileURI(tmpOutput.getAbsolutePath());
+		
+		//save resources
+		XMLResource resourceOut = (XMLResource)resourceSet.createResource(outURI);
+		resourceOut.getContents().add(sGraph2store);
+		resourceOut.setEncoding("UTF-8");
+		resourceOut.save(null);
+		
+		
+		//load resource 
+		Resource resource = resourceSet.createResource(URI.createFileURI(tmpOutput.getAbsolutePath()));
+		
+		if (resource== null)
+			throw new NullPointerException("The resource is null.");
+		resource.load(null);
+		SCorpusGraph sCorpGraph2= null; 
+		sCorpGraph2= (SCorpusGraph) resource.getContents().get(0);
+		return(sCorpGraph2);
+	}
+	
+	/**
+	 * Creates a corpus structure, stores it and loads it again. the loaded model will be compared,
+	 * to the created one. The crested corpus structure only contains one {@link SCorpus} node.
+	
+	 * @throws IOException
+	 */
 	public void testStoring1() throws IOException
 	{
 		SCorpusGraph graph2= SaltCommonFactory.eINSTANCE.createSCorpusGraph();
-		String tmpFileName= "_TMP/SCorpusGraph.saltCommon";
+		File tmpOutput= new File("./_TMP/SCorpusGraph1.salt");
+		
+		//adding sName
+		String sName= "myGraph1";
+		this.getFixture().setSName(sName);
+		
+		//adding id
+		String id= "salt:/"+ sName;
+		this.getFixture().setSId(id);
+		
+		//start: adding SCorpus
+			sName= "myCorp1";
+			SCorpus sCorpus= SaltFactory.eINSTANCE.createSCorpus();
+			sCorpus.setSName(sName);
+			this.getFixture().addSNode(sCorpus);
+		//end: adding SCorpus
+		
+		//save and reload
+		graph2= this.storeAndLoadSCorpusGraph(this.getFixture(), tmpOutput);
+		
+		//check if both graphs are equals
+		assertEquals("The graph which was storeed to '"+tmpOutput.getAbsolutePath()+"' and loaded again is not equal any more, to the instance before.",this.getFixture(), graph2);
+
+	}
+	
+	/**
+	 * Creates a corpus structure, stores it and loads it again. the loaded model will be compared,
+	 * to the created one.
+	 * 
+	 * 				corp1
+	 * 			/			\
+	 * 		corp2			corp4
+	 * 		/	\			/		\
+	 * 	corp3	doc2		doc3	doc4
+	 *	/
+	 *	doc1
+	 * @throws IOException
+	 */
+	public void testStoring2() throws IOException
+	{
+		SCorpusGraph graph2= SaltCommonFactory.eINSTANCE.createSCorpusGraph();
+		File tmpOutput= new File("_TMP/SCorpusGraph.salt");
 		{//adding id
-			String id= "salt:/graph1";
+			String id= "salt:/myGraph1";
 			this.getFixture().setSId(id);
 		}
 		
@@ -232,35 +322,11 @@ public class SCorpusGraphStoringTest extends TestCase {
 			this.getFixture().addSRelation(corpDocRel);
 		}
 		
-		{//save and reload
-			// create resource set and resource 
-			ResourceSet resourceSet = new ResourceSetImpl();
-
-			// Register XML resource factory
-			resourceSet.getPackageRegistry().put(SaltCorePackage.eINSTANCE.getNsURI(), SaltCorePackage.eINSTANCE);
-			resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("saltCommon",new XMIResourceFactoryImpl());
-			
-			URI outURI= URI.createFileURI(tmpFileName);
-			
-			//save resources
-			XMLResource resourceOut = (XMLResource)resourceSet.createResource(outURI);
-			resourceOut.getContents().add(this.getFixture());
-			resourceOut.setEncoding("UTF-8");
-			resourceOut.save(null);
-			
-			
-			//load resource 
-			Resource resource = resourceSet.createResource(URI.createFileURI(tmpFileName));
-			
-			if (resource== null)
-				throw new NullPointerException("The resource is null.");
-			resource.load(null);
-			graph2= (SCorpusGraph) resource.getContents().get(0);
-		}
 		
-		{//check if equals
-			assertEquals(this.getFixture(), graph2);
-		}
+		graph2= this.storeAndLoadSCorpusGraph(this.getFixture(), tmpOutput);
+		
+		//check if both graphs are equals
+		assertEquals("The graph which was storeed to '"+tmpOutput.getAbsolutePath()+"' and loaded again is not equal any more, to the instance before.",this.getFixture(), graph2);
 	}
 
 } //SCorpusGraphTest

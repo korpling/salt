@@ -17,8 +17,12 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDataSourceAccessor;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentStructureRootAccessor;
+
 /**
- * 
+ * Is thrown in case of an exception in one of the several Salt modules (e.g. {@link SDataSourceAccessor},
+ * {@link SDocumentStructureRootAccessor} etc.) occurs.
  * @author Florian Zipser
  *
  */

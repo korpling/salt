@@ -119,13 +119,40 @@ public interface IndexPackage extends EPackage {
 	int INDEX__NUM_OF_ELEMENTS = GraphPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Num Of Element Ids</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEX__NUM_OF_ELEMENT_IDS = GraphPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Index Map</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEX__INDEX_MAP = GraphPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Estimated Capacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INDEX__ESTIMATED_CAPACITY = GraphPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Index</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDEX_FEATURE_COUNT = GraphPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int INDEX_FEATURE_COUNT = GraphPackage.IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SimpleIndexImpl <em>Simple Index</em>}' class.
@@ -174,13 +201,31 @@ public interface IndexPackage extends EPackage {
 	int SIMPLE_INDEX__NUM_OF_ELEMENTS = INDEX__NUM_OF_ELEMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Idx Table</b></em>' attribute.
+	 * The feature id for the '<em><b>Num Of Element Ids</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_INDEX__IDX_TABLE = INDEX_FEATURE_COUNT + 0;
+	int SIMPLE_INDEX__NUM_OF_ELEMENT_IDS = INDEX__NUM_OF_ELEMENT_IDS;
+
+	/**
+	 * The feature id for the '<em><b>Index Map</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_INDEX__INDEX_MAP = INDEX__INDEX_MAP;
+
+	/**
+	 * The feature id for the '<em><b>Estimated Capacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_INDEX__ESTIMATED_CAPACITY = INDEX__ESTIMATED_CAPACITY;
 
 	/**
 	 * The number of structural features of the '<em>Simple Index</em>' class.
@@ -189,7 +234,7 @@ public interface IndexPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_INDEX_FEATURE_COUNT = INDEX_FEATURE_COUNT + 1;
+	int SIMPLE_INDEX_FEATURE_COUNT = INDEX_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexMgrImpl <em>Mgr</em>}' class.
@@ -285,31 +330,49 @@ public interface IndexPackage extends EPackage {
 	int COMPLEX_INDEX__NUM_OF_ELEMENTS = INDEX__NUM_OF_ELEMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Num Of Slots</b></em>' attribute.
+	 * The feature id for the '<em><b>Num Of Element Ids</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_INDEX__NUM_OF_SLOTS = INDEX_FEATURE_COUNT + 0;
+	int COMPLEX_INDEX__NUM_OF_ELEMENT_IDS = INDEX__NUM_OF_ELEMENT_IDS;
 
 	/**
-	 * The feature id for the '<em><b>Idx Table</b></em>' attribute.
+	 * The feature id for the '<em><b>Index Map</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_INDEX__IDX_TABLE = INDEX_FEATURE_COUNT + 1;
+	int COMPLEX_INDEX__INDEX_MAP = INDEX__INDEX_MAP;
 
 	/**
+	 * The feature id for the '<em><b>Estimated Capacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_INDEX__ESTIMATED_CAPACITY = INDEX__ESTIMATED_CAPACITY;
+
+	/**
+	 * The feature id for the '<em><b>Sortable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+    int COMPLEX_INDEX__SORTABLE = INDEX_FEATURE_COUNT + 0;
+
+    /**
 	 * The number of structural features of the '<em>Complex Index</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPLEX_INDEX_FEATURE_COUNT = INDEX_FEATURE_COUNT + 2;
+	int COMPLEX_INDEX_FEATURE_COUNT = INDEX_FEATURE_COUNT + 1;
 
 
 	/**
@@ -334,6 +397,39 @@ public interface IndexPackage extends EPackage {
 	EAttribute getIndex_NumOfElements();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds <em>Num Of Element Ids</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Num Of Element Ids</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getNumOfElementIds()
+	 * @see #getIndex()
+	 * @generated
+	 */
+	EAttribute getIndex_NumOfElementIds();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap <em>Index Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Index Map</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap()
+	 * @see #getIndex()
+	 * @generated
+	 */
+	EAttribute getIndex_IndexMap();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getEstimatedCapacity <em>Estimated Capacity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Estimated Capacity</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getEstimatedCapacity()
+	 * @see #getIndex()
+	 * @generated
+	 */
+	EAttribute getIndex_EstimatedCapacity();
+
+	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex <em>Simple Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -342,17 +438,6 @@ public interface IndexPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSimpleIndex();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#getIdxTable <em>Idx Table</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Idx Table</em>'.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#getIdxTable()
-	 * @see #getSimpleIndex()
-	 * @generated
-	 */
-	EAttribute getSimpleIndex_IdxTable();
 
 	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr <em>Mgr</em>}'.
@@ -408,28 +493,17 @@ public interface IndexPackage extends EPackage {
 	EClass getComplexIndex();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getNumOfSlots <em>Num Of Slots</em>}'.
+	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#isSortable <em>Sortable</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Num Of Slots</em>'.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getNumOfSlots()
+     * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sortable</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#isSortable()
 	 * @see #getComplexIndex()
 	 * @generated
 	 */
-	EAttribute getComplexIndex_NumOfSlots();
+    EAttribute getComplexIndex_Sortable();
 
-	/**
-	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getIdxTable <em>Idx Table</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Idx Table</em>'.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getIdxTable()
-	 * @see #getComplexIndex()
-	 * @generated
-	 */
-	EAttribute getComplexIndex_IdxTable();
-
-	/**
+    /**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -470,6 +544,30 @@ public interface IndexPackage extends EPackage {
 		EAttribute INDEX__NUM_OF_ELEMENTS = eINSTANCE.getIndex_NumOfElements();
 
 		/**
+		 * The meta object literal for the '<em><b>Num Of Element Ids</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INDEX__NUM_OF_ELEMENT_IDS = eINSTANCE.getIndex_NumOfElementIds();
+
+		/**
+		 * The meta object literal for the '<em><b>Index Map</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INDEX__INDEX_MAP = eINSTANCE.getIndex_IndexMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Estimated Capacity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INDEX__ESTIMATED_CAPACITY = eINSTANCE.getIndex_EstimatedCapacity();
+
+		/**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SimpleIndexImpl <em>Simple Index</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -478,14 +576,6 @@ public interface IndexPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SIMPLE_INDEX = eINSTANCE.getSimpleIndex();
-
-		/**
-		 * The meta object literal for the '<em><b>Idx Table</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SIMPLE_INDEX__IDX_TABLE = eINSTANCE.getSimpleIndex_IdxTable();
 
 		/**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexMgrImpl <em>Mgr</em>}' class.
@@ -532,20 +622,12 @@ public interface IndexPackage extends EPackage {
 		EClass COMPLEX_INDEX = eINSTANCE.getComplexIndex();
 
 		/**
-		 * The meta object literal for the '<em><b>Num Of Slots</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Sortable</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+         * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute COMPLEX_INDEX__NUM_OF_SLOTS = eINSTANCE.getComplexIndex_NumOfSlots();
-
-		/**
-		 * The meta object literal for the '<em><b>Idx Table</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute COMPLEX_INDEX__IDX_TABLE = eINSTANCE.getComplexIndex_IdxTable();
+        EAttribute COMPLEX_INDEX__SORTABLE = eINSTANCE.getComplexIndex_Sortable();
 
 	}
 

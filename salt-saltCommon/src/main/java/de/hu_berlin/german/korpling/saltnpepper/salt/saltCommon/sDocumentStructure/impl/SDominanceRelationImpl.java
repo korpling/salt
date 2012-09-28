@@ -27,8 +27,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructuredNode;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.accessors.STimeOverlappingRelationAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 
@@ -164,11 +162,12 @@ public class SDominanceRelationImpl extends STextOverlappingRelationImpl impleme
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SDominanceRelation#setSTarget(SNode)}
+	 * Checks if the given target is of type {@link SStructuredNode}.
 	 */
 	public void setSTarget(SNode sTarget) {
-		if (sTarget instanceof SStructuredNode) {
+		if (	(sTarget== null)||
+				(sTarget instanceof SStructuredNode)) {
 			this.setSStructuredTarget((SStructuredNode)sTarget);
 		}
 		else {
@@ -177,8 +176,7 @@ public class SDominanceRelationImpl extends STextOverlappingRelationImpl impleme
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc SDominanceRelation#getSDocumentGraph()}
 	 */
 	public SDocumentGraph getSDocumentGraph() 
 	{

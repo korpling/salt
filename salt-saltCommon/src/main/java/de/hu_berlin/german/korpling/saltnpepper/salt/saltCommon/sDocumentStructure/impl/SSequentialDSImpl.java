@@ -19,12 +19,14 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStruct
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
+import org.eclipse.emf.common.notify.Notification;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +36,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SSequentialDSImpl#getSData <em>SData</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SSequentialDSImpl#getSStart <em>SStart</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SSequentialDSImpl#getSEnd <em>SEnd</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,6 +54,24 @@ public abstract class SSequentialDSImpl extends SNodeImpl implements SSequential
 	 */
 	protected static final Object SDATA_EDEFAULT = null;
 
+	/**
+	 * The default value of the '{@link #getSStart() <em>SStart</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSStart()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer SSTART_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getSEnd() <em>SEnd</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSEnd()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer SEND_EDEFAULT = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -106,6 +128,22 @@ public abstract class SSequentialDSImpl extends SNodeImpl implements SSequential
 	}
 
 	/**
+	 * {@inheritDoc SSequentialDS#getSStart()}. This method throws an exception, and has to be overridden by 
+	 * derived classes.
+	 */
+	public Integer getSStart() {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * {@inheritDoc SSequentialDS#getSEnd()}. This method throws an exception, and has to be overridden by 
+	 * 
+	 */
+	public Integer getSEnd() {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -115,6 +153,10 @@ public abstract class SSequentialDSImpl extends SNodeImpl implements SSequential
 		switch (featureID) {
 			case SDocumentStructurePackage.SSEQUENTIAL_DS__SDATA:
 				return getSData();
+			case SDocumentStructurePackage.SSEQUENTIAL_DS__SSTART:
+				return getSStart();
+			case SDocumentStructurePackage.SSEQUENTIAL_DS__SEND:
+				return getSEnd();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,6 +201,10 @@ public abstract class SSequentialDSImpl extends SNodeImpl implements SSequential
 		switch (featureID) {
 			case SDocumentStructurePackage.SSEQUENTIAL_DS__SDATA:
 				return SDATA_EDEFAULT == null ? getSData() != null : !SDATA_EDEFAULT.equals(getSData());
+			case SDocumentStructurePackage.SSEQUENTIAL_DS__SSTART:
+				return SSTART_EDEFAULT == null ? getSStart() != null : !SSTART_EDEFAULT.equals(getSStart());
+			case SDocumentStructurePackage.SSEQUENTIAL_DS__SEND:
+				return SEND_EDEFAULT == null ? getSEnd() != null : !SEND_EDEFAULT.equals(getSEnd());
 		}
 		return super.eIsSet(featureID);
 	}

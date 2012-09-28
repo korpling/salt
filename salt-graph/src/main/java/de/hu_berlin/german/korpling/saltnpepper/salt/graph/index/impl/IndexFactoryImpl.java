@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.*;
 
 import org.eclipse.emf.ecore.EClass;
@@ -84,8 +85,8 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleIndex createSimpleIndex() {
-		SimpleIndexImpl simpleIndex = new SimpleIndexImpl();
+	public <K, V> SimpleIndex<K, V> createSimpleIndex() {
+		SimpleIndexImpl<K, V> simpleIndex = new SimpleIndexImpl<K, V>();
 		return simpleIndex;
 	}
 
@@ -102,11 +103,23 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public ComplexIndex createComplexIndex() {
-		ComplexIndexImpl complexIndex = new ComplexIndexImpl();
+	public <K, V> ComplexIndex<K, V> createComplexIndex() {
+//		ComplexIndexImpl<K, V> complexIndex = new ComplexIndexImpl<K, V>();
+//		return complexIndex;
+		SlimComplexIndexImpl<K, V> complexIndex = new SlimComplexIndexImpl<K, V>();
 		return complexIndex;
+	}
+	
+	/**
+	 * Creates a {@link IdentifiableElementIndex} object which can contain the given value V as value objects.
+	 * @return {@link IdentifiableElementIndex} object 
+	 */
+	@Override
+	public <V extends IdentifiableElement> IdentifiableElementIndex<V> createIdentifiableElementIndex()
+	{
+		IdentifiableElementIndex<V> idIndex = new IdentifiableElementIndex<V>();
+		return idIndex;
 	}
 
 	/**
@@ -128,5 +141,4 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 	public static IndexPackage getPackage() {
 		return IndexPackage.eINSTANCE;
 	}
-
 } //IndexFactoryImpl

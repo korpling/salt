@@ -17,6 +17,9 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
@@ -36,27 +39,52 @@ public class DOTNode
 		
 		//open properties
 		retStr= retStr+ "[";
-		//shape
-		if (this.shape!= null) retStr= retStr+ "shape= "+ shape +",";
-		//color
-		if (this.color!= null) retStr= retStr+ "color= "+ color+",";
-		//style
-		if (this.style!= null) retStr= retStr+ "style= "+ style+",";
+		
+		List<String> props = new LinkedList<String>();
+		if(shape != null) 
+		{
+			props.add("shape=" + shape);
+		}
+		if(color != null) 
+		{
+			props.add("color=" + color);
+		}
+		if(style != null) 
+		{
+			props.add("style=" + style);
+		}
+		
+		
+		
 		if ((labels!= null) && (labels.size()> 0))
-		{	
-			retStr= retStr + "label=\"{{"+id + "}|";
+		{
+			String labelStr = "label=\"{{"+id + "}|";
 			boolean printSep= false;
 			for (String label: labels)
 			{
-				if (printSep)
-					retStr= retStr + "|";
+				if (printSep) 
+				{
+					labelStr= labelStr + "|";
+				}
 				printSep= true;
-				retStr= retStr +"{"+ label+"}";
+				labelStr= labelStr +"{"+ label+"}";
 			}
-			retStr= retStr + "}\"";
+			labelStr= labelStr + "}\"";
+			props.add(labelStr);
 		}
+		
+		Iterator<String> it = props.iterator();
+		while(it.hasNext())
+		{
+			retStr += it.next();
+			if(it.hasNext())
+			{
+				retStr += ",";
+			}
+		}
+		
 		//close properties
-		retStr= retStr + "]";
+		retStr= retStr + "];";
 		return(retStr);
 	}
 }

@@ -25,9 +25,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.NodeImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
@@ -50,8 +51,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SFeatura
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SIdentifiableElementAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SMetaAnnotatableElementAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcessingAnnotatableElementAccessor;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.NodeImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -61,12 +60,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.NodeImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSAnnotations <em>SAnnotations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSName <em>SName</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSElementId <em>SElement Id</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSId <em>SId</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSMetaAnnotations <em>SMeta Annotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSGraph <em>SGraph</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl#getSLayers <em>SLayers</em>}</li>
@@ -85,16 +84,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * @ordered
 	 */
 	protected static final String SNAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSName() <em>SName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String sName = SNAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSId() <em>SId</em>}' attribute.
@@ -135,6 +124,25 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	}
 
 	/**
+	 * Adds this object to the list of to be notified objects for all possible notifiers. 
+	 */
+	@Override
+	public boolean eNotificationRequired() {
+		return true;
+	}
+	
+	/**
+	 * {@inheritDoc SNamedElementImpl#eNotify(SNamedElement, Notification)}
+	 */
+	@Override
+	public void eNotify(Notification notification) 
+	{
+		SNamedElementImpl.eNotify(this, notification);
+		super.eNotify(notification);
+	}
+	
+	
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -144,35 +152,19 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		return SaltCorePackage.Literals.SNODE;
 	}
 
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	/**
+	 * {@inheritDoc SNamedElement#getSName()}
 	 */
 	public String getSName() {
-		return sName;
+		return(SNamedElementImpl.getSName(this));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#setSName(String)}
 	 */
-	public void setSName(String newSName) {
-		String oldSName = sName;
-		sName = newSName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SNODE__SNAME, oldSName, sName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SElementId getSElementId() {
-		SElementId sElementId = basicGetSElementId();
-		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
+	public void setSName(String newSName) 
+	{
+		SNamedElementImpl.setSName(this, newSName);
 	}
 
 	/**
@@ -217,15 +209,60 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		return((EList<SLayer>) (EList<? extends Object>)super.getLayers());
 	}
 
-	//=================== start: handling SIdentifiableElement	
+//=================== start: handling SIdentifiableElement	
 	/**
 	 * Delegatee for SIdentifiableElement
 	 */
 	private SIdentifiableElementAccessor sIdentAccessor= null;
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
+	 */
+	@Override
+	public void setId(String newSId) 
+	{
+		this.sIdentAccessor.setSId(this, newSId);
+	}
+	
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSId(SIdentifiableElement)}
+	 */
+	@Override
+	public String getSId() 
+	{
+		return(this.sIdentAccessor.getSId(this));
+	}
+
+	
+	/**
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
+	 */
+	@Override
+	public void setSId(String newSId) 
+	{
+		this.sIdentAccessor.setSId(this, newSId);
+	}
+
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSElementPath(SIdentifiableElement)}
+	 */
+	@Override
+	public URI getSElementPath() 
+	{
+		return(this.sIdentAccessor.getSElementPath(this));
+	}
+
+	/**
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementPath(SIdentifiableElement, URI)}
+	 */
+	@Override
+	public void setSElementPath(URI newSElementPath) 
+	{
+		this.sIdentAccessor.setSElementPath(this, newSElementPath);
+	}
+	
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSElementId(SIdentifiableElement)}
 	 */
 	public SElementId basicGetSElementId() 
 	{
@@ -233,8 +270,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
 	 */
 	public void setSElementId(SElementId newSElementId) 
 	{
@@ -244,39 +280,13 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public String getSId() 
-	{
-		return(this.sIdentAccessor.getSId(this));
+	public SElementId getSElementId() {
+		SElementId sElementId = basicGetSElementId();
+		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSId(String newSId) 
-	{
-		this.sIdentAccessor.setSId(this, newSId);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public URI getSElementPath() 
-	{
-		return(this.sIdentAccessor.getSElementPath(this));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSElementPath(URI newSElementPath) 
-	{
-		this.sIdentAccessor.setSElementPath(this, newSElementPath);
-	}
-//=================== end: handling SIdentifiableElement	
+//=================== end: handling SIdentifiableElement
 //=================== start: handling SAnnotatableElement	
 	/**
 	 * Delegatee for SAnnotatableElement
@@ -305,9 +315,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SAnnotation getSAnnotation(String fullName) 
+	public SAnnotation getSAnnotation(String qName) 
 	{
-		return(this.sAnnoAccessor.getSAnnotation(this, fullName));
+		return(this.sAnnoAccessor.getSAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -354,9 +364,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SMetaAnnotation getSMetaAnnotation(String fullName) 
+	public SMetaAnnotation getSMetaAnnotation(String qName) 
 	{
-		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, fullName));
+		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -403,9 +413,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SProcessingAnnotation getSProcessingAnnotation(String fullName) 
+	public SProcessingAnnotation getSProcessingAnnotation(String qName) 
 	{
-		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
+		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -496,9 +506,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	/**
 	 * This method returns the given object. It adds all properties of this to the given object.
 	 * @param clone the clone to which all properties of this shall be copied to
-	 * @return
+	 * @return the extended given object
 	 */
-	protected Object clone(SNode clone)
+	public Object clone(SNode clone)
 	{
 		super.clone(clone);
 		return(clone);
@@ -582,10 +592,10 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		switch (featureID) {
 			case SaltCorePackage.SNODE__SANNOTATIONS:
 				return ((InternalEList<?>)getSAnnotations()).basicRemove(otherEnd, msgs);
-			case SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS:
-				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SNODE__SFEATURES:
 				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
+			case SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS:
+				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SNODE__SMETA_ANNOTATIONS:
 				return ((InternalEList<?>)getSMetaAnnotations()).basicRemove(otherEnd, msgs);
 		}
@@ -602,6 +612,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		switch (featureID) {
 			case SaltCorePackage.SNODE__SANNOTATIONS:
 				return getSAnnotations();
+			case SaltCorePackage.SNODE__SFEATURES:
+				return getSFeatures();
 			case SaltCorePackage.SNODE__SNAME:
 				return getSName();
 			case SaltCorePackage.SNODE__SELEMENT_ID:
@@ -613,8 +625,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return getSElementPath();
 			case SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS:
 				return getSProcessingAnnotations();
-			case SaltCorePackage.SNODE__SFEATURES:
-				return getSFeatures();
 			case SaltCorePackage.SNODE__SMETA_ANNOTATIONS:
 				return getSMetaAnnotations();
 			case SaltCorePackage.SNODE__SGRAPH:
@@ -639,6 +649,10 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				getSAnnotations().clear();
 				getSAnnotations().addAll((Collection<? extends SAnnotation>)newValue);
 				return;
+			case SaltCorePackage.SNODE__SFEATURES:
+				getSFeatures().clear();
+				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
+				return;
 			case SaltCorePackage.SNODE__SNAME:
 				setSName((String)newValue);
 				return;
@@ -650,10 +664,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return;
 			case SaltCorePackage.SNODE__SELEMENT_PATH:
 				setSElementPath((URI)newValue);
-				return;
-			case SaltCorePackage.SNODE__SFEATURES:
-				getSFeatures().clear();
-				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
 				return;
 			case SaltCorePackage.SNODE__SMETA_ANNOTATIONS:
 				getSMetaAnnotations().clear();
@@ -681,6 +691,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 			case SaltCorePackage.SNODE__SANNOTATIONS:
 				getSAnnotations().clear();
 				return;
+			case SaltCorePackage.SNODE__SFEATURES:
+				getSFeatures().clear();
+				return;
 			case SaltCorePackage.SNODE__SNAME:
 				setSName(SNAME_EDEFAULT);
 				return;
@@ -692,9 +705,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return;
 			case SaltCorePackage.SNODE__SELEMENT_PATH:
 				setSElementPath(SELEMENT_PATH_EDEFAULT);
-				return;
-			case SaltCorePackage.SNODE__SFEATURES:
-				getSFeatures().clear();
 				return;
 			case SaltCorePackage.SNODE__SMETA_ANNOTATIONS:
 				getSMetaAnnotations().clear();
@@ -719,8 +729,10 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		switch (featureID) {
 			case SaltCorePackage.SNODE__SANNOTATIONS:
 				return !getSAnnotations().isEmpty();
+			case SaltCorePackage.SNODE__SFEATURES:
+				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SNODE__SNAME:
-				return SNAME_EDEFAULT == null ? sName != null : !SNAME_EDEFAULT.equals(sName);
+				return SNAME_EDEFAULT == null ? getSName() != null : !SNAME_EDEFAULT.equals(getSName());
 			case SaltCorePackage.SNODE__SELEMENT_ID:
 				return basicGetSElementId() != null;
 			case SaltCorePackage.SNODE__SID:
@@ -729,8 +741,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				return SELEMENT_PATH_EDEFAULT == null ? getSElementPath() != null : !SELEMENT_PATH_EDEFAULT.equals(getSElementPath());
 			case SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS:
 				return !getSProcessingAnnotations().isEmpty();
-			case SaltCorePackage.SNODE__SFEATURES:
-				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SNODE__SMETA_ANNOTATIONS:
 				return !getSMetaAnnotations().isEmpty();
 			case SaltCorePackage.SNODE__SGRAPH:
@@ -754,6 +764,12 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				default: return -1;
 			}
 		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (derivedFeatureID) {
+				case SaltCorePackage.SNODE__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == SNamedElement.class) {
 			switch (derivedFeatureID) {
 				case SaltCorePackage.SNODE__SNAME: return SaltCorePackage.SNAMED_ELEMENT__SNAME;
@@ -771,12 +787,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (baseClass == SProcessingAnnotatableElement.class) {
 			switch (derivedFeatureID) {
 				case SaltCorePackage.SNODE__SPROCESSING_ANNOTATIONS: return SaltCorePackage.SPROCESSING_ANNOTATABLE_ELEMENT__SPROCESSING_ANNOTATIONS;
-				default: return -1;
-			}
-		}
-		if (baseClass == SFeaturableElement.class) {
-			switch (derivedFeatureID) {
-				case SaltCorePackage.SNODE__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
 				default: return -1;
 			}
 		}
@@ -802,6 +812,12 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				default: return -1;
 			}
 		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (baseFeatureID) {
+				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SNODE__SFEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == SNamedElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SNAMED_ELEMENT__SNAME: return SaltCorePackage.SNODE__SNAME;
@@ -822,12 +838,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				default: return -1;
 			}
 		}
-		if (baseClass == SFeaturableElement.class) {
-			switch (baseFeatureID) {
-				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SNODE__SFEATURES;
-				default: return -1;
-			}
-		}
 		if (baseClass == SMetaAnnotatableElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS: return SaltCorePackage.SNODE__SMETA_ANNOTATIONS;
@@ -835,22 +845,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sName: ");
-		result.append(sName);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SNodeImpl

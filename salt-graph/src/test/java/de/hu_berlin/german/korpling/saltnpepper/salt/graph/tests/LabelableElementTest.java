@@ -45,6 +45,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#getLabelsByNamespace(java.lang.String) <em>Get Labels By Namespace</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#hasLabel(java.lang.String) <em>Has Label</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#removeLabel(java.lang.String, java.lang.String) <em>Remove Label</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#differences(java.lang.Object) <em>Differences</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -128,7 +129,7 @@ public class LabelableElementTest extends TestCase {
 		//test 1 - should fail
 		try {
 			labelableElement.addLabel(null);
-			fail("shouldn�t add an empty label");
+			fail("shouldn't add an empty label");
 		} catch (Exception e) {
 		}
 		
@@ -363,6 +364,18 @@ public class LabelableElementTest extends TestCase {
 	}
 
 	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#differences(java.lang.Object) <em>Differences</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#differences(java.lang.Object)
+	 */
+	public void testDifferences__Object() 
+	{
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+	}
+
+	/**
 	 * Tests the '{@link de.util.graph.LabelableElement#addLabel(de.util.graph.Label) <em>Add Label</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -473,10 +486,7 @@ public class LabelableElementTest extends TestCase {
 	}
 
 	public void testDifferences()
-	{
-		System.out.println("testing: "+ this.getFixture());
-		System.out.println(this.getFixture().differences(this.getFixture()));
-		
+	{		
 		assertNull(this.getFixture().differences(this.getFixture()));
 	}
 } //LabelableElementTest

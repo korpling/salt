@@ -109,7 +109,39 @@ public enum STYPE_NAME implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SPOINTING_RELATION(7, "SPOINTING_RELATION", "SPointingRelation");
+	SPOINTING_RELATION(7, "SPOINTING_RELATION", "SPointingRelation"), /**
+	 * The '<em><b>STEXT OVERLAPPING RELATION</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #STEXT_OVERLAPPING_RELATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	STEXT_OVERLAPPING_RELATION(8, "STEXT_OVERLAPPING_RELATION", "STEXT_OVERLAPPING_RELATION"), /**
+	 * The '<em><b>STIME OVERLAPPING RELATION</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #STIME_OVERLAPPING_RELATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	STIME_OVERLAPPING_RELATION(9, "STIME_OVERLAPPING_RELATION", "STIME_OVERLAPPING_RELATION"), /**
+	 * The '<em><b>SSEQUENTIAL RELATION</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SSEQUENTIAL_RELATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SSEQUENTIAL_RELATION(10, "SSEQUENTIAL_RELATION", "SSEQUENTIAL_RELATION"), /**
+	 * The '<em><b>SORDER RELATION</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SORDER_RELATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SORDER_RELATION(11, "SORDER_RELATION", "SORDER_RELATION");
 
 	/**
 	 * The '<em><b>STEXTUAL DS</b></em>' literal value.
@@ -232,6 +264,66 @@ public enum STYPE_NAME implements Enumerator {
 	public static final int SPOINTING_RELATION_VALUE = 7;
 
 	/**
+	 * The '<em><b>STEXT OVERLAPPING RELATION</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>STEXT OVERLAPPING RELATION</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #STEXT_OVERLAPPING_RELATION
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STEXT_OVERLAPPING_RELATION_VALUE = 8;
+
+	/**
+	 * The '<em><b>STIME OVERLAPPING RELATION</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>STIME OVERLAPPING RELATION</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #STIME_OVERLAPPING_RELATION
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STIME_OVERLAPPING_RELATION_VALUE = 9;
+
+	/**
+	 * The '<em><b>SSEQUENTIAL RELATION</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SSEQUENTIAL RELATION</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SSEQUENTIAL_RELATION
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SSEQUENTIAL_RELATION_VALUE = 10;
+
+	/**
+	 * The '<em><b>SORDER RELATION</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SORDER RELATION</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SORDER_RELATION
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SORDER_RELATION_VALUE = 11;
+
+	/**
 	 * An array of all the '<em><b>STYPE NAME</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -247,6 +339,10 @@ public enum STYPE_NAME implements Enumerator {
 			SSPANNING_RELATION,
 			SDOMINANCE_RELATION,
 			SPOINTING_RELATION,
+			STEXT_OVERLAPPING_RELATION,
+			STIME_OVERLAPPING_RELATION,
+			SSEQUENTIAL_RELATION,
+			SORDER_RELATION,
 		};
 
 	/**
@@ -305,6 +401,10 @@ public enum STYPE_NAME implements Enumerator {
 			case SSPANNING_RELATION_VALUE: return SSPANNING_RELATION;
 			case SDOMINANCE_RELATION_VALUE: return SDOMINANCE_RELATION;
 			case SPOINTING_RELATION_VALUE: return SPOINTING_RELATION;
+			case STEXT_OVERLAPPING_RELATION_VALUE: return STEXT_OVERLAPPING_RELATION;
+			case STIME_OVERLAPPING_RELATION_VALUE: return STIME_OVERLAPPING_RELATION;
+			case SSEQUENTIAL_RELATION_VALUE: return SSEQUENTIAL_RELATION;
+			case SORDER_RELATION_VALUE: return SORDER_RELATION;
 		}
 		return null;
 	}

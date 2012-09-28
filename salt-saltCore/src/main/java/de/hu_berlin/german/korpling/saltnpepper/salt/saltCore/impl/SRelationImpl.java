@@ -64,12 +64,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcess
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSAnnotations <em>SAnnotations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSName <em>SName</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSElementId <em>SElement Id</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSId <em>SId</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSElementPath <em>SElement Path</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSProcessingAnnotations <em>SProcessing Annotations</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSFeatures <em>SFeatures</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSMetaAnnotations <em>SMeta Annotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSSource <em>SSource</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl#getSTarget <em>STarget</em>}</li>
@@ -91,16 +91,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	 * @ordered
 	 */
 	protected static final String SNAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSName() <em>SName</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String sName = SNAME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSId() <em>SId</em>}' attribute.
@@ -151,45 +141,92 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#getSName()}
 	 */
 	public String getSName() {
-		return sName;
+		return(SNamedElementImpl.getSName(this));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * {@inheritDoc SNamedElement#setSName(String)}
 	 */
-	public void setSName(String newSName) {
-		String oldSName = sName;
-		sName = newSName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SaltCorePackage.SRELATION__SNAME, oldSName, sName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SElementId getSElementId() {
-		SElementId sElementId = basicGetSElementId();
-		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
+	public void setSName(String newSName) 
+	{
+		SNamedElementImpl.setSName(this, newSName);
 	}
 	
-//=================== start: handling SIdentifiableElement	
+	/**
+	 * Adds this object to the list of to be notified objects for all possible notifiers. 
+	 */
+	@Override
+	public boolean eNotificationRequired() {
+		return true;
+	}
+	
+	/**
+	 * Delegates the notification to others
+	 * {@inheritDoc SNamedElementImpl#eNotify(SNamedElement, Notification)}
+	 */
+	@Override
+	public void eNotify(Notification notification) 
+	{
+		SNamedElementImpl.eNotify(this, notification);
+		super.eNotify(notification);
+	}
+	//=================== start: handling SIdentifiableElement	
 	/**
 	 * Delegatee for SIdentifiableElement
 	 */
 	private SIdentifiableElementAccessor sIdentAccessor= null;
 	
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
+	 */
+	@Override
+	public void setId(String newSId) 
+	{
+		this.sIdentAccessor.setSId(this, newSId);
+	}
+	
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSId(SIdentifiableElement)}
+	 */
+	@Override
+	public String getSId() 
+	{
+		return(this.sIdentAccessor.getSId(this));
+	}
+
+	
+	/**
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
+	 */
+	@Override
+	public void setSId(String newSId) 
+	{
+		this.sIdentAccessor.setSId(this, newSId);
+	}
+
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSElementPath(SIdentifiableElement)}
+	 */
+	@Override
+	public URI getSElementPath() 
+	{
+		return(this.sIdentAccessor.getSElementPath(this));
+	}
+
+	/**
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementPath(SIdentifiableElement, URI)}
+	 */
+	@Override
+	public void setSElementPath(URI newSElementPath) 
+	{
+		this.sIdentAccessor.setSElementPath(this, newSElementPath);
+	}
+	
+	/**
+	 * Delegates getting of id to {@link SIdentifiableElementAccessor#getSElementId(SIdentifiableElement)}
 	 */
 	public SElementId basicGetSElementId() 
 	{
@@ -197,8 +234,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Delegates setting of id to {@link SIdentifiableElementAccessor#setSElementId(SIdentifiableElement, SElementId)}
 	 */
 	public void setSElementId(SElementId newSElementId) 
 	{
@@ -208,37 +244,11 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public String getSId() 
-	{
-		return(this.sIdentAccessor.getSId(this));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSId(String newSId) 
-	{
-		this.sIdentAccessor.setSId(this, newSId);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public URI getSElementPath() 
-	{
-		return(this.sIdentAccessor.getSElementPath(this));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setSElementPath(URI newSElementPath) 
-	{
-		this.sIdentAccessor.setSElementPath(this, newSElementPath);
+	public SElementId getSElementId() {
+		SElementId sElementId = basicGetSElementId();
+		return sElementId != null && sElementId.eIsProxy() ? (SElementId)eResolveProxy((InternalEObject)sElementId) : sElementId;
 	}
 //=================== end: handling SIdentifiableElement	
 //=================== start: handling SAnnotatableElement	
@@ -269,9 +279,9 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SAnnotation getSAnnotation(String fullName) 
+	public SAnnotation getSAnnotation(String qName) 
 	{
-		return(this.sAnnoAccessor.getSAnnotation(this, fullName));
+		return(this.sAnnoAccessor.getSAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -318,9 +328,9 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SMetaAnnotation getSMetaAnnotation(String fullName) 
+	public SMetaAnnotation getSMetaAnnotation(String qName) 
 	{
-		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, fullName));
+		return(this.sMetaAnnoAccessor.getSMetaAnnotation(this, qName));
 	}
 
 	/**
@@ -372,9 +382,9 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public SProcessingAnnotation getSProcessingAnnotation(String fullName) 
+	public SProcessingAnnotation getSProcessingAnnotation(String qName) 
 	{
-		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, fullName));
+		return(this.sProcAnnoAccessor.getSProcessingAnnotation(this, qName));
 	}
 /**
 	 * <!-- begin-user-doc -->
@@ -550,7 +560,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 
 	
 //---------------------------- start sTypes	
-	public static String KW_STYPE= "STYPE";
+//	public static String KW_STYPE= "STYPE";
 	public static String KW_STYPE_SEP= "::";
 	
 	/**
@@ -560,7 +570,7 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	public EList<String> getSTypes() 
 	{
 		EList<String> retVal= null;
-		SFeature sFeature= this.getSFeature(SaltCorePackage.eNS_PREFIX, KW_STYPE);
+		SFeature sFeature= this.getSFeature(SaltCorePackage.eNS_PREFIX, SaltCoreFactory.SALT_CORE_SFEATURES.STYPE.toString());
 		if (sFeature!= null)
 		{
 			String parts[]=sFeature.getSValue().toString().split(KW_STYPE_SEP); 
@@ -592,12 +602,12 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		if (	(sType!= null) &&
 				(!sType.equals("")))
 		{	
-			SFeature sFeature= this.getSFeature(SaltCorePackage.eNS_PREFIX, KW_STYPE);
+			SFeature sFeature= this.getSFeature(SaltCorePackage.eNS_PREFIX, SaltCoreFactory.SALT_CORE_SFEATURES.STYPE.toString());
 			if (sFeature== null)
 			{
 				sFeature= SaltCoreFactory.eINSTANCE.createSFeature();
 				sFeature.setSNS(SaltCorePackage.eNS_PREFIX);
-				sFeature.setSName(KW_STYPE);
+				sFeature.setSName(SaltCoreFactory.SALT_CORE_SFEATURES.STYPE.toString());
 				this.addSFeature(sFeature);
 			}
 			if (sFeature.getSValue()== null)
@@ -619,10 +629,10 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		switch (featureID) {
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				return ((InternalEList<?>)getSAnnotations()).basicRemove(otherEnd, msgs);
-			case SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS:
-				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SRELATION__SFEATURES:
 				return ((InternalEList<?>)getSFeatures()).basicRemove(otherEnd, msgs);
+			case SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS:
+				return ((InternalEList<?>)getSProcessingAnnotations()).basicRemove(otherEnd, msgs);
 			case SaltCorePackage.SRELATION__SMETA_ANNOTATIONS:
 				return ((InternalEList<?>)getSMetaAnnotations()).basicRemove(otherEnd, msgs);
 		}
@@ -639,6 +649,8 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		switch (featureID) {
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				return getSAnnotations();
+			case SaltCorePackage.SRELATION__SFEATURES:
+				return getSFeatures();
 			case SaltCorePackage.SRELATION__SNAME:
 				return getSName();
 			case SaltCorePackage.SRELATION__SELEMENT_ID:
@@ -650,8 +662,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return getSElementPath();
 			case SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS:
 				return getSProcessingAnnotations();
-			case SaltCorePackage.SRELATION__SFEATURES:
-				return getSFeatures();
 			case SaltCorePackage.SRELATION__SMETA_ANNOTATIONS:
 				return getSMetaAnnotations();
 			case SaltCorePackage.SRELATION__SSOURCE:
@@ -684,6 +694,10 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				getSAnnotations().clear();
 				getSAnnotations().addAll((Collection<? extends SAnnotation>)newValue);
 				return;
+			case SaltCorePackage.SRELATION__SFEATURES:
+				getSFeatures().clear();
+				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
+				return;
 			case SaltCorePackage.SRELATION__SNAME:
 				setSName((String)newValue);
 				return;
@@ -695,10 +709,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return;
 			case SaltCorePackage.SRELATION__SELEMENT_PATH:
 				setSElementPath((URI)newValue);
-				return;
-			case SaltCorePackage.SRELATION__SFEATURES:
-				getSFeatures().clear();
-				getSFeatures().addAll((Collection<? extends SFeature>)newValue);
 				return;
 			case SaltCorePackage.SRELATION__SMETA_ANNOTATIONS:
 				getSMetaAnnotations().clear();
@@ -732,6 +742,9 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				getSAnnotations().clear();
 				return;
+			case SaltCorePackage.SRELATION__SFEATURES:
+				getSFeatures().clear();
+				return;
 			case SaltCorePackage.SRELATION__SNAME:
 				setSName(SNAME_EDEFAULT);
 				return;
@@ -743,9 +756,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return;
 			case SaltCorePackage.SRELATION__SELEMENT_PATH:
 				setSElementPath(SELEMENT_PATH_EDEFAULT);
-				return;
-			case SaltCorePackage.SRELATION__SFEATURES:
-				getSFeatures().clear();
 				return;
 			case SaltCorePackage.SRELATION__SMETA_ANNOTATIONS:
 				getSMetaAnnotations().clear();
@@ -776,8 +786,10 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		switch (featureID) {
 			case SaltCorePackage.SRELATION__SANNOTATIONS:
 				return !getSAnnotations().isEmpty();
+			case SaltCorePackage.SRELATION__SFEATURES:
+				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SRELATION__SNAME:
-				return SNAME_EDEFAULT == null ? sName != null : !SNAME_EDEFAULT.equals(sName);
+				return SNAME_EDEFAULT == null ? getSName() != null : !SNAME_EDEFAULT.equals(getSName());
 			case SaltCorePackage.SRELATION__SELEMENT_ID:
 				return basicGetSElementId() != null;
 			case SaltCorePackage.SRELATION__SID:
@@ -786,8 +798,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				return SELEMENT_PATH_EDEFAULT == null ? getSElementPath() != null : !SELEMENT_PATH_EDEFAULT.equals(getSElementPath());
 			case SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS:
 				return !getSProcessingAnnotations().isEmpty();
-			case SaltCorePackage.SRELATION__SFEATURES:
-				return !getSFeatures().isEmpty();
 			case SaltCorePackage.SRELATION__SMETA_ANNOTATIONS:
 				return !getSMetaAnnotations().isEmpty();
 			case SaltCorePackage.SRELATION__SSOURCE:
@@ -817,6 +827,12 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				default: return -1;
 			}
 		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (derivedFeatureID) {
+				case SaltCorePackage.SRELATION__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == SNamedElement.class) {
 			switch (derivedFeatureID) {
 				case SaltCorePackage.SRELATION__SNAME: return SaltCorePackage.SNAMED_ELEMENT__SNAME;
@@ -834,12 +850,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		if (baseClass == SProcessingAnnotatableElement.class) {
 			switch (derivedFeatureID) {
 				case SaltCorePackage.SRELATION__SPROCESSING_ANNOTATIONS: return SaltCorePackage.SPROCESSING_ANNOTATABLE_ELEMENT__SPROCESSING_ANNOTATIONS;
-				default: return -1;
-			}
-		}
-		if (baseClass == SFeaturableElement.class) {
-			switch (derivedFeatureID) {
-				case SaltCorePackage.SRELATION__SFEATURES: return SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES;
 				default: return -1;
 			}
 		}
@@ -865,6 +875,12 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				default: return -1;
 			}
 		}
+		if (baseClass == SFeaturableElement.class) {
+			switch (baseFeatureID) {
+				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SRELATION__SFEATURES;
+				default: return -1;
+			}
+		}
 		if (baseClass == SNamedElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SNAMED_ELEMENT__SNAME: return SaltCorePackage.SRELATION__SNAME;
@@ -885,12 +901,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 				default: return -1;
 			}
 		}
-		if (baseClass == SFeaturableElement.class) {
-			switch (baseFeatureID) {
-				case SaltCorePackage.SFEATURABLE_ELEMENT__SFEATURES: return SaltCorePackage.SRELATION__SFEATURES;
-				default: return -1;
-			}
-		}
 		if (baseClass == SMetaAnnotatableElement.class) {
 			switch (baseFeatureID) {
 				case SaltCorePackage.SMETA_ANNOTATABLE_ELEMENT__SMETA_ANNOTATIONS: return SaltCorePackage.SRELATION__SMETA_ANNOTATIONS;
@@ -898,22 +908,6 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (sName: ");
-		result.append(sName);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SRelationImpl
