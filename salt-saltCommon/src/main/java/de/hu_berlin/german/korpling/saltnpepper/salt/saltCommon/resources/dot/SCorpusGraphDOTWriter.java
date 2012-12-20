@@ -167,6 +167,10 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 		DOTNode dotNode= new DOTNode();
 		dotNode.id= currSNode.getId().toString();
 		
+		//print sName
+		if (currSNode.getSName()!= null)
+			dotNode.labels.add("sName"+"= "+currSNode.getSName());
+		
 		//create all annotations incl. meta annotations
 		for (SMetaAnnotation sMetaAnno: currSNode.getSMetaAnnotations())
 		{
@@ -217,6 +221,10 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 //				dotEdge.fromId= fromSNode.getId().toString();
 //			}
 			dotEdge.toId= currSNode.getId().toString();	
+			
+			//print sName
+			if (sRelation.getSName()!= null)
+				dotEdge.labels.add("sName"+"= "+sRelation.getSName());
 			
 			{//print edge type, if exists
 				EList<String> sTypes= sRelation.getSTypes(); 
