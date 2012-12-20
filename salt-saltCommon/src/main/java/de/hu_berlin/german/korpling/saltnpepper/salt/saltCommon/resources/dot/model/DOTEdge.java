@@ -67,10 +67,10 @@ public class DOTEdge
 			{
 				if (printSep) 
 				{
-					labelStr= labelStr + "|";
+					labelStr= labelStr + ", ";
 				}
 				printSep= true;
-				labelStr= labelStr +"{"+ label+"}";
+				labelStr= labelStr + label;
 			}
 			labelStr= labelStr + "\"";
 			props.add(labelStr);

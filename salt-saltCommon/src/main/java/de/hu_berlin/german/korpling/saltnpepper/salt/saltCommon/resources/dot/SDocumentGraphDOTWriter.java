@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -52,8 +54,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class SDocumentGraphDOTWriter implements TraversalObject
 {
@@ -291,7 +291,11 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 	{
 		DOTNode dotNode= new DOTNode();
 		dotNode.id= currSNode.getId().toString();
-				
+			
+		//print sName
+		if (currSNode.getSName()!= null)
+			dotNode.labels.add("sName"+"= "+currSNode.getSName());
+		
 		//create all annotations incl. meta annotations
 		for (SAnnotation sAnno: currSNode.getSAnnotations())
 		{
@@ -432,6 +436,11 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			DOTEdge dotEdge= new DOTEdge();
 			dotEdge.fromId= fromSNode.getId().toString();
 			dotEdge.toId= currSNode.getId().toString();	
+			
+//			//print sName
+//			if (relation.getSName()!= null)
+//				dotEdge.labels.add("sName"+"= "+relation.getSName());
+			
 			{//print edge type, if exists
 				EList<String> sTypes= relation.getSTypes(); 
 				if (	(sTypes!= null) &&
