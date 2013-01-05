@@ -17,17 +17,16 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules;
 
-import java.awt.font.ShapeGraphicAttribute;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.osgi.service.log.LogService;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.exceptions.GraphModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.exceptions.GraphModuleException;
 
 
 /**

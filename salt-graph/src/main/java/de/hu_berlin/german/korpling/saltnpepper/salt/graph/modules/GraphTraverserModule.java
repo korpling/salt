@@ -31,7 +31,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphTraverserException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 
 
 /**
@@ -49,9 +48,9 @@ public class GraphTraverserModule extends GraphModule
 	
 	/**
 	 * Traverses a graph in the given order traverseType and starts traversing with the given startNodes. When a node is reached, 
-	 * first this method will invoke the method {@link GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_MODE, String, Edge, Node, long)} 
-	 * of the given callback handler traverseHandler, second the method {@link GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)}
-	 * is invoked. When a node was left, the method {@link GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)} 
+	 * first this method will invoke the method {@link GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_TYPE, String, Edge, Node, long)} 
+	 * of the given callback handler traverseHandler, second the method {@link GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_TYPE, String, Node, Edge, Node, long)}
+	 * is invoked. When a node was left, the method {@link GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_TYPE, String, Node, Edge, Node, long)} 
 	 * is invoked. When calling these methods, the traverseId will be passed, so that the callback handler knows which traversal is meant.
 	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
 	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
@@ -71,9 +70,9 @@ public class GraphTraverserModule extends GraphModule
 	
 	/**
 	 * Traverses a graph in the given order traverseType and starts traversing with the given startNodes. When a node is reached, 
-	 * first this method will invoke the method {@link GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_MODE, String, Edge, Node, long)} 
-	 * of the given callback handler traverseHandler, second the method {@link GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)}
-	 * is invoked. When a node was left, the method {@link GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)} 
+	 * first this method will invoke the method {@link GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_TYPE, String, Edge, Node, long)} 
+	 * of the given callback handler traverseHandler, second the method {@link GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_TYPE, String, Node, Edge, Node, long)}
+	 * is invoked. When a node was left, the method {@link GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_TYPE, String, Node, Edge, Node, long)} 
 	 * is invoked. When calling these methods, the traverseId will be passed, so that the callback handler knows which traversal is meant.
 	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
 	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
