@@ -1100,6 +1100,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		// Obtain other dependent packages
 		SaltCorePackage theSaltCorePackage = (SaltCorePackage)EPackage.Registry.INSTANCE.getEPackage(SaltCorePackage.eNS_URI);
 		SCorpusStructurePackage theSCorpusStructurePackage = (SCorpusStructurePackage)EPackage.Registry.INSTANCE.getEPackage(SCorpusStructurePackage.eNS_URI);
+		SaltCommonPackage theSaltCommonPackage = (SaltCommonPackage)EPackage.Registry.INSTANCE.getEPackage(SaltCommonPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1228,6 +1229,10 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		addEParameter(op, this.getSSequentialDS(), "sSequentialDS", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEIntegerObject(), "sStart", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEIntegerObject(), "sEnd", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sDocumentGraphEClass, null, "tokenize", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(sDocumentGraphEClass, theSaltCommonPackage.getTokenizer(), "createTokenizer", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sTextualDSEClass, STextualDS.class, "STextualDS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSTextualDS_SText(), ecorePackage.getEString(), "sText", null, 0, 1, STextualDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

@@ -18,6 +18,8 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.*;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer;
+
 import java.util.Properties;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusDocumentRelation;
@@ -144,6 +146,8 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 				return createSFEATURE_NAMEFromString(eDataType, initialValue);
 			case SaltCommonPackage.PROPERTIES:
 				return createPropertiesFromString(eDataType, initialValue);
+			case SaltCommonPackage.TOKENIZER:
+				return createTokenizerFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -161,6 +165,8 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 				return convertSFEATURE_NAMEToString(eDataType, instanceValue);
 			case SaltCommonPackage.PROPERTIES:
 				return convertPropertiesToString(eDataType, instanceValue);
+			case SaltCommonPackage.TOKENIZER:
+				return convertTokenizerToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -211,6 +217,24 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	 * @generated
 	 */
 	public String convertPropertiesToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Tokenizer createTokenizerFromString(EDataType eDataType, String initialValue) {
+		return (Tokenizer)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertTokenizerToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

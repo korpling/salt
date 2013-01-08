@@ -24,6 +24,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl.SCorpusStructurePackageImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SDocumentStructurePackageImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 
 
@@ -70,6 +71,13 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 	 * @generated
 	 */
 	private EDataType propertiesEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType tokenizerEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -193,6 +201,15 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getTokenizer() {
+		return tokenizerEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SaltCommonFactory getSaltCommonFactory() {
 		return (SaltCommonFactory)getEFactoryInstance();
 	}
@@ -225,6 +242,7 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 
 		// Create data types
 		propertiesEDataType = createEDataType(PROPERTIES);
+		tokenizerEDataType = createEDataType(TOKENIZER);
 	}
 
 	/**
@@ -320,6 +338,7 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 
 		// Initialize data types
 		initEDataType(propertiesEDataType, Properties.class, "Properties", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(tokenizerEDataType, Tokenizer.class, "Tokenizer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

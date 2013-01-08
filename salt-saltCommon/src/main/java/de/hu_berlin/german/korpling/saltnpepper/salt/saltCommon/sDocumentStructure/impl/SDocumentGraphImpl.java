@@ -67,6 +67,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
@@ -765,6 +766,31 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		sequence.setSSequentialDS(sSequentialDS);
 		this.addSToken(sTok, sequence);
 		return(sTok);
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#tokenize()}
+	 */
+	public void tokenize() {
+		if (	(this.getSTextualDSs()!= null)&&
+				(this.getSTextualDSs().size()>0))
+		{
+			Tokenizer tokenizer= createTokenizer();
+			for (STextualDS sTextualDS: this.getSTextualDSs())
+			{
+				if (sTextualDS!= null)
+					tokenizer.tokenize(sTextualDS);
+			}
+		}
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#createTokenizer()}
+	 */
+	public Tokenizer createTokenizer() {
+		Tokenizer tokenizer= new Tokenizer();
+		tokenizer.setsDocumentGraph(this);
+		return(tokenizer);
 	}
 
 	/**

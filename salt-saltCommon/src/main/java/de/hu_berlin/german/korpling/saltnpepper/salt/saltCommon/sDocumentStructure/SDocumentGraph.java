@@ -17,7 +17,6 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure;
 
-import java.util.Hashtable;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
@@ -25,6 +24,7 @@ import org.eclipse.emf.common.util.EList;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
@@ -583,6 +583,35 @@ public interface SDocumentGraph extends SGraph {
 	SToken createSToken(SSequentialDS sSequentialDS, Integer sStart, Integer sEnd);
 
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Tokenizes all {@link STextualDS} object being contained in this {@link SDocumentGraph} object. The Tokenization is similar to the tokenization made by the TreeTagger tokenizer. This method calls the method {@link #createTokenizer()} and initilizes with automatic detected values. The language will be detected automatically for each {@link STextualDS} object by use of the {@link TextCategorizer} (see: <a href="http://textcat.sourceforge.net/doc/org/knallgrau/utils/textcat/TextCategorizer.html">http://textcat.sourceforge.net/doc/org/knallgrau/utils/textcat/TextCategorizer.html</a>). If the language is one of the given ones: english, french, italian and german, abbreviations also taken from the Treetagger will be used.
+	 * To customize these settings use the method {@link #createTokenizer()}.
+	 * 
+	 * The used Treetagger is a reimplementation in Java with permission from the original TreeTagger tokenizer in Perl by Helmut Schmid (see: <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/">http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>).
+	 * For each token detected in the text given by <code>sTextualDS.getSText()</code> an {@link SToken} object is created and linked with the {@link STextualDS} object via a new {@link STextualRelation} object containing the textual offset.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	void tokenize();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Creates a new {@link Tokenizer} object to tokenize the set {@link STextualDS} objects being contained in this {@link SDocumentGraph} object. To customize the tokenization, set take a look to the properties of the returned {@link Tokenizer} object. This method is used by the method {@link #tokenize()}.
+	 * The used Treetagger is a reimplementation in Java with permission from the original TreeTagger tokenizer in Perl by Helmut Schmid (see: <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/">http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>).
+	 * For each token detected in the text given by <code>sTextualDS.getSText()</code> an {@link SToken} object is created and linked with the {@link STextualDS} object via a new {@link STextualRelation} object containing the textual offset. 
+	 * If the set {@link STextualDS} object is empty or if it does not belong to this {@link SDocumentGraph} object an exception is thrown. 
+	 * <!-- end-model-doc -->
+	 * @model dataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.Tokenizer"
+	 * @generated
+	 */
+	Tokenizer createTokenizer();
+
 	/**
 	 * Sets the SName of the SDocumentGraphImpl, but the parameter newSName is just a dummy. The SName of the corresponding SDocument plus "_graph" will be the SName.
 	 * @param newSName this value will be ignored

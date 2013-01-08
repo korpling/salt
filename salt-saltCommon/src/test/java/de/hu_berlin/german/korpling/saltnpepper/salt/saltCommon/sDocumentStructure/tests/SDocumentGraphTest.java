@@ -45,6 +45,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
@@ -96,6 +97,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getRootsBySRelation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME) <em>Get Roots By SRelation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getRootsBySRelationSType(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME) <em>Get Roots By SRelation SType</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSToken(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS, java.lang.Integer, java.lang.Integer) <em>Create SToken</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#tokenize() <em>Tokenize</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createTokenizer() <em>Create Tokenizer</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -1817,5 +1820,51 @@ public class SDocumentGraphTest extends TestCase {
 		assertEquals(Integer.valueOf(16), sequence.getSStart());
 		assertEquals(Integer.valueOf(17), sequence.getSEnd());
 		assertEquals(primaryText, sequence.getSSequentialDS());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#tokenize() <em>Tokenize</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#tokenize()
+	 */
+	public void testTokenize() 
+	{
+		String text1="This is a sample.";
+		String text2="This is the second sample.";
+		
+		STextualDS sText1= this.getFixture().createSTextualDS(text1);
+		STextualDS sText2= this.getFixture().createSTextualDS(text2);
+		
+		this.getFixture().tokenize();
+		
+		assertEquals(11, this.getFixture().getSTokens().size());
+		assertEquals(11, this.getFixture().getSTextualRelations().size());
+		
+		int relTosText1=0;
+		int relTosText2=0;
+		for (STextualRelation textRel: this.getFixture().getSTextualRelations())
+		{
+			if (textRel.getSTarget().equals(sText2))
+				relTosText2++;
+			else if (textRel.getSTarget().equals(sText1))
+				relTosText1++;
+		}
+		
+		assertEquals(5, relTosText1);
+		assertEquals(6, relTosText2);
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createTokenizer() <em>Create Tokenizer</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createTokenizer()
+	 */
+	public void testCreateTokenizer() 
+	{
+		Tokenizer tokenizer= this.getFixture().createTokenizer();
+		assertNotNull(tokenizer);
+		assertEquals(this.getFixture(), tokenizer.getsDocumentGraph());
 	}
 } //SDocumentGraphTest

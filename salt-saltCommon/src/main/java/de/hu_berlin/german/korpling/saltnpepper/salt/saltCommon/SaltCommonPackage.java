@@ -132,6 +132,17 @@ public interface SaltCommonPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Tokenizer</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonPackageImpl#getTokenizer()
+	 * @generated
+	 */
+	int TOKENIZER = 3;
+
+
+	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject <em>Salt Project</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -183,6 +194,17 @@ public interface SaltCommonPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getProperties();
+
+	/**
+	 * Returns the meta object for data type '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer <em>Tokenizer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Tokenizer</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer
+	 * @model instanceClass="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer"
+	 * @generated
+	 */
+	EDataType getTokenizer();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -251,6 +273,16 @@ public interface SaltCommonPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType PROPERTIES = eINSTANCE.getProperties();
+
+		/**
+		 * The meta object literal for the '<em>Tokenizer</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonPackageImpl#getTokenizer()
+		 * @generated
+		 */
+		EDataType TOKENIZER = eINSTANCE.getTokenizer();
 
 	}
 

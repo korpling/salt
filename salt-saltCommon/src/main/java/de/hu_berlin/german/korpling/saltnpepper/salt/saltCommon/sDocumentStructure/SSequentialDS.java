@@ -69,7 +69,7 @@ public interface SSequentialDS extends SNode {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * This value represents the  first position of where the data starts. In generel this value is 0. In case of the {@link SSequentialDS} is a {@link STextualDS}, this value determines the position where the text starts.
+	 * This value represents the  first position of where the data starts. In general this value is 0. In case of the {@link SSequentialDS} is a {@link STextualDS}, this value determines the position where the text starts. This value is null if the value {@link #SData} is null.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>SStart</em>' attribute.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSequentialDS_SStart()
@@ -83,7 +83,7 @@ public interface SSequentialDS extends SNode {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * This value represents the  last position of where the data ends. In case of the {@link SSequentialDS} is a {@link STextualDS}, this value determines the position of the last character of the text.
+	 * This value represents the  last position of where the data ends. In case of the {@link SSequentialDS} is a {@link STextualDS}, this value determines the position of the last character of the text. This value is null if the value {@link #SData} is null.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>SEnd</em>' attribute.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSSequentialDS_SEnd()
