@@ -23,27 +23,21 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.security.auth.callback.LanguageCallback;
-
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.knallgrau.utils.textcat.TextCategorizer;
 
 import com.neovisionaries.i18n.LanguageCode;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltTokenizerException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
@@ -85,15 +79,13 @@ public class Tokenizer
     {
     }
     
-//    private STextualDS sTextualDSs= null;
-    
     /**
      * Sets the {@link STextualDS} to be tokenized. Its language will be detected automatically if possible.
      * @param sTextualDSs
      */
-    public void tokenize(STextualDS sTextualDSs)
+    public EList<SToken> tokenize(STextualDS sTextualDSs)
     {
-    	this.tokenize(sTextualDSs, null);
+    	return(this.tokenize(sTextualDSs, null));
     }
     
     /**
@@ -101,9 +93,9 @@ public class Tokenizer
      * be detected automatically if possible.
      * @param sTextualDSs
      */
-    public void tokenize(STextualDS sTextualDSs, LanguageCode language)
+    public EList<SToken> tokenize(STextualDS sTextualDSs, LanguageCode language)
     {
-    	this.tokenize(sTextualDSs, language, null, null);
+    	return(this.tokenize(sTextualDSs, language, null, null));
     }
 
     /**
@@ -114,8 +106,9 @@ public class Tokenizer
      * @param startPos start position, if text to be tokenized is subset (0 assumed if set to null)
      * @param startPos end position, if text to be tokenized is subset (length of text assumed if set to null)
      */
-    public void tokenize(STextualDS sTextualDS, LanguageCode language, Integer startPos, Integer endPos)
+    public EList<SToken> tokenize(STextualDS sTextualDS, LanguageCode language, Integer startPos, Integer endPos)
     {
+    	EList<SToken> retVal= null;
     	if (sTextualDS== null)
     		throw new SaltTokenizerException("Cannot tokenize an empty 'SSTextualDS' object.");
     	
@@ -147,9 +140,9 @@ public class Tokenizer
 	    	
 	    	this.setClitics(language);
 	    	
-	    	this.tokenizeToToken(sTextualDS, language, startPos, endPos);
+	    	retVal= this.tokenizeToToken(sTextualDS, language, startPos, endPos);
     	}
-    	
+    	return(retVal);
     }
     
     /**
@@ -320,11 +313,12 @@ public class Tokenizer
      * @param strInput original text
      * @return tokenized text fragments and their position in the original text
      */
-    public void tokenizeToToken(	STextualDS sTextualDS, 
+    public EList<SToken> tokenizeToToken(	STextualDS sTextualDS, 
     								LanguageCode language, 
     								Integer startPos, 
     								Integer endPos) 
     {
+    	EList<SToken> retVal= null;
     	List<String> strTokens = null;
     	String strInput= sTextualDS.getSText().substring(startPos, endPos);
     	strTokens= this.tokenizeToString(strInput, language);
@@ -346,7 +340,10 @@ public class Tokenizer
      				}//compute pattern in text
      				if (strTokens.get(tokenCntr).hashCode()== pattern.toString().hashCode())
      				{//pattern found
-     					this.getsDocumentGraph().createSToken(sTextualDS, i, i+strTokens.get(tokenCntr).length());
+     					SToken sTok= this.getsDocumentGraph().createSToken(sTextualDS, i, i+strTokens.get(tokenCntr).length());
+     					if (retVal== null)
+     						retVal= new BasicEList<SToken>();
+     					retVal.add(sTok);
      	    			i= i+strTokens.get(tokenCntr).length()-1;
      					tokenCntr++;
      					if (tokenCntr >= strTokens.size())
@@ -355,6 +352,7 @@ public class Tokenizer
      			}//first letter matches
      		}
     	}
+    	return(retVal);
     }
     
     /**

@@ -1230,7 +1230,7 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		addEParameter(op, ecorePackage.getEIntegerObject(), "sStart", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEIntegerObject(), "sEnd", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(sDocumentGraphEClass, null, "tokenize", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(sDocumentGraphEClass, this.getSToken(), "tokenize", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(sDocumentGraphEClass, theSaltCommonPackage.getTokenizer(), "createTokenizer", 0, 1, IS_UNIQUE, IS_ORDERED);
 

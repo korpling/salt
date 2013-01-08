@@ -596,7 +596,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model
 	 * @generated
 	 */
-	void tokenize();
+	EList<SToken> tokenize();
 
 	/**
 	 * <!-- begin-user-doc -->

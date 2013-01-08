@@ -771,7 +771,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * {@inheritDoc SDocumentGraph#tokenize()}
 	 */
-	public void tokenize() {
+	public EList<SToken> tokenize() 
+	{
+		EList<SToken> retVal= null;
 		if (	(this.getSTextualDSs()!= null)&&
 				(this.getSTextualDSs().size()>0))
 		{
@@ -779,9 +781,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			for (STextualDS sTextualDS: this.getSTextualDSs())
 			{
 				if (sTextualDS!= null)
-					tokenizer.tokenize(sTextualDS);
+				{
+					if (retVal== null)
+						retVal= new BasicEList<SToken>();
+					retVal.addAll(tokenizer.tokenize(sTextualDS));
+				}
 			}
 		}
+		return(retVal);
 	}
 
 	/**
