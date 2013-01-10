@@ -51,7 +51,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
  * This implementation uses sets of abbreviations to detect tokens, which are abbreviations in a specific language.
  * Therefore you can set a file containing abbreviations, to take others than the default ones. Because of 
  * abbreviations are language dependend, you can set a language, to use only a specific set of abbreviations.
- * The current version of the {@link TTTokenizer} supports abbreviations for english, french, italian and german language.
+ * The current version of the {@link Tokenizer} supports abbreviations for english, french, italian and german language.
  * If no language is set, all available abbreviations will be used.    
  *  
  * @author Amir Zeldes
