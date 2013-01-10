@@ -314,13 +314,14 @@ public class Tokenizer
      * @return tokenized text fragments and their position in the original text
      */
     public EList<SToken> tokenizeToToken(	STextualDS sTextualDS, 
-    								LanguageCode language, 
-    								Integer startPos, 
-    								Integer endPos) 
+		    								LanguageCode language, 
+		    								Integer startPos, 
+		    								Integer endPos) 
     {
     	EList<SToken> retVal= null;
     	List<String> strTokens = null;
     	String strInput= sTextualDS.getSText().substring(startPos, endPos);
+    	
     	strTokens= this.tokenizeToString(strInput, language);
     	if (	(strTokens!= null)&&
     			(strTokens.size()> 0))
@@ -340,7 +341,10 @@ public class Tokenizer
      				}//compute pattern in text
      				if (strTokens.get(tokenCntr).hashCode()== pattern.toString().hashCode())
      				{//pattern found
-     					SToken sTok= this.getsDocumentGraph().createSToken(sTextualDS, i, i+strTokens.get(tokenCntr).length());
+     					int start= i+ startPos;
+     					int end= i+startPos+ strTokens.get(tokenCntr).length();
+     					
+     					SToken sTok= this.getsDocumentGraph().createSToken(sTextualDS, start, end);
      					if (retVal== null)
      						retVal= new BasicEList<SToken>();
      					retVal.add(sTok);
