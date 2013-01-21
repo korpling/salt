@@ -80,9 +80,7 @@
                 <classname>SMetaAnnotation</classname>. The corpus structure created here is shown
             in the figure. The following snippet shows the creation of the container object
             SaltProject, which shall contain our corpus model:
-            <programlisting language="Java">
-        SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
-        </programlisting>
+            <programlisting language="Java">SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();</programlisting>
             The next snippet illustrates the creation of the corpus structure by creating a corpus
             graph, a corpus named 'sampleCorpus' and a document named 'sampleDocument'. Afterwards,
             the creation of the corpus is shown, followed by a meta annotation declaring it´s
@@ -93,7 +91,7 @@ SCorpus sampleCorpus= SaltFactory.eINSTANCE.createSCorpus();
 sampleCorpus.setSName("sampleCorpus");
 sCorpGraph.addSNode(sampleCorpus);
 //creates a meta annotation on the corpus sampleCorpus
-sampleCorpus.createMetaAnnotation(null, "annotator", "A. Nyone");</programlisting>
+sampleCorpus.createSMetaAnnotation(null, "annotator", "A. Nyone");</programlisting>
             The meta annotation is created via the method
                 <methodname>createMetaAnnotation()</methodname>. This method takes three arguments:
             a namespace which is optional and can be used to take further information, the name of
@@ -134,7 +132,7 @@ sCorpGraph.addSRelation(sRelation);        </programlisting>
             their annotations. Therefore we need to add a <classname>SDocumentGraph</classname>
             object to the <classname>SDocument</classname>, whicch acts as container for the primary
             data and linguistic annotationns.
-            <programlisting language="Java">sampleDocument.setSDocumentGraph(SaltFactory.eInstance.createSDocumentGraph);</programlisting>
+            <programlisting language="Java">sampleDocument.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());</programlisting>
         </para>
     </chapter>
     <chapter xml:id="chPrimaryData">
@@ -151,7 +149,7 @@ sCorpGraph.addSRelation(sRelation);        </programlisting>
 //setting the primary text to the sentence "Is this example more complicated than it appears to be?" 
 primaryText.setSText("Is this example more complicated than it appears to?");
 //adding the text to the document-graph
-sampleDocument.getSDocumentGraph().addSNode(sTextualDS);</programlisting>
+sampleDocument.getSDocumentGraph().addSNode(primaryText);</programlisting>
             For creating a primary text node, Salt offers the following shortcut:
             <programlisting language="Java">STextualDS primaryText = sampleDocument.getSDocumentGraph().createSTextualDS("Is this example more complicated than it appears to?");</programlisting>
         </para>
@@ -328,7 +326,7 @@ np_1.createSAnnotation(null, "cat", "SQ");
 //creating a syntax layer
 SLayer syntaxLayer = SaltFactory.eINSTANCE.createSLayer();
 syntaxLayer.setSName("syntax");
-docGraph.addSLayer(syntaxLayer);
+sampleDocument.getSDocumentGraph().addSLayer(syntaxLayer);
             
 //adding syntactic nodes to syntax layer
 syntaxLayer.getNodes().add(np_1);
@@ -348,7 +346,7 @@ syntaxLayer.getNodes().add(sq);        </programlisting>
             structure analysis to be modeled. The following snippet shows the code used to create
             the analysis shown in the figure.
             <programlisting language="Java">//create span overlaping only one token
-SSpan contrast_focus= docGraph.createSSpan(tok_is);
+SSpan contrast_focus= sampleDocument.getSDocumentGraph().createSSpan(tok_is);
 contrast_focus.createSAnnotation(null, "inf-struct", "contrast-focus");
                     
 //create a list of tokens taking part in the set to be annotated as a bundle
@@ -365,7 +363,7 @@ overlappingTokens.add(tok_be);
 overlappingTokens.add(tok_PUNC);
                     
 //create span overlaping a set of tokens    
-SSpan topic= docGraph.createSSpan(overlappingTokens);
+SSpan topic= sampleDocument.getSDocumentGraph().createSSpan(overlappingTokens);
 topic.createSAnnotation(null, "inf-struct", "topic");                </programlisting>
         </para>
     </chapter>
@@ -394,7 +392,7 @@ topic.createSAnnotation(null, "inf-struct", "topic");                </programli
 EList&lt;SToken&gt; overlappingTokens= new BasicEList&lt;SToken&gt;();
 overlappingTokens.add(tok_this);
 overlappingTokens.add(tok_example);
-SSpan span= docGraph.createSSpan(overlappingTokens);
+SSpan span= sampleDocument.getSDocumentGraph().createSSpan(overlappingTokens);
                     
 //creating a pointing relations
 SPointingRelation sPointingRelation= SaltFactory.eINSTANCE.createSPointingRelation();
@@ -489,9 +487,9 @@ saltProject.loadSaltProject(URI);</programlisting>
             <programlisting>sampleDocument.load(URI);</programlisting> or
             <programlisting>sampleDocument.load();</programlisting> in case of a
                 <classname>URI</classname> was earlier set with:
-            <programlisting>sampleDocument.setSDocumentGraphLocation(URI)</programlisting></para>
+            <programlisting>sampleDocument.setSDocumentGraphLocation(URI);</programlisting></para>
         <para>At last we show how to load just the corpus structure seperatly, therfore just call
-            the method: <programlisting>saltProject.loadCorpusStructure(URI)</programlisting>All
+            the method: <programlisting>saltProject.loadCorpusStructure(URI);</programlisting>All
             these methods for persisting and loading also be used in a static way via the class
                 <classname>SaltFactory</classname>. For more information concerning the class
                 <classname>SaltFactory</classname> please see the detailed ???User Guide???. </para>
