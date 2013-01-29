@@ -18,7 +18,6 @@
       <groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
       <artifactId>salt-graph</artifactId>
       <version>${project.version}</version>
-      <type>bundle</type>
     </dependency>
   </dependencies>
   <build>
