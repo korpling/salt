@@ -23,7 +23,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
@@ -55,6 +57,8 @@ public class GraphTraverserModule extends GraphModule
 	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
 	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
 	 * node twice.
+	 * Cycle safe breadth first traversing could consume a lot of memory because the algorithm keeps a map of all visited Nodes for every start node.
+	 * 
 	 * @param startNodes list of nodes at which the traversal shall start
 	 * @param traverseType type of traversing
 	 * @param traverseId identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler
@@ -77,6 +81,8 @@ public class GraphTraverserModule extends GraphModule
 	 * This is helpful, in case of a single callback handler is used for more than one traversal at  the same time.
 	 * This method throws a {@link GraphTraverserException} in case of the graph contains a cycle. A cycle means a path containing the same 
 	 * node twice.
+	 * Cycle safe breadth first traversing could consume a lot of memory because the algorithm keeps a map of all visited Nodes for every start node.
+	 * 
 	 * @param startNodes list of nodes at which the traversal shall start
 	 * @param traverseType type of traversing
 	 * @param traverseId identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler
@@ -99,10 +105,6 @@ public class GraphTraverserModule extends GraphModule
 		if (traverseHandler== null)
 			throw new GraphTraverserException("Cannot start traversing graph '"+this.getGraph().getId()+"', because the given callback handler 'traverseHandler' is empty.");
 		
-		//TODO remove this, when all types are supported
-		if (	(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST.equals(traverseType))||
-				(GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST.equals(traverseType)))
-			throw new UnsupportedOperationException("We are very sorry, but this type has not been implemented yet. The supported types are TD_DF and BU_DF.");
 		{//check if traverseId is already in use
 			 synchronized (traverseIdTable) 
 			 {
@@ -263,9 +265,32 @@ public class GraphTraverserModule extends GraphModule
 							this.bottomUpDepthFirstRec(null, 0);
 						}
 					}
-				}//BOTTOM_UP_DEPTH_FIRST traversal
-				
-				
+				}else if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST.equals(this.traverseType))
+				{// TOP_DOWN_BREADTH_FIRST traversal
+					for (Node startNode: startNodes)
+					{
+						//TODO replace EList with HashEList
+						this.currentNodePath= new BasicEList<Node>();
+						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST, traverseId, null, startNode, 0l))
+						{
+							this.currentNodePath.add(startNode);							
+						}
+					}
+					breadthFirst(null, 0);
+				}// TOP_DOWN_BREADTH_FIRST traversal
+				else if (GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST.equals(this.traverseType))
+				{// BOTTOM_UP_BREADTH_FIRST traversal
+					for (Node startNode: startNodes)
+					{
+						//TODO replace EList with HashEList
+						this.currentNodePath= new BasicEList<Node>();
+						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, traverseId, null, startNode, 0l))
+						{
+							this.currentNodePath.add(startNode);							
+						}
+					}
+					breadthFirst(null, 0);
+				}// BOTTOM_UP_BREADTH_FIRST traversal
 			} catch (Exception e) 
 			{
 				GraphTraverserException ex= null;
@@ -286,7 +311,85 @@ public class GraphTraverserModule extends GraphModule
 				this.traverselock.unlock();
 			}
 		}
-		
+
+		/**
+		 * Traverses the graph in breadth first order. Edges are followed from source to target.
+		 * If the {@link Traverser#traverseType} is ({@link GRAPH_TRAVERSE_TYPE#BOTTOM_UP_BREADTH_FIRST})
+		 * edges are followed in their opposite direction. 
+		 * <br/>
+		 * During the BFS {@link Traverser#currentNodePath} will only contain one node at most. 
+		 * The node most recently visited node.
+		 * <br/>
+		 * This function is able to detect cycles.
+		 * 
+		 * Memory considerations: The algorithm keeps a map of all visited Nodes for every start node.
+		 *  
+		 * @param edge  (NOT IMPLEMENTET) is the edge, via which the current node (last one in currentPath) was reached
+		 * @param order (NOT IMPLEMENTET) number of current edge in list of all outgoing edges of the parent node
+		 */
+		private void breadthFirst(Edge edge,
+								  long order) {
+			if (	(this.currentNodePath== null)||
+					(this.currentNodePath.isEmpty()))
+				throw new GraphTraverserException("Cannot traverse node starting at empty start node.");
+			final boolean isTopDown = traverseType != GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
+			Node parent = null;
+			//TODO replace EList with HashEList
+			EList<Node> queuedNodes = new BasicEList<Node>();
+			EList<Node> queueReachedFrom = new BasicEList<Node>();
+			EMap<Node, EMap<Node, Integer>> distanceFromStartNode = new BasicEMap<Node, EMap<Node,Integer>>();
+			
+			queuedNodes.addAll(startNodes);
+			for (Node startNode : startNodes) {
+				queueReachedFrom.add(startNode);
+				distanceFromStartNode.put(startNode, new BasicEMap<Node, Integer>());
+				distanceFromStartNode.get(startNode).put(startNode, 0);
+			}
+			currentNodePath.clear();
+			while(!queuedNodes.isEmpty()){
+				Node tNode = queuedNodes.remove(0);
+				Node fromNode = queueReachedFrom.remove(0);
+				EMap<Node, Integer> distance = distanceFromStartNode.get(fromNode);
+				
+				EList<Edge> edgesIn  = this.getGraph().getInEdges(tNode.getId());
+				EList<Edge> edgesOut = this.getGraph().getOutEdges(tNode.getId());
+				EList<Edge> edges    = null;
+				currentNodePath.add(tNode);
+				traverseHandler.nodeReached(traverseType, traverseId, tNode, edge, parent, order);
+				if (isTopDown) {//Switching in and out nodes list
+					edges = edgesOut;
+				}else{
+					edges    = edgesIn;
+					edgesIn  = edgesOut;
+					edgesOut = edges;
+				}
+				if (edges != null)
+				{//in case of node has childs
+					for(Edge e: edges){
+						Node n = null;
+						n = (isTopDown)? e.getTarget() : e.getSource();				
+						if(!this.isCycleSafe ){
+							//Do Nothing
+						}else if(!(distance.containsKey(n))){
+							distance.put(n, distance.get(tNode) + 1);
+						} else if (distance.get(n) < distance.get(tNode)){
+							throw new GraphTraverserException("A cycle in graph '"+graph.getId()+"' has been detected, while traversing with type '"+traverseType+"'. The cycle has been detected when visiting node '"+tNode+"' while current path was '"+ this.currentNodePath+"'.");									
+						}
+						
+						if (traverseHandler.checkConstraint(traverseType, traverseId, e, n, order))
+						{
+							queuedNodes.add(n);
+							queueReachedFrom.add(fromNode);
+						}
+					}
+				}
+				traverseHandler.nodeLeft(traverseType, traverseId, tNode, edge, parent, order);
+				currentNodePath.remove(0);
+			}
+			
+		}
+	
+
 		/**
 		 * Contains the path beginning from root node to current node.
 		 */

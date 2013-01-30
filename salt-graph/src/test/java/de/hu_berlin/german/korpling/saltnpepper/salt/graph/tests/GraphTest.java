@@ -1195,12 +1195,16 @@ public class GraphTest extends IdentifiableElementTest {
 	}
 	
 	/**
-	 * Creates the following graph: <br/>
-	 * 				node1					<br/>
-	 *			/		\		\			<br/>
-	 *		node2		node4	node7		<br/>
-	 *		/		\	|					<br/>
-	 *	node3	node6	node5				<br/>
+     * Creates the following graph: <br/>
+     * <pre>
+     *                 node1             
+     *            /        \        \  
+     *           V          V        V
+     *        node2        node4    node7
+     *        /    \        |         
+     *       V      V       V
+     *    node3    node6   node5   
+     * </pre>     
 	 **/
 	public static Graph createGraph_Tree()
 	{
@@ -1216,13 +1220,17 @@ public class GraphTest extends IdentifiableElementTest {
 	}
 	
 	/**
-	 * Creates the following graph: <br/>
-	 * 	node1	node4				<br/>
-	 *		\	/					<br/>
-	 *		node2					<br/>
-	 *		/	\					<br/>
-	 *	node3	node6				<br/>
-	 **/
+     * Creates the following graph: <br/>
+     * <pre>
+     *     node1    node4
+     *        \    /
+     *         V  V  
+     *        node2      
+     *        /    \
+     *       V      V
+     *    node3    node6 
+     * </pre>
+     **/
 	public static Graph createGraph_DAG()
 	{
 		Graph graph= GraphFactory.eINSTANCE.createGraph();
@@ -1238,14 +1246,19 @@ public class GraphTest extends IdentifiableElementTest {
 	
 	/**
 	 * Creates the following graph including a cycle: <br/>
-	 * 	node1	node4					<br/>
-	 *		\	/						<br/>
-	 *		node2						<br/>
-	 *		/	\						<br/>
-	 *	node3	node6 					<br/>
-	 *				\					<br/>
-	 *				 node 7				<br/>
-	 * node 7 -> node2					<br/>
+     * <pre>
+     *     node1    node4
+     *        \    /   
+     *         V  V    
+     *        node2          
+     *        /    \
+     *        V     V     
+     *    node3    node6
+     *                \ 
+     *                 V     
+     *              node 7
+     * node 7 -> node2       
+     * </pre>
 	 **/
 	public static Graph createGraph_Cycle()
 	{
@@ -1262,23 +1275,50 @@ public class GraphTest extends IdentifiableElementTest {
 	
 	/**
 	 * Creates the following graph including a cycle: <br/>
-	 * 	node1							<br/>
-	 *		\							<br/>
-	 *		node2						<br/>
-	 *		/	\						<br/>
-	 *	node3	node6 					<br/>
-	 *				\					<br/>
-	 *				 node 7				<br/>
-	 * node 7 -> node2					<br/>
+     * <pre>
+     *     node1                
+     *        \ 
+     *         V               
+     *        node2            
+     *        /    \
+     *       V      V      
+     *    node3    node6         
+     *                \ 
+     *                 V       
+     *                 node 7    
+     * node 7 -> node2        
+     * </pre>
 	 **/
 	public static Graph createGraph_SimpleCycle()
 	{
 		Graph graph= GraphFactory.eINSTANCE.createGraph();
-		graph.setId("createGraph_Cycle");
+		graph.setId("createGraph_SimpleCycle");
 		String[] nodeNames= {"node1", "node2", "node3", "node6", "node7"};
 		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
 								{"node2", "node6", "edge3"}, {"node6", "node7", "edge5"}, 
 								{"node7", "node2", "edge6"}};
+	
+		createGraph(graph, nodeNames, edgeNames);
+		return(graph);
+	}
+	
+	/**
+	 * Creates the following graph including a cycle: <br/>
+     * <pre>
+     *       node1
+     *        ^ \
+     *       /   V
+     *  node3 <- node2  
+     *      
+     * </pre>
+	 **/
+	public static Graph createGraph_PureCycle()
+	{
+		Graph graph= GraphFactory.eINSTANCE.createGraph();
+		graph.setId("createGraph_PureCycle");
+		String[] nodeNames= {"node1", "node2", "node3"};
+		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
+								{"node3", "node1", "edge3"}};
 	
 		createGraph(graph, nodeNames, edgeNames);
 		return(graph);
