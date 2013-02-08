@@ -520,7 +520,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns all {@link SToken} objects being contained in the given list and sorts them by the {@link STextualRelation#getSStart()} 
-	 * value of {@link SToken} object. This method will sort the list of tokens by bubble sort.
+	 * value of {@link SToken} object.
 	 * @param sTokens2sort the list of {@link SToken} objects to sort
 	 * @return list of tokens in order of left text position
 	 * @model sTokens2sortMany="true"
@@ -530,7 +530,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns all {@link SToken} objects being contained in the list {@link SDocumentGraph#getSTokens()} and sorts them by the {@link STextualRelation#getSStart()} 
-	 * value of {@link SToken} object. This method will sort the list of tokens by bubble sort.
+	 * value of {@link SToken} object.
 	 * @return list of tokens in order of left text position
 	 * @model kind="operation"
 	 * @generated
@@ -539,7 +539,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Sorts all {@link SToken} objects being contained in the list {@link SDocumentGraph#getSTokens()} by the {@link STextualRelation#getSStart()} 
-	 * value of {@link SToken} object. This method will sort the list of tokens by bubble sort.
+	 * value of {@link SToken} object.
 	 * @model
 	 * @generated
 	 */
