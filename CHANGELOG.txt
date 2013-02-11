@@ -12,6 +12,18 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 1.1.6
+=============
+	* + switched to EMF 2.8
+	* + implemented breadth first traversal in class Graph
+	* + changed dependency type from bundle to default
+	* = added a Tokenizer, using the Treetagger algorithm and abbreviation list 
+	* - removed license mapping file and put on https://korpling.german.hu-berlin.de/saltnpepper/misc/license-mappings.xml
+
+Version 1.1.5
+=============
+	* = bug fixes
+
 Version 1.1.4
 =============
 	* = bug fixes
