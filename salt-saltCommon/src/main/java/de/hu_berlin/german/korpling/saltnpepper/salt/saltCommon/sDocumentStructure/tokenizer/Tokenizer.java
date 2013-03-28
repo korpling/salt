@@ -112,6 +112,13 @@ public class Tokenizer
     	if (sTextualDS== null)
     		throw new SaltTokenizerException("Cannot tokenize an empty 'SSTextualDS' object.");
     	
+    	if (this.getsDocumentGraph()== null)
+    	{
+    		if (sTextualDS.getSDocumentGraph()== null)
+    			throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
+    		else this.setsDocumentGraph(sTextualDS.getSDocumentGraph());
+    	}
+    	
     	if (sTextualDS.getSText()!= null)
     	{
 	    	if (startPos== null)
@@ -343,6 +350,9 @@ public class Tokenizer
      				{//pattern found
      					int start= i+ startPos;
      					int end= i+startPos+ strTokens.get(tokenCntr).length();
+     					
+     					if (this.getsDocumentGraph()== null)
+     						throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object.");
      					
      					SToken sTok= this.getsDocumentGraph().createSToken(sTextualDS, start, end);
      					if (retVal== null)
