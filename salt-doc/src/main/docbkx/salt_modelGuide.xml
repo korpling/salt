@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<book xmlns="http://docbook.org/ns/docbook"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Salt</title>
+        <subtitle>Model Guide</subtitle>
+        <authorgroup>
+            <author>
+                <personname>
+                    <firstname>Florian</firstname>
+                    <surname>Zipser</surname>
+                </personname>
+                <email>saltnpepper@lists.hu-berlin.de</email>
+            </author>
+            <author>
+                <orgname xml:id="org1">INRIA</orgname>
+            </author>
+            <author>
+                <orgname xml:id="org2">SFB 632 Information Structure / D1 Linguistic Database</orgname>
+            </author>
+            <author>
+                <orgname xml:id="org3">Humboldt-Universität zu Berlin</orgname>
+            </author>
+            <author>
+                <orgname xml:id="org4">Universität Potsdam</orgname>
+            </author>
+        </authorgroup>
+        <copyright>
+            <year>2012</year>
+            <holder><xref linkend="org1"/>, <xref linkend="org2"/>, <xref linkend="org3"/>, <xref linkend="org1"/>,<xref linkend="org4"/>, All rights reserved.</holder>
+        </copyright>
+        <releaseinfo>Version ${project.version}</releaseinfo>
+    </info>
+    <preface>
+        <title>Foreword</title>
+        <para></para>
+    </preface>
+    <chapter>
+        <title>salt-saltCommon</title>
+        <para>
+        </para>
+        <sect1>
+            <title>time management</title>
+            <para>
+                short introduction to TimelineDS, than motivation
+                <itemizedlist>
+                    <listitem><para>when dealing with corpora, we often need a time</para></listitem>
+                    <listitem>
+                        <para>imagine a text like "Is this example ..." and a tokeinzation like
+                            "Is", "this", "example"..., even in that case we have an implicit
+                            timeline. the implicit timeline is given in first the order of the signs
+                            in the primary text like for "Is", "I" comes before "s", in space and
+                            even in time, second in the tokenization, like "Is" comes before "this";
+                            we now can say, that token  "Is" occurs between point of time 1 and
+                            point of time 2, whereas "this" occurs between point of time 2 and
+                            3.</para>
+                    </listitem>
+                    <listitem>
+                        <para>a timeline gets important, in case of your corpus contains two primary
+                            datasources e.g. in a dialog corpus, sample with two speakers, where
+                            tokens can occur in parallel and have to be ordered in time, to keep
+                            information which word was said after which </para>
+                    </listitem>
+                    <listitem>
+                        <para>especially with multimedia corpora,  it may sounds weird to have an
+                            artificial timeline, since multimedia files already contains an own time
+                            coding, but we need to deal with several times and timelines,</para>
+                    </listitem>
+                    <listitem>
+                        <para>in case of an SAudioDS, an audio or video file contains its own time
+                            like starting at 00:00:00 and ending after 5 seconds at 00:00:05 etc.
+                        </para>
+                    </listitem>
+                    <listitem>
+                        <para>Because of several reasons, a corpus can refer to more than one audio
+                            file, for instance, each audio file handles one speaker, or the audio
+                            file is spiltted to reduce its size</para>
+                    </listitem>
+                    <listitem>
+                        <para>Imagine a second audio file also starting at 00:00:00 and ending at
+                            00:00:20, when using the internal timeline of both files, we have an
+                            overlapping range between 00:00:00 and 00:00:05 in that range, we cannot
+                            say which token or event comes before or after one of the other file, in
+                            case of theentire audio is split, one audio file comes after the next so
+                            for instance audio file 1 starts at 00:00:00 and ends at 00:00:05, audio
+                            file 2 starts at 00:00:05 and ends at 00:00:25 in a general timeline,
+                            but point of time 00:00:25 is nowhere encoded</para>
+                    </listitem>
+                    <listitem>
+                        <para>Using the common timeline, we can refer each token to the common
+                            timeline and now can order tokens in both files; </para>
+                    </listitem>
+                    <listitem>
+                        <para>the common timeline only contains abstract points of time like 1,2,3,4
+                            etc. to not lose the real time, you can annotate the points of time with
+                            real time items like 00:00:05 etc.</para>
+                    </listitem>
+                    <listitem>
+                        <para>show example common timeline (with annotated real time), timeline of
+                            audio1 and audio 2, their tokenization and the linking (if possible in a
+                            table)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </sect1>
+    </chapter>
+</book>
