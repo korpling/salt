@@ -147,7 +147,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		
 		File objectFile= new File((objectURI.toFileString()==null)?objectURI.toString():objectURI.toFileString());
 		if (!objectFile.exists())
-			throw new SaltResourceNotFoundException("Cannot load Object, because the file '"+objectFile+"' does not exists.");
+			throw new SaltResourceNotFoundException("Cannot load Object, because the file '"+objectFile+"' does not exist.");
 		
 		Resource resource= getResourceSet().createResource(URI.createFileURI(objectFile.getAbsolutePath()));
 		if (resource== null)
@@ -192,7 +192,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			throw new SaltResourceNotFoundException("Can not load SaltProject.",e);
 		}
 		if (saltProjectPath.exists())
-			throw new SaltResourceException("Can not load SaltProject, because path '"+saltProjectPath+"' does not exists.");
+			throw new SaltResourceException("Can not load SaltProject, because path '"+saltProjectPath+"' does not exist.");
 		if (saltProjectPath.isDirectory())
 			throw new SaltResourceException("Can not load SaltProject, because path '"+saltProjectPath+"' is not a directory.");
 		
@@ -488,7 +488,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				if (!sDocumentPath.exists())
 				{
 					//TODO put a log message (debug), that no document graph was found for document 
-					throw new SaltResourceException("Cannot load SDocument object '"+sDocument.getSName()+"', because resource '"+sDocumentPath.getAbsolutePath()+"' does not exists.");
+					throw new SaltResourceException("Cannot load SDocument object '"+sDocument.getSName()+"', because resource '"+sDocumentPath.getAbsolutePath()+"' does not exist.");
 				}
 				else
 				{

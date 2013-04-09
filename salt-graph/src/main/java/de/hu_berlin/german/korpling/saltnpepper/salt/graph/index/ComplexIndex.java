@@ -69,7 +69,7 @@ public interface ComplexIndex<K, V> extends Index<K, V> {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * This method returns a slot matching to the given id. If id does not exists in index returned list is empty.
+	 * This method returns a slot matching to the given id. If id does not exist in index returned list is empty.
 	 * @return matching slot
 	 * <!-- end-model-doc -->
 	 * @model

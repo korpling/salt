@@ -215,7 +215,7 @@ public class IndexMgrTest extends TestCase {
 				assertFalse("this index should have been removed", this.getFixture().hasIndex(idx.getId()));
 			}
 			//einen Index l�schen, den es nicht gibt
-			assertFalse("this index does not exists and cannot be removed", this.getFixture().removeIndex("not there"));
+			assertFalse("this index does not exist and cannot be removed", this.getFixture().removeIndex("not there"));
 	}
 	
 	/**

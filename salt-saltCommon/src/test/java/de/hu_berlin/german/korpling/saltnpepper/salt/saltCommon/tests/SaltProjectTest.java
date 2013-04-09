@@ -442,7 +442,7 @@ public class SaltProjectTest extends TestCase {
 		SaltProject saltProject2= SaltFactory.eINSTANCE.createSaltProject();
 		SampleGenerator.createCorpusStructure(saltProject2);
 		File file= new File(saltProjectPathResource);
-		assertTrue("cannot run test, because resource '"+file.getAbsolutePath()+"' does not exists.",file.exists());
+		assertTrue("cannot run test, because resource '"+file.getAbsolutePath()+"' does not exist.",file.exists());
 		this.getFixture().loadSCorpusStructure(URI.createFileURI(file.getAbsolutePath()));
 		
 		assertEquals(saltProject2, this.getFixture());

@@ -475,7 +475,7 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		File tmpFile= new File(tmpDir);
 		URI tmpUri= URI.createFileURI(tmpFile.getAbsolutePath());
 		saltProject.saveSaltProject(tmpUri);
-		assertTrue("Cannot run test, because file does not exists: "+ tmpFile.getAbsolutePath(), tmpFile.exists());
+		assertTrue("Cannot run test, because file does not exist: "+ tmpFile.getAbsolutePath(), tmpFile.exists());
 		
 		this.getFixture().load(tmpUri);
 		assertNotNull(this.getFixture());

@@ -170,7 +170,7 @@ public class GrAFFileDelegator {
 		File grafFile= null;
 		grafFile= new File(this.getGrafPath()+ "/"+ type);
 		if (!grafFile.exists())
-			throw new SaltResourceException("Cannot read graf resource '"+grafFile.getAbsolutePath()+"', because file does not exists.");
+			throw new SaltResourceException("Cannot read graf resource '"+grafFile.getAbsolutePath()+"', because file does not exist.");
 		this.start(grafFile);
 	}
 	

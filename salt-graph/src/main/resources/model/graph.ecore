@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="graph"
-    nsURI="graph" nsPrefix="graph">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="graph" nsURI="graph" nsPrefix="graph">
   <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//IdentifiableElement">
     <eOperations name="clone" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="graph" eType="#//Graph"
@@ -302,7 +300,7 @@
       </eOperations>
       <eOperations name="getSlot" upperBound="-1">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This method returns a slot matching to the given id. If id does not exists in index returned list is empty.&#xD;&#xA;@return matching slot"/>
+          <details key="documentation" value="This method returns a slot matching to the given id. If id does not exist in index returned list is empty.&#xD;&#xA;@return matching slot"/>
         </eAnnotations>
         <eGenericType eTypeParameter="#//index/ComplexIndex/V"/>
         <eParameters name="elementId">

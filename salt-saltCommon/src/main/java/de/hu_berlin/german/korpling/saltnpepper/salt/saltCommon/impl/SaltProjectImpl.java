@@ -536,7 +536,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 				if (!sDocumentPath.exists())
 				{
 					//TODO put a log message (debug), that no document graph was found for document 
-//					throw new SaltResourceException("Cannot load SDocument object '"+sDocument.getSName()+"', because resource '"+sDocumentPath.getAbsolutePath()+"' does not exists.");
+//					throw new SaltResourceException("Cannot load SDocument object '"+sDocument.getSName()+"', because resource '"+sDocumentPath.getAbsolutePath()+"' does not exist.");
 				}
 				else
 				{
@@ -658,7 +658,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		
 		File sDocumentGraphPath= new File(sDocumentGraphURI.toFileString());
 		if (!sDocumentGraphPath.exists())
-			throw new SaltResourceNotFoundException("Cannot load SDocument, because the given uri '"+sDocumentGraphPath.getAbsolutePath()+"' does not exists..");
+			throw new SaltResourceNotFoundException("Cannot load SDocument, because the given uri '"+sDocumentGraphPath.getAbsolutePath()+"' does not exist.");
 		
 		Resource resource= GrAFResourceFactory.newInstance().createResource(URI.createFileURI(sDocumentGraphPath.getAbsolutePath()));
 		if (resource== null)
@@ -730,7 +730,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 												File saltProjectPath)
 	{
 		if (!saltProjectPath.exists())
-			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the given uri '"+saltProjectPath.getAbsolutePath()+"' does not exists.");
+			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the given uri '"+saltProjectPath.getAbsolutePath()+"' does not exist.");
 		
 		boolean hasGrafFiles= false;
 		EList<File> subFolders= new BasicEList<File>();
