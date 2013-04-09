@@ -27,6 +27,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphTraverserException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserModule;
@@ -793,6 +794,67 @@ public class GraphTraverserModuleTest extends TestCase
 		this.getFixture().traverse(startNode, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_DAG_NON_ROOT_START", checker);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
+	/**
+	 * Tests the traversing of {@link GRAPH_TRAVERSE_TYPE#TOP_DOWN_BREADTH_FIRST} of graph_DAG, with graph {@inheritDoc GraphTest#createGraph_DAG()}. 
+	 * Starting with a node that is not a root node
+	 */
+	public void testTraverse_TOP_DOWN_DEPTH_FIRST_NO_REAL_CYCLES()
+	{
+		Graph graph= GraphFactory.eINSTANCE.createGraph();
+		graph.setId("graph1");
+		Node node1= GraphFactory.eINSTANCE.createNode();
+		graph.addNode(node1);
+		Node node2= GraphFactory.eINSTANCE.createNode();
+		graph.addNode(node2);
+		Node node3= GraphFactory.eINSTANCE.createNode();
+		graph.addNode(node3);
+		
+		Edge edge1= GraphFactory.eINSTANCE.createEdge();
+		edge1.setSource(node1);
+		edge1.setTarget(node2);
+		graph.addEdge(edge1);
+		Edge edge2= GraphFactory.eINSTANCE.createEdge();
+		edge2.setSource(node2);
+		edge2.setTarget(node3);
+		graph.addEdge(edge2);
+		Edge edge3= GraphFactory.eINSTANCE.createEdge();
+		edge3.setSource(node3);
+		edge3.setTarget(node2);
+		Label label= GraphFactory.eINSTANCE.createLabel();
+		label.setName("name");
+		label.setValue("notCheck");
+		edge3.addLabel(label);
+		graph.addEdge(edge3);
+		
+		GraphTraverseHandler graphTraverseHandler= new GraphTraverseHandler() {
+			@Override
+			public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
+					String traversalId, Node currNode, Edge edge, Node fromNode,
+					long order) {
+			}
+			
+			@Override
+			public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
+					Node currNode, Edge edge, Node fromNode, long order) {
+			}
+			
+			@Override
+			public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
+					String traversalId, Edge edge, Node currNode, long order) {
+				if (	(edge != null)&&
+						(edge.getLabel("name")!= null)&&
+						(edge.getLabel("name").getValue().equals("notCheck")))
+					return false;
+				else return true;
+			}
+		};
+		this.getFixture().setGraph(graph);
+		
+		EList<Node> startNode = (new BasicEList<Node>());
+		startNode.add(node1);
+		this.getFixture().traverse(startNode, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_NO_REAL_CYCLES", graphTraverseHandler);
+	}
+	
 	
 	/**
 	 * Tests the traversing of {@link GRAPH_TRAVERSE_TYPE#TOP_DOWN_BREADTH_FIRST} of graph_Cycle, with graph {@inheritDoc GraphTest#createGraph_Cycle()}.

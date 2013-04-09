@@ -386,7 +386,6 @@ public class GraphTraverserModule extends GraphModule
 				traverseHandler.nodeLeft(traverseType, traverseId, tNode, edge, parent, order);
 				currentNodePath.remove(0);
 			}
-			
 		}
 	
 
@@ -424,21 +423,31 @@ public class GraphTraverserModule extends GraphModule
 					for(Edge childEdge: childEdges)
 					{
 						Node childNode= childEdge.getTarget();
-						if (	(this.isCycleSafe)&&
-								(this.currentNodePath.contains(childNode)))
-						{
-							throw new GraphTraverserException("A cycle in graph '"+graph.getId()+"' has been detected, while traversing with type '"+traverseType+"'. The cycle has been detected when visiting node '"+childNode+"' while current path was '"+ this.currentNodePath+"'.");
-						}
 						
-						this.currentNodePath.add(childNode);
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, childEdge, childNode, order))
 						{
-							//i++;
+							if (	(this.isCycleSafe)&&
+									(this.currentNodePath.contains(childNode)))
+							{
+								
+								StringBuffer text= new StringBuffer(); 
+								for (Node node: this.currentNodePath)
+								{
+									text.append(node.getId());
+									text.append(" --> ");
+								}
+								text.append(childNode.getId());
+								
+								throw new GraphTraverserException("A cycle in graph '"+graph.getId()+"' has been detected, while traversing with type '"+traverseType+"'. The cycle has been detected when visiting node '"+childNode+"' while current path was '"+ text.toString() +"'.");
+							}
+							
+							this.currentNodePath.add(childNode);
 							this.topDownDepthFirstRec(childEdge, i);
+							this.currentNodePath.remove(this.currentNodePath.size()-1);
+							
 							i++;
 						}
 						//remove last entry, to update current path
-						this.currentNodePath.remove(this.currentNodePath.size()-1);
 					}//in case of node has childs
 				}//walk through all childs of this node
 			}
