@@ -693,6 +693,14 @@
             <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SORDER_RELATION"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_tRfKsrC1EeGnV96BSfr67w"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_0kcfQKW7EeKmQ6pvQ9x3Bw" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SDOCUMENT"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_0kcfQaW7EeKmQ6pvQ9x3Bw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_2DNjUKW7EeKmQ6pvQ9x3Bw" type="2006">
+            <element xmi:type="ecore:EEnumLiteral" href="saltCommon.ecore#//sDocumentStructure/STYPE_NAME/SCORPUS"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_2DNjUaW7EeKmQ6pvQ9x3Bw"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_HKSFIlrHEd-nlKwtzNGozg"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_HKSFI1rHEd-nlKwtzNGozg"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_HKSFJFrHEd-nlKwtzNGozg"/>

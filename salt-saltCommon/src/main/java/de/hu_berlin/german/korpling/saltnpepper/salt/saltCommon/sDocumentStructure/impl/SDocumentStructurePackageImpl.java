@@ -1342,6 +1342,8 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		addEEnumLiteral(stypE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME.STIME_OVERLAPPING_RELATION);
 		addEEnumLiteral(stypE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME.SSEQUENTIAL_RELATION);
 		addEEnumLiteral(stypE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME.SORDER_RELATION);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME.SDOCUMENT);
+		addEEnumLiteral(stypE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME.SCORPUS);
 	}
 
 } //SDocumentStructurePackageImpl

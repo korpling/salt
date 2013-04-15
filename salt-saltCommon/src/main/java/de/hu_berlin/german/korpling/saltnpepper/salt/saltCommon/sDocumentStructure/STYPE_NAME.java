@@ -141,7 +141,23 @@ public enum STYPE_NAME implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SORDER_RELATION(11, "SORDER_RELATION", "SORDER_RELATION");
+	SORDER_RELATION(11, "SORDER_RELATION", "SORDER_RELATION"), /**
+	 * The '<em><b>SDOCUMENT</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SDOCUMENT_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SDOCUMENT(12, "SDOCUMENT", "SDOCUMENT"), /**
+	 * The '<em><b>SCORPUS</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #SCORPUS_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	SCORPUS(13, "SCORPUS", "SCORPUS");
 
 	/**
 	 * The '<em><b>STEXTUAL DS</b></em>' literal value.
@@ -324,6 +340,36 @@ public enum STYPE_NAME implements Enumerator {
 	public static final int SORDER_RELATION_VALUE = 11;
 
 	/**
+	 * The '<em><b>SDOCUMENT</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SDOCUMENT</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SDOCUMENT
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SDOCUMENT_VALUE = 12;
+
+	/**
+	 * The '<em><b>SCORPUS</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>SCORPUS</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #SCORPUS
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SCORPUS_VALUE = 13;
+
+	/**
 	 * An array of all the '<em><b>STYPE NAME</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -343,6 +389,8 @@ public enum STYPE_NAME implements Enumerator {
 			STIME_OVERLAPPING_RELATION,
 			SSEQUENTIAL_RELATION,
 			SORDER_RELATION,
+			SDOCUMENT,
+			SCORPUS,
 		};
 
 	/**
@@ -405,6 +453,8 @@ public enum STYPE_NAME implements Enumerator {
 			case STIME_OVERLAPPING_RELATION_VALUE: return STIME_OVERLAPPING_RELATION;
 			case SSEQUENTIAL_RELATION_VALUE: return SSEQUENTIAL_RELATION;
 			case SORDER_RELATION_VALUE: return SORDER_RELATION;
+			case SDOCUMENT_VALUE: return SDOCUMENT;
+			case SCORPUS_VALUE: return SCORPUS;
 		}
 		return null;
 	}
