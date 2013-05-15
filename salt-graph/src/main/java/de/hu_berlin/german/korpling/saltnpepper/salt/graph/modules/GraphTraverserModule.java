@@ -276,7 +276,7 @@ public class GraphTraverserModule extends GraphModule
 							this.currentNodePath.add(startNode);							
 						}
 					}
-					breadthFirst(null, 0);
+					breadthFirst();
 				}// TOP_DOWN_BREADTH_FIRST traversal
 				else if (GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST.equals(this.traverseType))
 				{// BOTTOM_UP_BREADTH_FIRST traversal
@@ -289,7 +289,7 @@ public class GraphTraverserModule extends GraphModule
 							this.currentNodePath.add(startNode);							
 						}
 					}
-					breadthFirst(null, 0);
+					breadthFirst();
 				}// BOTTOM_UP_BREADTH_FIRST traversal
 			} catch (Exception e) 
 			{
@@ -311,6 +311,7 @@ public class GraphTraverserModule extends GraphModule
 				this.traverselock.unlock();
 			}
 		}
+		
 
 		/**
 		 * Traverses the graph in breadth first order. Edges are followed from source to target.
@@ -320,42 +321,49 @@ public class GraphTraverserModule extends GraphModule
 		 * During the BFS {@link Traverser#currentNodePath} will only contain one node at most. 
 		 * The node most recently visited node.
 		 * <br/>
-		 * This function is able to detect cycles.
-		 * 
-		 * Memory considerations: The algorithm keeps a map of all visited Nodes for every start node.
+		 * This function isn't able to detect cycles.
 		 *  
-		 * @param edge  (NOT IMPLEMENTET) is the edge, via which the current node (last one in currentPath) was reached
-		 * @param order (NOT IMPLEMENTET) number of current edge in list of all outgoing edges of the parent node
+		 * @param edge is the edge, via which the current node (last one in currentPath) was reached
+		 * @param order number of current edge in list of all outgoing edges of the parent node
 		 */
-		private void breadthFirst(Edge edge,
-								  long order) {
+		private void breadthFirst() {
+			if(isCycleSafe){
+				throw new GraphTraverserException("Not able to detect cycles with breadth first search");
+			}
 			if (	(this.currentNodePath== null)||
 					(this.currentNodePath.isEmpty()))
 				throw new GraphTraverserException("Cannot traverse node starting at empty start node.");
 			final boolean isTopDown = traverseType != GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
-			Node parent = null;
+			Node fromNode = null;
+			Edge fromEdge = null;
 			//TODO replace EList with HashEList
 			EList<Node> queuedNodes = new BasicEList<Node>();
 			EList<Node> queueReachedFrom = new BasicEList<Node>();
-			EMap<Node, EMap<Node, Integer>> distanceFromStartNode = new BasicEMap<Node, EMap<Node,Integer>>();
+			EList<Edge> queueReachedFromEdge = new BasicEList<Edge>();
+			EList<Integer> queueReachedOrder = new BasicEList<Integer>();
+//			EMap<Node, EMap<Node, Integer>> distanceFromStartNode = new BasicEMap<Node, EMap<Node,Integer>>();
 			
 			queuedNodes.addAll(startNodes);
 			for (Node startNode : startNodes) {
 				queueReachedFrom.add(startNode);
-				distanceFromStartNode.put(startNode, new BasicEMap<Node, Integer>());
-				distanceFromStartNode.get(startNode).put(startNode, 0);
+				queueReachedFromEdge.add(null);
+				queueReachedOrder.add(0);
+//				distanceFromStartNode.put(startNode, new BasicEMap<Node, Integer>());
+//				distanceFromStartNode.get(startNode).put(startNode, 0);
 			}
 			currentNodePath.clear();
 			while(!queuedNodes.isEmpty()){
 				Node tNode = queuedNodes.remove(0);
-				Node fromNode = queueReachedFrom.remove(0);
-				EMap<Node, Integer> distance = distanceFromStartNode.get(fromNode);
+				fromNode = queueReachedFrom.remove(0);
+				fromEdge = queueReachedFromEdge.remove(0);
+				Integer order = queueReachedOrder.remove(0);
+//				EMap<Node, Integer> distance = distanceFromStartNode.get(fromNode);
 				
 				EList<Edge> edgesIn  = this.getGraph().getInEdges(tNode.getId());
 				EList<Edge> edgesOut = this.getGraph().getOutEdges(tNode.getId());
 				EList<Edge> edges    = null;
 				currentNodePath.add(tNode);
-				traverseHandler.nodeReached(traverseType, traverseId, tNode, edge, parent, order);
+				traverseHandler.nodeReached(traverseType, traverseId, tNode, fromEdge, fromNode, order);
 				if (isTopDown) {//Switching in and out nodes list
 					edges = edgesOut;
 				}else{
@@ -365,25 +373,29 @@ public class GraphTraverserModule extends GraphModule
 				}
 				if (edges != null)
 				{//in case of node has childs
+					int orderCount = 0;
 					for(Edge e: edges){
 						Node n = null;
 						n = (isTopDown)? e.getTarget() : e.getSource();				
-						if(!this.isCycleSafe ){
-							//Do Nothing
-						}else if(!(distance.containsKey(n))){
-							distance.put(n, distance.get(tNode) + 1);
-						} else if (distance.get(n) < distance.get(tNode)){
-							throw new GraphTraverserException("A cycle in graph '"+graph.getId()+"' has been detected, while traversing with type '"+traverseType+"'. The cycle has been detected when visiting node '"+tNode+"' while current path was '"+ this.currentNodePath+"'.");									
-						}
+//						if(!this.isCycleSafe ){
+//							Do Nothing
+//						}else if(!(distance.containsKey(n))){
+//							distance.put(n, distance.get(tNode) + 1);
+//						} else if (distance.get(n) < distance.get(tNode)){
+//							throw new GraphTraverserException("A cycle in graph '"+graph.getId()+"' has been detected, while traversing with type '"+traverseType+"'. The cycle has been detected when visiting node '"+tNode+"' while current path was '"+ this.currentNodePath+"'.");									
+//						}
 						
 						if (traverseHandler.checkConstraint(traverseType, traverseId, e, n, order))
 						{
 							queuedNodes.add(n);
 							queueReachedFrom.add(fromNode);
+							queueReachedFromEdge.add(e);
+							queueReachedOrder.add(orderCount);
 						}
+						++orderCount;
 					}
 				}
-				traverseHandler.nodeLeft(traverseType, traverseId, tNode, edge, parent, order);
+				traverseHandler.nodeLeft(traverseType, traverseId, tNode, fromEdge, fromNode, order);
 				currentNodePath.remove(0);
 			}
 		}
