@@ -693,7 +693,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= false;
 		if ( (node!= null) && (node.getId()!= null))
 		{
-			if (((ComplexIndex)this.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).hasSlot(node.getId()))
+			if (this.getIndexMgr().getIndex(IDX_NODE_ID_NODE).hasKey(node.getId()))
 			{	
 				//deleting all outgoing edges
 				for (Edge edge: this.getOutEdges(node.getId()))
@@ -708,8 +708,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				
 				//removing node from internal list
 				this.getNodes().remove(this.getNode(node.getId()));
-				//removing node from all indexes
-				((ComplexIndex) this.getIndexMgr()).removeSlot(node.getId());
+				//removing node from *all* indexes
+				getIndexMgr().removeElement(getNode(node.getId()));
 				
 				//remove observers on edge
 				node.eAdapters().remove(this.graphAdapter);

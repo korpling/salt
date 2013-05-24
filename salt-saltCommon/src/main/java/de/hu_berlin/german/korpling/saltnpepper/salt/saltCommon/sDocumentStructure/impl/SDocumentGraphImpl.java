@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -124,13 +123,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			Index index= null;
 			
 			//start: creating node-type index
-				index= IndexFactory.eINSTANCE.createComplexIndex();
+				index= IndexFactory.eINSTANCE.createSlimComplexIndex();
 				index.setId(IDX_SNODETYPE);
 				this.getIndexMgr().addIndex(index);
 			//end: creating node-type index
 			
 			//start: creating relation-type index
-				index= IndexFactory.eINSTANCE.createComplexIndex();
+				index= IndexFactory.eINSTANCE.createSlimComplexIndex();
 				index.setId(IDX_SRELATIONTYPE);
 				this.getIndexMgr().addIndex(index);
 			//end: creating relation-type index

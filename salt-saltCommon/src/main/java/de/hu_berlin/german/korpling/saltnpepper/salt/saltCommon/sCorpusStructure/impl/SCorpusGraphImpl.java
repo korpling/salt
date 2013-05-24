@@ -93,13 +93,13 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			Index index= null;
 			
 			{//creating node-type index
-				index= IndexFactory.eINSTANCE.createComplexIndex();
+				index= IndexFactory.eINSTANCE.createSlimComplexIndex();
 				index.setId(IDX_SNODETYPE);
 				this.getIndexMgr().addIndex(index);
 			}
 			
 			{//creating relation-type index
-				index= IndexFactory.eINSTANCE.createComplexIndex();
+				index= IndexFactory.eINSTANCE.createSlimComplexIndex();
 				index.setId(IDX_SRELATIONTYPE);
 				this.getIndexMgr().addIndex(index);
 			}
