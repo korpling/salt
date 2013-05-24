@@ -51,6 +51,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserModule;
+import java.util.LinkedHashSet;
+import java.util.Map;
 
 /**
  * <!-- begin-user-doc -->
@@ -858,19 +860,23 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	{
 		EList<Edge> retList= null;
 		//searching for all edges going out from nodeId1
-		EList<Edge> outEdges= this.getOutEdges(nodeId1);
+		LinkedHashSet<Edge> outEdges = 
+				(LinkedHashSet<Edge>)this.getIndexMgr().getIndex(IDX_OUTEDGES).getIndexMap().get(nodeId1);
 		
-		for (Edge edge: outEdges)
-		{//searching if edge goes to nodeId2
-			if (edge.getTarget().getId().equals(nodeId2))
-			{
-				//initialize return list if it is not
-				if (retList== null)
-					retList= new BasicEList<Edge>();
-				//adding edge to list of matching edges
-				retList.add(edge);
-			}
-		}//searching if edge goes to nodeId2	
+		if(outEdges != null)
+		{
+			for (Edge edge: outEdges)
+			{//searching if edge goes to nodeId2
+				if (edge.getTarget().getId().equals(nodeId2))
+				{
+					//initialize return list if it is not
+					if (retList== null)
+						retList= new BasicEList<Edge>();
+					//adding edge to list of matching edges
+					retList.add(edge);
+				}
+			}//searching if edge goes to nodeId2	
+		}
 		return(retList);
 	}
 
