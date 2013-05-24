@@ -155,10 +155,15 @@ public class IdentifiableElementImpl extends LabelableElementImpl implements Ide
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((this.getIdentifier() == null) ? 0 : this.getIdentifier().hashCode());
-		return result;
+		Identifier id = getIdentifier();
+		if(id == null || id.getId() == null)
+		{
+			return 0;
+		}
+		else
+		{
+			return id.getId().hashCode();
+		}
 	}
 	
 	/**

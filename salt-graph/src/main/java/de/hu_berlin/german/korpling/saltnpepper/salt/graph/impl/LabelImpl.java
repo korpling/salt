@@ -222,7 +222,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 					differences.add("This label has a name, but the given one does not.");
 				else return false;
 			}
-			else if (this.getName().hashCode()!= other.getName().hashCode())
+			else if (!this.getName().equals(other.getName()))
 			{
 				if (differences!= null)
 					differences.add("The values of both names differs, the name of this label is '"+this.getName()+"', whereas the name of the given label is '"+other.getName()+"'.");
@@ -245,7 +245,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 					differences.add("This label has a value, but the given one does not.");
 				else return false;
 			}
-			else if (this.getValue().hashCode()!= other.getValue().hashCode())
+			else if (!this.getValue().equals(other.getValue()))
 			{
 				if (differences!= null)
 					differences.add("The values of both values differs, the value of this label is '"+this.getValue()+"', whereas the value of the given label is '"+other.getValue()+"'.");

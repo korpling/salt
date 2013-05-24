@@ -246,14 +246,6 @@ public class EdgeImpl extends IdentifiableElementImpl implements Edge {
 //		else return(superVal);
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((this.getIdentifier() == null) ? 0 : this.getIdentifier().hashCode());
-		return result;
-	}
-
 //	@Override
 //	public boolean equals(Object obj) 
 //	{
