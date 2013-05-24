@@ -465,6 +465,7 @@ public class SlimComplexIndexImpl<K, V> extends IdentifiableElementImpl implemen
 	 * @return true, if there exists a slot with given id
 	 * @throws Exception
 	 */
+	@Override
 	public Boolean hasSlot(K id) 
 	{
 		return (this.getIndexMap_SlimComplex().containsKey(id));
@@ -479,16 +480,9 @@ public class SlimComplexIndexImpl<K, V> extends IdentifiableElementImpl implemen
 	 * @return true, if value exists in index
 	 */
 	@Override
-	public Boolean hasElement(K elementId)
+	public Boolean hasKey(K elementId)
 	{
-		if (elementId==null)
-			throw new GraphIndexException("Cannot search for the given element, because it is empty.");
-
-		for (Object id : getIndexMap_SlimComplex().keySet())
-			if (getIndexMap_SlimComplex().get(id).contains(elementId))
-				return true;
-
-		return false;
+		return hasSlot(elementId);
 	}
 
 	/**

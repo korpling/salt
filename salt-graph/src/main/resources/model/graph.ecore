@@ -206,7 +206,7 @@
           <eGenericType eTypeParameter="#//index/Index/V"/>
         </eParameters>
       </eOperations>
-      <eOperations name="hasElement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
+      <eOperations name="hasKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
         <eParameters name="elementId">
           <eGenericType eTypeParameter="#//index/Index/K"/>
         </eParameters>

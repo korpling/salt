@@ -245,14 +245,14 @@ public class IndexMgrTest extends TestCase {
 			for(int i= 0; i< entries.length; i++)
 			{
 				idx= this.getFixture().getIndex(entries[i][0]);
-				if (idx.hasElement(entries[i][2]))
+				if (idx.hasKey(entries[i][2]))
 				{
 					this.getFixture().removeElement(entries[i][2]);
-					assertFalse("this entry '"+entries[i][2]+ "' should have been removed", idx.hasElement(entries[i][2]));
+					assertFalse("this entry '"+entries[i][1]+ "' should have been removed", idx.hasKey(entries[i][1]));
 				}
 			}
 			//einen Eintrag l�schen, den es nicht gibt
-			assertFalse("this entry 'not there' should have been removed", idx.hasElement("not there"));
+			assertFalse("this entry 'not there' should have been removed", idx.hasKey("not there"));
 	}
 
 	/**

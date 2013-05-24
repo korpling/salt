@@ -416,7 +416,7 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		g1 = createEGenericType(indexEClass_V);
 		addEParameter(op, g1, "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(indexEClass, ecorePackage.getEBooleanObject(), "hasElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(indexEClass, ecorePackage.getEBooleanObject(), "hasKey", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(indexEClass_K);
 		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
 

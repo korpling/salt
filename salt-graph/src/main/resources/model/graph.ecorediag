@@ -188,7 +188,7 @@
             <layoutConstraint xmi:type="notation:Location" xmi:id="_axlr0pxtEd625-Uq6sOdNQ"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_iIbWgJxtEd625-Uq6sOdNQ" type="2002">
-            <element xmi:type="ecore:EOperation" href="graph.ecore#//index/Index/hasElement"/>
+            <element xmi:type="ecore:EOperation" href="graph.ecore#//index/Index/hasKey"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_iIbWgZxtEd625-Uq6sOdNQ"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_mB-a8JxtEd625-Uq6sOdNQ" type="2002">

@@ -159,7 +159,7 @@ public class SlimComplexIndexTest extends IdentifiableElementTest {
 	}
 	
 	/**
-	 * Tested die Methoden hasEntry() und hasId dieses Indexes.
+	 * Tested die Methoden hasSlot() und hasKey dieses Indexes.
 	 */
 	public void testHasEntryOrId() throws Exception
 	{
@@ -167,12 +167,12 @@ public class SlimComplexIndexTest extends IdentifiableElementTest {
 		for (int i= 0; i< entries.length; i++)
 		{
 			assertTrue("the index should have the id: " + entries[i][0], this.getFixture().hasSlot(entries[i][0]));
-			assertTrue("the index should have the entry: " + entries[i][1], this.getFixture().hasElement(entries[i][1]));
+			assertTrue("the index should have the entry: " + entries[i][1], this.getFixture().hasKey(entries[i][0]));
 		}
 		//nach Eintr�gen suchen, die es nicht gibt
 		
 		assertFalse("the index should not have the id: " + "not there", this.getFixture().hasSlot("not there"));
-		assertFalse("the index should not have the entry: " + "not there", this.getFixture().hasElement("not there"));
+		assertFalse("the index should not have the entry: " + "not there", this.getFixture().hasKey("not there"));
 	}
 	
 	/**
@@ -190,7 +190,7 @@ public class SlimComplexIndexTest extends IdentifiableElementTest {
 			//Eintrag l�schen
 			this.getFixture().removeSlot(ids[i]);
 			//pr�fen ob Eintrag entfernt wurde
-			assertFalse("the entry '"+ids[i]+"' should have been removed",this.getFixture().hasElement(entries[i][0]));
+			assertFalse("the entry '"+ids[i]+"' should have been removed",this.getFixture().hasKey(entries[i][0]));
 		}
 		//einen Slot l�schen, den es nicht gibt
 		assertFalse("the slot wich is tried to remove shouldn�t be there", this.getFixture().removeSlot(entries[1][0]));
@@ -209,7 +209,8 @@ public class SlimComplexIndexTest extends IdentifiableElementTest {
 		for (int i= 0; i< entries.length; i++)
 		{
 			this.getFixture().removeElement(entries[i][1]);
-			assertFalse("entry should have been removed", this.getFixture().hasElement(entries[i][1]));
+			EList<String> slot = this.getFixture().getSlot(entries[i][0]);
+			assertTrue("entry should have been removed", slot == null || !slot.contains(entries[i][1]));
 		}
 		//einen Eintrag l�schen, den es nicht gibt
 		assertFalse("the entry wich is tried to remove shouldn�t be there", this.getFixture().removeElement(entries[1][1]));
@@ -339,10 +340,10 @@ public class SlimComplexIndexTest extends IdentifiableElementTest {
 	public void testHasElement__Object() throws Exception 
 	{
 		for (String[] entry: entries)
-			assertFalse(this.getFixture().hasElement(entry[1]));
+			assertFalse(this.getFixture().hasKey(entry[0]));
 		this.fillIdx();
 		for (String[] entry: entries)
-			assertTrue(this.getFixture().hasElement(entry[1]));
+			assertTrue(this.getFixture().hasKey(entry[0]));
 	}
 	
 	/**

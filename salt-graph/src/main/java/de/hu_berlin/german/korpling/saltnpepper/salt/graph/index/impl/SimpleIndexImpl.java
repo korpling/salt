@@ -203,15 +203,14 @@ public class SimpleIndexImpl<K, V> extends IdentifiableElementImpl implements Si
 	}
 
 	/**
-	 * {@inheritDoc Index#hasElement(Object)}
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public Boolean  hasElement(K elementId) {
+	public Boolean hasKey(K elementId) {
 		if (elementId== null)
 			throw new GraphIndexException("Cannot search for an empty element.");
-		if(this.getIndexMap().get(elementId)!= null)
-			return(true);
-		else return(false);
+		return this.getIndexMap().containsKey(elementId);
 	}
 
 	/**

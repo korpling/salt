@@ -146,7 +146,7 @@ public interface Index<K, V> extends IdentifiableElement {
 	 * @model
 	 * @generated
 	 */
-	Boolean hasElement(K elementId);
+	Boolean hasKey(K elementId);
 
 	/**
 	 * <!-- begin-user-doc -->

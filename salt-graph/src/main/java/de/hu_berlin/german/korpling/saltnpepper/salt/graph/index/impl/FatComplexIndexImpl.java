@@ -390,13 +390,14 @@ public class FatComplexIndexImpl<K, V> extends IdentifiableElementImpl implement
 	}
 	
 	/**
-	 * {@inheritDoc Index#hasElement(Object)}
+	 * {@inheritDoc Index#hasKey(Object)}
 	 */
-	public Boolean hasElement(K elementId) {
+	@Override
+	public Boolean hasKey(K elementId) {
 		if (elementId== null) {
 			throw new GraphIndexException("Cannot search for the given element, because it is empty.");
 		}
-		return this.getInvIdxTable().containsKey(elementId);
+		return this.getIdxSet().containsKey(elementId);
 	}
 
 	/**

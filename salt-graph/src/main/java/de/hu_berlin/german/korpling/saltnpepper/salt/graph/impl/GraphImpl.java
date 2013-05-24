@@ -693,7 +693,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= false;
 		if ( (node!= null) && (node.getId()!= null))
 		{
-			if (this.getIndexMgr().getIndex(IDX_NODE_ID_NODE).hasElement(node.getId()))
+			if (((ComplexIndex)this.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).hasSlot(node.getId()))
 			{	
 				//deleting all outgoing edges
 				for (Edge edge: this.getOutEdges(node.getId()))
@@ -709,7 +709,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				//removing node from internal list
 				this.getNodes().remove(this.getNode(node.getId()));
 				//removing node from all indexes
-				this.getIndexMgr().removeElement(this.getNode(node.getId()));
+				((ComplexIndex) this.getIndexMgr()).removeSlot(node.getId());
 				
 				//remove observers on edge
 				node.eAdapters().remove(this.graphAdapter);
@@ -1007,12 +1007,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		if (!edge.getSource().getId().equalsIgnoreCase(nodeId)) 
 			edge.setSource(this.getNode(nodeId));
 		
-		//remove old entry in outgoing index, if exists
-		if (((ComplexIndex)this.getIndexMgr().getIndex(IDX_OUTEDGES)).hasElement(edge))
-		{
-			((ComplexIndex)this.getIndexMgr().getIndex(IDX_OUTEDGES)).removeElement(edge);
-		}
-		
+		//remove old entry in outgoing index
+		((ComplexIndex)this.getIndexMgr().getIndex(IDX_OUTEDGES)).removeElement(edge);
+
 		//create entry in outgoing index
 		this.getIndexMgr().getIndex(IDX_OUTEDGES).addElement(edge.getSource().getId(), edge);
 	}
@@ -1036,9 +1033,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		if (!edge.getTarget().getId().equalsIgnoreCase(nodeId)) 
 			edge.setTarget(this.getNode(nodeId));
 		
-		//remove old entry in ingoing index, if exists
-		if (((ComplexIndex)this.getIndexMgr().getIndex(IDX_INEDGES)).hasElement(edge))
-			((ComplexIndex)this.getIndexMgr().getIndex(IDX_INEDGES)).removeElement(edge);
+		//remove old entry in ingoing index
+		((ComplexIndex)this.getIndexMgr().getIndex(IDX_INEDGES)).removeElement(edge);
 		
 		//create entry in ingoing index
 		this.getIndexMgr().getIndex(IDX_INEDGES).addElement(edge.getTarget().getId(), edge);
