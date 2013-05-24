@@ -284,10 +284,10 @@ public interface IndexPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl <em>Complex Index</em>}' class.
+	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex <em>Complex Index</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexPackageImpl#getComplexIndex()
 	 * @generated
 	 */
@@ -373,6 +373,189 @@ public interface IndexPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPLEX_INDEX_FEATURE_COUNT = INDEX_FEATURE_COUNT + 1;
+
+
+	/**
+	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.FatComplexIndexImpl <em>Fat Complex Index</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.FatComplexIndexImpl
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexPackageImpl#getFatComplexIndex()
+	 * @generated
+	 */
+	int FAT_COMPLEX_INDEX = 4;
+
+				/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX__LABELS = COMPLEX_INDEX__LABELS;
+
+				/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX__ID = COMPLEX_INDEX__ID;
+
+				/**
+	 * The feature id for the '<em><b>Identifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX__IDENTIFIER = COMPLEX_INDEX__IDENTIFIER;
+
+				/**
+	 * The feature id for the '<em><b>Num Of Elements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX__NUM_OF_ELEMENTS = COMPLEX_INDEX__NUM_OF_ELEMENTS;
+
+				/**
+	 * The feature id for the '<em><b>Num Of Element Ids</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX__NUM_OF_ELEMENT_IDS = COMPLEX_INDEX__NUM_OF_ELEMENT_IDS;
+
+				/**
+	 * The feature id for the '<em><b>Index Map</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX__INDEX_MAP = COMPLEX_INDEX__INDEX_MAP;
+
+				/**
+	 * The feature id for the '<em><b>Estimated Capacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX__ESTIMATED_CAPACITY = COMPLEX_INDEX__ESTIMATED_CAPACITY;
+
+				/**
+	 * The feature id for the '<em><b>Sortable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX__SORTABLE = COMPLEX_INDEX__SORTABLE;
+
+				/**
+	 * The number of structural features of the '<em>Fat Complex Index</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAT_COMPLEX_INDEX_FEATURE_COUNT = COMPLEX_INDEX_FEATURE_COUNT + 0;
+
+				/**
+	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl <em>Slim Complex Index</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexPackageImpl#getSlimComplexIndex()
+	 * @generated
+	 */
+	int SLIM_COMPLEX_INDEX = 5;
+
+				/**
+	 * The feature id for the '<em><b>Labels</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX__LABELS = COMPLEX_INDEX__LABELS;
+
+				/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX__ID = COMPLEX_INDEX__ID;
+
+				/**
+	 * The feature id for the '<em><b>Identifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX__IDENTIFIER = COMPLEX_INDEX__IDENTIFIER;
+
+				/**
+	 * The feature id for the '<em><b>Num Of Elements</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX__NUM_OF_ELEMENTS = COMPLEX_INDEX__NUM_OF_ELEMENTS;
+
+				/**
+	 * The feature id for the '<em><b>Num Of Element Ids</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX__NUM_OF_ELEMENT_IDS = COMPLEX_INDEX__NUM_OF_ELEMENT_IDS;
+
+				/**
+	 * The feature id for the '<em><b>Index Map</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX__INDEX_MAP = COMPLEX_INDEX__INDEX_MAP;
+
+				/**
+	 * The feature id for the '<em><b>Estimated Capacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY = COMPLEX_INDEX__ESTIMATED_CAPACITY;
+
+				/**
+	 * The feature id for the '<em><b>Sortable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX__SORTABLE = COMPLEX_INDEX__SORTABLE;
+
+				/**
+	 * The number of structural features of the '<em>Slim Complex Index</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLIM_COMPLEX_INDEX_FEATURE_COUNT = COMPLEX_INDEX_FEATURE_COUNT + 0;
 
 
 	/**
@@ -504,6 +687,26 @@ public interface IndexPackage extends EPackage {
     EAttribute getComplexIndex_Sortable();
 
     /**
+	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.FatComplexIndex <em>Fat Complex Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Fat Complex Index</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.FatComplexIndex
+	 * @generated
+	 */
+	EClass getFatComplexIndex();
+
+	/**
+	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SlimComplexIndex <em>Slim Complex Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Slim Complex Index</em>'.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SlimComplexIndex
+	 * @generated
+	 */
+	EClass getSlimComplexIndex();
+
+				/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -612,10 +815,10 @@ public interface IndexPackage extends EPackage {
 		EReference INDEX_MGR__GRAPH = eINSTANCE.getIndexMgr_Graph();
 
 		/**
-		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl <em>Complex Index</em>}' class.
+		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex <em>Complex Index</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex
 		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexPackageImpl#getComplexIndex()
 		 * @generated
 		 */
@@ -628,6 +831,26 @@ public interface IndexPackage extends EPackage {
 		 * @generated
 		 */
         EAttribute COMPLEX_INDEX__SORTABLE = eINSTANCE.getComplexIndex_Sortable();
+
+		/**
+		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.FatComplexIndexImpl <em>Fat Complex Index</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.FatComplexIndexImpl
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexPackageImpl#getFatComplexIndex()
+		 * @generated
+		 */
+		EClass FAT_COMPLEX_INDEX = eINSTANCE.getFatComplexIndex();
+
+		/**
+		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl <em>Slim Complex Index</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl
+		 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexPackageImpl#getSlimComplexIndex()
+		 * @generated
+		 */
+		EClass SLIM_COMPLEX_INDEX = eINSTANCE.getSlimComplexIndex();
 
 	}
 

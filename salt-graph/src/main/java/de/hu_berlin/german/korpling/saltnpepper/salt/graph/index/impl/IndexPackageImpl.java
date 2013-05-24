@@ -20,6 +20,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphPackageImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.FatComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
@@ -28,6 +29,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
 
 
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SlimComplexIndex;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
@@ -72,6 +74,20 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 	 * @generated
 	 */
 	private EClass complexIndexEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass fatComplexIndexEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass slimComplexIndexEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -253,6 +269,24 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getFatComplexIndex() {
+		return fatComplexIndexEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSlimComplexIndex() {
+		return slimComplexIndexEClass;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public IndexFactory getIndexFactory() {
 		return (IndexFactory)getEFactoryInstance();
 	}
@@ -291,6 +325,10 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 
 		complexIndexEClass = createEClass(COMPLEX_INDEX);
 		createEAttribute(complexIndexEClass, COMPLEX_INDEX__SORTABLE);
+
+		fatComplexIndexEClass = createEClass(FAT_COMPLEX_INDEX);
+
+		slimComplexIndexEClass = createEClass(SLIM_COMPLEX_INDEX);
 	}
 
 	/**
@@ -326,6 +364,10 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		ETypeParameter simpleIndexEClass_V = addETypeParameter(simpleIndexEClass, "V");
 		ETypeParameter complexIndexEClass_K = addETypeParameter(complexIndexEClass, "K");
 		ETypeParameter complexIndexEClass_V = addETypeParameter(complexIndexEClass, "V");
+		ETypeParameter fatComplexIndexEClass_K = addETypeParameter(fatComplexIndexEClass, "K");
+		ETypeParameter fatComplexIndexEClass_V = addETypeParameter(fatComplexIndexEClass, "V");
+		ETypeParameter slimComplexIndexEClass_K = addETypeParameter(slimComplexIndexEClass, "K");
+		ETypeParameter slimComplexIndexEClass_V = addETypeParameter(slimComplexIndexEClass, "V");
 
 		// Set bounds for type parameters
 
@@ -343,6 +385,18 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		g2 = createEGenericType(complexIndexEClass_V);
 		g1.getETypeArguments().add(g2);
 		complexIndexEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getComplexIndex());
+		g2 = createEGenericType(fatComplexIndexEClass_K);
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(fatComplexIndexEClass_V);
+		g1.getETypeArguments().add(g2);
+		fatComplexIndexEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getComplexIndex());
+		g2 = createEGenericType(slimComplexIndexEClass_K);
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(slimComplexIndexEClass_V);
+		g1.getETypeArguments().add(g2);
+		slimComplexIndexEClass.getEGenericSuperTypes().add(g1);
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(indexEClass, Index.class, "Index", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -406,7 +460,7 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		op = addEOperation(indexMgrEClass, ecorePackage.getEBooleanObject(), "removeElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEJavaObject(), "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(complexIndexEClass, ComplexIndex.class, "ComplexIndex", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(complexIndexEClass, ComplexIndex.class, "ComplexIndex", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getComplexIndex_Sortable(), ecorePackage.getEBoolean(), "sortable", "false", 0, 1, ComplexIndex.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(complexIndexEClass, ecorePackage.getEBooleanObject(), "hasSlot", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -426,6 +480,10 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		op = addEOperation(complexIndexEClass, ecorePackage.getEBooleanObject(), "removeSlot", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(complexIndexEClass_K);
 		addEParameter(op, g1, "elementId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(fatComplexIndexEClass, FatComplexIndex.class, "FatComplexIndex", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(slimComplexIndexEClass, SlimComplexIndex.class, "SlimComplexIndex", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //IndexPackageImpl

@@ -284,7 +284,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="graph" eType="#//Graph"
           volatile="true" transient="true" eOpposite="#//Graph/indexMgr"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ComplexIndex">
+    <eClassifiers xsi:type="ecore:EClass" name="ComplexIndex" abstract="true" interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A {@link ComplexIndex} object refers a key (or elementId) to a set of values (or elements). Such a set is stored in a {@link EList} object."/>
       </eAnnotations>
@@ -320,6 +320,22 @@
       <eGenericSuperTypes eClassifier="#//index/Index">
         <eTypeArguments eTypeParameter="#//index/ComplexIndex/K"/>
         <eTypeArguments eTypeParameter="#//index/ComplexIndex/V"/>
+      </eGenericSuperTypes>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FatComplexIndex">
+      <eTypeParameters name="K"/>
+      <eTypeParameters name="V"/>
+      <eGenericSuperTypes eClassifier="#//index/ComplexIndex">
+        <eTypeArguments eTypeParameter="#//index/FatComplexIndex/K"/>
+        <eTypeArguments eTypeParameter="#//index/FatComplexIndex/V"/>
+      </eGenericSuperTypes>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SlimComplexIndex">
+      <eTypeParameters name="K"/>
+      <eTypeParameters name="V"/>
+      <eGenericSuperTypes eClassifier="#//index/ComplexIndex">
+        <eTypeArguments eTypeParameter="#//index/SlimComplexIndex/K"/>
+        <eTypeArguments eTypeParameter="#//index/SlimComplexIndex/V"/>
       </eGenericSuperTypes>
     </eClassifiers>
   </eSubpackages>

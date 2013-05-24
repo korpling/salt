@@ -4,7 +4,7 @@
     modelPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-graph" modelName="salt-graph"
     testsDirectory="/salt-graph/src/test/java" testSuiteClass="de.hu_berlin.german.korpling.saltnpepper.salt.graph.tests.GraphAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
-    runtimeVersion="2.8">
+    runtimeVersion="2.8" language="" interfaceNamePattern="">
   <foreignModel>graph.ecore</foreignModel>
   <genPackages prefix="Graph" basePackage="de.hu_berlin.german.korpling.saltnpepper.salt"
       disposableProviderFactory="true" ecorePackage="graph.ecore#/">

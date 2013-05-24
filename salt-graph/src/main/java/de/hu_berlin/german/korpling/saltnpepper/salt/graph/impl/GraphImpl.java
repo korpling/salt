@@ -338,12 +338,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		this.getIndexMgr().addIndex(index);
 		
 		//outgoing edge index
-		index= IndexFactory.eINSTANCE.createComplexIndex();
+		index= IndexFactory.eINSTANCE.createSlimComplexIndex();
 		index.setId(IDX_OUTEDGES);
 		this.getIndexMgr().addIndex(index);
 		
 		//ingoing edge index
-		index= IndexFactory.eINSTANCE.createComplexIndex();
+		index= IndexFactory.eINSTANCE.createSlimComplexIndex();
 		index.setId(IDX_INEDGES);
 		this.getIndexMgr().addIndex(index);
 	}

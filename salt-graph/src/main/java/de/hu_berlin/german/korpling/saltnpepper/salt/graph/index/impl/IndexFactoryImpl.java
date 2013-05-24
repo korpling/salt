@@ -74,7 +74,8 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 		switch (eClass.getClassifierID()) {
 			case IndexPackage.SIMPLE_INDEX: return createSimpleIndex();
 			case IndexPackage.INDEX_MGR: return createIndexMgr();
-			case IndexPackage.COMPLEX_INDEX: return createComplexIndex();
+			case IndexPackage.FAT_COMPLEX_INDEX: return createFatComplexIndex();
+			case IndexPackage.SLIM_COMPLEX_INDEX: return createSlimComplexIndex();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -98,6 +99,26 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 	public IndexMgr createIndexMgr() {
 		IndexMgrImpl indexMgr = new IndexMgrImpl();
 		return indexMgr;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public <K, V> FatComplexIndex<K, V> createFatComplexIndex() {
+		FatComplexIndexImpl<K, V> fatComplexIndex = new FatComplexIndexImpl<K, V>();
+		return fatComplexIndex;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public <K, V> SlimComplexIndex<K, V> createSlimComplexIndex() {
+		SlimComplexIndexImpl<K, V> slimComplexIndex = new SlimComplexIndexImpl<K, V>();
+		return slimComplexIndex;
 	}
 
 	/**

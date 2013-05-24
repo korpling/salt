@@ -102,6 +102,14 @@ public class IndexAdapterFactory extends AdapterFactoryImpl {
 				return createComplexIndexAdapter();
 			}
 			@Override
+			public <K, V> Adapter caseFatComplexIndex(FatComplexIndex<K, V> object) {
+				return createFatComplexIndexAdapter();
+			}
+			@Override
+			public <K, V> Adapter caseSlimComplexIndex(SlimComplexIndex<K, V> object) {
+				return createSlimComplexIndexAdapter();
+			}
+			@Override
 			public Adapter caseLabelableElement(LabelableElement object) {
 				return createLabelableElementAdapter();
 			}
@@ -182,6 +190,34 @@ public class IndexAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createComplexIndexAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.FatComplexIndex <em>Fat Complex Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.FatComplexIndex
+	 * @generated
+	 */
+	public Adapter createFatComplexIndexAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SlimComplexIndex <em>Slim Complex Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SlimComplexIndex
+	 * @generated
+	 */
+	public Adapter createSlimComplexIndexAdapter() {
 		return null;
 	}
 

@@ -22,9 +22,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.*;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -118,6 +115,26 @@ public class IndexSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case IndexPackage.FAT_COMPLEX_INDEX: {
+				FatComplexIndex<?, ?> fatComplexIndex = (FatComplexIndex<?, ?>)theEObject;
+				T result = caseFatComplexIndex(fatComplexIndex);
+				if (result == null) result = caseComplexIndex(fatComplexIndex);
+				if (result == null) result = caseIndex(fatComplexIndex);
+				if (result == null) result = caseIdentifiableElement(fatComplexIndex);
+				if (result == null) result = caseLabelableElement(fatComplexIndex);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case IndexPackage.SLIM_COMPLEX_INDEX: {
+				SlimComplexIndex<?, ?> slimComplexIndex = (SlimComplexIndex<?, ?>)theEObject;
+				T result = caseSlimComplexIndex(slimComplexIndex);
+				if (result == null) result = caseComplexIndex(slimComplexIndex);
+				if (result == null) result = caseIndex(slimComplexIndex);
+				if (result == null) result = caseIdentifiableElement(slimComplexIndex);
+				if (result == null) result = caseLabelableElement(slimComplexIndex);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -179,6 +196,36 @@ public class IndexSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public <K, V> T caseComplexIndex(ComplexIndex<K, V> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Fat Complex Index</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Fat Complex Index</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <K, V> T caseFatComplexIndex(FatComplexIndex<K, V> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Slim Complex Index</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Slim Complex Index</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public <K, V> T caseSlimComplexIndex(SlimComplexIndex<K, V> object) {
 		return null;
 	}
 

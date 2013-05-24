@@ -22,14 +22,17 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphIndexException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.IdentifiableElementImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SlimComplexIndex;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,15 +41,72 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getNumOfElements <em>Num Of Elements</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getNumOfSlots <em>Num Of Slots</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.ComplexIndexImpl#getIdxTable <em>Idx Table</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl#getNumOfElements <em>Num Of Elements</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl#getNumOfElementIds <em>Num Of Element Ids</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl#getIndexMap <em>Index Map</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl#getEstimatedCapacity <em>Estimated Capacity</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.SlimComplexIndexImpl#isSortable <em>Sortable</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SlimComplexIndexImpl<K, V> extends ComplexIndexImpl<K, V> implements ComplexIndex<K, V> {
+public class SlimComplexIndexImpl<K, V> extends IdentifiableElementImpl implements SlimComplexIndex<K, V> {
+
+	/**
+	 * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNumOfElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long NUM_OF_ELEMENTS_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getNumOfElementIds() <em>Num Of Element Ids</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNumOfElementIds()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long NUM_OF_ELEMENT_IDS_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEstimatedCapacity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer ESTIMATED_CAPACITY_EDEFAULT = new Integer(10000);
+	/**
+	 * The cached value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEstimatedCapacity()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer estimatedCapacity = ESTIMATED_CAPACITY_EDEFAULT;
+	/**
+	 * The default value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSortable()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SORTABLE_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSortable()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean sortable = SORTABLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -55,7 +115,7 @@ public class SlimComplexIndexImpl<K, V> extends ComplexIndexImpl<K, V> implement
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return IndexPackage.Literals.COMPLEX_INDEX;
+		return IndexPackage.Literals.SLIM_COMPLEX_INDEX;
 	}
 	
 	protected SlimComplexIndexImpl() {
@@ -144,6 +204,27 @@ public class SlimComplexIndexImpl<K, V> extends ComplexIndexImpl<K, V> implement
 //		this.setNumOfElements(elementCount);
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Integer getEstimatedCapacity() {
+		return estimatedCapacity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEstimatedCapacity(Integer newEstimatedCapacity) {
+		Integer oldEstimatedCapacity = estimatedCapacity;
+		estimatedCapacity = newEstimatedCapacity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY, oldEstimatedCapacity, estimatedCapacity));
+	}
+
 	//============================================================================================================
 	// ADD
 	//============================================================================================================
@@ -263,6 +344,105 @@ public class SlimComplexIndexImpl<K, V> extends ComplexIndexImpl<K, V> implement
 	}
 
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENTS:
+				return getNumOfElements();
+			case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENT_IDS:
+				return getNumOfElementIds();
+			case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
+				return getIndexMap();
+			case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				return getEstimatedCapacity();
+			case IndexPackage.SLIM_COMPLEX_INDEX__SORTABLE:
+				return isSortable();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
+				setIndexMap((Map<K, V>)newValue);
+				return;
+			case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				setEstimatedCapacity((Integer)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
+				setIndexMap((Map<K, V>)null);
+				return;
+			case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				setEstimatedCapacity(ESTIMATED_CAPACITY_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENTS:
+				return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
+			case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENT_IDS:
+				return NUM_OF_ELEMENT_IDS_EDEFAULT == null ? getNumOfElementIds() != null : !NUM_OF_ELEMENT_IDS_EDEFAULT.equals(getNumOfElementIds());
+			case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
+				return getIndexMap() != null;
+			case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				return ESTIMATED_CAPACITY_EDEFAULT == null ? estimatedCapacity != null : !ESTIMATED_CAPACITY_EDEFAULT.equals(estimatedCapacity);
+			case IndexPackage.SLIM_COMPLEX_INDEX__SORTABLE:
+				return sortable != SORTABLE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (estimatedCapacity: ");
+		result.append(estimatedCapacity);
+		result.append(", sortable: ");
+		result.append(sortable);
+		result.append(')');
+		return result.toString();
+	}
+
 	/**
 	 * {@inheritDoc ComplexIndex#removeAll()}
 	 */

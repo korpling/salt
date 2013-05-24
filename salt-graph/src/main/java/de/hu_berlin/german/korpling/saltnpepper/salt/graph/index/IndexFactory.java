@@ -66,13 +66,22 @@ public interface IndexFactory extends EFactory {
 	IndexMgr createIndexMgr();
 
 	/**
-	 * Returns a new object of class '<em>Complex Index</em>'.
+	 * Returns a new object of class '<em>Fat Complex Index</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Complex Index</em>'.
+	 * @return a new object of class '<em>Fat Complex Index</em>'.
 	 * @generated
 	 */
-	<K, V> ComplexIndex<K, V> createComplexIndex();
+	<K, V> FatComplexIndex<K, V> createFatComplexIndex();
+
+	/**
+	 * Returns a new object of class '<em>Slim Complex Index</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Slim Complex Index</em>'.
+	 * @generated
+	 */
+	<K, V> SlimComplexIndex<K, V> createSlimComplexIndex();
 
 	/**
 	 * Returns the package supported by this factory.
