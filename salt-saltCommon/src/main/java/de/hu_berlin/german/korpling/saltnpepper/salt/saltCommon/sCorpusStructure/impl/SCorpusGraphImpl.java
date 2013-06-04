@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl;
 
+import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -28,16 +29,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
@@ -52,6 +49,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
+import org.eclipse.emf.ecore.util.DelegatingEcoreEList;
 
 /**
  * 
@@ -90,19 +88,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	private void init()
 	{
 		{//creating indexes
-			Index index= null;
 			
-			{//creating node-type index
-				index= IndexFactory.eINSTANCE.createSlimComplexIndex();
-				index.setId(IDX_SNODETYPE);
-				this.getIndexMgr().addIndex(index);
-			}
-			
-			{//creating relation-type index
-				index= IndexFactory.eINSTANCE.createSlimComplexIndex();
-				index.setId(IDX_SRELATIONTYPE);
-				this.getIndexMgr().addIndex(index);
-			}
+			//creating node-type index
+			getCentralIndex().addIndex(IDX_SNODETYPE, Class.class, Node.class);
+			//creating relation-type index
+			getCentralIndex().addIndex(IDX_SRELATIONTYPE, Class.class, Edge.class);
 		}
 	}
 	
@@ -233,17 +223,16 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 		super.basicAddEdge(edge);
 		
-		String slotId= null;
-		//start: compute slot id
-			if (edge instanceof SCorpusRelation)
-				slotId= SCorpusRelation.class.getName();
-			else if (edge instanceof SCorpusDocumentRelation)
-				slotId= SCorpusDocumentRelation.class.getName();
-			else
-				slotId= (String) edge.getClass().getName();
-		//end: compute slot id
-		
-		this.getIndexMgr().getIndex(IDX_SRELATIONTYPE).addElement(slotId, edge);
+		// map some implementation types to the matching interfaces
+		Class key;
+		if (edge instanceof SCorpusRelation)
+			key= SCorpusRelation.class;
+		else if (edge instanceof SCorpusDocumentRelation)
+			key= SCorpusDocumentRelation.class;
+		else
+			key= edge.getClass();
+
+		getCentralIndex().put(IDX_SRELATIONTYPE, key, edge);
 	}
 // ============================ end: handling relations
 // ============================ start: handling nodes
@@ -277,16 +266,17 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}//sid a name if none exists
 		super.basicAddNode(node);
 		
-		String slotId= null;
-		//start: compute slot id
-			if (node instanceof SCorpus)
-				slotId= SCorpus.class.getName();
-			else if (node instanceof SDocument)
-				slotId= SDocument.class.getName();
-			else
-				slotId= (String) node.getClass().getName();
+		// map some implementation types to the matching interfaces
+		Class key;
+		if (node instanceof SCorpus)
+			key= SCorpus.class;
+		else if (node instanceof SDocument)
+			key= SDocument.class;
+		else
+			key= node.getClass();
+		
 		//end: compute slot id
-		this.getIndexMgr().getIndex(IDX_SNODETYPE).addElement(slotId, node);
+		getCentralIndex().put(IDX_SNODETYPE, key, node);
 	}
 // ============================ end: handling nodes
 
@@ -299,16 +289,12 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SCorpus> getSCorpora() 
 	{
-		EList<SCorpus> retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SCorpus.class.getName());
-		if (nodes!= null)
-			retVal= new EcoreEList.UnmodifiableEList<SCorpus>(this,
-					SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpora(),
-					nodes.size(), nodes.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList<SCorpus>(this,
-				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpora(), 0, (Object[]) null);
+		ImmutableList<SCorpus> result = 
+				getCentralIndex().getAll(IDX_SNODETYPE, SCorpus.class);
 		
-		return(retVal);
+		return new DelegatingEcoreEList.UnmodifiableEList<SCorpus>(this, 
+				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpora(), 
+				result);
 	}
 	
 	/**
@@ -318,17 +304,13 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SDocument> getSDocuments() 
 	{
-		EList<SDocument> retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SDocument.class.getName());
-		if (nodes!= null)
-			retVal= new EcoreEList.UnmodifiableEList<SDocument>(this,
-					SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SDocuments(),
-					nodes.size(), nodes.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList<SDocument>(this,
-				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SDocuments(), 0, (Object[]) null);
+		ImmutableList<SDocument> result = 
+				getCentralIndex().getAll(IDX_SNODETYPE, SDocument.class);
 		
-		return(retVal);
-	}
+		return new DelegatingEcoreEList.UnmodifiableEList<SDocument>(this, 
+				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SDocuments(), 
+				result);
+}
 // ============================ end: handling specific nodes
 // ============================ start: handling specific relations
 	/**
@@ -338,17 +320,12 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SCorpusRelation> getSCorpusRelations() 
 	{
-		EList<SCorpusRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SCorpusRelation.class.getName());
+		ImmutableList<SCorpusRelation> result = 
+				getCentralIndex().getAll(IDX_SRELATIONTYPE, SCorpusRelation.class);
 		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList<SCorpusRelation>(this,
-					SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpusRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList<SCorpusRelation>(this,
-				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpusRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return new DelegatingEcoreEList.UnmodifiableEList<SCorpusRelation>(this, 
+				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpusRelations(), 
+				result);	
 	}
 
 	/**
@@ -358,17 +335,12 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SCorpusDocumentRelation> getSCorpusDocumentRelations() 
 	{
-		EList<SCorpusDocumentRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SCorpusDocumentRelation.class.getName());
+		ImmutableList<SCorpusDocumentRelation> result = 
+				getCentralIndex().getAll(IDX_SRELATIONTYPE, SCorpusDocumentRelation.class);
 		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList<SCorpusDocumentRelation>(this,
-					SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpusDocumentRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList<SCorpusDocumentRelation>(this,
-				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpusDocumentRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return new DelegatingEcoreEList.UnmodifiableEList<SCorpusDocumentRelation>(this, 
+				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpusDocumentRelations(), 
+				result);
 	}
 // ============================ end: handling specific relations
 

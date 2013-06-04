@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphTraverserException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.CentralIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 import org.eclipse.emf.common.util.EList;
@@ -62,6 +63,8 @@ public interface Graph extends IdentifiableElement {
 	 * @generated
 	 */
 	IndexMgr getIndexMgr();
+	
+	CentralIndex getCentralIndex();
 
 	/**
 	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getIndexMgr <em>Index Mgr</em>}' reference.

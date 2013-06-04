@@ -143,7 +143,6 @@ public class CentralIndexImpl implements CentralIndex
 		}
 	}
 	
-
 	@Override
 	public <K, V> V get(String indexId, K key)
 	{
@@ -192,7 +191,7 @@ public class CentralIndexImpl implements CentralIndex
 	@Override
 	public <K> boolean remove(String indexId, K key)
 	{
-		if(indexId == null && key == null)
+		if(indexId != null && key != null)
 		{
 			L.writeLock().lock();
 			try

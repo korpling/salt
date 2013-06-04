@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl;
 
+import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
@@ -44,12 +45,14 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltE
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltImproperSTypeException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDataSourceAccessor;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentStructureRootAccessor;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import static de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph.IDX_SNODETYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
@@ -70,6 +73,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
+import org.eclipse.emf.common.util.DelegatingEList;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.DelegatingEcoreEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -120,19 +127,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	private void init()
 	{
 		//start: creating indexes
-			Index index= null;
-			
-			//start: creating node-type index
-				index= IndexFactory.eINSTANCE.createSlimComplexIndex();
-				index.setId(IDX_SNODETYPE);
-				this.getIndexMgr().addIndex(index);
-			//end: creating node-type index
-			
-			//start: creating relation-type index
-				index= IndexFactory.eINSTANCE.createSlimComplexIndex();
-				index.setId(IDX_SRELATIONTYPE);
-				this.getIndexMgr().addIndex(index);
-			//end: creating relation-type index
+			//creating node-type index
+			getCentralIndex().addIndex(IDX_SNODETYPE, Class.class, Node.class);
+			//creating relation-type index
+			getCentralIndex().addIndex(IDX_SRELATIONTYPE, Class.class, Edge.class);
 		//end: creating indexes
 	}
 
@@ -181,27 +179,26 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		
 		super.basicAddEdge(edge);
 		
-		String slotId= null;
-		//start: compute slot id
-			if (edge instanceof STextualRelation)
-				slotId= STextualRelation.class.getName();
-			else if (edge instanceof STimelineRelation)
-				slotId= STimelineRelation.class.getName();
-			else if (edge instanceof SSpanningRelation)
-				slotId= SSpanningRelation.class.getName();
-			else if (edge instanceof SPointingRelation)
-				slotId= SPointingRelation.class.getName();
-			else if (edge instanceof SDominanceRelation)
-				slotId= SDominanceRelation.class.getName();
-			else if (edge instanceof SAudioDSRelation)
-				slotId= SAudioDSRelation.class.getName();
-			else if (edge instanceof SOrderRelation)
-				slotId= SOrderRelation.class.getName();
-			else
-				slotId= (String) edge.getClass().getName();
-		//end: compute slot id
+		Class key;
+		// map some implementation types to the matching interfaces
+		if (edge instanceof STextualRelation)
+			key= STextualRelation.class;
+		else if (edge instanceof STimelineRelation)
+			key= STimelineRelation.class;
+		else if (edge instanceof SSpanningRelation)
+			key= SSpanningRelation.class;
+		else if (edge instanceof SPointingRelation)
+			key= SPointingRelation.class;
+		else if (edge instanceof SDominanceRelation)
+			key= SDominanceRelation.class;
+		else if (edge instanceof SAudioDSRelation)
+			key= SAudioDSRelation.class;
+		else if (edge instanceof SOrderRelation)
+			key= SOrderRelation.class;
+		else
+			key= edge.getClass();
 		
-		this.getIndexMgr().getIndex(IDX_SRELATIONTYPE).addElement(slotId, edge);
+		getCentralIndex().put(IDX_SRELATIONTYPE, key, edge);
 	}
 // ============================ end: handling relations
 // ============================ start: handling nodes
@@ -241,25 +238,24 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			((SNode)node).setSId(this.getSId() + "#"+ ((SNode)node).getSName());
 		super.basicAddNode(node);
 		
-		String slotId= null;
-		//start: compute slot id
-			if (node instanceof SToken)
-				slotId= SToken.class.getName();
-			else if (node instanceof STextualDS)
-				slotId= STextualDS.class.getName();
-			else if (node instanceof STimeline)
-				slotId= STimeline.class.getName();
-			else if (node instanceof SSpan)
-				slotId= SSpan.class.getName();
-			else if (node instanceof SStructure)
-				slotId= SStructure.class.getName();
-			else if (node instanceof SAudioDataSource)
-				slotId= SAudioDataSource.class.getName();
-			else
-				slotId= (String) node.getClass().getName();
-		//end: compute slot id
+		// map some implementation types to the matching interfaces
+		Class key;
+		if (node instanceof SToken)
+			key= SToken.class;
+		else if (node instanceof STextualDS)
+			key= STextualDS.class;
+		else if (node instanceof STimeline)
+			key= STimeline.class;
+		else if (node instanceof SSpan)
+			key= SSpan.class;
+		else if (node instanceof SStructure)
+			key= SStructure.class;
+		else if (node instanceof SAudioDataSource)
+			key= SAudioDataSource.class;
+		else
+			key= node.getClass();
 		
-		this.getIndexMgr().getIndex(IDX_SNODETYPE).addElement(slotId, node);
+		getCentralIndex().put(IDX_SNODETYPE, key, node);
 	}
 // ============================ end: handling nodes
 	/**
@@ -336,41 +332,40 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 // ============================ start: handling specific nodes
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public EList<STextualDS> getSTextualDSs() 
+	private<T> EList<T> getNodeOfTypeUsingIndex(Class<? extends T> type, 
+			EStructuralFeature feature)
 	{
-		EList<STextualDS> retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(STextualDS.class.getName());
-		if (nodes!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualDSs(),
-					nodes.size(), nodes.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualDSs(), 0, (Object[]) null);
+		ImmutableList<T> result = 
+				getCentralIndex().getAll(IDX_SNODETYPE, type);
+		return new DelegatingEcoreEList.UnmodifiableEList<T>(this, feature, result);
+	}
+	private<T> EList<T> getRelationOfTypeUsingIndex(Class<? extends T> type,
+			EStructuralFeature feature)
+	{
+		ImmutableList<T> result = 
+				getCentralIndex().getAll(IDX_SRELATIONTYPE, type);
 		
-		return(retVal);
+		return new DelegatingEcoreEList.UnmodifiableEList<T>(this, feature, result);
 	}
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public EList<STextualDS> getSTextualDSs() 
+	{
+		return getNodeOfTypeUsingIndex(STextualDS.class, 
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualDSs());
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
 	public EList<SToken> getSTokens() 
 	{
-		EList<SToken> retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SToken.class.getName());
-		if (nodes!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens(),
-					nodes.size(), nodes.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens(), 0, (Object[]) null);
-		return(retVal);
+		return getNodeOfTypeUsingIndex(SToken.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens());
 	}
 	
 	/**
@@ -387,17 +382,18 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings("unchecked")
 	public STimeline basicGetSTimeline() 
 	{
-		STimeline retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(STimeline.class.getName());
-		if (	(nodes!= null)&&
-				(nodes.size()> 0))
-		{	
-			retVal= (STimeline)nodes.get(0);
+		ImmutableList<STimeline> result = 
+				getCentralIndex().getAll(IDX_SNODETYPE, STimeline.class);
+		if(result.isEmpty())
+		{
+			return null;
 		}
-		return(retVal);
+		else
+		{
+			return result.get(0);
+		}
 	}
 
 	/**
@@ -567,7 +563,6 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 *{@inheritDoc SDocumentGraph#getSNodeBySequence(SDataSourceSequence)}
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public EList<SNode> getSNodeBySequence(SDataSourceSequence sequence) {
 		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
@@ -859,51 +854,27 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<SSpan> getSSpans() 
 	{
-		EList<SSpan> retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SSpan.class.getName());
-		if (nodes!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpans(),
-					nodes.size(), nodes.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpans(), 0, (Object[]) null);
-		return(retVal);
+		return getNodeOfTypeUsingIndex(SSpan.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpans());
 	}
 
 	/**
 	 * {@inheritDoc SDocumentGraph#getSStructures()}
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<SStructure> getSStructures() 
 	{
-		EList<SStructure> retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SStructure.class.getName());
-		if (nodes!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SStructures(),
-					nodes.size(), nodes.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SStructures(), 0, (Object[]) null);
-		return(retVal);
+		return getNodeOfTypeUsingIndex(SStructure.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SStructures());
 	}
 	
 	/**
 	 * {@inheritDoc SDocumentGraph#getSAudioDataSources()}
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public EList<SAudioDataSource> getSAudioDataSources() {
-		EList<SAudioDataSource> retVal= null;
-		EList<Node> nodes= (EList<Node>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SNODETYPE)).getSlot(SAudioDataSource.class.getName());
-		if (nodes!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDataSources(),
-					nodes.size(), nodes.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDataSources(), 0, (Object[]) null);
-		return(retVal);
+		return getNodeOfTypeUsingIndex(SAudioDataSource.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDataSources());
 	}
 
 
@@ -915,137 +886,67 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<STextualRelation> getSTextualRelations() 
 	{
-		EList<STextualRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(STextualRelation.class.getName());
-		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return getRelationOfTypeUsingIndex(STextualRelation.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STextualRelations());
 	}
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<SOrderRelation> getSOrderRelations() {
-		EList<SOrderRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SOrderRelation.class.getName());
-		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SOrderRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SOrderRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return getRelationOfTypeUsingIndex(SOrderRelation.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SOrderRelations());
 	}
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<STimelineRelation> getSTimelineRelations() 
 	{
 
-		EList<STimelineRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(STimelineRelation.class.getName());
-		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STimelineRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STimelineRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return getRelationOfTypeUsingIndex(STimelineRelation.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STimelineRelations());
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<SSpanningRelation> getSSpanningRelations() 
 	{
-		EList<SSpanningRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SSpanningRelation.class.getName());
-		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpanningRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpanningRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return getRelationOfTypeUsingIndex(SSpanningRelation.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SSpanningRelations());
 	}
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<SDominanceRelation> getSDominanceRelations() 
 	{
-		EList<SDominanceRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SDominanceRelation.class.getName());
-		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SDominanceRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SDominanceRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return getRelationOfTypeUsingIndex(SDominanceRelation.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SDominanceRelations());
 	}
 
 	/**
 	 * {@inheritDoc SDocumentGraph#getSPointingRelations()}
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public EList<SPointingRelation> getSPointingRelations() 
 	{
-		EList<SPointingRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SPointingRelation.class.getName());
-		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SPointingRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SPointingRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return getRelationOfTypeUsingIndex(SPointingRelation.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SPointingRelations());
 	}
 
 	/**
 	 * {@inheritDoc SDocumentGraph#getSAudioDSRelations()}
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public EList<SAudioDSRelation> getSAudioDSRelations() {
-		EList<SAudioDSRelation> retVal= null;
-		EList<Edge> edges= (EList<Edge>)(EList<? extends Object>)((ComplexIndex)this.getIndexMgr().getIndex(IDX_SRELATIONTYPE)).getSlot(SAudioDSRelation.class.getName());
-		
-		if (edges!= null)
-			retVal= new EcoreEList.UnmodifiableEList(this,
-					SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDSRelations(),
-					edges.size(), edges.toArray());
-		else retVal= new EcoreEList.UnmodifiableEList(this,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDSRelations(), 0, (Object[]) null);
-		
-		return(retVal);
+		return getRelationOfTypeUsingIndex(SAudioDSRelation.class,
+				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_SAudioDSRelations());
 	}
 // ============================ end: handling specific relations
 	

@@ -516,6 +516,13 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		return indexMgr != null && indexMgr.eIsProxy() ? (IndexMgr)eResolveProxy((InternalEObject)indexMgr) : indexMgr;
 	}
 
+	@Override
+	public CentralIndex getCentralIndex()
+	{
+		return centralIndex;
+	}
+	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
