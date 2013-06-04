@@ -103,10 +103,36 @@ public class CentralIndexImpl implements CentralIndex
 				Class<?> keyClass = indexKeyTypes.get(indexId);
 				Class<?> valueClass = indexValueTypes.get(indexId);
 
-				if(keyClass.isAssignableFrom(key.getClass()) 
+				if(keyClass != null && valueClass != null
+						&& keyClass.isAssignableFrom(key.getClass()) 
 						&& valueClass.isAssignableFrom(value.getClass()))
 				{
 					return indexes.get(indexId).put(key, value);
+				}
+			}
+			return false;
+		}
+		finally
+		{
+			L.writeLock().unlock();
+		}
+	}
+	
+	@Override
+	public <K, V> boolean putAll(String indexId, K key, Collection<V> values)
+	{
+		L.writeLock().lock();
+		try
+		{
+			if(indexId != null && key != null && values != null && !values.isEmpty())
+			{
+				Class<?> keyClass = indexKeyTypes.get(indexId);
+				Class<?> valueClass = indexValueTypes.get(indexId);
+
+				if(keyClass.isAssignableFrom(key.getClass()) 
+						&& valueClass.isAssignableFrom(values.iterator().next().getClass()))
+				{
+					return indexes.get(indexId).putAll(key, values);
 				}
 			}
 			return false;
@@ -135,13 +161,13 @@ public class CentralIndexImpl implements CentralIndex
 	@Override
 	public <K, V> ImmutableList<V> getAll(String indexId, K key)
 	{
-		if(indexId == null && key == null)
+		if(indexId != null && key != null)
 		{
 			L.readLock().lock();
 			try
 			{
 				Class<?> keyClass = indexKeyTypes.get(indexId);
-				if(keyClass.isAssignableFrom(key.getClass()))
+				if(keyClass != null && keyClass.isAssignableFrom(key.getClass()))
 				{
 					return ImmutableList
 							.copyOf((Collection<V>) indexes.get(indexId).get(key));
@@ -201,6 +227,7 @@ public class CentralIndexImpl implements CentralIndex
 				{
 					return indexes.get(indexId).remove(key, value);
 				}
+				
 			}
 			finally
 			{
@@ -246,8 +273,6 @@ public class CentralIndexImpl implements CentralIndex
 			{
 				idx.clear();
 			}
-			indexKeyTypes.remove(indexId);
-			indexValueTypes.remove(indexId);
 		}
 		finally
 		{

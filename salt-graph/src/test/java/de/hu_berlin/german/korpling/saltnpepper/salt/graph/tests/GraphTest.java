@@ -35,6 +35,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphExcep
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.tests.GraphTraverserModuleTest;
 
 /**

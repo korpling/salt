@@ -67,6 +67,7 @@ public interface CentralIndex  {
 	void removeAll();
 
 	<K,V> boolean put(String indexId, K key, V value);
+	<K,V> boolean putAll(String indexId, K key, Collection<V> values);
 	<K,V> V get(String indexId, K key);
 	<K,V> ImmutableList<V> getAll(String indexId, K key);
 	<K> boolean remove(String indexId, K key);
