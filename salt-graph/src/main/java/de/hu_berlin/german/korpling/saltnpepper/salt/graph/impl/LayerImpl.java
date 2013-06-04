@@ -222,6 +222,12 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 		}
 		
 		Layer other= (Layer) obj;
+		final EList<Node> nodes = this.getNodes();
+		final EList<Node> otherNodes = other.getNodes();
+		final EList<Edge> edges = this.getEdges();
+		final EList<Edge> otherEdges = other.getEdges();
+		
+		
 		
 		{//check super-layers
 			if (this.getSuperLayer() == null) 
@@ -286,16 +292,16 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 		}//check sub-layers
 		
 		{//check nodes
-			if (this.getNodes() == null) 
+			if (nodes == null) 
 			{
-				if (other.getNodes()!= null)
+				if (otherNodes != null)
 				{
 					if (differences!= null)
 						differences.add("This layer object '"+this.getId()+"' does not have node objects, whereas the given one '"+other.getId()+"' does.");
 					else return false;
 				}
 			}
-			else if (other.getNodes()== null)
+			else if (otherNodes == null)
 			{
 				if (differences!= null)
 					differences.add("This layer object '"+this.getId()+"' has node objects, whereas the given one '"+other.getId()+"' does not.");
@@ -304,13 +310,13 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 			else 
 			{
 				//check size of Nodes
-				if (this.getNodes().size()!= other.getNodes().size())
+				if (nodes.size() != otherNodes.size())
 				{
 					if (differences!= null)
 						differences.add("The number of node objects of this layer object '"+this.getId()+"' is not the same as the number of sub-layer objects of the given layer object '"+other.getId()+"'.");
 					else return false;
 				}
-				for (int i= 0; i< this.getNodes().size(); i++)
+				for (int i= 0; i < nodes.size(); i++)
 				{
 					if (differences!= null)
 					{
@@ -318,11 +324,11 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 //						if (diffs!= null)
 //							differences.addAll(diffs);
 						
-						this.getNodes().get(i).equals(differences, other.getNodes().get(i));
+						nodes.get(i).equals(differences, otherNodes.get(i));
 					}
 					else
 					{
-						if (!this.getNodes().get(i).equals(differences, other.getNodes().get(i)))
+						if (!nodes.get(i).equals(differences, otherNodes.get(i)))
 							return(false);
 					}
 				}
@@ -330,16 +336,16 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 		}//check nodes
 		
 		{//check edges
-			if (this.getEdges() == null) 
+			if (edges == null) 
 			{
-				if (other.getEdges()!= null)
+				if (otherEdges != null)
 				{
 					if (differences!= null)
 						differences.add("This layer object '"+this.getId()+"' does not have edge objects, whereas the given one '"+other.getId()+"' does.");
 					else return false;
 				}
 			}
-			else if (other.getEdges()== null)
+			else if (otherEdges == null)
 			{
 				if (differences!= null)
 					differences.add("This layer object '"+this.getId()+"' has edge objects, whereas the given one '"+other.getId()+"' does not.");
@@ -348,24 +354,24 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 			else 
 			{
 				//check size of Edges
-				if (this.getEdges().size()!= other.getEdges().size())
+				if (edges.size()!= otherEdges.size())
 				{
 					if (differences!= null)
 						differences.add("The number of edges of this layer object '"+this.getId()+"' is not the same as the number of edge objects of the given layer object '"+other.getId()+"'.");
 					else return false;
 				}
-				for (int i= 0; i< this.getEdges().size(); i++)
+				for (int i = 0; i < edges.size(); i++)
 				{
 					if (differences!= null)
 					{
 //						EList<String> diffs= this.getEdges().get(i).differences(other.getEdges().get(i));
 //						if (diffs!= null)
 //							differences.addAll(diffs);
-						this.getEdges().get(i).equals(differences, other.getEdges().get(i));
+						edges.get(i).equals(differences, otherEdges.get(i));
 					}
 					else
 					{
-						if (!this.getEdges().get(i).equals(differences, other.getEdges().get(i)))
+						if (!edges.get(i).equals(differences, otherEdges.get(i)))
 							return(false);
 					}
 				}
