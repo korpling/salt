@@ -82,7 +82,14 @@ public interface IndexFactory extends EFactory {
 	 * @generated
 	 */
 	<K, V> SlimComplexIndex<K, V> createSlimComplexIndex();
-
+	
+	/**
+	 * Returns the default implementation of {@link ComplexIndex}, which currently is the 
+	 * {@link SlimComplexIndex}, but with no guarantee.
+	 * @return
+	 */
+	<K, V> ComplexIndex<K, V> createComplexIndex();
+	
 	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->

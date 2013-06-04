@@ -122,12 +122,9 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc IndexFactory#createComplexIndex()}
 	 */
 	public <K, V> ComplexIndex<K, V> createComplexIndex() {
-//		ComplexIndexImpl<K, V> complexIndex = new ComplexIndexImpl<K, V>();
-//		return complexIndex;
 		SlimComplexIndexImpl<K, V> complexIndex = new SlimComplexIndexImpl<K, V>();
 		return complexIndex;
 	}
