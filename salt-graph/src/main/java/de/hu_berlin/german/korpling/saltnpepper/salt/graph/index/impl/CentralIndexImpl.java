@@ -204,12 +204,8 @@ public class CentralIndexImpl implements CentralIndex
 			
 			try
 			{
-				Class<?> keyClass = indexKeyTypes.get(indexId);
-				if(keyClass != null && keyClass.isAssignableFrom(key.getClass()))
-				{
-					return ImmutableList
-							.copyOf((Collection<V>) indexes.get(indexId).get(key));
-				}
+				return ImmutableList
+						.copyOf((Collection<V>) indexes.get(indexId).get(key));
 			}
 			finally
 			{
