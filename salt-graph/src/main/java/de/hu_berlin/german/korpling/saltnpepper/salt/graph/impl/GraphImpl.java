@@ -187,7 +187,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				if  (GraphPackage.Literals.EDGE__SOURCE.equals(notification.getFeature()))						 	
 				{
 					if (notification.getOldValue()!=null) {
-						changeEdgeSource(((Edge)notification.getNotifier()).getId(), ((Node)notification.getNewValue()).getId());
+						changeEdgeSource(((Edge)notification.getNotifier()).getId(), 
+								((Node) notification.getOldValue()).getId(),
+								((Node)notification.getNewValue()).getId());
 					}
 					//create entry in outgoing index
 					else
@@ -204,7 +206,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						String id= null;
 						if (((Node)notification.getNewValue())!= null)
 							id= ((Node)notification.getNewValue()).getId();
-						changeEdgeTarget(((Edge)notification.getNotifier()).getId(), id);
+						changeEdgeTarget(((Edge)notification.getNotifier()).getId(),
+								((Node) notification.getOldValue()).getId(),
+								id);
 					}
 					//create entry in outgoing index
 					else
@@ -1018,7 +1022,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
-	public void changeEdgeTarget(String edgeId, String oldTargetId, String nodeId) 
+	protected void changeEdgeTarget(String edgeId, String oldTargetId, String nodeId) 
 	{
 		Edge edge= this.getEdge(edgeId);
 		if (edge== null)

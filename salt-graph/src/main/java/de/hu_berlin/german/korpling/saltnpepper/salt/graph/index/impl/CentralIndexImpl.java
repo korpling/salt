@@ -214,7 +214,7 @@ public class CentralIndexImpl implements CentralIndex
 	@Override
 	public <K, V> boolean remove(String indexId, K key, V value)
 	{
-		if(indexId == null && key == null)
+		if(indexId != null && key != null && value != null)
 		{
 			L.writeLock().lock();
 			try
