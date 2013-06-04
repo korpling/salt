@@ -17,9 +17,11 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphTraverserException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 import org.eclipse.emf.common.util.EList;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,6 +46,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
  * @generated
  */
 public interface Graph extends IdentifiableElement {
+	
 	/**
 	 * Returns the value of the '<em><b>Index Mgr</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -69,7 +72,7 @@ public interface Graph extends IdentifiableElement {
 	 * @generated
 	 */
 	void setIndexMgr(IndexMgr value);
-
+	
 	/**
 	 * Returns the value of the '<em><b>Edges</b></em>' containment reference list.
 	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge}.

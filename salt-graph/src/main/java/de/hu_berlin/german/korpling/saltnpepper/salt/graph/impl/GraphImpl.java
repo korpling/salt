@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 
+import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -46,13 +47,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphInsertException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.CentralIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.CentralIndexImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserModule;
-import java.util.LinkedHashSet;
-import java.util.Map;
+import java.util.Set;
+import org.eclipse.emf.common.util.DelegatingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,6 +79,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	
 	//TODO to delete
 	public static Long equalTime= 0l;
+	
+	private CentralIndex centralIndex = new CentralIndexImpl();
 	
 	private class GraphAdapter extends EContentAdapter
 	{
@@ -310,42 +313,14 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		this.graphAdapter = new GraphAdapter();
 		this.graphAdapter.graph= this;
 		
-		//creating index manager and all needed indexes
-		this.indexMgr= IndexFactory.eINSTANCE.createIndexMgr();
-		
-		
-//		Index index= null;
-//		node index
-//		index= IndexFactory.eINSTANCE.createSimpleIndex();
-//		index.setId(IDX_NODE_ID_NODE);
-//		this.getIndexMgr().addIndex(index);
-//		
-//		//edge index
-//		index= IndexFactory.eINSTANCE.createSimpleIndex();
-//		index.setId(IDX_EDGE_ID_EDGE);
-//		this.getIndexMgr().addIndex(index);
-		
-		Index index= null;
-		
 		//node index
-		index= IndexFactory.eINSTANCE.createIdentifiableElementIndex();
-		index.setId(IDX_NODE_ID_NODE);
-		this.getIndexMgr().addIndex(index);
-		
+		centralIndex.addIndex(IDX_NODE_ID_NODE, String.class, Node.class);
 		//edge index
-		index= IndexFactory.eINSTANCE.createIdentifiableElementIndex();
-		index.setId(IDX_EDGE_ID_EDGE);
-		this.getIndexMgr().addIndex(index);
-		
+		centralIndex.addIndex(IDX_EDGE_ID_EDGE, String.class, Edge.class);
 		//outgoing edge index
-		index= IndexFactory.eINSTANCE.createSlimComplexIndex();
-		index.setId(IDX_OUTEDGES);
-		this.getIndexMgr().addIndex(index);
-		
+		centralIndex.addIndex(IDX_OUTEDGES, String.class, Edge.class);
 		//ingoing edge index
-		index= IndexFactory.eINSTANCE.createSlimComplexIndex();
-		index.setId(IDX_INEDGES);
-		this.getIndexMgr().addIndex(index);
+		centralIndex.addIndex(IDX_INEDGES, String.class, Edge.class);
 	}
 	
 	/**
@@ -647,7 +622,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		}//if node already exists, create new Id
 		
 		this.getNodes().add(node);
-		this.getIndexMgr().getIndex(IDX_NODE_ID_NODE).addElement(node.getId(), node);
+		centralIndex.put(IDX_NODE_ID_NODE, node.getId(), node);
 		{//create a notifier for changes in node
 			node.eAdapters().add(this.graphAdapter);
 			node.getIdentifier().eAdapters().add(this.graphAdapter);
@@ -677,9 +652,15 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	 */
 	public Node getNode(String nodeId)
 	{ 
-		Node retNode= null;
-		retNode= (Node)((SimpleIndex)this.getIndexMgr().getIndex(IDX_NODE_ID_NODE)).getElement(nodeId);
-		return(retNode);
+		Set<Node> set = centralIndex.get(IDX_NODE_ID_NODE, nodeId);
+		if(set.isEmpty())
+		{
+			return null;
+		}
+		else
+		{
+			return set.iterator().next();
+		}
 	}
 
 	/**
@@ -693,23 +674,27 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= false;
 		if ( (node!= null) && (node.getId()!= null))
 		{
-			if (this.getIndexMgr().getIndex(IDX_NODE_ID_NODE).hasKey(node.getId()))
+			String nodeId = node.getId();
+			if (centralIndex.containsKey(IDX_NODE_ID_NODE, nodeId))
 			{	
 				//deleting all outgoing edges
-				for (Edge edge: this.getOutEdges(node.getId()))
+				for (Edge edge: this.getOutEdges(nodeId))
 				{
-					this.removeEdgeById(edge.getId());
+					this.removeEdge(edge);
 				}
 				//deleting all incoming edges
-				for (Edge edge: this.getInEdges(node.getId()))
+				for (Edge edge: this.getInEdges(nodeId))
 				{
-					this.removeEdgeById(edge.getId());
+					this.removeEdge(edge);
 				}
 				
+				Node internalNode = getNode(nodeId);
 				//removing node from internal list
-				this.getNodes().remove(this.getNode(node.getId()));
+				this.getNodes().remove(internalNode);
+				
 				//removing node from *all* indexes
-				getIndexMgr().removeElement(getNode(node.getId()));
+				centralIndex.remove(IDX_NODE_ID_NODE, nodeId);
+				centralIndex.removeElement(node);
 				
 				//remove observers on edge
 				node.eAdapters().remove(this.graphAdapter);
@@ -752,12 +737,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	{
 		boolean retVal= true;
 		
-		//clearing index for edges
-		this.getIndexMgr().getIndex(IDX_NODE_ID_NODE).removeAll();
-		
-		//clearing other indexes 
-		for (Node node: this.getNodes())	
-			this.getIndexMgr().removeElement(node);
+		//clearing index for nodes
+		centralIndex.clearIndex(IDX_NODE_ID_NODE);
 		
 		//remove all Edges, because they can' t exist without nodes
 		this.removeEdges();
@@ -803,7 +784,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		//put new edge into edge list
 		this.getEdges().add(edge);
 		//put edge into naming index
-		this.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE).addElement(edge.getId(), edge);
+		centralIndex.put(IDX_EDGE_ID_EDGE, edge.getId(), edge);
 				
 		//throw exception, if source isn't null, but is not added to graph 
 		if (edge.getSource()!= null)
@@ -813,7 +794,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				throw new GraphInsertException("Cannot insert the given edge, because source of edge does not belong to list of nodes in graph: "+ edge.getSource().getId());
 			}
 			//insert edge into index outEdges
-			this.getIndexMgr().getIndex(IDX_OUTEDGES).addElement(edge.getSource().getId(), edge);
+			centralIndex.put(IDX_OUTEDGES, edge.getSource().getId(), edge);
 		}
 		//throw exception, if target isn't null, but is not added to graph
 		if (edge.getTarget()!= null)
@@ -821,7 +802,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			if ((this.getNode(edge.getTarget().getId())== null))
 				throw new GraphException("Cannot insert the given edge, because destination of edge  does not belong to list of nodes in graph: "+ edge.getTarget());
 			//insert edge in index inEdges
-			this.getIndexMgr().getIndex(IDX_INEDGES).addElement(edge.getTarget().getId(), edge);
+			centralIndex.put(IDX_INEDGES, edge.getTarget().getId(), edge);
 		}	
 		
 		{//create a notifier for changes in edge
@@ -847,9 +828,15 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	 */
 	public Edge getEdge(String edgeId) 
 	{
-		Edge retEdge= null;
-		retEdge= (Edge)((SimpleIndex)this.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE)).getElement(edgeId);
-		return(retEdge);
+		Set<Edge> set = centralIndex.get(IDX_EDGE_ID_EDGE, edgeId);
+		if(set.isEmpty())
+		{
+			return null;
+		}
+		else
+		{
+			return set.iterator().next();
+		}
 	}
 
 	/**
@@ -860,8 +847,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	{
 		EList<Edge> retList= null;
 		//searching for all edges going out from nodeId1
-		LinkedHashSet<Edge> outEdges = 
-				(LinkedHashSet<Edge>)this.getIndexMgr().getIndex(IDX_OUTEDGES).getIndexMap().get(nodeId1);
+		Set<Edge> outEdges = centralIndex.get(IDX_OUTEDGES, nodeId1);
 		
 		if(outEdges != null)
 		{
@@ -887,12 +873,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	 */
 	public EList<Edge> getInEdges(String nodeId) 
 	{
-		EList<Edge> inEdges= new BasicEList<Edge>();
-		if (((ComplexIndex)this.getIndexMgr().getIndex(IDX_INEDGES)).hasSlot(nodeId))
-		{
-			for (Object edge: ((ComplexIndex)this.getIndexMgr().getIndex(IDX_INEDGES)).getSlot(nodeId))
-				inEdges.add((Edge) edge);
-		}
+		ImmutableList<Edge> e = centralIndex.getAll(IDX_INEDGES, nodeId);
+		EList<Edge> inEdges = new DelegatingEList.UnmodifiableEList<Edge>(e);
 		return(inEdges);
 	}
 
@@ -903,12 +885,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	 */
 	public EList<Edge> getOutEdges(String nodeId) 
 	{
-		EList<Edge> outEdges= new BasicEList<Edge>();
-		if (((ComplexIndex)this.getIndexMgr().getIndex(IDX_OUTEDGES)).hasSlot(nodeId))
-		{
-			for (Object edge: ((ComplexIndex)this.getIndexMgr().getIndex(IDX_OUTEDGES)).getSlot(nodeId))
-				outEdges.add((Edge) edge);
-		}
+		ImmutableList<Edge> e = centralIndex.getAll(IDX_OUTEDGES, nodeId);
+		EList<Edge> outEdges = new DelegatingEList.UnmodifiableEList<Edge>(e);
 		return(outEdges);
 	}
 
@@ -923,7 +901,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		if (edge!= null)
 		{
 			//removing edge from all indexes
-			this.getIndexMgr().removeElement(edge);
+			centralIndex.remove(IDX_EDGE_ID_EDGE, edge.getId());
+			centralIndex.removeElement(edge);
 			//removing edge from internal list
 			this.getEdges().remove(edge);
 			
@@ -957,13 +936,12 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		boolean retVal= true;
 		
 		//clearing index for edges
-		this.getIndexMgr().getIndex(IDX_EDGE_ID_EDGE).removeAll();
-		this.getIndexMgr().getIndex(IDX_OUTEDGES).removeAll();
-		this.getIndexMgr().getIndex(IDX_INEDGES).removeAll();
-		
+		centralIndex.clearIndex(IDX_EDGE_ID_EDGE);
+		centralIndex.clearIndex(IDX_OUTEDGES);
+		centralIndex.clearIndex(IDX_INEDGES);
 		//clearing other indexes 
 		for (Edge edge: this.getEdges())	
-			this.getIndexMgr().removeElement(edge);
+			centralIndex.removeElement(edge);
 		
 		return(retVal);
 	}
@@ -1003,15 +981,18 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		
 		if (edge.getSource()== null) 
 			throw new GraphException("Cannot insert the given edge, the source (node from wich the edge comes) is empty. Edge: "+edge);
+		
+		String oldSourceId = edge.getSource().getId();
+		
 		//set new source in edge if it isn't already reset
-		if (!edge.getSource().getId().equalsIgnoreCase(nodeId)) 
+		if (!oldSourceId.equalsIgnoreCase(nodeId)) 
 			edge.setSource(this.getNode(nodeId));
 		
 		//remove old entry in outgoing index
-		((ComplexIndex)this.getIndexMgr().getIndex(IDX_OUTEDGES)).removeElement(edge);
+		centralIndex.remove(IDX_OUTEDGES, oldSourceId, edge);
 
 		//create entry in outgoing index
-		this.getIndexMgr().getIndex(IDX_OUTEDGES).addElement(edge.getSource().getId(), edge);
+		centralIndex.put(IDX_OUTEDGES, nodeId, edge);
 	}
 
 	/**
@@ -1029,15 +1010,17 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		if (edge.getTarget().getId()== null) 
 			throw new GraphException("Cannot insert the given edge, because the ID of target is null. Edge: "+edge);
 		
+		String oldTargetId = edge.getTarget().getId();
+		
 		//set new target in edge if it isn't already reset
-		if (!edge.getTarget().getId().equalsIgnoreCase(nodeId)) 
+		if (!oldTargetId.equalsIgnoreCase(nodeId)) 
 			edge.setTarget(this.getNode(nodeId));
 		
 		//remove old entry in ingoing index
-		((ComplexIndex)this.getIndexMgr().getIndex(IDX_INEDGES)).removeElement(edge);
-		
+		centralIndex.remove(IDX_INEDGES, oldTargetId, edge);
+	
 		//create entry in ingoing index
-		this.getIndexMgr().getIndex(IDX_INEDGES).addElement(edge.getTarget().getId(), edge);
+		centralIndex.put(IDX_INEDGES, nodeId, edge);
 	}
 
 	/**
