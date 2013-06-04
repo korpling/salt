@@ -508,6 +508,28 @@ public class GraphTest extends IdentifiableElementTest {
 		}
 	}
 	
+	/**
+	 * Tests if nodes are also removed from layers, if they are removed from graph.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeNode(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node)
+	 */
+	public void testRemoveNode__Node2() 
+	{
+		Layer layer1= GraphFactory.eINSTANCE.createLayer();
+		this.getFixture().addLayer(layer1);
+		for (Node node: this.nodes)
+		{
+			this.getFixture().addNode(node);
+			layer1.getNodes().add(node);
+		}
+		assertEquals(this.nodes.size(), layer1.getNodes().size());
+		for (Node node: this.nodes)
+		{
+			this.getFixture().removeNode(node);
+		}
+		assertEquals(0, layer1.getNodes().size());
+		
+	}
+	
 	public void testRemoveNodeByRemovingFromList() 
 	{
 		for (Node node: this.nodes )
@@ -893,6 +915,42 @@ public class GraphTest extends IdentifiableElementTest {
 		Edge edge= GraphFactory.eINSTANCE.createEdge();
 		edge.setId("not there");
 		assertFalse(this.getFixture().removeEdge(edge));
+	}
+	
+	/**
+	 * Creates an edge, puts it into graph and a layer and removes it from the graph. Tests if edge is even removed in layer. 
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeEdge(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge)
+	 */
+	public void testRemoveEdge__Edge2() 
+	{
+		Node node1= GraphFactory.eINSTANCE.createNode();
+		Node node2= GraphFactory.eINSTANCE.createNode();
+		this.getFixture().addNode(node1);
+		this.getFixture().addNode(node2);
+		
+		Layer layer1= GraphFactory.eINSTANCE.createLayer();
+		this.getFixture().getLayers().add(layer1);
+		Collection<Edge> edges= new Vector<Edge>();
+		for (int i=0; i< 5; i++)
+		{
+			Edge edge= GraphFactory.eINSTANCE.createEdge();
+			edge.setSource(node1);
+			edge.setSource(node2);
+			this.getFixture().addEdge(edge);
+			layer1.getEdges().add(edge);
+			edges.add(edge);
+		}
+		assertEquals(new Long(5), this.getFixture().getNumOfEdges());
+		assertEquals(new Long(1), this.getFixture().getNumOfLayers());
+		assertEquals(5, layer1.getEdges().size());
+		
+		for (Edge edge: edges)
+		{
+			this.getFixture().removeEdge(edge);
+		}
+		assertEquals(new Long(0), this.getFixture().getNumOfEdges());
+		assertEquals(new Long(1), this.getFixture().getNumOfLayers());
+		assertEquals(0, layer1.getEdges().size());
 	}
 	
 	public void testIncompleteEdge()

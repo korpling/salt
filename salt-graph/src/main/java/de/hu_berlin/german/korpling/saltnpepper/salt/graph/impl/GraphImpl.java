@@ -742,6 +742,13 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 					this.removeEdge(edge);
 				}
 				
+				//remove node even from layers
+				for (Layer layer: this.getLayers())
+				{
+					if (layer!= null)
+						layer.getNodes().remove(node);
+				}
+				
 				Node internalNode = getNode(nodeId);
 				//removing node from internal list
 				this.getNodes().remove(internalNode);
@@ -951,6 +958,13 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			centralIndex.removeElement(edge);
 			//removing edge from internal list
 			this.getEdges().remove(edge);
+			
+			//remove edge even from layer
+			for (Layer layer: this.getLayers())
+			{
+				if (layer!= null)
+					layer.getEdges().remove(edge);
+			}
 			
 			//remove observers on edge
 			edge.eAdapters().remove(this.graphAdapter);
