@@ -17,14 +17,15 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 
-import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -34,6 +35,8 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.service.log.LogService;
+
+import com.google.common.collect.ImmutableList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
@@ -51,9 +54,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.CentralIndexImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserModule;
-import java.util.List;
-import java.util.Set;
-import org.eclipse.emf.common.util.DelegatingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -395,8 +395,22 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 					else throw new GraphException("Only a node object can be added into graph.nodes()-list. But added was: "+notification.getNewValue().getClass());
 					break;
 				case Notification.ADD_MANY:
-					throw new GraphException("More than one nodes are added ontime. I don't know what to do. This is an internal error.");
-//					break;
+				{
+					if (notification.getNewValue() instanceof List)
+					{
+						List<?> list= (List<?>)notification.getNewValue();
+						if (list.size()!= 0)
+						{
+							for (Object object: list)
+							{
+								Node node= (Node) object;
+								if (node!= null)
+									this.basicAddNode(node);
+							}
+						}
+					}
+					break;
+				}
 				case Notification.REMOVE:
 					if (notification.getOldValue() instanceof Node)
 					{
@@ -441,8 +455,20 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 					else throw new GraphException("Only an Edge object can be added into graph.Edges()-list. But added was: "+notification.getNewValue().getClass());
 					break;
 				case Notification.ADD_MANY:
-					throw new GraphException("More than one Edges are added ontime. I don't know what to do. This is an internal error.");
-//					break;
+					if (notification.getNewValue() instanceof List)
+					{
+						List<?> list= (List<?>)notification.getNewValue();
+						if (list.size()!= 0)
+						{
+							for (Object object: list)
+							{
+								Edge edge= (Edge) object;
+								if (edge!= null)
+									this.basicAddEdge(edge);
+							}
+						}
+					}
+					break;
 				case Notification.REMOVE:
 					if (notification.getOldValue() instanceof Edge)
 					{
@@ -481,8 +507,20 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 						else throw new GraphException("Only a Edge object can be added into graph.Edges()-list. But added was: "+notification.getNewValue().getClass());
 						break;
 					case Notification.ADD_MANY:
-						throw new GraphException("More than one Layer are added at one time. I don't know what to do. This is an internal error.");
-//						break;
+						if (notification.getNewValue() instanceof List)
+						{
+							List<?> list= (List<?>)notification.getNewValue();
+							if (list.size()!= 0)
+							{
+								for (Object object: list)
+								{
+									Layer layer= (Layer) object;
+									if (layer!= null)
+										this.basicAddLayer(layer);
+								}
+							}
+						}
+						break;
 					case Notification.REMOVE:
 //						throw new GraphException("One Layer has been removed. I don't know what to do. This is an internal error.");
 						break;
