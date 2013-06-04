@@ -40,7 +40,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getNumOfIndexes() <em>Num Of Indexes</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph() <em>Graph</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -293,31 +292,6 @@ public class IndexMgrTest extends TestCase {
 			i++;
 			assertEquals(new Long(i), this.getFixture().getNumOfIndexes());
 		}
-	}
-	
-	
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph() <em>Graph</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph()
-	 */
-	public void testGetGraph() 
-	{
-		Graph graph= GraphFactory.eINSTANCE.createGraph();
-		this.getFixture().setGraph(graph);
-		assertEquals(graph, this.getFixture().getGraph());
-	}
-
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#setGraph(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph) <em>Graph</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#setGraph(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph)
-	 */
-	public void testSetGraph() 
-	{
-		this.testGetGraph();
 	}
 
 	/**

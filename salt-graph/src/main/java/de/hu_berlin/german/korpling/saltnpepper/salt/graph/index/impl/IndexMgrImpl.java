@@ -46,7 +46,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexMgrImpl#getIndexes <em>Indexes</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexMgrImpl#getNumOfIndexes <em>Num Of Indexes</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.impl.IndexMgrImpl#getGraph <em>Graph</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,39 +110,6 @@ public class IndexMgrImpl extends EObjectImpl implements IndexMgr {
 	public Long getNumOfIndexes() 
 	{
 		return(new Long(this.getIndexes().size()));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Graph getGraph() {
-		Graph graph = basicGetGraph();
-		return graph != null && graph.eIsProxy() ? (Graph)eResolveProxy((InternalEObject)graph) : graph;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public Graph basicGetGraph() 
-	{
-		return(this.graph);
-	}
-
-	/**
-	 * Graph for which this MGr is the index manager.
-	 */
-	private Graph graph= null;
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public void setGraph(Graph newGraph) 
-	{
-		this.graph= newGraph;
 	}
 
 	/**
@@ -248,9 +214,6 @@ public class IndexMgrImpl extends EObjectImpl implements IndexMgr {
 				return getIndexes();
 			case IndexPackage.INDEX_MGR__NUM_OF_INDEXES:
 				return getNumOfIndexes();
-			case IndexPackage.INDEX_MGR__GRAPH:
-				if (resolve) return getGraph();
-				return basicGetGraph();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -268,9 +231,6 @@ public class IndexMgrImpl extends EObjectImpl implements IndexMgr {
 				getIndexes().clear();
 				getIndexes().addAll((Collection<? extends Index>)newValue);
 				return;
-			case IndexPackage.INDEX_MGR__GRAPH:
-				setGraph((Graph)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -285,9 +245,6 @@ public class IndexMgrImpl extends EObjectImpl implements IndexMgr {
 		switch (featureID) {
 			case IndexPackage.INDEX_MGR__INDEXES:
 				getIndexes().clear();
-				return;
-			case IndexPackage.INDEX_MGR__GRAPH:
-				setGraph((Graph)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -305,8 +262,6 @@ public class IndexMgrImpl extends EObjectImpl implements IndexMgr {
 				return indexes != null && !indexes.isEmpty();
 			case IndexPackage.INDEX_MGR__NUM_OF_INDEXES:
 				return NUM_OF_INDEXES_EDEFAULT == null ? getNumOfIndexes() != null : !NUM_OF_INDEXES_EDEFAULT.equals(getNumOfIndexes());
-			case IndexPackage.INDEX_MGR__GRAPH:
-				return basicGetGraph() != null;
 		}
 		return super.eIsSet(featureID);
 	}

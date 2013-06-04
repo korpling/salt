@@ -241,15 +241,6 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIndexMgr_Graph() {
-		return (EReference)indexMgrEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getComplexIndex() {
 		return complexIndexEClass;
 	}
@@ -321,7 +312,6 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		indexMgrEClass = createEClass(INDEX_MGR);
 		createEReference(indexMgrEClass, INDEX_MGR__INDEXES);
 		createEAttribute(indexMgrEClass, INDEX_MGR__NUM_OF_INDEXES);
-		createEReference(indexMgrEClass, INDEX_MGR__GRAPH);
 
 		complexIndexEClass = createEClass(COMPLEX_INDEX);
 		createEAttribute(complexIndexEClass, COMPLEX_INDEX__SORTABLE);
@@ -441,7 +431,6 @@ public class IndexPackageImpl extends EPackageImpl implements IndexPackage {
 		initEClass(indexMgrEClass, IndexMgr.class, "IndexMgr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIndexMgr_Indexes(), this.getIndex(), null, "indexes", null, 0, -1, IndexMgr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIndexMgr_NumOfIndexes(), ecorePackage.getELongObject(), "numOfIndexes", null, 0, 1, IndexMgr.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getIndexMgr_Graph(), theGraphPackage.getGraph(), theGraphPackage.getGraph_IndexMgr(), "graph", null, 0, 1, IndexMgr.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(indexMgrEClass, null, "addIndex", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getIndex(), "index", 0, 1, IS_UNIQUE, IS_ORDERED);

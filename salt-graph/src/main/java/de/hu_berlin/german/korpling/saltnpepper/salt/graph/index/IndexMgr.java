@@ -37,7 +37,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getIndexes <em>Indexes</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getNumOfIndexes <em>Num Of Indexes</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph <em>Graph</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,34 +75,6 @@ public interface IndexMgr extends EObject {
 	 * @generated
 	 */
 	Long getNumOfIndexes();
-
-	/**
-	 * Returns the value of the '<em><b>Graph</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getIndexMgr <em>Index Mgr</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Graph</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Graph</em>' reference.
-	 * @see #setGraph(Graph)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndexMgr_Graph()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getIndexMgr
-	 * @model opposite="indexMgr" transient="true" volatile="true"
-	 * @generated
-	 */
-	Graph getGraph();
-
-	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph <em>Graph</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Graph</em>' reference.
-	 * @see #getGraph()
-	 * @generated
-	 */
-	void setGraph(Graph value);
 
 	/**
 	 * <!-- begin-user-doc -->

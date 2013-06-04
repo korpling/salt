@@ -46,7 +46,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr;
 public interface Graph extends IdentifiableElement {
 	/**
 	 * Returns the value of the '<em><b>Index Mgr</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph <em>Graph</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Index Mgr</em>' reference isn't clear,
@@ -56,8 +55,7 @@ public interface Graph extends IdentifiableElement {
 	 * @return the value of the '<em>Index Mgr</em>' reference.
 	 * @see #setIndexMgr(IndexMgr)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getGraph_IndexMgr()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph
-	 * @model opposite="graph" transient="true" volatile="true"
+	 * @model transient="true" volatile="true"
 	 * @generated
 	 */
 	IndexMgr getIndexMgr();

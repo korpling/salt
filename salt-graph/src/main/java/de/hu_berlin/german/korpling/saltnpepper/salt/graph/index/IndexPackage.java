@@ -265,22 +265,13 @@ public interface IndexPackage extends EPackage {
 	int INDEX_MGR__NUM_OF_INDEXES = 1;
 
 	/**
-	 * The feature id for the '<em><b>Graph</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INDEX_MGR__GRAPH = 2;
-
-	/**
 	 * The number of structural features of the '<em>Mgr</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INDEX_MGR_FEATURE_COUNT = 3;
+	int INDEX_MGR_FEATURE_COUNT = 2;
 
 
 	/**
@@ -655,17 +646,6 @@ public interface IndexPackage extends EPackage {
 	EAttribute getIndexMgr_NumOfIndexes();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph <em>Graph</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Graph</em>'.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph()
-	 * @see #getIndexMgr()
-	 * @generated
-	 */
-	EReference getIndexMgr_Graph();
-
-	/**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex <em>Complex Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -805,14 +785,6 @@ public interface IndexPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INDEX_MGR__NUM_OF_INDEXES = eINSTANCE.getIndexMgr_NumOfIndexes();
-
-		/**
-		 * The meta object literal for the '<em><b>Graph</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference INDEX_MGR__GRAPH = eINSTANCE.getIndexMgr_Graph();
 
 		/**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex <em>Complex Index</em>}' class.

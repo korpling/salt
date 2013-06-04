@@ -51,7 +51,7 @@ import static junit.framework.Assert.assertTrue;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#getSlotIds() <em>Get Slot Ids</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex#removeSlot(java.lang.Object) <em>Remove Slot</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#addElement(java.lang.Object, java.lang.Object) <em>Add Element</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasElement(java.lang.Object) <em>Has Element</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasKey(java.lang.Object) <em>Has Key</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#removeElement(java.lang.Object) <em>Remove Element</em>}</li>
  * </ul>
  * </p>
@@ -345,6 +345,20 @@ public class FatComplexIndexTest extends IdentifiableElementTest {
 		}
 	}
 	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasKey(java.lang.Object) <em>Has Key</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasKey(java.lang.Object)
+	 */
+	public void testHasKey__Object() throws Exception {
+		for (String id: ids)
+			assertFalse(this.getFixture().hasKey(id));
+		this.fillIdx();
+		for (String id: ids)
+			assertTrue(this.getFixture().hasKey(id));
+		assertFalse(this.getFixture().hasKey("not there"));
+	}
 	/**
 	 * Tests the methods equals() and hachCode().
 	 */

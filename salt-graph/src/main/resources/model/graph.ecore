@@ -145,7 +145,7 @@
       <eParameters name="isCycleSafe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="indexMgr" eType="#//index/IndexMgr"
-        volatile="true" transient="true" eOpposite="#//index/IndexMgr/graph"/>
+        volatile="true" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
         eType="#//Node" containment="true" eOpposite="#//Node/graph"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
@@ -281,8 +281,6 @@
           eType="#//index/Index" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="numOfIndexes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
           changeable="false" volatile="true" transient="true" derived="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="graph" eType="#//Graph"
-          volatile="true" transient="true" eOpposite="#//Graph/indexMgr"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ComplexIndex" abstract="true" interface="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
