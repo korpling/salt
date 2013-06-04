@@ -121,26 +121,12 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 	}
 
 	/**
-	 * Returns a QName created of namespace, seperator and name.
-	 * @param namespace 
-	 * @param name
-	 */
-	private String getQName(String namespace, String name)
-	{
-		String retVal= null;
-		if ((namespace!= null) && (!namespace.isEmpty()))
-			retVal= namespace + LabelImpl.GET_NS_SEPERATOR();
-		retVal= retVal + name;
-		return(retVal);
-	}
-	
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	public Label getLabel(String ns, String name) 
 	{
-		return(this.getLabel(this.getQName(ns, name)));
+		return(this.getLabel(LabelImpl.getQName(ns, name)));
 	}
 
 	/**

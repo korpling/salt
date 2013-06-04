@@ -314,30 +314,35 @@ public class LabelImpl extends LabelableElementImpl implements Label
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__NAME, oldName, name));
 	}
+	
+	/**
+	 * Returns a QName created of namespace, seperator and name.
+	 * @param namespace 
+	 * @param name
+	 */
+	public static String getQName(String namespace, String name)
+	{
+		if(namespace == null || namespace.isEmpty())
+		{
+			return name;
+		}
+		else if(name == null || name.isEmpty())
+		{
+			return namespace + Label.NS_SEPERATOR;
+		}
+		else
+		{
+			return namespace + Label.NS_SEPERATOR + name;
+		}
+	}
 
 	/**
 	 * {@inheritDoc Label#getQName()}
 	 */
+	@Override
 	public String getQName() 
 	{
-		StringBuffer retVal= new StringBuffer();
-		
-		if ((this.getNamespace()== null) && (this.getName()== null))
-			retVal= null;
-		else if ((this.getNamespace()== null)  || (this.getNamespace().isEmpty()))
-			retVal.append(this.getName());
-		else
-		{	
-			retVal.append(this.getNamespace());
-			retVal.append(Label.NS_SEPERATOR);
-			if (	(this.getName()!= null)&&
-					(!this.getName().isEmpty()))
-				retVal.append(this.getName());
-		}
-		
-		if (retVal!= null)
-			return(retVal.toString());
-		else return(null);
+		return getQName(getNamespace(), getName());
 	}
 
 	/**
