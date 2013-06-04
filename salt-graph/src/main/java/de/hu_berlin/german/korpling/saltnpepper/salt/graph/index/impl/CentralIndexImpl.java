@@ -44,8 +44,17 @@ public class CentralIndexImpl implements CentralIndex
 	private Map<String, Class<?>> indexKeyTypes;
 	private Map<String, Class<?>> indexValueTypes;
 
+	private final boolean threadSafe;
+	
 	public CentralIndexImpl()
 	{
+		this(false);
+	}
+	
+	public CentralIndexImpl(boolean threadSafe)
+	{
+		this.threadSafe = threadSafe;
+		
 		indexes = Maps.newHashMap();
 		indexKeyTypes = Maps.newHashMap();
 		indexValueTypes = Maps.newHashMap();
@@ -58,7 +67,10 @@ public class CentralIndexImpl implements CentralIndex
 	@Override
 	public <K,V> void addIndex(String indexId, Class<K> keyType, Class<V> valueType) 
 	{
-		L.writeLock().lock();
+		if(threadSafe)
+		{
+			L.writeLock().lock();
+		}
 		try
 		{
 			if (this.hasIndex(indexId))
@@ -70,7 +82,10 @@ public class CentralIndexImpl implements CentralIndex
 		}
 		finally
 		{
-			L.writeLock().unlock();
+			if(threadSafe)
+			{
+				L.writeLock().unlock();
+			}
 		}
 	}
 
@@ -81,21 +96,31 @@ public class CentralIndexImpl implements CentralIndex
 	@Override
 	public boolean hasIndex(String indexId) 
 	{
-		L.readLock().lock();
+		if(threadSafe)
+		{
+			L.readLock().lock();
+		}
 		try
 		{
 			return indexes.containsKey(indexId);
 		}
 		finally
 		{
-			L.readLock().unlock();
+			if(threadSafe)
+			{
+				L.readLock().unlock();
+			}
 		}
 	}
 
 	@Override
 	public <K, V> boolean put(String indexId, K key, V value)
 	{
-		L.writeLock().lock();
+		if(threadSafe)
+		{
+			L.writeLock().lock();
+		}
+		
 		try
 		{
 			if(indexId != null && key != null && value != null)
@@ -114,14 +139,21 @@ public class CentralIndexImpl implements CentralIndex
 		}
 		finally
 		{
-			L.writeLock().unlock();
+			if(threadSafe)
+			{
+				L.writeLock().unlock();
+			}
 		}
 	}
 	
 	@Override
 	public <K, V> boolean putAll(String indexId, K key, Collection<V> values)
 	{
-		L.writeLock().lock();
+		if(threadSafe)
+		{
+			L.writeLock().lock();
+		}
+		
 		try
 		{
 			if(indexId != null && key != null && values != null && !values.isEmpty())
@@ -139,7 +171,10 @@ public class CentralIndexImpl implements CentralIndex
 		}
 		finally
 		{
-			L.writeLock().unlock();
+			if(threadSafe)
+			{
+				L.writeLock().unlock();
+			}
 		}
 	}
 	
@@ -162,7 +197,11 @@ public class CentralIndexImpl implements CentralIndex
 	{
 		if(indexId != null && key != null)
 		{
-			L.readLock().lock();
+			if(threadSafe)
+			{
+				L.readLock().lock();
+			}
+			
 			try
 			{
 				Class<?> keyClass = indexKeyTypes.get(indexId);
@@ -174,7 +213,10 @@ public class CentralIndexImpl implements CentralIndex
 			}
 			finally
 			{
-				L.readLock().unlock();
+				if(threadSafe)
+				{
+					L.readLock().unlock();
+				}
 			}
 		}
 		return ImmutableList.copyOf(new LinkedList<V>());
@@ -193,7 +235,11 @@ public class CentralIndexImpl implements CentralIndex
 	{
 		if(indexId != null && key != null)
 		{
-			L.writeLock().lock();
+			if(threadSafe)
+			{
+				L.writeLock().lock();
+			}
+			
 			try
 			{
 				Class<?> keyClass = indexKeyTypes.get(indexId);
@@ -204,7 +250,10 @@ public class CentralIndexImpl implements CentralIndex
 			}
 			finally
 			{
-				L.writeLock().unlock();
+				if(threadSafe)
+				{
+					L.writeLock().unlock();
+				}
 			}
 		}
 		return false;
@@ -215,7 +264,11 @@ public class CentralIndexImpl implements CentralIndex
 	{
 		if(indexId != null && key != null && value != null)
 		{
-			L.writeLock().lock();
+			if(threadSafe)
+			{
+				L.writeLock().lock();
+			}
+			
 			try
 			{
 				Class<?> keyClass = indexKeyTypes.get(indexId);
@@ -230,7 +283,10 @@ public class CentralIndexImpl implements CentralIndex
 			}
 			finally
 			{
-				L.writeLock().unlock();
+				if(threadSafe)
+				{
+					L.writeLock().unlock();
+				}
 			}
 		}
 		return false;
@@ -244,7 +300,11 @@ public class CentralIndexImpl implements CentralIndex
 	@Override
 	public boolean removeIndex(String indexId) 
 	{
-		L.writeLock().lock();
+		if(threadSafe)
+		{
+			L.writeLock().lock();
+		}
+		
 		try
 		{
 			if(indexes.remove(indexId) == null)
@@ -257,14 +317,21 @@ public class CentralIndexImpl implements CentralIndex
 		}
 		finally
 		{
-			L.writeLock().unlock();
+			if(threadSafe)
+			{
+				L.writeLock().unlock();
+			}
 		}
 	}
 
 	@Override
 	public void clearIndex(String indexId)
 	{
-		L.writeLock().lock();
+		if(threadSafe)
+		{
+			L.writeLock().lock();
+		}
+		
 		try
 		{
 			Multimap<Object, Object> idx = indexes.get(indexId);
@@ -275,7 +342,10 @@ public class CentralIndexImpl implements CentralIndex
 		}
 		finally
 		{
-			L.writeLock().unlock();
+			if(threadSafe)
+			{
+				L.writeLock().unlock();
+			}
 		}
 	}
 	
@@ -287,7 +357,11 @@ public class CentralIndexImpl implements CentralIndex
 	@Override
 	public void removeAll() 
 	{
-		L.writeLock().lock();
+		if(threadSafe)
+		{
+			L.writeLock().lock();
+		}
+		
 		try
 		{
 			indexes.clear();
@@ -296,7 +370,10 @@ public class CentralIndexImpl implements CentralIndex
 		}
 		finally
 		{
-			L.writeLock().unlock();
+			if(threadSafe)
+			{
+				L.writeLock().unlock();
+			}
 		}
 	}
 
@@ -312,7 +389,11 @@ public class CentralIndexImpl implements CentralIndex
 		
 		if(element != null)
 		{
-			L.writeLock().lock();
+			if(threadSafe)
+			{
+				L.writeLock().lock();
+			}
+			
 			try
 			{
 				for(Entry<String, Multimap<Object, Object>> e : indexes.entrySet())
@@ -327,7 +408,10 @@ public class CentralIndexImpl implements CentralIndex
 			}
 			finally
 			{
-				L.writeLock().unlock();
+				if(threadSafe)
+				{
+					L.writeLock().unlock();
+				}
 			}
 		}
 		return result;
@@ -340,7 +424,11 @@ public class CentralIndexImpl implements CentralIndex
 		
 		if(indexId != null && element != null)
 		{
-			L.writeLock().lock();
+			if(threadSafe)
+			{
+				L.writeLock().lock();
+			}
+			
 			try
 			{
 				Multimap<Object,Object> idx = indexes.get(indexId);
@@ -354,7 +442,10 @@ public class CentralIndexImpl implements CentralIndex
 			}
 			finally
 			{
-				L.writeLock().unlock();
+				if(threadSafe)
+				{
+					L.writeLock().unlock();
+				}
 			}
 		}
 		
@@ -367,7 +458,11 @@ public class CentralIndexImpl implements CentralIndex
 	public boolean removeAllElements(Collection<?> element)
 	{
 		boolean result = false;
-		L.writeLock().lock();
+		if(threadSafe)
+		{
+			L.writeLock().lock();
+		}
+		
 		try
 		{
 			for(Multimap<?, ?> index : indexes.values())
@@ -377,7 +472,10 @@ public class CentralIndexImpl implements CentralIndex
 		}
 		finally
 		{
-			L.writeLock().unlock();
+			if(threadSafe)
+			{
+				L.writeLock().unlock();
+			}
 		}
 		return result;
 	}
