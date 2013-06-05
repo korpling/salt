@@ -17,6 +17,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.benchmark;
 
 import com.carrotsearch.junitbenchmarks.BenchmarkOptions;
 import com.carrotsearch.junitbenchmarks.BenchmarkRule;
+import com.carrotsearch.junitbenchmarks.annotation.AxisRange;
 import com.carrotsearch.junitbenchmarks.annotation.BenchmarkHistoryChart;
 import com.carrotsearch.junitbenchmarks.annotation.BenchmarkMethodChart;
 import com.carrotsearch.junitbenchmarks.annotation.LabelType;
@@ -39,9 +40,10 @@ import org.junit.rules.TestRule;
  *
  * @author Thomas Krause <thomas.krause@alumni.hu-berlin.de>
  */
-@BenchmarkOptions(callgc = false, benchmarkRounds = 10, warmupRounds = 5)
-@BenchmarkMethodChart(filePrefix = "benchmark-lists")
-@BenchmarkHistoryChart(labelWith = LabelType.TIMESTAMP, maxRuns = 20)
+@BenchmarkOptions(callgc = false, benchmarkRounds = 5, warmupRounds = 5)
+@BenchmarkMethodChart(filePrefix = "salt-benchmark")
+@BenchmarkHistoryChart(labelWith = LabelType.RUN_ID, maxRuns = 20)
+@AxisRange(min=0.0)
 public class SaltBenchmarkTest
 {
   
