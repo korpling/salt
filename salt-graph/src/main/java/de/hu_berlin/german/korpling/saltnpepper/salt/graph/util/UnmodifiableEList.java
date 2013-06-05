@@ -8,8 +8,9 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * This list is an unmodifiable implementation of type {@link EList}. It contains a constructor to which
@@ -21,14 +22,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * @param <E>
  */
-public class UnmodifiableEList<E> implements EList<E>{
-	
-	public static void main(String[] args)
-	{
-		org.eclipse.emf.common.util.BasicEList.UnmodifiableEList<Object> list= new BasicEList.UnmodifiableEList<Object>(0, null);
-		list.add(new String("d"));
-	}
-	
+public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
+	/**
+	 * {@link Collection} object, to which all methods are delegated
+	 */
 	private Collection<E> delegatee= null; 
 	public UnmodifiableEList(Collection<E> delegatee)
 	{
@@ -67,12 +64,12 @@ public class UnmodifiableEList<E> implements EList<E>{
 
 	@Override
 	public boolean add(E e) {
-		return delegatee.add(e);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		return delegatee.remove(o);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -82,7 +79,7 @@ public class UnmodifiableEList<E> implements EList<E>{
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		return delegatee.addAll(c);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -92,7 +89,7 @@ public class UnmodifiableEList<E> implements EList<E>{
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		return delegatee.removeAll(c);
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -105,9 +102,24 @@ public class UnmodifiableEList<E> implements EList<E>{
 		delegatee.clear();
 	}
 
+	/**
+	 * Caution this method is very slow, because the list is traversed until the index is reached.
+	 * When calling this method more often, it is strongly recommended, to copy the items of this 
+	 * list into another structure
+	 */
 	@Override
 	public E get(int index) {
-		throw new UnsupportedOperationException();
+		if (index >= delegatee.size())
+			throw new IndexOutOfBoundsException();
+		
+		int i= 0;
+		for (E o: this.delegatee)
+		{
+			if (i== index)
+				return(o);
+			i++;
+		}
+		return(null);
 	}
 
 	@Override
@@ -261,6 +273,20 @@ public class UnmodifiableEList<E> implements EList<E>{
 		}
 		return(retVal);
 	}
+	
+	@Override
+	public String toString()
+	{
+		StringBuilder builder= new StringBuilder();
+		builder.append("[");
+		for (E o: delegatee)
+		{
+			builder.append(o);
+			builder.append(", ");
+		}
+		builder.append("]");
+		return(builder.toString());
+	}
 
 	@Override
 	public void move(int newPosition, E object) {
@@ -269,6 +295,108 @@ public class UnmodifiableEList<E> implements EList<E>{
 
 	@Override
 	public E move(int newPosition, int oldPosition) {
+		throw new UnsupportedOperationException();
+	}
+
+	
+	
+	
+	
+	
+	@Override
+	public E basicGet(int index) {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * Cuation, very slow, because copying of lists.
+	 */
+	@Override
+	public List<E> basicList() {
+		List<E> retVal= new Vector<E>();
+		for (E o: delegatee)
+			retVal.add(o);
+		return(retVal);	
+	}
+
+	@Override
+	public Iterator<E> basicIterator() {
+		return(iterator());
+	}
+
+	@Override
+	public ListIterator<E> basicListIterator() {
+		return(listIterator());
+	}
+
+	@Override
+	public ListIterator<E> basicListIterator(int index) {
+		return(listIterator(index));
+	}
+
+	@Override
+	public Object[] basicToArray() {
+		return(toArray());
+	}
+
+	@Override
+	public <T> T[] basicToArray(T[] array) {
+		return(toArray(array));
+	}
+
+	@Override
+	public int basicIndexOf(Object object) {
+		return(indexOf(object));
+	}
+
+	@Override
+	public int basicLastIndexOf(Object object) {
+		return(lastIndexOf(object));
+	}
+
+	@Override
+	public boolean basicContains(Object object) {
+		return(contains(object));
+	}
+
+	@Override
+	public boolean basicContainsAll(Collection<?> collection) {
+		return(containsAll(collection));
+	}
+
+	@Override
+	public NotificationChain basicRemove(Object object,
+			NotificationChain notifications) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public NotificationChain basicAdd(E object, NotificationChain notifications) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void addUnique(E object) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void addUnique(int index, E object) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean addAllUnique(Collection<? extends E> collection) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean addAllUnique(int index, Collection<? extends E> collection) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public E setUnique(int index, E object) {
 		throw new UnsupportedOperationException();
 	}
 }

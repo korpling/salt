@@ -231,7 +231,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 			comparator.setSDocumentGraph(this.getSDocumentGraph());
 
 			//sort tokens
-			ImmutableList<SToken> tokens = getSDocumentGraph().getCentralIndex()
+			EList<SToken> tokens = getSDocumentGraph().getCentralIndex()
 					.getAll(SDocumentGraph.IDX_SNODETYPE, SToken.class);
 			List<SToken> mutableTokens = new LinkedList<SToken>(tokens);
 			Collections.sort(mutableTokens, comparator);

@@ -23,12 +23,17 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.CentralIndex;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.util.UnmodifiableEList;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -181,7 +186,7 @@ public class CentralIndexImpl implements CentralIndex
 	@Override
 	public <K, V> V get(String indexId, K key)
 	{
-		ImmutableList<V> result = getAll(indexId, key);
+		EList<V> result = getAll(indexId, key);
 		if(result.isEmpty())
 		{
 			return null;
@@ -191,9 +196,9 @@ public class CentralIndexImpl implements CentralIndex
 			return result.iterator().next();
 		}
 	}
-
+	
 	@Override
-	public <K, V> ImmutableList<V> getAll(String indexId, K key)
+	public <K, V> EList<V> getAll(String indexId, K key)
 	{
 		if(indexId != null && key != null)
 		{
@@ -204,8 +209,7 @@ public class CentralIndexImpl implements CentralIndex
 			
 			try
 			{
-				return ImmutableList
-						.copyOf((Collection<V>) indexes.get(indexId).get(key));
+				return new UnmodifiableEList<V>((Collection<V>) indexes.get(indexId).get(key));
 			}
 			finally
 			{
@@ -215,7 +219,8 @@ public class CentralIndexImpl implements CentralIndex
 				}
 			}
 		}
-		return ImmutableList.copyOf(new LinkedList<V>());
+//		return ImmutableList.copyOf(new LinkedList<V>());
+		return new BasicEList<V>();
 	}
 
 	@Override

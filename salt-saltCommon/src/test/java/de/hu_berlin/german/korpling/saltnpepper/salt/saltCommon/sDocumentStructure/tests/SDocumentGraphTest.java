@@ -1206,6 +1206,7 @@ public class SDocumentGraphTest extends TestCase {
 		this.getFixture().sortSTokenByText();
 		assertNotNull(this.getFixture().getSTokens());
 		assertEquals(sTokens.size(), this.getFixture().getSTokens().size());
+		
 		for (int i=0; i< 6; i++)
 		{
 			assertEquals("tokens of index '"+i+"' aren't equal", sTokens.get(i), this.getFixture().getSTokens().get(i));

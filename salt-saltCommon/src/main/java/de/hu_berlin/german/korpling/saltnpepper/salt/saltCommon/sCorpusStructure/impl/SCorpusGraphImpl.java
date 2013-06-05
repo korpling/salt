@@ -289,12 +289,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SCorpus> getSCorpora() 
 	{
-		ImmutableList<SCorpus> result = 
-				getCentralIndex().getAll(IDX_SNODETYPE, SCorpus.class);
-		
-		return new DelegatingEcoreEList.UnmodifiableEList<SCorpus>(this, 
-				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpora(), 
-				result);
+		return getCentralIndex().getAll(IDX_SNODETYPE, SCorpus.class);
 	}
 	
 	/**
@@ -304,12 +299,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SDocument> getSDocuments() 
 	{
-		ImmutableList<SDocument> result = 
-				getCentralIndex().getAll(IDX_SNODETYPE, SDocument.class);
-		
-		return new DelegatingEcoreEList.UnmodifiableEList<SDocument>(this, 
-				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SDocuments(), 
-				result);
+		return(getCentralIndex().getAll(IDX_SNODETYPE, SDocument.class));
 }
 // ============================ end: handling specific nodes
 // ============================ start: handling specific relations
@@ -320,12 +310,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SCorpusRelation> getSCorpusRelations() 
 	{
-		ImmutableList<SCorpusRelation> result = 
-				getCentralIndex().getAll(IDX_SRELATIONTYPE, SCorpusRelation.class);
-		
-		return new DelegatingEcoreEList.UnmodifiableEList<SCorpusRelation>(this, 
-				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpusRelations(), 
-				result);	
+		return(getCentralIndex().getAll(IDX_SRELATIONTYPE, SCorpusRelation.class));
 	}
 
 	/**
@@ -335,12 +320,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@SuppressWarnings("unchecked")
 	public EList<SCorpusDocumentRelation> getSCorpusDocumentRelations() 
 	{
-		ImmutableList<SCorpusDocumentRelation> result = 
-				getCentralIndex().getAll(IDX_SRELATIONTYPE, SCorpusDocumentRelation.class);
-		
-		return new DelegatingEcoreEList.UnmodifiableEList<SCorpusDocumentRelation>(this, 
-				SCorpusStructurePackage.eINSTANCE.getSCorpusGraph_SCorpusDocumentRelations(), 
-				result);
+		return(getCentralIndex().getAll(IDX_SRELATIONTYPE, SCorpusDocumentRelation.class));
 	}
 // ============================ end: handling specific relations
 

@@ -335,17 +335,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	private<T> EList<T> getNodeOfTypeUsingIndex(Class<? extends T> type, 
 			EStructuralFeature feature)
 	{
-		ImmutableList<T> result = 
-				getCentralIndex().getAll(IDX_SNODETYPE, type);
-		return new DelegatingEcoreEList.UnmodifiableEList<T>(this, feature, result);
+		return getCentralIndex().getAll(IDX_SNODETYPE, type);
 	}
 	private<T> EList<T> getRelationOfTypeUsingIndex(Class<? extends T> type,
 			EStructuralFeature feature)
 	{
-		ImmutableList<T> result = 
-				getCentralIndex().getAll(IDX_SRELATIONTYPE, type);
-		
-		return new DelegatingEcoreEList.UnmodifiableEList<T>(this, feature, result);
+		return getCentralIndex().getAll(IDX_SRELATIONTYPE, type);
 	}
 	
 	/**
@@ -364,8 +359,11 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 */
 	public EList<SToken> getSTokens() 
 	{
-		return getNodeOfTypeUsingIndex(SToken.class,
-				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens());
+		return(getCentralIndex().getAll(IDX_SNODETYPE, SToken.class));
+		
+		
+//		return getNodeOfTypeUsingIndex(SToken.class,
+//				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens());
 	}
 	
 	/**
@@ -384,7 +382,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 */
 	public STimeline basicGetSTimeline() 
 	{
-		ImmutableList<STimeline> result = 
+		EList<STimeline> result = 
 				getCentralIndex().getAll(IDX_SNODETYPE, STimeline.class);
 		if(result.isEmpty())
 		{

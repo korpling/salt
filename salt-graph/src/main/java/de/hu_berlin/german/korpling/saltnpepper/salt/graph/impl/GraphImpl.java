@@ -731,8 +731,11 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			String nodeId = node.getId();
 			if (centralIndex.containsKey(IDX_NODE_ID_NODE, nodeId))
 			{	
+//				Collection<Edge> outEdges= Collections.synchronizedCollection(this.getOutEdges(nodeId));
+				
+				Collection<Edge> outEdges= ImmutableList.copyOf(Collections.synchronizedCollection(this.getOutEdges(nodeId)));
 				//deleting all outgoing edges
-				for (Edge edge: this.getOutEdges(nodeId))
+				for (Edge edge: outEdges)
 				{
 					this.removeEdge(edge);
 				}
@@ -742,8 +745,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 					this.removeEdge(edge);
 				}
 				
+				Collection<Layer> layers= ImmutableList.copyOf(Collections.synchronizedCollection(this.getLayers()));
 				//remove node even from layers
-				for (Layer layer: this.getLayers())
+				for (Layer layer: layers)
 				{
 					if (layer!= null)
 						layer.getNodes().remove(node);
@@ -900,7 +904,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	{
 		EList<Edge> retList= null;
 		//searching for all edges going out from nodeId1
-		ImmutableList<Edge> outEdges = centralIndex.getAll(IDX_OUTEDGES, nodeId1);
+		EList<Edge> outEdges = centralIndex.getAll(IDX_OUTEDGES, nodeId1);
 		
 		if(outEdges != null)
 		{
@@ -926,8 +930,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	 */
 	public EList<Edge> getInEdges(String nodeId) 
 	{
-		ImmutableList<Edge> e = centralIndex.getAll(IDX_INEDGES, nodeId);
-		EList<Edge> inEdges = new DelegatingEList.UnmodifiableEList<Edge>(e);
+		EList<Edge> inEdges = centralIndex.getAll(IDX_INEDGES, nodeId);
 		return(inEdges);
 	}
 
@@ -938,8 +941,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	 */
 	public EList<Edge> getOutEdges(String nodeId) 
 	{
-		ImmutableList<Edge> e = centralIndex.getAll(IDX_OUTEDGES, nodeId);
-		EList<Edge> outEdges = new DelegatingEList.UnmodifiableEList<Edge>(e);
+		EList<Edge> outEdges = centralIndex.getAll(IDX_OUTEDGES, nodeId);
 		return(outEdges);
 	}
 

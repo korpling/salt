@@ -21,6 +21,8 @@ import com.google.common.collect.ImmutableList;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import java.util.Collection;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -70,7 +72,8 @@ public interface CentralIndex  {
 	<K,V> boolean putAll(String indexId, K key, Collection<V> values);
 	
 	<K,V> V get(String indexId, K key);
-	<K,V> ImmutableList<V> getAll(String indexId, K key);
+	<K, V> EList<V> getAll(String indexId, K key);
+	
 	<K> boolean remove(String indexId, K key);
 	<K, V> boolean remove(String indexId, K key, V value);
 	<K> boolean containsKey(String indexId, K key);
