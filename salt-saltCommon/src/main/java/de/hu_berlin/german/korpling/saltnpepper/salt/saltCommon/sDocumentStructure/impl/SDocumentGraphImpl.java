@@ -360,10 +360,6 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public EList<SToken> getSTokens() 
 	{
 		return(getCentralIndex().getAll(IDX_SNODETYPE, SToken.class));
-		
-		
-//		return getNodeOfTypeUsingIndex(SToken.class,
-//				SDocumentStructurePackage.eINSTANCE.getSDocumentGraph_STokens());
 	}
 	
 	/**

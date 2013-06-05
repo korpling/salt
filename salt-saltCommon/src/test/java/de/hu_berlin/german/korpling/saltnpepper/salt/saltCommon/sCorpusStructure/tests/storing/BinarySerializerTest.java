@@ -1,8 +1,6 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests.storing;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Vector;
 
 import junit.framework.TestCase;
 
@@ -18,7 +16,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.Salt2DOT;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
-import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SaltSample;
+import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class BinarySerializerTest extends TestCase {
 
@@ -35,10 +33,10 @@ public class BinarySerializerTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		this.setFixture(SaltFactory.eINSTANCE.createSaltProject());
-		SaltSample.createCorpusStructure(this.getFixture());
+		SampleGenerator.createCorpusStructure(this.getFixture());
 		for (SDocument sDocument: this.getFixture().getSCorpusGraphs().get(0).getSDocuments())
 		{//filling all of the documents in the corpus structure with document structure data	
-			SaltSample.createSDocumentStructure(sDocument);
+			SampleGenerator.createSDocumentStructure(sDocument);
 		}//filling all of the documents in the corpus structure with document structure data
 	}
 
@@ -49,7 +47,7 @@ public class BinarySerializerTest extends TestCase {
 		Resource resource;
 	    resource = new BinaryResourceImpl(resourceURI);
 	    SDocument sDoc= SaltFactory.eINSTANCE.createSDocument();
-	    SaltSample.createSDocumentStructure(sDoc);
+	    SampleGenerator.createSDocumentStructure(sDoc);
 	    
 	    Salt2DOT s2d= new Salt2DOT();
 	    s2d.salt2Dot(sDoc.getSDocumentGraph(), URI.createFileURI("d:/Test/saltBinary/original/doc.dot"));

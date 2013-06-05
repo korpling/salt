@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -35,12 +36,15 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.xml.sax.SAXException;
 
+import com.google.common.collect.ImmutableList;
+
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
+import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -198,30 +202,34 @@ public class SaltProjectTest extends TestCase {
 	{
 		File saltProjectFile= new File(FILE_RESOURCE_DIR+ "case5/");
 		URI saltProjectURI= URI.createFileURI(saltProjectFile.getAbsolutePath());
+		
 		this.getFixture().loadSCorpusStructure(saltProjectURI);
 		Map<SElementId, URI> sDocumentMap= this.getFixture().getSDocumentGraphLocations();
 		
 		assertNotNull(this.getFixture().getSCorpusGraphs());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
 		assertNotNull(this.getFixture().getSCorpusGraphs().get(0));
+		
+		List<SDocument> sDocuments= ImmutableList.copyOf(this.getFixture().getSCorpusGraphs().get(0).getSDocuments());
+		
 		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments());
 		assertEquals(4, this.getFixture().getSCorpusGraphs().get(0).getSDocuments().size());
+	
+		assertNotNull(sDocuments.get(0));
+		assertNotNull(sDocuments.get(1));
+		assertNotNull(sDocuments.get(2));
+		assertNotNull(sDocuments.get(3));
 		
-		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0));
-		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(1));
-		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(2));
-		assertNotNull(this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(3));
-		
-		SDocument sDoc1= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(0);
-		SDocument sDoc2= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(1);
-		SDocument sDoc3= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(2);
-		SDocument sDoc4= this.getFixture().getSCorpusGraphs().get(0).getSDocuments().get(3);
+		SDocument sDoc1= sDocuments.get(0);
+		SDocument sDoc2= sDocuments.get(1);
+		SDocument sDoc3= sDocuments.get(2);
+		SDocument sDoc4= sDocuments.get(3);
 		
 		File sDoc1File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc1."+SaltFactory.FILE_ENDING_SALT);
 		File sDoc2File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc2."+SaltFactory.FILE_ENDING_SALT);
 		File sDoc3File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc3."+SaltFactory.FILE_ENDING_SALT);
 		File sDoc4File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc4."+SaltFactory.FILE_ENDING_SALT);
-				
+		
 		assertNotNull(sDocumentMap.get(sDoc1.getSElementId()));
 		assertNotNull(sDocumentMap.get(sDoc2.getSElementId()));
 		assertNotNull(sDocumentMap.get(sDoc3.getSElementId()));
