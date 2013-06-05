@@ -1,11 +1,12 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.ConcurrentModificationException;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
 import java.util.Vector;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -29,7 +30,7 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
 	private Collection<E> delegatee= null; 
 	public UnmodifiableEList(Collection<E> delegatee)
 	{
-		this.delegatee= delegatee;
+		this.delegatee= Collections.unmodifiableCollection(delegatee);
 	}
 
 	@Override
@@ -149,114 +150,16 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
 
 	@Override
 	public ListIterator<E> listIterator() {
-		System.out.println("CAUTION listIterator");
-		return new ListItr(0);
+		LinkedList<E> copy = new LinkedList<E>(delegatee);
+		return Collections.unmodifiableList(copy).listIterator();
 	}
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		System.out.println("CAUTION listIterator(index)");
-		return(new ListItr(index));
+		ArrayList<E> copy = new ArrayList<E>(delegatee);
+		return Collections.unmodifiableList(copy).listIterator(index);
 	}
 	
-	/**
-     * An optimized version of AbstractList.Itr
-     */
-    private class Itr implements Iterator<E> {
-        int cursor;       // index of next element to return
-        int lastRet = -1; // index of last element returned; -1 if no such
-        int expectedModCount = 0;
-
-        public boolean hasNext() {
-            // Racy but within spec, since modifications are checked
-            // within or after synchronization in next/previous
-            return cursor != delegatee.size();
-        }
-
-        @SuppressWarnings("unchecked")
-		public E next() {
-            synchronized (UnmodifiableEList.this) {
-                checkForComodification();
-                int i = cursor;
-                if (i >= delegatee.size())
-                    throw new NoSuchElementException();
-                cursor = i + 1;
-                return (E)delegatee.toArray()[lastRet = i];
-            }
-        }
-
-        public void remove() {
-            if (lastRet == -1)
-                throw new IllegalStateException();
-            synchronized (UnmodifiableEList.this) {
-                checkForComodification();
-                UnmodifiableEList.this.remove(lastRet);
-                expectedModCount = 0;
-            }
-            cursor = lastRet;
-            lastRet = -1;
-        }
-
-        final void checkForComodification() {
-            if (0 != expectedModCount)
-                throw new ConcurrentModificationException();
-        }
-    }
-    
-	/**
-     * An optimized version of AbstractList.ListItr
-     */
-    final class ListItr extends Itr implements ListIterator<E> {
-        ListItr(int index) {
-            super();
-            cursor = index;
-        }
-
-        public boolean hasPrevious() {
-            return cursor != 0;
-        }
-
-        public int nextIndex() {
-            return cursor;
-        }
-
-        public int previousIndex() {
-            return cursor - 1;
-        }
-
-        @SuppressWarnings("unchecked")
-		public E previous() {
-            synchronized (UnmodifiableEList.this) {
-                checkForComodification();
-                int i = cursor - 1;
-                if (i < 0)
-                    throw new NoSuchElementException();
-                cursor = i;
-                return (E)delegatee.toArray()[lastRet = i];
-            }
-        }
-
-        public void set(E e) {
-            if (lastRet == -1)
-                throw new IllegalStateException();
-            synchronized (UnmodifiableEList.this) {
-                checkForComodification();
-                UnmodifiableEList.this.set(lastRet, e);
-            }
-        }
-
-        public void add(E e) {
-            int i = cursor;
-            synchronized (UnmodifiableEList.this) {
-                checkForComodification();
-                UnmodifiableEList.this.add(i, e);
-                expectedModCount = 0;
-            }
-            cursor = i + 1;
-            lastRet = -1;
-        }
-    }
-
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
 		List<E> retVal= new Vector<E>();
