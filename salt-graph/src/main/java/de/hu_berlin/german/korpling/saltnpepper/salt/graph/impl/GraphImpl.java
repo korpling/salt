@@ -25,7 +25,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -45,6 +44,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.IdentifiableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Identifier;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphException;
@@ -82,6 +82,22 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	
 	private CentralIndex centralIndex = new CentralIndexImpl();
 	
+	/**
+	 * A sub-class implementation of {@link EContentAdapter} to attach this adapter to all objects being contained by the 
+	 * {@link Graph} object to which this adapter belongs to. The adapter will be set even to all child objects of the contained
+	 * ones. For instance, when adding this adapter to the list of adapters of a {@link Node} object, this adapter will be
+	 * added automatically to all {@link Label} objects contained by the {@link Node} object and even by {@link Label} objects 
+	 * contained by {@link Label} objects contained by the {@link Node} object and so on. So this mechanism is recursive.
+	 * 
+	 * This adapter observes changes on:
+	 * <ul>
+	 *  <li>{@link GraphPackage#IDENTIFIER__ID} to update the graphs internal index for {@link GraphImpl#IDX_NODE_ID_NODE} and {@link GraphImpl#IDX_EDGE_ID_EDGE}</li>
+	 *  <li>{@link GraphPackage#EDGE__SOURCE} to update the graphs internal index for {@link GraphImpl#IDX_INEDGES} and {@link GraphImpl#IDX_OUTEDGES}</li>
+	 *  <li>{@link GraphPackage#EDGE__TARGET} to update the graphs internal index for {@link GraphImpl#IDX_INEDGES} and {@link GraphImpl#IDX_OUTEDGES}</li> 
+	 * </ul>
+	 * @author Florian Zipser
+	 *
+	 */
 	private class GraphAdapter extends EContentAdapter
 	{
 		public Graph graph= null;
@@ -164,9 +180,13 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		@Override
 		public void notifyChanged(Notification notification) 
 		{
+			//do nothing in case of no changes has been done
+			if (notification.isTouch())
+				return;
+
 			// first call must be super.notifyChanged(n) which adds MyContentAdapter to any new elements in the hierarchy and removes MyContentAdapter from any removed EObjects in the hierarchy
 			super.notifyChanged(notification);
-			
+						
 			if (notification.getFeature() instanceof EAttribute)
 			{//if changed object is of type EAttribute
 				if (GraphPackage.Literals.IDENTIFIER__ID.equals(notification.getFeature()))
