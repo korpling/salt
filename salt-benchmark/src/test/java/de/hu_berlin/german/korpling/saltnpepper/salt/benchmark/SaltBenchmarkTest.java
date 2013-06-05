@@ -24,8 +24,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.CentralIndex;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -77,6 +80,7 @@ public class SaltBenchmarkTest
      for(int i=0; i < 20000; i++)
      {
         Node n =  GraphFactory.eINSTANCE.createNode();
+        n.setId("" + i);
         
         g.addNode(n);
         
@@ -85,10 +89,66 @@ public class SaltBenchmarkTest
           Label lbl = GraphFactory.eINSTANCE.createLabel();
           lbl.setName("lbl" + l);
           lbl.setNamespace("salt");
+          lbl.setValue("lblValue "+ l + i);
           n.addLabel(lbl);
         }
-        
      }
+     
+     int count = 0;
+     for(Node n : g.getNodes())
+     {
+       // get any label
+       int lblNr = (int) (Math.random() * 19.0);
+       Label l = n.getLabel("salt", "lbl" + lblNr);
+       if(l != null)
+       {
+         count++;
+       }
+     }
+     Assert.assertEquals(20000, count);
+   }
+   
+   @Test
+   public void addNodesWithLabelsIndex() throws Exception {
+     
+     final String IDXNAME = "labelqname";
+     
+     GraphImpl g = (GraphImpl) GraphFactory.eINSTANCE.createGraph();
+     
+     CentralIndex index = g.getCentralIndex();
+     index.addIndex(IDXNAME, String.class, Label.class);
+     
+     for(int i=0; i < 20000; i++)
+     {
+        Node n =  GraphFactory.eINSTANCE.createNode();
+        n.setId("" + i);
+        
+        g.addNode(n);
+        
+        for(int l=0; l < 20; l++)
+        {
+          Label lbl = GraphFactory.eINSTANCE.createLabel();
+          lbl.setName("lbl" + l);
+          lbl.setNamespace("salt");
+          lbl.setValue("lblValue "+ l + i);
+          n.addLabel(lbl);
+          index.put(IDXNAME, n.getId() + "_label_" + lbl.getQName(), lbl);
+        }
+     }
+     
+     int count = 0;
+    
+     for(Node n : g.getNodes())
+     {
+       // get any label
+       int lblNr = (int) (Math.random() * 19.0);
+       Label l = index.get(IDXNAME, n.getId() + "_label_" + "salt::lbl" + lblNr);
+       if(l != null)
+       {
+         count++;
+       }
+     }
+     Assert.assertEquals(20000, count);
    }
    
 }
