@@ -707,10 +707,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		
 		this.getNodes().add(node);
 		centralIndex.put(IDX_NODE_ID_NODE, node.getId(), node);
-		{//create a notifier for changes in node
+		//create a notifier for changes in node
 			node.eAdapters().add(this.graphAdapter);
-			node.getIdentifier().eAdapters().add(this.graphAdapter);
-		}
+//			node.getIdentifier().eAdapters().add(this.graphAdapter);
 	}
 	
 	/**
@@ -892,10 +891,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 			centralIndex.put(IDX_INEDGES, edge.getTarget().getId(), edge);
 		}	
 		
-		{//create a notifier for changes in edge
+		//create a notifier for changes in edge
 			edge.eAdapters().add(this.graphAdapter);
-			edge.getIdentifier().eAdapters().add(this.graphAdapter);
-		}//create a notifier for changes in edge
+//			edge.getIdentifier().eAdapters().add(this.graphAdapter);
+		//create a notifier for changes in edge
 	}
 	
 	/**
