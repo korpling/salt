@@ -161,30 +161,15 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		 * This method is called, if any value in one of the observed objects has changed. This method ensures, that all indexes of
 		 * the owning graph will be kept up-to-date.
 		 */
+		@Override
 		public void notifyChanged(Notification notification) 
 		{
-//			System.out.println("notification: "+ notification);
-//			System.out.println("notification.getFeature(): "+ notification.getFeature());
-//			if (notification.getFeature() instanceof EAttribute)
-//			{
-//				System.out.println("isAttr");	
-//				if (notification.getFeature().equals(GraphPackage.Literals.LABEL__VALUE))
-//				{
-//					System.out.println("IS VALUE");
-//					switch (notification.getEventType()) 
-//					{
-//						case Notification.SET:
-//						{//if Identifier.id has been set or reset
-//							System.out.println("HAS BEEN SET");
-//							break;
-//						}//if Identifier.id has been set or reset
-//					}
-//				}
-//			}
+			// first call must be super.notifyChanged(n) which adds MyContentAdapter to any new elements in the hierarchy and removes MyContentAdapter from any removed EObjects in the hierarchy
+			super.notifyChanged(notification);
 			
 			if (notification.getFeature() instanceof EAttribute)
 			{//if changed object is of type EAttribute
-				if (notification.getFeature().equals(GraphPackage.Literals.IDENTIFIER__ID))
+				if (GraphPackage.Literals.IDENTIFIER__ID.equals(notification.getFeature()))
 				{//if changed value is Identifier.id
 					switch (notification.getEventType()) 
 					{
@@ -197,8 +182,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 					
 				}//if changed value is Identifier.id
 			}//if changed object is of type EAttribute
-			
-			super.notifyChanged(notification);
 			
 			
 			if (notification.getFeature() instanceof EReference) 
@@ -237,7 +220,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 								((Edge)notification.getNotifier()));
 					}
 				}
-				else if (notification.getFeature().equals(GraphPackage.Literals.IDENTIFIABLE_ELEMENT__IDENTIFIER))
+				else if (GraphPackage.Literals.IDENTIFIABLE_ELEMENT__IDENTIFIER.equals(notification.getFeature()))
 				{//identifier has changed some value
 					switch (notification.getEventType()) 
 					{
@@ -392,7 +375,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 	{
 		if (notification.getFeature() instanceof EReference) {
 			EReference ref = (EReference) notification.getFeature();
-			if(ref.equals(GraphPackage.Literals.GRAPH__NODES)) {
+			if(GraphPackage.Literals.GRAPH__NODES.equals(ref)) {
 				switch (notification.getEventType()) {
 				case Notification.ADD:
 					if (notification.getNewValue() instanceof Node)
@@ -456,7 +439,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 					break;
 				}
 			}
-			else if(ref.equals(GraphPackage.Literals.GRAPH__EDGES)) {
+			else if(GraphPackage.Literals.GRAPH__EDGES.equals(ref)) {
 				switch (notification.getEventType()) {
 				case Notification.ADD:
 					if (notification.getNewValue() instanceof Edge)
@@ -514,7 +497,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 					break;
 				}
 			}
-			else if(ref.equals(GraphPackage.Literals.GRAPH__LAYERS)) 
+			else if(GraphPackage.Literals.GRAPH__LAYERS.equals(ref)) 
 			{//when a layers of graph has been changed 
 				switch (notification.getEventType()) 
 				{
