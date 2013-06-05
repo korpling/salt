@@ -17,13 +17,22 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 
+import java.lang.ref.WeakReference;
+import java.util.Collections;
+import java.util.Map;
+import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import com.google.common.collect.MapMaker;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage;
@@ -51,6 +60,43 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphExcep
  */
 public class LabelImpl extends LabelableElementImpl implements Label 
 {
+	public static class StringPooler{
+		// String pooling Test
+		private boolean IS_STRING_POOLING = true;
+		public final Map<String, WeakReference<String>> stringPoolMap = Collections.synchronizedMap(new WeakHashMap<String, WeakReference<String>>());
+		private int missedCalls = 0;
+		private int cachedCalls = 0;
+		public void printPooledInfo(){
+			System.out.println("PoolInfo: Entries= " + stringPoolMap.size() );
+			System.out.println("PoolInfo: missed / cached / total = " + missedCalls + " / "  + cachedCalls + " / " + (cachedCalls + missedCalls));
+		}
+		private String pool(final String s){
+//			if ((missedCalls + cachedCalls) % 50000 == 0){
+//				printPooledInfo();
+//			}
+			WeakReference<String> pooled = stringPoolMap.get(s);
+			if (pooled == null){
+				++missedCalls;
+				stringPoolMap.put(s, new WeakReference<String>(s));
+				return s;
+			} else{
+				++cachedCalls;
+				return pooled.get();
+			}
+		}
+	}
+	
+	public static final StringPooler POOL_INSTANCE = new StringPooler();
+	
+	// TODO: Add to Model
+	synchronized public void setStringPooling(boolean b){
+		POOL_INSTANCE.IS_STRING_POOLING = b;
+	}
+	
+	// TODO: Add to Model
+	synchronized public boolean isStringPooling(){
+		return POOL_INSTANCE.IS_STRING_POOLING;
+	}
 	//TODO to delete
 	public static Long equalTime= 0l;
 	
@@ -113,6 +159,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	 * @ordered
 	 */
 	protected static final Object VALUE_EDEFAULT = null;
+	
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -285,7 +332,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	 */
 	public void setNamespace(String newNamespace) {
 		String oldNamespace = namespace;
-		namespace = newNamespace;
+		namespace = (POOL_INSTANCE.IS_STRING_POOLING)?POOL_INSTANCE.pool(newNamespace):newNamespace;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__NAMESPACE, oldNamespace, namespace));
 	}
@@ -310,7 +357,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 		if (newName.contains(GET_NS_SEPERATOR()))
 			throw new GraphException("Cannot set the name to the given, because a namespace with namespace seperaor is illegal.");
 		String oldName = name;
-		name = newName;
+		name = (POOL_INSTANCE.IS_STRING_POOLING)?POOL_INSTANCE.pool(newName):newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__NAME, oldName, name));
 	}
@@ -393,7 +440,11 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	 */
 	public void setValue(Object newValue) {
 		Object oldValue = value;
-		value = newValue;
+		if(newValue instanceof String){
+			value = POOL_INSTANCE.pool((String) newValue);
+		}else{
+			value = newValue;
+		}
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GraphPackage.LABEL__VALUE, oldValue, value));
 	}
