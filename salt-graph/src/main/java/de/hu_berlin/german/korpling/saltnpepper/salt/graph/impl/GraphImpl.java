@@ -163,6 +163,25 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		 */
 		public void notifyChanged(Notification notification) 
 		{
+//			System.out.println("notification: "+ notification);
+//			System.out.println("notification.getFeature(): "+ notification.getFeature());
+//			if (notification.getFeature() instanceof EAttribute)
+//			{
+//				System.out.println("isAttr");	
+//				if (notification.getFeature().equals(GraphPackage.Literals.LABEL__VALUE))
+//				{
+//					System.out.println("IS VALUE");
+//					switch (notification.getEventType()) 
+//					{
+//						case Notification.SET:
+//						{//if Identifier.id has been set or reset
+//							System.out.println("HAS BEEN SET");
+//							break;
+//						}//if Identifier.id has been set or reset
+//					}
+//				}
+//			}
+			
 			if (notification.getFeature() instanceof EAttribute)
 			{//if changed object is of type EAttribute
 				if (notification.getFeature().equals(GraphPackage.Literals.IDENTIFIER__ID))

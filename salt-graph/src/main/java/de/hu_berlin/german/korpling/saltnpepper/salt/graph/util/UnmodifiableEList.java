@@ -149,13 +149,14 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
 
 	@Override
 	public ListIterator<E> listIterator() {
+		System.out.println("CAUTION listIterator");
 		return new ListItr(0);
 	}
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("CAUTION listIterator(index)");
+		return(new ListItr(index));
 	}
 	
 	/**
@@ -180,7 +181,6 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
                 if (i >= delegatee.size())
                     throw new NoSuchElementException();
                 cursor = i + 1;
-//                return elementData(lastRet = i);
                 return (E)delegatee.toArray()[lastRet = i];
             }
         }
@@ -232,7 +232,6 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
                 if (i < 0)
                     throw new NoSuchElementException();
                 cursor = i;
-//                return elementData(lastRet = i);
                 return (E)delegatee.toArray()[lastRet = i];
             }
         }
@@ -309,10 +308,12 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
 	}
 
 	/**
-	 * Cuation, very slow, because copying of lists.
+	 * Caution, very slow, because copying of lists.
 	 */
 	@Override
 	public List<E> basicList() {
+		System.out.println("--------------> CAUTION VERY SLOW");
+		
 		List<E> retVal= new Vector<E>();
 		for (E o: delegatee)
 			retVal.add(o);
