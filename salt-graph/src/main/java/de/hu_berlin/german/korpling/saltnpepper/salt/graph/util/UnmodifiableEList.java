@@ -215,8 +215,6 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
 	 */
 	@Override
 	public List<E> basicList() {
-		System.out.println("--------------> CAUTION VERY SLOW");
-		
 		List<E> retVal= new Vector<E>();
 		for (E o: delegatee)
 			retVal.add(o);
