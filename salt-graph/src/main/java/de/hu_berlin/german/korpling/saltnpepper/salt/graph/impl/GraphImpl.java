@@ -681,6 +681,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 		if (layer.getId()== null)
 		{	
 			layer.setId("layer"+getNumOfLayers());
+			layer.eAdapters().add(this.graphAdapter);
 		}
 	}
 //====================== end: layer-handling
@@ -760,8 +761,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph
 				{
 					this.removeEdge(edge);
 				}
+				Collection<Edge> inEdges= ImmutableList.copyOf(Collections.synchronizedCollection(this.getInEdges(nodeId)));
 				//deleting all incoming edges
-				for (Edge edge: this.getInEdges(nodeId))
+				for (Edge edge: inEdges)
 				{
 					this.removeEdge(edge);
 				}
