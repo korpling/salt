@@ -140,8 +140,15 @@ public class Tokenizer {
 
 	    // detect language
 	    if (language == null)
+	    {
 		language = checkLanguage(sTextualDS.getSText().substring(
 			startPos, endPos));
+		//if text was to short to emit language try entire text (and hope, that no language mixes are contained :-})
+		if (language== null)
+		    language = checkLanguage(sTextualDS.getSText().substring(
+				startPos, endPos));
+	    }
+		
 
 	    if (language != null) {// set abbreviations
 		if (this.getAbbreviations(language) == null) {
@@ -296,9 +303,13 @@ public class Tokenizer {
      * @return
      */
     public HashSet<String> getAbbreviations(LanguageCode language) {
-	if (this.abbreviations == null)
-	    this.abbreviations = new ConcurrentHashMap<LanguageCode, HashSet<String>>();
-	return (abbreviations.get(language));
+	HashSet<String> retVal= null;
+	if (language!= null){
+        	if (this.abbreviations == null)
+        	    this.abbreviations = new ConcurrentHashMap<LanguageCode, HashSet<String>>();
+        	retVal= abbreviations.get(language); 
+	}
+	return (retVal);
     }
 
     // ======================= start: important issues
