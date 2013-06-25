@@ -48,72 +48,72 @@ public interface Label extends LabelableElement
 	public static final String NS_SEPERATOR= "::";
 	
 	/**
-	 * Returns the value of the '<em><b>Namespace</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Namespace</b></em>' attribute.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Namespace</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Namespace</em>' attribute.
-	 * @see #setNamespace(String)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Namespace()
-	 * @model
-	 * @generated
-	 */
+         * @return the value of the '<em>Namespace</em>' attribute.
+         * @see #setNamespace(String)
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Namespace()
+         * @model
+         * @generated
+         */
 	String getNamespace();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getNamespace <em>Namespace</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getNamespace <em>Namespace</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Namespace</em>' attribute.
-	 * @see #getNamespace()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Namespace</em>' attribute.
+         * @see #getNamespace()
+         * @generated
+         */
 	void setNamespace(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Name</b></em>' attribute.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Name()
-	 * @model
-	 * @generated
-	 */
+         * @return the value of the '<em>Name</em>' attribute.
+         * @see #setName(String)
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Name()
+         * @model
+         * @generated
+         */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getName <em>Name</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Name</em>' attribute.
+         * @see #getName()
+         * @generated
+         */
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>QName</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>QName</b></em>' attribute.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * Returns the full qualified name of this {@link Label} object. A full qualified name contains of the following:
 	 * {@link #getNamespace()})+{@value #NS_SEPERATOR}+{@link #getName()}
 	 * 
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>QName</em>' attribute.
-	 * @see #setQName(String)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_QName()
-	 * @model transient="true" volatile="true" derived="true"
-	 * @generated
-	 */
+         * @return the value of the '<em>QName</em>' attribute.
+         * @see #setQName(String)
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_QName()
+         * @model transient="true" volatile="true" derived="true"
+         * @generated
+         */
 	String getQName();
 
 	/**
@@ -132,57 +132,57 @@ public interface Label extends LabelableElement
 	void setQName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Value</b></em>' attribute.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(Object)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Value()
-	 * @model
-	 * @generated
-	 */
+         * @return the value of the '<em>Value</em>' attribute.
+         * @see #setValue(Object)
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Value()
+         * @model
+         * @generated
+         */
 	Object getValue();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValue <em>Value</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Value</em>' attribute.
+         * @see #getValue()
+         * @generated
+         */
 	void setValue(Object value);
 
 	/**
-	 * Returns the value of the '<em><b>Labelable Element</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#getLabels <em>Labels</em>}'.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Labelable Element</b></em>' container reference.
+         * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#getLabels <em>Labels</em>}'.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Labelable Element</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labelable Element</em>' container reference.
-	 * @see #setLabelableElement(LabelableElement)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_LabelableElement()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#getLabels
-	 * @model opposite="labels" transient="false"
-	 * @generated
-	 */
+         * @return the value of the '<em>Labelable Element</em>' container reference.
+         * @see #setLabelableElement(LabelableElement)
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_LabelableElement()
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement#getLabels
+         * @model opposite="labels" transient="false"
+         * @generated
+         */
 	LabelableElement getLabelableElement();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getLabelableElement <em>Labelable Element</em>}' container reference.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getLabelableElement <em>Labelable Element</em>}' container reference.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Labelable Element</em>' container reference.
-	 * @see #getLabelableElement()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Labelable Element</em>' container reference.
+         * @see #getLabelableElement()
+         * @generated
+         */
 	void setLabelableElement(LabelableElement value);
 
 	/**
@@ -206,11 +206,11 @@ public interface Label extends LabelableElement
 	void setValueString(String value);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
+         * @model kind="operation"
+         * @generated
+         */
 	String getNSSeperator();
 
 	/**

@@ -36,90 +36,90 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+         * Creates the default factory implementation.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public static IndexFactory init() {
-		try {
-			IndexFactory theIndexFactory = (IndexFactory)EPackage.Registry.INSTANCE.getEFactory("index"); 
-			if (theIndexFactory != null) {
-				return theIndexFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new IndexFactoryImpl();
-	}
+                try {
+                        IndexFactory theIndexFactory = (IndexFactory)EPackage.Registry.INSTANCE.getEFactory("index"); 
+                        if (theIndexFactory != null) {
+                                return theIndexFactory;
+                        }
+                }
+                catch (Exception exception) {
+                        EcorePlugin.INSTANCE.log(exception);
+                }
+                return new IndexFactoryImpl();
+        }
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+         * Creates an instance of the factory.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public IndexFactoryImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case IndexPackage.SIMPLE_INDEX: return createSimpleIndex();
-			case IndexPackage.INDEX_MGR: return createIndexMgr();
-			case IndexPackage.FAT_COMPLEX_INDEX: return createFatComplexIndex();
-			case IndexPackage.SLIM_COMPLEX_INDEX: return createSlimComplexIndex();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+                switch (eClass.getClassifierID()) {
+                        case IndexPackage.SIMPLE_INDEX: return createSimpleIndex();
+                        case IndexPackage.INDEX_MGR: return createIndexMgr();
+                        case IndexPackage.FAT_COMPLEX_INDEX: return createFatComplexIndex();
+                        case IndexPackage.SLIM_COMPLEX_INDEX: return createSlimComplexIndex();
+                        default:
+                                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+                }
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public <K, V> SimpleIndex<K, V> createSimpleIndex() {
-		SimpleIndexImpl<K, V> simpleIndex = new SimpleIndexImpl<K, V>();
-		return simpleIndex;
-	}
+                SimpleIndexImpl<K, V> simpleIndex = new SimpleIndexImpl<K, V>();
+                return simpleIndex;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public IndexMgr createIndexMgr() {
-		IndexMgrImpl indexMgr = new IndexMgrImpl();
-		return indexMgr;
-	}
+                IndexMgrImpl indexMgr = new IndexMgrImpl();
+                return indexMgr;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public <K, V> FatComplexIndex<K, V> createFatComplexIndex() {
-		FatComplexIndexImpl<K, V> fatComplexIndex = new FatComplexIndexImpl<K, V>();
-		return fatComplexIndex;
-	}
+                FatComplexIndexImpl<K, V> fatComplexIndex = new FatComplexIndexImpl<K, V>();
+                return fatComplexIndex;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public <K, V> SlimComplexIndex<K, V> createSlimComplexIndex() {
-		SlimComplexIndexImpl<K, V> slimComplexIndex = new SlimComplexIndexImpl<K, V>();
-		return slimComplexIndex;
-	}
+                SlimComplexIndexImpl<K, V> slimComplexIndex = new SlimComplexIndexImpl<K, V>();
+                return slimComplexIndex;
+        }
 
 	/**
 	 * {@inheritDoc IndexFactory#createComplexIndex()}
@@ -141,22 +141,22 @@ public class IndexFactoryImpl extends EFactoryImpl implements IndexFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public IndexPackage getIndexPackage() {
-		return (IndexPackage)getEPackage();
-	}
+                return (IndexPackage)getEPackage();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+         * @deprecated
+         * @generated
+         */
 	@Deprecated
 	public static IndexPackage getPackage() {
-		return IndexPackage.eINSTANCE;
-	}
+                return IndexPackage.eINSTANCE;
+        }
 } //IndexFactoryImpl

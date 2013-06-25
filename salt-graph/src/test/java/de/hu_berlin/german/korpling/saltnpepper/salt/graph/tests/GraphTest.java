@@ -638,22 +638,13 @@ public class GraphTest extends IdentifiableElementTest {
 		
 //		assertTrue(this.getFixture().getOutEdges(node1.getId()).contains(edge1));
 //		assertTrue(this.getFixture().getInEdges(node2.getId()).contains(edge1));		
-		
-//		System.out.println("node1 contains these InEdges:\t" + this.getFixture().getInEdges(node1.getId()));
-//		System.out.println("node1 contains these OutEdges:\t" + this.getFixture().getOutEdges(node1.getId()));
-//		System.out.println("node2 contains these InEdges:\t" + this.getFixture().getInEdges(node2.getId()));
-//		System.out.println("node2 contains these OutEdges:\t" + this.getFixture().getOutEdges(node2.getId()));
-		
+				
 		edge1.setSource(node2);
 		edge1.setTarget(node1);
 
 //		assertTrue(this.getFixture().getInEdges(node1.getId()).contains(edge1));
 //		assertTrue(this.getFixture().getOutEdges(node2.getId()).contains(edge1));		
 		
-//		System.out.println("node1 contains these InEdges:\t" + this.getFixture().getInEdges(node1.getId()));
-//		System.out.println("node1 contains these OutEdges:\t" + this.getFixture().getOutEdges(node1.getId()));
-//		System.out.println("node2 contains these InEdges:\t" + this.getFixture().getInEdges(node2.getId()));
-//		System.out.println("node2 contains these OutEdges:\t" + this.getFixture().getOutEdges(node2.getId()));
 	}
 		
 	/**
@@ -863,22 +854,23 @@ public class GraphTest extends IdentifiableElementTest {
 	 */
 	public void testRemoveEdges() 
 	{
-		//Knoten in den Graphen einf�gen
+		//add node to graph
 		this.insertNodes(nodes);
-		//Kanten in den Graphen einf�gen
+		//add node to graph
 		this.insertEdges(edges);
-		//Pr�fen ob Kanten eingef�gt wurden
+		//check if edge was inserted
 		for (Edge edge: edges)
 		{
 			assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));
 		}
-		//Kante l�schen
+		//remove edge
 		assertTrue(this.getFixture().removeEdges());
+		
 		for (Edge edge: edges)
 		{	
-			assertNull("this edge '"+edge.getId()+"' shouldn�t be there", this.getFixture().getEdge(edge.getId()));
+			assertNull("this edge '"+edge.getId()+"' shouldn't be there", this.getFixture().getEdge(edge.getId()));
 		}
-		//Kante entfernen, deren Knoten es nicht gibt
+		//remove edge, whichs node does not exist
 		Edge edge= GraphFactory.eINSTANCE.createEdge();
 		edge.setId("not there");
 		assertFalse(this.getFixture().removeEdgeById(edge.getId()));
