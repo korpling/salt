@@ -40,7 +40,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
  * The following features are tested:
  * <ul>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getNumOfIndexes() <em>Num Of Indexes</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph() <em>Graph</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -245,14 +244,14 @@ public class IndexMgrTest extends TestCase {
 			for(int i= 0; i< entries.length; i++)
 			{
 				idx= this.getFixture().getIndex(entries[i][0]);
-				if (idx.hasElement(entries[i][2]))
+				if (idx.hasKey(entries[i][2]))
 				{
 					this.getFixture().removeElement(entries[i][2]);
-					assertFalse("this entry '"+entries[i][2]+ "' should have been removed", idx.hasElement(entries[i][2]));
+					assertFalse("this entry '"+entries[i][1]+ "' should have been removed", idx.hasKey(entries[i][1]));
 				}
 			}
 			//einen Eintrag l�schen, den es nicht gibt
-			assertFalse("this entry 'not there' should have been removed", idx.hasElement("not there"));
+			assertFalse("this entry 'not there' should have been removed", idx.hasKey("not there"));
 	}
 
 	/**
@@ -293,31 +292,6 @@ public class IndexMgrTest extends TestCase {
 			i++;
 			assertEquals(new Long(i), this.getFixture().getNumOfIndexes());
 		}
-	}
-	
-	
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph() <em>Graph</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#getGraph()
-	 */
-	public void testGetGraph() 
-	{
-		Graph graph= GraphFactory.eINSTANCE.createGraph();
-		this.getFixture().setGraph(graph);
-		assertEquals(graph, this.getFixture().getGraph());
-	}
-
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#setGraph(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph) <em>Graph</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexMgr#setGraph(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph)
-	 */
-	public void testSetGraph() 
-	{
-		this.testGetGraph();
 	}
 
 	/**

@@ -17,11 +17,15 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
+import java.util.List;
+
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+
+import com.google.common.collect.ImmutableList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
@@ -896,7 +900,6 @@ public class SDocumentGraphTest extends TestCase {
 	public void testGetOverlappedDSSequences__SNode_EList() {
 		String text= "This is a sample text.";
 		SDataSourceSequence dsSequence= SaltFactory.eINSTANCE.createSDataSourceSequence();
-		
 		//start: create sample graph
 			STextualDS sText= this.getFixture().createSTextualDS(text);
 			dsSequence.setSSequentialDS(sText);
@@ -910,7 +913,7 @@ public class SDocumentGraphTest extends TestCase {
 			dsSequence.setSEnd(7);
 			SToken tok2= this.getFixture().createSToken(dsSequence);
 			tok2.setSName("tok2");
-			
+
 			dsSequence.setSStart(8);
 			dsSequence.setSEnd(9);
 			SToken tok3= this.getFixture().createSToken(dsSequence);
@@ -961,23 +964,21 @@ public class SDocumentGraphTest extends TestCase {
 		SDataSourceSequence sequence= null;
 		EList<STYPE_NAME> saltTypes= new BasicEList<STYPE_NAME>();
 		saltTypes.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);
-		
 		sequence= this.getFixture().getOverlappedDSSequences(struct2, saltTypes).get(0);
 		assertNotNull(sequence);
 		assertEquals((Integer)0, sequence.getSStart());
 		assertEquals((Integer)4, sequence.getSEnd());
-		
+
 		sequence= this.getFixture().getOverlappedDSSequences(struct1, saltTypes).get(0);
 		assertNotNull(sequence);
 		assertEquals((Integer)0, sequence.getSStart());
 		assertEquals((Integer)9, sequence.getSEnd());
 		
-		
 		sequence= this.getFixture().getOverlappedDSSequences(span1, saltTypes).get(0);
 		assertNotNull(sequence);
 		assertEquals((Integer)5, sequence.getSStart());
 		assertEquals((Integer)9, sequence.getSEnd());
-	
+		
 		sequence= this.getFixture().getOverlappedDSSequences(struct3, saltTypes).get(0);
 		assertNotNull(sequence);
 		assertEquals((Integer)5, sequence.getSStart());
@@ -1206,9 +1207,11 @@ public class SDocumentGraphTest extends TestCase {
 		this.getFixture().sortSTokenByText();
 		assertNotNull(this.getFixture().getSTokens());
 		assertEquals(sTokens.size(), this.getFixture().getSTokens().size());
+		List<SToken> controllSTokens= ImmutableList.copyOf(this.getFixture().getSTokens());
+		
 		for (int i=0; i< 6; i++)
 		{
-			assertEquals("tokens of index '"+i+"' aren't equal", sTokens.get(i), this.getFixture().getSTokens().get(i));
+			assertEquals("tokens of index '"+i+"' aren't equal", sTokens.get(i), controllSTokens.get(i));
 		}
 	}
 

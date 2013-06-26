@@ -15,13 +15,14 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.tests;
+package de.hu_berlin.german.korpling.saltnpepper.salt.samples;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import org.xml.sax.SAXException;
+
+import com.google.common.collect.ImmutableList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
@@ -323,7 +324,7 @@ public class SampleGenerator
 			}//creating tokenization (token objects and relations between tokens and the primary data object)
 			
 			// a synchronized list of all tokens to walk through
-			List<SToken> sTokens= Collections.synchronizedList(sDocument.getSDocumentGraph().getSTokens());
+			List<SToken> sTokens= ImmutableList.copyOf(sDocument.getSDocumentGraph().getSTokens());
 			
 			{//adding some annotations, part-of-speech and lemma (for part-of speech and lemma annotations a special annotation in Salt exists)
 				{//adding part-of speech annotations

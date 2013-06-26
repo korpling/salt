@@ -51,45 +51,45 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphInser
  */
 public class LabelableElementImpl extends EObjectImpl implements LabelableElement {
 	/**
-	 * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+         * The cached value of the '{@link #getLabels() <em>Labels</em>}' containment reference list.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLabels()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getLabels()
+         * @generated
+         * @ordered
+         */
 	protected EList<Label> labels;
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected LabelableElementImpl() {
-		super();
-	}
+                super();
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return GraphPackage.Literals.LABELABLE_ELEMENT;
-	}
+                return GraphPackage.Literals.LABELABLE_ELEMENT;
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public EList<Label> getLabels() {
-		if (labels == null) {
-			labels = new EObjectContainmentWithInverseEList<Label>(Label.class, this, GraphPackage.LABELABLE_ELEMENT__LABELS, GraphPackage.LABEL__LABELABLE_ELEMENT);
-		}
-		return labels;
-	}
+                if (labels == null) {
+                        labels = new EObjectContainmentWithInverseEList<Label>(Label.class, this, GraphPackage.LABELABLE_ELEMENT__LABELS, GraphPackage.LABEL__LABELABLE_ELEMENT);
+                }
+                return labels;
+        }
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -121,26 +121,12 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 	}
 
 	/**
-	 * Returns a QName created of namespace, seperator and name.
-	 * @param namespace 
-	 * @param name
-	 */
-	private String getQName(String namespace, String name)
-	{
-		String retVal= null;
-		if ((namespace!= null) && (!namespace.isEmpty()))
-			retVal= namespace + LabelImpl.GET_NS_SEPERATOR();
-		retVal= retVal + name;
-		return(retVal);
-	}
-	
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
 	public Label getLabel(String ns, String name) 
 	{
-		return(this.getLabel(this.getQName(ns, name)));
+		return(this.getLabel(LabelImpl.getQName(ns, name)));
 	}
 
 	/**
@@ -379,92 +365,92 @@ public class LabelableElementImpl extends EObjectImpl implements LabelableElemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case GraphPackage.LABELABLE_ELEMENT__LABELS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLabels()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+                switch (featureID) {
+                        case GraphPackage.LABELABLE_ELEMENT__LABELS:
+                                return ((InternalEList<InternalEObject>)(InternalEList<?>)getLabels()).basicAdd(otherEnd, msgs);
+                }
+                return super.eInverseAdd(otherEnd, featureID, msgs);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case GraphPackage.LABELABLE_ELEMENT__LABELS:
-				return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+                switch (featureID) {
+                        case GraphPackage.LABELABLE_ELEMENT__LABELS:
+                                return ((InternalEList<?>)getLabels()).basicRemove(otherEnd, msgs);
+                }
+                return super.eInverseRemove(otherEnd, featureID, msgs);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case GraphPackage.LABELABLE_ELEMENT__LABELS:
-				return getLabels();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case GraphPackage.LABELABLE_ELEMENT__LABELS:
+                                return getLabels();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case GraphPackage.LABELABLE_ELEMENT__LABELS:
-				getLabels().clear();
-				getLabels().addAll((Collection<? extends Label>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case GraphPackage.LABELABLE_ELEMENT__LABELS:
+                                getLabels().clear();
+                                getLabels().addAll((Collection<? extends Label>)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case GraphPackage.LABELABLE_ELEMENT__LABELS:
-				getLabels().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case GraphPackage.LABELABLE_ELEMENT__LABELS:
+                                getLabels().clear();
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case GraphPackage.LABELABLE_ELEMENT__LABELS:
-				return labels != null && !labels.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case GraphPackage.LABELABLE_ELEMENT__LABELS:
+                                return labels != null && !labels.isEmpty();
+                }
+                return super.eIsSet(featureID);
+        }
 
 } //LabelableElementImpl

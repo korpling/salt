@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/salt-saltCore/src/main/java"
-    editDirectory="/salt-saltCore.edit/src" editorDirectory="/salt-saltCore.editor/src"
-    modelPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-saltCore" modelName="SaltCore"
-    testsDirectory="/salt-saltCore/src/test/java" testSuiteClass="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.tests.SaltCoreAllTests"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/salt-saltCore/src/main/java" editDirectory="/salt-saltCore.edit/src"
+    editorDirectory="/salt-saltCore.editor/src" modelPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-saltCore"
+    modelName="SaltCore" testsDirectory="/salt-saltCore/src/test/java" testSuiteClass="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.tests.SaltCoreAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
     editPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-saltCore.edit" editorPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-saltCore.editor"
-    testsPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-saltCore" runtimeVersion="2.6"
+    testsPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-saltCore" runtimeVersion="2.8"
     usedGenPackages="../../../../../salt-graph/src/main/resources/model/graph.genmodel#//graph">
   <foreignModel>saltCore.ecore</foreignModel>
   <genPackages prefix="SaltCore" basePackage="de.hu_berlin.german.korpling.saltnpepper.salt"
@@ -42,7 +40,7 @@
         <genParameters ecoreParameter="saltCore.ecore#//SAnnotatableElement/addSAnnotation/sAnnotation"/>
       </genOperations>
       <genOperations ecoreOperation="saltCore.ecore#//SAnnotatableElement/getSAnnotation">
-        <genParameters ecoreParameter="saltCore.ecore#//SAnnotatableElement/getSAnnotation/fullName"/>
+        <genParameters ecoreParameter="saltCore.ecore#//SAnnotatableElement/getSAnnotation/qName"/>
       </genOperations>
       <genOperations ecoreOperation="saltCore.ecore#//SAnnotatableElement/createSAnnotation">
         <genParameters ecoreParameter="saltCore.ecore#//SAnnotatableElement/createSAnnotation/sNS"/>
@@ -117,7 +115,7 @@
         <genParameters ecoreParameter="saltCore.ecore#//SProcessingAnnotatableElement/addSProcessingAnnotation/sProcessingAnnotation"/>
       </genOperations>
       <genOperations ecoreOperation="saltCore.ecore#//SProcessingAnnotatableElement/getSProcessingAnnotation">
-        <genParameters ecoreParameter="saltCore.ecore#//SProcessingAnnotatableElement/getSProcessingAnnotation/fullName"/>
+        <genParameters ecoreParameter="saltCore.ecore#//SProcessingAnnotatableElement/getSProcessingAnnotation/qName"/>
       </genOperations>
       <genOperations ecoreOperation="saltCore.ecore#//SProcessingAnnotatableElement/createSProcessingAnnotation">
         <genParameters ecoreParameter="saltCore.ecore#//SProcessingAnnotatableElement/createSProcessingAnnotation/sNS"/>
@@ -145,7 +143,7 @@
         <genParameters ecoreParameter="saltCore.ecore#//SFeaturableElement/addSFeature/sFeature"/>
       </genOperations>
       <genOperations ecoreOperation="saltCore.ecore#//SFeaturableElement/getSFeature">
-        <genParameters ecoreParameter="saltCore.ecore#//SFeaturableElement/getSFeature/sFeatureName"/>
+        <genParameters ecoreParameter="saltCore.ecore#//SFeaturableElement/getSFeature/qName"/>
       </genOperations>
       <genOperations ecoreOperation="saltCore.ecore#//SFeaturableElement/getSFeature.1">
         <genParameters ecoreParameter="saltCore.ecore#//SFeaturableElement/getSFeature.1/sNamespace"/>
@@ -169,7 +167,7 @@
         <genParameters ecoreParameter="saltCore.ecore#//SMetaAnnotatableElement/addSMetaAnnotation/sMetaAnnotation"/>
       </genOperations>
       <genOperations ecoreOperation="saltCore.ecore#//SMetaAnnotatableElement/getSMetaAnnotation">
-        <genParameters ecoreParameter="saltCore.ecore#//SMetaAnnotatableElement/getSMetaAnnotation/fullName"/>
+        <genParameters ecoreParameter="saltCore.ecore#//SMetaAnnotatableElement/getSMetaAnnotation/qName"/>
       </genOperations>
       <genOperations ecoreOperation="saltCore.ecore#//SMetaAnnotatableElement/createSMetaAnnotation">
         <genParameters ecoreParameter="saltCore.ecore#//SMetaAnnotatableElement/createSMetaAnnotation/sNS"/>

@@ -43,21 +43,21 @@ import org.eclipse.emf.ecore.EObject;
 public interface LabelableElement extends EObject 
 {
 	/**
-	 * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
-	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label}.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getLabelableElement <em>Labelable Element</em>}'.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Labels</b></em>' containment reference list.
+         * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label}.
+         * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getLabelableElement <em>Labelable Element</em>}'.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Labels</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Labels</em>' containment reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabelableElement_Labels()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getLabelableElement
-	 * @model opposite="labelableElement" containment="true"
-	 * @generated
-	 */
+         * @return the value of the '<em>Labels</em>' containment reference list.
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabelableElement_Labels()
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getLabelableElement
+         * @model opposite="labelableElement" containment="true"
+         * @generated
+         */
 	EList<Label> getLabels();
 
 	/**
@@ -79,35 +79,35 @@ public interface LabelableElement extends EObject
 	void addLabel(Label label);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+         * @model
+         * @generated
+         */
 	Label getLabel(String ns, String name);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+         * @model
+         * @generated
+         */
 	Label getLabel(String fullName);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+         * @model
+         * @generated
+         */
 	Boolean removeLabel(String fullName);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
+         * @model kind="operation"
+         * @generated
+         */
 	int getNumOfLabels();
 
 	/**

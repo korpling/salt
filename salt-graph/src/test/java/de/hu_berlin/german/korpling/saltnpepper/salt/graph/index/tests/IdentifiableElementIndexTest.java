@@ -132,23 +132,23 @@ public class IdentifiableElementIndexTest extends IdentifiableElementTest {
 		
 		this.getFixture().removeElement(elem3);
 		assertEquals(Long.valueOf(4), this.getFixture().getNumOfElementIds());
-		assertFalse(this.getFixture().hasElement(elem3.getId()));
+		assertFalse(this.getFixture().hasKey(elem3.getId()));
 		
 		this.getFixture().removeElement(elem5);
 		assertEquals(Long.valueOf(3), this.getFixture().getNumOfElementIds());
-		assertFalse(this.getFixture().hasElement(elem5.getId()));
+		assertFalse(this.getFixture().hasKey(elem5.getId()));
 		
 		this.getFixture().removeElement(elem1);
 		assertEquals(Long.valueOf(2), this.getFixture().getNumOfElementIds());
-		assertFalse(this.getFixture().hasElement(elem1.getId()));
+		assertFalse(this.getFixture().hasKey(elem1.getId()));
 		
 		this.getFixture().removeElement(elem2);
 		assertEquals(Long.valueOf(1), this.getFixture().getNumOfElementIds());
-		assertFalse(this.getFixture().hasElement(elem2.getId()));
+		assertFalse(this.getFixture().hasKey(elem2.getId()));
 		
 		this.getFixture().removeElement(elem4);
 		assertEquals(Long.valueOf(0), this.getFixture().getNumOfElementIds());
-		assertFalse(this.getFixture().hasElement(elem4.getId()));
+		assertFalse(this.getFixture().hasKey(elem4.getId()));
 	}
 	
 	/**

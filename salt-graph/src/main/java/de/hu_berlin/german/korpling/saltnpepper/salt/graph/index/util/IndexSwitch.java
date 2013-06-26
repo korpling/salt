@@ -22,10 +22,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.*;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,206 +39,240 @@ import org.eclipse.emf.ecore.EObject;
  * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage
  * @generated
  */
-public class IndexSwitch<T> {
+public class IndexSwitch<T> extends Switch<T> {
 	/**
-	 * The cached model package
-	 * <!-- begin-user-doc -->
+         * The cached model package
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	protected static IndexPackage modelPackage;
 
 	/**
-	 * Creates an instance of the switch.
-	 * <!-- begin-user-doc -->
+         * Creates an instance of the switch.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	public IndexSwitch() {
-		if (modelPackage == null) {
-			modelPackage = IndexPackage.eINSTANCE;
-		}
-	}
+                if (modelPackage == null) {
+                        modelPackage = IndexPackage.eINSTANCE;
+                }
+        }
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
+         * Checks whether this is a switch for the given package.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
-	public T doSwitch(EObject theEObject) {
-		return doSwitch(theEObject.eClass(), theEObject);
-	}
+         * @parameter ePackage the package in question.
+         * @return whether this is a switch for the given package.
+         * @generated
+         */
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage) {
+                return ePackage == modelPackage;
+        }
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
+         * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
-	}
-
-	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+         * @return the first non-null result returned by a <code>caseXXX</code> call.
+         * @generated
+         */
+	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID) {
-			case IndexPackage.INDEX: {
-				Index<?, ?> index = (Index<?, ?>)theEObject;
-				T result = caseIndex(index);
-				if (result == null) result = caseIdentifiableElement(index);
-				if (result == null) result = caseLabelableElement(index);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case IndexPackage.SIMPLE_INDEX: {
-				SimpleIndex<?, ?> simpleIndex = (SimpleIndex<?, ?>)theEObject;
-				T result = caseSimpleIndex(simpleIndex);
-				if (result == null) result = caseIndex(simpleIndex);
-				if (result == null) result = caseIdentifiableElement(simpleIndex);
-				if (result == null) result = caseLabelableElement(simpleIndex);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case IndexPackage.INDEX_MGR: {
-				IndexMgr indexMgr = (IndexMgr)theEObject;
-				T result = caseIndexMgr(indexMgr);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case IndexPackage.COMPLEX_INDEX: {
-				ComplexIndex<?, ?> complexIndex = (ComplexIndex<?, ?>)theEObject;
-				T result = caseComplexIndex(complexIndex);
-				if (result == null) result = caseIndex(complexIndex);
-				if (result == null) result = caseIdentifiableElement(complexIndex);
-				if (result == null) result = caseLabelableElement(complexIndex);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			default: return defaultCase(theEObject);
-		}
-	}
+                switch (classifierID) {
+                        case IndexPackage.INDEX: {
+                                Index<?, ?> index = (Index<?, ?>)theEObject;
+                                T result = caseIndex(index);
+                                if (result == null) result = caseIdentifiableElement(index);
+                                if (result == null) result = caseLabelableElement(index);
+                                if (result == null) result = defaultCase(theEObject);
+                                return result;
+                        }
+                        case IndexPackage.SIMPLE_INDEX: {
+                                SimpleIndex<?, ?> simpleIndex = (SimpleIndex<?, ?>)theEObject;
+                                T result = caseSimpleIndex(simpleIndex);
+                                if (result == null) result = caseIndex(simpleIndex);
+                                if (result == null) result = caseIdentifiableElement(simpleIndex);
+                                if (result == null) result = caseLabelableElement(simpleIndex);
+                                if (result == null) result = defaultCase(theEObject);
+                                return result;
+                        }
+                        case IndexPackage.INDEX_MGR: {
+                                IndexMgr indexMgr = (IndexMgr)theEObject;
+                                T result = caseIndexMgr(indexMgr);
+                                if (result == null) result = defaultCase(theEObject);
+                                return result;
+                        }
+                        case IndexPackage.COMPLEX_INDEX: {
+                                ComplexIndex<?, ?> complexIndex = (ComplexIndex<?, ?>)theEObject;
+                                T result = caseComplexIndex(complexIndex);
+                                if (result == null) result = caseIndex(complexIndex);
+                                if (result == null) result = caseIdentifiableElement(complexIndex);
+                                if (result == null) result = caseLabelableElement(complexIndex);
+                                if (result == null) result = defaultCase(theEObject);
+                                return result;
+                        }
+                        case IndexPackage.FAT_COMPLEX_INDEX: {
+                                FatComplexIndex<?, ?> fatComplexIndex = (FatComplexIndex<?, ?>)theEObject;
+                                T result = caseFatComplexIndex(fatComplexIndex);
+                                if (result == null) result = caseComplexIndex(fatComplexIndex);
+                                if (result == null) result = caseIndex(fatComplexIndex);
+                                if (result == null) result = caseIdentifiableElement(fatComplexIndex);
+                                if (result == null) result = caseLabelableElement(fatComplexIndex);
+                                if (result == null) result = defaultCase(theEObject);
+                                return result;
+                        }
+                        case IndexPackage.SLIM_COMPLEX_INDEX: {
+                                SlimComplexIndex<?, ?> slimComplexIndex = (SlimComplexIndex<?, ?>)theEObject;
+                                T result = caseSlimComplexIndex(slimComplexIndex);
+                                if (result == null) result = caseComplexIndex(slimComplexIndex);
+                                if (result == null) result = caseIndex(slimComplexIndex);
+                                if (result == null) result = caseIdentifiableElement(slimComplexIndex);
+                                if (result == null) result = caseLabelableElement(slimComplexIndex);
+                                if (result == null) result = defaultCase(theEObject);
+                                return result;
+                        }
+                        default: return defaultCase(theEObject);
+                }
+        }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Index</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns the result of interpreting the object as an instance of '<em>Index</em>'.
+         * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Index</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>Index</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+         * @generated
+         */
 	public <K, V> T caseIndex(Index<K, V> object) {
-		return null;
-	}
+                return null;
+        }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple Index</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns the result of interpreting the object as an instance of '<em>Simple Index</em>'.
+         * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple Index</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>Simple Index</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+         * @generated
+         */
 	public <K, V> T caseSimpleIndex(SimpleIndex<K, V> object) {
-		return null;
-	}
+                return null;
+        }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mgr</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns the result of interpreting the object as an instance of '<em>Mgr</em>'.
+         * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mgr</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>Mgr</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+         * @generated
+         */
 	public T caseIndexMgr(IndexMgr object) {
-		return null;
-	}
+                return null;
+        }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Complex Index</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns the result of interpreting the object as an instance of '<em>Complex Index</em>'.
+         * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Complex Index</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>Complex Index</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+         * @generated
+         */
 	public <K, V> T caseComplexIndex(ComplexIndex<K, V> object) {
-		return null;
-	}
+                return null;
+        }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Labelable Element</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns the result of interpreting the object as an instance of '<em>Fat Complex Index</em>'.
+         * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Labelable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>Fat Complex Index</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+         * @generated
+         */
+	public <K, V> T caseFatComplexIndex(FatComplexIndex<K, V> object) {
+                return null;
+        }
+
+	/**
+         * Returns the result of interpreting the object as an instance of '<em>Slim Complex Index</em>'.
+         * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>Slim Complex Index</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+         * @generated
+         */
+	public <K, V> T caseSlimComplexIndex(SlimComplexIndex<K, V> object) {
+                return null;
+        }
+
+	/**
+         * Returns the result of interpreting the object as an instance of '<em>Labelable Element</em>'.
+         * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>Labelable Element</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+         * @generated
+         */
 	public T caseLabelableElement(LabelableElement object) {
-		return null;
-	}
+                return null;
+        }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Identifiable Element</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns the result of interpreting the object as an instance of '<em>Identifiable Element</em>'.
+         * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Identifiable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>Identifiable Element</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+         * @generated
+         */
 	public T caseIdentifiableElement(IdentifiableElement object) {
-		return null;
-	}
+                return null;
+        }
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * <!-- begin-user-doc -->
+         * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+         * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch, but this is the last case anyway.
 	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
-	 * @generated
-	 */
+         * @param object the target of the switch.
+         * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
+         * @see #doSwitch(org.eclipse.emf.ecore.EObject)
+         * @generated
+         */
+	@Override
 	public T defaultCase(EObject object) {
-		return null;
-	}
+                return null;
+        }
 
 } //IndexSwitch

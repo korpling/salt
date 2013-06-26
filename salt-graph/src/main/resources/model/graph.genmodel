@@ -4,7 +4,7 @@
     modelPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-graph" modelName="salt-graph"
     testsDirectory="/salt-graph/src/test/java" testSuiteClass="de.hu_berlin.german.korpling.saltnpepper.salt.graph.tests.GraphAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
-    runtimeVersion="2.6">
+    runtimeVersion="2.8" language="" interfaceNamePattern="">
   <foreignModel>graph.ecore</foreignModel>
   <genPackages prefix="Graph" basePackage="de.hu_berlin.german.korpling.saltnpepper.salt"
       disposableProviderFactory="true" ecorePackage="graph.ecore#/">
@@ -169,7 +169,12 @@
     </genClasses>
     <nestedGenPackages prefix="Index" disposableProviderFactory="true" ecorePackage="graph.ecore#//index">
       <genClasses image="false" ecoreClass="graph.ecore#//index/Index">
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/Index/K"/>
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/Index/V"/>
         <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/Index/numOfElements"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/Index/numOfElementIds"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/Index/indexMap"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/Index/estimatedCapacity"/>
         <genOperations ecoreOperation="graph.ecore#//index/Index/addElement">
           <genParameters ecoreParameter="graph.ecore#//index/Index/addElement/elementId"/>
           <genParameters ecoreParameter="graph.ecore#//index/Index/addElement/element"/>
@@ -183,7 +188,8 @@
         <genOperations ecoreOperation="graph.ecore#//index/Index/removeAll"/>
       </genClasses>
       <genClasses ecoreClass="graph.ecore#//index/SimpleIndex">
-        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/SimpleIndex/idxTable"/>
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/SimpleIndex/K"/>
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/SimpleIndex/V"/>
         <genOperations ecoreOperation="graph.ecore#//index/SimpleIndex/getElement">
           <genParameters ecoreParameter="graph.ecore#//index/SimpleIndex/getElement/elementId"/>
         </genOperations>
@@ -214,8 +220,8 @@
         </genOperations>
       </genClasses>
       <genClasses ecoreClass="graph.ecore#//index/ComplexIndex">
-        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/ComplexIndex/numOfSlots"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/ComplexIndex/idxTable"/>
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/ComplexIndex/K"/>
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/ComplexIndex/V"/>
         <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/ComplexIndex/sortable"/>
         <genOperations ecoreOperation="graph.ecore#//index/ComplexIndex/hasSlot">
           <genParameters ecoreParameter="graph.ecore#//index/ComplexIndex/hasSlot/elementId"/>

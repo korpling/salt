@@ -48,7 +48,8 @@ public class IndexTests extends TestSuite {
 		TestSuite suite = new IndexTests("index Tests");
 		suite.addTestSuite(SimpleIndexTest.class);
 		suite.addTestSuite(IndexMgrTest.class);
-		suite.addTestSuite(ComplexIndexTest.class);
+		suite.addTestSuite(FatComplexIndexTest.class);
+		suite.addTestSuite(SlimComplexIndexTest.class);
 		return suite;
 	}
 

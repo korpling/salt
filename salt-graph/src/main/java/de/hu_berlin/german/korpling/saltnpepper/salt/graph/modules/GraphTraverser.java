@@ -74,14 +74,15 @@ public class GraphTraverser extends GraphModule
 	public EList<Node> getRoots() 
 	{
 		EList<Node> retList= null;
+		EList<Node> nodes = this.getGraph().getNodes();
 		retList= new BasicEList<Node>();
-		if (this.getGraph().getNodes().size()==1)
+		if (nodes.size() == 1)
 		{//if corpusGraph only contains one corpus it shall not need to be traversed
-			retList.add(this.getGraph().getNodes().get(0)); 
+			retList.add(nodes.get(0)); 
 		}//if corpusGraph only contains one corpus it shall not need to be traversed
 		else
 		{	
-			for (Node node: Collections.synchronizedCollection(this.getGraph().getNodes()))
+			for (Node node: Collections.synchronizedCollection(nodes))
 			{
 				//checking if node has ingoing edges
 				EList<Edge> inEdges= this.getGraph().getInEdges(node.getId());

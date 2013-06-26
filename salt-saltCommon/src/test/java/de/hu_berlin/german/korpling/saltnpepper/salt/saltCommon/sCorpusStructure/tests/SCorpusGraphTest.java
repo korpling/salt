@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests;
 
 import java.io.File;
+import java.util.List;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
@@ -25,6 +26,8 @@ import junit.textui.TestRunner;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+
+import com.google.common.collect.ImmutableList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
@@ -37,11 +40,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.tests.SampleGenerator;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 import de.hu_berlin.german.korpling.saltnpepper.salt.tests.SaltFactoryImplTest;
 
 /**
@@ -300,13 +303,12 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		this.getFixture().addSNode(sSuperCorpus);
 		assertNotNull(this.getFixture().addSSubCorpus(sSuperCorpus, sSubCorpus));
 		
-		EList<Edge> edges= null;
-		edges= this.getFixture().getOutEdges(sSuperCorpus.getSId());
+		List<Edge> edges= ImmutableList.copyOf(this.getFixture().getOutEdges(sSuperCorpus.getSId()));
 		assertNotNull(edges);
 		assertTrue(edges.size()== 1);
 		assertEquals(sSubCorpus, edges.get(0).getTarget());
 		
-		edges= this.getFixture().getInEdges(sSubCorpus.getSId());
+		edges= ImmutableList.copyOf(this.getFixture().getInEdges(sSubCorpus.getSId()));
 		assertNotNull(edges);
 		assertTrue(edges.size()== 1);
 		assertEquals(sSuperCorpus, edges.get(0).getSource());
@@ -331,13 +333,12 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		this.getFixture().addSNode(sSuperCorpus);
 		assertNotNull(this.getFixture().addSDocument(sSuperCorpus, sDocument));
 		
-		EList<Edge> edges= null;
-		edges= this.getFixture().getOutEdges(sSuperCorpus.getSId());
+		List<Edge> edges= ImmutableList.copyOf(this.getFixture().getOutEdges(sSuperCorpus.getSId()));
 		assertNotNull(edges);
 		assertTrue(edges.size()== 1);
 		assertEquals(sDocument, edges.get(0).getTarget());
 		
-		edges= this.getFixture().getInEdges(sDocument.getSId());
+		edges= ImmutableList.copyOf(this.getFixture().getInEdges(sDocument.getSId()));
 		assertNotNull(edges);
 		assertTrue(edges.size()== 1);
 		assertEquals(sSuperCorpus, edges.get(0).getSource());

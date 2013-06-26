@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules;
 
+import com.google.common.collect.ImmutableList;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -24,7 +25,6 @@ import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
@@ -41,6 +41,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Provides some methods for an easier access to objects being contained by a given {@link SDocumentGraph}
@@ -225,30 +227,18 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 		
 		if (this.getSDocumentGraph().getSTokens()!= null)
 		{
-			STokenSStartComparator comparator= new STokenSStartComparator();
+			STokenSStartComparator comparator = new STokenSStartComparator();
 			comparator.setSDocumentGraph(this.getSDocumentGraph());
-	
-			//sort tokens
-			Object slotId = SToken.class.getName();
-			ComplexIndex complexIndex = ((ComplexIndex)this.getSDocumentGraph().getIndexMgr().getIndex(SDocumentGraph.IDX_SNODETYPE));
 
-			if (complexIndex.isSortable())
-			{
-                @SuppressWarnings("unchecked")
-                EList<SToken> tokens = ((EList<SToken>)(EList<? extends Object>)complexIndex.getSlot(slotId));
-                Collections.sort(tokens, comparator);
-			}
-			else
-			{
-	             //In SlimComplexIndex, a LinkedHashSet is used, so no sorting is possible. Remove the whole slot and recreate it in 
-                //the desired order.
-                @SuppressWarnings("unchecked")
-                EList<SToken> tokens = new BasicEList<SToken>((EList<SToken>)(EList<? extends Object>)complexIndex.getSlot(slotId));
-                Collections.sort(tokens, comparator);
-                complexIndex.removeSlot(slotId);
-                for (SToken token : tokens)
-                    complexIndex.addElement(slotId, token);
-			}
+			//sort tokens
+			EList<SToken> tokens = getSDocumentGraph().getCentralIndex()
+					.getAll(SDocumentGraph.IDX_SNODETYPE, SToken.class);
+			List<SToken> mutableTokens = new LinkedList<SToken>(tokens);
+			Collections.sort(mutableTokens, comparator);
+			getSDocumentGraph().getCentralIndex().remove(SDocumentGraph.IDX_SNODETYPE, SToken.class);
+			getSDocumentGraph().getCentralIndex()
+					.putAll(SDocumentGraph.IDX_SNODETYPE, SToken.class, mutableTokens);
+			
 		}
 	}
 	

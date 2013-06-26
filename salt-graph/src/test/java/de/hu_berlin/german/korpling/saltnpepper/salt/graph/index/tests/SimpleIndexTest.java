@@ -47,7 +47,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#getElement(java.lang.Object) <em>Get Element</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SimpleIndex#removeElementById(java.lang.Object) <em>Remove Element By Id</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#addElement(java.lang.Object, java.lang.Object) <em>Add Element</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasElement(java.lang.Object) <em>Has Element</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#hasKey(java.lang.Object) <em>Has Key</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#removeElement(java.lang.Object) <em>Remove Element</em>}</li>
  * </ul>
  * </p>
@@ -222,12 +222,12 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 	}
 
 	/**
-	 * Tests the '{@link de.util.graph.Index#hasElement(java.lang.Object) <em>Has Element</em>}' operation.
+	 * Tests the '{@link de.util.graph.Index#hasKey(java.lang.Object) <em>Has Key</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.util.graph.Index#hasElement(java.lang.Object)
+	 * @see de.util.graph.Index#hasKey(java.lang.Object)
 	 */
-	public void testHasElement__Object() 
+	public void testHasKey__Object() 
 	{
 		String[][] entries= {{"elemId1", "entry1"}, {"elemId2", "entry2"}};
 		for (String[] entry: entries)
@@ -237,7 +237,7 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 		
 		for (String[] entry: entries)
 		{
-			assertTrue(this.getFixture().hasElement(entry[0]));
+			assertTrue(this.getFixture().hasKey(entry[0]));
 		}
 	}
 
@@ -257,12 +257,12 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 		
 		for (String[] entry: entries)
 		{
-			assertTrue(this.getFixture().hasElement(entry[0]));
+			assertTrue(this.getFixture().hasKey(entry[0]));
 		}
 		for (String[] entry: entries)
 		{
 			assertTrue(this.getFixture().removeElement(entry[1]));
-			assertFalse(this.getFixture().hasElement(entry[0]));
+			assertFalse(this.getFixture().hasKey(entry[0]));
 		}
 		assertEquals(new Long(0), this.getFixture().getNumOfElements());
 		
@@ -284,7 +284,7 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 		
 		for (String[] entry: entries)
 		{
-			assertTrue(this.getFixture().hasElement(entry[0]));
+			assertTrue(this.getFixture().hasKey(entry[0]));
 		}
 
 		assertTrue(this.getFixture().removeAll());
@@ -292,7 +292,7 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 		assertEquals(new Long(0), this.getFixture().getNumOfElements());
 		for (String[] entry: entries)
 		{
-			assertFalse(this.getFixture().hasElement(entry[0]));
+			assertFalse(this.getFixture().hasKey(entry[0]));
 		}
 	}
 	
@@ -313,12 +313,12 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 		
 		for (String[] entry: entries)
 		{
-			assertTrue(this.getFixture().hasElement(entry[0]));
+			assertTrue(this.getFixture().hasKey(entry[0]));
 		}
 		for (String[] entry: entries)
 		{
 			assertTrue(this.getFixture().removeElementById(entry[0]));
-			assertFalse(this.getFixture().hasElement(entry[0]));
+			assertFalse(this.getFixture().hasKey(entry[0]));
 		}
 		assertEquals(new Long(0), this.getFixture().getNumOfElements());
 	}
@@ -335,10 +335,10 @@ public class SimpleIndexTest extends IdentifiableElementTest {
 		String entry= "entry";
 		this.getFixture().addElement(id, entry);
 		
-		assertTrue(this.getFixture().hasElement("id1"));
+		assertTrue(this.getFixture().hasKey("id1"));
 
 		assertTrue(this.getFixture().removeElementById("id1"));
-		assertFalse(this.getFixture().hasElement("id1"));
+		assertFalse(this.getFixture().hasKey("id1"));
 		assertEquals(new Long(0), this.getFixture().getNumOfElements());
 	}
 

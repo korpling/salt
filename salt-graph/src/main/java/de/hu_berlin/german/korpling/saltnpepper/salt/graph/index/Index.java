@@ -46,126 +46,126 @@ import java.util.Map;
 public interface Index<K, V> extends IdentifiableElement {
 
 	/**
-	 * Returns the value of the '<em><b>Num Of Elements</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Num Of Elements</b></em>' attribute.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Num Of Elements</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Num Of Elements</em>' attribute.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_NumOfElements()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
+         * @return the value of the '<em>Num Of Elements</em>' attribute.
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_NumOfElements()
+         * @model transient="true" changeable="false" volatile="true" derived="true"
+         * @generated
+         */
 	Long getNumOfElements();
 
 	/**
-	 * Returns the value of the '<em><b>Num Of Element Ids</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Num Of Element Ids</b></em>' attribute.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Num Of Element Ids</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Num Of Element Ids</em>' attribute.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_NumOfElementIds()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
+         * @return the value of the '<em>Num Of Element Ids</em>' attribute.
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_NumOfElementIds()
+         * @model transient="true" changeable="false" volatile="true" derived="true"
+         * @generated
+         */
 	Long getNumOfElementIds();
 
 	/**
-	 * Returns the value of the '<em><b>Index Map</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Index Map</b></em>' attribute.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Index Map</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Index Map</em>' attribute.
-	 * @see #setIndexMap(Map)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_IndexMap()
-	 * @model transient="true" volatile="true"
-	 * @generated
-	 */
+         * @return the value of the '<em>Index Map</em>' attribute.
+         * @see #setIndexMap(Map)
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_IndexMap()
+         * @model transient="true" volatile="true"
+         * @generated
+         */
 	Map<K, V> getIndexMap();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap <em>Index Map</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getIndexMap <em>Index Map</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Index Map</em>' attribute.
-	 * @see #getIndexMap()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Index Map</em>' attribute.
+         * @see #getIndexMap()
+         * @generated
+         */
 	void setIndexMap(Map<K, V> value);
 
 	/**
-	 * Returns the value of the '<em><b>Estimated Capacity</b></em>' attribute.
-	 * The default value is <code>"10000"</code>.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Estimated Capacity</b></em>' attribute.
+         * The default value is <code>"10000"</code>.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Determines the estimated size of this index. For instance this value can be used by implemnting calsses as inital cpacity for e.g. {@link HashMap} objects etc.. The default value is set to {@value #ESTIMATED_CAPACITY_EDEFAULT}. A reset currently is ineffective.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Estimated Capacity</em>' attribute.
-	 * @see #setEstimatedCapacity(Integer)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_EstimatedCapacity()
-	 * @model default="10000"
-	 * @generated
-	 */
+         * <!-- begin-model-doc -->
+         * Determines the estimated size of this index. For instance this value can be used by implemnting calsses as inital cpacity for e.g. {@link HashMap} objects etc.. The default value is set to {@value #ESTIMATED_CAPACITY_EDEFAULT}. A reset currently is ineffective.
+         * <!-- end-model-doc -->
+         * @return the value of the '<em>Estimated Capacity</em>' attribute.
+         * @see #setEstimatedCapacity(Integer)
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndex_EstimatedCapacity()
+         * @model default="10000"
+         * @generated
+         */
 	Integer getEstimatedCapacity();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getEstimatedCapacity <em>Estimated Capacity</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index#getEstimatedCapacity <em>Estimated Capacity</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Estimated Capacity</em>' attribute.
-	 * @see #getEstimatedCapacity()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Estimated Capacity</em>' attribute.
+         * @see #getEstimatedCapacity()
+         * @generated
+         */
 	void setEstimatedCapacity(Integer value);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * This method adds an element to slot with given id. If no slot exists it will be created. No element will ever be inserted into the same slot more than once.
-	 * @param id Object - identifier for slot
-	 * @param element Object - adding element  
-	 * <!-- end-model-doc -->
-	 * @model
-	 * @generated
-	 */
+         * <!-- begin-model-doc -->
+         * This method adds an element to slot with given id. If no slot exists it will be created. No element will ever be inserted into the same slot more than once.
+         * @param id Object - identifier for slot
+         * @param element Object - adding element  
+         * <!-- end-model-doc -->
+         * @model
+         * @generated
+         */
 	void addElement(K elementId, V element);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	Boolean hasElement(K elementId);
+         * @model
+         * @generated
+         */
+	Boolean hasKey(K elementId);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Removes the given element from this index.
-	 * @param element - the element which shall be removed
-	 * @return true, if removing was successful 
-	 * <!-- end-model-doc -->
-	 * @model
-	 * @generated
-	 */
+         * <!-- begin-model-doc -->
+         * Removes the given element from this index.
+         * @param element - the element which shall be removed
+         * @return true, if removing was successful 
+         * <!-- end-model-doc -->
+         * @model
+         * @generated
+         */
 	Boolean removeElement(V element);
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
+         * @model
+         * @generated
+         */
 	Boolean removeAll();
 } // Index

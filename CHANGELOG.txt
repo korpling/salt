@@ -12,6 +12,14 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 1.1.7
+=============
+	* = bug fix in Tokenizer (Issue #289, NullPointerException, if language not estimated)
+	* + String pooling for Label namespaces, names and if value is a string
+	* = avoid copying of lists when using the index e.g. in case of calling getSSpans(), getSTokens() etc.
+	* + implemented ADD_MANY and REMOVE_MANY in GraphImpl for nodes and edges
+	* = new and faster index behaviour (it remains to harmonize the old slower and new faster index) 
+
 Version 1.1.6
 =============
 	* + switched to EMF 2.8

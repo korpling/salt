@@ -77,13 +77,13 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 	 */
 //	protected IdentifiableElement identifiableElement;
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
+         * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
-	 * @generated
-	 * @ordered
-	 */
+         * @see #getId()
+         * @generated
+         * @ordered
+         */
 	protected static final String ID_EDEFAULT = null;
 	
 	/**
@@ -103,14 +103,14 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	protected EClass eStaticClass() {
-		return GraphPackage.Literals.IDENTIFIER;
-	}
+                return GraphPackage.Literals.IDENTIFIER;
+        }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -232,10 +232,10 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 					differences.add("The id of this is '"+this.getId()+"', but the one of the given object is null.");
 				else return(false);
 			}
-			else if (this.getId().hashCode()!= other.getId().hashCode())
+			else if (!this.getId().equals(other.getId()))
 			{
 				if (differences!= null)
-					differences.add("The hashcode of the id of both objects isn't the same.");
+					differences.add("The value of the id of both objects isn't the same.");
 				else return false;
 			}
 		//end: check id
@@ -263,9 +263,9 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 	 */
 	public IdentifiableElement getIdentifiableElement() 
 	{
-		IdentifiableElement identifiableElement = basicGetIdentifiableElement();
-		return identifiableElement != null && identifiableElement.eIsProxy() ? (IdentifiableElement)eResolveProxy((InternalEObject)identifiableElement) : identifiableElement;
-	}
+                IdentifiableElement identifiableElement = basicGetIdentifiableElement();
+                return identifiableElement != null && identifiableElement.eIsProxy() ? (IdentifiableElement)eResolveProxy((InternalEObject)identifiableElement) : identifiableElement;
+        }
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -296,72 +296,72 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 	}
 	
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case GraphPackage.IDENTIFIER__IDENTIFIABLE_ELEMENT:
-				if (resolve) return getIdentifiableElement();
-				return basicGetIdentifiableElement();
-			case GraphPackage.IDENTIFIER__ID:
-				return getId();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+                switch (featureID) {
+                        case GraphPackage.IDENTIFIER__IDENTIFIABLE_ELEMENT:
+                                if (resolve) return getIdentifiableElement();
+                                return basicGetIdentifiableElement();
+                        case GraphPackage.IDENTIFIER__ID:
+                                return getId();
+                }
+                return super.eGet(featureID, resolve, coreType);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case GraphPackage.IDENTIFIER__IDENTIFIABLE_ELEMENT:
-				setIdentifiableElement((IdentifiableElement)newValue);
-				return;
-			case GraphPackage.IDENTIFIER__ID:
-				setId((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+                switch (featureID) {
+                        case GraphPackage.IDENTIFIER__IDENTIFIABLE_ELEMENT:
+                                setIdentifiableElement((IdentifiableElement)newValue);
+                                return;
+                        case GraphPackage.IDENTIFIER__ID:
+                                setId((String)newValue);
+                                return;
+                }
+                super.eSet(featureID, newValue);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case GraphPackage.IDENTIFIER__IDENTIFIABLE_ELEMENT:
-				setIdentifiableElement((IdentifiableElement)null);
-				return;
-			case GraphPackage.IDENTIFIER__ID:
-				setId(ID_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+                switch (featureID) {
+                        case GraphPackage.IDENTIFIER__IDENTIFIABLE_ELEMENT:
+                                setIdentifiableElement((IdentifiableElement)null);
+                                return;
+                        case GraphPackage.IDENTIFIER__ID:
+                                setId(ID_EDEFAULT);
+                                return;
+                }
+                super.eUnset(featureID);
+        }
 
 	/**
-	 * <!-- begin-user-doc -->
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+         * @generated
+         */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case GraphPackage.IDENTIFIER__IDENTIFIABLE_ELEMENT:
-				return basicGetIdentifiableElement() != null;
-			case GraphPackage.IDENTIFIER__ID:
-				return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
-		}
-		return super.eIsSet(featureID);
-	}
+                switch (featureID) {
+                        case GraphPackage.IDENTIFIER__IDENTIFIABLE_ELEMENT:
+                                return basicGetIdentifiableElement() != null;
+                        case GraphPackage.IDENTIFIER__ID:
+                                return ID_EDEFAULT == null ? getId() != null : !ID_EDEFAULT.equals(getId());
+                }
+                return super.eIsSet(featureID);
+        }
 
 } //IdentifierImpl

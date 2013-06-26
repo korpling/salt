@@ -39,49 +39,49 @@ import org.eclipse.emf.common.util.EList;
 public interface Node extends IdentifiableElement {
 
 	/**
-	 * Returns the value of the '<em><b>Graph</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getNodes <em>Nodes</em>}'.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Graph</b></em>' container reference.
+         * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getNodes <em>Nodes</em>}'.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Graph</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Graph</em>' container reference.
-	 * @see #setGraph(Graph)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getNode_Graph()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getNodes
-	 * @model opposite="nodes" unsettable="true" transient="false"
-	 * @generated
-	 */
+         * @return the value of the '<em>Graph</em>' container reference.
+         * @see #setGraph(Graph)
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getNode_Graph()
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getNodes
+         * @model opposite="nodes" unsettable="true" transient="false"
+         * @generated
+         */
 	Graph getGraph();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node#getGraph <em>Graph</em>}' container reference.
-	 * <!-- begin-user-doc -->
+         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node#getGraph <em>Graph</em>}' container reference.
+         * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Graph</em>' container reference.
-	 * @see #getGraph()
-	 * @generated
-	 */
+         * @param value the new value of the '<em>Graph</em>' container reference.
+         * @see #getGraph()
+         * @generated
+         */
 	void setGraph(Graph value);
 
 	/**
-	 * Returns the value of the '<em><b>Layers</b></em>' reference list.
-	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer}.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getNodes <em>Nodes</em>}'.
-	 * <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Layers</b></em>' reference list.
+         * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer}.
+         * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getNodes <em>Nodes</em>}'.
+         * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layers</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Layers</em>' reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getNode_Layers()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getNodes
-	 * @model opposite="nodes"
-	 * @generated
-	 */
+         * @return the value of the '<em>Layers</em>' reference list.
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getNode_Layers()
+         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getNodes
+         * @model opposite="nodes"
+         * @generated
+         */
 	EList<Layer> getLayers();
 
 	/**
