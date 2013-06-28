@@ -258,12 +258,12 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 				else ((SNode)node).setSName("node"+ (this.getSDocuments().size()+1));
 			}
 		//end: create a name if none exists
-		
 		if (	(((SNode)node).getSId()== null)||
 				(((SNode)node).getSId().isEmpty()))
 		{//sid a name if none exists	
 			((SNode)node).setSId("salt:/"+((SNode)node).getSName());
 		}//sid a name if none exists
+		
 		super.basicAddNode(node);
 		
 		// map some implementation types to the matching interfaces

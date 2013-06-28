@@ -763,12 +763,11 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 		// the given id, which eventually has to be extended for artificial
 		// counter
 		String idBase = node.getId();
-		while (this.getEdge(idBase) != null) {// if edge already exists, create
+		while (this.getNode(node.getId()) != null) {// if node already exists, create
 												// new Id
-			node.setId(idBase + "_" + (getNumOfEdges() + i));
+			node.setId(idBase + "_" + (getNumOfNodes() + i));
 			i++;
-		}// if edge already exists, create new Id
-
+		}// if node already exists, create new Id
 		this.getNodes().add(node);
 		centralIndex.put(IDX_NODE_ID_NODE, node.getId(), node);
 		// create a notifier for changes in node
@@ -945,7 +944,7 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 		// the given id, which eventually has to be extended for artificial
 		// counter
 		String idBase = edge.getId();
-		while (this.getEdge(idBase) != null) {// if edge already exists, create
+		while (this.getEdge(edge.getId()) != null) {// if edge already exists, create
 												// new Id
 			edge.setId(idBase + "_" + (getNumOfEdges() + i));
 			i++;

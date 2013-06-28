@@ -353,17 +353,18 @@ public class GraphTest extends IdentifiableElementTest {
 	}
 	
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addNode(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node) <em>Add Node</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Tests if a node which was added is retrievable and if it gets a unique id. 
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addNode(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node)
 	 */
 	public void testAddNode__Node() 
 	{
-		//Knoten in den Graphen einf�gen
+		//add nodes to graph
+		int i=1;
 		for (Node node: nodes)
 		{
 			this.getFixture().addNode(node);
+			assertEquals("node"+i, node.getId());
+			i++;
 		}
 		
 		for (Node node: this.nodes)
@@ -371,8 +372,8 @@ public class GraphTest extends IdentifiableElementTest {
 			assertEquals("the graph should have the node '"+node.getId()+"' ", node, this.getFixture().getNode(node.getId()));
 			
 		}
-		//Knoten suchen, der nicht im Graph ist
-		assertNull("this node shouln�t exist",this.getFixture().getNode("not there"));
+		//search for nodes which are not in graph
+		assertNull("this node shouln't exist",this.getFixture().getNode("not there"));
 	}
 	
 	public void testAddNodeByAddingInList() 
@@ -391,8 +392,6 @@ public class GraphTest extends IdentifiableElementTest {
 		//Knoten suchen, der nicht im Graph ist
 		assertNull("this node shouln�t exist",this.getFixture().getNode("not there"));
 	}
-
-	
 
 	/**
 	 * Testet das Einf�gen von Knoten in den Graphen.
