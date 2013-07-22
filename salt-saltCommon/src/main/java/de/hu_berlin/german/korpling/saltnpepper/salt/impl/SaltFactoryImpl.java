@@ -36,11 +36,9 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserObject;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
@@ -264,7 +262,6 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	 */
 	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph) {
 		SCorpusGraph retVal= null;
-		
 		if (!sCorpusGraphUri.toFileString().endsWith(SaltFactory.FILE_ENDING_SALT))
 		{
 			//looks weird, but is necessary in case of uri ends with /
@@ -284,30 +281,16 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 		if (retVal== null)
 			throw new SaltResourceException("No '"+SCorpusGraph.class.getName()+"' object was found in resource '"+sCorpusGraphUri+"'.");
-				
 		{//TODO all this can be removed, when feature request Feature #117 is done
-			GraphTraverser graphTraverser= new GraphTraverser();
-			graphTraverser.setGraph(retVal);
 			SaltLoadingTraverser loadingTraverser= new SaltLoadingTraverser();
 			loadingTraverser.saltProjectPath= sCorpusGraphUri.toFileString().replace(SaltFactory.FILE_SALT_PROJECT, "");
-			GraphTraverserObject traverser= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, loadingTraverser);
-			EList<Node> startNodes= (EList<Node>)(EList<? extends Node>)retVal.getSRootCorpus();
+			EList<Node> startNodes= (EList<Node>)(EList<? extends Node>)retVal.getSRoots();
 			if (	(startNodes!= null)&&
 					(startNodes.size()>0))
 			{
-				traverser.start(startNodes);
-				while(!traverser.isFinished())
-				{ 
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						throw new SaltResourceException("This seems to be a bug, it is not possible to wait for a thread.");
-					}
-				}
+				retVal.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "SCOPRUS_GRAPH_LOADING", loadingTraverser);
 			}
 		}//TODO all this can be removed, when feature request Feature #117 is done
-		
-		
 		return(retVal);
 	}
 	
@@ -459,7 +442,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 
 // ====================================================== end: loading SaltXML resource
 	//TODO all this can be removed, when feature request Feature #117 is done
-	private class SaltLoadingTraverser implements TraversalObject
+	private class SaltLoadingTraverser implements GraphTraverseHandler
 	{
 		private Stack<String> pathStack= null;
 		private String saltProjectPath= null;
@@ -470,9 +453,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 		
 		@Override
-		public void nodeReached(GRAPH_TRAVERSE_MODE traversalMode,
-								Long traversalId, Node currNode, Edge edge, Node fromNode,
-								long order) 
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Node currNode, Edge edge, Node fromNode, long order) 
 		{
 			if (pathStack.size()==0)
 				pathStack.push(saltProjectPath);
@@ -484,7 +465,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			else if (currNode instanceof SDocument)
 			{
 				SDocument sDocument= (SDocument) currNode;
-				File sDocumentPath= new File(this.pathStack.peek()+"/"+sDocument.getSName()+ "."+SaltFactory.FILE_ENDING_SALT);
+				File sDocumentPath= new File(this.pathStack.peek()+"/"+sDocument.getSElementPath().lastSegment()+ "."+SaltFactory.FILE_ENDING_SALT);
 				if (!sDocumentPath.exists())
 				{
 					//TODO put a log message (debug), that no document graph was found for document 
@@ -499,9 +480,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 
 		@Override
-		public void nodeLeft(GRAPH_TRAVERSE_MODE traversalMode,
-				Long traversalId, Node currNode, Edge edge, Node fromNode,
-				long order) 
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Node currNode, Edge edge, Node fromNode, long order)
 		{
 			if (	(currNode != null)&&
 					(!(currNode instanceof SDocument)))
@@ -513,10 +492,9 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 
 		@Override
-		public boolean checkConstraint(GRAPH_TRAVERSE_MODE traversalMode,
-				Long traversalId, Edge edge, Node currNode, long order) {
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Edge edge, Node currNode, long order)
+		{
 			return true;
 		}
 	}
-// ====================================================== end: loading SaltXML resource
 }

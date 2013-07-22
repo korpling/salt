@@ -470,6 +470,10 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 	public void testLoad__URI() 
 	{
 		SCorpusGraph template = SampleGenerator.createCorpusStructure();
+		for (SDocument sDocument: template.getSDocuments())
+		{
+			SampleGenerator.createSDocumentStructure(sDocument);
+		}
 		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
 		saltProject.getSCorpusGraphs().add(template);
 		String tmpDir = System.getProperty("java.io.tmpdir")+"/"+ this.getClass().getName();
@@ -477,7 +481,6 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		URI tmpUri= URI.createFileURI(tmpFile.getAbsolutePath());
 		saltProject.saveSaltProject(tmpUri);
 		assertTrue("Cannot run test, because file does not exist: "+ tmpFile.getAbsolutePath(), tmpFile.exists());
-		
 		this.getFixture().load(tmpUri);
 		assertNotNull(this.getFixture());
 		assertEquals("differences: "+ template.differences(this.getFixture()), template, this.getFixture());

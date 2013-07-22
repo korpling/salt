@@ -384,7 +384,6 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 								//as long as sId starts with scheme, replace(...) must be there
 								String corpusPath= fatherCorpus.getSId().replace("salt:", "");
 								sDocumentFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() + corpusPath+"/"+ sDocument.getSName()+"."+ SaltFactory.FILE_ENDING_SALT);
-								
 								sDocument.saveSDocumentGraph(sDocumentFileURI);
 							}
 						}//only store sDocument, when there is some content in sDocumentGraph corresponding to sDocument
