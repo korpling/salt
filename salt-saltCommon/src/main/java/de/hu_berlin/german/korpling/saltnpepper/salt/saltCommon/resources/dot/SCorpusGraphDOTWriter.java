@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model.DOTEdge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model.DOTNode;
@@ -40,7 +39,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
 /**
@@ -119,16 +117,6 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 	{
 		String retStr= null;
 		
-		//checks if sAnno has metaAnnos
-		//TODO Label has to be of superType LabelableElement
-//		EList<SAnnotation> metaAnnos= sAnno.getSAnnotations();
-//		if (metaAnnos!= null)
-//		{	
-//			for (SAnnotation metaAnno: metaAnnos)
-//			{
-//				retStr= this.createAnnotations(metaAnno);
-//			}	
-//		}
 		String anno= null;
 		if (sAnno.getSValue()!= null)
 			anno= sAnno.getSValue().toString().replace("\"", "\\\"");
@@ -136,17 +124,7 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 		
 		return(retStr);
 	}
-	
-	/**
-	 * Namespace for dot flags
-	 */
-	protected static final String KW_DOT_NS=	"dot::";
-	/**
-	 * String to identify a flag in salt elements or relations, which say that the current 
-	 * element or relation has already been stored or not
-	 */
-	protected static final String KW_DOT_STORED=	KW_DOT_NS+"stored";
-	
+		
 	@Override
 	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
 			String traversalId, SRelation edge, SNode currNode, long order) {
@@ -195,31 +173,12 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 			dotNode.color= "gray"; 
 			dotNode.style= "filled";
 			dotNode.shape= "Mrecord";
-		}
-		//if element is already stored don�t store again
-		if (currSNode.getSProcessingAnnotation(KW_DOT_STORED)!= null);
-		else
-		{
-			this.currOutputStream.println(dotNode.toString());
-			
-			//flag the current element
-			{
-				SProcessingAnnotation spAnno= SaltCommonFactory.eINSTANCE.createSProcessingAnnotation();
-				spAnno.setQName(KW_DOT_STORED);
-				currSNode.addSProcessingAnnotation(spAnno);
-			}
-		}
-		
+		}		
 		//print relation, if exists
 		if (sRelation!= null)
 		{
 			DOTEdge dotEdge= new DOTEdge();
 			dotEdge.fromId= fromSNode.getId().toString();
-//			if ( fromSNode instanceof SDocument){
-//				dotEdge.fromId= sRelation.getSSource().getId().toString();
-//			} else {
-//				dotEdge.fromId= fromSNode.getId().toString();
-//			}
 			dotEdge.toId= currSNode.getId().toString();	
 			
 			//print sName
@@ -261,24 +220,6 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 				dotEdge.color= "gray";
 				dotEdge.style= "filled";
 			}
-			//if relation is already stored don�t store again
-			if (sRelation.getSProcessingAnnotation(KW_DOT_STORED)!= null);
-			else
-			{
-				this.currOutputStream.println(dotEdge.toString());
-				//flag the current element
-				{
-					SProcessingAnnotation spAnno= SaltCommonFactory.eINSTANCE.createSProcessingAnnotation();
-					spAnno.setQName(KW_DOT_STORED);
-					sRelation.addSProcessingAnnotation(spAnno);
-				}
-			}
 		}
 	}
-
-	
-
-	
-
-	
 }

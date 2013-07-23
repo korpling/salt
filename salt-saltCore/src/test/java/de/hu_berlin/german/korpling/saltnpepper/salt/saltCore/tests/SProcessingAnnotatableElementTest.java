@@ -138,7 +138,10 @@ public class SProcessingAnnotatableElementTest extends TestCase {
 			this.getFixture().addSProcessingAnnotation(sProcAnno1);
 			sProcAnnos.add(sProcAnno1);
 		}
-		
+		for (String qName: QNames)
+		{	
+			assertNotNull(this.getFixture().getSProcessingAnnotation(qName));
+		}
 		assertTrue(sProcAnnos.containsAll(this.getFixture().getSProcessingAnnotations()));
 		assertTrue(this.getFixture().getSProcessingAnnotations().containsAll(sProcAnnos));
 	}
