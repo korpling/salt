@@ -40,6 +40,13 @@
   		<version>1.0.1</version>
   		<type>jar</type>
   	</dependency>
+  	<dependency>
+    	<groupId>org.apache.commons</groupId>
+    	<artifactId>commons-lang3</artifactId>
+    	<version>3.1</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -65,9 +72,9 @@
             <Bundle-SymbolicName>${project.groupId}.${project.artifactId};singleton:=true</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
             <Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
-            <Export-Package>de.hu_berlin.german.korpling.saltnpepper.salt; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure; de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics; de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.modules; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer; com.neovisionaries.i18n; !org.knallgrau.utils.textcat;</Export-Package>
-            <Bundle-ClassPath>.,{maven-dependencies}, lib/nv-i18n-1.1.jar, lib/textcat-1.0.1.jar</Bundle-ClassPath>
-			<Include-Resource>{maven-resources}, LICENSE, NOTICE, lib/nv-i18n-1.1.jar=lib/nv-i18n-1.1.jar, lib/textcat-1.0.1.jar=lib/textcat-1.0.1.jar</Include-Resource>
+            <Export-Package>de.hu_berlin.german.korpling.saltnpepper.salt; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure; de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics; de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.modules; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot; de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer; com.neovisionaries.i18n; !org.knallgrau.utils.textcat; org.apache.commons.lang3;</Export-Package>
+            <Bundle-ClassPath>.,{maven-dependencies}, lib/nv-i18n-1.1.jar, lib/textcat-1.0.1.jar, lib/commons-lang3-3.1.jar</Bundle-ClassPath>
+			<Include-Resource>{maven-resources}, LICENSE, NOTICE, lib/nv-i18n-1.1.jar=lib/nv-i18n-1.1.jar, lib/textcat-1.0.1.jar=lib/textcat-1.0.1.jar, lib/commons-lang3-3.1.jar=lib/commons-lang3-3.1.jar</Include-Resource>
           </instructions>
         </configuration>
       </plugin>
