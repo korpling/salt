@@ -1909,8 +1909,6 @@ public class SDocumentGraphTest extends TestCase {
 		
 		this.getFixture().insertSTokensAt(sTextualDS, 5, text, true);
 		
-		getFixture().setSElementId(SaltFactory.eINSTANCE.createSElementId());
-		
 		assertEquals(6, getFixture().getSTokens().size());
 		assertEquals("This addition is the original Text ", sTextualDS.getSText());
 		assertEquals(6, getFixture().getSTextualRelations().size());
@@ -1965,18 +1963,7 @@ public class SDocumentGraphTest extends TestCase {
 		text.add("be");
 		text.add("added");
 
-		this.getFixture().insertSTokensAt(sTextualDS, 5, text, true);
-		
-		getFixture().setSElementId(SaltFactory.eINSTANCE.createSElementId());
-		
-		Salt2DOT salt2Dot= new Salt2DOT();
-		salt2Dot.salt2Dot(this.getFixture(), URI.createFileURI("d:/Test/Tom/insert/bla.dot"));
-		
-		for (STextualRelation rel: getFixture().getSTextualRelations()){
-			System.out.println(rel);
-			System.out.println(sTextualDS.getSText().substring(rel.getSStart(), rel.getSEnd()));
-		}
-		
+		this.getFixture().insertSTokensAt(sTextualDS, 5, text, true);	
 		
 		assertEquals(11, getFixture().getSTokens().size());
 		assertEquals("This is the text to be added is the original Text ", sTextualDS.getSText());
