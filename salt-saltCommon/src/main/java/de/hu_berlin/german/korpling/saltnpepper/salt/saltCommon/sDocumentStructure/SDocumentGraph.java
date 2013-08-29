@@ -613,6 +613,59 @@ public interface SDocumentGraph extends SGraph {
 	Tokenizer createTokenizer();
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Inserts a token to the graph starting at position 
+	 * <em>posInText</em> and relates them to the given {@link STextualDS} object.<br/>
+	 * An example:<br/>
+	 * Imagine the following sText and tokenization 
+	 * <pre>
+	 * tok1  tok2  tok3  tok4
+	 * This  is    a     text.
+	 * </pre>
+	 * the call insertSTokensAt(sTextualDS, 5, "additional", true);<br/>
+	 * results in <br/>
+	 * <pre>
+	 * tok1  tok5        tok2  tok3  tok4
+	 * This  additional  is    a     text.
+	 * </pre>
+	 * @param sTextualDS the {@link STextualDS} object to which the new tokens should be related to. Make sure, that stextualDS is already contained in the {@link SDocumentGraph}
+	 * @param posInText textual position where to add the new tokens.
+	 * @param text text value, the new token should cover
+	 * @param insertSpace if true, a blank after each new text is inserted
+	 * @return new created token
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	SToken insertSTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace);
+
+	/**
+	 * Inserts n tokens (where n is the size of the given list <em>texts</em>) to the graph starting at position 
+	 * <em>posInText</em> and relates them to the given {@link STextualDS} object.<br/>
+	 * An example:<br/>
+	 * Imagine the following sText and tokenization 
+	 * <pre>
+	 * tok1  tok2  tok3  tok4
+	 * This  is    a     text.
+	 * </pre>
+	 * the call insertSTokensAt(sTextualDS, 5, {"additional" "text"}, true);<br/>
+	 * results in <br/>
+	 * <pre>
+	 * tok1  tok5        tok6  tok2  tok3  tok4
+	 * This  additional  text  is    a     text.
+	 * </pre>
+	 * @model textsMany="true"
+	 * @param sTextualDS the {@link STextualDS} object to which the new tokens should be related to. Make sure, that stextualDS is already contained in the {@link SDocumentGraph}
+	 * @param posInText textual position where to add the new tokens.
+	 * @param texts text values, the new tokens should cover
+	 * @param insertSpace if true, a blank after each new text is inserted
+	 * @generated
+	 */
+	EList<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, EList<String> texts, Boolean insertSpace);
+
+	/**
 	 * Sets the SName of the SDocumentGraphImpl, but the parameter newSName is just a dummy. The SName of the corresponding SDocument plus "_graph" will be the SName.
 	 * @param newSName this value will be ignored
 	 */

@@ -216,6 +216,24 @@
           <details key="documentation" value="Creates a new {@link Tokenizer} object to tokenize the set {@link STextualDS} objects being contained in this {@link SDocumentGraph} object. To customize the tokenization, set take a look to the properties of the returned {@link Tokenizer} object. This method is used by the method {@link #tokenize()}.&#xD;&#xA;The used Treetagger is a reimplementation in Java with permission from the original TreeTagger tokenizer in Perl by Helmut Schmid (see: &lt;a href=&quot;http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/&quot;>http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/&lt;/a>).&#xD;&#xA;For each token detected in the text given by &lt;code>sTextualDS.getSText()&lt;/code> an {@link SToken} object is created and linked with the {@link STextualDS} object via a new {@link STextualRelation} object containing the textual offset. &#xD;&#xA;If the set {@link STextualDS} object is empty or if it does not belong to this {@link SDocumentGraph} object an exception is thrown. "/>
         </eAnnotations>
       </eOperations>
+      <eOperations name="insertSTokenAt" eType="#//sDocumentStructure/SToken">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Inserts a token to the graph starting at position &#xD;&#xA;&lt;em>posInText&lt;/em> and relates them to the given {@link STextualDS} object.&lt;br/>&#xD;&#xA;An example:&lt;br/>&#xD;&#xA;Imagine the following sText and tokenization &#xD;&#xA;&lt;pre>&#xD;&#xA;tok1  tok2  tok3  tok4&#xD;&#xA;This  is    a     text.&#xD;&#xA;&lt;/pre>&#xD;&#xA;the call insertSTokensAt(sTextualDS, 5, &quot;additional&quot;, true);&lt;br/>&#xD;&#xA;results in &lt;br/>&#xD;&#xA;&lt;pre>&#xD;&#xA;tok1  tok5        tok2  tok3  tok4&#xD;&#xA;This  additional  is    a     text.&#xD;&#xA;&lt;/pre>&#xD;&#xA;@param sTextualDS the {@link STextualDS} object to which the new tokens should be related to. Make sure, that stextualDS is already contained in the {@link SDocumentGraph}&#xD;&#xA;@param posInText textual position where to add the new tokens.&#xD;&#xA;@param text text value, the new token should cover&#xD;&#xA;@param insertSpace if true, a blank after each new text is inserted&#xD;&#xA;@return new created token"/>
+        </eAnnotations>
+        <eParameters name="sTextualDS" eType="#//sDocumentStructure/STextualDS"/>
+        <eParameters name="posInText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+        <eParameters name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eParameters name="insertSpace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+      </eOperations>
+      <eOperations name="insertSTokensAt" upperBound="-1" eType="#//sDocumentStructure/SToken">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Inserts n tokens (where n is the size of the given list &lt;em>texts&lt;/em>) to the graph starting at position &#xD;&#xA;&lt;em>posInText&lt;/em> and relates them to the given {@link STextualDS} object.&lt;br/>&#xD;&#xA;An example:&lt;br/>&#xD;&#xA;Imagine the following sText and tokenization &#xD;&#xA;&lt;pre>&#xD;&#xA;tok1  tok2  tok3  tok4&#xD;&#xA;This  is    a     text.&#xD;&#xA;&lt;/pre>&#xD;&#xA;the call insertSTokensAt(sTextualDS, 5, {&quot;additional&quot; &quot;text&quot;}, true);&lt;br/>&#xD;&#xA;results in &lt;br/>&#xD;&#xA;&lt;pre>&#xD;&#xA;tok1  tok5        tok6  tok2  tok3  tok4&#xD;&#xA;This  additional  text  is    a     text.&#xD;&#xA;&lt;/pre>&#xD;&#xA;@param sTextualDS the {@link STextualDS} object to which the new tokens should be related to. Make sure, that stextualDS is already contained in the {@link SDocumentGraph}&#xD;&#xA;@param posInText textual position where to add the new tokens.&#xD;&#xA;@param texts text values, the new tokens should cover&#xD;&#xA;@param insertSpace if true, a blank after each new text is inserted"/>
+        </eAnnotations>
+        <eParameters name="sTextualDS" eType="#//sDocumentStructure/STextualDS"/>
+        <eParameters name="posInText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+        <eParameters name="texts" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eParameters name="insertSpace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
           eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTextualDSs" upperBound="-1"

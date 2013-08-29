@@ -19,6 +19,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStruct
 
 import com.google.common.collect.ImmutableList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -788,6 +789,67 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		return(tokenizer);
 	}
 
+	/**
+	 * {@inheritDoc SDocumentGraph#insertSTokenAt(STextualDS, Integer, String)}
+	 */
+	public SToken insertSTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace) {
+		EList<String> texts= new BasicEList<String>();
+		texts.add(text);
+		return(insertSTokensAt(sTextualDS, posInText, texts, insertSpace).get(0));
+	}
+
+	/**
+	 * {@inheritDoc SDocumentGraph#insertSTokensAt(STextualDS, Integer, EList)}
+	 */
+	public EList<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, EList<String> texts, Boolean insertSpace) {
+		EList<SToken> sTokens= new BasicEList<SToken>();
+		HashSet<STextualRelation> sTextualRelations= new HashSet<STextualRelation>();
+		
+		StringBuilder newSTextualDSvalueBuilder = new StringBuilder(sTextualDS.getSText().substring(0, posInText));
+        
+        int sizeOfnewTexts= newSTextualDSvalueBuilder.length();
+        for (String text: texts){
+            
+        	Integer start= newSTextualDSvalueBuilder.length();
+        	newSTextualDSvalueBuilder.append(text);
+        	Integer end= newSTextualDSvalueBuilder.length();
+        	SToken sTok= SaltFactory.eINSTANCE.createSToken();
+        	addSNode(sTok);
+        	
+        	STextualRelation sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
+        	sTextRel.setSStart(start);
+        	sTextRel.setSEnd(end);
+        	sTextRel.setSToken(sTok);
+        	sTextRel.setSTextualDS(sTextualDS);
+        	addSRelation(sTextRel);
+        	
+        	sTextualRelations.add(sTextRel);
+        	
+        	if (insertSpace) newSTextualDSvalueBuilder.append(" ");
+        }
+        
+        sizeOfnewTexts= newSTextualDSvalueBuilder.length() - sizeOfnewTexts;
+        
+        newSTextualDSvalueBuilder.append(sTextualDS.getSText().substring(posInText));
+        
+        sTextualDS.setSText(newSTextualDSvalueBuilder.toString());    
+        
+        for (STextualRelation sTextualRelation : getSTextualRelations()){
+            
+        	if (!sTextualRelations.contains(sTextualRelation))
+        	{
+	        	if (sTextualRelation.getSStart() >= posInText){
+	                sTextualRelation.setSStart(sTextualRelation.getSStart()+sizeOfnewTexts);
+	            }
+	            if (sTextualRelation.getSEnd() >= posInText){
+	                sTextualRelation.setSEnd(sTextualRelation.getSEnd()+sizeOfnewTexts);
+	            }
+        	}
+        }
+       return(sTokens); 
+    } 
+	
+	
 	/**
 	 * Connects the given {@link SToken} object to the given {@link SSequentialDS} object. If the given 
 	 * {@link SToken} object is not already add to the graph, it will be added.

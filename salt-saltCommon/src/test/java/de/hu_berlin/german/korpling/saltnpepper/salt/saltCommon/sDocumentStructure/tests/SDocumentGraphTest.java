@@ -24,6 +24,7 @@ import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.ImmutableList;
 
@@ -31,6 +32,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltElementNotContainedInGraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentDataEnricher;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.Salt2DOT;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
@@ -103,6 +105,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSToken(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS, java.lang.Integer, java.lang.Integer) <em>Create SToken</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#tokenize() <em>Tokenize</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createTokenizer() <em>Create Tokenizer</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokenAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, java.lang.String) <em>Insert SToken At</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokensAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, org.eclipse.emf.common.util.EList) <em>Insert STokens At</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -1869,5 +1873,129 @@ public class SDocumentGraphTest extends TestCase {
 		Tokenizer tokenizer= this.getFixture().createTokenizer();
 		assertNotNull(tokenizer);
 		assertEquals(this.getFixture(), tokenizer.getsDocumentGraph());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokenAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, java.lang.String) <em>Insert SToken At</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokenAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, java.lang.String)
+	 */
+	public void testInsertSTokenAt__STextualDS_Integer_String() {
+		EList<String> origText= new BasicEList<String>();
+		origText.add("This");
+		origText.add("is");
+		origText.add("the");
+		origText.add("original");
+		origText.add("Text");
+		
+		StringBuilder str= new StringBuilder();
+		STextualDS sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
+		this.getFixture().addSNode(sTextualDS);
+		for (String text: origText)
+		{
+			int start= str.length();
+			str.append(text);
+			int end= str.length();
+			str.append(" ");
+			getFixture().createSToken(sTextualDS, start, end);
+		}
+		
+		sTextualDS.setSText(str.toString());
+		
+		
+		EList<String> text= new BasicEList<String>();
+		text.add("addition");
+		
+		this.getFixture().insertSTokensAt(sTextualDS, 5, text, true);
+		
+		getFixture().setSElementId(SaltFactory.eINSTANCE.createSElementId());
+		
+		assertEquals(6, getFixture().getSTokens().size());
+		assertEquals("This addition is the original Text ", sTextualDS.getSText());
+		assertEquals(6, getFixture().getSTextualRelations().size());
+		
+		//This
+		assertEquals(new Integer(0), getFixture().getSTextualRelations().get(0).getSStart());
+		assertEquals(new Integer(4), getFixture().getSTextualRelations().get(0).getSEnd());
+		
+		//addition
+		assertEquals(new Integer(5), getFixture().getSTextualRelations().get(5).getSStart());
+		assertEquals(new Integer(13), getFixture().getSTextualRelations().get(5).getSEnd());
+		
+		//is
+		assertEquals(new Integer(14), getFixture().getSTextualRelations().get(1).getSStart());
+		assertEquals(new Integer(16), getFixture().getSTextualRelations().get(1).getSEnd());
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokensAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, org.eclipse.emf.common.util.EList) <em>Insert STokens At</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokensAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, org.eclipse.emf.common.util.EList)
+	 */
+	public void testInsertSTokensAt__STextualDS_Integer_EList() {
+		EList<String> origText= new BasicEList<String>();
+		origText.add("This");
+		origText.add("is");
+		origText.add("the");
+		origText.add("original");
+		origText.add("Text");
+		
+		StringBuilder str= new StringBuilder();
+		STextualDS sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
+		this.getFixture().addSNode(sTextualDS);
+		for (String text: origText)
+		{
+			int start= str.length();
+			str.append(text);
+			int end= str.length();
+			str.append(" ");
+			getFixture().createSToken(sTextualDS, start, end);
+		}
+		
+		sTextualDS.setSText(str.toString());
+		
+		
+		EList<String> text= new BasicEList<String>();
+		text.add("is");
+		text.add("the");
+		text.add("text");
+		text.add("to");
+		text.add("be");
+		text.add("added");
+
+		this.getFixture().insertSTokensAt(sTextualDS, 5, text, true);
+		
+		getFixture().setSElementId(SaltFactory.eINSTANCE.createSElementId());
+		
+		Salt2DOT salt2Dot= new Salt2DOT();
+		salt2Dot.salt2Dot(this.getFixture(), URI.createFileURI("d:/Test/Tom/insert/bla.dot"));
+		
+		for (STextualRelation rel: getFixture().getSTextualRelations()){
+			System.out.println(rel);
+			System.out.println(sTextualDS.getSText().substring(rel.getSStart(), rel.getSEnd()));
+		}
+		
+		
+		assertEquals(11, getFixture().getSTokens().size());
+		assertEquals("This is the text to be added is the original Text ", sTextualDS.getSText());
+		assertEquals(11, getFixture().getSTextualRelations().size());
+		
+		//This
+		assertEquals(new Integer(0), getFixture().getSTextualRelations().get(0).getSStart());
+		assertEquals(new Integer(4), getFixture().getSTextualRelations().get(0).getSEnd());
+		
+		//is
+		assertEquals(new Integer(5), getFixture().getSTextualRelations().get(5).getSStart());
+		assertEquals(new Integer(7), getFixture().getSTextualRelations().get(5).getSEnd());
+		
+		//added
+		assertEquals(new Integer(23), getFixture().getSTextualRelations().get(10).getSStart());
+		assertEquals(new Integer(28), getFixture().getSTextualRelations().get(10).getSEnd());
+		
+		// second is
+		assertEquals(new Integer(29), getFixture().getSTextualRelations().get(1).getSStart());
+		assertEquals(new Integer(31), getFixture().getSTextualRelations().get(1).getSEnd());
 	}
 } //SDocumentGraphTest
