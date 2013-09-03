@@ -803,7 +803,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 */
 	public EList<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, EList<String> texts, Boolean insertSpace) {
 		EList<SToken> sTokens= new BasicEList<SToken>();
-		HashSet<STextualRelation> sTextualRelations= new HashSet<STextualRelation>();
+		HashSet<STextualRelation> newSTextualRelations= new HashSet<STextualRelation>();
 		
 		StringBuilder newSTextualDSvalueBuilder = new StringBuilder(sTextualDS.getSText().substring(0, posInText));
         
@@ -824,7 +824,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
         	sTextRel.setSTextualDS(sTextualDS);
         	addSRelation(sTextRel);
         	
-        	sTextualRelations.add(sTextRel);
+        	newSTextualRelations.add(sTextRel);
         	
         	if (insertSpace) newSTextualDSvalueBuilder.append(" ");
         }
@@ -837,12 +837,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
         
         for (STextualRelation sTextualRelation : getSTextualRelations()){
             
-        	if (!sTextualRelations.contains(sTextualRelation))
+        	if (!newSTextualRelations.contains(sTextualRelation))
         	{
 	        	if (sTextualRelation.getSStart() >= posInText){
 	                sTextualRelation.setSStart(sTextualRelation.getSStart()+sizeOfnewTexts);
 	            }
-	            if (sTextualRelation.getSEnd() >= posInText){
+	            if (sTextualRelation.getSEnd() > posInText){
 	                sTextualRelation.setSEnd(sTextualRelation.getSEnd()+sizeOfnewTexts);
 	            }
         	}
