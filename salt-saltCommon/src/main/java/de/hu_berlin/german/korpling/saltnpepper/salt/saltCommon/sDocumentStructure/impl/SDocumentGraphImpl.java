@@ -815,6 +815,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
         	Integer end= newSTextualDSvalueBuilder.length();
         	SToken sTok= SaltFactory.eINSTANCE.createSToken();
         	addSNode(sTok);
+        	sTokens.add(sTok);
         	
         	STextualRelation sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
         	sTextRel.setSStart(start);

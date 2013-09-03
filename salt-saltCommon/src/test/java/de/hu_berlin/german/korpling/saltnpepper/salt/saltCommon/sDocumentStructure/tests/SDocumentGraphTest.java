@@ -1904,10 +1904,10 @@ public class SDocumentGraphTest extends TestCase {
 		sTextualDS.setSText(str.toString());
 		
 		
-		EList<String> text= new BasicEList<String>();
-		text.add("addition");
+		String text="addition";
 		
-		this.getFixture().insertSTokensAt(sTextualDS, 5, text, true);
+		SToken token=  this.getFixture().insertSTokenAt(sTextualDS, 5, text, true);
+		assertNotNull(token);
 		
 		assertEquals(6, getFixture().getSTokens().size());
 		assertEquals("This addition is the original Text ", sTextualDS.getSText());
@@ -1963,7 +1963,9 @@ public class SDocumentGraphTest extends TestCase {
 		text.add("be");
 		text.add("added");
 
-		this.getFixture().insertSTokensAt(sTextualDS, 5, text, true);	
+		EList<SToken> tokens= this.getFixture().insertSTokensAt(sTextualDS, 5, text, true);
+		assertNotNull(tokens);
+		assertEquals(6, tokens.size());
 		
 		assertEquals(11, getFixture().getSTokens().size());
 		assertEquals("This is the text to be added is the original Text ", sTextualDS.getSText());
