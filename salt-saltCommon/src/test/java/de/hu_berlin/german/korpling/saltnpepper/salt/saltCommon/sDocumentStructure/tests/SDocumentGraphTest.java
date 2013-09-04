@@ -1212,10 +1212,17 @@ public class SDocumentGraphTest extends TestCase {
 		assertNotNull(this.getFixture().getSTokens());
 		assertEquals(sTokens.size(), this.getFixture().getSTokens().size());
 		List<SToken> controllSTokens= ImmutableList.copyOf(this.getFixture().getSTokens());
+	
 		
 		for (int i=0; i< 6; i++)
 		{
 			assertEquals("tokens of index '"+i+"' aren't equal", sTokens.get(i), controllSTokens.get(i));
+		}
+		
+		int prevStart = -1;
+		for (STextualRelation curSTextRel : this.getFixture().getSTextualRelations()){
+			assertTrue("this textrel does not follow previous texrel: " + this.getFixture().getSTextualRelations(), curSTextRel.getSStart() > prevStart);
+			prevStart = curSTextRel.getSStart();
 		}
 	}
 

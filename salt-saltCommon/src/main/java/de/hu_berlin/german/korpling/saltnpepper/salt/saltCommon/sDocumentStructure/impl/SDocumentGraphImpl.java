@@ -637,6 +637,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		sDatasourceAccessor.setSDocumentGraph(this);
 		sDatasourceAccessor.sortSTokenByText();
 	}
+
 	
 	/**
 	 * {@inheritDoc SDocumentGraph#createSSpan(SToken)}

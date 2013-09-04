@@ -35,6 +35,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
@@ -238,6 +239,18 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 			getSDocumentGraph().getCentralIndex().remove(SDocumentGraph.IDX_SNODETYPE, SToken.class);
 			getSDocumentGraph().getCentralIndex()
 					.putAll(SDocumentGraph.IDX_SNODETYPE, SToken.class, mutableTokens);
+			
+			STextualRelationSStartComparator comparatortextrels = new STextualRelationSStartComparator();
+			comparatortextrels.setSDocumentGraph(this.getSDocumentGraph());
+			
+			//sort textual relations
+			EList<STextualRelation> textualRelations = getSDocumentGraph().getCentralIndex()
+					.getAll(SDocumentGraph.IDX_SRELATIONTYPE, STextualRelation.class);
+			List<STextualRelation> mutableTextualRelations = new LinkedList<STextualRelation>(textualRelations);
+			Collections.sort(mutableTextualRelations, comparatortextrels);
+			getSDocumentGraph().getCentralIndex().remove(SDocumentGraph.IDX_SRELATIONTYPE, STextualRelation.class);
+			getSDocumentGraph().getCentralIndex()
+					.putAll(SDocumentGraph.IDX_SRELATIONTYPE, STextualRelation.class, mutableTextualRelations);
 			
 		}
 	}

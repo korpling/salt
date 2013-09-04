@@ -538,8 +538,8 @@ public interface SDocumentGraph extends SGraph {
 	EList<SToken> getSortedSTokenByText();
 
 	/**
-	 * Sorts all {@link SToken} objects being contained in the list {@link SDocumentGraph#getSTokens()} by the {@link STextualRelation#getSStart()} 
-	 * value of {@link SToken} object.
+	 * Sorts all {@link SToken} and {@link STextualRelation} objects being contained in the list {@link SDocumentGraph#getSTokens()} and {@link SDocumentGraph#getSTextualRelations()} by the {@link STextualRelation#getSStart()} 
+	 * value of {@link SToken} and {@link STextualRelation} object.
 	 * @model
 	 * @generated
 	 */
