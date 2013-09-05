@@ -17,6 +17,9 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.URI;
@@ -26,6 +29,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
@@ -257,6 +262,29 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		this.setSDocumentGraph(sDocumentGraph);
 		//remove SFeature containing location of where SaltXML file containing the loaded object  
 		this.removeLabel(SaltFactory.NAMESPACE_SALT, SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION.toString());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 */
+	public void printInfo(URI outputResource) {
+		InfoModule im = new InfoModule();
+		try {
+			File infoFile = new File(outputResource.toFileString());
+			if(!infoFile.isFile()){
+				new File(infoFile.getParent()).mkdirs();
+				infoFile.createNewFile();
+			}
+			if(this.getSDocumentGraph() == null){
+				this.loadSDocumentGraph();
+			}
+			im.writeInfoFile(this, infoFile);
+		} catch (Exception e) {
+			System.out.println("Cant print SDocumentInfo to" + e);
+			throw new SaltException("Could not write Info XML file for this SDocument to " + outputResource , e);
+		}
 	}
 
 	/**

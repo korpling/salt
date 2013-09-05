@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import org.eclipse.emf.common.util.URI;
 
 /**
  * In Salt a corpus is represented by this class. An object of this class can be a super corpus, a sun corpus or none of them as well. 
@@ -64,6 +65,40 @@ public interface SCorpus extends SNode {
 	 */
 	void setSCorpusGraph(SCorpusGraph value);
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Generates an XML File that contains information about the given SCorpus and all its contents.
+	 * The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. 
+	 * There will be additional counts for every SLayer. 
+	 * 
+	 * The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/sCorpusInfo.xsd
+	 * 
+	 * Temporary XML files for every SDocument will be created in a tempFolder. This tempFolder will be created in the same place as the XML output file. 
+	 * <!-- end-model-doc -->
+	 * @model outputResourceDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void printInfo(URI outputResource);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Generates an XML File that contains information about the given SCorpus and all its contents.
+	 * The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. 
+	 * There will be additional counts for every SLayer. 
+	 * 
+	 * The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/sCorpusInfo.xsd
+	 * 
+	 * Temporary XML files for every SDocument will be created in the tempFolder.
+	 * <!-- end-model-doc -->
+	 * @model outputResourceDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI" tempFolderDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void printInfo(URI outputResource, URI tempFolder);
+
 	/**
 	 * Returns a {@link SCorpus} object having the same properties like this. This means, all labels (annotations, meta-annotations and so on)
 	 * will also be cloned. These clones will be set to the cloned {@link SCorpus} object.   

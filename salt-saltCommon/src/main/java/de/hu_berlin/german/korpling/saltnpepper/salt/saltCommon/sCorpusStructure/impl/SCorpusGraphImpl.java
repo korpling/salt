@@ -341,7 +341,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 */
 	public SaltProject getSaltProject() {
 		if (eContainerFeatureID() != SCorpusStructurePackage.SCORPUS_GRAPH__SALT_PROJECT) return null;
-		return (SaltProject)eContainer();
+		return (SaltProject)eInternalContainer();
 	}
 
 	/**

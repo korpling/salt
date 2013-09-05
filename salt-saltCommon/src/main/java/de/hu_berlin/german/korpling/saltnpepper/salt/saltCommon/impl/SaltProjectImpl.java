@@ -53,8 +53,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObje
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.Salt2DOT;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.graf.v09.GrAFResource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.graf.v09.GrAFResource.GRAF_MAPPING_TYPE;
@@ -433,6 +435,30 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		return(retVal);
 	}
 	
+	/**
+	 * {@inheritDoc SaltProject#printInfo(URI)}
+	 */
+	public void printInfo(URI outputResource) {
+//		File out = new File(outputResource.toFileString());
+//		File dir = new File(out.getParentFile(), "SaltProjectInfoTempFiles/");
+		
+		printInfo(outputResource, URI.createFileURI("SaltProjectInfoTempFiles/").resolve(outputResource));
+	}
+
+	/**
+	 * {@inheritDoc SaltProject#printInfo(URI, URI)}
+	 */
+	public void printInfo(URI outputResource, URI tempFolder) {
+		InfoModule im = new InfoModule();
+		File out = new File(outputResource.toFileString());
+//		File dir = new File(tempFolder.toFileString());
+		try {
+			im.writeInfoFile(this, out,tempFolder);
+		} catch (Exception e) {
+			throw new SaltException("Could not write Info XML file for this SaltProject to " + outputResource , e);
+		}
+	}
+
 	/**
 	 * {@inheritDoc SaltProject#loadSCorpusStructure(URI)}
 	 */

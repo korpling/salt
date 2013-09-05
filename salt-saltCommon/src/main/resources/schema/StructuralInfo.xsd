@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="structuralInfo" type="structuralInfoType"/>
+    <xs:complexType name="structuralInfoType">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="entry" type="entry" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:attribute name="STextualDS"/>
+    <xs:attribute name="sStructure"/>
+    <xs:attribute name="sSpan"/>
+    <xs:attribute name="sDominanceRelation"/>
+    <xs:attribute name="sSpanningRelation"/>
+    <xs:attribute name="sPointingRelation"/>
+    <xs:attribute name="sTextualDS"/>
+    <xs:attribute name="sToken"/>
+    <xs:complexType name="entry">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="key" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:attribute name="sName" type="xs:string"/>
+
+    <xs:attribute name="generatedOn" type="xs:string"/>
+    <xs:attribute name="occurances" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string"/>
+</xs:schema>

@@ -18,11 +18,16 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests;
 
 import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.emf.common.util.URI;
+import org.xml.sax.SAXException;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests.InfoModuleTest;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
@@ -50,6 +55,7 @@ import junit.textui.TestRunner;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#saveSDocumentGraph(org.eclipse.emf.common.util.URI) <em>Save SDocument Graph</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#loadSDocumentGraph() <em>Load SDocument Graph</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#loadSDocumentGraph(org.eclipse.emf.common.util.URI) <em>Load SDocument Graph</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -212,6 +218,32 @@ public class SDocumentTest extends TestCase {
 	 */
 	public void testLoadSDocumentGraph__URI() {
 		this.testSaveSDocumentGraph__URI();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#printInfo(org.eclipse.emf.common.util.URI)
+	 * 
+	 */
+	public void testPrintInfo__URI() {
+		SampleGenerator.createSDocumentStructure(this.getFixture());
+		SampleGenerator.createSDocumentSLayered(this.getFixture());
+		this.getFixture().setSId("tempSDocument");
+		File tmpFile = new File(System.getProperty("java.io.tmpdir")+"/testDocInfo.xml");
+		URI tmpUri = URI.createFileURI(tmpFile.getAbsolutePath());
+		this.getFixture().printInfo(tmpUri);
+		
+		InfoModuleTest imt = new InfoModuleTest();
+		try {
+			// TODO: header or no header
+			imt.validate(tmpFile);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail();
+		}
 	}
 
 } //SDocumentTest

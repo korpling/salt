@@ -473,8 +473,18 @@ public class SCorpusStructurePackageImpl extends EPackageImpl implements SCorpus
 		op = addEOperation(sDocumentEClass, null, "loadSDocumentGraph", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theSaltCorePackage.getURI(), "sDocumentGraphLocation", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(sDocumentEClass, null, "printInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "outputResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(sCorpusEClass, SCorpus.class, "SCorpus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSCorpus_SCorpusGraph(), this.getSCorpusGraph(), this.getSCorpusGraph_SCorpora(), "sCorpusGraph", null, 0, 1, SCorpus.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(sCorpusEClass, null, "printInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "outputResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(sCorpusEClass, null, "printInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "outputResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "tempFolder", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sCorpusRelationEClass, SCorpusRelation.class, "SCorpusRelation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSCorpusRelation_SSuperCorpus(), this.getSCorpus(), null, "sSuperCorpus", null, 0, 1, SCorpusRelation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

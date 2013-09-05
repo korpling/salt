@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:include schemaLocation="sCorpusInfo.xsd"/>
+    <xs:element name="saltProjectInfo" type="saltProjectInfo"> </xs:element>
+    
+    <xs:complexType name="saltProjectInfo">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="sCorpusInfo" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+        <xs:attribute use="required" ref="sName"/>
+        <xs:attribute use="required" ref="generatedOn"/>
+    </xs:complexType>    
+</xs:schema>

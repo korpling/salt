@@ -86,7 +86,7 @@ public class SaltCommonFactoryImpl extends EFactoryImpl implements SaltCommonFac
 	 */
 	public static SaltCommonFactory init() {
 		try {
-			SaltCommonFactory theSaltCommonFactory = (SaltCommonFactory)EPackage.Registry.INSTANCE.getEFactory("saltCommon"); 
+			SaltCommonFactory theSaltCommonFactory = (SaltCommonFactory)EPackage.Registry.INSTANCE.getEFactory(SaltCommonPackage.eNS_URI);
 			if (theSaltCommonFactory != null) {
 				return theSaltCommonFactory;
 			}

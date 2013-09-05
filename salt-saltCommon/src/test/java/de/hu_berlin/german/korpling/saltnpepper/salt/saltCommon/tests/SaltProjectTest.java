@@ -41,6 +41,8 @@ import com.google.common.collect.ImmutableList;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests.InfoModuleTest;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
@@ -64,6 +66,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#saveSDocumentGraph_DOT(org.eclipse.emf.common.util.URI, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId) <em>Save SDocument Graph DOT</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load SCorpus Structure</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#getSDocumentGraphLocations() <em>Get SDocument Graph Locations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#printInfo(org.eclipse.emf.common.util.URI, org.eclipse.emf.common.util.URI) <em>Print Info</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -72,7 +76,7 @@ public class SaltProjectTest extends TestCase {
 
 	
 	public static final String FILE_RESOURCE_DIR= "./src/test/resources/SaltProjectTest/";
-	public static final String FILE_TMP_DIR= "./_TMP/";
+	public static final String FILE_TMP_DIR= "_TMP/";
 	
 	
 	/**
@@ -192,6 +196,48 @@ public class SaltProjectTest extends TestCase {
 		//nothing to do, see testLoadSCorpusStructure__URI()
 	}
 	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#printInfo(org.eclipse.emf.common.util.URI)
+	 * 
+	 */
+	public void testPrintInfo__URI() {
+		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		File tmpFile = new File(FILE_TMP_DIR +"SaltProjectPrintInfo__URI.xml");
+		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
+		sp.printInfo(res);
+		InfoModuleTest imt = new InfoModuleTest();
+		try {
+			imt.validate(res);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#printInfo(org.eclipse.emf.common.util.URI, org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#printInfo(org.eclipse.emf.common.util.URI, org.eclipse.emf.common.util.URI)
+	 * 
+	 */
+	public void testPrintInfo__URI_URI() {
+		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		File tmpFile = new File(FILE_TMP_DIR + "SaltProjectPrintInfo__URI.xml");
+		File tmpFolder = new File(FILE_TMP_DIR + "SaltProjectPrintInfo__URI_tempFolder/");
+		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
+		URI resFolder = URI.createFileURI(tmpFolder.toURI().getRawPath());
+		sp.printInfo(res,resFolder);
+		InfoModuleTest imt = new InfoModuleTest();
+		try {
+			imt.validate(res);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject#loadSCorpusStructure(org.eclipse.emf.common.util.URI) <em>Load SCorpus Structure</em>}' operation.
 	 * Only tests, if the created map is correct. Further tests can be found in {@link #testLoadSaltProject_SCorpusStructure__URI_simple()} and

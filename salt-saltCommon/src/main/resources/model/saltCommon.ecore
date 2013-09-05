@@ -44,6 +44,19 @@
         <eTypeArguments eClassifier="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
       </eGenericType>
     </eOperations>
+    <eOperations name="printInfo">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Generates an XML File that contains information about the given SaltProject.&#xA;The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. &#xA;There will be additional counts for every SLayer. &#xA;&#xA;The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/saltProjectInfo.xsd&#xA;&#xA;Temporary XML files for every SDocument will be created in a tempFolder. This tempFolder will be created in the same place as the XML output file. "/>
+      </eAnnotations>
+      <eParameters name="outputResource" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+    </eOperations>
+    <eOperations name="printInfo">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Generates an XML File that contains information about the given SaltProject.&#xA;The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. &#xA;There will be additional counts for every SLayer. &#xA;&#xA;The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/saltProjectInfo.xsd&#xA;&#xA;Temporary XML files for every SDocument will be created in the tempFolder."/>
+      </eAnnotations>
+      <eParameters name="outputResource" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      <eParameters name="tempFolder" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraphs" upperBound="-1"
         eType="#//sCorpusStructure/SCorpusGraph" containment="true" eOpposite="#//sCorpusStructure/SCorpusGraph/saltProject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -99,6 +112,12 @@
       <eOperations name="loadSDocumentGraph">
         <eParameters name="sDocumentGraphLocation" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
       </eOperations>
+      <eOperations name="printInfo">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Generates an XML File that contains information about the given SDocument.&#xA;The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. &#xA;There will be additional counts for every SLayer. &#xA;&#xA;The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/sDocumentInfo.xsd&#xA;"/>
+        </eAnnotations>
+        <eParameters name="outputResource" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sCorpusStructure/SCorpusGraph/sDocuments"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocumentGraph" eType="#//sDocumentStructure/SDocumentGraph"
@@ -108,6 +127,19 @@
           volatile="true" transient="true" derived="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SCorpus" eSuperTypes="../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode">
+      <eOperations name="printInfo">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Generates an XML File that contains information about the given SCorpus and all its contents.&#xA;The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. &#xA;There will be additional counts for every SLayer. &#xA;&#xA;The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/sCorpusInfo.xsd&#xA;&#xA;Temporary XML files for every SDocument will be created in a tempFolder. This tempFolder will be created in the same place as the XML output file. "/>
+        </eAnnotations>
+        <eParameters name="outputResource" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eOperations>
+      <eOperations name="printInfo">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Generates an XML File that contains information about the given SCorpus and all its contents.&#xA;The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. &#xA;There will be additional counts for every SLayer. &#xA;&#xA;The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/sCorpusInfo.xsd&#xA;&#xA;Temporary XML files for every SDocument will be created in the tempFolder."/>
+        </eAnnotations>
+        <eParameters name="outputResource" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+        <eParameters name="tempFolder" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sCorpusGraph" eType="#//sCorpusStructure/SCorpusGraph"
           volatile="true" transient="true" derived="true" eOpposite="#//sCorpusStructure/SCorpusGraph/sCorpora"/>
     </eClassifiers>

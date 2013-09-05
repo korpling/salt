@@ -207,4 +207,38 @@ public interface SaltProject extends EObject {
 	 */
 	Map<SElementId, URI> getSDocumentGraphLocations();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Generates an XML File that contains information about the given SaltProject.
+	 * The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. 
+	 * There will be additional counts for every SLayer. 
+	 * 
+	 * The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/saltProjectInfo.xsd
+	 * 
+	 * Temporary XML files for every SDocument will be created in a tempFolder. This tempFolder will be created in the same place as the XML output file. 
+	 * <!-- end-model-doc -->
+	 * @model outputResourceDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void printInfo(URI outputResource);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Generates an XML File that contains information about the given SaltProject.
+	 * The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. 
+	 * There will be additional counts for every SLayer. 
+	 * 
+	 * The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/saltProjectInfo.xsd
+	 * 
+	 * Temporary XML files for every SDocument will be created in the tempFolder.
+	 * <!-- end-model-doc -->
+	 * @model outputResourceDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI" tempFolderDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void printInfo(URI outputResource, URI tempFolder);
+
 } // SaltProject

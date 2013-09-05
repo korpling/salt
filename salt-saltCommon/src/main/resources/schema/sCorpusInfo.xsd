@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:include schemaLocation="sDocumentInfo.xsd"/>
+    <xs:element name="sCorpusInfo" type="sCorpusInfo"> </xs:element>
+
+    <xs:complexType name="sCorpusInfo">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="sCorpusInfo" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="structuralInfo" type="structuralInfoType"/>
+            <xs:element name="sDocumentInfo" type="sDocumentInfo"/>
+            <xs:element name="metaDataInfo" type="structuralInfoType"/>
+            <xs:element name="totalSAnnotationInfo" type="totalSAnnotationInfo"/>
+        </xs:choice>
+        <xs:attribute use="required" ref="sName"/>
+        <xs:attribute use="required" ref="id"/>
+    </xs:complexType>
+</xs:schema>

@@ -17,14 +17,20 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests;
 
+import java.io.File;
+
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
+
+import org.eclipse.emf.common.util.URI;
+
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests.InfoModuleTest;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
-
-import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
+import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,9 +42,18 @@ import junit.textui.TestRunner;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#getSCorpusGraph() <em>SCorpus Graph</em>}</li>
  * </ul>
  * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI, org.eclipse.emf.common.util.URI) <em>Print Info</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class SCorpusTest extends TestCase {
+
+	public static final String FILE_TMP_DIR= "_TMP/";
 
 	/**
 	 * The fixture for this SCorpus test case.
@@ -131,6 +146,52 @@ public class SCorpusTest extends TestCase {
 	public void testSetSCorpusGraph() 
 	{
 		this.testGetSCorpusGraph();
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI)
+	 * 
+	 */
+	public void testPrintInfo__URI() {
+		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SampleGenerator.createSDocumentSLayered(sp.getSCorpusGraphs().get(0).getSDocuments().get(0));
+		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
+		File tmpFile = new File(FILE_TMP_DIR + "SCorpusPrintInfo__URI.xml");
+		System.out.println("Writing test file: " + tmpFile.getAbsolutePath());
+		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
+		c.printInfo(res);
+		InfoModuleTest imt = new InfoModuleTest();
+		try {
+			imt.validate(res);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		} 
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI, org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI, org.eclipse.emf.common.util.URI)
+	 * 
+	 */
+	public void testPrintInfo__URI_URI() {
+		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
+		File tmpFile = new File(FILE_TMP_DIR + "SCorpusPrintInfo__URI.xml");
+		File tmpFolder = new File(FILE_TMP_DIR + "SCorpusPrintInfo__URI_tempFolder/");
+		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
+		URI resFolder = URI.createFileURI(tmpFolder.toURI().getRawPath());
+		c.printInfo(res,resFolder);
+		InfoModuleTest imt = new InfoModuleTest();
+		try {
+			imt.validate(res);
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 	}
 
 } //SCorpusTest

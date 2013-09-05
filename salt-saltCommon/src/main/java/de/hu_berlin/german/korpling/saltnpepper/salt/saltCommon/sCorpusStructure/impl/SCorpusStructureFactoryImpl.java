@@ -42,7 +42,7 @@ public class SCorpusStructureFactoryImpl extends EFactoryImpl implements SCorpus
 	 */
 	public static SCorpusStructureFactory init() {
 		try {
-			SCorpusStructureFactory theSCorpusStructureFactory = (SCorpusStructureFactory)EPackage.Registry.INSTANCE.getEFactory("sCorpusStructure"); 
+			SCorpusStructureFactory theSCorpusStructureFactory = (SCorpusStructureFactory)EPackage.Registry.INSTANCE.getEFactory(SCorpusStructurePackage.eNS_URI);
 			if (theSCorpusStructureFactory != null) {
 				return theSCorpusStructureFactory;
 			}

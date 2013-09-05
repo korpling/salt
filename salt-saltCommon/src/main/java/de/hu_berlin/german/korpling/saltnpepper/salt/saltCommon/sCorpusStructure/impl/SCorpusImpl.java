@@ -17,10 +17,15 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl;
 
+import java.io.File;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
@@ -78,6 +83,30 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	public void setSCorpusGraph(SCorpusGraph newSCorpusGraph) 
 	{
 		super.setSGraph(newSCorpusGraph);
+	}
+
+	/**
+	 * {@inheritDoc SCorpus#printInfo(URI)}
+	 */
+	public void printInfo(URI outputResource) {
+//		File out = new File(outputResource.toFileString());
+//		File dir = new File(out.getParentFile(), "sCorpusInfoTempFiles/");
+		printInfo(outputResource, outputResource.trimSegments(1).appendSegment("sCorpusInfoTempFiles"));
+	}
+
+	/**
+	 * {@inheritDoc SCorpus#printInfo(URI, URI)}
+	 * 
+	 */
+	public void printInfo(URI outputResource, URI sdocInfoRoot) {
+		InfoModule im = new InfoModule();
+		File out = new File(outputResource.toFileString());
+//		File dir = new File(sdocInfoRoot.toFileString());
+		try {
+			im.writeInfoFile(this, out,sdocInfoRoot);
+		} catch (Exception e) {
+			throw new SaltException("Could not write Info XML file for this SCorpus" , e);
+		}
 	}
 
 	/**

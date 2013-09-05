@@ -157,6 +157,22 @@ public interface SDocument extends SNode {
 	void loadSDocumentGraph(URI sDocumentGraphLocation);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Generates an XML File that contains information about the given SDocument.
+	 * The output will contain the count of all SNode and SRelation objects as well as their SAnnotation objects. 
+	 * There will be additional counts for every SLayer. 
+	 * 
+	 * The XML file's schema can be found under https://korpling.german.hu-berlin.de/saltnpepper/salt/info/info-10/sDocumentInfo.xsd
+	 * 
+	 * <!-- end-model-doc -->
+	 * @model outputResourceDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	void printInfo(URI outputResource);
+
+	/**
 	 * Returns a {@link SDocument} object having the same properties like this. This means, all labels (annotations, meta-annotations and so on)
 	 * will also be cloned. These clones will be set to the cloned {@link SDocument} object.   
 	 * @return {@link SDocument} object as copy of this 

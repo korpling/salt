@@ -332,6 +332,13 @@ public class SaltCommonPackageImpl extends EPackageImpl implements SaltCommonPac
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
+		op = addEOperation(saltProjectEClass, null, "printInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "outputResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(saltProjectEClass, null, "printInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "outputResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getURI(), "tempFolder", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(sfeaturE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME.class, "SFEATURE_NAME");
 		addEEnumLiteral(sfeaturE_NAMEEEnum, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION);

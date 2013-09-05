@@ -37,6 +37,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
 
@@ -436,5 +440,74 @@ public class SampleGenerator
 			}//creating an anaphoric relation with the use of pointing relations between the Tokens {"it"} and {"this", "example"}
 			//TODO more to do
 		}//creating the document structure
+	}
+	/**
+	 * creates a document with layers
+	 * <pre>
+	 * 
+	 * </pre>
+	 */
+	public static SDocument createSDocumentSLayered(SDocument sDocument) {
+		if (sDocument.getSDocumentGraph() == null){
+			createSDocumentStructure(sDocument);
+		}
+		SLayer sLayer1 = SaltFactory.eINSTANCE.createSLayer();
+		SLayer sLayer2 = SaltFactory.eINSTANCE.createSLayer();
+		sLayer1.setSName("sLayer1 mit SRelations");
+		sLayer2.setSName("sLayer2 mit STokens");
+		sLayer1.setId("sLayer1 mit Annotations:id");
+		sLayer2.setId("sLayer2 mit STokens:id");
+		for (SRelation sAnno : sDocument.getSDocumentGraph().getSRelations()) {
+			sLayer1.getSRelations().add(sAnno);
+		}
+		for (SToken sToken : sDocument.getSDocumentGraph().getSTokens()) {
+			sLayer2.getSNodes().add(sToken);
+		}
+		sLayer2.setSSuperLayer(sLayer1);
+		
+		sDocument.getSDocumentGraph().addSLayer(sLayer1);
+		sDocument.getSDocumentGraph().addSLayer(sLayer2);
+
+		return sDocument;
+	}
+	
+	/**
+	 * Creates a document with 2 layers, 5 Tokens with no Layer
+	 * 
+	 * @param sDocument
+	 * @return
+	 */
+	public static SDocument createSDocument_simpleLayeredDocument(SDocument sDocument) {
+		sDocument.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
+		SLayer sLayer1 = SaltFactory.eINSTANCE.createSLayer();
+		SLayer sLayer2 = SaltFactory.eINSTANCE.createSLayer();
+		sLayer1.setSName("sLayer1");
+		sLayer2.setSName("sLayer2");
+		sLayer1.setId("sLayer1:id");
+		sLayer2.setId("sLayer2:id");
+
+		for (int i = 0; i < 5; i++) {
+			SToken sToken= SaltFactory.eINSTANCE.createSToken();
+			sDocument.getSDocumentGraph().addSNode(sToken);
+		}
+		
+		for (int i = 0; i < 5; i++) {
+			SToken sToken= SaltFactory.eINSTANCE.createSToken();
+			sDocument.getSDocumentGraph().addSNode(sToken);
+			sToken.getSLayers().add(sLayer1);
+		}
+		
+		sDocument.getSDocumentGraph().addSLayer(sLayer1);
+		sDocument.getSDocumentGraph().addSLayer(sLayer2);
+
+		return sDocument;
+	}
+	
+	public static void addMetaAnnotation(final SMetaAnnotatableElement annotatable, final String name, final String value) {
+		SMetaAnnotation sMetaAnno = SaltFactory.eINSTANCE.createSMetaAnnotation();
+		sMetaAnno.setName(name);
+//		sMetaAnno.setValueString("Hans Wurst");
+		sMetaAnno.setSValue(value);
+		annotatable.addSMetaAnnotation(sMetaAnno);
 	}
 }

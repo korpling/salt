@@ -43,7 +43,7 @@ public class SDocumentStructureFactoryImpl extends EFactoryImpl implements SDocu
 	 */
 	public static SDocumentStructureFactory init() {
 		try {
-			SDocumentStructureFactory theSDocumentStructureFactory = (SDocumentStructureFactory)EPackage.Registry.INSTANCE.getEFactory("sDocumentStructure"); 
+			SDocumentStructureFactory theSDocumentStructureFactory = (SDocumentStructureFactory)EPackage.Registry.INSTANCE.getEFactory(SDocumentStructurePackage.eNS_URI);
 			if (theSDocumentStructureFactory != null) {
 				return theSDocumentStructureFactory;
 			}
