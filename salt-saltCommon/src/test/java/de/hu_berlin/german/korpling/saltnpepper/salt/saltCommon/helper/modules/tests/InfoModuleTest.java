@@ -1,3 +1,20 @@
+/**
+ * Copyright 2009 Humboldt University of Berlin, INRIA.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests;
 
 import java.io.File;
@@ -101,7 +118,7 @@ public class InfoModuleTest extends TestCase {
 			SDocument sdoc = SaltFactory.eINSTANCE.createSDocument();
 			SampleGenerator.createSDocumentStructure(sdoc);
 			SampleGenerator.createSDocumentSLayered(sdoc);
-			SampleGenerator.addMetaAnnotation(sdoc,"doc-author", "Hans Würst");
+			SampleGenerator.addMetaAnnotation(sdoc,"doc-author", "Hans W??rst");
 			sdoc.setSId("sampleSDocumentID" + i);
 			sdoc.setSName("sampleSDocName" + i);
 			InfoModule infoAdapter = new InfoModule();
@@ -126,10 +143,10 @@ public class InfoModuleTest extends TestCase {
 	 */
 	public void testUnicode() throws Exception {
 		SaltProject sp = SaltFactory.eINSTANCE.createSaltProject();
-		String testString = "üTesting «ταБЬℓσ»: 13, now 20% off! ٩(-̮̮̃-̃)۶ ٩(●̮̮̃•̃)۶ ٩(͡๏̯͡๏)۶ ٩(-̮̮̃•̃).";
+		String testString = "??Testing ?????????????????: 13, now 20% off! ??(-??????-??)?? ??(??????????????)?? ??(????????????)?? ??(-???????????).";
 		sp.setSName(testString);
 //		sp.getSCorpusGraphs().add(SaltFactory.eINSTANCE.createSCorpusGraph());
-		URI out = TMP_DIR_URI.appendSegment("ünicode").appendFileExtension("xml");
+		URI out = TMP_DIR_URI.appendSegment("??nicode").appendFileExtension("xml");
 		sp.printInfo(out);
 		FileReader fr = new FileReader(out.toFileString());
 		char [] buffer = new char[2048];
@@ -148,10 +165,10 @@ public class InfoModuleTest extends TestCase {
 		sp.setSName("Test-SaltProject");
 		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
 		SampleGenerator.createSDocumentSLayered(first);
-		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
+		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans W??rst");
 //		SaltFactory.eINSTANCE.createSaltProject().getSCorpusGraphs().add(cg);
 		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
-		SampleGenerator.addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans Würst");
+		SampleGenerator.addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans W??rst");
 		InfoModule im = new InfoModule();
 		im.setOverwriting(true);
 		File corpusinfo = new File(FILE_TMP_DIR, "corpusInfo.xml");
@@ -172,7 +189,7 @@ public class InfoModuleTest extends TestCase {
 		sp.setSName("Test-SaltProject");
 		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
 		SampleGenerator.createSDocumentSLayered(first);
-		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
+		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans W??rst");
 		
 		XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(buffer);
 //		URI tFolder = (URI.createFileURI(FILE_TMP_DIR).appendSegment("xmlStreamTestTempDir"));
