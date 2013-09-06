@@ -707,18 +707,13 @@ public class InfoModule {
 					System.out.println("Generating partial to document: " + partial.toFileString());
 					sdoc.printInfo(partial);
 				} else {
-					throw new SaltException("Can't find sDocumentInfo file:" + sdocInfo);
+					System.out.println("No partial found. Try to generate one");
+					try {
+						sdoc.printInfo(partial);
+					} catch (Exception e) {
+						throw new SaltException("Can't find sDocumentInfo file:" + sdocInfo);
+					}
 				}
-//				if (sdoc.getSDocumentGraphLocation() != null){
-//					System.out.println("Generating partial to document: " + partial.toFileString());
-//					sdoc.printInfo(partial);
-////				}else if(this.isOverwriting){
-////					System.out.println("Deleting old file " + sdocInfo.getAbsolutePath());
-////					sdocInfo.delete();
-////					sdoc.printInfo(partial);
-//				}else{
-//					System.out.println("File was already generated");
-//				}
 				insertSDocumentTempFile(writer,sdocInfo);
 				
 			}

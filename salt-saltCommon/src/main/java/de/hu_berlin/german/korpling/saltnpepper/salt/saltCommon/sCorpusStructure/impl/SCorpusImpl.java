@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.URI;
@@ -101,7 +102,20 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	public void printInfo(URI outputResource, URI sdocInfoRoot) {
 		InfoModule im = new InfoModule();
 		File out = new File(outputResource.toFileString());
-//		File dir = new File(sdocInfoRoot.toFileString());
+		File dir = new File(sdocInfoRoot.toFileString());
+		try {
+			out.createNewFile();
+			dir.mkdirs();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if (!out.canWrite()){
+			throw new SaltException("File: " + out.toString() +" is not writeable");
+		}
+		if (!dir.canRead() || !dir.canWrite()){
+			throw new SaltException("Folder: " + dir.toString() +" is not writeable or readable");
+		}
 		try {
 			im.writeInfoFile(this, out,sdocInfoRoot);
 		} catch (Exception e) {
