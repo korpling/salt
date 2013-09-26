@@ -43,6 +43,7 @@ public class SDocumentInfo {
 	private final EMap<String, EMap<String,InfoEntry>>     layeredInfoEntries;
 	private final EMap<String, EMap<String,AnnoInfoEntry>> layeredAnnoInfoEntries;
 	private final EMap<String, String> metaData;
+	private final EMap<String, InfoEntry> totalInfoEntries;
 	private final EMap<String, AnnoInfoEntry> totalAnnoEntries;
 
 	private SDocumentGraph sdocgraph;
@@ -61,6 +62,7 @@ public class SDocumentInfo {
 		layeredInfoEntries     = new BasicEMap<String, EMap<String,InfoEntry>>();
 		layeredAnnoInfoEntries = new BasicEMap<String, EMap<String,AnnoInfoEntry>>();
 		totalAnnoEntries = new BasicEMap<String, AnnoInfoEntry>();
+		totalInfoEntries = new BasicEMap<String, SDocumentInfo.InfoEntry>();
 		metaData = new BasicEMap<String, String>();
 	}
 	
@@ -304,7 +306,7 @@ public class SDocumentInfo {
 	public Collection<AnnoInfoEntry> getAllAnnoInfoEntries() {
 		// TODO Auto-generated method stub
 		System.out.println(totalAnnoEntries.values());
-		return totalAnnoEntries.values();
+		return layeredAnnoInfoEntries.get(ALL_LAYERS).values();
 	}
 
 

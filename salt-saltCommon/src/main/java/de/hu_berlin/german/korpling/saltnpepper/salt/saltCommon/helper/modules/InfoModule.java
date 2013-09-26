@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -44,14 +45,10 @@ import javax.xml.stream.events.EntityReference;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
@@ -67,10 +64,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SIdentifiableElement;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
@@ -482,12 +476,12 @@ public class InfoModule {
 	private void writeTotalSAnnotations(SDocumentInfo results,
 			XMLStreamWriter writer) throws XMLStreamException {
 		writer.writeStartElement(TOTAL_ANNOTATION_INFO);
-//		for (String sLayerId : results.layeredInfoEntries.keySet()) {
+		// for (String sLayerId : results.layeredInfoEntries.keySet()) {
 		System.out.println(results);
-			for (AnnoInfoEntry annoEntry : results.getAllAnnoInfoEntries()) {
-				writeSAnnotationInfoElement(annoEntry,writer);
-			}
-//		}
+		for (AnnoInfoEntry annoEntry : results.getAllAnnoInfoEntries()) {
+			writeSAnnotationInfoElement(annoEntry, writer);
+		}
+		// }
 		writer.writeEndElement();
 	}
 
@@ -778,7 +772,7 @@ public class InfoModule {
 		try {
 //			tempFile = sDocInfoPartial.get();
 			in = new FileInputStream(tempFile);
-			reader = new InputStreamReader(in);
+			reader = new InputStreamReader(in,"UTF-8");
 			breader = new BufferedReader(reader);
 			xmlReader = xmlInputFactory.createXMLEventReader(breader);
 			XMLEvent event = xmlReader.nextEvent();
@@ -796,6 +790,8 @@ public class InfoModule {
 			tempFile.deleteOnExit();
 			throw new SaltException("Exception while writing to the XML Stream",e);
 			
+		} catch (UnsupportedEncodingException e) {
+			throw new SaltException("Given file encoding is not supported");
 		}finally{
 			try {
 				xmlReader.close();
