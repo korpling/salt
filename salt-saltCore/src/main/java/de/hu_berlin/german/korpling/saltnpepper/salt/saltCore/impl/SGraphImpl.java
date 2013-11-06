@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -605,6 +606,14 @@ public class SGraphImpl extends GraphImpl implements SGraph {
 	 */
 	public SAnnotation createSAnnotation(String sNS, String sName, String sValueString) {
 		return this.createSAnnotation(sNS, sName, sValueString, SDATATYPE.STEXT);
+	}
+
+	/**
+	 * {@inheritDoc SAnnotatableElement#createSAnnotations(String)}
+	 */
+	@Override
+	public EList<SAnnotation> createSAnnotations(String annotationString) {
+		return(sAnnoAccessor.createSAnnotations(this, annotationString));
 	}
 
 	//=================== end: handling SAnnotatableElement

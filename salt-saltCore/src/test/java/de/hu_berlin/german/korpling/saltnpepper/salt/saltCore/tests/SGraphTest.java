@@ -80,6 +80,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#getSAnnotation(java.lang.String) <em>Get SAnnotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SAnnotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotation(java.lang.String, java.lang.String, java.lang.String) <em>Create SAnnotation</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotations(java.lang.String) <em>Create SAnnotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#addSFeature(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature) <em>Add SFeature</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String) <em>Get SFeature</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#getSFeature(java.lang.String, java.lang.String) <em>Get SFeature</em>}</li>
@@ -89,7 +90,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  * </p>
  * @generated
  */
-public class SGraphTest extends SNamedElementTest {
+public class SGraphTest extends TestCase {
 
 	/**
 	 * The fixture for this SGraph test case.
@@ -690,6 +691,25 @@ public class SGraphTest extends SNamedElementTest {
 		this.testCreateSAnnotation__String_String_Object_SDATATYPE();
 	}
 
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotations(java.lang.String) <em>Create SAnnotations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotations(java.lang.String)
+	 */
+	public void testCreateSAnnotations__String() {
+		try 
+		{
+			SAnnotatableElementTest sFeatTest= new SAnnotatableElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testCreateSAnnotations__String();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	// ========================= end: testing SAnnotatableElement	
 // ========================= start: testing SMetaAnnotatableElement
 	/**
@@ -863,6 +883,44 @@ public class SGraphTest extends SNamedElementTest {
 			sFeatTest.setUp();
 			sFeatTest.setFixture(this.getFixture());
 			sFeatTest.testGetSFeatures();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName() <em>SName</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName()
+	 */
+	public void testGetSName() {
+		try 
+		{
+			SNamedElementTest sFeatTest= new SNamedElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testGetSName();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#setSName(java.lang.String) <em>SName</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#setSName(java.lang.String)
+	 */
+	public void testSetSName() {
+		try 
+		{
+			SNamedElementTest sFeatTest= new SNamedElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testSetSName();
 			sFeatTest.tearDown();
 		}catch (Exception e) {
 			throw new RuntimeException(e);

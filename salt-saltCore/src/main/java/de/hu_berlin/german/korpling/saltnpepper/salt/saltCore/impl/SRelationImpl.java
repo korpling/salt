@@ -299,6 +299,13 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		return this.createSAnnotation(sNS, sName, sValueString, SDATATYPE.STEXT);
 	}
 
+	/**
+	 * {@inheritDoc SAnnotatableElement#createSAnnotations(String)}
+	 */
+	@Override
+	public EList<SAnnotation> createSAnnotations(String annotationString) {
+		return(sAnnoAccessor.createSAnnotations(this, annotationString));
+	}
 	//=================== end: handling SAnnotatableElement
 //=================== start: handling SMetaAnnotatableElement	
 	/**
@@ -344,12 +351,9 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public SMetaAnnotation createSMetaAnnotation(String sNS, String sName, String sValueString) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return (this.sMetaAnnoAccessor.createSMetaAnnotation(this, sNS, sName, sValueString, SDATATYPE.STEXT));
 	}
 
 	//=================== end: handling SMetaAnnotatableElement

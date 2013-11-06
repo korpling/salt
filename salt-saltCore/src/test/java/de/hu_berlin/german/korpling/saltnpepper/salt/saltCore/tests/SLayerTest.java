@@ -67,6 +67,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#getSAnnotation(java.lang.String) <em>Get SAnnotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SAnnotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotation(java.lang.String, java.lang.String, java.lang.String) <em>Create SAnnotation</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotations(java.lang.String) <em>Create SAnnotations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement#addSProcessingAnnotation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation) <em>Add SProcessing Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement#getSProcessingAnnotation(java.lang.String) <em>Get SProcessing Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement#createSProcessingAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SProcessing Annotation</em>}</li>
@@ -80,7 +81,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  * </p>
  * @generated
  */
-public class SLayerTest extends SNamedElementTest {
+public class SLayerTest extends TestCase {
 
 	/**
 	 * The fixture for this SLayer test case.
@@ -520,6 +521,25 @@ public class SLayerTest extends SNamedElementTest {
 		this.testCreateSAnnotation__String_String_Object_SDATATYPE();
 	}
 
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotations(java.lang.String) <em>Create SAnnotations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotations(java.lang.String)
+	 */
+	public void testCreateSAnnotations__String() {
+		try 
+		{
+			SAnnotatableElementTest sFeatTest= new SAnnotatableElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testCreateSAnnotations__String();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	// ========================= end: testing SAnnotatableElement	
 	
 // ========================= start: testing SProcessingAnnotatableElement
@@ -627,6 +647,45 @@ public class SLayerTest extends SNamedElementTest {
 		}
 	}
 	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName() <em>SName</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#getSName()
+	 */
+	public void testGetSName() {
+		try 
+		{
+			SNamedElementTest sFeatTest= new SNamedElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testGetSName();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#setSName(java.lang.String) <em>SName</em>}' feature setter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#setSName(java.lang.String)
+	 * @generated
+	 */
+	public void testSetSName() {
+		try 
+		{
+			SNamedElementTest sFeatTest= new SNamedElementTest(this.getName());
+			sFeatTest.setUp();
+			sFeatTest.setFixture(this.getFixture());
+			sFeatTest.testSetSName();
+			sFeatTest.tearDown();
+		}catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeaturableElement#addSFeature(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature) <em>Add SFeature</em>}' operation.
 	 * <!-- begin-user-doc -->

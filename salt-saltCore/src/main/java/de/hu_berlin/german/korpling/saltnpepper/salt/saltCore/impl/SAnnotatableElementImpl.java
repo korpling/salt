@@ -123,7 +123,14 @@ public class SAnnotatableElementImpl extends LabelableElementImpl implements SAn
 	public SAnnotation createSAnnotation(String sNS, String sName, String sValueString) {
 		return this.createSAnnotation(sNS, sName, sValueString, SDATATYPE.STEXT);
 	}
-
+	/**
+	 * {@inheritDoc SAnnotatableElement#createSAnnotations(String)}
+	 */
+	@Override
+	public EList<SAnnotation> createSAnnotations(String annotationString) {
+		return(sAnnoAccessor.createSAnnotations(this, annotationString));
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -41,6 +41,12 @@
       <eParameters name="sName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="sValueString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
+    <eOperations name="createSAnnotations" upperBound="-1" eType="#//SAnnotation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method parses the given annotation String and adds an {@link SAnnotation} object for each &#xA;annotation being contained in that string to the given {@link SAnnotatableElement} object. The&#xA;syntax for Annotations is:&lt;br/>&#xA;(SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+ &#xA;&lt;br/>&#xA;where SNS is the namespace of the annotation, SNAME is its name and SVALUE is the value of the annotation&#xA;@param annotationString String containing the annotations"/>
+      </eAnnotations>
+      <eParameters name="annottaionString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sAnnotations" upperBound="-1"
         eType="#//SAnnotation" volatile="true" transient="true" derived="true" containment="true"
         eOpposite="#//SAnnotation/sAnnotatableElement"/>

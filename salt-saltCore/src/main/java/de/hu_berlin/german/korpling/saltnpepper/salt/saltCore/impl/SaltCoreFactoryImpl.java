@@ -60,7 +60,7 @@ public class SaltCoreFactoryImpl extends EFactoryImpl implements SaltCoreFactory
 	 */
 	public static SaltCoreFactory init() {
 		try {
-			SaltCoreFactory theSaltCoreFactory = (SaltCoreFactory)EPackage.Registry.INSTANCE.getEFactory("saltCore"); 
+			SaltCoreFactory theSaltCoreFactory = (SaltCoreFactory)EPackage.Registry.INSTANCE.getEFactory(SaltCorePackage.eNS_URI);
 			if (theSaltCoreFactory != null) {
 				return theSaltCoreFactory;
 			}

@@ -44,6 +44,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#getSAnnotation(java.lang.String) <em>Get SAnnotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SAnnotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotation(java.lang.String, java.lang.String, java.lang.String) <em>Create SAnnotation</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement#createSAnnotations(java.lang.String) <em>Create SAnnotations</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -189,6 +190,24 @@ public class SAnnotatableElementTest extends TestCase {
 //		String sName = "name";
 //		String sValueString = "valuestring"; 
 //		this.getFixture().createSAnnotation(sNS, sName, sValueString);
+	}
+	
+	/**
+	 * Tests if the extraction of an annotations string works quite well.
+	 */
+	public void testCreateSAnnotations__String() {
+		String annotationString="blub";
+		getFixture().createSAnnotations(annotationString);
+		assertNotNull(getFixture().getSAnnotation("blub"));
+		
+		annotationString="myNS::bla=blub;foo;x=y";
+		getFixture().createSAnnotations(annotationString);
+		assertEquals(4, getFixture().getSAnnotations().size());
+		assertNotNull(getFixture().getSAnnotation("myNS::bla"));
+		assertEquals("blub", getFixture().getSAnnotation("myNS::bla").getSValue());
+		assertNotNull(getFixture().getSAnnotation("foo"));
+		assertNotNull(getFixture().getSAnnotation("x"));
+		assertEquals("y", getFixture().getSAnnotation("x").getSValue());
 	}
 
 	public void testReverseGetSAnnotation()

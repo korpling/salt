@@ -64,6 +64,10 @@
         <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SAnnotatableElement/createSAnnotation.1"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_wobvYXsJEeCc486azoYi9Q"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_bnDrcEcbEeOerK34nemKAQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SAnnotatableElement/createSAnnotations"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bnDrcUcbEeOerK34nemKAQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_a3Bt2YjXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_a3Bt2ojXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_a3Bt24jXEd6X5oQchPkMiQ"/>

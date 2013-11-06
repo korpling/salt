@@ -937,6 +937,9 @@ public class SaltCorePackageImpl extends EPackageImpl implements SaltCorePackage
 		addEParameter(op, ecorePackage.getEString(), "sName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "sValueString", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(sAnnotatableElementEClass, this.getSAnnotation(), "createSAnnotations", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "annottaionString", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(sAnnotationEClass, SAnnotation.class, "SAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSAnnotation_SAnnotatableElement(), this.getSAnnotatableElement(), this.getSAnnotatableElement_SAnnotations(), "sAnnotatableElement", null, 0, 1, SAnnotation.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

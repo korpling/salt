@@ -88,4 +88,21 @@ public interface SAnnotatableElement extends LabelableElement {
 	 */
 	SAnnotation createSAnnotation(String sNS, String sName, String sValueString);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This method parses the given annotation String and adds an {@link SAnnotation} object for each 
+	 * annotation being contained in that string to the given {@link SAnnotatableElement} object. The
+	 * syntax for Annotations is:<br/>
+	 * (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+ 
+	 * <br/>
+	 * where SNS is the namespace of the annotation, SNAME is its name and SVALUE is the value of the annotation
+	 * @param annotationString String containing the annotations
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<SAnnotation> createSAnnotations(String annottaionString);
+
 } // SAnnotatableElement

@@ -389,6 +389,14 @@ public class SLayerImpl extends LayerImpl implements SLayer {
 		return this.createSAnnotation(sNS, sName, sValueString, SDATATYPE.STEXT);
 	}
 
+	/**
+	 * {@inheritDoc SAnnotatableElement#createSAnnotations(String)}
+	 */
+	@Override
+	public EList<SAnnotation> createSAnnotations(String annotationString) {
+		return(sAnnoAccessor.createSAnnotations(this, annotationString));
+	}
+
 	//=================== end: handling SAnnotatableElement
 //=================== start: handling SMetaAnnotatableElement	
 	/**

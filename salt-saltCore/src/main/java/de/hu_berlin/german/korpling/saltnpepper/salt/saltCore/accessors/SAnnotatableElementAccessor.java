@@ -19,6 +19,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors;
 
 import java.util.ArrayList;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreEList;
@@ -29,6 +30,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreException;
 
 public class SAnnotatableElementAccessor 
 {
@@ -47,7 +49,48 @@ public class SAnnotatableElementAccessor
 			sProcAnno= (SAnnotation) label;
 		return(sProcAnno);
 	}
-
+	
+	/**
+	 * {@inheritDoc SaltFactory#createSAnnotations(SAnnotatableElement, String)}
+	 */
+	public EList<SAnnotation> createSAnnotations(SAnnotatableElement sProcElem, String annotationString)
+	{
+		EList<SAnnotation> retVal= new BasicEList<SAnnotation>();
+		if (	(annotationString!= null)&&
+				(!annotationString.isEmpty()))
+		{
+			String[] annotations= annotationString.split(";");
+			for (String annotation: annotations)
+			{
+				SAnnotation sAnno= SaltCoreFactory.eINSTANCE.createSAnnotation();
+				retVal.add(sAnno);
+				String[] nsParts= annotation.split(Label.NS_SEPERATOR);
+				String rest;
+				if (nsParts.length> 2)
+					throw new SaltCoreException("The given annotation String '"+annotation+"' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
+				else if (nsParts.length== 2)
+				{
+					sAnno.setSNS(nsParts[0]);
+					rest= nsParts[1];
+				}
+				else rest= nsParts[0];
+				
+				String[] nameParts= rest.split("=");
+				if (nameParts.length> 2)
+					throw new SaltCoreException("The given annotation String '"+annotation+"' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
+				else if (nameParts.length== 2)
+				{
+					sAnno.setSName(nameParts[0]);
+					sAnno.setSValue(nameParts[1]);
+				}
+				else sAnno.setSName(nameParts[0]);
+				sProcElem.addSAnnotation(sAnno);
+			}
+			
+		}
+		return(retVal);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public EList<SAnnotation> getSAnnotations(SAnnotatableElement sProcElem) 
 	{
@@ -64,12 +107,6 @@ public class SAnnotatableElementAccessor
 			if (label instanceof SAnnotation)
 				sProcAnnosList.add((SAnnotation) label);
 		}
-//		old since 2010-10-15	
-//		for (Label label: sProcElem.getLabels() ) 
-//		{
-//			if (label instanceof SAnnotation)
-//				sProcAnnosList.add((SAnnotation) label);
-//		}
 		sProcAnnos= new EcoreEList.UnmodifiableEList((InternalEObject)sProcElem,
 												SaltCorePackage.eINSTANCE.getSAnnotatableElement_SAnnotations(),
 												sProcAnnosList.size(), sProcAnnosList.toArray());
