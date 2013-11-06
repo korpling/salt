@@ -29,11 +29,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserObject;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
@@ -55,7 +53,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
-public class SDocumentGraphDOTWriter implements TraversalObject
+public class SDocumentGraphDOTWriter implements GraphTraverseHandler
 {
 	private URI outputURI= null;
 	public void setOutputURI(URI outputURI) {
@@ -116,10 +114,6 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 		SDocumentGraph docGraph = getSDocumentGraph();
 		if (docGraph != null)
 		{
-		    
-			GraphTraverser graphTraverser= new GraphTraverser();
-			graphTraverser.setGraph(docGraph);
-			GraphTraverserObject travObj= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this);
 			
 			this.visitedNodes= new BasicEList<Node>(); 
 			this.spanList = new LinkedHashSet<SSpan>();
@@ -129,7 +123,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			this.tokenList = new LinkedHashSet<SToken>();
 			this.otherNodeList = new LinkedHashSet<SNode>();
 			
-			EList<Node> startNodes= graphTraverser.getRoots();
+			EList<Node> startNodes= docGraph.getRoots();
 			if (startNodes== null)
 			{
 				startNodes= new BasicEList<Node>();
@@ -139,9 +133,8 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 			}
 			if (	(startNodes!= null)&&
 					(startNodes.size() >0))
-				travObj.start(startNodes);
-			
-			travObj.waitUntilFinished();
+				docGraph.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "Dot_top_down", this);
+		    
 			
 			// primary texts should be on the bottom
 		    if(textList.size() > 0)
@@ -217,11 +210,7 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 						throw new SaltResourceException("There are some nodes, which hasn' t been printed because of an unknown reason.");
 					else
 					{//traverse again
-						graphTraverser= new GraphTraverser();
-						graphTraverser.setGraph(this.getSDocumentGraph());
-						travObj= graphTraverser.getTraverserObject(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this);
-						travObj.start(forgottenNodes);
-						travObj.waitUntilFinished();
+						docGraph.traverse(forgottenNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "dot_forgotten_nodes", this);
 					}//traverse again
 				}//if both lists doesn't have the same size create difference
 			}//some nodes have no roots for example if they are part of a cycle, they have to be still stored
@@ -277,13 +266,14 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 	protected static final String KW_DOT_STORED=	KW_DOT_NS+"stored";
 	
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_MODE traversalMode,
-			Long traversalId, Edge edge, Node currNode, long order) {
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
+			String traversalId, Edge edge, Node currNode, long order) {
 		return(true);
 	}
+	
 
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_MODE traversalMode, Long traversalId,
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
 			Node currNode, Edge edge, Node fromNode, long order) {
 	}
 	
@@ -384,8 +374,8 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 		
 	
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_MODE traversalMode,
-			Long traversalId, Node currNode, Edge edge, Node fromNode,
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
+			String traversalId, Node currNode, Edge edge, Node fromNode,
 			long order) 
 	{
 		SRelation relation= null;

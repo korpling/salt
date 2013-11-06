@@ -26,6 +26,7 @@ import java.util.Vector;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xml.namespace.SpaceType;
 import org.xml.sax.SAXException;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
@@ -324,12 +325,19 @@ public class SaltSample
 		List<SToken> englishToks= createTokens(sDocument, pd_EN);
 		List<SToken> germanToks= createTokens(sDocument, pd_DE);
 		
-		SPointingRelation pRel= SaltFactory.eINSTANCE.createSPointingRelation();
-		pRel.setSSource(englishToks.get(0));
-		pRel.setSSource(englishToks.get(1));
-		sDocument.getSDocumentGraph().addSRelation(pRel);
-		
-		
+		sDocument.getSDocumentGraph().createSRelation(englishToks.get(0), germanToks.get(0), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		sDocument.getSDocumentGraph().createSRelation(englishToks.get(1), germanToks.get(1), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		sDocument.getSDocumentGraph().createSRelation(englishToks.get(2), germanToks.get(2), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		EList<SToken> sTokens= new BasicEList<SToken>();
+		sTokens.add(englishToks.get(3));
+		sTokens.add(englishToks.get(4));
+		SSpan sSpan= sDocument.getSDocumentGraph().createSSpan(sTokens);
+		sDocument.getSDocumentGraph().createSRelation(sSpan, germanToks.get(3), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		sDocument.getSDocumentGraph().createSRelation(englishToks.get(5), germanToks.get(4), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		sDocument.getSDocumentGraph().createSRelation(englishToks.get(6), germanToks.get(5), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		sDocument.getSDocumentGraph().createSRelation(englishToks.get(7), germanToks.get(6), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		sDocument.getSDocumentGraph().createSRelation(englishToks.get(8), germanToks.get(7), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		sDocument.getSDocumentGraph().createSRelation(englishToks.get(9), germanToks.get(8), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 	}
 	
 	/**
