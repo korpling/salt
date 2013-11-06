@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -145,35 +146,58 @@ public class SaltSample
 	/**
 	 * The primary text, which is used for the samples.
 	 */
-	public static String PRIMARY_TEXT= "Is this example more complicated than it appears to be?";
+	public static String PRIMARY_TEXT_EN= "Is this example more complicated than it appears to be?";
+	/**
+	 * The primary text, which is used for the samples.
+	 */
+	public static String PRIMARY_TEXT_DE= "Ist dieses Beispiel komplizierter als es zu sein scheint?";
 	/**
 	 * The name of the morphologic layer containing the tokens. 
 	 */
 	public static String MORPHOLOGY_LAYER="morphology";
-	
+	/** iso  639-1 language code for english**/
+	public static final String LANG_EN="en";
+	/** iso  639-1 language code for german**/
+	public static final String LANG_DE="de";
 	/**
-	 * Creates a {@link STextualDS} object containing the primary text {@link SaltSample#PRIMARY_TEXT} and adds the object
+	 * Creates a {@link STextualDS} object containing the primary text {@link SaltSample#PRIMARY_TEXT_EN} and adds the object
 	 * to the {@link SDocumentGraph} being contained by the given {@link SDocument} object.
 	 * 
 	 * @param sDocument the document, to which the created {@link STextualDS} object will be added
 	 */
 	public static void createPrimaryData(SDocument sDocument){
+		createPrimaryData(sDocument, LANG_EN);
+	}
+	
+	/**
+	 * Creates a {@link STextualDS} object containing the primary text {@link SaltSample#PRIMARY_TEXT_EN}, which is either
+	 * an english text or its german translation and adds the object
+	 * to the {@link SDocumentGraph} being contained by the given {@link SDocument} object.
+	 * 
+	 * @param sDocument the document, to which the created {@link STextualDS} object will be added
+	 * @param language the language of the resource to be created, {@link #LANG_EN} for english, {@link #LANG_DE} for german
+	 * @return returns the created {@link STextualDS} object
+	 */
+	public static STextualDS createPrimaryData(SDocument sDocument, String language){
 		if (sDocument== null)
 			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
 		if (sDocument.getSDocumentGraph()== null)
 			throw new SaltSampleException("Cannot create example, because the given sDocument does not contain an SDocumentGraph.");
 		STextualDS sTextualDS = null;
-		{//creating the primary text
+		//creating the primary text depending on the language
 			sTextualDS= SaltFactory.eINSTANCE.createSTextualDS();
-			sTextualDS.setSText(PRIMARY_TEXT);
-			//sTextualDS.setSText("This is a sample text, which is very short.");
+			if (LANG_EN.equalsIgnoreCase(language))
+				sTextualDS.setSText(PRIMARY_TEXT_EN);
+			else if (LANG_DE.equalsIgnoreCase(language))
+				sTextualDS.setSText(PRIMARY_TEXT_DE);
 			//adding the text to the document-graph
 			sDocument.getSDocumentGraph().addSNode(sTextualDS);
-		}//creating the primary text
+		//creating the primary text depending on the language
+		return(sTextualDS);
 	}
 	
 	/**
-	 * Creates a set of {@link SToken} objects tokenizing the primary text {@link SaltSample#PRIMARY_TEXT} in to the 
+	 * Creates a set of {@link SToken} objects tokenizing the primary text {@link SaltSample#PRIMARY_TEXT_EN} in to the 
 	 * following tokens:
 	 * <ul>
 	 *	<li>Is</li>
@@ -192,35 +216,88 @@ public class SaltSample
 	 * @param sDocument the document, to which the created {@link SToken} objects will be added
 	 */
 	public static void createTokens(SDocument sDocument){
-		STextualDS sTextualDS = sDocument.getSDocumentGraph().getSTextualDSs().get(0);
+		createTokens(sDocument, sDocument.getSDocumentGraph().getSTextualDSs().get(0));
+	}
+	
+	/**
+	 * Creates a set of {@link SToken} objects tokenizing the primary text {@link SaltSample#PRIMARY_TEXT_EN} or 
+	 * {@link SaltSample#PRIMARY_TEXT_DE} depending on the given {@link STextualDS} object in to the 
+	 * following tokens:
+	 * <ul>
+	 *	<li>Is</li>
+	 *	<li>this</li>
+	 *	<li>example</li>
+	 * 	<li>more</li>
+	 * 	<li>complicated</li>
+	 *	<li>than</li>
+	 * 	<li>it</li>
+	 * 	<li>appears</li>
+	 * 	<li>to</li>
+	 * 	<li>be</li>
+	 * 	<li>?</li>
+	 * </ul>
+	 * or
+	 * <ul>
+	 *	<li>Ist</li>
+	 *	<li>dieses</li>
+	 *	<li>Beispiel</li>
+	 * 	<li>komplizierter</li>
+	 * 	<li>als</li>
+	 *	<li>es</li>
+	 * 	<li>zu</li>
+	 * 	<li>sein</li>
+	 * 	<li>scheint</li>
+	 * 	<li>?</li>
+	 * </ul>
+	 * The created {@link SToken} objects and corresponding {@link STextualRelation} objects are added to the given {@link SDocument} object.
+	 * @param sDocument the document, to which the created {@link SToken} objects will be added
+	 * @return list of created {@link SToken} objects
+	 */
+	public static List<SToken> createTokens(SDocument sDocument, STextualDS sTextualDS){
 		//as a means to group elements, layers (SLayer) can be used. here, a layer
 		//named "morphology" is created and the tokens will be added to it
 		SLayer morphLayer = SaltFactory.eINSTANCE.createSLayer();
 		morphLayer.setSName(MORPHOLOGY_LAYER);
 		sDocument.getSDocumentGraph().addSLayer(morphLayer);
-
-		createToken(0,2,sTextualDS,sDocument,morphLayer);	
-		//creating tokenization for the token 'this' and adding it to the morphology layer
-		createToken(3,7,sTextualDS,sDocument,morphLayer);	
-		//creating tokenization for the token 'example' and adding it to the morphology layer
-		createToken(8,15,sTextualDS,sDocument,morphLayer);		
-		//creating tokenization for the token 'more' and adding it to the morphology layer
-		createToken(16,20,sTextualDS,sDocument,morphLayer);		
-		//creating tokenization for the token 'complicated' and adding it to the morphology layer
-		createToken(21,32,sTextualDS,sDocument,morphLayer);
-		//creating tokenization for the token 'than' and adding it to the morphology layer
-		createToken(33,37,sTextualDS,sDocument,morphLayer);		
-		//creating tokenization for the token 'it' and adding it to the morphology layer
-		createToken(38,40,sTextualDS,sDocument,morphLayer);	
-		//creating tokenization for the token 'appears' and adding it to the morphology layer
-		createToken(41,48,sTextualDS,sDocument,morphLayer);
-		//creating tokenization for the token 'to' and adding it to the morphology layer
-		createToken(49,51,sTextualDS,sDocument,morphLayer);
-		//creating tokenization for the token 'be' and adding it to the morphology layer
-		createToken(52,54,sTextualDS,sDocument,morphLayer);
+		
+		List<SToken> retVal= new Vector<SToken>();
+		
+		if (sTextualDS.getSText().equals(PRIMARY_TEXT_EN))
+		{
+			retVal.add(createToken(0,2,sTextualDS,sDocument,morphLayer));		//Is
+			retVal.add(createToken(3,7,sTextualDS,sDocument,morphLayer));		//this
+			retVal.add(createToken(8,15,sTextualDS,sDocument,morphLayer));		//example
+			retVal.add(createToken(16,20,sTextualDS,sDocument,morphLayer));		//more
+			retVal.add(createToken(21,32,sTextualDS,sDocument,morphLayer));		//complicated
+			retVal.add(createToken(33,37,sTextualDS,sDocument,morphLayer));		//than
+			retVal.add(createToken(38,40,sTextualDS,sDocument,morphLayer));		//it
+			retVal.add(createToken(41,48,sTextualDS,sDocument,morphLayer));		//supposed
+			retVal.add(createToken(49,51,sTextualDS,sDocument,morphLayer));		//to
+			retVal.add(createToken(52,54,sTextualDS,sDocument,morphLayer));		//be
+		}else if (sTextualDS.getSText().equals(PRIMARY_TEXT_DE))
+		{
+			retVal.add(createToken(0,3,sTextualDS,sDocument,morphLayer));	//Ist	
+			retVal.add(createToken(4,10,sTextualDS,sDocument,morphLayer));	//dieses	
+			retVal.add(createToken(11,19,sTextualDS,sDocument,morphLayer));	//Beipsiel
+			retVal.add(createToken(20,33,sTextualDS,sDocument,morphLayer));	//komplizierter
+			retVal.add(createToken(34,37,sTextualDS,sDocument,morphLayer));	//als
+			retVal.add(createToken(38,40,sTextualDS,sDocument,morphLayer));	//es
+			retVal.add(createToken(41,43,sTextualDS,sDocument,morphLayer));	//zu
+			retVal.add(createToken(44,48,sTextualDS,sDocument,morphLayer));	//sein
+			retVal.add(createToken(49,56,sTextualDS,sDocument,morphLayer));	//scheint
+		}
+		return(retVal);
 	}
-	
-	public static void createToken(int start, int end, STextualDS sTextualDS, SDocument sDocument, SLayer layer){
+	/**
+	 * Creates a {@link SToken} covering the passed poition and returns it.
+	 * @param start
+	 * @param end
+	 * @param sTextualDS
+	 * @param sDocument
+	 * @param layer
+	 * @return created {@link SToken} object
+	 */
+	public static SToken createToken(int start, int end, STextualDS sTextualDS, SDocument sDocument, SLayer layer){
 		SToken sToken= SaltFactory.eINSTANCE.createSToken();
 		sDocument.getSDocumentGraph().addSNode(sToken);
 		layer.getSNodes().add(sToken);
@@ -230,6 +307,29 @@ public class SaltSample
 		sTextRel.setSStart(start);
 		sTextRel.setSEnd(end);
 		sDocument.getSDocumentGraph().addSRelation(sTextRel);
+		return(sToken);
+	}
+	
+	/**
+	 * Creates a small parallel corpus, containing an english and a german text.
+	 * The english text is {@value #PRIMARY_TEXT_EN}, the german text is {@value #PRIMARY_TEXT_DE}. 
+	 * Both are tokenized by word borders.
+	 * 
+	 * @param sDocument he document containing the {@link STextualDS} objects
+	 */
+	public static void createParallelData(SDocument sDocument){
+		STextualDS pd_EN= createPrimaryData(sDocument, LANG_EN);
+		STextualDS pd_DE= createPrimaryData(sDocument, LANG_DE);
+		
+		List<SToken> englishToks= createTokens(sDocument, pd_EN);
+		List<SToken> germanToks= createTokens(sDocument, pd_DE);
+		
+		SPointingRelation pRel= SaltFactory.eINSTANCE.createSPointingRelation();
+		pRel.setSSource(englishToks.get(0));
+		pRel.setSSource(englishToks.get(1));
+		sDocument.getSDocumentGraph().addSRelation(pRel);
+		
+		
 	}
 	
 	/**
