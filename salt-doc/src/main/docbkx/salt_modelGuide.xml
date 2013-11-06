@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<book xmlns="http://docbook.org/ns/docbook"
-    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
     <info>
         <title>Salt</title>
         <subtitle>Model Guide</subtitle>
@@ -17,7 +16,8 @@
                 <orgname xml:id="org1">INRIA</orgname>
             </author>
             <author>
-                <orgname xml:id="org2">SFB 632 Information Structure / D1 Linguistic Database</orgname>
+                <orgname xml:id="org2">SFB 632 Information Structure / D1 Linguistic
+                    Database</orgname>
             </author>
             <author>
                 <orgname xml:id="org3">Humboldt-Universität zu Berlin</orgname>
@@ -28,33 +28,301 @@
         </authorgroup>
         <copyright>
             <year>2012</year>
-            <holder><xref linkend="org1"/>, <xref linkend="org2"/>, <xref linkend="org3"/>, <xref linkend="org1"/>,<xref linkend="org4"/>, All rights reserved.</holder>
+            <holder><xref linkend="org1"/>, <xref linkend="org2"/>, <xref linkend="org3"/>, <xref
+                    linkend="org1"/>,<xref linkend="org4"/>, All rights reserved.</holder>
         </copyright>
         <releaseinfo>Version ${project.version}</releaseinfo>
     </info>
     <preface>
         <title>Foreword</title>
-        <para></para>
+        <para/>
     </preface>
     <chapter>
-        <title>salt-saltCommon</title>
+        <title>Roadmap</title>
         <para>
+            <itemizedlist>
+                <listitem>
+                    <para>What is Salt</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>What is the aim of Salt</para>
+                        </listitem>
+                        <listitem>
+                            <para>Salt is therefore a graph, what does a graph mean (soft
+                                explanaition)</para>
+                        </listitem>
+                        <listitem>
+                            <para>Graph definition (theoretical)</para>
+                        </listitem>
+                        <listitem>
+                            <para>EMF model of graph</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Components of Salt</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>corpus-structure</para>
+                        </listitem>
+                        <listitem>
+                            <para>document-structure</para>
+                        </listitem>
+                        <listitem>
+                            <para>primary text</para>
+                        </listitem>
+                        <listitem>
+                            <para>token</para>
+                        </listitem>
+                        <listitem>
+                            <para>annotation</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>motivate via pos and lemma example</para>
+                                </listitem>
+                                <listitem>
+                                    <para>it is a label: annotation is namespace, name, value</para>
+                                </listitem>
+                                <listitem>
+                                    <para>different kinds of annotations: SAnnotation,
+                                        SMetaAnnotation and SProcessAnnotation</para>
+                                </listitem>
+                                <listitem>
+                                    <para>what are they good for, explain and show sample for
+                                        each</para>
+                                </listitem>
+                                <listitem>
+                                    <para>data types in annotations</para>
+                                </listitem>
+                                <listitem>
+                                    <para>we also have features (SFeature)</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>collections of tokens</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>In a graph world, everything has to be graph conform, even
+                                        a collection, therfore it is modeled as a separate node
+                                        SSPan, and needs a relation, to the nodes being contained
+                                        SSpaningRelation</para>
+                                </listitem>
+                                <listitem>
+                                    <para>SSpan and SSPaningRelation are a unit, SSPaningRelation is
+                                        only between SSPan and Stoken</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>hierarchies</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>SStructure and SDominanceRelation are a unit,
+                                        SDominancerel is only between SSTructure and X</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>loose relation</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>for instance coreference, what else???</para>
+                                </listitem>
+                                <listitem>
+                                    <para>SPointingRelation</para>
+                                </listitem>
+                                <listitem>
+                                    <para>connects the entire text, also across borders like
+                                        sentence borders</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>multiple texts</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>motivate with parallel text</para>
+                                </listitem>
+                                <listitem>
+                                    <para>alignements between texts via SPointingRelation</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>timeline</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>motivate with dialogue data</para>
+                                </listitem>
+                                <listitem>
+                                    <para>timeline discussion</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                        <listitem>
+                            <para>ordering the data</para>
+                            <itemizedlist>
+                                <listitem>
+                                    <para>ordering can be understood and realized in several ways or
+                                        dimensions. What in one case can be a good order, can be
+                                        very wrong in another case. To respect this, Salt provides
+                                        different meanings of order. In the following we will go
+                                        step by step, throuh their different levels.</para>
+                                </listitem>
+                                <listitem>
+                                    <para>general order via list behaviour, where is the problem -->
+                                        list is sorted by order of inserts :-( can be
+                                        rearanged</para>
+                                </listitem>
+                                <listitem>
+                                    <para>order is implicit by order in text --> what is with
+                                        parallel data --> order by timeline</para>
+                                </listitem>
+                                <listitem>
+                                    <para>what is with tokens at same time, or for instance
+                                        subtokenization (see segmentation)</para>
+                                </listitem>
+                                <listitem>
+                                    <para>therefore we have SOrderRelation</para>
+                                </listitem>
+                            </itemizedlist>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Identifying  an object via SName, SId and SElementId</para>
+                </listitem>
+                <listitem>
+                    <para>Special semantics, tell about SaltSemantics and ISOCat</para>
+                </listitem>
+                <listitem>
+                    <para>Insides of Salt</para>
+                    <para>Only for the ones wants to understand the whole stuff, or for
+                        troubleshooting</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>SRelation and SNode as fathers of the rest</para>
+                        </listitem>
+                        <listitem><para>usage of SFeature in detail</para></listitem>
+                        <listitem>
+                            <para>3 Faltigkeit of Salt: salt-graph, salt-core and salt-common</para>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+                <listitem>
+                    <para>Implementors guide (same as Quick users guide)</para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Code is generated by EMF, everything starts with and e for emf, or
+                                with an S for salt</para>
+                        </listitem>
+                        <listitem>
+                            <para>Factory pattern</para>
+                        </listitem>
+                        <listitem>
+                            <para/>
+                        </listitem>
+                    </itemizedlist>
+                </listitem>
+
+            </itemizedlist>
         </para>
+    </chapter>
+    <chapter>
+        <title>Components</title>
+        <sect1>
+            <title>Corpus-strucure</title>
+            <para> Generally spoken, a copus structure structures an entire corpus into smaller
+                logical units. Such units are a corpus, a subcorpus and a document. Often the
+                structurization goes along the logical structure of the real data. Imagine your
+                corpus represents a collection of writings of an author, than you may have a
+                subcorpus per writing, which itself contains subcorpora representing the chapters or
+                articals, which again might be divided into divisions or paragraphs etc.. Dividing
+                data has two main benefits, a logical and second a practical. From a logical point
+                of view, the corpus structure keeps the hierarchical relation of units as given in
+                real world item. And from a practical point of view, it keeps things simple. For
+                instance several human annotators can work on several units in parallel. Further
+                this will also speed up automatical processing, since data easier fit into main
+                memory and indexes on them can be kept small. </para>
+            <sect2>
+                <title>Corpus</title>
+                <para>As mentioned above, a corpus is an element to organize your data. Similar to a
+                    folder in a filesystem, it groups the underlying parts (files and other
+                    folders). Abstractly spoken, a corpus is a selfcontaining structure, which
+                    contains documents or further corpora. When a corpus containes another corpus we
+                    call the container corpus the super corpus and the contained corpus the
+                    sub-corpus. A corpus which is not contained by another corpus is called a root
+                    corpus. Each corpus can contain between zero and and many other corpora. With
+                    this mechanism we now can represent a hirarchie as mentioned above. A corpus
+                    representing a collection of writings can contain further corpora, each
+                    representing a book. A book corpus itself can contain corpora representing a
+                    chapter, and so on. In Salt a corpus is represented by a SCorpus element. Two
+                    SCorpus objects can be set into supet-corpus sub-corpus relation via connecting
+                    them with a SCorpusRelation object. </para>
+            </sect2>
+            <sect2>
+                <title>Document</title>
+                <para>A document is a logical partition wich represents the end point of the
+                    hirarchie built with the corpus structure. Partitioning data means, that no
+                    relations between data of two partitions are allowed. More concretly spoken, a
+                    document, normally contains a single text and all annotations corresponding to
+                    it, but no interlinks between two texts or their annotations. A text can be a
+                    paragraph, a chapter, an article or even an entire book. But a text can also be
+                    understood as the logical interpretation of it and be realized in several
+                    languages (called parallel text), or in case of historical texts in several
+                    normalized or diplomatic surrogates. These texts are often interlinked between
+                    same tokens (here same means the same meaning in for intance different
+                    languages). In that case all surrogates of a text MUST belong to the same
+                    partition (document). Next to a logical partitioning, creating such documents,
+                    have a high influence on processing speed and main memory. Therefore we highly
+                    recommend to keep documents as small as possible (as long as allowed by the
+                    linguistic logic behind). A document in salt is represented by the type
+                    SDocument and can be grouped to a corpus or subcorpus by attaching it to a
+                    SCorpus. To mark a SDocument as being part of a SCorpus, just connect them via a
+                    SDocCorpRelation.</para>
+            </sect2>
+            <sect2>
+                <title>???</title>
+                <para> A corpus structure (SCorpusStructure in Salt) consisting of the nodes SCorpus
+                    and Sdocument and the relations SCorpusRelation and ScorpDocRel and realizes a
+                    directed tree structure. <itemizedlist>
+                        <listitem>
+                            <para>show emf diag</para>
+                        </listitem>
+                        <listitem>
+                            <para>show sample of structure in salt</para>
+                        </listitem>
+                        <listitem>
+                            <para>As every node and every relation in salt, even those can be
+                                labeled by linguistic annotations and meta annotations.</para>
+                        </listitem>
+                        <listitem>
+                            <para>show emf diag of snode, srel, smetaanno, sanno, sprocanno,
+                                scorprel, scorpdocrel</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </sect2>
+        </sect1>
         <sect1>
             <title>time management</title>
-            <para>
-                short introduction to TimelineDS, than motivation
-                <itemizedlist>
-                    <listitem><para>when dealing with corpora, we often need a time</para></listitem>
+            <note>
+                <para>compare that with
+                    https://korpling.german.hu-berlin.de/p/projects/saltnpepperinternal/wiki/Salt_timeDiscussion</para>
+            </note>
+            <para> short introduction to TimelineDS, than motivation <itemizedlist>
+                    <listitem>
+                        <para>when dealing with corpora, we often need a time</para>
+                    </listitem>
                     <listitem>
                         <para>imagine a text like "Is this example ..." and a tokeinzation like
                             "Is", "this", "example"..., even in that case we have an implicit
                             timeline. the implicit timeline is given in first the order of the signs
                             in the primary text like for "Is", "I" comes before "s", in space and
                             even in time, second in the tokenization, like "Is" comes before "this";
-                            we now can say, that token  "Is" occurs between point of time 1 and
-                            point of time 2, whereas "this" occurs between point of time 2 and
-                            3.</para>
+                            we now can say, that token "Is" occurs between point of time 1 and point
+                            of time 2, whereas "this" occurs between point of time 2 and 3.</para>
                     </listitem>
                     <listitem>
                         <para>a timeline gets important, in case of your corpus contains two primary
@@ -63,7 +331,7 @@
                             information which word was said after which </para>
                     </listitem>
                     <listitem>
-                        <para>especially with multimedia corpora,  it may sounds weird to have an
+                        <para>especially with multimedia corpora, it may sounds weird to have an
                             artificial timeline, since multimedia files already contains an own time
                             coding, but we need to deal with several times and timelines,</para>
                     </listitem>
