@@ -96,7 +96,8 @@ public class SDocumentGraphDOTWriter implements TraversalObject
 		
 		File outputFile= new File(this.getOutputURI().toFileString());
 		File outputDir= null;
-		if (!outputFile.isDirectory())
+		// check if uri is a file uri or a directory uri
+		if (outputFile.getName().contains("."))
 			outputDir= outputFile.getParentFile();
 		else outputDir= outputFile;
 		outputDir.mkdirs();
