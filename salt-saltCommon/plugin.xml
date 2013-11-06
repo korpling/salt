@@ -18,6 +18,22 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated saltCommon -->
+      <package
+            uri="sCorpusStructure"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage"
+            genModel="src/main/resources/model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated saltCommon -->
+      <package
+            uri="sDocumentStructure"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage"
+            genModel="src/main/resources/model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="corpusStructure"
             class="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.CorpusStructurePackage"
