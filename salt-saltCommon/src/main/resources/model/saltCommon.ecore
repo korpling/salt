@@ -266,6 +266,15 @@
         <eParameters name="texts" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         <eParameters name="insertSpace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
       </eOperations>
+      <eOperations name="createSRelation" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SRelation">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Creates a {@link SRelation} object, and sets its sSource and sTarget to the passed ones. The created {@link SRelation} is of the passed type. If annotations are not empty, even {@link SAnnotation} objects will be created. The syntax to pass annotations is:&#xA;&lt;br/> &#xA;(SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+ &#xA;&lt;br/>&#xA;where SNS is the namespace of the annotation, SNAME is its name and SVALUE is the value of the annotation.&#xA;&#xA;"/>
+        </eAnnotations>
+        <eParameters name="sSource" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+        <eParameters name="sTarget" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+        <eParameters name="sRelationType" eType="#//sDocumentStructure/STYPE_NAME"/>
+        <eParameters name="sAnnotations" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
           eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTextualDSs" upperBound="-1"

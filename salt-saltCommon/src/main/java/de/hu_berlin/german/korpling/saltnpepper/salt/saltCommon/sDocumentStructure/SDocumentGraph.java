@@ -666,6 +666,23 @@ public interface SDocumentGraph extends SGraph {
 	EList<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, EList<String> texts, Boolean insertSpace);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Creates a {@link SRelation} object, and sets its sSource and sTarget to the passed ones. The created {@link SRelation} is of the passed type. If annotations are not empty, even {@link SAnnotation} objects will be created. The syntax to pass annotations is:
+	 * <br/> 
+	 * (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+ 
+	 * <br/>
+	 * where SNS is the namespace of the annotation, SNAME is its name and SVALUE is the value of the annotation.
+	 * 
+	 * 
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	SRelation createSRelation(SNode sSource, SNode sTarget, STYPE_NAME sRelationType, String sAnnotations);
+
+	/**
 	 * Sets the SName of the SDocumentGraphImpl, but the parameter newSName is just a dummy. The SName of the corresponding SDocument plus "_graph" will be the SName.
 	 * @param newSName this value will be ignored
 	 */

@@ -1246,6 +1246,12 @@ public class SDocumentStructurePackageImpl extends EPackageImpl implements SDocu
 		addEParameter(op, ecorePackage.getEString(), "texts", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBooleanObject(), "insertSpace", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(sDocumentGraphEClass, theSaltCorePackage.getSRelation(), "createSRelation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getSNode(), "sSource", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theSaltCorePackage.getSNode(), "sTarget", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getSTYPE_NAME(), "sRelationType", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "sAnnotations", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(sTextualDSEClass, STextualDS.class, "STextualDS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSTextualDS_SText(), ecorePackage.getEString(), "sText", null, 0, 1, STextualDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSTextualDS_SDocumentGraph(), this.getSDocumentGraph(), this.getSDocumentGraph_STextualDSs(), "sDocumentGraph", null, 0, 1, STextualDS.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);

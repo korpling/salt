@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl;
 
 import com.google.common.collect.ImmutableList;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.ComplexIndex;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index;
@@ -71,9 +73,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
+
 import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.DelegatingEcoreEList;
@@ -851,7 +857,47 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
        return(sTokens); 
     } 
 	
-	
+	/**
+	 * {@inheritDoc SDocumentGraph#createSRelation(SNode, SNode, STYPE_NAME, String)}}
+	 */
+	public SRelation createSRelation(SNode sSource, SNode sTarget, STYPE_NAME sRelationType, String sAnnotations) {
+		if (sSource== null)
+			throw new SaltEmptyParameterException("Cannot create an Srelation, because the passed source node is null.");
+		if (sTarget== null)
+			throw new SaltEmptyParameterException("Cannot create an Srelation, because the passed target node is null.");
+		if (sRelationType== null)
+			throw new SaltEmptyParameterException("Cannot create an Srelation, because the type of relation is null.");
+		
+		SRelation sRel= null;
+		
+		switch (sRelationType) {
+		case SPOINTING_RELATION:
+			sRel= SaltFactory.eINSTANCE.createSPointingRelation();
+			break;
+		case SSPANNING_RELATION:
+			sRel= SaltFactory.eINSTANCE.createSSpanningRelation();
+			break;
+		case SDOMINANCE_RELATION:
+			sRel= SaltFactory.eINSTANCE.createSDominanceRelation();
+			break;
+		case SORDER_RELATION:
+			sRel= SaltFactory.eINSTANCE.createSOrderRelation();
+			break;
+		default:
+			throw new SaltImproperSTypeException("Cannot create an SRelation, because the passed type '"+sRelationType+"' is not supported for this method.");
+		}
+		try{
+			sRel.setSource(sSource);
+			sRel.setSTarget(sTarget);
+		}catch(Exception e)
+		{
+			throw new SaltImproperSTypeException("Cannot create an SRelation for the passed type '"+sRelationType+"', because of a nested exception. It might be, that the passed type is not compatible to the types of passed sSource '"+sSource.getClass()+"' or sTarget node '"+sTarget.getClass()+"'.");
+		}
+		addSRelation(sRel);
+		sRel.createSAnnotations(sAnnotations);
+		return(sRel);
+	}
+
 	/**
 	 * Connects the given {@link SToken} object to the given {@link SSequentialDS} object. If the given 
 	 * {@link SToken} object is not already add to the graph, it will be added.

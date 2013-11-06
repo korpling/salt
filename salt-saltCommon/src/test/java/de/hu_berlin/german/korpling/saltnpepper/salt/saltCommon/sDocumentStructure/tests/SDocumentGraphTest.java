@@ -24,15 +24,12 @@ import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.ImmutableList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltElementNotContainedInGraphException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.SDocumentDataEnricher;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.Salt2DOT;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
@@ -52,6 +49,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer.Tokenizer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
@@ -107,6 +105,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createTokenizer() <em>Create Tokenizer</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokenAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, java.lang.String, java.lang.Boolean) <em>Insert SToken At</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokensAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, org.eclipse.emf.common.util.EList, java.lang.Boolean) <em>Insert STokens At</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSRelation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME, java.lang.String) <em>Create SRelation</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -1993,5 +1992,51 @@ public class SDocumentGraphTest extends TestCase {
 		// second is
 		assertEquals(new Integer(29), getFixture().getSTextualRelations().get(1).getSStart());
 		assertEquals(new Integer(31), getFixture().getSTextualRelations().get(1).getSEnd());
+	}
+
+	/**
+	 * Creates some {@link SNode} objects and checks if connecting them
+	 * with the method {@link SDocumentGraph#createSRelation(SNode, SNode, STYPE_NAME, String)}
+	 * works correctly. 
+	 */
+	public void testCreateSRelation__SNode_SNode_STYPE_NAME_String() 
+	{
+		STextualDS sText= getFixture().createSTextualDS("This is a sample text");
+		SToken tok1= getFixture().createSToken(sText, 0, 4);
+		SToken tok2= getFixture().createSToken(sText, 5, 7);
+		SSpan sSpan= SaltFactory.eINSTANCE.createSSpan();
+		getFixture().addSNode(sSpan);
+		SStructure sStruct= SaltFactory.eINSTANCE.createSStructure();
+		getFixture().addSNode(sStruct);
+		SRelation sRel= null;
+		
+		assertEquals(new Long(2), getFixture().getNumOfEdges());
+		
+		sRel= getFixture().createSRelation(tok1, tok2, STYPE_NAME.SPOINTING_RELATION, "myNS::coref=anaphor;anotherNS::foo=bar");
+		assertEquals(new Long(3), getFixture().getNumOfEdges());
+		assertEquals(tok1, sRel.getSSource());
+		assertEquals(tok2, sRel.getSTarget());
+		assertEquals(2, sRel.getSAnnotations().size());
+		SAnnotation sAnno= sRel.getSAnnotations().get(0);
+		assertEquals("myNS", sAnno.getSNS());
+		assertEquals("coref", sAnno.getSName());
+		assertEquals("anaphor", sAnno.getSValue());
+		sAnno= sRel.getSAnnotations().get(1);
+		assertEquals("anotherNS", sAnno.getSNS());
+		assertEquals("foo", sAnno.getSName());
+		assertEquals("bar", sAnno.getSValue());
+		
+		sRel= getFixture().createSRelation(sSpan, tok2, STYPE_NAME.SSPANNING_RELATION, null);
+		assertEquals(new Long(4), getFixture().getNumOfEdges());
+		assertEquals(sSpan, sRel.getSSource());
+		assertEquals(tok2, sRel.getSTarget());
+		assertEquals(0, sRel.getSAnnotations().size());
+		
+		sRel= getFixture().createSRelation(sStruct, tok2, STYPE_NAME.SDOMINANCE_RELATION, null);
+		assertEquals(new Long(5), getFixture().getNumOfEdges());
+		assertEquals(sStruct, sRel.getSSource());
+		assertEquals(tok2, sRel.getSTarget());
+		assertEquals(0, sRel.getSAnnotations().size());
+		
 	}
 } //SDocumentGraphTest
