@@ -1888,7 +1888,7 @@ public class SDocumentGraphTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokenAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, java.lang.String)
 	 */
-	public void testInsertSTokenAt__STextualDS_Integer_String() {
+	public void testInsertSTokenAt__STextualDS_Integer_String_Boolean() {
 		EList<String> origText= new BasicEList<String>();
 		origText.add("This");
 		origText.add("is");
@@ -1939,7 +1939,7 @@ public class SDocumentGraphTest extends TestCase {
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokensAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, org.eclipse.emf.common.util.EList)
 	 */
-	public void testInsertSTokensAt__STextualDS_Integer_EList() {
+	public void testInsertSTokensAt__STextualDS_Integer_EList_Boolean() {
 		EList<String> origText= new BasicEList<String>();
 		origText.add("This");
 		origText.add("is");
