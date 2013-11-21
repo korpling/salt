@@ -26,7 +26,6 @@ import java.util.Vector;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.xml.namespace.SpaceType;
 import org.xml.sax.SAXException;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
@@ -36,6 +35,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
@@ -43,10 +43,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SLemmaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;
 
@@ -148,6 +149,10 @@ public class SaltSample
 	 * The primary text, which is used for the samples.
 	 */
 	public static String PRIMARY_TEXT_EN= "Is this example more complicated than it appears to be?";
+	/** Primary text of speaker1**/
+	public static String PRIMARY_TEXT_EN_SPK1=PRIMARY_TEXT_EN;
+	/** Primary text of speaker2**/
+	public static String PRIMARY_TEXT_EN_SPK2="Oh yes!";
 	/**
 	 * The primary text, which is used for the samples.
 	 */
@@ -160,6 +165,62 @@ public class SaltSample
 	public static final String LANG_EN="en";
 	/** iso  639-1 language code for german**/
 	public static final String LANG_DE="de";
+	
+	/**
+	 * Creates a {@link SDocumentGraph} containing to texts of two different speakers, who are aligned via 
+	 * the {@link STimeline} related to the {@link SToken} objects. The texts are {@value #PRIMARY_TEXT_EN_SPK1}
+	 * and {@value #PRIMARY_TEXT_EN_SPK2}, which are tokeized by words. The words 'to' and 'Oh' have been said
+	 * simultaneously and are overlapping via the timeline.  
+	 * @param sDocument
+	 */
+	public static void createDialogue(SDocument sDocument)
+	{
+		sDocument.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
+		sDocument.getSDocumentGraph().createSTextualDS(PRIMARY_TEXT_EN_SPK1);
+		createTokens(sDocument);
+		STextualDS sText1= sDocument.getSDocumentGraph().getSTextualDSs().get(0);
+		sDocument.getSDocumentGraph().createSTimeline();
+		
+		System.out.println("pots: "+sDocument.getSDocumentGraph().getSTimeline().getSPointsOfTime());
+		//add SOrderRelations for speaker 1
+		SToken lastSTok= null;
+		for (SToken sTok: sDocument.getSDocumentGraph().getSTokens())
+		{
+			if (lastSTok!= null)
+			{
+				SOrderRelation sOrd= SaltFactory.eINSTANCE.createSOrderRelation();
+				sOrd.setSSource(lastSTok);
+				sOrd.setSTarget(sTok);
+				sDocument.getSDocumentGraph().addSRelation(sOrd);
+			}
+			lastSTok= sTok;
+		}
+		
+		//create text of speaker2
+		STextualDS sText2= sDocument.getSDocumentGraph().createSTextualDS(PRIMARY_TEXT_EN_SPK2);
+		SToken spk2_tok1= createToken(0, 2, sText2, sDocument, null);
+		STimelineRelation sTimeRel1= SaltFactory.eINSTANCE.createSTimelineRelation();
+		sTimeRel1.setSSource(spk2_tok1);
+		sTimeRel1.setSTarget(sDocument.getSDocumentGraph().getSTimeline());
+		sTimeRel1.setSStart(8);
+		sTimeRel1.setSEnd(9);
+		sDocument.getSDocumentGraph().addSRelation(sTimeRel1);
+		
+		SToken spk2_tok2= createToken(3, 6, sText2, sDocument, null);
+		STimelineRelation sTimeRel2= SaltFactory.eINSTANCE.createSTimelineRelation();
+		sTimeRel2.setSSource(spk2_tok2);
+		sTimeRel2.setSTarget(sDocument.getSDocumentGraph().getSTimeline());
+		sTimeRel2.setSStart(9);
+		sTimeRel2.setSEnd(10);
+		sDocument.getSDocumentGraph().addSRelation(sTimeRel2);
+		
+		//add SOrderRelations for speaker 1
+		SOrderRelation sOrd= SaltFactory.eINSTANCE.createSOrderRelation();
+		sOrd.setSSource(spk2_tok1);
+		sOrd.setSTarget(spk2_tok2);
+		sDocument.getSDocumentGraph().addSRelation(sOrd);
+	}
+	
 	/**
 	 * Creates a {@link STextualDS} object containing the primary text {@link SaltSample#PRIMARY_TEXT_EN} and adds the object
 	 * to the {@link SDocumentGraph} being contained by the given {@link SDocument} object.
@@ -301,7 +362,8 @@ public class SaltSample
 	public static SToken createToken(int start, int end, STextualDS sTextualDS, SDocument sDocument, SLayer layer){
 		SToken sToken= SaltFactory.eINSTANCE.createSToken();
 		sDocument.getSDocumentGraph().addSNode(sToken);
-		layer.getSNodes().add(sToken);
+		if (layer != null)
+			layer.getSNodes().add(sToken);
 		STextualRelation sTextRel= SaltFactory.eINSTANCE.createSTextualRelation();
 		sTextRel.setSToken(sToken);
 		sTextRel.setSTextualDS(sTextualDS);
