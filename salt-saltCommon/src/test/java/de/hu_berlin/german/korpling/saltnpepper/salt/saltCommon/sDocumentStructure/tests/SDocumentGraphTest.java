@@ -106,6 +106,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokenAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, java.lang.String, java.lang.Boolean) <em>Insert SToken At</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokensAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, org.eclipse.emf.common.util.EList, java.lang.Boolean) <em>Insert STokens At</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSRelation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME, java.lang.String) <em>Create SRelation</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, org.eclipse.emf.common.util.EList) <em>Get Overlapped STokens</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -2038,5 +2039,55 @@ public class SDocumentGraphTest extends TestCase {
 		assertEquals(tok2, sRel.getSTarget());
 		assertEquals(0, sRel.getSAnnotations().size());
 		
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME) <em>Get Overlapped STokens</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME)
+	 */
+	public void testGetOverlappedSTokens__SNode_STYPE_NAME() {
+		
+		STextualDS sText= getFixture().createSTextualDS("This is a sample text");
+		SToken tok1= getFixture().createSToken(sText, 0, 4);
+		SToken tok2= getFixture().createSToken(sText, 5, 7);
+		SToken tok3= getFixture().createSToken(sText, 8, 9);
+		SToken tok4= getFixture().createSToken(sText, 10, 15);
+		SToken tok5= getFixture().createSToken(sText, 16, 20);
+		EList<SToken> tokenList = new BasicEList<SToken>();
+		tokenList.add(tok1);
+		tokenList.add(tok2);
+		tokenList.add(tok3);
+		SSpan sSpan= fixture.createSSpan(tokenList);
+		
+		EList<SStructuredNode> nodeList = new BasicEList<SStructuredNode>();
+		nodeList.add(sSpan);
+		nodeList.add(tok4);
+		nodeList.add(tok5);
+		SStructure sStructure = fixture.createSStructure(nodeList);
+		
+		// test whether the span overlaps tok1, tok2 and tok3
+		EList<STYPE_NAME> typeList = new BasicEList<STYPE_NAME>();
+		typeList.add(STYPE_NAME.SSPANNING_RELATION);
+		EList<SToken> overlappedTokenList1 = fixture.getOverlappedSTokens(sSpan, typeList);
+		assertNotNull(overlappedTokenList1);
+		assertTrue(overlappedTokenList1.containsAll(tokenList));
+		
+		EList<SToken> allTokenList = new BasicEList<SToken>();
+		allTokenList.add(tok1);
+		allTokenList.add(tok2);
+		allTokenList.add(tok3);
+		allTokenList.add(tok4);
+		allTokenList.add(tok5);
+		typeList.add(STYPE_NAME.SDOMINANCE_RELATION);
+		EList<SToken> overlappedTokenList2 = fixture.getOverlappedSTokens(sStructure, typeList);
+		assertNotNull(overlappedTokenList2);
+		assertTrue(overlappedTokenList2.containsAll(allTokenList));
+		
+		// test whether the structure overlaps tok1 to tok5
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		//fail();
 	}
 } //SDocumentGraphTest

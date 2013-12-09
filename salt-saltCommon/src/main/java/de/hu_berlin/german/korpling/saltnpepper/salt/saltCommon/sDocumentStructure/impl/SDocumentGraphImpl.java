@@ -899,6 +899,24 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/**
+	 * This method searches for every {@link SToken} which is (transitively) overlapped
+	 * by the given {@link SNode} by {@link SRelation} types which have one of the types
+	 * given in the overlappingRelationTypes list.
+	 * 
+	 * @param overlappingNode the node for which the overlapped {@link SToken} objects are searched
+	 * @param overlappingRelationTypes the list of {@link STYPE_NAME}s which are used for traversion.
+	 * 	If, for example, all {@link SToken} are searched which are overlapped by a {@link SStructure},
+	 *  the {@link STYPE_NAME.SDOMINANCE_RELATION} and {@link STYPE_NAME.SPANNING_RELATION} should be contained in this
+	 *  parameter. 
+	 * @return a list of {@link SToken} which are overlapped by the overlappingNode. 
+	 */
+	public EList<SToken> getOverlappedSTokens(SNode overlappingNode, EList<STYPE_NAME> overlappingRelationTypes) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
 	 * Connects the given {@link SToken} object to the given {@link SSequentialDS} object. If the given 
 	 * {@link SToken} object is not already add to the graph, it will be added.
 	 * @param sToken token to connect to the {@link SSequentialDS} object

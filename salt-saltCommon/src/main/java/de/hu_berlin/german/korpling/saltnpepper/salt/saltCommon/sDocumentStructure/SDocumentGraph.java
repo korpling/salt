@@ -683,6 +683,14 @@ public interface SDocumentGraph extends SGraph {
 	SRelation createSRelation(SNode sSource, SNode sTarget, STYPE_NAME sRelationType, String sAnnotations);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model overlappingRelationTypesMany="true"
+	 * @generated
+	 */
+	EList<SToken> getOverlappedSTokens(SNode overlappingNode, EList<STYPE_NAME> overlappingRelationTypes);
+
+	/**
 	 * Sets the SName of the SDocumentGraphImpl, but the parameter newSName is just a dummy. The SName of the corresponding SDocument plus "_graph" will be the SName.
 	 * @param newSName this value will be ignored
 	 */

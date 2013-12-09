@@ -275,6 +275,10 @@
         <eParameters name="sRelationType" eType="#//sDocumentStructure/STYPE_NAME"/>
         <eParameters name="sAnnotations" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
+      <eOperations name="getOverlappedSTokens" upperBound="-1" eType="#//sDocumentStructure/SToken">
+        <eParameters name="overlappingNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+        <eParameters name="overlappingRelationTypes" upperBound="-1" eType="#//sDocumentStructure/STYPE_NAME"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
           eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTextualDSs" upperBound="-1"
