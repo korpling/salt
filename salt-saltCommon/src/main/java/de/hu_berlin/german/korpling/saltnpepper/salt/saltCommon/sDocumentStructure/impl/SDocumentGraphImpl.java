@@ -911,9 +911,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * @return a list of {@link SToken} which are overlapped by the overlappingNode. 
 	 */
 	public EList<SToken> getOverlappedSTokens(SNode overlappingNode, EList<STYPE_NAME> overlappingRelationTypes) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+		sDatasourceAccessor.setSDocumentGraph(this);
+		return(sDatasourceAccessor.getOverlappedSTokens(overlappingNode, overlappingRelationTypes));
 	}
 
 	/**

@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules;
 
 import com.google.common.collect.ImmutableList;
+
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -28,9 +29,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
@@ -42,6 +45,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -326,10 +331,11 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 	/**
 	 * types of traversions, used by the several methods, used as id for traversion
 	 */
-	private enum TRAVERSION_TYPE {OVERLAPPED_DS_SEQUENCES};
+	private enum TRAVERSION_TYPE {OVERLAPPED_DS_SEQUENCES,OVERLAPPED_STOKEN};
 	
 	/**
-	 * in case of traversion type is {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES}, here are the relation types, which shall
+	 * in case of traversion type is {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES} or
+	 * {@link TRAVERSION_TYPE#OVERLAPPED_STOKEN}, here are the relation types, which shall
 	 * be used for traversion 
 	 */
 	private EList<STYPE_NAME> relationTypes2Traverse= null;
@@ -338,6 +344,11 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 	 * in case of traversion type is {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES}, the results are stored here
 	 */
 	private EList<SDataSourceSequence> sDataSourceSequences= null;
+	
+	/**
+	 * in case of traversion type is {@link TRAVERSION_TYPE#OVERLAPPED_STOKEN}, the results are stored here
+	 */
+	private HashSet<SToken> overlappedSToken = null;
 	
 	/**
 	 * in case of traversion type is {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES}, stores the last seen data source
@@ -379,6 +390,16 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 				}//sequence haven't been visit -> create it
 			}
 		}//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
+		else {
+			if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))){
+				// if a SToken was reached
+				if (currSNode instanceof SToken){
+					System.out.println("Reached Token " + currSNode.getSId());
+					// add it to the overlapped token list
+					this.overlappedSToken.add(((SToken)currSNode));
+				}
+			}
+		}
 	}
 
 	/**
@@ -428,7 +449,11 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 				}
 			}//check if current start and end value is smaller or bigger, than reset
 		}//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
-		
+		else {
+			if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))){
+				// do nothing?
+			}
+		}
 	}
 
 	@Override
@@ -460,7 +485,56 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 			else retVal= true;
 				
 		}//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
+		else {
+			if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))){
+				// there is a relation
+				if (sRelation!= null)
+				{
+					
+					// the STYPE has to be either SSpanningRelation or SDominanceRelation
+					if (this.relationTypes2Traverse.contains(STYPE_NAME.SSPANNING_RELATION) 
+						&& sRelation instanceof SSpanningRelation)
+					{
+						retVal= true;
+					}
+					if (this.relationTypes2Traverse.contains(STYPE_NAME.SDOMINANCE_RELATION) 
+							&& sRelation instanceof SDominanceRelation)
+					{
+						retVal= true;
+					}
+				} else 
+				{
+					retVal= true;
+				}
+			}
+		}
 		return(retVal);
+	}
+
+	/**
+	 * This method searches for every {@link SToken} which is (transitively) overlapped
+	 * by the given {@link SNode} by {@link SRelation} types which have one of the types
+	 * given in the overlappingRelationTypes list.
+	 * 
+	 * @param overlappingNode the node for which the overlapped {@link SToken} objects are searched
+	 * @param overlappingRelationTypes the list of {@link STYPE_NAME}s which are used for traversion.
+	 * 	If, for example, all {@link SToken} are searched which are overlapped by a {@link SStructure},
+	 *  the {@link STYPE_NAME.SDOMINANCE_RELATION} and {@link STYPE_NAME.SPANNING_RELATION} should be contained in this
+	 *  parameter. 
+	 * @return a list of {@link SToken} which are overlapped by the overlappingNode. 
+	 */
+	public EList<SToken> getOverlappedSTokens(SNode overlappingNode,
+			EList<STYPE_NAME> overlappingRelationTypes) {
+		System.out.println("Starting traversion");
+		// initialise the overlappedSToken EList
+		this.overlappedSToken = new HashSet<SToken>();
+		// initialise the relationTypes2Traverse EList
+		this.relationTypes2Traverse = overlappingRelationTypes;
+		EList<SNode> rootNodes = new BasicEList<SNode>();
+		rootNodes.add(overlappingNode);
+		this.getSDocumentGraph().traverse(rootNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAVERSION_TYPE.OVERLAPPED_STOKEN.toString(), this);
+		
+		return(new BasicEList<SToken>(this.overlappedSToken));
 	}
 	
 }
