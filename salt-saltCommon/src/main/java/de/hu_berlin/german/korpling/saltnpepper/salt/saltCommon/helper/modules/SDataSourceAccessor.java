@@ -23,6 +23,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
@@ -490,17 +491,29 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 				// there is a relation
 				if (sRelation!= null)
 				{
-					
-					// the STYPE has to be either SSpanningRelation or SDominanceRelation
-					if (this.relationTypes2Traverse.contains(STYPE_NAME.SSPANNING_RELATION) 
-						&& sRelation instanceof SSpanningRelation)
-					{
-						retVal= true;
-					}
-					if (this.relationTypes2Traverse.contains(STYPE_NAME.SDOMINANCE_RELATION) 
-							&& sRelation instanceof SDominanceRelation)
-					{
-						retVal= true;
+					// get the typename for the sRelation class
+					STYPE_NAME typeName = SaltFactory.eINSTANCE.convertClazzToSTypeName(sRelation.getClass());
+					if (typeName != null){
+						// found matching SType for an implemented interface
+						if (this.relationTypes2Traverse.contains(typeName)){
+							return(true);
+						}
+					} 
+					// get the implemented interfaces of the SRelation
+					Class<?>[] iFaces = sRelation.getClass().getInterfaces();
+					Class<? extends EObject> clazz = null;
+					if (iFaces.length > 0){
+						for (int i = 0 ; i < iFaces.length; i++){
+							clazz = (Class<? extends EObject>)iFaces[0];
+							typeName = SaltFactory.eINSTANCE.convertClazzToSTypeName(clazz);
+							if (typeName != null){
+								// found matching SType for an implemented interface
+								if (this.relationTypes2Traverse.contains(typeName)){
+									return(true);
+								}
+							} 
+						}
+						
 					}
 				} else 
 				{

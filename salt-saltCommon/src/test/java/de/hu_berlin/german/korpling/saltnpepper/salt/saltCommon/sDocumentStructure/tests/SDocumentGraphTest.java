@@ -2097,6 +2097,26 @@ public class SDocumentGraphTest extends TestCase {
 		assertTrue(overlappedTokenList1.containsAll(tokenList));
 		assertFalse(overlappedTokenList1.contains(tok4));
 		
+		System.out.println("Getting the tokens which are overlapped by the span by the SSpanningRelation and the SPointingRelation."); 
+		System.out.println("Those should be tok1,tok2,tok3 and tok4");
+		EList<STYPE_NAME> typeList2 = new BasicEList<STYPE_NAME>();
+		typeList2.add(STYPE_NAME.SSPANNING_RELATION);
+		typeList2.add(STYPE_NAME.SPOINTING_RELATION);
+		tokenList.add(tok4);
+		EList<SToken> overlappedTokenListWithPointing = fixture.getOverlappedSTokens(sSpan, typeList2);
+		assertNotNull(overlappedTokenListWithPointing);
+		System.out.println("TokenList contains:");
+		for (SToken token : tokenList){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		System.out.println("overlappedTokenListWithPointing contains:");
+		for (SToken token : overlappedTokenListWithPointing){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		assertTrue(overlappedTokenListWithPointing.containsAll(tokenList));
+		
 		EList<SToken> allTokenList = new BasicEList<SToken>();
 		allTokenList.add(tok1);
 		allTokenList.add(tok2);
