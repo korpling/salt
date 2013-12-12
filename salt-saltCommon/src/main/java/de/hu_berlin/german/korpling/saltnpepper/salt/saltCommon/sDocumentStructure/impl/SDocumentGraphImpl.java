@@ -802,7 +802,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public SToken insertSTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace) {
 		EList<String> texts= new BasicEList<String>();
 		texts.add(text);
-		return(insertSTokensAt(sTextualDS, posInText, texts, insertSpace).get(0));
+		return(insertSTokensAt(sTextualDS,posInText, texts, insertSpace).get(0));
 	}
 
 	/**
