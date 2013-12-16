@@ -18,16 +18,29 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.tests;
 
 import java.io.File;
+import java.util.HashSet;
+
+import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SSpanImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SStructureImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.STokenImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
-import junit.framework.TestCase;
 
 public class SaltFactoryImplTest extends TestCase 
 {
@@ -127,4 +140,24 @@ public class SaltFactoryImplTest extends TestCase
 		assertEquals("differences: "+ template_sDocument.differences(sDocument),template_sDocument, sDocument);
 	}
 	
+	/**
+	 * Tests if the conversion works correctly
+	 */
+	public void testConvertClazzToSTypeName(){
+		assertTrue(getFixture().convertClazzToSTypeName(SOrderRelation.class).contains(STYPE_NAME.SORDER_RELATION));
+		assertTrue(getFixture().convertClazzToSTypeName(SPointingRelation.class).contains(STYPE_NAME.SPOINTING_RELATION));
+		assertTrue(getFixture().convertClazzToSTypeName(SDominanceRelation.class).contains(STYPE_NAME.SDOMINANCE_RELATION));
+		assertTrue(getFixture().convertClazzToSTypeName(SSpanningRelation.class).contains(STYPE_NAME.SSPANNING_RELATION));
+		
+		assertFalse(getFixture().convertClazzToSTypeName(SSpanningRelation.class).contains(STYPE_NAME.SDOMINANCE_RELATION));
+		assertFalse(getFixture().convertClazzToSTypeName(SDominanceRelation.class).contains(STYPE_NAME.SSPANNING_RELATION));
+		
+		assertTrue(getFixture().convertClazzToSTypeName(SToken.class).contains(STYPE_NAME.STOKEN));
+		assertTrue(getFixture().convertClazzToSTypeName(SSpan.class).contains(STYPE_NAME.SSPAN));
+		assertTrue(getFixture().convertClazzToSTypeName(SStructure.class).contains(STYPE_NAME.SSTRUCTURE));
+		
+		assertTrue(getFixture().convertClazzToSTypeName(STokenImpl.class).contains(STYPE_NAME.STOKEN));
+		assertTrue(getFixture().convertClazzToSTypeName(SSpanImpl.class).contains(STYPE_NAME.SSPAN));
+		assertTrue(getFixture().convertClazzToSTypeName(SStructureImpl.class).contains(STYPE_NAME.SSTRUCTURE));
+	}
 }

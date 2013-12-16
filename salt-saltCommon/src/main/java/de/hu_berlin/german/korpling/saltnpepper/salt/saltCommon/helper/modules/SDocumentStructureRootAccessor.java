@@ -39,22 +39,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
 public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 {
-//========================= start: getting roots for given Relation type (Class) =========================
-	
-	/**
-	 * Delegates to {@link #getRootsBySRelation(STYPE_NAME)} 
-	 */
-	public EList<SNode> getRootsBySRelation(Class<? extends SRelation> clazz)
-	{
-		STYPE_NAME sType= SaltFactory.eINSTANCE.convertClazzToSTypeName(clazz);
-		return (this.getRootsBySRelation(sType));
-	}
-	
+//========================= start: getting roots for given Relation type (Class) =========================	
 	/**
 	 * Returns all SNode objects which are roots for the given SRelation Subtype. Means, that all SNode-objects
 	 * will be returned as roots, which have no incoming SRelation-objects of the given subtype clazz. 
 	 * <br/>
-	 * Attention: Only  the subtypes SPointingRelation, SSpanningRelation and SDominanceRelation 
+	 * Attention: Only  the subtypes {@link STYPE_NAME#SPOINTING_RELATION}, {@link STYPE_NAME#SSPANNING_RELATION} and {@link STYPE_NAME#SDOMINANCE_RELATION}
 	 * are supported yet.
 	 * <br/>
 	 * @param clazz Subclass of SRelation which shall be used for computing roots
