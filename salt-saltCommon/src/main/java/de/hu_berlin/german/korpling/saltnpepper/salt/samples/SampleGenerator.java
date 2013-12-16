@@ -152,6 +152,23 @@ public class SampleGenerator
 	public static SCorpusGraph createCorpusStructure() 
 	{
 		SCorpusGraph sCorpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
+		createCorpusStructure(sCorpGraph);
+		return(sCorpGraph);
+	}
+	
+	/**
+	 * Tests following structure:
+	 * 
+	 * 				rootCorpus
+	 * 		/					\
+	 * 	subCorp1				subCorp2
+	 * 	/		\				/		\
+	 * doc1		doc2		doc3		doc4
+	 * @throws IOException 
+	 * @throws SAXException 
+	 */
+	public static SCorpusGraph createCorpusStructure(SCorpusGraph sCorpGraph)
+	{
 		sCorpGraph.setSId("corpusGraph1");
 		SCorpus sCorpus1= SaltFactory.eINSTANCE.createSCorpus();
 		sCorpus1.setSName("rootCorpus");
