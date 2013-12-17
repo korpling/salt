@@ -118,9 +118,9 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * be load, in case of the given SaltXML file contains more than one persisting of
 	 * {@link SCorpusGraph} objects.
 	 * @param sCorpusGraphUri the {@link URI} to locate the SaltXML file
-	 * @param numOfSCorpusGraph number of graph to be load, note that the list of graphs starts with 0
+	 * @param idxOfSCorpusGraph index of graph to be load, note that the list of graphs starts with 0
 	 */
-	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph);
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph);
 	
 	/**
 	 * Persists the given {@link SDocumentGraph} object as SaltXML file at the 

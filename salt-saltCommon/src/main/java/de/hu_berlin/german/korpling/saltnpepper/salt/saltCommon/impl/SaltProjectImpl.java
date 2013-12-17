@@ -492,7 +492,9 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 			this.getSCorpusGraphs().addAll(saltProject.getSCorpusGraphs());
 		}
 		
-		
+		if (saltProjectPath.getAbsolutePath().endsWith(SaltFactory.FILE_SALT_PROJECT)){
+			saltProjectPath= new File(saltProjectPath.getAbsolutePath().replace(SaltFactory.FILE_SALT_PROJECT, ""));
+		}
 		{//load SDocumentGraph-objects belonging to the SDocument objects of all SCorpusGraphs
 			//TODO this is a workaround, because the mechanism of EMF does not work correctly here, but it would be better to do this automatically by EMF, because the given approach uses the SElementId for retrieval, which can be incorrect!!! But when using EMF take care for relative pathes.
 			if (	(this.getSCorpusGraphs()!= null)&&
@@ -522,12 +524,20 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	 */
 	public synchronized void loadSaltProject(URI saltProjectURI) 
 	{
+		if (saltProjectURI== null)
+			throw new SaltResourceException("Cannot load salt project, because the paassed uri is null.");
 		this.loadSCorpusStructure(saltProjectURI);
 		for (SCorpusGraph sCorpusGraph: this.getSCorpusGraphs())
 		{
 			for (SDocument sDoc: sCorpusGraph.getSDocuments())
 			{
-				sDoc.loadSDocumentGraph();
+				try{
+					sDoc.loadSDocumentGraph();
+				}catch (SaltResourceException e){
+					throw new SaltResourceException("A problem occured when loading salt project from '"+saltProjectURI+"', because one of its documents could not have been load '"+sDoc.getSId()+"'.", e);
+				}catch (Exception e) {
+					throw new SaltResourceException("A problem occured when loading salt project from '"+saltProjectURI+"', because of a nested exception during loading one of its documents '"+sDoc.getSId()+"'.", e);
+				}
 			}
 		}	
 	}
@@ -604,20 +614,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	 * @param properties a {@link Properties}} object which contains a utilization for the load process 
 	 * @model saltProjectUriDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
 	 */
-	public synchronized void loadSaltProject_GrAF(URI saltProjectUri, Properties properties) {
-//		if (saltProjectUri== null)
-//			throw new SaltResourceNotFoundException("Cannot load SaltProject, because the given uri is null.");
-//		File saltProjectPath= null;
-//		try
-//		{
-//			saltProjectPath= new File(saltProjectUri.toFileString());
-//		}catch (Exception e) {
-//			throw new SaltResourceNotFoundException("Cannot load SaltProject.",e);
-//		}
-//		SCorpusGraph sCorpusGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
-//		this.getSCorpusGraphs().add(sCorpusGraph);
-//		loadSaltProjectFromGrAF_rec(properties, sCorpusGraph, null, saltProjectPath);
-		
+	public synchronized void loadSaltProject_GrAF(URI saltProjectUri, Properties properties) {		
 		Hashtable<SDocument, URI> sDocument2Resource= this.loadSCorpusGraph_GrAF(saltProjectUri, properties);
 		Enumeration<SDocument> keys=sDocument2Resource.keys(); 
 		while (keys.hasMoreElements())

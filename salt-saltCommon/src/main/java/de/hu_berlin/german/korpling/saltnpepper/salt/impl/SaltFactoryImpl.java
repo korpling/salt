@@ -265,7 +265,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	/**
 	 * {@inheritDoc SaltFactory#loadSCorpusGraph(URI, Integer)}
 	 */
-	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph) {
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph) {
 		SCorpusGraph retVal= null;
 		if (!sCorpusGraphUri.toFileString().endsWith(SaltFactory.FILE_ENDING_SALT))
 		{
@@ -281,8 +281,8 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		else if (obj instanceof SaltProject)
 		{
 			if (	(((SaltProject) obj).getSCorpusGraphs()!= null)&&
-					(((SaltProject) obj).getSCorpusGraphs().size()>=numOfSCorpusGraph))
-					retVal= ((SaltProject) obj).getSCorpusGraphs().get(numOfSCorpusGraph);
+					(((SaltProject) obj).getSCorpusGraphs().size()>=idxOfSCorpusGraph))
+					retVal= ((SaltProject) obj).getSCorpusGraphs().get(idxOfSCorpusGraph);
 		}
 		if (retVal== null)
 			throw new SaltResourceException("No '"+SCorpusGraph.class.getName()+"' object was found in resource '"+sCorpusGraphUri+"'.");
