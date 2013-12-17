@@ -155,14 +155,49 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
 		throw new UnsupportedOperationException();	
 		}
 
+	/**
+	 * Returns the position of the last occurrence of the object in the list. 
+	 * <br/>
+	 * <strong>Note: The use of this method might be very slow, when using it in a loop, since 
+	 * for each call, the list is traversed from the first element, until the passed one is found.</strong>
+	 * @return the position of the first occurrence of the object in the list. Or -1, if object is not contained in list.
+	 */
 	@Override
 	public int indexOf(Object o) {
-		throw new UnsupportedOperationException();
+		if (	(o!= null) &&
+				(delegatee!= null)){
+			int i=0;
+			for (Object o1: delegatee){
+				if (o.equals(o1)){
+					return(i);
+				}
+				i++;
+			}
+		}
+		return(-1);
 	}
-
+	/**
+	 * Returns the position of the last occurrence of the object in the list.
+	 * <br/>
+	 * <strong>Note: The use of this method might be very slow, when using it in a loop, since 
+	 * for each call, the list is traversed from the first element, until the passed one is found.</strong>
+	 * @return 
+	 */
 	@Override
 	public int lastIndexOf(Object o) {
-		throw new UnsupportedOperationException();
+		if (	(o!= null) &&
+				(delegatee!= null)){
+			int i=0;
+			int lastIdx= 0;
+			for (Object o1: delegatee){
+				if (o.equals(o1)){
+					lastIdx= i;
+				}
+				i++;
+			}
+			return(lastIdx);
+		}
+		return(-1);
 	}
 
 	@Override
@@ -216,11 +251,6 @@ public class UnmodifiableEList<E> implements EList<E>, InternalEList<E>{
 	public E move(int newPosition, int oldPosition) {
 		throw new UnsupportedOperationException();
 	}
-
-	
-	
-	
-	
 	
 	@Override
 	public E basicGet(int index) {
