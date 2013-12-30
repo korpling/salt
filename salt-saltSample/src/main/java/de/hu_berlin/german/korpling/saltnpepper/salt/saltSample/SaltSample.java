@@ -152,7 +152,7 @@ public class SaltSample
 	/** Primary text of speaker1**/
 	public static String PRIMARY_TEXT_EN_SPK1=PRIMARY_TEXT_EN;
 	/** Primary text of speaker2**/
-	public static String PRIMARY_TEXT_EN_SPK2="Oh yes!";
+	public static String PRIMARY_TEXT_EN_SPK2="Uhm oh yes!";
 	/**
 	 * The primary text, which is used for the samples.
 	 */
@@ -198,20 +198,29 @@ public class SaltSample
 		
 		//create text of speaker2
 		STextualDS sText2= sDocument.getSDocumentGraph().createSTextualDS(PRIMARY_TEXT_EN_SPK2);
-		SToken spk2_tok1= createToken(0, 2, sText2, sDocument, null);
+		
+		SToken spk2_tok0= createToken(0, 3, sText2, sDocument, null);
+		STimelineRelation sTimeRel0= SaltFactory.eINSTANCE.createSTimelineRelation();
+		sTimeRel0.setSSource(spk2_tok0);
+		sTimeRel0.setSTarget(sDocument.getSDocumentGraph().getSTimeline());
+		sTimeRel0.setSStart(7);
+		sTimeRel0.setSEnd(9);
+		sDocument.getSDocumentGraph().addSRelation(sTimeRel0);
+		
+		SToken spk2_tok1= createToken(4, 6, sText2, sDocument, null);
 		STimelineRelation sTimeRel1= SaltFactory.eINSTANCE.createSTimelineRelation();
 		sTimeRel1.setSSource(spk2_tok1);
 		sTimeRel1.setSTarget(sDocument.getSDocumentGraph().getSTimeline());
-		sTimeRel1.setSStart(8);
-		sTimeRel1.setSEnd(9);
+		sTimeRel1.setSStart(9);
+		sTimeRel1.setSEnd(10);
 		sDocument.getSDocumentGraph().addSRelation(sTimeRel1);
 		
-		SToken spk2_tok2= createToken(3, 6, sText2, sDocument, null);
+		SToken spk2_tok2= createToken(7, 11, sText2, sDocument, null);
 		STimelineRelation sTimeRel2= SaltFactory.eINSTANCE.createSTimelineRelation();
 		sTimeRel2.setSSource(spk2_tok2);
 		sTimeRel2.setSTarget(sDocument.getSDocumentGraph().getSTimeline());
-		sTimeRel2.setSStart(9);
-		sTimeRel2.setSEnd(10);
+		sTimeRel2.setSStart(10);
+		sTimeRel2.setSEnd(11);
 		sDocument.getSDocumentGraph().addSRelation(sTimeRel2);
 		
 		//add SOrderRelations for speaker 1
@@ -335,7 +344,7 @@ public class SaltSample
 			retVal.add(createToken(38,40,sTextualDS,sDocument,morphLayer));		//it
 			retVal.add(createToken(41,48,sTextualDS,sDocument,morphLayer));		//supposed
 			retVal.add(createToken(49,51,sTextualDS,sDocument,morphLayer));		//to
-			retVal.add(createToken(52,54,sTextualDS,sDocument,morphLayer));		//be
+			retVal.add(createToken(52,55,sTextualDS,sDocument,morphLayer));		//be?
 		}else if (sTextualDS.getSText().equals(PRIMARY_TEXT_DE))
 		{
 			retVal.add(createToken(0,3,sTextualDS,sDocument,morphLayer));	//Ist	
@@ -346,7 +355,7 @@ public class SaltSample
 			retVal.add(createToken(38,40,sTextualDS,sDocument,morphLayer));	//es
 			retVal.add(createToken(41,43,sTextualDS,sDocument,morphLayer));	//zu
 			retVal.add(createToken(44,48,sTextualDS,sDocument,morphLayer));	//sein
-			retVal.add(createToken(49,56,sTextualDS,sDocument,morphLayer));	//scheint
+			retVal.add(createToken(49,57,sTextualDS,sDocument,morphLayer));	//scheint?
 		}
 		return(retVal);
 	}
@@ -390,16 +399,16 @@ public class SaltSample
 		sDocument.getSDocumentGraph().createSRelation(englishToks.get(0), germanToks.get(0), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 		sDocument.getSDocumentGraph().createSRelation(englishToks.get(1), germanToks.get(1), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 		sDocument.getSDocumentGraph().createSRelation(englishToks.get(2), germanToks.get(2), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
-		EList<SToken> sTokens= new BasicEList<SToken>();
-		sTokens.add(englishToks.get(3));
-		sTokens.add(englishToks.get(4));
-		SSpan sSpan= sDocument.getSDocumentGraph().createSSpan(sTokens);
-		sDocument.getSDocumentGraph().createSRelation(sSpan, germanToks.get(3), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 		sDocument.getSDocumentGraph().createSRelation(englishToks.get(5), germanToks.get(4), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 		sDocument.getSDocumentGraph().createSRelation(englishToks.get(6), germanToks.get(5), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 		sDocument.getSDocumentGraph().createSRelation(englishToks.get(7), germanToks.get(6), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 		sDocument.getSDocumentGraph().createSRelation(englishToks.get(8), germanToks.get(7), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 		sDocument.getSDocumentGraph().createSRelation(englishToks.get(9), germanToks.get(8), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
+		EList<SToken> sTokens= new BasicEList<SToken>();
+		sTokens.add(englishToks.get(3));
+		sTokens.add(englishToks.get(4));
+		SSpan sSpan= sDocument.getSDocumentGraph().createSSpan(sTokens);
+		sDocument.getSDocumentGraph().createSRelation(sSpan, germanToks.get(3), STYPE_NAME.SPOINTING_RELATION, "align=en_de");
 	}
 	
 	/**
