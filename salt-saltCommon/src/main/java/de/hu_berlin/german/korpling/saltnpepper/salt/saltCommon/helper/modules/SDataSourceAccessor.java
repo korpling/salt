@@ -395,7 +395,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 			if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))){
 				// if a SToken was reached
 				if (currSNode instanceof SToken){
-					System.out.println("Reached Token " + currSNode.getSId());
+					//System.out.println("Reached Token " + currSNode.getSId());
 					// add it to the overlapped token list
 					this.overlappedSToken.add(((SToken)currSNode));
 				}
@@ -538,7 +538,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 	 */
 	public EList<SToken> getOverlappedSTokens(SNode overlappingNode,
 			EList<STYPE_NAME> overlappingRelationTypes) {
-		System.out.println("Starting traversion");
+		//System.out.println("Starting traversion");
 		// initialise the overlappedSToken EList
 		this.overlappedSToken = new HashSet<SToken>();
 		// initialise the relationTypes2Traverse EList
