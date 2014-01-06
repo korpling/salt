@@ -453,6 +453,24 @@ public class SaltSample
 	
 	/**
 	 * Creates {@link SSpan} object above the tokenization.
+	 * <table border="1">
+	 * 	<tr>
+	 * 	 	<td>contrast-focus</td>
+	 * 		<td colspan="9">topic</td>
+	 * </tr>
+	 *  <tr>
+	 *  	<td>Is</td>
+	 *  	<td>this</td>
+	 *   	<td>example</td>
+	 *    	<td>more</td>
+	 *     	<td>complicated</td>
+	 *  	<td>than</td>
+	 *   	<td>it</td>
+	 *    	<td>appears</td>
+	 *     	<td>to</td>
+	 *     	<td>be</td>
+	 *  </tr>
+	 * </table>
 	 * @param sDocument
 	 */
 	public static void createInformationStructureSpan(SDocument sDocument){
