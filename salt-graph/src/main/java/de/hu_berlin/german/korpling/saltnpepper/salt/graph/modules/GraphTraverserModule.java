@@ -17,15 +17,16 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
@@ -231,7 +232,63 @@ public class GraphTraverserModule extends GraphModule
 		/**
 		 * a condition which is signaled, when a traversion has been finished.
 		 */
-		Condition traverseFinished= traverselock.newCondition();
+		private Condition traverseFinished= traverselock.newCondition();
+		
+		/**
+		 * Currently only used for {@link GRAPH_TRAVERSE_TYPE#TOP_DOWN_DEPTH_FIRST}.
+		 * Single entries for a stack to stores the path, which has been used in traversal.
+		 * Contains a node, a counter for the edge and order, in which child node the traversal currently is.
+		 * @author florian
+		 *
+		 */
+		private class NodeEntry
+		{
+			private final Node node;
+			private int order;
+			private Edge edge;
+			
+			public NodeEntry(Node node, int order)
+			{
+				this.node = node;
+				this.order = order;
+			}
+			public String toString(){
+				return(((node!= null)? node.toString() : "")+": "+order);
+			}
+			@Override
+			public boolean equals(Object obj){
+				if (obj== null) 
+					return false;
+				if (obj== this)
+					return true;
+				if (obj instanceof NodeEntry){
+					return(node.equals(((NodeEntry) obj).node));
+				}
+				else return(false);
+			}
+		}
+		
+		/**
+		 * Currently only used for {@link GRAPH_TRAVERSE_TYPE#TOP_DOWN_DEPTH_FIRST}.
+		 * Basing on the given order in the passed {@link NodeEntry} element, this method checks if
+		 * further children exist. If true, the next child is returned and the order counter of the 
+		 * passed element is increased by 1.
+		 * @param entry
+		 * @return
+		 */
+		protected Node nextChild(NodeEntry entry){
+			Node retVal= null;
+			List<Edge> outEdges= getGraph().getOutEdges(entry.node.getId());
+			if (	(outEdges!= null)&&
+					(!outEdges.isEmpty())){
+				if (entry.order<outEdges.size()){
+					entry.edge= outEdges.get(entry.order);
+					retVal= entry.edge.getTarget();
+					entry.order++;
+				}
+			}
+			return(retVal);
+		}
 		
 		/**
 		 * Starts traversal, with set properties. 
@@ -244,12 +301,67 @@ public class GraphTraverserModule extends GraphModule
 				{//TOP_DOWN_DEPTH_FIRST traversal
 					for (Node startNode: startNodes)
 					{
-						//TODO replace EList with HashEList
-						this.currentNodePath= new BasicEList<Node>();
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, null, startNode, 0l))
 						{
-							this.currentNodePath.add(startNode);
-							this.topDownDepthFirstRec(null, 0);
+							Stack<NodeEntry> parentStack= new Stack<NodeEntry>();
+							NodeEntry currentEntry= new NodeEntry(startNode, 0);
+							while(	(!parentStack.isEmpty())||
+									(currentEntry!= null)){
+								if (currentEntry!= null){//way down
+									if (isCycleSafe){//check if cycle exists
+										if (parentStack.contains(currentEntry))
+										{
+											StringBuffer text= new StringBuffer(); 
+											for (Node node: this.currentNodePath)
+											{
+												text.append(node.getId());
+												text.append(" --> ");
+											}
+											text.append(currentEntry.node.getId());
+											throw new GraphTraverserException("A cycle in graph '"+graph.getId()+"' has been detected, while traversing with type '"+traverseType+"'. The cycle has been detected when visiting node '"+currentEntry.node+"' while current path was '"+ text.toString() +"'.");
+										}
+									}
+									NodeEntry peekEntry= null;
+									if (!parentStack.isEmpty())
+										peekEntry= parentStack.peek();
+									parentStack.push(currentEntry);
+									Node nextChild= nextChild(currentEntry);
+									if (peekEntry== null)
+										traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.node, null, null, 0);
+									else
+										traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.node, peekEntry.edge, (peekEntry.edge!= null)?peekEntry.edge.getSource():null, peekEntry.order);
+									if (nextChild!= null){
+										if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.edge, nextChild, currentEntry.order))
+											currentEntry= new NodeEntry(nextChild, 0);
+										else currentEntry= null;
+									}
+									else currentEntry= null;
+								}else{
+									NodeEntry peekEntry= parentStack.peek();
+									if (peekEntry!= null){
+										Node nextChild= nextChild(peekEntry);
+										if (nextChild!= null){//way down, another branch was found 
+											if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, peekEntry.edge, nextChild, peekEntry.order))
+												currentEntry= new NodeEntry(nextChild, 0);
+											else currentEntry= null;
+										}
+										else{//way up
+											parentStack.pop();
+											
+											//collect stuff for notification
+											Node peekNode= peekEntry.node; 
+											peekEntry= null;
+											if (!parentStack.isEmpty())
+												peekEntry= parentStack.peek();
+											if (peekEntry== null)
+												traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, peekNode, null, null, 0);
+											else
+												traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, peekNode, peekEntry.edge, (peekEntry.edge!= null)?peekEntry.edge.getSource():null, peekEntry.order);
+										}
+									}
+								}
+							}
+							
 						}
 					}
 				}//TOP_DOWN_DEPTH_FIRST traversal
@@ -515,6 +627,6 @@ public class GraphTraverserModule extends GraphModule
 			}
 
 			traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, currNode, edge, child,  order);
-		}		
+		}
 	}
 }

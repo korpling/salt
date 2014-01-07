@@ -503,7 +503,7 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 	public void testGraphTraversion()
 	{
 		this.traversedNodes = new BasicEList<SNode>();
-		SDocument sDocument = this.createCorpusStructure(this.getFixture());
+		this.createCorpusStructure(this.getFixture());
 		this.getFixture()
 			.traverse(this.getFixture().getSRootCorpus(),	
 					GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "",this);

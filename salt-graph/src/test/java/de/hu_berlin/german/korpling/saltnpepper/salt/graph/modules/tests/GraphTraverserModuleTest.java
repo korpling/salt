@@ -129,7 +129,7 @@ public class GraphTraverserModuleTest extends TestCase
 					else
 						path= path+ "->" +nodeName;
 				}
-				throw new RuntimeException("Test fails, another way than expected has been traversed on way back. Expected way was '"+path+"', but instead of node '"+nodeOrderWayThere[posInWayBack]+"' at position '"+posInWayBack+1+"', node '"+currNode.getId()+"' was found.");
+				throw new RuntimeException("Test fails, another way than expected has been traversed on way back. Expected way was '"+path+"', but instead of node '"+nodeOrderWayBack[posInWayBack]+"' at position '"+(posInWayBack+1)+"', node '"+currNode.getId()+"' was found.");
 			}
 			posInWayBack++;			
 		}
@@ -144,6 +144,7 @@ public class GraphTraverserModuleTest extends TestCase
 										Node currNode, 
 										long order) 
 		{
+//			System.out.println("checkConstraint(), node: '"+currNode.getId()+"', traverseId: '"+traversalId+"' ");
 			boolean retVal= true;
 			
 			if (isCycleSafe== false) 
@@ -569,11 +570,12 @@ public class GraphTraverserModuleTest extends TestCase
 	
 	/**
 	 * Tests the traversing of top-down, depth first of graph_Cycle. 
+	 * @throws Exception 
 	 */
-	public void testTraverse_TOP_DOWN_DEPTH_FIRST_Cycle()
+	public void testTraverse_TOP_DOWN_DEPTH_FIRST_Cycle() throws Exception
 	{
 		Graph graph= GraphTest.createGraph_Cycle();
-		String[] nodeOrderWayThere= {"node1", "node2", "node3", "node6", "node7", "node4", "node2", "node3", "node6", "node7"};
+		String[] nodeOrderWayThere= {"node1", "node2", "node3", "node6", "node7", "node2","node6", "node7", "node2"};
 		String[] nodeOrderWayBack= {"node3", "node6", "node2", "node1", "node3", "node6", "node2", "node4"};
 		TraverserChecker checker= new TraverserChecker();
 		checker.nodeOrderWayThere= nodeOrderWayThere;
