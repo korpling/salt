@@ -19,6 +19,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.locks.Condition;
@@ -303,13 +304,17 @@ public class GraphTraverserModule extends GraphModule
 					{
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, null, startNode, 0l))
 						{
-							Stack<NodeEntry> parentStack= new Stack<NodeEntry>();
+							HashSet<Node> visitedNodes= null;
+							if (isCycleSafe){//if checking for cycles is enabled, initialize hashset
+								visitedNodes= new HashSet<Node>();
+							}
+ 							Stack<NodeEntry> parentStack= new Stack<NodeEntry>();
 							NodeEntry currentEntry= new NodeEntry(startNode, 0);
 							while(	(!parentStack.isEmpty())||
 									(currentEntry!= null)){
 								if (currentEntry!= null){//way down
 									if (isCycleSafe){//check if cycle exists
-										if (parentStack.contains(currentEntry))
+										if (visitedNodes.contains(currentEntry))
 										{
 											StringBuffer text= new StringBuffer(); 
 											for (Node node: this.currentNodePath)
@@ -325,6 +330,9 @@ public class GraphTraverserModule extends GraphModule
 									if (!parentStack.isEmpty())
 										peekEntry= parentStack.peek();
 									parentStack.push(currentEntry);
+									if (isCycleSafe){//if checking for cycles is enabled, add node to hashset
+										visitedNodes.add(currentEntry.node);
+									}
 									Node nextChild= nextChild(currentEntry);
 									if (peekEntry== null)
 										traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.node, null, null, 0);
@@ -347,7 +355,9 @@ public class GraphTraverserModule extends GraphModule
 										}
 										else{//way up
 											parentStack.pop();
-											
+											if (isCycleSafe){//if checking for cycles is enabled, remove node from hashset
+												visitedNodes.remove(peekEntry.node);
+											}
 											//collect stuff for notification
 											Node peekNode= peekEntry.node; 
 											peekEntry= null;
