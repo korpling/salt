@@ -354,9 +354,9 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		}catch (Exception e) {
 			throw new SaltResourceNotFoundException("Cannot save SaltProject.",e);
 		}
-		if (!saltProjectPath.exists())
+		if (!saltProjectPath.exists()){
 			saltProjectPath.mkdirs();
-		
+		}
 		URI saltProjectFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ "saltProject"+"."+ SaltFactory.FILE_ENDING_SALT);
 		
 		Resource resource= SaltFactory.resourceSet.createResource(saltProjectFileURI);

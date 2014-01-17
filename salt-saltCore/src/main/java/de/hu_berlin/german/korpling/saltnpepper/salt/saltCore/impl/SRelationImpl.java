@@ -577,10 +577,12 @@ public class SRelationImpl extends EdgeImpl implements SRelation {
 		SFeature sFeature= this.getSFeature(SaltCorePackage.eNS_PREFIX, SaltCoreFactory.SALT_CORE_SFEATURES.STYPE.toString());
 		if (sFeature!= null)
 		{
-			String parts[]=sFeature.getSValue().toString().split(KW_STYPE_SEP); 
-			retVal = new BasicEList<String>();
-			for (String part: parts)
-				retVal.add(part);
+			if (sFeature.getSValue()!= null){
+				String parts[]=sFeature.getSValue().toString().split(KW_STYPE_SEP); 
+				retVal = new BasicEList<String>();
+				for (String part: parts)
+					retVal.add(part);
+			}
 				
 		}
 		return(retVal);

@@ -61,6 +61,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
@@ -99,6 +100,43 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			}
 		}
 		return(saltFactory);
+	}
+	
+	/**
+	 * {@inheritDoc SaltFactory#getGlobalId(SElementId)}
+	 */
+	@Override
+	public String getGlobalId(SElementId sDocumentId)
+	{
+		StringBuilder globalId= new StringBuilder();
+		if (sDocumentId!= null)
+		{
+			globalId.append("salt:");
+			if (	(sDocumentId.getSIdentifiableElement()!= null)&&
+					(sDocumentId.getSIdentifiableElement() instanceof SDocument))
+			{
+				SDocument sDocument= (SDocument) sDocumentId.getSIdentifiableElement(); 
+				if (sDocument!= null)
+				{
+					SCorpusGraph graph= sDocument.getSCorpusGraph(); 
+					if (graph!= null)
+					{
+						SaltProject project= graph.getSaltProject(); 
+						if (project!= null)
+						{
+							globalId.append("/");
+							globalId.append(project.getSCorpusGraphs().indexOf(graph));
+							globalId.append("/");
+						}
+					}
+					String actualId= sDocumentId.getSId().replace("salt:", "");
+					if (actualId.startsWith("/"))
+						actualId= actualId.substring(1, actualId.length());
+					globalId.append(actualId);		
+				}
+			}
+		}
+		return(globalId.toString());
 	}
 	
 	/**

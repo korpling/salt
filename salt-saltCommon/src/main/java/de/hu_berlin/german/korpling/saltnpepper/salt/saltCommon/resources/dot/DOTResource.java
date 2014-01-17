@@ -65,9 +65,12 @@ public class DOTResource extends ResourceImpl
 		EObject content = this.getContents().get(0);
 		
 		if ((content instanceof SCorpusGraph)||(content instanceof SDocumentGraph)) {
-			File path= new File(this.getURI().toString());
+			File path= new File(getURI().toFileString());
 			if (!path.exists()) {
-				path.mkdirs();
+				if (content instanceof SCorpusGraph)
+					path.mkdirs();
+				else if (content instanceof SDocumentGraph)
+					path.getParentFile().mkdirs();
 			}
 			if (content instanceof SCorpusGraph) {
 				saveSCorpusGraph( (SCorpusGraph)content, this.getURI() );

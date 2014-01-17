@@ -17,12 +17,16 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.tests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 
 import org.eclipse.emf.common.util.URI;
+import org.junit.Test;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
@@ -52,6 +56,26 @@ public class SaltFactoryImplTest extends TestCase
 	public void testLoadSaltProject()
 	{
 		
+	}
+	
+	/**
+	 * Tests whether computation of global id works correctly.
+	 */
+	@Test
+	public void testGetGlobalId(){
+		SaltProject project= SaltFactory.eINSTANCE.createSaltProject();
+		project.getSCorpusGraphs().add(SaltFactory.eINSTANCE.createSCorpusGraph());
+		project.getSCorpusGraphs().add(SaltFactory.eINSTANCE.createSCorpusGraph());
+		
+		SCorpus sCorpus= SaltFactory.eINSTANCE.createSCorpus();
+		sCorpus.setSName("corpus1");
+		project.getSCorpusGraphs().get(0).addSNode(sCorpus);
+		
+		SDocument sDocument = SaltFactory.eINSTANCE.createSDocument();
+		sDocument.setSName("document1");
+		project.getSCorpusGraphs().get(0).addSDocument(sCorpus, sDocument);
+
+		assertEquals("salt:/0/corpus1/document1", getFixture().getGlobalId(sDocument.getSElementId()));
 	}
 	
 	/**

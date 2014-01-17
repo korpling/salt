@@ -34,6 +34,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
 
@@ -74,6 +75,15 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * Namespace of e.g. {@link SFeature} objects used by salt. 
 	 */
 	public static final String NAMESPACE_SALT= "salt";
+	
+
+	/**
+	 * Creates a global id for the passed {@link SElementId}. The {@link SElementId} must 
+	 * correspond to a {@link SDocument}. 
+	 * @param sDocumentId {@link SElementId} corresponding to a {@link SDocument}
+	 * @return a global identifier which is unique in entire salt project
+	 */
+	public String getGlobalId(SElementId sDocumentId);
 	
 	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.

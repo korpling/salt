@@ -222,15 +222,6 @@ public class Salt2DOT
 				sDocGraph= (SDocumentGraph) resource.getContents().get(0);
 			else throw new NullPointerException("Sorry, in this version i can just work with SDocumentGraph-objects");
 			
-	//		for (Token token: document.getTokens())
-	//		{
-	//			System.out.println(token.getText());
-	//			for (Annotation anno : token.getAnnotations())
-	//				System.out.print("\t"+anno.getName()+": "+ anno.getValue()+"\t");
-	//			System.out.println();
-	//		}
-			
-			
 			Resource resourceOut = resourceSet.createResource(URI.createFileURI(outputFile));
 			resourceOut.getContents().add(sDocGraph);
 			resourceOut.save(null);
