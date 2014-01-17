@@ -270,11 +270,13 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			throw new SaltResourceException("Cannot load '"+SCorpusGraph.class.getSimpleName()+"' object, because the passed uri is empty. ");
 		
 		SCorpusGraph retVal= null;
-		if (!sCorpusGraphUri.toFileString().endsWith(SaltFactory.FILE_ENDING_SALT))
+		
+		if (!sCorpusGraphUri.toFileString().endsWith("."+SaltFactory.FILE_ENDING_SALT))
 		{
 			//looks weird, but is necessary in case of uri ends with /
-			if (sCorpusGraphUri.toString().endsWith("/"))
+			if (sCorpusGraphUri.toString().endsWith("/")){
 				sCorpusGraphUri= sCorpusGraphUri.trimSegments(1);
+			}
 			sCorpusGraphUri= sCorpusGraphUri.appendSegment(SaltFactory.FILE_SALT_PROJECT);
 		}
 		
