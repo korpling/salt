@@ -266,6 +266,9 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	 * {@inheritDoc SaltFactory#loadSCorpusGraph(URI, Integer)}
 	 */
 	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph) {
+		if (sCorpusGraphUri== null)
+			throw new SaltResourceException("Cannot load '"+SCorpusGraph.class.getSimpleName()+"' object, because the passed uri is empty. ");
+		
 		SCorpusGraph retVal= null;
 		if (!sCorpusGraphUri.toFileString().endsWith(SaltFactory.FILE_ENDING_SALT))
 		{
