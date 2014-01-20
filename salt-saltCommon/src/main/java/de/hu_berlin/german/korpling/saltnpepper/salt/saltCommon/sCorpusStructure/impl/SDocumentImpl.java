@@ -18,7 +18,6 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -206,7 +205,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	@Override
 	public URI getSDocumentGraphLocation() {
 		URI retVal= null;
-		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION;
+//		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION;
+		String name= SaltFactory.eINSTANCE.createQName(SaltFactory.NAMESPACE_SALT, SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION.getLiteral());
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature!= null)
 		{
@@ -223,7 +223,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 */
 	@Override
 	public void setSDocumentGraphLocation(URI newSDocumentGraphLocation) {
-		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION; 
+//		String name= SaltFactory.NAMESPACE_SALT + "::" + SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION; 
+		String name= SaltFactory.eINSTANCE.createQName(SaltFactory.NAMESPACE_SALT, SFEATURE_NAME.SDOCUMENT_GRAPH_LOCATION.getLiteral());
 		SFeature sFeature= this.getSFeature(name);
 		if (sFeature== null)
 		{//create a new sFeature
@@ -249,7 +250,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * {@inheritDoc SDocument#load()}
 	 */
 	@Override
-	public void loadSDocumentGraph() {
+	public synchronized  void loadSDocumentGraph() {
 		this.loadSDocumentGraph(this.getSDocumentGraphLocation());
 	}
 
@@ -257,7 +258,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * {@inheritDoc SDocument#load(URI)}
 	 */
 	@Override
-	public void loadSDocumentGraph(URI sDocumentGraphLocation) {
+	public synchronized void loadSDocumentGraph(URI sDocumentGraphLocation) {
 		SDocumentGraph sDocumentGraph= SaltFactory.eINSTANCE.loadSDocumentGraph(sDocumentGraphLocation);
 		this.setSDocumentGraph(sDocumentGraph);
 		//remove SFeature containing location of where SaltXML file containing the loaded object  
@@ -282,7 +283,6 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			}
 			im.writeInfoFile(this, infoFile);
 		} catch (Exception e) {
-			System.out.println("Cant print SDocumentInfo to" + e);
 			throw new SaltException("Could not write Info XML file for this SDocument to " + outputResource , e);
 		}
 	}

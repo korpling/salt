@@ -26,16 +26,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
 
 public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
@@ -75,15 +72,41 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * Namespace of e.g. {@link SFeature} objects used by salt. 
 	 */
 	public static final String NAMESPACE_SALT= "salt";
+	/**
+	 * URI scheme for Salt.
+	 */
+	public final static String URI_SALT_SCHEMA="salt:";
 	
-
+	/**
+	 * Returns a qualified name for the passed namespace and name.
+	 * This is computed as follows:<br>
+	 * namespace + {@value Label#NS_SEPERATOR} + name
+	 * @param namespace namespace part of the qualified name
+	 * @param name name part of the qualified name
+	 */
+	public String createQName(String namespace, String name);
+	
+	/** Name of created {@link SProcessingAnnotation} for global id for {@link SDocument} **/
+	public final static String PA_GLOBALID_NAME="globalID";
+	/**
+	 * Returns a global ID for the passed {@link SDocument} object, in case it is set.
+	 * Null otherwise.
+	 * <br/>
+	 * The global id is retrieved via a {@link SProcessingAnnotation} having the namespace
+	 * {@link #PA_GLOBALID_NS} and the name {@link #PA_GLOBALID_NAME}. This {@link SProcessingAnnotation}
+	 * for instance is set in method {@link #createGlobalId(SElementId)}.
+	 * @param sDOcument Object to retrieve global id.
+	 * @return String value for global id, if one is given.
+	 */
+	public String getGlobalId(SElementId sDocumentId);
+	
 	/**
 	 * Creates a global id for the passed {@link SElementId}. The {@link SElementId} must 
 	 * correspond to a {@link SDocument}. 
 	 * @param sDocumentId {@link SElementId} corresponding to a {@link SDocument}
 	 * @return a global identifier which is unique in entire salt project
 	 */
-	public String getGlobalId(SElementId sDocumentId);
+	public String createGlobalId(SElementId sDocumentId);
 	
 	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.

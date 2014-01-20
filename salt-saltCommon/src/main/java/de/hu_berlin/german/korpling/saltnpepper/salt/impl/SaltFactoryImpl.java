@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import javax.annotation.processing.ProcessingEnvironment;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -42,7 +44,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonFactoryImpl;
@@ -58,8 +59,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
@@ -103,21 +102,52 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	}
 	
 	/**
+	 * {@inheritDoc SaltFactory#getQName(String, String)}
+	 */
+	@Override
+	public String createQName(String namespace, String name)
+	{
+		if(namespace == null || namespace.isEmpty()){
+			return name;
+		}else if(name == null || name.isEmpty()){
+			return namespace + Label.NS_SEPERATOR;
+		}else{
+			return namespace + Label.NS_SEPERATOR + name;
+		}
+	}
+	
+	/**
 	 * {@inheritDoc SaltFactory#getGlobalId(SElementId)}
 	 */
 	@Override
 	public String getGlobalId(SElementId sDocumentId)
 	{
-		StringBuilder globalId= new StringBuilder();
-		if (sDocumentId!= null)
-		{
-			globalId.append("salt:");
+		String globalId= null;
+		if (sDocumentId!= null){
 			if (	(sDocumentId.getSIdentifiableElement()!= null)&&
-					(sDocumentId.getSIdentifiableElement() instanceof SDocument))
-			{
-				SDocument sDocument= (SDocument) sDocumentId.getSIdentifiableElement(); 
-				if (sDocument!= null)
-				{
+					(sDocumentId.getSIdentifiableElement() instanceof SDocument)){
+				SDocument sDocument= (SDocument) sDocumentId.getSIdentifiableElement();
+				SProcessingAnnotation pa= sDocument.getSProcessingAnnotation(createQName(NAMESPACE_SALT, PA_GLOBALID_NAME));
+				if (pa!= null)
+					globalId= pa.getSValueSTEXT();
+			}
+		}
+		return(globalId);
+	}
+	
+	/**
+	 * {@inheritDoc SaltFactory#createGlobalId(SElementId)}
+	 */
+	public String createGlobalId(SElementId sDocumentId){
+		StringBuilder globalId= new StringBuilder();
+		if (sDocumentId!= null){
+			synchronized (sDocumentId) {
+				if (	(sDocumentId.getSIdentifiableElement()!= null)&&
+						(sDocumentId.getSIdentifiableElement() instanceof SDocument)){
+					SDocument sDocument= (SDocument) sDocumentId.getSIdentifiableElement();
+					
+					globalId.append(URI_SALT_SCHEMA);
+					
 					SCorpusGraph graph= sDocument.getSCorpusGraph(); 
 					if (graph!= null)
 					{
@@ -133,6 +163,9 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 					if (actualId.startsWith("/"))
 						actualId= actualId.substring(1, actualId.length());
 					globalId.append(actualId);		
+					
+					
+					sDocument.createSProcessingAnnotation(NAMESPACE_SALT, PA_GLOBALID_NAME, globalId.toString());
 				}
 			}
 		}

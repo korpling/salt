@@ -62,7 +62,7 @@ public class SaltFactoryImplTest extends TestCase
 	 * Tests whether computation of global id works correctly.
 	 */
 	@Test
-	public void testGetGlobalId(){
+	public void testCreateGetGlobalId(){
 		SaltProject project= SaltFactory.eINSTANCE.createSaltProject();
 		project.getSCorpusGraphs().add(SaltFactory.eINSTANCE.createSCorpusGraph());
 		project.getSCorpusGraphs().add(SaltFactory.eINSTANCE.createSCorpusGraph());
@@ -75,6 +75,7 @@ public class SaltFactoryImplTest extends TestCase
 		sDocument.setSName("document1");
 		project.getSCorpusGraphs().get(0).addSDocument(sCorpus, sDocument);
 
+		assertEquals("salt:/0/corpus1/document1", getFixture().createGlobalId(sDocument.getSElementId()));
 		assertEquals("salt:/0/corpus1/document1", getFixture().getGlobalId(sDocument.getSElementId()));
 	}
 	
