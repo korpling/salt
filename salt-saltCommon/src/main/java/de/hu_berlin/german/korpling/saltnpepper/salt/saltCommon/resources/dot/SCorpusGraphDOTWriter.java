@@ -25,8 +25,10 @@ import java.io.UnsupportedEncodingException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model.DOTEdge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model.DOTNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
@@ -75,22 +77,25 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 		
 		File outputFile= new File(this.getOutputURI().toFileString());
 		File outputDir= null;
-		if (!outputFile.isDirectory())
+		
+		if (outputFile.getName().endsWith("."+SaltFactory.FILE_ENDING_DOT)){
 			outputDir= outputFile.getParentFile();
-		else outputDir= outputFile;
+		}else{
+			outputDir= outputFile;
+		}
 		outputDir.mkdirs();
 		try {
 			this.currOutputStream= new PrintStream(outputFile, "UTF-8");
 			}
 		catch (FileNotFoundException e) {
-			throw new NullPointerException(e.getMessage());
+			throw new SaltResourceException("Cannot save "+SCorpusGraph.class.getSimpleName()+" object to uri '"+outputURI+"'", e);
 		}
 		catch (UnsupportedEncodingException e) 
-		{ throw new NullPointerException(e.getMessage()); }
+		{ throw new SaltResourceException("Cannot save "+SCorpusGraph.class.getSimpleName()+" object to uri '"+outputURI+"'", e); }
 		this.currOutputStream.println("digraph G {");
 		this.currOutputStream.println("ordering=out;");
 		
-		//if documentgraph isn�t  null print it 
+		//if documentgraph isn't  null print it 
 		if (this.getSCorpusGraph()!= null)
 		{
 			this.getSCorpusGraph().traverse(this.getSCorpusGraph().getSRootCorpus(), 
@@ -216,7 +221,7 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 			}
 			//SCORPDOC_RELATION
 			else if (sRelation instanceof SCorpusDocumentRelation)
-			{	//System.out.println("found SCorpusDocumentRelation");
+			{	
 				dotEdge.color= "gray";
 				dotEdge.style= "filled";
 			}

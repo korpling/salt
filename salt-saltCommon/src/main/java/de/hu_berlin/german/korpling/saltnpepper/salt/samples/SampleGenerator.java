@@ -122,12 +122,13 @@ public class SampleGenerator
 	
 	/**
 	 * Tests following structure:
-	 * 
-	 * 				rootCorpus
-	 * 		/					\
-	 * 	subCorp1				subCorp2
-	 * 	/		\				/		\
-	 * doc1		doc2		doc3		doc4
+	 * <pre>
+	 *            rootCorpus
+	 *       /                    \
+	 *   subCorp1               subCorp2
+	 *  /       \              /        \
+	 * doc1     doc2         doc3      doc4
+	 * </pre>
 	 * @throws IOException 
 	 * @throws SAXException 
 	 */
@@ -140,12 +141,13 @@ public class SampleGenerator
 	
 	/**
 	 * Tests following structure:
-	 * 
-	 * 				rootCorpus
-	 * 		/					\
-	 * 	subCorp1				subCorp2
-	 * 	/		\				/		\
-	 * doc1		doc2		doc3		doc4
+	 * <pre>
+	 *            rootCorpus
+	 *       /                    \
+	 *   subCorp1               subCorp2
+	 *  /       \              /        \
+	 * doc1     doc2         doc3      doc4
+	 * </pre>
 	 * @throws IOException 
 	 * @throws SAXException 
 	 */

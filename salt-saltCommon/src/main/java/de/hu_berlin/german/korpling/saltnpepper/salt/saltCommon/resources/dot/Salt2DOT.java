@@ -18,6 +18,8 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -35,10 +37,25 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
-
+/**
+ * This class provides static methods to store a Salt model the dot syntax (see: http://www.graphviz.org/) 
+ * in a file. This dot graph can be visualized via the Graphviz toolbox (see: http://www.graphviz.org/)
+ * into a bunch of graphical formats like jpeg, png, svg etc..
+ * <br/>
+ * This class provides a set of methods to store different parts of a Salt model:
+ * <ul>
+ * 	<li>{@link #salt2Dot(SaltProject, URI)} - to save an entire {@link SaltProject}</li>
+ *  <li>{@link #salt2Dot(SCorpusGraph, URI)} - to store a {@link SCorpusGraph} and its contained entries</li>
+ *  <li>{@link #salt2Dot(SDocumentGraph, URI) -  to store a {@link SDocumentGraph} and its contained entries</li>
+ *  <li>{@link #salt2Dot(SElementId, URI) -  to store either a {@link SCorpusGraph} or a {@link SDocumentGraph} depending on the {@link SElementId}</li>
+ * </ul>
+ * 
+ * @author Florian Zipser
+ * @author hildebax
+ */
+@Deprecated  
 public class Salt2DOT 
 {
-
 	/**
 	 * Creates a dot resource to save a dot model of a SCorpusGraph or a SDocumentGraph (given by obj) to a file given by outputURI.
 	 * @param obj a SCorpusGraph or a SDocumentGraph 
@@ -49,6 +66,7 @@ public class Salt2DOT
 		Resource resourceOut = resourceSet.createResource(outputURI);
 		if (resourceOut==null)
 			throw new SaltResourceException("Cannot export salt model to dot, because the resource is null. Maybe, there is no resource-uri given, or it does not ends with '.dot'. Resource: "+ outputURI);
+		
 		resourceOut.getContents().add(obj);
 		try {
 			resourceOut.save(null);
@@ -91,26 +109,37 @@ public class Salt2DOT
 		//if it is a SaltProject, different URIs for the different components of the project are needed
 		else if (obj instanceof SaltProject) 
 		{
-			for (int corpIndex=0;corpIndex<((SaltProject)obj).getSCorpusGraphs().size();corpIndex++) {
-			//for (SCorpusGraph sCorpusGraph:((SaltProject)obj).getSCorpusGraphs()) {
-				SCorpusGraph sCorpusGraph = ((SaltProject)obj).getSCorpusGraphs().get(corpIndex);
-				URI corpURI = outputURI.appendSegments((String[])sCorpusGraph.getSElementId().getSElementPath().segmentsList().toArray());
-				saveResource(sCorpusGraph, corpURI.appendFileExtension(SaltFactory.FILE_ENDING_DOT), resourceSet);
+			Collection<SCorpusGraph> corpGraphs= Collections.synchronizedCollection(((SaltProject)obj).getSCorpusGraphs());
+			
+//			for (int corpIndex=0;corpIndex<((SaltProject)obj).getSCorpusGraphs().size();corpIndex++) {
+			Integer corpIndex= 0;
+			for (SCorpusGraph sCorpusGraph: corpGraphs) {
+				URI corpUri = null;
+				if (corpGraphs.size()>1){
+					corpUri=outputURI.appendSegment(corpIndex.toString());
+				}else{
+					corpUri= outputURI;
+				}				
+				saveResource(sCorpusGraph, corpUri.appendFileExtension(SaltFactory.FILE_ENDING_DOT), resourceSet);
+				
+				//TODO check if this is really necessary
 				//when calling saveResource(), the sCorpusGraph object will be attached to the resource and therefore removed from list of SaltProject, therefore the graph must be artificially added again  
 				((SaltProject)obj).getSCorpusGraphs().add(corpIndex, sCorpusGraph);
+				
 				for (int docIndex=0;docIndex<sCorpusGraph.getSDocuments().size();docIndex++) 
 				{
 				//for (SDocument sDocument:sCorpusGraph.getSDocuments()) {
 					SDocument sDocument = sCorpusGraph.getSDocuments().get(docIndex);
 					if (sDocument.getSDocumentGraph()!= null)
 					{
-						URI docURI = corpURI.appendSegments((String[])sDocument.getSDocumentGraph().getSElementId().getSElementPath().segmentsList().toArray());
+						URI docURI = corpUri.appendSegments((String[])sDocument.getSDocumentGraph().getSElementId().getSElementPath().segmentsList().toArray());
 						SDocumentGraph sDocGraph= sDocument.getSDocumentGraph(); 
 						saveResource(sDocGraph, docURI.appendFileExtension(SaltFactory.FILE_ENDING_DOT), resourceSet);
 						//when calling saveResource(), the sCorpusGraph object will be attached to the resource and therefore removed from list of SaltProject, therefore the graph must be artificially added again  
 						sDocument.setSDocumentGraph(sDocGraph);
 					}
 				}
+				corpIndex++;
 			}
 		} 
 		else {
@@ -119,9 +148,10 @@ public class Salt2DOT
 	}
 	
 	/**
-	 * Prints a given structure by sElementId to a dot file given by outputURI.
-	 * @param sElementId
-	 * @param outputURI
+	 * Stores the container of the passed {@link SElementId} to a dot file located by the passed
+	 * {@link URI}.
+	 * @param sElementId 
+	 * @param outputURI locating the place to store dot file
 	 */
 	public void salt2Dot(SElementId sElementId, URI outputURI)
 	{
@@ -132,9 +162,10 @@ public class Salt2DOT
 	}
 	
 	/**
-	 * Prints a given SaltProject to a dot files given by outputURI.
+	 * Stores the passed {@link SaltProject} to a dot file located by the passed
+	 * {@link URI}.
 	 * @param saltProject SaltProject to print
-	 * @param outputURI
+	 * @param outputURI locating the place to store dot file
 	 */
 	public void salt2Dot(SaltProject saltProject, URI outputURI)
 	{
@@ -145,9 +176,10 @@ public class Salt2DOT
 	}
 	
 	/**
-	 * Prints a given SCorpusGraph to a dot file given by outputURI.
+	 * Stores the passed {@link SCorpusGraph} to a dot file located by the passed
+	 * {@link URI}.
 	 * @param sDocGraph SCorpusGraph-object to print
-	 * @param outputURI
+	 * @param outputURI locating the place to store dot file
 	 */
 	public void salt2Dot(SCorpusGraph sCorpusGraph, URI outputURI)
 	{
@@ -158,9 +190,10 @@ public class Salt2DOT
 	}
 	
 	/**
-	 * Prints a given SDocumentGraph to a dot file given by outputURI.
+	 * Stores the passed {@link SDocumentGraph} to a dot file located by the passed
+	 * {@link URI}.
 	 * @param sDocGraph SDocumentGraph-object to print
-	 * @param outputURI
+	 * @param outputURI locating the place to store dot file
 	 */
 	public void salt2Dot(SDocumentGraph sDocumentGraph, URI outputURI)
 	{

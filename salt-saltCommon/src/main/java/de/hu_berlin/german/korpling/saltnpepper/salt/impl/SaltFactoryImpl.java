@@ -164,8 +164,9 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 						actualId= actualId.substring(1, actualId.length());
 					globalId.append(actualId);		
 					
-					
-					sDocument.createSProcessingAnnotation(NAMESPACE_SALT, PA_GLOBALID_NAME, globalId.toString());
+					if (!sDocument.hasLabel(createQName(NAMESPACE_SALT, PA_GLOBALID_NAME))){
+						sDocument.createSProcessingAnnotation(NAMESPACE_SALT, PA_GLOBALID_NAME, globalId.toString());
+					}
 				}
 			}
 		}
