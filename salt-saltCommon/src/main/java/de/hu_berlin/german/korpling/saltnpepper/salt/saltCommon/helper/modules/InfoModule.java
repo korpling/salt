@@ -593,7 +593,7 @@ public class InfoModule {
 			gtm.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "info_sdoc_traverse_TDBF", traverser, true);
 		}else{
 			//TODO: Fix problem with ridges corpus
-			System.out.println("No root nodes found: " + sdoc.getSName());
+//			System.out.println("No root nodes found: " + sdoc.getSName());
 		}
 		return sDocInfo;
 	}
