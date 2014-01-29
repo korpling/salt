@@ -209,13 +209,13 @@ public class InfoModuleTest extends TestCase {
 		}
 	}
 	
-	public void testGetDocumentLocationURI() throws Exception {
-		SDocument sdoc = SaltFactory.eINSTANCE.createSDocument();
-		sdoc.setSElementPath(URI.createURI("blablabla:/rootCorpus/doc1"));
-		URI root = URI.createFileURI("/InfoXMLOutput").appendSegment(URI.encodeSegment("", false));
-		URI res = InfoModule.getDocumentLocationURI(sdoc, root);
-		assertEquals("file:/InfoXMLOutput/rootCorpus/doc1.xml", res.toString());
-	}
+//	public void testGetDocumentLocationURI() throws Exception {
+//		SDocument sdoc = SaltFactory.eINSTANCE.createSDocument();
+//		sdoc.setSElementPath(URI.createURI("blablabla:/rootCorpus/doc1"));
+//		URI root = URI.createFileURI("/InfoXMLOutput").appendSegment(URI.encodeSegment("", false));
+//		URI res = InfoModule.getDocumentLocationURI(sdoc, root);
+//		assertEquals("file:/InfoXMLOutput/rootCorpus/doc1.xml", res.toString());
+//	}
 
 	private void validate(final File f, final String schema) throws SAXException, IOException,
 			ParserConfigurationException {
