@@ -492,13 +492,17 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 				if (sRelation!= null)
 				{
 					// get the typename for the sRelation class
-					STYPE_NAME typeName = SaltFactory.eINSTANCE.convertClazzToSTypeName(sRelation.getClass());
+					HashSet<STYPE_NAME> typeName = SaltFactory.eINSTANCE.convertClazzToSTypeName(sRelation.getClass());
 					if (typeName != null){
 						// found matching SType for an implemented interface
-						if (this.relationTypes2Traverse.contains(typeName)){
-							return(true);
+						for (STYPE_NAME name : typeName){
+							if (this.relationTypes2Traverse.contains(name)){
+								return(true);
+							}
 						}
+						
 					} 
+					/*
 					// get the implemented interfaces of the SRelation
 					Class<?>[] iFaces = sRelation.getClass().getInterfaces();
 					Class<? extends EObject> clazz = null;
@@ -514,7 +518,7 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 							} 
 						}
 						
-					}
+					}*/
 				} else 
 				{
 					retVal= true;
