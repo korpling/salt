@@ -29,6 +29,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltE
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltInvalidModelException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
@@ -62,7 +63,8 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 		
 		if (	(!STYPE_NAME.SDOMINANCE_RELATION.equals(sType)) &&
 				(!STYPE_NAME.SPOINTING_RELATION.equals(sType)) &&
-				(!STYPE_NAME.SSPANNING_RELATION.equals(sType)))
+				(!STYPE_NAME.SSPANNING_RELATION.equals(sType)) &&
+				(!STYPE_NAME.SORDER_RELATION.equals(sType)))
 		{// if the relation type isn't supported throw exception
 			throw new SaltModuleException("Cannot compute roots for given SRelation type '"+sType+"', because it isn't supported yet. Supported subtypes are only: SPointingRelation, SSpanningRelation and SDominanceRelation");
 		}// if the subtype isn't supported throw exception
@@ -76,6 +78,8 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSDominanceRelations();
 			else if (STYPE_NAME.SSPANNING_RELATION.equals(sType))
 				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSSpanningRelations();
+			else if (STYPE_NAME.SORDER_RELATION.equals(sType))
+				relations= (EList<SRelation>) (EList<? extends SRelation>) this.getSDocumentGraph().getSOrderRelations();
 		}//compute all relations of subtype
 		if (relations!= null)
 		{
@@ -143,7 +147,7 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 	 * Returns all nodes, which are roots for the given relation-class respects to the given SType of the traversed
 	 * relation. The following example shows the different to the method getRootsBySRelation():
 	 * Imagine the following graphFor example: node1 ->t1 node2, node2 ->t2-> node3.
-	 * Also imagine, that -> is a relation of same class with sType=t1 respectivly sType=t2
+	 * Also imagine, that -> is a relation of same class with sType=t1 respectively sType=t2
 	 * The returned roots will be node1 and node 2, because of node1 is the root of a subgraph for 
 	 * relation.sType=t1 and node2 is the root of the subgraph for relation.sType=t2. Whereas the returned 
 	 * nodes of getRootsBySRelation() is only node1. 
@@ -173,12 +177,14 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 		}//compute all relations
 		for (SRelation currentRel: relations)
 		{//walk through relations
-			//stores if one of the parents is of same class
+			//stores whether one of the parent relation is of same relation class
 			boolean parentHasSameClass= false;
 			//a table to notice, for which sTypes a relation has to be stored
 			Hashtable<String, Boolean> storeSType= new Hashtable<String, Boolean>();
+			
 			if (currentRel.getSource()== null)
 				throw new SaltInvalidModelException("Cannot compute roots, because there is a SRelation object '"+currentRel.getSId()+"' having no source node.");
+			
 			for (Edge edge: this.getSDocumentGraph().getInEdges(currentRel.getSSource().getSId()))
 			{//walk through all incoming relations of currentRelation.sSource
 				if (currRelationType.isInstance(edge))
@@ -186,13 +192,15 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 					parentHasSameClass= true;
 					SRelation parentRelation= (SRelation) edge;
 					if (currentRel.getSTypes()!= null)
-					{	
+					{// the current relation has a SType
 						for (String sType: currentRel.getSTypes())
 						{//store the source node of current relation for every type, which is not contained by parent relation
-							if (parentRelation.getSTypes().contains(sType))
-							{//don't store source, if any parent Relation has not all types of current relation
+							 
+							if (parentRelation.getSTypes() != null && parentRelation.getSTypes().contains(sType))
+							//if (parentRelation.getSTypes().contains(sType))
+							{//if the parent relation and the current relation have the same sTypes, the current relation cannot be a root
 								storeSType.put(sType, false);
-							}//store node, if parent Relation has not all types of current relation
+							}//if at least one sType is not common between the current and the parent relation, the current relation is a root
 							else
 							{	
 								if (storeSType.get(sType)== null)
@@ -200,22 +208,77 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 									storeSType.put(sType, true);
 								}
 							}
+							
+							
 						}//store the source node of current relation for every type, which is not contained by parent relation
+					} else {
+						// the parent relation is a PointingRelation.
+						if (parentRelation instanceof SPointingRelation){
+							if (parentRelation.getSTypes() == null)
+							{ // the parent relation does not have a SRelation, too.Thus, the current relation is no root.
+								storeSType.put(SDocumentGraph.DEFAULT_STYPE, false);
+							} 
+							else 
+							{// the parent relation has STypes. Thus, the current relation is a root.
+								if (storeSType.get(SDocumentGraph.DEFAULT_STYPE)== null)
+								{
+									storeSType.put(SDocumentGraph.DEFAULT_STYPE, true);
+								}
+							}
+								
+						} 
+						
+						else if (parentRelation instanceof SOrderRelation){
+							if (parentRelation.getSTypes() == null)
+							{ // the parent relation does not have a SRelation, too.Thus, the current relation is no root.
+								storeSType.put(SDocumentGraph.DEFAULT_STYPE_SORDERRELATION, false);
+							} 
+							else 
+							{// the parent relation has STypes. Thus, the current relation is a root.
+								if (storeSType.get(SDocumentGraph.DEFAULT_STYPE_SORDERRELATION)== null)
+								{
+									storeSType.put(SDocumentGraph.DEFAULT_STYPE_SORDERRELATION, true);
+								}
+							}
+						}
+							// the parent relation does not have a SRelation, too and it is a PointingRelation. 
+							
+						 
 					}
 				}//regard only current relation type
 			}//walk through all incoming relations of currentRelation.sSource
+			
+			// if there is at least one sType to use 
 			if (storeSType.size()> 0)
 			{
-				for (String sType: currentRel.getSTypes())
+				if (currentRel.getSTypes() != null)
 				{
-					if (storeSType.get(sType))
+					for (String sType: currentRel.getSTypes())
 					{
-						this.storeSType2SNode(sType, currentRel.getSSource());
+						// if the sType of the current relation should be stored
+						if (storeSType.get(sType))
+						{	// do it. 
+							this.storeSType2SNode(sType, currentRel.getSSource());
+						}
 					}
 				}
+				else
+				{
+					if (currentRel instanceof SPointingRelation && storeSType.get(SDocumentGraph.DEFAULT_STYPE))
+					{
+						this.storeSType2SNode(SDocumentGraph.DEFAULT_STYPE, currentRel.getSSource());
+					}
+					else 
+					if (currentRel instanceof SOrderRelation && storeSType.get(SDocumentGraph.DEFAULT_STYPE_SORDERRELATION))
+					{
+						this.storeSType2SNode(SDocumentGraph.DEFAULT_STYPE_SORDERRELATION, currentRel.getSSource());
+					}
+					
+				}
+				
 			}
 			if (!parentHasSameClass)
-			{//there was no parent of class --> store source of current node
+			{// The current relation has no parent of the same class with a compatible sType --> store the source node of the current relation as root
 				if (currentRel.getSTypes()!= null)
 				{	
 					for (String sType: currentRel.getSTypes())
@@ -223,7 +286,19 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 						this.storeSType2SNode(sType, currentRel.getSSource());
 					}
 				}
-			}//there was no parent of class --> store source of current node
+				else 
+				{
+					if (currentRel instanceof SPointingRelation)
+					{
+						this.storeSType2SNode(SDocumentGraph.DEFAULT_STYPE, currentRel.getSSource());
+					}
+					else if (currentRel instanceof SOrderRelation)
+					{
+						this.storeSType2SNode(SDocumentGraph.DEFAULT_STYPE_SORDERRELATION, currentRel.getSSource());
+					}
+					
+				}
+			}// The current relation has no parent of the same class with a compatible sType --> store the source node of the current relation as root
 		}//walk through all relations
 		retVal= this.sType2Roots;
 	
