@@ -486,41 +486,41 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 			else retVal= true;
 				
 		}//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
-//		else {
-//			if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))){
-//				// there is a relation
-//				if (sRelation!= null)
-//				{
-//					// get the typename for the sRelation class
-//					STYPE_NAME typeName = SaltFactory.eINSTANCE.convertClazzToSTypeName(sRelation.getClass());
-//					if (typeName != null){
-//						// found matching SType for an implemented interface
-//						if (this.relationTypes2Traverse.contains(typeName)){
-//							return(true);
-//						}
-//					} 
-//					// get the implemented interfaces of the SRelation
-//					Class<?>[] iFaces = sRelation.getClass().getInterfaces();
-//					Class<? extends EObject> clazz = null;
-//					if (iFaces.length > 0){
-//						for (int i = 0 ; i < iFaces.length; i++){
-//							clazz = (Class<? extends EObject>)iFaces[0];
-//							typeName = SaltFactory.eINSTANCE.convertClazzToSTypeName(clazz);
-//							if (typeName != null){
-//								// found matching SType for an implemented interface
-//								if (this.relationTypes2Traverse.contains(typeName)){
-//									return(true);
-//								}
-//							} 
-//						}
-//						
-//					}
-//				} else 
-//				{
-//					retVal= true;
-//				}
-//			}
-//		}
+		else {
+			if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))){
+				// there is a relation
+				if (sRelation!= null)
+				{
+					// get the typename for the sRelation class
+					STYPE_NAME typeName = SaltFactory.eINSTANCE.convertClazzToSTypeName(sRelation.getClass());
+					if (typeName != null){
+						// found matching SType for an implemented interface
+						if (this.relationTypes2Traverse.contains(typeName)){
+							return(true);
+						}
+					} 
+					// get the implemented interfaces of the SRelation
+					Class<?>[] iFaces = sRelation.getClass().getInterfaces();
+					Class<? extends EObject> clazz = null;
+					if (iFaces.length > 0){
+						for (int i = 0 ; i < iFaces.length; i++){
+							clazz = (Class<? extends EObject>)iFaces[0];
+							typeName = SaltFactory.eINSTANCE.convertClazzToSTypeName(clazz);
+							if (typeName != null){
+								// found matching SType for an implemented interface
+								if (this.relationTypes2Traverse.contains(typeName)){
+									return(true);
+								}
+							} 
+						}
+						
+					}
+				} else 
+				{
+					retVal= true;
+				}
+			}
+		}
 		return(retVal);
 	}
 

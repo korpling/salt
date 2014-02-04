@@ -70,6 +70,16 @@ public interface SDocumentGraph extends SGraph {
 	public static final String IDX_SRELATIONTYPE=	"idx_sRelationType";
 	
 	/**
+	 * default SType string for SRelations which do not have a SType
+	 */
+	public static final String DEFAULT_STYPE= "SALT::NULL";
+	
+	/**
+	 * default SType string for SOrderRelations which do not have a SType
+	 */
+	public static final String DEFAULT_STYPE_SORDERRELATION= "default_seg";
+	
+	/**
 	 * Returns the {@link SDocument} object containing this graph object. The {@link SDocument}
 	 * object is linked via a {@link SFeature} object having the namespace {@value SaltFactory#NAMESPACE_SALT} and
 	 * the name {@value SFEATURE_NAME#SDOCUMENT}.
