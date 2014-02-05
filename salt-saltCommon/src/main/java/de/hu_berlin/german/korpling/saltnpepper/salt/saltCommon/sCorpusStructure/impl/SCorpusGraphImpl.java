@@ -145,18 +145,20 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 						boolean foundEqualGraph= false;
 						for (SDocument otherSDocument: othersCorpusGraph.getSDocuments())
 						{//run through all SCorpusGraph objects belonging to other
-							if (differences!= null)
-							{
-								sDocument.getSDocumentGraph().equals(differences, otherSDocument.getSDocumentGraph());
-								foundEqualGraph= true;
-								break;
-							}
-							else 
-							{
-								if (sDocument.getSDocumentGraph().equals(differences, otherSDocument.getSDocumentGraph()))
+							if (otherSDocument.getSDocumentGraph()!= null){
+								if (differences!= null)
 								{
+									sDocument.getSDocumentGraph().equals(differences, otherSDocument.getSDocumentGraph());
 									foundEqualGraph= true;
 									break;
+								}
+								else 
+								{
+									if (sDocument.getSDocumentGraph().equals(differences, otherSDocument.getSDocumentGraph()))
+									{
+										foundEqualGraph= true;
+										break;
+									}
 								}
 							}
 						}//run through all SCorpusGraph objects belonging to other
