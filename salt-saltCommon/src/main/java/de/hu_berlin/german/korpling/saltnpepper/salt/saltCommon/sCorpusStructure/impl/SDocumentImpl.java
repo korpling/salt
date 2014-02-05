@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SFEATURE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.InfoModule;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
@@ -281,7 +281,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			if(this.getSDocumentGraph() == null){
 				this.loadSDocumentGraph();
 			}
-			im.writeInfoFile(this, infoFile);
+			im.writeInfoFile(this, infoFile,null);
 		} catch (Exception e) {
 			throw new SaltException("Could not write Info XML file for this SDocument to " + outputResource , e);
 		}

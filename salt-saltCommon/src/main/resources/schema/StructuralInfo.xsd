@@ -9,6 +9,7 @@
 
     <xs:attribute name="STextualDS"/>
     <xs:attribute name="sStructure"/>
+    <xs:attribute name="rel-location"/>
     <xs:attribute name="sSpan"/>
     <xs:attribute name="sDominanceRelation"/>
     <xs:attribute name="sSpanningRelation"/>
@@ -26,7 +27,8 @@
     <xs:attribute name="sName" type="xs:string"/>
 
     <xs:attribute name="generatedOn" type="xs:string"/>
-    <xs:attribute name="occurances" type="xs:string"/>
+    <xs:attribute name="occurrences" type="xs:string"/>
     <xs:attribute name="id" type="xs:string"/>
     <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="href" type="xs:string"/>
 </xs:schema>

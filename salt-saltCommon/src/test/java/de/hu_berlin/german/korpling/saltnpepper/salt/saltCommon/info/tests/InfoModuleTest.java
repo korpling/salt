@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests;
+package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.tests;
 
 import java.io.File;
 import java.io.FileReader;
@@ -51,7 +51,7 @@ import org.xml.sax.XMLReader;
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.InfoModule;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
@@ -78,6 +78,9 @@ public class InfoModuleTest extends TestCase {
 		}
 	};
 	
+	
+	
+	
 	/**
 	 * Test if valid Info files for a SaltProject can be generated without errors
 	 * 
@@ -85,7 +88,6 @@ public class InfoModuleTest extends TestCase {
 	 */
 	public void testWriteInfoFile_SaltProject_File_URI() throws Exception {
 			File f = new File(FILE_TMP_DIR, "statTestSaltProject.xml");
-//			File tempDir = new File(FILE_TMP_DIR, "testWriteInfoFile_SaltProject_File_URI_dir/");
 			URI tDir = URI.createFileURI("testWriteInfoFile_SaltProject_File_URI_dir/").resolve(TMP_DIR_URI);
 //			tempDir.mkdir();
 
@@ -99,7 +101,7 @@ public class InfoModuleTest extends TestCase {
 			infoAdapter.writeInfoFile(sp,f, tDir);
 
 			File spInfoFile = f;
-//				System.out.println("Validating: " + spInfoFile.getName());
+//			System.out.println("Validating: " + spInfoFile.getName());
 			validate(spInfoFile,SCHEMA_PATH_SALT_PROJECT);
 	}
 
@@ -118,13 +120,13 @@ public class InfoModuleTest extends TestCase {
 			SDocument sdoc = SaltFactory.eINSTANCE.createSDocument();
 			SampleGenerator.createSDocumentStructure(sdoc);
 			SampleGenerator.createSDocumentSLayered(sdoc);
-			SampleGenerator.addMetaAnnotation(sdoc,"doc-author", "Hans W??rst");
+			SampleGenerator.addMetaAnnotation(sdoc,"doc-author", "Hans Würst");
 			sdoc.setSId("sampleSDocumentID" + i);
 			sdoc.setSName("sampleSDocName" + i);
 			InfoModule infoAdapter = new InfoModule();
 			infoAdapter.setOverwriting(true);
 			File sdocFile = new File(sdoctempdir,sdoc.getSName() + ".xml");
-			infoAdapter.writeInfoFile(sdoc, sdocFile);
+			infoAdapter.writeInfoFile(sdoc, sdocFile,null);
 			files.add(sdocFile);
 		}
 
@@ -139,44 +141,43 @@ public class InfoModuleTest extends TestCase {
 	
 	/**
 	 * TODO: proper test, because with JUnit, but not witch Maven
+	 * WARNING: removed due to maven problems 
 	 * @throws Exception
 	 */
 	public void testUnicode() throws Exception {
-		SaltProject sp = SaltFactory.eINSTANCE.createSaltProject();
-		String testString = "??Testing ?????????????????: 13, now 20% off! ??(-??????-??)?? ??(??????????????)?? ??(????????????)?? ??(-???????????).";
-		sp.setSName(testString);
-//		sp.getSCorpusGraphs().add(SaltFactory.eINSTANCE.createSCorpusGraph());
-		URI out = TMP_DIR_URI.appendSegment("unicode").appendFileExtension("xml");
-		sp.printInfo(out);
-		FileReader fr = new FileReader(out.toFileString());
-		char [] buffer = new char[2048];
-		StringBuffer result = new StringBuffer();
-		int len = 0;
-		while((len =fr.read(buffer)) != -1){
-			result.append(buffer, 0, len);
-		}
-		fr.close();
-		System.out.println("Result=" +result);
-		//assertTrue(result.toString().contains(testString));
+//		SaltProject sp = SaltFactory.eINSTANCE.createSaltProject();
+//		String testString = "Testing «ταБЬℓσ»";
+//		sp.setSName(testString);
+////		sp.getSCorpusGraphs().add(SaltFactory.eINSTANCE.createSCorpusGraph());
+//		URI out = TMP_DIR_URI.appendSegment("unicode").appendFileExtension("xml");
+//		sp.printInfo(out);
+//		FileReader fr = new FileReader(out.toFileString());
+//		char [] buffer = new char[2048];
+//		StringBuffer result = new StringBuffer();
+//		int len = 0;
+//		while((len =fr.read(buffer)) != -1){
+//			result.append(buffer, 0, len);
+//		}
+//		fr.close();
+//		System.out.println("Result=" +result);
+//		assertTrue(result.toString().contains(testString));
 		
 	}
 	public void testPrintInfoFileSCorpus() throws SAXException, IOException, ParserConfigurationException {
 		SaltProject sp = SampleGenerator.createCompleteSaltproject();
 		sp.setSName("Test-SaltProject");
 		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
+		
 		SampleGenerator.createSDocumentSLayered(first);
-		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans W??rst");
-//		SaltFactory.eINSTANCE.createSaltProject().getSCorpusGraphs().add(cg);
+		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
 		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
-		SampleGenerator.addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans W??rst");
+		SampleGenerator.addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans Würst");
 		InfoModule im = new InfoModule();
 		im.setOverwriting(true);
 		File corpusinfo = new File(FILE_TMP_DIR, "corpusInfo.xml");
 //		File tempFolder = new File(FILE_TMP_DIR, );
 		URI tFolder = URI.createFileURI("tempCorpInfo/").resolve(TMP_DIR_URI);
-//		tempFolder.mkdir();
-//		c.setSName("rootCorpus");
-//		c.setSId(c.getSName() + "_graph");
+
 		im.writeInfoFile(c, corpusinfo, tFolder);
 		validate(corpusinfo,SCHEMA_PATH_SALT_PROJECT);
 	}
@@ -189,13 +190,50 @@ public class InfoModuleTest extends TestCase {
 		sp.setSName("Test-SaltProject");
 		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
 		SampleGenerator.createSDocumentSLayered(first);
-		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans W??rst");
+		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
 		
 		XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(buffer);
 //		URI tFolder = (URI.createFileURI(FILE_TMP_DIR).appendSegment("xmlStreamTestTempDir"));
-		URI tFolder = URI.createFileURI("xmlStreamTestTempDir/").resolve(TMP_DIR_URI);
+		URI tFolder = URI.createFileURI("InfoModuleTestData/").resolve(TMP_DIR_URI);
 		im.writeInfoStream(sp, writer,tFolder);
+//		im.createSDocumentInfo(sp);
 		validate(buffer,SCHEMA_PATH_SALT_PROJECT);
+	}
+	
+	public void testPrintInfoDocumentXMLStreamWriter__Scorpus() throws XMLStreamException, FactoryConfigurationError, IOException, SAXException, ParserConfigurationException {
+		StringWriter buffer = new StringWriter();
+		InfoModule im = new InfoModule();
+		im.setOverwriting(true);
+		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		sp.setSName("Test-SaltProject");
+		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
+		SampleGenerator.createSDocumentSLayered(first);
+		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
+		
+		XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(buffer);
+//		URI tFolder = (URI.createFileURI(FILE_TMP_DIR).appendSegment("xmlStreamTestTempDir"));
+		URI tFolder = URI.createFileURI("InfoModuleTestData/").resolve(TMP_DIR_URI);
+		im.writeInfoStream((SCorpus) sp.getSCorpusGraphs().get(0).getRoots().get(0), writer,tFolder);
+//		im.createSDocumentInfo(sp);
+		validate(buffer,SCHEMA_PATH_SALT_PROJECT);
+	}
+	
+	public void testPrintInfoComplete() throws Exception{
+		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		sp.setSName("Test-SaltProject");
+		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
+		SampleGenerator.createSDocumentSLayered(first);
+		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
+		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
+		SampleGenerator.addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans Würst");
+		InfoModule im = new InfoModule();
+		URI tFolder = URI.createFileURI("InfoModuleTestData/").resolve(TMP_DIR_URI);
+		System.out.println("Test folder: " + tFolder);
+		URI out = tFolder.appendSegment("SampleInfo").appendFileExtension("xml");
+//		sp.printInfo(out);
+		im.setCaching(true);
+		im.setWriteAll(true);
+		im.writeInfoFile(sp, new File(out.toFileString()), tFolder);
 	}
 	
 
@@ -204,18 +242,22 @@ public class InfoModuleTest extends TestCase {
 		URI out = URI.createFileURI("emptySDoc.xml").resolve(TMP_DIR_URI);
 		try {
 			emptySDoc.printInfo(out);
+			fail();
 		} catch (SaltException e) {
 			// TODO: handle exception
 		}
 	}
 	
-//	public void testGetDocumentLocationURI() throws Exception {
-//		SDocument sdoc = SaltFactory.eINSTANCE.createSDocument();
-//		sdoc.setSElementPath(URI.createURI("blablabla:/rootCorpus/doc1"));
-//		URI root = URI.createFileURI("/InfoXMLOutput").appendSegment(URI.encodeSegment("", false));
-//		URI res = InfoModule.getDocumentLocationURI(sdoc, root);
-//		assertEquals("file:/InfoXMLOutput/rootCorpus/doc1.xml", res.toString());
-//	}
+	public void testGetDocumentLocationURI() throws Exception {
+		SDocument sdoc = SaltFactory.eINSTANCE.createSDocument();
+		sdoc.setSElementPath(URI.createURI("salt:/rootCorpus/doc1"));
+		URI root = URI.createFileURI("/InfoXMLOutput");
+		URI res = InfoModule.getDocumentLocationURI(sdoc, root);
+		assertEquals("file:/InfoXMLOutput/rootCorpus/doc1", res.toString());
+		
+		URI relative = InfoModule.getDocumentLocationURI(sdoc, null);
+		assertEquals("rootCorpus/doc1", relative.toString());
+	}
 
 	private void validate(final File f, final String schema) throws SAXException, IOException,
 			ParserConfigurationException {
@@ -285,9 +327,9 @@ public class InfoModuleTest extends TestCase {
 	 * TODO: Actual test data has to be provided by the repository
 	 */
 	public void testBigFiles(){
-//		if(true){
-//			PCC2();
-//		}
+		if(true){
+			PCC2();
+		}
 //		if(false){
 //			Ridges();
 //		}

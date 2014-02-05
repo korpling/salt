@@ -27,15 +27,13 @@ import org.xml.sax.SAXException;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.tests.InfoModuleTest;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.tests.InfoModuleTest;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructureFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
-
 import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 
 /**
