@@ -24,6 +24,7 @@ import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.hamcrest.core.Every;
 
 import com.google.common.collect.ImmutableList;
 
@@ -106,6 +107,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokenAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, java.lang.String, java.lang.Boolean) <em>Insert SToken At</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokensAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, org.eclipse.emf.common.util.EList, java.lang.Boolean) <em>Insert STokens At</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSRelation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME, java.lang.String) <em>Create SRelation</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, org.eclipse.emf.common.util.EList) <em>Get Overlapped STokens</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -2038,5 +2040,132 @@ public class SDocumentGraphTest extends TestCase {
 		assertEquals(tok2, sRel.getSTarget());
 		assertEquals(0, sRel.getSAnnotations().size());
 		
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME) <em>Get Overlapped STokens</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME)
+	 */
+	public void testGetOverlappedSTokens__SNode_STYPE_NAME() {
+		
+		STextualDS sText= getFixture().createSTextualDS("This is a sample text");
+		SToken tok1= getFixture().createSToken(sText, 0, 4);
+		SToken tok2= getFixture().createSToken(sText, 5, 7);
+		SToken tok3= getFixture().createSToken(sText, 8, 9);
+		SToken tok4= getFixture().createSToken(sText, 10, 15);
+		SToken tok5= getFixture().createSToken(sText, 16, 20);
+		EList<SToken> tokenList = new BasicEList<SToken>();
+		tokenList.add(tok1);
+		tokenList.add(tok2);
+		tokenList.add(tok3);
+		SSpan sSpan= fixture.createSSpan(tokenList);
+		SRelation pointingRel = this.getFixture().createSRelation(sSpan, tok4, STYPE_NAME.SPOINTING_RELATION, null);
+		
+		EList<SStructuredNode> nodeList = new BasicEList<SStructuredNode>();
+		nodeList.add(sSpan);
+		nodeList.add(tok4);
+		nodeList.add(tok5);
+		SStructure sStructure = fixture.createSStructure(nodeList);
+		
+		// test whether the span overlaps tok1, tok2 and tok3
+		EList<STYPE_NAME> typeList = new BasicEList<STYPE_NAME>();
+		typeList.add(STYPE_NAME.SSPANNING_RELATION);
+		//typeList.add(STYPE_NAME.SPOINTING_RELATION);
+		System.out.println("Getting the tokens which are overlapped by the span. Those should be tok1,tok2 and tok3");
+		System.out.println("There is a pointing relation from the span to tok4. tok4 is not allowed to be in the overlappedTokenList");
+		
+		for (Edge rel : fixture.getOutEdges(sSpan.getSId())){
+			if (rel instanceof SPointingRelation){
+				System.out.println("Found pointing relation from "+rel.getSource().getId() + " to "+rel.getTarget().getId());
+			}
+		}
+		
+		EList<SToken> overlappedTokenList1 = fixture.getOverlappedSTokens(sSpan, typeList);
+		assertNotNull(overlappedTokenList1);
+		System.out.println("TokenList contains:");
+		for (SToken token : tokenList){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		System.out.println("OverlappedTokenList1 contains:");
+		for (SToken token : overlappedTokenList1){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		assertTrue(overlappedTokenList1.containsAll(tokenList));
+		assertFalse(overlappedTokenList1.contains(tok4));
+		
+		System.out.println("Getting the tokens which are overlapped by the span by the SSpanningRelation and the SPointingRelation."); 
+		System.out.println("Those should be tok1,tok2,tok3 and tok4");
+		EList<STYPE_NAME> typeList2 = new BasicEList<STYPE_NAME>();
+		typeList2.add(STYPE_NAME.SSPANNING_RELATION);
+		typeList2.add(STYPE_NAME.SPOINTING_RELATION);
+		tokenList.add(tok4);
+		EList<SToken> overlappedTokenListWithPointing = fixture.getOverlappedSTokens(sSpan, typeList2);
+		assertNotNull(overlappedTokenListWithPointing);
+		System.out.println("TokenList contains:");
+		for (SToken token : tokenList){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		System.out.println("overlappedTokenListWithPointing contains:");
+		for (SToken token : overlappedTokenListWithPointing){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		assertTrue(overlappedTokenListWithPointing.containsAll(tokenList));
+		
+		EList<SToken> allTokenList = new BasicEList<SToken>();
+		allTokenList.add(tok1);
+		allTokenList.add(tok2);
+		allTokenList.add(tok3);
+		allTokenList.add(tok4);
+		allTokenList.add(tok5);
+		typeList.add(STYPE_NAME.SDOMINANCE_RELATION);
+		System.out.println("Getting the tokens which are overlapped by the structures. Those should be tok1 to tok5 since the struct overlaps the span and tok4 and tok5");
+		EList<SToken> overlappedTokenList2 = fixture.getOverlappedSTokens(sStructure, typeList);
+		assertNotNull(overlappedTokenList2);
+		System.out.println("AllTokenList contains:");
+		for (SToken token : allTokenList){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		System.out.println("OverlappedTokenList2 contains:");
+		for (SToken token : overlappedTokenList2){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		assertTrue(overlappedTokenList2.containsAll(allTokenList));
+		
+		System.out.println("Now, we make something special:");
+		System.out.println("The stucture overlapps the span, tok4, tok5 and tok2 directly.");
+		System.out.println("In this case, tok2 is only allowed to occur once");
+		nodeList.add(tok2);
+		SStructure sStructure2 = fixture.createSStructure(nodeList);
+		System.out.println("Getting the tokens which are overlapped by the structures. Those should be tok1 to tok5 since the struct overlaps the span and tok4 and tok5");
+		EList<SToken> overlappedTokenList3 = fixture.getOverlappedSTokens(sStructure2, typeList);
+		assertNotNull(overlappedTokenList3);
+		System.out.println("The node list contains:");
+		for (SNode node : nodeList){
+			System.out.print(node.getSId()+"\t");
+		}
+		System.out.println();
+		System.out.println("OverlappedTokenList3 contains:");
+		for (SToken token : overlappedTokenList3){
+			System.out.print(token.getSId()+"\t");
+		}
+		System.out.println();
+		System.out.print("Checking whether all tokens are contained in the overlapped token list");
+		assertTrue(overlappedTokenList3.containsAll(allTokenList));
+		System.out.println(" ... SUCCESS");
+		System.out.println("Removing first occurence of tok1,tok2,tok3,tok4 and tok5 from the overlapped token list");
+		for (SToken token : allTokenList){
+			overlappedTokenList3.remove(token);
+		}
+		System.out.print("The overlapped token list must be empty now. Checking");
+		assertTrue(overlappedTokenList3.isEmpty());
+		System.out.println("... SUCCESS");
 	}
 } //SDocumentGraphTest

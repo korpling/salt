@@ -21,11 +21,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-
-import javax.annotation.processing.ProcessingEnvironment;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -44,6 +43,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonFactoryImpl;
@@ -55,10 +55,16 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSequentialRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextOverlappingRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
@@ -481,45 +487,65 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	}
 	
 	/**
-	 * Initializes the map of {@link STYPE_NAME} and {@link Class}.
-	 */
-	private void initSType2ClazzMap()
-	{
-		this.sType2clazzMap= Collections.synchronizedMap(new HashMap<STYPE_NAME, Class<? extends EObject>>());
-		sType2clazzMap.put(STYPE_NAME.SDOMINANCE_RELATION, SDominanceRelation.class);
-		sType2clazzMap.put(STYPE_NAME.SPOINTING_RELATION, SPointingRelation.class);
-		sType2clazzMap.put(STYPE_NAME.SSPANNING_RELATION, SSpanningRelation.class);
-		sType2clazzMap.put(STYPE_NAME.STEXT_OVERLAPPING_RELATION, STextOverlappingRelation.class);
-		sType2clazzMap.put(STYPE_NAME.STIME_OVERLAPPING_RELATION, STimeOverlappingRelation.class);
-		sType2clazzMap.put(STYPE_NAME.SSEQUENTIAL_RELATION, SSequentialRelation.class);
-		sType2clazzMap.put(STYPE_NAME.SORDER_RELATION, SOrderRelation.class);
-	}
-	/**
 	 * the map of {@link STYPE_NAME} and {@link Class}.
 	 */
-	private Map<STYPE_NAME, Class<? extends EObject>> sType2clazzMap= null;
+	protected Map<STYPE_NAME, Class<? extends EObject>> sType2clazzMap= null;
+	/**
+	 * Returns map of {@link STYPE_NAME} and {@link Class}.
+	 * @return
+	 */
+	protected Map<STYPE_NAME, Class<? extends EObject>> getSType2clazz(){
+		if (sType2clazzMap== null){
+			synchronized (this) {
+				if (sType2clazzMap== null){
+					sType2clazzMap= Collections.synchronizedMap(new HashMap<STYPE_NAME, Class<? extends EObject>>());
+					sType2clazzMap.put(STYPE_NAME.STEXT_OVERLAPPING_RELATION, STextOverlappingRelation.class);
+					sType2clazzMap.put(STYPE_NAME.STIME_OVERLAPPING_RELATION, STimeOverlappingRelation.class);
+					sType2clazzMap.put(STYPE_NAME.SSEQUENTIAL_RELATION, SSequentialRelation.class);
+					sType2clazzMap.put(STYPE_NAME.SDOMINANCE_RELATION, SDominanceRelation.class);
+					sType2clazzMap.put(STYPE_NAME.SPOINTING_RELATION, SPointingRelation.class);
+					sType2clazzMap.put(STYPE_NAME.SSPANNING_RELATION, SSpanningRelation.class);
+					sType2clazzMap.put(STYPE_NAME.SORDER_RELATION, SOrderRelation.class);
+					
+					sType2clazzMap.put(STYPE_NAME.STEXTUAL_DS, STextualDS.class);
+					sType2clazzMap.put(STYPE_NAME.STOKEN, SToken.class);
+					sType2clazzMap.put(STYPE_NAME.SSPAN, SSpan.class);
+					sType2clazzMap.put(STYPE_NAME.SSTRUCTURE, SStructure.class);
+					
+					sType2clazzMap.put(STYPE_NAME.SDOCUMENT, SDocument.class);
+					sType2clazzMap.put(STYPE_NAME.SCORPUS, SCorpus.class);
+				}
+			}
+		}
+		return(sType2clazzMap);
+	}
 	
+	/**
+	 * {@inheritDoc SaltFactory#convertClazzToSTypeName(Class...)}
+	 */
 	@Override
-	public STYPE_NAME convertClazzToSTypeName(Class<? extends EObject> clazz) 
+	public HashSet<STYPE_NAME> convertClazzToSTypeName(Class<? extends EObject>... classes) 
 	{
-		if (this.sType2clazzMap== null)
-			this.initSType2ClazzMap();
+		HashSet<STYPE_NAME> retVal= new HashSet<STYPE_NAME>();
 		
-		Set<STYPE_NAME> keys= this.sType2clazzMap.keySet();
+		Set<STYPE_NAME> keys= getSType2clazz().keySet();
 		for (STYPE_NAME sType: keys)
 		{
-			Class<? extends EObject> clazz1= sType2clazzMap.get(sType); 
-			if (clazz1.equals(clazz))
-				return(sType);
+			Class<? extends EObject> clazz1= getSType2clazz().get(sType);
+			for (Class<? extends EObject> clazz:classes){
+				if (clazz1.isAssignableFrom(clazz)){
+					retVal.add(sType);
+				}
+			}
 		}
-		return null;
+		return(retVal);
 	}
-
+	
 	@Override
 	public Class<? extends EObject> convertSTypeNameToClazz(STYPE_NAME sType) {
-		if (this.sType2clazzMap== null)
-			this.initSType2ClazzMap();
-		return(this.sType2clazzMap.get(sType));
+		if (sType== null)
+			return(null);
+		return(getSType2clazz().get(sType));
 	}
 
 // ====================================================== end: loading SaltXML resource

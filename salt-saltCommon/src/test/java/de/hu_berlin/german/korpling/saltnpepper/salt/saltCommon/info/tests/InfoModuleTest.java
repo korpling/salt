@@ -323,47 +323,4 @@ public class InfoModuleTest extends TestCase {
 		// TODO Auto-generated method stub
 		validate(new File(res.toFileString()),SCHEMA_PATH_SALT_PROJECT);
 	}
-	/**
-	 * TODO: Actual test data has to be provided by the repository
-	 */
-	public void testBigFiles(){
-		if(true){
-			PCC2();
-		}
-//		if(false){
-//			Ridges();
-//		}
-	}
-	public void PCC2() {
-//       TODO: Remove this test
-		URI pcc2URI = URI.createFileURI("/Developer/SaltNPepper_2012.10.01/workspace/saltxmlppc2/saltProject.salt");
-		SCorpusGraph pcc2Graph = SaltFactory.eINSTANCE.loadSCorpusGraph(pcc2URI);
-		SaltProject pcc2Project = SaltFactory.eINSTANCE.createSaltProject();
-//		pcc2Project.setSName("pp2 Import Test");
-		pcc2Project.getSCorpusGraphs().add(pcc2Graph);
-		
-		File pcc2xml = new File(FILE_TMP_DIR, "pcc2Info.xml");
-//		URI res = URI.createFileURI(pcc2xml.getAbsolutePath());
-		System.out.println(TMP_DIR_URI);
-		URI res = URI.createFileURI("pcc2Info.xml").resolve(TMP_DIR_URI);
-		pcc2Project.printInfo(res);
-		System.out.println("fin");
-	}
-			public void Ridges() {
-//      TODO: Remove this test
-		URI pcc2URI = URI.createFileURI("/Developer/SaltNPepper_2013.05.21/workspace/saltRidges/saltProject.salt");
-		SCorpusGraph pcc2Graph = SaltFactory.eINSTANCE.loadSCorpusGraph(pcc2URI);
-		SaltProject pcc2Project = SaltFactory.eINSTANCE.createSaltProject();
-		pcc2Project.setSName("Ridges Test");
-		pcc2Project.getSCorpusGraphs().add(pcc2Graph);
-		
-		File pcc2xml = new File(FILE_TMP_DIR, "ridges2Info.xml");
-		URI res = URI.createFileURI(pcc2xml.getAbsolutePath());
-		pcc2Project.printInfo(res);
-		System.out.println("fin");
-	}
-	
-	// TODO: Test write to Stream
-	// TODO: Test for correct count
-
 }

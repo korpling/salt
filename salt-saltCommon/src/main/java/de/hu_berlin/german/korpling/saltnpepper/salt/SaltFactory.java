@@ -17,6 +17,8 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt;
 
+import java.util.HashSet;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -34,7 +36,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	/**
@@ -78,6 +79,18 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 */
 	public final static String URI_SALT_SCHEMA="salt:";
 	
+	/** Separator between name and namespace**/
+	public static final String NS_SEPERATOR= Label.NS_SEPERATOR;
+	/**
+	 * default SType string for SRelations which do not have a SType
+	 */
+	public static final String DEFAULT_STYPE= NAMESPACE_SALT+Label.NS_SEPERATOR+"NULL";
+	
+	/**
+	 * default SType string for SOrderRelations which do not have a SType
+	 */
+	public static final String DEFAULT_STYPE_SORDERRELATION= "default_seg";
+	
 	/**
 	 * Returns a qualified name for the passed namespace and name.
 	 * This is computed as follows:<br>
@@ -114,7 +127,7 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * @param class to convert
 	 * @return {@link STYPE_NAME} of given class
 	 */
-	public STYPE_NAME convertClazzToSTypeName(Class<? extends EObject> clazz); 
+	public HashSet<STYPE_NAME> convertClazzToSTypeName(Class<? extends EObject>... clazz); 
 	
 	/**
 	 * Converts the given {@link STYPE_NAME}, into the corresponding class. 
@@ -152,9 +165,9 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * be load, in case of the given SaltXML file contains more than one persisting of
 	 * {@link SCorpusGraph} objects.
 	 * @param sCorpusGraphUri the {@link URI} to locate the SaltXML file
-	 * @param idxOfSCorpusGraph index of graph to be load, note that the list of graphs starts with 0
+	 * @param numOfSCorpusGraph number of graph to be load, note that the list of graphs starts with 0
 	 */
-	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph);
+	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer numOfSCorpusGraph);
 	
 	/**
 	 * Persists the given {@link SDocumentGraph} object as SaltXML file at the 

@@ -343,6 +343,10 @@
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/insertSTokensAt"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_ige54RB_EeO8w57NZbu78g"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_HqjX4GDREeOpk5xZxOZcbg" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getOverlappedSTokens"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_HqjX4WDREeOpk5xZxOZcbg"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_vw8YeIjWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_vw8YeYjWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_vw8YeojWEd6X5oQchPkMiQ"/>
