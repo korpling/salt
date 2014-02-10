@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -46,6 +47,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *
  */
 public class SDocumentInfo {
+	
+	static private Logger log = Logger.getLogger(SDocumentInfo.class);
 	
 //	public final int ALL_TOP_OBJECTS = 0;
 //	public final int ALL_TOP_ANNOTATIONS = 1;
@@ -79,7 +82,7 @@ public class SDocumentInfo {
 		cDocument.putSubIdentifierIfAbsent(allCounts);
 		cDocument.putSubIdentifierIfAbsent(noLayer);
 		cDocument.putSubIdentifierIfAbsent(metaData);
-//		System.out.println("MetaData: " + sDocumentGraph.getSMetaAnnotations().size());
+//		log.debug("MetaData: " + sDocumentGraph.getSMetaAnnotations().size());
 //		for (SMetaAnnotation metaanno : sDocumentGraph.getSMetaAnnotations()) {
 //			addMetaDataItem(metaanno);
 //		}
@@ -363,17 +366,17 @@ public class SDocumentInfo {
 	}
 	
 	public void print() {
-		System.out.println("SDocumentInfo for " + iDocument.clazz);
+		log.debug("SDocumentInfo for " + iDocument.clazz);
 		recPrint("", cDocument);
 	}
 	
 	public void print(String layer) {
-		System.out.println("SDocumentInfo for layer " + layer + " in "+ iDocument.clazz);
+		log.debug("SDocumentInfo for layer " + layer + " in "+ iDocument.clazz);
 		recPrint("", cDocument.getSubCount(this.getIdentifier(layer)));
 	}
 	
 	public void recPrint(String tabs, Count c) {
-		System.out.println(tabs + c.id.clazz + ": " + c.n);
+		log.debug(tabs + c.id.clazz + ": " + c.n);
 		if (c.getSubMap().isEmpty()){
 			return;
 		}
@@ -415,15 +418,15 @@ public class SDocumentInfo {
 				return new SDocumentInfo("empty");
 			}
 		}
-		System.out.println(String.format("==Merging %s %s", left.getName(), right.getName()));
-		System.out.println("Left  total sToken " + left.getCount("SToken", SDocumentInfo.ALL_LAYERS));
-		System.out.println("Right total sToken " + right.getCount("SToken", SDocumentInfo.ALL_LAYERS));
+		log.debug(String.format("==Merging %s %s", left.getName(), right.getName()));
+		log.debug("Left  total sToken " + left.getCount("SToken", SDocumentInfo.ALL_LAYERS));
+		log.debug("Right total sToken " + right.getCount("SToken", SDocumentInfo.ALL_LAYERS));
 		SDocumentInfo merged = new SDocumentInfo(left.getName());
 		Count cMerging = merged.cDocument;
 		Count lRoot    = left.cDocument;
 		Count rRoot    = right.cDocument;
 		rMerge(cMerging, lRoot, rRoot);
-		System.out.println(" Merged total sToken " + merged.getCount("SToken", SDocumentInfo.ALL_LAYERS));
+		log.debug(" Merged total sToken " + merged.getCount("SToken", SDocumentInfo.ALL_LAYERS));
 		return merged;
 	}
 

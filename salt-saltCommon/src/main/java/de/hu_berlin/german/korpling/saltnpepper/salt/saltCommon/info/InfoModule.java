@@ -40,6 +40,7 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -107,7 +108,8 @@ public class InfoModule {
 	private static final String XML_VERSION = "1.0";
 	private static final String XHREF_TAG = "rel-location";
 	
-
+	static private Logger log = Logger.getLogger(InfoModule.class);
+	
 
 	private XMLOutputFactory xmlOutFactory = null;
 	private XMLInputFactory xmlInputFactory = null;
@@ -527,14 +529,14 @@ public class InfoModule {
 		if(graph == null){
 			// cached result
 //			if(resultCache.containsKey(sdoc.getSElementId())){
-//				System.out.println("Cache hit");
+//				log.debug("Cache hit");
 //				return resultCache.remove(sdoc.getSElementId());
 //			}
 			try {
 				// empty result
 				sdoc.loadSDocumentGraph();
 			} catch (SaltResourceNotFoundException e) {
-				System.out.println("could not load " + sdoc);
+				log.debug("could not load " + sdoc);
 				return SDocumentInfo.init("");
 			}
 
@@ -574,13 +576,13 @@ public class InfoModule {
 		gtm.setGraph(sdoc.getSDocumentGraph());
 	
 //		for (Node root : sdoc.getSDocumentGraph().getRoots()) {
-//			System.out.println("Root: " + root);
+//			log.debug("Root: " + root);
 //		}
 		if (startNodes != null){
 			gtm.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "info_sdoc_traverse_TDBF", traverser, true);
 		}else{
 			//TODO: Fix problem with ridges corpus
-			System.out.println("No root nodes found: " + sdoc.getSName());
+			log.debug("No root nodes found: " + sdoc.getSName());
 		}
 		return sDocInfo;
 	}
@@ -605,7 +607,7 @@ public class InfoModule {
 		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
 				String traversalId, Node currNode, Edge edge, Node fromNode,
 				long order) {
-//			System.out.println("Reached: " + currNode.getId() + " from " + fromNode + " over " + edge);
+//			log.debug("Reached: " + currNode.getId() + " from " + fromNode + " over " + edge);
 			sDocInfo.add(currNode);
 			sDocInfo.add(edge);
 			
@@ -655,7 +657,7 @@ public class InfoModule {
 		writeSCorpusTag(writer, sCorpusRoot);
 		Iterator<EObject> corpusGraphIterator = new CorpusGraphIterator(sCorpusGraph);
 		for (EObject out : sCorpusGraph.getOutEdges(sCorpusRoot.getId())) {
-			System.out.println(message + "sCorpusOutEdge: " + out.eClass().getName());
+			log.debug(message + "sCorpusOutEdge: " + out.eClass().getName());
 			SDocumentInfo result;
 			SElementId id;
 			URI partial;
@@ -700,16 +702,16 @@ public class InfoModule {
 				}else{
 					result = saveElementCount(sdoc);
 				}
-				System.out.println(message + "sDocumentInfo: " + result);
+				log.debug(message + "sDocumentInfo: " + result);
 				result.addAllMetaData(sdoc.getSMetaAnnotations());
 				results.add(result);
 				if (options.isWritingAllDocumentInfo()){
-					System.out.println(message + "writing SDocument Info= " + partial.toFileString() + " root was: " + sdocInfoRoot.toFileString());
+					log.debug(message + "writing SDocument Info= " + partial.toFileString() + " root was: " + sdocInfoRoot.toFileString());
 					File sdocInfo = new File(partial.toFileString());
 					writeInfoFile(sdoc, sdocInfo,result);
 				}
 			} else {
-				System.out.println(message + "what is this : " + out);
+				log.debug(message + "what is this : " + out);
 			}
 		}
 		writer.writeEndElement();// end scorpus tag
@@ -791,8 +793,8 @@ public class InfoModule {
 		if (uri.hasAbsolutePath()){
 			uri = URI.createURI(uri.path().substring(1));
 		}
-//		System.out.println(uri);
-//		System.out.println(uri.hasAbsolutePath());
+//		log.debug(uri);
+//		log.debug(uri.hasAbsolutePath());
 //		infoFileLocation = infoFileLocation.deresolve(infoFileLocation.));
 		if(root != null ){
 			if(!root.hasTrailingPathSeparator()){
@@ -801,7 +803,6 @@ public class InfoModule {
 				uri = uri.resolve(root);
 			}
 		}
-		System.out.println(uri);
 		return uri;
 	}
 	

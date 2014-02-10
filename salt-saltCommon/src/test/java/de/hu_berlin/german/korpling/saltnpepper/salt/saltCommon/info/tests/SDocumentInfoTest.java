@@ -24,10 +24,12 @@ import java.util.Map.Entry;
 
 import junit.framework.TestCase;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.SDocumentInfo;
 //import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentInfo.InfoEntry;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
@@ -37,13 +39,15 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class SDocumentInfoTest extends TestCase {
 	
+	static private Logger log = Logger.getLogger(SDocumentInfoTest.class);
+	
 	@Override
 	protected void setUp() throws Exception {
 		SCorpusGraph sgraph = SampleGenerator.createCorpusStructure_simple();
 		SampleGenerator.createSDocument_simpleLayeredDocument(sgraph.getSDocuments().get(0));
 		
 		fixture = SDocumentInfo.init(sgraph.getSDocuments().get(0).getSDocumentGraph());
-		System.out.println("Setup: STokens=" + sgraph.getSDocuments().get(0).getSDocumentGraph().getSTokens().size());
+		log.debug("Setup: STokens=" + sgraph.getSDocuments().get(0).getSDocumentGraph().getSTokens().size());
 		fixture.addAllObjects(sgraph.getSDocuments().get(0).getSDocumentGraph().getSTokens());
 		super.setUp();
 	}
@@ -124,7 +128,7 @@ public class SDocumentInfoTest extends TestCase {
 		Collection<String> layerNames = fixture.getLayerNames();
 		assertEquals(2, layerNames.size());
 		for (String string : layerNames) {
-			System.out.println("Layer: " + string);
+			log.debug("Layer: " + string);
 			if(string.equals("sLayer1") ||
 			   string.equals(SDocumentInfo.NOSLAYER_TAG)||
 			   string.equals(SDocumentInfo.ALL_LAYERS) ||
@@ -153,9 +157,9 @@ public class SDocumentInfoTest extends TestCase {
 		SDocumentInfo scorpus = SDocumentInfo.init("Test");
 		annotated.addAllMetaData(sgraph.getSDocuments().get(0).getSDocumentGraph().getSMetaAnnotations());
 		annotated.print();
-		System.out.println(annotated.getMetaData().size());
+		log.debug(annotated.getMetaData().size());
 		for (Entry<String, String> metaElement : annotated.getMetaData().entrySet()) {
-			System.out.println(String.format("Metadata k=%s v=%s", metaElement.getKey(),metaElement.getValue()));
+			log.debug(String.format("Metadata k=%s v=%s", metaElement.getKey(),metaElement.getValue()));
 			assertTrue(metaMap.get(metaElement.getKey()).equals(metaElement.getValue()));
 		}
 		SDocumentInfo mergedMetaData = SDocumentInfo.merge(annotated, annotated2);
@@ -178,7 +182,7 @@ public class SDocumentInfoTest extends TestCase {
 			Map<String, Integer> annoNames = sample.getCounts(SDocumentInfo.ALL_LAYERS,annoType.getKey());
 			for (Entry<String, Integer> annoValue : annoNames.entrySet()) {
 				Map<String, Integer> annoValues = sample.getCounts(SDocumentInfo.ALL_LAYERS,annoType.getKey(),annoValue.getKey());
-				System.out.println(String.format("Annotation: Layer=%s, annotype=%s, annoName=%s, annoOcc=%s", SDocumentInfo.ALL_LAYERS, annoType.getKey(),annoValue.getKey(),annoValue.getValue() ));
+				log.debug(String.format("Annotation: Layer=%s, annotype=%s, annoName=%s, annoOcc=%s", SDocumentInfo.ALL_LAYERS, annoType.getKey(),annoValue.getKey(),annoValue.getValue() ));
 			}
 		}
 	}

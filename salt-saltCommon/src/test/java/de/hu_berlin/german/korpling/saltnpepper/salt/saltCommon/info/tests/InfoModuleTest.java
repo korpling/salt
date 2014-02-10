@@ -39,6 +39,7 @@ import javax.xml.validation.SchemaFactory;
 
 import junit.framework.TestCase;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -58,6 +59,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class InfoModuleTest extends TestCase {
+	
+	private Logger log = Logger.getLogger(InfoModule.class);
+	
 
 	static final String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
 	static final String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
@@ -101,7 +105,7 @@ public class InfoModuleTest extends TestCase {
 			infoAdapter.writeInfoFile(sp,f, tDir);
 
 			File spInfoFile = f;
-//			System.out.println("Validating: " + spInfoFile.getName());
+//			log.debug("Validating: " + spInfoFile.getName());
 			validate(spInfoFile,SCHEMA_PATH_SALT_PROJECT);
 	}
 
@@ -159,7 +163,7 @@ public class InfoModuleTest extends TestCase {
 //			result.append(buffer, 0, len);
 //		}
 //		fr.close();
-//		System.out.println("Result=" +result);
+//		log.debug("Result=" +result);
 //		assertTrue(result.toString().contains(testString));
 		
 	}
@@ -228,7 +232,7 @@ public class InfoModuleTest extends TestCase {
 		SampleGenerator.addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans Würst");
 		InfoModule im = new InfoModule();
 		URI tFolder = URI.createFileURI("InfoModuleTestData/").resolve(TMP_DIR_URI);
-		System.out.println("Test folder: " + tFolder);
+		log.debug("Test folder: " + tFolder);
 		URI out = tFolder.appendSegment("SampleInfo").appendFileExtension("xml");
 //		sp.printInfo(out);
 		im.setCaching(true);
@@ -261,7 +265,7 @@ public class InfoModuleTest extends TestCase {
 
 	private void validate(final File f, final String schema) throws SAXException, IOException,
 			ParserConfigurationException {
-		System.out.println("Validating: " + f.getName());
+		log.debug("Validating: " + f.getName());
 		XMLReader reader = getXMLParser(schema);
 		reader.parse(f.getAbsolutePath());
 	}
@@ -297,19 +301,19 @@ public class InfoModuleTest extends TestCase {
 			
 			@Override
 			public void warning(SAXParseException exception) throws SAXException {
-				System.out.println(exception.getMessage());
+				log.error(exception.getMessage());
 				throw new SAXParseException("XML not valid", null);
 			}
 			
 			@Override
 			public void fatalError(SAXParseException exception) throws SAXException {
-				System.out.println(exception.getMessage());
+				log.error(exception.getMessage());
 				throw new SAXParseException("XML not valid", null);
 			}
 			
 			@Override
 			public void error(SAXParseException exception) throws SAXException {
-				System.out.println(exception.getMessage());
+				log.error(exception.getMessage());
 				throw new SAXParseException("XML not valid", null);
 			}
 		});
