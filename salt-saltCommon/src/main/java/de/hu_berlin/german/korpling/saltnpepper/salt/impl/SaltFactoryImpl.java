@@ -43,7 +43,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonFactoryImpl;
@@ -63,14 +62,13 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAbstractAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SCatAnnotation;
@@ -131,12 +129,19 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		String globalId= null;
 		if (sDocumentId!= null){
 			if (	(sDocumentId.getSIdentifiableElement()!= null)&&
-					(sDocumentId.getSIdentifiableElement() instanceof SDocument)){
-				SDocument sDocument= (SDocument) sDocumentId.getSIdentifiableElement();
-				SProcessingAnnotation pa= sDocument.getSProcessingAnnotation(createQName(NAMESPACE_SALT, PA_GLOBALID_NAME));
+					(sDocumentId.getSIdentifiableElement() instanceof SProcessingAnnotatableElement)){
+				SProcessingAnnotatableElement sElement= (SProcessingAnnotatableElement) sDocumentId.getSIdentifiableElement();
+				SProcessingAnnotation pa= sElement.getSProcessingAnnotation(createQName(NAMESPACE_SALT, PA_GLOBALID_NAME));
 				if (pa!= null)
 					globalId= pa.getSValueSTEXT();
 			}
+//			if (	(sDocumentId.getSIdentifiableElement()!= null)&&
+//					(sDocumentId.getSIdentifiableElement() instanceof SDocument)){
+//				SDocument sDocument= (SDocument) sDocumentId.getSIdentifiableElement();
+//				SProcessingAnnotation pa= sDocument.getSProcessingAnnotation(createQName(NAMESPACE_SALT, PA_GLOBALID_NAME));
+//				if (pa!= null)
+//					globalId= pa.getSValueSTEXT();
+//			}
 		}
 		return(globalId);
 	}

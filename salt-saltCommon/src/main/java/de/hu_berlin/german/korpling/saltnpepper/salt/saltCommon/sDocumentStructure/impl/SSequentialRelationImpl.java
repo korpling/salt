@@ -120,7 +120,8 @@ public abstract class SSequentialRelationImpl extends SRelationImpl implements S
 		Integer retVal= null;
 		String name= SaltCommonPackage.eNS_PREFIX + "::" + FEAT_SEND;
 		SFeature sFeature= this.getSFeature(name);
-		if (sFeature!= null)
+		if (	(sFeature!= null)&&
+				(sFeature.getSValue()!= null))
 		{
 			retVal= Integer.decode(sFeature.getSValue().toString());
 		}
