@@ -814,9 +814,8 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SaltCommonPackage.SALT_PROJECT__SCORPUS_GRAPHS:{
+			case SaltCommonPackage.SALT_PROJECT__SCORPUS_GRAPHS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSCorpusGraphs()).basicAdd(otherEnd, msgs);
-			}
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -829,9 +828,8 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case SaltCommonPackage.SALT_PROJECT__SCORPUS_GRAPHS:{
+			case SaltCommonPackage.SALT_PROJECT__SCORPUS_GRAPHS:
 				return ((InternalEList<?>)getSCorpusGraphs()).basicRemove(otherEnd, msgs);
-			}
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
