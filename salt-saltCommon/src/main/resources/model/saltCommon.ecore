@@ -89,6 +89,32 @@
       <eOperations name="load">
         <eParameters name="sCorpusGraphUri" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
       </eOperations>
+      <eOperations name="createSCorpus" eType="#//sCorpusStructure/SCorpus">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Creates a new {@link SCorpus} object having the name &lt;code>sCorpusName&lt;/code>. The new created  {@link SCorpus} object is added as a sub-corpus to the given &lt;code>superSCorpus&lt;/code>. An {@link SCorpusRelation} is created to connect them. The new created {@link SCorpus} is returned. If &lt;code>superSCorpus&lt;/code> does not exist, a root corpus is created.&#xA;@param superSCorpus the parent {@link SCorpus} object&#xA;@param sCorpusName the name of the {@link SCorpus} object to be new created&#xA;@return the new created {@link SCorpus} object"/>
+        </eAnnotations>
+        <eParameters name="superSCorpus" eType="#//sCorpusStructure/SCorpus"/>
+        <eParameters name="sCorpusName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="createSDocument" eType="#//sCorpusStructure/SDocument">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Creates a {@link SDocument} object having the name &lt;code>sDocumentName&lt;/code> and is added to the given  &lt;code>parentSCorpus&lt;/code> via a {@link SCorpusDocumentRelation}.&#xA;@param parentSCorpus the parent {@link SCorpus} object&#xA;@param sDocumentName the name of the {@link SDocument} object to be new created&#xA;@return the new created {@link SDocument} object"/>
+        </eAnnotations>
+        <eParameters name="parentSCorpus" eType="#//sCorpusStructure/SCorpus"/>
+        <eParameters name="sDocumentName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="createSCorpus" upperBound="-1" eType="#//sCorpusStructure/SCorpus">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Creates all {@link SCorpus} objects contained in the passed &lt;code>corpusPath&lt;/code> and returns &#xA;a list of all {@link SCorpus} objects. &#xA;@param corpusPath the URI path of corpora&#xA;@return all created {@link SCorpus} objects"/>
+        </eAnnotations>
+        <eParameters name="corpusPath" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eOperations>
+      <eOperations name="createSDocument" eType="#//sCorpusStructure/SDocument">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Creates all {@link SCorpus} objects contained in the passed corpusPath and assumes,  that the last segment is a {@link SDocument} object.  The created {@link SDocument} than is returned.&#xA;@param documentPath&#xA;@return"/>
+        </eAnnotations>
+        <eParameters name="documentPath" eType="ecore:EDataType ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//URI"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocuments" upperBound="-1"
           eType="#//sCorpusStructure/SDocument" volatile="true" transient="true" derived="true"
           containment="true" eOpposite="#//sCorpusStructure/SDocument/sCorpusGraph"/>

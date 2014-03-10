@@ -486,6 +486,72 @@ public class SCorpusGraphTest extends TestCase implements SGraphTraverseHandler{
 		assertEquals("differences: "+ template.differences(this.getFixture()), template, this.getFixture());
 	}
 
+	/**
+	 * Tests the creation of a {@link SCorpus} object via a super corpus.  
+	 */
+	public void testCreateSCorpus__SCorpus_String() {
+		SCorpus sCorpus= SaltFactory.eINSTANCE.createSCorpus();
+		getFixture().addSNode(sCorpus);
+		SCorpus sCorp2= getFixture().createSCorpus(sCorpus, "corp2");
+		
+		assertNotNull(getFixture().getSNode(sCorp2.getSId()));
+		assertEquals(2, getFixture().getSNodes().size());
+		assertEquals(1, getFixture().getSRelations().size());
+	}
+
+	/**
+	 * Tests the creation of a {@link SDocument} object via a super corpus.  
+	 */
+	public void testCreateSDocument__SCorpus_String() {
+		SCorpus sCorpus= SaltFactory.eINSTANCE.createSCorpus();
+		getFixture().addSNode(sCorpus);
+		SDocument sDoc= getFixture().createSDocument(sCorpus, "doc1");
+		
+		assertNotNull(getFixture().getSNode(sDoc.getSId()));
+		assertEquals(2, getFixture().getSNodes().size());
+		assertEquals(1, getFixture().getSRelations().size());
+	}
+
+	/**
+	 * Tests the creation of {@link SCorpus} objects via a URI. 
+	 * The URI is c1/c2/c3 and c1/c2/c4
+	 */
+	public void testCreateSCorpus__URI() {
+		URI path= URI.createURI("salt:/c1/c2/c3");
+		List<SCorpus> corpora= getFixture().createSCorpus(path);
+		
+		assertNotNull(corpora);
+		assertEquals(3, corpora.size());
+		assertEquals(3, getFixture().getSNodes().size());
+		assertEquals(2, getFixture().getSRelations().size());
+		
+		path= URI.createURI("salt:/c1/c2/c4");
+		corpora= getFixture().createSCorpus(path);
+		assertNotNull(corpora);
+		assertEquals(1, corpora.size());
+		assertEquals(4, getFixture().getSNodes().size());
+		assertEquals(3, getFixture().getSRelations().size());
+	}
+
+	/**
+	 * Tests the creation of {@link SCorpus} objects via a URI. 
+	 * The URI is c1/c2/d1 and c1/c2/d2
+	 */
+	public void testCreateSDocument__URI() {
+		URI path= URI.createURI("salt:/c1/c2/c3");
+		SDocument sDoc= getFixture().createSDocument(path);
+		
+		assertNotNull(sDoc);
+		assertEquals(3, getFixture().getSNodes().size());
+		assertEquals(2, getFixture().getSRelations().size());
+		
+		path= URI.createURI("salt:/c1/c2/c4");
+		sDoc= getFixture().createSDocument(path);
+		assertNotNull(sDoc);
+		assertEquals(4, getFixture().getSNodes().size());
+		assertEquals(3, getFixture().getSRelations().size());
+	}
+
 	public void testCheckElementId()
 	{
 		SCorpus sCorpus = SaltCommonFactory.eINSTANCE.createSCorpus();

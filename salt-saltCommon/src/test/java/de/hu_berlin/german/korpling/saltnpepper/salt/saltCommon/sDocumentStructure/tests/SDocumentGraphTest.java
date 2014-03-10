@@ -2043,13 +2043,12 @@ public class SDocumentGraphTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME) <em>Get Overlapped STokens</em>}' operation.
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, org.eclipse.emf.common.util.EList) <em>Get Overlapped STokens</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, org.eclipse.emf.common.util.EList)
 	 */
-	public void testGetOverlappedSTokens__SNode_STYPE_NAME() {
-		
+	public void testGetOverlappedSTokens__SNode_EList() {
 		STextualDS sText= getFixture().createSTextualDS("This is a sample text");
 		SToken tok1= getFixture().createSToken(sText, 0, 4);
 		SToken tok2= getFixture().createSToken(sText, 5, 7);

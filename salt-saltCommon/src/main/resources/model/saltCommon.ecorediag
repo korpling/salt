@@ -111,13 +111,29 @@
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/load"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_Il7jMbB9EeGksebmK-oU-Q"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_dYYrUKhkEeOCP7F5wWAKyg" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/createSCorpus"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_dYYrUahkEeOCP7F5wWAKyg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_0_KIUKhkEeOCP7F5wWAKyg" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/createSDocument"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_0_KIUahkEeOCP7F5wWAKyg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_AL5GgKhlEeOCP7F5wWAKyg" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/createSCorpus.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_AL5GgahlEeOCP7F5wWAKyg"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E8GtMKhlEeOCP7F5wWAKyg" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sCorpusStructure/SCorpusGraph/createSDocument.1"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_E8GtMahlEeOCP7F5wWAKyg"/>
+          </children>
           <styles xmi:type="notation:DrawerStyle" xmi:id="_kxpZVYjWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:SortingStyle" xmi:id="_kxpZVojWEd6X5oQchPkMiQ"/>
           <styles xmi:type="notation:FilteringStyle" xmi:id="_kxpZV4jWEd6X5oQchPkMiQ"/>
         </children>
         <styles xmi:type="notation:ShapeStyle" xmi:id="_kxjSsYjWEd6X5oQchPkMiQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
         <element xmi:type="ecore:EClass" href="saltCommon.ecore#//sCorpusStructure/SCorpusGraph"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kxjSsojWEd6X5oQchPkMiQ" x="1" y="174" width="337" height="183"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_kxjSsojWEd6X5oQchPkMiQ" x="1" y="174" width="362" height="260"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mr_mIIjWEd6X5oQchPkMiQ" type="2003">
         <children xmi:type="notation:Node" xmi:id="_msFswIjWEd6X5oQchPkMiQ" type="4002"/>

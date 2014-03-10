@@ -241,4 +241,59 @@ public interface SCorpusGraph extends SGraph {
 	 */
 	void load(URI sCorpusGraphUri);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Creates a new {@link SCorpus} object having the name <code>sCorpusName</code>. The new created  {@link SCorpus} object is added as a sub-corpus to the given <code>superSCorpus</code>. An {@link SCorpusRelation} is created to connect them. The new created {@link SCorpus} is returned. If <code>superSCorpus</code> does not exist, a root corpus is created.
+	 * @param superSCorpus the parent {@link SCorpus} object
+	 * @param sCorpusName the name of the {@link SCorpus} object to be new created
+	 * @return the new created {@link SCorpus} object
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	SCorpus createSCorpus(SCorpus superSCorpus, String sCorpusName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Creates a {@link SDocument} object having the name <code>sDocumentName</code> and is added to the given  <code>parentSCorpus</code> via a {@link SCorpusDocumentRelation}.
+	 * @param parentSCorpus the parent {@link SCorpus} object
+	 * @param sDocumentName the name of the {@link SDocument} object to be new created
+	 * @return the new created {@link SDocument} object
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	SDocument createSDocument(SCorpus parentSCorpus, String sDocumentName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Creates all {@link SCorpus} objects contained in the passed <code>corpusPath</code> and returns 
+	 * a list of all {@link SCorpus} objects. 
+	 * @param corpusPath the URI path of corpora
+	 * @return all created {@link SCorpus} objects
+	 * <!-- end-model-doc -->
+	 * @model corpusPathDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	EList<SCorpus> createSCorpus(URI corpusPath);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Creates all {@link SCorpus} objects contained in the passed corpusPath and assumes,  that the last segment is a {@link SDocument} object.  The created {@link SDocument} than is returned.
+	 * @param documentPath
+	 * @return
+	 * <!-- end-model-doc -->
+	 * @model documentPathDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 * @generated
+	 */
+	SDocument createSDocument(URI documentPath);
+
 } // SCorpusGraph

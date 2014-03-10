@@ -18,8 +18,11 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl;
 
 import com.google.common.collect.ImmutableList;
+
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -49,6 +52,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
+
 import org.eclipse.emf.ecore.util.DelegatingEcoreEList;
 
 /**
@@ -545,6 +549,68 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		
 		//moves content of loaded SCorpusgraph object to this
 		SaltFactory.eINSTANCE.move(sCorpusGraph, this);
+	}
+
+	/**
+	 * {@inheritDoc SCorpusGraph#createSDocument(SCorpus, String)}
+	 */
+	public SCorpus createSCorpus(SCorpus superSCorpus, String sCorpusName) {
+		SCorpus sCorpus= SaltFactory.eINSTANCE.createSCorpus();
+		sCorpus.setSName(sCorpusName);
+		if (superSCorpus!= null){
+			addSSubCorpus(superSCorpus, sCorpus);
+		}else{
+			addSNode(sCorpus);
+		}
+		return(sCorpus);
+	}
+
+	/**
+	 * {@inheritDoc SCorpusGraph#createSDocument(SCorpus, String)}
+	 */
+	public SDocument createSDocument(SCorpus parentSCorpus, String sDocumentName) {
+		SDocument sDoc= SaltFactory.eINSTANCE.createSDocument();
+		sDoc.setSName(sDocumentName);
+		addSDocument(parentSCorpus, sDoc);
+		return(sDoc);
+	}
+
+	/**
+	 * {@inheritDoc SCorpusGraph#createSCorpus(URI)}
+	 */
+	public EList<SCorpus> createSCorpus(URI corpusPath) {
+		EList<SCorpus> retVal= null;
+		if (corpusPath!= null){
+			SCorpus parentCorpus= null;
+			for (int i= corpusPath.segments().length-1;i >= 0; i--){
+				URI currPath= corpusPath.trimSegments(i);
+				SNode sNode= getSNode(currPath.toString());
+				if (sNode== null){
+					parentCorpus= createSCorpus(parentCorpus, currPath.lastSegment());
+					if (retVal== null)
+						retVal= new BasicEList<SCorpus>();
+					retVal.add(parentCorpus);
+				}else{
+					parentCorpus= (SCorpus) sNode;
+				}
+			}
+		}
+		return(retVal);
+	}
+
+	/**
+	 * {@inheritDoc SCorpusGraph#createSDocument(URI)}
+	 */
+	public SDocument createSDocument(URI documentPath) {
+		SDocument retVal= null;
+		List<SCorpus> corpora= createSCorpus(documentPath.trimSegments(1));
+		if (	(corpora== null)||
+				(corpora.size()== 0)){
+			corpora= new Vector<SCorpus>();
+			corpora.add((SCorpus)getSNode(documentPath.trimSegments(1).toString()));
+		}
+		retVal= createSDocument(corpora.get(corpora.size()-1), documentPath.lastSegment());
+		return(retVal);
 	}
 
 	/**
