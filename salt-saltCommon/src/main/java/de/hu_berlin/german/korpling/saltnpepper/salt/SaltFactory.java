@@ -23,18 +23,19 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.omg.PortableInterceptor.ServerIdHelper;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
 
 public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
@@ -100,27 +101,13 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 */
 	public String createQName(String namespace, String name);
 	
-	/** Name of created {@link SProcessingAnnotation} for global id for {@link SDocument} **/
-	public final static String PA_GLOBALID_NAME="globalID";
 	/**
-	 * Returns a global ID for the passed {@link SDocument} object, in case it is set.
-	 * Null otherwise.
-	 * <br/>
-	 * The global id is retrieved via a {@link SProcessingAnnotation} having the namespace
-	 * {@link #PA_GLOBALID_NS} and the name {@link #PA_GLOBALID_NAME}. This {@link SProcessingAnnotation}
-	 * for instance is set in method {@link #createGlobalId(SElementId)}.
-	 * @param sDOcument Object to retrieve global id.
+	 * Returns a global ID for the passed object (either if {@link SElementId} belongs to {@link SDocument} or {@link SCorpus} object). A global id only can be returned, if the element is contained 
+	 * in a {@link SCorpusGraph} object. If this is not the case, the {@link ServerIdHelper} is returned.
+	 * @param sElementId Object to retrieve global id.
 	 * @return String value for global id, if one is given.
 	 */
-	public String getGlobalId(SElementId sDocumentId);
-	
-	/**
-	 * Creates a global id for the passed {@link SElementId}. The {@link SElementId} must 
-	 * correspond to a {@link SDocument}. 
-	 * @param sDocumentId {@link SElementId} corresponding to a {@link SDocument}
-	 * @return a global identifier which is unique in entire salt project
-	 */
-	public String createGlobalId(SElementId sDocumentId);
+	public String getGlobalId(SElementId sElementId);
 	
 	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.

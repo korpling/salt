@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
@@ -60,6 +61,29 @@ public class SaltFactoryImplTest extends TestCase
 	public void setUp()
 	{
 		this.setFixture(SaltFactory.eINSTANCE);
+	}
+	
+	public void testGlobalId(){
+		SaltProject proj= SaltFactory.eINSTANCE.createSaltProject();
+		SCorpusGraph g1= SaltFactory.eINSTANCE.createSCorpusGraph();
+		proj.getSCorpusGraphs().add(g1);
+		SCorpus c11= SaltFactory.eINSTANCE.createSCorpus();
+		c11.setSName("c1");
+		g1.addSNode(c11);
+		SDocument d11= g1.createSDocument(c11, "d1");
+		
+		SCorpusGraph g2= SaltFactory.eINSTANCE.createSCorpusGraph();
+		proj.getSCorpusGraphs().add(g2);
+		SCorpus c21= SaltFactory.eINSTANCE.createSCorpus();
+		c21.setSName("c1");
+		g2.addSNode(c21);
+		SDocument d21=  g2.createSDocument(c21, "d1");
+		
+		assertEquals("salt:/0/c1/", getFixture().getGlobalId(c11.getSElementId()));
+		assertEquals("salt:/1/c1/", getFixture().getGlobalId(c21.getSElementId()));
+		
+		assertEquals("salt:/0/c1/d1", getFixture().getGlobalId(d11.getSElementId()));
+		assertEquals("salt:/1/c1/d1", getFixture().getGlobalId(d21.getSElementId()));
 	}
 	
 	public void testLoadSaltProject()

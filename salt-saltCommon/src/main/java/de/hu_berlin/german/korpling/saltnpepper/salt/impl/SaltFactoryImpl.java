@@ -68,7 +68,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SCatAnnotation;
@@ -124,60 +123,34 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	 * {@inheritDoc SaltFactory#getGlobalId(SElementId)}
 	 */
 	@Override
-	public String getGlobalId(SElementId sDocumentId)
+	public String getGlobalId(SElementId sElementId)
 	{
-		String globalId= null;
-		if (sDocumentId!= null){
-			if (	(sDocumentId.getSIdentifiableElement()!= null)&&
-					(sDocumentId.getSIdentifiableElement() instanceof SProcessingAnnotatableElement)){
-				SProcessingAnnotatableElement sElement= (SProcessingAnnotatableElement) sDocumentId.getSIdentifiableElement();
-				SProcessingAnnotation pa= sElement.getSProcessingAnnotation(createQName(NAMESPACE_SALT, PA_GLOBALID_NAME));
-				if (pa!= null)
-					globalId= pa.getSValueSTEXT();
+		StringBuffer globalId= new StringBuffer();
+
+		if (	(sElementId!= null)&&
+				(sElementId.getSIdentifiableElement()!= null)){
+			globalId.append(URI_SALT_SCHEMA);
+			SCorpusGraph graph= null;
+			if (	(sElementId.getSIdentifiableElement() instanceof SDocument)&&
+					(((SDocument)sElementId.getSIdentifiableElement()).getSCorpusGraph()!= null)){
+				graph= ((SDocument)sElementId.getSIdentifiableElement()).getSCorpusGraph();
+			}else if (	(sElementId.getSIdentifiableElement() instanceof SCorpus)&&
+						(((SCorpus)sElementId.getSIdentifiableElement()).getSCorpusGraph()!= null)){
+				graph= ((SCorpus)sElementId.getSIdentifiableElement()).getSCorpusGraph();
 			}
-//			if (	(sDocumentId.getSIdentifiableElement()!= null)&&
-//					(sDocumentId.getSIdentifiableElement() instanceof SDocument)){
-//				SDocument sDocument= (SDocument) sDocumentId.getSIdentifiableElement();
-//				SProcessingAnnotation pa= sDocument.getSProcessingAnnotation(createQName(NAMESPACE_SALT, PA_GLOBALID_NAME));
-//				if (pa!= null)
-//					globalId= pa.getSValueSTEXT();
-//			}
-		}
-		return(globalId);
-	}
-	
-	/**
-	 * {@inheritDoc SaltFactory#createGlobalId(SElementId)}
-	 */
-	public String createGlobalId(SElementId sDocumentId){
-		StringBuilder globalId= new StringBuilder();
-		if (sDocumentId!= null){
-			synchronized (sDocumentId) {
-				if (	(sDocumentId.getSIdentifiableElement()!= null)&&
-						(sDocumentId.getSIdentifiableElement() instanceof SDocument)){
-					SDocument sDocument= (SDocument) sDocumentId.getSIdentifiableElement();
-					
-					globalId.append(URI_SALT_SCHEMA);
-					
-					SCorpusGraph graph= sDocument.getSCorpusGraph(); 
-					if (graph!= null)
-					{
-						SaltProject project= graph.getSaltProject(); 
-						if (project!= null)
-						{
-							globalId.append("/");
-							globalId.append(project.getSCorpusGraphs().indexOf(graph));
-							globalId.append("/");
-						}
-					}
-					String actualId= sDocumentId.getSId().replace("salt:", "");
+			if (graph!= null){
+				SaltProject project= graph.getSaltProject(); 
+				if (project!= null)
+				{
+					globalId.append("/");
+					globalId.append(project.getSCorpusGraphs().indexOf(graph));
+					globalId.append("/");
+					String actualId= sElementId.getSId().replace("salt:", "");
 					if (actualId.startsWith("/"))
 						actualId= actualId.substring(1, actualId.length());
-					globalId.append(actualId);		
-					
-					if (!sDocument.hasLabel(createQName(NAMESPACE_SALT, PA_GLOBALID_NAME))){
-						sDocument.createSProcessingAnnotation(NAMESPACE_SALT, PA_GLOBALID_NAME, globalId.toString());
-					}
+					globalId.append(actualId);	
+					if (sElementId.getSIdentifiableElement() instanceof SCorpus)
+						globalId.append("/");	
 				}
 			}
 		}
