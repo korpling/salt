@@ -18,12 +18,11 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.tests;
 
 import java.io.File;
-import java.util.HashSet;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
+import org.junit.Test;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
@@ -41,6 +40,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SSpanImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.SStructureImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.impl.STokenImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class SaltFactoryImplTest extends TestCase 
@@ -84,6 +87,88 @@ public class SaltFactoryImplTest extends TestCase
 		
 		assertEquals("salt:/0/c1/d1", getFixture().getGlobalId(d11.getSElementId()));
 		assertEquals("salt:/1/c1/d1", getFixture().getGlobalId(d21.getSElementId()));
+	}
+	
+	/**
+	 * Checks if {@link SMetaAnnotation} objects are moved correctly from one {@link SMetaAnnotatableElement} object
+	 * to another {@link SMetaAnnotatableElement} object.
+	 * @throws Exception
+	 */
+	@Test
+	public void testMoveSMetaAnnotations() throws Exception {
+		SCorpus sCorp = SaltFactory.eINSTANCE.createSCorpus();
+		SDocument sDoc = SaltFactory.eINSTANCE.createSDocument();
+		
+		String annoName = "metaAnno";
+		String annoValue= "metaValue";
+		sCorp.createSMetaAnnotation(null, annoName, annoValue);
+		
+		getFixture().moveSMetaAnnotations(sCorp, sDoc);
+		
+		assertNull(sCorp.getSMetaAnnotation(annoName));
+		
+		// sDoc contains a SMetaAnnotation
+		assertEquals(1, sDoc.getSMetaAnnotations().size());
+		// the SMetaAnnotation is "metaAnno"
+		assertNotNull(sDoc.getSMetaAnnotation(annoName));
+		assertEquals(annoName, sDoc.getSMetaAnnotation(annoName).getSName());
+		assertEquals(annoValue, sDoc.getSMetaAnnotation(annoName).getValue());
+		
+		sCorp = SaltFactory.eINSTANCE.createSCorpus();
+		String annoName2 = "metaAnno";
+		String annoValue2= "metaValue_1";
+		sCorp.createSMetaAnnotation(null, annoName2, annoValue2);
+		
+		getFixture().moveSMetaAnnotations(sCorp, sDoc);
+		
+		// assert that there are 2 SMetaAnnotation objects in the target document
+		assertEquals(2, sDoc.getSMetaAnnotations().size());
+		// assert that there is a SMetaAnnotation object with name "metaAnno"
+		assertNotNull(sDoc.getSMetaAnnotation(annoName2));
+		// assert that there is a SMetaAnnotation object with name "metaAnno_1"
+		assertEquals(annoName2 + "_1", sDoc.getSMetaAnnotation(annoName2 + "_1").getSName());
+		assertEquals(annoValue2, sDoc.getSMetaAnnotation(annoName2 + "_1").getValue());
+	}
+	
+	/**
+	 * Checks if {@link SAnnotation} objects are moved correctly from one {@link SAnnotatableElement} object
+	 * to another {@link SAnnotatableElement} object.
+	 * @throws Exception
+	 */
+	@Test
+	public void testMoveSAnnotations() throws Exception {
+		SCorpus sCorp = SaltFactory.eINSTANCE.createSCorpus();
+		SDocument sDoc = SaltFactory.eINSTANCE.createSDocument();
+		
+		String annoName = "anno";
+		String annoValue= "value";
+		sCorp.createSAnnotation(null, annoName, annoValue);
+		
+		getFixture().moveSAnnotations(sCorp, sDoc);
+		
+		assertNull(sCorp.getSAnnotation(annoName));
+		
+		// sDoc contains a SAnnotation
+		assertEquals(1, sDoc.getSAnnotations().size());
+		// the SAnnotation is "metaAnno"
+		assertNotNull(sDoc.getSAnnotation(annoName));
+		assertEquals(annoName, sDoc.getSAnnotation(annoName).getSName());
+		assertEquals(annoValue, sDoc.getSAnnotation(annoName).getValue());
+		
+		sCorp = SaltFactory.eINSTANCE.createSCorpus();
+		String annoName2 = "anno";
+		String annoValue2= "value_1";
+		sCorp.createSAnnotation(null, annoName2, annoValue2);
+		
+		getFixture().moveSAnnotations(sCorp, sDoc);
+		
+		// assert that there are 2 SAnnotation objects in the target document
+		assertEquals(2, sDoc.getSAnnotations().size());
+		// assert that there is a SAnnotation object with name "metaAnno"
+		assertNotNull(sDoc.getSAnnotation(annoName2));
+		// assert that there is a SAnnotation object with name "metaAnno_1"
+		assertEquals(annoName2 + "_1", sDoc.getSAnnotation(annoName2 + "_1").getSName());
+		assertEquals(annoValue2, sDoc.getSAnnotation(annoName2 + "_1").getValue());
 	}
 	
 	public void testLoadSaltProject()

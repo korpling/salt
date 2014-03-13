@@ -62,10 +62,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeOverlappingRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
@@ -155,6 +157,60 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			}
 		}
 		return(globalId.toString());
+	}
+	
+	/**
+	 * {@inheritDoc SaltFactory#moveSAnnotations(SAnnotatableElement, SAnnotatableElement)}
+	 */
+	@Override
+	public void moveSAnnotations(SAnnotatableElement from, SAnnotatableElement to){
+		if 	(	(from != null)&&
+				(to != null)){
+			for (SAnnotation fromSAnno: from.getSAnnotations()){
+				// if to contains an SAnnotation with the same namespace and name
+				String newSName = fromSAnno.getSName();
+				if (to.getSAnnotation(fromSAnno.getQName()) != null){
+					int i = 1;
+					while (to.getSAnnotation(fromSAnno.getQName()+"_"+i) != null)
+					{ // while there is an anno "annoQName_i" , increment i
+						i++;
+					} // while there is an anno "annoQName_i" , increment i
+					newSName = fromSAnno.getSName() + "_" + i;
+					fromSAnno.setSName(newSName);
+					to.addSAnnotation(fromSAnno);
+				} else {
+					// move
+					to.addSAnnotation(fromSAnno);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * {@inheritDoc SaltFactory#moveSMetaAnnotations(SMetaAnnotatableElement, SMetaAnnotatableElement)}
+	 */
+	@Override
+	public void moveSMetaAnnotations(SMetaAnnotatableElement from, SMetaAnnotatableElement to){
+		if 	(	(from != null)&&
+				(to != null)){
+			for (SMetaAnnotation fromSAnno: from.getSMetaAnnotations()){
+				String newSName = fromSAnno.getSName();
+				if (to.getSMetaAnnotation(fromSAnno.getQName()) != null){
+					int i = 1;
+					while (to.getSMetaAnnotation(fromSAnno.getQName()+"_"+i) != null)
+					{ // while there is a meta anno "annoQName_i" , increment i
+						i++;
+					} // while there is a meta anno "annoQName_i" , increment i
+					newSName = fromSAnno.getSName() + "_" + i;
+					fromSAnno.setSName(newSName);
+					to.addSMetaAnnotation(fromSAnno);
+					
+				} else {
+					// move
+					to.addSMetaAnnotation(fromSAnno);
+				}
+			}				
+		}
 	}
 	
 	/**

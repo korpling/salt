@@ -34,8 +34,12 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;
 
 public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
@@ -109,6 +113,19 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 */
 	public String getGlobalId(SElementId sElementId);
 	
+	/**
+	 * Moves all {@link SAnnotation} objects from <code>from</code> to <code>to</code>.
+	 * @param from {@link SAnnotatableElement} object from which {@link SAnnotation} object should be moved
+	 * @param to {@link SAnnotatableElement} object to which {@link SAnnotation} object should be moved
+	 */
+	public void moveSAnnotations(SAnnotatableElement from, SAnnotatableElement to);
+	
+	/**
+	 * Moves all {@link SMetaAnnotation} objects from <code>from</code> to <code>to</code>.
+	 * @param from {@link SMetaAnnotatableElement} object from which {@link SMetaAnnotation} object should be moved
+	 * @param to {@link SMetaAnnotatableElement} object to which {@link SMetaAnnotation} object should be moved
+	 */
+	public void moveSMetaAnnotations(SMetaAnnotatableElement from, SMetaAnnotatableElement to);
 	/**
 	 * Converts the given class, if it is a class of the Salt model into its corresponding {@link STYPE_NAME}.
 	 * @param class to convert
