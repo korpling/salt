@@ -144,14 +144,14 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				{
 					globalId.append("/");
 					globalId.append(project.getSCorpusGraphs().indexOf(graph));
-					globalId.append("/");
-					String actualId= sElementId.getSId().replace("salt:", "");
-					if (actualId.startsWith("/"))
-						actualId= actualId.substring(1, actualId.length());
-					globalId.append(actualId);	
-					if (sElementId.getSIdentifiableElement() instanceof SCorpus)
-						globalId.append("/");	
+					globalId.append("/");	
 				}
+				String actualId= sElementId.getSId().replace("salt:", "");
+				if (actualId.startsWith("/"))
+					actualId= actualId.substring(1, actualId.length());
+				globalId.append(actualId);	
+				if (sElementId.getSIdentifiableElement() instanceof SCorpus)
+					globalId.append("/");
 			}
 		}
 		return(globalId.toString());
