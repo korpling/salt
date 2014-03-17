@@ -30,6 +30,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 
 /**
@@ -54,6 +55,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
  * <p>
  * The following operations are tested:
  * <ul>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getOutgoingSRelations() <em>Get Outgoing SRelations</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getIncomingSRelations() <em>Get Incoming SRelations</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#addSMetaAnnotation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation) <em>Add SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#getSMetaAnnotation(java.lang.String) <em>Get SMeta Annotation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement#createSMetaAnnotation(java.lang.String, java.lang.String, java.lang.Object, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SDATATYPE) <em>Create SMeta Annotation</em>}</li>
@@ -288,6 +291,62 @@ public class SNodeTest extends TestCase {
 		}
 		assertTrue(layers.containsAll(this.getFixture().getSLayers()));
 		assertTrue(this.getFixture().getSLayers().containsAll(layers));
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getOutgoingSRelations() <em>Get Outgoing SRelations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getOutgoingSRelations()
+	 * @generated
+	 */
+	public void testGetOutgoingSRelationsNoRelations() {		
+		assertNull(this.getFixture().getOutgoingSRelations());
+	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getOutgoingSRelations() <em>Get Outgoing SRelations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getOutgoingSRelations()
+	 * @generated
+	 */
+	public void testGetOutgoingSRelations() {
+		SGraph sGraph = SaltCoreFactory.eINSTANCE.createSGraph();
+		sGraph.addSNode(this.getFixture());
+		SRelation sRelation = SaltCoreFactory.eINSTANCE.createSRelation();
+		sRelation.setSSource(this.getFixture());
+		sGraph.addSRelation(sRelation);
+		assertNotNull(this.getFixture().getOutgoingSRelations());
+		assertEquals(1, this.getFixture().getOutgoingSRelations().size());		
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getIncomingSRelations() <em>Get Incoming SRelations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getIncomingSRelations()
+	 * @generated
+	 */
+	public void testGetIncomingSRelationsNoRelations() {
+		assertNull(this.getFixture().getIncomingSRelations());
+	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getIncomingSRelations() <em>Get Incoming SRelations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode#getIncomingSRelations()
+	 * @generated
+	 */
+	public void testGetIncomingSRelations() {
+		SGraph sGraph = SaltCoreFactory.eINSTANCE.createSGraph();
+		sGraph.addSNode(this.getFixture());
+		SRelation sRelation = SaltCoreFactory.eINSTANCE.createSRelation();
+		sRelation.setSTarget(this.getFixture());
+		sGraph.addSRelation(sRelation);
+		assertNotNull(this.getFixture().getIncomingSRelations());
+		assertEquals(1, this.getFixture().getIncomingSRelations().size());
 	}
 
 	// ========================= start: testing SMetaAnnotatableElement
@@ -625,7 +684,6 @@ public class SNodeTest extends TestCase {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement#setSName(java.lang.String)
-	 * @generated
 	 */
 	public void testSetSName() {
 		try 
