@@ -86,6 +86,28 @@ public interface SNode extends Node, SAnnotatableElement, SNamedElement, SIdenti
 	EList<SLayer> getSLayers();
 	
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This method returns all {@link SRelation} objects which the {@link SNode} is SSource of.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<SRelation> getOutgoingSRelations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This method returns all {@link SRelation} objects which the {@link SNode} is STarget of.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<SRelation> getIncomingSRelations();
+
+	/**
 	 * Sets the identifier of this node SNode object. Note, that an identifier must be unique inside the graph 
 	 * which contains the node. The id can also be used as an uri and therefore has to respect some syntax 
 	 * restrictions. In general the identifier will be set by the graph when adding the SNode object to 
