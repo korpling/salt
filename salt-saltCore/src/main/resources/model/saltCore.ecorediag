@@ -8,6 +8,14 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_a27nN4jXEd6X5oQchPkMiQ"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_a27nOIjXEd6X5oQchPkMiQ" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_RvMoIK3qEeO7VPpB6gXBkw" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SNode/getOutgoingSRelations"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_RvMoIa3qEeO7VPpB6gXBkw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_oiojsK3qEeO7VPpB6gXBkw" type="2002">
+        <element xmi:type="ecore:EOperation" href="saltCore.ecore#//SNode/getIncomingSRelations"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oiojsa3qEeO7VPpB6gXBkw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_a27nOYjXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_a27nOojXEd6X5oQchPkMiQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_a27nO4jXEd6X5oQchPkMiQ"/>

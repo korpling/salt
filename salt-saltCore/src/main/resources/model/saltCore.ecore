@@ -2,6 +2,16 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="saltCore" nsURI="saltCore" nsPrefix="saltCore">
   <eClassifiers xsi:type="ecore:EClass" name="SNode" eSuperTypes="../../../../../salt-graph/src/main/resources/model/graph.ecore#//Node #//SAnnotatableElement #//SNamedElement #//SIdentifiableElement #//SProcessingAnnotatableElement #//SFeaturableElement #//SMetaAnnotatableElement">
+    <eOperations name="getOutgoingSRelations" upperBound="-1" eType="#//SRelation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method returns all {@link SRelation} objects which the {@link SNode} is SSource of."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getIncomingSRelations" upperBound="-1" eType="#//SRelation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method returns all {@link SRelation} objects which the {@link SNode} is STarget of."/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sGraph" eType="#//SGraph"
         volatile="true" transient="true" derived="true" eOpposite="#//SGraph/sNodes"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sLayers" upperBound="-1"
