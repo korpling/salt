@@ -318,7 +318,8 @@ public class SNodeTest extends TestCase {
 		sRelation.setSSource(this.getFixture());
 		sGraph.addSRelation(sRelation);
 		assertNotNull(this.getFixture().getOutgoingSRelations());
-		assertEquals(1, this.getFixture().getOutgoingSRelations().size());		
+		assertEquals(1, this.getFixture().getOutgoingSRelations().size());
+		assertTrue(this.getFixture().getOutgoingSRelations().contains(sRelation));
 	}
 
 	/**
@@ -347,6 +348,7 @@ public class SNodeTest extends TestCase {
 		sGraph.addSRelation(sRelation);
 		assertNotNull(this.getFixture().getIncomingSRelations());
 		assertEquals(1, this.getFixture().getIncomingSRelations().size());
+		assertTrue(this.getFixture().getIncomingSRelations().contains(sRelation));
 	}
 
 	// ========================= start: testing SMetaAnnotatableElement
