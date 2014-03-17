@@ -21,6 +21,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -44,6 +45,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNamedElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotatableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCoreFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SAnnotatableElementAccessor;
@@ -209,7 +211,43 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		return((EList<SLayer>) (EList<? extends Object>)super.getLayers());
 	}
 
-//=================== start: handling SIdentifiableElement	
+	/**
+	 * {@inheritDoc SNode#getOutgoingSRelations()}
+	 */
+	public EList<SRelation> getOutgoingSRelations() {
+		EList<SRelation> sOutRelList = new BasicEList<SRelation>();
+		if(getSGraph()==null){
+			return null;
+		}
+		else{			
+			for(SRelation sRel : getSGraph().getSRelations()){
+				if(sRel.getSSource().equals(this)){
+					sOutRelList.add(sRel);
+				}
+			}
+		}
+		return sOutRelList;
+	}
+
+	/**
+	 * {@inheritDoc SNode#getIncomingSRelations()}
+	 */
+	public EList<SRelation> getIncomingSRelations() {
+		EList<SRelation> sInRelList = new BasicEList<SRelation>();
+		if(getSGraph()==null){
+			return null;
+		}
+		else{			
+			for(SRelation sRel : getSGraph().getSRelations()){
+				if(sRel.getSTarget().equals(this)){
+					sInRelList.add(sRel);
+				}
+			}
+		}
+		return sInRelList;
+	}
+
+	//=================== start: handling SIdentifiableElement	
 	/**
 	 * Delegatee for SIdentifiableElement
 	 */
