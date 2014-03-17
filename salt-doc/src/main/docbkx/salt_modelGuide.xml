@@ -191,7 +191,7 @@
                     </itemizedlist>
                 </listitem>
                 <listitem>
-                    <para>Identifying  an object via SName, SId and SElementId</para>
+                    <para>Identifying an object via SName, SId and SElementId</para>
                 </listitem>
                 <listitem>
                     <para>Special semantics, tell about SaltSemantics and ISOCat</para>
@@ -204,7 +204,9 @@
                         <listitem>
                             <para>SRelation and SNode as fathers of the rest</para>
                         </listitem>
-                        <listitem><para>usage of SFeature in detail</para></listitem>
+                        <listitem>
+                            <para>usage of SFeature in detail</para>
+                        </listitem>
                         <listitem>
                             <para>3 Faltigkeit of Salt: salt-graph, salt-core and salt-common</para>
                         </listitem>
@@ -218,10 +220,22 @@
                                 with an S for salt</para>
                         </listitem>
                         <listitem>
-                            <para>Factory pattern</para>
+                            <para>Factory pattern, what is it, how does it work, explain eISNTANCE model</para>
                         </listitem>
                         <listitem>
-                            <para/>
+                            <para>a section easy access (no EMF)</para>
+                        </listitem>
+                        <listitem>
+                            <para>how to traverse a graph</para>
+                        </listitem>
+                        <listitem>
+                            <para>how to create a corpus structure, with easy access</para>
+                        </listitem>
+                        <listitem>
+                            <para>how to get all out/ in going edges</para>
+                        </listitem>
+                        <listitem>
+                            <para>simple creation methods of SDocumentGraph</para>
                         </listitem>
                     </itemizedlist>
                 </listitem>
@@ -283,10 +297,10 @@
                     SDocCorpRelation.</para>
             </sect2>
             <sect2>
-                <title>???</title>
-                <para> A corpus structure (SCorpusStructure in Salt) consisting of the nodes SCorpus
-                    and Sdocument and the relations SCorpusRelation and ScorpDocRel and realizes a
-                    directed tree structure. <itemizedlist>
+                <title>Corpus-Graph</title>
+                <para>Since Salt over and over is a graph based model, the corpus-structure is
+                    representet as a graph, called the SCorpusGraph. This graph realizes a directed
+                    tree structure, whose nodes are corpora (SCorpus) and document (SDocument).<itemizedlist>
                         <listitem>
                             <para>show emf diag</para>
                         </listitem>
@@ -300,6 +314,33 @@
                         <listitem>
                             <para>show emf diag of snode, srel, smetaanno, sanno, sprocanno,
                                 scorprel, scorpdocrel</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </sect2>
+            <sect2>
+                <title>mata-annotation</title>
+                <para><itemizedlist>
+                        <listitem>
+                            <para>metaannotations are very useful for corpora to document for
+                                instance the creation process, the aim of the corpus and for
+                                instance whch tools have been used</para>
+                        </listitem>
+                        <listitem>
+                            <para>metaannotations are often things like author, creation date etc.
+                                But since Salt is an open model, there are no limitations in naming
+                                meta-annotations. Meta-annotations are modeled as labels, which can
+                                be added to each node and edge in the model. A meta-annotation in
+                                Salt is represented via the element SMetaAnnotation and contains the
+                                fields: namespace (SNS), name (SName) and value (SValue). A
+                                meta-annotation describing an author having the SName 'author', the
+                                SValue 'John Doe' and an empty SNS can be added to a SCorpus node to
+                                mark, that this corpus is created by John Doe for instance. In Salt
+                                there are no rules for the semantics of meta-annotations, therefore,
+                                the meta-annotation for determining the author can also be named
+                                creator or something else. It is also not bound, if such a
+                                meta-annotation refers to corpora and documents contained in the
+                                subtree of the annotated one or not.</para>
                         </listitem>
                     </itemizedlist>
                 </para>
