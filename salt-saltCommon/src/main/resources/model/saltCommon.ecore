@@ -305,6 +305,12 @@
         <eParameters name="overlappingNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
         <eParameters name="overlappingRelationTypes" upperBound="-1" eType="#//sDocumentStructure/STYPE_NAME"/>
       </eOperations>
+      <eOperations name="getSText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This method returns the exact text overlapped in the {@link STextualDS} by the given {@link SNode}."/>
+        </eAnnotations>
+        <eParameters name="sNode" eType="ecore:EClass ../../../../../salt-saltCore/src/main/resources/model/saltCore.ecore#//SNode"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sDocument" eType="#//sCorpusStructure/SDocument"
           eOpposite="#//sCorpusStructure/SDocument/sDocumentGraph"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="sTextualDSs" upperBound="-1"

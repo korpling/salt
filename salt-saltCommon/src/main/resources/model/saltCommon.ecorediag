@@ -251,6 +251,10 @@
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/addSNode"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_wubTonVsEeCXQ9RnU_WgtA"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_uFNlAK32EeO7VPpB6gXBkw" type="2002">
+            <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/getSText"/>
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_uFNlAa32EeO7VPpB6gXBkw"/>
+          </children>
           <children xmi:type="notation:Node" xmi:id="_hgSt8AGEEeGsJtYaUYTaYA" type="2002">
             <element xmi:type="ecore:EOperation" href="saltCommon.ecore#//sDocumentStructure/SDocumentGraph/createSTextualDS"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_hgSt8QGEEeGsJtYaUYTaYA"/>
