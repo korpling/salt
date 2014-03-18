@@ -691,6 +691,17 @@ public interface SDocumentGraph extends SGraph {
 	EList<SToken> getOverlappedSTokens(SNode overlappingNode, EList<STYPE_NAME> overlappingRelationTypes);
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This method returns the exact text overlapped in the {@link STextualDS} by the given {@link SNode}.
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getSText(SNode sNode);
+
+	/**
 	 * Sets the SName of the SDocumentGraphImpl, but the parameter newSName is just a dummy. The SName of the corresponding SDocument plus "_graph" will be the SName.
 	 * @param newSName this value will be ignored
 	 */
