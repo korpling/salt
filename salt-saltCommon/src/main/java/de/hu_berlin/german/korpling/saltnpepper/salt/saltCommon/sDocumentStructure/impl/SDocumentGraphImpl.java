@@ -144,7 +144,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
 	 */
 	@Override
 	protected EClass eStaticClass() {
@@ -283,7 +283,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
 	 */
 	public SDocument basicGetSDocument() {
 		return sDocument;
@@ -292,7 +292,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
 	 */
 	public NotificationChain basicSetSDocument(SDocument newSDocument, NotificationChain msgs) {
 		SDocument oldSDocument = sDocument;
@@ -372,7 +372,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
 	 */
 	public STimeline getSTimeline() {
 		STimeline sTimeline = basicGetSTimeline();
@@ -917,6 +917,17 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/**
+	 * {@inheritDoc SDocumentGraph#getSText(SNode)}} 
+	 */
+	public String getSText(SNode sNode) {
+		if(sNode==null){return null;}		
+		EList<STYPE_NAME> relTypes = new BasicEList<STYPE_NAME>();
+		relTypes.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);		
+		SDataSourceSequence sData = this.getOverlappedDSSequences(sNode, relTypes).get(0);		
+		return((STextualDS)sData.getSSequentialDS()).getSText().substring(sData.getSStart(), sData.getSEnd());		
+	}
+
+	/**
 	 * Connects the given {@link SToken} object to the given {@link SSequentialDS} object. If the given 
 	 * {@link SToken} object is not already add to the graph, it will be added.
 	 * @param sToken token to connect to the {@link SSequentialDS} object
@@ -1100,7 +1111,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 *
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -1138,7 +1149,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
@@ -1180,7 +1191,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -1247,7 +1258,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
 	 */
 	@Override
 	public void eUnset(int featureID) {
@@ -1301,7 +1312,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * 
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
