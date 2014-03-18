@@ -30,6 +30,7 @@ import com.google.common.collect.ImmutableList;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltElementNotContainedInGraphException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource;
@@ -108,6 +109,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#insertSTokensAt(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS, java.lang.Integer, org.eclipse.emf.common.util.EList, java.lang.Boolean) <em>Insert STokens At</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createSRelation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME, java.lang.String) <em>Create SRelation</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedSTokens(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode, org.eclipse.emf.common.util.EList) <em>Get Overlapped STokens</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSText(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode) <em>Get SText</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -2166,5 +2168,46 @@ public class SDocumentGraphTest extends TestCase {
 		System.out.print("The overlapped token list must be empty now. Checking");
 		assertTrue(overlappedTokenList3.isEmpty());
 		System.out.println("... SUCCESS");
+	}
+
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSText(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode) <em>Get SText</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSText(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode)
+	 */
+	public void testGetSText__SNode() {		
+		SDocumentGraph fixGraph = this.getFixture();
+		assertNull(fixGraph.getSText(null));
+		String testText = "Is this example more complicated than it appears to be";
+		fixGraph.createSTextualDS(testText);
+		fixGraph.tokenize();
+		String sText = fixGraph.getSText(fixGraph.getSTokens().get(4));
+		assertNotNull(sText);
+		assertFalse(sText.isEmpty());
+		assertEquals("complicated", sText);
+	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSText(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode) <em>Get SText</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSText(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode)
+	 */
+	public void testGetSText__SNode__withDiscontinuesSpan() {
+		SDocumentGraph fixGraph = this.getFixture();
+		String testText = "Is this example more complicated than it appears to be";
+		fixGraph.createSTextualDS(testText);
+		fixGraph.tokenize();
+		/* collect tokens for discontinues span */
+		EList<SToken> sTokens = new BasicEList<SToken>();		
+		sTokens.add(fixGraph.getSTokens().get(0));
+		sTokens.add(fixGraph.getSTokens().get(1));
+		sTokens.add(fixGraph.getSTokens().get(fixGraph.getSTokens().size()-1));
+		/* create discontinues span */
+		String sText = fixGraph.getSText(fixGraph.createSSpan(sTokens));
+		assertNotNull(sText);
+		assertFalse(sText.isEmpty());
+		assertEquals(testText, sText);
 	}
 } //SDocumentGraphTest
