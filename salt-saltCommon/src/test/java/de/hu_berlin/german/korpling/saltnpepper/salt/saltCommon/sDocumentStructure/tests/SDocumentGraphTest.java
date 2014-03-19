@@ -2210,4 +2210,17 @@ public class SDocumentGraphTest extends TestCase {
 		assertFalse(sText.isEmpty());
 		assertEquals(testText, sText);
 	}
+	
+	/**
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSText(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode) <em>Get SText</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSText(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode)
+	 */
+	public void testGetSText__SNode__SStructure() {
+		SDocumentGraph fixGraph = this.getFixture();
+		SStructure sStructure = SaltCommonFactory.eINSTANCE.createSStructure();
+		fixGraph.addSNode(sStructure);
+		assertNull(fixGraph.getSText(sStructure));
+	}
 } //SDocumentGraphTest
