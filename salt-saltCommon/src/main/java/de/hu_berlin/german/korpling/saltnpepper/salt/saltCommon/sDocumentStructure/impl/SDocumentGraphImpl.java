@@ -922,7 +922,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public String getSText(SNode sNode) {
 		if(sNode==null){return null;}		
 		EList<STYPE_NAME> relTypes = new BasicEList<STYPE_NAME>();
-		relTypes.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);		
+		relTypes.add(STYPE_NAME.STEXT_OVERLAPPING_RELATION);
+		if(this.getOverlappedDSSequences(sNode, relTypes)==null){return null;}
 		SDataSourceSequence sData = this.getOverlappedDSSequences(sNode, relTypes).get(0);		
 		return((STextualDS)sData.getSSequentialDS()).getSText().substring(sData.getSStart(), sData.getSEnd());		
 	}
