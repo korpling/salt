@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltModuleException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.model.DOTEdge;
@@ -96,10 +97,13 @@ public class SCorpusGraphDOTWriter implements SGraphTraverseHandler
 		this.currOutputStream.println("ordering=out;");
 		
 		//if documentgraph isn't  null print it 
-		if (this.getSCorpusGraph()!= null)
-		{
-			this.getSCorpusGraph().traverse(this.getSCorpusGraph().getSRootCorpus(), 
-					GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "", this);
+		if (this.getSCorpusGraph()!= null){
+			try{
+				this.getSCorpusGraph().traverse(this.getSCorpusGraph().getSRootCorpus(), 
+						GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "", this);
+			}catch(Exception e){
+				throw new SaltException("Cannot print SCorpusGraph as dot serialization, because of nested exception. ", e);
+			}
 			
 		}
 		else 

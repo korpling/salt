@@ -46,6 +46,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonFactoryImpl;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.dot.DOTResource;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
@@ -104,6 +105,19 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			}
 		}
 		return(saltFactory);
+	}
+	
+	/**
+	 * {@inheritDoc SaltFactory#save(EObject, URI)}
+	 */
+	public void save_DOT(EObject content, URI outputURI) {
+		DOTResource.save(content, outputURI);
+	}
+	/**
+	 * {@inheritDoc SaltFactory#save(EObject, URI, Map)}
+	 */
+	public void save_DOT(EObject content, URI outputURI, Map<?,?> options) {
+		DOTResource.save(content, outputURI, options);
 	}
 	
 	/**

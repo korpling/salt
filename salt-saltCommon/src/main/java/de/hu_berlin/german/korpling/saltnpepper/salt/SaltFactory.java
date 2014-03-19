@@ -18,6 +18,7 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt;
 
 import java.util.HashSet;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -95,6 +96,25 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * default SType string for SOrderRelations which do not have a SType
 	 */
 	public static final String DEFAULT_STYPE_SORDERRELATION= "default_seg";
+	
+	/**
+	 * Stores the passed {@link Econtent} to a dot file located by the passed
+	 * {@link URI}.<br/>
+	 * <strong>Note, that only a set of {@link Econtent} types is supported</strong>  
+	 * @param content A SaltProject, SCorpusGraph or SDocumentGraph
+	 * @param outputURI locating the place to store dot file
+	 */
+	public void save_DOT(EObject content, URI outputURI);
+	/**
+	 * Stores the passed {@link Econtent} to a dot file located by the passed
+	 * {@link URI}.<br/>
+	 * <strong>Note, that only a set of {@link Econtent} types is supported</strong>  
+	 * @param content A SaltProject, SCorpusGraph or SDocumentGraph
+	 * @param outputURI locating the place to store dot file
+	 * @param options a map of options to customize the storing behavior
+	 */
+	public void save_DOT(EObject content, URI outputURI, Map<?,?> options);
+	
 	
 	/**
 	 * Returns a qualified name for the passed namespace and name.
