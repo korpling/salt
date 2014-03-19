@@ -46,82 +46,82 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface IndexMgr extends EObject {
 	/**
-         * Returns the value of the '<em><b>Indexes</b></em>' containment reference list.
-         * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index}.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Indexes</b></em>' containment reference list.
+	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.Index}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Indexes</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Indexes</em>' containment reference list.
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndexMgr_Indexes()
-         * @model containment="true"
-         * @generated
-         */
+	 * @return the value of the '<em>Indexes</em>' containment reference list.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndexMgr_Indexes()
+	 * @model containment="true"
+	 * @generated
+	 */
 	EList<Index> getIndexes();
 
 	/**
-         * Returns the value of the '<em><b>Num Of Indexes</b></em>' attribute.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Num Of Indexes</b></em>' attribute.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Num Of Indexes</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Num Of Indexes</em>' attribute.
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndexMgr_NumOfIndexes()
-         * @model transient="true" changeable="false" volatile="true" derived="true"
-         * @generated
-         */
+	 * @return the value of the '<em>Num Of Indexes</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getIndexMgr_NumOfIndexes()
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
 	Long getNumOfIndexes();
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	void addIndex(Index index);
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	Boolean hasIndex(Object indexId);
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	Index getIndex(Object indexId);
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	Boolean removeIndex(Object indexId);
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	Boolean removeAll();
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	Boolean removeElement(Object elementId);
 
 } // IndexMgr

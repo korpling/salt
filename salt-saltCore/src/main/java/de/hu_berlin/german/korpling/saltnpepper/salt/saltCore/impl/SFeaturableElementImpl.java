@@ -47,6 +47,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SFeatura
  */
 public class SFeaturableElementImpl extends LabelableElementImpl implements SFeaturableElement {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6746026018411798230L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

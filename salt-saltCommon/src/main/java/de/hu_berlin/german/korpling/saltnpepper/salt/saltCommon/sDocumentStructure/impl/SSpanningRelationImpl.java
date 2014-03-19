@@ -50,6 +50,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl
  */
 public class SSpanningRelationImpl extends SRelationImpl implements SSpanningRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4975360691977239272L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

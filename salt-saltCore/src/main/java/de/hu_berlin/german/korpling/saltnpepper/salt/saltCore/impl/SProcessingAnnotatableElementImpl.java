@@ -45,6 +45,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcess
  */
 public class SProcessingAnnotatableElementImpl extends LabelableElementImpl implements SProcessingAnnotatableElement {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2550812126776641734L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

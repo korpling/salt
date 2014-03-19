@@ -39,6 +39,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
  */
 public class SSpanImpl extends SStructuredNodeImpl implements SSpan {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6250145057383993297L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

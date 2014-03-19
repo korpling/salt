@@ -44,6 +44,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SIdentif
  */
 public class SIdentifiableElementImpl extends IdentifiableElementImpl implements SIdentifiableElement {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1219015359700088135L;
+	/**
 	 * The default value of the '{@link #getSId() <em>SId</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

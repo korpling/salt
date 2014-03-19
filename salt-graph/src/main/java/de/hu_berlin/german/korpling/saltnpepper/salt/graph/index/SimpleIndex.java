@@ -30,18 +30,18 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.index;
  */
 public interface SimpleIndex<K, V> extends Index<K, V> {
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	V getElement(K elementId);
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	Boolean removeElementById(K elementId);
 } // SimpleIndex

@@ -47,6 +47,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
  */
 public class SDominanceRelationImpl extends STextOverlappingRelationImpl implements SDominanceRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1564197200624382252L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

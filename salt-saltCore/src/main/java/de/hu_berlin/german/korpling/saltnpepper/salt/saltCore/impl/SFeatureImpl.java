@@ -40,6 +40,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
  */
 public class SFeatureImpl extends SAbstractAnnotationImpl implements SFeature {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8806850878889204707L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

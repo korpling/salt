@@ -44,6 +44,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SFeature;
  */
 public class SAudioDataSourceImpl extends SSequentialDSImpl implements SAudioDataSource {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1475489062321546273L;
+	/**
 	 * The default value of the '{@link #getSAudioReference() <em>SAudio Reference</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

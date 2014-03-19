@@ -87,6 +87,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCor
  */
 public class SGraphImpl extends GraphImpl implements SGraph {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1645962042568808518L;
+
+	/**
 	 * The default value of the '{@link #getSName() <em>SName</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

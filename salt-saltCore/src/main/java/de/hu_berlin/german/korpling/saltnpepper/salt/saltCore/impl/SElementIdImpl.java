@@ -44,6 +44,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
  */
 public class SElementIdImpl extends IdentifierImpl implements SElementId {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9101994173633036928L;
+
+	/**
 	 * The default value of the '{@link #getSId() <em>SId</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

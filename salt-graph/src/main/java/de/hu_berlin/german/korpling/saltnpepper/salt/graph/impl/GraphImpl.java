@@ -59,33 +59,24 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverse
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getIndexMgr
- * <em>Index Mgr</em>}</li>
- * <li>
- * {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getNodes
- * <em>Nodes</em>}</li>
- * <li>
- * {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getEdges
- * <em>Edges</em>}</li>
- * <li>
- * {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getNumOfNodes
- * <em>Num Of Nodes</em>}</li>
- * <li>
- * {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getNumOfEdges
- * <em>Num Of Edges</em>}</li>
- * <li>
- * {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getLayers
- * <em>Layers</em>}</li>
- * <li>
- * {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getNumOfLayers
- * <em>Num Of Layers</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getIndexMgr <em>Index Mgr</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getNodes <em>Nodes</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getEdges <em>Edges</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getNumOfNodes <em>Num Of Nodes</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getNumOfEdges <em>Num Of Edges</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getLayers <em>Layers</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl#getNumOfLayers <em>Num Of Layers</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class GraphImpl extends IdentifiableElementImpl implements Graph {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4607543150000550247L;
 
 	// TODO to delete
 	public static Long equalTime = 0l;
@@ -327,18 +318,16 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 	public static final String IDX_INEDGES = "idx_inedges";
 
 	/**
-	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getNodes()
 	 * @generated
 	 * @ordered
 	 */
 	protected EList<Node> nodes;
 	/**
-	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getEdges() <em>Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getEdges()
 	 * @generated
 	 * @ordered
@@ -346,18 +335,16 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 	protected EList<Edge> edges;
 
 	/**
-	 * The default value of the '{@link #getNumOfNodes() <em>Num Of Nodes</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getNumOfNodes() <em>Num Of Nodes</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getNumOfNodes()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final Long NUM_OF_NODES_EDEFAULT = null;
 	/**
-	 * The default value of the '{@link #getNumOfEdges() <em>Num Of Edges</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getNumOfEdges() <em>Num Of Edges</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getNumOfEdges()
 	 * @generated
 	 * @ordered
@@ -365,9 +352,8 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 	protected static final Long NUM_OF_EDGES_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLayers() <em>Layers</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getLayers() <em>Layers</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLayers()
 	 * @generated
 	 * @ordered
@@ -375,10 +361,9 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 	protected EList<Layer> layers;
 
 	/**
-	 * The default value of the '{@link #getNumOfLayers()
-	 * <em>Num Of Layers</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getNumOfLayers() <em>Num Of Layers</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getNumOfLayers()
 	 * @generated
 	 * @ordered
@@ -413,7 +398,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -633,13 +617,11 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public IndexMgr getIndexMgr() {
 		IndexMgr indexMgr = basicGetIndexMgr();
-		return indexMgr != null && indexMgr.eIsProxy() ? (IndexMgr) eResolveProxy((InternalEObject) indexMgr)
-				: indexMgr;
+		return indexMgr != null && indexMgr.eIsProxy() ? (IndexMgr)eResolveProxy((InternalEObject)indexMgr) : indexMgr;
 	}
 
 	@Override
@@ -663,26 +645,22 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Edge> getEdges() {
 		if (edges == null) {
-			edges = new EObjectContainmentWithInverseEList<Edge>(Edge.class,
-					this, GraphPackage.GRAPH__EDGES, GraphPackage.EDGE__GRAPH);
+			edges = new EObjectContainmentWithInverseEList<Edge>(Edge.class, this, GraphPackage.GRAPH__EDGES, GraphPackage.EDGE__GRAPH);
 		}
 		return edges;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Node> getNodes() {
 		if (nodes == null) {
-			nodes = new EObjectContainmentWithInverseEList<Node>(Node.class,
-					this, GraphPackage.GRAPH__NODES, GraphPackage.NODE__GRAPH);
+			nodes = new EObjectContainmentWithInverseEList<Node>(Node.class, this, GraphPackage.GRAPH__NODES, GraphPackage.NODE__GRAPH);
 		}
 		return nodes;
 	}
@@ -722,13 +700,11 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 	// ====================== start: layer-handling
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Layer> getLayers() {
 		if (layers == null) {
-			layers = new EObjectContainmentWithInverseEList<Layer>(Layer.class,
-					this, GraphPackage.GRAPH__LAYERS, GraphPackage.LAYER__GRAPH);
+			layers = new EObjectContainmentWithInverseEList<Layer>(Layer.class, this, GraphPackage.GRAPH__LAYERS, GraphPackage.LAYER__GRAPH);
 		}
 		return layers;
 	}
@@ -1574,7 +1550,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -1582,143 +1557,131 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case GraphPackage.GRAPH__NODES:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getNodes())
-					.basicAdd(otherEnd, msgs);
-		case GraphPackage.GRAPH__EDGES:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getEdges())
-					.basicAdd(otherEnd, msgs);
-		case GraphPackage.GRAPH__LAYERS:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getLayers())
-					.basicAdd(otherEnd, msgs);
+			case GraphPackage.GRAPH__NODES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getNodes()).basicAdd(otherEnd, msgs);
+			case GraphPackage.GRAPH__EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEdges()).basicAdd(otherEnd, msgs);
+			case GraphPackage.GRAPH__LAYERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLayers()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case GraphPackage.GRAPH__NODES:
-			return ((InternalEList<?>) getNodes()).basicRemove(otherEnd, msgs);
-		case GraphPackage.GRAPH__EDGES:
-			return ((InternalEList<?>) getEdges()).basicRemove(otherEnd, msgs);
-		case GraphPackage.GRAPH__LAYERS:
-			return ((InternalEList<?>) getLayers()).basicRemove(otherEnd, msgs);
+			case GraphPackage.GRAPH__NODES:
+				return ((InternalEList<?>)getNodes()).basicRemove(otherEnd, msgs);
+			case GraphPackage.GRAPH__EDGES:
+				return ((InternalEList<?>)getEdges()).basicRemove(otherEnd, msgs);
+			case GraphPackage.GRAPH__LAYERS:
+				return ((InternalEList<?>)getLayers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case GraphPackage.GRAPH__INDEX_MGR:
-			if (resolve)
-				return getIndexMgr();
-			return basicGetIndexMgr();
-		case GraphPackage.GRAPH__NODES:
-			return getNodes();
-		case GraphPackage.GRAPH__EDGES:
-			return getEdges();
-		case GraphPackage.GRAPH__NUM_OF_NODES:
-			return getNumOfNodes();
-		case GraphPackage.GRAPH__NUM_OF_EDGES:
-			return getNumOfEdges();
-		case GraphPackage.GRAPH__LAYERS:
-			return getLayers();
-		case GraphPackage.GRAPH__NUM_OF_LAYERS:
-			return getNumOfLayers();
+			case GraphPackage.GRAPH__INDEX_MGR:
+				if (resolve) return getIndexMgr();
+				return basicGetIndexMgr();
+			case GraphPackage.GRAPH__NODES:
+				return getNodes();
+			case GraphPackage.GRAPH__EDGES:
+				return getEdges();
+			case GraphPackage.GRAPH__NUM_OF_NODES:
+				return getNumOfNodes();
+			case GraphPackage.GRAPH__NUM_OF_EDGES:
+				return getNumOfEdges();
+			case GraphPackage.GRAPH__LAYERS:
+				return getLayers();
+			case GraphPackage.GRAPH__NUM_OF_LAYERS:
+				return getNumOfLayers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case GraphPackage.GRAPH__INDEX_MGR:
-			setIndexMgr((IndexMgr) newValue);
-			return;
-		case GraphPackage.GRAPH__NODES:
-			getNodes().clear();
-			getNodes().addAll((Collection<? extends Node>) newValue);
-			return;
-		case GraphPackage.GRAPH__EDGES:
-			getEdges().clear();
-			getEdges().addAll((Collection<? extends Edge>) newValue);
-			return;
-		case GraphPackage.GRAPH__LAYERS:
-			getLayers().clear();
-			getLayers().addAll((Collection<? extends Layer>) newValue);
-			return;
+			case GraphPackage.GRAPH__INDEX_MGR:
+				setIndexMgr((IndexMgr)newValue);
+				return;
+			case GraphPackage.GRAPH__NODES:
+				getNodes().clear();
+				getNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case GraphPackage.GRAPH__EDGES:
+				getEdges().clear();
+				getEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case GraphPackage.GRAPH__LAYERS:
+				getLayers().clear();
+				getLayers().addAll((Collection<? extends Layer>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case GraphPackage.GRAPH__INDEX_MGR:
-			setIndexMgr((IndexMgr) null);
-			return;
-		case GraphPackage.GRAPH__NODES:
-			getNodes().clear();
-			return;
-		case GraphPackage.GRAPH__EDGES:
-			getEdges().clear();
-			return;
-		case GraphPackage.GRAPH__LAYERS:
-			getLayers().clear();
-			return;
+			case GraphPackage.GRAPH__INDEX_MGR:
+				setIndexMgr((IndexMgr)null);
+				return;
+			case GraphPackage.GRAPH__NODES:
+				getNodes().clear();
+				return;
+			case GraphPackage.GRAPH__EDGES:
+				getEdges().clear();
+				return;
+			case GraphPackage.GRAPH__LAYERS:
+				getLayers().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case GraphPackage.GRAPH__INDEX_MGR:
-			return basicGetIndexMgr() != null;
-		case GraphPackage.GRAPH__NODES:
-			return nodes != null && !nodes.isEmpty();
-		case GraphPackage.GRAPH__EDGES:
-			return edges != null && !edges.isEmpty();
-		case GraphPackage.GRAPH__NUM_OF_NODES:
-			return NUM_OF_NODES_EDEFAULT == null ? getNumOfNodes() != null
-					: !NUM_OF_NODES_EDEFAULT.equals(getNumOfNodes());
-		case GraphPackage.GRAPH__NUM_OF_EDGES:
-			return NUM_OF_EDGES_EDEFAULT == null ? getNumOfEdges() != null
-					: !NUM_OF_EDGES_EDEFAULT.equals(getNumOfEdges());
-		case GraphPackage.GRAPH__LAYERS:
-			return layers != null && !layers.isEmpty();
-		case GraphPackage.GRAPH__NUM_OF_LAYERS:
-			return NUM_OF_LAYERS_EDEFAULT == null ? getNumOfLayers() != null
-					: !NUM_OF_LAYERS_EDEFAULT.equals(getNumOfLayers());
+			case GraphPackage.GRAPH__INDEX_MGR:
+				return basicGetIndexMgr() != null;
+			case GraphPackage.GRAPH__NODES:
+				return nodes != null && !nodes.isEmpty();
+			case GraphPackage.GRAPH__EDGES:
+				return edges != null && !edges.isEmpty();
+			case GraphPackage.GRAPH__NUM_OF_NODES:
+				return NUM_OF_NODES_EDEFAULT == null ? getNumOfNodes() != null : !NUM_OF_NODES_EDEFAULT.equals(getNumOfNodes());
+			case GraphPackage.GRAPH__NUM_OF_EDGES:
+				return NUM_OF_EDGES_EDEFAULT == null ? getNumOfEdges() != null : !NUM_OF_EDGES_EDEFAULT.equals(getNumOfEdges());
+			case GraphPackage.GRAPH__LAYERS:
+				return layers != null && !layers.isEmpty();
+			case GraphPackage.GRAPH__NUM_OF_LAYERS:
+				return NUM_OF_LAYERS_EDEFAULT == null ? getNumOfLayers() != null : !NUM_OF_LAYERS_EDEFAULT.equals(getNumOfLayers());
 		}
 		return super.eIsSet(featureID);
 	}

@@ -78,6 +78,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcess
  */
 public class SNodeImpl extends NodeImpl implements SNode {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4245332086469189476L;
+
+	/**
 	 * The default value of the '{@link #getSName() <em>SName</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

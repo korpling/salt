@@ -42,6 +42,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl
  */
 public abstract class SSequentialRelationImpl extends SRelationImpl implements SSequentialRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8967668820882592451L;
+
+	/**
 	 * The default value of the '{@link #getSStart() <em>SStart</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -47,6 +47,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SAnnotat
  */
 public class SAnnotatableElementImpl extends LabelableElementImpl implements SAnnotatableElement {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7152464430410275701L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

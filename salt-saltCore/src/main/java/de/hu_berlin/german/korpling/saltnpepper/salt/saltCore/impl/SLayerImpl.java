@@ -80,6 +80,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcess
  */
 public class SLayerImpl extends LayerImpl implements SLayer {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5772712443291239262L;
+
+	/**
 	 * The default value of the '{@link #getSName() <em>SName</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -40,6 +40,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
  */
 public class STextualDSImpl extends SSequentialDSImpl implements STextualDS {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8429141974451677200L;
+	/**
 	 * The default value of the '{@link #getSText() <em>SText</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

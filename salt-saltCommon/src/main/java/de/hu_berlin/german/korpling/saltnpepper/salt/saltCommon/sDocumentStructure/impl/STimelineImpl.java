@@ -46,6 +46,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
  */
 public class STimelineImpl extends SSequentialDSImpl implements STimeline {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3777842318169430019L;
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -44,6 +44,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl
  */
 public class SCorpusRelationImpl extends SRelationImpl implements SCorpusRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1687911326272177796L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

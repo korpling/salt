@@ -53,6 +53,11 @@ import org.eclipse.emf.ecore.InternalEObject;
  */
 public class SAudioDSRelationImpl extends SRelationImpl implements SAudioDSRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6717666857570085529L;
+
+	/**
 	 * The default value of the '{@link #getSStart() <em>SStart</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

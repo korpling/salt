@@ -36,6 +36,11 @@ import org.eclipse.emf.ecore.EClass;
  */
 public abstract class STimeOverlappingRelationImpl extends SRelationImpl implements STimeOverlappingRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5666893018701273788L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

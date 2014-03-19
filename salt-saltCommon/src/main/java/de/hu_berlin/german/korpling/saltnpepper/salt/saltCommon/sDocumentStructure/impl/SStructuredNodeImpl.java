@@ -39,6 +39,11 @@ import org.eclipse.emf.ecore.EClass;
  */
 public abstract class SStructuredNodeImpl extends SNodeImpl implements SStructuredNode {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5912951505954729980L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

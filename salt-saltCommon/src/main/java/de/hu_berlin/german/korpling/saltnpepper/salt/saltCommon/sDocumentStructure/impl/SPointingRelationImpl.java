@@ -47,6 +47,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl
  */
 public class SPointingRelationImpl extends SRelationImpl implements SPointingRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3020513150162819963L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

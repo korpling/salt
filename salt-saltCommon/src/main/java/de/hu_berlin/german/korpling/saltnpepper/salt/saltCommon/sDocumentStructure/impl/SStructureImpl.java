@@ -41,6 +41,11 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class SStructureImpl extends SStructuredNodeImpl implements SStructure {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1920821987554747632L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

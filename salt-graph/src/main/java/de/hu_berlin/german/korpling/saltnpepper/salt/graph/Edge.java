@@ -42,100 +42,100 @@ import org.eclipse.emf.common.util.EList;
 public interface Edge extends IdentifiableElement {
 
 	/**
-         * Returns the value of the '<em><b>Graph</b></em>' container reference.
-         * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getEdges <em>Edges</em>}'.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Graph</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getEdges <em>Edges</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Graph</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Graph</em>' container reference.
-         * @see #setGraph(Graph)
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getEdge_Graph()
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getEdges
-         * @model opposite="edges" transient="false"
-         * @generated
-         */
+	 * @return the value of the '<em>Graph</em>' container reference.
+	 * @see #setGraph(Graph)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getEdge_Graph()
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#getEdges
+	 * @model opposite="edges" transient="false"
+	 * @generated
+	 */
 	Graph getGraph();
 
 	/**
-         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge#getGraph <em>Graph</em>}' container reference.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge#getGraph <em>Graph</em>}' container reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Graph</em>' container reference.
-         * @see #getGraph()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Graph</em>' container reference.
+	 * @see #getGraph()
+	 * @generated
+	 */
 	void setGraph(Graph value);
 
 	/**
-         * Returns the value of the '<em><b>Source</b></em>' reference.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Source</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Source</em>' reference.
-         * @see #setSource(Node)
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getEdge_Source()
-         * @model
-         * @generated
-         */
+	 * @return the value of the '<em>Source</em>' reference.
+	 * @see #setSource(Node)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getEdge_Source()
+	 * @model
+	 * @generated
+	 */
 	Node getSource();
 
 	/**
-         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge#getSource <em>Source</em>}' reference.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge#getSource <em>Source</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Source</em>' reference.
-         * @see #getSource()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Source</em>' reference.
+	 * @see #getSource()
+	 * @generated
+	 */
 	void setSource(Node value);
 
 	/**
-         * Returns the value of the '<em><b>Target</b></em>' reference.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Target</b></em>' reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Target</em>' reference.
-         * @see #setTarget(Node)
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getEdge_Target()
-         * @model
-         * @generated
-         */
+	 * @return the value of the '<em>Target</em>' reference.
+	 * @see #setTarget(Node)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getEdge_Target()
+	 * @model
+	 * @generated
+	 */
 	Node getTarget();
 
 	/**
-         * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge#getTarget <em>Target</em>}' reference.
-         * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge#getTarget <em>Target</em>}' reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @param value the new value of the '<em>Target</em>' reference.
-         * @see #getTarget()
-         * @generated
-         */
+	 * @param value the new value of the '<em>Target</em>' reference.
+	 * @see #getTarget()
+	 * @generated
+	 */
 	void setTarget(Node value);
 
 	/**
-         * Returns the value of the '<em><b>Layers</b></em>' reference list.
-         * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer}.
-         * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getEdges <em>Edges</em>}'.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Layers</b></em>' reference list.
+	 * The list contents are of type {@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer}.
+	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getEdges <em>Edges</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layers</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-         * @return the value of the '<em>Layers</em>' reference list.
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getEdge_Layers()
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getEdges
-         * @model opposite="edges"
-         * @generated
-         */
+	 * @return the value of the '<em>Layers</em>' reference list.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getEdge_Layers()
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getEdges
+	 * @model opposite="edges"
+	 * @generated
+	 */
 	EList<Layer> getLayers();
 } // Edge

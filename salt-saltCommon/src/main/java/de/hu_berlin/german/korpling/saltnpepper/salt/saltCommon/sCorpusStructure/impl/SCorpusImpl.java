@@ -47,6 +47,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
  */
 public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4087747358589159086L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

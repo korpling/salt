@@ -57,6 +57,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SNodeImpl;
  */
 public class SDocumentImpl extends SNodeImpl implements SDocument {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8691633879331921789L;
+
+	/**
 	 * The cached value of the '{@link #getSDocumentGraph() <em>SDocument Graph</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

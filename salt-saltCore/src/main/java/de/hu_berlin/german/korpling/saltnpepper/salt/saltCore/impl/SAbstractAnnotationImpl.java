@@ -45,6 +45,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
  */
 public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbstractAnnotation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5727726684825126700L;
+
+	/**
 	 * The default value of the '{@link #getSNS() <em>SNS</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

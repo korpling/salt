@@ -48,6 +48,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class SOrderRelationImpl extends SRelationImpl implements SOrderRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2712903820294376608L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

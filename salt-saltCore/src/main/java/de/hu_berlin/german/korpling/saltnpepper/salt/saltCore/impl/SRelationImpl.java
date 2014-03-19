@@ -83,6 +83,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SProcess
  */
 public class SRelationImpl extends EdgeImpl implements SRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3399859079732367859L;
+
+	/**
 	 * The default value of the '{@link #getSName() <em>SName</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

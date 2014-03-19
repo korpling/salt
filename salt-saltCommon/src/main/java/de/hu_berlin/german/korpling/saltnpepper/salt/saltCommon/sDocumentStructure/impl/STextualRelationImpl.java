@@ -49,6 +49,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
  */
 public class STextualRelationImpl extends SSequentialRelationImpl implements STextualRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7182563392385532812L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

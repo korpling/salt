@@ -17,4 +17,12 @@
             genModel="model/graph.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated graph -->
+      <package
+            uri="index"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage"
+            genModel="src/main/resources/model/graph.genmodel"/>
+   </extension>
+
 </plugin>

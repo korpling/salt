@@ -41,6 +41,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
  */
 public class SAnnotationImpl extends SAbstractAnnotationImpl implements SAnnotation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -396140574239846405L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

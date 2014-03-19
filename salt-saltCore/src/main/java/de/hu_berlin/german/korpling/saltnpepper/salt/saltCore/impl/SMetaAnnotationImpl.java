@@ -40,6 +40,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SaltCorePackage;
  */
 public class SMetaAnnotationImpl extends SAbstractAnnotationImpl implements SMetaAnnotation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6881951586240249518L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

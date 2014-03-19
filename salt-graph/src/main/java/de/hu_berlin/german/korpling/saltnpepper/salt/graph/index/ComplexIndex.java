@@ -37,60 +37,60 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ComplexIndex<K, V> extends Index<K, V> {
 	/**
-         * Returns the value of the '<em><b>Sortable</b></em>' attribute.
-         * The default value is <code>"false"</code>.
-         * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Sortable</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Sortable</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-         * @return the value of the '<em>Sortable</em>' attribute.
-         * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex_Sortable()
-         * @model default="false" changeable="false"
-         * @generated
-         */
+	 * @return the value of the '<em>Sortable</em>' attribute.
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.IndexPackage#getComplexIndex_Sortable()
+	 * @model default="false" changeable="false"
+	 * @generated
+	 */
     boolean isSortable();
 
     /**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * <!-- begin-model-doc -->
-         * This method returns if index has a slot with the given id.
-         * @param id Object - identifier for slot
-         * @return true, if there exists a slot with given id
-         * <!-- end-model-doc -->
-         * @model
-         * @generated
-         */
+	 * <!-- begin-model-doc -->
+	 * This method returns if index has a slot with the given id.
+	 * @param id Object - identifier for slot
+	 * @return true, if there exists a slot with given id
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
 	Boolean hasSlot(K elementId);
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * <!-- begin-model-doc -->
-         * This method returns a slot matching to the given id. If id does not exist in index returned list is empty.
-         * @return matching slot
-         * <!-- end-model-doc -->
-         * @model
-         * @generated
-         */
+	 * <!-- begin-model-doc -->
+	 * This method returns a slot matching to the given id. If id does not exist in index returned list is empty.
+	 * @return matching slot
+	 * <!-- end-model-doc -->
+	 * @model
+	 * @generated
+	 */
 	EList<V> getSlot(K elementId);
 
 				/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model kind="operation"
-         * @generated
-         */
+	 * @model kind="operation"
+	 * @generated
+	 */
 	EList<K> getSlotIds();
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @model
-         * @generated
-         */
+	 * @model
+	 * @generated
+	 */
 	Boolean removeSlot(K elementId);
 
 } // ComplexIndex

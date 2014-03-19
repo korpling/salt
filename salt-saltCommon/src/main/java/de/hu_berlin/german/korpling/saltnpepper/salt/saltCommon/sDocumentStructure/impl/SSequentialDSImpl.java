@@ -45,6 +45,11 @@ import org.eclipse.emf.common.notify.Notification;
  */
 public abstract class SSequentialDSImpl extends SNodeImpl implements SSequentialDS {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1878043916316208616L;
+
+	/**
 	 * The default value of the '{@link #getSData() <em>SData</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

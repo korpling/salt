@@ -48,6 +48,11 @@ public class SNamedElementImpl extends SFeaturableElementImpl implements SNamedE
 {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -416773817145007554L;
+
+	/**
 	 * This is a static version of the method:
 	 * {@inheritDoc SNamedElement#getSName()}
 	 * 

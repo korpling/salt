@@ -47,6 +47,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors.SMetaAnn
  */
 public class SMetaAnnotatableElementImpl extends LabelableElementImpl implements SMetaAnnotatableElement {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2414724972567754298L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

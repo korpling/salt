@@ -54,69 +54,69 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.SlimComplexInde
 public class SlimComplexIndexImpl<K, V> extends IdentifiableElementImpl implements SlimComplexIndex<K, V> {
 
 	/**
-         * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getNumOfElements() <em>Num Of Elements</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getNumOfElements()
-         * @generated
-         * @ordered
-         */
+	 * @see #getNumOfElements()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Long NUM_OF_ELEMENTS_EDEFAULT = null;
 	/**
-         * The default value of the '{@link #getNumOfElementIds() <em>Num Of Element Ids</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getNumOfElementIds() <em>Num Of Element Ids</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getNumOfElementIds()
-         * @generated
-         * @ordered
-         */
+	 * @see #getNumOfElementIds()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Long NUM_OF_ELEMENT_IDS_EDEFAULT = null;
 	/**
-         * The default value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getEstimatedCapacity()
-         * @generated
-         * @ordered
-         */
+	 * @see #getEstimatedCapacity()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Integer ESTIMATED_CAPACITY_EDEFAULT = new Integer(10000);
 	/**
-         * The cached value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getEstimatedCapacity() <em>Estimated Capacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #getEstimatedCapacity()
-         * @generated
-         * @ordered
-         */
+	 * @see #getEstimatedCapacity()
+	 * @generated
+	 * @ordered
+	 */
 	protected Integer estimatedCapacity = ESTIMATED_CAPACITY_EDEFAULT;
 	/**
-         * The default value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #isSortable()
-         * @generated
-         * @ordered
-         */
+	 * @see #isSortable()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final boolean SORTABLE_EDEFAULT = false;
 	/**
-         * The cached value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
-         * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isSortable() <em>Sortable</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @see #isSortable()
-         * @generated
-         * @ordered
-         */
+	 * @see #isSortable()
+	 * @generated
+	 * @ordered
+	 */
 	protected boolean sortable = SORTABLE_EDEFAULT;
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-                return IndexPackage.Literals.SLIM_COMPLEX_INDEX;
-        }
+		return IndexPackage.Literals.SLIM_COMPLEX_INDEX;
+	}
 	
 	protected SlimComplexIndexImpl() {
 		super();
@@ -205,25 +205,25 @@ public class SlimComplexIndexImpl<K, V> extends IdentifiableElementImpl implemen
 	}
 	
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public Integer getEstimatedCapacity() {
-                return estimatedCapacity;
-        }
+		return estimatedCapacity;
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	public void setEstimatedCapacity(Integer newEstimatedCapacity) {
-                Integer oldEstimatedCapacity = estimatedCapacity;
-                estimatedCapacity = newEstimatedCapacity;
-                if (eNotificationRequired())
-                        eNotify(new ENotificationImpl(this, Notification.SET, IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY, oldEstimatedCapacity, estimatedCapacity));
-        }
+		Integer oldEstimatedCapacity = estimatedCapacity;
+		estimatedCapacity = newEstimatedCapacity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY, oldEstimatedCapacity, estimatedCapacity));
+	}
 
 	//============================================================================================================
 	// ADD
@@ -345,103 +345,103 @@ public class SlimComplexIndexImpl<K, V> extends IdentifiableElementImpl implemen
 
 	
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-                switch (featureID) {
-                        case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENTS:
-                                return getNumOfElements();
-                        case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENT_IDS:
-                                return getNumOfElementIds();
-                        case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
-                                return getIndexMap();
-                        case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
-                                return getEstimatedCapacity();
-                        case IndexPackage.SLIM_COMPLEX_INDEX__SORTABLE:
-                                return isSortable();
-                }
-                return super.eGet(featureID, resolve, coreType);
-        }
+		switch (featureID) {
+			case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENTS:
+				return getNumOfElements();
+			case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENT_IDS:
+				return getNumOfElementIds();
+			case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
+				return getIndexMap();
+			case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				return getEstimatedCapacity();
+			case IndexPackage.SLIM_COMPLEX_INDEX__SORTABLE:
+				return isSortable();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-                switch (featureID) {
-                        case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
-                                setIndexMap((Map<K, V>)newValue);
-                                return;
-                        case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
-                                setEstimatedCapacity((Integer)newValue);
-                                return;
-                }
-                super.eSet(featureID, newValue);
-        }
+		switch (featureID) {
+			case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
+				setIndexMap((Map<K, V>)newValue);
+				return;
+			case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				setEstimatedCapacity((Integer)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-                switch (featureID) {
-                        case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
-                                setIndexMap((Map<K, V>)null);
-                                return;
-                        case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
-                                setEstimatedCapacity(ESTIMATED_CAPACITY_EDEFAULT);
-                                return;
-                }
-                super.eUnset(featureID);
-        }
+		switch (featureID) {
+			case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
+				setIndexMap((Map<K, V>)null);
+				return;
+			case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				setEstimatedCapacity(ESTIMATED_CAPACITY_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-                switch (featureID) {
-                        case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENTS:
-                                return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
-                        case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENT_IDS:
-                                return NUM_OF_ELEMENT_IDS_EDEFAULT == null ? getNumOfElementIds() != null : !NUM_OF_ELEMENT_IDS_EDEFAULT.equals(getNumOfElementIds());
-                        case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
-                                return getIndexMap() != null;
-                        case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
-                                return ESTIMATED_CAPACITY_EDEFAULT == null ? estimatedCapacity != null : !ESTIMATED_CAPACITY_EDEFAULT.equals(estimatedCapacity);
-                        case IndexPackage.SLIM_COMPLEX_INDEX__SORTABLE:
-                                return sortable != SORTABLE_EDEFAULT;
-                }
-                return super.eIsSet(featureID);
-        }
+		switch (featureID) {
+			case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENTS:
+				return NUM_OF_ELEMENTS_EDEFAULT == null ? getNumOfElements() != null : !NUM_OF_ELEMENTS_EDEFAULT.equals(getNumOfElements());
+			case IndexPackage.SLIM_COMPLEX_INDEX__NUM_OF_ELEMENT_IDS:
+				return NUM_OF_ELEMENT_IDS_EDEFAULT == null ? getNumOfElementIds() != null : !NUM_OF_ELEMENT_IDS_EDEFAULT.equals(getNumOfElementIds());
+			case IndexPackage.SLIM_COMPLEX_INDEX__INDEX_MAP:
+				return getIndexMap() != null;
+			case IndexPackage.SLIM_COMPLEX_INDEX__ESTIMATED_CAPACITY:
+				return ESTIMATED_CAPACITY_EDEFAULT == null ? estimatedCapacity != null : !ESTIMATED_CAPACITY_EDEFAULT.equals(estimatedCapacity);
+			case IndexPackage.SLIM_COMPLEX_INDEX__SORTABLE:
+				return sortable != SORTABLE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
 	/**
-         * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-         * @generated
-         */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-                if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-                StringBuffer result = new StringBuffer(super.toString());
-                result.append(" (estimatedCapacity: ");
-                result.append(estimatedCapacity);
-                result.append(", sortable: ");
-                result.append(sortable);
-                result.append(')');
-                return result.toString();
-        }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (estimatedCapacity: ");
+		result.append(estimatedCapacity);
+		result.append(", sortable: ");
+		result.append(sortable);
+		result.append(')');
+		return result.toString();
+	}
 
 	/**
 	 * {@inheritDoc ComplexIndex#removeAll()}

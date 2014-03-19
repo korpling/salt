@@ -17,8 +17,6 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.impl;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -53,8 +51,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions.SaltCoreException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SGraphImpl;
 
-import org.eclipse.emf.ecore.util.DelegatingEcoreEList;
-
 /**
  * 
  * <p>
@@ -71,6 +67,10 @@ import org.eclipse.emf.ecore.util.DelegatingEcoreEList;
  * @author Florian Zipser
  */
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6231183755050628580L;
 	/**
 	 * name of index for node-types
 	 */

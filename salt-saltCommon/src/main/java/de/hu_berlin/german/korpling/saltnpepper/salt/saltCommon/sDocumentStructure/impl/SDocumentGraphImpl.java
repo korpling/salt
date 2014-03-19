@@ -113,6 +113,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8187727451861908852L;
+	/**
 	 * The cached value of the '{@link #getSDocument() <em>SDocument</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

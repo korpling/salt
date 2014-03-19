@@ -45,6 +45,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
  */
 public class STimelineRelationImpl extends SSequentialRelationImpl implements STimelineRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3003719957169950864L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

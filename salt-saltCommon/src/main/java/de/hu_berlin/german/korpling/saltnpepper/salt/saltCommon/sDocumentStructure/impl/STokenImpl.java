@@ -39,6 +39,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
  */
 public class STokenImpl extends SStructuredNodeImpl implements SToken {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7109731287964542621L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

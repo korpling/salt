@@ -35,6 +35,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl.SRelationImpl
  */
 public abstract class STextOverlappingRelationImpl extends SRelationImpl implements STextOverlappingRelation {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4612076432814368802L;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */

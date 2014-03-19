@@ -10,7 +10,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LabelableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="@export java.io.Serializable"/>
+      <details key="documentation" value="@extends java.io.Serializable"/>
     </eAnnotations>
     <eOperations name="addLabel">
       <eParameters name="label" eType="#//Label"/>
