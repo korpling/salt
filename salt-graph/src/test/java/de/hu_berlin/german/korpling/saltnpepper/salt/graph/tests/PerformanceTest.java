@@ -100,15 +100,15 @@ public class PerformanceTest extends TestCase
 			}
 			scndTestIdx= System.currentTimeMillis() - scndTestIdx;
 		
-			System.out.println("Needed time over all (number of runs: "+maxRuns+"):");
-			System.out.println("\t with using idx:\t" +neededTimeIdx);
-			System.out.println("\t controll value:\t" +scndTestIdx);
-			System.out.println("\t without using idx:\t" +neededTimeSearch);
-			System.out.println("\t controll value:\t" +scndTestSearch);
-			
-			System.out.println("Needed time per run ("+maxRuns+"):");
-			System.out.println("\t with using idx:\t" +neededTimeIdx/ maxRuns);
-			System.out.println("\t without using idx:\t" +neededTimeSearch / maxRuns);
+//			System.out.println("Needed time over all (number of runs: "+maxRuns+"):");
+//			System.out.println("\t with using idx:\t" +neededTimeIdx);
+//			System.out.println("\t controll value:\t" +scndTestIdx);
+//			System.out.println("\t without using idx:\t" +neededTimeSearch);
+//			System.out.println("\t controll value:\t" +scndTestSearch);
+//			
+//			System.out.println("Needed time per run ("+maxRuns+"):");
+//			System.out.println("\t with using idx:\t" +neededTimeIdx/ maxRuns);
+//			System.out.println("\t without using idx:\t" +neededTimeSearch / maxRuns);
 		}
 	}
 }

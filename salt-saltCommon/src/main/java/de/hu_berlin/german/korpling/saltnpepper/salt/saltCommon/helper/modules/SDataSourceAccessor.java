@@ -364,7 +364,6 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 								SNode fromSNode,
 								long order) 
 	{
-//		System.out.println("nodeReached('"+currSNode+"',)");
 		if (TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.equals(TRAVERSION_TYPE.valueOf(traversalId)))
 		{//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 			if (currSNode instanceof SSequentialDS)
@@ -395,7 +394,6 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 			if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))){
 				// if a SToken was reached
 				if (currSNode instanceof SToken){
-					//System.out.println("Reached Token " + currSNode.getSId());
 					// add it to the overlapped token list
 					this.overlappedSToken.add(((SToken)currSNode));
 				}
@@ -414,7 +412,6 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 							SNode fromSNode, 
 							long order) 
 	{
-//		System.out.println("nodeLeft('"+currSNode+"',)");
 		if (TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.equals(TRAVERSION_TYPE.valueOf(traversalId)))
 		{//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 			if (currSNode instanceof SSequentialDS)
@@ -464,7 +461,6 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 									SNode currSNode, 
 									long order) 
 	{
-//		System.out.println("checkConstraint('"+currSNode+"',)");
 		boolean retVal= false;
 		if (TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.equals(TRAVERSION_TYPE.valueOf(traversalId)))
 		{//TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
@@ -542,7 +538,6 @@ public class SDataSourceAccessor extends SDocumentStructureModule implements SGr
 	 */
 	public EList<SToken> getOverlappedSTokens(SNode overlappingNode,
 			EList<STYPE_NAME> overlappingRelationTypes) {
-		//System.out.println("Starting traversion");
 		// initialise the overlappedSToken EList
 		this.overlappedSToken = new HashSet<SToken>();
 		// initialise the relationTypes2Traverse EList

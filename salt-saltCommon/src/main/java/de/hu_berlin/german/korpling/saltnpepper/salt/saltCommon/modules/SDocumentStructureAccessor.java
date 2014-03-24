@@ -651,7 +651,6 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 	public boolean checkConstraint(GRAPH_TRAVERSE_MODE traversalMode,
 			Long traversalId, Edge edge, Node currNode, long order) 
 	{
-//		System.out.println("checkConstraint(traversalMode: "+ traversalMode+ ", currNode: "+ currNode.getId()+ ")");
 		SRelation relation= null;
 		if (edge== null);
 		else if (!(edge instanceof SRelation))
@@ -727,8 +726,6 @@ public class SDocumentStructureAccessor extends SDocumentStructureModule impleme
 			Long traversalId, Node currNode, Edge edge, Node fromNode,
 			long order) 
 	{
-//		System.out.println("nodeReached(traversalMode: "+ traversalMode+ ", currNode: "+ currNode.getId()+ ")");
-//		System.out.println("relation: "+ edge);
 		SRelation relation= null;
 		if (edge== null);
 		else if (!(edge instanceof SRelation))

@@ -90,7 +90,6 @@ public class GraphTraverserModuleTest extends TestCase
 									Node fromNode,
 									long order) 
 		{
-//			System.out.println("nodeReached(), node: '"+currNode.getId()+"', traverseId: '"+traversalId+"' ");
 			currentPath.add(currNode);
 			if (!currNode.getId().equalsIgnoreCase(nodeOrderWayThere[posInWayThere]))
 			{
@@ -114,7 +113,6 @@ public class GraphTraverserModuleTest extends TestCase
 								Node fromNode, 
 								long order) 
 		{
-//			System.out.println("nodeLeft(), node: '"+currNode.getId()+"', traverseId: '"+traversalId+"' ");
 			if(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST == traversalType ||
 			   GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST == traversalType){
 				currentPath.remove(currentPath.size()-1);
@@ -144,7 +142,6 @@ public class GraphTraverserModuleTest extends TestCase
 										Node currNode, 
 										long order) 
 		{
-//			System.out.println("checkConstraint(), node: '"+currNode.getId()+"', traverseId: '"+traversalId+"' ");
 			boolean retVal= true;
 			
 			if (isCycleSafe== false) 

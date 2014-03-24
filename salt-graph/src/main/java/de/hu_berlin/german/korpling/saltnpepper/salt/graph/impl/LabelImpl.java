@@ -71,14 +71,7 @@ public class LabelImpl extends LabelableElementImpl implements Label
 		public final Map<String, WeakReference<String>> stringPoolMap = Collections.synchronizedMap(new WeakHashMap<String, WeakReference<String>>());
 		private int missedCalls = 0;
 		private int cachedCalls = 0;
-		public void printPooledInfo(){
-//			System.out.println("PoolInfo: Entries= " + stringPoolMap.size() );
-//			System.out.println("PoolInfo: missed / cached / total = " + missedCalls + " / "  + cachedCalls + " / " + (cachedCalls + missedCalls));
-		}
 		private String pool(final String s){
-//			if ((missedCalls + cachedCalls) % 50000 == 0){
-//				printPooledInfo();
-//			}
 			WeakReference<String> pooled = stringPoolMap.get(s);
 			if (pooled == null){
 				++missedCalls;

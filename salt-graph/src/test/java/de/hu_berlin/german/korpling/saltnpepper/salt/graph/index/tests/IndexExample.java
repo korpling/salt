@@ -110,7 +110,6 @@ public class IndexExample {
 					}
 				}
 				catch (RuntimeException exception) {
-					System.out.println("Problem loading " + uri);
 					exception.printStackTrace();
 				}
 			}

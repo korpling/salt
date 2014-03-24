@@ -86,7 +86,6 @@ public class GrAFFileDelegator {
 	public void setMappingProps(Properties mappingProps) 
 	{
 		this.mappingProps= mappingProps;
-		System.out.println("----> setMappingProps: "+ mappingProps);
 		if (mappingProps!= null)
 		{//extract type to GrAF_MAPPING_TYPE mapping
 			Enumeration<Object> keys= mappingProps.keys();
@@ -96,8 +95,6 @@ public class GrAFFileDelegator {
 				if (key.contains(GrAFResource.PROP_GRAF_LAYER_TO_TYPE))
 				{
 					String value= mappingProps.get(key).toString();
-					System.out.println("key: "+ key);
-					System.out.println("value: "+ value);
 					if (value== null)
 						throw new SaltResourceException("Cannot read resource, because a property with key '"+GrAFResource.PROP_GRAF_LAYER_TO_TYPE+"' is not matchable to '"+GRAF_MAPPING_TYPE.class+"' for value '"+value+"'.");
 					key= key.replace(GrAFResource.PROP_GRAF_LAYER_TO_TYPE+".", "");
@@ -111,9 +108,7 @@ public class GrAFFileDelegator {
 					}
 				}
 			}
-			System.out.println("type2grafMappingType: "+ type2grafMappingType);
 		}//extract type to GrAF_MAPPING_TYPE mapping
-		System.out.println("<---- setMappingProps");
 	}
 
 	public Properties getMappingProps() {

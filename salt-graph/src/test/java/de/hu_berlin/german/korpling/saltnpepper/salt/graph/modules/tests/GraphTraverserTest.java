@@ -331,7 +331,6 @@ public class GraphTraverserTest extends GraphModuleTest implements TraversalObje
 		if ((this.currTestCase== TEST_CASE.CASE1)	||
 				(this.currTestCase== TEST_CASE.CASE2))
 			{
-			System.out.println("left node(traversalId: "+traversalId+ ", currNode: "+ currNode.getId());
 			if (	(traversalMode ==GRAPH_TRAVERSE_MODE.DEPTH_FIRST) &&
 					(traversalId== depthFirst1Id))
 			{
@@ -357,7 +356,6 @@ public class GraphTraverserTest extends GraphModuleTest implements TraversalObje
 		if ((this.currTestCase== TEST_CASE.CASE1)	||
 			(this.currTestCase== TEST_CASE.CASE2))
 		{	
-			System.out.println("reached node(traversalId: "+traversalId+", currNode: "+ currNode.getId());
 			if (	(traversalMode ==GRAPH_TRAVERSE_MODE.DEPTH_FIRST) &&
 					(traversalId== depthFirst1Id))
 			{
@@ -376,7 +374,6 @@ public class GraphTraverserTest extends GraphModuleTest implements TraversalObje
 		{//checks if every edge is visited only one time
 			if (edge!= null)
 			{	
-//				System.out.println(edge.getId()+ ": "+edge.getSource().getId()+ "-->"+ edge.getTarget().getId());
 				if (!edgesList.contains(edge))
 					fail("a visited edge does not contain in edge list, or is visited two times");
 				edgesList.remove(edge);
@@ -388,39 +385,7 @@ public class GraphTraverserTest extends GraphModuleTest implements TraversalObje
 	 * Stores nodes from CycleTest.
 	 */
 	private EList<Edge> edgesList= null;
-	
-	/**
-	 * creates several graphs looking like a double linked chain and tests, if every edge is visited 
-	 * only one time. For testing performance.
-	 */
-//	public void testCycleTraversionPerformance()
-//	{
-//		int runs= 3; 
-//		long time= 0l;
-//		System.out.println("===== visited by node ===== ");
-//		for (int i= 1; i< runs; i++)
-//		{	
-//			System.out.println("Test"+ i);
-//			long millis= System.currentTimeMillis();
-//			this.cycleTest(true);
-//			time= time+(System.currentTimeMillis() - millis);
-//			System.out.println("needed millis: "+ time);
-//		}
-//		System.out.println("needed millis: "+ time + ", time per run: "+ (time/ runs));
-//		
-//		System.out.println("===== visited by table ===== ");
-//		time= 0l;
-//		for (int i= 1; i< runs; i++)
-//		{	
-//			System.out.println("Test"+ i);
-//			long millis= System.currentTimeMillis();
-//			this.cycleTest(false);
-//			time= time+(System.currentTimeMillis() - millis);
-//			System.out.println("needed millis: "+ time);
-//		}
-//		System.out.println("needed millis: "+ time + ", time per run: "+ (time/ runs));
-//	}
-	
+		
 	/**
 	 * creates a graph looking like a double linked chain and tests, if every edge is visited 
 	 * only one time. 

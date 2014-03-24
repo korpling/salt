@@ -300,7 +300,6 @@ public class GraphTraverserObject implements Runnable
 				int i= 0;
 				for(Edge childEdge: childEdges)
 				{
-	//				System.out.println(this.getClass()+ ": childEdge: "+ childEdge+ ", visited: "+ this.hasVisited(childEdge));
 					if (	(!this.getCycleSafe()) ||
 							(!this.hasVisited(childEdge)))
 					{//if is not cycle safe or  the edge has not been visited	

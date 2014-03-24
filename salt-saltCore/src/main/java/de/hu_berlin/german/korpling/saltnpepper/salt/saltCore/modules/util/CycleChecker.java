@@ -183,17 +183,9 @@ public class CycleChecker implements TraversalObject
 	
 	protected SNode[] getShortCycle(EList<SRelation> longCycle, SRelation duplicatedSRelation)
 	{
-//		List<SNode> shortCycle= null;
 		SNode[] shortCycle= null;
 		int lastIndex= longCycle.lastIndexOf(duplicatedSRelation);
-		
-//		{//debug
-//			System.out.print("longCycle: ");
-//			for (SRelation sRelation: longCycle)
-//				System.out.print("longCycle: "+sRelation.getSSource().getSId()+ "-->"+ sRelation.getSTarget().getSId()+"; ");
-//			System.out.println();
-//		}//debug
-		
+				
 		shortCycle= new SNode[(longCycle.size()-lastIndex)+1];
 		int arrayIdx= 0;
 		for (int i= lastIndex; i< longCycle.size(); i++)
@@ -237,17 +229,10 @@ public class CycleChecker implements TraversalObject
 			sRelation= (SRelation) edge;
 			currRelClass= sRelation.getClass().getSimpleName();
 		}
-		
-//		if (sRelation== null)
-//			System.out.println("null --> "+currNode.getId());
-//		else
-//			System.out.println(edge.getSource().getId()+" -["+sRelation.getClass().getSimpleName()+"|"+sRelation.getSTypes()+"]-> "+currNode.getId());
-		 		
+				 		
 		//start: checking level-1 cycles
-//			System.out.println("visited relations of level-1: "+visitedRelationsLevel1);
 			if (visitedRelationsLevel1.contains(sRelation))
 			{//node has been visited
-//				System.out.println("cycle-1 DETECTED");
 				this.listener.cycleDetected(CYCLE_LEVELS.LEVEL_1, null, null, this.getShortCycle(visitedRelationsLevel1, sRelation));
 				retVal= false;
 			}//node has been visited
