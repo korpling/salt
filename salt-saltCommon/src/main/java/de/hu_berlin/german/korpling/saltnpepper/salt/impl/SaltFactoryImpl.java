@@ -286,8 +286,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		XMLResource xmlResource= null;
 		xmlResource= (XMLResource)resource;
 		xmlResource.setEncoding("UTF-8");	
-		try 
-		{//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
+		try {//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
 			xmlResource.load(null);
 		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
 		catch (IOException e) 

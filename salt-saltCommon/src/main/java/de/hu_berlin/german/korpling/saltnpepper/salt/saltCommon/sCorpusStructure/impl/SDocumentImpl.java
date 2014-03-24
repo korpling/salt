@@ -245,7 +245,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * {@inheritDoc SDocument#save(URI)}
 	 */
 	@Override
-	public void saveSDocumentGraph(URI sDocumentGraphLocation) {
+	public synchronized void saveSDocumentGraph(URI sDocumentGraphLocation) {
 		SaltFactory.eINSTANCE.saveSDocumentGraph(this.getSDocumentGraph(), sDocumentGraphLocation);
 		this.setSDocumentGraph(null);
 		this.setSDocumentGraphLocation(sDocumentGraphLocation);
@@ -253,9 +253,10 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 
 	/**
 	 * {@inheritDoc SDocument#load()}
+	 * Must be synchronized with {@link #loadSDocumentGraph()} and {@link #loadSDocumentGraph(URI)}
 	 */
 	@Override
-	public synchronized  void loadSDocumentGraph() {
+	public synchronized void loadSDocumentGraph() {
 		this.loadSDocumentGraph(this.getSDocumentGraphLocation());
 	}
 
