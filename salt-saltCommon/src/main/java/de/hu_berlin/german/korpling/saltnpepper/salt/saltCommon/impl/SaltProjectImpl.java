@@ -50,6 +50,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverse
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverser.GRAPH_TRAVERSE_MODE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.GraphTraverserObject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.TraversalObject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
@@ -359,7 +360,7 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		}
 		URI saltProjectFileURI= URI.createFileURI(saltProjectPath.getAbsolutePath() +"/"+ "saltProject"+"."+ SaltFactory.FILE_ENDING_SALT);
 		
-		Resource resource= SaltFactory.resourceSet.createResource(saltProjectFileURI);
+		Resource resource= SaltFactoryImpl.getResourceSet().createResource(saltProjectFileURI);
 		
 		if (resource== null)
 			throw new SaltResourceException("Cannot save salt project to given uri '"+saltProjectURI+"'.");

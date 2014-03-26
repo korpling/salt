@@ -22,12 +22,9 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.omg.PortableInterceptor.ServerIdHelper;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
-import de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
@@ -49,12 +46,6 @@ public interface SaltFactory extends SaltCommonFactory, SaltSemanticsFactory{
 	 * @generated
 	 */
 	SaltFactory eINSTANCE = de.hu_berlin.german.korpling.saltnpepper.salt.impl.SaltFactoryImpl.init();
-	
-	/**
-	 * Returns a {@link ResourceSet} object, which is initialized with all {@link Resource} objects to load
-	 * and store Salt object into the different available formats. 
-	 */
-	ResourceSet resourceSet= SaltFactoryImpl.getResourceSet();
 	
 	/**
 	 * The file ending for xml files to store a SALT model.

@@ -246,6 +246,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	 */
 	public static synchronized ResourceSet getResourceSet() 
 	{
+		ResourceSet resourceSet= null;
 		if (resourceSet==  null)
 		{
 			if (resourceSet==  null)
@@ -288,7 +289,6 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		xmlResource.setEncoding("UTF-8");	
 		try {//must be done after all, because it doesn't work, if not all SDocumentGraph objects 
 			xmlResource.load(null);
-			SaltFactory.resourceSet.getResources().remove(xmlResource);
 		}//must be done after all, because it doesn't work, if not all SDocumentGraph objects  
 		catch (IOException e) 
 		{
@@ -336,7 +336,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	public void saveSDocumentGraph(	SDocumentGraph sDocumentGraph, 
 									URI sDocumentGraphLocation) 
 	{
-		Resource resource= SaltFactory.resourceSet.createResource(sDocumentGraphLocation);
+		Resource resource= getResourceSet().createResource(sDocumentGraphLocation);
 		if (resource== null)
 			throw new SaltResourceException("Cannot save the "+SDocumentGraph.class.getName()+" object '"+sDocumentGraph.getSElementId()+"' to given uri '"+sDocumentGraphLocation+"', because no resource was found.");
 		if (!(resource instanceof XMLResource))
@@ -355,7 +355,6 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			xmlResource.setEncoding("UTF-8");	
 			try {
 				xmlResource.save(null);
-				SaltFactory.resourceSet.getResources().remove(xmlResource);
 			} catch (IOException e) 
 			{
 				throw new SaltResourceException("Cannot save "+SDocumentGraph.class.getName()+" to given uri '"+sDocumentGraphLocation+"'.", e);
