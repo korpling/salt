@@ -142,10 +142,8 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	public String getGlobalId(SElementId sElementId)
 	{
 		StringBuffer globalId= new StringBuffer();
-
 		if (	(sElementId!= null)&&
 				(sElementId.getSIdentifiableElement()!= null)){
-			globalId.append(URI_SALT_SCHEMA);
 			SCorpusGraph graph= null;
 			if (	(sElementId.getSIdentifiableElement() instanceof SDocument)&&
 					(((SDocument)sElementId.getSIdentifiableElement()).getSCorpusGraph()!= null)){
@@ -155,19 +153,24 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				graph= ((SCorpus)sElementId.getSIdentifiableElement()).getSCorpusGraph();
 			}
 			if (graph!= null){
+				globalId.append(URI_SALT_SCHEMA);
 				SaltProject project= graph.getSaltProject(); 
-				if (project!= null)
-				{
+				if (project!= null){
 					globalId.append("/");
 					globalId.append(project.getSCorpusGraphs().indexOf(graph));
 					globalId.append("/");	
 				}
 				String actualId= sElementId.getSId().replace("salt:", "");
-				if (actualId.startsWith("/"))
+				if (actualId.startsWith("/")){
 					actualId= actualId.substring(1, actualId.length());
+				}
 				globalId.append(actualId);	
-				if (sElementId.getSIdentifiableElement() instanceof SCorpus)
+				if (sElementId.getSIdentifiableElement() instanceof SCorpus){
 					globalId.append("/");
+				}
+			}
+			else{
+				globalId.append(sElementId.getSId());
 			}
 		}
 		return(globalId.toString());
