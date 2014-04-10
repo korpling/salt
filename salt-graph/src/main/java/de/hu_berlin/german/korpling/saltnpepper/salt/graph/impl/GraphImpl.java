@@ -1465,19 +1465,19 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 					return (false);
 			}// check size of nodes
 
-			// TODO: remove this when hashEList is part of GraphImpl
-			HashSet<Node> thisNodes = new HashSet<Node>(this.getNodes());
-			for (Node node : other.getNodes()) {
-				if (!thisNodes.contains(node)) {
-					if (differences != null)
-						differences.add(this.getClass().getSimpleName()
-								+ ": Node " + node.getId() + " in "
-								+ other.getId() + " has no equivalent in "
-								+ this.getId());
-					else
-						return false;
-				}
-			}
+//			// TODO: remove this when hashEList is part of GraphImpl
+//			HashSet<Node> thisNodes = new HashSet<Node>(this.getNodes());
+//			for (Node node : other.getNodes()) {
+//				if (!thisNodes.contains(node)) {
+//					if (differences != null)
+//						differences.add(this.getClass().getSimpleName()
+//								+ ": Node " + node.getId() + " in "
+//								+ other.getId() + " has no equivalent in "
+//								+ this.getId());
+//					else
+//						return false;
+//				}
+//			}
 		}
 		// end: check nodes
 
@@ -1518,19 +1518,19 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 					return (false);
 			}// check size of edges
 				// TODO: remove this when hashEList is part of GraphImpl
-			HashSet<Edge> thisEdges = new HashSet<Edge>(this.getEdges());
-			for (Edge edge : other.getEdges()) {
-				if (!thisEdges.contains(edge)) {
-
-					if (differences != null)
-						differences.add(this.getClass().getSimpleName()
-								+ ": Edge " + edge.getId() + " in "
-								+ other.getId() + " has no equivalent in "
-								+ this.getId());
-					else
-						return false;
-				}
-			}
+//			HashSet<Edge> thisEdges = new HashSet<Edge>(this.getEdges());
+//			for (Edge edge : other.getEdges()) {
+//				if (!thisEdges.contains(edge)) {
+//
+//					if (differences != null)
+//						differences.add(this.getClass().getSimpleName()
+//								+ ": Edge " + edge.getId() + " in "
+//								+ other.getId() + " has no equivalent in "
+//								+ this.getId());
+//					else
+//						return false;
+//				}
+//			}
 		}
 		// end: check edges
 		return (true);
