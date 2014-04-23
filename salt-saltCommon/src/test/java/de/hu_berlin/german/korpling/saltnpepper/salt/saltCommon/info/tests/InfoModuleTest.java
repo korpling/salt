@@ -17,14 +17,19 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.tests;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringBufferInputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 
 import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -43,6 +48,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.w3c.dom.Document;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -66,14 +72,14 @@ public class InfoModuleTest extends TestCase {
 	static final String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";
 	static final String W3C_XML_SCHEMA = "http://www.w3.org/2001/XMLSchema";
 	static final String JAXP_SCHEMA_LANGUAGE = "http://java.sun.com/xml/jaxp/properties/schemaLanguage";
-	public static final String FILE_TMP_DIR = "_TMP/";
+	public static final String FILE_TMP_DIR = System.getProperty("java.io.tmpdir");
 	public static final File TMP_DIR = new File(FILE_TMP_DIR);
 	public static URI TMP_DIR_URI = null;
 	private static final String SCHEMA_PATH_SALT_PROJECT = "./src/main/resources/schema/saltProjectInfo.xsd";
 	private static final String SCHEMA_PATH_SDOCUMENT = "./src/main/resources/schema/sDocumentInfo.xsd";
 
 	public InfoModuleTest() {
-		TMP_DIR_URI = URI.createFileURI(TMP_DIR.toURI().getRawPath() + File.separator);
+		TMP_DIR_URI = URI.createFileURI(TMP_DIR.getPath());
 	}
 	private FilenameFilter xmlFilter = new FilenameFilter() {
 		@Override
@@ -202,6 +208,32 @@ public class InfoModuleTest extends TestCase {
 		im.writeInfoStream(sp, writer,tFolder);
 //		im.createSDocumentInfo(sp);
 		validate(buffer,SCHEMA_PATH_SALT_PROJECT);
+	}
+	
+	public void testOmitMetaDataInfo() throws Exception {
+		StringWriter buffer = new StringWriter();
+		XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(buffer);
+		InfoModule im = new InfoModule();
+		SDocument emptyDocument = SaltFactory.eINSTANCE.createSDocument();
+		im.writeInfoStream(emptyDocument, writer);
+		assertFalse(buffer.toString().contains("metaDataInfo"));
+	}
+	
+	public void testDocumentStructure() throws Exception {
+		StringWriter buffer = new StringWriter();
+		XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(buffer);
+		InfoModule im = new InfoModule();
+		SaltProject sproject = SampleGenerator.createCompleteSaltproject2();
+		URI tempUri = URI.createURI("testDocumentStructure").resolve(TMP_DIR_URI);
+		im.setWriteAll(true);
+		im.writeInfoStream(sproject, writer, tempUri);
+		
+		 DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+		 DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+		 InputStream in = new ByteArrayInputStream(buffer.toString().getBytes(Charset.defaultCharset()));
+		 Document doc = docBuilder.parse(in);
+		 
+		 //TODO: structure test
 	}
 	
 	public void testPrintInfoDocumentXMLStreamWriter__Scorpus() throws XMLStreamException, FactoryConfigurationError, IOException, SAXException, ParserConfigurationException {

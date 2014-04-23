@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -513,6 +514,11 @@ public class SDocumentInfo {
 			addMetaDataItem(sMetaAnnotation);
 		}
 		
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("(SDocInfo, iDocument=%s, cDocCount=%s)", this.iDocument.clazz, this.cDocument.getValue());
 	}
 
 

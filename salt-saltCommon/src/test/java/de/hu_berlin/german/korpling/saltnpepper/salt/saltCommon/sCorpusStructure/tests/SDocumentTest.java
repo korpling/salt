@@ -18,12 +18,11 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.tests;
 
 import java.io.File;
-import java.io.IOException;
 
-import javax.xml.parsers.ParserConfigurationException;
+import junit.framework.TestCase;
+import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.URI;
-import org.xml.sax.SAXException;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonFactory;
@@ -33,8 +32,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
-import junit.framework.TestCase;
-import junit.textui.TestRunner;
 
 /**
  * <!-- begin-user-doc -->
@@ -238,8 +235,6 @@ public class SDocumentTest extends TestCase {
 			// TODO: header or no header
 			imt.validate(tmpFile);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			fail();
 		}
 	}

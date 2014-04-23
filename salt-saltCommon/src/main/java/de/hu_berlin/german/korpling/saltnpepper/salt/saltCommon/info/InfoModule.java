@@ -45,6 +45,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
@@ -111,6 +112,7 @@ public class InfoModule {
 	static private Logger log = Logger.getLogger(InfoModule.class);
 	
 
+
 	private XMLOutputFactory xmlOutFactory = null;
 	private XMLInputFactory xmlInputFactory = null;
 	private final Charset charset;
@@ -141,8 +143,8 @@ public class InfoModule {
 	 */
 	public SDocumentInfo writeInfoFile(final SDocument sdoc, final File fout, SDocumentInfo result){
 		FileOutputStream out        = null;
-		XMLStreamWriter  tempWriter = null;
 		BufferedWriter   buffWriter = null;
+		XMLStreamWriter  tempWriter = null;
 		SDocumentInfo results = SDocumentInfo.init(sdoc);
 		newXMLFactories();
 		
@@ -216,6 +218,7 @@ public class InfoModule {
 		}else{
 			writer.writeAttribute(SID_TAG, root.getSName());
 		}
+//		SaltFactory.eINSTANCE.save_DOT(root, URI.createFileURI("/Developer/temp/graph"));
 		SDocumentInfo corpusCount = writeSCorpusTree(writer, root.getSCorpusGraph(), root, "", outputDir);
 		writeSDocumentData(corpusCount, writer);
 //		corpusCount.print();
@@ -225,6 +228,8 @@ public class InfoModule {
 			resultCache.put(root.getSElementId(), corpusCount);
 		}
 	}
+	
+	
 
 
 	
@@ -318,11 +323,9 @@ public class InfoModule {
 			throw new SaltException("Could not write SCorpusInfo XML file", e);
 		}finally{
 			try {
-				writer.flush();
-				writer.close();
-				bwriter.close();
-				osw.close();
-				out.close();
+				if(writer != null){
+					writer.close();
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 //				e.printStackTrace();
@@ -408,19 +411,19 @@ public class InfoModule {
 	 */
 	private void writeSDocumentData(SDocumentInfo results,
 			XMLStreamWriter w) throws XMLStreamException {
-		Map<String, Integer> allTopLevels = results.getCounts(SDocumentInfo.ALL_LAYERS);
-		
+		Map<String, Integer> layerCountsForAllLayers = results.getCounts(SDocumentInfo.ALL_LAYERS);
+		results.print(SDocumentInfo.META_DATA);// TODO: remove printout
 		writeMetaData(results, w);
-		writeStructuralInfoData(w, allTopLevels);
-		writeAnnotationData(results, w, SDocumentInfo.ALL_LAYERS, allTopLevels);
+		writeStructuralInfoData(w, layerCountsForAllLayers);
+		writeAnnotationData(results, w, SDocumentInfo.ALL_LAYERS, layerCountsForAllLayers);
 		
 		for (String layerName : results.getLayerNames()) {
-			Map<String, Integer> topLevel = results.getCounts(layerName);
+			Map<String, Integer> layerCountsForLayer = results.getCounts(layerName);
 			w.writeStartElement(SLAYERINFO_TAG);
 			w.writeAttribute(SNAME_TAG, layerName);
-			writeStructuralInfoData(w, topLevel);
+			writeStructuralInfoData(w, layerCountsForLayer);
 			
-			writeAnnotationData(results, w, layerName, topLevel);
+			writeAnnotationData(results, w, layerName, layerCountsForLayer);
 			w.writeEndElement();// end SLAYER_INFO
 		}
 
@@ -432,14 +435,22 @@ public class InfoModule {
 
 	private void writeMetaData(SDocumentInfo results, XMLStreamWriter w)
 			throws XMLStreamException {
-		w.writeStartElement(META_DATA_INFO);
-		for( Entry<String, String> metaElement: results.getMetaData().entrySet()){
-			w.writeStartElement(ENTRY_TAG);
-			w.writeAttribute(KEY_TAG, metaElement.getKey());
-			w.writeCharacters(metaElement.getValue());
+		Map<String, Integer> metaData = results
+				.getCounts(SDocumentInfo.META_DATA);
+		if (!metaData.isEmpty()) {
+			w.writeStartElement(META_DATA_INFO);
+			for (Entry<String, Integer> metaElement : metaData.entrySet()) {
+				for (Entry<String, Integer> metaValue : results.getCounts(
+						SDocumentInfo.META_DATA, metaElement.getKey())
+						.entrySet()) {
+					w.writeStartElement(ENTRY_TAG);
+					w.writeAttribute(KEY_TAG, metaElement.getKey());
+					w.writeCharacters(metaValue.getKey());
+					w.writeEndElement();
+				}
+			}
 			w.writeEndElement();
 		}
-		w.writeEndElement();
 	}
 
 	/**
@@ -448,27 +459,29 @@ public class InfoModule {
 	 * @param results
 	 * @param w
 	 * @param layerName
-	 * @param topLevel
+	 * @param layerCountsForLayer
 	 * @throws XMLStreamException
 	 */
 	private void writeAnnotationData(SDocumentInfo results, XMLStreamWriter w,
-			String layerName, Map<String, Integer> topLevel)
+			String layerName, Map<String, Integer> layerCountsForLayer)
 			throws XMLStreamException {
-		for (Entry<String, Integer> count : topLevel.entrySet()) {
-			Set<String> annotationTypes = results.getAnnotationCount(layerName,count.getKey());
-			if(annotationTypes.isEmpty()){
-				continue;
-			}
-			for (String annotationType : annotationTypes) {
+		// type
+		for (Entry<String, Integer> annotationType : layerCountsForLayer.entrySet()) {
+			Map<String, Integer> annotationNames = results.getCounts(layerName,annotationType.getKey());
+			
+			// annotation names
+			for (Entry<String, Integer> annotationName : annotationNames.entrySet()) {
+				Map<String, Integer> annotationValues = results.getCounts(layerName,annotationType.getKey(),annotationName.getKey());
 				w.writeStartElement(SANNOTATION_INFO_TAG);
-				w.writeAttribute(TYPE_ATTRIBUTE, count.getKey());
-				w.writeAttribute(OCCURANCES_TAG, count.getValue().toString());
-				w.writeAttribute(SNAME_TAG, annotationType);
-				Map<String, Integer> annotationCounts = results.getCounts(layerName,count.getKey(),annotationType);
-				for (Entry<String, Integer> anno : annotationCounts.entrySet()) {
+				w.writeAttribute(TYPE_ATTRIBUTE, annotationType.getKey());
+				w.writeAttribute(SNAME_TAG, annotationName.getKey());
+				w.writeAttribute(OCCURANCES_TAG, annotationName.getValue().toString());
+				
+				// annotation values
+				for (Entry<String, Integer> annotationValue : annotationValues.entrySet()) {
 					w.writeStartElement(SVALUE_TAG);
-					w.writeAttribute(OCCURANCES_TAG, anno.getValue().toString());
-					w.writeCharacters(anno.getKey());
+					w.writeAttribute(OCCURANCES_TAG, annotationValue.getValue().toString());
+					w.writeCharacters(annotationValue.getKey());
 					w.writeEndElement();
 				}
 				w.writeEndElement();
@@ -529,14 +542,14 @@ public class InfoModule {
 		if(graph == null){
 			// cached result
 //			if(resultCache.containsKey(sdoc.getSElementId())){
-//				log.debug("Cache hit");
+//				System.out.println("Cache hit");
 //				return resultCache.remove(sdoc.getSElementId());
 //			}
 			try {
 				// empty result
 				sdoc.loadSDocumentGraph();
 			} catch (SaltResourceNotFoundException e) {
-				log.debug("could not load " + sdoc);
+				System.out.println("could not load " + sdoc);
 				return SDocumentInfo.init("");
 			}
 
@@ -576,7 +589,7 @@ public class InfoModule {
 		gtm.setGraph(sdoc.getSDocumentGraph());
 	
 //		for (Node root : sdoc.getSDocumentGraph().getRoots()) {
-//			log.debug("Root: " + root);
+//			System.out.println("Root: " + root);
 //		}
 		if (startNodes != null){
 			gtm.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "info_sdoc_traverse_TDBF", traverser, true);
@@ -654,7 +667,8 @@ public class InfoModule {
 		List<SDocumentInfo> results = new LinkedList<SDocumentInfo>();
 		SDocumentInfo ret = SDocumentInfo.init(sCorpusGraph.getSName());
 //		results.add(ret);
-		writeSCorpusTag(writer, sCorpusRoot);
+		writeStartSCorpusTag(writer, sCorpusRoot);
+		
 		Iterator<EObject> corpusGraphIterator = new CorpusGraphIterator(sCorpusGraph);
 		for (EObject out : sCorpusGraph.getOutEdges(sCorpusRoot.getId())) {
 			log.debug(message + "sCorpusOutEdge: " + out.eClass().getName());
@@ -711,13 +725,13 @@ public class InfoModule {
 					writeInfoFile(sdoc, sdocInfo,result);
 				}
 			} else {
-				log.debug(message + "what is this : " + out);
+				log.debug(message + "what is this : " + out);// TODO: remove printout
 			}
 		}
 		writer.writeEndElement();// end scorpus tag
 		
 		ret = mergeAllTo(ret, results);
-		ret.print(SDocumentInfo.META_DATA);
+		
 		return ret;
 	}
 
@@ -743,7 +757,7 @@ public class InfoModule {
 		
 	}
 
-	private void writeSCorpusTag(final XMLStreamWriter writer,
+	private void writeStartSCorpusTag(final XMLStreamWriter writer,
 			final SCorpus sCorpusRoot) throws XMLStreamException {
 		writer.writeStartElement(SCORPUS_INFO_TAG);
 		String sname;
@@ -803,6 +817,7 @@ public class InfoModule {
 				uri = uri.resolve(root);
 			}
 		}
+		System.out.println(uri);
 		return uri;
 	}
 	
@@ -921,5 +936,72 @@ public class InfoModule {
 	public void setOverwriting(boolean b) {
 		this.options.setOverwriting(b);
 		
+	}
+	
+
+	public void writeProjectInfoXML(SaltProject saltProject, URI projectXML) {
+		FileOutputStream out        = null;
+		BufferedWriter   buffWriter = null;
+		XMLStreamWriter  writer = null;
+		try {
+			XMLOutputFactory xmlOutFactory = XMLOutputFactory.newInstance();
+			out = new FileOutputStream(projectXML.toFileString());
+			buffWriter = new BufferedWriter(new OutputStreamWriter(out,Charset.defaultCharset()));
+			writer = xmlOutFactory.createXMLStreamWriter(buffWriter);
+			
+			writeStartSProjectDocument(writer,saltProject);
+			
+			for (SCorpusGraph sCorpusGraph : saltProject.getSCorpusGraphs()) {
+				SCorpus sCorpusRoot = (SCorpus) sCorpusGraph.getRoots().get(0);
+//				SCorpus graph has only one root
+				assert sCorpusRoot != null;
+				writeStartSCorpusTag(writer, sCorpusRoot);
+				writeSProjectStructure(writer,sCorpusGraph, sCorpusRoot);
+				writer.writeEndElement();
+			}
+			
+			writer.writeEndDocument();
+			
+			
+		} catch (Exception e) {
+			throw new SaltException("could not create salt project xml", e);
+		} finally {
+			try {
+				writer.close();
+			} catch (XMLStreamException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println("written " + projectXML.toFileString());
+		
+	}
+	
+	private void writeStartSProjectDocument(XMLStreamWriter writer,
+			SaltProject saltProject) throws XMLStreamException {
+		writer.writeStartDocument();
+		writer.writeStartElement(SPROJECT_TAG);
+		String sname = saltProject.getSName();
+		if (sname != null) {
+			writer.writeAttribute(SNAME_TAG, sname);
+		} else {
+			writer.writeAttribute(SNAME_TAG, "salt-project");
+		}
+	}
+	private void writeSProjectStructure(XMLStreamWriter writer, SCorpusGraph sCorpusGraph, SCorpus node) throws XMLStreamException {
+		for (EObject out : sCorpusGraph.getOutEdges(node.getId())) {
+			if (out instanceof SCorpusRelation) {
+				SCorpusRelation corpRel = (SCorpusRelation) out;
+				SCorpus scorpus = corpRel.getSSubCorpus();
+				
+				writeStartSCorpusTag(writer, scorpus);
+				writeSProjectStructure(writer, sCorpusGraph, scorpus);
+				writer.writeEndElement();
+			} else if (out instanceof SCorpusDocumentRelation) {
+				SCorpusDocumentRelation corpDocRel = (SCorpusDocumentRelation) out;
+				SDocument sdoc = corpDocRel.getSDocument();
+				writeSDocumentTag(writer, sdoc);
+			}
+		}
 	}
 }

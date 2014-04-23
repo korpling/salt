@@ -77,6 +77,34 @@ public class SampleGenerator
 	}
 	
 	/**
+	 * TODO: The original {@link SampleGenerator#createCompleteSaltproject()}
+	 * method does not generate the intendet structure but can not be changed
+	 * because of other modules depend on it
+	 * 
+	 * Creates a complete {@link SaltProject} object having the complex
+	 * structure
+	 * 
+	 * @return
+	 */
+	public static SaltProject createCompleteSaltproject2() 
+	{
+		//Creating a new salt project, this is the main object and contains all the others. 
+		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
+		saltProject.setSName("sampleSaltProject");
+		//this works, because after createCorpusStructure() was called, only one graph exists in salt project
+		SCorpusGraph sCorpGraph = SaltFactory.eINSTANCE.createSCorpusGraph();
+//		SCorpusGraph sCorpusGraph= saltProject.getSCorpusGraphs().get(0);
+		
+		sCorpGraph= createCorpusStructure2(sCorpGraph);
+		
+		saltProject.getSCorpusGraphs().add(sCorpGraph);
+		for (SDocument sDocument : sCorpGraph.getSDocuments()) {
+			createSDocumentStructure(sDocument);
+		}
+		return(saltProject);
+	}
+	
+	/**
 	 * Tests following structure:
 	 * 
 	 * 	rootCorpus
@@ -160,15 +188,17 @@ public class SampleGenerator
 	
 	/**
 	 * Tests following structure:
-	 * 
-	 * 				rootCorpus
-	 * 		/					\
-	 * 	subCorp1				subCorp2
-	 * 	/		\				/		\
-	 * doc1		doc2		doc3		doc4
+	 * <pre>
+	 * 	             rootCorpus
+	 * 		     /                 \
+	 *       subCorp1		      subCorp2
+	 * 	/	  /		\		\
+	 * doc1	doc2	doc3	doc4
+	 * </pre>
 	 * @throws IOException 
 	 * @throws SAXException 
 	 */
+	@Deprecated
 	public static SCorpusGraph createCorpusStructure(SCorpusGraph sCorpGraph)
 	{
 		sCorpGraph.setSId("corpusGraph1");
@@ -202,6 +232,52 @@ public class SampleGenerator
 		sCorpGraph.addSDocument(sCorpus2, sDoc);
 		
 		return(sCorpGraph);
+	}
+	
+	/**
+	 * Tests following structure:
+	 * 
+	 * 				rootCorpus
+	 * 		/					\
+	 * 	subCorp1				subCorp2
+	 * 	/		\				/		\
+	 * doc1		doc2		doc3		doc4
+	 * @throws IOException 
+	 * @throws SAXException 
+	 */
+	public static SCorpusGraph createCorpusStructure2(SCorpusGraph sCorpGraph1)
+	{
+		sCorpGraph1.setSId("corpusGraph1");
+		SCorpus sCorpusRoot= SaltFactory.eINSTANCE.createSCorpus();
+		sCorpusRoot.setSName("rootCorpus");
+		sCorpGraph1.addSNode(sCorpusRoot);
+		SCorpus sCorpusSub1= SaltFactory.eINSTANCE.createSCorpus();
+		sCorpusSub1.setSName("subCorpus1");
+		SCorpus sCorpusSub2= SaltFactory.eINSTANCE.createSCorpus();
+		sCorpusSub2.setSName("subCorpus2");
+		
+		sCorpGraph1.addSSubCorpus(sCorpusRoot, sCorpusSub1);
+		sCorpGraph1.addSSubCorpus(sCorpusRoot, sCorpusSub2);
+		
+		SDocument sDoc= null;
+		
+		sDoc= SaltFactory.eINSTANCE.createSDocument();
+		sDoc.setSName("doc1");
+		sCorpGraph1.addSDocument(sCorpusSub1, sDoc);
+		
+		sDoc= SaltFactory.eINSTANCE.createSDocument();
+		sDoc.setSName("doc2");
+		sCorpGraph1.addSDocument(sCorpusSub1, sDoc);
+		
+		sDoc= SaltFactory.eINSTANCE.createSDocument();
+		sDoc.setSName("doc3");
+		sCorpGraph1.addSDocument(sCorpusSub2, sDoc);
+		
+		sDoc= SaltFactory.eINSTANCE.createSDocument();
+		sDoc.setSName("doc4");
+		sCorpGraph1.addSDocument(sCorpusSub2, sDoc);
+		
+		return(sCorpGraph1);
 	}
 	
 	/**
