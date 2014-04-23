@@ -22,7 +22,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
@@ -60,7 +59,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
@@ -79,7 +77,15 @@ public class InfoModuleTest extends TestCase {
 	private static final String SCHEMA_PATH_SDOCUMENT = "./src/main/resources/schema/sDocumentInfo.xsd";
 
 	public InfoModuleTest() {
+		/*
+		 * The path  may end with a with a path separator nor not depending on the operating system.
+		 * Since we deal with URIs we need to add a separator if necessary.
+		 * see http://bugs.java.com/bugdatabase/view_bug.do?bug_id=4391434
+		 */
 		TMP_DIR_URI = URI.createFileURI(TMP_DIR.getPath());
+		if (!TMP_DIR_URI.hasTrailingPathSeparator()) {
+			TMP_DIR_URI = TMP_DIR_URI.appendSegment("");
+		}
 	}
 	private FilenameFilter xmlFilter = new FilenameFilter() {
 		@Override
