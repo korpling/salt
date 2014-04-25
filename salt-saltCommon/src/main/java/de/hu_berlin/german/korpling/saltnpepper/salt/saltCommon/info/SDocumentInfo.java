@@ -155,11 +155,11 @@ public class SDocumentInfo {
 		increaseCountForNestedElement(cLayer, iObject);
 		// Counting SRelation, SNode separated
 		if (eObject instanceof SRelation) {
-			Identifier snode = getIdentifier("SRelation.subclass");
+			Identifier snode = getIdentifier(SRelation.class.getSimpleName());
 			increaseCountForNestedElement(cLayer, snode);
 		}  
 		if (eObject instanceof SNode) {
-			Identifier iRelation = getIdentifier("SNode.subclass");
+			Identifier iRelation = getIdentifier(SNode.class.getSimpleName());
 			increaseCountForNestedElement(cLayer, iRelation);
 		}
 
