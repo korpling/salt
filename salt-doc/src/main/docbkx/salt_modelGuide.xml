@@ -109,6 +109,13 @@
                                         SSpaningRelation</para>
                                 </listitem>
                                 <listitem>
+                                    <para>a SSPan is a totally ordered set of tokens.  a totally
+                                        ordered set is a collection of distinct objects, having a
+                                        unique order, which is represented by the position of the
+                                        token in list. For each token t1 and t2 element of span with
+                                        t1 != t2: either t1 &lt; t2 xor t1 > t2   </para>
+                                </listitem>
+                                <listitem>
                                     <para>SSpan and SSPaningRelation are a unit, SSPaningRelation is
                                         only between SSPan and Stoken</para>
                                 </listitem>
