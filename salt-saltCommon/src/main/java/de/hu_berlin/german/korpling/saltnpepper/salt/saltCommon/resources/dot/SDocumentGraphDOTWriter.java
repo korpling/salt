@@ -53,9 +53,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SProcessingAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
-public class SDocumentGraphDOTWriter implements GraphTraverseHandler
-{
-	private URI outputURI= null;
+public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
+	private URI outputURI = null;
+
 	public void setOutputURI(URI outputURI) {
 		this.outputURI = outputURI;
 	}
@@ -63,8 +63,9 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler
 	public URI getOutputURI() {
 		return outputURI;
 	}
-	
-	private SDocumentGraph sDocumentGraph= null;
+
+	private SDocumentGraph sDocumentGraph = null;
+
 	public void setSDocumentGraph(SDocumentGraph sDocumentGraph) {
 		this.sDocumentGraph = sDocumentGraph;
 	}
@@ -72,278 +73,262 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler
 	public SDocumentGraph getSDocumentGraph() {
 		return sDocumentGraph;
 	}
-	
-	private PrintStream currOutputStream= null; 
-	
+
+	private PrintStream currOutputStream = null;
+
 	/**
 	 * This list contains all nodes, which are visited.
 	 */
-	private EList<Node> visitedNodes= null;
-	
+	private EList<Node> visitedNodes = null;
+
 	private Set<SToken> tokenList;
 	private Set<SSpan> spanList;
 	private Set<STimeline> timelineList;
 	private Set<SStructure> structureList;
 	private Set<STextualDS> textList;
 	private Set<SNode> otherNodeList;
-	
-	public void save()
-	{
+
+	public void save() {
 		if (outputURI == null)
 			throw new SaltModuleException("Cannot print the given model to dot, because no output file is given.");
-		
-		File outputFile= new File(this.getOutputURI().toFileString());
-		File outputDir= null;
+
+		File outputFile = new File(this.getOutputURI().toFileString());
+		File outputDir = null;
 		// check if uri is a file uri or a directory uri
 		if (outputFile.getName().contains("."))
-			outputDir= outputFile.getParentFile();
-		else outputDir= outputFile;
+			outputDir = outputFile.getParentFile();
+		else
+			outputDir = outputFile;
 		outputDir.mkdirs();
 		try {
-			this.currOutputStream= new PrintStream(outputFile, "UTF-8");
-			}
-		catch (FileNotFoundException e) {
+			this.currOutputStream = new PrintStream(outputFile, "UTF-8");
+		} catch (FileNotFoundException e) {
+			throw new NullPointerException(e.getMessage());
+		} catch (UnsupportedEncodingException e) {
 			throw new NullPointerException(e.getMessage());
 		}
-		catch (UnsupportedEncodingException e) 
-		{ throw new NullPointerException(e.getMessage()); }
 		this.currOutputStream.println("digraph G {");
 		this.currOutputStream.println("ordering=out;");
-		
-		//if documentgraph isn't  null print it 
+
+		// if documentgraph isn't null print it
 		SDocumentGraph docGraph = getSDocumentGraph();
-		if (docGraph != null)
-		{
-			
-			this.visitedNodes= new BasicEList<Node>(); 
+		if (docGraph != null) {
+
+			this.visitedNodes = new BasicEList<Node>();
 			this.spanList = new LinkedHashSet<SSpan>();
 			this.structureList = new LinkedHashSet<SStructure>();
 			this.textList = new LinkedHashSet<STextualDS>();
 			this.timelineList = new LinkedHashSet<STimeline>();
 			this.tokenList = new LinkedHashSet<SToken>();
 			this.otherNodeList = new LinkedHashSet<SNode>();
-			
-			EList<Node> startNodes= docGraph.getRoots();
-			if (startNodes== null)
-			{
-				startNodes= new BasicEList<Node>();
-				if (	(this.getSDocumentGraph().getSTokens()!= null) &&
-						(this.getSDocumentGraph().getSTokens().size()>0))
-						startNodes.add(this.getSDocumentGraph().getSTokens().get(0));
+
+			EList<Node> startNodes = docGraph.getRoots();
+			if (startNodes == null) {
+				startNodes = new BasicEList<Node>();
+				if ((this.getSDocumentGraph().getSTokens() != null) && (this.getSDocumentGraph().getSTokens().size() > 0))
+					startNodes.add(this.getSDocumentGraph().getSTokens().get(0));
 			}
-			if (	(startNodes!= null)&&
-					(startNodes.size() >0))
+			if ((startNodes != null) && (startNodes.size() > 0))
 				docGraph.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "Dot_top_down", this);
-		    
-			
+
 			// primary texts should be on the bottom
-		    if(textList.size() > 0)
-			{
+			if (textList.size() > 0) {
 				currOutputStream.println("{");
 				currOutputStream.println("rank=max;");
-				for(STextualDS n : textList)
-				{
+				for (STextualDS n : textList) {
 					printSTextualDS(n);
 				}
 				currOutputStream.println("}");
 			}
-			
+
 			// put timeline on separate layer
-			if(timelineList.size() > 0)
-			{
+			if (timelineList.size() > 0) {
 				currOutputStream.println("{");
 				currOutputStream.println("rank=same;");
-				for(STimeline n : timelineList)
-				{
+				for (STimeline n : timelineList) {
 					printSTimeline(n);
 				}
 				currOutputStream.println("}");
 			}
-			
+
 			// put all token on same layer
-			if(tokenList.size() > 0)
-			{
+			if (tokenList.size() > 0) {
 				currOutputStream.println("{");
 				currOutputStream.println("rank=same;");
-				for(SToken n : tokenList)
-				{
+				for (SToken n : tokenList) {
 					printSToken(n);
 				}
 				currOutputStream.println("}");
 			}
-			
+
 			// put all spans on same layer
-		    if(spanList.size() > 0)
-			{
+			if (spanList.size() > 0) {
 				currOutputStream.println("{");
 				currOutputStream.println("rank=same;");
-				for(SSpan n : spanList)
-				{
+				for (SSpan n : spanList) {
 					printSSpan(n);
 				}
 				currOutputStream.println("}");
 			}
-			
+
 			// no specific ordering for structured nodes and other nodes
-			for(SStructure n : structureList)
-			{
+			for (SStructure n : structureList) {
 				printSStructure(n);
 			}
-			
-			for(SNode n : otherNodeList)
-			{
+
+			for (SNode n : otherNodeList) {
 				printSNode(n);
 			}
-			
-			
-			{//some nodes have no roots for example if they are part of a cycle, they have to be still stored
-				if (visitedNodes.size() != this.getSDocumentGraph().getSNodes().size())
-				{//if both lists doesn't have the same size create difference
-					//contains all nodes, which wasn' t visited while first traversal
-					EList<Node> forgottenNodes= new BasicEList<Node>();
-					for (Node node: this.getSDocumentGraph().getSNodes())
-					{
+
+			{// some nodes have no roots for example if they are part of a
+				// cycle, they have to be still stored
+				if (visitedNodes.size() != this.getSDocumentGraph().getSNodes().size()) {// if
+																							// both
+																							// lists
+																							// doesn't
+																							// have
+																							// the
+																							// same
+																							// size
+																							// create
+																							// difference
+																							// contains
+																							// all
+																							// nodes,
+																							// which
+																							// wasn'
+																							// t
+																							// visited
+																							// while
+																							// first
+																							// traversal
+					EList<Node> forgottenNodes = new BasicEList<Node>();
+					for (Node node : this.getSDocumentGraph().getSNodes()) {
 						if (!visitedNodes.contains(node))
 							forgottenNodes.add(node);
 					}
-					if (forgottenNodes.size()== 0)
+					if (forgottenNodes.size() == 0)
 						throw new SaltResourceException("There are some nodes, which hasn' t been printed because of an unknown reason.");
-					else
-					{//traverse again
+					else {// traverse again
 						docGraph.traverse(forgottenNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "dot_forgotten_nodes", this);
-					}//traverse again
-				}//if both lists doesn't have the same size create difference
-			}//some nodes have no roots for example if they are part of a cycle, they have to be still stored
-		}
-		else 
-		{
+					}// traverse again
+				}// if both lists doesn't have the same size create difference
+			}// some nodes have no roots for example if they are part of a
+				// cycle, they have to be still stored
+		} else {
 			this.currOutputStream.println("<empty>[color= red, style = filled]");
-		}	
+		}
 		this.currOutputStream.println("}");
-		//close and flusch stream
+		// close and flusch stream
 		this.currOutputStream.flush();
 		this.currOutputStream.close();
 	}
-	
+
 	/**
-	 * Creates all annotation for dotNode comming from SAnnotation. This methode also
-	 * includes traversing recursive Annotations (meta annotations).
-	 * @param sAnno salt object form which all annotations come
+	 * Creates all annotation for dotNode comming from SAnnotation. This methode
+	 * also includes traversing recursive Annotations (meta annotations).
+	 * 
+	 * @param sAnno
+	 *            salt object form which all annotations come
 	 * @return returns a label for dot node
 	 */
-	private String createAnnotations(SAnnotation sAnno)
-	{
-		String retStr= null;
-		
-		String anno= null;
-		if (sAnno.getSValue()!= null)
-		{
-			anno= sAnno.getSValue().toString().replace("\"", "\\\"");
-			anno= anno.replace("\n", "\\n");
-			anno= anno.replace("\r", "\\r");
+	private String createAnnotations(SAnnotation sAnno) {
+		String retStr = null;
+
+		String anno = null;
+		if (sAnno.getSValue() != null) {
+			anno = sAnno.getSValue().toString().replace("\"", "\\\"");
+			anno = anno.replace("\n", "\\n");
+			anno = anno.replace("\r", "\\r");
 		}
-		
-		if ((retStr!= null) && (!retStr.isEmpty()))		
-		{
-				retStr= (sAnno.getQName()+"="+anno+"\\{"+retStr+"\\}");
+
+		if ((retStr != null) && (!retStr.isEmpty())) {
+			retStr = (sAnno.getQName() + "=" + anno + "\\{" + retStr + "\\}");
+		} else {
+			retStr = (sAnno.getQName() + "=" + anno);
 		}
-		else	
-		{
-			retStr= (sAnno.getQName()+"="+anno);
-		}
-		
-		return(retStr);
+
+		return (retStr);
 	}
-	
+
 	/**
 	 * Namespace for dot flags
 	 */
-	protected static final String KW_DOT_NS=	"dot::";
+	protected static final String KW_DOT_NS = "dot::";
 	/**
-	 * String to identify a flag in salt elements or relations, which say that the current 
-	 * element or relation has already been stored or not
+	 * String to identify a flag in salt elements or relations, which say that
+	 * the current element or relation has already been stored or not
 	 */
-	protected static final String KW_DOT_STORED=	KW_DOT_NS+"stored";
-	
-	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType,
-			String traversalId, Edge edge, Node currNode, long order) {
-		return(true);
-	}
-	
+	protected static final String KW_DOT_STORED = KW_DOT_NS + "stored";
 
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
-			Node currNode, Edge edge, Node fromNode, long order) {
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Edge edge, Node currNode, long order) {
+		return (true);
 	}
-	
-	
-	private DOTNode getDOTNode(SNode currSNode)
-	{
-		DOTNode dotNode= new DOTNode();
-		dotNode.id= currSNode.getId().toString();
-			
-		//print sName
-		if (currSNode.getSName()!= null)
-			dotNode.labels.add("sName"+"= "+currSNode.getSName());
-		
-		//create all annotations incl. meta annotations
-		for (SAnnotation sAnno: currSNode.getSAnnotations())
-		{
+
+	@Override
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Node currNode, Edge edge, Node fromNode, long order) {
+	}
+
+	private DOTNode getDOTNode(SNode currSNode) {
+		DOTNode dotNode = new DOTNode();
+		dotNode.id = currSNode.getId().toString();
+
+		// print sName
+		if (currSNode.getSName() != null)
+			dotNode.labels.add("sName" + "= " + currSNode.getSName());
+
+		// create all annotations incl. meta annotations
+		for (SAnnotation sAnno : currSNode.getSAnnotations()) {
 			dotNode.labels.add(this.createAnnotations(sAnno));
 		}
-		
+
 		visitedNodes.add(currSNode);
 		return dotNode;
 	}
-	
-	private void printDOTNode(DOTNode dotNode)
-	{
+
+	private void printDOTNode(DOTNode dotNode) {
 		this.currOutputStream.println(dotNode.toString());
 	}
-	
-	private void printSTextualDS(STextualDS t)
-	{
+
+	private void printSTextualDS(STextualDS t) {
 		DOTNode dotNode = getDOTNode(t);
-		
-		dotNode.color= "yellow"; 
+
+		dotNode.color = "yellow";
 		dotNode.style = "filled";
 		dotNode.shape = "Mrecord";
 		String text = t.getSText();
-		if (text != null) {//preparing text for dot
-			//replace " with \"
+		if (text != null) {// preparing text for dot
+			// replace " with \"
 			text = text.replace("\"", "\\\"");
-			//replace " with \n"
+			// replace " with \n"
 			text = text.replace("\n", "");
 			text = text.replace("\r", "");
-		}//preparing text for dot   
+		}// preparing text for dot
 		dotNode.labels.add("text=" + text);
 		printDOTNode(dotNode);
 	}
-	
-	private void printSToken(SToken currSNode)
-	{
+
+	private void printSToken(SToken currSNode) {
 		DOTNode dotNode = getDOTNode(currSNode);
-		
+
 		dotNode.color = "turquoise";
 		dotNode.style = "filled";
 		dotNode.shape = "Mrecord";
 		printDOTNode(dotNode);
 	}
-	
-	private void printSTimeline(STimeline currSNode)
-	{
+
+	private void printSTimeline(STimeline currSNode) {
 		DOTNode dotNode = getDOTNode(currSNode);
-		
+
 		dotNode.color = "gray";
 		dotNode.style = "filled";
 		dotNode.shape = "Mrecord";
 		dotNode.labels.add("time=" + ((STimeline) currSNode).getSPointsOfTime());
 		printDOTNode(dotNode);
 	}
-	
-	private void printSSpan(SSpan currSNode)
-	{
+
+	private void printSSpan(SSpan currSNode) {
 		DOTNode dotNode = getDOTNode(currSNode);
 
 		dotNode.color = "dodgerblue3";
@@ -351,9 +336,8 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler
 		dotNode.shape = "Mrecord";
 		printDOTNode(dotNode);
 	}
-		
-	private void printSStructure(SStructure currSNode)
-	{
+
+	private void printSStructure(SStructure currSNode) {
 		DOTNode dotNode = getDOTNode(currSNode);
 
 		dotNode.color = "seagreen";
@@ -361,9 +345,8 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler
 		dotNode.shape = "Mrecord";
 		printDOTNode(dotNode);
 	}
-	
-	private void printSNode(SNode currSNode)
-	{
+
+	private void printSNode(SNode currSNode) {
 		DOTNode dotNode = getDOTNode(currSNode);
 
 		dotNode.color = "red";
@@ -371,136 +354,110 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler
 		dotNode.style = "filled";
 		printDOTNode(dotNode);
 	}
-		
-	
+
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
-			String traversalId, Node currNode, Edge edge, Node fromNode,
-			long order) 
-	{
-		SRelation relation= null;
-		SNode currSNode= (SNode) currNode;
-		SNode fromSNode= null;
-		if (edge!= null) 
-		{
-			relation= (SRelation) edge;
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Node currNode, Edge edge, Node fromNode, long order) {
+		SRelation relation = null;
+		SNode currSNode = (SNode) currNode;
+		SNode fromSNode = null;
+		if (edge != null) {
+			relation = (SRelation) edge;
 		}
-		if (fromNode!= null) 
-		{
-			fromSNode= (SNode) fromNode;
+		if (fromNode != null) {
+			fromSNode = (SNode) fromNode;
 		}
-		
-		//------------------------------- Elements of a document
-		//STEXTUAL_DATASOURCE
-		if (currSNode instanceof STextualDS)
-		{
+
+		// ------------------------------- Elements of a document
+		// STEXTUAL_DATASOURCE
+		if (currSNode instanceof STextualDS) {
 			textList.add((STextualDS) currSNode);
 		}
-		//STIMELINE
-		else if (currSNode instanceof STimeline)
-		{
+		// STIMELINE
+		else if (currSNode instanceof STimeline) {
 			timelineList.add((STimeline) currSNode);
 		}
-		//STOKEN
-		else if (currSNode instanceof SToken)
-		{
+		// STOKEN
+		else if (currSNode instanceof SToken) {
 			tokenList.add((SToken) currSNode);
 		}
-		//SSpan
-		else if (currSNode instanceof SSpan)
-		{
+		// SSpan
+		else if (currSNode instanceof SSpan) {
 			spanList.add((SSpan) currSNode);
 		}
-		//SSTRUCTURE
-		else if (currSNode instanceof SStructure)
-		{
+		// SSTRUCTURE
+		else if (currSNode instanceof SStructure) {
 			structureList.add((SStructure) currSNode);
-		}
-		else 
-		{
+		} else {
 			otherNodeList.add(currSNode);
-		}		
-		
-		//print relation, if exists
-		if (relation!= null)
-		{
-			DOTEdge dotEdge= new DOTEdge();
-			dotEdge.fromId= fromSNode.getId().toString();
-			dotEdge.toId= currSNode.getId().toString();	
-			
-//			//print sName
-//			if (relation.getSName()!= null)
-//				dotEdge.labels.add("sName"+"= "+relation.getSName());
-			
-			{//print edge type, if exists
-				EList<String> sTypes= relation.getSTypes(); 
-				if (	(sTypes!= null) &&
-						(sTypes.size() > 0))
-				{
-					String dotString= "";
-					for (String sType: sTypes)
-					{	
-						if (dotString.isEmpty()) 
-						{
-							dotString= sType;
-						}
-						else 
-						{
-							dotString= dotString + sType+ ", ";
+		}
+
+		// print relation, if exists
+		if (relation != null) {
+			DOTEdge dotEdge = new DOTEdge();
+			dotEdge.fromId = fromSNode.getId().toString();
+			dotEdge.toId = currSNode.getId().toString();
+
+			// //print sName
+			// if (relation.getSName()!= null)
+			// dotEdge.labels.add("sName"+"= "+relation.getSName());
+
+			{// print edge type, if exists
+				EList<String> sTypes = relation.getSTypes();
+				if ((sTypes != null) && (sTypes.size() > 0)) {
+					String dotString = "";
+					for (String sType : sTypes) {
+						if (dotString.isEmpty()) {
+							dotString = sType;
+						} else {
+							dotString = dotString + sType + ", ";
 						}
 					}
-					dotString= "sTypes= ["+ dotString +"]";
-					
+					dotString = "sTypes= [" + dotString + "]";
+
 					dotEdge.labels.add(dotString);
 				}
 			}
-			for (SAnnotation sAnno: relation.getSAnnotations())
-			{
-				dotEdge.labels.add(sAnno.getQName()+"= "+sAnno.getSValueSTEXT());
+			for (SAnnotation sAnno : relation.getSAnnotations()) {
+				dotEdge.labels.add(sAnno.getQName() + "= " + sAnno.getSValueSTEXT());
 			}
-						
-			//STEXTUAL_RELATION
-			if (relation instanceof STextualRelation)
-			{
-				dotEdge.color= "yellow";
-				dotEdge.style= "filled";
+
+			// STEXTUAL_RELATION
+			if (relation instanceof STextualRelation) {
+				dotEdge.color = "yellow";
+				dotEdge.style = "filled";
 			}
-			//STimelineRelation
-			else if (relation instanceof STimelineRelation)
-			{
-				dotEdge.color= "gray";
-				dotEdge.style= "filled";
+			// STimelineRelation
+			else if (relation instanceof STimelineRelation) {
+				dotEdge.color = "gray";
+				dotEdge.style = "filled";
 			}
-			//SPANNING_RELATION
-			else if (relation instanceof SSpanningRelation)
-			{
-				dotEdge.color= "dodgerblue3";
-				dotEdge.style= "filled";
+			// SPANNING_RELATION
+			else if (relation instanceof SSpanningRelation) {
+				dotEdge.color = "dodgerblue3";
+				dotEdge.style = "filled";
 			}
-			//SDOMINANCE_RELATION
-			else if (relation instanceof SDominanceRelation)
-			{
-				dotEdge.color= "seagreen";
-				dotEdge.style= "filled";
+			// SDOMINANCE_RELATION
+			else if (relation instanceof SDominanceRelation) {
+				dotEdge.color = "seagreen";
+				dotEdge.style = "filled";
 			}
-			//SPOINTING_RELATION
-			else if (relation instanceof SPointingRelation)
-			{
-				dotEdge.color= "blue";
-				dotEdge.style= "filled";
+			// SPOINTING_RELATION
+			else if (relation instanceof SPointingRelation) {
+				dotEdge.color = "blue";
+				dotEdge.style = "filled";
 			}
-			//if relation is already stored don't store again
-			if (relation.getSProcessingAnnotation(KW_DOT_STORED)!= null);
-			else
-			{
+			// if relation is already stored don't store again
+			if (relation.getSProcessingAnnotation(KW_DOT_STORED) != null)
+				;
+			else {
 				this.currOutputStream.println(dotEdge.toString());
-				//flag the current element
+				// flag the current element
 				{
-					SProcessingAnnotation spAnno= SaltCommonFactory.eINSTANCE.createSProcessingAnnotation();
+					SProcessingAnnotation spAnno = SaltCommonFactory.eINSTANCE.createSProcessingAnnotation();
 					spAnno.setQName(KW_DOT_STORED);
 					relation.addSProcessingAnnotation(spAnno);
 				}
 			}
-		}		
+		}
 	}
 }
