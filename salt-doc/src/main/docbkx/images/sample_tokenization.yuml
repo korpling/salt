@@ -1,0 +1,14 @@
+//see yuml.me
+
+[text1|Is this example more complicated than it apperas to be?]
+[tok11|?]->[text1]
+[tok10|be]->[text1]
+[tok9|to]->[text1]
+[tok8|appears]->[text1]
+[tok7|it]->[text1]
+[tok6|than]->[text1]
+[tok5|complicated]->[text1]
+[tok4|more]->[text1]
+[tok3|example]->[text1]
+[tok2|this]->[text1]
+[tok1|Is]->[text1]

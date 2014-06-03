@@ -61,141 +61,6 @@
                 </listitem>
                 <listitem>
                     <para>Components of Salt</para>
-                    <itemizedlist>
-                        <listitem>
-                            <para>corpus-structure</para>
-                        </listitem>
-                        <listitem>
-                            <para>document-structure</para>
-                        </listitem>
-                        <listitem>
-                            <para>primary text</para>
-                        </listitem>
-                        <listitem>
-                            <para>token</para>
-                        </listitem>
-                        <listitem>
-                            <para>annotation</para>
-                            <itemizedlist>
-                                <listitem>
-                                    <para>motivate via pos and lemma example</para>
-                                </listitem>
-                                <listitem>
-                                    <para>it is a label: annotation is namespace, name, value</para>
-                                </listitem>
-                                <listitem>
-                                    <para>different kinds of annotations: SAnnotation,
-                                        SMetaAnnotation and SProcessAnnotation</para>
-                                </listitem>
-                                <listitem>
-                                    <para>what are they good for, explain and show sample for
-                                        each</para>
-                                </listitem>
-                                <listitem>
-                                    <para>data types in annotations</para>
-                                </listitem>
-                                <listitem>
-                                    <para>we also have features (SFeature)</para>
-                                </listitem>
-                            </itemizedlist>
-                        </listitem>
-                        <listitem>
-                            <para>collections of tokens</para>
-                            <itemizedlist>
-                                <listitem>
-                                    <para>In a graph world, everything has to be graph conform, even
-                                        a collection, therfore it is modeled as a separate node
-                                        SSPan, and needs a relation, to the nodes being contained
-                                        SSpaningRelation</para>
-                                </listitem>
-                                <listitem>
-                                    <para>a SSPan is a totally ordered set of tokens.  a totally
-                                        ordered set is a collection of distinct objects, having a
-                                        unique order, which is represented by the position of the
-                                        token in list. For each token t1 and t2 element of span with
-                                        t1 != t2: either t1 &lt; t2 xor t1 > t2   </para>
-                                </listitem>
-                                <listitem>
-                                    <para>SSpan and SSPaningRelation are a unit, SSPaningRelation is
-                                        only between SSPan and Stoken</para>
-                                </listitem>
-                            </itemizedlist>
-                        </listitem>
-                        <listitem>
-                            <para>hierarchies</para>
-                            <itemizedlist>
-                                <listitem>
-                                    <para>SStructure and SDominanceRelation are a unit,
-                                        SDominancerel is only between SSTructure and X</para>
-                                </listitem>
-                            </itemizedlist>
-                        </listitem>
-                        <listitem>
-                            <para>loose relation</para>
-                            <itemizedlist>
-                                <listitem>
-                                    <para>for instance coreference, what else???</para>
-                                </listitem>
-                                <listitem>
-                                    <para>SPointingRelation</para>
-                                </listitem>
-                                <listitem>
-                                    <para>connects the entire text, also across borders like
-                                        sentence borders</para>
-                                </listitem>
-                            </itemizedlist>
-                        </listitem>
-                        <listitem>
-                            <para>multiple texts</para>
-                            <itemizedlist>
-                                <listitem>
-                                    <para>motivate with parallel text</para>
-                                </listitem>
-                                <listitem>
-                                    <para>alignements between texts via SPointingRelation</para>
-                                </listitem>
-                            </itemizedlist>
-                        </listitem>
-                        <listitem>
-                            <para>timeline</para>
-                            <itemizedlist>
-                                <listitem>
-                                    <para>motivate with dialogue data</para>
-                                </listitem>
-                                <listitem>
-                                    <para>timeline discussion</para>
-                                </listitem>
-                            </itemizedlist>
-                        </listitem>
-                        <listitem>
-                            <para>ordering the data</para>
-                            <itemizedlist>
-                                <listitem>
-                                    <para>ordering can be understood and realized in several ways or
-                                        dimensions. What in one case can be a good order, can be
-                                        very wrong in another case. To respect this, Salt provides
-                                        different meanings of order. In the following we will go
-                                        step by step, throuh their different levels.</para>
-                                </listitem>
-                                <listitem>
-                                    <para>general order via list behaviour, where is the problem -->
-                                        list is sorted by order of inserts :-( can be
-                                        rearanged</para>
-                                </listitem>
-                                <listitem>
-                                    <para>order is implicit by order in text --> what is with
-                                        parallel data --> order by timeline</para>
-                                </listitem>
-                                <listitem>
-                                    <para>what is with tokens at same time, or for instance
-                                        subtokenization (see segmentation)</para>
-                                </listitem>
-                                <listitem>
-                                    <para>therefore we have SOrderRelation</para>
-                                </listitem>
-                            </itemizedlist>
-                        </listitem>
-                    </itemizedlist>
                 </listitem>
                 <listitem>
                     <para>Identifying an object via SName, SId and SElementId</para>
@@ -210,6 +75,8 @@
                     <itemizedlist>
                         <listitem>
                             <para>SRelation and SNode as fathers of the rest</para>
+                            <para>when an SNode is deleted its in-and outgoind relations will be
+                                deleted too</para>
                         </listitem>
                         <listitem>
                             <para>usage of SFeature in detail</para>
@@ -227,7 +94,8 @@
                                 with an S for salt</para>
                         </listitem>
                         <listitem>
-                            <para>Factory pattern, what is it, how does it work, explain eISNTANCE model</para>
+                            <para>Factory pattern, what is it, how does it work, explain eISNTANCE
+                                model</para>
                         </listitem>
                         <listitem>
                             <para>a section easy access (no EMF)</para>
@@ -252,7 +120,42 @@
     </chapter>
     <chapter>
         <title>Components</title>
-        <sect1>
+        <sect1 xml:id="sec_annotations">
+            <title>Annotations</title>
+            <para>Generally spoken, an annotation is an interpretation of primary data (see: <xref
+                    linkend="sec_primData"/>). In Salt we differentiate this abstract form of
+                annotation into a structural part and a "real" annotation. For instance imagine a
+                syntax tree. In Salt the tree itself would belong to the structural part and be
+                modeled by nodes and edges, whereas the annotation part for instance given by a name
+                "cat" and a value "S" belongs to the annotation part and is modeled as a label. </para>
+            <para>We further differentiate into a linguistic annotation and a meta-annotation. A
+                linguistic annotation defines a structural element as a specific linguistic category
+                like being a sentence, a nominal phrase, a verb or something else. A meta-annotation
+                adds a non linguistic information to a structural element. For instance language
+                information to a primary text, infromation about an annotator of a syntax tree and
+                so on. But still both sorts of annotations are derivates of a label and are
+                therefore a triple consisting of a namespace, a name and a value as shown in figure
+                    <xref linkend="fig_annotations"/>. <figure xml:id="fig_annotations">
+                    <title>Annotations in Salt are specific types of labels</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata width="200" fileref="images/model_annotations.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+            </para>
+            <para>Since annotations are the core essence of linguistic work, they will be used at
+                various places in the following. </para>
+            <itemizedlist>
+                <listitem>
+                    <para>data types in annotations</para>
+                </listitem>
+                <listitem>
+                    <para>SProcessAnnotation</para>
+                </listitem>
+            </itemizedlist>
+        </sect1>
+        <sect1 xml:id="sec_corpusStructure">
             <title>Corpus-strucure</title>
             <para> Generally spoken, a copus structure structures an entire corpus into smaller
                 logical units. Such units are a corpus, a subcorpus and a document. Often the
@@ -294,131 +197,397 @@
                     languages (called parallel text), or in case of historical texts in several
                     normalized or diplomatic surrogates. These texts are often interlinked between
                     same tokens (here same means the same meaning in for intance different
-                    languages). In that case all surrogates of a text MUST belong to the same
-                    partition (document). Next to a logical partitioning, creating such documents,
-                    have a high influence on processing speed and main memory. Therefore we highly
-                    recommend to keep documents as small as possible (as long as allowed by the
-                    linguistic logic behind). A document in salt is represented by the type
-                    SDocument and can be grouped to a corpus or subcorpus by attaching it to a
-                    SCorpus. To mark a SDocument as being part of a SCorpus, just connect them via a
-                    SDocCorpRelation.</para>
+                    languages). In that case all surrogates of a text <emphasis role="bold"
+                        >MUST</emphasis> belong to the same partition (document). Next to a logical
+                    partitioning, creating such documents, have a high influence on processing speed
+                    and main memory. Therefore we highly recommend to keep documents as small as
+                    possible (as long as allowed by the linguistic logic behind). A document in salt
+                    is represented by the type <classname>SDocument</classname> and can be grouped
+                    to a corpus or subcorpus by attaching it to a <classname>SCorpus</classname>. To
+                    mark a <classname>SDocument</classname> as being part of a
+                        <classname>SCorpus</classname>, just connect them via a
+                        <classname>SDocumentCorpusRelation</classname>.</para>
             </sect2>
             <sect2>
                 <title>Corpus-Graph</title>
                 <para>Since Salt over and over is a graph based model, the corpus-structure is
-                    representet as a graph, called the SCorpusGraph. This graph realizes a directed
-                    tree structure, whose nodes are corpora (SCorpus) and document (SDocument).<itemizedlist>
+                    representet as a graph, called the <classname>SCorpusGraph</classname>. This
+                    graph realizes a directed tree structure, whose nodes are corpora
+                        (<classname>SCorpus</classname>) and document
+                        (<classname>SDocument</classname>) as shown in figure <xref
+                        linkend="fig_corpusStructure"/>. <figure xml:id="fig_corpusStructure">
+                        <title>Elements being part of the corpus-structure</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="200" fileref="images/model_corpusGraph.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure>For those you more like samples instead of UML diagrams, figure <xref
+                        linkend="fig_sample_corpusStructure"/> shows a sample containing three
+                        <classname>SCorpus</classname> objects "superCorpus", "subCorpus1" and
+                    "subCorpus2" and four <classname>SDocument</classname> objects "doc1", "doc2",
+                    "doc3" and "doc4". Two objects of type <classname>SCorpusRelation</classname>
+                    connect the "superCorpus" with "subCorpus1" and "subCorpus2". Four objects of
+                    type <classname>SDocumentCorpusRealtion</classname> connect the sub-corpus
+                    "subCorpus1" with documents "doc1" and "doc2" and sub-corpus "subCorpus2" with
+                    documents "doc3" and "doc4".<figure xml:id="fig_sample_corpusStructure">
+                        <title>Elements being part of the corpus-structure</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="200" fileref="images/sample_corpusStructure.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure>
+                </para>
+            </sect2>
+            <sect2>
+                <title>Meta-annotations</title>
+                <para>Meta-annotations are very useful for corpora to document for instance the
+                    creation process or the aim of the corpus. These information are supposed to
+                    give a person working with this corpus additional non linguistic information.
+                    For instance which tools have been used which persons have annotated the corpus,
+                    when was the corpus annotated and so on. Let's give an example: a
+                    meta-annotation describing an author having the SName 'author', the SValue 'John
+                    Doe' and an empty SNS can be added to a SCorpus node to mark, that this corpus
+                    is created by John Doe for instance. Salt is an open model, which means, there
+                    are no limitations of naming a meta-annotation. Further, Salt does not
+                    interprete them, therefore the meta-annotation for determining the author can
+                    also be named "creator" or something else instead of "author". </para>
+                <para> The most convenient way to use meta-annotations is to add a meta-annotation
+                    to a document or a corpus node. But since a meta-annotation is just a label of a
+                    specific type, you are free to add a meta-annotation each node or edge in the
+                    Salt model. </para>
+            </sect2>
+        </sect1>
+        <sect1 xml:id="sec_documentStructure">
+            <title>Document-strucure</title>
+            <para/>
+            <sect2 xml:id="sec_primData">
+                <title>Primary data</title>
+                <para>The primary data in linguistics are the center and the beginning of each
+                    annotation process. A primary date is every piece of language. This includes
+                    textual data, audio-video data etc. as well. A special subtype of primary data
+                    is the primary text, which only covers textual data. Since in linguistic the
+                    term and the meaning of primary data and especially primary text is
+                    controversal, we here use primary data as the first digitalisation of data,
+                    which come into a Salt model.</para>
+                <para>So now the question is how to realize primary data in a graph based world? And
+                    the answer is with graph elements, or more precisly with nodes and lables. In
+                    Salt a specific node of type SDatasource is used as a placholder for a primary
+                    date. The real data themselve are added to that node with a label having the
+                    name 'sData' and the namespace 'salt'. The same goes for each subtype of
+                    SDatasource, so for instance the type STextualDS, which represents primary data
+                    in Salt, see figure <xref linkend="fig_primaryData"/>.</para>
+                <figure xml:id="fig_primaryData">
+                    <title>primary data and primary text in Salt</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata width="200" fileref="images/model_primaryData.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                <para>Regarding figure <xref linkend="fig_primaryData"/> the primary text like
+                        '<emphasis role="italic">Is this example more complicated than it apperas to
+                        be?'</emphasis> is stored as the value of the shown
+                        <classname>SFeature</classname>.</para>
+            </sect2>
+            <sect2 xml:id="sec_tokenization">
+                <title>Tokenization</title>
+                <para>In general in linguistics it is not totally clear, what is a token. In most
+                    interpretations the term is simultaneously used with word. But even here, the
+                    quetion what is a word is not uncontroversal. Therefore we here use a more
+                    technically definition of what is a token. In Salt a token is the smallest
+                    countable unit of primary data. For instance in a primary text, a token could be
+                    a set of characters, just one character or even an empty character. This allows
+                    us, to use tokens free of a semantical interpretation. A token now can be a
+                    word, a silible, a sentence or any other texual categorization.</para>
+                <para>In Salt a token is represented by the type <classname>SToken</classname>, a
+                    specialization of the type <classname>SNode</classname>. Such a
+                        <classname>SToken</classname> object is a placholder for annotations and a
+                    target for interlinking. The <classname>SToken</classname> object itself does
+                    not contain any information about the overlapped primary data. In case of the
+                    primary data is a text, this is realized with a specific
+                        <classname>SRelation</classname>, the
+                        <classname>STextualRelation</classname>. A
+                        <classname>STextualRelation</classname> links a primary text (as source)
+                    with a token (as target), see <xref linkend="fig_model_token"/>. <figure
+                        xml:id="fig_model_token">
+                        <title>representation of tokens in Salt via <classname>SToken</classname>
+                            and <classname>STextualRelation</classname></title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="200" fileref="images/model_token.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure> A <classname>STextualRelation</classname> further contains two labels
+                    (or more precisly <classname>SFeature</classname> objects) representing the
+                    start and the end position determining the interval of the primary text
+                    belonging to the token. Figure <xref linkend="fig_model_token_features"/> shows
+                    that mechanism. Although the type <classname>STextualRelation</classname> has
+                    properties 'sStart' and 'sEnd', they are modelled as derived attributes just for
+                    easier accessing these values. <figure xml:id="fig_model_token_features">
+                        <title>start and end position for text intervals realized with
+                                <classname>SFeature</classname></title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="200" fileref="images/model_token_features.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure>
+                </para>
+                <para>At least figure <xref linkend="fig_sample_tokenization"/> gives an example of
+                    a tokenization of the primary text "Is this example more complicated than it
+                    appears to be?". <figure xml:id="fig_sample_tokenization">
+                        <title>A sample tokenization</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="500" fileref="images/sample_tokenization.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure></para>
+            </sect2>
+
+            <sect2 xml:id="sec_spans">
+                <title>Spans of tokens</title>
+                <para>A span is used to group a couple of tokens together to give them the exactly
+                    same annotation or to connect them as a bunch with a 3rd node at once. A span is
+                    an ordered set of tokens. Let s1 be a span, for each token XXXt1 and t2 Element
+                    of s1: t1 != t2 --> t1 &lt; t2 XOR t2 &lt; t1 XXX. IN a graph based world, we
+                    need to model such an ordered set as nodes and edges. Therefore in Salt contains
+                    the node type <classname>SSpan</classname> and the relation type
+                        <classname>SSpanningRelation</classname>. A <classname>SSpan</classname>
+                    object represents the span itself and for instance could be annotated or linked
+                    with other nodes. To realize the containment of tokens in a span, each token is
+                    connected with the span with a separate <classname>SSpanningRelation</classname>
+                    object see figure <xref linkend="fig_model_span"/>. <figure
+                        xml:id="fig_model_span">
+                        <title>relation of spans in Salt via <classname>SSpan</classname> and
+                                <classname>SSpanningRelation</classname></title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="200" fileref="images/model_span.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure>
+                </para>
+                <para>Imagine a piece of a primary text '<emphasis role="italic">New
+                    York</emphasis>' and two tokens XXXt1 (representing '<emphasis role="italic"
+                        >New</emphasis>') and t2 XXX (representing '<emphasis role="italic"
+                        >York</emphasis>'). For annotating them as an entity, you can create a span
+                    XXX s1 XXX and connect t1 with s1 via one
+                        <classname>SSpanningRelation</classname> r1 and t2 with s1 via a second
+                        <classname>SSpanningRelation</classname> r2 as shown in figure <xref
+                        linkend="fig_sample_span"/>. <figure xml:id="fig_sample_span">
+                        <title>"New York"-sample as Salt objects</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="100" fileref="images/sample_span.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure> Since a <classname>SSpan</classname> is just a node, it can be further
+                    annotated for instance with an annotation <emphasis role="italic">entity=
+                        city</emphasis>. Spans can even be very helpful, to annotate bigger parts of
+                    the primary text for instance to annotate information structure or foreign
+                    language parts etc. . Also a <classname>SSpanningRelation</classname> can carry
+                    further annotations, but this rather unusual, since such an edge has no own
+                    linguistic semantic and is just a technical mechanism to model ordered sets in a
+                    graph.</para>
+            </sect2>
+            <sect2>
+                <title>Hierarchies</title>
+                <para>Hierarchies are a useful mechanism in linguistics to express a complex
+                    structure behind the surface of a text. For insatnce a widely used mechanism to
+                    describe phrase structures are syntax trees. As already the term syntax trees
+                    implies, these hierarchies are trees even in a graph sense. Which means, they
+                    consists of nodes and edges and are therefore easy to model in Salt. Salt offers
+                    a specific kind of node the <classname>SStructure</classname> and a specific
+                    kind of edge, the <classname>SDominanceRelation</classname>. The source of an
+                        <classname>SDominanceRelation</classname> object always is a
+                        <classname>SToken</classname>, <classname>SSpan</classname> or even a
+                        <classname>SStructure</classname> object as shown in figure <xref
+                        linkend="fig_model_hierarchie"/>. The unit of both elements enables to
+                    create unbound hierarchies above a tokenization. </para>
+                <figure xml:id="fig_model_hierarchie">
+                    <title>Hierarchies in Salt are modeled with th elements
+                            <classname>SStructure</classname> and
+                            <classname>SDominanceRealtion</classname></title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata width="100" fileref="images/model_hierarchies.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                <para>The meaning of the type <classname>SDocminanceRelation</classname> is a
+                    part-of relation. In contrast to the <classname>SSpan</classname> and the
+                        <classname>SSpanningRelation</classname>, a
+                        <classname>SStructure</classname> is not just a placeholder for a bunch of
+                        <classname>SToken</classname> objects, it is a proper element itself. The
+                    same goes for <classname>SDominanceRealtion</classname> objects. For instance in
+                    many cases it makes a linguistic difference, if tokens t1, t2 and t3 are
+                    directly dominated by a structure s1 or if t1 and t2 are dominated by a
+                    structure s2 which is, togethzer with t3, dominated by structure s2, see figure
+                        <xref linkend="fig_sample_hierarchie"/>.</para>
+                <figure xml:id="fig_sample_hierarchie">
+                    <title>Two hirarchies having a different semantic</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata width="100" fileref="images/sample_hierarchies1.png"/>
+                        </imageobject>
+                        <imageobject>
+                            <imagedata width="100" fileref="images/sample_hierarchies2.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+            </sect2>
+            <sect2>
+                <title>loose relation</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>for instance coreference, what else???</para>
+                    </listitem>
+                    <listitem>
+                        <para>SPointingRelation</para>
+                    </listitem>
+                    <listitem>
+                        <para>connects the entire text, also across borders like sentence
+                            borders</para>
+                    </listitem>
+                </itemizedlist>
+            </sect2>
+            <sect2>
+                <title>Annotations</title>
+                <para>
+                    <itemizedlist>
                         <listitem>
-                            <para>show emf diag</para>
+                            <para>motivate via pos and lemma example</para>
                         </listitem>
                         <listitem>
-                            <para>show sample of structure in salt</para>
-                        </listitem>
-                        <listitem>
-                            <para>As every node and every relation in salt, even those can be
-                                labeled by linguistic annotations and meta annotations.</para>
-                        </listitem>
-                        <listitem>
-                            <para>show emf diag of snode, srel, smetaanno, sanno, sprocanno,
-                                scorprel, scorpdocrel</para>
+                            <para>what are they good for, explain and show sample for each</para>
                         </listitem>
                     </itemizedlist>
                 </para>
             </sect2>
             <sect2>
-                <title>mata-annotation</title>
+                <title>Layers</title>
                 <para><itemizedlist>
                         <listitem>
-                            <para>metaannotations are very useful for corpora to document for
-                                instance the creation process, the aim of the corpus and for
-                                instance whch tools have been used</para>
+                            <para>aim of a layer</para>
                         </listitem>
                         <listitem>
-                            <para>metaannotations are often things like author, creation date etc.
-                                But since Salt is an open model, there are no limitations in naming
-                                meta-annotations. Meta-annotations are modeled as labels, which can
-                                be added to each node and edge in the model. A meta-annotation in
-                                Salt is represented via the element SMetaAnnotation and contains the
-                                fields: namespace (SNS), name (SName) and value (SValue). A
-                                meta-annotation describing an author having the SName 'author', the
-                                SValue 'John Doe' and an empty SNS can be added to a SCorpus node to
-                                mark, that this corpus is created by John Doe for instance. In Salt
-                                there are no rules for the semantics of meta-annotations, therefore,
-                                the meta-annotation for determining the author can also be named
-                                creator or something else. It is also not bound, if such a
-                                meta-annotation refers to corpora and documents contained in the
-                                subtree of the annotated one or not.</para>
+                            <para>sub graph</para>
+                        </listitem>
+                        <listitem>
+                            <para>used for linguistic semantic layers</para>
+                        </listitem>
+                    </itemizedlist></para>
+            </sect2>
+            <sect2>
+                <title>multiple texts</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>motivate with parallel text</para>
+                    </listitem>
+                    <listitem>
+                        <para>alignements between texts via SPointingRelation</para>
+                    </listitem>
+                </itemizedlist>
+            </sect2>
+            <sect2>
+                <title>time management</title>
+                <note>
+                    <para>compare that with
+                        https://korpling.german.hu-berlin.de/p/projects/saltnpepperinternal/wiki/Salt_timeDiscussion</para>
+                </note>
+                <para> short introduction to TimelineDS, than motivation <itemizedlist>
+                        <listitem>
+                            <para>when dealing with corpora, we often need a time</para>
+                        </listitem>
+                        <listitem>
+                            <para>imagine a text like "Is this example ..." and a tokeinzation like
+                                "Is", "this", "example"..., even in that case we have an implicit
+                                timeline. the implicit timeline is given in first the order of the
+                                signs in the primary text like for "Is", "I" comes before "s", in
+                                space and even in time, second in the tokenization, like "Is" comes
+                                before "this"; we now can say, that token "Is" occurs between point
+                                of time 1 and point of time 2, whereas "this" occurs between point
+                                of time 2 and 3.</para>
+                        </listitem>
+                        <listitem>
+                            <para>a timeline gets important, in case of your corpus contains two
+                                primary datasources e.g. in a dialog corpus, sample with two
+                                speakers, where tokens can occur in parallel and have to be ordered
+                                in time, to keep information which word was said after which </para>
+                        </listitem>
+                        <listitem>
+                            <para>especially with multimedia corpora, it may sounds weird to have an
+                                artificial timeline, since multimedia files already contains an own
+                                time coding, but we need to deal with several times and
+                                timelines,</para>
+                        </listitem>
+                        <listitem>
+                            <para>in case of an SAudioDS, an audio or video file contains its own
+                                time like starting at 00:00:00 and ending after 5 seconds at
+                                00:00:05 etc. </para>
+                        </listitem>
+                        <listitem>
+                            <para>Because of several reasons, a corpus can refer to more than one
+                                audio file, for instance, each audio file handles one speaker, or
+                                the audio file is spiltted to reduce its size</para>
+                        </listitem>
+                        <listitem>
+                            <para>Imagine a second audio file also starting at 00:00:00 and ending
+                                at 00:00:20, when using the internal timeline of both files, we have
+                                an overlapping range between 00:00:00 and 00:00:05 in that range, we
+                                cannot say which token or event comes before or after one of the
+                                other file, in case of theentire audio is split, one audio file
+                                comes after the next so for instance audio file 1 starts at 00:00:00
+                                and ends at 00:00:05, audio file 2 starts at 00:00:05 and ends at
+                                00:00:25 in a general timeline, but point of time 00:00:25 is
+                                nowhere encoded</para>
+                        </listitem>
+                        <listitem>
+                            <para>Using the common timeline, we can refer each token to the common
+                                timeline and now can order tokens in both files; </para>
+                        </listitem>
+                        <listitem>
+                            <para>the common timeline only contains abstract points of time like
+                                1,2,3,4 etc. to not lose the real time, you can annotate the points
+                                of time with real time items like 00:00:05 etc.</para>
+                        </listitem>
+                        <listitem>
+                            <para>show example common timeline (with annotated real time), timeline
+                                of audio1 and audio 2, their tokenization and the linking (if
+                                possible in a table)</para>
                         </listitem>
                     </itemizedlist>
                 </para>
             </sect2>
-        </sect1>
-        <sect1>
-            <title>time management</title>
-            <note>
-                <para>compare that with
-                    https://korpling.german.hu-berlin.de/p/projects/saltnpepperinternal/wiki/Salt_timeDiscussion</para>
-            </note>
-            <para> short introduction to TimelineDS, than motivation <itemizedlist>
+            <sect2>
+                <title>ordering the data</title>
+                <itemizedlist>
                     <listitem>
-                        <para>when dealing with corpora, we often need a time</para>
+                        <para>ordering can be understood and realized in several ways or dimensions.
+                            What in one case can be a good order, can be very wrong in another case.
+                            To respect this, Salt provides different meanings of order. In the
+                            following we will go step by step, throuh their different levels.</para>
                     </listitem>
                     <listitem>
-                        <para>imagine a text like "Is this example ..." and a tokeinzation like
-                            "Is", "this", "example"..., even in that case we have an implicit
-                            timeline. the implicit timeline is given in first the order of the signs
-                            in the primary text like for "Is", "I" comes before "s", in space and
-                            even in time, second in the tokenization, like "Is" comes before "this";
-                            we now can say, that token "Is" occurs between point of time 1 and point
-                            of time 2, whereas "this" occurs between point of time 2 and 3.</para>
+                        <para>general order via list behaviour, where is the problem --> list is
+                            sorted by order of inserts :-( can be rearanged</para>
                     </listitem>
                     <listitem>
-                        <para>a timeline gets important, in case of your corpus contains two primary
-                            datasources e.g. in a dialog corpus, sample with two speakers, where
-                            tokens can occur in parallel and have to be ordered in time, to keep
-                            information which word was said after which </para>
+                        <para>order is implicit by order in text --> what is with parallel data -->
+                            order by timeline</para>
                     </listitem>
                     <listitem>
-                        <para>especially with multimedia corpora, it may sounds weird to have an
-                            artificial timeline, since multimedia files already contains an own time
-                            coding, but we need to deal with several times and timelines,</para>
+                        <para>what is with tokens at same time, or for instance subtokenization (see
+                            segmentation)</para>
                     </listitem>
                     <listitem>
-                        <para>in case of an SAudioDS, an audio or video file contains its own time
-                            like starting at 00:00:00 and ending after 5 seconds at 00:00:05 etc.
-                        </para>
-                    </listitem>
-                    <listitem>
-                        <para>Because of several reasons, a corpus can refer to more than one audio
-                            file, for instance, each audio file handles one speaker, or the audio
-                            file is spiltted to reduce its size</para>
-                    </listitem>
-                    <listitem>
-                        <para>Imagine a second audio file also starting at 00:00:00 and ending at
-                            00:00:20, when using the internal timeline of both files, we have an
-                            overlapping range between 00:00:00 and 00:00:05 in that range, we cannot
-                            say which token or event comes before or after one of the other file, in
-                            case of theentire audio is split, one audio file comes after the next so
-                            for instance audio file 1 starts at 00:00:00 and ends at 00:00:05, audio
-                            file 2 starts at 00:00:05 and ends at 00:00:25 in a general timeline,
-                            but point of time 00:00:25 is nowhere encoded</para>
-                    </listitem>
-                    <listitem>
-                        <para>Using the common timeline, we can refer each token to the common
-                            timeline and now can order tokens in both files; </para>
-                    </listitem>
-                    <listitem>
-                        <para>the common timeline only contains abstract points of time like 1,2,3,4
-                            etc. to not lose the real time, you can annotate the points of time with
-                            real time items like 00:00:05 etc.</para>
-                    </listitem>
-                    <listitem>
-                        <para>show example common timeline (with annotated real time), timeline of
-                            audio1 and audio 2, their tokenization and the linking (if possible in a
-                            table)</para>
+                        <para>therefore we have SOrderRelation</para>
                     </listitem>
                 </itemizedlist>
-            </para>
+            </sect2>
         </sect1>
     </chapter>
 </book>

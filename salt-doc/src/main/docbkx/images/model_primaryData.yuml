@@ -1,0 +1,6 @@
+//see yuml.me
+
+[SSequentialDS|sData]^-[STextualDS|sText]
+[SSequentialDS]<>-[SFeature|sNamespace='salt';sData='sData']
+[SDocumentGraph]<>SSequentialDSs-[SSequentialDS]
+[SDocumentGraph]<>STextualDSs-[STextualDS]

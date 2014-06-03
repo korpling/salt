@@ -1,0 +1,3 @@
+//see http://yuml.me/
+[Label|namespace;name;value]^-[SAnnotation|sNS;sName;sValue]
+[Label]^-[SMetaAnnotation|sNS;sName;sValue]
