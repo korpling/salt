@@ -187,7 +187,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				else ((SRelation)edge).setSName("sRel"+ (this.getSRelations().size()+1));
 			}
 		//end: create a name if none exists
-		
+		((SRelation)edge).setSId(this.getSId() + "#"+ ((SRelation)edge).getSName());
 		super.basicAddEdge(edge);
 		
 		Class key;
