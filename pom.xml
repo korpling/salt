@@ -29,8 +29,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk/</developerConnection>
-		<url>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/</url>
+		<connection>scm:git:git://github.com/korpling/salt.git</connection>
+		<developerConnection>scm:git:git@github.com:korpling/salt.git</developerConnection>
+		<url>https://github.com/korpling/salt</url>
 	</scm>
 	<distributionManagement>
 		<repository>
@@ -177,15 +178,21 @@
 			<!-- start: Plugin for automatic releasing -->
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.1</version>
+				<version>${maven-release-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>perform</goal>        			
+						</goals>
+						<configuration>
+							<pomFileName>salt/pom.xml</pomFileName>
+						</configuration>
+					</execution>
+				</executions>
 				<configuration>
-					<tagBase>
-
-						https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/tags/
-
-					</tagBase>
-					<releaseProfiles>release</releaseProfiles>
-					<goals>package assembly:single deploy</goals>
+				  <releaseProfiles>release</releaseProfiles>
+				  <goals>package assembly:single deploy</goals>
 				</configuration>
 			</plugin>
 			<!-- end: Plugin for automatic releasing -->
