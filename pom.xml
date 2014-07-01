@@ -178,7 +178,7 @@
 			<!-- start: Plugin for automatic releasing -->
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>${maven-release-plugin.version}</version>
+				<version>2.2.1</version>
 				<executions>
 					<execution>
 						<id>default</id>
