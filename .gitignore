@@ -1,3 +1,10 @@
 /_TMP
 /META-INF
 /OSGI-INF
+salt-graph/META-INF/
+salt-graph/_TMP/
+salt-saltCommon/META-INF/
+salt-saltCommon/_TMP/
+salt-saltCore/META-INF/
+salt-saltCore/_TMP/
+salt-saltSample/META-INF/
