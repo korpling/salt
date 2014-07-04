@@ -1,0 +1,4 @@
+//yuml.me
+[SLayer]*sLayers-sNodes*>[SNode]
+[SLayer]*sLayers-sRelations*>[SRelation]
+[SLayer]* sSubLayer-sSuperLayer 0..1[SLayer]

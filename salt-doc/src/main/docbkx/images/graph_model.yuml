@@ -1,0 +1,8 @@
+//yuml.me
+[Edge]-target 1 >[Node]
+[Edge]-source 1 >[Node]
+[Layer]*-nodes *[Node]
+[Layer]*-edges *[Edge]
+[Graph]1 -layers *[Layer]
+[Graph]1-edges *[Edge]
+[Graph]1-nodes *[Node]
