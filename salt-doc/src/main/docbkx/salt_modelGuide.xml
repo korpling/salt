@@ -120,11 +120,11 @@
                 <para>see <link xlink:href="http://linktype.iaa.uni-jena.de/atomic/"
                         >http://linktype.iaa.uni-jena.de/atomic/</link></para>
             </footnote>and of course Pepper.</para>
-        <para>Salt was developed following a model driven developement approach with the use of the
+        <para>Salt was developed following a model driven development approach with the use of the
             Eclipse Modeling framework (EMF, see <link
                 xlink:href="http://www.eclipse.org/modeling/emf/"
                 >http://www.eclipse.org/modeling/emf/</link>). EMF provides a UML near syntax and
-            possiblities to automatically generate code for an api. We used the code generation to
+            possibilities to automatically generate code for an api. We used the code generation to
             generate Java code and extended the api with many functions for an easier access. This
             makes the api much more specific to the linguistic domain.</para>
         <para>This article addresses a wider range of readers. We want to satisfy readers coming
@@ -226,7 +226,8 @@
                         <imagedata width="350" fileref="images/graph_model.png"/>
                     </imageobject>
                 </mediaobject>
-            </figure>Since a single figure showing the entire model gets to confused, <xref linkend="fig_graph_model"/> dosn't show the labeling mechanism, but <xref
+            </figure>Since a single figure showing the entire model gets to confused, <xref
+                linkend="fig_graph_model"/> doesn't show the labeling mechanism, but <xref
                 linkend="fig_labelAndGraph"/>does. <figure xml:id="fig_labelAndGraph">
                 <title>Label mechanism for graph, node, edge and layer</title>
                 <mediaobject>
@@ -254,7 +255,7 @@
             type value (<varname>sType</varname>)<footnote>
                 <para>Even adding such an additional value in our graph world is realized with the
                     labeling mechanism. This is done by using <classname>SFeature</classname>, which
-                    will be explaind in <xref linkend="sec_insides"/></para>
+                    will be explained in <xref linkend="sec_insides"/></para>
             </footnote>. This will be very useful since in the linguistic world and even in many
             others, people don't want to annotate relations with an attribute-value-pair. They just
             want to label them as being of a specific type, like being a love relation from our
@@ -317,8 +318,8 @@
                     <classname>SFeature</classname>.</para>
         </sect2>
         <sect2 xml:id="sec_corpusStructure">
-            <title>Corpus-strucure</title>
-            <para> A copus-structure structures an entire corpus into smaller logical units. Such
+            <title>Corpus-structure</title>
+            <para> A corpus-structure structures an entire corpus into smaller logical units. Such
                 units are a corpus, a subcorpus and a document. Often the structurization goes along
                 the logical structure of the real data. Imagine your corpus represents a collection
                 of writings of an author, then you may have one subcorpus per writing, which itself
@@ -348,7 +349,7 @@
             </sect3>
             <sect3>
                 <title>Document</title>
-                <para>A document is a logical partition wich represents the end point of the
+                <para>A document is a logical partition which represents the end point of the
                     corpus-structure hierarchy. Partitioning data means that no relations between
                     data of two partitions are allowed. More concretely spoken, a document normally
                     contains a single text and all annotations corresponding to it, but no
@@ -357,7 +358,7 @@
                     the logical interpretation of it and be realized in several languages (called
                     parallel text), or in case of historical texts in several normalized or
                     diplomatic surrogates. These texts are often interlinked between same tokens
-                    (here 'same' means the same meaning, for intance in different languages). In
+                    (here 'same' means the same meaning, for instance in different languages). In
                     that case all surrogates of a text <emphasis role="bold">HAVE TO</emphasis>
                     belong to the same partition (document). Next to a logical partitioning,
                     creating such documents has a high influence on processing speed and main
@@ -414,8 +415,8 @@
                     be added to a <classname>SCorpus</classname> node to mark that this corpus is
                     created by '<emphasis role="italic">John Doe</emphasis>' for instance. Salt is
                     an open model, which means, there are no limitations on naming a meta
-                    annotation. Further, Salt does not interprete them, therefore the meta
-                    annotation for determining the author can also be named '<emphasis role="italic"
+                    annotation. Further, Salt does not interpret them, therefore the meta annotation
+                    for determining the author can also be named '<emphasis role="italic"
                         >creator</emphasis>' or something else instead of '<emphasis role="italic"
                         >author</emphasis>'. </para>
                 <para> The most convenient way to use meta annotations is to add a meta annotation
@@ -425,7 +426,7 @@
             </sect3>
         </sect2>
         <sect2 xml:id="sec_documentStructure">
-            <title>Document-strucure</title>
+            <title>Document-structure</title>
             <para/>
             <sect3 xml:id="sec_primData">
                 <title>Primary data</title>
@@ -433,11 +434,11 @@
                     annotation process. Every piece of language is a primary date. This includes
                     textual data, audio-video data etc. . A special subtype of primary data is the
                     primary text, which only covers textual data. Since in linguistics the term and
-                    the meaning of primary data and especially primary text is controversal, we here
-                    use primary data as the first digitalisation of data which come into a Salt
+                    the meaning of primary data and especially primary text is controversial, we
+                    here use primary data as the first digitalisation of data which come into a Salt
                     model.</para>
                 <para>So now the question is how to realize primary data in a graph based world. And
-                    the answer is: with graph elements, or more precisly with nodes and lables. In
+                    the answer is: with graph elements, or more precisely with nodes and labels. In
                     Salt, a specific node of type <classname>SDatasource</classname> is used as a
                     placeholder for a primary date. The real data itself is added to that node with
                     a label having the name <varname>sData</varname> and the namespace <emphasis
@@ -462,12 +463,12 @@
                 <title>Tokenization</title>
                 <para>In general, it is not totally clear in linguistics what a token is. In most
                     interpretations the term is used synonymously with 'word'. But even here, the
-                    question what a word is, is controversal. Therefore we here use a more
+                    question what a word is, is controverisal. Therefore we here use a more
                     technically definition of what a token is. In Salt a token is the smallest
                     countable unit of primary data. For instance in a primary text, a token could be
                     a set of characters, just one character or even an empty character. This allows
                     us, to use tokens free of a semantical interpretation. A token now can be a
-                    word, a silible, a sentence or any other texual categorization.</para>
+                    word, a silible, a sentence or any other textual categorization.</para>
                 <para>The Salt type representing a token is the type <classname>SToken</classname>,
                     a specialization of the type <classname>SNode</classname>. Such a
                         <classname>SToken</classname> object is a placeholder for annotations and a
@@ -487,11 +488,11 @@
                             </imageobject>
                         </mediaobject>
                     </figure> A <classname>STextualRelation</classname> further contains two labels
-                    (or more precisly <classname>SFeature</classname> objects) representing the
+                    (or more precisely <classname>SFeature</classname> objects) representing the
                     start and the end position determining the interval of the primary text
                     overlapped by the token. Although the type
                         <classname>STextualRelation</classname> has the properties
-                        <varname>sStart</varname> and <varname>sEnd</varname>, they are modelled as
+                        <varname>sStart</varname> and <varname>sEnd</varname>, they are modeled as
                     derived attributes in order to have easier access on these values. <xref
                         linkend="fig_model_token_features"/> shows that mechanism.<figure
                         xml:id="fig_model_token_features">
@@ -713,8 +714,8 @@
                     Furthermore, a layer can also contain a layer. Imagine our first example. Here
                     the syntactic layer can contain the morphological layer, and as a result, all
                     tokens are part of the syntactic layer as well. A layer is represented with the
-                    elment <classname>SLayer</classname>has a name and can be annotated in the same
-                    way as nodes and edges can be. <xref linkend="fig_sLayers"/> shows the
+                    element <classname>SLayer</classname> has a name and can be annotated in the
+                    same way as nodes and edges can be. <xref linkend="fig_sLayers"/> shows the
                     relationship between layers nodes and edges in Salt. <figure
                         xml:id="fig_sLayers">
                         <title><classname>SLayer</classname> as a subgraph</title>
