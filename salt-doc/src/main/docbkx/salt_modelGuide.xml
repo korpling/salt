@@ -248,8 +248,8 @@
             of the graph elements. Don't worry on that, in fact the <classname>sType</classname> is
             even a label on an edge. We herefore used a specific type of label, the
                 <classname>SFeature</classname> element whcih is described in detail in <xref
-                linkend="sec_labeling"/>. The <classname>sType</classname> attribute for edges is
-            a very since mechanism for linguistic data, since edges do not always need an
+                linkend="sec_labeling"/>. The <classname>sType</classname> attribute for edges is a
+            very since mechanism for linguistic data, since edges do not always need an
             attribute-value pair. Sometimes it is enough to flag an edge being a specific type. If
             this sounds to abstract for now don't worry we give detailed examples in <xref
                 linkend="sec_pointingRelation"/> and <xref linkend="sec_hierarchies"/>. <xref
@@ -771,6 +771,7 @@
             </sect3>
             <sect3 xml:id="sec_multipleTexts">
                 <title>Multiple primary texts</title>
+                <subtitle>parallel texts</subtitle>
                 <para>A lot of corpus projects in linguistics are more complex than handling just
                     one primary text. They address parallel data dealing with multiple texts, for
                     instance to compare different languages, different XXX Sprachstufen XXX or to
@@ -847,31 +848,171 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                         <classname>SLayer.sName</classname> to the language.</para>
             </sect3>
             <sect3 xml:id="sec_time">
-                <title>time management</title>
+                <title>Time management</title>
+                <subtitle>dialogue data</subtitle>
                 <note>
                     <para>compare that with
                         https://korpling.german.hu-berlin.de/p/projects/saltnpepperinternal/wiki/Salt_timeDiscussion</para>
                 </note>
-                <para> short introduction to TimelineDS, than motivation <itemizedlist>
-                        <listitem>
-                            <para>when dealing with corpora, we often need a time</para>
-                        </listitem>
-                        <listitem>
-                            <para>imagine a text like "Is this example ..." and a tokeinzation like
-                                "Is", "this", "example"..., even in that case we have an implicit
-                                timeline. the implicit timeline is given in first the order of the
-                                signs in the primary text like for "Is", "I" comes before "s", in
-                                space and even in time, second in the tokenization, like "Is" comes
-                                before "this"; we now can say, that token "Is" occurs between point
-                                of time 1 and point of time 2, whereas "this" occurs between point
-                                of time 2 and 3.</para>
-                        </listitem>
-                        <listitem>
-                            <para>a timeline gets important, in case of your corpus contains two
-                                primary datasources e.g. in a dialog corpus, sample with two
-                                speakers, where tokens can occur in parallel and have to be ordered
-                                in time, to keep information which word was said after which </para>
-                        </listitem>
+                <para>In this section, we address the time management in Salt. But what does it
+                    mean, time management? Remember, Salt is poor of semantics, so time management
+                    does not address the timely progression of a text like "<emphasis role="bold"
+                        >Before</emphasis> Bart went to school, he stood up."<footnote>
+                        <para>To model such semantic issues is up to the user, for instance the ISO
+                            approach of TimeML (see XXX) covers that.</para>
+                    </footnote> With time management we mean the fact of ordering tokens in texts,
+                    for instance in multiple texts. In Salt this is handled by introducing a global<footnote>
+                        <para>Global here means global for one document-structure.</para>
+                    </footnote> unique timeline which is connected with each token. The timeline in
+                    Salt is represented by the element <classname>STimeline</classname> and can be
+                    related with tokens via <classname>STimelineRelation</classname> objects. In
+                        <xref linkend="sec_multipleTexts"/> we discussed the mechanism of how to
+                    model multiple primary texts in Salt. Now we wan't to introduce Salts time
+                    management along the example of modelling dialogue data. </para>
+                <para>A lot of linguistic projects do not only address written texts, they further
+                    annotate spoken data. Spoken data differs in two main issues from written data.
+                    First, the data source differs, since the primary data of spoken data is mostly
+                    an audio or video stream. Since Salt was developed for covering textual data,
+                    for now, we expect that there is also a textual representation of the audio or
+                    video data. But nevertheless Salt also allows to represent such data. The
+                    mechanism how is addressed in detail in <xref linkend="sec_audioData"/>. Second,
+                    in many cases we do not have one continuous text, since there are multiple
+                    speakers, which might speak at the same time. We recommand to model each text,
+                    belonging to one speaker, in a separate <classname>STextualDS</classname>
+                    object. To give a more concrete example, imagine the following to texts produced
+                    by speakers '<emphasis role="italic">spk1</emphasis>' and '<emphasis
+                        role="italic">spk2</emphasis>': <table frame="all" xml:id="table_overview">
+                        <title>Two speakers ('<emphasis role="italic">spk1</emphasis>' and
+                                '<emphasis role="italic">spk2</emphasis>') and the corresponding
+                            timeline (<emphasis role="italic">tml</emphasis>)</title>
+                        <tgroup align="left" cols="10" colsep="1" rowsep="1">
+                            <colspec colname="c1" colnum="1"/>
+                            <colspec colname="c2" colnum="2"/>
+                            <colspec colname="c3" colnum="3"/>
+                            <colspec colname="c4" colnum="4"/>
+                            <colspec colname="c5" colnum="5"/>
+                            <colspec colname="c6" colnum="6"/>
+                            <colspec colname="c7" colnum="7"/>
+                            <colspec colname="c8" colnum="8"/>
+                            <colspec colname="c9" colnum="9"/>
+                            <colspec colname="c10" colnum="10"/>
+                            <colspec colname="c11" colnum="11"/>
+                            <colspec colname="c12" colnum="12"/>
+                            <tbody>
+                                <row>
+                                    <entry>spk1:</entry>
+                                    <entry>Is</entry>
+                                    <entry>this</entry>
+                                    <entry>example</entry>
+                                    <entry>more</entry>
+                                    <entry>complicated</entry>
+                                    <entry>than</entry>
+                                    <entry>it</entry>
+                                    <entry>appears</entry>
+                                    <entry>to</entry>
+                                    <entry>be</entry>
+                                </row>
+                                <row>
+                                    <entry>spk2: </entry>
+                                    <entry namest="c2" nameend="c8"/>
+                                    <entry namest="c8" nameend="c9">Uhm</entry>
+                                    <entry>oh</entry>
+                                    <entry>yes</entry>
+                                </row>
+                                <row>
+                                    <entry>tml:</entry>
+                                    <entry>0-1</entry>
+                                    <entry>1-2</entry>
+                                    <entry>2-3</entry>
+                                    <entry>3-4</entry>
+                                    <entry>4-5</entry>
+                                    <entry>5-6</entry>
+                                    <entry>6-7</entry>
+                                    <entry>7-8</entry>
+                                    <entry>8-9</entry>
+                                    <entry>9-10</entry>
+                                    <entry>10-11</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table> This sample shows the tokenized texts of the two speakers and the
+                    correspondance of each token, two an interval in the timeline. For instance the
+                    token '<emphasis role="italic">Is</emphasis>' (<emphasis role="italic"
+                            >t<subscript>1</subscript></emphasis>) of speaker '<emphasis
+                        role="italic">spk1</emphasis>' corresponds to an interval starting at 0 and
+                    ending at 1<footnote>
+                        <para>In Salt the interval borders are also known as point-of-time.</para>
+                    </footnote>. Since we are in a graph world, this needs to be modeled by nodes,
+                    edges and labels. Therefore, the <classname>STimeline</classname> is a subtype
+                    of <classname>SNode</classname> and the <classname>STimelineRelation</classname>
+                    is a subtype of <classname>SRelation</classname> having two attributes
+                        (<classname>SFeature</classname> objects) <classname>sStart</classname> and
+                        <classname>sEnd</classname> determining the borders of the time interval.
+                    This is shown in <xref linkend="fig_time"/>
+                    <figure xml:id="fig_time">
+                        <title>Token 'Is' related to common timeline</title>
+                        <mediaobject>
+                            <imageobject>
+                                <!-- Object diagram SToken 'Is' sTimerel, stimeline and sData(=,1,2,3,4...) and stimerelation sstart=0, send= 1-->
+                                <imagedata width="350" fileref="images/graph_model.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure> This mechanism is quite simple, since it is the same mechanism as the
+                    way of corresponding a token to a primary text. It might become more interesting
+                    in case of the time interval between 7 and 9. In that case the text of
+                        '<emphasis role="italic">spk1</emphasis>' covers two tokens (<emphasis
+                        role="italic">t<subscript>spk1_8</subscript></emphasis> and <emphasis
+                        role="italic">t<subscript>spk1_9</subscript></emphasis>), and the text of
+                        '<emphasis role="italic">spk2</emphasis>' (<emphasis role="italic"
+                            >t<subscript>spk2_1</subscript></emphasis>) covers one token. But
+                    modelling this is also very straight forward, because you can connect them via
+                    three <classname>STimeRelation</classname> objects. For <emphasis role="italic"
+                            >t<subscript>spk1_8</subscript></emphasis> with the interval [7, 8],
+                        <emphasis role="italic">t<subscript>spk1_9</subscript></emphasis> with the
+                    interval [8, 9] and finally for <emphasis role="italic"
+                            >t<subscript>spk2_1</subscript></emphasis> with the interval [7, 9].
+                    With these abstract points-of-time (like 1,2,3,4, ...), it is possible to set an
+                    unbound number of tokens and primary texts in relation to the common timeline.
+                    In theory, the timeline in Salt is implicitly always there, even in a single
+                    primary text, it could be easily computed by the order of the tokens given by
+                    the text. But in real implementation, it is not explicitly given if not needed
+                    to save memory space. When dealing with audio and video data it might be
+                    necessary, not only to use abstract points-of-time (like 1,2,3,4,...), but
+                    specific ones (like 00:00:00, 00:00:01, 01:12:20 etc.) as well. How to model
+                    such specific intreval borders we show in <xref linkend="sec_audioData"/>.</para>
+            </sect3>
+            <sect3 xml:id="sec_order">
+                <title>Ordering tokens</title>
+                <itemizedlist>
+                    <listitem>
+                        <para>ordering can be understood and realized in several ways or dimensions.
+                            What in one case can be a good order, can be very wrong in another case.
+                            To respect this, Salt provides different meanings of order. In the
+                            following we will go step by step, throuh their different levels.</para>
+                    </listitem>
+                    <listitem>
+                        <para>general order via list behaviour, where is the problem -> list is
+                            sorted by order of inserts :-( can be rearanged</para>
+                    </listitem>
+                    <listitem>
+                        <para>order is implicit by order in text -> what is with parallel data ->
+                            order by timeline</para>
+                    </listitem>
+                    <listitem>
+                        <para>what is with tokens at same time, or for instance subtokenization (see
+                            segmentation)</para>
+                    </listitem>
+                    <listitem>
+                        <para>therefore we have SOrderRelation</para>
+                    </listitem>
+                </itemizedlist>
+            </sect3>
+            <sect3 xml:id="sec_audioData">
+                <title>Audio data</title>
+                <para>introduce SAUdioDS and SAudioRelation and explain the annotation with audio
+                    data via datatype SURI</para>
+                <para>
+                    <itemizedlist>
                         <listitem>
                             <para>especially with multimedia corpora, it may sounds weird to have an
                                 artificial timeline, since multimedia files already contains an own
@@ -916,33 +1057,7 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                     </itemizedlist>
                 </para>
             </sect3>
-            <sect3 xml:id="sec_order">
-                <title>ordering the data</title>
-                <itemizedlist>
-                    <listitem>
-                        <para>ordering can be understood and realized in several ways or dimensions.
-                            What in one case can be a good order, can be very wrong in another case.
-                            To respect this, Salt provides different meanings of order. In the
-                            following we will go step by step, throuh their different levels.</para>
-                    </listitem>
-                    <listitem>
-                        <para>general order via list behaviour, where is the problem -> list is
-                            sorted by order of inserts :-( can be rearanged</para>
-                    </listitem>
-                    <listitem>
-                        <para>order is implicit by order in text -> what is with parallel data ->
-                            order by timeline</para>
-                    </listitem>
-                    <listitem>
-                        <para>what is with tokens at same time, or for instance subtokenization (see
-                            segmentation)</para>
-                    </listitem>
-                    <listitem>
-                        <para>therefore we have SOrderRelation</para>
-                    </listitem>
-                </itemizedlist>
-            </sect3>
-            <sect3>
+            <sect3 xml:id="sec_id">
                 <title>Identifying an object via SName, SId and SElementId</title>
                 <para/>
             </sect3>
