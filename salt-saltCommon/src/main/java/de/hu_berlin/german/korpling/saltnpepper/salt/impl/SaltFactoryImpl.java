@@ -149,10 +149,19 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			}else if (sElementId.getSIdentifiableElement() instanceof SNode){
 				SNode sNode= (SNode)sElementId.getSIdentifiableElement();
 				if ((sNode.getSGraph()!= null)){
-					if (graph instanceof SCorpusGraph){
+					if (sNode.getSGraph() instanceof SCorpusGraph){
 						graph= (SCorpusGraph)sNode.getSGraph();
-					}else if (graph instanceof SDocumentGraph){
+					}else if (sNode.getSGraph() instanceof SDocumentGraph){
 						graph = ((SDocumentGraph) sNode.getSGraph()).getSDocument().getSCorpusGraph();
+					}
+				}
+			}else if (sElementId.getSIdentifiableElement() instanceof SRelation){
+				SRelation sRel= (SRelation)sElementId.getSIdentifiableElement();
+				if ((sRel.getSGraph()!= null)){
+					if (sRel.getSGraph() instanceof SCorpusGraph){
+						graph= (SCorpusGraph)sRel.getSGraph();
+					}else if (sRel.getSGraph() instanceof SDocumentGraph){
+						graph = ((SDocumentGraph) sRel.getSGraph()).getSDocument().getSCorpusGraph();
 					}
 				}
 			}
