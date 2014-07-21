@@ -146,7 +146,17 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				graph = ((SDocument) sElementId.getSIdentifiableElement()).getSCorpusGraph();
 			} else if ((sElementId.getSIdentifiableElement() instanceof SCorpus) && (((SCorpus) sElementId.getSIdentifiableElement()).getSCorpusGraph() != null)) {
 				graph = ((SCorpus) sElementId.getSIdentifiableElement()).getSCorpusGraph();
+			}else if (sElementId.getSIdentifiableElement() instanceof SNode){
+				SNode sNode= (SNode)sElementId.getSIdentifiableElement();
+				if ((sNode.getSGraph()!= null)){
+					if (graph instanceof SCorpusGraph){
+						graph= (SCorpusGraph)sNode.getSGraph();
+					}else if (graph instanceof SDocumentGraph){
+						graph = ((SDocumentGraph) sNode.getSGraph()).getSDocument().getSCorpusGraph();
+					}
+				}
 			}
+			
 			if (graph != null) {
 				globalId.append(URI_SALT_SCHEMA);
 				SaltProject project = graph.getSaltProject();
