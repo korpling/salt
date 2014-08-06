@@ -549,7 +549,6 @@ public class InfoModule {
 				// empty result
 				sdoc.loadSDocumentGraph();
 			} catch (SaltResourceNotFoundException e) {
-				System.out.println("could not load " + sdoc);
 				return SDocumentInfo.init("");
 			}
 
@@ -817,7 +816,6 @@ public class InfoModule {
 				uri = uri.resolve(root);
 			}
 		}
-		System.out.println(uri);
 		return uri;
 	}
 	
@@ -973,8 +971,6 @@ public class InfoModule {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("written " + projectXML.toFileString());
-		
 	}
 	
 	private void writeStartSProjectDocument(XMLStreamWriter writer,

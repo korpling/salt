@@ -19,7 +19,6 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -31,7 +30,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.osgi.service.log.LogService;
 
 import com.google.common.collect.ImmutableList;
 
@@ -404,23 +402,6 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph {
 	protected EClass eStaticClass() {
 		return GraphPackage.Literals.GRAPH;
 	}
-
-	// ---------------- start log service for osgi
-	private LogService logService;
-
-	public void setLogService(LogService logService) {
-		this.logService = logService;
-	}
-
-	public LogService getLogService(LogService logService) {
-		return (this.logService);
-	}
-
-	public void unsetLogService(LogService logService) {
-		logService = null;
-	}
-
-	// ---------------- end log service for osgi
 
 	// ---------------- start: notifying if nodes or edges list has changed
 	@SuppressWarnings("unchecked")

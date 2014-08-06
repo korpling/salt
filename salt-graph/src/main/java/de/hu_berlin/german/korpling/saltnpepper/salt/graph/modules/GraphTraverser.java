@@ -21,7 +21,6 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.osgi.service.log.LogService;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
@@ -38,23 +37,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.modules.exceptions.Gr
 @Deprecated
 public class GraphTraverser extends GraphModule
 {
-// ================================================ start: LogService	
-	private LogService logService;
-
-	public void setLogService(LogService logService) 
-	{
-		this.logService = logService;
-	}
-	
-	public LogService getLogService() 
-	{
-		return(this.logService);
-	}
-	
-	public void unsetLogService(LogService logService) {
-		logService= null;
-	}
-// ================================================ end: LogService
 	
 	/**
 	 * Some different supported modes to traverse the given graph.
@@ -119,7 +101,6 @@ public class GraphTraverser extends GraphModule
 		GraphTraverserObject traverserObject= null;
 		try {
 			traverserObject= new GraphTraverserObject();
-			traverserObject.setLogService(this.getLogService());
 			traverserObject.setTMode(tMode);
 			traverserObject.setGraph(this.getGraph());
 			traverserObject.setTraversalObject(traversalObject);

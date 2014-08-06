@@ -24,7 +24,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.osgi.service.log.LogService;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
@@ -62,24 +61,6 @@ public class GraphTraverserObject implements Runnable
 	public Long getId() {
 		return id;
 	}
-// ================================================ start: LogService	
-	private LogService logService;
-
-	public void setLogService(LogService logService) 
-	{
-		this.logService = logService;
-	}
-	
-	public LogService getLogService() 
-	{
-		return(this.logService);
-	}
-	
-	public void unsetLogService(LogService logService) {
-		logService= null;
-	}
-// ================================================ end: LogService
-	
 // ================================================ start exception handling
 // ================================================ end exception handling
 	/**
@@ -287,8 +268,8 @@ public class GraphTraverserObject implements Runnable
 			
 			if (currNode== null)
 				throw new GraphModuleException("Cannot traverse node starting at empty start node.");
-			if (this.logService!= null) 
-				this.logService.log(LogService.LOG_DEBUG, "start depthFirstRec() in node: "+ currNode.getId());	
+//			if (this.logService!= null) 
+//				this.logService.log(LogService.LOG_DEBUG, "start depthFirstRec() in node: "+ currNode.getId());	
 			this.getTraversalObj().nodeReached(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this.getId(), currNode, edge, father, order);
 			
 			//durch alle Kinder dieses Knotens gehen
@@ -322,8 +303,8 @@ public class GraphTraverserObject implements Runnable
 			}
 			this.getTraversalObj().nodeLeft(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this.getId(), currNode, edge, father,  order);
 			
-			if (this.logService!= null) 
-				this.logService.log(LogService.LOG_DEBUG, "end depthFirstRec(currNode: "+currNode+", edge: "+ edge+ ", fatcher: "+ father+ ", order: "+ order+")");
+//			if (this.logService!= null) 
+//				this.logService.log(LogService.LOG_DEBUG, "end depthFirstRec(currNode: "+currNode+", edge: "+ edge+ ", fatcher: "+ father+ ", order: "+ order+")");
 	}
 	
 	/**
@@ -339,8 +320,8 @@ public class GraphTraverserObject implements Runnable
 								Node child,
 								long order)
 	{
-		if (this.logService!= null) 
-			this.logService.log(LogService.LOG_DEBUG, "start depthFirstRec()");
+//		if (this.logService!= null) 
+//			this.logService.log(LogService.LOG_DEBUG, "start depthFirstRec()");
 		
 		//wenn dieser Knoten schon einmal besichtigt wurde, dann abbruch
 		if (	(this.visitedNodes!= null) && 
@@ -376,8 +357,8 @@ public class GraphTraverserObject implements Runnable
 			}
 			this.getTraversalObj().nodeLeft(GRAPH_TRAVERSE_MODE.BOTTOM_UP, this.getId(),  currNode, edge, child,  order);
 		}	
-		if (this.logService!= null) 
-			this.logService.log(LogService.LOG_DEBUG, "end depthFirstRec()");
+//		if (this.logService!= null) 
+//			this.logService.log(LogService.LOG_DEBUG, "end depthFirstRec()");
 	}
 
 	private static String KW_NS= "graphTraverseObject";

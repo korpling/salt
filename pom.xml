@@ -56,7 +56,6 @@
 		<license.file>${basedir}/LICENSE</license.file>
 		<notice.file>${basedir}/NOTICE</notice.file>
 		<java.version>1.6</java.version>
-		<osgi.version>1.4.0</osgi.version>
 		<xmlunit.version>1.3</xmlunit.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.16</log4j.version>
@@ -64,16 +63,6 @@
 		<guava.version>14.0.1</guava.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.core</artifactId>
-			<version>${osgi.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-			<version>${osgi.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
