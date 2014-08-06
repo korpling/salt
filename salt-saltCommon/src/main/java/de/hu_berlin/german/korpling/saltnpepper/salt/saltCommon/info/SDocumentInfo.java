@@ -27,10 +27,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
@@ -49,7 +50,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
  */
 public class SDocumentInfo {
 	
-	static private Logger log = Logger.getLogger(SDocumentInfo.class);
+	static private Logger log = LoggerFactory.getLogger(SDocumentInfo.class);
 	
 //	public final int ALL_TOP_OBJECTS = 0;
 //	public final int ALL_TOP_ANNOTATIONS = 1;

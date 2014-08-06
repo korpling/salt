@@ -40,10 +40,11 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
@@ -109,7 +110,7 @@ public class InfoModule {
 	private static final String XML_VERSION = "1.0";
 	private static final String XHREF_TAG = "rel-location";
 	
-	static private Logger log = Logger.getLogger(InfoModule.class);
+	static private Logger log = LoggerFactory.getLogger(InfoModule.class);
 	
 
 

@@ -43,10 +43,11 @@ import javax.xml.validation.SchemaFactory;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
@@ -64,7 +65,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class InfoModuleTest extends TestCase {
 	
-	private Logger log = Logger.getLogger(InfoModule.class);
+	private Logger log = LoggerFactory.getLogger(InfoModule.class);
 	
 
 	static final String JAXP_SCHEMA_SOURCE = "http://java.sun.com/xml/jaxp/properties/schemaSource";

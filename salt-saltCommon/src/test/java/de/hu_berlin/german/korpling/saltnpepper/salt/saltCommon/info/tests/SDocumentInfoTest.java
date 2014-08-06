@@ -24,9 +24,10 @@ import java.util.Map.Entry;
 
 import junit.framework.TestCase;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.InfoModule;
@@ -39,7 +40,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class SDocumentInfoTest extends TestCase {
 	
-	static private Logger log = Logger.getLogger(SDocumentInfoTest.class);
+	static private Logger log = LoggerFactory.getLogger(SDocumentInfoTest.class);
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -157,7 +158,6 @@ public class SDocumentInfoTest extends TestCase {
 		SDocumentInfo scorpus = SDocumentInfo.init("Test");
 		annotated.addAllMetaData(sgraph.getSDocuments().get(0).getSDocumentGraph().getSMetaAnnotations());
 		annotated.print();
-		log.debug(annotated.getMetaData().size());
 		for (Entry<String, String> metaElement : annotated.getMetaData().entrySet()) {
 			log.debug(String.format("Metadata k=%s v=%s", metaElement.getKey(),metaElement.getValue()));
 			assertTrue(metaMap.get(metaElement.getKey()).equals(metaElement.getValue()));
