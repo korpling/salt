@@ -24,6 +24,13 @@ To access the maven coordinates, you need to include our maven repoitory:
   </repository>
 </repositories>
 ```
+coorperations
+===
+Known projects using Salt:<br/>
+[ANNIS](http://www.sfb632.uni-potsdam.de/annis/index.html) - ANNIS: Search and Visualization in Multilayer Linguistic Corpora<br/>
+[ATOMIC](http://linktype.iaa.uni-jena.de/atomic/) - Atomic: A tool for multilevel corpus annotation <br/>
+[Pepper](http://u.hu-berlin.de/saltnpepper) - Pepper: A multi converter framework for linguistic data
+
 
 contribute
 ===
