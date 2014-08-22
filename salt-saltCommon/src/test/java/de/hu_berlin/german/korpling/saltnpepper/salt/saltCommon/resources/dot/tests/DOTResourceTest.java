@@ -82,7 +82,7 @@ public class DOTResourceTest extends TestCase {
 	public void testSave_SProject(){
 		URI uri= getTmpDir().appendSegment("sProject");
 		
-		SaltProject saltProject= SampleGenerator.createCompleteSaltproject();
+		SaltProject saltProject= SampleGenerator.createSaltProject();
 		
 		DOTResource.save(saltProject, uri);
 		assertTrue(new File(uri.appendSegment("rootCorpus").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
@@ -99,7 +99,7 @@ public class DOTResourceTest extends TestCase {
 	public void testSave_SProject2(){
 		URI uri= getTmpDir().appendSegment("sProject2");
 		
-		SaltProject saltProject= SampleGenerator.createCompleteSaltproject();
+		SaltProject saltProject= SampleGenerator.createSaltProject();
 		saltProject.getSCorpusGraphs().add(SampleGenerator.createCorpusStructure());
 		DOTResource.save(saltProject, uri);
 		assertTrue(new File(uri.appendSegment("0").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());

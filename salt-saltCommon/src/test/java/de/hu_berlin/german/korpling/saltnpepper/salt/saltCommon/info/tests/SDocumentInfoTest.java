@@ -34,7 +34,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.SDocumentInfo;
 //import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.helper.modules.SDocumentInfo.InfoEntry;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 
@@ -45,7 +47,7 @@ public class SDocumentInfoTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		SCorpusGraph sgraph = SampleGenerator.createCorpusStructure_simple();
-		SampleGenerator.createSDocument_simpleLayeredDocument(sgraph.getSDocuments().get(0));
+		createSDocument_simpleLayeredDocument(sgraph.getSDocuments().get(0));
 		
 		fixture = SDocumentInfo.init(sgraph.getSDocuments().get(0).getSDocumentGraph());
 		log.debug("Setup: STokens=" + sgraph.getSDocuments().get(0).getSDocumentGraph().getSTokens().size());
@@ -73,7 +75,7 @@ public class SDocumentInfoTest extends TestCase {
 
 	public void testMerge(){
 		SCorpusGraph sgraph = SampleGenerator.createCorpusStructure_simple();
-		SampleGenerator.createSDocument_simpleLayeredDocument(sgraph.getSDocuments().get(0));
+		createSDocument_simpleLayeredDocument(sgraph.getSDocuments().get(0));
 //		SampleGenerator.
 		SDocumentInfo left  = SDocumentInfo.init(sgraph.getSDocuments().get(0).getSDocumentGraph());
 		left.addAllObjects(sgraph.getSDocuments().get(0).getSDocumentGraph().getSNodes());
@@ -99,6 +101,38 @@ public class SDocumentInfoTest extends TestCase {
 	}
 
 
+	/**
+	 * Creates a document with 2 layers, 5 Tokens with no Layer
+	 * 
+	 * @param sDocument
+	 * @return
+	 */
+	private SDocument createSDocument_simpleLayeredDocument(SDocument sDocument) {
+		sDocument.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
+		SLayer sLayer1 = SaltFactory.eINSTANCE.createSLayer();
+		SLayer sLayer2 = SaltFactory.eINSTANCE.createSLayer();
+		sLayer1.setSName("sLayer1");
+		sLayer2.setSName("sLayer2");
+		sLayer1.setId("sLayer1:id");
+		sLayer2.setId("sLayer2:id");
+
+		for (int i = 0; i < 5; i++) {
+			SToken sToken= SaltFactory.eINSTANCE.createSToken();
+			sDocument.getSDocumentGraph().addSNode(sToken);
+		}
+		
+		for (int i = 0; i < 5; i++) {
+			SToken sToken= SaltFactory.eINSTANCE.createSToken();
+			sDocument.getSDocumentGraph().addSNode(sToken);
+			sToken.getSLayers().add(sLayer1);
+		}
+		
+		sDocument.getSDocumentGraph().addSLayer(sLayer1);
+		sDocument.getSDocumentGraph().addSLayer(sLayer2);
+
+		return sDocument;
+	}
+	
 
 	public void testGetEntries() {
 		assertEquals(5, fixture.getCount("SToken",SDocumentInfo.NOSLAYER_TAG));
@@ -142,13 +176,13 @@ public class SDocumentInfoTest extends TestCase {
 	}
 	
 	public void testMetaData() throws Exception {
-		SCorpusGraph sgraph = SampleGenerator.createCompleteSaltproject().getSCorpusGraphs().get(0);
-		SampleGenerator.createSDocument_simpleLayeredDocument(sgraph.getSDocuments().get(0));
+		SCorpusGraph sgraph = SampleGenerator.createSaltProject().getSCorpusGraphs().get(0);
+		createSDocument_simpleLayeredDocument(sgraph.getSDocuments().get(0));
 		Map<String, String> metaMap = new HashMap<String, String>();
 		metaMap.put("author", "Hans Würst");
 		metaMap.put("title", "This is a title");
 		for (Map.Entry<String, String> metaEntry : metaMap.entrySet()) {
-			SampleGenerator.addMetaAnnotation(sgraph.getSDocuments().get(0).getSDocumentGraph(), metaEntry.getKey(),metaEntry.getValue());
+			InfoModuleTest.addMetaAnnotation(sgraph.getSDocuments().get(0).getSDocumentGraph(), metaEntry.getKey(),metaEntry.getValue());
 		}
 		
 		SDocumentInfo annotated = SDocumentInfo.init(sgraph.getSDocuments().get(0).getSDocumentGraph());

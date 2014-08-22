@@ -61,6 +61,11 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltE
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.info.InfoModule;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotatableElement;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SMetaAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class InfoModuleTest extends TestCase {
@@ -108,9 +113,9 @@ public class InfoModuleTest extends TestCase {
 			URI tDir = URI.createFileURI("testWriteInfoFile_SaltProject_File_URI_dir/").resolve(TMP_DIR_URI);
 //			tempDir.mkdir();
 
-			SaltProject sp = SampleGenerator.createCompleteSaltproject();
+			SaltProject sp = SampleGenerator.createSaltProject();
 			sp.setSName("Test-SaltProject");
-			SampleGenerator.createSDocumentSLayered(sp.getSCorpusGraphs()
+			createSDocumentSLayered(sp.getSCorpusGraphs()
 					.get(0).getSDocuments().get(0));
 
 			InfoModule infoAdapter = new InfoModule();			
@@ -136,8 +141,8 @@ public class InfoModuleTest extends TestCase {
 		for (int i = 0; i < n; i++) {
 			SDocument sdoc = SaltFactory.eINSTANCE.createSDocument();
 			SampleGenerator.createSDocumentStructure(sdoc);
-			SampleGenerator.createSDocumentSLayered(sdoc);
-			SampleGenerator.addMetaAnnotation(sdoc,"doc-author", "Hans Würst");
+			createSDocumentSLayered(sdoc);
+			addMetaAnnotation(sdoc,"doc-author", "Hans Würst");
 			sdoc.setSId("sampleSDocumentID" + i);
 			sdoc.setSName("sampleSDocName" + i);
 			InfoModule infoAdapter = new InfoModule();
@@ -181,14 +186,14 @@ public class InfoModuleTest extends TestCase {
 		
 	}
 	public void testPrintInfoFileSCorpus() throws SAXException, IOException, ParserConfigurationException {
-		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SaltProject sp = SampleGenerator.createSaltProject();
 		sp.setSName("Test-SaltProject");
 		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
 		
-		SampleGenerator.createSDocumentSLayered(first);
-		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
+		createSDocumentSLayered(first);
+		addMetaAnnotation(first,"doc-author", "Hans Würst");
 		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
-		SampleGenerator.addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans Würst");
+		addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans Würst");
 		InfoModule im = new InfoModule();
 		im.setOverwriting(true);
 		File corpusinfo = new File(FILE_TMP_DIR, "corpusInfo.xml");
@@ -203,11 +208,11 @@ public class InfoModuleTest extends TestCase {
 		StringWriter buffer = new StringWriter();
 		InfoModule im = new InfoModule();
 		im.setOverwriting(true);
-		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SaltProject sp = SampleGenerator.createSaltProject();
 		sp.setSName("Test-SaltProject");
 		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
-		SampleGenerator.createSDocumentSLayered(first);
-		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
+		createSDocumentSLayered(first);
+		addMetaAnnotation(first,"doc-author", "Hans Würst");
 		
 		XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(buffer);
 //		URI tFolder = (URI.createFileURI(FILE_TMP_DIR).appendSegment("xmlStreamTestTempDir"));
@@ -230,7 +235,7 @@ public class InfoModuleTest extends TestCase {
 		StringWriter buffer = new StringWriter();
 		XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(buffer);
 		InfoModule im = new InfoModule();
-		SaltProject sproject = SampleGenerator.createCompleteSaltproject2();
+		SaltProject sproject = SampleGenerator.createSaltProject();
 		URI tempUri = URI.createURI("testDocumentStructure").resolve(TMP_DIR_URI);
 		im.setWriteAll(true);
 		im.writeInfoStream(sproject, writer, tempUri);
@@ -247,11 +252,11 @@ public class InfoModuleTest extends TestCase {
 		StringWriter buffer = new StringWriter();
 		InfoModule im = new InfoModule();
 		im.setOverwriting(true);
-		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SaltProject sp = SampleGenerator.createSaltProject();
 		sp.setSName("Test-SaltProject");
 		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
-		SampleGenerator.createSDocumentSLayered(first);
-		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
+		createSDocumentSLayered(first);
+		addMetaAnnotation(first,"doc-author", "Hans Würst");
 		
 		XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(buffer);
 //		URI tFolder = (URI.createFileURI(FILE_TMP_DIR).appendSegment("xmlStreamTestTempDir"));
@@ -261,14 +266,51 @@ public class InfoModuleTest extends TestCase {
 		validate(buffer,SCHEMA_PATH_SALT_PROJECT);
 	}
 	
+	/**
+	 * creates a document with layers
+	 * <pre>
+	 * 
+	 * </pre>
+	 */
+	private SDocument createSDocumentSLayered(SDocument sDocument) {
+		if (sDocument.getSDocumentGraph() == null){
+			SampleGenerator.createSDocumentStructure(sDocument);
+		}
+		SLayer sLayer1 = SaltFactory.eINSTANCE.createSLayer();
+		SLayer sLayer2 = SaltFactory.eINSTANCE.createSLayer();
+		sLayer1.setSName("sLayer1 mit SRelations");
+		sLayer2.setSName("sLayer2 mit STokens");
+		sLayer1.setId("sLayer1 mit Annotations:id");
+		sLayer2.setId("sLayer2 mit STokens:id");
+		for (SRelation sAnno : sDocument.getSDocumentGraph().getSRelations()) {
+			sLayer1.getSRelations().add(sAnno);
+		}
+		for (SToken sToken : sDocument.getSDocumentGraph().getSTokens()) {
+			sLayer2.getSNodes().add(sToken);
+		}
+		sLayer2.setSSuperLayer(sLayer1);
+		
+		sDocument.getSDocumentGraph().addSLayer(sLayer1);
+		sDocument.getSDocumentGraph().addSLayer(sLayer2);
+
+		return sDocument;
+	}
+	
+	public static void addMetaAnnotation(final SMetaAnnotatableElement annotatable, final String name, final String value) {
+		SMetaAnnotation sMetaAnno = SaltFactory.eINSTANCE.createSMetaAnnotation();
+		sMetaAnno.setName(name);
+		sMetaAnno.setSValue(value);
+		annotatable.addSMetaAnnotation(sMetaAnno);
+	}
+	
 	public void testPrintInfoComplete() throws Exception{
-		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SaltProject sp = SampleGenerator.createSaltProject();
 		sp.setSName("Test-SaltProject");
 		SDocument first = sp.getSCorpusGraphs().get(0).getSDocuments().get(0);
-		SampleGenerator.createSDocumentSLayered(first);
-		SampleGenerator.addMetaAnnotation(first,"doc-author", "Hans Würst");
+		createSDocumentSLayered(first);
+		addMetaAnnotation(first,"doc-author", "Hans Würst");
 		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
-		SampleGenerator.addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans Würst");
+		addMetaAnnotation(c.getSCorpusGraph(),"corpus-author", "Hans Würst");
 		InfoModule im = new InfoModule();
 		URI tFolder = URI.createFileURI("InfoModuleTestData/").resolve(TMP_DIR_URI);
 		log.debug("Test folder: " + tFolder);

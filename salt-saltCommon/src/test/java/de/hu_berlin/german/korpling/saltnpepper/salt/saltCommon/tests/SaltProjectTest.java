@@ -204,7 +204,7 @@ public class SaltProjectTest extends TestCase {
 	 * 
 	 */
 	public void testPrintInfo__URI() {
-		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SaltProject sp = SampleGenerator.createSaltProject();
 		File tmpFile = new File(FILE_TMP_DIR +"SaltProjectPrintInfo__URI.xml");
 		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
 		sp.printInfo(res);
@@ -224,7 +224,7 @@ public class SaltProjectTest extends TestCase {
 	 * 
 	 */
 	public void testPrintInfo__URI_URI() {
-		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SaltProject sp = SampleGenerator.createSaltProject();
 		File tmpFile = new File(FILE_TMP_DIR + "SaltProjectPrintInfo__URI.xml");
 		File tmpFolder = new File(FILE_TMP_DIR + "SaltProjectPrintInfo__URI_tempFolder/");
 		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
@@ -273,8 +273,8 @@ public class SaltProjectTest extends TestCase {
 		
 		File sDoc1File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc1."+SaltFactory.FILE_ENDING_SALT);
 		File sDoc2File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc2."+SaltFactory.FILE_ENDING_SALT);
-		File sDoc3File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc3."+SaltFactory.FILE_ENDING_SALT);
-		File sDoc4File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus1/doc4."+SaltFactory.FILE_ENDING_SALT);
+		File sDoc3File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus2/doc3."+SaltFactory.FILE_ENDING_SALT);
+		File sDoc4File= new File(saltProjectFile.getAbsoluteFile()+"/rootCorpus/subCorpus2/doc4."+SaltFactory.FILE_ENDING_SALT);
 		
 		assertNotNull(sDocumentMap.get(sDoc1.getSElementId()));
 		assertNotNull(sDocumentMap.get(sDoc2.getSElementId()));
@@ -331,7 +331,9 @@ public class SaltProjectTest extends TestCase {
 		this.getFixture().loadSaltProject(saltProjectURI);
 		assertNotNull(this.getFixture().getSCorpusGraphs());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
-		SaltProject template_saltProject= SampleGenerator.createCompleteSaltproject();		
+		SaltProject template_saltProject= SampleGenerator.createSaltProject();		
+//		template_saltProject.saveSaltProject(URI.createFileURI("/home/klotzmaz/case5_new/"));
+//		this.getFixture().setSName(template_saltProject.getSName());
 		assertEquals("differences:\n"+template_saltProject.differences(this.getFixture()), template_saltProject, this.getFixture());
 	}
 	
@@ -360,10 +362,9 @@ public class SaltProjectTest extends TestCase {
 			SCorpusGraph sCorpusGraph= template_saltProject.getSCorpusGraphs().get(0);
 			for (SDocument sDocument: sCorpusGraph.getSDocuments())
 			{//filling all of the documents in the corpus structure with document structure data	
-				SampleGenerator.createSDocumentStructure(sDocument);
+				SampleGenerator.createSDocumentStructure(sDocument);				
 			}//filling all of the documents in the corpus structure with document structure data
 		}//filling all of the documents in the corpus structure with document structure data
-		
 		
 		assertEquals("differences:\n"+template_saltProject.differences(this.getFixture()), template_saltProject, this.getFixture());
 	}
