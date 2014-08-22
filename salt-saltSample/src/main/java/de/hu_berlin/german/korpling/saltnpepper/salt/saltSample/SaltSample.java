@@ -170,7 +170,7 @@ public class SaltSample
 	 * Creates a {@link SDocumentGraph} containing to texts of two different speakers, who are aligned via 
 	 * the {@link STimeline} related to the {@link SToken} objects. The texts are {@value #PRIMARY_TEXT_EN_SPK1}
 	 * and {@value #PRIMARY_TEXT_EN_SPK2}, which are tokeized by words. The words 'to' and 'Oh' have been said
-	 * simultaneously and are overlapping via the timeline.  
+	 * simultaneously and are overlapping via the timeline.  FEHLT!
 	 * @param sDocument
 	 */
 	public static void createDialogue(SDocument sDocument)

@@ -328,11 +328,14 @@ public class SaltProjectTest extends TestCase {
 	public void testLoadSaltProject__URI() 
 	{
 		URI saltProjectURI= URI.createFileURI(FILE_RESOURCE_DIR+ "case5/");
+		
+		SaltProject template_saltProject= SampleGenerator.createCompleteSaltproject();
+		template_saltProject.saveSaltProject(URI.createFileURI("home/klotzmaz/saltCorpusStructure"));
+		
 		this.getFixture().loadSaltProject(saltProjectURI);
 		assertNotNull(this.getFixture().getSCorpusGraphs());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
 		
-		SaltProject template_saltProject= SampleGenerator.createCompleteSaltproject();
 		
 		assertEquals("differences:\n"+template_saltProject.differences(this.getFixture()), template_saltProject, this.getFixture());
 	}

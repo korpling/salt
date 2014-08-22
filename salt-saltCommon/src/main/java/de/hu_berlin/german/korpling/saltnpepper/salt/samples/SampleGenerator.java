@@ -182,57 +182,57 @@ public class SampleGenerator
 	public static SCorpusGraph createCorpusStructure() 
 	{
 		SCorpusGraph sCorpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
-		createCorpusStructure(sCorpGraph);
+		createCorpusStructure2(sCorpGraph);
 		return(sCorpGraph);
 	}
 	
-	/**
-	 * Tests following structure:
-	 * <pre>
-	 * 	             rootCorpus
-	 * 		     /                 \
-	 *       subCorp1		      subCorp2
-	 * 	/	  /		\		\
-	 * doc1	doc2	doc3	doc4
-	 * </pre>
-	 * @throws IOException 
-	 * @throws SAXException 
-	 */
-	@Deprecated
-	public static SCorpusGraph createCorpusStructure(SCorpusGraph sCorpGraph)
-	{
-		sCorpGraph.setSId("corpusGraph1");
-		SCorpus sCorpus1= SaltFactory.eINSTANCE.createSCorpus();
-		sCorpus1.setSName("rootCorpus");
-		sCorpGraph.addSNode(sCorpus1);
-		SCorpus sCorpus2= SaltFactory.eINSTANCE.createSCorpus();
-		sCorpus2.setSName("subCorpus1");
-		SCorpus sCorpus3= SaltFactory.eINSTANCE.createSCorpus();
-		sCorpus3.setSName("subCorpus2");
-		
-		sCorpGraph.addSSubCorpus(sCorpus1, sCorpus2);
-		sCorpGraph.addSSubCorpus(sCorpus1, sCorpus3);
-		
-		SDocument sDoc= null;
-		
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc1");
-		sCorpGraph.addSDocument(sCorpus2, sDoc);
-		
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc2");
-		sCorpGraph.addSDocument(sCorpus2, sDoc);
-		
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc3");
-		sCorpGraph.addSDocument(sCorpus2, sDoc);
-		
-		sDoc= SaltFactory.eINSTANCE.createSDocument();
-		sDoc.setSName("doc4");
-		sCorpGraph.addSDocument(sCorpus2, sDoc);
-		
-		return(sCorpGraph);
-	}
+//	/**
+//	 * Tests following structure:
+//	 * <pre>
+//	 * 	             rootCorpus
+//	 * 		     /                 \
+//	 *       subCorp1		      subCorp2
+//	 * 	/	  /		\		\
+//	 * doc1	doc2	doc3	doc4
+//	 * </pre>
+//	 * @throws IOException 
+//	 * @throws SAXException 
+//	 */
+//	@Deprecated
+//	public static SCorpusGraph createCorpusStructure(SCorpusGraph sCorpGraph)
+//	{
+//		sCorpGraph.setSId("corpusGraph1");
+//		SCorpus sCorpus1= SaltFactory.eINSTANCE.createSCorpus();
+//		sCorpus1.setSName("rootCorpus");
+//		sCorpGraph.addSNode(sCorpus1);
+//		SCorpus sCorpus2= SaltFactory.eINSTANCE.createSCorpus();
+//		sCorpus2.setSName("subCorpus1");
+//		SCorpus sCorpus3= SaltFactory.eINSTANCE.createSCorpus();
+//		sCorpus3.setSName("subCorpus2");
+//		
+//		sCorpGraph.addSSubCorpus(sCorpus1, sCorpus2);
+//		sCorpGraph.addSSubCorpus(sCorpus1, sCorpus3);
+//		
+//		SDocument sDoc= null;
+//		
+//		sDoc= SaltFactory.eINSTANCE.createSDocument();
+//		sDoc.setSName("doc1");
+//		sCorpGraph.addSDocument(sCorpus2, sDoc);
+//		
+//		sDoc= SaltFactory.eINSTANCE.createSDocument();
+//		sDoc.setSName("doc2");
+//		sCorpGraph.addSDocument(sCorpus2, sDoc);
+//		
+//		sDoc= SaltFactory.eINSTANCE.createSDocument();
+//		sDoc.setSName("doc3");
+//		sCorpGraph.addSDocument(sCorpus2, sDoc);
+//		
+//		sDoc= SaltFactory.eINSTANCE.createSDocument();
+//		sDoc.setSName("doc4");
+//		sCorpGraph.addSDocument(sCorpus2, sDoc);
+//		
+//		return(sCorpGraph);
+//	}
 	
 	/**
 	 * Tests following structure:
