@@ -170,7 +170,7 @@ public class SaltSample
 	 * Creates a {@link SDocumentGraph} containing to texts of two different speakers, who are aligned via 
 	 * the {@link STimeline} related to the {@link SToken} objects. The texts are {@value #PRIMARY_TEXT_EN_SPK1}
 	 * and {@value #PRIMARY_TEXT_EN_SPK2}, which are tokeized by words. The words 'to' and 'Oh' have been said
-	 * simultaneously and are overlapping via the timeline.  FEHLT!
+	 * simultaneously and are overlapping via the timeline.  FEHLT IN SAMPLE GENERATOR!
 	 * @param sDocument
 	 */
 	public static void createDialogue(SDocument sDocument)
@@ -260,7 +260,7 @@ public class SaltSample
 	 * Creates a {@link STextualDS} object containing the primary text {@link SaltSample#PRIMARY_TEXT_EN} and adds the object
 	 * to the {@link SDocumentGraph} being contained by the given {@link SDocument} object.
 	 * 
-	 * @param sDocument the document, to which the created {@link STextualDS} object will be added
+	 * @param sDocument the document, to which the created {@link STextualDS} object will be added FEHLT IN SAMPLE GENERATOR
 	 */
 	public static void createPrimaryData(SDocument sDocument){
 		createPrimaryData(sDocument, LANG_EN);
