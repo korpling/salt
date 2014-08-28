@@ -332,8 +332,6 @@ public class SaltProjectTest extends TestCase {
 		assertNotNull(this.getFixture().getSCorpusGraphs());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
 		SaltProject template_saltProject= SampleGenerator.createSaltProject();		
-//		template_saltProject.saveSaltProject(URI.createFileURI("/home/klotzmaz/case5_new/"));
-//		this.getFixture().setSName(template_saltProject.getSName());
 		assertEquals("differences:\n"+template_saltProject.differences(this.getFixture()), template_saltProject, this.getFixture());
 	}
 	
@@ -365,7 +363,6 @@ public class SaltProjectTest extends TestCase {
 				SampleGenerator.createSDocumentStructure(sDocument);				
 			}//filling all of the documents in the corpus structure with document structure data
 		}//filling all of the documents in the corpus structure with document structure data
-		
 		assertEquals("differences:\n"+template_saltProject.differences(this.getFixture()), template_saltProject, this.getFixture());
 	}
 		

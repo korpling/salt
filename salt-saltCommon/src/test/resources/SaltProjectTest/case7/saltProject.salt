@@ -8,8 +8,7 @@
     </nodes>
     <nodes xsi:type="sCorpusStructure:SDocument">
       <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED0005740004646F6331" valueString="doc1"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001573616C743A2F726F6F74436F727075732F646F6331" valueString="salt:/rootCorpus/doc1"/>
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="ACED000574003266696C653A2F686F6D652F6B6C6F747A6D617A2F63617365375F6E65772F726F6F74436F727075732F646F63312E73616C74" valueString="file:/home/klotzmaz/case7_new/rootCorpus/doc1.salt"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001573616C743A2F726F6F74436F727075732F646F6331" valueString="salt:/rootCorpus/doc1"/>      
     </nodes>
     <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@sCorpusGraphs.0/@nodes.0" target="//@sCorpusGraphs.0/@nodes.1">
       <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000B636F7270446F6352656C31" valueString="corpDocRel1"/>

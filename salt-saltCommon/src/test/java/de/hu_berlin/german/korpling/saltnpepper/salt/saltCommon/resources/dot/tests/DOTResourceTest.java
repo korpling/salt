@@ -88,8 +88,8 @@ public class DOTResourceTest extends TestCase {
 		assertTrue(new File(uri.appendSegment("rootCorpus").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
 		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc1").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
 		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc2").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc3").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc4").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc3").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc4").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
 	}
 	
 	/**
@@ -105,7 +105,7 @@ public class DOTResourceTest extends TestCase {
 		assertTrue(new File(uri.appendSegment("0").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
 		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc1").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
 		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc2").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc3").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc4").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc3").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc4").appendFileExtension(SaltFactory.FILE_ENDING_DOT).toFileString()).exists());
 	}
 }
