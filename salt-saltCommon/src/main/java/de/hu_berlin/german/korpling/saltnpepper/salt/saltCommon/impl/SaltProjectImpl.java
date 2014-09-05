@@ -490,6 +490,9 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 		else
 		{
 			SaltProject saltProject= (SaltProject) obj;
+			if(getSName()==null){
+				setSName(saltProject.getSName());
+			}
 			this.getSCorpusGraphs().addAll(saltProject.getSCorpusGraphs());
 		}
 		
