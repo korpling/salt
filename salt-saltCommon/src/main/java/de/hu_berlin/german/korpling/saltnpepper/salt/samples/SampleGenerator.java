@@ -56,35 +56,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.samples.exceptions.SaltSamp
  * 
  */
 public class SampleGenerator {
-	// private SCorpusGraph sCorpusGraph=null;
-
-	// SampleGenerator SaltGenerator(){
-	// //Creating a new salt project, this is the main object and contains all
-	// the others.
-	// SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
-	// {//creating a corpus structure for salt project
-	// System.out.print("creating a corpus structure for salt project...");
-	// createCorpusStructure(saltProject);
-	// System.out.println("OK");
-	// }//creating a corpus structure for salt project
-	//
-	// {//filling all of the documents in the corpus structure with document
-	// structure data
-	// System.out.print("filling all of the documents in the corpus structure with document structure data...");
-	// //this works, because after createCorpusStructure() was called, only one
-	// graph exists in salt project
-	// sCorpusGraph= saltProject.getSCorpusGraphs().get(0);
-	// for (SDocument sDocument: sCorpusGraph.getSDocuments())
-	// {//filling all of the documents in the corpus structure with document
-	// structure data
-	// createSDocumentStructure(sDocument);
-	// }//filling all of the documents in the corpus structure with document
-	// structure data
-	// System.out.println("OK");
-	//
-	// }//filling all of the documents in the corpus structure with document
-	// structure data
-	// }
 
 	/**
 	 * Creates the following corpus structure and adds it to the given salt
@@ -1029,9 +1000,9 @@ public class SampleGenerator {
 		if (sDocument==null){
 			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
 		}
-		if (sDocument.getSDocumentGraph()==null){
+		if (sDocument.getSDocumentGraph()==null || sDocument.getSDocumentGraph().getSLayerByName("syntax").isEmpty()){
 			createSyntaxStructure(sDocument);
-		}
+		}		
 		List<SStructure> sStructures = Collections.synchronizedList(sDocument
 				.getSDocumentGraph().getSStructures());
 		String[] annotations = { "ROOT", "SQ", "NP", "ADJP", "ADJP", "SBar",
