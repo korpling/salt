@@ -25,8 +25,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class SampleGeneratorTest {
@@ -260,20 +258,5 @@ public class SampleGeneratorTest {
 		catch (Exception e){
 			fail(e.getMessage()+"\n"+e.getCause());
 		}		
-	}
-	
-	@Test
-	public void testCase(){
-		SDocument fixture = SaltFactory.eINSTANCE.createSDocument();
-		
-		SampleGenerator.createMorphologyAnnotations(fixture);
-		SampleGenerator.createSyntaxAnnotations(fixture);
-		
-		for(SLayer sLayer : fixture.getSDocumentGraph().getSLayers()){
-			System.out.println("SLayer: "+sLayer.getSName());
-			for(SNode sNode : sLayer.getSNodes()){
-				System.out.println(sLayer.getSName()+":\t"+sNode.getSName()+"\t"+sNode.getSAnnotations());
-			}
-		}
 	}
 }
