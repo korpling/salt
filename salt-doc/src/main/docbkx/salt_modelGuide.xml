@@ -549,11 +549,10 @@
                         <title>Part-of-speech annotations of sample tokenization</title>
                         <mediaobject>
                             <imageobject>
-                                <!-- XXX same picture as now + all pos annotations in same object -->
-                                <imagedata width="400" fileref="images/sample_tokenization.png"/>
+                                <imagedata width="400" fileref="images/sample_tokenization_pos.png"/>
                             </imageobject>
                         </mediaobject>
-                    </figure>Each of these annotations are reducable to label of type
+                    </figure>Each of these annotations are reducable to labels of type
                         <classname>SAnnotation</classname> and <xref
                         linkend="fig_sample_token_annotation_pos"/> examplifies the annotation of
                     token t<subscript>1</subscript> covering the text '<emphasis role="italic"
@@ -563,8 +562,7 @@
                             for token t<subscript>1</subscript></title>
                         <mediaobject>
                             <imageobject>
-                                <!-- XXX show object diagram, haveing ::t1 and ::pos |sName='pos', sValue='VBZ'-->
-                                <imagedata width="400" fileref="images/sample_tokenization.png"/>
+                                <imagedata width="200" fileref="images/sample_pos_annotation.png"/>
                             </imageobject>
                         </mediaobject>
                     </figure> We here examplified the creation of annotations using the sample of
@@ -858,10 +856,11 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                     mean, time management? Remember, Salt is poor of semantics, so time management
                     does not address the timely progression of a text like "<emphasis role="bold"
                         >Before</emphasis> Bart went to school, he stood up."<footnote>
-                        <para>To model such semantic issues is up to the user, for instance the ISO
-                            approach of TimeML (see XXX) covers that.</para>
-                    </footnote> With time management we mean the fact of ordering tokens in texts,
-                    for instance in multiple texts. In Salt this is handled by introducing a global<footnote>
+                        <para>The modeling of such semantic issues is up to the user, for instance
+                            the ISO approach of TimeML (see XXX) covers that.</para>
+                    </footnote> With time management we mean the fact of ordering tokens in a
+                    primary text along their temporal occurance. This often becomes necessary for
+                    multiple texts. In Salt this is handled by introducing a global<footnote>
                         <para>Global here means global for one document-structure.</para>
                     </footnote> unique timeline which is connected with each token. The timeline in
                     Salt is represented by the element <classname>STimeline</classname> and can be
@@ -979,10 +978,85 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                     to save memory space. When dealing with audio and video data it might be
                     necessary, not only to use abstract points-of-time (like 1,2,3,4,...), but
                     specific ones (like 00:00:00, 00:00:01, 01:12:20 etc.) as well. How to model
-                    such specific intreval borders we show in <xref linkend="sec_audioData"/>.</para>
+                    such specific intreval borders we show in <xref linkend="sec_audioData"
+                    />.</para>
             </sect3>
             <sect3 xml:id="sec_order">
                 <title>Ordering tokens</title>
+                <para>In this section we address the order of tokens in one or multiple texts. In a
+                    single ordinary primary text, the order might not be an issue, since the natural
+                    order of tokens is along their occurence in primary text. In a Salt model all
+                    tokens are contained in a single list, which is sorted by the insertion of the
+                    tokens. Imagine a primary text "<emphasis role="italic">This is a
+                        sample</emphasis>" tokenized in 4 tokens. If token <emphasis role="italic"
+                            >t<subscript>3</subscript></emphasis> ("a") was inserted into the list
+                    before token <emphasis role="italic">t<subscript>2</subscript></emphasis> ("is")
+                    was inserted, the order of the list would be <emphasis role="italic"
+                            >t<subscript>1</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>3</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>2</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>4</subscript></emphasis>. Salt provides methods to reorder
+                    this list along the offset in primary text
+                        (<classname>STextualRelatuin.sLeft</classname>). But what is with multiple
+                    texts? If we have multiple texts and order the corresponding tokens by their
+                    textual offset, we will end up with a mixed list of tokens of both texts.
+                    Imagine a second text "What a nice sample" also tokenized into 4 tokens
+                        <emphasis role="italic">t<subscript>21</subscript></emphasis>, <emphasis
+                        role="italic">t<subscript>22</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>23</subscript></emphasis> and <emphasis role="italic"
+                            >t<subscript>24</subscript></emphasis>. The token list ordered by the
+                    textual offset would be the following useless list: <emphasis role="italic"
+                            >t<subscript>1</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>21</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>2</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>22</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>23</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>3</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>4</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>24</subscript></emphasis>. A second option is the ordering
+                    by the offset in the timeline. Imagine both primary texts as a dialogue between
+                    two persons, with the following temporal order. <table frame="all"
+                        xml:id="table_dialogue">
+                        <title>Both texts as a dialogue.</title>
+                        <tgroup align="left" cols="10" colsep="1" rowsep="1">
+                            <colspec colname="c1" colnum="1"/>
+                            <colspec colname="c2" colnum="2"/>
+                            <colspec colname="c3" colnum="3"/>
+                            <colspec colname="c4" colnum="4"/>
+                            <colspec colname="c5" colnum="5"/>
+                            <colspec colname="c6" colnum="6"/>
+                            <colspec colname="c7" colnum="7"/>
+                            <colspec colname="c8" colnum="8"/>
+                            <tbody>
+                                <row>
+                                    <entry>spk1:</entry>
+                                    <entry>This</entry>
+                                    <entry>is</entry>
+                                    <entry>a</entry>
+                                    <entry>sample</entry>
+                                    <entry namest="c7" nameend="c8"/>
+                                </row>
+                                <row>
+                                    <entry>spk2: </entry>
+                                    <entry namest="c2" nameend="c3"/>
+                                    <entry>What</entry>
+                                    <entry>a</entry>
+                                    <entry>nice</entry>
+                                    <entry>sample</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>This will result in a list of the order: <emphasis role="italic"
+                            >t<subscript>1</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>2</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>3</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>21</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>4</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>22</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>23</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>24</subscript></emphasis>. This list now represents the
+                    temporal order, but the tokens are also mixed in sense of the correspondance to
+                    the primary texts.</para>
                 <itemizedlist>
                     <listitem>
                         <para>ordering can be understood and realized in several ways or dimensions.
@@ -1009,53 +1083,68 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
             </sect3>
             <sect3 xml:id="sec_audioData">
                 <title>Audio data</title>
-                <para>introduce SAUdioDS and SAudioRelation and explain the annotation with audio
-                    data via datatype SURI</para>
-                <para>
-                    <itemizedlist>
-                        <listitem>
-                            <para>especially with multimedia corpora, it may sounds weird to have an
-                                artificial timeline, since multimedia files already contains an own
-                                time coding, but we need to deal with several times and
-                                timelines,</para>
-                        </listitem>
-                        <listitem>
-                            <para>in case of an SAudioDS, an audio or video file contains its own
-                                time like starting at 00:00:00 and ending after 5 seconds at
-                                00:00:05 etc. </para>
-                        </listitem>
-                        <listitem>
-                            <para>Because of several reasons, a corpus can refer to more than one
-                                audio file, for instance, each audio file handles one speaker, or
-                                the audio file is spiltted to reduce its size</para>
-                        </listitem>
-                        <listitem>
-                            <para>Imagine a second audio file also starting at 00:00:00 and ending
-                                at 00:00:20, when using the internal timeline of both files, we have
-                                an overlapping range between 00:00:00 and 00:00:05 in that range, we
-                                cannot say which token or event comes before or after one of the
-                                other file, in case of theentire audio is split, one audio file
-                                comes after the next so for instance audio file 1 starts at 00:00:00
-                                and ends at 00:00:05, audio file 2 starts at 00:00:05 and ends at
-                                00:00:25 in a general timeline, but point of time 00:00:25 is
-                                nowhere encoded</para>
-                        </listitem>
-                        <listitem>
-                            <para>Using the common timeline, we can refer each token to the common
-                                timeline and now can order tokens in both files; </para>
-                        </listitem>
-                        <listitem>
-                            <para>the common timeline only contains abstract points of time like
-                                1,2,3,4 etc. to not lose the real time, you can annotate the points
-                                of time with real time items like 00:00:05 etc.</para>
-                        </listitem>
-                        <listitem>
-                            <para>show example common timeline (with annotated real time), timeline
-                                of audio1 and audio 2, their tokenization and the linking (if
-                                possible in a table)</para>
-                        </listitem>
-                    </itemizedlist>
-                </para>
+                <para>Next to textual born data like news paper articles, essays, internet chats
+                    etc. linguistics is also interested in spoken data like dialogues etc. . Even if
+                    Salt is a text based model for linguistic data, it can also deal with audio data
+                    in two different ways. That means, that audio data can be annotations or primary
+                    data. To create an audio annotation, the
+                        <classname>SAnnotation.sValue</classname> must be set to an URI pointing to
+                    the audio file. To use audio data as primary data, Salt contains the model
+                    elements <classname>SAudioDataSource</classname> and
+                        <classname>SAudioDSRelation</classname>. These elements are very similar to
+                    the elements <classname>STextualDS</classname> and
+                        <classname>STextualRelation</classname>. The element
+                        <classname>SAudioDataSource</classname> is also derived from the element
+                        <classname>SSequentialDS</classname>, it provides the field
+                        <classname>sAudioReference</classname> wich contains a URI referring to an
+                    audio file. With an object of type <classname>SAudioDSRelation</classname>, we
+                    now can connect such audio data with a token. To address a range in the entire
+                    audio stream, the element <classname>SAudioDSRelation</classname> contains the
+                    fields <classname>sStart</classname> and <classname>sEnd</classname> to address
+                    the beginning and the end of that range. <xref linkend="fig_sAudioData"/> shows
+                    the named elements in Salt and their relation to each other. <figure
+                        xml:id="fig_sAudioData">
+                        <title>audio data in Salt</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="150" fileref="images/sAudioData.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure></para>
+                <para> As already mentioned, Salt was created to handle textual data in the first
+                    place, it is usual to also have a transcription of these audio data in Salt. To
+                    connect tokens to a primary text next to an audio source is quite simple. You
+                    just need to create <classname>STextualRelation</classname> objects and let them
+                    point to the <classname>STextualDS</classname> object containing the primary
+                    text. Imagine the primary text "Is this example more complicated than it appears
+                    to be?", which is tokenized by words and a corresponding audio file. <xref
+                        linkend="fig_audioSample"/> shows the relation of a token <emphasis
+                        role="italic">tok1</emphasis> (just as a sample), the primary text <emphasis
+                        role="italic">text1</emphasis>, the audio date <emphasis role="italic"
+                        >audio1</emphasis> via the <classname>STextualRelation</classname> object
+                        <emphasis role="italic">sTextRel</emphasis> and the
+                        <classname>SAudioDSRelation</classname>
+                    <emphasis role="italic">sAudioRel</emphasis>.<figure xml:id="fig_audioSample">
+                        <title>A sample of audio data in combination with primary text</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="150" fileref="images/audioSample.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure></para>
+                <para>In Salt, the number of <classname>SAudioDataSource</classname> objects a model
+                    can have is not restricted and you can add as many of them as you like. You can
+                    also combine the use of multiple audio and textual primary data with the use of
+                    a common timeline. The use of the timeline allows you to model the temporal
+                    order of tokens in such a case. Imagine a dialogue consisting of two speakers,
+                    an audio recording for each speaker <emphasis role="italic">audio1</emphasis>
+                    and <emphasis role="italic">audio2</emphasis> and a corresponding transcription
+                    to each audio recording <emphasis role="italic">text1</emphasis> and <emphasis
+                        role="italic">text2</emphasis>.  Since in an ordenary dialogue, the speakers
+                    are somtimes talking disordered or in parallel, the temporal order cannot be
+                    represented by the order of the tokens. To do so, you just need to add an object
+                    of type <classname>STimeRelation</classname> and connect each token with the
+                    time line, for more information see <xref linkend="sec_time"/>.</para>
             </sect3>
             <sect3 xml:id="sec_id">
                 <title>Identifying an object via SName, SId and SElementId</title>
