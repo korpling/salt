@@ -12,7 +12,7 @@ You can also plug-in this api into your code via maven.
 <version>VERSION</version>
 ```
 
-To access the maven coordinates, you need to include our maven repoitory:
+To access the maven coordinates, you need to include our maven repository:
 
 ```xml
 <repositories>
