@@ -1,10 +1,9 @@
-salt
-====
+#Salt
 
 With Salt we provide an easily understandable meta model for linguistic data and an open source api to store, manipulate and represent data. Salt is an abstract model, poor of linguistic semantics. As a result, it is free of any linguistic schools or theories. The core model is graph-based and therefore keeps the structural restrictions very low and allows for a wide range of possible linguistic annotations like syntactic, morphological, coreferential annotations and many more. You can even model your own very personal annotation as long as it fits into a graph structure (and so far we have not seen a linguistic annotation which does not). Furthermore, Salt does not depend on a specific linguistic tagset which allows you to use every tagset you like.
 
-maven
-===
+##Maven
+
 You can also plug-in this api into your code via maven. 
 
 ```xml
@@ -24,21 +23,21 @@ To access the maven coordinates, you need to include our maven repoitory:
   </repository>
 </repositories>
 ```
-coorperations
-===
+##Coorperations
+
 Known projects using Salt:<br/>
 [ANNIS](http://www.sfb632.uni-potsdam.de/annis/index.html) - ANNIS: Search and Visualization in Multilayer Linguistic Corpora<br/>
 [ATOMIC](http://linktype.iaa.uni-jena.de/atomic/) - Atomic: A tool for multilevel corpus annotation <br/>
 [Pepper](http://u.hu-berlin.de/saltnpepper) - Pepper: A multi converter framework for linguistic data
 
 
-contribute
-===
+##Contribute
+
 Please help us, to make the api better and give us feedback and send a bug report or a feature request. You can also write a mail to saltnpepper@lists.hu-berlin.de
 
 
-Funders
-===
+##Funders
+
 This project has been funded by several institutions:
 
 <table>
@@ -65,8 +64,8 @@ This project has been funded by several institutions:
 </table>
 
 
-license
-===
+##License
+
   Copyright 2009 Humboldt University of Berlin, INRIA.
 
   Licensed under the Apache License, Version 2.0 (the "License");
