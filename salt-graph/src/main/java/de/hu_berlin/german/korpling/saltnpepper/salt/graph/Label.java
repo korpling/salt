@@ -142,7 +142,7 @@ public interface Label extends LabelableElement
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(Object)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Value()
-	 * @model
+	 * @model dataType="de.hu_berlin.german.korpling.saltnpepper.salt.graph.Object"
 	 * @generated
 	 */
 	Object getValue();

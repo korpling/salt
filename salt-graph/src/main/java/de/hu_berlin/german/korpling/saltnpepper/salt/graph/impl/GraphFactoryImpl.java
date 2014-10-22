@@ -19,13 +19,13 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.*;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
@@ -97,6 +97,8 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 				return createGRAPH_TRAVERSE_TYPEFromString(eDataType, initialValue);
 			case GraphPackage.GRAPH_TRAVERSE_HANDLER:
 				return createGraphTraverseHandlerFromString(eDataType, initialValue);
+			case GraphPackage.OBJECT:
+				return createObjectFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -114,6 +116,8 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 				return convertGRAPH_TRAVERSE_TYPEToString(eDataType, instanceValue);
 			case GraphPackage.GRAPH_TRAVERSE_HANDLER:
 				return convertGraphTraverseHandlerToString(eDataType, instanceValue);
+			case GraphPackage.OBJECT:
+				return convertObjectToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -235,6 +239,63 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 	 */
 	public String convertGraphTraverseHandlerToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * Creates an {@link Object} from passed String. if the created object starts with:
+	 * <ul>
+	 *   <li>URI:: - the returned Object will be of type {@link URI}</li>
+	 * </ul>
+	 */
+	public Object createObjectFromString(EDataType eDataType, String initialValue) {
+		Object retVal= null;
+		if (	(initialValue== null)||
+				(initialValue.length()<3)){
+		}else if (initialValue.startsWith("T")){
+			retVal= StringEscapeUtils.unescapeXml(initialValue.substring(3));
+		}else if (initialValue.startsWith("B")){
+			retVal= Boolean.parseBoolean(StringEscapeUtils.unescapeXml(initialValue.substring(3)));
+		}else if (initialValue.startsWith("N")){
+			retVal= Long.parseLong(StringEscapeUtils.unescapeXml(initialValue.substring(3)));
+		}else if (initialValue.startsWith("F")){
+			retVal= Float.parseFloat(StringEscapeUtils.unescapeXml(initialValue.substring(3)));
+		}else if (initialValue.startsWith("U")){
+			retVal= URI.createURI(StringEscapeUtils.unescapeXml(initialValue.substring(3)));
+		}else{
+			retVal= super.createFromString(eDataType, initialValue);
+		}
+		return(retVal); 
+
+	}
+
+	/**
+	 * Serializes an object as String. If the passed object is 
+	 * <ul>
+	 *  <li>{@link URI} - it is prefixed with "URI::"</li>
+	 * </ul>
+	 */
+	public String convertObjectToString(EDataType eDataType, Object instanceValue) {
+		String retVal= null;
+		if (instanceValue== null){
+		}else if(instanceValue instanceof String){
+			retVal= "T::"+StringEscapeUtils.escapeXml11((String)instanceValue);
+		}else if(instanceValue instanceof Boolean){
+			retVal="B::"+instanceValue.toString();
+		}else if(instanceValue instanceof Integer){
+			retVal="N::"+instanceValue.toString();
+		}else if(instanceValue instanceof Long){
+			retVal="N::"+instanceValue.toString();
+		}else if(instanceValue instanceof Double){
+			retVal="F::"+instanceValue.toString();
+		}else if(instanceValue instanceof Float){
+			retVal="F::"+instanceValue.toString();
+		}else if (instanceValue instanceof URI){
+			retVal= "U::"+ StringEscapeUtils.escapeXml11(instanceValue.toString());
+		}else{
+			retVal= super.convertToString(eDataType, instanceValue);
+		}
+		
+		return(retVal);
 	}
 
 	/**

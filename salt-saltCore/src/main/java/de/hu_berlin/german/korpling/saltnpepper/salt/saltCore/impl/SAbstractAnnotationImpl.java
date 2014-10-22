@@ -159,25 +159,6 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public void setSValue(Object newSValue) 
 	{
 		super.setValue(newSValue);
-//		{//setting sValueType
-//			if (newSValue == null)
-//				this.setSValueType(SDATATYPE.SOBJECT);
-//			else if (newSValue instanceof String)
-//				this.setSValueType(SDATATYPE.STEXT);
-//			else if (newSValue instanceof Boolean)
-//				this.setSValueType(SDATATYPE.SBOOLEAN);
-//			else if (newSValue instanceof Integer)
-//				this.setSValueType(SDATATYPE.SNUMERIC);
-//			else if (newSValue instanceof Long)
-//				this.setSValueType(SDATATYPE.SNUMERIC);
-//			else if (newSValue instanceof Float)
-//				this.setSValueType(SDATATYPE.SFLOAT);
-//			else if (newSValue instanceof Double)
-//				this.setSValueType(SDATATYPE.SFLOAT);
-//			else if (newSValue instanceof URI)
-//				this.setSValueType(SDATATYPE.SURI);
-//			else this.setSValueType(SDATATYPE.SOBJECT);
-//		}//setting sValueType
 	}
 
 // ============================= start: SValueType	

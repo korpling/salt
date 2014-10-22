@@ -119,6 +119,13 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	private EDataType graphTraverseHandlerEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType objectEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -540,6 +547,15 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getObject() {
+		return objectEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GraphFactory getGraphFactory() {
 		return (GraphFactory)getEFactoryInstance();
 	}
@@ -613,6 +629,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 
 		// Create data types
 		graphTraverseHandlerEDataType = createEDataType(GRAPH_TRAVERSE_HANDLER);
+		objectEDataType = createEDataType(OBJECT);
 	}
 
 	/**
@@ -711,7 +728,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		initEAttribute(getLabel_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabel_QName(), ecorePackage.getEString(), "qName", null, 0, 1, Label.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLabel_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabel_Value(), this.getObject(), "value", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLabel_LabelableElement(), this.getLabelableElement(), this.getLabelableElement_Labels(), "labelableElement", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabel_ValueString(), ecorePackage.getEString(), "valueString", null, 0, 1, Label.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
@@ -831,6 +848,7 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 
 		// Initialize data types
 		initEDataType(graphTraverseHandlerEDataType, GraphTraverseHandler.class, "GraphTraverseHandler", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(objectEDataType, Object.class, "Object", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
