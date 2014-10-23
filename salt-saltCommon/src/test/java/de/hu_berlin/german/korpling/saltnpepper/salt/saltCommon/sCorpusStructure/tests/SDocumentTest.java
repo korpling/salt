@@ -187,7 +187,6 @@ public class SDocumentTest extends TestCase {
 		SampleGenerator.createSDocumentStructure(this.getFixture());
 		File tmpFile = new File(System.getProperty("java.io.tmpdir")+"/testDoc."+ SaltFactory.FILE_ENDING_SALT);
 		
-		System.out.println(tmpFile);
 		URI tmpUri = URI.createFileURI(tmpFile.getAbsolutePath());
 		SDocumentGraph template= this.getFixture().getSDocumentGraph();
 		this.getFixture().saveSDocumentGraph(tmpUri);

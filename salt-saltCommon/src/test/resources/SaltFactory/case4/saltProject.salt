@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <saltCommon:SaltProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:saltCommon="saltCommon" xmlns:saltCore="saltCore">
   <sCorpusGraphs>
-    <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000F6D7953436F72707573477261706831" valueString="mySCorpusGraph1"/>
-    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574000C636F72707573477261706831" valueString="corpusGraph1"/>
+    <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::mySCorpusGraph1"/>
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::corpusGraph1"/>
   </sCorpusGraphs>
   <sCorpusGraphs>
-    <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000F6D7953436F72707573477261706832" valueString="mySCorpusGraph2"/>
-    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574000C636F72707573477261706832" valueString="corpusGraph2"/>
+    <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::mySCorpusGraph2"/>
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::corpusGraph2"/>
   </sCorpusGraphs>
   <sCorpusGraphs>
-    <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000F6D7953436F72707573477261706833" valueString="mySCorpusGraph3"/>
-    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574000C636F72707573477261706833" valueString="corpusGraph3"/>
+    <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::mySCorpusGraph3"/>
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::corpusGraph3"/>
   </sCorpusGraphs>
 </saltCommon:SaltProject>

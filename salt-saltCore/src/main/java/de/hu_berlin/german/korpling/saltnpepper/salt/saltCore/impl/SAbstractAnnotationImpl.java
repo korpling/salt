@@ -198,7 +198,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 		    { 
 		      label.setValue(computeSValueType());  
 		    }
-	        retVal= SDATATYPE.valueOf(label.getValueString()); 
+	        retVal= SDATATYPE.valueOf(label.getValue().toString()); 
 		}
 		else
 		{//compute value type
@@ -221,8 +221,8 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 			this.addLabel(label);
 		}
 		if (newSValueType== null)
-		    label.setValueString(null);
-		else label.setValueString(newSValueType.toString());
+		    label.setValue(null);
+		else label.setValue(newSValueType.toString());
 	}
 	
 	/**

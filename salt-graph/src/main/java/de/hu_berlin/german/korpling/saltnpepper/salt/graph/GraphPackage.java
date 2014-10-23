@@ -359,22 +359,13 @@ public interface GraphPackage extends EPackage {
         int LABEL__LABELABLE_ELEMENT = LABELABLE_ELEMENT_FEATURE_COUNT + 4;
 
         /**
-	 * The feature id for the '<em><b>Value String</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-        int LABEL__VALUE_STRING = LABELABLE_ELEMENT_FEATURE_COUNT + 5;
-
-        /**
 	 * The number of structural features of the '<em>Label</em>' class.
 	 * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-        int LABEL_FEATURE_COUNT = LABELABLE_ELEMENT_FEATURE_COUNT + 6;
+        int LABEL_FEATURE_COUNT = LABELABLE_ELEMENT_FEATURE_COUNT + 5;
 
         /**
 	 * The meta object id for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl <em>Graph</em>}' class.
@@ -548,15 +539,6 @@ public interface GraphPackage extends EPackage {
 	 * @ordered
 	 */
         int IDENTIFIER__LABELABLE_ELEMENT = LABEL__LABELABLE_ELEMENT;
-
-        /**
-	 * The feature id for the '<em><b>Value String</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-        int IDENTIFIER__VALUE_STRING = LABEL__VALUE_STRING;
 
         /**
 	 * The feature id for the '<em><b>Identifiable Element</b></em>' reference.
@@ -911,17 +893,6 @@ public interface GraphPackage extends EPackage {
 	 * @generated
 	 */
         EReference getLabel_LabelableElement();
-
-        /**
-	 * Returns the meta object for the attribute '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString <em>Value String</em>}'.
-	 * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value String</em>'.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString()
-	 * @see #getLabel()
-	 * @generated
-	 */
-        EAttribute getLabel_ValueString();
 
         /**
 	 * Returns the meta object for class '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph <em>Graph</em>}'.
@@ -1322,14 +1293,6 @@ public interface GraphPackage extends EPackage {
 		 * @generated
 		 */
                 EReference LABEL__LABELABLE_ELEMENT = eINSTANCE.getLabel_LabelableElement();
-
-                /**
-		 * The meta object literal for the '<em><b>Value String</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-                 * <!-- end-user-doc -->
-		 * @generated
-		 */
-                EAttribute LABEL__VALUE_STRING = eINSTANCE.getLabel_ValueString();
 
                 /**
 		 * The meta object literal for the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl <em>Graph</em>}' class.

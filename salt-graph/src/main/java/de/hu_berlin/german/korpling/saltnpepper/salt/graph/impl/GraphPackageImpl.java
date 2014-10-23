@@ -367,15 +367,6 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLabel_ValueString() {
-		return (EAttribute)labelEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getGraph() {
 		return graphEClass;
 	}
@@ -602,7 +593,6 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		createEAttribute(labelEClass, LABEL__QNAME);
 		createEAttribute(labelEClass, LABEL__VALUE);
 		createEReference(labelEClass, LABEL__LABELABLE_ELEMENT);
-		createEAttribute(labelEClass, LABEL__VALUE_STRING);
 
 		graphEClass = createEClass(GRAPH);
 		createEReference(graphEClass, GRAPH__INDEX_MGR);
@@ -730,7 +720,6 @@ public class GraphPackageImpl extends EPackageImpl implements GraphPackage {
 		initEAttribute(getLabel_QName(), ecorePackage.getEString(), "qName", null, 0, 1, Label.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLabel_Value(), this.getObject(), "value", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLabel_LabelableElement(), this.getLabelableElement(), this.getLabelableElement_Labels(), "labelableElement", null, 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLabel_ValueString(), ecorePackage.getEString(), "valueString", null, 0, 1, Label.class, !IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(labelEClass, ecorePackage.getEString(), "getNSSeperator", 0, 1, IS_UNIQUE, IS_ORDERED);
 

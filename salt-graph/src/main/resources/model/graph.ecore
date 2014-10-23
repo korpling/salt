@@ -67,8 +67,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//Object"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="labelableElement" eType="#//LabelableElement"
         eOpposite="#//LabelableElement/labels"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Graph" eSuperTypes="#//IdentifiableElement">
     <eOperations name="addNode">

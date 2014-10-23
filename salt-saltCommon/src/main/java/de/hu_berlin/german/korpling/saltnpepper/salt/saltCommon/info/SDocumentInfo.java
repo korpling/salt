@@ -97,7 +97,7 @@ public class SDocumentInfo {
 
 	private void addMetaDataItem(SMetaAnnotation metaanno) {
 		Identifier snode = getIdentifier(metaanno.getName());
-		Identifier svalue = getIdentifier(metaanno.getValueString());
+		Identifier svalue = getIdentifier(metaanno.getValue().toString());
 //		Count eCount = metaData.putSubIdentifierIfAbsent(snode,0);
 //		eCount.increase();
 		metaData.increase();
@@ -171,7 +171,7 @@ public class SDocumentInfo {
 			Identifier iAnnotation = getIdentifier(sanno.eClass().getName());
 			for (SAnnotation anno : sanno.getSAnnotations()) {
 				Identifier iAnno  = getIdentifier(anno.getName());
-				Identifier iValue = getIdentifier(anno.getValueString());
+				Identifier iValue = getIdentifier(anno.getValue().toString());
 				increaseCountForNestedElement(cLayer.putSubIdentifierIfAbsent(iObject, 0), iAnno, iValue);
 			}
 		

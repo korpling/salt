@@ -131,10 +131,6 @@
         <element xmi:type="ecore:EAttribute" href="graph.ecore#//Label/value"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_ZfA2o5oxEd6Ex8f7L1NZYQ"/>
       </children>
-      <children xmi:type="notation:Node" xmi:id="_ZimjkJ-3Ed6wqdVF8e_BCg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="graph.ecore#//Label/valueString"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZimjkZ-3Ed6wqdVF8e_BCg"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_ZfA2lZoxEd6Ex8f7L1NZYQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_ZfA2lpoxEd6Ex8f7L1NZYQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_ZfA2l5oxEd6Ex8f7L1NZYQ"/>

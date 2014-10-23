@@ -767,12 +767,10 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 	public String toString()
 	{
 		String retStr= "[";
-
-
 		retStr= retStr+ "("+this.getId()+"): ";
 		retStr= retStr+ "labels:";
 		for (Label label: this.getLabels())
-			retStr= retStr + label.getQName()+"="+ label.getValueString() + ", ";
+			retStr= retStr + label.getQName()+"="+ label.getValue() + ", ";
 		retStr= retStr+ "; sub-layers:";		
 		for (Layer subLayer: this.getSubLayers())
 			retStr= retStr + subLayer.getId() + ",";

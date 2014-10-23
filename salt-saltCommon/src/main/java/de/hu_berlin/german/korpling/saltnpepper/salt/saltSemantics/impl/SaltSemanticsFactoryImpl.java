@@ -50,7 +50,7 @@ public class SaltSemanticsFactoryImpl extends EFactoryImpl implements SaltSemant
 	 */
 	public static SaltSemanticsFactory init() {
 		try {
-			SaltSemanticsFactory theSaltSemanticsFactory = (SaltSemanticsFactory)EPackage.Registry.INSTANCE.getEFactory("SaltSemantics"); 
+			SaltSemanticsFactory theSaltSemanticsFactory = (SaltSemanticsFactory)EPackage.Registry.INSTANCE.getEFactory(SaltSemanticsPackage.eNS_URI);
 			if (theSaltSemanticsFactory != null) {
 				return theSaltSemanticsFactory;
 			}
