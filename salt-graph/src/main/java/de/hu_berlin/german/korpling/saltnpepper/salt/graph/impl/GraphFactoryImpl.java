@@ -265,7 +265,6 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 			retVal= super.createFromString(eDataType, initialValue);
 		}
 		return(retVal); 
-
 	}
 
 	/**
@@ -294,7 +293,6 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 		}else{
 			retVal= super.convertToString(eDataType, instanceValue);
 		}
-		
 		return(retVal);
 	}
 
@@ -317,6 +315,4 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 	public static GraphPackage getPackage() {
 		return GraphPackage.eINSTANCE;
 	}
-	
-
 } //GraphFactoryImpl
