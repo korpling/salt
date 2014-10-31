@@ -11,6 +11,15 @@
 *	artifactId:		salt-saltCommon												  *
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
+Version 1.1.9
+=============
+* bugfixes
+* replaced log4j with slf4j
+* added a global id for all SNode objects, via SaltFactory.eINSTANCE.createGlobalId(SNode)
+* reorganized samples
+** removed subproject salt-sample
+** added all functionality from salt-sample to SampleGenerator (de.hu_berlin.german.korpling.saltnpepper.salt.samples)
+ 
 Version 1.1.8
 =============
 * a lot of bug fixes
