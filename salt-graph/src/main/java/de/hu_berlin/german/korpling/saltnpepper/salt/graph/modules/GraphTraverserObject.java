@@ -268,6 +268,8 @@ public class GraphTraverserObject implements Runnable
 			
 			if (currNode== null)
 				throw new GraphModuleException("Cannot traverse node starting at empty start node.");
+//			if (this.logService!= null) 
+//				this.logService.log(LogService.LOG_DEBUG, "start depthFirstRec() in node: "+ currNode.getId());	
 			this.getTraversalObj().nodeReached(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this.getId(), currNode, edge, father, order);
 			
 			//durch alle Kinder dieses Knotens gehen
@@ -291,7 +293,7 @@ public class GraphTraverserObject implements Runnable
 								this.depthFirstRec(childNode, childEdge, currNode, i);
 							} catch (StackOverflowError e) 
 							{
-								System.err.println("\n\nCycle detected, cannot raise an error\n\n");
+								System.out.println("\n\nCycle detected, cannot raise an error\n\n");
 								System.exit(-1);
 							}
 							i++;
@@ -300,6 +302,9 @@ public class GraphTraverserObject implements Runnable
 				}
 			}
 			this.getTraversalObj().nodeLeft(GRAPH_TRAVERSE_MODE.DEPTH_FIRST, this.getId(), currNode, edge, father,  order);
+			
+//			if (this.logService!= null) 
+//				this.logService.log(LogService.LOG_DEBUG, "end depthFirstRec(currNode: "+currNode+", edge: "+ edge+ ", fatcher: "+ father+ ", order: "+ order+")");
 	}
 	
 	/**
@@ -315,10 +320,15 @@ public class GraphTraverserObject implements Runnable
 								Node child,
 								long order)
 	{
+//		if (this.logService!= null) 
+//			this.logService.log(LogService.LOG_DEBUG, "start depthFirstRec()");
+		
+		//wenn dieser Knoten schon einmal besichtigt wurde, dann abbruch
 		if (	(this.visitedNodes!= null) && 
-				(this.visitedNodes.contains(currNode))){
-			
-		}else{
+				(this.visitedNodes.contains(currNode)));
+		//sonst weiter traversieren
+		else
+		{
 			if (visitedNodes!= null) 
 				this.visitedNodes.add(currNode);
 			this.getTraversalObj().nodeReached(GRAPH_TRAVERSE_MODE.BOTTOM_UP, this.getId(),  currNode, edge, child, order);
@@ -347,10 +357,13 @@ public class GraphTraverserObject implements Runnable
 			}
 			this.getTraversalObj().nodeLeft(GRAPH_TRAVERSE_MODE.BOTTOM_UP, this.getId(),  currNode, edge, child,  order);
 		}	
+//		if (this.logService!= null) 
+//			this.logService.log(LogService.LOG_DEBUG, "end depthFirstRec()");
 	}
 
 	private static String KW_NS= "graphTraverseObject";
 	private static String KW_VISITED= "visited";
+	//private EList<Edge> visitedEdges= null;
 	private HashMap<Edge, Object> visitedEdges= null;
 	/**
 	 * Marks the given node as visited.

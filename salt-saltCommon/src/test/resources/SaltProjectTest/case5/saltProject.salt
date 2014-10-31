@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <saltCommon:SaltProject xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sCorpusStructure="sCorpusStructure" xmlns:saltCommon="saltCommon" xmlns:saltCore="saltCore" sName="sampleSaltProject">
   <sCorpusGraphs>
-    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::corpusGraph1"/>
+    <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574000C636F72707573477261706831" valueString="corpusGraph1"/>
     <nodes xsi:type="sCorpusStructure:SCorpus">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::rootCorpus"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/rootCorpus"/>
-    </nodes>
-    <nodes xsi:type="sCorpusStructure:SCorpus">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::subCorpus1"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/rootCorpus/subCorpus1"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000A726F6F74436F72707573" valueString="rootCorpus"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001073616C743A2F726F6F74436F72707573" valueString="salt:/rootCorpus"/>
     </nodes>
     <nodes xsi:type="sCorpusStructure:SCorpus">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::subCorpus2"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/rootCorpus/subCorpus2"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000A737562436F7270757331" valueString="subCorpus1"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001B73616C743A2F726F6F74436F727075732F737562436F7270757331" valueString="salt:/rootCorpus/subCorpus1"/>
+    </nodes>
+    <nodes xsi:type="sCorpusStructure:SCorpus">
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000A737562436F7270757332" valueString="subCorpus2"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001B73616C743A2F726F6F74436F727075732F737562436F7270757332" valueString="salt:/rootCorpus/subCorpus2"/>
     </nodes>
     <nodes xsi:type="sCorpusStructure:SDocument">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::doc1"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/rootCorpus/subCorpus1/doc1"/>
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="T::file:/home/klotzmaz/case5_new/rootCorpus/subCorpus1/doc1.salt"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED0005740004646F6331" valueString="doc1"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574002073616C743A2F726F6F74436F727075732F737562436F72707573312F646F6331" valueString="salt:/rootCorpus/subCorpus1/doc1"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="ACED000574003D66696C653A2F686F6D652F6B6C6F747A6D617A2F63617365355F6E65772F726F6F74436F727075732F737562436F72707573312F646F63312E73616C74" valueString="file:/home/klotzmaz/case5_new/rootCorpus/subCorpus1/doc1.salt"/>
     </nodes>
     <nodes xsi:type="sCorpusStructure:SDocument">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::doc2"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/rootCorpus/subCorpus1/doc2"/>
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="T::file:/home/klotzmaz/case5_new/rootCorpus/subCorpus1/doc2.salt"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED0005740004646F6332" valueString="doc2"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574002073616C743A2F726F6F74436F727075732F737562436F72707573312F646F6332" valueString="salt:/rootCorpus/subCorpus1/doc2"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="ACED000574003D66696C653A2F686F6D652F6B6C6F747A6D617A2F63617365355F6E65772F726F6F74436F727075732F737562436F72707573312F646F63322E73616C74" valueString="file:/home/klotzmaz/case5_new/rootCorpus/subCorpus1/doc2.salt"/>
     </nodes>
     <nodes xsi:type="sCorpusStructure:SDocument">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::doc3"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/rootCorpus/subCorpus2/doc3"/>
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="T::file:/home/klotzmaz/case5_new/rootCorpus/subCorpus2/doc3.salt"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED0005740004646F6333" valueString="doc3"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574002073616C743A2F726F6F74436F727075732F737562436F72707573322F646F6333" valueString="salt:/rootCorpus/subCorpus2/doc3"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="ACED000574003D66696C653A2F686F6D652F6B6C6F747A6D617A2F63617365355F6E65772F726F6F74436F727075732F737562436F72707573322F646F63332E73616C74" valueString="file:/home/klotzmaz/case5_new/rootCorpus/subCorpus2/doc3.salt"/>
     </nodes>
     <nodes xsi:type="sCorpusStructure:SDocument">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::doc4"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/rootCorpus/subCorpus2/doc4"/>
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="T::file:/home/klotzmaz/case5_new/rootCorpus/subCorpus2/doc4.salt"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED0005740004646F6334" valueString="doc4"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574002073616C743A2F726F6F74436F727075732F737562436F72707573322F646F6334" valueString="salt:/rootCorpus/subCorpus2/doc4"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SDOCUMENT_GRAPH_LOCATION" value="ACED000574003D66696C653A2F686F6D652F6B6C6F747A6D617A2F63617365355F6E65772F726F6F74436F727075732F737562436F72707573322F646F63342E73616C74" valueString="file:/home/klotzmaz/case5_new/rootCorpus/subCorpus2/doc4.salt"/>
     </nodes>
     <edges xsi:type="sCorpusStructure:SCorpusRelation" source="//@sCorpusGraphs.0/@nodes.0" target="//@sCorpusGraphs.0/@nodes.1">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::corpRel1"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/corpRel1"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED0005740008636F727052656C31" valueString="corpRel1"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574000E73616C743A2F636F727052656C31" valueString="salt:/corpRel1"/>
     </edges>
     <edges xsi:type="sCorpusStructure:SCorpusRelation" source="//@sCorpusGraphs.0/@nodes.0" target="//@sCorpusGraphs.0/@nodes.2">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::corpRel2"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/corpRel2"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED0005740008636F727052656C32" valueString="corpRel2"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574000E73616C743A2F636F727052656C32" valueString="salt:/corpRel2"/>
     </edges>
     <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@sCorpusGraphs.0/@nodes.1" target="//@sCorpusGraphs.0/@nodes.3">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::corpDocRel1"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/corpDocRel1"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000B636F7270446F6352656C31" valueString="corpDocRel1"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001173616C743A2F636F7270446F6352656C31" valueString="salt:/corpDocRel1"/>
     </edges>
     <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@sCorpusGraphs.0/@nodes.1" target="//@sCorpusGraphs.0/@nodes.4">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::corpDocRel2"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/corpDocRel2"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000B636F7270446F6352656C32" valueString="corpDocRel2"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001173616C743A2F636F7270446F6352656C32" valueString="salt:/corpDocRel2"/>
     </edges>
     <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@sCorpusGraphs.0/@nodes.2" target="//@sCorpusGraphs.0/@nodes.5">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::corpDocRel3"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/corpDocRel3"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000B636F7270446F6352656C33" valueString="corpDocRel3"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001173616C743A2F636F7270446F6352656C33" valueString="salt:/corpDocRel3"/>
     </edges>
     <edges xsi:type="sCorpusStructure:SCorpusDocumentRelation" source="//@sCorpusGraphs.0/@nodes.2" target="//@sCorpusGraphs.0/@nodes.6">
-      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="T::corpDocRel4"/>
-      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="T::salt:/corpDocRel4"/>
+      <labels xsi:type="saltCore:SFeature" namespace="salt" name="SNAME" value="ACED000574000B636F7270446F6352656C34" valueString="corpDocRel4"/>
+      <labels xsi:type="saltCore:SElementId" namespace="graph" name="id" value="ACED000574001173616C743A2F636F7270446F6352656C34" valueString="salt:/corpDocRel4"/>
     </edges>
   </sCorpusGraphs>
 </saltCommon:SaltProject>

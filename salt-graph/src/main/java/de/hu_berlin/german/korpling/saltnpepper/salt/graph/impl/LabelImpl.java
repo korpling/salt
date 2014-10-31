@@ -52,6 +52,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphExcep
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.LabelImpl#getQName <em>QName</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.LabelImpl#getValue <em>Value</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.LabelImpl#getLabelableElement <em>Labelable Element</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.LabelImpl#getValueString <em>Value String</em>}</li>
  * </ul>
  * </p>
  *
@@ -443,6 +444,16 @@ public class LabelImpl extends LabelableElementImpl implements Label
 	}
 
 	/**
+	 * The default value of the '{@link #getValueString() <em>Value String</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValueString()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String VALUE_STRING_EDEFAULT = null;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -606,6 +617,8 @@ public class LabelImpl extends LabelableElementImpl implements Label
 				return getValue();
 			case GraphPackage.LABEL__LABELABLE_ELEMENT:
 				return getLabelableElement();
+			case GraphPackage.LABEL__VALUE_STRING:
+				return getValueString();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -632,6 +645,9 @@ public class LabelImpl extends LabelableElementImpl implements Label
 				return;
 			case GraphPackage.LABEL__LABELABLE_ELEMENT:
 				setLabelableElement((LabelableElement)newValue);
+				return;
+			case GraphPackage.LABEL__VALUE_STRING:
+				setValueString((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -660,6 +676,9 @@ public class LabelImpl extends LabelableElementImpl implements Label
 			case GraphPackage.LABEL__LABELABLE_ELEMENT:
 				setLabelableElement((LabelableElement)null);
 				return;
+			case GraphPackage.LABEL__VALUE_STRING:
+				setValueString(VALUE_STRING_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -682,6 +701,8 @@ public class LabelImpl extends LabelableElementImpl implements Label
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case GraphPackage.LABEL__LABELABLE_ELEMENT:
 				return getLabelableElement() != null;
+			case GraphPackage.LABEL__VALUE_STRING:
+				return VALUE_STRING_EDEFAULT == null ? getValueString() != null : !VALUE_STRING_EDEFAULT.equals(getValueString());
 		}
 		return super.eIsSet(featureID);
 	}

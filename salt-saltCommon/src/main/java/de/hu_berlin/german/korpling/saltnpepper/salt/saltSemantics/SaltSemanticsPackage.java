@@ -136,6 +136,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SPOS_ANNOTATION__LABELABLE_ELEMENT = SaltCorePackage.SANNOTATION__LABELABLE_ELEMENT;
 
 	/**
+	 * The feature id for the '<em><b>Value String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SPOS_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
+
+	/**
 	 * The feature id for the '<em><b>SNS</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -252,6 +261,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SLEMMA_ANNOTATION__LABELABLE_ELEMENT = SaltCorePackage.SANNOTATION__LABELABLE_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Value String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SLEMMA_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
 	 * The feature id for the '<em><b>SNS</b></em>' attribute.
@@ -373,6 +391,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SCAT_ANNOTATION__LABELABLE_ELEMENT = SaltCorePackage.SANNOTATION__LABELABLE_ELEMENT;
 
 	/**
+	 * The feature id for the '<em><b>Value String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCAT_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
+
+	/**
 	 * The feature id for the '<em><b>SNS</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -489,6 +516,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STYPE_ANNOTATION__LABELABLE_ELEMENT = SaltCorePackage.SANNOTATION__LABELABLE_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Value String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STYPE_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
 	 * The feature id for the '<em><b>SNS</b></em>' attribute.
@@ -609,6 +645,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	int SWORD_ANNOTATION__LABELABLE_ELEMENT = SaltCorePackage.SANNOTATION__LABELABLE_ELEMENT;
 
 	/**
+	 * The feature id for the '<em><b>Value String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWORD_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
+
+	/**
 	 * The feature id for the '<em><b>SNS</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -725,6 +770,15 @@ public interface SaltSemanticsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SSENTENCE_ANNOTATION__LABELABLE_ELEMENT = SaltCorePackage.SANNOTATION__LABELABLE_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Value String</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SSENTENCE_ANNOTATION__VALUE_STRING = SaltCorePackage.SANNOTATION__VALUE_STRING;
 
 	/**
 	 * The feature id for the '<em><b>SNS</b></em>' attribute.

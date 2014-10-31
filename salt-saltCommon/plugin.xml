@@ -47,12 +47,4 @@
             genModel="model/saltCommon.genmodel"/>
    </extension>
 
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated saltSemantics -->
-      <package
-            uri="SaltSemantics"
-            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage"
-            genModel="src/main/resources/model/saltSemantics.genmodel"/>
-   </extension>
-
 </plugin>

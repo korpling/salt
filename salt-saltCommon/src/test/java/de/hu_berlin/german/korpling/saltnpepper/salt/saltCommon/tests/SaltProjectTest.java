@@ -76,12 +76,8 @@ public class SaltProjectTest extends TestCase {
 
 	
 	public static final String FILE_RESOURCE_DIR= "./src/test/resources/SaltProjectTest/";
-	private static final String FILE_TMP_DIR= System.getProperty("java.io.tmpdir")+"/salt-test_"+System.getProperty("user.name")+"/";
-	public String getTmpPath_Str(){
-		File tmpPath= new File(FILE_TMP_DIR);
-		tmpPath.mkdirs();
-		return(tmpPath.getAbsolutePath()+"/");
-	}
+	public static final String FILE_TMP_DIR= "_TMP/";
+	
 	
 	/**
 	 * The fixture for this Salt Project test case.
@@ -166,7 +162,7 @@ public class SaltProjectTest extends TestCase {
 			SampleGenerator.createSDocumentStructure(sDoc);
 		}
 		
-		File tmpDir = new File(getTmpPath_Str()+this.getClass().getName());
+		File tmpDir = new File(FILE_TMP_DIR+this.getClass().getName());
 		URI tmpURI= URI.createFileURI(tmpDir.getAbsolutePath());
 		this.getFixture().saveSaltProject(tmpURI);
 		for (SDocument sDoc: template_sCorpusGraph.getSDocuments())
@@ -209,7 +205,7 @@ public class SaltProjectTest extends TestCase {
 	 */
 	public void testPrintInfo__URI() {
 		SaltProject sp = SampleGenerator.createSaltProject();
-		File tmpFile = new File(getTmpPath_Str() +"SaltProjectPrintInfo__URI.xml");
+		File tmpFile = new File(FILE_TMP_DIR +"SaltProjectPrintInfo__URI.xml");
 		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
 		sp.printInfo(res);
 		InfoModuleTest imt = new InfoModuleTest();
@@ -229,8 +225,8 @@ public class SaltProjectTest extends TestCase {
 	 */
 	public void testPrintInfo__URI_URI() {
 		SaltProject sp = SampleGenerator.createSaltProject();
-		File tmpFile = new File(getTmpPath_Str() + "SaltProjectPrintInfo__URI.xml");
-		File tmpFolder = new File(getTmpPath_Str() + "SaltProjectPrintInfo__URI_tempFolder/");
+		File tmpFile = new File(FILE_TMP_DIR + "SaltProjectPrintInfo__URI.xml");
+		File tmpFolder = new File(FILE_TMP_DIR + "SaltProjectPrintInfo__URI_tempFolder/");
 		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
 		URI resFolder = URI.createFileURI(tmpFolder.toURI().getRawPath());
 		sp.printInfo(res,resFolder);
@@ -302,13 +298,8 @@ public class SaltProjectTest extends TestCase {
 		assertNotNull(this.getFixture().getSCorpusGraphs());
 		assertEquals(1, this.getFixture().getSCorpusGraphs().size());
 		SCorpusGraph sCorpusGraph= this.getFixture().getSCorpusGraphs().get(0);
+	
 		SCorpusGraph template_sCorpusGraph= SampleGenerator.createCorpusStructure_simple();
-		
-		saltProjectURI= URI.createFileURI(getTmpPath_Str()+"case8/");
-		SaltProject project= SaltFactory.eINSTANCE.createSaltProject();
-		project.getSCorpusGraphs().add(template_sCorpusGraph);
-		project.saveSaltProject(saltProjectURI);
-		
 		assertEquals("differences:\n"+template_sCorpusGraph.differences(sCorpusGraph), template_sCorpusGraph, sCorpusGraph);
 	}
 	
@@ -389,7 +380,7 @@ public class SaltProjectTest extends TestCase {
 	public void testSaveSaltProject_CorpusGraph() throws IOException, SAXException 
 	{
 		String saltProjectPathResource= FILE_RESOURCE_DIR+"case1/";
-		String saltProjectPathTMP= getTmpPath_Str()+ "case1/";
+		String saltProjectPathTMP= FILE_TMP_DIR+ "case1/";
 		
 		SampleGenerator.createCorpusStructure(this.getFixture());
 		

@@ -32,6 +32,7 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.graph;
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getQName <em>QName</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValue <em>Value</em>}</li>
  *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getLabelableElement <em>Labelable Element</em>}</li>
+ *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString <em>Value String</em>}</li>
  * </ul>
  * </p>
  *
@@ -141,7 +142,7 @@ public interface Label extends LabelableElement
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(Object)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_Value()
-	 * @model dataType="de.hu_berlin.german.korpling.saltnpepper.salt.graph.Object"
+	 * @model
 	 * @generated
 	 */
 	Object getValue();
@@ -183,6 +184,26 @@ public interface Label extends LabelableElement
 	 * @generated
 	 */
 	void setLabelableElement(LabelableElement value);
+
+	/**
+	 * Returns the value of {@link #getValue()} as its string representation. The value valueString only exists
+	 * for persisting the model. 
+	 * @return the value of the '<em>Value String</em>' attribute.
+	 * @see #setValueString(String)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphPackage#getLabel_ValueString()
+	 * @model volatile="true" derived="true"
+	 * @generated
+	 */
+	String getValueString();
+
+	/**
+	 * Attention this method does nothing, the given value will not be stored anyway. This method only exists 
+	 * for persisting the model.
+	 * @param value the new value of the '<em>Value String</em>' attribute.
+	 * @see #getValueString()
+	 * @generated
+	 */
+	void setValueString(String value);
 
 	/**
 	 * <!-- begin-user-doc -->
