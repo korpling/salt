@@ -176,7 +176,7 @@ public class IdentifierTest extends LabelTest {
 		assertNull(this.getFixture().getValue());
 		
 		this.getFixture().setValue(id);
-		assertTrue(id.equalsIgnoreCase(this.getFixture().getValueString()));
+		assertTrue(id.equalsIgnoreCase(this.getFixture().getValue().toString()));
 	}
 
 	/**

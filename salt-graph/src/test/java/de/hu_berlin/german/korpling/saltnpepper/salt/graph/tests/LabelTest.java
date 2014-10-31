@@ -317,35 +317,6 @@ public class LabelTest extends LabelableElementTest {
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString() <em>Value String</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#getValueString()
-	 */
-	public void testGetValueString() 
-	{
-		assertNull(this.getFixture().getValue());
-		
-		Object obj= new Object();
-		this.getFixture().setValue(obj);
-		assertEquals(obj.toString(), this.getFixture().getValueString());
-		
-		String value= "value";
-		this.getFixture().setValue(value);
-		assertEquals(value, this.getFixture().getValueString());
-	}
-
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#setValueString(java.lang.String) <em>Value String</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label#setValueString(java.lang.String)
-	 */
-	public void testSetValueString() {
-		//nothing to test, because method does nothing
-	}
-
-	/**
 	 * Tests the '{@link de.util.graph.Label#getNSSeperator() <em>Get NS Seperator</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
