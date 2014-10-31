@@ -1,4 +1,4 @@
 //see yuml.me
 
-[t:STextualRelation]<>-[f1:SFeature|sNamespace='salt';sName='sStart']
-[t:STextualRelation]<>-[f2:SFeature|sNamespace='salt';sName='sEnd']
+[:STextualRelation]<>-[f2:SFeature|sNamespace='salt';sName='sStart']
+[:STextualRelation]<>-[f1:SFeature|sNamespace='salt';sName='sEnd']

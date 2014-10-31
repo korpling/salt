@@ -1,9 +1,4 @@
 //see yuml.me
-
-[SDocumentGraph]<>-sTokens*>[SToken{bg:darkgray}]
-[SDocumentGraph]<>-sTextualDSs*>[STextualRelation|sStart;sEnd{bg:darkgray}]
-[STextualRelation]-sToken>[SToken]
+[STextualRelation|sStart : String;sEnd : String]-sToken>[SToken]
 [STextualRelation]-sTextualDS>[STextualDS]
-[SRelation]^-[STextualRelation]
-[SNode]^-[SToken]
 

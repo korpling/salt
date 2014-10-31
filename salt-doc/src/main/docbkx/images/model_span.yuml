@@ -1,8 +1,5 @@
 //see yuml.me
 
-[SDocumentGraph]<>-sSpans*>[SSpan]
-[SDocumentGraph]<>-sSpanningRelations*>[SSpanningRelation]
 [SSpanningRelation]-sSource>[SToken]
 [SSpanningRelation]-sTarget>[SSpan]
-[SNode]^-[SSpan{bg:darkgray}]
-[SRelation]^-[SSpanningRelation{bg:darkgray}]
+

@@ -1,5 +1,5 @@
 //yuml.me
 [SSequentialDS]^[SAudioRelation]
-[SAudioRelation|sStart;sEnd]-sSource>[SToken]
-[SAudioRelation]-sTarget>[SAudioDataSource|sAudioReference]
+[SAudioRelation|sStart : Double;sEnd : Double]-sSource>[SToken]
+[SAudioRelation]-sTarget>[SAudioDataSource|sAudioReference : URI]
 
