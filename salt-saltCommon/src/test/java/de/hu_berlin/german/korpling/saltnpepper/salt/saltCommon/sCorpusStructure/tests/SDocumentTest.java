@@ -215,28 +215,28 @@ public class SDocumentTest extends TestCase {
 		this.testSaveSDocumentGraph__URI();
 	}
 
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#printInfo(org.eclipse.emf.common.util.URI)
-	 * 
-	 */
-	public void testPrintInfo__URI() {
-		SampleGenerator.createSDocumentStructure(this.getFixture());
-		SampleGenerator.createSDocumentSLayered(this.getFixture());
-		this.getFixture().setSId("tempSDocument");
-		File tmpFile = new File(System.getProperty("java.io.tmpdir")+"/testDocInfo.xml");
-		URI tmpUri = URI.createFileURI(tmpFile.getAbsolutePath());
-		this.getFixture().printInfo(tmpUri);
-		
-		InfoModuleTest imt = new InfoModuleTest();
-		try {
-			// TODO: header or no header
-			imt.validate(tmpFile);
-		} catch (Exception e) {
-			fail();
-		}
-	}
+//	/**
+//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument#printInfo(org.eclipse.emf.common.util.URI)
+//	 * 
+//	 */
+//	public void testPrintInfo__URI() {
+//		SampleGenerator.createSDocumentStructure(this.getFixture());
+//		SampleGenerator.createSDocumentSLayered(this.getFixture());
+//		this.getFixture().setSId("tempSDocument");
+//		File tmpFile = new File(System.getProperty("java.io.tmpdir")+"/testDocInfo.xml");
+//		URI tmpUri = URI.createFileURI(tmpFile.getAbsolutePath());
+//		this.getFixture().printInfo(tmpUri);
+//		
+//		InfoModuleTest imt = new InfoModuleTest();
+//		try {
+//			// TODO: header or no header
+//			imt.validate(tmpFile);
+//		} catch (Exception e) {
+//			fail();
+//		}
+//	}
 
 } //SDocumentTest

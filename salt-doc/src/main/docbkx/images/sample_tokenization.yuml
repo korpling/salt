@@ -1,6 +1,6 @@
 //see yuml.me
 
-[text1|Is this example more complicated than it apperas to be?]
+[text1|Is this example more complicated than it appears to be?]
 [tok11|?]->[text1]
 [tok10|be]->[text1]
 [tok9|to]->[text1]

@@ -148,28 +148,28 @@ public class SCorpusTest extends TestCase {
 		this.testGetSCorpusGraph();
 	}
 
-	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI)
-	 * 
-	 */
-	public void testPrintInfo__URI() {
-		SaltProject sp = SampleGenerator.createCompleteSaltproject();
-		SampleGenerator.createSDocumentSLayered(sp.getSCorpusGraphs().get(0).getSDocuments().get(0));
-		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
-		File tmpFile = new File(FILE_TMP_DIR + "SCorpusPrintInfo__URI.xml");
-		System.out.println("Writing test file: " + tmpFile.getAbsolutePath());
-		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
-		c.printInfo(res);
-		InfoModuleTest imt = new InfoModuleTest();
-		try {
-			imt.validate(res);
-		} catch (Exception e) {
-			fail(e.getMessage());
-		} 
-	}
+//	/**
+//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI)
+//	 * 
+//	 */
+//	public void testPrintInfo__URI() {
+//		SaltProject sp = SampleGenerator.createSaltProject();
+//		SampleGenerator.createSDocumentSLayered(sp.getSCorpusGraphs().get(0).getSDocuments().get(0));
+//		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
+//		File tmpFile = new File(FILE_TMP_DIR + "SCorpusPrintInfo__URI.xml");
+//		System.out.println("Writing test file: " + tmpFile.getAbsolutePath());
+//		URI res = URI.createFileURI(tmpFile.toURI().getRawPath());
+//		c.printInfo(res);
+//		InfoModuleTest imt = new InfoModuleTest();
+//		try {
+//			imt.validate(res);
+//		} catch (Exception e) {
+//			fail(e.getMessage());
+//		} 
+//	}
 
 	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus#printInfo(org.eclipse.emf.common.util.URI, org.eclipse.emf.common.util.URI) <em>Print Info</em>}' operation.
@@ -179,7 +179,7 @@ public class SCorpusTest extends TestCase {
 	 * 
 	 */
 	public void testPrintInfo__URI_URI() {
-		SaltProject sp = SampleGenerator.createCompleteSaltproject();
+		SaltProject sp = SampleGenerator.createSaltProject();
 		SCorpus c = sp.getSCorpusGraphs().get(0).getSRootCorpus().get(0);
 		File tmpFile = new File(FILE_TMP_DIR + "SCorpusPrintInfo__URI.xml");
 		File tmpFolder = new File(FILE_TMP_DIR + "SCorpusPrintInfo__URI_tempFolder/");

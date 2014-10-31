@@ -30,6 +30,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.IOWrappedException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -305,12 +306,13 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				sDoc.setSDocumentGraphLocation(sDocumentGraphLocation);
 				sDoc.setSDocumentGraph(null);
 			}// store location of where file is persist
-
 			XMLResource xmlResource = (XMLResource) resource;
 			xmlResource.getContents().add(sDocumentGraph);
 			xmlResource.setEncoding("UTF-8");
 			try {
 				xmlResource.save(null);
+			}catch (IOWrappedException e){
+				throw new SaltResourceException("Cannot save " + SDocumentGraph.class.getName() + " to given uri '" + sDocumentGraphLocation + "'. This could be caused, because the Salt model was not created correctly. It seems, that at least one object (SNode, SRelation, SAnnotation, SMetaAnnotation, SProcessingAnnotation, SLayer etc.) is not contained in the SDocumentGraph. ", e);	
 			} catch (IOException e) {
 				throw new SaltResourceException("Cannot save " + SDocumentGraph.class.getName() + " to given uri '" + sDocumentGraphLocation + "'.", e);
 			}

@@ -1,0 +1,8 @@
+//yuml.me
+[audio1|sAudioReference=...]
+[text1|sText=Is this ...]
+[sTextRel|sStart=0;sEnd=2]-> [text1]
+[sTextRel]->[sTok1]
+[sAudioRel|sStart=0.0;sEnd=0.002]-> [audio1]
+[sAudioRel]->[sTok1]
+

@@ -9,7 +9,6 @@
 		<module>salt-graph</module>
 		<module>salt-saltCore</module>
 		<module>salt-saltCommon</module>
-		<module>salt-saltSample</module>
   </modules>
 	<description>Salt is an abstract and graph based meta model for dealing with linguistic annotated data. Salt describes a minimum of semantic and only handles the structure of linguistic data.</description>
 	<url>https://korpling.german.hu-berlin.de/p/projects/salt</url>
