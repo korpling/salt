@@ -102,11 +102,11 @@
     </itemizedlist>
     <sect1 xml:id="sec_intro">
         <title>The aim of Salt</title>
-        <para>With Salt we provide an easily understandable meta model for linguistic data and an
-            open source api to store, manipulate and represent data. Salt is an abstract model, poor
-            of linguistic semantics. As a result, it is free of any linguistic schools or theories.
-            The core model is graph-based and therefore keeps the structural restrictions very low
-            and allows for a wide range of possible linguistic annotations like syntactic,
+        <para>With Salt we provide a) an easily understandable meta model for linguistic data and b)
+            an open source api to store, manipulate and represent data. Salt is an abstract model,
+            poor of linguistic semantics. As a result, it is free of any linguistic schools or
+            theories. The core model is graph-based and therefore keeps the structural restrictions
+            very low and allows for a wide range of possible linguistic annotations like syntactic,
             morphological, coreferential annotations and many more. You can even model your own very
             personal annotation as long as it fits into a graph structure (and so far we have not
             seen a linguistic annotation which does not). Furthermore, Salt does not depend on a
@@ -118,9 +118,10 @@
             Pepper) being able to convert several linguistic formats<footnote>
                 <para>for instance the PennTreebank format, TigerXML, the EXMARaLDA format, PAULA,
                     GrAF, RST, CoNLL, the ANNIS format and many more</para>
-            </footnote> into each other. The job of Salt here was to be able to cover all these
-            kinds of data with a single model. In the meantime, Salt was developed further to an own
-            project and it now is part of several linguistic software solutions like ANNIS<footnote>
+            </footnote> into each other. The job of Salt here was to be able to cover all kinds of
+            different linguistic data with a single model. In the meantime, Salt was developed
+            further to an own project and it now is part of several linguistic software solutions
+            like ANNIS<footnote>
                 <para>see <link xlink:href="http://www.sfb632.uni-potsdam.de/annis/"
                         >http://www.sfb632.uni-potsdam.de/annis/</link></para>
             </footnote>, Atomic<footnote>
@@ -139,10 +140,10 @@
             this is a balancing act between different domains, we try to provide simple additional
             information for specific terms and aspects of the different domains. If you get bored at
             some point, don't hesitate to step over these paragraphs to the more interesting parts.
-            We always try to improve our software and guides as well. And since we are an
-            open-source community project, this is your chance to participate. So if you find typos
-            or misleading parts of text, please let us know and the honor will be yours. Just mail
-            to <email>saltnpepper@lists.hu-berlin.de</email>.</para>
+            We always try to improve our software and guides as well. And since we are an open
+            source community project, this is your chance to participate. So if you find typos or
+            misleading parts of text, please let us know and the honor will be yours. Just mail to
+                <email>saltnpepper@lists.hu-berlin.de</email>.</para>
     </sect1>
     <sect1 xml:id="sec_graph">
         <title>What is a graph?</title>
@@ -207,10 +208,7 @@
                 <listitem>
                     <para>and a set of labels <emphasis role="italic"
                             >{label<subscript>a</subscript>, …
-                            label<subscript>b</subscript>}</emphasis> the graph is labeled with<footnote>
-                            <para>Note that this set does not contain the labels of the nodes, edges
-                                and layers.</para>
-                        </footnote>.</para>
+                            label<subscript>b</subscript>}</emphasis> the graph is labeled with.</para>
                 </listitem>
             </itemizedlist>Each label is defined as <emphasis role="italic"
                     >label<subscript>y</subscript>= (namespace, name, value,
@@ -235,7 +233,7 @@
             connection to each other. In Salt, we call a node <classname>SNode</classname>, an edge
                 <classname>SRelation</classname>, a layer <classname>SLayer</classname> and a graph
                 <classname>SGraph</classname>. <figure xml:id="fig_graph_model">
-                <title>Salt base graph model as UML model</title>
+                <title>Salt's graph model</title>
                 <mediaobject>
                     <imageobject>
                         <imagedata width="350" fileref="images/graph_model.png"/>
@@ -247,13 +245,13 @@
             formal model and conflicts with the approach that everything we use in Salt must be one
             of the graph elements. Don't worry on that, in fact the <classname>sType</classname> is
             even a label on an edge. We herefore used a specific type of label, the
-                <classname>SFeature</classname> element whcih is described in detail in <xref
-                linkend="sec_labeling"/>. The <classname>sType</classname> attribute for edges is a
-            very since mechanism for linguistic data, since edges do not always need an
-            attribute-value pair. Sometimes it is enough to flag an edge being a specific type. If
+                <classname>SFeature</classname> element which is described in detail in <xref
+                linkend="sec_labeling"/>. Since edges do not always need an
+            attribute-value pair, the <classname>sType</classname> attribute for edges is a
+            very useful mechanism for linguistic data. Sometimes it is enough to flag an edge being a specific type. If
             this sounds to abstract for now don't worry we give detailed examples in <xref
                 linkend="sec_pointingRelation"/> and <xref linkend="sec_hierarchies"/>. <xref
-                linkend="fig_labelAndGraph"/> shows the model element label, which in Salt is called
+                linkend="fig_labelAndGraph"/> shows labels as model elements, which in Salt is called
                 <classname>SLabel</classname>, and the connection between such a label and the other
             model elements. <figure xml:id="fig_labelAndGraph">
                 <title>Label mechanism for graph, node, edge and layer</title>
@@ -269,15 +267,15 @@
             <para>Generally spoken, an annotation is an interpretation of primary data (see <xref
                     linkend="sec_primData"/>). In Salt, we differentiate this abstract form of
                 annotation into a "structural" and a "semantic" part. Imagine for instance a syntax
-                tree. In Salt, the tree itself, which is modeled by nodes and edges, would belong to
-                the structural part, whereas the assignment of a node or an edge to a category like
+                tree. In Salt, the tree itself, which is modeled by nodes and edges, belong to the
+                structural part, whereas the assignment of a node or an edge to a category like
                 being a sentence, a noun phrase etc. belongs to the semantic part. The semantic part
                 is realized by labeling a node or an edge for instance by adding a label with the
-                name "cat" and value "S" (following the tiger scheme<footnote>
+                name '<emphasis role="italic">cat</emphasis>' and value '<emphasis role="italic">S</emphasis>' (following the tiger scheme<footnote>
                     <para>see <link
                             xlink:href="http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf"
                             >http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf</link></para>
-                </footnote>, where "cat" stands for category and "S" for sentence). Note that such a
+                </footnote>, where '<emphasis role="italic">cat</emphasis>' stands for category and '<emphasis role="italic">S</emphasis>' for sentence). Note that such a
                 tagset is not part of Salt. Salt is poor of semantics, which means you can use every
                 tagset you like.</para>
             <para>We further differentiate between a linguistic annotation and a meta annotation. A
@@ -311,7 +309,7 @@
                         graph.</para>
                 </footnote> to it. Unfortunately the label <classname>SFeature</classname> is a bit
                 more complicated. The good news is, that you normally will not need to work with it,
-                when using the Salt api. The <classname>Sfeature</classname> is a mechanism to
+                when using the Salt api. The <classname>SFeature</classname> is a mechanism to
                 enhance our graph elements with class attributes<footnote>
                     <para>In UML or object oriented programming languages an attribute is part of a
                         class to store a state of a class instance.</para>
@@ -328,7 +326,7 @@
         </sect2>
     </sect1>
     <sect1>
-        <title>Components</title>
+        <title>How does Salt work?</title>
         <para>This section addresses the single components of Salt and the linguistic aspects they
             are covering. This section is divided into two parts, the corpus-structure and the
             document-stcuture. The corpus-structure is a grouping mechanism, to organize a corpus,
@@ -369,25 +367,26 @@
                     corpus-structure hierarchy. Partitioning data means that no relations between
                     data of two partitions are allowed. More concretely spoken, a document normally
                     contains a single text and all annotations corresponding to it, but no
-                    interlinks between two texts or their annotations. A text can be a paragraph, a
-                    chapter, an article or even an entire book. But a text can also be understood as
-                    the logical interpretation of it and be realized in several languages (called
-                    parallel text), or in case of historical texts in several normalized or
-                    diplomatic surrogates. These texts are often interlinked between same tokens
-                    (here 'same' means the same meaning, for instance in different languages). In
-                    that case all surrogates of a text <emphasis role="bold">HAVE TO</emphasis>
-                    belong to the same partition (document). Next to a logical partitioning,
-                    creating such documents has a high influence on processing speed and main
-                    memory. Therefore we highly recommend to keep documents as small as possible (as
-                    long as allowed by the linguistic logic behind). A document in Salt is
-                    represented by the type <classname>SDocument</classname> and can be grouped to a
-                    corpus or subcorpus by attaching it to a <classname>SCorpus</classname>. To mark
-                    a <classname>SDocument</classname> as being part of a
+                    interlinks between texts of different documents or their annotations. A text can
+                    be a paragraph, a chapter, an article or even an entire book. But a text can
+                    also be understood as the logical interpretation of it and be realized in
+                    several languages (called parallel text), or in case of historical texts in
+                    several normalized or diplomatic surrogates. These texts are often interlinked
+                    between same tokens (here 'same' means the same meaning, for instance in
+                    different languages). In that case all surrogates of a text <emphasis
+                        role="bold">HAVE TO</emphasis> belong to the same partition (document). Next
+                    to a logical partitioning, creating such documents has a high influence on
+                    processing speed and main memory. Therefore we highly recommend to keep
+                    documents as small as possible (as long as allowed by the linguistic logic
+                    behind). A document in Salt is represented by the type
+                        <classname>SDocument</classname> and can be grouped to a corpus or subcorpus
+                    by attaching it to a <classname>SCorpus</classname>. To mark a
+                        <classname>SDocument</classname> as being part of a
                         <classname>SCorpus</classname>, just connect them via a
                         <classname>SDocumentCorpusRelation</classname>.</para>
             </sect3>
             <sect3 xml:id="sec_corpusGraph">
-                <title>Corpus-Graph</title>
+                <title>Corpus graph</title>
                 <para>Since Salt is graph based over and over, the corpus-structure is represented
                     as a graph, called the <classname>SCorpusGraph</classname>. This graph realizes
                     a directed tree structure, whose nodes are corpora
@@ -401,14 +400,22 @@
                             </imageobject>
                         </mediaobject>
                     </figure>For those who prefer samples over UML diagrams, <xref
-                        linkend="fig_sample_corpusStructure"/> shows a sample containing three
-                        <classname>SCorpus</classname> objects "superCorpus", "subCorpus1" and
-                    "subCorpus2" and four <classname>SDocument</classname> objects "doc1", "doc2",
-                    "doc3" and "doc4". Two objects of type <classname>SCorpusRelation</classname>
-                    connect the "superCorpus" with "subCorpus1" and "subCorpus2". Four objects of
-                    type <classname>SDocumentCorpusRelation</classname> connect the sub-corpus
-                    "subCorpus1" with documents "doc1" and "doc2" and sub-corpus "subCorpus2" with
-                    documents "doc3" and "doc4".<figure xml:id="fig_sample_corpusStructure">
+                        linkend="fig_sample_corpusStructure"/> shows a corpus-structure containing
+                    three <classname>SCorpus</classname> objects <emphasis role="italic"
+                        >superCorpus</emphasis>, <emphasis role="italic">subCorpus1</emphasis> and
+                        <emphasis role="italic">subCorpus2</emphasis> and four
+                        <classname>SDocument</classname> objects <emphasis role="italic"
+                        >doc1</emphasis>, <emphasis role="italic">doc2</emphasis>, <emphasis
+                        role="italic">doc3</emphasis> and <emphasis role="italic">doc4</emphasis>.
+                    Two objects of type <classname>SCorpusRelation</classname> connect the <emphasis
+                        role="italic">superCorpus</emphasis> with <emphasis role="italic"
+                        >subCorpus1</emphasis> and <emphasis role="italic">subCorpus2</emphasis>.
+                    Four objects of type <classname>SDocumentCorpusRelation</classname> connect the
+                    sub-corpus subCorpus1 with documents <emphasis role="italic">doc1</emphasis> and
+                        <emphasis role="italic">doc2</emphasis> and sub-corpus <emphasis
+                        role="italic">subCorpus2</emphasis> with documents <emphasis role="italic"
+                        >doc3</emphasis> and <emphasis role="italic">doc4</emphasis>.<figure
+                        xml:id="fig_sample_corpusStructure">
                         <title>Elements being part of the corpus-structure</title>
                         <mediaobject>
                             <imageobject>
@@ -443,7 +450,9 @@
         </sect2>
         <sect2 xml:id="sec_documentStructure">
             <title>Document-structure</title>
-            <para/>
+            <para>In contrast to the corpus-structure, the document-structure covers the "real"
+                linguistic data, which means primary data, linguistic structures and annotations
+                above them. </para>
             <sect3 xml:id="sec_primData">
                 <title>Primary data</title>
                 <para>The primary data in linguistics are the center and the beginning of each
@@ -485,13 +494,13 @@
                     a set of characters, just one character or even an empty character. This allows
                     us, to use tokens free of a semantical interpretation. A token now can be a
                     word, a silible, a sentence or any other textual categorization.</para>
-                <para>The Salt type representing a token is the type <classname>SToken</classname>,
-                    a specialization of the type <classname>SNode</classname>. Such a
-                        <classname>SToken</classname> object is a placeholder for annotations and a
-                    target for interlinking. The <classname>SToken</classname> object itself does
-                    not contain any information about the overlapped primary data. In case of the
-                    primary data being text, this is realized with a specific type of
-                        <classname>SRelation</classname>, the
+                <para>The Salt element representing a token is the type
+                        <classname>SToken</classname>, a specialization of the type
+                        <classname>SNode</classname>. Such a <classname>SToken</classname> object is
+                    a placeholder for annotations and a target for interlinking. The
+                        <classname>SToken</classname> object itself does not contain any information
+                    about the overlapped primary data. In case of the primary data being text, this
+                    is realized with a specific type of <classname>SRelation</classname>, the
                         <classname>STextualRelation</classname>. A
                         <classname>STextualRelation</classname> links a primary text (as source)
                     with a token (as target), see <xref linkend="fig_model_token"/>. <figure
@@ -506,11 +515,9 @@
                     </figure> A <classname>STextualRelation</classname> further contains two labels
                     (or more precisely <classname>SFeature</classname> objects) representing the
                     start and the end position determining the interval of the primary text
-                    overlapped by the token. Although the type
-                        <classname>STextualRelation</classname> has the properties
-                        <varname>sStart</varname> and <varname>sEnd</varname>, they are modeled as
-                    derived attributes in order to have easier access on these values. <xref
-                        linkend="fig_model_token_features"/> shows that mechanism.<figure
+                    overlapped by the token. These labels are of type
+                        <classname>SFeature</classname> as shown in  <xref
+                        linkend="fig_model_token_features"/>.<figure
                         xml:id="fig_model_token_features">
                         <title>Start and end position for text intervals realized with
                                 <classname>SFeature</classname></title>
@@ -523,7 +530,7 @@
                 </para>
                 <para>Finally, <xref linkend="fig_sample_tokenization"/> gives an example of a
                     tokenization of the primary text '<emphasis role="italic">Is this example more
-                        complicated than it appears to be?</emphasis>'. <figure
+                        complicated than it appears to be?</emphasis>' modeled in Salt. <figure
                         xml:id="fig_sample_tokenization">
                         <title>A sample tokenization</title>
                         <mediaobject>
@@ -535,21 +542,23 @@
             </sect3>
             <sect3 xml:id="sec_annotation">
                 <title>Annotations</title>
-                <para>In the last sections we showed how to model the structural part of
-                    annotations. Here we want to give an impression of how to do the semantic part
-                    of it. Therefore we pick up the sample of <xref linkend="sec_tokenization"/> and
-                    especially its tokenization. We want to enhance the tokenized words with
-                    part-of-speech annotations. We already introduced the labeling mechanism in
-                        <xref linkend="sec_labeling"/>. Now we want to make use of it by adding a
-                        <classname>SAnnotation</classname> object to each token having the
-                        <classname>sName</classname> '<emphasis role="italic">pos</emphasis>' and
-                    the corresponding part-of-speech value as <classname>sValue</classname>. <xref
-                        linkend="fig_sample_token_annotation"/> shows the annotation for the
-                    previous used tokenization. <figure xml:id="fig_sample_token_annotation">
+                <para>In the last sections we showed how to model the "structural" part of
+                    annotations (we have often called it placeholder). Now we want to give an
+                    impression of how to do the "semantic" part. Therefore we pick up the sample
+                    used in <xref linkend="sec_tokenization"/> and especially its tokenization. We
+                    want to enhance the tokenized words with part-of-speech annotations. We already
+                    introduced the labeling mechanism in <xref linkend="sec_labeling"/>. Now we want
+                    to make use of it by adding a <classname>SAnnotation</classname> object to each
+                    token having the <classname>sName</classname> '<emphasis role="italic"
+                        >pos</emphasis>' and the corresponding part-of-speech value as
+                        <classname>sValue</classname>. <xref linkend="fig_sample_token_annotation"/>
+                    shows the annotation for the previous used tokenization sample.<figure
+                        xml:id="fig_sample_token_annotation">
                         <title>Part-of-speech annotations of sample tokenization</title>
                         <mediaobject>
                             <imageobject>
-                                <imagedata width="400" fileref="images/sample_tokenization_pos.png"/>
+                                <imagedata width="400" fileref="images/sample_tokenization_pos.png"
+                                />
                             </imageobject>
                         </mediaobject>
                     </figure>Each of these annotations are reducable to labels of type
@@ -565,8 +574,8 @@
                                 <imagedata width="200" fileref="images/sample_pos_annotation.png"/>
                             </imageobject>
                         </mediaobject>
-                    </figure> We here examplified the creation of annotations using the sample of
-                    part-of-speech annotations and tokens. But remember, that Salt is not bound to a
+                    </figure> We here examplified the creation of annotations by annotating tokens
+                    with part-of-speech annotations. But remember, that Salt is not bound to a
                     specific set of annotations or tagsets. This means, you can use any kind of
                     annotations with the same machanism. Furthermore adding an
                         <classname>SAnnotation</classname> is not bound to tokens. Also any
@@ -579,22 +588,17 @@
             <sect3 xml:id="sec_spans">
                 <title>Spans of tokens</title>
                 <para>A span is used to group a couple of tokens together to give them exactly the
-                    same annotation or to connect them as a bunch with a 3rd node at once. A span is
-                    an ordered set of tokens. </para>
-                <para>Let s<subscript>1</subscript> be a span, for each token
-                        t<subscript>1</subscript> and t<subscript>2</subscript> ∊
-                        s<subscript>1</subscript>: t<subscript>1</subscript> !=
-                        t<subscript>2</subscript> --> t<subscript>1</subscript> &lt;
-                        t<subscript>2</subscript> XOR t<subscript>2</subscript> &lt;
-                        t<subscript>1</subscript>. </para>
-                <para>In a graph based world, we need to model such an ordered set as nodes and
-                    edges. Therefore Salt provides the node type <classname>SSpan</classname> and
-                    the relation type <classname>SSpanningRelation</classname>. A
-                        <classname>SSpan</classname> object represents the span itself and for
-                    instance could be annotated or linked with other nodes. To realize the
-                    containment of tokens in a span, each token is connected with the span with a
-                    separate <classname>SSpanningRelation</classname> object, see <xref
-                        linkend="fig_model_span"/>. <figure xml:id="fig_model_span">
+                    same annotation or to connect them as a bunch with a 3rd node at once. A span
+                    therefore has the semantic of an ordered set. In a graph based world, we need to
+                    model such an ordered set as nodes and edges. Therefore Salt provides the node
+                    type <classname>SSpan</classname> and the relation type
+                        <classname>SSpanningRelation</classname>. A <classname>SSpan</classname>
+                    object represents the span itself and for instance could be annotated or linked
+                    with other nodes. To realize the containment of tokens in a span, each token is
+                    connected with the span with a separate <classname>SSpanningRelation</classname>
+                    object, see <xref linkend="fig_model_span"/>. A
+                        <classname>SSpanningRelation</classname> always has a span as source and a
+                    token as target.<figure xml:id="fig_model_span">
                         <title>Relation of spans in Salt via <classname>SSpan</classname> and
                                 <classname>SSpanningRelation</classname></title>
                         <mediaobject>
@@ -619,21 +623,21 @@
                         role="italic">s<subscript>1</subscript></emphasis> via a second
                         <classname>SSpanningRelation</classname>
                     <emphasis role="italic">r<subscript>2</subscript></emphasis> as shown in <xref
-                        linkend="fig_sample_span"/>. <figure xml:id="fig_sample_span">
+                        linkend="fig_sample_span"/>. Since a <classname>SSpan</classname> is just a
+                    node, it can be further annotated for instance with an annotation '<emphasis
+                        role="italic">entity= city</emphasis>'.<figure xml:id="fig_sample_span">
                         <title>'New York'-sample as Salt objects</title>
                         <mediaobject>
                             <imageobject>
                                 <imagedata width="100" fileref="images/sample_span.png"/>
                             </imageobject>
                         </mediaobject>
-                    </figure> Since a <classname>SSpan</classname> is just a node, it can be further
-                    annotated for instance with an annotation '<emphasis role="italic">entity=
-                        city</emphasis>'. Spans can even be very helpful to annotate bigger parts of
-                    the primary text, for instance to annotate information structure or foreign
-                    language parts etc. . Also a <classname>SSpanningRelation</classname> can carry
-                    further annotations, but this is rather unusual since such an edge has no own
-                    linguistic semantics and is just a technical mechanism to model ordered sets in
-                    a graph.</para>
+                    </figure> Spans can even be very helpful to annotate bigger parts of the primary
+                    text, for instance to annotate information structure or foreign language parts
+                    etc. . Also a <classname>SSpanningRelation</classname> can carry further
+                    annotations, but this is rather unusual since such an edge has no own linguistic
+                    semantics and is just a technical mechanism to model ordered sets in a
+                    graph.</para>
             </sect3>
             <sect3 xml:id="sec_hierarchies">
                 <title>Hierarchies</title>
@@ -641,12 +645,12 @@
                     structure behind the surface of a text. For instance, a widely used mechanism to
                     describe phrase structures are syntax trees. The term syntax trees implies that
                     these hierarchies are trees, even in a graph sense. Which means, they consists
-                    of nodes and edges and are therefore easy to model in Salt. Salt offers a
-                    specific kind of node, the <classname>SStructure</classname>, and a specific
-                    kind of edge, the <classname>SDominanceRelation</classname>. The source of an
-                        <classname>SDominanceRelation</classname> object always is a
+                    of nodes and relations and are therefore easy to model in Salt. Salt offers a
+                    specific type of node, the <classname>SStructure</classname>, and a specific
+                    type of relation, the <classname>SDominanceRelation</classname>. The source of
+                    an <classname>SDominanceRelation</classname> could be a
                         <classname>SToken</classname>, <classname>SSpan</classname> or even a
-                        <classname>SStructure</classname> object as shown in <xref
+                        <classname>SStructure</classname> as shown in <xref
                         linkend="fig_model_hierarchie"/>. The unit of both elements enables to
                     create unbound hierarchies above a tokenization. </para>
                 <figure xml:id="fig_model_hierarchie">
@@ -679,7 +683,8 @@
                         linkend="fig_sample_hierarchie1"/> and <xref
                         linkend="fig_sample_hierarchie2"/>.</para>
                 <figure xml:id="fig_sample_hierarchie1">
-                    <title>Syntax tree 1</title>
+                    <title>Syntax tree (t<subscript>3</subscript> directly dominated by
+                            s<subscript>1</subscript>)</title>
                     <mediaobject>
                         <imageobject>
                             <imagedata width="100" fileref="images/sample_hierarchies1.png"/>
@@ -687,7 +692,8 @@
                     </mediaobject>
                 </figure>
                 <figure xml:id="fig_sample_hierarchie2">
-                    <title>Syntax tree 2</title>
+                    <title>Syntax tree (t<subscript>3</subscript> indirectly dominated by
+                            s<subscript>1</subscript>)</title>
                     <mediaobject>
                         <imageobject>
                             <imagedata width="100" fileref="images/sample_hierarchies2.png"/>
@@ -697,44 +703,45 @@
             </sect3>
             <sect3 xml:id="sec_pointingRelation">
                 <title>Loose relation</title>
-                <para>Sometimes it is necessary to set objects into a very loose relationship, into
-                    a kind of an interlinking, which does not influence the objects themselves. Such
-                    a relation is the type <classname>SPointingRelation</classname>. A pointing
+                <para>Sometimes it is necessary to set objects into a very loose relationship, as a
+                    kind of an interlinking, which does not influence the objects themselves. Such a
+                    relation is the type <classname>SPointingRelation</classname>. A pointing
                     relation in Salt allows to relate any kind of nodes with each other. In general,
                     this type of relation has no semantics and could be used for a wide range of
                     annotations, which does not group or structure nodes. For instance, this could
                     be very helpful for a dependency analysis or coreferences etc. . </para>
-                <para>To give an example, imagine the text '<emphasis role="italic">John ...
-                        he</emphasis>', where '<emphasis role="italic">John</emphasis>' (token
-                        <emphasis role="italic">t<subscript>1</subscript></emphasis>) and '<emphasis
-                        role="italic">he</emphasis>' (token <emphasis role="italic"
-                            >t<subscript>2</subscript></emphasis>) refer to the same entity. To
-                    express that in Salt, you can create a <classname>SPoiningRelation</classname>
-                    object having the <classname>sSource</classname>
+                <para>To give an example, imagine the text '<emphasis role="italic">John was a big
+                        man  ... he always had to move his head</emphasis>', where '<emphasis
+                        role="italic">John</emphasis>' (token <emphasis role="italic"
+                            >t<subscript>1</subscript></emphasis>) and '<emphasis role="italic"
+                        >he</emphasis>' (token <emphasis role="italic"
+                        >t<subscript>i</subscript></emphasis>) refer to the same entity. To express
+                    that in Salt, you can create a <classname>SPoiningRelation</classname> object
+                    having the <classname>sSource</classname>
                     <emphasis role="italic">t<subscript>1</subscript></emphasis> and the
                         <classname>sTarget</classname>
-                    <emphasis role="italic">t<subscript>2</subscript></emphasis>, or the other way
+                    <emphasis role="italic">t<subscript>i</subscript></emphasis>, or the other way
                     around. Now let's extend this example and imagine the text '<emphasis
                         role="italic">John Doe ... he</emphasis>', with the tokens <emphasis
                         role="italic">t<subscript>1</subscript></emphasis> ('<emphasis role="italic"
                         >John</emphasis>'), <emphasis role="italic"
                         >t<subscript>2</subscript></emphasis> ('<emphasis role="italic"
                         >Doe</emphasis>') and <emphasis role="italic"
-                        >t<subscript>3</subscript></emphasis> ('<emphasis role="italic"
+                        >t<subscript>i</subscript></emphasis> ('<emphasis role="italic"
                         >he</emphasis>'). In this case, we want to set '<emphasis role="italic">John
                         Doe</emphasis>' as a whole in relation to '<emphasis role="italic"
                         >he</emphasis>'. This is possible by creating a <classname>SSpan</classname>
                     object <emphasis role="italic">s<subscript>1</subscript></emphasis> containing
                         <emphasis role="italic">t<subscript>1</subscript></emphasis> and <emphasis
                         role="italic">t<subscript>2</subscript></emphasis> and relating the token
-                        <emphasis role="italic">t<subscript>3</subscript></emphasis> via a
+                        <emphasis role="italic">t<subscript>i</subscript></emphasis> via a
                         <classname>SPointingRelation</classname> object to <emphasis role="italic"
                             >s<subscript>1</subscript></emphasis>.</para>
-                <para>Just like all other relations, <classname>SPointingRelation</classname> can be
-                    annotated to express some linguistic semantics. If there is no
-                    attribute-value-pair and just a single value like to determine this is a
-                    coreferential relation or a dependency, you can use the <varname>sType</varname>
-                    attribute which is available for every <classname>SRelation</classname>. </para>
+                <para>To determine a <classname>SPointingRelation</classname> being a coreferential
+                    relation or a dependency, you can use the <varname>sType</varname> attribute
+                    which is available for every <classname>SRelation</classname>. Like all the
+                    other relations, <classname>SPointingRelation</classname> can be annotated to
+                    express some linguistic semantics.</para>
             </sect3>
             <sect3 xml:id="sec_layer">
                 <title>Layer</title>
@@ -751,11 +758,11 @@
                     Imagine a set of spans annotating the information structure of a text and
                     another set of spans annotating the typological fields.</para>
                 <para>In Salt, each node and each edge can belong to an unbound number of layers.
-                    Furthermore, a layer can also contain a layer. Imagine our first example. Here
-                    the syntactic layer can contain the morphological layer, and as a result, all
-                    tokens are part of the syntactic layer as well. A layer is represented with the
-                    element <classname>SLayer</classname> has a name and can be annotated in the
-                    same way as nodes and edges can be. <xref linkend="fig_sLayers"/> shows the
+                    Furthermore, a layer can also contain another layer. For instance a syntactic
+                    layer can contain a morphological layer. This makes all tokens being part of the
+                    syntactic layer as well. A layer is represented with the element
+                        <classname>SLayer</classname> has a name and can be annotated in the same
+                    way as nodes and edges can be. <xref linkend="fig_sLayers"/> shows the
                     relationship between layers nodes and edges in Salt. <figure
                         xml:id="fig_sLayers">
                         <title><classname>SLayer</classname> as a subgraph</title>
@@ -769,28 +776,27 @@
             </sect3>
             <sect3 xml:id="sec_multipleTexts">
                 <title>Multiple primary texts</title>
-                <subtitle>parallel texts</subtitle>
+                <subtitle>On the exmple of parallel texts</subtitle>
                 <para>A lot of corpus projects in linguistics are more complex than handling just
                     one primary text. They address parallel data dealing with multiple texts, for
-                    instance to compare different languages, different XXX Sprachstufen XXX or to
-                    handle dialogue data with multiple speakers. In Salt the number of primary texts
-                    (element <classname>STextualDS</classname>) or primary data (element
+                    instance to compare different languages, different historical stages of language
+                    or to handle dialogue data with multiple speakers. In Salt the number of primary
+                    texts (element <classname>STextualDS</classname>) or primary data (element
                         <classname>SDataSource</classname>) is not limited. </para>
                 <para>We want to demonstrate the use of multiple texts by creating a parallel corpus
-                    for the languages English and German. Demonstrations how to model different XXX
-                    Sprachstufen XXX and dialogue data please take a look to <xref
-                        linkend="sec_time"/> and <xref linkend="sec_order"/>. Imagine the primary
-                    text '<emphasis role="italic">Is this example more complicated than it appears
-                        to be?'</emphasis> and its German translation '<emphasis role="italic">Ist
-                        dieses Beispiel komplizierter als es zu sein scheint?</emphasis>'. Creating
-                    two <classname>STextualDs</classname> objects '<emphasis role="italic"
-                        >text1</emphasis>' and '<emphasis role="italic">text2</emphasis>' containing
-                    the one of the texts each is rather simple<footnote>
+                    for the languages English and German. Demonstrations how to model dialogue data
+                    please find in <xref linkend="sec_time"/> and <xref linkend="sec_order"/>.
+                    Imagine the primary text '<emphasis role="italic">Is this example more
+                        complicated than it appears to be?'</emphasis> and its German counterpart
+                        '<emphasis role="italic">Ist dieses Beispiel komplizierter als es zu sein
+                        scheint?</emphasis>'. Creating two <classname>STextualDs</classname> objects
+                        '<emphasis role="italic">text1</emphasis>' and '<emphasis role="italic"
+                        >text2</emphasis>' each containing one of the texts is rather simple<footnote>
                         <para>Each primary text is is stored in the attribute
                                 <classname>STextualDS.sText</classname>, see <xref
                                 linkend="sec_primData"/></para>
-                    </footnote> and the more interesting question is how to align the single words
-                    as being translations of each other. In case you are not so familar with German<footnote>
+                    </footnote>. The more interesting question is how to align the single words as
+                    being translations of each other. In case you are not so familar with German<footnote>
                         <para>By the way what is a pitty.</para>
                     </footnote>, we here present the translation alignment for the tokenized
                     texts:<programlisting>Is    this     example    more complicated   than   it   appears   to   be?
@@ -799,27 +805,30 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                     and for our example mostly have a word to word translation, we also have one
                     case, where the two English words '<emphasis role="italic">more
                         complicated</emphasis>' are translated to a single German word '<emphasis
-                        role="italic">komplizierter</emphasis>'. To bring two tokens for instance
-                        <emphasis role="italic">t<subscript>1e</subscript></emphasis> and <emphasis
-                        role="italic">t<subscript>1g</subscript></emphasis> in relation to each
-                    other, you can create a <classname>SPointingRelation</classname>
+                        role="italic">komplizierter</emphasis>'. </para>
+                <para>To bring two tokens for instance <emphasis role="italic"
+                            >t<subscript>1e</subscript></emphasis> and <emphasis role="italic"
+                            >t<subscript>1g</subscript></emphasis><footnote>
+                        <para>Where e stands for English and g for german</para>
+                    </footnote> in relation to each other, you can create a
+                        <classname>SPointingRelation</classname>
                     <emphasis role="italic">r<subscript>1</subscript></emphasis> which's source is
                         <emphasis role="italic">t<subscript>1e</subscript></emphasis> and target is
                         <emphasis role="italic">t<subscript>1g</subscript></emphasis>. Now they are
-                    connected, but more in a technical than in a semantic way. To also the linguisic
-                    meaning to that relation, you can use the value
-                        <classname>SPointingRelation.sType</classname> and add for instance the type
-                        '<classname>translation</classname>'. For such a sample, our linguistic
-                    intention to determine that <emphasis role="italic"
-                        >t<subscript>1e</subscript></emphasis> is the translation of <emphasis
-                        role="italic">t<subscript>1g</subscript></emphasis> and even the way around,
-                    the graph structure differs in detail. As our graph is a directed graph, we do
-                    not really have such a bidirectional relation. Depending on the interpretation
-                    of the corpus, it might be useful to create a second relation having <emphasis
-                        role="italic">t<subscript>1g</subscript></emphasis> as source and <emphasis
-                        role="italic">t<subscript>1e</subscript></emphasis> as target and to mark
-                    both relations as '<emphasis role="italic">trans_en_de</emphasis>' and
-                        '<emphasis role="italic">trans_de_en</emphasis>'.</para>
+                    connected, but more in a technical than in a semantic sense. To add the
+                    linguisic meaning to that relation, you can use the <classname>sType</classname>
+                    attribute and add for instance the type '<classname>translation</classname>'.
+                    For such a sample, our linguistic intention to determine that <emphasis
+                        role="italic">t<subscript>1e</subscript></emphasis> is the translation of
+                        <emphasis role="italic">t<subscript>1g</subscript></emphasis> and even the
+                    way around, the graph structure differs in detail. As our graph is a directed
+                    graph, we do not really have such a bidirectional relation. Depending on the
+                    interpretation of the corpus, it might be useful to create a second relation
+                    having <emphasis role="italic">t<subscript>1g</subscript></emphasis> as source
+                    and <emphasis role="italic">t<subscript>1e</subscript></emphasis> as target and
+                    to mark both relations as being either '<emphasis role="italic"
+                        >trans_en_de</emphasis>' or '<emphasis role="italic"
+                    >trans_de_en</emphasis>'.</para>
                 <para>Now comming to the more complex case of aligning the tokens <emphasis
                         role="italic">t<subscript>4e</subscript></emphasis> ('<emphasis
                         role="italic">more</emphasis>'), <emphasis role="italic"
@@ -836,8 +845,9 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                         role="italic">t<subscript>4g</subscript></emphasis> as its target. </para>
                 <para>If your individual case is even more complicated and needs to realize an n:m
                     translation, just use spans on both sides. Group the tokens of the first
-                    language to a span and groupt the tokens of the second language to a span. Then
-                    connect both spans with a <classname>SPointingRelation</classname>. </para>
+                    language to a span and group the tokens of the second language to a span. Then
+                    connect the span on th eone side with the tokens on the other side with a
+                        <classname>SPointingRelation</classname>. </para>
                 <para>In our sample we used just two languages for a better readability. Note that
                     Salt is not bound to a fixed number of primary texts, which allows to model as
                     many parallel texts with as many relations between their tokenizations as you
@@ -847,7 +857,7 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
             </sect3>
             <sect3 xml:id="sec_time">
                 <title>Time management</title>
-                <subtitle>dialogue data</subtitle>
+                <subtitle>On the exmple of dialogue data</subtitle>
                 <note>
                     <para>compare that with
                         https://korpling.german.hu-berlin.de/p/projects/saltnpepperinternal/wiki/Salt_timeDiscussion</para>
@@ -857,29 +867,26 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                     does not address the timely progression of a text like "<emphasis role="bold"
                         >Before</emphasis> Bart went to school, he stood up."<footnote>
                         <para>The modeling of such semantic issues is up to the user, for instance
-                            the ISO approach of TimeML (see XXX) covers that.</para>
+                            the ISO approach of ISO-TimeML covers things like that.</para>
                     </footnote> With time management we mean the fact of ordering tokens in a
-                    primary text along their temporal occurance. This often becomes necessary for
-                    multiple texts. In Salt this is handled by introducing a global<footnote>
+                    primary text along their temporal occurance. This often becomes necessary when
+                    dealing with multiple texts. In Salt this is handled by introducing a global<footnote>
                         <para>Global here means global for one document-structure.</para>
-                    </footnote> unique timeline which is connected with each token. The timeline in
-                    Salt is represented by the element <classname>STimeline</classname> and can be
-                    related with tokens via <classname>STimelineRelation</classname> objects. In
-                        <xref linkend="sec_multipleTexts"/> we discussed the mechanism of how to
-                    model multiple primary texts in Salt. Now we wan't to introduce Salts time
-                    management along the example of modelling dialogue data. </para>
+                    </footnote> unique timeline which is connected with each token.</para>
                 <para>A lot of linguistic projects do not only address written texts, they further
                     annotate spoken data. Spoken data differs in two main issues from written data.
                     First, the data source differs, since the primary data of spoken data is mostly
                     an audio or video stream. Since Salt was developed for covering textual data,
                     for now, we expect that there is also a textual representation of the audio or
-                    video data. But nevertheless Salt also allows to represent such data. The
-                    mechanism how is addressed in detail in <xref linkend="sec_audioData"/>. Second,
-                    in many cases we do not have one continuous text, since there are multiple
+                    video data. But nevertheless Salt also allows to represent such data. This
+                    mechanism is addressed in detail in <xref linkend="sec_audioData"/>. Second, in
+                    many cases we do not have one continuous text, since there are multiple
                     speakers, which might speak at the same time. We recommand to model each text,
-                    belonging to one speaker, in a separate <classname>STextualDS</classname>
-                    object. To give a more concrete example, imagine the following to texts produced
-                    by speakers '<emphasis role="italic">spk1</emphasis>' and '<emphasis
+                    belonging to one speaker, in a separate <classname>STextualDS</classname> object<footnote>
+                        <para>In section <xref linkend="sec_multipleTexts"/> we discussed the
+                            mechanism to model multiple primary texts in Salt.</para>
+                    </footnote>. To give a more concrete example, imagine the following two texts
+                    produced by speakers '<emphasis role="italic">spk1</emphasis>' and '<emphasis
                         role="italic">spk2</emphasis>': <table frame="all" xml:id="table_overview">
                         <title>Two speakers ('<emphasis role="italic">spk1</emphasis>' and
                                 '<emphasis role="italic">spk2</emphasis>') and the corresponding
@@ -934,9 +941,9 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                                 </row>
                             </tbody>
                         </tgroup>
-                    </table> This sample shows the tokenized texts of the two speakers and the
-                    correspondance of each token, two an interval in the timeline. For instance the
-                    token '<emphasis role="italic">Is</emphasis>' (<emphasis role="italic"
+                    </table> This sample shows the tokenized two texts and the correspondance of
+                    each token to an interval in the timeline. For instance the token '<emphasis
+                        role="italic">Is</emphasis>' (<emphasis role="italic"
                             >t<subscript>1</subscript></emphasis>) of speaker '<emphasis
                         role="italic">spk1</emphasis>' corresponds to an interval starting at 0 and
                     ending at 1<footnote>
@@ -946,8 +953,8 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                     of <classname>SNode</classname> and the <classname>STimelineRelation</classname>
                     is a subtype of <classname>SRelation</classname> having two attributes
                         (<classname>SFeature</classname> objects) <classname>sStart</classname> and
-                        <classname>sEnd</classname> determining the borders of the time interval.
-                    This is shown in <xref linkend="fig_time"/>
+                        <classname>sEnd</classname> determining the start and end of the time
+                    interval. This is shown in <xref linkend="fig_time"/>
                     <figure xml:id="fig_time">
                         <title>Token 'Is' related to common timeline</title>
                         <mediaobject>
@@ -956,47 +963,42 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                                 <imagedata width="350" fileref="images/graph_model.png"/>
                             </imageobject>
                         </mediaobject>
-                    </figure> This mechanism is quite simple, since it is the same mechanism as the
-                    way of corresponding a token to a primary text. It might become more interesting
-                    in case of the time interval between 7 and 9. In that case the text of
-                        '<emphasis role="italic">spk1</emphasis>' covers two tokens (<emphasis
-                        role="italic">t<subscript>spk1_8</subscript></emphasis> and <emphasis
-                        role="italic">t<subscript>spk1_9</subscript></emphasis>), and the text of
-                        '<emphasis role="italic">spk2</emphasis>' (<emphasis role="italic"
-                            >t<subscript>spk2_1</subscript></emphasis>) covers one token. But
-                    modelling this is also very straight forward, because you can connect them via
-                    three <classname>STimeRelation</classname> objects. For <emphasis role="italic"
-                            >t<subscript>spk1_8</subscript></emphasis> with the interval [7, 8],
-                        <emphasis role="italic">t<subscript>spk1_9</subscript></emphasis> with the
-                    interval [8, 9] and finally for <emphasis role="italic"
-                            >t<subscript>spk2_1</subscript></emphasis> with the interval [7, 9].
-                    With these abstract points-of-time (like 1,2,3,4, ...), it is possible to set an
-                    unbound number of tokens and primary texts in relation to the common timeline.
-                    In theory, the timeline in Salt is implicitly always there, even in a single
-                    primary text, it could be easily computed by the order of the tokens given by
-                    the text. But in real implementation, it is not explicitly given if not needed
-                    to save memory space. When dealing with audio and video data it might be
-                    necessary, not only to use abstract points-of-time (like 1,2,3,4,...), but
-                    specific ones (like 00:00:00, 00:00:01, 01:12:20 etc.) as well. How to model
-                    such specific intreval borders we show in <xref linkend="sec_audioData"
-                    />.</para>
+                    </figure> This mechanism is quite simple, since it is the same mechanism as
+                    corresponding a token to a primary text. It might become more interesting in
+                    case of the time interval between 7 and 9. In that interval the text of
+                        <emphasis role="italic">spk1</emphasis> covers the two tokens <emphasis
+                        role="italic">t<subscript>spk1_8</subscript></emphasis> ('<emphasis
+                        role="italic">appears</emphasis>')and <emphasis role="italic"
+                            >t<subscript>spk1_9</subscript></emphasis> ('<emphasis role="italic"
+                        >to</emphasis>'), and the text of <emphasis role="italic">spk2</emphasis>
+                    just covers the  token <emphasis role="italic"
+                        >t<subscript>spk2_1</subscript></emphasis> ('<emphasis role="italic"
+                        >Uhm</emphasis>'). But modelling this is also very straight forward, because
+                    you can connect them via three <classname>STimeRelation</classname> objects: 1)
+                        <emphasis role="italic">t<subscript>spk1_8</subscript></emphasis> with the
+                    interval [7, 8], 2) <emphasis role="italic"
+                        >t<subscript>spk1_9</subscript></emphasis> with the interval [8, 9] and 3)
+                        <emphasis role="italic">t<subscript>spk2_1</subscript></emphasis> with the
+                    interval [7, 9]. With these abstract points-of-time (like 1,2,3,4, ...), it is
+                    possible to set an unbound number of tokens in relation to the common
+                    timeline.</para>
             </sect3>
             <sect3 xml:id="sec_order">
                 <title>Ordering tokens</title>
                 <para>In this section we address the order of tokens in one or multiple texts. In a
                     single ordinary primary text, the order might not be an issue, since the natural
                     order of tokens is along their occurence in primary text. In a Salt model all
-                    tokens are contained in a single list, which is sorted by the insertion of the
-                    tokens. Imagine a primary text "<emphasis role="italic">This is a
-                        sample</emphasis>" tokenized in 4 tokens. If token <emphasis role="italic"
+                    tokens are contained in a single list, which is sorted by their insertion.
+                    Imagine a primary text '<emphasis role="italic">This is a sample</emphasis>'
+                    tokenized in 4 tokens. If token <emphasis role="italic"
                             >t<subscript>3</subscript></emphasis> ("a") was inserted into the list
                     before token <emphasis role="italic">t<subscript>2</subscript></emphasis> ("is")
                     was inserted, the order of the list would be <emphasis role="italic"
                             >t<subscript>1</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>3</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>2</subscript></emphasis>, <emphasis role="italic"
-                            >t<subscript>4</subscript></emphasis>. Salt provides methods to reorder
-                    this list along the offset in primary text
+                            >t<subscript>4</subscript></emphasis>. In that case, the list could be
+                    reordered in temporal order, which means along the offset in primary text
                         (<classname>STextualRelatuin.sLeft</classname>). But what is with multiple
                     texts? If we have multiple texts and order the corresponding tokens by their
                     textual offset, we will end up with a mixed list of tokens of both texts.
@@ -1046,48 +1048,66 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                                 </row>
                             </tbody>
                         </tgroup>
-                    </table>This will result in a list of the order: <emphasis role="italic"
-                            >t<subscript>1</subscript></emphasis>, <emphasis role="italic"
+                    </table>This could result in: <emphasis role="italic"
+                        >t<subscript>1</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>2</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>3</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>21</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>4</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>22</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>23</subscript></emphasis>, <emphasis role="italic"
-                            >t<subscript>24</subscript></emphasis>. This list now represents the
-                    temporal order, but the tokens are also mixed in sense of the correspondance to
-                    the primary texts.</para>
-                <itemizedlist>
-                    <listitem>
-                        <para>ordering can be understood and realized in several ways or dimensions.
-                            What in one case can be a good order, can be very wrong in another case.
-                            To respect this, Salt provides different meanings of order. In the
-                            following we will go step by step, throuh their different levels.</para>
-                    </listitem>
-                    <listitem>
-                        <para>general order via list behaviour, where is the problem -> list is
-                            sorted by order of inserts :-( can be rearanged</para>
-                    </listitem>
-                    <listitem>
-                        <para>order is implicit by order in text -> what is with parallel data ->
-                            order by timeline</para>
-                    </listitem>
-                    <listitem>
-                        <para>what is with tokens at same time, or for instance subtokenization (see
-                            segmentation)</para>
-                    </listitem>
-                    <listitem>
-                        <para>therefore we have SOrderRelation</para>
-                    </listitem>
-                </itemizedlist>
+                            >t<subscript>24</subscript></emphasis>.<footnote>
+                        <para>Note, for two identical time intervals it is not clear, which token
+                            comes first.</para>
+                    </footnote> This list now represents the temporal order, but the tokens are also
+                    mixed in sense of the correspondance to the primary texts. So it depends on what
+                    you want to do with the data, to know which order might be the best.</para>
+                <para>Another way of ordering the tokens is an explicit order via the specific
+                    relation <classname>SOrderRelation</classname>. This relation allows to relate
+                    the node types <classname>SToken</classname>, <classname>SSpan</classname> and
+                        <classname>SStructure</classname>. With this relation you can create a path
+                    through the graph to represent any kind of order. But note, this path must be
+                    acyclic. When setting the <classname>sType</classname> of that relation, you can
+                    name the path. To give an example, imagine the text '<emphasis role="italic">The
+                        streets of New York</emphasis>' and a tokenization of
+                        t<subscript>1</subscript> ('<emphasis role="italic">The</emphasis>'),
+                        t<subscript>2</subscript> ('<emphasis role="italic">streets</emphasis>'),
+                        t<subscript>3</subscript> ('<emphasis role="italic">of</emphasis>'),
+                        t<subscript>4</subscript> ('<emphasis role="italic">New</emphasis>') and
+                        t<subscript>5</subscript> ('<emphasis role="italic">York</emphasis>'). Since
+                    you may want to annotate t<subscript>4</subscript> and t<subscript>5</subscript>
+                    as one word, you can create a span s<subscript>1</subscript> containing both
+                    tokens. A path of wordforms given by <classname>SOrderRelation</classname>s
+                    could now be: t<subscript>1</subscript>, t<subscript>2</subscript>,
+                        t<subscript>3</subscript>, s<subscript>1</subscript> as shown in <xref
+                        linkend="fig_order_path"/>
+                    <figure xml:id="fig_order_path">
+                        <title>Path of wordforms</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="350" fileref="images/sample_order_path.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure> Another use case for <classname>SOrderRelation</classname> objects are
+                    parallel tokenizations. For instance a tokenization of characters or letters
+                    and one by wordformss. Here it may make sense, to create two pathes, one for the
+                    characters and one for the wordforms as shown in <xref linkend="fig_order_path2"/>.
+                    <figure xml:id="fig_order_path2">
+                        <title>Path of wordforms</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="350" fileref="images/sample_order_path2.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure>
+                </para>
             </sect3>
             <sect3 xml:id="sec_audioData">
                 <title>Audio data</title>
                 <para>Next to textual born data like news paper articles, essays, internet chats
                     etc. linguistics is also interested in spoken data like dialogues etc. . Even if
-                    Salt is a text based model for linguistic data, it can also deal with audio data
-                    in two different ways. That means, that audio data can be annotations or primary
-                    data. To create an audio annotation, the
+                    Salt is a text based model, it can also deal with audio data. Audio data can be
+                    modeled as annotations or primary data. To create an audio annotation, the
                         <classname>SAnnotation.sValue</classname> must be set to an URI pointing to
                     the audio file. To use audio data as primary data, Salt contains the model
                     elements <classname>SAudioDataSource</classname> and
@@ -1096,14 +1116,19 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                         <classname>STextualRelation</classname>. The element
                         <classname>SAudioDataSource</classname> is also derived from the element
                         <classname>SSequentialDS</classname>, it provides the field
-                        <classname>sAudioReference</classname> wich contains a URI referring to an
+                        <classname>sAudioReference</classname> which contains a URI referring to an
                     audio file. With an object of type <classname>SAudioDSRelation</classname>, we
                     now can connect such audio data with a token. To address a range in the entire
                     audio stream, the element <classname>SAudioDSRelation</classname> contains the
                     fields <classname>sStart</classname> and <classname>sEnd</classname> to address
-                    the beginning and the end of that range. <xref linkend="fig_sAudioData"/> shows
-                    the named elements in Salt and their relation to each other. <figure
-                        xml:id="fig_sAudioData">
+                    the beginning and the end of that range as shown in <xref
+                        linkend="fig_sAudioData"/>. For instance to address a range beginning at
+                    00:00:00 and ending 00:00:01. Since one second could be very long for spoken
+                    data, the start and end value is a very fine granular floating point number with
+                    a precision of 64-bit IEEE 754.<footnote>
+                        <para>A start value of 0,0 and a end value of 1.0 represents one second and
+                            an end value of 0.001 represents one millisecond.</para>
+                    </footnote><figure xml:id="fig_sAudioData">
                         <title>audio data in Salt</title>
                         <mediaobject>
                             <imageobject>
@@ -1111,20 +1136,18 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                             </imageobject>
                         </mediaobject>
                     </figure></para>
-                <para> As already mentioned, Salt was created to handle textual data in the first
-                    place, it is usual to also have a transcription of these audio data in Salt. To
-                    connect tokens to a primary text next to an audio source is quite simple. You
-                    just need to create <classname>STextualRelation</classname> objects and let them
-                    point to the <classname>STextualDS</classname> object containing the primary
-                    text. Imagine the primary text "Is this example more complicated than it appears
-                    to be?", which is tokenized by words and a corresponding audio file. <xref
-                        linkend="fig_audioSample"/> shows the relation of a token <emphasis
+                <para> Since Salt expects a textual transcription corresponding to audio data it is
+                    necessary to connect a token with first the audio data, second the primary text
+                    and eventually third the timeline. Imagine the primary text '<emphasis
+                        role="italic">Is this example more complicated than it appears to
+                        be?</emphasis>', which is tokenized by words and a corresponding audio file.
+                        <xref linkend="fig_audioSample"/> shows the relation of the token <emphasis
                         role="italic">tok1</emphasis> (just as a sample), the primary text <emphasis
-                        role="italic">text1</emphasis>, the audio date <emphasis role="italic"
+                        role="italic">text1</emphasis> and the audio date <emphasis role="italic"
                         >audio1</emphasis> via the <classname>STextualRelation</classname> object
-                        <emphasis role="italic">sTextRel</emphasis> and the
+                        <emphasis role="italic">sTextRel1</emphasis> and the
                         <classname>SAudioDSRelation</classname>
-                    <emphasis role="italic">sAudioRel</emphasis>.<figure xml:id="fig_audioSample">
+                    <emphasis role="italic">sAudioRel1</emphasis>.<figure xml:id="fig_audioSample">
                         <title>A sample of audio data in combination with primary text</title>
                         <mediaobject>
                             <imageobject>
@@ -1133,22 +1156,92 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                         </mediaobject>
                     </figure></para>
                 <para>In Salt, the number of <classname>SAudioDataSource</classname> objects a model
-                    can have is not restricted and you can add as many of them as you like. You can
-                    also combine the use of multiple audio and textual primary data with the use of
-                    a common timeline. The use of the timeline allows you to model the temporal
-                    order of tokens in such a case. Imagine a dialogue consisting of two speakers,
-                    an audio recording for each speaker <emphasis role="italic">audio1</emphasis>
-                    and <emphasis role="italic">audio2</emphasis> and a corresponding transcription
-                    to each audio recording <emphasis role="italic">text1</emphasis> and <emphasis
-                        role="italic">text2</emphasis>.  Since in an ordenary dialogue, the speakers
-                    are somtimes talking disordered or in parallel, the temporal order cannot be
-                    represented by the order of the tokens. To do so, you just need to add an object
-                    of type <classname>STimeRelation</classname> and connect each token with the
-                    time line, for more information see <xref linkend="sec_time"/>.</para>
+                    can have is not restricted and you can add as many of them as you like. </para>
+                <para>You can also combine the use of multiple audio and textual primary data with
+                    the use of the common timeline. The use of the timeline allows you to model the
+                    temporal order of tokens in such a case. This could be very useful in case of
+                    you have to model a dialogue, where each speaker is represented in an own
+                    audiofile and a separate transcription. With the timeline you can align the
+                    tokens in temporal order to each other. Imagine a dialogue consisting of two
+                    speakers, an audio recording for each speaker <emphasis role="italic"
+                        >audio1</emphasis> and <emphasis role="italic">audio2</emphasis> and a
+                    corresponding transcription to each audio recording <emphasis role="italic"
+                        >text1</emphasis> and <emphasis role="italic">text2</emphasis>. To connect
+                    the tokens with the common timeline, you just need to a
+                        <classname>STimeRelation</classname> having the token as its source and the
+                    time line as its target. For more information on that see <xref
+                        linkend="sec_time"/>.</para>
             </sect3>
             <sect3 xml:id="sec_id">
-                <title>Identifying an object via SName, SId and SElementId</title>
-                <para/>
+                <title>Names and Ids</title>
+                <para> In Salt each node, edge or layer can have a name. Each of those objects
+                    contain a field names <classname>SName</classname> (which is a String value).
+                    The <classname>sName</classname> is added using the
+                        <classname>SFeature</classname> mechanism (see <xref linkend="sec_sfeature"
+                    />). In Salt, there are no restrictions on that name, it even does not have to
+                    be unique. Because of that, the <classname>sName</classname> could not reliably
+                    be used to identify exact a single object in Salt.</para>
+                <para>To identify objects, in Salt each object (except a label and therefore all
+                    types of annotations) provides a unique identifier the
+                        <classname>SElementId</classname>. This identifier is unique for the whole
+                    document-structure or corpus-structure and is created by the containing graph
+                    object. An <classname>SElementId</classname> object is structured as an URI
+                    having the scheme <emphasis role="italic">salt</emphasis> and using segments for
+                    single Salt objects. Such a segment is given by the <classname>sName</classname>
+                    of an object, if that name is unique. If not it is extended by an artificial
+                    counter to make it unique. In the corpus-structure, the
+                        <classname>SElementId</classname> represents the path from the root corpus
+                    to a specific object (<classname>SCorpus</classname> or
+                        <classname>SDocument</classname>). For instance imagine the corpus-structure
+                    shown in <xref linkend="fig_sample_selementId"/>
+                    <figure xml:id="fig_sample_selementId">
+                        <title>A sample corpus-structure containing 3 corpora and 4
+                            documents</title>
+                        <mediaobject>
+                            <imageobject>
+                                <imagedata width="150" fileref="images/sample_corpusStructure_id.png"/>
+                            </imageobject>
+                        </mediaobject>
+                    </figure> This corpus-structure results in the following
+                        <classname>SElementId</classname> objects: <table frame="all"
+                        xml:id="table_SElementId">
+                        <title><classname>SElementId</classname>s corresponding to <xref
+                                linkend="fig_sample_selementId"/>.</title>
+                        <tgroup align="left" cols="10" colsep="1" rowsep="1">
+                            <colspec colname="c1" colnum="1"/>
+                            <tbody>
+                                <row>
+                                    <entry>salt:/corp1</entry>
+                                </row>
+                                <row>
+                                    <entry>salt:/corp1/corp2</entry>
+                                </row>
+                                <row>
+                                    <entry>salt:/corp1/corp2/doc1</entry>
+                                </row>
+                                <row>
+                                    <entry>salt:/corp1/corp2/doc2</entry>
+                                </row>
+                                <row>
+                                    <entry>salt:/corp1/corp3</entry>
+                                </row>
+                                <row>
+                                    <entry>salt:/corp1/corp3/doc3</entry>
+                                </row>
+                                <row>
+                                    <entry>salt:/corp1/corp3/doc4</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table> An <classname>SElementId</classname> corresponding to an object which
+                    is contained in a document-structure, is the <classname>SElementId</classname>
+                    object of the document plus a fragment for the unified
+                        <classname>sName</classname> of that object. For instance token <emphasis
+                        role="italic">tok1</emphasis> contained in document <emphasis role="italic"
+                        >doc1</emphasis> gets the id: <emphasis role="italic"
+                        >salt:/corp1/doc1#tok1</emphasis>. A second token also having the name
+                        <emphasis role="italic">tok1</emphasis> gets the id: <emphasis role="italic"
+                        >salt:/corp1/doc1#tok1_1</emphasis>.</para>
             </sect3>
         </sect2>
     </sect1>
