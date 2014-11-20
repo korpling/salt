@@ -55,7 +55,7 @@
 		<assemblies.name>src/assemble/assemblies.xml</assemblies.name>
 		<license.file>${basedir}/LICENSE</license.file>
 		<notice.file>${basedir}/NOTICE</notice.file>
-		<java.version>1.6</java.version>
+		<java.version>1.7</java.version>
 		<xmlunit.version>1.3</xmlunit.version>
 		<junit.version>4.11</junit.version>
 		<emf.version>2.8.0-v20120911-0500</emf.version>
