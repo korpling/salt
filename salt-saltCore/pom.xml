@@ -25,7 +25,7 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>2.1.0</version>
+        <version>${maven-bundle-plugin.version}</version>
         <extensions>true</extensions>
         <executions>
           <execution>
@@ -37,13 +37,13 @@
         </executions>
         <configuration>
           <manifestLocation>${basedir}/META-INF</manifestLocation>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
           <instructions>
             <Bundle-Name>${project.artifactId}</Bundle-Name>
             <Bundle-SymbolicName>${project.groupId}.${project.artifactId};singleton:=true</Bundle-SymbolicName>
             <Bundle-Version>${project.version}</Bundle-Version>
-            <Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
             <Export-Package>de.hu_berlin.german.korpling.saltnpepper.salt.saltCore; de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl; de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.accessors; de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.exceptions; de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.modules; de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.helper.modules</Export-Package>
             <Include-Resource>{maven-resources}, LICENSE, NOTICE</Include-Resource>
           </instructions>

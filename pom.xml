@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
 	<artifactId>salt</artifactId>
@@ -9,7 +10,7 @@
 		<module>salt-graph</module>
 		<module>salt-saltCore</module>
 		<module>salt-saltCommon</module>
-  </modules>
+	</modules>
 	<description>Salt is an abstract and graph based meta model for dealing with linguistic annotated data. Salt describes a minimum of semantic and only handles the structure of linguistic data.</description>
 	<url>https://korpling.german.hu-berlin.de/p/projects/salt</url>
 	<issueManagement>
@@ -37,7 +38,7 @@
 			<id>korpling</id>
 			<name>korpling maven repo</name>
 			<url>file:///srv/www/maven2/</url>
-			<!-- <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url>-->
+			<!-- <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url> -->
 		</repository>
 	</distributionManagement>
 	<repositories>
@@ -61,6 +62,17 @@
 		<guava.version>14.0.1</guava.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<commons.lang3.version>3.3.2</commons.lang3.version>
+		<maven-bundle-plugin.version>2.1.0</maven-bundle-plugin.version>
+		<maven-resources-plugin.version>2.5</maven-resources-plugin.version>
+		<maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+		<maven-site-plugin.version>3.0</maven-site-plugin.version>
+		<maven-assembly-plugin.version>2.2</maven-assembly-plugin.version>
+		<maven-release-plugin.version>2.2.1</maven-release-plugin.version>
+		<maven-javadoc-plugin.version>2.8</maven-javadoc-plugin.version>
+		<maven-deploy-plugin.version>2.7</maven-deploy-plugin.version>
+		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+		<maven-license-plugin.version>1.4.0</maven-license-plugin.version>
+		<maven-notice-plugin.version>1.0.4</maven-notice-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -108,13 +120,13 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-  	    <dependency>
-	        <groupId>org.apache.commons</groupId>
-	        <artifactId>commons-lang3</artifactId>
-	        <version>${commons.lang3.version}</version>
-	        <type>jar</type>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
+			<type>jar</type>
 			<scope>compile</scope>
-        </dependency>
+		</dependency>
 	</dependencies>
 	<organization>
 		<name>Humboldt Univerity of Berlin, INRIA</name>
@@ -122,20 +134,15 @@
 	<build>
 		<extensions>
 			<!-- Enabling the use of FTP -->
-			<!-- 
-		   <extension>
-			 <groupId>org.apache.maven.wagon</groupId>
-			 <artifactId>wagon-ssh-external</artifactId>
-			 <version>1.0</version>
-		   </extension>
-			-->
+			<!-- <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ssh-external</artifactId> 
+				<version>1.0</version> </extension> -->
 		</extensions>
 		<plugins>
 			<!-- generate a jar for sources -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
+				<version>${maven-source-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -150,7 +157,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.0</version>
+				<version>${maven-site-plugin.version}</version>
 				<configuration>
 					<outputDirectory>${basedir}/docs/site</outputDirectory>
 				</configuration>
@@ -159,7 +166,7 @@
 			<!-- start: assembly plugin -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2</version>
+				<version>${maven-assembly-plugin.version}</version>
 				<configuration>
 					<descriptors>
 						<descriptor>${assemblies.name}</descriptor>
@@ -174,12 +181,12 @@
 			<!-- start: Plugin for automatic releasing -->
 			<plugin>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.2.1</version>
+				<version>${maven-release-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>default</id>
 						<goals>
-							<goal>perform</goal>        			
+							<goal>perform</goal>
 						</goals>
 						<configuration>
 							<pomFileName>salt/pom.xml</pomFileName>
@@ -187,8 +194,8 @@
 					</execution>
 				</executions>
 				<configuration>
-				  <releaseProfiles>release</releaseProfiles>
-				  <goals>package assembly:single deploy</goals>
+					<releaseProfiles>release</releaseProfiles>
+					<goals>package assembly:single deploy</goals>
 				</configuration>
 			</plugin>
 			<!-- end: Plugin for automatic releasing -->
@@ -196,20 +203,20 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.8</version>
+				<version>${maven-javadoc-plugin.version}</version>
 			</plugin>
 			<!-- end: plugin to generate javadoc -->
 			<!-- start: plugin to deploy project to maven repo -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.7</version>
+				<version>${maven-deploy-plugin.version}</version>
 			</plugin>
 			<!-- end: plugin to deploy project to maven repo -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -219,7 +226,7 @@
 			<plugin>
 				<groupId>com.google.code.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
-				<version>1.4.0</version>
+				<version>${maven-license-plugin.version}</version>
 				<configuration>
 					<header>${basedir}/src/etc/header.txt</header>
 					<includes>
@@ -233,7 +240,7 @@
 			<plugin>
 				<groupId>org.jasig.maven</groupId>
 				<artifactId>maven-notice-plugin</artifactId>
-				<version>1.0.4</version>
+				<version>${maven-notice-plugin.version}</version>
 				<configuration>
 					<noticeTemplate>./src/etc/NOTICE_template.txt</noticeTemplate>
 					<licenseMapping>
@@ -246,7 +253,7 @@
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.1.0</version>
+				<version>${maven-bundle-plugin.version}</version>
 				<extensions>true</extensions>
 				<executions>
 					<execution>
@@ -269,8 +276,8 @@
 					</instructions>
 				</configuration>
 			</plugin>
-      
-			<!--       start: of docbook plugin -->
+
+			<!-- start: of docbook plugin -->
 			<plugin>
 				<groupId>com.agilejava.docbkx</groupId>
 				<artifactId>docbkx-maven-plugin</artifactId>
@@ -295,7 +302,7 @@
 							<useSvg>true</useSvg>
 							<useExtensions>true</useExtensions>
 							<sectionAutolabel>true</sectionAutolabel>
-							<!--               font configuration -->
+							<!-- font configuration -->
 							<bodyFontFamily>DejaVu Serif</bodyFontFamily>
 							<monospaceFontFamily>DejaVu Sans Mono</monospaceFontFamily>
 							<titleFontFamily>DejaVu Sans</titleFontFamily>
@@ -382,9 +389,9 @@
 				<configuration>
 					<xincludeSupported>true</xincludeSupported>
 				</configuration>
-                
+
 			</plugin>
-      
+
 			<plugin>
 				<groupId>com.agilejava.docbkx</groupId>
 				<artifactId>docbkx-fop-support</artifactId>
@@ -402,11 +409,11 @@
 					</execution>
 				</executions>
 			</plugin>
-      
-      
+
+
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.5</version>
+				<version>${maven-resources-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>copy-filter-docbook</id>
@@ -421,14 +428,14 @@
 									<directory>${basedir}/src/main/docbkx/</directory>
 									<filtering>true</filtering>
 								</resource>
-							</resources>             
-						</configuration>            
+							</resources>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-      
-           
-      
+
+
+
 		</plugins>
 		<finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName>
 	</build>
