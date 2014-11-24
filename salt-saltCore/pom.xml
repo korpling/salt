@@ -10,10 +10,6 @@
 		<version>2.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<scm>
-		<developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk/salt-saltCore</developerConnection>
-		<url>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/salt-saltCore</url>
-	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>

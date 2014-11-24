@@ -10,10 +10,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>salt-graph</artifactId>
 	<packaging>bundle</packaging>
-	<scm>
-		<developerConnection>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/trunk/salt-graph</developerConnection>
-		<url>scm:svn:https://korpling.german.hu-berlin.de/svn/saltnpepper/salt/salt-graph</url>
-	</scm>
 	<build>
 		<plugins>
 			<plugin>
