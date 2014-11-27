@@ -68,11 +68,7 @@
 						<Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
 						<Export-Package>
 							de.hu_berlin.german.korpling.saltnpepper.salt.*,
-<<<<<<< HEAD
 							com.neovisionaries.i18n, !org.knallgrau.utils.textcat,
-=======
-							com.neovisionaries.i18n; !org.knallgrau.utils.textcat,
->>>>>>> origin/develop
 							org.apache.commons.lang3;version="${commons.lang3.version}"
 						</Export-Package>
 						<Bundle-ClassPath>.,{maven-dependencies}, lib/nv-i18n-${nv-i18n.version}.jar,
