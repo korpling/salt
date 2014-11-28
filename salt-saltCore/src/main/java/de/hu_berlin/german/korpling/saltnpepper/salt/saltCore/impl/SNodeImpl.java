@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.impl;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -220,36 +221,52 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * {@inheritDoc SNode#getOutgoingSRelations()}
 	 */
 	public EList<SRelation> getOutgoingSRelations() {
-		EList<SRelation> sOutRelList = new BasicEList<SRelation>();
+		
+		
 		if(getSGraph()==null){
 			return null;
 		}
-		else{			
-			for(SRelation sRel : getSGraph().getSRelations()){
-				if(sRel.getSSource().equals(this)){
-					sOutRelList.add(sRel);
+		
+		EList<Edge> outEdges = getSGraph().getOutEdges(this.getSId());
+		if(outEdges != null)
+		{
+			EList<SRelation> sOutRelList = new BasicEList<SRelation>();
+			for(Edge e : outEdges)
+			{
+				if(e instanceof SRelation)
+				{
+					sOutRelList.add((SRelation) e);
 				}
 			}
+			return sOutRelList;
 		}
-		return sOutRelList;
+
+		return null;
 	}
 
 	/**
 	 * {@inheritDoc SNode#getIncomingSRelations()}
 	 */
 	public EList<SRelation> getIncomingSRelations() {
-		EList<SRelation> sInRelList = new BasicEList<SRelation>();
 		if(getSGraph()==null){
 			return null;
 		}
-		else{			
-			for(SRelation sRel : getSGraph().getSRelations()){
-				if(sRel.getSTarget().equals(this)){
-					sInRelList.add(sRel);
+		
+		EList<Edge> inEdges = getSGraph().getInEdges(this.getSId());
+		if(inEdges != null)
+		{
+			EList<SRelation> sInRelList = new BasicEList<SRelation>();
+			for(Edge e : inEdges)
+			{
+				if(e instanceof SRelation)
+				{
+					sInRelList.add((SRelation) e);
 				}
 			}
+			return sInRelList;
 		}
-		return sInRelList;
+
+		return null;
 	}
 
 	//=================== start: handling SIdentifiableElement	
