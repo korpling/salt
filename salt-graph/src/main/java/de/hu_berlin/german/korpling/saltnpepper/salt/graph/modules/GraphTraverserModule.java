@@ -36,6 +36,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphTraverserException;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles the traversal of a graph.
@@ -331,6 +333,7 @@ public class GraphTraverserModule extends GraphModule {
 					entry.order++;
 				}
 				catch (ConcurrentModificationException ex) {
+					LoggerFactory.getLogger(GraphTraverserModule.class).warn("Graph was changed during traversal", ex);
 					// use fallback
 					entry.iterator = null;
 				}
