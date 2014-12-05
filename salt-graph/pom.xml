@@ -35,7 +35,7 @@
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
 						<Export-Package>
-							de.hu_berlin.german.korpling.saltnpepper.salt.graph.*;
+							de.hu_berlin.german.korpling.saltnpepper.salt.graph.*
 						</Export-Package>
 						<Include-Resource>{maven-resources}, LICENSE, NOTICE</Include-Resource>
 					</instructions>
