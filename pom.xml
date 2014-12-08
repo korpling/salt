@@ -130,7 +130,7 @@
 		</dependency>
 	</dependencies>
 	<organization>
-		<name>Humboldt Univerity of Berlin, INRIA</name>
+		<name>Humboldt-Universität zu Berlin, INRIA</name>
 	</organization>
 	<build>
 		<extensions>
