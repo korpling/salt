@@ -64,9 +64,6 @@ public class LayerImpl extends IdentifiableElementImpl implements Layer
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	//TODO to delete
-	public static  Long equalTime= 0l;
 	
 	/**
 	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' reference list.
