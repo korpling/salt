@@ -15,26 +15,23 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.benchmark;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.eclipse.emf.common.util.URI;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestRule;
+
 import com.carrotsearch.junitbenchmarks.BenchmarkOptions;
 import com.carrotsearch.junitbenchmarks.BenchmarkRule;
 import com.carrotsearch.junitbenchmarks.annotation.AxisRange;
 import com.carrotsearch.junitbenchmarks.annotation.BenchmarkHistoryChart;
 import com.carrotsearch.junitbenchmarks.annotation.BenchmarkMethodChart;
 import com.carrotsearch.junitbenchmarks.annotation.LabelType;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.CentralIndex;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestRule;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 
 /**
  *
@@ -43,114 +40,38 @@ import org.junit.rules.TestRule;
 @BenchmarkOptions(callgc = false, benchmarkRounds = 5, warmupRounds = 5)
 @BenchmarkMethodChart(filePrefix = "salt-benchmark")
 @BenchmarkHistoryChart(labelWith = LabelType.RUN_ID, maxRuns = 20)
-@AxisRange(min=0.0)
-public class SaltBenchmarkTest
-{
-  
-  @Rule
-  public TestRule benchmarkRun = new BenchmarkRule();
-  
-  public SaltBenchmarkTest()
-  {
-  }
-  
-  @BeforeClass
-  public static void setUpClass()
-  {
-  }
-  
-  @AfterClass
-  public static void tearDownClass()
-  {
-  }
-  
-  @Before
-  public void setUp()
-  {
-  }
-  
-  @After
-  public void tearDown()
-  {
-  }
-  
-   @Test
-   public void addNodesWithLabels() throws Exception {
-     
-     Graph g = GraphFactory.eINSTANCE.createGraph();
-        
-     for(int i=0; i < 20000; i++)
-     {
-        Node n =  GraphFactory.eINSTANCE.createNode();
-        n.setId("" + i);
-        
-        g.addNode(n);
-        
-        for(int l=0; l < 20; l++)
-        {
-          Label lbl = GraphFactory.eINSTANCE.createLabel();
-          lbl.setName("lbl" + l);
-          lbl.setNamespace("salt");
-          lbl.setValue("lblValue "+ l + i);
-          n.addLabel(lbl);
-        }
-     }
-     
-     int count = 0;
-     for(Node n : g.getNodes())
-     {
-       // get any label
-       int lblNr = (int) (Math.random() * 19.0);
-       Label l = n.getLabel("salt", "lbl" + lblNr);
-       if(l != null)
-       {
-         count++;
-       }
-     }
-     Assert.assertEquals(20000, count);
-   }
-   
-   @Test
-   public void addNodesWithLabelsIndex() throws Exception {
-     
-     final String IDXNAME = "labelqname";
-     
-     GraphImpl g = (GraphImpl) GraphFactory.eINSTANCE.createGraph();
-     
-     CentralIndex index = g.getCentralIndex();
-     index.addIndex(IDXNAME, String.class, Label.class);
-     
-     for(int i=0; i < 20000; i++)
-     {
-        Node n =  GraphFactory.eINSTANCE.createNode();
-        n.setId("" + i);
-        
-        g.addNode(n);
-        
-        for(int l=0; l < 20; l++)
-        {
-          Label lbl = GraphFactory.eINSTANCE.createLabel();
-          lbl.setName("lbl" + l);
-          lbl.setNamespace("salt");
-          lbl.setValue("lblValue "+ l + i);
-          n.addLabel(lbl);
-          index.put(IDXNAME, n.getId() + "_label_" + lbl.getQName(), lbl);
-        }
-     }
-     
-     int count = 0;
-    
-     for(Node n : g.getNodes())
-     {
-       // get any label
-       int lblNr = (int) (Math.random() * 19.0);
-       Label l = index.get(IDXNAME, n.getId() + "_label_" + "salt::lbl" + lblNr);
-       if(l != null)
-       {
-         count++;
-       }
-     }
-     Assert.assertEquals(20000, count);
-   }
-   
+@AxisRange(min = 0.0)
+public class SaltBenchmarkTest {
+	@Rule
+	public TestRule benchmarkRun = new BenchmarkRule();
+
+	@Test
+	public void benchmarkPCC_11299() {
+		URI benchmarkFile = URI
+				.createFileURI("./src/test/resources/pcc/11299.salt");
+		Object obj = SaltFactory.eINSTANCE.load(benchmarkFile);
+		assertNotNull(obj);
+		assertTrue(obj instanceof SDocumentGraph);
+	}
+	
+	@Test
+	public void benchmarkPCC_11299_test() {
+		URI benchmarkFile = URI
+				.createFileURI("./src/test/resources/pcc/11299.salt");
+		Object obj = SaltFactory.eINSTANCE.load2(benchmarkFile);
+//		assertNotNull(obj);
+//		assertTrue(obj instanceof SDocumentGraph);
+	}
+
+//	@BenchmarkOptions(callgc = false, benchmarkRounds = 5, warmupRounds = 0)
+//	@Test
+//	public void benchmarkRidges_SonderbaresKraeuterbuch() {
+//		System.out.println("START");
+//		URI benchmarkFile = URI
+//				.createFileURI("./src/test/resources/ridges/SonderbaresKraeuterbuch-11-21_1675.salt");
+//		Object obj = SaltFactory.eINSTANCE.load(benchmarkFile);
+//		assertNotNull(obj);
+//		assertTrue(obj instanceof SDocumentGraph);
+//		System.out.println("DONE");
+//	}
 }
