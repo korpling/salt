@@ -15,26 +15,23 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.benchmark;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.eclipse.emf.common.util.URI;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestRule;
+
 import com.carrotsearch.junitbenchmarks.BenchmarkOptions;
 import com.carrotsearch.junitbenchmarks.BenchmarkRule;
 import com.carrotsearch.junitbenchmarks.annotation.AxisRange;
 import com.carrotsearch.junitbenchmarks.annotation.BenchmarkHistoryChart;
 import com.carrotsearch.junitbenchmarks.annotation.BenchmarkMethodChart;
 import com.carrotsearch.junitbenchmarks.annotation.LabelType;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphImpl;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.index.CentralIndex;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestRule;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 
 /**
  *
@@ -43,36 +40,17 @@ import org.junit.rules.TestRule;
 @BenchmarkOptions(callgc = false, benchmarkRounds = 5, warmupRounds = 5)
 @BenchmarkMethodChart(filePrefix = "salt-benchmark")
 @BenchmarkHistoryChart(labelWith = LabelType.RUN_ID, maxRuns = 20)
-@AxisRange(min=0.0)
-public class SaltBenchmarkTest
-{
-  
-  @Rule
-  public TestRule benchmarkRun = new BenchmarkRule();
-  
-  public SaltBenchmarkTest()
-  {
-  }
-  
-  @BeforeClass
-  public static void setUpClass()
-  {
-  }
-  
-  @AfterClass
-  public static void tearDownClass()
-  {
-  }
-  
-  @Before
-  public void setUp()
-  {
-  }
-  
-  @After
-  public void tearDown()
-  {
-  }
+@AxisRange(min = 0.0)
+public class SaltBenchmarkTest {
+	@Rule
+	public TestRule benchmarkRun = new BenchmarkRule();
 
-   
+	@Test
+	public void benchmarkPCC_11299() {
+		URI benchmarkFile = URI
+				.createFileURI("./src/test/resources/pcc/11299.salt");
+		Object obj = SaltFactory.eINSTANCE.load(benchmarkFile);
+		assertNotNull(obj);
+		assertTrue(obj instanceof SDocumentGraph);
+	}
 }

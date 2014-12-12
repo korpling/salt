@@ -7,7 +7,7 @@ Created-By: 1.7.0_65 (Oracle Corporation)
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Humboldt Univerity of Berlin, INRIA
 Bundle-Version: 1.1.7.SNAPSHOT
-Bnd-LastModified: 1418402410139
+Bnd-LastModified: 1418407622654
 Bundle-ManifestVersion: 2
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
 Bundle-Description: Salt is an abstract and graph based meta model for

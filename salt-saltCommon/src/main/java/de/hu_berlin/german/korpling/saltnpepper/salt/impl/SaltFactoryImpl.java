@@ -18,13 +18,21 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -35,6 +43,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
@@ -44,6 +55,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.impl.SaltCommonFactoryImpl;
@@ -143,30 +155,32 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		StringBuffer globalId = new StringBuffer();
 		if ((sElementId != null) && (sElementId.getSIdentifiableElement() != null)) {
 			SCorpusGraph graph = null;
-			if ((sElementId.getSIdentifiableElement() instanceof SDocument) && (((SDocument) sElementId.getSIdentifiableElement()).getSCorpusGraph() != null)) {
+			if ((sElementId.getSIdentifiableElement() instanceof SDocument)
+					&& (((SDocument) sElementId.getSIdentifiableElement()).getSCorpusGraph() != null)) {
 				graph = ((SDocument) sElementId.getSIdentifiableElement()).getSCorpusGraph();
-			} else if ((sElementId.getSIdentifiableElement() instanceof SCorpus) && (((SCorpus) sElementId.getSIdentifiableElement()).getSCorpusGraph() != null)) {
+			} else if ((sElementId.getSIdentifiableElement() instanceof SCorpus)
+					&& (((SCorpus) sElementId.getSIdentifiableElement()).getSCorpusGraph() != null)) {
 				graph = ((SCorpus) sElementId.getSIdentifiableElement()).getSCorpusGraph();
-			}else if (sElementId.getSIdentifiableElement() instanceof SNode){
-				SNode sNode= (SNode)sElementId.getSIdentifiableElement();
-				if ((sNode.getSGraph()!= null)){
-					if (sNode.getSGraph() instanceof SCorpusGraph){
-						graph= (SCorpusGraph)sNode.getSGraph();
-					}else if (sNode.getSGraph() instanceof SDocumentGraph){
+			} else if (sElementId.getSIdentifiableElement() instanceof SNode) {
+				SNode sNode = (SNode) sElementId.getSIdentifiableElement();
+				if ((sNode.getSGraph() != null)) {
+					if (sNode.getSGraph() instanceof SCorpusGraph) {
+						graph = (SCorpusGraph) sNode.getSGraph();
+					} else if (sNode.getSGraph() instanceof SDocumentGraph) {
 						graph = ((SDocumentGraph) sNode.getSGraph()).getSDocument().getSCorpusGraph();
 					}
 				}
-			}else if (sElementId.getSIdentifiableElement() instanceof SRelation){
-				SRelation sRel= (SRelation)sElementId.getSIdentifiableElement();
-				if ((sRel.getSGraph()!= null)){
-					if (sRel.getSGraph() instanceof SCorpusGraph){
-						graph= (SCorpusGraph)sRel.getSGraph();
-					}else if (sRel.getSGraph() instanceof SDocumentGraph){
+			} else if (sElementId.getSIdentifiableElement() instanceof SRelation) {
+				SRelation sRel = (SRelation) sElementId.getSIdentifiableElement();
+				if ((sRel.getSGraph() != null)) {
+					if (sRel.getSGraph() instanceof SCorpusGraph) {
+						graph = (SCorpusGraph) sRel.getSGraph();
+					} else if (sRel.getSGraph() instanceof SDocumentGraph) {
 						graph = ((SDocumentGraph) sRel.getSGraph()).getSDocument().getSCorpusGraph();
 					}
 				}
 			}
-			
+
 			if (graph != null) {
 				globalId.append(URI_SALT_SCHEMA);
 				SaltProject project = graph.getSaltProject();
@@ -278,9 +292,12 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		if (resourceSet == null) {
 			if (resourceSet == null) {
 				resourceSet = new ResourceSetImpl();
-				resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
-				resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(), SaltSemanticsPackage.eINSTANCE);
-				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
+				resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(),
+						SaltCommonPackage.eINSTANCE);
+				resourceSet.getPackageRegistry().put(SaltSemanticsPackage.eINSTANCE.getNsURI(),
+						SaltSemanticsPackage.eINSTANCE);
+				resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+						.put(SaltFactory.FILE_ENDING_SALT, new XMIResourceFactoryImpl());
 			}
 		}
 		return resourceSet;
@@ -297,9 +314,12 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	public void saveSDocumentGraph(SDocumentGraph sDocumentGraph, URI sDocumentGraphLocation) {
 		Resource resource = getResourceSet().createResource(sDocumentGraphLocation);
 		if (resource == null)
-			throw new SaltResourceException("Cannot save the " + SDocumentGraph.class.getName() + " object '" + sDocumentGraph.getSElementId() + "' to given uri '" + sDocumentGraphLocation + "', because no resource was found.");
+			throw new SaltResourceException("Cannot save the " + SDocumentGraph.class.getName() + " object '"
+					+ sDocumentGraph.getSElementId() + "' to given uri '" + sDocumentGraphLocation
+					+ "', because no resource was found.");
 		if (!(resource instanceof XMLResource))
-			throw new SaltResourceException("Cannot save the " + SDocumentGraph.class.getName() + " object '" + sDocumentGraph.getSElementId() + "' to given uri '" + sDocumentGraphLocation + "'.");
+			throw new SaltResourceException("Cannot save the " + SDocumentGraph.class.getName() + " object '"
+					+ sDocumentGraph.getSElementId() + "' to given uri '" + sDocumentGraphLocation + "'.");
 		else {
 			SDocument sDoc = sDocumentGraph.getSDocument();
 			if (sDoc != null) {// store location of where file is persist
@@ -311,10 +331,17 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			xmlResource.setEncoding("UTF-8");
 			try {
 				xmlResource.save(null);
-			}catch (IOWrappedException e){
-				throw new SaltResourceException("Cannot save " + SDocumentGraph.class.getName() + " to given uri '" + sDocumentGraphLocation + "'. This could be caused, because the Salt model was not created correctly. It seems, that at least one object (SNode, SRelation, SAnnotation, SMetaAnnotation, SProcessingAnnotation, SLayer etc.) is not contained in the SDocumentGraph. ", e);	
+			} catch (IOWrappedException e) {
+				throw new SaltResourceException(
+						"Cannot save "
+								+ SDocumentGraph.class.getName()
+								+ " to given uri '"
+								+ sDocumentGraphLocation
+								+ "'. This could be caused, because the Salt model was not created correctly. It seems, that at least one object (SNode, SRelation, SAnnotation, SMetaAnnotation, SProcessingAnnotation, SLayer etc.) is not contained in the SDocumentGraph. ",
+						e);
 			} catch (IOException e) {
-				throw new SaltResourceException("Cannot save " + SDocumentGraph.class.getName() + " to given uri '" + sDocumentGraphLocation + "'.", e);
+				throw new SaltResourceException("Cannot save " + SDocumentGraph.class.getName() + " to given uri '"
+						+ sDocumentGraphLocation + "'.", e);
 			}
 			sDoc.setSDocumentGraph(sDocumentGraph);
 		}
@@ -325,32 +352,57 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	 */
 	@Override
 	public EObject load(URI objectURI) {
-		if (objectURI == null)
-			throw new SaltResourceNotFoundException("Cannot load object, because the given uri is null.");
-
-		File objectFile = new File((objectURI.toFileString() == null) ? objectURI.toString() : objectURI.toFileString());
-		if (!objectFile.exists())
-			throw new SaltResourceNotFoundException("Cannot load Object, because the file '" + objectFile + "' does not exist.");
-
-		Resource resource = getResourceSet().createResource(URI.createFileURI(objectFile.getAbsolutePath()));
-		if (resource == null)
-			throw new SaltResourceException("Cannot load object to given uri '" + objectURI + "', because no handler for resource was found.");
-		if (!(resource instanceof XMLResource))
-			throw new SaltResourceException("Cannot load object to given uri '" + objectURI + "'.");
-		XMLResource xmlResource = null;
-		xmlResource = (XMLResource) resource;
-		xmlResource.setEncoding("UTF-8");
-		try {// must be done after all, because it doesn't work, if not all
-				// SDocumentGraph objects
-			xmlResource.load(null);
-		}// must be done after all, because it doesn't work, if not all
-			// SDocumentGraph objects
-		catch (IOException e) {
-			throw new SaltResourceException("Cannot load salt-project from given uri '" + objectURI + "'.", e);
+		if (objectURI == null) {
+			throw new SaltResourceNotFoundException("Cannot load Salt object, because the given uri is null.");
 		}
-		EObject obj = xmlResource.getContents().get(0);
-		xmlResource.getContents().remove(obj);
-		return (obj);
+		File objectFile = new File((objectURI.toFileString() == null) ? objectURI.toString() : objectURI.toFileString());
+		if (!objectFile.exists()) {
+			throw new SaltResourceNotFoundException("Cannot load Salt object, because the file '" + objectFile
+					+ "' does not exist.");
+		}
+
+		SAXParser parser;
+		XMLReader xmlReader;
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+
+		SaltXMLHandler contentHandler = new SaltXMLHandler();
+
+		try {
+			parser = factory.newSAXParser();
+			xmlReader = parser.getXMLReader();
+			xmlReader.setContentHandler(contentHandler);
+		} catch (ParserConfigurationException e) {
+			throw new SaltResourceException(
+					"Cannot load Salt object from file '" + objectFile.getAbsolutePath() + "'.", e);
+		} catch (Exception e) {
+			throw new SaltResourceException(
+					"Cannot load Salt object from file '" + objectFile.getAbsolutePath() + "'.", e);
+		}
+		try {
+			InputStream inputStream = new FileInputStream(objectFile);
+			Reader reader = new InputStreamReader(inputStream, "UTF-8");
+			InputSource is = new InputSource(reader);
+			is.setEncoding("UTF-8");
+			xmlReader.parse(is);
+		} catch (SAXException e) {
+			try {
+				parser = factory.newSAXParser();
+				xmlReader = parser.getXMLReader();
+				xmlReader.setContentHandler(contentHandler);
+				xmlReader.parse(objectFile.getAbsolutePath());
+			} catch (Exception e1) {
+				throw new SaltResourceException("Cannot Salt object from file '" + objectFile.getAbsolutePath() + "'.",
+						e1);
+			}
+		} catch (Exception e) {
+			if (e instanceof SaltException) {
+				throw (SaltException) e;
+			} else {
+				throw new SaltResourceException("Cannot load Salt object from file'" + objectFile
+						+ "', because of a nested exception. ", e);
+			}
+		}
+		return ((EObject) contentHandler.getSaltObject());
 	}
 
 	@Override
@@ -372,13 +424,15 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 			throw new SaltResourceNotFoundException("Can not load SaltProject.", e);
 		}
 		if (saltProjectPath.exists())
-			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectPath + "' does not exist.");
+			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectPath
+					+ "' does not exist.");
 		if (saltProjectPath.isDirectory())
-			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectPath + "' is not a directory.");
+			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectPath
+					+ "' is not a directory.");
 
 		return (saltProject);
 	}
-	
+
 	/**
 	 * {@inheritDoc SaltFactory#loadSDocumentGraph(URI)
 	 */
@@ -387,11 +441,13 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		SDocumentGraph retVal = null;
 		EObject obj = this.load(sDocumentGraphLocation);
 		if (obj == null)
-			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName() + ", because file located at contains no such object, the returned object was null.");
+			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName()
+					+ ", because file located at contains no such object, the returned object was null.");
 		else if (obj instanceof SDocumentGraph) {
 			retVal = (SDocumentGraph) obj;
 		} else
-			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName() + ", because file located at contains no such object. It contains: " + obj.getClass());
+			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName()
+					+ ", because file located at contains no such object. It contains: " + obj.getClass());
 		return (retVal);
 	}
 
@@ -407,7 +463,8 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 	 */
 	public SCorpusGraph loadSCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph) {
 		if (sCorpusGraphUri == null)
-			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName() + "' object, because the passed uri is empty. ");
+			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName()
+					+ "' object, because the passed uri is empty. ");
 
 		SCorpusGraph retVal = null;
 
@@ -423,18 +480,22 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		if (obj instanceof SCorpusGraph)
 			retVal = (SCorpusGraph) obj;
 		else if (obj instanceof SaltProject) {
-			if ((((SaltProject) obj).getSCorpusGraphs() != null) && (((SaltProject) obj).getSCorpusGraphs().size() >= idxOfSCorpusGraph))
+			if ((((SaltProject) obj).getSCorpusGraphs() != null)
+					&& (((SaltProject) obj).getSCorpusGraphs().size() >= idxOfSCorpusGraph))
 				retVal = ((SaltProject) obj).getSCorpusGraphs().get(idxOfSCorpusGraph);
 		}
 		if (retVal == null)
-			throw new SaltResourceException("No '" + SCorpusGraph.class.getName() + "' object was found in resource '" + sCorpusGraphUri + "'.");
+			throw new SaltResourceException("No '" + SCorpusGraph.class.getName() + "' object was found in resource '"
+					+ sCorpusGraphUri + "'.");
 		{// TODO all this can be removed, when feature request Feature #117 is
 			// done
 			SaltLoadingTraverser loadingTraverser = new SaltLoadingTraverser();
-			loadingTraverser.saltProjectPath = sCorpusGraphUri.toFileString().replace(SaltFactory.FILE_SALT_PROJECT, "");
+			loadingTraverser.saltProjectPath = sCorpusGraphUri.toFileString()
+					.replace(SaltFactory.FILE_SALT_PROJECT, "");
 			EList<Node> startNodes = (EList<Node>) (EList<? extends Node>) retVal.getSRoots();
 			if ((startNodes != null) && (startNodes.size() > 0)) {
-				retVal.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "SCOPRUS_GRAPH_LOADING", loadingTraverser);
+				retVal.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "SCOPRUS_GRAPH_LOADING",
+						loadingTraverser);
 			}
 		}// TODO all this can be removed, when feature request Feature #117 is
 			// done
@@ -614,7 +675,8 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 
 		@Override
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Node currNode, Edge edge, Node fromNode, long order) {
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Node currNode, Edge edge,
+				Node fromNode, long order) {
 			if (pathStack.size() == 0)
 				pathStack.push(saltProjectPath);
 			if (currNode instanceof SCorpus) {
@@ -622,11 +684,13 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				pathStack.push(pathStack.peek() + "/" + sCorpus.getSName());
 			} else if (currNode instanceof SDocument) {
 				SDocument sDocument = (SDocument) currNode;
-				File sDocumentPath = new File(this.pathStack.peek() + "/" + sDocument.getSElementPath().lastSegment() + "." + SaltFactory.FILE_ENDING_SALT);
+				File sDocumentPath = new File(this.pathStack.peek() + "/" + sDocument.getSElementPath().lastSegment()
+						+ "." + SaltFactory.FILE_ENDING_SALT);
 				if (!sDocumentPath.exists()) {
 					// TODO put a log message (debug), that no document graph
 					// was found for document
-					throw new SaltResourceException("Cannot load SDocument object '" + sDocument.getSName() + "', because resource '" + sDocumentPath.getAbsolutePath() + "' does not exist.");
+					throw new SaltResourceException("Cannot load SDocument object '" + sDocument.getSName()
+							+ "', because resource '" + sDocumentPath.getAbsolutePath() + "' does not exist.");
 				} else {
 					URI sDocumentURI = URI.createFileURI(sDocumentPath.getAbsolutePath());
 					sDocument.setSDocumentGraphLocation(sDocumentURI);
@@ -635,7 +699,8 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 
 		@Override
-		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Node currNode, Edge edge, Node fromNode, long order) {
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Node currNode, Edge edge,
+				Node fromNode, long order) {
 			if ((currNode != null) && (!(currNode instanceof SDocument))) {
 				if ((this.pathStack != null) && (this.pathStack.size() > 0))
 					this.pathStack.pop();
@@ -643,7 +708,8 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		}
 
 		@Override
-		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Edge edge, Node currNode, long order) {
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, Edge edge, Node currNode,
+				long order) {
 			return true;
 		}
 	}
