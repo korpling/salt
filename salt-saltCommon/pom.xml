@@ -33,6 +33,7 @@
 			<artifactId>nv-i18n</artifactId>
 			<version>${nv-i18n.version}</version>
 			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
 		<!-- automatic language detection -->
 		<dependency>
@@ -40,6 +41,7 @@
 			<artifactId>textcat</artifactId>
 			<version>${textcat.version}</version>
 			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
