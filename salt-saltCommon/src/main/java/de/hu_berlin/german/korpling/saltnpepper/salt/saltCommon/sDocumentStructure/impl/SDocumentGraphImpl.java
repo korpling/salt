@@ -1088,14 +1088,6 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 // ============================ end: handling specific relations
 	
-	protected void finalize() throws Throwable 
-	{
-	    try {
-	    } finally {
-	        super.finalize();
-	    }
-	}
-	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

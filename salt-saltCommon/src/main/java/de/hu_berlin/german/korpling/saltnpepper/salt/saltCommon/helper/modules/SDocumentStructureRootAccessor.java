@@ -37,6 +37,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STYPE_NAME;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import java.util.LinkedHashSet;
 
 public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 {
@@ -54,7 +55,8 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 	@SuppressWarnings("unchecked")
 	public EList<SNode> getRootsBySRelation(STYPE_NAME sType)
 	{
-		EList<SNode> retVal= null;
+		HashSet<SNode> retSet = new LinkedHashSet<>();
+		
 		if (this.getSDocumentGraph()== null)
 			new SaltModuleException("Cannot start method please set the document graph first.");
 		
@@ -83,7 +85,6 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 		}//compute all relations of subtype
 		if (relations!= null)
 		{
-			retVal= new BasicEList<SNode>();
 			HashSet<SNode> notRootElements= new HashSet<SNode>();
 			for (SRelation relation: relations)
 			{
@@ -92,12 +93,17 @@ public class SDocumentStructureRootAccessor extends SDocumentStructureModule
 					notRootElements.add(relation.getSTarget());
 				//if source is not also a destination
 				if (	(!notRootElements.contains(relation.getSSource())) &&
-						(!retVal.contains(relation.getSSource())))
-					retVal.add(relation.getSSource());
+						(!retSet.contains(relation.getSSource())))
+					retSet.add(relation.getSSource());
 				//remove wrong stored nodes in retList
-				if (retVal.contains(relation.getSTarget()))
-					retVal.remove(relation.getSTarget());
+				if (retSet.contains(relation.getSTarget()))
+					retSet.remove(relation.getSTarget());
 			}
+		}
+		EList<SNode> retVal= null;
+		if(!retSet.isEmpty())
+		{
+			retVal= new BasicEList<>(retSet);
 		}
 		return (retVal);
 	}

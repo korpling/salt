@@ -34,6 +34,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphTraverserException;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handles the traversal of a graph.
@@ -46,7 +50,8 @@ public class GraphTraverserModule extends GraphModule {
 	 * Stores all used traverseIds to the corresponding traverse callback
 	 * handler. This is used, to check, that an id is not used twice.
 	 */
-	private volatile HashMap<GraphTraverseHandler, EList<String>> traverseIdTable = new HashMap<GraphTraverseHandler, EList<String>>();
+	private HashMap<GraphTraverseHandler, EList<String>> traverseIdTable 
+			= new HashMap<GraphTraverseHandler, EList<String>>();
 
 	/**
 	 * Traverses a graph in the given order traverseType and starts traversing
@@ -164,22 +169,8 @@ public class GraphTraverserModule extends GraphModule {
 		traverser.traverseHandler = traverseHandler;
 		traverser.isCycleSafe = isCycleSafe;
 		traverser.setGraph(this.getGraph());
-		Thread traverserThread = new Thread(traverser, "GraphTraverserThread_"
-				+ traverseId);
-
-		traverser.traverselock.lock();
-
-		traverserThread.start();
-		// traverserThread.join();
-		try {
-			traverser.traverseFinished.await();
-		} catch (InterruptedException e) {
-			throw new GraphTraverserException(
-					"An exception occurs while traversing the graph '"
-							+ this.getGraph().getId() + "'.", e);
-		} finally {
-			traverser.traverselock.unlock();
-		}
+		
+		traverser.run();
 
 		// clean up traverseIdTable
 		synchronized (traverseIdTable) {
@@ -286,6 +277,7 @@ public class GraphTraverserModule extends GraphModule {
 		private class NodeEntry {
 			private final Node node;
 			private int order;
+			private Iterator<Edge> iterator;
 			private Edge edge;
 
 			public NodeEntry(Node node, int order) {
@@ -322,12 +314,42 @@ public class GraphTraverserModule extends GraphModule {
 		 */
 		protected Node nextChild(NodeEntry entry) {
 			Node retVal = null;
-			List<Edge> outEdges = getGraph().getOutEdges(entry.node.getId());
-			if ((outEdges != null) && (!outEdges.isEmpty())) {
-				if (entry.order < outEdges.size()) {
-					entry.edge = outEdges.get(entry.order);
+			
+			if(entry.order == 0)
+			{
+				// set the iterator
+				List<Edge> outEdges = getGraph().getOutEdges(entry.node.getId());
+				if ((outEdges != null) && (!outEdges.isEmpty())) {
+					entry.iterator = outEdges.iterator();
+				}
+			}
+			
+			// if we already have an iterator use it
+			if(entry.iterator != null && entry.iterator.hasNext())
+			{
+				try {
+					entry.edge = entry.iterator.next();
 					retVal = entry.edge.getTarget();
 					entry.order++;
+				}
+				catch (ConcurrentModificationException ex) {
+					LoggerFactory.getLogger(GraphTraverserModule.class).warn("Graph was changed during traversal", ex);
+					// use fallback
+					entry.iterator = null;
+				}
+			}
+			
+			// even if something went wrong with the iterator we should be still
+			// able to execute the code (just with less performance)
+			if(entry.iterator == null)
+			{
+				List<Edge> outEdges = getGraph().getOutEdges(entry.node.getId());
+				if ((outEdges != null) && (!outEdges.isEmpty())) {
+					if (entry.order < outEdges.size()) {
+						entry.edge = outEdges.get(entry.order);
+						retVal = entry.edge.getTarget();
+						entry.order++;
+					}
 				}
 			}
 			return (retVal);
