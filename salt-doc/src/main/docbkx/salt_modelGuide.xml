@@ -104,7 +104,7 @@
                 </listitem>
                 <listitem>
                     <para><emphasis role="italic">E</emphasis> being a set of directed edges with
-                        <emphasis role="italic">e= (v<subscript>1</subscript> &#x220a; V,
+                            <emphasis role="italic">e= (v<subscript>1</subscript> &#x220a; V,
                                 v<subscript>2</subscript> &#x220a; V) &#x220a; E</emphasis>.</para>
                 </listitem>
             </itemizedlist>
@@ -258,212 +258,7 @@
                 especially the linguistic one - is in the labeling mechanism, which is widely used
                 in Salt as you will see in the following.</para>
         </sect2>
-        <sect2 xml:id="sec_inheritanceGraph">
-            <title>model elements</title>
-            <para> In this section we briefly present all elements in Salt. You can use this section
-                as a kind of a quick reference, where you can look up the role of a particular
-                element. Since this description is very simple, the particular elements will be
-                explained in detail in the following sections. </para>
-            <para> As we will explain later in <xref linkend="sec_saltInDetail"/> Salt
-                differentiates between the corpus-structure and the document-structure. The
-                corpus-structure is a kind of a grouping mechanism to create a hierarchy of
-                different data sources.<xref linkend="fig_inheritanceGraph_corpusStructure"/> shows
-                the inheritance graph of all elements in the corpus-structure. <figure
-                    xml:id="fig_inheritanceGraph_corpusStructure">
-                    <title>corpus structure (inheritance graph)</title>
-                    <mediaobject>
-                        <imageobject>
-                            <imagedata width="200"
-                                fileref="images/inheritanceGraph_corpusStructure.png"/>
-                        </imageobject>
-                    </mediaobject>
-                </figure> The <xref linkend="tab_corpus_strcuture"/> names all elements being part
-                of the corpus-structure and gives a short description of their meaning. A detailed
-                description of the corpus-structure and its elements can be found in <xref
-                    linkend="sec_corpusStructure"/>. <table xml:id="tab_corpus_strcuture"
-                    frame="all">
-                    <title>Overview over all elements of corpus-structure</title>
-                    <tgroup cols="2">
-                        <colspec colname="c1" colnum="1" colwidth="1*"/>
-                        <colspec colname="c2" colnum="2" colwidth="1.8*"/>
-                        <thead>
-                            <row>
-                                <entry>element</entry>
-                                <entry>short description</entry>
-                            </row>
-                        </thead>
-                        <tbody>
-                            <row>
-                                <entry>SCorpus</entry>
-                                <entry>A container for documents or other corpora, see <xref
-                                        linkend="sec_corpus"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SDocument</entry>
-                                <entry>A container for primary data and annotations, see <xref
-                                        linkend="sec_document"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SCorpusRelation</entry>
-                                <entry>Connects a super corpus with a sub corpus, see <xref
-                                        linkend="sec_corpusStructure"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SCorpusDocumentRelation</entry>
-                                <entry>Connects a corpus with a document, see <xref
-                                        linkend="sec_corpusStructure"/>.</entry>
-                            </row>
-                        </tbody>
-                    </tgroup>
-                </table>
-            </para>
-            <para>
-                <xref linkend="fig_inheritanceGraph_document_structure_nodes"/> shows all nodes
-                being contained in the document-structure and are derived from the general type
-                    <classname>SNode</classname>. <figure
-                    xml:id="fig_inheritanceGraph_document_structure_nodes">
-                    <title>nodes of document structure (inheritance graph)</title>
-                    <mediaobject>
-                        <imageobject>
-                            <imagedata width="250"
-                                fileref="images/inheritanceGraph_documentStructure_nodes.png"/>
-                        </imageobject>
-                    </mediaobject>
-                </figure> The document-structure contains the data sources and all its annotations.
-                    <xref linkend="fig_inheritanceGraph_document_structure_relations"/> shows all
-                relations being contained in the document structure and are derived from the general
-                type <classname>SRelation</classname>. <figure
-                    xml:id="fig_inheritanceGraph_document_structure_relations">
-                    <title>relations of document structure (inheritance graph)</title>
-                    <mediaobject>
-                        <imageobject>
-                            <imagedata width="300"
-                                fileref="images/inheritanceGraph_documentStructure_relations.png"/>
-                        </imageobject>
-                    </mediaobject>
-                </figure> The <xref linkend="tab_document_strcuture"/> names all elements being part
-                of the document-structure and gives a short description of their meaning. A detailed
-                description of the document-structure and its elements can be found in <xref
-                    linkend="sec_documentStructure"/>. <table xml:id="tab_document_strcuture"
-                    frame="all">
-                    <title>Overview over all elements of document-structure</title>
-                    <tgroup cols="2">
-                        <colspec colname="c1" colnum="1" colwidth="1*"/>
-                        <colspec colname="c2" colnum="2" colwidth="1.79*"/>
-                        <thead>
-                            <row>
-                                <entry>element</entry>
-                                <entry>short description</entry>
-                            </row>
-                        </thead>
-                        <tbody>
-                            <row>
-                                <entry><emphasis role="italic">SSequentialDS</emphasis></entry>
-                                <entry>An abstract node which marks implementing nodes to contain a
-                                    2 dimensional datasource.</entry>
-                            </row>
-                            <row>
-                                <entry><emphasis role="italic">SStructuredNode</emphasis></entry>
-                                <entry>An abstract node which is used for technical purposes, to
-                                    constraint the kind of nodes being target of for instance
-                                    SDominanceRelations, SPointingRelations.</entry>
-                            </row>
-                            <row>
-                                <entry>STextualDS</entry>
-                                <entry>A node representing primary texts, see <xref
-                                        linkend="sec_primData"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SAudioDataSource</entry>
-                                <entry>A node representing audio data, see <xref
-                                        linkend="sec_audioData"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>STimeline</entry>
-                                <entry>A common timeline for all objects in the document structure,
-                                    for instance to model time in dialogue data. There could be only
-                                    one timeline object for one document structure. See <xref
-                                        linkend="sec_time"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SToken</entry>
-                                <entry>Smallest annotatable unit of primary data, for isntance a
-                                    character, syllable, word etc., see <xref
-                                        linkend="sec_tokenization"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SSpan</entry>
-                                <entry>A node to model sets in a graph, to collect a number of
-                                    tokens and to annotate them at once, see <xref
-                                        linkend="sec_spans"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SStructure</entry>
-                                <entry>A node to model hierarchies, for instance for syntax trees,
-                                    see <xref linkend="sec_hierarchies"/>.</entry>
-                            </row>
-                            <row>
-                                <entry><emphasis role="italic"
-                                    >SSequentialRelation</emphasis></entry>
-                                <entry>An abstract relation which provides to address an interval
-                                    (start and end value) in a data source, see <xref
-                                        linkend="sec_time"/>.</entry>
-                            </row>
-                            <row>
-                                <entry><emphasis role="italic"
-                                    >STimeOverlappingRelation</emphasis></entry>
-                                <entry>An abstract relation marking the implementing relation to be
-                                    a relation, giving the overlapped time interval from its target
-                                    to its source (a kind of a contrary inheritance).</entry>
-                            </row>
-                            <row>
-                                <entry><emphasis role="italic"
-                                    >STextOverlappingRelation</emphasis></entry>
-                                <entry>An abstract relation marking the implementing relation to be
-                                    a relation, giving the overlapped textual interval from its
-                                    target to its source (a kind of a contrary inheritance).</entry>
-                            </row>
-                            <row>
-                                <entry>STimelineRelation</entry>
-                                <entry>A relation to connect a token with the common timeline, see
-                                        <xref linkend="sec_time"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>STextualRelation</entry>
-                                <entry>A relation to connect a token with the a primary text, see
-                                        <xref linkend="sec_primData"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SAudioRelation</entry>
-                                <entry>A relation to connect a token with the a audio data object,
-                                    see <xref linkend="sec_audioData"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SSpanningRelation</entry>
-                                <entry>A relation used to create a set in a graph, this is used to
-                                    connect a token with a span object, see <xref
-                                        linkend="sec_spans"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SDominanceRelation</entry>
-                                <entry>A relation to represent hierarchies, see <xref
-                                        linkend="sec_hierarchies"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SPointingRelation</entry>
-                                <entry>A loose relation to connect each kind of node with another
-                                    one, see <xref linkend="sec_pointingRelation"/>.</entry>
-                            </row>
-                            <row>
-                                <entry>SOrderRelation</entry>
-                                <entry>A relation to create an explicit order of tokens, see <xref
-                                        linkend="sec_order"/>.</entry>
-                            </row>
-                        </tbody>
-                    </tgroup>
-                </table>
-            </para>
-        </sect2>
+
     </sect1>
     <sect1 xml:id="sec_saltInDetail">
         <title>How does Salt work?</title>
@@ -485,6 +280,10 @@
                 work on several units in parallel. Furthermore this will also speed up automatic
                 processing, since data fits easier into main memory and indexes on them can be kept
                 small. </para>
+            <para> As a quick reference <xref linkend="fig_inheritanceGraph_corpusStructure"/> and
+                    <xref linkend="tab_corpus_strcuture"/> in the appendix give a short description
+                and an overview of the inheritance hierarchy of the elements being part of the
+                corpus-structure. </para>
             <sect3 xml:id="sec_corpus">
                 <title>Corpus</title>
                 <para>As mentioned above, a corpus is an element to organize your data. Similar to a
@@ -603,6 +402,11 @@
                 All these nodes and relations are contained in a graph, the
                     <classname>SDocumentGraph</classname>, which is the model element representing
                 the document-structure.</para>
+            <para>As a quick reference <xref linkend="fig_inheritanceGraph_document_structure_nodes"
+                />, <xref linkend="fig_inheritanceGraph_document_structure_relations"/> and <xref
+                    linkend="tab_document_strcuture"/> in the appendix give a short description and
+                an overview of the inheritance hierarchy of the elements being part of the
+                document-structure.</para>
             <sect3 xml:id="sec_primData">
                 <title>Primary data</title>
                 <para>The primary data in linguistics are the center and the beginning of each
@@ -1085,7 +889,7 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                         <emphasis role="italic">t<subscript>spk2_1</subscript></emphasis> with the
                     interval [7, 9]. With these abstract points-of-time (like 1,2,3,4, ...), it is
                     possible to set an unbound number of tokens in relation to the common timeline.
-                    But note, in each document structure there can be only one
+                    But note, in each document-structure there can be only one
                         <classname>STimeline</classname> object.</para>
             </sect3>
             <sect3 xml:id="sec_order">
@@ -1314,7 +1118,7 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                         </mediaobject>
                     </figure> This corpus-structure results in the following
                         <classname>SElementId</classname> objects: <table frame="all">
-                            <title><classname>SElementId</classname>s corresponding to <xref
+                        <title><classname>SElementId</classname>s corresponding to <xref
                                 linkend="fig_sample_selementId"/>.</title>
                         <tgroup cols="1">
                             <colspec colname="c1" colnum="1" colwidth="1.0*"/>
@@ -1354,4 +1158,227 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
             </sect3>
         </sect2>
     </sect1>
+    <appendix xml:id="appendix">
+        <title>Appendix</title>
+        <sect1 xml:id="app_corpusStructure">
+            <title>Corpus-structure</title>
+            <para>
+                <figure xml:id="fig_inheritanceGraph_corpusStructure">
+                    <title>corpus-structure (inheritance graph)</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata width="200"
+                                fileref="images/inheritanceGraph_corpusStructure.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                <table xml:id="tab_corpus_strcuture" frame="all">
+                    <title>Overview over all elements of corpus-structure</title>
+                    <tgroup cols="2">
+                        <colspec colname="c1" colnum="1" colwidth="1*"/>
+                        <colspec colname="c2" colnum="2" colwidth="1.8*"/>
+                        <thead>
+                            <row>
+                                <entry>element</entry>
+                                <entry>short description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>SCorpusGraph</entry>
+                                <entry>A graph representing the corpus-structure itself, see <xref
+                                        linkend="sec_corpusGraph"/>.</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic">SNode</emphasis></entry>
+                                <entry>An abstract node, from which all other nodes are derived
+                                    from, see <xref linkend="sec_salt"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SCorpus</entry>
+                                <entry>A container for documents or other corpora, see <xref
+                                        linkend="sec_corpus"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SDocument</entry>
+                                <entry>A container for primary data and annotations, see <xref
+                                        linkend="sec_document"/>.</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic">SRelation</emphasis></entry>
+                                <entry>An abstract relation, from which all other relations are
+                                    derived from, see <xref linkend="sec_salt"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SCorpusRelation</entry>
+                                <entry>Connects a super corpus with a sub corpus, see <xref
+                                        linkend="sec_corpusStructure"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SCorpusDocumentRelation</entry>
+                                <entry>Connects a corpus with a document, see <xref
+                                        linkend="sec_corpusStructure"/>.</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+        </sect1>
+        <sect1>
+            <title>Document-structure</title>
+            <para>
+                <figure xml:id="fig_inheritanceGraph_document_structure_nodes">
+                    <title>nodes of document-structure (inheritance graph)</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata width="300"
+                                fileref="images/inheritanceGraph_documentStructure_nodes.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                <figure xml:id="fig_inheritanceGraph_document_structure_relations">
+                    <title>relations of document-structure (inheritance graph)</title>
+                    <mediaobject>
+                        <imageobject>
+                            <imagedata width="350"
+                                fileref="images/inheritanceGraph_documentStructure_relations.png"/>
+                        </imageobject>
+                    </mediaobject>
+                </figure>
+                <table xml:id="tab_document_strcuture" frame="all">
+                    <title>Overview over all elements of document-structure</title>
+                    <tgroup cols="2">
+                        <colspec colname="c1" colnum="1" colwidth="1*"/>
+                        <colspec colname="c2" colnum="2" colwidth="1.79*"/>
+                        <thead>
+                            <row>
+                                <entry>element</entry>
+                                <entry>short description</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>SDocumentGraph</entry>
+                                <entry>A graph representing the document-structure itself, see <xref
+                                        linkend="sec_corpusGraph"/>.</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic">SNode</emphasis></entry>
+                                <entry>An abstract node, from which all other nodes are derived
+                                    from, see <xref linkend="sec_salt"/>.</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic">SSequentialDS</emphasis></entry>
+                                <entry>An abstract node used to model sequential datasources.
+                                    Sequential here means, that you can address an interval of the
+                                    datasource by determing a start and a end position.</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic">SStructuredNode</emphasis></entry>
+                                <entry>An abstract node which is used for technical purposes, to
+                                    constraint the kind of nodes being target of for instance
+                                    SDominanceRelations, SPointingRelations.</entry>
+                            </row>
+                            <row>
+                                <entry>STextualDS</entry>
+                                <entry>A node representing primary texts, see <xref
+                                        linkend="sec_primData"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SAudioDataSource</entry>
+                                <entry>A node representing audio data, see <xref
+                                        linkend="sec_audioData"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>STimeline</entry>
+                                <entry>A common timeline for all objects in the document-structure,
+                                    for instance to model time in dialogue data. There could be only
+                                    one timeline object for one document-structure. See <xref
+                                        linkend="sec_time"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SToken</entry>
+                                <entry>Smallest annotatable unit of primary data, for instance a
+                                    character, syllable, word etc., see <xref
+                                        linkend="sec_tokenization"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SSpan</entry>
+                                <entry>A node to model sets in a graph, to collect a number of
+                                    tokens and to annotate them at once, see <xref
+                                        linkend="sec_spans"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SStructure</entry>
+                                <entry>A node to model hierarchies, for instance for syntax trees,
+                                    see <xref linkend="sec_hierarchies"/>.</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic">SRelation</emphasis></entry>
+                                <entry>An abstract relation, from which all other relations are
+                                    derived from, see <xref linkend="sec_salt"/>.</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic"
+                                    >SSequentialRelation</emphasis></entry>
+                                <entry>An abstract relation which provides to address an interval
+                                    (start and end value) in a data source, see <xref
+                                        linkend="sec_time"/>.</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic"
+                                    >STimeOverlappingRelation</emphasis></entry>
+                                <entry>An abstract relation marking the implementing relation to be
+                                    a relation, giving the overlapped time interval from its target
+                                    to its source (a kind of a contrary inheritance).</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic"
+                                    >STextOverlappingRelation</emphasis></entry>
+                                <entry>An abstract relation marking the implementing relation to be
+                                    a relation, giving the overlapped textual interval from its
+                                    target to its source (a kind of a contrary inheritance).</entry>
+                            </row>
+                            <row>
+                                <entry>STimelineRelation</entry>
+                                <entry>A relation to connect a token with the common timeline, see
+                                        <xref linkend="sec_time"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>STextualRelation</entry>
+                                <entry>A relation to connect a token with the a primary text, see
+                                        <xref linkend="sec_primData"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SAudioRelation</entry>
+                                <entry>A relation to connect a token with the a audio data object,
+                                    see <xref linkend="sec_audioData"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SSpanningRelation</entry>
+                                <entry>A relation used to create a set in a graph, this is used to
+                                    connect a token with a span object, see <xref
+                                        linkend="sec_spans"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SDominanceRelation</entry>
+                                <entry>A relation to represent hierarchies, see <xref
+                                        linkend="sec_hierarchies"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SPointingRelation</entry>
+                                <entry>A loose relation to connect each kind of node with another
+                                    one, see <xref linkend="sec_pointingRelation"/>.</entry>
+                            </row>
+                            <row>
+                                <entry>SOrderRelation</entry>
+                                <entry>A relation to create an explicit order of tokens, see <xref
+                                        linkend="sec_order"/>.</entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </para>
+        </sect1>
+    </appendix>
 </article>
