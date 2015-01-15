@@ -17,7 +17,13 @@
  */
 package de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl;
 
+import com.google.common.io.BaseEncoding;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.*;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Objects;
+import org.apache.commons.lang3.SerializationException;
+import org.apache.commons.lang3.SerializationUtils;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.emf.common.util.URI;
@@ -261,8 +267,19 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 			retVal= Float.parseFloat(StringEscapeUtils.unescapeXml(initialValue.substring(3)));
 		}else if (initialValue.startsWith("U")){
 			retVal= URI.createURI(StringEscapeUtils.unescapeXml(initialValue.substring(3)));
-		}else{
+		} else if(initialValue.startsWith("O")) {
+			String base64Encoded = initialValue.substring(3);
+			try	{
+				return SerializationUtils.deserialize(BaseEncoding.base64().decode(base64Encoded));
+			}
+			catch(SerializationException ex) {
+				return null;
+			}
+		}else if(eDataType != null) {
 			retVal= super.createFromString(eDataType, initialValue);
+		}
+		else {
+			return null;
 		}
 		return(retVal); 
 	}
@@ -290,7 +307,10 @@ public class GraphFactoryImpl extends EFactoryImpl implements GraphFactory {
 			retVal="F::"+instanceValue.toString();
 		}else if (instanceValue instanceof URI){
 			retVal= "U::"+ StringEscapeUtils.escapeXml11(instanceValue.toString());
-		}else{
+		} else if(instanceValue instanceof Serializable) {
+			byte[] rawBytes = SerializationUtils.serialize((Serializable) instanceValue);
+			retVal= "O::" + BaseEncoding.base64().encode(rawBytes);
+		}else if (eDataType != null){
 			retVal= super.convertToString(eDataType, instanceValue);
 		}
 		return(retVal);

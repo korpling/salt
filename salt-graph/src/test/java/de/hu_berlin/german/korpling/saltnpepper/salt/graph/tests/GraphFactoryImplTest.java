@@ -26,9 +26,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.impl.GraphFactoryImpl;
+import java.io.Serializable;
+import java.util.Objects;
 
 public class GraphFactoryImplTest extends TestCase{
 	private GraphFactoryImpl fixture= null;
+	
+	private final static String unknownObjectSerialization =
+			"O::rO0ABXNyAGBkZS5odV9iZXJsaW4uZ2VybWFuLmtvcnBsaW5nLnNh"
+			+ "bHRucGVwcGVyLnNhbHQuZ3JhcGgudGVzdHMuR3JhcGhGYWN0b3J5S"
+			+ "W1wbFRlc3QkVW5rbm93blRlc3RPYmplY3T211MlAS44twIAAUkAAW"
+			+ "N4cgBZZGUuaHVfYmVybGluLmdlcm1hbi5rb3JwbGluZy5zYWx0bnB"
+			+ "lcHBlci5zYWx0LmdyYXBoLnRlc3RzLkdyYXBoRmFjdG9yeUltcGxU"
+			+ "ZXN0JFRlc3RPYmplY3R4r50rUMulywIAA0kAAWJMAAFhdAASTGphd"
+			+ "mEvbGFuZy9TdHJpbmc7TAAGbmVzdGVkdABbTGRlL2h1X2Jlcmxpbi"
+			+ "9nZXJtYW4va29ycGxpbmcvc2FsdG5wZXBwZXIvc2FsdC9ncmFwaC9"
+			+ "0ZXN0cy9HcmFwaEZhY3RvcnlJbXBsVGVzdCRUZXN0T2JqZWN0O3hw"
+			+ "AAAAe3QAA2FiY3NxAH4AAQAAAch0AANkZWZwAAAAAQ==";
 
 	public GraphFactoryImpl getFixture() {
 		return fixture;
@@ -126,5 +140,70 @@ public class GraphFactoryImplTest extends TestCase{
 		object=URI.createFileURI("/anyFile/");
 		result= getFixture().convertObjectToString(eDataType, object);
 		assertEquals(object, getFixture().createObjectFromString(null, result));
+		
+		// known object
+		object = new TestObject("abc", 123, new TestObject("def", 456));
+		result = getFixture().convertObjectToString(eDataType, object);
+		assertEquals(object, getFixture().createObjectFromString(null, result));
+		
+		// unknown objects should be ignored
+		assertEquals(null, getFixture().createObjectFromString(null, unknownObjectSerialization));
+	}
+	
+	public static class TestObject implements Serializable
+	{
+		private String a;
+		private int b;
+		private TestObject nested;
+
+		public TestObject(String a, int b)
+		{
+			this.a = a;
+			this.b = b;
+		}
+
+		public TestObject(String a, int b, TestObject nested)
+		{
+			this.a = a;
+			this.b = b;
+			this.nested = nested;
+		}
+
+		@Override
+		public int hashCode()
+		{
+			int hash = 5;
+			hash = 29 * hash + Objects.hashCode(this.a);
+			hash = 29 * hash + this.b;
+			hash = 29 * hash + Objects.hashCode(this.nested);
+			return hash;
+		}
+
+		@Override
+		public boolean equals(Object obj)
+		{
+			if (obj == null)
+			{
+				return false;
+			}
+			if (getClass() != obj.getClass())
+			{
+				return false;
+			}
+			final TestObject other = (TestObject) obj;
+			if (!Objects.equals(this.a, other.a))
+			{
+				return false;
+			}
+			if (this.b != other.b)
+			{
+				return false;
+			}
+			if (!Objects.equals(this.nested, other.nested))
+			{
+				return false;
+			}
+			return true;
+		}
 	}
 }
