@@ -1,11 +1,6 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.tokenizer;
 
-import java.util.List;
-
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-
-import com.neovisionaries.i18n.LanguageCode;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltTokenizerException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
@@ -13,8 +8,8 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 
 /**
- * This class is a very simple implementation of a tokenizer, which just splits a primary text
- * by a given list of characters. e.g. a blank.
+ * This class is a very simple implementation of a tokenizer, which just splits
+ * a primary text by a given list of characters. e.g. a blank.
  * 
  * @author Florian Zipser
  *
@@ -48,7 +43,7 @@ public class SimpleTokenizer {
 	public EList<SToken> tokenize(STextualDS sTextualDSs, Character... separator) {
 		return (this.tokenize(sTextualDSs, null, null, separator));
 	}
-	
+
 	/**
 	 * Sets the {@link STextualDS} to be tokenized and the language of the text.
 	 * If language is null, it will be detected automatically if possible.
@@ -69,40 +64,56 @@ public class SimpleTokenizer {
 
 		if (this.getsDocumentGraph() == null) {
 			if (sTextualDS.getSDocumentGraph() == null)
-				throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
+				throw new SaltTokenizerException(
+						"Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
 			else
 				this.setsDocumentGraph(sTextualDS.getSDocumentGraph());
 		}
 
 		if (sTextualDS.getSText() != null) {
-			if (startPos == null){
+			if (startPos == null) {
 				startPos = 0;
 			}
-			if (endPos == null){
+			if (endPos == null) {
 				endPos = sTextualDS.getSText().length();
 			}
-			
+
 			char[] text;
-			if (	(startPos!= 0)||
-					(endPos!= sTextualDS.getSText().length())){
-				text= sTextualDS.getSText().substring(startPos, endPos).toCharArray();
-			}else{
-				text= sTextualDS.getSText().toCharArray();
+			if ((startPos != 0) || (endPos != sTextualDS.getSText().length())) {
+				text = sTextualDS.getSText().substring(startPos, endPos).toCharArray();
+			} else {
+				text = sTextualDS.getSText().toCharArray();
 			}
-			//true if last character was a separator, false otherwise
-			boolean lastWasSep= false;
-			int currStart= 0; // current start position for token
-			int currEnd= 0;  //current end position for token
-			for (char chr: text){
-				for (char sep: separator){
-					if (chr== sep){
-						//create token
-						getsDocumentGraph().createSToken(sTextualDS, currStart, currEnd);
-						
-					}else{
-						currEnd++;
+			// true if last character was a separator, false otherwise
+			boolean isSep = false;
+			int currStart = 0; // current start position for token
+			int currEnd = 0; // current end position for token
+			boolean wasHere= false;
+			for (char chr : text) {
+				wasHere= false;
+				for (char sep : separator) {
+					if (chr == sep) {
+						if (currStart!= currEnd){
+							// create token
+							getsDocumentGraph().createSToken(sTextualDS, currStart, currEnd);
+						}
+						isSep = true;
+					} else {
+						if (wasHere){
+							break;
+						}
+						isSep = false;
 					}
+					wasHere= true;
 				}
+				currEnd++;
+				if (isSep) {
+					currStart = currEnd;
+				}
+			}
+			if (!isSep){
+				// create a token for the last part of text, if last character was not a separator
+				getsDocumentGraph().createSToken(sTextualDS, currStart, currEnd);
 			}
 		}
 		return (retVal);

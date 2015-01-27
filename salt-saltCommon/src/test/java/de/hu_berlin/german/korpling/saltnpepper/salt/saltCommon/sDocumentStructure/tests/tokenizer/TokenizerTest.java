@@ -20,6 +20,9 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStruct
 import java.util.List;
 import java.util.Vector;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 import com.neovisionaries.i18n.LanguageCode;
@@ -33,15 +36,16 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 /**
  * 
  * Tests the class TTTokenizer.
+ * 
  * @author Florian Zipser
  *
  */
-public class TokenizerTest extends TestCase
-{
-	private Tokenizer fixture= null;
+public class TokenizerTest extends TestCase {
+	private Tokenizer fixture = null;
 
 	/**
-	 * @param fixture the fixture to set
+	 * @param fixture
+	 *            the fixture to set
 	 */
 	public void setFixture(Tokenizer fixture) {
 		this.fixture = fixture;
@@ -53,56 +57,54 @@ public class TokenizerTest extends TestCase
 	public Tokenizer getFixture() {
 		return fixture;
 	}
-	
-	public void setUp()
-	{
+
+	@Before
+	public void setUp() {
 		this.setFixture(new Tokenizer());
-//		this.getFixture().setAbbriviationFolder(new File("./src/main/resources/abbreviations/"));
 	}
-	
-	
-	public void testLANGUAGE_DESCRIPTION()
-	{
+
+	@Test
+	public void testLANGUAGE_DESCRIPTION() {
 		assertEquals(LanguageCode.de, this.getFixture().mapISOLanguageCode("german"));
 		assertEquals(LanguageCode.en, this.getFixture().mapISOLanguageCode("english"));
 		assertEquals(LanguageCode.fr, this.getFixture().mapISOLanguageCode("french"));
 		assertEquals(LanguageCode.it, this.getFixture().mapISOLanguageCode("italian"));
 	}
-	
-	public void testDetectLanguage()
-	{
-		String text= null;
-		
-		text= "The Java Text Categorizing Library (JTCL) is a pure java 1.5 implementation of libTextCat which in turn is \"a library that was primarily developed for language guessing, a task on which it is known to perform with near-perfect accuracy\".";
+
+	@Test
+	public void testDetectLanguage() {
+		String text = null;
+
+		text = "The Java Text Categorizing Library (JTCL) is a pure java 1.5 implementation of libTextCat which in turn is \"a library that was primarily developed for language guessing, a task on which it is known to perform with near-perfect accuracy\".";
 		assertEquals(LanguageCode.en, this.getFixture().checkLanguage(text));
-		
-		text= "Die Java-Text Kategorisierung Library (JTCL) ist eine reine Java 1.5 Implementierung von libtextcat die wiederum \"eine Bibliothek, die vor allem für die Sprache zu raten, eine Aufgabe, auf denen bekannt ist, mit nahezu perfekter Genauigkeit durchzuführen ist, wurde entwickelt.\"";
+
+		text = "Die Java-Text Kategorisierung Library (JTCL) ist eine reine Java 1.5 Implementierung von libtextcat die wiederum \"eine Bibliothek, die vor allem für die Sprache zu raten, eine Aufgabe, auf denen bekannt ist, mit nahezu perfekter Genauigkeit durchzuführen ist, wurde entwickelt.\"";
 		assertEquals(LanguageCode.de, this.getFixture().checkLanguage(text));
-		
-		text= "La bibliothèque Java Catégorisation Texte (JTCL) est un pur Java 1.5 mise en œuvre de libtextcat qui à son tour \"une bibliothèque qui a été développé pour la langue deviner Primar, une tâche sur laquelle il est connu de réaliser avec une précision quasi-parfaite.\"";
+
+		text = "La bibliothèque Java Catégorisation Texte (JTCL) est un pur Java 1.5 mise en œuvre de libtextcat qui à son tour \"une bibliothèque qui a été développé pour la langue deviner Primar, une tâche sur laquelle il est connu de réaliser avec une précision quasi-parfaite.\"";
 		assertEquals(LanguageCode.fr, this.getFixture().checkLanguage(text));
-		
-		text= "Text Library Java Categorizzare (JTCL) è un puro Java 1.5 realizzazione di libtextcat che a sua volta è \"una libreria che è stato sviluppato per la lingua indovinare Primar, un compito su cui è conosciuto per eseguire con precisione quasi perfetta.\"";
+
+		text = "Text Library Java Categorizzare (JTCL) è un puro Java 1.5 realizzazione di libtextcat che a sua volta è \"una libreria che è stato sviluppato per la lingua indovinare Primar, un compito su cui è conosciuto per eseguire con precisione quasi perfetta.\"";
 		assertEquals(LanguageCode.it, this.getFixture().checkLanguage(text));
 	}
-	
-	//TODO test the detection of abbreviations, by 1) giving a specific file, 2) giving a folder (giving a language and not) and 3) using default abbrevs 
-	
-	class Token{
+
+	// TODO test the detection of abbreviations, by 1) giving a specific file,
+	// 2) giving a folder (giving a language and not) and 3) using default
+	// abbrevs
+	class Token {
 		String text;
 		Integer startPos;
 		Integer endPos;
-		public Token(String text, int startPos, int endPos)
-		{
-			this.text= text;
-			this.startPos= startPos;
-			this.endPos= endPos;
+
+		public Token(String text, int startPos, int endPos) {
+			this.text = text;
+			this.startPos = startPos;
+			this.endPos = endPos;
 		}
 	}
-	
-	public List<Token> createCase1()
-	{
-		List<Token> expectedToken= new Vector<Token>();
+
+	public List<Token> createCase1() {
+		List<Token> expectedToken = new Vector<Token>();
 		expectedToken.add(new Token("Die", 0, 3));
 		expectedToken.add(new Token("Ölpest", 4, 10));
 		expectedToken.add(new Token("im", 11, 13));
@@ -161,209 +163,204 @@ public class TokenizerTest extends TestCase
 		expectedToken.add(new Token("1.", 324, 326));
 		expectedToken.add(new Token("Oktober", 327, 334));
 		expectedToken.add(new Token(".", 334, 335));
-		return(expectedToken);
+		return (expectedToken);
 	}
-	
-	
+
 	/**
 	 * checks the following text via TokenizeToToken:
 	 * "Die �lpest im Golf von Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\", erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten, begr�ndete er seinen R�ckzug zum 1. Oktober."
 	 */
-	public void testCase1()
-	{
-		String text= "Die Ölpest im Golf von Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\", erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten, begr�ndete er seinen R�ckzug zum 1. Oktober.";
-		List<Token> expectedToken= this.createCase1();
-		
-		SDocumentGraph sDocGraph= SaltFactory.eINSTANCE.createSDocumentGraph();
-		STextualDS sTextualDS= sDocGraph.createSTextualDS(text);
+	@Test
+	public void testCase1() {
+		String text = "Die Ölpest im Golf von Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\", erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten, begr�ndete er seinen R�ckzug zum 1. Oktober.";
+		List<Token> expectedToken = this.createCase1();
+
+		SDocumentGraph sDocGraph = SaltFactory.eINSTANCE.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
 		this.getFixture().tokenize(sTextualDS);
-		
+
 		assertEquals(expectedToken.size(), sDocGraph.getSTokens().size());
-		
-		int i=0;
-		for (STextualRelation sTextRel: sDocGraph.getSTextualRelations())
-		{
-			assertTrue(expectedToken.size()>= i);
+
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getSTextualRelations()) {
+			assertTrue(expectedToken.size() >= i);
 			assertNotNull(expectedToken.get(i));
 			assertNotNull(sTextRel.getSToken());
 			assertNotNull(sTextRel.getSTextualDS());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getSStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getSEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
 			i++;
 		}
 	}
-	
-	
-	
+
 	/**
 	 * checks the following text via TokenizeToText:
 	 * "Die �lpest im Golf von Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\", erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten, begr�ndete er seinen R�ckzug zum 1. Oktober."
 	 */
-	public void testCase2()
-	{
-		String text= "Die Ölpest im Golf von Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\", erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten, begr�ndete er seinen R�ckzug zum 1. Oktober.";
-		List<Token> expectedToken= this.createCase1();
-		
-		SDocumentGraph sDocGraph= SaltFactory.eINSTANCE.createSDocumentGraph();
-		STextualDS sTextualDS= sDocGraph.createSTextualDS(text);
+	@Test
+	public void testCase2() {
+		String text = "Die Ölpest im Golf von Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\", erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten, begr�ndete er seinen R�ckzug zum 1. Oktober.";
+		List<Token> expectedToken = this.createCase1();
+
+		SDocumentGraph sDocGraph = SaltFactory.eINSTANCE.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
-		this.getFixture().tokenize(sTextualDS,LanguageCode.de);
-		
+		this.getFixture().tokenize(sTextualDS, LanguageCode.de);
+
 		assertEquals(expectedToken.size(), sDocGraph.getSTokens().size());
-		
-		int i=0;
-		for (STextualRelation sTextRel: sDocGraph.getSTextualRelations())
-		{
-			assertTrue(expectedToken.size()>= i);
+
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getSTextualRelations()) {
+			assertTrue(expectedToken.size() >= i);
 			assertNotNull(expectedToken.get(i));
 			assertNotNull(sTextRel.getSToken());
 			assertNotNull(sTextRel.getSTextualDS());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getSStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getSEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
 			i++;
 		}
 	}
-	
+
 	/**
-	 * checks the following text via TokenizeToToken, tests tokenizing with starting blank
-	 * " Die"
+	 * checks the following text via TokenizeToToken, tests tokenizing with
+	 * starting blank " Die"
 	 */
-	public void testCase4()
-	{
-		String text= "Die Ölpest";
-		List<Token> expectedToken= null;
-		
-		expectedToken= new Vector<Token>();
+	@Test
+	public void testCase4() {
+		String text = "Die Ölpest";
+		List<Token> expectedToken = null;
+
+		expectedToken = new Vector<Token>();
 		expectedToken.add(new Token("Die", 0, 3));
 		expectedToken.add(new Token("Ölpest", 4, 10));
-		
-		
-		SDocumentGraph sDocGraph= SaltFactory.eINSTANCE.createSDocumentGraph();
-		STextualDS sTextualDS= sDocGraph.createSTextualDS(text);
+
+		SDocumentGraph sDocGraph = SaltFactory.eINSTANCE.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
-		this.getFixture().tokenize(sTextualDS,LanguageCode.de);
-		
+		this.getFixture().tokenize(sTextualDS, LanguageCode.de);
+
 		assertEquals(expectedToken.size(), sDocGraph.getSTokens().size());
-		
-		int i=0;
-		for (STextualRelation sTextRel: sDocGraph.getSTextualRelations())
-		{
-			assertTrue(expectedToken.size()>= i);
+
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getSTextualRelations()) {
+			assertTrue(expectedToken.size() >= i);
 			assertNotNull(expectedToken.get(i));
 			assertNotNull(sTextRel.getSToken());
 			assertNotNull(sTextRel.getSTextualDS());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getSStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getSEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
 			i++;
 		}
 	}
-	
+
 	/**
-	 * checks the following text via TokenizeToToken, tests tokenizing with starting blank
-	 * " Die"
+	 * checks the following text via TokenizeToToken, tests tokenizing with
+	 * starting blank " Die"
 	 */
-	public void testCase5()
-	{
-		String text= "Feigenblatt  ";
-		List<Token> expectedToken= null;
-		
-		expectedToken= new Vector<Token>();
+	@Test
+	public void testCase5() {
+		String text = "Feigenblatt  ";
+		List<Token> expectedToken = null;
+
+		expectedToken = new Vector<Token>();
 		expectedToken.add(new Token("Feigenblatt", 0, 11));
-		
-		SDocumentGraph sDocGraph= SaltFactory.eINSTANCE.createSDocumentGraph();
-		STextualDS sTextualDS= sDocGraph.createSTextualDS(text);
+
+		SDocumentGraph sDocGraph = SaltFactory.eINSTANCE.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
-		this.getFixture().tokenize(sTextualDS,LanguageCode.de);
-		
+		this.getFixture().tokenize(sTextualDS, LanguageCode.de);
+
 		assertEquals(expectedToken.size(), sDocGraph.getSTokens().size());
-		
-		int i=0;
-		for (STextualRelation sTextRel: sDocGraph.getSTextualRelations())
-		{
-			assertTrue(expectedToken.size()>= i);
+
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getSTextualRelations()) {
+			assertTrue(expectedToken.size() >= i);
 			assertNotNull(expectedToken.get(i));
 			assertNotNull(sTextRel.getSToken());
 			assertNotNull(sTextRel.getSTextualDS());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getSStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getSEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
 			i++;
 		}
 	}
-	
+
 	/**
-	 * checks the following text via TokenizeToToken, tests tokenizing two times with same TTTokenizer object
-	 * " Die"
+	 * checks the following text via TokenizeToToken, tests tokenizing two times
+	 * with same TTTokenizer object " Die"
 	 */
-	public void testCase6()
-	{
-		String text= "Die Ölpest";
-		List<Token> expectedToken= null;
-		
-		expectedToken= new Vector<Token>();
+	@Test
+	public void testCase6() {
+		String text = "Die Ölpest";
+		List<Token> expectedToken = null;
+
+		expectedToken = new Vector<Token>();
 		expectedToken.add(new Token("Die", 0, 3));
 		expectedToken.add(new Token("Ölpest", 4, 10));
-		
-		
-		SDocumentGraph sDocGraph= SaltFactory.eINSTANCE.createSDocumentGraph();
-		STextualDS sTextualDS= sDocGraph.createSTextualDS(text);
+
+		SDocumentGraph sDocGraph = SaltFactory.eINSTANCE.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
-		this.getFixture().tokenize(sTextualDS,LanguageCode.de);
-		
+		this.getFixture().tokenize(sTextualDS, LanguageCode.de);
+
 		assertEquals(expectedToken.size(), sDocGraph.getSTokens().size());
-		
-		int i=0;
-		for (STextualRelation sTextRel: sDocGraph.getSTextualRelations())
-		{
-			assertTrue(expectedToken.size()>= i);
+
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getSTextualRelations()) {
+			assertTrue(expectedToken.size() >= i);
 			assertNotNull(expectedToken.get(i));
 			assertNotNull(sTextRel.getSToken());
 			assertNotNull(sTextRel.getSTextualDS());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getSStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getSEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
 			i++;
 		}
 	}
-	
+
 	/**
 	 * checks the following text via TokenizeToToken:
 	 * "O.K., so the answer's obvious."
 	 */
-	public void testCase7()
-	{
-		String text= "O.K., so the answer's obvious.";
-		List<Token> expectedToken= new Vector<Token>();
+	@Test
+	public void testCase7() {
+		String text = "O.K., so the answer's obvious.";
+		List<Token> expectedToken = new Vector<Token>();
 		expectedToken.add(new Token("O.K.", 0, 4));
-        expectedToken.add(new Token(",", 4, 5));
+		expectedToken.add(new Token(",", 4, 5));
 		expectedToken.add(new Token("so", 6, 8));
 		expectedToken.add(new Token("the", 9, 12));
 		expectedToken.add(new Token("answer", 13, 19));
 		expectedToken.add(new Token("'s", 19, 21));
 		expectedToken.add(new Token("obvious", 22, 29));
 		expectedToken.add(new Token(".", 29, 30));
-		
-		SDocumentGraph sDocGraph= SaltFactory.eINSTANCE.createSDocumentGraph();
-		STextualDS sTextualDS= sDocGraph.createSTextualDS(text);
+
+		SDocumentGraph sDocGraph = SaltFactory.eINSTANCE.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
-		this.getFixture().tokenize(sTextualDS,LanguageCode.en);
-		
+		this.getFixture().tokenize(sTextualDS, LanguageCode.en);
+
 		assertEquals(expectedToken.size(), sDocGraph.getSTokens().size());
-		
-		int i=0;
-		for (STextualRelation sTextRel: sDocGraph.getSTextualRelations())
-		{
-			assertTrue(expectedToken.size()>= i);
+
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getSTextualRelations()) {
+			assertTrue(expectedToken.size() >= i);
 			assertNotNull(expectedToken.get(i));
 			assertNotNull(sTextRel.getSToken());
 			assertNotNull(sTextRel.getSTextualDS());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getSStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getSEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getSTextualDS().getSText().substring(sTextRel.getSStart(), sTextRel.getSEnd()));
 			i++;
 		}
 	}
