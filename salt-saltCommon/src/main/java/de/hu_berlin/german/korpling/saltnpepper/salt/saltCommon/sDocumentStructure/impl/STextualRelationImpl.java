@@ -183,7 +183,7 @@ public class STextualRelationImpl extends SSequentialRelationImpl implements STe
 			this.setSTextualDS((STextualDS)sTarget);
 		}
 		else {
-			throw new SaltImproperSTypeException("Parameter for STextualRelation.setSTarget must be an instance of STextualDS.");
+			throw new SaltImproperSTypeException("Parameter for STextualRelation.setSTarget must be an instance of STextualDS, but was '"+sTarget.getClass()+"'. ");
 		}
 	}
 

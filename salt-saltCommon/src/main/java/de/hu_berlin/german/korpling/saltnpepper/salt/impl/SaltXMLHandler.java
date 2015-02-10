@@ -83,14 +83,14 @@ public class SaltXMLHandler extends DefaultHandler2 {
 	public static final String TAG_SCORPUS_GRAPH = "sCorpusGraphs";
 
 	public static final String ATT_SNAME = "sName";
-	
+
 	public static final String TYPE_SCORPUS = "sCorpusStructure:SCorpus";
 	public static final String TYPE_SDOCUMENT = "sCorpusStructure:SDocument";
 	public static final String TYPE_SCORPUS_DOCUMENT_RELATION = "sCorpusStructure:SCorpusDocumentRelation";
 	public static final String TYPE_SCORPUS_RELATION = "sCorpusStructure:SCorpusRelation";
 
 	public static final String TYPE_STIMELINE = "sDocumentStructure:STimeline";
-	public static final String TYPE_SAUDIODS = "sDocumentStructure:SAudioDS";
+	public static final String TYPE_SAUDIODS = "sDocumentStructure:SAudioDataSource";
 	public static final String TYPE_STEXTUALDS = "sDocumentStructure:STextualDS";
 	public static final String TYPE_STOKEN = "sDocumentStructure:SToken";
 	public static final String TYPE_SSPAN = "sDocumentStructure:SSpan";
@@ -159,8 +159,8 @@ public class SaltXMLHandler extends DefaultHandler2 {
 			SaltProject project = SaltFactory.eINSTANCE.createSaltProject();
 			setSaltObject(project);
 			saltProject = project;
-			String sName= attributes.getValue(ATT_SNAME);
-			if (sName!= null){
+			String sName = attributes.getValue(ATT_SNAME);
+			if (sName != null) {
 				project.setSName(sName);
 			}
 			currentContainer.push(project);
