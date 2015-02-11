@@ -366,7 +366,8 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 
 		SaltXMLHandler contentHandler = new SaltXMLHandler();
-
+		contentHandler.setResource(objectURI);
+		
 		try {
 			parser = factory.newSAXParser();
 			xmlReader = parser.getXMLReader();
