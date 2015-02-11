@@ -96,7 +96,7 @@ public class SaltXMLHandler extends DefaultHandler2 {
 	public static final String TYPE_SSPAN = "sDocumentStructure:SSpan";
 	public static final String TYPE_SSTRUCTURE = "sDocumentStructure:SStructure";
 	public static final String TYPE_STEXTUAL_RELATION = "sDocumentStructure:STextualRelation";
-	public static final String TYPE_SAUDIO_RELATION = "sDocumentStructure:SAudioRelation";
+	public static final String TYPE_SAUDIO_RELATION = "sDocumentStructure:SAudioDSRelation";
 	public static final String TYPE_STIMELINE_RELATION = "sDocumentStructure:STimelineRelation";
 	public static final String TYPE_SSPANNING_RELATION = "sDocumentStructure:SSpanningRelation";
 	public static final String TYPE_SORDER_RELATION = "sDocumentStructure:SOrderRelation";
