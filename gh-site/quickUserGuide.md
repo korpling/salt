@@ -12,7 +12,7 @@ In this article, we present only a very simple example to show the main componen
 After having illustrated the modelling of a corpus with Salt in [Persist and Load](#persistAndLoad) we show how to persist and load a model to disk.
 
 
-### <a name="corpusStructure>Corpus Structure</a>
+### <a name="corpusStructure">Corpus Structure</a>
 
 Due to it´s graph based structure, even sub- and super-corpora are modeled as nodes having relations connecting them and creating a containment relationship. The only element not following the graph approach is the element _SaltProject_. This element serves as container for a set of corpus structures represented via the model element _SCorpusGraph_. Such a corpus structure is organized as a graph and contains corpora and documents. Salt distinguishes between a corpus (which can contain other corpora and documents) and documents (which only contain the document structure). The document structure itself is organized as a graph called _SDocumentGraph_. The _SDocumentGraph_ is the element containing the primary data and the linguistic analysis. The corpus structure is just for organizing a complex linguistic project. A corpus in Salt is represented by the element _SCorpus_ and a document is represented by the element _SDocument_. 
 In this section, we create a simple corpus structure having one corpus and one document. Since corpora and documents are nodes, they can be labeled. To show this mechanism, we create a meta-annotation, defining the annotator of that corpus. A meta-annotation is represented via the element _SMetaAnnotation_. The corpus structure created here is shown in the figure.
