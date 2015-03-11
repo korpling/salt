@@ -111,7 +111,7 @@ A token in Salt is not bound to a linguistic unit - in this example we show how 
 In the given table SPACE is an alias for a space or a blank ' '.
 The following figure shows an excerpt of the document graph we want to model in Salt. The figure only shows the tokens overlapping the words 'Is', 'this', 'example' and '.'.
 
-!sample_token.jpg!
+!(gh-site/img/sample_tokenization.png)
 
 In the following snippet we show an example of creating a tokenization by creating just one token. The creation of all other tokens is done in the same manner. Each token will be added to the morphology layer. A layer in Salt is represented by the element _SLayer_ and defines a kind of a sub-graph, for instance for clustering nodes to a specific linguistic analysis. The snippet also shows the annotation of tokens with part-of-speech and lemma annotations using the element _SAnnotation_.
 
