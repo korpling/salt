@@ -6,7 +6,7 @@ With Salt we provide an easily understandable meta model for linguistic data and
 
 ## Documentation
 * [Salt quick user guide](./gh-site/quickUserGuide.md) - a short quide to introduce the Salt API
-* [Salt model guide](./gh-site/doc/salt_modelGuide.pdf) - a guide describing the model of Salt
+* [Salt model guide](./gh-site/doc/salt_modelGuide.pdf) - a guide describing the model of Salt (Click on 'View Raw')
 
 ##Maven
 
