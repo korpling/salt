@@ -35,14 +35,14 @@
         <title>The aim of Salt</title>
         <para>With Salt we provide a) an easily understandable meta model for linguistic data and b)
             an open source API to store, manipulate and represent data. Salt is an abstract model,
-            poor in linguistic semantics. As a result, it is agnostic to linguistic schools or
-            theories. The core model is graph based and therefore keeps the structural restrictions
-            very low and allows for a wide range of possible linguistic annotations like syntactic,
-            morphological, coreferential annotations and many more. You can even model your own very
-            personal annotation as long as it fits into a graph structure (and so far we have not
-            seen a linguistic annotation which does not). Furthermore, Salt does not depend on a
-            specific linguistic tagset and this allows you to use every tagset you like.</para>
-        <para>Originally Salt was developed as a common meta model as part of the SaltNPepper project<footnote>
+            poor in linguistic semantics. As a result, Salt can cover most linguistic schools or
+            theories. The core model is graph-based and therefore keeps the structural restrictions
+            very low and allows for a wide range of possible linguistic annotations such as
+            syntactic, morphological, coreferential annotations and many more. You can even model
+            your own personal annotation as long as it fits into a graph structure. Furthermore,
+            Salt does not depend on a specific linguistic tagset and this allows you to use every
+            tagset you like.</para>
+        <para>Salt was originally developed as a common meta model as part of the SaltNPepper project<footnote>
                 <para>see <link xlink:href="http://u.hu-berlin.de/saltnpepper"
                         >http://u.hu-berlin.de/saltnpepper</link></para>
             </footnote>. The aim of this project was to develop a converter framework (called
@@ -59,43 +59,44 @@
                 <para>see <link xlink:href="http://linktype.iaa.uni-jena.de/atomic/"
                         >http://linktype.iaa.uni-jena.de/atomic/</link></para>
             </footnote>and of course Pepper.</para>
-        <para>Salt was developed following a model driven development approach with the use of the
-            Eclipse Modeling framework (EMF, see <link
-                xlink:href="http://www.eclipse.org/modeling/emf/"
-                >http://www.eclipse.org/modeling/emf/</link>). EMF provides a UML near syntax and
+        <para>Salt was developed by following a model driven development approach with the Eclipse
+            Modeling framework (EMF, see <link xlink:href="http://www.eclipse.org/modeling/emf/"
+                >http://www.eclipse.org/modeling/emf/</link>). EMF provides a UML like syntax and
             possibilities to automatically generate code for an API. We used the code generation to
             generate Java code and extended the API with many functions for an easier access. This
             makes the API much more specific to the linguistic domain.</para>
-        <para>This article addresses a wider range of readers. We want to satisfy readers coming
-            from a linguistic background as well as readers coming from a technical background. As
-            this is a balancing act between different domains, we try to provide simple additional
+        <para>This guide addresses a wider range of readers. We want to satisfy readers coming from
+            a linguistic background as well as readers coming from a technical background. As this
+            is a balancing act between different domains, we try to provide simple additional
             information for specific terms and aspects of the different domains. If you get bored at
             some point, don't hesitate to step over these paragraphs to the more interesting parts.
             We always try to improve our software and guides as well. And since we are an open
             source community project, this is your chance to participate. So if you find typos or
-            misleading parts of text, please let us know and the honor will be yours. Just mail to
+            misleading parts of text, please let us know. Just mail to
                 <email>saltnpepper@lists.hu-berlin.de</email>.</para>
     </sect1>
     <sect1 xml:id="sec_graph">
         <title>What is a graph?</title>
-        <para>Since Salt is a totally graph based model, it is important to have a basic
+        <para>Since Salt is a totally graph-based model, it is important to have a basic
             understanding of what a graph is.</para>
         <para>A graph is a very simple, but not a linguistic structure. So we need to abstract over
-            linguistic data to press them into such a structure. To give a simple explanation of
-            what a graph is, let us forget linguistics for a moment and think about humans and their
+            linguistic data to map them into such a structure. To give a simple explanation of what
+            a graph is, let us forget linguistics for a moment and think about humans and their
             relationships. Imagine a set of humans for instance your family or friends. In a graph,
             each of these humans will represent one node. The relationship, for instance between
             exactly two humans then is defined as an edge. In other words, an edge connects two
             nodes. Now the relations between humans can be very different, so for instance the
             relation between a couple can be described as a love relation, whereas the relation
-            between an employee and her/his boss could be described as a work relation. This example
-            shows us that the edges between nodes can be very different, as well as human relations
-            could be. To differentiate the types of edges, they could be labeled. The same goes for
-            the nodes: they also could be labeled, for instance with the human's name it represents.
-            Returning to linguistics, this means, when we can model humans and their relationships
-            as a graph, we can also model linguistic artifacts as a graph. For instance we can model
-            texts, tokens etc. as nodes, linguistic categorization as labels and relations between
-            them as edges. In the following, this will become clearer.</para>
+            between an employee and her/his boss could be described as a work relation. A relation
+            can also have a direction imagine for instance a person and a car are modeled as nodes
+            and a relation with the semantic drive. Than a person can drive a car, but not the way
+            around. The examples have shown that edges between nodes can be very different, as well
+            as human relations could be. To differentiate the types of edges, they can be labeled.
+            The same goes for the nodes: they also could be labeled, for instance with the human's
+            name it represents. Returning to linguistics, this means, when we can model humans and
+            their relationships as a graph, we can also model linguistic artifacts as a graph. For
+            instance we can model texts, tokens etc. as nodes, linguistic categorization as labels
+            and relations between them as edges.</para>
         <para>As we now have an informal understanding of what a graph is, we provide a formal
             definition of what we consider a graph to be. To model Salt, we enhanced the general
             directed graph structure, which is <emphasis role="italic">G= (V, E)</emphasis> with: <itemizedlist>
@@ -112,10 +113,9 @@
     </sect1>
     <sect1 xml:id="sec_salt">
         <title>What is Salt?</title>
-        <para>As already mentioned, Salt is a graph based model, therefore we expanded the graph
-            structure presented in <xref linkend="sec_graph"/> with layers and labels and the
-            mechanism to label a graph, a node, an edge, a layer or another label. The expanded
-            graph structure is given by <emphasis role="italic">G=(V, E, L,
+        <para>We expanded the graph structure presented in <xref linkend="sec_graph"/> with layers
+            and labels and the mechanism to label a graph, a node, an edge, a layer or another
+            label. The expanded graph structure is given by <emphasis role="italic">G=(V, E, L,
                     {label<subscript>a</subscript>, … label<subscript>b</subscript>})</emphasis>
             with: <itemizedlist>
                 <listitem>
@@ -124,16 +124,18 @@
                                 label<subscript>d</subscript>}) &#x220a; V</emphasis></para>
                 </listitem>
                 <listitem>
-                    <para>E being a set of directed edges with <emphasis role="italic">e=
-                                (v<subscript>1</subscript> &#x220a; V, v<subscript>2</subscript>
-                            &#x220a; V, {label<subscript>e</subscript>, …
-                                label<subscript>f</subscript>}) &#x220a; E</emphasis></para>
+                    <para><emphasis role="italic">E</emphasis> being a set of directed edges with
+                            <emphasis role="italic">e= (v<subscript>1</subscript> &#x220a; V,
+                                v<subscript>2</subscript> &#x220a; V,
+                            {label<subscript>e</subscript>, … label<subscript>f</subscript>})
+                            &#x220a; E</emphasis></para>
                 </listitem>
                 <listitem>
-                    <para>L being a set of layers with <emphasis role="italic">l=
-                                (V<subscript>1</subscript> ⊆ V, E<subscript>1</subscript> ⊆ E,
-                                L<subscript>1</subscript> ⊆ L, {label<subscript>g</subscript>,..
-                                label<subscript>h</subscript>}) &#x220a; L</emphasis></para>
+                    <para><emphasis role="italic">L</emphasis> being a set of layers with <emphasis
+                            role="italic">l= (V<subscript>1</subscript> ⊆ V,
+                                E<subscript>1</subscript> ⊆ E, L<subscript>1</subscript> ⊆ L,
+                                {label<subscript>g</subscript>,.. label<subscript>h</subscript>})
+                            &#x220a; L</emphasis></para>
                 </listitem>
                 <listitem>
                     <para>and a set of labels <emphasis role="italic"
@@ -141,36 +143,45 @@
                             label<subscript>b</subscript>}</emphasis> the graph is labeled
                         with.</para>
                 </listitem>
-            </itemizedlist>Each label is defined as <emphasis role="italic"
-                    >label<subscript>y</subscript>= (namespace, name, value,
-                    {label<subscript>k</subscript>,...label<subscript>l</subscript>})</emphasis>. </para>
-        <para> A layer is a grouping mechanism for nodes and edges, and can also contain further
-            layers (called sub layers). The containment relation implements a recursive structure
-            for layers, to build hierarchies. In general this mechanism enables the creation of sub
-            graphs. But note that a layer cannot be contained by itself, so cycles of layers are not
-            possible. </para>
-        <para> A label is an attribute-value-pair contained in either a node, an edge, a graph, a
-            layer or another label. The attribute-value-pair mechanism is realized by two
-            components, a naming component and a value component. The naming component must be
-            unique for one object and consists of the two values namespace and name. We expand the
-            naming component with a namespace attribute to enable the possibility of adding more
-            than one label with the same name to one graph, node etc. Now an object can have two
-            labels with the same name but different namespaces. The value component is simpler and
-            is just the value itself. The values of namespace and name are restricted to be a String
-            value, whereas the value is unbound and can be in principle anything.</para>
-        <para>At last we want to regard Salt from a modelling point of view. Therefore <xref
-                linkend="fig_graph_model"/> shows the base model, that we used for our abstraction
-            for linguistic data in EMF. The figure shows, the above defined elements and their
-            connection to each other. In Salt, we call a node <classname>SNode</classname>, an edge
-                <classname>SRelation</classname>, a layer <classname>SLayer</classname> and a graph
-                <classname>SGraph</classname>. <figure xml:id="fig_graph_model">
+            </itemizedlist> A graphical overview of Salt's core model is shown in <xref
+                linkend="fig_graph_model"/>. The reference <classname>source</classname> and
+                <classname>target</classname> between <classname>SRelation</classname> and
+                <classname>SNode</classname> determines the direction of a relation between two
+                nodes.<figure xml:id="fig_graph_model">
                 <title>Salt's graph model (class diagram)</title>
                 <mediaobject>
                     <imageobject>
                         <imagedata width="350" fileref="images/graph_model.png"/>
                     </imageobject>
                 </mediaobject>
-            </figure> When you take a look at figure, you might wonder, what the attribute
+            </figure>
+        </para>
+        <para> A layer is a grouping mechanism for nodes and edges, and can also contain further
+            layers (called sub layers). The containment relation implements a recursive structure
+            for layers, to build hierarchies. In general this mechanism enables the creation of sub
+            graphs. But note that a layer cannot be contained by itself, so cycles of layers are not
+            possible. </para>
+        <para> A label is an attribute-value-pair and can belong to either a node, an edge, a graph,
+            a layer or another label as shown in <xref linkend="fig_labelAndGraph"/>. An
+            attribute-value-pair is a triple which consists of a namespace, a name and a value
+            (namespace:name=value). The combination of name and namespace is used to identify a
+            label and therefore must be unique. The namespace is an optional value, to ditinguish in
+            case of there are two labels having the same name. For instance a node etc. can have a
+            label <emphasis role="italic">stts:pos=VVFIN</emphasis> as well as the label <emphasis
+                role="italic">pos:VV</emphasis> to annotate it with two part-of-speech annotations
+            from different tagsets. <figure xml:id="fig_labelAndGraph">
+                <title>Label mechanism for graph, node, edge and layer (class diagram)</title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata width="200" fileref="images/labelAndGraph.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+        </para>
+        <!-- Should sType still be contained in guide?
+        <para>
+            
+            When you take a look at figure, you might wonder, what the attribute
                 <classname>sType</classname> of element <classname>SRelation</classname>
                 (<classname>SRelation.sType</classname>) means, since it is not introduced in the
             formal model and conflicts with the approach that everything we use in Salt must be one
@@ -184,88 +195,72 @@
                 linkend="sec_pointingRelation"/> and <xref linkend="sec_hierarchies"/>. <xref
                 linkend="fig_labelAndGraph"/> shows labels as model elements, which in Salt is
             called <classname>SLabel</classname>, and the connection between such a label and the
-            other model elements. <figure xml:id="fig_labelAndGraph">
-                <title>Label mechanism for graph, node, edge and layer (class diagram)</title>
+            other model elements.
+        </para>
+         -->
+        <para>Generally spoken, an annotation is an interpretation of primary data (see <xref
+                linkend="sec_primData"/>). In Salt, we differentiate this abstract form of
+            annotation into a "structural" and a "semantic" part. Imagine for instance a syntax
+            tree. In Salt, the tree itself, which is modeled by nodes and edges, belongs to the
+            structural part, whereas the assignment of a node or an edge to a category like being a
+            sentence, a noun phrase etc. belongs to the semantic part. The semantic part is realized
+            by labeling a node or an edge for instance by adding a label with the name '<emphasis
+                role="italic">cat</emphasis>' and value '<emphasis role="italic">S</emphasis>'
+            (following the TIGER scheme<footnote>
+                <para>see <link
+                        xlink:href="http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf"
+                        >http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora
+                        /TIGERCorpus/annotation/tiger_scheme-syntax.pdf</link></para>
+            </footnote>, where '<emphasis role="italic">cat</emphasis>' stands for category and
+                '<emphasis role="italic">S</emphasis>' for sentence). Note that such a tagset is not
+            part of Salt. Salt is poor in semantics, which means you can use every tagset you
+            like.</para>
+        <para>We further differentiate between a linguistic annotation and a meta annotation. A
+            linguistic annotation defines a structural element as a specific linguistic category. A
+            meta annotation adds linguistic and non-linguistic information on a meta level to a
+            structural element. For instance language information to a primary text, information
+            about an annotator of a syntax tree and so on. But still both sorts of annotations are
+            derivates of a label and are therefore a triple consisting of a namespace, a name and a
+            value as shown in <xref linkend="fig_annotations"/>. <figure xml:id="fig_annotations">
+                <title>Annotations in Salt are specific types of labels (class diagram)</title>
                 <mediaobject>
                     <imageobject>
-                        <imagedata width="200" fileref="images/labelAndGraph.png"/>
+                        <imagedata width="200" fileref="images/model_annotations.png"/>
                     </imageobject>
                 </mediaobject>
             </figure>
         </para>
-        <sect2 xml:id="sec_labeling">
-            <title>Annotations and label mechanism</title>
-            <para>Generally spoken, an annotation is an interpretation of primary data (see <xref
-                    linkend="sec_primData"/>). In Salt, we differentiate this abstract form of
-                annotation into a "structural" and a "semantic" part. Imagine for instance a syntax
-                tree. In Salt, the tree itself, which is modeled by nodes and edges, belongs to the
-                structural part, whereas the assignment of a node or an edge to a category like
-                being a sentence, a noun phrase etc. belongs to the semantic part. The semantic part
-                is realized by labeling a node or an edge for instance by adding a label with the
-                name '<emphasis role="italic">cat</emphasis>' and value '<emphasis role="italic"
-                    >S</emphasis>' (following the TIGER scheme<footnote>
-                    <para>see <link
-                            xlink:href="http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf"
-                            >http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/annotation/tiger_scheme-syntax.pdf</link></para>
-                </footnote>, where '<emphasis role="italic">cat</emphasis>' stands for category and
-                    '<emphasis role="italic">S</emphasis>' for sentence). Note that such a tagset is
-                not part of Salt. Salt is poor in semantics, which means you can use every tagset
-                you like.</para>
-            <para>We further differentiate between a linguistic annotation and a meta annotation. A
-                linguistic annotation defines a structural element as a specific linguistic
-                category. A meta annotation adds linguistic and non-linguistic information on a meta
-                level to a structural element. For instance language information to a primary text,
-                information about an annotator of a syntax tree and so on. But still both sorts of
-                annotations are derivates of a label and are therefore a triple consisting of a
-                namespace, a name and a value as shown in <xref linkend="fig_annotations"/>. <figure
-                    xml:id="fig_annotations">
-                    <title>Annotations in Salt are specific types of labels (class diagram)</title>
-                    <mediaobject>
-                        <imageobject>
-                            <imagedata width="200" fileref="images/model_annotations.png"/>
-                        </imageobject>
-                    </mediaobject>
-                </figure>
-            </para>
-            <para>Since annotations are a core essence of linguistic work, they will be used at
-                various places in the following.</para>
-            <para>Next to <classname>SAnnotation</classname> and
-                    <classname>SMetaAnnotation</classname>, there are two further subtypes of
-                    <classname>Label</classname>. One is
-                    <classname>SProcessingAnnotation</classname> and the other is
-                    <classname>SFeature</classname>. The type
-                    <classname>SProcessingAnnotation</classname> is not part of the model, this type
-                could be used, to add some information to any Salt object during a processing. So
-                for instance you can store any state like '<emphasis role="italic">already
-                    processed</emphasis>' or other non-linguistic and non meta annotations like
-                'having the color red'<footnote>
-                    <para>For instance if you compute the chromatic number of the linguistic
-                        graph.</para>
-                </footnote> to it. Unfortunately the label <classname>SFeature</classname> is a bit
-                more complicated. The good news is, that you normally will not need to work with it,
-                when using the Salt API. The <classname>SFeature</classname> is a mechanism to
-                enhance our graph elements with class attributes<footnote>
-                    <para>In UML or object oriented programming languages an attribute is part of a
-                        class to store a state of a class instance.</para>
-                </footnote>. We will explain this in more detail in <xref linkend="sec_annotation"
-                />. We just mention it here since we have used the <classname>SFeature</classname>
-                mechanism to model the class attribute
-                <classname>SRelation.sType</classname>.</para>
-            <para> If it is not clear what this has to do with modeling linguistic data, we hope to
-                make it clear in the following sections. But always keep in mind, that everything in
-                Salt and all its power is reducible, to the here presented graph structure. And
-                since the nodes and edges in Salt are just used as placeholders, the real power -
-                especially the linguistic one - is in the labeling mechanism, which is widely used
-                in Salt as you will see in the following.</para>
-        </sect2>
+        <para>Since the semantic enrichment of structures are a core essence of linguistic work,
+            they will be used at various places in the following.</para>
+        <para>Next to <classname>SAnnotation</classname> and <classname>SMetaAnnotation</classname>,
+            there are two further subtypes of <classname>Label</classname>. One is
+                <classname>SProcessingAnnotation</classname> and the other is
+                <classname>SFeature</classname>. The type
+                <classname>SProcessingAnnotation</classname> is not part of the model, this label
+            could be used, to add some information to any Salt object during a processing. So for
+            instance you can store any state like '<emphasis role="italic">already
+                processed</emphasis>' or other non-linguistic and non meta annotations like 'having
+            the color red'<footnote>
+                <para>For instance if you compute the chromatic number of the linguistic
+                    graph.</para>
+            </footnote> to it. <classname>SFeature</classname> objects are used to store structural
+            information of Salt, which are necessary to map a linguistic model to a graph. As we
+            show in section <xref linkend="sec_tokenization"/> this type of label is used to
+            determine the offset of tokens in a primary text. </para>
+        <para> If it is not clear what this has to do with modeling linguistic data, we hope to make
+            it clear in the following sections. But always keep in mind, that everything in Salt and
+            all its power is reducible, to the here presented graph structure. And since the nodes
+            and edges in Salt are just used as placeholders, the real power - especially the
+            linguistic one - is in the labeling mechanism, which is widely used in Salt as you will
+            see in the following sections.</para>
 
     </sect1>
     <sect1 xml:id="sec_saltInDetail">
         <title>How does Salt work?</title>
         <para>This section addresses the single components of Salt and the linguistic aspects they
             are covering. It is divided into two parts, the corpus-structure and the
-            document-stcuture. The corpus-structure is a grouping mechanism, to organize a corpus,
-            whereas the document-structure covers the 'real' linguistic part.</para>
+            document-structure. The corpus-structure is a grouping mechanism, to organize a corpus,
+            whereas the document-structure covers the primary data and all their annotations.</para>
         <sect2 xml:id="sec_corpusStructure">
             <title>Corpus-structure</title>
             <para> A corpus-structure structures an entire corpus into smaller logical units. Such
@@ -305,7 +300,7 @@
                 <title>Document</title>
                 <para>A document is a logical partition which represents the end point of the
                     corpus-structure hierarchy. Partitioning data means that no relations between
-                    data of two partitions are allowed. More concretely spoken, a document normally
+                    data of two partitions are allowed. More concretely spoken, a document usually
                     contains a single text and all annotations corresponding to it, but no
                     interlinks between texts of different documents or their annotations. A text can
                     be a paragraph, a chapter, an article or even an entire book. But a text can
@@ -327,7 +322,7 @@
             </sect3>
             <sect3 xml:id="sec_corpusGraph">
                 <title>Corpus graph</title>
-                <para>Since Salt is graph based over and over, the corpus-structure is represented
+                <para>Since Salt is graph-based over and over, the corpus-structure is represented
                     as a graph, called the <classname>SCorpusGraph</classname>. This graph realizes
                     a directed tree structure, whose nodes are corpora
                         (<classname>SCorpus</classname>) and documents
@@ -350,9 +345,9 @@
                     Two objects of type <classname>SCorpusRelation</classname> connect the <emphasis
                         role="italic">superCorpus</emphasis> with <emphasis role="italic"
                         >subCorpus1</emphasis> and <emphasis role="italic">subCorpus2</emphasis>.
-                    Four objects of type <classname>SDocumentCorpusRelation</classname> connect the
-                    sub corpus subCorpus1 with documents <emphasis role="italic">doc1</emphasis> and
-                        <emphasis role="italic">doc2</emphasis> and sub corpus <emphasis
+                    Four objects of the type <classname>SDocumentCorpusRelation</classname> connect
+                    the sub corpus subCorpus1 with documents <emphasis role="italic">doc1</emphasis>
+                    and <emphasis role="italic">doc2</emphasis> and sub corpus <emphasis
                         role="italic">subCorpus2</emphasis> with documents <emphasis role="italic"
                         >doc3</emphasis> and <emphasis role="italic">doc4</emphasis>.<figure
                         xml:id="fig_sample_corpusStructure">
@@ -367,13 +362,13 @@
             </sect3>
             <sect3 xml:id="sec_metaAnnotation">
                 <title>Meta annotations</title>
-                <para>Meta annotations are very useful for corpora to document, for instance, the
-                    creation process or the aim of the corpus. These information are supposed to
-                    give a person working with this corpus additional non-linguistic information.
-                    For instance which tools have been used, which persons have annotated the
-                    corpus, when was the corpus annotated and so on. Let's give an example: A meta
-                    annotation describing the date of the origin would have the
-                        <classname>sName</classname>="date" and the
+                <para>Meta annotations are very useful for instance to document the creation process
+                    or the aim of a corpus, a sub corpus or a document. These information are
+                    supposed to give a person working with this corpus additional non-linguistic
+                    information. For instance which tools have been used, which persons have
+                    annotated the corpus, when was the corpus annotated and so on. Let's give an
+                    example: A meta annotation describing the creation date of the origin would have
+                    the <classname>sName</classname>="date" and the
                     <classname>sValue</classname>="1487" and an empty <varname>sNS</varname> can be
                     added to a <classname>SCorpus</classname>. Salt is an open model, which means,
                     there are no limitations on naming a meta annotation. Further, Salt does not
@@ -381,16 +376,17 @@
                     also be named '<emphasis role="italic">creator</emphasis>' or something else
                     instead of '<emphasis role="italic">author</emphasis>'. </para>
                 <para> The most convenient way to use meta annotations is to add a meta annotation
-                    to a document or a corpus node. But since a meta annotation is just a label of a
-                    specific type, you are free to add it to each node or edge in the Salt model.
-                </para>
+                    to a document node or a corpus node. But since a meta annotation is just a label
+                    of a specific type, you are free to add it to each node or edge in the Salt
+                    model (for instance to annotate a specific node being created by from a specific
+                    annotator). </para>
             </sect3>
         </sect2>
         <sect2 xml:id="sec_documentStructure">
             <title>Document-structure</title>
             <para>In contrast to the corpus-structure, the document-structure covers the "real"
-                linguistic data, which means primary data, linguistic structures and annotations
-                above them. The linguistic structure contains the nodes:
+                linguistic data, which means primary data, linguistic structures and annotations on
+                them. The linguistic structure contains the nodes:
                     <classname>SSequentialDS</classname>, <classname>STextualDS</classname>,
                     <classname>SAudioDataSource</classname>, <classname>SToken</classname>,
                     <classname>SSpan</classname> and <classname>SStructure</classname> and the
@@ -414,29 +410,30 @@
                     textual data, audio-video data etc. . A special subtype of primary data is the
                     primary text, which only covers textual data. Since in linguistics the term and
                     the meaning of primary data and especially primary text is controversial, we
-                    here use primary data as the first digitalisation of data which comes into a
-                    Salt model.</para>
-                <para>So now the question is how to realize primary data in a graph based world. And
-                    the answer is: with graph elements, or more precisely with nodes and labels. In
+                    here use primary data as the digitalisation(s) of data which comes into a Salt
+                    model.</para>
+                <para>The question is how to realize primary data in a graph-based world. And the
+                    answer is: with graph elements, or more precisely with nodes and labels. In
                     Salt, a specific node of type <classname>SDatasource</classname> is used as a
-                    placeholder for a primary date. The real data itself is added to that node with
-                    a label having the name <varname>sData</varname> and the namespace <emphasis
-                        role="italic">salt</emphasis>. The same goes for each subtype of
-                        <classname>SDatasource</classname>, so for instance for the type
-                        <classname>STextualDS</classname> which represents primary texts in Salt,
-                    see <xref linkend="fig_primaryData"/>.</para>
+                    placeholder for a primary date. But to store for instance a text like the
+                    primary text '<emphasis role="italic">Is this example more complicated than it
+                        appears to be?</emphasis>' Salt uses a label or more precisly an object of
+                    type <classname>SFeature</classname> having the name <varname>sData</varname>,
+                    the namespace <emphasis role="italic">salt</emphasis> ans the value '<emphasis
+                        role="italic">Is this example more complicated than it appears to
+                        be?</emphasis>'. <xref linkend="fig_primaryData"/> shows how a
+                        <classname>STextualDS</classname> object is modeled. The attribute
+                        <classname>STextualDS.sText</classname> is just a shortcut to have an easy
+                    access to the <classname>sValue</classname> attribute of the connected
+                        <classname>SFeature</classname> object.</para>
                 <figure xml:id="fig_primaryData">
-                    <title>Primary data and primary text in Salt (class/object diagram)</title>
+                    <title>Primary data and primary text in Salt (object diagram)</title>
                     <mediaobject>
                         <imageobject>
                             <imagedata width="200" fileref="images/model_primaryData.png"/>
                         </imageobject>
                     </mediaobject>
                 </figure>
-                <para>Regarding <xref linkend="fig_primaryData"/> the primary text like '<emphasis
-                        role="italic">Is this example more complicated than it appears to
-                        be?'</emphasis> is stored as the value of the shown
-                        <classname>SFeature</classname>.</para>
             </sect3>
             <sect3 xml:id="sec_tokenization">
                 <title>Tokenization</title>
@@ -454,7 +451,7 @@
                         <classname>SNode</classname>. Such a <classname>SToken</classname> object is
                     a placeholder for annotations and a target for interlinking. The
                         <classname>SToken</classname> object itself does not contain any information
-                    about the overlapped primary data. In case of the primary data being text, this
+                    about the overlapped primary data. In case of the primary data is a text, this
                     is realized with a specific type of <classname>SRelation</classname>, the
                         <classname>STextualRelation</classname>. A
                         <classname>STextualRelation</classname> links a primary text (as source)
@@ -497,7 +494,7 @@
             </sect3>
             <sect3 xml:id="sec_annotation">
                 <title>Annotations</title>
-                <para>In the last sections we showed how to model the "structural" part of
+                <para>In the previous sections we showed how to model the "structural" part of
                     annotations (we have often called it placeholder). Now we want to give an
                     impression of how to do the "semantic" part. Therefore we pick up the sample
                     used in <xref linkend="sec_tokenization"/> and especially its tokenization. We
@@ -506,8 +503,12 @@
                     to make use of it by adding a <classname>SAnnotation</classname> object to each
                     token having the <classname>sName</classname> '<emphasis role="italic"
                         >pos</emphasis>' and the corresponding part-of-speech value as
-                        <classname>sValue</classname>. <xref linkend="fig_sample_token_annotation"/>
-                    shows the annotation for the previous used tokenization sample.<figure
+                        <classname>sValue</classname> (not every node needs to be annotated with the
+                    same annotation). <xref linkend="fig_sample_token_annotation"/> shows the
+                    annotation for the previous used tokenization sample using the (Penn) Treebank
+                    Tag-set (see: <link
+                        xlink:href="http://www.comp.leeds.ac.uk/amalgam/tagsets/upenn.html"
+                        >http://www.comp.leeds.ac.uk/amalgam/tagsets/upenn.html</link>). <figure
                         xml:id="fig_sample_token_annotation">
                         <title>Part-of-speech annotations of sample tokenization (simplified object
                             diagram)</title>
@@ -534,8 +535,8 @@
                     with part-of-speech annotations. But remember, that Salt is not bound to a
                     specific set of annotations or tagsets. This means, you can use any kind of
                     annotations with the same machanism. Furthermore adding an
-                        <classname>SAnnotation</classname> is not bound to tokens. Also any
-                        <classname>SNode</classname>, <classname>SRelation</classname>,
+                        <classname>SAnnotation</classname> is not bound to tokens. Each graph
+                    element like <classname>SNode</classname>, <classname>SRelation</classname>,
                         <classname>SLayer</classname>, <classname>SGraph</classname> and even
                         <classname>SAnnotation</classname> can be annotated in this way.
                     <!-- explain SPOSAnnotation and mention SLemmaAnnotation and all availables; explain ISOCat mechanism when ready -->
@@ -545,14 +546,14 @@
                 <title>Spans of tokens</title>
                 <para>A span is used to group a couple of tokens together to give them exactly the
                     same annotation or to connect them as a bunch with a 3rd node at once. A span
-                    therefore has the semantic of an ordered set. In a graph based world, we need to
+                    therefore has the semantic of an ordered set. In a graph-based world, we need to
                     model such an ordered set as nodes and edges. Therefore Salt provides the node
                     type <classname>SSpan</classname> and the relation type
                         <classname>SSpanningRelation</classname>. A <classname>SSpan</classname>
                     object represents the span itself and for instance could be annotated or linked
-                    with other nodes. To realize the containment of tokens in a span, each token is
-                    connected with the span with a separate <classname>SSpanningRelation</classname>
-                    object, see <xref linkend="fig_model_span"/>. A
+                    with other nodes. To mark a token as being part of the set, a
+                        <classname>SSpanningRelation</classname> object connects each token with the
+                    span, see <xref linkend="fig_model_span"/>. A
                         <classname>SSpanningRelation</classname> always has a span as source and a
                     token as target.<figure xml:id="fig_model_span">
                         <title>Relation of spans in Salt via <classname>SSpan</classname> and
@@ -589,22 +590,22 @@
                             </imageobject>
                         </mediaobject>
                     </figure> Spans can even be very helpful to annotate bigger parts of the primary
-                    text, for instance to annotate information structure or foreign language parts
-                    etc. . Also a <classname>SSpanningRelation</classname> can carry further
-                    annotations, but this is rather unusual since such an edge has no own linguistic
-                    semantics and is just a technical mechanism to model ordered sets in a
-                    graph.</para>
+                    text, for instance to annotate several tokens as phrases, sentences or foreign
+                    language parts etc. . Also a <classname>SSpanningRelation</classname> can carry
+                    further annotations, but this is rather unusual since such an edge has no own
+                    linguistic semantics and is just a technical mechanism to model ordered sets in
+                    a graph.</para>
             </sect3>
             <sect3 xml:id="sec_hierarchies">
                 <title>Hierarchies</title>
-                <para>Hierarchies are a useful mechanism in linguistics to express a complex
-                    structure behind the surface of a text. For instance, a widely used mechanism to
-                    describe phrase structures are syntax trees. The term syntax trees implies that
-                    these hierarchies are trees, even in a graph sense. This means, they consist of
-                    nodes and relations and are therefore easy to model in Salt. Salt offers a
-                    specific type of node, the <classname>SStructure</classname>, and a specific
-                    type of relation, the <classname>SDominanceRelation</classname>. The source of
-                    an <classname>SDominanceRelation</classname> could be a
+                <para>Hierarchies are a useful mechanism to express tree-like or hierarchical
+                    structures behind a text. For instance, a widely used mechanism to describe
+                    phrase structures are syntax trees. The term syntax trees implies that these
+                    hierarchies are trees, even in a graph sense. This means, they consist of nodes
+                    and relations and are therefore easy to model in Salt. Salt offers a specific
+                    type of node, the <classname>SStructure</classname>, and a specific type of
+                    relation, the <classname>SDominanceRelation</classname>. The source of an
+                        <classname>SDominanceRelation</classname> could be a
                         <classname>SToken</classname>, <classname>SSpan</classname> or even a
                         <classname>SStructure</classname> as shown in <xref
                         linkend="fig_model_hierarchie"/>. The unit of both elements enables to
@@ -658,17 +659,20 @@
                 </figure>
             </sect3>
             <sect3 xml:id="sec_pointingRelation">
-                <title>Loose relation</title>
-                <para>Sometimes it is necessary to set objects into a very loose relationship, as a
-                    kind of an interlinking, which does not influence the objects themselves. Such a
-                    relation is the type <classname>SPointingRelation</classname>. A pointing
-                    relation in Salt allows to relate any kind of nodes with each other. In general,
-                    this type of relation has no semantics and could be used for a wide range of
-                    annotations, which does not group or structure nodes. For instance, this could
-                    be very helpful for a dependency analysis or coreferential chains etc. . </para>
-                <para>To give an example, imagine the text '<emphasis role="italic">John was a big
-                        man ... he always had to move his head</emphasis>', where '<emphasis
-                        role="italic">John</emphasis>' (token <emphasis role="italic"
+                <title>Pointing relation</title>
+                <para> Sometimes in linguistics you want to set nodes into a relationship without
+                    adding a set semantic or a hierarchical relation. You sometimes just need an
+                    interlinking mechanism. Such a relation is the type
+                        <classname>SPointingRelation</classname>. A pointing relation in Salt allows
+                    to relate any kind of nodes with each other. In general, this type of relation
+                    has no semantics and could be used for a wide range of annotations, which does
+                    not group or structure nodes. For instance, this could be very helpful for a
+                    dependency analysis or coreferential chains etc. . </para>
+                <para>To give an example, imagine the
+                    text:<programlisting> 
+                    '<emphasis role="italic">John was a big man ... he always had to move his head</emphasis>'
+                    </programlisting>
+                    In this text '<emphasis role="italic">John</emphasis>' (token <emphasis role="italic"
                             >t<subscript>1</subscript></emphasis>) and '<emphasis role="italic"
                         >he</emphasis>' (token <emphasis role="italic"
                         >t<subscript>i</subscript></emphasis>) refer to the same entity. To express
@@ -740,8 +744,9 @@
                     texts (element <classname>STextualDS</classname>) or primary data (element
                         <classname>SDataSource</classname>) is not limited. </para>
                 <para>We want to demonstrate the use of multiple texts by creating a parallel corpus
-                    for the languages English and German. Demonstrations how to model dialogue data
-                    please find in <xref linkend="sec_time"/> and <xref linkend="sec_order"/>.
+                    for the languages English and German<footnote>
+                        <para>More information on modelling dialogue data are given in <xref linkend="sec_time"/> and <xref linkend="sec_order"/>.</para>
+                    </footnote>. 
                     Imagine the primary text '<emphasis role="italic">Is this example more
                         complicated than it appears to be?'</emphasis> and its German counterpart
                         '<emphasis role="italic">Ist dieses Beispiel komplizierter als es zu sein
@@ -756,37 +761,97 @@
                         <para>By the way what is a pity.</para>
                     </footnote>, we here present the translation alignment for the tokenized texts
                     (for an easier alignment, we switched the words at the end a
-                    little):<programlisting>Is    this     example    more complicated   than   it   appears   to   be?
-Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</programlisting>
+                    little):
+                    <table>
+                    <title>Both texts as a dialogue.</title>
+                    <tgroup align="left" cols="10" colsep="1" rowsep="1">
+                        <colspec colname="c1" colnum="1" colwidth="43.96pt"/>
+                        <colspec colname="c2" colnum="2" colwidth="50.78pt"/>
+                        <colspec colname="c3" colnum="3" colwidth="65.94pt"/>
+                        <colspec colname="c4" colnum="4" colwidth="43.2pt"/>
+                        <colspec colname="c5" colnum="5" colwidth="88.67pt"/>
+                        <colspec colname="c6" colnum="6" colwidth="43.96pt"/>
+                        <colspec colname="c7" colnum="7" colwidth="43.96pt"/>
+                        <colspec colname="c8" colnum="8" colwidth="62.91pt"/>
+                        <colspec colname="c9" colnum="9" colwidth="43.96pt"/>
+                        <colspec colname="c10" colnum="10" colwidth="49.26pt"/>
+                        <tbody>
+                            <row>
+                                <entry><emphasis role="italic">t<subscript>1e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>2e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>3e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>4e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>5e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>6e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>7e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>8e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>9e</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>10e</subscript></emphasis></entry>
+                            </row>
+                            <row>
+                                <entry>Is</entry>
+                                <entry>this</entry>
+                                <entry>example</entry>
+                                <entry>more</entry>
+                                <entry>complicated</entry>
+                                <entry>than</entry>
+                                <entry>it</entry>
+                                <entry>appears</entry>
+                                <entry>to</entry>
+                                <entry>be</entry>
+                            </row>
+                            <row>
+                                <entry>Ist</entry>
+                                <entry>dieses</entry>
+                                <entry>Beispiel</entry>
+                                <entry namest="c4" nameend="c5">komplizierter</entry>
+                                <entry>als</entry>
+                                <entry>es</entry>
+                                <entry>scheint</entry>
+                                <entry>zu</entry>
+                                <entry>sein</entry>
+                            </row>
+                            <row>
+                                <entry><emphasis role="italic">t<subscript>1g</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>2g</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>3g</subscript></emphasis></entry>
+                                <entry namest="c4" nameend="c5"><emphasis role="italic">t<subscript>4g</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>5g</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>6g</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>7g</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>8g</subscript></emphasis></entry>
+                                <entry><emphasis role="italic">t<subscript>9g</subscript></emphasis></entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                    </table>
                     Next to the fact, that English and German are sometimes very close to each other
-                    and for our example mostly have a word to word translation, we also have one
-                    case, where the two English words '<emphasis role="italic">more
-                        complicated</emphasis>' are translated to a single German word '<emphasis
+                    and for our example mostly have a word by word translation, we also have a case,
+                    where the two English words '<emphasis role="italic">more
+                    complicated</emphasis>' are translated to a single German word '<emphasis
                         role="italic">komplizierter</emphasis>'. </para>
-                <para>To bring two tokens for instance <emphasis role="italic"
-                            >t<subscript>1e</subscript></emphasis> and <emphasis role="italic"
-                            >t<subscript>1g</subscript></emphasis><footnote>
+                <para>Let's start with the easier case. To bring two tokens for instance <emphasis
+                        role="italic">t<subscript>1e</subscript></emphasis> and <emphasis
+                        role="italic">t<subscript>1g</subscript></emphasis><footnote>
                         <para>Where e stands for English and g for german</para>
                     </footnote> in relation to each other, you can create a
                         <classname>SPointingRelation</classname>
                     <emphasis role="italic">r<subscript>1</subscript></emphasis> which's source is
                         <emphasis role="italic">t<subscript>1e</subscript></emphasis> and target is
                         <emphasis role="italic">t<subscript>1g</subscript></emphasis>. Now they are
-                    connected, but more in a technical than in a semantic sense. To add the
-                    linguistic meaning to that relation, you can use the
-                        <classname>sType</classname> attribute and add for instance the type
-                        '<classname>translation</classname>'. For such a sample, our linguistic
-                    intention to determine that <emphasis role="italic"
-                        >t<subscript>1e</subscript></emphasis> is the translation of <emphasis
-                        role="italic">t<subscript>1g</subscript></emphasis> and even the way around,
-                    the graph structure differs in detail. As our graph is a directed graph, we do
-                    not really have such a bidirectional relation. Depending on the interpretation
-                    of the corpus, it might be useful to create a second relation having <emphasis
-                        role="italic">t<subscript>1g</subscript></emphasis> as source and <emphasis
+                    connected, but more in a technical than in a semantic sense. To add a linguistic
+                    meaning to that relation, you can use the <classname>sType</classname> attribute
+                    and add for instance the type '<classname>translation</classname>'. But note
+                    that relations in Salt are directed. In our case that means, we have modeled
+                    that <emphasis role="italic">t<subscript>1e</subscript></emphasis> is translated
+                    to <emphasis role="italic">t<subscript>1g</subscript></emphasis>, but not the
+                    way arround. Depending on the interpretation of the corpus, it might be useful
+                    to create a second relation having <emphasis role="italic"
+                            >t<subscript>1g</subscript></emphasis> as source and <emphasis
                         role="italic">t<subscript>1e</subscript></emphasis> as target and to mark
                     both relations as being either '<emphasis role="italic">trans_en_de</emphasis>'
                     or '<emphasis role="italic">trans_de_en</emphasis>'.</para>
-                <para>Now coming to the more complex case of aligning the tokens <emphasis
+                <para>Now we come to the more complex case of aligning the tokens <emphasis
                         role="italic">t<subscript>4e</subscript></emphasis> ('<emphasis
                         role="italic">more</emphasis>'), <emphasis role="italic"
                             >t<subscript>5e</subscript></emphasis>('<emphasis role="italic"
@@ -815,8 +880,8 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
             <sect3 xml:id="sec_time">
                 <title>Time management</title>
                 <subtitle>On the example of dialogue data</subtitle>
-                <para>In this section, we address the time management in Salt. But what does it
-                    mean, time management? Remember, Salt is poor in semantics, so time management
+                <para>In this section, we address the time management in Salt. But what does time
+                    management exactly mean? Remember, Salt is poor in semantics, so time management
                     does not address the chronological progression of a text like "<emphasis
                         role="bold">Before</emphasis> Bart went to school, he stood up."<footnote>
                         <para>The modeling of such semantic issues is up to the user, for instance
@@ -826,15 +891,15 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                     dealing with multiple texts. In Salt this is handled by introducing a global<footnote>
                         <para>Global here means global for one document-structure.</para>
                     </footnote> unique timeline which is connected with each token.</para>
-                <para>A lot of linguistic projects do not only address written texts, they further
-                    annotate spoken data. Spoken data differs in two areas from written data. First,
-                    the data source differs, since the primary data of spoken data is mostly an
-                    audio or video stream. Since Salt was developed for covering textual data, for
-                    now, we expect that there is also a textual representation of the audio or video
-                    data. But nevertheless Salt also allows to represent such data. This mechanism
-                    is addressed in detail in <xref linkend="sec_audioData"/>. Second, in many cases
-                    we do not have one continuous text, since there are multiple speakers, which
-                    might speak at the same time. We recommend modelling each text, belonging to one
+                <para>A lot of linguistic projects do not deal with written data, they deal with
+                    spoken data. Spoken data differs in two areas from written data. First, the data
+                    source differs, since the primary data of spoken data is mostly an audio or
+                    video stream. Since Salt was developed for covering textual data, for now, we
+                    expect that there is also a textual representation of the audio or video data.
+                    But nevertheless Salt also allows to represent such data. This mechanism is
+                    addressed in detail in <xref linkend="sec_audioData"/>. Second, in many cases we
+                    do not have one continuous text, since there are multiple speakers, which might
+                    speak at the same time. We recommend modelling each text, belonging to one
                     speaker, in a separate <classname>STextualDS</classname> object<footnote>
                         <para>In section <xref linkend="sec_multipleTexts"/> we discussed the
                             mechanism to model multiple primary texts in Salt.</para>
@@ -909,7 +974,7 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                             >t<subscript>2</subscript></emphasis>, <emphasis role="italic"
                             >t<subscript>4</subscript></emphasis>. In that case, the list could be
                     reordered in temporal order, which means along the offset in primary text
-                        (<classname>STextualRelation.sLeft</classname>). But what is with multiple
+                        (<classname>STextualRelation.sLeft</classname>). But what about multiple
                     texts? If we have multiple texts and order the corresponding tokens by their
                     textual offset, we will end up with a mixed list of tokens of both texts.
                     Imagine a second text '<emphasis role="italic">What a nice sample</emphasis>'
@@ -931,7 +996,7 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                     two persons, with the following temporal order. <table frame="all"
                         xml:id="table_dialogue">
                         <title>Both texts as a dialogue.</title>
-                        <tgroup align="left" cols="10" colsep="1" rowsep="1">
+                        <tgroup align="left" cols="8" colsep="1" rowsep="1">
                             <colspec colname="c1" colnum="1"/>
                             <colspec colname="c2" colnum="2"/>
                             <colspec colname="c3" colnum="3"/>
@@ -1001,17 +1066,26 @@ Ist   dieses   Beispiel   komplizierter      als    es   scheint   zu   sein?'</
                         </mediaobject>
                     </figure> Another use case for <classname>SOrderRelation</classname> objects are
                     parallel tokenizations. For instance a tokenization of characters or letters and
-                    one by word forms. Here it may make sense, to create two pathes, one for the
-                    characters and one for the word forms as shown in <xref
-                        linkend="fig_order_path2"/>. <figure xml:id="fig_order_path2">
+                    one by word forms, both on the same primary text. Here it may make sense, to
+                    create two pathes, one for the characters and one for the word forms as
+                    illustrated in <xref linkend="fig_order_path2"/>. <figure
+                        xml:id="fig_order_path2">
                         <title>Path of word forms (simplified object diagram)</title>
                         <mediaobject>
                             <imageobject>
                                 <imagedata width="200" fileref="images/sample_order_path2.png"/>
                             </imageobject>
                         </mediaobject>
-                    </figure>
-                </para>
+                    </figure> Without the the <classname>SOrderRelation</classname> we just have a
+                    list of tokens, which is sortable by their textual offsets. This would result in
+                    the list: <emphasis role="italic">t<subscript>A</subscript></emphasis>,
+                        <emphasis role="italic">t<subscript>1</subscript></emphasis>, <emphasis
+                        role="italic">t<subscript>B</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>C</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>D</subscript></emphasis>, <emphasis role="italic"
+                            >t<subscript>2</subscript></emphasis>, ... . Such a list is also very
+                    useless. But with the <classname>SOrderRelation</classname> we can distinguish
+                    between both pathes. </para>
             </sect3>
             <sect3 xml:id="sec_audioData">
                 <title>Audio data</title>

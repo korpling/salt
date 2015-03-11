@@ -1,6 +1,12 @@
+![SaltNPepper project](./gh-site/img/SaltNPepper_logo2010.png)
+
 #Salt
 
 With Salt we provide an easily understandable meta model for linguistic data and an open source api to store, manipulate and represent data. Salt is an abstract model, poor of linguistic semantics. As a result, it is free of any linguistic schools or theories. The core model is graph-based and therefore keeps the structural restrictions very low and allows for a wide range of possible linguistic annotations like syntactic, morphological, coreferential annotations and many more. You can even model your own very personal annotation as long as it fits into a graph structure (and so far we have not seen a linguistic annotation which does not). Furthermore, Salt does not depend on a specific linguistic tagset which allows you to use every tagset you like.
+
+## Documentation
+* [Salt quick user guide](./gh-site/quickUserGuide.md) - a short quide to introduce the Salt API
+* [Salt model guide](./gh-site/doc/salt_modelGuide.pdf) - a guide describing the model of Salt
 
 ##Maven
 
