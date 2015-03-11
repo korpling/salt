@@ -111,7 +111,7 @@ A token in Salt is not bound to a linguistic unit - in this example we show how 
 In the given table SPACE is an alias for a space or a blank ' '.
 The following figure shows an excerpt of the document graph we want to model in Salt. The figure only shows the tokens overlapping the words 'Is', 'this', 'example' and '.'.
 
-!(./img/sample_tokenization.png)
+![](./img/sample_tokenization.png)
 
 In the following snippet we show an example of creating a tokenization by creating just one token. The creation of all other tokens is done in the same manner. Each token will be added to the morphology layer. A layer in Salt is represented by the element _SLayer_ and defines a kind of a sub-graph, for instance for clustering nodes to a specific linguistic analysis. The snippet also shows the annotation of tokens with part-of-speech and lemma annotations using the element _SAnnotation_.
 
@@ -135,7 +135,7 @@ tok_is.createSAnnotation(null, "lemma", "be");
 
 Again, we did not explicitly create the relations: their creation is hidden in the method _createSToken()_. But in the background Salt creates a node of type _SToken_ for the token and a relation called _STextualRelation_ which connects the token and the primary data node. Since Salt does not know any further elements other than the graph elements mentioned, the character positions, to which the tokens refer to are stored as labels of the edges. For such a kind of label we use a special type named _SFeature_. When just working with Salt and not creating an own derived meta model, the mechanism is not important. It is just important, that the positions can be set and retrieved via the methods _StextualRelation.getSStart()_ or _STextualRelation.setSStart(value)_. The same goes for the end position _SEnd_.
 
-### <a name="hierarchies>Hierarchies</a>
+### <a name="hierarchies">Hierarchies</a>
 
 In Salt, you can create higher structures representing hierarchies for instance to model syntactic annotations like constituencies. These hierarchies are realized via the nodes _SStructure_ and can be connected to each other via edges of type _SDominanceRelation_. A relation of that type has the semantics of a part-of relation, which means that the target of that relation is a part of the source of that relation. In this example, we want to create a syntactic analysis as part of a syntactic layer. The following figure shows the structure we will create in this step of the example.
 
