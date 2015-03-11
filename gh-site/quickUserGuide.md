@@ -1,3 +1,4 @@
+![SaltNPepper project](./img/SaltNPepper_logo2010.png)
 #Quick User guide
 
 This article gives a brief overview over the linguistic meta model Salt and explains how to use and how to work with it's model elements. We only describe the use of the meta model SaltCommon here, which is one of three meta models coming with the Salt project. 
