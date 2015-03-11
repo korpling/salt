@@ -95,7 +95,7 @@ For creating a primary text node, Salt offers the following shortcut:
 STextualDS primaryText = sampleDocument.getSDocumentGraph().createSTextualDS("Is this example more complicated than it appears to?");
 ```
 
-### <a name="tokenization>"Tokenization</a>
+### <a name="tokenization">Tokenization</a>
 
 A token in Salt is not bound to a linguistic unit - in this example we show how to tokenize words, although tokenizations by characters, syllables or sentences and so on are possible, too. For tokenizing a primary text, we need the character offset of the start and the end position for each token in the text. The word "Is" in the sample text, for instance, has the start position 0 and the end position 1. Note that the positions are counted between two characters.
 
