@@ -1,6 +1,5 @@
 #Quick User guide
 
-
 This article gives a brief overview over the linguistic meta model Salt and explains how to use and how to work with it's model elements. We only describe the use of the meta model SaltCommon here, which is one of three meta models coming with the Salt project. 
 For giving a short but concise feeling of what Salt is made for, we give an example in Java Code, followed by explanations. The description exemplifies the creation of a new corpus, starting from modeling it's structure, the primary data, the tokenization, adding annotations and higher structures like hierarchies and so on. At the end of this article, we show how such a corpus model can be stored into SaltXML and loaded into main memory again. We also provide a sample project as part of Salt. This sample project is located in salt-saltCommon under the package de.hu_berlin.german.korpling.saltnpepper.salt.samples .
 
@@ -100,8 +99,14 @@ STextualDS primaryText = sampleDocument.getSDocumentGraph().createSTextualDS("Is
 
 A token in Salt is not bound to a linguistic unit - in this example we show how to tokenize words, although tokenizations by characters, syllables or sentences and so on are possible, too. For tokenizing a primary text, we need the character offset of the start and the end position for each token in the text. The word "Is" in the sample text, for instance, has the start position 0 and the end position 1. Note that the positions are counted between two characters.
 
-||Is||SPACE||this||SPACE||example||SPACE||more||SPACE||complicated||SPACE||than||SPACE||it||SPACE||appears|SPACE| ||to||SPACE||be||?||
-|0||2||3||7||8||15||16||20||21||32||33||37||38||40||41||48||49||51||52||54|55|
+<table>
+<td></td><td>Is</td><td></td><td>SPACE</td><td></td><td>this</td><td></td><td>SPACE</td><td></td><td>example</td><td></td><td>SPACE</td><td></td><td>more</td><td></td><td>SPACE</td><td></td><td>complicated</td><td></td><td>SPACE</td><td></td><td>than</td><td></td><td>SPACE</td><td></td><td>it</td><td></td><td>SPACE</td><td></td><td>appears</td><td></td><td>SPACE</td><td></td><td>to</td><td></td><td>SPACE</td><td></td><td>be</td><td></td><td>?</td><td></td>
+</tr>
+<tr>
+<td>
+0</td><td></td><td>2</td><td></td><td>3</td><td></td><td>7</td><td></td><td>8</td><td></td><td>15</td><td></td><td>16</td><td></td><td>20</td><td></td><td>21</td><td></td><td>32</td><td></td><td>33</td><td></td><td>37</td><td></td><td>38</td><td></td><td>40</td><td></td><td>41</td><td></td><td>48</td><td></td><td>49</td><td></td><td>51</td><td></td><td>52</td><td></td><td>54</td><td>55</td>
+</tr>
+</table>
 
 In the given table SPACE is an alias for a space or a blank ' '.
 The following figure shows an excerpt of the document graph we want to model in Salt. The figure only shows the tokens overlapping the words 'Is', 'this', 'example' and '.'.
