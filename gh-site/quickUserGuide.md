@@ -123,7 +123,7 @@ Salt provides a tokenizer to tokenie a primary text. This tokenizer is along the
 ```java
 sampleDocument.getSDocumentGraph().tokenize();
 ```
-TO access the created tokens you can iterate over the token's list:
+To access the created tokens you can iterate over the token's list:
 
 ```java
 sampleDocument.getSDocumentGraph().getSTokens();
