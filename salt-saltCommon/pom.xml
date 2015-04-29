@@ -67,6 +67,13 @@
 						<Bundle-SymbolicName>${project.groupId}.${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
+						<Import-Package>
+							!de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.*,
+							!de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.*,
+							!de.hu_berlin.german.korpling.saltnpepper.salt,
+							!de.hu_berlin.german.korpling.saltnpepper.salt.samples.*,
+							*
+						</Import-Package>
 						<Export-Package>
 							de.hu_berlin.german.korpling.saltnpepper.salt.*,
 							com.neovisionaries.i18n, !org.knallgrau.utils.textcat,
