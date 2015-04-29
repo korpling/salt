@@ -11,6 +11,19 @@
 *	artifactId:		salt-saltCommon												  *
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
+
+Version 2.1.0
+=============
+* updated EMF version from 2.8 to 2.9.1-v20130827-0309
+* removed self inclusions from pom for OSGi
+
+Version 2.0.0
+=============
+* bugfixes
+* clean ups
+* replaced EMF deserialization mechanism with an own one (SaltXMLHandler)
+* updated Java version to 1.7
+ 
 Version 1.1.9
 =============
 * bugfixes
