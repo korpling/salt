@@ -782,8 +782,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			{
 				if (sTextualDS!= null)
 				{
-					if (retVal== null)
+					if (retVal== null){
 						retVal= new BasicEList<SToken>();
+					}
 					retVal.addAll(tokenizer.tokenize(sTextualDS));
 				}
 			}

@@ -36,12 +36,24 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.knallgrau.utils.textcat.TextCategorizer;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Range;
+import com.google.common.collect.RangeMap;
+import com.google.common.collect.TreeRangeMap;
 import com.neovisionaries.i18n.LanguageCode;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltTokenizerException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDataSourceSequence;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 
 /**
  * The general task of this class is to tokenize a given text in the same order
@@ -342,35 +354,134 @@ public class Tokenizer {
 			char[] chrText = strInput.toCharArray();
 			int tokenCntr = 0;
 
+			// check if tokens exist for passed span
+			List<SToken> tokens = null;
+			if ((startPos != 0) || (endPos != sTextualDS.getSText().length())
+					|| (getsDocumentGraph().getSTextualDSs().size() > 1)) {
+				SDataSourceSequence sequence = SaltFactory.eINSTANCE.createSDataSourceSequence();
+				sequence.setSSequentialDS(sTextualDS);
+				sequence.setSStart(startPos);
+				sequence.setSEnd(endPos);
+				tokens = getsDocumentGraph().getSTokensBySequence(sequence);
+			} else {
+				tokens = getsDocumentGraph().getSTokens();
+			}
+
+			RangeMap<Integer, SToken> oldTokens = null;
+			// create an organization structure for a tokens interval which
+			// corresponds to a token
+			if ((tokens != null) && (tokens.size() != 0)) {
+				if ((getsDocumentGraph().getSTextualRelations() != null)
+						&& (getsDocumentGraph().getSTextualRelations().size() > 0)) {
+					oldTokens = TreeRangeMap.create();
+					for (STextualRelation rel : getsDocumentGraph().getSTextualRelations()) {
+						oldTokens.put(Range.closed(rel.getSStart(), rel.getSEnd()), rel.getSToken());
+					}
+				}
+			}
+			// a map mapping new created tokens, to old already existing tokens.
+			// The old tokens should be removed later on and spans should be
+			// created instead
+			Multimap<SToken, SToken> old2newToken = ArrayListMultimap.create();
+
 			for (int i = 0; i < chrText.length; i++) {
-				if ((strTokens.get(tokenCntr).length() < 1) || (strTokens.get(tokenCntr).substring(0, 1).equals(String.valueOf(chrText[i])))) {// first
+				if ((strTokens.get(tokenCntr).length() < 1)
+						|| (strTokens.get(tokenCntr).substring(0, 1).equals(String.valueOf(chrText[i])))) {// first
 					// letter
 					// matches
 					StringBuffer pattern = new StringBuffer();
-					for (int y = 0; y < strTokens.get(tokenCntr).length(); y++) {// compute
-						// pattern
-						// in
-						// text
+					for (int y = 0; y < strTokens.get(tokenCntr).length(); y++) {
+						// compute pattern in text
 						pattern.append(chrText[i + y]);
 					}// compute pattern in text
-					if (strTokens.get(tokenCntr).hashCode() == pattern.toString().hashCode()) {// pattern
-																								// found
+					if (strTokens.get(tokenCntr).hashCode() == pattern.toString().hashCode()) {
+						// pattern found
 						int start = i + startPos;
 						int end = i + startPos + strTokens.get(tokenCntr).length();
 
-						if (this.getsDocumentGraph() == null)
+						if (this.getsDocumentGraph() == null) {
 							throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object.");
+						}
 
 						SToken sTok = this.getsDocumentGraph().createSToken(sTextualDS, start, end);
-						if (retVal == null)
+						if (retVal == null) {
 							retVal = new BasicEList<SToken>();
+						}
 						retVal.add(sTok);
 						i = i + strTokens.get(tokenCntr).length() - 1;
 						tokenCntr++;
-						if (tokenCntr >= strTokens.size())
+						if (tokenCntr >= strTokens.size()) {
 							break;
+						}
+
+						/**
+						 * check, if there is an old token, overlapping the same
+						 * or a bigger span as the currently created one. If
+						 * yes, remove the old one and create a span overlapping
+						 * the new one.
+						 **/
+						if (oldTokens != null) {
+							SToken oldToken = oldTokens.get(start);
+							if (oldToken != null) {
+								old2newToken.put(oldToken, sTok);
+							}
+						}
+
 					}// pattern found
 				}// first letter matches
+			}
+
+			if (old2newToken != null) {
+				for (SToken oldToken : old2newToken.keySet()) {
+					// create span for oldToken
+					EList<SToken> overlappedTokens = new BasicEList<SToken>(old2newToken.get(oldToken));
+					if (overlappedTokens.size() == 1) {
+						getsDocumentGraph().removeNode(overlappedTokens.get(0));
+					} else {
+
+						SSpan span = getsDocumentGraph().createSSpan(overlappedTokens);
+
+						// move all annotations from old token to span
+						for (SAnnotation sAnno : oldToken.getSAnnotations()) {
+							span.addSAnnotation(sAnno);
+						}
+
+						// redirect all relations to span
+						List<Edge> inEdges = new ArrayList<Edge>();
+						for (Edge edge : getsDocumentGraph().getInEdges(oldToken.getSId())) {
+							inEdges.add(edge);
+						}
+						for (Edge edge : inEdges) {
+							if (edge instanceof SSpanningRelation) {
+								// in case of edge is a SSpanningRelation remove
+								// it and create new ones for each token under
+								// the span
+								if (edge.getSource() instanceof SSpan) {
+									SSpan parentSpan = (SSpan) edge.getSource();
+									getsDocumentGraph().removeEdge(edge);
+									for (SToken overlappedToken : overlappedTokens) {
+										SSpanningRelation rel = SaltFactory.eINSTANCE.createSSpanningRelation();
+										rel.setSSource(parentSpan);
+										rel.setSTarget(overlappedToken);
+										getsDocumentGraph().addSRelation(rel);
+									}
+								}
+							} else {
+								edge.setTarget(span);
+							}
+						}
+						List<Edge> outEdges = new ArrayList<Edge>();
+						for (Edge edge : getsDocumentGraph().getOutEdges(oldToken.getSId())) {
+							if (!(edge instanceof STextualRelation)) {
+								outEdges.add(edge);
+							}
+						}
+						for (Edge edge : outEdges) {
+							edge.setSource(span);
+						}
+						getsDocumentGraph().removeNode(oldToken);
+					}
+				}
 			}
 		}
 		return (retVal);
