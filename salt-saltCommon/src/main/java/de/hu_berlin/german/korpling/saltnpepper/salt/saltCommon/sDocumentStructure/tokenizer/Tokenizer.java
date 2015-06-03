@@ -339,6 +339,11 @@ public class Tokenizer {
 	 * The general task of this class is to tokenize a given text in the same
 	 * order as the tool TreeTagger will do. A list of tokenized text is
 	 * returned with the text anchor (start and end position) in original text.
+	 * If the {@link SDocumentGraph} already contains tokens, the tokens will be preserved, 
+	 * if they overlap the same textual range as the new one. Otherwise a {@link SSpan} is 
+	 * created covering corresponding to the existing token. The span than overlaps all new tokens 
+	 * and contains all annotations the old token did. In case, the span would overlaps the same textual 
+	 * range as the old token did, no span is created.
 	 * 
 	 * @param strInput
 	 *            original text
@@ -386,9 +391,8 @@ public class Tokenizer {
 
 			for (int i = 0; i < chrText.length; i++) {
 				if ((strTokens.get(tokenCntr).length() < 1)
-						|| (strTokens.get(tokenCntr).substring(0, 1).equals(String.valueOf(chrText[i])))) {// first
-					// letter
-					// matches
+						|| (strTokens.get(tokenCntr).substring(0, 1).equals(String.valueOf(chrText[i])))) {
+					// first letter matches
 					StringBuffer pattern = new StringBuffer();
 					for (int y = 0; y < strTokens.get(tokenCntr).length(); y++) {
 						// compute pattern in text
