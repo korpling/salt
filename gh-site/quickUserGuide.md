@@ -299,7 +299,7 @@ docGraph.addSRelation(spanRel);
 
 Now we will show another type of edge, which renders a more loose relation between nodes. In contrast to _SSpanningRelations_ and _SDominanceRelations_, which can only connect specific kinds of nodes, the type _SPointingRelation_ can connect _SToken_, _SSpan_ and _SStructure_ nodes with each other and vice versa. These edges for instance can be used to model anaphoric relations between words, phrases, sentences and so on. Edges in general can be typed with a linguistic meaning by setting their attribute _SType_. We illustrate that by connecting the token covering the word "it" to the set of tokens "the" and "example". To bundle the words "the" and "example", we first have to create a span covering both tokens "the" and "example" following the same mechanism as shown in section [spans](#spans).
 
-![](./img/sample_pointingRel.png)
+<img src="./img/sample_pointingRel.png" width="120%">
 
 The following snippet shows the creation of the model shown in the figure.
 
