@@ -1,6 +1,6 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
-public class Label {
+public class LabelImpl {
 	private String namespace= null;
 	public String getNamespace() {
 		return namespace;

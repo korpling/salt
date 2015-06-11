@@ -1,21 +1,65 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.NamedElement;
+import de.hu_berlin.u.saltnpepper.graph.Node;
 
 
-public class EdgeImpl extends IdentifiableElementImpl implements Edge, NamedElement{
-	private NodeImpl source=null;
-	public NodeImpl getSource() {
+public class EdgeImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Edge<S, T>, NamedElement{
+	/**
+	 * Initializes an object of type {@link Edge}.
+	 */
+	public EdgeImpl(){
+	}
+	
+	/**
+	 * Initializes an object of type {@link Edge}. If {@link #delegate} is not null,  all functions of 
+	 * this method are delegated to the delegate object. Setting {@link #delegate} makes this object
+	 * to a container.
+	 * @param a delegate object of the same type.
+	 */
+	public EdgeImpl(Edge<S, T> delegate){
+		this.delegate= delegate;
+	}
+	
+	/** 
+	 * A delegate object of the same type. If {@link #delegate} is not null,  all functions of 
+	 * this method are delegated to the delegate object. Setting {@link #delegate} makes this object
+	 * to a container.   
+	**/
+	protected Edge<S, T> delegate= null;
+	/**
+	 * {@inheritDoc Edge#getDelegate()}
+	 */
+	public Edge<S, T> getDelegate(){
+		return(delegate);
+	}
+	/** source node of this edge. **/
+	protected S source=null;
+	/**
+	 * {@inheritDoc Edge#getSource()}
+	 */
+	public S getSource() {
 		return source;
 	}
-	public void setSource(NodeImpl source) {
+	/**
+	 * {@inheritDoc Edge#setSource(Node)}
+	 */
+	public void setSource(S source) {
 		this.source = source;
 	}
-	private NodeImpl target=null;
-	public NodeImpl getTarget() {
+	/** target node of this edge. **/
+	private T target=null;
+	/**
+	 * {@inheritDoc Edge#getTarget()}
+	 */
+	public T getTarget() {
 		return target;
 	}
-	public void setTarget(NodeImpl target) {
+	/**
+	 * {@inheritDoc Edge#setTarget(Node)}
+	 */
+	public void setTarget(T target) {
 		this.target = target;
 	}
 	public String getName() {

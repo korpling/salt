@@ -1,4 +1,4 @@
-package de.hu_berlin.u.saltnpepper.graph.impl;
+package de.hu_berlin.u.saltnpepper.graph;
 
 public interface NamedElement {
 	public String getName();

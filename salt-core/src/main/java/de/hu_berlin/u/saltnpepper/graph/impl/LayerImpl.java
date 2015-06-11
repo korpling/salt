@@ -2,7 +2,10 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import java.util.List;
 
-public class Layer extends IdentifiableElementImpl implements NamedElement{
+import de.hu_berlin.u.saltnpepper.graph.Layer;
+import de.hu_berlin.u.saltnpepper.graph.NamedElement;
+
+public class LayerImpl extends IdentifiableElementImpl implements Layer, NamedElement{
 	private List<NodeImpl> nodes= null;
 	private List<EdgeImpl> edges= null;
 	public String getName() {

@@ -1,5 +1,7 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
+import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
 
@@ -47,5 +49,26 @@ public class NodeImpl extends IdentifiableElementImpl implements Node, NamedElem
 		// TODO Auto-generated method stub
 		
 	}
+
+	/** container graph object**/
+	protected Graph graph= null;
+	/**
+	 * {@inheritDoc Node#getGraph()}
+	 */
+	@Override
+	public Graph getGraph() {
+		return(graph);
+	}
+	/**
+	 * {@inheritDoc Node#setGraph(Graph)}
+	 */
+	@Override
+	public void setGraph(Graph graph) {
+		basicSetGraph(graph);
+	}
+	public void basicSetGraph(Graph graph){
+		this.graph= graph;
+	}
+	
 
 }

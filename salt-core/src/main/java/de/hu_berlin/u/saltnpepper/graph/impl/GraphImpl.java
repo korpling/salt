@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.util.Index;
 import de.hu_berlin.u.saltnpepper.graph.util.IndexImpl;
 
@@ -43,10 +44,10 @@ public class GraphImpl extends IdentifiableElementImpl implements Graph, NamedEl
 		return(Collections.unmodifiableList(edges));
 	}
 	
-	private List<Layer> layers= null;
-	public List<Layer> getLayers(){
+	private List<LayerImpl> layers= null;
+	public List<LayerImpl> getLayers(){
 		if (layers== null){
-			layers= Collections.synchronizedList(new ArrayList<Layer>());
+			layers= Collections.synchronizedList(new ArrayList<LayerImpl>());
 		}
 		return(Collections.unmodifiableList(layers));
 	}
