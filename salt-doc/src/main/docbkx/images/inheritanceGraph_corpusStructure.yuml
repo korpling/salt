@@ -1,5 +1,0 @@
-// see: http://yuml.me
-[SRelation]^-[SCorpusDocumentRelation]
-[SRelation]^-[SCorpusRelation]
-[SNode]^-[SDocument]
-[SNode]^-[SCorpus]

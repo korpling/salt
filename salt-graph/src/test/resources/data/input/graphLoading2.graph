@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<graph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:graph="graph" id="graph1">
-  <edges id="edge1" source="//@nodes.0" target="//@nodes.3"/>
-  <edges id="edge2" source="//@nodes.1" target="//@nodes.2"/>
-  <nodes id="node1"/>
-  <nodes id="node2"/>
-  <nodes id="node3"/>
-  <nodes id="node4"/>
-</graph:Graph>

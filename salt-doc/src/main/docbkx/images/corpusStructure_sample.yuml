@@ -1,8 +1,0 @@
-//yuml.me
-[corp1]->[corp3]
-[corp1]->[corp2]
-[corp3]->[doc4]
-[corp3]->[doc3]
-[corp2]->[doc2]
-[corp2]->[doc1]
-
