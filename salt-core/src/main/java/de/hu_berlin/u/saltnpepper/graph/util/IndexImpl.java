@@ -30,7 +30,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
-import de.hu_berlin.u.saltnpepper.graph.exceptions.GraphException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -67,7 +67,7 @@ public class IndexImpl implements Index {
 		}
 		try {
 			if (this.hasIndex(indexId))
-				throw new GraphException("Cannot add the given index, because an index with this id already exists: " + indexId);
+				throw new SaltException("Cannot add the given index, because an index with this id already exists: " + indexId);
 
 			indexes.put(indexId, LinkedHashMultimap.create());
 			indexKeyTypes.put(indexId, keyType);

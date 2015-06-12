@@ -15,27 +15,27 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.graph.exceptions;
+package de.hu_berlin.u.saltnpepper.salt.exceptions;
 
 /**
- * This class is highest exception. All PepperExceptions are derived from this class. 
- * It can be instantiated, if no other Exception maps to the problem.
+ * This class is highest exception. All {@link SaltException} classes are derived from this class. 
+ * It can be instantiated, if no other Exception matches to the problem.
  * @author Florian Zipser
  *
  */
-public class GraphException extends java.lang.RuntimeException
+public class SaltException extends java.lang.RuntimeException
 {
 	/**
 	 * generated serialVersionUID
 	 */
 	private static final long serialVersionUID = 7152733137673010658L;
 
-	public GraphException()
+	public SaltException()
 	{ super(); }
 	
-    public GraphException(String s)
+    public SaltException(String s)
     { super(s); }
     
-	public GraphException(String s, Throwable ex)
+	public SaltException(String s, Throwable ex)
 	{super(s, ex); }
 }

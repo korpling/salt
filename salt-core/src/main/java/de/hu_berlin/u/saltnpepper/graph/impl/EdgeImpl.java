@@ -1,6 +1,7 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
@@ -69,5 +70,27 @@ public class EdgeImpl<S extends Node, T extends Node> extends IdentifiableElemen
 	public void setName(String name) {
 		// TODO Auto-generated method stub
 		
+	}
+	/** container graph**/
+	protected Graph graph= null;
+	/** {@inheritDoc Edge#getGraph()} **/
+	@Override
+	public Graph getGraph() {
+		return(graph);
+	}
+	/** {@inheritDoc Edge#setGraph(Graph)} **/
+	@Override
+	public void setGraph(Graph graph) {
+		basicSetGraph(graph);
+		if (graph!= null){
+			graph.addEdge(this);
+		}else{
+			//TODO: remove edge from graph
+		}
+	}
+	/** {@inheritDoc Edge#basicSetGraph(Graph)} **/
+	@Override
+	public void basicSetGraph(Graph graph) {
+		this.graph= graph;
 	}
 }
