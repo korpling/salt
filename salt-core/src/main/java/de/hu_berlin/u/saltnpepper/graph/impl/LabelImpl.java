@@ -88,4 +88,12 @@ public class LabelImpl<V extends Object> implements Label<V> {
 		other.setValue(this.getValue());
 		return (other);
 	}
+	@Override
+	public String toString() {
+		StringBuilder str= new StringBuilder();
+		str.append(GraphUtil.createQName(getNamespace(), getName()));
+		str.append("=");
+		str.append(getValue());
+		return super.toString();
+	}
 }

@@ -69,20 +69,20 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	@Override
 	public void basicAddNode(N node) {
 		if (node!= null){
-			// if node has no id a new id will be given to node
-			if (node.getId() == null) {
-				node.setId("node" + getNodes().size());
-			}
-			int i = 0;
-			// the given id, which eventually has to be extended for artificial
-			// counter
-			String idBase = node.getId();
-			while (this.getNode(node.getId()) != null) {// if node already exists, create
-													// new Id
-				node.setId(idBase + "_" + (getNodes().size() + i));
-				i++;
-			}// if node already exists, create new Id
-			getNodes().add(node);
+//			// if node has no id a new id will be given to node
+//			if (node.getId() == null) {
+//				node.setId("node" + getNodes().size());
+//			}
+//			int i = 0;
+//			// the given id, which eventually has to be extended for artificial
+//			// counter
+//			String idBase = node.getId();
+//			while (this.getNode(node.getId()) != null) {// if node already exists, create
+//													// new Id
+//				node.setId(idBase + "_" + (getNodes().size() + i));
+//				i++;
+//			}// if node already exists, create new Id
+//			getNodes().add(node);
 		}
 	}
 	/** {@inheritDoc Graph#removeNode(Node)}**/
