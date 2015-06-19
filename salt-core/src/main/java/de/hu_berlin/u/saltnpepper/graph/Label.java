@@ -34,7 +34,7 @@ public interface Label<V extends Object> {
 	public String getName();
 	/**
 	 * Sets the name of the label. The combination of namespace and name must be unique 
-	 * in the containing object.
+	 * in the containing object. The passed name must not be empty.
 	 * @param name name of the label
 	 */
 	public void setName(String name);
@@ -60,4 +60,18 @@ public interface Label<V extends Object> {
 	 * @param value generic value of this label.
 	 */
 	public void setValue(V value);
+	
+	/**
+	 * Creates a new object of type {@link Label} and copies the namespace, name and value of this label.
+	 * @return a new {@link Label} object
+	 */
+	public Label<V> clone();
+	/**
+	 * This method the namespace, the name and the value from this object to the passed one and 
+	 * returns the passed one.
+	 * @param clone
+	 *            the clone to which all properties of this shall be copied to
+	 * @return other enhanced for namespace, name and value
+	 */
+	public Label<V> copy(Label<V> other);
 }
