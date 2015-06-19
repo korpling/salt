@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,7 +21,8 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
  * @author florian
  *
  */
-public abstract class LabelableElementImpl implements LabelableElement {
+public abstract class LabelableElementImpl implements LabelableElement, Serializable{
+	private static final long serialVersionUID = -900356617796178257L;
 	/** internal set of all labels **/
 	private Map<String, Label<?>> labels = null;
 
