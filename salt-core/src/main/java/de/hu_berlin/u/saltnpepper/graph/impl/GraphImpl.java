@@ -2,7 +2,6 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,30 +11,14 @@ import com.google.common.collect.Multimap;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
-import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
-import de.hu_berlin.u.saltnpepper.graph.util.Index;
-import de.hu_berlin.u.saltnpepper.graph.util.IndexImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 public class GraphImpl<N extends Node, E extends Edge<N, N>> extends IdentifiableElementImpl implements Graph<N, E>, NamedElement{
-	/**
-	 * name of index for node-types
-	 */
-	public static final String IDX_SNODETYPE=	"idx_sNodeType";
-	/**
-	 * name of index for relation-types
-	 */
-	public static final String IDX_SRELATIONTYPE=	"idx_sRelationType";
-	
-	private Index index= null;
-	public Index getIndex(){
-		return(index);
-	}
+
 	
 	public GraphImpl(){
-		index= new IndexImpl();
 	}
 	
 	public String getName() {
@@ -46,6 +29,17 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		// TODO Auto-generated method stub
 		
 	}
+
+	// =========================================================== > Indexes
+	/** An index storing all nodes and their corresponding ids (key: id; value: node) **/
+	private Map<String, Node> idx_node_id= new ConcurrentHashMap<String, Node>();
+	/** An index storing all edges and their corresponding ids (key: id; value: edge) **/
+	private Map<String, Edge<N,N>> idx_edge_id= new ConcurrentHashMap<String, Edge<N,N>>();
+	/** An index storing all node ids and the corresponding outgoing edges (key: node id; value: edge) **/
+	private Multimap<String, Edge<N,N>> idx_out_edge_id=  HashMultimap.create();
+	/** An index storing all node ids and the corresponding incomming edges (key: node id; value: edge) **/
+	private Multimap<String, Edge<N,N>> idx_in_edge_id=  HashMultimap.create();
+	// =========================================================== < Indexes
 
 	
 	// =========================================================== > Nodes
