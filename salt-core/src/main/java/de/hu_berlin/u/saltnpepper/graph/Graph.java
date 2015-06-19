@@ -90,4 +90,22 @@ public interface Graph<N extends Node, E extends Edge<N, N>> {
 	 * @param node the node to be removed
 	 */
 	public void basicRemoveNode(N node);
+	/**
+	 * Returns whether this graph contains a {@link Node} corresponding to the passed id.
+	 * @param nodeId id of the node to be checked
+	 * @return true if the node is contained, false otherwise
+	 */
+	public boolean containsNode(String nodeId);
+	/**
+	 * Returns whether this graph contains an {@link Edge} corresponding to the passed id.
+	 * @param edgeId id of the node to be checked
+	 * @return true if the edge is contained, false otherwise
+	 */
+	public boolean containsEdge(String edgeId);
+	/**
+	 * Returns whether this graph contains a {@link Layer} corresponding to the passed id.
+	 * @param layerId id of the node to be checked
+	 * @return true if the node is contained, false otherwise
+	 */
+	public boolean containsLayer(String layerId);
 }

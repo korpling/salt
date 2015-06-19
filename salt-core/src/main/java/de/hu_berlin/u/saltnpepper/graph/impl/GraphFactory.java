@@ -11,21 +11,21 @@ public class GraphFactory {
 	 * Creates a new {@link Graph} object of type {@link GraphImpl}.
 	 * @return new {@link Graph} object
 	 */
-	public Graph<Node, Edge<Node,Node>> createGraph(){
+	public static Graph<Node, Edge<Node,Node>> createGraph(){
 		return(new GraphImpl<Node, Edge<Node,Node>>());
 	}
 	/**
 	 * Creates a new {@link Node} object of type {@link NodeImpl}.
 	 * @return new {@link Node} object
 	 */
-	public Node createNode(){
+	public static Node createNode(){
 		return(new NodeImpl());
 	}
 	/**
 	 * Creates a new {@link Edge} object of type {@link EdgeImpl}.
 	 * @return new {@link Edge} object
 	 */
-	public Edge<Node, Node> createEdge(){
+	public static Edge<Node, Node> createEdge(){
 		return(new EdgeImpl<Node, Node>());
 	}
 	/**
@@ -34,7 +34,7 @@ public class GraphFactory {
 	 * the generic method {@link #createLabel(Class)}.
 	 * @return new {@link Label} object
 	 */
-	public Label<String> createLabel(){
+	public static Label<String> createLabel(){
 		return(createLabel_String());
 	}
 	/**
@@ -43,7 +43,7 @@ public class GraphFactory {
 	 * the generic method {@link #createLabel(Class)}.
 	 * @return new {@link Label} object
 	 */
-	public Label<String> createLabel_String(){
+	public static Label<String> createLabel_String(){
 		return(new LabelImpl<String>());
 	}
 	/**
@@ -51,7 +51,7 @@ public class GraphFactory {
 	 * freely be defined.
 	 * @return new {@link Label} object
 	 */
-	public <V extends Object> Label<V> createLabel(Class<V> clazz){
+	public static <V extends Object> Label<V> createLabel(Class<V> clazz){
 		return(new LabelImpl<V>());
 	}
 }

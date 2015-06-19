@@ -11,6 +11,7 @@ import com.google.common.collect.Multimap;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
@@ -35,6 +36,8 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	private Map<String, Node> idx_node_id= new ConcurrentHashMap<String, Node>();
 	/** An index storing all edges and their corresponding ids (key: id; value: edge) **/
 	private Map<String, Edge<N,N>> idx_edge_id= new ConcurrentHashMap<String, Edge<N,N>>();
+	/** An index storing all layers and their corresponding ids (key: id; value: layer) **/
+	private Map<String, Layer> idx_layer_id= new ConcurrentHashMap<String, Layer>();
 	/** An index storing all node ids and the corresponding outgoing edges (key: node id; value: edge) **/
 	private Multimap<String, Edge<N,N>> idx_out_edge_id=  HashMultimap.create();
 	/** An index storing all node ids and the corresponding incomming edges (key: node id; value: edge) **/
@@ -66,6 +69,19 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	@Override
 	public void basicAddNode(N node) {
 		if (node!= null){
+			// if node has no id a new id will be given to node
+			if (node.getId() == null) {
+				node.setId("node" + getNumOfNodes());
+			}
+			int i = 0;
+			// the given id, which eventually has to be extended for artificial
+			// counter
+			String idBase = node.getId();
+			while (this.getNode(node.getId()) != null) {// if node already exists, create
+													// new Id
+				node.setId(idBase + "_" + (getNumOfNodes() + i));
+				i++;
+			}// if node already exists, create new Id
 			getNodes().add(node);
 		}
 	}
@@ -81,6 +97,11 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	@Override
 	public void basicRemoveNode(N node){
 		getNodes().remove(node);
+	}
+	/** {@inheritDoc Graph#containsNode(String)}**/
+	@Override
+	public boolean containsNode(String nodeId) {
+		return(idx_node_id.containsKey(nodeId));
 	}
 	// =========================================================== < Nodes
 	
@@ -118,6 +139,11 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 			getEdges().add(edge);
 		}
 	}
+	/** {@inheritDoc Graph#containsEdge(String)}**/
+	@Override
+	public boolean containsEdge(String edgeId) {
+		return(idx_edge_id.containsKey(edgeId));
+	}
 	// =========================================================== < Edges
 	
 	// =========================================================== > Layers
@@ -127,6 +153,11 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 			layers= Collections.synchronizedList(new ArrayList<LayerImpl>());
 		}
 		return(Collections.unmodifiableList(layers));
+	}
+	/** {@inheritDoc Graph#containsLayer(String)}**/
+	@Override
+	public boolean containsLayer(String layerId) {
+		return(idx_edge_id.containsKey(layerId));
 	}
 	// =========================================================== < Layers
 }
