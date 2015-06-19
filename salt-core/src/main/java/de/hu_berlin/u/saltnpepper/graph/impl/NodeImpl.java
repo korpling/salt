@@ -50,25 +50,26 @@ public class NodeImpl extends IdentifiableElementImpl implements Node, NamedElem
 		
 	}
 
-	/** container graph object**/
+	/** container graph**/
 	protected Graph graph= null;
-	/**
-	 * {@inheritDoc Node#getGraph()}
-	 */
+	/** {@inheritDoc Edge#getGraph()} **/
 	@Override
 	public Graph getGraph() {
 		return(graph);
 	}
-	/**
-	 * {@inheritDoc Node#setGraph(Graph)}
-	 */
+	/** {@inheritDoc Edge#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
 		basicSetGraph(graph);
+		if (graph!= null){
+			graph.addNode(this);
+		}else{
+			graph.removeNode(this);
+		}
 	}
-	public void basicSetGraph(Graph graph){
+	/** {@inheritDoc Edge#basicSetGraph(Graph)} **/
+	@Override
+	public void basicSetGraph(Graph graph) {
 		this.graph= graph;
 	}
-	
-
 }

@@ -1,6 +1,8 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
-public class LabelImpl {
+import de.hu_berlin.u.saltnpepper.graph.Label;
+
+public class LabelImpl<V extends Object> implements Label<V>{
 	private String namespace= null;
 	public String getNamespace() {
 		return namespace;
@@ -15,11 +17,20 @@ public class LabelImpl {
 	public void setName(String name) {
 		this.name = name;
 	}
-	private Object value= null;
-	public Object getValue() {
+	/** The generic value field. **/
+	private V value= null;
+	/**
+	 * Returns the value of this label.
+	 * @return generic value of this label.
+	 */
+	public V getValue() {
 		return value;
 	}
-	public void setValue(Object value) {
+	/**
+	 * Sets the value of this label.
+	 * @param value generic value of this label.
+	 */
+	public void setValue(V value) {
 		this.value = value;
 	}
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>salt-core</artifactId>
 	<packaging>bundle</packaging>
@@ -9,6 +10,13 @@
 		<version>3.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+	<dependencies>
+		<dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-lang3</artifactId>
+  <version>3.1</version>
+</dependency>	
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -33,15 +41,9 @@
 						<Bundle-SymbolicName>${project.groupId}.${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
-						<!--						
-						<Import-Package>
-							!de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.*,*
-						</Import-Package>
-						<Export-Package>
-							de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.*
-						</Export-Package>
-						<Include-Resource>{maven-resources}, LICENSE, NOTICE</Include-Resource>
--->
+						<!-- <Import-Package> !de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.*,* 
+							</Import-Package> <Export-Package> de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.* 
+							</Export-Package> <Include-Resource>{maven-resources}, LICENSE, NOTICE</Include-Resource> -->
 					</instructions>
 				</configuration>
 			</plugin>

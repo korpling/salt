@@ -2,11 +2,17 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.util.Index;
@@ -32,23 +38,6 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		index= new IndexImpl();
 	}
 	
-	private List<NodeImpl> nodes= null;
-	public List<NodeImpl> getNodes(){
-		if (nodes== null){
-			nodes= Collections.synchronizedList(new ArrayList<NodeImpl>());
-		}
-		return(Collections.unmodifiableList(nodes));
-	}
-	
-	private List<LayerImpl> layers= null;
-	public List<LayerImpl> getLayers(){
-		if (layers== null){
-			layers= Collections.synchronizedList(new ArrayList<LayerImpl>());
-		}
-		return(Collections.unmodifiableList(layers));
-	}
-	
-	
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
@@ -57,6 +46,52 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+	// =========================================================== > Nodes
+	/** internal list of all contained nodes **/
+	private List<N> nodes= null;
+	/** {@inheritDoc Graph#getNodes()} **/
+	@Override
+	public List<N> getNodes(){
+		if (nodes== null){
+			nodes= Collections.synchronizedList(new ArrayList<N>());
+		}
+		return(nodes);
+	}
+	
+	/** {@inheritDoc Graph#addNode(Node)} **/
+	@Override
+	public void addNode(N node) {
+		basicAddNode(node);
+		if (node!= null){
+			node.basicSetGraph(this);
+		}
+	}
+	/** {@inheritDoc Graph#basicAddNode(Node)} **/
+	@Override
+	public void basicAddNode(N node) {
+		if (node!= null){
+			getNodes().add(node);
+		}
+	}
+	/** {@inheritDoc Graph#removeNode(Node)}**/
+	@Override
+	public void removeNode(N node){
+		if (node!= null){
+			node.basicSetGraph(null);
+			basicRemoveNode(node);
+		}
+	}
+	/** {@inheritDoc Graph#basicRemoveNode(Node)}**/
+	@Override
+	public void basicRemoveNode(N node){
+		getNodes().remove(node);
+	}
+	// =========================================================== < Nodes
+	
+	// =========================================================== > Edges	
+	
 	/** internal list of all contained edges **/
 	private List<E> edges= null;
 	/** {@inheritDoc Graph#getEdges()} **/
@@ -65,7 +100,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		if (edges== null){
 			edges= Collections.synchronizedList(new ArrayList<E>());
 		}
-		return(Collections.unmodifiableList(edges));
+		return(edges);
 	}
 	
 	/** {@inheritDoc Graph#addEdge(Edge)} **/
@@ -86,20 +121,18 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 			if (edge.getTarget()== null){
 				throw new SaltInsertionException(this, edge, "The target node is empty. ");
 			}
-			edges.add(edge);
+			getEdges().add(edge);
 		}
 	}
+	// =========================================================== < Edges
 	
-	/** {@inheritDoc Graph#addNode(Node)} **/
-	@Override
-	public void addNode(N node) {
-		// TODO Auto-generated method stub
-		
+	// =========================================================== > Layers
+	private List<LayerImpl> layers= null;
+	public List<LayerImpl> getLayers(){
+		if (layers== null){
+			layers= Collections.synchronizedList(new ArrayList<LayerImpl>());
+		}
+		return(Collections.unmodifiableList(layers));
 	}
-	/** {@inheritDoc Graph#basicAddNode(Node)} **/
-	@Override
-	public void basicAddNode(N node) {
-		// TODO Auto-generated method stub
-		
-	}
+	// =========================================================== < Layers
 }

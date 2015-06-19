@@ -66,5 +66,4 @@ public interface Edge<S extends Node, T extends Node> {
 	 * @param graph graph which contains this edge
 	 */
 	public void basicSetGraph(Graph graph);
-
 }
