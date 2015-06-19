@@ -2,6 +2,7 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
@@ -53,5 +54,13 @@ public class GraphFactory {
 	 */
 	public static <V extends Object> Label<V> createLabel(Class<V> clazz){
 		return(new LabelImpl<V>());
+	}
+	/**
+	 * Creates a new {@link Identifier} object of type {@link IdentifierImpl}. The value of this label is defined to
+	 * be of type {@link String}. 
+	 * @return new {@link Identifier} object
+	 */
+	public static Identifier<String> createIdentifier(){
+		return(new IdentifierImpl<String>());
 	}
 }

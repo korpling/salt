@@ -17,6 +17,15 @@ public class GraphUtil {
 	 * {@value #NS_SEPERATOR} NAME.
 	 */
 	public static final String NS_SEPERATOR = "::";
+	/**
+	 * default name for of derived namespace-attribute
+	 */
+	public static final String IDENTIFIER_NAMESPACE="salt";
+	
+	/**
+	 * default name for of derived name-attribute
+	 */
+	public static final String IDENTIFIER_NAME="id";
 
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
