@@ -5,15 +5,21 @@ import de.hu_berlin.u.saltnpepper.graph.Identifier;
 
 public class IdentifierImpl extends LabelImpl<String> implements Identifier{
 
+	public IdentifierImpl(IdentifiableElement container, String id) {
+		this.container= container;
+		this.value= id;
+	}
+	
+	/** {@inheritDoc Identifier#setValue(String)}**/
+	@Override
+	public void setValue(String value) {
+		
+	}
+	
 	/** {@inheritDoc Identifier#getId()}**/
 	@Override
 	public String getId() {
 		return(getValue());
-	}
-	/** {@inheritDoc Identifier#setId(String)}**/
-	@Override
-	public void setId(String value) {
-		setValue(value);
 	}
 	
 	private IdentifiableElement container= null;
@@ -21,10 +27,5 @@ public class IdentifierImpl extends LabelImpl<String> implements Identifier{
 	@Override
 	public IdentifiableElement getIdentifiableElement() {
 		return(container);
-	}
-	/** {@inheritDoc Identifier#setIdentifiableElement(IdentifiableElement))}**/
-	@Override
-	public void setIdentifiableElement(IdentifiableElement container) {
-		this.container= container;
 	}
 }

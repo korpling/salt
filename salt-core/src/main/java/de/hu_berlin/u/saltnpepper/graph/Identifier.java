@@ -18,20 +18,13 @@ public interface Identifier extends Label<String>{
 	public String getId();
 
 	/**
-	 * Sets the value of this label.
-	 * @param value id value to be set
-	 */
-	public void setId(String value);
-
-	/**
 	 * Returns the {@link IdentifiableElement} object containing this identifier.
 	 * @return container
 	 */
 	public IdentifiableElement getIdentifiableElement();
-
 	/**
-	 * Sets the {@link IdentifiableElement} object containing this identifier.
-	 * @param container object contianing this id.
+	 * This method has no effect, since the id value is not changeable. 
 	 */
-	void setIdentifiableElement(IdentifiableElement container);
+	@Override
+	public void setValue(String value);
 }

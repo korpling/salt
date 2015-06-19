@@ -7,8 +7,8 @@ import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
 public class LabelImpl<V extends Object> implements Label<V> {
-	private String namespace = null;
-
+	
+	protected String namespace = null;
 	/** {@inheritDoc Label#getNamespace()} */
 	@Override
 	public String getNamespace() {
@@ -21,8 +21,7 @@ public class LabelImpl<V extends Object> implements Label<V> {
 		this.namespace = namespace;
 	}
 
-	private String name = null;
-
+	protected String name = null;
 	/** {@inheritDoc Label#getName()} */
 	@Override
 	public String getName() {
@@ -54,7 +53,7 @@ public class LabelImpl<V extends Object> implements Label<V> {
 	}
 
 	/** The generic value field. **/
-	private V value = null;
+	protected V value = null;
 
 	/** {@inheritDoc Label#getValue()} */
 	@Override
