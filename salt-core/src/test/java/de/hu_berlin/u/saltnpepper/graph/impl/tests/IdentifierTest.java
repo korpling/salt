@@ -17,7 +17,10 @@
  */
 package de.hu_berlin.u.saltnpepper.graph.impl.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,24 +28,29 @@ import org.junit.Test;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
+import de.hu_berlin.u.saltnpepper.graph.impl.IdentifiableElementImpl;
 import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
-import junit.textui.TestRunner;
 
 public class IdentifierTest {
 
-	private Identifier<?> fixture = null;
+	private Identifier fixture = null;
 
-	protected Identifier<?> getFixture() {
-		return (Identifier<?>) fixture;
+	protected Identifier getFixture() {
+		return (Identifier) fixture;
 	}
 
-	protected void setFixture(Identifier<?> fixture) {
+	protected void setFixture(Identifier fixture) {
 		this.fixture = fixture;
+	}
+
+	class MyContainer extends IdentifiableElementImpl {
+		private static final long serialVersionUID = 5834449609454195900L;
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(GraphFactory.createIdentifier());
+		MyContainer container = new MyContainer();
+		setFixture(GraphFactory.createIdentifier(container, "myId"));
 	}
 
 	@Before
@@ -77,7 +85,7 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testGetQName() {
-		String qname = GraphUtil.IDENTIFIER_NAMESPACE+ GraphUtil.NS_SEPERATOR + GraphUtil.IDENTIFIER_NAME;
+		String qname = GraphUtil.IDENTIFIER_NAMESPACE + GraphUtil.NS_SEPERATOR + GraphUtil.IDENTIFIER_NAME;
 		assertEquals(qname, getFixture().getQName());
 		getFixture().setName("something");
 		assertEquals(qname, getFixture().getQName());
@@ -86,10 +94,10 @@ public class IdentifierTest {
 	@Test
 	public void testGetIdentifiableElement() {
 		assertEquals(null, getFixture().getIdentifiableElement());
-		Node node = GraphFactory.createNode();
-		assertNotNull(node.getIdentifier());
-		getFixture().setIdentifiableElement(node);
-		assertEquals(node, getFixture().getIdentifiableElement());
+		MyContainer container =new MyContainer();
+		assertNotNull(container.getIdentifier());
+		getFixture().setIdentifiableElement(container);
+		assertEquals(container, getFixture().getIdentifiableElement());
 	}
 
 	@Test

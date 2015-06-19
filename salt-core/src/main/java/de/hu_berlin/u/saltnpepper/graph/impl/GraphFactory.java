@@ -2,6 +2,7 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Node;
@@ -56,11 +57,13 @@ public class GraphFactory {
 		return(new LabelImpl<V>());
 	}
 	/**
-	 * Creates a new {@link Identifier} object of type {@link IdentifierImpl}. The value of this label is defined to
-	 * be of type {@link String}. 
+	 * Creates a new {@link Identifier} object of type {@link IdentifierImpl}. Its {@link IdentifiableElement}
+	 * is set to the passed container and its id value is set to passed id.
+	 * @param container {@link IdentifiableElement} which contains this {@link Identifier}
+	 * @param id the id value of the {@link Identifier}
 	 * @return new {@link Identifier} object
 	 */
-	public static Identifier<String> createIdentifier(){
-		return(new IdentifierImpl<String>());
+	public static Identifier createIdentifier(IdentifiableElement container, String id){
+		return(new IdentifierImpl(container, id));
 	}
 }
