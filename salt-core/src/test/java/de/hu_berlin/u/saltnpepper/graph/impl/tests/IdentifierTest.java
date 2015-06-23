@@ -18,15 +18,16 @@
 package de.hu_berlin.u.saltnpepper.graph.impl.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
-import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.impl.IdentifiableElementImpl;
 import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
@@ -35,11 +36,11 @@ public class IdentifierTest {
 
 	private Identifier fixture = null;
 
-	protected Identifier getFixture() {
-		return (Identifier) fixture;
+	public Identifier getFixture() {
+		return fixture;
 	}
 
-	protected void setFixture(Identifier fixture) {
+	public void setFixture(Identifier fixture) {
 		this.fixture = fixture;
 	}
 
@@ -53,24 +54,18 @@ public class IdentifierTest {
 		setFixture(GraphFactory.createIdentifier(container, "myId"));
 	}
 
-	@Before
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		setFixture(null);
 	}
 
-	/**
-	 * Tests the '{@link de.util.graph.Label#getFullName() <em>Full Name</em>}'
-	 * feature getter. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see de.util.graph.Label#getFullName()
-	 */
 	@Test
 	public void testQNameHandling() {
 		// should be ok
 		String name = GraphUtil.IDENTIFIER_NAME;
-		String fullName = GraphUtil.IDENTIFIER_NAMESPACE + Identifier.NS_SEPERATOR + name;
+		String qName = GraphUtil.IDENTIFIER_NAMESPACE + Identifier.NS_SEPERATOR + name;
 		getFixture().setQName(name);
-		assertEquals(fullName, getFixture().getQName());
+		assertEquals(qName, getFixture().getQName());
 	}
 
 	@Test
@@ -92,28 +87,16 @@ public class IdentifierTest {
 	}
 
 	@Test
-	public void testGetIdentifiableElement() {
-		assertEquals(null, getFixture().getIdentifiableElement());
-		MyContainer container =new MyContainer();
-		assertNotNull(container.getIdentifier());
-		getFixture().setIdentifiableElement(container);
-		assertEquals(container, getFixture().getIdentifiableElement());
+	public void testGetId() {
+		assertEquals("myId", getFixture().getId());
+		assertEquals("myId", getFixture().getValue());
 	}
 
+	/** Checks that id is not changeable. **/
 	@Test
-	public void testGetId() {
-		String id = "id1";
-		assertNull(getFixture().getId());
-
-		getFixture().setId(id);
-		assertTrue(id.equalsIgnoreCase(getFixture().getId()));
-
-		getFixture().setId(null);
-		assertNull(getFixture().getId());
-		assertNull(getFixture().getValue());
-
-		getFixture().setValue(id);
-		assertTrue(id.equalsIgnoreCase(getFixture().getValue().toString()));
+	public void testSetValue() {
+		getFixture().setValue("newId");
+		assertEquals("myId", getFixture().getValue());
 	}
 
 	/**
@@ -136,17 +119,22 @@ public class IdentifierTest {
 		assertEquals(GraphUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
 	}
 
+	/**
+	 * Checks that {@link IdentifiableElement} and {@link Identifier} are always
+	 * correctly connected.
+	 **/
 	@Test
 	public void testCheckOpposite() {
-		Node node = GraphFactory.createNode();
-		node.setIdentifier(getFixture());
-		assertEquals(getFixture(), node.getIdentifier());
-		assertEquals(getFixture().getIdentifiableElement(), node);
-
+		MyContainer newContainer = new MyContainer();
+		Identifier id= GraphFactory.createIdentifier(newContainer, GraphUtil.IDENTIFIER_NAME);
+		assertEquals(newContainer.getIdentifier(), id);
+		
+		newContainer.setId("newId");
+		assertFalse(newContainer.equals(id));
 	}
 
 	@Test
 	public void testGeneralNameHandling() {
-		assertEquals("graph", getFixture().getNamespace());
+		assertEquals(GraphUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
 	}
 } // IdentifierTest

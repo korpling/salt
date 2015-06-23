@@ -2,6 +2,7 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
+import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 
 public abstract class IdentifiableElementImpl extends LabelableElementImpl implements IdentifiableElement {
@@ -20,19 +21,22 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 	@Override
 	public void setIdentifier(Identifier identifier) {
 		if (identifier != null) {
-			if (this.identifier != null) {
-				removeLabel(GraphUtil.IDENTIFIER_NAME, GraphUtil.IDENTIFIER_NAMESPACE);
+			if (getIdentifier() != null) {
+				removeLabel(GraphUtil.IDENTIFIER_NAMESPACE, GraphUtil.IDENTIFIER_NAME);
 			}
 			this.identifier = identifier;
 			addLabel(identifier);
 		}
-
 	}
 
 	/** {@inheritDoc IdentifiableElement#getId()} **/
 	@Override
 	public String getId() {
-		return (getIdentifier().getId());
+		if (getIdentifier() != null) {
+			return (getIdentifier().getId());
+		} else {
+			return (null);
+		}
 	}
 
 	/** {@inheritDoc IdentifiableElement#setId(String)} **/
@@ -42,5 +46,30 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 			Identifier identifier = GraphFactory.createIdentifier(this, id);
 			setIdentifier(identifier);
 		}
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(getClass().getSimpleName());
+		str.append("(");
+		str.append(getId());
+		str.append(")");
+		if ((getLabels() != null) && (getLabels().size() > 0)) {
+			str.append("[");
+			boolean isFirst = true;
+			for (Label<?> label : getLabels()) {
+				if (!(label instanceof Identifier)) {
+					if (isFirst) {
+						isFirst = false;
+					} else {
+						str.append(", ");
+					}
+					str.append(label);
+				}
+				str.append("]");
+			}
+		}
+		return (str.toString());
 	}
 }

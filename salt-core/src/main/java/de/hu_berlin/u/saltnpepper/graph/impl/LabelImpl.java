@@ -93,6 +93,6 @@ public class LabelImpl<V extends Object> implements Label<V> {
 		str.append(GraphUtil.createQName(getNamespace(), getName()));
 		str.append("=");
 		str.append(getValue());
-		return super.toString();
+		return(str.toString());
 	}
 }

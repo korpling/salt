@@ -21,7 +21,7 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
  * @author florian
  *
  */
-public abstract class LabelableElementImpl implements LabelableElement, Serializable{
+public abstract class LabelableElementImpl implements LabelableElement, Serializable {
 	private static final long serialVersionUID = -900356617796178257L;
 	/** internal set of all labels **/
 	private Map<String, Label<?>> labels = null;
@@ -35,38 +35,42 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		}
 		return (retVal);
 	}
+
 	/** {@inheritDoc LabelableElement#getLabel(String)} **/
 	@Override
-	public Label<?> getLabel(String qName){
-		if (labels!= null){
-			return(labels.get(qName));
-		}else{
-			return(null);
+	public Label<?> getLabel(String qName) {
+		if (labels != null) {
+			return (labels.get(qName));
+		} else {
+			return (null);
 		}
 	}
+
 	/** {@inheritedDoc LabelableElement#getLabel(String, String)} **/
 	@Override
 	public Label<?> getLabel(String namespace, String name) {
 		String qName = GraphUtil.createQName(namespace, name);
-		return(getLabel(qName));
+		return (getLabel(qName));
 	}
+
 	/** {@inheritDoc LabelableElement#getLabelsByNamespace(String)} **/
 	@Override
 	public Set<Label<?>> getLabelsByNamespace(String ns) {
 		Set<Label<?>> retVal = new HashSet<Label<?>>();
 		if (labels != null) {
 			for (Label<?> label : labels.values()) {
-				if (ns== null){
-					if (label.getNamespace()== null){
-						retVal.add(label);	
+				if (ns == null) {
+					if (label.getNamespace() == null) {
+						retVal.add(label);
 					}
-				}else if (ns.equals(label.getNamespace())) {
+				} else if (ns.equals(label.getNamespace())) {
 					retVal.add(label);
 				}
 			}
 		}
 		return (retVal);
 	}
+
 	/** {@inheritDoc LabelableElement#addLabel(Label)} **/
 	@Override
 	public void addLabel(Label<?> label) {
@@ -80,10 +84,11 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		}
 		String qName = GraphUtil.createQName(label.getNamespace(), label.getName());
 		if (labels.containsKey(qName)) {
-			if (this instanceof IdentifiableElement)
-				throw new SaltInsertionException(this, label, "Cannot add the given label '" + label + "' object to LabelableElement '" + ((IdentifiableElement) this).getId() + "', because a label with this QName already exists: " + label.getQName());
-			else
+			if (this instanceof IdentifiableElement) {
+				throw new SaltInsertionException(this, label, " Because an id already exists: "+labels.get(qName)+".");
+			} else {
 				throw new SaltInsertionException(this, label, "Cannot add the given label object, because a label with this QName already exists: " + label.getQName());
+			}
 		}
 		labels.put(qName, label);
 	}
@@ -92,6 +97,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	@Override
 	public void removeLabel(String qName) {
 		if (qName != null) {
+			labels.remove(labels.get(qName));
 			labels.remove(qName);
 		}
 	}
@@ -113,12 +119,13 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	public boolean containsLabel(String qName) {
 		return (labels.containsKey(qName));
 	}
+
 	/** {@inheritDoc LabelableElement#sizeLabels()} **/
 	@Override
-	public Integer sizeLabels(){
-		if (labels!= null){
-			return(labels.values().size());
+	public Integer sizeLabels() {
+		if (labels != null) {
+			return (labels.values().size());
 		}
-		return(0);
+		return (0);
 	}
 }
