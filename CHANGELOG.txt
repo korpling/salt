@@ -12,6 +12,10 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 2.1.1
+=============
+* this is just a bugfix release 
+
 Version 2.1.0
 =============
 * updated EMF version from 2.8 to 2.9.1-v20130827-0309
