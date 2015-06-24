@@ -68,6 +68,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
+import java.util.LinkedList;
 
 /**
  * <!-- begin-user-doc -->
@@ -371,12 +372,12 @@ public class SaltProjectImpl extends EObjectImpl implements SaltProject {
 				(this.getSCorpusGraphs().size()> 0))
 		{//store all documents if exist
 			URI sDocumentFileURI= null;
-			for (SCorpusGraph sCorpusGraph: Collections.synchronizedList(this.getSCorpusGraphs()))
+			for (SCorpusGraph sCorpusGraph: new LinkedList<>(this.getSCorpusGraphs()))
 			{
 				if (	(sCorpusGraph.getSDocuments()!= null) &&
 						(sCorpusGraph.getSDocuments().size()> 0))
 				{
-					for (SDocument sDocument: Collections.synchronizedList(sCorpusGraph.getSDocuments()))
+					for (SDocument sDocument: new LinkedList<>(sCorpusGraph.getSDocuments()))
 					{
 						if (sDocument.getSDocumentGraph()!= null)
 						{//only store sDocument, when there is some content in sDocumentGraph corresponding to sDocument

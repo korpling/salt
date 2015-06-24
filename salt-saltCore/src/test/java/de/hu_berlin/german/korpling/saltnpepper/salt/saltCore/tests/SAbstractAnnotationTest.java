@@ -387,7 +387,7 @@ public abstract class SAbstractAnnotationTest extends TestCase {
         SDATATYPE dataType= null;
         
         dataType= SDATATYPE.SURI;
-        this.getFixture().setSValue(URI.createFileURI(""));
+        this.getFixture().setSValue(URI.createFileURI("."));
         assertEquals(dataType, this.getFixture().getSValueType());
     }
     

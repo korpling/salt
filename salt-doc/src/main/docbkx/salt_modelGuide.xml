@@ -165,9 +165,9 @@
             a layer or another label as shown in <xref linkend="fig_labelAndGraph"/>. An
             attribute-value-pair is a triple which consists of a namespace, a name and a value
             (namespace:name=value). The combination of name and namespace is used to identify a
-            label and therefore must be unique. The namespace is an optional value, to ditinguish in
-            case of there are two labels having the same name. For instance a node etc. can have a
-            label <emphasis role="italic">stts:pos=VVFIN</emphasis> as well as the label <emphasis
+            label and therefore must be unique. The namespace is an optional value, to distinguish
+            in case of there are two labels having the same name. For instance a node etc. can have
+            a label <emphasis role="italic">stts:pos=VVFIN</emphasis> as well as the label <emphasis
                 role="italic">pos:VV</emphasis> to annotate it with two part-of-speech annotations
             from different tagsets. <figure xml:id="fig_labelAndGraph">
                 <title>Label mechanism for graph, node, edge and layer (class diagram)</title>

@@ -1873,6 +1873,49 @@ public class SDocumentGraphTest extends TestCase {
 	}
 
 	/**
+	 * Tests the tokenization of a pretokenized text and checks if the old toekns are removed correctly.
+	 */
+	public void testTokenize2() 
+	{
+		String text="This is a sample.";
+		
+		STextualDS sText1= this.getFixture().createSTextualDS(text);
+		getFixture().createSToken(sText1, 0, 7);
+		getFixture().createSToken(sText1, 8, 16);
+		
+		this.getFixture().tokenize();
+		
+		assertEquals(5, this.getFixture().getSTokens().size());
+		assertEquals(5, this.getFixture().getSTextualRelations().size());
+		assertEquals(2, this.getFixture().getSSpans().size());
+	}
+	
+	/**
+	 * Tests the tokenization of a pretokenized text and checks if the old tokens are removed correctly. Further checks, that
+	 * all annotations are copied to the new created span node.
+	 */
+	public void testTokenize3() 
+	{
+		String text="This is a sample.";
+		
+		STextualDS sText1= this.getFixture().createSTextualDS(text);
+		SToken tok1= getFixture().createSToken(sText1, 0, 7);
+		tok1.createSAnnotation(null, "a", "b");
+		tok1.createSAnnotation(null, "c", "d");
+		SToken tok2= getFixture().createSToken(sText1, 8, 16);
+		tok2.createSAnnotation(null, "1", "2");
+		tok2.createSAnnotation(null, "3", "4");
+		
+		this.getFixture().tokenize();
+		
+		assertEquals(5, this.getFixture().getSTokens().size());
+		assertEquals(5, this.getFixture().getSTextualRelations().size());
+		assertEquals(2, this.getFixture().getSSpans().size());
+		assertEquals(2, this.getFixture().getSSpans().get(0).getSAnnotations().size());
+		assertEquals(2, this.getFixture().getSSpans().get(1).getSAnnotations().size());
+	}
+	
+	/**
 	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#createTokenizer() <em>Create Tokenizer</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
