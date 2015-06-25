@@ -75,6 +75,8 @@
 		<maven-license-plugin.version>1.4.0</maven-license-plugin.version>
 		<maven-notice-plugin.version>1.0.4</maven-notice-plugin.version>
 		<maven-clean-plugin.version>2.6.1</maven-clean-plugin.version>
+		<docbkx-fop-support.version>2.0.14</docbkx-fop-support.version>
+		<docbkx-maven-plugin.version>2.0.14</docbkx-maven-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -216,13 +218,6 @@
 				</configuration>
 			</plugin>
 			<!-- end: Plugin for automatic releasing -->
-			<!-- start: plugin to generate javadoc -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${maven-javadoc-plugin.version}</version>
-			</plugin>
-			<!-- end: plugin to generate javadoc -->
 			<!-- start: plugin to deploy project to maven repo -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -267,165 +262,6 @@
 				</configuration>
 			</plugin>
 			<!-- end: creates a NOTICE file use mvn notice:generate -->
-			<!-- start: of docbook plugin -->
-			<plugin>
-				<groupId>com.agilejava.docbkx</groupId>
-				<artifactId>docbkx-maven-plugin</artifactId>
-				<version>2.0.14</version>
-				<executions>
-					<execution>
-						<id>pdf</id>
-						<goals>
-							<goal>generate-pdf</goal>
-						</goals>
-						<configuration>
-							<!-- <sourceDirectory>${project.build.directory}/docbkx</sourceDirectory> -->
-							<sourceDirectory>${project.basedir}/src/main/docbkx</sourceDirectory>
-							<targetDirectory>${project.build.directory}/manual</targetDirectory>
-							<targetFileExtension>${project.version}.pdf</targetFileExtension>
-							<includes>manual.xml</includes>
-							<foCustomization>${basedir}/src/main/docbkx/custom.xsl</foCustomization>
-							<highlightSource>true</highlightSource>
-							<admonGraphics>true</admonGraphics>
-							<admonGraphicsPath>${basedir}/src/main/docbkx/images/docbook/</admonGraphicsPath>
-							<admonGraphicsExtension>.svg</admonGraphicsExtension>
-							<useSvg>true</useSvg>
-							<useExtensions>true</useExtensions>
-							<sectionAutolabel>true</sectionAutolabel>
-							<!-- font configuration -->
-							<bodyFontFamily>DejaVu Serif</bodyFontFamily>
-							<monospaceFontFamily>DejaVu Sans Mono</monospaceFontFamily>
-							<titleFontFamily>DejaVu Sans</titleFontFamily>
-							<fonts>
-								<font>
-									<name>DejaVu Sans Mono</name>
-									<style>normal</style>
-									<weight>normal</weight>
-									<embedFile>${basedir}/src/main/fonts/DejaVuSansMono.ttf</embedFile>
-									<metricsFile>${project.build.directory}/fonts/DejaVuSansMono-metrics.xml</metricsFile>
-								</font>
-								<font>
-									<name>DejaVu Serif</name>
-									<style>normal</style>
-									<weight>normal</weight>
-									<embedFile>${basedir}/src/main/fonts/DejaVuSerif.ttf</embedFile>
-									<metricsFile>${project.build.directory}/fonts/DejaVuSerif-metrics.xml</metricsFile>
-								</font>
-								<font>
-									<name>DejaVu Serif</name>
-									<style>italic</style>
-									<weight>normal</weight>
-									<embedFile>${basedir}/src/main/fonts/DejaVuSerif-Italic.ttf</embedFile>
-									<metricsFile>${project.build.directory}/fonts/DejaVuSerif-Italic-metrics.xml</metricsFile>
-								</font>
-								<font>
-									<name>DejaVu Serif</name>
-									<style>normal</style>
-									<weight>bold</weight>
-									<embedFile>${basedir}/src/main/fonts/DejaVuSerif-Bold.ttf</embedFile>
-									<metricsFile>${project.build.directory}/fonts/DejaVuSerif-Bold-metrics.xml</metricsFile>
-								</font>
-								<font>
-									<name>DejaVu Serif</name>
-									<style>italic</style>
-									<weight>bold</weight>
-									<embedFile>${basedir}/src/main/fonts/DejaVuSerif-BoldItalic.ttf</embedFile>
-									<metricsFile>${project.build.directory}/fonts/DejaVuSerif-BoldItalic-metrics.xml</metricsFile>
-								</font>
-								<font>
-									<name>DejaVu Sans</name>
-									<style>normal</style>
-									<weight>bold</weight>
-									<embedFile>${basedir}/src/main/fonts/DejaVuSans-Bold.ttf</embedFile>
-									<metricsFile>${project.build.directory}/fonts/DejaVuSans-Bold-metrics.xml</metricsFile>
-								</font>
-								<font>
-									<name>DejaVu Sans</name>
-									<style>normal</style>
-									<weight>normal</weight>
-									<embedFile>${basedir}/src/main/fonts/DejaVuSans.ttf</embedFile>
-									<metricsFile>${project.build.directory}/fonts/DejaVuSans-metrics.xml</metricsFile>
-								</font>
-							</fonts>
-						</configuration>
-						<phase>site</phase>
-					</execution>
-					<execution>
-						<id>html</id>
-						<goals>
-							<goal>generate-html</goal>
-						</goals>
-						<configuration>
-							<sourceDirectory>${project.build.directory}/docbkx</sourceDirectory>
-							<targetDirectory>${project.build.directory}/manual</targetDirectory>
-							<targetFileExtension>${project.version}.html</targetFileExtension>
-							<includes>manual.xml</includes>
-							<highlightSource>true</highlightSource>
-							<admonGraphics>true</admonGraphics>
-							<admonGraphicsPath>${basedir}/src/main/docbkx/images/docbook/</admonGraphicsPath>
-							<admonGraphicsExtension>.svg</admonGraphicsExtension>
-							<useSvg>true</useSvg>
-							<useExtensions>true</useExtensions>
-							<preProcess>
-								<copy todir="${project.build.directory}/manual/images">
-									<fileset dir="${basedir}/src/main/docbkx/images">
-									</fileset>
-								</copy>
-							</preProcess>
-						</configuration>
-						<phase>site</phase>
-					</execution>
-				</executions>
-				<configuration>
-					<xincludeSupported>true</xincludeSupported>
-				</configuration>
-
-			</plugin>
-
-			<plugin>
-				<groupId>com.agilejava.docbkx</groupId>
-				<artifactId>docbkx-fop-support</artifactId>
-				<version>2.0.14</version>
-				<executions>
-					<execution>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<sourceDirectory>${basedir}/src/main/fonts/</sourceDirectory>
-							<ansi>false</ansi>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>${maven-resources-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>copy-filter-docbook</id>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/docbkx</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/src/main/docbkx/</directory>
-									<filtering>true</filtering>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-
-
 		</plugins>
 		<finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName>
 	</build>
@@ -435,7 +271,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
+				<version>${maven-javadoc-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</reporting>

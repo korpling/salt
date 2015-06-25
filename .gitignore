@@ -9,3 +9,4 @@ salt-saltCore/META-INF/
 salt-saltCore/_TMP/
 salt-saltSample/META-INF/
 /target
+/docs/
