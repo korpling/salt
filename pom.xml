@@ -35,13 +35,17 @@
 		<tag>HEAD</tag>
 	</scm>
 	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
 		<repository>
-			<id>korpling</id>
-			<name>korpling maven repo</name>
-			<url>file:///srv/www/maven2/</url>
-			<!-- <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url> -->
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
+	<!-- <distributionManagement> <repository> <id>korpling</id> <name>korpling 
+		maven repo</name> <url>file:///srv/www/maven2/</url> </repository> </distributionManagement> -->
 	<repositories>
 		<repository>
 			<id>korpling</id>
@@ -78,6 +82,7 @@
 		<maven-clean-plugin.version>2.6.1</maven-clean-plugin.version>
 		<docbkx-fop-support.version>2.0.14</docbkx-fop-support.version>
 		<docbkx-maven-plugin.version>2.0.14</docbkx-maven-plugin.version>
+		<maven-gpg-plugin>1.5</maven-gpg-plugin>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -137,12 +142,22 @@
 		<name>Humboldt-Universität zu Berlin, INRIA</name>
 	</organization>
 	<build>
-		<extensions>
-			<!-- Enabling the use of FTP -->
-			<!-- <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ssh-external</artifactId> 
-				<version>1.0</version> </extension> -->
-		</extensions>
 		<plugins>
+			<!-- The Maven GPG plugin is used to sign the components -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>${maven-gpg-plugin}</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- a plugin to clean the project when calling mvn clean (removes META-INF 
 				and OSGI-INF) -->
 			<plugin>
@@ -263,17 +278,22 @@
 				</configuration>
 			</plugin>
 			<!-- end: creates a NOTICE file use mvn notice:generate -->
-		</plugins>
-		<finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName>
-	</build>
-	<name>${project.groupId}.${project.artifactId}</name>
-	<reporting>
-		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${maven-javadoc-plugin.version}</version>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
-	</reporting>
+
+		<finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName>
+	</build>
+	<name>${project.groupId}.${project.artifactId}</name>
 </project>
