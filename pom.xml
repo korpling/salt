@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
 	<artifactId>salt</artifactId>
@@ -31,8 +32,8 @@
 		<connection>scm:git:git://github.com/korpling/salt.git</connection>
 		<developerConnection>scm:git:git@github.com:korpling/salt.git</developerConnection>
 		<url>https://github.com/korpling/salt</url>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 	<distributionManagement>
 		<repository>
 			<id>korpling</id>
@@ -63,7 +64,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<commons.lang3.version>3.3.2</commons.lang3.version>
 		<maven-bundle-plugin.version>2.5.3</maven-bundle-plugin.version>
-		<!-- <maven-bundle-plugin.version>2.1.0</maven-bundle-plugin.version>-->
+		<!-- <maven-bundle-plugin.version>2.1.0</maven-bundle-plugin.version> -->
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<maven-source-plugin.version>2.4</maven-source-plugin.version>
 		<maven-site-plugin.version>3.4</maven-site-plugin.version>
