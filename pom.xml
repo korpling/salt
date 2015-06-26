@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
 	<artifactId>salt</artifactId>
 	<packaging>pom</packaging>
-	<version>2.1.2-SNAPSHOT</version>
+	<version>2.1.2</version>
 	<modules>
 		<module>salt-graph</module>
 		<module>salt-saltCore</module>
@@ -46,7 +45,7 @@
 		<connection>scm:git:git://github.com/korpling/salt.git</connection>
 		<developerConnection>scm:git:git@github.com:korpling/salt.git</developerConnection>
 		<url>https://github.com/korpling/salt</url>
-		<tag>HEAD</tag>
+		<tag>salt-2.1.2</tag>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
@@ -268,7 +267,7 @@
 	</build>
 	<profiles>
 		<profile>
-			<id></id>
+			<id />
 			<build>
 				<plugins>
 					<!-- generate a jar for sources -->
