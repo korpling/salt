@@ -11,6 +11,9 @@
 *	artifactId:		salt-saltCommon												  *
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
+Version 2.1.2
+=============
+* only changes in pom.xml to make Salt compatible for maven central
 
 Version 2.1.1
 =============
