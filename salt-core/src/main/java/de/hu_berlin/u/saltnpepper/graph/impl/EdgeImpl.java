@@ -6,6 +6,7 @@ import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
 
+@SuppressWarnings("serial")
 public class EdgeImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Edge<S, T>, NamedElement{
 	/**
 	 * Initializes an object of type {@link Edge}.

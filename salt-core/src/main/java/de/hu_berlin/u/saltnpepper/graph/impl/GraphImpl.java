@@ -16,9 +16,8 @@ import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
+@SuppressWarnings("serial")
 public class GraphImpl<N extends Node, E extends Edge<N, N>> extends IdentifiableElementImpl implements Graph<N, E>, NamedElement{
-
-	
 	public GraphImpl(){
 	}
 	

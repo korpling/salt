@@ -14,8 +14,8 @@ import de.hu_berlin.u.saltnpepper.graph.impl.NodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 public class GraphTest {
-	protected Graph<Node, Edge<Node,Node>> fixture= null; 
-	
+	protected Graph<Node, Edge<Node, Node>> fixture = null;
+
 	public Graph<Node, Edge<Node, Node>> getFixture() {
 		return fixture;
 	}
@@ -26,34 +26,42 @@ public class GraphTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new GraphImpl<Node, Edge<Node,Node>>());
+		setFixture(new GraphImpl<Node, Edge<Node, Node>>());
+	}
+
+	public void testGetId() {
+		String id = "id1";
+		this.getFixture().setId(id);
+		assertEquals(id, this.getFixture().getId());
 	}
 
 	/**
 	 * <ul>
-	 * 	<li>checks that an edge with no source could not be inserted</li>
-	 *  <li>checks that an edge with no target could not be inserted</li>
-	 *  <li>checks that a correct edge is inserted correctly</li>
+	 * <li>checks that an edge with no source could not be inserted</li>
+	 * <li>checks that an edge with no target could not be inserted</li>
+	 * <li>checks that a correct edge is inserted correctly</li>
 	 * </ul>
 	 */
 	@Test
 	public void testAddEdge() {
-		Edge<Node, Node> edge= new EdgeImpl<Node, Node>();
-		Node source= null;
-		Node target= null;
-		try{
+		Edge<Node, Node> edge = new EdgeImpl<Node, Node>();
+		Node source = null;
+		Node target = null;
+		try {
 			getFixture().addEdge(edge);
-			//no source node is set
+			// no source node is set
 			fail();
-		}catch (SaltInsertionException e){}
-		source= new NodeImpl();
+		} catch (SaltInsertionException e) {
+		}
+		source = new NodeImpl();
 		edge.setSource(source);
-		try{
+		try {
 			getFixture().addEdge(edge);
-			//no target node is set
+			// no target node is set
 			fail();
-		}catch (SaltInsertionException e){}
-		target= new NodeImpl();
+		} catch (SaltInsertionException e) {
+		}
+		target = new NodeImpl();
 		edge.setTarget(target);
 		getFixture().addEdge(edge);
 		assertTrue(getFixture().getEdges().contains(edge));

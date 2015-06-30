@@ -3,7 +3,7 @@ package de.hu_berlin.u.saltnpepper.graph;
 import java.util.List;
 
 
-public interface Graph<N extends Node, E extends Edge<N, N>> {
+public interface Graph<N extends Node, E extends Edge<N, N>> extends IdentifiableElement{
 	/**
 	 * Returns a list of all edges contained in this graph. 
 	 * @return a list of all contained edges.

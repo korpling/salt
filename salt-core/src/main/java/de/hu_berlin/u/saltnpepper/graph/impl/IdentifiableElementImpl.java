@@ -5,9 +5,9 @@ import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 
+@SuppressWarnings("serial")
 public abstract class IdentifiableElementImpl extends LabelableElementImpl implements IdentifiableElement {
 
-	private static final long serialVersionUID = 376684011595531725L;
 	/** internal ref to the {@link Identifier} label **/
 	private Identifier identifier = null;
 
