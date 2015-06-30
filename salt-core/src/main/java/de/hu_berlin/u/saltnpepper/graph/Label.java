@@ -11,7 +11,7 @@ package de.hu_berlin.u.saltnpepper.graph;
  *
  * @param <V> this parameter determines the type of the value of this label. 
  */
-public interface Label<V extends Object> {
+public interface Label<V extends Object> extends LabelableElement{
 	/** Separator between namespace and name: qname= NAMESPACE {@value #NS_SEPERATOR} NAME. */
 	public static final String NS_SEPERATOR= "::";
 	/** 

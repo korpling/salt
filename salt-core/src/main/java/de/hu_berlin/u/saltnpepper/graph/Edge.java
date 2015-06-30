@@ -1,5 +1,18 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
+/**
+ * In graph theory an edge is a relation between two nodes, often an edge is realized as a pair of nodes.
+ * 
+ * This interface defines a directed and labeled edge. A directed edge is a not symmetric edge. For instance if an edge 
+ * relates a node <i>a</i> with a node <i>b</i>, it is not the case for the way around. A labeled edge is an edge, which can 
+ * contain labels as defined in {@link Label}. An edge always belong to 0..1 {@link Graph}s and can also be contained in one or 
+ * more {@link Layer}s. 
+ * 
+ * @author florian
+ *
+ * @param <S> source node of the edge
+ * @param <T> target nod eof the edge
+ */
 public interface Edge<S extends Node, T extends Node> {
 	
 	/**

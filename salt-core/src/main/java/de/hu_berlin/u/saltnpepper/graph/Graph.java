@@ -2,7 +2,20 @@ package de.hu_berlin.u.saltnpepper.graph;
 
 import java.util.List;
 
-
+/**
+ * The here defined graph is given by G=(V, E, L, {label a , ...label b }) with:
+ * <ul>
+ * 	<li>V being a set of {@link Node}s with v= ({label c , ... label d }) ∊ V</li>
+ *  <li>E being a set of directed {@link Edge}s with e= (v 1 ∊ V, v 2 ∊ V, {label e , ... label f }) ∊ E</li>
+ *  <li>L being a set of {@link Layer}s with l= (V 1 ⊆ V, E 1 ⊆ E, L 1 ⊆ L, {label g ,.. label h }) ∊ L</li>
+ *  <li>and a set of {@link Label}s {label a , ... label b } the graph is labeled with.</li>  
+ * </ul>
+ * 
+ * @author florian
+ *
+ * @param <N> type of contained {@link Node}s
+ * @param <E> type of contained {@link Edge}s
+ */
 public interface Graph<N extends Node, E extends Edge<N, N>> extends IdentifiableElement{
 	/**
 	 * Returns a list of all edges contained in this graph. 

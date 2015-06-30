@@ -6,7 +6,8 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
-public class LabelImpl<V extends Object> implements Label<V> {
+@SuppressWarnings("serial")
+public class LabelImpl<V extends Object> extends LabelableElementImpl implements Label<V>{
 	
 	protected String namespace = null;
 	/** {@inheritDoc Label#getNamespace()} */

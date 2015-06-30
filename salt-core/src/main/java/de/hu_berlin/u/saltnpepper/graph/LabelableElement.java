@@ -3,6 +3,12 @@ package de.hu_berlin.u.saltnpepper.graph;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * This interface defines a container to hold {@link Label} objects and makes them accessible.
+ * 
+ * @author florian
+ *
+ */
 public interface LabelableElement {
 	/**
 	 * Returns all labels being contained by this object.
