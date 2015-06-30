@@ -29,6 +29,13 @@ public class GraphTest {
 		setFixture(new GraphImpl<Node, Edge<Node,Node>>());
 	}
 
+	/**
+	 * <ul>
+	 * 	<li>checks that an edge with no source could not be inserted</li>
+	 *  <li>checks that an edge with no target could not be inserted</li>
+	 *  <li>checks that a correct edge is inserted correctly</li>
+	 * </ul>
+	 */
 	@Test
 	public void testAddEdge() {
 		Edge<Node, Node> edge= new EdgeImpl<Node, Node>();
@@ -51,5 +58,4 @@ public class GraphTest {
 		getFixture().addEdge(edge);
 		assertTrue(getFixture().getEdges().contains(edge));
 	}
-
 }

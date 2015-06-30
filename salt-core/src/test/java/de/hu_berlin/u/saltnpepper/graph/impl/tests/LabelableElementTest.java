@@ -50,6 +50,7 @@ public class LabelableElementTest extends TestCase {
 	}
 
 	class MyLabelableElement extends LabelableElementImpl {
+		private static final long serialVersionUID = 1L;
 	}
 
 	@After
