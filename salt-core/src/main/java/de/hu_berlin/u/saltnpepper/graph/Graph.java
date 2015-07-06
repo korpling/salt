@@ -23,6 +23,11 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 */
 	public List<E> getEdges();
 	/**
+	 * Returns an edge corresponding to the passed id, if such an edge is contained in the graph.
+	 * @param edgeId id of the edge to be searched for
+	 */
+	public E getEdge(String edgeId);
+	/**
 	 * Adds an edge to this graph and updates indexes. If edge is null nothing is inserted.
 	 * For double chaining between this {@link Graph} and the passed {@link Edge} object,
 	 * the real insertion is done by method {@link #basicAddEdge(Edge)}.
@@ -55,6 +60,13 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @return a list of all contained edges.
 	 */
 	public List<N> getNodes();
+	
+	/**
+	 * Returns a node corresponding to the passed id, if such a node is contained in the graph.
+	 * @param nodeId id of the node to be searched for
+	 */
+	public N getNode(String nodeId);
+	
 	/**
 	 * Adds a node to this graph and updates indexes. If node is null nothing is inserted.
 	 * For double chaining between this {@link Graph} and the passed {@link node} object,

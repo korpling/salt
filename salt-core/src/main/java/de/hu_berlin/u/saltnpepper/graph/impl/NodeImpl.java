@@ -5,6 +5,7 @@ import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
 
+@SuppressWarnings("serial")
 public class NodeImpl extends IdentifiableElementImpl implements Node, NamedElement{
 
 	/**

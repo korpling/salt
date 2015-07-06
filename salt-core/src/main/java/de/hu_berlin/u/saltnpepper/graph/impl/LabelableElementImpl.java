@@ -74,23 +74,26 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritDoc LabelableElement#addLabel(Label)} **/
 	@Override
 	public void addLabel(Label<?> label) {
+		if (label== null){
+			throw new SaltInsertionException(this, label, "The label was null. ");
+		}
 		if (label != null) {
 			if ((label.getName() == null) || (label.getName().isEmpty())) {
-				throw new SaltException("Cannot add a label object without a name.");
+				throw new SaltInsertionException(this, label, "Cannot add a label object without a name.");
 			}
-		}
-		if (labels == null) {
-			labels = new HashMap<String, Label<?>>();
-		}
-		String qName = GraphUtil.createQName(label.getNamespace(), label.getName());
-		if (labels.containsKey(qName)) {
-			if (this instanceof IdentifiableElement) {
-				throw new SaltInsertionException(this, label, " Because an id already exists: "+labels.get(qName)+".");
-			} else {
-				throw new SaltInsertionException(this, label, "Cannot add the given label object, because a label with this QName already exists: " + label.getQName());
+			if (labels == null) {
+				labels = new HashMap<String, Label<?>>();
 			}
+			String qName = GraphUtil.createQName(label.getNamespace(), label.getName());
+			if (labels.containsKey(qName)) {
+				if (this instanceof IdentifiableElement) {
+					throw new SaltInsertionException(this, label, " Because an id already exists: " + labels.get(qName) + ".");
+				} else {
+					throw new SaltInsertionException(this, label, "Cannot add the given label object, because a label with this QName already exists: " + label.getQName());
+				}
+			}
+			labels.put(qName, label);
 		}
-		labels.put(qName, label);
 	}
 
 	/** {@inheritDoc LabelableElement#removeLabel(String)} **/

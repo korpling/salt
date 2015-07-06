@@ -10,7 +10,7 @@ package de.hu_berlin.u.saltnpepper.graph;
  * @author florian
  *
  */
-public interface Node {
+public interface Node extends IdentifiableElement{
 	/**
 	 * Returns the container graph of this node.
 	 * @return graph object which contains this node.

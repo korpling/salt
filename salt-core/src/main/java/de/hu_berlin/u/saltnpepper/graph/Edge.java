@@ -13,7 +13,7 @@ package de.hu_berlin.u.saltnpepper.graph;
  * @param <S> source node of the edge
  * @param <T> target nod eof the edge
  */
-public interface Edge<S extends Node, T extends Node> {
+public interface Edge<S extends Node, T extends Node> extends IdentifiableElement{
 	
 	/**
 	 * Returns the delegate object. If {@link #delegate} is not null,  all functions of 

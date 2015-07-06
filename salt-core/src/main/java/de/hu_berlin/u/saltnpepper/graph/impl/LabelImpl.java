@@ -1,13 +1,14 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import org.apache.commons.lang3.tuple.Pair;
+import java.lang.Cloneable;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
 @SuppressWarnings("serial")
-public class LabelImpl<V extends Object> extends LabelableElementImpl implements Label<V>{
+public class LabelImpl<V extends Object> extends LabelableElementImpl implements Label<V>, Cloneable{
 	
 	protected String namespace = null;
 	/** {@inheritDoc Label#getNamespace()} */
