@@ -2,8 +2,10 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.common.collect.HashMultimap;
@@ -25,6 +27,9 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	/**
 	 * Initializes an object of type {@link GraphImpl}.
 	 * <ul>
+	 * <li>Initializes nodes list</li>
+	 * <li>Initializes edges list</li>
+	 * <li>Initializes layers set</li>
 	 * <li>Initializes index {@link #idx_node_id}</li>
 	 * <li>Initializes index {@link #idx_edge_id}</li>
 	 * <li>Initializes index {@link #idx_layer_id}</li>
@@ -33,6 +38,10 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * </ul>
 	 */
 	private void init() {
+		layers = Collections.synchronizedSet(new HashSet<Layer<N, E>>());
+		nodes = Collections.synchronizedList(new ArrayList<N>());
+		edges = Collections.synchronizedList(new ArrayList<E>());
+		
 		idx_node_id = new ConcurrentHashMap<>();
 		idx_edge_id = new ConcurrentHashMap<>();
 		idx_layer_id = new ConcurrentHashMap<>();
@@ -65,7 +74,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * An index storing all layers and their corresponding ids (key: id; value:
 	 * layer)
 	 **/
-	private Map<String, Layer> idx_layer_id = null;
+	private Map<String, Layer<N, E>> idx_layer_id = null;
 	/**
 	 * An index storing all node ids and the corresponding outgoing edges (key:
 	 * node id; value: edge)
@@ -85,10 +94,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	/** {@inheritDoc Graph#getNodes()} **/
 	@Override
 	public List<N> getNodes() {
-		if (nodes == null) {
-			nodes = Collections.synchronizedList(new ArrayList<N>());
-		}
-		return (nodes);
+		return (Collections.unmodifiableList(nodes));
 	}
 
 	/** {@inheritDoc Graph#getNode(String)} **/
@@ -114,7 +120,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		}
 		// if node has no id a new id will be given to node
 		if (node.getId() == null) {
-			node.setId("node" + getNodes().size());
+			node.setId("n" + getNodes().size());
 		}
 		int i = 0;
 		// the given id, which eventually has to be extended for artificial
@@ -126,7 +132,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 			i++;
 		}// if node already exists, create new Id
 			// add node to internal list
-		getNodes().add(node);
+		nodes.add(node);
 		// add node to id index
 		idx_node_id.put(node.getId(), node);
 	}
@@ -143,7 +149,14 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	/** {@inheritDoc Graph#basicRemoveNode(Node)} **/
 	@Override
 	public void basicRemoveNode(N node) {
-		getNodes().remove(node);
+		//remove node from internal list
+		nodes.remove(node);
+		//remove node from internal index
+		idx_node_id.remove(node.getId());
+		//remove node also from layers
+		for (Layer<N, E> layer: layers){
+			layer.removeNode(node);
+		}
 	}
 
 	/** {@inheritDoc Graph#containsNode(String)} **/
@@ -162,11 +175,9 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	/** {@inheritDoc Graph#getEdges()} **/
 	@Override
 	public List<E> getEdges() {
-		if (edges == null) {
-			edges = Collections.synchronizedList(new ArrayList<E>());
-		}
-		return (edges);
+		return (Collections.unmodifiableList(edges));
 	}
+
 	/** {@inheritDoc Graph#getedge(String)} **/
 	@Override
 	public E getEdge(String edgeId) {
@@ -196,19 +207,19 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		}
 		// if node has no id a new id will be given to node
 		if (edge.getId() == null) {
-			edge.setId("node" + getNodes().size());
+			edge.setId("r" + getNodes().size());
 		}
 		int i = 0;
 		// the given id, which eventually has to be extended for artificial
 		// counter
 		String idBase = edge.getId();
 		while (getEdge(edge.getId()) != null) {
-		// if node already exists, create new Id
+			// if node already exists, create new Id
 			edge.setId(idBase + "_" + (getNodes().size() + i));
 			i++;
 		}
-			// add node to internal list
-		getEdges().add(edge);
+		// add node to internal list
+		edges.add(edge);
 		// add node to id index
 		idx_edge_id.put(edge.getId(), edge);
 	}
@@ -222,19 +233,34 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	// =========================================================== < Edges
 
 	// =========================================================== > Layers
-	private List<LayerImpl> layers = null;
+	private Set<Layer<N, E>> layers = null;
 
-	public List<LayerImpl> getLayers() {
-		if (layers == null) {
-			layers = Collections.synchronizedList(new ArrayList<LayerImpl>());
-		}
-		return (Collections.unmodifiableList(layers));
+	@Override
+	public Set<Layer<N, E>> getLayers() {
+		return (Collections.unmodifiableSet(layers));
 	}
 
 	/** {@inheritDoc Graph#containsLayer(String)} **/
 	@Override
 	public boolean containsLayer(String layerId) {
 		return (idx_edge_id.containsKey(layerId));
+	}
+
+	@Override
+	public void addLayer(Layer<N, E> layer) {
+		if (layer != null) {
+			basicAddLayer(layer);
+			layer.basicSetGraph(this);
+		}
+	}
+
+	@Override
+	public void basicAddLayer(Layer<N, E> layer) {
+		if (layer != null) {
+			if (!layers.contains(layer)) {
+				layers.add(layer);
+			}
+		}
 	}
 	// =========================================================== < Layers
 }

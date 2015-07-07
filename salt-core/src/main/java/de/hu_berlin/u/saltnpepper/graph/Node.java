@@ -18,10 +18,6 @@ public interface Node extends IdentifiableElement{
 	public Graph getGraph();
 	/**
 	 * Sets the container graph of this node.
-	 * @param graph object which contains this node.
-	 */
-	/**
-	 * Sets the container graph of this node.
 	 * For double chaining between this {@link Node} and the passed {@link Graph} object,
 	 * the real insertion is done by method {@link #basicSetGraph(Graph)}.
 	 * @param graph graph which contains this node 

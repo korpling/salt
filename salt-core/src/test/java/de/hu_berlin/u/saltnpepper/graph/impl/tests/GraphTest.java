@@ -2,7 +2,10 @@ package de.hu_berlin.u.saltnpepper.graph.impl.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
@@ -10,6 +13,7 @@ import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.impl.EdgeImpl;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
@@ -39,6 +43,7 @@ public class GraphTest {
 		assertEquals(id, this.getFixture().getId());
 	}
 
+	// ==========================================================> test nodes
 	/**
 	 * Checks that nodes are added correctly and null is not a valid node.
 	 */
@@ -67,36 +72,116 @@ public class GraphTest {
 	 * <ul>
 	 * <li>each added node got an id</li>
 	 * <li>that an id is not used twice</li>
-	 * <li>that when an id is already given to the node, it is changed, when
-	 * the graph already contains such a node</li>
+	 * <li>that when an id is already given to the node, it is changed, when the
+	 * graph already contains such a node</li>
 	 * </ul>
 	 */
 	@Test
-	public void testAddNode_Id(){
-		Node node= GraphFactory.createNode();
+	public void testAddNode_Id() {
+		Node node = GraphFactory.createNode();
 		getFixture().addNode(node);
 		assertEquals(1, getFixture().getNodes().size());
 		assertEquals(node, getFixture().getNodes().get(0));
-		Set<String> ids= new HashSet<String>();
-		for (int i= 0; i < 50; i++){
-			node= GraphFactory.createNode();
+		Set<String> ids = new HashSet<String>();
+		for (int i = 0; i < 50; i++) {
+			node = GraphFactory.createNode();
 			getFixture().addNode(node);
 			assertNotNull(node.getId());
-			if (ids.contains(node.getId())){
+			if (ids.contains(node.getId())) {
 				fail("AN id was given twice");
 			}
 			ids.add(node.getId());
 			assertTrue(getFixture().getNodes().contains(node));
 		}
-		node= GraphFactory.createNode();
+		node = GraphFactory.createNode();
 		node.setId("hello");
 		getFixture().addNode(node);
-		node= GraphFactory.createNode();
+		node = GraphFactory.createNode();
 		node.setId("hello");
 		getFixture().addNode(node);
 		assertNotEquals("hello", node.getId());
 	}
-	
+
+	/**
+	 * CHecks that method {@link Graph#getNodes()} returns a list containing all
+	 * nodes.
+	 */
+	@Test
+	public void testGetNodes() throws Exception {
+		List<Node> nodes = new ArrayList<>();
+		for (int i = 0; i < 50; i++) {
+			Node node = GraphFactory.createNode();
+			nodes.add(node);
+			getFixture().addNode(node);
+		}
+		assertEquals(nodes.size(), getFixture().getNodes().size());
+		for (Node node : nodes) {
+			getFixture().getNodes().contains(node);
+		}
+	}
+
+	/**
+	 * Checks that nodes are added correctly and null is not a valid node.
+	 */
+	@Test
+	public void testGetNode() {
+		List<Node> nodes = new ArrayList<>();
+		for (int i = 0; i < 50; i++) {
+			Node node = GraphFactory.createNode();
+			nodes.add(node);
+			getFixture().addNode(node);
+		}
+
+		for (Node node : nodes) {
+			assertEquals(node, this.getFixture().getNode(node.getId()));
+		}
+	}
+
+	/**
+	 * Checks that a node is removed correctly.
+	 */
+	@Test
+	public void testRemoveNode() {
+		List<Node> nodes = new ArrayList<>();
+		for (int i = 0; i < 50; i++) {
+			Node node = GraphFactory.createNode();
+			nodes.add(node);
+			getFixture().addNode(node);
+		}
+		for (Node node : nodes) {
+			assertNotNull(this.getFixture().getNode(node.getId()));
+			getFixture().removeNode(node);
+			assertNull("node '" + node + "' should be removed", this.getFixture().getNode(node.getId()));
+		}
+	}
+
+	/**
+	 * Tests if nodes are also removed from layers, when they are removed from
+	 * graph.
+	 */
+	@Test
+	public void testRemoveNode__Node2() {
+		Layer<Node, Edge<Node, Node>> layer1 = GraphFactory.createLayer();
+		getFixture().addLayer(layer1);
+
+		List<Node> nodes = new ArrayList<>();
+		for (int i = 0; i < 50; i++) {
+			Node node = GraphFactory.createNode();
+			nodes.add(node);
+			getFixture().addNode(node);
+			layer1.getNodes().add(node);
+		}
+		assertEquals(nodes.size(), layer1.getNodes().size());
+		for (Node node : nodes) {
+			getFixture().removeNode(node);
+		}
+		assertEquals(0, layer1.getNodes().size());
+
+	}
+
+	// ==========================================================< test nodes
+
+	// ==========================================================> test edges
 	/**
 	 * <ul>
 	 * <li>checks that an empty edge could not be inserted</li>
@@ -112,7 +197,7 @@ public class GraphTest {
 			fail("Null should not have been added as a node. ");
 		} catch (SaltInsertionException e) {
 		}
-		
+
 		Edge<Node, Node> edge = new EdgeImpl<Node, Node>();
 		Node source = null;
 		Node target = null;
@@ -135,52 +220,53 @@ public class GraphTest {
 		getFixture().addEdge(edge);
 		assertTrue(getFixture().getEdges().contains(edge));
 	}
-	
+
 	/**
 	 * Checks that
 	 * <ul>
 	 * <li>each added node got an id</li>
 	 * <li>that an id is not used twice</li>
-	 * <li>that when an id is already given to the node, it is changed, when
-	 * the graph already contains such a node</li>
+	 * <li>that when an id is already given to the node, it is changed, when the
+	 * graph already contains such a node</li>
 	 * </ul>
 	 */
 	@Test
-	public void testAddEdge_Id(){
-		Node node= GraphFactory.createNode();
-		Edge<Node, Node> edge= GraphFactory.createEdge();
+	public void testAddEdge_Id() {
+		Node node = GraphFactory.createNode();
+		Edge<Node, Node> edge = GraphFactory.createEdge();
 		edge.setSource(node);
 		edge.setTarget(node);
-		
+
 		assertEquals(0, getFixture().getEdges().size());
 		getFixture().addEdge(edge);
 		assertEquals(1, getFixture().getEdges().size());
 		assertEquals(edge, getFixture().getEdges().get(0));
-		
-		Set<String> ids= new HashSet<String>();
-		for (int i= 0; i < 50; i++){
-			edge= GraphFactory.createEdge();
+
+		Set<String> ids = new HashSet<String>();
+		for (int i = 0; i < 50; i++) {
+			edge = GraphFactory.createEdge();
 			edge.setSource(node);
 			edge.setTarget(node);
-			
+
 			getFixture().addEdge(edge);
 			assertNotNull(edge.getId());
-			if (ids.contains(edge.getId())){
+			if (ids.contains(edge.getId())) {
 				fail("An id was given twice");
 			}
 			ids.add(edge.getId());
 			assertTrue(getFixture().getEdges().contains(edge));
 		}
-		edge= GraphFactory.createEdge();
+		edge = GraphFactory.createEdge();
 		edge.setId("hello");
 		edge.setSource(node);
 		edge.setTarget(node);
 		getFixture().addEdge(edge);
-		edge= GraphFactory.createEdge();
+		edge = GraphFactory.createEdge();
 		edge.setId("hello");
 		edge.setSource(node);
 		edge.setTarget(node);
 		getFixture().addEdge(edge);
 		assertNotEquals("hello", edge.getId());
 	}
+	// ==========================================================< test nodes
 }

@@ -1,6 +1,7 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * The here defined graph is given by G=(V, E, L, {label a , ...label b }) with:
@@ -28,7 +29,7 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 */
 	public E getEdge(String edgeId);
 	/**
-	 * Adds an edge to this graph and updates indexes. If edge is null nothing is inserted.
+	 * Adds the passed edge to this graph and updates indexes. If edge is null nothing is inserted.
 	 * For double chaining between this {@link Graph} and the passed {@link Edge} object,
 	 * the real insertion is done by method {@link #basicAddEdge(Edge)}.
 	 * @param edge edge to be inserted 
@@ -54,6 +55,12 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @param edge edge to be inserted
 	 */
 	public void basicAddEdge(E edge);
+	/**
+	 * Returns whether this graph contains an {@link Edge} corresponding to the passed id.
+	 * @param edgeId id of the node to be checked
+	 * @return true if the edge is contained, false otherwise
+	 */
+	public boolean containsEdge(String edgeId);
 	
 	/**
 	 * Returns a list of all edges contained in this graph. 
@@ -68,7 +75,7 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public N getNode(String nodeId);
 	
 	/**
-	 * Adds a node to this graph and updates indexes. If node is null nothing is inserted.
+	 * Adds the passed node to this graph and updates indexes. If node is null nothing is inserted.
 	 * For double chaining between this {@link Graph} and the passed {@link node} object,
 	 * the real insertion is done by method {@link #basicAddNode(Node)}.
 	 * @param node node to be inserted 
@@ -121,12 +128,39 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @return true if the node is contained, false otherwise
 	 */
 	public boolean containsNode(String nodeId);
+	
 	/**
-	 * Returns whether this graph contains an {@link Edge} corresponding to the passed id.
-	 * @param edgeId id of the node to be checked
-	 * @return true if the edge is contained, false otherwise
+	 * Returns a set of layers contained by this graph. 
+	 * @return all contained layers
 	 */
-	public boolean containsEdge(String edgeId);
+	public Set<Layer<N, E>> getLayers();
+	/**
+	 * Adds the passed layer to this graph. If layer is null nothing is inserted.
+	 * For double chaining between this {@link Graph} and the passed {@link layer} object,
+	 * the real insertion is done by method {@link #basicAddLayer(Layer)}.
+	 * @param layer layer to be inserted 
+	 */
+	public void addLayer(Layer<N, E> layer);
+	/**
+	 * This is an internally used method. To implement a double chaining of {@link Graph} and {@link Node} object when an
+	 * node is inserted into this graph and to avoid an endless invocation the insertion of an edge is splitted into
+	 * the two methods {@link #addNode(node)} and {@link #basicAddNode(Node)}. The invocation of methods is implement 
+	 * as follows:
+	 * <pre>
+	 * {@link #addLayer(layer)}                      {@link Layer#setGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicAddLayer(Layer)}            {@link Layer#basicSetGraph(Graph)}
+	 * </pre> 
+	 * 
+	 * That means method {@link #addLayer(Layer)} calls {@link #basicAddLayer(Layer)} 
+	 * and {@link Node#basicSetGraph(Graph)}. And method {@link Layer#setGraph(Graph)} calls 
+	 * {@link #basicAddLayer(Layer)} and {@link Layer#basicSetGraph(Graph)}.
+	 * 
+	 * @param node node to be inserted
+	 */
+	public void basicAddLayer(Layer<N, E> layer);
 	/**
 	 * Returns whether this graph contains a {@link Layer} corresponding to the passed id.
 	 * @param layerId id of the node to be checked
