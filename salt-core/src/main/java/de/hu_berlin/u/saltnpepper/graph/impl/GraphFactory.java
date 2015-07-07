@@ -93,7 +93,7 @@ public class GraphFactory {
 	 * 
 	 * @return new layer object
 	 */
-	public static Layer createLayer() {
-		return (new LayerImpl());
+	public static Layer<Node, Edge<Node, Node>> createLayer() {
+		return (new LayerImpl<Node, Edge<Node, Node>>());
 	}
 }
