@@ -105,9 +105,35 @@ public class GraphTest {
 		getFixture().addNode(node);
 		assertNotEquals("hello", node.getId());
 	}
+	
+	/**
+	 * Checks that no {@link Node}, {@link Edge} or {@link Layer} can be added
+	 * by adding them into the list returned by the graph
+	 */
+	@Test
+	public void testAddXInList() {
+		
+		//test adding of node
+		try{
+			getFixture().getNodes().add(GraphFactory.createNode());
+			fail("A node shall not be added by the list");
+		}catch (UnsupportedOperationException e){}
+		
+		//test adding of edge
+		try{
+			getFixture().getEdges().add(GraphFactory.createEdge());
+			fail("An edge shall not be added by the list");
+		}catch (UnsupportedOperationException e){}
+		
+		//test adding of layer
+		try{
+			getFixture().getLayers().add(GraphFactory.createLayer());
+			fail("A layer shall not be added by the list");
+		}catch (UnsupportedOperationException e){}
+	}
 
 	/**
-	 * CHecks that method {@link Graph#getNodes()} returns a list containing all
+	 * Checks that method {@link Graph#getNodes()} returns a list containing all
 	 * nodes.
 	 */
 	@Test
@@ -164,22 +190,22 @@ public class GraphTest {
 	 * graph.
 	 */
 	@Test
-	public void testRemoveNode__Node2() {
-		Layer<Node, Edge<Node, Node>> layer1 = GraphFactory.createLayer();
-		getFixture().addLayer(layer1);
+	public void testRemoveNodeAlsoFromLayer() {
+		Layer<Node, Edge<Node, Node>> layer = GraphFactory.createLayer();
+		getFixture().addLayer(layer);
 
 		List<Node> nodes = new ArrayList<>();
 		for (int i = 0; i < 50; i++) {
 			Node node = GraphFactory.createNode();
 			nodes.add(node);
 			getFixture().addNode(node);
-			layer1.getNodes().add(node);
+			layer.addNode(node);
 		}
-		assertEquals(nodes.size(), layer1.getNodes().size());
+		assertEquals(nodes.size(), layer.getNodes().size());
 		for (Node node : nodes) {
 			getFixture().removeNode(node);
 		}
-		assertEquals(0, layer1.getNodes().size());
+		assertEquals(0, layer.getNodes().size());
 
 	}
 
