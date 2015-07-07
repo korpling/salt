@@ -61,12 +61,12 @@ public class NodeImpl extends IdentifiableElementImpl implements Node, NamedElem
 	/** {@inheritDoc Edge#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
-		basicSetGraph(graph);
 		if (graph!= null){
 			graph.addNode(this);
 		}else{
-			graph.removeNode(this);
+			getGraph().removeNode(this);
 		}
+		basicSetGraph(graph);
 	}
 	/**
 	 * This is an internally used method. To implement a double chaining of {@link Graph} and {@link Node} object when an
