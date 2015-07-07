@@ -30,12 +30,12 @@ public class LayerImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	/** {@inheritDoc Edge#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph<N, E> graph) {
-		basicSetGraph(graph);
 		if (graph!= null){
 			graph.basicAddLayer(this);
 		}else{
-			//TODO: remove edge from graph
+			getGraph().basicRemoveLayer(this);
 		}
+		basicSetGraph(graph);
 	}
 	/** {@inheritDoc Edge#basicSetGraph(Graph)} **/
 	@Override

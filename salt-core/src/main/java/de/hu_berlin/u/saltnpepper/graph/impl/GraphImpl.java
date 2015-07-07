@@ -262,5 +262,20 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 			}
 		}
 	}
+	
+	@Override
+	public void removeLayer(Layer<N, E> layer){
+		layer.basicSetGraph(null);
+		basicRemoveLayer(layer);
+	}
+
+	@Override
+	public void basicRemoveLayer(Layer<N, E> layer){
+		if (layer != null) {
+			if (layers.contains(layer)) {
+				layers.remove(layer);
+			}
+		}
+	}
 	// =========================================================== < Layers
 }
