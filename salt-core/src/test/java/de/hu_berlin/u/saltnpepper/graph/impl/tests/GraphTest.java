@@ -177,12 +177,14 @@ public class GraphTest {
 			Node node = GraphFactory.createNode();
 			nodes.add(node);
 			getFixture().addNode(node);
+			assertEquals(node, getFixture().getNode(node.getId()));
 		}
 		for (Node node : nodes) {
 			assertNotNull(this.getFixture().getNode(node.getId()));
 			getFixture().removeNode(node);
-			assertNull("node '" + node + "' should be removed", this.getFixture().getNode(node.getId()));
+			assertNull("node '" + node + "' should be removed", getFixture().getNode(node.getId()));
 		}
+		assertEquals(0, getFixture().getNodes().size());
 	}
 
 	/**
@@ -237,7 +239,7 @@ public class GraphTest {
 			fail();
 		} catch (SaltInsertionException e) {
 		}
-		source = new NodeImpl();
+		source = GraphFactory.createNode();
 		edge.setSource(source);
 		try {
 			getFixture().addEdge(edge);
@@ -245,8 +247,16 @@ public class GraphTest {
 			fail();
 		} catch (SaltInsertionException e) {
 		}
-		target = new NodeImpl();
+		target = GraphFactory.createNode();
 		edge.setTarget(target);
+		try {
+			getFixture().addEdge(edge);
+			// target and source does not belong to graph
+			fail("Cannot add edge, whose source and target does not belong to graph");
+		} catch (SaltInsertionException e) {
+		}
+		getFixture().addNode(source);
+		getFixture().addNode(target);
 		getFixture().addEdge(edge);
 		assertTrue(getFixture().getEdges().contains(edge));
 	}
@@ -263,6 +273,7 @@ public class GraphTest {
 	@Test
 	public void testAddEdge_Id() {
 		Node node = GraphFactory.createNode();
+		getFixture().addNode(node);
 		Edge<Node, Node> edge = GraphFactory.createEdge();
 		edge.setSource(node);
 		edge.setTarget(node);

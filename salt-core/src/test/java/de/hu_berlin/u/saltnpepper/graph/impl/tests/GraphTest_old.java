@@ -128,29 +128,10 @@ public class GraphTest_old {
 //		}
 //	}
 //	
-//	/**
-//	 * TODO
-//	 * This might be not necessary any more, when returned list of nodes is immutable
-//	 */
-//	public void testAddNodeByAddingInList() 
-//	{
-//		//Knoten in den Graphen einf�gen
-//		for (Node node: nodes)
-//		{
-//			this.getFixture().getNodes().add(node);
-//		}
-//		
-//		for (Node node: this.nodes)
-//		{	
-//			assertEquals("the graph should have the node '"+node.getId()+"' ", node, this.getFixture().getNode(node.getId()));
-//			
-//		}
-//		//Knoten suchen, der nicht im Graph ist
-//		assertNull("this node shouln�t exist",this.getFixture().getNode("not there"));
-//	}
+
 //
 //	/**
-//	 * TODO
+//	 * TODO still necessary???
 //	 */
 //	public void testRemoveNodeById__String() 
 //	{
@@ -169,60 +150,7 @@ public class GraphTest_old {
 //	
 //
 //	
-//	public void testRemoveNodeByRemovingFromList() 
-//	{
-//		for (Node node: this.nodes )
-//		{
-//			this.getFixture().addNode(node);
-//			assertEquals(node, this.getFixture().getNode(node.getId()));
-//		}
-//		for (String nodeName: nodeNames)
-//		{
-//			assertNotNull(this.getFixture().getNode(nodeName));
-//			this.getFixture().getNodes().remove(this.getFixture().getNode(nodeName));
-//			assertNull("node '"+nodeName+"' should be removed", this.getFixture().getNode(nodeName));
-//		}
-//	}
-//	
-//	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeNodes() <em>Remove Nodes</em>}' operation.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeNodes()
-//	 */
-//	public void testRemoveNodes() 
-//	{
-//		//insert node into graph
-//		this.insertNodes(nodes);
-//		//check if node is there
-//		for (Node node: nodes)
-//		{
-//			assertSame("this node '"+node.getId()+"' should be there", node, this.getFixture().getNode(node.getId()));
-//		}
-//		//remove node
-//		assertTrue(this.getFixture().removeNodes());
-//		for (Node node: nodes)
-//		{	
-//			assertNull("this node '"+node.getId()+"' shouldn�t be there", this.getFixture().getNode(node.getId()));
-//		}
-//		//insert nodes into graph
-//		this.insertNodes(nodes);
-//		//check if nodes are there
-//		for (Node node: nodes)
-//		{
-//			assertSame("this node '"+node.getId()+"' should be there", node, this.getFixture().getNode(node.getId()));
-//		}
-//		//remove nodes
-//		assertTrue(this.getFixture().removeNodes());
-//		for (Node node: nodes)
-//		{	
-//			assertNull("this node '"+node.getId()+"' shouldn�t be there", this.getFixture().getNode(node.getId()));
-//		}
-//		//try to remove node which is not there
-//		Node node= GraphFactory.createNode();
-//		node.setId("not there");
-//		assertFalse(this.getFixture().removeNodeById(node.getId()));
-//	}
+
 //	
 //	/**
 //	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addEdge(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge) <em>Add Edge</em>}' operation.

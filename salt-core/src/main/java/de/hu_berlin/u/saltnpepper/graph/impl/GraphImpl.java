@@ -270,6 +270,14 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		if (edge.getTarget() == null) {
 			throw new SaltInsertionException(this, edge, "The target node is empty. ");
 		}
+		if (	(edge.getSource().getId()== null)||
+				(!containsNode(edge.getSource().getId()))){
+			throw new SaltInsertionException(this, edge, "The source node of the passed edge does not belong to this graph. ");
+		}
+		if (	(edge.getTarget().getId()== null)||
+				(!containsNode(edge.getTarget().getId()))){
+			throw new SaltInsertionException(this, edge, "The target node of the passed edge does not belong to this graph. ");
+		}
 		// if node has no id a new id will be given to node
 		if (edge.getId() == null) {
 			edge.setId("r" + getNodes().size());
