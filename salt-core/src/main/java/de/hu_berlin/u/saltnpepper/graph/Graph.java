@@ -41,40 +41,14 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 
 	/**
 	 * Adds the passed edge to this graph and updates indexes. If edge is null
-	 * nothing is inserted. For double chaining between this {@link Graph} and
-	 * the passed {@link Edge} object, the real insertion is done by method
-	 * {@link #basicAddEdge(Edge)}.
+	 * nothing is inserted. The passed edge and this graph will be double
+	 * chained, which means the method {@link Edge#getGraph()} will return this
+	 * graph.
 	 * 
 	 * @param edge
 	 *            edge to be inserted
 	 */
 	public void addEdge(E edge);
-
-	/**
-	 * This is an internally used method. To implement a double chaining of
-	 * {@link Graph} and {@link Edge} object when an edge is inserted into this
-	 * graph and to avoid an endless invocation the insertion of an edge is
-	 * splitted into the two methods {@link #addEdge(Edge)} and
-	 * {@link #basicAddEdge(Edge)}. The invocation of methods is implement as
-	 * follows:
-	 * 
-	 * <pre>
-	 * {@link #addEdge(Edge)}                      {@link Edge#setGraph(Graph)}
-	 *         ||             \ /                   ||
-	 *         ||              X                    ||
-	 *         \/             / \                   \/
-	 * {@link #basicAddEdge(Edge)}            {@link Edge#basicSetGraph(Graph)}
-	 * </pre>
-	 * 
-	 * That means method {@link #addEdge(Edge)} calls
-	 * {@link #basicAddEdge(Edge)} and {@link Edge#basicSetGraph(Graph)}. And
-	 * method {@link Edge#setGraph(Graph)} calls {@link #basicAddEdge(Edge)} and
-	 * {@link Edge#basicSetGraph(Graph)}.
-	 * 
-	 * @param edge
-	 *            edge to be inserted
-	 */
-	public void basicAddEdge(E edge);
 
 	/**
 	 * Returns whether this graph contains an {@link Edge} corresponding to the
@@ -104,9 +78,9 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 
 	/**
 	 * Adds the passed node to this graph and updates indexes. If node is null
-	 * nothing is inserted. For double chaining between this {@link Graph} and
-	 * the passed {@link node} object, the real insertion is done by method
-	 * {@link #basicAddNode(Node)}.
+	 * nothing is inserted. The passed node and this graph will be double
+	 * chained, which means the method {@link Node#getGraph()} will return this
+	 * graph.
 	 * 
 	 * @param node
 	 *            node to be inserted
@@ -114,62 +88,16 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public void addNode(N node);
 
 	/**
-	 * This is an internally used method. To implement a double chaining of
-	 * {@link Graph} and {@link Node} object when an node is inserted into this
-	 * graph and to avoid an endless invocation the insertion of an edge is
-	 * splitted into the two methods {@link #addNode(node)} and
-	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
-	 * follows:
-	 * 
-	 * <pre>
-	 * {@link #addNode(node)}                      {@link Node#setGraph(Graph)}
-	 *         ||             \ /                   ||
-	 *         ||              X                    ||
-	 *         \/             / \                   \/
-	 * {@link #basicAddNode(Node)}            {@link Node#basicSetGraph(Graph)}
-	 * </pre>
-	 * 
-	 * That means method {@link #addNode(Node)} calls
-	 * {@link #basicAddNode(Node)} and {@link Node#basicSetGraph(Graph)}. And
-	 * method {@link Node#setGraph(Graph)} calls {@link #basicAddNode(Node)} and
-	 * {@link Node#basicSetGraph(Graph)}.
-	 * 
-	 * @param node
-	 *            node to be inserted
-	 */
-	public void basicAddNode(N node);
-
-	/**
-	 * Removes the passed node from this graph and cleans all indexes. It also ensures,
-	 * that the graph is removed from the node, thus invoking
-	 * {@link Node#getGraph()} will return null. For cutting the double chaining
-	 * between this {@link Graph} and the passed {@link node} object, the real
-	 * removal is done by method {@link #basicRemoveNode(Node)}. If the passed
-	 * node is null nothing happens.
+	 * Removes the passed node from this graph and cleans all indexes. It also
+	 * ensures, that the graph is removed from the node, thus invoking
+	 * {@link Node#getGraph()} will return null. The double chaining between
+	 * this graph and the passed node will be cut off. If the passed node is
+	 * null nothing is done.
 	 * 
 	 * @param node
 	 *            the node to be removed
 	 */
 	public void removeNode(N node);
-
-	/**
-	 * This is an internally used method. To realize the cut of the double
-	 * chaining, the removal is splitted in two methods
-	 * {@link #removeNode(Node)} and {@link #basicRemoveNode(Node)}. which are
-	 * connected as follows:
-	 * 
-	 * <pre>
-	 * {@link #removeNode(node)}                      {@link Node#setGraph(null)}
-	 *         ||             \ /                   ||
-	 *         ||              X                    ||
-	 *         \/             / \                   \/
-	 * {@link #basicRemoveNode(Node)}            {@link Node#basicSetGraph(null)}
-	 * </pre>
-	 * 
-	 * @param node
-	 *            the node to be removed
-	 */
-	public void basicRemoveNode(N node);
 
 	/**
 	 * Returns whether this graph contains a {@link Node} corresponding to the
@@ -190,40 +118,13 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 
 	/**
 	 * Adds the passed layer to this graph. If layer is null nothing is
-	 * inserted. For double chaining between this {@link Graph} and the passed
-	 * {@link layer} object, the real insertion is done by method
-	 * {@link #basicAddLayer(Layer)}.
+	 * inserted. The passed layer and this graph will be double chained, which
+	 * means the method {@link Layer#getGraph()} will return this graph.
 	 * 
 	 * @param layer
 	 *            layer to be inserted
 	 */
 	public void addLayer(Layer<N, E> layer);
-
-	/**
-	 * This is an internally used method. To implement a double chaining of
-	 * {@link Graph} and {@link Node} object when an node is inserted into this
-	 * graph and to avoid an endless invocation the insertion of an edge is
-	 * splitted into the two methods {@link #addNode(node)} and
-	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
-	 * follows:
-	 * 
-	 * <pre>
-	 * {@link #addLayer(layer)}                      {@link Layer#setGraph(Graph)}
-	 *         ||             \ /                   ||
-	 *         ||              X                    ||
-	 *         \/             / \                   \/
-	 * {@link #basicAddLayer(Layer)}            {@link Layer#basicSetGraph(Graph)}
-	 * </pre>
-	 * 
-	 * That means method {@link #addLayer(Layer)} calls
-	 * {@link #basicAddLayer(Layer)} and {@link Node#basicSetGraph(Graph)}. And
-	 * method {@link Layer#setGraph(Graph)} calls {@link #basicAddLayer(Layer)}
-	 * and {@link Layer#basicSetGraph(Graph)}.
-	 * 
-	 * @param node
-	 *            node to be inserted
-	 */
-	public void basicAddLayer(Layer<N, E> layer);
 
 	/**
 	 * Returns whether this graph contains a {@link Layer} corresponding to the
@@ -236,34 +137,14 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public boolean containsLayer(String layerId);
 
 	/**
-	 * Removes the passed layer from this graph and cleans all indexes. It also ensures,
-	 * that the graph is removed from the layer, thus invoking
-	 * {@link Layer#getGraph()} will return null. For cutting the double chaining
-	 * between this {@link Graph} and the passed {@link layer} object, the real
-	 * removal is done by method {@link #basicRemoveLayer(Layer)}. If the passed
-	 * layer is null nothing happens.
+	 * Removes the passed layer from this graph and cleans all indexes. It also
+	 * ensures, that the graph is removed from the layer, thus invoking
+	 * {@link Layer#getGraph()} will return null. The double chaining between
+	 * this graph and the passed layer will be cut off. If
+	 * the passed layer is null nothing happens.
 	 * 
 	 * @param layer
 	 *            the layer to be removed
 	 */
 	public void removeLayer(Layer<N, E> layer);
-
-	/**
-	 * This is an internally used method. To realize the cut of the double
-	 * chaining, the removal is splitted in two methods
-	 * {@link #removeLayer(Layer)} and {@link #basicRemoveLayer(Layer)}. which are
-	 * connected as follows:
-	 * 
-	 * <pre>
-	 * {@link #removeLayer(layer)}                      {@link Layer#setGraph(null)}
-	 *         ||             \ /                   ||
-	 *         ||              X                    ||
-	 *         \/             / \                   \/
-	 * {@link #basicRemoveLayer(Layer)}            {@link Layer#basicSetGraph(null)}
-	 * </pre>
-	 * 
-	 * @param node
-	 *            the node to be removed
-	 */
-	public void basicRemoveLayer(Layer<N, E> layer);
 }

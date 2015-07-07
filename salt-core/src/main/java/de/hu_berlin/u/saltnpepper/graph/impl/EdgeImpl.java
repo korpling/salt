@@ -89,9 +89,26 @@ public class EdgeImpl<S extends Node, T extends Node> extends IdentifiableElemen
 			//TODO: remove edge from graph
 		}
 	}
-	/** {@inheritDoc Edge#basicSetGraph(Graph)} **/
-	@Override
-	public void basicSetGraph(Graph graph) {
+	/**
+	 * This is an internally used method. To implement a double chaining of {@link Graph} and {@link Edge} object when an
+	 * edge is inserted into this graph and to avoid an endless invocation the insertion of an edge is splited into
+	 * the two methods {@link #setGraph(Graph)} and {@link #basicSetGraph(Graph)}. The invocation of methods is implement 
+	 * as follows:
+	 * <pre>
+	 * {@link Graph#addEdge(Edge)}                      {@link Edge#setGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link Graph#basicAddEdge(Edge)}            {@link Edge#basicSetGraph(Graph)}
+	 * </pre> 
+	 * 
+	 * That means method {@link #setGraph(Graph)} calls {@link #basicSetGraph(Graph)} 
+	 * and {@link Graph#basicAddEdge(Edge)}. And method {@link #setGraph(Graph)} calls 
+	 * {@link Graph#basicAddEdge(Edge)} and {@link Edge#basicSetGraph(Graph)}.
+	 * 
+	 * @param graph graph which contains this edge
+	 */
+	protected void basicSetGraph(Graph graph) {
 		this.graph= graph;
 	}
 }

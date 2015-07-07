@@ -108,13 +108,37 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public void addNode(N node) {
 		basicAddNode(node);
 		if (node != null) {
-			node.basicSetGraph(this);
+			if (node instanceof NodeImpl){
+				((NodeImpl)node).basicSetGraph(this);
+			}
 		}
 	}
 
-	/** {@inheritDoc Graph#basicAddNode(Node)} **/
-	@Override
-	public void basicAddNode(N node) {
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link Graph} and {@link Node} object when an node is inserted into this
+	 * graph and to avoid an endless invocation the insertion of an edge is
+	 * splitted into the two methods {@link #addNode(node)} and
+	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
+	 * follows:
+	 * 
+	 * <pre>
+	 * {@link #addNode(node)}                      {@link Node#setGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicAddNode(Node)}            {@link Node#basicSetGraph(Graph)}
+	 * </pre>
+	 * 
+	 * That means method {@link #addNode(Node)} calls
+	 * {@link #basicAddNode(Node)} and {@link Node#basicSetGraph(Graph)}. And
+	 * method {@link Node#setGraph(Graph)} calls {@link #basicAddNode(Node)} and
+	 * {@link Node#basicSetGraph(Graph)}.
+	 * 
+	 * @param node
+	 *            node to be inserted
+	 */
+	protected void basicAddNode(N node) {
 		if (node == null) {
 			throw new SaltInsertionException(this, node, "A null value is not allowed. ");
 		}
@@ -141,14 +165,31 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	@Override
 	public void removeNode(N node) {
 		if (node != null) {
-			node.basicSetGraph(null);
+			if (node instanceof NodeImpl){
+				((NodeImpl)node).basicSetGraph(null);
+			}
 			basicRemoveNode(node);
 		}
 	}
 
-	/** {@inheritDoc Graph#basicRemoveNode(Node)} **/
-	@Override
-	public void basicRemoveNode(N node) {
+	/**
+	 * This is an internally used method. To realize the cut of the double
+	 * chaining, the removal is splitted in two methods
+	 * {@link #removeNode(Node)} and {@link #basicRemoveNode(Node)}. which are
+	 * connected as follows:
+	 * 
+	 * <pre>
+	 * {@link #removeNode(node)}                      {@link Node#setGraph(null)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicRemoveNode(Node)}            {@link Node#basicSetGraph(null)}
+	 * </pre>
+	 * 
+	 * @param node
+	 *            the node to be removed
+	 */
+	protected void basicRemoveNode(N node) {
 		//remove node from internal list
 		nodes.remove(node);
 		//remove node from internal index
@@ -189,13 +230,37 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public void addEdge(E edge) {
 		basicAddEdge(edge);
 		if (edge != null) {
-			edge.basicSetGraph(this);
+			if (edge instanceof EdgeImpl){
+				((EdgeImpl<N, N>)edge).basicSetGraph(this);
+			}
 		}
 	}
 
-	/** {@inheritDoc Graph#basicAddEdge(Edge)} **/
-	@Override
-	public void basicAddEdge(E edge) {
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link Graph} and {@link Edge} object when an edge is inserted into this
+	 * graph and to avoid an endless invocation the insertion of an edge is
+	 * splitted into the two methods {@link #addEdge(Edge)} and
+	 * {@link #basicAddEdge(Edge)}. The invocation of methods is implement as
+	 * follows:
+	 * 
+	 * <pre>
+	 * {@link #addEdge(Edge)}                      {@link Edge#setGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicAddEdge(Edge)}            {@link Edge#basicSetGraph(Graph)}
+	 * </pre>
+	 * 
+	 * That means method {@link #addEdge(Edge)} calls
+	 * {@link #basicAddEdge(Edge)} and {@link Edge#basicSetGraph(Graph)}. And
+	 * method {@link Edge#setGraph(Graph)} calls {@link #basicAddEdge(Edge)} and
+	 * {@link Edge#basicSetGraph(Graph)}.
+	 * 
+	 * @param edge
+	 *            edge to be inserted
+	 */
+	protected void basicAddEdge(E edge) {
 		if (edge == null) {
 			throw new SaltInsertionException(this, edge, "A null value is not allowed. ");
 		}
@@ -250,12 +315,37 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public void addLayer(Layer<N, E> layer) {
 		if (layer != null) {
 			basicAddLayer(layer);
-			layer.basicSetGraph(this);
+			if (layer instanceof LayerImpl){
+				((LayerImpl<N, E>)layer).basicSetGraph(this);
+			}
 		}
 	}
 
-	@Override
-	public void basicAddLayer(Layer<N, E> layer) {
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link Graph} and {@link Node} object when an node is inserted into this
+	 * graph and to avoid an endless invocation the insertion of an edge is
+	 * splitted into the two methods {@link #addNode(node)} and
+	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
+	 * follows:
+	 * 
+	 * <pre>
+	 * {@link #addLayer(layer)}                      {@link Layer#setGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicAddLayer(Layer)}            {@link Layer#basicSetGraph(Graph)}
+	 * </pre>
+	 * 
+	 * That means method {@link #addLayer(Layer)} calls
+	 * {@link #basicAddLayer(Layer)} and {@link Node#basicSetGraph(Graph)}. And
+	 * method {@link Layer#setGraph(Graph)} calls {@link #basicAddLayer(Layer)}
+	 * and {@link Layer#basicSetGraph(Graph)}.
+	 * 
+	 * @param node
+	 *            node to be inserted
+	 */
+	protected void basicAddLayer(Layer<N, E> layer) {
 		if (layer != null) {
 			if (!layers.contains(layer)) {
 				layers.add(layer);
@@ -265,12 +355,30 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	
 	@Override
 	public void removeLayer(Layer<N, E> layer){
-		layer.basicSetGraph(null);
+		if (layer instanceof LayerImpl){
+			((LayerImpl<N, E>)layer).basicSetGraph(null);
+		}
 		basicRemoveLayer(layer);
 	}
 
-	@Override
-	public void basicRemoveLayer(Layer<N, E> layer){
+	/**
+	 * This is an internally used method. To realize the cut of the double
+	 * chaining, the removal is splitted in two methods
+	 * {@link #removeLayer(Layer)} and {@link #basicRemoveLayer(Layer)}. which are
+	 * connected as follows:
+	 * 
+	 * <pre>
+	 * {@link #removeLayer(layer)}                      {@link Layer#setGraph(null)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicRemoveLayer(Layer)}            {@link Layer#basicSetGraph(null)}
+	 * </pre>
+	 * 
+	 * @param node
+	 *            the node to be removed
+	 */
+	protected void basicRemoveLayer(Layer<N, E> layer){
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);

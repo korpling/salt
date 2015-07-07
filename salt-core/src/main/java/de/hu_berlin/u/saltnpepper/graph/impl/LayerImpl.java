@@ -31,15 +31,42 @@ public class LayerImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	@Override
 	public void setGraph(Graph<N, E> graph) {
 		if (graph!= null){
-			graph.basicAddLayer(this);
+			if (graph instanceof GraphImpl){
+				((GraphImpl<N, E>)graph).basicAddLayer(this);
+			}
 		}else{
-			getGraph().basicRemoveLayer(this);
+			if (getGraph() instanceof GraphImpl){
+				((GraphImpl<N, E>)getGraph()).basicRemoveLayer(this);
+			}
 		}
 		basicSetGraph(graph);
 	}
-	/** {@inheritDoc Edge#basicSetGraph(Graph)} **/
-	@Override
-	public void basicSetGraph(Graph<N, E> graph) {
+	
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link Graph} and {@link Layer} object when an layer is inserted into this
+	 * graph and to avoid an endless invocation the insertion of an layer is
+	 * splited into the two methods {@link #setGraph(Graph)} and
+	 * {@link #basicSetGraph(Graph)}. The invocation of methods is implement as
+	 * follows:
+	 * 
+	 * <pre>
+	 * {@link Graph#addLayer(Layer)}                      {@link Layer#setGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link Graph#basicAddLayer(Layer)}            {@link Layer#basicSetGraph(Graph)}
+	 * </pre>
+	 * 
+	 * That means method {@link #setGraph(Graph)} calls
+	 * {@link #basicSetGraph(Graph)} and {@link Graph#basicAddLayer(Layer)}. And
+	 * method {@link #setGraph(Graph)} calls {@link Graph#basicAddLayer(Layer)}
+	 * and {@link Layer#basicSetGraph(Graph)}.
+	 * 
+	 * @param graph
+	 *            graph which contains this layer
+	 */
+	protected void basicSetGraph(Graph<N, E> graph) {
 		this.graph= graph;
 	}
 	
