@@ -385,7 +385,7 @@ List<SRelation> out= (List<SRelation>)(List<? extends SRelation>)docGraph.getInE
 //accessing all incoming edges of a node (the first structure node)
 List<SRelation> in= (List<SRelation>)(List<? extends SRelation>)docGraph.getInEdges(docGraph.getSStructures().get(0).getSId());
 ```
-So far we havn't talked about how to traverse the document graph. This is done in section (#traversing). 
+So far we havn't talked about how to traverse the document graph. This is done in section [Traversing graphs](#traversing). 
 
 ### <a name="persistAndLoad">Persist and Load a Model<a>
 
