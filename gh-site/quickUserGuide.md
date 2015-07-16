@@ -6,12 +6,11 @@ For giving a short but concise feeling of what Salt is made for, we give an exam
 
 Salt is a graph-based meta model, and therefore each model element in Salt is either a node, an edge (relation), a graph, a label or a layer. This means nodes can be connected via relations. Nodes and relations are contained in a graph. They also can be contained in layers, which define kinds of sub-graphs. A layer itself is also contained in a graph. Each element can be labeled, and even a label can be labeled by another label.
 
-### The Sample
+In the following we start creating a Salt model along a very tiny and simple example described in [The Sample](#sample). First we will create a corpus structure in [Corpus Structure](#corpusStructure) and fill one document with content in [Document structure](#documentStructure). After creating the sample, we gonna show how to access its elements in [Accessing a Salt model](#accessing). Finally we will show how to store and load a model into its serialization SaltXML in [Persist and Load a model](#persistAndLoad).
+
+### <a name="sample">The Sample</a>
 
 In this article, we present only a very simple example to show the main components of Salt in a very brief way. The example is just used to clarify the mechanisms of Salt and therefore does not claim to advocate to a specific linguistic school. In general, Salt is able to contain very complex corpus structures (which means the inner organization of a corpus), having a recursive sub-corpus - super-corpus structure with a lot of primary data. For simplifying the example, we decided to use just a single corpus object (which is also the root corpus) containing one document. The document contains the primary text "Is this example more complicated than it appears to be?".  After showing how to create a corpus structure in section [Corpus Structure](#corpusStructure), we show a tokenization of the primary text by adding one token for each word of that sentence in [Tokenization](#tokenization). We illustrate how to annotate these words with part-of-speech and lemma annotations. In [Hierarchies](#hierarchies), we show the modeling of higher hierarchies having a part-of relationship in Salt, we decided to model a syntax analysis above the given sentence.  In Salt, there also exists a second way of creating aggregations of tokens called 'spans'. The semantics of spans is slightly different compared to that of hierarchies. In contrast to hierarchies, spans aggregate tokens to a set to be annotated once. You might, for instance, not want to annotate a single token only, but a whole structure containing a set of possibly discontinuous tokens. The use of spans is shown in [Spans](#spans) and demonstrated with the use case of an information structure analysis. The last type of model elements we show here is a loose relation or edge between tokens and/or other structures called pointing relation. To show the use of pointing relations in [Pointing Relations](#pointingRelations), we use an anaphoric annotation to connect the word "it" with the words "this example". 
-
-At last we show how to persist and load a model to disk in [Persist and Load](#persistAndLoad) and we show how to traverse the document structure.
-
 
 ### <a name="corpusStructure">Corpus Structure</a>
 
@@ -322,7 +321,7 @@ sampleDocument.getSDocumentGraph().addSRelation(sPointingRelation);
 sPointingRelation.addSType("anaphoric");
 ```
 
-### Accessing a Salt model
+### <a name="accessing">Accessing a Salt model</a>
 
 After we have shown how to create a Salt model, we now show some methods to access its data.
 If you start reading from here, and did not already have a Salt model, you can use the class SampleGenerator, to generate predefined sample models.
@@ -543,3 +542,53 @@ void traverse(     EList<? extends SNode> startSNodes,
 * _traverseHandler_, is the object which will be used for callback. 
 
 Additionally, you can set a flag to protect the traversal engine from running in cycles. Per default, this flag is set to __false__ and your _traverseHandler_ has to deal with cyclic graphs itself.
+
+To traverse our sample, you can use the following snippet:
+
+```java
+//traversing the graph in depth first top down mode beginning with its roots
+	docGraph.traverse(docGraph.getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "td", new SGraphTraverseHandler() {
+		
+		@Override
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation,
+				SNode fromNode, long order) {
+			// TODO Auto-generated method stub
+		}
+		
+		@Override
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
+				SNode fromNode, long order) {
+			// TODO Auto-generated method stub
+		}
+		
+		@Override
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation edge,
+				SNode currNode, long order) {
+			return true;
+		}
+	});
+	
+	//traversing the graph form the tokens to the top
+	docGraph.traverse(docGraph.getSTokens(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, "bu", new SGraphTraverseHandler() {
+		
+		@Override
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation,
+				SNode fromNode, long order) {
+			// TODO Auto-generated method stub
+		}
+		
+		@Override
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
+				SNode fromNode, long order) {
+			// TODO Auto-generated method stub
+		}
+		
+		@Override
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation edge,
+				SNode currNode, long order) {
+			return true;
+		}
+	}, false);
+	
+}
+```
