@@ -322,6 +322,95 @@ sampleDocument.getSDocumentGraph().addSRelation(sPointingRelation);
 sPointingRelation.addSType("anaphoric");
 ```
 
+### Accessing a Salt model
+
+After we have shown how to create a Salt model, we now show some methods to access its data.
+If you start reading from here, and did not already have a Salt model, you can use the class SampleGenerator, to generate predefined sample models.
+```java
+SDocument sampleDocument= SaltFactory.eINSTANCE.createSDocument();
+SampleGenerator.createSDocumentStructure(sampleDocument);
+SDocumentGraph docGraph= sampleDocument.getSDocumentGraph();
+```
+The following snippet examplifies accessing a Salt model. If you copy the following lines and run the code you won't see anything. There are no outputs in the code below.
+
+```java
+//accessing all primary text nodes (getting a list)
+docGraph.getSTextualDSs();
+//accessing the primary text of the first primary text node
+docGraph.getSTextualDSs().get(0).getSText();
+	
+//accessing all token nodes (getting a list)
+docGraph.getSTokens();
+//accessing the primary text, which is overlapped by the first token (note: changing the returned text has no effects)
+docGraph.getSText(docGraph.getSTokens().get(0));
+//accessing all annotations of the first token
+docGraph.getSTokens().get(0).getSAnnotations();
+		
+//accessing the relations between all tokens and their primary text nodes
+docGraph.getSTextualRelations();
+//accessing the interval determining the overlapped text of the first relation (which probably is related to the first token)
+docGraph.getSTextualRelations().get(0).getSStart();
+docGraph.getSTextualRelations().get(0).getSEnd();
+		
+//accessing all span nodes  (getting a list)
+docGraph.getSSpans();
+//accessing the primary text, which is overlapped by the first span (note: changing the returned text has no effects)
+docGraph.getSText(docGraph.getSSpans().get(0));
+//accessing all relations between all spans and their tokens 
+docGraph.getSSpanningRelations();
+		
+//accessing all hierarchical nodes (structures)
+docGraph.getSStructures();
+//accessing the primary text, which is overlapped by the first structure (note: changing the returned text has no effects)
+docGraph.getSText(docGraph.getSStructures().get(0));
+//accessing all dominance relations (relations between all structures and their other nodes)
+docGraph.getSDominanceRelations();
+//accessing all annotations of the first dominance relation
+docGraph.getSDominanceRelations().get(0).getSAnnotations();
+		
+//accessing all pointing relations 
+docGraph.getSPointingRelations();
+//accessing all annotations of the first pointing relation
+docGraph.getSDominanceRelations().get(0).getSAnnotations();
+		
+//accessing all roots of the document graph
+docGraph.getSRoots();
+		
+//accessing all nodes and edges contained in the document graph
+docGraph.getSNodes();
+docGraph.getSRelations();
+		
+//accessing all outgoing edges of a node (the first structure node)
+List<SRelation> out= (List<SRelation>)(List<? extends SRelation>)docGraph.getInEdges(docGraph.getSStructures().get(0).getSId());
+//accessing all incoming edges of a node (the first structure node)
+List<SRelation> in= (List<SRelation>)(List<? extends SRelation>)docGraph.getInEdges(docGraph.getSStructures().get(0).getSId());
+```
+So far we havn't talked about how to traverse the document graph. This is done in section (#traversing). 
+
+### <a name="persistAndLoad">Persist and Load a Model<a>
+
+Persisting a model is very easy: only a nonempty _SaltProject_ object and a valid local URI are needed. The following snippet shows how to persist an entire model.
+
+```java
+saltProject.saveSaltProject(URI);
+```
+
+Please note, that the URI used as parameter is not a URI of type java.net.Uri - it is of type org.eclipse.emf.common.util.URI.
+
+To load a valid SaltXML document, create an empty _SaltProject_ object and call the load method as shown in the following snippet.
+
+```java
+saltProject= SaltFactory.eINSTANCE.createSaltProject();
+saltProject.loadSaltProject(URI);
+```
+
+You can also store and load document structures as shown in the following snippet:
+```java
+// storing
+sampleDocument.saveSDocumentGraph(URI);
+// loading
+sampleDocument.loadSDocumentGraph(URI);
+```
 ### Identifiers in Salt
 
 Each node, edge, graph and layer in Salt gets a unique identifier called _SElementId_. Such an identifier is organized like an URI. The inner structure of a URI is shown here:
@@ -354,51 +443,7 @@ or its String representation by
 tok1.getSId();
 ```
 
-### <a name="persistAndLoad">Persist and Load a Model<a>
-
-Persisting a model is very easy: only a nonempty _SaltProject_ object and a valid local URI are needed. The following snippet shows how to persist an entire model.
-
-```java
-saltProject.saveSaltProject(URI);
-```
-
-Please note, that the URI used as parameter is not a URI of type java.net.Uri - it is of type org.eclipse.emf.common.util.URI.
-
-To load a valid SaltXML document, create an empty _SaltProject_ object and call the load method as shown in the following snippet.
-
-```java
-saltProject= SaltFactory.eINSTANCE.createSaltProject();
-saltProject.loadSaltProject(URI);
-```
-
-You can also store and load document structures as shown in the following snippet:
-```java
-// storing
-sampleDocument.saveSDocumentGraph(URI);
-// loading
-sampleDocument.loadSDocumentGraph(URI);
-```
-
-### Accessing a Salt model
-
-To access a Salt model, you can use the methods generated by the <a href="https://www.eclipse.org/modeling/emf/">Eclipse Modelling Framework</a> (EMF). For attributes and references having the cardinality 1, EMF generates simple getters and setters, i.e. _.getXXX()_ and _.setXXX()_ methods. If attributes do not have a cardinality of 1, the corresponding _.getXXX()_ method will return a list accessor. You can access or manipulate the entries of such a list with these methods:
-
-* _.add(Object)_ to add an entry, 
-* _.get(Position)_ to get the object placed at 'Position' in that list, and 
-* _.remove(Object)_ to remove an entry.
-
-### Shortcuts
-
-For more complicated accesses which to not concern just two objects, it can be a very long way to get a requested object. Therefore in Salt we offer some shortcuts to have a faster access. For instance for getting the text overlapping by any node, you can write the following code:
-
-```java
-docGraph.getSText(sq);
-```
-
-Additional shortcuts are provided by the _SDocumentGraph_ class.
-
-
-### Traversing graphs
+### <a name="traversing">Traversing graphs</a>
 
 When working with Salt, it is often necessary 
 
