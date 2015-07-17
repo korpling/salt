@@ -25,13 +25,13 @@ import de.hu_berlin.u.saltnpepper.graph.impl.NodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 public class GraphTest_old {
-//	protected Graph<Node, Edge<Node, Node>> fixture = null;
+//	protected Graph<Node, Relation<Node, Node>> fixture = null;
 //
-//	public Graph<Node, Edge<Node, Node>> getFixture() {
+//	public Graph<Node, Relation<Node, Node>> getFixture() {
 //		return fixture;
 //	}
 //
-//	public void setFixture(Graph<Node, Edge<Node, Node>> fixture) {
+//	public void setFixture(Graph<Node, Relation<Node, Node>> fixture) {
 //		this.fixture = fixture;
 //	}
 //
@@ -54,23 +54,23 @@ public class GraphTest_old {
 //		}
 //		
 //		//Kantenliste erstellen
-//		edges= new ArrayList<Edge>();
-//		Edge<Node, Node> edge= null;
-//		for (int i= 0; i < edgeNames.length; i++)
+//		relations= new ArrayList<Relation>();
+//		Relation<Node, Node> relation= null;
+//		for (int i= 0; i < relationNames.length; i++)
 //		{
 //			for (Node srcNode: nodes)
 //			{
-//				if (((String)srcNode.getId()).equalsIgnoreCase(edgeNames[i][0]))
+//				if (((String)srcNode.getId()).equalsIgnoreCase(relationNames[i][0]))
 //				{
 //					for (Node dstNode: nodes)
 //					{
-//						if (((String)dstNode.getId()).equalsIgnoreCase(edgeNames[i][1]))
+//						if (((String)dstNode.getId()).equalsIgnoreCase(relationNames[i][1]))
 //						{
-//							edge= GraphFactory.createEdge();
-//							edge.setId(edgeNames[i][2]);
-//							edge.setSource(srcNode);
-//							edge.setTarget(dstNode);
-//							edges.add(edge);
+//							relation= GraphFactory.createRelation();
+//							relation.setId(relationNames[i][2]);
+//							relation.setSource(srcNode);
+//							relation.setTarget(dstNode);
+//							relations.add(relation);
 //							break;
 //						}
 //					}
@@ -93,14 +93,14 @@ public class GraphTest_old {
 //	/**
 //	 * Knotennamen f�r zu erstellende Knoten als String
 //	 */
-//	private String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
-//									{"node1", "node4", "edge3"},{"node4", "node5", "edge4"},
-//									{"node2", "node6", "edge5"}, {"node1", "node7", "edge6"}};
+//	private String[][] relationNames= {	{"node1", "node2", "relation1"}, {"node2", "node3","relation2"}, 
+//									{"node1", "node4", "relation3"},{"node4", "node5", "relation4"},
+//									{"node2", "node6", "relation5"}, {"node1", "node7", "relation6"}};
 //	
 //	/**
 //	 * Liste von Knoten
 //	 */
-//	private List<Edge> edges= null;
+//	private List<Relation> relations= null;
 //	
 //	/**
 //	 * F�gt die �bergebenen Knoten in den Graphen ein
@@ -120,11 +120,11 @@ public class GraphTest_old {
 //	 * @param modeNames zweidimensionaler String, in dem die Namen der Quell- und Zielknoten stehen (Quelle, Ziel)
 //	 * @throws Exception
 //	 */
-//	private void insertEdges(Collection<Edge> edges)
+//	private void insertRelations(Collection<Relation> relations)
 //	{
-//		for (Edge edge: edges)
+//		for (Relation relation: relations)
 //		{
-//			this.getFixture().addEdge(edge);
+//			this.getFixture().addRelation(relation);
 //		}
 //	}
 //	
@@ -154,144 +154,18 @@ public class GraphTest_old {
 
 
 
-//
-//		/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeEdgeById(java.lang.String) <em>Remove Edge By Id</em>}' operation.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeEdgeById(java.lang.String)
-//	 */
-//	public void testRemoveEdgeById__String() 
-//	{
-//		//Knoten in den Graphen einf�gen
-//		this.insertNodes(nodes);
-//		//Kanten in den Graphen einf�gen
-//		this.insertEdges(edges);
-//		//Pr�fen ob Kanten eingef�gt wurden
-//		for (Edge edge: edges)
-//		{
-//			assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));
-//		}
-//		//Kante l�schen
-//		for (Edge edge: edges)
-//		{
-//			if (this.getFixture().getEdge(edge.getId())!= null)
-//			{
-//				assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));	
-//				assertTrue(this.getFixture().removeEdgeById(edge.getId()));
-//				assertNull("this edge '"+edge.getId()+"' shouldn�t be there", this.getFixture().getEdge(edge.getId()));
-//			}
-//		}
-//		//Kante entfernen, deren Knoten es nicht gibt
-//		Edge edge= GraphFactory.createEdge();
-//		edge.setId("not there");
-//		assertFalse(this.getFixture().removeEdgeById(edge.getId()));
-//	}
-//
-//	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeEdges() <em>Remove Edges</em>}' operation.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeEdges()
-//	 */
-//	public void testRemoveEdges() 
-//	{
-//		//add node to graph
-//		this.insertNodes(nodes);
-//		//add node to graph
-//		this.insertEdges(edges);
-//		//check if edge was inserted
-//		for (Edge edge: edges)
-//		{
-//			assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));
-//		}
-//		//remove edge
-//		assertTrue(this.getFixture().removeEdges());
-//		
-//		for (Edge edge: edges)
-//		{	
-//			assertNull("this edge '"+edge.getId()+"' shouldn't be there", this.getFixture().getEdge(edge.getId()));
-//		}
-//		//remove edge, whichs node does not exist
-//		Edge edge= GraphFactory.createEdge();
-//		edge.setId("not there");
-//		assertFalse(this.getFixture().removeEdgeById(edge.getId()));
-//	}
-//
-//	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeEdge(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge) <em>Remove Edge</em>}' operation.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeEdge(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge)
-//	 */
-//	public void testRemoveEdge__Edge() 
-//	{
-//		//Knoten in den Graphen einf�gen
-//		this.insertNodes(nodes);
-//		//Kanten in den Graphen einf�gen
-//		this.insertEdges(edges);
-//		//Pr�fen ob Kanten eingef�gt wurden
-//		for (Edge edge: edges)
-//		{
-//			assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));
-//		}
-//		//Kante l�schen
-//		for (Edge edge: edges)
-//		{
-//			if (this.getFixture().getEdge(edge.getId())!= null)
-//			{
-//				assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));	
-//				assertTrue(this.getFixture().removeEdge(edge));
-//				assertNull("this edge '"+edge.getId()+"' shouldn�t be there", this.getFixture().getEdge(edge.getId()));
-//			}
-//		}
-//		//Kante entfernen, deren Knoten es nicht gibt
-//		Edge edge= GraphFactory.createEdge();
-//		edge.setId("not there");
-//		assertFalse(this.getFixture().removeEdge(edge));
-//	}
 //	
 //	/**
-//	 * Creates an edge, puts it into graph and a layer and removes it from the graph. Tests if edge is even removed in layer. 
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#removeEdge(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge)
+//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeRelationSource(java.lang.String, java.lang.String) <em>Change Relation Source</em>}' operation.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeRelationSource(java.lang.String, java.lang.String)
 //	 */
-//	public void testRemoveEdge__Edge2() 
+//	public void testChangeRelationSource__String_String() 
 //	{
-//		Node node1= GraphFactory.createNode();
-//		Node node2= GraphFactory.createNode();
-//		this.getFixture().addNode(node1);
-//		this.getFixture().addNode(node2);
-//		
-//		Layer layer1= GraphFactory.createLayer();
-//		this.getFixture().getLayers().add(layer1);
-//		Collection<Edge> edges= new ArrayList<Edge>();
-//		for (int i=0; i< 5; i++)
-//		{
-//			Edge edge= GraphFactory.createEdge();
-//			edge.setSource(node1);
-//			edge.setSource(node2);
-//			this.getFixture().addEdge(edge);
-//			layer1.getEdges().add(edge);
-//			edges.add(edge);
-//		}
-//		assertEquals(new Long(5), this.getFixture().getNumOfEdges());
-//		assertEquals(new Long(1), this.getFixture().getNumOfLayers());
-//		assertEquals(5, layer1.getEdges().size());
-//		
-//		for (Edge edge: edges)
-//		{
-//			this.getFixture().removeEdge(edge);
-//		}
-//		assertEquals(new Long(0), this.getFixture().getNumOfEdges());
-//		assertEquals(new Long(1), this.getFixture().getNumOfLayers());
-//		assertEquals(0, layer1.getEdges().size());
-//	}
-//	
-//	public void testIncompleteEdge()
-//	{
-//		Edge edge= GraphFactory.createEdge();
-//		edge.setId("edge1");
-//		this.getFixture().addEdge(edge);
+//		Relation relation= GraphFactory.createRelation();
+//		relation.setId("relation1");
+//		this.getFixture().addRelation(relation);
 //		
 //		Node node1= GraphFactory.createNode();
 //		node1.setId("node1");
@@ -301,60 +175,33 @@ public class GraphTest_old {
 //		node2.setId("node2");
 //		this.getFixture().addNode(node2);
 //		
-//		edge.setSource(node1);
-//		edge.setTarget(node2);
+//		relation.setSource(node1);
+//		relation.setTarget(node2);
 //		
-//		assertTrue(this.getFixture().getOutEdges(node1.getId()).contains(edge));
-//		assertTrue(this.getFixture().getInEdges(node2.getId()).contains(edge));
-//	}
-//	
-//	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeEdgeSource(java.lang.String, java.lang.String) <em>Change Edge Source</em>}' operation.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeEdgeSource(java.lang.String, java.lang.String)
-//	 */
-//	public void testChangeEdgeSource__String_String() 
-//	{
-//		Edge edge= GraphFactory.createEdge();
-//		edge.setId("edge1");
-//		this.getFixture().addEdge(edge);
-//		
-//		Node node1= GraphFactory.createNode();
-//		node1.setId("node1");
-//		this.getFixture().addNode(node1);
-//		
-//		Node node2= GraphFactory.createNode();
-//		node2.setId("node2");
-//		this.getFixture().addNode(node2);
-//		
-//		edge.setSource(node1);
-//		edge.setTarget(node2);
-//		
-//		assertTrue(this.getFixture().getOutEdges(node1.getId()).contains(edge));
-//		assertTrue(this.getFixture().getInEdges(node2.getId()).contains(edge));
+//		assertTrue(this.getFixture().getOutRelations(node1.getId()).contains(relation));
+//		assertTrue(this.getFixture().getInRelations(node2.getId()).contains(relation));
 //		
 //		Node node3= GraphFactory.createNode();
 //		node3.setId("node3");
 //		this.getFixture().addNode(node3);
 //		
 //		//redirect source
-//		edge.setSource(node3);
-//		assertTrue(this.getFixture().getOutEdges(node3.getId()).contains(edge));
-//		assertTrue(this.getFixture().getOutEdges(node1.getId()).isEmpty());
+//		relation.setSource(node3);
+//		assertTrue(this.getFixture().getOutRelations(node3.getId()).contains(relation));
+//		assertTrue(this.getFixture().getOutRelations(node1.getId()).isEmpty());
 //	}
 //
 //	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeEdgeTarget(java.lang.String, java.lang.String) <em>Change Edge Target</em>}' operation.
+//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeRelationTarget(java.lang.String, java.lang.String) <em>Change Relation Target</em>}' operation.
 //	 * <!-- begin-user-doc -->
 //	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeEdgeTarget(java.lang.String, java.lang.String)
+//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeRelationTarget(java.lang.String, java.lang.String)
 //	 */
-//	public void testChangeEdgeTarget__String_String() 
+//	public void testChangeRelationTarget__String_String() 
 //	{
-//		Edge edge= GraphFactory.createEdge();
-//		edge.setId("edge1");
-//		this.getFixture().addEdge(edge);
+//		Relation relation= GraphFactory.createRelation();
+//		relation.setId("relation1");
+//		this.getFixture().addRelation(relation);
 //		
 //		Node node1= GraphFactory.createNode();
 //		node1.setId("node1");
@@ -364,19 +211,19 @@ public class GraphTest_old {
 //		node2.setId("node2");
 //		this.getFixture().addNode(node2);
 //		
-//		edge.setSource(node1);
-//		edge.setTarget(node2);
+//		relation.setSource(node1);
+//		relation.setTarget(node2);
 //		
-//		assertTrue(this.getFixture().getOutEdges(node1.getId()).contains(edge));
-//		assertTrue(this.getFixture().getInEdges(node2.getId()).contains(edge));
+//		assertTrue(this.getFixture().getOutRelations(node1.getId()).contains(relation));
+//		assertTrue(this.getFixture().getInRelations(node2.getId()).contains(relation));
 //		
 //		Node node3= GraphFactory.createNode();
 //		node3.setId("node3");
 //		this.getFixture().addNode(node3);
 //		//redirect source
-//		edge.setTarget(node3);
-//		assertTrue(this.getFixture().getInEdges(node3.getId()).contains(edge));
-//		assertTrue(this.getFixture().getInEdges(node2.getId()).isEmpty());
+//		relation.setTarget(node3);
+//		assertTrue(this.getFixture().getInRelations(node3.getId()).contains(relation));
+//		assertTrue(this.getFixture().getInRelations(node2.getId()).isEmpty());
 //	}
 //
 //	/**
@@ -434,57 +281,57 @@ public class GraphTest_old {
 //	}
 //
 //	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addEdge(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge, de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer) <em>Add Edge</em>}' operation.
+//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addRelation(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Relation, de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer) <em>Add Relation</em>}' operation.
 //	 * <!-- begin-user-doc -->
 //	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addEdge(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge, de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer)
+//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addRelation(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Relation, de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer)
 //	 */
-//	public void testAddEdge__Edge_Layer() 
+//	public void testAddRelation__Relation_Layer() 
 //	{
-//		List<Edge> edgesOflayer1= null;
+//		List<Relation> relationsOflayer1= null;
 //		Layer layer1= null;
-//		List<Edge> edgesOflayer2= null;
+//		List<Relation> relationsOflayer2= null;
 //		Layer layer2= null;
 //		
 //		layer1= GraphFactory.createLayer();
 //		layer2= GraphFactory.createLayer();
 //		
-//		{//adding null edge to layer
-//			this.getFixture().addEdge(null, layer1);
-//		}//adding null edge to layer
+//		{//adding null relation to layer
+//			this.getFixture().addRelation(null, layer1);
+//		}//adding null relation to layer
 //		
-//		edgesOflayer1= new BasicList<Edge>();
+//		relationsOflayer1= new BasicList<Relation>();
 //		for (int i= 1; i< 5; i++)
-//			edgesOflayer1.add(GraphFactory.createEdge());
+//			relationsOflayer1.add(GraphFactory.createRelation());
 //		
-//		{//adding edges to non existing layer
+//		{//adding relations to non existing layer
 //			layer1= GraphFactory.createLayer();
 //			
-//			Edge edge= GraphFactory.createEdge();
-//			this.getFixture().addEdge(edge, layer1);
-//			assertTrue(layer1.getEdges().contains(edge));
-//			assertEquals(edge, this.getFixture().getEdge(edge.getId()));
-//		}//adding edges to non existing layer
+//			Relation relation= GraphFactory.createRelation();
+//			this.getFixture().addRelation(relation, layer1);
+//			assertTrue(layer1.getRelations().contains(relation));
+//			assertEquals(relation, this.getFixture().getRelation(relation.getId()));
+//		}//adding relations to non existing layer
 //		
 //		this.getFixture().addLayer(layer1);
-//		for (Edge edge: edgesOflayer1)
-//			this.getFixture().addEdge(edge, layer1);
+//		for (Relation relation: relationsOflayer1)
+//			this.getFixture().addRelation(relation, layer1);
 //		
-//		edgesOflayer2= new BasicList<Edge>();
+//		relationsOflayer2= new BasicList<Relation>();
 //		for (int i= 1; i< 5; i++)
-//			edgesOflayer2.add(GraphFactory.createEdge());
+//			relationsOflayer2.add(GraphFactory.createRelation());
 //		this.getFixture().addLayer(layer2);
-//		for (Edge edge: edgesOflayer2)
-//			this.getFixture().addEdge(edge, layer2);
+//		for (Relation relation: relationsOflayer2)
+//			this.getFixture().addRelation(relation, layer2);
 //		
-//		{//checking if layer 1 and 2 contains all edges
-//			assertTrue(layer1.getEdges().containsAll(edgesOflayer1));
-//			for (Edge edge: edgesOflayer1)
-//				assertTrue(edge.getLayers().contains(layer1));
-//			for (Edge edge: edgesOflayer2)
-//				assertTrue(edge.getLayers().contains(layer2));
-//			assertTrue(layer2.getEdges().containsAll(edgesOflayer2));
-//		}//checking if layer 1 and 2 contains all edges
+//		{//checking if layer 1 and 2 contains all relations
+//			assertTrue(layer1.getRelations().containsAll(relationsOflayer1));
+//			for (Relation relation: relationsOflayer1)
+//				assertTrue(relation.getLayers().contains(layer1));
+//			for (Relation relation: relationsOflayer2)
+//				assertTrue(relation.getLayers().contains(layer2));
+//			assertTrue(layer2.getRelations().containsAll(relationsOflayer2));
+//		}//checking if layer 1 and 2 contains all relations
 //	}
 //
 //	/**
@@ -539,16 +386,16 @@ public class GraphTest_old {
 //
 //// ============================================== start: create dummy graphs
 //	/**
-//	 * Fills the given graph, containing nodes having the names as given in nodeNames list and connects them with edges as
-//	 * given in the edgeNames list.
-//	 * The edge names list contains of entries as follows:
+//	 * Fills the given graph, containing nodes having the names as given in nodeNames list and connects them with relations as
+//	 * given in the relationNames list.
+//	 * The relation names list contains of entries as follows:
 //	 * [[SOURCE_NODE_NAME, TARGET_NODE_NAME, EDGE_NAME],...]
 //	 * @param nodeNames
-//	 * @param edgeNames
+//	 * @param relationNames
 //	 */
 //	public static void createGraph(	Graph graph,
 //								String[] nodeNames,
-//								String[][] edgeNames)
+//								String[][] relationNames)
 //	{
 //		List<Node> nodes= new ArrayList<Node>();
 //		for (String nodeName: nodeNames)
@@ -560,24 +407,24 @@ public class GraphTest_old {
 //		}
 //		
 //		//Kantenliste erstellen
-//		List<Edge> edges= new ArrayList<Edge>();
-//		Edge edge= null;
-//		for (int i= 0; i < edgeNames.length; i++)
+//		List<Relation> relations= new ArrayList<Relation>();
+//		Relation relation= null;
+//		for (int i= 0; i < relationNames.length; i++)
 //		{
 //			for (Node srcNode: nodes)
 //			{
-//				if (((String)srcNode.getId()).equalsIgnoreCase(edgeNames[i][0]))
+//				if (((String)srcNode.getId()).equalsIgnoreCase(relationNames[i][0]))
 //				{
 //					for (Node dstNode: nodes)
 //					{
-//						if (((String)dstNode.getId()).equalsIgnoreCase(edgeNames[i][1]))
+//						if (((String)dstNode.getId()).equalsIgnoreCase(relationNames[i][1]))
 //						{
-//							edge= GraphFactory.createEdge();
-//							edge.setId(edgeNames[i][2]);
-//							edge.setSource(srcNode);
-//							edge.setTarget(dstNode);
-//							edges.add(edge);
-//							graph.addEdge(edge);
+//							relation= GraphFactory.createRelation();
+//							relation.setId(relationNames[i][2]);
+//							relation.setSource(srcNode);
+//							relation.setTarget(dstNode);
+//							relations.add(relation);
+//							graph.addRelation(relation);
 //							break;
 //						}
 //					}
@@ -604,11 +451,11 @@ public class GraphTest_old {
 //		Graph graph= GraphFactory.createGraph();
 //		graph.setId("createGraph_Tree");
 //		String[] nodeNames= {"node1", "node2", "node3", "node4", "node5", "node6", "node7"};
-//		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
-//								{"node1", "node4", "edge3"},{"node4", "node5", "edge4"},
-//								{"node2", "node6", "edge5"}, {"node1", "node7", "edge6"}};
+//		String[][] relationNames= {	{"node1", "node2", "relation1"}, {"node2", "node3","relation2"}, 
+//								{"node1", "node4", "relation3"},{"node4", "node5", "relation4"},
+//								{"node2", "node6", "relation5"}, {"node1", "node7", "relation6"}};
 //	
-//		createGraph(graph, nodeNames, edgeNames);
+//		createGraph(graph, nodeNames, relationNames);
 //		return(graph);
 //	}
 //	
@@ -630,10 +477,10 @@ public class GraphTest_old {
 //		graph.setId("createGraph_DAG");
 //		
 //		String[] nodeNames= {"node1", "node2", "node3", "node4","node6",};
-//		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
-//								{"node2", "node6", "edge3"}, {"node4", "node2", "edge4"}};
+//		String[][] relationNames= {	{"node1", "node2", "relation1"}, {"node2", "node3","relation2"}, 
+//								{"node2", "node6", "relation3"}, {"node4", "node2", "relation4"}};
 //	
-//		createGraph(graph, nodeNames, edgeNames);
+//		createGraph(graph, nodeNames, relationNames);
 //		return(graph);
 //	}
 //	
@@ -658,11 +505,11 @@ public class GraphTest_old {
 //		Graph graph= GraphFactory.createGraph();
 //		graph.setId("createGraph_Cycle");
 //		String[] nodeNames= {"node1", "node2", "node3", "node4","node6", "node7"};
-//		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
-//								{"node2", "node6", "edge3"}, {"node4", "node2", "edge4"},
-//								{"node6", "node7", "edge5"}, {"node7", "node2", "edge6"}};
+//		String[][] relationNames= {	{"node1", "node2", "relation1"}, {"node2", "node3","relation2"}, 
+//								{"node2", "node6", "relation3"}, {"node4", "node2", "relation4"},
+//								{"node6", "node7", "relation5"}, {"node7", "node2", "relation6"}};
 //	
-//		createGraph(graph, nodeNames, edgeNames);
+//		createGraph(graph, nodeNames, relationNames);
 //		return(graph);
 //	}	
 //	
@@ -687,11 +534,11 @@ public class GraphTest_old {
 //		Graph graph= GraphFactory.createGraph();
 //		graph.setId("createGraph_SimpleCycle");
 //		String[] nodeNames= {"node1", "node2", "node3", "node6", "node7"};
-//		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
-//								{"node2", "node6", "edge3"}, {"node6", "node7", "edge5"}, 
-//								{"node7", "node2", "edge6"}};
+//		String[][] relationNames= {	{"node1", "node2", "relation1"}, {"node2", "node3","relation2"}, 
+//								{"node2", "node6", "relation3"}, {"node6", "node7", "relation5"}, 
+//								{"node7", "node2", "relation6"}};
 //	
-//		createGraph(graph, nodeNames, edgeNames);
+//		createGraph(graph, nodeNames, relationNames);
 //		return(graph);
 //	}
 //	
@@ -710,10 +557,10 @@ public class GraphTest_old {
 //		Graph graph= GraphFactory.createGraph();
 //		graph.setId("createGraph_PureCycle");
 //		String[] nodeNames= {"node1", "node2", "node3"};
-//		String[][] edgeNames= {	{"node1", "node2", "edge1"}, {"node2", "node3","edge2"}, 
-//								{"node3", "node1", "edge3"}};
+//		String[][] relationNames= {	{"node1", "node2", "relation1"}, {"node2", "node3","relation2"}, 
+//								{"node3", "node1", "relation3"}};
 //	
-//		createGraph(graph, nodeNames, edgeNames);
+//		createGraph(graph, nodeNames, relationNames);
 //		return(graph);
 //	}	
 //// ============================================== end: create dummy graphs	
@@ -827,57 +674,57 @@ public class GraphTest_old {
 //	}
 //	
 //
-//	public void testRemoveEdge__EdgeByList() 
+//	public void testRemoveRelation__RelationByList() 
 //	{
 //		//Knoten in den Graphen einf�gen
 //		this.insertNodes(nodes);
 //		//Kanten in den Graphen einf�gen
-//		this.insertEdges(edges);
+//		this.insertRelations(relations);
 //		//Pr�fen ob Kanten eingef�gt wurden
-//		for (Edge edge: edges)
+//		for (Relation relation: relations)
 //		{
-//			assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));
+//			assertSame("this relation '"+relation.getId()+"' should be there", relation, this.getFixture().getRelation(relation.getId()));
 //		}
 //		//Kante l�schen
-//		for (Edge edge: edges)
+//		for (Relation relation: relations)
 //		{
-//			if (this.getFixture().getEdge(edge.getId())!= null)
+//			if (this.getFixture().getRelation(relation.getId())!= null)
 //			{
-//				assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));	
-//				assertTrue(this.getFixture().getEdges().remove(edge));
-//				assertNull("this edge '"+edge.getId()+"' shouldn�t be there", this.getFixture().getEdge(edge.getId()));
+//				assertSame("this relation '"+relation.getId()+"' should be there", relation, this.getFixture().getRelation(relation.getId()));	
+//				assertTrue(this.getFixture().getRelations().remove(relation));
+//				assertNull("this relation '"+relation.getId()+"' shouldn�t be there", this.getFixture().getRelation(relation.getId()));
 //			}
 //		}
 //		//Kante entfernen, deren Knoten es nicht gibt
-//		Edge edge= GraphFactory.createEdge();
-//		edge.setId("not there");
-//		assertFalse(this.getFixture().getEdges().remove(edge));
+//		Relation relation= GraphFactory.createRelation();
+//		relation.setId("not there");
+//		assertFalse(this.getFixture().getRelations().remove(relation));
 //	}
 //	
 //	/**
 //	 * Testet das Entfernen aller Kanten des Graphen.
 //	 * @throws Exception
 //	 */
-//	public void testRemoveAllEdge() throws Exception
+//	public void testRemoveAllRelation() throws Exception
 //	{
 //		//add node to graph
 //		this.insertNodes(nodes);
-//		//add edges to graph
-//		this.insertEdges(edges);
-//		//check if edges have been added
-//		for (Edge edge: edges)
+//		//add relations to graph
+//		this.insertRelations(relations);
+//		//check if relations have been added
+//		for (Relation relation: relations)
 //		{
-//			assertSame("this edge '"+edge.getId()+"' should be there", edge, this.getFixture().getEdge(edge.getId()));
+//			assertSame("this relation '"+relation.getId()+"' should be there", relation, this.getFixture().getRelation(relation.getId()));
 //		}
-//		//remove old edge
-//		this.getFixture().removeEdges();
-//		//add new edge
-//		for (Edge edge: edges )
+//		//remove old relation
+//		this.getFixture().removeRelations();
+//		//add new relation
+//		for (Relation relation: relations )
 //		{
-//			//add edge
-//			this.getFixture().addEdge(edge);
-//			//check if edge exists
-//			assertEquals("created edge has to be there", this.getFixture().getEdge(edge.getId()), edge);
+//			//add relation
+//			this.getFixture().addRelation(relation);
+//			//check if relation exists
+//			assertEquals("created relation has to be there", this.getFixture().getRelation(relation.getId()), relation);
 //		}
 //	}
 //	

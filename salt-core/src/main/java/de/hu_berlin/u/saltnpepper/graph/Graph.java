@@ -7,8 +7,8 @@ import java.util.Set;
  * The here defined graph is given by G=(V, E, L, {label a , ...label b }) with:
  * <ul>
  * <li>V being a set of {@link Node}s with v= ({label c , ... label d }) ∊ V</li>
- * <li>E being a set of directed {@link Relation}s with e= (v 1 ∊ V, v 2 ∊ V, {label
- * e , ... label f }) ∊ E</li>
+ * <li>E being a set of directed {@link Relation}s with e= (v 1 ∊ V, v 2 ∊ V,
+ * {label e , ... label f }) ∊ E</li>
  * <li>L being a set of {@link Layer}s with l= (V 1 ⊆ V, E 1 ⊆ E, L 1 ⊆ L,
  * {label g ,.. label h }) ∊ L</li>
  * <li>and a set of {@link Label}s {label a , ... label b } the graph is labeled
@@ -31,38 +31,52 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	public List<R> getRelations();
 
 	/**
-	 * Returns an relation corresponding to the passed id, if such an relation is
-	 * contained in the graph.
+	 * Returns an relation corresponding to the passed id, if such an relation
+	 * is contained in the graph.
 	 * 
 	 * @param relationId
 	 *            id of the relation to be searched for
 	 */
 	public R getRelation(String relationId);
+
 	/**
 	 * Returns all relations,which connects the two passed nodes.
-	 * @param sourceNodeId the id of the source node
-	 * @param targetNodeId the id of the target node
+	 * 
+	 * @param sourceNodeId
+	 *            the id of the source node
+	 * @param targetNodeId
+	 *            the id of the target node
 	 * @return returns all nodes between source node and target node
 	 */
 	public List<R> getRelations(String sourceNodeId, String targetNodeId);
+
 	/**
-	 * Returns all relations, which have the node corresponding to the passed id as their target node.
-	 * @param nodeId id corresponding to the node, for which all incoming relations should be searched
+	 * Returns all relations, which have the node corresponding to the passed id
+	 * as their target node.
+	 * 
+	 * @param nodeId
+	 *            id corresponding to the node, for which all incoming relations
+	 *            should be searched
 	 * @return a list of all incoming relations
 	 */
 	public List<R> getInRelations(String nodeId);
+
 	/**
-	 * Returns all relations, which have the node corresponding to the passed id as their source node.
-	 * @param nodeId id corresponding to the node, for which all outgoing relations should be searched
+	 * Returns all relations, which have the node corresponding to the passed id
+	 * as their source node.
+	 * 
+	 * @param nodeId
+	 *            id corresponding to the node, for which all outgoing relations
+	 *            should be searched
 	 * @return a list of all outgoing relations
 	 */
 	public List<R> getOutRelations(String nodeId);
-	
+
 	/**
-	 * Adds the passed relation to this graph and updates indexes. If relation is null
-	 * nothing is inserted. The passed relation and this graph will be double
-	 * chained, which means the method {@link Relation#getGraph()} will return this
-	 * graph.
+	 * Adds the passed relation to this graph and updates indexes. If relation
+	 * is null nothing is inserted. The passed relation and this graph will be
+	 * double chained, which means the method {@link Relation#getGraph()} will
+	 * return this graph.
 	 * 
 	 * @param relation
 	 *            relation to be inserted
@@ -70,8 +84,23 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	public void addRelation(R relation);
 
 	/**
-	 * Returns whether this graph contains an {@link Relation} corresponding to the
-	 * passed id.
+	 * Removes the passed relation from this graph. If a relation is removed, it
+	 * will be deleted from all indexes. If the passed relation is null, nothing
+	 * is removed.
+	 * 
+	 * @param relation
+	 *            relation to be removed
+	 */
+	public void removeRelation(R relation);
+	
+	/**
+	 * Removes all relations from this graph and cleans all indexes.
+	 */
+	public void removeRelations();
+
+	/**
+	 * Returns whether this graph contains an {@link Relation} corresponding to
+	 * the passed id.
 	 * 
 	 * @param relationId
 	 *            id of the node to be checked
@@ -159,8 +188,8 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 * Removes the passed layer from this graph and cleans all indexes. It also
 	 * ensures, that the graph is removed from the layer, thus invoking
 	 * {@link Layer#getGraph()} will return null. The double chaining between
-	 * this graph and the passed layer will be cut off. If
-	 * the passed layer is null nothing happens.
+	 * this graph and the passed layer will be cut off. If the passed layer is
+	 * null nothing happens.
 	 * 
 	 * @param layer
 	 *            the layer to be removed

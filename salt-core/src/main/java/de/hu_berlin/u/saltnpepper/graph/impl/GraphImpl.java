@@ -30,17 +30,21 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 */
 	public GraphImpl(int expectedNodes, int expectedRelations) {
 		init();
-		this.expectedNodes= expectedNodes;
-		this.expectedRelations= expectedRelations;
-		approximatedNodeDegree= expectedRelations/ expectedNodes;
+		this.expectedNodes = expectedNodes;
+		this.expectedRelations = expectedRelations;
+		approximatedNodeDegree = expectedRelations / expectedNodes;
 	}
-	/** Number of expected nodes to initialize indexes**/
-	private int expectedNodes= 1000;
-	/** Number of expected relations to initialize indexes**/
-	private int expectedRelations= 5000;
-	/** Approximated node degree, which is {@link #expectedRelations} / {@link #expectedNodes}**/
-	private int approximatedNodeDegree= expectedRelations/ expectedNodes;
-	
+
+	/** Number of expected nodes to initialize indexes **/
+	private int expectedNodes = 1000;
+	/** Number of expected relations to initialize indexes **/
+	private int expectedRelations = 5000;
+	/**
+	 * Approximated node degree, which is {@link #expectedRelations} /
+	 * {@link #expectedNodes}
+	 **/
+	private int approximatedNodeDegree = expectedRelations / expectedNodes;
+
 	/**
 	 * Initializes an object of type {@link GraphImpl}.
 	 * <ul>
@@ -83,8 +87,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 **/
 	private Map<String, N> idx_node_id = null;
 	/**
-	 * An index storing all relations and their corresponding ids (key: id; value:
-	 * relation)
+	 * An index storing all relations and their corresponding ids (key: id;
+	 * value: relation)
 	 **/
 	private Map<String, R> idx_relation_id = null;
 	/**
@@ -93,13 +97,13 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 **/
 	private Map<String, Layer<N, R>> idx_layer_id = null;
 	/**
-	 * An index storing all node ids and the corresponding outgoing relations (key:
-	 * node id; value: relation)
+	 * An index storing all node ids and the corresponding outgoing relations
+	 * (key: node id; value: relation)
 	 **/
 	private ListMultimap<String, R> idx_out_relation_id = null;
 	/**
-	 * An index storing all node ids and the corresponding incoming relations (key:
-	 * node id; value: relation)
+	 * An index storing all node ids and the corresponding incoming relations
+	 * (key: node id; value: relation)
 	 **/
 	private ListMultimap<String, R> idx_in_relation_id = null;
 	// =========================================================== < Indexes
@@ -191,9 +195,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/**
 	 * This is an internally used method. To realize the cut of the double
-	 * chaining, the removal is split in two methods
-	 * {@link #removeNode(Node)} and {@link #basicRemoveNode(Node)}. which are
-	 * connected as follows:
+	 * chaining, the removal is split in two methods {@link #removeNode(Node)}
+	 * and {@link #basicRemoveNode(Node)}. which are connected as follows:
 	 * 
 	 * <pre>
 	 * {@link #removeNode(node)}                      {@link Node#setGraph(null)}
@@ -211,7 +214,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		nodes.remove(node);
 		// remove node from internal index
 		idx_node_id.remove(node.getId());
-		//TODO remove all relations and update index outgoing and incoming indexes
+		// TODO remove all relations and update index outgoing and incoming
+		// indexes
 		// remove node also from layers
 		for (Layer<N, R> layer : layers) {
 			layer.removeNode(node);
@@ -250,7 +254,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		List<R> outRelations = getOutRelations(nodeId1);
 
 		if (outRelations != null) {
-			for (R relation : outRelations) {// searching if relation goes to nodeId2
+			for (R relation : outRelations) {// searching if relation goes to
+												// nodeId2
 				if (relation.getTarget().getId().equals(nodeId2)) {
 					// adding relation to list of matching relations
 					retList.add(relation);
@@ -285,11 +290,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
-	 * {@link Graph} and {@link Relation} object when an relation is inserted into this
-	 * graph and to avoid an endless invocation the insertion of an relation is
-	 * split into the two methods {@link #addRelation(Relation)} and
-	 * {@link #basicAddRelation(Relation)}. The invocation of methods is implement as
-	 * follows:
+	 * {@link Graph} and {@link Relation} object when an relation is inserted
+	 * into this graph and to avoid an endless invocation the insertion of an
+	 * relation is split into the two methods {@link #addRelation(Relation)} and
+	 * {@link #basicAddRelation(Relation)}. The invocation of methods is
+	 * implement as follows:
 	 * 
 	 * <pre>
 	 * {@link #addRelation(Relation)}                      {@link Relation#setGraph(Graph)}
@@ -300,8 +305,10 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * </pre>
 	 * 
 	 * That means method {@link #addRelation(Relation)} calls
-	 * {@link #basicAddRelation(Relation)} and {@link Relation#basicSetGraph(Graph)}. And
-	 * method {@link Relation#setGraph(Graph)} calls {@link #basicAddRelation(Relation)} and
+	 * {@link #basicAddRelation(Relation)} and
+	 * {@link Relation#basicSetGraph(Graph)}. And method
+	 * {@link Relation#setGraph(Graph)} calls
+	 * {@link #basicAddRelation(Relation)} and
 	 * {@link Relation#basicSetGraph(Graph)}.
 	 * 
 	 * @param relation
@@ -342,6 +349,58 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		idx_relation_id.put(relation.getId(), relation);
 		idx_out_relation_id.put(relation.getSource().getId(), relation);
 		idx_in_relation_id.put(relation.getTarget().getId(), relation);
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public void removeRelation(R rel) {
+		if (rel != null) {
+			if (rel instanceof NodeImpl) {
+				((RelationImpl<N, N>) rel).basicSetGraph(null);
+			}
+			basicRemoveRelation(rel);
+		}
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public void removeRelations() {
+		relations.clear();
+		idx_relation_id.clear();
+		idx_in_relation_id.clear();
+		idx_out_relation_id.clear();
+	}
+
+	/**
+	 * This is an internally used method. To realize the cut of the double
+	 * chaining, the removal is split in two methods
+	 * {@link #removeRelation(Relation)} and
+	 * {@link #basicRemoveRelation(Relation)}. which are connected as follows:
+	 * 
+	 * <pre>
+	 * {@link #removeRelation(relation)}                      {@link Relation#setGraph(null)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicRemoveRelation(Relation)}            {@link Relation#basicSetGraph(null)}
+	 * </pre>
+	 * 
+	 * @param relation
+	 *            the relation to be removed
+	 */
+	protected void basicRemoveRelation(R rel) {
+		// remove relation from internal index
+		if (idx_relation_id.remove(rel.getId()) != null) {
+			//if relation exists in graph remove it from other indexes
+			idx_in_relation_id.get(rel.getTarget().getId()).remove(rel);
+			idx_out_relation_id.get(rel.getSource().getId()).remove(rel);
+		}
+		// remove relation also from layers
+		for (Layer<N, R> layer : layers) {
+			layer.removeRelation(rel);
+		}
+		// remove relation from internal list
+		relations.remove(rel);
 	}
 
 	/** {@inheritDoc Graph#containsRelation(String)} **/
@@ -418,9 +477,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/**
 	 * This is an internally used method. To realize the cut of the double
-	 * chaining, the removal is split in two methods
-	 * {@link #removeLayer(Layer)} and {@link #basicRemoveLayer(Layer)}. which
-	 * are connected as follows:
+	 * chaining, the removal is split in two methods {@link #removeLayer(Layer)}
+	 * and {@link #basicRemoveLayer(Layer)}. which are connected as follows:
 	 * 
 	 * <pre>
 	 * {@link #removeLayer(layer)}                      {@link Layer#setGraph(null)}
