@@ -38,7 +38,26 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 *            id of the edge to be searched for
 	 */
 	public E getEdge(String edgeId);
-
+	/**
+	 * Returns all edges,which connects the two passed nodes.
+	 * @param sourceNodeId the id of the source node
+	 * @param targetNodeId the id of the target node
+	 * @return returns all nodes between source node and target node
+	 */
+	public List<E> getEdges(String sourceNodeId, String targetNodeId);
+	/**
+	 * Returns all edges, which have the node corresponding to the passed id as their target node.
+	 * @param nodeId id corresponding to the node, for which all incoming edges should be searched
+	 * @return a list of all incoming edges
+	 */
+	public List<E> getInEdges(String nodeId);
+	/**
+	 * Returns all edges, which have the node corresponding to the passed id as their source node.
+	 * @param nodeId id corresponding to the node, for which all outgoing edges should be searched
+	 * @return a list of all outgoing edges
+	 */
+	public List<E> getOutEdges(String nodeId);
+	
 	/**
 	 * Adds the passed edge to this graph and updates indexes. If edge is null
 	 * nothing is inserted. The passed edge and this graph will be double

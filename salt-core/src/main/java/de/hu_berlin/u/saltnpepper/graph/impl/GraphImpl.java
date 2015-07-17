@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
 
 import de.hu_berlin.u.saltnpepper.graph.Edge;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
@@ -25,6 +25,23 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	}
 
 	/**
+	 * Instantiates a new graph object and sets the initial capacity for all
+	 * indexes to the passed ones
+	 */
+	public GraphImpl(int expectedNodes, int expectedEdges) {
+		init();
+		this.expectedNodes= expectedNodes;
+		this.expectedEdges= expectedEdges;
+		approximatedNodeDegree= expectedEdges/ expectedNodes;
+	}
+	/** Number of expected nodes to initialize indexes**/
+	private int expectedNodes= 1000;
+	/** Number of expected edges to initialize indexes**/
+	private int expectedEdges= 5000;
+	/** Approximated node degree, which is {@link #expectedEdges} / {@link #expectedNodes}**/
+	private int approximatedNodeDegree= expectedEdges/ expectedNodes;
+	
+	/**
 	 * Initializes an object of type {@link GraphImpl}.
 	 * <ul>
 	 * <li>Initializes nodes list</li>
@@ -39,14 +56,14 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 */
 	private void init() {
 		layers = Collections.synchronizedSet(new HashSet<Layer<N, E>>());
-		nodes = Collections.synchronizedList(new ArrayList<N>());
-		edges = Collections.synchronizedList(new ArrayList<E>());
-		
-		idx_node_id = new ConcurrentHashMap<>();
-		idx_edge_id = new ConcurrentHashMap<>();
+		nodes = Collections.synchronizedList(new ArrayList<N>(expectedNodes));
+		edges = Collections.synchronizedList(new ArrayList<E>(expectedNodes));
+
+		idx_node_id = new ConcurrentHashMap<>(expectedNodes);
+		idx_edge_id = new ConcurrentHashMap<>(expectedEdges);
 		idx_layer_id = new ConcurrentHashMap<>();
-		idx_out_edge_id = HashMultimap.create();
-		idx_in_edge_id = HashMultimap.create();
+		idx_out_edge_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
+		idx_in_edge_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
 	}
 
 	public String getName() {
@@ -79,12 +96,12 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * An index storing all node ids and the corresponding outgoing edges (key:
 	 * node id; value: edge)
 	 **/
-	private Multimap<String, E> idx_out_edge_id = null;
+	private ListMultimap<String, E> idx_out_edge_id = null;
 	/**
-	 * An index storing all node ids and the corresponding incomming edges (key:
+	 * An index storing all node ids and the corresponding incoming edges (key:
 	 * node id; value: edge)
 	 **/
-	private Multimap<String, E> idx_in_edge_id = null;
+	private ListMultimap<String, E> idx_in_edge_id = null;
 	// =========================================================== < Indexes
 
 	// =========================================================== > Nodes
@@ -108,8 +125,8 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public void addNode(N node) {
 		basicAddNode(node);
 		if (node != null) {
-			if (node instanceof NodeImpl){
-				((NodeImpl)node).basicSetGraph(this);
+			if (node instanceof NodeImpl) {
+				((NodeImpl) node).basicSetGraph(this);
 			}
 		}
 	}
@@ -118,7 +135,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
 	 * graph and to avoid an endless invocation the insertion of an edge is
-	 * splitted into the two methods {@link #addNode(node)} and
+	 * split into the two methods {@link #addNode(node)} and
 	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
 	 * follows:
 	 * 
@@ -165,8 +182,8 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	@Override
 	public void removeNode(N node) {
 		if (node != null) {
-			if (node instanceof NodeImpl){
-				((NodeImpl)node).basicSetGraph(null);
+			if (node instanceof NodeImpl) {
+				((NodeImpl) node).basicSetGraph(null);
 			}
 			basicRemoveNode(node);
 		}
@@ -174,7 +191,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 
 	/**
 	 * This is an internally used method. To realize the cut of the double
-	 * chaining, the removal is splitted in two methods
+	 * chaining, the removal is split in two methods
 	 * {@link #removeNode(Node)} and {@link #basicRemoveNode(Node)}. which are
 	 * connected as follows:
 	 * 
@@ -190,12 +207,13 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 *            the node to be removed
 	 */
 	protected void basicRemoveNode(N node) {
-		//remove node from internal list
+		// remove node from internal list
 		nodes.remove(node);
-		//remove node from internal index
+		// remove node from internal index
 		idx_node_id.remove(node.getId());
-		//remove node also from layers
-		for (Layer<N, E> layer: layers){
+		//TODO remove all edges and update index outgoing and incoming indexes
+		// remove node also from layers
+		for (Layer<N, E> layer : layers) {
 			layer.removeNode(node);
 		}
 	}
@@ -219,10 +237,39 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		return (Collections.unmodifiableList(edges));
 	}
 
-	/** {@inheritDoc Graph#getedge(String)} **/
+	/** {@inheritDoc Graph#getEdge(String)} **/
 	@Override
 	public E getEdge(String edgeId) {
 		return (idx_edge_id.get(edgeId));
+	}
+
+	/** {@inheritDoc} **/
+	public List<E> getEdges(String nodeId1, String nodeId2) {
+		List<E> retList = new ArrayList<>();
+		// searching for all edges going out from nodeId1
+		List<E> outEdges = getOutEdges(nodeId1);
+
+		if (outEdges != null) {
+			for (E edge : outEdges) {// searching if edge goes to nodeId2
+				if (edge.getTarget().getId().equals(nodeId2)) {
+					// adding edge to list of matching edges
+					retList.add(edge);
+				}
+			}// searching if edge goes to nodeId2
+		}
+		return (retList);
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<E> getInEdges(String nodeId) {
+		return (idx_in_edge_id.get(nodeId));
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<E> getOutEdges(String nodeId) {
+		return (idx_out_edge_id.get(nodeId));
 	}
 
 	/** {@inheritDoc Graph#addEdge(Edge)} **/
@@ -230,8 +277,8 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public void addEdge(E edge) {
 		basicAddEdge(edge);
 		if (edge != null) {
-			if (edge instanceof EdgeImpl){
-				((EdgeImpl<N, N>)edge).basicSetGraph(this);
+			if (edge instanceof EdgeImpl) {
+				((EdgeImpl<N, N>) edge).basicSetGraph(this);
 			}
 		}
 	}
@@ -240,7 +287,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Edge} object when an edge is inserted into this
 	 * graph and to avoid an endless invocation the insertion of an edge is
-	 * splitted into the two methods {@link #addEdge(Edge)} and
+	 * split into the two methods {@link #addEdge(Edge)} and
 	 * {@link #basicAddEdge(Edge)}. The invocation of methods is implement as
 	 * follows:
 	 * 
@@ -270,31 +317,31 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		if (edge.getTarget() == null) {
 			throw new SaltInsertionException(this, edge, "The target node is empty. ");
 		}
-		if (	(edge.getSource().getId()== null)||
-				(!containsNode(edge.getSource().getId()))){
+		if ((edge.getSource().getId() == null) || (!containsNode(edge.getSource().getId()))) {
 			throw new SaltInsertionException(this, edge, "The source node of the passed edge does not belong to this graph. ");
 		}
-		if (	(edge.getTarget().getId()== null)||
-				(!containsNode(edge.getTarget().getId()))){
+		if ((edge.getTarget().getId() == null) || (!containsNode(edge.getTarget().getId()))) {
 			throw new SaltInsertionException(this, edge, "The target node of the passed edge does not belong to this graph. ");
 		}
-		// if node has no id a new id will be given to node
+		// if edge has no id a new id will be given to edge
 		if (edge.getId() == null) {
-			edge.setId("r" + getNodes().size());
+			edge.setId("r" + getEdges().size());
 		}
 		int i = 0;
 		// the given id, which eventually has to be extended for artificial
 		// counter
 		String idBase = edge.getId();
 		while (getEdge(edge.getId()) != null) {
-			// if node already exists, create new Id
-			edge.setId(idBase + "_" + (getNodes().size() + i));
+			// if edge already exists, create new Id
+			edge.setId(idBase + "_" + (getEdges().size() + i));
 			i++;
 		}
-		// add node to internal list
+		// add edge to internal list
 		edges.add(edge);
-		// add node to id index
+		// add edge to indexes
 		idx_edge_id.put(edge.getId(), edge);
+		idx_out_edge_id.put(edge.getSource().getId(), edge);
+		idx_in_edge_id.put(edge.getTarget().getId(), edge);
 	}
 
 	/** {@inheritDoc Graph#containsEdge(String)} **/
@@ -323,8 +370,8 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public void addLayer(Layer<N, E> layer) {
 		if (layer != null) {
 			basicAddLayer(layer);
-			if (layer instanceof LayerImpl){
-				((LayerImpl<N, E>)layer).basicSetGraph(this);
+			if (layer instanceof LayerImpl) {
+				((LayerImpl<N, E>) layer).basicSetGraph(this);
 			}
 		}
 	}
@@ -333,7 +380,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
 	 * graph and to avoid an endless invocation the insertion of an edge is
-	 * splitted into the two methods {@link #addNode(node)} and
+	 * split into the two methods {@link #addNode(node)} and
 	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
 	 * follows:
 	 * 
@@ -360,20 +407,20 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 			}
 		}
 	}
-	
+
 	@Override
-	public void removeLayer(Layer<N, E> layer){
-		if (layer instanceof LayerImpl){
-			((LayerImpl<N, E>)layer).basicSetGraph(null);
+	public void removeLayer(Layer<N, E> layer) {
+		if (layer instanceof LayerImpl) {
+			((LayerImpl<N, E>) layer).basicSetGraph(null);
 		}
 		basicRemoveLayer(layer);
 	}
 
 	/**
 	 * This is an internally used method. To realize the cut of the double
-	 * chaining, the removal is splitted in two methods
-	 * {@link #removeLayer(Layer)} and {@link #basicRemoveLayer(Layer)}. which are
-	 * connected as follows:
+	 * chaining, the removal is split in two methods
+	 * {@link #removeLayer(Layer)} and {@link #basicRemoveLayer(Layer)}. which
+	 * are connected as follows:
 	 * 
 	 * <pre>
 	 * {@link #removeLayer(layer)}                      {@link Layer#setGraph(null)}
@@ -386,7 +433,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @param node
 	 *            the node to be removed
 	 */
-	protected void basicRemoveLayer(Layer<N, E> layer){
+	protected void basicRemoveLayer(Layer<N, E> layer) {
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);
