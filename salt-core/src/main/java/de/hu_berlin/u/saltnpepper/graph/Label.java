@@ -1,7 +1,7 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
 /**
- * A label is an attribute-value-pair and can belong to either a {@link Node}, an {@link Edge}, a {@link Graph}, 
+ * A label is an attribute-value-pair and can belong to either a {@link Node}, an {@link Relation}, a {@link Graph}, 
  * a {@link Layer} or another {@link Label} as shown in . An attribute-value-pair is a triple which consists of 
  * a namespace, a name and a value (namespace::name=value). The combination of name and namespace is used to 
  * identify a label and therefore must be unique. The namespace is an optional value, to distinguish in case of 

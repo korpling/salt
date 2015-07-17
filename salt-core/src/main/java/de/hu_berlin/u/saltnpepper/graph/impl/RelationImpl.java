@@ -1,26 +1,26 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
-import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
 
 @SuppressWarnings("serial")
-public class EdgeImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Edge<S, T>, NamedElement{
+public class RelationImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Relation<S, T>, NamedElement{
 	/**
-	 * Initializes an object of type {@link Edge}.
+	 * Initializes an object of type {@link Relation}.
 	 */
-	public EdgeImpl(){
+	public RelationImpl(){
 	}
 	
 	/**
-	 * Initializes an object of type {@link Edge}. If {@link #delegate} is not null,  all functions of 
+	 * Initializes an object of type {@link Relation}. If {@link #delegate} is not null,  all functions of 
 	 * this method are delegated to the delegate object. Setting {@link #delegate} makes this object
 	 * to a container.
 	 * @param a delegate object of the same type.
 	 */
-	public EdgeImpl(Edge<S, T> delegate){
+	public RelationImpl(Relation<S, T> delegate){
 		this.delegate= delegate;
 	}
 	
@@ -29,37 +29,37 @@ public class EdgeImpl<S extends Node, T extends Node> extends IdentifiableElemen
 	 * this method are delegated to the delegate object. Setting {@link #delegate} makes this object
 	 * to a container.   
 	**/
-	protected Edge<S, T> delegate= null;
+	protected Relation<S, T> delegate= null;
 	/**
-	 * {@inheritDoc Edge#getDelegate()}
+	 * {@inheritDoc Relation#getDelegate()}
 	 */
-	public Edge<S, T> getDelegate(){
+	public Relation<S, T> getDelegate(){
 		return(delegate);
 	}
-	/** source node of this edge. **/
+	/** source node of this relation. **/
 	protected S source=null;
 	/**
-	 * {@inheritDoc Edge#getSource()}
+	 * {@inheritDoc Relation#getSource()}
 	 */
 	public S getSource() {
 		return source;
 	}
 	/**
-	 * {@inheritDoc Edge#setSource(Node)}
+	 * {@inheritDoc Relation#setSource(Node)}
 	 */
 	public void setSource(S source) {
 		this.source = source;
 	}
-	/** target node of this edge. **/
+	/** target node of this relation. **/
 	private T target=null;
 	/**
-	 * {@inheritDoc Edge#getTarget()}
+	 * {@inheritDoc Relation#getTarget()}
 	 */
 	public T getTarget() {
 		return target;
 	}
 	/**
-	 * {@inheritDoc Edge#setTarget(Node)}
+	 * {@inheritDoc Relation#setTarget(Node)}
 	 */
 	public void setTarget(T target) {
 		this.target = target;
@@ -74,39 +74,39 @@ public class EdgeImpl<S extends Node, T extends Node> extends IdentifiableElemen
 	}
 	/** container graph**/
 	protected Graph graph= null;
-	/** {@inheritDoc Edge#getGraph()} **/
+	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
 	public Graph getGraph() {
 		return(graph);
 	}
-	/** {@inheritDoc Edge#setGraph(Graph)} **/
+	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
 		basicSetGraph(graph);
 		if (graph!= null){
-			graph.addEdge(this);
+			graph.addRelation(this);
 		}else{
-			//TODO: remove edge from graph
+			//TODO: remove relation from graph
 		}
 	}
 	/**
-	 * This is an internally used method. To implement a double chaining of {@link Graph} and {@link Edge} object when an
-	 * edge is inserted into this graph and to avoid an endless invocation the insertion of an edge is splited into
+	 * This is an internally used method. To implement a double chaining of {@link Graph} and {@link Relation} object when an
+	 * relation is inserted into this graph and to avoid an endless invocation the insertion of an relation is splited into
 	 * the two methods {@link #setGraph(Graph)} and {@link #basicSetGraph(Graph)}. The invocation of methods is implement 
 	 * as follows:
 	 * <pre>
-	 * {@link Graph#addEdge(Edge)}                      {@link Edge#setGraph(Graph)}
+	 * {@link Graph#addRelation(Relation)}                      {@link Relation#setGraph(Graph)}
 	 *         ||             \ /                   ||
 	 *         ||              X                    ||
 	 *         \/             / \                   \/
-	 * {@link Graph#basicAddEdge(Edge)}            {@link Edge#basicSetGraph(Graph)}
+	 * {@link Graph#basicAddRelation(Relation)}            {@link Relation#basicSetGraph(Graph)}
 	 * </pre> 
 	 * 
 	 * That means method {@link #setGraph(Graph)} calls {@link #basicSetGraph(Graph)} 
-	 * and {@link Graph#basicAddEdge(Edge)}. And method {@link #setGraph(Graph)} calls 
-	 * {@link Graph#basicAddEdge(Edge)} and {@link Edge#basicSetGraph(Graph)}.
+	 * and {@link Graph#basicAddRelation(Relation)}. And method {@link #setGraph(Graph)} calls 
+	 * {@link Graph#basicAddRelation(Relation)} and {@link Relation#basicSetGraph(Graph)}.
 	 * 
-	 * @param graph graph which contains this edge
+	 * @param graph graph which contains this relation
 	 */
 	protected void basicSetGraph(Graph graph) {
 		this.graph= graph;

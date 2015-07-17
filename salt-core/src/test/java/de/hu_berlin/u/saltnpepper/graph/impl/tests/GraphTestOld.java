@@ -25,7 +25,7 @@ import java.util.Vector;
 import org.junit.After;
 import org.junit.Before;
 
-import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Layer;

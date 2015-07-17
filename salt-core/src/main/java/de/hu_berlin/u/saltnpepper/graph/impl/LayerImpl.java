@@ -3,40 +3,40 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
 @SuppressWarnings("serial")
-public class LayerImpl<N extends Node, E extends Edge<N, N>> extends IdentifiableElementImpl implements Layer<N, E>, NamedElement {
+public class LayerImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Layer<N, R>, NamedElement {
 
 	private Set<N> nodes = null;
-	private Set<E> edges = null;
+	private Set<R> relations = null;
 
 	public LayerImpl() {
 		nodes = new HashSet<N>();
-		edges = new HashSet<E>();
+		relations = new HashSet<R>();
 	}
 
 	/** container graph**/
-	protected Graph<N, E> graph= null;
-	/** {@inheritDoc Edge#getGraph()} **/
+	protected Graph<N, R> graph= null;
+	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph<N, E> getGraph() {
+	public Graph<N, R> getGraph() {
 		return(graph);
 	}
-	/** {@inheritDoc Edge#setGraph(Graph)} **/
+	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
-	public void setGraph(Graph<N, E> graph) {
+	public void setGraph(Graph<N, R> graph) {
 		if (graph!= null){
 			if (graph instanceof GraphImpl){
-				((GraphImpl<N, E>)graph).basicAddLayer(this);
+				((GraphImpl<N, R>)graph).basicAddLayer(this);
 			}
 		}else{
 			if (getGraph() instanceof GraphImpl){
-				((GraphImpl<N, E>)getGraph()).basicRemoveLayer(this);
+				((GraphImpl<N, R>)getGraph()).basicRemoveLayer(this);
 			}
 		}
 		basicSetGraph(graph);
@@ -66,7 +66,7 @@ public class LayerImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @param graph
 	 *            graph which contains this layer
 	 */
-	protected void basicSetGraph(Graph<N, E> graph) {
+	protected void basicSetGraph(Graph<N, R> graph) {
 		this.graph= graph;
 	}
 	
@@ -90,22 +90,22 @@ public class LayerImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		}
 	}
 	
-	/** {@inheritDoc Layer#getEdges()} **/
+	/** {@inheritDoc Layer#getRelations()} **/
 	@Override
-	public Set<E> getEdges() {
-		return (edges);
+	public Set<R> getRelations() {
+		return (relations);
 	}
 
-	/** {@inheritDoc Layer#addEdge(Edge)} **/
+	/** {@inheritDoc Layer#addRelation(Relation)} **/
 	@Override
-	public void addEdge(E edge) {
-		edges.add(edge);
+	public void addRelation(R relation) {
+		relations.add(relation);
 	}
-	/** {@inheritDoc Layer#removeEdge(Edge)} **/
+	/** {@inheritDoc Layer#removeRelation(Relation)} **/
 	@Override
-	public void removeEdge(E edge){
-		if (edge!= null){
-			edges.remove(edge);
+	public void removeRelation(R relation){
+		if (relation!= null){
+			relations.remove(relation);
 		}
 	}
 

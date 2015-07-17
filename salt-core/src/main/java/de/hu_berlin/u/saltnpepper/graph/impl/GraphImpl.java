@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
-import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
@@ -19,7 +19,7 @@ import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 @SuppressWarnings("serial")
-public class GraphImpl<N extends Node, E extends Edge<N, N>> extends IdentifiableElementImpl implements Graph<N, E>, NamedElement {
+public class GraphImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Graph<N, R>, NamedElement {
 	public GraphImpl() {
 		init();
 	}
@@ -28,42 +28,42 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * Instantiates a new graph object and sets the initial capacity for all
 	 * indexes to the passed ones
 	 */
-	public GraphImpl(int expectedNodes, int expectedEdges) {
+	public GraphImpl(int expectedNodes, int expectedRelations) {
 		init();
 		this.expectedNodes= expectedNodes;
-		this.expectedEdges= expectedEdges;
-		approximatedNodeDegree= expectedEdges/ expectedNodes;
+		this.expectedRelations= expectedRelations;
+		approximatedNodeDegree= expectedRelations/ expectedNodes;
 	}
 	/** Number of expected nodes to initialize indexes**/
 	private int expectedNodes= 1000;
-	/** Number of expected edges to initialize indexes**/
-	private int expectedEdges= 5000;
-	/** Approximated node degree, which is {@link #expectedEdges} / {@link #expectedNodes}**/
-	private int approximatedNodeDegree= expectedEdges/ expectedNodes;
+	/** Number of expected relations to initialize indexes**/
+	private int expectedRelations= 5000;
+	/** Approximated node degree, which is {@link #expectedRelations} / {@link #expectedNodes}**/
+	private int approximatedNodeDegree= expectedRelations/ expectedNodes;
 	
 	/**
 	 * Initializes an object of type {@link GraphImpl}.
 	 * <ul>
 	 * <li>Initializes nodes list</li>
-	 * <li>Initializes edges list</li>
+	 * <li>Initializes relations list</li>
 	 * <li>Initializes layers set</li>
 	 * <li>Initializes index {@link #idx_node_id}</li>
-	 * <li>Initializes index {@link #idx_edge_id}</li>
+	 * <li>Initializes index {@link #idx_relation_id}</li>
 	 * <li>Initializes index {@link #idx_layer_id}</li>
-	 * <li>Initializes index {@link #idx_out_edge_id}</li>
-	 * <li>Initializes index {@link #idx_in_edge_id}</li>
+	 * <li>Initializes index {@link #idx_out_relation_id}</li>
+	 * <li>Initializes index {@link #idx_in_relation_id}</li>
 	 * </ul>
 	 */
 	private void init() {
-		layers = Collections.synchronizedSet(new HashSet<Layer<N, E>>());
+		layers = Collections.synchronizedSet(new HashSet<Layer<N, R>>());
 		nodes = Collections.synchronizedList(new ArrayList<N>(expectedNodes));
-		edges = Collections.synchronizedList(new ArrayList<E>(expectedNodes));
+		relations = Collections.synchronizedList(new ArrayList<R>(expectedNodes));
 
 		idx_node_id = new ConcurrentHashMap<>(expectedNodes);
-		idx_edge_id = new ConcurrentHashMap<>(expectedEdges);
+		idx_relation_id = new ConcurrentHashMap<>(expectedRelations);
 		idx_layer_id = new ConcurrentHashMap<>();
-		idx_out_edge_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
-		idx_in_edge_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
+		idx_out_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
+		idx_in_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
 	}
 
 	public String getName() {
@@ -83,25 +83,25 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 **/
 	private Map<String, N> idx_node_id = null;
 	/**
-	 * An index storing all edges and their corresponding ids (key: id; value:
-	 * edge)
+	 * An index storing all relations and their corresponding ids (key: id; value:
+	 * relation)
 	 **/
-	private Map<String, E> idx_edge_id = null;
+	private Map<String, R> idx_relation_id = null;
 	/**
 	 * An index storing all layers and their corresponding ids (key: id; value:
 	 * layer)
 	 **/
-	private Map<String, Layer<N, E>> idx_layer_id = null;
+	private Map<String, Layer<N, R>> idx_layer_id = null;
 	/**
-	 * An index storing all node ids and the corresponding outgoing edges (key:
-	 * node id; value: edge)
+	 * An index storing all node ids and the corresponding outgoing relations (key:
+	 * node id; value: relation)
 	 **/
-	private ListMultimap<String, E> idx_out_edge_id = null;
+	private ListMultimap<String, R> idx_out_relation_id = null;
 	/**
-	 * An index storing all node ids and the corresponding incoming edges (key:
-	 * node id; value: edge)
+	 * An index storing all node ids and the corresponding incoming relations (key:
+	 * node id; value: relation)
 	 **/
-	private ListMultimap<String, E> idx_in_edge_id = null;
+	private ListMultimap<String, R> idx_in_relation_id = null;
 	// =========================================================== < Indexes
 
 	// =========================================================== > Nodes
@@ -134,7 +134,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	/**
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
-	 * graph and to avoid an endless invocation the insertion of an edge is
+	 * graph and to avoid an endless invocation the insertion of an relation is
 	 * split into the two methods {@link #addNode(node)} and
 	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
 	 * follows:
@@ -211,9 +211,9 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 		nodes.remove(node);
 		// remove node from internal index
 		idx_node_id.remove(node.getId());
-		//TODO remove all edges and update index outgoing and incoming indexes
+		//TODO remove all relations and update index outgoing and incoming indexes
 		// remove node also from layers
-		for (Layer<N, E> layer : layers) {
+		for (Layer<N, R> layer : layers) {
 			layer.removeNode(node);
 		}
 	}
@@ -226,152 +226,152 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 
 	// =========================================================== < Nodes
 
-	// =========================================================== > Edges
+	// =========================================================== > Relations
 
-	/** internal list of all contained edges **/
-	private List<E> edges = null;
+	/** internal list of all contained relations **/
+	private List<R> relations = null;
 
-	/** {@inheritDoc Graph#getEdges()} **/
+	/** {@inheritDoc Graph#getRelations()} **/
 	@Override
-	public List<E> getEdges() {
-		return (Collections.unmodifiableList(edges));
+	public List<R> getRelations() {
+		return (Collections.unmodifiableList(relations));
 	}
 
-	/** {@inheritDoc Graph#getEdge(String)} **/
+	/** {@inheritDoc Graph#getRelation(String)} **/
 	@Override
-	public E getEdge(String edgeId) {
-		return (idx_edge_id.get(edgeId));
+	public R getRelation(String relationId) {
+		return (idx_relation_id.get(relationId));
 	}
 
 	/** {@inheritDoc} **/
-	public List<E> getEdges(String nodeId1, String nodeId2) {
-		List<E> retList = new ArrayList<>();
-		// searching for all edges going out from nodeId1
-		List<E> outEdges = getOutEdges(nodeId1);
+	public List<R> getRelations(String nodeId1, String nodeId2) {
+		List<R> retList = new ArrayList<>();
+		// searching for all relations going out from nodeId1
+		List<R> outRelations = getOutRelations(nodeId1);
 
-		if (outEdges != null) {
-			for (E edge : outEdges) {// searching if edge goes to nodeId2
-				if (edge.getTarget().getId().equals(nodeId2)) {
-					// adding edge to list of matching edges
-					retList.add(edge);
+		if (outRelations != null) {
+			for (R relation : outRelations) {// searching if relation goes to nodeId2
+				if (relation.getTarget().getId().equals(nodeId2)) {
+					// adding relation to list of matching relations
+					retList.add(relation);
 				}
-			}// searching if edge goes to nodeId2
+			}// searching if relation goes to nodeId2
 		}
 		return (retList);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<E> getInEdges(String nodeId) {
-		return (idx_in_edge_id.get(nodeId));
+	public List<R> getInRelations(String nodeId) {
+		return (idx_in_relation_id.get(nodeId));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<E> getOutEdges(String nodeId) {
-		return (idx_out_edge_id.get(nodeId));
+	public List<R> getOutRelations(String nodeId) {
+		return (idx_out_relation_id.get(nodeId));
 	}
 
-	/** {@inheritDoc Graph#addEdge(Edge)} **/
+	/** {@inheritDoc Graph#addRelation(Relation)} **/
 	@Override
-	public void addEdge(E edge) {
-		basicAddEdge(edge);
-		if (edge != null) {
-			if (edge instanceof EdgeImpl) {
-				((EdgeImpl<N, N>) edge).basicSetGraph(this);
+	public void addRelation(R relation) {
+		basicAddRelation(relation);
+		if (relation != null) {
+			if (relation instanceof RelationImpl) {
+				((RelationImpl<N, N>) relation).basicSetGraph(this);
 			}
 		}
 	}
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
-	 * {@link Graph} and {@link Edge} object when an edge is inserted into this
-	 * graph and to avoid an endless invocation the insertion of an edge is
-	 * split into the two methods {@link #addEdge(Edge)} and
-	 * {@link #basicAddEdge(Edge)}. The invocation of methods is implement as
+	 * {@link Graph} and {@link Relation} object when an relation is inserted into this
+	 * graph and to avoid an endless invocation the insertion of an relation is
+	 * split into the two methods {@link #addRelation(Relation)} and
+	 * {@link #basicAddRelation(Relation)}. The invocation of methods is implement as
 	 * follows:
 	 * 
 	 * <pre>
-	 * {@link #addEdge(Edge)}                      {@link Edge#setGraph(Graph)}
+	 * {@link #addRelation(Relation)}                      {@link Relation#setGraph(Graph)}
 	 *         ||             \ /                   ||
 	 *         ||              X                    ||
 	 *         \/             / \                   \/
-	 * {@link #basicAddEdge(Edge)}            {@link Edge#basicSetGraph(Graph)}
+	 * {@link #basicAddRelation(Relation)}            {@link Relation#basicSetGraph(Graph)}
 	 * </pre>
 	 * 
-	 * That means method {@link #addEdge(Edge)} calls
-	 * {@link #basicAddEdge(Edge)} and {@link Edge#basicSetGraph(Graph)}. And
-	 * method {@link Edge#setGraph(Graph)} calls {@link #basicAddEdge(Edge)} and
-	 * {@link Edge#basicSetGraph(Graph)}.
+	 * That means method {@link #addRelation(Relation)} calls
+	 * {@link #basicAddRelation(Relation)} and {@link Relation#basicSetGraph(Graph)}. And
+	 * method {@link Relation#setGraph(Graph)} calls {@link #basicAddRelation(Relation)} and
+	 * {@link Relation#basicSetGraph(Graph)}.
 	 * 
-	 * @param edge
-	 *            edge to be inserted
+	 * @param relation
+	 *            relation to be inserted
 	 */
-	protected void basicAddEdge(E edge) {
-		if (edge == null) {
-			throw new SaltInsertionException(this, edge, "A null value is not allowed. ");
+	protected void basicAddRelation(R relation) {
+		if (relation == null) {
+			throw new SaltInsertionException(this, relation, "A null value is not allowed. ");
 		}
-		if (edge.getSource() == null) {
-			throw new SaltInsertionException(this, edge, "The source node is empty. ");
+		if (relation.getSource() == null) {
+			throw new SaltInsertionException(this, relation, "The source node is empty. ");
 		}
-		if (edge.getTarget() == null) {
-			throw new SaltInsertionException(this, edge, "The target node is empty. ");
+		if (relation.getTarget() == null) {
+			throw new SaltInsertionException(this, relation, "The target node is empty. ");
 		}
-		if ((edge.getSource().getId() == null) || (!containsNode(edge.getSource().getId()))) {
-			throw new SaltInsertionException(this, edge, "The source node of the passed edge does not belong to this graph. ");
+		if ((relation.getSource().getId() == null) || (!containsNode(relation.getSource().getId()))) {
+			throw new SaltInsertionException(this, relation, "The source node of the passed relation does not belong to this graph. ");
 		}
-		if ((edge.getTarget().getId() == null) || (!containsNode(edge.getTarget().getId()))) {
-			throw new SaltInsertionException(this, edge, "The target node of the passed edge does not belong to this graph. ");
+		if ((relation.getTarget().getId() == null) || (!containsNode(relation.getTarget().getId()))) {
+			throw new SaltInsertionException(this, relation, "The target node of the passed relation does not belong to this graph. ");
 		}
-		// if edge has no id a new id will be given to edge
-		if (edge.getId() == null) {
-			edge.setId("r" + getEdges().size());
+		// if relation has no id a new id will be given to relation
+		if (relation.getId() == null) {
+			relation.setId("r" + getRelations().size());
 		}
 		int i = 0;
 		// the given id, which eventually has to be extended for artificial
 		// counter
-		String idBase = edge.getId();
-		while (getEdge(edge.getId()) != null) {
-			// if edge already exists, create new Id
-			edge.setId(idBase + "_" + (getEdges().size() + i));
+		String idBase = relation.getId();
+		while (getRelation(relation.getId()) != null) {
+			// if relation already exists, create new Id
+			relation.setId(idBase + "_" + (getRelations().size() + i));
 			i++;
 		}
-		// add edge to internal list
-		edges.add(edge);
-		// add edge to indexes
-		idx_edge_id.put(edge.getId(), edge);
-		idx_out_edge_id.put(edge.getSource().getId(), edge);
-		idx_in_edge_id.put(edge.getTarget().getId(), edge);
+		// add relation to internal list
+		relations.add(relation);
+		// add relation to indexes
+		idx_relation_id.put(relation.getId(), relation);
+		idx_out_relation_id.put(relation.getSource().getId(), relation);
+		idx_in_relation_id.put(relation.getTarget().getId(), relation);
 	}
 
-	/** {@inheritDoc Graph#containsEdge(String)} **/
+	/** {@inheritDoc Graph#containsRelation(String)} **/
 	@Override
-	public boolean containsEdge(String edgeId) {
-		return (idx_edge_id.containsKey(edgeId));
+	public boolean containsRelation(String relationId) {
+		return (idx_relation_id.containsKey(relationId));
 	}
 
-	// =========================================================== < Edges
+	// =========================================================== < Relations
 
 	// =========================================================== > Layers
-	private Set<Layer<N, E>> layers = null;
+	private Set<Layer<N, R>> layers = null;
 
 	@Override
-	public Set<Layer<N, E>> getLayers() {
+	public Set<Layer<N, R>> getLayers() {
 		return (Collections.unmodifiableSet(layers));
 	}
 
 	/** {@inheritDoc Graph#containsLayer(String)} **/
 	@Override
 	public boolean containsLayer(String layerId) {
-		return (idx_edge_id.containsKey(layerId));
+		return (idx_relation_id.containsKey(layerId));
 	}
 
 	@Override
-	public void addLayer(Layer<N, E> layer) {
+	public void addLayer(Layer<N, R> layer) {
 		if (layer != null) {
 			basicAddLayer(layer);
 			if (layer instanceof LayerImpl) {
-				((LayerImpl<N, E>) layer).basicSetGraph(this);
+				((LayerImpl<N, R>) layer).basicSetGraph(this);
 			}
 		}
 	}
@@ -379,7 +379,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	/**
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
-	 * graph and to avoid an endless invocation the insertion of an edge is
+	 * graph and to avoid an endless invocation the insertion of an relation is
 	 * split into the two methods {@link #addNode(node)} and
 	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
 	 * follows:
@@ -400,7 +400,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @param node
 	 *            node to be inserted
 	 */
-	protected void basicAddLayer(Layer<N, E> layer) {
+	protected void basicAddLayer(Layer<N, R> layer) {
 		if (layer != null) {
 			if (!layers.contains(layer)) {
 				layers.add(layer);
@@ -409,9 +409,9 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	}
 
 	@Override
-	public void removeLayer(Layer<N, E> layer) {
+	public void removeLayer(Layer<N, R> layer) {
 		if (layer instanceof LayerImpl) {
-			((LayerImpl<N, E>) layer).basicSetGraph(null);
+			((LayerImpl<N, R>) layer).basicSetGraph(null);
 		}
 		basicRemoveLayer(layer);
 	}
@@ -433,7 +433,7 @@ public class GraphImpl<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @param node
 	 *            the node to be removed
 	 */
-	protected void basicRemoveLayer(Layer<N, E> layer) {
+	protected void basicRemoveLayer(Layer<N, R> layer) {
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);

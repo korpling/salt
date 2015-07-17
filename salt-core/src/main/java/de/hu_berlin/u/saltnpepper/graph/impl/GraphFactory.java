@@ -1,6 +1,6 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
-import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
@@ -15,8 +15,8 @@ public class GraphFactory {
 	 * 
 	 * @return new {@link Graph} object
 	 */
-	public static Graph<Node, Edge<Node, Node>> createGraph() {
-		return (new GraphImpl<Node, Edge<Node, Node>>());
+	public static Graph<Node, Relation<Node, Node>> createGraph() {
+		return (new GraphImpl<Node, Relation<Node, Node>>());
 	}
 
 	/**
@@ -29,12 +29,12 @@ public class GraphFactory {
 	}
 
 	/**
-	 * Creates a new {@link Edge} object of type {@link EdgeImpl}.
+	 * Creates a new {@link Relation} object of type {@link RelationImpl}.
 	 * 
-	 * @return new {@link Edge} object
+	 * @return new {@link Relation} object
 	 */
-	public static Edge<Node, Node> createEdge() {
-		return (new EdgeImpl<Node, Node>());
+	public static Relation<Node, Node> createRelation() {
+		return (new RelationImpl<Node, Node>());
 	}
 
 	/**
@@ -89,11 +89,11 @@ public class GraphFactory {
 
 	/**
 	 * Creates a new {@link Layer} object. A layer is a kind of a subgraph,
-	 * which can contain nodes, edges and other layers.
+	 * which can contain nodes, relations and other layers.
 	 * 
 	 * @return new layer object
 	 */
-	public static Layer<Node, Edge<Node, Node>> createLayer() {
-		return (new LayerImpl<Node, Edge<Node, Node>>());
+	public static Layer<Node, Relation<Node, Node>> createLayer() {
+		return (new LayerImpl<Node, Relation<Node, Node>>());
 	}
 }

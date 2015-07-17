@@ -17,33 +17,33 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
-import de.hu_berlin.u.saltnpepper.graph.impl.EdgeImpl;
+import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 public class GraphTest {
-	protected Graph<Node, Edge<Node, Node>> fixture = null;
+	protected Graph<Node, Relation<Node, Node>> fixture = null;
 
-	public Graph<Node, Edge<Node, Node>> getFixture() {
+	public Graph<Node, Relation<Node, Node>> getFixture() {
 		return fixture;
 	}
 
-	public void setFixture(Graph<Node, Edge<Node, Node>> fixture) {
+	public void setFixture(Graph<Node, Relation<Node, Node>> fixture) {
 		this.fixture = fixture;
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new GraphImpl<Node, Edge<Node, Node>>());
+		setFixture(new GraphImpl<Node, Relation<Node, Node>>());
 	}
 
 	/**
-	 * Adds a set of nodes and edges to the graph and returns the lists of nodes and edges.
+	 * Adds a set of nodes and relations to the graph and returns the lists of nodes and relations.
 	 * r1: n1 --> n2
 	 * r2: n2 --> n3 
 	 * r3: n1 --> n4
@@ -51,7 +51,7 @@ public class GraphTest {
 	 * r5: n2 --> n6
 	 * r6: n1 --> n7
 	 */
-	private Pair<List<Node>,List<Edge<Node, Node>>> createSampleGraph() {
+	private Pair<List<Node>,List<Relation<Node, Node>>> createSampleGraph() {
 		List<Node> nodes = new ArrayList<Node>();
 		
 		Node node1 = GraphFactory.createNode();
@@ -82,44 +82,44 @@ public class GraphTest {
 		getFixture().addNode(node7);
 		nodes.add(node7);
 		
-		List<Edge<Node,Node>> edges = new ArrayList<>();
-		Edge<Node, Node> edge1= GraphFactory.createEdge();
-		edge1.setSource(node1);
-		edge1.setTarget(node2);
-		getFixture().addEdge(edge1);
-		edges.add(edge1);
+		List<Relation<Node,Node>> relations = new ArrayList<>();
+		Relation<Node, Node> relation1= GraphFactory.createRelation();
+		relation1.setSource(node1);
+		relation1.setTarget(node2);
+		getFixture().addRelation(relation1);
+		relations.add(relation1);
 		
-		Edge<Node, Node> edge2= GraphFactory.createEdge();
-		edge2.setSource(node2);
-		edge2.setTarget(node3);
-		getFixture().addEdge(edge2);
-		edges.add(edge2);
+		Relation<Node, Node> relation2= GraphFactory.createRelation();
+		relation2.setSource(node2);
+		relation2.setTarget(node3);
+		getFixture().addRelation(relation2);
+		relations.add(relation2);
 		
-		Edge<Node, Node> edge3= GraphFactory.createEdge();
-		edge3.setSource(node1);
-		edge3.setTarget(node4);
-		getFixture().addEdge(edge3);
-		edges.add(edge3);
+		Relation<Node, Node> relation3= GraphFactory.createRelation();
+		relation3.setSource(node1);
+		relation3.setTarget(node4);
+		getFixture().addRelation(relation3);
+		relations.add(relation3);
 		
-		Edge<Node, Node> edge4= GraphFactory.createEdge();
-		edge4.setSource(node4);
-		edge4.setTarget(node5);
-		getFixture().addEdge(edge4);
-		edges.add(edge4);
+		Relation<Node, Node> relation4= GraphFactory.createRelation();
+		relation4.setSource(node4);
+		relation4.setTarget(node5);
+		getFixture().addRelation(relation4);
+		relations.add(relation4);
 		
-		Edge<Node, Node> edge5= GraphFactory.createEdge();
-		edge5.setSource(node2);
-		edge5.setTarget(node6);
-		getFixture().addEdge(edge5);
-		edges.add(edge5);
+		Relation<Node, Node> relation5= GraphFactory.createRelation();
+		relation5.setSource(node2);
+		relation5.setTarget(node6);
+		getFixture().addRelation(relation5);
+		relations.add(relation5);
 		
-		Edge<Node, Node> edge6= GraphFactory.createEdge();
-		edge6.setSource(node1);
-		edge6.setTarget(node7);
-		getFixture().addEdge(edge6);
-		edges.add(edge6);
+		Relation<Node, Node> relation6= GraphFactory.createRelation();
+		relation6.setSource(node1);
+		relation6.setTarget(node7);
+		getFixture().addRelation(relation6);
+		relations.add(relation6);
 		
-		return(new ImmutablePair<>(nodes, edges));
+		return(new ImmutablePair<>(nodes, relations));
 	}
 	
 	@Test
@@ -189,7 +189,7 @@ public class GraphTest {
 	}
 
 	/**
-	 * Checks that no {@link Node}, {@link Edge} or {@link Layer} can be added
+	 * Checks that no {@link Node}, {@link Relation} or {@link Layer} can be added
 	 * by adding them into the list returned by the graph
 	 */
 	@Test
@@ -202,10 +202,10 @@ public class GraphTest {
 		} catch (UnsupportedOperationException e) {
 		}
 
-		// test adding of edge
+		// test adding of relation
 		try {
-			getFixture().getEdges().add(GraphFactory.createEdge());
-			fail("An edge shall not be added by the list");
+			getFixture().getRelations().add(GraphFactory.createRelation());
+			fail("An relation shall not be added by the list");
 		} catch (UnsupportedOperationException e) {
 		}
 
@@ -278,7 +278,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testRemoveNodeAlsoFromLayer() {
-		Layer<Node, Edge<Node, Node>> layer = GraphFactory.createLayer();
+		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
 		getFixture().addLayer(layer);
 
 		List<Node> nodes = new ArrayList<>();
@@ -298,52 +298,52 @@ public class GraphTest {
 
 	// ==========================================================< test nodes
 
-	// ==========================================================> test edges
+	// ==========================================================> test relations
 	/**
 	 * <ul>
-	 * <li>checks that an empty edge could not be inserted</li>
-	 * <li>checks that an edge with no source could not be inserted</li>
-	 * <li>checks that an edge with no target could not be inserted</li>
-	 * <li>checks that a correct edge is inserted correctly</li>
+	 * <li>checks that an empty relation could not be inserted</li>
+	 * <li>checks that an relation with no source could not be inserted</li>
+	 * <li>checks that an relation with no target could not be inserted</li>
+	 * <li>checks that a correct relation is inserted correctly</li>
 	 * </ul>
 	 */
 	@Test
-	public void testAddEdge() {
+	public void testAddRelation() {
 		try {
-			getFixture().addEdge(null);
+			getFixture().addRelation(null);
 			fail("Null should not have been added as a node. ");
 		} catch (SaltInsertionException e) {
 		}
 
-		Edge<Node, Node> edge = new EdgeImpl<Node, Node>();
+		Relation<Node, Node> relation = new RelationImpl<Node, Node>();
 		Node source = null;
 		Node target = null;
 		try {
-			getFixture().addEdge(edge);
+			getFixture().addRelation(relation);
 			// no source node is set
 			fail();
 		} catch (SaltInsertionException e) {
 		}
 		source = GraphFactory.createNode();
-		edge.setSource(source);
+		relation.setSource(source);
 		try {
-			getFixture().addEdge(edge);
+			getFixture().addRelation(relation);
 			// no target node is set
 			fail();
 		} catch (SaltInsertionException e) {
 		}
 		target = GraphFactory.createNode();
-		edge.setTarget(target);
+		relation.setTarget(target);
 		try {
-			getFixture().addEdge(edge);
+			getFixture().addRelation(relation);
 			// target and source does not belong to graph
-			fail("Cannot add edge, whose source and target does not belong to graph");
+			fail("Cannot add relation, whose source and target does not belong to graph");
 		} catch (SaltInsertionException e) {
 		}
 		getFixture().addNode(source);
 		getFixture().addNode(target);
-		getFixture().addEdge(edge);
-		assertTrue(getFixture().getEdges().contains(edge));
+		getFixture().addRelation(relation);
+		assertTrue(getFixture().getRelations().contains(relation));
 	}
 
 	/**
@@ -356,72 +356,72 @@ public class GraphTest {
 	 * </ul>
 	 */
 	@Test
-	public void testAddEdge_Id() {
+	public void testAddRelation_Id() {
 		Node node = GraphFactory.createNode();
 		getFixture().addNode(node);
-		Edge<Node, Node> edge = GraphFactory.createEdge();
-		edge.setSource(node);
-		edge.setTarget(node);
+		Relation<Node, Node> relation = GraphFactory.createRelation();
+		relation.setSource(node);
+		relation.setTarget(node);
 
-		assertEquals(0, getFixture().getEdges().size());
-		getFixture().addEdge(edge);
-		assertEquals(1, getFixture().getEdges().size());
-		assertEquals(edge, getFixture().getEdges().get(0));
+		assertEquals(0, getFixture().getRelations().size());
+		getFixture().addRelation(relation);
+		assertEquals(1, getFixture().getRelations().size());
+		assertEquals(relation, getFixture().getRelations().get(0));
 
 		Set<String> ids = new HashSet<String>();
 		for (int i = 0; i < 50; i++) {
-			edge = GraphFactory.createEdge();
-			edge.setSource(node);
-			edge.setTarget(node);
+			relation = GraphFactory.createRelation();
+			relation.setSource(node);
+			relation.setTarget(node);
 
-			getFixture().addEdge(edge);
-			assertNotNull(edge.getId());
-			if (ids.contains(edge.getId())) {
+			getFixture().addRelation(relation);
+			assertNotNull(relation.getId());
+			if (ids.contains(relation.getId())) {
 				fail("An id was given twice");
 			}
-			ids.add(edge.getId());
-			assertTrue(getFixture().getEdges().contains(edge));
+			ids.add(relation.getId());
+			assertTrue(getFixture().getRelations().contains(relation));
 		}
-		edge = GraphFactory.createEdge();
-		edge.setId("hello");
-		edge.setSource(node);
-		edge.setTarget(node);
-		getFixture().addEdge(edge);
-		edge = GraphFactory.createEdge();
-		edge.setId("hello");
-		edge.setSource(node);
-		edge.setTarget(node);
-		getFixture().addEdge(edge);
-		assertNotEquals("hello", edge.getId());
+		relation = GraphFactory.createRelation();
+		relation.setId("hello");
+		relation.setSource(node);
+		relation.setTarget(node);
+		getFixture().addRelation(relation);
+		relation = GraphFactory.createRelation();
+		relation.setId("hello");
+		relation.setSource(node);
+		relation.setTarget(node);
+		getFixture().addRelation(relation);
+		assertNotEquals("hello", relation.getId());
 	}
 
 	/**
-	 * Tests adding an edge to the graph and if it could be accessed by its id.
+	 * Tests adding an relation to the graph and if it could be accessed by its id.
 	 */
 	@Test
-	public void testGetEdge__String() {
+	public void testGetRelation__String() {
 		Node node1 = GraphFactory.createNode();
 		node1.setId("node1");
 		Node node2 = GraphFactory.createNode();
 		node2.setId("node2");
 
-		Edge<Node, Node> edge1 = GraphFactory.createEdge();
-		edge1.setId("edge1");
-		edge1.setSource(node1);
-		edge1.setTarget(node2);
+		Relation<Node, Node> relation1 = GraphFactory.createRelation();
+		relation1.setId("relation1");
+		relation1.setSource(node1);
+		relation1.setTarget(node2);
 
-		assertNull(this.getFixture().getEdge(edge1.getId()));
+		assertNull(this.getFixture().getRelation(relation1.getId()));
 		this.getFixture().addNode(node1);
 		this.getFixture().addNode(node2);
-		this.getFixture().addEdge(edge1);
-		assertEquals(edge1, this.getFixture().getEdge(edge1.getId()));
+		this.getFixture().addRelation(relation1);
+		assertEquals(relation1, this.getFixture().getRelation(relation1.getId()));
 	}
 
 	/**
-	 * Checks that all edges between two nodes are returned correctly.
+	 * Checks that all relations between two nodes are returned correctly.
 	 */
 	@Test
-	public void testGetEdges__String_String() {
+	public void testGetRelations__String_String() {
 		Node node1 = GraphFactory.createNode();
 		getFixture().addNode(node1);
 		Node node2 = GraphFactory.createNode();
@@ -429,43 +429,42 @@ public class GraphTest {
 		Node node3 = GraphFactory.createNode();
 		getFixture().addNode(node3);
 
-		Edge<Node, Node> edge1 = GraphFactory.createEdge();
-		edge1.setSource(node2);
-		edge1.setTarget(node3);
-		getFixture().addEdge(edge1);
+		Relation<Node, Node> relation1 = GraphFactory.createRelation();
+		relation1.setSource(node2);
+		relation1.setTarget(node3);
+		getFixture().addRelation(relation1);
 
-		Edge<Node, Node> edge2 = GraphFactory.createEdge();
-		edge2.setSource(node2);
-		edge2.setTarget(node3);
-		getFixture().addEdge(edge2);
+		Relation<Node, Node> relation2 = GraphFactory.createRelation();
+		relation2.setSource(node2);
+		relation2.setTarget(node3);
+		getFixture().addRelation(relation2);
 
-		assertEquals(2, getFixture().getEdges(node2.getId(), node3.getId()).size());
-		assertEquals(edge1, getFixture().getEdges(node2.getId(), node3.getId()).get(0));
-		assertEquals(edge2, getFixture().getEdges(node2.getId(), node3.getId()).get(1));
+		assertEquals(2, getFixture().getRelations(node2.getId(), node3.getId()).size());
+		assertEquals(relation1, getFixture().getRelations(node2.getId(), node3.getId()).get(0));
+		assertEquals(relation2, getFixture().getRelations(node2.getId(), node3.getId()).get(1));
 
-		assertEquals(0, getFixture().getEdges(node1.getId(), node3.getId()).size());
+		assertEquals(0, getFixture().getRelations(node1.getId(), node3.getId()).size());
 	}
 	
 	/**
-	 * Checks that all incoming edges are returned correctly.
+	 * Checks that all incoming relations are returned correctly.
 	 */
 	@Test
-	public void testGetInEdges__String() {
-		Pair<List<Node>, List<Edge<Node, Node>>> pair= createSampleGraph();
-		System.out.println(getFixture().getEdges());
-		for (Edge<Node, Node> edge : pair.getRight()) {
-			assertTrue("this inserted edge '"+edge.getId()+"' should be in getInEdges: "+ this.getFixture().getInEdges(edge.getTarget().getId()), this.getFixture().getInEdges(edge.getTarget().getId()).contains(edge));
+	public void testGetInRelations__String() {
+		Pair<List<Node>, List<Relation<Node, Node>>> pair= createSampleGraph();
+		for (Relation<Node, Node> relation : pair.getRight()) {
+			assertTrue("this inserted relation '"+relation.getId()+"' should be in getInRelations: "+ this.getFixture().getInRelations(relation.getTarget().getId()), this.getFixture().getInRelations(relation.getTarget().getId()).contains(relation));
 		}
 	}
 
 	/**
-	 * Checks that all outgoing edges are returned correctly.
+	 * Checks that all outgoing relations are returned correctly.
 	 */
 	@Test
-	public void testGetOutEdges__String() {
-		Pair<List<Node>, List<Edge<Node, Node>>> pair= createSampleGraph();
-		for (Edge<Node, Node> edge : pair.getRight()) {
-			assertTrue("this inserted edge '"+edge.getId()+"' should be in getOutEdges: "+this.getFixture().getOutEdges(edge.getSource().getId()), this.getFixture().getOutEdges(edge.getSource().getId()).contains(edge));
+	public void testGetOutRelations__String() {
+		Pair<List<Node>, List<Relation<Node, Node>>> pair= createSampleGraph();
+		for (Relation<Node, Node> relation : pair.getRight()) {
+			assertTrue("this inserted relation '"+relation.getId()+"' should be in getOutRelations: "+this.getFixture().getOutRelations(relation.getSource().getId()), this.getFixture().getOutRelations(relation.getSource().getId()).contains(relation));
 		}
 	}
 	// ==========================================================< test nodes

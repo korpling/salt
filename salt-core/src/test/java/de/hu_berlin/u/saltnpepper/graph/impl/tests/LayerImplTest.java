@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
@@ -20,18 +20,18 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
 public class LayerImplTest {
 
-	private Layer<Node, Edge<Node, Node>> fixture = null;
+	private Layer<Node, Relation<Node, Node>> fixture = null;
 
 	@Before
 	public void setUp() throws Exception {
 		setFixture(GraphFactory.createLayer());
 	}
 
-	public Layer<Node, Edge<Node, Node>> getFixture() {
+	public Layer<Node, Relation<Node, Node>> getFixture() {
 		return fixture;
 	}
 
-	public void setFixture(Layer<Node, Edge<Node, Node>> fixture) {
+	public void setFixture(Layer<Node, Relation<Node, Node>> fixture) {
 		this.fixture = fixture;
 	}
 
@@ -43,7 +43,7 @@ public class LayerImplTest {
 	public void testSetGetGraph() {
 		assertNull(getFixture().getGraph());
 
-		Graph<Node, Edge<Node, Node>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>> graph = GraphFactory.createGraph();
 		getFixture().setGraph(graph);
 		assertEquals(getFixture().getGraph(), graph);
 
@@ -57,7 +57,7 @@ public class LayerImplTest {
 	 */
 	@Test
 	public void testDoubleChaining() {
-		Graph<Node, Edge<Node, Node>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>> graph = GraphFactory.createGraph();
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getLayers(), graph.getLayers().contains(getFixture()));
 	}
@@ -99,22 +99,22 @@ public class LayerImplTest {
 	}
 
 	/**
-	 * Tests that all inserted edges are returned again.
+	 * Tests that all inserted relations are returned again.
 	 */
-	public void testGetEdges() {
-		List<Edge<Node, Node>> edges = new ArrayList<>();
+	public void testGetRelations() {
+		List<Relation<Node, Node>> relations = new ArrayList<>();
 		Node node = GraphFactory.createNode();
 
 		for (int i = 0; i < 50; i++) {
-			Edge<Node, Node> edge = GraphFactory.createEdge();
-			edge.setSource(node);
-			edge.setTarget(node);
-			edges.add(edge);
-			getFixture().addEdge(edge);
+			Relation<Node, Node> relation = GraphFactory.createRelation();
+			relation.setSource(node);
+			relation.setTarget(node);
+			relations.add(relation);
+			getFixture().addRelation(relation);
 		}
-		assertEquals(edges.size(), getFixture().getEdges().size());
-		for (Edge<Node, Node> edge : edges) {
-			assertTrue(getFixture().getEdges().contains(edge));
+		assertEquals(relations.size(), getFixture().getRelations().size());
+		for (Relation<Node, Node> relation : relations) {
+			assertTrue(getFixture().getRelations().contains(relation));
 		}
 	}
 
@@ -254,71 +254,71 @@ public class LayerImplTest {
 	// /**
 	// * Tests the '
 	// * {@link
-	// de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getAllIncludedEdges()
-	// * <em>Get All Included Edges</em>}' operation. <!-- begin-user-doc -->
+	// de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getAllIncludedRelations()
+	// * <em>Get All Included Relations</em>}' operation. <!-- begin-user-doc -->
 	// <!--
 	// * end-user-doc -->
 	// *
 	// * @see
-	// de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getAllIncludedEdges()
+	// de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getAllIncludedRelations()
 	// * layer1 (e1) / \ layer2(e2.1, e2.2) layer3(e3) | layer4(e4)
 	// */
-	// public void testGetAllIncludedEdges() {
+	// public void testGetAllIncludedRelations() {
 	// Layer layer1 = GraphFactory.createLayer();
 	// layer1.setId("layer1");
-	// Edge e1 = GraphFactory.createEdge();
+	// Relation e1 = GraphFactory.createRelation();
 	// e1.setId("e1");
-	// layer1.getEdges().add(e1);
+	// layer1.getRelations().add(e1);
 	//
 	// Layer layer2 = GraphFactory.createLayer();
 	// layer2.setId("layer2");
-	// Edge e21 = GraphFactory.createEdge();
+	// Relation e21 = GraphFactory.createRelation();
 	// e21.setId("e2.1");
-	// layer2.getEdges().add(e21);
-	// Edge e22 = GraphFactory.createEdge();
+	// layer2.getRelations().add(e21);
+	// Relation e22 = GraphFactory.createRelation();
 	// e22.setId("e2.2");
-	// layer2.getEdges().add(e22);
+	// layer2.getRelations().add(e22);
 	//
 	// Layer layer3 = GraphFactory.createLayer();
 	// layer3.setId("layer3");
-	// Edge e3 = GraphFactory.createEdge();
+	// Relation e3 = GraphFactory.createRelation();
 	// e3.setId("e3");
-	// layer3.getEdges().add(e3);
+	// layer3.getRelations().add(e3);
 	//
 	// Layer layer4 = GraphFactory.createLayer();
 	// layer4.setId("layer4");
-	// Edge e4 = GraphFactory.createEdge();
+	// Relation e4 = GraphFactory.createRelation();
 	// e4.setId("e4");
-	// layer4.getEdges().add(e4);
+	// layer4.getRelations().add(e4);
 	//
 	// // connect layers
 	// layer1.getSubLayers().add(layer2);
 	// layer1.getSubLayers().add(layer3);
 	// layer2.getSubLayers().add(layer4);
 	//
-	// {// check edge containment
-	// assertNotNull(layer1.getAllIncludedEdges());
-	// assertNotNull(layer2.getAllIncludedEdges());
-	// assertNotNull(layer3.getAllIncludedEdges());
-	// assertNotNull(layer4.getAllIncludedEdges());
+	// {// check relation containment
+	// assertNotNull(layer1.getAllIncludedRelations());
+	// assertNotNull(layer2.getAllIncludedRelations());
+	// assertNotNull(layer3.getAllIncludedRelations());
+	// assertNotNull(layer4.getAllIncludedRelations());
 	//
-	// assertEquals(1, layer4.getAllIncludedEdges().size());
-	// assertTrue(layer4.getAllIncludedEdges().contains(e4));
+	// assertEquals(1, layer4.getAllIncludedRelations().size());
+	// assertTrue(layer4.getAllIncludedRelations().contains(e4));
 	//
-	// assertEquals(1, layer3.getAllIncludedEdges().size());
-	// assertTrue(layer3.getAllIncludedEdges().contains(e3));
+	// assertEquals(1, layer3.getAllIncludedRelations().size());
+	// assertTrue(layer3.getAllIncludedRelations().contains(e3));
 	//
-	// assertEquals(3, layer2.getAllIncludedEdges().size());
-	// assertTrue(layer2.getAllIncludedEdges().contains(e4));
-	// assertTrue(layer2.getAllIncludedEdges().contains(e21));
-	// assertTrue(layer2.getAllIncludedEdges().contains(e22));
+	// assertEquals(3, layer2.getAllIncludedRelations().size());
+	// assertTrue(layer2.getAllIncludedRelations().contains(e4));
+	// assertTrue(layer2.getAllIncludedRelations().contains(e21));
+	// assertTrue(layer2.getAllIncludedRelations().contains(e22));
 	//
-	// assertEquals(5, layer1.getAllIncludedEdges().size());
-	// assertTrue(layer1.getAllIncludedEdges().contains(e4));
-	// assertTrue(layer1.getAllIncludedEdges().contains(e3));
-	// assertTrue(layer1.getAllIncludedEdges().contains(e21));
-	// assertTrue(layer1.getAllIncludedEdges().contains(e22));
-	// assertTrue(layer1.getAllIncludedEdges().contains(e1));
+	// assertEquals(5, layer1.getAllIncludedRelations().size());
+	// assertTrue(layer1.getAllIncludedRelations().contains(e4));
+	// assertTrue(layer1.getAllIncludedRelations().contains(e3));
+	// assertTrue(layer1.getAllIncludedRelations().contains(e21));
+	// assertTrue(layer1.getAllIncludedRelations().contains(e22));
+	// assertTrue(layer1.getAllIncludedRelations().contains(e1));
 	// }// check node containment
 	// }
 }

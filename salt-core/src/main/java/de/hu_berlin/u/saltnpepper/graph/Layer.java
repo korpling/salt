@@ -3,7 +3,7 @@ package de.hu_berlin.u.saltnpepper.graph;
 import java.util.Set;
 
 /**
- * A layer is a grouping mechanism for nodes and edges, and can also contain
+ * A layer is a grouping mechanism for nodes and relations, and can also contain
  * further layers (called sub layers). The containment relation implements a
  * recursive structure for layers, to build hierarchies. In general this
  * mechanism enables the creation of sub graphs. But note that a layer cannot be
@@ -12,14 +12,14 @@ import java.util.Set;
  * @author florian
  *
  */
-public interface Layer<N extends Node, E extends Edge<N, N>> extends IdentifiableElement {
+public interface Layer<N extends Node, R extends Relation<N, N>> extends IdentifiableElement {
 
 	/**
 	 * Returns the container graph of this node.
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph<N, E> getGraph();
+	public Graph<N, R> getGraph();
 
 	/**
 	 * Sets the container graph of this node. For double chaining between this
@@ -29,7 +29,7 @@ public interface Layer<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @param graph
 	 *            graph which contains this layer
 	 */
-	public void setGraph(Graph<N, E> graph);
+	public void setGraph(Graph<N, R> graph);
 
 	/**
 	 * Adds the passed node to this layer. The insertion order is preserved.
@@ -39,7 +39,7 @@ public interface Layer<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 */
 	public void addNode(N node);
 	/**
-	 * Removes the passed node from this layer. If the passed edge is null, nothing is done.
+	 * Removes the passed node from this layer. If the passed relation is null, nothing is done.
 	 * @param node to be removed
 	 */
 	public void removeNode(N node);
@@ -53,22 +53,22 @@ public interface Layer<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	public Set<N> getNodes();
 
 	/**
-	 * Adds the passed edge to this layer. The insertion order is preserved.
+	 * Adds the passed relation to this layer. The insertion order is preserved.
 	 * 
-	 * @param edge
-	 *            edge to be inserted into this layer
+	 * @param relation
+	 *            relation to be inserted into this layer
 	 */
-	public void addEdge(E edge);
+	public void addRelation(R relation);
 	/**
-	 * Removes the passed edge from this layer. If the passed edge is null, nothing is done.
-	 * @param edge to be removed
+	 * Removes the passed relation from this layer. If the passed relation is null, nothing is done.
+	 * @param relation to be removed
 	 */
-	public void removeEdge(E edge);
+	public void removeRelation(R relation);
 	/**
-	 * Returns a set of all contained edges, in the order how the edges were
+	 * Returns a set of all contained relations, in the order how the relations were
 	 * inserted.
 	 * 
-	 * @return all contained edges
+	 * @return all contained relations
 	 */
-	public Set<E> getEdges();
+	public Set<R> getRelations();
 }

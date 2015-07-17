@@ -7,7 +7,7 @@ import java.util.Set;
  * The here defined graph is given by G=(V, E, L, {label a , ...label b }) with:
  * <ul>
  * <li>V being a set of {@link Node}s with v= ({label c , ... label d }) ∊ V</li>
- * <li>E being a set of directed {@link Edge}s with e= (v 1 ∊ V, v 2 ∊ V, {label
+ * <li>E being a set of directed {@link Relation}s with e= (v 1 ∊ V, v 2 ∊ V, {label
  * e , ... label f }) ∊ E</li>
  * <li>L being a set of {@link Layer}s with l= (V 1 ⊆ V, E 1 ⊆ E, L 1 ⊆ L,
  * {label g ,.. label h }) ∊ L</li>
@@ -20,69 +20,69 @@ import java.util.Set;
  * @param <N>
  *            type of contained {@link Node}s
  * @param <E>
- *            type of contained {@link Edge}s
+ *            type of contained {@link Relation}s
  */
-public interface Graph<N extends Node, E extends Edge<N, N>> extends IdentifiableElement {
+public interface Graph<N extends Node, R extends Relation<N, N>> extends IdentifiableElement {
 	/**
-	 * Returns a list of all edges contained in this graph.
+	 * Returns a list of all relations contained in this graph.
 	 * 
-	 * @return a list of all contained edges.
+	 * @return a list of all contained relations.
 	 */
-	public List<E> getEdges();
+	public List<R> getRelations();
 
 	/**
-	 * Returns an edge corresponding to the passed id, if such an edge is
+	 * Returns an relation corresponding to the passed id, if such an relation is
 	 * contained in the graph.
 	 * 
-	 * @param edgeId
-	 *            id of the edge to be searched for
+	 * @param relationId
+	 *            id of the relation to be searched for
 	 */
-	public E getEdge(String edgeId);
+	public R getRelation(String relationId);
 	/**
-	 * Returns all edges,which connects the two passed nodes.
+	 * Returns all relations,which connects the two passed nodes.
 	 * @param sourceNodeId the id of the source node
 	 * @param targetNodeId the id of the target node
 	 * @return returns all nodes between source node and target node
 	 */
-	public List<E> getEdges(String sourceNodeId, String targetNodeId);
+	public List<R> getRelations(String sourceNodeId, String targetNodeId);
 	/**
-	 * Returns all edges, which have the node corresponding to the passed id as their target node.
-	 * @param nodeId id corresponding to the node, for which all incoming edges should be searched
-	 * @return a list of all incoming edges
+	 * Returns all relations, which have the node corresponding to the passed id as their target node.
+	 * @param nodeId id corresponding to the node, for which all incoming relations should be searched
+	 * @return a list of all incoming relations
 	 */
-	public List<E> getInEdges(String nodeId);
+	public List<R> getInRelations(String nodeId);
 	/**
-	 * Returns all edges, which have the node corresponding to the passed id as their source node.
-	 * @param nodeId id corresponding to the node, for which all outgoing edges should be searched
-	 * @return a list of all outgoing edges
+	 * Returns all relations, which have the node corresponding to the passed id as their source node.
+	 * @param nodeId id corresponding to the node, for which all outgoing relations should be searched
+	 * @return a list of all outgoing relations
 	 */
-	public List<E> getOutEdges(String nodeId);
+	public List<R> getOutRelations(String nodeId);
 	
 	/**
-	 * Adds the passed edge to this graph and updates indexes. If edge is null
-	 * nothing is inserted. The passed edge and this graph will be double
-	 * chained, which means the method {@link Edge#getGraph()} will return this
+	 * Adds the passed relation to this graph and updates indexes. If relation is null
+	 * nothing is inserted. The passed relation and this graph will be double
+	 * chained, which means the method {@link Relation#getGraph()} will return this
 	 * graph.
 	 * 
-	 * @param edge
-	 *            edge to be inserted
+	 * @param relation
+	 *            relation to be inserted
 	 */
-	public void addEdge(E edge);
+	public void addRelation(R relation);
 
 	/**
-	 * Returns whether this graph contains an {@link Edge} corresponding to the
+	 * Returns whether this graph contains an {@link Relation} corresponding to the
 	 * passed id.
 	 * 
-	 * @param edgeId
+	 * @param relationId
 	 *            id of the node to be checked
-	 * @return true if the edge is contained, false otherwise
+	 * @return true if the relation is contained, false otherwise
 	 */
-	public boolean containsEdge(String edgeId);
+	public boolean containsRelation(String relationId);
 
 	/**
-	 * Returns a list of all edges contained in this graph.
+	 * Returns a list of all relations contained in this graph.
 	 * 
-	 * @return a list of all contained edges.
+	 * @return a list of all contained relations.
 	 */
 	public List<N> getNodes();
 
@@ -133,7 +133,7 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * 
 	 * @return all contained layers
 	 */
-	public Set<Layer<N, E>> getLayers();
+	public Set<Layer<N, R>> getLayers();
 
 	/**
 	 * Adds the passed layer to this graph. If layer is null nothing is
@@ -143,7 +143,7 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @param layer
 	 *            layer to be inserted
 	 */
-	public void addLayer(Layer<N, E> layer);
+	public void addLayer(Layer<N, R> layer);
 
 	/**
 	 * Returns whether this graph contains a {@link Layer} corresponding to the
@@ -165,5 +165,5 @@ public interface Graph<N extends Node, E extends Edge<N, N>> extends Identifiabl
 	 * @param layer
 	 *            the layer to be removed
 	 */
-	public void removeLayer(Layer<N, E> layer);
+	public void removeLayer(Layer<N, R> layer);
 }

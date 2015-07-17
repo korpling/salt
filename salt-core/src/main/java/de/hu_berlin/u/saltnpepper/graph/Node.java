@@ -2,7 +2,7 @@ package de.hu_berlin.u.saltnpepper.graph;
 
 /**
  * In graph theory a node is a placeholder, which can be related with other
- * nodes via an edge.
+ * nodes via an relation.
  * 
  * The here defined node, is a labeled node, which means, it can contain a set
  * of {@link Label}s. Am node always belong to 0..1 {@link Graph}s and can also

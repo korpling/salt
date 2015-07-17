@@ -4,7 +4,7 @@ import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 
 /**
  * This class represents an identifier, which is a special kind of a label. The identifier is used for
- * {@link Node}, {@link Edge}, {@link Graph} and {@link Layer} objects. The namespace of an {@link Identifier} 
+ * {@link Node}, {@link Relation}, {@link Graph} and {@link Layer} objects. The namespace of an {@link Identifier} 
  * objectis fixed to {@link GraphUtil#IDENTIFIER_NAMESPACE} and its name is fixed to 
  * {@link GraphUtil#IDENTIFIER_NAME}. 
  * 

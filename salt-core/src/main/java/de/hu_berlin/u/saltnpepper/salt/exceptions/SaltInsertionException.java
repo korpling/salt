@@ -17,15 +17,15 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.exceptions;
 
-import de.hu_berlin.u.saltnpepper.graph.Edge;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
 /**
  * This exception is thrown, if one object could not be inserted into another
- * object. For instance if a {@link Node} can not be set to an {@link Edge}s
- * source or target, a {@link Edge} cannot be added to a {@link Graph} or a
+ * object. For instance if a {@link Node} can not be set to an {@link Relation}s
+ * source or target, a {@link Relation} cannot be added to a {@link Graph} or a
  * {@link Label} cannot be added to a {@link Node} etc. .
  * 
  * @author Florian Zipser
