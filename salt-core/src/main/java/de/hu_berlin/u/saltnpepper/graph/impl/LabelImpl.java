@@ -1,14 +1,16 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import org.apache.commons.lang3.tuple.Pair;
+
 import java.lang.Cloneable;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
+import de.hu_berlin.u.saltnpepper.graph.util.Copyable;
 import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
 @SuppressWarnings("serial")
-public class LabelImpl<V extends Object> extends LabelableElementImpl implements Label<V>, Cloneable{
+public class LabelImpl<V extends Object> extends LabelableElementImpl implements Label<V>, Copyable<Label<V>>{
 	
 	protected String namespace = null;
 	/** {@inheritDoc Label#getNamespace()} */
@@ -70,24 +72,20 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	}
 
 	/**
-	 * {@inheritDoc Label#clone()}
+	 * This method the namespace, the name and the value from this object to the passed one and 
+	 * returns the passed one.
+	 * @param clone
+	 *            the clone to which all properties of this shall be copied to
+	 * @return other enhanced for namespace, name and value
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public Label<V> clone() {
-		return (this.copy((Label<V>) GraphFactory.createLabel()));
-	}
-
-	/** {@inheritDoc Label#copy()} **/
-	@Override
-	public Label<V> copy(Label<V> other) {
+	public void copy(Label<V> other) {
 		if (other == null) {
 			throw new SaltException("Cannot clone label '" + this + "', because the given object is null and its not possible to copy values into a null object.");
 		}
 		other.setNamespace(this.getNamespace());
 		other.setName(this.getName());
 		other.setValue(this.getValue());
-		return (other);
 	}
 	@Override
 	public String toString() {

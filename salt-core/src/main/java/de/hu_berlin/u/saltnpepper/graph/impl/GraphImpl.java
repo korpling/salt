@@ -355,7 +355,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	@Override
 	public void removeRelation(R rel) {
 		if (rel != null) {
-			if (rel instanceof NodeImpl) {
+			if (rel instanceof RelationImpl) {
 				((RelationImpl<N, N>) rel).basicSetGraph(null);
 			}
 			basicRemoveRelation(rel);

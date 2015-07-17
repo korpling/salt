@@ -216,21 +216,6 @@ public class LabelTest {
 		this.getFixture().setValue(value);
 		assertEquals(value, this.getFixture().getValue());
 	}
-
-	/**
-	 * Tests the method {@link Label#clone()}
-	 */
-	@Test
-	public void testClone() {
-		getFixture().setNamespace("namespace");
-		getFixture().setName("name");
-		getFixture().setValue("value");
-		Label other= this.getFixture().clone();
-		assertEquals(getFixture().getNamespace(), other.getNamespace());
-		assertEquals(getFixture().getName(), other.getName());
-		assertEquals(getFixture().getValue(), other.getValue());
-	}
-	
 	/**
 	 * Tests the method {@link Label#copy(Label)}
 	 */

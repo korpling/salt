@@ -1,5 +1,7 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
+import de.hu_berlin.u.saltnpepper.graph.util.Copyable;
+
 /**
  * A label is an attribute-value-pair and can belong to either a {@link Node}, an {@link Relation}, a {@link Graph}, 
  * a {@link Layer} or another {@link Label} as shown in . An attribute-value-pair is a triple which consists of 
@@ -11,7 +13,7 @@ package de.hu_berlin.u.saltnpepper.graph;
  *
  * @param <V> this parameter determines the type of the value of this label. 
  */
-public interface Label<V extends Object> extends LabelableElement{
+public interface Label<V extends Object> extends LabelableElement, Copyable<Label<V>>{
 	/** Separator between namespace and name: qname= NAMESPACE {@value #NS_SEPERATOR} NAME. */
 	public static final String NS_SEPERATOR= "::";
 	/** 
@@ -60,18 +62,4 @@ public interface Label<V extends Object> extends LabelableElement{
 	 * @param value generic value of this label.
 	 */
 	public void setValue(V value);
-	
-	/**
-	 * Creates a new object of type {@link Label} and copies the namespace, name and value of this label.
-	 * @return a new {@link Label} object
-	 */
-	public Label<V> clone();
-	/**
-	 * This method the namespace, the name and the value from this object to the passed one and 
-	 * returns the passed one.
-	 * @param clone
-	 *            the clone to which all properties of this shall be copied to
-	 * @return other enhanced for namespace, name and value
-	 */
-	public Label<V> copy(Label<V> other);
 }
