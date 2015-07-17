@@ -99,7 +99,6 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	@Override
 	public void removeLabel(String qName) {
 		if (qName != null) {
-			labels.remove(labels.get(qName));
 			labels.remove(qName);
 		}
 	}
