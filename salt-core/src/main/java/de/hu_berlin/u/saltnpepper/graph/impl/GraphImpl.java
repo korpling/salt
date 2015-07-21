@@ -1,6 +1,7 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -11,12 +12,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
-import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
-import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
@@ -216,8 +216,17 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		nodes.remove(node);
 		// remove node from internal index
 		idx_node_id.remove(node.getId());
-		// TODO remove all relations and update index outgoing and incoming
-		// indexes
+		// remove all relations having the removed node as source or target and
+		// update index outgoing and incoming indexes
+		Collection<R> rels= new ArrayList<R>(getInRelations(node.getId()));
+		for (R r : rels) {
+			removeRelation(r);
+		}
+		rels= new ArrayList<R>(getOutRelations(node.getId()));
+		for (R r : rels) {
+			removeRelation(r);
+		}
+
 		// remove node also from layers
 		for (Layer<N, R> layer : layers) {
 			layer.removeNode(node);
@@ -270,13 +279,13 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc} **/
 	@Override
 	public List<R> getInRelations(String nodeId) {
-		return (idx_in_relation_id.get(nodeId));
+		return (Collections.unmodifiableList(idx_in_relation_id.get(nodeId)));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<R> getOutRelations(String nodeId) {
-		return (idx_out_relation_id.get(nodeId));
+		return (Collections.unmodifiableList(idx_out_relation_id.get(nodeId)));
 	}
 
 	/** {@inheritDoc Graph#addRelation(Relation)} **/
@@ -362,34 +371,38 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * which has been made. If the update could not be performed, false is
 	 * returned. True otherwise.
 	 * 
-	 * @param oldValue old value 
-	 * @param container the object which has been updated
-	 * @param updateType type of update to be performed 
-	 * @throws SaltException in case the update could not be performed
+	 * @param oldValue
+	 *            old value
+	 * @param container
+	 *            the object which has been updated
+	 * @param updateType
+	 *            type of update to be performed
+	 * @throws SaltException
+	 *             in case the update could not be performed
 	 */
 	protected void update(Object oldValue, Object container, UPDATE_TYPE updateType) throws SaltException {
-		if (UPDATE_TYPE.RELATION_SOURCE.equals(updateType)){
-			//as long as R extends Relation, this check is valid
-			if (container instanceof Relation){
+		if (UPDATE_TYPE.RELATION_SOURCE.equals(updateType)) {
+			// as long as R extends Relation, this check is valid
+			if (container instanceof Relation) {
 				@SuppressWarnings("unchecked")
-				R relation= (R) container;
+				R relation = (R) container;
 				idx_out_relation_id.put(relation.getSource().getId(), relation);
-				//as long as N extends Node, this check is valid
-				if (oldValue!= null && oldValue instanceof Node){
+				// as long as N extends Node, this check is valid
+				if (oldValue != null && oldValue instanceof Node) {
 					@SuppressWarnings("unchecked")
-					N node= (N) oldValue;
+					N node = (N) oldValue;
 					idx_out_relation_id.remove(node.getId(), relation);
 				}
 			}
-		}else if (UPDATE_TYPE.RELATION_TARGET.equals(updateType)){
-			//as long as R extends Relation, this check is valid
-			if (container instanceof Relation){
+		} else if (UPDATE_TYPE.RELATION_TARGET.equals(updateType)) {
+			// as long as R extends Relation, this check is valid
+			if (container instanceof Relation) {
 				@SuppressWarnings("unchecked")
-				R relation= (R) container;
+				R relation = (R) container;
 				idx_in_relation_id.put(relation.getTarget().getId(), relation);
-				if (oldValue!= null && oldValue instanceof Node){
+				if (oldValue != null && oldValue instanceof Node) {
 					@SuppressWarnings("unchecked")
-					N node= (N) oldValue;
+					N node = (N) oldValue;
 					idx_in_relation_id.remove(node.getId(), relation);
 				}
 			}
