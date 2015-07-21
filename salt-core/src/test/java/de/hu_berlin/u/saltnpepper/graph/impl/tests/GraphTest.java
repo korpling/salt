@@ -295,8 +295,7 @@ public class GraphTest {
 
 	// ==========================================================< test nodes
 
-	// ==========================================================> test
-	// relations
+	// ======================================================> test relations
 	/**
 	 * <ul>
 	 * <li>checks that an empty relation could not be inserted</li>
@@ -542,5 +541,67 @@ public class GraphTest {
 		assertEquals(1, getFixture().getLayers().size());
 		assertEquals(0, layer1.getRelations().size());
 	}
-	// ==========================================================< test nodes
+
+	/**
+	 * Tests when the source of a relation has been changed, if the index was
+	 * updated correctly.
+	 */
+	@Test
+	public void testChangeRelationSource() {
+		Node node1 = GraphFactory.createNode();
+		getFixture().addNode(node1);
+
+		Node node2 = GraphFactory.createNode();
+		getFixture().addNode(node2);
+
+		Relation<Node, Node> relation = GraphFactory.createRelation();
+		relation.setSource(node1);
+		relation.setTarget(node2);
+		getFixture().addRelation(relation);
+
+		assertTrue(getFixture().getOutRelations(node1.getId()).contains(relation));
+		assertTrue(getFixture().getInRelations(node2.getId()).contains(relation));
+
+		Node node3 = GraphFactory.createNode();
+		getFixture().addNode(node3);
+
+		// redirect source
+		relation.setSource(node3);
+		assertTrue("all relations: "+getFixture().getOutRelations(node3.getId()), getFixture().getOutRelations(node3.getId()).contains(relation));
+		assertTrue(getFixture().getOutRelations(node1.getId()).isEmpty());
+	}
+
+	/**
+	 * Tests when the target of a relation has been changed, if the index was
+	 * updated correctly.
+	 */
+	@Test
+	public void testChangeRelationTarget() {
+		Node node1 = GraphFactory.createNode();
+		node1.setId("node1");
+		getFixture().addNode(node1);
+
+		Node node2 = GraphFactory.createNode();
+		node2.setId("node2");
+		getFixture().addNode(node2);
+
+		Relation<Node, Node> relation = GraphFactory.createRelation();
+		relation.setId("relation1");
+		relation.setSource(node1);
+		relation.setTarget(node2);
+		getFixture().addRelation(relation);
+
+
+		assertTrue(getFixture().getOutRelations(node1.getId()).contains(relation));
+		assertTrue(getFixture().getInRelations(node2.getId()).contains(relation));
+
+		Node node3 = GraphFactory.createNode();
+		node3.setId("node3");
+		getFixture().addNode(node3);
+		// redirect source
+		relation.setTarget(node3);
+		assertTrue(getFixture().getInRelations(node3.getId()).contains(relation));
+		assertTrue(getFixture().getInRelations(node2.getId()).isEmpty());
+	}
+	// =======================================================< test relations
 }

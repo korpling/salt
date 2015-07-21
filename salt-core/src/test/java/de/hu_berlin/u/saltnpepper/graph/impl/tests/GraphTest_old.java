@@ -43,7 +43,7 @@ public class GraphTest_old {
 //	@Before
 //	protected void setUp() throws Exception {
 //		setFixture(GraphFactory.createGraph());
-//		this.getFixture().setId("graph1");
+//		getFixture().setId("graph1");
 //		//Knotenliste erstellen
 //		nodes= new ArrayList<Node>();
 //		for (String nodeName: nodeNames)
@@ -111,7 +111,7 @@ public class GraphTest_old {
 //	{
 //		for (Node node: nodes)
 //		{
-//			this.getFixture().addNode(node);
+//			getFixture().addNode(node);
 //		}
 //	}
 //	
@@ -124,7 +124,7 @@ public class GraphTest_old {
 //	{
 //		for (Relation relation: relations)
 //		{
-//			this.getFixture().addRelation(relation);
+//			getFixture().addRelation(relation);
 //		}
 //	}
 //	
@@ -137,14 +137,14 @@ public class GraphTest_old {
 //	{
 //		for (Node node: this.nodes )
 //		{
-//			this.getFixture().addNode(node);
-//			assertEquals(node, this.getFixture().getNode(node.getId()));
+//			getFixture().addNode(node);
+//			assertEquals(node, getFixture().getNode(node.getId()));
 //		}
 //		for (String nodeName: nodeNames)
 //		{
-//			assertNotNull(this.getFixture().getNode(nodeName));
-//			this.getFixture().removeNodeById(nodeName);
-//			assertNull("node '"+nodeName+"' should be removed", this.getFixture().getNode(nodeName));
+//			assertNotNull(getFixture().getNode(nodeName));
+//			getFixture().removeNodeById(nodeName);
+//			assertNull("node '"+nodeName+"' should be removed", getFixture().getNode(nodeName));
 //		}
 //	}
 //	
@@ -154,77 +154,7 @@ public class GraphTest_old {
 
 
 
-//	
-//	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeRelationSource(java.lang.String, java.lang.String) <em>Change Relation Source</em>}' operation.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeRelationSource(java.lang.String, java.lang.String)
-//	 */
-//	public void testChangeRelationSource__String_String() 
-//	{
-//		Relation relation= GraphFactory.createRelation();
-//		relation.setId("relation1");
-//		this.getFixture().addRelation(relation);
-//		
-//		Node node1= GraphFactory.createNode();
-//		node1.setId("node1");
-//		this.getFixture().addNode(node1);
-//		
-//		Node node2= GraphFactory.createNode();
-//		node2.setId("node2");
-//		this.getFixture().addNode(node2);
-//		
-//		relation.setSource(node1);
-//		relation.setTarget(node2);
-//		
-//		assertTrue(this.getFixture().getOutRelations(node1.getId()).contains(relation));
-//		assertTrue(this.getFixture().getInRelations(node2.getId()).contains(relation));
-//		
-//		Node node3= GraphFactory.createNode();
-//		node3.setId("node3");
-//		this.getFixture().addNode(node3);
-//		
-//		//redirect source
-//		relation.setSource(node3);
-//		assertTrue(this.getFixture().getOutRelations(node3.getId()).contains(relation));
-//		assertTrue(this.getFixture().getOutRelations(node1.getId()).isEmpty());
-//	}
-//
-//	/**
-//	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeRelationTarget(java.lang.String, java.lang.String) <em>Change Relation Target</em>}' operation.
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#changeRelationTarget(java.lang.String, java.lang.String)
-//	 */
-//	public void testChangeRelationTarget__String_String() 
-//	{
-//		Relation relation= GraphFactory.createRelation();
-//		relation.setId("relation1");
-//		this.getFixture().addRelation(relation);
-//		
-//		Node node1= GraphFactory.createNode();
-//		node1.setId("node1");
-//		this.getFixture().addNode(node1);
-//		
-//		Node node2= GraphFactory.createNode();
-//		node2.setId("node2");
-//		this.getFixture().addNode(node2);
-//		
-//		relation.setSource(node1);
-//		relation.setTarget(node2);
-//		
-//		assertTrue(this.getFixture().getOutRelations(node1.getId()).contains(relation));
-//		assertTrue(this.getFixture().getInRelations(node2.getId()).contains(relation));
-//		
-//		Node node3= GraphFactory.createNode();
-//		node3.setId("node3");
-//		this.getFixture().addNode(node3);
-//		//redirect source
-//		relation.setTarget(node3);
-//		assertTrue(this.getFixture().getInRelations(node3.getId()).contains(relation));
-//		assertTrue(this.getFixture().getInRelations(node2.getId()).isEmpty());
-//	}
+
 //
 //	/**
 //	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.graph.Graph#addNode(de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node, de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer) <em>Add Node</em>}' operation.
@@ -243,7 +173,7 @@ public class GraphTest_old {
 //		layer2= GraphFactory.createLayer();
 //		
 //		{//adding null node to layer
-//			this.getFixture().addNode(null, layer1);
+//			getFixture().addNode(null, layer1);
 //		}//adding null node to layer
 //		
 //		nodesOflayer1= new BasicList<Node>();
@@ -254,21 +184,21 @@ public class GraphTest_old {
 //			layer1= GraphFactory.createLayer();
 //			
 //			Node node= GraphFactory.createNode();
-//			this.getFixture().addNode(node, layer1);
+//			getFixture().addNode(node, layer1);
 //			assertTrue(layer1.getNodes().contains(node));
-//			assertEquals(node, this.getFixture().getNode(node.getId()));
+//			assertEquals(node, getFixture().getNode(node.getId()));
 //		}//adding nodes to non existing layer
 //		
-//		this.getFixture().addLayer(layer1);
+//		getFixture().addLayer(layer1);
 //		for (Node node: nodesOflayer1)
-//			this.getFixture().addNode(node, layer1);
+//			getFixture().addNode(node, layer1);
 //		
 //		nodesOflayer2= new BasicList<Node>();
 //		for (int i= 1; i< 5; i++)
 //			nodesOflayer2.add(GraphFactory.createNode());
-//		this.getFixture().addLayer(layer2);
+//		getFixture().addLayer(layer2);
 //		for (Node node: nodesOflayer2)
-//			this.getFixture().addNode(node, layer2);
+//			getFixture().addNode(node, layer2);
 //		
 //		{//checking if layer 1 and 2 contains all nodes
 //			assertTrue(layer1.getNodes().containsAll(nodesOflayer1));
@@ -297,7 +227,7 @@ public class GraphTest_old {
 //		layer2= GraphFactory.createLayer();
 //		
 //		{//adding null relation to layer
-//			this.getFixture().addRelation(null, layer1);
+//			getFixture().addRelation(null, layer1);
 //		}//adding null relation to layer
 //		
 //		relationsOflayer1= new BasicList<Relation>();
@@ -308,21 +238,21 @@ public class GraphTest_old {
 //			layer1= GraphFactory.createLayer();
 //			
 //			Relation relation= GraphFactory.createRelation();
-//			this.getFixture().addRelation(relation, layer1);
+//			getFixture().addRelation(relation, layer1);
 //			assertTrue(layer1.getRelations().contains(relation));
-//			assertEquals(relation, this.getFixture().getRelation(relation.getId()));
+//			assertEquals(relation, getFixture().getRelation(relation.getId()));
 //		}//adding relations to non existing layer
 //		
-//		this.getFixture().addLayer(layer1);
+//		getFixture().addLayer(layer1);
 //		for (Relation relation: relationsOflayer1)
-//			this.getFixture().addRelation(relation, layer1);
+//			getFixture().addRelation(relation, layer1);
 //		
 //		relationsOflayer2= new BasicList<Relation>();
 //		for (int i= 1; i< 5; i++)
 //			relationsOflayer2.add(GraphFactory.createRelation());
-//		this.getFixture().addLayer(layer2);
+//		getFixture().addLayer(layer2);
 //		for (Relation relation: relationsOflayer2)
-//			this.getFixture().addRelation(relation, layer2);
+//			getFixture().addRelation(relation, layer2);
 //		
 //		{//checking if layer 1 and 2 contains all relations
 //			assertTrue(layer1.getRelations().containsAll(relationsOflayer1));
@@ -345,21 +275,21 @@ public class GraphTest_old {
 //		Layer layer= null;
 //		{//adding null layer
 //			try {
-//				this.getFixture().addLayer(layer);
+//				getFixture().addLayer(layer);
 //				fail("shall not add a null layer");
 //			} catch (GraphException e) {	}
 //		}//adding null layer
 //		
 //		{//adding layer
 //			layer= GraphFactory.createLayer();
-//			this.getFixture().addLayer(layer);
-//			assertTrue(this.getFixture().getLayers().contains(layer));
+//			getFixture().addLayer(layer);
+//			assertTrue(getFixture().getLayers().contains(layer));
 //		}//adding layer
 //		
 //		{//adding layer second time shall fail
 //			try {
-//				this.getFixture().addLayer(layer);
-//				assertTrue(this.getFixture().getLayers().contains(layer));
+//				getFixture().addLayer(layer);
+//				assertTrue(getFixture().getLayers().contains(layer));
 //				fail("shall not add a layer two times");
 //			} catch (GraphException e) {	}
 //			
@@ -380,8 +310,8 @@ public class GraphTest_old {
 //		
 //		layer= GraphFactory.createLayer();
 //		layer.setId(id);
-//		this.getFixture().addLayer(layer);
-//		assertEquals(layer, this.getFixture().getLayer(id));
+//		getFixture().addLayer(layer);
+//		assertEquals(layer, getFixture().getLayer(id));
 //	}
 //
 //// ============================================== start: create dummy graphs
@@ -581,7 +511,7 @@ public class GraphTest_old {
 //			this.setFixture(graph);
 //			expectedRoots= new ArrayList<Node>();
 //			expectedRoots.add(graph.getNode("node1"));
-//			roots= this.getFixture().getRoots();
+//			roots= getFixture().getRoots();
 //			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
 //			for (Node expectedRoot: expectedRoots)
 //			{
@@ -595,7 +525,7 @@ public class GraphTest_old {
 //			expectedRoots= new ArrayList<Node>();
 //			expectedRoots.add(graph.getNode("node1"));
 //			expectedRoots.add(graph.getNode("node4"));
-//			roots= this.getFixture().getRoots();
+//			roots= getFixture().getRoots();
 //			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
 //			for (Node expectedRoot: expectedRoots)
 //			{
@@ -609,7 +539,7 @@ public class GraphTest_old {
 //			expectedRoots= new ArrayList<Node>();
 //			expectedRoots.add(graph.getNode("node1"));
 //			expectedRoots.add(graph.getNode("node4"));
-//			roots= this.getFixture().getRoots();
+//			roots= getFixture().getRoots();
 //			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
 //			for (Node expectedRoot: expectedRoots)
 //			{
@@ -637,7 +567,7 @@ public class GraphTest_old {
 //			expectedLeafs.add(graph.getNode("node6"));
 //			expectedLeafs.add(graph.getNode("node5"));
 //			expectedLeafs.add(graph.getNode("node7"));
-//			leafs= this.getFixture().getLeafs();
+//			leafs= getFixture().getLeafs();
 //			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
 //			for (Node expectedLeaf: expectedLeafs)
 //			{
@@ -651,7 +581,7 @@ public class GraphTest_old {
 //			expectedLeafs= new ArrayList<Node>();
 //			expectedLeafs.add(graph.getNode("node3"));
 //			expectedLeafs.add(graph.getNode("node6"));
-//			leafs= this.getFixture().getLeafs();
+//			leafs= getFixture().getLeafs();
 //			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
 //			for (Node expectedLeaf: expectedLeafs)
 //			{
@@ -664,7 +594,7 @@ public class GraphTest_old {
 //			this.setFixture(graph);
 //			expectedLeafs= new ArrayList<Node>();
 //			expectedLeafs.add(graph.getNode("node3"));
-//			leafs= this.getFixture().getLeafs();
+//			leafs= getFixture().getLeafs();
 //			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
 //			for (Node expectedLeaf: expectedLeafs)
 //			{
@@ -683,22 +613,22 @@ public class GraphTest_old {
 //		//Pr�fen ob Kanten eingef�gt wurden
 //		for (Relation relation: relations)
 //		{
-//			assertSame("this relation '"+relation.getId()+"' should be there", relation, this.getFixture().getRelation(relation.getId()));
+//			assertSame("this relation '"+relation.getId()+"' should be there", relation, getFixture().getRelation(relation.getId()));
 //		}
 //		//Kante l�schen
 //		for (Relation relation: relations)
 //		{
-//			if (this.getFixture().getRelation(relation.getId())!= null)
+//			if (getFixture().getRelation(relation.getId())!= null)
 //			{
-//				assertSame("this relation '"+relation.getId()+"' should be there", relation, this.getFixture().getRelation(relation.getId()));	
-//				assertTrue(this.getFixture().getRelations().remove(relation));
-//				assertNull("this relation '"+relation.getId()+"' shouldn�t be there", this.getFixture().getRelation(relation.getId()));
+//				assertSame("this relation '"+relation.getId()+"' should be there", relation, getFixture().getRelation(relation.getId()));	
+//				assertTrue(getFixture().getRelations().remove(relation));
+//				assertNull("this relation '"+relation.getId()+"' shouldn�t be there", getFixture().getRelation(relation.getId()));
 //			}
 //		}
 //		//Kante entfernen, deren Knoten es nicht gibt
 //		Relation relation= GraphFactory.createRelation();
 //		relation.setId("not there");
-//		assertFalse(this.getFixture().getRelations().remove(relation));
+//		assertFalse(getFixture().getRelations().remove(relation));
 //	}
 //	
 //	/**
@@ -714,17 +644,17 @@ public class GraphTest_old {
 //		//check if relations have been added
 //		for (Relation relation: relations)
 //		{
-//			assertSame("this relation '"+relation.getId()+"' should be there", relation, this.getFixture().getRelation(relation.getId()));
+//			assertSame("this relation '"+relation.getId()+"' should be there", relation, getFixture().getRelation(relation.getId()));
 //		}
 //		//remove old relation
-//		this.getFixture().removeRelations();
+//		getFixture().removeRelations();
 //		//add new relation
 //		for (Relation relation: relations )
 //		{
 //			//add relation
-//			this.getFixture().addRelation(relation);
+//			getFixture().addRelation(relation);
 //			//check if relation exists
-//			assertEquals("created relation has to be there", this.getFixture().getRelation(relation.getId()), relation);
+//			assertEquals("created relation has to be there", getFixture().getRelation(relation.getId()), relation);
 //		}
 //	}
 //	
@@ -737,22 +667,22 @@ public class GraphTest_old {
 //	 */
 //	public void testGetNumOfIndexes() 
 //	{
-//		long i= this.getFixture().getIndexMgr().getNumOfIndexes();
+//		long i= getFixture().getIndexMgr().getNumOfIndexes();
 //		String[] indexNames= {"index1", "index2", "index3", "index4", "index5"};
 //		for (String indexName: indexNames)
 //		{
 //			Index simpleIndex= IndexFactory.eINSTANCE.createSimpleIndex();
 //			simpleIndex.setId(indexName);
-//			this.getFixture().getIndexMgr().addIndex(simpleIndex);
+//			getFixture().getIndexMgr().addIndex(simpleIndex);
 //		}
-//		assertEquals(indexNames.length, this.getFixture().getIndexMgr().getNumOfIndexes()-i);
+//		assertEquals(indexNames.length, getFixture().getIndexMgr().getNumOfIndexes()-i);
 //	}
 //	public void testReverseGetLabel()
 //	{
 //		Label<String> label= GraphFactory.createLabel();
 //		label.setName("labelName");
-//		this.getFixture().addLabel(label);
+//		getFixture().addLabel(label);
 //		
-//		assertEquals(this.getFixture(), label.getLabelableElement());
+//		assertEquals(getFixture(), label.getLabelableElement());
 //	}
 }

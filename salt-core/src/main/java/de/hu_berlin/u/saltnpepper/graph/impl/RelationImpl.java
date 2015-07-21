@@ -4,6 +4,7 @@ import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
+import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl.UPDATE_TYPE;
 
 
 @SuppressWarnings("serial")
@@ -46,9 +47,15 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	}
 	/**
 	 * {@inheritDoc Relation#setSource(Node)}
+	 * Notifies the graph, about the change of the source.
 	 */
 	public void setSource(S source) {
+		S oldValue= getSource();
 		this.source = source;
+		//notify graph about change of target
+		if (getGraph()!= null && getGraph() instanceof GraphImpl){
+			((GraphImpl)getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
+		}
 	}
 	/** target node of this relation. **/
 	private T target=null;
@@ -60,9 +67,15 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	}
 	/**
 	 * {@inheritDoc Relation#setTarget(Node)}
+	 * Notifies the graph, about the change of the target.
 	 */
 	public void setTarget(T target) {
+		T oldValue= this.getTarget();
 		this.target = target;
+		//notify graph about change of target
+		if (getGraph()!= null && getGraph() instanceof GraphImpl){
+			((GraphImpl)getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
+		}
 	}
 	public String getName() {
 		// TODO Auto-generated method stub

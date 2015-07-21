@@ -11,11 +11,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
+import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 @SuppressWarnings("serial")
@@ -347,8 +349,51 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		relations.add(relation);
 		// add relation to indexes
 		idx_relation_id.put(relation.getId(), relation);
-		idx_out_relation_id.put(relation.getSource().getId(), relation);
-		idx_in_relation_id.put(relation.getTarget().getId(), relation);
+		update(null, relation, UPDATE_TYPE.RELATION_SOURCE);
+		update(null, relation, UPDATE_TYPE.RELATION_TARGET);
+	}
+
+	enum UPDATE_TYPE {
+		RELATION_TARGET, RELATION_SOURCE
+	}
+
+	/**
+	 * Updates all graph internal indexes, concerning the kind of the update
+	 * which has been made. If the update could not be performed, false is
+	 * returned. True otherwise.
+	 * 
+	 * @param oldValue old value 
+	 * @param container the object which has been updated
+	 * @param updateType type of update to be performed 
+	 * @throws SaltException in case the update could not be performed
+	 */
+	protected void update(Object oldValue, Object container, UPDATE_TYPE updateType) throws SaltException {
+		if (UPDATE_TYPE.RELATION_SOURCE.equals(updateType)){
+			//as long as R extends Relation, this check is valid
+			if (container instanceof Relation){
+				@SuppressWarnings("unchecked")
+				R relation= (R) container;
+				idx_out_relation_id.put(relation.getSource().getId(), relation);
+				//as long as N extends Node, this check is valid
+				if (oldValue!= null && oldValue instanceof Node){
+					@SuppressWarnings("unchecked")
+					N node= (N) oldValue;
+					idx_out_relation_id.remove(node.getId(), relation);
+				}
+			}
+		}else if (UPDATE_TYPE.RELATION_TARGET.equals(updateType)){
+			//as long as R extends Relation, this check is valid
+			if (container instanceof Relation){
+				@SuppressWarnings("unchecked")
+				R relation= (R) container;
+				idx_in_relation_id.put(relation.getTarget().getId(), relation);
+				if (oldValue!= null && oldValue instanceof Node){
+					@SuppressWarnings("unchecked")
+					N node= (N) oldValue;
+					idx_in_relation_id.remove(node.getId(), relation);
+				}
+			}
+		}
 	}
 
 	/** {@inheritDoc} **/
@@ -391,7 +436,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	protected void basicRemoveRelation(R rel) {
 		// remove relation from internal index
 		if (idx_relation_id.remove(rel.getId()) != null) {
-			//if relation exists in graph remove it from other indexes
+			// if relation exists in graph remove it from other indexes
 			idx_in_relation_id.get(rel.getTarget().getId()).remove(rel);
 			idx_out_relation_id.get(rel.getSource().getId()).remove(rel);
 		}
