@@ -25,6 +25,7 @@ import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 public class GraphTest {
@@ -299,31 +300,31 @@ public class GraphTest {
 	 */
 	@Test
 	public void testRemoveNodeAndAlsoRelations() {
-		Node n1= GraphFactory.createNode();
+		Node n1 = GraphFactory.createNode();
 		getFixture().addNode(n1);
-		Node n2= GraphFactory.createNode();
+		Node n2 = GraphFactory.createNode();
 		getFixture().addNode(n2);
-		
-		Relation<Node, Node> r1= GraphFactory.createRelation();
+
+		Relation<Node, Node> r1 = GraphFactory.createRelation();
 		r1.setSource(n1);
 		r1.setTarget(n2);
 		getFixture().addRelation(r1);
-		
-		Relation<Node, Node> r2= GraphFactory.createRelation();
+
+		Relation<Node, Node> r2 = GraphFactory.createRelation();
 		r2.setSource(n2);
 		r2.setTarget(n1);
 		getFixture().addRelation(r2);
-		
-		//check precondition
+
+		// check precondition
 		assertEquals(1, getFixture().getOutRelations(n1.getId()).size());
 		assertTrue(getFixture().getOutRelations(n1.getId()).contains(r1));
 		assertTrue(getFixture().getOutRelations(n2.getId()).contains(r2));
 		assertEquals(1, getFixture().getInRelations(n1.getId()).size());
 		assertTrue(getFixture().getInRelations(n1.getId()).contains(r2));
 		assertTrue(getFixture().getInRelations(n2.getId()).contains(r1));
-		
+
 		getFixture().removeNode(n2);
-		
+
 		assertEquals(0, getFixture().getRelations().size());
 		assertEquals(0, getFixture().getInRelations(n1.getId()).size());
 		assertEquals(0, getFixture().getOutRelations(n1.getId()).size());
@@ -638,5 +639,43 @@ public class GraphTest {
 		assertTrue(getFixture().getInRelations(node3.getId()).contains(relation));
 		assertTrue(getFixture().getInRelations(node2.getId()).isEmpty());
 	}
+
 	// =======================================================< test relations
+
+	// =======================================================> test layers
+	/**
+	 * Tests whether a layer was added correctly.
+	 */
+	@Test
+	public void testAddLayer__Layer() {
+		Layer<Node, Relation<Node, Node>> layer = null;
+		// adding null layer
+		getFixture().addLayer(layer);
+		assertEquals("shall not add a null layer", 0, getFixture().getLayers().size());
+		
+		// adding layer
+		layer = GraphFactory.createLayer();
+		getFixture().addLayer(layer);
+		assertTrue(getFixture().getLayers().contains(layer));
+
+		// adding layer second time shall fail
+		getFixture().addLayer(layer);
+		assertTrue(getFixture().getLayers().contains(layer));
+		assertEquals("shall not add a layer two times", 1, getFixture().getLayers().size());
+	}
+
+	/**
+	 * Tests whether the method {@link Graph#getLayer(String)}
+	 */
+	@Test
+	public void testGetLayer__String() {
+		Layer<Node, Relation<Node, Node>> layer = null;
+		String id = "id";
+
+		layer = GraphFactory.createLayer();
+		layer.setId(id);
+		getFixture().addLayer(layer);
+		assertEquals(layer, getFixture().getLayer(id));
+	}
+	// =======================================================< test layers
 }

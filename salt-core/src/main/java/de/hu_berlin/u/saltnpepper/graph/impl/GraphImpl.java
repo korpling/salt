@@ -218,11 +218,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		idx_node_id.remove(node.getId());
 		// remove all relations having the removed node as source or target and
 		// update index outgoing and incoming indexes
-		Collection<R> rels= new ArrayList<R>(getInRelations(node.getId()));
+		Collection<R> rels = new ArrayList<R>(getInRelations(node.getId()));
 		for (R r : rels) {
 			removeRelation(r);
 		}
-		rels= new ArrayList<R>(getOutRelations(node.getId()));
+		rels = new ArrayList<R>(getOutRelations(node.getId()));
 		for (R r : rels) {
 			removeRelation(r);
 		}
@@ -472,9 +472,16 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	// =========================================================== > Layers
 	private Set<Layer<N, R>> layers = null;
 
+	/** {@inheritDoc} **/
 	@Override
 	public Set<Layer<N, R>> getLayers() {
 		return (Collections.unmodifiableSet(layers));
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public Layer<N, R> getLayer(String layerId) {
+		return (idx_layer_id.get(layerId));
 	}
 
 	/** {@inheritDoc Graph#containsLayer(String)} **/
@@ -483,6 +490,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		return (idx_relation_id.containsKey(layerId));
 	}
 
+	/** {@inheritDoc} **/
 	@Override
 	public void addLayer(Layer<N, R> layer) {
 		if (layer != null) {
@@ -520,11 +528,27 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	protected void basicAddLayer(Layer<N, R> layer) {
 		if (layer != null) {
 			if (!layers.contains(layer)) {
+				// if relation has no id a new id will be given to relation
+				if (layer.getId() == null) {
+					layer.setId("r" + getRelations().size());
+				}
+				int i = 0;
+				// the given id, which eventually has to be extended for
+				// artificial
+				// counter
+				String idBase = layer.getId();
+				while (getRelation(layer.getId()) != null) {
+					// if relation already exists, create new Id
+					layer.setId(idBase + "_" + (getRelations().size() + i));
+					i++;
+				}
 				layers.add(layer);
+				idx_layer_id.put(layer.getId(), layer);
 			}
 		}
 	}
 
+	/** {@inheritDoc} **/
 	@Override
 	public void removeLayer(Layer<N, R> layer) {
 		if (layer instanceof LayerImpl) {

@@ -158,6 +158,14 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	public boolean containsNode(String nodeId);
 
 	/**
+	 * Returns a layer corresponding to the passed id, if such a layer is
+	 * contained in the graph.
+	 * 
+	 * @param layerId
+	 *            id of the layer to be searched for
+	 */
+	public Layer<N, R> getLayer(String layerId);
+	/**
 	 * Returns a set of layers contained by this graph.
 	 * 
 	 * @return all contained layers
