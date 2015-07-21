@@ -18,14 +18,13 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
-import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
+import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 public class GraphTest {
@@ -269,6 +268,24 @@ public class GraphTest {
 		}
 		assertEquals(0, getFixture().getNodes().size());
 	}
+	
+	/**
+	 * Checks that removing nodes from {@link Graph#getNodes()} has no effect.
+	 */
+	@Test
+	public void testRemoveNodeFromList() {
+		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
+		
+		for (Node node : pair.getLeft()) {
+			if (getFixture().getNode(node.getId()) != null) {
+				assertEquals("this node '" + node.getId() + "' should be there", node, getFixture().getNode(node.getId()));
+				try{
+					getFixture().getNodes().remove(node);
+				}catch (Exception e){}
+				assertNotNull("this node '" + node.getId() + "' should still be there", getFixture().getNode(node.getId()));
+			}
+		}
+	}
 
 	/**
 	 * Tests if nodes are also removed from layers, when they are removed from
@@ -434,7 +451,7 @@ public class GraphTest {
 	 * id.
 	 */
 	@Test
-	public void testGetRelation__String() {
+	public void testGetRelation() {
 		Node node1 = GraphFactory.createNode();
 		node1.setId("node1");
 		Node node2 = GraphFactory.createNode();
@@ -456,7 +473,7 @@ public class GraphTest {
 	 * Checks that all relations between two nodes are returned correctly.
 	 */
 	@Test
-	public void testGetRelations__String_String() {
+	public void testGetRelationsBetweenNodes() {
 		Node node1 = GraphFactory.createNode();
 		getFixture().addNode(node1);
 		Node node2 = GraphFactory.createNode();
@@ -485,7 +502,7 @@ public class GraphTest {
 	 * Checks that all incoming relations are returned correctly.
 	 */
 	@Test
-	public void testGetInRelations__String() {
+	public void testGetInRelations() {
 		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
 		for (Relation<Node, Node> relation : pair.getRight()) {
 			assertTrue("this inserted relation '" + relation.getId() + "' should be in getInRelations: " + getFixture().getInRelations(relation.getTarget().getId()), getFixture().getInRelations(relation.getTarget().getId()).contains(relation));
@@ -496,7 +513,7 @@ public class GraphTest {
 	 * Checks that all outgoing relations are returned correctly.
 	 */
 	@Test
-	public void testGetOutRelations__String() {
+	public void testGetOutRelations() {
 		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
 		for (Relation<Node, Node> relation : pair.getRight()) {
 			assertTrue("this inserted relation '" + relation.getId() + "' should be in getOutRelations: " + getFixture().getOutRelations(relation.getSource().getId()), getFixture().getOutRelations(relation.getSource().getId()).contains(relation));
@@ -550,7 +567,7 @@ public class GraphTest {
 	 * the graph. Tests if relation is even removed in layer.
 	 */
 	@Test
-	public void testRemoveRelation__Relation2() {
+	public void testRemoveRelation2() {
 		Node node1 = GraphFactory.createNode();
 		Node node2 = GraphFactory.createNode();
 		getFixture().addNode(node1);
@@ -577,6 +594,45 @@ public class GraphTest {
 		assertEquals(0, getFixture().getRelations().size());
 		assertEquals(1, getFixture().getLayers().size());
 		assertEquals(0, layer1.getRelations().size());
+	}
+
+	/**
+	 * Chechs that removing relations from {@link Graph#getRelations()} has no effect.
+	 */
+	@Test
+	public void testRemoveRelationFromList() {
+		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
+		
+		for (Relation<Node, Node> relation : pair.getRight()) {
+			if (getFixture().getRelation(relation.getId()) != null) {
+				assertEquals("this relation '" + relation.getId() + "' should be there", relation, getFixture().getRelation(relation.getId()));
+				try{
+					getFixture().getRelations().remove(relation);
+				}catch (Exception e){}
+				assertNotNull("this relation '" + relation.getId() + "' should still be there", getFixture().getRelation(relation.getId()));
+			}
+		}
+	}
+
+	/**
+	 * Tests the removing of all relations in graph.
+	 */
+	@Test
+	public void testRemoveAllRelation() throws Exception {
+		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
+		// check if relations have been added
+		for (Relation<Node, Node> relation : pair.getRight()) {
+			assertEquals("this relation '" + relation.getId() + "' should be there", relation, getFixture().getRelation(relation.getId()));
+		}
+		// remove old relation
+		getFixture().removeRelations();
+		// add new relation
+		for (Relation<Node, Node> relation : pair.getRight()) {
+			// add relation
+			getFixture().addRelation(relation);
+			// check if relation exists
+			assertEquals("created relation has to be there", getFixture().getRelation(relation.getId()), relation);
+		}
 	}
 
 	/**
@@ -647,12 +703,12 @@ public class GraphTest {
 	 * Tests whether a layer was added correctly.
 	 */
 	@Test
-	public void testAddLayer__Layer() {
+	public void testAddLayer() {
 		Layer<Node, Relation<Node, Node>> layer = null;
 		// adding null layer
 		getFixture().addLayer(layer);
 		assertEquals("shall not add a null layer", 0, getFixture().getLayers().size());
-		
+
 		// adding layer
 		layer = GraphFactory.createLayer();
 		getFixture().addLayer(layer);
@@ -668,7 +724,7 @@ public class GraphTest {
 	 * Tests whether the method {@link Graph#getLayer(String)}
 	 */
 	@Test
-	public void testGetLayer__String() {
+	public void testGetLayer() {
 		Layer<Node, Relation<Node, Node>> layer = null;
 		String id = "id";
 
