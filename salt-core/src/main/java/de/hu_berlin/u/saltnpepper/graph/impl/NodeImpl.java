@@ -1,12 +1,11 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
-import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
 
 @SuppressWarnings("serial")
-public class NodeImpl extends IdentifiableElementImpl implements Node, NamedElement{
+public class NodeImpl extends IdentifiableElementImpl implements Node{
 
 	/**
 	 * Initializes an object of type {@link Node}.
@@ -39,16 +38,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node, NamedElem
 	 */
 	public Node getDelegate(){
 		return(delegate);
-	}
-	
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/** container graph**/

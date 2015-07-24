@@ -3,14 +3,13 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
-import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 
 @SuppressWarnings("serial")
-public class LayerImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Layer<N, R>, NamedElement {
+public class LayerImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Layer<N, R> {
 
 	private Set<N> nodes = null;
 	private Set<R> relations = null;
@@ -81,9 +80,8 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Layer#addNode(Node)} **/
 	@Override
 	public void addNode(N node) {
-		if ((getGraph()!= null) &&
-			(!getGraph().containsNode(node.getId()))){
-				getGraph().addNode(node);
+		if ((getGraph() != null) && (!getGraph().containsNode(node.getId()))) {
+			getGraph().addNode(node);
 		}
 		nodes.add(node);
 	}
@@ -105,10 +103,9 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Layer#addRelation(Relation)} **/
 	@Override
 	public void addRelation(R relation) {
-		if ((getGraph()!= null) &&
-				(!getGraph().containsRelation(relation.getId()))){
-					getGraph().addRelation(relation);
-			}
+		if ((getGraph() != null) && (!getGraph().containsRelation(relation.getId()))) {
+			getGraph().addRelation(relation);
+		}
 		relations.add(relation);
 	}
 
@@ -118,15 +115,5 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if (relation != null) {
 			relations.remove(relation);
 		}
-	}
-
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-
 	}
 }

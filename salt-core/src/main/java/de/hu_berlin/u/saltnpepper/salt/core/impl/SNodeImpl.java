@@ -16,4 +16,16 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
-public interface SGraph<N extends SNode, R extends SRelation<N, N>> extends Graph<N, R> {
+public interface SGraph<N extends SNode, R extends SRelation<N, N>> extends Graph<N, R>, NamedElement {
 
 	/**
 	 * The {@link GRAPH_TRAVERSE_TYPE} determines the the traversal order. In

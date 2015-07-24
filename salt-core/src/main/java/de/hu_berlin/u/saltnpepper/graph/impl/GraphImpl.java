@@ -14,14 +14,13 @@ import com.google.common.collect.ListMultimap;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
-import de.hu_berlin.u.saltnpepper.graph.NamedElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 @SuppressWarnings("serial")
-public class GraphImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Graph<N, R>, NamedElement {
+public class GraphImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Graph<N, R> {
 	public GraphImpl() {
 		init();
 	}
@@ -70,16 +69,6 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		idx_layer_id = new ConcurrentHashMap<>();
 		idx_out_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
 		idx_in_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
-	}
-
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-
 	}
 
 	// =========================================================== > Indexes
