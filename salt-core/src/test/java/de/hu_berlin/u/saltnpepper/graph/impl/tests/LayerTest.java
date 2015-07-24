@@ -18,7 +18,7 @@ import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
-public class LayerImplTest {
+public class LayerTest {
 
 	private Layer<Node, Relation<Node, Node>> fixture = null;
 

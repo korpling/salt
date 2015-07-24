@@ -92,7 +92,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 *            relation to be removed
 	 */
 	public void removeRelation(R relation);
-	
+
 	/**
 	 * Removes all relations from this graph and cleans all indexes.
 	 */
@@ -165,6 +165,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 *            id of the layer to be searched for
 	 */
 	public Layer<N, R> getLayer(String layerId);
+
 	/**
 	 * Returns a set of layers contained by this graph.
 	 * 
@@ -175,7 +176,9 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	/**
 	 * Adds the passed layer to this graph. If layer is null nothing is
 	 * inserted. The passed layer and this graph will be double chained, which
-	 * means the method {@link Layer#getGraph()} will return this graph.
+	 * means the method {@link Layer#getGraph()} will return this graph. If the
+	 * passed layer contains nodes or relations, which are not already contained
+	 * by the graph, they will be added.
 	 * 
 	 * @param layer
 	 *            layer to be inserted

@@ -32,15 +32,21 @@ public interface Layer<N extends Node, R extends Relation<N, N>> extends Identif
 	public void setGraph(Graph<N, R> graph);
 
 	/**
-	 * Adds the passed node to this layer. The insertion order is preserved.
+	 * Adds the passed node to this layer. The insertion order is preserved. If
+	 * this layer is contained by a graph, the passed node is also added to the
+	 * graph in case it was not already contained in the graph.
 	 * 
 	 * @param node
 	 *            node to be inserted into this layer
 	 */
 	public void addNode(N node);
+
 	/**
-	 * Removes the passed node from this layer. If the passed relation is null, nothing is done.
-	 * @param node to be removed
+	 * Removes the passed node from this layer. If the passed relation is null,
+	 * nothing is done.
+	 * 
+	 * @param node
+	 *            to be removed
 	 */
 	public void removeNode(N node);
 
@@ -54,19 +60,26 @@ public interface Layer<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/**
 	 * Adds the passed relation to this layer. The insertion order is preserved.
+	 * If this layer is contained by a graph, the passed relation is also added
+	 * to the graph in case it was not already contained in the graph.
 	 * 
 	 * @param relation
 	 *            relation to be inserted into this layer
 	 */
 	public void addRelation(R relation);
+
 	/**
-	 * Removes the passed relation from this layer. If the passed relation is null, nothing is done.
-	 * @param relation to be removed
+	 * Removes the passed relation from this layer. If the passed relation is
+	 * null, nothing is done.
+	 * 
+	 * @param relation
+	 *            to be removed
 	 */
 	public void removeRelation(R relation);
+
 	/**
-	 * Returns a set of all contained relations, in the order how the relations were
-	 * inserted.
+	 * Returns a set of all contained relations, in the order how the relations
+	 * were inserted.
 	 * 
 	 * @return all contained relations
 	 */
