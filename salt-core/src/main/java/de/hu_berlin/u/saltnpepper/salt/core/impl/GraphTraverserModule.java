@@ -45,7 +45,8 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltTraverserException;
  * @author Florian Zipser
  * 
  */
-//public class GraphTraverserModule<N extends SNode, R extends SRelation<N, N>> {
+// public class GraphTraverserModule<N extends SNode, R extends SRelation<N, N>>
+// {
 public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R extends SRelation<N, N>> {
 	/**
 	 * Stores all used traverseIds to the corresponding traverse callback
@@ -228,7 +229,7 @@ public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R ext
 		public G getGraph() {
 			return graph;
 		}
-		
+
 		/**
 		 * In Case of an exception occurs during traversal, it will be stored
 		 * here, so that the calling method can check if the traversal finished
@@ -361,9 +362,10 @@ public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R ext
 								visitedNodes = new HashSet<>();
 							}
 							Stack<NodeEntry<N, R>> parentStack = new Stack<>();
-							NodeEntry<N,R> currentEntry = new NodeEntry<>(startNode, 0);
+							NodeEntry<N, R> currentEntry = new NodeEntry<>(startNode, 0);
 							while ((!parentStack.isEmpty()) || (currentEntry != null)) {
-								if (currentEntry != null) {// way down
+								if (currentEntry != null) {
+									// way down
 									if (isCycleSafe) {
 										// check if cycle exists
 										if (visitedNodes.contains(currentEntry.node)) {
@@ -392,17 +394,20 @@ public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R ext
 										visitedNodes.add(currentEntry.node);
 									}
 									N nextChild = nextChild(currentEntry);
-									if (peekEntry == null)
+									if (peekEntry == null) {
 										traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.node, null, null, 0);
-									else
+									} else {
 										traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.node, peekEntry.edge, (peekEntry.edge != null) ? peekEntry.edge.getSource() : null, peekEntry.order);
+									}
 									if (nextChild != null) {
-										if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.edge, nextChild, currentEntry.order))
+										if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.edge, nextChild, currentEntry.order)) {
 											currentEntry = new NodeEntry<>(nextChild, 0);
-										else
+										} else {
 											currentEntry = null;
-									} else
+										}
+									} else {
 										currentEntry = null;
+									}
 								} else {
 									NodeEntry<N, R> peekEntry = parentStack.peek();
 									if (peekEntry != null) {
@@ -410,10 +415,11 @@ public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R ext
 										if (nextChild != null) {
 											// way down, another branch was
 											// found
-											if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, peekEntry.edge, nextChild, peekEntry.order))
+											if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, peekEntry.edge, nextChild, peekEntry.order)) {
 												currentEntry = new NodeEntry<>(nextChild, 0);
-											else
+											} else {
 												currentEntry = null;
+											}
 										} else {// way up
 											parentStack.pop();
 											if (isCycleSafe) {
@@ -425,12 +431,14 @@ public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R ext
 											// collect stuff for notification
 											N peekNode = peekEntry.node;
 											peekEntry = null;
-											if (!parentStack.isEmpty())
+											if (!parentStack.isEmpty()) {
 												peekEntry = parentStack.peek();
-											if (peekEntry == null)
+											}
+											if (peekEntry == null) {
 												traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, peekNode, null, null, 0);
-											else
+											} else {
 												traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, peekNode, peekEntry.edge, (peekEntry.edge != null) ? peekEntry.edge.getSource() : null, peekEntry.order);
+											}
 										}
 									}
 								}
@@ -469,6 +477,7 @@ public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R ext
 					}
 					breadthFirst();
 				}
+
 			} catch (Exception e) {
 				SaltTraverserException ex = null;
 				if (e instanceof SaltTraverserException) {
@@ -479,10 +488,10 @@ public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R ext
 					setException(ex);
 				}
 			} finally {
+				traverselock.unlock();
 				// signal all waiting threads in case of no exception until here
 				// occurs
 				traverseFinished.signalAll();
-				traverselock.unlock();
 			}
 		}
 
@@ -584,7 +593,7 @@ public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R ext
 		 *            the parent node
 		 */
 		private void topDownDepthFirstRec(R edge, long order) {
-			if ((currentNodePath == null) || (currentNodePath.size() == 0)){
+			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
 				throw new SaltTraverserException("Cannot traverse node starting at empty start node.");
 			}
 			// current node is last element in currentPath

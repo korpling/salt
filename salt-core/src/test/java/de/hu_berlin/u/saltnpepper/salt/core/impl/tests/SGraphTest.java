@@ -1,6 +1,7 @@
 package de.hu_berlin.u.saltnpepper.salt.core.impl.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class SGraphTest {
 	 * @param nodeNames
 	 * @param relationNames
 	 */
-	public static void createGraph(SGraph<SNode, SRelation<SNode,SNode>> graph, String[] nodeNames, String[][] relationNames) {
+	public static void createGraph(SGraph<SNode, SRelation<SNode, SNode>> graph, String[] nodeNames, String[][] relationNames) {
 		List<SNode> nodes = new ArrayList<>();
 		for (String nodeName : nodeNames) {
 			SNode node = SaltFactory.createSNode();
@@ -85,8 +86,8 @@ public class SGraphTest {
 	 *    node3    node6   node5
 	 * </pre>
 	 **/
-	public static SGraph<SNode, SRelation<SNode,SNode>> createGraph_Tree() {
-		SGraph<SNode, SRelation<SNode,SNode>> graph = SaltFactory.createSGraph();
+	public static SGraph<SNode, SRelation<SNode, SNode>> createGraph_Tree() {
+		SGraph<SNode, SRelation<SNode, SNode>> graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_Tree");
 		String[] nodeNames = { "node1", "node2", "node3", "node4", "node5", "node6", "node7" };
 		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node1", "node4", "relation3" }, { "node4", "node5", "relation4" }, { "node2", "node6", "relation5" }, { "node1", "node7", "relation6" } };
@@ -108,8 +109,8 @@ public class SGraphTest {
 	 *    node3    node6
 	 * </pre>
 	 **/
-	public static SGraph<SNode, SRelation<SNode,SNode>> createGraph_DAG() {
-		SGraph<SNode, SRelation<SNode,SNode>> graph = SaltFactory.createSGraph();
+	public static SGraph<SNode, SRelation<SNode, SNode>> createGraph_DAG() {
+		SGraph<SNode, SRelation<SNode, SNode>> graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_DAG");
 
 		String[] nodeNames = { "node1", "node2", "node3", "node4", "node6", };
@@ -136,8 +137,8 @@ public class SGraphTest {
 	 * node 7 -> node2
 	 * </pre>
 	 **/
-	public static SGraph<SNode, SRelation<SNode,SNode>> createGraph_Cycle() {
-		SGraph<SNode, SRelation<SNode,SNode>> graph = SaltFactory.createSGraph();
+	public static SGraph<SNode, SRelation<SNode, SNode>> createGraph_Cycle() {
+		SGraph<SNode, SRelation<SNode, SNode>> graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_Cycle");
 		String[] nodeNames = { "node1", "node2", "node3", "node4", "node6", "node7" };
 		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node2", "node6", "relation3" }, { "node4", "node2", "relation4" }, { "node6", "node7", "relation5" }, { "node7", "node2", "relation6" } };
@@ -163,8 +164,8 @@ public class SGraphTest {
 	 * node 7 -> node2
 	 * </pre>
 	 **/
-	public static SGraph<SNode, SRelation<SNode,SNode>> createGraph_SimpleCycle() {
-		SGraph<SNode, SRelation<SNode,SNode>> graph = SaltFactory.createSGraph();
+	public static SGraph<SNode, SRelation<SNode, SNode>> createGraph_SimpleCycle() {
+		SGraph<SNode, SRelation<SNode, SNode>> graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_SimpleCycle");
 		String[] nodeNames = { "node1", "node2", "node3", "node6", "node7" };
 		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node2", "node6", "relation3" }, { "node6", "node7", "relation5" }, { "node7", "node2", "relation6" } };
@@ -184,8 +185,8 @@ public class SGraphTest {
 	 * 
 	 * </pre>
 	 **/
-	public static SGraph<SNode, SRelation<SNode,SNode>> createGraph_PureCycle() {
-		SGraph<SNode, SRelation<SNode,SNode>> graph =  SaltFactory.createSGraph();
+	public static SGraph<SNode, SRelation<SNode, SNode>> createGraph_PureCycle() {
+		SGraph<SNode, SRelation<SNode, SNode>> graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_PureCycle");
 		String[] nodeNames = { "node1", "node2", "node3" };
 		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node3", "node1", "relation3" } };
@@ -203,7 +204,7 @@ public class SGraphTest {
 	public void testGetRoots() {
 		List<SNode> expectedRoots = null;
 		List<SNode> roots = null;
-		SGraph<SNode, SRelation<SNode,SNode>> graph = null;
+		SGraph<SNode, SRelation<SNode, SNode>> graph = null;
 
 		// test 1
 		graph = createGraph_Tree();
@@ -248,7 +249,7 @@ public class SGraphTest {
 	public void testGetLeafs() {
 		List<SNode> expectedLeafs = null;
 		List<SNode> leafs = null;
-		SGraph<SNode, SRelation<SNode,SNode>> graph = null;
+		SGraph<SNode, SRelation<SNode, SNode>> graph = null;
 
 		// test 1
 		graph = createGraph_Tree();
@@ -286,5 +287,10 @@ public class SGraphTest {
 		for (SNode expectedLeaf : expectedLeafs) {
 			assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 		}
+	}
+
+	@Test
+	public void testTraverse() {
+		// TODO create tests for all kinds of traverse types
 	}
 }
