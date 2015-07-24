@@ -123,6 +123,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Graph#getNode(String)} **/
 	@Override
 	public N getNode(String nodeId) {
+		if (nodeId == null) {
+			return (null);
+		}
 		return (idx_node_id.get(nodeId));
 	}
 
@@ -236,6 +239,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Graph#containsNode(String)} **/
 	@Override
 	public boolean containsNode(String nodeId) {
+		if (nodeId == null) {
+			return (false);
+		}
 		return (idx_node_id.containsKey(nodeId));
 	}
 
@@ -255,6 +261,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Graph#getRelation(String)} **/
 	@Override
 	public R getRelation(String relationId) {
+		if (relationId == null) {
+			return (null);
+		}
 		return (idx_relation_id.get(relationId));
 	}
 
@@ -464,6 +473,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Graph#containsRelation(String)} **/
 	@Override
 	public boolean containsRelation(String relationId) {
+		if (relationId == null) {
+			return (false);
+		}
 		return (idx_relation_id.containsKey(relationId));
 	}
 
@@ -481,6 +493,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc} **/
 	@Override
 	public Layer<N, R> getLayer(String layerId) {
+		if (layerId == null) {
+			return (null);
+		}
 		return (idx_layer_id.get(layerId));
 	}
 
@@ -497,6 +512,19 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 			basicAddLayer(layer);
 			if (layer instanceof LayerImpl) {
 				((LayerImpl<N, R>) layer).basicSetGraph(this);
+			}
+			// check whether graph contains nodes in layer, if not, add them
+			for (N node : layer.getNodes()) {
+				if (!containsNode(node.getId())) {
+					addNode(node);
+				}
+			}
+
+			// check whether graph contains relations in layer, if not, add them
+			for (R rel : layer.getRelations()) {
+				if (!containsRelation(rel.getId())) {
+					addRelation(rel);
+				}
 			}
 		}
 	}
@@ -577,6 +605,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);
+				idx_layer_id.remove(layer.getId());
 			}
 		}
 	}

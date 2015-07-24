@@ -20,33 +20,35 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		relations = new HashSet<R>();
 	}
 
-	/** container graph**/
-	protected Graph<N, R> graph= null;
+	/** container graph **/
+	protected Graph<N, R> graph = null;
+
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
 	public Graph<N, R> getGraph() {
-		return(graph);
+		return (graph);
 	}
+
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph<N, R> graph) {
-		if (graph!= null){
-			if (graph instanceof GraphImpl){
-				((GraphImpl<N, R>)graph).basicAddLayer(this);
+		if (graph != null) {
+			if (graph instanceof GraphImpl) {
+				((GraphImpl<N, R>) graph).basicAddLayer(this);
 			}
-		}else{
-			if (getGraph() instanceof GraphImpl){
-				((GraphImpl<N, R>)getGraph()).basicRemoveLayer(this);
+		} else {
+			if (getGraph() instanceof GraphImpl) {
+				((GraphImpl<N, R>) getGraph()).basicRemoveLayer(this);
 			}
 		}
 		basicSetGraph(graph);
 	}
-	
+
 	/**
 	 * This is an internally used method. To implement a double chaining of
-	 * {@link Graph} and {@link Layer} object when an layer is inserted into this
-	 * graph and to avoid an endless invocation the insertion of an layer is
-	 * splited into the two methods {@link #setGraph(Graph)} and
+	 * {@link Graph} and {@link Layer} object when an layer is inserted into
+	 * this graph and to avoid an endless invocation the insertion of an layer
+	 * is splited into the two methods {@link #setGraph(Graph)} and
 	 * {@link #basicSetGraph(Graph)}. The invocation of methods is implement as
 	 * follows:
 	 * 
@@ -67,9 +69,9 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 *            graph which contains this layer
 	 */
 	protected void basicSetGraph(Graph<N, R> graph) {
-		this.graph= graph;
+		this.graph = graph;
 	}
-	
+
 	/** {@inheritDoc Layer#getNodes()} **/
 	@Override
 	public Set<N> getNodes() {
@@ -79,17 +81,21 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Layer#addNode(Node)} **/
 	@Override
 	public void addNode(N node) {
+		if ((getGraph()!= null) &&
+			(!getGraph().containsNode(node.getId()))){
+				getGraph().addNode(node);
+		}
 		nodes.add(node);
 	}
 
 	/** {@inheritDoc Layer#removeNode(Node)} **/
 	@Override
-	public void removeNode(N node){
-		if (nodes!= null){
+	public void removeNode(N node) {
+		if (nodes != null) {
 			nodes.remove(node);
 		}
 	}
-	
+
 	/** {@inheritDoc Layer#getRelations()} **/
 	@Override
 	public Set<R> getRelations() {
@@ -99,12 +105,17 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Layer#addRelation(Relation)} **/
 	@Override
 	public void addRelation(R relation) {
+		if ((getGraph()!= null) &&
+				(!getGraph().containsRelation(relation.getId()))){
+					getGraph().addRelation(relation);
+			}
 		relations.add(relation);
 	}
+
 	/** {@inheritDoc Layer#removeRelation(Relation)} **/
 	@Override
-	public void removeRelation(R relation){
-		if (relation!= null){
+	public void removeRelation(R relation) {
+		if (relation != null) {
 			relations.remove(relation);
 		}
 	}

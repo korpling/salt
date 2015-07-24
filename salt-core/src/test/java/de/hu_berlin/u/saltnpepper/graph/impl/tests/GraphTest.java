@@ -237,6 +237,8 @@ public class GraphTest {
 	 */
 	@Test
 	public void testGetNode() {
+		assertNull(getFixture().getNode(null));
+
 		List<Node> nodes = new ArrayList<>();
 		for (int i = 0; i < 50; i++) {
 			Node node = GraphFactory.createNode();
@@ -268,20 +270,21 @@ public class GraphTest {
 		}
 		assertEquals(0, getFixture().getNodes().size());
 	}
-	
+
 	/**
 	 * Checks that removing nodes from {@link Graph#getNodes()} has no effect.
 	 */
 	@Test
 	public void testRemoveNodeFromList() {
 		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
-		
+
 		for (Node node : pair.getLeft()) {
 			if (getFixture().getNode(node.getId()) != null) {
 				assertEquals("this node '" + node.getId() + "' should be there", node, getFixture().getNode(node.getId()));
-				try{
+				try {
 					getFixture().getNodes().remove(node);
-				}catch (Exception e){}
+				} catch (Exception e) {
+				}
 				assertNotNull("this node '" + node.getId() + "' should still be there", getFixture().getNode(node.getId()));
 			}
 		}
@@ -452,6 +455,8 @@ public class GraphTest {
 	 */
 	@Test
 	public void testGetRelation() {
+		assertNull(getFixture().getRelation(null));
+
 		Node node1 = GraphFactory.createNode();
 		node1.setId("node1");
 		Node node2 = GraphFactory.createNode();
@@ -597,18 +602,20 @@ public class GraphTest {
 	}
 
 	/**
-	 * Chechs that removing relations from {@link Graph#getRelations()} has no effect.
+	 * Chechs that removing relations from {@link Graph#getRelations()} has no
+	 * effect.
 	 */
 	@Test
 	public void testRemoveRelationFromList() {
 		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
-		
+
 		for (Relation<Node, Node> relation : pair.getRight()) {
 			if (getFixture().getRelation(relation.getId()) != null) {
 				assertEquals("this relation '" + relation.getId() + "' should be there", relation, getFixture().getRelation(relation.getId()));
-				try{
+				try {
 					getFixture().getRelations().remove(relation);
-				}catch (Exception e){}
+				} catch (UnsupportedOperationException e) {
+				}
 				assertNotNull("this relation '" + relation.getId() + "' should still be there", getFixture().getRelation(relation.getId()));
 			}
 		}
@@ -725,13 +732,99 @@ public class GraphTest {
 	 */
 	@Test
 	public void testGetLayer() {
+		assertNull(getFixture().getLayer(null));
+
 		Layer<Node, Relation<Node, Node>> layer = null;
-		String id = "id";
+		// String id = "id";
 
 		layer = GraphFactory.createLayer();
-		layer.setId(id);
+		// layer.setId(id);
 		getFixture().addLayer(layer);
-		assertEquals(layer, getFixture().getLayer(id));
+		assertEquals(layer, getFixture().getLayer(layer.getId()));
+	}
+
+	/**
+	 * Tests the removing of a layer
+	 */
+	@Test
+	public void testRemoveLayer() {
+		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
+		getFixture().addLayer(layer);
+		assertEquals(layer, getFixture().getLayer(layer.getId()));
+		getFixture().removeLayer(layer);
+		assertNull(getFixture().getLayer(layer.getId()));
+		assertEquals(0, getFixture().getLayers().size());
+	}
+
+	/**
+	 * Tests that layers cannot be removed from list {@link Graph#getLayers()}
+	 */
+	@Test
+	public void testRemoveLayerFromList() {
+		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
+		getFixture().addLayer(layer);
+		assertEquals(layer, getFixture().getLayer(layer.getId()));
+		try {
+			getFixture().getLayers().remove(layer);
+		} catch (UnsupportedOperationException e) {
+		}
+		assertEquals(layer, getFixture().getLayer(layer.getId()));
+		assertEquals(1, getFixture().getLayers().size());
+	}
+
+	/**
+	 * Tests that when a layer, which contains nodes and relations is added to
+	 * the graph, the nodes and relations are also added to the graph.
+	 */
+	@Test
+	public void testAddingLayerContainingNodeAndRelation() {
+		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
+		Node node = GraphFactory.createNode();
+		Node node2 = GraphFactory.createNode();
+		Relation<Node, Node> relation = GraphFactory.createRelation();
+		relation.setSource(node);
+		relation.setTarget(node2);
+
+		layer.addNode(node);
+		layer.addNode(node2);
+		layer.addRelation(relation);
+
+		assertEquals(0, getFixture().getNodes().size());
+		assertEquals(0, getFixture().getRelations().size());
+
+		getFixture().addLayer(layer);
+
+		assertEquals(2, getFixture().getNodes().size());
+		assertEquals(node, getFixture().getNode(node.getId()));
+		assertEquals(node2, getFixture().getNode(node2.getId()));
+		assertEquals(1, getFixture().getRelations().size());
+		assertEquals(relation, getFixture().getRelation(relation.getId()));
+	}
+
+	/**
+	 * Tests whether a node and relation added to a layer is also added to the
+	 * graph.
+	 */
+	@Test
+	public void testAddNodeAndRelationToLayer() {
+		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
+		getFixture().addLayer(layer);
+
+		Node node = GraphFactory.createNode();
+		Node node2 = GraphFactory.createNode();
+		Relation<Node, Node> relation = GraphFactory.createRelation();
+		relation.setSource(node);
+		relation.setTarget(node2);
+
+		assertEquals(0, getFixture().getNodes().size());
+		assertEquals(0, getFixture().getRelations().size());
+
+		layer.addNode(node);
+		assertEquals(node, getFixture().getNode(node.getId()));
+		layer.addNode(node2);
+		assertEquals(node2, getFixture().getNode(node2.getId()));
+		layer.addRelation(relation);
+		assertEquals(relation, getFixture().getRelation(relation.getId()));
 	}
 	// =======================================================< test layers
 }
