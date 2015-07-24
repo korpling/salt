@@ -186,7 +186,7 @@ public class GraphBenchmark {
 		List<Relation<Node, Node>> rels = createRelations(graph, nodes);
 
 		// create layers
-		List<Layer<Node, Relation<Node, Node>>> layers = createLayers(graph, nodes, rels);
+		createLayers(graph, nodes, rels);
 	}
 
 	/**
@@ -259,34 +259,15 @@ public class GraphBenchmark {
 	/**
 	 * 
 	 * ============================== HOW TO RUN THIS TEST:
-	 * ====================================
-	 * 
-	 * 
-	 * 
 	 * You are expected to see the different run modes for the same benchmark.
-	 * 
 	 * Note the units are different, scores are consistent with each other.
-	 * 
-	 * 
-	 * 
 	 * You can run this test:
-	 * 
-	 * 
-	 * 
 	 * a) Via the command line:
-	 * 
 	 * $ mvn clean install
-	 * 
-	 * $ java -jar target/benchmarks.jar JMHSample_02 -wi 5 -i 5 -f 1
-	 * 
+	 * $ java -jar target/benchmarks.jar GraphBenchmark_02 -wi 5 -i 5 -f 1 -rf csv -rff GraphBenchmark.jmh.csv
 	 * (we requested 5 warmup/measurement iterations, single fork)
-	 * 
-	 * 
-	 * 
 	 * b) Via the Java API:
-	 * 
 	 * (see the JMH homepage for possible caveats when running from IDE:
-	 * 
 	 * http://openjdk.java.net/projects/code-tools/jmh/)
 	 */
 
