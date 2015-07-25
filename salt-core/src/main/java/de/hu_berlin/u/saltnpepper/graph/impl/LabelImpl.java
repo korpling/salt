@@ -2,8 +2,6 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.lang.Cloneable;
-
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.util.Copyable;

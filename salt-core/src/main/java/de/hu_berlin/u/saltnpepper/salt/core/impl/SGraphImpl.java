@@ -70,4 +70,16 @@ public class SGraphImpl<N extends SNode, R extends SRelation<N, N>> extends Grap
 		traverserModule.setGraph(this);
 		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);
 	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
 }
