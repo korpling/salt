@@ -1,6 +1,6 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
-import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
 
 /**
  * This class represents an identifier, which is a special kind of a label. The identifier is used for

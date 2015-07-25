@@ -1,6 +1,6 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
-import de.hu_berlin.u.saltnpepper.graph.util.Copyable;
+import de.hu_berlin.u.saltnpepper.salt.util.Copyable;
 
 /**
  * A label is an attribute-value-pair and can belong to either a {@link Node}, an {@link Relation}, a {@link Graph}, 

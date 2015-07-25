@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.graph.util;
+package de.hu_berlin.u.saltnpepper.salt.util;
 
 import java.util.Collection;
 import java.util.List;
@@ -35,8 +35,8 @@ import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.hu_berlin.u.saltnpepper.graph.util.Index#getIndexes <em>Indexes</em>}</li>
- *   <li>{@link de.hu_berlin.u.saltnpepper.graph.util.Index#getNumOfIndexes <em>Num Of Indexes</em>}</li>
+ *   <li>{@link de.hu_berlin.u.saltnpepper.salt.util.Index#getIndexes <em>Indexes</em>}</li>
+ *   <li>{@link de.hu_berlin.u.saltnpepper.salt.util.Index#getNumOfIndexes <em>Num Of Indexes</em>}</li>
  * </ul>
  * </p>
  */

@@ -1,4 +1,4 @@
-package de.hu_berlin.u.saltnpepper.graph.util;
+package de.hu_berlin.u.saltnpepper.salt.util;
 
 /**
  * An interface to ensure that an object is copyable. This is an alternative to

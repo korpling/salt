@@ -5,9 +5,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.lang.Cloneable;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
-import de.hu_berlin.u.saltnpepper.graph.util.Copyable;
-import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
+import de.hu_berlin.u.saltnpepper.salt.util.Copyable;
+import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
 
 @SuppressWarnings("serial")
 public class LabelImpl<V extends Object> extends LabelableElementImpl implements Label<V>, Copyable<Label<V>>{

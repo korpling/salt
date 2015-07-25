@@ -2,7 +2,7 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
-import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
 
 public class IdentifierImpl extends LabelImpl<String> implements Identifier{
 

@@ -10,8 +10,8 @@ import java.util.Set;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
-import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
+import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
 
 /**
  * This class is an abstract container containing a set of {@link Label}
@@ -73,7 +73,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritDoc LabelableElement#addLabel(Label)} **/
 	@Override
 	public void addLabel(Label<?> label) {
-		if (label== null){
+		if (label == null) {
 			throw new SaltInsertionException(this, label, "The label was null. ");
 		}
 		if (label != null) {

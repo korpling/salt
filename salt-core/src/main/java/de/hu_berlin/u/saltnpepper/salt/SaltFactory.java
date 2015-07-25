@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.salt;
 
+import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
@@ -37,6 +38,15 @@ public class SaltFactory{
 	 * @return new {@link SRelation} object
 	 */
 	public static SRelation<SNode, SNode> createSRelation() {
+		return (new SRelationImpl<SNode, SNode>());
+	}
+	
+	/**
+	 * Creates a new {@link SAnnotation} object of type {@link SAnnot}.
+	 * 
+	 * @return new {@link SRelation} object
+	 */
+	public static SRelation<SNode, SNode> createSAnnotation() {
 		return (new SRelationImpl<SNode, SNode>());
 	}
 }

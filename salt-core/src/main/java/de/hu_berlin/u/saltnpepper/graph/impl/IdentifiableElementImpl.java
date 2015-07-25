@@ -3,7 +3,7 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
-import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
 
 @SuppressWarnings("serial")
 public abstract class IdentifiableElementImpl extends LabelableElementImpl implements IdentifiableElement {

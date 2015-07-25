@@ -26,7 +26,7 @@ import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
-import de.hu_berlin.u.saltnpepper.graph.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
 
 public class LabelTest {
 

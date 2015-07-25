@@ -1,4 +1,4 @@
-package de.hu_berlin.u.saltnpepper.graph.util;
+package de.hu_berlin.u.saltnpepper.salt.util;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
