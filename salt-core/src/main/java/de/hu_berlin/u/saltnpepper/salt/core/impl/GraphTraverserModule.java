@@ -26,9 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.slf4j.LoggerFactory;
 
@@ -250,12 +247,6 @@ public class GraphTraverserModule{
 			return exception;
 		}
 
-		Lock traverselock = new ReentrantLock();
-		/**
-		 * a condition which is signaled, when a traversion has been finished.
-		 */
-		private Condition traverseFinished = traverselock.newCondition();
-
 		/**
 		 * Currently only used for
 		 * {@link GRAPH_TRAVERSE_TYPE#TOP_DOWN_DEPTH_FIRST}. Single entries for
@@ -347,7 +338,6 @@ public class GraphTraverserModule{
 		 * Starts traversal, with set properties.
 		 */
 		public void run() {
-			traverselock.lock();
 			try {
 				if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST.equals(traverseType)) {
 					// TOP_DOWN_DEPTH_FIRST traversal
@@ -485,11 +475,6 @@ public class GraphTraverserModule{
 					ex = new SaltTraverserException("An exception occured while traversing the graph '" + graph.getId() + "' with path '" + currentNodePath + "'.", e);
 					setException(ex);
 				}
-			} finally {
-				traverselock.unlock();
-				// signal all waiting threads in case of no exception until here
-				// occurs
-				traverseFinished.signalAll();
 			}
 		}
 
