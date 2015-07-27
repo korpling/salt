@@ -20,7 +20,6 @@ package de.hu_berlin.u.saltnpepper.salt.core;
 import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
-import de.hu_berlin.u.saltnpepper.salt.SDATATYPE;
 
 /**
  * This interface defines a container to hold annotations ({@link SAnnotation}),
@@ -31,15 +30,15 @@ import de.hu_berlin.u.saltnpepper.salt.SDATATYPE;
  *
  */
 public interface SAnnotatableElement extends LabelableElement {
-	public Set<SAnnotation> getSAnnotations();
+	public <A extends SAnnotation> Set<A> getAnnotations();
 
-	public void addSAnnotation(SAnnotation sAnnotation);
+	public void addSAnnotation(SAnnotation annotation);
 
-	public SAnnotation getSAnnotation(String qName);
+	public SAnnotation getAnnotation(String qName);
 
-	public SAnnotation createSAnnotation(String sNS, String sName, Object sValue, SDATATYPE sValueType);
+	public SAnnotation createAnnotation(String namespace, String name, Object value);
 
-	public SAnnotation createSAnnotation(String sNS, String sName, String sValueString);
+	public SAnnotation createAnnotation(String namespace, String name, String valueString);
 
 	/**
 	 * This method parses the given annotation String and adds an
@@ -53,6 +52,6 @@ public interface SAnnotatableElement extends LabelableElement {
 	 * @param annotationString
 	 *            String containing the annotations
 	 */
-	public Set<SAnnotation> createSAnnotations(String annotationString);
+	public <A extends SAnnotation> Set<A> createAnnotations(String annotationString);
 
 } // SAnnotatableElement

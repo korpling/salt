@@ -4,6 +4,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
+import de.hu_berlin.u.saltnpepper.salt.core.impl.SAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
@@ -42,11 +43,11 @@ public class SaltFactory{
 	}
 	
 	/**
-	 * Creates a new {@link SAnnotation} object of type {@link SAnnot}.
+	 * Creates a new {@link SAnnotation} object of type {@link SAnnotationImpl}.
 	 * 
-	 * @return new {@link SRelation} object
+	 * @return new {@link SAnnotation} object
 	 */
-	public static SRelation<SNode, SNode> createSAnnotation() {
-		return (new SRelationImpl<SNode, SNode>());
+	public static SAnnotation createSAnnotation() {
+		return (new SAnnotationImpl());
 	}
 }

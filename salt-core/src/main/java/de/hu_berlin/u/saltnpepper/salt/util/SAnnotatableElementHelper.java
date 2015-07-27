@@ -18,12 +18,12 @@
 package de.hu_berlin.u.saltnpepper.salt.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EcoreEList;
-
+import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotatableElement;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
@@ -33,86 +33,110 @@ import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
 /**
  * This class is a helper class for internal use. It is used by {@link SNode},
  * {@link SRelation}, {@link SGraph} etc. . It provides methods to access all
  * {@link SAnnotation}, {@link SMetaAnnotation}, {@link SProcessingAnnotation}
- * and {@link SFeature} objects. 
+ * and {@link SFeature} objects.
  * 
  * @author florian
  *
  */
 public class SAnnotatableElementHelper {
-//	public void addSAnnotation(SAnnotatableElement sProcElem, SAnnotation SAnnotation) {
-//		sProcElem.addLabel(SAnnotation);
-//	}
-//
-//	public SAnnotation getSAnnotation(SAnnotatableElement sProcElem, String qName) {
-//		SAnnotation sProcAnno = null;
-//		Label label = sProcElem.getLabel(qName);
-//		if (label instanceof SAnnotation)
-//			sProcAnno = (SAnnotation) label;
-//		return (sProcAnno);
-//	}
-//
-//	/**
-//	 * {@inheritDoc SaltFactory#createSAnnotations(SAnnotatableElement, String)}
-//	 */
-//	public EList<SAnnotation> createSAnnotations(SAnnotatableElement sProcElem, String annotationString) {
-//		EList<SAnnotation> retVal = new BasicEList<SAnnotation>();
-//		if ((annotationString != null) && (!annotationString.isEmpty())) {
-//			String[] annotations = annotationString.split(";");
-//			for (String annotation : annotations) {
-//				SAnnotation sAnno = SaltCoreFactory.eINSTANCE.createSAnnotation();
-//				retVal.add(sAnno);
-//				String[] nsParts = annotation.split(Label.NS_SEPERATOR);
-//				String rest;
-//				if (nsParts.length > 2)
-//					throw new SaltCoreException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
-//				else if (nsParts.length == 2) {
-//					sAnno.setSNS(nsParts[0]);
-//					rest = nsParts[1];
-//				} else
-//					rest = nsParts[0];
-//
-//				String[] nameParts = rest.split("=");
-//				if (nameParts.length > 2)
-//					throw new SaltCoreException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
-//				else if (nameParts.length == 2) {
-//					sAnno.setSName(nameParts[0]);
-//					sAnno.setSValue(nameParts[1]);
-//				} else
-//					sAnno.setSName(nameParts[0]);
-//				sProcElem.addSAnnotation(sAnno);
-//			}
-//
-//		}
-//		return (retVal);
-//	}
-//
-//	@SuppressWarnings("unchecked")
-//	public EList<SAnnotation> getSAnnotations(SAnnotatableElement sProcElem) {
-//		EList<SAnnotation> sProcAnnos = null;
-//		ArrayList<SAnnotation> sProcAnnosList = new ArrayList<SAnnotation>();
-//		if ((sProcElem.getLabels() != null) && (sProcElem.getLabels().size() > 0)) {
-//
-//		}
-//		for (int i = 0; i < sProcElem.getLabels().size(); i++) {
-//			Label label = sProcElem.getLabels().get(i);
-//			if (label instanceof SAnnotation)
-//				sProcAnnosList.add((SAnnotation) label);
-//		}
-//		sProcAnnos = new EcoreEList.UnmodifiableEList((InternalEObject) sProcElem, SaltCorePackage.eINSTANCE.getSAnnotatableElement_SAnnotations(), sProcAnnosList.size(), sProcAnnosList.toArray());
-//		return (sProcAnnos);
-//	}
-//
-//	public SAnnotation createSAnnotation(SAnnotatableElement sProcElem, String sNS, String sName, Object sValue, SDATATYPE sValueType) {
-//		SAnnotation retVal = SaltFactory.createSAnnotation();
-//		retVal.setSNS(sNS);
-//		retVal.setSName(sName);
-//		retVal.setSValue(sValue);
-//		sProcElem.addSAnnotation(retVal);
-//		return retVal;
-//	}
+	public static void addSAnnotation(SAnnotatableElement container, SAnnotation annotation) {
+		container.addLabel(annotation);
+	}
+
+	public static SAnnotation getSAnnotation(SAnnotatableElement container, String qName) {
+		SAnnotation anno = null;
+		Label label = container.getLabel(qName);
+		if (label instanceof SAnnotation) {
+			anno = (SAnnotation) label;
+		}
+		return (anno);
+	}
+
+	public static Set<SAnnotation> createAnnotations(SAnnotatableElement container, String annotationString) {
+		Set<SAnnotation> retVal = new HashSet<>();
+		if ((annotationString != null) && (!annotationString.isEmpty())) {
+			String[] annotations = annotationString.split(";");
+			for (String annotation : annotations) {
+				SAnnotation sAnno = SaltFactory.createSAnnotation();
+				retVal.add(sAnno);
+				String[] nsParts = annotation.split(Label.NS_SEPERATOR);
+				String rest;
+				if (nsParts.length > 2)
+					throw new SaltException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
+				else if (nsParts.length == 2) {
+					sAnno.setNamespace(nsParts[0]);
+					rest = nsParts[1];
+				} else
+					rest = nsParts[0];
+
+				String[] nameParts = rest.split("=");
+				if (nameParts.length > 2)
+					throw new SaltException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
+				else if (nameParts.length == 2) {
+					sAnno.setName(nameParts[0]);
+					sAnno.setValue(nameParts[1]);
+				} else
+					sAnno.setName(nameParts[0]);
+				container.addSAnnotation(sAnno);
+			}
+
+		}
+		return (retVal);
+	}
+
+	/**
+	 * A default list, which could be returned by methods to not create an empty
+	 * list each time a method was invoked.
+	 */
+	private static final Set<SAnnotation> DEFAULT_EMPTY_LIST = Collections.unmodifiableSet(new HashSet<SAnnotation>());
+
+	/**
+	 * Returns all {@link SAnnotation} object, which are contained by the passed
+	 * container.
+	 * <p>
+	 * Attention: This method is slow, since it iterates over all contained
+	 * labels and creates a new list of all {@link SAnnotation} objects.
+	 * </p>
+	 * 
+	 * @param container
+	 *            the container object which contains the {@link SAnnotation} to
+	 *            be searched for
+	 * @return an unmodifiable list of {@link SAnnotation} object or an empty
+	 *         list
+	 */
+	@SuppressWarnings("unchecked")
+	public static <A extends SAnnotation> Set<A> getAnnotations(SAnnotatableElement container) {
+		Set<SAnnotation> retVal = null;
+		if (container != null) {
+			for (Label label : container.getLabels()) {
+				if (label instanceof SAnnotation) {
+					if (retVal == null) {
+						retVal = new HashSet<SAnnotation>();
+					}
+					retVal.add((SAnnotation) label);
+				}
+			}
+		}
+		if (retVal != null) {
+			retVal = Collections.unmodifiableSet(retVal);
+		} else {
+			return (Set<A>) (DEFAULT_EMPTY_LIST);
+		}
+		return (Set<A>) (retVal);
+	}
+
+	public static SAnnotation createSAnnotation(SAnnotatableElement container, String namespace, String name, Object value) {
+		SAnnotation retVal = SaltFactory.createSAnnotation();
+		retVal.setNamespace(namespace);
+		retVal.setName(name);
+		retVal.setValue(value);
+		container.addSAnnotation(retVal);
+		return retVal;
+	}
 }
