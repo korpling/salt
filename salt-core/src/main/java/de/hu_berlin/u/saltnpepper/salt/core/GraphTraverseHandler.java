@@ -43,7 +43,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
  * @author Florian Zipser
  *
  */
-public interface GraphTraverseHandler<N extends SNode, R extends SRelation<N, N>> {
+public interface GraphTraverseHandler {
 	/**
 	 * This method will be invoked, when a node is reached, after the method
 	 * {@link #checkConstraint(GRAPH_TRAVERSE_TYPE, String, SRelation, SNode, long)}
@@ -64,7 +64,7 @@ public interface GraphTraverseHandler<N extends SNode, R extends SRelation<N, N>
 	 * @param order
 	 *            the number of the relation in the parent node
 	 */
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, N currNode, R relation, N fromNode, long order);
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order);
 
 	/**
 	 * This method will be invoked, when a node is left, after the method
@@ -86,7 +86,7 @@ public interface GraphTraverseHandler<N extends SNode, R extends SRelation<N, N>
 	 * @param order
 	 *            the number of the relation in the parent node
 	 */
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, N currNode, R relation, N fromNode, long order);
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order);
 
 	/**
 	 * This method is called during a traversal to check if the current node and
@@ -113,5 +113,5 @@ public interface GraphTraverseHandler<N extends SNode, R extends SRelation<N, N>
 	 * @param order
 	 *            the number of the relation in the parent node
 	 */
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, R relation, N currNode, long order);
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<SNode, SNode> relation, SNode currNode, long order);
 }

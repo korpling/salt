@@ -20,8 +20,8 @@ public class SaltFactory{
 	 * 
 	 * @return new {@link SGraph} object
 	 */
-	public static SGraph<SNode, SRelation<SNode, SNode>> createSGraph() {
-		return (new SGraphImpl<SNode, SRelation<SNode, SNode>>());
+	public static SGraph createSGraph() {
+		return (new SGraphImpl());
 	}
 
 	/**

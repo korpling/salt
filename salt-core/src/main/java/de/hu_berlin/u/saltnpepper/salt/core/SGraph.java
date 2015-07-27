@@ -5,7 +5,7 @@ import java.util.List;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
-public interface SGraph<N extends SNode, R extends SRelation<N, N>> extends Graph<N, R>, NamedElement {
+public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>>, NamedElement {
 
 	/**
 	 * The {@link GRAPH_TRAVERSE_TYPE} determines the the traversal order. In
@@ -25,7 +25,7 @@ public interface SGraph<N extends SNode, R extends SRelation<N, N>> extends Grap
 	 * 
 	 * @return list of nodes being roots in the given graph.
 	 */
-	public List<N> getRoots();
+	public List<SNode> getRoots();
 
 	/**
 	 * Returns all leaf nodes, if exist. A leaf node is a node, which has no
@@ -33,7 +33,7 @@ public interface SGraph<N extends SNode, R extends SRelation<N, N>> extends Grap
 	 * 
 	 * @return list of nodes being leafs in the given graph.
 	 */
-	public List<N> getLeafs();
+	public List<SNode> getLeafs();
 
 	/**
 	 * Traverses a graph in the given order traverseType and starts traversing
@@ -62,7 +62,7 @@ public interface SGraph<N extends SNode, R extends SRelation<N, N>> extends Grap
 	 * @param traverseHandler
 	 *            callback handler, on which the three methods will be invoked
 	 */
-	public void traverse(List<N> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler<N, R> traverseHandler);
+	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler);
 
 	/**
 	 * {@inheritDoc #traverse(EList, GRAPH_TRAVERSE_TYPE, String,
@@ -74,5 +74,5 @@ public interface SGraph<N extends SNode, R extends SRelation<N, N>> extends Grap
 	 *        "de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"
 	 * @generated
 	 */
-	public void traverse(List<N> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler<N, R> traverseHandler, boolean isCycleSafe);
+	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 }
