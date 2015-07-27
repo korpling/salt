@@ -45,8 +45,6 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltTraverserException;
  * @author Florian Zipser
  * 
  */
-// public class GraphTraverserModule<N extends SNode, R extends SRelation<N, N>>
-// {
 public class GraphTraverserModule<G extends SGraph<N, R>, N extends SNode, R extends SRelation<N, N>> {
 	/**
 	 * Stores all used traverseIds to the corresponding traverse callback

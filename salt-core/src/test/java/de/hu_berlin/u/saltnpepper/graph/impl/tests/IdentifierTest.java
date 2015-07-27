@@ -28,7 +28,7 @@ import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.impl.IdentifiableElementImpl;
-import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public class IdentifierTest {
 
@@ -60,8 +60,8 @@ public class IdentifierTest {
 	@Test
 	public void testQNameHandling() {
 		// should be ok
-		String name = GraphUtil.IDENTIFIER_NAME;
-		String qName = GraphUtil.IDENTIFIER_NAMESPACE + Identifier.NS_SEPERATOR + name;
+		String name = SaltUtil.IDENTIFIER_NAME;
+		String qName = SaltUtil.IDENTIFIER_NAMESPACE + Identifier.NS_SEPERATOR + name;
 		getFixture().setQName(name);
 		assertEquals(qName, getFixture().getQName());
 	}
@@ -78,7 +78,7 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testGetQName() {
-		String qname = GraphUtil.IDENTIFIER_NAMESPACE + GraphUtil.NS_SEPERATOR + GraphUtil.IDENTIFIER_NAME;
+		String qname = SaltUtil.IDENTIFIER_NAMESPACE + SaltUtil.NS_SEPERATOR + SaltUtil.IDENTIFIER_NAME;
 		assertEquals(qname, getFixture().getQName());
 		getFixture().setName("something");
 		assertEquals(qname, getFixture().getQName());
@@ -102,9 +102,9 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testSetName() {
-		assertEquals(GraphUtil.IDENTIFIER_NAME, getFixture().getName());
+		assertEquals(SaltUtil.IDENTIFIER_NAME, getFixture().getName());
 		getFixture().setName("somename");
-		assertEquals(GraphUtil.IDENTIFIER_NAME, getFixture().getName());
+		assertEquals(SaltUtil.IDENTIFIER_NAME, getFixture().getName());
 	}
 
 	/**
@@ -112,9 +112,9 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testSetNameSpace() {
-		assertEquals(GraphUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
+		assertEquals(SaltUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
 		getFixture().setNamespace("somename");
-		assertEquals(GraphUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
+		assertEquals(SaltUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class IdentifierTest {
 	@Test
 	public void testCheckOpposite() {
 		MyContainer newContainer = new MyContainer();
-		Identifier id= GraphFactory.createIdentifier(newContainer, GraphUtil.IDENTIFIER_NAME);
+		Identifier id= GraphFactory.createIdentifier(newContainer, SaltUtil.IDENTIFIER_NAME);
 		assertEquals(newContainer.getIdentifier(), id);
 		
 		newContainer.setId("newId");
@@ -133,6 +133,6 @@ public class IdentifierTest {
 
 	@Test
 	public void testGeneralNameHandling() {
-		assertEquals(GraphUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
+		assertEquals(SaltUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
 	}
 } // IdentifierTest

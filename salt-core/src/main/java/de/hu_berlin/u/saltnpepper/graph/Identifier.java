@@ -1,12 +1,12 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
-import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 /**
  * This class represents an identifier, which is a special kind of a label. The identifier is used for
  * {@link Node}, {@link Relation}, {@link Graph} and {@link Layer} objects. The namespace of an {@link Identifier} 
- * objectis fixed to {@link GraphUtil#IDENTIFIER_NAMESPACE} and its name is fixed to 
- * {@link GraphUtil#IDENTIFIER_NAME}. 
+ * objectis fixed to {@link SaltUtil#IDENTIFIER_NAMESPACE} and its name is fixed to 
+ * {@link SaltUtil#IDENTIFIER_NAME}. 
  * 
  * @author florian
  */

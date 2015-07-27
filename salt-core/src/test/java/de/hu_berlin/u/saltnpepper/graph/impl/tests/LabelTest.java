@@ -28,7 +28,7 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.impl.LabelableElementImpl;
-import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public class LabelTest {
 
@@ -171,8 +171,8 @@ public class LabelTest {
 		// test1
 		label = this.getFixture();
 		ns = null;
-		name = "name1" + GraphUtil.NS_SEPERATOR + "name2";
-		QName = ns + GraphUtil.NS_SEPERATOR + name;
+		name = "name1" + SaltUtil.NS_SEPERATOR + "name2";
+		QName = ns + SaltUtil.NS_SEPERATOR + name;
 		label.setNamespace(ns);
 		try {
 			label.setName(name);

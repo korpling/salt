@@ -209,7 +209,7 @@ public class GraphTest {
 			getFixture().addNode(node);
 			assertNotNull(node.getId());
 			if (ids.contains(node.getId())) {
-				fail("AN id was given twice");
+				fail("An id was given twice");
 			}
 			ids.add(node.getId());
 			assertTrue(getFixture().getNodes().contains(node));

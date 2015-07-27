@@ -32,13 +32,38 @@ import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 public interface SAnnotatableElement extends LabelableElement {
 	public <A extends SAnnotation> Set<A> getAnnotations();
 
+	/**
+	 * Adds the passed annotation to this container.
+	 * @param annotation annotation to be added
+	 */
 	public void addSAnnotation(SAnnotation annotation);
 
+	/**
+	 * Returns an annotation having the passed qualified name, if this container
+	 * contains such an annotation.
+	 * 
+	 * @param qName
+	 *            the qualified of the annotation. A qualified name consists of: namespace+'::'+name
+	 * @return an annotation having the qualified name, if such an annotation exists, null otherwise
+	 */
 	public SAnnotation getAnnotation(String qName);
 
+	/**
+	 * Creates and returns an annotation having the passed namespace, name and value.
+	 * @param namespace namespace of the annotation
+	 * @param name name of the annotation
+	 * @param value value of the annotation
+	 * @return the created annotation
+	 */
 	public SAnnotation createAnnotation(String namespace, String name, Object value);
-
-	public SAnnotation createAnnotation(String namespace, String name, String valueString);
+//	/**
+//	 * Creates and returns an annotation having the passed namespace, name and value.
+//	 * @param namespace namespace of the annotation
+//	 * @param name name of the annotation
+//	 * @param value value of the annotation
+//	 * @return the created annotation
+//	 */
+//	public SAnnotation createAnnotation(String namespace, String name, String valueString);
 
 	/**
 	 * This method parses the given annotation String and adds an

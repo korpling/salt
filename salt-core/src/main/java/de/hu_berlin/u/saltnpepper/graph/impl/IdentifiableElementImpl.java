@@ -3,7 +3,7 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
-import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public abstract class IdentifiableElementImpl extends LabelableElementImpl implements IdentifiableElement {
@@ -22,7 +22,7 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 	public void setIdentifier(Identifier identifier) {
 		if (identifier != null) {
 			if (getIdentifier() != null) {
-				removeLabel(GraphUtil.IDENTIFIER_NAMESPACE, GraphUtil.IDENTIFIER_NAME);
+				removeLabel(SaltUtil.IDENTIFIER_NAMESPACE, SaltUtil.IDENTIFIER_NAME);
 			}
 			this.identifier = identifier;
 			addLabel(identifier);

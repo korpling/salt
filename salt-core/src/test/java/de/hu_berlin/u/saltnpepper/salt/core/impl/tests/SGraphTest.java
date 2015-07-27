@@ -288,9 +288,4 @@ public class SGraphTest {
 			assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 		}
 	}
-
-	@Test
-	public void testTraverse() {
-		// TODO create tests for all kinds of traverse types
-	}
 }

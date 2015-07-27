@@ -11,7 +11,7 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  * @author florian
  *
  */
-public class GraphUtil {
+public class SaltUtil {
 	/**
 	 * Separator between namespace and name: qname= NAMESPACE
 	 * {@value #NS_SEPERATOR} NAME.

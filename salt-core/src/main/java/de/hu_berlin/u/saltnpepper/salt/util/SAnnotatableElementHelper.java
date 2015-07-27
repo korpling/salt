@@ -17,10 +17,8 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.util;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;

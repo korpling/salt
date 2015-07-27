@@ -6,7 +6,7 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.util.Copyable;
-import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class LabelImpl<V extends Object> extends LabelableElementImpl implements Label<V>, Copyable<Label<V>>{
@@ -45,12 +45,12 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	/** {@inheritDoc Label#getQName()} */
 	@Override
 	public String getQName() {
-		return GraphUtil.createQName(getNamespace(), getName());
+		return SaltUtil.createQName(getNamespace(), getName());
 	}
 
 	/** {@inheritDoc Label#setQName(String)} */
 	public void setQName(String newQName) {
-		Pair<String, String> pair = GraphUtil.splitQName(newQName);
+		Pair<String, String> pair = SaltUtil.splitQName(newQName);
 		setNamespace(pair.getLeft());
 		setName(pair.getRight());
 	}
@@ -145,7 +145,7 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	@Override
 	public String toString() {
 		StringBuilder str= new StringBuilder();
-		str.append(GraphUtil.createQName(getNamespace(), getName()));
+		str.append(SaltUtil.createQName(getNamespace(), getName()));
 		str.append("=");
 		str.append(getValue());
 		return(str.toString());

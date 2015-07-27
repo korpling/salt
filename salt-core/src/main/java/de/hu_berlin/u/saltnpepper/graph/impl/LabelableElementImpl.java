@@ -13,7 +13,7 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
-import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 /**
  * This class is an abstract container containing a set of {@link Label}
@@ -50,7 +50,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritedDoc LabelableElement#getLabel(String, String)} **/
 	@Override
 	public Label<?> getLabel(String namespace, String name) {
-		String qName = GraphUtil.createQName(namespace, name);
+		String qName = SaltUtil.createQName(namespace, name);
 		return (getLabel(qName));
 	}
 
@@ -116,7 +116,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 			if (labels == null) {
 				labels = new HashMap<String, Label<?>>();
 			}
-			String qName = GraphUtil.createQName(label.getNamespace(), label.getName());
+			String qName = SaltUtil.createQName(label.getNamespace(), label.getName());
 			if (labels.containsKey(qName)) {
 				if (this instanceof IdentifiableElement) {
 					throw new SaltInsertionException(this, label, " Because an id already exists: " + labels.get(qName) + ".");
@@ -174,7 +174,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritDoc LabelableElement#removeLabel(String, String))} **/
 	@Override
 	public void removeLabel(String namespace, String name) {
-		removeLabel(GraphUtil.createQName(namespace, name));
+		removeLabel(SaltUtil.createQName(namespace, name));
 	}
 
 	/** {@inheritDoc LabelableElement#removeAll()} **/

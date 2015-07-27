@@ -14,6 +14,7 @@ import org.junit.Test;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotatableElement;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public abstract class SAnnotatableElementTest {
 
@@ -47,7 +48,6 @@ public abstract class SAnnotatableElementTest {
 			this.getFixture().addSAnnotation(anno);
 			annos.add(anno);
 		}
-		System.out.println("---> all annos: "+ this.getFixture().getAnnotations());
 		assertTrue(annos.containsAll(this.getFixture().getAnnotations()));
 		assertTrue(this.getFixture().getAnnotations().containsAll(annos));
 	}
@@ -62,7 +62,7 @@ public abstract class SAnnotatableElementTest {
 	}
 
 	/**
-	 * Tests whether the extraction of an annotations string works quite well.
+	 * Tests the creation of a set of annotations, along a formatted string.
 	 */
 	@Test
 	public void testCreateAnnotations() {
@@ -80,7 +80,19 @@ public abstract class SAnnotatableElementTest {
 		assertNotNull(getFixture().getAnnotation("x"));
 		assertEquals("y", getFixture().getAnnotation("x").getValue());
 	}
-
+	/**
+	 * Checks the creation of a single annotation
+	 */
+	public void testCreateSAnnotation() {
+		String name = "name";
+		String namespace = "namespace";
+		String value = "value";
+		SAnnotation anno = this.getFixture().createAnnotation(namespace, name, value);
+		assertEquals(1, this.getFixture().getAnnotations().size());
+		assertTrue(this.getFixture().getAnnotations().contains(anno));
+		assertEquals(anno, this.getFixture().getAnnotation(SaltUtil.createQName(namespace, name)));
+	}
+	
 	/**
 	 * Tests whether the container and the label are double chained.
 	 */
@@ -88,8 +100,9 @@ public abstract class SAnnotatableElementTest {
 		SAnnotation anno = SaltFactory.createSAnnotation();
 		anno.setName("labelName");
 		this.getFixture().addLabel(anno);
-		
+
 		assertEquals(this.getFixture(), anno.getContainer());
 	}
 
+	// ========================= end: testing SAnnotatableElement
 }
