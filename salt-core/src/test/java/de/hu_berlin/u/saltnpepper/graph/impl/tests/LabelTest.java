@@ -25,7 +25,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
+import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
+import de.hu_berlin.u.saltnpepper.graph.impl.LabelableElementImpl;
 import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
 
 public class LabelTest {
@@ -204,6 +206,7 @@ public class LabelTest {
 		label.setValue(value);
 		assertEquals(value, label.getValue());
 	}
+
 	@Test
 	public void testGetValue() {
 		assertNull(this.getFixture().getValue());
@@ -216,6 +219,7 @@ public class LabelTest {
 		this.getFixture().setValue(value);
 		assertEquals(value, this.getFixture().getValue());
 	}
+
 	/**
 	 * Tests the method {@link Label#copy(Label)}
 	 */
@@ -224,12 +228,27 @@ public class LabelTest {
 		getFixture().setNamespace("namespace1");
 		getFixture().setName("name1");
 		getFixture().setValue("value1");
-		
-		Label<String> other= GraphFactory.createLabel();
+
+		Label<String> other = GraphFactory.createLabel();
 		getFixture().copy(other);
-		
+
 		assertEquals(getFixture().getNamespace(), other.getNamespace());
 		assertEquals(getFixture().getName(), other.getName());
 		assertEquals(getFixture().getValue(), other.getValue());
+	}
+
+	/**
+	 * Tests whether a label, which is added to a container contains the
+	 * container as {@link Label#getLabelableElement()}.
+	 */
+	@Test
+	public void testDoubleChaining() {
+		@SuppressWarnings("serial")
+		LabelableElement container = new LabelableElementImpl() {
+		};
+		getFixture().setQName("labelName");
+		assertNull(getFixture().getLabelableElement());
+		container.addLabel(getFixture());		
+		assertEquals(getFixture(), getFixture().getLabelableElement());
 	}
 } // LabelTest

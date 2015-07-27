@@ -7,9 +7,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
+import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
 
@@ -70,12 +72,45 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		return (retVal);
 	}
 
-	/** {@inheritDoc LabelableElement#addLabel(Label)} **/
+	/** {@inheritDoc} */
 	@Override
 	public void addLabel(Label<?> label) {
 		if (label == null) {
 			throw new SaltInsertionException(this, label, "The label was null. ");
+		} else {
+			if (label instanceof LabelImpl) {
+				((LabelImpl) label).basicSetLabelableElement(this);
+			}
+			basicAddLabel(label);
 		}
+	}
+
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link LabelableElement} and {@link label} object. When a label is
+	 * inserted into this container and to avoid an endless invocation the
+	 * insertion of a label is split into the two methods
+	 * {@link #addLabel(Label)} and {@link #basicAddLabel(Label)}. The
+	 * invocation of methods is implement as follows:
+	 * 
+	 * <pre>
+	 * {@link #addLabel(Label)}                      {@link Label#setLabelableElement(LabelableElement)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicAddLabel(Label)}            {@link LabelImpl#basicSetLabelableElement(LabelableElement)}
+	 * </pre>
+	 * 
+	 * That means method {@link #addLabel(Label)} calls
+	 * {@link #basicAddLabel(Label)} and {@link Label#basicSetGraph(Graph)}. And
+	 * method {@link Label#setLabelableElement(LabelableElement)} calls
+	 * {@link #basicAddLabel(Label)} and
+	 * {@link LabelImpl#basicSetLabelableElement(LabelableElement)}.
+	 * 
+	 * @param label
+	 *            label to be inserted
+	 */
+	public void basicAddLabel(Label<?> label) {
 		if (label != null) {
 			if ((label.getName() == null) || (label.getName().isEmpty())) {
 				throw new SaltInsertionException(this, label, "Cannot add a label object without a name.");
@@ -98,6 +133,41 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritDoc LabelableElement#removeLabel(String)} **/
 	@Override
 	public void removeLabel(String qName) {
+		if (qName != null) {
+			Label label= getLabel(qName);
+			if (label instanceof LabelImpl){
+				((LabelImpl)label).setLabelableElement(null);
+			}
+			basicRemoveLabel(qName);
+		}
+	}
+
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link LabelableElement} and {@link label} object. When a label is
+	 * inserted into this container and to avoid an endless invocation the
+	 * insertion of a label is split into the two methods
+	 * {@link #removeLabel(String)} and {@link #basicRemoveLabel(String)}. The
+	 * invocation of methods is implement as follows:
+	 * 
+	 * <pre>
+	 * {@link #removeLabel(String)}                      {@link Label#setLabelableElement(LabelableElement)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicRemoveLabel(STring)}            {@link LabelImpl#basicSetLabelableElement(LabelableElement)}
+	 * </pre>
+	 * 
+	 * That means method {@link #removeLabel(String)} calls
+	 * {@link #basicRemoveLabel(String)} and {@link Label#basicSetGraph(Graph)}.
+	 * And method {@link Label#setLabelableElement(LabelableElement)} calls
+	 * {@link #basicRemoveLabel(String)} and
+	 * {@link LabelImpl#basicSetLabelableElement(LabelableElement)}.
+	 * 
+	 * @param label
+	 *            label to be inserted
+	 */
+	public void basicRemoveLabel(String qName) {
 		if (qName != null) {
 			labels.remove(qName);
 		}

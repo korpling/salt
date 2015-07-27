@@ -17,6 +17,8 @@
  */
 package de.hu_berlin.u.saltnpepper.graph.impl.tests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.Vector;
@@ -269,5 +271,22 @@ public class LabelableElementTest extends TestCase {
 		label.setName("name");
 		this.getFixture().addLabel(label);
 		assertEquals(label, this.getFixture().getLabel(label.getNamespace(), label.getName()));
+	}
+	/**
+	 * Tests whether a label, which is added to a container contains the
+	 * container as {@link Label#getLabelableElement()}.
+	 */
+	@Test
+	public void testDoubleChaining() {
+		Label label= GraphFactory.createLabel();
+		label.setQName("labelName");
+		assertNull(getFixture().getLabels());
+		label.setLabelableElement(getFixture());
+		assertEquals(1, getFixture().getLabels().size());
+		assertEquals(getFixture(), getFixture().getLabel(label.getNamespace(), label.getName()));
+		
+		assertTrue(getFixture().containsLabel(label.getQName()));
+		label.setLabelableElement(null);
+		assertFalse(getFixture().containsLabel(label.getQName()));
 	}
 } // LabelableElementTest

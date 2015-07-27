@@ -3,6 +3,7 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 import org.apache.commons.lang3.tuple.Pair;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
+import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.util.Copyable;
 import de.hu_berlin.u.saltnpepper.salt.util.GraphUtil;
@@ -68,7 +69,61 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	public void setValue(V value) {
 		this.value = value;
 	}
-
+	/** {@inheritDoc} */
+	@Override
+	public LabelableElement getLabelableElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/** The container of this object. **/
+	protected LabelableElement container= null;
+	
+	/** {@inheritDoc} */
+	@Override
+	public void setLabelableElement(LabelableElement container) {
+		if (container!= null){
+			//add label to container
+			if (container instanceof LabelableElementImpl){
+				container.addLabel(this);
+			}
+			
+		}else{
+			// remove label from container
+			if (container instanceof LabelableElementImpl){
+				container.removeLabel(this.getQName());
+			}
+		}
+	}
+	
+	/** 
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link LabelableElement} and {@link label} object.  When a label is inserted into this
+	 * container and to avoid an endless invocation the insertion of a label is
+	 * split into the two methods {@link #addLabel(Label)} and
+	 * {@link #basicAddLabel(Label)}. The invocation of methods is implement as
+	 * follows:
+	 * 
+	 * <pre>
+	 * {@link #addLabel(Label)}                      {@link Label#setLabelableElement(LabelableElement)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicAddLabel(Label)}            {@link LabelImpl#basicSetLabelableElement(LabelableElement)}
+	 * </pre>
+	 * 
+	 * That means method {@link #addLabel(Label)} calls
+	 * {@link #basicAddLabel(Label)} and {@link Label#basicSetGraph(Graph)}. And
+	 * method {@link Label#setLabelableElement(LabelableElement)} calls {@link #basicAddLabel(Label)} and
+	 * {@link LabelImpl#basicSetLabelableElement(LabelableElement)}.
+	 * 
+	 * @param label
+	 *            label to be inserted
+	 */
+	public void basicSetLabelableElement(LabelableElement container) {
+		this.container= container;
+	}
+	
 	/**
 	 * This method the namespace, the name and the value from this object to the passed one and 
 	 * returns the passed one.
