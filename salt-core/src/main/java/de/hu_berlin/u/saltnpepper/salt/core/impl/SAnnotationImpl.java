@@ -17,13 +17,7 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-
-import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 import de.hu_berlin.u.saltnpepper.graph.impl.LabelImpl;
-import de.hu_berlin.u.saltnpepper.graph.impl.LabelableElementImpl;
-import de.hu_berlin.u.saltnpepper.salt.core.SAnnotatableElement;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 
 /**
@@ -43,24 +37,4 @@ import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 @SuppressWarnings("serial")
 public class SAnnotationImpl extends LabelImpl implements SAnnotation {
 
-	protected SAnnotationImpl() {
-		super();
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public SAnnotatableElement getSAnnotatableElement() {
-		SAnnotatableElement retVal = null;
-		LabelableElement labelableElement = getLabelableElement();
-		if (labelableElement instanceof SAnnotatableElement){
-			retVal = (SAnnotatableElement) labelableElement;
-		}
-		return (retVal);
-	}
-
-	/** {@inheritDoc} */
-	@Override
-	public void setSAnnotatableElement(SAnnotatableElement newSAnnotatableElement) {
-		super.setLabelableElement(newSAnnotatableElement);
-	}
 } // SAnnotationImpl

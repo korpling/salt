@@ -75,7 +75,7 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	
 	/** {@inheritDoc} */
 	@Override
-	public void setLabelableElement(LabelableElement container) {
+	public void setContainer(LabelableElement container) {
 		LabelableElement oldContainer= this.container;
 		if (container!= null){
 			//add label to container
@@ -93,7 +93,7 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	}
 	/** {@inheritDoc} */
 	@Override
-	public LabelableElement getLabelableElement() {
+	public LabelableElement getContainer() {
 		return(container);
 	}
 	
@@ -106,7 +106,7 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	 * follows:
 	 * 
 	 * <pre>
-	 * {@link #addLabel(Label)}                      {@link Label#setLabelableElement(LabelableElement)}
+	 * {@link #addLabel(Label)}                      {@link Label#setContainer(LabelableElement)}
 	 *         ||             \ /                   ||
 	 *         ||              X                    ||
 	 *         \/             / \                   \/
@@ -115,7 +115,7 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	 * 
 	 * That means method {@link #addLabel(Label)} calls
 	 * {@link #basicAddLabel(Label)} and {@link Label#basicSetGraph(Graph)}. And
-	 * method {@link Label#setLabelableElement(LabelableElement)} calls {@link #basicAddLabel(Label)} and
+	 * method {@link Label#setContainer(LabelableElement)} calls {@link #basicAddLabel(Label)} and
 	 * {@link LabelImpl#basicSetLabelableElement(LabelableElement)}.
 	 * 
 	 * @param label

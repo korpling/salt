@@ -239,7 +239,7 @@ public class LabelTest {
 
 	/**
 	 * Tests whether a label, which is added to a container contains the
-	 * container as {@link Label#getLabelableElement()}.
+	 * container as {@link Label#getContainer()}.
 	 */
 	@Test
 	public void testDoubleChaining() {
@@ -247,8 +247,8 @@ public class LabelTest {
 		LabelableElement container = new LabelableElementImpl() {
 		};
 		getFixture().setQName("labelName");
-		assertNull(getFixture().getLabelableElement());
+		assertNull(getFixture().getContainer());
 		container.addLabel(getFixture());		
-		assertEquals(container, getFixture().getLabelableElement());
+		assertEquals(container, getFixture().getContainer());
 	}
 } // LabelTest

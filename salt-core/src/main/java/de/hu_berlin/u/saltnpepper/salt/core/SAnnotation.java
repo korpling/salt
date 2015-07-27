@@ -44,17 +44,4 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  *
  */
 public interface SAnnotation extends Label {
-	/**
-	 * Returns the container, which contains this annotation. The container
-	 * could be a node, a relation, a graph, a layer or another label.
-	 * @return container of this label
-	 */
-	public SAnnotatableElement getSAnnotatableElement();
-	/**
-	 * Returns the container, which contains this annotation. The container
-	 * could be a node, a relation, a graph, a layer or another label.
-	 * @param container container of this label
-	 */
-	public void setSAnnotatableElement(SAnnotatableElement conteiner);
-
 } // SAnnotation

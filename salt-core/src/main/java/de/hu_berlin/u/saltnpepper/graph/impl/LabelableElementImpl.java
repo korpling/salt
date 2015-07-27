@@ -92,7 +92,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	 * invocation of methods is implement as follows:
 	 * 
 	 * <pre>
-	 * {@link #addLabel(Label)}                      {@link Label#setLabelableElement(LabelableElement)}
+	 * {@link #addLabel(Label)}                      {@link Label#setContainer(LabelableElement)}
 	 *         ||             \ /                   ||
 	 *         ||              X                    ||
 	 *         \/             / \                   \/
@@ -101,7 +101,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	 * 
 	 * That means method {@link #addLabel(Label)} calls
 	 * {@link #basicAddLabel(Label)} and {@link Label#basicSetGraph(Graph)}. And
-	 * method {@link Label#setLabelableElement(LabelableElement)} calls
+	 * method {@link Label#setContainer(LabelableElement)} calls
 	 * {@link #basicAddLabel(Label)} and
 	 * {@link LabelImpl#basicSetLabelableElement(LabelableElement)}.
 	 * 
@@ -134,7 +134,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		if (qName != null) {
 			Label label= getLabel(qName);
 			if (label instanceof LabelImpl){
-				((LabelImpl)label).setLabelableElement(null);
+				((LabelImpl)label).setContainer(null);
 			}
 			basicRemoveLabel(qName);
 		}
@@ -149,7 +149,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	 * invocation of methods is implement as follows:
 	 * 
 	 * <pre>
-	 * {@link #removeLabel(String)}                      {@link Label#setLabelableElement(LabelableElement)}
+	 * {@link #removeLabel(String)}                      {@link Label#setContainer(LabelableElement)}
 	 *         ||             \ /                   ||
 	 *         ||              X                    ||
 	 *         \/             / \                   \/
@@ -158,7 +158,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	 * 
 	 * That means method {@link #removeLabel(String)} calls
 	 * {@link #basicRemoveLabel(String)} and {@link Label#basicSetGraph(Graph)}.
-	 * And method {@link Label#setLabelableElement(LabelableElement)} calls
+	 * And method {@link Label#setContainer(LabelableElement)} calls
 	 * {@link #basicRemoveLabel(String)} and
 	 * {@link LabelImpl#basicSetLabelableElement(LabelableElement)}.
 	 * 

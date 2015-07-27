@@ -273,18 +273,18 @@ public class LabelableElementTest extends TestCase {
 	}
 	/**
 	 * Tests whether a label, which is added to a container contains the
-	 * container as {@link Label#getLabelableElement()}.
+	 * container as {@link Label#getContainer()}.
 	 */
 	@Test
 	public void testDoubleChaining() {
 		Label label= GraphFactory.createLabel();
 		label.setQName("labelName");
 		assertNull(getFixture().getLabels());
-		label.setLabelableElement(getFixture());
+		label.setContainer(getFixture());
 		assertEquals(1, getFixture().getLabels().size());
 		
 		assertTrue(getFixture().containsLabel(label.getQName()));
-		label.setLabelableElement(null);
+		label.setContainer(null);
 		assertFalse(getFixture().containsLabel(label.getQName()));
 	}
 } // LabelableElementTest

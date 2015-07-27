@@ -98,7 +98,7 @@ public interface Label<V extends Object> extends LabelableElement, Copyable<Labe
 	 * 
 	 * @return container of this label
 	 */
-	public LabelableElement getLabelableElement();
+	public <C extends LabelableElement>C getContainer();
 
 	/**
 	 * Sets the container element, which contains this label. The label and the
@@ -110,5 +110,5 @@ public interface Label<V extends Object> extends LabelableElement, Copyable<Labe
 	 * @param value
 	 *            container of this label
 	 */
-	void setLabelableElement(LabelableElement container);
+	public <C extends LabelableElement> void setContainer(C container);
 }
