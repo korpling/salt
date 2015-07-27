@@ -249,6 +249,6 @@ public class LabelTest {
 		getFixture().setQName("labelName");
 		assertNull(getFixture().getLabelableElement());
 		container.addLabel(getFixture());		
-		assertEquals(getFixture(), getFixture().getLabelableElement());
+		assertEquals(container, getFixture().getLabelableElement());
 	}
 } // LabelTest

@@ -60,17 +60,16 @@ public class LabelableElementTest extends TestCase {
 		setFixture(null);
 	}
 
+	/**
+	 * Tests adding of labels to a {@link LabelableElement}
+	 */
 	@Test
 	public void testAddingGettingLabels() {
-		LabelableElement labelableElement = this.getFixture();
 		Label<?> label = null;
 
-		// test 1 - should fail
-		try {
-			labelableElement.addLabel(null);
-			fail("shouldn't add an empty label");
-		} catch (Exception e) {
-		}
+		// test 1 - empty label should not be added
+		getFixture().addLabel(null);
+		assertEquals(null, getFixture().getLabels());
 
 		// test 2 - add all
 		String[] labelNames = { "label1", "label2", "label3", "label4", "label5" };
@@ -78,8 +77,8 @@ public class LabelableElementTest extends TestCase {
 		for (String labelName : labelNames) {
 			label = GraphFactory.createLabel();
 			label.setName(labelName);
-			labelableElement.addLabel(label);
-			assertEquals(label, labelableElement.getLabel(labelName));
+			getFixture().addLabel(label);
+			assertEquals(label, getFixture().getLabel(labelName));
 		}
 	}
 
@@ -283,7 +282,6 @@ public class LabelableElementTest extends TestCase {
 		assertNull(getFixture().getLabels());
 		label.setLabelableElement(getFixture());
 		assertEquals(1, getFixture().getLabels().size());
-		assertEquals(getFixture(), getFixture().getLabel(label.getNamespace(), label.getName()));
 		
 		assertTrue(getFixture().containsLabel(label.getQName()));
 		label.setLabelableElement(null);

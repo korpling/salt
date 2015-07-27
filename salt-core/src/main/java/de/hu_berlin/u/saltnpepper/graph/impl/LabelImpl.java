@@ -69,31 +69,32 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	public void setValue(V value) {
 		this.value = value;
 	}
-	/** {@inheritDoc} */
-	@Override
-	public LabelableElement getLabelableElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+	// ==========================================> container
 	/** The container of this object. **/
 	protected LabelableElement container= null;
 	
 	/** {@inheritDoc} */
 	@Override
 	public void setLabelableElement(LabelableElement container) {
+		LabelableElement oldContainer= this.container;
 		if (container!= null){
 			//add label to container
 			if (container instanceof LabelableElementImpl){
 				container.addLabel(this);
 			}
 			
-		}else{
-			// remove label from container
-			if (container instanceof LabelableElementImpl){
-				container.removeLabel(this.getQName());
+		}
+		if (oldContainer!= null){
+			// remove label from old container
+			if (oldContainer instanceof LabelableElementImpl){
+				((LabelableElementImpl) oldContainer).basicRemoveLabel(this.getQName());
 			}
 		}
+	}
+	/** {@inheritDoc} */
+	@Override
+	public LabelableElement getLabelableElement() {
+		return(container);
 	}
 	
 	/** 
@@ -123,6 +124,7 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	public void basicSetLabelableElement(LabelableElement container) {
 		this.container= container;
 	}
+	// ==========================================< container
 	
 	/**
 	 * This method the namespace, the name and the value from this object to the passed one and 

@@ -75,9 +75,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritDoc} */
 	@Override
 	public void addLabel(Label<?> label) {
-		if (label == null) {
-			throw new SaltInsertionException(this, label, "The label was null. ");
-		} else {
+		if (label != null) {
 			if (label instanceof LabelImpl) {
 				((LabelImpl) label).basicSetLabelableElement(this);
 			}
