@@ -47,20 +47,20 @@ public class SAnnotationImpl extends LabelImpl implements SAnnotation {
 		super();
 	}
 
-//	/** {@inheritDoc} */
-//	@Override
-//	public SAnnotatableElement getSAnnotatableElement() {
-//		SAnnotatableElement retVal = null;
-//		LabelableElement labelableElement = getLabelableElement();
-//		if (labelableElement instanceof SAnnotatableElement){
-//			retVal = (SAnnotatableElement) labelableElement;
-//		}
-//		return (retVal);
-//	}
-//
-//	/** {@inheritDoc} */
-//	@Override
-//	public void setSAnnotatableElement(SAnnotatableElement newSAnnotatableElement) {
-//		super.setLabelableElement(newSAnnotatableElement);
-//	}
+	/** {@inheritDoc} */
+	@Override
+	public SAnnotatableElement getSAnnotatableElement() {
+		SAnnotatableElement retVal = null;
+		LabelableElement labelableElement = getLabelableElement();
+		if (labelableElement instanceof SAnnotatableElement){
+			retVal = (SAnnotatableElement) labelableElement;
+		}
+		return (retVal);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setSAnnotatableElement(SAnnotatableElement newSAnnotatableElement) {
+		super.setLabelableElement(newSAnnotatableElement);
+	}
 } // SAnnotationImpl
