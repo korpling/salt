@@ -4,7 +4,8 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * This interface defines a container to hold {@link Label} objects and makes them accessible.
+ * This interface defines a container to hold {@link Label} objects and makes
+ * them accessible.
  * 
  * @author florian
  *
@@ -94,8 +95,10 @@ public interface LabelableElement {
 	 *         otherwise
 	 */
 	public boolean containsLabel(String qName);
+
 	/**
-	 * returns the number of {@link Label} objects contained by this object. 
+	 * returns the number of {@link Label} objects contained by this object.
+	 * 
 	 * @return number of {@link Label} objects
 	 */
 	public Integer sizeLabels();

@@ -9,7 +9,7 @@ import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
-public class SNodeTest extends SAnnotatableElementTest{
+public class SNodeTest extends SAnnotationContainerTest{
 
 	@Before
 	@Override

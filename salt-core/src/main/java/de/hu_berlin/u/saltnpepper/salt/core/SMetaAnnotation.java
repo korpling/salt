@@ -54,9 +54,4 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  *
  */
 public interface SMetaAnnotation extends Label {
-
-	public SAnnotationContainer getSMetaAnnotatableElement();
-
-	public void setSMetaAnnotatableElement(SAnnotationContainer value);
-
 } // SMetaAnnotation

@@ -11,7 +11,6 @@ import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
-import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
@@ -132,9 +131,9 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	@Override
 	public void removeLabel(String qName) {
 		if (qName != null) {
-			Label label= getLabel(qName);
-			if (label instanceof LabelImpl){
-				((LabelImpl)label).setContainer(null);
+			Label label = getLabel(qName);
+			if (label instanceof LabelImpl) {
+				((LabelImpl) label).setContainer(null);
 			}
 			basicRemoveLabel(qName);
 		}
