@@ -21,26 +21,24 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
 
 /**
  * <p>
- * An object of class {@link SFeature} is a label and can be added
- * like every other label to a node, relation, graph, layer or to another label.
- * Like every label a {@link SFeature} object consists of the main
- * fields {@link Label#getNamespace()}, {@link Label#getName()} and
+ * An object of class {@link SFeature} is a label and can be added like every
+ * other label to a node, relation, graph, layer or to another label. Like every
+ * label a {@link SFeature} object consists of the main fields
+ * {@link Label#getNamespace()}, {@link Label#getName()} and
  * {@link Label#getValue()}.
- * </p><p>
- * A {@link SFeature} could be used, to
- * add some information to any Salt object during a processing. So for instance
- * you can store any state like 'already processed' or other non-linguistic and
- * non meta annotations like 'having the color red' to it.
  * </p>
- * For further information on labels, 
- * @see Label 
+ * <p>
+ * A {@link SFeature} could be used, to add some information to any Salt object
+ * during a processing. So for instance you can store any state like 'already
+ * processed' or other non-linguistic and non meta annotations like 'having the
+ * color red' to it.
+ * </p>
+ * For further information on labels,
+ * 
+ * @see Label
  * 
  * @author florian
  *
  */
 public interface SFeature extends Label {
-	public SAnnotationContainer getSFeaturableElement();
-
-	public void setSFeaturableElement(SAnnotationContainer value);
-
 } // SFeature

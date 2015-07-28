@@ -98,6 +98,12 @@ public class SAnnotationContainerHelper {
 		}
 	}
 
+	/**
+	 * A default list, which could be returned by methods to not create an empty
+	 * list each time a method was invoked.
+	 */
+	private static final Set<? extends Label> DEFAULT_EMPTY_LIST = Collections.unmodifiableSet(new HashSet<SAnnotation>());
+
 	// =======================================> SAnnotation
 	public static void addAnnotation(SAnnotationContainer container, SAnnotation annotation) {
 		container.addLabel(annotation);
@@ -119,12 +125,6 @@ public class SAnnotationContainerHelper {
 		}
 		return (retVal);
 	}
-
-	/**
-	 * A default list, which could be returned by methods to not create an empty
-	 * list each time a method was invoked.
-	 */
-	private static final Set<? extends Label> DEFAULT_EMPTY_LIST = Collections.unmodifiableSet(new HashSet<SAnnotation>());
 
 	/**
 	 * Returns all {@link SAnnotation} object, which are contained by the passed
@@ -281,5 +281,162 @@ public class SAnnotationContainerHelper {
 		}
 		return (anno);
 	}
+	public static Iterator<SMetaAnnotation> iterator_SMetaAnnotation(SAnnotationContainer container) {
+		Iterator<SMetaAnnotation> retVal = null;
+		if (container != null) {
+			retVal = new MyIterator<SMetaAnnotation>(container.getLabels().iterator());
+		}
+		return(retVal);
+	}
+	
 	// =======================================< SMetaAnnotation
+	// =======================================> SProcessingAnnotation
+	public static void addProcessingAnnotation(SAnnotationContainer container, SProcessingAnnotation annotation) {
+		container.addLabel(annotation);
+	}
+
+	public static SProcessingAnnotation getProcessingAnnotation(SAnnotationContainer container, String qName) {
+		SProcessingAnnotation anno = null;
+		Label label = container.getLabel(qName);
+		if (label instanceof SProcessingAnnotation) {
+			anno = (SProcessingAnnotation) label;
+		}
+		return (anno);
+	}
+
+	public static Set<SProcessingAnnotation> createProcessingAnnotations(SAnnotationContainer container, String annotationString) {
+		Set<SProcessingAnnotation> retVal = new HashSet<>();
+		for (Triple<String, String, String> triple : unmarshalString(annotationString)) {
+			retVal.add(container.createProcessingAnnotation(triple.getLeft(), triple.getMiddle(), triple.getRight()));
+		}
+		return (retVal);
+	}
+
+	/**
+	 * Returns all {@link SProcessingAnnotation} object, which are contained by
+	 * the passed container.
+	 * <p>
+	 * Attention: This method is slow, since it iterates over all contained
+	 * labels and creates a new list of all {@link SProcessingAnnotation}
+	 * objects.
+	 * </p>
+	 * 
+	 * @param container
+	 *            the container object which contains the
+	 *            {@link SProcessingAnnotation} to be searched for
+	 * @return an unmodifiable list of {@link SProcessingAnnotation} object or
+	 *         an empty list
+	 */
+	@SuppressWarnings("unchecked")
+	public static <A extends SProcessingAnnotation> Set<A> getProcessingAnnotations(SAnnotationContainer container) {
+		Set<SProcessingAnnotation> retVal = null;
+		if (container != null) {
+			for (Label label : container.getLabels()) {
+				if (label instanceof SProcessingAnnotation) {
+					if (retVal == null) {
+						retVal = new HashSet<SProcessingAnnotation>();
+					}
+					retVal.add((SProcessingAnnotation) label);
+				}
+			}
+		}
+		if (retVal != null) {
+			retVal = Collections.unmodifiableSet(retVal);
+		} else {
+			return (Set<A>) (DEFAULT_EMPTY_LIST);
+		}
+		return (Set<A>) (retVal);
+	}
+
+	public static Iterator<SProcessingAnnotation> iterator_SProcessingAnnotation(SAnnotationContainer container) {
+		Iterator<SProcessingAnnotation> retVal = null;
+		if (container != null) {
+			retVal = new MyIterator<SProcessingAnnotation>(container.getLabels().iterator());
+		}
+		return (retVal);
+	}
+
+	public static SProcessingAnnotation createProcessingAnnotation(SAnnotationContainer container, String namespace, String name, Object value) {
+		SProcessingAnnotation retVal = SaltFactory.createSProcessingAnnotation();
+		retVal.setNamespace(namespace);
+		retVal.setName(name);
+		retVal.setValue(value);
+		container.addProcessingAnnotation(retVal);
+		return retVal;
+	}
+
+	// =======================================< SProcessingAnnotation
+	// =======================================> SFeature
+	public static void addFeature(SAnnotationContainer container, SFeature annotation) {
+		container.addLabel(annotation);
+	}
+
+	public static SFeature getFeature(SAnnotationContainer container, String qName) {
+		SFeature anno = null;
+		Label label = container.getLabel(qName);
+		if (label instanceof SFeature) {
+			anno = (SFeature) label;
+		}
+		return (anno);
+	}
+
+	public static Set<SFeature> createFeatures(SAnnotationContainer container, String annotationString) {
+		Set<SFeature> retVal = new HashSet<>();
+		for (Triple<String, String, String> triple : unmarshalString(annotationString)) {
+			retVal.add(container.createFeature(triple.getLeft(), triple.getMiddle(), triple.getRight()));
+		}
+		return (retVal);
+	}
+
+	/**
+	 * Returns all {@link SFeature} object, which are contained by the passed
+	 * container.
+	 * <p>
+	 * Attention: This method is slow, since it iterates over all contained
+	 * labels and creates a new list of all {@link SFeature} objects.
+	 * </p>
+	 * 
+	 * @param container
+	 *            the container object which contains the {@link SFeature} to be
+	 *            searched for
+	 * @return an unmodifiable list of {@link SFeature} object or an empty list
+	 */
+	@SuppressWarnings("unchecked")
+	public static <A extends SFeature> Set<A> getFeatures(SAnnotationContainer container) {
+		Set<SFeature> retVal = null;
+		if (container != null) {
+			for (Label label : container.getLabels()) {
+				if (label instanceof SFeature) {
+					if (retVal == null) {
+						retVal = new HashSet<SFeature>();
+					}
+					retVal.add((SFeature) label);
+				}
+			}
+		}
+		if (retVal != null) {
+			retVal = Collections.unmodifiableSet(retVal);
+		} else {
+			return (Set<A>) (DEFAULT_EMPTY_LIST);
+		}
+		return (Set<A>) (retVal);
+	}
+
+	public static Iterator<SFeature> iterator_SFeature(SAnnotationContainer container) {
+		Iterator<SFeature> retVal = null;
+		if (container != null) {
+			retVal = new MyIterator<SFeature>(container.getLabels().iterator());
+		}
+		return (retVal);
+	}
+
+	public static SFeature createFeature(SAnnotationContainer container, String namespace, String name, Object value) {
+		SFeature retVal = SaltFactory.createSFeature();
+		retVal.setNamespace(namespace);
+		retVal.setName(name);
+		retVal.setValue(value);
+		container.addFeature(retVal);
+		return retVal;
+	}
+	// =======================================< SFeature
 }

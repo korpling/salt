@@ -42,8 +42,4 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  *
  */
 public interface SProcessingAnnotation extends Label {
-	public SAnnotationContainer getSProcessingAnnotatableElement();
-
-	public void setSProcessingAnnotatableElement(SAnnotationContainer value);
-
 } // SProcessingAnnotation

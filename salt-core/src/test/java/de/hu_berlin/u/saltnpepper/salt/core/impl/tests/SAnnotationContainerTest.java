@@ -17,7 +17,9 @@ import org.junit.Test;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public abstract class SAnnotationContainerTest {
@@ -210,4 +212,144 @@ public abstract class SAnnotationContainerTest {
 		assertEquals(getFixture(), anno.getContainer());
 	}
 	// =============================< SMetaAnnotation
+	// =============================> SProcessingAnnotation
+	@Test
+	public void testGetProcessingAnnotations() {
+		String[] qNames = { "ns::name1", "ns::name2", "ns::name3", "ns::name4" };
+		List<SProcessingAnnotation> annos = new ArrayList<>();
+		for (String qName : qNames) {
+			SProcessingAnnotation anno = SaltFactory.createSProcessingAnnotation();
+			anno.setQName(qName);
+			getFixture().addProcessingAnnotation(anno);
+			annos.add(anno);
+		}
+		assertTrue(annos.containsAll(getFixture().getProcessingAnnotations()));
+		assertTrue(getFixture().getProcessingAnnotations().containsAll(annos));
+	}
+
+	@Test
+	public void testAddSProcessingAnnotation() {
+		String QName = "ns::name";
+		SProcessingAnnotation anno = SaltFactory.createSProcessingAnnotation();
+		anno.setQName(QName);
+		getFixture().addProcessingAnnotation(anno);
+		assertEquals(anno, getFixture().getProcessingAnnotation(QName));
+	}
+
+	/**
+	 * Tests the creation of a set of ProcessingAnnotations, along a formatted string.
+	 */
+	@Test
+	public void testCreateProcessingAnnotations() {
+		String ProcessingAnnotationString = "blub";
+		getFixture().createProcessingAnnotations(ProcessingAnnotationString);
+		assertNotNull(getFixture().getProcessingAnnotation("blub"));
+
+		ProcessingAnnotationString = "myNS::bla=blub;foo;x=y";
+		getFixture().createProcessingAnnotations(ProcessingAnnotationString);
+		assertNotNull(getFixture().getProcessingAnnotations());
+		assertEquals(4, getFixture().getProcessingAnnotations().size());
+		assertNotNull(getFixture().getProcessingAnnotation("myNS::bla"));
+		assertEquals("blub", getFixture().getProcessingAnnotation("myNS::bla").getValue());
+		assertNotNull(getFixture().getProcessingAnnotation("foo"));
+		assertNotNull(getFixture().getProcessingAnnotation("x"));
+		assertEquals("y", getFixture().getProcessingAnnotation("x").getValue());
+	}
+
+	/**
+	 * Checks the creation of a single ProcessingAnnotation
+	 */
+	@Test
+	public void testCreateSProcessingAnnotation() {
+		String name = "name";
+		String namespace = "namespace";
+		String value = "value";
+		SProcessingAnnotation anno = getFixture().createProcessingAnnotation(namespace, name, value);
+		assertEquals(1, getFixture().getProcessingAnnotations().size());
+		assertTrue(getFixture().getProcessingAnnotations().contains(anno));
+		assertEquals(anno, getFixture().getProcessingAnnotation(SaltUtil.createQName(namespace, name)));
+	}
+
+	/**
+	 * Tests whether the container and the label are double chained.
+	 */
+	@Test
+	public void testDoubleChaining_SProcessingAnnotation() {
+		SProcessingAnnotation anno = SaltFactory.createSProcessingAnnotation();
+		anno.setName("labelName");
+		getFixture().addLabel(anno);
+
+		assertEquals(getFixture(), anno.getContainer());
+	}
+	// =============================< SProcessingAnnotation
+	// =============================> SFeature
+	@Test
+	public void testGetFeatures() {
+		String[] qNames = { "ns::name1", "ns::name2", "ns::name3", "ns::name4" };
+		List<SFeature> annos = new ArrayList<>();
+		for (String qName : qNames) {
+			SFeature anno = SaltFactory.createSFeature();
+			anno.setQName(qName);
+			getFixture().addFeature(anno);
+			annos.add(anno);
+		}
+		assertTrue(annos.containsAll(getFixture().getFeatures()));
+		assertTrue(getFixture().getFeatures().containsAll(annos));
+	}
+
+	@Test
+	public void testAddSFeature() {
+		String QName = "ns::name";
+		SFeature anno = SaltFactory.createSFeature();
+		anno.setQName(QName);
+		getFixture().addFeature(anno);
+		assertEquals(anno, getFixture().getFeature(QName));
+	}
+
+	/**
+	 * Tests the creation of a set of Features, along a formatted string.
+	 */
+	@Test
+	public void testCreateFeatures() {
+		String FeatureString = "blub";
+		getFixture().createFeatures(FeatureString);
+		assertNotNull(getFixture().getFeature("blub"));
+
+		FeatureString = "myNS::bla=blub;foo;x=y";
+		getFixture().createFeatures(FeatureString);
+		assertNotNull(getFixture().getFeatures());
+		assertEquals(4, getFixture().getFeatures().size());
+		assertNotNull(getFixture().getFeature("myNS::bla"));
+		assertEquals("blub", getFixture().getFeature("myNS::bla").getValue());
+		assertNotNull(getFixture().getFeature("foo"));
+		assertNotNull(getFixture().getFeature("x"));
+		assertEquals("y", getFixture().getFeature("x").getValue());
+	}
+
+	/**
+	 * Checks the creation of a single Feature
+	 */
+	@Test
+	public void testCreateSFeature() {
+		String name = "name";
+		String namespace = "namespace";
+		String value = "value";
+		SFeature anno = getFixture().createFeature(namespace, name, value);
+		assertEquals(1, getFixture().getFeatures().size());
+		assertTrue(getFixture().getFeatures().contains(anno));
+		assertEquals(anno, getFixture().getFeature(SaltUtil.createQName(namespace, name)));
+	}
+
+	/**
+	 * Tests whether the container and the label are double chained.
+	 */
+	@Test
+	public void testDoubleChaining_SFeature() {
+		SFeature anno = SaltFactory.createSFeature();
+		anno.setName("labelName");
+		getFixture().addLabel(anno);
+
+		assertEquals(getFixture(), anno.getContainer());
+	}
+	// =============================< SFeature
 }

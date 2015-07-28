@@ -32,6 +32,7 @@
 package de.hu_berlin.german.korpling.saltnpepper;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -48,6 +49,10 @@ import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
+import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
+import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
 public class GraphBenchmark {
 
@@ -256,6 +261,7 @@ public class GraphBenchmark {
 			graph.getLayer(layer.getId());
 		}
 	}
+	
 	/**
 	 * 
 	 * ============================== HOW TO RUN THIS TEST:
@@ -264,7 +270,7 @@ public class GraphBenchmark {
 	 * You can run this test:
 	 * a) Via the command line:
 	 * $ mvn clean install
-	 * $ java -jar target/benchmarks.jar GraphBenchmark_02 -wi 5 -i 5 -f 1 -rf csv -rff GraphBenchmark.jmh.csv
+	 * $ java -jar target/benchmarks.jar GraphBenchmark -wi 5 -i 5 -f 1 -rf csv -rff GraphBenchmark.jmh.csv
 	 * (we requested 5 warmup/measurement iterations, single fork)
 	 * b) Via the Java API:
 	 * (see the JMH homepage for possible caveats when running from IDE:
