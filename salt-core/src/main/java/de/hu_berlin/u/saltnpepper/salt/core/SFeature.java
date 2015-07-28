@@ -39,8 +39,8 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  *
  */
 public interface SFeature extends Label {
-	public SAnnotatableElement getSFeaturableElement();
+	public SAnnotationContainer getSFeaturableElement();
 
-	public void setSFeaturableElement(SAnnotatableElement value);
+	public void setSFeaturableElement(SAnnotationContainer value);
 
 } // SFeature

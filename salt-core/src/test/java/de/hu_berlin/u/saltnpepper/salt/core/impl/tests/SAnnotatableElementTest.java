@@ -12,19 +12,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.core.SAnnotatableElement;
+import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public abstract class SAnnotatableElementTest {
 
-	protected SAnnotatableElement fixture = null;
+	protected SAnnotationContainer fixture = null;
 
-	public SAnnotatableElement getFixture() {
+	public SAnnotationContainer getFixture() {
 		return fixture;
 	}
 
-	public void setFixture(SAnnotatableElement fixture) {
+	public void setFixture(SAnnotationContainer fixture) {
 		this.fixture = fixture;
 	}
 

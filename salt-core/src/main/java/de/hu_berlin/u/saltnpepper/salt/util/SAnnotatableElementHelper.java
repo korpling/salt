@@ -23,7 +23,7 @@ import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.core.SAnnotatableElement;
+import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
@@ -43,11 +43,11 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
  *
  */
 public class SAnnotatableElementHelper {
-	public static void addSAnnotation(SAnnotatableElement container, SAnnotation annotation) {
+	public static void addSAnnotation(SAnnotationContainer container, SAnnotation annotation) {
 		container.addLabel(annotation);
 	}
 
-	public static SAnnotation getSAnnotation(SAnnotatableElement container, String qName) {
+	public static SAnnotation getSAnnotation(SAnnotationContainer container, String qName) {
 		SAnnotation anno = null;
 		Label label = container.getLabel(qName);
 		if (label instanceof SAnnotation) {
@@ -56,7 +56,7 @@ public class SAnnotatableElementHelper {
 		return (anno);
 	}
 
-	public static Set<SAnnotation> createAnnotations(SAnnotatableElement container, String annotationString) {
+	public static Set<SAnnotation> createAnnotations(SAnnotationContainer container, String annotationString) {
 		Set<SAnnotation> retVal = new HashSet<>();
 		if ((annotationString != null) && (!annotationString.isEmpty())) {
 			String[] annotations = annotationString.split(";");
@@ -109,7 +109,7 @@ public class SAnnotatableElementHelper {
 	 *         list
 	 */
 	@SuppressWarnings("unchecked")
-	public static <A extends SAnnotation> Set<A> getAnnotations(SAnnotatableElement container) {
+	public static <A extends SAnnotation> Set<A> getAnnotations(SAnnotationContainer container) {
 		Set<SAnnotation> retVal = null;
 		if (container != null) {
 			for (Label label : container.getLabels()) {
@@ -129,7 +129,7 @@ public class SAnnotatableElementHelper {
 		return (Set<A>) (retVal);
 	}
 
-	public static SAnnotation createSAnnotation(SAnnotatableElement container, String namespace, String name, Object value) {
+	public static SAnnotation createSAnnotation(SAnnotationContainer container, String namespace, String name, Object value) {
 		SAnnotation retVal = SaltFactory.createSAnnotation();
 		retVal.setNamespace(namespace);
 		retVal.setName(name);

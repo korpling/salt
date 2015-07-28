@@ -29,7 +29,7 @@ import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
  * @author florian
  *
  */
-public interface SAnnotatableElement extends LabelableElement {
+public interface SAnnotationContainer extends LabelableElement {
 	public <A extends SAnnotation> Set<A> getAnnotations();
 
 	/**
@@ -68,7 +68,7 @@ public interface SAnnotatableElement extends LabelableElement {
 	/**
 	 * This method parses the given annotation String and adds an
 	 * {@link SAnnotation} object for each annotation being contained in that
-	 * string to the given {@link SAnnotatableElement} object. The syntax for
+	 * string to the given {@link SAnnotationContainer} object. The syntax for
 	 * Annotations is:<br/>
 	 * (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+ <br/>
 	 * where SNS is the namespace of the annotation, SNAME is its name and
