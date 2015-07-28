@@ -1,9 +1,11 @@
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.impl.NodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.util.SAnnotationContainerHelper;
@@ -39,6 +41,12 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	@Override
 	public Set<SAnnotation> createAnnotations(String annotationString) {
 		return (SAnnotationContainerHelper.createAnnotations(this, annotationString));
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public Iterator<SAnnotation> iterator_SAnnotation(){
+		return(SAnnotationContainerHelper.iterator_SAnnotation(this));
 	}
 
 	// =======================================< SAnnotation

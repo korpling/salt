@@ -161,7 +161,7 @@ public class SAnnotationContainerHelper {
 		return (Set<A>) (retVal);
 	}
 
-	public static Iterator<SAnnotation> iterator(SAnnotationContainer container) {
+	public static Iterator<SAnnotation> iterator_SAnnotation(SAnnotationContainer container) {
 		Iterator<SAnnotation> retVal = null;
 		if (container != null) {
 			retVal = new MyIterator<SAnnotation>(container.getLabels().iterator());

@@ -5,7 +5,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
@@ -82,6 +85,7 @@ public abstract class SAnnotationContainerTest {
 		assertNotNull(getFixture().getAnnotation("x"));
 		assertEquals("y", getFixture().getAnnotation("x").getValue());
 	}
+
 	/**
 	 * Checks the creation of a single annotation
 	 */
@@ -95,7 +99,7 @@ public abstract class SAnnotationContainerTest {
 		assertTrue(getFixture().getAnnotations().contains(anno));
 		assertEquals(anno, getFixture().getAnnotation(SaltUtil.createQName(namespace, name)));
 	}
-	
+
 	/**
 	 * Tests whether the container and the label are double chained.
 	 */
@@ -108,8 +112,34 @@ public abstract class SAnnotationContainerTest {
 		assertEquals(getFixture(), anno.getContainer());
 	}
 
+	/**
+	 * Creates some {@link SAnnotation} and {@link SMetaAnnotation} objects and
+	 * adds them in a mixed order to the container. The iterator is checked if
+	 * it finds each {@link SAnnotation} object.
+	 */
+	@Test
+	public void testIterator_SAnnotation(){
+		Set<SAnnotation> annos= new HashSet<>();
+		annos.add(getFixture().createAnnotation("stts", "pos", "VVFIN"));
+		getFixture().createMetaAnnotation(null, "meta1", "val1");
+		getFixture().createMetaAnnotation(null, "meta2", "val2");
+		annos.add(getFixture().createAnnotation(null, "lemma", "go"));
+		annos.add(getFixture().createAnnotation(null, "text", "went"));
+		getFixture().createMetaAnnotation(null, "meta3", "val3");
+		annos.add(getFixture().createAnnotation(null, "other", null));
+		
+		Iterator<SAnnotation> it= getFixture().iterator_SAnnotation();
+		Set<SAnnotation> itAnnos= new HashSet<>();
+		while (it.hasNext()){
+			itAnnos.add(it.next());
+		}
+		assertEquals(itAnnos.size(), annos.size());
+		assertTrue(itAnnos.containsAll(annos));
+		assertTrue(annos.containsAll(itAnnos));
+	}
+
 	// =============================< SAnnotation
-	
+
 	// =============================> SMetaAnnotation
 	@Test
 	public void testGetMetaAnnotations() {
@@ -153,6 +183,7 @@ public abstract class SAnnotationContainerTest {
 		assertNotNull(getFixture().getMetaAnnotation("x"));
 		assertEquals("y", getFixture().getMetaAnnotation("x").getValue());
 	}
+
 	/**
 	 * Checks the creation of a single MetaAnnotation
 	 */
@@ -166,7 +197,7 @@ public abstract class SAnnotationContainerTest {
 		assertTrue(getFixture().getMetaAnnotations().contains(anno));
 		assertEquals(anno, getFixture().getMetaAnnotation(SaltUtil.createQName(namespace, name)));
 	}
-	
+
 	/**
 	 * Tests whether the container and the label are double chained.
 	 */

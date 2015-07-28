@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.core;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
@@ -76,16 +77,7 @@ public interface SAnnotationContainer extends LabelableElement {
 	 */
 	public SAnnotation createAnnotation(String namespace, String name, Object value);
 
-	// /**
-	// * Creates and returns an annotation having the passed namespace, name and
-	// value.
-	// * @param namespace namespace of the annotation
-	// * @param name name of the annotation
-	// * @param value value of the annotation
-	// * @return the created annotation
-	// */
-	// public SAnnotation createAnnotation(String namespace, String name, String
-	// valueString);
+	public Iterator<SAnnotation> iterator_SAnnotation();
 
 	/**
 	 * This method parses the given annotation String and adds an
