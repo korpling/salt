@@ -15,12 +15,12 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
-public class SaltFactory{
+public class SaltFactory {
 
 	public SaltFactory() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/**
 	 * Creates a new {@link SGraph} object of type {@link SGraphImpl}.
 	 * 
@@ -47,7 +47,7 @@ public class SaltFactory{
 	public static SRelation<SNode, SNode> createSRelation() {
 		return (new SRelationImpl<SNode, SNode>());
 	}
-	
+
 	/**
 	 * Creates a new {@link SAnnotation} object of type {@link SAnnotationImpl}.
 	 * 
@@ -56,22 +56,27 @@ public class SaltFactory{
 	public static SAnnotation createSAnnotation() {
 		return (new SAnnotationImpl());
 	}
+
 	/**
-	 * Creates a new {@link SMetaAnnotation} object of type {@link SMetaAnnotationImpl}.
+	 * Creates a new {@link SMetaAnnotation} object of type
+	 * {@link SMetaAnnotationImpl}.
 	 * 
 	 * @return new {@link SMetaAnnotation} object
 	 */
 	public static SMetaAnnotation createSMetaAnnotation() {
 		return (new SMetaAnnotationImpl());
 	}
+
 	/**
-	 * Creates a new {@link SProcessingAnnotation} object of type {@link SProcessingAnnotationImpl}.
+	 * Creates a new {@link SProcessingAnnotation} object of type
+	 * {@link SProcessingAnnotationImpl}.
 	 * 
 	 * @return new {@link SProcessingAnnotation} object
 	 */
 	public static SProcessingAnnotation createSProcessingAnnotation() {
 		return (new SProcessingAnnotationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SFeature} object of type {@link SFeatureImpl}.
 	 * 

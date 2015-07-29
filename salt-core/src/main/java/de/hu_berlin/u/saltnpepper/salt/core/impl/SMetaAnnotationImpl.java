@@ -24,5 +24,4 @@ import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 @SuppressWarnings("serial")
 public class SMetaAnnotationImpl extends LabelImpl implements SMetaAnnotation {
 
-
 } // SAnnotationImpl

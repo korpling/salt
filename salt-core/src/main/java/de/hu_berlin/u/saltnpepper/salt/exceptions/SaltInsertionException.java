@@ -36,29 +36,46 @@ public class SaltInsertionException extends java.lang.RuntimeException {
 
 	/**
 	 * Initializes an object of this exception class.
-	 * @param container the container object, which could not insert the passed object.
-	 * @param object the object to be inserted into the container
+	 * 
+	 * @param container
+	 *            the container object, which could not insert the passed
+	 *            object.
+	 * @param object
+	 *            the object to be inserted into the container
 	 */
 	public SaltInsertionException(Object container, Object object) {
 		this(container, object, null);
 	}
+
 	/**
 	 * Initializes an object of this exception class.
-	 * @param container the container object, which could not insert the passed object.
-	 * @param object the object to be inserted into the container
-	 * @param msg a message to be passed
+	 * 
+	 * @param container
+	 *            the container object, which could not insert the passed
+	 *            object.
+	 * @param object
+	 *            the object to be inserted into the container
+	 * @param msg
+	 *            a message to be passed
 	 */
 	public SaltInsertionException(Object container, Object object, String msg) {
 		this(container, object, msg, null);
 	}
+
 	/**
 	 * Initializes an object of this exception class.
-	 * @param container the container object, which could not insert the passed object.
-	 * @param object the object to be inserted into the container
-	 * @param msg a message to be passed
-	 * @param ex a sub exception too be passed
+	 * 
+	 * @param container
+	 *            the container object, which could not insert the passed
+	 *            object.
+	 * @param object
+	 *            the object to be inserted into the container
+	 * @param msg
+	 *            a message to be passed
+	 * @param ex
+	 *            a sub exception too be passed
 	 */
 	public SaltInsertionException(Object container, Object object, String msg, Throwable ex) {
-		super("Cannot insert object '"+object+"' into container '"+container+"'. "+msg, ex);
+		super("Cannot insert object '" + object + "' into container '" + container + "'. " + msg, ex);
 	}
 }

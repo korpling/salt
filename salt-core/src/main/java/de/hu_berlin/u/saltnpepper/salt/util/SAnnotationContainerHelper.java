@@ -281,14 +281,15 @@ public class SAnnotationContainerHelper {
 		}
 		return (anno);
 	}
+
 	public static Iterator<SMetaAnnotation> iterator_SMetaAnnotation(SAnnotationContainer container) {
 		Iterator<SMetaAnnotation> retVal = null;
 		if (container != null) {
 			retVal = new MyIterator<SMetaAnnotation>(container.getLabels().iterator());
 		}
-		return(retVal);
+		return (retVal);
 	}
-	
+
 	// =======================================< SMetaAnnotation
 	// =======================================> SProcessingAnnotation
 	public static void addProcessingAnnotation(SAnnotationContainer container, SProcessingAnnotation annotation) {

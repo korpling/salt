@@ -80,6 +80,6 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>> implem
 	@Override
 	public void setName(String name) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

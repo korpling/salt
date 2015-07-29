@@ -12,7 +12,8 @@ public interface Copyable<T> {
 	/**
 	 * Takes a new 'empty' object and sets all its fields by copying by value.
 	 * 
-	 * @param surrogate empty object to be filled
+	 * @param surrogate
+	 *            empty object to be filled
 	 */
 	public void copy(T surrogate);
 }

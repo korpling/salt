@@ -42,7 +42,7 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltTraverserException;
  * @author Florian Zipser
  * 
  */
-public class GraphTraverserModule{
+public class GraphTraverserModule {
 	/**
 	 * Stores all used traverseIds to the corresponding traverse callback
 	 * handler. This is used, to check, that an id is not used twice.
@@ -257,7 +257,7 @@ public class GraphTraverserModule{
 		 * @author florian
 		 * 
 		 */
-		private class NodeEntry{
+		private class NodeEntry {
 			private final SNode node;
 			private int order;
 			private Iterator<SRelation<SNode, SNode>> iterator;
@@ -479,8 +479,8 @@ public class GraphTraverserModule{
 		}
 
 		/**
-		 * Traverses the graph in breadth first order. Relations are followed from
-		 * source to target. If the {@link Traverser#traverseType} is (
+		 * Traverses the graph in breadth first order. Relations are followed
+		 * from source to target. If the {@link Traverser#traverseType} is (
 		 * {@link GRAPH_TRAVERSE_TYPE#BOTTOM_UP_BREADTH_FIRST}) relations are
 		 * followed in their opposite direction. <br/>
 		 * During the BFS {@link Traverser#currentNodePath} will only contain
@@ -491,8 +491,8 @@ public class GraphTraverserModule{
 		 *            is the relation, via which the current node (last one in
 		 *            currentPath) was reached
 		 * @param order
-		 *            number of current relation in list of all outgoing relations of
-		 *            the parent node
+		 *            number of current relation in list of all outgoing
+		 *            relations of the parent node
 		 */
 		private void breadthFirst() {
 			if (isCycleSafe) {

@@ -37,8 +37,8 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	public S getSource();
 
 	/**
-	 * Returns the source node of this relation object. If this relation
-	 * belongs to a graph, the graph's indexes will be updated automatically.
+	 * Returns the source node of this relation object. If this relation belongs
+	 * to a graph, the graph's indexes will be updated automatically.
 	 * 
 	 * @param source
 	 *            source node
@@ -53,8 +53,8 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	public T getTarget();
 
 	/**
-	 * Sets the target node of this relation object. If this relation
-	 * belongs to a graph, the graph's indexes will be updated automatically.
+	 * Sets the target node of this relation object. If this relation belongs to
+	 * a graph, the graph's indexes will be updated automatically.
 	 * 
 	 * @param target
 	 *            target node

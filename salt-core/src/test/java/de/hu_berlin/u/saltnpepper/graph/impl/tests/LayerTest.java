@@ -255,7 +255,8 @@ public class LayerTest {
 	// * Tests the '
 	// * {@link
 	// de.hu_berlin.german.korpling.saltnpepper.salt.graph.Layer#getAllIncludedRelations()
-	// * <em>Get All Included Relations</em>}' operation. <!-- begin-user-doc -->
+	// * <em>Get All Included Relations</em>}' operation. <!-- begin-user-doc
+	// -->
 	// <!--
 	// * end-user-doc -->
 	// *

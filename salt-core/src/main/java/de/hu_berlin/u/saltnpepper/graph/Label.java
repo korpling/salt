@@ -98,7 +98,7 @@ public interface Label extends LabelableElement, Copyable<Label> {
 	 * 
 	 * @return container of this label
 	 */
-	public <C extends LabelableElement>C getContainer();
+	public <C extends LabelableElement> C getContainer();
 
 	/**
 	 * Sets the container element, which contains this label. The label and the

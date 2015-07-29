@@ -23,5 +23,4 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 @SuppressWarnings("serial")
 public class SFeatureImpl extends LabelImpl implements SFeature {
 
-
 } // SAnnotationImpl

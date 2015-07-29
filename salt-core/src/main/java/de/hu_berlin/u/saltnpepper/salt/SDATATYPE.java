@@ -17,7 +17,6 @@
  */
 package de.hu_berlin.u.saltnpepper.salt;
 
-
 public enum SDATATYPE {
 	STEXT, SBOOLEAN, SNUMERIC, SFLOAT, SURI, SOBJECT
 } // SDATATYPE

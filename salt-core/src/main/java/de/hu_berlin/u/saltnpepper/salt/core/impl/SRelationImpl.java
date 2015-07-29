@@ -16,7 +16,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	@Override
 	public void setName(String name) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

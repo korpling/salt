@@ -81,9 +81,10 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public SMetaAnnotation getMetaAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getMetaAnnotation(this, qName));
 	}
+
 	@Override
 	public Iterator<SMetaAnnotation> iterator_SMetaAnnotation() {
-		return(SAnnotationContainerHelper.iterator_SMetaAnnotation(this));
+		return (SAnnotationContainerHelper.iterator_SMetaAnnotation(this));
 	}
 
 	// =======================================< SMetaAnnotation
