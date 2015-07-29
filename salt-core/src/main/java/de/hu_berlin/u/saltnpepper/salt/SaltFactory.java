@@ -3,6 +3,7 @@ package de.hu_berlin.u.saltnpepper.salt;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
+import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
@@ -10,6 +11,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SFeatureImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
+import de.hu_berlin.u.saltnpepper.salt.core.impl.SLayerImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SMetaAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
@@ -84,5 +86,13 @@ public class SaltFactory {
 	 */
 	public static SFeature createSFeature() {
 		return (new SFeatureImpl());
+	}
+	/**
+	 * Creates a new {@link SLayer} object of type {@link SLayerImpl}.
+	 * 
+	 * @return new {@link SLayer} object
+	 */
+	public static SLayer createSLayer() {
+		return (new SLayerImpl());
 	}
 }

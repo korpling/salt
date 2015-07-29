@@ -14,18 +14,10 @@ import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
-public class SGraphTest {
-
-	private SGraph fixture = null;
-
+public class SGraphTest extends SAnnotationContainerTest{
 	public SGraph getFixture() {
-		return fixture;
+		return((SGraph)super.getFixture());
 	}
-
-	public void setFixture(SGraph fixture) {
-		this.fixture = fixture;
-	}
-
 	@Before
 	public void setUp() throws Exception {
 		setFixture(SaltFactory.createSGraph());
