@@ -2,6 +2,7 @@ package de.hu_berlin.u.saltnpepper.graph.impl;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
@@ -9,9 +10,10 @@ import de.hu_berlin.u.saltnpepper.salt.util.Copyable;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public class LabelImpl<V extends Object> extends LabelableElementImpl implements Label<V>, Copyable<Label<V>>{
-	
+public class LabelImpl extends LabelableElementImpl implements Label, Copyable<Label> {
+
 	protected String namespace = null;
+
 	/** {@inheritDoc Label#getNamespace()} */
 	@Override
 	public String getNamespace() {
@@ -25,6 +27,7 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	}
 
 	protected String name = null;
+
 	/** {@inheritDoc Label#getName()} */
 	@Override
 	public String getName() {
@@ -56,54 +59,56 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	}
 
 	/** The generic value field. **/
-	protected V value = null;
+	protected Object value = null;
 
 	/** {@inheritDoc Label#getValue()} */
 	@Override
-	public V getValue() {
+	public Object getValue() {
 		return value;
 	}
 
 	/** {@inheritDoc Label#setValue(Object)} */
 	@Override
-	public void setValue(V value) {
+	public void setValue(Object value) {
 		this.value = value;
 	}
+
 	// ==========================================> container
 	/** The container of this object. **/
-	protected LabelableElement container= null;
-	
+	protected LabelableElement container = null;
+
 	/** {@inheritDoc} */
 	@Override
 	public void setContainer(LabelableElement container) {
-		LabelableElement oldContainer= this.container;
-		if (container!= null){
-			//add label to container
-			if (container instanceof LabelableElementImpl){
+		LabelableElement oldContainer = this.container;
+		if (container != null) {
+			// add label to container
+			if (container instanceof LabelableElementImpl) {
 				container.addLabel(this);
 			}
-			
+
 		}
-		if (oldContainer!= null){
+		if (oldContainer != null) {
 			// remove label from old container
-			if (oldContainer instanceof LabelableElementImpl){
+			if (oldContainer instanceof LabelableElementImpl) {
 				((LabelableElementImpl) oldContainer).basicRemoveLabel(this.getQName());
 			}
 		}
 	}
+
 	/** {@inheritDoc} */
 	@Override
 	public LabelableElement getContainer() {
-		return(container);
+		return (container);
 	}
-	
-	/** 
+
+	/**
 	 * This is an internally used method. To implement a double chaining of
-	 * {@link LabelableElement} and {@link label} object.  When a label is inserted into this
-	 * container and to avoid an endless invocation the insertion of a label is
-	 * split into the two methods {@link #addLabel(Label)} and
-	 * {@link #basicAddLabel(Label)}. The invocation of methods is implement as
-	 * follows:
+	 * {@link LabelableElement} and {@link label} object. When a label is
+	 * inserted into this container and to avoid an endless invocation the
+	 * insertion of a label is split into the two methods
+	 * {@link #addLabel(Label)} and {@link #basicAddLabel(Label)}. The
+	 * invocation of methods is implement as follows:
 	 * 
 	 * <pre>
 	 * {@link #addLabel(Label)}                      {@link Label#setContainer(LabelableElement)}
@@ -115,26 +120,29 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 	 * 
 	 * That means method {@link #addLabel(Label)} calls
 	 * {@link #basicAddLabel(Label)} and {@link Label#basicSetGraph(Graph)}. And
-	 * method {@link Label#setContainer(LabelableElement)} calls {@link #basicAddLabel(Label)} and
+	 * method {@link Label#setContainer(LabelableElement)} calls
+	 * {@link #basicAddLabel(Label)} and
 	 * {@link LabelImpl#basicSetLabelableElement(LabelableElement)}.
 	 * 
 	 * @param label
 	 *            label to be inserted
 	 */
 	public void basicSetLabelableElement(LabelableElement container) {
-		this.container= container;
+		this.container = container;
 	}
+
 	// ==========================================< container
-	
+
 	/**
-	 * This method the namespace, the name and the value from this object to the passed one and 
-	 * returns the passed one.
+	 * This method the namespace, the name and the value from this object to the
+	 * passed one and returns the passed one.
+	 * 
 	 * @param clone
 	 *            the clone to which all properties of this shall be copied to
 	 * @return other enhanced for namespace, name and value
 	 */
 	@Override
-	public void copy(Label<V> other) {
+	public void copy(Label other) {
 		if (other == null) {
 			throw new SaltException("Cannot clone label '" + this + "', because the given object is null and its not possible to copy values into a null object.");
 		}
@@ -142,12 +150,13 @@ public class LabelImpl<V extends Object> extends LabelableElementImpl implements
 		other.setName(this.getName());
 		other.setValue(this.getValue());
 	}
+
 	@Override
 	public String toString() {
-		StringBuilder str= new StringBuilder();
+		StringBuilder str = new StringBuilder();
 		str.append(SaltUtil.createQName(getNamespace(), getName()));
 		str.append("=");
 		str.append(getValue());
-		return(str.toString());
+		return (str.toString());
 	}
 }

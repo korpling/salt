@@ -229,7 +229,7 @@ public class LabelTest {
 		getFixture().setName("name1");
 		getFixture().setValue("value1");
 
-		Label<String> other = GraphFactory.createLabel();
+		Label other = GraphFactory.createLabel();
 		getFixture().copy(other);
 
 		assertEquals(getFixture().getNamespace(), other.getNamespace());

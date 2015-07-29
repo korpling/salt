@@ -65,7 +65,7 @@ public class LabelableElementTest extends TestCase {
 	 */
 	@Test
 	public void testAddingGettingLabels() {
-		Label<?> label = null;
+		Label label = null;
 
 		// test 1 - empty label should not be added
 		getFixture().addLabel(null);
@@ -85,7 +85,7 @@ public class LabelableElementTest extends TestCase {
 	@Test
 	public void testAddingRemovingLabels() {
 		LabelableElement labelableElement = this.getFixture();
-		Label<?> label = null;
+		Label label = null;
 
 		String[] labelNames = { "label1", "label2", "label3", "label4", "label5" };
 		String label1 = "label1";
@@ -147,7 +147,7 @@ public class LabelableElementTest extends TestCase {
 	@Test
 	public void testRemoveAll() throws Exception {
 		LabelableElement labelableElement = this.getFixture();
-		Label<?> label = null;
+		Label label = null;
 		String[] labelNames = { "label1", "label2", "label3", "label4", "label5" };
 		Integer numOfLabels = labelNames.length + labelableElement.sizeLabels();
 
@@ -169,7 +169,7 @@ public class LabelableElementTest extends TestCase {
 	@Test
 	public void testGetLabelsByNamespace__String() {
 		LabelableElement labelableElement = this.getFixture();
-		Label<?> label = null;
+		Label label = null;
 		String ns1 = "ns1";
 		String ns2 = null;
 		String ns3 = "ns2";
@@ -187,12 +187,12 @@ public class LabelableElementTest extends TestCase {
 		}
 
 		// searching for ns1
-		Set<Label<?>> labels = labelableElement.getLabelsByNamespace(ns1);
+		Set<Label> labels = labelableElement.getLabelsByNamespace(ns1);
 		assertEquals(labelNames1.length, labels.size());
 		boolean found = false;
 		for (String labelName : labelNames1) {
 			found = false;
-			for (Label<?> searchLabel : labels) {
+			for (Label searchLabel : labels) {
 				if (searchLabel.getQName().equalsIgnoreCase(labelName))
 					found = true;
 			}
@@ -205,7 +205,7 @@ public class LabelableElementTest extends TestCase {
 		found = false;
 		for (String labelName : labelNames2) {
 			found = false;
-			for (Label<?> searchLabel : labels) {
+			for (Label searchLabel : labels) {
 				if (searchLabel.getQName().equalsIgnoreCase(labelName))
 					found = true;
 			}
@@ -218,7 +218,7 @@ public class LabelableElementTest extends TestCase {
 		found = false;
 		for (String labelName : labelNames3) {
 			found = false;
-			for (Label<?> searchLabel : labels) {
+			for (Label searchLabel : labels) {
 				if (searchLabel.getQName().equalsIgnoreCase(labelName))
 					found = true;
 			}
@@ -230,7 +230,7 @@ public class LabelableElementTest extends TestCase {
 	@Test
 	public void testHasLabel__String() {
 		LabelableElement labelableElement = this.getFixture();
-		Label<?> label = null;
+		Label label = null;
 		String[] labelNamesOK = { "ns1::label1", "ns1::label2", "label1", "ns:label4", "label6" };
 		String[] labelNamesNOTOK = { "label2", "ns1::label6" };
 		// add labels
@@ -252,7 +252,7 @@ public class LabelableElementTest extends TestCase {
 
 	@Test
 	public void testRemoveLabel__String_String() {
-		Label<?> label = GraphFactory.createLabel();
+		Label label = GraphFactory.createLabel();
 		label.setNamespace("ns1");
 		label.setName("name1");
 
@@ -265,7 +265,7 @@ public class LabelableElementTest extends TestCase {
 
 	@Test
 	public void testGetLabel__String_String() {
-		Label<?> label = GraphFactory.createLabel();
+		Label label = GraphFactory.createLabel();
 		label.setNamespace("sNS");
 		label.setName("name");
 		this.getFixture().addLabel(label);

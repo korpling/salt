@@ -16,7 +16,7 @@ public interface LabelableElement {
 	 * 
 	 * @return set of all {@link Label} objects
 	 */
-	public Collection<Label<?>> getLabels();
+	public Collection<Label> getLabels();
 
 	/**
 	 * Adds the given Label object to the list of labels.
@@ -24,7 +24,7 @@ public interface LabelableElement {
 	 * @param label
 	 *            the Label object to be added
 	 */
-	public void addLabel(Label<?> label);
+	public void addLabel(Label label);
 
 	/**
 	 * Returns a label having the passed namespace and name, if such a label is
@@ -36,7 +36,7 @@ public interface LabelableElement {
 	 *            name of the {@link Label} to be searched for
 	 * @return {@link Label} object
 	 */
-	public Label<?> getLabel(String namespace, String name);
+	public Label getLabel(String namespace, String name);
 
 	/**
 	 * Returns a label having the passed qualified name. Therefore the qName is
@@ -46,7 +46,7 @@ public interface LabelableElement {
 	 *            the qualified name to be splitted
 	 * @return {@link Label} object
 	 */
-	public Label<?> getLabel(String qName);
+	public Label getLabel(String qName);
 
 	/**
 	 * Removes the label having the passed qName.
@@ -83,7 +83,7 @@ public interface LabelableElement {
 	 * @return a list of Label objects if this object contains Label objects
 	 *         having the given namespace, null otherwise.
 	 */
-	public Set<Label<?>> getLabelsByNamespace(String namespace);
+	public Set<Label> getLabelsByNamespace(String namespace);
 
 	/**
 	 * Checks if this object has a Label object in its list having the given

@@ -58,7 +58,7 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 		if ((getLabels() != null) && (getLabels().size() > 0)) {
 			str.append("[");
 			boolean isFirst = true;
-			for (Label<?> label : getLabels()) {
+			for (Label label : getLabels()) {
 				if (!(label instanceof Identifier)) {
 					if (isFirst) {
 						isFirst = false;

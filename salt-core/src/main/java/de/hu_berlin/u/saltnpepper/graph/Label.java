@@ -16,7 +16,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.Copyable;
  * @param <V>
  *            this parameter determines the type of the value of this label.
  */
-public interface Label<V extends Object> extends LabelableElement, Copyable<Label<V>> {
+public interface Label extends LabelableElement, Copyable<Label> {
 	/**
 	 * Separator between namespace and name: qname= NAMESPACE
 	 * {@value #NS_SEPERATOR} NAME.
@@ -80,7 +80,7 @@ public interface Label<V extends Object> extends LabelableElement, Copyable<Labe
 	 * 
 	 * @return generic value of this label.
 	 */
-	public V getValue();
+	public Object getValue();
 
 	/**
 	 * Sets the value of this label.
@@ -88,7 +88,7 @@ public interface Label<V extends Object> extends LabelableElement, Copyable<Labe
 	 * @param value
 	 *            generic value of this label.
 	 */
-	public void setValue(V value);
+	public void setValue(Object value);
 
 	/**
 	 * Returns the container element, which contains this label. The label and

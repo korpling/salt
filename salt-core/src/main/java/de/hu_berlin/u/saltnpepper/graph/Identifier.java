@@ -10,7 +10,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
  * 
  * @author florian
  */
-public interface Identifier extends Label<String>{
+public interface Identifier extends Label{
 	/**
 	 * Returns the value of this {@link Label}.
 	 * @return the id value
@@ -25,6 +25,5 @@ public interface Identifier extends Label<String>{
 	/**
 	 * This method has no effect, since the id value is not changeable. 
 	 */
-	@Override
 	public void setValue(String value);
 }

@@ -53,9 +53,9 @@ public class SAnnotationContainerHelper {
 	public static class MyIterator<E extends Label> implements Iterator<E> {
 
 		/** The real iterator, to which this iterator delegates its methods **/
-		protected Iterator<Label<?>> delegatee = null;
+		protected Iterator<Label> delegatee = null;
 
-		public MyIterator(Iterator<Label<?>> delegatee) {
+		public MyIterator(Iterator<Label> delegatee) {
 			this.delegatee = delegatee;
 		}
 

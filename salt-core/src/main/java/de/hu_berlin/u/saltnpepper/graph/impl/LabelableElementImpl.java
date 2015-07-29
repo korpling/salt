@@ -24,12 +24,12 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 @SuppressWarnings("serial")
 public abstract class LabelableElementImpl implements LabelableElement, Serializable {
 	/** internal set of all labels **/
-	private Map<String, Label<?>> labels = null;
+	private Map<String, Label> labels = null;
 
 	/** {@inheritDoc LabelableElement#getLabels()} **/
 	@Override
-	public Collection<Label<?>> getLabels() {
-		Collection<Label<?>> retVal = null;
+	public Collection<Label> getLabels() {
+		Collection<Label> retVal = null;
 		if (labels != null) {
 			retVal = labels.values();
 		}
@@ -38,7 +38,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 
 	/** {@inheritDoc LabelableElement#getLabel(String)} **/
 	@Override
-	public Label<?> getLabel(String qName) {
+	public Label getLabel(String qName) {
 		if (labels != null) {
 			return (labels.get(qName));
 		} else {
@@ -48,17 +48,17 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 
 	/** {@inheritedDoc LabelableElement#getLabel(String, String)} **/
 	@Override
-	public Label<?> getLabel(String namespace, String name) {
+	public Label getLabel(String namespace, String name) {
 		String qName = SaltUtil.createQName(namespace, name);
 		return (getLabel(qName));
 	}
 
 	/** {@inheritDoc LabelableElement#getLabelsByNamespace(String)} **/
 	@Override
-	public Set<Label<?>> getLabelsByNamespace(String ns) {
-		Set<Label<?>> retVal = new HashSet<Label<?>>();
+	public Set<Label> getLabelsByNamespace(String ns) {
+		Set<Label> retVal = new HashSet<Label>();
 		if (labels != null) {
-			for (Label<?> label : labels.values()) {
+			for (Label label : labels.values()) {
 				if (ns == null) {
 					if (label.getNamespace() == null) {
 						retVal.add(label);
@@ -73,7 +73,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 
 	/** {@inheritDoc} */
 	@Override
-	public void addLabel(Label<?> label) {
+	public void addLabel(Label label) {
 		if (label != null) {
 			if (label instanceof LabelImpl) {
 				((LabelImpl) label).basicSetLabelableElement(this);
@@ -107,13 +107,13 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	 * @param label
 	 *            label to be inserted
 	 */
-	public void basicAddLabel(Label<?> label) {
+	public void basicAddLabel(Label label) {
 		if (label != null) {
 			if ((label.getName() == null) || (label.getName().isEmpty())) {
 				throw new SaltInsertionException(this, label, "Cannot add a label object without a name.");
 			}
 			if (labels == null) {
-				labels = new HashMap<String, Label<?>>();
+				labels = new HashMap<String, Label>();
 			}
 			String qName = SaltUtil.createQName(label.getNamespace(), label.getName());
 			if (labels.containsKey(qName)) {
@@ -179,7 +179,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritDoc LabelableElement#removeAll()} **/
 	@Override
 	public void removeAll() {
-		labels = new HashMap<String, Label<?>>();
+		labels = new HashMap<String, Label>();
 	}
 
 	/** {@inheritDoc LabelableElement#containsLabel(String)} **/
