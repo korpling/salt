@@ -12,7 +12,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class VisJsTest implements SGraphTraverseHandler{
 
-	@Test
+	//@Test
 	public void test(){
 		SDocument doc= SaltFactory.eINSTANCE.createSDocument();
 		SampleGenerator.createSDocumentStructure(doc);
