@@ -156,7 +156,7 @@ public class GraphTraverserModuleTest {
 		private GRAPH_TRAVERSE_TYPE traverseType = null;
 		private String traverseId = null;
 		private Exception exception = null;
-		public volatile int runs = 0;
+		public int runs = 0;
 		Thread traverseThread;
 
 		public void start(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId) {
@@ -352,7 +352,7 @@ public class GraphTraverserModuleTest {
 			Thread.sleep(100);
 		}
 
-		if ((checker.exception == null) || (!(checker.exception instanceof SaltTraverserException))) {
+		if ((checker.exception != null) && (!(checker.exception instanceof SaltTraverserException))) {
 			checker.exception.printStackTrace();
 			fail("A GraphTaverserException should have been thrown, because the same id was used twice with the same callback handler");
 		}
