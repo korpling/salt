@@ -15,8 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;

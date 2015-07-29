@@ -18,7 +18,6 @@
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.impl.LabelImpl;
-import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 
 @SuppressWarnings("serial")

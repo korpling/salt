@@ -17,10 +17,10 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.exceptions;
 
-import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Node;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 
 /**
  * This exception is thrown, if one object could not be inserted into another

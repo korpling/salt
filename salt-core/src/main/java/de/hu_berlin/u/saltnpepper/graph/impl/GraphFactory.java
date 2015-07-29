@@ -1,12 +1,12 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
-import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 
 public class GraphFactory {
 
