@@ -32,7 +32,6 @@
 package de.hu_berlin.german.korpling.saltnpepper;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -49,10 +48,6 @@ import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
-import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
-import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
 public class GraphBenchmark {
 
@@ -83,7 +78,7 @@ public class GraphBenchmark {
 
 			// add labels
 			for (int k = 0; k < NUM_OF_LABELS; k++) {
-				Label<String> label = GraphFactory.createLabel();
+				Label label = GraphFactory.createLabel();
 				label.setNamespace("ns");
 				label.setName("label_" + k);
 				label.setValue("val_" + k);
@@ -123,7 +118,7 @@ public class GraphBenchmark {
 
 			// add labels
 			for (int k = 0; k < NUM_OF_LABELS; k++) {
-				Label<String> label = GraphFactory.createLabel();
+				Label label = GraphFactory.createLabel();
 				label.setNamespace("ns");
 				label.setName("label_" + k);
 				label.setValue("val_" + k);
@@ -261,6 +256,8 @@ public class GraphBenchmark {
 			graph.getLayer(layer.getId());
 		}
 	}
+	
+	
 	
 	/**
 	 * 
