@@ -17,10 +17,9 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
-import de.hu_berlin.u.saltnpepper.graph.impl.LabelImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 
 @SuppressWarnings("serial")
-public class SAnnotationImpl extends LabelImpl implements SAnnotation {
+public class SAnnotationImpl extends SAbstractAnnotationImpl implements SAnnotation {
 
 } // SAnnotationImpl

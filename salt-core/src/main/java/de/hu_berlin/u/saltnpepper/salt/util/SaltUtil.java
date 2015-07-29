@@ -26,6 +26,11 @@ public class SaltUtil {
 	 * default name for of derived name-attribute
 	 */
 	public static final String IDENTIFIER_NAME = "id";
+	/**
+	 * QName of label for storing a new label determining the salt-data type of
+	 * the value of this label.
+	 */
+	public static final String KW_SVAL_TYPE = "SVAL_TYPE";
 
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a

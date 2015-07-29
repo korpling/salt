@@ -17,10 +17,9 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
-import de.hu_berlin.u.saltnpepper.graph.impl.LabelImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 
 @SuppressWarnings("serial")
-public class SMetaAnnotationImpl extends LabelImpl implements SMetaAnnotation {
+public class SMetaAnnotationImpl extends SAbstractAnnotationImpl implements SMetaAnnotation {
 
 } // SAnnotationImpl

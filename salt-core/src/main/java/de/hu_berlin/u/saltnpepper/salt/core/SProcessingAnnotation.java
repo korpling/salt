@@ -41,5 +41,5 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  * @author florian
  *
  */
-public interface SProcessingAnnotation extends Label {
+public interface SProcessingAnnotation extends SAbstractAnnotation {
 } // SProcessingAnnotation

@@ -17,10 +17,9 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
-import de.hu_berlin.u.saltnpepper.graph.impl.LabelImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 
 @SuppressWarnings("serial")
-public class SProcessingAnnotationImpl extends LabelImpl implements SProcessingAnnotation {
+public class SProcessingAnnotationImpl extends SAbstractAnnotationImpl implements SProcessingAnnotation {
 
 } // SAnnotationImpl

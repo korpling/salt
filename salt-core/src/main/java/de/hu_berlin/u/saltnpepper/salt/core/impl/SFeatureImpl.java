@@ -17,10 +17,9 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
-import de.hu_berlin.u.saltnpepper.graph.impl.LabelImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 
 @SuppressWarnings("serial")
-public class SFeatureImpl extends LabelImpl implements SFeature {
+public class SFeatureImpl extends SAbstractAnnotationImpl implements SFeature {
 
 } // SAnnotationImpl

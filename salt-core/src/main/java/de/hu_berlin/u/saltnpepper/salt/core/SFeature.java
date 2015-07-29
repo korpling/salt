@@ -40,5 +40,5 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  * @author florian
  *
  */
-public interface SFeature extends Label {
+public interface SFeature extends SAbstractAnnotation {
 } // SFeature

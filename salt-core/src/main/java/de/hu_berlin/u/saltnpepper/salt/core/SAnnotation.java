@@ -43,5 +43,5 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  * @author florian
  *
  */
-public interface SAnnotation extends Label {
+public interface SAnnotation extends SAbstractAnnotation {
 } // SAnnotation

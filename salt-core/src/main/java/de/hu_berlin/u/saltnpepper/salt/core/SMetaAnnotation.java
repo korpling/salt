@@ -53,5 +53,5 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  * @author florian
  *
  */
-public interface SMetaAnnotation extends Label {
+public interface SMetaAnnotation extends SAbstractAnnotation {
 } // SMetaAnnotation
