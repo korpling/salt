@@ -17,8 +17,6 @@
  */
 package de.hu_berlin.u.saltnpepper.graph.impl.tests;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import java.util.Set;
 import java.util.Vector;

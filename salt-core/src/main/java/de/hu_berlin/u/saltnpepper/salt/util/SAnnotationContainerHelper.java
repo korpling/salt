@@ -54,9 +54,11 @@ public class SAnnotationContainerHelper {
 
 		/** The real iterator, to which this iterator delegates its methods **/
 		protected Iterator<Label> delegatee = null;
+		protected Class<E>clazz= null;
 
-		public MyIterator(Iterator<Label> delegatee) {
+		public MyIterator(Iterator<Label> delegatee, Class<E> clazz) {
 			this.delegatee = delegatee;
+			this.clazz= clazz;
 		}
 
 		/**
@@ -79,15 +81,19 @@ public class SAnnotationContainerHelper {
 			}
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public synchronized E next() {
 			E retVal = next;
 			next = null;
 			if (retVal == null) {
 				Label label = null;
-				while (((label = delegatee.next()) != null) && (!(label instanceof SAnnotation))) {
+				while ( (delegatee.hasNext())&& ((label = delegatee.next()) != null) && (!(clazz.isInstance(label)))) {
 				}
-				retVal = (E) label;
+				if (clazz.isInstance(label)){
+					retVal = (E) label;
+				}
+
 			}
 			return (retVal);
 		}
@@ -164,7 +170,7 @@ public class SAnnotationContainerHelper {
 	public static Iterator<SAnnotation> iterator_SAnnotation(SAnnotationContainer container) {
 		Iterator<SAnnotation> retVal = null;
 		if (container != null) {
-			retVal = new MyIterator<SAnnotation>(container.getLabels().iterator());
+			retVal = new MyIterator<SAnnotation>(container.getLabels().iterator(), SAnnotation.class);
 		}
 		return (retVal);
 	}
@@ -285,7 +291,7 @@ public class SAnnotationContainerHelper {
 	public static Iterator<SMetaAnnotation> iterator_SMetaAnnotation(SAnnotationContainer container) {
 		Iterator<SMetaAnnotation> retVal = null;
 		if (container != null) {
-			retVal = new MyIterator<SMetaAnnotation>(container.getLabels().iterator());
+			retVal = new MyIterator<SMetaAnnotation>(container.getLabels().iterator(), SMetaAnnotation.class);
 		}
 		return (retVal);
 	}
@@ -352,7 +358,7 @@ public class SAnnotationContainerHelper {
 	public static Iterator<SProcessingAnnotation> iterator_SProcessingAnnotation(SAnnotationContainer container) {
 		Iterator<SProcessingAnnotation> retVal = null;
 		if (container != null) {
-			retVal = new MyIterator<SProcessingAnnotation>(container.getLabels().iterator());
+			retVal = new MyIterator<SProcessingAnnotation>(container.getLabels().iterator(), SProcessingAnnotation.class);
 		}
 		return (retVal);
 	}
@@ -426,7 +432,7 @@ public class SAnnotationContainerHelper {
 	public static Iterator<SFeature> iterator_SFeature(SAnnotationContainer container) {
 		Iterator<SFeature> retVal = null;
 		if (container != null) {
-			retVal = new MyIterator<SFeature>(container.getLabels().iterator());
+			retVal = new MyIterator<SFeature>(container.getLabels().iterator(), SFeature.class);
 		}
 		return (retVal);
 	}

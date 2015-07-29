@@ -211,6 +211,31 @@ public abstract class SAnnotationContainerTest {
 
 		assertEquals(getFixture(), anno.getContainer());
 	}
+	/**
+	 * Creates some {@link SAnnotation} and {@link SMetaAnnotation} objects and
+	 * adds them in a mixed order to the container. The iterator is checked if
+	 * it finds each {@link SAnnotation} object.
+	 */
+	@Test
+	public void testIterator_SMetaAnnotation(){
+		Set<SMetaAnnotation> metaAnnos= new HashSet<>();
+		getFixture().createAnnotation("stts", "pos", "VVFIN");
+		metaAnnos.add(getFixture().createMetaAnnotation(null, "meta1", "val1"));
+		metaAnnos.add(getFixture().createMetaAnnotation(null, "meta2", "val2"));
+		getFixture().createAnnotation(null, "lemma", "go");
+		getFixture().createAnnotation(null, "text", "went");
+		metaAnnos.add(getFixture().createMetaAnnotation(null, "meta3", "val3"));
+		getFixture().createAnnotation(null, "other", null);
+		
+		Iterator<SMetaAnnotation> it= getFixture().iterator_SMetaAnnotation();
+		Set<SMetaAnnotation> itAnnos= new HashSet<>();
+		while (it.hasNext()){
+			itAnnos.add(it.next());
+		}
+		assertEquals(itAnnos.size(), metaAnnos.size());
+		assertTrue(itAnnos.containsAll(metaAnnos));
+		assertTrue(metaAnnos.containsAll(itAnnos));
+	}
 	// =============================< SMetaAnnotation
 	// =============================> SProcessingAnnotation
 	@Test
