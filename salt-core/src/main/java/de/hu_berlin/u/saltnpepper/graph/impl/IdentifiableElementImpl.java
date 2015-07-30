@@ -22,7 +22,7 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 	public void setIdentifier(Identifier identifier) {
 		if (identifier != null) {
 			if (getIdentifier() != null) {
-				removeLabel(SaltUtil.IDENTIFIER_NAMESPACE, SaltUtil.IDENTIFIER_NAME);
+				removeLabel(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_IDENTIFIER);
 			}
 			this.identifier = identifier;
 			addLabel(identifier);

@@ -60,8 +60,8 @@ public class IdentifierTest {
 	@Test
 	public void testQNameHandling() {
 		// should be ok
-		String name = SaltUtil.IDENTIFIER_NAME;
-		String qName = SaltUtil.IDENTIFIER_NAMESPACE + Identifier.NS_SEPERATOR + name;
+		String name = SaltUtil.KW_IDENTIFIER;
+		String qName = SaltUtil.SALT_NAMESPACE + Identifier.NS_SEPERATOR + name;
 		getFixture().setQName(name);
 		assertEquals(qName, getFixture().getQName());
 	}
@@ -78,7 +78,7 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testGetQName() {
-		String qname = SaltUtil.IDENTIFIER_NAMESPACE + SaltUtil.NS_SEPERATOR + SaltUtil.IDENTIFIER_NAME;
+		String qname = SaltUtil.SALT_NAMESPACE + SaltUtil.NAMESPACE_SEPERATOR + SaltUtil.KW_IDENTIFIER;
 		assertEquals(qname, getFixture().getQName());
 		getFixture().setName("something");
 		assertEquals(qname, getFixture().getQName());
@@ -102,9 +102,9 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testSetName() {
-		assertEquals(SaltUtil.IDENTIFIER_NAME, getFixture().getName());
+		assertEquals(SaltUtil.KW_IDENTIFIER, getFixture().getName());
 		getFixture().setName("somename");
-		assertEquals(SaltUtil.IDENTIFIER_NAME, getFixture().getName());
+		assertEquals(SaltUtil.KW_IDENTIFIER, getFixture().getName());
 	}
 
 	/**
@@ -112,9 +112,9 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testSetNameSpace() {
-		assertEquals(SaltUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
+		assertEquals(SaltUtil.SALT_NAMESPACE, getFixture().getNamespace());
 		getFixture().setNamespace("somename");
-		assertEquals(SaltUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
+		assertEquals(SaltUtil.SALT_NAMESPACE, getFixture().getNamespace());
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class IdentifierTest {
 	@Test
 	public void testCheckOpposite() {
 		MyContainer newContainer = new MyContainer();
-		Identifier id= GraphFactory.createIdentifier(newContainer, SaltUtil.IDENTIFIER_NAME);
+		Identifier id= GraphFactory.createIdentifier(newContainer, SaltUtil.KW_IDENTIFIER);
 		assertEquals(newContainer.getIdentifier(), id);
 		
 		newContainer.setId("newId");
@@ -133,6 +133,6 @@ public class IdentifierTest {
 
 	@Test
 	public void testGeneralNameHandling() {
-		assertEquals(SaltUtil.IDENTIFIER_NAMESPACE, getFixture().getNamespace());
+		assertEquals(SaltUtil.SALT_NAMESPACE, getFixture().getNamespace());
 	}
 } // IdentifierTest

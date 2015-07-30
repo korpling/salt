@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
+import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 
 /**
  * This class contains a set of helpful methods.
@@ -13,28 +14,43 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
  */
 public class SaltUtil {
 	/**
-	 * Separator between namespace and name: qname= NAMESPACE
-	 * {@value #NS_SEPERATOR} NAME.
-	 */
-	public static final String NS_SEPERATOR = "::";
-	/**
 	 * default name for of derived namespace-attribute
 	 */
-	public static final String IDENTIFIER_NAMESPACE = "salt";
-
+	public static final String SALT_NAMESPACE = "salt";
 	/**
-	 * default name for of derived name-attribute
+	 * Separator between namespace and name: qname= NAMESPACE
+	 * {@value #NAMESPACE_SEPERATOR} NAME.
 	 */
-	public static final String IDENTIFIER_NAME = "id";
+	public static final String NAMESPACE_SEPERATOR = "::";
 	/**
-	 * QName of label for storing a new label determining the salt-data type of
-	 * the value of this label.
+	 * Name of {@link Label} to store the identifier of a node, relation, graph
+	 * or layer.
 	 */
-	public static final String KW_SVAL_TYPE = "SVAL_TYPE";
+	public static final String KW_IDENTIFIER = "id";
+	/**
+	 * Qualified name of {@link Label} to store the identifier of a node,
+	 * relation, graph or layer.
+	 */
+	public static final String KW_QNAME_ID = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_IDENTIFIER;
+	/**
+	 * Name for {@link SProcessingAnnotation} to store the type of a labels
+	 * value.
+	 */
+	public static final String KW_VALUE_TYPE = "SVAL_TYPE";
+	/**
+	 * Name for {@link SProcessingAnnotation} to store the name of a node,
+	 * relation, graph or label.
+	 */
+	public static final String KW_NAME = "SNAME";
+	/**
+	 * Qualified name for {@link SProcessingAnnotation} to store the name of a
+	 * node, relation, graph or label.
+	 */
+	public static final String KW_QNAME_NAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_NAME;
 
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
-	 * qualified name: qname= NAMESPACE {@value #NS_SEPERATOR} NAME.
+	 * qualified name: qname= NAMESPACE {@value #NAMESPACE_SEPERATOR} NAME.
 	 * 
 	 * @param namespace
 	 *            the namespace of a label
@@ -60,7 +76,7 @@ public class SaltUtil {
 	public static Pair<String, String> splitQName(String qName) {
 		Pair<String, String> retVal = null;
 		if ((qName != null) && (!qName.isEmpty())) {
-			String[] fullName = qName.split(NS_SEPERATOR);
+			String[] fullName = qName.split(NAMESPACE_SEPERATOR);
 			StringBuffer ns = new StringBuffer();
 			String name = null;
 			for (int i = 0; i < fullName.length; i++) {
@@ -71,7 +87,7 @@ public class SaltUtil {
 					if ((ns == null) || (ns.toString().isEmpty()))
 						ns.append(fullName[i]);
 					else {
-						ns.append(NS_SEPERATOR);
+						ns.append(NAMESPACE_SEPERATOR);
 						ns.append(fullName[i]);
 					}
 				}

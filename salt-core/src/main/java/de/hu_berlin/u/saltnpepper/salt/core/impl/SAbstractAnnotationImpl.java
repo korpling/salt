@@ -43,7 +43,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public SDATATYPE getValueType() {
 		SDATATYPE retVal = null;
 
-		Label label = super.getLabel(SaltUtil.KW_SVAL_TYPE);
+		Label label = super.getLabel(SaltUtil.KW_VALUE_TYPE);
 		if (label != null) {
 			if ((label.getValue() == null) && (this.getValue() != null)) {
 				label.setValue(computeSValueType());
@@ -61,10 +61,10 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	 */
 	@Override
 	public void setValueType(SDATATYPE newSValueType) {
-		Label label = super.getLabel(SaltUtil.KW_SVAL_TYPE);
+		Label label = super.getLabel(SaltUtil.KW_VALUE_TYPE);
 		if (label == null) {
 			label = GraphFactory.createLabel();
-			label.setQName(SaltUtil.KW_SVAL_TYPE);
+			label.setQName(SaltUtil.KW_VALUE_TYPE);
 			this.addLabel(label);
 		}
 		if (newSValueType == null){

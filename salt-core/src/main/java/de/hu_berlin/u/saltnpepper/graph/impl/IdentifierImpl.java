@@ -10,8 +10,8 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 	/**
 	 * Instantiates an {@link IdentifierImpl} object and sets its passed
 	 * container and id. Further sets its namespace to
-	 * {@link SaltUtil#IDENTIFIER_NAMESPACE} and its name to
-	 * {@link SaltUtil#IDENTIFIER_NAME}.
+	 * {@link SaltUtil#SALT_NAMESPACE} and its name to
+	 * {@link SaltUtil#KW_IDENTIFIER}.
 	 * 
 	 * @param container
 	 * @param id
@@ -19,8 +19,8 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 	public IdentifierImpl(IdentifiableElement container, String id) {
 		this.container = container;
 		this.value = id;
-		super.setNamespace(SaltUtil.IDENTIFIER_NAMESPACE);
-		super.setName(SaltUtil.IDENTIFIER_NAME);
+		super.setNamespace(SaltUtil.SALT_NAMESPACE);
+		super.setName(SaltUtil.KW_IDENTIFIER);
 		if (container != null) {
 			container.setIdentifier(this);
 		}

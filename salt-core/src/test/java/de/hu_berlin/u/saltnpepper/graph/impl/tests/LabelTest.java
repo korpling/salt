@@ -171,8 +171,8 @@ public class LabelTest {
 		// test1
 		label = this.getFixture();
 		ns = null;
-		name = "name1" + SaltUtil.NS_SEPERATOR + "name2";
-		QName = ns + SaltUtil.NS_SEPERATOR + name;
+		name = "name1" + SaltUtil.NAMESPACE_SEPERATOR + "name2";
+		QName = ns + SaltUtil.NAMESPACE_SEPERATOR + name;
 		label.setNamespace(ns);
 		try {
 			label.setName(name);
