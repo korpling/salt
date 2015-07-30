@@ -29,6 +29,19 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 		}
 	}
 
+	/**
+	 * {@inheritDoc} In case the passed qualified name is equal to
+	 * {@link SaltUtil#KW_QNAME_ID} the internal reference to
+	 * {@link #identifier} is set to null.
+	 **/
+	@Override
+	public void removeLabel(String qName) {
+		if (SaltUtil.KW_QNAME_ID.equals(qName)) {
+			identifier = null;
+		}
+		super.removeLabel(qName);
+	}
+
 	/** {@inheritDoc IdentifiableElement#getId()} **/
 	@Override
 	public String getId() {

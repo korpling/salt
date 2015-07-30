@@ -200,5 +200,5 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		}
 		this.name.setValue(name);
 	}
-	// =======================================< SNamedElement
+	// =======================================< SNamedElement	
 }
