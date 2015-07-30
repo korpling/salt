@@ -336,7 +336,7 @@ public class GraphTraverserModuleTest {
 		List<SNode> startNodes = null;
 		GRAPH_TRAVERSE_TYPE traverseType = null;
 		String traverseId = "traverseId";
-		getFixture().setGraph(SGraphTest.createGraph_Tree());
+		getFixture().setGraph(TestHelper.createGraph_Tree());
 
 		startNodes = getFixture().getGraph().getRoots();
 		traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
@@ -368,12 +368,12 @@ public class GraphTraverserModuleTest {
 	@Test
 	public void testThreading_TOP_DOWN_DEPTH_FIRST() throws Exception {
 		// uses the tree as graph
-		getFixture().setGraph(SGraphTest.createGraph_Tree());
+		getFixture().setGraph(TestHelper.createGraph_Tree());
 
 		List<SNode> startNodes = null;
 		GRAPH_TRAVERSE_TYPE traverseType = null;
 		String traverseId = null;
-		getFixture().setGraph(SGraphTest.createGraph_Tree());
+		getFixture().setGraph(TestHelper.createGraph_Tree());
 
 		startNodes = getFixture().getGraph().getRoots();
 		traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
@@ -435,12 +435,12 @@ public class GraphTraverserModuleTest {
 	@Test
 	public void testThreading_TOP_DOWN_BREADTH_FIRST() throws Exception {
 		// uses the tree as graph
-		getFixture().setGraph(SGraphTest.createGraph_Tree());
+		getFixture().setGraph(TestHelper.createGraph_Tree());
 
 		List<SNode> startNodes = null;
 		GRAPH_TRAVERSE_TYPE traverseType = null;
 		String traverseId = null;
-		getFixture().setGraph(SGraphTest.createGraph_Tree());
+		getFixture().setGraph(TestHelper.createGraph_Tree());
 
 		startNodes = getFixture().getGraph().getRoots();
 		traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST;
@@ -506,7 +506,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_DEPTH_FIRST_Tree() {
-		SGraph graph = SGraphTest.createGraph_Tree();
+		SGraph graph = TestHelper.createGraph_Tree();
 		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node4", "node5", "node7" };
 		String[] nodeOrderWayBack = { "node3", "node6", "node2", "node5", "node4", "node7", "node1" };
 		TraverserChecker checker = new TraverserChecker();
@@ -522,7 +522,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_DEPTH_FIRST_DAG() {
-		SGraph graph = SGraphTest.createGraph_DAG();
+		SGraph graph = TestHelper.createGraph_DAG();
 		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node4", "node2", "node3", "node6" };
 		String[] nodeOrderWayBack = { "node3", "node6", "node2", "node1", "node3", "node6", "node2", "node4" };
 		TraverserChecker checker = new TraverserChecker();
@@ -540,7 +540,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_DEPTH_FIRST_Cycle() throws Exception {
-		SGraph graph = SGraphTest.createGraph_Cycle();
+		SGraph graph = TestHelper.createGraph_Cycle();
 		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node6", "node7", "node2" };
 		String[] nodeOrderWayBack = { "node3", "node6", "node2", "node1", "node3", "node6", "node2", "node4" };
 		TraverserChecker checker = new TraverserChecker();
@@ -560,7 +560,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_DEPTH_FIRST_CycleUnsafe() {
-		SGraph graph = SGraphTest.createGraph_SimpleCycle();
+		SGraph graph = TestHelper.createGraph_SimpleCycle();
 		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node3", "node6", "node7" };
 		String[] nodeOrderWayBack = { "node3", "node3", "node7", "node6", "node2", "node7", "node6", "node2", "node1" };
 		TraverserChecker checker = new TraverserChecker();
@@ -577,7 +577,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_BOTTOM_UP_DEPTH_FIRST_Tree() {
-		SGraph graph = SGraphTest.createGraph_Tree();
+		SGraph graph = TestHelper.createGraph_Tree();
 		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node5", "node4", "node1", "node6", "node2", "node1", "node7", "node1" };
 		String[] nodeOrderWayBack = { "node1", "node2", "node3", "node1", "node4", "node5", "node1", "node2", "node6", "node1", "node7" };
 		TraverserChecker checker = new TraverserChecker();
@@ -593,7 +593,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_BOTTOM_UP_DEPTH_FIRST_DAG() {
-		SGraph graph = SGraphTest.createGraph_DAG();
+		SGraph graph = TestHelper.createGraph_DAG();
 		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node4", "node6", "node2", "node1", "node4" };
 		String[] nodeOrderWayBack = { "node1", "node4", "node2", "node3", "node1", "node4", "node2", "node6" };
 		TraverserChecker checker = new TraverserChecker();
@@ -609,7 +609,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_BOTTOM_UP_DEPTH_FIRST_Cycle() {
-		SGraph graph = SGraphTest.createGraph_Cycle();
+		SGraph graph = TestHelper.createGraph_Cycle();
 		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node4", "node7", "node6", "node2", "node1", "node4" };
 		String[] nodeOrderWayBack = { "node1", "node4", "node2", "node3", "node1", "node4", "node2", "node6" };
 		TraverserChecker checker = new TraverserChecker();
@@ -634,12 +634,12 @@ public class GraphTraverserModuleTest {
 	@Test
 	public void testThreading_BOTTOM_UP_DEPTH_FIRST() throws Exception {
 		// uses the tree as graph
-		getFixture().setGraph(SGraphTest.createGraph_Tree());
+		getFixture().setGraph(TestHelper.createGraph_Tree());
 
 		List<SNode> startNodes = null;
 		GRAPH_TRAVERSE_TYPE traverseType = null;
 		String traverseId = null;
-		getFixture().setGraph(SGraphTest.createGraph_Tree());
+		getFixture().setGraph(TestHelper.createGraph_Tree());
 
 		startNodes = getFixture().getGraph().getLeafs();
 		traverseType = GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST;
@@ -700,7 +700,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_BREADTH_FIRST_Tree() {
-		SGraph graph = SGraphTest.createGraph_Tree();
+		SGraph graph = TestHelper.createGraph_Tree();
 		String[] nodeOrderWayThere = { "node1", "node2", "node4", "node7", "node3", "node6", "node5" };
 		String[] nodeOrderWayBack = { "node1", "node2", "node4", "node7", "node3", "node6", "node5" };
 		TraverserChecker checker = new TraverserChecker();
@@ -718,7 +718,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_BREADTH_FIRST_DAG() {
-		SGraph graph = SGraphTest.createGraph_DAG();
+		SGraph graph = TestHelper.createGraph_DAG();
 		String[] nodeOrderWayThere = { "node1", "node4", "node2", "node2", "node3", "node6", "node3", "node6" };
 		String[] nodeOrderWayBack = { "node1", "node4", "node2", "node2", "node3", "node6", "node3", "node6" };
 		TraverserChecker checker = new TraverserChecker();
@@ -737,7 +737,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_BREADTH_FIRST_DAG_NON_ROOT_START() {
-		SGraph graph = SGraphTest.createGraph_DAG();
+		SGraph graph = TestHelper.createGraph_DAG();
 		String[] nodeOrderWayThere = { "node2", "node3", "node6" };
 		String[] nodeOrderWayBack = { "node2", "node3", "node6" };
 		TraverserChecker checker = new TraverserChecker();
@@ -758,7 +758,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_DEPTH_FIRST_DAG_NON_ROOT_START() {
-		SGraph graph = SGraphTest.createGraph_DAG();
+		SGraph graph = TestHelper.createGraph_DAG();
 		String[] nodeOrderWayThere = { "node2", "node3", "node6" };
 		String[] nodeOrderWayBack = { "node3", "node6", "node2" };
 		TraverserChecker checker = new TraverserChecker();
@@ -837,7 +837,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_TOP_DOWN_BREADTH_FIRST_CycleUnsafe() {
-		SGraph graph = SGraphTest.createGraph_SimpleCycle();
+		SGraph graph = TestHelper.createGraph_SimpleCycle();
 		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node3", "node6", "node7" };
 		String[] nodeOrderWayBack = nodeOrderWayThere.clone();
 		TraverserChecker checker = new TraverserChecker();
@@ -856,7 +856,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_BOTTOM_UP_BREADTH_FIRST_Tree() {
-		SGraph graph = SGraphTest.createGraph_Tree();
+		SGraph graph = TestHelper.createGraph_Tree();
 		// String[] nodeOrderWayThere= {"node3", "node6", "node5", "node7",
 		// "node2", "node2", "node4", "node1", "node1", "node1", "node1"};
 		String[] nodeOrderWayThere = { "node3", "node5", "node6", "node7", "node2", "node4", "node2", "node1", "node1", "node1", "node1" };
@@ -877,7 +877,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_BOTTOM_UP_BREADTH_FIRST_DAG() {
-		SGraph graph = SGraphTest.createGraph_DAG();
+		SGraph graph = TestHelper.createGraph_DAG();
 		String[] nodeOrderWayThere = { "node3", "node6", "node2", "node2", "node1", "node4", "node1", "node4" };
 		String[] nodeOrderWayBack = nodeOrderWayThere.clone();
 		TraverserChecker checker = new TraverserChecker();
@@ -895,7 +895,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_BOTTOM_UP_BREADTH_FIRST_Cycle() {
-		SGraph graph = SGraphTest.createGraph_Cycle();
+		SGraph graph = TestHelper.createGraph_Cycle();
 		{
 			String[] nodeOrderWayThere = { "node3", "node2", "node1", "node4" };
 			String[] nodeOrderWayBack = { "node3", "node2", "node1", "node4" };
@@ -945,7 +945,7 @@ public class GraphTraverserModuleTest {
 	 */
 	@Test
 	public void testTraverse_BOTTOM_UP_BREADTH_FIRST_CycleUnsafe() {
-		SGraph graph = SGraphTest.createGraph_SimpleCycle();
+		SGraph graph = TestHelper.createGraph_SimpleCycle();
 		List<SNode> startNodes = new ArrayList<>();
 		startNodes.add(graph.getNode("node3"));
 		startNodes.add(graph.getNode("node7"));

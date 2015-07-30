@@ -11,6 +11,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.SAnnotationContainerHelper;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImpl<S, T> implements SRelation<S, T> {
@@ -164,16 +165,41 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	}
 
 	// =======================================< SFeature
+	// =======================================> SNamedElement
+	@Override
+	public void removeLabel(String qName) {
+		if (SaltUtil.KW_QNAME_NAME.equals(qName)){
+			name= null;
+		}
+		super.removeLabel(qName);
+	}
+	
+	/** The feature object containing the name of the node **/
+	protected SFeature name= null;
+	
+	/** {@inheritDoc} **/
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		if (name== null){			
+			SFeature feature= getFeature(SaltUtil.KW_QNAME_NAME);
+			if (feature!= null){
+				name= feature;
+			}
+			if (name== null){
+				return(null);
+			}
+		}
+		return(name.getValue_STEXT());
 	}
 
+	/** {@inheritDoc} **/
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-
+		if (this.name== null){
+			this.name= createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_NAME, null);
+		}
+		this.name.setValue(name);
 	}
+	// =======================================< SNamedElement
 
 }
