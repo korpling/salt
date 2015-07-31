@@ -545,18 +545,18 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	protected void basicAddLayer(Layer<N, R> layer) {
 		if (layer != null) {
 			if (!layers.contains(layer)) {
-				// if relation has no id a new id will be given to relation
+				// if layers has no id a new id will be given to layer
 				if (layer.getId() == null) {
-					layer.setId("r" + getRelations().size());
+					layer.setId("l" + getLayers().size());
 				}
 				int i = 0;
 				// the given id, which eventually has to be extended for
 				// artificial
 				// counter
 				String idBase = layer.getId();
-				while (getRelation(layer.getId()) != null) {
-					// if relation already exists, create new Id
-					layer.setId(idBase + "_" + (getRelations().size() + i));
+				while (getLayer(layer.getId()) != null) {
+					// if layer already exists, create new Id
+					layer.setId(idBase + "_" + (getLayers().size() + i));
 					i++;
 				}
 				layers.add(layer);
