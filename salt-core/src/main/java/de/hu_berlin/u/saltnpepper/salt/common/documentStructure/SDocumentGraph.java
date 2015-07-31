@@ -20,8 +20,7 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
-
+import de.hu_berlin.german.korpling.saltnpepper.salt.common.tokenizer.Tokenizer;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
@@ -146,7 +145,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<STimelineRelation> getSTimelineRelations();
+	List<STimelineRelation> getSTimelineRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SSpanning Relations</b></em>'
@@ -170,7 +169,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<SSpanningRelation> getSSpanningRelations();
+	List<SSpanningRelation> getSSpanningRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SSpans</b></em>' containment reference
@@ -192,7 +191,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<SSpan> getSSpans();
+	List<SSpan> getSSpans();
 
 	/**
 	 * Returns the value of the '<em><b>SStructures</b></em>' containment
@@ -215,7 +214,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<SStructure> getSStructures();
+	List<SStructure> getSStructures();
 
 	/**
 	 * Returns the value of the '<em><b>SDominance Relations</b></em>'
@@ -239,7 +238,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<SDominanceRelation> getSDominanceRelations();
+	List<SDominanceRelation> getSDominanceRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SPointing Relations</b></em>'
@@ -263,7 +262,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true"
 	 * @generated
 	 */
-	EList<SPointingRelation> getSPointingRelations();
+	List<SPointingRelation> getSPointingRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SAudio DS Relations</b></em>'
@@ -286,7 +285,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<SAudioDSRelation> getSAudioDSRelations();
+	List<SAudioDSRelation> getSAudioDSRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SAudio Data Sources</b></em>'
@@ -309,7 +308,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<SAudioDataSource> getSAudioDataSources();
+	List<SAudioDataSource> getSAudioDataSources();
 
 	/**
 	 * Returns the value of the '<em><b>SOrder Relations</b></em>' containment
@@ -332,7 +331,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<SOrderRelation> getSOrderRelations();
+	List<SOrderRelation> getSOrderRelations();
 
 	/**
 	 * Creates and returns a '<em><b>SRelation</b></em>' of the type given by
@@ -375,7 +374,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model sDSSequencesMany="true"
 	 * @generated
 	 */
-	SToken createSToken(EList<SDataSourceSequence> sDSSequences);
+	SToken createSToken(List<SDataSourceSequence> sDSSequences);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
@@ -417,7 +416,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model sTokensMany="true"
 	 * @generated
 	 */
-	SSpan createSSpan(EList<SToken> sTokens);
+	SSpan createSSpan(List<SToken> sTokens);
 
 	/**
 	 * Creates a new {@link SStructure} object, adds it to the graph and returns
@@ -447,7 +446,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model sStructuresMany="true"
 	 * @generated
 	 */
-	SStructure createSStructure(EList<SStructuredNode> sStructures);
+	SStructure createSStructure(List<SStructuredNode> sStructures);
 
 	/**
 	 * Creates an {@link STimeline} object being contained in this
@@ -479,7 +478,7 @@ public interface SDocumentGraph extends SGraph {
 	 *         passed sequence
 	 * @model
 	 */
-	EList<SToken> getSTokensBySequence(SDataSourceSequence sequence);
+	List<SToken> getSTokensBySequence(SDataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SSpan} objects which refer to the passed
@@ -494,7 +493,7 @@ public interface SDocumentGraph extends SGraph {
 	 *         sequence
 	 * @model
 	 */
-	EList<SSpan> getSSpanBySequence(SDataSourceSequence sequence);
+	List<SSpan> getSSpanBySequence(SDataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SStructure} objects which refer to the passed
@@ -509,7 +508,7 @@ public interface SDocumentGraph extends SGraph {
 	 *         passed sequence
 	 * @model
 	 */
-	EList<SStructure> getSStructureBySequence(SDataSourceSequence sequence);
+	List<SStructure> getSStructureBySequence(SDataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SNode} objects which refer to the passed
@@ -524,7 +523,7 @@ public interface SDocumentGraph extends SGraph {
 	 *         sequence
 	 * @model
 	 */
-	EList<SNode> getSNodeBySequence(SDataSourceSequence sequence);
+	List<SNode> getSNodeBySequence(SDataSourceSequence sequence);
 
 	/**
 	 * Returns the sequences as {@link SDataSourceSequence} which are overlapped
@@ -541,7 +540,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model sRelationTypesMany="true"
 	 * @generated
 	 */
-	EList<SDataSourceSequence> getOverlappedDSSequences(SNode sNode, EList<STYPE_NAME> sRelationTypes);
+	List<SDataSourceSequence> getOverlappedDSSequences(SNode sNode, List<STYPE_NAME> sRelationTypes);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -549,7 +548,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model sNodeMany="true" sRelationTypesMany="true"
 	 * @generated
 	 */
-	EList<SDataSourceSequence> getOverlappedDSSequences(EList<SNode> sNode, EList<STYPE_NAME> sRelationTypes);
+	List<SDataSourceSequence> getOverlappedDSSequences(List<SNode> sNode, List<STYPE_NAME> sRelationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subSNodeList</em> is
@@ -565,7 +564,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return true, if list is continuous
 	 * @model subSNodeListMany="true" fullSNodeListMany="true"
 	 */
-	boolean isContinuousByText(EList<SNode> subSNodeList, EList<SNode> fullSNodeList);
+	boolean isContinuousByText(List<SNode> subSNodeList, List<SNode> fullSNodeList);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subSNodeList</em> is
@@ -582,7 +581,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model subSNodeListMany="true"
 	 * @generated
 	 */
-	boolean isContinuousByText(EList<SNode> subSNodeList);
+	boolean isContinuousByText(List<SNode> subSNodeList);
 
 	/**
 	 * Returns all {@link SToken} objects being contained in the given list and
@@ -595,7 +594,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model sTokens2sortMany="true"
 	 * @generated
 	 */
-	EList<SToken> getSortedSTokenByText(EList<SToken> sTokens2sort);
+	List<SToken> getSortedSTokenByText(List<SToken> sTokens2sort);
 
 	/**
 	 * Returns all {@link SToken} objects being contained in the list
@@ -606,7 +605,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	EList<SToken> getSortedSTokenByText();
+	List<SToken> getSortedSTokenByText();
 
 	/**
 	 * Sorts all {@link SToken} and {@link STextualRelation} objects being
@@ -633,7 +632,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model
 	 * @generated
 	 */
-	EList<SNode> getRootsBySRelation(STYPE_NAME sType);
+	List<SNode> getRootsBySRelation(STYPE_NAME sType);
 
 	/**
 	 * Returns all nodes, which are roots for the given relation-class respects
@@ -651,7 +650,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a map of types, with corresponding lists of root nodes
 	 * @model keyType="java.lang.String" valueType="java.lang.String"
 	 */
-	Map<String, EList<SNode>> getRootsBySRelationSType(STYPE_NAME sType);
+	Map<String, List<SNode>> getRootsBySRelationSType(STYPE_NAME sType);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
@@ -693,7 +692,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model
 	 * @generated
 	 */
-	EList<SToken> tokenize();
+	List<SToken> tokenize();
 
 	/**
 	 * Creates a new {@link Tokenizer} object to tokenize the set
@@ -784,7 +783,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            if true, a blank after each new text is inserted
 	 * @generated
 	 */
-	EList<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, EList<String> texts, Boolean insertSpace);
+	List<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -810,7 +809,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model overlappingRelationTypesMany="true"
 	 * @generated
 	 */
-	EList<SToken> getOverlappedSTokens(SNode overlappingNode, EList<STYPE_NAME> overlappingRelationTypes);
+	List<SToken> getOverlappedSTokens(SNode overlappingNode, List<STYPE_NAME> overlappingRelationTypes);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->

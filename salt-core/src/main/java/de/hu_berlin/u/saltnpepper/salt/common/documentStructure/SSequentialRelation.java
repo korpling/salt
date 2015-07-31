@@ -21,4 +21,11 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
 public interface SSequentialRelation<S extends SNode, T extends SNode> extends SRelation<S, T> {
+	public Integer getStart();
+
+	public void setStart(Integer value);
+
+	public Integer getEnd();
+
+	public void setEnd(Integer value);
 } // SSequentialRelation
