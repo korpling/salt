@@ -8,3 +8,4 @@ Semantic changes in simple Salt
 - the list of nodes, layers and edges returned by the graph is immutable
 - A layer has sets with preserved order instead of lists for nodes and relations
 - a layer provides addNode and addEdge method, it is recommended to use them and not to add things directlyx into the list
+- the type of an edge is only one value instead of a list

@@ -171,6 +171,9 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 		if (SaltUtil.KW_QNAME_NAME.equals(qName)){
 			name= null;
 		}
+		if (SaltUtil.KW_QNAME_TYPE.equals(qName)){
+			type= null;
+		}
 		super.removeLabel(qName);
 	}
 	
@@ -201,5 +204,33 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 		this.name.setValue(name);
 	}
 	// =======================================< SNamedElement
+	
+	// =======================================> STypedElement
+	/** The feature object containing the type of the node **/
+	protected SFeature type= null;
+	
+	/** {@inheritDoc} **/
+	@Override
+	public String getType() {
+		if (type== null){			
+			SFeature feature= getFeature(SaltUtil.KW_QNAME_TYPE);
+			if (feature!= null){
+				type= feature;
+			}
+			if (type== null){
+				return(null);
+			}
+		}
+		return(type.getValue_STEXT());
+	}
 
+	/** {@inheritDoc} **/
+	@Override
+	public void setType(String type) {
+		if (this.type== null){
+			this.type= createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_TYPE, null);
+		}
+		this.type.setValue(type);
+	}
+	// =======================================< STypedElement
 }
