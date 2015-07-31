@@ -25,12 +25,9 @@ package de.hu_berlin.u.saltnpepper.salt.exceptions;
  * @author Florian Zipser
  *
  */
+@SuppressWarnings("serial")
 public class SaltException extends java.lang.RuntimeException {
-	/**
-	 * generated serialVersionUID
-	 */
-	private static final long serialVersionUID = 7152733137673010658L;
-
+	
 	public SaltException() {
 		super();
 	}

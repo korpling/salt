@@ -15,20 +15,19 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.exceptions;
+package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-@SuppressWarnings("serial")
-public class SaltTraverserException extends SaltException {
+import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
-	public SaltTraverserException() {
-		super();
-	}
+/**
+ *
+ */
+public interface SAudioDSRelation extends SRelation<SAudioDataSource, SToken> {
+	public Double getSStart();
 
-	public SaltTraverserException(String s) {
-		super(s);
-	}
+	public void setSStart(Double value);
 
-	public SaltTraverserException(String s, Throwable ex) {
-		super(s, ex);
-	}
-}
+	public Double getSEnd();
+
+	public void setSEnd(Double value);
+} // SAudioDSRelation

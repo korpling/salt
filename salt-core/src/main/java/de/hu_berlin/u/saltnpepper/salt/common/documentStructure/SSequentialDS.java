@@ -15,20 +15,17 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.exceptions;
+package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-@SuppressWarnings("serial")
-public class SaltTraverserException extends SaltException {
+import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
-	public SaltTraverserException() {
-		super();
-	}
+public interface SSequentialDS extends SNode {
+	public Object getSData();
 
-	public SaltTraverserException(String s) {
-		super(s);
-	}
+	public void setSData(Object value);
 
-	public SaltTraverserException(String s, Throwable ex) {
-		super(s, ex);
-	}
-}
+	public Integer getSStart();
+
+	public Integer getSEnd();
+
+} // SSequentialDS

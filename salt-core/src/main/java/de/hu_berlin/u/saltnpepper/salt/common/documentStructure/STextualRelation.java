@@ -15,20 +15,16 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.exceptions;
+package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-@SuppressWarnings("serial")
-public class SaltTraverserException extends SaltException {
+import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 
-	public SaltTraverserException() {
-		super();
-	}
-
-	public SaltTraverserException(String s) {
-		super(s);
-	}
-
-	public SaltTraverserException(String s, Throwable ex) {
-		super(s, ex);
-	}
-}
+/**
+ * A {@link STextualRelation} links a primary text (as source) with a token (as target).
+ * A {@link STextualRelation} further contains two labels (or more precisely {@link SFeature}
+ * objects) representing the start and the end position determining the interval
+ * of the primary text overlapped by the token.
+ * @author florian
+ */
+public interface STextualRelation extends SSequentialRelation<SToken, STextualDS>, STextOverlappingRelation<SToken, STextualDS> {
+} // STextualRelation

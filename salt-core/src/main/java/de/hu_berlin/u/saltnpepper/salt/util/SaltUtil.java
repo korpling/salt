@@ -57,6 +57,19 @@ public class SaltUtil {
 	public static final String KW_QNAME_TYPE = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_TYPE;
 
 	/**
+	 * The name of the {@link SFeature} for the reference to an audio file.
+	 */
+	public static final String FEAT_SAUDIO_REFERNCE="SAUDIO_REFERENCE";
+
+	/**
+	 * The name of the {@link SFeature} for the start value.
+	 */
+	public static final String FEAT_SSTART= "SSTART";
+	/**
+	 * The name of the {@link SFeature} for the end value.
+	 */
+	public static final String FEAT_SEND= "SEND";
+	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
 	 * qualified name: qname= NAMESPACE {@value #NAMESPACE_SEPERATOR} NAME.
 	 * 
@@ -110,4 +123,14 @@ public class SaltUtil {
 		}
 		return (retVal);
 	}
+	
+	/**
+	 * name of index for node-types
+	 */
+	public static final String IDX_SNODETYPE = "idx_sNodeType";
+	/**
+	 * name of index for relation-types
+	 */
+	public static final String IDX_SRELATIONTYPE = "idx_sRelationType";
+
 }

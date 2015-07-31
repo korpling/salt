@@ -31,8 +31,8 @@ import de.hu_berlin.u.saltnpepper.graph.Relation;
  * @author Florian Zipser
  *
  */
+@SuppressWarnings("serial")
 public class SaltInsertionException extends java.lang.RuntimeException {
-	private static final long serialVersionUID = -5231306000162630734L;
 
 	/**
 	 * Initializes an object of this exception class.

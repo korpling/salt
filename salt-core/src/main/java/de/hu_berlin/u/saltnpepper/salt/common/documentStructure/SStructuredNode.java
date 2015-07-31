@@ -15,20 +15,15 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.exceptions;
+package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-@SuppressWarnings("serial")
-public class SaltTraverserException extends SaltException {
+import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
-	public SaltTraverserException() {
-		super();
-	}
-
-	public SaltTraverserException(String s) {
-		super(s);
-	}
-
-	public SaltTraverserException(String s, Throwable ex) {
-		super(s, ex);
-	}
-}
+/**
+ * This class bundles the node types {@link SToken}, {@link SSpan} and
+ * {@link SStructure} to be used as target in a {@link SDominanceRelation}.
+ * 
+ * @author florian
+ */
+public interface SStructuredNode extends SNode {
+} // SStructuredNode

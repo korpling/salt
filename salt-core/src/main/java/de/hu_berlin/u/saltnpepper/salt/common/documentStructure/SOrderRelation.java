@@ -15,20 +15,16 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.exceptions;
+package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-@SuppressWarnings("serial")
-public class SaltTraverserException extends SaltException {
+import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
-	public SaltTraverserException() {
-		super();
-	}
-
-	public SaltTraverserException(String s) {
-		super(s);
-	}
-
-	public SaltTraverserException(String s, Throwable ex) {
-		super(s, ex);
-	}
-}
+/**
+ * This class provides SOrderRelation, to determine the order of SNodes. Means
+ * creating a path through nodes on "same level", to identify, that one nodes
+ * comes before another one, when it is not computable from the datasources.
+ * 
+ * @author florian
+ */
+public interface SOrderRelation extends SRelation<SStructuredNode, SStructuredNode> {
+} // SOrderRelation

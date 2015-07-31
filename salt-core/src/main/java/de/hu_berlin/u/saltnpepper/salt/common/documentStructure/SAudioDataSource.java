@@ -15,20 +15,24 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.exceptions;
+package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-@SuppressWarnings("serial")
-public class SaltTraverserException extends SaltException {
+import org.eclipse.emf.common.util.URI;
 
-	public SaltTraverserException() {
-		super();
-	}
+public interface SAudioDataSource extends SSequentialDS, Bla {
 
-	public SaltTraverserException(String s) {
-		super(s);
-	}
+	/**
+	 * Returns a {@link URI} object, which points to a audio file. If no uri was
+	 * set null is returned.
+	 * 
+	 * @return {@link URI} to audio file
+	 */
+	public URI getSAudioReference();
 
-	public SaltTraverserException(String s, Throwable ex) {
-		super(s, ex);
-	}
-}
+	/**
+	 * Sets a {@link URI} object, which points to a audio file.
+	 * 
+	 * @param audioRef reference to the audio file
+	 */
+	public void setSAudioReference(URI audioRef);
+} // SAudioDataSource

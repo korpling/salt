@@ -17,18 +17,19 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.exceptions;
 
-@SuppressWarnings("serial")
-public class SaltTraverserException extends SaltException {
+public class SaltTokenizerException extends SaltException {
 
-	public SaltTraverserException() {
-		super();
-	}
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3806907508823082271L;
 
-	public SaltTraverserException(String s) {
-		super(s);
-	}
-
-	public SaltTraverserException(String s, Throwable ex) {
-		super(s, ex);
-	}
+	public SaltTokenizerException()
+	{ super(); }
+	
+    public SaltTokenizerException(String s)
+    { super(s); }
+    
+	public SaltTokenizerException(String s, Throwable ex)
+	{super(s, ex); }
 }

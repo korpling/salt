@@ -15,20 +15,13 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.exceptions;
+package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-@SuppressWarnings("serial")
-public class SaltTraverserException extends SaltException {
+import de.hu_berlin.u.saltnpepper.salt.core.SNode;
+import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
-	public SaltTraverserException() {
-		super();
-	}
 
-	public SaltTraverserException(String s) {
-		super(s);
-	}
+public interface STextOverlappingRelation<S extends SNode, T extends SNode> extends SRelation<S, T> {
+	public Boolean isSTextOverlapping();
 
-	public SaltTraverserException(String s, Throwable ex) {
-		super(s, ex);
-	}
-}
+} // STextOverlappingRelation
