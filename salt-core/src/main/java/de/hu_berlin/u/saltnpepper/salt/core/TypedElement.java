@@ -9,10 +9,11 @@ package de.hu_berlin.u.saltnpepper.salt.core;
  *
  */
 public interface TypedElement {
-	public static final String NAMESPACE = "salt";
-	public static final String NAME = "type";
+	/**
+	 * Returns the type of this element
+	 * @return
+	 */
+	public String getType();
 
-	public String getName();
-
-	public void setName(String name);
+	public void setType(String name);
 }

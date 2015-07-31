@@ -46,7 +46,7 @@ import de.hu_berlin.u.saltnpepper.salt.SDATATYPE;
  * @author florian
  *
  */
-public interface SAbstractAnnotation extends Label {
+public interface SAbstractAnnotation extends Label, SAnnotationContainer {
 	/**
 	 * Returns the value of the '<em><b>SValue Type</b></em>' attribute. The
 	 * literals are from the enumeration

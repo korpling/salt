@@ -4,7 +4,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
-import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 
 /**
  * This class contains a set of helpful methods.
@@ -33,20 +33,28 @@ public class SaltUtil {
 	 */
 	public static final String KW_QNAME_ID = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_IDENTIFIER;
 	/**
-	 * Name for {@link SProcessingAnnotation} to store the type of a labels
+	 * Name for {@link SFeature} to store the type of a labels
 	 * value.
 	 */
-	public static final String KW_VALUE_TYPE = "SVAL_TYPE";
+	public static final String KW_VALUE_DATATYPE = "SVAL_TYPE";
 	/**
-	 * Name for {@link SProcessingAnnotation} to store the name of a node,
+	 * Name for {@link SFeature} to store the name of a node,
 	 * relation, graph or label.
 	 */
 	public static final String KW_NAME = "SNAME";
 	/**
-	 * Qualified name for {@link SProcessingAnnotation} to store the name of a
+	 * Qualified name for {@link SFeature} to store the name of a
 	 * node, relation, graph or label.
 	 */
 	public static final String KW_QNAME_NAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_NAME;
+	/**
+	 * Name for {@link SFeature} to store the type of a relation.
+	 */
+	public static final String KW_TYPE = "STYPE";
+	/**
+	 * Qualified name for {@link SFeature} to store the type of a relation.
+	 */
+	public static final String KW_QNAME_TYPE = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_TYPE;
 
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a

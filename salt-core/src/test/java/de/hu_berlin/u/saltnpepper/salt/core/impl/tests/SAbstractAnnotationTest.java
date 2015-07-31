@@ -17,9 +17,11 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.core.impl.tests;
 
-import java.io.File;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.TestCase;
+import java.io.File;
 
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
@@ -27,17 +29,15 @@ import org.junit.Test;
 import de.hu_berlin.u.saltnpepper.salt.SDATATYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
 
-public abstract class SAbstractAnnotationTest extends TestCase {
-	protected SAbstractAnnotation fixture = null;
-
+public abstract class SAbstractAnnotationTest extends SAnnotationContainerTest {
+	
 	public SAbstractAnnotation getFixture() {
-		return fixture;
+		return (SAbstractAnnotation)fixture;
 	}
-
 	public void setFixture(SAbstractAnnotation fixture) {
 		this.fixture = fixture;
 	}
-
+	
 	@Test
 	public void testGetSValueSNUMERIC() {
 		Long value = 1L;
