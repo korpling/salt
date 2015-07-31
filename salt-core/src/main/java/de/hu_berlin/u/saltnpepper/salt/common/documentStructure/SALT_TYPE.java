@@ -32,7 +32,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * @model
  * @generated
  */
-public enum STYPE_NAME implements Enumerator {
+public enum SALT_TYPE implements Enumerator {
 	/**
 	 * The '<em><b>STEXTUAL DS</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -375,8 +375,8 @@ public enum STYPE_NAME implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final STYPE_NAME[] VALUES_ARRAY =
-		new STYPE_NAME[] {
+	private static final SALT_TYPE[] VALUES_ARRAY =
+		new SALT_TYPE[] {
 			STEXTUAL_DS,
 			STOKEN,
 			SSPAN,
@@ -399,7 +399,7 @@ public enum STYPE_NAME implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<STYPE_NAME> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<SALT_TYPE> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>STYPE NAME</b></em>' literal with the specified literal value.
@@ -407,9 +407,9 @@ public enum STYPE_NAME implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static STYPE_NAME get(String literal) {
+	public static SALT_TYPE get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			STYPE_NAME result = VALUES_ARRAY[i];
+			SALT_TYPE result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -423,9 +423,9 @@ public enum STYPE_NAME implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static STYPE_NAME getByName(String name) {
+	public static SALT_TYPE getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			STYPE_NAME result = VALUES_ARRAY[i];
+			SALT_TYPE result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -439,7 +439,7 @@ public enum STYPE_NAME implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static STYPE_NAME get(int value) {
+	public static SALT_TYPE get(int value) {
 		switch (value) {
 			case STEXTUAL_DS_VALUE: return STEXTUAL_DS;
 			case STOKEN_VALUE: return STOKEN;
@@ -486,7 +486,7 @@ public enum STYPE_NAME implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private STYPE_NAME(int value, String name, String literal) {
+	private SALT_TYPE(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;

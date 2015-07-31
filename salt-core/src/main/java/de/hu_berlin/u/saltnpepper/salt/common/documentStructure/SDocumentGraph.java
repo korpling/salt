@@ -344,12 +344,12 @@ public interface SDocumentGraph extends SGraph {
 	 *            .hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode
 	 * @param de
 	 *            .hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode
-	 * @param STYPE_NAME
+	 * @param SALT_TYPE
 	 * @return de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation
 	 * @model
 	 * @generated
 	 */
-	SRelation addSNode(SNode sourceSNode, SNode targetSNode, STYPE_NAME sRelationType);
+	SRelation addSNode(SNode sourceSNode, SNode targetSNode, SALT_TYPE sRelationType);
 
 	/**
 	 * Creates and adds a new {@link STextualDS} node object and sets its text
@@ -460,40 +460,36 @@ public interface SDocumentGraph extends SGraph {
 	 * 
 	 * @return returns a new created and automatically filled {@link STimeline}
 	 *         object if no one exists yet
-	 * @model
-	 * @generated
 	 */
-	STimeline createSTimeline();
+	public STimeline createSTimeline();
 
 	/**
 	 * Returns all {@link SToken} objects which refer to the passed
 	 * {@link SDataSourceSequence} object. The passed object determines the
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
+	 * and the type of data source by the instance <em>sSequentialDS</em>.
 	 * 
-	 * @param sDataSourceSequence
-	 *            an object determing the sequence to which the returned
+	 * @param sequence
+	 *            an object determining the sequence to which the returned
 	 *            {@link SToken} objects refer to.
 	 * @return a list of {@link SToken} objects which refer or overlap the
 	 *         passed sequence
-	 * @model
 	 */
-	List<SToken> getSTokensBySequence(SDataSourceSequence sequence);
+	public List<SToken> getSTokensBySequence(SDataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SSpan} objects which refer to the passed
 	 * {@link SDataSourceSequence} object. The passed object determines the
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
+	 * and the type of data source by the instance <em>sSequentialDS</em>.
 	 * 
-	 * @param sDataSourceSequence
-	 *            an object determing the sequence to which the returned
+	 * @param sequence
+	 *            an object determining the sequence to which the returned
 	 *            {@link SSpan} objects refer to.
 	 * @return a list of {@link SSpan} objects which refer or overlap the passed
 	 *         sequence
-	 * @model
 	 */
-	List<SSpan> getSSpanBySequence(SDataSourceSequence sequence);
+	public List<SSpan> getSSpanBySequence(SDataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SStructure} objects which refer to the passed
@@ -501,100 +497,83 @@ public interface SDocumentGraph extends SGraph {
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
 	 * and the type of datasource by the instance <em>sSequentialDS</em>.
 	 * 
-	 * @param sDataSourceSequence
+	 * @param sequence
 	 *            an object determing the sequence to which the returned
 	 *            {@link SStructure} objects refer to.
 	 * @return a list of {@link SStructure} objects which refer or overlap the
 	 *         passed sequence
-	 * @model
 	 */
-	List<SStructure> getSStructureBySequence(SDataSourceSequence sequence);
+	public List<SStructure> getSStructureBySequence(SDataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SNode} objects which refer to the passed
 	 * {@link SDataSourceSequence} object. The passed object determines the
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
+	 * and the type of data source by the instance <em>sSequentialDS</em>.
 	 * 
-	 * @param sDataSourceSequence
-	 *            an object determing the sequence to which the returned
+	 * @param sequence
+	 *            an object determining the sequence to which the returned
 	 *            {@link SNode} objects refer to.
 	 * @return a list of {@link SNode} objects which refer or overlap the passed
 	 *         sequence
-	 * @model
 	 */
-	List<SNode> getSNodeBySequence(SDataSourceSequence sequence);
+	public List<SNode> getNodeBySequence(SDataSourceSequence sequence);
 
 	/**
 	 * Returns the sequences as {@link SDataSourceSequence} which are overlapped
 	 * by the given {@link SNode} node. Overlapped means, that starting from the
 	 * given {@link SNode} node the {@link SSequentialDS} can reached by
-	 * traversing relations of onne of the types contained in the given list of
-	 * {@link STYPE_NAME}.
+	 * traversing relations of one of the types contained in the given list of
+	 * {@link SALT_TYPE}.
 	 * 
-	 * @param sNode
+	 * @param node
 	 *            node to start from
-	 * @param sRelationTypes
+	 * @param relationTypes
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link SDataSourceSequence} objects
-	 * @model sRelationTypesMany="true"
-	 * @generated
 	 */
-	List<SDataSourceSequence> getOverlappedDSSequences(SNode sNode, List<STYPE_NAME> sRelationTypes);
+	public List<SDataSourceSequence> getOverlappedDSSequences(SNode node, List<SALT_TYPE> relationTypes);
+
+	public List<SDataSourceSequence> getOverlappedDSSequences(List<SNode> sNode, List<SALT_TYPE> relationTypes);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model sNodeMany="true" sRelationTypesMany="true"
-	 * @generated
-	 */
-	List<SDataSourceSequence> getOverlappedDSSequences(List<SNode> sNode, List<STYPE_NAME> sRelationTypes);
-
-	/**
-	 * Returns true, if the given list of nodes <em>subSNodeList</em> is
+	 * Returns true, if the given list of nodes <em>subNodeList</em> is
 	 * continuous respecting the overlapped text. A list of nodes is continuous,
 	 * if there is no other node overlapping a text sequence, which is a
 	 * subsequence of the sequence overlapped by the given list and is not part
 	 * of the list.
 	 * 
-	 * @param subSNodeList
+	 * @param subNodeList
 	 *            list to check against fullSNodeList
-	 * @param fullSNodeList
+	 * @param fullNodeList
 	 *            list which contains all nodes in correct order
 	 * @return true, if list is continuous
-	 * @model subSNodeListMany="true" fullSNodeListMany="true"
 	 */
-	boolean isContinuousByText(List<SNode> subSNodeList, List<SNode> fullSNodeList);
+	public boolean isContinuousByText(List<SNode> subNodeList, List<SNode> fullNodeList);
 
 	/**
-	 * Returns true, if the given list of nodes <em>subSNodeList</em> is
+	 * Returns true, if the given list of nodes <em>subNodeList</em> is
 	 * continuous respecting the overlapped text. A list of nodes is continuous,
 	 * if there is no other node overlapping a text sequence, which is a
 	 * subsequence of the sequence overlapped by the given list and is not part
 	 * of the list. The fullSNodeList is given by the token list of this graph.
 	 * 
-	 * @param subSNodeList
+	 * @param subNodeList
 	 *            list to check against fullSNodeList
-	 * @param fullSNodeList
-	 *            list which contains all nodes in correct order
 	 * @return true, if list is continuous
-	 * @model subSNodeListMany="true"
-	 * @generated
 	 */
-	boolean isContinuousByText(List<SNode> subSNodeList);
+	public boolean isContinuousByText(List<SNode> subNodeList);
 
 	/**
 	 * Returns all {@link SToken} objects being contained in the given list and
-	 * sorts them by the {@link STextualRelation#getSStart()} value of
+	 * sorts them by the {@link STextualRelation#getStart()} value of
 	 * {@link SToken} object.
 	 * 
-	 * @param sTokens2sort
+	 * @param tokens2sort
 	 *            the list of {@link SToken} objects to sort
 	 * @return list of tokens in order of left text position
-	 * @model sTokens2sortMany="true"
-	 * @generated
 	 */
-	List<SToken> getSortedSTokenByText(List<SToken> sTokens2sort);
+	public List<SToken> getSortedSTokenByText(List<SToken> tokens2sort);
 
 	/**
 	 * Returns all {@link SToken} objects being contained in the list
@@ -602,10 +581,8 @@ public interface SDocumentGraph extends SGraph {
 	 * {@link STextualRelation#getSStart()} value of {@link SToken} object.
 	 * 
 	 * @return list of tokens in order of left text position
-	 * @model kind="operation"
-	 * @generated
 	 */
-	List<SToken> getSortedSTokenByText();
+	public List<SToken> getSortedTokenByText();
 
 	/**
 	 * Sorts all {@link SToken} and {@link STextualRelation} objects being
@@ -613,11 +590,8 @@ public interface SDocumentGraph extends SGraph {
 	 * {@link SDocumentGraph#getSTextualRelations()} by the
 	 * {@link STextualRelation#getSStart()} value of {@link SToken} and
 	 * {@link STextualRelation} object.
-	 * 
-	 * @model
-	 * @generated
 	 */
-	void sortSTokenByText();
+	public void sortTokenByText();
 
 	/**
 	 * Returns all SNode objects which are roots for the given SRelation
@@ -626,31 +600,33 @@ public interface SDocumentGraph extends SGraph {
 	 * Attention: Only the subtypes SPointingRelation, SSpanningRelation and
 	 * SDominanceRelation are supported yet. <br/>
 	 * 
-	 * @param sType
+	 * @param type
 	 *            type, which shall be used for computing roots
 	 * @return a list of SNode-objects which are roots
-	 * @model
-	 * @generated
 	 */
-	List<SNode> getRootsBySRelation(STYPE_NAME sType);
+	public List<SNode> getRootsByRelation(SALT_TYPE type);
 
 	/**
 	 * Returns all nodes, which are roots for the given relation-class respects
 	 * to the given SType of the traversed relation. The following example shows
 	 * the different to the method getRootsBySRelation(): Imagine the following
-	 * graphFor example: node1 ->t1 node2, node2 ->t2-> node3. Also imagine,
-	 * that -> is a relation of same class with sType=t1 respectivly sType=t2
-	 * The returned roots will be node1 and node 2, because of node1 is the root
-	 * of a subgraph for relation.sType=t1 and node2 is the root of the subgraph
-	 * for relation.sType=t2. Whereas the returned nodes of
+	 * graphFor example:
+	 * 
+	 * <pre>
+	 * node1 ->t1 node2, node2 ->t2-> node3
+	 * </pre>
+	 * 
+	 * Also imagine, that -> is a relation of same class with sType=t1
+	 * respectivly sType=t2 The returned roots will be node1 and node 2, because
+	 * of node1 is the root of a subgraph for relation.sType=t1 and node2 is the
+	 * root of the subgraph for relation.sType=t2. Whereas the returned nodes of
 	 * getRootsBySRelation() is only node1.
 	 * 
-	 * @param sType
+	 * @param type
 	 *            type, which shall be used for computing roots
 	 * @return a map of types, with corresponding lists of root nodes
-	 * @model keyType="java.lang.String" valueType="java.lang.String"
 	 */
-	Map<String, List<SNode>> getRootsBySRelationSType(STYPE_NAME sType);
+	public Map<String, List<SNode>> getRootsBySRelationSType(SALT_TYPE type);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
@@ -658,13 +634,17 @@ public interface SDocumentGraph extends SGraph {
 	 * {@link SSequentialDS} object. The created relation get the passed
 	 * positions.
 	 * 
-	 * @model
-	 * @generated
+	 * @param sequentialDS
+	 *            the data source to which the created token should be connected
+	 * @param start
+	 *            the offset in the data source where the created token starts
+	 * @param end
+	 *            the offset in the data source where the created token ends
+	 * @return the created token
 	 */
-	SToken createSToken(SSequentialDS sSequentialDS, Integer sStart, Integer sEnd);
+	public SToken createSToken(SSequentialDS sequentialDS, Integer start, Integer end);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Tokenizes all {@link STextualDS} object being contained in this
 	 * {@link SDocumentGraph} object. The Tokenization is similar to the
 	 * tokenization made by the TreeTagger tokenizer. This method calls the
@@ -686,13 +666,9 @@ public interface SDocumentGraph extends SGraph {
 	 * each token detected in the text given by
 	 * <code>sTextualDS.getSText()</code> an {@link SToken} object is created
 	 * and linked with the {@link STextualDS} object via a new
-	 * {@link STextualRelation} object containing the textual offset. <!--
-	 * end-model-doc -->
-	 * 
-	 * @model
-	 * @generated
+	 * {@link STextualRelation} object containing the textual offset.
 	 */
-	List<SToken> tokenize();
+	public List<SToken> tokenize();
 
 	/**
 	 * Creates a new {@link Tokenizer} object to tokenize the set
@@ -710,12 +686,12 @@ public interface SDocumentGraph extends SGraph {
 	 * {@link STextualRelation} object containing the textual offset. If the set
 	 * {@link STextualDS} object is empty or if it does not belong to this
 	 * {@link SDocumentGraph} object an exception is thrown.
+	 * 
 	 * @return a tokenizer object
 	 */
 	public Tokenizer createTokenizer();
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Inserts a token to the graph starting at position <em>posInText</em> and
 	 * relates them to the given {@link STextualDS} object.<br/>
 	 * An example:<br/>
@@ -744,11 +720,9 @@ public interface SDocumentGraph extends SGraph {
 	 *            text value, the new token should cover
 	 * @param insertSpace
 	 *            if true, a blank after each new text is inserted
-	 * @return new created token <!-- end-model-doc -->
-	 * @model
-	 * @generated
+	 * @return new created token
 	 */
-	SToken insertSTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace);
+	public SToken insertSTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace);
 
 	/**
 	 * Inserts n tokens (where n is the size of the given list <em>texts</em>)
@@ -770,7 +744,6 @@ public interface SDocumentGraph extends SGraph {
 	 * This  additional  text  is    a     text.
 	 * </pre>
 	 * 
-	 * @model textsMany="true"
 	 * @param sTextualDS
 	 *            the {@link STextualDS} object to which the new tokens should
 	 *            be related to. Make sure, that stextualDS is already contained
@@ -781,9 +754,8 @@ public interface SDocumentGraph extends SGraph {
 	 *            text values, the new tokens should cover
 	 * @param insertSpace
 	 *            if true, a blank after each new text is inserted
-	 * @generated
 	 */
-	List<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace);
+	public List<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -801,7 +773,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model
 	 * @generated
 	 */
-	SRelation createSRelation(SNode sSource, SNode sTarget, STYPE_NAME sRelationType, String sAnnotations);
+	SRelation createSRelation(SNode sSource, SNode sTarget, SALT_TYPE sRelationType, String sAnnotations);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -809,30 +781,26 @@ public interface SDocumentGraph extends SGraph {
 	 * @model overlappingRelationTypesMany="true"
 	 * @generated
 	 */
-	List<SToken> getOverlappedSTokens(SNode overlappingNode, List<STYPE_NAME> overlappingRelationTypes);
+	List<SToken> getOverlappedSTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * This method returns the exact text overlapped in the {@link STextualDS}
-	 * by the given {@link SNode}. <!-- end-model-doc -->
+	 * by the given {@link SNode}. Imagine the following graph:
 	 * 
-	 * @model
-	 * @generated
-	 */
-	String getSText(SNode sNode);
-
-	/**
-	 * Sets the SName of the SDocumentGraphImpl, but the parameter newSName is
-	 * just a dummy. The SName of the corresponding SDocument plus "_graph" will
-	 * be the SName.
+	 * <pre>
+	 *       n1
+	 *      /  \
+	 *  t1 t2  t3 t4      t5
+	 *   |  |  |   |      |
+	 * This is a sample text.
+	 * </pre>
 	 * 
-	 * @param newSName
-	 *            this value will be ignored
+	 * The method will return the text 'text' for token t5 and 'is a' for node
+	 * n1.
+	 * 
+	 * @param sNode
+	 *            the node for which the text should be retrieved.
+	 * @return the text which is overlapped by the passed node
 	 */
-	public void setSName(String newSName);
-
-	/**
-	 * What is this???
-	 */
-	void basicSetSElementId();
+	public String getSText(SNode sNode);
 } // SDocumentGraph
