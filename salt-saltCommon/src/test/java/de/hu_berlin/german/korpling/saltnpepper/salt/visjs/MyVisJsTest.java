@@ -2,21 +2,13 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.visjs;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.Flushable;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.Writer;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
 
 import org.eclipse.emf.common.util.EList;
 import org.junit.Test;
@@ -53,39 +45,47 @@ public class MyVisJsTest implements SGraphTraverseHandler{
 		
 	private  int currHigh;
 	private  int maxHigh;
-	private long maxLevel;
+	private  long maxLevel;
 	private  int currHighFromToken;
-	boolean graphContainsSpans = false;
 	
-	private SDocument doc;
-	private XMLOutputFactory outputFactory;
-	private OutputStream os;
-	private XMLStreamWriter writer;
-	private BufferedWriter out;
-	private JSONWriter jsonWriter;
-	private StringBuilder strBuilder;
+	private  SDocument doc;
+	private  XMLOutputFactory outputFactory;
+	private  OutputStream os;
+	private  XMLStreamWriter writer;
+	private  BufferedWriter out;
+	//test
+	private  BufferedWriter outEdges;
+	
+	private  JSONWriter jsonWriterNodes;
+	//test
+	private  JSONWriter jsonWriterEdges;
+	
+	private  long bufferSize;
+	
+	
+//	private StringBuilder strBuilder;
 	private static final String TRAV_MODE_CALC_LEVEL = "calcLevel";
 	private static final String TRAV_MODE_READ_NODES = "readNodes";
 	
 	
-	private HashSet <SNode> readRoots;
-	private EList<SNode> roots;
+	private final HashSet <SNode> readRoots;
+	private final EList<SNode> roots;
 	private int nGroupsId = 0;
 	
 	
 	// JSON output
-	private String id = "id";
-	private String label = "label";
-	private String color = "color";
-	private String x = "x";
-	private String level = "level";
-	private String group = "group";
+	private final String id = "id";
+	private final String label = "label";
+	private final String color = "color";
+	private final String x = "x";
+	private final String level = "level";
+	private final String group = "group";
 	
-	private String from = "{from: ";
-	private String to = "to: ";
+//	private String from = "{from: ";
+//	private String to = "to: ";
 	
-	private int xValue = 0;	
-	private String tokColorValue = "#CCFF99";
+	private  int xValue = 0;	
+	private final String tokColorValue = "#CCFF99";
 	//private int groupValue;
 	
 	
@@ -137,6 +137,7 @@ public MyVisJsTest (){
 	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();
 	
 	
+	
 	if (sSpans != null && (sSpans.size() > 0)){
 		nGroupsId += 1;
 	}
@@ -147,20 +148,35 @@ public MyVisJsTest (){
 		nGroupsId += 2;
 	}
 	
-	// this.os = new FileOutputStream(new File ("outputHTMLTest.html"));	
+	 try {
+		this.os = new FileOutputStream(new File ("../hierarchicalLayoutUserdefined.html"));
+	//	this.os = System.out;
+	} catch (FileNotFoundException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}	
 	readRoots = new HashSet <SNode>();
 	this.outputFactory = XMLOutputFactory.newInstance();
 	try {
-		this.writer = outputFactory.createXMLStreamWriter(System.out, "UTF-8");
+		this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
 	} catch (XMLStreamException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	
 	
-	this.out = new BufferedWriter(new OutputStreamWriter(System.out));		
-	this.jsonWriter = new JSONWriter(out);
-	this.strBuilder = new StringBuilder();
+	bufferSize = doc.getSDocumentGraph().getNumOfEdges() * 60;
+	
+	this.out = new BufferedWriter(new OutputStreamWriter(os));		
+	//TODO check the buffer size
+	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);
+	
+	//System.out.println("BufferSize: " + bufferSize);
+	
+	this.jsonWriterNodes = new JSONWriter(out);
+	this.jsonWriterEdges = new JSONWriter(outEdges);
+	
+	//this.strBuilder = new StringBuilder();
 	
 
 }
@@ -176,7 +192,7 @@ public MyVisJsTest (){
 
 
 		
-		writer.writeStartDocument();
+		writer.writeStartDocument("UTF-8", "1.0");
 		writer.writeCharacters(newline);
 		writer.writeStartElement(html);
 		writer.writeCharacters(newline);
@@ -222,14 +238,14 @@ public MyVisJsTest (){
 						+ "destroy();\n" 
 						+ "var connectionCount = [];\n" 
 						+ "nodes = [];\n" 
-						+ "edges = [];);\n");
+						+ "edges = [];\n");
 		
 		writer.flush();
 		
-		  writeJSON();
+		writeJSON();
 		
-		writer.writeCharacters("var container = document.getElementById('mynetwork');\n +"
-				+ "var data = {\n "
+		writer.writeCharacters("var container = document.getElementById('mynetwork');\n"
+				+ "var data = {\n"
 				+ "nodes: nodes,\n"
 				+ "edges: edges\n"
 				+ "};\n"
@@ -310,7 +326,7 @@ public MyVisJsTest (){
 		writer.writeEmptyElement(input);
 		writer.writeAttribute(attType,"hidden");
 		//TODO check the apostrophes
-		writer.writeAttribute(attId, "'direction'");
+		writer.writeAttribute(attId, "direction");
 		writer.writeAttribute(attValue, "UD");
 		writer.writeCharacters(newline);
 	
@@ -332,6 +348,7 @@ public MyVisJsTest (){
 		
 		writer.writeStartElement(script);
 		writer.writeAttribute(attLang, "JavaScript");
+		writer.writeCharacters(newline);
 		writer.writeCharacters("var directionInput = document.getElementById(\"direction\");\n"
 				+ "var btnUD = document.getElementById(\"btn-UD\");\n"
 				+ "btnUD.onclick = function() {\n"
@@ -375,6 +392,7 @@ public MyVisJsTest (){
 		writer.flush();
 		writer.close();
 		
+		outEdges.close();
 		out.close();
 		
 		
@@ -389,42 +407,52 @@ public MyVisJsTest (){
 		maxLevel = getMaxHighOfSDocGraph(doc) + 1;
 		EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
 		 if (sSpans != null && sSpans.size() != 0) {
-			 graphContainsSpans = true;
+		//	 graphContainsSpans = true;
 			 maxLevel++;			 
 		 }
 		
 	//	 System.out.println("maximales Level: " + maxLevel);
-		 strBuilder.append("var edges = new vis.DataSet(\n");
-		 strBuilder.append("[");
+		/* strBuilder.append("var edges = new vis.DataSet(\n");
+		 strBuilder.append("[");*/
 		 
 		 doc.getSDocumentGraph().sortSTokenByText();	  		 
 		 EList <SToken> sTokens = doc.getSDocumentGraph().getSTokens();
 		 
 		 out.append("var nodes = new vis.DataSet(\n");
 		 
-		jsonWriter.array();
+		jsonWriterNodes.array();
 		 for (SToken token : sTokens){			
 			 writeJSONObject(token, maxLevel);
 		 }
 		
-	
+		 outEdges.append("var edges = new vis.DataSet(\n");
+		 jsonWriterEdges.array();
 		 
 		 doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, 
 				 												TRAV_MODE_READ_NODES, this);		
 		 		 
-		 jsonWriter.endArray();			   
-		 out.append(");\n");
+		 jsonWriterNodes.endArray();			   
+		 out.append(");");
+		 out.newLine();
 		 out.flush();
 		
+		 
 		
-		 int commaIndex = strBuilder.lastIndexOf(",");
+		
+	/*	 int commaIndex = strBuilder.lastIndexOf(",");
 		 strBuilder.deleteCharAt(commaIndex);
 		 strBuilder.append("]");
-		 strBuilder.append(");\n");
+		 strBuilder.append(");\n");*/
+		
+		 jsonWriterEdges.endArray();		
+		 outEdges.append(");");
+		 outEdges.newLine();
+		 outEdges.flush();
+
 		 
-		 out.append(strBuilder.toString());
-		 out.append(newline);
-		 out.flush();
+	//	 out.append(strBuilder.toString());
+	//	 out.newLine();
+	//	 out.flush();
 		
 
 			
@@ -444,45 +472,52 @@ public MyVisJsTest (){
 	private void writeJSONObject (SNode node, long levelValue){
 		 try {
 			 
-		 jsonWriter.object();
-		 jsonWriter.key(id);
-		 jsonWriter.value(node.getSElementPath().fragment());
-		 jsonWriter.key(label);
+		 jsonWriterNodes.object();
+		 jsonWriterNodes.key(id);
+		 jsonWriterNodes.value(node.getSElementPath().fragment());
+		 jsonWriterNodes.key(label);
 		 String allLabels = "";
 	
 		   EList<SAnnotation> sAnnotations = node.getSAnnotations();
 		   if (sAnnotations.size() > 0){
+			
+			   
 			   for (SAnnotation annotation : sAnnotations) {
-				   allLabels += (annotation.getSName() + "=" + annotation.getSValue().toString() + newline);								   
+				   allLabels += (annotation.getSName() + "=" + annotation.getSValue().toString());
+				
+				   if (sAnnotations.indexOf(annotation) < sAnnotations.size()-1) {
+					   allLabels+= newline;								   
+				   }
 			   }
 		   }
 		   
 		   if (node instanceof SToken){
 			   String text = doc.getSDocumentGraph().getSText(node);
 				  if (text != null && !text.isEmpty()){
+					  allLabels+= newline;			
 					  allLabels += doc.getSDocumentGraph().getSText(node);
 				  }
 		   } 
 		   				
-		 jsonWriter.value(allLabels);	
+		 jsonWriterNodes.value(allLabels);	
 		 if (node instanceof SToken){
-			 jsonWriter.key(color);
-			 jsonWriter.value(tokColorValue);
-			 jsonWriter.key(x);
-			 jsonWriter.value(++xValue);
+			 jsonWriterNodes.key(color);
+			 jsonWriterNodes.value(tokColorValue);
+			 jsonWriterNodes.key(x);
+			 jsonWriterNodes.value(++xValue);
 		 }
 		 
-		 	 jsonWriter.key(level);
-			 jsonWriter.value(levelValue);
+		 	 jsonWriterNodes.key(level);
+			 jsonWriterNodes.value(levelValue);
 			 
 		if (node instanceof SSpan){
 			if (nGroupsId == 3){
-				 jsonWriter.key(group);
-				 jsonWriter.value("1");
+				 jsonWriterNodes.key(group);
+				 jsonWriterNodes.value("1");
 			}
 			else if (nGroupsId == 1){
-				jsonWriter.key(group);
-				jsonWriter.value("0");
+				jsonWriterNodes.key(group);
+				jsonWriterNodes.value("0");
 			}
 			// TODO error handling
 			
@@ -490,16 +525,17 @@ public MyVisJsTest (){
 		
 		if (node instanceof SStructure){
 			if (nGroupsId == 3 || nGroupsId == 2){
-				jsonWriter.key(group);
-				jsonWriter.value("0");
+				jsonWriterNodes.key(group);
+				jsonWriterNodes.value("0");
 			}
 			// TODO error handling
 		}
 		 
 		 
-		 jsonWriter.endObject();		
+		 jsonWriterNodes.endObject();		
 
 		out.append(newline);
+		out.flush();
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -584,12 +620,26 @@ public MyVisJsTest (){
 					  
 					  }
 					 
-				  strBuilder.append(from);
+				/*  strBuilder.append(from);
 				  strBuilder.append("\"" +fromNode.getSElementPath().fragment() + "\", ");
 				  strBuilder.append(to);
 				  strBuilder.append("\"" +currNode.getSElementPath().fragment() + "\"}");
 				  strBuilder.append(",");
-				  strBuilder.append(newline);
+				  strBuilder.append(newline);*/
+				  
+				  
+				  jsonWriterEdges.object();
+				  jsonWriterEdges.key("from");
+				  jsonWriterEdges.value(fromNode.getSElementPath().fragment());
+				  jsonWriterEdges.key("to");
+				  jsonWriterEdges.value(currNode.getSElementPath().fragment());
+				  jsonWriterEdges.endObject();
+				  try {
+					outEdges.newLine();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				  
 				}
