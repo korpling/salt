@@ -19,7 +19,7 @@ public class SaltFactory {
 	 * 
 	 * @return the internal factory.
 	 */
-	public static ISaltFactory getBla() {
+	public static ISaltFactory getFactory() {
 		return factory;
 	}
 
@@ -27,7 +27,7 @@ public class SaltFactory {
 	 * Returns the internal factory to create Salt objects.
 	 * @param factory internal factory
 	 */
-	public static void setBla(ISaltFactory factory) {
+	public static void setFactory(ISaltFactory factory) {
 		SaltFactory.factory = factory;
 	}
 
