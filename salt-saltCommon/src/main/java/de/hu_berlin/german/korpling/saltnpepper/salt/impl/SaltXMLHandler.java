@@ -40,6 +40,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Label;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.LabelableElement;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.exceptions.GraphInsertException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
@@ -180,6 +181,9 @@ public class SaltXMLHandler extends DefaultHandler2 {
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+		
+		Object resultObj = null;
+		
 		try {
 
 			if (TAG_SALT_PROJECT.equals(qName)) {
@@ -190,18 +194,18 @@ public class SaltXMLHandler extends DefaultHandler2 {
 				if (sName != null) {
 					project.setSName(sName);
 				}
-				currentContainer.push(project);
+				resultObj = project;
 			} else if (TAG_SCORPUS_GRAPH.equals(qName)) {
 				SCorpusGraph graph = SaltFactory.eINSTANCE.createSCorpusGraph();
 				setSaltObject(graph);
 				if (saltProject != null) {
 					saltProject.getSCorpusGraphs().add(graph);
 				}
-				currentContainer.push(graph);
+				resultObj = graph;
 			} else if (TAG_SDOCUMENT_GRAPH.equals(qName)) {
 				SDocumentGraph graph = SaltFactory.eINSTANCE.createSDocumentGraph();
 				setSaltObject(graph);
-				currentContainer.push(graph);
+				resultObj = graph;
 			} else if (TAG_NODES.equals(qName)) {
 				SNode sNode = null;
 				String type = attributes.getValue(ATT_TYPE);
@@ -221,10 +225,10 @@ public class SaltXMLHandler extends DefaultHandler2 {
 					sNode = SaltFactory.eINSTANCE.createSCorpus();
 				} else if (TYPE_SDOCUMENT.equals(type)) {
 					sNode = SaltFactory.eINSTANCE.createSDocument();
-				}
+				}				
 				if (sNode != null) {
 					setSaltObject(sNode);
-					currentContainer.push(sNode);
+					resultObj = sNode;
 					nodes.add(sNode);
 				}
 				String layersStr = attributes.getValue(ATT_LAYERS);
@@ -274,7 +278,7 @@ public class SaltXMLHandler extends DefaultHandler2 {
 					Integer targetIdx = Integer.parseInt(target.replaceAll("((//@sCorpusGraphs[.]0)|/)/@nodes.", ""));
 					sRel.setSTarget(nodes.get(targetIdx));
 					edges.add(sRel);
-					currentContainer.push(sRel);
+					resultObj = sRel;
 					String layersStr = attributes.getValue(ATT_LAYERS);
 					if (layersStr != null) {
 						layersStr = layersStr.replace("//@layers.", "");
@@ -298,7 +302,7 @@ public class SaltXMLHandler extends DefaultHandler2 {
 					}else if (sRel== null){
 						logger.warn("Could not load relation "+createXMLElement(qName, attributes)+" because of could not match type '"+type+"' to any relation. ");
 					}
-					currentContainer.push("EMPTY, because of a faulty xml-element (edges).");
+					resultObj = "EMPTY, because of a faulty xml-element (edges).";
 				}
 				
 			} else if (TAG_LABELS.equals(qName)) {
@@ -314,7 +318,7 @@ public class SaltXMLHandler extends DefaultHandler2 {
 					if ((!currentContainer.isEmpty()) && (currentContainer.peek() instanceof SIdentifiableElement)) {
 						((SIdentifiableElement) currentContainer.peek()).setSId((String) createObjectFromString(value));
 					}
-					currentContainer.push("SElementId");
+					resultObj = "SElementId";
 				} else if (TYPE_SFEATURE.equals(type)) {
 					label = SaltFactory.eINSTANCE.createSFeature();
 				} else if (TYPE_SANNOTATION.equals(type)) {
@@ -356,7 +360,7 @@ public class SaltXMLHandler extends DefaultHandler2 {
 					}
 
 					setSaltObject(label);
-					currentContainer.push(label);
+					resultObj = label;
 				}
 			} else if (TAG_LAYERS.equals(qName)) {
 				SLayer layer = null;
@@ -367,13 +371,19 @@ public class SaltXMLHandler extends DefaultHandler2 {
 				if (currentContainer.peek() instanceof SDocumentGraph) {
 					((SDocumentGraph) currentContainer.peek()).addSLayer(layer);
 				}
-				currentContainer.push(layer);
+				resultObj = layer;
 				layerIdx++;
 			}
 		} catch (Exception e) {
 			throw new SaltResourceException("Cannot load xml element in resource '"+getResource()+"': '" + createXMLElement(qName, attributes) + "'. A nested exception occured: "
 					+ e.getMessage(), e);
 		}
+		
+		// always push something on the element stack since endElement() will pop unconditionally
+		if(resultObj == null) {
+			resultObj = new Object();
+		}
+		currentContainer.push(resultObj);
 	}
 	
 	private String createXMLElement(String qName, Attributes attributes){
