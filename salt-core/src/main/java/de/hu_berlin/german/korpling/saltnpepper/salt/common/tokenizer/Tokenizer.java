@@ -54,6 +54,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltTokenizerException;
+import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 
 /**
  * The general task of this class is to tokenize a given text in the same order
@@ -363,11 +364,11 @@ public class Tokenizer {
 			// check if tokens exist for passed span
 			List<SToken> tokens = null;
 			if ((startPos != 0) || (endPos != sTextualDS.getSText().length()) || (getsDocumentGraph().getTextualDSs().size() > 1)) {
-				SDataSourceSequence sequence = SaltFactory.createSDataSourceSequence();
-				sequence.setSSequentialDS(sTextualDS);
-				sequence.setSStart(startPos);
-				sequence.setSEnd(endPos);
-				tokens = getsDocumentGraph().getSTokensBySequence(sequence);
+				DataSourceSequence sequence = new DataSourceSequence();
+				sequence.setDataSource(sTextualDS);
+				sequence.setStart(startPos);
+				sequence.setEnd(endPos);
+				tokens = getsDocumentGraph().getTokensBySequence(sequence);
 			} else {
 				tokens = getsDocumentGraph().getSTokens();
 			}
@@ -450,8 +451,8 @@ public class Tokenizer {
 
 						// redirect all relations to span
 						List<SRelation<SNode, SNode>> inRels = new ArrayList<>();
-						for (SRelation<SNode, SNode> edge : getsDocumentGraph().getInRelations(oldToken.getId())) {
-							inRels.add(edge);
+						for (SRelation rel : getsDocumentGraph().getInRelations(oldToken.getId())) {
+							inRels.add(rel);
 						}
 						for (SRelation inRel : inRels) {
 							if (inRel instanceof SSpanningRelation) {
@@ -466,6 +467,7 @@ public class Tokenizer {
 										rel.setSource(parentSpan);
 										rel.setTarget(overlappedToken);
 										getsDocumentGraph().addRelation(rel);
+//										getsDocumentGraph().addRelation(((SRelation<SNode, SNode>)(SRelation<? extends SNode, ? extends SNode>)rel));
 									}
 								}
 							} else {
@@ -473,7 +475,7 @@ public class Tokenizer {
 							}
 						}
 						List<SRelation<SNode, SNode>> outRels = new ArrayList<>();
-						for (SRelation outRel : getsDocumentGraph().getOutEdges(oldToken.getId())) {
+						for (SRelation outRel : getsDocumentGraph().getOutRelations(oldToken.getId())) {
 							if (!(outRel instanceof STextualRelation)) {
 								outRels.add(outRel);
 							}
