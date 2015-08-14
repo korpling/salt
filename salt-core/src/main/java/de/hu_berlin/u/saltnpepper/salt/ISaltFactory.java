@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.salt;
 
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
@@ -73,4 +74,11 @@ public interface ISaltFactory {
 	 * @return new {@link SLayer} object
 	 */
 	public  SLayer createSLayer();
+	
+	/**
+	 * Creates a new {@link SSpanningRelation} object.
+	 * 
+	 * @return new {@link SSpanningRelation} object
+	 */
+	public SSpanningRelation createSSpanningRelation();
 }

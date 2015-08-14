@@ -28,6 +28,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
+import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 
 /**
  * The document-structure covers the "real" linguistic data, which means primary
@@ -87,7 +88,7 @@ public interface SDocumentGraph extends SGraph {
 	 * 
 	 * @return all tokens
 	 */
-	public List<SToken> getSTokens();
+	public List<SToken> getTokens();
 
 	/**
 	 * Returns the value of the '<em><b>STimeline</b></em>' reference. It is
@@ -101,14 +102,14 @@ public interface SDocumentGraph extends SGraph {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>STimeline</em>' reference.
-	 * @see #setSTimeline(STimeline)
+	 * @see #setTimeline(STimeline)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_STimeline()
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph
 	 * @model opposite="sDocumentGraph" transient="true" volatile="true"
 	 *        derived="true"
 	 * @generated
 	 */
-	STimeline getSTimeline();
+	STimeline getTimeline();
 
 	/**
 	 * Sets the value of the '
@@ -118,10 +119,10 @@ public interface SDocumentGraph extends SGraph {
 	 * 
 	 * @param value
 	 *            the new value of the '<em>STimeline</em>' reference.
-	 * @see #getSTimeline()
+	 * @see #getTimeline()
 	 * @generated
 	 */
-	void setSTimeline(STimeline value);
+	void setTimeline(STimeline value);
 
 	/**
 	 * Returns the value of the '<em><b>STimeline Relations</b></em>'
@@ -145,7 +146,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<STimelineRelation> getSTimelineRelations();
+	List<STimelineRelation> getTimelineRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SSpanning Relations</b></em>'
@@ -374,7 +375,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model sDSSequencesMany="true"
 	 * @generated
 	 */
-	SToken createSToken(List<SDataSourceSequence> sDSSequences);
+	SToken createSToken(List<DataSourceSequence> sDSSequences);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
@@ -386,7 +387,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model
 	 * @generated
 	 */
-	SToken createSToken(SDataSourceSequence sDSSequence);
+	SToken createSToken(DataSourceSequence sDSSequence);
 
 	/**
 	 * Creates a new {@link SSpan} object, adds it to the graph and returns the
@@ -475,7 +476,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SToken} objects which refer or overlap the
 	 *         passed sequence
 	 */
-	public List<SToken> getSTokensBySequence(SDataSourceSequence sequence);
+	public List<SToken> getTokensBySequence(DataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SSpan} objects which refer to the passed
@@ -489,7 +490,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SSpan} objects which refer or overlap the passed
 	 *         sequence
 	 */
-	public List<SSpan> getSSpanBySequence(SDataSourceSequence sequence);
+	public List<SSpan> getSpansBySequence(DataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SStructure} objects which refer to the passed
@@ -498,12 +499,12 @@ public interface SDocumentGraph extends SGraph {
 	 * and the type of datasource by the instance <em>sSequentialDS</em>.
 	 * 
 	 * @param sequence
-	 *            an object determing the sequence to which the returned
+	 *            an object determining the sequence to which the returned
 	 *            {@link SStructure} objects refer to.
 	 * @return a list of {@link SStructure} objects which refer or overlap the
 	 *         passed sequence
 	 */
-	public List<SStructure> getSStructureBySequence(SDataSourceSequence sequence);
+	public List<SStructure> getStructuresBySequence(DataSourceSequence sequence);
 
 	/**
 	 * Returns all {@link SNode} objects which refer to the passed
@@ -517,7 +518,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SNode} objects which refer or overlap the passed
 	 *         sequence
 	 */
-	public List<SNode> getNodeBySequence(SDataSourceSequence sequence);
+	public List<SNode> getNodesBySequence(DataSourceSequence sequence);
 
 	/**
 	 * Returns the sequences as {@link SDataSourceSequence} which are overlapped
@@ -532,9 +533,9 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link SDataSourceSequence} objects
 	 */
-	public List<SDataSourceSequence> getOverlappedDSSequences(SNode node, List<SALT_TYPE> relationTypes);
+	public List<DataSourceSequence> getOverlappedDSSequences(SNode node, List<SALT_TYPE> relationTypes);
 
-	public List<SDataSourceSequence> getOverlappedDSSequences(List<SNode> sNode, List<SALT_TYPE> relationTypes);
+	public List<DataSourceSequence> getOverlappedDSSequences(List<SNode> sNode, List<SALT_TYPE> relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is
@@ -577,7 +578,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns all {@link SToken} objects being contained in the list
-	 * {@link SDocumentGraph#getSTokens()} and sorts them by the
+	 * {@link SDocumentGraph#getTokens()} and sorts them by the
 	 * {@link STextualRelation#getSStart()} value of {@link SToken} object.
 	 * 
 	 * @return list of tokens in order of left text position
@@ -586,7 +587,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Sorts all {@link SToken} and {@link STextualRelation} objects being
-	 * contained in the list {@link SDocumentGraph#getSTokens()} and
+	 * contained in the list {@link SDocumentGraph#getTokens()} and
 	 * {@link SDocumentGraph#getSTextualRelations()} by the
 	 * {@link STextualRelation#getSStart()} value of {@link SToken} and
 	 * {@link STextualRelation} object.

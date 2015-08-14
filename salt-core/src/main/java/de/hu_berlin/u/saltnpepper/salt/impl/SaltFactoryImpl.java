@@ -1,6 +1,8 @@
 package de.hu_berlin.u.saltnpepper.salt.impl;
 
 import de.hu_berlin.u.saltnpepper.salt.ISaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SSpanningRelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
@@ -24,6 +26,7 @@ public class SaltFactoryImpl implements ISaltFactory{
 	 * 
 	 * @return new {@link SGraph} object
 	 */
+	@Override
 	public  SGraph createSGraph() {
 		return (new SGraphImpl());
 	}
@@ -33,6 +36,7 @@ public class SaltFactoryImpl implements ISaltFactory{
 	 * 
 	 * @return new {@link SNode} object
 	 */
+	@Override
 	public  SNode createSNode() {
 		return (new SNodeImpl());
 	}
@@ -42,6 +46,7 @@ public class SaltFactoryImpl implements ISaltFactory{
 	 * 
 	 * @return new {@link SRelation} object
 	 */
+	@Override
 	public  SRelation<SNode, SNode> createSRelation() {
 		return (new SRelationImpl<SNode, SNode>());
 	}
@@ -51,6 +56,7 @@ public class SaltFactoryImpl implements ISaltFactory{
 	 * 
 	 * @return new {@link SAnnotation} object
 	 */
+	@Override
 	public  SAnnotation createSAnnotation() {
 		return (new SAnnotationImpl());
 	}
@@ -61,6 +67,7 @@ public class SaltFactoryImpl implements ISaltFactory{
 	 * 
 	 * @return new {@link SMetaAnnotation} object
 	 */
+	@Override
 	public  SMetaAnnotation createSMetaAnnotation() {
 		return (new SMetaAnnotationImpl());
 	}
@@ -71,6 +78,7 @@ public class SaltFactoryImpl implements ISaltFactory{
 	 * 
 	 * @return new {@link SProcessingAnnotation} object
 	 */
+	@Override
 	public  SProcessingAnnotation createSProcessingAnnotation() {
 		return (new SProcessingAnnotationImpl());
 	}
@@ -80,6 +88,7 @@ public class SaltFactoryImpl implements ISaltFactory{
 	 * 
 	 * @return new {@link SFeature} object
 	 */
+	@Override
 	public  SFeature createSFeature() {
 		return (new SFeatureImpl());
 	}
@@ -88,7 +97,17 @@ public class SaltFactoryImpl implements ISaltFactory{
 	 * 
 	 * @return new {@link SLayer} object
 	 */
+	@Override
 	public  SLayer createSLayer() {
 		return (new SLayerImpl());
+	}
+	/**
+	 * Creates a new {@link SSpanningRelation} object of type {@link SSpanningRelationImpl}.
+	 * 
+	 * @return new {@link SSpanningRelation} object
+	 */
+	@Override
+	public SSpanningRelation createSSpanningRelation() {
+		return (new SSpanningRelationImpl());
 	}
 }
