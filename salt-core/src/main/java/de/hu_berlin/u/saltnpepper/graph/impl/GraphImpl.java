@@ -288,7 +288,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/** {@inheritDoc Graph#addRelation(Relation)} **/
 	@Override
-	public void addRelation(R relation) {
+	public void addRelation(Relation<? extends Node, ? extends Node> relation) {
 		basicAddRelation(relation);
 		if (relation != null) {
 			if (relation instanceof RelationImpl) {
@@ -323,7 +323,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param relation
 	 *            relation to be inserted
 	 */
-	protected void basicAddRelation(R relation) {
+	@SuppressWarnings("unchecked")
+	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
 		if (relation == null) {
 			throw new SaltInsertionException(this, relation, "A null value is not allowed. ");
 		}
@@ -353,9 +354,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 			i++;
 		}
 		// add relation to internal list
-		relations.add(relation);
+		relations.add((R)relation);
 		// add relation to indexes
-		idx_relation_id.put(relation.getId(), relation);
+		idx_relation_id.put(relation.getId(), (R)relation);
 		update(null, relation, UPDATE_TYPE.RELATION_SOURCE);
 		update(null, relation, UPDATE_TYPE.RELATION_TARGET);
 	}
