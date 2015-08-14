@@ -15,22 +15,20 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
  *
  */
 public class SaltUtil {
-	/**
-	 * name of index for node-types
-	 */
+	/** name of index for node-types */
 	public static final String IDX_SNODETYPE = "idx_sNodeType";
-	/**
-	 * name of index for relation-types
-	 */
+	/** name of index for relation-types */
 	public static final String IDX_SRELATIONTYPE = "idx_sRelationType";
-	/**
-	 * name of index for relating ids and nodes
-	 */
+	/** name of index for relating ids and nodes */
 	public static final String IDX_ID_NODES = "idx_id_nodes";
-	/**
-	 * name of index for relating ids and relations
-	 */
+	/** name of index for relating ids and relations */
 	public static final String IDX_ID_RELATIONS = "idx_id_relation";
+	/** name of index for relating ids and layers */
+	public static final String IDX_ID_LAYER = "idx_id_layer";
+	/** name of index for relating node ids and outgoing relations */
+	public static final String IDX_OUT_RELATIONS = "idx_out_relations";
+	/** name of index for relating node ids and incoming relations */
+	public static final String IDX_IN_RELATIONS = "idx_in_relations";
 	/**
 	 * default name for of derived namespace-attribute
 	 */
@@ -82,7 +80,7 @@ public class SaltUtil {
 	 * QUalified name name for {@link SFeature} to store the uri reference of a
 	 * {@link SDocumentGraph} in a {@link SDocument}
 	 */
-	public static final String KW_QNAME_SDOCUMENT_GRAPH_LOCATION = SALT_NAMESPACE + NAMESPACE_SEPERATOR +KW_SDOCUMENT_GRAPH_LOCATION;
+	public static final String KW_QNAME_SDOCUMENT_GRAPH_LOCATION = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_SDOCUMENT_GRAPH_LOCATION;
 	/**
 	 * The name of the {@link SFeature} for the reference to an audio file.
 	 */

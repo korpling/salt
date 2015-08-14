@@ -94,8 +94,12 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		nodes = Collections.synchronizedList(new ArrayList<N>(expectedNodes));
 		relations = Collections.synchronizedList(new ArrayList<R>(expectedNodes));
 		indexMgr = new IndexMgrImpl();
-		// idx_node_id = new ConcurrentHashMap<>(expectedNodes);
 		indexMgr.createIndex(SaltUtil.IDX_ID_NODES, String.class, Node.class, expectedNodes, expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS, String.class, Node.class, expectedRelations, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_ID_LAYER, String.class, Node.class);
+		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, String.class, Node.class, expectedNodes, approximatedNodeDegree);
+		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, String.class, Node.class, expectedNodes, approximatedNodeDegree);
+		
 		idx_relation_id = new ConcurrentHashMap<>(expectedRelations);
 		idx_layer_id = new ConcurrentHashMap<>();
 		idx_out_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);

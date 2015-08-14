@@ -34,6 +34,9 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 * <ul>
 	 * <li>{@link SaltUtil#IDX_ID_NODES}</li>
 	 * <li>{@link SaltUtil#IDX_ID_RELATIONS}</li>
+	 * <li>{@link SaltUtil#IDX_ID_LAYER}</li>
+	 * <li>{@link SaltUtil#IDX_OUT_RELATIONS}</li>
+	 * <li>{@link SaltUtil#IDX_IN_RELATIONS}</li>
 	 * </ul>
 	 * Even further indexes can be added to the index manager.
 	 * 
