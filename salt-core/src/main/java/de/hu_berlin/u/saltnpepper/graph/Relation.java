@@ -16,7 +16,7 @@ package de.hu_berlin.u.saltnpepper.graph;
  * @param <S>
  *            source node of the relation
  * @param <T>
- *            target nod eof the relation
+ *            target node of the relation
  */
 public interface Relation<S extends Node, T extends Node> extends IdentifiableElement {
 

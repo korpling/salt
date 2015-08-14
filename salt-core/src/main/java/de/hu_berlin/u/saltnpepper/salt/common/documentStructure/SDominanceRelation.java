@@ -29,5 +29,5 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
  * 
  * @author florian
  */
-public interface SDominanceRelation extends STextOverlappingRelation<SStructure, SStructuredNode>, STimeOverlappingRelation<SStructure, SStructuredNode>, Bla {
+public interface SDominanceRelation extends STextOverlappingRelation<SStructure, SStructuredNode>, STimeOverlappingRelation<SStructure, SStructuredNode>, SDocumentGraphObject {
 } // SDominanceRelation

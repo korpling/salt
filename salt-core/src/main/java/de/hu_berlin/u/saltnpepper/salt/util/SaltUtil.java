@@ -4,6 +4,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 
 /**
@@ -33,18 +35,17 @@ public class SaltUtil {
 	 */
 	public static final String KW_QNAME_ID = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_IDENTIFIER;
 	/**
-	 * Name for {@link SFeature} to store the type of a labels
-	 * value.
+	 * Name for {@link SFeature} to store the type of a labels value.
 	 */
 	public static final String KW_VALUE_DATATYPE = "SVAL_TYPE";
 	/**
-	 * Name for {@link SFeature} to store the name of a node,
-	 * relation, graph or label.
+	 * Name for {@link SFeature} to store the name of a node, relation, graph or
+	 * label.
 	 */
 	public static final String KW_NAME = "SNAME";
 	/**
-	 * Qualified name for {@link SFeature} to store the name of a
-	 * node, relation, graph or label.
+	 * Qualified name for {@link SFeature} to store the name of a node,
+	 * relation, graph or label.
 	 */
 	public static final String KW_QNAME_NAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_NAME;
 	/**
@@ -57,18 +58,29 @@ public class SaltUtil {
 	public static final String KW_QNAME_TYPE = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_TYPE;
 
 	/**
+	 * Name for {@link SFeature} to store the uri reference of a
+	 * {@link SDocumentGraph} in a {@link SDocument}
+	 */
+	public static final String KW_SDOCUMENT_GRAPH_LOCATION = "SDOCUMENT_GRAPH_LOCATION";
+	/**
+	 * QUalified name name for {@link SFeature} to store the uri reference of a
+	 * {@link SDocumentGraph} in a {@link SDocument}
+	 */
+	public static final String KW_QNAME_SDOCUMENT_GRAPH_LOCATION = SALT_NAMESPACE + NAMESPACE_SEPERATOR +KW_SDOCUMENT_GRAPH_LOCATION;
+	/**
 	 * The name of the {@link SFeature} for the reference to an audio file.
 	 */
-	public static final String FEAT_SAUDIO_REFERNCE="SAUDIO_REFERENCE";
+	public static final String FEAT_SAUDIO_REFERNCE = "SAUDIO_REFERENCE";
 
 	/**
 	 * The name of the {@link SFeature} for the start value.
 	 */
-	public static final String FEAT_SSTART= "SSTART";
+	public static final String FEAT_SSTART = "SSTART";
 	/**
 	 * The name of the {@link SFeature} for the end value.
 	 */
-	public static final String FEAT_SEND= "SEND";
+	public static final String FEAT_SEND = "SEND";
+
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
 	 * qualified name: qname= NAMESPACE {@value #NAMESPACE_SEPERATOR} NAME.
@@ -123,7 +135,7 @@ public class SaltUtil {
 		}
 		return (retVal);
 	}
-	
+
 	/**
 	 * name of index for node-types
 	 */
@@ -132,5 +144,4 @@ public class SaltUtil {
 	 * name of index for relation-types
 	 */
 	public static final String IDX_SRELATIONTYPE = "idx_sRelationType";
-
 }

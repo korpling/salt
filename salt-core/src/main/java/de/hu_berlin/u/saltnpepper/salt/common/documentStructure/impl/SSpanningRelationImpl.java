@@ -5,6 +5,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelatio
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
+@SuppressWarnings("serial")
 public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implements SSpanningRelation {
 
 	@Override

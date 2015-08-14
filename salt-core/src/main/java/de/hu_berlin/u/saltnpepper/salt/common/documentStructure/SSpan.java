@@ -30,5 +30,5 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
  * 
  * @author florian
  */
-public interface SSpan extends SStructuredNode, Bla {
+public interface SSpan extends SStructuredNode, SDocumentGraphObject {
 } // SSpan

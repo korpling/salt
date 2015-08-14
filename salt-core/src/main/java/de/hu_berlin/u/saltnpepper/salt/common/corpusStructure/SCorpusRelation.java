@@ -27,20 +27,20 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
  * @author florian
  */
 public interface SCorpusRelation extends SRelation<SCorpus, SCorpus> {
-	/**
-	 * Returns the corpus structure container, which contains this corpus
-	 * relation.
-	 * 
-	 * @return corpus structure container
-	 */
-	public SCorpusGraph getSCorpusGraph();
-
-	/**
-	 * Sets the corpus structure container, which contains this corpus
-	 * relation.
-	 * 
-	 * @return corpus structure container
-	 */
-	public void setSCorpusGraph(SCorpusGraph value);
+//	/**
+//	 * Returns the corpus structure container, which contains this corpus
+//	 * relation.
+//	 * 
+//	 * @return corpus structure container
+//	 */
+//	public SCorpusGraph getSCorpusGraph();
+//
+//	/**
+//	 * Sets the corpus structure container, which contains this corpus
+//	 * relation.
+//	 * 
+//	 * @return corpus structure container
+//	 */
+//	public void setSCorpusGraph(SCorpusGraph value);
 
 } // SCorpusRelation

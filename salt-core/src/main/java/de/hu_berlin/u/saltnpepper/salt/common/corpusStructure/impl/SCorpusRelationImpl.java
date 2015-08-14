@@ -15,24 +15,13 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
+package de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl;
 
-import org.eclipse.emf.common.util.URI;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
+import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
-public interface SAudioDataSource extends SSequentialDS, SDocumentGraphObject {
 
-	/**
-	 * Returns a {@link URI} object, which points to a audio file. If no uri was
-	 * set null is returned.
-	 * 
-	 * @return {@link URI} to audio file
-	 */
-	public URI getSAudioReference();
-
-	/**
-	 * Sets a {@link URI} object, which points to a audio file.
-	 * 
-	 * @param audioRef reference to the audio file
-	 */
-	public void setSAudioReference(URI audioRef);
-} // SAudioDataSource
+@SuppressWarnings("serial")
+public class SCorpusRelationImpl extends SRelationImpl<SCorpus, SCorpus> implements SCorpusRelation {
+} //SCorpusRelationImpl

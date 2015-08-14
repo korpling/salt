@@ -28,19 +28,19 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
  * @author florian
  */
 public interface SCorpusDocumentRelation extends SRelation<SCorpus, SDocument> {
-	/**
-	 * Returns the document structure containing the linguistic data to this
-	 * element.
-	 * 
-	 * @return document structure
-	 */
-	public SCorpusGraph getSCorpusGraph();
-	/**
-	 * Sets the document structure containing the linguistic data to this
-	 * element.
-	 * 
-	 * @param documentStructure document structure
-	 */
-	public void setSCorpusGraph(SCorpusGraph documentStructure);
+//	/**
+//	 * Returns the document structure containing the linguistic data to this
+//	 * element.
+//	 * 
+//	 * @return document structure
+//	 */
+//	public SCorpusGraph getSCorpusGraph();
+//	/**
+//	 * Sets the document structure containing the linguistic data to this
+//	 * element.
+//	 * 
+//	 * @param documentStructure document structure
+//	 */
+//	public void setSCorpusGraph(SCorpusGraph documentStructure);
 
 } // SCorpusDocumentRelation
