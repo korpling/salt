@@ -3,6 +3,9 @@ package de.hu_berlin.u.saltnpepper.graph;
 import java.util.List;
 import java.util.Set;
 
+import de.hu_berlin.u.saltnpepper.salt.index.IndexMgr;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
+
 /**
  * The here defined graph is given by G=(V, E, L, {label a , ...label b }) with:
  * <ul>
@@ -23,6 +26,20 @@ import java.util.Set;
  *            type of contained {@link Relation}s
  */
 public interface Graph<N extends Node, R extends Relation<N, N>> extends IdentifiableElement {
+	/**
+	 * Returns the index manager. The index manager is used to register indexes
+	 * for sets of nodes, relations, layers etc. or single values. The manager
+	 * contains all indexes used by the {@link Graph} class. These indexes are:
+	 * 
+	 * <ul>
+	 * <li>{@link SaltUtil#IDX_ID_NODES}</li>
+	 * <li>{@link SaltUtil#IDX_ID_RELATIONS}</li>
+	 * </ul>
+	 * Even further indexes can be added to the index manager.
+	 * 
+	 * @return the index manager
+	 */
+	public IndexMgr getIndexMgr();
 	/**
 	 * Returns a list of all relations contained in this graph.
 	 * 

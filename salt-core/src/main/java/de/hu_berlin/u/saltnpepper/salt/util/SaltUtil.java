@@ -16,6 +16,22 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
  */
 public class SaltUtil {
 	/**
+	 * name of index for node-types
+	 */
+	public static final String IDX_SNODETYPE = "idx_sNodeType";
+	/**
+	 * name of index for relation-types
+	 */
+	public static final String IDX_SRELATIONTYPE = "idx_sRelationType";
+	/**
+	 * name of index for relating ids and nodes
+	 */
+	public static final String IDX_ID_NODES = "idx_id_nodes";
+	/**
+	 * name of index for relating ids and relations
+	 */
+	public static final String IDX_ID_RELATIONS = "idx_id_relation";
+	/**
 	 * default name for of derived namespace-attribute
 	 */
 	public static final String SALT_NAMESPACE = "salt";
@@ -135,13 +151,4 @@ public class SaltUtil {
 		}
 		return (retVal);
 	}
-
-	/**
-	 * name of index for node-types
-	 */
-	public static final String IDX_SNODETYPE = "idx_sNodeType";
-	/**
-	 * name of index for relation-types
-	 */
-	public static final String IDX_SRELATIONTYPE = "idx_sRelationType";
 }

@@ -18,6 +18,9 @@ import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
+import de.hu_berlin.u.saltnpepper.salt.index.IndexMgr;
+import de.hu_berlin.u.saltnpepper.salt.index.IndexMgrImpl;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class GraphImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Graph<N, R> {
@@ -25,9 +28,36 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		init();
 	}
 
+	/** Index manager **/
+	protected IndexMgr indexMgr = null;
+
+	/**
+	 * Returns the index manager. The index manager is used to register indexes
+	 * for sets of nodes, relations, layers etc. or single values. The manager
+	 * contains all indexes used by the {@link Graph} class. These indexes are:
+	 * 
+	 * <ul>
+	 * <li>{@link SaltUtil#IDX_ID_NODES}</li>
+	 * <li>{@link SaltUtil#IDX_ID_RELATIONS}</li>
+	 * </ul>
+	 * Even further indexes can be added to the index manager.
+	 * 
+	 * @return the index manager
+	 */
+	public IndexMgr getIndexMgr() {
+		return indexMgr;
+	}
+
 	/**
 	 * Instantiates a new graph object and sets the initial capacity for all
 	 * indexes to the passed ones
+	 * 
+	 * @param expectedNodes
+	 *            expected upper bound of nodes in the graph, used for
+	 *            optimization
+	 * @param expectedRelations
+	 *            expected upper bound of relations in the graph, used for
+	 *            optimization
 	 */
 	public GraphImpl(int expectedNodes, int expectedRelations) {
 		init();
@@ -63,8 +93,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		layers = Collections.synchronizedSet(new HashSet<Layer<N, R>>());
 		nodes = Collections.synchronizedList(new ArrayList<N>(expectedNodes));
 		relations = Collections.synchronizedList(new ArrayList<R>(expectedNodes));
-
-		idx_node_id = new ConcurrentHashMap<>(expectedNodes);
+		indexMgr = new IndexMgrImpl();
+		// idx_node_id = new ConcurrentHashMap<>(expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_ID_NODES, String.class, Node.class, expectedNodes, expectedNodes);
 		idx_relation_id = new ConcurrentHashMap<>(expectedRelations);
 		idx_layer_id = new ConcurrentHashMap<>();
 		idx_out_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
@@ -76,7 +107,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * An index storing all nodes and their corresponding ids (key: id; value:
 	 * node)
 	 **/
-	private Map<String, N> idx_node_id = null;
+	// private Map<String, N> idx_node_id = null;
 	/**
 	 * An index storing all relations and their corresponding ids (key: id;
 	 * value: relation)
@@ -115,7 +146,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if (nodeId == null) {
 			return (null);
 		}
-		return (idx_node_id.get(nodeId));
+		return (getIndexMgr().get(SaltUtil.IDX_ID_NODES, nodeId));
 	}
 
 	/** {@inheritDoc Graph#addNode(Node)} **/
@@ -173,7 +204,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 			// add node to internal list
 		nodes.add(node);
 		// add node to id index
-		idx_node_id.put(node.getId(), node);
+		getIndexMgr().put(SaltUtil.IDX_ID_NODES, node.getId(), node);
 	}
 
 	/** {@inheritDoc Graph#removeNode(Node)} **/
@@ -206,8 +237,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	protected void basicRemoveNode(N node) {
 		// remove node from internal list
 		nodes.remove(node);
-		// remove node from internal index
-		idx_node_id.remove(node.getId());
+		// remove node from all internal indexes
+		getIndexMgr().removeValue(node);
 		// remove all relations having the removed node as source or target and
 		// update index outgoing and incoming indexes
 		Collection<R> rels = new ArrayList<R>(getInRelations(node.getId()));
@@ -231,7 +262,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if (nodeId == null) {
 			return (false);
 		}
-		return (idx_node_id.containsKey(nodeId));
+		return (getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES, nodeId));
 	}
 
 	// =========================================================== < Nodes
@@ -354,9 +385,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 			i++;
 		}
 		// add relation to internal list
-		relations.add((R)relation);
+		relations.add((R) relation);
 		// add relation to indexes
-		idx_relation_id.put(relation.getId(), (R)relation);
+		idx_relation_id.put(relation.getId(), (R) relation);
 		update(null, relation, UPDATE_TYPE.RELATION_SOURCE);
 		update(null, relation, UPDATE_TYPE.RELATION_TARGET);
 	}
