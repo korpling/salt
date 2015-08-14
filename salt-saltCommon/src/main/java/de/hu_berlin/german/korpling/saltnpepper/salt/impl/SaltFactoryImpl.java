@@ -682,7 +682,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				pathStack.push(saltProjectPath);
 			if (currNode instanceof SCorpus) {
 				SCorpus sCorpus = (SCorpus) currNode;
-				pathStack.push(pathStack.peek() + "/" + sCorpus.getSName());
+				pathStack.push(pathStack.peek() + "/" + sCorpus.getSElementPath().lastSegment());
 			} else if (currNode instanceof SDocument) {
 				SDocument sDocument = (SDocument) currNode;
 				File sDocumentPath = new File(this.pathStack.peek() + "/" + sDocument.getSElementPath().lastSegment()
@@ -690,7 +690,7 @@ public class SaltFactoryImpl extends SaltCommonFactoryImpl implements SaltFactor
 				if (!sDocumentPath.exists()) {
 					// TODO put a log message (debug), that no document graph
 					// was found for document
-					throw new SaltResourceException("Cannot load SDocument object '" + sDocument.getSName()
+					throw new SaltResourceException("Cannot load SDocument object '" + sDocument.getSId()
 							+ "', because resource '" + sDocumentPath.getAbsolutePath() + "' does not exist.");
 				} else {
 					URI sDocumentURI = URI.createFileURI(sDocumentPath.getAbsolutePath());
