@@ -100,7 +100,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
 		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
 		
-		idx_relation_id = new ConcurrentHashMap<>(expectedRelations);
+//		idx_relation_id = new ConcurrentHashMap<>(expectedRelations);
 //		idx_layer_id = new ConcurrentHashMap<>();
 		idx_out_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
 		idx_in_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
@@ -112,11 +112,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * node)
 	 **/
 	// private Map<String, N> idx_node_id = null;
-	/**
-	 * An index storing all relations and their corresponding ids (key: id;
-	 * value: relation)
-	 **/
-	private Map<String, R> idx_relation_id = null;
+//	/**
+//	 * An index storing all relations and their corresponding ids (key: id;
+//	 * value: relation)
+//	 **/
+//	private Map<String, R> idx_relation_id = null;
 //	/**
 //	 * An index storing all layers and their corresponding ids (key: id; value:
 //	 * layer)
@@ -288,7 +288,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if (relationId == null) {
 			return (null);
 		}
-		return (idx_relation_id.get(relationId));
+		return (getIndexMgr().get(SaltUtil.IDX_ID_RELATIONS, relationId));
+//		return (idx_relation_id.get(relationId));
 	}
 
 	/** {@inheritDoc} **/
@@ -391,7 +392,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		// add relation to internal list
 		relations.add((R) relation);
 		// add relation to indexes
-		idx_relation_id.put(relation.getId(), (R) relation);
+		getIndexMgr().put(SaltUtil.IDX_ID_RELATIONS, relation.getId(), (R) relation);
+//		idx_relation_id.put(relation.getId(), (R) relation);
 		update(null, relation, UPDATE_TYPE.RELATION_SOURCE);
 		update(null, relation, UPDATE_TYPE.RELATION_TARGET);
 	}
@@ -458,7 +460,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	@Override
 	public void removeRelations() {
 		relations.clear();
-		idx_relation_id.clear();
+		getIndexMgr().clearIndex(SaltUtil.IDX_ID_RELATIONS);
+//		idx_relation_id.clear
 		idx_in_relation_id.clear();
 		idx_out_relation_id.clear();
 	}
@@ -482,7 +485,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 */
 	protected void basicRemoveRelation(R rel) {
 		// remove relation from internal index
-		if (idx_relation_id.remove(rel.getId()) != null) {
+		if (getIndexMgr().removeValue(rel)){
+//		if (idx_relation_id.remove(rel.getId()) != null) {
 			// if relation exists in graph remove it from other indexes
 			idx_in_relation_id.get(rel.getTarget().getId()).remove(rel);
 			idx_out_relation_id.get(rel.getSource().getId()).remove(rel);
@@ -501,7 +505,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if (relationId == null) {
 			return (false);
 		}
-		return (idx_relation_id.containsKey(relationId));
+		return (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS, relationId));
+//		return (idx_relation_id.containsKey(relationId));
 	}
 
 	// =========================================================== < Relations
