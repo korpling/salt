@@ -95,13 +95,13 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		relations = Collections.synchronizedList(new ArrayList<R>(expectedNodes));
 		indexMgr = new IndexMgrImpl();
 		indexMgr.createIndex(SaltUtil.IDX_ID_NODES, String.class, Node.class, expectedNodes, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS, String.class, Node.class, expectedRelations, expectedRelations);
-		indexMgr.createIndex(SaltUtil.IDX_ID_LAYER, String.class, Node.class);
-		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, String.class, Node.class, expectedNodes, approximatedNodeDegree);
-		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, String.class, Node.class, expectedNodes, approximatedNodeDegree);
+		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS, String.class, Relation.class, expectedRelations, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_ID_LAYER, String.class, Layer.class);
+		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
+		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
 		
 		idx_relation_id = new ConcurrentHashMap<>(expectedRelations);
-		idx_layer_id = new ConcurrentHashMap<>();
+//		idx_layer_id = new ConcurrentHashMap<>();
 		idx_out_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
 		idx_in_relation_id = ArrayListMultimap.create(expectedNodes, approximatedNodeDegree);
 	}
@@ -117,11 +117,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * value: relation)
 	 **/
 	private Map<String, R> idx_relation_id = null;
-	/**
-	 * An index storing all layers and their corresponding ids (key: id; value:
-	 * layer)
-	 **/
-	private Map<String, Layer<N, R>> idx_layer_id = null;
+//	/**
+//	 * An index storing all layers and their corresponding ids (key: id; value:
+//	 * layer)
+//	 **/
+//	private Map<String, Layer<N, R>> idx_layer_id = null;
 	/**
 	 * An index storing all node ids and the corresponding outgoing relations
 	 * (key: node id; value: relation)
@@ -521,13 +521,13 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if (layerId == null) {
 			return (null);
 		}
-		return (idx_layer_id.get(layerId));
+		return (getIndexMgr().get(SaltUtil.IDX_ID_LAYER, layerId));
 	}
 
 	/** {@inheritDoc Graph#containsLayer(String)} **/
 	@Override
 	public boolean containsLayer(String layerId) {
-		return (idx_relation_id.containsKey(layerId));
+		return (getIndexMgr().containsKey(SaltUtil.IDX_ID_LAYER, layerId));
 	}
 
 	/** {@inheritDoc} **/
@@ -587,8 +587,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 				}
 				int i = 0;
 				// the given id, which eventually has to be extended for
-				// artificial
-				// counter
+				// artificial counter
 				String idBase = layer.getId();
 				while (getLayer(layer.getId()) != null) {
 					// if layer already exists, create new Id
@@ -596,7 +595,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 					i++;
 				}
 				layers.add(layer);
-				idx_layer_id.put(layer.getId(), layer);
+				getIndexMgr().put(SaltUtil.IDX_ID_LAYER, layer.getId(), layer);
 			}
 		}
 	}
@@ -630,7 +629,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);
-				idx_layer_id.remove(layer.getId());
+				getIndexMgr().removeValue(layer);
 			}
 		}
 	}

@@ -126,18 +126,6 @@ public interface IndexMgr {
 	public <K, V> boolean putAll(String indexId, K key, Collection<V> values);
 
 	/**
-	 * Returns the set of values corresponding to the passed key, which is
-	 * contained in the index with the passed identifier.
-	 * 
-	 * @param indexId
-	 *            identifier of the index
-	 * @param key
-	 *            corresponding key to the returned set of values
-	 * @return set of values matching the passed key
-	 */
-	public <K, V> V get(String indexId, K key);
-
-	/**
 	 * Returns the value corresponding to the passed key, which is contained in
 	 * the index with the passed identifier.
 	 * 
@@ -146,6 +134,18 @@ public interface IndexMgr {
 	 * @param key
 	 *            corresponding key to the returned value
 	 * @return value matching the passed key
+	 */
+	public <K, V> V get(String indexId, K key);
+
+	/**
+	 * Returns the set of values corresponding to the passed key, which is
+	 * contained in the index with the passed identifier.
+	 * 
+	 * @param indexId
+	 *            identifier of the index
+	 * @param key
+	 *            corresponding key to the returned set of values
+	 * @return set of values matching the passed key
 	 */
 	public <K, V> List<V> getAll(String indexId, K key);
 

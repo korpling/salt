@@ -91,7 +91,6 @@ public class IndexMgrImpl implements IndexMgr {
 			if (indexId != null && key != null && value != null) {
 				Class<?> keyClass = indexKeyTypes.get(indexId);
 				Class<?> valueClass = indexValueTypes.get(indexId);
-
 				if (keyClass != null && valueClass != null && keyClass.isAssignableFrom(key.getClass()) && valueClass.isAssignableFrom(value.getClass())) {
 					return indexes.get(indexId).put(key, value);
 				}
@@ -326,5 +325,21 @@ public class IndexMgrImpl implements IndexMgr {
 		}
 
 		return result;
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		StringBuilder str= new StringBuilder();
+		for (String indexId: indexes.keySet()){
+			str.append(indexId);
+			str.append(": ");
+			Multimap<Object, Object> index=  indexes.get(indexId);
+			str.append(index);
+			str.append(",\n");
+		}
+		
+		return(str.toString()); 
 	}
 }
