@@ -19,57 +19,70 @@ package de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
+import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
-
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 	/** Salt-project containing this corpus structure **/
-	protected SaltProject saltProject= null;
+	protected SaltProject saltProject = null;
+
 	/** {@inheritDoc} **/
 	@Override
 	public SaltProject getSaltProject() {
-		return(saltProject);
+		return (saltProject);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public void setSaltProject(SaltProject saltProject) {
-		this.saltProject= saltProject;
+		this.saltProject = saltProject;
 	}
 
-	@Override
-	public List<SDocument> getDocuments() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	// ============================ start: handling specific nodes
 
+	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpus> getCorpora() {
-		// TODO Auto-generated method stub
-		return null;
+		return(getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SCorpus.class));
 	}
 
+	/** {@inheritDoc} **/
+	@Override
+	public List<SDocument> getDocuments() {
+		return(getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SDocument.class));
+	}
+
+	// ============================ end: handling specific nodes
+	// ============================ start: handling specific relations
+	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusRelation> getCorpusRelations() {
-		// TODO Auto-generated method stub
-		return null;
+		return(getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusRelation.class));
 	}
 
+	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusDocumentRelation> getCorpusDocumentRelations() {
-		// TODO Auto-generated method stub
-		return null;
+		return(getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusDocumentRelation.class));
 	}
+
+	// ============================ end: handling specific relations
 
 	@Override
 	public SCorpus getCorpus(Identifier corpusId) {
@@ -104,7 +117,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public void load(URI corpusGraphUri) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -131,4 +144,4 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		return null;
 	}
 
-} //SCorpusGraphImpl
+} // SCorpusGraphImpl

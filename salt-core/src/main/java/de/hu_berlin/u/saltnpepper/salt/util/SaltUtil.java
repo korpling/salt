@@ -16,9 +16,9 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
  */
 public class SaltUtil {
 	/** name of index for node-types */
-	public static final String IDX_SNODETYPE = "idx_sNodeType";
+	public static final String IDX_NODETYPE = "idx_sNodeType";
 	/** name of index for relation-types */
-	public static final String IDX_SRELATIONTYPE = "idx_sRelationType";
+	public static final String IDX_RELATIONTYPE = "idx_sRelationType";
 	/** name of index for relating ids and nodes */
 	public static final String IDX_ID_NODES = "idx_id_nodes";
 	/** name of index for relating ids and relations */
