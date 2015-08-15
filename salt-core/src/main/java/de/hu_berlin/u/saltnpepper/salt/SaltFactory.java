@@ -1,5 +1,9 @@
 package de.hu_berlin.u.saltnpepper.salt;
 
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
@@ -10,8 +14,9 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.impl.SaltFactoryImpl;
+
 public class SaltFactory {
-	/** Internal factory which is used to create objects. **/
+	/** Internal factory Impl<Node, Relation<Node, Node>>()which is used to create objects. **/
 	private static ISaltFactory factory = new SaltFactoryImpl();
 
 	/**
@@ -26,7 +31,9 @@ public class SaltFactory {
 
 	/**
 	 * Returns the internal factory to create Salt objects.
-	 * @param factory internal factory
+	 * 
+	 * @param factory
+	 *            internal factory
 	 */
 	public static void setFactory(ISaltFactory factory) {
 		SaltFactory.factory = factory;
@@ -38,7 +45,7 @@ public class SaltFactory {
 	 * @return new {@link SGraph} object
 	 */
 	public static SGraph createSGraph() {
-		return(factory.createSGraph());
+		return (factory.createSGraph());
 	}
 
 	/**
@@ -105,7 +112,7 @@ public class SaltFactory {
 	public static SLayer createSLayer() {
 		return (factory.createSLayer());
 	}
-	
+
 	/**
 	 * Creates a new {@link SSpanningRelation} object.
 	 * 
@@ -114,4 +121,42 @@ public class SaltFactory {
 	public static SSpanningRelation createSSpanningRelation() {
 		return (factory.createSSpanningRelation());
 	}
+
+	// ===============================> corpus structure
+	/**
+	 * Creates a new {@link SCorpus} object.
+	 * 
+	 * @return new {@link SCorpus} object
+	 */
+	public static SCorpus createSCorpus() {
+		return (factory.createSCorpus());
+	}
+
+	/**
+	 * Creates a new {@link SDocument} object.
+	 * 
+	 * @return new {@link SDocument} object
+	 */
+	public static SDocument createSDocument() {
+		return (factory.createSDocument());
+	}
+
+	/**
+	 * Creates a new {@link SCorpusRelation} object.
+	 * 
+	 * @return new {@link SCorpusRelation} object
+	 */
+	public static SCorpusRelation createSCorpusRelation() {
+		return (factory.createSCorpusRelation());
+	}
+
+	/**
+	 * Creates a new {@link SCorpusDocumentRelation} object.
+	 * 
+	 * @return new {@link SCorpusDocumentRelation} object
+	 */
+	public static SCorpusDocumentRelation createSCorpusDocumentRelation() {
+		return (factory.createSCorpusDocumentRelation());
+	}
+	// ===============================< corpus structure
 }

@@ -65,11 +65,11 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
  * {@link SCorpusDocumentRelation}, where the source of this relation is the
  * corpus and the target of this relation is the document. To add such a
  * {@link SDocument} object to the {@link SCorpusGraph} use the method
- * {@link SCorpusGraph#addSDocument(SCorpus, SDocument)}. This method will
+ * {@link SCorpusGraph#addDocument(SCorpus, SDocument)}. This method will
  * automatically create the relation between them. Like with adding a sub
  * corpus, here you can also do this by hand hand, but note that even here it is
  * recommended using the method
- * {@link SCorpusGraph#addSDocument(SCorpus, SDocument)} because of the
+ * {@link SCorpusGraph#addDocument(SCorpus, SDocument)} because of the
  * {@link SElementId} object belonging to the {@link SDocument} object.</br> In
  * Salt the 'real' linguistic data are also stored in a graph called
  * document-graph which is represented by the type {@link SDocumentGraph}. An
@@ -161,7 +161,7 @@ public interface SCorpusGraph extends SGraph {
 	 * @model
 	 * @generated
 	 */
-	public Identifier addSSubCorpus(SCorpus superCorpus, SCorpus subCorpus);
+	public Identifier addSubCorpus(SCorpus superCorpus, SCorpus subCorpus);
 
 	/**
 	 * Adds the given document to the {@link SCorpusGraph} object and creates an
@@ -178,7 +178,7 @@ public interface SCorpusGraph extends SGraph {
 	 * @return the identifier for the generated {@link SCorpusDocumentRelation}
 	 *         object
 	 */
-	public Identifier addSDocument(SCorpus corpus, SDocument document);
+	public Identifier addDocument(SCorpus corpus, SDocument document);
 
 	/**
 	 * Returns the {@link SCorpus} object, which contains the given

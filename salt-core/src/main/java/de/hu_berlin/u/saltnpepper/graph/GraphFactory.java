@@ -1,22 +1,23 @@
-package de.hu_berlin.u.saltnpepper.graph.impl;
+package de.hu_berlin.u.saltnpepper.graph;
 
-import de.hu_berlin.u.saltnpepper.graph.Graph;
-import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
-import de.hu_berlin.u.saltnpepper.graph.Identifier;
-import de.hu_berlin.u.saltnpepper.graph.Label;
-import de.hu_berlin.u.saltnpepper.graph.Layer;
-import de.hu_berlin.u.saltnpepper.graph.Node;
-import de.hu_berlin.u.saltnpepper.graph.Relation;
+import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactoryImpl;
+import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
+import de.hu_berlin.u.saltnpepper.graph.impl.IdentifierImpl;
+import de.hu_berlin.u.saltnpepper.graph.impl.LabelImpl;
+import de.hu_berlin.u.saltnpepper.graph.impl.NodeImpl;
+import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 
 public class GraphFactory {
-
+	/** Internal factory which is used to create objects. **/
+	private static IGraphFactory factory = new GraphFactoryImpl();
+	
 	/**
 	 * Creates a new {@link Graph} object of type {@link GraphImpl}.
 	 * 
 	 * @return new {@link Graph} object
 	 */
 	public static Graph<Node, Relation<Node, Node>> createGraph() {
-		return (new GraphImpl<Node, Relation<Node, Node>>());
+		return(factory.createGraph());
 	}
 
 	/**
@@ -25,7 +26,7 @@ public class GraphFactory {
 	 * @return new {@link Node} object
 	 */
 	public static Node createNode() {
-		return (new NodeImpl());
+		return(factory.createNode());
 	}
 
 	/**
@@ -34,20 +35,8 @@ public class GraphFactory {
 	 * @return new {@link Relation} object
 	 */
 	public static Relation<Node, Node> createRelation() {
-		return (new RelationImpl<Node, Node>());
+		return(factory.createRelation());
 	}
-
-	// /**
-	// * Creates a new {@link Label} object of type {@link LabelImpl}. The value
-	// * of this label is defined to be of type {@link String}. To use another
-	// * value type, use one of the other create methods createLabelXXX() or the
-	// * generic method {@link #createLabel(Class)}.
-	// *
-	// * @return new {@link Label} object
-	// */
-	// public static Label createLabel() {
-	// return (createLabel_String());
-	// }
 
 	/**
 	 * Creates a new {@link Label} object of type {@link LabelImpl}. The value
@@ -58,19 +47,8 @@ public class GraphFactory {
 	 * @return new {@link Label} object
 	 */
 	public static Label createLabel() {
-		return (new LabelImpl());
+		return(factory.createLabel());
 	}
-
-	// /**
-	// * Creates a new {@link Label} object of type {@link LabelImpl}. The type
-	// of
-	// * the value of this label can freely be defined.
-	// *
-	// * @return new {@link Label} object
-	// */
-	// public static Label createLabel(Class<V> clazz) {
-	// return (new LabelImpl());
-	// }
 
 	/**
 	 * Creates a new {@link Identifier} object of type {@link IdentifierImpl}.
@@ -85,7 +63,7 @@ public class GraphFactory {
 	 * @return new {@link Identifier} object
 	 */
 	public static Identifier createIdentifier(IdentifiableElement container, String id) {
-		return (new IdentifierImpl(container, id));
+		return (factory.createIdentifier(container, id));
 	}
 
 	/**
@@ -95,6 +73,6 @@ public class GraphFactory {
 	 * @return new layer object
 	 */
 	public static Layer<Node, Relation<Node, Node>> createLayer() {
-		return (new LayerImpl<Node, Relation<Node, Node>>());
+		return (factory.createLayer());
 	}
 }

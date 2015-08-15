@@ -12,10 +12,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
-import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
 public class LayerTest {

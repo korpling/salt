@@ -1,6 +1,15 @@
 package de.hu_berlin.u.saltnpepper.salt.impl;
 
+import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactoryImpl;
 import de.hu_berlin.u.saltnpepper.salt.ISaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusDocumentRelationImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusRelationImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SDocumentImpl;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SSpanningRelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
@@ -20,7 +29,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
-public class SaltFactoryImpl implements ISaltFactory{
+public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	/**
 	 * Creates a new {@link SGraph} object of type {@link SGraphImpl}.
 	 * 
@@ -110,4 +119,41 @@ public class SaltFactoryImpl implements ISaltFactory{
 	public SSpanningRelation createSSpanningRelation() {
 		return (new SSpanningRelationImpl());
 	}
+	// ===============================> corpus structure
+	/**
+	 * Creates a new {@link SCorpus} object.
+	 * 
+	 * @return new {@link SCorpus} object
+	 */
+	public SCorpus createSCorpus() {
+		return (new SCorpusImpl());
+	}
+
+	/**
+	 * Creates a new {@link SDocument} object.
+	 * 
+	 * @return new {@link SDocument} object
+	 */
+	public SDocument createSDocument() {
+		return (new SDocumentImpl());
+	}
+
+	/**
+	 * Creates a new {@link SCorpusRelation} object.
+	 * 
+	 * @return new {@link SCorpusRelation} object
+	 */
+	public SCorpusRelation createSCorpusRelation() {
+		return (new SCorpusRelationImpl());
+	}
+
+	/**
+	 * Creates a new {@link SCorpusDocumentRelation} object.
+	 * 
+	 * @return new {@link SCorpusDocumentRelation} object
+	 */
+	public SCorpusDocumentRelation createSCorpusDocumentRelation() {
+		return (new SCorpusDocumentRelationImpl());
+	}
+	// ===============================< corpus structure
 }

@@ -1,5 +1,10 @@
 package de.hu_berlin.u.saltnpepper.salt;
 
+import de.hu_berlin.u.saltnpepper.graph.IGraphFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
@@ -18,33 +23,34 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
-public interface ISaltFactory {
+public interface ISaltFactory extends IGraphFactory{
 	/**
 	 * Creates a new {@link SGraph} object of type {@link SGraphImpl}.
 	 * 
 	 * @return new {@link SGraph} object
 	 */
-	public  SGraph createSGraph();
+	public SGraph createSGraph();
 
 	/**
 	 * Creates a new {@link SNode} object of type {@link SNodeImpl}.
 	 * 
 	 * @return new {@link SNode} object
 	 */
-	public  SNode createSNode();
+	public SNode createSNode();
 
 	/**
 	 * Creates a new {@link SRelation} object of type {@link SRelationImpl}.
 	 * 
 	 * @return new {@link SRelation} object
 	 */
-	public  SRelation<SNode, SNode> createSRelation();
+	public SRelation<SNode, SNode> createSRelation();
+
 	/**
 	 * Creates a new {@link SAnnotation} object of type {@link SAnnotationImpl}.
 	 * 
 	 * @return new {@link SAnnotation} object
 	 */
-	public  SAnnotation createSAnnotation();
+	public SAnnotation createSAnnotation();
 
 	/**
 	 * Creates a new {@link SMetaAnnotation} object of type
@@ -52,7 +58,7 @@ public interface ISaltFactory {
 	 * 
 	 * @return new {@link SMetaAnnotation} object
 	 */
-	public  SMetaAnnotation createSMetaAnnotation();
+	public SMetaAnnotation createSMetaAnnotation();
 
 	/**
 	 * Creates a new {@link SProcessingAnnotation} object of type
@@ -60,25 +66,56 @@ public interface ISaltFactory {
 	 * 
 	 * @return new {@link SProcessingAnnotation} object
 	 */
-	public  SProcessingAnnotation createSProcessingAnnotation();
+	public SProcessingAnnotation createSProcessingAnnotation();
 
 	/**
 	 * Creates a new {@link SFeature} object of type {@link SFeatureImpl}.
 	 * 
 	 * @return new {@link SFeature} object
 	 */
-	public  SFeature createSFeature();
+	public SFeature createSFeature();
+
 	/**
 	 * Creates a new {@link SLayer} object of type {@link SLayerImpl}.
 	 * 
 	 * @return new {@link SLayer} object
 	 */
-	public  SLayer createSLayer();
-	
+	public SLayer createSLayer();
+
 	/**
 	 * Creates a new {@link SSpanningRelation} object.
 	 * 
 	 * @return new {@link SSpanningRelation} object
 	 */
 	public SSpanningRelation createSSpanningRelation();
+
+	// ===============================> corpus structure
+	/**
+	 * Creates a new {@link SCorpus} object.
+	 * 
+	 * @return new {@link SCorpus} object
+	 */
+	public SCorpus createSCorpus();
+
+	/**
+	 * Creates a new {@link SDocument} object.
+	 * 
+	 * @return new {@link SDocument} object
+	 */
+	public SDocument createSDocument();
+
+	/**
+	 * Creates a new {@link SCorpusRelation} object.
+	 * 
+	 * @return new {@link SCorpusRelation} object
+	 */
+	public SCorpusRelation createSCorpusRelation();
+
+	/**
+	 * Creates a new {@link SCorpusDocumentRelation} object.
+	 * 
+	 * @return new {@link SCorpusDocumentRelation} object
+	 */
+	public SCorpusDocumentRelation createSCorpusDocumentRelation();
+	// ===============================< corpus structure
 }

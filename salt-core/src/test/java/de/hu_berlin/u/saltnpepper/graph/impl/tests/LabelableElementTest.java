@@ -27,9 +27,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.LabelableElement;
-import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.impl.LabelableElementImpl;
 
 public class LabelableElementTest extends TestCase {

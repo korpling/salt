@@ -47,7 +47,7 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
-import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
+import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactoryImpl;
 
 public class GraphBenchmark {
 
@@ -72,13 +72,13 @@ public class GraphBenchmark {
 		List<Node> nodes = new ArrayList<>(NUM_OF_NODES);
 		Node node = null;
 		for (int i = 0; i < NUM_OF_NODES; i++) {
-			node = GraphFactory.createNode();
+			node = GraphFactoryImpl.createNode();
 			nodes.add(node);
 			graph.addNode(node);
 
 			// add labels
 			for (int k = 0; k < NUM_OF_LABELS; k++) {
-				Label label = GraphFactory.createLabel();
+				Label label = GraphFactoryImpl.createLabel();
 				label.setNamespace("ns");
 				label.setName("label_" + k);
 				label.setValue("val_" + k);
@@ -110,7 +110,7 @@ public class GraphBenchmark {
 			int targetNo = random.nextInt(NUM_OF_NODES);
 			Node source = nodes.get(sourceNo);
 			Node target = nodes.get(targetNo);
-			rel = GraphFactory.createRelation();
+			rel = GraphFactoryImpl.createRelation();
 			rel.setSource(source);
 			rel.setTarget(target);
 			rels.add(rel);
@@ -118,7 +118,7 @@ public class GraphBenchmark {
 
 			// add labels
 			for (int k = 0; k < NUM_OF_LABELS; k++) {
-				Label label = GraphFactory.createLabel();
+				Label label = GraphFactoryImpl.createLabel();
 				label.setNamespace("ns");
 				label.setName("label_" + k);
 				label.setValue("val_" + k);
@@ -139,7 +139,7 @@ public class GraphBenchmark {
 		List<Layer<Node, Relation<Node, Node>>> layers = new ArrayList<>();
 		Layer<Node, Relation<Node, Node>> layer = null;
 		for (int i = 0; i < NUM_OF_LAYERS; i++) {
-			layer = GraphFactory.createLayer();
+			layer = GraphFactoryImpl.createLayer();
 			layers.add(layer);
 			graph.addLayer(layer);
 
@@ -177,7 +177,7 @@ public class GraphBenchmark {
 	 */
 	@Benchmark
 	public void insert() {
-		Graph<Node, Relation<Node, Node>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>> graph = GraphFactoryImpl.createGraph();
 
 		// create nodes
 		List<Node> nodes = createNodes(graph);
@@ -203,7 +203,7 @@ public class GraphBenchmark {
 	 */
 	@Benchmark
 	public void access() {
-		Graph<Node, Relation<Node, Node>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>> graph = GraphFactoryImpl.createGraph();
 		// create nodes
 		List<Node> nodes = createNodes(graph);
 		// create relations
@@ -235,7 +235,7 @@ public class GraphBenchmark {
 	 */
 	@Benchmark
 	public void delete() {
-		Graph<Node, Relation<Node, Node>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>> graph = GraphFactoryImpl.createGraph();
 		// create nodes
 		List<Node> nodes = createNodes(graph);
 		// create relations

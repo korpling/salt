@@ -26,9 +26,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Node;
-import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;

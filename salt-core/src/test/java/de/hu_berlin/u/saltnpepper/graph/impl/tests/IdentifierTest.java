@@ -24,9 +24,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
-import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.impl.IdentifiableElementImpl;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 

@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
+import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
