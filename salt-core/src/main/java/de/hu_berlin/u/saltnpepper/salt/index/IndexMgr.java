@@ -71,7 +71,7 @@ public interface IndexMgr {
 	 * @return true if an index with the passed identifier exists, false
 	 *         otherwise
 	 */
-	public boolean hasIndex(String indexId);
+	public boolean containsIndex(String indexId);
 
 	/**
 	 * Removes the index with the passed identifier.

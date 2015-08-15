@@ -48,7 +48,7 @@ public class IndexMgrImpl implements IndexMgr {
 			L.writeLock().lock();
 		}
 		try {
-			if (this.hasIndex(indexId)) {
+			if (this.containsIndex(indexId)) {
 				throw new SaltException("Cannot add the given index, because an index with this id already exists: " + indexId);
 			}
 			if ((expectedKeys > 0) && (expectedValuesPerKey > 0)) {
@@ -67,7 +67,7 @@ public class IndexMgrImpl implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public boolean hasIndex(String indexId) {
+	public boolean containsIndex(String indexId) {
 		if (threadSafe) {
 			L.readLock().lock();
 		}
@@ -91,8 +91,18 @@ public class IndexMgrImpl implements IndexMgr {
 			if (indexId != null && key != null && value != null) {
 				Class<?> keyClass = indexKeyTypes.get(indexId);
 				Class<?> valueClass = indexValueTypes.get(indexId);
-				if (keyClass != null && valueClass != null && keyClass.isAssignableFrom(key.getClass()) && valueClass.isAssignableFrom(value.getClass())) {
-					return indexes.get(indexId).put(key, value);
+				if (keyClass != null && valueClass != null) {
+					if (keyClass.isAssignableFrom(key.getClass()) && valueClass.isAssignableFrom(value.getClass())) {
+						return indexes.get(indexId).put(key, value);
+					}
+					else{
+						if (!keyClass.isAssignableFrom(key.getClass())){
+							throw new ClassCastException("The type passed key '"+key.getClass()+"' is not assignable to '"+keyClass+"'. ");
+						}
+						if (!valueClass.isAssignableFrom(value.getClass())){
+							throw new ClassCastException("The type passed value '"+value.getClass()+"' is not assignable to '"+valueClass+"'. ");
+						}
+					}
 				}
 			}
 			return false;
@@ -326,20 +336,21 @@ public class IndexMgrImpl implements IndexMgr {
 
 		return result;
 	}
+
 	/**
 	 * 
 	 */
 	@Override
 	public String toString() {
-		StringBuilder str= new StringBuilder();
-		for (String indexId: indexes.keySet()){
+		StringBuilder str = new StringBuilder();
+		for (String indexId : indexes.keySet()) {
 			str.append(indexId);
 			str.append(": ");
-			Multimap<Object, Object> index=  indexes.get(indexId);
+			Multimap<Object, Object> index = indexes.get(indexId);
 			str.append(index);
 			str.append(",\n");
 		}
-		
-		return(str.toString()); 
+
+		return (str.toString());
 	}
 }
