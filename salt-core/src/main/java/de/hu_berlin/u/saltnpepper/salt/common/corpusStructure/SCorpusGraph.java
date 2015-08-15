@@ -144,7 +144,7 @@ public interface SCorpusGraph extends SGraph {
 	 *            identifier corresponding to the document to be searched
 	 * @return document matching the identifier, null if no such document exists
 	 */
-	public SCorpus getDocuemnt(Identifier documentId);
+	public SDocument getDocument(Identifier documentId);
 
 	/**
 	 * Adds the given sSubCorpus to the SCorpusGraph object and creates an
