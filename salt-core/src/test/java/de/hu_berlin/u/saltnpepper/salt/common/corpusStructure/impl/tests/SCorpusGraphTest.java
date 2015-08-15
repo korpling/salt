@@ -22,19 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
-import junit.textui.TestRunner;
 
 import org.eclipse.emf.common.util.URI;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-import com.google.common.collect.ImmutablList;
-
+import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
+import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
+import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
 
 public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
@@ -60,43 +64,43 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	}
 
 	@Test
-	public void testGetSDocuments() 
+	public void testgetDocuments() 
 	{
 		String[] ids= {"salt:/graph1#doc1", "salt:/graph1#doc2", "salt:/graph1#doc3", "salt:/graph1#doc4"};
 		List<SDocument> docDSs= new ArrayList<SDocument>();
 		for (String id: ids)
 		{
-			SDocument docDs= SaltCommonFactory.eINSTANCE.createSDocument();
-			docDs.setSId(id);
-			this.getFixture().addSNode(docDs);
+			SDocument docDs= SaltFactory.createSDocument();
+			docDs.setId(id);
+			getFixture().addNode(docDs);
 			docDSs.add(docDs);
 		}	
 		
-		assertTrue(docDSs.containsAll(this.getFixture().getSDocuments()));
-		assertTrue(this.getFixture().getSDocuments().containsAll(docDSs));
+		assertTrue(docDSs.containsAll(getFixture().getDocuments()));
+		assertTrue(getFixture().getDocuments().containsAll(docDSs));
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSCorpora() <em>SCorpora</em>}' feature getter.
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getCorpora() <em>SCorpora</em>}' feature getter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSCorpora()
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getCorpora()
 	 */
 	@Test
-	public void testGetSCorpora() 
+	public void testgetCorpora() 
 	{
 		String[] ids= {"salt:/graph1#corp1", "salt:/graph1#corp2", "salt:/graph1#corp3", "salt:/graph1#corp4"};
 		List<SCorpus> corpDSs= new ArrayList<SCorpus>();
 		for (String id: ids)
 		{
-			SCorpus corpDs= SaltCommonFactory.eINSTANCE.createSCorpus();
-			corpDs.setSId(id);
-			this.getFixture().addSNode(corpDs);
+			SCorpus corpDs= SaltFactory.createSCorpus();
+			corpDs.setId(id);
+			getFixture().addNode(corpDs);
 			corpDSs.add(corpDs);
 		}	
 		
-		assertTrue(corpDSs.containsAll(this.getFixture().getSCorpora()));
-		assertTrue(this.getFixture().getSCorpora().containsAll(corpDSs));
+		assertTrue(corpDSs.containsAll(getFixture().getCorpora()));
+		assertTrue(getFixture().getCorpora().containsAll(corpDSs));
 	}
 
 	/**
@@ -112,37 +116,37 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 		List<SCorpusRelation> corpRelDSs= new ArrayList<SCorpusRelation>();
 		for (String id: ids)
 		{
-			SCorpusRelation corpRelDs= SaltCommonFactory.eINSTANCE.createSCorpusRelation();
-			corpRelDs.setSId(id);
-			this.getFixture().addSRelation(corpRelDs);
+			SCorpusRelation corpRelDs= SaltFactory.createSCorpusRelation();
+			corpRelDs.setId(id);
+			getFixture().addRelation(corpRelDs);
 			corpRelDSs.add(corpRelDs);
 		}	
 		
-		assertTrue(corpRelDSs.containsAll(this.getFixture().getSCorpusRelations()));
-		assertTrue(this.getFixture().getSCorpusRelations().containsAll(corpRelDSs));
+		assertTrue(corpRelDSs.containsAll(getFixture().getCorpusRelations()));
+		assertTrue(getFixture().getCorpusRelations().containsAll(corpRelDSs));
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSCorpusDocumentRelations() <em>SCorpus Document Relations</em>}' feature getter.
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getCorpusDocumentRelations() <em>SCorpus Document Relations</em>}' feature getter.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSCorpusDocumentRelations()
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getCorpusDocumentRelations()
 	 */
 	@Test
-	public void testGetSCorpusDocumentRelations() 
+	public void testgetCorpusDocumentRelations() 
 	{
 		String[] ids= {"salt:/graph1#corpRel1", "salt:/graph1#corpRel2", "salt:/graph1#corpRel3", "salt:/graph1#corpRel4"};
 		List<SCorpusDocumentRelation> corpRelDSs= new ArrayList<SCorpusDocumentRelation>();
 		for (String id: ids)
 		{
-			SCorpusDocumentRelation corpRelDs= SaltCommonFactory.eINSTANCE.createSCorpusDocumentRelation();
-			corpRelDs.setSId(id);
-			this.getFixture().addSRelation(corpRelDs);
+			SCorpusDocumentRelation corpRelDs= SaltFactory.createSCorpusDocumentRelation();
+			corpRelDs.setId(id);
+			getFixture().addRelation(corpRelDs);
 			corpRelDSs.add(corpRelDs);
 		}	
 		
-		assertTrue(corpRelDSs.containsAll(this.getFixture().getSCorpusDocumentRelations()));
-		assertTrue(this.getFixture().getSCorpusDocumentRelations().containsAll(corpRelDSs));
+		assertTrue(corpRelDSs.containsAll(getFixture().getCorpusDocumentRelations()));
+		assertTrue(getFixture().getCorpusDocumentRelations().containsAll(corpRelDSs));
 	}
 
 	/**
@@ -158,69 +162,69 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 		List<SCorpus> corpDSs= new ArrayList<SCorpus>();
 		for (String id: ids)
 		{
-			SCorpus corpDs= SaltCommonFactory.eINSTANCE.createSCorpus();
-			corpDs.setSId(id);
-			this.getFixture().addSNode(corpDs);
+			SCorpus corpDs= SaltFactory.createSCorpus();
+			corpDs.setId(id);
+			getFixture().addNode(corpDs);
 			corpDSs.add(corpDs);
 		}	
 		
 		for (SCorpus corpus: corpDSs)
 		{
-			assertEquals(corpus, this.getFixture().getSCorpus(corpus.getSElementId()));
+			assertEquals(corpus, getFixture().getSCorpus(corpus.getSElementId()));
 		}
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSDocument(de.hub.corpling.salt.saltCore.SElementId) <em>Get SDocument</em>}' operation.
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getDocument(de.hub.corpling.salt.saltCore.SElementId) <em>Get SDocument</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getSDocument(de.hub.corpling.salt.saltCore.SElementId)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#getDocument(de.hub.corpling.salt.saltCore.SElementId)
 	 */
 	@Test
-	public void testGetSDocument__SElementId() 
+	public void testgetDocument__SElementId() 
 	{
 		String[] ids= {"salt:/graph1#doc1", "salt:/graph1#doc2", "salt:/graph1#doc3", "salt:/graph1#doc4"};
 		List<SDocument> docDSs= new ArrayList<SDocument>();
 		for (String id: ids)
 		{
-			SDocument docDs= SaltCommonFactory.eINSTANCE.createSDocument();
-			docDs.setSId(id);
-			this.getFixture().addSNode(docDs);
+			SDocument docDs= SaltFactory.createSDocument();
+			docDs.setId(id);
+			getFixture().addNode(docDs);
 			docDSs.add(docDs);
 		}	
 		
 		for (SDocument corpus: docDSs)
 		{
-			assertEquals(corpus, this.getFixture().getSDocument(corpus.getSElementId()));
+			assertEquals(corpus, getFixture().getDocument(corpus.getSElementId()));
 		}
 	}
 
 	/**
-	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#addSSubCorpus(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus) <em>Add SSub Corpus</em>}' operation.
+	 * Tests the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#addSubCorpus(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus) <em>Add SSub Corpus</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#addSSubCorpus(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusGraph#addSubCorpus(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus, de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus)
 	 */
 	@Test
 	public void testAddSSubCorpus__SCorpus_SCorpus() 
 	{
-		SCorpus sSuperCorpus= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sSubCorpus= SaltFactory.eINSTANCE.createSCorpus();
+		SCorpus sSuperCorpus= SaltFactory.createSCorpus();
+		SCorpus sSubCorpus= SaltFactory.createSCorpus();
 		try {
-			this.getFixture().addSSubCorpus(sSuperCorpus, sSubCorpus);
+			getFixture().addSubCorpus(sSuperCorpus, sSubCorpus);
 			fail("An exception must be thrown, because the root corpus has not been inserted yet.");
 		} catch (Exception e) {
 		}
 		
-		this.getFixture().addSNode(sSuperCorpus);
-		assertNotNull(this.getFixture().addSSubCorpus(sSuperCorpus, sSubCorpus));
+		getFixture().addNode(sSuperCorpus);
+		assertNotNull(getFixture().addSubCorpus(sSuperCorpus, sSubCorpus));
 		
-		List<Edge> edges= ImmutablList.copyOf(this.getFixture().getOutEdges(sSuperCorpus.getSId()));
+		List<Edge> edges= ImmutablList.copyOf(getFixture().getOutRelations(sSuperCorpus.getId()));
 		assertNotNull(edges);
 		assertTrue(edges.size()== 1);
 		assertEquals(sSubCorpus, edges.get(0).getTarget());
 		
-		edges= ImmutablList.copyOf(this.getFixture().getInEdges(sSubCorpus.getSId()));
+		edges= ImmutablList.copyOf(getFixture().getInRelations(sSubCorpus.getId()));
 		assertNotNull(edges);
 		assertTrue(edges.size()== 1);
 		assertEquals(sSuperCorpus, edges.get(0).getSource());
@@ -235,23 +239,23 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	@Test
 	public void testAddSDocument__SCorpus_SDocument() 
 	{
-		SCorpus sSuperCorpus= SaltFactory.eINSTANCE.createSCorpus();
-		SDocument sDocument= SaltFactory.eINSTANCE.createSDocument();
+		SCorpus sSuperCorpus= SaltFactory.createSCorpus();
+		SDocument sDocument= SaltFactory.createSDocument();
 		try {
-			this.getFixture().addSDocument(sSuperCorpus, sDocument);
+			getFixture().addSDocument(sSuperCorpus, sDocument);
 			fail("An exception must be thrown, because the corpus has not been inserted yet.");
 		} catch (Exception e) {
 		}
 		
-		this.getFixture().addSNode(sSuperCorpus);
-		assertNotNull(this.getFixture().addSDocument(sSuperCorpus, sDocument));
+		getFixture().addNode(sSuperCorpus);
+		assertNotNull(getFixture().addSDocument(sSuperCorpus, sDocument));
 		
-		List<Edge> edges= ImmutablList.copyOf(this.getFixture().getOutEdges(sSuperCorpus.getSId()));
+		List<Edge> edges= ImmutablList.copyOf(getFixture().getOutRelations(sSuperCorpus.getId()));
 		assertNotNull(edges);
 		assertTrue(edges.size()== 1);
 		assertEquals(sDocument, edges.get(0).getTarget());
 		
-		edges= ImmutablList.copyOf(this.getFixture().getInEdges(sDocument.getSId()));
+		edges= ImmutablList.copyOf(getFixture().getInRelations(sDocument.getId()));
 		assertNotNull(edges);
 		assertTrue(edges.size()== 1);
 		assertEquals(sSuperCorpus, edges.get(0).getSource());
@@ -263,8 +267,8 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	@Test
 	public void testEquals_Identtical_Empty()
 	{
-		assertTrue(this.getFixture().equals(this.getFixture()));
-		assertTrue(this.getFixture().equals(SaltFactory.eINSTANCE.createSCorpusGraph()));
+		assertTrue(getFixture().equals(getFixture()));
+		assertTrue(getFixture().equals(SaltFactory.createSCorpusGraph()));
 	}
 	
 	/**
@@ -277,23 +281,23 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	@Test
 	public void testEquals_Identtical_NotEmpty()
 	{
-		SCorpus sCorp1= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp2= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp3= SaltFactory.eINSTANCE.createSCorpus();
-		this.getFixture().addSNode(sCorp1);
-		this.getFixture().addSSubCorpus(sCorp1, sCorp2);
-		this.getFixture().addSSubCorpus(sCorp1, sCorp3);
+		SCorpus sCorp1= SaltFactory.createSCorpus();
+		SCorpus sCorp2= SaltFactory.createSCorpus();
+		SCorpus sCorp3= SaltFactory.createSCorpus();
+		getFixture().addNode(sCorp1);
+		getFixture().addSubCorpus(sCorp1, sCorp2);
+		getFixture().addSubCorpus(sCorp1, sCorp3);
 		
-		assertEquals(this.getFixture(), this.getFixture());
+		assertEquals(getFixture(), getFixture());
 		
-		SCorpusGraph other= SaltFactory.eINSTANCE.createSCorpusGraph();
-		SCorpus sCorp1Other= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp2Other= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp3Other= SaltFactory.eINSTANCE.createSCorpus();
-		other.addSNode(sCorp1Other);
-		other.addSSubCorpus(sCorp1Other, sCorp2Other);
-		other.addSSubCorpus(sCorp1Other, sCorp3Other);
-		assertEquals(this.getFixture(), other);
+		SCorpusGraph other= SaltFactory.createSCorpusGraph();
+		SCorpus sCorp1Other= SaltFactory.createSCorpus();
+		SCorpus sCorp2Other= SaltFactory.createSCorpus();
+		SCorpus sCorp3Other= SaltFactory.createSCorpus();
+		other.addNode(sCorp1Other);
+		other.addSubCorpus(sCorp1Other, sCorp2Other);
+		other.addSubCorpus(sCorp1Other, sCorp3Other);
+		assertEquals(getFixture(), other);
 	}
 	
 	/**
@@ -306,26 +310,26 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	@Test
 	public void testEquals_NotIdenttical()
 	{
-		SCorpusGraph other= SaltFactory.eINSTANCE.createSCorpusGraph();
-		assertEquals(this.getFixture(), other);
+		SCorpusGraph other= SaltFactory.createSCorpusGraph();
+		assertEquals(getFixture(), other);
 		
-		SCorpus sCorp1= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp2= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp3= SaltFactory.eINSTANCE.createSCorpus();
-		this.getFixture().addSNode(sCorp1);
-		this.getFixture().addSSubCorpus(sCorp1, sCorp2);
-		this.getFixture().addSSubCorpus(sCorp1, sCorp3);
+		SCorpus sCorp1= SaltFactory.createSCorpus();
+		SCorpus sCorp2= SaltFactory.createSCorpus();
+		SCorpus sCorp3= SaltFactory.createSCorpus();
+		getFixture().addNode(sCorp1);
+		getFixture().addSubCorpus(sCorp1, sCorp2);
+		getFixture().addSubCorpus(sCorp1, sCorp3);
 		
-		assertFalse(this.getFixture().equals(other));
+		assertFalse(getFixture().equals(other));
 		
-		SCorpus sCorp1Other= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp2Other= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp3Other= SaltFactory.eINSTANCE.createSCorpus();
-		other.addSNode(sCorp1Other);
-		other.addSSubCorpus(sCorp1Other, sCorp2Other);
-		other.addSSubCorpus(sCorp1Other, sCorp3Other);
+		SCorpus sCorp1Other= SaltFactory.createSCorpus();
+		SCorpus sCorp2Other= SaltFactory.createSCorpus();
+		SCorpus sCorp3Other= SaltFactory.createSCorpus();
+		other.addNode(sCorp1Other);
+		other.addSubCorpus(sCorp1Other, sCorp2Other);
+		other.addSubCorpus(sCorp1Other, sCorp3Other);
 		
-		assertEquals(this.getFixture(), other);
+		assertEquals(getFixture(), other);
 	}
 	
 	/**
@@ -337,26 +341,26 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	@Test
 	public void testGetSCorpus__SDocument() 
 	{
-		this.getFixture().getSCorpus((SDocument)null);
+		getFixture().getSCorpus((SDocument)null);
 		
 		SCorpus sCorpus= null;
 		SCorpus sSubCorpus= null;
 		SDocument sDocument= null;
 		
-		sCorpus= SaltFactory.eINSTANCE.createSCorpus();
-		this.getFixture().addSNode(sCorpus);
+		sCorpus= SaltFactory.createSCorpus();
+		getFixture().addNode(sCorpus);
 		
-		sDocument= SaltFactory.eINSTANCE.createSDocument();
-		this.getFixture().addSDocument(sCorpus, sDocument);
-		assertEquals(sCorpus, this.getFixture().getSCorpus(sDocument));
+		sDocument= SaltFactory.createSDocument();
+		getFixture().addSDocument(sCorpus, sDocument);
+		assertEquals(sCorpus, getFixture().getSCorpus(sDocument));
 		
-		sSubCorpus= SaltFactory.eINSTANCE.createSCorpus();
-		this.getFixture().addSSubCorpus(sCorpus, sSubCorpus);
+		sSubCorpus= SaltFactory.createSCorpus();
+		getFixture().addSubCorpus(sCorpus, sSubCorpus);
 		
-		sDocument= SaltFactory.eINSTANCE.createSDocument();
-		this.getFixture().addSDocument(sSubCorpus, sDocument);
-		assertEquals(sSubCorpus, this.getFixture().getSCorpus(sDocument));
-		assertFalse(sCorpus.equals(this.getFixture().getSCorpus(sDocument)));
+		sDocument= SaltFactory.createSDocument();
+		getFixture().addSDocument(sSubCorpus, sDocument);
+		assertEquals(sSubCorpus, getFixture().getSCorpus(sDocument));
+		assertFalse(sCorpus.equals(getFixture().getSCorpus(sDocument)));
 	}
 
 	/**
@@ -368,15 +372,15 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	@Test
 	public void testGetSRootCorpus() 
 	{
-		SCorpus sCorp1= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp2= SaltFactory.eINSTANCE.createSCorpus();
-		SCorpus sCorp3= SaltFactory.eINSTANCE.createSCorpus();
-		this.getFixture().addSNode(sCorp1);
-		this.getFixture().addSSubCorpus(sCorp1, sCorp2);
-		this.getFixture().addSSubCorpus(sCorp1, sCorp3);
+		SCorpus sCorp1= SaltFactory.createSCorpus();
+		SCorpus sCorp2= SaltFactory.createSCorpus();
+		SCorpus sCorp3= SaltFactory.createSCorpus();
+		getFixture().addNode(sCorp1);
+		getFixture().addSubCorpus(sCorp1, sCorp2);
+		getFixture().addSubCorpus(sCorp1, sCorp3);
 		
-		assertTrue(this.getFixture().getSRootCorpus().contains(sCorp1));
-		assertEquals(1, this.getFixture().getSRootCorpus().size());
+		assertTrue(getFixture().getSRootCorpus().contains(sCorp1));
+		assertEquals(1, getFixture().getSRootCorpus().size());
 	}
 
 	/**
@@ -389,20 +393,20 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	public void testLoad__URI() 
 	{
 		SCorpusGraph template = SampleGenerator.createCorpusStructure();
-		for (SDocument sDocument: template.getSDocuments())
+		for (SDocument sDocument: template.getDocuments())
 		{
 			SampleGenerator.createSDocumentStructure(sDocument);
 		}
-		SaltProject saltProject= SaltFactory.eINSTANCE.createSaltProject();
-		saltProject.getSCorpusGraphs().add(template);
+		SaltProject saltProject= SaltFactory.createSaltProject();
+		saltProject.getCorpusGraphs().add(template);
 		String tmpDir = System.getProperty("java.io.tmpdir")+"/"+ this.getClass().getName();
 		File tmpFile= new File(tmpDir);
 		URI tmpUri= URI.createFileURI(tmpFile.getAbsolutePath());
 		saltProject.saveSaltProject(tmpUri);
 		assertTrue("Cannot run test, because file does not exist: "+ tmpFile.getAbsolutePath(), tmpFile.exists());
-		this.getFixture().load(tmpUri);
-		assertNotNull(this.getFixture());
-		assertEquals("differences: "+ template.differences(this.getFixture()), template, this.getFixture());
+		getFixture().load(tmpUri);
+		assertNotNull(getFixture());
+		assertEquals("differences: "+ template.differences(getFixture()), template, getFixture());
 	}
 
 	/**
@@ -410,13 +414,13 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	 */
 	@Test
 	public void testCreateSCorpus__SCorpus_String() {
-		SCorpus sCorpus= SaltFactory.eINSTANCE.createSCorpus();
-		getFixture().addSNode(sCorpus);
+		SCorpus sCorpus= SaltFactory.createSCorpus();
+		getFixture().addNode(sCorpus);
 		SCorpus sCorp2= getFixture().createSCorpus(sCorpus, "corp2");
 		
-		assertNotNull(getFixture().getSNode(sCorp2.getSId()));
-		assertEquals(2, getFixture().getSNodes().size());
-		assertEquals(1, getFixture().getSRelations().size());
+		assertNotNull(getFixture().getSNode(sCorp2.getId()));
+		assertEquals(2, getFixture().getNodes().size());
+		assertEquals(1, getFixture().getRelations().size());
 	}
 
 	/**
@@ -424,13 +428,13 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	 */
 	@Test
 	public void testCreateSDocument__SCorpus_String() {
-		SCorpus sCorpus= SaltFactory.eINSTANCE.createSCorpus();
-		getFixture().addSNode(sCorpus);
+		SCorpus sCorpus= SaltFactory.createSCorpus();
+		getFixture().addNode(sCorpus);
 		SDocument sDoc= getFixture().createSDocument(sCorpus, "doc1");
 		
-		assertNotNull(getFixture().getSNode(sDoc.getSId()));
-		assertEquals(2, getFixture().getSNodes().size());
-		assertEquals(1, getFixture().getSRelations().size());
+		assertNotNull(getFixture().getSNode(sDoc.getId()));
+		assertEquals(2, getFixture().getNodes().size());
+		assertEquals(1, getFixture().getRelations().size());
 	}
 
 	/**
@@ -444,15 +448,15 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 		
 		assertNotNull(corpora);
 		assertEquals(3, corpora.size());
-		assertEquals(3, getFixture().getSNodes().size());
-		assertEquals(2, getFixture().getSRelations().size());
+		assertEquals(3, getFixture().getNodes().size());
+		assertEquals(2, getFixture().getRelations().size());
 		
 		path= URI.createURI("salt:/c1/c2/c4");
 		corpora= getFixture().createSCorpus(path);
 		assertNotNull(corpora);
 		assertEquals(1, corpora.size());
-		assertEquals(4, getFixture().getSNodes().size());
-		assertEquals(3, getFixture().getSRelations().size());
+		assertEquals(4, getFixture().getNodes().size());
+		assertEquals(3, getFixture().getRelations().size());
 	}
 
 	/**
@@ -465,26 +469,26 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 		SDocument sDoc= getFixture().createSDocument(path);
 		
 		assertNotNull(sDoc);
-		assertEquals(3, getFixture().getSNodes().size());
-		assertEquals(2, getFixture().getSRelations().size());
+		assertEquals(3, getFixture().getNodes().size());
+		assertEquals(2, getFixture().getRelations().size());
 		
 		path= URI.createURI("salt:/c1/c2/c4");
 		sDoc= getFixture().createSDocument(path);
 		assertNotNull(sDoc);
-		assertEquals(4, getFixture().getSNodes().size());
-		assertEquals(3, getFixture().getSRelations().size());
+		assertEquals(4, getFixture().getNodes().size());
+		assertEquals(3, getFixture().getRelations().size());
 	}
 
 	@Test
 	public void testCheckElementId()
 	{
-		SCorpus sCorpus = SaltCommonFactory.eINSTANCE.createSCorpus();
-		this.getFixture().addSNode(sCorpus);
-		assertEquals("salt:/corp1", sCorpus.getSId());
+		SCorpus sCorpus = SaltFactory.createSCorpus();
+		getFixture().addNode(sCorpus);
+		assertEquals("salt:/corp1", sCorpus.getId());
 		
-		SDocument sDocument = SaltCommonFactory.eINSTANCE.createSDocument();
-		this.getFixture().addSNode(sDocument);
-		assertEquals("salt:/doc1", sDocument.getSId());
+		SDocument sDocument = SaltFactory.createSDocument();
+		getFixture().addNode(sDocument);
+		assertEquals("salt:/doc1", sDocument.getId());
 		
 		//TODO check, for corpora and documents with relations salt:/corp1/corp2 ...
 	}
@@ -493,9 +497,9 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	public void testGraphTraversion()
 	{
 		this.traversedNodes = new ArrayList()<SNode>();
-		this.createCorpusStructure(this.getFixture());
-		this.getFixture()
-			.traverse(this.getFixture().getSRootCorpus(),	
+		this.createCorpusStructure(getFixture());
+		getFixture()
+			.traverse(getFixture().getSRootCorpus(),	
 					GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "",this);
 		
 		assertTrue("GraphTraversionTest: First traversed object is not null, but "+this.traversedNodes.get(0)+"!", this.traversedNodes.get(0) == null); 
@@ -517,39 +521,34 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 	private SDocument createCorpusStructure(SCorpusGraph corpGraph)
 	{
 		{//creating corpus structure
-			//corpGraph= SaltFactory.eINSTANCE.createSCorpusGraph();
-			//this.getFixture().getSaltProject().getSCorpusGraphs().add(corpGraph);
+			//corpGraph= SaltFactory.createSCorpusGraph();
+			//getFixture().getSaltProject().getCorpusGraphs().add(corpGraph);
 			//		corp1
 			//		|
 			//		doc1
 			
 			//corp1
-			SElementId sElementId= SaltFactory.eINSTANCE.createSElementId();
-			sElementId.setSId("corp1");
-			SCorpus corp1= SaltFactory.eINSTANCE.createSCorpus();
-			corp1.setSName("corp1");
+			SCorpus corp1= SaltFactory.createSCorpus();
+			corp1.setName("corp1");
 			corp1.setId("corp1");
-			corp1.setSElementId(sElementId);
-			corpGraph.addSNode(corp1);
+			GraphFactory.createIdentifier(corp1, "corp1");
+			
+			corpGraph.addNode(corp1);
 			
 			
 			//doc1
-			SDocument doc1= SaltFactory.eINSTANCE.createSDocument();
-			sElementId= SaltFactory.eINSTANCE.createSElementId();
-			sElementId.setSId("corp1/doc1");
-			doc1.setSElementId(sElementId);
-			doc1.setSName("doc1");
-			corpGraph.addSNode(doc1);
-			doc1.setSDocumentGraph(SaltFactory.eINSTANCE.createSDocumentGraph());
+			SDocument doc1= SaltFactory.createSDocument();
+			GraphFactory.createIdentifier(doc1, "doc1");
+			doc1.setName("doc1");
+			corpGraph.addNode(doc1);
+			doc1.setDocumentGraph(SaltFactory.createSDocumentGraph());
 			//CorpDocRel
-			SCorpusDocumentRelation corpDocRel1= SaltFactory.eINSTANCE.createSCorpusDocumentRelation();
-			sElementId= SaltFactory.eINSTANCE.createSElementId();
-			sElementId.setSId("rel1");
-			corpDocRel1.setSElementId(sElementId);
-			corpDocRel1.setSName("rel1");
-			corpDocRel1.setSCorpus(corp1);
-			corpDocRel1.setSDocument(doc1);
-			corpGraph.addSRelation(corpDocRel1);
+			SCorpusDocumentRelation corpDocRel1= SaltFactory.createSCorpusDocumentRelation();
+			GraphFactory.createIdentifier(corpDocRel1, "rel1");
+			corpDocRel1.setName("rel1");
+			corpDocRel1.setSource(corp1);
+			corpDocRel1.setTarget(doc1);
+			corpGraph.addRelation(corpDocRel1);
 			return(doc1);
 		}
 	}
@@ -558,7 +557,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler{
 
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType,
-			String traversalId, SNode currNode, SRelation edge, SNode fromNode,
+			String traversalId, SNode currNode, SRelation<SNode, SNode> edge, SNode fromNode,
 			long order) {
 		
 		this.traversedNodes.add(fromNode);

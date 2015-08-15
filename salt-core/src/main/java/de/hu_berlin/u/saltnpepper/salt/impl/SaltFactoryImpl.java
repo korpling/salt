@@ -4,13 +4,17 @@ import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactoryImpl;
 import de.hu_berlin.u.saltnpepper.salt.ISaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusDocumentRelationImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusImpl;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusRelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SDocumentImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SDocumentGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SSpanningRelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
@@ -29,14 +33,14 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
-public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
+public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	/**
 	 * Creates a new {@link SGraph} object of type {@link SGraphImpl}.
 	 * 
 	 * @return new {@link SGraph} object
 	 */
 	@Override
-	public  SGraph createSGraph() {
+	public SGraph createSGraph() {
 		return (new SGraphImpl());
 	}
 
@@ -46,7 +50,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	 * @return new {@link SNode} object
 	 */
 	@Override
-	public  SNode createSNode() {
+	public SNode createSNode() {
 		return (new SNodeImpl());
 	}
 
@@ -56,7 +60,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	 * @return new {@link SRelation} object
 	 */
 	@Override
-	public  SRelation<SNode, SNode> createSRelation() {
+	public SRelation<SNode, SNode> createSRelation() {
 		return (new SRelationImpl<SNode, SNode>());
 	}
 
@@ -66,7 +70,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	 * @return new {@link SAnnotation} object
 	 */
 	@Override
-	public  SAnnotation createSAnnotation() {
+	public SAnnotation createSAnnotation() {
 		return (new SAnnotationImpl());
 	}
 
@@ -77,7 +81,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	 * @return new {@link SMetaAnnotation} object
 	 */
 	@Override
-	public  SMetaAnnotation createSMetaAnnotation() {
+	public SMetaAnnotation createSMetaAnnotation() {
 		return (new SMetaAnnotationImpl());
 	}
 
@@ -88,7 +92,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	 * @return new {@link SProcessingAnnotation} object
 	 */
 	@Override
-	public  SProcessingAnnotation createSProcessingAnnotation() {
+	public SProcessingAnnotation createSProcessingAnnotation() {
 		return (new SProcessingAnnotationImpl());
 	}
 
@@ -98,20 +102,23 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	 * @return new {@link SFeature} object
 	 */
 	@Override
-	public  SFeature createSFeature() {
+	public SFeature createSFeature() {
 		return (new SFeatureImpl());
 	}
+
 	/**
 	 * Creates a new {@link SLayer} object of type {@link SLayerImpl}.
 	 * 
 	 * @return new {@link SLayer} object
 	 */
 	@Override
-	public  SLayer createSLayer() {
+	public SLayer createSLayer() {
 		return (new SLayerImpl());
 	}
+
 	/**
-	 * Creates a new {@link SSpanningRelation} object of type {@link SSpanningRelationImpl}.
+	 * Creates a new {@link SSpanningRelation} object of type
+	 * {@link SSpanningRelationImpl}.
 	 * 
 	 * @return new {@link SSpanningRelation} object
 	 */
@@ -119,6 +126,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	public SSpanningRelation createSSpanningRelation() {
 		return (new SSpanningRelationImpl());
 	}
+
 	// ===============================> corpus structure
 	/**
 	 * Creates a new {@link SCorpus} object.
@@ -155,5 +163,25 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory{
 	public SCorpusDocumentRelation createSCorpusDocumentRelation() {
 		return (new SCorpusDocumentRelationImpl());
 	}
+	/**
+	 * Creates a new {@link SCorpusGraph} object.
+	 * 
+	 * @return new {@link SCorpusGraph} object
+	 */
+	public SCorpusGraph createSCorpusGraph() {
+		return (new SCorpusGraphImpl());
+	}
+
 	// ===============================< corpus structure
+
+	// ===============================> document structure
+	/**
+	 * Creates a new {@link SDocumentGraph} object.
+	 * 
+	 * @return new {@link SDocumentGraph} object
+	 */
+	public SDocumentGraph createSDocumentGraph() {
+		return (new SDocumentGraphImpl());
+	}
+	// ===============================< document structure
 }

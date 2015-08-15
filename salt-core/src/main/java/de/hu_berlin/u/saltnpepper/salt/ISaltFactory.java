@@ -3,8 +3,10 @@ package de.hu_berlin.u.saltnpepper.salt;
 import de.hu_berlin.u.saltnpepper.graph.IGraphFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
@@ -23,7 +25,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
-public interface ISaltFactory extends IGraphFactory{
+public interface ISaltFactory extends IGraphFactory {
 	/**
 	 * Creates a new {@link SGraph} object of type {@link SGraphImpl}.
 	 * 
@@ -117,5 +119,21 @@ public interface ISaltFactory extends IGraphFactory{
 	 * @return new {@link SCorpusDocumentRelation} object
 	 */
 	public SCorpusDocumentRelation createSCorpusDocumentRelation();
+
+	/**
+	 * Creates a new {@link SCorpusGraph} object.
+	 * 
+	 * @return new {@link SCorpusGraph} object
+	 */
+	public SCorpusGraph createSCorpusGraph();
+
 	// ===============================< corpus structure
+	// ===============================> document structure
+	/**
+	 * Creates a new {@link SDocumentGraph} object.
+	 * 
+	 * @return new {@link SDocumentGraph} object
+	 */
+	public SDocumentGraph createSDocumentGraph();
+	// ===============================< document structure
 }
