@@ -15,6 +15,23 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
  *
  */
 public class SaltUtil {
+
+	// ===================================> common Salt stuff
+	/** The ending of a Salt XML file. **/
+	public static final String FILE_ENDING_SALT_XML = "salt";
+
+	/**
+	 * default name for of derived namespace-attribute
+	 */
+	public static final String SALT_NAMESPACE = "salt";
+	/**
+	 * Separator between namespace and name: qname= NAMESPACE
+	 * {@value #NAMESPACE_SEPERATOR} NAME.
+	 */
+	public static final String NAMESPACE_SEPERATOR = "::";
+	// ===================================< common Salt stuff
+
+	// ======================================> index names
 	/** name of index for node-types */
 	public static final String IDX_NODETYPE = "idx_sNodeType";
 	/** name of index for relation-types */
@@ -29,15 +46,7 @@ public class SaltUtil {
 	public static final String IDX_OUT_RELATIONS = "idx_out_relations";
 	/** name of index for relating node ids and incoming relations */
 	public static final String IDX_IN_RELATIONS = "idx_in_relations";
-	/**
-	 * default name for of derived namespace-attribute
-	 */
-	public static final String SALT_NAMESPACE = "salt";
-	/**
-	 * Separator between namespace and name: qname= NAMESPACE
-	 * {@value #NAMESPACE_SEPERATOR} NAME.
-	 */
-	public static final String NAMESPACE_SEPERATOR = "::";
+	// ======================================< index names
 	/**
 	 * Name of {@link Label} to store the identifier of a node, relation, graph
 	 * or layer.

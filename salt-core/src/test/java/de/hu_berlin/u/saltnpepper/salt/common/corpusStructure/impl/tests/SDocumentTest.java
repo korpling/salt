@@ -29,6 +29,7 @@ import org.junit.Test;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public class SDocumentTest {
 
@@ -61,7 +62,7 @@ public class SDocumentTest {
 	@Test
 	public void testSaveSDocumentGraph__URI() {
 		SampleGenerator.createSDocumentStructure(this.getFixture());
-		File tmpFile = new File(System.getProperty("java.io.tmpdir") + "/testDoc." + SaltFactory.FILE_ENDING_SALT);
+		File tmpFile = new File(System.getProperty("java.io.tmpdir") + "/testDoc." + SaltUtil.FILE_ENDING_SALT_XML);
 
 		URI tmpUri = URI.createFileURI(tmpFile.getAbsolutePath());
 		SDocumentGraph template = this.getFixture().getDocumentGraph();

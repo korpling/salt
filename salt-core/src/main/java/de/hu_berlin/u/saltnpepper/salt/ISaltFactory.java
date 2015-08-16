@@ -1,6 +1,7 @@
 package de.hu_berlin.u.saltnpepper.salt;
 
 import de.hu_berlin.u.saltnpepper.graph.IGraphFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
@@ -85,12 +86,12 @@ public interface ISaltFactory extends IGraphFactory {
 	public SLayer createSLayer();
 
 	/**
-	 * Creates a new {@link SSpanningRelation} object.
+	 * Creates a new {@link SaltProject}.
 	 * 
-	 * @return new {@link SSpanningRelation} object
+	 * @return new {@link SaltProject} object
 	 */
-	public SSpanningRelation createSSpanningRelation();
-
+	public SaltProject createSaltProject();
+	
 	// ===============================> corpus structure
 	/**
 	 * Creates a new {@link SCorpus} object.
@@ -135,5 +136,12 @@ public interface ISaltFactory extends IGraphFactory {
 	 * @return new {@link SDocumentGraph} object
 	 */
 	public SDocumentGraph createSDocumentGraph();
+	/**
+	 * Creates a new {@link SSpanningRelation} object.
+	 * 
+	 * @return new {@link SSpanningRelation} object
+	 */
+	public SSpanningRelation createSSpanningRelation();
+
 	// ===============================< document structure
 }

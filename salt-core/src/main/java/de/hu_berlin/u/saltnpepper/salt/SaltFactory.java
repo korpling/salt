@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.salt;
 
+import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
@@ -40,7 +41,7 @@ public class SaltFactory {
 	public static void setFactory(ISaltFactory factory) {
 		SaltFactory.factory = factory;
 	}
-
+	// ===============================> salt core	
 	/**
 	 * Creates a new {@link SGraph} object of type {@link SGraph}.
 	 * 
@@ -114,14 +115,15 @@ public class SaltFactory {
 	public static SLayer createSLayer() {
 		return (factory.createSLayer());
 	}
+	// ===============================< salt core
 
 	/**
-	 * Creates a new {@link SSpanningRelation} object.
+	 * Creates a new {@link SaltProject}.
 	 * 
-	 * @return new {@link SSpanningRelation} object
+	 * @return new {@link SaltProject} object
 	 */
-	public static SSpanningRelation createSSpanningRelation() {
-		return (factory.createSSpanningRelation());
+	public static SaltProject createSaltProject() {
+		return (factory.createSaltProject());
 	}
 
 	// ===============================> corpus structure
@@ -178,6 +180,14 @@ public class SaltFactory {
 	 */
 	public static SDocumentGraph createSDocumentGraph() {
 		return (factory.createSDocumentGraph());
+	}
+	/**
+	 * Creates a new {@link SSpanningRelation} object.
+	 * 
+	 * @return new {@link SSpanningRelation} object
+	 */
+	public static SSpanningRelation createSSpanningRelation() {
+		return (factory.createSSpanningRelation());
 	}
 	// ===============================< document structure
 }

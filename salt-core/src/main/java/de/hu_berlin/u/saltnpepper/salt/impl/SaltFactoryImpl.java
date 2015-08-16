@@ -2,6 +2,7 @@ package de.hu_berlin.u.saltnpepper.salt.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactoryImpl;
 import de.hu_berlin.u.saltnpepper.salt.ISaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
@@ -16,6 +17,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SDocumentGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SSpanningRelationImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.impl.SaltProjectImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
@@ -115,16 +117,14 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SLayer createSLayer() {
 		return (new SLayerImpl());
 	}
-
+	
 	/**
-	 * Creates a new {@link SSpanningRelation} object of type
-	 * {@link SSpanningRelationImpl}.
+	 * Creates a new {@link SaltProject}.
 	 * 
-	 * @return new {@link SSpanningRelation} object
+	 * @return new {@link SaltProject} object
 	 */
-	@Override
-	public SSpanningRelation createSSpanningRelation() {
-		return (new SSpanningRelationImpl());
+	public SaltProject createSaltProject() {
+		return (new SaltProjectImpl());
 	}
 
 	// ===============================> corpus structure
@@ -183,5 +183,16 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SDocumentGraph createSDocumentGraph() {
 		return (new SDocumentGraphImpl());
 	}
+	/**
+	 * Creates a new {@link SSpanningRelation} object of type
+	 * {@link SSpanningRelationImpl}.
+	 * 
+	 * @return new {@link SSpanningRelation} object
+	 */
+	@Override
+	public SSpanningRelation createSSpanningRelation() {
+		return (new SSpanningRelationImpl());
+	}
+
 	// ===============================< document structure
 }
