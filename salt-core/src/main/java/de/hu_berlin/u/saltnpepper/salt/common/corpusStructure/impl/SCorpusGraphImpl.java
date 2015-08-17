@@ -45,6 +45,24 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 @SuppressWarnings("serial")
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
+	/**
+	 * Calls the init of super class and expands its initialization for adding
+	 * of indexes:
+	 * <ul>
+	 * <li>Initializes index {@link #idx_node_id}</li>
+	 * <li>Initializes index {@link #idx_relation_id}</li>
+	 * <li>Initializes index {@link #idx_layer_id}</li>
+	 * <li>Initializes index {@link #idx_out_relation_id}</li>
+	 * <li>Initializes index {@link #idx_in_relation_id}</li>
+	 * </ul>
+	 */
+	protected void init() {
+		super.init();
+
+		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes/2, expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations/2, expectedRelations);
+	}
+
 	/** Salt-project containing this corpus structure **/
 	protected SaltProject saltProject = null;
 
@@ -118,18 +136,19 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 		// start: create a name if none exists
 		if ((((SNode) node).getName() == null) || (((SNode) node).getName().isEmpty())) {
-			if (node instanceof SCorpus)
+			if (node instanceof SCorpus) {
 				((SNode) node).setName("corp" + (this.getCorpora().size() + 1));
-			else if (node instanceof SDocument)
+			} else if (node instanceof SDocument) {
 				((SNode) node).setName("doc" + (this.getDocuments().size() + 1));
-			else
+			} else {
 				((SNode) node).setName("node" + (this.getDocuments().size() + 1));
+			}
 		}
 		// end: create a name if none exists
 		if ((((SNode) node).getId() == null) || (((SNode) node).getId().isEmpty())) {
 			// id a name if none exists
 			((SNode) node).setId("salt:/" + ((SNode) node).getName());
-		}// id a name if none exists
+		}
 
 		super.basicAddNode(node);
 

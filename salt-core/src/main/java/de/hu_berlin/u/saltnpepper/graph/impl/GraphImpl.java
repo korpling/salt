@@ -62,29 +62,26 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	}
 
 	/** Number of expected nodes to initialize indexes **/
-	private int expectedNodes = 1000;
+	protected int expectedNodes = 1000;
 	/** Number of expected relations to initialize indexes **/
-	private int expectedRelations = 5000;
+	protected int expectedRelations = 5000;
 	/**
 	 * Approximated node degree, which is {@link #expectedRelations} /
 	 * {@link #expectedNodes}
 	 **/
-	private int approximatedNodeDegree = expectedRelations / expectedNodes;
+	protected int approximatedNodeDegree = expectedRelations / expectedNodes;
 
 	/**
 	 * Initializes an object of type {@link GraphImpl}.
 	 * <ul>
-	 * <li>Initializes nodes list</li>
-	 * <li>Initializes relations list</li>
-	 * <li>Initializes layers set</li>
-	 * <li>Initializes index {@link #idx_node_id}</li>
-	 * <li>Initializes index {@link #idx_relation_id}</li>
-	 * <li>Initializes index {@link #idx_layer_id}</li>
-	 * <li>Initializes index {@link #idx_out_relation_id}</li>
-	 * <li>Initializes index {@link #idx_in_relation_id}</li>
+	 * <li>{@link SaltUtil#IDX_ID_NODES}</li>
+	 * <li>{@link SaltUtil#IDX_ID_RELATIONS}</li>
+	 * <li>{@link SaltUtil#IDX_ID_LAYER}</li>
+	 * <li>{@link SaltUtil#IDX_OUT_RELATIONS}</li>
+	 * <li>{@link SaltUtil#IDX_IN_RELATIONS}</li>
 	 * </ul>
 	 */
-	private void init() {
+	protected void init() {
 		layers = Collections.synchronizedSet(new HashSet<Layer<N, R>>());
 		nodes = Collections.synchronizedList(new ArrayList<N>(expectedNodes));
 		relations = Collections.synchronizedList(new ArrayList<R>(expectedNodes));
