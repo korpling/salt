@@ -38,7 +38,6 @@ import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
@@ -131,9 +130,6 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 */
 	@Override
 	protected void basicAddNode(SNode node) {
-		if (!(node instanceof SNode)) {
-			throw new SaltException("Cannot insert a node, which is not a SNode object: " + node);
-		}
 		// start: create a name if none exists
 		if ((((SNode) node).getName() == null) || (((SNode) node).getName().isEmpty())) {
 			if (node instanceof SCorpus) {
@@ -153,14 +149,14 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		super.basicAddNode(node);
 
 		// map some implementation types to the matching interfaces
-		Class key;
-		if (node instanceof SCorpus)
+		Class<? extends SNode> key;
+		if (node instanceof SCorpus) {
 			key = SCorpus.class;
-		else if (node instanceof SDocument)
+		} else if (node instanceof SDocument) {
 			key = SDocument.class;
-		else
+		} else {
 			key = node.getClass();
-
+		}
 		// end: compute slot id
 		getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
 	}
@@ -220,16 +216,16 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public Identifier addSubCorpus(SCorpus superCorpus, SCorpus subCorpus) {
 		if (superCorpus == null) {
-			throw new SaltException("Cannot add the given subCorpus, because the given superCorpus is null.");
+			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is null.");
 		}
 		if (subCorpus == null) {
-			throw new SaltException("Cannot add the given subCorpus, because it is null.");
+			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because it is null.");
 		}
 		if (superCorpus.getId() == null) {
-			throw new SaltException("Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
 		}
 		if (this.getNode(superCorpus.getId()) == null) {
-			throw new SaltException("Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
 		}
 
 		String namePart = null;
@@ -254,13 +250,13 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public Identifier addDocument(SCorpus corpus, SDocument document) {
 		if (corpus == null) {
-			throw new SaltException("Cannot add the given sDocument, because the given sCorpus is null.");
+			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because the given sCorpus is null.");
 		}
 		if (document == null) {
-			throw new SaltException("Cannot add the given sDocument, because it is null.");
+			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because it is null.");
 		}
 		if (this.getNode(corpus.getId()) == null) {
-			throw new SaltException("Cannot add the given sDocument, because the given sCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because the given sCorpus is not already contained in corpus graph.");
 		}
 		String namePart = null;
 		namePart = document.getName();

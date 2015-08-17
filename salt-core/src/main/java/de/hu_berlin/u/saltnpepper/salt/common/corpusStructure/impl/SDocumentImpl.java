@@ -30,18 +30,18 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 public class SDocumentImpl extends SNodeImpl implements SDocument {
 
 	/** document structure which is contained in this document */
-	protected SDocumentGraph documentStructure;
+	protected SDocumentGraph documentGraph;
 
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getDocumentGraph() {
-		return (documentStructure);
+		return (documentGraph);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public void setDocumentGraph(SDocumentGraph documentStructure) {
-		this.documentStructure = documentStructure;
+	public void setDocumentGraph(SDocumentGraph documentGraph) {
+		this.documentGraph = documentGraph;
 	}
 
 	/** {@inheritDoc} **/

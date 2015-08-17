@@ -64,10 +64,10 @@ public interface SDocument extends SNode {
 	/**
 	 * Sets the document structure which belongs to this document.
 	 * 
-	 * @param documentStructure
+	 * @param documentGraph
 	 *            document structure which belongs to this document
 	 */
-	public void setDocumentGraph(SDocumentGraph documentStructure);
+	public void setDocumentGraph(SDocumentGraph documentGraph);
 
 	/**
 	 * Returns the value of the '<em><b>SDocument Graph Location</b></em>'

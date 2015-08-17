@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
@@ -37,6 +38,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.tests.SaltTestsUtil;
 
 public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
@@ -66,8 +68,31 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		alibiDocument = SaltFactory.createSDocument();
 	}
 
+	/**
+	 * Tests the setter and getter for salt-project.
+	 */
 	@Test
-	public void testgetDocuments() {
+	public void testSetGetSaltProjetc() {
+		assertNull(getFixture().getSaltProject());
+		SaltProject project = SaltFactory.createSaltProject();
+		getFixture().setSaltProject(project);
+		assertEquals(project, getFixture().getSaltProject());
+	}
+
+	/**
+	 * Tries to add a relation which is not of type {@link SRelation}
+	 */
+	@Test
+	public void testAddUnsupportedRelation() {
+		try {
+			getFixture().addRelation(GraphFactory.createRelation());
+			fail("Should not add this type of relation");
+		} catch (SaltInsertionException e) {
+		}
+	}
+
+	@Test
+	public void testGetDocuments() {
 		String[] ids = { "salt:/graph1#doc1", "salt:/graph1#doc2", "salt:/graph1#doc3", "salt:/graph1#doc4" };
 		List<SDocument> docDSs = new ArrayList<SDocument>();
 		for (String id : ids) {
@@ -82,7 +107,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	}
 
 	@Test
-	public void testgetCorpora() {
+	public void testGetCorpora() {
 		String[] ids = { "salt:/graph1#corp1", "salt:/graph1#corp2", "salt:/graph1#corp3", "salt:/graph1#corp4" };
 		List<SCorpus> corpDSs = new ArrayList<SCorpus>();
 		for (String id : ids) {
@@ -150,7 +175,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	}
 
 	@Test
-	public void testgetDocument__SId() {
+	public void testGetDocument__SId() {
 		String[] ids = { "salt:/graph1#doc1", "salt:/graph1#doc2", "salt:/graph1#doc3", "salt:/graph1#doc4" };
 		List<SDocument> docDSs = new ArrayList<SDocument>();
 		for (String id : ids) {
@@ -165,52 +190,134 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		}
 	}
 
+	/**
+	 * Checks whether the adding of a sub corpus works as expected. Means an
+	 * error if an empty super or sub corpus was passed, or if the super corpus
+	 * was not already inserted into the graph. If the parameters are ok, sub
+	 * corpus must be part of the graph.
+	 */
 	@Test
 	public void testAddSSubCorpus__SCorpus_SCorpus() {
-		SCorpus sSuperCorpus = SaltFactory.createSCorpus();
-		SCorpus sSubCorpus = SaltFactory.createSCorpus();
+		SCorpus superCorpus = null;
+		SCorpus subCorpus = null;
+		// empty sub and super corpus
 		try {
-			getFixture().addSubCorpus(sSuperCorpus, sSubCorpus);
-			fail("An exception must be thrown, because the root corpus has not been inserted yet.");
-		} catch (Exception e) {
+			getFixture().addSubCorpus(superCorpus, subCorpus);
+			fail();
+		} catch (SaltInsertionException e) {
 		}
 
-		getFixture().addNode(sSuperCorpus);
-		assertNotNull(getFixture().addSubCorpus(sSuperCorpus, sSubCorpus));
+		superCorpus = SaltFactory.createSCorpus();
+		// empty sub corpus
+		try {
+			getFixture().addSubCorpus(superCorpus, subCorpus);
+			fail();
+		} catch (SaltInsertionException e) {
+		}
 
-		List<SRelation<SNode, SNode>> relations = getFixture().getOutRelations(sSuperCorpus.getId());
+		superCorpus = null;
+		subCorpus = SaltFactory.createSCorpus();
+		// empty super corpus
+		try {
+			getFixture().addSubCorpus(superCorpus, subCorpus);
+			fail();
+		} catch (SaltInsertionException e) {
+		}
+
+		superCorpus = SaltFactory.createSCorpus();
+		try {
+			getFixture().addSubCorpus(superCorpus, subCorpus);
+			fail("An exception must be thrown, because the root corpus has not been inserted yet.");
+		} catch (SaltInsertionException e) {
+		}
+
+		superCorpus.setId("fakeId");
+		try {
+			getFixture().addSubCorpus(superCorpus, subCorpus);
+			fail("An exception must be thrown, because the root corpus has not been inserted yet.");
+		} catch (SaltInsertionException e) {
+		}
+
+		getFixture().addNode(superCorpus);
+		assertNotNull(getFixture().addSubCorpus(superCorpus, subCorpus));
+
+		List<SRelation<SNode, SNode>> relations = getFixture().getOutRelations(superCorpus.getId());
 		assertNotNull(relations);
 		assertTrue(relations.size() == 1);
-		assertEquals(sSubCorpus, relations.get(0).getTarget());
+		assertEquals(subCorpus, relations.get(0).getTarget());
 
-		relations = getFixture().getInRelations(sSubCorpus.getId());
+		relations = getFixture().getInRelations(subCorpus.getId());
 		assertNotNull(relations);
 		assertTrue(relations.size() == 1);
-		assertEquals(sSuperCorpus, relations.get(0).getSource());
+		assertEquals(superCorpus, relations.get(0).getSource());
 	}
 
+	/**
+	 * Checks whether the adding of a document works as expected. Means an error
+	 * if an empty corpus or document was passed, or if the corpus was not
+	 * already inserted into the graph. If the parameters are ok, document must
+	 * be part of the graph.
+	 */
 	@Test
 	public void testAddSDocument__SCorpus_SDocument() {
-		SCorpus sSuperCorpus = SaltFactory.createSCorpus();
-		SDocument sDocument = SaltFactory.createSDocument();
+		SCorpus corpus = null;
+		SDocument document = null;
+		// empty sub and super corpus
 		try {
-			getFixture().addDocument(sSuperCorpus, sDocument);
+			getFixture().addDocument(corpus, document);
+			fail();
+		} catch (SaltInsertionException e) {
+		}
+
+		corpus = SaltFactory.createSCorpus();
+		// empty sub corpus
+		try {
+			getFixture().addDocument(corpus, document);
+			fail();
+		} catch (SaltInsertionException e) {
+		}
+
+		corpus = null;
+		document = SaltFactory.createSDocument();
+		// empty super corpus
+		try {
+			getFixture().addDocument(corpus, document);
+			fail();
+		} catch (SaltInsertionException e) {
+		}
+
+		corpus = SaltFactory.createSCorpus();
+		try {
+			getFixture().addDocument(corpus, document);
+			fail("An exception must be thrown, because the root corpus has not been inserted yet.");
+		} catch (SaltInsertionException e) {
+		}
+
+		corpus.setId("fakeId");
+		try {
+			getFixture().addDocument(corpus, document);
+			fail("An exception must be thrown, because the root corpus has not been inserted yet.");
+		} catch (SaltInsertionException e) {
+		}
+
+		try {
+			getFixture().addDocument(corpus, document);
 			fail("An exception must be thrown, because the corpus has not been inserted yet.");
 		} catch (Exception e) {
 		}
 
-		getFixture().addNode(sSuperCorpus);
-		assertNotNull(getFixture().addDocument(sSuperCorpus, sDocument));
+		getFixture().addNode(corpus);
+		assertNotNull(getFixture().addDocument(corpus, document));
 
-		List<SRelation<SNode, SNode>> relations = getFixture().getOutRelations(sSuperCorpus.getId());
+		List<SRelation<SNode, SNode>> relations = getFixture().getOutRelations(corpus.getId());
 		assertNotNull(relations);
 		assertTrue(relations.size() == 1);
-		assertEquals(sDocument, relations.get(0).getTarget());
+		assertEquals(document, relations.get(0).getTarget());
 
-		relations = getFixture().getInRelations(sDocument.getId());
+		relations = getFixture().getInRelations(document.getId());
 		assertNotNull(relations);
 		assertTrue(relations.size() == 1);
-		assertEquals(sSuperCorpus, relations.get(0).getSource());
+		assertEquals(corpus, relations.get(0).getSource());
 	}
 
 	@Test

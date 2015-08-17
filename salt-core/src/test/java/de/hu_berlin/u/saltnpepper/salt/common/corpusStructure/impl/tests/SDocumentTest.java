@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 
 public class SDocumentTest {
 
@@ -54,6 +55,17 @@ public class SDocumentTest {
 		this.getFixture().setDocumentGraphLocation(graphLocation);
 
 		assertEquals(graphLocation, this.getFixture().getDocumentGraphLocation());
+	}
+	
+	/**
+	 * Tests whether the getter and setter of document structure are correct.
+	 */
+	@Test
+	public void testSetGetDocumentStructure(){
+		assertNull(getFixture().getDocumentGraph());
+		SDocumentGraph graph= SaltFactory.createSDocumentGraph();
+		getFixture().setDocumentGraph(graph);
+		assertEquals(graph, getFixture().getDocumentGraph());
 	}
 
 	// @Test
