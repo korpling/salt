@@ -31,6 +31,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
+import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 
 /**
  * The document-structure covers the "real" linguistic data, which means primary

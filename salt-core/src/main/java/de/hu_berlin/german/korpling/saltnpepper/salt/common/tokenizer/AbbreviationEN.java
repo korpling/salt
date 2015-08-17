@@ -21,7 +21,7 @@ import java.util.HashSet;
 
 /**
  * This offers a set of english abbreviations. The set is supplied by a
- * {@link HashSet} object which is returned, when calling the methode
+ * {@link HashSet} object which is returned, when calling the method
  * {@link #createAbbriviations()}. The returned object is a static one and
  * therefore initialized only once. The set of abbreviations is reimplemented in
  * Java with permission from the original abbreviation sets used by the

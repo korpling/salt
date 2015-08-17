@@ -13,7 +13,6 @@ import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SAudioDSRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SAudioDataSource;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
@@ -39,6 +38,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.index.IndexMgr;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
+import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 
 public class SDocumentGraphImpl implements SDocumentGraph {
 
