@@ -134,25 +134,26 @@ public class Tokenizer {
 			throw new SaltTokenizerException("Cannot tokenize an empty 'SSTextualDS' object.");
 
 		if (this.getDocumentGraph() == null) {
-			if (sTextualDS.getSDocumentGraph() == null)
+			if (sTextualDS.getGraph() == null) {
 				throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
-			else
-				this.setsDocumentGraph(sTextualDS.getSDocumentGraph());
+			} else {
+				this.setsDocumentGraph(sTextualDS.getGraph());
+			}
 		}
 
-		if (sTextualDS.getSText() != null) {
+		if (sTextualDS.getText() != null) {
 			if (startPos == null)
 				startPos = 0;
 			if (endPos == null)
-				endPos = sTextualDS.getSText().length();
+				endPos = sTextualDS.getText().length();
 
 			// detect language
 			if (language == null) {
-				language = checkLanguage(sTextualDS.getSText().substring(startPos, endPos));
+				language = checkLanguage(sTextualDS.getText().substring(startPos, endPos));
 				// if text was to short to emit language try entire text (and
 				// hope, that no language mixes are contained :-})
 				if (language == null)
-					language = checkLanguage(sTextualDS.getSText().substring(startPos, endPos));
+					language = checkLanguage(sTextualDS.getText().substring(startPos, endPos));
 			}
 
 			if (language != null) {// set abbreviations
@@ -352,7 +353,7 @@ public class Tokenizer {
 	public List<SToken> tokenizeToToken(STextualDS sTextualDS, LanguageCode language, Integer startPos, Integer endPos) {
 		List<SToken> retVal = null;
 		List<String> strTokens = null;
-		String strInput = sTextualDS.getSText().substring(startPos, endPos);
+		String strInput = sTextualDS.getText().substring(startPos, endPos);
 
 		strTokens = this.tokenizeToString(strInput, language);
 		if ((strTokens != null) && (strTokens.size() > 0)) {
@@ -361,7 +362,7 @@ public class Tokenizer {
 
 			// check if tokens exist for passed span
 			List<SToken> tokens = null;
-			if ((startPos != 0) || (endPos != sTextualDS.getSText().length()) || (getDocumentGraph().getTextualDSs().size() > 1)) {
+			if ((startPos != 0) || (endPos != sTextualDS.getText().length()) || (getDocumentGraph().getTextualDSs().size() > 1)) {
 				DataSourceSequence sequence = new DataSourceSequence();
 				sequence.setDataSource(sTextualDS);
 				sequence.setStart(startPos);

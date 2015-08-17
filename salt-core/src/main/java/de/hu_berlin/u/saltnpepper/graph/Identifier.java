@@ -7,7 +7,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
  * identifier is used for {@link Node}, {@link Relation}, {@link Graph} and
  * {@link Layer} objects. The namespace of an {@link Identifier} objectis fixed
  * to {@link SaltUtil#SALT_NAMESPACE} and its name is fixed to
- * {@link SaltUtil#KW_IDENTIFIER}.
+ * {@link SaltUtil#LABEL_ID}.
  * 
  * @author florian
  */

@@ -19,13 +19,13 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
-public interface SSequentialDS extends SNode {
-	public Object getSData();
+public interface SSequentialDS<D, P> extends SNode {
+	public D getSData();
 
-	public void setSData(Object value);
+	public void setSData(D value);
 
-	public Integer getSStart();
+	public P getSStart();
 
-	public Integer getSEnd();
+	public P getSEnd();
 
 } // SSequentialDS

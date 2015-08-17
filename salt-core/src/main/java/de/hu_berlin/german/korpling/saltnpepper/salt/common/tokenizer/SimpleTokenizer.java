@@ -80,26 +80,26 @@ public class SimpleTokenizer {
 			throw new SaltTokenizerException("Cannot tokenize an empty 'SSTextualDS' object.");
 
 		if (this.getsDocumentGraph() == null) {
-			if (sTextualDS.getSDocumentGraph() == null) {
+			if (sTextualDS.getGraph() == null) {
 				throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
 			} else {
-				this.setsDocumentGraph(sTextualDS.getSDocumentGraph());
+				this.setsDocumentGraph(sTextualDS.getGraph());
 			}
 		}
 
-		if (sTextualDS.getSText() != null) {
+		if (sTextualDS.getText() != null) {
 			if (startPos == null) {
 				startPos = 0;
 			}
 			if (endPos == null) {
-				endPos = sTextualDS.getSText().length();
+				endPos = sTextualDS.getText().length();
 			}
 
 			char[] text;
-			if ((startPos != 0) || (endPos != sTextualDS.getSText().length())) {
-				text = sTextualDS.getSText().substring(startPos, endPos).toCharArray();
+			if ((startPos != 0) || (endPos != sTextualDS.getText().length())) {
+				text = sTextualDS.getText().substring(startPos, endPos).toCharArray();
 			} else {
-				text = sTextualDS.getSText().toCharArray();
+				text = sTextualDS.getText().toCharArray();
 			}
 			// true if last character was a separator, false otherwise
 			boolean isSep = false;

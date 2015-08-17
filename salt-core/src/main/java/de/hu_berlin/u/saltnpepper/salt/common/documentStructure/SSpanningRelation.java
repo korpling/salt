@@ -48,5 +48,5 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
  * in a graph.
  * </p>
  */
-public interface SSpanningRelation extends SRelation<SSpan, SToken>, STextOverlappingRelation<SSpan, SToken>, STimeOverlappingRelation<SSpan, SToken> {
+public interface SSpanningRelation extends SRelation<SSpan, SToken>, STextOverlappingRelation<SSpan, SToken>, STimeOverlappingRelation<SSpan, SToken>,SDocumentGraphObject {
 } // SSpanningRelation

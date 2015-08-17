@@ -168,10 +168,10 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	// =======================================> SNamedElement
 	@Override
 	public void removeLabel(String qName) {
-		if (SaltUtil.KW_QNAME_NAME.equals(qName)) {
+		if (SaltUtil.FEAT_NAME_QNAME.equals(qName)) {
 			name = null;
 		}
-		if (SaltUtil.KW_QNAME_TYPE.equals(qName)) {
+		if (SaltUtil.FEAT_TYPE_QNAME.equals(qName)) {
 			type = null;
 		}
 		super.removeLabel(qName);
@@ -184,7 +184,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	@Override
 	public String getName() {
 		if (name == null) {
-			SFeature feature = getFeature(SaltUtil.KW_QNAME_NAME);
+			SFeature feature = getFeature(SaltUtil.FEAT_NAME_QNAME);
 			if (feature != null) {
 				name = feature;
 			}
@@ -199,7 +199,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	@Override
 	public void setName(String name) {
 		if (this.name == null) {
-			this.name = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_NAME, null);
+			this.name = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.FEAT_NAME, null);
 		}
 		this.name.setValue(name);
 	}
@@ -214,7 +214,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	@Override
 	public String getType() {
 		if (type == null) {
-			SFeature feature = getFeature(SaltUtil.KW_QNAME_TYPE);
+			SFeature feature = getFeature(SaltUtil.FEAT_TYPE_QNAME);
 			if (feature != null) {
 				type = feature;
 			}
@@ -229,7 +229,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	@Override
 	public void setType(String type) {
 		if (this.type == null) {
-			this.type = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_TYPE, null);
+			this.type = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.FEAT_TYPE, null);
 		}
 		this.type.setValue(type);
 	}

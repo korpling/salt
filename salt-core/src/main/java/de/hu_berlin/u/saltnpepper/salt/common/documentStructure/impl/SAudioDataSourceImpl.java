@@ -15,10 +15,25 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
+package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
-import de.hu_berlin.u.saltnpepper.salt.core.SNode;
-import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
+import org.eclipse.emf.common.util.URI;
 
-public interface STextOverlappingRelation<S extends SNode, T extends SNode> extends SRelation<S, T>, SDocumentGraphObject {
-} // STextOverlappingRelation
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SAudioDataSource;
+
+@SuppressWarnings("serial")
+public class SAudioDataSourceImpl extends SSequentialDSImpl<URI, Double> implements SAudioDataSource {
+	/** {@inheritDoc} */
+	@Override
+	public URI getSAudioReference() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	/** {@inheritDoc} */
+	@Override
+	public void setSAudioReference(URI audioRef) {
+		// TODO Auto-generated method stub
+		
+	}
+
+} //SAudioDataSourceImpl

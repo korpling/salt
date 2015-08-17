@@ -60,7 +60,7 @@ public class IdentifierTest {
 	@Test
 	public void testQNameHandling() {
 		// should be ok
-		String name = SaltUtil.KW_IDENTIFIER;
+		String name = SaltUtil.LABEL_ID;
 		String qName = SaltUtil.SALT_NAMESPACE + Identifier.NS_SEPERATOR + name;
 		getFixture().setQName(name);
 		assertEquals(qName, getFixture().getQName());
@@ -78,7 +78,7 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testGetQName() {
-		String qname = SaltUtil.SALT_NAMESPACE + SaltUtil.NAMESPACE_SEPERATOR + SaltUtil.KW_IDENTIFIER;
+		String qname = SaltUtil.SALT_NAMESPACE + SaltUtil.NAMESPACE_SEPERATOR + SaltUtil.LABEL_ID;
 		assertEquals(qname, getFixture().getQName());
 		getFixture().setName("something");
 		assertEquals(qname, getFixture().getQName());
@@ -102,9 +102,9 @@ public class IdentifierTest {
 	 */
 	@Test
 	public void testSetName() {
-		assertEquals(SaltUtil.KW_IDENTIFIER, getFixture().getName());
+		assertEquals(SaltUtil.LABEL_ID, getFixture().getName());
 		getFixture().setName("somename");
-		assertEquals(SaltUtil.KW_IDENTIFIER, getFixture().getName());
+		assertEquals(SaltUtil.LABEL_ID, getFixture().getName());
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class IdentifierTest {
 	@Test
 	public void testCheckOpposite() {
 		MyContainer newContainer = new MyContainer();
-		Identifier id = GraphFactory.createIdentifier(newContainer, SaltUtil.KW_IDENTIFIER);
+		Identifier id = GraphFactory.createIdentifier(newContainer, SaltUtil.LABEL_ID);
 		assertEquals(newContainer.getIdentifier(), id);
 
 		newContainer.setId("newId");

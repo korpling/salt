@@ -31,5 +31,5 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
  * 
  * @author florian
  */
-public interface SStructure extends SStructuredNode {
+public interface SStructure extends SStructuredNode, SDocumentGraphObject {
 } // SStructure

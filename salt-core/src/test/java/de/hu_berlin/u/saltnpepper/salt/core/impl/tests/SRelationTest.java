@@ -50,9 +50,9 @@ public class SRelationTest extends SAnnotationContainerTest {
 		assertNull(getFixture().getType());
 
 		if (getFixture() instanceof SAnnotationContainer) {
-			((SAnnotationContainer) getFixture()).removeLabel(SaltUtil.KW_QNAME_TYPE);
+			((SAnnotationContainer) getFixture()).removeLabel(SaltUtil.FEAT_TYPE_QNAME);
 			assertNull(getFixture().getType());
-			((SAnnotationContainer) getFixture()).createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_TYPE, "myType2");
+			((SAnnotationContainer) getFixture()).createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.FEAT_TYPE, "myType2");
 			assertEquals("myType2", getFixture().getType());
 		}
 	}

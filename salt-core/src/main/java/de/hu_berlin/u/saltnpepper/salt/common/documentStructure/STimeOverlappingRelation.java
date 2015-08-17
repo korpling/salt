@@ -20,10 +20,5 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
-/**
- * 
- */
 public interface STimeOverlappingRelation<S extends SNode, T extends SNode> extends SRelation<S, T> {
-	public Boolean isSTimeOverlapping();
-
 } // STimeOverlappingRelation

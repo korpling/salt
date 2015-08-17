@@ -82,7 +82,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>> implem
 	// =======================================> SNamedElement
 	@Override
 	public void removeLabel(String qName) {
-		if (SaltUtil.KW_QNAME_NAME.equals(qName)) {
+		if (SaltUtil.FEAT_NAME_QNAME.equals(qName)) {
 			name = null;
 		}
 		super.removeLabel(qName);
@@ -95,7 +95,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>> implem
 	@Override
 	public String getName() {
 		if (name == null) {
-			SFeature feature = getFeature(SaltUtil.KW_QNAME_NAME);
+			SFeature feature = getFeature(SaltUtil.FEAT_NAME_QNAME);
 			if (feature != null) {
 				name = feature;
 			}
@@ -110,7 +110,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>> implem
 	@Override
 	public void setName(String name) {
 		if (this.name == null) {
-			this.name = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_NAME, null);
+			this.name = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.FEAT_NAME, null);
 		}
 		this.name.setValue(name);
 	}

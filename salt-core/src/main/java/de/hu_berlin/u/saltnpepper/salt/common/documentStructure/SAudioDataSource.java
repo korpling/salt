@@ -19,7 +19,7 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
 import org.eclipse.emf.common.util.URI;
 
-public interface SAudioDataSource extends SSequentialDS, SDocumentGraphObject {
+public interface SAudioDataSource extends SSequentialDS<URI, Double>, SDocumentGraphObject {
 
 	/**
 	 * Returns a {@link URI} object, which points to a audio file. If no uri was

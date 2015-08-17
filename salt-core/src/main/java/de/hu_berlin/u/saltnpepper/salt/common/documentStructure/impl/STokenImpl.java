@@ -2,12 +2,13 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructuredNode;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
 
 @SuppressWarnings("serial")
-public class STokenImpl extends SNodeImpl implements SToken {
+public class STokenImpl extends SNodeImpl implements SToken, SStructuredNode {
 
 	/** {@inheritDoc} **/
 	@Override

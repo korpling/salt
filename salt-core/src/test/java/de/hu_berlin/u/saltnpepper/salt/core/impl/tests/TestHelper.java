@@ -27,9 +27,9 @@ public class TestHelper {
 		assertNull(namedElement.getName());
 
 		if (namedElement instanceof SAnnotationContainer) {
-			((SAnnotationContainer) namedElement).removeLabel(SaltUtil.KW_QNAME_NAME);
+			((SAnnotationContainer) namedElement).removeLabel(SaltUtil.FEAT_NAME_QNAME);
 			assertNull(namedElement.getName());
-			((SAnnotationContainer) namedElement).createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_NAME, "myName2");
+			((SAnnotationContainer) namedElement).createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.FEAT_NAME, "myName2");
 			assertEquals("myName2", namedElement.getName());
 		}
 	}

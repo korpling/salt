@@ -6,6 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 
 /**
@@ -47,63 +48,85 @@ public class SaltUtil {
 	/** name of index for relating node ids and incoming relations */
 	public static final String IDX_IN_RELATIONS = "idx_in_relations";
 	// ======================================< index names
+
+	// ======================================> keywords for features
 	/**
 	 * Name of {@link Label} to store the identifier of a node, relation, graph
 	 * or layer.
 	 */
-	public static final String KW_IDENTIFIER = "id";
+	public static final String LABEL_ID = "id";
 	/**
 	 * Qualified name of {@link Label} to store the identifier of a node,
 	 * relation, graph or layer.
 	 */
-	public static final String KW_QNAME_ID = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_IDENTIFIER;
+	public static final String LABEL_ID_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + LABEL_ID;
 	/**
 	 * Name for {@link SFeature} to store the type of a labels value.
 	 */
-	public static final String KW_VALUE_DATATYPE = "SVAL_TYPE";
+	public static final String FEAT_VALUE_DATATYPE = "SVAL_TYPE";
 	/**
 	 * Name for {@link SFeature} to store the name of a node, relation, graph or
 	 * label.
 	 */
-	public static final String KW_NAME = "SNAME";
+	public static final String FEAT_NAME = "SNAME";
 	/**
 	 * Qualified name for {@link SFeature} to store the name of a node,
 	 * relation, graph or label.
 	 */
-	public static final String KW_QNAME_NAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_NAME;
+	public static final String FEAT_NAME_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_NAME;
 	/**
 	 * Name for {@link SFeature} to store the type of a relation.
 	 */
-	public static final String KW_TYPE = "STYPE";
+	public static final String FEAT_TYPE = "STYPE";
 	/**
 	 * Qualified name for {@link SFeature} to store the type of a relation.
 	 */
-	public static final String KW_QNAME_TYPE = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_TYPE;
+	public static final String FEAT_TYPE_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_TYPE;
 
 	/**
 	 * Name for {@link SFeature} to store the uri reference of a
 	 * {@link SDocumentGraph} in a {@link SDocument}
 	 */
-	public static final String KW_SDOCUMENT_GRAPH_LOCATION = "SDOCUMENT_GRAPH_LOCATION";
+	public static final String FEAT_SDOCUMENT_GRAPH_LOCATION = "SDOCUMENT_GRAPH_LOCATION";
 	/**
-	 * QUalified name name for {@link SFeature} to store the uri reference of a
+	 * Qualified name name for {@link SFeature} to store the uri reference of a
 	 * {@link SDocumentGraph} in a {@link SDocument}
 	 */
-	public static final String KW_QNAME_SDOCUMENT_GRAPH_LOCATION = SALT_NAMESPACE + NAMESPACE_SEPERATOR + KW_SDOCUMENT_GRAPH_LOCATION;
+	public static final String FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_SDOCUMENT_GRAPH_LOCATION;
 	/**
 	 * The name of the {@link SFeature} for the reference to an audio file.
 	 */
 	public static final String FEAT_SAUDIO_REFERNCE = "SAUDIO_REFERENCE";
 
-	/**
-	 * The name of the {@link SFeature} for the start value.
-	 */
+	/** The name of the {@link SFeature} for the start value. */
 	public static final String FEAT_SSTART = "SSTART";
 	/**
-	 * The name of the {@link SFeature} for the end value.
+	 * The qualified name of the name of the {@link SFeature} for the start
+	 * value.
 	 */
+	public static final String FEAT_SSTART_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + "SSTART";
+	/** The name of the {@link SFeature} for the end value. */
 	public static final String FEAT_SEND = "SEND";
+	/**
+	 * The qualified name of the name of the {@link SFeature} for the end value.
+	 */
+	public static final String FEAT_SEND_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + "SEND";
+	/**
+	 * The name of the {@link SFeature} for the data label for textual sources,
+	 * etc..
+	 */
+	public static final String FEAT_SDATA = "SDATA";
 
+	/**
+	 * Qualified name name of the {@link SFeature} for the data label for
+	 * textual sources, etc..
+	 */
+	public static final String FEAT_SDATA_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_SDATA;
+
+	// ======================================< keywords for features
+
+	/** Determines the separator between points of time in a {@link STimeline}**/
+	public static final String TIMELINE_SEPARATOR = "#";
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
 	 * qualified name: qname= NAMESPACE {@value #NAMESPACE_SEPERATOR} NAME.

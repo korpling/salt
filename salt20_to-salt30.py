@@ -33,7 +33,9 @@ def rename(file):
 	line= line.replace('getSRootCorpus', 'getRoots')
 
 	#document structure
-
+	line= line.replace('getSDocumentGraph()', 'getGraph()')
+	line= line.replace('setSDocumentGraph(', 'setGraph(')
+	getSDocumentGraph()
 
         sys.stdout.write(line)
 

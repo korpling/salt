@@ -28,5 +28,5 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
  * 
  * @author florian
  */
-public interface STextualRelation extends SSequentialRelation<SToken, STextualDS>, STextOverlappingRelation<SToken, STextualDS> {
+public interface STextualRelation extends SSequentialRelation<SToken, STextualDS, Integer>, STextOverlappingRelation<SToken, STextualDS>, SDocumentGraphObject {
 } // STextualRelation

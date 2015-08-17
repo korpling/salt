@@ -50,7 +50,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public SDATATYPE getValueType() {
 		SDATATYPE retVal = null;
 
-		SFeature feature = getFeature(SaltUtil.KW_VALUE_DATATYPE);
+		SFeature feature = getFeature(SaltUtil.FEAT_VALUE_DATATYPE);
 		if (feature != null) {
 			if ((feature.getValue() == null) && (this.getValue() != null)) {
 				feature.setValue(computeSValueType());
@@ -68,10 +68,10 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	 */
 	@Override
 	public void setValueType(SDATATYPE newSValueType) {
-		SFeature feature = getFeature(SaltUtil.KW_VALUE_DATATYPE);
+		SFeature feature = getFeature(SaltUtil.FEAT_VALUE_DATATYPE);
 		if (feature == null) {
 			feature = SaltFactory.createSFeature();
-			feature.setQName(SaltUtil.KW_VALUE_DATATYPE);
+			feature.setQName(SaltUtil.FEAT_VALUE_DATATYPE);
 			addFeature(feature);
 		}
 		if (newSValueType == null) {

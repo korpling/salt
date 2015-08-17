@@ -17,17 +17,6 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
-/**
- *
- */
-public interface SAudioDSRelation extends SRelation<SAudioDataSource, SToken> {
-	public Double getSStart();
-
-	public void setSStart(Double value);
-
-	public Double getSEnd();
-
-	public void setSEnd(Double value);
+public interface SAudioDSRelation extends SSequentialRelation<SToken, SAudioDataSource, Double>, SDocumentGraphObject {
 } // SAudioDSRelation

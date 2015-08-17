@@ -48,7 +48,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	@Override
 	public URI getDocumentGraphLocation() {
 		URI retVal = null;
-		String name = SaltUtil.KW_QNAME_SDOCUMENT_GRAPH_LOCATION;
+		String name = SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME;
 		SFeature sFeature = getFeature(name);
 		if (sFeature != null) {
 			Object obj = sFeature.getValue();
@@ -63,13 +63,13 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	/** {@inheritDoc} **/
 	@Override
 	public void setDocumentGraphLocation(URI location) {
-		String name = SaltUtil.KW_QNAME_SDOCUMENT_GRAPH_LOCATION;
+		String name = SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME;
 		SFeature sFeature = getFeature(name);
 		if (sFeature == null) {
 			// create a new sFeature
 			sFeature = SaltFactory.createSFeature();
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
-			sFeature.setName(SaltUtil.KW_SDOCUMENT_GRAPH_LOCATION);
+			sFeature.setName(SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION);
 			addFeature(sFeature);
 		}
 		sFeature.setValue(location.toString());

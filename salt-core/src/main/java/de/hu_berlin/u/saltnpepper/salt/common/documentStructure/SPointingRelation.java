@@ -47,5 +47,5 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
  * @author florian
  *
  */
-public interface SPointingRelation extends SRelation<SStructuredNode, SStructuredNode> {
+public interface SPointingRelation extends SRelation<SStructuredNode, SStructuredNode>, SDocumentGraphObject {
 } // SPointingRelation

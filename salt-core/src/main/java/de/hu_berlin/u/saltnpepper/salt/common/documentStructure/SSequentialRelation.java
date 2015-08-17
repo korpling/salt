@@ -20,12 +20,12 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 
-public interface SSequentialRelation<S extends SNode, T extends SNode> extends SRelation<S, T> {
-	public Integer getStart();
+public interface SSequentialRelation<S extends SNode, T extends SNode, P> extends SRelation<S, T> {
+	public P getStart();
 
-	public void setStart(Integer value);
+	public void setStart(P startPoint);
 
-	public Integer getEnd();
+	public P getEnd();
 
-	public void setEnd(Integer value);
+	public void setEnd(P endPoint);
 } // SSequentialRelation
