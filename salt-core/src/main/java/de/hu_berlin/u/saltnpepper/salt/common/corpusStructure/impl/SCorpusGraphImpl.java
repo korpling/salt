@@ -59,8 +59,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	protected void init() {
 		super.init();
 
-		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes/2, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations/2, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2, expectedRelations);
 	}
 
 	/** Salt-project containing this corpus structure **/

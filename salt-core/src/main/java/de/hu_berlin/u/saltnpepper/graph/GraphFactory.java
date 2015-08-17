@@ -10,14 +10,14 @@ import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 public class GraphFactory {
 	/** Internal factory which is used to create objects. **/
 	private static IGraphFactory factory = new GraphFactoryImpl();
-	
+
 	/**
 	 * Creates a new {@link Graph} object of type {@link GraphImpl}.
 	 * 
 	 * @return new {@link Graph} object
 	 */
 	public static Graph<Node, Relation<Node, Node>> createGraph() {
-		return(factory.createGraph());
+		return (factory.createGraph());
 	}
 
 	/**
@@ -26,7 +26,7 @@ public class GraphFactory {
 	 * @return new {@link Node} object
 	 */
 	public static Node createNode() {
-		return(factory.createNode());
+		return (factory.createNode());
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class GraphFactory {
 	 * @return new {@link Relation} object
 	 */
 	public static Relation<Node, Node> createRelation() {
-		return(factory.createRelation());
+		return (factory.createRelation());
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class GraphFactory {
 	 * @return new {@link Label} object
 	 */
 	public static Label createLabel() {
-		return(factory.createLabel());
+		return (factory.createLabel());
 	}
 
 	/**

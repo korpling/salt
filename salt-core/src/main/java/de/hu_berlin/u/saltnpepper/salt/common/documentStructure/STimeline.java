@@ -20,15 +20,18 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 import org.eclipse.emf.common.util.EList;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>STimeline</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>STimeline</b></em>'. <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph <em>SDocument Graph</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSPointsOfTime <em>SPoints Of Time</em>}</li>
+ * <li>
+ * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph
+ * <em>SDocument Graph</em>}</li>
+ * <li>
+ * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSPointsOfTime
+ * <em>SPoints Of Time</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,14 +41,15 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface STimeline extends SSequentialDS {
 	/**
-	 * Returns the value of the '<em><b>SPoints Of Time</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>SPoints Of Time</b></em>' attribute
+	 * list. The list contents are of type {@link java.lang.String}. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SPoints Of Time</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>SPoints Of Time</em>' attribute list isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>SPoints Of Time</em>' attribute list.
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTimeline_SPointsOfTime()
 	 * @model transient="true" volatile="true" derived="true"
@@ -54,36 +58,42 @@ public interface STimeline extends SSequentialDS {
 	EList<String> getSPointsOfTime();
 
 	/**
-	 * Returns the value of the '<em><b>SDocument Graph</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline <em>STimeline</em>}'.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>SDocument Graph</b></em>' reference. It
+	 * is bidirectional and its opposite is '
+	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline
+	 * <em>STimeline</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SDocument Graph</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>SDocument Graph</em>' reference.
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTimeline_SDocumentGraph()
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline
-	 * @model opposite="sTimeline" transient="true" volatile="true" derived="true"
+	 * @model opposite="sTimeline" transient="true" volatile="true"
+	 *        derived="true"
 	 * @generated
 	 */
 	SDocumentGraph getSDocumentGraph();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph <em>SDocument Graph</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SDocument Graph</em>' reference.
+	 * Sets the value of the '
+	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph
+	 * <em>SDocument Graph</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>SDocument Graph</em>' reference.
 	 * @see #getSDocumentGraph()
 	 * @generated
 	 */
 	void setSDocumentGraph(SDocumentGraph value);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

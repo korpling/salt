@@ -40,8 +40,8 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
  * {@link SSpan} object s 1 containing t1 and t2 and relating the token t i via
  * a {@link SPointingRelation} object to s1 . To determine a
  * {@link SPointingRelation} being a coreferential relation or a dependency, you
- * should use the type attribute which is available for every {@link SRelation}. Like
- * all the other relations, {@link SPointingRelation} can be annotated to
+ * should use the type attribute which is available for every {@link SRelation}.
+ * Like all the other relations, {@link SPointingRelation} can be annotated to
  * express some linguistic semantics.
  * 
  * @author florian

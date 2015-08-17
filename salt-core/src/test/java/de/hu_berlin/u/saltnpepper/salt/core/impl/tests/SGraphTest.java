@@ -14,10 +14,11 @@ import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNamedElement;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
-public class SGraphTest extends SAnnotationContainerTest{
+public class SGraphTest extends SAnnotationContainerTest {
 	public SGraph getFixture() {
-		return((SGraph)super.getFixture());
+		return ((SGraph) super.getFixture());
 	}
+
 	@Before
 	public void setUp() throws Exception {
 		setFixture(SaltFactory.createSGraph());
@@ -31,7 +32,7 @@ public class SGraphTest extends SAnnotationContainerTest{
 	public void testGetName() {
 		TestHelper.testGetName(getFixture());
 	}
-	
+
 	/**
 	 * Tests that the root nodes are returned correctly.
 	 */

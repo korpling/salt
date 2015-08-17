@@ -20,35 +20,38 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.common.tokenizer;
 import java.util.HashSet;
 
 /**
- * This offers a set of italian abbreviations. The set is supplied by a {@link HashSet} object which is returned, when 
- * calling the methode {@link #createAbbriviations()}. The returned object is a static one and therefore initialized
- * only once. The set of abbreviations is reimplemented in Java with permission from the original  
- * abbreviation sets used by the TreeTagger by Helmut Schmid (see http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
- *   
+ * This offers a set of italian abbreviations. The set is supplied by a
+ * {@link HashSet} object which is returned, when calling the methode
+ * {@link #createAbbriviations()}. The returned object is a static one and
+ * therefore initialized only once. The set of abbreviations is reimplemented in
+ * Java with permission from the original abbreviation sets used by the
+ * TreeTagger by Helmut Schmid (see
+ * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
+ * 
  * @author Florian Zipser
  *
  */
-public class AbbreviationIT 
-{
+public class AbbreviationIT {
 	/**
 	 * all abbreviations
 	 */
-	private static HashSet<String> abbreviations= null;
-	
-	public static HashSet<String> createAbbriviations()
-	{
-		if (abbreviations== null)
-			abbreviations= init();
-		return(abbreviations);
+	private static HashSet<String> abbreviations = null;
+
+	public static HashSet<String> createAbbriviations() {
+		if (abbreviations == null)
+			abbreviations = init();
+		return (abbreviations);
 	}
-	
+
 	/**
-	 * Returns a set of italian abbreviations, used by the TreeTagger by Helmut Schmid (see http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
+	 * Returns a set of italian abbreviations, used by the TreeTagger by Helmut
+	 * Schmid (see
+	 * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
+	 * 
 	 * @return set of italian abbreviations
 	 */
-	private static HashSet<String> init()
-	{
-		HashSet<String> abbreviations= new HashSet<String>(79);
+	private static HashSet<String> init() {
+		HashSet<String> abbreviations = new HashSet<String>(79);
 		abbreviations.add("All.");
 		abbreviations.add("Art.");
 		abbreviations.add("B.");
@@ -128,6 +131,6 @@ public class AbbreviationIT
 		abbreviations.add("v.");
 		abbreviations.add("");
 		abbreviations.add("vol.");
-		return(abbreviations);
+		return (abbreviations);
 	}
 }

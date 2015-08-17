@@ -19,7 +19,10 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.impl.SaltFactoryImpl;
 
 public class SaltFactory {
-	/** Internal factory Impl<Node, Relation<Node, Node>>()which is used to create objects. **/
+	/**
+	 * Internal factory Impl<Node, Relation<Node, Node>>()which is used to
+	 * create objects.
+	 **/
 	private static ISaltFactory factory = new SaltFactoryImpl();
 
 	/**
@@ -41,7 +44,8 @@ public class SaltFactory {
 	public static void setFactory(ISaltFactory factory) {
 		SaltFactory.factory = factory;
 	}
-	// ===============================> salt core	
+
+	// ===============================> salt core
 	/**
 	 * Creates a new {@link SGraph} object of type {@link SGraph}.
 	 * 
@@ -115,6 +119,7 @@ public class SaltFactory {
 	public static SLayer createSLayer() {
 		return (factory.createSLayer());
 	}
+
 	// ===============================< salt core
 
 	/**
@@ -162,6 +167,7 @@ public class SaltFactory {
 	public static SCorpusDocumentRelation createSCorpusDocumentRelation() {
 		return (factory.createSCorpusDocumentRelation());
 	}
+
 	/**
 	 * Creates a new {@link SCorpusGraph} object.
 	 * 
@@ -170,8 +176,9 @@ public class SaltFactory {
 	public static SCorpusGraph createSCorpusGraph() {
 		return (factory.createSCorpusGraph());
 	}
+
 	// ===============================< corpus structure
-	
+
 	// ===============================> document structure
 	/**
 	 * Creates a new {@link SDocumentGraph} object.
@@ -181,6 +188,7 @@ public class SaltFactory {
 	public static SDocumentGraph createSDocumentGraph() {
 		return (factory.createSDocumentGraph());
 	}
+
 	/**
 	 * Creates a new {@link SSpanningRelation} object.
 	 * 

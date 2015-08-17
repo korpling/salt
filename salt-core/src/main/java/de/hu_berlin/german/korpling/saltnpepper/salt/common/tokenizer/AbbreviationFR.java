@@ -20,35 +20,38 @@ package de.hu_berlin.german.korpling.saltnpepper.salt.common.tokenizer;
 import java.util.HashSet;
 
 /**
- * This offers a set of french abbreviations. The set is supplied by a {@link HashSet} object which is returned, when 
- * calling the methode {@link #createAbbriviations()}. The returned object is a static one and therefore initialized
- * only once. The set of abbreviations is reimplemented in Java with permission from the original  
- * abbreviation sets used by the TreeTagger by Helmut Schmid (see http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
- *   
+ * This offers a set of french abbreviations. The set is supplied by a
+ * {@link HashSet} object which is returned, when calling the methode
+ * {@link #createAbbriviations()}. The returned object is a static one and
+ * therefore initialized only once. The set of abbreviations is reimplemented in
+ * Java with permission from the original abbreviation sets used by the
+ * TreeTagger by Helmut Schmid (see
+ * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
+ * 
  * @author Florian Zipser
  *
  */
-public class AbbreviationFR 
-{
+public class AbbreviationFR {
 	/**
 	 * all abbreviations
 	 */
-	private static HashSet<String> abbreviations= null;
-	
-	public static HashSet<String> createAbbriviations()
-	{
-		if (abbreviations== null)
-			abbreviations= init();
-		return(abbreviations);
+	private static HashSet<String> abbreviations = null;
+
+	public static HashSet<String> createAbbriviations() {
+		if (abbreviations == null)
+			abbreviations = init();
+		return (abbreviations);
 	}
-	
+
 	/**
-	 * Returns a set of french abbreviations, used by the TreeTagger by Helmut Schmid (see http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
+	 * Returns a set of french abbreviations, used by the TreeTagger by Helmut
+	 * Schmid (see
+	 * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
+	 * 
 	 * @return set of french abbreviations
 	 */
-	private static HashSet<String> init()
-	{
-		HashSet<String> abbreviations= new HashSet<String>(1300);
+	private static HashSet<String> init() {
+		HashSet<String> abbreviations = new HashSet<String>(1300);
 		abbreviations.add("rendez-vous");
 		abbreviations.add("d'abord");
 		abbreviations.add("d'accord");
@@ -146,7 +149,7 @@ public class AbbreviationFR
 		abbreviations.add("?col.");
 		abbreviations.add("?d.");
 		abbreviations.add("?tiq.");
-		
-		return(abbreviations);
+
+		return (abbreviations);
 	}
 }

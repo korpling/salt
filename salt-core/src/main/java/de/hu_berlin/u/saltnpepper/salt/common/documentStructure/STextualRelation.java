@@ -20,10 +20,12 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 
 /**
- * A {@link STextualRelation} links a primary text (as source) with a token (as target).
- * A {@link STextualRelation} further contains two labels (or more precisely {@link SFeature}
- * objects) representing the start and the end position determining the interval
- * of the primary text overlapped by the token.
+ * A {@link STextualRelation} links a primary text (as source) with a token (as
+ * target). A {@link STextualRelation} further contains two labels (or more
+ * precisely {@link SFeature} objects) representing the start and the end
+ * position determining the interval of the primary text overlapped by the
+ * token.
+ * 
  * @author florian
  */
 public interface STextualRelation extends SSequentialRelation<SToken, STextualDS>, STextOverlappingRelation<SToken, STextualDS> {

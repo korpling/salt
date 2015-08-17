@@ -132,19 +132,19 @@ public class GraphTest {
 	 */
 	@Test
 	public void testDoubleChainingNode() {
-		Node node= GraphFactory.createNode();
+		Node node = GraphFactory.createNode();
 		getFixture().addNode(node);
 		assertEquals(getFixture(), node.getGraph());
 	}
-	
+
 	/**
 	 * Tests the double chaining with {@link Relation}.
 	 */
 	@Test
 	public void testDoubleChainingRelation() {
-		Relation<Node, Node> rel= GraphFactory.createRelation();
-		Node source= GraphFactory.createNode();
-		Node target=  GraphFactory.createNode();
+		Relation<Node, Node> rel = GraphFactory.createRelation();
+		Node source = GraphFactory.createNode();
+		Node target = GraphFactory.createNode();
 		getFixture().addNode(source);
 		getFixture().addNode(target);
 		rel.setSource(source);
@@ -152,16 +152,17 @@ public class GraphTest {
 		getFixture().addRelation(rel);
 		assertEquals(getFixture(), rel.getGraph());
 	}
-	
+
 	/**
 	 * Tests the double chaining with {@link Layer}.
 	 */
 	@Test
 	public void testDoubleChainingLayer() {
-		Layer<Node, Relation<Node, Node>> layer= GraphFactory.createLayer();
+		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
 		getFixture().addLayer(layer);
 		assertEquals(getFixture(), layer.getGraph());
 	}
+
 	// ================================================< test doubleChaining
 
 	// ==========================================================> test nodes

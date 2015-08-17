@@ -39,5 +39,5 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
  * 
  * @author florian
  */
-public interface SToken extends SStructuredNode, SDocumentGraphObject{
+public interface SToken extends SStructuredNode, SDocumentGraphObject {
 } // SToken

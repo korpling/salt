@@ -276,6 +276,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public Iterator<SProcessingAnnotation> iterator_SProcessingAnnotation() {
 		return (SAnnotationContainerHelper.iterator_SProcessingAnnotation(this));
 	}
+
 	// =======================================< SProcessingAnnotation
 	// =======================================> SFeature
 	/** {@inheritDoc} **/

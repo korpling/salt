@@ -33,7 +33,7 @@ public class TestHelper {
 			assertEquals("myName2", namedElement.getName());
 		}
 	}
-	
+
 	// ============================================== start: create dummy graphs
 	/**
 	 * Fills the given graph, containing nodes having the names as given in

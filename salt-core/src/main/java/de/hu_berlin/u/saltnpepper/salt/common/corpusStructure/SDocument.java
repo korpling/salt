@@ -39,30 +39,33 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
  * @author florian
  */
 public interface SDocument extends SNode {
-//	/**
-//	 * Returns the corpus structure, this document belongs to.
-//	 * 
-//	 * @return corpus structure
-//	 */
-//	public SCorpusGraph getCorpusGraph();
-//
-//	/**
-//	 * Sets the corpus structure, this document belongs to.
-//	 * 
-//	 * @param corpusStructure
-//	 *            the corpus structure this document belongs to
-//	 */
-//	public void setCorpusGraph(SCorpusGraph corpusStructure);
+	// /**
+	// * Returns the corpus structure, this document belongs to.
+	// *
+	// * @return corpus structure
+	// */
+	// public SCorpusGraph getCorpusGraph();
+	//
+	// /**
+	// * Sets the corpus structure, this document belongs to.
+	// *
+	// * @param corpusStructure
+	// * the corpus structure this document belongs to
+	// */
+	// public void setCorpusGraph(SCorpusGraph corpusStructure);
 
 	/**
 	 * Returns the document structure which belongs to this document.
+	 * 
 	 * @return document structure
 	 */
 	public SDocumentGraph getDocumentGraph();
 
 	/**
 	 * Sets the document structure which belongs to this document.
-	 * @param documentStructure document structure which belongs to this document
+	 * 
+	 * @param documentStructure
+	 *            document structure which belongs to this document
 	 */
 	public void setDocumentGraph(SDocumentGraph documentStructure);
 

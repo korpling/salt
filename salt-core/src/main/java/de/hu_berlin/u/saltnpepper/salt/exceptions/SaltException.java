@@ -27,7 +27,7 @@ package de.hu_berlin.u.saltnpepper.salt.exceptions;
  */
 @SuppressWarnings("serial")
 public class SaltException extends java.lang.RuntimeException {
-	
+
 	public SaltException() {
 		super();
 	}

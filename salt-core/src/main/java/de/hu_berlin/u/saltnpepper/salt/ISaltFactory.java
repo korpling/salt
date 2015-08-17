@@ -91,7 +91,7 @@ public interface ISaltFactory extends IGraphFactory {
 	 * @return new {@link SaltProject} object
 	 */
 	public SaltProject createSaltProject();
-	
+
 	// ===============================> corpus structure
 	/**
 	 * Creates a new {@link SCorpus} object.
@@ -136,6 +136,7 @@ public interface ISaltFactory extends IGraphFactory {
 	 * @return new {@link SDocumentGraph} object
 	 */
 	public SDocumentGraph createSDocumentGraph();
+
 	/**
 	 * Creates a new {@link SSpanningRelation} object.
 	 * 

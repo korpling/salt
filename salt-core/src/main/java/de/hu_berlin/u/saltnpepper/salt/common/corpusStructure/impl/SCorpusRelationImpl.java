@@ -21,7 +21,6 @@ import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
-
 @SuppressWarnings("serial")
 public class SCorpusRelationImpl extends SRelationImpl<SCorpus, SCorpus> implements SCorpusRelation {
-} //SCorpusRelationImpl
+} // SCorpusRelationImpl

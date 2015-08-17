@@ -20,6 +20,8 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 import java.util.List;
 import java.util.Map;
 
+import org.knallgrau.utils.textcat.TextCategorizer;
+
 import de.hu_berlin.german.korpling.saltnpepper.salt.common.tokenizer.Tokenizer;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;

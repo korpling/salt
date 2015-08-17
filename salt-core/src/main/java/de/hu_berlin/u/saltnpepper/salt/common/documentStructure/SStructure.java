@@ -23,10 +23,11 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
  * phrase structures are syntax trees. The term syntax trees implies that these
  * hierarchies are trees, even in a graph sense. This means, they consist of
  * nodes and relations and are therefore easy to model in Salt. Salt offers a
- * specific type of node, the {@link SStructure}, and a specific type of relation, the
- * {@link SDominanceRelation}. The source of an {@link SDominanceRelation} could
- * be a {@link SToken}, {@link SSpan} or even a {@link SStructure}. The unit of both
- * elements enables to create unbound hierarchies above a tokenization.
+ * specific type of node, the {@link SStructure}, and a specific type of
+ * relation, the {@link SDominanceRelation}. The source of an
+ * {@link SDominanceRelation} could be a {@link SToken}, {@link SSpan} or even a
+ * {@link SStructure}. The unit of both elements enables to create unbound
+ * hierarchies above a tokenization.
  * 
  * @author florian
  */

@@ -124,9 +124,9 @@ public class IdentifierTest {
 	@Test
 	public void testCheckOpposite() {
 		MyContainer newContainer = new MyContainer();
-		Identifier id= GraphFactory.createIdentifier(newContainer, SaltUtil.KW_IDENTIFIER);
+		Identifier id = GraphFactory.createIdentifier(newContainer, SaltUtil.KW_IDENTIFIER);
 		assertEquals(newContainer.getIdentifier(), id);
-		
+
 		newContainer.setId("newId");
 		assertFalse(newContainer.equals(id));
 	}

@@ -117,7 +117,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SLayer createSLayer() {
 		return (new SLayerImpl());
 	}
-	
+
 	/**
 	 * Creates a new {@link SaltProject}.
 	 * 
@@ -163,6 +163,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SCorpusDocumentRelation createSCorpusDocumentRelation() {
 		return (new SCorpusDocumentRelationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SCorpusGraph} object.
 	 * 
@@ -183,6 +184,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SDocumentGraph createSDocumentGraph() {
 		return (new SDocumentGraphImpl());
 	}
+
 	/**
 	 * Creates a new {@link SSpanningRelation} object of type
 	 * {@link SSpanningRelationImpl}.

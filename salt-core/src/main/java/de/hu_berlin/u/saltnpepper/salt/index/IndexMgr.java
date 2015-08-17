@@ -58,8 +58,8 @@ public interface IndexMgr {
 	 *            number of expected keys of the index, this parameter is used
 	 *            for initialization optimization. -1 means no expected size
 	 * @param expectedValuesPerKey
-	 *            number of expected values per key of the index, this parameter is used
-	 *            for initialization optimization. 
+	 *            number of expected values per key of the index, this parameter
+	 *            is used for initialization optimization.
 	 */
 	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey);
 

@@ -20,21 +20,27 @@ package de.hu_berlin.u.saltnpepper.salt.common.corpusStructure;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
 /**
- * In Salt a corpus is represented by this class. An object of this class can be a super corpus, a sun corpus or none of them as well. 
- * The class {@link SCorpus} is a derivation of of class {@link SNode} and can be added to an object of type {@link SCorpusGraph}. To
- * know how to create a hierarchical relation between several {@link SCorpus} objects please read the documentation in {@link SCorpusGraph}}.
- * @author florian 
+ * In Salt a corpus is represented by this class. An object of this class can be
+ * a super corpus, a sun corpus or none of them as well. The class
+ * {@link SCorpus} is a derivation of of class {@link SNode} and can be added to
+ * an object of type {@link SCorpusGraph}. To know how to create a hierarchical
+ * relation between several {@link SCorpus} objects please read the
+ * documentation in {@link SCorpusGraph} .
+ * 
+ * @author florian
  */
 public interface SCorpus extends SNode {
-//	/**
-//	 * Returns the corpus structure container, which is represented by {@link SCorpusGraph} object. 
-//	 * @return corpus structure
-//	 */
-//	public SCorpusGraph getSCorpusGraph();
-//	/**
-//	 * Sets the corpus structure container, which is represented by {@link SCorpusGraph} object. 
-//	 * @return corpus structure
-//	 */
-//	public void setSCorpusGraph(SCorpusGraph value);
-	
+	// /**
+	// * Returns the corpus structure container, which is represented by {@link
+	// SCorpusGraph} object.
+	// * @return corpus structure
+	// */
+	// public SCorpusGraph getSCorpusGraph();
+	// /**
+	// * Sets the corpus structure container, which is represented by {@link
+	// SCorpusGraph} object.
+	// * @return corpus structure
+	// */
+	// public void setSCorpusGraph(SCorpusGraph value);
+
 } // SCorpus

@@ -9,9 +9,11 @@ import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 
-public class GraphFactoryImpl implements IGraphFactory{
+public class GraphFactoryImpl implements IGraphFactory {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createGraph()
 	 */
 	@Override
@@ -19,7 +21,9 @@ public class GraphFactoryImpl implements IGraphFactory{
 		return (new GraphImpl<Node, Relation<Node, Node>>());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createNode()
 	 */
 	@Override
@@ -27,7 +31,9 @@ public class GraphFactoryImpl implements IGraphFactory{
 		return (new NodeImpl());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createRelation()
 	 */
 	@Override
@@ -35,7 +41,9 @@ public class GraphFactoryImpl implements IGraphFactory{
 		return (new RelationImpl<Node, Node>());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createLabel()
 	 */
 	@Override
@@ -43,15 +51,21 @@ public class GraphFactoryImpl implements IGraphFactory{
 		return (new LabelImpl());
 	}
 
-	/* (non-Javadoc)
-	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createIdentifier(de.hu_berlin.u.saltnpepper.graph.IdentifiableElement, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createIdentifier(
+	 * de.hu_berlin.u.saltnpepper.graph.IdentifiableElement, java.lang.String)
 	 */
 	@Override
 	public Identifier createIdentifier(IdentifiableElement container, String id) {
 		return (new IdentifierImpl(container, id));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createLayer()
 	 */
 	@Override

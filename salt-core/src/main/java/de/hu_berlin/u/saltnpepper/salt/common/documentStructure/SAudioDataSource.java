@@ -32,7 +32,8 @@ public interface SAudioDataSource extends SSequentialDS, SDocumentGraphObject {
 	/**
 	 * Sets a {@link URI} object, which points to a audio file.
 	 * 
-	 * @param audioRef reference to the audio file
+	 * @param audioRef
+	 *            reference to the audio file
 	 */
 	public void setSAudioReference(URI audioRef);
 } // SAudioDataSource

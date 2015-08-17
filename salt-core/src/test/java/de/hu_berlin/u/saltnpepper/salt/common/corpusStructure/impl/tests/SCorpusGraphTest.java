@@ -56,14 +56,14 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		return fixture;
 	}
 
-	private SCorpus alibiCorpus= null;
-	private SDocument alibiDocument= null;
-	
+	private SCorpus alibiCorpus = null;
+	private SDocument alibiDocument = null;
+
 	@Before
 	public void setUp() throws Exception {
 		setFixture(SaltFactory.createSCorpusGraph());
-		alibiCorpus= SaltFactory.createSCorpus();
-		alibiDocument= SaltFactory.createSDocument();
+		alibiCorpus = SaltFactory.createSCorpus();
+		alibiDocument = SaltFactory.createSDocument();
 	}
 
 	@Test
@@ -212,8 +212,6 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		assertTrue(relations.size() == 1);
 		assertEquals(sSuperCorpus, relations.get(0).getSource());
 	}
-
-
 
 	@Test
 	public void testGetSCorpus__SDocument() {

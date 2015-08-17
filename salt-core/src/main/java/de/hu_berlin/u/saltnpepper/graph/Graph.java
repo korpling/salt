@@ -43,6 +43,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @return the index manager
 	 */
 	public IndexMgr getIndexMgr();
+
 	/**
 	 * Returns a list of all relations contained in this graph.
 	 * 

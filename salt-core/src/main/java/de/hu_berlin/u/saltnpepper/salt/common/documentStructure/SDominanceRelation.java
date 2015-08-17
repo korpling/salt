@@ -17,15 +17,15 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-
 /**
- * The meaning of the type {@link SDominanceRelation} is a part-of relation. In contrast
- * to the {@link SSpan} and the {@link SSpanningRelation}, a {@link SStructure} is not just a
- * placeholder for a bunch of {@link SToken} objects, it is a proper element itself. The
- * same goes for {@link SDominanceRelation} objects. For instance, in many cases it
- * makes a linguistic difference whether tokens t1 , t2 and t3 are directly
- * dominated by a structure s1 or whether t1 and t2 are dominated by a
- * structure s2 which is, together with t3 , dominated by structure s2.
+ * The meaning of the type {@link SDominanceRelation} is a part-of relation. In
+ * contrast to the {@link SSpan} and the {@link SSpanningRelation}, a
+ * {@link SStructure} is not just a placeholder for a bunch of {@link SToken}
+ * objects, it is a proper element itself. The same goes for
+ * {@link SDominanceRelation} objects. For instance, in many cases it makes a
+ * linguistic difference whether tokens t1 , t2 and t3 are directly dominated by
+ * a structure s1 or whether t1 and t2 are dominated by a structure s2 which is,
+ * together with t3 , dominated by structure s2.
  * 
  * @author florian
  */

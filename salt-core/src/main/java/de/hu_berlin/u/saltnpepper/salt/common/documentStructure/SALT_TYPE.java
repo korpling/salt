@@ -24,19 +24,19 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>STYPE NAME</b></em>',
- * and utility methods for working with them.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the literals of the enumeration '
+ * <em><b>STYPE NAME</b></em>', and utility methods for working with them. <!--
+ * end-user-doc -->
+ * 
  * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTYPE_NAME()
  * @model
  * @generated
  */
 public enum SALT_TYPE implements Enumerator {
 	/**
-	 * The '<em><b>STEXTUAL DS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>STEXTUAL DS</b></em>' literal object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #STEXTUAL_DS_VALUE
 	 * @generated
 	 * @ordered
@@ -44,9 +44,9 @@ public enum SALT_TYPE implements Enumerator {
 	STEXTUAL_DS(0, "STEXTUAL_DS", "STextualDS"),
 
 	/**
-	 * The '<em><b>STOKEN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>STOKEN</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #STOKEN_VALUE
 	 * @generated
 	 * @ordered
@@ -54,9 +54,9 @@ public enum SALT_TYPE implements Enumerator {
 	STOKEN(1, "STOKEN", "SToken"),
 
 	/**
-	 * The '<em><b>SSPAN</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>SSPAN</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #SSPAN_VALUE
 	 * @generated
 	 * @ordered
@@ -64,9 +64,9 @@ public enum SALT_TYPE implements Enumerator {
 	SSPAN(2, "SSPAN", "SSpan"),
 
 	/**
-	 * The '<em><b>SSTRUCTURE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SSTRUCTURE</b></em>' literal object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SSTRUCTURE_VALUE
 	 * @generated
 	 * @ordered
@@ -74,9 +74,9 @@ public enum SALT_TYPE implements Enumerator {
 	SSTRUCTURE(3, "SSTRUCTURE", "SStructure"),
 
 	/**
-	 * The '<em><b>STEXTUAL RELATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>STEXTUAL RELATION</b></em>' literal object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #STEXTUAL_RELATION_VALUE
 	 * @generated
 	 * @ordered
@@ -84,9 +84,9 @@ public enum SALT_TYPE implements Enumerator {
 	STEXTUAL_RELATION(4, "STEXTUAL_RELATION", "STextualRelation"),
 
 	/**
-	 * The '<em><b>SSPANNING RELATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>SSPANNING RELATION</b></em>' literal object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #SSPANNING_RELATION_VALUE
 	 * @generated
 	 * @ordered
@@ -94,65 +94,71 @@ public enum SALT_TYPE implements Enumerator {
 	SSPANNING_RELATION(5, "SSPANNING_RELATION", "SSpanningRelation"),
 
 	/**
-	 * The '<em><b>SDOMINANCE RELATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>SDOMINANCE RELATION</b></em>' literal object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #SDOMINANCE_RELATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	SDOMINANCE_RELATION(6, "SDOMINANCE_RELATION", "SDominanceRelation"), /**
-	 * The '<em><b>SPOINTING RELATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The
+	 * '<em><b>SPOINTING RELATION</b></em>' literal object. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #SPOINTING_RELATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	SPOINTING_RELATION(7, "SPOINTING_RELATION", "SPointingRelation"), /**
-	 * The '<em><b>STEXT OVERLAPPING RELATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '
+	 * <em><b>STEXT OVERLAPPING RELATION</b></em>' literal object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #STEXT_OVERLAPPING_RELATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	STEXT_OVERLAPPING_RELATION(8, "STEXT_OVERLAPPING_RELATION", "STEXT_OVERLAPPING_RELATION"), /**
-	 * The '<em><b>STIME OVERLAPPING RELATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * 
+	 * The '<em><b>STIME OVERLAPPING RELATION</b></em>' literal object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #STIME_OVERLAPPING_RELATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	STIME_OVERLAPPING_RELATION(9, "STIME_OVERLAPPING_RELATION", "STIME_OVERLAPPING_RELATION"), /**
-	 * The '<em><b>SSEQUENTIAL RELATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * 
+	 * The '<em><b>SSEQUENTIAL RELATION</b></em>' literal object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #SSEQUENTIAL_RELATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	SSEQUENTIAL_RELATION(10, "SSEQUENTIAL_RELATION", "SSEQUENTIAL_RELATION"), /**
-	 * The '<em><b>SORDER RELATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * 
+	 * The '<em><b>SORDER RELATION</b></em>' literal object. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #SORDER_RELATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	SORDER_RELATION(11, "SORDER_RELATION", "SORDER_RELATION"), /**
-	 * The '<em><b>SDOCUMENT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '
+	 * <em><b>SDOCUMENT</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #SDOCUMENT_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	SDOCUMENT(12, "SDOCUMENT", "SDOCUMENT"), /**
-	 * The '<em><b>SCORPUS</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>SCORPUS</b></em>'
+	 * literal object. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #SCORPUS_VALUE
 	 * @generated
 	 * @ordered
@@ -160,13 +166,13 @@ public enum SALT_TYPE implements Enumerator {
 	SCORPUS(13, "SCORPUS", "SCORPUS");
 
 	/**
-	 * The '<em><b>STEXTUAL DS</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>STEXTUAL DS</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>STEXTUAL DS</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>STEXTUAL DS</b></em>' literal object isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #STEXTUAL_DS
 	 * @model literal="STextualDS"
 	 * @generated
@@ -175,13 +181,13 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int STEXTUAL_DS_VALUE = 0;
 
 	/**
-	 * The '<em><b>STOKEN</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>STOKEN</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>STOKEN</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #STOKEN
 	 * @model literal="SToken"
 	 * @generated
@@ -190,13 +196,13 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int STOKEN_VALUE = 1;
 
 	/**
-	 * The '<em><b>SSPAN</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SSPAN</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>SSPAN</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SSPAN
 	 * @model literal="SSpan"
 	 * @generated
@@ -205,13 +211,13 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SSPAN_VALUE = 2;
 
 	/**
-	 * The '<em><b>SSTRUCTURE</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SSTRUCTURE</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SSTRUCTURE</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>SSTRUCTURE</b></em>' literal object isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SSTRUCTURE
 	 * @model literal="SStructure"
 	 * @generated
@@ -220,13 +226,14 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SSTRUCTURE_VALUE = 3;
 
 	/**
-	 * The '<em><b>STEXTUAL RELATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>STEXTUAL RELATION</b></em>' literal value. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>STEXTUAL RELATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>STEXTUAL RELATION</b></em>' literal object
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #STEXTUAL_RELATION
 	 * @model literal="STextualRelation"
 	 * @generated
@@ -235,13 +242,14 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int STEXTUAL_RELATION_VALUE = 4;
 
 	/**
-	 * The '<em><b>SSPANNING RELATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SSPANNING RELATION</b></em>' literal value. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SSPANNING RELATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>SSPANNING RELATION</b></em>' literal object
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SSPANNING_RELATION
 	 * @model literal="SSpanningRelation"
 	 * @generated
@@ -250,13 +258,14 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SSPANNING_RELATION_VALUE = 5;
 
 	/**
-	 * The '<em><b>SDOMINANCE RELATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SDOMINANCE RELATION</b></em>' literal value. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SDOMINANCE RELATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>SDOMINANCE RELATION</b></em>' literal object
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SDOMINANCE_RELATION
 	 * @model literal="SDominanceRelation"
 	 * @generated
@@ -265,13 +274,14 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SDOMINANCE_RELATION_VALUE = 6;
 
 	/**
-	 * The '<em><b>SPOINTING RELATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SPOINTING RELATION</b></em>' literal value. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SPOINTING RELATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>SPOINTING RELATION</b></em>' literal object
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SPOINTING_RELATION
 	 * @model literal="SPointingRelation"
 	 * @generated
@@ -280,13 +290,14 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SPOINTING_RELATION_VALUE = 7;
 
 	/**
-	 * The '<em><b>STEXT OVERLAPPING RELATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>STEXT OVERLAPPING RELATION</b></em>' literal value. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>STEXT OVERLAPPING RELATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>STEXT OVERLAPPING RELATION</b></em>' literal
+	 * object isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #STEXT_OVERLAPPING_RELATION
 	 * @model
 	 * @generated
@@ -295,13 +306,14 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int STEXT_OVERLAPPING_RELATION_VALUE = 8;
 
 	/**
-	 * The '<em><b>STIME OVERLAPPING RELATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>STIME OVERLAPPING RELATION</b></em>' literal value. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>STIME OVERLAPPING RELATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>STIME OVERLAPPING RELATION</b></em>' literal
+	 * object isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #STIME_OVERLAPPING_RELATION
 	 * @model
 	 * @generated
@@ -310,13 +322,14 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int STIME_OVERLAPPING_RELATION_VALUE = 9;
 
 	/**
-	 * The '<em><b>SSEQUENTIAL RELATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SSEQUENTIAL RELATION</b></em>' literal value. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SSEQUENTIAL RELATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>SSEQUENTIAL RELATION</b></em>' literal object
+	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SSEQUENTIAL_RELATION
 	 * @model
 	 * @generated
@@ -325,13 +338,14 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SSEQUENTIAL_RELATION_VALUE = 10;
 
 	/**
-	 * The '<em><b>SORDER RELATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SORDER RELATION</b></em>' literal value. <!-- begin-user-doc
+	 * -->
 	 * <p>
-	 * If the meaning of '<em><b>SORDER RELATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of '<em><b>SORDER RELATION</b></em>' literal object isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SORDER_RELATION
 	 * @model
 	 * @generated
@@ -340,13 +354,13 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SORDER_RELATION_VALUE = 11;
 
 	/**
-	 * The '<em><b>SDOCUMENT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SDOCUMENT</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>SDOCUMENT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SDOCUMENT
 	 * @model
 	 * @generated
@@ -355,13 +369,13 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SDOCUMENT_VALUE = 12;
 
 	/**
-	 * The '<em><b>SCORPUS</b></em>' literal value.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>SCORPUS</b></em>' literal value. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>SCORPUS</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #SCORPUS
 	 * @model
 	 * @generated
@@ -370,41 +384,25 @@ public enum SALT_TYPE implements Enumerator {
 	public static final int SCORPUS_VALUE = 13;
 
 	/**
-	 * An array of all the '<em><b>STYPE NAME</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * An array of all the '<em><b>STYPE NAME</b></em>' enumerators. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	private static final SALT_TYPE[] VALUES_ARRAY =
-		new SALT_TYPE[] {
-			STEXTUAL_DS,
-			STOKEN,
-			SSPAN,
-			SSTRUCTURE,
-			STEXTUAL_RELATION,
-			SSPANNING_RELATION,
-			SDOMINANCE_RELATION,
-			SPOINTING_RELATION,
-			STEXT_OVERLAPPING_RELATION,
-			STIME_OVERLAPPING_RELATION,
-			SSEQUENTIAL_RELATION,
-			SORDER_RELATION,
-			SDOCUMENT,
-			SCORPUS,
-		};
+	private static final SALT_TYPE[] VALUES_ARRAY = new SALT_TYPE[] { STEXTUAL_DS, STOKEN, SSPAN, SSTRUCTURE, STEXTUAL_RELATION, SSPANNING_RELATION, SDOMINANCE_RELATION, SPOINTING_RELATION, STEXT_OVERLAPPING_RELATION, STIME_OVERLAPPING_RELATION, SSEQUENTIAL_RELATION, SORDER_RELATION, SDOCUMENT, SCORPUS, };
 
 	/**
-	 * A public read-only list of all the '<em><b>STYPE NAME</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * A public read-only list of all the '<em><b>STYPE NAME</b></em>'
+	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final List<SALT_TYPE> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>STYPE NAME</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>STYPE NAME</b></em>' literal with the specified
+	 * literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static SALT_TYPE get(String literal) {
@@ -419,8 +417,8 @@ public enum SALT_TYPE implements Enumerator {
 
 	/**
 	 * Returns the '<em><b>STYPE NAME</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static SALT_TYPE getByName(String name) {
@@ -434,56 +432,70 @@ public enum SALT_TYPE implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>STYPE NAME</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>STYPE NAME</b></em>' literal with the specified
+	 * integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static SALT_TYPE get(int value) {
 		switch (value) {
-			case STEXTUAL_DS_VALUE: return STEXTUAL_DS;
-			case STOKEN_VALUE: return STOKEN;
-			case SSPAN_VALUE: return SSPAN;
-			case SSTRUCTURE_VALUE: return SSTRUCTURE;
-			case STEXTUAL_RELATION_VALUE: return STEXTUAL_RELATION;
-			case SSPANNING_RELATION_VALUE: return SSPANNING_RELATION;
-			case SDOMINANCE_RELATION_VALUE: return SDOMINANCE_RELATION;
-			case SPOINTING_RELATION_VALUE: return SPOINTING_RELATION;
-			case STEXT_OVERLAPPING_RELATION_VALUE: return STEXT_OVERLAPPING_RELATION;
-			case STIME_OVERLAPPING_RELATION_VALUE: return STIME_OVERLAPPING_RELATION;
-			case SSEQUENTIAL_RELATION_VALUE: return SSEQUENTIAL_RELATION;
-			case SORDER_RELATION_VALUE: return SORDER_RELATION;
-			case SDOCUMENT_VALUE: return SDOCUMENT;
-			case SCORPUS_VALUE: return SCORPUS;
+		case STEXTUAL_DS_VALUE:
+			return STEXTUAL_DS;
+		case STOKEN_VALUE:
+			return STOKEN;
+		case SSPAN_VALUE:
+			return SSPAN;
+		case SSTRUCTURE_VALUE:
+			return SSTRUCTURE;
+		case STEXTUAL_RELATION_VALUE:
+			return STEXTUAL_RELATION;
+		case SSPANNING_RELATION_VALUE:
+			return SSPANNING_RELATION;
+		case SDOMINANCE_RELATION_VALUE:
+			return SDOMINANCE_RELATION;
+		case SPOINTING_RELATION_VALUE:
+			return SPOINTING_RELATION;
+		case STEXT_OVERLAPPING_RELATION_VALUE:
+			return STEXT_OVERLAPPING_RELATION;
+		case STIME_OVERLAPPING_RELATION_VALUE:
+			return STIME_OVERLAPPING_RELATION;
+		case SSEQUENTIAL_RELATION_VALUE:
+			return SSEQUENTIAL_RELATION;
+		case SORDER_RELATION_VALUE:
+			return SORDER_RELATION;
+		case SDOCUMENT_VALUE:
+			return SDOCUMENT;
+		case SCORPUS_VALUE:
+			return SCORPUS;
 		}
 		return null;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private SALT_TYPE(int value, String name, String literal) {
@@ -493,41 +505,41 @@ public enum SALT_TYPE implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getValue() {
-	  return value;
+		return value;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getName() {
-	  return name;
+		return name;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
-	  return literal;
+		return literal;
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string
+	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String toString() {
 		return literal;
 	}
-	
-} //STYPE_NAME
+
+} // STYPE_NAME

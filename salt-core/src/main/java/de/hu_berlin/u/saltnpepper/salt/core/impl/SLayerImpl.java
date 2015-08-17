@@ -170,35 +170,35 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 	// =======================================> SNamedElement
 	@Override
 	public void removeLabel(String qName) {
-		if (SaltUtil.KW_QNAME_NAME.equals(qName)){
-			name= null;
+		if (SaltUtil.KW_QNAME_NAME.equals(qName)) {
+			name = null;
 		}
 		super.removeLabel(qName);
 	}
-	
+
 	/** The feature object containing the name of the node **/
-	protected SFeature name= null;
-	
+	protected SFeature name = null;
+
 	/** {@inheritDoc} **/
 	@Override
 	public String getName() {
-		if (name== null){			
-			SFeature feature= getFeature(SaltUtil.KW_QNAME_NAME);
-			if (feature!= null){
-				name= feature;
+		if (name == null) {
+			SFeature feature = getFeature(SaltUtil.KW_QNAME_NAME);
+			if (feature != null) {
+				name = feature;
 			}
-			if (name== null){
-				return(null);
+			if (name == null) {
+				return (null);
 			}
 		}
-		return(name.getValue_STEXT());
+		return (name.getValue_STEXT());
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void setName(String name) {
-		if (this.name== null){
-			this.name= createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_NAME, null);
+		if (this.name == null) {
+			this.name = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_NAME, null);
 		}
 		this.name.setValue(name);
 	}

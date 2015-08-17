@@ -3,8 +3,6 @@ package de.hu_berlin.u.saltnpepper.salt.core.impl.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import java.io.ObjectInputStream.GetField;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +15,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.STypedElement;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public class SRelationTest extends SAnnotationContainerTest {
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public SRelation<SNode, SNode> getFixture() {
@@ -38,7 +36,7 @@ public class SRelationTest extends SAnnotationContainerTest {
 	public void testGetName() {
 		TestHelper.testGetName(getFixture());
 	}
-	
+
 	/**
 	 * Tests the methods {@link STypedElement#getType()} and
 	 * {@link STypedElement#setType(String)}.
@@ -58,5 +56,5 @@ public class SRelationTest extends SAnnotationContainerTest {
 			assertEquals("myType2", getFixture().getType());
 		}
 	}
-	
+
 }

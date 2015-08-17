@@ -168,67 +168,68 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	// =======================================> SNamedElement
 	@Override
 	public void removeLabel(String qName) {
-		if (SaltUtil.KW_QNAME_NAME.equals(qName)){
-			name= null;
+		if (SaltUtil.KW_QNAME_NAME.equals(qName)) {
+			name = null;
 		}
-		if (SaltUtil.KW_QNAME_TYPE.equals(qName)){
-			type= null;
+		if (SaltUtil.KW_QNAME_TYPE.equals(qName)) {
+			type = null;
 		}
 		super.removeLabel(qName);
 	}
-	
+
 	/** The feature object containing the name of the node **/
-	protected SFeature name= null;
-	
+	protected SFeature name = null;
+
 	/** {@inheritDoc} **/
 	@Override
 	public String getName() {
-		if (name== null){			
-			SFeature feature= getFeature(SaltUtil.KW_QNAME_NAME);
-			if (feature!= null){
-				name= feature;
+		if (name == null) {
+			SFeature feature = getFeature(SaltUtil.KW_QNAME_NAME);
+			if (feature != null) {
+				name = feature;
 			}
-			if (name== null){
-				return(null);
+			if (name == null) {
+				return (null);
 			}
 		}
-		return(name.getValue_STEXT());
+		return (name.getValue_STEXT());
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void setName(String name) {
-		if (this.name== null){
-			this.name= createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_NAME, null);
+		if (this.name == null) {
+			this.name = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_NAME, null);
 		}
 		this.name.setValue(name);
 	}
+
 	// =======================================< SNamedElement
-	
+
 	// =======================================> STypedElement
 	/** The feature object containing the type of the node **/
-	protected SFeature type= null;
-	
+	protected SFeature type = null;
+
 	/** {@inheritDoc} **/
 	@Override
 	public String getType() {
-		if (type== null){			
-			SFeature feature= getFeature(SaltUtil.KW_QNAME_TYPE);
-			if (feature!= null){
-				type= feature;
+		if (type == null) {
+			SFeature feature = getFeature(SaltUtil.KW_QNAME_TYPE);
+			if (feature != null) {
+				type = feature;
 			}
-			if (type== null){
-				return(null);
+			if (type == null) {
+				return (null);
 			}
 		}
-		return(type.getValue_STEXT());
+		return (type.getValue_STEXT());
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void setType(String type) {
-		if (this.type== null){
-			this.type= createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_TYPE, null);
+		if (this.type == null) {
+			this.type = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.KW_TYPE, null);
 		}
 		this.type.setValue(type);
 	}

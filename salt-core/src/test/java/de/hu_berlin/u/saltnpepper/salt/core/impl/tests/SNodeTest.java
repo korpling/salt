@@ -9,10 +9,10 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
 public class SNodeTest extends SAnnotationContainerTest {
 
-	public SNode getFixture(){
-		return((SNode)super.getFixture());
+	public SNode getFixture() {
+		return ((SNode) super.getFixture());
 	}
-	
+
 	@Before
 	@Override
 	public void setUp() throws Exception {

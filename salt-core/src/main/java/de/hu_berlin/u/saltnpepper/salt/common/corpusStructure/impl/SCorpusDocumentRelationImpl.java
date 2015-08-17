@@ -22,8 +22,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRel
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 
-
 @SuppressWarnings("serial")
 public class SCorpusDocumentRelationImpl extends SRelationImpl<SCorpus, SDocument> implements SCorpusDocumentRelation {
 
-} //SCorpusDocumentRelationImpl
+} // SCorpusDocumentRelationImpl

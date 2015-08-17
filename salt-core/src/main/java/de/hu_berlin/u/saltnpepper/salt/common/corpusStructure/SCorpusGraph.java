@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
@@ -193,15 +194,15 @@ public interface SCorpusGraph extends SGraph {
 	 */
 	public SCorpus getCorpus(SDocument document);
 
-//	/**
-//	 * Returns a list of SCorpus object being the root corpora of this
-//	 * SCorpusGraph object.
-//	 * 
-//	 * @model kind="operation"
-//	 * @return a list of corpus objects being root corpora
-//	 * @generated
-//	 */
-//	EList<SCorpus> getRootCorpus();
+	// /**
+	// * Returns a list of SCorpus object being the root corpora of this
+	// * SCorpusGraph object.
+	// *
+	// * @model kind="operation"
+	// * @return a list of corpus objects being root corpora
+	// * @generated
+	// */
+	// EList<SCorpus> getRootCorpus();
 
 	/**
 	 * Loads the content of this object by reading the SaltXML file located by
@@ -259,8 +260,9 @@ public interface SCorpusGraph extends SGraph {
 	 * and assumes, that the last segment is a {@link SDocument} object. The
 	 * created {@link SDocument} than is returned.
 	 * 
-	 * @param documentPath the URI path of the document
-	 * @return  the created document
+	 * @param documentPath
+	 *            the URI path of the document
+	 * @return the created document
 	 */
 	public SDocument createSDocument(URI documentPath);
 

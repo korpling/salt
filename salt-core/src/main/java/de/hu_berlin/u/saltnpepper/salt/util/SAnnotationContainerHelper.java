@@ -54,11 +54,11 @@ public class SAnnotationContainerHelper {
 
 		/** The real iterator, to which this iterator delegates its methods **/
 		protected Iterator<Label> delegatee = null;
-		protected Class<E>clazz= null;
+		protected Class<E> clazz = null;
 
 		public MyIterator(Iterator<Label> delegatee, Class<E> clazz) {
 			this.delegatee = delegatee;
-			this.clazz= clazz;
+			this.clazz = clazz;
 		}
 
 		/**
@@ -88,9 +88,9 @@ public class SAnnotationContainerHelper {
 			next = null;
 			if (retVal == null) {
 				Label label = null;
-				while ( (delegatee.hasNext())&& ((label = delegatee.next()) != null) && (!(clazz.isInstance(label)))) {
+				while ((delegatee.hasNext()) && ((label = delegatee.next()) != null) && (!(clazz.isInstance(label)))) {
 				}
-				if (clazz.isInstance(label)){
+				if (clazz.isInstance(label)) {
 					retVal = (E) label;
 				}
 
@@ -149,7 +149,7 @@ public class SAnnotationContainerHelper {
 	@SuppressWarnings("unchecked")
 	public static <A extends SAnnotation> Set<A> getAnnotations(SAnnotationContainer container) {
 		Set<SAnnotation> retVal = null;
-		if ((container != null) && (container.getLabels()!= null)) {
+		if ((container != null) && (container.getLabels() != null)) {
 			for (Label label : container.getLabels()) {
 				if (label instanceof SAnnotation) {
 					if (retVal == null) {
@@ -261,7 +261,7 @@ public class SAnnotationContainerHelper {
 	@SuppressWarnings("unchecked")
 	public static <A extends SMetaAnnotation> Set<A> getMetaAnnotations(SAnnotationContainer container) {
 		Set<SMetaAnnotation> retVal = null;
-		if ((container != null) && (container.getLabels()!= null)) {
+		if ((container != null) && (container.getLabels() != null)) {
 			for (Label label : container.getLabels()) {
 				if (label instanceof SMetaAnnotation) {
 					if (retVal == null) {
@@ -337,7 +337,7 @@ public class SAnnotationContainerHelper {
 	@SuppressWarnings("unchecked")
 	public static <A extends SProcessingAnnotation> Set<A> getProcessingAnnotations(SAnnotationContainer container) {
 		Set<SProcessingAnnotation> retVal = null;
-		if ((container != null) && (container.getLabels()!= null)) {
+		if ((container != null) && (container.getLabels() != null)) {
 			for (Label label : container.getLabels()) {
 				if (label instanceof SProcessingAnnotation) {
 					if (retVal == null) {
@@ -411,7 +411,7 @@ public class SAnnotationContainerHelper {
 	@SuppressWarnings("unchecked")
 	public static <A extends SFeature> Set<A> getFeatures(SAnnotationContainer container) {
 		Set<SFeature> retVal = null;
-		if ((container != null) && (container.getLabels()!= null)) {
+		if ((container != null) && (container.getLabels() != null)) {
 			for (Label label : container.getLabels()) {
 				if (label instanceof SFeature) {
 					if (retVal == null) {

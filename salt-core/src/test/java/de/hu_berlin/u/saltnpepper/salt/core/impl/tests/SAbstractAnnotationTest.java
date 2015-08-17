@@ -30,14 +30,15 @@ import de.hu_berlin.u.saltnpepper.salt.SDATATYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
 
 public abstract class SAbstractAnnotationTest extends SAnnotationContainerTest {
-	
+
 	public SAbstractAnnotation getFixture() {
-		return (SAbstractAnnotation)fixture;
+		return (SAbstractAnnotation) fixture;
 	}
+
 	public void setFixture(SAbstractAnnotation fixture) {
 		this.fixture = fixture;
 	}
-	
+
 	@Test
 	public void testGetSValueSNUMERIC() {
 		Long value = 1L;
@@ -105,7 +106,7 @@ public abstract class SAbstractAnnotationTest extends SAnnotationContainerTest {
 		getFixture().setValue(value);
 		assertEquals(value, getFixture().getValue_STEXT());
 	}
-	
+
 	@Test
 	public void testGetSValueSBOOLEAN() {
 		Boolean value = true;

@@ -17,18 +17,22 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>STimeline Relation</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>STimeline Relation</b></em>'. <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSTimeline <em>STimeline</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSToken <em>SToken</em>}</li>
- *   <li>{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}</li>
+ * <li>
+ * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSTimeline
+ * <em>STimeline</em>}</li>
+ * <li>
+ * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSToken
+ * <em>SToken</em>}</li>
+ * <li>
+ * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph
+ * <em>SDocument Graph</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,13 +42,14 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
  */
 public interface STimelineRelation extends SSequentialRelation, STimeOverlappingRelation {
 	/**
-	 * Returns the value of the '<em><b>STimeline</b></em>' reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>STimeline</b></em>' reference. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>STimeline</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>STimeline</em>' reference isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>STimeline</em>' reference.
 	 * @see #setSTimeline(STimeline)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTimelineRelation_STimeline()
@@ -54,23 +59,27 @@ public interface STimelineRelation extends SSequentialRelation, STimeOverlapping
 	STimeline getSTimeline();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSTimeline <em>STimeline</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>STimeline</em>' reference.
+	 * Sets the value of the '
+	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSTimeline
+	 * <em>STimeline</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>STimeline</em>' reference.
 	 * @see #getSTimeline()
 	 * @generated
 	 */
 	void setSTimeline(STimeline value);
 
 	/**
-	 * Returns the value of the '<em><b>SToken</b></em>' reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>SToken</b></em>' reference. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>SToken</em>' reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>SToken</em>' reference isn't clear, there
+	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>SToken</em>' reference.
 	 * @see #setSToken(SToken)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTimelineRelation_SToken()
@@ -80,24 +89,29 @@ public interface STimelineRelation extends SSequentialRelation, STimeOverlapping
 	SToken getSToken();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSToken <em>SToken</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SToken</em>' reference.
+	 * Sets the value of the '
+	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSToken
+	 * <em>SToken</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @param value
+	 *            the new value of the '<em>SToken</em>' reference.
 	 * @see #getSToken()
 	 * @generated
 	 */
 	void setSToken(SToken value);
 
 	/**
-	 * Returns the value of the '<em><b>SDocument Graph</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations <em>STimeline Relations</em>}'.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>SDocument Graph</b></em>' container
+	 * reference. It is bidirectional and its opposite is '
+	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimelineRelations
+	 * <em>STimeline Relations</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>SDocument Graph</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>SDocument Graph</em>' container reference.
 	 * @see #setSDocumentGraph(SDocumentGraph)
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSTimelineRelation_SDocumentGraph()
@@ -108,10 +122,14 @@ public interface STimelineRelation extends SSequentialRelation, STimeOverlapping
 	SDocumentGraph getSDocumentGraph();
 
 	/**
-	 * Sets the value of the '{@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph <em>SDocument Graph</em>}' container reference.
-	 * <!-- begin-user-doc -->
+	 * Sets the value of the '
+	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph
+	 * <em>SDocument Graph</em>}' container reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>SDocument Graph</em>' container reference.
+	 * 
+	 * @param value
+	 *            the new value of the '<em>SDocument Graph</em>' container
+	 *            reference.
 	 * @see #getSDocumentGraph()
 	 * @generated
 	 */

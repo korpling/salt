@@ -94,13 +94,12 @@ public class IndexMgrImpl implements IndexMgr {
 				if (keyClass != null && valueClass != null) {
 					if (keyClass.isAssignableFrom(key.getClass()) && valueClass.isAssignableFrom(value.getClass())) {
 						return indexes.get(indexId).put(key, value);
-					}
-					else{
-						if (!keyClass.isAssignableFrom(key.getClass())){
-							throw new ClassCastException("The type passed key '"+key.getClass()+"' is not assignable to '"+keyClass+"'. ");
+					} else {
+						if (!keyClass.isAssignableFrom(key.getClass())) {
+							throw new ClassCastException("The type passed key '" + key.getClass() + "' is not assignable to '" + keyClass + "'. ");
 						}
-						if (!valueClass.isAssignableFrom(value.getClass())){
-							throw new ClassCastException("The type passed value '"+value.getClass()+"' is not assignable to '"+valueClass+"'. ");
+						if (!valueClass.isAssignableFrom(value.getClass())) {
+							throw new ClassCastException("The type passed value '" + value.getClass() + "' is not assignable to '" + valueClass + "'. ");
 						}
 					}
 				}
