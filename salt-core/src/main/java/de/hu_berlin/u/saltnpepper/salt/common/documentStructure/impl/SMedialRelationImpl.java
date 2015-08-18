@@ -26,7 +26,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
 
-public class SAudioDSRelationImpl extends SSequentialRelationImpl<SToken, SMedialDS, Double> implements SMedialRelation {
+public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedialDS, Double> implements SMedialRelation {
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

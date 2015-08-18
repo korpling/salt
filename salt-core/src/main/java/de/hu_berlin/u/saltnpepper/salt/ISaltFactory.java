@@ -8,7 +8,19 @@ import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
@@ -143,6 +155,77 @@ public interface ISaltFactory extends IGraphFactory {
 	 * @return new {@link SSpanningRelation} object
 	 */
 	public SSpanningRelation createSSpanningRelation();
-
+	/**
+	 * Creates a new {@link SDominanceRelation} object.
+	 * 
+	 * @return new {@link SDominanceRelation} object
+	 */
+	public SDominanceRelation createSDominanceRelation();
+	/**
+	 * Creates a new {@link SPointingRelation} object.
+	 * 
+	 * @return new {@link SPointingRelation} object
+	 */
+	public SPointingRelation createSPointingRelation();
+	/**
+	 * Creates a new {@link SOrderRelation} object.
+	 * 
+	 * @return new {@link SOrderRelation} object
+	 */
+	public SOrderRelation createSOrderRelation();
+	/**
+	 * Creates a new {@link STextualRelation} object.
+	 * 
+	 * @return new {@link STextualRelation} object
+	 */
+	public STextualRelation createSTextualRelation();
+	/**
+	 * Creates a new {@link STimelineRelation} object.
+	 * 
+	 * @return new {@link STimelineRelation} object
+	 */
+	public STimelineRelation createSTimelineRelation();
+	/**
+	 * Creates a new {@link SMedialRelation} object.
+	 * 
+	 * @return new {@link SMedialRelation} object
+	 */
+	public SMedialRelation createSMedialRelation();
+	/**
+	 * Creates a new {@link SSpan} object.
+	 * 
+	 * @return new {@link SSpan} object
+	 */
+	public SSpan createSSpan();
+	/**
+	 * Creates a new {@link SStructure} object.
+	 * 
+	 * @return new {@link SStructure} object
+	 */
+	public SStructure createSStructure();
+	/**
+	 * Creates a new {@link STextualDS} object.
+	 * 
+	 * @return new {@link STextualDS} object
+	 */
+	public STextualDS createSTextualDS();
+	/**
+	 * Creates a new {@link SMedialDS} object.
+	 * 
+	 * @return new {@link SMedialDS} object
+	 */
+	public SMedialDS createSMedialDS();
+	/**
+	 * Creates a new {@link STimeline} object.
+	 * 
+	 * @return new {@link STimeline} object
+	 */
+	public STimeline createSTimeline();
+	/**
+	 * Creates a new {@link SToken} object.
+	 * 
+	 * @return new {@link SToken} object
+	 */
+	public SToken createSToken();
 	// ===============================< document structure
 }

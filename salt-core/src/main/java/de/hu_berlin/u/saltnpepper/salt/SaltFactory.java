@@ -7,7 +7,19 @@ import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
@@ -196,6 +208,103 @@ public class SaltFactory {
 	 */
 	public static SSpanningRelation createSSpanningRelation() {
 		return (factory.createSSpanningRelation());
+	}
+	
+	/**
+	 * Creates a new {@link SDominanceRelation} object.
+	 * 
+	 * @return new {@link SDominanceRelation} object
+	 */
+	public static SDominanceRelation createSDominanceRelation() {
+		return (factory.createSDominanceRelation());
+	}
+	/**
+	 * Creates a new {@link SPointingRelation} object.
+	 * 
+	 * @return new {@link SPointingRelation} object
+	 */
+	public static SPointingRelation createSPointingRelation() {
+		return (factory.createSPointingRelation());
+	}
+	/**
+	 * Creates a new {@link SOrderRelation} object.
+	 * 
+	 * @return new {@link SOrderRelation} object
+	 */
+	public static SOrderRelation createSOrderRelation() {
+		return (factory.createSOrderRelation());
+	}
+	/**
+	 * Creates a new {@link STextualRelation} object.
+	 * 
+	 * @return new {@link STextualRelation} object
+	 */
+	public static STextualRelation createSTextualRelation() {
+		return (factory.createSTextualRelation());
+	}
+	/**
+	 * Creates a new {@link STimelineRelation} object.
+	 * 
+	 * @return new {@link STimelineRelation} object
+	 */
+	public static STimelineRelation createSTimelineRelation() {
+		return (factory.createSTimelineRelation());
+	}
+	/**
+	 * Creates a new {@link SMedialRelation} object.
+	 * 
+	 * @return new {@link SMedialRelation} object
+	 */
+	public static SMedialRelation createSMedialRelation() {
+		return (factory.createSMedialRelation());
+	}
+	/**
+	 * Creates a new {@link SSpan} object.
+	 * 
+	 * @return new {@link SSpan} object
+	 */
+	public static SSpan createSSpan() {
+		return (factory.createSSpan());
+	}
+	/**
+	 * Creates a new {@link SStructure} object.
+	 * 
+	 * @return new {@link SStructure} object
+	 */
+	public static SStructure createSStructure() {
+		return (factory.createSStructure());
+	}
+	/**
+	 * Creates a new {@link STextualDS} object.
+	 * 
+	 * @return new {@link STextualDS} object
+	 */
+	public static STextualDS createSTextualDS() {
+		return (factory.createSTextualDS());
+	}
+	/**
+	 * Creates a new {@link SMedialDS} object.
+	 * 
+	 * @return new {@link SMedialDS} object
+	 */
+	public static SMedialDS createSMedialDS() {
+		return (factory.createSMedialDS);
+	}
+	/**
+	 * Creates a new {@link STimeline} object.
+	 * 
+	 * @return new {@link STimeline} object
+	 */
+	public static STimeline createSTimeline() {
+		return (factory.createSTimeline());
+	}
+	/**
+	 * Creates a new {@link SToken} object.
+	 * 
+	 * @return new {@link SToken} object
+	 */
+	public static SToken createSToken() {
+		return (factory.createSToken());
 	}
 	// ===============================< document structure
 }
