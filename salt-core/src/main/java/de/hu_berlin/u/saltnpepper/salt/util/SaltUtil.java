@@ -96,7 +96,11 @@ public class SaltUtil {
 	/**
 	 * The name of the {@link SFeature} for the reference to an audio file.
 	 */
-	public static final String FEAT_SAUDIO_REFERNCE = "SAUDIO_REFERENCE";
+	public static final String FEAT_SMEDIA_REFERNCE = "SAUDIO_REFERENCE";
+	/**
+	 * The qualified name of the name of the {@link SFeature} for the reference to an audio file.
+	 */
+	public static final String FEAT_SMEDIA_REFERNCE_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_SMEDIA_REFERNCE;
 
 	/** The name of the {@link SFeature} for the start value. */
 	public static final String FEAT_SSTART = "SSTART";
@@ -104,13 +108,13 @@ public class SaltUtil {
 	 * The qualified name of the name of the {@link SFeature} for the start
 	 * value.
 	 */
-	public static final String FEAT_SSTART_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + "SSTART";
+	public static final String FEAT_SSTART_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_SSTART;
 	/** The name of the {@link SFeature} for the end value. */
 	public static final String FEAT_SEND = "SEND";
 	/**
 	 * The qualified name of the name of the {@link SFeature} for the end value.
 	 */
-	public static final String FEAT_SEND_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + "SEND";
+	public static final String FEAT_SEND_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_SEND;
 	/**
 	 * The name of the {@link SFeature} for the data label for textual sources,
 	 * etc..

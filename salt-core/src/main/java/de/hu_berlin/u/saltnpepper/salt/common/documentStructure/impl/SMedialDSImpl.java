@@ -19,21 +19,48 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
 import org.eclipse.emf.common.util.URI;
 
+import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class SMedialDSImpl extends SSequentialDSImpl<URI, Double> implements SMedialDS {
 	/** {@inheritDoc} */
 	@Override
-	public URI getSAudioReference() {
-		// TODO Auto-generated method stub
+	public URI getMediaReference() {
+		URI retVal= null;
+		SFeature sFeature= getFeature(SaltUtil.FEAT_SMEDIA_REFERNCE_QNAME);
+		if (	(sFeature!= null)&&
+				(sFeature.getValue()!= null))
+		{
+			retVal= URI.createURI(sFeature.getValue().toString());
+		}
+		return(retVal);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public void setMediaReference(URI mediaRef) {
+		SFeature sFeature= getFeature(SaltUtil.FEAT_SMEDIA_REFERNCE_QNAME);
+		if (sFeature== null)
+		{//create a new sFeature
+			sFeature= SaltFactory.createSFeature();
+			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
+			sFeature.setName(SaltUtil.FEAT_SMEDIA_REFERNCE);
+			addFeature(sFeature);
+		}	
+		sFeature.setValue(mediaRef);
+	}
+	/** {@inheritDoc} */
+	@Override
+	public Double getStart() {
 		return null;
 	}
 	/** {@inheritDoc} */
 	@Override
-	public void setSAudioReference(URI audioRef) {
-		// TODO Auto-generated method stub
-		
+	public Double getEnd() {
+		return null;
 	}
 
 } //SAudioDataSourceImpl

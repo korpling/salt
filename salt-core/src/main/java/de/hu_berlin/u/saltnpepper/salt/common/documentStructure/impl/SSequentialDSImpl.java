@@ -56,21 +56,11 @@ public abstract class SSequentialDSImpl<D, P> extends SNodeImpl implements SSequ
 		return((SDocumentGraph)super.getGraph());
 	}
 	
-	/**
-	 * {@inheritDoc SSequentialDS#getSStart()}. This method throws an exception,
-	 * and has to be overridden by derived classes.
-	 */
+	/** {@inheritDoc SSequentialDS#getSStart()} */
 	@Override
-	public P getStart() {
-		throw new UnsupportedOperationException();
-	}
+	public abstract P getStart();
 
-	/**
-	 * {@inheritDoc SSequentialDS#getSEnd()}. This method throws an exception,
-	 * and has to be overridden by
-	 */
+	/** {@inheritDoc SSequentialDS#getSStart()} */
 	@Override
-	public P getEnd() {
-		throw new UnsupportedOperationException();
-	}
+	public abstract P getEnd();
 } // SSequentialDSImpl

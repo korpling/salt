@@ -46,7 +46,7 @@ public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements
 		super.setGraph(graph);
 	}
 
-		/** {@inheritDoc} **/
+	/** {@inheritDoc} **/
 	@Override
 	public List<String> getPointsOfTime() {
 		List<String> retVal = null;
@@ -57,7 +57,9 @@ public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements
 		}
 		return (retVal);
 	}
-
+	/** stored the number of points of time **/
+	protected int numPOS= 0;
+	
 	/** {@inheritDoc} **/
 	@Override
 	public void addPointOfTime(String pointOfTime) {
@@ -76,12 +78,31 @@ public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements
 		} else {
 			String pot = null;
 			if (pointOfTime.isEmpty()) {
-				pot = this.getPointsOfTime().size() + "";
+				pot = getPointsOfTime().size() + "";
 			} else {
 				pot = pointOfTime;
 			}
 			timeline = timeline + SaltUtil.TIMELINE_SEPARATOR + pot;
 		}
+		numPOS++;
 		super.setData(timeline);
+	}
+
+	@Override
+	public Integer getStart() {
+		if (getData() != null) {
+			return (0);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public Integer getEnd() {
+		if (getData() != null) {
+			return (numPOS);
+		} else {
+			return null;
+		}
 	}
 } // STimelineImpl

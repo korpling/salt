@@ -27,13 +27,13 @@ public interface SMedialDS extends SSequentialDS<URI, Double>, SDocumentGraphObj
 	 * 
 	 * @return {@link URI} to audio file
 	 */
-	public URI getSAudioReference();
+	public URI getMediaReference();
 
 	/**
 	 * Sets a {@link URI} object, which points to a audio file.
 	 * 
-	 * @param audioRef
+	 * @param mediaRef
 	 *            reference to the audio file
 	 */
-	public void setSAudioReference(URI audioRef);
+	public void setMediaReference(URI mediaRef);
 } // SAudioDataSource
