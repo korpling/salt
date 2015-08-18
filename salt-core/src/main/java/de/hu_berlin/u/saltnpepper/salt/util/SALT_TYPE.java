@@ -20,8 +20,11 @@ package de.hu_berlin.u.saltnpepper.salt.util;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
@@ -36,6 +39,10 @@ public enum SALT_TYPE {
 	//
 	STEXTUAL_DS("STEXTUAL_DS", STextualDS.class),
 	//
+	SSEQUENTIAL_DS("SSEQUENTIAL_DS", SSequentialDS.class),
+	//
+	SMEDIAL_DS("SMEDIAL_DS", SMedialDS.class),
+	//
 	STOKEN("STOKEN", SToken.class),
 	//
 	SSPAN("SSPAN", SSpan.class),
@@ -43,6 +50,8 @@ public enum SALT_TYPE {
 	SSTRUCTURE("SSTRUCTURE", SStructure.class),
 	//
 	STEXTUAL_RELATION("STEXTUAL_RELATION", STextualRelation.class),
+	//
+	SMEDIAL_RELATION("SMEDIAL_RELATION", SMedialRelation.class),
 	//
 	SSPANNING_RELATION("SSPANNING_RELATION", SSpanningRelation.class),
 	//

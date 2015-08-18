@@ -13,8 +13,8 @@ import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SAudioDSRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SAudioDataSource;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
@@ -509,13 +509,13 @@ public class SDocumentGraphImpl implements SDocumentGraph {
 	}
 
 	@Override
-	public List<SAudioDSRelation> getSAudioDSRelations() {
+	public List<SMedialRelation> getSAudioDSRelations() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SAudioDataSource> getSAudioDataSources() {
+	public List<SMedialDS> getSAudioDataSources() {
 		// TODO Auto-generated method stub
 		return null;
 	}

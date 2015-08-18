@@ -37,9 +37,9 @@ import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
  * The document-structure covers the "real" linguistic data, which means primary
  * data, linguistic structures and annotations on them. The linguistic structure
  * contains the nodes: {@link SSequentialDS}, {@link STextualDS},
- * {@link SAudioDataSource}, {@link SToken}, {@link SSpan} and
+ * {@link SMedialDS}, {@link SToken}, {@link SSpan} and
  * {@link SStructure} and the relations: {@link STextualRelation},
- * {@link SAudioDSRelation}, {@link SSpanningRelation},
+ * {@link SMedialRelation}, {@link SSpanningRelation},
  * {@link SDominanceRelation}, {@link SPointingRelation} and
  * {@link SOrderRelation} which we will discuss in the following. All these
  * nodes and relations are contained in a graph, the {@link SDocumentGraph},
@@ -289,7 +289,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SAudioDSRelation> getSAudioDSRelations();
+	List<SMedialRelation> getSAudioDSRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SAudio Data Sources</b></em>'
@@ -312,7 +312,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SAudioDataSource> getSAudioDataSources();
+	List<SMedialDS> getSAudioDataSources();
 
 	/**
 	 * Returns the value of the '<em><b>SOrder Relations</b></em>' containment

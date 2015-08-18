@@ -19,10 +19,10 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
 import org.eclipse.emf.common.util.URI;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SAudioDataSource;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
 
 @SuppressWarnings("serial")
-public class SAudioDataSourceImpl extends SSequentialDSImpl<URI, Double> implements SAudioDataSource {
+public class SAudioDataSourceImpl extends SSequentialDSImpl<URI, Double> implements SMedialDS {
 	/** {@inheritDoc} */
 	@Override
 	public URI getSAudioReference() {
