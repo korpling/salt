@@ -22,9 +22,9 @@ import java.util.Map;
 
 import org.knallgrau.utils.textcat.TextCategorizer;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.common.tokenizer.Tokenizer;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.tokenizer.Tokenizer;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;

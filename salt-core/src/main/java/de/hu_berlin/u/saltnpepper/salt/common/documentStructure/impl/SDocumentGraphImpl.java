@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.common.tokenizer.Tokenizer;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
@@ -29,6 +28,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.tokenizer.Tokenizer;
 import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;

@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.common.tokenizer;
+package de.hu_berlin.u.saltnpepper.salt.common.tokenizer;
 
 import java.util.HashSet;
 
