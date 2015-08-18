@@ -16,7 +16,7 @@ import com.google.common.collect.Multimap;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 
 public class IndexMgrImpl implements IndexMgr {
-	private final ReadWriteLock L = new ReentrantReadWriteLock();
+	private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
 	private Map<String, Multimap<Object, Object>> indexes;
 	private Map<String, Class<?>> indexKeyTypes;
@@ -45,7 +45,7 @@ public class IndexMgrImpl implements IndexMgr {
 	/** {@inheritDoc} **/
 	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey) {
 		if (threadSafe) {
-			L.writeLock().lock();
+			lock.writeLock().lock();
 		}
 		try {
 			if (this.containsIndex(indexId)) {
@@ -60,7 +60,7 @@ public class IndexMgrImpl implements IndexMgr {
 			indexValueTypes.put(indexId, valueType);
 		} finally {
 			if (threadSafe) {
-				L.writeLock().unlock();
+				lock.writeLock().unlock();
 			}
 		}
 	}
@@ -69,13 +69,13 @@ public class IndexMgrImpl implements IndexMgr {
 	@Override
 	public boolean containsIndex(String indexId) {
 		if (threadSafe) {
-			L.readLock().lock();
+			lock.readLock().lock();
 		}
 		try {
 			return indexes.containsKey(indexId);
 		} finally {
 			if (threadSafe) {
-				L.readLock().unlock();
+				lock.readLock().unlock();
 			}
 		}
 	}
@@ -84,7 +84,7 @@ public class IndexMgrImpl implements IndexMgr {
 	@Override
 	public <K, V> boolean put(String indexId, K key, V value) {
 		if (threadSafe) {
-			L.writeLock().lock();
+			lock.writeLock().lock();
 		}
 
 		try {
@@ -107,7 +107,7 @@ public class IndexMgrImpl implements IndexMgr {
 			return false;
 		} finally {
 			if (threadSafe) {
-				L.writeLock().unlock();
+				lock.writeLock().unlock();
 			}
 		}
 	}
@@ -116,7 +116,7 @@ public class IndexMgrImpl implements IndexMgr {
 	@Override
 	public <K, V> boolean putAll(String indexId, K key, Collection<V> values) {
 		if (threadSafe) {
-			L.writeLock().lock();
+			lock.writeLock().lock();
 		}
 
 		try {
@@ -131,7 +131,7 @@ public class IndexMgrImpl implements IndexMgr {
 			return false;
 		} finally {
 			if (threadSafe) {
-				L.writeLock().unlock();
+				lock.writeLock().unlock();
 			}
 		}
 	}
@@ -152,14 +152,14 @@ public class IndexMgrImpl implements IndexMgr {
 	public <K, V> List<V> getAll(String indexId, K key) {
 		if (indexId != null && key != null) {
 			if (threadSafe) {
-				L.readLock().lock();
+				lock.readLock().lock();
 			}
 
 			try {
 				return (Collections.unmodifiableList((List<V>) indexes.get(indexId).get(key)));
 			} finally {
 				if (threadSafe) {
-					L.readLock().unlock();
+					lock.readLock().unlock();
 				}
 			}
 		}
@@ -177,7 +177,7 @@ public class IndexMgrImpl implements IndexMgr {
 	public <K> boolean remove(String indexId, K key) {
 		if (indexId != null && key != null) {
 			if (threadSafe) {
-				L.writeLock().lock();
+				lock.writeLock().lock();
 			}
 
 			try {
@@ -187,7 +187,7 @@ public class IndexMgrImpl implements IndexMgr {
 				}
 			} finally {
 				if (threadSafe) {
-					L.writeLock().unlock();
+					lock.writeLock().unlock();
 				}
 			}
 		}
@@ -199,7 +199,7 @@ public class IndexMgrImpl implements IndexMgr {
 	public <K, V> boolean remove(String indexId, K key, V value) {
 		if (indexId != null && key != null && value != null) {
 			if (threadSafe) {
-				L.writeLock().lock();
+				lock.writeLock().lock();
 			}
 
 			try {
@@ -211,7 +211,7 @@ public class IndexMgrImpl implements IndexMgr {
 
 			} finally {
 				if (threadSafe) {
-					L.writeLock().unlock();
+					lock.writeLock().unlock();
 				}
 			}
 		}
@@ -222,7 +222,7 @@ public class IndexMgrImpl implements IndexMgr {
 	@Override
 	public boolean removeIndex(String indexId) {
 		if (threadSafe) {
-			L.writeLock().lock();
+			lock.writeLock().lock();
 		}
 
 		try {
@@ -234,7 +234,7 @@ public class IndexMgrImpl implements IndexMgr {
 			return false;
 		} finally {
 			if (threadSafe) {
-				L.writeLock().unlock();
+				lock.writeLock().unlock();
 			}
 		}
 	}
@@ -243,7 +243,7 @@ public class IndexMgrImpl implements IndexMgr {
 	@Override
 	public void clearIndex(String indexId) {
 		if (threadSafe) {
-			L.writeLock().lock();
+			lock.writeLock().lock();
 		}
 
 		try {
@@ -253,7 +253,7 @@ public class IndexMgrImpl implements IndexMgr {
 			}
 		} finally {
 			if (threadSafe) {
-				L.writeLock().unlock();
+				lock.writeLock().unlock();
 			}
 		}
 	}
@@ -262,7 +262,7 @@ public class IndexMgrImpl implements IndexMgr {
 	@Override
 	public void removeAll() {
 		if (threadSafe) {
-			L.writeLock().lock();
+			lock.writeLock().lock();
 		}
 
 		try {
@@ -271,7 +271,7 @@ public class IndexMgrImpl implements IndexMgr {
 			indexValueTypes.clear();
 		} finally {
 			if (threadSafe) {
-				L.writeLock().unlock();
+				lock.writeLock().unlock();
 			}
 		}
 	}
@@ -289,7 +289,7 @@ public class IndexMgrImpl implements IndexMgr {
 
 		if (element != null) {
 			if (threadSafe) {
-				L.writeLock().lock();
+				lock.writeLock().lock();
 			}
 
 			try {
@@ -302,7 +302,7 @@ public class IndexMgrImpl implements IndexMgr {
 				}
 			} finally {
 				if (threadSafe) {
-					L.writeLock().unlock();
+					lock.writeLock().unlock();
 				}
 			}
 		}
@@ -316,7 +316,7 @@ public class IndexMgrImpl implements IndexMgr {
 
 		if (indexId != null && element != null) {
 			if (threadSafe) {
-				L.writeLock().lock();
+				lock.writeLock().lock();
 			}
 
 			try {
@@ -328,7 +328,7 @@ public class IndexMgrImpl implements IndexMgr {
 				}
 			} finally {
 				if (threadSafe) {
-					L.writeLock().unlock();
+					lock.writeLock().unlock();
 				}
 			}
 		}

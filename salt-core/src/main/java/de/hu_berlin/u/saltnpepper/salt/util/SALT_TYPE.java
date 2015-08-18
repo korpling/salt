@@ -17,6 +17,14 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.util;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
@@ -95,4 +103,77 @@ public enum SALT_TYPE {
 		this.name = name;
 		this.javaType = javaType;
 	}
-} // STYPE_NAME
+
+	private static final ReadWriteLock lock = new ReentrantReadWriteLock();
+	
+	/**
+	 * the map of {@link SALT_TYPE} and {@link Class}.
+	 */
+	protected static Map<SALT_TYPE, Class<? extends Object>> sType2clazzMap = null;
+
+	/**
+	 * Returns map of {@link SALT_TYPE} and {@link Class}.
+	 * 
+	 * @return
+	 */
+	protected static Map<SALT_TYPE, Class<? extends Object>> getSType2clazz() {
+		if (sType2clazzMap == null) {
+			lock.writeLock().lock();
+			if (sType2clazzMap == null) {
+				sType2clazzMap = Collections.synchronizedMap(new HashMap<SALT_TYPE, Class<? extends Object>>());
+				sType2clazzMap.put(SALT_TYPE.STEXT_OVERLAPPING_RELATION, STextOverlappingRelation.class);
+				sType2clazzMap.put(SALT_TYPE.STIME_OVERLAPPING_RELATION, STimeOverlappingRelation.class);
+				sType2clazzMap.put(SALT_TYPE.SSEQUENTIAL_RELATION, SSequentialRelation.class);
+				sType2clazzMap.put(SALT_TYPE.SDOMINANCE_RELATION, SDominanceRelation.class);
+				sType2clazzMap.put(SALT_TYPE.SPOINTING_RELATION, SPointingRelation.class);
+				sType2clazzMap.put(SALT_TYPE.SSPANNING_RELATION, SSpanningRelation.class);
+				sType2clazzMap.put(SALT_TYPE.SORDER_RELATION, SOrderRelation.class);
+
+				sType2clazzMap.put(SALT_TYPE.STEXTUAL_DS, STextualDS.class);
+				sType2clazzMap.put(SALT_TYPE.STOKEN, SToken.class);
+				sType2clazzMap.put(SALT_TYPE.SSPAN, SSpan.class);
+				sType2clazzMap.put(SALT_TYPE.SSTRUCTURE, SStructure.class);
+
+				sType2clazzMap.put(SALT_TYPE.SDOCUMENT, SDocument.class);
+				sType2clazzMap.put(SALT_TYPE.SCORPUS, SCorpus.class);
+			}
+			lock.writeLock().unlock();
+		}
+		return (sType2clazzMap);
+	}
+
+	/**
+	 * Converts the given class, if it is a class of the Salt model into its
+	 * corresponding {@link SALT_TYPE}.
+	 * 
+	 * @param class to convert
+	 * @return {@link SALT_TYPE} of given class
+	 */
+	public static Set<SALT_TYPE> convertClazzToSTypeName(Class<? extends Object>... classes) {
+		HashSet<SALT_TYPE> retVal = new HashSet<SALT_TYPE>();
+
+		Set<SALT_TYPE> keys = getSType2clazz().keySet();
+		for (SALT_TYPE sType : keys) {
+			Class<? extends Object> clazz1 = getSType2clazz().get(sType);
+			for (Class<? extends Object> clazz : classes) {
+				if (clazz1.isAssignableFrom(clazz)) {
+					retVal.add(sType);
+				}
+			}
+		}
+		return (retVal);
+	}
+
+	/**
+	 * Converts the given {@link SALT_TYPE}, into the corresponding class.
+	 * 
+	 * @param type to convert
+	 * @return corresponding class
+	 */
+	public static Class<? extends Object> convertSTypeNameToClazz(SALT_TYPE sType) {
+		if (sType == null) {
+			return (null);
+		}
+		return (getSType2clazz().get(sType));
+	}
+} // SALT_TYPE

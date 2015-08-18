@@ -29,6 +29,7 @@ import org.junit.Test;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.tests.SaltTestsUtil;
 
 public class SDocumentTest {
 
@@ -50,7 +51,8 @@ public class SDocumentTest {
 	@Test
 	public void testGetSDocumentGraphLocation() {
 		assertNull(getFixture().getDocumentGraphLocation());
-		File file = new File("/home/saltnpepper/bla.salt");
+		File file = SaltTestsUtil.getTempTestFile("bla.salt");
+//		File file = new File("/home/saltnpepper/bla.salt");
 		URI graphLocation = URI.createFileURI(file.getAbsolutePath());
 		this.getFixture().setDocumentGraphLocation(graphLocation);
 
