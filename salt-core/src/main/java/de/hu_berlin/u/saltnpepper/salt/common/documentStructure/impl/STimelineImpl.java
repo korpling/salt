@@ -50,7 +50,7 @@ public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements
 	@Override
 	public List<String> getPointsOfTime() {
 		List<String> retVal = null;
-		String timelineStr = (String) super.getSData();
+		String timelineStr = (String) super.getData();
 		if (timelineStr != null) {
 			String[] timelineStrArr = timelineStr.split(SaltUtil.TIMELINE_SEPARATOR);
 			retVal = Collections.unmodifiableList(Arrays.asList(timelineStrArr));
@@ -64,7 +64,7 @@ public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements
 		if (pointOfTime == null) {
 			throw new SaltInsertionException(this, pointOfTime, "Cannot add an empty point of time. ");
 		}
-		String timeline = (String) super.getSData();
+		String timeline = (String) super.getData();
 		if (timeline == null) {
 			String pot = null;
 			if (pointOfTime.isEmpty()) {
@@ -82,6 +82,6 @@ public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements
 			}
 			timeline = timeline + SaltUtil.TIMELINE_SEPARATOR + pot;
 		}
-		super.setSData(timeline);
+		super.setData(timeline);
 	}
 } // STimelineImpl

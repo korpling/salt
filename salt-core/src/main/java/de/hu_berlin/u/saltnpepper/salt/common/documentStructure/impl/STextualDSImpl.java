@@ -29,15 +29,15 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	@Override
 	public String getText() {
 		String retVal = null;
-		if (super.getSData() instanceof String)
-			retVal = (String) super.getSData();
+		if (super.getData() instanceof String)
+			retVal = (String) super.getData();
 		return (retVal);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void setText(String newSText) {
-		super.setSData(newSText);
+		super.setData(newSText);
 	}
 
 	/** {@inheritDoc} **/
@@ -60,7 +60,7 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	 * otherwise
 	 */
 	@Override
-	public Integer getSStart() {
+	public Integer getStart() {
 		if (getText() != null) {
 			return (0);
 		} else
@@ -72,7 +72,7 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	 * length, -1 otherwise
 	 * 
 	 */
-	public Integer getSEnd() {
+	public Integer getEnd() {
 		String sText = getText();
 		if (sText != null) {
 			return (sText.length());

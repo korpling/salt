@@ -29,7 +29,7 @@ public abstract class SSequentialDSImpl<D, P> extends SNodeImpl implements SSequ
 
 	/** {@inheritDoc} */
 	@Override
-	public D getSData() {
+	public D getData() {
 		D retVal = null;
 		SFeature feature = getFeature(SaltUtil.FEAT_SDATA_QNAME);
 		if (feature != null) {
@@ -40,7 +40,7 @@ public abstract class SSequentialDSImpl<D, P> extends SNodeImpl implements SSequ
 
 	/** {@inheritDoc} */
 	@Override
-	public void setSData(D newSData) {
+	public void setData(D newSData) {
 		SFeature feature = getFeature(SaltUtil.FEAT_SDATA_QNAME);
 		if (feature == null) {// create a new sFeature
 			feature = SaltFactory.createSFeature();
@@ -61,7 +61,7 @@ public abstract class SSequentialDSImpl<D, P> extends SNodeImpl implements SSequ
 	 * and has to be overridden by derived classes.
 	 */
 	@Override
-	public P getSStart() {
+	public P getStart() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -70,7 +70,7 @@ public abstract class SSequentialDSImpl<D, P> extends SNodeImpl implements SSequ
 	 * and has to be overridden by
 	 */
 	@Override
-	public P getSEnd() {
+	public P getEnd() {
 		throw new UnsupportedOperationException();
 	}
 } // SSequentialDSImpl

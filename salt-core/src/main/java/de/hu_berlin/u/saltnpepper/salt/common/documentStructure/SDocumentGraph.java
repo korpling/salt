@@ -582,7 +582,7 @@ public interface SDocumentGraph extends SGraph {
 	/**
 	 * Returns all {@link SToken} objects being contained in the list
 	 * {@link SDocumentGraph#getTokens()} and sorts them by the
-	 * {@link STextualRelation#getSStart()} value of {@link SToken} object.
+	 * {@link STextualRelation#getStart()} value of {@link SToken} object.
 	 * 
 	 * @return list of tokens in order of left text position
 	 */
@@ -592,7 +592,7 @@ public interface SDocumentGraph extends SGraph {
 	 * Sorts all {@link SToken} and {@link STextualRelation} objects being
 	 * contained in the list {@link SDocumentGraph#getTokens()} and
 	 * {@link SDocumentGraph#getSTextualRelations()} by the
-	 * {@link STextualRelation#getSStart()} value of {@link SToken} and
+	 * {@link STextualRelation#getStart()} value of {@link SToken} and
 	 * {@link STextualRelation} object.
 	 */
 	public void sortTokenByText();

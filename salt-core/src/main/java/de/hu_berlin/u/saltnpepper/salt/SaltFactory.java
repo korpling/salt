@@ -288,7 +288,7 @@ public class SaltFactory {
 	 * @return new {@link SMedialDS} object
 	 */
 	public static SMedialDS createSMedialDS() {
-		return (factory.createSMedialDS);
+		return (factory.createSMedialDS());
 	}
 	/**
 	 * Creates a new {@link STimeline} object.
