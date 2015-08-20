@@ -9,13 +9,13 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.HashSet;
 
-
 import org.eclipse.emf.common.util.EList;
 import org.junit.Test;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltProject;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
@@ -37,6 +37,7 @@ import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.events.*;
 
 import org.json.*;
+import org.eclipse.emf.common.util.URI;
 
 
 
@@ -63,12 +64,13 @@ public class MyVisJsTest implements SGraphTraverseHandler{
 	private  long bufferSize;
 	
 	
-//	private StringBuilder strBuilder;
+
 	private static final String TRAV_MODE_CALC_LEVEL = "calcLevel";
 	private static final String TRAV_MODE_READ_NODES = "readNodes";
 	
 	
 	private final HashSet <SNode> readRoots;
+	private final HashSet <SRelation> readRelations;
 	private final EList<SNode> roots;
 	private int nGroupsId = 0;
 	
@@ -128,10 +130,23 @@ public class MyVisJsTest implements SGraphTraverseHandler{
 	
 	
 	
-	
+
 public MyVisJsTest (){
-	 this.doc= SaltFactory.eINSTANCE.createSDocument();
-	SampleGenerator.createSDocumentStructure(doc);
+	
+	//URI uri = URI.createFileURI("../pcc2_salt/pcc2/11299.salt");
+	URI uri = URI.createFileURI("../pcc2_random_sentence/pcc2/match_0.salt");
+	
+	
+	this.doc= SaltFactory.eINSTANCE.createSDocument();
+	
+
+	
+
+	// Test-Corpus
+	// SampleGenerator.createSDocumentStructure(doc);
+	
+	
+	doc.loadSDocumentGraph(uri);
 	roots = doc.getSDocumentGraph().getSRoots();
 	
 	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();
@@ -156,6 +171,8 @@ public MyVisJsTest (){
 		e1.printStackTrace();
 	}	
 	readRoots = new HashSet <SNode>();
+	readRelations = new HashSet <SRelation>();
+	
 	this.outputFactory = XMLOutputFactory.newInstance();
 	try {
 		this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
@@ -165,18 +182,21 @@ public MyVisJsTest (){
 	}
 	
 	
+	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
+	System.out.println("nEdges: " + nEdges);
+	
 	bufferSize = doc.getSDocumentGraph().getNumOfEdges() * 60;
 	
 	this.out = new BufferedWriter(new OutputStreamWriter(os));		
 	//TODO check the buffer size
 	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);
 	
-	//System.out.println("BufferSize: " + bufferSize);
+	System.out.println("BufferSize: " + bufferSize);
 	
 	this.jsonWriterNodes = new JSONWriter(out);
 	this.jsonWriterEdges = new JSONWriter(outEdges);
 	
-	//this.strBuilder = new StringBuilder();
+	
 	
 
 }
@@ -411,9 +431,7 @@ public MyVisJsTest (){
 			 maxLevel++;			 
 		 }
 		
-	//	 System.out.println("maximales Level: " + maxLevel);
-		/* strBuilder.append("var edges = new vis.DataSet(\n");
-		 strBuilder.append("[");*/
+
 		 
 		 doc.getSDocumentGraph().sortSTokenByText();	  		 
 		 EList <SToken> sTokens = doc.getSDocumentGraph().getSTokens();
@@ -439,23 +457,13 @@ public MyVisJsTest (){
 		 
 		
 		
-	/*	 int commaIndex = strBuilder.lastIndexOf(",");
-		 strBuilder.deleteCharAt(commaIndex);
-		 strBuilder.append("]");
-		 strBuilder.append(");\n");*/
-		
 		 jsonWriterEdges.endArray();		
 		 outEdges.append(");");
 		 outEdges.newLine();
 		 outEdges.flush();
 
 		 
-	//	 out.append(strBuilder.toString());
-	//	 out.newLine();
-	//	 out.flush();
 		
-
-			
 		
 		 
 	
@@ -474,7 +482,8 @@ public MyVisJsTest (){
 			 
 		 jsonWriterNodes.object();
 		 jsonWriterNodes.key(id);
-		 jsonWriterNodes.value(node.getSElementPath().fragment());
+		 String idValue = node.getSElementPath().fragment();
+		 jsonWriterNodes.value(idValue);
 		 jsonWriterNodes.key(label);
 		 String allLabels = "";
 	
@@ -498,6 +507,15 @@ public MyVisJsTest (){
 					  allLabels += doc.getSDocumentGraph().getSText(node);
 				  }
 		   } 
+		  
+		   String idLabel = "id=" + idValue;
+		  		   
+		   if (allLabels.isEmpty()){
+			   allLabels = idLabel;
+		   }
+		   else{
+			   allLabels = idLabel + " \n" + allLabels;
+		   }
 		   				
 		 jsonWriterNodes.value(allLabels);	
 		 if (node instanceof SToken){
@@ -620,26 +638,27 @@ public MyVisJsTest (){
 					  
 					  }
 					 
-				/*  strBuilder.append(from);
-				  strBuilder.append("\"" +fromNode.getSElementPath().fragment() + "\", ");
-				  strBuilder.append(to);
-				  strBuilder.append("\"" +currNode.getSElementPath().fragment() + "\"}");
-				  strBuilder.append(",");
-				  strBuilder.append(newline);*/
+			
+				  if (!readRelations.contains(edge)){
+					  
+					  jsonWriterEdges.object();
+					  jsonWriterEdges.key("from");
+					  jsonWriterEdges.value(fromNode.getSElementPath().fragment());
+					  jsonWriterEdges.key("to");
+					  jsonWriterEdges.value(currNode.getSElementPath().fragment());
+					  jsonWriterEdges.endObject();
+					  try {
+							outEdges.newLine();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					  
+					  readRelations.add(edge);
+				  }
 				  
 				  
-				  jsonWriterEdges.object();
-				  jsonWriterEdges.key("from");
-				  jsonWriterEdges.value(fromNode.getSElementPath().fragment());
-				  jsonWriterEdges.key("to");
-				  jsonWriterEdges.value(currNode.getSElementPath().fragment());
-				  jsonWriterEdges.endObject();
-				  try {
-					outEdges.newLine();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 				
 				  
 				}
@@ -652,7 +671,7 @@ public MyVisJsTest (){
 	@Override
 	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation edge,
 			SNode currNode, long order) {
-		if(edge instanceof SDominanceRelation || edge instanceof SSpanningRelation || edge == null)  return true;
+		if(edge instanceof SDominanceRelation || edge instanceof SSpanningRelation || edge instanceof SPointingRelation || edge == null)  return true;
 		else return false;
 		
 	}
