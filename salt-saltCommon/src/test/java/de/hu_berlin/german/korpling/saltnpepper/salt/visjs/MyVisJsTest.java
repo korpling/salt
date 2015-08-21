@@ -42,6 +42,7 @@ import org.eclipse.emf.common.util.URI;
 
 
 
+
 public class MyVisJsTest implements SGraphTraverseHandler{
 		
 	private  int currHigh;
@@ -53,13 +54,13 @@ public class MyVisJsTest implements SGraphTraverseHandler{
 	private  XMLOutputFactory outputFactory;
 	private  OutputStream os;
 	private  XMLStreamWriter writer;
-	private  BufferedWriter out;
-	//test
+	private  BufferedWriter outNodes;
 	private  BufferedWriter outEdges;
+	private  BufferedWriter outOptions;
 	
 	private  JSONWriter jsonWriterNodes;
-	//test
 	private  JSONWriter jsonWriterEdges;
+	
 	
 	private  long bufferSize;
 	
@@ -137,14 +138,10 @@ public MyVisJsTest (){
 	URI uri = URI.createFileURI("../pcc2_random_sentence/pcc2/match_0.salt");
 	
 	
-	this.doc= SaltFactory.eINSTANCE.createSDocument();
-	
-
-	
+	this.doc= SaltFactory.eINSTANCE.createSDocument();	
 
 	// Test-Corpus
-	// SampleGenerator.createSDocumentStructure(doc);
-	
+	// SampleGenerator.createSDocumentStructure(doc);	
 	
 	doc.loadSDocumentGraph(uri);
 	roots = doc.getSDocumentGraph().getSRoots();
@@ -165,7 +162,7 @@ public MyVisJsTest (){
 	
 	 try {
 		this.os = new FileOutputStream(new File ("../hierarchicalLayoutUserdefined.html"));
-	//	this.os = System.out;
+		//this.os = System.out;
 	} catch (FileNotFoundException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
@@ -187,28 +184,23 @@ public MyVisJsTest (){
 	
 	bufferSize = doc.getSDocumentGraph().getNumOfEdges() * 60;
 	
-	this.out = new BufferedWriter(new OutputStreamWriter(os));		
+	this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
 	//TODO check the buffer size
 	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);
+	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));	
 	
 	System.out.println("BufferSize: " + bufferSize);
 	
-	this.jsonWriterNodes = new JSONWriter(out);
+	this.jsonWriterNodes = new JSONWriter(outNodes);
 	this.jsonWriterEdges = new JSONWriter(outEdges);
 	
-	
-	
-
 }
 	
 
 	
 	
 	@Test
-	public void test() throws IOException, XMLStreamException{
-		
-	
-	
+	public void writeHTML() throws IOException, XMLStreamException{
 
 
 		
@@ -262,32 +254,41 @@ public MyVisJsTest (){
 		
 		writer.flush();
 		
+		outNodes.append("var nodes = new vis.DataSet(\n");
+		
+		outEdges.append("var edges = new vis.DataSet(\n");
+		
 		writeJSON();
 		
-		writer.writeCharacters("var container = document.getElementById('mynetwork');\n"
-				+ "var data = {\n"
-				+ "nodes: nodes,\n"
-				+ "edges: edges\n"
-				+ "};\n"
-				+ "var options = {\n"
-				+ "nodes:{\n"
-				+ "shadow: true,\n"
-				+ "shape: \"box\"\n"
-				+ "},\n"
-				+ "edges: {\n"
-				+ "smooth: true\n"
-				+ "},\n"
-				+ "layout: {\n"
-				+ "hierarchical:{\n"
-				+ "direction: directionInput.value\n"
-				+ "}\n"
-				+ "}\n"
-				+ "};\n"
+		 outNodes.flush();
+		 outNodes.append(");");
+		 outNodes.newLine();
+		 outNodes.flush();
+		 
+		 outEdges.append(");");
+		 outEdges.newLine();
+		 outEdges.flush();
+		
+		
+    	 writer.writeCharacters("var container = document.getElementById('mynetwork');\n"
+					+ "var data = {\n"
+					+ "nodes: nodes,\n"
+					+ "edges: edges\n"
+					+ "};\n"
+					+ "var options = ");
+	
+    	 
+    	 writeOptions();
+		 outOptions.flush();
+	
+
+		 
+		writer.writeCharacters(";\n"
 				+ "network = new vis.Network(container, data, options);\n"
 				+ "network.on('select', function(params) {\n"
 				+ "document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;\n"
 				+ "});\n"
-				+ "}\n");
+				+ "}\n"); 
 
 		writer.writeEndElement();
 		writer.writeCharacters(newline);
@@ -413,7 +414,7 @@ public MyVisJsTest (){
 		writer.close();
 		
 		outEdges.close();
-		out.close();
+		outNodes.close();
 		
 		
 	  
@@ -421,104 +422,93 @@ public MyVisJsTest (){
 	  
 	}
 	
-	private void writeJSON (){		
-	try {
+	//@Test
+	public void testJson(){
+		writeJSON();
 		
-		maxLevel = getMaxHighOfSDocGraph(doc) + 1;
-		EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
-		 if (sSpans != null && sSpans.size() != 0) {
-		//	 graphContainsSpans = true;
-			 maxLevel++;			 
-		 }
-		
-
-		 
-		 doc.getSDocumentGraph().sortSTokenByText();	  		 
-		 EList <SToken> sTokens = doc.getSDocumentGraph().getSTokens();
-		 
-		 out.append("var nodes = new vis.DataSet(\n");
-		 
-		jsonWriterNodes.array();
-		 for (SToken token : sTokens){			
-			 writeJSONObject(token, maxLevel);
-		 }
-		
-		 outEdges.append("var edges = new vis.DataSet(\n");
-		 jsonWriterEdges.array();
-		 
-		 doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, 
-				 												TRAV_MODE_READ_NODES, this);		
-		 		 
-		 jsonWriterNodes.endArray();			   
-		 out.append(");");
-		 out.newLine();
-		 out.flush();
-		
-		 
-		
-		
-		 jsonWriterEdges.endArray();		
-		 outEdges.append(");");
-		 outEdges.newLine();
-		 outEdges.flush();
-
-		 
-		
-		
-		 
-	
-		} 
-		catch (IOException e) {
+		try {
+			outNodes.flush();
+			outNodes.close();
+			outEdges.flush();
+			outEdges.close();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}	
+	}
+	
+	public void writeJSON (){		
+	maxLevel = getMaxLevel(doc);
+
+	 
+	 doc.getSDocumentGraph().sortSTokenByText();	  		 
+	 EList <SToken> sTokens = doc.getSDocumentGraph().getSTokens();
+	 
+
+	//create node array
+	jsonWriterNodes.array();
+	// write tokens
+	 for (SToken token : sTokens){			
+		 writeJsonNode(token, maxLevel);
+	 }
+	
+	 //create edge array
+	 jsonWriterEdges.array();
+	 
+	 // traverse the document tree in order to write remained nodes and edges
+	 doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, 
+			 												TRAV_MODE_READ_NODES, this);		
+	 //close node array		 
+	 jsonWriterNodes.endArray();			   
 		
-		
+	//close edge array
+	 jsonWriterEdges.endArray();		
+			
 	}
 	
 	
-	private void writeJSONObject (SNode node, long levelValue){
-		 try {
+	private void writeJsonNode (SNode node, long levelValue)
+	{
+		 try 
+		 {
+			
+		 String idValue = node.getSElementPath().fragment();
+		 String idLabel = "id=" + idValue;	
+		 String allLabels = idLabel;
 			 
 		 jsonWriterNodes.object();
-		 jsonWriterNodes.key(id);
-		 String idValue = node.getSElementPath().fragment();
+		 jsonWriterNodes.key(id);		 
 		 jsonWriterNodes.value(idValue);
 		 jsonWriterNodes.key(label);
-		 String allLabels = "";
+		 
 	
 		   EList<SAnnotation> sAnnotations = node.getSAnnotations();
-		   if (sAnnotations.size() > 0){
-			
+		   if (sAnnotations.size() > 0)
+		   {		
+			   allLabels += "\n";
 			   
-			   for (SAnnotation annotation : sAnnotations) {
+			   for (SAnnotation annotation : sAnnotations) 
+			   {
 				   allLabels += (annotation.getSName() + "=" + annotation.getSValue().toString());
 				
-				   if (sAnnotations.indexOf(annotation) < sAnnotations.size()-1) {
-					   allLabels+= newline;								   
-				   }
+				   if (sAnnotations.indexOf(annotation) < sAnnotations.size()-1)  allLabels+= newline;								   
 			   }
 		   }
 		   
-		   if (node instanceof SToken){
+		   if (node instanceof SToken)
+		   {
 			   String text = doc.getSDocumentGraph().getSText(node);
-				  if (text != null && !text.isEmpty()){
+				  if (text != null && !text.isEmpty())
+				  {
 					  allLabels+= newline;			
 					  allLabels += doc.getSDocumentGraph().getSText(node);
 				  }
 		   } 
 		  
-		   String idLabel = "id=" + idValue;
-		  		   
-		   if (allLabels.isEmpty()){
-			   allLabels = idLabel;
-		   }
-		   else{
-			   allLabels = idLabel + " \n" + allLabels;
-		   }
 		   				
 		 jsonWriterNodes.value(allLabels);	
-		 if (node instanceof SToken){
+		 if (node instanceof SToken)
+		 {
 			 jsonWriterNodes.key(color);
 			 jsonWriterNodes.value(tokColorValue);
 			 jsonWriterNodes.key(x);
@@ -528,12 +518,15 @@ public MyVisJsTest (){
 		 	 jsonWriterNodes.key(level);
 			 jsonWriterNodes.value(levelValue);
 			 
-		if (node instanceof SSpan){
-			if (nGroupsId == 3){
+		if (node instanceof SSpan)
+		{
+			if (nGroupsId == 3)
+			{
 				 jsonWriterNodes.key(group);
 				 jsonWriterNodes.value("1");
 			}
-			else if (nGroupsId == 1){
+			else if (nGroupsId == 1)
+			{
 				jsonWriterNodes.key(group);
 				jsonWriterNodes.value("0");
 			}
@@ -541,8 +534,10 @@ public MyVisJsTest (){
 			
 		}
 		
-		if (node instanceof SStructure){
-			if (nGroupsId == 3 || nGroupsId == 2){
+		else if (node instanceof SStructure)
+		{
+			if (nGroupsId == 3 || nGroupsId == 2)
+			{
 				jsonWriterNodes.key(group);
 				jsonWriterNodes.value("0");
 			}
@@ -552,20 +547,93 @@ public MyVisJsTest (){
 		 
 		 jsonWriterNodes.endObject();		
 
-		out.append(newline);
-		out.flush();
-	} catch (IOException e) {
+		outNodes.newLine();
+	//	outNodes.flush();
+	} catch (IOException e) 
+		 {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+		 }
+}
+		 
+	private void writeJsonEdge (SNode fromNode, SNode toNode)
+	{
+		  try 
+		  {
+		  jsonWriterEdges.object();
+		  jsonWriterEdges.key("from");
+		  jsonWriterEdges.value(fromNode.getSElementPath().fragment());
+		  jsonWriterEdges.key("to");
+		  jsonWriterEdges.value(toNode.getSElementPath().fragment());
+		  jsonWriterEdges.endObject();
+		  
+		  outEdges.newLine();
+			} catch (IOException e) 
+		  {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+	}
+	
+	private void writeOptions(){
+		
+		try {
+			outOptions.write("{\n"
+					+ "nodes:{\n"
+					+ "shadow: true,\n"
+					+ "shape: \"box\"\n"
+					+"},\n"
+					+"edges: {\n"
+					+"smooth: true,\n"
+					+"arrows: {\n"
+					+"to: {\n"
+					+"enabled: true\n"
+					+"}\n"
+					+"}\n"
+					+"},\n"
+					+"layout: {\n"
+					+"hierarchical:{\n"
+					+"direction: directionInput.value\n"
+					+"}\n"
+					+"},\n"
+					+"physics: {\n"
+					+"hierarchicalRepulsion: {\n"
+					+"centralGravity: 0.05,\n"
+					+"springLength: 0,\n"
+					+"springConstant: 0.02,\n"
+					+"nodeDistance: 170,\n"
+					+"damping: 0.04\n"
+					+"},\n"
+					+"maxVelocity: 27,\n"
+					+"solver: 'hierarchicalRepulsion',\n"
+					+"timestep: 0.481\n"
+					+"}\n"
+					+"}\n");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 		
 		
+	
+	
+	private long getMaxLevel(SDocument doc)
+	{
+		maxLevel = getMaxHighOfSDocGraph(doc) + 1;
+		EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
+		 if (sSpans != null && sSpans.size() != 0) 
+		 {
+			 maxLevel++;			 
+		 }
+		 return maxLevel;
 	}
 	
 	
 	 //traversing the graph in depth first top down mode beginning with its roots
-	private  long getMaxHighOfSDocGraph(SDocument doc){
-		 doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAV_MODE_CALC_LEVEL, this);		
+	private  long getMaxHighOfSDocGraph(SDocument doc)
+	{
+		doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAV_MODE_CALC_LEVEL, this);		
 		return maxHigh;
 		
 	}
@@ -574,16 +642,17 @@ public MyVisJsTest (){
 	
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation,
-														SNode fromNode, long order) {
+														SNode fromNode, long order) 
+	{
 		
-		if (sRelation!= null){
-			
-			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST){
-				
-				if (traversalId.equals(TRAV_MODE_CALC_LEVEL)){
+		if (sRelation!= null)
+		{			
+			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
+			{				
+				if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
+				{
 				currHigh++;
 				if (maxHigh < currHigh) maxHigh = currHigh;
-			//	System.out.println(currNode +  "  currLevel: " + currHigh + " maxh: " + maxHigh);
 				}					
 			}		
 		}	
@@ -593,87 +662,69 @@ public MyVisJsTest (){
 	
 	@Override
 	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
-			SNode fromNode, long order) {		
+			SNode fromNode, long order) 
+	{		
 		
-		if (edge!= null){			
-			
-			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST){
-				
-				if (traversalId.equals(TRAV_MODE_CALC_LEVEL)){
+		if (edge!= null)
+		{		
+			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
+			{				
+				if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
+				{
 				currHigh--;		
 				}
 			
-				if (traversalId.equals(TRAV_MODE_READ_NODES)){
-			//		System.out.println(fromNode + " --> " +edge + "-->"+currNode);
-				  if (currNode instanceof SToken) {
-					  currHighFromToken = 1;	
-					  
+				else if (traversalId.equals(TRAV_MODE_READ_NODES))
+				{
+				  if (currNode instanceof SToken) 
+				  {
+					  currHighFromToken = 1;						  
 					  // write SSpan-Nodes					  
-					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode))){						  
-						  
-						  writeJSONObject(fromNode, maxLevel - currHighFromToken);
-						
-						readRoots.add(fromNode);					
+					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode)))
+					  {				  
+						  writeJsonNode(fromNode, maxLevel - currHighFromToken);						
+					      readRoots.add(fromNode);					
 						  	
 					  }
 					
 				  }
-				  else {
-					  
+				  else 
+				  {					  
 					  currHighFromToken++;				  
 					  
-					  
-					  if (currNode instanceof SStructure){
+					  if (currNode instanceof SStructure)
+					  {						 
+						  writeJsonNode(currNode, maxLevel - currHighFromToken);						 
 						 
-						  writeJSONObject(currNode, maxLevel - currHighFromToken);
-						 
-						 
-						 if (roots.contains(fromNode) && !readRoots.contains(fromNode)){
-							 writeJSONObject(fromNode, maxLevel - currHighFromToken - 1);							 
+						 if (roots.contains(fromNode) && !readRoots.contains(fromNode))
+						 {
+							 writeJsonNode(fromNode, maxLevel - currHighFromToken - 1);							 
 							 readRoots.add(fromNode);
-						 }
-						  	
-					  }
+						 }						  	
+					  }				  
 					  
-					  
-					  }
+					}
 					 
 			
-				  if (!readRelations.contains(edge)){
-					  
-					  jsonWriterEdges.object();
-					  jsonWriterEdges.key("from");
-					  jsonWriterEdges.value(fromNode.getSElementPath().fragment());
-					  jsonWriterEdges.key("to");
-					  jsonWriterEdges.value(currNode.getSElementPath().fragment());
-					  jsonWriterEdges.endObject();
-					  try {
-							outEdges.newLine();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					  
+				  if (!readRelations.contains(edge))
+				  {					  
+					  writeJsonEdge(fromNode, currNode);					  
 					  readRelations.add(edge);
-				  }
-				  
-				  
-				
-				
+				  }			
 				  
 				}
-				
-				
 			}			
 		}		
 	}
 
 	@Override
 	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation edge,
-			SNode currNode, long order) {
+			SNode currNode, long order) 
+	{
 		if(edge instanceof SDominanceRelation || edge instanceof SSpanningRelation || edge instanceof SPointingRelation || edge == null)  return true;
 		else return false;
 		
 	}
-
 }
+
+
