@@ -129,8 +129,8 @@ public class SaltUtil {
 
 	// ======================================< keywords for features
 
-	/** Determines the separator between points of time in a {@link STimeline}**/
-	public static final String TIMELINE_SEPARATOR = "#";
+//	/** Determines the separator between points of time in a {@link STimeline}**/
+//	public static final String TIMELINE_SEPARATOR = "#";
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
 	 * qualified name: qname= NAMESPACE {@value #NAMESPACE_SEPERATOR} NAME.

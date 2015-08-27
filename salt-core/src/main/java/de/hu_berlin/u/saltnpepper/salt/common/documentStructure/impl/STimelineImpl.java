@@ -17,19 +17,13 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
-import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements STimeline {
+public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implements STimeline {
 
 	/** {@inheritDoc} **/
 	@Override
@@ -46,46 +40,20 @@ public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements
 		super.setGraph(graph);
 	}
 
-	/** {@inheritDoc} **/
 	@Override
-	public List<String> getPointsOfTime() {
-		List<String> retVal = null;
-		String timelineStr = (String) super.getData();
-		if (timelineStr != null) {
-			String[] timelineStrArr = timelineStr.split(SaltUtil.TIMELINE_SEPARATOR);
-			retVal = Collections.unmodifiableList(Arrays.asList(timelineStrArr));
-		}
-		return (retVal);
+	public void increasePointOfTime() {
+		increasePointOfTime(1);
 	}
-	/** stored the number of points of time **/
-	protected int numPOS= 0;
-	
-	/** {@inheritDoc} **/
+
 	@Override
-	public void addPointOfTime(String pointOfTime) {
-		if (pointOfTime == null) {
-			throw new SaltInsertionException(this, pointOfTime, "Cannot add an empty point of time. ");
-		}
-		String timeline = (String) super.getData();
-		if (timeline == null) {
-			String pot = null;
-			if (pointOfTime.isEmpty()) {
-				pot = "0";
-			} else {
-				pot = pointOfTime;
-			}
-			timeline = pot;
+	public void increasePointOfTime(Integer additionalPOS) {
+		Integer pos = getData();
+		if (pos == null) {
+			pos = additionalPOS;
 		} else {
-			String pot = null;
-			if (pointOfTime.isEmpty()) {
-				pot = getPointsOfTime().size() + "";
-			} else {
-				pot = pointOfTime;
-			}
-			timeline = timeline + SaltUtil.TIMELINE_SEPARATOR + pot;
+			pos = pos + additionalPOS;
 		}
-		numPOS++;
-		super.setData(timeline);
+		setData(pos);
 	}
 
 	@Override
@@ -93,16 +61,16 @@ public class STimelineImpl extends SSequentialDSImpl<String, Integer> implements
 		if (getData() != null) {
 			return (0);
 		} else {
-			return null;
+			return (-1);
 		}
 	}
 
 	@Override
 	public Integer getEnd() {
 		if (getData() != null) {
-			return (numPOS);
+			return (getData());
 		} else {
-			return null;
+			return (-1);
 		}
 	}
 } // STimelineImpl

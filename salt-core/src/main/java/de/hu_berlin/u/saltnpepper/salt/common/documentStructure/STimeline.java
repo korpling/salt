@@ -19,7 +19,23 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
 import java.util.List;
 
-public interface STimeline extends SSequentialDS<String, Integer>, SDocumentGraphObject {
-	public List<String> getPointsOfTime();
-	public void addPointOfTime(String sPointOfTime);
+public interface STimeline extends SSequentialDS<Integer, Integer>, SDocumentGraphObject {
+	// public List<String> getPointsOfTime();
+	// public void addPointOfTime(String sPointOfTime);
+
+	/**
+	 * Increases the number of points of time by one. The points of time are
+	 * stored as a single number determining the number of points of time. The
+	 * maximal number of points of time can be retrieved by calling
+	 * {@link #getEnd()}.
+	 */
+	public void increasePointOfTime();
+
+	/**
+	 * Increases the number of points of time by the passed number. The points
+	 * of time are stored as a single number determining the number of points of
+	 * time. The maximal number of points of time can be retrieved by calling
+	 * {@link #getEnd()}.
+	 */
+	public void increasePointOfTime(Integer additionalPOS);
 } // STimeline

@@ -17,8 +17,12 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
+import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
 
 public abstract class SSequentialDSTest<D, P> {
@@ -50,4 +54,11 @@ public abstract class SSequentialDSTest<D, P> {
 	 */
 	@Test
 	public abstract void testGetEnd();
+	
+	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
+	@Test
+	public void testGetGraph(){
+		getFixture().setGraph(SaltFactory.createSDocumentGraph());
+		assertTrue(getFixture().getGraph() instanceof SDocumentGraph);
+	}
 } // SSequentialDSTest

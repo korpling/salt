@@ -76,9 +76,9 @@ public class SimpleTokenizer {
 	 */
 	public List<SToken> tokenize(STextualDS sTextualDS, Integer startPos, Integer endPos, Character... separator) {
 		List<SToken> retVal = null;
-		if (sTextualDS == null)
+		if (sTextualDS == null){
 			throw new SaltTokenizerException("Cannot tokenize an empty 'SSTextualDS' object.");
-
+		}
 		if (this.getsDocumentGraph() == null) {
 			if (sTextualDS.getGraph() == null) {
 				throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
