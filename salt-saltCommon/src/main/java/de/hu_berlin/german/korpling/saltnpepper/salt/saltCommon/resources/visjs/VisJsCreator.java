@@ -1,4 +1,4 @@
-package de.hu_berlin.german.korpling.saltnpepper.salt.visjs;
+package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.visjs;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +10,6 @@ import java.io.OutputStreamWriter;
 import java.util.HashSet;
 
 import org.eclipse.emf.common.util.EList;
-import org.junit.Test;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
@@ -28,6 +27,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHand
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.visjs.*;
 
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -40,15 +40,14 @@ import org.json.*;
 import org.eclipse.emf.common.util.URI;
 
 
-
-
-
-public class MyVisJsTest implements SGraphTraverseHandler{
-		
+public class VisJsCreator implements SGraphTraverseHandler{
+	
+	private final URI uri;	
 	private  int currHigh;
 	private  int maxHigh;
 	private  long maxLevel;
 	private  int currHighFromToken;
+
 	
 	private  SDocument doc;
 	private  XMLOutputFactory outputFactory;
@@ -63,7 +62,8 @@ public class MyVisJsTest implements SGraphTraverseHandler{
 	
 	
 	private  long bufferSize;
-	
+	//TODO change path
+	private final String outputFilePath = "../hierarchicalLayoutUserdefined.html";	
 	
 
 	private static final String TRAV_MODE_CALC_LEVEL = "calcLevel";
@@ -129,128 +129,68 @@ public class MyVisJsTest implements SGraphTraverseHandler{
     
     private final Filter filter;
     
- 
+  
+    public VisJsCreator(URI uri){
+  	  this(uri, null);
+    }
 	
+    public VisJsCreator (URI uri, Filter filter){
+    	this.uri = uri;
+    	
+    	this.doc= SaltFactory.eINSTANCE.createSDocument();	
+    	// Test-Corpus
+    	// SampleGenerator.createSDocumentStructure(doc);	
+    	
+    	doc.loadSDocumentGraph(uri);
+    	roots = doc.getSDocumentGraph().getSRoots();	
+    	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
+    	if (sSpans != null && (sSpans.size() > 0)){
+    		nGroupsId += 1;
+    	}	
+    	EList<SStructure>  sStructures = doc.getSDocumentGraph().getSStructures();
+    	
+    	if (sStructures != null && (sStructures.size() > 0)){
+    		nGroupsId += 2;
+    	}
+    	
+    	try {
+    		this.os = new FileOutputStream(new File (outputFilePath));
+    		} catch (FileNotFoundException e1) {
+    		// TODO Auto-generated catch block
+    		e1.printStackTrace();
+    	}	
+    	readRoots = new HashSet <SNode>();
+    	readRelations = new HashSet <SRelation>();
+    	
+    	this.outputFactory = XMLOutputFactory.newInstance();
+    	try {
+    		this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
+    	} catch (XMLStreamException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    	
+    	
+    	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
+    	System.out.println("nEdges: " + nEdges);
+    	
+    	bufferSize = doc.getSDocumentGraph().getNumOfEdges() * jsonEdgeStrSize;	
+    	this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
+    	//TODO check the buffer size
+    	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);	
+    	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));		
+    	System.out.println("BufferSize: " + bufferSize);	
+    	this.jsonWriterNodes = new JSONWriter(outNodes);
+    	this.jsonWriterEdges = new JSONWriter(outEdges);
+    	this.filter = filter;
+    	
+    }
+	
+   
 	
 	
 
-/*public MyVisJsTest (Filter filter){	
-	  
-	URI uri = URI.createFileURI("../pcc2_random_sentence/pcc2/match_0.salt");	
-	this.doc= SaltFactory.eINSTANCE.createSDocument();	
-	// Test-Corpus
-	// SampleGenerator.createSDocumentStructure(doc);	
-	
-	doc.loadSDocumentGraph(uri);
-	roots = doc.getSDocumentGraph().getSRoots();	
-	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
-	if (sSpans != null && (sSpans.size() > 0)){
-		nGroupsId += 1;
-	}	
-	EList<SStructure>  sStructures = doc.getSDocumentGraph().getSStructures();
-	
-	if (sStructures != null && (sStructures.size() > 0)){
-		nGroupsId += 2;
-	}
-	
-	try {
-		this.os = new FileOutputStream(new File ("../hierarchicalLayoutUserdefined.html"));
-		} catch (FileNotFoundException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	}	
-	readRoots = new HashSet <SNode>();
-	readRelations = new HashSet <SRelation>();
-	
-	this.outputFactory = XMLOutputFactory.newInstance();
-	try {
-		this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
-	} catch (XMLStreamException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	
-	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
-	System.out.println("nEdges: " + nEdges);
-	
-	bufferSize = doc.getSDocumentGraph().getNumOfEdges() * jsonEdgeStrSize;	
-	this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
-	//TODO check the buffer size
-	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);	
-	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));		
-	System.out.println("BufferSize: " + bufferSize);	
-	this.jsonWriterNodes = new JSONWriter(outNodes);
-	this.jsonWriterEdges = new JSONWriter(outEdges);
-	this.filter = filter;
-	
-	
-	
-
-}*/
-
-/*public MyVisJsTest (){	
-	this(null);
-}*/
-
-public MyVisJsTest (){	
-	  
-	URI uri = URI.createFileURI("../pcc2_random_sentence/pcc2/match_0.salt");	
-	this.doc= SaltFactory.eINSTANCE.createSDocument();	
-	// Test-Corpus
-	// SampleGenerator.createSDocumentStructure(doc);	
-	
-	doc.loadSDocumentGraph(uri);
-	roots = doc.getSDocumentGraph().getSRoots();	
-	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
-	if (sSpans != null && (sSpans.size() > 0)){
-		nGroupsId += 1;
-	}	
-	EList<SStructure>  sStructures = doc.getSDocumentGraph().getSStructures();
-	
-	if (sStructures != null && (sStructures.size() > 0)){
-		nGroupsId += 2;
-	}
-	
-	try {
-		this.os = new FileOutputStream(new File ("../hierarchicalLayoutUserdefined.html"));
-		} catch (FileNotFoundException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	}	
-	readRoots = new HashSet <SNode>();
-	readRelations = new HashSet <SRelation>();
-	
-	this.outputFactory = XMLOutputFactory.newInstance();
-	try {
-		this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
-	} catch (XMLStreamException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	
-	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
-	System.out.println("nEdges: " + nEdges);
-	
-	bufferSize = doc.getSDocumentGraph().getNumOfEdges() * jsonEdgeStrSize;	
-	this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
-	//TODO check the buffer size
-	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);	
-	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));		
-	System.out.println("BufferSize: " + bufferSize);	
-	this.jsonWriterNodes = new JSONWriter(outNodes);
-	this.jsonWriterEdges = new JSONWriter(outEdges);	
-	this.filter = null;
-}
-
-
-	
-
-	
-	
-	@Test
-	public void writeHTML() throws IOException, XMLStreamException{
+public void writeHTML() throws IOException, XMLStreamException{
 
 
 		
@@ -308,7 +248,7 @@ public MyVisJsTest (){
 		
 		outEdges.append("var edges = new vis.DataSet(\n");
 		
-		buildJSON(filter);
+		buildJSON();
 		
 		 outNodes.flush();
 		 outNodes.append(");");
@@ -328,7 +268,7 @@ public MyVisJsTest (){
 					+ "var options = ");
 	
     	 
-    	 bildOptions();
+    	 buildOptions();
 		 outOptions.flush();
 	
 
@@ -471,7 +411,7 @@ public MyVisJsTest (){
 	
 	
 	
-	public void buildJSON (Filter filter){		
+	public void buildJSON (){		
 	maxLevel = getMaxLevel(doc);
 
 	 
@@ -618,7 +558,7 @@ public MyVisJsTest (){
 			}		
 	}
 	
-	private void bildOptions(){
+	public void buildOptions(){
 		
 		try {
 			outOptions.write("{\n"
@@ -779,7 +719,10 @@ public MyVisJsTest (){
 	{
 		return outEdges;
 	}
+	
+	public BufferedWriter getOptions(){
+		return outOptions;
+	}
 
+	
 }
-
-
