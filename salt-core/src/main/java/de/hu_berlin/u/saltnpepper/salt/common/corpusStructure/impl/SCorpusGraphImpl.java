@@ -46,15 +46,14 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 	/**
 	 * Calls the init of super class and expands its initialization for adding
+	 * {@link SaltUtil#IDX_NODETYPE}
 	 * of indexes:
 	 * <ul>
-	 * <li>Initializes index {@link #idx_node_id}</li>
-	 * <li>Initializes index {@link #idx_relation_id}</li>
-	 * <li>Initializes index {@link #idx_layer_id}</li>
-	 * <li>Initializes index {@link #idx_out_relation_id}</li>
-	 * <li>Initializes index {@link #idx_in_relation_id}</li>
+	 * <li>Initializes index {@link SaltUtil#IDX_NODETYPE}</li>
+	 * <li>Initializes index {@link SaltUtil#IDX_RELATIONTYPE}</li>
 	 * </ul>
 	 */
+	@Override
 	protected void init() {
 		super.init();
 
@@ -107,7 +106,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		super.basicAddRelation(relation);
 
 		// map some implementation types to the matching interfaces
-		Class key;
+		Class<?> key;
 		if (relation instanceof SCorpusRelation) {
 			key = SCorpusRelation.class;
 		} else if (relation instanceof SCorpusDocumentRelation) {

@@ -312,7 +312,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SMedialDS> getMediaDSs();
+	List<SMedialDS> getMedialDSs();
 
 	/**
 	 * Returns the value of the '<em><b>SOrder Relations</b></em>' containment

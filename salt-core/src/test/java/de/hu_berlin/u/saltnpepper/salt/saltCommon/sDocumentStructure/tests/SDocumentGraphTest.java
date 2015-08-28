@@ -224,7 +224,7 @@ public class SDocumentGraphTest {
 	public void testGetSAudioDSs() {
 		SMedialDS sAudioDS = SaltFactory.createSMedialDS();
 		getFixture().addNode(sAudioDS);
-		assertTrue(getFixture().getMediaDSs().contains(sAudioDS));
+		assertTrue(getFixture().getMedialDSs().contains(sAudioDS));
 	}
 
 	@Test
