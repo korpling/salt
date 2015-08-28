@@ -17,21 +17,21 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
 
-public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P> {
-
-	protected SSequentialRelation<S, T, P> fixture = null;
-
-	protected void setFixture(SSequentialRelation<S, T, P> fixture) {
-		this.fixture = fixture;
-	}
+public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P> extends SRelationAbstractTest{
 
 	protected SSequentialRelation<S, T, P> getFixture() {
-		return fixture;
+		return (SSequentialRelation<S, T, P>)fixture;
 	}
 
 	/** Tests whether the start value is set and returned correct. **/
@@ -41,4 +41,10 @@ public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, 
 	/** Tests whether the end value is set and returned correct. **/
 	@Test
 	public abstract void testSetGetEnd();
+	
+	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
+	@Test
+	public void testGetGraph(){
+		TestUtils.testSetGetGraph(getFixture());
+	}
 } // SSequentialDSTest

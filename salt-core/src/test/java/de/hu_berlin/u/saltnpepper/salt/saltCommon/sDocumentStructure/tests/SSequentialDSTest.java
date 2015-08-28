@@ -18,23 +18,19 @@
 package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
 
-public abstract class SSequentialDSTest<D, P> {
-
-	protected SSequentialDS<D, P> fixture = null;
-
-	protected void setFixture(SSequentialDS<D, P> fixture) {
-		this.fixture = fixture;
-	}
+public abstract class SSequentialDSTest<D, P> extends SNodeAbstractTest{
 
 	protected SSequentialDS<D, P> getFixture() {
-		return fixture;
+		return (SSequentialDS<D, P>)fixture;
 	}
 
 	/**
@@ -54,11 +50,4 @@ public abstract class SSequentialDSTest<D, P> {
 	 */
 	@Test
 	public abstract void testGetEnd();
-	
-	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
-	@Test
-	public void testGetGraph(){
-		getFixture().setGraph(SaltFactory.createSDocumentGraph());
-		assertTrue(getFixture().getGraph() instanceof SDocumentGraph);
-	}
 } // SSequentialDSTest
