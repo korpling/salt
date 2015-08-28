@@ -173,7 +173,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SSpanningRelation> getSSpanningRelations();
+	List<SSpanningRelation> getSpanningRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SSpans</b></em>' containment reference
@@ -195,7 +195,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SSpan> getSSpans();
+	List<SSpan> getSpans();
 
 	/**
 	 * Returns the value of the '<em><b>SStructures</b></em>' containment
@@ -218,7 +218,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SStructure> getSStructures();
+	List<SStructure> getStructures();
 
 	/**
 	 * Returns the value of the '<em><b>SDominance Relations</b></em>'
@@ -242,7 +242,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SDominanceRelation> getSDominanceRelations();
+	List<SDominanceRelation> getDominanceRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SPointing Relations</b></em>'
@@ -266,7 +266,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true"
 	 * @generated
 	 */
-	List<SPointingRelation> getSPointingRelations();
+	List<SPointingRelation> getPointingRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SAudio DS Relations</b></em>'
@@ -289,7 +289,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SMedialRelation> getSAudioDSRelations();
+	List<SMedialRelation> getMedialRelations();
 
 	/**
 	 * Returns the value of the '<em><b>SAudio Data Sources</b></em>'
@@ -312,7 +312,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SMedialDS> getSAudioDataSources();
+	List<SMedialDS> getMediaDSs();
 
 	/**
 	 * Returns the value of the '<em><b>SOrder Relations</b></em>' containment
@@ -335,7 +335,7 @@ public interface SDocumentGraph extends SGraph {
 	 *        volatile="true" derived="true"
 	 * @generated
 	 */
-	List<SOrderRelation> getSOrderRelations();
+	List<SOrderRelation> getOrderRelations();
 
 	/**
 	 * Creates and returns a '<em><b>SRelation</b></em>' of the type given by
@@ -353,7 +353,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @model
 	 * @generated
 	 */
-	SRelation addSNode(SNode sourceSNode, SNode targetSNode, SALT_TYPE sRelationType);
+	SRelation addNode(SNode sourceSNode, SNode targetSNode, SALT_TYPE sRelationType);
 
 	/**
 	 * Creates and adds a new {@link STextualDS} node object and sets its text

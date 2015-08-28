@@ -479,55 +479,55 @@ public class SDocumentGraphImpl implements SDocumentGraph {
 	}
 
 	@Override
-	public List<SSpanningRelation> getSSpanningRelations() {
+	public List<SSpanningRelation> getSpanningRelations() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SSpan> getSSpans() {
+	public List<SSpan> getSpans() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SStructure> getSStructures() {
+	public List<SStructure> getStructures() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SDominanceRelation> getSDominanceRelations() {
+	public List<SDominanceRelation> getDominanceRelations() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SPointingRelation> getSPointingRelations() {
+	public List<SPointingRelation> getPointingRelations() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SMedialRelation> getSAudioDSRelations() {
+	public List<SMedialRelation> getMedialRelations() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SMedialDS> getSAudioDataSources() {
+	public List<SMedialDS> getMediaDSs() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<SOrderRelation> getSOrderRelations() {
+	public List<SOrderRelation> getOrderRelations() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public SRelation addSNode(SNode sourceSNode, SNode targetSNode, SALT_TYPE sRelationType) {
+	public SRelation addNode(SNode sourceSNode, SNode targetSNode, SALT_TYPE sRelationType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
