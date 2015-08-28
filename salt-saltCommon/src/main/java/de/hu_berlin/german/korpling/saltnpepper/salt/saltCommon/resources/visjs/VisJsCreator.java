@@ -1,10 +1,13 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.visjs;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.HashSet;
@@ -42,7 +45,7 @@ import org.eclipse.emf.common.util.URI;
 
 public class VisJsCreator implements SGraphTraverseHandler{
 	
-	private final URI uri;	
+//	private  URI uri;	
 	private  int currHigh;
 	private  int maxHigh;
 	private  long maxLevel;
@@ -58,13 +61,9 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	private  BufferedWriter outOptions;
 	
 	private  JSONWriter jsonWriterNodes;
-	private  JSONWriter jsonWriterEdges;
-	
-	
+	private  JSONWriter jsonWriterEdges;	
+		
 	private  long bufferSize;
-	//TODO change path
-	private final String outputFilePath = "../hierarchicalLayoutUserdefined.html";	
-	
 
 	private static final String TRAV_MODE_CALC_LEVEL = "calcLevel";
 	private static final String TRAV_MODE_READ_NODES = "readNodes";
@@ -84,15 +83,13 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	private final String level = "level";
 	private final String group = "group";
 	
-//	private String from = "{from: ";
-//	private String to = "to: ";
-	
 	private  int xValue = 0;	
 	private final String tokColorValue = "#CCFF99";
 	//private int groupValue;
 	
 	
 	// HTML output
+	//TODO change resources
 	private  final String visJsSrc = "../../../dist/vis.js";
 	private final String visCss = "../../../dist/vis.css";
 	private final String visJsSrcGA = "../../googleAnalytics.js";
@@ -129,18 +126,25 @@ public class VisJsCreator implements SGraphTraverseHandler{
     
     private final Filter filter;
     
+    private boolean writeNodeImmediately = false;
+    
+    private static final String OUTPUT_FILE = "hierarchicalLayoutUserdefined.html";	
+    private static final String CSS_FOLDER_OUT = "css";
+    private static final String JS_FOLDER_OUT = "js";
+    private static final String CSS_FILE = "vis.min.css";
+    private static final String JS_FILE = "vis.min.js";
+        
+    private static final String RESOURCES_FOLDER = System.getProperty("file.separator") + "visjs"; 
+    													
+    		
+    
   
     public VisJsCreator(URI uri){
   	  this(uri, null);
     }
 	
-    public VisJsCreator (URI uri, Filter filter){
-    	this.uri = uri;
-    	
+    public VisJsCreator (URI uri, Filter filter){  	
     	this.doc= SaltFactory.eINSTANCE.createSDocument();	
-    	// Test-Corpus
-    	// SampleGenerator.createSDocumentStructure(doc);	
-    	
     	doc.loadSDocumentGraph(uri);
     	roots = doc.getSDocumentGraph().getSRoots();	
     	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
@@ -153,45 +157,67 @@ public class VisJsCreator implements SGraphTraverseHandler{
     		nGroupsId += 2;
     	}
     	
-    	try {
-    		this.os = new FileOutputStream(new File (outputFilePath));
-    		} catch (FileNotFoundException e1) {
-    		// TODO Auto-generated catch block
-    		e1.printStackTrace();
-    	}	
     	readRoots = new HashSet <SNode>();
-    	readRelations = new HashSet <SRelation>();
-    	
-    	this.outputFactory = XMLOutputFactory.newInstance();
-    	try {
-    		this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
-    	} catch (XMLStreamException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-    	
-    	
-    	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
-    	System.out.println("nEdges: " + nEdges);
-    	
+    	readRelations = new HashSet <SRelation>();       	
     	bufferSize = doc.getSDocumentGraph().getNumOfEdges() * jsonEdgeStrSize;	
-    	this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
-    	//TODO check the buffer size
-    	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);	
-    	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));		
-    	System.out.println("BufferSize: " + bufferSize);	
-    	this.jsonWriterNodes = new JSONWriter(outNodes);
-    	this.jsonWriterEdges = new JSONWriter(outEdges);
     	this.filter = filter;
     	
     }
+    
+    
+public void setNodeWriter (OutputStream os)
+{
+	this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
+	this.jsonWriterNodes = new JSONWriter(outNodes);
+}
+
+public void setEdgeWriter (OutputStream os)
+{
+	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);	
+	this.jsonWriterEdges = new JSONWriter(outEdges);
+}
+
+public void setOptionsWriter (OutputStream os){
+	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));		
 	
+}
    
 	
 	
 
-public void writeHTML() throws IOException, XMLStreamException{
-
+public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
+	
+		try {
+			File outputFolder = createOutputResources(outputFileUri);	
+			if (outputFolder == null)
+			{
+				//TODO
+			  System.out.println("Output folder could not have been created.");	
+			}
+			 this.os = new FileOutputStream(new File(outputFolder, OUTPUT_FILE));
+		
+			} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+	
+		this.outputFactory = XMLOutputFactory.newInstance();
+		try {
+			this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
+		} catch (XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
+    	//TODO check the buffer size
+    	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);	
+    	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));	
+    	
+    	this.jsonWriterNodes = new JSONWriter(outNodes);
+    	this.jsonWriterEdges = new JSONWriter(outEdges);
+    	
+    	writeNodeImmediately = true;
 
 		
 		writer.writeStartDocument("UTF-8", "1.0");
@@ -406,10 +432,81 @@ public void writeHTML() throws IOException, XMLStreamException{
 		outEdges.close();
 		outNodes.close();
 		
+		writeNodeImmediately = false;
 	  
 	}
+
+  
+	private File createOutputResources(URI outputFileUri){
+		File outputFolder = null;
+
+		try {			
+			outputFolder = new File (outputFileUri.path());
+			outputFolder.mkdir();			
+		  if (!outputFolder.canWrite())
+		  {				//TODO
+				System.out.println("Permission denied.");
+				
+			}
+		  else 
+		  {
+			  File cssFolderOut = new File(outputFolder, CSS_FOLDER_OUT);
+			  cssFolderOut.mkdir();
+			  File jsFolderOut = new File(outputFolder, JS_FOLDER_OUT);
+			  jsFolderOut.mkdir();
+			  
+			  copyResourceFile(CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
+			  copyResourceFile(JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
+			  
+		  }		  
+
+	} catch (NullPointerException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		
+		}			     
+		return outputFolder;
+	}
 	
+	private void copyResourceFile (String inFile, String outputFolder, String outSubFolder, String outFile){
+		try {
+		InputStream inputStream = getClass( ).getResourceAsStream(RESOURCES_FOLDER 
+				  + System.getProperty("file.separator") 
+				  + inFile);		  
+		  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+		  BufferedWriter writer;
 	
+			writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
+					  + System.getProperty("file.separator")
+					  + outSubFolder 
+					  + System.getProperty("file.separator")
+					  + outFile))));
+		
+		  
+		  int bufferSize = 2048;		  
+		  char [] buffer = new char [bufferSize];
+		  int readChars = 0;		  		  
+
+			while ((readChars=reader.read(buffer, 0, bufferSize)) != -1) 
+			  {		
+						writer.write(buffer, 0, readChars);
+			  }	
+			    
+		  	inputStream.close();
+		    reader.close();
+		    writer.flush();
+		    writer.close();     
+		    
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public void buildJSON (){		
 	maxLevel = getMaxLevel(doc);
@@ -506,8 +603,7 @@ public void writeHTML() throws IOException, XMLStreamException{
 				jsonWriterNodes.key(group);
 				jsonWriterNodes.value("0");
 			}
-			// TODO error handling
-			
+			// TODO error handling			
 		}
 		
 		else if (node instanceof SStructure)
@@ -518,15 +614,12 @@ public void writeHTML() throws IOException, XMLStreamException{
 				jsonWriterNodes.value("0");
 			}
 			// TODO error handling
-		}
+		}		 
 		 
-		 
-		 jsonWriterNodes.endObject();		
-
+		jsonWriterNodes.endObject();	
 		outNodes.newLine();	
 		
-		//TODO bei writeHTML schreiben
-		//	outNodes.flush();
+		if(writeNodeImmediately) outNodes.flush();
 		
 		}
 	} catch (IOException e) 

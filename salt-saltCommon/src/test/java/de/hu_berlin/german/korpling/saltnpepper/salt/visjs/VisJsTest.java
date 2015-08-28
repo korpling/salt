@@ -1,10 +1,14 @@
 package de.hu_berlin.german.korpling.saltnpepper.salt.visjs;
 
+import org.eclipse.emf.common.util.EList;
 import org.junit.Test;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
@@ -24,7 +28,21 @@ public class VisJsTest implements SGraphTraverseHandler{
 		System.out.println("getting the overlapped text for a token:\t\t"+ doc.getSDocumentGraph().getSText(doc.getSDocumentGraph().getSTokens().get(0)));
 		System.out.println("getting annotations of a token: \t\t"+doc.getSDocumentGraph().getSTokens().get(0).getSAnnotations());
 		
-		System.out.println("All spans: "+ doc.getSDocumentGraph().getSSpans());
+	//	System.out.println("All spans: "+ doc.getSDocumentGraph().getSSpans());
+		EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
+		
+		for (SSpan sspan : sSpans){
+			System.out.println("id: "+sspan.getSId() + " name: "+sspan.getSName() + "incomingRel: "+sspan.getIncomingSRelations().size() );
+			EList<SAnnotation> sAnnotations =  sspan.getSAnnotations();
+			for (SAnnotation sAnn : sAnnotations ){
+				System.out.println(sAnn.getSName()+" --> "+  sAnn.getSValue().toString());
+			}
+			
+			System.out.println("-------------------------------------------------");
+		}
+		
+		
+		
 		System.out.println("getting the overlapped text for a span:\t\t"+ doc.getSDocumentGraph().getSText(doc.getSDocumentGraph().getSSpans().get(0)));
 		
 		System.out.println("All structures: "+ doc.getSDocumentGraph().getSStructures());
@@ -50,7 +68,10 @@ public class VisJsTest implements SGraphTraverseHandler{
 	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation,
 			SNode fromNode, long order) {
 		if (sRelation!= null){
-			System.out.println(sRelation+"-->"+currNode);
+			if (sRelation instanceof SSpanningRelation){
+				System.out.println(sRelation+"-->" + fromNode + "-->"+currNode);
+			}
+			
 		}
 	}
 
