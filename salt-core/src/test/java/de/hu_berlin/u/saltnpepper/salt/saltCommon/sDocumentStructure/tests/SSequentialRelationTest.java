@@ -41,10 +41,4 @@ public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, 
 	/** Tests whether the end value is set and returned correct. **/
 	@Test
 	public abstract void testSetGetEnd();
-	
-	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
-	@Test
-	public void testGetGraph(){
-		TestUtils.testSetGetGraph(getFixture());
-	}
 } // SSequentialDSTest

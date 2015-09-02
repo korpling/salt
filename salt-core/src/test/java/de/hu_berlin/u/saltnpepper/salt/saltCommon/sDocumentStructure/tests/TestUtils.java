@@ -28,7 +28,14 @@ public class TestUtils {
 			fixture.setGraph(SaltFactory.createSCorpusGraph());
 			fail();
 		}catch (SaltWrongParameterException e){}
-		fixture.setGraph(SaltFactory.createSDocumentGraph());
+		SDocumentGraph graph= SaltFactory.createSDocumentGraph();
+		if (fixture.getSource()!= null){
+			graph.addNode(fixture.getSource());
+		}
+		if (fixture.getTarget()!= null){
+			graph.addNode(fixture.getTarget());
+		}
+		fixture.setGraph(graph);
 		assertTrue(fixture.getGraph() instanceof SDocumentGraph);
 	}
 }

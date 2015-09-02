@@ -92,11 +92,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		// start: create a name if none exists
 		if ((((SRelation) relation).getName() == null) || (((SRelation) relation).getName().isEmpty())) {
 			if (relation instanceof SCorpusRelation) {
-				((SRelation) relation).setName("corpRel" + (this.getCorpusRelations().size() + 1));
+				((SRelation) relation).setName("corpRel" + (getCorpusRelations().size() + 1));
 			} else if (relation instanceof SCorpusDocumentRelation) {
-				((SRelation) relation).setName("corpDocRel" + (this.getCorpusDocumentRelations().size() + 1));
+				((SRelation) relation).setName("corpDocRel" + (getCorpusDocumentRelations().size() + 1));
 			} else {
-				((SRelation) relation).setName("rel" + (this.getRelations().size() + 1));
+				((SRelation) relation).setName("rel" + (getRelations().size() + 1));
 			}
 		}
 		// end: create a name if none exists
@@ -132,11 +132,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		// start: create a name if none exists
 		if ((((SNode) node).getName() == null) || (((SNode) node).getName().isEmpty())) {
 			if (node instanceof SCorpus) {
-				((SNode) node).setName("corp" + (this.getCorpora().size() + 1));
+				((SNode) node).setName("corp" + (getCorpora().size() + 1));
 			} else if (node instanceof SDocument) {
-				((SNode) node).setName("doc" + (this.getDocuments().size() + 1));
+				((SNode) node).setName("doc" + (getDocuments().size() + 1));
 			} else {
-				((SNode) node).setName("node" + (this.getDocuments().size() + 1));
+				((SNode) node).setName("node" + (getDocuments().size() + 1));
 			}
 		}
 		// end: create a name if none exists
@@ -195,7 +195,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public SCorpus getCorpus(Identifier corpusId) {
 		SCorpus retVal = null;
-		SNode node = this.getNode(corpusId.getId());
+		SNode node = getNode(corpusId.getId());
 		if (node instanceof SCorpus)
 			retVal = (SCorpus) node;
 		return retVal;
@@ -205,7 +205,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public SDocument getDocument(Identifier documentId) {
 		SDocument retVal = null;
-		SNode node = this.getNode(documentId.getId());
+		SNode node = getNode(documentId.getId());
 		if (node instanceof SDocument)
 			retVal = (SDocument) node;
 		return retVal;
@@ -223,7 +223,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		if (superCorpus.getId() == null) {
 			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
 		}
-		if (this.getNode(superCorpus.getId()) == null) {
+		if (getNode(superCorpus.getId()) == null) {
 			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
 		}
 
@@ -254,7 +254,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		if (document == null) {
 			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because it is null.");
 		}
-		if (this.getNode(corpus.getId()) == null) {
+		if (getNode(corpus.getId()) == null) {
 			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because the given sCorpus is not already contained in corpus graph.");
 		}
 		String namePart = null;
