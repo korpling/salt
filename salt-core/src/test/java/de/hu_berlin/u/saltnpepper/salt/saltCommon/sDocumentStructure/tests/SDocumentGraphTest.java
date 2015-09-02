@@ -37,11 +37,10 @@ import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
-
 public class SDocumentGraphTest {
 
-	protected SDocumentGraph fixture= null;
-		
+	protected SDocumentGraph fixture = null;
+
 	public SDocumentGraph getFixture() {
 		return fixture;
 	}
@@ -56,18 +55,16 @@ public class SDocumentGraphTest {
 	}
 
 	@Test
-	public void testGetSTextualDSs() 
-	{
-		String[] ids= {"salt:/graph1#text1", "salt:/graph1#text2", "salt:/graph1#text3", "salt:/graph1#text4"};
-		List<STextualDS> textDSs= new ArrayList<STextualDS>();
-		for (String id: ids)
-		{
-			STextualDS textDs= SaltFactory.createSTextualDS();
+	public void testGetSTextualDSs() {
+		String[] ids = { "salt:/graph1#text1", "salt:/graph1#text2", "salt:/graph1#text3", "salt:/graph1#text4" };
+		List<STextualDS> textDSs = new ArrayList<STextualDS>();
+		for (String id : ids) {
+			STextualDS textDs = SaltFactory.createSTextualDS();
 			textDs.setId(id);
 			getFixture().addNode(textDs);
 			textDSs.add(textDs);
-		}	
-		
+		}
+
 		assertTrue(textDSs.containsAll(getFixture().getTextualDSs()));
 		assertTrue(getFixture().getTextualDSs().containsAll(textDSs));
 	}
@@ -75,9 +72,9 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSTextualRelations() {
 		String[] ids = { "salt:/graph1#textRel1", "salt:/graph1#textRel2", "salt:/graph1#textRel3", "salt:/graph1#textRel4" };
-		SToken source= SaltFactory.createSToken();
+		SToken source = SaltFactory.createSToken();
 		getFixture().addNode(source);
-		STextualDS target= SaltFactory.createSTextualDS();
+		STextualDS target = SaltFactory.createSTextualDS();
 		getFixture().addNode(target);
 		List<STextualRelation> rels = new ArrayList<STextualRelation>();
 		for (String id : ids) {
@@ -107,41 +104,39 @@ public class SDocumentGraphTest {
 		assertTrue(getFixture().getTokens().containsAll(toks));
 	}
 
-	
-//	@Test
-//	public void testGetSTimeline() {
-//		STimeline sTimeline = SaltFactory.createSTimeline();
-//		List<String> timeline = new ArrayList<String>();
-//		timeline.add("1.0");
-//		timeline.add("1.1");
-//		timeline.add("1.2");
-//		timeline.add("1.3");
-//		timeline.add("1.4");
-//		for (String point : timeline){
-//			sTimeline.increasePointOfTime();
-//		}
-//		getFixture().setTimeline(sTimeline);
-//		assertNotNull(getFixture().getTimeline());
-//		assertNotNull(getFixture().getTimeline().getEnd());
-//		for (String point1 : timeline) {
-//			boolean hasOpponend = false;
-//			for (String point2 : getFixture().getTimeline().getEnd()) {
-//				if (point1.equals(point2))
-//					hasOpponend = true;
-//			}
-//			assertTrue(hasOpponend);
-//		}
-//		assertTrue(timeline.containsAll(getFixture().getTimeline().getEnd()));
-//		assertTrue(getFixture().getTimeline().getEnd().containsAll(timeline));
-//	}
-
+	// @Test
+	// public void testGetSTimeline() {
+	// STimeline sTimeline = SaltFactory.createSTimeline();
+	// List<String> timeline = new ArrayList<String>();
+	// timeline.add("1.0");
+	// timeline.add("1.1");
+	// timeline.add("1.2");
+	// timeline.add("1.3");
+	// timeline.add("1.4");
+	// for (String point : timeline){
+	// sTimeline.increasePointOfTime();
+	// }
+	// getFixture().setTimeline(sTimeline);
+	// assertNotNull(getFixture().getTimeline());
+	// assertNotNull(getFixture().getTimeline().getEnd());
+	// for (String point1 : timeline) {
+	// boolean hasOpponend = false;
+	// for (String point2 : getFixture().getTimeline().getEnd()) {
+	// if (point1.equals(point2))
+	// hasOpponend = true;
+	// }
+	// assertTrue(hasOpponend);
+	// }
+	// assertTrue(timeline.containsAll(getFixture().getTimeline().getEnd()));
+	// assertTrue(getFixture().getTimeline().getEnd().containsAll(timeline));
+	// }
 
 	@Test
 	public void testGetSTimelineRelations() {
 		List<STimelineRelation> timeRels = new ArrayList<STimelineRelation>();
-		SToken source= SaltFactory.createSToken();
+		SToken source = SaltFactory.createSToken();
 		getFixture().addNode(source);
-		STimeline target= SaltFactory.createSTimeline();
+		STimeline target = SaltFactory.createSTimeline();
 		getFixture().addNode(target);
 		for (int i = 0; i < 10; i++) {
 			STimelineRelation rel = SaltFactory.createSTimelineRelation();
@@ -157,9 +152,9 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSSpanningRelations() {
 		List<SSpanningRelation> spanRels = new ArrayList<SSpanningRelation>();
-		SSpan source= SaltFactory.createSSpan();
+		SSpan source = SaltFactory.createSSpan();
 		getFixture().addNode(source);
-		SToken target= SaltFactory.createSToken();
+		SToken target = SaltFactory.createSToken();
 		getFixture().addNode(target);
 		for (int i = 0; i < 10; i++) {
 			SSpanningRelation rel = SaltFactory.createSSpanningRelation();
@@ -204,9 +199,9 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testGetSDominanceRelations() {
-		SStructure source= SaltFactory.createSStructure();
+		SStructure source = SaltFactory.createSStructure();
 		getFixture().addNode(source);
-		SStructure target= SaltFactory.createSStructure();
+		SStructure target = SaltFactory.createSStructure();
 		getFixture().addNode(target);
 		List<SDominanceRelation> rels = new ArrayList<SDominanceRelation>();
 		for (int i = 0; i < 10; i++) {
@@ -222,9 +217,9 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testGetSPointingRelations() {
-		SStructure source= SaltFactory.createSStructure();
+		SStructure source = SaltFactory.createSStructure();
 		getFixture().addNode(source);
-		SStructure target= SaltFactory.createSStructure();
+		SStructure target = SaltFactory.createSStructure();
 		getFixture().addNode(target);
 		List<SPointingRelation> rels = new ArrayList<SPointingRelation>();
 		for (int i = 0; i < 10; i++) {
@@ -241,9 +236,9 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSMedialRelations() {
 		List<SMedialRelation> sAudioRels = new ArrayList<SMedialRelation>();
-		SToken source= SaltFactory.createSToken();
+		SToken source = SaltFactory.createSToken();
 		getFixture().addNode(source);
-		SMedialDS target= SaltFactory.createSMedialDS();
+		SMedialDS target = SaltFactory.createSMedialDS();
 		getFixture().addNode(target);
 		for (int i = 0; i < 10; i++) {
 			SMedialRelation rel = SaltFactory.createSMedialRelation();
@@ -266,9 +261,9 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSOrderRelations() {
 		List<SOrderRelation> orderRels = new ArrayList<SOrderRelation>();
-		SToken source= SaltFactory.createSToken();
+		SToken source = SaltFactory.createSToken();
 		getFixture().addNode(source);
-		SToken target= SaltFactory.createSToken();
+		SToken target = SaltFactory.createSToken();
 		getFixture().addNode(target);
 		for (int i = 0; i < 10; i++) {
 			SOrderRelation rel = SaltFactory.createSOrderRelation();
