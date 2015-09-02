@@ -136,126 +136,150 @@ public class SDocumentGraphTest {
 //	}
 
 
-//	@Test
-//	public void testGetSTimelineRelations() {
-//		List<STimelineRelation> timeRels = new ArrayList<STimelineRelation>();
-//		for (int i = 0; i < 10; i++) {
-//			STimelineRelation sTimeRel = SaltFactory.createSTimelineRelation();
-//			timeRels.add(sTimeRel);
-//			getFixture().addRelation(sTimeRel);
-//		}
-//		assertTrue(timeRels.containsAll(getFixture().getTimelineRelations()));
-//		assertTrue(getFixture().getTimelineRelations().containsAll(timeRels));
-//	}
-//
-//	@Test
-//	public void testGetSSpanningRelations() {
-//		List<SSpanningRelation> spanRels = new ArrayList<SSpanningRelation>();
-//		for (int i = 0; i < 10; i++) {
-//			SSpanningRelation sSpanRel = SaltFactory.createSSpanningRelation();
-//			spanRels.add(sSpanRel);
-//			getFixture().addRelation(sSpanRel);
-//		}
-//		assertTrue(spanRels.containsAll(getFixture().getSpanningRelations()));
-//		assertTrue(getFixture().getSpanningRelations().containsAll(spanRels));
-//	}
-//
-//	@Test
-//	public void testGetSSpans() {
-//		String[] names = { "salt:/graph1#span1", "salt:/graph1#span2", "salt:/graph1#span3", "salt:/graph1#span4" };
-//		List<SSpan> spans = new ArrayList<SSpan>();
-//		for (String name : names) {
-//			SSpan span = SaltFactory.createSSpan();
-//			span.setName(name);
-//			getFixture().addNode(span);
-//			spans.add(span);
-//		}
-//
-//		assertTrue(spans.containsAll(getFixture().getSpans()));
-//		assertTrue(getFixture().getSpans().containsAll(spans));
-//	}
-//
-//	@Test
-//	public void testGetSStructures() {
-//		String[] names = { "salt:/graph1#structure1", "salt:/graph1#structure2", "salt:/graph1#structure3", "salt:/graph1#structure4" };
-//		List<SStructure> structures = new ArrayList<SStructure>();
-//		for (String name : names) {
-//			SStructure structure = SaltFactory.createSStructure();
-//			structure.setName(name);
-//			getFixture().addNode(structure);
-//			structures.add(structure);
-//		}
-//
-//		assertTrue(structures.containsAll(getFixture().getStructures()));
-//		assertTrue(getFixture().getStructures().containsAll(structures));
-//	}
-//
-//	@Test
-//	public void testGetSDominanceRelations() {
-//		SStructure source= SaltFactory.createSStructure();
-//		getFixture().addNode(source);
-//		SStructure target= SaltFactory.createSStructure();
-//		getFixture().addNode(target);
-//		List<SDominanceRelation> rels = new ArrayList<SDominanceRelation>();
-//		for (int i = 0; i < 10; i++) {
-//			SDominanceRelation rel = SaltFactory.createSDominanceRelation();
-//			rel.setSource(source);
-//			rel.setTarget(target);
-//			rels.add(rel);
-//			getFixture().addRelation(rel);
-//		}
-//		assertTrue(rels.containsAll(getFixture().getDominanceRelations()));
-//		assertTrue(getFixture().getDominanceRelations().containsAll(rels));
-//	}
-//
-//	@Test
-//	public void testGetSPointingRelations() {
-//		SStructure source= SaltFactory.createSStructure();
-//		getFixture().addNode(source);
-//		SStructure target= SaltFactory.createSStructure();
-//		getFixture().addNode(target);
-//		List<SPointingRelation> rels = new ArrayList<SPointingRelation>();
-//		for (int i = 0; i < 10; i++) {
-//			SPointingRelation rel = SaltFactory.createSPointingRelation();
-//			rel.setSource(source);
-//			rel.setTarget(target);
-//			rels.add(rel);
-//			getFixture().addRelation(rel);
-//		}
-//		assertTrue(rels.containsAll(getFixture().getPointingRelations()));
-//		assertTrue(getFixture().getPointingRelations().containsAll(rels));
-//	}
-//
-//	@Test
-//	public void testGetSMedialRelations() {
-//		List<SMedialRelation> sAudioRels = new ArrayList<SMedialRelation>();
-//		for (int i = 0; i < 10; i++) {
-//			SMedialRelation sAudioRel = SaltFactory.createSMedialRelation();
-//			sAudioRels.add(sAudioRel);
-//			getFixture().addRelation(sAudioRel);
-//		}
-//		assertTrue(sAudioRels.containsAll(getFixture().getMedialRelations()));
-//		assertTrue(getFixture().getMedialRelations().containsAll(sAudioRels));
-//	}
-//
-//	@Test
-//	public void testGetSAudioDSs() {
-//		SMedialDS sAudioDS = SaltFactory.createSMedialDS();
-//		getFixture().addNode(sAudioDS);
-//		assertTrue(getFixture().getMedialDSs().contains(sAudioDS));
-//	}
-//
-//	@Test
-//	public void testGetSOrderRelations() {
-//		List<SOrderRelation> orderRels = new ArrayList<SOrderRelation>();
-//		for (int i = 0; i < 10; i++) {
-//			SOrderRelation sOrderRel = SaltFactory.createSOrderRelation();
-//			orderRels.add(sOrderRel);
-//			getFixture().addRelation(sOrderRel);
-//		}
-//		assertTrue(orderRels.containsAll(getFixture().getOrderRelations()));
-//		assertTrue(getFixture().getOrderRelations().containsAll(orderRels));
-//	}
+	@Test
+	public void testGetSTimelineRelations() {
+		List<STimelineRelation> timeRels = new ArrayList<STimelineRelation>();
+		SToken source= SaltFactory.createSToken();
+		getFixture().addNode(source);
+		STimeline target= SaltFactory.createSTimeline();
+		getFixture().addNode(target);
+		for (int i = 0; i < 10; i++) {
+			STimelineRelation rel = SaltFactory.createSTimelineRelation();
+			rel.setSource(source);
+			rel.setTarget(target);
+			timeRels.add(rel);
+			getFixture().addRelation(rel);
+		}
+		assertTrue(timeRels.containsAll(getFixture().getTimelineRelations()));
+		assertTrue(getFixture().getTimelineRelations().containsAll(timeRels));
+	}
+
+	@Test
+	public void testGetSSpanningRelations() {
+		List<SSpanningRelation> spanRels = new ArrayList<SSpanningRelation>();
+		SSpan source= SaltFactory.createSSpan();
+		getFixture().addNode(source);
+		SToken target= SaltFactory.createSToken();
+		getFixture().addNode(target);
+		for (int i = 0; i < 10; i++) {
+			SSpanningRelation rel = SaltFactory.createSSpanningRelation();
+			rel.setSource(source);
+			rel.setTarget(target);
+			spanRels.add(rel);
+			getFixture().addRelation(rel);
+		}
+		assertTrue(spanRels.containsAll(getFixture().getSpanningRelations()));
+		assertTrue(getFixture().getSpanningRelations().containsAll(spanRels));
+	}
+
+	@Test
+	public void testGetSSpans() {
+		String[] names = { "salt:/graph1#span1", "salt:/graph1#span2", "salt:/graph1#span3", "salt:/graph1#span4" };
+		List<SSpan> spans = new ArrayList<SSpan>();
+		for (String name : names) {
+			SSpan span = SaltFactory.createSSpan();
+			span.setName(name);
+			getFixture().addNode(span);
+			spans.add(span);
+		}
+
+		assertTrue(spans.containsAll(getFixture().getSpans()));
+		assertTrue(getFixture().getSpans().containsAll(spans));
+	}
+
+	@Test
+	public void testGetSStructures() {
+		String[] names = { "salt:/graph1#structure1", "salt:/graph1#structure2", "salt:/graph1#structure3", "salt:/graph1#structure4" };
+		List<SStructure> structures = new ArrayList<SStructure>();
+		for (String name : names) {
+			SStructure structure = SaltFactory.createSStructure();
+			structure.setName(name);
+			getFixture().addNode(structure);
+			structures.add(structure);
+		}
+
+		assertTrue(structures.containsAll(getFixture().getStructures()));
+		assertTrue(getFixture().getStructures().containsAll(structures));
+	}
+
+	@Test
+	public void testGetSDominanceRelations() {
+		SStructure source= SaltFactory.createSStructure();
+		getFixture().addNode(source);
+		SStructure target= SaltFactory.createSStructure();
+		getFixture().addNode(target);
+		List<SDominanceRelation> rels = new ArrayList<SDominanceRelation>();
+		for (int i = 0; i < 10; i++) {
+			SDominanceRelation rel = SaltFactory.createSDominanceRelation();
+			rel.setSource(source);
+			rel.setTarget(target);
+			rels.add(rel);
+			getFixture().addRelation(rel);
+		}
+		assertTrue(rels.containsAll(getFixture().getDominanceRelations()));
+		assertTrue(getFixture().getDominanceRelations().containsAll(rels));
+	}
+
+	@Test
+	public void testGetSPointingRelations() {
+		SStructure source= SaltFactory.createSStructure();
+		getFixture().addNode(source);
+		SStructure target= SaltFactory.createSStructure();
+		getFixture().addNode(target);
+		List<SPointingRelation> rels = new ArrayList<SPointingRelation>();
+		for (int i = 0; i < 10; i++) {
+			SPointingRelation rel = SaltFactory.createSPointingRelation();
+			rel.setSource(source);
+			rel.setTarget(target);
+			rels.add(rel);
+			getFixture().addRelation(rel);
+		}
+		assertTrue(rels.containsAll(getFixture().getPointingRelations()));
+		assertTrue(getFixture().getPointingRelations().containsAll(rels));
+	}
+
+	@Test
+	public void testGetSMedialRelations() {
+		List<SMedialRelation> sAudioRels = new ArrayList<SMedialRelation>();
+		SToken source= SaltFactory.createSToken();
+		getFixture().addNode(source);
+		SMedialDS target= SaltFactory.createSMedialDS();
+		getFixture().addNode(target);
+		for (int i = 0; i < 10; i++) {
+			SMedialRelation rel = SaltFactory.createSMedialRelation();
+			rel.setSource(source);
+			rel.setTarget(target);
+			sAudioRels.add(rel);
+			getFixture().addRelation(rel);
+		}
+		assertTrue(sAudioRels.containsAll(getFixture().getMedialRelations()));
+		assertTrue(getFixture().getMedialRelations().containsAll(sAudioRels));
+	}
+
+	@Test
+	public void testGetSMediaDSs() {
+		SMedialDS sAudioDS = SaltFactory.createSMedialDS();
+		getFixture().addNode(sAudioDS);
+		assertTrue(getFixture().getMedialDSs().contains(sAudioDS));
+	}
+
+	@Test
+	public void testGetSOrderRelations() {
+		List<SOrderRelation> orderRels = new ArrayList<SOrderRelation>();
+		SToken source= SaltFactory.createSToken();
+		getFixture().addNode(source);
+		SToken target= SaltFactory.createSToken();
+		getFixture().addNode(target);
+		for (int i = 0; i < 10; i++) {
+			SOrderRelation rel = SaltFactory.createSOrderRelation();
+			rel.setSource(source);
+			rel.setTarget(target);
+			orderRels.add(rel);
+			getFixture().addRelation(rel);
+		}
+		assertTrue(orderRels.containsAll(getFixture().getOrderRelations()));
+		assertTrue(getFixture().getOrderRelations().containsAll(orderRels));
+	}
 //
 //	@Test
 //	public void testAddSNode__SNode_SNode_SALT_TYPE() {

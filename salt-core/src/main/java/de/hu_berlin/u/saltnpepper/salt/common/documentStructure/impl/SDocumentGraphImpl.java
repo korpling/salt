@@ -223,19 +223,15 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/** {@inheritDoc} **/
-	// TODO double-chain
 	@Override
 	public STimeline getTimeline() {
-		// TODO Auto-generated method stub
-		return null;
+		return(getIndexMgr().get(SaltUtil.IDX_NODETYPE, STimeline.class));
 	}
 
-	// TODO double-chain
 	/** {@inheritDoc} **/
 	@Override
 	public void setTimeline(STimeline value) {
-		// TODO Auto-generated method stub
-
+		addNode(value);
 	}
 
 	/** {@inheritDoc} **/
