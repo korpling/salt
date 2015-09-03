@@ -530,7 +530,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDSSequences(SNode node, List<SALT_TYPE> relationTypes);
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, List<SALT_TYPE> relationTypes);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
@@ -545,7 +545,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDSSequences(List<SNode> nodes, List<SALT_TYPE> relationTypes);
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, List<SALT_TYPE> relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is
@@ -637,7 +637,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            type, which shall be used for computing roots
 	 * @return a map of types, with corresponding lists of root nodes
 	 */
-	public Map<String, List<SNode>> getRootsBySRelationSType(SALT_TYPE type);
+	public Map<String, List<SNode>> getRootsByRelationType(SALT_TYPE type);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
@@ -820,5 +820,5 @@ public interface SDocumentGraph extends SGraph {
 	 *            the node for which the text should be retrieved.
 	 * @return the text which is overlapped by the passed node
 	 */
-	public String getSText(SNode sNode);
+	public String getText(SNode sNode);
 } // SDocumentGraph

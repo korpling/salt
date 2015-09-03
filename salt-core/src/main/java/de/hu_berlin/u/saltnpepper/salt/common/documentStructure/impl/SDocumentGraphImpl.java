@@ -1,9 +1,13 @@
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Node;
@@ -36,6 +40,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltElementNotInGraphException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
+import de.hu_berlin.u.saltnpepper.salt.util.DataSourceAccessor;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
@@ -437,15 +442,15 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end) {
-		SToken sTok= SaltFactory.createSToken();
-		DataSourceSequence sequence= new DataSourceSequence<Number>();
+		SToken sTok = SaltFactory.createSToken();
+		DataSourceSequence sequence = new DataSourceSequence<Number>();
 		sequence.setStart(start);
 		sequence.setEnd(end);
 		sequence.setDataSource(sequentialDS);
 		addToken(sTok, sequence);
-		return(sTok);
+		return (sTok);
 	}
-	
+
 	/**
 	 * Connects the given {@link SToken} object to the given
 	 * {@link SSequentialDS} object. If the given {@link SToken} object is not
@@ -586,7 +591,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				sTimeRel.setSource(sTextRel.getSource());
 
 				// start: put STimelineRelation into sTimeRelTable
-				if (sTimeRelTable.get(sTextRel.getTarget()) == null){
+				if (sTimeRelTable.get(sTextRel.getTarget()) == null) {
 					sTimeRelTable.put(sTextRel.getTarget(), new ArrayList<STimelineRelation>());
 				}
 				// TODO not only adding the timeRel, sorting for left and right
@@ -616,143 +621,226 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> getTokensBySequence(DataSourceSequence sequence) {
-//		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
-//		sDatasourceAccessor.setDocumentGraph(this);
-//		return(sDatasourceAccessor.getTokensBySequence(sequence));
-		throw new UnsupportedOperationException();
+		return (DataSourceAccessor.getTokensBySequence(this, sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SSpan> getSpansBySequence(DataSourceSequence sequence) {
-		// TODO Auto-generated method stub
-		return null;
+		return (DataSourceAccessor.getSpanBySequence(this, sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SStructure> getStructuresBySequence(DataSourceSequence sequence) {
-		// TODO Auto-generated method stub
-		return null;
+		return (DataSourceAccessor.getStructureBySequence(this, sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SNode> getNodesBySequence(DataSourceSequence sequence) {
-		// TODO Auto-generated method stub
-		return null;
+		return (DataSourceAccessor.getNodeBySequence(this, sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<DataSourceSequence> getOverlappedDSSequences(SNode node, List<SALT_TYPE> relationTypes) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, List<SALT_TYPE> relationTypes) {
+		return (DataSourceAccessor.getOverlappedDataSourceSequence(this, node, relationTypes));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<DataSourceSequence> getOverlappedDSSequences(List<SNode> sNode, List<SALT_TYPE> relationTypes) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, List<SALT_TYPE> relationTypes) {
+		return (DataSourceAccessor.getOverlappedDataSourceSequence(this, nodes, relationTypes));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public boolean isContinuousByText(List<SNode> subNodeList, List<SNode> fullNodeList) {
-		// TODO Auto-generated method stub
-		return false;
+		return (DataSourceAccessor.isContinuousByText(this, subNodeList, fullNodeList));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public boolean isContinuousByText(List<SNode> subNodeList) {
-		// TODO Auto-generated method stub
-		return false;
+		return (DataSourceAccessor.isContinuousByText(this, subNodeList));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> getSortedSTokenByText(List<SToken> tokens2sort) {
-		// TODO Auto-generated method stub
-		return null;
+		return (DataSourceAccessor.getSortedSTokenByText(this, tokens2sort));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> getSortedTokenByText() {
-		// TODO Auto-generated method stub
-		return null;
+		return (DataSourceAccessor.getSortedSTokenByText(this));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void sortTokenByText() {
-		// TODO Auto-generated method stub
-
+		DataSourceAccessor.sortSTokenByText(this);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SNode> getRootsByRelation(SALT_TYPE type) {
-		// TODO Auto-generated method stub
-		return null;
+		return(DataSourceAccessor.getRootsByRelation(this, type));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public Map<String, List<SNode>> getRootsBySRelationSType(SALT_TYPE type) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, List<SNode>> getRootsByRelationType(SALT_TYPE type) {
+		return(DataSourceAccessor.getRootsByRelationType(this, type));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> tokenize() {
-		// TODO Auto-generated method stub
-		return null;
+		List<SToken> retVal = null;
+		if ((getTextualDSs() != null) && (getTextualDSs().size() > 0)) {
+			Tokenizer tokenizer = createTokenizer();
+			for (STextualDS sTextualDS : getTextualDSs()) {
+				if (sTextualDS != null) {
+					if (retVal == null) {
+						retVal = new ArrayList<>();
+					}
+					retVal.addAll(tokenizer.tokenize(sTextualDS));
+				}
+			}
+		}
+		return (retVal);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public Tokenizer createTokenizer() {
-		// TODO Auto-generated method stub
-		return null;
+		Tokenizer tokenizer = new Tokenizer();
+		tokenizer.setsDocumentGraph(this);
+		return (tokenizer);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public SToken insertTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> texts = new ArrayList<>();
+		texts.add(text);
+		return (insertTokensAt(sTextualDS, posInText, texts, insertSpace).get(0));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> insertTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace) {
-		// TODO Auto-generated method stub
-		return null;
+		EList<SToken> sTokens = new BasicEList<SToken>();
+		HashSet<STextualRelation> newSTextualRelations = new HashSet<STextualRelation>();
+
+		StringBuilder newSTextualDSvalueBuilder = new StringBuilder(sTextualDS.getText().substring(0, posInText));
+
+		int sizeOfnewTexts = newSTextualDSvalueBuilder.length();
+		for (String text : texts) {
+
+			Integer start = newSTextualDSvalueBuilder.length();
+			newSTextualDSvalueBuilder.append(text);
+			Integer end = newSTextualDSvalueBuilder.length();
+			SToken sTok = SaltFactory.createSToken();
+			addNode(sTok);
+			sTokens.add(sTok);
+
+			STextualRelation sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setStart(start);
+			sTextRel.setEnd(end);
+			sTextRel.setSource(sTok);
+			sTextRel.setTarget(sTextualDS);
+			addRelation(sTextRel);
+
+			newSTextualRelations.add(sTextRel);
+
+			if (insertSpace) {
+				newSTextualDSvalueBuilder.append(" ");
+			}
+		}
+
+		sizeOfnewTexts = newSTextualDSvalueBuilder.length() - sizeOfnewTexts;
+
+		newSTextualDSvalueBuilder.append(sTextualDS.getText().substring(posInText));
+
+		sTextualDS.setText(newSTextualDSvalueBuilder.toString());
+
+		for (STextualRelation sTextualRelation : getTextualRelations()) {
+
+			if (!newSTextualRelations.contains(sTextualRelation)) {
+				if (sTextualRelation.getStart() >= posInText) {
+					sTextualRelation.setStart(sTextualRelation.getStart() + sizeOfnewTexts);
+				}
+				if (sTextualRelation.getEnd() > posInText) {
+					sTextualRelation.setEnd(sTextualRelation.getEnd() + sizeOfnewTexts);
+				}
+			}
+		}
+		return (sTokens);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public SRelation createSRelation(SNode sSource, SNode sTarget, SALT_TYPE sRelationType, String sAnnotations) {
-		// TODO Auto-generated method stub
-		return null;
+		if (sSource == null) {
+			throw new SaltParameterException("Cannot create an Srelation, because the passed source node is null.");
+		}
+		if (sTarget == null) {
+			throw new SaltParameterException("Cannot create an Srelation, because the passed target node is null.");
+		}
+		if (sRelationType == null) {
+			throw new SaltParameterException("Cannot create an Srelation, because the type of relation is null.");
+		}
+		SRelation sRel = null;
+		switch (sRelationType) {
+		case SPOINTING_RELATION:
+			sRel = SaltFactory.createSPointingRelation();
+			break;
+		case SSPANNING_RELATION:
+			sRel = SaltFactory.createSSpanningRelation();
+			break;
+		case SDOMINANCE_RELATION:
+			sRel = SaltFactory.createSDominanceRelation();
+			break;
+		case SORDER_RELATION:
+			sRel = SaltFactory.createSOrderRelation();
+			break;
+		default:
+			throw new SaltParameterException("Cannot create an SRelation, because the passed type '" + sRelationType + "' is not supported for this method.");
+		}
+		try {
+			sRel.setSource(sSource);
+			sRel.setTarget(sTarget);
+		} catch (Exception e) {
+			throw new SaltParameterException("Cannot create an SRelation for the passed type '" + sRelationType + "', because of a nested exception. It might be, that the passed type is not compatible to the types of passed sSource '" + sSource.getClass() + "' or sTarget node '" + sTarget.getClass() + "'.");
+		}
+		addRelation(sRel);
+		sRel.createAnnotations(sAnnotations);
+		return (sRel);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> getOverlappedTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes) {
-		// TODO Auto-generated method stub
-		return null;
+		return (DataSourceAccessor.getOverlappedSTokens(this, overlappingNode, overlappingRelationTypes));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public String getSText(SNode sNode) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getText(SNode sNode) {
+		if (sNode == null) {
+			return null;
+		}
+		List<SALT_TYPE> relTypes = new ArrayList<>();
+		relTypes.add(SALT_TYPE.STEXT_OVERLAPPING_RELATION);
+		if (this.getOverlappedDataSourceSequence(sNode, relTypes) == null) {
+			return null;
+		}
+		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, relTypes).get(0);
+		return ((STextualDS) sData.getDataSource()).getText().substring((Integer)sData.getStart(), (Integer)sData.getEnd());
 	}
 
 	@Override

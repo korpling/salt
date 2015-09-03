@@ -18,27 +18,24 @@
 package de.hu_berlin.u.saltnpepper.salt.exceptions;
 
 /**
- * This exception class is thrown, when a wrong parameter was passed to a method
- * in the Salt api.
+ * This exception class is used, in case of a Salt model is not valid respecting
+ * the constraints of Salt.
  * 
  * @author Florian Zipser
  *
  */
 @SuppressWarnings("serial")
-public class SaltParameterException extends SaltException {
-	public SaltParameterException(String parameterName, String methodName, Class<? extends Object> clazz) {
-		this(parameterName, methodName, clazz, null);
+public class SaltInvalidModelException extends SaltException {
+
+	public SaltInvalidModelException() {
+		super();
 	}
 
-	public SaltParameterException(String parameterName, String methodName, Class<? extends Object> clazz, String msg) {
-		super("The method '" + methodName + "' of class '" + clazz.getSimpleName() + "' invokes an exception, because the paased parameter '" + parameterName + "' was not correct. " + (msg != null ? msg : ""));
-	}
-
-	public SaltParameterException(String s) {
+	public SaltInvalidModelException(String s) {
 		super(s);
 	}
 
-	public SaltParameterException(String s, Throwable ex) {
+	public SaltInvalidModelException(String s, Throwable ex) {
 		super(s, ex);
 	}
 }

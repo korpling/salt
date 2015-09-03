@@ -27,7 +27,7 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public abstract class SSequentialDSImpl<D, P> extends SNodeImpl implements SSequentialDS<D, P> {
+public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl implements SSequentialDS<D, P> {
 
 	/** {@inheritDoc} */
 	@Override

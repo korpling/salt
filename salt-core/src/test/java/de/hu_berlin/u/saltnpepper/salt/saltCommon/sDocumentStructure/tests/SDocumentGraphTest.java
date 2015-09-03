@@ -75,7 +75,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSTextualDSs() {
 		String[] ids = { "salt:/graph1#text1", "salt:/graph1#text2", "salt:/graph1#text3", "salt:/graph1#text4" };
-		List<STextualDS> textDSs = new ArrayList<STextualDS>();
+		List<STextualDS> textDSs = new ArrayList<>();
 		for (String id : ids) {
 			STextualDS textDs = SaltFactory.createSTextualDS();
 			textDs.setId(id);
@@ -94,7 +94,7 @@ public class SDocumentGraphTest {
 		getFixture().addNode(source);
 		STextualDS target = SaltFactory.createSTextualDS();
 		getFixture().addNode(target);
-		List<STextualRelation> rels = new ArrayList<STextualRelation>();
+		List<STextualRelation> rels = new ArrayList<>();
 		for (String id : ids) {
 			STextualRelation rel = SaltFactory.createSTextualRelation();
 			rel.setSource(source);
@@ -110,7 +110,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSTokens() {
 		String[] ids = { "salt:/graph1#tok1", "salt:/graph1#tok2", "salt:/graph1#tok3", "salt:/graph1#tok4" };
-		List<SToken> toks = new ArrayList<SToken>();
+		List<SToken> toks = new ArrayList<>();
 		for (String id : ids) {
 			SToken tok = SaltFactory.createSToken();
 			tok.setId(id);
@@ -151,7 +151,7 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testGetSTimelineRelations() {
-		List<STimelineRelation> timeRels = new ArrayList<STimelineRelation>();
+		List<STimelineRelation> timeRels = new ArrayList<>();
 		SToken source = SaltFactory.createSToken();
 		getFixture().addNode(source);
 		STimeline target = SaltFactory.createSTimeline();
@@ -169,7 +169,7 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testGetSSpanningRelations() {
-		List<SSpanningRelation> spanRels = new ArrayList<SSpanningRelation>();
+		List<SSpanningRelation> spanRels = new ArrayList<>();
 		SSpan source = SaltFactory.createSSpan();
 		getFixture().addNode(source);
 		SToken target = SaltFactory.createSToken();
@@ -188,7 +188,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSSpans() {
 		String[] names = { "salt:/graph1#span1", "salt:/graph1#span2", "salt:/graph1#span3", "salt:/graph1#span4" };
-		List<SSpan> spans = new ArrayList<SSpan>();
+		List<SSpan> spans = new ArrayList<>();
 		for (String name : names) {
 			SSpan span = SaltFactory.createSSpan();
 			span.setName(name);
@@ -203,7 +203,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSStructures() {
 		String[] names = { "salt:/graph1#structure1", "salt:/graph1#structure2", "salt:/graph1#structure3", "salt:/graph1#structure4" };
-		List<SStructure> structures = new ArrayList<SStructure>();
+		List<SStructure> structures = new ArrayList<>();
 		for (String name : names) {
 			SStructure structure = SaltFactory.createSStructure();
 			structure.setName(name);
@@ -221,7 +221,7 @@ public class SDocumentGraphTest {
 		getFixture().addNode(source);
 		SStructure target = SaltFactory.createSStructure();
 		getFixture().addNode(target);
-		List<SDominanceRelation> rels = new ArrayList<SDominanceRelation>();
+		List<SDominanceRelation> rels = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			SDominanceRelation rel = SaltFactory.createSDominanceRelation();
 			rel.setSource(source);
@@ -239,7 +239,7 @@ public class SDocumentGraphTest {
 		getFixture().addNode(source);
 		SStructure target = SaltFactory.createSStructure();
 		getFixture().addNode(target);
-		List<SPointingRelation> rels = new ArrayList<SPointingRelation>();
+		List<SPointingRelation> rels = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			SPointingRelation rel = SaltFactory.createSPointingRelation();
 			rel.setSource(source);
@@ -253,7 +253,7 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testGetSMedialRelations() {
-		List<SMedialRelation> sAudioRels = new ArrayList<SMedialRelation>();
+		List<SMedialRelation> sAudioRels = new ArrayList<>();
 		SToken source = SaltFactory.createSToken();
 		getFixture().addNode(source);
 		SMedialDS target = SaltFactory.createSMedialDS();
@@ -278,7 +278,7 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testGetSOrderRelations() {
-		List<SOrderRelation> orderRels = new ArrayList<SOrderRelation>();
+		List<SOrderRelation> orderRels = new ArrayList<>();
 		SToken source = SaltFactory.createSToken();
 		getFixture().addNode(source);
 		SToken target = SaltFactory.createSToken();
@@ -385,7 +385,7 @@ public class SDocumentGraphTest {
 		} catch (Exception e) {
 		}
 
-		sequences = new ArrayList<DataSourceSequence>();
+		sequences = new ArrayList<>();
 		DataSourceSequence sequence = null;
 
 		sequences.add(sequence);
@@ -394,7 +394,7 @@ public class SDocumentGraphTest {
 			fail("empty data-source value");
 		} catch (Exception e) {
 		}
-		sequences = new ArrayList<DataSourceSequence>();
+		sequences = new ArrayList<>();
 		sequence = new DataSourceSequence();
 		sequences.add(sequence);
 		sequence.setDataSource(stext);
@@ -712,24 +712,24 @@ public class SDocumentGraphTest {
 		List<SStructuredNode> overlappedNodes = null;
 		List<SToken> overlappedTokens = null;
 
-		overlappedNodes = new ArrayList<SStructuredNode>();
+		overlappedNodes = new ArrayList<>();
 		overlappedNodes.add(tok1);
 		SStructure struct2 = getFixture().createSStructure(tok1);
 		struct2.setName("struct2");
 
-		overlappedTokens = new ArrayList<SToken>();
+		overlappedTokens = new ArrayList<>();
 		overlappedTokens.add(tok2);
 		overlappedTokens.add(tok3);
 		SSpan span1 = getFixture().createSpan(overlappedTokens);
 		span1.setName("span1");
 
-		overlappedNodes = new ArrayList<SStructuredNode>();
+		overlappedNodes = new ArrayList<>();
 		overlappedNodes.add(struct2);
 		overlappedNodes.add(span1);
 		SStructure struct1 = getFixture().createStructure(overlappedNodes);
 		struct1.setName("struct1");
 
-		overlappedNodes = new ArrayList<SStructuredNode>();
+		overlappedNodes = new ArrayList<>();
 		overlappedNodes.add(span1);
 		overlappedNodes.add(tok5);
 		SStructure struct3 = getFixture().createStructure(overlappedNodes);
@@ -737,24 +737,24 @@ public class SDocumentGraphTest {
 		// end: create sample graph
 
 		DataSourceSequence sequence = null;
-		List<SALT_TYPE> saltTypes = new ArrayList<SALT_TYPE>();
+		List<SALT_TYPE> saltTypes = new ArrayList<>();
 		saltTypes.add(SALT_TYPE.STEXT_OVERLAPPING_RELATION);
-		sequence = getFixture().getOverlappedDSSequences(struct2, saltTypes).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(struct2, saltTypes).get(0);
 		assertNotNull(sequence);
 		assertEquals(0, sequence.getStart());
 		assertEquals(4, sequence.getEnd());
 
-		sequence = getFixture().getOverlappedDSSequences(struct1, saltTypes).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(struct1, saltTypes).get(0);
 		assertNotNull(sequence);
 		assertEquals(0, sequence.getStart());
 		assertEquals(9, sequence.getEnd());
 
-		sequence = getFixture().getOverlappedDSSequences(span1, saltTypes).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(span1, saltTypes).get(0);
 		assertNotNull(sequence);
 		assertEquals(5, sequence.getStart());
 		assertEquals(9, sequence.getEnd());
 
-		sequence = getFixture().getOverlappedDSSequences(struct3, saltTypes).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(struct3, saltTypes).get(0);
 		assertNotNull(sequence);
 		assertEquals(5, sequence.getStart());
 		assertEquals(21, sequence.getEnd());
@@ -768,14 +768,14 @@ public class SDocumentGraphTest {
 	public void testGetOverlappedDSSequences__STextualDS_EList() {
 		STextualDS sTextualDs = SaltFactory.createSTextualDS();
 		getFixture().addNode(sTextualDs);
-		List<SALT_TYPE> relations = new ArrayList<SALT_TYPE>();
+		List<SALT_TYPE> relations = new ArrayList<>();
 		relations.add(SALT_TYPE.STEXT_OVERLAPPING_RELATION);
-		DataSourceSequence sequence = getFixture().getOverlappedDSSequences(sTextualDs, relations).get(0);
+		DataSourceSequence sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, relations).get(0);
 		assertEquals(sTextualDs, sequence.getDataSource());
 
 		sTextualDs.setText("This is a sample text.");
 
-		sequence = getFixture().getOverlappedDSSequences(sTextualDs, relations).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, relations).get(0);
 		assertEquals(sTextualDs, sequence.getDataSource());
 		assertEquals(sTextualDs, sequence.getDataSource());
 		assertEquals(0, sequence.getStart());
@@ -832,15 +832,15 @@ public class SDocumentGraphTest {
 
 		List<SToken> sTokens = null;
 
-		sTokens = new ArrayList<SToken>();
+		sTokens = new ArrayList<>();
 		sTokens.add(tok1);
 		assertTrue(getFixture().isContinuousByText((List<SNode>) ((List<? extends SNode>) sTokens)));
 
-		sTokens = new ArrayList<SToken>();
+		sTokens = new ArrayList<>();
 		sTokens.add(tok2);
 		sTokens.add(tok4);
 		assertFalse(getFixture().isContinuousByText((List<SNode>) ((List<? extends SNode>) sTokens)));
-		sTokens = new ArrayList<SToken>();
+		sTokens = new ArrayList<>();
 		sTokens.add(tok2);
 		sTokens.add(tok4);
 		sTokens.add(tok3);
@@ -848,8 +848,13 @@ public class SDocumentGraphTest {
 	}
 
 	/**
-	 * Tests the graph: span1 span2 / \ / \ tok1 tok2 tok3 tok4
+	 * Tests the graph: 
+	 * <pre>
+	 *    span1      span2 
+	 *     / \       / \ 
+	 *  tok1 tok2  tok3 tok4
 	 * 
+	 * </pre>
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#isContinuousByText(org.eclipse.emf.common.util.EList,
 	 *      org.eclipse.emf.common.util.EList)
 	 */
@@ -893,7 +898,7 @@ public class SDocumentGraphTest {
 		SToken tok3 = getFixture().createToken(dsSequence);
 		tok3.setName("tok3");
 		// end: create sample graph
-		List<SNode> fullList = new ArrayList<SNode>();
+		List<SNode> fullList = new ArrayList<>();
 		fullList.add(tok1);
 		fullList.add(tok2);
 		fullList.add(tok3);
@@ -901,15 +906,15 @@ public class SDocumentGraphTest {
 
 		List<SToken> sTokens = null;
 
-		sTokens = new ArrayList<SToken>();
+		sTokens = new ArrayList<>();
 		sTokens.add(tok1);
 		assertTrue(getFixture().isContinuousByText((List<SNode>) ((List<? extends SNode>) sTokens), fullList));
 
-		sTokens = new ArrayList<SToken>();
+		sTokens = new ArrayList<>();
 		sTokens.add(tok2);
 		sTokens.add(tok4);
 		assertFalse(getFixture().isContinuousByText((List<SNode>) ((List<? extends SNode>) sTokens), fullList));
-		sTokens = new ArrayList<SToken>();
+		sTokens = new ArrayList<>();
 		sTokens.add(tok2);
 		sTokens.add(tok4);
 		sTokens.add(tok3);
@@ -924,7 +929,7 @@ public class SDocumentGraphTest {
 	 */
 	@Test
 	public void testSortSTokenByText() {
-		List<SToken> sTokens = new ArrayList<SToken>();
+		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
 		DataSourceSequence dsSequence = new DataSourceSequence();
 
@@ -1006,7 +1011,7 @@ public class SDocumentGraphTest {
 		tok3.setName("tok3");
 		// end: create sample graph
 
-		List<SToken> sTokens2Sort = new ArrayList<SToken>();
+		List<SToken> sTokens2Sort = new ArrayList<>();
 		sTokens2Sort.add(tok5);
 		sTokens2Sort.add(tok3);
 		sTokens2Sort.add(tok4);
@@ -1027,7 +1032,7 @@ public class SDocumentGraphTest {
 	 */
 	@Test
 	public void testGetSortedSTokenByText() {
-		List<SToken> sTokens = new ArrayList<SToken>();
+		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
 		DataSourceSequence dsSequence = new DataSourceSequence();
 
@@ -1077,7 +1082,7 @@ public class SDocumentGraphTest {
 	 */
 	@Test
 	public void testGetSortedSTokenByText_2() {
-		List<SToken> sTokens = new ArrayList<SToken>();
+		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
 		String text2 = "A sample text.";
 		DataSourceSequence dsSequence = new DataSourceSequence();
@@ -1454,7 +1459,7 @@ public class SDocumentGraphTest {
 
 		List<SNode> roots = null;
 		{// check SSpanningRelation
-			roots = new ArrayList<SNode>();
+			roots = new ArrayList<>();
 			roots.add(span1);
 			roots.add(span2);
 			assertTrue(roots.containsAll(getFixture().getRootsByRelation(SALT_TYPE.SSPANNING_RELATION)));
@@ -1462,14 +1467,14 @@ public class SDocumentGraphTest {
 		}// check SSpanningRelation
 
 		{// check SDominanceRelation
-			roots = new ArrayList<SNode>();
+			roots = new ArrayList<>();
 			roots.add(struct2);
 			assertTrue(roots.containsAll(getFixture().getRootsByRelation(SALT_TYPE.SDOMINANCE_RELATION)));
 			assertTrue(getFixture().getRootsByRelation(SALT_TYPE.SDOMINANCE_RELATION).containsAll(roots));
 		}// check SDominanceRelation
 
 		{// check SPointingRelation
-			roots = new ArrayList<SNode>();
+			roots = new ArrayList<>();
 			roots.add(tok1);
 			roots.add(tok3);
 			assertTrue(roots.containsAll(getFixture().getRootsByRelation(SALT_TYPE.SPOINTING_RELATION)));
@@ -1480,7 +1485,7 @@ public class SDocumentGraphTest {
 	/**
 	 * Checks the method getRootsBySRelationSType(). Just for SPointingRelation
 	 * 
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getRootsBySRelationSType(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SALT_TYPE)
+	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getRootsByRelationType(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SALT_TYPE)
 	 */
 	@Test
 	public void testGetRootsBySRelationSType__SALT_TYPE() {
@@ -1507,12 +1512,12 @@ public class SDocumentGraphTest {
 		rel2.setTarget(node1);
 		getFixture().addRelation(rel2);
 
-		assertTrue(getFixture().getRootsBySRelationSType(SALT_TYPE.SPOINTING_RELATION).containsKey(type1));
-		assertTrue(getFixture().getRootsBySRelationSType(SALT_TYPE.SPOINTING_RELATION).containsKey(type2));
-		assertEquals(1, getFixture().getRootsBySRelationSType(SALT_TYPE.SPOINTING_RELATION).get(type1).size());
-		assertEquals(1, getFixture().getRootsBySRelationSType(SALT_TYPE.SPOINTING_RELATION).get(type2).size());
-		assertTrue(getFixture().getRootsBySRelationSType(SALT_TYPE.SPOINTING_RELATION).get(type1).contains(node1));
-		assertTrue(getFixture().getRootsBySRelationSType(SALT_TYPE.SPOINTING_RELATION).get(type2).contains(node2));
+		assertTrue(getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).containsKey(type1));
+		assertTrue(getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).containsKey(type2));
+		assertEquals(1, getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).get(type1).size());
+		assertEquals(1, getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).get(type2).size());
+		assertTrue(getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).get(type1).contains(node1));
+		assertTrue(getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).get(type2).contains(node2));
 		// checking for SPointingRelation
 	}
 
@@ -1526,31 +1531,31 @@ public class SDocumentGraphTest {
 		SToken tok4 = getFixture().createToken(primaryText, 10, 16);
 		SToken tok5 = getFixture().createToken(primaryText, 16, 17);
 
-		List<SALT_TYPE> relations = new ArrayList<SALT_TYPE>();
+		List<SALT_TYPE> relations = new ArrayList<>();
 		relations.add(SALT_TYPE.STEXT_OVERLAPPING_RELATION);
 		DataSourceSequence sequence = null;
 
-		sequence = getFixture().getOverlappedDSSequences(tok1, relations).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(tok1, relations).get(0);
 		assertEquals(0, sequence.getStart());
 		assertEquals(4, sequence.getEnd());
 		assertEquals(primaryText, sequence.getDataSource());
 
-		sequence = getFixture().getOverlappedDSSequences(tok2, relations).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(tok2, relations).get(0);
 		assertEquals(5, sequence.getStart());
 		assertEquals(7, sequence.getEnd());
 		assertEquals(primaryText, sequence.getDataSource());
 
-		sequence = getFixture().getOverlappedDSSequences(tok3, relations).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(tok3, relations).get(0);
 		assertEquals(8, sequence.getStart());
 		assertEquals(9, sequence.getEnd());
 		assertEquals(primaryText, sequence.getDataSource());
 
-		sequence = getFixture().getOverlappedDSSequences(tok4, relations).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(tok4, relations).get(0);
 		assertEquals(10, sequence.getStart());
 		assertEquals(16, sequence.getEnd());
 		assertEquals(primaryText, sequence.getDataSource());
 
-		sequence = getFixture().getOverlappedDSSequences(tok5, relations).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(tok5, relations).get(0);
 		assertEquals(16, sequence.getStart());
 		assertEquals(17, sequence.getEnd());
 		assertEquals(primaryText, sequence.getDataSource());
@@ -1636,7 +1641,7 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testInsertSTokenAt__STextualDS_Integer_String_Boolean() {
-		List<String> origText = new ArrayList<String>();
+		List<String> origText = new ArrayList<>();
 		origText.add("This");
 		origText.add("is");
 		origText.add("the");
@@ -1680,7 +1685,7 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testInsertSTokensAt__STextualDS_Integer_EList_Boolean() {
-		List<String> origText = new ArrayList<String>();
+		List<String> origText = new ArrayList<>();
 		origText.add("This");
 		origText.add("is");
 		origText.add("the");
@@ -1700,7 +1705,7 @@ public class SDocumentGraphTest {
 
 		sTextualDS.setText(str.toString());
 
-		List<String> text = new ArrayList<String>();
+		List<String> text = new ArrayList<>();
 		text.add("is");
 		text.add("the");
 		text.add("text");
@@ -1778,21 +1783,21 @@ public class SDocumentGraphTest {
 		SToken tok3 = getFixture().createToken(sText, 8, 9);
 		SToken tok4 = getFixture().createToken(sText, 10, 15);
 		SToken tok5 = getFixture().createToken(sText, 16, 20);
-		List<SToken> tokenList = new ArrayList<SToken>();
+		List<SToken> tokenList = new ArrayList<>();
 		tokenList.add(tok1);
 		tokenList.add(tok2);
 		tokenList.add(tok3);
 		SSpan sSpan = fixture.createSpan(tokenList);
 		SRelation pointingRel = getFixture().createSRelation(sSpan, tok4, SALT_TYPE.SPOINTING_RELATION, null);
 
-		List<SStructuredNode> nodeList = new ArrayList<SStructuredNode>();
+		List<SStructuredNode> nodeList = new ArrayList<>();
 		nodeList.add(sSpan);
 		nodeList.add(tok4);
 		nodeList.add(tok5);
 		SStructure sStructure = fixture.createStructure(nodeList);
 
 		// test whether the span overlaps tok1, tok2 and tok3
-		List<SALT_TYPE> typeList = new ArrayList<SALT_TYPE>();
+		List<SALT_TYPE> typeList = new ArrayList<>();
 		typeList.add(SALT_TYPE.SSPANNING_RELATION);
 
 		List<SToken> overlappedTokenList1 = fixture.getOverlappedTokens(sSpan, typeList);
@@ -1800,7 +1805,7 @@ public class SDocumentGraphTest {
 		assertTrue(overlappedTokenList1.containsAll(tokenList));
 		assertFalse(overlappedTokenList1.contains(tok4));
 
-		List<SALT_TYPE> typeList2 = new ArrayList<SALT_TYPE>();
+		List<SALT_TYPE> typeList2 = new ArrayList<>();
 		typeList2.add(SALT_TYPE.SSPANNING_RELATION);
 		typeList2.add(SALT_TYPE.SPOINTING_RELATION);
 		tokenList.add(tok4);
@@ -1808,7 +1813,7 @@ public class SDocumentGraphTest {
 		assertNotNull(overlappedTokenListWithPointing);
 		assertTrue(overlappedTokenListWithPointing.containsAll(tokenList));
 
-		List<SToken> allTokenList = new ArrayList<SToken>();
+		List<SToken> allTokenList = new ArrayList<>();
 		allTokenList.add(tok1);
 		allTokenList.add(tok2);
 		allTokenList.add(tok3);
@@ -1832,11 +1837,11 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSText__SNode() {
 		SDocumentGraph fixGraph = getFixture();
-		assertNull(fixGraph.getSText(null));
+		assertNull(fixGraph.getText(null));
 		String testText = "Is this example more complicated than it appears to be";
 		fixGraph.createTextualDS(testText);
 		fixGraph.tokenize();
-		String sText = fixGraph.getSText(fixGraph.getTokens().get(4));
+		String sText = fixGraph.getText(fixGraph.getTokens().get(4));
 		assertNotNull(sText);
 		assertFalse(sText.isEmpty());
 		assertEquals("complicated", sText);
@@ -1849,12 +1854,12 @@ public class SDocumentGraphTest {
 		fixGraph.createTextualDS(testText);
 		fixGraph.tokenize();
 		/* collect tokens for discontinues span */
-		List<SToken> sTokens = new ArrayList<SToken>();
+		List<SToken> sTokens = new ArrayList<>();
 		sTokens.add(fixGraph.getTokens().get(0));
 		sTokens.add(fixGraph.getTokens().get(1));
 		sTokens.add(fixGraph.getTokens().get(fixGraph.getTokens().size() - 1));
 		/* create discontinues span */
-		String sText = fixGraph.getSText(fixGraph.createSpan(sTokens));
+		String sText = fixGraph.getText(fixGraph.createSpan(sTokens));
 		assertNotNull(sText);
 		assertFalse(sText.isEmpty());
 		assertEquals(testText, sText);
@@ -1865,6 +1870,6 @@ public class SDocumentGraphTest {
 		SDocumentGraph fixGraph = getFixture();
 		SStructure sStructure = SaltFactory.createSStructure();
 		fixGraph.addNode(sStructure);
-		assertNull(fixGraph.getSText(sStructure));
+		assertNull(fixGraph.getText(sStructure));
 	}
 }

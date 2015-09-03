@@ -19,7 +19,7 @@ package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
-public interface SSequentialDS<D, P> extends SNode {
+public interface SSequentialDS<D, P extends Number> extends SNode {
 	public D getData();
 
 	public void setData(D value);

@@ -27,7 +27,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
-public abstract class SSequentialDSTest<D, P> extends SNodeAbstractTest{
+public abstract class SSequentialDSTest<D, P extends Number> extends SNodeAbstractTest{
 
 	protected SSequentialDS<D, P> getFixture() {
 		return (SSequentialDS<D, P>)fixture;
