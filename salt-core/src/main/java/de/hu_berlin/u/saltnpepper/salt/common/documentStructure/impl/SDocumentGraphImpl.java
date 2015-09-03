@@ -1,16 +1,11 @@
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Sets;
-
 import de.hu_berlin.u.saltnpepper.graph.Graph;
-import de.hu_berlin.u.saltnpepper.graph.Identifier;
-import de.hu_berlin.u.saltnpepper.graph.Label;
-import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
@@ -23,6 +18,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
@@ -37,8 +33,9 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltElementNotInGraphException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
@@ -199,16 +196,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public void setDocument(SDocument document){
-		SDocument oldDocument= getDocument(); 
-		if ((oldDocument!= null)&&(oldDocument!= document)){
-			if (oldDocument instanceof SDocumentImpl){
-				((SDocumentImpl)oldDocument).basic_setDocumentGraph(null);
+	public void setDocument(SDocument document) {
+		SDocument oldDocument = getDocument();
+		if ((oldDocument != null) && (oldDocument != document)) {
+			if (oldDocument instanceof SDocumentImpl) {
+				((SDocumentImpl) oldDocument).basic_setDocumentGraph(null);
 			}
 		}
-		if (document!= null){
-			if (document instanceof SDocumentImpl){
-				((SDocumentImpl)document).basic_setDocumentGraph(this);
+		if (document != null) {
+			if (document instanceof SDocumentImpl) {
+				((SDocumentImpl) document).basic_setDocumentGraph(this);
 			}
 		}
 		basic_setDocument(document);
@@ -217,9 +214,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/**
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link SDocument} and {@link SDocumentGraph} object when a document is
-	 * set to avoid an endless invocation. The invocation of methods is implement as
-	 * follows:
-	 *  
+	 * set to avoid an endless invocation. The invocation of methods is
+	 * implement as follows:
+	 * 
 	 * <pre>
 	 * {@link #setSDocument(SDocument)}                      {@link SDocument#setSDocumentGraph(Graph)}
 	 *         ||             \ /                   ||
@@ -227,7 +224,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 *         \/             / \                   \/
 	 * {@link #basicSDocument(SDocument)}            {@link SDocument#basicSetSDocumentGraph(Graph)}
 	 * </pre>
-	 * @param document the container document of this document graph
+	 * 
+	 * @param document
+	 *            the container document of this document graph
 	 */
 	public void basic_setDocument(SDocument document) {
 		SFeature sFeature = getFeature(SaltUtil.FEAT_SDOCUMENT_QNAME);
@@ -375,72 +374,240 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SRelation addNode(SNode sourceSNode, SNode targetSNode, SALT_TYPE sRelationType) {
-		// TODO Auto-generated method stub
-		return null;
+	public SRelation addNode(SNode source, SNode target, SALT_TYPE sRelationType) {
+		if (!getNodes().contains(source)) {
+			throw new SaltElementNotInGraphException(this, source, "Given SNode cannot be used as source node, because it is not contained in the SDocumentGraph");
+		}
+		SRelation retVal = null;
+		switch (sRelationType) {
+		case STEXTUAL_RELATION:
+			retVal = SaltFactory.createSTextualRelation();
+			break;
+		case SPOINTING_RELATION:
+			retVal = SaltFactory.createSPointingRelation();
+			break;
+		case SSPANNING_RELATION:
+			retVal = SaltFactory.createSSpanningRelation();
+			break;
+		case SDOMINANCE_RELATION:
+			retVal = SaltFactory.createSDominanceRelation();
+			break;
+		default:
+			;
+		}
+		if (retVal == null) {
+			throw new SaltParameterException("Improper STYPE_NAME for this method; must be one of STEXTUAL_RELATION, SPOINTING_RELATION, SSPANNING_RELATION and SDOMINANCE_RELATION.");
+		}
+		retVal.setSource(source);
+		retVal.setTarget(target);
+		if (!getNodes().contains(target)) {
+			addNode(target);
+		}
+		addRelation(retVal);
+		return retVal;
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public STextualDS createSTextualDS(String sText) {
-		// TODO Auto-generated method stub
-		return null;
+	public STextualDS createTextualDS(String text) {
+		STextualDS sTextualDS = SaltFactory.createSTextualDS();
+		sTextualDS.setText(text);
+		addNode(sTextualDS);
+		return (sTextualDS);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SToken createSToken(List<DataSourceSequence> sDSSequences) {
-		// TODO Auto-generated method stub
-		return null;
+	public SToken createToken(List<DataSourceSequence> sequences) {
+		if (sequences == null) {
+			throw new SaltParameterException("sDSSequences", "addSToken", this.getClass());
+		}
+		if (sequences.size() > 0) {
+			SToken sToken = SaltFactory.createSToken();
+			this.addNode(sToken);
+			for (DataSourceSequence sequence : sequences) {
+				addToken(sToken, sequence);
+			}
+			return (sToken);
+		} else {
+			return (null);
+		}
+	}
+
+	/**
+	 * Connects the given {@link SToken} object to the given
+	 * {@link SSequentialDS} object. If the given {@link SToken} object is not
+	 * already add to the graph, it will be added.
+	 * 
+	 * @param token
+	 *            token to connect to the {@link SSequentialDS} object
+	 * @param sequence
+	 *            object containing the {@link SSequentialDS} object and the
+	 *            borders, to which the token points to
+	 */
+	private void addToken(SToken token, DataSourceSequence sequence) {
+		if (sequence == null) {
+			throw new SaltParameterException("sDSSequence", "addSToken", this.getClass());
+		}
+		if (sequence.getDataSource() == null) {
+			throw new SaltParameterException("sDSSequences.getSSequentialDS()", "addSToken", this.getClass());
+		}
+		if (sequence.getStart() == -1) {
+			throw new SaltParameterException("sDSSequences.getSStart()", "addSToken", this.getClass());
+		}
+		if (sequence.getEnd() == -1) {
+			throw new SaltParameterException("sDSSequences.getSEnd()", "addSToken", this.getClass());
+		}
+		if ((token.getId() == null) || (getNode(token.getId()) == null)) {
+			addNode(token);
+		}
+
+		SSequentialRelation seqRel = null;
+
+		if (sequence.getDataSource() instanceof STextualDS) {
+			seqRel = SaltFactory.createSTextualRelation();
+			((STextualRelation) seqRel).setTarget((STextualDS) sequence.getDataSource());
+		} else if (sequence.getDataSource() instanceof STimeline) {
+			seqRel = SaltFactory.createSTimelineRelation();
+			((STimelineRelation) seqRel).setTarget((STimeline) sequence.getDataSource());
+		}
+		seqRel.setSource(token);
+		seqRel.setStart(sequence.getStart());
+		seqRel.setEnd(sequence.getEnd());
+		addRelation(seqRel);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SToken createSToken(DataSourceSequence sDSSequence) {
-		// TODO Auto-generated method stub
-		return null;
+	public SToken createToken(DataSourceSequence sDSSequence) {
+		SToken sToken = SaltFactory.createSToken();
+		addNode(sToken);
+		addToken(sToken, sDSSequence);
+		return (sToken);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SSpan createSSpan(SToken sourceSToken) {
-		// TODO Auto-generated method stub
-		return null;
+	public SSpan createSpan(SToken token) {
+		if (token == null) {
+			throw new SaltParameterException("addSSpan", "sourceSToken", this.getClass());
+		}
+		SSpan sSpan = SaltFactory.createSSpan();
+		addNode(sSpan);
+		SSpanningRelation rel = SaltFactory.createSSpanningRelation();
+		rel.setSource(sSpan);
+		rel.setTarget(token);
+		this.addRelation(rel);
+		return (sSpan);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SSpan createSSpan(List<SToken> sTokens) {
-		// TODO Auto-generated method stub
-		return null;
+	public SSpan createSpan(List<SToken> sTokens) {
+		SSpan retVal = null;
+		if (sTokens != null) {
+			for (SToken sToken : sTokens) {
+				if (sToken != null) {
+					if (retVal == null) {
+						retVal = SaltFactory.createSSpan();
+						addNode(retVal);
+					}
+					SSpanningRelation sSpanRel = SaltFactory.createSSpanningRelation();
+					sSpanRel.setSource(retVal);
+					sSpanRel.setTarget(sToken);
+					addRelation(sSpanRel);
+				}
+			}
+		}
+		return (retVal);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public SStructure createSStructure(SStructuredNode sourceSNode) {
-		// TODO Auto-generated method stub
-		return null;
+		if (sourceSNode == null) {
+			throw new SaltParameterException("addSStructure", "sourceSNode", this.getClass());
+		}
+		SStructure sStruct = SaltFactory.createSStructure();
+		addNode(sStruct);
+		SDominanceRelation sDomRel = SaltFactory.createSDominanceRelation();
+		sDomRel.setSource(sStruct);
+		sDomRel.setTarget(sourceSNode);
+		addRelation(sDomRel);
+		return (sStruct);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SStructure createSStructure(List<SStructuredNode> sStructures) {
-		// TODO Auto-generated method stub
-		return null;
+	public SStructure createStructure(List<SStructuredNode> structures) {
+		SStructure retVal = null;
+		if (structures != null) {
+			for (SStructuredNode sStructuredNode : structures) {
+				if (sStructuredNode != null) {
+					if (retVal == null) {
+						retVal = SaltFactory.createSStructure();
+						addNode(retVal);
+					}
+					SDominanceRelation sDomRel = SaltFactory.createSDominanceRelation();
+					sDomRel.setSource(retVal);
+					sDomRel.setTarget(sStructuredNode);
+					addRelation(sDomRel);
+				}
+			}
+		}
+		return (retVal);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public STimeline createSTimeline() {
-		// TODO Auto-generated method stub
-		return null;
+	public STimeline createTimeline() {
+		STimeline retVal = null;
+		if ((getTimeline() == null) || (getTimeline().getEnd() == 0)) {
+			STimeline sTimeline = SaltFactory.createSTimeline();
+			addNode(sTimeline);
+			List<STimelineRelation> sTimeRelList = new ArrayList<>();
+			Map<STextualDS, List<STimelineRelation>> sTimeRelTable = new Hashtable<>();
+			for (STextualRelation sTextRel : getTextualRelations()) {
+				// for each token create a STimeline object
+				STimelineRelation sTimeRel = SaltFactory.createSTimelineRelation();
+				sTimeRel.setTarget(sTimeline);
+				sTimeRel.setSource(sTextRel.getSource());
+
+				// start: put STimelineRelation into sTimeRelTable
+				if (sTimeRelTable.get(sTextRel.getTarget()) == null){
+					sTimeRelTable.put(sTextRel.getTarget(), new ArrayList<STimelineRelation>());
+				}
+				// TODO not only adding the timeRel, sorting for left and right
+				// textual position
+				sTimeRelTable.get(sTextRel.getTarget()).add(sTimeRel);
+				// end: put STimelineRelation into sTimeRelTable
+			}// for each token create a STimeline object
+			for (STextualDS sTextualDS : getTextualDSs()) {
+				sTimeRelList.addAll(sTimeRelTable.get(sTextualDS));
+			}
+			Integer pot = 0;
+			for (STimelineRelation sTimeRelation : sTimeRelList) {
+				sTimeRelation.setStart(pot);
+				pot++;
+				sTimeline.increasePointOfTime();
+				sTimeRelation.setEnd(pot);
+				addRelation(sTimeRelation);
+			}
+			retVal = sTimeline;
+		} else {
+			retVal = getTimeline();
+		}
+
+		return (retVal);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> getTokensBySequence(DataSourceSequence sequence) {
-		// TODO Auto-generated method stub
-		return null;
+//		SDataSourceAccessor sDatasourceAccessor= new SDataSourceAccessor();
+//		sDatasourceAccessor.setDocumentGraph(this);
+//		return(sDatasourceAccessor.getTokensBySequence(sequence));
+		throw new UnsupportedOperationException();
 	}
 
 	/** {@inheritDoc} **/
@@ -550,14 +717,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SToken insertSTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace) {
+	public SToken insertTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace) {
+	public List<SToken> insertTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -571,7 +738,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> getOverlappedSTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes) {
+	public List<SToken> getOverlappedTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -582,7 +749,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

@@ -25,7 +25,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P> extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
+public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number> extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
 
 	/** {@inheritDoc} **/
 	@Override

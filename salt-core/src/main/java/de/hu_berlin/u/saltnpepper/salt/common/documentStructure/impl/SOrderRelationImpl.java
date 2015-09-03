@@ -23,7 +23,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructuredNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
 
 /**
@@ -44,7 +44,7 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltWrongParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}

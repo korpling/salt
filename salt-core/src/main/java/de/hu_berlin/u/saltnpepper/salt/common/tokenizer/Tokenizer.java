@@ -447,7 +447,7 @@ public class Tokenizer {
 						getDocumentGraph().removeNode(overlappedTokens.get(0));
 					} else {
 
-						SSpan span = getDocumentGraph().createSSpan(overlappedTokens);
+						SSpan span = getDocumentGraph().createSpan(overlappedTokens);
 
 						// move all annotations from old token to span
 						for (SAnnotation sAnno : oldToken.getAnnotations()) {

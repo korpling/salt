@@ -22,7 +22,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
 @SuppressWarnings("serial")
 public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STimeline, Integer> implements STimelineRelation {
@@ -36,7 +36,7 @@ public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STime
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltWrongParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}

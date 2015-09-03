@@ -37,13 +37,13 @@ import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
  * The document-structure covers the "real" linguistic data, which means primary
  * data, linguistic structures and annotations on them. The linguistic structure
  * contains the nodes: {@link SSequentialDS}, {@link STextualDS},
- * {@link SMedialDS}, {@link SToken}, {@link SSpan} and
- * {@link SStructure} and the relations: {@link STextualRelation},
- * {@link SMedialRelation}, {@link SSpanningRelation},
- * {@link SDominanceRelation}, {@link SPointingRelation} and
- * {@link SOrderRelation} which we will discuss in the following. All these
- * nodes and relations are contained in a graph, the {@link SDocumentGraph},
- * which is the model element representing the document-structure.
+ * {@link SMedialDS}, {@link SToken}, {@link SSpan} and {@link SStructure} and
+ * the relations: {@link STextualRelation}, {@link SMedialRelation},
+ * {@link SSpanningRelation}, {@link SDominanceRelation},
+ * {@link SPointingRelation} and {@link SOrderRelation} which we will discuss in
+ * the following. All these nodes and relations are contained in a graph, the
+ * {@link SDocumentGraph}, which is the model element representing the
+ * document-structure.
  * 
  * @author florian
  */
@@ -339,58 +339,60 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Creates and returns a '<em><b>SRelation</b></em>' of the type given by
-	 * sRelationType between sourceSNode and targetSNode. Note that the
-	 * sourceSNode is required to be in the SDocumentGraph already and that the
-	 * sRelationType may only be one of STEXTUAL_RELATION, SSPANNING_RELATION,
-	 * SDOMINANCE_RELATION and SPOINTING_RELATION.
+	 * sRelationType between source and target. Note that the source is required
+	 * to be in the SDocumentGraph already and that the elationType may only be
+	 * one of {@link SALT_TYPE#STEXTUAL_RELATION},
+	 * {@link SALT_TYPE#SSPANNING_RELATION},
+	 * {@link SALT_TYPE#SDOMINANCE_RELATION} and
+	 * {@link SALT_TYPE#SPOINTING_RELATION}.
 	 * 
-	 * @param de
-	 *            .hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode
-	 * @param de
-	 *            .hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode
+	 * @param source
+	 *            source node
+	 * @param target
+	 *            target node
 	 * @param SALT_TYPE
-	 * @return de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation
-	 * @model
-	 * @generated
+	 *            type of the relation to be created between source and target
+	 * @return created relation
 	 */
-	SRelation addNode(SNode sourceSNode, SNode targetSNode, SALT_TYPE sRelationType);
+	public SRelation addNode(SNode source, SNode target, SALT_TYPE relationType);
 
 	/**
 	 * Creates and adds a new {@link STextualDS} node object and sets its text
 	 * to the passed one and adds it to the graph.
 	 * 
-	 * @param the
-	 *            text which shall be the primary text and be added to the
+	 * @param text
+	 *            the text which shall be the primary text and be added to the
 	 *            created {@link STextualDS} node
 	 * @return the created {@link STextualDS} node which has been created
-	 * 
-	 * @model
 	 */
-	STextualDS createSTextualDS(String sText);
+	public STextualDS createTextualDS(String text);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
 	 * {@link SToken} object will be connected with the {@link SSequentialDS}
-	 * object given in the passed {@link SDataSourceSequence} object. The
-	 * created relations get the borders also given in the
-	 * {@link SDataSourceSequence} object.
+	 * object given in the passed {@link DataSourceSequence} object. The created
+	 * relations get the borders also given in the {@link DataSourceSequence}
+	 * object.
 	 * 
-	 * @model sDSSequencesMany="true"
-	 * @generated
+	 * @param sequences
+	 *            list of sequences which shall be overlapped by the created
+	 *            token
+	 * @return returns the created token
 	 */
-	SToken createSToken(List<DataSourceSequence> sDSSequences);
+	public SToken createToken(List<DataSourceSequence> sequences);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
 	 * {@link SToken} object will be connected with the {@link SSequentialDS}
-	 * objects given in the passed {@link SDataSourceSequence} object. The
+	 * objects given in the passed {@link DataSourceSequence} object. The
 	 * created relations get the borders also given in the
-	 * {@link SDataSourceSequence} object.
+	 * {@link DataSourceSequence} object.
 	 * 
-	 * @model
-	 * @generated
+	 * @param sequence
+	 *            the sequence which shall be overlapped by the created token
+	 * @return returns the created token
 	 */
-	SToken createSToken(DataSourceSequence sDSSequence);
+	public SToken createToken(DataSourceSequence sequence);
 
 	/**
 	 * Creates a new {@link SSpan} object, adds it to the graph and returns the
@@ -398,14 +400,12 @@ public interface SDocumentGraph extends SGraph {
 	 * object and sets its source to the created {@link SSpan} object and the
 	 * target to the given source node.
 	 * 
-	 * @param sourceSToken
+	 * @param sourceToken
 	 *            source {@link SToken} node to which the
 	 *            {@link SSpanningRelation} relation points to
 	 * @return the created {@link SSpan} node
-	 * @model
-	 * @generated
 	 */
-	SSpan createSSpan(SToken sourceSToken);
+	public SSpan createSpan(SToken sourceToken);
 
 	/**
 	 * Creates a {@link SSpan} object, adds it to the graph and returns the new
@@ -413,14 +413,12 @@ public interface SDocumentGraph extends SGraph {
 	 * and sets their source to the created {@link SSpan} object and the targets
 	 * to the given source nodes.
 	 * 
-	 * @param sourceSToken
+	 * @param sourceTokens
 	 *            source {@link SToken} node to which the
 	 *            {@link SSpanningRelation} relation points to
 	 * @return the created {@link SSpan} node
-	 * @model sTokensMany="true"
-	 * @generated
 	 */
-	SSpan createSSpan(List<SToken> sTokens);
+	public SSpan createSpan(List<SToken> sourceTokens);
 
 	/**
 	 * Creates a new {@link SStructure} object, adds it to the graph and returns
@@ -428,14 +426,12 @@ public interface SDocumentGraph extends SGraph {
 	 * object and sets its source to the created {@link SStructure} object and
 	 * the target to the given source node.
 	 * 
-	 * @param sourceSToken
+	 * @param structure
 	 *            source {@link SStructuredNode} node to which the
 	 *            {@link SDominanceRelation} relation points to
 	 * @return {@link SStructure} node
-	 * @model
-	 * @generated
 	 */
-	SStructure createSStructure(SStructuredNode sourceSNode);
+	public SStructure createSStructure(SStructuredNode structure);
 
 	/**
 	 * Creates a new {@link SStructure} object, adds it to the graph and returns
@@ -443,14 +439,12 @@ public interface SDocumentGraph extends SGraph {
 	 * relations and sets their sources to the created {@link SStructure} object
 	 * and the targets to the given source nodes.
 	 * 
-	 * @param sourceSToken
-	 *            source {@link SStructuredNode} node to which the
+	 * @param structures
+	 *            list of source {@link SStructuredNode} nodes to which the
 	 *            {@link SDominanceRelation} relation points to
 	 * @return {@link SStructure} node
-	 * @model sStructuresMany="true"
-	 * @generated
 	 */
-	SStructure createSStructure(List<SStructuredNode> sStructures);
+	public SStructure createStructure(List<SStructuredNode> structures);
 
 	/**
 	 * Creates an {@link STimeline} object being contained in this
@@ -465,11 +459,11 @@ public interface SDocumentGraph extends SGraph {
 	 * @return returns a new created and automatically filled {@link STimeline}
 	 *         object if no one exists yet
 	 */
-	public STimeline createSTimeline();
+	public STimeline createTimeline();
 
 	/**
 	 * Returns all {@link SToken} objects which refer to the passed
-	 * {@link SDataSourceSequence} object. The passed object determines the
+	 * {@link DataSourceSequence} object. The passed object determines the
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
 	 * and the type of data source by the instance <em>sSequentialDS</em>.
 	 * 
@@ -483,7 +477,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns all {@link SSpan} objects which refer to the passed
-	 * {@link SDataSourceSequence} object. The passed object determines the
+	 * {@link DataSourceSequence} object. The passed object determines the
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
 	 * and the type of data source by the instance <em>sSequentialDS</em>.
 	 * 
@@ -497,7 +491,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns all {@link SStructure} objects which refer to the passed
-	 * {@link SDataSourceSequence} object. The passed object determines the
+	 * {@link DataSourceSequence} object. The passed object determines the
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
 	 * and the type of datasource by the instance <em>sSequentialDS</em>.
 	 * 
@@ -511,7 +505,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns all {@link SNode} objects which refer to the passed
-	 * {@link SDataSourceSequence} object. The passed object determines the
+	 * {@link DataSourceSequence} object. The passed object determines the
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
 	 * and the type of data source by the instance <em>sSequentialDS</em>.
 	 * 
@@ -524,7 +518,7 @@ public interface SDocumentGraph extends SGraph {
 	public List<SNode> getNodesBySequence(DataSourceSequence sequence);
 
 	/**
-	 * Returns the sequences as {@link SDataSourceSequence} which are overlapped
+	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
 	 * by the given {@link SNode} node. Overlapped means, that starting from the
 	 * given {@link SNode} node the {@link SSequentialDS} can reached by
 	 * traversing relations of one of the types contained in the given list of
@@ -534,11 +528,24 @@ public interface SDocumentGraph extends SGraph {
 	 *            node to start from
 	 * @param relationTypes
 	 *            a list of relation types, which are traversed
-	 * @return the overlapped {@link SDataSourceSequence} objects
+	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
 	public List<DataSourceSequence> getOverlappedDSSequences(SNode node, List<SALT_TYPE> relationTypes);
 
-	public List<DataSourceSequence> getOverlappedDSSequences(List<SNode> sNode, List<SALT_TYPE> relationTypes);
+	/**
+	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
+	 * by the given {@link SNode} node. Overlapped means, that starting from the
+	 * given {@link SNode} node the {@link SSequentialDS} can reached by
+	 * traversing relations of one of the types contained in the given list of
+	 * {@link SALT_TYPE}.
+	 * 
+	 * @param nodes
+	 *            a list of nodes to start from
+	 * @param relationTypes
+	 *            a list of relation types, which are traversed
+	 * @return the overlapped {@link DataSourceSequence} objects
+	 */
+	public List<DataSourceSequence> getOverlappedDSSequences(List<SNode> nodes, List<SALT_TYPE> relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is
@@ -652,14 +659,14 @@ public interface SDocumentGraph extends SGraph {
 	 * Tokenizes all {@link STextualDS} object being contained in this
 	 * {@link SDocumentGraph} object. The Tokenization is similar to the
 	 * tokenization made by the TreeTagger tokenizer. This method calls the
-	 * method {@link #createTokenizer()} and initilizes with automatic detected
+	 * method {@link #createTokenizer()} and initializes with automatic detected
 	 * values. The language will be detected automatically for each
 	 * {@link STextualDS} object by use of the {@link TextCategorizer} (see: <a
 	 * href=
 	 * "http://textcat.sourceforge.net/doc/org/knallgrau/utils/textcat/TextCategorizer.html"
 	 * >http://textcat.sourceforge.net/doc/org/knallgrau/utils/textcat/
 	 * TextCategorizer.html</a>). If the language is one of the given ones:
-	 * english, french, italian and german, abbreviations also taken from the
+	 * English, French, Italian and German, abbreviations also taken from the
 	 * Treetagger will be used. To customize these settings use the method
 	 * {@link #createTokenizer()}.
 	 * 
@@ -671,6 +678,8 @@ public interface SDocumentGraph extends SGraph {
 	 * <code>sTextualDS.getSText()</code> an {@link SToken} object is created
 	 * and linked with the {@link STextualDS} object via a new
 	 * {@link STextualRelation} object containing the textual offset.
+	 * 
+	 * @return a list of all created tokens
 	 */
 	public List<SToken> tokenize();
 
@@ -714,7 +723,7 @@ public interface SDocumentGraph extends SGraph {
 	 * This  additional  is    a     text.
 	 * </pre>
 	 * 
-	 * @param sTextualDS
+	 * @param textualDS
 	 *            the {@link STextualDS} object to which the new tokens should
 	 *            be related to. Make sure, that stextualDS is already contained
 	 *            in the {@link SDocumentGraph}
@@ -726,7 +735,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            if true, a blank after each new text is inserted
 	 * @return new created token
 	 */
-	public SToken insertSTokenAt(STextualDS sTextualDS, Integer posInText, String text, Boolean insertSpace);
+	public SToken insertTokenAt(STextualDS textualDS, Integer posInText, String text, Boolean insertSpace);
 
 	/**
 	 * Inserts n tokens (where n is the size of the given list <em>texts</em>)
@@ -748,7 +757,7 @@ public interface SDocumentGraph extends SGraph {
 	 * This  additional  text  is    a     text.
 	 * </pre>
 	 * 
-	 * @param sTextualDS
+	 * @param textualDS
 	 *            the {@link STextualDS} object to which the new tokens should
 	 *            be related to. Make sure, that stextualDS is already contained
 	 *            in the {@link SDocumentGraph}
@@ -759,10 +768,9 @@ public interface SDocumentGraph extends SGraph {
 	 * @param insertSpace
 	 *            if true, a blank after each new text is inserted
 	 */
-	public List<SToken> insertSTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace);
+	public List<SToken> insertTokensAt(STextualDS textualDS, Integer posInText, List<String> texts, Boolean insertSpace);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Creates a {@link SRelation} object, and sets its sSource and sTarget to
 	 * the passed ones. The created {@link SRelation} is of the passed type. If
 	 * annotations are not empty, even {@link SAnnotation} objects will be
@@ -771,21 +779,27 @@ public interface SDocumentGraph extends SGraph {
 	 * where SNS is the namespace of the annotation, SNAME is its name and
 	 * SVALUE is the value of the annotation.
 	 * 
-	 * 
-	 * <!-- end-model-doc -->
-	 * 
-	 * @model
-	 * @generated
+	 * @param source
+	 *            source node
+	 * @param target
+	 *            target node
+	 * @param relationType
+	 *            type of the relation
+	 * @param annotations
+	 *            annotations to be added to the created relation
+	 *            (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+
+	 * @return the created relation
 	 */
-	SRelation createSRelation(SNode sSource, SNode sTarget, SALT_TYPE sRelationType, String sAnnotations);
+	public SRelation createSRelation(SNode source, SNode target, SALT_TYPE relationType, String annotations);
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns all tokens in the graph, which are overlapped by the passed node
+	 * and are reachable via relations having at least one of the passed types.
 	 * 
-	 * @model overlappingRelationTypesMany="true"
-	 * @generated
+	 * @param overlappingNode anchor node, which overlaps the returned tokens
+	 * @param overlappingRelationTypes relation types
 	 */
-	List<SToken> getOverlappedSTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes);
+	public List<SToken> getOverlappedTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes);
 
 	/**
 	 * This method returns the exact text overlapped in the {@link STextualDS}

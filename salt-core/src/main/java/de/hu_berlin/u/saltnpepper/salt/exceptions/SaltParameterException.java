@@ -25,25 +25,25 @@ package de.hu_berlin.u.saltnpepper.salt.exceptions;
  *
  */
 @SuppressWarnings("serial")
-public class SaltWrongParameterException extends SaltException {
+public class SaltParameterException extends SaltException {
 
-	public SaltWrongParameterException() {
+	public SaltParameterException() {
 		super();
 	}
 
-	public SaltWrongParameterException(String parameterName, String methodName, Class<? extends Object> clazz) {
+	public SaltParameterException(String parameterName, String methodName, Class<? extends Object> clazz) {
 		this(parameterName, methodName, clazz, null);
 	}
 
-	public SaltWrongParameterException(String parameterName, String methodName, Class<? extends Object> clazz, String msg) {
+	public SaltParameterException(String parameterName, String methodName, Class<? extends Object> clazz, String msg) {
 		super("The method '" + methodName + "' of class '" + clazz.getSimpleName() + "' invokes an exception, because the paased parameter '" + parameterName + "' was not correct. " + (msg != null ? msg : ""));
 	}
 
-	public SaltWrongParameterException(String s) {
+	public SaltParameterException(String s) {
 		super(s);
 	}
 
-	public SaltWrongParameterException(String s, Throwable ex) {
+	public SaltParameterException(String s, Throwable ex) {
 		super(s, ex);
 	}
 }

@@ -291,262 +291,262 @@ public class SDocumentGraphTest {
 		assertTrue(orderRels.containsAll(getFixture().getOrderRelations()));
 		assertTrue(getFixture().getOrderRelations().containsAll(orderRels));
 	}
-//
-//	@Test
-//	public void testAddSNode__SNode_SNode_SALT_TYPE() {
-//
-//		// test for SPOINTING_RELATION
-//		{
-//			SToken source = SaltFactory.createSToken();
-//			SToken target = SaltFactory.createSToken();
-//			// calling addNode now should throw an
-//			// SaltElementNotInGraphException
-//			try {
-//				getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
-//				fail();
-//			} catch (SaltElementNotInGraphException e) {
-//			}
-//			getFixture().addNode(source);
-//			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
-//			assertTrue(sRelation instanceof SPointingRelation);
-//		}
-//
-//		// test for STEXTUAL_RELATION
-//		{
-//			SToken source = SaltFactory.createSToken();
-//			STextualDS target = SaltFactory.createSTextualDS();
-//			// calling addNode now should throw an
-//			// SaltElementNotInGraphException
-//			try {
-//				getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
-//				fail();
-//			} catch (SaltElementNotInGraphException e) {
-//			}
-//			getFixture().addNode(source);
-//			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
-//			assertTrue(sRelation instanceof STextualRelation);
-//		}
-//
-//		// test for SDOMINANCE_RELATION
-//		{
-//			SStructure source = SaltFactory.createSStructure();
-//			SToken target = SaltFactory.createSToken();
-//			// calling addNode now should throw an
-//			// SaltElementNotInGraphException
-//			try {
-//				getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
-//				fail();
-//			} catch (SaltElementNotInGraphException e) {
-//			}
-//			getFixture().addNode(source);
-//			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
-//			assertTrue(sRelation instanceof SDominanceRelation);
-//		}
-//
-//		// test for SSPANNING_RELATION
-//		{
-//			SSpan source = SaltFactory.createSSpan();
-//			SToken target = SaltFactory.createSToken();
-//			// calling addNode now should throw an
-//			// SaltElementNotInGraphException
-//			try {
-//				getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
-//				fail();
-//			} catch (SaltElementNotInGraphException e) {
-//			}
-//			getFixture().addNode(source);
-//			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
-//			assertTrue(sRelation instanceof SSpanningRelation);
-//		}
-//
-//	}
-//
-//	@Test
-//	public void testCreateSTextualDS__String() {
-//		String sText = "This is a new primary text.";
-//		STextualDS sTextualDS = getFixture().createSTextualDS(sText);
-//		assertNotNull(sTextualDS);
-//		assertEquals(sText, sTextualDS.getText());
-//		assertTrue(getFixture().getTextualDSs().contains(sTextualDS));
-//	}
-//
-//	@Test
-//	public void testCreateSToken__EList() {
-//		String text = "This is a sample text.";
-//		STextualDS stext = getFixture().createSTextualDS(text);
-//
-//		List<DataSourceSequence> sequences = null;
-//
-//		try {
-//			getFixture().createSToken(sequences);
-//			fail("empty param");
-//		} catch (Exception e) {
-//		}
-//
-//		sequences = new ArrayList<DataSourceSequence>();
-//		DataSourceSequence sequence = null;
-//
-//		sequences.add(sequence);
-//		try {
-//			getFixture().createSToken(sequences);
-//			fail("empty data-source value");
-//		} catch (Exception e) {
-//		}
-//		sequences = new ArrayList<DataSourceSequence>();
-//		sequence = new DataSourceSequence();
-//		sequences.add(sequence);
-//		sequence.setDataSource(stext);
-//
-//		try {
-//			getFixture().createSToken(sequences);
-//			fail("empty start value");
-//		} catch (Exception e) {
-//		}
-//		sequence.setStart(0);
-//		try {
-//			getFixture().createSToken(sequences);
-//			fail("empty end value");
-//		} catch (Exception e) {
-//		}
-//		sequence.setEnd(4);
-//
-//		SToken sToken = getFixture().createSToken(sequences);
-//
-//		assertNotNull(sToken);
-//		assertEquals(sToken, getFixture().getNode(sToken.getId()));
-//	}
-//
-//	@Test
-//	public void testCreateSToken__DataSourceSequence() {
-//		String text = "This is a sample text.";
-//		DataSourceSequence sequence = null;
-//		STextualDS stext = getFixture().createSTextualDS(text);
-//
-//		try {
-//			getFixture().createSToken(sequence);
-//			fail("empty data-source value");
-//		} catch (Exception e) {
-//		}
-//		sequence = new DataSourceSequence();
-//		sequence.setDataSource(stext);
-//
-//		try {
-//			getFixture().createSToken(sequence);
-//			fail("empty start value");
-//		} catch (Exception e) {
-//		}
-//		sequence.setStart(0);
-//		try {
-//			getFixture().createSToken(sequence);
-//			fail("empty end value");
-//		} catch (Exception e) {
-//		}
-//		sequence.setEnd(4);
-//
-//		SToken sToken = getFixture().createSToken(sequence);
-//
-//		assertNotNull(sToken);
-//		assertEquals(sToken, getFixture().getNode(sToken.getId()));
-//	}
-//
-//	@Test
-//	public void testCreateSTimeline() {
-//		{// text 1
-//			STextualDS sText1 = SaltFactory.createSTextualDS();
-//			sText1.setText("Hello, text1.");
-//			getFixture().addNode(sText1);
-//			SToken sToken = null;
-//			STextualRelation sTextRel = null;
-//
-//			sToken = SaltFactory.createSToken();
-//			getFixture().addNode(sToken);
-//			sTextRel = SaltFactory.createSTextualRelation();
-//			sTextRel.setTarget(sText1);
-//			sTextRel.setSource(sToken);
-//			sTextRel.setStart(0);
-//			sTextRel.setEnd(5);
-//			getFixture().addRelation(sTextRel);
-//
-//			sToken = SaltFactory.createSToken();
-//			getFixture().addNode(sToken);
-//			sTextRel = SaltFactory.createSTextualRelation();
-//			sTextRel.setTarget(sText1);
-//			sTextRel.setSource(sToken);
-//			sTextRel.setStart(5);
-//			sTextRel.setEnd(6);
-//			getFixture().addRelation(sTextRel);
-//
-//			sToken = SaltFactory.createSToken();
-//			getFixture().addNode(sToken);
-//			sTextRel = SaltFactory.createSTextualRelation();
-//			sTextRel.setTarget(sText1);
-//			sTextRel.setSource(sToken);
-//			sTextRel.setStart(7);
-//			sTextRel.setEnd(12);
-//			getFixture().addRelation(sTextRel);
-//
-//			sToken = SaltFactory.createSToken();
-//			getFixture().addNode(sToken);
-//			sTextRel = SaltFactory.createSTextualRelation();
-//			sTextRel.setTarget(sText1);
-//			sTextRel.setSource(sToken);
-//			sTextRel.setStart(12);
-//			sTextRel.setEnd(13);
-//			getFixture().addRelation(sTextRel);
-//
-//		}
-//
-//		{// text 1
-//			STextualDS sText2 = SaltFactory.createSTextualDS();
-//			sText2.setText("Hello, Text2.");
-//			getFixture().addNode(sText2);
-//			SToken sToken = null;
-//			STextualRelation sTextRel = null;
-//
-//			sToken = SaltFactory.createSToken();
-//			getFixture().addNode(sToken);
-//			sTextRel = SaltFactory.createSTextualRelation();
-//			sTextRel.setTarget(sText2);
-//			sTextRel.setSource(sToken);
-//			sTextRel.setStart(0);
-//			sTextRel.setEnd(5);
-//			getFixture().addRelation(sTextRel);
-//
-//			sToken = SaltFactory.createSToken();
-//			getFixture().addNode(sToken);
-//			sTextRel = SaltFactory.createSTextualRelation();
-//			sTextRel.setTarget(sText2);
-//			sTextRel.setSource(sToken);
-//			sTextRel.setStart(5);
-//			sTextRel.setEnd(6);
-//			getFixture().addRelation(sTextRel);
-//
-//			sToken = SaltFactory.createSToken();
-//			getFixture().addNode(sToken);
-//			sTextRel = SaltFactory.createSTextualRelation();
-//			sTextRel.setTarget(sText2);
-//			sTextRel.setSource(sToken);
-//			sTextRel.setStart(7);
-//			sTextRel.setEnd(12);
-//			getFixture().addRelation(sTextRel);
-//
-//			sToken = SaltFactory.createSToken();
-//			getFixture().addNode(sToken);
-//			sTextRel = SaltFactory.createSTextualRelation();
-//			sTextRel.setTarget(sText2);
-//			sTextRel.setSource(sToken);
-//			sTextRel.setStart(12);
-//			sTextRel.setEnd(13);
-//			getFixture().addRelation(sTextRel);
-//		}
-//
-//		getFixture().createSTimeline();
-//		assertNotNull(getFixture().getTimeline());
-//		assertEquals(8, getFixture().getTimelineRelations().size());
-//
-//		//TODO check whether this is correct since salt 3.0
-//		assertEquals(Integer.valueOf(8), getFixture().getTimeline().getEnd());
-//	}
+
+	@Test
+	public void testAddSNode__SNode_SNode_SALT_TYPE() {
+
+		// test for SPOINTING_RELATION
+		{
+			SToken source = SaltFactory.createSToken();
+			SToken target = SaltFactory.createSToken();
+			// calling addNode now should throw an
+			// SaltElementNotInGraphException
+			try {
+				getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
+				fail();
+			} catch (SaltElementNotInGraphException e) {
+			}
+			getFixture().addNode(source);
+			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
+			assertTrue(sRelation instanceof SPointingRelation);
+		}
+
+		// test for STEXTUAL_RELATION
+		{
+			SToken source = SaltFactory.createSToken();
+			STextualDS target = SaltFactory.createSTextualDS();
+			// calling addNode now should throw an
+			// SaltElementNotInGraphException
+			try {
+				getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
+				fail();
+			} catch (SaltElementNotInGraphException e) {
+			}
+			getFixture().addNode(source);
+			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
+			assertTrue(sRelation instanceof STextualRelation);
+		}
+
+		// test for SDOMINANCE_RELATION
+		{
+			SStructure source = SaltFactory.createSStructure();
+			SToken target = SaltFactory.createSToken();
+			// calling addNode now should throw an
+			// SaltElementNotInGraphException
+			try {
+				getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
+				fail();
+			} catch (SaltElementNotInGraphException e) {
+			}
+			getFixture().addNode(source);
+			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
+			assertTrue(sRelation instanceof SDominanceRelation);
+		}
+
+		// test for SSPANNING_RELATION
+		{
+			SSpan source = SaltFactory.createSSpan();
+			SToken target = SaltFactory.createSToken();
+			// calling addNode now should throw an
+			// SaltElementNotInGraphException
+			try {
+				getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
+				fail();
+			} catch (SaltElementNotInGraphException e) {
+			}
+			getFixture().addNode(source);
+			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
+			assertTrue(sRelation instanceof SSpanningRelation);
+		}
+
+	}
+
+	@Test
+	public void testCreateSTextualDS__String() {
+		String sText = "This is a new primary text.";
+		STextualDS sTextualDS = getFixture().createTextualDS(sText);
+		assertNotNull(sTextualDS);
+		assertEquals(sText, sTextualDS.getText());
+		assertTrue(getFixture().getTextualDSs().contains(sTextualDS));
+	}
+
+	@Test
+	public void testCreateSToken__EList() {
+		String text = "This is a sample text.";
+		STextualDS stext = getFixture().createTextualDS(text);
+
+		List<DataSourceSequence> sequences = null;
+
+		try {
+			getFixture().createToken(sequences);
+			fail("empty param");
+		} catch (Exception e) {
+		}
+
+		sequences = new ArrayList<DataSourceSequence>();
+		DataSourceSequence sequence = null;
+
+		sequences.add(sequence);
+		try {
+			getFixture().createToken(sequences);
+			fail("empty data-source value");
+		} catch (Exception e) {
+		}
+		sequences = new ArrayList<DataSourceSequence>();
+		sequence = new DataSourceSequence();
+		sequences.add(sequence);
+		sequence.setDataSource(stext);
+
+		try {
+			getFixture().createToken(sequences);
+			fail("empty start value");
+		} catch (Exception e) {
+		}
+		sequence.setStart(0);
+		try {
+			getFixture().createToken(sequences);
+			fail("empty end value");
+		} catch (Exception e) {
+		}
+		sequence.setEnd(4);
+
+		SToken sToken = getFixture().createToken(sequences);
+
+		assertNotNull(sToken);
+		assertEquals(sToken, getFixture().getNode(sToken.getId()));
+	}
+
+	@Test
+	public void testCreateSToken__DataSourceSequence() {
+		String text = "This is a sample text.";
+		DataSourceSequence sequence = null;
+		STextualDS stext = getFixture().createTextualDS(text);
+
+		try {
+			getFixture().createToken(sequence);
+			fail("empty data-source value");
+		} catch (Exception e) {
+		}
+		sequence = new DataSourceSequence();
+		sequence.setDataSource(stext);
+
+		try {
+			getFixture().createToken(sequence);
+			fail("empty start value");
+		} catch (Exception e) {
+		}
+		sequence.setStart(0);
+		try {
+			getFixture().createToken(sequence);
+			fail("empty end value");
+		} catch (Exception e) {
+		}
+		sequence.setEnd(4);
+
+		SToken sToken = getFixture().createToken(sequence);
+
+		assertNotNull(sToken);
+		assertEquals(sToken, getFixture().getNode(sToken.getId()));
+	}
+
+	@Test
+	public void testCreateSTimeline() {
+		{// text 1
+			STextualDS sText1 = SaltFactory.createSTextualDS();
+			sText1.setText("Hello, text1.");
+			getFixture().addNode(sText1);
+			SToken sToken = null;
+			STextualRelation sTextRel = null;
+
+			sToken = SaltFactory.createSToken();
+			getFixture().addNode(sToken);
+			sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setTarget(sText1);
+			sTextRel.setSource(sToken);
+			sTextRel.setStart(0);
+			sTextRel.setEnd(5);
+			getFixture().addRelation(sTextRel);
+
+			sToken = SaltFactory.createSToken();
+			getFixture().addNode(sToken);
+			sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setTarget(sText1);
+			sTextRel.setSource(sToken);
+			sTextRel.setStart(5);
+			sTextRel.setEnd(6);
+			getFixture().addRelation(sTextRel);
+
+			sToken = SaltFactory.createSToken();
+			getFixture().addNode(sToken);
+			sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setTarget(sText1);
+			sTextRel.setSource(sToken);
+			sTextRel.setStart(7);
+			sTextRel.setEnd(12);
+			getFixture().addRelation(sTextRel);
+
+			sToken = SaltFactory.createSToken();
+			getFixture().addNode(sToken);
+			sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setTarget(sText1);
+			sTextRel.setSource(sToken);
+			sTextRel.setStart(12);
+			sTextRel.setEnd(13);
+			getFixture().addRelation(sTextRel);
+
+		}
+
+		{// text 1
+			STextualDS sText2 = SaltFactory.createSTextualDS();
+			sText2.setText("Hello, Text2.");
+			getFixture().addNode(sText2);
+			SToken sToken = null;
+			STextualRelation sTextRel = null;
+
+			sToken = SaltFactory.createSToken();
+			getFixture().addNode(sToken);
+			sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setTarget(sText2);
+			sTextRel.setSource(sToken);
+			sTextRel.setStart(0);
+			sTextRel.setEnd(5);
+			getFixture().addRelation(sTextRel);
+
+			sToken = SaltFactory.createSToken();
+			getFixture().addNode(sToken);
+			sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setTarget(sText2);
+			sTextRel.setSource(sToken);
+			sTextRel.setStart(5);
+			sTextRel.setEnd(6);
+			getFixture().addRelation(sTextRel);
+
+			sToken = SaltFactory.createSToken();
+			getFixture().addNode(sToken);
+			sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setTarget(sText2);
+			sTextRel.setSource(sToken);
+			sTextRel.setStart(7);
+			sTextRel.setEnd(12);
+			getFixture().addRelation(sTextRel);
+
+			sToken = SaltFactory.createSToken();
+			getFixture().addNode(sToken);
+			sTextRel = SaltFactory.createSTextualRelation();
+			sTextRel.setTarget(sText2);
+			sTextRel.setSource(sToken);
+			sTextRel.setStart(12);
+			sTextRel.setEnd(13);
+			getFixture().addRelation(sTextRel);
+		}
+
+		getFixture().createTimeline();
+		assertNotNull(getFixture().getTimeline());
+		assertEquals(8, getFixture().getTimelineRelations().size());
+
+		//TODO check whether this is correct since salt 3.0
+		assertEquals(Integer.valueOf(8), getFixture().getTimeline().getEnd());
+	}
 //
 //	/**
 //	 * Tests if tokens are correctly returned to corresponding

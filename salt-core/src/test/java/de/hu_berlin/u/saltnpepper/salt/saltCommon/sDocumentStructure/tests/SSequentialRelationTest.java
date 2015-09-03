@@ -26,9 +26,9 @@ import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
-public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P> extends SRelationAbstractTest{
+public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number> extends SRelationAbstractTest{
 
 	protected SSequentialRelation<S, T, P> getFixture() {
 		return (SSequentialRelation<S, T, P>)fixture;

@@ -17,6 +17,8 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.exceptions;
 
+import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
+import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
@@ -31,15 +33,15 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 @SuppressWarnings("serial")
 public class SaltElementNotInGraphException extends SaltException {
 
-	public SaltElementNotInGraphException() {
-		super();
+	private static String createMsg(SGraph graph, IdentifiableElement element){
+		return("The passed element '"+element.getId()+"' is not contained in the graph '"+graph.getId()+"'. ");
+	}
+	
+	public SaltElementNotInGraphException(SGraph graph, IdentifiableElement element, String s) {
+		this(graph, element, s, null);
 	}
 
-	public SaltElementNotInGraphException(String s) {
-		super(s);
-	}
-
-	public SaltElementNotInGraphException(String s, Throwable ex) {
-		super(s, ex);
+	public SaltElementNotInGraphException(SGraph graph, IdentifiableElement element, String s, Throwable ex) {
+		super(createMsg(graph, element)+s, ex);
 	}
 }

@@ -22,7 +22,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltWrongParameterException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
 
 @SuppressWarnings("serial")
@@ -37,7 +37,7 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltWrongParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}
