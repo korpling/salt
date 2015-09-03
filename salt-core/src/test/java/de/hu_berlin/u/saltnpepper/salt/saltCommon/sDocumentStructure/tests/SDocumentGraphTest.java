@@ -13,6 +13,7 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
@@ -54,6 +55,21 @@ public class SDocumentGraphTest {
 		setFixture(SaltFactory.createSDocumentGraph());
 	}
 
+	@Test
+	public void testSetGetDocument(){
+		assertNull(getFixture().getDocument());
+		SDocument document= SaltFactory.createSDocument();
+		getFixture().setDocument(document);
+		assertNotNull(getFixture().getDocument());
+		assertEquals(document, getFixture().getDocument());
+		
+		//test double chaining
+		assertEquals(getFixture(), document.getDocumentGraph());
+		getFixture().setDocument(null);
+		assertNull(document.getDocumentGraph());
+		assertNull(getFixture().getDocument());
+	}
+	
 	@Test
 	public void testGetSTextualDSs() {
 		String[] ids = { "salt:/graph1#text1", "salt:/graph1#text2", "salt:/graph1#text3", "salt:/graph1#text4" };

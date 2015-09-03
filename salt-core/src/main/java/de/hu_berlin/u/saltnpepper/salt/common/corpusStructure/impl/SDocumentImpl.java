@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SDocumentGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
@@ -29,19 +30,61 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 @SuppressWarnings("serial")
 public class SDocumentImpl extends SNodeImpl implements SDocument {
 
-	/** document structure which is contained in this document */
-	protected SDocumentGraph documentGraph;
-
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getDocumentGraph() {
-		return (documentGraph);
+		SDocumentGraph retVal = null;
+		SFeature sFeature = getFeature(SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME);
+		if (sFeature != null) {
+			retVal = (SDocumentGraph) sFeature.getValue();
+		}
+		return (retVal);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void setDocumentGraph(SDocumentGraph documentGraph) {
-		this.documentGraph = documentGraph;
+		SDocumentGraph oldDocumentGraph = getDocumentGraph();
+		if ((oldDocumentGraph != null) && (oldDocumentGraph != documentGraph)) {
+			if (oldDocumentGraph instanceof SDocumentGraphImpl) {
+				((SDocumentGraphImpl) oldDocumentGraph).basic_setDocument(null);
+			}
+		}
+		if (documentGraph != null) {
+			if (documentGraph instanceof SDocumentGraphImpl) {
+				((SDocumentGraphImpl) documentGraph).basic_setDocument(this);
+			}
+		}
+		basic_setDocumentGraph(documentGraph);
+	}
+
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link SDocument} and {@link SDocumentGraph} object when a document is
+	 * set to avoid an endless invocation. The invocation of methods is
+	 * implement as follows:
+	 * 
+	 * <pre>
+	 * {@link #setSDocument(SDocument)}                      {@link SDocument#setSDocumentGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicSDocument(SDocument)}            {@link SDocument#basicSetSDocumentGraph(Graph)}
+	 * </pre>
+	 * 
+	 * @param document
+	 *            the container document of this document graph
+	 */
+	public void basic_setDocumentGraph(SDocumentGraph documentGraph) {
+		SFeature sFeature = getFeature(SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME);
+		if (sFeature == null) {
+			// create a new sFeature
+			sFeature = SaltFactory.createSFeature();
+			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
+			sFeature.setName(SaltUtil.FEAT_SDOCUMENT_GRAPH);
+			addFeature(sFeature);
+		}
+		sFeature.setValue(documentGraph);
 	}
 
 	/** {@inheritDoc} **/
@@ -52,10 +95,11 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		SFeature sFeature = getFeature(name);
 		if (sFeature != null) {
 			Object obj = sFeature.getValue();
-			if (obj instanceof URI)
+			if (obj instanceof URI) {
 				retVal = (URI) obj;
-			else
+			} else {
 				retVal = URI.createURI(obj.toString());
+			}
 		}
 		return (retVal);
 	}
@@ -104,4 +148,13 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		// removeLabel(SaltUtil.KW_QNAME_SDOCUMENT_GRAPH_LOCATION);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(getClass().getSimpleName());
+		str.append("(");
+		str.append(getId());
+		str.append(")");
+		return (str.toString());
+	}
 } // SDocumentImpl

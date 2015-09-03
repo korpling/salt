@@ -84,6 +84,22 @@ public class SaltUtil {
 	public static final String FEAT_TYPE_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_TYPE;
 
 	/**
+	 * Name for {@link SFeature} to store the {@link SDocumentGraph} in a {@link SDocument} object
+	 */
+	public static final String FEAT_SDOCUMENT_GRAPH = "SDOCUMENT_GRAPH";
+	/**
+	 * Qualified name for {@link SFeature} to store the {@link SDocumentGraph} in a {@link SDocument} object
+	 */
+	public static final String FEAT_SDOCUMENT_GRAPH_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + "SDOCUMENT_GRAPH";
+	/**
+	 * Name for {@link SFeature} to store the {@link SDocument} corresponding to a {@link SDocumentGraph} object
+	 */
+	public static final String FEAT_SDOCUMENT = "SDOCUMENT";
+	/**
+	 * Qualified name for {@link SFeature} to store the {@link SDocument} corresponding to a {@link SDocumentGraph} object
+	 */
+	public static final String FEAT_SDOCUMENT_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + "SDOCUMENT";
+	/**
 	 * Name for {@link SFeature} to store the uri reference of a
 	 * {@link SDocumentGraph} in a {@link SDocument}
 	 */

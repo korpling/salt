@@ -1,12 +1,21 @@
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Sets;
+
+import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.Identifier;
+import de.hu_berlin.u.saltnpepper.graph.Label;
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
+import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SDocumentImpl;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
@@ -24,6 +33,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.common.tokenizer.Tokenizer;
+import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
@@ -177,27 +187,66 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/** {@inheritDoc} **/
-	// TODO double-chain
 	@Override
 	public SDocument getDocument() {
-		// TODO Auto-generated method stub
-		return null;
+		SDocument retVal = null;
+		SFeature sFeature = getFeature(SaltUtil.FEAT_SDOCUMENT_QNAME);
+		if (sFeature != null) {
+			retVal = (SDocument) sFeature.getValue();
+		}
+		return (retVal);
 	}
 
 	/** {@inheritDoc} **/
-	// TODO double-chain
 	@Override
-	public void setDocument(SDocument document) {
-		// TODO Auto-generated method stub
+	public void setDocument(SDocument document){
+		SDocument oldDocument= getDocument(); 
+		if ((oldDocument!= null)&&(oldDocument!= document)){
+			if (oldDocument instanceof SDocumentImpl){
+				((SDocumentImpl)oldDocument).basic_setDocumentGraph(null);
+			}
+		}
+		if (document!= null){
+			if (document instanceof SDocumentImpl){
+				((SDocumentImpl)document).basic_setDocumentGraph(this);
+			}
+		}
+		basic_setDocument(document);
+	}
 
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link SDocument} and {@link SDocumentGraph} object when a document is
+	 * set to avoid an endless invocation. The invocation of methods is implement as
+	 * follows:
+	 *  
+	 * <pre>
+	 * {@link #setSDocument(SDocument)}                      {@link SDocument#setSDocumentGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link #basicSDocument(SDocument)}            {@link SDocument#basicSetSDocumentGraph(Graph)}
+	 * </pre>
+	 * @param document the container document of this document graph
+	 */
+	public void basic_setDocument(SDocument document) {
+		SFeature sFeature = getFeature(SaltUtil.FEAT_SDOCUMENT_QNAME);
+		if (sFeature == null) {
+			// create a new sFeature
+			sFeature = SaltFactory.createSFeature();
+			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
+			sFeature.setName(SaltUtil.FEAT_SDOCUMENT);
+			addFeature(sFeature);
+		}
+		sFeature.setValue(document);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<STextualDS> getTextualDSs() {
-		List<STextualDS> retVal= getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, STextualDS.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<STextualDS> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, STextualDS.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -205,9 +254,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<STextualRelation> getTextualRelations() {
-		List<STextualRelation> retVal= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, STextualRelation.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<STextualRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, STextualRelation.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -215,9 +264,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> getTokens() {
-		List<SToken> retVal= getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SToken.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SToken> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SToken.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -225,7 +274,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public STimeline getTimeline() {
-		return(getIndexMgr().get(SaltUtil.IDX_NODETYPE, STimeline.class));
+		return (getIndexMgr().get(SaltUtil.IDX_NODETYPE, STimeline.class));
 	}
 
 	/** {@inheritDoc} **/
@@ -237,9 +286,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<STimelineRelation> getTimelineRelations() {
-		List<STimelineRelation> retVal= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, STimelineRelation.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<STimelineRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, STimelineRelation.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -247,9 +296,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SSpanningRelation> getSpanningRelations() {
-		List<SSpanningRelation> retVal= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SSpanningRelation.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SSpanningRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SSpanningRelation.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -257,9 +306,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SSpan> getSpans() {
-		List<SSpan> retVal= getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SSpan.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SSpan> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SSpan.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -267,9 +316,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SStructure> getStructures() {
-		List<SStructure> retVal= getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SStructure.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SStructure> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SStructure.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -277,9 +326,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SDominanceRelation> getDominanceRelations() {
-		List<SDominanceRelation> retVal= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SDominanceRelation.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SDominanceRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SDominanceRelation.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -287,9 +336,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SPointingRelation> getPointingRelations() {
-		List<SPointingRelation> retVal= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SPointingRelation.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SPointingRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SPointingRelation.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -297,9 +346,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SMedialRelation> getMedialRelations() {
-		List<SMedialRelation> retVal= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SMedialRelation.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SMedialRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SMedialRelation.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -307,9 +356,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SMedialDS> getMedialDSs() {
-		List<SMedialDS> retVal= getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SMedialDS.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SMedialDS> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SMedialDS.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -317,9 +366,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SOrderRelation> getOrderRelations() {
-		List<SOrderRelation> retVal= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SOrderRelation.class);
-		if (retVal== null){
-			retVal= new ArrayList<>();
+		List<SOrderRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SOrderRelation.class);
+		if (retVal == null) {
+			retVal = new ArrayList<>();
 		}
 		return (retVal);
 	}
@@ -533,5 +582,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(getClass().getSimpleName());
+		str.append("(");
+		str.append(getId());
+		str.append(")");
+		return (str.toString());
+	}
 }
