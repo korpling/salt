@@ -63,7 +63,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	private  JSONWriter jsonWriterNodes;
 	private  JSONWriter jsonWriterEdges;	
 		
-	private  long bufferSize;
+	private  int bufferSize;
 
 	private static final String TRAV_MODE_CALC_LEVEL = "calcLevel";
 	private static final String TRAV_MODE_READ_NODES = "readNodes";
@@ -76,54 +76,51 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	
 	
 	// JSON output
-	private final String id = "id";
-	private final String label = "label";
-	private final String color = "color";
-	private final String x = "x";
-	private final String level = "level";
-	private final String group = "group";
+	private static final String id = "id";
+	private static final String label = "label";
+	private static final String color = "color";
+	private static final String x = "x";
+	private static final String level = "level";
+	private static final String group = "group";
 	
 	private  int xValue = 0;	
-	private final String tokColorValue = "#CCFF99";
+	private static final String tokColorValue = "#CCFF99";
 	//private int groupValue;
 	
 	
-	// HTML output
-	//TODO change resources
-	private  final String visJsSrc = "../../../dist/vis.js";
-	private final String visCss = "../../../dist/vis.css";
-	private final String visJsSrcGA = "../../googleAnalytics.js";
+	// HTML resources output
+	private  final String visJsSrc = "js/vis.min.js";
+	private final String visCss = "css/vis.min.css";
+	//private final String visJsSrcGA = "../../googleAnalytics.js";
 	
     private final String textStyle = "width:700px; font-size:14px; text-align: justify;";
     
     //HTML tags
-    private final String html = "html";
-    private final String head = "head";
-    private final String body = "body";
-    private final String title = "title";
-    private final String p = "p";
-    private final String div = "div";
-    private final String script = "script";
-    private final String style = "style";
-    private final String link = "link";
-    private final String h2 = "h2";
-    private final String input = "input";
+    private static final String html = "html";
+    private static final String head = "head";
+    private static final String body = "body";
+    private static final String title = "title";
+    private static final String p = "p";
+    private static final String div = "div";
+    private static final String script = "script";
+    private static final String style = "style";
+    private static final String link = "link";
+    private static final String h2 = "h2";
+    private static final String input = "input";
     
     //HTML attributes
-    private final String attType = "type";
-    private final String attId = "id";
-    private final String attValue = "value";
-    private final String attSrc = "src";
-    private final String attHref = "href";
-    private final String attRel = "rel";
-    private final String attStyle = "style";
-    private final String attLang = "language";
+    private static final String attType = "type";
+    private static final String attId = "id";
+    private static final String attValue = "value";
+    private static final String attSrc = "src";
+    private static final String attHref = "href";
+    private static final String attRel = "rel";
+    private static final String attStyle = "style";
+    private static final String attLang = "language";
     
     
-    private int jsonEdgeStrSize = 60;
-    
-    private final String newline = "\n";
-    
+    private static final int JSON_EDGE_LINE_LENGTH = 60;    
+    private static final String NEWLINE = System.lineSeparator();    
     private final Filter filter;
     
     private boolean writeNodeImmediately = false;
@@ -159,7 +156,18 @@ public class VisJsCreator implements SGraphTraverseHandler{
     	
     	readRoots = new HashSet <SNode>();
     	readRelations = new HashSet <SRelation>();       	
-    	bufferSize = doc.getSDocumentGraph().getNumOfEdges() * jsonEdgeStrSize;	
+    	
+    	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
+    	if (nEdges > Math.ceil(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
+    	{
+    		//TODO Abbruch
+    		System.out.println("Too many Edges.");
+    	}
+    	else
+    	{
+    		bufferSize = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
+    	}
+    	
     	this.filter = filter;
     	
     }
@@ -173,7 +181,7 @@ public void setNodeWriter (OutputStream os)
 
 public void setEdgeWriter (OutputStream os)
 {
-	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);	
+	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), bufferSize);	
 	this.jsonWriterEdges = new JSONWriter(outEdges);
 }
 
@@ -191,7 +199,7 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 			File outputFolder = createOutputResources(outputFileUri);	
 			if (outputFolder == null)
 			{
-				//TODO
+				//TODO  Abbruch
 			  System.out.println("Output folder could not have been created.");	
 			}
 			 this.os = new FileOutputStream(new File(outputFolder, OUTPUT_FILE));
@@ -209,70 +217,83 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 			e.printStackTrace();
 		}
 		
-		this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
+		setNodeWriter(os);
+		setEdgeWriter(os);
+		setOptionsWriter(os);
+		
+		/*this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
     	//TODO check the buffer size
-    	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), (int) bufferSize);	
+    	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), bufferSize);	
     	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));	
     	
     	this.jsonWriterNodes = new JSONWriter(outNodes);
-    	this.jsonWriterEdges = new JSONWriter(outEdges);
+    	this.jsonWriterEdges = new JSONWriter(outEdges);*/
     	
     	writeNodeImmediately = true;
 
 		
 		writer.writeStartDocument("UTF-8", "1.0");
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		writer.writeStartElement(html);
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement(head);
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement(title);
-		writer.writeCharacters("Network | Hierarchical Layout, userDefined");
+		writer.writeCharacters("Salt Document Tree");
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement(style);
 		writer.writeAttribute(attType, "text/css");
-		writer.writeCharacters("body {\nfont: 10pt sans;\n}\n#mynetwork {\nwidth: 1000px;\nheight: 1000px;\nborder: 1px solid lightgray;\n}");
+		writer.writeCharacters("body {" + NEWLINE 
+				+ "font: 10pt sans;" + NEWLINE 
+				+ "}" + NEWLINE 
+				+ "#mynetwork {" + NEWLINE 
+				+ "width: 1400px;" + NEWLINE 
+				+ "height: 1000px;" + NEWLINE 
+				+ "border: 1px solid lightgray;" + NEWLINE 
+				+ "}");
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement(script);
 		writer.writeAttribute(attType, "text/javascript");
 		writer.writeAttribute(attSrc,visJsSrc);
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeEmptyElement(link);
 		writer.writeAttribute(attHref, visCss);
 		writer.writeAttribute(attRel,"stylesheet");
 		writer.writeAttribute(attType, "text/css");
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		
 		writer.writeStartElement(script);
 		writer.writeAttribute(attType, "text/javascript");
-		writer.writeCharacters("var nodes = null;\nvar edges = null;\nvar network = null;\n"
-						+ "var directionInput = document.getElementById(\"direction\");\n" 
-						+ "function destroy() {\n" 
-						+ "if (network !== null) {\n" 
-						+ "network.destroy();\n" 
-						+ "network = null;\n" 
-						+ "}\n" 
-						+ "}\n" 
-						+ "function draw() {\n" 
-						+ "destroy();\n" 
-						+ "var connectionCount = [];\n" 
-						+ "nodes = [];\n" 
-						+ "edges = [];\n");
+		writer.writeCharacters("var nodes = null;" + NEWLINE 
+						+ "var edges = null;" + NEWLINE 
+						+ "var network = null;" + NEWLINE
+						+ "var directionInput = document.getElementById(\"direction\");" + NEWLINE 
+						+ "function destroy() {" + NEWLINE 
+						+ "if (network !== null) {" + NEWLINE 
+						+ "network.destroy();" + NEWLINE 
+						+ "network = null;" + NEWLINE 
+						+ "}" + NEWLINE 
+						+ "}" + NEWLINE 
+						+ "function draw() {" + NEWLINE 
+						+ "destroy();" + NEWLINE 
+						+ "var connectionCount = [];" + NEWLINE 
+						+ "nodes = [];" + NEWLINE 
+						+ "edges = [];" + NEWLINE);
 		
 		writer.flush();
 		
-		outNodes.append("var nodes = new vis.DataSet(\n");
+		outNodes.append("var nodes = new vis.DataSet(" + NEWLINE);
 		
-		outEdges.append("var edges = new vis.DataSet(\n");
+		outEdges.append("var edges = new vis.DataSet(" + NEWLINE);
 		
 		buildJSON();
 		
@@ -286,11 +307,11 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 		 outEdges.flush();
 		
 		
-    	 writer.writeCharacters("var container = document.getElementById('mynetwork');\n"
-					+ "var data = {\n"
-					+ "nodes: nodes,\n"
-					+ "edges: edges\n"
-					+ "};\n"
+    	 writer.writeCharacters("var container = document.getElementById('mynetwork');" + NEWLINE
+					+ "var data = {" + NEWLINE
+					+ "nodes: nodes," + NEWLINE
+					+ "edges: edges" + NEWLINE
+					+ "};" + NEWLINE
 					+ "var options = ");
 	
     	 
@@ -299,40 +320,39 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 	
 
 		 
-		writer.writeCharacters(";\n"
-				+ "network = new vis.Network(container, data, options);\n"
-				+ "network.on('select', function(params) {\n"
-				+ "document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;\n"
-				+ "});\n"
-				+ "}\n"); 
+		writer.writeCharacters(";" + NEWLINE
+				+ "network = new vis.Network(container, data, options);" + NEWLINE
+				+ "network.on('select', function(params) {" + NEWLINE
+				+ "document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;" + NEWLINE
+				+ "});" + NEWLINE
+				+ "}" + NEWLINE); 
 
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(script);
+	/*	writer.writeStartElement(script);
 		writer.writeAttribute(attSrc, visJsSrcGA);
 		writer.writeEndElement();
-		writer.writeCharacters(newline);		
+		writer.writeCharacters(NEWLINE);		*/
 		
 		//head 
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		
 		writer.writeStartElement(body);
 		writer.writeAttribute("onload", "draw();");
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement(h2);
-		writer.writeCharacters("Hierarchical Layout");
+		writer.writeCharacters("Salt Document Tree");
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement(div);
 		writer.writeAttribute(attStyle,textStyle);
-		writer.writeCharacters("Ein Beispiel");
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement("p");
 		
@@ -340,90 +360,85 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 		writer.writeAttribute(attType,"button");
 		writer.writeAttribute(attId, "btn-UD");
 		writer.writeAttribute(attValue, "Up-Down");
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeEmptyElement(input);
 		writer.writeAttribute(attType,"button");
 		writer.writeAttribute(attId, "btn-DU");
 		writer.writeAttribute(attValue, "Down-Up");
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeEmptyElement(input);
 		writer.writeAttribute(attType,"button");
 		writer.writeAttribute(attId, "btn-LR");
 		writer.writeAttribute("value", "Left-Right");
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeEmptyElement(input);
 		writer.writeAttribute(attType,"button");
 		writer.writeAttribute(attId, "btn-RL");
 		writer.writeAttribute(attValue, "Right-Left");
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeEmptyElement(input);
 		writer.writeAttribute(attType,"hidden");
 		//TODO check the apostrophes
 		writer.writeAttribute(attId, "direction");
 		writer.writeAttribute(attValue, "UD");
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 	
 		
 		//p
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement(div);
 		writer.writeAttribute(attId, "mynetwork");
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement(p);
 		writer.writeAttribute(attId, "selection");
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
+		writer.writeCharacters(NEWLINE);
 		
 		
 		writer.writeStartElement(script);
 		writer.writeAttribute(attLang, "JavaScript");
-		writer.writeCharacters(newline);
-		writer.writeCharacters("var directionInput = document.getElementById(\"direction\");\n"
-				+ "var btnUD = document.getElementById(\"btn-UD\");\n"
-				+ "btnUD.onclick = function() {\n"
-				+ "directionInput.value = \"UD\";\n"
-				+ "draw();\n"
-				+ "};\n"
-				+ "var btnDU = document.getElementById(\"btn-DU\");\n"
-				+ "btnDU.onclick = function() {\n"
-				+ "directionInput.value = \"DU\";\n"
-				+ "draw();\n"
-				+ "};\n"
-				+ "var btnLR = document.getElementById(\"btn-LR\");\n"
-				+ "btnLR.onclick = function() {\n"
-				+ "directionInput.value = \"LR\";\n"
-				+ "draw();\n"
-				+ "};\n"
-				+ "var btnRL = document.getElementById(\"btn-RL\");\n"
-				+ "btnRL.onclick = function() {\n"
-				+ "directionInput.value = \"RL\";\n"
-				+ "draw();\n"
-				+ "};\n");
+		writer.writeCharacters(NEWLINE);
+		writer.writeCharacters("var directionInput = document.getElementById(\"direction\");" + NEWLINE
+				+ "var btnUD = document.getElementById(\"btn-UD\");" + NEWLINE
+				+ "btnUD.onclick = function() {" + NEWLINE
+				+ "directionInput.value = \"UD\";" + NEWLINE
+				+ "draw();" + NEWLINE
+				+ "};" + NEWLINE
+				+ "var btnDU = document.getElementById(\"btn-DU\");" + NEWLINE
+				+ "btnDU.onclick = function() {" + NEWLINE
+				+ "directionInput.value = \"DU\";" + NEWLINE
+				+ "draw();" + NEWLINE
+				+ "};" + NEWLINE
+				+ "var btnLR = document.getElementById(\"btn-LR\");" + NEWLINE
+				+ "btnLR.onclick = function() {" + NEWLINE
+				+ "directionInput.value = \"LR\";" + NEWLINE
+				+ "draw();" + NEWLINE
+				+ "};" + NEWLINE
+				+ "var btnRL = document.getElementById(\"btn-RL\");" + NEWLINE
+				+ "btnRL.onclick = function() {" + NEWLINE
+				+ "directionInput.value = \"RL\";" + NEWLINE
+				+ "draw();" + NEWLINE
+				+ "};" + NEWLINE);
 		writer.writeEndElement();
-		writer.writeCharacters(newline);	
-		
+		writer.writeCharacters(NEWLINE);			
 		
 		//body
 		writer.writeEndElement();
-		writer.writeCharacters(newline);
-		
-		
+		writer.writeCharacters(NEWLINE);	
 		
 		
 		//html
 		writer.writeEndElement();
-		writer.writeCharacters(newline);	
-		
-		
-		
+		writer.writeCharacters(NEWLINE);	
+			
 	   
 		writer.writeEndDocument();
 		writer.flush();
@@ -442,7 +457,10 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 
 		try {			
 			outputFolder = new File (outputFileUri.path());
-			outputFolder.mkdir();			
+			
+		  if (!outputFolder.mkdir()){
+			  System.out.println("Cannot create the  output folder.");
+		  }
 		  if (!outputFolder.canWrite())
 		  {				//TODO
 				System.out.println("Permission denied.");
@@ -483,7 +501,7 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 					  + outFile))));
 		
 		  
-		  int bufferSize = 2048;		  
+		  int bufferSize = 512*1024;		  
 		  char [] buffer = new char [bufferSize];
 		  int readChars = 0;		  		  
 
@@ -558,13 +576,13 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 		   EList<SAnnotation> sAnnotations = node.getSAnnotations();
 		   if (sAnnotations.size() > 0)
 		   {		
-			   allLabels += "\n";
+			   allLabels += "" + NEWLINE;
 			   
 			   for (SAnnotation annotation : sAnnotations) 
 			   {
 				   allLabels += (annotation.getSName() + "=" + annotation.getSValue().toString());
 				
-				   if (sAnnotations.indexOf(annotation) < sAnnotations.size()-1)  allLabels+= newline;								   
+				   if (sAnnotations.indexOf(annotation) < sAnnotations.size()-1)  allLabels+= NEWLINE;								   
 			   }
 		   }
 		   
@@ -573,7 +591,7 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 			   String text = doc.getSDocumentGraph().getSText(node);
 				  if (text != null && !text.isEmpty())
 				  {
-					  allLabels+= newline;			
+					  allLabels+= NEWLINE;			
 					  allLabels += doc.getSDocumentGraph().getSText(node);
 				  }
 		   } 
@@ -654,37 +672,37 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 	public void buildOptions(){
 		
 		try {
-			outOptions.write("{\n"
-					+ "nodes:{\n"
-					+ "shadow: true,\n"
-					+ "shape: \"box\"\n"
-					+"},\n"
-					+"edges: {\n"
-					+"smooth: true,\n"
-					+"arrows: {\n"
-					+"to: {\n"
-					+"enabled: true\n"
-					+"}\n"
-					+"}\n"
-					+"},\n"
-					+"layout: {\n"
-					+"hierarchical:{\n"
-					+"direction: directionInput.value\n"
-					+"}\n"
-					+"},\n"
-					+"physics: {\n"
-					+"hierarchicalRepulsion: {\n"
-					+"centralGravity: 0.05,\n"
-					+"springLength: 0,\n"
-					+"springConstant: 0.02,\n"
-					+"nodeDistance: 170,\n"
-					+"damping: 0.04\n"
-					+"},\n"
-					+"maxVelocity: 27,\n"
-					+"solver: 'hierarchicalRepulsion',\n"
-					+"timestep: 0.481\n"
-					+"}\n"
-					+"}\n");
+			outOptions.write("{" + NEWLINE
+					+ "nodes:{" + NEWLINE
+					+ "shadow: true," + NEWLINE
+					+ "shape: \"box\"" + NEWLINE
+					+"}," + NEWLINE
+					+"edges: {" + NEWLINE
+					+"smooth: true," + NEWLINE
+					+"arrows: {" + NEWLINE
+					+"to: {" + NEWLINE
+					+"enabled: true" + NEWLINE
+					+"}" + NEWLINE
+					+"}" + NEWLINE
+					+"}," + NEWLINE
+					+"layout: {" + NEWLINE
+					+"hierarchical:{" + NEWLINE
+					+"direction: directionInput.value" + NEWLINE
+					+"}" + NEWLINE
+					+"}," + NEWLINE
+					+"physics: {" + NEWLINE
+					+"hierarchicalRepulsion: {" + NEWLINE
+					+"centralGravity: 0.05," + NEWLINE
+					+"springLength: 0," + NEWLINE
+					+"springConstant: 0.0007," + NEWLINE
+					+"nodeDistance: 200," + NEWLINE
+					+"damping: 0.04" + NEWLINE
+					+"}," + NEWLINE
+					+"maxVelocity: 27," + NEWLINE
+					+"solver: 'hierarchicalRepulsion'," + NEWLINE
+					+"timestep: 0.481" + NEWLINE
+					+"}" + NEWLINE
+					+"}" + NEWLINE);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

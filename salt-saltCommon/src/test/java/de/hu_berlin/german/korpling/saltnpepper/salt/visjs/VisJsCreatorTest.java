@@ -46,7 +46,7 @@ public class VisJsCreatorTest extends TestCase{
 		}	
 	}
 	
-//	@Test
+	@Test
 	public void testJson(){
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsCreator visJsCreator = new VisJsCreator(uri);
