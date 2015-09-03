@@ -452,10 +452,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (sequence.getDataSource() == null) {
 			throw new SaltParameterException("sDSSequences.getSSequentialDS()", "addSToken", this.getClass());
 		}
-		if (sequence.getStart() == -1) {
+		if (sequence.getStart() == null) {
 			throw new SaltParameterException("sDSSequences.getSStart()", "addSToken", this.getClass());
 		}
-		if (sequence.getEnd() == -1) {
+		if (sequence.getEnd() == null) {
 			throw new SaltParameterException("sDSSequences.getSEnd()", "addSToken", this.getClass());
 		}
 		if ((token.getId() == null) || (getNode(token.getId()) == null)) {

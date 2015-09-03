@@ -13,24 +13,24 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
  * @author florian
  *
  */
-public class DataSourceSequence {
+public class DataSourceSequence<P extends Number> {
 
 	public DataSourceSequence() {
 	}
 
-	public DataSourceSequence(SSequentialDS dataSource, int start, int end) {
+	public DataSourceSequence(SSequentialDS dataSource, P start, P end) {
 		this.dataSource = dataSource;
 		this.start = start;
 		this.end = end;
 	}
 
 	/** start value for this sequence **/
-	protected int start = -1;
+	protected P start = null;
 
 	/**
 	 * @return start value of this sequence
 	 */
-	public int getStart() {
+	public P getStart() {
 		return start;
 	}
 
@@ -38,23 +38,23 @@ public class DataSourceSequence {
 	 * @param start
 	 *            start value of this sequence
 	 */
-	public void setStart(int start) {
-		if (start < -1) {
-			start = -1;
+	public void setStart(P start) {
+		if (start.doubleValue() < -1) {
+			start = null;
 		}
 		this.start = start;
 	}
 
 	/** end value for this sequence **/
-	protected int end = -1;
+	protected P end = null;
 
-	public int getEnd() {
+	public P getEnd() {
 		return end;
 	}
 
-	public void setEnd(int end) {
-		if (end < -1) {
-			end = -1;
+	public void setEnd(P end) {
+		if (end.doubleValue() < -1) {
+			end = null;
 		}
 		this.end = end;
 	}

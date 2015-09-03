@@ -56,7 +56,7 @@ public class STimelineTest extends SSequentialDSTest<Integer, Integer> {
 	 */
 	@Override
 	public void testGetStart() {
-		assertEquals(Integer.valueOf(-1), getFixture().getStart());
+		assertEquals(null, getFixture().getStart());
 		getFixture().increasePointOfTime();
 		assertEquals(Integer.valueOf(0), getFixture().getStart());
 	}
@@ -66,7 +66,7 @@ public class STimelineTest extends SSequentialDSTest<Integer, Integer> {
 	 */
 	@Override
 	public void testGetEnd() {
-		assertEquals(Integer.valueOf(-1), getFixture().getEnd());
+		assertEquals(null, getFixture().getEnd());
 		getFixture().increasePointOfTime();
 		assertEquals(Integer.valueOf(1), getFixture().getEnd());
 		getFixture().increasePointOfTime();

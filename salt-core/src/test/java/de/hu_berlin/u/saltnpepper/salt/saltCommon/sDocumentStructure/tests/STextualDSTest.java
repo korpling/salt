@@ -58,7 +58,7 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 	@Override
 	@Test
 	public void testGetStart() {
-		assertEquals(Integer.valueOf(-1), getFixture().getStart());
+		assertEquals(null, getFixture().getStart());
 		getFixture().setData("Test");
 		assertEquals(Integer.valueOf(0), getFixture().getStart());
 	}
@@ -66,7 +66,7 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 	@Override
 	@Test
 	public void testGetEnd() {
-		assertEquals(Integer.valueOf(-1), getFixture().getEnd());
+		assertEquals(null, getFixture().getEnd());
 		getFixture().setData("Test");
 		assertEquals(Integer.valueOf(4), getFixture().getEnd());
 	}

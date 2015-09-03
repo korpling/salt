@@ -57,7 +57,7 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	}
 
 	/**
-	 * {@inheritDoc SSequentialDS#getSStart()}. If a text was set returns 0, -1
+	 * {@inheritDoc SSequentialDS#getSStart()}. If a text was set returns 0, null
 	 * otherwise
 	 */
 	@Override
@@ -65,13 +65,13 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 		if (getText() != null) {
 			return (0);
 		} else{
-			return (-1);
+			return (null);
 		}
 	}
 
 	/**
 	 * {@inheritDoc SSequentialDS#getSEnd()}. If a text was set returns it's
-	 * length, -1 otherwise
+	 * length, null otherwise
 	 * 
 	 */
 	public Integer getEnd() {
@@ -79,7 +79,7 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 		if (sText != null) {
 			return (sText.length());
 		} else{
-			return (-1);
+			return (null);
 		}
 	}
 } // STextualDSImpl
