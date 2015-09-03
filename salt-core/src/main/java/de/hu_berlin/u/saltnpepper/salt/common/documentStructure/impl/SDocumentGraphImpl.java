@@ -434,6 +434,18 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}
 	}
 
+	/** {@inheritDoc} **/
+	@Override
+	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end) {
+		SToken sTok= SaltFactory.createSToken();
+		DataSourceSequence sequence= new DataSourceSequence<Number>();
+		sequence.setStart(start);
+		sequence.setEnd(end);
+		sequence.setDataSource(sequentialDS);
+		addToken(sTok, sequence);
+		return(sTok);
+	}
+	
 	/**
 	 * Connects the given {@link SToken} object to the given
 	 * {@link SSequentialDS} object. If the given {@link SToken} object is not
@@ -690,13 +702,6 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public Map<String, List<SNode>> getRootsBySRelationSType(SALT_TYPE type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public SToken createSToken(SSequentialDS sequentialDS, Integer start, Integer end) {
 		// TODO Auto-generated method stub
 		return null;
 	}

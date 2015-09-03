@@ -393,7 +393,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return returns the created token
 	 */
 	public SToken createToken(DataSourceSequence sequence);
-
+	
 	/**
 	 * Creates a new {@link SSpan} object, adds it to the graph and returns the
 	 * new object. Further, this method creates a {@link SSpanningRelation}
@@ -653,7 +653,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            the offset in the data source where the created token ends
 	 * @return the created token
 	 */
-	public SToken createSToken(SSequentialDS sequentialDS, Integer start, Integer end);
+	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end);
 
 	/**
 	 * Tokenizes all {@link STextualDS} object being contained in this

@@ -112,7 +112,7 @@ public class SimpleTokenizer {
 					if (chr == sep) {
 						if (currStart != currEnd) {
 							// create token
-							getsDocumentGraph().createSToken(sTextualDS, currStart, currEnd);
+							getsDocumentGraph().createToken(sTextualDS, currStart, currEnd);
 						}
 						isSep = true;
 					} else {
@@ -131,7 +131,7 @@ public class SimpleTokenizer {
 			if (!isSep) {
 				// create a token for the last part of text, if last character
 				// was not a separator
-				getsDocumentGraph().createSToken(sTextualDS, currStart, currEnd);
+				getsDocumentGraph().createToken(sTextualDS, currStart, currEnd);
 			}
 		}
 		return (retVal);

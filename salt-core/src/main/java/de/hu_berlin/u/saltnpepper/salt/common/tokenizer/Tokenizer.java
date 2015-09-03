@@ -411,7 +411,7 @@ public class Tokenizer {
 							throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object.");
 						}
 
-						SToken sTok = this.getDocumentGraph().createSToken(sTextualDS, start, end);
+						SToken sTok = this.getDocumentGraph().createToken(sTextualDS, start, end);
 						if (retVal == null) {
 							retVal = new ArrayList<SToken>();
 						}
