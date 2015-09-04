@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.util;
+package de.hu_berlin.u.saltnpepper.salt.util.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,6 +52,11 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInvalidModelException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
+import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
+import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
+import de.hu_berlin.u.saltnpepper.salt.util.STextualRelationSStartComparator;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.TokenStartComparator;
 
 /**
  * Provides some methods for an easier access to objects being contained by a

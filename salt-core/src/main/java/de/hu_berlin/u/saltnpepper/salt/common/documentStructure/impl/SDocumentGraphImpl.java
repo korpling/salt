@@ -42,10 +42,10 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltElementNotInGraphException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
-import de.hu_berlin.u.saltnpepper.salt.util.DataSourceAccessor;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.DataSourceAccessor;
 
 @SuppressWarnings("serial")
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {

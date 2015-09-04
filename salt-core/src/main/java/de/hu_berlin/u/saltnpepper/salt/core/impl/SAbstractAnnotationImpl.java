@@ -15,8 +15,8 @@ import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.util.SAnnotationContainerHelper;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
 public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbstractAnnotation, SAnnotationContainer {

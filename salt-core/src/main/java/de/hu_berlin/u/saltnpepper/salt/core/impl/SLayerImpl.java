@@ -11,8 +11,8 @@ import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
-import de.hu_berlin.u.saltnpepper.salt.util.SAnnotationContainerHelper;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
 public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implements SLayer {
