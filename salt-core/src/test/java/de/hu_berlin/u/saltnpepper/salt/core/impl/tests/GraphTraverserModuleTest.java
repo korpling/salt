@@ -36,6 +36,8 @@ import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.GraphTraverserModule;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInvalidModelException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltTraverserException;
 
 public class GraphTraverserModuleTest {
@@ -918,12 +920,8 @@ public class GraphTraverserModuleTest {
 			try {
 				getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, "test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker);
 				assertTrue(checker.checkNumberOfTraversedNodes());
-			} catch (Exception e) {
-				if (e instanceof SaltTraverserException) {
-
-				} else {
-					fail("The graph contains a cycle, that shall invoke an exception.");
-				}
+				fail("The graph contains a cycle, that shall invoke an exception.");
+			} catch (SaltException e) {
 			}
 		}
 		{
@@ -940,12 +938,8 @@ public class GraphTraverserModuleTest {
 			try {
 				getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, "test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker);
 				assertTrue(checker.checkNumberOfTraversedNodes());
-			} catch (Exception e) {
-				if (e instanceof SaltTraverserException) {
-
-				} else {
-					fail("The graph contains a cycle, that shall invoke an exception.");
-				}
+				fail("The graph contains a cycle, that shall invoke an exception.");
+			} catch (SaltException e) {
 			}
 		}
 	}
