@@ -37,6 +37,12 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SMetaAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SCatAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
 
 public interface ISaltFactory extends IGraphFactory {
 	/**
@@ -228,4 +234,36 @@ public interface ISaltFactory extends IGraphFactory {
 	 */
 	public SToken createSToken();
 	// ===============================< document structure
+	// ===============================> semantics
+	/**
+	 * Creates a new {@link SCatAnnotation} object.
+	 * @return new {@link SCatAnnotation} object
+	 */
+	public SCatAnnotation createSCatAnnotation();
+	/**
+	 * Creates a new {@link SPOSAnnotation} object.
+	 * @return new {@link SPOSAnnotation} object
+	 */
+	public SPOSAnnotation createSPOSAnnotation();
+	/**
+	 * Creates a new {@link SLemmaAnnotation} object.
+	 * @return new {@link SLemmaAnnotation} object
+	 */
+	public SLemmaAnnotation createSLemmaAnnotation();
+	/**
+	 * Creates a new {@link STypeAnnotation} object.
+	 * @return new {@link STypeAnnotation} object
+	 */
+	public STypeAnnotation createSTypeAnnotation();
+	/**
+	 * Creates a new {@link SWordAnnotation} object.
+	 * @return new {@link SWordAnnotation} object
+	 */
+	public SWordAnnotation createSWordAnnotation();
+	/**
+	 * Creates a new {@link SSentenceAnnotation} object.
+	 * @return new {@link SSentenceAnnotation} object
+	 */
+	public SSentenceAnnotation createSSentenceAnnotation();
+	// ===============================< semantics
 }

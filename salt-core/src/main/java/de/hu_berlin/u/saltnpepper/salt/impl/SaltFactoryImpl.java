@@ -58,6 +58,18 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SMetaAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SCatAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SCatAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SLemmaAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SPOSAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SSentenceAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.STypeAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SWordAnnotationImpl;
 
 public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	/**
@@ -317,4 +329,48 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 		return (new STokenImpl());
 	}
 	// ===============================< document structure
+	// ===============================> semantics
+	/**
+	 * Creates a new {@link SCatAnnotation} object.
+	 * @return new {@link SCatAnnotation} object
+	 */
+	public SCatAnnotation createSCatAnnotation() {
+		return (new SCatAnnotationImpl());
+	}
+	/**
+	 * Creates a new {@link SPOSAnnotation} object.
+	 * @return new {@link SPOSAnnotation} object
+	 */
+	public SPOSAnnotation createSPOSAnnotation() {
+		return (new SPOSAnnotationImpl());
+	}
+	/**
+	 * Creates a new {@link SLemmaAnnotation} object.
+	 * @return new {@link SLemmaAnnotation} object
+	 */
+	public SLemmaAnnotation createSLemmaAnnotation() {
+		return (new SLemmaAnnotationImpl());
+	}
+	/**
+	 * Creates a new {@link STypeAnnotation} object.
+	 * @return new {@link STypeAnnotation} object
+	 */
+	public STypeAnnotation createSTypeAnnotation() {
+		return (new STypeAnnotationImpl());
+	}
+	/**
+	 * Creates a new {@link SWordAnnotation} object.
+	 * @return new {@link SWordAnnotation} object
+	 */
+	public SWordAnnotation createSWordAnnotation() {
+		return (new SWordAnnotationImpl());
+	}
+	/**
+	 * Creates a new {@link SSentenceAnnotation} object.
+	 * @return new {@link SSentenceAnnotation} object
+	 */
+	public SSentenceAnnotation createSSentenceAnnotation() {
+		return (new SSentenceAnnotationImpl());
+	}
+	// ===============================< semantics
 }

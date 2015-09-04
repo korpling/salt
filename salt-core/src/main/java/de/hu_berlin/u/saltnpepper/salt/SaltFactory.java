@@ -29,6 +29,12 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.impl.SaltFactoryImpl;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SCatAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
 
 public class SaltFactory {
 	/**
@@ -307,4 +313,48 @@ public class SaltFactory {
 		return (factory.createSToken());
 	}
 	// ===============================< document structure
+	// ===============================> semantics
+	/**
+	 * Creates a new {@link SCatAnnotation} object.
+	 * @return new {@link SCatAnnotation} object
+	 */
+	public static SCatAnnotation createSCatAnnotation() {
+		return (factory.createSCatAnnotation());
+	}
+	/**
+	 * Creates a new {@link SPOSAnnotation} object.
+	 * @return new {@link SPOSAnnotation} object
+	 */
+	public static SPOSAnnotation createSPOSAnnotation() {
+		return (factory.createSPOSAnnotation());
+	}
+	/**
+	 * Creates a new {@link SLemmaAnnotation} object.
+	 * @return new {@link SLemmaAnnotation} object
+	 */
+	public static SLemmaAnnotation createSLemmaAnnotation() {
+		return (factory.createSLemmaAnnotation());
+	}
+	/**
+	 * Creates a new {@link STypeAnnotation} object.
+	 * @return new {@link STypeAnnotation} object
+	 */
+	public static STypeAnnotation createSTypeAnnotation() {
+		return (factory.createSTypeAnnotation());
+	}
+	/**
+	 * Creates a new {@link SWordAnnotation} object.
+	 * @return new {@link SWordAnnotation} object
+	 */
+	public static SWordAnnotation createSWordAnnotation() {
+		return (factory.createSWordAnnotation());
+	}
+	/**
+	 * Creates a new {@link SSentenceAnnotation} object.
+	 * @return new {@link SSentenceAnnotation} object
+	 */
+	public static SSentenceAnnotation createSSentenceAnnotation() {
+		return (factory.createSSentenceAnnotation());
+	}
+	// ===============================< semantics
 }
