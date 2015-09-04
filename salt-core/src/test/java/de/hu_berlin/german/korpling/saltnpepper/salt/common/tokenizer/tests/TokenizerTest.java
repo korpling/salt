@@ -35,8 +35,6 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.tokenizer.Tokenizer;
 
-
-
 /**
  * 
  * Tests the class TTTokenizer.
@@ -180,7 +178,7 @@ public class TokenizerTest {
 		List<Token> expectedToken = this.createCase1();
 
 		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
-		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
+		STextualDS sTextualDS = sDocGraph.createTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
 		this.getFixture().tokenize(sTextualDS);
 
@@ -209,7 +207,7 @@ public class TokenizerTest {
 		List<Token> expectedToken = this.createCase1();
 
 		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
-		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
+		STextualDS sTextualDS = sDocGraph.createTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
 		this.getFixture().tokenize(sTextualDS, LanguageCode.de);
 
@@ -242,7 +240,7 @@ public class TokenizerTest {
 		expectedToken.add(new Token("Ölpest", 4, 10));
 
 		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
-		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
+		STextualDS sTextualDS = sDocGraph.createTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
 		this.getFixture().tokenize(sTextualDS, LanguageCode.de);
 
@@ -274,7 +272,7 @@ public class TokenizerTest {
 		expectedToken.add(new Token("Feigenblatt", 0, 11));
 
 		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
-		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
+		STextualDS sTextualDS = sDocGraph.createTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
 		this.getFixture().tokenize(sTextualDS, LanguageCode.de);
 
@@ -307,7 +305,7 @@ public class TokenizerTest {
 		expectedToken.add(new Token("Ölpest", 4, 10));
 
 		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
-		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
+		STextualDS sTextualDS = sDocGraph.createTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
 		this.getFixture().tokenize(sTextualDS, LanguageCode.de);
 
@@ -344,7 +342,7 @@ public class TokenizerTest {
 		expectedToken.add(new Token(".", 29, 30));
 
 		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
-		STextualDS sTextualDS = sDocGraph.createSTextualDS(text);
+		STextualDS sTextualDS = sDocGraph.createTextualDS(text);
 		this.getFixture().setsDocumentGraph(sDocGraph);
 		this.getFixture().tokenize(sTextualDS, LanguageCode.en);
 
