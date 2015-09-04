@@ -30,6 +30,10 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHand
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltEmptyParameterException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.visjs.*;
 
 import javax.xml.stream.XMLEventFactory;
@@ -47,8 +51,8 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	
 //	private  URI uri;	
 	private  int currHigh;
-	private  int maxHigh;
-	private  long maxLevel;
+	private  long maxHigh;
+	private  int maxLevel;
 	private  int currHighFromToken;
 
 	
@@ -125,7 +129,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
     
     private boolean writeNodeImmediately = false;
     
-    private static final String OUTPUT_FILE = "hierarchicalLayoutUserdefined.html";	
+    private static final String OUTPUT_FILE = "saltVisJs.html";	
     private static final String CSS_FOLDER_OUT = "css";
     private static final String JS_FOLDER_OUT = "js";
     private static final String CSS_FILE = "vis.min.css";
@@ -136,21 +140,29 @@ public class VisJsCreator implements SGraphTraverseHandler{
     		
     
   
-    public VisJsCreator(URI uri){
-  	  this(uri, null);
+    public VisJsCreator(URI inputUri){
+  	  this(inputUri, null);
     }
 	
-    public VisJsCreator (URI uri, Filter filter){  	
-    	this.doc= SaltFactory.eINSTANCE.createSDocument();	
-    	doc.loadSDocumentGraph(uri);
+    public VisJsCreator (URI inputUri, Filter filter){  
+    	if(inputUri == null) throw new SaltEmptyParameterException("inputUri", "VisJsCreator", this.getClass());
+     	
+    	try{
+    		this.doc= SaltFactory.eINSTANCE.createSDocument();	
+        	doc.loadSDocumentGraph(inputUri);
+    	}catch (SaltResourceException e){
+			throw new SaltResourceException("A problem occured when loading salt project from '" + inputUri + "'.", e);
+		}
     	roots = doc.getSDocumentGraph().getSRoots();	
     	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
-    	if (sSpans != null && (sSpans.size() > 0)){
+    	if (sSpans != null && (sSpans.size() > 0))
+    	{
     		nGroupsId += 1;
     	}	
     	EList<SStructure>  sStructures = doc.getSDocumentGraph().getSStructures();
     	
-    	if (sStructures != null && (sStructures.size() > 0)){
+    	if (sStructures != null && (sStructures.size() > 0))
+    	{
     		nGroupsId += 2;
     	}
     	
@@ -158,10 +170,9 @@ public class VisJsCreator implements SGraphTraverseHandler{
     	readRelations = new HashSet <SRelation>();       	
     	
     	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
-    	if (nEdges > Math.ceil(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
+    	if (nEdges > Math.floor(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
     	{
-    		//TODO Abbruch
-    		System.out.println("Too many Edges.");
+    		throw new SaltException("The specified document can not be visualized. It contains too many edges.");    		
     	}
     	else
     	{
@@ -193,36 +204,35 @@ public void setOptionsWriter (OutputStream os){
 	
 	
 
-public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
+public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException, SecurityException, IOException, XMLStreamException{
 	
 		try {
 			File outputFolder = createOutputResources(outputFileUri);	
-			if (outputFolder == null)
-			{
-				//TODO  Abbruch
-			  System.out.println("Output folder could not have been created.");	
-			}
 			 this.os = new FileOutputStream(new File(outputFolder, OUTPUT_FILE));
 		
-			} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}	
+			} catch (SaltEmptyParameterException e) {
+			  throw new SaltEmptyParameterException("outputFileUri", "writeHTML", this.getClass());
+			}	
+			catch (FileNotFoundException e) {
+				throw new SaltResourceNotFoundException("The output file could not have been created.");
+			}	
+			catch (SecurityException e) {
+			 throw new SaltException("Either the output folder could not have been created or permission denied.");
+			}
+			catch (IOException e) {
+			 throw new SaltResourceException("A problem occured while copying the vis-js resource files");
+			}	
 	
-		this.outputFactory = XMLOutputFactory.newInstance();
+		
 		try {
-			this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
-		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.outputFactory = XMLOutputFactory.newInstance();
+		this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
 		
 		setNodeWriter(os);
 		setEdgeWriter(os);
 		setOptionsWriter(os);
 		
 		/*this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
-    	//TODO check the buffer size
     	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), bufferSize);	
     	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));	
     	
@@ -230,7 +240,6 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
     	this.jsonWriterEdges = new JSONWriter(outEdges);*/
     	
     	writeNodeImmediately = true;
-
 		
 		writer.writeStartDocument("UTF-8", "1.0");
 		writer.writeCharacters(NEWLINE);
@@ -448,46 +457,35 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 		outNodes.close();
 		
 		writeNodeImmediately = false;
+		} catch (XMLStreamException e) {
+			throw new SaltException("A problem occured while writing the output file.");
+		}
 	  
 	}
 
   
-	private File createOutputResources(URI outputFileUri){
-		File outputFolder = null;
-
-		try {			
-			outputFolder = new File (outputFileUri.path());
-			
-		  if (!outputFolder.mkdir()){
-			  System.out.println("Cannot create the  output folder.");
-		  }
-		  if (!outputFolder.canWrite())
-		  {				//TODO
-				System.out.println("Permission denied.");
-				
-			}
-		  else 
-		  {
-			  File cssFolderOut = new File(outputFolder, CSS_FOLDER_OUT);
-			  cssFolderOut.mkdir();
-			  File jsFolderOut = new File(outputFolder, JS_FOLDER_OUT);
-			  jsFolderOut.mkdir();
-			  
-			  copyResourceFile(CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
-			  copyResourceFile(JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
-			  
-		  }		  
-
-	} catch (NullPointerException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		
-		}			     
-		return outputFolder;
+	private File createOutputResources(URI outputFileUri) 
+			throws SaltEmptyParameterException, SecurityException, FileNotFoundException, IOException{
+		  File outputFolder = null;
+		  if (outputFileUri == null) throw new SaltEmptyParameterException();			
+		  outputFolder = new File (outputFileUri.path());
+		  outputFolder.mkdir();
+		  File cssFolderOut = new File(outputFolder, CSS_FOLDER_OUT);
+		  cssFolderOut.mkdir();
+		  File jsFolderOut = new File(outputFolder, JS_FOLDER_OUT);
+		  jsFolderOut.mkdir();
+		  
+		  copyResourceFile(CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
+		  copyResourceFile(JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
+	     
+		  return outputFolder;
 	}
 	
-	private void copyResourceFile (String inFile, String outputFolder, String outSubFolder, String outFile){
-		try {
+	
+	
+	private void copyResourceFile (String inFile, String outputFolder, String outSubFolder, String outFile) 
+					throws FileNotFoundException, IOException{
+	
 		InputStream inputStream = getClass( ).getResourceAsStream(RESOURCES_FOLDER 
 				  + System.getProperty("file.separator") 
 				  + inFile);		  
@@ -514,31 +512,21 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 		    reader.close();
 		    writer.flush();
 		    writer.close();     
-		    
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 	
-	public void buildJSON (){		
+	public void buildJSON () throws IOException{		
 	maxLevel = getMaxLevel(doc);
 
-	 
-	 doc.getSDocumentGraph().sortSTokenByText();	  		 
+	doc.getSDocumentGraph().sortSTokenByText();	  		 
 	 EList <SToken> sTokens = doc.getSDocumentGraph().getSTokens();
 	 
-
+	 try{
+		 
 	//create node array
 	jsonWriterNodes.array();
 	// write tokens
 	 for (SToken token : sTokens){			
-		 writeJsonNode(token, maxLevel, filter);
+			writeJsonNode(token, maxLevel, filter);
 	 }
 	
 	 //create edge array
@@ -551,16 +539,20 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 	 jsonWriterNodes.endArray();			   
 		
 	//close edge array
-	 jsonWriterEdges.endArray();		
+	 jsonWriterEdges.endArray();	
+	 
+	 }catch(JSONException e){
+		 throw new SaltException("A problem occured while building JSON objects.");
+	 }
+	 catch(IOException e){
+		 throw new SaltException("A problem occured while building JSON objects.");
+	 }
 			
 	}
 	
 	
-	private void writeJsonNode (SNode node, long levelValue, Filter filter)
+	private void writeJsonNode (SNode node, long levelValue, Filter filter) throws IOException
 	{
-		 try 
-		 {
-		
 		if (filter == null || filter.outputNode(node))	
 		{
 		 String idValue = node.getSElementPath().fragment();
@@ -621,7 +613,7 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 				jsonWriterNodes.key(group);
 				jsonWriterNodes.value("0");
 			}
-			// TODO error handling			
+	
 		}
 		
 		else if (node instanceof SStructure)
@@ -631,7 +623,7 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 				jsonWriterNodes.key(group);
 				jsonWriterNodes.value("0");
 			}
-			// TODO error handling
+	
 		}		 
 		 
 		jsonWriterNodes.endObject();	
@@ -640,17 +632,10 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 		if(writeNodeImmediately) outNodes.flush();
 		
 		}
-	} catch (IOException e) 
-		 {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		 }
 }
 		 
-	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation, Filter filter)
+	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation, Filter filter) throws IOException
 	{
-		 try 
-		  {
 			  if(filter == null || filter.outputRelation(relation))
 			  {
 			  jsonWriterEdges.object();
@@ -658,20 +643,17 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 			  jsonWriterEdges.value(fromNode.getSElementPath().fragment());
 			  jsonWriterEdges.key("to");
 			  jsonWriterEdges.value(toNode.getSElementPath().fragment());
+			  jsonWriterEdges.key("label");
+			  jsonWriterEdges.value(relation.getSElementPath().fragment());
 			  jsonWriterEdges.endObject();
+			  
 			  
 			  outEdges.newLine();
 			  }
-		} catch (IOException e) 
-		  {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}		
 	}
 	
-	public void buildOptions(){
+	public void buildOptions() throws IOException{
 		
-		try {
 			outOptions.write("{" + NEWLINE
 					+ "nodes:{" + NEWLINE
 					+ "shadow: true," + NEWLINE
@@ -700,19 +682,18 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 					+"}," + NEWLINE
 					+"maxVelocity: 27," + NEWLINE
 					+"solver: 'hierarchicalRepulsion'," + NEWLINE
-					+"timestep: 0.481" + NEWLINE
+					+"timestep: 0.5," + NEWLINE
+					+"stabilization: {" + NEWLINE
+					+"iteration: 800" + NEWLINE
+					+"}" + NEWLINE
 					+"}" + NEWLINE
 					+"}" + NEWLINE);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 		
 		
 	
 	
-	private long getMaxLevel(SDocument doc)
+	private int getMaxLevel(SDocument doc)
 	{
 		maxLevel = getMaxHighOfSDocGraph(doc) + 1;
 		EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
@@ -725,13 +706,13 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 	
 	
 	 //traversing the graph in depth first top down mode beginning with its roots
-	private  long getMaxHighOfSDocGraph(SDocument doc)
+	private  int  getMaxHighOfSDocGraph(SDocument doc)
 	{
 		doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAV_MODE_CALC_LEVEL, this);		
-		return maxHigh;
+		if (maxHigh > (Integer.MAX_VALUE - 100)) throw new SaltException("The specified document can not be visualized. It is too complex.");    
+		else return (int) maxHigh;
 		
 	}
-	
 	
 	
 	@Override
@@ -776,7 +757,11 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 					  // write SSpan-Nodes					  
 					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode)))
 					  {				  
-						  writeJsonNode(fromNode, maxLevel - currHighFromToken, filter);						
+						  try {
+							writeJsonNode(fromNode, maxLevel - currHighFromToken, filter);
+						} catch (IOException e) {
+							throw new SaltException("A problem occured while building JSON objects.");
+						}						
 					      readRoots.add(fromNode);					
 						  	
 					  }
@@ -788,11 +773,19 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 					  
 					  if (currNode instanceof SStructure)
 					  {						 
-						  writeJsonNode(currNode, maxLevel - currHighFromToken, filter);						 
+						  try {
+							writeJsonNode(currNode, maxLevel - currHighFromToken, filter);
+						} catch (IOException e) {
+							throw new SaltException("A problem occured while building JSON objects.");
+						}						 
 						 
 						 if (roots.contains(fromNode) && !readRoots.contains(fromNode))
 						 {
-							 writeJsonNode(fromNode, maxLevel - currHighFromToken - 1, filter);							 
+							 try {
+								writeJsonNode(fromNode, maxLevel - currHighFromToken - 1, filter);
+							} catch (IOException e) {
+								throw new SaltException("A problem occured while building JSON objects.");
+							}							 
 							 readRoots.add(fromNode);
 						 }						  	
 					  }				  
@@ -802,7 +795,11 @@ public void writeHTML(URI outputFileUri) throws IOException, XMLStreamException{
 			
 				  if (!readRelations.contains(edge))
 				  {					  
-					  writeJsonEdge(fromNode, currNode, edge,filter );					  
+					  try {
+						writeJsonEdge(fromNode, currNode, edge,filter );
+					} catch (IOException e) {
+						throw new SaltException("A problem occured while building JSON objects.");
+					}					  
 					  readRelations.add(edge);
 				  }			
 				  

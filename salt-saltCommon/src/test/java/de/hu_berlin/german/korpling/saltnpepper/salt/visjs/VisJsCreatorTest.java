@@ -54,8 +54,18 @@ public class VisJsCreatorTest extends TestCase{
 		visJsCreator.setNodeWriter(System.out);
 		visJsCreator.setEdgeWriter(System.out);
 		visJsCreator.setOptionsWriter(System.out);
-		visJsCreator.buildJSON();
-		visJsCreator.buildOptions();
+		try {
+			visJsCreator.buildJSON();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			visJsCreator.buildOptions();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		BufferedWriter ow;
 		
