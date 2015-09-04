@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.german.korpling.saltnpepper.salt.common.tokenizer.tests;
+package de.hu_berlin.u.saltnpepper.salt.common.tokenizer.tests;
 
 import static org.junit.Assert.assertEquals;
 
