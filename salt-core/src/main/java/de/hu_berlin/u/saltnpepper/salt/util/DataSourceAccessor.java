@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
@@ -387,19 +390,7 @@ public class DataSourceAccessor {
 			// if the relation type isn't supported throw exception
 			throw new SaltException("Cannot compute roots for given SRelation type '" + sType + "', because it isn't supported yet. Supported subtypes are only: SPointingRelation, SSpanningRelation and SDominanceRelation");
 		}
-
-		List<SRelation> relations = null;
-		{// compute all relations of subtype
-			if (SALT_TYPE.SPOINTING_RELATION.equals(sType)) {
-				relations = (List<SRelation>) (List<? extends SRelation>) documentGraph.getPointingRelations();
-			} else if (SALT_TYPE.SDOMINANCE_RELATION.equals(sType)) {
-				relations = (List<SRelation>) (List<? extends SRelation>) documentGraph.getDominanceRelations();
-			} else if (SALT_TYPE.SSPANNING_RELATION.equals(sType)) {
-				relations = (List<SRelation>) (List<? extends SRelation>) documentGraph.getSpanningRelations();
-			} else if (SALT_TYPE.SORDER_RELATION.equals(sType)) {
-				relations = (List<SRelation>) (List<? extends SRelation>) documentGraph.getOrderRelations();
-			}
-		}// compute all relations of subtype
+		List<SRelation> relations = documentGraph.getRelations(sType);
 		if (relations != null) {
 			HashSet<SNode> notRootElements = new HashSet<>();
 			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
@@ -425,27 +416,6 @@ public class DataSourceAccessor {
 	}
 
 	/**
-	 * puts an sType and an SNode in the map for storing them for method
-	 * getRootsBySRelationSType.
-	 * 
-	 * @param sType
-	 * @param sNode
-	 */
-	private static void storeSType2SNode(Map<String, List<SNode>> sType2Roots, String sType, SNode sNode) {
-		if (sType2Roots == null) {
-			sType2Roots = new Hashtable<>();
-		}
-		List<SNode> vector = sType2Roots.get(sType);
-		if (vector == null) {
-			vector = new ArrayList<>();
-			sType2Roots.put(sType, vector);
-		}
-		if (!vector.contains(sNode)) {
-			vector.add(sNode);
-		}
-	}
-
-	/**
 	 * Returns all nodes, which are roots for the given relation-class respects
 	 * to the given SType of the traversed relation. The following example shows
 	 * the different to the method getRootsBySRelation(): Imagine the following
@@ -461,36 +431,23 @@ public class DataSourceAccessor {
 	 * @return a map of types, with corresponding lists of root nodes
 	 */
 	@SuppressWarnings("unchecked")
-	public static Map<String, List<SNode>> getRootsByRelationType(SDocumentGraph documentGraph, SALT_TYPE sType) {
-		return (getRootsByRelationType(documentGraph, (Class<? extends SRelation>) SALT_TYPE.convertSTypeNameToClazz(sType)));
+	public static Multimap<String, SNode> getRootsByRelationType(SDocumentGraph documentGraph, SALT_TYPE sType) {
+		return (getRootsByRelationType(documentGraph, (Class<? extends SRelation>) sType.getJavaType()));
 	}
 
 	/**
-	 * default SType string for SRelations which do not have a SType
-	 */
-	public static final String DEFAULT_STYPE = SaltUtil.SALT_NAMESPACE + SaltUtil.NAMESPACE_SEPERATOR + "NULL";
-	/**
-	 * default SType string for SOrderRelations which do not have a SType
-	 */
-	public static final String DEFAULT_STYPE_SORDERRELATION = "default_seg";
-
-	/**
-	 * Returns all nodes, which are roots for the given relation-class respects
-	 * to the given SType of the traversed relation. The following example shows
-	 * the different to the method getRootsBySRelation(): Imagine the following
-	 * graphFor example: node1 ->t1 node2, node2 ->t2-> node3. Also imagine,
-	 * that -> is a relation of same class with sType=t1 respectively sType=t2
-	 * The returned roots will be node1 and node 2, because of node1 is the root
-	 * of a subgraph for relation.sType=t1 and node2 is the root of the subgraph
-	 * for relation.sType=t2. Whereas the returned nodes of
-	 * getRootsBySRelation() is only node1.
+	 * {@inheritDoc SDocumentGraph#getRootsByRelationType(SALT_TYPE)}
 	 * 
-	 * @param clazz
-	 *            class of Relation to be traversed for searching roots
-	 * @return a map of types, with corresponding lists of root nodes
+	 * <pre>
+	 * for each relation R of type class
+	 *     for each foregoing relation P (incoming relation of R'source)
+	 *         check whether P is a parent of R (true, if they have the same class and the same type)   
+	 *     if R has no parents store R corresponding to it's type in returned table
+	 * </pre>
+	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public static Hashtable<String, List<SNode>> getRootsByRelationType(SDocumentGraph documentGraph, Class<? extends SRelation> clazz) {
+	public static Multimap<String, SNode> getRootsByRelationType(SDocumentGraph documentGraph, Class<? extends SRelation> clazz) {
 		if (clazz == null) {
 			throw new SaltParameterException("clazz", "getRootsBySRelationSType", clazz);
 		}
@@ -499,118 +456,44 @@ public class DataSourceAccessor {
 		}
 		Class<? extends SRelation> currRelationType = null;
 		currRelationType = clazz;
-		Hashtable<String, List<SNode>> retVal = null;
-		List<SRelation> relations = null;
-		// compute all relations
-		if (clazz.equals(SPointingRelation.class)) {
-			relations = (List<SRelation>) (List<? extends SRelation>) documentGraph.getPointingRelations();
-		} else if (clazz.equals(SDominanceRelation.class)) {
-			relations = (List<SRelation>) (List<? extends SRelation>) documentGraph.getDominanceRelations();
-		} else if (clazz.equals(SSpanningRelation.class)) {
-			relations = (List<SRelation>) (List<? extends SRelation>) documentGraph.getSpanningRelations();
-		} else if (clazz.equals(SOrderRelation.class)) {
-			relations = (List<SRelation>) (List<? extends SRelation>) documentGraph.getOrderRelations();
-		}
-		Hashtable<String, List<SNode>> sType2Roots = null;
+		Multimap<String, SNode> retVal = HashMultimap.create();
+		List<SRelation> relations = documentGraph.getRelations(clazz);
 		for (SRelation<? extends SNode, ? extends SNode> currentRel : relations) {
-			// walk through relations stores whether one of the parent relation
-			// is of same relation class
-			boolean parentHasSameClass = false;
-			// a table to notice, for which sTypes a relation has to be stored
-			Set<String> storeSType = new HashSet<>();
 
 			if (currentRel.getSource() == null) {
 				throw new SaltInvalidModelException("Cannot compute roots, because there is a SRelation object '" + currentRel.getId() + "' having no source node.");
 			}
-			for (SRelation<? extends SNode, ? extends SNode> relation : documentGraph.getInRelations(currentRel.getSource().getId())) {
+			boolean hasParent = false;
+			for (SRelation<? extends SNode, ? extends SNode> parentRelation : documentGraph.getInRelations(currentRel.getSource().getId())) {
 				// walk through all incoming relations of
-				// currentRelation.sSource
-				if (currRelationType.isInstance(relation)) {
-					// regard only current relation type
-					parentHasSameClass = true;
-					SRelation<? extends SNode, ? extends SNode> parentRelation = relation;
-					if (currentRel.getType() != null) {
-						// the current relation has a SType
-						if (parentRelation.getType() != null && parentRelation.getType().contains(currentRel.getType())) {
-							// if the parent relation and the current
-							// relation have the same sTypes, the current
-							// relation cannot be a root
-							storeSType.add(currentRel.getType());
-						} else {
-							if (storeSType.contains(currentRel.getType())) {
-								storeSType.add(currentRel.getType());
-							}
-						}
-					} else {
-						// the parent relation is a PointingRelation.
-						if (parentRelation instanceof SPointingRelation) {
-							if (parentRelation.getType() == null) {
-								// the parent relation does not have a
-								// SRelation, too.Thus, the current relation is
-								// no root.
-								storeSType.add(DEFAULT_STYPE);
-							} else {
-								// the parent relation has STypes. Thus, the
-								// current relation is a root.
-								if (storeSType.contains(DEFAULT_STYPE)) {
-									storeSType.add(DEFAULT_STYPE);
-								}
-							}
-						} else if (parentRelation instanceof SOrderRelation) {
-							if (parentRelation.getType() == null) {
-								// the parent relation does not have a
-								// SRelation, too.Thus,
-								// the current relation is no root.
-								storeSType.add(DEFAULT_STYPE_SORDERRELATION);
-							} else {// the parent relation has STypes. Thus, the
-									// current relation is a root.
-								if (storeSType.contains(DEFAULT_STYPE_SORDERRELATION)) {
-									storeSType.add(DEFAULT_STYPE_SORDERRELATION);
-								}
-							}
-						}
-						// the parent relation does not have a SRelation, too
-						// and it is a PointingRelation.
-					}
-				}// regard only current relation type
-			}// walk through all incoming relations of currentRelation.sSource
+				// currentRelation' source
+				if (currRelationType.isInstance(parentRelation)) {
+					// parent has same class
+					// check whether parent is a real parent
 
-			// if there is at least one sType to use
-			if (storeSType.size() > 0) {
-				if (currentRel.getType() != null) {
-					// if the sType of the current relation should be stored
-					if (storeSType.contains(currentRel.getType())) { // do it.
-						storeSType2SNode(sType2Roots, currentRel.getType(), currentRel.getSource());
+					if (currentRel.getType() == null) {
+						if (parentRelation.getType() == null) {
+							// parent is a real parent
+							hasParent = true;
+						}
+					} else if (currentRel.getType().equals(parentRelation.getType())) {
+						// parent is a real parent
+						hasParent = true;
 					}
-				} else {
-					if (currentRel instanceof SPointingRelation && storeSType.contains(DEFAULT_STYPE)) {
-						storeSType2SNode(sType2Roots, DEFAULT_STYPE, currentRel.getSource());
-					} else if (currentRel instanceof SOrderRelation && storeSType.contains(DEFAULT_STYPE_SORDERRELATION)) {
-						storeSType2SNode(sType2Roots, DEFAULT_STYPE_SORDERRELATION, currentRel.getSource());
+					if (hasParent) {
+						break;
 					}
-
 				}
-
 			}
-			if (!parentHasSameClass) {
-				// The current relation has no parent of the same class with a
-				// compatible sType --> store the source node of the current
-				// relation as root
-				if (currentRel.getType() != null) {
-					storeSType2SNode(sType2Roots, currentRel.getType(), currentRel.getSource());
-				} else {
-					if (currentRel instanceof SPointingRelation) {
-						storeSType2SNode(sType2Roots, DEFAULT_STYPE, currentRel.getSource());
-					} else if (currentRel instanceof SOrderRelation) {
-						storeSType2SNode(sType2Roots, DEFAULT_STYPE_SORDERRELATION, currentRel.getSource());
-					}
-
+			if (!hasParent) {
+				// current relation is a root
+				String type = currentRel.getType();
+				if (type == null) {
+					type = SaltUtil.SALT_NULL_VALUE;
 				}
-			}// The current relation has no parent of the same class with a
-				// compatible sType --> store the source node of the current
-				// relation as root
-		}// walk through all relations
-		retVal = sType2Roots;
+				retVal.put(type, currentRel.getSource());
+			}
+		}
 
 		return (retVal);
 	}
@@ -677,8 +560,8 @@ public class DataSourceAccessor {
 						}
 					}// search for correct sequence, containing the datasource
 						// if it was already found
-					if (sequence == null) {// sequence haven't been visit ->
-											// create it
+					if (sequence == null) {
+						// sequence haven't been visit -> create it
 						sequence = new DataSourceSequence();
 						sequence.setDataSource(dataSource);
 						this.lastSeenDSSequence = sequence;
@@ -708,30 +591,25 @@ public class DataSourceAccessor {
 					// check if current start and end value is smaller or
 					// bigger, than reset
 					SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> seqRel = (SSequentialRelation) relation;
-					try {
-						if ((relation == null) && (currNode instanceof SSequentialDS)) {
-							this.lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
-							this.lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
-							this.lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
-						} else {
-							if ((this.lastSeenDSSequence.getStart() == null) || (seqRel.getStart().doubleValue() < this.lastSeenDSSequence.getStart().doubleValue())) {
-								// if start value wasn't set or is higher than
-								// current one
-								this.lastSeenDSSequence.setStart(seqRel.getStart());
-							}
-							if ((this.lastSeenDSSequence.getEnd() == null) || (seqRel.getEnd().doubleValue() > this.lastSeenDSSequence.getEnd().doubleValue())) {
-								// if end value wasn't set or is higher than
-								// current one
-								this.lastSeenDSSequence.setEnd(seqRel.getEnd());
-							}
-						}
-					} catch (NullPointerException e) {
+					if ((seqRel == null) && (currNode instanceof SSequentialDS)) {
+						this.lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
+						this.lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
+						this.lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
+					} else {
 						if (seqRel.getStart() == null) {
-							throw new SaltParameterException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set.", e);
+							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set. ");
 						} else if (seqRel.getEnd() == null) {
-							throw new SaltParameterException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '" + seqRel + "' is not set.", e);
-						} else {
-							throw e;
+							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '" + seqRel + "' is not set. ");
+						}
+						if ((this.lastSeenDSSequence.getStart() == null) || (seqRel.getStart().doubleValue() < this.lastSeenDSSequence.getStart().doubleValue())) {
+							// if start value wasn't set or is higher than
+							// current one
+							this.lastSeenDSSequence.setStart(seqRel.getStart());
+						}
+						if ((this.lastSeenDSSequence.getEnd() == null) || (seqRel.getEnd().doubleValue() > this.lastSeenDSSequence.getEnd().doubleValue())) {
+							// if end value wasn't set or is higher than
+							// current one
+							this.lastSeenDSSequence.setEnd(seqRel.getEnd());
 						}
 					}
 				}
@@ -762,7 +640,7 @@ public class DataSourceAccessor {
 					// there is a relation
 					if (relation != null) {
 						// get the typename for the sRelation class
-						Set<SALT_TYPE> typeName = SALT_TYPE.convertClazzToSTypeName(relation.getClass());
+						Set<SALT_TYPE> typeName = SALT_TYPE.class2SaltType(relation.getClass());
 						if (typeName != null) {
 							// found matching SType for an implemented interface
 							for (SALT_TYPE name : typeName) {

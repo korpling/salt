@@ -39,8 +39,16 @@ public class DataSourceSequence<P extends Number> {
 	 *            start value of this sequence
 	 */
 	public void setStart(P start) {
-		if (start.doubleValue() < -1) {
-			start = null;
+		if (start != null) {
+			if (start instanceof Integer) {
+				if (start.intValue() < 0) {
+					start = null;
+				}
+			} else {
+				if (start.doubleValue() < 0) {
+					start = null;
+				}
+			}
 		}
 		this.start = start;
 	}
@@ -53,8 +61,16 @@ public class DataSourceSequence<P extends Number> {
 	}
 
 	public void setEnd(P end) {
-		if (end.doubleValue() < -1) {
-			end = null;
+		if (end != null) {
+			if (end instanceof Integer) {
+				if (end.intValue() < 0) {
+					end = null;
+				}
+			} else {
+				if (end.doubleValue() < 0) {
+					end = null;
+				}
+			}
 		}
 		this.end = end;
 	}

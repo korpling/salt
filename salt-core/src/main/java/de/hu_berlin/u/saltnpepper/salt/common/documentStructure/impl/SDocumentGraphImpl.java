@@ -9,6 +9,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
+import com.google.common.collect.Multimap;
+
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
@@ -253,6 +255,21 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			retVal = new ArrayList<>();
 		}
 		return (retVal);
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SRelation> getRelations(SALT_TYPE type) {
+		List<SRelation> relations = null;
+		relations= getRelations(type.getJavaType());
+		return(relations);
+	}
+	/** {@inheritDoc} **/
+	@Override
+	public List<SRelation> getRelations(Class<?> clazz) {
+		List<SRelation> relations = null;
+		relations= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, clazz);
+		return(relations);
 	}
 
 	/** {@inheritDoc} **/
@@ -687,13 +704,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SNode> getRootsByRelation(SALT_TYPE type) {
-		return(DataSourceAccessor.getRootsByRelation(this, type));
+		return (DataSourceAccessor.getRootsByRelation(this, type));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public Map<String, List<SNode>> getRootsByRelationType(SALT_TYPE type) {
-		return(DataSourceAccessor.getRootsByRelationType(this, type));
+	public Multimap<String, SNode> getRootsByRelationType(SALT_TYPE type) {
+		return (DataSourceAccessor.getRootsByRelationType(this, type));
 	}
 
 	/** {@inheritDoc} **/
@@ -840,7 +857,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			return null;
 		}
 		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, relTypes).get(0);
-		return ((STextualDS) sData.getDataSource()).getText().substring((Integer)sData.getStart(), (Integer)sData.getEnd());
+		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(), (Integer) sData.getEnd());
 	}
 
 	@Override

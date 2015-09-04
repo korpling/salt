@@ -9,11 +9,13 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Multimap;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
@@ -1400,31 +1402,31 @@ public class SDocumentGraphTest {
 		{// SDominanceRelation
 			SDominanceRelation sDomRel = null;
 			sDomRel = SaltFactory.createSDominanceRelation();
-			sDomRel.setTarget(struct1);
+			sDomRel.setSource(struct1);
 			sDomRel.setTarget(tok1);
 			getFixture().addRelation(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
-			sDomRel.setTarget(struct1);
+			sDomRel.setSource(struct1);
 			sDomRel.setTarget(span1);
 			getFixture().addRelation(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
-			sDomRel.setTarget(struct2);
+			sDomRel.setSource(struct2);
 			sDomRel.setTarget(struct1);
 			getFixture().addRelation(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
-			sDomRel.setTarget(struct2);
+			sDomRel.setSource(struct2);
 			sDomRel.setTarget(span1);
 			getFixture().addRelation(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
-			sDomRel.setTarget(struct2);
+			sDomRel.setSource(struct2);
 			sDomRel.setTarget(span2);
 			getFixture().addRelation(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
@@ -1450,12 +1452,6 @@ public class SDocumentGraphTest {
 			getFixture().addRelation(sPRel);
 			assertEquals(sPRel, getFixture().getRelation(sPRel.getId()));
 		}// SPointingRelation
-
-		{// print saltGraph to dot (just for testing)
-			// Salt2DOT salt2Dot= new Salt2DOT();
-		// salt2Dot.salt2Dot(getFixture().getDocumentGraph(),
-		// URI.createFileURI("_TMP" + "/doc1.dot"));
-		}
 
 		List<SNode> roots = null;
 		{// check SSpanningRelation
@@ -1484,8 +1480,6 @@ public class SDocumentGraphTest {
 
 	/**
 	 * Checks the method getRootsBySRelationSType(). Just for SPointingRelation
-	 * 
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getRootsByRelationType(de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SALT_TYPE)
 	 */
 	@Test
 	public void testGetRootsBySRelationSType__SALT_TYPE() {
@@ -1512,12 +1506,14 @@ public class SDocumentGraphTest {
 		rel2.setTarget(node1);
 		getFixture().addRelation(rel2);
 
-		assertTrue(getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).containsKey(type1));
-		assertTrue(getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).containsKey(type2));
-		assertEquals(1, getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).get(type1).size());
-		assertEquals(1, getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).get(type2).size());
-		assertTrue(getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).get(type1).contains(node1));
-		assertTrue(getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION).get(type2).contains(node2));
+		Multimap<String, SNode> roots= getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION);
+		System.out.println("---> roots: "+ roots);
+		assertTrue(roots.containsKey(type1));
+		assertTrue(roots.containsKey(type2));
+		assertEquals(1, roots.get(type1).size());
+		assertEquals(1, roots.get(type2).size());
+		assertTrue(roots.get(type1).contains(node1));
+		assertTrue(roots.get(type2).contains(node2));
 		// checking for SPointingRelation
 	}
 

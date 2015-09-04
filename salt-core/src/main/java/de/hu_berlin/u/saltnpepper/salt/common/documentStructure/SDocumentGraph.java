@@ -22,6 +22,8 @@ import java.util.Map;
 
 import org.knallgrau.utils.textcat.TextCategorizer;
 
+import com.google.common.collect.Multimap;
+
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.tokenizer.Tokenizer;
@@ -32,6 +34,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 /**
  * The document-structure covers the "real" linguistic data, which means primary
@@ -127,6 +130,20 @@ public interface SDocumentGraph extends SGraph {
 	 */
 	void setTimeline(STimeline value);
 
+	/**
+	 * Returns all relations of the passed type.
+	 * @param type type of relations
+	 * @return a list of relations matching passed type
+	 */
+	public List<SRelation> getRelations(SALT_TYPE type);
+	
+	/**
+	 * Returns all relations of the passed class.
+	 * @param clazz class of relations
+	 * @return a list of relations matching passed class
+	 */
+	public List<SRelation> getRelations(Class<?> clazz);
+	
 	/**
 	 * Returns the value of the '<em><b>STimeline Relations</b></em>'
 	 * containment reference list. The list contents are of type
@@ -393,7 +410,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return returns the created token
 	 */
 	public SToken createToken(DataSourceSequence sequence);
-	
+
 	/**
 	 * Creates a new {@link SSpan} object, adds it to the graph and returns the
 	 * new object. Further, this method creates a {@link SSpanningRelation}
@@ -631,13 +648,15 @@ public interface SDocumentGraph extends SGraph {
 	 * respectivly sType=t2 The returned roots will be node1 and node 2, because
 	 * of node1 is the root of a subgraph for relation.sType=t1 and node2 is the
 	 * root of the subgraph for relation.sType=t2. Whereas the returned nodes of
-	 * getRootsBySRelation() is only node1.
+	 * {@link #getRootsByRelation(SALT_TYPE)} is only node1. <br/>
+	 * All relations having no type are stored in returned map corresponding to
+	 * key {@link SaltUtil#SALT_NULL_VALUE}.
 	 * 
 	 * @param type
 	 *            type, which shall be used for computing roots
 	 * @return a map of types, with corresponding lists of root nodes
 	 */
-	public Map<String, List<SNode>> getRootsByRelationType(SALT_TYPE type);
+	public Multimap<String, SNode> getRootsByRelationType(SALT_TYPE type);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
@@ -796,8 +815,10 @@ public interface SDocumentGraph extends SGraph {
 	 * Returns all tokens in the graph, which are overlapped by the passed node
 	 * and are reachable via relations having at least one of the passed types.
 	 * 
-	 * @param overlappingNode anchor node, which overlaps the returned tokens
-	 * @param overlappingRelationTypes relation types
+	 * @param overlappingNode
+	 *            anchor node, which overlaps the returned tokens
+	 * @param overlappingRelationTypes
+	 *            relation types
 	 */
 	public List<SToken> getOverlappedTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes);
 

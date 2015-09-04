@@ -34,6 +34,9 @@ import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInvalidModelException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltTraverserException;
 
 /**
@@ -72,7 +75,7 @@ public class GraphTraverserModule {
 	 * that the callback handler knows which traversal is meant. This is
 	 * helpful, in case of a single callback handler is used for more than one
 	 * traversal at the same time. This method throws a
-	 * {@link SaltTraverserException} in case of the graph contains a cycle. A
+	 * {@link SaltInvalidModelException} in case of the graph contains a cycle. A
 	 * cycle means a path containing the same node twice. Cycle safe breadth
 	 * first traversing could consume a lot of memory because the algorithm
 	 * keeps a map of all visited Nodes for every start node.
@@ -105,7 +108,7 @@ public class GraphTraverserModule {
 	 * that the callback handler knows which traversal is meant. This is
 	 * helpful, in case of a single callback handler is used for more than one
 	 * traversal at the same time. This method throws a
-	 * {@link SaltTraverserException} in case of the graph contains a cycle. A
+	 * {@link SaltInvalidModelException} in case of the graph contains a cycle. A
 	 * cycle means a path containing the same node twice. Cycle safe breadth
 	 * first traversing could consume a lot of memory because the algorithm
 	 * keeps a map of all visited Nodes for every start node.
@@ -176,7 +179,7 @@ public class GraphTraverserModule {
 
 		if (traverser.getException() != null) {
 			// ckecks if an error occurs while traversal and throws it
-			throw new SaltTraverserException("Traversal of graph produced an exception. ", traverser.getException());
+			throw traverser.getException();
 		}
 	}
 
@@ -230,9 +233,9 @@ public class GraphTraverserModule {
 		 * here, so that the calling method can check if the traversal finished
 		 * successfully or with an error.
 		 */
-		private SaltTraverserException exception = null;
+		private SaltException exception = null;
 
-		private void setException(SaltTraverserException exception) {
+		private void setException(SaltException exception) {
 			this.exception = exception;
 		}
 
@@ -243,7 +246,7 @@ public class GraphTraverserModule {
 		 * 
 		 * @return
 		 */
-		public SaltTraverserException getException() {
+		public SaltException getException() {
 			return exception;
 		}
 
@@ -369,7 +372,7 @@ public class GraphTraverserModule {
 												}
 											}
 											text.append(currentEntry.node.getId());
-											throw new SaltTraverserException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + currentEntry.node + "' while current path was '" + text.toString() + "'.");
+											throw new SaltInvalidModelException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + currentEntry.node + "' while current path was '" + text.toString() + "'.");
 										}
 									}
 									NodeEntry peekEntry = null;
@@ -466,15 +469,11 @@ public class GraphTraverserModule {
 					breadthFirst();
 				}
 
-			} catch (Exception e) {
-				SaltTraverserException ex = null;
-				if (e instanceof SaltTraverserException) {
-					ex = (SaltTraverserException) e;
-					setException(ex);
-				} else {
-					ex = new SaltTraverserException("An exception occured while traversing the graph '" + graph.getId() + "' with path '" + currentNodePath + "'.", e);
-					setException(ex);
-				}
+			} catch (SaltException e) {
+				setException(e);
+			}catch (Exception e2) {
+				SaltException e= new SaltException("An exception occured while traversing the graph '" + graph.getId() + "' with path '" + currentNodePath + "'.", e2);
+				setException(e);
 			}
 		}
 
@@ -496,10 +495,11 @@ public class GraphTraverserModule {
 		 */
 		private void breadthFirst() {
 			if (isCycleSafe) {
-				throw new SaltTraverserException("Not able to detect cycles with breadth first search");
+				throw new SaltException("Not able to detect cycles with breadth first search");
 			}
-			if ((currentNodePath == null) || (currentNodePath.isEmpty()))
-				throw new SaltTraverserException("Cannot traverse node starting at empty start node.");
+			if ((currentNodePath == null) || (currentNodePath.isEmpty())) {
+				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
+			}
 			final boolean isTopDown = traverseType != GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
 			SNode fromNode = null;
 			SRelation<SNode, SNode> fromRel = null;
@@ -577,7 +577,7 @@ public class GraphTraverserModule {
 		 */
 		private void topDownDepthFirstRec(SRelation<SNode, SNode> rel, long order) {
 			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
-				throw new SaltTraverserException("Cannot traverse node starting at empty start node.");
+				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 			}
 			// current node is last element in currentPath
 			SNode currNode = currentNodePath.get(currentNodePath.size() - 1);
@@ -605,7 +605,7 @@ public class GraphTraverserModule {
 							}
 							text.append(childNode.getId());
 
-							throw new SaltTraverserException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + childNode + "' while current path was '" + text.toString() + "'.");
+							throw new SaltInvalidModelException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + childNode + "' while current path was '" + text.toString() + "'.");
 						}
 
 						currentNodePath.add(childNode);
@@ -635,8 +635,9 @@ public class GraphTraverserModule {
 		 *            the child node
 		 */
 		private void bottomUpDepthFirstRec(SRelation<SNode, SNode> edge, long order) {
-			if ((currentNodePath == null) || (currentNodePath.size() == 0))
-				throw new SaltTraverserException("Cannot traverse node starting at empty start node.");
+			if ((currentNodePath == null) || (currentNodePath.size() == 0)){
+				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
+			}
 			// current node is last element in currentPath
 			SNode currNode = currentNodePath.get(currentNodePath.size() - 1);
 			SNode child = null;
@@ -655,7 +656,7 @@ public class GraphTraverserModule {
 				for (SRelation<SNode, SNode> parentEdge : parentEdges) {
 					SNode parentNode = parentEdge.getSource();
 					if ((isCycleSafe) && (currentNodePath.contains(parentNode)))
-						throw new SaltTraverserException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + parentNode + "' while current path was '" + currentNodePath + "'.");
+						throw new SaltInvalidModelException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + parentNode + "' while current path was '" + currentNodePath + "'.");
 
 					currentNodePath.add(parentNode);
 					if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, parentEdge, parentNode, order)) {

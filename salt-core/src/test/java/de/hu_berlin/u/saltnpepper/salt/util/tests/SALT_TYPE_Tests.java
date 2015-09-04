@@ -29,20 +29,20 @@ public class SALT_TYPE_Tests {
 	 */
 	@Test
 	public void testConvertClazzToSTypeName() {
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SOrderRelation.class).contains(SALT_TYPE.SORDER_RELATION));
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SPointingRelation.class).contains(SALT_TYPE.SPOINTING_RELATION));
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SDominanceRelation.class).contains(SALT_TYPE.SDOMINANCE_RELATION));
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SSpanningRelation.class).contains(SALT_TYPE.SSPANNING_RELATION));
+		assertTrue(SALT_TYPE.class2SaltType(SOrderRelation.class).contains(SALT_TYPE.SORDER_RELATION));
+		assertTrue(SALT_TYPE.class2SaltType(SPointingRelation.class).contains(SALT_TYPE.SPOINTING_RELATION));
+		assertTrue(SALT_TYPE.class2SaltType(SDominanceRelation.class).contains(SALT_TYPE.SDOMINANCE_RELATION));
+		assertTrue(SALT_TYPE.class2SaltType(SSpanningRelation.class).contains(SALT_TYPE.SSPANNING_RELATION));
 
-		assertFalse(SALT_TYPE.convertClazzToSTypeName(SSpanningRelation.class).contains(SALT_TYPE.SDOMINANCE_RELATION));
-		assertFalse(SALT_TYPE.convertClazzToSTypeName(SDominanceRelation.class).contains(SALT_TYPE.SSPANNING_RELATION));
+		assertFalse(SALT_TYPE.class2SaltType(SSpanningRelation.class).contains(SALT_TYPE.SDOMINANCE_RELATION));
+		assertFalse(SALT_TYPE.class2SaltType(SDominanceRelation.class).contains(SALT_TYPE.SSPANNING_RELATION));
 
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SToken.class).contains(SALT_TYPE.STOKEN));
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SSpan.class).contains(SALT_TYPE.SSPAN));
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SStructure.class).contains(SALT_TYPE.SSTRUCTURE));
+		assertTrue(SALT_TYPE.class2SaltType(SToken.class).contains(SALT_TYPE.STOKEN));
+		assertTrue(SALT_TYPE.class2SaltType(SSpan.class).contains(SALT_TYPE.SSPAN));
+		assertTrue(SALT_TYPE.class2SaltType(SStructure.class).contains(SALT_TYPE.SSTRUCTURE));
 
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(STokenImpl.class).contains(SALT_TYPE.STOKEN));
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SSpanImpl.class).contains(SALT_TYPE.SSPAN));
-		assertTrue(SALT_TYPE.convertClazzToSTypeName(SStructureImpl.class).contains(SALT_TYPE.SSTRUCTURE));
+		assertTrue(SALT_TYPE.class2SaltType(STokenImpl.class).contains(SALT_TYPE.STOKEN));
+		assertTrue(SALT_TYPE.class2SaltType(SSpanImpl.class).contains(SALT_TYPE.SSPAN));
+		assertTrue(SALT_TYPE.class2SaltType(SStructureImpl.class).contains(SALT_TYPE.SSTRUCTURE));
 	}
 }

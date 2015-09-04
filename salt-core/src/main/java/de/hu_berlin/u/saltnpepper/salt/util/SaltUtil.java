@@ -30,6 +30,10 @@ public class SaltUtil {
 	 * {@value #NAMESPACE_SEPERATOR} NAME.
 	 */
 	public static final String NAMESPACE_SEPERATOR = "::";
+	/**
+	 * A NULL value as String.
+	 */
+	public static final String SALT_NULL_VALUE = SaltUtil.SALT_NAMESPACE + SaltUtil.NAMESPACE_SEPERATOR + "NULL";
 	// ===================================< common Salt stuff
 
 	// ======================================> index names
