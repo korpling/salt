@@ -32,7 +32,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
  * a set of corpus structures, which could contain a set of document structures
  * each. This makes the {@link SaltProject} object the entry point for a salt
  * model. In case you have more than one salt project, you can name it by
- * {@link #setSName(String)}
+ * {@link #setName(String)}
  * 
  * @author florian
  */
@@ -45,11 +45,28 @@ public interface SaltProject {
 	public List<SCorpusGraph> getCorpusGraphs();
 
 	/**
+	 * Adds the passed {@link SCorpusGraph} object to the list of corpus graphs.
+	 * 
+	 * @param corpusGraph
+	 *            new corpus graph object
+	 */
+	public void addCorpusGraph(SCorpusGraph corpusGraph);
+
+	/**
+	 * Removes the passed {@link SCorpusGraph} object to the list of corpus
+	 * graphs.
+	 * 
+	 * @param corpusGraph
+	 *            new corpus graph object
+	 */
+	public void removeCorpusGraph(SCorpusGraph corpusGraph);
+
+	/**
 	 * Returns the name of this salt project. A name is optional.
 	 * 
 	 * @return name of the project
 	 */
-	public String getSName();
+	public String getName();
 
 	/**
 	 * Sets the name of this salt project. A name is optional.
@@ -57,7 +74,7 @@ public interface SaltProject {
 	 * @param name
 	 *            of the project
 	 */
-	public void setSName(String name);
+	public void setName(String name);
 
 	/**
 	 * Persists this {@link SaltProject} object to the location given by the

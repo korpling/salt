@@ -1,5 +1,7 @@
 package de.hu_berlin.u.saltnpepper.salt.common.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -8,29 +10,81 @@ import org.eclipse.emf.common.util.URI;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusGraphImpl;
 
 public class SaltProjectImpl implements SaltProject {
 
 	public SaltProjectImpl() {
-		// TODO Auto-generated constructor stub
+		corpusGraphs = new ArrayList<SCorpusGraph>();
 	}
 
+	/** list of all {@link SCorpusGraph} objects contained in this Salt project **/
+	private List<SCorpusGraph> corpusGraphs = null;
+
+	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusGraph> getCorpusGraphs() {
-		// TODO Auto-generated method stub
-		return null;
+		return (Collections.unmodifiableList(corpusGraphs));
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public void addCorpusGraph(SCorpusGraph corpusGraph) {
+		if (corpusGraph != null) {
+			if (corpusGraph instanceof SCorpusGraphImpl) {
+				((SCorpusGraphImpl) corpusGraph).basic_setSaltProject(this);
+			}
+		}
+		basic_addCorpusGraph(corpusGraph);
+	}
+
+	/**
+	 * Adds the corpus graph to the internal list of corpus graphs.
+	 * 
+	 * @param corpusGraph
+	 *            to add
+	 */
+	public void basic_addCorpusGraph(SCorpusGraph corpusGraph) {
+		if (corpusGraph != null) {
+			corpusGraphs.add(corpusGraph);
+		}
 	}
 
 	@Override
-	public String getSName() {
-		// TODO Auto-generated method stub
-		return null;
+	public void removeCorpusGraph(SCorpusGraph corpusGraph) {
+		if (corpusGraph != null) {
+			if (corpusGraph instanceof SCorpusGraphImpl) {
+				((SCorpusGraphImpl) corpusGraph).basic_setSaltProject(null);
+			}
+		}
+		basic_removeCorpusGraph(corpusGraph);
 	}
 
-	@Override
-	public void setSName(String name) {
-		// TODO Auto-generated method stub
+	/**
+	 * Removes the corpus graph to the internal list of corpus graphs.
+	 * 
+	 * @param corpusGraph
+	 *            graph to remove
+	 */
+	public void basic_removeCorpusGraph(SCorpusGraph corpusGraph) {
+		if (corpusGraph != null) {
+			corpusGraphs.remove(corpusGraph);
+		}
+	}
 
+	/** Name of the Salt project. **/
+	private String name = null;
+
+	/** {@inheritDoc} **/
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -56,5 +110,4 @@ public class SaltProjectImpl implements SaltProject {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

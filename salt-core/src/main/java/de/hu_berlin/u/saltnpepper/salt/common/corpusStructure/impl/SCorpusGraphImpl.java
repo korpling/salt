@@ -24,6 +24,7 @@ import java.util.Vector;
 
 import org.eclipse.emf.common.util.URI;
 
+import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Node;
@@ -35,6 +36,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRel
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.impl.SaltProjectImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
@@ -46,8 +48,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 	/**
 	 * Calls the init of super class and expands its initialization for adding
-	 * {@link SaltUtil#IDX_NODETYPE}
-	 * of indexes:
+	 * {@link SaltUtil#IDX_NODETYPE} of indexes:
 	 * <ul>
 	 * <li>Initializes index {@link SaltUtil#IDX_NODETYPE}</li>
 	 * <li>Initializes index {@link SaltUtil#IDX_RELATIONTYPE}</li>
@@ -73,6 +74,39 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public void setSaltProject(SaltProject saltProject) {
+		if (saltProject != null) {
+			if (saltProject instanceof SaltProjectImpl) {
+				((SaltProjectImpl) saltProject).basic_addCorpusGraph(this);
+			}
+		} else {
+			if (getSaltProject() instanceof SaltProjectImpl) {
+				((SaltProjectImpl) getSaltProject()).basic_removeCorpusGraph(this);
+			}
+		}
+		basic_setSaltProject(saltProject);
+	}
+
+	/**
+	 * This is an internally used method. To implement a double chaining of
+	 * {@link SCorpusGraph} and {@link SaltProject} object when an node is
+	 * inserted into this graph and to avoid an endless invocation the insertion
+	 * of an node is splited into the two methods
+	 * {@link #setSaltProject(SaltProject)} and
+	 * {@link #basic_setSaltProject(SaltProject)}. The invocation of methods is
+	 * implement as follows:
+	 * 
+	 * <pre>
+	 * {@link SaltProject#}                      {@link Node#setGraph(Graph)}
+	 *         ||             \ /                   ||
+	 *         ||              X                    ||
+	 *         \/             / \                   \/
+	 * {@link Graph#basicAddNode(Node)}            {@link Node#basicSetGraph(Graph)}
+	 * </pre>
+	 * 
+	 * @param graph
+	 *            graph which contains this node
+	 */
+	public void basic_setSaltProject(SaltProject saltProject) {
 		this.saltProject = saltProject;
 	}
 
