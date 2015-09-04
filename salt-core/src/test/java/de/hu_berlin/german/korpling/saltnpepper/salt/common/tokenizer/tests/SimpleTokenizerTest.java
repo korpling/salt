@@ -27,7 +27,6 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.tokenizer.SimpleTokenizer;
 
-
 /**
  * 
  * Tests the class TTTokenizer.
@@ -72,16 +71,16 @@ public class SimpleTokenizerTest {
 	@Test
 	public void testTokenize_ByBlanks1() {
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
-		STextualDS primText = docGraph.createSTextualDS("This is a test text.");
+		STextualDS primText = docGraph.createTextualDS("This is a test text.");
 		getFixture().setsDocumentGraph(docGraph);
 		getFixture().tokenize(primText, ' ');
 
 		assertEquals(5, docGraph.getTokens().size());
-		assertEquals("This", docGraph.getSText(docGraph.getTokens().get(0)));
-		assertEquals("is", docGraph.getSText(docGraph.getTokens().get(1)));
-		assertEquals("a", docGraph.getSText(docGraph.getTokens().get(2)));
-		assertEquals("test", docGraph.getSText(docGraph.getTokens().get(3)));
-		assertEquals("text.", docGraph.getSText(docGraph.getTokens().get(4)));
+		assertEquals("This", docGraph.getText(docGraph.getTokens().get(0)));
+		assertEquals("is", docGraph.getText(docGraph.getTokens().get(1)));
+		assertEquals("a", docGraph.getText(docGraph.getTokens().get(2)));
+		assertEquals("test", docGraph.getText(docGraph.getTokens().get(3)));
+		assertEquals("text.", docGraph.getText(docGraph.getTokens().get(4)));
 	}
 
 	/**
@@ -98,16 +97,16 @@ public class SimpleTokenizerTest {
 	@Test
 	public void testTokenize_ByBlanks2() {
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
-		STextualDS primText = docGraph.createSTextualDS("    This   is   a test  text.  ");
+		STextualDS primText = docGraph.createTextualDS("    This   is   a test  text.  ");
 		getFixture().setsDocumentGraph(docGraph);
 		getFixture().tokenize(primText, ' ');
 
 		assertEquals(5, docGraph.getTokens().size());
-		assertEquals("This", docGraph.getSText(docGraph.getTokens().get(0)));
-		assertEquals("is", docGraph.getSText(docGraph.getTokens().get(1)));
-		assertEquals("a", docGraph.getSText(docGraph.getTokens().get(2)));
-		assertEquals("test", docGraph.getSText(docGraph.getTokens().get(3)));
-		assertEquals("text.", docGraph.getSText(docGraph.getTokens().get(4)));
+		assertEquals("This", docGraph.getText(docGraph.getTokens().get(0)));
+		assertEquals("is", docGraph.getText(docGraph.getTokens().get(1)));
+		assertEquals("a", docGraph.getText(docGraph.getTokens().get(2)));
+		assertEquals("test", docGraph.getText(docGraph.getTokens().get(3)));
+		assertEquals("text.", docGraph.getText(docGraph.getTokens().get(4)));
 	}
 
 	/**
@@ -124,15 +123,15 @@ public class SimpleTokenizerTest {
 	@Test
 	public void testTokenize_ByBlanksAndPunc() {
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
-		STextualDS primText = docGraph.createSTextualDS("    This   is   a test  text.  ");
+		STextualDS primText = docGraph.createTextualDS("    This   is   a test  text.  ");
 		getFixture().setsDocumentGraph(docGraph);
 		getFixture().tokenize(primText, ' ', '.');
 
 		assertEquals(5, docGraph.getTokens().size());
-		assertEquals("This", docGraph.getSText(docGraph.getTokens().get(0)));
-		assertEquals("is", docGraph.getSText(docGraph.getTokens().get(1)));
-		assertEquals("a", docGraph.getSText(docGraph.getTokens().get(2)));
-		assertEquals("test", docGraph.getSText(docGraph.getTokens().get(3)));
-		assertEquals("text", docGraph.getSText(docGraph.getTokens().get(4)));
+		assertEquals("This", docGraph.getText(docGraph.getTokens().get(0)));
+		assertEquals("is", docGraph.getText(docGraph.getTokens().get(1)));
+		assertEquals("a", docGraph.getText(docGraph.getTokens().get(2)));
+		assertEquals("test", docGraph.getText(docGraph.getTokens().get(3)));
+		assertEquals("text", docGraph.getText(docGraph.getTokens().get(4)));
 	}
 }
