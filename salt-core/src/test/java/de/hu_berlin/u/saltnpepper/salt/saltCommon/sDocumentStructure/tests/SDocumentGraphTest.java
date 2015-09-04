@@ -1507,7 +1507,6 @@ public class SDocumentGraphTest {
 		getFixture().addRelation(rel2);
 
 		Multimap<String, SNode> roots= getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION);
-		System.out.println("---> roots: "+ roots);
 		assertTrue(roots.containsKey(type1));
 		assertTrue(roots.containsKey(type2));
 		assertEquals(1, roots.get(type1).size());

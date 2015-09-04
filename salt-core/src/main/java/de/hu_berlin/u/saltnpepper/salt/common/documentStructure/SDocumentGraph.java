@@ -145,6 +145,20 @@ public interface SDocumentGraph extends SGraph {
 	public List<SRelation> getRelations(Class<?> clazz);
 	
 	/**
+	 * Returns all nodes of the passed type.
+	 * @param type type of nodes
+	 * @return a list of nodes matching passed type
+	 */
+	public List<SNode> getNodes(SALT_TYPE type);
+	
+	/**
+	 * Returns all nodes of the passed class.
+	 * @param clazz class of nodes
+	 * @return a list of nodes matching passed class
+	 */
+	public List<SNode> getNodes(Class<?> clazz);
+	
+	/**
 	 * Returns the value of the '<em><b>STimeline Relations</b></em>'
 	 * containment reference list. The list contents are of type
 	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation}

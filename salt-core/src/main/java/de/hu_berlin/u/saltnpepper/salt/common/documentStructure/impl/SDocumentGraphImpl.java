@@ -271,6 +271,20 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		relations= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, clazz);
 		return(relations);
 	}
+	/** {@inheritDoc} **/
+	@Override
+	public List<SNode> getNodes(SALT_TYPE type) {
+		List<SNode> nodes = null;
+		nodes= getNodes(type.getJavaType());
+		return(nodes);
+	}
+	/** {@inheritDoc} **/
+	@Override
+	public List<SNode> getNodes(Class<?> clazz) {
+		List<SNode> nodes = null;
+		nodes= getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, clazz);
+		return(nodes);
+	}
 
 	/** {@inheritDoc} **/
 	@Override
