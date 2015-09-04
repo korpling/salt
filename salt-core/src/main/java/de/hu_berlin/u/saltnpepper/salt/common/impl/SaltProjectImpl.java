@@ -110,4 +110,16 @@ public class SaltProjectImpl implements SaltProject {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder retStr= new StringBuilder();
+		retStr.append("SaltProject(");
+		retStr.append(getName());
+		retStr.append(")");
+		retStr.append(": ");
+		retStr.append(getCorpusGraphs().size());
+		retStr.append("corpus graphs");
+		return(retStr.toString());
+	}
 }
