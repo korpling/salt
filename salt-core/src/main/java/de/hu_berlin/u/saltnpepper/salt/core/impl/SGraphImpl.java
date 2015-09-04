@@ -6,6 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
@@ -20,6 +24,26 @@ import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
 public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>> implements SGraph {
+	/**
+	 * {@inheritDoc SGraph#getSLayerByName(String)}
+	 */
+	public List<SLayer> getSLayerByName(String layerName) {
+		if ((layerName == null) || (layerName.isEmpty()))
+			return (null);
+
+		List<SLayer> result = new ArrayList<>();
+		if (layerName != null) {
+			for (SLayer l : getLayers()) {
+				if ((l.getSName() == null) || (l.getSName().isEmpty())) {
+					break;
+				}
+				if (layerName.equals(l.getSName())) {
+					result.add(l);
+				}
+			}
+		}
+		return result;
+	}
 
 	/** {@inheritDoc} */
 	@Override

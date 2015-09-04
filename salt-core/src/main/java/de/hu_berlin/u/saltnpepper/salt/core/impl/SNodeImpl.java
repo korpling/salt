@@ -1,6 +1,8 @@
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.impl.NodeImpl;
@@ -9,11 +11,55 @@ import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
 public class SNodeImpl extends NodeImpl implements SNode {
+
+	/**
+	 * {@inheritDoc SNode#getOutgoingSRelations()}
+	 */
+	@Override
+	public List<SRelation> getOutRelations() {
+		if (getGraph() == null) {
+			return null;
+		}
+		List<SRelation> outRelations = getGraph().getOutRelations(getId());
+		if (outRelations != null) {
+			List<SRelation> sOutRelList = new ArrayList<>();
+			for (SRelation rel : outRelations) {
+				if (rel instanceof SRelation) {
+					sOutRelList.add((SRelation) rel);
+				}
+			}
+			return sOutRelList;
+		}
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc SNode#getIncomingSRelations()}
+	 */
+	@Override
+	public List<SRelation> getInRelations() {
+		if (getGraph() == null) {
+			return null;
+		}
+		List<SRelation> inRelations = getGraph().getInRelations(getId());
+		if (inRelations != null) {
+			List<SRelation> sInRelList = new ArrayList<>();
+			for (SRelation rel : inRelations) {
+				if (rel instanceof SRelation) {
+					sInRelList.add((SRelation) rel);
+				}
+			}
+			return sInRelList;
+		}
+		return null;
+	}
+
 	// =======================================> SAnnotation
 	/** {@inheritDoc} **/
 	@Override

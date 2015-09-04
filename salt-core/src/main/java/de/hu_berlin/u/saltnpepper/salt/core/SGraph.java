@@ -2,6 +2,7 @@ package de.hu_berlin.u.saltnpepper.salt.core;
 
 import java.util.List;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
@@ -75,4 +76,10 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>>, SAnnotati
 	 * @generated
 	 */
 	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
+	/**
+	 * Searches for a layer having the given layer name.
+	 * @param layerName Name of the layer to search for
+	 * @return A complete list of all matching layers. Is never null.
+	 */
+	public List<SLayer> getSLayerByName(String layerName);
 }

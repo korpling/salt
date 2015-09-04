@@ -11,6 +11,7 @@ import org.eclipse.emf.common.util.EList;
 
 import com.google.common.collect.Multimap;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.Diff;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
@@ -874,6 +875,19 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(), (Integer) sData.getEnd());
 	}
 
+	/** {@inheritDoc SDocumentGraph#isIsomorph()} **/
+	@Override
+	public boolean isIsomorph(SDocumentGraph other) {
+		Diff diff= new Diff(this, other);
+		return(diff.isIsomorph());
+	}
+	/** {@inheritDoc SDocumentGraph#findDiffs()} **/
+	@Override
+	public boolean findDiffs(SDocumentGraph other) {
+		Diff diff= new Diff(this, other);
+		return(diff.findDiffs());
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

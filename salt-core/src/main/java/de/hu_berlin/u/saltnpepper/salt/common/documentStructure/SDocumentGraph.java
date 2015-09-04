@@ -24,6 +24,8 @@ import org.knallgrau.utils.textcat.TextCategorizer;
 
 import com.google.common.collect.Multimap;
 
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.Diff;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.tokenizer.Tokenizer;
@@ -856,4 +858,23 @@ public interface SDocumentGraph extends SGraph {
 	 * @return the text which is overlapped by the passed node
 	 */
 	public String getText(SNode sNode);
+	
+	/**
+	 * Compares the passed graph with the current one and returns if they are isomorph or not. In case of the graphs are not
+	 * isomorph, this method does not record all differences. TO speed up the computation.
+	 * it just detects the first difference and returns false. To get a full list of all differences, 
+	 * use method {@link #findDiffs()}.
+	 * @param other the graph to be compared with this one
+	 * @return true, if graphs are isomorph, false otherwise.
+	 */
+	public boolean isIsomorph(SDocumentGraph other);
+	/**
+	 * Compares the passed graph with the current one and returns if they are isomorph or not. If graphs are not isomporph, 
+	 * this method finds and records  all differences and lists them. That means the entire graphs 
+	 * have to be compared and could slow down the computation. If you are only interested in the 
+	 * result and not in the particular differences, use method {@link #isIsomorph()}.
+	 * @param other the graph to be compared with this one 
+	 * @return true, if graphs are isomorph, false otherwise.
+	 */
+	public boolean findDiffs(SDocumentGraph other);
 } // SDocumentGraph

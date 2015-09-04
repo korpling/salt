@@ -3,6 +3,9 @@ package de.hu_berlin.u.saltnpepper.graph;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
+
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.index.IndexMgr;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
@@ -192,7 +195,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 * 
 	 * @return all contained layers
 	 */
-	public Set<Layer<N, R>> getLayers();
+	public Set<? extends Layer<N, R>> getLayers();
 
 	/**
 	 * Adds the passed layer to this graph. If layer is null nothing is

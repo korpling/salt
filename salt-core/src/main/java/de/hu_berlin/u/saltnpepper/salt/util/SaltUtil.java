@@ -8,6 +8,12 @@ import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SCatAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
 
 /**
  * This class contains a set of helpful methods.
@@ -148,6 +154,22 @@ public class SaltUtil {
 	public static final String FEAT_SDATA_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_SDATA;
 
 	// ======================================< keywords for features
+	// ======================================> keywords for semantics
+	/** name for {@link SCatAnnotation} **/
+	public static final String SEMANTICS_CAT="cat";
+	/** name for {@link SPOSAnnotation} **/
+	public static final String SEMANTICS_POS="pos";
+	/** name for {@link SLemmaAnnotation} **/
+	public static final String SEMANTICS_LEMMA="lemma";
+	/** name for {@link SSentenceAnnotation} **/
+	public static final String SEMANTICS_SENTENCE="sentence";
+	/** value for {@link STypeAnnotation} **/
+	public static final String SEMANTICS_TYPE="type";
+	/** value for {@link SWordAnnotation} **/
+	public static final String SEMANTICS_WORD="word";
+	/** name for {@link SWordAnnotation} and {@link SSentenceAnnotation} **/
+	public static final String SEMANTICS_UNIT= "unit";
+	// ======================================< keywords for semantics
 
 //	/** Determines the separator between points of time in a {@link STimeline}**/
 //	public static final String TIMELINE_SEPARATOR = "#";
