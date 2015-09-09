@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -47,6 +48,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.DataSourceAccessor;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff.Difference;
 
 @SuppressWarnings("serial")
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
@@ -883,7 +885,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 	/** {@inheritDoc SDocumentGraph#findDiffs()} **/
 	@Override
-	public boolean findDiffs(SDocumentGraph other) {
+	public Set<Difference> findDiffs(SDocumentGraph other) {
 		Diff diff= new Diff(this, other);
 		return(diff.findDiffs());
 	}

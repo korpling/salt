@@ -18,7 +18,7 @@ import de.hu_berlin.u.saltnpepper.salt.index.IndexMgrImpl;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public class GraphImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Graph<N, R> {
+public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends IdentifiableElementImpl implements Graph<N, R, L> {
 	public GraphImpl() {
 		init();
 	}
@@ -82,7 +82,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * </ul>
 	 */
 	protected void init() {
-		layers = Collections.synchronizedSet(new HashSet<Layer<N, R>>());
+		layers = Collections.synchronizedSet(new HashSet<L>());
 		nodes = Collections.synchronizedList(new ArrayList<N>(expectedNodes));
 		relations = Collections.synchronizedList(new ArrayList<R>(expectedNodes));
 		indexMgr = new IndexMgrImpl();
@@ -462,17 +462,17 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	// =========================================================== < Relations
 
 	// =========================================================== > Layers
-	private Set<Layer<N, R>> layers = null;
+	private Set<L> layers = null;
 
 	/** {@inheritDoc} **/
 	@Override
-	public Set<Layer<N, R>> getLayers() {
+	public Set<L> getLayers() {
 		return (Collections.unmodifiableSet(layers));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public Layer<N, R> getLayer(String layerId) {
+	public L getLayer(String layerId) {
 		if (layerId == null) {
 			return (null);
 		}
@@ -487,7 +487,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addLayer(Layer<N, R> layer) {
+	public void addLayer(L layer) {
 		if (layer != null) {
 			basicAddLayer(layer);
 			if (layer instanceof LayerImpl) {
@@ -533,7 +533,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param node
 	 *            node to be inserted
 	 */
-	protected void basicAddLayer(Layer<N, R> layer) {
+	protected void basicAddLayer(L layer) {
 		if (layer != null) {
 			if (!layers.contains(layer)) {
 				// if layers has no id a new id will be given to layer
@@ -557,7 +557,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/** {@inheritDoc} **/
 	@Override
-	public void removeLayer(Layer<N, R> layer) {
+	public void removeLayer(L layer) {
 		if (layer instanceof LayerImpl) {
 			((LayerImpl<N, R>) layer).basicSetGraph(null);
 		}
@@ -580,7 +580,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param node
 	 *            the node to be removed
 	 */
-	protected void basicRemoveLayer(Layer<N, R> layer) {
+	protected void basicRemoveLayer(L layer) {
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);

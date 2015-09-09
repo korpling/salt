@@ -43,7 +43,7 @@ public class LayerTest {
 	public void testSetGetGraph() {
 		assertNull(getFixture().getGraph());
 
-		Graph<Node, Relation<Node, Node>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
 		getFixture().setGraph(graph);
 		assertEquals(getFixture().getGraph(), graph);
 
@@ -57,7 +57,7 @@ public class LayerTest {
 	 */
 	@Test
 	public void testDoubleChaining() {
-		Graph<Node, Relation<Node, Node>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getLayers(), graph.getLayers().contains(getFixture()));
 	}
@@ -96,6 +96,41 @@ public class LayerTest {
 		for (Node node : nodes) {
 			assertTrue(getFixture().getNodes().contains(node));
 		}
+	}
+	
+	/**
+	 * Tests that all nodes added to layer also contains the layer.
+	 */
+	public void testDoubleChainingAddNode() {
+		List<Node> nodes = new ArrayList<>();
+
+		for (int i = 0; i < 50; i++) {
+			Node node = GraphFactory.createNode();
+			nodes.add(node);
+			getFixture().addNode(node);
+		}
+		assertEquals(nodes.size(), getFixture().getNodes().size());
+		for (Node node : nodes) {
+			assertTrue(node.getLayers().contains(getFixture()));
+		}
+	}
+	
+	/**
+	 * Tests that all nodes removed from this layer also contains the layer.
+	 */
+	public void testDoubleChainingRemoveNode() {
+		List<Node> nodes = new ArrayList<>();
+
+		for (int i = 0; i < 50; i++) {
+			Node node = GraphFactory.createNode();
+			nodes.add(node);
+			getFixture().addNode(node);
+		}
+		assertEquals(nodes.size(), getFixture().getNodes().size());
+		for (Node node : nodes) {
+			node.removeLayer(getFixture());
+		}
+		assertEquals(0, getFixture().getNodes().size());
 	}
 
 	/**

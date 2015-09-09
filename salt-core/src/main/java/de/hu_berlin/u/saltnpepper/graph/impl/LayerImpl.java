@@ -20,24 +20,24 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	}
 
 	/** container graph **/
-	protected Graph<N, R> graph = null;
+	protected Graph graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph<N, R> getGraph() {
+	public Graph getGraph() {
 		return (graph);
 	}
 
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
-	public void setGraph(Graph<N, R> graph) {
+	public void setGraph(Graph graph) {
 		if (graph != null) {
 			if (graph instanceof GraphImpl) {
-				((GraphImpl<N, R>) graph).basicAddLayer(this);
+				((GraphImpl) graph).basicAddLayer(this);
 			}
 		} else {
 			if (getGraph() instanceof GraphImpl) {
-				((GraphImpl<N, R>) getGraph()).basicRemoveLayer(this);
+				((GraphImpl) getGraph()).basicRemoveLayer(this);
 			}
 		}
 		basicSetGraph(graph);
@@ -67,7 +67,7 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param graph
 	 *            graph which contains this layer
 	 */
-	protected void basicSetGraph(Graph<N, R> graph) {
+	protected void basicSetGraph(Graph graph) {
 		this.graph = graph;
 	}
 

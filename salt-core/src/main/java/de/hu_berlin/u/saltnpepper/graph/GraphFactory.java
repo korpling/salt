@@ -16,7 +16,7 @@ public class GraphFactory {
 	 * 
 	 * @return new {@link Graph} object
 	 */
-	public static Graph<Node, Relation<Node, Node>> createGraph() {
+	public static Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
 		return (factory.createGraph());
 	}
 

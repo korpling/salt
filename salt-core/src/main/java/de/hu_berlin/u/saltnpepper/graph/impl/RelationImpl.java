@@ -1,6 +1,10 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl.UPDATE_TYPE;
@@ -132,5 +136,37 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 */
 	protected void basicSetGraph(Graph graph) {
 		this.graph = graph;
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public Set<Layer> getLayers() {
+		Set<Layer> layers= new HashSet<>();
+		if (getGraph()!= null){
+			Set<Layer> allLayers= getGraph().getLayers();
+			if (	(allLayers!= null)&&
+					(allLayers.size()>0)){
+				for (Layer layer: allLayers){
+					if (layer.getRelations().contains(this)){
+						layers.add(layer);
+					}
+				}
+			}
+		}
+		return(layers);
+	}
+	/** {@inheritDoc} **/
+	@Override
+	public void addLayer(Layer layer) {
+		if (layer!= null){
+			layer.addRelation(this);
+		}
+	}
+	/** {@inheritDoc} **/
+	@Override
+	public void removeLayer(Layer layer) {
+		if (layer!= null){
+			layer.removeRelation(this);
+		}
 	}
 }

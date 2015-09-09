@@ -18,6 +18,7 @@
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
 import java.util.List;
+import java.util.Set;
 
 import org.knallgrau.utils.textcat.TextCategorizer;
 
@@ -34,6 +35,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff.Difference;
 
 /**
  * The document-structure covers the "real" linguistic data, which means primary
@@ -873,5 +875,5 @@ public interface SDocumentGraph extends SGraph {
 	 * @param other the graph to be compared with this one 
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
-	public boolean findDiffs(SDocumentGraph other);
+	public Set<Difference> findDiffs(SDocumentGraph other);
 } // SDocumentGraph

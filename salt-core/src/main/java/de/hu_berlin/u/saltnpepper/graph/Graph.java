@@ -25,7 +25,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
  * @param <E>
  *            type of contained {@link Relation}s
  */
-public interface Graph<N extends Node, R extends Relation<N, N>> extends IdentifiableElement {
+public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends IdentifiableElement {
 	/**
 	 * Returns the index manager. The index manager is used to register indexes
 	 * for sets of nodes, relations, layers etc. or single values. The manager
@@ -185,14 +185,14 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param layerId
 	 *            id of the layer to be searched for
 	 */
-	public Layer<N, R> getLayer(String layerId);
+	public L getLayer(String layerId);
 
 	/**
 	 * Returns a set of layers contained by this graph.
 	 * 
 	 * @return all contained layers
 	 */
-	public Set<? extends Layer<N, R>> getLayers();
+	public Set<L> getLayers();
 
 	/**
 	 * Adds the passed layer to this graph. If layer is null nothing is
@@ -204,7 +204,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param layer
 	 *            layer to be inserted
 	 */
-	public void addLayer(Layer<N, R> layer);
+	public void addLayer(L layer);
 
 	/**
 	 * Returns whether this graph contains a {@link Layer} corresponding to the
@@ -226,5 +226,5 @@ public interface Graph<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param layer
 	 *            the layer to be removed
 	 */
-	public void removeLayer(Layer<N, R> layer);
+	public void removeLayer(L layer);
 }

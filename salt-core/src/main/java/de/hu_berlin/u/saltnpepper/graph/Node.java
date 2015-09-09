@@ -1,5 +1,7 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
+import java.util.Set;
+
 /**
  * In graph theory a node is a placeholder, which can be related with other
  * nodes via an relation.
@@ -28,4 +30,29 @@ public interface Node extends IdentifiableElement {
 	 *            graph which contains this node
 	 */
 	public void setGraph(Graph graph);
+
+	/**
+	 * Returns all layers containing this node. This is a computed set and only
+	 * works, when this node is contained in a graph. If this list is used
+	 * multiple times, it makes sense to store that set.
+	 * 
+	 * @return a set of layers containing this node
+	 */
+	public Set<Layer> getLayers();
+
+	/**
+	 * Adds this node to the passed layer.
+	 * 
+	 * @param layer
+	 *            to which this node should be added
+	 */
+	public void addLayer(Layer layer);
+
+	/**
+	 * Removes this node from the passed layer.
+	 * 
+	 * @param layer
+	 *            from which this node should be removed
+	 */
+	public void removeLayer(Layer layer);
 }

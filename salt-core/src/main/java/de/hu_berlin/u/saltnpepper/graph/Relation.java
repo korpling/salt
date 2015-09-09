@@ -1,5 +1,7 @@
 package de.hu_berlin.u.saltnpepper.graph;
 
+import java.util.Set;
+
 /**
  * In graph theory an relation is a relation between two nodes, often an
  * relation is realized as a pair of nodes.
@@ -83,4 +85,29 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	 *            graph which contains this relation
 	 */
 	public void setGraph(Graph graph);
+
+	/**
+	 * Returns all layers containing this relation. This is a computed set and
+	 * only works, when this relation is contained in a graph. If this list is
+	 * used multiple times, it makes sense to store that set.
+	 * 
+	 * @return a set of layers containing this relation
+	 */
+	public Set<Layer> getLayers();
+
+	/**
+	 * Adds this relation to the passed layer.
+	 * 
+	 * @param layer
+	 *            to which this node should be added
+	 */
+	public void addLayer(Layer layer);
+
+	/**
+	 * Removes this relation from the passed layer.
+	 * 
+	 * @param layer
+	 *            from which this node should be removed
+	 */
+	public void removeLayer(Layer layer);
 }

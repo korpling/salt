@@ -1,5 +1,8 @@
 package de.hu_berlin.u.saltnpepper.graph.impl.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -7,6 +10,7 @@ import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 
@@ -32,7 +36,7 @@ public class RelationTest {
 	 */
 	@Test
 	public void testDoubleChaining() {
-		Graph<Node, Relation<Node, Node>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
 		Node source = GraphFactory.createNode();
 		Node target = GraphFactory.createNode();
 		graph.addNode(source);
@@ -42,5 +46,78 @@ public class RelationTest {
 
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getRelations(), graph.getRelations().contains(getFixture()));
+	}
+	
+	/**
+	 * tests the adding and getting of a layer to a relation
+	 */
+	@Test
+	public void testAddGetLayers() {
+		Layer layer = GraphFactory.createLayer();
+		Node source= GraphFactory.createNode();
+		Node target= GraphFactory.createNode();
+		getFixture().setSource(source);
+		getFixture().setTarget(target);
+		
+		//prerequirements
+		Graph graph= GraphFactory.createGraph();
+		graph.addLayer(layer);
+		graph.addNode(source);
+		graph.addNode(target);
+		graph.addRelation(getFixture());
+		
+		getFixture().addLayer(layer);
+		assertEquals(1, getFixture().getLayers().size());
+		assertTrue(getFixture().getLayers().contains(layer));
+	}
+
+	/**
+	 * Tests the adding, getting and removing of a layer to a relation
+	 */
+	@Test
+	public void testRemoveLayers() {
+		assertNotNull(getFixture().getLayers());
+		Layer layer = GraphFactory.createLayer();
+		Node source= GraphFactory.createNode();
+		Node target= GraphFactory.createNode();
+		getFixture().setSource(source);
+		getFixture().setTarget(target);
+		
+		//prerequirements
+		Graph graph= GraphFactory.createGraph();
+		graph.addLayer(layer);
+		graph.addNode(source);
+		graph.addNode(target);
+		graph.addRelation(getFixture());
+		
+		getFixture().addLayer(layer);
+		assertTrue(getFixture().getLayers().contains(layer));
+		getFixture().removeLayer(layer);
+		assertEquals(0, getFixture().getLayers().size());
+	}
+
+	/**
+	 * Tests whether adding a layer to a relation, results in adding the relation to the
+	 * layer. And the same goes for removing.
+	 */
+	@Test
+	public void testDoubleChainingLayer() {
+		Layer layer = GraphFactory.createLayer();
+		Node source= GraphFactory.createNode();
+		Node target= GraphFactory.createNode();
+		getFixture().setSource(source);
+		getFixture().setTarget(target);
+		
+		//prerequirements
+		Graph graph= GraphFactory.createGraph();
+		graph.addLayer(layer);
+		graph.addNode(source);
+		graph.addNode(target);
+		graph.addRelation(getFixture());
+		
+		getFixture().addLayer(layer);
+		assertTrue(layer.getRelations().contains(getFixture()));
+		getFixture().removeLayer(layer);
+		assertFalse(layer.getRelations().contains(getFixture()));
 	}
 }

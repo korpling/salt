@@ -20,7 +20,8 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
-public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>> implements SGraph {
+public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
+	
 	/**
 	 * {@inheritDoc SGraph#getSLayerByName(String)}
 	 */

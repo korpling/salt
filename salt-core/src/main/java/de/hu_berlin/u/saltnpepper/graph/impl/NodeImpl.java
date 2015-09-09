@@ -1,6 +1,10 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import de.hu_berlin.u.saltnpepper.graph.Graph;
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
 @SuppressWarnings("serial")
@@ -89,5 +93,37 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 */
 	protected void basicSetGraph(Graph graph) {
 		this.graph = graph;
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public Set<Layer> getLayers() {
+		Set<Layer> layers= new HashSet<>();
+		if (getGraph()!= null){
+			Set<Layer> allLayers= getGraph().getLayers();
+			if (	(allLayers!= null)&&
+					(allLayers.size()>0)){
+				for (Layer layer: allLayers){
+					if (layer.getNodes().contains(this)){
+						layers.add(layer);
+					}
+				}
+			}
+		}
+		return(layers);
+	}
+	/** {@inheritDoc} **/
+	@Override
+	public void addLayer(Layer layer) {
+		if (layer!= null){
+			layer.addNode(this);
+		}
+	}
+	/** {@inheritDoc} **/
+	@Override
+	public void removeLayer(Layer layer) {
+		if (layer!= null){
+			layer.removeNode(this);
+		}
 	}
 }

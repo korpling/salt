@@ -28,19 +28,19 @@ import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 
 public class GraphTest {
-	protected Graph<Node, Relation<Node, Node>> fixture = null;
+	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture = null;
 
-	public Graph<Node, Relation<Node, Node>> getFixture() {
+	public Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> getFixture() {
 		return fixture;
 	}
 
-	public void setFixture(Graph<Node, Relation<Node, Node>> fixture) {
+	public void setFixture(Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture) {
 		this.fixture = fixture;
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new GraphImpl<Node, Relation<Node, Node>>());
+		setFixture(new GraphImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>());
 	}
 
 	/**

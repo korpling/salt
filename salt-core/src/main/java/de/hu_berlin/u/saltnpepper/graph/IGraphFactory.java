@@ -13,7 +13,7 @@ public interface IGraphFactory {
 	 * 
 	 * @return new {@link Graph} object
 	 */
-	public abstract Graph<Node, Relation<Node, Node>> createGraph();
+	public abstract Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph();
 
 	/**
 	 * Creates a new {@link Node} object of type {@link NodeImpl}.

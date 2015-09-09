@@ -19,7 +19,7 @@ public interface Layer<N extends Node, R extends Relation<N, N>> extends Identif
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph<N, R> getGraph();
+	public Graph getGraph();
 
 	/**
 	 * Sets the container graph of this node. For double chaining between this
@@ -29,7 +29,7 @@ public interface Layer<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param graph
 	 *            graph which contains this layer
 	 */
-	public void setGraph(Graph<N, R> graph);
+	public void setGraph(Graph graph);
 
 	/**
 	 * Adds the passed node to this layer. The insertion order is preserved. If
