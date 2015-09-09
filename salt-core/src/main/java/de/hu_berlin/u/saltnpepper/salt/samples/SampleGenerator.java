@@ -80,38 +80,38 @@ public class SampleGenerator {
 			throw new SaltSampleException("Cannot create example, because the given saltProjects is empty.");
 		}
 
-		SCorpusGraph sCorpGraph = SaltFactory.createSCorpusGraph();
-		saltProject.getCorpusGraphs().add(sCorpGraph);
-		SCorpus sCorpus1 = SaltFactory.createSCorpus();
-		sCorpus1.setName("rootCorpus");
-		sCorpGraph.addNode(sCorpus1);
-		SCorpus sCorpus2 = SaltFactory.createSCorpus();
-		sCorpus2.setName("subCorpus1");
-		SCorpus sCorpus3 = SaltFactory.createSCorpus();
-		sCorpus3.setName("subCorpus2");
+		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
+		saltProject.addCorpusGraph(corpGraph);
+		SCorpus corpus1 = SaltFactory.createSCorpus();
+		corpus1.setName("rootCorpus");
+		corpGraph.addNode(corpus1);
+		SCorpus corpus2 = SaltFactory.createSCorpus();
+		corpus2.setName("subCorpus1");
+		SCorpus corpus3 = SaltFactory.createSCorpus();
+		corpus3.setName("subCorpus2");
 
-		sCorpGraph.addSubCorpus(sCorpus1, sCorpus2);
-		sCorpGraph.addSubCorpus(sCorpus1, sCorpus3);
+		corpGraph.addSubCorpus(corpus1, corpus2);
+		corpGraph.addSubCorpus(corpus1, corpus3);
 
-		SDocument sDoc = null;
+		SDocument doc = null;
 
-		sDoc = SaltFactory.createSDocument();
-		sDoc.setName("doc1");
-		sCorpGraph.addDocument(sCorpus1, sDoc);
+		doc = SaltFactory.createSDocument();
+		doc.setName("doc1");
+		corpGraph.addDocument(corpus1, doc);
 
-		sDoc = SaltFactory.createSDocument();
-		sDoc.setName("doc2");
-		sCorpGraph.addDocument(sCorpus1, sDoc);
+		doc = SaltFactory.createSDocument();
+		doc.setName("doc2");
+		corpGraph.addDocument(corpus1, doc);
 
-		sDoc = SaltFactory.createSDocument();
-		sDoc.setName("doc3");
-		sCorpGraph.addDocument(sCorpus2, sDoc);
+		doc = SaltFactory.createSDocument();
+		doc.setName("doc3");
+		corpGraph.addDocument(corpus2, doc);
 
-		sDoc = SaltFactory.createSDocument();
-		sDoc.setName("doc4");
-		sCorpGraph.addDocument(sCorpus2, sDoc);
+		doc = SaltFactory.createSDocument();
+		doc.setName("doc4");
+		corpGraph.addDocument(corpus2, doc);
 
-		return (sCorpGraph);
+		return (corpGraph);
 	}
 
 	/**
@@ -137,12 +137,12 @@ public class SampleGenerator {
 		saltProject.setName("sampleSaltProject");
 		// this works, because after createCorpusStructure() was called, only
 		// one graph exists in salt project
-		SCorpusGraph sCorpGraph = SaltFactory.createSCorpusGraph();
+		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
 
-		sCorpGraph = createCorpusStructure(sCorpGraph);
+		corpGraph = createCorpusStructure(corpGraph);
 
-		saltProject.getCorpusGraphs().add(sCorpGraph);
-		for (SDocument sDocument : sCorpGraph.getDocuments()) {
+		saltProject.addCorpusGraph(corpGraph);
+		for (SDocument sDocument : corpGraph.getDocuments()) {
 			createSDocumentStructure(sDocument);
 		}
 		return (saltProject);
@@ -163,9 +163,9 @@ public class SampleGenerator {
 	 * @throws SAXException
 	 */
 	public static SCorpusGraph createCorpusStructure() {
-		SCorpusGraph sCorpGraph = SaltFactory.createSCorpusGraph();
-		createCorpusStructure(sCorpGraph);
-		return (sCorpGraph);
+		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
+		createCorpusStructure(corpGraph);
+		return (corpGraph);
 	}
 
 	/**
@@ -182,41 +182,41 @@ public class SampleGenerator {
 	 * @throws IOException
 	 * @throws SAXException
 	 */
-	public static SCorpusGraph createCorpusStructure(SCorpusGraph sCorpGraph1) {
-		if (sCorpGraph1 == null) {
+	public static SCorpusGraph createCorpusStructure(SCorpusGraph corpGraph1) {
+		if (corpGraph1 == null) {
 			throw new SaltSampleException("Cannot create example, because the given sCorpusGraph is empty.");
 		}
-		sCorpGraph1.setId("corpusGraph1");
-		SCorpus sCorpusRoot = SaltFactory.createSCorpus();
-		sCorpusRoot.setName("rootCorpus");
-		sCorpGraph1.addNode(sCorpusRoot);
-		SCorpus sCorpusSub1 = SaltFactory.createSCorpus();
-		sCorpusSub1.setName("subCorpus1");
-		SCorpus sCorpusSub2 = SaltFactory.createSCorpus();
-		sCorpusSub2.setName("subCorpus2");
+		corpGraph1.setId("corpusGraph1");
+		SCorpus corpusRoot = SaltFactory.createSCorpus();
+		corpusRoot.setName("rootCorpus");
+		corpGraph1.addNode(corpusRoot);
+		SCorpus corpusSub1 = SaltFactory.createSCorpus();
+		corpusSub1.setName("subCorpus1");
+		SCorpus corpusSub2 = SaltFactory.createSCorpus();
+		corpusSub2.setName("subCorpus2");
 
-		sCorpGraph1.addSubCorpus(sCorpusRoot, sCorpusSub1);
-		sCorpGraph1.addSubCorpus(sCorpusRoot, sCorpusSub2);
+		corpGraph1.addSubCorpus(corpusRoot, corpusSub1);
+		corpGraph1.addSubCorpus(corpusRoot, corpusSub2);
 
-		SDocument sDoc = null;
+		SDocument doc = null;
 
-		sDoc = SaltFactory.createSDocument();
-		sDoc.setName("doc1");
-		sCorpGraph1.addDocument(sCorpusSub1, sDoc);
+		doc = SaltFactory.createSDocument();
+		doc.setName("doc1");
+		corpGraph1.addDocument(corpusSub1, doc);
 
-		sDoc = SaltFactory.createSDocument();
-		sDoc.setName("doc2");
-		sCorpGraph1.addDocument(sCorpusSub1, sDoc);
+		doc = SaltFactory.createSDocument();
+		doc.setName("doc2");
+		corpGraph1.addDocument(corpusSub1, doc);
 
-		sDoc = SaltFactory.createSDocument();
-		sDoc.setName("doc3");
-		sCorpGraph1.addDocument(sCorpusSub2, sDoc);
+		doc = SaltFactory.createSDocument();
+		doc.setName("doc3");
+		corpGraph1.addDocument(corpusSub2, doc);
 
-		sDoc = SaltFactory.createSDocument();
-		sDoc.setName("doc4");
-		sCorpGraph1.addDocument(sCorpusSub2, sDoc);
+		doc = SaltFactory.createSDocument();
+		doc.setName("doc4");
+		corpGraph1.addDocument(corpusSub2, doc);
 
-		return (sCorpGraph1);
+		return (corpGraph1);
 	}
 
 	/**
@@ -296,17 +296,17 @@ public class SampleGenerator {
 		// add SOrderRelations for speaker 1
 		SToken lastSTok = null;
 		int lastPointOfTime = 0;
-		for (SToken sTok : document.getDocumentGraph().getTokens()) {
+		for (SToken tok : document.getDocumentGraph().getTokens()) {
 			if (lastSTok != null) {
-				SOrderRelation sOrd = SaltFactory.createSOrderRelation();
-				sOrd.setSource(lastSTok);
-				sOrd.setTarget(sTok);
-				document.getDocumentGraph().addRelation(sOrd);
+				SOrderRelation rel = SaltFactory.createSOrderRelation();
+				rel.setSource(lastSTok);
+				rel.setTarget(tok);
+				document.getDocumentGraph().addRelation(rel);
 			}
 
 			// set timeline
 			STimelineRelation sTimeRel = SaltFactory.createSTimelineRelation();
-			sTimeRel.setSource(sTok);
+			sTimeRel.setSource(tok);
 			sTimeRel.setTarget(document.getDocumentGraph().getTimeline());
 			sTimeRel.setStart(lastPointOfTime);
 			lastPointOfTime += 1;
@@ -316,19 +316,19 @@ public class SampleGenerator {
 			sTimeRel.setEnd(lastPointOfTime);
 			document.getDocumentGraph().addRelation(sTimeRel);
 
-			lastSTok = sTok;
+			lastSTok = tok;
 		}
 
 		// create text of speaker2
 		STextualDS sText2 = document.getDocumentGraph().createTextualDS(PRIMARY_TEXT_EN_SPK2);
 
 		SToken spk2_tok0 = createToken(0, 3, sText2, document, null);
-		STimelineRelation sTimeRel0 = SaltFactory.createSTimelineRelation();
-		sTimeRel0.setSource(spk2_tok0);
-		sTimeRel0.setTarget(document.getDocumentGraph().getTimeline());
-		sTimeRel0.setStart(7);
-		sTimeRel0.setEnd(9);
-		document.getDocumentGraph().addRelation(sTimeRel0);
+		STimelineRelation timeRel0 = SaltFactory.createSTimelineRelation();
+		timeRel0.setSource(spk2_tok0);
+		timeRel0.setTarget(document.getDocumentGraph().getTimeline());
+		timeRel0.setStart(7);
+		timeRel0.setEnd(9);
+		document.getDocumentGraph().addRelation(timeRel0);
 
 		SToken spk2_tok1 = createToken(4, 6, sText2, document, null);
 		STimelineRelation sTimeRel1 = SaltFactory.createSTimelineRelation();
@@ -339,12 +339,12 @@ public class SampleGenerator {
 		document.getDocumentGraph().addRelation(sTimeRel1);
 
 		SToken spk2_tok2 = createToken(7, 11, sText2, document, null);
-		STimelineRelation sTimeRel2 = SaltFactory.createSTimelineRelation();
-		sTimeRel2.setSource(spk2_tok2);
-		sTimeRel2.setTarget(document.getDocumentGraph().getTimeline());
-		sTimeRel2.setStart(10);
-		sTimeRel2.setEnd(11);
-		document.getDocumentGraph().addRelation(sTimeRel2);
+		STimelineRelation timeRel2 = SaltFactory.createSTimelineRelation();
+		timeRel2.setSource(spk2_tok2);
+		timeRel2.setTarget(document.getDocumentGraph().getTimeline());
+		timeRel2.setStart(10);
+		timeRel2.setEnd(11);
+		document.getDocumentGraph().addRelation(timeRel2);
 
 		// add SOrderRelations for speaker 2
 		SOrderRelation sOrd1 = SaltFactory.createSOrderRelation();

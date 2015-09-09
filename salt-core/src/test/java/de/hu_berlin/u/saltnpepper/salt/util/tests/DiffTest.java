@@ -353,13 +353,4 @@ public class DiffTest {
 //		out.close();
 //
 //	}
-
-	@Test
-	public void testGua() {
-		BiMap<Object, Object> isoObjects = null;
-		isoObjects = HashBiMap.create();
-		isoObjects.put("A", "B");
-		isoObjects.put("A", "C");
-		System.out.println(isoObjects);
-	}
 }

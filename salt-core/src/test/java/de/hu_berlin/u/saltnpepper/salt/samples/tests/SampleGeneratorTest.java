@@ -32,12 +32,7 @@ public class SampleGeneratorTest {
 	@Test
 	public void testCreateCorpusStructure_saltProject() {
 		SaltProject fixture = SaltFactory.createSaltProject();
-
-		try {
-			SampleGenerator.createCorpusStructure(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createCorpusStructure(fixture);
 	}
 
 	@Test
@@ -62,11 +57,7 @@ public class SampleGeneratorTest {
 
 	@Test
 	public void testCreateSaltProject() {
-		try {
-			SampleGenerator.createSaltProject();
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createSaltProject();
 	}
 
 	@Test
@@ -126,7 +117,8 @@ public class SampleGeneratorTest {
 
 	@Test
 	public void testCreateTokens__SDocument_STextualDS() {
-		// TODO
+		SDocument fixture = SaltFactory.createSDocument();
+		SampleGenerator.createTokens(fixture);
 	}
 
 	@Test
