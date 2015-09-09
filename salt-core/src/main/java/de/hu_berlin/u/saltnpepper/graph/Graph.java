@@ -3,9 +3,6 @@ package de.hu_berlin.u.saltnpepper.graph;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
-
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.index.IndexMgr;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 

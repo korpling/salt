@@ -2,7 +2,6 @@ package de.hu_berlin.u.saltnpepper.salt.core;
 
 import java.util.List;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 

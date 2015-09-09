@@ -261,7 +261,7 @@ public class TokenizerTest {
 
 	/**
 	 * checks the following text via TokenizeToToken, tests tokenizing with
-	 * starting blank " Die"
+	 * ending blank "Feigenblatt  "
 	 */
 	@Test
 	public void testCase5() {

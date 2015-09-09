@@ -66,7 +66,7 @@ public interface Layer<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param relation
 	 *            relation to be inserted into this layer
 	 */
-	public void addRelation(R relation);
+	public void addRelation(Relation<? extends Node, ? extends Node> relation);
 
 	/**
 	 * Removes the passed relation from this layer. If the passed relation is

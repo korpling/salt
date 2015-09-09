@@ -6,15 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
+import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
@@ -34,10 +31,10 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>> implem
 		List<SLayer> result = new ArrayList<>();
 		if (layerName != null) {
 			for (SLayer l : getLayers()) {
-				if ((l.getSName() == null) || (l.getSName().isEmpty())) {
+				if ((l.getName() == null) || (l.getName().isEmpty())) {
 					break;
 				}
-				if (layerName.equals(l.getSName())) {
+				if (layerName.equals(l.getName())) {
 					result.add(l);
 				}
 			}

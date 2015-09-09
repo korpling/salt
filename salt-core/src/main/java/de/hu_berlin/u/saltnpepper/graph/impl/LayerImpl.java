@@ -102,11 +102,11 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/** {@inheritDoc Layer#addRelation(Relation)} **/
 	@Override
-	public void addRelation(R relation) {
+	public void addRelation(Relation<? extends Node, ? extends Node> relation) {
 		if ((getGraph() != null) && (!getGraph().containsRelation(relation.getId()))) {
 			getGraph().addRelation(relation);
 		}
-		relations.add(relation);
+		relations.add((R)relation);
 	}
 
 	/** {@inheritDoc Layer#removeRelation(Relation)} **/

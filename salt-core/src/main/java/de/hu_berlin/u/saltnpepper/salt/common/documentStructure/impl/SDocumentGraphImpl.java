@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
 
 import com.google.common.collect.Multimap;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.modules.Diff;
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
@@ -47,6 +46,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.DataSourceAccessor;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff;
 
 @SuppressWarnings("serial")
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
