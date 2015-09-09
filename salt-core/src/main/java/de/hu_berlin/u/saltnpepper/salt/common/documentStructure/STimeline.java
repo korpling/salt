@@ -17,7 +17,6 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-import java.util.List;
 
 public interface STimeline extends SSequentialDS<Integer, Integer>, SDocumentGraphObject {
 	// public List<String> getPointsOfTime();

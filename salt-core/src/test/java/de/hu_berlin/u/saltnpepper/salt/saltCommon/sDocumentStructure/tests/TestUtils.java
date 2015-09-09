@@ -2,9 +2,6 @@ package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import org.junit.Test;
-
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;

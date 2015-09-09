@@ -21,19 +21,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;

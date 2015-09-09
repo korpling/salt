@@ -18,21 +18,12 @@
 package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
-import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public class STimelineTest extends SSequentialDSTest<Integer, Integer> {
 

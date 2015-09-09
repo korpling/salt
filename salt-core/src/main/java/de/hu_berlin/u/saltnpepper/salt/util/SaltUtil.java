@@ -6,7 +6,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SCatAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;

@@ -19,6 +19,7 @@ package de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl;
 
 import org.eclipse.emf.common.util.URI;
 
+import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;

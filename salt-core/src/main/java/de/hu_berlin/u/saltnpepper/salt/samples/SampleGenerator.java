@@ -38,6 +38,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelatio
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;

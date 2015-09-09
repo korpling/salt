@@ -18,12 +18,10 @@
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
-import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
-import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
 public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedialDS, Double> implements SMedialRelation {

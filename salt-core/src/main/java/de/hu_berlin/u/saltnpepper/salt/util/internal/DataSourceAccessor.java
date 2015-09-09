@@ -20,24 +20,18 @@ package de.hu_berlin.u.saltnpepper.salt.util.internal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextOverlappingRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
