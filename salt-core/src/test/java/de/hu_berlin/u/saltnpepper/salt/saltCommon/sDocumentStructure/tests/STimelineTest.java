@@ -30,7 +30,7 @@ public class STimelineTest extends SSequentialDSTest<Integer, Integer> {
 	public STimeline getFixture() {
 		return (STimeline) fixture;
 	}
-	
+
 	@Before
 	public void setUp() {
 		setFixture(SaltFactory.createSTimeline());
@@ -43,7 +43,8 @@ public class STimelineTest extends SSequentialDSTest<Integer, Integer> {
 	}
 
 	/**
-	 * Tests the methods {@link STimeline#getStart()} and {@link STimeline#increasePointOfTime()}.
+	 * Tests the methods {@link STimeline#getStart()} and
+	 * {@link STimeline#increasePointOfTime()}.
 	 */
 	@Override
 	public void testGetStart() {
@@ -53,7 +54,8 @@ public class STimelineTest extends SSequentialDSTest<Integer, Integer> {
 	}
 
 	/**
-	 * Tests the methods {@link STimeline#getStart()} and {@link STimeline#increasePointOfTime()}.
+	 * Tests the methods {@link STimeline#getStart()} and
+	 * {@link STimeline#increasePointOfTime()}.
 	 */
 	@Override
 	public void testGetEnd() {
@@ -63,8 +65,11 @@ public class STimelineTest extends SSequentialDSTest<Integer, Integer> {
 		getFixture().increasePointOfTime();
 		assertEquals(Integer.valueOf(2), getFixture().getEnd());
 	}
-	
-	/** Tests the increasing of points of time for a passed number {@link STimeline#increasePointOfTime(Integer)}  **/
+
+	/**
+	 * Tests the increasing of points of time for a passed number
+	 * {@link STimeline#increasePointOfTime(Integer)}
+	 **/
 	@Test
 	public void testIncreasePointOfTime_INTEGER() {
 		getFixture().increasePointOfTime(5);
@@ -72,4 +77,4 @@ public class STimelineTest extends SSequentialDSTest<Integer, Integer> {
 		getFixture().increasePointOfTime(10);
 		assertEquals(Integer.valueOf(15), getFixture().getData());
 	}
-} //STimelineTest
+} // STimelineTest

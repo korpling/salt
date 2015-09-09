@@ -25,11 +25,12 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
-
 /**
- * This class provides {@link SOrderRelation}, to determine the order of {@link SNode}s. Means creating a path through nodes on 
- * "same level", to identify, that one nodes comes before another one, when it is not computable from the 
- * datasources.
+ * This class provides {@link SOrderRelation}, to determine the order of
+ * {@link SNode}s. Means creating a path through nodes on "same level", to
+ * identify, that one nodes comes before another one, when it is not computable
+ * from the datasources.
+ * 
  * @author florian
  */
 @SuppressWarnings("serial")
@@ -48,4 +49,4 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 		}
 		super.setGraph(graph);
 	}
-} //SOrderRelationImpl
+} // SOrderRelationImpl

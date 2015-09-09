@@ -17,7 +17,6 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-
 public interface STextualDS extends SSequentialDS<String, Integer>, SDocumentGraphObject {
 	public String getText();
 

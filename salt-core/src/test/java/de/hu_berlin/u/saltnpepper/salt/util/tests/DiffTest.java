@@ -321,30 +321,32 @@ public class DiffTest {
 		assertFalse(getFixture().checkTwoLayers(tempLayer, otherLayer));
 	}
 
-//	@Test
-//	public void testRealData() throws FileNotFoundException {
-//		File inFile1 = new File("TCF-Test/SaltXML-Corpus/TCF-Corpus/parser_a.salt");
-//		URI uri1 = URI.createFileURI(inFile1.getAbsolutePath());
-//		SDocumentGraph graphA = SaltFactory.loadSDocumentGraph(uri1);
-//
-//		File inFile2 = new File("TCF-Test/SaltXML-Corpus/TCF-Corpus/parser_b.salt");
-//		URI uri2 = URI.createFileURI(inFile2.getAbsolutePath());
-//		SDocumentGraph graphB = SaltFactory.loadSDocumentGraph(uri2);
-//
-//		Diff newDiff = new Diff(graphA, graphB);
-//		boolean iso = newDiff.isIsomorph();
-//
-//		Diff newerDiff = new Diff(graphA, graphB);
-//		Set<Difference> diffs = newerDiff.findDiffs();
-//		Iterator<Difference> diffIt = diffs.iterator();
-//
-//		PrintWriter out = new PrintWriter("filename.txt");
-//		while (diffIt.hasNext()) {
-//			out.println(diffIt.next().toString());
-//
-//		}
-//		out.flush();
-//		out.close();
-//
-//	}
+	// @Test
+	// public void testRealData() throws FileNotFoundException {
+	// File inFile1 = new
+	// File("TCF-Test/SaltXML-Corpus/TCF-Corpus/parser_a.salt");
+	// URI uri1 = URI.createFileURI(inFile1.getAbsolutePath());
+	// SDocumentGraph graphA = SaltFactory.loadSDocumentGraph(uri1);
+	//
+	// File inFile2 = new
+	// File("TCF-Test/SaltXML-Corpus/TCF-Corpus/parser_b.salt");
+	// URI uri2 = URI.createFileURI(inFile2.getAbsolutePath());
+	// SDocumentGraph graphB = SaltFactory.loadSDocumentGraph(uri2);
+	//
+	// Diff newDiff = new Diff(graphA, graphB);
+	// boolean iso = newDiff.isIsomorph();
+	//
+	// Diff newerDiff = new Diff(graphA, graphB);
+	// Set<Difference> diffs = newerDiff.findDiffs();
+	// Iterator<Difference> diffIt = diffs.iterator();
+	//
+	// PrintWriter out = new PrintWriter("filename.txt");
+	// while (diffIt.hasNext()) {
+	// out.println(diffIt.next().toString());
+	//
+	// }
+	// out.flush();
+	// out.close();
+	//
+	// }
 }

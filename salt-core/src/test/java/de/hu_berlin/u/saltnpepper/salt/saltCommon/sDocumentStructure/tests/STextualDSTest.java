@@ -30,24 +30,31 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 	public STextualDS getFixture() {
 		return (STextualDS) fixture;
 	}
-	
+
 	@Before
 	public void setUp() {
 		setFixture(SaltFactory.createSTextualDS());
 	}
-	/** Tests if {@link STextualDS#getData()} returns the same text as passed in {@link STextualDS#setData(String)}**/
+
+	/**
+	 * Tests if {@link STextualDS#getData()} returns the same text as passed in
+	 * {@link STextualDS#setData(String)}
+	 **/
 	@Override
 	@Test
 	public void testSetGetData() {
-		String text= "text";
+		String text = "text";
 		this.getFixture().setData(text);
 		assertEquals(text, getFixture().getData());
 	}
-	
-	/** Tests if {@link STextualDS#getStart()} returns the same text as passed in {@link STextualDS#setText(String)}**/
+
+	/**
+	 * Tests if {@link STextualDS#getStart()} returns the same text as passed in
+	 * {@link STextualDS#setText(String)}
+	 **/
 	@Test
 	public void testSetGetText() {
-		String text= "text";
+		String text = "text";
 		this.getFixture().setText(text);
 		assertEquals(text, getFixture().getText());
 	}
@@ -67,4 +74,4 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 		getFixture().setData("Test");
 		assertEquals(Integer.valueOf(4), getFixture().getEnd());
 	}
-} //STextualDSTest
+} // STextualDSTest

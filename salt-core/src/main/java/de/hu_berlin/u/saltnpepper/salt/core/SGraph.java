@@ -75,9 +75,12 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	 * @generated
 	 */
 	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
+
 	/**
 	 * Searches for a layer having the given layer name.
-	 * @param layerName Name of the layer to search for
+	 * 
+	 * @param layerName
+	 *            Name of the layer to search for
 	 * @return A complete list of all matching layers. Is never null.
 	 */
 	public List<SLayer> getSLayerByName(String layerName);

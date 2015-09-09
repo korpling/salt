@@ -23,7 +23,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class SPOSAnnotationImpl extends SAnnotationImpl implements SPOSAnnotation {
-	public SPOSAnnotationImpl(){
+	public SPOSAnnotationImpl() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_POS);
 	}

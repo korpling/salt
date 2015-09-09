@@ -274,7 +274,8 @@ public class SampleGenerator {
 	 * 'to' and 'Oh' have been said simultaneously and are overlapping via the
 	 * timeline.
 	 * 
-	 * @param document document to be filled
+	 * @param document
+	 *            document to be filled
 	 */
 	public static void createDialogue(SDocument document) {
 		if (document == null) {

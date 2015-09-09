@@ -133,32 +133,40 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns all relations of the passed type.
-	 * @param type type of relations
+	 * 
+	 * @param type
+	 *            type of relations
 	 * @return a list of relations matching passed type
 	 */
 	public List<SRelation> getRelations(SALT_TYPE type);
-	
+
 	/**
 	 * Returns all relations of the passed class.
-	 * @param clazz class of relations
+	 * 
+	 * @param clazz
+	 *            class of relations
 	 * @return a list of relations matching passed class
 	 */
 	public List<SRelation> getRelations(Class<?> clazz);
-	
+
 	/**
 	 * Returns all nodes of the passed type.
-	 * @param type type of nodes
+	 * 
+	 * @param type
+	 *            type of nodes
 	 * @return a list of nodes matching passed type
 	 */
 	public List<SNode> getNodes(SALT_TYPE type);
-	
+
 	/**
 	 * Returns all nodes of the passed class.
-	 * @param clazz class of nodes
+	 * 
+	 * @param clazz
+	 *            class of nodes
 	 * @return a list of nodes matching passed class
 	 */
 	public List<SNode> getNodes(Class<?> clazz);
-	
+
 	/**
 	 * Returns the value of the '<em><b>STimeline Relations</b></em>'
 	 * containment reference list. The list contents are of type
@@ -857,22 +865,30 @@ public interface SDocumentGraph extends SGraph {
 	 * @return the text which is overlapped by the passed node
 	 */
 	public String getText(SNode sNode);
-	
+
 	/**
-	 * Compares the passed graph with the current one and returns if they are isomorph or not. In case of the graphs are not
-	 * isomorph, this method does not record all differences. TO speed up the computation.
-	 * it just detects the first difference and returns false. To get a full list of all differences, 
-	 * use method {@link #findDiffs()}.
-	 * @param other the graph to be compared with this one
+	 * Compares the passed graph with the current one and returns if they are
+	 * isomorph or not. In case of the graphs are not isomorph, this method does
+	 * not record all differences. TO speed up the computation. it just detects
+	 * the first difference and returns false. To get a full list of all
+	 * differences, use method {@link #findDiffs()}.
+	 * 
+	 * @param other
+	 *            the graph to be compared with this one
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
 	public boolean isIsomorph(SDocumentGraph other);
+
 	/**
-	 * Compares the passed graph with the current one and returns if they are isomorph or not. If graphs are not isomporph, 
-	 * this method finds and records  all differences and lists them. That means the entire graphs 
-	 * have to be compared and could slow down the computation. If you are only interested in the 
-	 * result and not in the particular differences, use method {@link #isIsomorph()}.
-	 * @param other the graph to be compared with this one 
+	 * Compares the passed graph with the current one and returns if they are
+	 * isomorph or not. If graphs are not isomporph, this method finds and
+	 * records all differences and lists them. That means the entire graphs have
+	 * to be compared and could slow down the computation. If you are only
+	 * interested in the result and not in the particular differences, use
+	 * method {@link #isIsomorph()}.
+	 * 
+	 * @param other
+	 *            the graph to be compared with this one
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
 	public Set<Difference> findDiffs(SDocumentGraph other);

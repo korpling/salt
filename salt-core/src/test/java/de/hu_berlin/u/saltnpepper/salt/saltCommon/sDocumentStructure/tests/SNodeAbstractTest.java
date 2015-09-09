@@ -7,6 +7,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
 /**
  * This is an abstract test class for testing {@link SNode} types.
+ * 
  * @author florian
  *
  */
@@ -21,10 +22,10 @@ public abstract class SNodeAbstractTest {
 	protected SNode getFixture() {
 		return fixture;
 	}
-	
+
 	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
 	@Test
-	public void testGetGraph(){
+	public void testGetGraph() {
 		TestUtils.testSetGetGraph(getFixture());
 	}
 }

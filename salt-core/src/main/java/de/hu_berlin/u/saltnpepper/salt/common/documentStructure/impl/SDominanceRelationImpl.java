@@ -41,4 +41,4 @@ public class SDominanceRelationImpl extends SRelationImpl<SStructure, SStructure
 		}
 		super.setGraph(graph);
 	}
-} //SDominanceRelationImpl
+} // SDominanceRelationImpl

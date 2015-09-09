@@ -46,12 +46,12 @@ public class NodeTest {
 	@Test
 	public void testAddGetLayers() {
 		Layer layer = GraphFactory.createLayer();
-		
-		//prerequirements
-		Graph graph= GraphFactory.createGraph();
+
+		// prerequirements
+		Graph graph = GraphFactory.createGraph();
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
-		
+
 		getFixture().addLayer(layer);
 		assertEquals(1, getFixture().getLayers().size());
 		assertTrue(getFixture().getLayers().contains(layer));
@@ -64,12 +64,12 @@ public class NodeTest {
 	public void testRemoveLayers() {
 		assertNotNull(getFixture().getLayers());
 		Layer layer = GraphFactory.createLayer();
-		
-		//prerequirements
-		Graph graph= GraphFactory.createGraph();
+
+		// prerequirements
+		Graph graph = GraphFactory.createGraph();
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
-		
+
 		getFixture().addLayer(layer);
 		assertTrue(getFixture().getLayers().contains(layer));
 		getFixture().removeLayer(layer);
@@ -83,12 +83,12 @@ public class NodeTest {
 	@Test
 	public void testDoubleChainingLayer() {
 		Layer layer = GraphFactory.createLayer();
-		
-		//prerequirements
-		Graph graph= GraphFactory.createGraph();
+
+		// prerequirements
+		Graph graph = GraphFactory.createGraph();
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
-		
+
 		getFixture().addLayer(layer);
 		assertTrue(layer.getNodes().contains(getFixture()));
 		getFixture().removeLayer(layer);

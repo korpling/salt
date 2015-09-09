@@ -75,8 +75,8 @@ public class GraphTraverserModule {
 	 * that the callback handler knows which traversal is meant. This is
 	 * helpful, in case of a single callback handler is used for more than one
 	 * traversal at the same time. This method throws a
-	 * {@link SaltInvalidModelException} in case of the graph contains a cycle. A
-	 * cycle means a path containing the same node twice. Cycle safe breadth
+	 * {@link SaltInvalidModelException} in case of the graph contains a cycle.
+	 * A cycle means a path containing the same node twice. Cycle safe breadth
 	 * first traversing could consume a lot of memory because the algorithm
 	 * keeps a map of all visited Nodes for every start node.
 	 * 
@@ -108,8 +108,8 @@ public class GraphTraverserModule {
 	 * that the callback handler knows which traversal is meant. This is
 	 * helpful, in case of a single callback handler is used for more than one
 	 * traversal at the same time. This method throws a
-	 * {@link SaltInvalidModelException} in case of the graph contains a cycle. A
-	 * cycle means a path containing the same node twice. Cycle safe breadth
+	 * {@link SaltInvalidModelException} in case of the graph contains a cycle.
+	 * A cycle means a path containing the same node twice. Cycle safe breadth
 	 * first traversing could consume a lot of memory because the algorithm
 	 * keeps a map of all visited Nodes for every start node.
 	 * 
@@ -471,8 +471,8 @@ public class GraphTraverserModule {
 
 			} catch (SaltException e) {
 				setException(e);
-			}catch (Exception e2) {
-				SaltException e= new SaltException("An exception occured while traversing the graph '" + graph.getId() + "' with path '" + currentNodePath + "'.", e2);
+			} catch (Exception e2) {
+				SaltException e = new SaltException("An exception occured while traversing the graph '" + graph.getId() + "' with path '" + currentNodePath + "'.", e2);
 				setException(e);
 			}
 		}
@@ -635,7 +635,7 @@ public class GraphTraverserModule {
 		 *            the child node
 		 */
 		private void bottomUpDepthFirstRec(SRelation<SNode, SNode> edge, long order) {
-			if ((currentNodePath == null) || (currentNodePath.size() == 0)){
+			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
 				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 			}
 			// current node is last element in currentPath

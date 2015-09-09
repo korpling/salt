@@ -4,7 +4,7 @@ import org.junit.Before;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 
-public class SDominanceRelationTest extends SRelationAbstractTest{
+public class SDominanceRelationTest extends SRelationAbstractTest {
 
 	@Before
 	public void setUp() throws Exception {

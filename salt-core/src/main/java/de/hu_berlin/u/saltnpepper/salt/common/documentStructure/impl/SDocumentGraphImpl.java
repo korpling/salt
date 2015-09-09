@@ -264,29 +264,32 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public List<SRelation> getRelations(SALT_TYPE type) {
 		List<SRelation> relations = null;
-		relations= getRelations(type.getJavaType());
-		return(relations);
+		relations = getRelations(type.getJavaType());
+		return (relations);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public List<SRelation> getRelations(Class<?> clazz) {
 		List<SRelation> relations = null;
-		relations= getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, clazz);
-		return(relations);
+		relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, clazz);
+		return (relations);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public List<SNode> getNodes(SALT_TYPE type) {
 		List<SNode> nodes = null;
-		nodes= getNodes(type.getJavaType());
-		return(nodes);
+		nodes = getNodes(type.getJavaType());
+		return (nodes);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public List<SNode> getNodes(Class<?> clazz) {
 		List<SNode> nodes = null;
-		nodes= getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, clazz);
-		return(nodes);
+		nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, clazz);
+		return (nodes);
 	}
 
 	/** {@inheritDoc} **/
@@ -880,16 +883,17 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc SDocumentGraph#isIsomorph()} **/
 	@Override
 	public boolean isIsomorph(SDocumentGraph other) {
-		Diff diff= new Diff(this, other);
-		return(diff.isIsomorph());
+		Diff diff = new Diff(this, other);
+		return (diff.isIsomorph());
 	}
+
 	/** {@inheritDoc SDocumentGraph#findDiffs()} **/
 	@Override
 	public Set<Difference> findDiffs(SDocumentGraph other) {
-		Diff diff= new Diff(this, other);
-		return(diff.findDiffs());
+		Diff diff = new Diff(this, other);
+		return (diff.findDiffs());
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

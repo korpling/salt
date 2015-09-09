@@ -10,8 +10,8 @@ public class IdentifierImpl extends LabelImpl implements Identifier {
 	/**
 	 * Instantiates an {@link IdentifierImpl} object and sets its passed
 	 * container and id. Further sets its namespace to
-	 * {@link SaltUtil#SALT_NAMESPACE} and its name to
-	 * {@link SaltUtil#LABEL_ID}.
+	 * {@link SaltUtil#SALT_NAMESPACE} and its name to {@link SaltUtil#LABEL_ID}
+	 * .
 	 * 
 	 * @param container
 	 * @param id

@@ -59,20 +59,20 @@ public class SDocumentGraphTest {
 	}
 
 	@Test
-	public void testSetGetDocument(){
+	public void testSetGetDocument() {
 		assertNull(getFixture().getDocument());
-		SDocument document= SaltFactory.createSDocument();
+		SDocument document = SaltFactory.createSDocument();
 		getFixture().setDocument(document);
 		assertNotNull(getFixture().getDocument());
 		assertEquals(document, getFixture().getDocument());
-		
-		//test double chaining
+
+		// test double chaining
 		assertEquals(getFixture(), document.getDocumentGraph());
 		getFixture().setDocument(null);
 		assertNull(document.getDocumentGraph());
 		assertNull(getFixture().getDocument());
 	}
-	
+
 	@Test
 	public void testGetSTextualDSs() {
 		String[] ids = { "salt:/graph1#text1", "salt:/graph1#text2", "salt:/graph1#text3", "salt:/graph1#text4" };
@@ -547,7 +547,7 @@ public class SDocumentGraphTest {
 		assertNotNull(getFixture().getTimeline());
 		assertEquals(8, getFixture().getTimelineRelations().size());
 
-		//TODO check whether this is correct since salt 3.0
+		// TODO check whether this is correct since salt 3.0
 		assertEquals(Integer.valueOf(8), getFixture().getTimeline().getEnd());
 	}
 
@@ -849,13 +849,15 @@ public class SDocumentGraphTest {
 	}
 
 	/**
-	 * Tests the graph: 
+	 * Tests the graph:
+	 * 
 	 * <pre>
 	 *    span1      span2 
 	 *     / \       / \ 
 	 *  tok1 tok2  tok3 tok4
 	 * 
 	 * </pre>
+	 * 
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#isContinuousByText(org.eclipse.emf.common.util.EList,
 	 *      org.eclipse.emf.common.util.EList)
 	 */
@@ -921,7 +923,6 @@ public class SDocumentGraphTest {
 		sTokens.add(tok3);
 		assertTrue(getFixture().isContinuousByText((List<SNode>) ((List<? extends SNode>) sTokens), fullList));
 	}
-
 
 	/**
 	 * Tests the sorting of tokens: tok2, tok6, tok1, tok4, tok5, tok3
@@ -1145,160 +1146,164 @@ public class SDocumentGraphTest {
 		}
 	}
 
-	//FIXME
-//	@Test
-//	public void testCreateSSpan__SToken() {
-//		String text = "a sample";
-//		STextualDS sText = getFixture().createSTextualDS(text);
-//		DataSourceSequence sequence = new DataSourceSequence();
-//		sequence.setDataSource(sText);
-//		sequence.setStart(0);
-//		sequence.setEnd(1);
-//		SToken tok1 = getFixture().createToken(sequence);
-//		SSpan sSpan = getFixture().createSSpan(tok1);
-//
-//		assertNotNull(sSpan);
-//		assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
-//		List<Relation> relations = getFixture().getRelations(sSpan.getId(), tok1.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SSpanningRelation);
-//		SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
-//		assertEquals(tok1, sSpanRel.getTarget());
-//		assertEquals(sSpan, sSpanRel.getSource());
-//	}
+	// FIXME
+	// @Test
+	// public void testCreateSSpan__SToken() {
+	// String text = "a sample";
+	// STextualDS sText = getFixture().createSTextualDS(text);
+	// DataSourceSequence sequence = new DataSourceSequence();
+	// sequence.setDataSource(sText);
+	// sequence.setStart(0);
+	// sequence.setEnd(1);
+	// SToken tok1 = getFixture().createToken(sequence);
+	// SSpan sSpan = getFixture().createSSpan(tok1);
+	//
+	// assertNotNull(sSpan);
+	// assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
+	// List<Relation> relations = getFixture().getRelations(sSpan.getId(),
+	// tok1.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SSpanningRelation);
+	// SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
+	// assertEquals(tok1, sSpanRel.getTarget());
+	// assertEquals(sSpan, sSpanRel.getSource());
+	// }
 
-	//FIXME
-//	@Test
-//	public void testCreateSSpan__EList() {
-//		String text = "a sample text";
-//		STextualDS sText = getFixture().createSTextualDS(text);
-//		DataSourceSequence sequence = new DataSourceSequence();
-//		sequence.setDataSource(sText);
-//
-//		sequence.setStart(0);
-//		sequence.setEnd(1);
-//		SToken tok1 = getFixture().createToken(sequence);
-//
-//		sequence.setStart(2);
-//		sequence.setEnd(8);
-//		SToken tok2 = getFixture().createToken(sequence);
-//
-//		sequence.setStart(9);
-//		sequence.setEnd(13);
-//		SToken tok3 = getFixture().createToken(sequence);
-//
-//		List<SToken> sTokens = new ArrayList<SToken>();
-//		sTokens.add(tok1);
-//		sTokens.add(tok2);
-//		sTokens.add(tok3);
-//		SSpan sSpan = getFixture().createSSpan(sTokens);
-//
-//		assertNotNull(sSpan);
-//		assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
-//
-//		List<Relation> relations = getFixture().getRelations(sSpan.getId(), tok1.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SSpanningRelation);
-//		SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
-//		assertEquals(tok1, sSpanRel.getTarget());
-//		assertEquals(sSpan, sSpanRel.getSource());
-//
-//		relations = getFixture().getRelations(sSpan.getId(), tok2.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SSpanningRelation);
-//		sSpanRel = (SSpanningRelation) relations.get(0);
-//		assertEquals(tok2, sSpanRel.getTarget());
-//		assertEquals(sSpan, sSpanRel.getSource());
-//
-//		relations = getFixture().getRelations(sSpan.getId(), tok3.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SSpanningRelation);
-//		sSpanRel = (SSpanningRelation) relations.get(0);
-//		assertEquals(tok3, sSpanRel.getTarget());
-//		assertEquals(sSpan, sSpanRel.getSource());
-//	}
+	// FIXME
+	// @Test
+	// public void testCreateSSpan__EList() {
+	// String text = "a sample text";
+	// STextualDS sText = getFixture().createSTextualDS(text);
+	// DataSourceSequence sequence = new DataSourceSequence();
+	// sequence.setDataSource(sText);
+	//
+	// sequence.setStart(0);
+	// sequence.setEnd(1);
+	// SToken tok1 = getFixture().createToken(sequence);
+	//
+	// sequence.setStart(2);
+	// sequence.setEnd(8);
+	// SToken tok2 = getFixture().createToken(sequence);
+	//
+	// sequence.setStart(9);
+	// sequence.setEnd(13);
+	// SToken tok3 = getFixture().createToken(sequence);
+	//
+	// List<SToken> sTokens = new ArrayList<SToken>();
+	// sTokens.add(tok1);
+	// sTokens.add(tok2);
+	// sTokens.add(tok3);
+	// SSpan sSpan = getFixture().createSSpan(sTokens);
+	//
+	// assertNotNull(sSpan);
+	// assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
+	//
+	// List<Relation> relations = getFixture().getRelations(sSpan.getId(),
+	// tok1.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SSpanningRelation);
+	// SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
+	// assertEquals(tok1, sSpanRel.getTarget());
+	// assertEquals(sSpan, sSpanRel.getSource());
+	//
+	// relations = getFixture().getRelations(sSpan.getId(), tok2.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SSpanningRelation);
+	// sSpanRel = (SSpanningRelation) relations.get(0);
+	// assertEquals(tok2, sSpanRel.getTarget());
+	// assertEquals(sSpan, sSpanRel.getSource());
+	//
+	// relations = getFixture().getRelations(sSpan.getId(), tok3.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SSpanningRelation);
+	// sSpanRel = (SSpanningRelation) relations.get(0);
+	// assertEquals(tok3, sSpanRel.getTarget());
+	// assertEquals(sSpan, sSpanRel.getSource());
+	// }
 
-	//FIXME
-//	@Test
-//	public void testCreateSStructure__SStructuredNode() {
-//		String text = "a sample";
-//		STextualDS sText = getFixture().createSTextualDS(text);
-//		DataSourceSequence sequence = new DataSourceSequence();
-//		sequence.setDataSource(sText);
-//		sequence.setStart(0);
-//		sequence.setEnd(1);
-//
-//		SToken tok1 = getFixture().createToken(sequence);
-//		SStructure sStruct = getFixture().createSStructure(tok1);
-//
-//		assertNotNull(sStruct);
-//		assertEquals(sStruct, getFixture().getNode(sStruct.getId()));
-//		List<Relation> relations = getFixture().getRelations(sStruct.getId(), tok1.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SDominanceRelation);
-//		SDominanceRelation sDomRel = (SDominanceRelation) relations.get(0);
-//		assertEquals(tok1, sDomRel.getTarget());
-//		assertEquals(sStruct, sDomRel.getTarget());
-//	}
+	// FIXME
+	// @Test
+	// public void testCreateSStructure__SStructuredNode() {
+	// String text = "a sample";
+	// STextualDS sText = getFixture().createSTextualDS(text);
+	// DataSourceSequence sequence = new DataSourceSequence();
+	// sequence.setDataSource(sText);
+	// sequence.setStart(0);
+	// sequence.setEnd(1);
+	//
+	// SToken tok1 = getFixture().createToken(sequence);
+	// SStructure sStruct = getFixture().createSStructure(tok1);
+	//
+	// assertNotNull(sStruct);
+	// assertEquals(sStruct, getFixture().getNode(sStruct.getId()));
+	// List<Relation> relations = getFixture().getRelations(sStruct.getId(),
+	// tok1.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SDominanceRelation);
+	// SDominanceRelation sDomRel = (SDominanceRelation) relations.get(0);
+	// assertEquals(tok1, sDomRel.getTarget());
+	// assertEquals(sStruct, sDomRel.getTarget());
+	// }
 
-	//FIXME
-//	@Test
-//	public void testCreateSStructure__EList() {
-//		String text = "a sample text";
-//		STextualDS sText = getFixture().createSTextualDS(text);
-//		DataSourceSequence sequence = new DataSourceSequence();
-//		sequence.setDataSource(sText);
-//
-//		sequence.setStart(0);
-//		sequence.setEnd(1);
-//		SToken tok1 = getFixture().createToken(sequence);
-//
-//		sequence.setStart(2);
-//		sequence.setEnd(8);
-//		SToken tok2 = getFixture().createToken(sequence);
-//
-//		sequence.setStart(9);
-//		sequence.setEnd(13);
-//		SToken tok3 = getFixture().createToken(sequence);
-//
-//		List<SStructuredNode> sTokens = new ArrayList<SStructuredNode>();
-//		sTokens.add(tok1);
-//		sTokens.add(tok2);
-//		sTokens.add(tok3);
-//		SStructure sStruct = getFixture().createSStructure(sTokens);
-//
-//		assertNotNull(sStruct);
-//		assertEquals(sStruct, getFixture().getNode(sStruct.getId()));
-//
-//		List<Relation> relations = getFixture().getRelations(sStruct.getId(), tok1.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SDominanceRelation);
-//		SDominanceRelation sDomRel = (SDominanceRelation) relations.get(0);
-//		assertEquals(tok1, sDomRel.getTarget());
-//		assertEquals(sStruct, sDomRel.getTarget());
-//
-//		relations = getFixture().getRelations(sStruct.getId(), tok2.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SDominanceRelation);
-//		sDomRel = (SDominanceRelation) relations.get(0);
-//		assertEquals(tok2, sDomRel.getTarget());
-//		assertEquals(sStruct, sDomRel.getTarget());
-//
-//		relations = getFixture().getRelations(sStruct.getId(), tok3.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SDominanceRelation);
-//		sDomRel = (SDominanceRelation) relations.get(0);
-//		assertEquals(tok3, sDomRel.getTarget());
-//		assertEquals(sStruct, sDomRel.getTarget());
-//	}
+	// FIXME
+	// @Test
+	// public void testCreateSStructure__EList() {
+	// String text = "a sample text";
+	// STextualDS sText = getFixture().createSTextualDS(text);
+	// DataSourceSequence sequence = new DataSourceSequence();
+	// sequence.setDataSource(sText);
+	//
+	// sequence.setStart(0);
+	// sequence.setEnd(1);
+	// SToken tok1 = getFixture().createToken(sequence);
+	//
+	// sequence.setStart(2);
+	// sequence.setEnd(8);
+	// SToken tok2 = getFixture().createToken(sequence);
+	//
+	// sequence.setStart(9);
+	// sequence.setEnd(13);
+	// SToken tok3 = getFixture().createToken(sequence);
+	//
+	// List<SStructuredNode> sTokens = new ArrayList<SStructuredNode>();
+	// sTokens.add(tok1);
+	// sTokens.add(tok2);
+	// sTokens.add(tok3);
+	// SStructure sStruct = getFixture().createSStructure(sTokens);
+	//
+	// assertNotNull(sStruct);
+	// assertEquals(sStruct, getFixture().getNode(sStruct.getId()));
+	//
+	// List<Relation> relations = getFixture().getRelations(sStruct.getId(),
+	// tok1.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SDominanceRelation);
+	// SDominanceRelation sDomRel = (SDominanceRelation) relations.get(0);
+	// assertEquals(tok1, sDomRel.getTarget());
+	// assertEquals(sStruct, sDomRel.getTarget());
+	//
+	// relations = getFixture().getRelations(sStruct.getId(), tok2.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SDominanceRelation);
+	// sDomRel = (SDominanceRelation) relations.get(0);
+	// assertEquals(tok2, sDomRel.getTarget());
+	// assertEquals(sStruct, sDomRel.getTarget());
+	//
+	// relations = getFixture().getRelations(sStruct.getId(), tok3.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SDominanceRelation);
+	// sDomRel = (SDominanceRelation) relations.get(0);
+	// assertEquals(tok3, sDomRel.getTarget());
+	// assertEquals(sStruct, sDomRel.getTarget());
+	// }
 
 	/**
 	 * tests graph: struct2 / / \ struct1 / | / | / | | span1 span2 | / \ / \
@@ -1505,7 +1510,7 @@ public class SDocumentGraphTest {
 		rel2.setTarget(node1);
 		getFixture().addRelation(rel2);
 
-		Multimap<String, SNode> roots= getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION);
+		Multimap<String, SNode> roots = getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION);
 		assertTrue(roots.containsKey(type1));
 		assertTrue(roots.containsKey(type2));
 		assertEquals(1, roots.get(type1).size());
@@ -1754,7 +1759,7 @@ public class SDocumentGraphTest {
 		assertEquals("anaphor", sRel.getAnnotation(SaltUtil.createQName("myNS", "coref")).getValue());
 		assertNotNull(sRel.getAnnotation(SaltUtil.createQName("anotherNS", "foo")));
 		assertEquals("bar", sRel.getAnnotation(SaltUtil.createQName("anotherNS", "foo")).getValue());
-		
+
 		sRel = getFixture().createSRelation(sSpan, tok2, SALT_TYPE.SSPANNING_RELATION, null);
 		assertEquals(4, getFixture().getRelations().size());
 		assertEquals(sSpan, sRel.getSource());

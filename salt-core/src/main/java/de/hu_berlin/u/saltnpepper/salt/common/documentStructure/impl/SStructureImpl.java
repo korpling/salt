@@ -40,4 +40,4 @@ public class SStructureImpl extends SNodeImpl implements SStructure, SStructured
 		}
 		super.setGraph(graph);
 	}
-} //SStructureImpl
+} // SStructureImpl

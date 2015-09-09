@@ -97,7 +97,7 @@ public class LayerTest {
 			assertTrue(getFixture().getNodes().contains(node));
 		}
 	}
-	
+
 	/**
 	 * Tests that all nodes added to layer also contains the layer.
 	 */
@@ -114,7 +114,7 @@ public class LayerTest {
 			assertTrue(node.getLayers().contains(getFixture()));
 		}
 	}
-	
+
 	/**
 	 * Tests that all nodes removed from this layer also contains the layer.
 	 */

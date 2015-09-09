@@ -161,107 +161,131 @@ public interface ISaltFactory extends IGraphFactory {
 	 * @return new {@link SSpanningRelation} object
 	 */
 	public SSpanningRelation createSSpanningRelation();
+
 	/**
 	 * Creates a new {@link SDominanceRelation} object.
 	 * 
 	 * @return new {@link SDominanceRelation} object
 	 */
 	public SDominanceRelation createSDominanceRelation();
+
 	/**
 	 * Creates a new {@link SPointingRelation} object.
 	 * 
 	 * @return new {@link SPointingRelation} object
 	 */
 	public SPointingRelation createSPointingRelation();
+
 	/**
 	 * Creates a new {@link SOrderRelation} object.
 	 * 
 	 * @return new {@link SOrderRelation} object
 	 */
 	public SOrderRelation createSOrderRelation();
+
 	/**
 	 * Creates a new {@link STextualRelation} object.
 	 * 
 	 * @return new {@link STextualRelation} object
 	 */
 	public STextualRelation createSTextualRelation();
+
 	/**
 	 * Creates a new {@link STimelineRelation} object.
 	 * 
 	 * @return new {@link STimelineRelation} object
 	 */
 	public STimelineRelation createSTimelineRelation();
+
 	/**
 	 * Creates a new {@link SMedialRelation} object.
 	 * 
 	 * @return new {@link SMedialRelation} object
 	 */
 	public SMedialRelation createSMedialRelation();
+
 	/**
 	 * Creates a new {@link SSpan} object.
 	 * 
 	 * @return new {@link SSpan} object
 	 */
 	public SSpan createSSpan();
+
 	/**
 	 * Creates a new {@link SStructure} object.
 	 * 
 	 * @return new {@link SStructure} object
 	 */
 	public SStructure createSStructure();
+
 	/**
 	 * Creates a new {@link STextualDS} object.
 	 * 
 	 * @return new {@link STextualDS} object
 	 */
 	public STextualDS createSTextualDS();
+
 	/**
 	 * Creates a new {@link SMedialDS} object.
 	 * 
 	 * @return new {@link SMedialDS} object
 	 */
 	public SMedialDS createSMedialDS();
+
 	/**
 	 * Creates a new {@link STimeline} object.
 	 * 
 	 * @return new {@link STimeline} object
 	 */
 	public STimeline createSTimeline();
+
 	/**
 	 * Creates a new {@link SToken} object.
 	 * 
 	 * @return new {@link SToken} object
 	 */
 	public SToken createSToken();
+
 	// ===============================< document structure
 	// ===============================> semantics
 	/**
 	 * Creates a new {@link SCatAnnotation} object.
+	 * 
 	 * @return new {@link SCatAnnotation} object
 	 */
 	public SCatAnnotation createSCatAnnotation();
+
 	/**
 	 * Creates a new {@link SPOSAnnotation} object.
+	 * 
 	 * @return new {@link SPOSAnnotation} object
 	 */
 	public SPOSAnnotation createSPOSAnnotation();
+
 	/**
 	 * Creates a new {@link SLemmaAnnotation} object.
+	 * 
 	 * @return new {@link SLemmaAnnotation} object
 	 */
 	public SLemmaAnnotation createSLemmaAnnotation();
+
 	/**
 	 * Creates a new {@link STypeAnnotation} object.
+	 * 
 	 * @return new {@link STypeAnnotation} object
 	 */
 	public STypeAnnotation createSTypeAnnotation();
+
 	/**
 	 * Creates a new {@link SWordAnnotation} object.
+	 * 
 	 * @return new {@link SWordAnnotation} object
 	 */
 	public SWordAnnotation createSWordAnnotation();
+
 	/**
 	 * Creates a new {@link SSentenceAnnotation} object.
+	 * 
 	 * @return new {@link SSentenceAnnotation} object
 	 */
 	public SSentenceAnnotation createSSentenceAnnotation();

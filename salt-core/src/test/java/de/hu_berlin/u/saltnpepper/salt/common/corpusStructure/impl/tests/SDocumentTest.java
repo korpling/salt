@@ -52,20 +52,20 @@ public class SDocumentTest {
 	public void testGetSDocumentGraphLocation() {
 		assertNull(getFixture().getDocumentGraphLocation());
 		File file = SaltTestsUtil.getTempTestFile("bla.salt");
-//		File file = new File("/home/saltnpepper/bla.salt");
+		// File file = new File("/home/saltnpepper/bla.salt");
 		URI graphLocation = URI.createFileURI(file.getAbsolutePath());
 		this.getFixture().setDocumentGraphLocation(graphLocation);
 
 		assertEquals(graphLocation, this.getFixture().getDocumentGraphLocation());
 	}
-	
+
 	/**
 	 * Tests whether the getter and setter of document structure are correct.
 	 */
 	@Test
-	public void testSetGetDocumentStructure(){
+	public void testSetGetDocumentStructure() {
 		assertNull(getFixture().getDocumentGraph());
-		SDocumentGraph graph= SaltFactory.createSDocumentGraph();
+		SDocumentGraph graph = SaltFactory.createSDocumentGraph();
 		getFixture().setDocumentGraph(graph);
 		assertEquals(graph, getFixture().getDocumentGraph());
 	}

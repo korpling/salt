@@ -240,6 +240,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SDominanceRelation createSDominanceRelation() {
 		return (new SDominanceRelationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SPointingRelation} object.
 	 * 
@@ -248,6 +249,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SPointingRelation createSPointingRelation() {
 		return (new SPointingRelationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SOrderRelation} object.
 	 * 
@@ -256,6 +258,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SOrderRelation createSOrderRelation() {
 		return (new SOrderRelationImpl());
 	}
+
 	/**
 	 * Creates a new {@link STextualRelation} object.
 	 * 
@@ -264,6 +267,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public STextualRelation createSTextualRelation() {
 		return (new STextualRelationImpl());
 	}
+
 	/**
 	 * Creates a new {@link STimelineRelation} object.
 	 * 
@@ -272,6 +276,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public STimelineRelation createSTimelineRelation() {
 		return (new STimelineRelationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SMedialRelation} object.
 	 * 
@@ -280,6 +285,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SMedialRelation createSMedialRelation() {
 		return (new SMedialRelationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SSpan} object.
 	 * 
@@ -288,6 +294,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SSpan createSSpan() {
 		return (new SSpanImpl());
 	}
+
 	/**
 	 * Creates a new {@link SStructure} object.
 	 * 
@@ -296,6 +303,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SStructure createSStructure() {
 		return (new SStructureImpl());
 	}
+
 	/**
 	 * Creates a new {@link STextualDS} object.
 	 * 
@@ -304,6 +312,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public STextualDS createSTextualDS() {
 		return (new STextualDSImpl());
 	}
+
 	/**
 	 * Creates a new {@link SMedialDS} object.
 	 * 
@@ -312,6 +321,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SMedialDS createSMedialDS() {
 		return (new SMedialDSImpl());
 	}
+
 	/**
 	 * Creates a new {@link STimeline} object.
 	 * 
@@ -320,6 +330,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public STimeline createSTimeline() {
 		return (new STimelineImpl());
 	}
+
 	/**
 	 * Creates a new {@link SToken} object.
 	 * 
@@ -328,45 +339,57 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	public SToken createSToken() {
 		return (new STokenImpl());
 	}
+
 	// ===============================< document structure
 	// ===============================> semantics
 	/**
 	 * Creates a new {@link SCatAnnotation} object.
+	 * 
 	 * @return new {@link SCatAnnotation} object
 	 */
 	public SCatAnnotation createSCatAnnotation() {
 		return (new SCatAnnotationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SPOSAnnotation} object.
+	 * 
 	 * @return new {@link SPOSAnnotation} object
 	 */
 	public SPOSAnnotation createSPOSAnnotation() {
 		return (new SPOSAnnotationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SLemmaAnnotation} object.
+	 * 
 	 * @return new {@link SLemmaAnnotation} object
 	 */
 	public SLemmaAnnotation createSLemmaAnnotation() {
 		return (new SLemmaAnnotationImpl());
 	}
+
 	/**
 	 * Creates a new {@link STypeAnnotation} object.
+	 * 
 	 * @return new {@link STypeAnnotation} object
 	 */
 	public STypeAnnotation createSTypeAnnotation() {
 		return (new STypeAnnotationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SWordAnnotation} object.
+	 * 
 	 * @return new {@link SWordAnnotation} object
 	 */
 	public SWordAnnotation createSWordAnnotation() {
 		return (new SWordAnnotationImpl());
 	}
+
 	/**
 	 * Creates a new {@link SSentenceAnnotation} object.
+	 * 
 	 * @return new {@link SSentenceAnnotation} object
 	 */
 	public SSentenceAnnotation createSSentenceAnnotation() {

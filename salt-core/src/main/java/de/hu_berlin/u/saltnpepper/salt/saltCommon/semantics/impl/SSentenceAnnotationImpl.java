@@ -38,9 +38,9 @@ public class SSentenceAnnotationImpl extends SAnnotationImpl implements SSentenc
 	@Override
 	public void setNamespace(String namespace) {
 	}
-	
+
 	/** Calling this method has no effect. **/
 	@Override
 	public void setValue(Object value) {
 	}
-} //SSentenceAnnotationImpl
+} // SSentenceAnnotationImpl

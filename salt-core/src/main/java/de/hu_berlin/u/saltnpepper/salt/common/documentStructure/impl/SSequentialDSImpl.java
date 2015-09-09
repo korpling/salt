@@ -35,7 +35,7 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 		D retVal = null;
 		SFeature feature = getFeature(SaltUtil.FEAT_SDATA_QNAME);
 		if (feature != null) {
-			retVal = (D)feature.getValue();
+			retVal = (D) feature.getValue();
 		}
 		return (retVal);
 	}
@@ -52,12 +52,13 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 		}
 		feature.setValue(newSData);
 	}
+
 	/** {@inheritDoc} */
 	@Override
 	public SDocumentGraph getGraph() {
-		return((SDocumentGraph)super.getGraph());
+		return ((SDocumentGraph) super.getGraph());
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
@@ -66,7 +67,7 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 		}
 		super.setGraph(graph);
 	}
-	
+
 	/** {@inheritDoc SSequentialDS#getSStart()} */
 	@Override
 	public abstract P getStart();

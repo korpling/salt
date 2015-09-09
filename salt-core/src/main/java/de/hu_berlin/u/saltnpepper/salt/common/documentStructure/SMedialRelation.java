@@ -17,6 +17,5 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.common.documentStructure;
 
-
 public interface SMedialRelation extends SSequentialRelation<SToken, SMedialDS, Double>, SDocumentGraphObject {
 } // SAudioDSRelation

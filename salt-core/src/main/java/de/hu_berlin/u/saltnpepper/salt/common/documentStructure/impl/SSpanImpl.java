@@ -26,7 +26,7 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
 @SuppressWarnings("serial")
 public class SSpanImpl extends SNodeImpl implements SSpan, SStructuredNode {
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

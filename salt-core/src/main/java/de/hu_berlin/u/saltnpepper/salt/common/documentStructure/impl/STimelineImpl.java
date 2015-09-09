@@ -39,11 +39,13 @@ public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implement
 		}
 		super.setGraph(graph);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public void increasePointOfTime() {
 		increasePointOfTime(1);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public void increasePointOfTime(Integer additionalPOS) {
@@ -55,6 +57,7 @@ public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implement
 		}
 		setData(pos);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public Integer getStart() {
@@ -64,6 +67,7 @@ public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implement
 			return (null);
 		}
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public Integer getEnd() {

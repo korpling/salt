@@ -29,38 +29,37 @@ public class SMedialDSImpl extends SSequentialDSImpl<URI, Double> implements SMe
 	/** {@inheritDoc} */
 	@Override
 	public URI getMediaReference() {
-		URI retVal= null;
-		SFeature sFeature= getFeature(SaltUtil.FEAT_SMEDIA_REFERNCE_QNAME);
-		if (	(sFeature!= null)&&
-				(sFeature.getValue()!= null))
-		{
-			retVal= URI.createURI(sFeature.getValue().toString());
+		URI retVal = null;
+		SFeature sFeature = getFeature(SaltUtil.FEAT_SMEDIA_REFERNCE_QNAME);
+		if ((sFeature != null) && (sFeature.getValue() != null)) {
+			retVal = URI.createURI(sFeature.getValue().toString());
 		}
-		return(retVal);
+		return (retVal);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setMediaReference(URI mediaRef) {
-		SFeature sFeature= getFeature(SaltUtil.FEAT_SMEDIA_REFERNCE_QNAME);
-		if (sFeature== null)
-		{//create a new sFeature
-			sFeature= SaltFactory.createSFeature();
+		SFeature sFeature = getFeature(SaltUtil.FEAT_SMEDIA_REFERNCE_QNAME);
+		if (sFeature == null) {// create a new sFeature
+			sFeature = SaltFactory.createSFeature();
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			sFeature.setName(SaltUtil.FEAT_SMEDIA_REFERNCE);
 			addFeature(sFeature);
-		}	
+		}
 		sFeature.setValue(mediaRef);
 	}
+
 	/** {@inheritDoc} */
 	@Override
 	public Double getStart() {
 		return null;
 	}
+
 	/** {@inheritDoc} */
 	@Override
 	public Double getEnd() {
 		return null;
 	}
 
-} //SAudioDataSourceImpl
+} // SAudioDataSourceImpl

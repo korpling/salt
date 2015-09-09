@@ -47,25 +47,25 @@ public class RelationTest {
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getRelations(), graph.getRelations().contains(getFixture()));
 	}
-	
+
 	/**
 	 * tests the adding and getting of a layer to a relation
 	 */
 	@Test
 	public void testAddGetLayers() {
 		Layer layer = GraphFactory.createLayer();
-		Node source= GraphFactory.createNode();
-		Node target= GraphFactory.createNode();
+		Node source = GraphFactory.createNode();
+		Node target = GraphFactory.createNode();
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
-		
-		//prerequirements
-		Graph graph= GraphFactory.createGraph();
+
+		// prerequirements
+		Graph graph = GraphFactory.createGraph();
 		graph.addLayer(layer);
 		graph.addNode(source);
 		graph.addNode(target);
 		graph.addRelation(getFixture());
-		
+
 		getFixture().addLayer(layer);
 		assertEquals(1, getFixture().getLayers().size());
 		assertTrue(getFixture().getLayers().contains(layer));
@@ -78,18 +78,18 @@ public class RelationTest {
 	public void testRemoveLayers() {
 		assertNotNull(getFixture().getLayers());
 		Layer layer = GraphFactory.createLayer();
-		Node source= GraphFactory.createNode();
-		Node target= GraphFactory.createNode();
+		Node source = GraphFactory.createNode();
+		Node target = GraphFactory.createNode();
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
-		
-		//prerequirements
-		Graph graph= GraphFactory.createGraph();
+
+		// prerequirements
+		Graph graph = GraphFactory.createGraph();
 		graph.addLayer(layer);
 		graph.addNode(source);
 		graph.addNode(target);
 		graph.addRelation(getFixture());
-		
+
 		getFixture().addLayer(layer);
 		assertTrue(getFixture().getLayers().contains(layer));
 		getFixture().removeLayer(layer);
@@ -97,24 +97,24 @@ public class RelationTest {
 	}
 
 	/**
-	 * Tests whether adding a layer to a relation, results in adding the relation to the
-	 * layer. And the same goes for removing.
+	 * Tests whether adding a layer to a relation, results in adding the
+	 * relation to the layer. And the same goes for removing.
 	 */
 	@Test
 	public void testDoubleChainingLayer() {
 		Layer layer = GraphFactory.createLayer();
-		Node source= GraphFactory.createNode();
-		Node target= GraphFactory.createNode();
+		Node source = GraphFactory.createNode();
+		Node target = GraphFactory.createNode();
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
-		
-		//prerequirements
-		Graph graph= GraphFactory.createGraph();
+
+		// prerequirements
+		Graph graph = GraphFactory.createGraph();
 		graph.addLayer(layer);
 		graph.addNode(source);
 		graph.addNode(target);
 		graph.addRelation(getFixture());
-		
+
 		getFixture().addLayer(layer);
 		assertTrue(layer.getRelations().contains(getFixture()));
 		getFixture().removeLayer(layer);

@@ -24,7 +24,6 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
-
 @SuppressWarnings("serial")
 public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextualDS, Integer> implements STextualRelation {
 	/** {@inheritDoc} **/
@@ -41,4 +40,4 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 		}
 		super.setGraph(graph);
 	}
-} //STextualRelationImpl
+} // STextualRelationImpl

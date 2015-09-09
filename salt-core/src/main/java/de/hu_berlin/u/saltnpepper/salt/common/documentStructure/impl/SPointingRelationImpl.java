@@ -40,4 +40,4 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 		}
 		super.setGraph(graph);
 	}
-} //SPointingRelationImpl
+} // SPointingRelationImpl

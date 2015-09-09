@@ -23,7 +23,7 @@ public interface SSentenceAnnotation extends SAnnotation {
 	/** Calling this method has no effect. **/
 	@Override
 	public void setName(String name);
-	
+
 	/** Calling this method has no effect. **/
 	@Override
 	public void setNamespace(String namespace);

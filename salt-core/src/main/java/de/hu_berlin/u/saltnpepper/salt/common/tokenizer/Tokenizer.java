@@ -130,7 +130,7 @@ public class Tokenizer {
 	 */
 	public List<SToken> tokenize(STextualDS sTextualDS, LanguageCode language, Integer startPos, Integer endPos) {
 		List<SToken> retVal = null;
-		if (sTextualDS == null){
+		if (sTextualDS == null) {
 			throw new SaltTokenizerException("Cannot tokenize an empty 'SSTextualDS' object.");
 		}
 		if (this.getDocumentGraph() == null) {
@@ -142,10 +142,10 @@ public class Tokenizer {
 		}
 
 		if (sTextualDS.getText() != null) {
-			if (startPos == null){
+			if (startPos == null) {
 				startPos = 0;
 			}
-			if (endPos == null){
+			if (endPos == null) {
 				endPos = sTextualDS.getText().length();
 			}
 			// detect language
@@ -153,20 +153,20 @@ public class Tokenizer {
 				language = checkLanguage(sTextualDS.getText().substring(startPos, endPos));
 				// if text was to short to emit language try entire text (and
 				// hope, that no language mixes are contained :-})
-				if (language == null){
+				if (language == null) {
 					language = checkLanguage(sTextualDS.getText().substring(startPos, endPos));
 				}
 			}
 
 			if (language != null) {// set abbreviations
 				if (this.getAbbreviations(language) == null) {
-					if (LanguageCode.de.equals(language)){
+					if (LanguageCode.de.equals(language)) {
 						this.addAbbreviation(LanguageCode.de, AbbreviationDE.createAbbriviations());
-					}else if (LanguageCode.en.equals(language)){
+					} else if (LanguageCode.en.equals(language)) {
 						this.addAbbreviation(LanguageCode.en, AbbreviationEN.createAbbriviations());
-					}else if (LanguageCode.fr.equals(language)){
+					} else if (LanguageCode.fr.equals(language)) {
 						this.addAbbreviation(LanguageCode.fr, AbbreviationFR.createAbbriviations());
-					}else if (LanguageCode.it.equals(language)){
+					} else if (LanguageCode.it.equals(language)) {
 						this.addAbbreviation(LanguageCode.it, AbbreviationIT.createAbbriviations());
 					}
 				}
@@ -235,7 +235,7 @@ public class Tokenizer {
 		} else if ("hungarian".equals(language)) {
 			retVal = LanguageCode.hu;
 		}
-			return (retVal);
+		return (retVal);
 	}
 
 	private Map<LanguageCode, HashSet<String>> abbreviations = null;
@@ -249,10 +249,10 @@ public class Tokenizer {
 	 */
 	public void addAbbreviation(LanguageCode language, HashSet<String> abbreviations) {
 		if ((language != null) && (abbreviations != null)) {
-			if (this.abbreviations == null){
+			if (this.abbreviations == null) {
 				this.abbreviations = new ConcurrentHashMap<LanguageCode, HashSet<String>>();
 			}
-			if (!this.abbreviations.containsKey(language)){
+			if (!this.abbreviations.containsKey(language)) {
 				this.abbreviations.put(language, abbreviations);
 			}
 		}

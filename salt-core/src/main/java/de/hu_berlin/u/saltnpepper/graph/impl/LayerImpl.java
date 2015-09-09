@@ -106,7 +106,7 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		if ((getGraph() != null) && (!getGraph().containsRelation(relation.getId()))) {
 			getGraph().addRelation(relation);
 		}
-		relations.add((R)relation);
+		relations.add((R) relation);
 	}
 
 	/** {@inheritDoc Layer#removeRelation(Relation)} **/

@@ -22,18 +22,18 @@ import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public class STypeAnnotationImpl extends SAnnotationImpl implements STypeAnnotation {
-	public STypeAnnotationImpl(){
+	public STypeAnnotationImpl() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_TYPE);
 	}
-	
+
 	/** Calling this method has no effect. **/
 	@Override
 	public void setName(String name) {
 	}
-	
+
 	/** Calling this method has no effect. **/
 	@Override
 	public void setNamespace(String namespace) {
 	}
-} //STypeAnnotationImpl
+} // STypeAnnotationImpl

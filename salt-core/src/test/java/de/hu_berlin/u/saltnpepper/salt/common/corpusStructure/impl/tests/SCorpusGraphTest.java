@@ -80,10 +80,11 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	}
 
 	/**
-	 * Tests the double chaining between {@link SCorpusGraph} and {@link SaltProject}.
+	 * Tests the double chaining between {@link SCorpusGraph} and
+	 * {@link SaltProject}.
 	 */
 	@Test
-	public void testSaltProject_doubleChaining(){
+	public void testSaltProject_doubleChaining() {
 		SaltProject project = SaltFactory.createSaltProject();
 		assertEquals(0, project.getCorpusGraphs().size());
 		getFixture().setSaltProject(project);
@@ -92,7 +93,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		getFixture().setSaltProject(null);
 		assertEquals(0, project.getCorpusGraphs().size());
 	}
-	
+
 	/**
 	 * Tries to add a relation which is not of type {@link SRelation}
 	 */

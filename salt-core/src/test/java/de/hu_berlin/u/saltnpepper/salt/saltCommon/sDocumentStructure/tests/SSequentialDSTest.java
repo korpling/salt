@@ -21,10 +21,10 @@ import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
 
-public abstract class SSequentialDSTest<D, P extends Number> extends SNodeAbstractTest{
+public abstract class SSequentialDSTest<D, P extends Number> extends SNodeAbstractTest {
 
 	protected SSequentialDS<D, P> getFixture() {
-		return (SSequentialDS<D, P>)fixture;
+		return (SSequentialDS<D, P>) fixture;
 	}
 
 	/**

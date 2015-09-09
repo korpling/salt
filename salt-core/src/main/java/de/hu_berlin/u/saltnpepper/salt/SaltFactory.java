@@ -215,7 +215,7 @@ public class SaltFactory {
 	public static SSpanningRelation createSSpanningRelation() {
 		return (factory.createSSpanningRelation());
 	}
-	
+
 	/**
 	 * Creates a new {@link SDominanceRelation} object.
 	 * 
@@ -224,6 +224,7 @@ public class SaltFactory {
 	public static SDominanceRelation createSDominanceRelation() {
 		return (factory.createSDominanceRelation());
 	}
+
 	/**
 	 * Creates a new {@link SPointingRelation} object.
 	 * 
@@ -232,6 +233,7 @@ public class SaltFactory {
 	public static SPointingRelation createSPointingRelation() {
 		return (factory.createSPointingRelation());
 	}
+
 	/**
 	 * Creates a new {@link SOrderRelation} object.
 	 * 
@@ -240,6 +242,7 @@ public class SaltFactory {
 	public static SOrderRelation createSOrderRelation() {
 		return (factory.createSOrderRelation());
 	}
+
 	/**
 	 * Creates a new {@link STextualRelation} object.
 	 * 
@@ -248,6 +251,7 @@ public class SaltFactory {
 	public static STextualRelation createSTextualRelation() {
 		return (factory.createSTextualRelation());
 	}
+
 	/**
 	 * Creates a new {@link STimelineRelation} object.
 	 * 
@@ -256,6 +260,7 @@ public class SaltFactory {
 	public static STimelineRelation createSTimelineRelation() {
 		return (factory.createSTimelineRelation());
 	}
+
 	/**
 	 * Creates a new {@link SMedialRelation} object.
 	 * 
@@ -264,6 +269,7 @@ public class SaltFactory {
 	public static SMedialRelation createSMedialRelation() {
 		return (factory.createSMedialRelation());
 	}
+
 	/**
 	 * Creates a new {@link SSpan} object.
 	 * 
@@ -272,6 +278,7 @@ public class SaltFactory {
 	public static SSpan createSSpan() {
 		return (factory.createSSpan());
 	}
+
 	/**
 	 * Creates a new {@link SStructure} object.
 	 * 
@@ -280,6 +287,7 @@ public class SaltFactory {
 	public static SStructure createSStructure() {
 		return (factory.createSStructure());
 	}
+
 	/**
 	 * Creates a new {@link STextualDS} object.
 	 * 
@@ -288,6 +296,7 @@ public class SaltFactory {
 	public static STextualDS createSTextualDS() {
 		return (factory.createSTextualDS());
 	}
+
 	/**
 	 * Creates a new {@link SMedialDS} object.
 	 * 
@@ -296,6 +305,7 @@ public class SaltFactory {
 	public static SMedialDS createSMedialDS() {
 		return (factory.createSMedialDS());
 	}
+
 	/**
 	 * Creates a new {@link STimeline} object.
 	 * 
@@ -304,6 +314,7 @@ public class SaltFactory {
 	public static STimeline createSTimeline() {
 		return (factory.createSTimeline());
 	}
+
 	/**
 	 * Creates a new {@link SToken} object.
 	 * 
@@ -312,45 +323,57 @@ public class SaltFactory {
 	public static SToken createSToken() {
 		return (factory.createSToken());
 	}
+
 	// ===============================< document structure
 	// ===============================> semantics
 	/**
 	 * Creates a new {@link SCatAnnotation} object.
+	 * 
 	 * @return new {@link SCatAnnotation} object
 	 */
 	public static SCatAnnotation createSCatAnnotation() {
 		return (factory.createSCatAnnotation());
 	}
+
 	/**
 	 * Creates a new {@link SPOSAnnotation} object.
+	 * 
 	 * @return new {@link SPOSAnnotation} object
 	 */
 	public static SPOSAnnotation createSPOSAnnotation() {
 		return (factory.createSPOSAnnotation());
 	}
+
 	/**
 	 * Creates a new {@link SLemmaAnnotation} object.
+	 * 
 	 * @return new {@link SLemmaAnnotation} object
 	 */
 	public static SLemmaAnnotation createSLemmaAnnotation() {
 		return (factory.createSLemmaAnnotation());
 	}
+
 	/**
 	 * Creates a new {@link STypeAnnotation} object.
+	 * 
 	 * @return new {@link STypeAnnotation} object
 	 */
 	public static STypeAnnotation createSTypeAnnotation() {
 		return (factory.createSTypeAnnotation());
 	}
+
 	/**
 	 * Creates a new {@link SWordAnnotation} object.
+	 * 
 	 * @return new {@link SWordAnnotation} object
 	 */
 	public static SWordAnnotation createSWordAnnotation() {
 		return (factory.createSWordAnnotation());
 	}
+
 	/**
 	 * Creates a new {@link SSentenceAnnotation} object.
+	 * 
 	 * @return new {@link SSentenceAnnotation} object
 	 */
 	public static SSentenceAnnotation createSSentenceAnnotation() {

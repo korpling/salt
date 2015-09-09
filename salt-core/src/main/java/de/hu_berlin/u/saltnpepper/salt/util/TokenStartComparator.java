@@ -31,6 +31,7 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
  */
 public class TokenStartComparator implements Comparator<SToken> {
 	private SDocumentGraph documentGraph = null;
+
 	/**
 	 * Returns the {@link SDocumentGraph} object which contains the tokens to be
 	 * compared.
@@ -45,7 +46,8 @@ public class TokenStartComparator implements Comparator<SToken> {
 	 * Sets the {@link SDocumentGraph} object which contains the tokens to be
 	 * compared.
 	 * 
-	 * @param documentGraph container graph
+	 * @param documentGraph
+	 *            container graph
 	 */
 	public void setDocumentGraph(SDocumentGraph documentGraph) {
 		this.documentGraph = documentGraph;

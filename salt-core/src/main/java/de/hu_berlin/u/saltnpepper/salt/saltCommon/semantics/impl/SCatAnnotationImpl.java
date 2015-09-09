@@ -23,19 +23,19 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class SCatAnnotationImpl extends SAnnotationImpl implements SCatAnnotation {
-	
-	public SCatAnnotationImpl(){
+
+	public SCatAnnotationImpl() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_CAT);
 	}
-	
+
 	/** Calling this method has no effect. **/
 	@Override
 	public void setName(String name) {
 	}
-	
+
 	/** Calling this method has no effect. **/
 	@Override
 	public void setNamespace(String namespace) {
 	}
-} //SCatAnnotationImpl
+} // SCatAnnotationImpl

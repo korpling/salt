@@ -93,19 +93,23 @@ public class SaltUtil {
 	public static final String FEAT_TYPE_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_TYPE;
 
 	/**
-	 * Name for {@link SFeature} to store the {@link SDocumentGraph} in a {@link SDocument} object
+	 * Name for {@link SFeature} to store the {@link SDocumentGraph} in a
+	 * {@link SDocument} object
 	 */
 	public static final String FEAT_SDOCUMENT_GRAPH = "SDOCUMENT_GRAPH";
 	/**
-	 * Qualified name for {@link SFeature} to store the {@link SDocumentGraph} in a {@link SDocument} object
+	 * Qualified name for {@link SFeature} to store the {@link SDocumentGraph}
+	 * in a {@link SDocument} object
 	 */
 	public static final String FEAT_SDOCUMENT_GRAPH_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + "SDOCUMENT_GRAPH";
 	/**
-	 * Name for {@link SFeature} to store the {@link SDocument} corresponding to a {@link SDocumentGraph} object
+	 * Name for {@link SFeature} to store the {@link SDocument} corresponding to
+	 * a {@link SDocumentGraph} object
 	 */
 	public static final String FEAT_SDOCUMENT = "SDOCUMENT";
 	/**
-	 * Qualified name for {@link SFeature} to store the {@link SDocument} corresponding to a {@link SDocumentGraph} object
+	 * Qualified name for {@link SFeature} to store the {@link SDocument}
+	 * corresponding to a {@link SDocumentGraph} object
 	 */
 	public static final String FEAT_SDOCUMENT_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + "SDOCUMENT";
 	/**
@@ -123,7 +127,8 @@ public class SaltUtil {
 	 */
 	public static final String FEAT_SMEDIA_REFERNCE = "SAUDIO_REFERENCE";
 	/**
-	 * The qualified name of the name of the {@link SFeature} for the reference to an audio file.
+	 * The qualified name of the name of the {@link SFeature} for the reference
+	 * to an audio file.
 	 */
 	public static final String FEAT_SMEDIA_REFERNCE_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_SMEDIA_REFERNCE;
 
@@ -155,23 +160,25 @@ public class SaltUtil {
 	// ======================================< keywords for features
 	// ======================================> keywords for semantics
 	/** name for {@link SCatAnnotation} **/
-	public static final String SEMANTICS_CAT="cat";
+	public static final String SEMANTICS_CAT = "cat";
 	/** name for {@link SPOSAnnotation} **/
-	public static final String SEMANTICS_POS="pos";
+	public static final String SEMANTICS_POS = "pos";
 	/** name for {@link SLemmaAnnotation} **/
-	public static final String SEMANTICS_LEMMA="lemma";
+	public static final String SEMANTICS_LEMMA = "lemma";
 	/** name for {@link SSentenceAnnotation} **/
-	public static final String SEMANTICS_SENTENCE="sentence";
+	public static final String SEMANTICS_SENTENCE = "sentence";
 	/** value for {@link STypeAnnotation} **/
-	public static final String SEMANTICS_TYPE="type";
+	public static final String SEMANTICS_TYPE = "type";
 	/** value for {@link SWordAnnotation} **/
-	public static final String SEMANTICS_WORD="word";
+	public static final String SEMANTICS_WORD = "word";
 	/** name for {@link SWordAnnotation} and {@link SSentenceAnnotation} **/
-	public static final String SEMANTICS_UNIT= "unit";
+	public static final String SEMANTICS_UNIT = "unit";
+
 	// ======================================< keywords for semantics
 
-//	/** Determines the separator between points of time in a {@link STimeline}**/
-//	public static final String TIMELINE_SEPARATOR = "#";
+	// /** Determines the separator between points of time in a {@link
+	// STimeline}**/
+	// public static final String TIMELINE_SEPARATOR = "#";
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
 	 * qualified name: qname= NAMESPACE {@value #NAMESPACE_SEPERATOR} NAME.

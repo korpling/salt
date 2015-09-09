@@ -39,4 +39,4 @@ public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedial
 		}
 		super.setGraph(graph);
 	}
-} //SAudioDSRelationImpl
+} // SAudioDSRelationImpl
