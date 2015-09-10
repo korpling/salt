@@ -1,7 +1,9 @@
 package de.hu_berlin.u.saltnpepper.salt.util.internal;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -9,12 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.GroupLayout.SequentialGroup;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
@@ -54,7 +59,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SFeatureImpl;
  * @author André Röhrig
  *
  */
-public class Diff {
+public class Diff2 {
 
 	private SDocumentGraph template = null;
 	private SDocumentGraph other = null;
@@ -74,12 +79,6 @@ public class Diff {
 	 **/
 	public static final String OPTION_CHECK_ID = "idCheck";
 
-	public Diff() {
-		options.put(OPTION_CHECK_ANNOTATION, true);
-		options.put(OPTION_CHECK_ANNOTATION_DIFF, true);
-		options.put(OPTION_CHECK_ID, false);
-	}
-
 	/**
 	 * Initializes Diff object with the two graphs <code>template</code> and
 	 * <code>other</code>.
@@ -87,7 +86,7 @@ public class Diff {
 	 * @param template
 	 * @param other
 	 */
-	public Diff(SDocumentGraph template, SDocumentGraph other) {
+	public Diff2(SDocumentGraph template, SDocumentGraph other) {
 		this.template = template;
 		this.other = other;
 
@@ -96,7 +95,7 @@ public class Diff {
 		options.put(OPTION_CHECK_ID, false);
 	}
 
-	public Diff(SDocumentGraph template, SDocumentGraph other, Map optionMap) {
+	public Diff2(SDocumentGraph template, SDocumentGraph other, Map optionMap) {
 		this.template = template;
 		this.other = other;
 
@@ -142,7 +141,7 @@ public class Diff {
 		LAYER_NAME_DIFFERING
 	}
 
-	public class Difference {
+	public class Difference implements Serializable {
 		/** Object of graph template, if this difference type has one **/
 		public Object templateObject;
 		/** Object of graph other, if this difference type has one **/
@@ -225,7 +224,7 @@ public class Diff {
 	 **/
 	public Set<Difference> getDifferences() {
 		if (differences == null) {
-			differences = new LinkedHashSet<Diff.Difference>();
+			differences = new LinkedHashSet<Diff2.Difference>();
 		}
 		return differences;
 	}
@@ -267,7 +266,7 @@ public class Diff {
 			System.out.println("1");
 			return false;
 		}
-		if (!compareTextualDSs(template, other, false)) {
+		if (!compareDataSources(template, other, false)) {
 			System.out.println("2");
 			return false;
 		}
@@ -305,7 +304,7 @@ public class Diff {
 	 */
 	public Set<Difference> findDiffs() {
 		checkSizes(template, other);
-		compareTextualDSs(template, other, true);
+		compareDataSources(template, other, true);
 		compareTokens(template, other, true);
 		compareNodes(template, other, true);
 		checkPointingRelations(template, other, true);
@@ -387,11 +386,11 @@ public class Diff {
 		return true;
 	}
 
-	/** isomorphic Salt objects **/
+	/** isomorphic Salt objects key= tempplate, value= other**/
 	private BiMap<Object, Object> isoObjects = null;
 
 	/**
-	 * return BiMap with isomorphic Salt object
+	 * return BiMap with isomorphic Salt object key= tempplate, value= other
 	 * 
 	 * @return BiMap with isomorphic Salt objects
 	 **/
@@ -421,8 +420,20 @@ public class Diff {
 		}
 	}
 
+	private boolean compareDataSources(SDocumentGraph template, SDocumentGraph other, boolean diff) {
+		boolean retVal= true;
+		//compare textual data sources
+		compareDataSources((List<SSequentialDS>)(List<? extends SSequentialDS>)template.getTextualDSs(), (List<SSequentialDS>)(List<? extends SSequentialDS>)other.getTextualDSs(), diff);
+		//compare medial data sources
+		compareDataSources((List<SSequentialDS>)(List<? extends SSequentialDS>)template.getMedialDSs(), (List<SSequentialDS>)(List<? extends SSequentialDS>)other.getMedialDSs(), diff);
+		return(retVal);
+	}
+	
 	/**
-	 * method to check {@link STextualDS}s for isomorphy
+	 * To check whether all {@link SSequentialDS} have a partner, create a map
+	 * for all {@link SSequentialDS} in template having the data as key and the
+	 * {@link SSequentialDS} as value. Next check all {@link SSequentialDS} of
+	 * other if they have a mapping partner.
 	 * 
 	 * @return isomorphy still possible after this check
 	 * @param template
@@ -432,72 +443,111 @@ public class Diff {
 	 * @param diff
 	 *            if true, diffs are checked as well
 	 **/
-	private boolean compareTextualDSs(SDocumentGraph template, SDocumentGraph other, boolean diff) {
+	private boolean compareDataSources(List<SSequentialDS> template, List<SSequentialDS>  other, boolean diff) {
 		boolean iso = true;
+		Map<Object, SSequentialDS> dataToDS = new Hashtable<>();
+		Set<SSequentialDS> remainingTemplates= new HashSet<>();
 
-		// initializing
-		List<STextualDS> templateDSlist = template.getTextualDSs();
-		List<STextualDS> otherDSlist = other.getTextualDSs();
+		// put all template data source to map
+		Iterator<SSequentialDS> iterator = template.iterator();
+		while (iterator.hasNext()) {
+			SSequentialDS templateDS = iterator.next();
+			dataToDS.put(templateDS.getData(), templateDS);
+			remainingTemplates.add(templateDS);
+		}
 
-		int templateRange = templateDSlist.size();
-		int otherRange = otherDSlist.size();
-
-		Set<STextualDS> templateMatched = new HashSet<>();
-		Set<STextualDS> otherMatched = new HashSet<>();
-
-		// checking for isomorphic objects
-		// adding these objects to BiMap
-		for (int i = 0; i < templateRange; i = i + 1) {
-			STextualDS templateDS = templateDSlist.get(i);
-			for (int j = 0; j < otherRange; j = j + 1) {
-				STextualDS otherDS = otherDSlist.get(j);
-				if (!otherMatched.contains(otherDS)) {
-					if (templateDS.getText().equals(otherDS.getText())) {
-						getIsoObjects().put(templateDS, otherDS);
-						templateMatched.add(templateDSlist.get(i));
-						otherMatched.add(otherDSlist.get(i));
-						break;
-					}
-				}
-			}
-			// check whether isomorphy can be ruled out
-			if (!templateMatched.contains(templateDS)) {
+		// check all other data source with map
+		iterator = other.iterator();
+		while (iterator.hasNext()) {
+			SSequentialDS otherDS = iterator.next();
+			SSequentialDS templateDS = (SSequentialDS) dataToDS.get(otherDS.getData());
+			if (templateDS== null){
 				if (!diff) {
 					return false;
-				} else {
-					iso = false;
 				}
-			}
-		}
-		// check whether isomorphy can be ruled out
-		if (otherMatched.size() < otherDSlist.size()) {
-			if (!diff) {
-				return false;
-			} else {
-				iso = false;
-			}
-		}
-
-		if (!diff) {
-			return iso;
-		}
-
-		// find unmatched objects and declare diffs
-		templateRange = templateDSlist.size();
-		otherRange = otherDSlist.size();
-
-		for (int i = 0; i < templateRange; i = i + 1) {
-			STextualDS templateDS = templateDSlist.get(i);
-			if (!templateMatched.contains(templateDS))
-				addDifference(templateDS, null, null, DIFF_TYPES.NODE_MISSING, null);
-		}
-
-		for (int i = 0; i < templateRange; i = i + 1) {
-			STextualDS otherDS = otherDSlist.get(i);
-			if (!otherMatched.contains(otherDS))
+				iso= false;
 				addDifference(null, otherDS, null, DIFF_TYPES.NODE_MISSING, null);
+				remainingTemplates.remove(templateDS);
+			}else{
+				getIsoObjects().put(templateDS, otherDS);
+			}
 		}
-		return iso;
+		if (remainingTemplates.size()>0){
+			iterator= remainingTemplates.iterator();
+			while(iterator.hasNext()){
+				SSequentialDS templateDS =iterator.next();
+				if (!diff) {
+					return false;
+				}
+				iso= false;
+				addDifference(templateDS, null, null, DIFF_TYPES.NODE_MISSING, null);
+			}
+		}
+		return(iso);
+		
+//		// initializing
+//		List<STextualDS> templateDSlist = template.getTextualDSs();
+//		List<STextualDS> otherDSlist = other.getTextualDSs();
+//
+//		int templateRange = templateDSlist.size();
+//		int otherRange = otherDSlist.size();
+//
+//		Set<STextualDS> templateMatched = new HashSet<>();
+//		Set<STextualDS> otherMatched = new HashSet<>();
+//
+//		// checking for isomorphic objects
+//		// adding these objects to BiMap
+//		for (int i = 0; i < templateRange; i = i + 1) {
+//			STextualDS templateDS = templateDSlist.get(i);
+//			for (int j = 0; j < otherRange; j = j + 1) {
+//				STextualDS otherDS = otherDSlist.get(j);
+//				if (!otherMatched.contains(otherDS)) {
+//					if (templateDS.getText().equals(otherDS.getText())) {
+//						getIsoObjects().put(templateDS, otherDS);
+//						templateMatched.add(templateDSlist.get(i));
+//						otherMatched.add(otherDSlist.get(i));
+//						break;
+//					}
+//				}
+//			}
+//			// check whether isomorphy can be ruled out
+//			if (!templateMatched.contains(templateDS)) {
+//				if (!diff) {
+//					return false;
+//				} else {
+//					iso = false;
+//				}
+//			}
+//		}
+//		// check whether isomorphy can be ruled out
+//		if (otherMatched.size() < otherDSlist.size()) {
+//			if (!diff) {
+//				return false;
+//			} else {
+//				iso = false;
+//			}
+//		}
+//
+//		if (!diff) {
+//			return iso;
+//		}
+//
+//		// find unmatched objects and declare diffs
+//		templateRange = templateDSlist.size();
+//		otherRange = otherDSlist.size();
+//
+//		for (int i = 0; i < templateRange; i = i + 1) {
+//			STextualDS templateDS = templateDSlist.get(i);
+//			if (!templateMatched.contains(templateDS))
+//				addDifference(templateDS, null, null, DIFF_TYPES.NODE_MISSING, null);
+//		}
+//
+//		for (int i = 0; i < templateRange; i = i + 1) {
+//			STextualDS otherDS = otherDSlist.get(i);
+//			if (!otherMatched.contains(otherDS))
+//				addDifference(null, otherDS, null, DIFF_TYPES.NODE_MISSING, null);
+//		}
+//		return iso;
 	}
 
 	/**
@@ -618,7 +668,8 @@ public class Diff {
 		Set<SNode> template0 = new HashSet<>();
 		Set<SNode> other0 = new HashSet<>();
 
-		//walk through all template tokens and add all nodes which refer to a token to list
+		// walk through all template tokens and add all nodes which refer to a
+		// token to list
 		for (int i = 0; i < templateDSlist.size(); i = i + 1) {
 			List<SRelation> relList = templateDSlist.get(i).getInRelations();
 			for (int j = 0; j < relList.size(); j = j + 1) {
@@ -626,7 +677,8 @@ public class Diff {
 					template0.add((SNode) relList.get(j).getSource());
 			}
 		}
-		//walk through all other tokens and add all nodes which refer to a token to list
+		// walk through all other tokens and add all nodes which refer to a
+		// token to list
 		for (int i = 0; i < otherDSlist.size(); i = i + 1) {
 			List<SRelation> relList = otherDSlist.get(i).getInRelations();
 			for (int j = 0; j < relList.size(); j = j + 1) {

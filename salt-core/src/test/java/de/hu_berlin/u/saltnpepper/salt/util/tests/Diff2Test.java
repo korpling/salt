@@ -34,26 +34,28 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff.Difference;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff2;
 
 /**
  * This class tests the isomorphy check of the {@link SDocumentGraph}.
  * 
  * @author André Röhrig
  */
-public class DiffTest {
+public class Diff2Test {
 
-	protected Diff fixture = null;
+	protected Diff2 fixture = null;
 
-	protected void setFixture(Diff fixture) {
+	protected void setFixture(Diff2 fixture) {
 		this.fixture = fixture;
 	}
 
-	protected Diff getFixture() {
+	protected Diff2 getFixture() {
 		return fixture;
 	}
 
@@ -68,7 +70,7 @@ public class DiffTest {
 		other = SaltFactory.createSDocumentGraph();
 		other.setDocument(SaltFactory.createSDocument());
 
-		setFixture(new Diff(template, other));
+		setFixture(new Diff2(template, other));
 	}
 
 	/**
@@ -94,16 +96,28 @@ public class DiffTest {
 	 * Tests same and different textual data sources
 	 */
 	@Test
-	public void testSTextualDS() {
+	public void testTextualDS_iso() {
 		SampleGenerator.createPrimaryData(template.getDocument());
 		SampleGenerator.createPrimaryData(other.getDocument());
-		other.createTextualDS("a different Text");
-		other.createTextualDS("a different text");
-		template.createTextualDS("a different text");
-		template.createTextualDS("a different Text");
+		template.createTextualDS("a template text");
+		STextualDS otherText= other.createTextualDS("a different text");
 		assertFalse(getFixture().isIsomorph());
-
-		assertEquals(2, getFixture().getIsoObjects().size());
+		otherText.setText("a template text");
+		assertTrue(getFixture().isIsomorph());
+	}
+	
+	/**
+	 * Tests same and different textual data sources
+	 */
+	@Test
+	public void testTextualDS_dif() {
+		SampleGenerator.createPrimaryData(template.getDocument());
+		SampleGenerator.createPrimaryData(other.getDocument());
+		template.createTextualDS("a template text");
+		STextualDS otherText= other.createTextualDS("a different text");
+		assertEquals(2, getFixture().findDiffs().size());
+		otherText.setText("a template text");
+		assertEquals(0, getFixture().findDiffs().size());
 	}
 
 	/**
@@ -156,7 +170,7 @@ public class DiffTest {
 		other.addNode(other_struc);
 		other.addRelation(sDominatingRelation2);
 
-		assertTrue(""+getFixture().getDifferences(), getFixture().isIsomorph());
+		assertTrue("" + getFixture().getDifferences(), getFixture().isIsomorph());
 
 		SDominanceRelation sDominatingRelation3 = SaltFactory.createSDominanceRelation();
 		sDominatingRelation3.setSource(templ_struc);
