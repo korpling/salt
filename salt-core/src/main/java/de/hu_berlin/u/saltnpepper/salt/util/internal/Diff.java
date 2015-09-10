@@ -276,7 +276,6 @@ public class Diff {
 		if (!checkLayers(template, other, false)) {
 			return false;
 		}
-
 		return true;
 	}
 
@@ -854,34 +853,65 @@ public class Diff {
 	}
 
 	public boolean compareSAnnotations(SAnnotationContainer templateNode, SAnnotationContainer otherNode, Set<Difference> subDiffs) {
-		Set<SAnnotation> tempSet = new HashSet<>(templateNode.getAnnotations());
-		Set<SAnnotation> otherSet = new HashSet<>(otherNode.getAnnotations());
-
+		
 		boolean iso = true;
-		Iterator<SAnnotation> itTemplate = tempSet.iterator();
-
 		if ((boolean) options.get("annoDiff")) {
-			while (itTemplate.hasNext()) {
-				SAnnotation tempFeat = itTemplate.next();
-				if (!otherSet.contains(tempFeat)) {
-					Difference tempDiff = new Difference(tempFeat, null, null, DIFF_TYPES.LABEL_MISSING);
+			Iterator<SAnnotation> it= templateNode.iterator_SAnnotation();
+			while (it.hasNext()) {
+				SAnnotation anno = it.next();
+				if (!otherNode.containsLabel(anno.getQName())){
+					Difference tempDiff = new Difference(anno, null, null, DIFF_TYPES.LABEL_MISSING);
 					subDiffs.add(tempDiff);
 					iso = false;
 				}
 			}
-
-			Iterator<SAnnotation> itOther = otherSet.iterator();
-
-			while (itOther.hasNext()) {
-				SAnnotation tempFeat = itOther.next();
-				if (!tempSet.contains(tempFeat)) {
-					Difference tempDiff = new Difference(null, tempFeat, null, DIFF_TYPES.LABEL_MISSING);
+			it= otherNode.iterator_SAnnotation();
+			while (it.hasNext()) {
+				SAnnotation anno = it.next();
+				if (!templateNode.containsLabel(anno.getQName())) {
+					Difference tempDiff = new Difference(null, anno, null, DIFF_TYPES.LABEL_MISSING);
 					subDiffs.add(tempDiff);
 					iso = false;
 				}
 			}
 		}
 		return iso;
+
+		
+		
+		//		Set<SAnnotation> tempSet = new HashSet<>(templateNode.getAnnotations());
+//		Set<SAnnotation> otherSet = new HashSet<>(otherNode.getAnnotations());
+//
+//		boolean iso = true;
+//		Iterator<SAnnotation> itTemplate = tempSet.iterator();
+//
+//		if ((boolean) options.get("annoDiff")) {
+//			while (itTemplate.hasNext()) {
+//				SAnnotation tempFeat = itTemplate.next();
+//				System.out.println("search "+tempFeat);
+//				if (!otherSet.contains(tempFeat)) {
+//					Difference tempDiff = new Difference(tempFeat, null, null, DIFF_TYPES.LABEL_MISSING);
+//					subDiffs.add(tempDiff);
+//					System.out.println("not there ");
+//					iso = false;
+//				}else{
+//					System.out.println("is there ");
+//				}
+//			}
+//
+//			Iterator<SAnnotation> itOther = otherSet.iterator();
+//
+//			while (itOther.hasNext()) {
+//				SAnnotation tempFeat = itOther.next();
+//				if (!tempSet.contains(tempFeat)) {
+//					Difference tempDiff = new Difference(null, tempFeat, null, DIFF_TYPES.LABEL_MISSING);
+//					subDiffs.add(tempDiff);
+//					System.out.println("compare sanno 2: ");
+//					iso = false;
+//				}
+//			}
+//		}
+//		return iso;
 
 	}
 

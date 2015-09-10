@@ -150,7 +150,7 @@ public class DiffTest {
 		other.addNode(other_struc);
 		other.addRelation(sDominatingRelation2);
 
-		assertTrue(getFixture().isIsomorph());
+		assertTrue(""+getFixture().getDifferences(), getFixture().isIsomorph());
 
 		SDominanceRelation sDominatingRelation3 = SaltFactory.createSDominanceRelation();
 		sDominatingRelation3.setSource(templ_struc);
@@ -241,7 +241,6 @@ public class DiffTest {
 		}
 		// same annotations
 		assertTrue(getFixture().isIsomorph());
-		// assertEquals(0, getFixture().getDifferences());
 
 		// different annotations - one additional annotation
 		other.getTokens().get(0).createAnnotation(null, "annoName2", "annoVal");
@@ -318,8 +317,6 @@ public class DiffTest {
 		assertTrue(getFixture().checkTwoLayers(tempLayer, otherLayer));
 
 		template.getTokens().get(1).addLayer(tempLayer);
-		System.out.println("tempLayer: "+ tempLayer);
-		System.out.println("otherLayer: "+ otherLayer);
 		assertFalse(getFixture().checkTwoLayers(tempLayer, otherLayer));
 	}
 
