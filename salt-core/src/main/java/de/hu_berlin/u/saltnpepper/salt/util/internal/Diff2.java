@@ -14,20 +14,28 @@ import java.util.Set;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
+import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
+import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNamedElement;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
+import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SFeatureImpl;
+import de.hu_berlin.u.saltnpepper.salt.util.DIFF_TYPES;
+import de.hu_berlin.u.saltnpepper.salt.util.Difference;
 
 /**
  * This class compares two {@link SDocumentGraph} objects for isomorphy. It uses
@@ -61,20 +69,45 @@ public class Diff2 {
 	private SDocumentGraph template = null;
 	private SDocumentGraph other = null;
 
-	private Map options = new HashMap<>();
+	private Map<String, Boolean> options = null;
 
+//	/**
+//	 * When true, even all annotations of nodes and relations are used for
+//	 * isomorphy check and difference computation.
+//	 **/
+//	public static final String OPTION_CHECK_ANNOTATION = "annoIso";
+//	/** ??? **/
+//	public static final String OPTION_CHECK_ANNOTATION_DIFF = "annoDiff";
+//	/**
+//	 * When true identifiers needs to be the same in isomorphy check and
+//	 * difference computation.
+//	 **/
+//	public static final String OPTION_CHECK_ID = "idCheck";
 	/**
-	 * When true, even all annotations of nodes and relations are used for
-	 * isomorphy check and difference computation.
-	 **/
-	public static final String OPTION_CHECK_ANNOTATION = "annoIso";
-	/** ??? **/
-	public static final String OPTION_CHECK_ANNOTATION_DIFF = "annoDiff";
+	 * When true, differences in {@link SFeature} have no influence on
+	 * isomorphie and will not produce any differences.
+	 */
+	public static final String OPTION_IGNORE_FEATURES = "ignoreFeatures";
 	/**
-	 * When true identifiers needs to be the same in isomorphy check and
-	 * difference computation.
-	 **/
-	public static final String OPTION_CHECK_ID = "idCheck";
+	 * When true, differences in {@link SAnnotation} have no influence on
+	 * isomorphie and will not produce any differences.
+	 */
+	public static final String OPTION_IGNORE_ANNOTATIONS = "ignoreAnnotations";
+	/**
+	 * When true, differences in {@link SMetaAnnotation} have no influence on
+	 * isomorphie and will not produce any differences.
+	 */
+	public static final String OPTION_IGNORE_META_ANNOTATIONS = "ignoreMetaAnnotstaions";
+	/**
+	 * When true, differences in {@link SProcessingAnnotation} have no influence
+	 * on isomorphie and will not produce any differences.
+	 */
+	public static final String OPTION_IGNORE_PROCESSING_ANNOTATIONS = "ignoreProcessingAnnotations";
+	/**
+	 * When true, differences in ids have no influence on isomorphie and will
+	 * not produce any differences.
+	 */
+	public static final String OPTION_IGNORE_ID = "ignoreIds";
 
 	/**
 	 * Initializes Diff object with the two graphs <code>template</code> and
@@ -84,131 +117,31 @@ public class Diff2 {
 	 * @param other
 	 */
 	public Diff2(SDocumentGraph template, SDocumentGraph other) {
-		this.template = template;
-		this.other = other;
-
-		options.put(OPTION_CHECK_ANNOTATION, true);
-		options.put(OPTION_CHECK_ANNOTATION_DIFF, true);
-		options.put(OPTION_CHECK_ID, false);
+		this(template, other, null);
 	}
 
-	public Diff2(SDocumentGraph template, SDocumentGraph other, Map optionMap) {
+	public Diff2(SDocumentGraph template, SDocumentGraph other, Map<String, Boolean> optionMap) {
 		this.template = template;
 		this.other = other;
 
 		options = optionMap;
-	}
-
-	public enum DIFF_TYPES {
-		/**
-		 * one of the compared objects contains a label, which is missing for
-		 * the other one
-		 */
-		LABEL_MISSING,
-		/** the compared labels differ in their namespace */
-		LABEL_NAMESPACES_DIFFERING,
-		/** the compared labels differ in their name */
-		LABEL_NAME_DIFFERING,
-		/** the compared labels differ in their value */
-		LABEL_VALUE_DIFFERING,
-		/* the ids of the compared objects differ */
-		ID_DIFFERING,
-		/**
-		 * one of the compared graphs contains a node that is missing for the
-		 * other one
-		 */
-		NODE_MISSING,
-		/** the compared nodes differ in their name */
-		NODE_NAME_DIFFERING,
-		/**
-		 * one of the compared graphs contains a relation that is missing for
-		 * the other one
-		 */
-		RELATION_MISSING,
-		/** the compared relations differ in their type */
-		RELATION_TYPE_DIFFERING,
-		/** the compared relations differ in their name */
-		RELATION_NAME_DIFFERING,
-		/**
-		 * one of the compared graphs contains a layer that is missing for the
-		 * other one
-		 */
-		LAYER_MISSING,
-		/** the compared layers differ in their name */
-		LAYER_NAME_DIFFERING
-	}
-
-	public class Difference implements Serializable {
-		/** Object of graph template, if this difference type has one **/
-		public Object templateObject;
-		/** Object of graph other, if this difference type has one **/
-		public Object otherObject;
-		/** Object containing the given object, e.g. used for layers **/
-		public Object container;
-		/** type of the difference **/
-		public DIFF_TYPES diffType;
-
-		public Set<Difference> subDiffs = null;
-
-		public void addSubDiffs(Set<Difference> subDiffs) {
-			this.subDiffs = subDiffs;
+		if (options== null){
+			options= new Hashtable<>();
 		}
-
-		public Difference(Object templateObject, Object otherObject, Object container, DIFF_TYPES diffType) {
-			this.templateObject = templateObject;
-			this.otherObject = otherObject;
-			this.container = container;
-			this.diffType = diffType;
+		if (!options.containsKey(OPTION_IGNORE_ANNOTATIONS)){
+			options.put(OPTION_IGNORE_ANNOTATIONS, false);
 		}
-
-		@Override
-		public String toString() {
-			StringBuilder str = new StringBuilder();
-			str.append(diffType.toString());
-
-			if (templateObject != null) {
-				str.append("	Graph1_Object:");
-				str.append(" salt-type:");
-				str.append((String) templateObject.getClass().getSimpleName());
-				str.append(" name:");
-				if (templateObject instanceof SAnnotationImpl) {
-					str.append((String) ((SAnnotation) templateObject).getName());
-				} else if (templateObject instanceof SFeatureImpl) {
-					str.append((String) ((SFeature) templateObject).getName());
-				} else {
-					str.append((String) ((SNamedElement) templateObject).getName());
-				}
-			}
-
-			if (otherObject != null) {
-				str.append(" Graph2_Object:");
-				str.append(" salt-type:");
-
-				str.append((String) otherObject.getClass().getSimpleName());
-
-				str.append(" name:");
-				if (otherObject instanceof SAnnotationImpl) {
-					str.append((String) ((SAnnotation) otherObject).getName());
-				} else if (otherObject instanceof SFeatureImpl) {
-					str.append((String) ((SFeature) otherObject).getName());
-				} else {
-					str.append((String) ((SNamedElement) otherObject).getName());
-				}
-			}
-
-			if (container != null) {
-				str.append(" Container:" + container.toString());
-			}
-
-			if (subDiffs != null) {
-				Iterator<Difference> iterator = subDiffs.iterator();
-				while (iterator.hasNext()) {
-					str.append("\n	" + iterator.next().toString());
-				}
-
-			}
-
-			return str.toString();
+		if (!options.containsKey(OPTION_IGNORE_META_ANNOTATIONS)){
+			options.put(OPTION_IGNORE_META_ANNOTATIONS, false);
+		}
+		if (!options.containsKey(OPTION_IGNORE_PROCESSING_ANNOTATIONS)){
+			options.put(OPTION_IGNORE_PROCESSING_ANNOTATIONS, true);
+		}
+		if (!options.containsKey(OPTION_IGNORE_FEATURES)){
+			options.put(OPTION_IGNORE_FEATURES, false);
+		}
+		if (!options.containsKey(OPTION_IGNORE_ID)){
+			options.put(OPTION_IGNORE_ID, false);
 		}
 	}
 
@@ -221,7 +154,7 @@ public class Diff2 {
 	 **/
 	public Set<Difference> getDifferences() {
 		if (differences == null) {
-			differences = new LinkedHashSet<Diff2.Difference>();
+			differences = new LinkedHashSet<>();
 		}
 		return differences;
 	}
@@ -380,7 +313,7 @@ public class Diff2 {
 	private BiMap<Object, Object> isoObjects = null;
 
 	/**
-	 * return BiMap with isomorphic Salt object key= tempplate, value= other
+	 * return BiMap with isomorphic Salt object key= template, value= other
 	 * 
 	 * @return BiMap with isomorphic Salt objects
 	 **/
@@ -504,88 +437,273 @@ public class Diff2 {
 	 **/
 	private boolean compareTokens(SDocumentGraph template, SDocumentGraph other, boolean diff) {
 		boolean iso = true;
-
-		// initializing
-		List<SToken> templateDSlist = template.getTokens();
-		List<SToken> otherDSlist = other.getTokens();
-
-		checkedElements.addAll(templateDSlist);
-		checkedElements.addAll(otherDSlist);
-
-		int templateRange = templateDSlist.size();
-		int otherRange = otherDSlist.size();
-
-		Set<SToken> templateMatched = new HashSet<>();
-		Set<SToken> otherMatched = new HashSet<>();
-
-		// checking for isomorphic objects
-		// adding these objects to BiMap
-		int nextJ = 0;
-
-		for (int i = 0; i < templateRange; i = i + 1) {
-			SToken templateTok = templateDSlist.get(i);
-			for (int j = nextJ; j < otherRange; j = j + 1) {
-				SToken otherTok = otherDSlist.get(j);
-				if (!otherMatched.contains(otherTok)) {
-					if (template.getText(templateTok).equals(other.getText(otherTok))) {
-						Set<Difference> subDiffs = new HashSet<>();
-						if (compareSAnnotations(templateTok, otherTok, subDiffs)) {
-
-						} else {
-							iso = false;
-							if ((boolean) options.get(OPTION_CHECK_ANNOTATION)) {
-								addDifference(templateTok, otherTok, null, DIFF_TYPES.NODE_MISSING, subDiffs);
-							}
-						}
-
-						getIsoObjects().put(templateTok, otherTok);
-						templateMatched.add(templateDSlist.get(i));
-						otherMatched.add(otherDSlist.get(i));
-						nextJ = j;
-						break;
-
-					}
-				}
+		Map<STextualDS, Map<String, STextualRelation>> bla = new Hashtable<>();
+		// data sources from template which have no partner in other
+		Set<STextualRelation> remainingTemplates = new HashSet<>();
+		Iterator<STextualRelation> iterator = template.getTextualRelations().iterator();
+		while (iterator.hasNext()) {
+			STextualRelation textRel = iterator.next();
+			Map<String, STextualRelation> offsetMap = bla.get(textRel.getTarget());
+			if (offsetMap == null) {
+				offsetMap = new Hashtable<>();
+				bla.put(textRel.getTarget(), offsetMap);
 			}
-			// check whether isomorphy can be ruled out
-			if (!templateMatched.contains(templateTok)) {
+			offsetMap.put(textRel.getStart() + "#" + textRel.getEnd(), textRel);
+			remainingTemplates.add(textRel);
+		}
+
+		// check all other data source with map
+		iterator = other.getTextualRelations().iterator();
+		while (iterator.hasNext()) {
+			STextualRelation otherRel = iterator.next();
+			STextualDS templateDS = (STextualDS) getIsoObjects().inverse().get(otherRel.getTarget());
+			if (templateDS != null) {
+				Map<String, STextualRelation> offsetMap = bla.get(templateDS);
+				STextualRelation templateRel = offsetMap.get(otherRel.getStart() + "#" + otherRel.getEnd());
+				if (templateRel == null) {
+					// no partner for rel was found, since the combination
+					// textual data source, start and end value has matched
+					if (!diff) {
+						return false;
+					}
+					iso = false;
+					addDifference(null, otherRel.getTarget(), null, DIFF_TYPES.NODE_MISSING, null);
+				} else {
+					// add tokens to isomorphy table
+					getIsoObjects().put(templateRel.getSource(), otherRel.getSource());
+					remainingTemplates.remove(templateRel);
+				}
+			} else {
+				// no partner for rel was found, since the textual data source
+				// does not exist in template
 				if (!diff) {
 					return false;
-				} else {
-					iso = false;
+				}
+				iso = false;
+				addDifference(null, otherRel.getTarget(), null, DIFF_TYPES.NODE_MISSING, null);
+			}
+		}
+
+		// check the remaining tectual relations
+		if (remainingTemplates.size() > 0) {
+			iterator = remainingTemplates.iterator();
+			while (iterator.hasNext()) {
+				STextualRelation templateRel = iterator.next();
+				if (!diff) {
+					return false;
+				}
+				iso = false;
+				addDifference(templateRel.getSource(), null, null, DIFF_TYPES.NODE_MISSING, null);
+			}
+		}
+		return (iso);
+
+		// boolean iso = true;
+		//
+		// // initializing
+		// List<SToken> templateDSlist = template.getTokens();
+		// List<SToken> otherDSlist = other.getTokens();
+		//
+		// checkedElements.addAll(templateDSlist);
+		// checkedElements.addAll(otherDSlist);
+		//
+		// int templateRange = templateDSlist.size();
+		// int otherRange = otherDSlist.size();
+		//
+		// Set<SToken> templateMatched = new HashSet<>();
+		// Set<SToken> otherMatched = new HashSet<>();
+		//
+		// // checking for isomorphic objects
+		// // adding these objects to BiMap
+		// int nextJ = 0;
+		//
+		// for (int i = 0; i < templateRange; i = i + 1) {
+		// SToken templateTok = templateDSlist.get(i);
+		// for (int j = nextJ; j < otherRange; j = j + 1) {
+		// SToken otherTok = otherDSlist.get(j);
+		// if (!otherMatched.contains(otherTok)) {
+		// if (template.getText(templateTok).equals(other.getText(otherTok))) {
+		// Set<Difference> subDiffs = new HashSet<>();
+		// if (compareSAnnotations(templateTok, otherTok, subDiffs)) {
+		//
+		// } else {
+		// iso = false;
+		// if ((boolean) options.get(OPTION_CHECK_ANNOTATION)) {
+		// addDifference(templateTok, otherTok, null, DIFF_TYPES.NODE_MISSING,
+		// subDiffs);
+		// }
+		// }
+		//
+		// getIsoObjects().put(templateTok, otherTok);
+		// templateMatched.add(templateDSlist.get(i));
+		// otherMatched.add(otherDSlist.get(i));
+		// nextJ = j;
+		// break;
+		//
+		// }
+		// }
+		// }
+		// // check whether isomorphy can be ruled out
+		// if (!templateMatched.contains(templateTok)) {
+		// if (!diff) {
+		// return false;
+		// } else {
+		// iso = false;
+		// }
+		// }
+		// }
+		//
+		// // check whether isomorphy can be ruled out
+		// if (otherMatched.size() < otherDSlist.size()) {
+		// if (!diff) {
+		// return false;
+		// } else {
+		// iso = false;
+		// }
+		// }
+		//
+		// if (!diff) {
+		// return iso;
+		// }
+		//
+		// // find unmatched objects and declare diffs
+		// templateRange = templateDSlist.size();
+		// otherRange = otherDSlist.size();
+		//
+		// for (int i = 0; i < templateRange; i = i + 1) {
+		// SToken templateDS = templateDSlist.get(i);
+		// if (!templateMatched.contains(templateDS))
+		// addDifference(templateDS, null, null, DIFF_TYPES.NODE_MISSING, null);
+		// }
+		//
+		// for (int i = 0; i < templateRange; i = i + 1) {
+		// SToken otherDS = otherDSlist.get(i);
+		// if (!otherMatched.contains(otherDS))
+		// addDifference(null, otherDS, null, DIFF_TYPES.NODE_MISSING, null);
+		// }
+		// return iso;
+	}
+
+	/**
+	 * Checks whether two {@link IdentifiableElement} objects are isomorph. If
+	 * option {@link #OPTION_IGNORE_ID} is false, this method returns true, if
+	 * the id values of both are equal, false otherwise.If subdiffs is not
+	 * null, the differences will be added to that list, if that list is empty
+	 * the method returns false when the first difference was found.
+	 * 
+	 * @param templateNode
+	 * @param otherNode
+	 * @param subDiffs
+	 * @return
+	 */
+	public boolean compareIdentifiableElements(IdentifiableElement template, IdentifiableElement other, Set<Difference> subDiffs) {
+		boolean retVal= true;
+		if (!(boolean)options.get(OPTION_IGNORE_ID)){
+			if (!template.getId().equals(other.getId())){
+				retVal= false;
+				if (subDiffs!= null){
+					subDiffs.add(new Difference(template, other, null, DIFF_TYPES.ID_DIFFERING));
 				}
 			}
 		}
+		return(retVal);
+	}
 
-		// check whether isomorphy can be ruled out
-		if (otherMatched.size() < otherDSlist.size()) {
-			if (!diff) {
-				return false;
-			} else {
-				iso = false;
+	/**
+	 * Checks whether two {@link SAnnotationContainer} objects are isomorph and
+	 * returns true if this is the case, false otherwise. If subdiffs is not
+	 * null, the differences will be added to that list, if that list is empty
+	 * the method returns false when the first difference was found. <br/>
+	 * The behavior of this method depends on options:
+	 * {@link #OPTION_IGNORE_META_ANNOTATIONS},
+	 * {@link #OPTION_IGNORE_PROCESSING_ANNOTATIONS},
+	 * {@link #OPTION_IGNORE_ANNOTATIONS} and {@link #OPTION_IGNORE_FEATURES}
+	 * 
+	 * @param templateNode
+	 * @param otherNode
+	 * @param subDiffs
+	 *            if differences shall be computed, this list must not have to
+	 *            be empty
+	 * @return
+	 */
+	public boolean compareAnnotationContainers(SAnnotationContainer template, SAnnotationContainer other, Set<Difference> subDiffs) {
+		boolean retVal1= true;
+		boolean retVal2= true;
+		boolean retVal3= true;
+		boolean retVal4= true;
+		
+		if (!(boolean)options.get(OPTION_IGNORE_ANNOTATIONS)){
+			Iterator<SAbstractAnnotation> otherIterator= (Iterator<SAbstractAnnotation>)(Iterator<? extends SAbstractAnnotation>)other.iterator_SAnnotation();
+			Iterator<SAbstractAnnotation> templateIterator= (Iterator<SAbstractAnnotation>)(Iterator<? extends SAbstractAnnotation>)template.iterator_SAnnotation();
+			retVal1= compareAnnotationContainers(templateIterator, otherIterator, subDiffs);
+			if (!retVal1 && subDiffs!= null){
+				return(false);
 			}
 		}
-
-		if (!diff) {
-			return iso;
+		if (!(boolean)options.get(OPTION_IGNORE_META_ANNOTATIONS)){
+			Iterator<SAbstractAnnotation> otherIterator= (Iterator<SAbstractAnnotation>)(Iterator<? extends SAbstractAnnotation>)other.iterator_SMetaAnnotation();
+			Iterator<SAbstractAnnotation> templateIterator= (Iterator<SAbstractAnnotation>)(Iterator<? extends SAbstractAnnotation>)template.iterator_SMetaAnnotation();
+			retVal2= compareAnnotationContainers(templateIterator, otherIterator, subDiffs);
+			if (!retVal1 && subDiffs!= null){
+				return(false);
+			}
 		}
-
-		// find unmatched objects and declare diffs
-		templateRange = templateDSlist.size();
-		otherRange = otherDSlist.size();
-
-		for (int i = 0; i < templateRange; i = i + 1) {
-			SToken templateDS = templateDSlist.get(i);
-			if (!templateMatched.contains(templateDS))
-				addDifference(templateDS, null, null, DIFF_TYPES.NODE_MISSING, null);
+		if (!(boolean)options.get(OPTION_IGNORE_PROCESSING_ANNOTATIONS)){
+			Iterator<SAbstractAnnotation> otherIterator= (Iterator<SAbstractAnnotation>)(Iterator<? extends SAbstractAnnotation>)other.iterator_SProcessingAnnotation();
+			Iterator<SAbstractAnnotation> templateIterator= (Iterator<SAbstractAnnotation>)(Iterator<? extends SAbstractAnnotation>)template.iterator_SProcessingAnnotation();
+			retVal3= compareAnnotationContainers(templateIterator, otherIterator, subDiffs);
+			if (!retVal1 && subDiffs!= null){
+				return(false);
+			}
 		}
-
-		for (int i = 0; i < templateRange; i = i + 1) {
-			SToken otherDS = otherDSlist.get(i);
-			if (!otherMatched.contains(otherDS))
-				addDifference(null, otherDS, null, DIFF_TYPES.NODE_MISSING, null);
+		if (!(boolean)options.get(OPTION_IGNORE_FEATURES)){
+			Iterator<SAbstractAnnotation> otherIterator= (Iterator<SAbstractAnnotation>)(Iterator<? extends SAbstractAnnotation>)other.iterator_SFeature();
+			Iterator<SAbstractAnnotation> templateIterator= (Iterator<SAbstractAnnotation>)(Iterator<? extends SAbstractAnnotation>)template.iterator_SFeature();
+			retVal4= compareAnnotationContainers(templateIterator, otherIterator, subDiffs);
+			if (!retVal1 && subDiffs!= null){
+				return(false);
+			}
 		}
-		return iso;
+		
+		return(retVal1 && retVal2 && retVal3 && retVal4);
+	}
+	
+	private boolean compareAnnotationContainers(Iterator<SAbstractAnnotation> templateIterator, Iterator<SAbstractAnnotation> otherIterator, Set<Difference> subDiffs) {
+		boolean retVal= true;
+		Set<SAbstractAnnotation> remainingLabels= new HashSet<>();
+		
+		while(otherIterator.hasNext()){
+			remainingLabels.add(otherIterator.next());
+		}			
+		
+		//check all annotations
+		while(templateIterator.hasNext()){
+			SAbstractAnnotation templateAnno=templateIterator.next();
+			SAbstractAnnotation otherAnno= (SAbstractAnnotation)other.getLabel(templateAnno.getQName());
+			if (otherAnno== null){
+				if (subDiffs!= null){
+					subDiffs.add(new Difference(templateAnno, null, template, DIFF_TYPES.LABEL_MISSING));
+					retVal= false;
+				}else{
+					return(false);
+				}
+			}else{
+				remainingLabels.remove(otherAnno);
+			}
+		}
+		
+		if (remainingLabels.size()>0){
+			if (subDiffs!= null){
+				retVal= false;
+				for (SAbstractAnnotation otherAnno: remainingLabels){
+					subDiffs.add(new Difference(null, otherAnno, other, DIFF_TYPES.LABEL_MISSING));
+				}
+			}else{
+				return(false);
+			}
+			
+		}
+		return(retVal);
 	}
 
 	/**
@@ -835,100 +953,100 @@ public class Diff2 {
 		return iso;
 	}
 
-	public boolean compareSFeatures(SAnnotationContainer templateNode, SAnnotationContainer otherNode, Set<Difference> subDiffs) {
-		Set<SFeature> tempSet = new HashSet<>(templateNode.getFeatures());
-		Set<SFeature> otherSet = new HashSet<>(otherNode.getFeatures());
-
-		boolean iso = true;
-		Iterator<SFeature> itTemplate = tempSet.iterator();
-
-		while (itTemplate.hasNext()) {
-			SFeature tempFeat = itTemplate.next();
-			if (!otherSet.contains(tempFeat)) {
-				Difference tempDiff = new Difference(tempFeat, null, null, DIFF_TYPES.LABEL_MISSING);
-				subDiffs.add(tempDiff);
-				iso = false;
-			}
-		}
-
-		Iterator<SFeature> itOther = otherSet.iterator();
-
-		while (itOther.hasNext()) {
-			SFeature tempFeat = itOther.next();
-			if (!tempSet.contains(tempFeat)) {
-				Difference tempDiff = new Difference(null, tempFeat, null, DIFF_TYPES.LABEL_MISSING);
-				subDiffs.add(tempDiff);
-				iso = false;
-			}
-		}
-
-		return iso;
-	}
-
-	public boolean compareSAnnotations(SAnnotationContainer templateNode, SAnnotationContainer otherNode, Set<Difference> subDiffs) {
-
-		boolean iso = true;
-		if ((boolean) options.get(OPTION_CHECK_ANNOTATION_DIFF)) {
-			Iterator<SAnnotation> it = templateNode.iterator_SAnnotation();
-			while (it.hasNext()) {
-				SAnnotation anno = it.next();
-				if (!otherNode.containsLabel(anno.getQName())) {
-					Difference tempDiff = new Difference(anno, null, null, DIFF_TYPES.LABEL_MISSING);
-					subDiffs.add(tempDiff);
-					iso = false;
-				}
-			}
-			it = otherNode.iterator_SAnnotation();
-			while (it.hasNext()) {
-				SAnnotation anno = it.next();
-				if (!templateNode.containsLabel(anno.getQName())) {
-					Difference tempDiff = new Difference(null, anno, null, DIFF_TYPES.LABEL_MISSING);
-					subDiffs.add(tempDiff);
-					iso = false;
-				}
-			}
-		}
-		return iso;
-
-		// Set<SAnnotation> tempSet = new
-		// HashSet<>(templateNode.getAnnotations());
-		// Set<SAnnotation> otherSet = new
-		// HashSet<>(otherNode.getAnnotations());
-		//
-		// boolean iso = true;
-		// Iterator<SAnnotation> itTemplate = tempSet.iterator();
-		//
-		// if ((boolean) options.get("annoDiff")) {
-		// while (itTemplate.hasNext()) {
-		// SAnnotation tempFeat = itTemplate.next();
-		// System.out.println("search "+tempFeat);
-		// if (!otherSet.contains(tempFeat)) {
-		// Difference tempDiff = new Difference(tempFeat, null, null,
-		// DIFF_TYPES.LABEL_MISSING);
-		// subDiffs.add(tempDiff);
-		// System.out.println("not there ");
-		// iso = false;
-		// }else{
-		// System.out.println("is there ");
-		// }
-		// }
-		//
-		// Iterator<SAnnotation> itOther = otherSet.iterator();
-		//
-		// while (itOther.hasNext()) {
-		// SAnnotation tempFeat = itOther.next();
-		// if (!tempSet.contains(tempFeat)) {
-		// Difference tempDiff = new Difference(null, tempFeat, null,
-		// DIFF_TYPES.LABEL_MISSING);
-		// subDiffs.add(tempDiff);
-		// System.out.println("compare sanno 2: ");
-		// iso = false;
-		// }
-		// }
-		// }
-		// return iso;
-
-	}
+//	public boolean compareSFeatures(SAnnotationContainer templateNode, SAnnotationContainer otherNode, Set<Difference> subDiffs) {
+//		Set<SFeature> tempSet = new HashSet<>(templateNode.getFeatures());
+//		Set<SFeature> otherSet = new HashSet<>(otherNode.getFeatures());
+//
+//		boolean iso = true;
+//		Iterator<SFeature> itTemplate = tempSet.iterator();
+//
+//		while (itTemplate.hasNext()) {
+//			SFeature tempFeat = itTemplate.next();
+//			if (!otherSet.contains(tempFeat)) {
+//				Difference tempDiff = new Difference(tempFeat, null, null, DIFF_TYPES.LABEL_MISSING);
+//				subDiffs.add(tempDiff);
+//				iso = false;
+//			}
+//		}
+//
+//		Iterator<SFeature> itOther = otherSet.iterator();
+//
+//		while (itOther.hasNext()) {
+//			SFeature tempFeat = itOther.next();
+//			if (!tempSet.contains(tempFeat)) {
+//				Difference tempDiff = new Difference(null, tempFeat, null, DIFF_TYPES.LABEL_MISSING);
+//				subDiffs.add(tempDiff);
+//				iso = false;
+//			}
+//		}
+//
+//		return iso;
+//	}
+//
+//	public boolean compareSAnnotations(SAnnotationContainer templateNode, SAnnotationContainer otherNode, Set<Difference> subDiffs) {
+//
+//		boolean iso = true;
+//		if ((boolean) options.get(OPTION_CHECK_ANNOTATION_DIFF)) {
+//			Iterator<SAnnotation> it = templateNode.iterator_SAnnotation();
+//			while (it.hasNext()) {
+//				SAnnotation anno = it.next();
+//				if (!otherNode.containsLabel(anno.getQName())) {
+//					Difference tempDiff = new Difference(anno, null, null, DIFF_TYPES.LABEL_MISSING);
+//					subDiffs.add(tempDiff);
+//					iso = false;
+//				}
+//			}
+//			it = otherNode.iterator_SAnnotation();
+//			while (it.hasNext()) {
+//				SAnnotation anno = it.next();
+//				if (!templateNode.containsLabel(anno.getQName())) {
+//					Difference tempDiff = new Difference(null, anno, null, DIFF_TYPES.LABEL_MISSING);
+//					subDiffs.add(tempDiff);
+//					iso = false;
+//				}
+//			}
+//		}
+//		return iso;
+//
+//		// Set<SAnnotation> tempSet = new
+//		// HashSet<>(templateNode.getAnnotations());
+//		// Set<SAnnotation> otherSet = new
+//		// HashSet<>(otherNode.getAnnotations());
+//		//
+//		// boolean iso = true;
+//		// Iterator<SAnnotation> itTemplate = tempSet.iterator();
+//		//
+//		// if ((boolean) options.get("annoDiff")) {
+//		// while (itTemplate.hasNext()) {
+//		// SAnnotation tempFeat = itTemplate.next();
+//		// System.out.println("search "+tempFeat);
+//		// if (!otherSet.contains(tempFeat)) {
+//		// Difference tempDiff = new Difference(tempFeat, null, null,
+//		// DIFF_TYPES.LABEL_MISSING);
+//		// subDiffs.add(tempDiff);
+//		// System.out.println("not there ");
+//		// iso = false;
+//		// }else{
+//		// System.out.println("is there ");
+//		// }
+//		// }
+//		//
+//		// Iterator<SAnnotation> itOther = otherSet.iterator();
+//		//
+//		// while (itOther.hasNext()) {
+//		// SAnnotation tempFeat = itOther.next();
+//		// if (!tempSet.contains(tempFeat)) {
+//		// Difference tempDiff = new Difference(null, tempFeat, null,
+//		// DIFF_TYPES.LABEL_MISSING);
+//		// subDiffs.add(tempDiff);
+//		// System.out.println("compare sanno 2: ");
+//		// iso = false;
+//		// }
+//		// }
+//		// }
+//		// return iso;
+//
+//	}
 
 	public boolean checkPointingRelations(SDocumentGraph template, SDocumentGraph other, Boolean diff) {
 		HashSet<SPointingRelation> tempSet = new HashSet<>(template.getPointingRelations());
