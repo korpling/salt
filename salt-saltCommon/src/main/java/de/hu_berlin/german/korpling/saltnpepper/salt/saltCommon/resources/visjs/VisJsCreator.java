@@ -49,7 +49,6 @@ import org.eclipse.emf.common.util.URI;
 
 public class VisJsCreator implements SGraphTraverseHandler{
 	
-//	private  URI uri;	
 	private  int currHigh;
 	private  long maxHigh;
 	private  int maxLevel;
@@ -60,12 +59,12 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	private  XMLOutputFactory outputFactory;
 	private  OutputStream os;
 	private  XMLStreamWriter writer;
-	private  BufferedWriter outNodes;
-	private  BufferedWriter outEdges;
-	private  BufferedWriter outOptions;
+	private  BufferedWriter outNodes = null;
+	private  BufferedWriter outEdges = null;;
+	private  BufferedWriter outOptions = null;
 	
-	private  JSONWriter jsonWriterNodes;
-	private  JSONWriter jsonWriterEdges;	
+	private  JSONWriter jsonWriterNodes = null;
+	private  JSONWriter jsonWriterEdges = null;	
 		
 	private  int bufferSize;
 
@@ -150,9 +149,13 @@ public class VisJsCreator implements SGraphTraverseHandler{
     	try{
     		this.doc= SaltFactory.eINSTANCE.createSDocument();	
         	doc.loadSDocumentGraph(inputUri);
-    	}catch (SaltResourceException e){
+    	}catch (SaltResourceNotFoundException e){
+    		throw new SaltResourceNotFoundException("A problem occured when loading salt project from '" + inputUri + "'.", e);
+    	}
+    	catch (SaltResourceException e){
 			throw new SaltResourceException("A problem occured when loading salt project from '" + inputUri + "'.", e);
 		}
+    	
     	roots = doc.getSDocumentGraph().getSRoots();	
     	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
     	if (sSpans != null && (sSpans.size() > 0))
@@ -204,7 +207,8 @@ public void setOptionsWriter (OutputStream os){
 	
 	
 
-public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException, SecurityException, IOException, XMLStreamException{
+public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  SaltResourceNotFoundException, SaltException,
+															SaltResourceException, XMLStreamException, IOException{
 	
 		try {
 			File outputFolder = createOutputResources(outputFileUri);	
@@ -214,10 +218,10 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException, Sec
 			  throw new SaltEmptyParameterException("outputFileUri", "writeHTML", this.getClass());
 			}	
 			catch (FileNotFoundException e) {
-				throw new SaltResourceNotFoundException("The output file could not have been created.");
+				throw new SaltResourceNotFoundException("The output file can not be created.");
 			}	
 			catch (SecurityException e) {
-			 throw new SaltException("Either the output folder could not have been created or permission denied.");
+			 throw new SaltException("Either the output folder can not be created or permission denied.");
 			}
 			catch (IOException e) {
 			 throw new SaltResourceException("A problem occured while copying the vis-js resource files");
@@ -232,12 +236,6 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException, Sec
 		setEdgeWriter(os);
 		setOptionsWriter(os);
 		
-		/*this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
-    	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), bufferSize);	
-    	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));	
-    	
-    	this.jsonWriterNodes = new JSONWriter(outNodes);
-    	this.jsonWriterEdges = new JSONWriter(outEdges);*/
     	
     	writeNodeImmediately = true;
 		
@@ -514,11 +512,20 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException, Sec
 		    writer.close();     
 	}
 	
-	public void buildJSON () throws IOException{		
+	
+	
+	public void buildJSON () throws SaltException, SaltEmptyParameterException{		
 	maxLevel = getMaxLevel(doc);
 
 	doc.getSDocumentGraph().sortSTokenByText();	  		 
 	 EList <SToken> sTokens = doc.getSDocumentGraph().getSTokens();
+	
+	 if(outNodes == null || jsonWriterNodes == null){
+		 throw new SaltEmptyParameterException("A problem occured while building of JSON objects. Probably the node writer is not set.");
+	 }
+	 if(outEdges == null || jsonWriterEdges == null){
+		 throw new SaltEmptyParameterException("A problem occured while building of JSON objects. Probably the edge writer is not set.");
+	 }
 	 
 	 try{
 		 
@@ -541,7 +548,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException, Sec
 	//close edge array
 	 jsonWriterEdges.endArray();	
 	 
-	 }catch(JSONException e){
+	}catch(JSONException e){
 		 throw new SaltException("A problem occured while building JSON objects.");
 	 }
 	 catch(IOException e){
@@ -652,7 +659,10 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException, Sec
 			  }
 	}
 	
-	public void buildOptions() throws IOException{
+	public void buildOptions() throws IOException, SaltEmptyParameterException{
+		if (outOptions == null){
+			throw new SaltEmptyParameterException("A problem occured while building of options. Probably the option writer is not set.");
+		}
 		
 			outOptions.write("{" + NEWLINE
 					+ "nodes:{" + NEWLINE

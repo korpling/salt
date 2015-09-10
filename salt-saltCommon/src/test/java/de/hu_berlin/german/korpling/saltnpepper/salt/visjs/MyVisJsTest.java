@@ -195,7 +195,22 @@ public class MyVisJsTest implements SGraphTraverseHandler{
 
 public MyVisJsTest (){	
 	  
-	URI uri = URI.createFileURI("../pcc2_random_sentence/pcc2/match_0.salt");	
+	URI uri = URI.createFileURI(".."+ System.getProperty("file.separator") 
+			+ "salt-saltCommon"
+			+ System.getProperty("file.separator") 
+			+ "src"
+			+ System.getProperty("file.separator") 
+			+ "test"
+			+ System.getProperty("file.separator") 
+			+ "resources"
+			+ System.getProperty("file.separator") 
+			+ "VisJsTest"
+			+ System.getProperty("file.separator") 
+			+ "pcc2_salt_random_sentence"
+			+ System.getProperty("file.separator") 
+			+ "pcc2"
+			+ System.getProperty("file.separator") 
+			+ "match_0.salt");	
 	this.doc= SaltFactory.eINSTANCE.createSDocument();	
 	// Test-Corpus
 	// SampleGenerator.createSDocumentStructure(doc);	
@@ -249,7 +264,7 @@ public MyVisJsTest (){
 
 	
 	
-	@Test
+	//@Test
 	public void writeHTML() throws IOException, XMLStreamException{
 
 
