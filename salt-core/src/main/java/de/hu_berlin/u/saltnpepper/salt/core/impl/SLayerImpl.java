@@ -3,6 +3,7 @@ package de.hu_berlin.u.saltnpepper.salt.core.impl;
 import java.util.Iterator;
 import java.util.Set;
 
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.impl.LayerImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
@@ -203,4 +204,20 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 		this.name.setValue(name);
 	}
 	// =======================================< SNamedElement
+	@Override
+	public String toString() {
+		StringBuilder str= new StringBuilder();
+		str.append(Layer.class.getSimpleName());
+		if (getId()!= null){
+			str.append("(");
+			str.append(getId());
+			str.append(")");
+		}
+		str.append(": ");
+		str.append(getNodes().size());
+		str.append(" nodes, ");
+		str.append(getRelations().size());
+		str.append(" relations");
+		return(str.toString());
+	}
 }

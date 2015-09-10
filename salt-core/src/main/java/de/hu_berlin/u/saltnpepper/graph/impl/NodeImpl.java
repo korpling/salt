@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.graph.impl;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -109,7 +110,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 				}
 			}
 		}
-		return (layers);
+		return (Collections.unmodifiableSet(layers));
 	}
 
 	/** {@inheritDoc} **/

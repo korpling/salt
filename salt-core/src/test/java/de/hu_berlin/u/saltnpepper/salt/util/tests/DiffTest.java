@@ -311,13 +311,15 @@ public class DiffTest {
 		SLayer tempLayer = SaltFactory.createSLayer();
 		SLayer otherLayer = SaltFactory.createSLayer();
 
-		template.getTokens().get(0).getLayers().add(tempLayer);
-		other.getTokens().get(0).getLayers().add(otherLayer);
+		template.getTokens().get(0).addLayer(tempLayer);
+		other.getTokens().get(0).addLayer(otherLayer);
 
 		assertTrue(getFixture().isIsomorph());
 		assertTrue(getFixture().checkTwoLayers(tempLayer, otherLayer));
 
-		template.getTokens().get(1).getLayers().add(tempLayer);
+		template.getTokens().get(1).addLayer(tempLayer);
+		System.out.println("tempLayer: "+ tempLayer);
+		System.out.println("otherLayer: "+ otherLayer);
 		assertFalse(getFixture().checkTwoLayers(tempLayer, otherLayer));
 	}
 
