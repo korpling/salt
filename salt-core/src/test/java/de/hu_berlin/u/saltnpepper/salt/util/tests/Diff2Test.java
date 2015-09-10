@@ -38,9 +38,8 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff.Difference;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff2;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff2.Difference;
 
 /**
  * This class tests the isomorphy check of the {@link SDocumentGraph}.
@@ -97,27 +96,27 @@ public class Diff2Test {
 	 */
 	@Test
 	public void testTextualDS_iso() {
-		SampleGenerator.createPrimaryData(template.getDocument());
-		SampleGenerator.createPrimaryData(other.getDocument());
-		template.createTextualDS("a template text");
-		STextualDS otherText= other.createTextualDS("a different text");
-		assertFalse(getFixture().isIsomorph());
-		otherText.setText("a template text");
+		STextualDS templateText= SampleGenerator.createPrimaryData(template.getDocument());
+		STextualDS otherText= SampleGenerator.createPrimaryData(other.getDocument());
 		assertTrue(getFixture().isIsomorph());
+		
+		otherText.setText("a template text");
+		assertFalse(getFixture().isIsomorph());
 	}
 	
 	/**
 	 * Tests same and different textual data sources
 	 */
 	@Test
-	public void testTextualDS_dif() {
-		SampleGenerator.createPrimaryData(template.getDocument());
-		SampleGenerator.createPrimaryData(other.getDocument());
-		template.createTextualDS("a template text");
-		STextualDS otherText= other.createTextualDS("a different text");
-		assertEquals(2, getFixture().findDiffs().size());
+	public void testTextualDS_diff() {
+		STextualDS templateText= SampleGenerator.createPrimaryData(template.getDocument());
+		STextualDS otherText= SampleGenerator.createPrimaryData(other.getDocument());
+		Set<Difference> diffs= getFixture().findDiffs();
+		assertEquals(""+diffs, 0, diffs.size());
+		
 		otherText.setText("a template text");
-		assertEquals(0, getFixture().findDiffs().size());
+		diffs= getFixture().findDiffs();
+		assertEquals(""+diffs, 2, diffs.size());
 	}
 
 	/**
@@ -194,7 +193,7 @@ public class Diff2Test {
 		// same primary date
 		assertTrue(getFixture().isIsomorph());
 
-		LinkedHashSet<Difference> noDifferences = new LinkedHashSet<Diff.Difference>();
+		LinkedHashSet<Difference> noDifferences = new LinkedHashSet<Difference>();
 		assertEquals(0, getFixture().getDifferences().size());
 
 		// different primary date
@@ -291,7 +290,7 @@ public class Diff2Test {
 
 		assertFalse(getFixture().isIsomorph());
 
-		Diff newerDiff = new Diff(template, other);
+		Diff2 newerDiff = new Diff2(template, other);
 		Set<Difference> diffs = newerDiff.findDiffs();
 		Iterator<Difference> diffIt = diffs.iterator();
 	}

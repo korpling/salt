@@ -370,9 +370,10 @@ public class SampleGenerator {
 	 * @param document
 	 *            the document, to which the created {@link STextualDS} object
 	 *            will be added FEHLT IN SAMPLE GENERATOR
+	 * @return returns the created primary text
 	 */
-	public static void createPrimaryData(SDocument document) {
-		createPrimaryData(document, LANG_EN);
+	public static STextualDS createPrimaryData(SDocument document) {
+		return(createPrimaryData(document, LANG_EN));
 	}
 
 	/**

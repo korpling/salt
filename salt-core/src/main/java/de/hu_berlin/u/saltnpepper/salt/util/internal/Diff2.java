@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.swing.GroupLayout.SequentialGroup;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
@@ -20,7 +18,6 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
@@ -171,9 +168,9 @@ public class Diff2 {
 
 			if (templateObject != null) {
 				str.append("	Graph1_Object:");
-				str.append(" SType:");
+				str.append(" salt-type:");
 				str.append((String) templateObject.getClass().getSimpleName());
-				str.append(" SName:");
+				str.append(" name:");
 				if (templateObject instanceof SAnnotationImpl) {
 					str.append((String) ((SAnnotation) templateObject).getName());
 				} else if (templateObject instanceof SFeatureImpl) {
@@ -185,11 +182,11 @@ public class Diff2 {
 
 			if (otherObject != null) {
 				str.append(" Graph2_Object:");
-				str.append(" SType:");
+				str.append(" salt-type:");
 
 				str.append((String) otherObject.getClass().getSimpleName());
 
-				str.append(" SName:");
+				str.append(" name:");
 				if (otherObject instanceof SAnnotationImpl) {
 					str.append((String) ((SAnnotation) otherObject).getName());
 				} else if (otherObject instanceof SFeatureImpl) {
@@ -263,31 +260,24 @@ public class Diff2 {
 	 */
 	public boolean isIsomorph() {
 		if (!checkSizes(template, other)) {
-			System.out.println("1");
 			return false;
 		}
 		if (!compareDataSources(template, other, false)) {
-			System.out.println("2");
 			return false;
 		}
 		if (!compareTokens(template, other, false)) {
-			System.out.println("3");
 			return false;
 		}
 		if (!compareNodes(template, other, false)) {
-			System.out.println("4");
 			return false;
 		}
 		if (!checkPointingRelations(template, other, false)) {
-			System.out.println("4");
 			return false;
 		}
 		if (!checkOrderRelations(template, other, false)) {
-			System.out.println("5");
 			return false;
 		}
 		if (!checkLayers(template, other, false)) {
-			System.out.println("6");
 			return false;
 		}
 		return true;
@@ -386,7 +376,7 @@ public class Diff2 {
 		return true;
 	}
 
-	/** isomorphic Salt objects key= tempplate, value= other**/
+	/** isomorphic Salt objects key= tempplate, value= other **/
 	private BiMap<Object, Object> isoObjects = null;
 
 	/**
@@ -420,15 +410,27 @@ public class Diff2 {
 		}
 	}
 
+	/**
+	 * Checks all data sources and calls for each type
+	 * {@link #compareDataSources(List, List, boolean)}
+	 * 
+	 * @param template
+	 * @param other
+	 * @param diff
+	 * @return
+	 */
 	private boolean compareDataSources(SDocumentGraph template, SDocumentGraph other, boolean diff) {
-		boolean retVal= true;
-		//compare textual data sources
-		compareDataSources((List<SSequentialDS>)(List<? extends SSequentialDS>)template.getTextualDSs(), (List<SSequentialDS>)(List<? extends SSequentialDS>)other.getTextualDSs(), diff);
-		//compare medial data sources
-		compareDataSources((List<SSequentialDS>)(List<? extends SSequentialDS>)template.getMedialDSs(), (List<SSequentialDS>)(List<? extends SSequentialDS>)other.getMedialDSs(), diff);
-		return(retVal);
+		// compare textual data sources
+		boolean retVal1 = compareDataSources((List<SSequentialDS>) (List<? extends SSequentialDS>) template.getTextualDSs(), (List<SSequentialDS>) (List<? extends SSequentialDS>) other.getTextualDSs(), diff);
+		// speed up
+		if (!diff && !retVal1) {
+			return (retVal1);
+		}
+		// compare medial data sources
+		boolean retVal2 = compareDataSources((List<SSequentialDS>) (List<? extends SSequentialDS>) template.getMedialDSs(), (List<SSequentialDS>) (List<? extends SSequentialDS>) other.getMedialDSs(), diff);
+		return (retVal1 && retVal2);
 	}
-	
+
 	/**
 	 * To check whether all {@link SSequentialDS} have a partner, create a map
 	 * for all {@link SSequentialDS} in template having the data as key and the
@@ -443,10 +445,11 @@ public class Diff2 {
 	 * @param diff
 	 *            if true, diffs are checked as well
 	 **/
-	private boolean compareDataSources(List<SSequentialDS> template, List<SSequentialDS>  other, boolean diff) {
+	private boolean compareDataSources(List<SSequentialDS> template, List<SSequentialDS> other, boolean diff) {
 		boolean iso = true;
 		Map<Object, SSequentialDS> dataToDS = new Hashtable<>();
-		Set<SSequentialDS> remainingTemplates= new HashSet<>();
+		// data sources from template which have no partner in other
+		Set<SSequentialDS> remainingTemplates = new HashSet<>();
 
 		// put all template data source to map
 		Iterator<SSequentialDS> iterator = template.iterator();
@@ -461,93 +464,31 @@ public class Diff2 {
 		while (iterator.hasNext()) {
 			SSequentialDS otherDS = iterator.next();
 			SSequentialDS templateDS = (SSequentialDS) dataToDS.get(otherDS.getData());
-			if (templateDS== null){
+			if (templateDS == null) {
 				if (!diff) {
 					return false;
 				}
-				iso= false;
+				iso = false;
 				addDifference(null, otherDS, null, DIFF_TYPES.NODE_MISSING, null);
-				remainingTemplates.remove(templateDS);
-			}else{
+			} else {
 				getIsoObjects().put(templateDS, otherDS);
+				remainingTemplates.remove(templateDS);
 			}
 		}
-		if (remainingTemplates.size()>0){
-			iterator= remainingTemplates.iterator();
-			while(iterator.hasNext()){
-				SSequentialDS templateDS =iterator.next();
+
+		// check the remaining data sources
+		if (remainingTemplates.size() > 0) {
+			iterator = remainingTemplates.iterator();
+			while (iterator.hasNext()) {
+				SSequentialDS templateDS = iterator.next();
 				if (!diff) {
 					return false;
 				}
-				iso= false;
+				iso = false;
 				addDifference(templateDS, null, null, DIFF_TYPES.NODE_MISSING, null);
 			}
 		}
-		return(iso);
-		
-//		// initializing
-//		List<STextualDS> templateDSlist = template.getTextualDSs();
-//		List<STextualDS> otherDSlist = other.getTextualDSs();
-//
-//		int templateRange = templateDSlist.size();
-//		int otherRange = otherDSlist.size();
-//
-//		Set<STextualDS> templateMatched = new HashSet<>();
-//		Set<STextualDS> otherMatched = new HashSet<>();
-//
-//		// checking for isomorphic objects
-//		// adding these objects to BiMap
-//		for (int i = 0; i < templateRange; i = i + 1) {
-//			STextualDS templateDS = templateDSlist.get(i);
-//			for (int j = 0; j < otherRange; j = j + 1) {
-//				STextualDS otherDS = otherDSlist.get(j);
-//				if (!otherMatched.contains(otherDS)) {
-//					if (templateDS.getText().equals(otherDS.getText())) {
-//						getIsoObjects().put(templateDS, otherDS);
-//						templateMatched.add(templateDSlist.get(i));
-//						otherMatched.add(otherDSlist.get(i));
-//						break;
-//					}
-//				}
-//			}
-//			// check whether isomorphy can be ruled out
-//			if (!templateMatched.contains(templateDS)) {
-//				if (!diff) {
-//					return false;
-//				} else {
-//					iso = false;
-//				}
-//			}
-//		}
-//		// check whether isomorphy can be ruled out
-//		if (otherMatched.size() < otherDSlist.size()) {
-//			if (!diff) {
-//				return false;
-//			} else {
-//				iso = false;
-//			}
-//		}
-//
-//		if (!diff) {
-//			return iso;
-//		}
-//
-//		// find unmatched objects and declare diffs
-//		templateRange = templateDSlist.size();
-//		otherRange = otherDSlist.size();
-//
-//		for (int i = 0; i < templateRange; i = i + 1) {
-//			STextualDS templateDS = templateDSlist.get(i);
-//			if (!templateMatched.contains(templateDS))
-//				addDifference(templateDS, null, null, DIFF_TYPES.NODE_MISSING, null);
-//		}
-//
-//		for (int i = 0; i < templateRange; i = i + 1) {
-//			STextualDS otherDS = otherDSlist.get(i);
-//			if (!otherMatched.contains(otherDS))
-//				addDifference(null, otherDS, null, DIFF_TYPES.NODE_MISSING, null);
-//		}
-//		return iso;
+		return (iso);
 	}
 
 	/**
