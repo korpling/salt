@@ -29,6 +29,8 @@ public enum DIFF_TYPES {
 	NODE_MISSING,
 	/** the compared nodes differ in their name */
 	NODE_NAME_DIFFERING,
+	/** the compared nodes differ in for instance their labels **/
+	NODE_DIFFERING,
 	/**
 	 * one of the compared graphs contains a relation that is missing for the
 	 * other one

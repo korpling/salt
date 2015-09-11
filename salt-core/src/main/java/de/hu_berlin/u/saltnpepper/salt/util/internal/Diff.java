@@ -264,31 +264,24 @@ public class Diff {
 	 */
 	public boolean isIsomorph() {
 		if (!checkSizes(template, other)) {
-			System.out.println("1");
 			return false;
 		}
 		if (!compareTextualDSs(template, other, false)) {
-			System.out.println("2");
 			return false;
 		}
 		if (!compareTokens(template, other, false)) {
-			System.out.println("3");
 			return false;
 		}
 		if (!compareNodes(template, other, false)) {
-			System.out.println("4");
 			return false;
 		}
 		if (!checkPointingRelations(template, other, false)) {
-			System.out.println("4");
 			return false;
 		}
 		if (!checkOrderRelations(template, other, false)) {
-			System.out.println("5");
 			return false;
 		}
 		if (!checkLayers(template, other, false)) {
-			System.out.println("6");
 			return false;
 		}
 		return true;
@@ -637,7 +630,6 @@ public class Diff {
 
 		for (SNode s : template0) {
 			Set<Difference> subDiffs = null;
-			System.out.println("FALSE 1");
 			boolean tempIso = false;
 			for (SNode t : other0) {
 				if (compareTwoNodes(s, t, subDiffs)) {
@@ -646,7 +638,6 @@ public class Diff {
 			}
 			if (tempIso == false) {
 				addDifference(s, null, null, DIFF_TYPES.NODE_MISSING, subDiffs);
-				System.out.println("FALSE 2");
 				iso = false;
 			}
 		}
@@ -661,7 +652,6 @@ public class Diff {
 			}
 			if (tempIso == false) {
 				addDifference(null, t, null, DIFF_TYPES.NODE_MISSING, subDiffs);
-				System.out.println("FALSE 3");
 				iso = false;
 			}
 		}
@@ -958,7 +948,6 @@ public class Diff {
 				}
 			}
 			if (tempIso == false) {
-				System.out.println("HERE 1");
 				relIso = false;
 				addDifference(tempPR, null, null, DIFF_TYPES.RELATION_MISSING, null);
 			}
@@ -976,7 +965,6 @@ public class Diff {
 				}
 			}
 			if (otherIso == false) {
-				System.out.println("HERE 3");
 				relIso = false;
 				addDifference(null, otherPR, null, DIFF_TYPES.RELATION_MISSING, null);
 			}

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SNamedElement;
@@ -52,12 +53,8 @@ public class Difference implements Serializable {
 			str.append(" salt-type:");
 			str.append((String) templateObject.getClass().getSimpleName());
 			str.append(" name:");
-			if (templateObject instanceof SAnnotationImpl) {
-				str.append((String) ((SAnnotation) templateObject).getName());
-			} else if (templateObject instanceof SFeatureImpl) {
-				str.append((String) ((SFeature) templateObject).getName());
-			} else {
-				str.append((String) ((SNamedElement) templateObject).getName());
+			if (templateObject instanceof SAbstractAnnotation) {
+				str.append(((SAbstractAnnotation) templateObject).toString());
 			}
 		}
 
@@ -68,12 +65,8 @@ public class Difference implements Serializable {
 			str.append((String) otherObject.getClass().getSimpleName());
 
 			str.append(" name:");
-			if (otherObject instanceof SAnnotationImpl) {
-				str.append((String) ((SAnnotation) otherObject).getName());
-			} else if (otherObject instanceof SFeatureImpl) {
-				str.append((String) ((SFeature) otherObject).getName());
-			} else {
-				str.append((String) ((SNamedElement) otherObject).getName());
+			if (otherObject instanceof SAbstractAnnotation) {
+				str.append(((SAbstractAnnotation) otherObject).toString());
 			}
 		}
 

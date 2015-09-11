@@ -22,6 +22,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -38,8 +39,8 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
+import de.hu_berlin.u.saltnpepper.salt.util.Difference;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff2;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff2.Difference;
 
 /**
  * This class tests the isomorphy check of the {@link SDocumentGraph}.
@@ -118,7 +119,41 @@ public class Diff2Test {
 		diffs= getFixture().findDiffs();
 		assertEquals(""+diffs, 2, diffs.size());
 	}
-
+	/**
+	 * Tests for two tokens whether their annotations are isomorph.
+	 */
+	@Test
+	public void testCompareAnnotationContainer(){
+		STextualDS text1= template.createTextualDS("Test");
+		SToken templateTok= template.createToken(text1, 0, 5);
+		
+		STextualDS otherText= other.createTextualDS("Test");
+		SToken otherTok= other.createToken(text1, 0, 5);
+		
+		//no annotations
+		Set<Difference> diffs= new HashSet<>();
+		getFixture().compareAnnotationContainers(templateTok, otherTok, diffs);
+		assertEquals(""+diffs, 0, diffs.size());
+		
+		// template has one annotation, other none
+		templateTok.createAnnotation(null, "anno", "annoVal");
+		diffs= new HashSet<>();
+		getFixture().compareAnnotationContainers(templateTok, otherTok, diffs);
+		assertEquals(""+diffs, 1, diffs.size());
+		
+		// both have one annotation
+		otherTok.createAnnotation(null, "anno", "annoVal");
+		diffs= new HashSet<>();
+		getFixture().compareAnnotationContainers(templateTok, otherTok, diffs);
+		assertEquals(""+diffs, 0, diffs.size());
+		
+		// template has two annotation, other has one
+		templateTok.createAnnotation("namespace", "anno", "annoVal");
+		diffs= new HashSet<>();
+		getFixture().compareAnnotationContainers(templateTok, otherTok, diffs);
+		assertEquals(""+diffs, 1, diffs.size());
+	}
+	
 	/**
 	 * Tests same and different tokens
 	 */
