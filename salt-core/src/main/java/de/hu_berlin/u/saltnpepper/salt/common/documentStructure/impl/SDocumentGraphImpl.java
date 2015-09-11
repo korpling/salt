@@ -723,7 +723,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SNode> getRootsByRelation(SALT_TYPE type) {
+	public List<SNode> getRootsByRelation(SALT_TYPE... type) {
 		return (DataSourceAccessor.getRootsByRelation(this, type));
 	}
 

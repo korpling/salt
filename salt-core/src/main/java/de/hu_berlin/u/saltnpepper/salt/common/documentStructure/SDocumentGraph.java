@@ -645,17 +645,33 @@ public interface SDocumentGraph extends SGraph {
 	public void sortTokenByText();
 
 	/**
-	 * Returns all SNode objects which are roots for the given SRelation
-	 * Subtype. Means, that all SNode-objects will be returned as roots, which
-	 * have no incoming SRelation-objects of the given subtype clazz. <br/>
-	 * Attention: Only the subtypes SPointingRelation, SSpanningRelation and
-	 * SDominanceRelation are supported yet. <br/>
+	 * Returns all {@link SNode} objects which are roots for the given types of
+	 * {@link SRelation}. Means, that all {@link SNode}s will be returned as
+	 * roots, which have no incoming relations of the given type.
+	 * <p>
+	 * For instance imagine the following structure and assume that the passed
+	 * {@link SALT_TYPE}s are {@link SALT_TYPE#SDOMINANCE_RELATION} and
+	 * {@link SALT_TYPE#SSPANNING_RELATION}:
+	 *
+	 * <pre>
+	 *       struct1
+	 *     //      ||
+	 *   span1     ||   span2
+	 * 	/    \     ||    |
+	 * tok1	tok2  tok3  tok4
+	 * </pre>
 	 * 
-	 * @param type
-	 *            type, which shall be used for computing roots
-	 * @return a list of SNode-objects which are roots
+	 * the nodes:
+	 * 
+	 * struct1 and span2 are returned, even if a pointing relation connects
+	 * struct1 and span2.
+	 * </p>
+	 * 
+	 * @param saltTypes
+	 *            a set of types for which nodes have to be computed.
+	 * @return a list of {@link SNode}s which are roots
 	 */
-	public List<SNode> getRootsByRelation(SALT_TYPE type);
+	public List<SNode> getRootsByRelation(SALT_TYPE... type);
 
 	/**
 	 * Returns all nodes, which are roots for the given relation-class respects

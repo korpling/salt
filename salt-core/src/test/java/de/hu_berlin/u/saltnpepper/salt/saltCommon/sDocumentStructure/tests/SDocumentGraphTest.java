@@ -1145,30 +1145,28 @@ public class SDocumentGraphTest {
 			assertEquals(sTokens.get(i), sortedSTokens.get(i));
 		}
 	}
-
-	// FIXME
-	// @Test
-	// public void testCreateSSpan__SToken() {
-	// String text = "a sample";
-	// STextualDS sText = getFixture().createSTextualDS(text);
-	// DataSourceSequence sequence = new DataSourceSequence();
-	// sequence.setDataSource(sText);
-	// sequence.setStart(0);
-	// sequence.setEnd(1);
-	// SToken tok1 = getFixture().createToken(sequence);
-	// SSpan sSpan = getFixture().createSSpan(tok1);
-	//
-	// assertNotNull(sSpan);
-	// assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
-	// List<Relation> relations = getFixture().getRelations(sSpan.getId(),
-	// tok1.getId());
-	// assertNotNull(relations);
-	// assertEquals(1, relations.size());
-	// assertTrue(relations.get(0) instanceof SSpanningRelation);
-	// SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
-	// assertEquals(tok1, sSpanRel.getTarget());
-	// assertEquals(sSpan, sSpanRel.getSource());
-	// }
+// @FIXME
+//	@Test
+//	public void testCreateSSpan__SToken() {
+//		String text = "a sample";
+//		STextualDS sText = getFixture().createTextualDS(text);
+//		DataSourceSequence sequence = new DataSourceSequence();
+//		sequence.setDataSource(sText);
+//		sequence.setStart(0);
+//		sequence.setEnd(1);
+//		SToken tok1 = getFixture().createToken(sequence);
+//		SSpan sSpan = getFixture().createSpan(tok1);
+//
+//		assertNotNull(sSpan);
+//		assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
+//		List<SRelation> relations = getFixture().getRelations(sSpan.getId(), tok1.getId());
+//		assertNotNull(relations);
+//		assertEquals(1, relations.size());
+//		assertTrue(relations.get(0) instanceof SSpanningRelation);
+//		SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
+//		assertEquals(tok1, sSpanRel.getTarget());
+//		assertEquals(sSpan, sSpanRel.getSource());
+//	}
 
 	// FIXME
 	// @Test
@@ -1306,8 +1304,17 @@ public class SDocumentGraphTest {
 	// }
 
 	/**
-	 * tests graph: struct2 / / \ struct1 / | / | / | | span1 span2 | / \ / \
+	 * tests graph:
+	 * 
+	 * <pre>
+	 * 	     struct2
+	 *       /      \
+	 *      /     struct1  
+	 *     /     /        \ 
+	 *    /    span1    span2 
+	 *   /     / \       / \
 	 * tok1 tok2 tok3 tok4 tok5
+	 * </pre>
 	 * 
 	 * PR's tok1-> tok2; tok3-> tok4; tok4->tok2
 	 * 
@@ -1424,13 +1431,13 @@ public class SDocumentGraphTest {
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
-			sDomRel.setSource(struct2);
+			sDomRel.setSource(struct1);
 			sDomRel.setTarget(span1);
 			getFixture().addRelation(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
-			sDomRel.setSource(struct2);
+			sDomRel.setSource(struct1);
 			sDomRel.setTarget(span2);
 			getFixture().addRelation(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));

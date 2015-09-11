@@ -43,7 +43,6 @@ import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInvalidModelException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
@@ -365,52 +364,113 @@ public class DataSourceAccessor {
 	}
 
 	/**
-	 * Returns all SNode objects which are roots for the given SRelation
-	 * Subtype. Means, that all SNode-objects will be returned as roots, which
-	 * have no incoming SRelation-objects of the given subtype clazz. <br/>
-	 * Attention: Only the subtypes {@link SALT_TYPE#SPOINTING_RELATION},
-	 * {@link SALT_TYPE#SSPANNING_RELATION} and
-	 * {@link SALT_TYPE#SDOMINANCE_RELATION} are supported yet. <br/>
+	 * Returns all {@link SNode} objects which are roots for the given types of
+	 * {@link SRelation}. Means, that all {@link SNode}s will be returned as
+	 * roots, which have no incoming relations of the given type.
+	 * <p>
+	 * For instance imagine the following structure and assume that the passed
+	 * {@link SALT_TYPE}s are {@link SALT_TYPE#SDOMINANCE_RELATION} and
+	 * {@link SALT_TYPE#SSPANNING_RELATION}:
+	 *
+	 * <pre>
+	 *       struct1
+	 *     //      ||
+	 *   span1     ||   span2
+	 * 	/    \     ||    |
+	 * tok1	tok2  tok3  tok4
+	 * </pre>
 	 * 
-	 * @param clazz
-	 *            Subclass of SRelation which shall be used for computing roots
-	 * @return a list of SNode-objects which are roots
+	 * the nodes:
+	 * 
+	 * struct1 and span2 are returned, even if a pointing relation connects
+	 * struct1 and span2.
+	 * </p>
+	 * 
+	 * @param saltTypes
+	 *            a set of types for which nodes have to be computed.
+	 * @return a list of {@link SNode}s which are roots
 	 */
-	public static List<SNode> getRootsByRelation(SDocumentGraph documentGraph, SALT_TYPE sType) {
+	public static List<SNode> getRootsByRelation(SDocumentGraph documentGraph, SALT_TYPE... saltTypes) {
 		HashSet<SNode> retSet = new LinkedHashSet<>();
-
-		if (documentGraph == null) {
-			new SaltParameterException("Cannot start method please set the document graph first.");
-		}
-		if (sType == null) {
-			throw new SaltParameterException("sType", "getSRootsByRelation", DataSourceAccessor.class);
-		}
-		if ((!SALT_TYPE.SDOMINANCE_RELATION.equals(sType)) && (!SALT_TYPE.SPOINTING_RELATION.equals(sType)) && (!SALT_TYPE.SSPANNING_RELATION.equals(sType)) && (!SALT_TYPE.SORDER_RELATION.equals(sType))) {
-			// if the relation type isn't supported throw exception
-			throw new SaltException("Cannot compute roots for given SRelation type '" + sType + "', because it isn't supported yet. Supported subtypes are only: SPointingRelation, SSpanningRelation and SDominanceRelation");
-		}
-		List<SRelation> relations = documentGraph.getRelations(sType);
-		if (relations != null) {
-			HashSet<SNode> notRootElements = new HashSet<>();
-			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
-				// mark destination as no root
-				if (!notRootElements.contains(relation.getTarget())) {
-					notRootElements.add(relation.getTarget());
-				}
-				// if source is not also a destination
-				if ((!notRootElements.contains(relation.getSource())) && (!retSet.contains(relation.getSource()))) {
-					retSet.add(relation.getSource());
-				}
-				// remove wrong stored nodes in retList
-				if (retSet.contains(relation.getTarget())) {
-					retSet.remove(relation.getTarget());
-				}
+		List<SRelation> relations = new ArrayList<>();
+		for (SALT_TYPE saltType : saltTypes) {
+			if (SALT_TYPE.SSPANNING_RELATION.equals(saltType)) {
+				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getSpanningRelations());
+			} else if (SALT_TYPE.SDOMINANCE_RELATION.equals(saltType)) {
+				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getDominanceRelations());
+			} else if (SALT_TYPE.SPOINTING_RELATION.equals(saltType)) {
+				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getPointingRelations());
+			} else if (SALT_TYPE.SORDER_RELATION.equals(saltType)) {
+				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getOrderRelations());
+			} else if (SALT_TYPE.STEXTUAL_RELATION.equals(saltType)) {
+				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getTextualRelations());
+			} else if (SALT_TYPE.STIMELINE_RELATION.equals(saltType)) {
+				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getTimelineRelations());
+			} else if (SALT_TYPE.SMEDIAL_RELATION.equals(saltType)) {
+				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getMedialRelations());
 			}
+		}
+		HashSet<SNode> notRootElements = new HashSet<>();
+		for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
+			// mark destination as no root
+			if (!notRootElements.contains(relation.getTarget()))
+				notRootElements.add(relation.getTarget());
+			// if source is not also a destination
+			if ((!notRootElements.contains(relation.getSource())) && (!retSet.contains(relation.getSource())))
+				retSet.add(relation.getSource());
+			// remove wrong stored nodes in retList
+			if (retSet.contains(relation.getTarget()))
+				retSet.remove(relation.getTarget());
 		}
 		List<SNode> retVal = null;
 		if (!retSet.isEmpty()) {
 			retVal = new ArrayList<>(retSet);
 		}
+
+		// HashSet<SNode> retSet = new LinkedHashSet<>();
+		//
+		// if (documentGraph == null) {
+		// new
+		// SaltParameterException("Cannot start method please set the document graph first.");
+		// }
+		// if (sType == null) {
+		// throw new SaltParameterException("sType", "getSRootsByRelation",
+		// DataSourceAccessor.class);
+		// }
+		// if ((!SALT_TYPE.SDOMINANCE_RELATION.equals(sType)) &&
+		// (!SALT_TYPE.SPOINTING_RELATION.equals(sType)) &&
+		// (!SALT_TYPE.SSPANNING_RELATION.equals(sType)) &&
+		// (!SALT_TYPE.SORDER_RELATION.equals(sType))) {
+		// // if the relation type isn't supported throw exception
+		// throw new
+		// SaltException("Cannot compute roots for given SRelation type '" +
+		// sType +
+		// "', because it isn't supported yet. Supported subtypes are only: SPointingRelation, SSpanningRelation and SDominanceRelation");
+		// }
+		// List<SRelation> relations = documentGraph.getRelations(sType);
+		// if (relations != null) {
+		// HashSet<SNode> notRootElements = new HashSet<>();
+		// for (SRelation<? extends SNode, ? extends SNode> relation :
+		// relations) {
+		// // mark destination as no root
+		// if (!notRootElements.contains(relation.getTarget())) {
+		// notRootElements.add(relation.getTarget());
+		// }
+		// // if source is not also a destination
+		// if ((!notRootElements.contains(relation.getSource())) &&
+		// (!retSet.contains(relation.getSource()))) {
+		// retSet.add(relation.getSource());
+		// }
+		// // remove wrong stored nodes in retList
+		// if (retSet.contains(relation.getTarget())) {
+		// retSet.remove(relation.getTarget());
+		// }
+		// }
+		// }
+		// List<SNode> retVal = null;
+		// if (!retSet.isEmpty()) {
+		// retVal = new ArrayList<>(retSet);
+		// }
 		return (retVal);
 	}
 
