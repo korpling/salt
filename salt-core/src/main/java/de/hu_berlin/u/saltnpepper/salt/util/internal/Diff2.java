@@ -197,28 +197,7 @@ public class Diff2 {
 	 * @return true, if graphs are isomorphic, false otherwise.
 	 */
 	public boolean isIsomorph() {
-		if (!checkSizes(templateDoc, otherDoc)) {
-			return false;
-		}
-		if (!compareDataSources(templateDoc, otherDoc, false)) {
-			return false;
-		}
-		if (!compareTokens(templateDoc, otherDoc, false)) {
-			return false;
-		}
-		if (!compareNodes(templateDoc, otherDoc, false)) {
-			return false;
-		}
-		if (!checkPointingRelations(templateDoc, otherDoc, false)) {
-			return false;
-		}
-		if (!checkOrderRelations(templateDoc, otherDoc, false)) {
-			return false;
-		}
-		if (!checkLayers(templateDoc, otherDoc, false)) {
-			return false;
-		}
-		return true;
+		return (findDiffs(false));
 	}
 
 	/**
@@ -231,14 +210,59 @@ public class Diff2 {
 	 * @return true, if graphs are isomorphic, false otherwise.
 	 */
 	public Set<Difference> findDiffs() {
-		checkSizes(templateDoc, otherDoc);
-		compareDataSources(templateDoc, otherDoc, true);
-		compareTokens(templateDoc, otherDoc, true);
-		compareNodes(templateDoc, otherDoc, true);
-		checkPointingRelations(templateDoc, otherDoc, true);
-		checkOrderRelations(templateDoc, otherDoc, true);
-		checkLayers(templateDoc, otherDoc, true);
-		return getDifferences();
+		findDiffs(true);
+		return (getDifferences());
+	}
+
+	/**
+	 * Compares the set graphs and returns if they are isomorphic or not. If
+	 * graphs are not isomporphic, this method finds and records all differences
+	 * and lists them. This means the entire graphs have to be compared and
+	 * could slow down the computation. If you are only interested in the result
+	 * and not in the particular differences, use method {@link #isIsomorph()}.
+	 * 
+	 * @param diffsRequested
+	 *            if false, only isomorphie is computed, which makes the process
+	 *            faster but does not collect all differences
+	 * @return true, if graphs are isomorphic, false otherwise.
+	 */
+	private boolean findDiffs(boolean diffsRequested) {
+		if (!compareSizes(templateDoc, otherDoc)) {
+			if (!diffsRequested) {
+				return false;
+			}
+		}
+		if (!compareDataSources(templateDoc, otherDoc, diffsRequested)) {
+			if (!diffsRequested) {
+				return false;
+			}
+		}
+		if (!compareTokens(templateDoc, otherDoc, diffsRequested)) {
+			if (!diffsRequested) {
+				return false;
+			}
+		}
+		if (!compareNodes(templateDoc, otherDoc, diffsRequested)) {
+			if (!diffsRequested) {
+				return false;
+			}
+		}
+		if (!checkPointingRelations(templateDoc, otherDoc, diffsRequested)) {
+			if (!diffsRequested) {
+				return false;
+			}
+		}
+		if (!checkOrderRelations(templateDoc, otherDoc, diffsRequested)) {
+			if (!diffsRequested) {
+				return false;
+			}
+		}
+		if (!checkLayers(templateDoc, otherDoc, diffsRequested)) {
+			if (!diffsRequested) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -267,7 +291,7 @@ public class Diff2 {
 	 *            second SDocGraph
 	 * @return returns whether sizes are the same
 	 **/
-	private boolean checkSizes(SDocumentGraph template, SDocumentGraph other) {
+	private boolean compareSizes(SDocumentGraph template, SDocumentGraph other) {
 		// size comparison for all data structures in Salt beside STimeline
 		if (template.getNodes().size() != other.getNodes().size()) {
 			return false;
@@ -410,7 +434,7 @@ public class Diff2 {
 				addDifference(null, otherDS, null, DIFF_TYPES.NODE_MISSING, null);
 			} else {
 				getIsoObjects().put(templateDS, otherDS);
-				//check whether both data sources have the same id
+				// check whether both data sources have the same id
 				Set<Difference> subDiffs = new HashSet<Difference>();
 				compareIdentifiableElements(templateDS, otherDS, subDiffs);
 				if (subDiffs.size() > 0) {
@@ -420,7 +444,7 @@ public class Diff2 {
 					iso = false;
 					addDifference(templateDS, otherDS, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
 				}
-				//check whether both data sources have the same labels
+				// check whether both data sources have the same labels
 				subDiffs = new HashSet<Difference>();
 				compareAnnotationContainers(templateDS, otherDS, subDiffs);
 				if (subDiffs.size() > 0) {
@@ -502,8 +526,8 @@ public class Diff2 {
 					// TODO: still missing is the reference to other data
 					// sources like
 					// timeline and medial data source
-					
-					//check whether both data sources have the same id
+
+					// check whether both data sources have the same id
 					Set<Difference> subDiffs = new HashSet<Difference>();
 					compareIdentifiableElements(templateRel.getSource(), otherRel.getSource(), subDiffs);
 					if (subDiffs.size() > 0) {
@@ -513,7 +537,7 @@ public class Diff2 {
 						iso = false;
 						addDifference(templateRel.getSource(), otherRel.getSource(), null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
 					}
-					//check whether both data sources have the same labels
+					// check whether both data sources have the same labels
 					subDiffs = new HashSet<Difference>();
 					compareAnnotationContainers(templateRel.getSource(), otherRel.getSource(), subDiffs);
 					if (subDiffs.size() > 0) {
@@ -788,7 +812,6 @@ public class Diff2 {
 		}
 
 		return it.iso;
-
 	}
 
 	private itNodeClass iterateNodeCheck(itNodeClass it) {
@@ -920,9 +943,8 @@ public class Diff2 {
 				SAnnotationContainer iTarget = (SAnnotationContainer) i.getTarget();
 				SAnnotationContainer jTarget = (SAnnotationContainer) j.getTarget();
 				// TODO check whether equals() can be used here
-				if (jTarget.equals(isoObjects.get(iTarget)) && compareSFeatures(iTarget, jTarget, tempSet) && iTarget.equals(isoObjects.inverse().get(jTarget))) {
+				if (jTarget.equals(isoObjects.get(iTarget)) && compareAnnotationContainers(iTarget, jTarget, tempSet) && iTarget.equals(isoObjects.inverse().get(jTarget))) {
 					tempIso = true;
-					tempIso = compareSAnnotations(i, j, null);
 				}
 			}
 			if (tempIso == false) {
@@ -933,80 +955,21 @@ public class Diff2 {
 		subDiffs = new HashSet<>();
 
 		if (iso) {
-			if ((boolean) options.get(OPTION_CHECK_ANNOTATION)) {
-				compareSAnnotations(templateNode, otherNode, subDiffs);
-			}
-
-			compareSFeatures(templateNode, otherNode, subDiffs);
+			compareAnnotationContainers(templateNode, otherNode, subDiffs);
 
 			if (iso) {
 				isoObjects.put(templateNode, otherNode);
 			}
 		}
 
-		if ((boolean) options.get(OPTION_CHECK_ID) && iso) {
-			if (templateNode.getId() != otherNode.getId()) {
-				addDifference(templateNode, otherNode, null, DIFF_TYPES.ID_DIFFERING, null);
-				iso = false;
-			}
+		// check whether both data sources have the same id
+		subDiffs = new HashSet<Difference>();
+		compareIdentifiableElements(templateNode, otherNode, subDiffs);
+		if (subDiffs.size() > 0) {
+			iso = false;
+			addDifference(templateNode, otherNode, null, DIFF_TYPES.ID_DIFFERING, null);
 		}
 
-		return iso;
-	}
-
-	public boolean compareSFeatures(SAnnotationContainer templateNode, SAnnotationContainer otherNode, Set<Difference> subDiffs) {
-		Set<SFeature> tempSet = new HashSet<>(templateNode.getFeatures());
-		Set<SFeature> otherSet = new HashSet<>(otherNode.getFeatures());
-
-		boolean iso = true;
-		Iterator<SFeature> itTemplate = tempSet.iterator();
-
-		while (itTemplate.hasNext()) {
-			SFeature tempFeat = itTemplate.next();
-			if (!otherSet.contains(tempFeat)) {
-				Difference tempDiff = new Difference(tempFeat, null, null, DIFF_TYPES.LABEL_MISSING);
-				subDiffs.add(tempDiff);
-				iso = false;
-			}
-		}
-
-		Iterator<SFeature> itOther = otherSet.iterator();
-
-		while (itOther.hasNext()) {
-			SFeature tempFeat = itOther.next();
-			if (!tempSet.contains(tempFeat)) {
-				Difference tempDiff = new Difference(null, tempFeat, null, DIFF_TYPES.LABEL_MISSING);
-				subDiffs.add(tempDiff);
-				iso = false;
-			}
-		}
-
-		return iso;
-	}
-
-	public boolean compareSAnnotations(SAnnotationContainer templateNode, SAnnotationContainer otherNode, Set<Difference> subDiffs) {
-
-		boolean iso = true;
-		if ((boolean) options.get(OPTION_CHECK_ANNOTATION_DIFF)) {
-			Iterator<SAnnotation> it = templateNode.iterator_SAnnotation();
-			while (it.hasNext()) {
-				SAnnotation anno = it.next();
-				if (!otherNode.containsLabel(anno.getQName())) {
-					Difference tempDiff = new Difference(anno, null, null, DIFF_TYPES.LABEL_MISSING);
-					subDiffs.add(tempDiff);
-					iso = false;
-				}
-			}
-			it = otherNode.iterator_SAnnotation();
-			while (it.hasNext()) {
-				SAnnotation anno = it.next();
-				if (!templateNode.containsLabel(anno.getQName())) {
-					Difference tempDiff = new Difference(null, anno, null, DIFF_TYPES.LABEL_MISSING);
-					subDiffs.add(tempDiff);
-					iso = false;
-				}
-			}
-		}
 		return iso;
 	}
 
