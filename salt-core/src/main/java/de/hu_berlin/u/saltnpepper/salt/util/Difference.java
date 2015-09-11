@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Set;
 
+import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
@@ -52,9 +53,9 @@ public class Difference implements Serializable {
 			str.append("	Graph1_Object:");
 			str.append(" salt-type:");
 			str.append((String) templateObject.getClass().getSimpleName());
-			str.append(" name:");
-			if (templateObject instanceof SAbstractAnnotation) {
-				str.append(((SAbstractAnnotation) templateObject).toString());
+			str.append(" id:");
+			if (templateObject instanceof IdentifiableElement) {
+				str.append(((IdentifiableElement) templateObject).getId());
 			}
 		}
 
@@ -64,9 +65,9 @@ public class Difference implements Serializable {
 
 			str.append((String) otherObject.getClass().getSimpleName());
 
-			str.append(" name:");
-			if (otherObject instanceof SAbstractAnnotation) {
-				str.append(((SAbstractAnnotation) otherObject).toString());
+			str.append(" id:");
+			if (otherObject instanceof IdentifiableElement) {
+				str.append(((IdentifiableElement) otherObject).getId());
 			}
 		}
 

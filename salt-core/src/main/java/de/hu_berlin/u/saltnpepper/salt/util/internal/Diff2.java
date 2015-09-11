@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.salt.util.internal;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -9,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -20,9 +21,12 @@ import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
+import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
@@ -33,6 +37,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.util.DIFF_TYPES;
 import de.hu_berlin.u.saltnpepper.salt.util.Difference;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
@@ -67,8 +72,8 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
  *
  */
 public class Diff2 {
-	private static final Logger logger = LoggerFactory.getLogger("salt");
-	
+	// private static final Logger logger = LoggerFactory.getLogger("salt");
+
 	private SDocumentGraph templateGraph = null;
 	private SDocumentGraph otherGraph = null;
 
@@ -149,7 +154,7 @@ public class Diff2 {
 			options.put(OPTION_IGNORE_FEATURES, false);
 		}
 		if (!options.containsKey(OPTION_IGNORE_ID)) {
-			options.put(OPTION_IGNORE_ID, false);
+			options.put(OPTION_IGNORE_ID, true);
 		}
 		if (!options.containsKey(OPTION_IGNORE_NAME)) {
 			options.put(OPTION_IGNORE_NAME, true);
@@ -163,7 +168,7 @@ public class Diff2 {
 	 * 
 	 * @return returns differences Set
 	 **/
-	public Set<Difference> getDifferences() {
+	private Set<Difference> getDifferences() {
 		if (differences == null) {
 			differences = new LinkedHashSet<>();
 		}
@@ -183,15 +188,13 @@ public class Diff2 {
 	 *            type of the difference
 	 * @return returns whether sizes are the same
 	 **/
-	public void addDifference(Object templateObject, Object otherObject, Object container, DIFF_TYPES diffType, Set<Difference> subDiffs) {
+	private void addDifference(Object templateObject, Object otherObject, Object container, DIFF_TYPES diffType, Set<Difference> subDiffs) {
 		Difference tempDiff = new Difference(templateObject, otherObject, container, diffType);
 		if (subDiffs != null) {
 			tempDiff.addSubDiffs(subDiffs);
 		}
 		getDifferences().add(tempDiff);
 	}
-
-	Difference diff = null;
 
 	/**
 	 * Compares the set graphs and returns if they are isomorphic or not. In
@@ -203,6 +206,7 @@ public class Diff2 {
 	 * @return true, if graphs are isomorphic, false otherwise.
 	 */
 	public boolean isIsomorph() {
+		diffsRequested = false;
 		return (findDiffs(false));
 	}
 
@@ -216,9 +220,16 @@ public class Diff2 {
 	 * @return true, if graphs are isomorphic, false otherwise.
 	 */
 	public Set<Difference> findDiffs() {
+		diffsRequested = true;
 		findDiffs(true);
 		return (getDifferences());
 	}
+
+	/**
+	 * if false, only isomorphie is computed, which makes the process faster but
+	 * does not collect all differences
+	 **/
+	private boolean diffsRequested = false;
 
 	/**
 	 * Compares the set graphs and returns if they are isomorphic or not. If
@@ -248,24 +259,38 @@ public class Diff2 {
 				return false;
 			}
 		}
-		
-		
-		
-//		List<SNode> roots = templateGraph.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
-//		if ((roots == null) || (roots.size() == 0)) {
-//			logger.warn("Cannot start computing of differences, since no tokens exist for document '{}'.", templateGraph.getId());
-//		} else {
-//			DifferenceHandler handler = new DifferenceHandler(getIsoObjects(), otherGraph, templateGraph);
-//			otherGraph.traverse(roots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateGraph.getId(), handler, false);
-//		}
-		
-		
-		
-		if (!compareNodes(templateGraph, otherGraph, diffsRequested)) {
-			if (!diffsRequested) {
-				return false;
+		List<SNode> roots = otherGraph.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
+		System.out.println("roots: " + roots);
+		if ((roots == null) || (roots.size() == 0)) {
+			// logger.warn("Cannot start computing of differences, since no tokens exist for document '{}'.",
+			// templateGraph.getId());
+		} else {
+			List<SNode> remainingTemplateNodes = new ArrayList<>(templateGraph.getSpans().size() + templateGraph.getStructures().size());
+			remainingTemplateNodes.addAll(templateGraph.getSpans());
+			remainingTemplateNodes.addAll(templateGraph.getStructures());
+			DifferenceHandler handler = new DifferenceHandler();
+			handler.remainingTemplateNodes = remainingTemplateNodes;
+			otherGraph.traverse(roots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateGraph.getId(), handler, false);
+			if (getDifferences().size() > 0) {
+				return (false);
+			}
+			System.out.println("remainingTemplateNodes: " + remainingTemplateNodes);
+			if (remainingTemplateNodes.size() > 0) {
+				for (SNode remainingNode : remainingTemplateNodes) {
+					if (!diffsRequested) {
+						return false;
+					}
+					addDifference(remainingNode, null, null, DIFF_TYPES.NODE_MISSING, null);
+				}
 			}
 		}
+
+		//
+		// if (!compareNodes(templateGraph, otherGraph, diffsRequested)) {
+		// if (!diffsRequested) {
+		// return false;
+		// }
+		// }
 		if (!checkPointingRelations(templateGraph, otherGraph, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
@@ -357,13 +382,13 @@ public class Diff2 {
 		return true;
 	}
 
-	/** isomorphic Salt objects key= tempplate, value= other **/
+	/** isomorphic {@link SNode}s key= template, value= other **/
 	private BiMap<SNode, SNode> isoNodes = null;
 
 	/**
-	 * return BiMap with isomorphic Salt object key= template, value= other
+	 * Return BiMap with isomorphic {@link SNode}s key= template, value= other
 	 * 
-	 * @return BiMap with isomorphic Salt objects
+	 * @return BiMap with isomorphic {@link SNode}s
 	 **/
 	public BiMap<SNode, SNode> getIsoNodes() {
 		if (isoNodes == null) {
@@ -753,244 +778,402 @@ public class Diff2 {
 		return (retVal);
 	}
 
-	/**
-	 * method to check {@link SNode}s of docGraphs for isomorphie
-	 * 
-	 * @return isomorphie still possible after this check
-	 * @param template
-	 *            first sDocGraph
-	 * @param other
-	 *            second sDocGraph
-	 * @param diff
-	 *            if true, diffs are checked as well
-	 **/
-	private boolean compareNodes(SDocumentGraph template, SDocumentGraph other, boolean diff) {
-		boolean iso = true;
+	private class DifferenceHandler implements GraphTraverseHandler {
+		List<SNode> remainingTemplateNodes = null;
+		private boolean abort = false;
+		/**
+		 * set of already visited {@link SRelation}s while traversing, this is
+		 * necessary to avoid cycles
+		 **/
+		private Set<SRelation> visitedRelations = new HashSet<>();
 
-		// initializing
-		List<SToken> templateDSlist = template.getTokens();
-		List<SToken> otherDSlist = other.getTokens();
-
-		Set<SNode> template0 = new HashSet<>();
-		Set<SNode> other0 = new HashSet<>();
-
-		// walk through all template tokens and add all nodes which refer to a
-		// token to list
-		for (int i = 0; i < templateDSlist.size(); i = i + 1) {
-			List<SRelation> relList = templateDSlist.get(i).getInRelations();
-			for (int j = 0; j < relList.size(); j = j + 1) {
-				if (!(template0.contains(relList.get(j).getSource()) || relList.get(j) instanceof SPointingRelation || relList.get(j) instanceof SOrderRelation))
-					template0.add((SNode) relList.get(j).getSource());
+		/**
+		 * Called by Pepper as callback, when otherGraph is traversed. Currently
+		 * only returns <code>true</code> to traverse the entire graph.
+		 */
+		@Override
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation sRelation, SNode currNode, long order) {
+			if (abort) {
+				return (false);
 			}
-		}
-		// walk through all other tokens and add all nodes which refer to a
-		// token to list
-		for (int i = 0; i < otherDSlist.size(); i = i + 1) {
-			List<SRelation> relList = otherDSlist.get(i).getInRelations();
-			for (int j = 0; j < relList.size(); j = j + 1) {
-				if (!(other0.contains(relList.get(j).getSource()) || relList.get(j) instanceof SPointingRelation || relList.get(j) instanceof SOrderRelation))
-					other0.add((SNode) relList.get(j).getSource());
-			}
-		}
+			boolean retVal = true;
+			if (sRelation != null) {
+				if (sRelation instanceof SPointingRelation) {
+					// in case of relation is pointing relation, ignore it, it
+					// will
+					// be processed later
 
-		for (SNode s : template0) {
-			Set<Difference> subDiffs = null;
-			boolean tempIso = false;
-			for (SNode t : other0) {
-				if (compareTwoNodes(s, t, subDiffs)) {
-					tempIso = true;
-				}
-			}
-			if (tempIso == false) {
-				addDifference(s, null, null, DIFF_TYPES.NODE_MISSING, subDiffs);
-				iso = false;
-			}
-		}
-
-		for (SNode t : other0) {
-			Set<Difference> subDiffs = null;
-			boolean tempIso = false;
-			for (SNode s : template0) {
-				if (compareTwoNodes(t, s, subDiffs)) {
-					tempIso = true;
-				}
-			}
-			if (tempIso == false) {
-				addDifference(null, t, null, DIFF_TYPES.NODE_MISSING, subDiffs);
-				iso = false;
-			}
-		}
-
-		itNodeClass it = new itNodeClass();
-		it.iso = iso;
-		it.templateSet = template0;
-		it.otherSet = other0;
-
-		while (it.newNodes) {
-			iterateNodeCheck(it);
-		}
-
-		return it.iso;
-	}
-
-	private itNodeClass iterateNodeCheck(itNodeClass it) {
-		Set<SNode> template0 = it.templateSet;
-		Set<SNode> other0 = it.otherSet;
-
-		Iterator<SNode> itTemplate = template0.iterator();
-		Iterator<SNode> otTemplate = other0.iterator();
-
-		Set<SNode> template1 = new HashSet<>();
-		Set<SNode> other1 = new HashSet<>();
-
-		while (itTemplate.hasNext()) {
-			List<SRelation> relList = itTemplate.next().getInRelations();
-			for (int j = 0; j < relList.size(); j = j + 1) {
-				if (!(template0.contains(relList.get(j).getSource()) || relList.get(j) instanceof SPointingRelation || relList.get(j) instanceof SOrderRelation))
-					template1.add((SNode) relList.get(j).getSource());
-			}
-		}
-
-		while (otTemplate.hasNext()) {
-			List<SRelation> relList = otTemplate.next().getInRelations();
-			for (int j = 0; j < relList.size(); j = j + 1) {
-				if (!(other0.contains(relList.get(j).getSource()) || relList.get(j) instanceof SPointingRelation || relList.get(j) instanceof SOrderRelation))
-					other1.add((SNode) relList.get(j).getSource());
-			}
-		}
-
-		for (SNode s : template1) {
-			Set<Difference> subDiffs = null;
-			if (checkChecked(s)) {
-				checkedElements.add(s);
-
-				boolean tempIso = false;
-				for (SNode t : other0) {
-					if (compareTwoNodes(s, t, subDiffs)) {
-						tempIso = true;
+					retVal = false;
+				} else if (currNode instanceof SToken) {
+					// if current node is a token, ignore it, it was already
+					// processed
+					retVal = false;
+				} else {
+					if (visitedRelations.contains(sRelation)) {
+						retVal = false;
+					} else {
+						visitedRelations.add(sRelation);
 					}
 				}
-				if (tempIso == false) {
-					it.iso = false;
-					addDifference(s, null, null, DIFF_TYPES.NODE_MISSING, subDiffs);
+			}
+			return (retVal);
+		}
+
+		/**
+		 * Called by Pepper as callback, when otherGraph is traversed. Currently
+		 * is empty.
+		 */
+		@Override
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation, SNode otherNode, long order) {
+		}
+
+		/**
+		 * Called by Pepper as callback, when otherGraph is traversed.
+		 */
+		@Override
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge, SNode otherNode, long order) {
+			System.out.println("--> " + currNode);
+			if (currNode instanceof SSpan) {
+				if (!findIsomorphicNode(currNode, SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SSPAN)) {
+					abort = true;
+				}
+			} else if (currNode instanceof SStructure) {
+				if (!findIsomorphicNode(currNode, SALT_TYPE.SDOMINANCE_RELATION, SALT_TYPE.SSTRUCTURE)) {
+					abort = true;
+				}
+			} else if (currNode instanceof STextualDS) {
+				// base text should be merged already
+			} else {
+				throw new SaltException("Computing of Differences is not implemented for this node type: " + currNode);
+			}
+		}
+
+		/**
+		 * 
+		 * @param otherNode
+		 * @param sTypeRelations
+		 * @param nodeType
+		 * @return
+		 */
+		private boolean findIsomorphicNode(SNode otherNode, SALT_TYPE sTypeRelations, SALT_TYPE nodeType) {
+			SNode templateNode = null;
+			// list of all equivalents to children of current node in other
+			// graph
+			List<SNode> children = otherGraph.getChildren(otherNode, sTypeRelations);
+			
+			List<SNode> templateChildren= new ArrayList<SNode>();
+			for (SNode child: children){
+				SNode templateChild= getIsoNodes().inverse().get(child);
+				if (templateChild!= null){
+					templateChildren.add(templateChild);
 				}
 			}
-		}
+			// list all parents in base document sharing the children
+			List<SNode> sharedParents = new ArrayList<>();
+			if (templateChildren.size() > 0) {
+				sharedParents = otherGraph.getSharedParent(templateChildren, nodeType);
+			}
+			if (sharedParents.size() > 0) {
+				// an equivalent to current node in base document was found
 
-		for (SNode t : other1) {
-			Set<Difference> subDiffs = null;
-			if (checkChecked(t)) {
-				checkedElements.add(t);
-				boolean tempIso = false;
-				for (SNode s : template0) {
-					if (compareTwoNodes(t, s, subDiffs)) {
-						tempIso = true;
-					}
+				templateNode = sharedParents.get(0);
+			}
+
+			System.out.println("--> template node: " + templateNode);
+
+			if (templateNode == null) {
+				// no equivalent to currNode in base document was found
+
+				if (!diffsRequested) {
+					return false;
 				}
-				if (tempIso == false) {
-					it.iso = false;
-					addDifference(null, t, null, DIFF_TYPES.NODE_MISSING, subDiffs);
-				}
-			}
-		}
-
-		it.templateSet = template1;
-		it.otherSet = other1;
-
-		if (it.templateSet.size() == 0 && it.otherSet.size() == 0) {
-			it.newNodes = false;
-		}
-
-		return it;
-	}
-
-	public class itNodeClass {
-		Set<SNode> templateSet = null;
-		Set<SNode> otherSet = null;
-		boolean iso = true;
-		boolean newNodes = true;
-	}
-
-	/**
-	 * method to check two {@link SNode}s for isomorphie
-	 * 
-	 * @return isomorphie still possible after this check
-	 * @param templateGraph
-	 *            first SNode
-	 * @param otherGraph
-	 *            second SNode
-	 **/
-	public boolean compareTwoNodes(SNode templateNode, SNode otherNode, Set<Difference> subDiffs) {
-		List<SRelation> tempList = templateNode.getOutRelations();
-		Set<SNode> templateSet = new HashSet<>();
-
-		boolean iso = true;
-
-		for (SRelation r : tempList) {
-			templateSet.add((SNode) r.getTarget());
-		}
-
-		List<SRelation> otherList = otherNode.getOutRelations();
-		Set<SNode> otherSet = new HashSet<>();
-
-		for (SRelation r : otherList) {
-			otherSet.add((SNode) r.getTarget());
-		}
-
-		Iterator<SNode> itTemplate = templateSet.iterator();
-
-		while (itTemplate.hasNext()) {
-			SNode tempItTemplate = itTemplate.next();
-			if (!otherSet.contains(getIsoNodes().get(tempItTemplate))) {
-				iso = false;
-			}
-		}
-
-		Iterator<SNode> itOther = otherSet.iterator();
-
-		while (itOther.hasNext()) {
-			SNode tempItOther = itOther.next();
-			if (!templateSet.contains(getIsoNodes().inverse().get(tempItOther))) {
-				iso = false;
-			}
-		}
-
-		for (SRelation i : tempList) {
-			boolean tempIso = false;
-			for (SRelation j : otherList) {
-				Set<Difference> tempSet = new HashSet<>();
-				SAnnotationContainer iTarget = (SAnnotationContainer) i.getTarget();
-				SAnnotationContainer jTarget = (SAnnotationContainer) j.getTarget();
-				// TODO check whether equals() can be used here
-				if (jTarget.equals(getIsoNodes().get(iTarget)) && compareAnnotationContainers(iTarget, jTarget, tempSet) && iTarget.equals(getIsoNodes().inverse().get(jTarget))) {
-					tempIso = true;
-				}
-			}
-			if (tempIso == false) {
-				iso = false;
-			}
-		}
-
-		subDiffs = new HashSet<>();
-
-		if (iso) {
-			compareAnnotationContainers(templateNode, otherNode, subDiffs);
-
-			if (iso) {
+				addDifference(null, otherNode, null, DIFF_TYPES.NODE_MISSING, null);
+				return (false);
+			} else {
+				boolean isIsomorph = true;
 				getIsoNodes().put(templateNode, otherNode);
+				System.out.println("remainingTemplateNodes before: " + remainingTemplateNodes);
+				System.out.println("remove: " + templateNode);
+				remainingTemplateNodes.remove(templateNode);
+				System.out.println("remainingTemplateNodes after: " + remainingTemplateNodes);
+				// check whether both data sources have the same id
+				Set<Difference> subDiffs = new HashSet<Difference>();
+				compareIdentifiableElements(templateNode, otherNode, subDiffs);
+				if (subDiffs.size() > 0) {
+					if (!diffsRequested) {
+						return false;
+					}
+					isIsomorph = false;
+					System.out.println("add diff 1");
+					addDifference(templateNode, otherNode, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
+				}
+				// check whether both data sources have the same labels
+				subDiffs = new HashSet<Difference>();
+				compareAnnotationContainers(templateNode, otherNode, subDiffs);
+				if (subDiffs.size() > 0) {
+					if (!diffsRequested) {
+						return false;
+					}
+					isIsomorph = false;
+					System.out.println("add diff 2");
+					addDifference(templateNode, otherNode, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
+				}
+				return (isIsomorph);
 			}
 		}
-
-		// check whether both data sources have the same id
-		subDiffs = new HashSet<Difference>();
-		compareIdentifiableElements(templateNode, otherNode, subDiffs);
-		if (subDiffs.size() > 0) {
-			iso = false;
-			addDifference(templateNode, otherNode, null, DIFF_TYPES.ID_DIFFERING, null);
-		}
-
-		return iso;
 	}
+
+	// /**
+	// * method to check {@link SNode}s of docGraphs for isomorphie
+	// *
+	// * @return isomorphie still possible after this check
+	// * @param template
+	// * first sDocGraph
+	// * @param other
+	// * second sDocGraph
+	// * @param diff
+	// * if true, diffs are checked as well
+	// **/
+	// private boolean compareNodes(SDocumentGraph template, SDocumentGraph
+	// other, boolean diff) {
+	// boolean iso = true;
+	//
+	// // initializing
+	// List<SToken> templateDSlist = template.getTokens();
+	// List<SToken> otherDSlist = other.getTokens();
+	//
+	// Set<SNode> template0 = new HashSet<>();
+	// Set<SNode> other0 = new HashSet<>();
+	//
+	// // walk through all template tokens and add all nodes which refer to a
+	// // token to list
+	// for (int i = 0; i < templateDSlist.size(); i = i + 1) {
+	// List<SRelation> relList = templateDSlist.get(i).getInRelations();
+	// for (int j = 0; j < relList.size(); j = j + 1) {
+	// if (!(template0.contains(relList.get(j).getSource()) || relList.get(j)
+	// instanceof SPointingRelation || relList.get(j) instanceof
+	// SOrderRelation))
+	// template0.add((SNode) relList.get(j).getSource());
+	// }
+	// }
+	// // walk through all other tokens and add all nodes which refer to a
+	// // token to list
+	// for (int i = 0; i < otherDSlist.size(); i = i + 1) {
+	// List<SRelation> relList = otherDSlist.get(i).getInRelations();
+	// for (int j = 0; j < relList.size(); j = j + 1) {
+	// if (!(other0.contains(relList.get(j).getSource()) || relList.get(j)
+	// instanceof SPointingRelation || relList.get(j) instanceof
+	// SOrderRelation))
+	// other0.add((SNode) relList.get(j).getSource());
+	// }
+	// }
+	//
+	// for (SNode s : template0) {
+	// Set<Difference> subDiffs = null;
+	// boolean tempIso = false;
+	// for (SNode t : other0) {
+	// if (compareTwoNodes(s, t, subDiffs)) {
+	// tempIso = true;
+	// }
+	// }
+	// if (tempIso == false) {
+	// addDifference(s, null, null, DIFF_TYPES.NODE_MISSING, subDiffs);
+	// iso = false;
+	// }
+	// }
+	//
+	// for (SNode t : other0) {
+	// Set<Difference> subDiffs = null;
+	// boolean tempIso = false;
+	// for (SNode s : template0) {
+	// if (compareTwoNodes(t, s, subDiffs)) {
+	// tempIso = true;
+	// }
+	// }
+	// if (tempIso == false) {
+	// addDifference(null, t, null, DIFF_TYPES.NODE_MISSING, subDiffs);
+	// iso = false;
+	// }
+	// }
+	//
+	// itNodeClass it = new itNodeClass();
+	// it.iso = iso;
+	// it.templateSet = template0;
+	// it.otherSet = other0;
+	//
+	// while (it.newNodes) {
+	// iterateNodeCheck(it);
+	// }
+	//
+	// return it.iso;
+	// }
+	//
+	// private itNodeClass iterateNodeCheck(itNodeClass it) {
+	// Set<SNode> template0 = it.templateSet;
+	// Set<SNode> other0 = it.otherSet;
+	//
+	// Iterator<SNode> itTemplate = template0.iterator();
+	// Iterator<SNode> otTemplate = other0.iterator();
+	//
+	// Set<SNode> template1 = new HashSet<>();
+	// Set<SNode> other1 = new HashSet<>();
+	//
+	// while (itTemplate.hasNext()) {
+	// List<SRelation> relList = itTemplate.next().getInRelations();
+	// for (int j = 0; j < relList.size(); j = j + 1) {
+	// if (!(template0.contains(relList.get(j).getSource()) || relList.get(j)
+	// instanceof SPointingRelation || relList.get(j) instanceof
+	// SOrderRelation))
+	// template1.add((SNode) relList.get(j).getSource());
+	// }
+	// }
+	//
+	// while (otTemplate.hasNext()) {
+	// List<SRelation> relList = otTemplate.next().getInRelations();
+	// for (int j = 0; j < relList.size(); j = j + 1) {
+	// if (!(other0.contains(relList.get(j).getSource()) || relList.get(j)
+	// instanceof SPointingRelation || relList.get(j) instanceof
+	// SOrderRelation))
+	// other1.add((SNode) relList.get(j).getSource());
+	// }
+	// }
+	//
+	// for (SNode s : template1) {
+	// Set<Difference> subDiffs = null;
+	// if (checkChecked(s)) {
+	// checkedElements.add(s);
+	//
+	// boolean tempIso = false;
+	// for (SNode t : other0) {
+	// if (compareTwoNodes(s, t, subDiffs)) {
+	// tempIso = true;
+	// }
+	// }
+	// if (tempIso == false) {
+	// it.iso = false;
+	// addDifference(s, null, null, DIFF_TYPES.NODE_MISSING, subDiffs);
+	// }
+	// }
+	// }
+	//
+	// for (SNode t : other1) {
+	// Set<Difference> subDiffs = null;
+	// if (checkChecked(t)) {
+	// checkedElements.add(t);
+	// boolean tempIso = false;
+	// for (SNode s : template0) {
+	// if (compareTwoNodes(t, s, subDiffs)) {
+	// tempIso = true;
+	// }
+	// }
+	// if (tempIso == false) {
+	// it.iso = false;
+	// addDifference(null, t, null, DIFF_TYPES.NODE_MISSING, subDiffs);
+	// }
+	// }
+	// }
+	//
+	// it.templateSet = template1;
+	// it.otherSet = other1;
+	//
+	// if (it.templateSet.size() == 0 && it.otherSet.size() == 0) {
+	// it.newNodes = false;
+	// }
+	//
+	// return it;
+	// }
+	//
+	// public class itNodeClass {
+	// Set<SNode> templateSet = null;
+	// Set<SNode> otherSet = null;
+	// boolean iso = true;
+	// boolean newNodes = true;
+	// }
+	//
+	// /**
+	// * method to check two {@link SNode}s for isomorphie
+	// *
+	// * @return isomorphie still possible after this check
+	// * @param templateGraph
+	// * first SNode
+	// * @param otherGraph
+	// * second SNode
+	// **/
+	// public boolean compareTwoNodes(SNode templateNode, SNode otherNode,
+	// Set<Difference> subDiffs) {
+	// List<SRelation> tempList = templateNode.getOutRelations();
+	// Set<SNode> templateSet = new HashSet<>();
+	//
+	// boolean iso = true;
+	//
+	// for (SRelation r : tempList) {
+	// templateSet.add((SNode) r.getTarget());
+	// }
+	//
+	// List<SRelation> otherList = otherNode.getOutRelations();
+	// Set<SNode> otherSet = new HashSet<>();
+	//
+	// for (SRelation r : otherList) {
+	// otherSet.add((SNode) r.getTarget());
+	// }
+	//
+	// Iterator<SNode> itTemplate = templateSet.iterator();
+	//
+	// while (itTemplate.hasNext()) {
+	// SNode tempItTemplate = itTemplate.next();
+	// if (!otherSet.contains(getIsoNodes().get(tempItTemplate))) {
+	// iso = false;
+	// }
+	// }
+	//
+	// Iterator<SNode> itOther = otherSet.iterator();
+	//
+	// while (itOther.hasNext()) {
+	// SNode tempItOther = itOther.next();
+	// if (!templateSet.contains(getIsoNodes().inverse().get(tempItOther))) {
+	// iso = false;
+	// }
+	// }
+	//
+	// for (SRelation i : tempList) {
+	// boolean tempIso = false;
+	// for (SRelation j : otherList) {
+	// Set<Difference> tempSet = new HashSet<>();
+	// SAnnotationContainer iTarget = (SAnnotationContainer) i.getTarget();
+	// SAnnotationContainer jTarget = (SAnnotationContainer) j.getTarget();
+	// // TODO check whether equals() can be used here
+	// if (jTarget.equals(getIsoNodes().get(iTarget)) &&
+	// compareAnnotationContainers(iTarget, jTarget, tempSet) &&
+	// iTarget.equals(getIsoNodes().inverse().get(jTarget))) {
+	// tempIso = true;
+	// }
+	// }
+	// if (tempIso == false) {
+	// iso = false;
+	// }
+	// }
+	//
+	// subDiffs = new HashSet<>();
+	//
+	// if (iso) {
+	// compareAnnotationContainers(templateNode, otherNode, subDiffs);
+	//
+	// if (iso) {
+	// getIsoNodes().put(templateNode, otherNode);
+	// }
+	// }
+	//
+	// // check whether both data sources have the same id
+	// subDiffs = new HashSet<Difference>();
+	// compareIdentifiableElements(templateNode, otherNode, subDiffs);
+	// if (subDiffs.size() > 0) {
+	// iso = false;
+	// addDifference(templateNode, otherNode, null, DIFF_TYPES.ID_DIFFERING,
+	// null);
+	// }
+	//
+	// return iso;
+	// }
 
 	public boolean checkPointingRelations(SDocumentGraph template, SDocumentGraph other, Boolean diff) {
 		HashSet<SPointingRelation> tempSet = new HashSet<>(template.getPointingRelations());

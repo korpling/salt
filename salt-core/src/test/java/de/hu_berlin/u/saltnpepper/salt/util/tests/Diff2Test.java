@@ -66,10 +66,14 @@ public class Diff2Test {
 	public void setUp() throws Exception {
 		template = SaltFactory.createSDocumentGraph();
 		template.setDocument(SaltFactory.createSDocument());
-
+		template.getDocument().setId("doc1");
+		template.getDocument().getDocumentGraph().setId("doc1");
+		
 		other = SaltFactory.createSDocumentGraph();
 		other.setDocument(SaltFactory.createSDocument());
-
+		other.getDocument().setId("doc2");
+		other.getDocument().getDocumentGraph().setId("doc2");
+		
 		setFixture(new Diff2(template, other));
 	}
 
@@ -129,7 +133,7 @@ public class Diff2Test {
 		SToken templateTok = template.createToken(text1, 0, 5);
 
 		STextualDS otherText = other.createTextualDS("Test");
-		SToken otherTok = other.createToken(text1, 0, 5);
+		SToken otherTok = other.createToken(otherText, 0, 5);
 
 		// no annotations
 		Set<Difference> diffs = new HashSet<>();
@@ -223,7 +227,7 @@ public class Diff2Test {
 		other.addNode(other_struc);
 		other.addRelation(sDominatingRelation2);
 
-		assertTrue("" + getFixture().getDifferences(), getFixture().isIsomorph());
+		assertTrue(getFixture().isIsomorph());
 
 		SDominanceRelation sDominatingRelation3 = SaltFactory.createSDominanceRelation();
 		sDominatingRelation3.setSource(templ_struc);
@@ -248,7 +252,7 @@ public class Diff2Test {
 		assertTrue(getFixture().isIsomorph());
 
 		LinkedHashSet<Difference> noDifferences = new LinkedHashSet<Difference>();
-		assertEquals(0, getFixture().getDifferences().size());
+		assertEquals(0, getFixture().findDiffs().size());
 
 		// different primary date
 		SampleGenerator.createPrimaryData(other.getDocument());
@@ -402,8 +406,8 @@ public class Diff2Test {
 	public void test_SyntaxAnnotation(){
 		SampleGenerator.createSyntaxAnnotations(template.getDocument());
 		SampleGenerator.createSyntaxAnnotations(other.getDocument());
-		Set<Difference> diffs= getFixture().getDifferences();
-		assertEquals(0, diffs.size());
+		Set<Difference> diffs= getFixture().findDiffs();
+		assertEquals(""+diffs, 0, diffs.size());
 	}
 	
 	/**
@@ -415,8 +419,22 @@ public class Diff2Test {
 	public void test_InformationStructureAnnotations(){
 		SampleGenerator.createInformationStructureAnnotations(template.getDocument());
 		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
-		Set<Difference> diffs= getFixture().getDifferences();
-		assertEquals(0, diffs.size());
+		
+		Set<Difference> diffs= getFixture().findDiffs();
+		assertEquals(""+diffs, 0, diffs.size());
+	}
+	/**
+	 * Checks differences between to graphs, which are isomorph. 
+	 * The here tested structure is
+	 * {@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}.
+	 */
+	@Test
+	public void test_InformationStructureAnnotations_Fail(){
+		SampleGenerator.createInformationStructureAnnotations(template.getDocument());
+		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
+		other.getDocument().getDocumentGraph().removeNode(other.getDocument().getDocumentGraph().getSpans().get(0));
+		Set<Difference> diffs= getFixture().findDiffs();
+		assertEquals(""+diffs, 1, diffs.size());
 	}
 	/**
 	 * Checks differences between to graphs, which are isomorph. 
@@ -427,7 +445,7 @@ public class Diff2Test {
 	public void test_Dependencies(){
 		SampleGenerator.createDependencies(template.getDocument());
 		SampleGenerator.createDependencies(other.getDocument());
-		Set<Difference> diffs= getFixture().getDifferences();
+		Set<Difference> diffs= getFixture().findDiffs();
 		assertEquals(0, diffs.size());
 	}
 	
@@ -448,7 +466,7 @@ public class Diff2Test {
 		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
 		SampleGenerator.createSyntaxAnnotations(other.getDocument());
 		SampleGenerator.createDependencies(other.getDocument());
-		Set<Difference> diffs= getFixture().getDifferences();
+		Set<Difference> diffs= getFixture().findDiffs();
 		assertEquals(0, diffs.size());
 	}
 }
