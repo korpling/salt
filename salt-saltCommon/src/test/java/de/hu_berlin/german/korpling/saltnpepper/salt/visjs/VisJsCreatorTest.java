@@ -17,19 +17,20 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.Assert;
 
-
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltEmptyParameterException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.visjs.VisJsCreator;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
+import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
 
 public class VisJsCreatorTest {
 	private final static String FSEP = System.getProperty("file.separator");
 	private final static String inputFilePath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
 			+ "resources" + FSEP + "VisJsTest" + FSEP + "pcc2_salt_random_sentence" + FSEP 	+ "pcc2" + FSEP  + "match_0.salt";
-	private final static String outputFolderPath =  ".." + FSEP + "visJsOutput";	    
+	private final static String outputFolderPath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+			+ "resources" + FSEP + "VisJsTest" + FSEP + "visJsOutput" + FSEP + "pcc2_random_sentences";	  
 	
 	
 	
@@ -47,11 +48,26 @@ public class VisJsCreatorTest {
 	  }*/
 
 	@Test
-	public void testHtmlWriter() {
-		/*inputFilePath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
-				+ "resources" + FSEP + "VisJsTest" + FSEP + "pcc2_salt_random_sentence" + FSEP 	+ "pcc2" + FSEP  + "match_0.salt";
+	public void testHtmlWriter() {		
+		URI uri = URI.createFileURI(inputFilePath);	
+		VisJsCreator visJsCreator = new VisJsCreator(uri);
 		
-		outputFolderPath = ".." + FSEP + "visJsOutput";	    */
+		try {
+			 URI outputFileUri = URI.createFileURI(outputFolderPath);	
+			 visJsCreator.writeHTML(outputFileUri);
+		} catch (IOException | XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
+	@Test
+	public void testHtmlWriterWholeCorpus() {
+		String inputFilePath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "pcc2_salt" + FSEP 	+ "pcc2" + FSEP  + "11299.salt";
+		
+		String outputFolderPath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "visJsOutput" + FSEP + "pcc2_11299";	   
 		
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsCreator visJsCreator = new VisJsCreator(uri);
@@ -66,7 +82,7 @@ public class VisJsCreatorTest {
 	}
 	
 	@Test
-	public void testJson(){
+	public void testJson(){	
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsCreator visJsCreator = new VisJsCreator(uri);
 		
@@ -101,6 +117,146 @@ public class VisJsCreatorTest {
 			e.printStackTrace();
 		}		
 	}
+	
+	//@Test
+	public void testJsonWholeCorpus(){
+		String inputFilePath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "pcc2_salt" + FSEP 	+ "pcc2" + FSEP  + "11299.salt";
+		URI uri = URI.createFileURI(inputFilePath);	
+		VisJsCreator visJsCreator = new VisJsCreator(uri);
+		
+		visJsCreator.setNodeWriter(System.out);
+		visJsCreator.setEdgeWriter(System.out);
+		visJsCreator.setOptionsWriter(System.out);
+		visJsCreator.buildJSON();
+		try {
+			visJsCreator.buildOptions();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		BufferedWriter ow;
+				
+		try {
+			ow = visJsCreator.getJsonNodes();
+			ow.newLine();
+			ow.flush();	
+			
+			//ow = visJsCreator.getJsonEdges();		
+		//	ow.newLine();
+		//	ow.flush();	
+	
+			ow = visJsCreator.getOptions();
+			ow.flush();
+			ow.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
+	@Test
+	public void testHtmlWriterSample() {
+		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SampleGenerator.createSDocumentStructure(doc);	
+		VisJsCreator visJsCreator = new VisJsCreator(doc);
+		String outputFolderPath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "visJsOutput" + FSEP + "sampleDoc";	  
+		try {
+			 URI outputFileUri = URI.createFileURI(outputFolderPath);	
+			 visJsCreator.writeHTML(outputFileUri);
+		} catch (IOException | XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	
+	}
+	
+	@Test
+	public void testHtmlWriterSampleAnaphoricAnn() {
+		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SampleGenerator.createAnaphoricAnnotations(doc);
+		VisJsCreator visJsCreator = new VisJsCreator(doc);
+		String outputFolderPath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "visJsOutput" + FSEP + "sampleDocAnaphoricAnn";	  
+		try {
+			 URI outputFileUri = URI.createFileURI(outputFolderPath);	
+			 visJsCreator.writeHTML(outputFileUri);
+		} catch (IOException | XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
+	@Test
+	public void testHtmlWriterSampleDependencies() {
+		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SampleGenerator.createDependencies(doc);
+		VisJsCreator visJsCreator = new VisJsCreator(doc);
+		String outputFolderPath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "visJsOutput" + FSEP + "sampleDocDependencies";	  
+		try {
+			 URI outputFileUri = URI.createFileURI(outputFolderPath);	
+			 visJsCreator.writeHTML(outputFileUri);
+		} catch (IOException | XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
+	
+	
+	@Test
+	public void testHtmlWriterSampleSyntaxStructure() {
+		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SampleGenerator.createSyntaxStructure(doc);
+		VisJsCreator visJsCreator = new VisJsCreator(doc);
+		String outputFolderPath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "visJsOutput" + FSEP + "sampleDocSyntaxStructure";	  
+		try {
+			 URI outputFileUri = URI.createFileURI(outputFolderPath);	
+			 visJsCreator.writeHTML(outputFileUri);
+		} catch (IOException | XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
+	@Test
+	public void testHtmlWriterSampleTokens() {
+		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SampleGenerator.createTokens(doc);
+		VisJsCreator visJsCreator = new VisJsCreator(doc);
+		String outputFolderPath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "visJsOutput" + FSEP + "sampleDocTokens";	  
+		try {
+			 URI outputFileUri = URI.createFileURI(outputFolderPath);	
+			 visJsCreator.writeHTML(outputFileUri);
+		} catch (IOException | XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
+	@Test
+	public void testHtmlWriterSampleMorphologyAnn() {
+		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SampleGenerator.createMorphologyAnnotations(doc);
+		VisJsCreator visJsCreator = new VisJsCreator(doc);
+		String outputFolderPath = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+				+ "resources" + FSEP + "VisJsTest" + FSEP + "visJsOutput" + FSEP + "sampleDocMorphologyAnn";	  
+		try {
+			 URI outputFileUri = URI.createFileURI(outputFolderPath);	
+			 visJsCreator.writeHTML(outputFileUri);
+		} catch (IOException | XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+	
+	
 	
 	@Test(expected = SaltEmptyParameterException.class)
 	public void testInputUrlIsNull(){
@@ -137,10 +293,7 @@ public class VisJsCreatorTest {
 		VisJsCreator visJsCreator = new VisJsCreator(uri);		
 		visJsCreator.setNodeWriter(System.out);
 		visJsCreator.buildJSON();
-	}
-	
-	
-	
+	}	
 	
 
 }

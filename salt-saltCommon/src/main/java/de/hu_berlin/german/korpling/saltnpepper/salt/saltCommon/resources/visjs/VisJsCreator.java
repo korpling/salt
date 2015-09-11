@@ -48,25 +48,25 @@ import org.eclipse.emf.common.util.URI;
 
 
 public class VisJsCreator implements SGraphTraverseHandler{
-	
-	private  int currHigh;
-	private  long maxHigh;
+		
+	private  long maxHeight;
+	private  int currHeight;
 	private  int maxLevel;
-	private  int currHighFromToken;
+	private  int currHeightFromToken;
 
 	
 	private  SDocument doc;
 	private  XMLOutputFactory outputFactory;
 	private  OutputStream os;
 	private  XMLStreamWriter writer;
-	private  BufferedWriter outNodes = null;
-	private  BufferedWriter outEdges = null;;
-	private  BufferedWriter outOptions = null;
+	private  BufferedWriter outNodes;
+	private  BufferedWriter outEdges;
+	private  BufferedWriter outOptions;
 	
-	private  JSONWriter jsonWriterNodes = null;
-	private  JSONWriter jsonWriterEdges = null;	
+	private  JSONWriter jsonWriterNodes;
+	private  JSONWriter jsonWriterEdges;	
 		
-	private  int bufferSize;
+	private  int bufferSizeEdges;
 
 	private static final String TRAV_MODE_CALC_LEVEL = "calcLevel";
 	private static final String TRAV_MODE_READ_NODES = "readNodes";
@@ -79,47 +79,48 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	
 	
 	// JSON output
-	private static final String id = "id";
-	private static final String label = "label";
-	private static final String color = "color";
-	private static final String x = "x";
-	private static final String level = "level";
-	private static final String group = "group";
+	private static final String JSON_ID = "id";
+	private static final String JSON_LABEL = "label";
+	private static final String JSON_COLOR = "color";
+	private static final String JSON_X = "x";
+	private static final String JSON_LEVEL = "level";
+	private static final String JSON_GROUP = "group";
 	
 	private  int xValue = 0;	
-	private static final String tokColorValue = "#CCFF99";
-	//private int groupValue;
+	private static final String TOK_COLOR_VALUE = "#CCFF99";
+	private static final String VISJS_WIDTH = "1400px";
+	private static final String VISJS_HEIGHT = "1000px";
 	
 	
 	// HTML resources output
-	private  final String visJsSrc = "js/vis.min.js";
-	private final String visCss = "css/vis.min.css";
+	private final static String VIS_JS_SRC = "js/vis.min.js";
+	private final static String VIS_CSS_SRC = "css/vis.min.css";
 	//private final String visJsSrcGA = "../../googleAnalytics.js";
 	
     private final String textStyle = "width:700px; font-size:14px; text-align: justify;";
     
     //HTML tags
-    private static final String html = "html";
-    private static final String head = "head";
-    private static final String body = "body";
-    private static final String title = "title";
-    private static final String p = "p";
-    private static final String div = "div";
-    private static final String script = "script";
-    private static final String style = "style";
-    private static final String link = "link";
-    private static final String h2 = "h2";
-    private static final String input = "input";
+    private static final String TAG_HTML = "html";
+    private static final String TAG_HEAD = "head";
+    private static final String TAG_BODY = "body";
+    private static final String TAG_TITLE = "title";
+    private static final String TAG_P = "p";
+    private static final String TAG_DIV = "div";
+    private static final String TAG_SCRIPT = "script";
+    private static final String TAG_STYLE = "style";
+    private static final String TAG_LINK = "link";
+    private static final String TAG_H2 = "h2";
+    private static final String TAG_INPUT = "input";
     
     //HTML attributes
-    private static final String attType = "type";
-    private static final String attId = "id";
-    private static final String attValue = "value";
-    private static final String attSrc = "src";
-    private static final String attHref = "href";
-    private static final String attRel = "rel";
-    private static final String attStyle = "style";
-    private static final String attLang = "language";
+    private static final String ATT_TYPE = "type";
+    private static final String ATT_ID = "id";
+    private static final String ATT_VALUE = "value";
+    private static final String ATT_SRC = "src";
+    private static final String ATT_HREF = "href";
+    private static final String ATT_REL = "rel";
+    private static final String ATT_STYLE = "style";
+    private static final String ATT_LANG = "language";
     
     
     private static final int JSON_EDGE_LINE_LENGTH = 60;    
@@ -143,6 +144,8 @@ public class VisJsCreator implements SGraphTraverseHandler{
   	  this(inputUri, null);
     }
 	
+    
+    
     public VisJsCreator (URI inputUri, Filter filter){  
     	if(inputUri == null) throw new SaltEmptyParameterException("inputUri", "VisJsCreator", this.getClass());
      	
@@ -150,10 +153,10 @@ public class VisJsCreator implements SGraphTraverseHandler{
     		this.doc= SaltFactory.eINSTANCE.createSDocument();	
         	doc.loadSDocumentGraph(inputUri);
     	}catch (SaltResourceNotFoundException e){
-    		throw new SaltResourceNotFoundException("A problem occured when loading salt project from '" + inputUri + "'.", e);
+    		throw new SaltResourceNotFoundException("A problem occurred while loading salt project from '" + inputUri + "'.", e);
     	}
     	catch (SaltResourceException e){
-			throw new SaltResourceException("A problem occured when loading salt project from '" + inputUri + "'.", e);
+			throw new SaltResourceException("A problem occurred while loading salt project from '" + inputUri + "'.", e);
 		}
     	
     	roots = doc.getSDocumentGraph().getSRoots();	
@@ -175,11 +178,51 @@ public class VisJsCreator implements SGraphTraverseHandler{
     	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
     	if (nEdges > Math.floor(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
     	{
-    		throw new SaltException("The specified document can not be visualized. It contains too many edges.");    		
+    		throw new SaltException("The specified document cannot be visualized. It contains too many edges.");    		
     	}
     	else
     	{
-    		bufferSize = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
+    		bufferSizeEdges = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
+    	}
+    	
+    	this.filter = filter;
+    	
+    }
+    
+
+    public VisJsCreator(SDocument doc){
+  	  this(doc, null);
+    }
+    
+    public VisJsCreator (SDocument doc, Filter filter){  
+    	
+    	if(doc == null) throw new SaltEmptyParameterException("doc", "VisJsCreator", this.getClass());
+    
+    	this.doc = doc;    	
+    	roots = doc.getSDocumentGraph().getSRoots();	
+    	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
+    	if (sSpans != null && (sSpans.size() > 0))
+    	{
+    		nGroupsId += 1;
+    	}	
+    	EList<SStructure>  sStructures = doc.getSDocumentGraph().getSStructures();
+    	
+    	if (sStructures != null && (sStructures.size() > 0))
+    	{
+    		nGroupsId += 2;
+    	}
+    	
+    	readRoots = new HashSet <SNode>();
+    	readRelations = new HashSet <SRelation>();       	
+    	
+    	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
+    	if (nEdges > Math.floor(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
+    	{
+    		throw new SaltException("The specified document cannot be visualized. It contains too many edges.");    		
+    	}
+    	else
+    	{
+    		bufferSizeEdges = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
     	}
     	
     	this.filter = filter;
@@ -195,7 +238,7 @@ public void setNodeWriter (OutputStream os)
 
 public void setEdgeWriter (OutputStream os)
 {
-	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), bufferSize);	
+	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), bufferSizeEdges);	
 	this.jsonWriterEdges = new JSONWriter(outEdges);
 }
 
@@ -205,7 +248,11 @@ public void setOptionsWriter (OutputStream os){
 }
    
 	
-	
+/*
+ * Creates the output folder from the specified URI if not exists and writes the output html-file into that.
+ * Also creates two subfolder for css and visjs resources and writes the resource files 
+ * vis.min.css and vis.min.js into the both folder respective.
+ */
 
 public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  SaltResourceNotFoundException, SaltException,
 															SaltResourceException, XMLStreamException, IOException{
@@ -218,13 +265,13 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 			  throw new SaltEmptyParameterException("outputFileUri", "writeHTML", this.getClass());
 			}	
 			catch (FileNotFoundException e) {
-				throw new SaltResourceNotFoundException("The output file can not be created.");
+				throw new SaltResourceNotFoundException("The output file cannot be created.");
 			}	
 			catch (SecurityException e) {
-			 throw new SaltException("Either the output folder can not be created or permission denied.");
+			 throw new SaltException("Either the output folder cannot be created or permission denied.");
 			}
 			catch (IOException e) {
-			 throw new SaltResourceException("A problem occured while copying the vis-js resource files");
+			 throw new SaltResourceException("A problem occurred while copying the vis-js resource files");
 			}	
 	
 		
@@ -241,45 +288,45 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		
 		writer.writeStartDocument("UTF-8", "1.0");
 		writer.writeCharacters(NEWLINE);
-		writer.writeStartElement(html);
+		writer.writeStartElement(TAG_HTML);
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(head);
+		writer.writeStartElement(TAG_HEAD);
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(title);
+		writer.writeStartElement(TAG_TITLE);
 		writer.writeCharacters("Salt Document Tree");
 		writer.writeEndElement();
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(style);
-		writer.writeAttribute(attType, "text/css");
+		writer.writeStartElement(TAG_STYLE);
+		writer.writeAttribute(ATT_TYPE, "text/css");
 		writer.writeCharacters("body {" + NEWLINE 
 				+ "font: 10pt sans;" + NEWLINE 
 				+ "}" + NEWLINE 
 				+ "#mynetwork {" + NEWLINE 
-				+ "width: 1400px;" + NEWLINE 
-				+ "height: 1000px;" + NEWLINE 
+				+ "width: " + VISJS_WIDTH +";" + NEWLINE 
+				+ "height: " + VISJS_HEIGHT + ";" + NEWLINE 
 				+ "border: 1px solid lightgray;" + NEWLINE 
 				+ "}");
 		writer.writeEndElement();
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(script);
-		writer.writeAttribute(attType, "text/javascript");
-		writer.writeAttribute(attSrc,visJsSrc);
+		writer.writeStartElement(TAG_SCRIPT);
+		writer.writeAttribute(ATT_TYPE, "text/javascript");
+		writer.writeAttribute(ATT_SRC,VIS_JS_SRC);
 		writer.writeEndElement();
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeEmptyElement(link);
-		writer.writeAttribute(attHref, visCss);
-		writer.writeAttribute(attRel,"stylesheet");
-		writer.writeAttribute(attType, "text/css");
+		writer.writeEmptyElement(TAG_LINK);
+		writer.writeAttribute(ATT_HREF, VIS_CSS_SRC);
+		writer.writeAttribute(ATT_REL,"stylesheet");
+		writer.writeAttribute(ATT_TYPE, "text/css");
 		writer.writeCharacters(NEWLINE);
 		
 		
-		writer.writeStartElement(script);
-		writer.writeAttribute(attType, "text/javascript");
+		writer.writeStartElement(TAG_SCRIPT);
+		writer.writeAttribute(ATT_TYPE, "text/javascript");
 		writer.writeCharacters("var nodes = null;" + NEWLINE 
 						+ "var edges = null;" + NEWLINE 
 						+ "var network = null;" + NEWLINE
@@ -298,18 +345,18 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		
 		writer.flush();
 		
-		outNodes.append("var nodes = new vis.DataSet(" + NEWLINE);
+		outNodes.write("var nodes = new vis.DataSet(" + NEWLINE);
+
 		
-		outEdges.append("var edges = new vis.DataSet(" + NEWLINE);
+		outEdges.write("var edges = new vis.DataSet(" + NEWLINE);
 		
 		buildJSON();
 		
-		 outNodes.flush();
-		 outNodes.append(");");
+		 outNodes.write(");");
 		 outNodes.newLine();
 		 outNodes.flush();
 		 
-		 outEdges.append(");");
+		 outEdges.write(");");
 		 outEdges.newLine();
 		 outEdges.flush();
 		
@@ -347,51 +394,51 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		writer.writeCharacters(NEWLINE);
 		
 		
-		writer.writeStartElement(body);
+		writer.writeStartElement(TAG_BODY);
 		writer.writeAttribute("onload", "draw();");
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(h2);
+		writer.writeStartElement(TAG_H2);
 		writer.writeCharacters("Salt Document Tree");
 		writer.writeEndElement();
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(div);
-		writer.writeAttribute(attStyle,textStyle);
+		writer.writeStartElement(TAG_DIV);
+		writer.writeAttribute(ATT_STYLE,textStyle);
 		writer.writeEndElement();
 		writer.writeCharacters(NEWLINE);
 		
 		writer.writeStartElement("p");
 		
-		writer.writeEmptyElement(input);
-		writer.writeAttribute(attType,"button");
-		writer.writeAttribute(attId, "btn-UD");
-		writer.writeAttribute(attValue, "Up-Down");
+		writer.writeEmptyElement(TAG_INPUT);
+		writer.writeAttribute(ATT_TYPE,"button");
+		writer.writeAttribute(ATT_ID, "btn-UD");
+		writer.writeAttribute(ATT_VALUE, "Up-Down");
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeEmptyElement(input);
-		writer.writeAttribute(attType,"button");
-		writer.writeAttribute(attId, "btn-DU");
-		writer.writeAttribute(attValue, "Down-Up");
+		writer.writeEmptyElement(TAG_INPUT);
+		writer.writeAttribute(ATT_TYPE,"button");
+		writer.writeAttribute(ATT_ID, "btn-DU");
+		writer.writeAttribute(ATT_VALUE, "Down-Up");
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeEmptyElement(input);
-		writer.writeAttribute(attType,"button");
-		writer.writeAttribute(attId, "btn-LR");
+		writer.writeEmptyElement(TAG_INPUT);
+		writer.writeAttribute(ATT_TYPE,"button");
+		writer.writeAttribute(ATT_ID, "btn-LR");
 		writer.writeAttribute("value", "Left-Right");
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeEmptyElement(input);
-		writer.writeAttribute(attType,"button");
-		writer.writeAttribute(attId, "btn-RL");
-		writer.writeAttribute(attValue, "Right-Left");
+		writer.writeEmptyElement(TAG_INPUT);
+		writer.writeAttribute(ATT_TYPE,"button");
+		writer.writeAttribute(ATT_ID, "btn-RL");
+		writer.writeAttribute(ATT_VALUE, "Right-Left");
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeEmptyElement(input);
-		writer.writeAttribute(attType,"hidden");
+		writer.writeEmptyElement(TAG_INPUT);
+		writer.writeAttribute(ATT_TYPE,"hidden");
 		//TODO check the apostrophes
-		writer.writeAttribute(attId, "direction");
-		writer.writeAttribute(attValue, "UD");
+		writer.writeAttribute(ATT_ID, "direction");
+		writer.writeAttribute(ATT_VALUE, "UD");
 		writer.writeCharacters(NEWLINE);
 	
 		
@@ -399,19 +446,19 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		writer.writeEndElement();
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(div);
-		writer.writeAttribute(attId, "mynetwork");
+		writer.writeStartElement(TAG_DIV);
+		writer.writeAttribute(ATT_ID, "mynetwork");
 		writer.writeEndElement();
 		writer.writeCharacters(NEWLINE);
 		
-		writer.writeStartElement(p);
-		writer.writeAttribute(attId, "selection");
+		writer.writeStartElement(TAG_P);
+		writer.writeAttribute(ATT_ID, "selection");
 		writer.writeEndElement();
 		writer.writeCharacters(NEWLINE);
 		
 		
-		writer.writeStartElement(script);
-		writer.writeAttribute(attLang, "JavaScript");
+		writer.writeStartElement(TAG_SCRIPT);
+		writer.writeAttribute(ATT_LANG, "JavaScript");
 		writer.writeCharacters(NEWLINE);
 		writer.writeCharacters("var directionInput = document.getElementById(\"direction\");" + NEWLINE
 				+ "var btnUD = document.getElementById(\"btn-UD\");" + NEWLINE
@@ -456,22 +503,27 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		
 		writeNodeImmediately = false;
 		} catch (XMLStreamException e) {
-			throw new SaltException("A problem occured while writing the output file.");
+			throw new SaltException("A problem occurred while writing the output file.");
 		}
 	  
 	}
 
+/*
+ * Organizes the output folder structure and invokes the method for copying of resource files. 
+ */
   
 	private File createOutputResources(URI outputFileUri) 
 			throws SaltEmptyParameterException, SecurityException, FileNotFoundException, IOException{
 		  File outputFolder = null;
 		  if (outputFileUri == null) throw new SaltEmptyParameterException();			
 		  outputFolder = new File (outputFileUri.path());
-		  outputFolder.mkdir();
+		 if(!outputFolder.exists()) outputFolder.mkdirs();
+		 
 		  File cssFolderOut = new File(outputFolder, CSS_FOLDER_OUT);
-		  cssFolderOut.mkdir();
+		  if(!cssFolderOut.exists()) cssFolderOut.mkdir();
+		  
 		  File jsFolderOut = new File(outputFolder, JS_FOLDER_OUT);
-		  jsFolderOut.mkdir();
+		  if(!jsFolderOut.exists()) jsFolderOut.mkdir();
 		  
 		  copyResourceFile(CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
 		  copyResourceFile(JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
@@ -480,7 +532,9 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	}
 	
 	
-	
+/*
+ * Copies the specified resource file to the output resource subfolder.
+ */
 	private void copyResourceFile (String inFile, String outputFolder, String outSubFolder, String outFile) 
 					throws FileNotFoundException, IOException{
 	
@@ -521,10 +575,10 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	 EList <SToken> sTokens = doc.getSDocumentGraph().getSTokens();
 	
 	 if(outNodes == null || jsonWriterNodes == null){
-		 throw new SaltEmptyParameterException("A problem occured while building of JSON objects. Probably the node writer is not set.");
+		 throw new SaltEmptyParameterException("A problem occurred while building JSON objects. Probably the node writer is not set.");
 	 }
 	 if(outEdges == null || jsonWriterEdges == null){
-		 throw new SaltEmptyParameterException("A problem occured while building of JSON objects. Probably the edge writer is not set.");
+		 throw new SaltEmptyParameterException("A problem occurred while building JSON objects. Probably the edge writer is not set.");
 	 }
 	 
 	 try{
@@ -549,10 +603,10 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	 jsonWriterEdges.endArray();	
 	 
 	}catch(JSONException e){
-		 throw new SaltException("A problem occured while building JSON objects.");
+		 throw new SaltException("A problem occurred while building JSON objects.");
 	 }
 	 catch(IOException e){
-		 throw new SaltException("A problem occured while building JSON objects.");
+		 throw new SaltException("A problem occurred while building JSON objects.");
 	 }
 			
 	}
@@ -567,9 +621,9 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		 String allLabels = idLabel;
 			 
 		 jsonWriterNodes.object();
-		 jsonWriterNodes.key(id);		 
+		 jsonWriterNodes.key(JSON_ID);		 
 		 jsonWriterNodes.value(idValue);
-		 jsonWriterNodes.key(label);
+		 jsonWriterNodes.key(JSON_LABEL);
 		 
 	
 		   EList<SAnnotation> sAnnotations = node.getSAnnotations();
@@ -599,25 +653,25 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		 jsonWriterNodes.value(allLabels);	
 		 if (node instanceof SToken)
 		 {
-			 jsonWriterNodes.key(color);
-			 jsonWriterNodes.value(tokColorValue);
-			 jsonWriterNodes.key(x);
+			 jsonWriterNodes.key(JSON_COLOR);
+			 jsonWriterNodes.value(TOK_COLOR_VALUE);
+			 jsonWriterNodes.key(JSON_X);
 			 jsonWriterNodes.value(++xValue);
 		 }
 		 
-		 	 jsonWriterNodes.key(level);
+		 	 jsonWriterNodes.key(JSON_LEVEL);
 			 jsonWriterNodes.value(levelValue);
 			 
 		if (node instanceof SSpan)
 		{
 			if (nGroupsId == 3)
 			{
-				 jsonWriterNodes.key(group);
+				 jsonWriterNodes.key(JSON_GROUP);
 				 jsonWriterNodes.value("1");
 			}
 			else if (nGroupsId == 1)
 			{
-				jsonWriterNodes.key(group);
+				jsonWriterNodes.key(JSON_GROUP);
 				jsonWriterNodes.value("0");
 			}
 	
@@ -627,7 +681,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		{
 			if (nGroupsId == 3 || nGroupsId == 2)
 			{
-				jsonWriterNodes.key(group);
+				jsonWriterNodes.key(JSON_GROUP);
 				jsonWriterNodes.value("0");
 			}
 	
@@ -659,9 +713,12 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 			  }
 	}
 	
+	/*
+	 * Writes options for visjs to the output stream.
+	 */
 	public void buildOptions() throws IOException, SaltEmptyParameterException{
 		if (outOptions == null){
-			throw new SaltEmptyParameterException("A problem occured while building of options. Probably the option writer is not set.");
+			throw new SaltEmptyParameterException("A problem occurred while building options. Probably the option writer is not set.");
 		}
 		
 			outOptions.write("{" + NEWLINE
@@ -719,8 +776,8 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	private  int  getMaxHighOfSDocGraph(SDocument doc)
 	{
 		doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAV_MODE_CALC_LEVEL, this);		
-		if (maxHigh > (Integer.MAX_VALUE - 100)) throw new SaltException("The specified document can not be visualized. It is too complex.");    
-		else return (int) maxHigh;
+		if (maxHeight > (Integer.MAX_VALUE - 100)) throw new SaltException("The specified document cannot be visualized. It is too complex.");    
+		else return (int) maxHeight;
 		
 	}
 	
@@ -736,8 +793,8 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 			{				
 				if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
 				{
-				currHigh++;
-				if (maxHigh < currHigh) maxHigh = currHigh;
+				currHeight++;
+				if (maxHeight < currHeight) maxHeight = currHeight;
 				}					
 			}		
 		}	
@@ -756,21 +813,21 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 			{				
 				if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
 				{
-				currHigh--;		
+				currHeight--;		
 				}
 			
 				else if (traversalId.equals(TRAV_MODE_READ_NODES))
 				{
 				  if (currNode instanceof SToken) 
 				  {
-					  currHighFromToken = 1;						  
+					  currHeightFromToken = 1;						  
 					  // write SSpan-Nodes					  
 					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode)))
 					  {				  
 						  try {
-							writeJsonNode(fromNode, maxLevel - currHighFromToken, filter);
+							writeJsonNode(fromNode, maxLevel - currHeightFromToken, filter);
 						} catch (IOException e) {
-							throw new SaltException("A problem occured while building JSON objects.");
+							throw new SaltException("A problem occurred while building JSON objects.");
 						}						
 					      readRoots.add(fromNode);					
 						  	
@@ -779,22 +836,22 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 				  }
 				  else 
 				  {					  
-					  currHighFromToken++;				  
+					  currHeightFromToken++;				  
 					  
 					  if (currNode instanceof SStructure)
 					  {						 
 						  try {
-							writeJsonNode(currNode, maxLevel - currHighFromToken, filter);
+							writeJsonNode(currNode, maxLevel - currHeightFromToken, filter);
 						} catch (IOException e) {
-							throw new SaltException("A problem occured while building JSON objects.");
+							throw new SaltException("A problem occurred while building JSON objects.");
 						}						 
 						 
 						 if (roots.contains(fromNode) && !readRoots.contains(fromNode))
 						 {
 							 try {
-								writeJsonNode(fromNode, maxLevel - currHighFromToken - 1, filter);
+								writeJsonNode(fromNode, maxLevel - currHeightFromToken - 1, filter);
 							} catch (IOException e) {
-								throw new SaltException("A problem occured while building JSON objects.");
+								throw new SaltException("A problem occurred while building JSON objects.");
 							}							 
 							 readRoots.add(fromNode);
 						 }						  	
@@ -808,7 +865,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 					  try {
 						writeJsonEdge(fromNode, currNode, edge,filter );
 					} catch (IOException e) {
-						throw new SaltException("A problem occured while building JSON objects.");
+						throw new SaltException("A problem occurred while building JSON objects.");
 					}					  
 					  readRelations.add(edge);
 				  }			
