@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
@@ -24,6 +27,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotationContainer;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
@@ -31,6 +35,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.DIFF_TYPES;
 import de.hu_berlin.u.saltnpepper.salt.util.Difference;
+import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 /**
@@ -62,9 +67,10 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
  *
  */
 public class Diff2 {
-
-	private SDocumentGraph templateDoc = null;
-	private SDocumentGraph otherDoc = null;
+	private static final Logger logger = LoggerFactory.getLogger("salt");
+	
+	private SDocumentGraph templateGraph = null;
+	private SDocumentGraph otherGraph = null;
 
 	private Map<String, Boolean> options = null;
 
@@ -123,8 +129,8 @@ public class Diff2 {
 	}
 
 	public Diff2(SDocumentGraph template, SDocumentGraph other, Map<String, Boolean> optionMap) {
-		this.templateDoc = template;
-		this.otherDoc = other;
+		this.templateGraph = template;
+		this.otherGraph = other;
 
 		options = optionMap;
 		if (options == null) {
@@ -227,37 +233,50 @@ public class Diff2 {
 	 * @return true, if graphs are isomorphic, false otherwise.
 	 */
 	private boolean findDiffs(boolean diffsRequested) {
-		if (!compareSizes(templateDoc, otherDoc)) {
+		if (!compareSizes(templateGraph, otherGraph)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!compareDataSources(templateDoc, otherDoc, diffsRequested)) {
+		if (!compareDataSources(templateGraph, otherGraph, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!compareTokens(templateDoc, otherDoc, diffsRequested)) {
+		if (!compareTokens(templateGraph, otherGraph, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!compareNodes(templateDoc, otherDoc, diffsRequested)) {
+		
+		
+		
+//		List<SNode> roots = templateGraph.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
+//		if ((roots == null) || (roots.size() == 0)) {
+//			logger.warn("Cannot start computing of differences, since no tokens exist for document '{}'.", templateGraph.getId());
+//		} else {
+//			DifferenceHandler handler = new DifferenceHandler(getIsoObjects(), otherGraph, templateGraph);
+//			otherGraph.traverse(roots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateGraph.getId(), handler, false);
+//		}
+		
+		
+		
+		if (!compareNodes(templateGraph, otherGraph, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!checkPointingRelations(templateDoc, otherDoc, diffsRequested)) {
+		if (!checkPointingRelations(templateGraph, otherGraph, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!checkOrderRelations(templateDoc, otherDoc, diffsRequested)) {
+		if (!checkOrderRelations(templateGraph, otherGraph, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!checkLayers(templateDoc, otherDoc, diffsRequested)) {
+		if (!checkLayers(templateGraph, otherGraph, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
@@ -339,18 +358,18 @@ public class Diff2 {
 	}
 
 	/** isomorphic Salt objects key= tempplate, value= other **/
-	private BiMap<Object, Object> isoObjects = null;
+	private BiMap<SNode, SNode> isoNodes = null;
 
 	/**
 	 * return BiMap with isomorphic Salt object key= template, value= other
 	 * 
 	 * @return BiMap with isomorphic Salt objects
 	 **/
-	public BiMap<Object, Object> getIsoObjects() {
-		if (isoObjects == null) {
-			isoObjects = HashBiMap.create();
+	public BiMap<SNode, SNode> getIsoNodes() {
+		if (isoNodes == null) {
+			isoNodes = HashBiMap.create();
 		}
-		return isoObjects;
+		return isoNodes;
 	}
 
 	private Set<Object> checkedElements = new HashSet<>();
@@ -433,7 +452,7 @@ public class Diff2 {
 				iso = false;
 				addDifference(null, otherDS, null, DIFF_TYPES.NODE_MISSING, null);
 			} else {
-				getIsoObjects().put(templateDS, otherDS);
+				getIsoNodes().put(templateDS, otherDS);
 				// check whether both data sources have the same id
 				Set<Difference> subDiffs = new HashSet<Difference>();
 				compareIdentifiableElements(templateDS, otherDS, subDiffs);
@@ -505,7 +524,7 @@ public class Diff2 {
 		iterator = other.getTextualRelations().iterator();
 		while (iterator.hasNext()) {
 			STextualRelation otherRel = iterator.next();
-			STextualDS templateDS = (STextualDS) getIsoObjects().inverse().get(otherRel.getTarget());
+			STextualDS templateDS = (STextualDS) getIsoNodes().inverse().get(otherRel.getTarget());
 			if (templateDS != null) {
 				Map<String, STextualRelation> offsetMap = textDSsToOffsetMap.get(templateDS);
 				STextualRelation templateRel = offsetMap.get(otherRel.getStart() + "#" + otherRel.getEnd());
@@ -519,7 +538,7 @@ public class Diff2 {
 					addDifference(null, otherRel.getTarget(), null, DIFF_TYPES.NODE_MISSING, null);
 				} else {
 					// add tokens to isomorphie table
-					getIsoObjects().put(templateRel.getSource(), otherRel.getSource());
+					getIsoNodes().put(templateRel.getSource(), otherRel.getSource());
 
 					// in case the token has dependencies to other data sources,
 					// check their isomorphie
@@ -896,9 +915,9 @@ public class Diff2 {
 	 * method to check two {@link SNode}s for isomorphie
 	 * 
 	 * @return isomorphie still possible after this check
-	 * @param templateDoc
+	 * @param templateGraph
 	 *            first SNode
-	 * @param otherDoc
+	 * @param otherGraph
 	 *            second SNode
 	 **/
 	public boolean compareTwoNodes(SNode templateNode, SNode otherNode, Set<Difference> subDiffs) {
@@ -922,7 +941,7 @@ public class Diff2 {
 
 		while (itTemplate.hasNext()) {
 			SNode tempItTemplate = itTemplate.next();
-			if (!otherSet.contains(isoObjects.get(tempItTemplate))) {
+			if (!otherSet.contains(getIsoNodes().get(tempItTemplate))) {
 				iso = false;
 			}
 		}
@@ -931,7 +950,7 @@ public class Diff2 {
 
 		while (itOther.hasNext()) {
 			SNode tempItOther = itOther.next();
-			if (!templateSet.contains(isoObjects.inverse().get(tempItOther))) {
+			if (!templateSet.contains(getIsoNodes().inverse().get(tempItOther))) {
 				iso = false;
 			}
 		}
@@ -943,7 +962,7 @@ public class Diff2 {
 				SAnnotationContainer iTarget = (SAnnotationContainer) i.getTarget();
 				SAnnotationContainer jTarget = (SAnnotationContainer) j.getTarget();
 				// TODO check whether equals() can be used here
-				if (jTarget.equals(isoObjects.get(iTarget)) && compareAnnotationContainers(iTarget, jTarget, tempSet) && iTarget.equals(isoObjects.inverse().get(jTarget))) {
+				if (jTarget.equals(getIsoNodes().get(iTarget)) && compareAnnotationContainers(iTarget, jTarget, tempSet) && iTarget.equals(getIsoNodes().inverse().get(jTarget))) {
 					tempIso = true;
 				}
 			}
@@ -958,7 +977,7 @@ public class Diff2 {
 			compareAnnotationContainers(templateNode, otherNode, subDiffs);
 
 			if (iso) {
-				isoObjects.put(templateNode, otherNode);
+				getIsoNodes().put(templateNode, otherNode);
 			}
 		}
 
@@ -989,7 +1008,7 @@ public class Diff2 {
 			SNode tempTarget = tempPR.getTarget();
 			for (SPointingRelation t : other.getPointingRelations()) {
 				// TODO check whether equals() can be used here
-				if (isoObjects.get(tempSource).equals(t.getSource()) && isoObjects.get(tempTarget).equals(t.getTarget())) {
+				if (getIsoNodes().get(tempSource).equals(t.getSource()) && getIsoNodes().get(tempTarget).equals(t.getTarget())) {
 					tempIso = true;
 				}
 			}
@@ -1006,7 +1025,7 @@ public class Diff2 {
 			SNode otherTarget = otherPR.getTarget();
 			for (SPointingRelation t : template.getPointingRelations()) {
 				// TODO check whether equals() can be used here
-				if (isoObjects.get(otherSource).equals(t.getSource()) && isoObjects.get(otherTarget).equals(t.getTarget())) {
+				if (getIsoNodes().get(otherSource).equals(t.getSource()) && getIsoNodes().get(otherTarget).equals(t.getTarget())) {
 					otherIso = true;
 				}
 			}
@@ -1035,7 +1054,7 @@ public class Diff2 {
 			SNode tempTarget = tempPR.getTarget();
 			for (SOrderRelation t : other.getOrderRelations()) {
 				// TODO check whether equals() can be used here
-				if (isoObjects.get(tempSource).equals(t.getSource()) && isoObjects.get(tempTarget).equals(t.getTarget())) {
+				if (getIsoNodes().get(tempSource).equals(t.getSource()) && getIsoNodes().get(tempTarget).equals(t.getTarget())) {
 					tempIso = true;
 				}
 			}
@@ -1052,7 +1071,7 @@ public class Diff2 {
 			SNode otherTarget = otherPR.getTarget();
 			for (SOrderRelation t : template.getOrderRelations()) {
 				// TODO check whether equals() can be used here
-				if (isoObjects.get(otherSource).equals(t.getSource()) && isoObjects.get(otherTarget).equals(t.getTarget())) {
+				if (getIsoNodes().get(otherSource).equals(t.getSource()) && getIsoNodes().get(otherTarget).equals(t.getTarget())) {
 					otherIso = true;
 				}
 			}
@@ -1111,13 +1130,13 @@ public class Diff2 {
 		Boolean iso = true;
 
 		for (SNode t : tNodes) {
-			if (!oNodes.contains(isoObjects.get(t))) {
+			if (!oNodes.contains(getIsoNodes().get(t))) {
 				iso = false;
 			}
 		}
 
 		for (SNode o : oNodes) {
-			if (!tNodes.contains(isoObjects.inverse().get(o))) {
+			if (!tNodes.contains(getIsoNodes().inverse().get(o))) {
 				iso = false;
 			}
 		}
@@ -1132,7 +1151,7 @@ public class Diff2 {
 			for (SRelation o : oRelations) {
 				boolean tempIso = false;
 				// TODO check whether equals() can be used here
-				if (isoObjects.get(tempSource).equals(o.getSource()) && isoObjects.get(tempTarget).equals(o.getTarget())) {
+				if (getIsoNodes().get(tempSource).equals(o.getSource()) && getIsoNodes().get(tempTarget).equals(o.getTarget())) {
 					tempIso = true;
 				}
 				if (tempIso == false) {
@@ -1148,7 +1167,7 @@ public class Diff2 {
 			for (SRelation t : tRelations) {
 				boolean tempIso = false;
 				// TODO check whether equals() can be used here
-				if (isoObjects.inverse().get(tempSource).equals(t.getSource()) && isoObjects.inverse().get(tempTarget).equals(t.getTarget())) {
+				if (getIsoNodes().inverse().get(tempSource).equals(t.getSource()) && getIsoNodes().inverse().get(tempTarget).equals(t.getTarget())) {
 					tempIso = true;
 				}
 				if (tempIso == false) {

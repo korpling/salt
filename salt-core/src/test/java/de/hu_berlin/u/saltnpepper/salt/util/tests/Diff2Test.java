@@ -174,11 +174,11 @@ public class Diff2Test {
 		other.createToken(other.getTextualDSs().get(0), 12, 15);
 
 		assertFalse(getFixture().isIsomorph());
-		assertEquals(3, getFixture().getIsoObjects().size());
+		assertEquals(3, getFixture().getIsoNodes().size());
 	}
 
 	/**
-	 * Tests the mapping table {@link Diff2#getIsoObjects()} whether it contains
+	 * Tests the mapping table {@link Diff2#getIsoNodes()} whether it contains
 	 * the correct correspondence of token objects.
 	 */
 	@Test
@@ -189,7 +189,7 @@ public class Diff2Test {
 		assertTrue(getFixture().isIsomorph());
 		int i= 0;
 		for (SToken tok: template.getDocument().getDocumentGraph().getTokens()){
-			assertNotNull(getFixture().getIsoObjects().get(tok));
+			assertNotNull(getFixture().getIsoNodes().get(tok));
 			assertEquals(tok, template.getDocument().getDocumentGraph().getTokens().get(i));
 			i++;
 		}
