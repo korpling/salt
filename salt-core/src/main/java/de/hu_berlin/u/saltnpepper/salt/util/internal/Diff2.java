@@ -1008,45 +1008,6 @@ public class Diff2 {
 			}
 		}
 		return iso;
-
-		// Set<SAnnotation> tempSet = new
-		// HashSet<>(templateNode.getAnnotations());
-		// Set<SAnnotation> otherSet = new
-		// HashSet<>(otherNode.getAnnotations());
-		//
-		// boolean iso = true;
-		// Iterator<SAnnotation> itTemplate = tempSet.iterator();
-		//
-		// if ((boolean) options.get("annoDiff")) {
-		// while (itTemplate.hasNext()) {
-		// SAnnotation tempFeat = itTemplate.next();
-		// System.out.println("search "+tempFeat);
-		// if (!otherSet.contains(tempFeat)) {
-		// Difference tempDiff = new Difference(tempFeat, null, null,
-		// DIFF_TYPES.LABEL_MISSING);
-		// subDiffs.add(tempDiff);
-		// System.out.println("not there ");
-		// iso = false;
-		// }else{
-		// System.out.println("is there ");
-		// }
-		// }
-		//
-		// Iterator<SAnnotation> itOther = otherSet.iterator();
-		//
-		// while (itOther.hasNext()) {
-		// SAnnotation tempFeat = itOther.next();
-		// if (!tempSet.contains(tempFeat)) {
-		// Difference tempDiff = new Difference(null, tempFeat, null,
-		// DIFF_TYPES.LABEL_MISSING);
-		// subDiffs.add(tempDiff);
-		// System.out.println("compare sanno 2: ");
-		// iso = false;
-		// }
-		// }
-		// }
-		// return iso;
-
 	}
 
 	public boolean checkPointingRelations(SDocumentGraph template, SDocumentGraph other, Boolean diff) {

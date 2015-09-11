@@ -17,7 +17,7 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.util.tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -97,68 +97,69 @@ public class Diff2Test {
 	 */
 	@Test
 	public void testTextualDS_iso() {
-		STextualDS templateText= SampleGenerator.createPrimaryData(template.getDocument());
-		STextualDS otherText= SampleGenerator.createPrimaryData(other.getDocument());
+		STextualDS templateText = SampleGenerator.createPrimaryData(template.getDocument());
+		STextualDS otherText = SampleGenerator.createPrimaryData(other.getDocument());
 		assertTrue(getFixture().isIsomorph());
-		
+
 		otherText.setText("a template text");
 		assertFalse(getFixture().isIsomorph());
 	}
-	
+
 	/**
 	 * Tests same and different textual data sources
 	 */
 	@Test
 	public void testTextualDS_diff() {
-		STextualDS templateText= SampleGenerator.createPrimaryData(template.getDocument());
-		STextualDS otherText= SampleGenerator.createPrimaryData(other.getDocument());
-		Set<Difference> diffs= getFixture().findDiffs();
-		assertEquals(""+diffs, 0, diffs.size());
-		
+		STextualDS templateText = SampleGenerator.createPrimaryData(template.getDocument());
+		STextualDS otherText = SampleGenerator.createPrimaryData(other.getDocument());
+		Set<Difference> diffs = getFixture().findDiffs();
+		assertEquals("" + diffs, 0, diffs.size());
+
 		otherText.setText("a template text");
-		diffs= getFixture().findDiffs();
-		assertEquals(""+diffs, 2, diffs.size());
+		diffs = getFixture().findDiffs();
+		assertEquals("" + diffs, 2, diffs.size());
 	}
+
 	/**
 	 * Tests for two tokens whether their annotations are isomorph.
 	 */
 	@Test
-	public void testCompareAnnotationContainer(){
-		STextualDS text1= template.createTextualDS("Test");
-		SToken templateTok= template.createToken(text1, 0, 5);
-		
-		STextualDS otherText= other.createTextualDS("Test");
-		SToken otherTok= other.createToken(text1, 0, 5);
-		
-		//no annotations
-		Set<Difference> diffs= new HashSet<>();
+	public void testCompareAnnotationContainer() {
+		STextualDS text1 = template.createTextualDS("Test");
+		SToken templateTok = template.createToken(text1, 0, 5);
+
+		STextualDS otherText = other.createTextualDS("Test");
+		SToken otherTok = other.createToken(text1, 0, 5);
+
+		// no annotations
+		Set<Difference> diffs = new HashSet<>();
 		getFixture().compareAnnotationContainers(templateTok, otherTok, diffs);
-		assertEquals(""+diffs, 0, diffs.size());
-		
+		assertEquals("" + diffs, 0, diffs.size());
+
 		// template has one annotation, other none
 		templateTok.createAnnotation(null, "anno", "annoVal");
-		diffs= new HashSet<>();
+		diffs = new HashSet<>();
 		getFixture().compareAnnotationContainers(templateTok, otherTok, diffs);
-		assertEquals(""+diffs, 1, diffs.size());
-		
+		assertEquals("" + diffs, 1, diffs.size());
+
 		// both have one annotation
 		otherTok.createAnnotation(null, "anno", "annoVal");
-		diffs= new HashSet<>();
+		diffs = new HashSet<>();
 		getFixture().compareAnnotationContainers(templateTok, otherTok, diffs);
-		assertEquals(""+diffs, 0, diffs.size());
-		
+		assertEquals("" + diffs, 0, diffs.size());
+
 		// template has two annotation, other has one
 		templateTok.createAnnotation("namespace", "anno", "annoVal");
-		diffs= new HashSet<>();
+		diffs = new HashSet<>();
 		getFixture().compareAnnotationContainers(templateTok, otherTok, diffs);
-		assertEquals(""+diffs, 1, diffs.size());
+		assertEquals("" + diffs, 1, diffs.size());
 	}
-	
+
 	/**
 	 * Tests same and different tokens
 	 */
 	@Test
-	public void testSTokenCompare() {
+	public void testTokenCompare() {
 		SampleGenerator.createPrimaryData(template.getDocument());
 		SampleGenerator.createPrimaryData(other.getDocument());
 
@@ -174,6 +175,24 @@ public class Diff2Test {
 
 		assertFalse(getFixture().isIsomorph());
 		assertEquals(3, getFixture().getIsoObjects().size());
+	}
+
+	/**
+	 * Tests the mapping table {@link Diff2#getIsoObjects()} whether it contains
+	 * the correct correspondence of token objects.
+	 */
+	@Test
+	public void testTokenCompareIsoObjects() {
+		SampleGenerator.createTokens(template.getDocument());
+		SampleGenerator.createTokens(other.getDocument());
+		
+		assertTrue(getFixture().isIsomorph());
+		int i= 0;
+		for (SToken tok: template.getDocument().getDocumentGraph().getTokens()){
+			assertNotNull(getFixture().getIsoObjects().get(tok));
+			assertEquals(tok, template.getDocument().getDocumentGraph().getTokens().get(i));
+			i++;
+		}
 	}
 
 	@Test
@@ -374,32 +393,62 @@ public class Diff2Test {
 		assertFalse(getFixture().checkTwoLayers(tempLayer, otherLayer));
 	}
 
-	// @Test
-	// public void testRealData() throws FileNotFoundException {
-	// File inFile1 = new
-	// File("TCF-Test/SaltXML-Corpus/TCF-Corpus/parser_a.salt");
-	// URI uri1 = URI.createFileURI(inFile1.getAbsolutePath());
-	// SDocumentGraph graphA = SaltFactory.loadSDocumentGraph(uri1);
-	//
-	// File inFile2 = new
-	// File("TCF-Test/SaltXML-Corpus/TCF-Corpus/parser_b.salt");
-	// URI uri2 = URI.createFileURI(inFile2.getAbsolutePath());
-	// SDocumentGraph graphB = SaltFactory.loadSDocumentGraph(uri2);
-	//
-	// Diff newDiff = new Diff(graphA, graphB);
-	// boolean iso = newDiff.isIsomorph();
-	//
-	// Diff newerDiff = new Diff(graphA, graphB);
-	// Set<Difference> diffs = newerDiff.findDiffs();
-	// Iterator<Difference> diffIt = diffs.iterator();
-	//
-	// PrintWriter out = new PrintWriter("filename.txt");
-	// while (diffIt.hasNext()) {
-	// out.println(diffIt.next().toString());
-	//
-	// }
-	// out.flush();
-	// out.close();
-	//
-	// }
+	/**
+	 * Checks differences between to graphs, which are isomorph. 
+	 * The here tested structure is
+	 * {@link SampleGenerator#createSyntaxAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}
+	 */
+	@Test
+	public void test_SyntaxAnnotation(){
+		SampleGenerator.createSyntaxAnnotations(template.getDocument());
+		SampleGenerator.createSyntaxAnnotations(other.getDocument());
+		Set<Difference> diffs= getFixture().getDifferences();
+		assertEquals(0, diffs.size());
+	}
+	
+	/**
+	 * Checks differences between to graphs, which are isomorph. 
+	 * The here tested structure is
+	 * {@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}.
+	 */
+	@Test
+	public void test_InformationStructureAnnotations(){
+		SampleGenerator.createInformationStructureAnnotations(template.getDocument());
+		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
+		Set<Difference> diffs= getFixture().getDifferences();
+		assertEquals(0, diffs.size());
+	}
+	/**
+	 * Checks differences between to graphs, which are isomorph. 
+	 * The here tested structure is
+	 * {@link SampleGenerator#createDependencies(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}
+	 */
+	@Test
+	public void test_Dependencies(){
+		SampleGenerator.createDependencies(template.getDocument());
+		SampleGenerator.createDependencies(other.getDocument());
+		Set<Difference> diffs= getFixture().getDifferences();
+		assertEquals(0, diffs.size());
+	}
+	
+	/**
+	 * Checks differences between to graphs, which are isomorph. 
+	 * The here tested structure is:
+	 * <ul>
+	 *  <li>{@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}</li>
+	 *  <li>{@link SampleGenerator#createSyntaxAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}</li>
+	 *  <li>{@link SampleGenerator#createDependencies(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)</li>
+	 * </ul>
+	 */
+	@Test
+	public void test_AllSamples(){
+		SampleGenerator.createInformationStructureAnnotations(template.getDocument());
+		SampleGenerator.createSyntaxAnnotations(template.getDocument());
+		SampleGenerator.createDependencies(template.getDocument());
+		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
+		SampleGenerator.createSyntaxAnnotations(other.getDocument());
+		SampleGenerator.createDependencies(other.getDocument());
+		Set<Difference> diffs= getFixture().getDifferences();
+		assertEquals(0, diffs.size());
+	}
 }
