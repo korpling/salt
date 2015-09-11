@@ -41,14 +41,15 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltElementNotInGraphException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
+import de.hu_berlin.u.saltnpepper.salt.util.Difference;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.DataSourceAccessor;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff.Difference;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff2;
 
 @SuppressWarnings("serial")
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
@@ -479,6 +480,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end) {
+		if (sequentialDS== null){
+			throw new SaltInsertionException(this, sequentialDS, "The passed sequentialDS is empty. ");
+		}
+		if (sequentialDS.getId()== null || !containsNode(sequentialDS.getId())){
+			throw new SaltInsertionException(this, sequentialDS, "The passed sequentialDS does not belong to this document graph. ");
+		}
 		SToken sTok = SaltFactory.createSToken();
 		DataSourceSequence sequence = new DataSourceSequence<Number>();
 		sequence.setStart(start);
@@ -883,15 +890,60 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc SDocumentGraph#isIsomorph()} **/
 	@Override
 	public boolean isIsomorph(SDocumentGraph other) {
-		Diff diff = new Diff(this, other);
+		Diff2 diff = new Diff2(this, other);
 		return (diff.isIsomorph());
 	}
 
 	/** {@inheritDoc SDocumentGraph#findDiffs()} **/
 	@Override
 	public Set<Difference> findDiffs(SDocumentGraph other) {
-		Diff diff = new Diff(this, other);
+		Diff2 diff = new Diff2(this, other);
 		return (diff.findDiffs());
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType) {
+		List<SNode> children = new ArrayList<>();
+		List<SRelation> relations = parent.getOutRelations();
+		if (relations != null) {
+			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
+				if (SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
+					SNode child = relation.getTarget();
+					if (child == null) {
+						throw new SaltException("Cannot merge data, because otherBase was null for relation '" + relation + "'. ");
+					}
+					children.add(child);
+				}
+			}
+		}
+		return children;
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType) {
+		ArrayList<SNode> sharedParents = new ArrayList<>();
+		if ((children.size() > 0) && (children.get(0) != null)) {
+			List<SRelation> rels = children.get(0).getInRelations();
+			if ((rels != null) && (rels.size() > 0)) {
+				// A merge candidate has to be connected to every base node
+				for (SRelation<? extends SNode, ? extends SNode> baseRelation : rels) {
+					sharedParents.add(baseRelation.getSource());
+				}
+				for (SNode baseNode : children) {
+					ArrayList<SNode> parents = new ArrayList<>();
+					for (SRelation<? extends SNode, ? extends SNode> sRelation : baseNode.getInRelations()) {
+						SNode parent = sRelation.getSource();
+						if (SALT_TYPE.class2SaltType(parent.getClass()).contains(nodeType)) {
+							parents.add(parent);
+						}
+					}
+					sharedParents.retainAll(parents);
+				}
+			}
+		}
+		return sharedParents;
 	}
 
 	@Override

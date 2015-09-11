@@ -33,9 +33,9 @@ import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.DataSourceSequence;
+import de.hu_berlin.u.saltnpepper.salt.util.Difference;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff.Difference;
 
 /**
  * The document-structure covers the "real" linguistic data, which means primary
@@ -908,4 +908,31 @@ public interface SDocumentGraph extends SGraph {
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
 	public Set<Difference> findDiffs(SDocumentGraph other);
+	
+	/**
+	 * Returns a list of nodes in base document. The returned nodes are
+	 * equivalents to the direct children of the passed parent node. The
+	 * children are retrieved via traversing of relations of the passed
+	 * {@link SALT_TYPE}.
+	 * 
+	 * @param parent
+	 *            node to who the children are retrieved
+	 * @param relationType
+	 *            type of relations to be traversed
+	 * @return a list of children nodes
+	 */
+	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType);
+
+	/**
+	 * Returns a list of nodes that are the parents of every node in the given
+	 * base list. Only relations with the given {@link SALT_TYPE} will be
+	 * considered.
+	 * 
+	 * @param children
+	 *            list of nodes whose parents are looked for
+	 * @param nodeType
+	 *            regarded types of relations
+	 * @return a list of parents
+	 */
+	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType);
 } // SDocumentGraph
