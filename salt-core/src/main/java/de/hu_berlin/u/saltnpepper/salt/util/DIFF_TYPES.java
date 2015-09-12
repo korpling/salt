@@ -45,6 +45,6 @@ public enum DIFF_TYPES {
 	 * one
 	 */
 	LAYER_MISSING,
-	/** the compared layers differ in their name */
-	LAYER_NAME_DIFFERING
+	/** the compared layers differ in their name, the number of nodes or the number of relations */
+	LAYER_DIFFERING
 }

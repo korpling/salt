@@ -79,18 +79,18 @@ public class Diff2 {
 
 	private Map<String, Boolean> options = null;
 
-	/**
-	 * When true, even all annotations of nodes and relations are used for
-	 * isomorphie check and difference computation.
-	 **/
-	public static final String OPTION_CHECK_ANNOTATION = "annoIso";
-	/** ??? **/
-	public static final String OPTION_CHECK_ANNOTATION_DIFF = "annoDiff";
-	/**
-	 * When true identifiers needs to be the same in isomorphie check and
-	 * difference computation.
-	 **/
-	public static final String OPTION_CHECK_ID = "idCheck";
+	// /**
+	// * When true, even all annotations of nodes and relations are used for
+	// * isomorphie check and difference computation.
+	// **/
+	// public static final String OPTION_CHECK_ANNOTATION = "annoIso";
+	// /** ??? **/
+	// public static final String OPTION_CHECK_ANNOTATION_DIFF = "annoDiff";
+	// /**
+	// * When true identifiers needs to be the same in isomorphie check and
+	// * difference computation.
+	// **/
+	// public static final String OPTION_CHECK_ID = "idCheck";
 	/**
 	 * When true, differences in {@link SFeature} have no influence on
 	 * isomorphie and will not produce any differences.
@@ -121,6 +121,11 @@ public class Diff2 {
 	 * not produce any differences.
 	 */
 	public static final String OPTION_IGNORE_NAME = "ignoreName";
+	/**
+	 * When true, layers will not be checked when computing isomorphie and
+	 * differences.
+	 */
+	public static final String OPTION_IGNORE_LAYER = "ignoreLayer";
 
 	/**
 	 * Initializes Diff object with the two graphs <code>template</code> and
@@ -158,6 +163,9 @@ public class Diff2 {
 		}
 		if (!options.containsKey(OPTION_IGNORE_NAME)) {
 			options.put(OPTION_IGNORE_NAME, true);
+		}
+		if (!options.containsKey(OPTION_IGNORE_LAYER)) {
+			options.put(OPTION_IGNORE_LAYER, false);
 		}
 	}
 
@@ -244,7 +252,7 @@ public class Diff2 {
 	 * @return true, if graphs are isomorphic, false otherwise.
 	 */
 	private boolean findDiffs(boolean diffsRequested) {
-		if (!compareSizes(templateGraph, otherGraph)) {
+		if (!compareSize(templateGraph, otherGraph)) {
 			if (!diffsRequested) {
 				return false;
 			}
@@ -260,7 +268,6 @@ public class Diff2 {
 			}
 		}
 		List<SNode> roots = otherGraph.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
-		System.out.println("roots: " + roots);
 		if ((roots == null) || (roots.size() == 0)) {
 			// logger.warn("Cannot start computing of differences, since no tokens exist for document '{}'.",
 			// templateGraph.getId());
@@ -274,7 +281,6 @@ public class Diff2 {
 			if (getDifferences().size() > 0) {
 				return (false);
 			}
-			System.out.println("remainingTemplateNodes: " + remainingTemplateNodes);
 			if (remainingTemplateNodes.size() > 0) {
 				for (SNode remainingNode : remainingTemplateNodes) {
 					if (!diffsRequested) {
@@ -301,9 +307,11 @@ public class Diff2 {
 				return false;
 			}
 		}
-		if (!checkLayers(templateGraph, otherGraph, diffsRequested)) {
-			if (!diffsRequested) {
-				return false;
+		if (!options.get(OPTION_IGNORE_LAYER)) {
+			if (!compareLayers(templateGraph, otherGraph, diffsRequested)) {
+				if (!diffsRequested) {
+					return false;
+				}
 			}
 		}
 		return true;
@@ -335,7 +343,7 @@ public class Diff2 {
 	 *            second SDocGraph
 	 * @return returns whether sizes are the same
 	 **/
-	private boolean compareSizes(SDocumentGraph template, SDocumentGraph other) {
+	private boolean compareSize(SDocumentGraph template, SDocumentGraph other) {
 		// size comparison for all data structures in Salt beside STimeline
 		if (template.getNodes().size() != other.getNodes().size()) {
 			return false;
@@ -378,6 +386,11 @@ public class Diff2 {
 		}
 		if (template.getTimelineRelations().size() != other.getTimelineRelations().size()) {
 			return false;
+		}
+		if (!options.get(OPTION_IGNORE_LAYER)) {
+			if (template.getLayers().size() != other.getLayers().size()) {
+				return (false);
+			}
 		}
 		return true;
 	}
@@ -832,7 +845,6 @@ public class Diff2 {
 		 */
 		@Override
 		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge, SNode otherNode, long order) {
-			System.out.println("--> " + currNode);
 			if (currNode instanceof SSpan) {
 				if (!findIsomorphicNode(currNode, SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SSPAN)) {
 					abort = true;
@@ -860,11 +872,11 @@ public class Diff2 {
 			// list of all equivalents to children of current node in other
 			// graph
 			List<SNode> children = otherGraph.getChildren(otherNode, sTypeRelations);
-			
-			List<SNode> templateChildren= new ArrayList<SNode>();
-			for (SNode child: children){
-				SNode templateChild= getIsoNodes().inverse().get(child);
-				if (templateChild!= null){
+
+			List<SNode> templateChildren = new ArrayList<SNode>();
+			for (SNode child : children) {
+				SNode templateChild = getIsoNodes().inverse().get(child);
+				if (templateChild != null) {
 					templateChildren.add(templateChild);
 				}
 			}
@@ -879,8 +891,6 @@ public class Diff2 {
 				templateNode = sharedParents.get(0);
 			}
 
-			System.out.println("--> template node: " + templateNode);
-
 			if (templateNode == null) {
 				// no equivalent to currNode in base document was found
 
@@ -892,10 +902,7 @@ public class Diff2 {
 			} else {
 				boolean isIsomorph = true;
 				getIsoNodes().put(templateNode, otherNode);
-				System.out.println("remainingTemplateNodes before: " + remainingTemplateNodes);
-				System.out.println("remove: " + templateNode);
 				remainingTemplateNodes.remove(templateNode);
-				System.out.println("remainingTemplateNodes after: " + remainingTemplateNodes);
 				// check whether both data sources have the same id
 				Set<Difference> subDiffs = new HashSet<Difference>();
 				compareIdentifiableElements(templateNode, otherNode, subDiffs);
@@ -904,7 +911,6 @@ public class Diff2 {
 						return false;
 					}
 					isIsomorph = false;
-					System.out.println("add diff 1");
 					addDifference(templateNode, otherNode, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
 				}
 				// check whether both data sources have the same labels
@@ -915,7 +921,6 @@ public class Diff2 {
 						return false;
 					}
 					isIsomorph = false;
-					System.out.println("add diff 2");
 					addDifference(templateNode, otherNode, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
 				}
 				return (isIsomorph);
@@ -1268,97 +1273,180 @@ public class Diff2 {
 
 	}
 
-	public boolean checkLayers(SDocumentGraph template, SDocumentGraph other, Boolean diff) {
-		Set<SLayer> tempLayers = (Set<SLayer>) template.getLayers();
-		Set<SLayer> otherLayers = (Set<SLayer>) other.getLayers();
+	/**
+	 * Compares all layers in template graph with all layers in other graph and
+	 * searches for isomorphic pertners. To layers are isomorph, when have the
+	 * same name and contain the same number of nodes and relations and have the
+	 * same labels. <br/>
+	 * When diff is true, the return value is not necessarily correct, since in
+	 * that case the differences in {@link #getDifferences()} is computed. To
+	 * check the isomorphie there must be no differences.
+	 * 
+	 * @param template
+	 * @param other
+	 * @param diff
+	 * @return
+	 */
+	public boolean compareLayers(SDocumentGraph template, SDocumentGraph other, Boolean diff) {
+		Set<SLayer> remainingLayers = new HashSet<SLayer>();
 
-		Boolean iso = true;
-
-		for (SLayer i : tempLayers) {
-			boolean tempIso = false;
-			for (SLayer j : otherLayers) {
-				if (checkTwoLayers(i, j)) {
-					tempIso = true;
-				}
-				if (!tempIso) {
-					iso = false;
-					addDifference(i, null, null, DIFF_TYPES.LAYER_MISSING, null);
-				}
-			}
+		// create a map corresponding the layer's anme and the layer
+		Map<String, SLayer> nameToLayer = new Hashtable<>();
+		Iterator<SLayer> iterator = template.getLayers().iterator();
+		while (iterator.hasNext()) {
+			SLayer templateLayer = iterator.next();
+			nameToLayer.put(templateLayer.getName(), templateLayer);
+			remainingLayers.add(templateLayer);
 		}
 
-		for (SLayer j : otherLayers) {
-			boolean tempIso = false;
-			for (SLayer i : tempLayers) {
-				if (checkTwoLayers(i, j)) {
-					tempIso = true;
+		// for each layer in other search for a layer in template
+		iterator = other.getLayers().iterator();
+		while (iterator.hasNext()) {
+			SLayer otherLayer = iterator.next();
+			SLayer templateLayer = nameToLayer.get(otherLayer.getName());
+			if (templateLayer == null) {
+				// no partner for rel was found, since the combination
+				// textual data source, start and end value has matched
+				if (!diff) {
+					return false;
 				}
-				if (!tempIso) {
-					iso = false;
-					addDifference(null, j, null, DIFF_TYPES.LAYER_MISSING, null);
+				addDifference(null, otherLayer, null, DIFF_TYPES.LAYER_MISSING, null);
+			} else {
+				if (templateLayer.getNodes().size() != otherLayer.getNodes().size()) {
+					addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, null);
+					if (!diff) {
+						return false;
+					}
 				}
+				if (templateLayer.getRelations().size() != otherLayer.getRelations().size()) {
+					addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, null);
+					if (!diff) {
+						return false;
+					}
+				}
+				// check whether both layers have the same id
+				Set<Difference> subDiffs = new HashSet<Difference>();
+				compareIdentifiableElements(templateLayer, otherLayer, subDiffs);
+				if (subDiffs.size() > 0) {
+					if (!diff) {
+						return false;
+					}
+					addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, subDiffs);
+				}
+				// check whether both data sources have the same labels
+				subDiffs = new HashSet<Difference>();
+				compareAnnotationContainers(templateLayer, otherLayer, subDiffs);
+				if (subDiffs.size() > 0) {
+					if (!diff) {
+						return false;
+					}
+					addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, subDiffs);
+				}
+				remainingLayers.remove(templateLayer);
 			}
 		}
-
-		return iso;
+		// check the remaining data sources
+		if (remainingLayers.size() > 0) {
+			for (SLayer layer : remainingLayers) {
+				if (!diff) {
+					return false;
+				}
+				addDifference(layer, null, null, DIFF_TYPES.NODE_MISSING, null);
+			}
+		}
+		return (true);
+		// Set<SLayer> tempLayers = (Set<SLayer>) template.getLayers();
+		// Set<SLayer> otherLayers = (Set<SLayer>) other.getLayers();
+		//
+		// Boolean iso = true;
+		//
+		// for (SLayer i : tempLayers) {
+		// boolean tempIso = false;
+		// for (SLayer j : otherLayers) {
+		// if (checkTwoLayers(i, j)) {
+		// tempIso = true;
+		// }
+		// if (!tempIso) {
+		// iso = false;
+		// addDifference(i, null, null, DIFF_TYPES.LAYER_MISSING, null);
+		// }
+		// }
+		// }
+		//
+		// for (SLayer j : otherLayers) {
+		// boolean tempIso = false;
+		// for (SLayer i : tempLayers) {
+		// if (checkTwoLayers(i, j)) {
+		// tempIso = true;
+		// }
+		// if (!tempIso) {
+		// iso = false;
+		// addDifference(null, j, null, DIFF_TYPES.LAYER_MISSING, null);
+		// }
+		// }
+		// }
+		//
+		// return iso;
 	}
 
-	public boolean checkTwoLayers(SLayer template, SLayer other) {
-		Set<SNode> tNodes = template.getNodes();
-		Set<SRelation<SNode, SNode>> tRelations = template.getRelations();
-
-		Set<SNode> oNodes = other.getNodes();
-		Set<SRelation<SNode, SNode>> oRelations = other.getRelations();
-
-		Boolean iso = true;
-
-		for (SNode t : tNodes) {
-			if (!oNodes.contains(getIsoNodes().get(t))) {
-				iso = false;
-			}
-		}
-
-		for (SNode o : oNodes) {
-			if (!tNodes.contains(getIsoNodes().inverse().get(o))) {
-				iso = false;
-			}
-		}
-
-		if (tRelations.size() != oRelations.size()) {
-			iso = false;
-		}
-
-		for (SRelation<? extends SNode, ? extends SNode> t : tRelations) {
-			SNode tempSource = t.getSource();
-			SNode tempTarget = t.getTarget();
-			for (SRelation o : oRelations) {
-				boolean tempIso = false;
-				// TODO check whether equals() can be used here
-				if (getIsoNodes().get(tempSource).equals(o.getSource()) && getIsoNodes().get(tempTarget).equals(o.getTarget())) {
-					tempIso = true;
-				}
-				if (tempIso == false) {
-					iso = false;
-					addDifference(t, null, other, DIFF_TYPES.RELATION_MISSING, null);
-				}
-			}
-		}
-
-		for (SRelation<? extends SNode, ? extends SNode> o : oRelations) {
-			SNode tempSource = o.getSource();
-			SNode tempTarget = o.getTarget();
-			for (SRelation t : tRelations) {
-				boolean tempIso = false;
-				// TODO check whether equals() can be used here
-				if (getIsoNodes().inverse().get(tempSource).equals(t.getSource()) && getIsoNodes().inverse().get(tempTarget).equals(t.getTarget())) {
-					tempIso = true;
-				}
-				if (tempIso == false) {
-					iso = false;
-					addDifference(null, t, template, DIFF_TYPES.RELATION_MISSING, null);
-				}
-			}
-		}
-		return iso;
-	}
+	// public boolean checkTwoLayers(SLayer template, SLayer other) {
+	// Set<SNode> tNodes = template.getNodes();
+	// Set<SRelation<SNode, SNode>> tRelations = template.getRelations();
+	//
+	// Set<SNode> oNodes = other.getNodes();
+	// Set<SRelation<SNode, SNode>> oRelations = other.getRelations();
+	//
+	// Boolean iso = true;
+	//
+	// for (SNode t : tNodes) {
+	// if (!oNodes.contains(getIsoNodes().get(t))) {
+	// iso = false;
+	// }
+	// }
+	//
+	// for (SNode o : oNodes) {
+	// if (!tNodes.contains(getIsoNodes().inverse().get(o))) {
+	// iso = false;
+	// }
+	// }
+	//
+	// if (tRelations.size() != oRelations.size()) {
+	// iso = false;
+	// }
+	//
+	// for (SRelation<? extends SNode, ? extends SNode> t : tRelations) {
+	// SNode tempSource = t.getSource();
+	// SNode tempTarget = t.getTarget();
+	// for (SRelation o : oRelations) {
+	// boolean tempIso = false;
+	// // TODO check whether equals() can be used here
+	// if (getIsoNodes().get(tempSource).equals(o.getSource()) &&
+	// getIsoNodes().get(tempTarget).equals(o.getTarget())) {
+	// tempIso = true;
+	// }
+	// if (tempIso == false) {
+	// iso = false;
+	// addDifference(t, null, other, DIFF_TYPES.RELATION_MISSING, null);
+	// }
+	// }
+	// }
+	//
+	// for (SRelation<? extends SNode, ? extends SNode> o : oRelations) {
+	// SNode tempSource = o.getSource();
+	// SNode tempTarget = o.getTarget();
+	// for (SRelation t : tRelations) {
+	// boolean tempIso = false;
+	// // TODO check whether equals() can be used here
+	// if (getIsoNodes().inverse().get(tempSource).equals(t.getSource()) &&
+	// getIsoNodes().inverse().get(tempTarget).equals(t.getTarget())) {
+	// tempIso = true;
+	// }
+	// if (tempIso == false) {
+	// iso = false;
+	// addDifference(null, t, template, DIFF_TYPES.RELATION_MISSING, null);
+	// }
+	// }
+	// }
+	// return iso;
+	// }
 }

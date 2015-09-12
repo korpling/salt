@@ -385,16 +385,21 @@ public class Diff2Test {
 		other.createToken(other.getTextualDSs().get(0), 2, 11);
 
 		SLayer tempLayer = SaltFactory.createSLayer();
+		template.addLayer(tempLayer);
 		SLayer otherLayer = SaltFactory.createSLayer();
+		other.addLayer(otherLayer);
 
 		template.getTokens().get(0).addLayer(tempLayer);
 		other.getTokens().get(0).addLayer(otherLayer);
 
 		assertTrue(getFixture().isIsomorph());
-		assertTrue(getFixture().checkTwoLayers(tempLayer, otherLayer));
+//		assertTrue(getFixture().checkTwoLayers(tempLayer, otherLayer));
 
+		System.out.println("tokens before: "+ tempLayer.getNodes());
 		template.getTokens().get(1).addLayer(tempLayer);
-		assertFalse(getFixture().checkTwoLayers(tempLayer, otherLayer));
+		System.out.println("tokens after: "+ tempLayer.getNodes());
+		assertFalse(getFixture().isIsomorph());
+//		assertFalse(getFixture().checkTwoLayers(tempLayer, otherLayer));
 	}
 
 	/**

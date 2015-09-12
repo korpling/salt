@@ -22,6 +22,15 @@ import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
 @SuppressWarnings("serial")
 public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
 
+	/** {@inheritDoc} **/
+	@Override
+	public void addLayer(SLayer layer) {
+		if (layer.getName()== null){
+			layer.setName("l"+getLayers().size());
+		}
+		super.addLayer(layer);
+	}
+	
 	/**
 	 * {@inheritDoc SGraph#getSLayerByName(String)}
 	 */
