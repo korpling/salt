@@ -49,7 +49,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.Difference;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.DataSourceAccessor;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff2;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.Diff;
 
 @SuppressWarnings("serial")
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
@@ -890,14 +890,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc SDocumentGraph#isIsomorph()} **/
 	@Override
 	public boolean isIsomorph(SDocumentGraph other) {
-		Diff2 diff = new Diff2(this, other);
+		Diff diff = new Diff(this, other);
 		return (diff.isIsomorph());
 	}
 
 	/** {@inheritDoc SDocumentGraph#findDiffs()} **/
 	@Override
 	public Set<Difference> findDiffs(SDocumentGraph other) {
-		Diff2 diff = new Diff2(this, other);
+		Diff diff = new Diff(this, other);
 		return (diff.findDiffs());
 	}
 	
