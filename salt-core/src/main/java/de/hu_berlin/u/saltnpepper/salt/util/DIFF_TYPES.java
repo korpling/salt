@@ -36,6 +36,8 @@ public enum DIFF_TYPES {
 	 * other one
 	 */
 	RELATION_MISSING,
+	/** the compared relations differ in for instance their labels **/
+	RELATION_DIFFERING,
 	/** the compared relations differ in their type */
 	RELATION_TYPE_DIFFERING,
 	/** the compared relations differ in their name */

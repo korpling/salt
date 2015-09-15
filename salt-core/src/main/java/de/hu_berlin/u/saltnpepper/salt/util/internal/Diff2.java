@@ -297,12 +297,14 @@ public class Diff2 {
 		// return false;
 		// }
 		// }
-		if (!checkPointingRelations(templateGraph, otherGraph, diffsRequested)) {
+		//compare pointing relations
+		if (!compareRelations(templateGraph, templateGraph.getPointingRelations(), otherGraph, otherGraph.getPointingRelations(),diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!checkOrderRelations(templateGraph, otherGraph, diffsRequested)) {
+		//compare order relations
+		if (!compareRelations(templateGraph, templateGraph.getOrderRelations(), otherGraph, otherGraph.getOrderRelations(),diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
@@ -1180,50 +1182,141 @@ public class Diff2 {
 	// return iso;
 	// }
 
-	public boolean checkPointingRelations(SDocumentGraph template, SDocumentGraph other, Boolean diff) {
-		HashSet<SPointingRelation> tempSet = new HashSet<>(template.getPointingRelations());
-		Iterator<SPointingRelation> itTemp = tempSet.iterator();
+	/**
+	 * Compares all {@link SPointingRelation} of other and template graph.
+	 * 
+	 * @param template
+	 * @param other
+	 * @param diff
+	 * @return
+	 */
+	public boolean compareRelations(SDocumentGraph template, List<? extends SRelation> templateRels, SDocumentGraph other,List<? extends SRelation> otherRels,  Boolean diff) {
+		boolean iso = true;
 
-		HashSet<SPointingRelation> otherSet = new HashSet<>(other.getPointingRelations());
-		Iterator<SPointingRelation> itOther = otherSet.iterator();
-
-		boolean relIso = true;
-		// check whether template contains all pointing relations of other
-		while (itTemp.hasNext()) {
-			SPointingRelation tempPR = itTemp.next();
-			boolean tempIso = false;
-			SNode tempSource = tempPR.getSource();
-			SNode tempTarget = tempPR.getTarget();
-			for (SPointingRelation t : other.getPointingRelations()) {
-				// TODO check whether equals() can be used here
-				if (getIsoNodes().get(tempSource).equals(t.getSource()) && getIsoNodes().get(tempTarget).equals(t.getTarget())) {
-					tempIso = true;
-				}
-			}
-			if (tempIso == false) {
-				relIso = false;
-				addDifference(tempPR, null, null, DIFF_TYPES.RELATION_MISSING, null);
-			}
+		Set<SRelation> otherRelSet = new HashSet<SRelation>();
+		Iterator<? extends SRelation> iterator = otherRels.iterator();
+		while (iterator.hasNext()) {
+			otherRelSet.add(iterator.next());
 		}
 
-		while (itOther.hasNext()) {
-			SPointingRelation otherPR = itOther.next();
-			boolean otherIso = false;
-			SNode otherSource = otherPR.getSource();
-			SNode otherTarget = otherPR.getTarget();
-			for (SPointingRelation t : template.getPointingRelations()) {
-				// TODO check whether equals() can be used here
-				if (getIsoNodes().get(otherSource).equals(t.getSource()) && getIsoNodes().get(otherTarget).equals(t.getTarget())) {
-					otherIso = true;
+		// iterate over all pointing relations in template
+		iterator = templateRels.iterator();
+		while (iterator.hasNext()) {
+			SRelation<SNode, SNode> tempRel = iterator.next();
+			SNode tempSource = tempRel.getSource();
+			SNode tempTarget = tempRel.getTarget();
+			SNode otherSource = getIsoNodes().get(tempSource);
+			SNode otherTarget = getIsoNodes().get(tempTarget);
+			
+			// iterate over all relations between other source and other target
+			if (otherSource != null && otherTarget != null) {
+				Iterator<SRelation<SNode, SNode>> inBetweenIterator = other.getInRelations(otherTarget.getId()).iterator();
+				boolean isRelIso = true;
+				while (inBetweenIterator.hasNext()) {
+					isRelIso = true;
+					SRelation<SNode, SNode> otherRel = inBetweenIterator.next();
+					// check whether both relations are isomorph
+					if (otherRel.getSource().equals(otherSource) && tempRel.getClass().equals(otherRel.getClass())) {
+						// a potential partner for tempRel was found
+
+						// check whether both data sources have the same
+						// identifier
+						Set<Difference> subDiffs = new HashSet<Difference>();
+						compareIdentifiableElements(tempRel, otherRel, subDiffs);
+						if (subDiffs.size() > 0) {
+							if (!diff) {
+								return false;
+							}
+							isRelIso = false;
+							addDifference(tempRel, otherRel, null, DIFF_TYPES.RELATION_DIFFERING, subDiffs);
+						}
+						// check whether both data sources have the same labels
+						subDiffs = new HashSet<Difference>();
+						compareAnnotationContainers(tempRel, otherRel, subDiffs);
+						if (subDiffs.size() > 0) {
+							if (!diff) {
+								return false;
+							}
+							isRelIso = false;
+							addDifference(tempRel, otherRel, null, DIFF_TYPES.RELATION_DIFFERING, subDiffs);
+						}
+					}else{
+						isRelIso= false;
+					}
+					// both relations are isomorph
+					if (isRelIso) {
+						otherRelSet.remove(otherRel);
+						break;
+					}else{
+						iso= false;
+					}
+				}
+				// the current template relation has no partner
+				if (!isRelIso){
+					addDifference(tempRel, null, null, DIFF_TYPES.RELATION_MISSING, null);
 				}
 			}
-			if (otherIso == false) {
-				relIso = false;
-				addDifference(null, otherPR, null, DIFF_TYPES.RELATION_MISSING, null);
-			}
 		}
+		
+		// all remaining rels from other have no matching partner
+		if (otherRelSet.size() > 0){
+			iterator= otherRelSet.iterator();
+			while(iterator.hasNext()){
+				addDifference(null, iterator.next(), null, DIFF_TYPES.RELATION_MISSING, null);
+			}
+			iso= false;
+		}
+		
+		return (iso);
 
-		return relIso;
+		// HashSet<SPointingRelation> tempSet = new
+		// HashSet<>(template.getPointingRelations());
+		// Iterator<SPointingRelation> itTemp = tempSet.iterator();
+		//
+		// HashSet<SPointingRelation> otherSet = new
+		// HashSet<>(other.getPointingRelations());
+		// Iterator<SPointingRelation> itOther = otherSet.iterator();
+		//
+		// boolean relIso = true;
+		// // check whether template contains all pointing relations of other
+		// while (itTemp.hasNext()) {
+		// SPointingRelation tempPR = itTemp.next();
+		// boolean tempIso = false;
+		// SNode tempSource = tempPR.getSource();
+		// SNode tempTarget = tempPR.getTarget();
+		// for (SPointingRelation t : other.getPointingRelations()) {
+		// // TODO check whether equals() can be used here
+		// if (getIsoNodes().get(tempSource).equals(t.getSource()) &&
+		// getIsoNodes().get(tempTarget).equals(t.getTarget())) {
+		// tempIso = true;
+		// }
+		// }
+		// if (tempIso == false) {
+		// relIso = false;
+		// addDifference(tempPR, null, null, DIFF_TYPES.RELATION_MISSING, null);
+		// }
+		// }
+		//
+		// while (itOther.hasNext()) {
+		// SPointingRelation otherPR = itOther.next();
+		// boolean otherIso = false;
+		// SNode otherSource = otherPR.getSource();
+		// SNode otherTarget = otherPR.getTarget();
+		// for (SPointingRelation t : template.getPointingRelations()) {
+		// // TODO check whether equals() can be used here
+		// if (getIsoNodes().get(otherSource).equals(t.getSource()) &&
+		// getIsoNodes().get(otherTarget).equals(t.getTarget())) {
+		// otherIso = true;
+		// }
+		// }
+		// if (otherIso == false) {
+		// relIso = false;
+		// addDifference(null, otherPR, null, DIFF_TYPES.RELATION_MISSING,
+		// null);
+		// }
+		// }
+		//
+		// return relIso;
 
 	}
 
@@ -1275,7 +1368,7 @@ public class Diff2 {
 
 	/**
 	 * Compares all layers in template graph with all layers in other graph and
-	 * searches for isomorphic pertners. To layers are isomorph, when have the
+	 * searches for isomorphic partners. To layers are isomorph, when have the
 	 * same name and contain the same number of nodes and relations and have the
 	 * same labels. <br/>
 	 * When diff is true, the return value is not necessarily correct, since in

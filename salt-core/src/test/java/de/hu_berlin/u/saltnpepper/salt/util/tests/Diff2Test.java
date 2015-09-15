@@ -368,8 +368,7 @@ public class Diff2Test {
 		pr1.setSource((SToken) template.getNodes().get(1));
 		pr1.setTarget((SToken) template.getNodes().get(2));
 		pr1.setGraph(template);
-		getFixture().checkPointingRelations(template, other, true);
-
+		
 		assertFalse(getFixture().isIsomorph());
 
 	}
@@ -471,7 +470,10 @@ public class Diff2Test {
 		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
 		SampleGenerator.createSyntaxAnnotations(other.getDocument());
 		SampleGenerator.createDependencies(other.getDocument());
+		System.out.println("number of prels in template: "+ template.getPointingRelations().size());
+		System.out.println("number of prels in other: "+ other.getPointingRelations().size());
+		
 		Set<Difference> diffs= getFixture().findDiffs();
-		assertEquals(0, diffs.size());
+		assertEquals(""+diffs, 0, diffs.size());
 	}
 }
