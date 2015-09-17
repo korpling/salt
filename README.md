@@ -2,23 +2,23 @@
 
 #Salt
 
-*language-independent
+* **language-independent** <br/>
 Salt supports a huge set of languages and typesets. Each language which can be expressed in UTF-8 is supported by Salt.
-theory-neutral
 
-* Salt is open to any linguistic school or theory, not limited to a specific one.
-tagset independent
+* **theory-neutral** <br/>
+Salt is open to any linguistic school or theory, not limited to a specific one.
 
-* Salt is not bound to a tagset. Annotations are represented as attribute-value pairs and can be chosen freely.
-open source
+* **tagset independent** <br/>
+Salt is not bound to a tagset. Annotations are represented as attribute-value pairs and can be chosen freely.
 
-* Salt is licensed under the Apache License, Version 2.0 and published on Github.
-multimedia support
+* **open source** <br/>
+Salt is licensed under the Apache License, Version 2.0 and published on Github.
 
-* Salt is a text-based model, but also supports the modeling of audio and video corpora.
-annotation layer independent
+* **multimedia support** <br/>
+Salt is a text-based model, but also supports the modeling of audio and video corpora.
 
-* Salt is not limited to a specific set of annotation layers. Since Salt is a graph-based model, you can model many different structures, such as tree structures, span annotations, coreference chains and so on.
+* **annotation layer independent** <br/>
+Salt is not limited to a specific set of annotation layers. Since Salt is a graph-based model, you can model many different structures, such as tree structures, span annotations, coreference chains and so on.
 
 # Want to know more?
 
