@@ -20,7 +20,7 @@ annotation layer independent
 
 * Salt is not limited to a specific set of annotation layers. Since Salt is a graph-based model, you can model many different structures, such as tree structures, span annotations, coreference chains and so on.
 
-# Want to read know more?
+# Want to know more?
 
 * Homepage: http://annis-tools.org/salt
 * Code: https://github.com/korpling/salt
