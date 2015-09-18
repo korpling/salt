@@ -51,7 +51,7 @@ public class SDocumentTest {
 	@Test
 	public void testGetSDocumentGraphLocation() {
 		assertNull(getFixture().getDocumentGraphLocation());
-		File file = SaltTestsUtil.getTempTestFile("bla.salt");
+		File file = SaltTestsUtil.getTempTestFolder("bla.salt");
 		// File file = new File("/home/saltnpepper/bla.salt");
 		URI graphLocation = URI.createFileURI(file.getAbsolutePath());
 		this.getFixture().setDocumentGraphLocation(graphLocation);

@@ -1,14 +1,21 @@
 package de.hu_berlin.u.saltnpepper.salt.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Reader;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -31,6 +38,7 @@ import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.SaltXML10Writer;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.SaltXMLHandler;
 
 /**
@@ -262,7 +270,7 @@ public class SaltUtil {
 	 *            {@link URI} to SaltXML file containing the object
 	 * @return loaded object
 	 */
-	public Object load(URI location) {
+	public static Object load(URI location) {
 		if (location == null) {
 			throw new SaltResourceException("Cannot load Salt object, because the given uri is null.");
 		}
@@ -318,7 +326,7 @@ public class SaltUtil {
 	 * @return returns a saltProject, which is filled with data coming from
 	 *         corpus in uri
 	 */
-	public SaltProject loadSaltProject(URI location) {
+	public static SaltProject loadSaltProject(URI location) {
 		if (!location.toFileString().endsWith(FILE_ENDING_SALT_XML)) {
 			// looks weird, but is necessary in case of uri ends with /
 			if (location.toString().endsWith("/")) {
@@ -357,7 +365,7 @@ public class SaltUtil {
 	 * @param location
 	 *            the {@link URI} to locate the SaltXML file
 	 */
-	public SCorpusGraph loadCorpusGraph(URI location) {
+	public static SCorpusGraph loadCorpusGraph(URI location) {
 		return (loadCorpusGraph(location, 0));
 	}
 
@@ -375,7 +383,7 @@ public class SaltUtil {
 	 *            number of graph to be load, note that the list of graphs
 	 *            starts with 0
 	 */
-	public SCorpusGraph loadCorpusGraph(URI location, Integer numOfCorpusGraph) {
+	public static SCorpusGraph loadCorpusGraph(URI location, Integer numOfCorpusGraph) {
 		if (location == null) {
 			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName() + "' object, because the passed uri is empty. ");
 		}
@@ -428,7 +436,7 @@ public class SaltUtil {
 	 * @param location
 	 *            location of SaltXML to load {@link SDocumentGraph} object.
 	 */
-	public SDocumentGraph loadDocumentGraph(URI location) {
+	public static SDocumentGraph loadDocumentGraph(URI location) {
 		SDocumentGraph retVal = null;
 		Object obj = load(location);
 		if (obj == null) {
@@ -454,6 +462,17 @@ public class SaltUtil {
 	 * @param location
 	 *            location of where to persist object as {@link URI}
 	 */
-	public void saveDocumentGraph(SDocumentGraph documentGraph, URI location) {
+	public static void saveDocumentGraph(SDocumentGraph documentGraph, URI location) {
+		if (documentGraph != null && location != null) {
+			String path = location.toFileString();
+			if (path == null || path.isEmpty()) {
+				path = location.toString();
+			}
+			File out = new File(path);
+			out.getParentFile().mkdirs();
+
+			SaltXML10Writer writer= new SaltXML10Writer(out);
+			writer.writeDocumentGraph(documentGraph);
+		}
 	}
 }

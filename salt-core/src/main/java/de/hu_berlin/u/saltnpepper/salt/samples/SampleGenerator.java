@@ -143,8 +143,8 @@ public class SampleGenerator {
 		corpGraph = createCorpusStructure(corpGraph);
 
 		saltProject.addCorpusGraph(corpGraph);
-		for (SDocument sDocument : corpGraph.getDocuments()) {
-			createSDocumentStructure(sDocument);
+		for (SDocument document : corpGraph.getDocuments()) {
+			createSDocumentStructure(document);
 		}
 		return (saltProject);
 	}
@@ -279,7 +279,7 @@ public class SampleGenerator {
 	 */
 	public static void createDialogue(SDocument document) {
 		if (document == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
 		document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		document.getDocumentGraph().createTextualDS(PRIMARY_TEXT_EN_SPK1);
@@ -393,7 +393,7 @@ public class SampleGenerator {
 	 */
 	public static STextualDS createPrimaryData(SDocument document, String language) {
 		if (document == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
 		if (document.getDocumentGraph() == null) {
 			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
@@ -437,7 +437,7 @@ public class SampleGenerator {
 	 */
 	public static void createTokens(SDocument document) {
 		if (document == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
 		if (document.getDocumentGraph() == null) {
 			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
@@ -490,7 +490,7 @@ public class SampleGenerator {
 	 */
 	public static List<SToken> createTokens(SDocument document, STextualDS textualDS) {
 		if (document == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
 		// as a means to group elements, layers (SLayer) can be used. here, a
 		// layer
@@ -534,23 +534,23 @@ public class SampleGenerator {
 	 * @param start
 	 * @param end
 	 * @param textualDS
-	 * @param sDocument
+	 * @param document
 	 * @param layer
 	 * @return created {@link SToken} object
 	 */
-	public static SToken createToken(int start, int end, STextualDS textualDS, SDocument sDocument, SLayer layer) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static SToken createToken(int start, int end, STextualDS textualDS, SDocument document, SLayer layer) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		if (sDocument.getDocumentGraph() == null) {
-			sDocument.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		if (document.getDocumentGraph() == null) {
+			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		}
-		if (sDocument.getDocumentGraph().getTextualDSs().isEmpty()) {
-			createPrimaryData(sDocument);
-			textualDS = sDocument.getDocumentGraph().getTextualDSs().get(0);
+		if (document.getDocumentGraph().getTextualDSs().isEmpty()) {
+			createPrimaryData(document);
+			textualDS = document.getDocumentGraph().getTextualDSs().get(0);
 		}
 		SToken sToken = SaltFactory.createSToken();
-		sDocument.getDocumentGraph().addNode(sToken);
+		document.getDocumentGraph().addNode(sToken);
 		if (layer != null) {
 			layer.getNodes().add(sToken);
 		}
@@ -559,7 +559,7 @@ public class SampleGenerator {
 		sTextRel.setTarget(textualDS);
 		sTextRel.setStart(start);
 		sTextRel.setEnd(end);
-		sDocument.getDocumentGraph().addRelation(sTextRel);
+		document.getDocumentGraph().addRelation(sTextRel);
 		return (sToken);
 	}
 
@@ -573,50 +573,50 @@ public class SampleGenerator {
 	 * The english text is {@value #PRIMARY_TEXT_EN}, the german text is
 	 * {@value #PRIMARY_TEXT_DE}. Both are tokenized by word borders.
 	 * 
-	 * @param sDocument
+	 * @param document
 	 *            he document containing the {@link STextualDS} objects
 	 */
-	public static void createParallelData(SDocument sDocument, boolean setTypeForPointRel) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createParallelData(SDocument document, boolean setTypeForPointRel) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		STextualDS pd_EN = createPrimaryData(sDocument, LANG_EN);
-		STextualDS pd_DE = createPrimaryData(sDocument, LANG_DE);
+		STextualDS pd_EN = createPrimaryData(document, LANG_EN);
+		STextualDS pd_DE = createPrimaryData(document, LANG_DE);
 
-		List<SToken> englishToks = createTokens(sDocument, pd_EN);
-		List<SToken> germanToks = createTokens(sDocument, pd_DE);
+		List<SToken> englishToks = createTokens(document, pd_EN);
+		List<SToken> germanToks = createTokens(document, pd_DE);
 
 		SPointingRelation pointRel = null;
 
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(englishToks.get(0), germanToks.get(0), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(0), germanToks.get(0), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(englishToks.get(1), germanToks.get(1), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(1), germanToks.get(1), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(englishToks.get(2), germanToks.get(2), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(2), germanToks.get(2), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(englishToks.get(5), germanToks.get(4), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(5), germanToks.get(4), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(englishToks.get(6), germanToks.get(5), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(6), germanToks.get(5), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(englishToks.get(7), germanToks.get(6), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(7), germanToks.get(6), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(englishToks.get(8), germanToks.get(7), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(8), germanToks.get(7), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(englishToks.get(9), germanToks.get(8), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(9), germanToks.get(8), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
 		List<SToken> sTokens = new ArrayList<>();
 		sTokens.add(englishToks.get(3));
 		sTokens.add(englishToks.get(4));
-		SSpan sSpan = sDocument.getDocumentGraph().createSpan(sTokens);
-		pointRel = (SPointingRelation) sDocument.getDocumentGraph().createSRelation(sSpan, germanToks.get(3), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		SSpan sSpan = document.getDocumentGraph().createSpan(sTokens);
+		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(sSpan, germanToks.get(3), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
 	}
@@ -627,11 +627,11 @@ public class SampleGenerator {
 	 * {@value #PRIMARY_TEXT_DE}. Both are tokenized by word borders. TODO
 	 * INSUFFICIENT DOCUMENTATION
 	 * 
-	 * @param sDocument
+	 * @param document
 	 *            he document containing the {@link STextualDS} objects
 	 */
-	public static void createUntypedParallelData(SDocument sDocument) {
-		createParallelData(sDocument, false);
+	public static void createUntypedParallelData(SDocument document) {
+		createParallelData(document, false);
 	}
 
 	/**
@@ -696,22 +696,22 @@ public class SampleGenerator {
 	 * </tr>
 	 * </table>
 	 * 
-	 * @param sDocument
+	 * @param document
 	 *            the document containing the {@link SToken} and
 	 *            {@link STextualDS} objects
 	 */
-	public static void createMorphologyAnnotations(SDocument sDocument) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createMorphologyAnnotations(SDocument document) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		if (sDocument.getDocumentGraph() == null) {
-			sDocument.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		if (document.getDocumentGraph() == null) {
+			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		}
-		if (sDocument.getDocumentGraph().getTextualDSs().isEmpty()) {
-			createPrimaryData(sDocument);
-			createTokens(sDocument);
+		if (document.getDocumentGraph().getTextualDSs().isEmpty()) {
+			createPrimaryData(document);
+			createTokens(document);
 		}
-		List<SToken> sTokens = Collections.synchronizedList(sDocument.getDocumentGraph().getTokens());
+		List<SToken> sTokens = Collections.synchronizedList(document.getDocumentGraph().getTokens());
 
 		{// adding part-of speech annotations
 			SPOSAnnotation sPOSAnno = null;
@@ -762,23 +762,23 @@ public class SampleGenerator {
 	 * </tr>
 	 * </table>
 	 * 
-	 * @param sDocument
+	 * @param document
 	 */
-	public static void createInformationStructureSpan(SDocument sDocument) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createInformationStructureSpan(SDocument document) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		if (sDocument.getDocumentGraph() == null) {
-			sDocument.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		if (document.getDocumentGraph() == null) {
+			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		}
-		if ((sDocument.getDocumentGraph().getTokens() == null) || (sDocument.getDocumentGraph().getTokens().size() == 0)) {
-			if ((sDocument.getDocumentGraph().getTextualDSs() == null) || (sDocument.getDocumentGraph().getTextualDSs().size() == 0)) {
-				SampleGenerator.createPrimaryData(sDocument);
+		if ((document.getDocumentGraph().getTokens() == null) || (document.getDocumentGraph().getTokens().size() == 0)) {
+			if ((document.getDocumentGraph().getTextualDSs() == null) || (document.getDocumentGraph().getTextualDSs().size() == 0)) {
+				SampleGenerator.createPrimaryData(document);
 			}
-			SampleGenerator.createTokens(sDocument);
+			SampleGenerator.createTokens(document);
 		}
 
-		List<SToken> sTokens = Collections.synchronizedList(sDocument.getDocumentGraph().getTokens());
+		List<SToken> sTokens = Collections.synchronizedList(document.getDocumentGraph().getTokens());
 
 		SSpan sSpan = null;
 		SSpanningRelation sSpanRel = null;
@@ -786,7 +786,7 @@ public class SampleGenerator {
 		// annotation
 		sSpan = SaltFactory.createSSpan();
 		// adding the created span to the document-graph
-		sDocument.getDocumentGraph().addNode(sSpan);
+		document.getDocumentGraph().addNode(sSpan);
 		// creating an annotation for information-structure
 		// creating a relation to connect a token with the span
 		sSpanRel = SaltFactory.createSSpanningRelation();
@@ -795,15 +795,15 @@ public class SampleGenerator {
 		// setting the first token as target of the relation
 		sSpanRel.setTarget(sTokens.get(0));
 		// adding the created relation to the document-graph
-		sDocument.getDocumentGraph().addRelation(sSpanRel);
+		document.getDocumentGraph().addRelation(sSpanRel);
 
 		sSpan = SaltFactory.createSSpan();
-		sDocument.getDocumentGraph().addNode(sSpan);
+		document.getDocumentGraph().addNode(sSpan);
 		for (int i = 1; i < sTokens.size(); i++) {
 			sSpanRel = SaltFactory.createSSpanningRelation();
 			sSpanRel.setSource(sSpan);
 			sSpanRel.setTarget(sTokens.get(i));
-			sDocument.getDocumentGraph().addRelation(sSpanRel);
+			document.getDocumentGraph().addRelation(sSpanRel);
 		}
 	}
 
@@ -811,20 +811,20 @@ public class SampleGenerator {
 	 * Annotates the {@link SSpan} objects above the tokenization with
 	 * information structural annotations.
 	 * 
-	 * @param sDocument
+	 * @param document
 	 */
-	public static void createInformationStructureAnnotations(SDocument sDocument) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createInformationStructureAnnotations(SDocument document) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		if (sDocument.getDocumentGraph() == null) {
-			sDocument.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		if (document.getDocumentGraph() == null) {
+			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		}
-		if (sDocument.getDocumentGraph().getTextualDSs().isEmpty()) {
-			createPrimaryData(sDocument);
+		if (document.getDocumentGraph().getTextualDSs().isEmpty()) {
+			createPrimaryData(document);
 		}
-		if (sDocument.getDocumentGraph().getSpans().isEmpty()) {
-			createInformationStructureSpan(sDocument);
+		if (document.getDocumentGraph().getSpans().isEmpty()) {
+			createInformationStructureSpan(document);
 		}
 		SAnnotation sAnno = null;
 
@@ -834,12 +834,12 @@ public class SampleGenerator {
 		// setting the value of the annotation
 		sAnno.setValue("contrast-focus");
 		// adding the annotation to the placeholder span
-		sDocument.getDocumentGraph().getSpans().get(0).addAnnotation(sAnno);
+		document.getDocumentGraph().getSpans().get(0).addAnnotation(sAnno);
 
 		sAnno = SaltFactory.createSAnnotation();
 		sAnno.setName("Inf-Struct");
 		sAnno.setValue("topic");
-		sDocument.getDocumentGraph().getSpans().get(1).addAnnotation(sAnno);
+		document.getDocumentGraph().getSpans().get(1).addAnnotation(sAnno);
 	}
 
 	/**
@@ -848,26 +848,26 @@ public class SampleGenerator {
 	 * calls {@link #createPrimaryData(SDocument)} and
 	 * {@link #createTokens(SDocument)}.
 	 * 
-	 * @param sDocument
+	 * @param document
 	 */
-	public static void createSyntaxStructure(SDocument sDocument) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createSyntaxStructure(SDocument document) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		if (sDocument.getDocumentGraph() == null)
-			sDocument.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		if (document.getDocumentGraph() == null)
+			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 
-		if ((sDocument.getDocumentGraph().getTokens() == null) || (sDocument.getDocumentGraph().getTokens().size() == 0)) {
-			if ((sDocument.getDocumentGraph().getTextualDSs() == null) || (sDocument.getDocumentGraph().getTextualDSs().size() == 0))
-				SampleGenerator.createPrimaryData(sDocument);
-			SampleGenerator.createTokens(sDocument);
+		if ((document.getDocumentGraph().getTokens() == null) || (document.getDocumentGraph().getTokens().size() == 0)) {
+			if ((document.getDocumentGraph().getTextualDSs() == null) || (document.getDocumentGraph().getTextualDSs().size() == 0))
+				SampleGenerator.createPrimaryData(document);
+			SampleGenerator.createTokens(document);
 		}
-		List<SToken> sTokens = Collections.synchronizedList(sDocument.getDocumentGraph().getTokens());
+		List<SToken> sTokens = Collections.synchronizedList(document.getDocumentGraph().getTokens());
 
 		// creating variables for the eInstance of the SaltFactory and for the
 		// SDocumentGraph
 		// (this is just for convenience)
-		SDocumentGraph docGraph = sDocument.getDocumentGraph();
+		SDocumentGraph docGraph = document.getDocumentGraph();
 
 		// creating the constituent nodes of the syntax tree
 		// these nodes are of the type SStructure
@@ -959,16 +959,16 @@ public class SampleGenerator {
 	 * sample syntax tree created in
 	 * {@link SampleGenerator#createSyntaxStructure(SDocument)}.
 	 * 
-	 * @param sDocument
+	 * @param document
 	 */
-	public static void createSyntaxAnnotations(SDocument sDocument) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createSyntaxAnnotations(SDocument document) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		if (sDocument.getDocumentGraph() == null || sDocument.getDocumentGraph().getSLayerByName("syntax").isEmpty()) {
-			createSyntaxStructure(sDocument);
+		if (document.getDocumentGraph() == null || document.getDocumentGraph().getSLayerByName("syntax").isEmpty()) {
+			createSyntaxStructure(document);
 		}
-		List<SStructure> sStructures = Collections.synchronizedList(sDocument.getDocumentGraph().getStructures());
+		List<SStructure> sStructures = Collections.synchronizedList(document.getDocumentGraph().getStructures());
 		String[] annotations = { "ROOT", "SQ", "NP", "ADJP", "ADJP", "SBar", "S", "NP", "VP", "S", "VP", "VP" };
 		String annoNS = null; // no namespace used in this example
 		String annoName = "const"; // our name for a constituent
@@ -988,31 +988,31 @@ public class SampleGenerator {
 	/**
 	 * This method creates the sample's dependency annotation.
 	 * 
-	 * @param sDocument
+	 * @param document
 	 */
-	public static void createDependencies(SDocument sDocument) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createDependencies(SDocument document) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
 		/* is there a document graph? */
-		if (sDocument.getDocumentGraph() == null) {
-			sDocument.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		if (document.getDocumentGraph() == null) {
+			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		}
-		SDocumentGraph docGraph = sDocument.getDocumentGraph();
+		SDocumentGraph docGraph = document.getDocumentGraph();
 		/* is there primary data? */
 		if ((docGraph.getTextualDSs() == null) || (docGraph.getTextualDSs().size() == 0)) {
-			SampleGenerator.createPrimaryData(sDocument);
+			SampleGenerator.createPrimaryData(document);
 		}
 		/* is there a tokenization of the primary data? */
 		if ((docGraph.getTokens() == null) || (docGraph.getTokens().size() == 0)) {
-			SampleGenerator.createTokens(sDocument);
+			SampleGenerator.createTokens(document);
 		}
 
 		List<SToken> sTokens = docGraph.getSortedTokenByText();
 		SLayer depLayer = SaltFactory.createSLayer();
 		depLayer.setName("dependencies");
 		depLayer.createMetaAnnotation(null, "tagset", "penn treebank");
-		sDocument.getDocumentGraph().addLayer(depLayer);
+		document.getDocumentGraph().addLayer(depLayer);
 
 		/*
 		 * -- create dependency annotation (PennTreebank scheme) for EXPECTED
@@ -1094,34 +1094,34 @@ public class SampleGenerator {
 
 	/**
 	 * 
-	 * @param sDocument
+	 * @param document
 	 */
-	public static void createAnaphoricAnnotations(SDocument sDocument) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createAnaphoricAnnotations(SDocument document) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		if (sDocument.getDocumentGraph() == null) {
-			createPrimaryData(sDocument);
-			createTokens(sDocument);
+		if (document.getDocumentGraph() == null) {
+			createPrimaryData(document);
+			createTokens(document);
 		}
-		List<SToken> sTokens = Collections.synchronizedList(sDocument.getDocumentGraph().getTokens());
+		List<SToken> sTokens = Collections.synchronizedList(document.getDocumentGraph().getTokens());
 
 		// creating a span as placeholder, which contains the tokens for "this"
 		// and "example"
 		SSpan sSpan = SaltFactory.createSSpan();
 		// adding the created span to the document-graph
-		sDocument.getDocumentGraph().addNode(sSpan);
+		document.getDocumentGraph().addNode(sSpan);
 
 		// creating a relation between the span and the tokens
 		SSpanningRelation sSpanRel = null;
 		sSpanRel = SaltFactory.createSSpanningRelation();
 		sSpanRel.setSource(sSpan);
 		sSpanRel.setTarget(sTokens.get(1));
-		sDocument.getDocumentGraph().addRelation(sSpanRel);
+		document.getDocumentGraph().addRelation(sSpanRel);
 		sSpanRel = SaltFactory.createSSpanningRelation();
 		sSpanRel.setSource(sSpan);
 		sSpanRel.setTarget(sTokens.get(2));
-		sDocument.getDocumentGraph().addRelation(sSpanRel);
+		document.getDocumentGraph().addRelation(sSpanRel);
 
 		// creating a pointing relations
 		SPointingRelation sPointingRelation = SaltFactory.createSPointingRelation();
@@ -1130,7 +1130,7 @@ public class SampleGenerator {
 		// setting span "this example" as target of this relation
 		sPointingRelation.setTarget(sSpan);
 		// adding the created relation to the document-graph
-		sDocument.getDocumentGraph().addRelation(sPointingRelation);
+		document.getDocumentGraph().addRelation(sPointingRelation);
 		// adding the type to the relation
 		sPointingRelation.setType("anaphoric");
 		// creating an anaphoric relation with the use of pointing relations
@@ -1140,30 +1140,30 @@ public class SampleGenerator {
 
 	/**
 	 * 
-	 * @param sDocument
+	 * @param document
 	 */
-	public static void createSDocumentStructure(SDocument sDocument) {
-		if (sDocument == null) {
-			throw new SaltSampleException("Cannot create example, because the given sDocument is empty.");
+	public static void createSDocumentStructure(SDocument document) {
+		if (document == null) {
+			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
 
 		// create SDocumentGraph object and set it to SDocument object
-		sDocument.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		// create the primary text
-		createPrimaryData(sDocument);
+		createPrimaryData(document);
 		// create tokenization
-		createTokens(sDocument);
+		createTokens(document);
 		// create token Annotations
-		createMorphologyAnnotations(sDocument);
+		createMorphologyAnnotations(document);
 		// create spans
-		createInformationStructureSpan(sDocument);
+		createInformationStructureSpan(document);
 		// create span annotations
-		createInformationStructureAnnotations(sDocument);
+		createInformationStructureAnnotations(document);
 		// create Structures
-		createSyntaxStructure(sDocument);
+		createSyntaxStructure(document);
 		// create Structure annotations
-		createSyntaxAnnotations(sDocument);
+		createSyntaxAnnotations(document);
 		// create pointing relations
-		createAnaphoricAnnotations(sDocument);
+		createAnaphoricAnnotations(document);
 	}
 }

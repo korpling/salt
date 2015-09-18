@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.FileAttribute;
 
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltResourceException;
 
 /**
  * This class provides some helpers for testing Salt.
@@ -28,15 +28,15 @@ public class SaltTestsUtil {
 	 *            segments or subfolders to be attached to the created temp
 	 *            folder, subfolders are separated by '/'
 	 * @param prefix
-	 *            the prefix to be used like 'pepper' or pepper-test etc.
+	 *            the prefix to be used like 'salt' or salt-test etc.
 	 * @return
 	 */
-	public static synchronized File getTempTestFile(String segments) {
+	public static synchronized File getTempTestFolder(String segments) {
 		File file = null;
 		if (segments == null) {
-			file = getTempTestFile();
+			file = getTempTestFolder();
 		} else {
-			file = new File(getTempTestFile().getAbsolutePath() + segments);
+			file = new File(getTempTestFolder().getAbsolutePath() + segments);
 		}
 		if (!file.exists()) {
 			file.mkdirs();
@@ -52,10 +52,10 @@ public class SaltTestsUtil {
 	 * 
 	 * @return path, where to store temporary files
 	 * @param prefix
-	 *            the prefix to be used like 'pepper' or pepper-test etc.
+	 *            the prefix to be used like 'salt' or salt-test etc.
 	 * @return
 	 */
-	public static synchronized File getTempTestFile() {
+	public static synchronized File getTempTestFolder() {
 		String usr = System.getProperty("user.name");
 		String path = null;
 		if ((usr != null) && (!usr.isEmpty())) {
@@ -71,7 +71,7 @@ public class SaltTestsUtil {
 					path = path + "/";
 				}
 			} catch (IOException e) {
-				throw new SaltException("Cannot create temporary folder at " + System.getProperty("java.io.tmpdir") + ". ");
+				throw new SaltResourceException("Cannot create temporary folder at " + System.getProperty("java.io.tmpdir") + ". ");
 			}
 		}
 
