@@ -86,7 +86,7 @@ public class DiffTest {
 	 * </ul>
 	 **/
 	@Test
-	public void testNumbers() {
+	public void testSize() {
 		SampleGenerator.createPrimaryData(template.getDocument());
 		SampleGenerator.createPrimaryData(other.getDocument());
 
