@@ -101,7 +101,17 @@ public class SaltXML10Writer {
 	public SaltXML10Writer(File path) {
 		this.path = path;
 	}
-
+	/** Determines whether the outputted SaltXML should be pretty printed. **/
+	private boolean isPrettyPrint= true;
+	/**
+	 * Determines whether the outputted SaltXML should be pretty printed.
+	 * @param isPrettyPrint true when output needs to be pretty printed
+	 */
+	public void setPrettyPrint(boolean isPrettyPrint){
+		this.isPrettyPrint= isPrettyPrint;
+	}
+	
+	
 	private File path = null;
 	private XMLStreamWriter xml = null;
 	private XMLOutputFactory xmlFactory = XMLOutputFactory.newFactory();
@@ -112,17 +122,22 @@ public class SaltXML10Writer {
 			output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF8")), false);
 
 			xml = xmlFactory.createXMLStreamWriter(output);
-			xml.writeStartDocument();
+			xml.writeStartDocument("1.0");
+			xml.writeStartElement(NS_SDOCUMENTSTRUCTURE, TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH, NS_VALUE_SDOCUMENTSTRUCTURE);
+			xml.writeNamespace(NS_SDOCUMENTSTRUCTURE, NS_VALUE_SDOCUMENTSTRUCTURE);
 			xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
 			xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
-			xml.writeNamespace(NS_SDOCUMENTSTRUCTURE, NS_VALUE_SDOCUMENTSTRUCTURE);
 			xml.writeNamespace(NS_SALTCORE, NS_VALUE_SALTCORE);
-			xml.writeStartElement(NS_SDOCUMENTSTRUCTURE, TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH);
-			xml.writeAttribute(NS_XMI, ATT_XMI_VERSION, "2.0");
+			
+			xml.writeAttribute(NS_VALUE_XMI, ATT_XMI_VERSION, "2.0");
 			
 			// write all labels
 			Iterator<Label> labelIt = graph.getLabels().iterator();
 			while (labelIt.hasNext()) {
+				if (isPrettyPrint){
+					xml.writeCharacters("\n");
+					xml.writeCharacters("\t");
+				}
 				writeLable(xml, labelIt.next());
 			}
 
@@ -144,6 +159,10 @@ public class SaltXML10Writer {
 			Iterator<SNode> nodeIt = graph.getNodes().iterator();
 			position = 0;
 			while (nodeIt.hasNext()) {
+				if (isPrettyPrint){
+					xml.writeCharacters("\n");
+					xml.writeCharacters("\t");
+				}
 				SNode node = nodeIt.next();
 				writeNode(xml, node, layerPositions);
 				nodePositions.put(node, position);
@@ -159,6 +178,10 @@ public class SaltXML10Writer {
 			Iterator<SRelation<SNode, SNode>> relIt = graph.getRelations().iterator();
 			position = 0;
 			while (relIt.hasNext()) {
+				if (isPrettyPrint){
+					xml.writeCharacters("\n");
+					xml.writeCharacters("\t");
+				}
 				SRelation<SNode, SNode> rel = relIt.next();
 				writeRelation(xml, rel, nodePositions, layerPositions);
 				relPositions.put(rel, position);
@@ -168,6 +191,10 @@ public class SaltXML10Writer {
 			// write layers
 			layerIt = graph.getLayers().iterator();
 			while (layerIt.hasNext()) {
+				if (isPrettyPrint){
+					xml.writeCharacters("\n");
+					xml.writeCharacters("\t");
+				}
 				writeLayer(xml, layerIt.next(), nodePositions, relPositions);
 			}
 
@@ -210,7 +237,7 @@ public class SaltXML10Writer {
 		} else if (label instanceof SFeature) {
 			type = "saltCore:SFeature";
 		}
-		xml.writeAttribute(NS_XSI, ATT_XSI_TYPE, type);
+		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
 		xml.writeAttribute(ATT_NAMESPACE, label.getNamespace());
 		xml.writeAttribute(ATT_NAME, label.getName());
 		xml.writeAttribute(ATT_VALUE, label.getValue().toString());
@@ -242,7 +269,7 @@ public class SaltXML10Writer {
 		} else if (node instanceof SStructure) {
 			type = "sDocumentStructure:SStructure";
 		}
-		xml.writeAttribute(NS_XSI, ATT_XSI_TYPE, type);
+		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
 
 		// write layers
 		if (node.getLayers().size() > 0) {
@@ -263,6 +290,10 @@ public class SaltXML10Writer {
 		// write all labels
 		Iterator<Label> labelIt = node.getLabels().iterator();
 		while (labelIt.hasNext()) {
+			if (isPrettyPrint){
+				xml.writeCharacters("\n");
+				xml.writeCharacters("\t");
+			}
 			writeLable(xml, labelIt.next());
 		}
 		xml.writeEndElement();
@@ -299,7 +330,7 @@ public class SaltXML10Writer {
 		} else if (relation instanceof SOrderRelation) {
 			type = "sDocumentStructure:SOrderRelation";
 		}
-		xml.writeAttribute(NS_XSI, ATT_XSI_TYPE, type);
+		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
 		int sourcePos = nodePositions.get(relation.getSource());
 		int targetPos = nodePositions.get(relation.getTarget());
 		xml.writeAttribute(ATT_SOURCE, "//@nodes." + sourcePos);
@@ -324,6 +355,10 @@ public class SaltXML10Writer {
 		// write all labels
 		Iterator<Label> labelIt = relation.getLabels().iterator();
 		while (labelIt.hasNext()) {
+			if (isPrettyPrint){
+				xml.writeCharacters("\n");
+				xml.writeCharacters("\t");
+			}
 			writeLable(xml, labelIt.next());
 		}
 		xml.writeEndElement();
@@ -347,7 +382,7 @@ public class SaltXML10Writer {
 	public void writeLayer(XMLStreamWriter xml, Layer layer, Map<SNode, Integer> nodePositions, Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
 		xml.writeStartElement(TAG_LAYERS);
 		// write type
-		xml.writeAttribute(NS_XSI, ATT_XSI_TYPE, "saltCore:SLayer");
+		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, "saltCore:SLayer");
 
 		// write nodes
 		if (layer.getNodes().size() > 0) {
@@ -384,6 +419,10 @@ public class SaltXML10Writer {
 		// write all labels
 		Iterator<Label> labelIt = layer.getLabels().iterator();
 		while (labelIt.hasNext()) {
+			if (isPrettyPrint){
+				xml.writeCharacters("\n");
+				xml.writeCharacters("\t");
+			}
 			writeLable(xml, labelIt.next());
 		}
 		xml.writeEndElement();
