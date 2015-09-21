@@ -88,8 +88,8 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	
 	private  int xValue = 0;	
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
-	private static final String VISJS_WIDTH = "1400px";
-	private static final String VISJS_HEIGHT = "1000px";
+	private static final String VISJS_WIDTH = "1200px";
+	private static final String VISJS_HEIGHT = "900px";
 	
 	
 	// HTML resources output
@@ -125,7 +125,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
     
     private static final int JSON_EDGE_LINE_LENGTH = 60;    
     private static final String NEWLINE = System.lineSeparator();    
-    private final Filter filter;
+    private final ExportFilter filter;
     
     private boolean writeNodeImmediately = false;
     
@@ -135,7 +135,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
     private static final String CSS_FILE = "vis.min.css";
     private static final String JS_FILE = "vis.min.js";
         
-    private static final String RESOURCES_FOLDER = System.getProperty("file.separator") + "visjs"; 
+    private static final String RESOURCE_FOLDER = System.getProperty("file.separator") + "visjs"; 
     													
     		
     
@@ -146,7 +146,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	
     
     
-    public VisJsCreator (URI inputUri, Filter filter){  
+    public VisJsCreator (URI inputUri, ExportFilter filter){  
     	if(inputUri == null) throw new SaltEmptyParameterException("inputUri", "VisJsCreator", this.getClass());
      	
     	try{
@@ -194,7 +194,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
   	  this(doc, null);
     }
     
-    public VisJsCreator (SDocument doc, Filter filter){  
+    public VisJsCreator (SDocument doc, ExportFilter filter){  
     	
     	if(doc == null) throw new SaltEmptyParameterException("doc", "VisJsCreator", this.getClass());
     
@@ -271,7 +271,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 			 throw new SaltException("Either the output folder cannot be created or permission denied.");
 			}
 			catch (IOException e) {
-			 throw new SaltResourceException("A problem occurred while copying the vis-js resource files");
+			 throw new SaltResourceException("A problem occurred while copying the vis-js ressource files");
 			}	
 	
 		
@@ -327,6 +327,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		
 		writer.writeStartElement(TAG_SCRIPT);
 		writer.writeAttribute(ATT_TYPE, "text/javascript");
+		writer.writeCharacters(NEWLINE);
 		writer.writeCharacters("var nodes = null;" + NEWLINE 
 						+ "var edges = null;" + NEWLINE 
 						+ "var network = null;" + NEWLINE
@@ -538,7 +539,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	private void copyResourceFile (String inFile, String outputFolder, String outSubFolder, String outFile) 
 					throws FileNotFoundException, IOException{
 	
-		InputStream inputStream = getClass( ).getResourceAsStream(RESOURCES_FOLDER 
+		InputStream inputStream = getClass( ).getResourceAsStream(RESOURCE_FOLDER 
 				  + System.getProperty("file.separator") 
 				  + inFile);		  
 		  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -612,9 +613,9 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	}
 	
 	
-	private void writeJsonNode (SNode node, long levelValue, Filter filter) throws IOException
+	private void writeJsonNode (SNode node, long levelValue, ExportFilter filter) throws IOException
 	{
-		if (filter == null || filter.outputNode(node))	
+		if (filter == null || !filter.filterNode(node))	
 		{
 		 String idValue = node.getSElementPath().fragment();
 		 String idLabel = "id=" + idValue;	
@@ -695,9 +696,9 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		}
 }
 		 
-	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation, Filter filter) throws IOException
+	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation, ExportFilter filter) throws IOException
 	{
-			  if(filter == null || filter.outputRelation(relation))
+			  if(filter == null || !filter.filterRelation(relation))
 			  {
 			  jsonWriterEdges.object();
 			  jsonWriterEdges.key("from");
