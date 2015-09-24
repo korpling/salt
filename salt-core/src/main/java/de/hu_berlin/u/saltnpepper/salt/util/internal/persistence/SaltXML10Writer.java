@@ -1,4 +1,4 @@
-package de.hu_berlin.u.saltnpepper.salt.util.internal;
+package de.hu_berlin.u.saltnpepper.salt.util.internal.persistence;
 
 import java.io.BufferedWriter;
 import java.io.File;

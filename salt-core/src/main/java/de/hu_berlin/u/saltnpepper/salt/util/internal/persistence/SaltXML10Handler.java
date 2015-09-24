@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.util.internal;
+package de.hu_berlin.u.saltnpepper.salt.util.internal.persistence;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
  * @author florian
  *
  */
-public class SaltXMLHandler extends DefaultHandler2 {
+public class SaltXML10Handler extends DefaultHandler2 {
 	// private static final Logger logger =
 	// LoggerFactory.getLogger(SaltXMLHandler.class);
 
@@ -111,7 +111,7 @@ public class SaltXMLHandler extends DefaultHandler2 {
 	public static final String TYPE_SWORD = "saltSemantics:SWordAnnotation";
 	public static final String TYPE_STYPE = "saltSemantics:STypeAnnotation";
 
-	public SaltXMLHandler() {
+	public SaltXML10Handler() {
 		nodes = new ArrayList<SNode>();
 		relations = new ArrayList<SRelation>();
 		layers = new HashMap<String, SLayer>();
@@ -179,11 +179,11 @@ public class SaltXMLHandler extends DefaultHandler2 {
 		} else if (TAG_NODES.equals(qName)) {
 			SNode sNode = null;
 			String type = attributes.getValue(ATT_TYPE);
-			if (SaltXMLHandler.TYPE_SAUDIODS.equals(type)) {
+			if (SaltXML10Handler.TYPE_SAUDIODS.equals(type)) {
 				sNode = SaltFactory.createSMedialDS();
-			} else if (SaltXMLHandler.TYPE_STEXTUALDS.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_STEXTUALDS.equals(type)) {
 				sNode = SaltFactory.createSTextualDS();
-			} else if (SaltXMLHandler.TYPE_STIMELINE.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_STIMELINE.equals(type)) {
 				sNode = SaltFactory.createSTimeline();
 			} else if (TYPE_STOKEN.equals(type)) {
 				sNode = SaltFactory.createSToken();
@@ -221,23 +221,23 @@ public class SaltXMLHandler extends DefaultHandler2 {
 			String type = attributes.getValue(ATT_TYPE);
 			String source = attributes.getValue(ATT_SOURCE);
 			String target = attributes.getValue(ATT_TARGET);
-			if (SaltXMLHandler.TYPE_STEXTUAL_RELATION.equals(type)) {
+			if (SaltXML10Handler.TYPE_STEXTUAL_RELATION.equals(type)) {
 				sRel = SaltFactory.createSTextualRelation();
-			} else if (SaltXMLHandler.TYPE_SAUDIO_RELATION.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_SAUDIO_RELATION.equals(type)) {
 				sRel = SaltFactory.createSMedialRelation();
-			} else if (SaltXMLHandler.TYPE_STIMELINE_RELATION.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_STIMELINE_RELATION.equals(type)) {
 				sRel = SaltFactory.createSTimelineRelation();
-			} else if (SaltXMLHandler.TYPE_SSPANNING_RELATION.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_SSPANNING_RELATION.equals(type)) {
 				sRel = SaltFactory.createSSpanningRelation();
-			} else if (SaltXMLHandler.TYPE_SORDER_RELATION.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_SORDER_RELATION.equals(type)) {
 				sRel = SaltFactory.createSOrderRelation();
-			} else if (SaltXMLHandler.TYPE_SDOMINANCE_RELATION.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_SDOMINANCE_RELATION.equals(type)) {
 				sRel = SaltFactory.createSDominanceRelation();
-			} else if (SaltXMLHandler.TYPE_SPOINTING_RELATION.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_SPOINTING_RELATION.equals(type)) {
 				sRel = SaltFactory.createSPointingRelation();
-			} else if (SaltXMLHandler.TYPE_SCORPUS_RELATION.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_SCORPUS_RELATION.equals(type)) {
 				sRel = SaltFactory.createSCorpusRelation();
-			} else if (SaltXMLHandler.TYPE_SCORPUS_DOCUMENT_RELATION.equals(type)) {
+			} else if (SaltXML10Handler.TYPE_SCORPUS_DOCUMENT_RELATION.equals(type)) {
 				sRel = SaltFactory.createSCorpusDocumentRelation();
 			}
 			if ((sRel != null) && (target != null) && (source != null)) {

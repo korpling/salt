@@ -31,8 +31,8 @@ import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.SaltXML10Writer;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.SaltXMLHandler;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.SaltXML10Writer;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.SaltXML10Handler;
 
 /**
  * This class contains a set of helpful methods.
@@ -275,7 +275,7 @@ public class SaltUtil {
 		SAXParser parser;
 		XMLReader xmlReader;
 		SAXParserFactory factory = SAXParserFactory.newInstance();
-		SaltXMLHandler contentHandler = new SaltXMLHandler();
+		SaltXML10Handler contentHandler = new SaltXML10Handler();
 
 		try {
 			parser = factory.newSAXParser();
