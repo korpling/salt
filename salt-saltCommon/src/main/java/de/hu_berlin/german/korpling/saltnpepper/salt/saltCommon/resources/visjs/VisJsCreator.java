@@ -26,6 +26,7 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructu
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
+import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SElementId;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
@@ -46,6 +47,34 @@ import javax.xml.stream.events.*;
 import org.json.*;
 import org.eclipse.emf.common.util.URI;
 
+/**
+ * <p>
+ * This class provides a possibility to create a html file, which visualizes a salt graph,
+ * created from an {@link SDocument} or from an {@link URI} to a salt file, using the vis.js library.
+ * Also it can be used to get both nodes and relations of a salt document in JSON format 
+ * as well as vis.js-options for creating the html file. 
+ * </p>
+ * 
+ * <p>A simple way to use this class for writing the html file is shown in the following example code:</p>
+ * 
+ * <pre>
+ * String inputSaltFile = "path_to_your_salt_file";  </br>
+ * String outputFolder = "path_to_your_output_folder"; </br>
+ * URI uri = URI.createFileURI(inputSaltFile);</br>
+ *		VisJsCreator visJsCreator = new VisJsCreator(uri); </br>
+ *		try { </br>
+ *			 URI outputFileUri = URI.createFileURI(outputFolder);</br>
+ *			 visJsCreator.writeHTML(outputFileUri); </br>
+ *		} catch (IOException | XMLStreamException e) { </br>
+ *			e.printStackTrace(); </br>
+ *		}</br>
+ *
+ *</pre> 
+ *
+ *
+ * @author irina
+ *
+ */
 
 public class VisJsCreator implements SGraphTraverseHandler{
 		
@@ -125,7 +154,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
     
     private static final int JSON_EDGE_LINE_LENGTH = 60;    
     private static final String NEWLINE = System.lineSeparator();    
-    private final ExportFilter filter;
+    private final ExportFilter exportFilter;
     
     private boolean writeNodeImmediately = false;
     
@@ -139,24 +168,40 @@ public class VisJsCreator implements SGraphTraverseHandler{
     													
     		
     
-  
-    public VisJsCreator(URI inputUri){
-  	  this(inputUri, null);
+  /**
+   * Creates a new VisJsCreator instance for a salt file specified by the uri.
+   * 
+   * @param inputFileUri a hierarchical URI of a salt file, which have to be visualized. 
+   * 		The constructor will create a new {@link SDocument} from this.
+   * 
+   * @throws SaltEmptyParameterException - if the inputFileUri is null 
+   */
+    public VisJsCreator(URI inputFileUri){
+  	  this(inputFileUri, null);
     }
 	
+   /**
+    * Creates a new VisJsCreator instance with specified export filter for a salt file specified by the uri.
+    * 
+    * @param inputFileUri a hierarchical URI of a salt file, which have to be visualized. 
+    * 			The constructor will create a new  {@link SDocument} from this.
+    * @param exportFilter an ExportFilter to exclude selected nodes and/or relations from the visualizing
+    * 
+    * @throws SaltEmptyParameterException if the inputFileUri is null 
+    * @throws SaltResourceNotFoundException if a problem occurred while loading salt project from the inputFileUri
+    */
     
-    
-    public VisJsCreator (URI inputUri, ExportFilter filter){  
-    	if(inputUri == null) throw new SaltEmptyParameterException("inputUri", "VisJsCreator", this.getClass());
+    public VisJsCreator (URI inputFileUri, ExportFilter exportFilter){  
+    	if(inputFileUri == null) throw new SaltEmptyParameterException("inputUri", "VisJsCreator", this.getClass());
      	
     	try{
     		this.doc= SaltFactory.eINSTANCE.createSDocument();	
-        	doc.loadSDocumentGraph(inputUri);
+        	doc.loadSDocumentGraph(inputFileUri);
     	}catch (SaltResourceNotFoundException e){
-    		throw new SaltResourceNotFoundException("A problem occurred while loading salt project from '" + inputUri + "'.", e);
+    		throw new SaltResourceNotFoundException("A problem occurred while loading salt project from '" + inputFileUri + "'.", e);
     	}
     	catch (SaltResourceException e){
-			throw new SaltResourceException("A problem occurred while loading salt project from '" + inputUri + "'.", e);
+			throw new SaltResourceException("A problem occurred while loading salt project from '" + inputFileUri + "'.", e);
 		}
     	
     	roots = doc.getSDocumentGraph().getSRoots();	
@@ -185,16 +230,31 @@ public class VisJsCreator implements SGraphTraverseHandler{
     		bufferSizeEdges = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
     	}
     	
-    	this.filter = filter;
+    	this.exportFilter = exportFilter;
     	
     }
     
-
+  /**
+   * Creates a new VisJsCreator instance for the specified salt document.
+   * 
+   * @param doc an {@link SDocument}, which have to be visualized
+   * 
+   * @throws SaltEmptyParameterException if the doc is null 
+   */
     public VisJsCreator(SDocument doc){
   	  this(doc, null);
     }
     
-    public VisJsCreator (SDocument doc, ExportFilter filter){  
+    /**
+     * Creates a new VisJsCreator instance with specified export filter for the specified salt document.
+     * 
+     * @param doc an SDocument, which have to be visualized
+     * @param exportFilter an ExportFilter to exclude selected nodes and/or relations from the visualizing 
+     * 
+     * @throws SaltEmptyParameterException if the doc is null 
+     */
+    
+    public VisJsCreator (SDocument doc, ExportFilter exportFilter){  
     	
     	if(doc == null) throw new SaltEmptyParameterException("doc", "VisJsCreator", this.getClass());
     
@@ -225,47 +285,52 @@ public class VisJsCreator implements SGraphTraverseHandler{
     		bufferSizeEdges = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
     	}
     	
-    	this.filter = filter;
+    	this.exportFilter = exportFilter;
     	
     }
     
-    
-public void setNodeWriter (OutputStream os)
-{
-	this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
-	this.jsonWriterNodes = new JSONWriter(outNodes);
-}
+     
+    /**
+     * <p>
+     * This method writes the html document, which visualizes the Salt document, specified by constructor.
+     * The output folder structure will be created, if not yet exists and the output html file as well as the 
+     * auxiliary files will be written.
+     * </p>
+     * 
+     * The whole output structure will looks like following: </br>
+     * <pre>
+     * outputFolder </br>
+     *  --> css </br>
+     * 		-->vis.min.css </br>
+     *  --> js </br>
+     * 		-->vis.min.js </br> 
+     *  --> saltVisJs.html </br> 
+     * </pre>
+     * 
+     * @param outputFolderUri - a hierarchical URI that specifies the output folder path. Note, that the output folder have not necessarily to be existing.
+     * 
+     * @throws SaltEmptyParameterException if the outputFolderUri is null
+     * @throws SaltResourceNotFoundException if the output auxiliary files cannot have been created
+     * @throws SaltException if the output folders cannot have been created or permission denied 
+     * @throws SaltResourceException if a problem occurred while copying the auxiliary files  
+     * @throws XMLStreamException if a problem occurred while writing the output html file
+     * @throws IOException if a problem occurred while writing the output file
+     */
 
-public void setEdgeWriter (OutputStream os)
-{
-	this.outEdges = new BufferedWriter (new OutputStreamWriter(os), bufferSizeEdges);	
-	this.jsonWriterEdges = new JSONWriter(outEdges);
-}
 
-public void setOptionsWriter (OutputStream os){
-	this.outOptions = new BufferedWriter(new OutputStreamWriter(os));		
-	
-}
-   
-	
-/*
- * Creates the output folder from the specified URI if not exists and writes the output html-file into that.
- * Also creates two subfolder for css and visjs resources and writes the resource files 
- * vis.min.css and vis.min.js into the both folder respective.
- */
-
-public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  SaltResourceNotFoundException, SaltException,
+public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  SaltResourceNotFoundException, SaltException,
 															SaltResourceException, XMLStreamException, IOException{
-	
+			
 		try {
-			File outputFolder = createOutputResources(outputFileUri);	
+			File outputFolder = createOutputResources(outputFolderUri);	
 			 this.os = new FileOutputStream(new File(outputFolder, OUTPUT_FILE));
 		
-			} catch (SaltEmptyParameterException e) {
-			  throw new SaltEmptyParameterException("outputFileUri", "writeHTML", this.getClass());
-			}	
+			}
+			catch (SaltEmptyParameterException e){
+				throw new SaltEmptyParameterException("outputFileUri", "writeHTML", this.getClass());
+			}
 			catch (FileNotFoundException e) {
-				throw new SaltResourceNotFoundException("The output file cannot be created.");
+				throw new SaltResourceNotFoundException("The output auxiliary files cannot be created.");
 			}	
 			catch (SecurityException e) {
 			 throw new SaltException("Either the output folder cannot be created or permission denied.");
@@ -510,7 +575,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	}
 
 /*
- * Organizes the output folder structure and invokes the method for copying of resource files. 
+ * Organizes the output folder structure and invokes the method for copying of auxiliary files. 
  */
   
 	private File createOutputResources(URI outputFileUri) 
@@ -534,7 +599,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	
 	
 /*
- * Copies the specified resource file to the output resource subfolder.
+ * Copies the specified auxiliary file to the according output subfolder.
  */
 	private void copyResourceFile (String inFile, String outputFolder, String outSubFolder, String outFile) 
 					throws FileNotFoundException, IOException{
@@ -567,8 +632,52 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		    writer.close();     
 	}
 	
+	/**
+	 * Creates a new buffered writer with specified output stream. 
+	 * It will contain the nodes in JSON format after invoking the 'buildJSON' method.
+	 * 
+	 * @param os OutputStream associated to the node writer. 
+	 */
+	public void setNodeWriter (OutputStream os)
+	{
+		this.outNodes = new BufferedWriter(new OutputStreamWriter(os));		
+		this.jsonWriterNodes = new JSONWriter(outNodes);
+	}
+	
+	/**
+	 *  Creates a new buffered writer with specified output stream. 
+	 *  It will contain the edges in JSON format after invoking the 'buildJSON' method.
+	 * 
+	 * @param os OutputStream associated to the edge writer
+	 */
+
+	public void setEdgeWriter (OutputStream os)
+	{
+		this.outEdges = new BufferedWriter (new OutputStreamWriter(os), bufferSizeEdges);	
+		this.jsonWriterEdges = new JSONWriter(outEdges);
+	}
+
+	/**
+	 *  Creates a new buffered writer with specified output stream. 
+	 *  It will contain the options after invoking the 'buildOptions' method.
+	 * 
+	 * @param os OutputStream associated to the options writer
+	 */
+	public void setOptionsWriter (OutputStream os){
+		this.outOptions = new BufferedWriter(new OutputStreamWriter(os));		
+		
+	}
+	   
 	
 	
+	
+	
+	/**
+	 * This method creates the nodes and relations of the Salt document specified by the constructor in JSON format.
+	 * 
+	 * @throws SaltException if a problem occurred while building JSON objects
+	 * @throws SaltEmptyParameterException if the node writer and/or the edge writer not set
+	 */
 	public void buildJSON () throws SaltException, SaltEmptyParameterException{		
 	maxLevel = getMaxLevel(doc);
 
@@ -588,7 +697,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	jsonWriterNodes.array();
 	// write tokens
 	 for (SToken token : sTokens){			
-			writeJsonNode(token, maxLevel, filter);
+			writeJsonNode(token, maxLevel, exportFilter);
 	 }
 	
 	 //create edge array
@@ -615,7 +724,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	
 	private void writeJsonNode (SNode node, long levelValue, ExportFilter filter) throws IOException
 	{
-		if (filter == null || !filter.filterNode(node))	
+		if (filter == null || !filter.excludeNode(node))	
 		{
 		 String idValue = node.getSElementPath().fragment();
 		 String idLabel = "id=" + idValue;	
@@ -698,7 +807,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		 
 	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation, ExportFilter filter) throws IOException
 	{
-			  if(filter == null || !filter.filterRelation(relation))
+			  if(filter == null || !filter.excludeRelation(relation))
 			  {
 			  jsonWriterEdges.object();
 			  jsonWriterEdges.key("from");
@@ -757,13 +866,45 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 					+"}" + NEWLINE
 					+"}" + NEWLINE);
 	}
+	
+	/**
+	 * Returns the node writer.
+	 * 
+	 * @return
+	 */
+	public BufferedWriter getJsonNodes ()
+	{
+		return outNodes;
+	}
+	
+	/**
+	 * Returns the edge writer.
+	 * 
+	 * @return
+	 */
+	public BufferedWriter getJsonEdges()
+	{
+		return outEdges;
+	}
+	
+	/**
+	 * Returns the options writer.
+	 * 
+	 * @return
+	 */
+	public BufferedWriter getOptions(){
+		return outOptions;
+	}
 		
 		
 	
-	
+	/*
+	 *  Determine the max. level for JSON node objects.
+	 *  If the graph has no spans, it is maxHeight+1, else maxHeight+2.
+	 */
 	private int getMaxLevel(SDocument doc)
 	{
-		maxLevel = getMaxHighOfSDocGraph(doc) + 1;
+		maxLevel = getMaxHeightOfSDocGraph(doc) + 1;
 		EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
 		 if (sSpans != null && sSpans.size() != 0) 
 		 {
@@ -773,8 +914,8 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	}
 	
 	
-	 //traversing the graph in depth first top down mode beginning with its roots
-	private  int  getMaxHighOfSDocGraph(SDocument doc)
+	 //traverse the graph in depth first top down mode beginning with its roots and calculate the max. height of the salt graph
+	private  int  getMaxHeightOfSDocGraph(SDocument doc)
 	{
 		doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAV_MODE_CALC_LEVEL, this);		
 		if (maxHeight > (Integer.MAX_VALUE - 100)) throw new SaltException("The specified document cannot be visualized. It is too complex.");    
@@ -782,7 +923,9 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		
 	}
 	
-	
+	/**
+	 * implements the 'nodeReached' method of the 'SGraphTraverseHandler' interface
+	 */
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation,
 														SNode fromNode, long order) 
@@ -802,7 +945,9 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	}
 
 	
-	
+	/**
+	 * implements the 'nodeLeft' method of the 'SGraphTraverseHandler' interface
+	 */
 	@Override
 	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
 			SNode fromNode, long order) 
@@ -826,7 +971,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode)))
 					  {				  
 						  try {
-							writeJsonNode(fromNode, maxLevel - currHeightFromToken, filter);
+							writeJsonNode(fromNode, maxLevel - currHeightFromToken, exportFilter);
 						} catch (IOException e) {
 							throw new SaltException("A problem occurred while building JSON objects.");
 						}						
@@ -842,7 +987,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 					  if (currNode instanceof SStructure)
 					  {						 
 						  try {
-							writeJsonNode(currNode, maxLevel - currHeightFromToken, filter);
+							writeJsonNode(currNode, maxLevel - currHeightFromToken, exportFilter);
 						} catch (IOException e) {
 							throw new SaltException("A problem occurred while building JSON objects.");
 						}						 
@@ -850,7 +995,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 						 if (roots.contains(fromNode) && !readRoots.contains(fromNode))
 						 {
 							 try {
-								writeJsonNode(fromNode, maxLevel - currHeightFromToken - 1, filter);
+								writeJsonNode(fromNode, maxLevel - currHeightFromToken - 1, exportFilter);
 							} catch (IOException e) {
 								throw new SaltException("A problem occurred while building JSON objects.");
 							}							 
@@ -864,7 +1009,7 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 				  if (!readRelations.contains(edge))
 				  {					  
 					  try {
-						writeJsonEdge(fromNode, currNode, edge,filter );
+						writeJsonEdge(fromNode, currNode, edge,exportFilter );
 					} catch (IOException e) {
 						throw new SaltException("A problem occurred while building JSON objects.");
 					}					  
@@ -876,6 +1021,9 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 		}		
 	}
 
+	/**
+	 * implements the 'checkConstraint' method of the 'SGraphTraverseHandler' interface
+	 */
 	@Override
 	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation edge,
 			SNode currNode, long order) 
@@ -886,19 +1034,6 @@ public void writeHTML(URI outputFileUri) throws SaltEmptyParameterException,  Sa
 	}
 	
 	
-	public BufferedWriter getJsonNodes ()
-	{
-		return outNodes;
-	}
-	
-	public BufferedWriter getJsonEdges()
-	{
-		return outEdges;
-	}
-	
-	public BufferedWriter getOptions(){
-		return outOptions;
-	}
 
 	
 }

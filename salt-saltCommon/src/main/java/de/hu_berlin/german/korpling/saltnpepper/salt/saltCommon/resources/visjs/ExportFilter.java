@@ -5,9 +5,9 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
 
 public interface ExportFilter {
 	
-	public boolean filterNode (SNode node);
+	public boolean excludeNode (SNode node);
 	
-	public boolean filterRelation (SRelation relation);
+	public boolean excludeRelation (SRelation relation);
 		
 
 }
