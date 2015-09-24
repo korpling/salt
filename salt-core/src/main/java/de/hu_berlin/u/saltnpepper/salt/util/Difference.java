@@ -6,12 +6,6 @@ import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
-import de.hu_berlin.u.saltnpepper.salt.core.SNamedElement;
-import de.hu_berlin.u.saltnpepper.salt.core.impl.SAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.core.impl.SFeatureImpl;
 
 /**
  * Objects of this class are produces by
