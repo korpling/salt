@@ -69,12 +69,12 @@ public class DiffTest {
 		template.setDocument(SaltFactory.createSDocument());
 		template.getDocument().setId("doc1");
 		template.getDocument().getDocumentGraph().setId("doc1");
-		
+
 		other = SaltFactory.createSDocumentGraph();
 		other.setDocument(SaltFactory.createSDocument());
 		other.getDocument().setId("doc2");
 		other.getDocument().getDocumentGraph().setId("doc2");
-		
+
 		setFixture(new Diff(template, other));
 	}
 
@@ -190,10 +190,10 @@ public class DiffTest {
 	public void testTokenCompareIsoObjects() {
 		SampleGenerator.createTokens(template.getDocument());
 		SampleGenerator.createTokens(other.getDocument());
-		
+
 		assertTrue(getFixture().isIsomorph());
-		int i= 0;
-		for (SToken tok: template.getDocument().getDocumentGraph().getTokens()){
+		int i = 0;
+		for (SToken tok : template.getDocument().getDocumentGraph().getTokens()) {
 			assertNotNull(getFixture().getIsoNodes().get(tok));
 			assertEquals(tok, template.getDocument().getDocumentGraph().getTokens().get(i));
 			i++;
@@ -369,7 +369,7 @@ public class DiffTest {
 		pr1.setSource((SToken) template.getNodes().get(1));
 		pr1.setTarget((SToken) template.getNodes().get(2));
 		pr1.setGraph(template);
-		
+
 		assertFalse(getFixture().isIsomorph());
 
 	}
@@ -398,76 +398,86 @@ public class DiffTest {
 	}
 
 	/**
-	 * Checks differences between to graphs, which are isomorph. 
-	 * The here tested structure is
+	 * Checks differences between to graphs, which are isomorph. The here tested
+	 * structure is
 	 * {@link SampleGenerator#createSyntaxAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}
 	 */
 	@Test
-	public void test_SyntaxAnnotation(){
+	public void test_SyntaxAnnotation() {
 		SampleGenerator.createSyntaxAnnotations(template.getDocument());
 		SampleGenerator.createSyntaxAnnotations(other.getDocument());
-		Set<Difference> diffs= getFixture().findDiffs();
-		assertEquals(""+diffs, 0, diffs.size());
+		Set<Difference> diffs = getFixture().findDiffs();
+		assertEquals("" + diffs, 0, diffs.size());
 	}
-	
+
 	/**
-	 * Checks differences between to graphs, which are isomorph. 
-	 * The here tested structure is
-	 * {@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}.
+	 * Checks differences between to graphs, which are isomorph. The here tested
+	 * structure is
+	 * {@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}
+	 * .
 	 */
 	@Test
-	public void test_InformationStructureAnnotations(){
+	public void test_InformationStructureAnnotations() {
 		SampleGenerator.createInformationStructureAnnotations(template.getDocument());
 		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
-		
-		Set<Difference> diffs= getFixture().findDiffs();
-		assertEquals(""+diffs, 0, diffs.size());
+
+		Set<Difference> diffs = getFixture().findDiffs();
+		assertEquals("" + diffs, 0, diffs.size());
 	}
+
 	/**
-	 * Checks differences between to graphs, which are isomorph. 
-	 * The here tested structure is
-	 * {@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}.
+	 * Checks differences between to graphs, which are isomorph. The here tested
+	 * structure is
+	 * {@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}
+	 * .
 	 */
 	@Test
-	public void test_InformationStructureAnnotations_Fail(){
+	public void test_InformationStructureAnnotations_Fail() {
 		SampleGenerator.createInformationStructureAnnotations(template.getDocument());
 		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
 		other.getDocument().getDocumentGraph().removeNode(other.getDocument().getDocumentGraph().getSpans().get(0));
-		Set<Difference> diffs= getFixture().findDiffs();
-		assertEquals(""+diffs, 1, diffs.size());
+		Set<Difference> diffs = getFixture().findDiffs();
+		assertEquals("" + diffs, 1, diffs.size());
 	}
+
 	/**
-	 * Checks differences between to graphs, which are isomorph. 
-	 * The here tested structure is
+	 * Checks differences between to graphs, which are isomorph. The here tested
+	 * structure is
 	 * {@link SampleGenerator#createDependencies(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}
 	 */
 	@Test
-	public void test_Dependencies(){
+	public void test_Dependencies() {
 		SampleGenerator.createDependencies(template.getDocument());
 		SampleGenerator.createDependencies(other.getDocument());
-		Set<Difference> diffs= getFixture().findDiffs();
+		Set<Difference> diffs = getFixture().findDiffs();
 		assertEquals(0, diffs.size());
 	}
-	
+
 	/**
-	 * Checks differences between to graphs, which are isomorph. 
-	 * The here tested structure is:
+	 * Checks differences between to graphs, which are isomorph. The here tested
+	 * structure is:
 	 * <ul>
-	 *  <li>{@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}</li>
-	 *  <li>{@link SampleGenerator#createSyntaxAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}</li>
-	 *  <li>{@link SampleGenerator#createDependencies(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)</li>
+	 * <li>
+	 * {@link SampleGenerator#createInformationStructureAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}
+	 * </li>
+	 * <li>
+	 * {@link SampleGenerator#createSyntaxAnnotations(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)}
+	 * </li>
+	 * <li>
+	 * {@link SampleGenerator#createDependencies(de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument)
+	 * </li>
 	 * </ul>
 	 */
 	@Test
-	public void test_AllSamples(){
+	public void test_AllSamples() {
 		SampleGenerator.createInformationStructureAnnotations(template.getDocument());
 		SampleGenerator.createSyntaxAnnotations(template.getDocument());
 		SampleGenerator.createDependencies(template.getDocument());
 		SampleGenerator.createInformationStructureAnnotations(other.getDocument());
 		SampleGenerator.createSyntaxAnnotations(other.getDocument());
 		SampleGenerator.createDependencies(other.getDocument());
-		
-		Set<Difference> diffs= getFixture().findDiffs();
-		assertEquals(""+diffs, 0, diffs.size());
+
+		Set<Difference> diffs = getFixture().findDiffs();
+		assertEquals("" + diffs, 0, diffs.size());
 	}
 }

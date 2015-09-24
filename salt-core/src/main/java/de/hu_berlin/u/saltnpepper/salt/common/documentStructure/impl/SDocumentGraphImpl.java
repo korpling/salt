@@ -480,10 +480,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end) {
-		if (sequentialDS== null){
+		if (sequentialDS == null) {
 			throw new SaltInsertionException(this, sequentialDS, "The passed sequentialDS is empty. ");
 		}
-		if (sequentialDS.getId()== null || !containsNode(sequentialDS.getId())){
+		if (sequentialDS.getId() == null || !containsNode(sequentialDS.getId())) {
 			throw new SaltInsertionException(this, sequentialDS, "The passed sequentialDS does not belong to this document graph. ");
 		}
 		SToken sTok = SaltFactory.createSToken();
@@ -900,7 +900,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		Diff diff = new Diff(this, other);
 		return (diff.findDiffs());
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType) {

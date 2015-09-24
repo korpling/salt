@@ -373,7 +373,7 @@ public class SampleGenerator {
 	 * @return returns the created primary text
 	 */
 	public static STextualDS createPrimaryData(SDocument document) {
-		return(createPrimaryData(document, LANG_EN));
+		return (createPrimaryData(document, LANG_EN));
 	}
 
 	/**
@@ -825,7 +825,7 @@ public class SampleGenerator {
 		if (document.getDocumentGraph().getTextualDSs().isEmpty()) {
 			createPrimaryData(document);
 		}
-		if (document.getDocumentGraph().getNodesByName("IS_span1").size()== 0) {
+		if (document.getDocumentGraph().getNodesByName("IS_span1").size() == 0) {
 			createInformationStructureSpan(document);
 		}
 		SAnnotation sAnno = null;

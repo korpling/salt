@@ -908,7 +908,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
 	public Set<Difference> findDiffs(SDocumentGraph other);
-	
+
 	/**
 	 * Returns a list of nodes in base document. The returned nodes are
 	 * equivalents to the direct children of the passed parent node. The

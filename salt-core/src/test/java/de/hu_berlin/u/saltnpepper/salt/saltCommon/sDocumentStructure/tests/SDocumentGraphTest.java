@@ -1145,28 +1145,30 @@ public class SDocumentGraphTest {
 			assertEquals(sTokens.get(i), sortedSTokens.get(i));
 		}
 	}
-// @FIXME
-//	@Test
-//	public void testCreateSSpan__SToken() {
-//		String text = "a sample";
-//		STextualDS sText = getFixture().createTextualDS(text);
-//		DataSourceSequence sequence = new DataSourceSequence();
-//		sequence.setDataSource(sText);
-//		sequence.setStart(0);
-//		sequence.setEnd(1);
-//		SToken tok1 = getFixture().createToken(sequence);
-//		SSpan sSpan = getFixture().createSpan(tok1);
-//
-//		assertNotNull(sSpan);
-//		assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
-//		List<SRelation> relations = getFixture().getRelations(sSpan.getId(), tok1.getId());
-//		assertNotNull(relations);
-//		assertEquals(1, relations.size());
-//		assertTrue(relations.get(0) instanceof SSpanningRelation);
-//		SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
-//		assertEquals(tok1, sSpanRel.getTarget());
-//		assertEquals(sSpan, sSpanRel.getSource());
-//	}
+
+	// @FIXME
+	// @Test
+	// public void testCreateSSpan__SToken() {
+	// String text = "a sample";
+	// STextualDS sText = getFixture().createTextualDS(text);
+	// DataSourceSequence sequence = new DataSourceSequence();
+	// sequence.setDataSource(sText);
+	// sequence.setStart(0);
+	// sequence.setEnd(1);
+	// SToken tok1 = getFixture().createToken(sequence);
+	// SSpan sSpan = getFixture().createSpan(tok1);
+	//
+	// assertNotNull(sSpan);
+	// assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
+	// List<SRelation> relations = getFixture().getRelations(sSpan.getId(),
+	// tok1.getId());
+	// assertNotNull(relations);
+	// assertEquals(1, relations.size());
+	// assertTrue(relations.get(0) instanceof SSpanningRelation);
+	// SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
+	// assertEquals(tok1, sSpanRel.getTarget());
+	// assertEquals(sSpan, sSpanRel.getSource());
+	// }
 
 	// FIXME
 	// @Test

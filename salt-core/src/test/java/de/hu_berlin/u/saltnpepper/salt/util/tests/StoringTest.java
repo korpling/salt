@@ -34,7 +34,7 @@ public class StoringTest {
 		SampleGenerator.createPrimaryData(other);
 
 		// store other document
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore")+"/DocumentGraph_text.salt");
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_text.salt");
 		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
 		SaltUtil.saveDocumentGraph(other.getDocumentGraph(), path);
 
@@ -56,7 +56,7 @@ public class StoringTest {
 		SampleGenerator.createTokens(other);
 
 		// store other document
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore")+"/DocumentGraph_tokenization.salt");
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_tokenization.salt");
 		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
 		SaltUtil.saveDocumentGraph(other.getDocumentGraph(), path);
 
@@ -72,7 +72,8 @@ public class StoringTest {
 	 * <li>{@link SampleGenerator#createMorphologyAnnotations(SDocument)}</li>
 	 * <li>{@link SampleGenerator#createAnaphoricAnnotations(SDocument)}</li>
 	 * <li>{@link SampleGenerator#createDependencies(SDocument)}</li>
-	 * <li>{@link SampleGenerator#createInformationStructureAnnotations(SDocument)}</li>
+	 * <li>
+	 * {@link SampleGenerator#createInformationStructureAnnotations(SDocument)}</li>
 	 * <li>{@link SampleGenerator#createSyntaxAnnotations(SDocument)}</li>
 	 * </ul>
 	 */
@@ -96,13 +97,13 @@ public class StoringTest {
 		SampleGenerator.createSyntaxAnnotations(other);
 
 		// store other document
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore")+"/DocumentGraph_multilayer.salt");
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_multilayer.salt");
 		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
 		SaltUtil.saveDocumentGraph(other.getDocumentGraph(), path);
 
 		// compare both document graphs
 		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
-		
+
 		assertTrue(template.getDocumentGraph().isIsomorph(graph));
 	}
 
@@ -122,8 +123,8 @@ public class StoringTest {
 		SampleGenerator.createDialogue(other);
 
 		// store other document
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore")+"/DocumentGraph_dialogue.salt");
-		
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_dialogue.salt");
+
 		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
 		SaltUtil.saveDocumentGraph(other.getDocumentGraph(), path);
 
@@ -131,7 +132,7 @@ public class StoringTest {
 		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
 		assertTrue(template.getDocumentGraph().isIsomorph(graph));
 	}
-	
+
 	/**
 	 * Tests the loading and storing of:
 	 * <ul>
@@ -148,7 +149,7 @@ public class StoringTest {
 		SampleGenerator.createParallelData(other);
 
 		// store other document
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore")+"/DocumentGraph_parallel.salt");
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_parallel.salt");
 		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
 		SaltUtil.saveDocumentGraph(other.getDocumentGraph(), path);
 

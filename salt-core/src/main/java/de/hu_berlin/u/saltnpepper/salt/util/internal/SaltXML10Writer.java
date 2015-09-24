@@ -232,11 +232,11 @@ public class SaltXML10Writer {
 	 * @throws XMLStreamException
 	 */
 	public void writeLable(XMLStreamWriter xml, Label label) throws XMLStreamException {
-		//ignore when label is reference to SDocument
-		if (label!= null && label.getValue() instanceof SDocument){
+		// ignore when label is reference to SDocument
+		if (label != null && label.getValue() instanceof SDocument) {
 			return;
 		}
-		
+
 		xml.writeEmptyElement(TAG_LABELS);
 		String type = "";
 		if (label instanceof SAnnotation) {
@@ -251,11 +251,11 @@ public class SaltXML10Writer {
 			type = "saltCore:SElementId";
 		}
 		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
-		
+
 		if (label.getNamespace() != null && !label.getNamespace().isEmpty()) {
-			if (SaltUtil.FEAT_SDATA.equals(label.getName())){
+			if (SaltUtil.FEAT_SDATA.equals(label.getName())) {
 				xml.writeAttribute(ATT_NAMESPACE, "saltCommon");
-			}else{
+			} else {
 				xml.writeAttribute(ATT_NAMESPACE, label.getNamespace());
 			}
 		}
@@ -266,40 +266,40 @@ public class SaltXML10Writer {
 			xml.writeAttribute(ATT_VALUE, marshallValue(label.getValue()));
 		}
 	}
-	
+
 	/**
-	 * Serializes an object as String. If the passed object is 
+	 * Serializes an object as String. If the passed object is
 	 * <ul>
 	 * <li>{@link String} - it is prefixed with "T::"</li>
 	 * <li>{@link Boolean} - it is prefixed with "B::"</li>
 	 * <li>{@link Integer} - it is prefixed with "N::"</li>
 	 * <li>{@link Integer} - it is prefixed with "L::"</li>
 	 * <li>{@link Float} - it is prefixed with "F::"</li>
-	 *  <li>{@link URI} - it is prefixed with "U::"</li>
+	 * <li>{@link URI} - it is prefixed with "U::"</li>
 	 * </ul>
 	 */
 	public String marshallValue(Object value) {
-		String retVal= null;
-		if (value== null){
-		}else if(value instanceof String){
-			retVal= "T::"+StringEscapeUtils.escapeXml11((String)value);
-		}else if(value instanceof Boolean){
-			retVal="B::"+value.toString();
-		}else if(value instanceof Integer){
-			retVal="N::"+value.toString();
-		}else if(value instanceof Long){
-			retVal="N::"+value.toString();
-		}else if(value instanceof Double){
-			retVal="F::"+value.toString();
-		}else if(value instanceof Float){
-			retVal="F::"+value.toString();
-		}else if (value instanceof URI){
-			retVal= "U::"+ StringEscapeUtils.escapeXml11(value.toString());
-		} else if(value instanceof Serializable) {
+		String retVal = null;
+		if (value == null) {
+		} else if (value instanceof String) {
+			retVal = "T::" + StringEscapeUtils.escapeXml11((String) value);
+		} else if (value instanceof Boolean) {
+			retVal = "B::" + value.toString();
+		} else if (value instanceof Integer) {
+			retVal = "N::" + value.toString();
+		} else if (value instanceof Long) {
+			retVal = "N::" + value.toString();
+		} else if (value instanceof Double) {
+			retVal = "F::" + value.toString();
+		} else if (value instanceof Float) {
+			retVal = "F::" + value.toString();
+		} else if (value instanceof URI) {
+			retVal = "U::" + StringEscapeUtils.escapeXml11(value.toString());
+		} else if (value instanceof Serializable) {
 			byte[] rawBytes = SerializationUtils.serialize((Serializable) value);
-			retVal= "O::" + BaseEncoding.base64().encode(rawBytes);
+			retVal = "O::" + BaseEncoding.base64().encode(rawBytes);
 		}
-		return(retVal);
+		return (retVal);
 	}
 
 	/**

@@ -204,24 +204,25 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 		}
 		this.name.setValue(name);
 	}
-	
+
 	/**
-	 * Filters adding of name {@link SFeature} for name 
+	 * Filters adding of name {@link SFeature} for name
 	 */
 	@Override
 	public void addLabel(Label label) {
-		if (label!= null && label.getValue()!= null && label instanceof SFeature && SaltUtil.FEAT_NAME_QNAME.equals(label.getQName())){
+		if (label != null && label.getValue() != null && label instanceof SFeature && SaltUtil.FEAT_NAME_QNAME.equals(label.getQName())) {
 			setName(label.getValue().toString());
-		}else{
+		} else {
 			super.addLabel(label);
 		}
 	}
+
 	// =======================================< SNamedElement
 	@Override
 	public String toString() {
-		StringBuilder str= new StringBuilder();
+		StringBuilder str = new StringBuilder();
 		str.append(Layer.class.getSimpleName());
-		if (getId()!= null){
+		if (getId() != null) {
 			str.append("(");
 			str.append(getId());
 			str.append(")");
@@ -231,6 +232,6 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 		str.append(" nodes, ");
 		str.append(getRelations().size());
 		str.append(" relations");
-		return(str.toString());
+		return (str.toString());
 	}
 }

@@ -464,7 +464,7 @@ public class SaltUtil {
 			File out = new File(path);
 			out.getParentFile().mkdirs();
 
-			SaltXML10Writer writer= new SaltXML10Writer(out);
+			SaltXML10Writer writer = new SaltXML10Writer(out);
 			writer.writeDocumentGraph(documentGraph);
 		}
 	}

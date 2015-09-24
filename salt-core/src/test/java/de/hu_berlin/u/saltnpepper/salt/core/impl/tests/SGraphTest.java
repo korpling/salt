@@ -126,75 +126,86 @@ public class SGraphTest extends SAnnotationContainerTest {
 			assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 		}
 	}
-	
-	/** Tests whether the method {@link SGraph#getLayerByName(String)} returns the corrct values. **/
+
+	/**
+	 * Tests whether the method {@link SGraph#getLayerByName(String)} returns
+	 * the corrct values.
+	 **/
 	@Test
-	public void testGetLayersByName(){
-		SLayer layer= SaltFactory.createSLayer();
+	public void testGetLayersByName() {
+		SLayer layer = SaltFactory.createSLayer();
 		layer.setName("one");
 		getFixture().addLayer(layer);
-		layer= SaltFactory.createSLayer();
+		layer = SaltFactory.createSLayer();
 		layer.setName("two");
 		getFixture().addLayer(layer);
-		layer= SaltFactory.createSLayer();
+		layer = SaltFactory.createSLayer();
 		layer.setName("one");
 		getFixture().addLayer(layer);
-		layer= SaltFactory.createSLayer();
+		layer = SaltFactory.createSLayer();
 		layer.setName("three");
 		getFixture().addLayer(layer);
 		assertEquals(2, getFixture().getLayerByName("one").size());
 		assertEquals(1, getFixture().getLayerByName("two").size());
 		assertEquals(1, getFixture().getLayerByName("three").size());
 	}
-	/** Tests whether the method {@link SGraph#getLayerByName(String)} returns the corrct values. **/
+
+	/**
+	 * Tests whether the method {@link SGraph#getLayerByName(String)} returns
+	 * the corrct values.
+	 **/
 	@Test
-	public void testGetNodesByName(){
-		SNode node= SaltFactory.createSNode();
+	public void testGetNodesByName() {
+		SNode node = SaltFactory.createSNode();
 		node.setName("one");
 		getFixture().addNode(node);
-		node= SaltFactory.createSNode();
+		node = SaltFactory.createSNode();
 		node.setName("two");
 		getFixture().addNode(node);
-		node= SaltFactory.createSNode();
+		node = SaltFactory.createSNode();
 		node.setName("one");
 		getFixture().addNode(node);
-		node= SaltFactory.createSNode();
+		node = SaltFactory.createSNode();
 		node.setName("three");
 		getFixture().addNode(node);
 		assertEquals(2, getFixture().getNodesByName("one").size());
 		assertEquals(1, getFixture().getNodesByName("two").size());
 		assertEquals(1, getFixture().getNodesByName("three").size());
 	}
-	/** Tests whether the method {@link SGraph#getLayerByName(String)} returns the corrct values. **/
+
+	/**
+	 * Tests whether the method {@link SGraph#getLayerByName(String)} returns
+	 * the corrct values.
+	 **/
 	@Test
-	public void testGetRelationsByName(){
-		SNode node= SaltFactory.createSNode();
+	public void testGetRelationsByName() {
+		SNode node = SaltFactory.createSNode();
 		getFixture().addNode(node);
-		
-		SRelation rel= SaltFactory.createSRelation();
+
+		SRelation rel = SaltFactory.createSRelation();
 		rel.setSource(node);
 		rel.setTarget(node);
 		rel.setName("one");
 		getFixture().addRelation(rel);
-		
-		rel= SaltFactory.createSRelation();
+
+		rel = SaltFactory.createSRelation();
 		rel.setName("two");
 		rel.setSource(node);
 		rel.setTarget(node);
 		getFixture().addRelation(rel);
-		
-		rel= SaltFactory.createSRelation();
+
+		rel = SaltFactory.createSRelation();
 		rel.setSource(node);
 		rel.setTarget(node);
 		rel.setName("one");
 		getFixture().addRelation(rel);
-		
-		rel= SaltFactory.createSRelation();
+
+		rel = SaltFactory.createSRelation();
 		rel.setSource(node);
 		rel.setTarget(node);
 		rel.setName("three");
 		getFixture().addRelation(rel);
-		
+
 		assertEquals(2, getFixture().getRelationsByName("one").size());
 		assertEquals(1, getFixture().getRelationsByName("two").size());
 		assertEquals(1, getFixture().getRelationsByName("three").size());
