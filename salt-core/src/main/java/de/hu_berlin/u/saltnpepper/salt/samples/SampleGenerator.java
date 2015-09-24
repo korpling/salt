@@ -780,30 +780,32 @@ public class SampleGenerator {
 
 		List<SToken> sTokens = Collections.synchronizedList(document.getDocumentGraph().getTokens());
 
-		SSpan sSpan = null;
-		SSpanningRelation sSpanRel = null;
+		SSpan span = null;
+		SSpanningRelation spanRel = null;
 		// creating a span node as placeholder for information-structure
 		// annotation
-		sSpan = SaltFactory.createSSpan();
+		span = SaltFactory.createSSpan();
+		span.setName("IS_span1");
 		// adding the created span to the document-graph
-		document.getDocumentGraph().addNode(sSpan);
+		document.getDocumentGraph().addNode(span);
 		// creating an annotation for information-structure
 		// creating a relation to connect a token with the span
-		sSpanRel = SaltFactory.createSSpanningRelation();
+		spanRel = SaltFactory.createSSpanningRelation();
 		// setting the span as source of the relation
-		sSpanRel.setSource(sSpan);
+		spanRel.setSource(span);
 		// setting the first token as target of the relation
-		sSpanRel.setTarget(sTokens.get(0));
+		spanRel.setTarget(sTokens.get(0));
 		// adding the created relation to the document-graph
-		document.getDocumentGraph().addRelation(sSpanRel);
+		document.getDocumentGraph().addRelation(spanRel);
 
-		sSpan = SaltFactory.createSSpan();
-		document.getDocumentGraph().addNode(sSpan);
+		span = SaltFactory.createSSpan();
+		span.setName("IS_span2");
+		document.getDocumentGraph().addNode(span);
 		for (int i = 1; i < sTokens.size(); i++) {
-			sSpanRel = SaltFactory.createSSpanningRelation();
-			sSpanRel.setSource(sSpan);
-			sSpanRel.setTarget(sTokens.get(i));
-			document.getDocumentGraph().addRelation(sSpanRel);
+			spanRel = SaltFactory.createSSpanningRelation();
+			spanRel.setSource(span);
+			spanRel.setTarget(sTokens.get(i));
+			document.getDocumentGraph().addRelation(spanRel);
 		}
 	}
 
@@ -823,7 +825,7 @@ public class SampleGenerator {
 		if (document.getDocumentGraph().getTextualDSs().isEmpty()) {
 			createPrimaryData(document);
 		}
-		if (document.getDocumentGraph().getSpans().isEmpty()) {
+		if (document.getDocumentGraph().getNodesByName("IS_span1").size()== 0) {
 			createInformationStructureSpan(document);
 		}
 		SAnnotation sAnno = null;
@@ -965,7 +967,7 @@ public class SampleGenerator {
 		if (document == null) {
 			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
-		if (document.getDocumentGraph() == null || document.getDocumentGraph().getSLayerByName("syntax").isEmpty()) {
+		if (document.getDocumentGraph() == null || document.getDocumentGraph().getLayerByName("syntax").isEmpty()) {
 			createSyntaxStructure(document);
 		}
 		List<SStructure> sStructures = Collections.synchronizedList(document.getDocumentGraph().getStructures());

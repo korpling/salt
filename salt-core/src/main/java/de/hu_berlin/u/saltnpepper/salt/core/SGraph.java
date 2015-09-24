@@ -77,11 +77,27 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 
 	/**
-	 * Searches for a layer having the given layer name.
+	 * Searches for a node or a set of nodes having the given node name.
+	 * 
+	 * @param nodeName
+	 *            Name of the node to search for
+	 * @return A complete list of all matching nodes. Is never null.
+	 */
+	public List<SNode> getNodesByName(String nodeName);
+	/**
+	 * Searches for a relation or a set of relations having the given relation name.
+	 * 
+	 * @param relationName
+	 *            Name of the relation to search for
+	 * @return A complete list of all matching relations. Is never null.
+	 */
+	public List<SRelation> getRelationsByName(String relationName);
+	/**
+	 * Searches for a layer or a set of layers having the given layer name.
 	 * 
 	 * @param layerName
 	 *            Name of the layer to search for
 	 * @return A complete list of all matching layers. Is never null.
 	 */
-	public List<SLayer> getSLayerByName(String layerName);
+	public List<SLayer> getLayerByName(String layerName);
 }

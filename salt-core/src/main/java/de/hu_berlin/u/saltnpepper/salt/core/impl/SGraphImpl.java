@@ -25,16 +25,55 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	/** {@inheritDoc} **/
 	@Override
 	public void addLayer(SLayer layer) {
-		if (layer.getName()== null){
-			layer.setName("l"+getLayers().size());
+		if (layer.getName() == null) {
+			layer.setName("l" + getLayers().size());
 		}
 		super.addLayer(layer);
 	}
-	
-	/**
-	 * {@inheritDoc SGraph#getSLayerByName(String)}
-	 */
-	public List<SLayer> getSLayerByName(String layerName) {
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SNode> getNodesByName(String nodeName) {
+		if ((nodeName == null) || (nodeName.isEmpty()))
+			return (null);
+
+		List<SNode> result = new ArrayList<>();
+		if (nodeName != null) {
+			for (SNode n : getNodes()) {
+				if ((n.getName() == null) || (n.getName().isEmpty())) {
+					break;
+				}
+				if (nodeName.equals(n.getName())) {
+					result.add(n);
+				}
+			}
+		}
+		return result;
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SRelation> getRelationsByName(String relationName) {
+		if ((relationName == null) || (relationName.isEmpty()))
+			return (null);
+
+		List<SRelation> result = new ArrayList<>();
+		if (relationName != null) {
+			for (SRelation r : getRelations()) {
+				if ((r.getName() == null) || (r.getName().isEmpty())) {
+					break;
+				}
+				if (relationName.equals(r.getName())) {
+					result.add(r);
+				}
+			}
+		}
+		return result;
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SLayer> getLayerByName(String layerName) {
 		if ((layerName == null) || (layerName.isEmpty()))
 			return (null);
 

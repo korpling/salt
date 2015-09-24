@@ -3,6 +3,7 @@ package de.hu_berlin.u.saltnpepper.salt.core.impl;
 import java.util.Iterator;
 import java.util.Set;
 
+import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.impl.LayerImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
@@ -202,6 +203,18 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 			this.name = createFeature(SaltUtil.SALT_NAMESPACE, SaltUtil.FEAT_NAME, null);
 		}
 		this.name.setValue(name);
+	}
+	
+	/**
+	 * Filters adding of name {@link SFeature} for name 
+	 */
+	@Override
+	public void addLabel(Label label) {
+		if (label!= null && label.getValue()!= null && label instanceof SFeature && SaltUtil.FEAT_NAME_QNAME.equals(label.getQName())){
+			setName(label.getValue().toString());
+		}else{
+			super.addLabel(label);
+		}
 	}
 	// =======================================< SNamedElement
 	@Override

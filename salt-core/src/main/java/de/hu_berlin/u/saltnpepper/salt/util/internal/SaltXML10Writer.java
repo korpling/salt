@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -13,12 +14,18 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
+import com.google.common.io.BaseEncoding;
+
+import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.eclipse.emf.common.util.URI;
+
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
@@ -225,6 +232,11 @@ public class SaltXML10Writer {
 	 * @throws XMLStreamException
 	 */
 	public void writeLable(XMLStreamWriter xml, Label label) throws XMLStreamException {
+		//ignore when label is reference to SDocument
+		if (label!= null && label.getValue() instanceof SDocument){
+			return;
+		}
+		
 		xml.writeEmptyElement(TAG_LABELS);
 		String type = "";
 		if (label instanceof SAnnotation) {
@@ -239,15 +251,55 @@ public class SaltXML10Writer {
 			type = "saltCore:SElementId";
 		}
 		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
+		
 		if (label.getNamespace() != null && !label.getNamespace().isEmpty()) {
-			xml.writeAttribute(ATT_NAMESPACE, label.getNamespace());
+			if (SaltUtil.FEAT_SDATA.equals(label.getName())){
+				xml.writeAttribute(ATT_NAMESPACE, "saltCommon");
+			}else{
+				xml.writeAttribute(ATT_NAMESPACE, label.getNamespace());
+			}
 		}
 		if (label.getName() != null && !label.getName().isEmpty()) {
 			xml.writeAttribute(ATT_NAME, label.getName());
 		}
 		if (label.getValue() != null) {
-			xml.writeAttribute(ATT_VALUE, label.getValue().toString());
+			xml.writeAttribute(ATT_VALUE, marshallValue(label.getValue()));
 		}
+	}
+	
+	/**
+	 * Serializes an object as String. If the passed object is 
+	 * <ul>
+	 * <li>{@link String} - it is prefixed with "T::"</li>
+	 * <li>{@link Boolean} - it is prefixed with "B::"</li>
+	 * <li>{@link Integer} - it is prefixed with "N::"</li>
+	 * <li>{@link Integer} - it is prefixed with "L::"</li>
+	 * <li>{@link Float} - it is prefixed with "F::"</li>
+	 *  <li>{@link URI} - it is prefixed with "U::"</li>
+	 * </ul>
+	 */
+	public String marshallValue(Object value) {
+		String retVal= null;
+		if (value== null){
+		}else if(value instanceof String){
+			retVal= "T::"+StringEscapeUtils.escapeXml11((String)value);
+		}else if(value instanceof Boolean){
+			retVal="B::"+value.toString();
+		}else if(value instanceof Integer){
+			retVal="N::"+value.toString();
+		}else if(value instanceof Long){
+			retVal="N::"+value.toString();
+		}else if(value instanceof Double){
+			retVal="F::"+value.toString();
+		}else if(value instanceof Float){
+			retVal="F::"+value.toString();
+		}else if (value instanceof URI){
+			retVal= "U::"+ StringEscapeUtils.escapeXml11(value.toString());
+		} else if(value instanceof Serializable) {
+			byte[] rawBytes = SerializationUtils.serialize((Serializable) value);
+			retVal= "O::" + BaseEncoding.base64().encode(rawBytes);
+		}
+		return(retVal);
 	}
 
 	/**
@@ -276,7 +328,7 @@ public class SaltXML10Writer {
 		} else if (node instanceof SToken) {
 			type = "sDocumentStructure:SToken";
 		} else if (node instanceof SSpan) {
-			type = "sDocumentStructure:SSPan";
+			type = "sDocumentStructure:SSpan";
 		} else if (node instanceof SStructure) {
 			type = "sDocumentStructure:SStructure";
 		}

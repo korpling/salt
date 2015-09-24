@@ -25,8 +25,6 @@ import java.util.Stack;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.emf.common.util.URI;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
@@ -42,6 +40,8 @@ import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltResourceException;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 /**
  * This class reads the XMI structure of SaltXML and creates the corresponding
@@ -51,7 +51,8 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
  *
  */
 public class SaltXMLHandler extends DefaultHandler2 {
-	private static final Logger logger = LoggerFactory.getLogger(SaltXMLHandler.class);
+	// private static final Logger logger =
+	// LoggerFactory.getLogger(SaltXMLHandler.class);
 
 	public static final String ATT_TYPE = "xsi:type";
 	public static final String ATT_SOURCE = "source";
@@ -240,14 +241,27 @@ public class SaltXMLHandler extends DefaultHandler2 {
 				sRel = SaltFactory.createSCorpusDocumentRelation();
 			}
 			if ((sRel != null) && (target != null) && (source != null)) {
-				setSaltObject(sRel);
-
 				Integer sourceIdx = Integer.parseInt(source.replaceAll("((//@sCorpusGraphs[.]0)|/)/@nodes.", ""));
-				sRel.setSource(nodes.get(sourceIdx));
 				Integer targetIdx = Integer.parseInt(target.replaceAll("((//@sCorpusGraphs[.]0)|/)/@nodes.", ""));
-				sRel.setTarget(nodes.get(targetIdx));
-				relations.add(sRel);
-				currentContainer.push(sRel);
+				if (sourceIdx >= nodes.size()) {
+					throw new SaltResourceException("Cannot find a source node '" + source + "' for relation. ");
+				}
+				SNode sourceNode = nodes.get(sourceIdx);
+				if (targetIdx >= nodes.size()) {
+					throw new SaltResourceException("Cannot find a target node '" + target + "' for relation. ");
+				}
+				SNode targetNode = nodes.get(targetIdx);
+				if (sourceNode == null) {
+					throw new SaltResourceException("Cannot find a source node '" + source + "' for relation. ");
+				} else if (targetNode == null) {
+					throw new SaltResourceException("Cannot find a target node '" + target + "' for relation. ");
+				} else {
+					setSaltObject(sRel);
+					sRel.setSource(sourceNode);
+					sRel.setTarget(targetNode);
+					relations.add(sRel);
+					currentContainer.push(sRel);
+				}
 			}
 			String layersStr = attributes.getValue(ATT_LAYERS);
 			if (layersStr != null) {
@@ -268,6 +282,11 @@ public class SaltXMLHandler extends DefaultHandler2 {
 			Label label = null;
 			String type = attributes.getValue(ATT_TYPE);
 			String ns = attributes.getValue(ATT_NAMESPACE);
+			// replaces namespace, since saltCommon is no accurate namespace for
+			// salt 3.0 any more
+			if ("saltCommon".equals(ns)) {
+				ns = SaltUtil.SALT_NAMESPACE;
+			}
 			String name = attributes.getValue(ATT_NAME);
 			String value = attributes.getValue(ATT_VALUE_STRING);
 			if (value == null) {
@@ -312,10 +331,13 @@ public class SaltXMLHandler extends DefaultHandler2 {
 							((LabelableElement) container).addLabel(label);
 						}
 					} catch (SaltInsertionException e) {
-						logger.warn("A label having the name '" + label.getNamespace() + ":" + label.getName() + "' already exists for container '" + currentContainer.peek() + "' and could not be added twice.");
+						// logger.warn("A label having the name '" +
+						// label.getNamespace() + ":" + label.getName() +
+						// "' already exists for container '" +
+						// currentContainer.peek() +
+						// "' and could not be added twice.");
 					}
 				}
-
 				setSaltObject(label);
 				currentContainer.push(label);
 			}

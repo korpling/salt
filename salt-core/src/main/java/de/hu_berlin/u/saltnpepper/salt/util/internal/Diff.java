@@ -1,6 +1,7 @@
 package de.hu_berlin.u.saltnpepper.salt.util.internal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -9,6 +10,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
@@ -35,10 +43,6 @@ import de.hu_berlin.u.saltnpepper.salt.util.DIFF_TYPES;
 import de.hu_berlin.u.saltnpepper.salt.util.Difference;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 
 /**
  * This class compares two {@link SDocumentGraph} objects for isomorphie. It
@@ -463,7 +467,7 @@ public class Diff {
 		iterator = other.iterator();
 		while (iterator.hasNext()) {
 			SSequentialDS otherDS = iterator.next();
-			SSequentialDS templateDS = (SSequentialDS) dataToDS.get(otherDS.getData());
+			SSequentialDS templateDS = dataToDS.get(otherDS.getData());
 			if (templateDS == null) {
 				if (!diff) {
 					return false;
@@ -943,8 +947,11 @@ public class Diff {
 				Iterator<SRelation<SNode, SNode>> inBetweenIterator = other.getInRelations(otherTarget.getId()).iterator();
 				boolean isRelIso = true;
 				while (inBetweenIterator.hasNext()) {
+					// determines whether the current pair of template relation
+					// and other relation are isomorph
 					isRelIso = true;
 					SRelation<SNode, SNode> otherRel = inBetweenIterator.next();
+
 					// check whether both relations are isomorph
 					if (otherRel.getSource().equals(otherSource) && tempRel.getClass().equals(otherRel.getClass())) {
 						// a potential partner for tempRel was found
@@ -971,19 +978,20 @@ public class Diff {
 							addDifference(tempRel, otherRel, null, DIFF_TYPES.RELATION_DIFFERING, subDiffs);
 						}
 					} else {
+						// either template source and other source are not
+						// isomorph or classes are not equal
 						isRelIso = false;
 					}
 					// both relations are isomorph
 					if (isRelIso) {
 						otherRelSet.remove(otherRel);
 						break;
-					} else {
-						iso = false;
 					}
 				}
 				// the current template relation has no partner
 				if (!isRelIso) {
 					addDifference(tempRel, null, null, DIFF_TYPES.RELATION_MISSING, null);
+					iso = false;
 				}
 			}
 		}
@@ -996,7 +1004,6 @@ public class Diff {
 			}
 			iso = false;
 		}
-
 		return (iso);
 	}
 
@@ -1017,8 +1024,8 @@ public class Diff {
 	public boolean compareLayers(SDocumentGraph template, SDocumentGraph other, Boolean diff) {
 		Set<SLayer> remainingLayers = new HashSet<SLayer>();
 
-		// create a map corresponding the layer's anme and the layer
-		Map<String, SLayer> nameToLayer = new Hashtable<>();
+		// create a map corresponding the layer's name and the layer
+		Multimap<String, SLayer> nameToLayer = HashMultimap.create();
 		Iterator<SLayer> iterator = template.getLayers().iterator();
 		while (iterator.hasNext()) {
 			SLayer templateLayer = iterator.next();
@@ -1030,55 +1037,84 @@ public class Diff {
 		iterator = other.getLayers().iterator();
 		while (iterator.hasNext()) {
 			SLayer otherLayer = iterator.next();
-			SLayer templateLayer = nameToLayer.get(otherLayer.getName());
-			if (templateLayer == null) {
-				// no partner for rel was found, since the combination
-				// textual data source, start and end value has matched
+			Collection<SLayer> templateLayers = nameToLayer.get(otherLayer.getName());
+			if (templateLayers == null || templateLayers.size() == 0) {
+				// no potential partner for layer was found, since the
+				// layers name was not found
 				if (!diff) {
 					return false;
 				}
 				addDifference(null, otherLayer, null, DIFF_TYPES.LAYER_MISSING, null);
 			} else {
-				if (templateLayer.getNodes().size() != otherLayer.getNodes().size()) {
-					addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, null);
-					if (!diff) {
-						return false;
+				// when there are more than one potential partners for layer was
+				// found
+				int i = 0;
+				for (SLayer templateLayer : templateLayers) {
+					i++;
+					boolean morePotentialPartners = i < templateLayers.size();
+					// stores whether current potential partner mathes
+					boolean matches = true;
+					if (templateLayer.getNodes().size() != otherLayer.getNodes().size()) {
+						// template and other layer does not match
+						matches = false;
+						if (!morePotentialPartners) {
+							addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, null);
+							if (!diff) {
+								return false;
+							}
+						}
+					}
+					if (templateLayer.getRelations().size() != otherLayer.getRelations().size()) {
+						// template and other layer does not match
+						matches = false;
+						if (!morePotentialPartners) {
+							addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, null);
+							if (!diff) {
+								return false;
+							}
+						}
+					}
+					// check whether both layers have the same id
+					Set<Difference> subDiffs = new HashSet<Difference>();
+					compareIdentifiableElements(templateLayer, otherLayer, subDiffs);
+					if (subDiffs.size() > 0) {
+						// template and other layer does not match
+						matches = false;
+						if (!morePotentialPartners) {
+							if (!diff) {
+								return false;
+							}
+							addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, subDiffs);
+						}
+					}
+					// check whether both data sources have the same labels
+					subDiffs = new HashSet<Difference>();
+					compareAnnotationContainers(templateLayer, otherLayer, subDiffs);
+					if (subDiffs.size() > 0) {
+						matches = false;
+
+						if (!morePotentialPartners) {
+							// template and other layer does not match
+							if (!diff) {
+								return false;
+							}
+							addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, subDiffs);
+						}
+					}
+					if (matches) {
+						remainingLayers.remove(templateLayer);
+						break;
 					}
 				}
-				if (templateLayer.getRelations().size() != otherLayer.getRelations().size()) {
-					addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, null);
-					if (!diff) {
-						return false;
-					}
-				}
-				// check whether both layers have the same id
-				Set<Difference> subDiffs = new HashSet<Difference>();
-				compareIdentifiableElements(templateLayer, otherLayer, subDiffs);
-				if (subDiffs.size() > 0) {
-					if (!diff) {
-						return false;
-					}
-					addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, subDiffs);
-				}
-				// check whether both data sources have the same labels
-				subDiffs = new HashSet<Difference>();
-				compareAnnotationContainers(templateLayer, otherLayer, subDiffs);
-				if (subDiffs.size() > 0) {
-					if (!diff) {
-						return false;
-					}
-					addDifference(templateLayer, otherLayer, null, DIFF_TYPES.LAYER_DIFFERING, subDiffs);
-				}
-				remainingLayers.remove(templateLayer);
 			}
 		}
-		// check the remaining data sources
+		// check the remaining layers
 		if (remainingLayers.size() > 0) {
 			for (SLayer layer : remainingLayers) {
 				if (!diff) {
 					return false;
 				}
-				addDifference(layer, null, null, DIFF_TYPES.NODE_MISSING, null);
+				addDifference(layer, null, null, DIFF_TYPES.LAYER_MISSING, null);
 			}
 		}
 		return (true);

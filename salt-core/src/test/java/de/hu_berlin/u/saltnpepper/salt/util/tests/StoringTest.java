@@ -3,6 +3,7 @@ package de.hu_berlin.u.saltnpepper.salt.util.tests;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
@@ -11,9 +12,11 @@ import org.junit.Test;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests.TestUtils;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
 import de.hu_berlin.u.saltnpepper.salt.tests.SaltTestsUtil;
+import de.hu_berlin.u.saltnpepper.salt.util.Difference;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public class StoringTest {
@@ -36,7 +39,6 @@ public class StoringTest {
 
 		// store other document
 		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore")+"/DocumentGraph_text.salt");
-		System.out.println("tmpFile: "+ tmpFile);
 		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
 		SaltUtil.saveDocumentGraph(other.getDocumentGraph(), path);
 
@@ -104,6 +106,7 @@ public class StoringTest {
 
 		// compare both document graphs
 		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
+		
 		assertTrue(template.getDocumentGraph().isIsomorph(graph));
 	}
 
