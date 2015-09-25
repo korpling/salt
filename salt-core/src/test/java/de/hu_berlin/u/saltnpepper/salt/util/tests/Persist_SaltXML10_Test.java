@@ -1,8 +1,7 @@
 package de.hu_berlin.u.saltnpepper.salt.util.tests;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
@@ -12,7 +11,6 @@ import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
