@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.URI;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.rules.TemporaryFolder;
 import org.junit.Assert;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
@@ -96,20 +95,20 @@ public class VisJsCreatorTest {
 			e1.printStackTrace();
 		}
 		
-		BufferedWriter ow;
+		BufferedWriter bw;
 				
 		try {
-			ow = visJsCreator.getJsonNodes();
-			ow.newLine();
-			ow.flush();	
+			bw = visJsCreator.getNodeWriter();
+			bw.newLine();
+			bw.flush();	
 			
-			ow = visJsCreator.getJsonEdges();		
-			ow.newLine();
-			ow.flush();	
+			bw = visJsCreator.getEdgeWriter();		
+			bw.newLine();
+			bw.flush();	
 	
-			ow = visJsCreator.getOptions();
-			ow.flush();
-			ow.close();
+			bw = visJsCreator.getOptionsWriter();
+			bw.flush();
+			bw.close();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -137,15 +136,15 @@ public class VisJsCreatorTest {
 		BufferedWriter ow;
 				
 		try {
-			ow = visJsCreator.getJsonNodes();
+			ow = visJsCreator.getNodeWriter();
 			ow.newLine();
 			ow.flush();	
 			
-			//ow = visJsCreator.getJsonEdges();		
+			//ow = visJsCreator.getEdgeWriter();		
 		//	ow.newLine();
 		//	ow.flush();	
 	
-			ow = visJsCreator.getOptions();
+			ow = visJsCreator.getOptionsWriter();
 			ow.flush();
 			ow.close();
 			
