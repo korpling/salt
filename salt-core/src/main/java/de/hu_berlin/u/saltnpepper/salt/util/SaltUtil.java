@@ -594,7 +594,7 @@ public class SaltUtil {
 	 *    |-1.dot
 	 * </pre>
 	 */
-	public static void save_DOT(Object content, URI location){
+	public static void save_DOT(Object content, URI location) {
 		if (location == null) {
 			throw new SaltResourceException("Exception in storing Salt model to dot file, because no uri was given.");
 		}

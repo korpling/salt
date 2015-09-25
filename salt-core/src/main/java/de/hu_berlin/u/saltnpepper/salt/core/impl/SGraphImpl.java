@@ -343,7 +343,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	/** {@inheritDoc} **/
 	@Override
 	public URI getPath() {
-		return(SaltUtil.createSaltURI(getId()));
+		return (SaltUtil.createSaltURI(getId()));
 	}
 	// =======================================< SPathElement
 }

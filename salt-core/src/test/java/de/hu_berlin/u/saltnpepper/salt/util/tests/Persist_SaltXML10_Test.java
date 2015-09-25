@@ -161,32 +161,32 @@ public class Persist_SaltXML10_Test {
 		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
 		assertTrue(template.getDocumentGraph().isIsomorph(graph));
 	}
-	
+
 	/**
 	 * 
 	 */
 	@Test
-	public void testLoadStore_SaltProject(){
-		SaltProject project= SaltFactory.createSaltProject();
-		
-		//create two corpus structures
+	public void testLoadStore_SaltProject() {
+		SaltProject project = SaltFactory.createSaltProject();
+
+		// create two corpus structures
 		SampleGenerator.createCorpusStructure(project);
 		SampleGenerator.createCorpusStructure(project);
-		
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/saltProject/"+SaltUtil.FILE_SALT_PROJECT);
+
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/saltProject/" + SaltUtil.FILE_SALT_PROJECT);
 		SaltUtil.saveSaltProject(project, URI.createFileURI(tmpFile.getAbsolutePath()));
-		SaltProject loaded= SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
-		
+		SaltProject loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
+
 		assertEquals(project.getCorpusGraphs().size(), loaded.getCorpusGraphs().size());
 		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(), loaded.getCorpusGraphs().get(0).getNodes().size());
 		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
 		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(), loaded.getCorpusGraphs().get(1).getNodes().size());
 		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(), loaded.getCorpusGraphs().get(1).getRelations().size());
-		
+
 		tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/saltProject2/");
 		SaltUtil.saveSaltProject(project, URI.createFileURI(tmpFile.getAbsolutePath()));
-		loaded= SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
-		
+		loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
+
 		assertEquals(project.getCorpusGraphs().size(), loaded.getCorpusGraphs().size());
 		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(), loaded.getCorpusGraphs().get(0).getNodes().size());
 		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());

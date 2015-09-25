@@ -34,17 +34,18 @@ public class SNodeTest extends SAnnotationContainerTest {
 	public void testGetName() {
 		TestHelper.testGetName(getFixture());
 	}
+
 	/**
 	 * Tests the method {@link SNode#getPath()}.
 	 */
 	@Test
-	public void testGetPath(){
+	public void testGetPath() {
 		assertNull(getFixture().getPath());
 		getFixture().setId("node1");
 		assertNotNull(getFixture().getPath());
 		assertEquals(SaltUtil.createSaltURI("node1"), getFixture().getPath());
-		
-		SGraph graph= SaltFactory.createSGraph();
+
+		SGraph graph = SaltFactory.createSGraph();
 		graph.addNode(getFixture());
 		assertEquals(SaltUtil.createSaltURI(getFixture().getId()), getFixture().getPath());
 	}

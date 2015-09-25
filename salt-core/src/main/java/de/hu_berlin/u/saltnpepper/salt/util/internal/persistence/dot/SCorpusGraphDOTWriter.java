@@ -69,7 +69,7 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 	private PrintStream currOutputStream = null;
 
 	public void save() {
-		if (outputURI == null){
+		if (outputURI == null) {
 			throw new SaltException("Cannot print the given model to dot, because no output file is given.");
 		}
 		File outputFile = new File(getOutputURI().toFileString());

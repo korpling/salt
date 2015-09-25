@@ -235,12 +235,13 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 		}
 		this.type.setValue(type);
 	}
+
 	// =======================================< STypedElement
 	// =======================================> SPathElement
 	/** {@inheritDoc} **/
 	@Override
 	public URI getPath() {
-		return(SaltUtil.createSaltURI(getId()));
+		return (SaltUtil.createSaltURI(getId()));
 	}
 	// =======================================< SPathElement
 }

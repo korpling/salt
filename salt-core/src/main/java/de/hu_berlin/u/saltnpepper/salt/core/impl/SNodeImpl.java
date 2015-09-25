@@ -248,13 +248,14 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		}
 		this.name.setValue(name);
 	}
+
 	// =======================================< SNamedElement
 
 	// =======================================> SPathElement
 	/** {@inheritDoc} **/
 	@Override
 	public URI getPath() {
-		return(SaltUtil.createSaltURI(getId()));
+		return (SaltUtil.createSaltURI(getId()));
 	}
 	// =======================================< SPathElement
 }

@@ -69,7 +69,6 @@ public interface SaltXML10Dictionary {
 	/** constant to address the xml-attribute 'xmi:version'. **/
 	public static final String ATT_XMI_VERSION = "version";
 
-	
 	public static final String ATT_TYPE = "xsi:type";
 
 	public static final String ATT_VALUE_STRING = "valueString";
