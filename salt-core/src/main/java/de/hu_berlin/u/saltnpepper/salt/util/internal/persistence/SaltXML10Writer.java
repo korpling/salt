@@ -351,32 +351,34 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 
 		xml.writeEmptyElement(TAG_LABELS);
-		String type = "";
-		if (label instanceof SAnnotation) {
-			type = "saltCore:SAnnotation";
-		} else if (label instanceof SMetaAnnotation) {
-			type = "saltCore:SMetaAnnotation";
-		} else if (label instanceof SProcessingAnnotation) {
-			type = "saltCore:SProcessingAnnotation";
-		} else if (label instanceof SFeature) {
-			type = "saltCore:SFeature";
-		} else if (label instanceof Identifier) {
-			type = "saltCore:SElementId";
-		}
-		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
-
-		if (label.getNamespace() != null && !label.getNamespace().isEmpty()) {
-			if (SaltUtil.FEAT_SDATA.equals(label.getName())) {
-				xml.writeAttribute(ATT_NAMESPACE, "saltCommon");
-			} else {
-				xml.writeAttribute(ATT_NAMESPACE, label.getNamespace());
+		if (label != null) {
+			String type = "";
+			if (label instanceof SAnnotation) {
+				type = "saltCore:SAnnotation";
+			} else if (label instanceof SMetaAnnotation) {
+				type = "saltCore:SMetaAnnotation";
+			} else if (label instanceof SProcessingAnnotation) {
+				type = "saltCore:SProcessingAnnotation";
+			} else if (label instanceof SFeature) {
+				type = "saltCore:SFeature";
+			} else if (label instanceof Identifier) {
+				type = "saltCore:SElementId";
 			}
-		}
-		if (label.getName() != null && !label.getName().isEmpty()) {
-			xml.writeAttribute(ATT_NAME, label.getName());
-		}
-		if (label.getValue() != null) {
-			xml.writeAttribute(ATT_VALUE, marshallValue(label.getValue()));
+			xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
+
+			if (label.getNamespace() != null && !label.getNamespace().isEmpty()) {
+				if (SaltUtil.FEAT_SDATA.equals(label.getName())) {
+					xml.writeAttribute(ATT_NAMESPACE, "saltCommon");
+				} else {
+					xml.writeAttribute(ATT_NAMESPACE, label.getNamespace());
+				}
+			}
+			if (label.getName() != null && !label.getName().isEmpty()) {
+				xml.writeAttribute(ATT_NAME, label.getName());
+			}
+			if (label.getValue() != null) {
+				xml.writeAttribute(ATT_VALUE, marshallValue(label.getValue()));
+			}
 		}
 	}
 

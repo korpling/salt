@@ -17,12 +17,10 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.dot;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 
 public class DOTEdge {
 	public String fromId = null;
@@ -30,11 +28,11 @@ public class DOTEdge {
 	public String toId = null;
 	public String color = null;
 	public String style = null;
-	public EList<String> labels = new BasicEList<String>();
+	public List<String> labels = new ArrayList<>();
 
 	public String toString() {
 		String retStr = "";
-		retStr = "<" + this.fromId + "> -> <" + this.toId + ">";
+		retStr = "<" + fromId + "> -> <" + toId + ">";
 		// open properties
 		retStr = retStr + "[";
 
@@ -54,7 +52,6 @@ public class DOTEdge {
 		}
 
 		if ((labels != null) && (labels.size() > 0)) {
-			// retStr= retStr + "label=\"{{"+id + "}|";
 			String labelStr = "label=\"";
 			boolean printSep = false;
 			for (String label : labels) {

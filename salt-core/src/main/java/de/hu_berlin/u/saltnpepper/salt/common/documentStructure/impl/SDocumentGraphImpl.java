@@ -532,10 +532,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			seqRel = SaltFactory.createSTimelineRelation();
 			((STimelineRelation) seqRel).setTarget((STimeline) sequence.getDataSource());
 		}
-		seqRel.setSource(token);
-		seqRel.setStart(sequence.getStart());
-		seqRel.setEnd(sequence.getEnd());
-		addRelation(seqRel);
+		if (seqRel != null) {
+			seqRel.setSource(token);
+			seqRel.setStart(sequence.getStart());
+			seqRel.setEnd(sequence.getEnd());
+			addRelation(seqRel);
+		}
 	}
 
 	/** {@inheritDoc} **/

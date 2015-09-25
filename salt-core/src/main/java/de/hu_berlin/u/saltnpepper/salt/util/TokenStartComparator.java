@@ -61,10 +61,10 @@ public class TokenStartComparator implements Comparator<SToken> {
 	public int compare(SToken o1, SToken o2) {
 		int retVal = 0;
 		if (o1 == null) {
-			new SaltParameterException("Cannot compare the given SToken-objects, bacause first one is null.");
+			throw new SaltParameterException("Cannot compare the given SToken-objects, bacause first one is null.");
 		}
 		if (o2 == null) {
-			new SaltParameterException("Cannot compare the given SToken-objects, bacause second one is null.");
+			throw new SaltParameterException("Cannot compare the given SToken-objects, bacause second one is null.");
 		}
 		STextualRelation sTextRelO1 = null;
 		for (SRelation rel : getDocumentGraph().getOutRelations(o1.getId())) {
@@ -82,13 +82,15 @@ public class TokenStartComparator implements Comparator<SToken> {
 			}
 		}
 
-		// both tokens are equal
-		if (sTextRelO1.getStart().equals(sTextRelO2.getStart())) {
-			retVal = 0;
-		} else if (sTextRelO1.getStart() < sTextRelO2.getStart()) {
-			retVal = -1;
-		} else if (sTextRelO1.getStart() > sTextRelO2.getStart()) {
-			retVal = 1;
+		if (sTextRelO1 != null && sTextRelO2 != null) {
+			// both tokens are equal
+			if (sTextRelO1.getStart().equals(sTextRelO2.getStart())) {
+				retVal = 0;
+			} else if (sTextRelO1.getStart() < sTextRelO2.getStart()) {
+				retVal = -1;
+			} else if (sTextRelO1.getStart() > sTextRelO2.getStart()) {
+				retVal = 1;
+			}
 		}
 
 		return (retVal);

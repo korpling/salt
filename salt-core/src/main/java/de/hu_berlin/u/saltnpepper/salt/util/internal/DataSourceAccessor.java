@@ -155,16 +155,16 @@ public class DataSourceAccessor {
 	 */
 	private static List<SNode> getSNodesBySequence(SDocumentGraph documentGraph, DataSourceSequence sequence, List<Class<? extends SNode>> nodeClasses) {
 		if (sequence == null) {
-			new SaltParameterException("Cannot start returning nodes overlapping a data source, because the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
+			throw new SaltParameterException("Cannot start returning nodes overlapping a data source, because the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
 		}
 		if (sequence.getStart() == null) {
-			new SaltParameterException("Cannot start returning nodes overlapping a data source, because the 'sStart' value of the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
+			throw new SaltParameterException("Cannot start returning nodes overlapping a data source, because the 'sStart' value of the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
 		}
 		if (sequence.getEnd() == null) {
-			new SaltParameterException("Cannot start returning nodes overlapping a data source, because the 'sEnd' value of the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
+			throw new SaltParameterException("Cannot start returning nodes overlapping a data source, because the 'sEnd' value of the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
 		}
 		if (documentGraph == null) {
-			new SaltParameterException("Cannot start method please set the document graph first.");
+			throw new SaltParameterException("Cannot start method please set the document graph first.");
 		}
 
 		List<SNode> nodes = null;
@@ -203,7 +203,7 @@ public class DataSourceAccessor {
 	// TODO must be enabled for all SNode lists and not only SToken lists
 	public static boolean isContinuousByText(SDocumentGraph documentGraph, List<? extends SNode> subSNodList, List<? extends SNode> fullSNodList) {
 		if (documentGraph == null) {
-			new SaltParameterException("Cannot start method 'getContinuously(List<SToken>, List<SToken>)' please set the document graph first.");
+			throw new SaltParameterException("Cannot start method 'getContinuously(List<SToken>, List<SToken>)' please set the document graph first.");
 		}
 		Boolean retVal = null;
 		// compute sorted list of overlapped tokens by the given sStructuredNode
@@ -240,7 +240,7 @@ public class DataSourceAccessor {
 	 */
 	public static void sortSTokenByText(SDocumentGraph documentGraph) {
 		if (documentGraph == null) {
-			new SaltParameterException("Cannot start method please set the document graph first.");
+			throw new SaltParameterException("Cannot start method please set the document graph first.");
 		}
 		if (documentGraph.getTokens() != null) {
 			TokenStartComparator comparator = new TokenStartComparator();
@@ -271,7 +271,7 @@ public class DataSourceAccessor {
 	 */
 	public static List<SToken> getSortedSTokenByText(SDocumentGraph documentGraph, List<SToken> sTokens2sort) {
 		if (documentGraph == null) {
-			new SaltParameterException("Cannot start method please set the document graph first.");
+			throw new SaltParameterException("Cannot start method please set the document graph first.");
 		}
 		List<SToken> retVal = null;
 		if (sTokens2sort != null) {
@@ -291,7 +291,7 @@ public class DataSourceAccessor {
 	public static List<SToken> getSortedSTokenByText(SDocumentGraph documentGraph) {
 		List<SToken> retVal = null;
 		if (documentGraph == null) {
-			new SaltParameterException("Cannot start method please set the document graph first.");
+			throw new SaltParameterException("Cannot start method please set the document graph first.");
 		}
 
 		if ((documentGraph.getTextualDSs() != null) && (documentGraph.getTextualDSs().size() > 0)) {
@@ -654,7 +654,7 @@ public class DataSourceAccessor {
 						this.lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
 						this.lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
 						this.lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
-					} else {
+					} else if (seqRel!= null){
 						if (seqRel.getStart() == null) {
 							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set. ");
 						} else if (seqRel.getEnd() == null) {

@@ -252,7 +252,6 @@ public class DiffTest {
 		// same primary date
 		assertTrue(getFixture().isIsomorph());
 
-		LinkedHashSet<Difference> noDifferences = new LinkedHashSet<Difference>();
 		assertEquals(0, getFixture().findDiffs().size());
 
 		// different primary date
