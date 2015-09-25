@@ -173,11 +173,11 @@ public class SampleGenerator {
 	 * Creates the following structure:
 	 * 
 	 * <pre>
-	 * 				rootCorpus
-	 * 		/					\
-	 * 	subCorp1				subCorp2
-	 * 	/		\				/		\
-	 * doc1		doc2		doc3		doc4
+	 *             rootCorpus
+	 *       /                     \
+	 *   subCorp1               subCorp2
+	 *  /       \             /         \
+	 * doc1    doc2         doc3       doc4
 	 * </pre>
 	 * 
 	 * @throws IOException

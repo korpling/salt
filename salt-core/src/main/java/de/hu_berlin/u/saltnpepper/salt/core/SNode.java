@@ -4,7 +4,7 @@ import java.util.List;
 
 import de.hu_berlin.u.saltnpepper.graph.Node;
 
-public interface SNode extends Node, SAnnotationContainer, SNamedElement {
+public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathElement {
 	/**
 	 * When this node belongs to a {@link SGraph}, a list of outgoing relations
 	 * of this node are returned.

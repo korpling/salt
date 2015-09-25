@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
@@ -337,4 +339,11 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	}
 
 	// =======================================< SFeature
+	// =======================================> SPathElement
+	/** {@inheritDoc} **/
+	@Override
+	public URI getPath() {
+		return(SaltUtil.createSaltURI(getId()));
+	}
+	// =======================================< SPathElement
 }

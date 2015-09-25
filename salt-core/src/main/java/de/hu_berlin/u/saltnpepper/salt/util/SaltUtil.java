@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -31,8 +32,8 @@ import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.SaltXML10Writer;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.SaltXML10Handler;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.SaltXML10Writer;
 
 /**
  * This class contains a set of helpful methods.
@@ -256,6 +257,26 @@ public class SaltUtil {
 	}
 
 	/**
+	 * Creates a Salt URI from the passed path.
+	 * 
+	 * @param path
+	 *            path to an element
+	 * @return corresponding Salt URI
+	 */
+	public static URI createSaltURI(String path) {
+		URI uri = null;
+		if (path != null && !path.isEmpty()) {
+			if (path.startsWith(SALT_NAMESPACE + ":")) {
+				uri = URI.createURI(path);
+			} else {
+				uri = URI.createURI(SALT_NAMESPACE + ":" + path);
+			}
+		}
+		return (uri);
+	}
+
+	// =========================================================> Persistence
+	/**
 	 * Loads an object coming from a SaltXML (.{@link #FILE_ENDING_SALT_XML})
 	 * and returns it.
 	 * 
@@ -320,105 +341,31 @@ public class SaltUtil {
 	 *         corpus in uri
 	 */
 	public static SaltProject loadSaltProject(URI location) {
-		if (!location.toFileString().endsWith(FILE_ENDING_SALT_XML)) {
-			// looks weird, but is necessary in case of uri ends with /
-			if (location.toString().endsWith("/")) {
-				location = location.trimSegments(1);
-			}
+		if (!FILE_ENDING_SALT_XML.equals(location.fileExtension())) {
 			location = location.appendSegment(FILE_SALT_PROJECT);
 		}
 
 		SaltProject saltProject = null;
 		if (location == null) {
-			throw new SaltResourceException("Can not load SaltProject, because the given uri is null.");
+			throw new SaltResourceException("Can not load SaltProject, because the given uri is null. ");
 		}
-		File saltProjectPath = null;
+		File saltProjectFile = null;
 		try {
-			saltProjectPath = new File(location.toFileString());
+			saltProjectFile = new File(location.toFileString());
 		} catch (Exception e) {
-			throw new SaltResourceException("Can not load SaltProject.", e);
+			throw new SaltResourceException("Can not load SaltProject. ", e);
 		}
-		if (saltProjectPath.exists()) {
-			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectPath + "' does not exist.");
-		}
-		if (saltProjectPath.isDirectory()) {
-			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectPath + "' is not a directory.");
+		if (!saltProjectFile.exists()) {
+			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectFile + "' does not exist. ");
 		}
 
+		Object project = load(location);
+		if (project instanceof SaltProject) {
+			saltProject = (SaltProject) project;
+		} else {
+			throw new SaltResourceException("Can not load SaltProject, because the file at '" + saltProjectFile + "' does not contain a Salt project. ");
+		}
 		return (saltProject);
-	}
-
-	/**
-	 * Loads the given SaltXML file (.{@value #FILE_ENDING_SALT_XML}) into this
-	 * object. If the given SaltXML file does not contain a {@link SCorpusGraph}
-	 * object persisting, an exception will be thrown. If the SaltXML file
-	 * contains persistings for more than one {@link SCorpusGraph} object, the
-	 * first one will be load (analog to {@link #load(URI, 0)}).
-	 * 
-	 * @param location
-	 *            the {@link URI} to locate the SaltXML file
-	 */
-	public static SCorpusGraph loadCorpusGraph(URI location) {
-		return (loadCorpusGraph(location, 0));
-	}
-
-	/**
-	 * Loads the given SaltXML file (.{@value #FILE_ENDING_SALT_XML}) into this
-	 * object. If the given SaltXML file does not contain a {@link SCorpusGraph}
-	 * object persisting, an exception will be thrown. The parameter
-	 * <code>numOfSCorpusGraph</code> determines which object shall be load, in
-	 * case of the given SaltXML file contains more than one persisting of
-	 * {@link SCorpusGraph} objects.
-	 * 
-	 * @param location
-	 *            the {@link URI} to locate the SaltXML file
-	 * @param numOfCorpusGraph
-	 *            number of graph to be load, note that the list of graphs
-	 *            starts with 0
-	 */
-	public static SCorpusGraph loadCorpusGraph(URI location, Integer numOfCorpusGraph) {
-		if (location == null) {
-			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName() + "' object, because the passed uri is empty. ");
-		}
-		SCorpusGraph retVal = null;
-
-		if (!location.toFileString().endsWith("." + FILE_ENDING_SALT_XML)) {
-			// looks weird, but is necessary in case of uri ends with /
-			if (location.toString().endsWith("/")) {
-				location = location.trimSegments(1);
-			}
-			location = location.appendSegment(FILE_SALT_PROJECT);
-		}
-
-		Object obj = load(location);
-		if (obj instanceof SCorpusGraph) {
-			retVal = (SCorpusGraph) obj;
-		} else if (obj instanceof SaltProject) {
-			if ((((SaltProject) obj).getCorpusGraphs() != null) && (((SaltProject) obj).getCorpusGraphs().size() >= numOfCorpusGraph)) {
-				retVal = ((SaltProject) obj).getCorpusGraphs().get(numOfCorpusGraph);
-			}
-		}
-		if (retVal == null) {
-			throw new SaltResourceException("No '" + SCorpusGraph.class.getName() + "' object was found in resource '" + location + "'.");
-		}
-		// {// TODO all this can be removed, when feature request Feature #117
-		// is
-		// // done
-		// SaltLoadingTraverser loadingTraverser = new SaltLoadingTraverser();
-		// loadingTraverser.saltProjectPath =
-		// sCorpusGraphUri.toFileString().replace(SaltFactory.FILE_SALT_PROJECT,
-		// "");
-		// EList<Node> startNodes = (EList<Node>) (EList<? extends Node>)
-		// retVal.getSRoots();
-		// if ((startNodes != null) && (startNodes.size() > 0)) {
-		// retVal.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-		// "SCOPRUS_GRAPH_LOADING", loadingTraverser);
-		// }
-		// }// TODO all this can be removed, when feature request Feature #117
-		// is
-		// done
-		return (retVal);
-
 	}
 
 	/**
@@ -444,11 +391,8 @@ public class SaltUtil {
 	}
 
 	/**
-	 * Persists the given {@link SDocumentGraph} object as SaltXML file at the
-	 * location given by the passed {@link URI} object. The {@link URI} of where
-	 * the {@link SDocumentGraph} is stored as {@link SFeature} by calling
-	 * {@link SDocument#setSDocumentGraphLocation(URI)}, in case of the given
-	 * {@link SDocumentGraph} is contained by an {@link SDocument} object.
+	 * Persists the passed {@link SDocumentGraph} object in a SaltXML file at
+	 * the passed location.
 	 * 
 	 * @param documentGraph
 	 *            {@link SDocumentGraph} object to persist
@@ -468,4 +412,89 @@ public class SaltUtil {
 			writer.writeDocumentGraph(documentGraph);
 		}
 	}
+
+	/**
+	 * Persists the passed {@link SCorpusGraph} object in a SaltXML file at the
+	 * passed location.
+	 * 
+	 * @param corpusGraph
+	 *            {@link SCorpusGraph} object to persist
+	 * @param location
+	 *            location of where to persist object as {@link URI}
+	 */
+	public static void saveCorpusGraph(SCorpusGraph corpusGraph, URI location) {
+		if ((corpusGraph.getDocuments() != null) && (corpusGraph.getDocuments().size() > 0)) {
+			Iterator<SDocument> docs = corpusGraph.getDocuments().iterator();
+			while (docs.hasNext()) {
+				SDocument doc = docs.next();
+				URI docURI = location;
+				for (String seg : doc.getPath().segments()) {
+					docURI = docURI.appendSegment(seg);
+				}
+				docURI = docURI.appendFileExtension(FILE_ENDING_SALT_XML);
+				if (doc.getDocumentGraph() != null) {
+					// store document structure
+					doc.saveDocumentGraph(docURI);
+				} else {
+					// only store folder structure
+					URI corpUri = docURI.trimFileExtension().trimSegments(1);
+					String str = corpUri.toFileString();
+					if (str == null || str.isEmpty()) {
+						str = corpUri.toString();
+					}
+					File corpFile = new File(str);
+					corpFile.mkdirs();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Persists the passed {@link SaltProject} object in a SaltXML file at the
+	 * passed location.
+	 * 
+	 * @param saltProject
+	 *            {@link SaltProject} object to persist
+	 * @param location
+	 *            location of where to persist object as {@link URI}
+	 */
+	public static void saveSaltProject(SaltProject saltProject, URI location) {
+		if (location == null) {
+			throw new SaltResourceException("Cannot save SaltProject, because the given uri is null.");
+		}
+		URI saltProjectFolder = null;
+		URI saltProjectFile = null;
+		if (FILE_ENDING_SALT_XML.equals(location.fileExtension())) {
+			// location is a file name
+			saltProjectFile = location;
+			saltProjectFolder = location.trimFileExtension().trimSegments(1);
+		} else {
+			// location is a folder name
+			saltProjectFile = location.appendSegment(FILE_SALT_PROJECT);
+			saltProjectFolder = location;
+		}
+		// in case the salt project folder does not exist, create it
+		String str = saltProjectFolder.toFileString();
+		if (str == null || str.isEmpty()) {
+			str = saltProjectFolder.toString();
+		}
+		File folder = new File(str);
+		folder.mkdirs();
+
+		// write SaltProject to file
+		SaltXML10Writer writer = new SaltXML10Writer(saltProjectFile);
+		writer.writeSaltProject(saltProject);
+
+		// write folders and document structures to file
+		if ((saltProject.getCorpusGraphs() != null) && (saltProject.getCorpusGraphs().size() > 0)) {
+			// store all documents if exist
+			Iterator<SCorpusGraph> cGraphs = saltProject.getCorpusGraphs().iterator();
+			while (cGraphs.hasNext()) {
+				SCorpusGraph cGraph = cGraphs.next();
+				saveCorpusGraph(cGraph, saltProjectFolder);
+			}
+		}
+	}
+
+	// =========================================================< Persistence
 }

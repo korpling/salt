@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+
 import de.hu_berlin.u.saltnpepper.graph.impl.NodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
@@ -247,4 +249,12 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		this.name.setValue(name);
 	}
 	// =======================================< SNamedElement
+
+	// =======================================> SPathElement
+	/** {@inheritDoc} **/
+	@Override
+	public URI getPath() {
+		return(SaltUtil.createSaltURI(getId()));
+	}
+	// =======================================< SPathElement
 }

@@ -3,6 +3,8 @@ package de.hu_berlin.u.saltnpepper.salt.core.impl;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+
 import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
@@ -234,4 +236,11 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 		this.type.setValue(type);
 	}
 	// =======================================< STypedElement
+	// =======================================> SPathElement
+	/** {@inheritDoc} **/
+	@Override
+	public URI getPath() {
+		return(SaltUtil.createSaltURI(getId()));
+	}
+	// =======================================< SPathElement
 }

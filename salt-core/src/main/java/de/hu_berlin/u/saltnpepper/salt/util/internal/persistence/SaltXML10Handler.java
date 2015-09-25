@@ -50,70 +50,13 @@ import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
  * @author florian
  *
  */
-public class SaltXML10Handler extends DefaultHandler2 {
+public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictionary {
 	// private static final Logger logger =
 	// LoggerFactory.getLogger(SaltXMLHandler.class);
 
-	public static final String ATT_TYPE = "xsi:type";
-	public static final String ATT_SOURCE = "source";
-	public static final String ATT_TARGET = "target";
-	public static final String ATT_LAYERS = "layers";
-
-	// salt-graph
-	public static final String TAG_NODES = "nodes";
-	public static final String TAG_EDGES = "edges";
-	public static final String TAG_LABELS = "labels";
-	public static final String TAG_LAYERS = "layers";
-
-	public static final String ATT_NAMESPACE = "namespace";
-	public static final String ATT_NAME = "name";
-	public static final String ATT_VALUE = "value";
-	public static final String ATT_VALUE_STRING = "valueString";
-
-	// salt-saltCore
-	public static final String TYPE_SFEATURE = "saltCore:SFeature";
-	public static final String TYPE_SELEMENTID = "saltCore:SElementId";
-	public static final String TYPE_SANNOTATION = "saltCore:SAnnotation";
-	public static final String TYPE_SMETAANNOTATION = "saltCore:SMetaAnnotation";
-	public static final String TYPE_SPROCESSINGANNOTATION = "saltCore:SProcessingAnnotation";
-
-	// salt-saltCommon
-	public static final String TAG_SDOCUMENT = "sDocument";
-	public static final String TAG_SDOCUMENT_GRAPH = "sDocumentStructure:SDocumentGraph";
-	public static final String TAG_SALT_PROJECT = "saltCommon:SaltProject";
-	public static final String TAG_SCORPUS_GRAPH = "sCorpusGraphs";
-
-	public static final String ATT_SNAME = "sName";
-
-	public static final String TYPE_SCORPUS = "sCorpusStructure:SCorpus";
-	public static final String TYPE_SDOCUMENT = "sCorpusStructure:SDocument";
-	public static final String TYPE_SCORPUS_DOCUMENT_RELATION = "sCorpusStructure:SCorpusDocumentRelation";
-	public static final String TYPE_SCORPUS_RELATION = "sCorpusStructure:SCorpusRelation";
-
-	public static final String TYPE_STIMELINE = "sDocumentStructure:STimeline";
-	public static final String TYPE_SAUDIODS = "sDocumentStructure:SAudioDS";
-	public static final String TYPE_STEXTUALDS = "sDocumentStructure:STextualDS";
-	public static final String TYPE_STOKEN = "sDocumentStructure:SToken";
-	public static final String TYPE_SSPAN = "sDocumentStructure:SSpan";
-	public static final String TYPE_SSTRUCTURE = "sDocumentStructure:SStructure";
-	public static final String TYPE_STEXTUAL_RELATION = "sDocumentStructure:STextualRelation";
-	public static final String TYPE_SAUDIO_RELATION = "sDocumentStructure:SAudioRelation";
-	public static final String TYPE_STIMELINE_RELATION = "sDocumentStructure:STimelineRelation";
-	public static final String TYPE_SSPANNING_RELATION = "sDocumentStructure:SSpanningRelation";
-	public static final String TYPE_SORDER_RELATION = "sDocumentStructure:SOrderRelation";
-	public static final String TYPE_SDOMINANCE_RELATION = "sDocumentStructure:SDominanceRelation";
-	public static final String TYPE_SPOINTING_RELATION = "sDocumentStructure:SPointingRelation";
-
-	public static final String TYPE_SPOS = "saltSemantics:SPOSAnnotation";
-	public static final String TYPE_SLEMMA = "saltSemantics:SLemmaAnnotation";
-	public static final String TYPE_SCAT = "saltSemantics:SCatAnnotation";
-	public static final String TYPE_SSENTENCE = "saltSemantics:SentenceAnnotation";
-	public static final String TYPE_SWORD = "saltSemantics:SWordAnnotation";
-	public static final String TYPE_STYPE = "saltSemantics:STypeAnnotation";
-
 	public SaltXML10Handler() {
 		nodes = new ArrayList<SNode>();
-		relations = new ArrayList<SRelation>();
+		relations = new ArrayList<>();
 		layers = new HashMap<String, SLayer>();
 		currentContainer = new Stack<Object>();
 	}
@@ -148,7 +91,7 @@ public class SaltXML10Handler extends DefaultHandler2 {
 	/** a list of all read nodes **/
 	private List<SNode> nodes = null;
 	/** a list of all read edges **/
-	private List<SRelation> relations = null;
+	private List<SRelation<SNode, SNode>> relations = null;
 	/** a list of all read layers **/
 	private Map<String, SLayer> layers = null;
 	/** stores the position of the current read layer **/
@@ -156,7 +99,7 @@ public class SaltXML10Handler extends DefaultHandler2 {
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-		if (TAG_SALT_PROJECT.equals(qName)) {
+		if (TAG_SALT_PROJECT_FULL.equals(qName)) {
 			SaltProject project = SaltFactory.createSaltProject();
 			setSaltObject(project);
 			saltProject = project;
@@ -169,7 +112,7 @@ public class SaltXML10Handler extends DefaultHandler2 {
 			SCorpusGraph graph = SaltFactory.createSCorpusGraph();
 			setSaltObject(graph);
 			if (saltProject != null) {
-				saltProject.getCorpusGraphs().add(graph);
+				saltProject.addCorpusGraph(graph);
 			}
 			currentContainer.push(graph);
 		} else if (TAG_SDOCUMENT_GRAPH.equals(qName)) {

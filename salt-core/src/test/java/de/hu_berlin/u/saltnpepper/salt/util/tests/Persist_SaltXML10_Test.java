@@ -1,6 +1,8 @@
 package de.hu_berlin.u.saltnpepper.salt.util.tests;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
@@ -9,13 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
 import de.hu_berlin.u.saltnpepper.salt.tests.SaltTestsUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
-public class StoringTest {
+public class Persist_SaltXML10_Test {
 
 	@Before
 	public void setUp() throws Exception {
@@ -156,5 +160,37 @@ public class StoringTest {
 		// compare both document graphs
 		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
 		assertTrue(template.getDocumentGraph().isIsomorph(graph));
+	}
+	
+	/**
+	 * 
+	 */
+	@Test
+	public void testLoadStore_SaltProject(){
+		SaltProject project= SaltFactory.createSaltProject();
+		
+		//create two corpus structures
+		SampleGenerator.createCorpusStructure(project);
+		SampleGenerator.createCorpusStructure(project);
+		
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/saltProject/"+SaltUtil.FILE_SALT_PROJECT);
+		SaltUtil.saveSaltProject(project, URI.createFileURI(tmpFile.getAbsolutePath()));
+		SaltProject loaded= SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
+		
+		assertEquals(project.getCorpusGraphs().size(), loaded.getCorpusGraphs().size());
+		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(), loaded.getCorpusGraphs().get(0).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
+		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(), loaded.getCorpusGraphs().get(1).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(), loaded.getCorpusGraphs().get(1).getRelations().size());
+		
+		tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/saltProject2/");
+		SaltUtil.saveSaltProject(project, URI.createFileURI(tmpFile.getAbsolutePath()));
+		loaded= SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
+		
+		assertEquals(project.getCorpusGraphs().size(), loaded.getCorpusGraphs().size());
+		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(), loaded.getCorpusGraphs().get(0).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
+		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(), loaded.getCorpusGraphs().get(1).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(), loaded.getCorpusGraphs().get(1).getRelations().size());
 	}
 }

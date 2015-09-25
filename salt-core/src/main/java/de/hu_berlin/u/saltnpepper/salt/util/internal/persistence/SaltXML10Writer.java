@@ -25,6 +25,11 @@ import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.graph.Layer;
 import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
+import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
@@ -50,65 +55,19 @@ import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltResourceException;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
-public class SaltXML10Writer {
-	/** constant to address the xml-namespace prefix'saltCore'. **/
-	public static final String NS_SALTCORE = "saltCore";
-	/** constant to address the xml-namespace 'saltCore'. **/
-	public static final String NS_VALUE_SALTCORE = "saltCore";
-	/** constant to address the xml-namespace prefix'sDocumentStructure'. **/
-	public static final String NS_SDOCUMENTSTRUCTURE = "sDocumentStructure";
-	/** constant to address the xml-namespace 'sDocumentStructure'. **/
-	public static final String NS_VALUE_SDOCUMENTSTRUCTURE = "sDocumentStructure";
-	/** constant to address the xml-namespace prefix'xmi'. **/
-	public static final String NS_XMI = "xmi";
-	/** constant to address the xml-namespace 'http://www.omg.org/XMI'. **/
-	public static final String NS_VALUE_XMI = "http://www.omg.org/XMI";
-	/** constant to address the xml-namespace prefix'xsi'. **/
-	public static final String NS_XSI = "xsi";
-	/**
-	 * constant to address the xml-namespace
-	 * 'http://www.w3.org/2001/XMLSchema-instance'.
-	 **/
-	public static final String NS_VALUE_XSI = "http://www.w3.org/2001/XMLSchema-instance";
-
-	/** constant to address the xml-element 'edges'. **/
-	public static final String TAG_EDGES = "edges";
-	/** constant to address the xml-element 'nodes'. **/
-	public static final String TAG_NODES = "nodes";
-	/** constant to address the xml-element 'sDocumentStructure:SDocumentGraph'. **/
-	public static final String TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH = "SDocumentGraph";
-	/** constant to address the xml-element 'layers'. **/
-	public static final String TAG_LAYERS = "layers";
-	/** constant to address the xml-element 'labels'. **/
-	public static final String TAG_LABELS = "labels";
-	/** constant to address the xml-element 'sDocument'. **/
-	public static final String TAG_SDOCUMENT = "sDocument";
-
-	/** constant to address the xml-attribute 'edges'. **/
-	public static final String ATT_EDGES = "edges";
-	/** constant to address the xml-attribute 'source'. **/
-	public static final String ATT_SOURCE = "source";
-	/** constant to address the xml-attribute 'nodes'. **/
-	public static final String ATT_NODES = "nodes";
-	/** constant to address the xml-attribute 'layers'. **/
-	public static final String ATT_LAYERS = "layers";
-	/** constant to address the xml-attribute 'name'. **/
-	public static final String ATT_NAME = "name";
-	/** constant to address the xml-attribute 'target'. **/
-	public static final String ATT_TARGET = "target";
-	/** constant to address the xml-attribute 'value'. **/
-	public static final String ATT_VALUE = "value";
-	/** constant to address the xml-attribute 'xsi:type'. **/
-	public static final String ATT_XSI_TYPE = "type";
-	/** constant to address the xml-attribute 'href'. **/
-	public static final String ATT_HREF = "href";
-	/** constant to address the xml-attribute 'namespace'. **/
-	public static final String ATT_NAMESPACE = "namespace";
-	/** constant to address the xml-attribute 'xmi:version'. **/
-	public static final String ATT_XMI_VERSION = "version";
+public class SaltXML10Writer implements SaltXML10Dictionary {
 
 	public SaltXML10Writer(File path) {
 		this.path = path;
+	}
+
+	public SaltXML10Writer(URI path) {
+		if (path != null) {
+			String str = path.toFileString();
+			if (str != null && !str.isEmpty()) {
+				this.path = new File(str);
+			}
+		}
 	}
 
 	/** Determines whether the outputted SaltXML should be pretty printed. **/
@@ -128,6 +87,160 @@ public class SaltXML10Writer {
 	private XMLStreamWriter xml = null;
 	private XMLOutputFactory xmlFactory = XMLOutputFactory.newFactory();
 
+	/**
+	 * Writes a salt project to the xml stream.
+	 * 
+	 * @param project
+	 */
+	public void writeSaltProject(SaltProject project) {
+		PrintWriter output = null;
+		try {
+			output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF8")), false);
+
+			xml = xmlFactory.createXMLStreamWriter(output);
+			xml.writeStartDocument("1.0");
+			if (isPrettyPrint) {
+				xml.writeCharacters("\n");
+			}
+			xml.writeStartElement(NS_SALTCOMMON, TAG_SALT_PROJECT, NS_VALUE_SALTCOMMON);
+			xml.writeNamespace(NS_SCORPUSSTRUCTURE, NS_VALUE_SCORPUSSTRUCTURE);
+			xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
+			xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
+			xml.writeNamespace(NS_SALTCORE, NS_VALUE_SALTCORE);
+			xml.writeNamespace(NS_SALTCOMMON, NS_VALUE_SALTCOMMON);
+			xml.writeAttribute(NS_VALUE_XMI, ATT_XMI_VERSION, "2.0");
+
+			Iterator<SCorpusGraph> cGraphs = project.getCorpusGraphs().iterator();
+			while (cGraphs.hasNext()) {
+				if (isPrettyPrint) {
+					xml.writeCharacters("\n");
+					xml.writeCharacters("\t");
+				}
+				writeCorpusGraph(xml, cGraphs.next(), true);
+			}
+
+			if (isPrettyPrint) {
+				xml.writeCharacters("\n");
+			}
+			xml.writeEndElement();
+		} catch (Exception e) {
+			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. ", e);
+		} finally {
+			if (xml != null) {
+				try {
+					xml.flush();
+					xml.close();
+				} catch (XMLStreamException e) {
+					throw new SaltResourceException("Cannot store salt project to file '" + path + "', because the opened stream is not closable. ", e);
+				}
+			}
+			if (output != null) {
+				output.flush();
+				output.close();
+			}
+		}
+	}
+
+	/**
+	 * Writes a corpus graph to the xml stream
+	 * 
+	 * @param graph
+	 *            the corpus graph to be written
+	 * @param embedded
+	 *            determines whether this corpus graph is part of a saltProject
+	 * @param xml
+	 *            xml stream to write corpus graph to, if the passed one is
+	 *            null, a new one will be created
+	 */
+	public void writeCorpusGraph(XMLStreamWriter xml, SCorpusGraph graph, boolean embedded) {
+		PrintWriter output = null;
+		try {
+			if (xml == null) {
+				output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF8")), false);
+				xml = xmlFactory.createXMLStreamWriter(output);
+			}
+			if (!embedded) {
+				xml.writeStartDocument("1.0");
+				if (isPrettyPrint) {
+					xml.writeCharacters("\n");
+					xml.writeStartElement(NS_SALTCOMMON, TAG_SCORPUSGRAPH, NS_VALUE_SALTCOMMON);
+					xml.writeNamespace(NS_SCORPUSSTRUCTURE, NS_VALUE_SCORPUSSTRUCTURE);
+					xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
+					xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
+					xml.writeNamespace(NS_SALTCORE, NS_VALUE_SALTCORE);
+					xml.writeNamespace(NS_SALTCOMMON, NS_VALUE_SALTCOMMON);
+					xml.writeAttribute(NS_VALUE_XMI, ATT_XMI_VERSION, "2.0");
+				}
+			} else {
+				xml.writeStartElement(TAG_SCORPUSGRAPH);
+			}
+
+			// write all labels
+			if (graph.getLabels() != null) {
+				Iterator<Label> labelIt = graph.getLabels().iterator();
+				while (labelIt.hasNext()) {
+					if (isPrettyPrint) {
+						xml.writeCharacters("\n");
+						xml.writeCharacters("\t");
+					}
+					writeLable(xml, labelIt.next());
+				}
+			}
+			// stores the position of a single node in the list of nodes to
+			// refer them in a relation
+			Map<SNode, Integer> nodePositions = new HashMap<>();
+
+			// write all nodes
+			if (graph.getNodes() != null) {
+				Iterator<SNode> nodeIt = graph.getNodes().iterator();
+				Integer position = 0;
+				position = 0;
+				while (nodeIt.hasNext()) {
+					SNode node = nodeIt.next();
+					writeNode(xml, node, null);
+					nodePositions.put(node, position);
+					position++;
+				}
+			}
+
+			// write all relations
+			if (graph.getRelations() != null) {
+				Iterator<SRelation<SNode, SNode>> relIt = graph.getRelations().iterator();
+				while (relIt.hasNext()) {
+					SRelation<SNode, SNode> rel = relIt.next();
+					writeRelation(xml, rel, nodePositions, null);
+				}
+			}
+			if (isPrettyPrint) {
+				xml.writeCharacters("\n");
+				xml.writeCharacters("\t");
+			}
+			xml.writeEndElement();
+		} catch (Exception e) {
+			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. " + e.getMessage(), e);
+		} finally {
+			if (!embedded) {
+				if (xml != null) {
+					try {
+						xml.flush();
+						xml.close();
+					} catch (XMLStreamException e) {
+						throw new SaltResourceException("Cannot store salt project to file '" + path + "', because the opened stream is not closable. ", e);
+					}
+				}
+				if (output != null) {
+					output.flush();
+					output.close();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Writes a document graph to the xml stream
+	 * 
+	 * @param graph
+	 */
 	public void writeDocumentGraph(SDocumentGraph graph) {
 		PrintWriter output = null;
 		try {
@@ -320,17 +433,21 @@ public class SaltXML10Writer {
 		String type = "";
 		// write type
 		if (node instanceof STextualDS) {
-			type = "sDocumentStructure:STextualDS";
+			type = TYPE_STEXTUALDS;
 		} else if (node instanceof STimeline) {
-			type = "sDocumentStructure:STimeline";
+			type = TYPE_STIMELINE;
 		} else if (node instanceof SMedialDS) {
-			type = "sDocumentStructure:SAudioDataSource";
+			type = TYPE_SAUDIODS;
 		} else if (node instanceof SToken) {
-			type = "sDocumentStructure:SToken";
+			type = TYPE_STOKEN;
 		} else if (node instanceof SSpan) {
-			type = "sDocumentStructure:SSpan";
+			type = TYPE_SSPAN;
 		} else if (node instanceof SStructure) {
-			type = "sDocumentStructure:SStructure";
+			type = TYPE_SSTRUCTURE;
+		} else if (node instanceof SDocument) {
+			type = TYPE_SDOCUMENT;
+		} else if (node instanceof SCorpus) {
+			type = TYPE_SCORPUS;
 		}
 		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
 
@@ -388,19 +505,23 @@ public class SaltXML10Writer {
 		// write type
 		String type = "";
 		if (relation instanceof STextualRelation) {
-			type = "sDocumentStructure:STextualRelation";
+			type = TYPE_STEXTUAL_RELATION;
 		} else if (relation instanceof STimelineRelation) {
-			type = "sDocumentStructure:STimelineRelation";
+			type = TYPE_STIMELINE_RELATION;
 		} else if (relation instanceof SMedialRelation) {
-			type = "sDocumentStructure:SAudioRelation";
+			type = TYPE_SAUDIO_RELATION;
 		} else if (relation instanceof SSpanningRelation) {
-			type = "sDocumentStructure:SSpanningRelation";
+			type = TYPE_SSPANNING_RELATION;
 		} else if (relation instanceof SDominanceRelation) {
-			type = "sDocumentStructure:SDominanceRelation";
+			type = TYPE_SDOMINANCE_RELATION;
 		} else if (relation instanceof SPointingRelation) {
-			type = "sDocumentStructure:SPointingRelation";
+			type = TYPE_SPOINTING_RELATION;
 		} else if (relation instanceof SOrderRelation) {
-			type = "sDocumentStructure:SOrderRelation";
+			type = TYPE_SORDER_RELATION;
+		} else if (relation instanceof SCorpusRelation) {
+			type = TYPE_SCORPUS_RELATION;
+		} else if (relation instanceof SCorpusDocumentRelation) {
+			type = TYPE_SCORPUS_DOCUMENT_RELATION;
 		}
 		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
 		int sourcePos = nodePositions.get(relation.getSource());
