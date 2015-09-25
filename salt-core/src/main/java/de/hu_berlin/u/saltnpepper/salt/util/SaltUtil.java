@@ -5,7 +5,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -20,10 +23,12 @@ import org.xml.sax.XMLReader;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
+import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltResourceException;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SCatAnnotation;
@@ -34,6 +39,8 @@ import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.SaltXML10Handler;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.SaltXML10Writer;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter;
+import de.hu_berlin.u.saltnpepper.salt.util.internal.persistence.dot.SDocumentGraphDOTWriter;
 
 /**
  * This class contains a set of helpful methods.
@@ -46,6 +53,8 @@ public class SaltUtil {
 	// ===================================> common Salt stuff
 	/** The ending of a Salt XML file. **/
 	public static final String FILE_ENDING_SALT_XML = "salt";
+	/** The ending of a dot file. **/
+	public static final String FILE_ENDING_DOT = "dot";
 	/**
 	 * Default name of the saltProject file.
 	 */
@@ -275,7 +284,7 @@ public class SaltUtil {
 		return (uri);
 	}
 
-	// =========================================================> Persistence
+	// ================================================> Persistence SaltXML
 	/**
 	 * Loads an object coming from a SaltXML (.{@link #FILE_ENDING_SALT_XML})
 	 * and returns it.
@@ -496,5 +505,157 @@ public class SaltUtil {
 		}
 	}
 
-	// =========================================================< Persistence
+	// ==================================================< Persistence SaltXML
+	// ==================================================> Persistence DOT
+	/**
+	 * Stores a SCorpusGraph model into DOT file
+	 */
+	public static void saveCorpusGraph_DOT(SCorpusGraph sCorpusGraph, URI location) {
+		URI targetUri = null;
+		if (location.fileExtension() == null) {
+			if ((sCorpusGraph.getSaltProject() != null) && (sCorpusGraph.getSaltProject().getCorpusGraphs().size() > 1)) {
+				Integer pos = sCorpusGraph.getSaltProject().getCorpusGraphs().indexOf(sCorpusGraph);
+				targetUri = location.appendSegment(pos.toString()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+			} else {
+				List<SNode> roots = sCorpusGraph.getRoots();
+				if ((roots != null) && (!roots.isEmpty())) {
+					targetUri = location.appendSegment(((SCorpus) roots.get(0)).getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+				} else {
+					targetUri = location.appendSegment(sCorpusGraph.getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+				}
+			}
+		} else {
+			targetUri = location;
+		}
+		SCorpusGraphDOTWriter writer = new SCorpusGraphDOTWriter();
+		writer.setSCorpusGraph(sCorpusGraph);
+		writer.setOutputURI(targetUri);
+		writer.save();
+	}
+
+	/**
+	 * Stores a SDocumentGraph model into DOT file
+	 */
+	public static void saveDocumentGraph_DOT(SDocumentGraph sDocumentGraph, URI location) {
+		URI targetUri = null;
+		if (location.fileExtension() == null) {
+			if (sDocumentGraph.getDocument() != null) {
+				targetUri = location.appendSegment(sDocumentGraph.getDocument().getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+			} else {
+				targetUri = location.appendSegment(sDocumentGraph.getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+			}
+		} else {
+			targetUri = location;
+		}
+		SDocumentGraphDOTWriter writer = new SDocumentGraphDOTWriter();
+		writer.setSDocumentGraph(sDocumentGraph);
+		writer.setOutputURI(targetUri);
+		writer.save();
+	}
+
+	/**
+	 * This method stores a Salt model in the dot syntax (see:
+	 * http://www.graphviz.org/) in a file. The stored dot graph can be
+	 * visualized via the Graphviz toolbox (see: http://www.graphviz.org/) into
+	 * a bunch of graphical formats like jpeg, png, svg etc.. <br/>
+	 * In case of a {@link SaltProject} like the following is stored:
+	 * 
+	 * <pre>
+	 * |-----------------------------------------------|
+	 * | SaltProject:                                  |
+	 * |-----------------------------------------------|
+	 * | corpus-structure 0      | corpus-structure 1  |
+	 * |                         |                     |
+	 * |          c1             |       c1            |
+	 * |        /     \          |       |             |
+	 * |       c2      c3        |       d1            |
+	 * |   /   |   \   |   \     |                     |
+	 * |  d1   d2  d3  d4  d5    |                     |
+	 * |-----------------------------------------------|
+	 * </pre>
+	 * 
+	 * A structure like the following is created:
+	 * 
+	 * <pre>
+	 * 
+	 *  |-0
+	 *  | |-c1
+	 *  | | |-c2
+	 *  | |   |-d1.dot
+	 *  | |   |-d2.dot
+	 *  | |   |-d3.dot
+	 *  | | |-c3
+	 *  | |   |-d4.dot
+	 *  | |   |-d5.dot
+	 *  | |-0.dot
+	 *  |-1
+	 *    |-c1
+	 *    | |-d1.dot
+	 *    |-1.dot
+	 * </pre>
+	 */
+	public static void save_DOT(Object content, URI location){
+		if (location == null) {
+			throw new SaltResourceException("Exception in storing Salt model to dot file, because no uri was given.");
+		}
+		if (content == null) {
+			throw new SaltResourceException("Exception in storing Salt model to dot file. Cannot write more than one content per file.");
+		}
+
+		if (content instanceof SCorpus) {
+			SCorpus sCorpus = (SCorpus) content;
+			if (sCorpus.getGraph() != null) {
+				content = sCorpus.getGraph();
+			} else {
+				throw new SaltResourceException("Cannot save Salt model to DOT format, because the given " + SCorpus.class.getSimpleName() + " is not part of a " + SCorpusGraph.class.getSimpleName() + " container");
+			}
+		} else if (content instanceof SDocument) {
+			SDocument sDocument = (SDocument) content;
+			if (sDocument.getDocumentGraph() != null) {
+				content = sDocument.getDocumentGraph();
+			} else {
+				throw new SaltResourceException("Cannot save Salt model to DOT format, because the given " + SDocument.class.getSimpleName() + " does not contain a " + SDocumentGraph.class.getSimpleName() + " content");
+			}
+		}
+
+		// if content is a SDocumentGraph or SCorpusGraph, outputURI does not
+		// have to be changed
+		if (content instanceof SCorpusGraph) {
+			saveCorpusGraph_DOT((SCorpusGraph) content, location);
+		} else if (content instanceof SDocumentGraph) {
+			saveDocumentGraph_DOT((SDocumentGraph) content, location);
+		}
+		// if it is a SaltProject, different URIs for the different components
+		// of the project are needed
+		else if (content instanceof SaltProject) {
+			Collection<SCorpusGraph> corpGraphs = Collections.synchronizedCollection(((SaltProject) content).getCorpusGraphs());
+			Integer corpIndex = 0;
+			for (SCorpusGraph sCorpusGraph : corpGraphs) {
+				URI corpUri = location;
+
+				saveCorpusGraph_DOT(sCorpusGraph, corpUri);
+
+				if (corpGraphs.size() > 1) {
+					corpUri = corpUri.appendSegment(corpIndex.toString());
+				}
+				for (int docIndex = 0; docIndex < sCorpusGraph.getDocuments().size(); docIndex++) {
+					SDocument sDocument = sCorpusGraph.getDocuments().get(docIndex);
+					if (sDocument.getDocumentGraph() != null) {
+						URI docURI = corpUri.appendSegments((String[]) sDocument.getPath().segmentsList().toArray());
+						SDocumentGraph sDocGraph = sDocument.getDocumentGraph();
+						saveDocumentGraph_DOT(sDocGraph, docURI.appendFileExtension(SaltUtil.FILE_ENDING_DOT));
+						// when calling saveResource(), the sCorpusGraph content
+						// will be attached to the resource and therefore
+						// removed from list of SaltProject, therefore the graph
+						// must be artificially added again
+						sDocument.setDocumentGraph(sDocGraph);
+					}
+				}
+				corpIndex++;
+			}
+		} else {
+			throw new SaltResourceException("Cannot save Salt model to DOT format, because content is neither " + SCorpusGraph.class.getSimpleName() + ", " + SDocumentGraph.class.getSimpleName() + " nor " + SaltProject.class.getSimpleName() + " content. The given content is of type: '" + content.getClass() + "'.");
+		}
+	}
+	// ===================================================< Persistence DOT
 }
