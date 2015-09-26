@@ -24,7 +24,6 @@ import java.util.List;
 
 public class DOTEdge {
 	public String fromId = null;
-	public String shape = null;
 	public String toId = null;
 	public String color = null;
 	public String style = null;
@@ -38,10 +37,6 @@ public class DOTEdge {
 
 		List<String> props = new LinkedList<String>();
 
-		// shape
-		if (this.shape != null) {
-			props.add("shape=" + shape);
-		}
 		// color
 		if (this.color != null) {
 			props.add("color=" + color);

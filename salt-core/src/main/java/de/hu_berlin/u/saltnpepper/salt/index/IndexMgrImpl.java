@@ -46,23 +46,27 @@ public class IndexMgrImpl implements IndexMgr {
 	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey) {
 		if (threadSafe) {
 			lock.writeLock().lock();
-		}
-		try {
-			if (this.containsIndex(indexId)) {
-				throw new SaltException("Cannot add the given index, because an index with this id already exists: " + indexId);
-			}
-			if ((expectedKeys > 0) && (expectedValuesPerKey > 0)) {
-				indexes.put(indexId, ArrayListMultimap.create(expectedKeys, expectedValuesPerKey));
-			} else {
-				indexes.put(indexId, ArrayListMultimap.create());
-			}
-			indexKeyTypes.put(indexId, keyType);
-			indexValueTypes.put(indexId, valueType);
-		} finally {
-			if (threadSafe) {
+			try {
+				createIndex_intern(indexId, keyType, valueType, expectedKeys, expectedValuesPerKey);
+			} finally {
 				lock.writeLock().unlock();
 			}
+		} else {
+			createIndex_intern(indexId, keyType, valueType, expectedKeys, expectedValuesPerKey);
 		}
+	}
+
+	private <K, V> void createIndex_intern(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey) {
+		if (this.containsIndex(indexId)) {
+			throw new SaltException("Cannot add the given index, because an index with this id already exists: " + indexId);
+		}
+		if ((expectedKeys > 0) && (expectedValuesPerKey > 0)) {
+			indexes.put(indexId, ArrayListMultimap.create(expectedKeys, expectedValuesPerKey));
+		} else {
+			indexes.put(indexId, ArrayListMultimap.create());
+		}
+		indexKeyTypes.put(indexId, keyType);
+		indexValueTypes.put(indexId, valueType);
 	}
 
 	/** {@inheritDoc} **/
@@ -70,13 +74,13 @@ public class IndexMgrImpl implements IndexMgr {
 	public boolean containsIndex(String indexId) {
 		if (threadSafe) {
 			lock.readLock().lock();
-		}
-		try {
-			return indexes.containsKey(indexId);
-		} finally {
-			if (threadSafe) {
+			try {
+				return indexes.containsKey(indexId);
+			} finally {
 				lock.readLock().unlock();
 			}
+		} else {
+			return indexes.containsKey(indexId);
 		}
 	}
 
@@ -223,19 +227,23 @@ public class IndexMgrImpl implements IndexMgr {
 	public boolean removeIndex(String indexId) {
 		if (threadSafe) {
 			lock.writeLock().lock();
-		}
-
-		try {
+			try {
+				if (indexes.remove(indexId) == null) {
+					indexKeyTypes.remove(indexId);
+					indexValueTypes.remove(indexId);
+					return true;
+				}
+				return false;
+			} finally {
+				lock.writeLock().unlock();
+			}
+		} else {
 			if (indexes.remove(indexId) == null) {
 				indexKeyTypes.remove(indexId);
 				indexValueTypes.remove(indexId);
 				return true;
 			}
 			return false;
-		} finally {
-			if (threadSafe) {
-				lock.writeLock().unlock();
-			}
 		}
 	}
 
@@ -263,16 +271,17 @@ public class IndexMgrImpl implements IndexMgr {
 	public void removeAll() {
 		if (threadSafe) {
 			lock.writeLock().lock();
-		}
-
-		try {
+			try {
+				indexes.clear();
+				indexKeyTypes.clear();
+				indexValueTypes.clear();
+			} finally {
+				lock.writeLock().unlock();
+			}
+		} else {
 			indexes.clear();
 			indexKeyTypes.clear();
 			indexValueTypes.clear();
-		} finally {
-			if (threadSafe) {
-				lock.writeLock().unlock();
-			}
 		}
 	}
 
