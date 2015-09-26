@@ -13,6 +13,7 @@ import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 import de.hu_berlin.u.saltnpepper.salt.index.IndexMgr;
 import de.hu_berlin.u.saltnpepper.salt.index.IndexMgrImpl;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
@@ -149,7 +150,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 */
 	protected void basicAddNode(N node) {
 		if (node == null) {
-			throw new SaltInsertionException(this, node, "A null value is not allowed. ");
+			throw new SaltParameterException("node", "basicAddNode", GraphImpl.class ,"A null value is not allowed. ");
 		}
 		// if node has no id a new id will be given to node
 		if (node.getId() == null) {
@@ -320,7 +321,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	@SuppressWarnings("unchecked")
 	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
 		if (relation == null) {
-			throw new SaltInsertionException(this, relation, "A null value is not allowed. ");
+			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class ,"A null value is not allowed. ");
 		}
 		if (relation.getSource() == null) {
 			throw new SaltInsertionException(this, relation, "The source node is empty. ");

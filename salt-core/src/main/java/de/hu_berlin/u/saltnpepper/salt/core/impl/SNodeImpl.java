@@ -32,9 +32,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (outRelations != null) {
 			List<SRelation> sOutRelList = new ArrayList<>();
 			for (SRelation rel : outRelations) {
-				if (rel instanceof SRelation) {
-					sOutRelList.add((SRelation) rel);
-				}
+				sOutRelList.add((SRelation) rel);
 			}
 			return sOutRelList;
 		}
@@ -53,9 +51,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (inRelations != null) {
 			List<SRelation> sInRelList = new ArrayList<>();
 			for (SRelation rel : inRelations) {
-				if (rel instanceof SRelation) {
-					sInRelList.add((SRelation) rel);
-				}
+				sInRelList.add((SRelation) rel);
 			}
 			return sInRelList;
 		}

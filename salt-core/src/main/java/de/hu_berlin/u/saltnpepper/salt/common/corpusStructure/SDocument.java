@@ -28,8 +28,8 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
  * In Salt a document is represented by this class. An object of this class can
  * contain an object of type {@link SDocumentGraph} which contains the 'real'
  * linguistic data. An object of type {@link SDocumentGraph} can be set and get
- * by calling {@link SDocument#setSDocumentGraph(SDocumentGraph)} and
- * {@link SDocument#getSDocumentGraph()}. A closer documentation of a document
+ * by calling {@link SDocument#setDocumentGraph(SDocumentGraph)} and
+ * {@link SDocument#getDocumentGraph()}. A closer documentation of a document
  * graph, you can find in {@link SDocumentGraph}. A document must always be
  * contained in a corpus (object of type {@link SCorpus}). Such a containment
  * relation in Salt is represented by an object of type {@link SCorpusRelation}.

@@ -112,7 +112,7 @@ public enum SALT_TYPE {
 	/**
 	 * the map of {@link SALT_TYPE} and {@link Class}.
 	 */
-	protected static Map<SALT_TYPE, Class<? extends Object>> sType2clazzMap = null;
+	private static Map<SALT_TYPE, Class<? extends Object>> sType2clazzMap = null;
 
 	/**
 	 * Returns map of {@link SALT_TYPE} and {@link Class}.

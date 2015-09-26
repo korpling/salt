@@ -472,9 +472,6 @@ public class Tokenizer {
 										rel.setSource(parentSpan);
 										rel.setTarget(overlappedToken);
 										getDocumentGraph().addRelation(rel);
-										// getsDocumentGraph().addRelation(((SRelation<SNode,
-										// SNode>)(SRelation<? extends SNode, ?
-										// extends SNode>)rel));
 									}
 								}
 							} else {

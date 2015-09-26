@@ -66,7 +66,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * implement as follows:
 	 * 
 	 * <pre>
-	 * {@link #setSDocument(SDocument)}                      {@link SDocument#setSDocumentGraph(Graph)}
+	 * {@link #setSDocument(SDocument)}                      {@link SDocument#setDocumentGraph(Graph)}
 	 *         ||             \ /                   ||
 	 *         ||              X                    ||
 	 *         \/             / \                   \/

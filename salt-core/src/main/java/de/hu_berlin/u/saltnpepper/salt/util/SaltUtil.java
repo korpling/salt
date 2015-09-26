@@ -243,23 +243,23 @@ public class SaltUtil {
 			String name = null;
 			for (int i = 0; i < fullName.length; i++) {
 				// last part of fullname reached
-				if (i == fullName.length - 1)
+				if (i == fullName.length - 1) {
 					name = fullName[i];
-				else {
-					if ((ns == null) || (ns.toString().isEmpty()))
+				} else {
+					if ((ns == null) || (ns.toString().isEmpty())) {
 						ns.append(fullName[i]);
-					else {
+					} else {
 						ns.append(NAMESPACE_SEPERATOR);
 						ns.append(fullName[i]);
 					}
 				}
 			}
 			if ((ns.length() != 0) && (name.length() != 0)) {
-				retVal = new ImmutablePair<String, String>(ns.toString(), name.toString());
+				retVal = new ImmutablePair<String, String>(ns.toString(), name);
 			} else if (ns.length() != 0) {
 				retVal = new ImmutablePair<String, String>(ns.toString(), null);
 			} else if (name.length() != 0) {
-				retVal = new ImmutablePair<String, String>(null, name.toString());
+				retVal = new ImmutablePair<String, String>(null, name);
 			}
 		}
 		return (retVal);
@@ -509,8 +509,11 @@ public class SaltUtil {
 	// ==================================================> Persistence DOT
 	/**
 	 * Stores a {@link SCorpusGraph} into DOT file.
-	 * @param corpusGraph the corpus graph to be stored
-	 * @param location the location to where the corpus graph is stored
+	 * 
+	 * @param corpusGraph
+	 *            the corpus graph to be stored
+	 * @param location
+	 *            the location to where the corpus graph is stored
 	 */
 	public static void saveCorpusGraph_DOT(SCorpusGraph corpusGraph, URI location) {
 		URI targetUri = null;
@@ -537,8 +540,11 @@ public class SaltUtil {
 
 	/**
 	 * Stores a {@link SDocumentGraph} into DOT file.
-	 * @param documentGraph the document graph to be stored
-	 * @param location the location to where the document graph is stored
+	 * 
+	 * @param documentGraph
+	 *            the document graph to be stored
+	 * @param location
+	 *            the location to where the document graph is stored
 	 */
 	public static void saveDocumentGraph_DOT(SDocumentGraph documentGraph, URI location) {
 		URI targetUri = null;
@@ -552,7 +558,7 @@ public class SaltUtil {
 			targetUri = location;
 		}
 		SDocumentGraphDOTWriter writer = new SDocumentGraphDOTWriter();
-		writer.setSDocumentGraph(documentGraph);
+		writer.setDocumentGraph(documentGraph);
 		writer.setOutputURI(targetUri);
 		writer.save();
 	}
@@ -645,8 +651,8 @@ public class SaltUtil {
 					SDocument sDocument = sCorpusGraph.getDocuments().get(docIndex);
 					if (sDocument.getDocumentGraph() != null) {
 						URI docURI = corpUri;
-						for (String seg: sDocument.getPath().segments()){
-							docURI= docURI.appendSegment(seg);
+						for (String seg : sDocument.getPath().segments()) {
+							docURI = docURI.appendSegment(seg);
 						}
 						SDocumentGraph sDocGraph = sDocument.getDocumentGraph();
 						saveDocumentGraph_DOT(sDocGraph, docURI.appendFileExtension(SaltUtil.FILE_ENDING_DOT));

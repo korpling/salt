@@ -395,25 +395,6 @@ public class Diff {
 		return isoNodes;
 	}
 
-	private Set<Object> checkedElements = new HashSet<>();
-
-	private void addtoCheckedElements(Object element) {
-		checkedElements.add(element);
-	}
-
-	private boolean checkChecked(SNode node) {
-		List<SNode> nodes = new LinkedList<SNode>();
-		List<SRelation> rels = node.getOutRelations();
-		for (SRelation<? extends SNode, ? extends SNode> i : rels) {
-			nodes.add(i.getSource());
-		}
-		if (checkedElements.containsAll(nodes)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	/**
 	 * Checks all data sources and calls for each type
 	 * {@link #compareDataSources(List, List, boolean)}

@@ -144,31 +144,28 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	protected void basicAddNode(SNode node) {
 		if (node != null) {
-			if (!(node instanceof SNode)) {
-				throw new SaltInsertionException(this, node, "Cannot insert a node, which is not a SNode object. ");
-			}
 			// start: create a name if none exists
-			if ((((SNode) node).getName() == null) || (((SNode) node).getName().isEmpty())) {
+			if ((node.getName() == null) || (node.getName().isEmpty())) {
 				if (node instanceof STextualDS) {
-					((SNode) node).setName("sText" + (getTextualDSs().size() + 1));
+					node.setName("sText" + (getTextualDSs().size() + 1));
 				} else if (node instanceof SToken) {
-					((SNode) node).setName("sTok" + (getTokens().size() + 1));
+					node.setName("sTok" + (getTokens().size() + 1));
 				} else if (node instanceof STimeline) {
-					((SNode) node).setName("sTimeline" + (getTokens().size() + 1));
+					node.setName("sTimeline" + (getTokens().size() + 1));
 				} else if (node instanceof SSpan) {
-					((SNode) node).setName("sSpan" + (getSpans().size() + 1));
+					node.setName("sSpan" + (getSpans().size() + 1));
 				} else if (node instanceof SStructure) {
-					((SNode) node).setName("structure" + (getStructures().size() + 1));
+					node.setName("structure" + (getStructures().size() + 1));
 				} else if (node instanceof SMedialDS) {
-					((SNode) node).setName("audio" + (getMedialDSs().size() + 1));
+					node.setName("audio" + (getMedialDSs().size() + 1));
 				} else {
-					((SNode) node).setName("sNode" + (getNodes().size() + 1));
+					node.setName("sNode" + (getNodes().size() + 1));
 				}
 			}
 			// end: create a name if none exists
 
-			if ((((SNode) node).getId() == null) || (((SNode) node).getId().isEmpty())) {
-				((SNode) node).setId(getId() + "#" + ((SNode) node).getName());
+			if ((node.getId() == null) || (node.getId().isEmpty())) {
+				node.setId(getId() + "#" + node.getName());
 			}
 			super.basicAddNode(node);
 
@@ -229,7 +226,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * implement as follows:
 	 * 
 	 * <pre>
-	 * {@link #setSDocument(SDocument)}                      {@link SDocument#setSDocumentGraph(Graph)}
+	 * {@link #setSDocument(SDocument)}                      {@link SDocument#setDocumentGraph(Graph)}
 	 *         ||             \ /                   ||
 	 *         ||              X                    ||
 	 *         \/             / \                   \/

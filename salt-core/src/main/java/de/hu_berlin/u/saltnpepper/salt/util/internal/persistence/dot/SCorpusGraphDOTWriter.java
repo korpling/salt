@@ -144,7 +144,7 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currSNode, SRelation relation, SNode fromSNode, long order) {
 		DOTNode dotNode = new DOTNode();
-		dotNode.id = currSNode.getId().toString();
+		dotNode.id = currSNode.getId();
 
 		// print name
 		if (currSNode.getName() != null)
@@ -175,8 +175,8 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 		// print relation, if exists
 		if (relation != null) {
 			DOTEdge dotEdge = new DOTEdge();
-			dotEdge.fromId = fromSNode.getId().toString();
-			dotEdge.toId = currSNode.getId().toString();
+			dotEdge.fromId = fromSNode.getId();
+			dotEdge.toId = currSNode.getId();
 
 			// print name
 			if (relation.getName() != null)

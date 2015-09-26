@@ -26,6 +26,7 @@ import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
 import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
 public class GraphTest {
 	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture = null;
@@ -175,7 +176,7 @@ public class GraphTest {
 		try {
 			getFixture().addNode(null);
 			fail("Null should not have been added as a node. ");
-		} catch (SaltInsertionException e) {
+		} catch (SaltParameterException e) {
 		}
 
 		Node node = GraphFactory.createNode();
@@ -405,7 +406,7 @@ public class GraphTest {
 		try {
 			getFixture().addRelation(null);
 			fail("Null should not have been added as a node. ");
-		} catch (SaltInsertionException e) {
+		} catch (SaltParameterException e) {
 		}
 
 		Relation<Node, Node> relation = new RelationImpl<Node, Node>();

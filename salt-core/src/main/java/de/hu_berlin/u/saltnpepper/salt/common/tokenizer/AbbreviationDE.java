@@ -37,9 +37,10 @@ public class AbbreviationDE {
 	 */
 	private static HashSet<String> abbreviations = null;
 
-	public static HashSet<String> createAbbriviations() {
-		if (abbreviations == null)
+	public synchronized static HashSet<String> createAbbriviations() {
+		if (abbreviations == null) {
 			abbreviations = init();
+		}
 		return (abbreviations);
 	}
 

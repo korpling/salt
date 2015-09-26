@@ -248,19 +248,19 @@ public class SampleGenerator {
 	/**
 	 * The primary text, which is used for the samples.
 	 */
-	public static String PRIMARY_TEXT_EN = "Is this example more complicated than it appears to be?";
+	public static final String PRIMARY_TEXT_EN = "Is this example more complicated than it appears to be?";
 	/** Primary text of speaker1 **/
-	public static String PRIMARY_TEXT_EN_SPK1 = PRIMARY_TEXT_EN;
+	public static final String PRIMARY_TEXT_EN_SPK1 = PRIMARY_TEXT_EN;
 	/** Primary text of speaker2 **/
-	public static String PRIMARY_TEXT_EN_SPK2 = "Uhm oh yes!";
+	public static final String PRIMARY_TEXT_EN_SPK2 = "Uhm oh yes!";
 	/**
 	 * The primary text, which is used for the samples.
 	 */
-	public static String PRIMARY_TEXT_DE = "Ist dieses Beispiel komplizierter als es zu sein scheint?";
+	public static final String PRIMARY_TEXT_DE = "Ist dieses Beispiel komplizierter als es zu sein scheint?";
 	/**
 	 * The name of the morphologic layer containing the tokens.
 	 */
-	public static String MORPHOLOGY_LAYER = "morphology";
+	public static final String MORPHOLOGY_LAYER = "morphology";
 	/** iso 639-1 language code for english **/
 	public static final String LANG_EN = "en";
 	/** iso 639-1 language code for german **/

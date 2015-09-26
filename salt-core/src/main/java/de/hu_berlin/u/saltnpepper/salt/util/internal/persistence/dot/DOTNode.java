@@ -30,12 +30,14 @@ public class DOTNode {
 	public List<String> labels = new ArrayList<>();
 
 	public String toString() {
-		String retStr = "";
+		StringBuilder retStr = new StringBuilder();
 		// print name of node
-		retStr = "<" + id + ">";
+		retStr.append("<");
+		retStr.append(id);
+		retStr.append(">");
 
 		// open properties
-		retStr = retStr + "[";
+		retStr.append("[");
 
 		List<String> props = new LinkedList<String>();
 		if (shape != null) {
@@ -49,29 +51,30 @@ public class DOTNode {
 		}
 
 		if ((labels != null) && (labels.size() > 0)) {
-			String labelStr = "label=\"{{" + id + "}|";
+			StringBuilder labelStr = new StringBuilder(); 
+			labelStr.append("label=\"{{" + id + "}|");
 			boolean printSep = false;
 			for (String label : labels) {
 				if (printSep) {
-					labelStr = labelStr + "|";
+					labelStr.append("|");
 				}
 				printSep = true;
-				labelStr = labelStr + "{" + label + "}";
+				labelStr.append("{" + label + "}");
 			}
-			labelStr = labelStr + "}\"";
-			props.add(labelStr);
+			labelStr.append("}\"");
+			props.add(labelStr.toString());
 		}
 
 		Iterator<String> it = props.iterator();
 		while (it.hasNext()) {
-			retStr += it.next();
+			retStr.append(it.next());
 			if (it.hasNext()) {
-				retStr += ",";
+				retStr.append(",");
 			}
 		}
 
 		// close properties
-		retStr = retStr + "];";
-		return (retStr);
+		retStr.append("];");
+		return (retStr.toString());
 	}
 }

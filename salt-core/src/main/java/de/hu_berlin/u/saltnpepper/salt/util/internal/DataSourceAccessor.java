@@ -329,7 +329,7 @@ public class DataSourceAccessor {
 		Traverser traverser = new Traverser();
 		traverser.relationTypes2Traverse = relationTypes;
 		documentGraph.traverse(nodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.toString(), traverser);
-		return (traverser.DataSourceSequences);
+		return (traverser.dataSourceSequences);
 	}
 
 	/**
@@ -426,51 +426,6 @@ public class DataSourceAccessor {
 		if (!retSet.isEmpty()) {
 			retVal = new ArrayList<>(retSet);
 		}
-
-		// HashSet<SNode> retSet = new LinkedHashSet<>();
-		//
-		// if (documentGraph == null) {
-		// new
-		// SaltParameterException("Cannot start method please set the document graph first.");
-		// }
-		// if (sType == null) {
-		// throw new SaltParameterException("sType", "getSRootsByRelation",
-		// DataSourceAccessor.class);
-		// }
-		// if ((!SALT_TYPE.SDOMINANCE_RELATION.equals(sType)) &&
-		// (!SALT_TYPE.SPOINTING_RELATION.equals(sType)) &&
-		// (!SALT_TYPE.SSPANNING_RELATION.equals(sType)) &&
-		// (!SALT_TYPE.SORDER_RELATION.equals(sType))) {
-		// // if the relation type isn't supported throw exception
-		// throw new
-		// SaltException("Cannot compute roots for given SRelation type '" +
-		// sType +
-		// "', because it isn't supported yet. Supported subtypes are only: SPointingRelation, SSpanningRelation and SDominanceRelation");
-		// }
-		// List<SRelation> relations = documentGraph.getRelations(sType);
-		// if (relations != null) {
-		// HashSet<SNode> notRootElements = new HashSet<>();
-		// for (SRelation<? extends SNode, ? extends SNode> relation :
-		// relations) {
-		// // mark destination as no root
-		// if (!notRootElements.contains(relation.getTarget())) {
-		// notRootElements.add(relation.getTarget());
-		// }
-		// // if source is not also a destination
-		// if ((!notRootElements.contains(relation.getSource())) &&
-		// (!retSet.contains(relation.getSource()))) {
-		// retSet.add(relation.getSource());
-		// }
-		// // remove wrong stored nodes in retList
-		// if (retSet.contains(relation.getTarget())) {
-		// retSet.remove(relation.getTarget());
-		// }
-		// }
-		// }
-		// List<SNode> retVal = null;
-		// if (!retSet.isEmpty()) {
-		// retVal = new ArrayList<>(retSet);
-		// }
 		return (retVal);
 	}
 
@@ -585,7 +540,7 @@ public class DataSourceAccessor {
 		 * {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES}, the results are
 		 * stored here
 		 */
-		private List<DataSourceSequence> DataSourceSequences = null;
+		private List<DataSourceSequence> dataSourceSequences = null;
 
 		/**
 		 * in case of traversion type is
@@ -607,14 +562,15 @@ public class DataSourceAccessor {
 				if (currNode instanceof SSequentialDS) {
 					SSequentialDS dataSource = (SSequentialDS) currNode;
 					DataSourceSequence sequence = null;
-					if (this.DataSourceSequences == null)
-						this.DataSourceSequences = new ArrayList<DataSourceSequence>();
-					for (DataSourceSequence dsSequence : this.DataSourceSequences) {
+					if (dataSourceSequences == null){
+						dataSourceSequences = new ArrayList<DataSourceSequence>();
+					}
+					for (DataSourceSequence dsSequence : this.dataSourceSequences) {
 						// search for correct sequence, containing the
 						// datasource if it was already found
 						if (dsSequence.getDataSource().equals(dataSource)) {
 							sequence = dsSequence;
-							this.lastSeenDSSequence = dsSequence;
+							lastSeenDSSequence = dsSequence;
 							break;
 						}
 					}// search for correct sequence, containing the datasource
@@ -623,8 +579,8 @@ public class DataSourceAccessor {
 						// sequence haven't been visit -> create it
 						sequence = new DataSourceSequence();
 						sequence.setDataSource(dataSource);
-						this.lastSeenDSSequence = sequence;
-						this.DataSourceSequences.add(sequence);
+						lastSeenDSSequence = sequence;
+						dataSourceSequences.add(sequence);
 					}// sequence haven't been visit -> create it
 				}
 			}// TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
@@ -633,7 +589,7 @@ public class DataSourceAccessor {
 					// if a SToken was reached
 					if (currNode instanceof SToken) {
 						// add it to the overlapped token list
-						this.overlappedSToken.add(((SToken) currNode));
+						overlappedSToken.add(((SToken) currNode));
 					}
 				}
 			}
@@ -651,24 +607,24 @@ public class DataSourceAccessor {
 					// bigger, than reset
 					SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> seqRel = (SSequentialRelation) relation;
 					if ((seqRel == null) && (currNode instanceof SSequentialDS)) {
-						this.lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
-						this.lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
-						this.lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
+						lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
+						lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
+						lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
 					} else if (seqRel!= null){
 						if (seqRel.getStart() == null) {
 							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set. ");
 						} else if (seqRel.getEnd() == null) {
 							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '" + seqRel + "' is not set. ");
 						}
-						if ((this.lastSeenDSSequence.getStart() == null) || (seqRel.getStart().doubleValue() < this.lastSeenDSSequence.getStart().doubleValue())) {
+						if ((lastSeenDSSequence.getStart() == null) || (seqRel.getStart().doubleValue() < this.lastSeenDSSequence.getStart().doubleValue())) {
 							// if start value wasn't set or is higher than
 							// current one
-							this.lastSeenDSSequence.setStart(seqRel.getStart());
+							lastSeenDSSequence.setStart(seqRel.getStart());
 						}
-						if ((this.lastSeenDSSequence.getEnd() == null) || (seqRel.getEnd().doubleValue() > this.lastSeenDSSequence.getEnd().doubleValue())) {
+						if ((lastSeenDSSequence.getEnd() == null) || (seqRel.getEnd().doubleValue() > this.lastSeenDSSequence.getEnd().doubleValue())) {
 							// if end value wasn't set or is higher than
 							// current one
-							this.lastSeenDSSequence.setEnd(seqRel.getEnd());
+							lastSeenDSSequence.setEnd(seqRel.getEnd());
 						}
 					}
 				}
@@ -690,8 +646,9 @@ public class DataSourceAccessor {
 					} else if (((this.relationTypes2Traverse.contains(SALT_TYPE.STIME_OVERLAPPING_RELATION)) || (this.relationTypes2Traverse.contains(SALT_TYPE.SSEQUENTIAL_RELATION))) && (relation instanceof STimeOverlappingRelation)) {
 						retVal = true;
 					}
-				} else
+				} else{
 					retVal = true;
+				}
 
 			}// TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 			else {

@@ -35,14 +35,14 @@ public class SimpleTokenizer {
 	/**
 	 * Sets the {@link SDocumentGraph} to be used.
 	 */
-	private SDocumentGraph sDocumentGraph = null;
+	private SDocumentGraph documentGraph = null;
 
-	public void setsDocumentGraph(SDocumentGraph sDocumentGraph) {
-		this.sDocumentGraph = sDocumentGraph;
+	public void setDocumentGraph(SDocumentGraph documentGraph) {
+		this.documentGraph = documentGraph;
 	}
 
-	public SDocumentGraph getsDocumentGraph() {
-		return sDocumentGraph;
+	public SDocumentGraph getDocumentGraph() {
+		return documentGraph;
 	}
 
 	/**
@@ -55,10 +55,10 @@ public class SimpleTokenizer {
 	 * Sets the {@link STextualDS} to be tokenized. Its language will be
 	 * detected automatically if possible.
 	 * 
-	 * @param sTextualDSs
+	 * @param textualDSs
 	 */
-	public List<SToken> tokenize(STextualDS sTextualDSs, Character... separator) {
-		return (tokenize(sTextualDSs, null, null, separator));
+	public List<SToken> tokenize(STextualDS textualDSs, Character... separator) {
+		return (tokenize(textualDSs, null, null, separator));
 	}
 
 	/**
@@ -74,32 +74,32 @@ public class SimpleTokenizer {
 	 *            end position, if text to be tokenized is subset (length of
 	 *            text assumed if set to null)
 	 */
-	public List<SToken> tokenize(STextualDS sTextualDS, Integer startPos, Integer endPos, Character... separator) {
+	public List<SToken> tokenize(STextualDS textualDS, Integer startPos, Integer endPos, Character... separator) {
 		List<SToken> retVal = null;
-		if (sTextualDS == null) {
+		if (textualDS == null) {
 			throw new SaltTokenizerException("Cannot tokenize an empty 'SSTextualDS' object.");
 		}
-		if (this.getsDocumentGraph() == null) {
-			if (sTextualDS.getGraph() == null) {
+		if (getDocumentGraph() == null) {
+			if (textualDS.getGraph() == null) {
 				throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
 			} else {
-				this.setsDocumentGraph(sTextualDS.getGraph());
+				setDocumentGraph(textualDS.getGraph());
 			}
 		}
 
-		if (sTextualDS.getText() != null) {
+		if (textualDS.getText() != null) {
 			if (startPos == null) {
 				startPos = 0;
 			}
 			if (endPos == null) {
-				endPos = sTextualDS.getText().length();
+				endPos = textualDS.getText().length();
 			}
 
 			char[] text;
-			if ((startPos != 0) || (endPos != sTextualDS.getText().length())) {
-				text = sTextualDS.getText().substring(startPos, endPos).toCharArray();
+			if ((startPos != 0) || (endPos != textualDS.getText().length())) {
+				text = textualDS.getText().substring(startPos, endPos).toCharArray();
 			} else {
-				text = sTextualDS.getText().toCharArray();
+				text = textualDS.getText().toCharArray();
 			}
 			// true if last character was a separator, false otherwise
 			boolean isSep = false;
@@ -112,7 +112,7 @@ public class SimpleTokenizer {
 					if (chr == sep) {
 						if (currStart != currEnd) {
 							// create token
-							getsDocumentGraph().createToken(sTextualDS, currStart, currEnd);
+							getDocumentGraph().createToken(textualDS, currStart, currEnd);
 						}
 						isSep = true;
 					} else {
@@ -131,7 +131,7 @@ public class SimpleTokenizer {
 			if (!isSep) {
 				// create a token for the last part of text, if last character
 				// was not a separator
-				getsDocumentGraph().createToken(sTextualDS, currStart, currEnd);
+				getDocumentGraph().createToken(textualDS, currStart, currEnd);
 			}
 		}
 		return (retVal);

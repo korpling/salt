@@ -72,7 +72,7 @@ public class SimpleTokenizerTest {
 	public void testTokenize_ByBlanks1() {
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
 		STextualDS primText = docGraph.createTextualDS("This is a test text.");
-		getFixture().setsDocumentGraph(docGraph);
+		getFixture().setDocumentGraph(docGraph);
 		getFixture().tokenize(primText, ' ');
 
 		assertEquals(5, docGraph.getTokens().size());
@@ -98,7 +98,7 @@ public class SimpleTokenizerTest {
 	public void testTokenize_ByBlanks2() {
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
 		STextualDS primText = docGraph.createTextualDS("    This   is   a test  text.  ");
-		getFixture().setsDocumentGraph(docGraph);
+		getFixture().setDocumentGraph(docGraph);
 		getFixture().tokenize(primText, ' ');
 
 		assertEquals(5, docGraph.getTokens().size());
@@ -124,7 +124,7 @@ public class SimpleTokenizerTest {
 	public void testTokenize_ByBlanksAndPunc() {
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
 		STextualDS primText = docGraph.createTextualDS("    This   is   a test  text.  ");
-		getFixture().setsDocumentGraph(docGraph);
+		getFixture().setDocumentGraph(docGraph);
 		getFixture().tokenize(primText, ' ', '.');
 
 		assertEquals(5, docGraph.getTokens().size());

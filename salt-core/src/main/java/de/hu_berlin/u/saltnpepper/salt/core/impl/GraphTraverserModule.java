@@ -190,7 +190,7 @@ public class GraphTraverserModule {
 	 * @author Florian Zipser
 	 * 
 	 */
-	class Traverser implements Runnable {
+	static class Traverser implements Runnable {
 		/**
 		 * list of nodes where traversal starts
 		 */
@@ -260,7 +260,7 @@ public class GraphTraverserModule {
 		 * @author florian
 		 * 
 		 */
-		private class NodeEntry {
+		private static class NodeEntry {
 			private final SNode node;
 			private int order;
 			private Iterator<SRelation<SNode, SNode>> iterator;

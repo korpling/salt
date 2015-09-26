@@ -61,14 +61,14 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 		return outputURI;
 	}
 
-	private SDocumentGraph sDocumentGraph = null;
+	private SDocumentGraph documentGraph = null;
 
-	public void setSDocumentGraph(SDocumentGraph sDocumentGraph) {
-		this.sDocumentGraph = sDocumentGraph;
+	public void setDocumentGraph(SDocumentGraph documentGraph) {
+		this.documentGraph = documentGraph;
 	}
 
-	public SDocumentGraph getSDocumentGraph() {
-		return sDocumentGraph;
+	public SDocumentGraph getDocumentGraph() {
+		return documentGraph;
 	}
 
 	private PrintStream currOutputStream = null;
@@ -113,7 +113,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 		currOutputStream.println("ordering=out;");
 
 		// if documentgraph isn't null print it
-		SDocumentGraph docGraph = getSDocumentGraph();
+		SDocumentGraph docGraph = getDocumentGraph();
 		if (docGraph != null) {
 			visitedNodes = new ArrayList<>();
 			spanList = new LinkedHashSet<>();
@@ -126,8 +126,8 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 			List<SNode> startNodes = docGraph.getRoots();
 			if (startNodes == null) {
 				startNodes = new ArrayList<>();
-				if ((getSDocumentGraph().getTokens() != null) && (this.getSDocumentGraph().getTokens().size() > 0))
-					startNodes.add(this.getSDocumentGraph().getTokens().get(0));
+				if ((getDocumentGraph().getTokens() != null) && (this.getDocumentGraph().getTokens().size() > 0))
+					startNodes.add(this.getDocumentGraph().getTokens().get(0));
 			}
 			if ((startNodes != null) && (startNodes.size() > 0)) {
 				docGraph.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "Dot_top_down", this);
@@ -183,12 +183,12 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 
 			{// some nodes have no roots for example if they are part of a
 				// cycle, they have to be still stored
-				if (visitedNodes.size() != this.getSDocumentGraph().getNodes().size()) {
+				if (visitedNodes.size() != this.getDocumentGraph().getNodes().size()) {
 					// if both lists doesn't have the same size create
 					// difference contains all nodes, which wasn't visited while
 					// first traversal
 					List<SNode> forgottenNodes = new ArrayList<>();
-					for (SNode node : this.getSDocumentGraph().getNodes()) {
+					for (SNode node : this.getDocumentGraph().getNodes()) {
 						if (!visitedNodes.contains(node))
 							forgottenNodes.add(node);
 					}
@@ -257,7 +257,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 
 	private DOTNode getDOTNode(SNode currSNode) {
 		DOTNode dotNode = new DOTNode();
-		dotNode.id = currSNode.getId().toString();
+		dotNode.id = currSNode.getId();
 
 		// print name
 		if (currSNode.getName() != null) {
@@ -375,8 +375,8 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 		// print relation, if exists
 		if (relation != null) {
 			DOTEdge dotEdge = new DOTEdge();
-			dotEdge.fromId = fromSNode.getId().toString();
-			dotEdge.toId = currSNode.getId().toString();
+			dotEdge.fromId = fromSNode.getId();
+			dotEdge.toId = currSNode.getId();
 
 			// print edge type, if exists
 			String type = relation.getType();

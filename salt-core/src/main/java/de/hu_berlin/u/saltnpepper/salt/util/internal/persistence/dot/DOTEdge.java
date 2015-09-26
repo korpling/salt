@@ -30,10 +30,14 @@ public class DOTEdge {
 	public List<String> labels = new ArrayList<>();
 
 	public String toString() {
-		String retStr = "";
-		retStr = "<" + fromId + "> -> <" + toId + ">";
+		StringBuilder retStr = new StringBuilder();
+		retStr.append("<"); 
+		retStr.append(fromId);
+		retStr.append("> -> <");
+		retStr.append(toId);
+		retStr.append(">");
 		// open properties
-		retStr = retStr + "[";
+		retStr.append("[");
 
 		List<String> props = new LinkedList<String>();
 
@@ -47,29 +51,30 @@ public class DOTEdge {
 		}
 
 		if ((labels != null) && (labels.size() > 0)) {
-			String labelStr = "label=\"";
+			StringBuilder labelStr = new StringBuilder();
+			labelStr.append("label=\"");
 			boolean printSep = false;
 			for (String label : labels) {
 				if (printSep) {
-					labelStr = labelStr + ", ";
+					labelStr.append(", ");
 				}
 				printSep = true;
-				labelStr = labelStr + label;
+				labelStr.append(label);
 			}
-			labelStr = labelStr + "\"";
-			props.add(labelStr);
+			labelStr.append("\"");
+			props.add(labelStr.toString());
 		}
 
 		Iterator<String> it = props.iterator();
 		while (it.hasNext()) {
-			retStr += it.next();
+			retStr.append(it.next());
 			if (it.hasNext()) {
-				retStr += ",";
+				retStr.append(",");
 			}
 		}
 
 		// close properties
-		retStr = retStr + "];";
-		return (retStr);
+		retStr.append("];");
+		return (retStr.toString());
 	}
 }

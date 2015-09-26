@@ -75,7 +75,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
  * Salt the 'real' linguistic data are also stored in a graph called
  * document-graph which is represented by the type {@link SDocumentGraph}. An
  * object of this type is contained in a {@link SDocument} object and can be set
- * and get by calling {@link SDocument#setSDocumentGraph(SDocumentGraph)} and
+ * and get by calling {@link SDocument#setDocumentGraph(SDocumentGraph)} and
  * {@link SDocument#getDocumentGraph()}. A closer documentation of a document
  * graph, you can find in {@link SDocumentGraph}.
  * 
