@@ -30,16 +30,10 @@ import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
+import de.hu_berlin.u.saltnpepper.salt.tests.SaltTestsUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
-public class DOTResourceTest {
-
-	private URI getTmpDir() {
-		File tmpDir = new File(System.getProperty("java.io.tmpdir") + "/saltTest/DOTResourceTest/");
-		tmpDir.mkdirs();
-		URI tmpUri = URI.createFileURI(tmpDir.getAbsolutePath());
-		return (tmpUri);
-	}
+public class DOTStoringTest {
 
 	/**
 	 * Test the storing of a {@link SDocumentGraph}. Only tests, if a file at
@@ -47,7 +41,7 @@ public class DOTResourceTest {
 	 */
 	@Test
 	public void testSave_SDocumentGraph() {
-		URI uri = getTmpDir().appendSegment("sDocument");
+		URI uri = URI.createFileURI(SaltTestsUtil.getTempTestFolder("document").getAbsolutePath());
 
 		String docName = "doc1";
 		SDocument sDocument = SaltFactory.createSDocument();
@@ -59,7 +53,7 @@ public class DOTResourceTest {
 		assertTrue(new File(uri.toFileString()).isDirectory());
 		assertTrue(new File(uri.appendSegment(docName).appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
 
-		uri = getTmpDir().appendSegment(docName).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+		uri = URI.createFileURI(SaltTestsUtil.getTempTestFolder().getAbsolutePath()).appendSegment(docName).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 		SaltUtil.save_DOT(sDocument, uri);
 		assertTrue(new File(uri.toFileString()).exists());
 	}
@@ -70,7 +64,7 @@ public class DOTResourceTest {
 	 */
 	@Test
 	public void testSave_SCorpusGraph() {
-		URI uri = getTmpDir().appendSegment("sCorpusGraph");
+		URI uri = URI.createFileURI(SaltTestsUtil.getTempTestFolder("corpusGraph").getAbsolutePath());
 
 		SCorpusGraph sCorpGraph = SampleGenerator.createCorpusStructure();
 
@@ -84,7 +78,7 @@ public class DOTResourceTest {
 	 */
 	@Test
 	public void testSave_SProject() {
-		URI uri = getTmpDir().appendSegment("sProject");
+		URI uri = URI.createFileURI(SaltTestsUtil.getTempTestFolder("salt_project").getAbsolutePath());
 
 		SaltProject saltProject = SampleGenerator.createSaltProject();
 
@@ -102,7 +96,7 @@ public class DOTResourceTest {
 	 */
 	@Test
 	public void testSave_SProject2() {
-		URI uri = getTmpDir().appendSegment("sProject2");
+		URI uri = URI.createFileURI(SaltTestsUtil.getTempTestFolder("salt_project2").getAbsolutePath());
 
 		SaltProject saltProject = SampleGenerator.createSaltProject();
 		saltProject.addCorpusGraph(SampleGenerator.createCorpusStructure());

@@ -50,6 +50,7 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 	private URI outputURI = null;
 
 	public void setOutputURI(URI outputURI) {
+		this.outputURI = outputURI;
 	}
 
 	public URI getOutputURI() {
@@ -69,10 +70,14 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 	private PrintStream currOutputStream = null;
 
 	public void save() {
-		if (outputURI == null) {
+		if (getOutputURI() == null) {
 			throw new SaltException("Cannot print the given model to dot, because no output file is given.");
 		}
-		File outputFile = new File(getOutputURI().toFileString());
+		String str = getOutputURI().toFileString();
+		if (str == null) {
+			str = getOutputURI().toString();
+		}
+		File outputFile = new File(str);
 		File outputDir = null;
 
 		if (outputFile.getName().endsWith("." + SaltUtil.FILE_ENDING_DOT)) {
@@ -137,13 +142,13 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currSNode, SRelation sRelation, SNode fromSNode, long order) {
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currSNode, SRelation relation, SNode fromSNode, long order) {
 		DOTNode dotNode = new DOTNode();
 		dotNode.id = currSNode.getId().toString();
 
-		// print sName
+		// print name
 		if (currSNode.getName() != null)
-			dotNode.labels.add("sName" + "= " + currSNode.getName());
+			dotNode.labels.add("name" + "= " + currSNode.getName());
 
 		// create all annotations incl. meta annotations
 		for (SMetaAnnotation sMetaAnno : currSNode.getMetaAnnotations()) {
@@ -168,32 +173,31 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 		}
 		currOutputStream.println(dotNode.toString());
 		// print relation, if exists
-		if (sRelation != null) {
+		if (relation != null) {
 			DOTEdge dotEdge = new DOTEdge();
 			dotEdge.fromId = fromSNode.getId().toString();
 			dotEdge.toId = currSNode.getId().toString();
 
-			// print sName
-			if (sRelation.getName() != null)
-				dotEdge.labels.add("sName" + "= " + sRelation.getName());
+			// print name
+			if (relation.getName() != null)
+				dotEdge.labels.add("name" + "= " + relation.getName());
 
-			{// print edge type, if exists
-				String sTypes = sRelation.getType();
-				if ((sTypes != null) && (!sTypes.isEmpty())) {
-					dotEdge.labels.add("sTypes=[" + sTypes + "]");
-				}
+			// print edge type, if exists
+			String type = relation.getType();
+			if ((type != null) && (!type.isEmpty())) {
+				dotEdge.labels.add("type=[" + type + "]");
 			}
-			for (SAnnotation sAnno : sRelation.getAnnotations()) {
+			for (SAnnotation sAnno : relation.getAnnotations()) {
 				dotEdge.labels.add(sAnno.getQName() + "= " + sAnno.getValue().toString());
 			}
 
 			// SCORPUS_RELATION
-			if (sRelation instanceof SCorpusRelation) {
+			if (relation instanceof SCorpusRelation) {
 				dotEdge.color = "gray28";
 				dotEdge.style = "filled";
 			}
 			// SCORPDOC_RELATION
-			else if (sRelation instanceof SCorpusDocumentRelation) {
+			else if (relation instanceof SCorpusDocumentRelation) {
 				dotEdge.color = "gray";
 				dotEdge.style = "filled";
 			}

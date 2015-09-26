@@ -508,47 +508,51 @@ public class SaltUtil {
 	// ==================================================< Persistence SaltXML
 	// ==================================================> Persistence DOT
 	/**
-	 * Stores a SCorpusGraph model into DOT file
+	 * Stores a {@link SCorpusGraph} into DOT file.
+	 * @param corpusGraph the corpus graph to be stored
+	 * @param location the location to where the corpus graph is stored
 	 */
-	public static void saveCorpusGraph_DOT(SCorpusGraph sCorpusGraph, URI location) {
+	public static void saveCorpusGraph_DOT(SCorpusGraph corpusGraph, URI location) {
 		URI targetUri = null;
 		if (location.fileExtension() == null) {
-			if ((sCorpusGraph.getSaltProject() != null) && (sCorpusGraph.getSaltProject().getCorpusGraphs().size() > 1)) {
-				Integer pos = sCorpusGraph.getSaltProject().getCorpusGraphs().indexOf(sCorpusGraph);
+			if ((corpusGraph.getSaltProject() != null) && (corpusGraph.getSaltProject().getCorpusGraphs().size() > 1)) {
+				Integer pos = corpusGraph.getSaltProject().getCorpusGraphs().indexOf(corpusGraph);
 				targetUri = location.appendSegment(pos.toString()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 			} else {
-				List<SNode> roots = sCorpusGraph.getRoots();
+				List<SNode> roots = corpusGraph.getRoots();
 				if ((roots != null) && (!roots.isEmpty())) {
 					targetUri = location.appendSegment(((SCorpus) roots.get(0)).getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 				} else {
-					targetUri = location.appendSegment(sCorpusGraph.getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+					targetUri = location.appendSegment(corpusGraph.getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 				}
 			}
 		} else {
 			targetUri = location;
 		}
 		SCorpusGraphDOTWriter writer = new SCorpusGraphDOTWriter();
-		writer.setSCorpusGraph(sCorpusGraph);
+		writer.setSCorpusGraph(corpusGraph);
 		writer.setOutputURI(targetUri);
 		writer.save();
 	}
 
 	/**
-	 * Stores a SDocumentGraph model into DOT file
+	 * Stores a {@link SDocumentGraph} into DOT file.
+	 * @param documentGraph the document graph to be stored
+	 * @param location the location to where the document graph is stored
 	 */
-	public static void saveDocumentGraph_DOT(SDocumentGraph sDocumentGraph, URI location) {
+	public static void saveDocumentGraph_DOT(SDocumentGraph documentGraph, URI location) {
 		URI targetUri = null;
 		if (location.fileExtension() == null) {
-			if (sDocumentGraph.getDocument() != null) {
-				targetUri = location.appendSegment(sDocumentGraph.getDocument().getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+			if (documentGraph.getDocument() != null) {
+				targetUri = location.appendSegment(documentGraph.getDocument().getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 			} else {
-				targetUri = location.appendSegment(sDocumentGraph.getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+				targetUri = location.appendSegment(documentGraph.getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 			}
 		} else {
 			targetUri = location;
 		}
 		SDocumentGraphDOTWriter writer = new SDocumentGraphDOTWriter();
-		writer.setSDocumentGraph(sDocumentGraph);
+		writer.setSDocumentGraph(documentGraph);
 		writer.setOutputURI(targetUri);
 		writer.save();
 	}
@@ -594,25 +598,25 @@ public class SaltUtil {
 	 *    |-1.dot
 	 * </pre>
 	 */
-	public static void save_DOT(Object content, URI location) {
+	public static void save_DOT(Object saltObject, URI location) {
 		if (location == null) {
 			throw new SaltResourceException("Exception in storing Salt model to dot file, because no uri was given.");
 		}
-		if (content == null) {
+		if (saltObject == null) {
 			throw new SaltResourceException("Exception in storing Salt model to dot file. Cannot write more than one content per file.");
 		}
 
-		if (content instanceof SCorpus) {
-			SCorpus sCorpus = (SCorpus) content;
+		if (saltObject instanceof SCorpus) {
+			SCorpus sCorpus = (SCorpus) saltObject;
 			if (sCorpus.getGraph() != null) {
-				content = sCorpus.getGraph();
+				saltObject = sCorpus.getGraph();
 			} else {
 				throw new SaltResourceException("Cannot save Salt model to DOT format, because the given " + SCorpus.class.getSimpleName() + " is not part of a " + SCorpusGraph.class.getSimpleName() + " container");
 			}
-		} else if (content instanceof SDocument) {
-			SDocument sDocument = (SDocument) content;
+		} else if (saltObject instanceof SDocument) {
+			SDocument sDocument = (SDocument) saltObject;
 			if (sDocument.getDocumentGraph() != null) {
-				content = sDocument.getDocumentGraph();
+				saltObject = sDocument.getDocumentGraph();
 			} else {
 				throw new SaltResourceException("Cannot save Salt model to DOT format, because the given " + SDocument.class.getSimpleName() + " does not contain a " + SDocumentGraph.class.getSimpleName() + " content");
 			}
@@ -620,19 +624,18 @@ public class SaltUtil {
 
 		// if content is a SDocumentGraph or SCorpusGraph, outputURI does not
 		// have to be changed
-		if (content instanceof SCorpusGraph) {
-			saveCorpusGraph_DOT((SCorpusGraph) content, location);
-		} else if (content instanceof SDocumentGraph) {
-			saveDocumentGraph_DOT((SDocumentGraph) content, location);
+		if (saltObject instanceof SCorpusGraph) {
+			saveCorpusGraph_DOT((SCorpusGraph) saltObject, location);
+		} else if (saltObject instanceof SDocumentGraph) {
+			saveDocumentGraph_DOT((SDocumentGraph) saltObject, location);
 		}
 		// if it is a SaltProject, different URIs for the different components
 		// of the project are needed
-		else if (content instanceof SaltProject) {
-			Collection<SCorpusGraph> corpGraphs = Collections.synchronizedCollection(((SaltProject) content).getCorpusGraphs());
+		else if (saltObject instanceof SaltProject) {
+			Collection<SCorpusGraph> corpGraphs = Collections.synchronizedCollection(((SaltProject) saltObject).getCorpusGraphs());
 			Integer corpIndex = 0;
 			for (SCorpusGraph sCorpusGraph : corpGraphs) {
 				URI corpUri = location;
-
 				saveCorpusGraph_DOT(sCorpusGraph, corpUri);
 
 				if (corpGraphs.size() > 1) {
@@ -657,7 +660,7 @@ public class SaltUtil {
 				corpIndex++;
 			}
 		} else {
-			throw new SaltResourceException("Cannot save Salt model to DOT format, because content is neither " + SCorpusGraph.class.getSimpleName() + ", " + SDocumentGraph.class.getSimpleName() + " nor " + SaltProject.class.getSimpleName() + " content. The given content is of type: '" + content.getClass() + "'.");
+			throw new SaltResourceException("Cannot save Salt model to DOT format, because content is neither " + SCorpusGraph.class.getSimpleName() + ", " + SDocumentGraph.class.getSimpleName() + " nor " + SaltProject.class.getSimpleName() + " content. The given content is of type: '" + saltObject.getClass() + "'.");
 		}
 	}
 	// ===================================================< Persistence DOT

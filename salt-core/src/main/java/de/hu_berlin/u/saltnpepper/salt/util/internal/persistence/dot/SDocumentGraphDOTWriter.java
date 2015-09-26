@@ -86,38 +86,42 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 	private Set<SNode> otherNodeList;
 
 	public void save() {
-		if (outputURI == null)
+		if (outputURI == null) {
 			throw new SaltException("Cannot print the given model to dot, because no output file is given.");
-
-		File outputFile = new File(this.getOutputURI().toFileString());
+		}
+		String str = getOutputURI().toFileString();
+		if (str == null) {
+			str = getOutputURI().toString();
+		}
+		File outputFile = new File(str);
 		File outputDir = null;
 		// check if uri is a file uri or a directory uri
-		if (outputFile.getName().contains("."))
+		if (outputFile.getName().contains(".")) {
 			outputDir = outputFile.getParentFile();
-		else
+		} else {
 			outputDir = outputFile;
+		}
 		outputDir.mkdirs();
 		try {
-			this.currOutputStream = new PrintStream(outputFile, "UTF-8");
+			currOutputStream = new PrintStream(outputFile, "UTF-8");
 		} catch (FileNotFoundException e) {
 			throw new NullPointerException(e.getMessage());
 		} catch (UnsupportedEncodingException e) {
 			throw new NullPointerException(e.getMessage());
 		}
-		this.currOutputStream.println("digraph G {");
-		this.currOutputStream.println("ordering=out;");
+		currOutputStream.println("digraph G {");
+		currOutputStream.println("ordering=out;");
 
 		// if documentgraph isn't null print it
 		SDocumentGraph docGraph = getSDocumentGraph();
 		if (docGraph != null) {
-
-			this.visitedNodes = new ArrayList<>();
-			this.spanList = new LinkedHashSet<>();
-			this.structureList = new LinkedHashSet<>();
-			this.textList = new LinkedHashSet<>();
-			this.timelineList = new LinkedHashSet<>();
-			this.tokenList = new LinkedHashSet<>();
-			this.otherNodeList = new LinkedHashSet<>();
+			visitedNodes = new ArrayList<>();
+			spanList = new LinkedHashSet<>();
+			structureList = new LinkedHashSet<>();
+			textList = new LinkedHashSet<>();
+			timelineList = new LinkedHashSet<>();
+			tokenList = new LinkedHashSet<>();
+			otherNodeList = new LinkedHashSet<>();
 
 			List<SNode> startNodes = docGraph.getRoots();
 			if (startNodes == null) {
@@ -125,9 +129,9 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 				if ((getSDocumentGraph().getTokens() != null) && (this.getSDocumentGraph().getTokens().size() > 0))
 					startNodes.add(this.getSDocumentGraph().getTokens().get(0));
 			}
-			if ((startNodes != null) && (startNodes.size() > 0))
+			if ((startNodes != null) && (startNodes.size() > 0)) {
 				docGraph.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "Dot_top_down", this);
-
+			}
 			// primary texts should be on the bottom
 			if (textList.size() > 0) {
 				currOutputStream.println("{");
@@ -197,12 +201,12 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 			}// some nodes have no roots for example if they are part of a
 				// cycle, they have to be still stored
 		} else {
-			this.currOutputStream.println("<empty>[color= red, style = filled]");
+			currOutputStream.println("<empty>[color= red, style = filled]");
 		}
-		this.currOutputStream.println("}");
+		currOutputStream.println("}");
 		// close and flusch stream
-		this.currOutputStream.flush();
-		this.currOutputStream.close();
+		currOutputStream.flush();
+		currOutputStream.close();
 	}
 
 	/**
@@ -255,10 +259,10 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 		DOTNode dotNode = new DOTNode();
 		dotNode.id = currSNode.getId().toString();
 
-		// print sName
-		if (currSNode.getName() != null)
-			dotNode.labels.add("sName" + "= " + currSNode.getName());
-
+		// print name
+		if (currSNode.getName() != null) {
+			dotNode.labels.add("name" + "= " + currSNode.getName());
+		}
 		// create all annotations incl. meta annotations
 		for (SAnnotation sAnno : currSNode.getAnnotations()) {
 			dotNode.labels.add(this.createAnnotations(sAnno));
@@ -269,7 +273,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 	}
 
 	private void printDOTNode(DOTNode dotNode) {
-		this.currOutputStream.println(dotNode.toString());
+		currOutputStream.println(dotNode.toString());
 	}
 
 	private void printSTextualDS(STextualDS t) {
@@ -374,16 +378,12 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 			dotEdge.fromId = fromSNode.getId().toString();
 			dotEdge.toId = currSNode.getId().toString();
 
-			// //print sName
-			// if (relation.getSName()!= null)
-			// dotEdge.labels.add("sName"+"= "+relation.getSName());
-
-			{// print edge type, if exists
-				String sTypes = relation.getType();
-				if ((sTypes != null) && (!sTypes.isEmpty())) {
-					dotEdge.labels.add("sTypes= [" + sTypes + "]");
-				}
+			// print edge type, if exists
+			String type = relation.getType();
+			if ((type != null) && (!type.isEmpty())) {
+				dotEdge.labels.add("type= [" + type + "]");
 			}
+
 			for (SAnnotation sAnno : relation.getAnnotations()) {
 				dotEdge.labels.add(sAnno.getQName() + "= " + sAnno.getValue_STEXT());
 			}
