@@ -641,7 +641,10 @@ public class SaltUtil {
 				for (int docIndex = 0; docIndex < sCorpusGraph.getDocuments().size(); docIndex++) {
 					SDocument sDocument = sCorpusGraph.getDocuments().get(docIndex);
 					if (sDocument.getDocumentGraph() != null) {
-						URI docURI = corpUri.appendSegments((String[]) sDocument.getPath().segmentsList().toArray());
+						URI docURI = corpUri;
+						for (String seg: sDocument.getPath().segments()){
+							docURI= docURI.appendSegment(seg);
+						}
 						SDocumentGraph sDocGraph = sDocument.getDocumentGraph();
 						saveDocumentGraph_DOT(sDocGraph, docURI.appendFileExtension(SaltUtil.FILE_ENDING_DOT));
 						// when calling saveResource(), the sCorpusGraph content
