@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.index;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,7 +30,7 @@ import java.util.List;
  * @author florian
  *
  */
-public interface IndexMgr {
+public interface IndexMgr extends Serializable {
 
 	/**
 	 * Creates a new index which could be accessed via the passed identifier.

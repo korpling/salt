@@ -284,7 +284,7 @@ public class SampleGenerator {
 		document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		document.getDocumentGraph().createTextualDS(PRIMARY_TEXT_EN_SPK1);
 		createTokens(document);
-		STextualDS sText1 = document.getDocumentGraph().getTextualDSs().get(0);
+		document.getDocumentGraph().getTextualDSs().get(0);
 		document.getDocumentGraph().createTimeline();
 		List<SRelation> timelineRelationsToDelete = new ArrayList<>();
 		for (STimelineRelation timelineRelation : document.getDocumentGraph().getTimelineRelations()) {
@@ -972,17 +972,10 @@ public class SampleGenerator {
 		}
 		List<SStructure> sStructures = Collections.synchronizedList(document.getDocumentGraph().getStructures());
 		String[] annotations = { "ROOT", "SQ", "NP", "ADJP", "ADJP", "SBar", "S", "NP", "VP", "S", "VP", "VP" };
-		String annoNS = null; // no namespace used in this example
-		String annoName = "const"; // our name for a constituent
-		SAnnotation sAnno = null;
 		int i = 0;
 		for (SStructure sStructure : sStructures) {
-			sAnno = SaltFactory.createSAnnotation();
-			sAnno.setNamespace(annoNS);
-			sAnno.setName(annoName);
-			sAnno.setValue(annotations[i]);
+			sStructure.createAnnotation(null, "const", annotations[i]);
 			i++;
-			sStructure.addAnnotation(sAnno);
 		}
 
 	}

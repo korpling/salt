@@ -246,7 +246,7 @@ public class SaltUtil {
 				if (i == fullName.length - 1) {
 					name = fullName[i];
 				} else {
-					if ((ns == null) || (ns.toString().isEmpty())) {
+					if ((ns.toString().isEmpty())) {
 						ns.append(fullName[i]);
 					} else {
 						ns.append(NAMESPACE_SEPERATOR);

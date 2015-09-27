@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.util;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
@@ -29,7 +30,8 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
  * 
  * @author Florian Zipser
  */
-public class TokenStartComparator implements Comparator<SToken> {
+@SuppressWarnings("serial")
+public class TokenStartComparator implements Comparator<SToken>, Serializable {
 	private SDocumentGraph documentGraph = null;
 
 	/**

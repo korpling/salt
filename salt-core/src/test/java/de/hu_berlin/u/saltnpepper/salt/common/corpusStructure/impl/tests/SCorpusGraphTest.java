@@ -39,6 +39,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 import de.hu_berlin.u.saltnpepper.salt.tests.SaltTestsUtil;
 
 public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
@@ -219,7 +220,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		try {
 			getFixture().addSubCorpus(superCorpus, subCorpus);
 			fail();
-		} catch (SaltInsertionException e) {
+		} catch (SaltParameterException e) {
 		}
 
 		superCorpus = SaltFactory.createSCorpus();
@@ -227,7 +228,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		try {
 			getFixture().addSubCorpus(superCorpus, subCorpus);
 			fail();
-		} catch (SaltInsertionException e) {
+		} catch (SaltParameterException e) {
 		}
 
 		superCorpus = null;
@@ -236,7 +237,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		try {
 			getFixture().addSubCorpus(superCorpus, subCorpus);
 			fail();
-		} catch (SaltInsertionException e) {
+		} catch (SaltParameterException e) {
 		}
 
 		superCorpus = SaltFactory.createSCorpus();
@@ -281,7 +282,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		try {
 			getFixture().addDocument(corpus, document);
 			fail();
-		} catch (SaltInsertionException e) {
+		} catch (SaltParameterException e) {
 		}
 
 		corpus = SaltFactory.createSCorpus();
@@ -289,7 +290,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		try {
 			getFixture().addDocument(corpus, document);
 			fail();
-		} catch (SaltInsertionException e) {
+		} catch (SaltParameterException e) {
 		}
 
 		corpus = null;
@@ -298,7 +299,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		try {
 			getFixture().addDocument(corpus, document);
 			fail();
-		} catch (SaltInsertionException e) {
+		} catch (SaltParameterException e) {
 		}
 
 		corpus = SaltFactory.createSCorpus();

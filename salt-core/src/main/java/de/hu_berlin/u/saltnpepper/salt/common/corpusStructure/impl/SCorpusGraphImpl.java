@@ -41,6 +41,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SGraphImpl;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
@@ -63,7 +64,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	}
 
 	/** Salt-project containing this corpus structure **/
-	protected SaltProject saltProject = null;
+	protected transient SaltProject saltProject = null;
 
 	/** {@inheritDoc} **/
 	@Override
@@ -249,10 +250,10 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public Identifier addSubCorpus(SCorpus superCorpus, SCorpus subCorpus) {
 		if (superCorpus == null) {
-			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is null.");
+			throw new SaltParameterException("superCorpus", "addSubCorpus", this.getClass(), "Cannot add the given subCorpus, because the given superCorpus is null.");
 		}
 		if (subCorpus == null) {
-			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because it is null.");
+			throw new SaltParameterException("subCorpus", "addSubCorpus", this.getClass(), "Cannot add the given subCorpus, because it is null.");
 		}
 		if (superCorpus.getId() == null) {
 			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
@@ -283,10 +284,10 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public Identifier addDocument(SCorpus corpus, SDocument document) {
 		if (corpus == null) {
-			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because the given sCorpus is null.");
+			throw new SaltParameterException("corpus", "addDocument",this.getClass(), "Cannot add the given sDocument, because the given sCorpus is null.");
 		}
 		if (document == null) {
-			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because it is null.");
+			throw new SaltParameterException("document", "addDocument",this.getClass(), "Cannot add the given sDocument, because it is null.");
 		}
 		if (getNode(corpus.getId()) == null) {
 			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because the given sCorpus is not already contained in corpus graph.");

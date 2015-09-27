@@ -51,7 +51,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
  * type {@link SCorpusRelation}, setting its source to the super corpus, setting
  * its target to the sub corpus and adding the relation to the
  * {@link SCorpusGraph} object by calling
- * {@link SCorpusGraph#addSRelation(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation)}
+ * {@link SCorpusGraph#addSRelation(SRelation)}
  * . But note, that first the second way contains more handwork and second it is
  * recommended to use the first appoach, because the {@link SElementId} object
  * belonging to the sub corpus can only represent the hierarchy, when the
@@ -193,16 +193,6 @@ public interface SCorpusGraph extends SGraph {
 	 * @return the {@link SCorpus} object containing document
 	 */
 	public SCorpus getCorpus(SDocument document);
-
-	// /**
-	// * Returns a list of SCorpus object being the root corpora of this
-	// * SCorpusGraph object.
-	// *
-	// * @model kind="operation"
-	// * @return a list of corpus objects being root corpora
-	// * @generated
-	// */
-	// EList<SCorpus> getRootCorpus();
 
 	/**
 	 * Loads the content of this object by reading the SaltXML file located by

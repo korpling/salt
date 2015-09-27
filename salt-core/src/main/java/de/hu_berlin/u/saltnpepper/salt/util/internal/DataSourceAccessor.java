@@ -562,7 +562,7 @@ public class DataSourceAccessor {
 				if (currNode instanceof SSequentialDS) {
 					SSequentialDS dataSource = (SSequentialDS) currNode;
 					DataSourceSequence sequence = null;
-					if (dataSourceSequences == null){
+					if (dataSourceSequences == null) {
 						dataSourceSequences = new ArrayList<DataSourceSequence>();
 					}
 					for (DataSourceSequence dsSequence : this.dataSourceSequences) {
@@ -610,7 +610,7 @@ public class DataSourceAccessor {
 						lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
 						lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
 						lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
-					} else if (seqRel!= null){
+					} else if (seqRel != null) {
 						if (seqRel.getStart() == null) {
 							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set. ");
 						} else if (seqRel.getEnd() == null) {
@@ -628,10 +628,6 @@ public class DataSourceAccessor {
 						}
 					}
 				}
-			} else {
-				if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))) {
-					// do nothing?
-				}
 			}
 
 		}
@@ -646,10 +642,9 @@ public class DataSourceAccessor {
 					} else if (((this.relationTypes2Traverse.contains(SALT_TYPE.STIME_OVERLAPPING_RELATION)) || (this.relationTypes2Traverse.contains(SALT_TYPE.SSEQUENTIAL_RELATION))) && (relation instanceof STimeOverlappingRelation)) {
 						retVal = true;
 					}
-				} else{
+				} else {
 					retVal = true;
 				}
-
 			}// TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 			else {
 				if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))) {
@@ -664,7 +659,6 @@ public class DataSourceAccessor {
 									return (true);
 								}
 							}
-
 						}
 					} else {
 						retVal = true;

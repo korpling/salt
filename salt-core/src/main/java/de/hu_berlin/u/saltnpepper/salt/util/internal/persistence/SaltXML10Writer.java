@@ -2,10 +2,12 @@ package de.hu_berlin.u.saltnpepper.salt.util.internal.persistence;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -123,7 +125,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeCharacters("\n");
 			}
 			xml.writeEndElement();
-		} catch (Exception e) {
+		} catch (XMLStreamException | UnsupportedEncodingException | FileNotFoundException e) {
 			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. ", e);
 		} finally {
 			if (xml != null) {
@@ -216,7 +218,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeCharacters("\t");
 			}
 			xml.writeEndElement();
-		} catch (Exception e) {
+		} catch (XMLStreamException | UnsupportedEncodingException | FileNotFoundException e) {
 			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. " + e.getMessage(), e);
 		} finally {
 			if (!embedded) {
@@ -294,8 +296,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 
 			// stores the position of a single relation in the list of relations
-			// to
-			// refer them later
+			// to refer them later
 			Map<SRelation<SNode, SNode>, Integer> relPositions = new HashMap<>();
 
 			// write all relations
@@ -319,7 +320,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 			xml.writeEndElement();
 			xml.writeEndDocument();
-		} catch (Exception e) {
+		} catch (XMLStreamException | UnsupportedEncodingException | FileNotFoundException e) {
 			throw new SaltResourceException("Cannot store document graph to file '" + path + "'. ", e);
 		} finally {
 			if (xml != null) {

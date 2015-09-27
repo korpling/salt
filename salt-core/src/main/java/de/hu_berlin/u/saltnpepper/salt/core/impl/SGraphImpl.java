@@ -36,18 +36,16 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	/** {@inheritDoc} **/
 	@Override
 	public List<SNode> getNodesByName(String nodeName) {
-		if ((nodeName == null) || (nodeName.isEmpty()))
+		if ((nodeName == null) || (nodeName.isEmpty())) {
 			return (null);
-
+		}
 		List<SNode> result = new ArrayList<>();
-		if (nodeName != null) {
-			for (SNode n : getNodes()) {
-				if ((n.getName() == null) || (n.getName().isEmpty())) {
-					break;
-				}
-				if (nodeName.equals(n.getName())) {
-					result.add(n);
-				}
+		for (SNode n : getNodes()) {
+			if ((n.getName() == null) || (n.getName().isEmpty())) {
+				break;
+			}
+			if (nodeName.equals(n.getName())) {
+				result.add(n);
 			}
 		}
 		return result;
@@ -56,18 +54,17 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	/** {@inheritDoc} **/
 	@Override
 	public List<SRelation> getRelationsByName(String relationName) {
-		if ((relationName == null) || (relationName.isEmpty()))
+		if ((relationName == null) || (relationName.isEmpty())) {
 			return (null);
+		}
 
 		List<SRelation> result = new ArrayList<>();
-		if (relationName != null) {
-			for (SRelation r : getRelations()) {
-				if ((r.getName() == null) || (r.getName().isEmpty())) {
-					break;
-				}
-				if (relationName.equals(r.getName())) {
-					result.add(r);
-				}
+		for (SRelation r : getRelations()) {
+			if ((r.getName() == null) || (r.getName().isEmpty())) {
+				break;
+			}
+			if (relationName.equals(r.getName())) {
+				result.add(r);
 			}
 		}
 		return result;
@@ -76,18 +73,17 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	/** {@inheritDoc} **/
 	@Override
 	public List<SLayer> getLayerByName(String layerName) {
-		if ((layerName == null) || (layerName.isEmpty()))
+		if ((layerName == null) || (layerName.isEmpty())) {
 			return (null);
+		}
 
 		List<SLayer> result = new ArrayList<>();
-		if (layerName != null) {
-			for (SLayer l : getLayers()) {
-				if ((l.getName() == null) || (l.getName().isEmpty())) {
-					break;
-				}
-				if (layerName.equals(l.getName())) {
-					result.add(l);
-				}
+		for (SLayer l : getLayers()) {
+			if ((l.getName() == null) || (l.getName().isEmpty())) {
+				break;
+			}
+			if (layerName.equals(l.getName())) {
+				result.add(l);
 			}
 		}
 		return result;

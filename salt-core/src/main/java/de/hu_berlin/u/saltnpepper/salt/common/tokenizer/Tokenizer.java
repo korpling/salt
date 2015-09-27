@@ -273,12 +273,8 @@ public class Tokenizer {
 	 */
 	public void addAbbreviation(LanguageCode language, File abbreviationFile) {
 		HashSet<String> abbreviations = null;
-		try {
+		try (BufferedReader inReader = new BufferedReader(new InputStreamReader(new FileInputStream(abbreviationFile), "UTF8"))) {
 			abbreviations = new HashSet<String>();
-
-			BufferedReader inReader;
-
-			inReader = new BufferedReader(new InputStreamReader(new FileInputStream(abbreviationFile), "UTF8"));
 
 			String input = "";
 
@@ -330,15 +326,14 @@ public class Tokenizer {
 	 *            language
 	 */
 	private void setClitics(LanguageCode language) {
-		if (LanguageCode.en.equals(language))
+		if (LanguageCode.en.equals(language)) {
 			this.FClitic = "('(s|re|ve|d|m|em|ll)|n't)";
-		else if (LanguageCode.fr.equals(language)) {
+		} else if (LanguageCode.fr.equals(language)) {
 			this.PClitic = "([dcjlmnstDCJLNMST]'|[Qq]u'|[Jj]usqu'|[Ll]orsqu')";
 			this.FClitic = "(-t-elles?|-t-ils?|-t-on|-ce|-elles?|-ils?|-je|-la|-les?|-leur|-lui|-mêmes?|-m'|-moi|-nous|-on|-toi|-tu|-t'|-vous|-en|-y|-ci|-là)";
-		} else if (LanguageCode.es.equals(language))
+		} else if (LanguageCode.es.equals(language)) {
 			this.PClitic = "([dD][ae]ll'|[nN]ell'|[Aa]ll'|[lLDd]'|[Ss]ull'|[Qq]uest'|[Uu]n'|[Ss]enz'|[Tt]utt')";
-		else if (LanguageCode.de.equals(language))
-			;// do nothing
+		}
 	}
 
 	/**

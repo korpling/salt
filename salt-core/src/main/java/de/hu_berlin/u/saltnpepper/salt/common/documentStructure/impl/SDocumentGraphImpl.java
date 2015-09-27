@@ -478,7 +478,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end) {
 		if (sequentialDS == null) {
-			throw new SaltInsertionException(this, sequentialDS, "The passed sequentialDS is empty. ");
+			throw new SaltParameterException("sequentialDS", "createToken", this.getClass(), "The passed sequentialDS is empty. ");
 		}
 		if (sequentialDS.getId() == null || !containsNode(sequentialDS.getId())) {
 			throw new SaltInsertionException(this, sequentialDS, "The passed sequentialDS does not belong to this document graph. ");

@@ -532,8 +532,8 @@ public class GraphTraverserModule {
 					edges = edgesOut;
 				} else {
 					edges = edgesIn;
-					edgesIn = edgesOut;
-					edgesOut = edges;
+//					edgesIn = edgesOut;
+//					edgesOut = edges;
 				}
 				if (edges != null) {
 					// in case of node has childs

@@ -51,6 +51,17 @@ import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltResourceException;
 
 public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
+
+	public SDocumentGraphDOTWriter() {
+		visitedNodes = new ArrayList<>();
+		spanList = new LinkedHashSet<>();
+		structureList = new LinkedHashSet<>();
+		textList = new LinkedHashSet<>();
+		timelineList = new LinkedHashSet<>();
+		tokenList = new LinkedHashSet<>();
+		otherNodeList = new LinkedHashSet<>();
+	}
+
 	private URI outputURI = null;
 
 	public void setOutputURI(URI outputURI) {
@@ -115,13 +126,6 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 		// if documentgraph isn't null print it
 		SDocumentGraph docGraph = getDocumentGraph();
 		if (docGraph != null) {
-			visitedNodes = new ArrayList<>();
-			spanList = new LinkedHashSet<>();
-			structureList = new LinkedHashSet<>();
-			textList = new LinkedHashSet<>();
-			timelineList = new LinkedHashSet<>();
-			tokenList = new LinkedHashSet<>();
-			otherNodeList = new LinkedHashSet<>();
 
 			List<SNode> startNodes = docGraph.getRoots();
 			if (startNodes == null) {
@@ -226,13 +230,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 			anno = anno.replace("\n", "\\n");
 			anno = anno.replace("\r", "\\r");
 		}
-
-		if ((retStr != null) && (!retStr.isEmpty())) {
-			retStr = (sAnno.getQName() + "=" + anno + "\\{" + retStr + "\\}");
-		} else {
-			retStr = (sAnno.getQName() + "=" + anno);
-		}
-
+		retStr = (sAnno.getQName() + "=" + anno);
 		return (retStr);
 	}
 
