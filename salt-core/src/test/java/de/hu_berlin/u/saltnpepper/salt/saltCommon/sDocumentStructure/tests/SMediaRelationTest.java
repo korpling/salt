@@ -24,9 +24,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SMedialRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 
 public class SMediaRelationTest extends SSequentialRelationTest<SToken, SMedialDS, Double> {
 

@@ -28,12 +28,12 @@ import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpusDocumentRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpusGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpusRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusDocumentRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;

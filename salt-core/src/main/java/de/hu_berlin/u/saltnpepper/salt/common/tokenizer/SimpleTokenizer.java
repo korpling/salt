@@ -19,9 +19,9 @@ package de.hu_berlin.u.saltnpepper.salt.common.tokenizer;
 
 import java.util.List;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltTokenizerException;
 
 /**

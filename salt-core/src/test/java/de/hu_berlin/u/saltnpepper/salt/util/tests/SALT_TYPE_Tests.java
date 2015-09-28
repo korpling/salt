@@ -6,16 +6,16 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SSpanImpl;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.SStructureImpl;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.impl.STokenImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.SDominanceRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SOrderRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SSpan;
+import de.hu_berlin.u.saltnpepper.salt.common.SSpanningRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SStructure;
+import de.hu_berlin.u.saltnpepper.salt.common.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.impl.SSpanImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.impl.SStructureImpl;
+import de.hu_berlin.u.saltnpepper.salt.common.impl.STokenImpl;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 
 public class SALT_TYPE_Tests {

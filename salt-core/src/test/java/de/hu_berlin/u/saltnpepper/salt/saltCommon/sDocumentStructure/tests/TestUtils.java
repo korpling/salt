@@ -3,7 +3,7 @@ package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;

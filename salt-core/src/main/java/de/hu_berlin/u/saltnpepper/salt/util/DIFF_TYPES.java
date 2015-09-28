@@ -1,6 +1,6 @@
 package de.hu_berlin.u.saltnpepper.salt.util;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
 
 /**
  * Defines types of differences between two {@link SDocumentGraph} objects.

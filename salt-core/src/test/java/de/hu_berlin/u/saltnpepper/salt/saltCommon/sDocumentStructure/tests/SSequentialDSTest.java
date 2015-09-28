@@ -19,7 +19,7 @@ package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
 import org.junit.Test;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SSequentialDS;
 
 public abstract class SSequentialDSTest<D, P extends Number> extends SNodeAbstractTest {
 

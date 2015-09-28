@@ -19,7 +19,7 @@ package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
 import org.junit.Test;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SSequentialRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
 public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number> extends SRelationAbstractTest {

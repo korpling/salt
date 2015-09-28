@@ -22,9 +22,9 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpusGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
 
 public class SampleGeneratorTest {

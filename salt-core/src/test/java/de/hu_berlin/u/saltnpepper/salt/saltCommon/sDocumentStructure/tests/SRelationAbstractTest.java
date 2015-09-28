@@ -3,14 +3,14 @@ package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SDominanceRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SMedialRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SOrderRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SSpanningRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.STimelineRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 

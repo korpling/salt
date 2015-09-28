@@ -1,7 +1,7 @@
 package de.hu_berlin.u.saltnpepper.salt.util;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SSequentialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualDS;
 
 /**
  * This class is a helper class to address a sequence inside a data source. For

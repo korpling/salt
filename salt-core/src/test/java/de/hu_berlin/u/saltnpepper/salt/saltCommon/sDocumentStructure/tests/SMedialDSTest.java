@@ -25,7 +25,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SMedialDS;
 
 public class SMedialDSTest extends SSequentialDSTest<URI, Double> {
 

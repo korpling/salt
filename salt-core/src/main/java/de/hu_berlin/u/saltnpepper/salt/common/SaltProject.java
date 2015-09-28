@@ -23,9 +23,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 
 /**
  * The salt project is a kind of a super container for a Salt model. It contains

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import com.google.common.collect.BiMap;
@@ -19,14 +20,14 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SSequentialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SSpan;
+import de.hu_berlin.u.saltnpepper.salt.common.SStructure;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.GraphTraverseHandler;
 import de.hu_berlin.u.saltnpepper.salt.core.SAbstractAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;

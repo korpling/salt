@@ -8,9 +8,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.u.saltnpepper.graph.Identifier;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.SCorpusGraphImpl;
 
 public class SaltProjectImpl implements SaltProject {
 

@@ -22,11 +22,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import de.hu_berlin.u.saltnpepper.graph.Label;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpusGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpusGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;

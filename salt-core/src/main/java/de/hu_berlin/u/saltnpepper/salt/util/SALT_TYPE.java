@@ -25,24 +25,24 @@ import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SCorpus;
-import de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.SDocument;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SMedialRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SOrderRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSequentialRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpan;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SSpanningRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextOverlappingRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeOverlappingRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocument;
+import de.hu_berlin.u.saltnpepper.salt.common.SDominanceRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SMedialRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SOrderRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SSequentialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SSequentialRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SSpan;
+import de.hu_berlin.u.saltnpepper.salt.common.SSpanningRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SStructure;
+import de.hu_berlin.u.saltnpepper.salt.common.STextOverlappingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.STimeOverlappingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.STimelineRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 
 public enum SALT_TYPE {
 	//

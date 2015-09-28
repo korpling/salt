@@ -24,9 +24,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimeline;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STimelineRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.STimeline;
+import de.hu_berlin.u.saltnpepper.salt.common.STimelineRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 
 public class STimelineRelationTest extends SSequentialRelationTest<SToken, STimeline, Integer> {
 

@@ -32,12 +32,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDominanceRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SPointingRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SStructure;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SDominanceRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SPointingRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SStructure;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.samples.SampleGenerator;
 import de.hu_berlin.u.saltnpepper.salt.util.Difference;

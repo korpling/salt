@@ -24,9 +24,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualDS;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SToken;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 
 public class STextualRelationTest extends SSequentialRelationTest<SToken, STextualDS, Integer> {
 

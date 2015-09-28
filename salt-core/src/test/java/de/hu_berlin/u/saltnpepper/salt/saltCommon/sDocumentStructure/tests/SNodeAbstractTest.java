@@ -2,7 +2,7 @@ package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
 
 import org.junit.Test;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
 /**

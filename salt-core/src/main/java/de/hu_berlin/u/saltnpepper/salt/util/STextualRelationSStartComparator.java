@@ -20,8 +20,8 @@ package de.hu_berlin.u.saltnpepper.salt.util;
 import java.io.Serializable;
 import java.util.Comparator;
 
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
 /**

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
-import de.hu_berlin.u.saltnpepper.salt.common.documentStructure.SDocumentGraph;
+import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
 
 /**
  * Objects of this class are produces by
