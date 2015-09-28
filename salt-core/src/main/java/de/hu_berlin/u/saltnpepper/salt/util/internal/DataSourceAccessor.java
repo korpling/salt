@@ -605,26 +605,28 @@ public class DataSourceAccessor {
 				if (currNode instanceof SSequentialDS) {
 					// check if current start and end value is smaller or
 					// bigger, than reset
-					SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> seqRel = (SSequentialRelation) relation;
-					if (seqRel == null){
+					if (relation == null) {
 						lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
 						lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
 						lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
-					} else{
-						if (seqRel.getStart() == null) {
-							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set. ");
-						} else if (seqRel.getEnd() == null) {
-							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '" + seqRel + "' is not set. ");
-						}
-						if ((lastSeenDSSequence.getStart() == null) || (seqRel.getStart().doubleValue() < this.lastSeenDSSequence.getStart().doubleValue())) {
-							// if start value wasn't set or is higher than
-							// current one
-							lastSeenDSSequence.setStart(seqRel.getStart());
-						}
-						if ((lastSeenDSSequence.getEnd() == null) || (seqRel.getEnd().doubleValue() > this.lastSeenDSSequence.getEnd().doubleValue())) {
-							// if end value wasn't set or is higher than
-							// current one
-							lastSeenDSSequence.setEnd(seqRel.getEnd());
+					} else {
+						if (relation instanceof SSequentialRelation) {
+							SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> seqRel = (SSequentialRelation) relation;
+							if (seqRel.getStart() == null) {
+								throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set. ");
+							} else if (seqRel.getEnd() == null) {
+								throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sEnd value the SSequentialRelation '" + seqRel + "' is not set. ");
+							}
+							if ((lastSeenDSSequence.getStart() == null) || (seqRel.getStart().doubleValue() < this.lastSeenDSSequence.getStart().doubleValue())) {
+								// if start value wasn't set or is higher than
+								// current one
+								lastSeenDSSequence.setStart(seqRel.getStart());
+							}
+							if ((lastSeenDSSequence.getEnd() == null) || (seqRel.getEnd().doubleValue() > this.lastSeenDSSequence.getEnd().doubleValue())) {
+								// if end value wasn't set or is higher than
+								// current one
+								lastSeenDSSequence.setEnd(seqRel.getEnd());
+							}
 						}
 					}
 				}
@@ -652,12 +654,10 @@ public class DataSourceAccessor {
 					if (relation != null) {
 						// get the typename for the sRelation class
 						Set<SALT_TYPE> typeName = SALT_TYPE.class2SaltType(relation.getClass());
-						if (typeName != null) {
-							// found matching SType for an implemented interface
-							for (SALT_TYPE name : typeName) {
-								if (this.relationTypes2Traverse.contains(name)) {
-									return (true);
-								}
+						// found matching SType for an implemented interface
+						for (SALT_TYPE name : typeName) {
+							if (this.relationTypes2Traverse.contains(name)) {
+								return (true);
 							}
 						}
 					} else {

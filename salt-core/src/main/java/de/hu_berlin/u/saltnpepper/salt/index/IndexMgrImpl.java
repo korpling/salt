@@ -161,7 +161,10 @@ public class IndexMgrImpl implements IndexMgr {
 			}
 
 			try {
-				return (Collections.unmodifiableList((List<V>) indexes.get(indexId).get(key)));
+				Collection<Object> col= indexes.get(indexId).get(key);
+				if (col instanceof List){
+					return (Collections.unmodifiableList((List<V>) col));	
+				}
 			} finally {
 				if (threadSafe) {
 					lock.readLock().unlock();

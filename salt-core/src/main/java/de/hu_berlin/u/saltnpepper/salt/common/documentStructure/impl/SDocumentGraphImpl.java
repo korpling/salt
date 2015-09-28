@@ -743,7 +743,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public List<SToken> tokenize() {
 		List<SToken> retVal = null;
-		if ((getTextualDSs() != null) && (getTextualDSs().size() > 0)) {
+		if (getTextualDSs().size() > 0) {
 			Tokenizer tokenizer = createTokenizer();
 			for (STextualDS sTextualDS : getTextualDSs()) {
 				if (sTextualDS != null) {

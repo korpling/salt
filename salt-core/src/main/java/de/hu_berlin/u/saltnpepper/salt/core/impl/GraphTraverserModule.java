@@ -274,18 +274,6 @@ public class GraphTraverserModule {
 			public String toString() {
 				return (((node != null) ? node.toString() : "") + ": " + order);
 			}
-
-			@Override
-			public boolean equals(Object obj) {
-				if (obj == null)
-					return false;
-				if (obj == this)
-					return true;
-				if (obj instanceof NodeEntry) {
-					return (node.equals(((NodeEntry) obj).node));
-				} else
-					return (false);
-			}
 		}
 
 		/**
@@ -532,8 +520,8 @@ public class GraphTraverserModule {
 					edges = edgesOut;
 				} else {
 					edges = edgesIn;
-//					edgesIn = edgesOut;
-//					edgesOut = edges;
+					// edgesIn = edgesOut;
+					// edgesOut = edges;
 				}
 				if (edges != null) {
 					// in case of node has childs

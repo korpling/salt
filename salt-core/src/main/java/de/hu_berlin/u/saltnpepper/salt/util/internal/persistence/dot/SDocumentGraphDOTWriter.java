@@ -133,7 +133,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 				if ((getDocumentGraph().getTokens() != null) && (this.getDocumentGraph().getTokens().size() > 0))
 					startNodes.add(this.getDocumentGraph().getTokens().get(0));
 			}
-			if ((startNodes != null) && (startNodes.size() > 0)) {
+			if (startNodes.size() > 0) {
 				docGraph.traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "Dot_top_down", this);
 			}
 			// primary texts should be on the bottom

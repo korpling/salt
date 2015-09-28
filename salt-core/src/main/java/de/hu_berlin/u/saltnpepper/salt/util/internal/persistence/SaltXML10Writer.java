@@ -616,7 +616,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				}
 				isFirst = false;
 				relAtt.append("//@edges.");
-				relAtt.append(nodePositions.get(relIt.next()));
+				relAtt.append(relPositions.get(relIt.next()));
 			}
 			xml.writeAttribute(ATT_EDGES, relAtt.toString());
 		}

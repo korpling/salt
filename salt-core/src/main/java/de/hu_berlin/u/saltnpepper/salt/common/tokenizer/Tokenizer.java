@@ -356,8 +356,8 @@ public class Tokenizer {
 		List<String> strTokens = null;
 		String strInput = sTextualDS.getText().substring(startPos, endPos);
 
-		strTokens = this.tokenizeToString(strInput, language);
-		if ((strTokens != null) && (strTokens.size() > 0)) {
+		strTokens = tokenizeToString(strInput, language);
+		if (strTokens.size() > 0) {
 			char[] chrText = strInput.toCharArray();
 			int tokenCntr = 0;
 
