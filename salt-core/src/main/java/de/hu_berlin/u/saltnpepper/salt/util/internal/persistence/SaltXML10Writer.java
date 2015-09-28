@@ -1,10 +1,8 @@
 package de.hu_berlin.u.saltnpepper.salt.util.internal.persistence;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -56,6 +54,8 @@ import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltResourceException;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class SaltXML10Writer implements SaltXML10Dictionary {
 
@@ -85,25 +85,56 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		this.isPrettyPrint = isPrettyPrint;
 	}
 
+	public File getPath()
+	{
+		return path;
+	}
+	
+	
 	private File path = null;
-	private XMLStreamWriter xml = null;
-	private XMLOutputFactory xmlFactory = XMLOutputFactory.newFactory();
+	private final XMLOutputFactory xmlFactory = XMLOutputFactory.newFactory();
 
 	/**
-	 * Writes a salt project to the xml stream.
+	 * Writes a salt project to the file given by {@link #getPath()}.
 	 * 
 	 * @param project
 	 */
 	public void writeSaltProject(SaltProject project) {
-		PrintWriter output = null;
-		try {
-			output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF8")), false);
-
-			xml = xmlFactory.createXMLStreamWriter(output);
+		XMLStreamWriter xml = null;
+		try(OutputStream output = new FileOutputStream(path)) {
+			xml = xmlFactory.createXMLStreamWriter(output, "UTF-8");
+			
 			xml.writeStartDocument("1.0");
 			if (isPrettyPrint) {
 				xml.writeCharacters("\n");
 			}
+			writeSaltProject(xml, project);
+			
+			xml.writeEndDocument();
+			
+		} catch (XMLStreamException | IOException e) {
+			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. ", e);
+		} finally {
+			if (xml != null) {
+				try {
+					xml.flush();
+					xml.close();
+				} catch (XMLStreamException e) {
+					throw new SaltResourceException("Cannot store salt project to file '" + path + "', because the opened stream is not closable. ", e);
+				}
+			}
+		}
+	}
+	/**
+	 * Writes a salt project to the xml stream.
+	 * 
+	 * @param xml A pre-configured {@link XMLStreamWriter}
+	 * @param project
+	 */
+	public void writeSaltProject(XMLStreamWriter xml, SaltProject project) {
+
+		try {
+
 			xml.writeStartElement(NS_SALTCOMMON, TAG_SALT_PROJECT, NS_VALUE_SALTCOMMON);
 			xml.writeNamespace(NS_SCORPUSSTRUCTURE, NS_VALUE_SCORPUSSTRUCTURE);
 			xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
@@ -125,21 +156,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeCharacters("\n");
 			}
 			xml.writeEndElement();
-		} catch (XMLStreamException | UnsupportedEncodingException | FileNotFoundException e) {
+		} catch (XMLStreamException e) {
 			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. ", e);
-		} finally {
-			if (xml != null) {
-				try {
-					xml.flush();
-					xml.close();
-				} catch (XMLStreamException e) {
-					throw new SaltResourceException("Cannot store salt project to file '" + path + "', because the opened stream is not closable. ", e);
-				}
-			}
-			if (output != null) {
-				output.flush();
-				output.close();
-			}
 		}
 	}
 
@@ -157,10 +175,6 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	public void writeCorpusGraph(XMLStreamWriter xml, SCorpusGraph graph, boolean embedded) {
 		PrintWriter output = null;
 		try {
-			if (xml == null) {
-				output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF8")), false);
-				xml = xmlFactory.createXMLStreamWriter(output);
-			}
 			if (!embedded) {
 				xml.writeStartDocument("1.0");
 				if (isPrettyPrint) {
@@ -218,7 +232,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeCharacters("\t");
 			}
 			xml.writeEndElement();
-		} catch (XMLStreamException | UnsupportedEncodingException | FileNotFoundException e) {
+		} catch (XMLStreamException e) {
 			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. " + e.getMessage(), e);
 		} finally {
 			if (!embedded) {
@@ -237,22 +251,48 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 		}
 	}
-
+	
 	/**
-	 * Writes a document graph to the xml stream
+	 * Writes a document graph to the file given by {@link #getPath()}.
 	 * 
 	 * @param graph
 	 */
 	public void writeDocumentGraph(SDocumentGraph graph) {
-		PrintWriter output = null;
-		try {
-			output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF8")), false);
-
-			xml = xmlFactory.createXMLStreamWriter(output);
+		XMLStreamWriter xml = null;
+		try(OutputStream output = new FileOutputStream(path)) {
+			xml = xmlFactory.createXMLStreamWriter(output, "UTF-8");
+			
 			xml.writeStartDocument("1.0");
 			if (isPrettyPrint) {
 				xml.writeCharacters("\n");
 			}
+			
+			writeDocumentGraph(xml, graph);
+			
+			xml.writeEndDocument();
+		} catch (XMLStreamException | IOException e) {
+			throw new SaltResourceException("Cannot store document graph to file '" + path + "'. ", e);
+		} finally {
+			if (xml != null) {
+				try {
+					xml.flush();
+					xml.close();
+				} catch (XMLStreamException e) {
+					throw new SaltResourceException("Cannot store document graph to file '" + path + "', because the opened stream is not closable. ", e);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Writes a document graph to the xml stream.
+	 * 
+     * @param xml A pre-configured {@link XMLStreamWriter}
+	 * @param graph
+	 */
+	public void writeDocumentGraph(XMLStreamWriter xml, SDocumentGraph graph) {
+		try {
+			
 			xml.writeStartElement(NS_SDOCUMENTSTRUCTURE, TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH, NS_VALUE_SDOCUMENTSTRUCTURE);
 			xml.writeNamespace(NS_SDOCUMENTSTRUCTURE, NS_VALUE_SDOCUMENTSTRUCTURE);
 			xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
@@ -319,20 +359,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeCharacters("\n");
 			}
 			xml.writeEndElement();
-			xml.writeEndDocument();
-		} catch (XMLStreamException | UnsupportedEncodingException | FileNotFoundException e) {
+		} catch (XMLStreamException e) {
 			throw new SaltResourceException("Cannot store document graph to file '" + path + "'. ", e);
-		} finally {
-			if (xml != null) {
-				output.flush();
-				output.close();
-				try {
-					xml.flush();
-					xml.close();
-				} catch (XMLStreamException e) {
-					throw new SaltResourceException("Cannot store document graph to file '" + path + "', because the opened stream is not closable. ", e);
-				}
-			}
 		}
 	}
 
