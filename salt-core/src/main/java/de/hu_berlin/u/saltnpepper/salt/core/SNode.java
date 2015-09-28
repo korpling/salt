@@ -32,4 +32,7 @@ public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathE
 	 */
 	@Override
 	public Set<SLayer> getLayers();
+	
+	@Override
+	public SGraph getGraph();
 }

@@ -1,6 +1,6 @@
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
-import de.hu_berlin.u.saltnpepper.graph.Layer;
+import de.hu_berlin.u.saltnpepper.graph.Graph;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,11 +11,13 @@ import org.eclipse.emf.common.util.URI;
 import de.hu_berlin.u.saltnpepper.graph.impl.NodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInvalidModelException;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
 import java.util.Collections;
@@ -32,7 +34,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation> outRelations = getGraph().getOutRelations(getId());
+		List<SRelation<SNode, SNode>> outRelations = getGraph().getOutRelations(getId());
 		if (outRelations != null) {
 			List<SRelation> sOutRelList = new ArrayList<>();
 			for (SRelation rel : outRelations) {
@@ -51,7 +53,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation> inRelations = getGraph().getInRelations(getId());
+		List<SRelation<SNode,SNode>> inRelations = getGraph().getInRelations(getId());
 		if (inRelations != null) {
 			List<SRelation> sInRelList = new ArrayList<>();
 			for (SRelation rel : inRelations) {
@@ -276,4 +278,15 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		return (SaltUtil.createSaltURI(getId()));
 	}
 	// =======================================< SPathElement
+
+	@Override
+	public SGraph getGraph() {
+		Graph superGraph = super.getGraph();
+		if(superGraph instanceof SGraph) {
+			return (SGraph) superGraph;
+		}
+		throw new SaltInvalidModelException("Graph implementation is not of type SGraph");
+	}
+	
+	
 }
