@@ -59,6 +59,9 @@ import java.io.OutputStream;
 
 public class SaltXML10Writer implements SaltXML10Dictionary {
 
+	public SaltXML10Writer() {
+		this.path = null;
+	}
 	public SaltXML10Writer(File path) {
 		this.path = path;
 	}
@@ -85,9 +88,16 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		this.isPrettyPrint = isPrettyPrint;
 	}
 
-	public File getPath()
-	{
+	public File getPath() {
 		return path;
+	}
+	
+	private String getLocationStr() {
+		if(path == null) {
+			return "<no-file>";
+		} else {
+			return path.toString();
+		}
 	}
 	
 	
@@ -113,14 +123,14 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			xml.writeEndDocument();
 			
 		} catch (XMLStreamException | IOException e) {
-			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. ", e);
+			throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "'. ", e);
 		} finally {
 			if (xml != null) {
 				try {
 					xml.flush();
 					xml.close();
 				} catch (XMLStreamException e) {
-					throw new SaltResourceException("Cannot store salt project to file '" + path + "', because the opened stream is not closable. ", e);
+					throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "', because the opened stream is not closable. ", e);
 				}
 			}
 		}
@@ -157,7 +167,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 			xml.writeEndElement();
 		} catch (XMLStreamException e) {
-			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. ", e);
+			throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "'. ", e);
 		}
 	}
 
@@ -233,7 +243,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 			xml.writeEndElement();
 		} catch (XMLStreamException e) {
-			throw new SaltResourceException("Cannot store salt project to file '" + path + "'. " + e.getMessage(), e);
+			throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "'. " + e.getMessage(), e);
 		} finally {
 			if (!embedded) {
 				if (xml != null) {
@@ -241,7 +251,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 						xml.flush();
 						xml.close();
 					} catch (XMLStreamException e) {
-						throw new SaltResourceException("Cannot store salt project to file '" + path + "', because the opened stream is not closable. ", e);
+						throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "', because the opened stream is not closable. ", e);
 					}
 				}
 				if (output != null) {
@@ -271,14 +281,14 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			
 			xml.writeEndDocument();
 		} catch (XMLStreamException | IOException e) {
-			throw new SaltResourceException("Cannot store document graph to file '" + path + "'. ", e);
+			throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr() + "'. ", e);
 		} finally {
 			if (xml != null) {
 				try {
 					xml.flush();
 					xml.close();
 				} catch (XMLStreamException e) {
-					throw new SaltResourceException("Cannot store document graph to file '" + path + "', because the opened stream is not closable. ", e);
+					throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr() + "', because the opened stream is not closable. ", e);
 				}
 			}
 		}
@@ -360,7 +370,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 			xml.writeEndElement();
 		} catch (XMLStreamException e) {
-			throw new SaltResourceException("Cannot store document graph to file '" + path + "'. ", e);
+			throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr() + "'. ", e);
 		}
 	}
 
