@@ -355,11 +355,10 @@ public class IndexMgrImpl implements IndexMgr {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		for (String indexId : indexes.keySet()) {
-			str.append(indexId);
+		for (Map.Entry<String,Multimap<Object,Object>> indexEntry : indexes.entrySet()) {
+			str.append(indexEntry.getKey());
 			str.append(": ");
-			Multimap<Object, Object> index = indexes.get(indexId);
-			str.append(index);
+			str.append(indexEntry.getValue());
 			str.append(",\n");
 		}
 

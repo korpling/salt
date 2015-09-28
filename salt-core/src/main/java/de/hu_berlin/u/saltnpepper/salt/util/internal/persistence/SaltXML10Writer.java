@@ -62,6 +62,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	public SaltXML10Writer() {
 		this.path = null;
 	}
+
 	public SaltXML10Writer(File path) {
 		this.path = path;
 	}
@@ -91,16 +92,15 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	public File getPath() {
 		return path;
 	}
-	
+
 	private String getLocationStr() {
-		if(path == null) {
+		if (path == null) {
 			return "<no-file>";
 		} else {
 			return path.toString();
 		}
 	}
-	
-	
+
 	private File path = null;
 	private final XMLOutputFactory xmlFactory = XMLOutputFactory.newFactory();
 
@@ -111,17 +111,17 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 */
 	public void writeSaltProject(SaltProject project) {
 		XMLStreamWriter xml = null;
-		try(OutputStream output = new FileOutputStream(path)) {
+		try (OutputStream output = new FileOutputStream(path)) {
 			xml = xmlFactory.createXMLStreamWriter(output, "UTF-8");
-			
+
 			xml.writeStartDocument("1.0");
 			if (isPrettyPrint) {
 				xml.writeCharacters("\n");
 			}
 			writeSaltProject(xml, project);
-			
+
 			xml.writeEndDocument();
-			
+
 		} catch (XMLStreamException | IOException e) {
 			throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "'. ", e);
 		} finally {
@@ -135,10 +135,12 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 		}
 	}
+
 	/**
 	 * Writes a salt project to the xml stream.
 	 * 
-	 * @param xml A pre-configured {@link XMLStreamWriter}
+	 * @param xml
+	 *            A pre-configured {@link XMLStreamWriter}
 	 * @param project
 	 */
 	public void writeSaltProject(XMLStreamWriter xml, SaltProject project) {
@@ -256,7 +258,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 		}
 	}
-	
+
 	/**
 	 * Writes a document graph to the file given by {@link #getPath()}.
 	 * 
@@ -264,16 +266,16 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 */
 	public void writeDocumentGraph(SDocumentGraph graph) {
 		XMLStreamWriter xml = null;
-		try(OutputStream output = new FileOutputStream(path)) {
+		try (OutputStream output = new FileOutputStream(path)) {
 			xml = xmlFactory.createXMLStreamWriter(output, "UTF-8");
-			
+
 			xml.writeStartDocument("1.0");
 			if (isPrettyPrint) {
 				xml.writeCharacters("\n");
 			}
-			
+
 			writeDocumentGraph(xml, graph);
-			
+
 			xml.writeEndDocument();
 		} catch (XMLStreamException | IOException e) {
 			throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr() + "'. ", e);
@@ -292,12 +294,12 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	/**
 	 * Writes a document graph to the xml stream.
 	 * 
-     * @param xml A pre-configured {@link XMLStreamWriter}
+	 * @param xml
+	 *            A pre-configured {@link XMLStreamWriter}
 	 * @param graph
 	 */
 	public void writeDocumentGraph(XMLStreamWriter xml, SDocumentGraph graph) {
 		try {
-			
 			xml.writeStartElement(NS_SDOCUMENTSTRUCTURE, TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH, NS_VALUE_SDOCUMENTSTRUCTURE);
 			xml.writeNamespace(NS_SDOCUMENTSTRUCTURE, NS_VALUE_SDOCUMENTSTRUCTURE);
 			xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
@@ -344,14 +346,16 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			// to refer them later
 			Map<SRelation<SNode, SNode>, Integer> relPositions = new HashMap<>();
 
-			// write all relations
-			Iterator<SRelation<SNode, SNode>> relIt = graph.getRelations().iterator();
-			position = 0;
-			while (relIt.hasNext()) {
-				SRelation<SNode, SNode> rel = relIt.next();
-				writeRelation(xml, rel, nodePositions, layerPositions);
-				relPositions.put(rel, position);
-				position++;
+			{
+				// write all relations
+				Iterator<SRelation<SNode, SNode>> relIt = graph.getRelations().iterator();
+				position = 0;
+				while (relIt.hasNext()) {
+					SRelation<SNode, SNode> rel = relIt.next();
+					writeRelation(xml, rel, nodePositions, layerPositions);
+					relPositions.put(rel, position);
+					position++;
+				}
 			}
 
 			// write layers
