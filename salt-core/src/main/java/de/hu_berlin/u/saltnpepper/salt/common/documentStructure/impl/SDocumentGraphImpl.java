@@ -433,7 +433,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			retVal = SaltFactory.createSDominanceRelation();
 			break;
 		default:
-			;
+			break;
 		}
 		if (retVal == null) {
 			throw new SaltParameterException("Improper STYPE_NAME for this method; must be one of STEXTUAL_RELATION, SPOINTING_RELATION, SSPANNING_RELATION and SDOMINANCE_RELATION.");

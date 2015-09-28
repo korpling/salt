@@ -49,7 +49,7 @@ public class LabelableElementTest extends TestCase {
 		this.setFixture(new MyLabelableElement());
 	}
 
-	class MyLabelableElement extends LabelableElementImpl {
+	static class MyLabelableElement extends LabelableElementImpl {
 		private static final long serialVersionUID = 1L;
 	}
 
@@ -158,7 +158,7 @@ public class LabelableElementTest extends TestCase {
 		}
 		assertEquals(numOfLabels, labelableElement.sizeLabels());
 		labelableElement.removeAll();
-		assertEquals(new Integer(0), labelableElement.sizeLabels());
+		assertEquals(Integer.valueOf(0), labelableElement.sizeLabels());
 		for (String labelName : labelNames) {
 			assertNull(labelableElement.getLabel(labelName));
 		}

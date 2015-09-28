@@ -634,6 +634,7 @@ public class GraphTraverserModuleTest {
 			assertTrue(checker.checkNumberOfTraversedNodes());
 			fail("The graph contains a cycle, that shall invoke an exception.");
 		} catch (Exception e) {
+			;
 		}
 	}
 

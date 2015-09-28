@@ -563,13 +563,11 @@ public class SDocumentGraphTest {
 	public void testGetSNodeBySequence__DataSourceSequence() {
 		String text1 = "This is a sample text.";
 		String text2 = "A sample text.";
-		DataSourceSequence<Integer> dsSequence = new DataSourceSequence<>();
-
+		
 		// start: create sample graph
 		// start: sTokens for sText1
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-		dsSequence.setDataSource(sText1);
-
+		
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
 
@@ -590,8 +588,7 @@ public class SDocumentGraphTest {
 		// end: sTokens for sText1
 		// start: sTokens for sText2
 		STextualDS sText2 = getFixture().createTextualDS(text2);
-		dsSequence.setDataSource(sText2);
-
+	
 		SToken tok3_1 = getFixture().createToken(sText2, 9, 13);
 		tok3_1.setName("tok3_1");
 
@@ -713,8 +710,6 @@ public class SDocumentGraphTest {
 		List<SStructuredNode> overlappedNodes = null;
 		List<SToken> overlappedTokens = null;
 
-		overlappedNodes = new ArrayList<>();
-		overlappedNodes.add(tok1);
 		SStructure struct2 = getFixture().createSStructure(tok1);
 		struct2.setName("struct2");
 
@@ -933,12 +928,10 @@ public class SDocumentGraphTest {
 	public void testSortSTokenByText() {
 		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
-
+	
 		// start: create sample graph
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-		dsSequence.setDataSource(sText1);
-
+	
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
 
@@ -988,12 +981,10 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSortedSTokenByText__EList() {
 		String text1 = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
-
+	
 		// start: create sample graph
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-		dsSequence.setDataSource(sText1);
-
+	
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
 
@@ -1036,12 +1027,10 @@ public class SDocumentGraphTest {
 	public void testGetSortedSTokenByText() {
 		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
-
+	
 		// start: create sample graph
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-		dsSequence.setDataSource(sText1);
-
+	
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
 
@@ -1087,12 +1076,10 @@ public class SDocumentGraphTest {
 		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
 		String text2 = "A sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
-
+	
 		// start: create sample graph
 		// start: sTokens for sText1
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-		dsSequence.setDataSource(sText1);
 
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
@@ -1114,8 +1101,7 @@ public class SDocumentGraphTest {
 		// end: sTokens for sText1
 		// start: sTokens for sText2
 		STextualDS sText2 = getFixture().createTextualDS(text2);
-		dsSequence.setDataSource(sText2);
-
+	
 		SToken tok3_1 = getFixture().createToken(sText2, 9, 13);
 		tok3_1.setName("tok3_1");
 
@@ -1679,16 +1665,16 @@ public class SDocumentGraphTest {
 		assertEquals(6, getFixture().getTextualRelations().size());
 
 		// This
-		assertEquals(new Integer(0), getFixture().getTextualRelations().get(0).getStart());
-		assertEquals(new Integer(4), getFixture().getTextualRelations().get(0).getEnd());
+		assertEquals(Integer.valueOf(0), getFixture().getTextualRelations().get(0).getStart());
+		assertEquals(Integer.valueOf(4), getFixture().getTextualRelations().get(0).getEnd());
 
 		// addition
-		assertEquals(new Integer(5), getFixture().getTextualRelations().get(5).getStart());
-		assertEquals(new Integer(13), getFixture().getTextualRelations().get(5).getEnd());
+		assertEquals(Integer.valueOf(5), getFixture().getTextualRelations().get(5).getStart());
+		assertEquals(Integer.valueOf(13), getFixture().getTextualRelations().get(5).getEnd());
 
 		// is
-		assertEquals(new Integer(14), getFixture().getTextualRelations().get(1).getStart());
-		assertEquals(new Integer(16), getFixture().getTextualRelations().get(1).getEnd());
+		assertEquals(Integer.valueOf(14), getFixture().getTextualRelations().get(1).getStart());
+		assertEquals(Integer.valueOf(16), getFixture().getTextualRelations().get(1).getEnd());
 	}
 
 	@Test
@@ -1730,20 +1716,20 @@ public class SDocumentGraphTest {
 		assertEquals(11, getFixture().getTextualRelations().size());
 
 		// This
-		assertEquals(new Integer(0), getFixture().getTextualRelations().get(0).getStart());
-		assertEquals(new Integer(4), getFixture().getTextualRelations().get(0).getEnd());
+		assertEquals(Integer.valueOf(0), getFixture().getTextualRelations().get(0).getStart());
+		assertEquals(Integer.valueOf(4), getFixture().getTextualRelations().get(0).getEnd());
 
 		// is
-		assertEquals(new Integer(5), getFixture().getTextualRelations().get(5).getStart());
-		assertEquals(new Integer(7), getFixture().getTextualRelations().get(5).getEnd());
+		assertEquals(Integer.valueOf(5), getFixture().getTextualRelations().get(5).getStart());
+		assertEquals(Integer.valueOf(7), getFixture().getTextualRelations().get(5).getEnd());
 
 		// added
-		assertEquals(new Integer(23), getFixture().getTextualRelations().get(10).getStart());
-		assertEquals(new Integer(28), getFixture().getTextualRelations().get(10).getEnd());
+		assertEquals(Integer.valueOf(23), getFixture().getTextualRelations().get(10).getStart());
+		assertEquals(Integer.valueOf(28), getFixture().getTextualRelations().get(10).getEnd());
 
 		// second is
-		assertEquals(new Integer(29), getFixture().getTextualRelations().get(1).getStart());
-		assertEquals(new Integer(31), getFixture().getTextualRelations().get(1).getEnd());
+		assertEquals(Integer.valueOf(29), getFixture().getTextualRelations().get(1).getStart());
+		assertEquals(Integer.valueOf(31), getFixture().getTextualRelations().get(1).getEnd());
 	}
 
 	@Test
@@ -1796,7 +1782,7 @@ public class SDocumentGraphTest {
 		tokenList.add(tok2);
 		tokenList.add(tok3);
 		SSpan sSpan = fixture.createSpan(tokenList);
-		SRelation pointingRel = getFixture().createSRelation(sSpan, tok4, SALT_TYPE.SPOINTING_RELATION, null);
+		getFixture().createSRelation(sSpan, tok4, SALT_TYPE.SPOINTING_RELATION, null);
 
 		List<SStructuredNode> nodeList = new ArrayList<>();
 		nodeList.add(sSpan);

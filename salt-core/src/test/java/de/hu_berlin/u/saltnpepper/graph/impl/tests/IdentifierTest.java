@@ -42,7 +42,7 @@ public class IdentifierTest {
 		this.fixture = fixture;
 	}
 
-	class MyContainer extends IdentifiableElementImpl {
+	static class MyContainer extends IdentifiableElementImpl {
 		private static final long serialVersionUID = 5834449609454195900L;
 	}
 

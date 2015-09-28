@@ -53,8 +53,6 @@ public class TestHelper {
 			graph.addNode(node);
 		}
 
-		// Kantenliste erstellen
-		List<SRelation<SNode, SNode>> relations = new ArrayList<>();
 		SRelation<SNode, SNode> relation = null;
 		for (int i = 0; i < relationNames.length; i++) {
 			for (SNode srcNode : nodes) {
@@ -65,7 +63,6 @@ public class TestHelper {
 							relation.setId(relationNames[i][2]);
 							relation.setSource(srcNode);
 							relation.setTarget(dstNode);
-							relations.add(relation);
 							graph.addRelation(relation);
 							break;
 						}

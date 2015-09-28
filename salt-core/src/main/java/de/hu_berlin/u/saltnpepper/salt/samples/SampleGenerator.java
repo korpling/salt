@@ -284,7 +284,6 @@ public class SampleGenerator {
 		document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		document.getDocumentGraph().createTextualDS(PRIMARY_TEXT_EN_SPK1);
 		createTokens(document);
-		document.getDocumentGraph().getTextualDSs().get(0);
 		document.getDocumentGraph().createTimeline();
 		List<SRelation> timelineRelationsToDelete = new ArrayList<>();
 		for (STimelineRelation timelineRelation : document.getDocumentGraph().getTimelineRelations()) {

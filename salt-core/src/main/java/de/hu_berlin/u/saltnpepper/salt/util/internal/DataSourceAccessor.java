@@ -463,7 +463,7 @@ public class DataSourceAccessor {
 	@SuppressWarnings("unchecked")
 	public static Multimap<String, SNode> getRootsByRelationType(SDocumentGraph documentGraph, Class<? extends SRelation> clazz) {
 		if (clazz == null) {
-			throw new SaltParameterException("clazz", "getRootsBySRelationSType", clazz);
+			throw new SaltParameterException("clazz", "getRootsBySRelationSType", null);
 		}
 		if (documentGraph == null) {
 			throw new SaltParameterException("Cannot compute roots, because there is no SDocumentGraph set to traverse.");
@@ -606,11 +606,11 @@ public class DataSourceAccessor {
 					// check if current start and end value is smaller or
 					// bigger, than reset
 					SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> seqRel = (SSequentialRelation) relation;
-					if ((seqRel == null) && (currNode instanceof SSequentialDS)) {
+					if (seqRel == null){
 						lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
 						lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
 						lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
-					} else if (seqRel != null) {
+					} else{
 						if (seqRel.getStart() == null) {
 							throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set. ");
 						} else if (seqRel.getEnd() == null) {

@@ -52,7 +52,7 @@ public class IndexMgrTest {
 		getFixture().createIndex(indexId, String.class, String.class);
 
 		try {
-			getFixture().put(indexId, "wrongObject", new Integer(4));
+			getFixture().put(indexId, "wrongObject", Integer.valueOf(4));
 			fail();
 		} catch (ClassCastException e) {
 		}

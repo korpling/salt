@@ -102,7 +102,7 @@ public class DiffTest {
 	 */
 	@Test
 	public void testTextualDS_iso() {
-		STextualDS templateText = SampleGenerator.createPrimaryData(template.getDocument());
+		SampleGenerator.createPrimaryData(template.getDocument());
 		STextualDS otherText = SampleGenerator.createPrimaryData(other.getDocument());
 		assertTrue(getFixture().isIsomorph());
 
@@ -115,7 +115,7 @@ public class DiffTest {
 	 */
 	@Test
 	public void testTextualDS_diff() {
-		STextualDS templateText = SampleGenerator.createPrimaryData(template.getDocument());
+		SampleGenerator.createPrimaryData(template.getDocument());
 		STextualDS otherText = SampleGenerator.createPrimaryData(other.getDocument());
 		Set<Difference> diffs = getFixture().findDiffs();
 		assertEquals("" + diffs, 0, diffs.size());
@@ -347,10 +347,6 @@ public class DiffTest {
 		template.getTokens().get(0).createAnnotation(null, "A", "B");
 
 		assertFalse(getFixture().isIsomorph());
-
-		Diff newerDiff = new Diff(template, other);
-		Set<Difference> diffs = newerDiff.findDiffs();
-		Iterator<Difference> diffIt = diffs.iterator();
 	}
 
 	@Test

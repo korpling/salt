@@ -268,7 +268,7 @@ public class GraphTest {
 		}
 		assertEquals(nodes.size(), getFixture().getNodes().size());
 		for (Node node : nodes) {
-			getFixture().getNodes().contains(node);
+			assertTrue(getFixture().getNodes().contains(node));
 		}
 	}
 

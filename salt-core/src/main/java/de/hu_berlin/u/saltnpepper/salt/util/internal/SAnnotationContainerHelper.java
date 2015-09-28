@@ -65,7 +65,7 @@ public class SAnnotationContainerHelper {
 		 * A handle to the next element, this is necessary to get
 		 * {@link #hasNext()} run.
 		 **/
-		protected E next = null;
+		protected volatile E next = null;
 
 		@Override
 		public boolean hasNext() {
