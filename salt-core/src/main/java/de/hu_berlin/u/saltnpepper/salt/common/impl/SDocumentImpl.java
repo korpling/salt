@@ -122,30 +122,25 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	/** {@inheritDoc} **/
 	@Override
 	public void saveDocumentGraph(URI documentGraphLocation) {
-		// TODO
-		// SaltFactory.eINSTANCE.saveSDocumentGraph(getDocumentGraph(),
-		// documentGraphLocation);
-		// setDocumentGraph(null);
-		// setDocumentGraphLocation(documentGraphLocation);
+		SaltUtil.saveDocumentGraph(getDocumentGraph(), documentGraphLocation);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void loadDocumentGraph() {
-		// TODO
-		// loadSDocumentGraph(getDocumentGraphLocation());
+		loadDocumentGraph(getDocumentGraphLocation());
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void loadDocumentGraph(URI documentGraphLocation) {
-		// TODO
-		// SDocumentGraph sDocumentGraph=
-		// SaltFactory.eINSTANCE.loadSDocumentGraph(documentGraphLocation);
-		// setDocumentGraph(sDocumentGraph);
-		// //remove SFeature containing location of where SaltXML file
-		// containing the loaded object
-		// removeLabel(SaltUtil.KW_QNAME_SDOCUMENT_GRAPH_LOCATION);
+		 SDocumentGraph sDocumentGraph= SaltUtil.loadDocumentGraph(documentGraphLocation);
+		 setDocumentGraph(sDocumentGraph);
+		 
+		 //TODO check whether this still makes sense
+		 //remove SFeature containing location of where SaltXML file
+		 //containing the loaded object
+//		 removeLabel(SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME);
 	}
 
 	@Override
