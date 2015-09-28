@@ -214,7 +214,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 	}
 
 	/**
-	 * Creates all annotation for dotNode comming from SAnnotation. This methode
+	 * Creates all annotation for dotNode coming from SAnnotation. This method
 	 * also includes traversing recursive Annotations (meta annotations).
 	 * 
 	 * @param sAnno
