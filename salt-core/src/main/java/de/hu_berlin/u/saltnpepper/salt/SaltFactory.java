@@ -29,12 +29,12 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.impl.SaltFactoryImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SCatAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SCatAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SLemmaAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SPOSAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SSentenceAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.STypeAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SWordAnnotation;
 
 public class SaltFactory {
 	/**

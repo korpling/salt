@@ -15,10 +15,10 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl;
+package de.hu_berlin.u.saltnpepper.salt.semantics.impl;
 
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SWordAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 public class SWordAnnotationImpl extends SAnnotationImpl implements SWordAnnotation {

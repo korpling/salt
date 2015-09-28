@@ -58,18 +58,18 @@ import de.hu_berlin.u.saltnpepper.salt.core.impl.SMetaAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SProcessingAnnotationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SRelationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SCatAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SSentenceAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SWordAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SCatAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SLemmaAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SPOSAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SSentenceAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.STypeAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl.SWordAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SCatAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SLemmaAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SPOSAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SSentenceAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.STypeAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SWordAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.impl.SCatAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.semantics.impl.SLemmaAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.semantics.impl.SPOSAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.semantics.impl.SSentenceAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.semantics.impl.STypeAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.semantics.impl.SWordAnnotationImpl;
 
 public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	/**

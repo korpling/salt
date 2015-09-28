@@ -15,26 +15,16 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl;
+package de.hu_berlin.u.saltnpepper.salt.semantics;
 
-import de.hu_berlin.u.saltnpepper.salt.core.impl.SAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
+import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 
-@SuppressWarnings("serial")
-public class SLemmaAnnotationImpl extends SAnnotationImpl implements SLemmaAnnotation {
-	public SLemmaAnnotationImpl() {
-		super.setNamespace(SaltUtil.SALT_NAMESPACE);
-		super.setName(SaltUtil.SEMANTICS_LEMMA);
-	}
+public interface SCatAnnotation extends SAnnotation {
+	/** Calling this method has no effect. **/
+	@Override
+	public void setName(String name);
 
 	/** Calling this method has no effect. **/
 	@Override
-	public void setName(String name) {
-	}
-
-	/** Calling this method has no effect. **/
-	@Override
-	public void setNamespace(String namespace) {
-	}
-} // SLemmaAnnotationImpl
+	public void setNamespace(String namespace);
+} // SCatAnnotation

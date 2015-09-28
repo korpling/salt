@@ -45,8 +45,8 @@ import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltSampleException;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SLemmaAnnotation;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.SPOSAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SLemmaAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SPOSAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.util.SALT_TYPE;
 
 /**

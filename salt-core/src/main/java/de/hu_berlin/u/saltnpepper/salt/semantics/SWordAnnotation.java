@@ -15,11 +15,11 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics;
+package de.hu_berlin.u.saltnpepper.salt.semantics;
 
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 
-public interface SLemmaAnnotation extends SAnnotation {
+public interface SWordAnnotation extends SAnnotation {
 	/** Calling this method has no effect. **/
 	@Override
 	public void setName(String name);
@@ -27,4 +27,8 @@ public interface SLemmaAnnotation extends SAnnotation {
 	/** Calling this method has no effect. **/
 	@Override
 	public void setNamespace(String namespace);
-} // SLemmaAnnotation
+
+	/** Calling this method has no effect. **/
+	@Override
+	public void setValue(Object value);
+} // SWordAnnotation

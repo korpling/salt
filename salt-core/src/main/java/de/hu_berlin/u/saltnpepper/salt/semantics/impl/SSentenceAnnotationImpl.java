@@ -15,16 +15,18 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.impl;
+package de.hu_berlin.u.saltnpepper.salt.semantics.impl;
 
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SAnnotationImpl;
-import de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics.STypeAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SSentenceAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
-public class STypeAnnotationImpl extends SAnnotationImpl implements STypeAnnotation {
-	public STypeAnnotationImpl() {
+@SuppressWarnings("serial")
+public class SSentenceAnnotationImpl extends SAnnotationImpl implements SSentenceAnnotation {
+	public SSentenceAnnotationImpl() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
-		super.setName(SaltUtil.SEMANTICS_TYPE);
+		super.setName(SaltUtil.SEMANTICS_UNIT);
+		super.setValue(SaltUtil.SEMANTICS_WORD);
 	}
 
 	/** Calling this method has no effect. **/
@@ -36,4 +38,9 @@ public class STypeAnnotationImpl extends SAnnotationImpl implements STypeAnnotat
 	@Override
 	public void setNamespace(String namespace) {
 	}
-} // STypeAnnotationImpl
+
+	/** Calling this method has no effect. **/
+	@Override
+	public void setValue(Object value) {
+	}
+} // SSentenceAnnotationImpl

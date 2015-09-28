@@ -15,16 +15,27 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.semantics;
+package de.hu_berlin.u.saltnpepper.salt.semantics.impl;
 
-import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.core.impl.SAnnotationImpl;
+import de.hu_berlin.u.saltnpepper.salt.semantics.SCatAnnotation;
+import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
-public interface SPOSAnnotation extends SAnnotation {
+@SuppressWarnings("serial")
+public class SCatAnnotationImpl extends SAnnotationImpl implements SCatAnnotation {
+
+	public SCatAnnotationImpl() {
+		super.setNamespace(SaltUtil.SALT_NAMESPACE);
+		super.setName(SaltUtil.SEMANTICS_CAT);
+	}
+
 	/** Calling this method has no effect. **/
 	@Override
-	public void setName(String name);
+	public void setName(String name) {
+	}
 
 	/** Calling this method has no effect. **/
 	@Override
-	public void setNamespace(String namespace);
-} // SPOSAnnotation
+	public void setNamespace(String namespace) {
+	}
+} // SCatAnnotationImpl
