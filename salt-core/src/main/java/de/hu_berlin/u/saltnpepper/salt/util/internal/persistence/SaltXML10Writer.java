@@ -183,7 +183,6 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            null, a new one will be created
 	 */
 	public void writeCorpusGraph(XMLStreamWriter xml, SCorpusGraph graph, boolean embedded) {
-		PrintWriter output = null;
 		try {
 			if (!embedded) {
 				xml.writeStartDocument("1.0");
@@ -253,10 +252,6 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					} catch (XMLStreamException e) {
 						throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "', because the opened stream is not closable. ", e);
 					}
-				}
-				if (output != null) {
-					output.flush();
-					output.close();
 				}
 			}
 		}
