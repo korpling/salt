@@ -38,7 +38,7 @@ public interface Node extends IdentifiableElement {
 	 * 
 	 * @return a set of layers containing this node
 	 */
-	public Set<Layer> getLayers();
+	public Set<? extends Layer> getLayers();
 
 	/**
 	 * Adds this node to the passed layer.

@@ -98,7 +98,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 
 	/** {@inheritDoc} **/
 	@Override
-	public Set<Layer> getLayers() {
+	public Set<? extends Layer> getLayers() {
 		Set<Layer> layers = new HashSet<>();
 		if (getGraph() != null) {
 			Set<Layer> allLayers = getGraph().getLayers();

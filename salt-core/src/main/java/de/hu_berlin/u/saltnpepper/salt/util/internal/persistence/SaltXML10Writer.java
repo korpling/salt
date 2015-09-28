@@ -457,7 +457,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		// write layers
 		if (node.getLayers().size() > 0) {
 			StringBuilder layerAtt = new StringBuilder();
-			Iterator<Layer> layerIt = node.getLayers().iterator();
+			Iterator<? extends Layer> layerIt = node.getLayers().iterator();
 			boolean isFirst = true;
 			while (layerIt.hasNext()) {
 				if (!isFirst) {

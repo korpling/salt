@@ -1,8 +1,10 @@
 package de.hu_berlin.u.saltnpepper.salt.core;
 
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import java.util.List;
 
 import de.hu_berlin.u.saltnpepper.graph.Node;
+import java.util.Set;
 
 public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathElement {
 	/**
@@ -20,4 +22,14 @@ public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathE
 	 * @return list of incoming relations
 	 */
 	public List<SRelation> getInRelations();
+	
+	/**
+	 * Returns all layers containing this node. This is a computed set and only
+	 * works, when this node is contained in a graph. If this list is used
+	 * multiple times, it makes sense to store that set.
+	 * 
+	 * @return a set of layers containing this node
+	 */
+	@Override
+	public Set<SLayer> getLayers();
 }

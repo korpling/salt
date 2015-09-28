@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,12 +11,15 @@ import org.eclipse.emf.common.util.URI;
 import de.hu_berlin.u.saltnpepper.graph.impl.NodeImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
+import java.util.Collections;
+import java.util.HashSet;
 
 @SuppressWarnings("serial")
 public class SNodeImpl extends NodeImpl implements SNode {
@@ -57,6 +61,24 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		}
 		return null;
 	}
+
+	@Override
+	public Set<SLayer> getLayers() {
+	Set<SLayer> layers = new HashSet<>();
+		if (getGraph() != null) {
+			Set<SLayer> allLayers = getGraph().getLayers();
+			if ((allLayers != null) && (allLayers.size() > 0)) {
+				for (SLayer layer : allLayers) {
+					if (layer.getNodes().contains(this)) {
+						layers.add(layer);
+					}
+				}
+			}
+		}
+		return (Collections.unmodifiableSet(layers));
+	}
+	
+	
 
 	// =======================================> SAnnotation
 	/** {@inheritDoc} **/
