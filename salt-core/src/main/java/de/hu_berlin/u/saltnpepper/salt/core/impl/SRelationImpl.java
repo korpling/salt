@@ -1,5 +1,6 @@
 package de.hu_berlin.u.saltnpepper.salt.core.impl;
 
+import de.hu_berlin.u.saltnpepper.graph.Layer;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -8,12 +9,14 @@ import org.eclipse.emf.common.util.URI;
 import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
 import de.hu_berlin.u.saltnpepper.salt.core.SAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.core.SLayer;
 import de.hu_berlin.u.saltnpepper.salt.core.SMetaAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SProcessingAnnotation;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 import de.hu_berlin.u.saltnpepper.salt.util.internal.SAnnotationContainerHelper;
+import java.util.HashSet;
 
 @SuppressWarnings("serial")
 public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImpl<S, T> implements SRelation<S, T> {
@@ -244,4 +247,22 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 		return (SaltUtil.createSaltURI(getId()));
 	}
 	// =======================================< SPathElement
+
+	@Override
+	public Set<SLayer> getLayers() {
+		Set<SLayer> layers = new HashSet<>();
+		if (getGraph() != null) {
+			Set<SLayer> allLayers = getGraph().getLayers();
+			if ((allLayers != null) && (allLayers.size() > 0)) {
+				for (SLayer layer : allLayers) {
+					if (layer.getRelations().contains((SRelation) this)) {
+						layers.add(layer);
+					}
+				}
+			}
+		}
+		return (layers);
+	}
+	
+	
 }

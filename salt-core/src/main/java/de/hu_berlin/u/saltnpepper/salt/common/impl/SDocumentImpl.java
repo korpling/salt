@@ -21,10 +21,13 @@ import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.u.saltnpepper.graph.Graph;
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpusGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.SDocument;
 import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInvalidModelException;
 import de.hu_berlin.u.saltnpepper.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
@@ -152,4 +155,14 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		str.append(")");
 		return (str.toString());
 	}
+	
+	@Override
+	public SCorpusGraph getGraph() {
+		SGraph superGraph = super.getGraph();
+		if(superGraph instanceof SCorpusGraph) {
+			return (SCorpusGraph) superGraph;
+		}
+		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph");
+	}
+	
 } // SDocumentImpl

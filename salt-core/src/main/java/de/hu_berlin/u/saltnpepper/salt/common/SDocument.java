@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
+import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 
 /**
@@ -115,4 +116,8 @@ public interface SDocument extends SNode {
 	 *            location of SaltXML to load {@link SDocumentGraph} object.
 	 */
 	void loadDocumentGraph(URI documentGraphLocation);
+	
+	@Override
+	public SCorpusGraph getGraph();
+	
 } // SDocument
