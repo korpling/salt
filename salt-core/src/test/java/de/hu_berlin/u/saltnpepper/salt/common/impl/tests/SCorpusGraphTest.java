@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.common.corpusStructure.impl.tests;
+package de.hu_berlin.u.saltnpepper.salt.common.impl.tests;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
+package de.hu_berlin.u.saltnpepper.salt.common.impl.tests;
 
 import static org.junit.Assert.assertEquals;
 

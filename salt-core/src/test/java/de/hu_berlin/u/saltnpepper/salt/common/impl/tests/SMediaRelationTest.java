@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
+package de.hu_berlin.u.saltnpepper.salt.common.impl.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -24,39 +24,39 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.STextualDS;
-import de.hu_berlin.u.saltnpepper.salt.common.STextualRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.SMedialDS;
+import de.hu_berlin.u.saltnpepper.salt.common.SMedialRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 
-public class STextualRelationTest extends SSequentialRelationTest<SToken, STextualDS, Integer> {
+public class SMediaRelationTest extends SSequentialRelationTest<SToken, SMedialDS, Double> {
 
 	@Override
-	protected STextualRelation getFixture() {
-		return ((STextualRelation) super.getFixture());
+	protected SMedialRelation getFixture() {
+		return ((SMedialRelation) super.getFixture());
 	}
 
 	@Before
 	public void setUp() {
-		setFixture(SaltFactory.createSTextualRelation());
+		setFixture(SaltFactory.createSMedialRelation());
 	}
 
 	@Override
 	@Test
 	public void testSetGetStart() {
 		assertNull(getFixture().getStart());
-		getFixture().setStart(1);
-		assertEquals(Integer.valueOf(1), getFixture().getStart());
-		getFixture().setStart(2);
-		assertEquals(Integer.valueOf(2), getFixture().getStart());
+		getFixture().setStart(1.0);
+		assertEquals(Double.valueOf(1.0), getFixture().getStart());
+		getFixture().setStart(2.0);
+		assertEquals(Double.valueOf(2.0), getFixture().getStart());
 	}
 
 	@Override
 	@Test
 	public void testSetGetEnd() {
 		assertNull(getFixture().getEnd());
-		getFixture().setEnd(1);
-		assertEquals(Integer.valueOf(1), getFixture().getEnd());
-		getFixture().setEnd(2);
-		assertEquals(Integer.valueOf(2), getFixture().getEnd());
+		getFixture().setEnd(1.0);
+		assertEquals(Double.valueOf(1.0), getFixture().getEnd());
+		getFixture().setEnd(2.0);
+		assertEquals(Double.valueOf(2.0), getFixture().getEnd());
 	}
 } // SAudioDSRelationTest

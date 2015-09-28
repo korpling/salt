@@ -15,7 +15,7 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
+package de.hu_berlin.u.saltnpepper.salt.common.impl.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -24,20 +24,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.u.saltnpepper.salt.common.STimeline;
-import de.hu_berlin.u.saltnpepper.salt.common.STimelineRelation;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualDS;
+import de.hu_berlin.u.saltnpepper.salt.common.STextualRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 
-public class STimelineRelationTest extends SSequentialRelationTest<SToken, STimeline, Integer> {
+public class STextualRelationTest extends SSequentialRelationTest<SToken, STextualDS, Integer> {
 
 	@Override
-	protected STimelineRelation getFixture() {
-		return ((STimelineRelation) super.getFixture());
+	protected STextualRelation getFixture() {
+		return ((STextualRelation) super.getFixture());
 	}
 
 	@Before
 	public void setUp() {
-		setFixture(SaltFactory.createSTimelineRelation());
+		setFixture(SaltFactory.createSTextualRelation());
 	}
 
 	@Override

@@ -15,24 +15,33 @@
  *
  *
  */
-package de.hu_berlin.u.saltnpepper.salt.saltCommon.sDocumentStructure.tests;
+package de.hu_berlin.u.saltnpepper.salt.common.impl.tests;
 
 import org.junit.Test;
 
-import de.hu_berlin.u.saltnpepper.salt.common.SSequentialRelation;
-import de.hu_berlin.u.saltnpepper.salt.core.SNode;
+import de.hu_berlin.u.saltnpepper.salt.common.SSequentialDS;
 
-public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number> extends SRelationAbstractTest {
+public abstract class SSequentialDSTest<D, P extends Number> extends SNodeAbstractTest {
 
-	protected SSequentialRelation<S, T, P> getFixture() {
-		return (SSequentialRelation<S, T, P>) fixture;
+	protected SSequentialDS<D, P> getFixture() {
+		return (SSequentialDS<D, P>) fixture;
 	}
 
-	/** Tests whether the start value is set and returned correct. **/
+	/**
+	 * This method tests whether the set data value is also returned again.
+	 */
 	@Test
-	public abstract void testSetGetStart();
+	public abstract void testSetGetData();
 
-	/** Tests whether the end value is set and returned correct. **/
+	/**
+	 * This method tests whether the set start value is also returned again.
+	 */
 	@Test
-	public abstract void testSetGetEnd();
+	public abstract void testGetStart();
+
+	/**
+	 * This method tests whether the set start value is also returned again.
+	 */
+	@Test
+	public abstract void testGetEnd();
 } // SSequentialDSTest
