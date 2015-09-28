@@ -173,7 +173,7 @@ public class GraphMLWriter {
 		if (!types.isEmpty()) {
 			w.writeStartElement(NS, "data");
 			w.writeAttribute(NS, "key", "salt::type");
-			w.writeCharacters(types.iterator().next().getName());
+			w.writeCharacters(types.iterator().next().name());
 			w.writeEndElement();
 		}
 	}

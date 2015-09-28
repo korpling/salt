@@ -46,51 +46,43 @@ import de.hu_berlin.u.saltnpepper.salt.common.SToken;
 
 public enum SALT_TYPE {
 	//
-	STEXTUAL_DS("STEXTUAL_DS", STextualDS.class),
+	STEXTUAL_DS(STextualDS.class),
 	//
-	SSEQUENTIAL_DS("SSEQUENTIAL_DS", SSequentialDS.class),
+	SSEQUENTIAL_DS(SSequentialDS.class),
 	//
-	SMEDIAL_DS("SMEDIAL_DS", SMedialDS.class),
+	SMEDIAL_DS(SMedialDS.class),
 	//
-	STOKEN("STOKEN", SToken.class),
+	STOKEN(SToken.class),
 	//
-	SSPAN("SSPAN", SSpan.class),
+	SSPAN(SSpan.class),
 	//
-	SSTRUCTURE("SSTRUCTURE", SStructure.class),
+	SSTRUCTURE(SStructure.class),
 	//
-	STEXTUAL_RELATION("STEXTUAL_RELATION", STextualRelation.class),
+	STEXTUAL_RELATION(STextualRelation.class),
 	//
-	STIMELINE_RELATION("STIMELINE_RELATION", STimelineRelation.class),
+	STIMELINE_RELATION(STimelineRelation.class),
 	//
-	SMEDIAL_RELATION("SMEDIAL_RELATION", SMedialRelation.class),
+	SMEDIAL_RELATION(SMedialRelation.class),
 	//
-	SSPANNING_RELATION("SSPANNING_RELATION", SSpanningRelation.class),
+	SSPANNING_RELATION(SSpanningRelation.class),
 	//
-	SDOMINANCE_RELATION("SDOMINANCE_RELATION", SDominanceRelation.class),
+	SDOMINANCE_RELATION(SDominanceRelation.class),
 	//
-	SPOINTING_RELATION("SPOINTING_RELATION", SPointingRelation.class),
+	SPOINTING_RELATION(SPointingRelation.class),
 	//
-	STEXT_OVERLAPPING_RELATION("STEXT_OVERLAPPING_RELATION", STextOverlappingRelation.class),
+	STEXT_OVERLAPPING_RELATION(STextOverlappingRelation.class),
 	//
-	STIME_OVERLAPPING_RELATION("STIME_OVERLAPPING_RELATION", STimeOverlappingRelation.class),
+	STIME_OVERLAPPING_RELATION(STimeOverlappingRelation.class),
 	//
-	SSEQUENTIAL_RELATION("SSEQUENTIAL_RELATION", SSequentialRelation.class),
+	SSEQUENTIAL_RELATION(SSequentialRelation.class),
 	//
-	SORDER_RELATION("SORDER_RELATION", SOrderRelation.class),
+	SORDER_RELATION(SOrderRelation.class),
 	//
-	SDOCUMENT("SDOCUMENT", SDocument.class),
+	SDOCUMENT(SDocument.class),
 	//
-	SCORPUS("SCORPUS", SCorpus.class);
+	SCORPUS(SCorpus.class);
 
-	/** Name of the Salt type **/
-	private String name = null;
 
-	/**
-	 * @return the name of the Salt type
-	 */
-	public String getName() {
-		return name;
-	}
 
 	/** Java class which represents this Salt type **/
 	private Class<?> javaType = null;
@@ -102,8 +94,7 @@ public enum SALT_TYPE {
 		return javaType;
 	}
 
-	private SALT_TYPE(String name, Class<?> javaType) {
-		this.name = name;
+	private SALT_TYPE(Class<?> javaType) {
 		this.javaType = javaType;
 	}
 
