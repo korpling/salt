@@ -282,11 +282,16 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	@Override
 	public SGraph getGraph() {
 		Graph superGraph = super.getGraph();
+		
+		if(superGraph == null) {
+			return null;
+		}
+		
 		if(superGraph instanceof SGraph) {
 			return (SGraph) superGraph;
 		}
 		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " 
-				+ (superGraph == null ? "null" : superGraph.getClass().getName()) + ")");
+				+ superGraph.getClass().getName() + ")");
 	}
 	
 	
