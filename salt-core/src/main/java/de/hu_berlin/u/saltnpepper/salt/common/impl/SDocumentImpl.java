@@ -162,7 +162,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		if(superGraph instanceof SCorpusGraph) {
 			return (SCorpusGraph) superGraph;
 		}
-		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph");
+		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " 
+				+ (superGraph == null ? "null" : superGraph.getClass().getName()) + ")");
 	}
 	
 } // SDocumentImpl
