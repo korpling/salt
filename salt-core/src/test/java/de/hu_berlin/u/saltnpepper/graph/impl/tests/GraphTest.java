@@ -25,6 +25,7 @@ import de.hu_berlin.u.saltnpepper.graph.Node;
 import de.hu_berlin.u.saltnpepper.graph.Relation;
 import de.hu_berlin.u.saltnpepper.graph.impl.GraphImpl;
 import de.hu_berlin.u.saltnpepper.graph.impl.RelationImpl;
+import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInsertionException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltParameterException;
 
@@ -389,6 +390,19 @@ public class GraphTest {
 		assertEquals(0, getFixture().getInRelations(n1.getId()).size());
 		assertEquals(0, getFixture().getOutRelations(n1.getId()).size());
 	}
+	
+	/**
+	 * Tests that if a node object is already contained in the graph it not added again.
+	 */
+	@Test
+	public void testAddDuplicatedNode() {
+		Node n = GraphFactory.createNode();
+		
+		getFixture().addNode(n);
+		assertEquals(1, getFixture().getNodes().size());
+		getFixture().addNode(n);
+		assertEquals(1, getFixture().getNodes().size());
+	}
 
 	// ==========================================================< test nodes
 
@@ -742,6 +756,27 @@ public class GraphTest {
 		assertTrue(getFixture().getInRelations(node3.getId()).contains(relation));
 		assertTrue(getFixture().getInRelations(node2.getId()).isEmpty());
 	}
+	
+	/**
+	 * Tests that if a relation object is already contained in the graph it not added again.
+	 */
+	@Test
+	public void testAddDuplicatedRelation() {
+		Node n1 = GraphFactory.createNode();
+		Node n2 = GraphFactory.createNode();
+		
+		getFixture().addNode(n1);
+		getFixture().addNode(n2);
+		
+		Relation<Node,Node> rel = GraphFactory.createRelation();
+		rel.setSource(n1);
+		rel.setTarget(n2);
+		
+		getFixture().addRelation(rel);
+		assertEquals(1, getFixture().getRelations().size());
+		getFixture().addRelation(rel);
+		assertEquals(1, getFixture().getRelations().size());
+	}
 
 	// =======================================================< test relations
 
@@ -866,5 +901,19 @@ public class GraphTest {
 		layer.addRelation(relation);
 		assertEquals(relation, getFixture().getRelation(relation.getId()));
 	}
+	
+	/**
+	 * Tests that if a layer object is already contained in the graph it not added again.
+	 */
+	@Test
+	public void testAddDuplicatedLayer() {
+		Layer<Node, Relation<Node,Node>> l = GraphFactory.createLayer();
+		
+		getFixture().addLayer(l);
+		assertEquals(1, getFixture().getLayers().size());
+		getFixture().addLayer(l);
+		assertEquals(1, getFixture().getLayers().size());
+	}
+
 	// =======================================================< test layers
 }

@@ -82,8 +82,12 @@ public class SaltUtil {
 	public static final String IDX_RELATIONTYPE = "idx_sRelationType";
 	/** name of index for relating ids and nodes */
 	public static final String IDX_ID_NODES = "idx_id_nodes";
+	/** name of index for relating ids and nodes (inverse) */
+	public static final String IDX_ID_NODES_INVERSE = "idx_id_nodes_inverse";
 	/** name of index for relating ids and relations */
 	public static final String IDX_ID_RELATIONS = "idx_id_relation";
+	/** name of index for relating ids and relations (inverse) */
+	public static final String IDX_ID_RELATIONS_INVERSE = "idx_id_relation_inverse";
 	/** name of index for relating ids and layers */
 	public static final String IDX_ID_LAYER = "idx_id_layer";
 	/** name of index for relating node ids and outgoing relations */

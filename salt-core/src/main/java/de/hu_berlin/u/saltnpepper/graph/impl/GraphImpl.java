@@ -88,7 +88,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		relations = Collections.synchronizedList(new ArrayList<R>(expectedNodes));
 		indexMgr = new IndexMgrImpl();
 		indexMgr.createIndex(SaltUtil.IDX_ID_NODES, String.class, Node.class, expectedNodes, expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_ID_NODES_INVERSE, Node.class, String.class, expectedNodes, expectedNodes);
 		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS, String.class, Relation.class, expectedRelations, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS_INVERSE, Relation.class, String.class, expectedRelations, expectedRelations);
 		indexMgr.createIndex(SaltUtil.IDX_ID_LAYER, String.class, Layer.class);
 		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
 		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
@@ -152,6 +154,13 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		if (node == null) {
 			throw new SaltParameterException("node", "basicAddNode", GraphImpl.class ,"A null value is not allowed. ");
 		}
+		
+		// check if node already exists
+		if(getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES_INVERSE, node)) {
+			// do nothing, node is already added
+			return;
+		}
+		
 		// if node has no id a new id will be given to node
 		if (node.getId() == null) {
 			node.setId("n" + getNodes().size());
@@ -164,11 +173,13 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 			// if node already exists, create new Id
 			node.setId(idBase + "_" + (getNodes().size() + i));
 			i++;
-		}// if node already exists, create new Id
-			// add node to internal list
+		}// if node Id already exists, create new Id
+		
+		// add node to internal list
 		nodes.add(node);
-		// add node to id index
+		// add node to id indexes
 		getIndexMgr().put(SaltUtil.IDX_ID_NODES, node.getId(), node);
+		getIndexMgr().put(SaltUtil.IDX_ID_NODES_INVERSE, node, node.getId());
 	}
 
 	/** {@inheritDoc Graph#removeNode(Node)} **/
@@ -201,15 +212,17 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	protected void basicRemoveNode(N node) {
 		// remove node from internal list
 		nodes.remove(node);
+		// remove the node object from the inverse index
+		getIndexMgr().remove(SaltUtil.IDX_ID_NODES_INVERSE, node);
 		// remove node from all internal indexes
 		getIndexMgr().removeValue(node);
 		// remove all relations having the removed node as source or target and
 		// update index outgoing and incoming indexes
-		Collection<R> rels = new ArrayList<R>(getInRelations(node.getId()));
+		Collection<R> rels = new ArrayList<>(getInRelations(node.getId()));
 		for (R r : rels) {
 			removeRelation(r);
 		}
-		rels = new ArrayList<R>(getOutRelations(node.getId()));
+		rels = new ArrayList<>(getOutRelations(node.getId()));
 		for (R r : rels) {
 			removeRelation(r);
 		}
@@ -335,6 +348,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		if ((relation.getTarget().getId() == null) || (!containsNode(relation.getTarget().getId()))) {
 			throw new SaltInsertionException(this, relation, "The target node of the passed relation does not belong to this graph. ");
 		}
+		
+		if(getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
+			return;
+		}
+		
 		// if relation has no id a new id will be given to relation
 		if (relation.getId() == null) {
 			relation.setId("r" + getRelations().size());
@@ -352,6 +370,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		relations.add((R) relation);
 		// add relation to indexes
 		getIndexMgr().put(SaltUtil.IDX_ID_RELATIONS, relation.getId(), (R) relation);
+		getIndexMgr().put(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation, relation.getId());
 		update(null, relation, UPDATE_TYPE.RELATION_SOURCE);
 		update(null, relation, UPDATE_TYPE.RELATION_TARGET);
 	}
@@ -419,6 +438,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	public void removeRelations() {
 		relations.clear();
 		getIndexMgr().clearIndex(SaltUtil.IDX_ID_RELATIONS);
+		getIndexMgr().clearIndex(SaltUtil.IDX_ID_RELATIONS_INVERSE);
 		getIndexMgr().clearIndex(SaltUtil.IDX_IN_RELATIONS);
 		getIndexMgr().clearIndex(SaltUtil.IDX_OUT_RELATIONS);
 	}
@@ -443,6 +463,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	protected void basicRemoveRelation(R rel) {
 		// remove relation from all indexes
 		getIndexMgr().removeValue(rel);
+		getIndexMgr().remove(SaltUtil.IDX_ID_RELATIONS_INVERSE, rel.getId());
 		// remove relation also from layers
 		for (Layer<N, R> layer : layers) {
 			layer.removeRelation(rel);
