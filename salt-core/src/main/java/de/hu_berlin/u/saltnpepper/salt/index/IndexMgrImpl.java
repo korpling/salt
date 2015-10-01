@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class IndexMgrImpl implements IndexMgr {
 	private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
-	private class Index<K,V> implements Serializable {
+	private static class Index<K,V> implements Serializable {
 		
 		final Multimap<K, V> map;
 		final Class<K> keyClass;
