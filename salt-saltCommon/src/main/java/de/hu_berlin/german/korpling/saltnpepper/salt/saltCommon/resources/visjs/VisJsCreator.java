@@ -32,10 +32,6 @@ import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltE
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
 import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
 
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
-
 import org.json.*;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.EList;
@@ -114,15 +110,15 @@ public class VisJsCreator implements SGraphTraverseHandler{
 
 	
 	public  SDocument doc;
-	private  XMLOutputFactory outputFactory;
-	private  OutputStream os;
-	private  XMLStreamWriter writer;
+	private OutputStream jsonOutputStream;
+	public  BufferedWriter jsonWriter;
 	public  BufferedWriter nodeWriter;
 	public  BufferedWriter edgeWriter;
 	public  BufferedWriter optionsWriter;
 	
 	private  JSONWriter jsonWriterNodes;
-	private  JSONWriter jsonWriterEdges;	
+	private  JSONWriter jsonWriterEdges;
+	//private  JSONWriter jsonWriterCommon;
 		
 	private  int bufferSizeEdges;
 
@@ -146,52 +142,25 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	
 	private  int xValue = 0;	
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
-	private static final String VISJS_WIDTH = "1200px";
-	private static final String VISJS_HEIGHT = "900px";
-	
-	
-	// HTML resources output
-	private final static String VIS_JS_SRC = "js/vis.min.js";
-	private final static String VIS_CSS_SRC = "css/vis.min.css";
-	//private final String visJsSrcGA = "../../googleAnalytics.js";
-	
-    private final String textStyle = "width:700px; font-size:14px; text-align: justify;";
-    
-    //HTML tags
-    private static final String TAG_HTML = "html";
-    private static final String TAG_HEAD = "head";
-    private static final String TAG_BODY = "body";
-    private static final String TAG_TITLE = "title";
-    private static final String TAG_P = "p";
-    private static final String TAG_DIV = "div";
-    private static final String TAG_SCRIPT = "script";
-    private static final String TAG_STYLE = "style";
-    private static final String TAG_LINK = "link";
-    private static final String TAG_H2 = "h2";
-    private static final String TAG_INPUT = "input";
-    
-    //HTML attributes
-    private static final String ATT_TYPE = "type";
-    private static final String ATT_ID = "id";
-    private static final String ATT_VALUE = "value";
-    private static final String ATT_SRC = "src";
-    private static final String ATT_HREF = "href";
-    private static final String ATT_REL = "rel";
-    private static final String ATT_STYLE = "style";
-    private static final String ATT_LANG = "language";
-    
-    
+ 
+   
     private static final int JSON_EDGE_LINE_LENGTH = 60;    
     private static final String NEWLINE = System.lineSeparator();    
     private final ExportFilter exportFilter;
     
     private boolean writeNodeImmediately = false;
     
-    private static final String OUTPUT_FILE = "saltVisJs.html";	
+   // private static final String OUTPUT_FILE = "saltVisJs.html";	
+    private static final String NODES_AND_EDGES_FILE = "saltNodesAndEdges.json";
     private static final String CSS_FOLDER_OUT = "css";
     private static final String JS_FOLDER_OUT = "js";
+    private static final String JSON_FOLDER_OUT = "json";
+    
     private static final String CSS_FILE = "vis.min.css";
     private static final String JS_FILE = "vis.min.js";
+    private static final String JQUERY_FILE = "jquery.js";
+    private static final String HTML_FILE = "saltVisJs.html";
+    
         
     private static final String RESOURCE_FOLDER = System.getProperty("file.separator") + "visjs"; 
     													
@@ -349,11 +318,15 @@ public class VisJsCreator implements SGraphTraverseHandler{
 
 
 public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  SaltResourceNotFoundException, SaltException,
-															SaltResourceException, XMLStreamException, IOException{
+															SaltResourceException, IOException{
 			
 		try {
 			File outputFolder = createOutputResources(outputFolderUri);	
-			 this.os = new FileOutputStream(new File(outputFolder, OUTPUT_FILE));
+			 File jsonOutputFolder = new File(outputFolder+ System.getProperty("file.separator") + JSON_FOLDER_OUT);
+			 if(!jsonOutputFolder.exists() || !jsonOutputFolder.isDirectory()) 
+				 throw new SaltException("Either the output folder cannot be created or permission denied.");
+			 
+			 this.jsonOutputStream =new FileOutputStream(new File(jsonOutputFolder, NODES_AND_EDGES_FILE));			 
 		
 			}
 			catch (SaltEmptyParameterException e){
@@ -370,237 +343,20 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 			}	
 	
 		
-		try {
-		this.outputFactory = XMLOutputFactory.newInstance();
-		this.writer = outputFactory.createXMLStreamWriter(os, "UTF-8");
+		setJsonWriter(jsonOutputStream);
+		setNodeWriter(jsonOutputStream);
+		setEdgeWriter(jsonOutputStream);
 		
-		setNodeWriter(os);
-		setEdgeWriter(os);
-		setOptionsWriter(os);
-		
-    	
     	writeNodeImmediately = true;
-		
-		writer.writeStartDocument("UTF-8", "1.0");
-		writer.writeCharacters(NEWLINE);
-		writer.writeStartElement(TAG_HTML);
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement(TAG_HEAD);
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement(TAG_TITLE);
-		writer.writeCharacters("Salt Document Tree");
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement(TAG_STYLE);
-		writer.writeAttribute(ATT_TYPE, "text/css");
-		writer.writeCharacters("body {" + NEWLINE 
-				+ "font: 10pt sans;" + NEWLINE 
-				+ "}" + NEWLINE 
-				+ "#mynetwork {" + NEWLINE 
-				+ "width: " + VISJS_WIDTH +";" + NEWLINE 
-				+ "height: " + VISJS_HEIGHT + ";" + NEWLINE 
-				+ "border: 1px solid lightgray;" + NEWLINE 
-				+ "}");
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement(TAG_SCRIPT);
-		writer.writeAttribute(ATT_TYPE, "text/javascript");
-		writer.writeAttribute(ATT_SRC,VIS_JS_SRC);
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeEmptyElement(TAG_LINK);
-		writer.writeAttribute(ATT_HREF, VIS_CSS_SRC);
-		writer.writeAttribute(ATT_REL,"stylesheet");
-		writer.writeAttribute(ATT_TYPE, "text/css");
-		writer.writeCharacters(NEWLINE);
-		
-		
-		writer.writeStartElement(TAG_SCRIPT);
-		writer.writeAttribute(ATT_TYPE, "text/javascript");
-		writer.writeCharacters(NEWLINE);
-		writer.writeCharacters("var nodes = null;" + NEWLINE 
-						+ "var edges = null;" + NEWLINE 
-						+ "var network = null;" + NEWLINE
-						+ "var directionInput = document.getElementById(\"direction\");" + NEWLINE 
-						+ "function destroy() {" + NEWLINE 
-						+ "if (network !== null) {" + NEWLINE 
-						+ "network.destroy();" + NEWLINE 
-						+ "network = null;" + NEWLINE 
-						+ "}" + NEWLINE 
-						+ "}" + NEWLINE 
-						+ "function draw() {" + NEWLINE 
-						+ "destroy();" + NEWLINE 
-						+ "var connectionCount = [];" + NEWLINE 
-						+ "nodes = [];" + NEWLINE 
-						+ "edges = [];" + NEWLINE);
-		
-		writer.flush();
-		
-		nodeWriter.write("var nodes = new vis.DataSet(" + NEWLINE);
-
-		
-		edgeWriter.write("var edges = new vis.DataSet(" + NEWLINE);
-		
-		buildJSON();
-		
-		 nodeWriter.write(");");
-		 nodeWriter.newLine();
-		 nodeWriter.flush();
-		 
-		 edgeWriter.write(");");
-		 edgeWriter.newLine();
-		 edgeWriter.flush();
-		
-		
-    	 writer.writeCharacters("var container = document.getElementById('mynetwork');" + NEWLINE
-					+ "var data = {" + NEWLINE
-					+ "nodes: nodes," + NEWLINE
-					+ "edges: edges" + NEWLINE
-					+ "};" + NEWLINE
-					+ "var options = ");
-	
-    	 
-    	 buildOptions();
-		 optionsWriter.flush();
-	
-
-		 
-		writer.writeCharacters(";" + NEWLINE
-				+ "network = new vis.Network(container, data, options);" + NEWLINE
-				+ "network.on('select', function(params) {" + NEWLINE
-				+ "document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;" + NEWLINE
-				+ "});" + NEWLINE
-				+ "}" + NEWLINE); 
-
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-	/*	writer.writeStartElement(script);
-		writer.writeAttribute(attSrc, visJsSrcGA);
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);		*/
-		
-		//head 
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		
-		writer.writeStartElement(TAG_BODY);
-		writer.writeAttribute("onload", "draw();");
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement(TAG_H2);
-		writer.writeCharacters("Salt Document Tree");
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement(TAG_DIV);
-		writer.writeAttribute(ATT_STYLE,textStyle);
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement("p");
-		
-		writer.writeEmptyElement(TAG_INPUT);
-		writer.writeAttribute(ATT_TYPE,"button");
-		writer.writeAttribute(ATT_ID, "btn-UD");
-		writer.writeAttribute(ATT_VALUE, "Up-Down");
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeEmptyElement(TAG_INPUT);
-		writer.writeAttribute(ATT_TYPE,"button");
-		writer.writeAttribute(ATT_ID, "btn-DU");
-		writer.writeAttribute(ATT_VALUE, "Down-Up");
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeEmptyElement(TAG_INPUT);
-		writer.writeAttribute(ATT_TYPE,"button");
-		writer.writeAttribute(ATT_ID, "btn-LR");
-		writer.writeAttribute("value", "Left-Right");
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeEmptyElement(TAG_INPUT);
-		writer.writeAttribute(ATT_TYPE,"button");
-		writer.writeAttribute(ATT_ID, "btn-RL");
-		writer.writeAttribute(ATT_VALUE, "Right-Left");
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeEmptyElement(TAG_INPUT);
-		writer.writeAttribute(ATT_TYPE,"hidden");
-		//TODO check the apostrophes
-		writer.writeAttribute(ATT_ID, "direction");
-		writer.writeAttribute(ATT_VALUE, "UD");
-		writer.writeCharacters(NEWLINE);
-	
-		
-		//p
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement(TAG_DIV);
-		writer.writeAttribute(ATT_ID, "mynetwork");
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		writer.writeStartElement(TAG_P);
-		writer.writeAttribute(ATT_ID, "selection");
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);
-		
-		
-		writer.writeStartElement(TAG_SCRIPT);
-		writer.writeAttribute(ATT_LANG, "JavaScript");
-		writer.writeCharacters(NEWLINE);
-		writer.writeCharacters("var directionInput = document.getElementById(\"direction\");" + NEWLINE
-				+ "var btnUD = document.getElementById(\"btn-UD\");" + NEWLINE
-				+ "btnUD.onclick = function() {" + NEWLINE
-				+ "directionInput.value = \"UD\";" + NEWLINE
-				+ "draw();" + NEWLINE
-				+ "};" + NEWLINE
-				+ "var btnDU = document.getElementById(\"btn-DU\");" + NEWLINE
-				+ "btnDU.onclick = function() {" + NEWLINE
-				+ "directionInput.value = \"DU\";" + NEWLINE
-				+ "draw();" + NEWLINE
-				+ "};" + NEWLINE
-				+ "var btnLR = document.getElementById(\"btn-LR\");" + NEWLINE
-				+ "btnLR.onclick = function() {" + NEWLINE
-				+ "directionInput.value = \"LR\";" + NEWLINE
-				+ "draw();" + NEWLINE
-				+ "};" + NEWLINE
-				+ "var btnRL = document.getElementById(\"btn-RL\");" + NEWLINE
-				+ "btnRL.onclick = function() {" + NEWLINE
-				+ "directionInput.value = \"RL\";" + NEWLINE
-				+ "draw();" + NEWLINE
-				+ "};" + NEWLINE);
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);			
-		
-		//body
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);	
-		
-		
-		//html
-		writer.writeEndElement();
-		writer.writeCharacters(NEWLINE);	
-			
-	   
-		writer.writeEndDocument();
-		writer.flush();
-		writer.close();
-		
-		edgeWriter.close();
-		nodeWriter.close();
+    	
+    	try{
+    		writeJSON();
+    	}
+    	catch(IOException e){
+    		throw new SaltException("A problem occurred while writing JSON resources.");
+    	}    	
 		
 		writeNodeImmediately = false;
-		} catch (XMLStreamException e) {
-			throw new SaltException("A problem occurred while writing the output file.");
-		}
 	  
 	}
 
@@ -621,8 +377,13 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 		  File jsFolderOut = new File(outputFolder, JS_FOLDER_OUT);
 		  if(!jsFolderOut.exists()) jsFolderOut.mkdir();
 		  
+		  File jsonFolderOut = new File(outputFolder, JSON_FOLDER_OUT);
+		  if(!jsonFolderOut.exists()) jsonFolderOut.mkdir();
+		  
 		  copyResourceFile(CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
 		  copyResourceFile(JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
+		  copyResourceFile(JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE);
+		  copyResourceFile(HTML_FILE, outputFolder.getPath(), null, HTML_FILE);
 	     
 		  return outputFolder;
 	}
@@ -639,13 +400,19 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 				  + inFile);		  
 		  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		  BufferedWriter writer;
-	
-			writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
+		  
+		  if (outSubFolder != null){
+			  writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
 					  + System.getProperty("file.separator")
 					  + outSubFolder 
 					  + System.getProperty("file.separator")
 					  + outFile))));
-		
+			  }
+		  else{
+			  writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
+					  + System.getProperty("file.separator")
+					  + outFile))));
+		  }	
 		  
 		  int bufferSize = 512*1024;		  
 		  char [] buffer = new char [bufferSize];
@@ -660,6 +427,13 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 		    reader.close();
 		    writer.flush();
 		    writer.close();     
+	}
+	
+	public void setJsonWriter (OutputStream os)
+	{
+		this.jsonWriter = new BufferedWriter(new OutputStreamWriter(os));		
+
+
 	}
 	
 	/**
@@ -698,6 +472,34 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 		
 	}
 	   
+	private void writeJSON () throws IOException {	
+			jsonWriter.write("{");
+			jsonWriter.newLine();
+			jsonWriter.write("\"nodes\":");
+			jsonWriter.newLine();
+			jsonWriter.flush();
+			
+			buildJSON();
+			
+			nodeWriter.flush();		
+			
+			jsonWriter.write(",");
+			jsonWriter.newLine();
+			jsonWriter.write("\"edges\":");
+			jsonWriter.newLine();
+			jsonWriter.flush();
+			
+			edgeWriter.flush();		
+			
+			jsonWriter.newLine();
+			jsonWriter.write("}");
+			jsonWriter.flush();
+			jsonWriter.close();
+			
+			nodeWriter.close();
+			edgeWriter.close();
+		
+	}
 	
 	
 	
@@ -725,7 +527,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	 }
 	 
 	 try{
-		 
+	
 	//create node array
 	jsonWriterNodes.array();
 	// write tokens
