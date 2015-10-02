@@ -894,7 +894,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 					+"solver: 'hierarchicalRepulsion'," + NEWLINE
 					+"timestep: 0.5," + NEWLINE
 					+"stabilization: {" + NEWLINE
-					+"iteration: 800" + NEWLINE
+					+"iterations: 800" + NEWLINE
 					+"}" + NEWLINE
 					+"}" + NEWLINE
 					+"}" + NEWLINE);
