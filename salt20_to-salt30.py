@@ -101,6 +101,16 @@ def rename(file):
 
 	line= line.replace('getRootsBySRelation(', 'getRootsByRelation(')
 	line= line.replace('getNodeBySequence', 'getNodesBySequence')
+	line= line.replace('getSLayerByName', 'getLayerByName')
+	line= line.replace('addSLayer', 'addLayer')	
+	line= line.replace('getLayers().add', 'addLayer')	
+	line= line.replace('SMetaAnnotatableElement', 'SAnnotationContainer')	
+	line= line.replace('hasLabel', 'containsLabel')	
+	line= line.replace('getSCorpora', 'getCorpora')	
+	
+	
+	
+	
 
 	#in tests
 	line= line.replace('this.getFixture()', 'getFixture()')

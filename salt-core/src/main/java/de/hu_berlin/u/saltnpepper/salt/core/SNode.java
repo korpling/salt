@@ -1,10 +1,9 @@
 package de.hu_berlin.u.saltnpepper.salt.core;
 
-import de.hu_berlin.u.saltnpepper.graph.Layer;
 import java.util.List;
+import java.util.Set;
 
 import de.hu_berlin.u.saltnpepper.graph.Node;
-import java.util.Set;
 
 public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathElement {
 	/**

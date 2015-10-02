@@ -30,17 +30,7 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
  * @author florian
  */
 public interface SCorpus extends SNode {
-	// /**
-	// * Returns the corpus structure container, which is represented by {@link
-	// SCorpusGraph} object.
-	// * @return corpus structure
-	// */
-	// public SCorpusGraph getSCorpusGraph();
-	// /**
-	// * Sets the corpus structure container, which is represented by {@link
-	// SCorpusGraph} object.
-	// * @return corpus structure
-	// */
-	// public void setSCorpusGraph(SCorpusGraph value);
-
+	/** {@inheritDoc} **/
+	@Override
+	public SCorpusGraph getGraph();
 } // SCorpus

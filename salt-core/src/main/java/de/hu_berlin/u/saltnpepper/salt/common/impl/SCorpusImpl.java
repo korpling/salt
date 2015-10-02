@@ -18,8 +18,27 @@
 package de.hu_berlin.u.saltnpepper.salt.common.impl;
 
 import de.hu_berlin.u.saltnpepper.salt.common.SCorpus;
+import de.hu_berlin.u.saltnpepper.salt.common.SCorpusGraph;
+import de.hu_berlin.u.saltnpepper.salt.core.SGraph;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.SNodeImpl;
+import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltInvalidModelException;
 
 @SuppressWarnings("serial")
 public class SCorpusImpl extends SNodeImpl implements SCorpus {
+	/** {@inheritDoc} **/
+	@Override
+	public SCorpusGraph getGraph() {
+		SGraph superGraph = super.getGraph();
+		
+		if(superGraph == null) {
+			return null;
+		}
+		
+		if(superGraph instanceof SCorpusGraph) {
+			return (SCorpusGraph) superGraph;
+		}
+		
+		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " 
+				+ superGraph.getClass().getName() + ")");
+	}
 }

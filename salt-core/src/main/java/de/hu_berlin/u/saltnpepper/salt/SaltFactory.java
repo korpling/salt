@@ -1,5 +1,8 @@
 package de.hu_berlin.u.saltnpepper.salt;
 
+import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
+import de.hu_berlin.u.saltnpepper.graph.Identifier;
+import de.hu_berlin.u.saltnpepper.graph.impl.IdentifierImpl;
 import de.hu_berlin.u.saltnpepper.salt.common.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.SCorpusDocumentRelation;
 import de.hu_berlin.u.saltnpepper.salt.common.SCorpusGraph;
@@ -62,7 +65,23 @@ public class SaltFactory {
 	public static void setFactory(ISaltFactory factory) {
 		SaltFactory.factory = factory;
 	}
-
+	// ===============================> graph
+	/**
+	 * Creates a new {@link Identifier} object of type {@link IdentifierImpl}.
+	 * Its {@link IdentifiableElement} is set to the passed container and its id
+	 * value is set to passed id.
+	 * 
+	 * @param container
+	 *            {@link IdentifiableElement} which contains this
+	 *            {@link Identifier}
+	 * @param id
+	 *            the id value of the {@link Identifier}
+	 * @return new {@link Identifier} object
+	 */
+	public static Identifier createIdentifier(IdentifiableElement container, String id){
+		return (factory.createIdentifier(container, id));
+	}
+	// ===============================< graph
 	// ===============================> salt core
 	/**
 	 * Creates a new {@link SGraph} object of type {@link SGraph}.

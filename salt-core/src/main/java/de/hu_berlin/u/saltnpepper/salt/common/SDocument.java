@@ -116,7 +116,7 @@ public interface SDocument extends SNode {
 	 *            location of SaltXML to load {@link SDocumentGraph} object.
 	 */
 	void loadDocumentGraph(URI documentGraphLocation);
-	
+	/** {@inheritDoc} **/
 	@Override
 	public SCorpusGraph getGraph();
 	

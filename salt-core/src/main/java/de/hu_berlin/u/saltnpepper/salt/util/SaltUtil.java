@@ -17,10 +17,12 @@ import javax.xml.parsers.SAXParserFactory;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.emf.common.util.URI;
+import org.omg.PortableInterceptor.ServerIdHelper;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import de.hu_berlin.u.saltnpepper.graph.Identifier;
 import de.hu_berlin.u.saltnpepper.graph.Label;
 import de.hu_berlin.u.saltnpepper.salt.common.SCorpus;
 import de.hu_berlin.u.saltnpepper.salt.common.SCorpusGraph;
@@ -29,6 +31,7 @@ import de.hu_berlin.u.saltnpepper.salt.common.SDocumentGraph;
 import de.hu_berlin.u.saltnpepper.salt.common.SaltProject;
 import de.hu_berlin.u.saltnpepper.salt.core.SFeature;
 import de.hu_berlin.u.saltnpepper.salt.core.SNode;
+import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltResourceException;
 import de.hu_berlin.u.saltnpepper.salt.semantics.SCatAnnotation;
@@ -286,6 +289,67 @@ public class SaltUtil {
 			}
 		}
 		return (uri);
+	}
+
+	/**
+	 * Returns a global ID for the passed object (either if {@link Identifier}
+	 * belongs to {@link SDocument} or {@link SCorpus} object). A global id only
+	 * can be returned, if the element is contained in a {@link SCorpusGraph}
+	 * object. If this is not the case, the {@link ServerIdHelper} is returned.
+	 * 
+	 * @param id
+	 *            Object to retrieve global id.
+	 * @return String value for global id, if one is given.
+	 */
+	public static String getGlobalId(Identifier id) {
+		StringBuffer globalId = new StringBuffer();
+		if ((id != null) && (id.getIdentifiableElement() != null)) {
+			SCorpusGraph graph = null;
+			if ((id.getIdentifiableElement() instanceof SDocument) && (((SDocument) id.getIdentifiableElement()).getGraph() != null)) {
+				graph = ((SDocument) id.getIdentifiableElement()).getGraph();
+			} else if ((id.getIdentifiableElement() instanceof SCorpus) && (((SCorpus) id.getIdentifiableElement()).getGraph() != null)) {
+				graph = ((SCorpus) id.getIdentifiableElement()).getGraph();
+			} else if (id.getIdentifiableElement() instanceof SNode) {
+				SNode sNode = (SNode) id.getIdentifiableElement();
+				if ((sNode.getGraph() != null)) {
+					if (sNode.getGraph() instanceof SCorpusGraph) {
+						graph = (SCorpusGraph) sNode.getGraph();
+					} else if (sNode.getGraph() instanceof SDocumentGraph) {
+						graph = ((SDocumentGraph) sNode.getGraph()).getDocument().getGraph();
+					}
+				}
+			} else if (id.getIdentifiableElement() instanceof SRelation) {
+				SRelation<SNode, SNode> sRel = (SRelation<SNode, SNode>) id.getIdentifiableElement();
+				if ((sRel.getGraph() != null)) {
+					if (sRel.getGraph() instanceof SCorpusGraph) {
+						graph = (SCorpusGraph) sRel.getGraph();
+					} else if (sRel.getGraph() instanceof SDocumentGraph) {
+						graph = ((SDocumentGraph) sRel.getGraph()).getDocument().getGraph();
+					}
+				}
+			}
+
+			if (graph != null) {
+				globalId.append(SALT_NAMESPACE + ":");
+				SaltProject project = graph.getSaltProject();
+				if (project != null) {
+					globalId.append("/");
+					globalId.append(project.getCorpusGraphs().indexOf(graph));
+					globalId.append("/");
+				}
+				String actualId = id.getId().replace(SALT_NAMESPACE + ":", "");
+				if (actualId.startsWith("/")) {
+					actualId = actualId.substring(1, actualId.length());
+				}
+				globalId.append(actualId);
+				if (id.getIdentifiableElement() instanceof SCorpus) {
+					globalId.append("/");
+				}
+			} else {
+				globalId.append(id.getId());
+			}
+		}
+		return (globalId.toString());
 	}
 
 	// ================================================> Persistence SaltXML
