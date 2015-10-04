@@ -339,37 +339,37 @@ public class GraphTraverserModuleTest {
 	// }// test 3
 	// }
 
-	/**
-	 * Checks if it is detected, that a traverseId cannot be used twice.
-	 * 
-	 * @throws InterruptedException
-	 */
-	@Test
-	public void testTraverseId() throws InterruptedException {
-		List<SNode> startNodes = null;
-		GRAPH_TRAVERSE_TYPE traverseType = null;
-		String traverseId = "traverseId";
-		getFixture().setGraph(TestHelper.createGraph_Tree());
-
-		startNodes = getFixture().getGraph().getRoots();
-		traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
-
-		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node4", "node5", "node7" };
-		String[] nodeOrderWayBack = { "node3", "node6", "node2", "node5", "node4", "node7", "node1" };
-		TraverserChecker checker = new TraverserChecker();
-		checker.nodeOrderWayThere = nodeOrderWayThere;
-		checker.nodeOrderWayBack = nodeOrderWayBack;
-		checker.start(startNodes, traverseType, traverseId);
-		checker.start(startNodes, traverseType, traverseId);
-		while (checker.runs != 2) {
-			Thread.sleep(100);
-		}
-
-		if ((checker.exception != null) && (!(checker.exception instanceof SaltTraverserException))) {
-			checker.exception.printStackTrace();
-			fail("A GraphTaverserException should have been thrown, because the same id was used twice with the same callback handler");
-		}
-	}
+//	/**
+//	 * Checks if it is detected, that a traverseId cannot be used twice.
+//	 * 
+//	 * @throws InterruptedException
+//	 */
+//	@Test
+//	public void testTraverseId() throws InterruptedException {
+//		List<SNode> startNodes = null;
+//		GRAPH_TRAVERSE_TYPE traverseType = null;
+//		String traverseId = "traverseId";
+//		getFixture().setGraph(TestHelper.createGraph_Tree());
+//
+//		startNodes = getFixture().getGraph().getRoots();
+//		traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
+//
+//		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node4", "node5", "node7" };
+//		String[] nodeOrderWayBack = { "node3", "node6", "node2", "node5", "node4", "node7", "node1" };
+//		TraverserChecker checker = new TraverserChecker();
+//		checker.nodeOrderWayThere = nodeOrderWayThere;
+//		checker.nodeOrderWayBack = nodeOrderWayBack;
+//		checker.start(startNodes, traverseType, traverseId);
+//		checker.start(startNodes, traverseType, traverseId);
+//		while (checker.runs != 2) {
+//			Thread.sleep(100);
+//		}
+//
+//		if ((checker.exception != null) && (!(checker.exception instanceof SaltTraverserException))) {
+//			checker.exception.printStackTrace();
+//			fail("A GraphTaverserException should have been thrown, because the same id was used twice with the same callback handler");
+//		}
+//	}
 
 	/**
 	 * Starts 3 threads to traverse the graph and checks, that no problem

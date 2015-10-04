@@ -17,17 +17,21 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.util.internal.persistence;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.emf.common.util.URI;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
+
+import com.google.common.io.BaseEncoding;
 
 import de.hu_berlin.u.saltnpepper.graph.IdentifiableElement;
 import de.hu_berlin.u.saltnpepper.graph.Label;
@@ -329,7 +333,9 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 		Object retVal = null;
 		if ((value == null) || (value.length() < 3)) {
 		} else if (value.startsWith("T")) {
-			retVal = StringEscapeUtils.unescapeXml(value.substring(3));
+			byte[] rawBytes = BaseEncoding.base64().decode(value.substring(3));
+			retVal= SerializationUtils.deserialize(rawBytes);
+//			retVal = StringEscapeUtils.unescapeXml(value.substring(3));
 		} else if (value.startsWith("B")) {
 			retVal = Boolean.parseBoolean(StringEscapeUtils.unescapeXml(value.substring(3)));
 		} else if (value.startsWith("N")) {
@@ -338,6 +344,9 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			retVal = Float.parseFloat(StringEscapeUtils.unescapeXml(value.substring(3)));
 		} else if (value.startsWith("U")) {
 			retVal = URI.createURI(StringEscapeUtils.unescapeXml(value.substring(3)));
+		}else if (value.startsWith("O")) {
+			byte[] rawBytes = BaseEncoding.base64().decode(value.substring(3));
+			retVal= SerializationUtils.deserialize(rawBytes);
 		}
 		return (retVal);
 	}

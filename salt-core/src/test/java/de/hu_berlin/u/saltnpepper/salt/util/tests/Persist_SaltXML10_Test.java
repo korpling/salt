@@ -44,6 +44,30 @@ public class Persist_SaltXML10_Test {
 		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
 		assertTrue(template.getDocumentGraph().isIsomorph(graph));
 	}
+	
+	/**
+	 * Tests the loading and storing of primary data.
+	 */
+	@Test
+	public void testLoadStore_DocumentGraph_text_specialCharacters() {
+		// create template
+		SDocument template = SaltFactory.createSDocument();
+		template.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		template.getDocumentGraph().createTextualDS("This is a text with linebreaks\n and tabs\t.");
+		// create other
+		SDocument other = SaltFactory.createSDocument();
+		other.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		other.getDocumentGraph().createTextualDS("This is a text with linebreaks\n and tabs\t.");
+
+		// store other document
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_text_specialCharacters.salt");
+		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
+		SaltUtil.saveDocumentGraph(other.getDocumentGraph(), path);
+
+		// compare both document graphs
+		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
+		assertTrue(template.getDocumentGraph().isIsomorph(graph));
+	}
 
 	/**
 	 * Tests the loading and storing of tokenization

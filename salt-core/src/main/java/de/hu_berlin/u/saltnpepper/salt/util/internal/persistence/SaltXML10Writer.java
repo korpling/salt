@@ -436,7 +436,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		String retVal = null;
 		if (value == null) {
 		} else if (value instanceof String) {
-			retVal = "T::" + StringEscapeUtils.escapeXml11((String) value);
+//			retVal = "T::" + StringEscapeUtils.escapeXml11((String) value);
+			byte[] rawBytes = SerializationUtils.serialize((Serializable) value);
+			retVal = "T::" + BaseEncoding.base64().encode(rawBytes);
 		} else if (value instanceof Boolean) {
 			retVal = "B::" + value.toString();
 		} else if (value instanceof Integer) {

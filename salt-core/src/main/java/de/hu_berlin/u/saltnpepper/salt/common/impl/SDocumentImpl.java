@@ -126,6 +126,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	@Override
 	public void saveDocumentGraph(URI documentGraphLocation) {
 		SaltUtil.saveDocumentGraph(getDocumentGraph(), documentGraphLocation);
+		setDocumentGraph(null);
+		setDocumentGraphLocation(documentGraphLocation);
 	}
 
 	/** {@inheritDoc} **/
