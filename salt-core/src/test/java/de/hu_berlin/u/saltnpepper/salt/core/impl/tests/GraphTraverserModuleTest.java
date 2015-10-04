@@ -17,6 +17,7 @@
  */
 package de.hu_berlin.u.saltnpepper.salt.core.impl.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -37,7 +38,6 @@ import de.hu_berlin.u.saltnpepper.salt.core.SNode;
 import de.hu_berlin.u.saltnpepper.salt.core.SRelation;
 import de.hu_berlin.u.saltnpepper.salt.core.impl.GraphTraverserModule;
 import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltException;
-import de.hu_berlin.u.saltnpepper.salt.exceptions.SaltTraverserException;
 
 public class GraphTraverserModuleTest {
 	private GraphTraverserModule fixture = null;
@@ -229,147 +229,140 @@ public class GraphTraverserModuleTest {
 		}// test 3
 	}
 
-	// /**
-	// * Tests the method {@link GraphTraverserModule#getRoots()} and checks if
-	// * the correct roots are returned, using the several graph types.
-	// */
-	// public void testGetRoots() {
-	// List<SNode> expectedRoots = null;
-	// List<SNode> roots = null;
-	// SGraph graph = null;
-	//
-	// {// test 1
-	// graph = SGraphTest.createGraph_Tree();
-	// getFixture().setGraph(graph);
-	// expectedRoots = new ArrayList<>();
-	// expectedRoots.add(graph.getNode("node1"));
-	// roots = getFixture().getGraph().getRoots();
-	// assertEquals("The expected number of roots are not the same, as the returned number",
-	// expectedRoots.size(), roots.size());
-	// for (Node expectedRoot : expectedRoots) {
-	// assertTrue("The list of returned roots does not contain expected root '"
-	// + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
-	// }
-	// }// test 1
-	//
-	// {// test 2
-	// graph = SGraphTest.createGraph_DAG();
-	// getFixture().setGraph(graph);
-	// expectedRoots = new ArrayList<>();
-	// expectedRoots.add(graph.getNode("node1"));
-	// expectedRoots.add(graph.getNode("node4"));
-	// roots = getFixture().getGraph().getRoots();
-	// assertEquals("The expected number of roots are not the same, as the returned number",
-	// expectedRoots.size(), roots.size());
-	// for (Node expectedRoot : expectedRoots) {
-	// assertTrue("The list of returned roots does not contain expected root '"
-	// + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
-	// }
-	// }// test 2
-	//
-	// {// test 3
-	// graph = SGraphTest.createGraph_Cycle();
-	// getFixture().setGraph(graph);
-	// expectedRoots = new ArrayList<>();
-	// expectedRoots.add(graph.getNode("node1"));
-	// expectedRoots.add(graph.getNode("node4"));
-	// roots = getFixture().getGraph().getRoots();
-	// assertEquals("The expected number of roots are not the same, as the returned number",
-	// expectedRoots.size(), roots.size());
-	// for (Node expectedRoot : expectedRoots) {
-	// assertTrue("The list of returned roots does not contain expected root '"
-	// + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
-	// }
-	// }// test 3
-	// }
-	//
-	// /**
-	// * Tests the method {@link GraphTraverserModule#getLeafs()} and checks if
-	// * the correct leafs are returned, using the several graph types.
-	// */
-	// public void testGetLeafs() {
-	// List<SNode> expectedLeafs = null;
-	// List<SNode> leafs = null;
-	// SGraph graph = null;
-	//
-	// {// test 1
-	// graph = SGraphTest.createGraph_Tree();
-	// getFixture().setGraph(graph);
-	// expectedLeafs = new ArrayList<>();
-	// expectedLeafs.add(graph.getNode("node3"));
-	// expectedLeafs.add(graph.getNode("node6"));
-	// expectedLeafs.add(graph.getNode("node5"));
-	// expectedLeafs.add(graph.getNode("node7"));
-	// leafs = getFixture().getGraph().getLeafs();
-	// assertEquals("The expected number of leafs are not the same, as the returned number",
-	// expectedLeafs.size(), leafs.size());
-	// for (Node expectedLeaf : expectedLeafs) {
-	// assertTrue("The list of returned roots does not contain expected leaf '"
-	// + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
-	// }
-	// }// test 1
-	//
-	// {// test 2
-	// graph = SGraphTest.createGraph_DAG();
-	// getFixture().setGraph(graph);
-	// expectedLeafs = new ArrayList<SNode>();
-	// expectedLeafs.add(graph.getNode("node3"));
-	// expectedLeafs.add(graph.getNode("node6"));
-	// leafs = getFixture().getGraph().getLeafs();
-	// assertEquals("The expected number of leafs are not the same, as the returned number",
-	// expectedLeafs.size(), leafs.size());
-	// for (Node expectedLeaf : expectedLeafs) {
-	// assertTrue("The list of returned leafs does not contain expected leaf '"
-	// + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
-	// }
-	// }// test 2
-	//
-	// {// test 3
-	// graph = SGraphTest.createGraph_Cycle();
-	// getFixture().setGraph(graph);
-	// expectedLeafs = new ArrayList<SNode>();
-	// expectedLeafs.add(graph.getNode("node3"));
-	// leafs = getFixture().getGraph().getLeafs();
-	// assertEquals("The expected number of leafs are not the same, as the returned number",
-	// expectedLeafs.size(), leafs.size());
-	// for (Node expectedLeaf : expectedLeafs) {
-	// assertTrue("The list of returned roots does not contain expected leaf '"
-	// + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
-	// }
-	// }// test 3
-	// }
+	/**
+	 * Tests the method {@link GraphTraverserModule#getRoots()} and checks if
+	 * the correct roots are returned, using the several graph types.
+	 */
+	@Test
+	public void testGetRoots() {
+		List<SNode> expectedRoots = null;
+		List<SNode> roots = null;
+		SGraph graph = null;
 
-//	/**
-//	 * Checks if it is detected, that a traverseId cannot be used twice.
-//	 * 
-//	 * @throws InterruptedException
-//	 */
-//	@Test
-//	public void testTraverseId() throws InterruptedException {
-//		List<SNode> startNodes = null;
-//		GRAPH_TRAVERSE_TYPE traverseType = null;
-//		String traverseId = "traverseId";
-//		getFixture().setGraph(TestHelper.createGraph_Tree());
-//
-//		startNodes = getFixture().getGraph().getRoots();
-//		traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
-//
-//		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node4", "node5", "node7" };
-//		String[] nodeOrderWayBack = { "node3", "node6", "node2", "node5", "node4", "node7", "node1" };
-//		TraverserChecker checker = new TraverserChecker();
-//		checker.nodeOrderWayThere = nodeOrderWayThere;
-//		checker.nodeOrderWayBack = nodeOrderWayBack;
-//		checker.start(startNodes, traverseType, traverseId);
-//		checker.start(startNodes, traverseType, traverseId);
-//		while (checker.runs != 2) {
-//			Thread.sleep(100);
-//		}
-//
-//		if ((checker.exception != null) && (!(checker.exception instanceof SaltTraverserException))) {
-//			checker.exception.printStackTrace();
-//			fail("A GraphTaverserException should have been thrown, because the same id was used twice with the same callback handler");
-//		}
-//	}
+		{// test 1
+			graph = TestHelper.createGraph_Tree();
+			getFixture().setGraph(graph);
+			expectedRoots = new ArrayList<>();
+			expectedRoots.add(graph.getNode("node1"));
+			roots = getFixture().getGraph().getRoots();
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
+			for (Node expectedRoot : expectedRoots) {
+				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
+			}
+		}// test 1
+
+		{// test 2
+			graph = TestHelper.createGraph_DAG();
+			getFixture().setGraph(graph);
+			expectedRoots = new ArrayList<>();
+			expectedRoots.add(graph.getNode("node1"));
+			expectedRoots.add(graph.getNode("node4"));
+			roots = getFixture().getGraph().getRoots();
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
+			for (Node expectedRoot : expectedRoots) {
+				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
+			}
+		}// test 2
+
+		{// test 3
+			graph = TestHelper.createGraph_Cycle();
+			getFixture().setGraph(graph);
+			expectedRoots = new ArrayList<>();
+			expectedRoots.add(graph.getNode("node1"));
+			expectedRoots.add(graph.getNode("node4"));
+			roots = getFixture().getGraph().getRoots();
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
+			for (Node expectedRoot : expectedRoots) {
+				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
+			}
+		}// test 3
+	}
+
+	/**
+	 * Tests the method {@link GraphTraverserModule#getLeafs()} and checks if
+	 * the correct leafs are returned, using the several graph types.
+	 */
+	@Test
+	public void testGetLeafs() {
+		List<SNode> expectedLeafs = null;
+		List<SNode> leafs = null;
+		SGraph graph = null;
+
+		{// test 1
+			graph = TestHelper.createGraph_Tree();
+			getFixture().setGraph(graph);
+			expectedLeafs = new ArrayList<>();
+			expectedLeafs.add(graph.getNode("node3"));
+			expectedLeafs.add(graph.getNode("node6"));
+			expectedLeafs.add(graph.getNode("node5"));
+			expectedLeafs.add(graph.getNode("node7"));
+			leafs = getFixture().getGraph().getLeafs();
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
+			for (Node expectedLeaf : expectedLeafs) {
+				assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
+			}
+		}// test 1
+
+		{// test 2
+			graph = TestHelper.createGraph_DAG();
+			getFixture().setGraph(graph);
+			expectedLeafs = new ArrayList<SNode>();
+			expectedLeafs.add(graph.getNode("node3"));
+			expectedLeafs.add(graph.getNode("node6"));
+			leafs = getFixture().getGraph().getLeafs();
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
+			for (Node expectedLeaf : expectedLeafs) {
+				assertTrue("The list of returned leafs does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
+			}
+		}// test 2
+
+		{// test 3
+			graph = TestHelper.createGraph_Cycle();
+			getFixture().setGraph(graph);
+			expectedLeafs = new ArrayList<SNode>();
+			expectedLeafs.add(graph.getNode("node3"));
+			leafs = getFixture().getGraph().getLeafs();
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
+			for (Node expectedLeaf : expectedLeafs) {
+				assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
+			}
+		}// test 3
+	}
+
+	// /**
+	// * Checks if it is detected, that a traverseId cannot be used twice.
+	// *
+	// * @throws InterruptedException
+	// */
+	// @Test
+	// public void testTraverseId() throws InterruptedException {
+	// List<SNode> startNodes = null;
+	// GRAPH_TRAVERSE_TYPE traverseType = null;
+	// String traverseId = "traverseId";
+	// getFixture().setGraph(TestHelper.createGraph_Tree());
+	//
+	// startNodes = getFixture().getGraph().getRoots();
+	// traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
+	//
+	// String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6",
+	// "node4", "node5", "node7" };
+	// String[] nodeOrderWayBack = { "node3", "node6", "node2", "node5",
+	// "node4", "node7", "node1" };
+	// TraverserChecker checker = new TraverserChecker();
+	// checker.nodeOrderWayThere = nodeOrderWayThere;
+	// checker.nodeOrderWayBack = nodeOrderWayBack;
+	// checker.start(startNodes, traverseType, traverseId);
+	// checker.start(startNodes, traverseType, traverseId);
+	// while (checker.runs != 2) {
+	// Thread.sleep(100);
+	// }
+	//
+	// if ((checker.exception != null) && (!(checker.exception instanceof
+	// SaltTraverserException))) {
+	// checker.exception.printStackTrace();
+	// fail("A GraphTaverserException should have been thrown, because the same id was used twice with the same callback handler");
+	// }
+	// }
 
 	/**
 	 * Starts 3 threads to traverse the graph and checks, that no problem
