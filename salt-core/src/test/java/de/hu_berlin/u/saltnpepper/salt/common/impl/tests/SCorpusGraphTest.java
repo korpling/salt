@@ -415,7 +415,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	public void testCreateSCorpus__SCorpus_String() {
 		SCorpus sCorpus = SaltFactory.createSCorpus();
 		getFixture().addNode(sCorpus);
-		SCorpus sCorp2 = getFixture().createSCorpus(sCorpus, "corp2");
+		SCorpus sCorp2 = getFixture().createCorpus(sCorpus, "corp2");
 
 		assertNotNull(getFixture().getNode(sCorp2.getId()));
 		assertEquals(2, getFixture().getNodes().size());
@@ -429,7 +429,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	public void testCreateSDocument__SCorpus_String() {
 		SCorpus sCorpus = SaltFactory.createSCorpus();
 		getFixture().addNode(sCorpus);
-		SDocument sDoc = getFixture().createSDocument(sCorpus, "doc1");
+		SDocument sDoc = getFixture().createDocument(sCorpus, "doc1");
 
 		assertNotNull(getFixture().getNode(sDoc.getId()));
 		assertEquals(2, getFixture().getNodes().size());
@@ -443,7 +443,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	@Test
 	public void testCreateSCorpus__URI() {
 		URI path = URI.createURI("salt:/c1/c2/c3");
-		List<SCorpus> corpora = getFixture().createSCorpus(path);
+		List<SCorpus> corpora = getFixture().createCorpus(path);
 
 		assertNotNull(corpora);
 		assertEquals(3, corpora.size());
@@ -451,7 +451,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		assertEquals(2, getFixture().getRelations().size());
 
 		path = URI.createURI("salt:/c1/c2/c4");
-		corpora = getFixture().createSCorpus(path);
+		corpora = getFixture().createCorpus(path);
 		assertNotNull(corpora);
 		assertEquals(1, corpora.size());
 		assertEquals(4, getFixture().getNodes().size());
@@ -465,14 +465,14 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	@Test
 	public void testCreateSDocument__URI() {
 		URI path = URI.createURI("salt:/c1/c2/c3");
-		SDocument sDoc = getFixture().createSDocument(path);
+		SDocument sDoc = getFixture().createDocument(path);
 
 		assertNotNull(sDoc);
 		assertEquals(3, getFixture().getNodes().size());
 		assertEquals(2, getFixture().getRelations().size());
 
 		path = URI.createURI("salt:/c1/c2/c4");
-		sDoc = getFixture().createSDocument(path);
+		sDoc = getFixture().createDocument(path);
 		assertNotNull(sDoc);
 		assertEquals(4, getFixture().getNodes().size());
 		assertEquals(3, getFixture().getRelations().size());

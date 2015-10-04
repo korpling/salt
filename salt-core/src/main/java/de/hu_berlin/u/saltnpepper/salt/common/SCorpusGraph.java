@@ -217,7 +217,7 @@ public interface SCorpusGraph extends SGraph {
 	 *            the name of the {@link SCorpus} object to be new created
 	 * @return the new created {@link SCorpus} object
 	 */
-	public SCorpus createSCorpus(SCorpus superCorpus, String corpusName);
+	public SCorpus createCorpus(SCorpus superCorpus, String corpusName);
 
 	/**
 	 * Creates a {@link SDocument} object having the name
@@ -230,7 +230,7 @@ public interface SCorpusGraph extends SGraph {
 	 *            the name of the {@link SDocument} object to be new created
 	 * @return the new created {@link SDocument} object <!-- end-model-doc -->
 	 */
-	public SDocument createSDocument(SCorpus parentCorpus, String documentName);
+	public SDocument createDocument(SCorpus parentCorpus, String documentName);
 
 	/**
 	 * Creates all {@link SCorpus} objects contained in the passed
@@ -241,7 +241,7 @@ public interface SCorpusGraph extends SGraph {
 	 *            the URI path of corpora
 	 * @return all created {@link SCorpus} objects <!-- end-model-doc -->
 	 */
-	public List<SCorpus> createSCorpus(URI corpusPath);
+	public List<SCorpus> createCorpus(URI corpusPath);
 
 	/**
 	 * Creates all {@link SCorpus} objects contained in the passed corpusPath
@@ -252,6 +252,6 @@ public interface SCorpusGraph extends SGraph {
 	 *            the URI path of the document
 	 * @return the created document
 	 */
-	public SDocument createSDocument(URI documentPath);
+	public SDocument createDocument(URI documentPath);
 
 } // SCorpusGraph

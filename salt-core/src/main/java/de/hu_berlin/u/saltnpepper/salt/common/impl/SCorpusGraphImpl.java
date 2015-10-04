@@ -333,7 +333,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SCorpus createSCorpus(SCorpus superCorpus, String corpusName) {
+	public SCorpus createCorpus(SCorpus superCorpus, String corpusName) {
 		SCorpus corpus = SaltFactory.createSCorpus();
 		corpus.setName(corpusName);
 		if (superCorpus != null) {
@@ -346,7 +346,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SDocument createSDocument(SCorpus parentCorpus, String documentName) {
+	public SDocument createDocument(SCorpus parentCorpus, String documentName) {
 		SDocument document = SaltFactory.createSDocument();
 		document.setName(documentName);
 		addDocument(parentCorpus, document);
@@ -355,7 +355,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SCorpus> createSCorpus(URI corpusPath) {
+	public List<SCorpus> createCorpus(URI corpusPath) {
 		List<SCorpus> retVal = null;
 		if (corpusPath != null) {
 			SCorpus parentCorpus = null;
@@ -363,7 +363,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 				URI currPath = corpusPath.trimSegments(i);
 				SNode node = getNode(currPath.toString());
 				if (node == null) {
-					parentCorpus = createSCorpus(parentCorpus, currPath.lastSegment());
+					parentCorpus = createCorpus(parentCorpus, currPath.lastSegment());
 					if (retVal == null)
 						retVal = new ArrayList<SCorpus>();
 					retVal.add(parentCorpus);
@@ -378,14 +378,14 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SDocument createSDocument(URI documentPath) {
+	public SDocument createDocument(URI documentPath) {
 		SDocument retVal = null;
-		List<SCorpus> corpora = createSCorpus(documentPath.trimSegments(1));
+		List<SCorpus> corpora = createCorpus(documentPath.trimSegments(1));
 		if ((corpora == null) || (corpora.size() == 0)) {
 			corpora = new Vector<SCorpus>();
 			corpora.add((SCorpus) getNode(documentPath.trimSegments(1).toString()));
 		}
-		retVal = createSDocument(corpora.get(corpora.size() - 1), documentPath.lastSegment());
+		retVal = createDocument(corpora.get(corpora.size() - 1), documentPath.lastSegment());
 		return (retVal);
 	}
 } // SCorpusGraphImpl
