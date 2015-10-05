@@ -29,7 +29,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.hu_berlin.german.korpling.saltnpepper;
+package org.corpus_tools.salt.benchmark;
 
 import java.util.ArrayList;
 import java.util.List;
