@@ -1,0 +1,5 @@
+var classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_element_not_in_graph_exception =
+[
+    [ "SaltElementNotInGraphException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_element_not_in_graph_exception.html#a2a41f6611e148a3b26ded7eb0099b47e", null ],
+    [ "SaltElementNotInGraphException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_element_not_in_graph_exception.html#a5bfcc100b5f7295a9b9bee4e55d2e42b", null ]
+];

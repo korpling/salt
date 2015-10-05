@@ -1,0 +1,25 @@
+var namespacede_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl =
+[
+    [ "SaltProjectImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_salt_project_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_salt_project_impl" ],
+    [ "SCorpusDocumentRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html", null ],
+    [ "SCorpusGraphImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl" ],
+    [ "SCorpusImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_corpus_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_corpus_impl" ],
+    [ "SCorpusRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_corpus_relation_impl.html", null ],
+    [ "SDocumentGraphImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl" ],
+    [ "SDocumentImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_document_impl" ],
+    [ "SDominanceRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_dominance_relation_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_dominance_relation_impl" ],
+    [ "SMedialDSImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_medial_d_s_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_medial_d_s_impl" ],
+    [ "SMedialRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_medial_relation_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_medial_relation_impl" ],
+    [ "SOrderRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_order_relation_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_order_relation_impl" ],
+    [ "SPointingRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_pointing_relation_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_pointing_relation_impl" ],
+    [ "SSequentialDSImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_sequential_d_s_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_sequential_d_s_impl" ],
+    [ "SSequentialRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_sequential_relation_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_sequential_relation_impl" ],
+    [ "SSpanImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_span_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_span_impl" ],
+    [ "SSpanningRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_spanning_relation_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_spanning_relation_impl" ],
+    [ "SStructureImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_structure_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_structure_impl" ],
+    [ "STextualDSImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl" ],
+    [ "STextualRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_textual_relation_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_textual_relation_impl" ],
+    [ "STimelineImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_timeline_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_timeline_impl" ],
+    [ "STimelineRelationImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_timeline_relation_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_timeline_relation_impl" ],
+    [ "STokenImpl", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_token_impl.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1common_1_1impl_1_1_s_token_impl" ]
+];

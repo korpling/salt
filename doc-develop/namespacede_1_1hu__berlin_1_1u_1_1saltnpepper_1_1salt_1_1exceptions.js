@@ -1,0 +1,12 @@
+var namespacede_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions =
+[
+    [ "SaltElementNotInGraphException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_element_not_in_graph_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_element_not_in_graph_exception" ],
+    [ "SaltException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_exception" ],
+    [ "SaltInsertionException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_insertion_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_insertion_exception" ],
+    [ "SaltInvalidModelException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_invalid_model_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_invalid_model_exception" ],
+    [ "SaltParameterException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_parameter_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_parameter_exception" ],
+    [ "SaltResourceException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_resource_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_resource_exception" ],
+    [ "SaltSampleException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_sample_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_sample_exception" ],
+    [ "SaltTokenizerException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_tokenizer_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_tokenizer_exception" ],
+    [ "SaltTraverserException", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_traverser_exception.html", "classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1exceptions_1_1_salt_traverser_exception" ]
+];

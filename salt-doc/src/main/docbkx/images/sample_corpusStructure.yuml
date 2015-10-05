@@ -1,9 +1,0 @@
-//see yuml.me
-
-[superCorpus]->[subCorpus2]
-[subCorpus2]->[doc4]
-[subCorpus2]->[doc3]
-[superCorpus]->[subCorpus1]
-[subCorpus1]->[doc2]
-[subCorpus1]->[doc1]
-
