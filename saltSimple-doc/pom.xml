@@ -13,7 +13,7 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<site.path>doc-develop</site.path>
+		<site.path>doc-snapshot</site.path>
 		<!-- override in your settings -->
 		<siteMainDirectory>${user.home}</siteMainDirectory>
 		<scmPubCheckoutDirectory>\${siteMainDirectory}/salt-content-scm</scmPubCheckoutDirectory>
@@ -50,7 +50,7 @@
 						<content>${project.build.directory}/doxygen/</content>
 						<ignorePathsToDelete>
 							<path>doc</path>
-							<path>doc-develop</path>
+							<path>${site.path}</path>
 							<path>index.html</path>
 							<path>doxygen_sqlite3.db</path>
 							<path>.gitignore</path>
@@ -77,11 +77,11 @@
 			</properties>
 		</profile>
 
-		<!-- preview releases still push their documentation to doc-develop -->
+		<!-- preview releases still push their documentation to doc snapshot -->
 		<profile>
 			<id>preview</id>
 			<properties>
-				<site.path>doc-develop</site.path>
+				<site.path>${site.path}</site.path>
 			</properties>
 		</profile>
 
