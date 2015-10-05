@@ -1,0 +1,9 @@
+// see: http://yuml.me
+[SNode]^-[SStructuredNode]
+[SStructuredNode]^-[SSpan]
+[SStructuredNode]^-[SStructure]
+[SStructuredNode]^-[SToken]
+[SNode]^-[SSequentialDS]
+[SSequentialDS]^-[STextualDS]
+[SSequentialDS]^-[SAudioDataSource]
+[SSequentialDS]^-[STimeline]

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <info>
+        <title>Salt User Guide</title>
+        <author>
+            <orgname>Organization Name</orgname>
+            <address>
+                <city>City</city>
+                <street>Street</street>
+                <postcode>000000</postcode>
+                <country>Country</country>
+            </address>
+            <email>user@example.com</email>
+        </author>
+    </info>
+    <part>
+        <title>SaltCommon</title>
+        <chapter>
+            <title>Elements of the Salt metamodel</title>
+            <sect1>
+                <title><classname>SDocument</classname></title>
+                <para>Each <classname>SDocument</classname> object is a placeholder for the document
+                    structure containing the real linguistic content. Containing the primary text,
+                    the annotation structure, the annotations and so on. The document structure is
+                    represented in Salt by the model element <classname>SDocumentGraph</classname>.
+                    The relation between a <classname>SDocument</classname> and
+                        <classname>SDocumentGraph</classname> object is a 1:1 relation. In this case
+                    we have a node object (the <classname>SDocument</classname> node) containing an
+                    entire graph object (the <classname>SDocumentGraph</classname>). This
+                    containment again is relized by the feature mechanism of Salt. Therefore a
+                        <classname>SFeature</classname> object having the namespace
+                        <varname>salt</varname> and the name
+                        <classname>SFEATURE.SDOCUMENT_GRAPH_LOCATION</classname> is created which
+                    contains the <classname>SDocumentGraph</classname> object as its vlaue. Please
+                    see later on in  section ???, that the setting and persisiting of the document
+                    structure might interfer.</para>
+            </sect1>
+        </chapter>
+        <chapter>
+            <title>Persisting and Loading a Salt model</title>
+            <para>
+                To explain before section:
+                - SFeature mechanism 
+                - correspondance document Structure = SDOcumentGraph, corpus structure = SCorpusGraph
+            </para>
+            <para>For persisting and loading Salt models in different formats, two ways exist. First
+                you can store a Salt model or just parts of it like single model element via the
+                underlying resource technique provided by the EMF, or you can use some shortcuts
+                provided by the metamodel of Salt. The shortcuts also use the EMF resource
+                technique, but make some Salt specific assumptions to provide an easier and simpler
+                use of persisting and loading. </para>
+            <para>A Salt model can be persist in several formats like SaltXML, GrAF (a standardized
+                linguistic data format, see ???), DOT (a format to visualize graphs, see) etc. The
+                most native format is the SaltXML format, which is an automatique generated XMI
+                format (a dialekt of XML) by the EMF framework. Since SaltXML is an automatique
+                generated format, its focus is less the readability by humans than the fast import
+                from disk to main memory and the way around. Before we start with showing the
+                mechanisms of persisting and loading, we give a brief introduction into the
+                organisation of the SaltXML format.</para>
+            <sect1>
+                <title>SaltXML</title>
+                <para>In SaltXML the corpus structure including the Saltproject is persisted in one
+                    file having the ending .saltproject. Each document structure is persisted in its
+                    own file having the ending .salt. Next to the .saltproject file, the corpus
+                    structure (supercorpus-subcorpus relation and the corpus-document relation as
+                    well) is represented in the file structure on the disk. Each corpus will be
+                    represented by its own folder, so the file structure mirrors the corpus
+                    structure.A persisted Salt model consists of a file containing the Saltproject
+                    and a directory structure representing the corpus structure. Each document
+                    structure is persist in an own file put to the folder representing the document.
+                    For instance, imagine a Salt model containing the corpus rootcorpus, containing
+                    a sub corpus subcorpus1 and a sub corpus subcorpus2. The sub corpus subcorpus1
+                    contains the document document1 and document2. Further the sub corpus subcorpus2
+                    contains the document document3. The persisting of that model will be realized
+                    as the following file structure:</para>
+            </sect1>
+            <sect1>
+                <title>Shortcut</title>
+                <para>The entire Salt model can be stored via calling the method shown <link
+                    xlink:href="#pl_persist01">here</link>:
+                    <programlisting xml:id="pl_persist01">saltProject.saveSaltProject(URI);</programlisting>
+                    To load a valid SaltXML document, create an empty SaltProject object and call
+                    the load method as shown in the <link xlink:href="#pl_persist02">following
+                        snippet</link>
+                    <programlisting xml:id="pl_persist02">saltProject= SaltFactory.eINSTANCE.createSaltProject();
+                2saltProject.loadSaltProject(URI);</programlisting>
+                    Uses these methods will persist or load the entire Salt model including the
+                    corpus structure and the document structure of the documents.</para>
+                <para>Sometimes it becomes necessary to store just a single document structure or
+                    just to store the corpus structure. This can be useful in the case of you don't
+                    want to keep the entire model in main memory or want to exchange just single
+                    parts of it. Therefore each <classname>SDocument</classname> object can persist
+                    and load its related <classname>SDocumentGraph</classname> object separatly via
+                    calling the method shown <link xlink:href="#pl_persist0">here</link> to persist.
+                    <programlisting>sDocument.save(URI);</programlisting> and load the document
+                    structure via calling the method:
+                    <programlisting>sDocument.load(URI);</programlisting> or
+                    <programlisting>sDocument.load();</programlisting> in case of a <classname>URI</classname> 
+                    was earlier set with:
+                    <programlisting>sDocument.setSDocumentGraphLocation(URI)</programlisting></para>
+                <para>When setting a <classname>URI</classname> as location for the document
+                    structure, the URI object is stored via the feature mechanism of Salt via a
+                        <classname>SFeature</classname> object having the namespace
+                        <varname>salt</varname> and the name
+                        <classname>SFEATURE.SDOCUMENT_GRAPH_LOCATION</classname>. For more
+                    information about the feature mechanism please see ???. The set loaction can be
+                    read again via the method:
+                    <programlisting>sDocument.getSDocumentGraphLocation()</programlisting>
+                    </para>
+                    <caution>
+                        <para>When setting the location of a document structure there will be interference between the object
+                        <classname>SDocument.sDocumentGraphLocation</classname> and the object
+                        <classname>SDocument.sDocumentGraph</classname>. A document structure can
+                    only be in main memory (loaded) or on disk (persisted), but not be both. So when
+                    you persist the document structure, calling the method
+                        <methodname>getSDocumentGraph()</methodname> will return null.
+                        </para>
+                    </caution>
+                   
+                <para>At last we show how to load just the corpus structure seperatly, therfore just
+                    call the method:
+                    <programlisting>saltProject.loadCorpusStructure(URI)</programlisting>All these
+                    methods for persisting and loading also be used in a static way via the class
+                        <classname>SaltFactory</classname>. For more information concerning the
+                    class SaltFactory please see the detailed ???User Guide???. </para>
+                <para>For information about the internals of persisting and loading a Salt model or
+                    just parts of it, please see the detailed ???User Guide???.</para>
+            </sect1>
+            <sect1>
+                <title>EMF</title>
+                <para>EMF natively provides methods to store a model element, via so called Resource
+                    and ResourceFactory objects. Here is a brief sample, of how to persist a Salt
+                    element in SaltXML:</para>
+                <programlisting>ResourceSet resourceSet= new ResourceSetImpl();
+resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(), SaltCommonPackage.eINSTANCE);
+resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(SaltFactory.SALT_FILE_ENDING, new XMIResourceFactoryImpl());
+//note, that anyURI must end with SaltFactory.SALT_FILE_ENDING
+XMLResource resource= this.getResourceSet().createResource(anyURI);
+xmlResource= null;
+xmlResource= (XMLResource)resource;
+xmlResource.getContents().add(sDocument.getSDocumentGraph());
+xmlResource.setEncoding("UTF-8");    
+try {
+    xmlResource.save(null);
+} catch (IOException e) 
+{
+//some error message } 
+</programlisting>
+                <para>Another way provided by EMF, is to store model elements as XMI, here we gave a
+                    brief example, which persist an entire SaltProject into just a single
+                    file:</para>
+                <programlisting>@Override
+ public void writeTo(SaltProject project,
+ Class&lt;?&gt; type, Type genericType, Annotation[] annotations,
+ MediaType mediaType,
+ MultivaluedMap&lt;String, Object&gt; httpHeaders, OutputStream entityStream)
+ throws IOException, WebApplicationException
+ {
+    Resource resource = new XMIResourceImpl();
+    // add the project itself 11    resource.getContents().add(project);
+    // add all SDocumentGraph elements 14 for (SCorpusGraph corpusGraph : project.getSCorpusGraphs())
+    {
+        for (SDocument doc : corpusGraph.getSDocuments())
+        {
+            if (doc.getSDocumentGraph() != null)
+            {
+                resource.getContents().add(doc.getSDocumentGraph());
+            }
+        }   
+    }
+    resource.save(entityStream, null);
+}
+
+@Override
+public SaltProject readFrom(Class&lt;SaltProject&gt; type, Type genericType,
+    Annotation[] annotations, MediaType mediaType,
+    MultivaluedMap&lt;String, String&gt; httpHeaders, InputStream entityStream) throws IOException,
+    WebApplicationException
+  {
+    ResourceSet resourceSet = new ResourceSetImpl();
+    resourceSet.getPackageRegistry().put(SaltCommonPackage.eINSTANCE.getNsURI(),
+      SaltCommonPackage.eINSTANCE);
+    XMIResourceImpl resource = new XMIResourceImpl();
+    resourceSet.getResources().add(resource);
+resource.load(entityStream, null);
+    SaltProject project = SaltCommonFactory.eINSTANCE.createSaltProject();
+ for(EObject o : resource.getContents())
+    {
+ if(o instanceof SaltProject)
+      {
+        project = (SaltProject) o;
+        break;
+      }
+    }
+ return project;
+  }</programlisting>
+            </sect1>
+            <sect1>
+                <title>SDocument and SDocumentGraph</title>
+                <para> correspondance between setting/ getting SDocument or SDocumentGraph and
+                    loading/persisting stuff </para>
+                <para>used SFeature for storing/loading from or to uri</para>
+            </sect1>
+        </chapter>
+    </part>
+</book>

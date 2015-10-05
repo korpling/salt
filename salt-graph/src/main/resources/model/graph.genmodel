@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/salt-graph/src/main/java" editorDirectory="/salt-graph.editor/src"
+    modelPluginID="de.hu_berlin.german.korpling.saltnpepper.salt-graph" modelName="salt-graph"
+    testsDirectory="/salt-graph/src/test/java" testSuiteClass="de.hu_berlin.german.korpling.saltnpepper.salt.graph.tests.GraphAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    runtimeVersion="2.8" language="" interfaceNamePattern="">
+  <foreignModel>graph.ecore</foreignModel>
+  <genPackages prefix="Graph" basePackage="de.hu_berlin.german.korpling.saltnpepper.salt"
+      disposableProviderFactory="true" ecorePackage="graph.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="graph.ecore#//GRAPH_TRAVERSE_TYPE">
+      <genEnumLiterals ecoreEnumLiteral="graph.ecore#//GRAPH_TRAVERSE_TYPE/TOP_DOWN_DEPTH_FIRST"/>
+      <genEnumLiterals ecoreEnumLiteral="graph.ecore#//GRAPH_TRAVERSE_TYPE/TOP_DOWN_BREADTH_FIRST"/>
+      <genEnumLiterals ecoreEnumLiteral="graph.ecore#//GRAPH_TRAVERSE_TYPE/BOTTOM_UP_DEPTH_FIRST"/>
+      <genEnumLiterals ecoreEnumLiteral="graph.ecore#//GRAPH_TRAVERSE_TYPE/BOTTOM_UP_BREADTH_FIRST"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="graph.ecore#//GraphTraverseHandler"/>
+    <genClasses ecoreClass="graph.ecore#//Node">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference graph.ecore#//Node/graph"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Node/layers"/>
+      <genOperations ecoreOperation="graph.ecore#//Node/clone"/>
+    </genClasses>
+    <genClasses ecoreClass="graph.ecore#//LabelableElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference graph.ecore#//LabelableElement/labels"/>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/addLabel">
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/addLabel/label"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/getLabel">
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/getLabel/ns"/>
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/getLabel/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/getLabel.1">
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/getLabel.1/fullName"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/removeLabel">
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/removeLabel/fullName"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/getNumOfLabels"/>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/removeAll"/>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/getLabelsByNamespace">
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/getLabelsByNamespace/ns"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/hasLabel">
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/hasLabel/fullName"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/removeLabel.1">
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/removeLabel.1/namespace"/>
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/removeLabel.1/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//LabelableElement/differences">
+        <genParameters ecoreParameter="graph.ecore#//LabelableElement/differences/obj"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="graph.ecore#//Edge">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference graph.ecore#//Edge/graph"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Edge/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Edge/target"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Edge/layers"/>
+    </genClasses>
+    <genClasses ecoreClass="graph.ecore#//IdentifiableElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//IdentifiableElement/id"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//IdentifiableElement/identifier"/>
+    </genClasses>
+    <genClasses ecoreClass="graph.ecore#//Label">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Label/namespace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Label/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Label/qName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Label/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference graph.ecore#//Label/labelableElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Label/valueString"/>
+      <genOperations ecoreOperation="graph.ecore#//Label/getNSSeperator"/>
+      <genOperations ecoreOperation="graph.ecore#//Label/clone"/>
+    </genClasses>
+    <genClasses ecoreClass="graph.ecore#//Graph">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Graph/indexMgr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference graph.ecore#//Graph/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference graph.ecore#//Graph/edges"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Graph/numOfNodes"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Graph/numOfEdges"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference graph.ecore#//Graph/layers"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Graph/numOfLayers"/>
+      <genOperations ecoreOperation="graph.ecore#//Graph/addNode">
+        <genParameters ecoreParameter="graph.ecore#//Graph/addNode/node"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/getNode">
+        <genParameters ecoreParameter="graph.ecore#//Graph/getNode/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/removeNode">
+        <genParameters ecoreParameter="graph.ecore#//Graph/removeNode/node"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/removeNodeById">
+        <genParameters ecoreParameter="graph.ecore#//Graph/removeNodeById/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/addEdge">
+        <genParameters ecoreParameter="graph.ecore#//Graph/addEdge/edge"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/getEdge">
+        <genParameters ecoreParameter="graph.ecore#//Graph/getEdge/edgeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/getEdges">
+        <genParameters ecoreParameter="graph.ecore#//Graph/getEdges/nodeId1"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/getEdges/nodeId2"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/getInEdges">
+        <genParameters ecoreParameter="graph.ecore#//Graph/getInEdges/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/getOutEdges">
+        <genParameters ecoreParameter="graph.ecore#//Graph/getOutEdges/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/removeEdgeById">
+        <genParameters ecoreParameter="graph.ecore#//Graph/removeEdgeById/edgeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/removeEdges"/>
+      <genOperations ecoreOperation="graph.ecore#//Graph/removeNodes"/>
+      <genOperations ecoreOperation="graph.ecore#//Graph/removeEdge">
+        <genParameters ecoreParameter="graph.ecore#//Graph/removeEdge/edge"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/changeEdgeSource">
+        <genParameters ecoreParameter="graph.ecore#//Graph/changeEdgeSource/edgeId"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/changeEdgeSource/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/changeEdgeTarget">
+        <genParameters ecoreParameter="graph.ecore#//Graph/changeEdgeTarget/edgeId"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/changeEdgeTarget/nodeId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/addNode.1">
+        <genParameters ecoreParameter="graph.ecore#//Graph/addNode.1/node"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/addNode.1/layer"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/addEdge.1">
+        <genParameters ecoreParameter="graph.ecore#//Graph/addEdge.1/edge"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/addEdge.1/layer"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/addLayer">
+        <genParameters ecoreParameter="graph.ecore#//Graph/addLayer/layer"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/getLayer">
+        <genParameters ecoreParameter="graph.ecore#//Graph/getLayer/layerId"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/getRoots"/>
+      <genOperations ecoreOperation="graph.ecore#//Graph/getLeafs"/>
+      <genOperations ecoreOperation="graph.ecore#//Graph/traverse">
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse/startNodes"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse/traverseType"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse/traverseId"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse/traverseHandler"/>
+      </genOperations>
+      <genOperations ecoreOperation="graph.ecore#//Graph/traverse.1">
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse.1/startNodes"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse.1/traverseType"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse.1/traverseId"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse.1/traverseHandler"/>
+        <genParameters ecoreParameter="graph.ecore#//Graph/traverse.1/isCycleSafe"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="graph.ecore#//Identifier">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Identifier/identifiableElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//Identifier/id"/>
+    </genClasses>
+    <genClasses ecoreClass="graph.ecore#//Layer">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference graph.ecore#//Layer/graph"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Layer/nodes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Layer/edges"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Layer/superLayer"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference graph.ecore#//Layer/subLayers"/>
+      <genOperations ecoreOperation="graph.ecore#//Layer/getAllSubLayers"/>
+      <genOperations ecoreOperation="graph.ecore#//Layer/getAllIncludedNodes"/>
+      <genOperations ecoreOperation="graph.ecore#//Layer/getAllIncludedEdges"/>
+    </genClasses>
+    <nestedGenPackages prefix="Index" disposableProviderFactory="true" ecorePackage="graph.ecore#//index">
+      <genClasses image="false" ecoreClass="graph.ecore#//index/Index">
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/Index/K"/>
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/Index/V"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/Index/numOfElements"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/Index/numOfElementIds"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/Index/indexMap"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/Index/estimatedCapacity"/>
+        <genOperations ecoreOperation="graph.ecore#//index/Index/addElement">
+          <genParameters ecoreParameter="graph.ecore#//index/Index/addElement/elementId"/>
+          <genParameters ecoreParameter="graph.ecore#//index/Index/addElement/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/Index/hasElement">
+          <genParameters ecoreParameter="graph.ecore#//index/Index/hasElement/elementId"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/Index/removeElement">
+          <genParameters ecoreParameter="graph.ecore#//index/Index/removeElement/element"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/Index/removeAll"/>
+      </genClasses>
+      <genClasses ecoreClass="graph.ecore#//index/SimpleIndex">
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/SimpleIndex/K"/>
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/SimpleIndex/V"/>
+        <genOperations ecoreOperation="graph.ecore#//index/SimpleIndex/getElement">
+          <genParameters ecoreParameter="graph.ecore#//index/SimpleIndex/getElement/elementId"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/SimpleIndex/removeElementById">
+          <genParameters ecoreParameter="graph.ecore#//index/SimpleIndex/removeElementById/elementId"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="graph.ecore#//index/IndexMgr">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference graph.ecore#//index/IndexMgr/indexes"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/IndexMgr/numOfIndexes"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference graph.ecore#//index/IndexMgr/graph"/>
+        <genOperations ecoreOperation="graph.ecore#//index/IndexMgr/addIndex">
+          <genParameters ecoreParameter="graph.ecore#//index/IndexMgr/addIndex/index"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/IndexMgr/hasIndex">
+          <genParameters ecoreParameter="graph.ecore#//index/IndexMgr/hasIndex/indexId"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/IndexMgr/getIndex">
+          <genParameters ecoreParameter="graph.ecore#//index/IndexMgr/getIndex/indexId"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/IndexMgr/removeIndex">
+          <genParameters ecoreParameter="graph.ecore#//index/IndexMgr/removeIndex/indexId"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/IndexMgr/removeAll"/>
+        <genOperations ecoreOperation="graph.ecore#//index/IndexMgr/removeElement">
+          <genParameters ecoreParameter="graph.ecore#//index/IndexMgr/removeElement/elementId"/>
+        </genOperations>
+      </genClasses>
+      <genClasses ecoreClass="graph.ecore#//index/ComplexIndex">
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/ComplexIndex/K"/>
+        <genTypeParameters ecoreTypeParameter="graph.ecore#//index/ComplexIndex/V"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute graph.ecore#//index/ComplexIndex/sortable"/>
+        <genOperations ecoreOperation="graph.ecore#//index/ComplexIndex/hasSlot">
+          <genParameters ecoreParameter="graph.ecore#//index/ComplexIndex/hasSlot/elementId"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/ComplexIndex/getSlot">
+          <genParameters ecoreParameter="graph.ecore#//index/ComplexIndex/getSlot/elementId"/>
+        </genOperations>
+        <genOperations ecoreOperation="graph.ecore#//index/ComplexIndex/getSlotIds"/>
+        <genOperations ecoreOperation="graph.ecore#//index/ComplexIndex/removeSlot">
+          <genParameters ecoreParameter="graph.ecore#//index/ComplexIndex/removeSlot/elementId"/>
+        </genOperations>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

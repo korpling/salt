@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin id="de.hu_berlin.german.korpling.saltnpepper.salt.salt-saltCommon" name="salt-saltCommon" version="1.1.3">
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="saltCommon"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.SaltCommonPackage"
+            genModel="model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated saltCommon -->
+      <package
+            uri="sCorpusStructure"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpusStructurePackage"
+            genModel="src/main/resources/model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated saltCommon -->
+      <package
+            uri="sDocumentStructure"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage"
+            genModel="src/main/resources/model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="corpusStructure"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.CorpusStructurePackage"
+            genModel="model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="documentStructure"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.DocumentStructurePackage"
+            genModel="model/saltCommon.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated saltSemantics -->
+      <package
+            uri="SaltSemantics"
+            class="de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsPackage"
+            genModel="src/main/resources/model/saltSemantics.genmodel"/>
+   </extension>
+
+</plugin>

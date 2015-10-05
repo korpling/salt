@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:include schemaLocation="StructuralInfo.xsd"/>
+    <xs:complexType name="sDocumentInfo">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <!-- There can be 3 types of countet data: meta data, structural info counts nodes/relations and
+             annotation data which includes the annotation names and their values.
+            This data can also be countet per layer -->
+            <xs:element name="structuralInfo"  type="structuralInfoType"/>
+            <xs:element name="sAnnotationInfo" type="sAnnotationInfo"/>
+            <xs:element name="sLayerInfo"      type="sLayerInfo"/>
+            <xs:element name="metaDataInfo"    type="structuralInfoType"/>
+            <!--<xs:element name="totalSAnnotationInfo" type="totalSAnnotationInfo"/>-->
+            <!-- TODO: Could be wrong here, now it is considered to be the count for annotations with no layer  -->
+           
+        </xs:choice>
+        <xs:attribute use="required" ref="sName"/>
+        <xs:attribute use="required" ref="id"/>
+        <xs:attribute use="optional" ref="generatedOn"/>
+        <xs:attribute use="optional" ref="href"/>
+        <xs:attribute use="optional" ref="rel-location"/>
+    </xs:complexType>
+    <xs:complexType name="sLayer">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="structuralInfo" type="structuralInfoType"/>
+            <xs:element name="sAnnotationInfo" type="sAnnotationInfo"/>
+        </xs:choice>
+        <xs:attribute ref="sName"/>
+    </xs:complexType>
+    <xs:complexType name="totalSAnnotationInfo">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="sAnnotationInfo" type="sAnnotationInfo"/>
+        </xs:choice>
+        <xs:attribute ref="sName"/>
+    </xs:complexType>
+
+    <xs:complexType name="sLayerInfo">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="structuralInfo" type="structuralInfoType"/>
+            <xs:element name="sAnnotationInfo" type="sAnnotationInfo"/>
+            <!--<xs:element name="sAnnotation" type="sAnnotation"/>-->
+        </xs:choice>
+        <xs:attribute ref="sName"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="sAnnotationInfo">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="sValue" type="sValue" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:choice>
+        <xs:attribute use="required" ref="sName"/>
+        <xs:attribute use="required" ref="occurrences"/>
+        <xs:attribute use="required" ref="type"/>
+    </xs:complexType>
+
+    <xs:complexType name="sValue">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute use="required" ref="occurrences"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="sAnnotation">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute use="required" ref="sName"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:element name="sDocumentInfo" type="sDocumentInfo"/>
+
+</xs:schema>

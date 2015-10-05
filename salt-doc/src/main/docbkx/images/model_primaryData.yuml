@@ -1,0 +1,3 @@
+//see yuml.me
+[:STextualDS|sText]<>-[:SFeature|sNamespace='salt';sData='sData';sValue='Is this example more complicated than it appears to be']
+

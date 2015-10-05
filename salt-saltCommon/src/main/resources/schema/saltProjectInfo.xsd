@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:include schemaLocation="sCorpusInfo.xsd"/>
+    <xs:element name="saltProjectInfo" type="saltProjectInfo"> </xs:element>
+    
+    <xs:complexType name="saltProjectInfo">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="sCorpusInfo" minOccurs="0" maxOccurs="unbounded"/>
+            
+            <!-- There can be 3 types of countet data: meta data, structural info counts nodes/relations and
+             annotation data which includes the annotation names and their values.
+            This data can also be countet per layer -->
+            <xs:element name="structuralInfo"  type="structuralInfoType"/>
+            <xs:element name="sAnnotationInfo" type="sAnnotationInfo"/>
+            <xs:element name="sLayerInfo"      type="sLayerInfo"/>
+            <xs:element name="metaDataInfo"    type="structuralInfoType"/>
+        </xs:choice>
+        <xs:attribute use="required" ref="sName"/>
+        <xs:attribute use="required" ref="generatedOn"/>
+    </xs:complexType>    
+</xs:schema>

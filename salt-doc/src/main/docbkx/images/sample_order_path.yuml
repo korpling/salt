@@ -1,0 +1,7 @@
+//see: yuml.me
+
+[t1|'The']-w_order>[t2|'streets']
+[t2]-w_order>[t3|'of']
+[t3]-w_order>[s1]
+[s1]->[t5|'York']
+[s1]->[t4|'New']
