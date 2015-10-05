@@ -57,7 +57,7 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 	@Override
 	public void setId(String id) {
 		if ((id != null) && (!id.isEmpty())) {
-			Identifier identifier = GraphFactory.createIdentifier(this, id);
+			GraphFactory.createIdentifier(this, id);
 		}
 	}
 
