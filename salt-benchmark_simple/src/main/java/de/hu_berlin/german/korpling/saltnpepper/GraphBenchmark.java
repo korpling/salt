@@ -35,21 +35,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.GraphFactory;
+import org.corpus_tools.salt.graph.Label;
+import org.corpus_tools.salt.graph.Layer;
+import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.GraphFactoryImpl;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-
-import de.hu_berlin.u.saltnpepper.graph.Graph;
-import de.hu_berlin.u.saltnpepper.graph.GraphFactory;
-import de.hu_berlin.u.saltnpepper.graph.Label;
-import de.hu_berlin.u.saltnpepper.graph.Layer;
-import de.hu_berlin.u.saltnpepper.graph.Node;
-import de.hu_berlin.u.saltnpepper.graph.Relation;
-import de.hu_berlin.u.saltnpepper.graph.impl.GraphFactoryImpl;
-import de.hu_berlin.u.saltnpepper.salt.SaltFactory;
 
 public class GraphBenchmark {
 
