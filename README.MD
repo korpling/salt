@@ -13,5 +13,5 @@ mvn clean package -P doxygen
 ```
 to compile everything. The result will be located in the "target/doxygen" folder.
 
-To the documentation use the link:
-korpling.github.io/salt/doc-snapshot
+To the documentation follow this link:
+https://korpling.github.io/salt/doc-snapshot
