@@ -16,6 +16,10 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<guava.version>14.0.1</guava.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
+		<findbugs-maven-plugin.version>3.0.2</findbugs-maven-plugin.version>
+		<maven-surefire-plugin.version>2.15</maven-surefire-plugin.version>
+		<maven-site-plugin.version>3.1</maven-site-plugin.version>
+		<maven-project-info-reports-plugin.version>2.4</maven-project-info-reports-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -35,7 +39,7 @@
 		</dependency>
 		<!-- automatic language detection -->
 		<dependency>
-			<groupId>org.knallgrau</groupId>
+			<groupId>org.knallgrau.utils</groupId>
 			<artifactId>textcat</artifactId>
 			<version>${textcat.version}</version>
 			<type>jar</type>
@@ -99,13 +103,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.1</version>
+				<version>${maven-site-plugin.version}</version>
 				<configuration>
 					<reportPlugins>
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-project-info-reports-plugin</artifactId>
-							<version>2.4</version>
+							<version>${maven-project-info-reports-plugin.version}</version>
 							<configuration>
 								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 							</configuration>
@@ -119,7 +123,7 @@
 						<plugin>
 							<groupId>org.codehaus.mojo</groupId>
 							<artifactId>findbugs-maven-plugin</artifactId>
-							<version>3.0.2</version>
+							<version>${findbugs-maven-plugin.version}</version>
 							<configuration>
 								<excludeFilterFile>${basedir}/src/findbugs/excludeFilter.xml</excludeFilterFile>
 							</configuration>
@@ -132,7 +136,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.15</version>
+				<version>${maven-surefire-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
 	<artifactId>salt</artifactId>
@@ -10,8 +11,8 @@
 		<module>salt-benchmark</module>
 		<module>salt-doc</module>
 	</modules>
-	<description>Salt is an abstract and graph based meta model for dealing with linguistic annotated data. Salt describes a minimum of semantic and only handles the structure of linguistic data.</description>
-	<url>https://korpling.german.hu-berlin.de/p/projects/salt</url>
+	<description>A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</description>
+	<url>http://corpus-tools.org/salt/</url>
 	<issueManagement>
 		<system>GitHub</system>
 		<url>https://github.com/korpling/salt/issues</url>
@@ -31,23 +32,8 @@
 		<connection>scm:git:git://github.com/korpling/salt.git</connection>
 		<developerConnection>scm:git:git@github.com:korpling/salt.git</developerConnection>
 		<url>https://github.com/korpling/salt</url>
-	  <tag>HEAD</tag>
-  </scm>
-	<distributionManagement>
-		<repository>
-			<id>korpling</id>
-			<name>korpling maven repo</name>
-			<url>file:///srv/www/maven2/</url>
-			<!-- <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url> -->
-		</repository>
-	</distributionManagement>
-	<repositories>
-		<repository>
-			<id>korpling</id>
-			<name>korpling maven repo</name>
-			<url>http://korpling.german.hu-berlin.de/maven2</url>
-		</repository>
-	</repositories>
+		<tag>HEAD</tag>
+	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<component.descriptor.name>serviceComponents.xml</component.descriptor.name>
@@ -63,7 +49,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<commons.lang3.version>3.3.2</commons.lang3.version>
 		<maven-bundle-plugin.version>2.5.3</maven-bundle-plugin.version>
-		<!-- <maven-bundle-plugin.version>2.1.0</maven-bundle-plugin.version>-->
+		<!-- <maven-bundle-plugin.version>2.1.0</maven-bundle-plugin.version> -->
 		<maven-resources-plugin.version>2.7</maven-resources-plugin.version>
 		<maven-source-plugin.version>2.4</maven-source-plugin.version>
 		<maven-site-plugin.version>3.4</maven-site-plugin.version>
@@ -149,7 +135,6 @@
 					<filesets>
 						<fileset>
 							<directory>META-INF</directory>
-							<directory>_TMP</directory>
 							<followSymlinks>false</followSymlinks>
 						</fileset>
 					</filesets>
@@ -271,13 +256,4 @@
 		<finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName>
 	</build>
 	<name>${project.groupId}.${project.artifactId}</name>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
-			</plugin>
-		</plugins>
-	</reporting>
 </project>

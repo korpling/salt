@@ -10,7 +10,7 @@
 	<artifactId>salt-doc</artifactId>
 	<name>salt-doc</name>
 	<packaging>pom</packaging>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<site.path>doc-snapshot</site.path>
@@ -60,16 +60,15 @@
 						<checkinComment>update documentation for version
 							${project.version} (${site.path})
 
-							Original revision is ${buildNumber}.</checkinComment>
+							Original revision is
+							${buildNumber}.</checkinComment>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
 
-
 	<profiles>
-
 		<profile>
 			<id>release</id>
 			<properties>
@@ -87,10 +86,8 @@
 
 		<profile>
 			<id>doxygen</id>
-
 			<build>
 				<plugins>
-
 					<!-- make sure all paths are correct by replacing the properties -->
 					<plugin>
 						<artifactId>maven-resources-plugin</artifactId>
@@ -132,7 +129,7 @@
 						file -->
 					<plugin>
 						<artifactId>maven-clean-plugin</artifactId>
-						<version>2.6.1</version>
+						<version>${maven-clean-plugin.version}</version>
 						<executions>
 							<execution>
 								<id>remove-doxygen-sqlitedb</id>
@@ -169,10 +166,8 @@
 							</execution>
 						</executions>
 					</plugin>
-
 				</plugins>
 			</build>
-
 		</profile>
 	</profiles>
 </project>
