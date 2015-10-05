@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
-		<artifactId>saltSimple</artifactId>
+		<artifactId>salt</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<artifactId>saltSimple-doc</artifactId>
+	<artifactId>salt-doc</artifactId>
 	<name>salt-doc</name>
 	<packaging>pom</packaging>
 	

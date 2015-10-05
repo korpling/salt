@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
-	<artifactId>saltSimple</artifactId>
+	<artifactId>salt</artifactId>
 	<packaging>pom</packaging>
 	<version>3.0.0-SNAPSHOT</version>
 	<modules>
-		<module>salt-core</module>
-		<module>salt-benchmark_simple</module>
-		<module>saltSimple-doc</module>
+		<module>salt-api</module>
+		<module>salt-benchmark</module>
+		<module>salt-doc</module>
 	</modules>
 	<description>Salt is an abstract and graph based meta model for dealing with linguistic annotated data. Salt describes a minimum of semantic and only handles the structure of linguistic data.</description>
 	<url>https://korpling.german.hu-berlin.de/p/projects/salt</url>
