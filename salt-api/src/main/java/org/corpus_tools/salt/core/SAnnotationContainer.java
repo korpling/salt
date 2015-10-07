@@ -91,6 +91,19 @@ public interface SAnnotationContainer extends LabelableElement {
 	 *         exists, null otherwise
 	 */
 	public SAnnotation getAnnotation(String qName);
+	
+	/**
+	 * Returns an annotation having the passed qualified name, if this container
+	 * contains such an annotation.
+	 *
+	 * @param namespace
+	 *            the namespace of the annotation.
+	 * @param name
+	 *            the name of the annotation.
+	 * @return an annotation having the qualified name, if such an annotation
+	 *         exists, null otherwise
+	 */
+	public SAnnotation getAnnotation(String namespace, String name);
 
 	/**
 	 * Returns an iterator to iterate over the {@link SAnnotation} objects

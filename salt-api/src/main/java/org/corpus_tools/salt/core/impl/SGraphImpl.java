@@ -214,6 +214,12 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	public SAnnotation getAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getAnnotation(this, qName));
 	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public SAnnotation getAnnotation(String namespace, String name) {
+		return (SAnnotationContainerHelper.getAnnotation(this, SaltUtil.createQName(namespace, name)));
+	}
 
 	/** {@inheritDoc} **/
 	@Override

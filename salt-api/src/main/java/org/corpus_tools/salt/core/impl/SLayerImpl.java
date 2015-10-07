@@ -48,6 +48,12 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 	public SAnnotation getAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getAnnotation(this, qName));
 	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public SAnnotation getAnnotation(String namespace, String name) {
+		return (SAnnotationContainerHelper.getAnnotation(this, SaltUtil.createQName(namespace, name)));
+	}
 
 	/** {@inheritDoc} **/
 	@Override
