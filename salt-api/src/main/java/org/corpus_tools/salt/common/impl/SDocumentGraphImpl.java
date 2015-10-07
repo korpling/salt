@@ -709,7 +709,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> getSortedSTokenByText(List<SToken> tokens2sort) {
+	public List<SToken> getSortedTokenByText(List<SToken> tokens2sort) {
 		return (DataSourceAccessor.getSortedSTokenByText(this, tokens2sort));
 	}
 

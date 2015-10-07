@@ -1008,7 +1008,7 @@ public class SDocumentGraphTest {
 		sTokens2Sort.add(tok3);
 		sTokens2Sort.add(tok4);
 
-		List<SToken> sortedSTokens = getFixture().getSortedSTokenByText(sTokens2Sort);
+		List<SToken> sortedSTokens = getFixture().getSortedTokenByText(sTokens2Sort);
 
 		assertNotNull(sortedSTokens);
 		assertEquals(sTokens2Sort.size(), sortedSTokens.size());

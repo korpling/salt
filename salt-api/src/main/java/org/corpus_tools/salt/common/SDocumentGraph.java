@@ -622,7 +622,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            the list of {@link SToken} objects to sort
 	 * @return list of tokens in order of left text position
 	 */
-	public List<SToken> getSortedSTokenByText(List<SToken> tokens2sort);
+	public List<SToken> getSortedTokenByText(List<SToken> tokens2sort);
 
 	/**
 	 * Returns all {@link SToken} objects being contained in the list

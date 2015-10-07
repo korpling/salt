@@ -267,7 +267,7 @@ public class DataSourceAccessor {
 	}
 
 	/**
-	 * {@inheritDoc SDocumentGraph#getSortedSTokenByText(List)}
+	 * {@inheritDoc SDocumentGraph#getSortedTokenByText(List)}
 	 */
 	public static List<SToken> getSortedSTokenByText(SDocumentGraph documentGraph, List<SToken> sTokens2sort) {
 		if (documentGraph == null) {
@@ -286,7 +286,7 @@ public class DataSourceAccessor {
 	}
 
 	/**
-	 * {@inheritDoc SDocumentGraph#getSortedSTokenByText()}
+	 * {@inheritDoc SDocumentGraph#getSortedTokenByText()}
 	 */
 	public static List<SToken> getSortedSTokenByText(SDocumentGraph documentGraph) {
 		List<SToken> retVal = null;
