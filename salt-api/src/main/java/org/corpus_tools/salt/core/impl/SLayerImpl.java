@@ -160,6 +160,12 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 	public SFeature getFeature(String qName) {
 		return (SAnnotationContainerHelper.getFeature(this, qName));
 	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public SFeature getFeature(String namespace, String name) {
+		return (SAnnotationContainerHelper.getFeature(this, SaltUtil.createQName(namespace, name)));
+	}
 
 	/** {@inheritDoc} **/
 	@Override

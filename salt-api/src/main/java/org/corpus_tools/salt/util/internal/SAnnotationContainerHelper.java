@@ -385,7 +385,7 @@ public class SAnnotationContainerHelper {
 		}
 		return (anno);
 	}
-
+	
 	public static Set<SFeature> createFeatures(SAnnotationContainer container, String annotationString) {
 		Set<SFeature> retVal = new HashSet<>();
 		for (Triple<String, String, String> triple : unmarshalString(annotationString)) {

@@ -160,6 +160,12 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	public SFeature getFeature(String qName) {
 		return (SAnnotationContainerHelper.getFeature(this, qName));
 	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public SFeature getFeature(String namespace, String name) {
+		return (SAnnotationContainerHelper.getFeature(this, SaltUtil.createQName(namespace, name)));
+	}
 
 	/** {@inheritDoc} **/
 	@Override

@@ -307,6 +307,11 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public SFeature getFeature(String qName) {
 		return (SAnnotationContainerHelper.getFeature(this, qName));
 	}
+	
+	@Override
+	public SFeature getFeature(String namespace, String name) {
+		return (SAnnotationContainerHelper.getFeature(this, SaltUtil.createQName(namespace, name)));
+	}
 
 	/** {@inheritDoc} **/
 	@Override

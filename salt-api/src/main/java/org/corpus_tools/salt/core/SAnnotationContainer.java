@@ -305,6 +305,20 @@ public interface SAnnotationContainer extends LabelableElement {
 	 *         null otherwise
 	 */
 	public SFeature getFeature(String qName);
+	
+	/**
+	 * Returns an feature having the passed qualified name, if this container
+	 * contains such an feature.
+	 * 
+	 * @param namespace
+	 *            the namespace of the feature.
+	 *
+	 * @param name
+	 *            the name of the feature.
+	 * @return an feature having the qualified name, if such an feature exists,
+	 *         null otherwise
+	 */
+	public SFeature getFeature(String namespace, String name);
 
 	/**
 	 * Returns an iterator to iterate over the {@link SFeature} objects
