@@ -53,10 +53,14 @@ public class Persist_SaltXML10_Test {
 		SDocument template = SaltFactory.createSDocument();
 		template.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		template.getDocumentGraph().createTextualDS("This is a text with linebreaks\n and tabs\t.");
+		// test attributes
+		template.getDocumentGraph().createAnnotation("mnys", "myname", "This is a \"text\" with linebreaks\n and tabs\t.");
+		
 		// create other
 		SDocument other = SaltFactory.createSDocument();
 		other.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		other.getDocumentGraph().createTextualDS("This is a text with linebreaks\n and tabs\t.");
+		other.getDocumentGraph().createAnnotation("mnys", "myname", "This is a \"text\" with linebreaks\n and tabs\t.");
 
 		// store other document
 		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_text_specialCharacters.salt");

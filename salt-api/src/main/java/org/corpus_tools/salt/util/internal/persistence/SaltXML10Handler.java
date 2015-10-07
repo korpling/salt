@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocumentGraph;
@@ -331,18 +330,16 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 		Object retVal = null;
 		if ((value == null) || (value.length() < 3)) {
 		} else if (value.startsWith("T")) {
-			byte[] rawBytes = BaseEncoding.base64().decode(value.substring(3));
-			retVal = SerializationUtils.deserialize(rawBytes);
-			// retVal = StringEscapeUtils.unescapeXml(value.substring(3));
+			retVal = value.substring(3);
 		} else if (value.startsWith("B")) {
-			retVal = Boolean.parseBoolean(StringEscapeUtils.unescapeXml(value.substring(3)));
+			retVal = Boolean.parseBoolean(value.substring(3));
 		} else if (value.startsWith("N")) {
-			retVal = Long.parseLong(StringEscapeUtils.unescapeXml(value.substring(3)));
+			retVal = Long.parseLong(value.substring(3));
 		} else if (value.startsWith("F")) {
-			retVal = Float.parseFloat(StringEscapeUtils.unescapeXml(value.substring(3)));
+			retVal = Float.parseFloat(value.substring(3));
 		} else if (value.startsWith("U")) {
-			retVal = URI.createURI(StringEscapeUtils.unescapeXml(value.substring(3)));
-		} else if (value.startsWith("O")) {
+			retVal = URI.createURI(value.substring(3));
+		}else if (value.startsWith("O")) {
 			byte[] rawBytes = BaseEncoding.base64().decode(value.substring(3));
 			retVal = SerializationUtils.deserialize(rawBytes);
 		}

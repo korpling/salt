@@ -1,5 +1,6 @@
 package org.corpus_tools.salt.util.internal.persistence;
 
+import com.ctc.wstx.stax.WstxOutputFactory;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,7 +15,6 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusDocumentRelation;
 import org.corpus_tools.salt.common.SCorpusGraph;
@@ -98,8 +98,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	}
 
 	private File path = null;
-	private final XMLOutputFactory xmlFactory = XMLOutputFactory.newFactory();
-
+	private final XMLOutputFactory xmlFactory = new WstxOutputFactory();
+	
 	/**
 	 * Writes a salt project to the file given by {@link #getPath()}.
 	 * 
@@ -109,7 +109,6 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		XMLStreamWriter xml = null;
 		try (OutputStream output = new FileOutputStream(path)) {
 			xml = xmlFactory.createXMLStreamWriter(output, "UTF-8");
-
 			xml.writeStartDocument("1.0");
 			if (isPrettyPrint) {
 				xml.writeCharacters("\n");
@@ -206,7 +205,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 						xml.writeCharacters("\n");
 						xml.writeCharacters("\t");
 					}
-					writeLable(xml, labelIt.next());
+					writeLabel(xml, labelIt.next());
 				}
 			}
 			// stores the position of a single node in the list of nodes to
@@ -311,7 +310,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					xml.writeCharacters("\n");
 					xml.writeCharacters("\t");
 				}
-				writeLable(xml, labelIt.next());
+				writeLabel(xml, labelIt.next());
 			}
 
 			// stores the position of a single layer in the list of layers to
@@ -378,7 +377,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            stream to write data to
 	 * @throws XMLStreamException
 	 */
-	public void writeLable(XMLStreamWriter xml, Label label) throws XMLStreamException {
+	public void writeLabel(XMLStreamWriter xml, Label label) throws XMLStreamException {
 		// ignore when label is reference to SDocument
 		if (label != null && label.getValue() instanceof SDocument) {
 			return;
@@ -431,9 +430,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		String retVal = null;
 		if (value == null) {
 		} else if (value instanceof String) {
-			// retVal = "T::" + StringEscapeUtils.escapeXml11((String) value);
-			byte[] rawBytes = SerializationUtils.serialize((Serializable) value);
-			retVal = "T::" + BaseEncoding.base64().encode(rawBytes);
+			retVal = "T::" + (String) value;
 		} else if (value instanceof Boolean) {
 			retVal = "B::" + value.toString();
 		} else if (value instanceof Integer) {
@@ -445,7 +442,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		} else if (value instanceof Float) {
 			retVal = "F::" + value.toString();
 		} else if (value instanceof URI) {
-			retVal = "U::" + StringEscapeUtils.escapeXml11(value.toString());
+			retVal = "U::" + value.toString();
 		} else if (value instanceof Serializable) {
 			byte[] rawBytes = SerializationUtils.serialize((Serializable) value);
 			retVal = "O::" + BaseEncoding.base64().encode(rawBytes);
@@ -513,7 +510,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeCharacters("\t");
 				xml.writeCharacters("\t");
 			}
-			writeLable(xml, labelIt.next());
+			writeLabel(xml, labelIt.next());
 		}
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
@@ -591,7 +588,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeCharacters("\t");
 				xml.writeCharacters("\t");
 			}
-			writeLable(xml, labelIt.next());
+			writeLabel(xml, labelIt.next());
 		}
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
@@ -664,7 +661,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeCharacters("\t");
 				xml.writeCharacters("\t");
 			}
-			writeLable(xml, labelIt.next());
+			writeLabel(xml, labelIt.next());
 		}
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
