@@ -34,6 +34,9 @@ import org.eclipse.emf.common.util.URI;
  * relation in Salt is represented by an object of type {@link SCorpusRelation}.
  * How to add a {@link SDocument} object to a {@link SCorpusGraph} object please
  * see the documentation of {@link SCorpusGraph}.
+ * <p>
+ * A document passes it's id to a document graph, when one is set.
+ * </p>
  * 
  * @author florian
  */

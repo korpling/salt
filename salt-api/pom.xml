@@ -84,8 +84,7 @@
 						<Bundle-Version>${project.version}</Bundle-Version>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
 						<Export-Package>
-							de.hu_berlin.u.saltnpepper.graph.*,
-							de.hu_berlin.u.saltnpepper.salt.*,
+							org.corpus_tools.salt.*,
 							com.neovisionaries.i18n, !org.knallgrau.utils.textcat,
 							org.apache.commons.lang3;version="${commons.lang3.version}"
 						</Export-Package>

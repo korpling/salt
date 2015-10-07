@@ -69,6 +69,22 @@ public class SDocumentTest {
 		assertEquals(graph, getFixture().getDocumentGraph());
 	}
 
+	/** Checks whether the id of the document graph's id is set when the document's graph is set **/
+	@Test
+	public void testSetDocumentGraphId(){
+		SaltFactory.createIdentifier(getFixture(), "myDoc");
+		getFixture().setDocumentGraph(SaltFactory.createSDocumentGraph());
+		assertEquals(getFixture().getId(), getFixture().getDocumentGraph().getId());
+	}
+	
+	/** Checks whether the id of the document's graph id is set when the document's id is set **/
+	@Test
+	public void testSetDocumentGraphId_wayaround(){
+		getFixture().setDocumentGraph(SaltFactory.createSDocumentGraph());
+		SaltFactory.createIdentifier(getFixture(), "myDoc");
+		assertEquals(getFixture().getId(), getFixture().getDocumentGraph().getId());
+	}
+	
 	// @Test
 	// public void testSaveSDocumentGraph__URI() {
 	// SampleGenerator.createSDocumentStructure(this.getFixture());

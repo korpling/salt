@@ -26,6 +26,7 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
@@ -87,6 +88,32 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			addFeature(sFeature);
 		}
 		sFeature.setValue(documentGraph);
+		if (getId() != null && !getId().isEmpty()) {
+			SaltFactory.createIdentifier(documentGraph, getId());
+		}
+	}
+	/**
+	 * {@inheritDoc} Creates a new {@link Identifier} and sets it to the
+	 * document graph. The identifier has the same id value as this document.
+	 **/
+	@Override
+	public void setId(String id) {
+		super.setId(id);
+		if (getDocumentGraph() != null && getId() != null && !getId().isEmpty()) {
+			SaltFactory.createIdentifier(getDocumentGraph(), getId());
+		}
+	}
+
+	/**
+	 * {@inheritDoc} Creates a new {@link Identifier} and sets it to the
+	 * document graph. The identifier has the same id value as this document.
+	 **/
+	@Override
+	public void setIdentifier(Identifier identifier) {
+		super.setIdentifier(identifier);
+		if (getDocumentGraph() != null && getId() != null && !getId().isEmpty()) {
+			SaltFactory.createIdentifier(getDocumentGraph(), getId());
+		}
 	}
 
 	/** {@inheritDoc} **/
@@ -138,13 +165,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	/** {@inheritDoc} **/
 	@Override
 	public void loadDocumentGraph(URI documentGraphLocation) {
-		 SDocumentGraph sDocumentGraph= SaltUtil.loadDocumentGraph(documentGraphLocation);
-		 setDocumentGraph(sDocumentGraph);
-		 
-		 //TODO check whether this still makes sense
-		 //remove SFeature containing location of where SaltXML file
-		 //containing the loaded object
-//		 removeLabel(SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME);
+		SDocumentGraph sDocumentGraph = SaltUtil.loadDocumentGraph(documentGraphLocation);
+		setDocumentGraph(sDocumentGraph);
 	}
 
 	@Override
@@ -156,21 +178,20 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		str.append(")");
 		return (str.toString());
 	}
-	
+
 	@Override
 	public SCorpusGraph getGraph() {
 		SGraph superGraph = super.getGraph();
-		
-		if(superGraph == null) {
+
+		if (superGraph == null) {
 			return null;
 		}
-		
-		if(superGraph instanceof SCorpusGraph) {
+
+		if (superGraph instanceof SCorpusGraph) {
 			return (SCorpusGraph) superGraph;
 		}
-		
-		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " 
-				+ superGraph.getClass().getName() + ")");
+
+		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " + superGraph.getClass().getName() + ")");
 	}
-	
+
 } // SDocumentImpl
