@@ -1,7 +1,6 @@
 package org.corpus_tools.salt.index;
 
-import com.google.common.base.Preconditions;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -11,13 +10,12 @@ import java.util.Map.Entry;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.corpus_tools.salt.exceptions.SaltException;
+
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-
-import java.io.Serializable;
-
-import org.corpus_tools.salt.exceptions.SaltException;
 
 @SuppressWarnings("serial")
 public class IndexMgrImpl implements IndexMgr {

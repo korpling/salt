@@ -1,6 +1,8 @@
 package org.corpus_tools.salt.core.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -19,9 +21,6 @@ import org.corpus_tools.salt.graph.impl.NodeImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
-
-import java.util.Collections;
-import java.util.HashSet;
 
 @SuppressWarnings("serial")
 public class SNodeImpl extends NodeImpl implements SNode {

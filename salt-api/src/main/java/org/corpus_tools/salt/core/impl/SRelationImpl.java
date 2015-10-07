@@ -1,5 +1,6 @@
 package org.corpus_tools.salt.core.impl;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -10,13 +11,10 @@ import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
-import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
-
-import java.util.HashSet;
 
 @SuppressWarnings("serial")
 public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImpl<S, T> implements SRelation<S, T> {

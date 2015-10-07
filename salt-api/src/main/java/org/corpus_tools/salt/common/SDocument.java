@@ -19,7 +19,6 @@ package org.corpus_tools.salt.common;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.core.SFeature;
-import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.eclipse.emf.common.util.URI;
 
@@ -57,8 +56,7 @@ public interface SDocument extends SNode {
 	public void setDocumentGraph(SDocumentGraph documentGraph);
 
 	/**
-	 * Returns the value of the '<em><b>SDocument Graph Location</b></em>'
-	 * attribute. Returns the location of the contained {@link SDocumentGraph}
+	 * Returns the location of the contained {@link SDocumentGraph}
 	 * object, in case it is persisted. The location is stored via a
 	 * {@link SFeature} object having the namespace
 	 * {@value SaltFactory#NAMESPACE_SALT} and the name

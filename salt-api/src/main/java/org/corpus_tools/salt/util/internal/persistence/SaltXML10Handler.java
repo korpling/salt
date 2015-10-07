@@ -17,7 +17,6 @@
  */
 package org.corpus_tools.salt.util.internal.persistence;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

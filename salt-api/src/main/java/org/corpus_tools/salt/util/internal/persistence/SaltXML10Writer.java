@@ -1,11 +1,10 @@
 package org.corpus_tools.salt.util.internal.persistence;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -53,9 +52,6 @@ import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.io.BaseEncoding;
-
-import java.io.IOException;
-import java.io.OutputStream;
 
 public class SaltXML10Writer implements SaltXML10Dictionary {
 
