@@ -82,8 +82,6 @@ public enum SALT_TYPE {
 	//
 	SCORPUS(SCorpus.class);
 
-
-
 	/** Java class which represents this Salt type **/
 	private Class<?> javaType = null;
 

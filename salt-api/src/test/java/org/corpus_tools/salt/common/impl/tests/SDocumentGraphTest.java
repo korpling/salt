@@ -562,11 +562,11 @@ public class SDocumentGraphTest {
 	public void testGetSNodeBySequence__DataSourceSequence() {
 		String text1 = "This is a sample text.";
 		String text2 = "A sample text.";
-		
+
 		// start: create sample graph
 		// start: sTokens for sText1
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-		
+
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
 
@@ -587,7 +587,7 @@ public class SDocumentGraphTest {
 		// end: sTokens for sText1
 		// start: sTokens for sText2
 		STextualDS sText2 = getFixture().createTextualDS(text2);
-	
+
 		SToken tok3_1 = getFixture().createToken(sText2, 9, 13);
 		tok3_1.setName("tok3_1");
 
@@ -927,10 +927,10 @@ public class SDocumentGraphTest {
 	public void testSortSTokenByText() {
 		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
-	
+
 		// start: create sample graph
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-	
+
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
 
@@ -980,10 +980,10 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSortedSTokenByText__EList() {
 		String text1 = "This is a sample text.";
-	
+
 		// start: create sample graph
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-	
+
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
 
@@ -1026,10 +1026,10 @@ public class SDocumentGraphTest {
 	public void testGetSortedSTokenByText() {
 		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
-	
+
 		// start: create sample graph
 		STextualDS sText1 = getFixture().createTextualDS(text1);
-	
+
 		SToken tok2 = getFixture().createToken(sText1, 5, 7);
 		tok2.setName("tok2");
 
@@ -1075,7 +1075,7 @@ public class SDocumentGraphTest {
 		List<SToken> sTokens = new ArrayList<>();
 		String text1 = "This is a sample text.";
 		String text2 = "A sample text.";
-	
+
 		// start: create sample graph
 		// start: sTokens for sText1
 		STextualDS sText1 = getFixture().createTextualDS(text1);
@@ -1100,7 +1100,7 @@ public class SDocumentGraphTest {
 		// end: sTokens for sText1
 		// start: sTokens for sText2
 		STextualDS sText2 = getFixture().createTextualDS(text2);
-	
+
 		SToken tok3_1 = getFixture().createToken(sText2, 9, 13);
 		tok3_1.setName("tok3_1");
 

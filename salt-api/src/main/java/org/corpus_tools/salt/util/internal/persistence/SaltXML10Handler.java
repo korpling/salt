@@ -332,8 +332,8 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 		if ((value == null) || (value.length() < 3)) {
 		} else if (value.startsWith("T")) {
 			byte[] rawBytes = BaseEncoding.base64().decode(value.substring(3));
-			retVal= SerializationUtils.deserialize(rawBytes);
-//			retVal = StringEscapeUtils.unescapeXml(value.substring(3));
+			retVal = SerializationUtils.deserialize(rawBytes);
+			// retVal = StringEscapeUtils.unescapeXml(value.substring(3));
 		} else if (value.startsWith("B")) {
 			retVal = Boolean.parseBoolean(StringEscapeUtils.unescapeXml(value.substring(3)));
 		} else if (value.startsWith("N")) {
@@ -342,9 +342,9 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			retVal = Float.parseFloat(StringEscapeUtils.unescapeXml(value.substring(3)));
 		} else if (value.startsWith("U")) {
 			retVal = URI.createURI(StringEscapeUtils.unescapeXml(value.substring(3)));
-		}else if (value.startsWith("O")) {
+		} else if (value.startsWith("O")) {
 			byte[] rawBytes = BaseEncoding.base64().decode(value.substring(3));
-			retVal= SerializationUtils.deserialize(rawBytes);
+			retVal = SerializationUtils.deserialize(rawBytes);
 		}
 		return (retVal);
 	}

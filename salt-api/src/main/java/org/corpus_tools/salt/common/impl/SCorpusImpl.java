@@ -29,16 +29,15 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	@Override
 	public SCorpusGraph getGraph() {
 		SGraph superGraph = super.getGraph();
-		
-		if(superGraph == null) {
+
+		if (superGraph == null) {
 			return null;
 		}
-		
-		if(superGraph instanceof SCorpusGraph) {
+
+		if (superGraph instanceof SCorpusGraph) {
 			return (SCorpusGraph) superGraph;
 		}
-		
-		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " 
-				+ superGraph.getClass().getName() + ")");
+
+		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " + superGraph.getClass().getName() + ")");
 	}
 }

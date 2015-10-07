@@ -21,7 +21,7 @@ public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathE
 	 * @return list of incoming relations
 	 */
 	public List<SRelation> getInRelations();
-	
+
 	/**
 	 * Returns all layers containing this node. This is a computed set and only
 	 * works, when this node is contained in a graph. If this list is used
@@ -31,7 +31,7 @@ public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathE
 	 */
 	@Override
 	public Set<SLayer> getLayers();
-	
+
 	@Override
 	public SGraph getGraph();
 }

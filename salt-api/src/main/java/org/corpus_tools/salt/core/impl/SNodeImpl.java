@@ -52,7 +52,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation<SNode,SNode>> inRelations = getGraph().getInRelations(getId());
+		List<SRelation<SNode, SNode>> inRelations = getGraph().getInRelations(getId());
 		if (inRelations != null) {
 			List<SRelation> sInRelList = new ArrayList<>();
 			for (SRelation rel : inRelations) {
@@ -65,7 +65,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 
 	@Override
 	public Set<SLayer> getLayers() {
-	Set<SLayer> layers = new HashSet<>();
+		Set<SLayer> layers = new HashSet<>();
 		if (getGraph() != null) {
 			Set<SLayer> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
@@ -78,8 +78,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		}
 		return (Collections.unmodifiableSet(layers));
 	}
-	
-	
 
 	// =======================================> SAnnotation
 	/** {@inheritDoc} **/
@@ -276,22 +274,21 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public URI getPath() {
 		return (SaltUtil.createSaltURI(getId()));
 	}
+
 	// =======================================< SPathElement
 
 	@Override
 	public SGraph getGraph() {
 		Graph superGraph = super.getGraph();
-		
-		if(superGraph == null) {
+
+		if (superGraph == null) {
 			return null;
 		}
-		
-		if(superGraph instanceof SGraph) {
+
+		if (superGraph instanceof SGraph) {
 			return (SGraph) superGraph;
 		}
-		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " 
-				+ superGraph.getClass().getName() + ")");
+		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
 	}
-	
-	
+
 }

@@ -49,21 +49,21 @@ import org.eclipse.emf.common.util.URI;
  * type {@link SCorpusRelation}, setting its source to the super corpus, setting
  * its target to the sub corpus and adding the relation to the
  * {@link SCorpusGraph} object by calling
- * {@link SCorpusGraph#addSRelation(SRelation)}
- * . But note, that first the second way contains more handwork and second it is
- * recommended to use the first appoach, because the {@link SElementId} object
- * belonging to the sub corpus can only represent the hierarchy, when the
- * {@link SCorpusGraph} knows about it, when adding the sub corpus. </br> The
- * 'real' linguistic data containing primary data, tokens, structures,
- * annotations and so on are contained in lets say a container-object called
- * document. Such a document is represented by the type {@link SDocument}. A
- * document always belongs to a corpus (if this corpus is a super or a sub
- * corpus makes no difference). Parallel to a corpus, a document is a
- * specialization of a node (in Salt of type {@link SNode}) as well. Such a
- * containment between a corpus and a document is represented by the type
- * {@link SCorpusDocumentRelation}, where the source of this relation is the
- * corpus and the target of this relation is the document. To add such a
- * {@link SDocument} object to the {@link SCorpusGraph} use the method
+ * {@link SCorpusGraph#addSRelation(SRelation)} . But note, that first the
+ * second way contains more handwork and second it is recommended to use the
+ * first appoach, because the {@link SElementId} object belonging to the sub
+ * corpus can only represent the hierarchy, when the {@link SCorpusGraph} knows
+ * about it, when adding the sub corpus. </br> The 'real' linguistic data
+ * containing primary data, tokens, structures, annotations and so on are
+ * contained in lets say a container-object called document. Such a document is
+ * represented by the type {@link SDocument}. A document always belongs to a
+ * corpus (if this corpus is a super or a sub corpus makes no difference).
+ * Parallel to a corpus, a document is a specialization of a node (in Salt of
+ * type {@link SNode}) as well. Such a containment between a corpus and a
+ * document is represented by the type {@link SCorpusDocumentRelation}, where
+ * the source of this relation is the corpus and the target of this relation is
+ * the document. To add such a {@link SDocument} object to the
+ * {@link SCorpusGraph} use the method
  * {@link SCorpusGraph#addDocument(SCorpus, SDocument)}. This method will
  * automatically create the relation between them. Like with adding a sub
  * corpus, here you can also do this by hand hand, but note that even here it is

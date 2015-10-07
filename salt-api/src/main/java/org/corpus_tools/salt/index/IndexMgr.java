@@ -43,7 +43,7 @@ public interface IndexMgr extends Serializable {
 	 * @param valueType
 	 *            type of the values in the index
 	 * @param <K>
-	 * @param <V> 
+	 * @param <V>
 	 */
 	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType);
 

@@ -56,11 +56,10 @@ public interface SDocument extends SNode {
 	public void setDocumentGraph(SDocumentGraph documentGraph);
 
 	/**
-	 * Returns the location of the contained {@link SDocumentGraph}
-	 * object, in case it is persisted. The location is stored via a
-	 * {@link SFeature} object having the namespace
-	 * {@value SaltFactory#NAMESPACE_SALT} and the name
-	 * {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
+	 * Returns the location of the contained {@link SDocumentGraph} object, in
+	 * case it is persisted. The location is stored via a {@link SFeature}
+	 * object having the namespace {@value SaltFactory#NAMESPACE_SALT} and the
+	 * name {@value SFEATURE_NAME#SDOCUMENT_GRAPH_LOCATION}.
 	 * 
 	 * @return location of persisted {@link SDocumentGraph} object as
 	 *         {@link URI}
@@ -116,8 +115,9 @@ public interface SDocument extends SNode {
 	 *            location of SaltXML to load {@link SDocumentGraph} object.
 	 */
 	void loadDocumentGraph(URI documentGraphLocation);
+
 	/** {@inheritDoc} **/
 	@Override
 	public SCorpusGraph getGraph();
-	
+
 } // SDocument

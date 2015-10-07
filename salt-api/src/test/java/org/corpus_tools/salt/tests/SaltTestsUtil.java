@@ -36,7 +36,7 @@ public class SaltTestsUtil {
 		if (segments == null) {
 			file = getTempTestFolder();
 		} else {
-			file = new File(getTempTestFolder().getAbsolutePath() + (segments.startsWith("/")?segments:"/"+segments));
+			file = new File(getTempTestFolder().getAbsolutePath() + (segments.startsWith("/") ? segments : "/" + segments));
 		}
 		if (!file.exists()) {
 			file.mkdirs();

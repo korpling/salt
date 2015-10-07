@@ -31,7 +31,7 @@ public class DOTEdge {
 
 	public String toString() {
 		StringBuilder retStr = new StringBuilder();
-		retStr.append("<"); 
+		retStr.append("<");
 		retStr.append(fromId);
 		retStr.append("> -> <");
 		retStr.append(toId);

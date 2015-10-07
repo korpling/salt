@@ -57,7 +57,7 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 		this.getFixture().setText(text);
 		assertEquals(text, getFixture().getText());
 	}
-	
+
 	/**
 	 * Tests if {@link STextualDS#getStart()} returns the same text as passed in
 	 * {@link STextualDS#setText(String)}

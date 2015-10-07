@@ -152,15 +152,15 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 */
 	protected void basicAddNode(N node) {
 		if (node == null) {
-			throw new SaltParameterException("node", "basicAddNode", GraphImpl.class ,"A null value is not allowed. ");
+			throw new SaltParameterException("node", "basicAddNode", GraphImpl.class, "A null value is not allowed. ");
 		}
-		
+
 		// check if node already exists
-		if(getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES_INVERSE, node)) {
+		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES_INVERSE, node)) {
 			// do nothing, node is already added
 			return;
 		}
-		
+
 		// if node has no id a new id will be given to node
 		if (node.getId() == null) {
 			node.setId("n" + getNodes().size());
@@ -174,7 +174,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 			node.setId(idBase + "_" + (getNodes().size() + i));
 			i++;
 		}// if node Id already exists, create new Id
-		
+
 		// add node to internal list
 		nodes.add(node);
 		// add node to id indexes
@@ -334,7 +334,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	@SuppressWarnings("unchecked")
 	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
 		if (relation == null) {
-			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class ,"A null value is not allowed. ");
+			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class, "A null value is not allowed. ");
 		}
 		if (relation.getSource() == null) {
 			throw new SaltInsertionException(this, relation, "The source node is empty. ");
@@ -348,11 +348,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		if ((relation.getTarget().getId() == null) || (!containsNode(relation.getTarget().getId()))) {
 			throw new SaltInsertionException(this, relation, "The target node of the passed relation does not belong to this graph. ");
 		}
-		
-		if(getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
+
+		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
 			return;
 		}
-		
+
 		// if relation has no id a new id will be given to relation
 		if (relation.getId() == null) {
 			relation.setId("r" + getRelations().size());

@@ -51,7 +51,7 @@ public class DOTNode {
 		}
 
 		if ((labels != null) && (labels.size() > 0)) {
-			StringBuilder labelStr = new StringBuilder(); 
+			StringBuilder labelStr = new StringBuilder();
 			labelStr.append("label=\"{{" + id + "}|");
 			boolean printSep = false;
 			for (String label : labels) {

@@ -65,6 +65,7 @@ public class SaltFactory {
 	public static void setFactory(ISaltFactory factory) {
 		SaltFactory.factory = factory;
 	}
+
 	// ===============================> graph
 	/**
 	 * Creates a new {@link Identifier} object of type {@link IdentifierImpl}.
@@ -78,9 +79,10 @@ public class SaltFactory {
 	 *            the id value of the {@link Identifier}
 	 * @return new {@link Identifier} object
 	 */
-	public static Identifier createIdentifier(IdentifiableElement container, String id){
+	public static Identifier createIdentifier(IdentifiableElement container, String id) {
 		return (factory.createIdentifier(container, id));
 	}
+
 	// ===============================< graph
 	// ===============================> salt core
 	/**

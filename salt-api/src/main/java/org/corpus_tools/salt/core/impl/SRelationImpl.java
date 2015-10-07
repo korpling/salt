@@ -244,6 +244,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	public URI getPath() {
 		return (SaltUtil.createSaltURI(getId()));
 	}
+
 	// =======================================< SPathElement
 
 	@Override
@@ -261,6 +262,5 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 		}
 		return (layers);
 	}
-	
-	
+
 }

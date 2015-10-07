@@ -43,7 +43,7 @@ public class Persist_SaltXML10_Test {
 		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
 		assertTrue(template.getDocumentGraph().isIsomorph(graph));
 	}
-	
+
 	/**
 	 * Tests the loading and storing of primary data.
 	 */

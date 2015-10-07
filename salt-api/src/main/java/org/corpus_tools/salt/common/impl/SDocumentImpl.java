@@ -92,6 +92,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			SaltFactory.createIdentifier(documentGraph, getId());
 		}
 	}
+
 	/**
 	 * {@inheritDoc} Creates a new {@link Identifier} and sets it to the
 	 * document graph. The identifier has the same id value as this document.
