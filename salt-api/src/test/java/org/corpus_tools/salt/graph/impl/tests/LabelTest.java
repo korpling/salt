@@ -19,6 +19,7 @@ package org.corpus_tools.salt.graph.impl.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.corpus_tools.salt.graph.GraphFactory;
@@ -248,5 +249,29 @@ public class LabelTest {
 		assertNull(getFixture().getContainer());
 		container.addLabel(getFixture());
 		assertEquals(container, getFixture().getContainer());
+	}
+
+	/**
+	 * Tests when a label is moved from one container to another, whether it is
+	 * removed correctly from the old container and whether the container
+	 * references the new one.
+	 */
+	@Test
+	public void testMoveLabel() {
+		getFixture().setName("myLabel");
+		LabelableElement container1 = new LabelableElementImpl() {
+		};
+		LabelableElement container2 = new LabelableElementImpl() {
+		};
+		container1.addLabel(getFixture());
+		assertTrue(container1.containsLabel(getFixture().getQName()));
+		assertEquals(container1, getFixture().getContainer());
+		
+		// move label
+		container2.addLabel(getFixture());
+		assertTrue(container2.containsLabel(getFixture().getQName()));
+		assertEquals(Integer.valueOf(0), container1.sizeLabels());
+		assertEquals(container2, getFixture().getContainer());
+		
 	}
 } // LabelTest

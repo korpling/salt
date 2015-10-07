@@ -39,8 +39,9 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 		if ((name == null) || (name.isEmpty())) {
 			throw new SaltException("Cannot set the name of this label object, because it is empty.");
 		}
-		if (name.contains(NS_SEPERATOR))
+		if (name.contains(NS_SEPERATOR)){
 			throw new SaltException("Cannot set the name to the given, because a namespace with namespace seperaor is illegal.");
+		}
 		this.name = name;
 	}
 

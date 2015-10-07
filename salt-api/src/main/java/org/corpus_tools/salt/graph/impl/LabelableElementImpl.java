@@ -76,6 +76,10 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	public void addLabel(Label label) {
 		if (label != null) {
 			if (label instanceof LabelImpl) {
+				if (label.getContainer()!= null){
+					//removes the label from old container, if an old container exists
+					label.getContainer().removeLabel(label.getQName());
+				}
 				((LabelImpl) label).basicSetLabelableElement(this);
 			}
 			basicAddLabel(label);

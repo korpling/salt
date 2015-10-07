@@ -6,6 +6,9 @@ import java.util.Set;
 /**
  * This interface defines a container to hold {@link Label} objects and makes
  * them accessible.
+ * <p>
+ * When a label is added to another container, it is removed from it's former container.
+ * </p>
  * 
  * @author florian
  *

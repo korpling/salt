@@ -10,6 +10,9 @@ import org.corpus_tools.salt.util.Copyable;
  * combination of name and namespace is used to identify a label and therefore
  * must be unique. The namespace is an optional value, to distinguish in case of
  * there are two labels having the same name.
+ * <p>
+ * When a label is added to another container, it is removed from it's former container.
+ * </p>
  * 
  * @author florian
  *
