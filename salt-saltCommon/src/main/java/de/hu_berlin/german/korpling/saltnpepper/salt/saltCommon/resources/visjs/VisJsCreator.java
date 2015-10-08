@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
@@ -163,6 +164,9 @@ public class VisJsCreator implements SGraphTraverseHandler{
     
         
     private static final String RESOURCE_FOLDER = System.getProperty("file.separator") + "visjs"; 
+    
+    private HashMap <String, Integer> spanClasses;
+    private int maxSpanOffset = 0;
     													
     		 
 
@@ -219,6 +223,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
     	}
     	
     	this.exportFilter = exportFilter;
+    	spanClasses =new HashMap<String, Integer>();
     	
     }
     
@@ -286,6 +291,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
       	}
       	
       	this.exportFilter = exportFilter;
+      	spanClasses =new HashMap<String, Integer>();
       	
       }
      
@@ -740,11 +746,16 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	private int getMaxLevel(SDocument doc)
 	{
 		maxLevel = getMaxHeightOfSDocGraph(doc) + 1;
-		EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
+		int nSpanClasses = spanClasses.size();
+		
+	//	System.out.println("spanClasses: " + spanClasses);
+	/*	EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
 		 if (sSpans != null && sSpans.size() != 0) 
 		 {
 			 maxLevel++;			 
-		 }
+		 }*/
+		
+		 maxLevel += nSpanClasses;
 		 return maxLevel;
 	}
 	
@@ -765,18 +776,40 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation,
 														SNode fromNode, long order) 
 	{
+		if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
+		{				
+			if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
+			{
+			
+				if (sRelation!= null)
+				{			
+				//	if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
+				//	{				
+					//	if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
+					//	{
+						currHeight++;
+						if (maxHeight < currHeight) maxHeight = currHeight;
+					//	}					
+					//}		
+				}	
+			
+				  if ((currNode instanceof SSpan))
+				  {
+					  String annClass = "";
+					  
+					  EList<SAnnotation> sAnnotations = currNode.getSAnnotations();
+					   if (sAnnotations.size() > 0)
+					   {	
+						   // use the first annotation
+						   annClass = sAnnotations.get(0).getSName();					   
+					   }
+				 
+					  if (!spanClasses.containsKey(annClass)) spanClasses.put(annClass, 0);				  
+				  }
+			
+			}
+		}
 		
-		if (sRelation!= null)
-		{			
-			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
-			{				
-				if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
-				{
-				currHeight++;
-				if (maxHeight < currHeight) maxHeight = currHeight;
-				}					
-			}		
-		}	
 	}
 
 	
@@ -787,7 +820,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
 			SNode fromNode, long order) 
 	{		
-		
+		//TODO calculate new level, depending on amount of different span classes
 		if (edge!= null)
 		{		
 			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
