@@ -96,7 +96,8 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	public Set<? extends Layer> getLayers();
 
 	/**
-	 * Adds this relation to the passed layer.
+	 * Adds this relation to the passed layer. If this relation is not already contained
+	 * in the layer's graph, it will be added to the graph.
 	 * 
 	 * @param layer
 	 *            to which this node should be added

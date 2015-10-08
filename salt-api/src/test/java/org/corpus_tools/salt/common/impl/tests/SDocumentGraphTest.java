@@ -32,6 +32,7 @@ import org.corpus_tools.salt.common.tokenizer.Tokenizer;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltElementNotInGraphException;
+import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.DataSourceSequence;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.junit.Before;
@@ -546,7 +547,6 @@ public class SDocumentGraphTest {
 		assertNotNull(getFixture().getTimeline());
 		assertEquals(8, getFixture().getTimelineRelations().size());
 
-		// TODO check whether this is correct since salt 3.0
 		assertEquals(Integer.valueOf(8), getFixture().getTimeline().getEnd());
 	}
 
@@ -1131,29 +1131,27 @@ public class SDocumentGraphTest {
 		}
 	}
 
-	// @FIXME
-	// @Test
-	// public void testCreateSSpan__SToken() {
-	// String text = "a sample";
-	// STextualDS sText = getFixture().createTextualDS(text);
-	// DataSourceSequence sequence = new DataSourceSequence();
-	// sequence.setDataSource(sText);
-	// sequence.setStart(0);
-	// sequence.setEnd(1);
-	// SToken tok1 = getFixture().createToken(sequence);
-	// SSpan sSpan = getFixture().createSpan(tok1);
-	//
-	// assertNotNull(sSpan);
-	// assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
-	// List<SRelation> relations = getFixture().getRelations(sSpan.getId(),
-	// tok1.getId());
-	// assertNotNull(relations);
-	// assertEquals(1, relations.size());
-	// assertTrue(relations.get(0) instanceof SSpanningRelation);
-	// SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
-	// assertEquals(tok1, sSpanRel.getTarget());
-	// assertEquals(sSpan, sSpanRel.getSource());
-	// }
+//	@Test
+//	public void testCreateSSpan__SToken() {
+//		String text = "a sample";
+//		STextualDS sText = getFixture().createTextualDS(text);
+//		DataSourceSequence sequence = new DataSourceSequence();
+//		sequence.setDataSource(sText);
+//		sequence.setStart(0);
+//		sequence.setEnd(1);
+//		SToken tok1 = getFixture().createToken(sequence);
+//		SSpan sSpan = getFixture().createSpan(tok1);
+//
+//		assertNotNull(sSpan);
+//		assertEquals(sSpan, getFixture().getNode(sSpan.getId()));
+//		List<SRelation> relations = getFixture().getRelations(sSpan.getId(), tok1.getId());
+//		assertNotNull(relations);
+//		assertEquals(1, relations.size());
+//		assertTrue(relations.get(0) instanceof SSpanningRelation);
+//		SSpanningRelation sSpanRel = (SSpanningRelation) relations.get(0);
+//		assertEquals(tok1, sSpanRel.getTarget());
+//		assertEquals(sSpan, sSpanRel.getSource());
+//	}
 
 	// FIXME
 	// @Test
@@ -1864,5 +1862,76 @@ public class SDocumentGraphTest {
 		SStructure sStructure = SaltFactory.createSStructure();
 		fixGraph.addNode(sStructure);
 		assertNull(fixGraph.getText(sStructure));
+	}
+	
+	/**
+	 * Tests whether the correct tokens are returned.
+	 */
+	public void testGetTokens(){
+		assertEquals(0, getFixture().getTokens().size());
+		
+		SToken tok1= SaltFactory.createSToken();
+		getFixture().addNode(tok1);
+		assertEquals(1, getFixture().getTokens().size());
+		assertTrue(getFixture().getTokens().contains(tok1));
+		
+		SToken tok2= SaltFactory.createSToken();
+		getFixture().addNode(tok2);
+		assertEquals(2, getFixture().getTokens().size());
+		assertTrue(getFixture().getTokens().contains(tok1));
+		assertTrue(getFixture().getTokens().contains(tok2));
+		
+		SToken tok3= SaltFactory.createSToken();
+		getFixture().addNode(tok3);
+		assertEquals(3, getFixture().getTokens().size());
+		assertTrue(getFixture().getTokens().contains(tok3));
+		assertTrue(getFixture().getTokens().contains(tok3));
+	}
+	
+	/**
+	 * Tests whether the correct spans are returned.
+	 */
+	public void testGetSpans(){
+		assertEquals(0, getFixture().getSpans().size());
+		
+		SSpan span1= SaltFactory.createSSpan();
+		getFixture().addNode(span1);
+		assertEquals(1, getFixture().getSpans().size());
+		assertTrue(getFixture().getSpans().contains(span1));
+		
+		SSpan span2= SaltFactory.createSSpan();
+		getFixture().addNode(span2);
+		assertEquals(2, getFixture().getSpans().size());
+		assertTrue(getFixture().getSpans().contains(span1));
+		assertTrue(getFixture().getSpans().contains(span2));
+		
+		SSpan span3= SaltFactory.createSSpan();
+		getFixture().addNode(span3);
+		assertEquals(3, getFixture().getSpans().size());
+		assertTrue(getFixture().getSpans().contains(span3));
+		assertTrue(getFixture().getSpans().contains(span3));
+	}
+	/**
+	 * Tests whether the correct structures are returned.
+	 */
+	public void testGetStructures(){
+		assertEquals(0, getFixture().getStructures().size());
+		
+		SStructure struct1= SaltFactory.createSStructure();
+		getFixture().addNode(struct1);
+		assertEquals(1, getFixture().getStructures().size());
+		assertTrue(getFixture().getStructures().contains(struct1));
+		
+		SStructure struct2= SaltFactory.createSStructure();
+		getFixture().addNode(struct2);
+		assertEquals(2, getFixture().getStructures().size());
+		assertTrue(getFixture().getStructures().contains(struct1));
+		assertTrue(getFixture().getStructures().contains(struct2));
+		
+		SStructure struct3= SaltFactory.createSStructure();
+		getFixture().addNode(struct3);
+		assertEquals(3, getFixture().getStructures().size());
+		assertTrue(getFixture().getStructures().contains(struct3));
+		assertTrue(getFixture().getStructures().contains(struct3));
 	}
 }

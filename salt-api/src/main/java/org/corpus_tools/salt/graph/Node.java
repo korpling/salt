@@ -41,7 +41,8 @@ public interface Node extends IdentifiableElement {
 	public Set<? extends Layer> getLayers();
 
 	/**
-	 * Adds this node to the passed layer.
+	 * Adds this node to the passed layer. If this node is not already contained
+	 * in the layer's graph, it will be added to the graph.
 	 * 
 	 * @param layer
 	 *            to which this node should be added

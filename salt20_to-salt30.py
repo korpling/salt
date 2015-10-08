@@ -4,6 +4,19 @@ os.chdir(".")
 
 def rename(file):
 	for line in fileinput.input(file, inplace = 1): 
+		
+		if re.search(r'package \w*([.]\w*)*;', 'import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.exceptions.PepperModuleException;') not None:
+			line= line +"\n\n"
+			line= line + "import org.corpus_tools.salt.SaltFactory;" + "\n"
+			line= line + "import org.corpus_tools.salt.common.SDominanceRelation;" + "\n"
+			line= line + "import org.corpus_tools.salt.common.SStructure;" + "\n"
+			line= line + "import org.corpus_tools.salt.common.SStructuredNode;" + "\n"
+			line= line + "import org.corpus_tools.salt.common.STextualDS;" + "\n"
+			line= line + "import org.corpus_tools.salt.common.SToken;" + "\n"
+			line= line + "import org.corpus_tools.salt.core.SAnnotation;" + "\n"
+			line= line + "import org.corpus_tools.salt.core.SLayer;" + "\n"
+			line= line + "import org.corpus_tools.salt.core.SNode;" + "\n"
+		
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;', '')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;', '')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;', '')
@@ -16,6 +29,11 @@ def rename(file):
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;', '')
 		line= line.replace('import org.eclipse.emf.common.util.BasicEList;', '')
 		line= line.replace('import org.eclipse.emf.common.util.EList;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;', '')
 		
 		
 		#global 
@@ -139,6 +157,8 @@ def rename(file):
 		line= line.replace('setSAudioReference', 'setMediaReference')
 		line= line.replace('getSMedialDSs()', 'getMedialDSs()')
 		line= line.replace('getSMedialRelations()', 'getMedialRelations()')
+		line= line.replace('getDocumentGraph().createSToken(', 'getDocumentGraph().createToken(')
+		line= line.replace('getSAnnotation(', 'getAnnotation(')
 		
 		
 		

@@ -95,9 +95,9 @@ public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer
 
 	/**
 	 * Adds the passed relation to this graph and updates indexes. If relation
-	 * is null nothing is inserted. The passed relation and this graph will be
-	 * double chained, which means the method {@link Relation#getGraph()} will
-	 * return this graph.
+	 * is null or relation is already contained nothing is inserted. The passed
+	 * relation and this graph will be double chained, which means the method
+	 * {@link Relation#getGraph()} will return this graph.
 	 * 
 	 * @param relation
 	 *            relation to be inserted
@@ -147,9 +147,9 @@ public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer
 
 	/**
 	 * Adds the passed node to this graph and updates indexes. If node is null
-	 * nothing is inserted. The passed node and this graph will be double
-	 * chained, which means the method {@link Node#getGraph()} will return this
-	 * graph.
+	 * or node is already contained nothing is inserted. The passed node and
+	 * this graph will be double chained, which means the method
+	 * {@link Node#getGraph()} will return this graph.
 	 * 
 	 * @param node
 	 *            node to be inserted
@@ -195,11 +195,11 @@ public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer
 	public Set<L> getLayers();
 
 	/**
-	 * Adds the passed layer to this graph. If layer is null nothing is
-	 * inserted. The passed layer and this graph will be double chained, which
-	 * means the method {@link Layer#getGraph()} will return this graph. If the
-	 * passed layer contains nodes or relations, which are not already contained
-	 * by the graph, they will be added.
+	 * Adds the passed layer to this graph. If layer is null or layer is already
+	 * contained nothing is inserted. The passed layer and this graph will be
+	 * double chained, which means the method {@link Layer#getGraph()} will
+	 * return this graph. If the passed layer contains nodes or relations, which
+	 * are not already contained by the graph, they will be added.
 	 * 
 	 * @param layer
 	 *            layer to be inserted

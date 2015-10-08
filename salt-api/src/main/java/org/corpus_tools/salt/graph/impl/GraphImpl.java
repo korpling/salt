@@ -118,6 +118,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#addNode(Node)} **/
 	@Override
 	public void addNode(N node) {
+		// check if node already exists
+		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES_INVERSE, node)) {
+			// do nothing, node is already added
+			return;
+		}
 		basicAddNode(node);
 		if (node != null) {
 			if (node instanceof NodeImpl) {
@@ -297,6 +302,10 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#addRelation(Relation)} **/
 	@Override
 	public void addRelation(Relation<? extends Node, ? extends Node> relation) {
+		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
+			return;
+		}
+
 		basicAddRelation(relation);
 		if (relation != null) {
 			if (relation instanceof RelationImpl) {
@@ -510,7 +519,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public void addLayer(L layer) {
-		if (layer != null) {
+		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);
 			if (layer instanceof LayerImpl) {
 				((LayerImpl<N, R>) layer).basicSetGraph(this);
