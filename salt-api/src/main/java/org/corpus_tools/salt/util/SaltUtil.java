@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -737,4 +738,21 @@ public class SaltUtil {
 		}
 	}
 	// ===================================================< Persistence DOT
+	
+	/**
+	 * Returns the annotation at position idx in the passed set of annotations.
+	 * @param idx position of the annotation to be returned
+	 * @param annotations set of annotations
+	 * @return annotation at position idx
+	 */
+	public static <P extends Label> P getAnnotation(Integer idx, Set<P> annotations){
+		P retVal= null;
+		if (annotations!= null && annotations.size() < idx){
+			Iterator<P> it= annotations.iterator();
+			for (int i= 0; i<= idx; i++){
+				retVal= it.next();
+			}
+		}
+		return(retVal);
+	}
 }

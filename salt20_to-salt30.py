@@ -1,9 +1,23 @@
 import glob, os, fileinput, sys
+import fnmatch
 os.chdir(".")
 
 def rename(file):
-	print("rename "+file)
 	for line in fileinput.input(file, inplace = 1): 
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SALT_TYPE;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;', '')
+		line= line.replace('import org.eclipse.emf.common.util.BasicEList;', '')
+		line= line.replace('import org.eclipse.emf.common.util.EList;', '')
+		
+		
 		#global 
 		line= line.replace('SaltFactory.eINSTANCE', 'SaltFactory')
 		line= line.replace('new BasicEList<', 'new ArrayList<') # must be before next row
@@ -24,13 +38,12 @@ def rename(file):
 		line= line.replace('getSRelations', 'getRelations')
 		line= line.replace('getSRelation', 'getRelation')
 		line= line.replace('Edge', 'Relation')
+		line= line.replace('edge', 'relation')
 		line= line.replace('createSAnnotation(', 'createAnnotation(')
 		line= line.replace('createSMetaAnnotation(', 'createMetaAnnotation(')
 		line= line.replace('createSProcessingAnnotation(', 'createProcessingAnnotation(')
 		line= line.replace('createSFeature(', 'createFeature(')
 		line= line.replace('getSAnnotations()', 'getAnnotations()')
-		line= line.replace('getSAnnotation()', 'getAnnotation()')
-		line= line.replace('getSMetaAnnotation()', 'getMetaAnnotation()')
 		line= line.replace('getSMetaAnnotations()', 'getMetaAnnotations()')
 		line= line.replace('getSProcessingAnnotations()', 'getProcessingAnnotations()')
 		line= line.replace('getSFeature()', 'getFeature()')
@@ -64,7 +77,6 @@ def rename(file):
 		line= line.replace('SaltFactory.createDataSourceSequence();', 'new DataSourceSequence();')
 		line= line.replace('setSSequentialDS(', 'setDataSource(')
 		line= line.replace('getSSequentialDS()', 'getDataSource()')
-
 		line= line.replace('setSStart(', 'setStart(')
 		line= line.replace('getSStart()', 'getStart()')
 		line= line.replace('setSEnd(', 'setEnd(')
@@ -97,7 +109,6 @@ def rename(file):
 		line= line.replace('getSTimelineRelations()', 'getTimelineRelations()')
 		line= line.replace('sortSTokenByText()', 'sortTokenByText()')
 		line= line.replace('getSortedSTokenByText()', 'getSortedTokenByText()')
-
 		line= line.replace('getRootsBySRelation(', 'getRootsByRelation(')
 		line= line.replace('getNodeBySequence', 'getNodesBySequence')
 		line= line.replace('getSLayerByName', 'getLayerByName')
@@ -106,23 +117,44 @@ def rename(file):
 		line= line.replace('SMetaAnnotatableElement', 'SAnnotationContainer')	
 		line= line.replace('hasLabel', 'containsLabel')	
 		line= line.replace('getSCorpora', 'getCorpora')	
-		line= line.replace('SIdentifiableElement', 'IdentifiableElement')	
-		line= line.replace('getSMedialDSs()', 'getMedialDSs()')
+		line= line.replace('SElementId', 'Identifier')	
+		line= line.replace('getSValue_STEXT()', 'getValue_STEXT()')	
+		line= line.replace('getSElementPath()', 'getPath()')
+		line= line.replace('addSAnnotation', 'addAnnotation')
+		line= line.replace('getSLayers()', 'getLayers()')
+		line= line.replace('getSMetaAnnotation', 'getMetaAnnotation')
 		line= line.replace('getSAudioReference()', 'getMediaReference()')
+		line= line.replace('getSText', 'getText')
+		line= line.replace('getOverlappedSTokens', 'getOverlappedTokens')
+		line= line.replace('getSortedSTokenByText', 'getSortedTokenByText')
+		line= line.replace('getSValueSTEXT()', 'getValue_STEXT()')
+		line= line.replace('getSValueSURI()', 'getValue_SURI()')
+		line= line.replace('annotation.getSValueType()', 'annotation.getValueType()')
+		line= line.replace('SDATATYPE', 'SALT_TYPE')
+		line= line.replace('getCorpusGraph()', 'getGraph()')
+		line= line.replace('getSRoots()', 'getRoots()')
+		line= line.replace('getRootsBySRelationSType(', 'getRootsByRelationType(')
+		line= line.replace('SGraphTraverseHandler', 'GraphTraverseHandler')
+		line= line.replace('getOverlappedSTokens', 'getOverlappedTokens')
+		line= line.replace('setSAudioReference', 'setMediaReference')
+		line= line.replace('getSMedialDSs()', 'getMedialDSs()')
+		line= line.replace('getSMedialRelations()', 'getMedialRelations()')
 		
 		
-
+		
 		#in tests
 		line= line.replace('this.getFixture()', 'getFixture()')
-
+		
 		#exceptions
 		line= line.replace('SaltElementNotContainedInGraphException', 'SaltElementNotInGraphException')
-		
-		# also change variable names
-		#line= line.replace('edge', 'relation')
+		sys.stdout.write(line)
 
-	sys.stdout.write(line)
-
+def recursive_glob(treeroot, pattern):
+    results = []
+    for base, dirs, files in os.walk(treeroot):
+        goodfiles = fnmatch.filter(files, pattern)
+        results.extend(os.path.join(base, f) for f in goodfiles)
+    return results
 
 if len(sys.argv)>1:
     sourcePath= sys.argv[1]
@@ -131,13 +163,9 @@ else:
 
 print sourcePath
 if os.path.isdir(sourcePath):
-	print "HERE"
-	for root, subdirs, files in os.walk(sourcePath):
-		print subdirs
-		for file in glob.glob("*.java"):
-			print file
-			#rename(file)
+	files= recursive_glob(sourcePath, "*.java")
+	for file in files:
+		print "rename "+file
+		rename(file)
 else:
-   #rename(sourcePath)
-
-
+    rename(sourcePath)

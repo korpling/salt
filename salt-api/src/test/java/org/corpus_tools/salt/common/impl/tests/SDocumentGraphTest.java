@@ -10,6 +10,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
@@ -32,7 +33,6 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltElementNotInGraphException;
 import org.corpus_tools.salt.util.DataSourceSequence;
-import org.corpus_tools.salt.util.SALT_TYPE;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.junit.Before;
 import org.junit.Test;

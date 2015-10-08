@@ -15,7 +15,7 @@
  *
  *
  */
-package org.corpus_tools.salt.util;
+package org.corpus_tools.salt;
 
 import java.util.Collections;
 import java.util.HashMap;

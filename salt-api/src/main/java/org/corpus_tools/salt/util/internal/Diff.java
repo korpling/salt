@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SPointingRelation;
 import org.corpus_tools.salt.common.SSequentialDS;
@@ -33,8 +34,8 @@ import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.graph.IdentifiableElement;
 import org.corpus_tools.salt.util.DIFF_TYPES;
 import org.corpus_tools.salt.util.Difference;
-import org.corpus_tools.salt.util.SALT_TYPE;
 import org.corpus_tools.salt.util.SaltUtil;
+
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;

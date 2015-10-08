@@ -25,6 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SSequentialDS;
 import org.corpus_tools.salt.common.SSequentialRelation;
@@ -43,7 +44,6 @@ import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.util.DataSourceSequence;
-import org.corpus_tools.salt.util.SALT_TYPE;
 import org.corpus_tools.salt.util.STextualRelationSStartComparator;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.TokenStartComparator;

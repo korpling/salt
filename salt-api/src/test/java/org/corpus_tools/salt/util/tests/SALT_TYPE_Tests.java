@@ -3,6 +3,7 @@ package org.corpus_tools.salt.util.tests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.common.SDominanceRelation;
 import org.corpus_tools.salt.common.SOrderRelation;
 import org.corpus_tools.salt.common.SPointingRelation;
@@ -13,7 +14,6 @@ import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.common.impl.SSpanImpl;
 import org.corpus_tools.salt.common.impl.SStructureImpl;
 import org.corpus_tools.salt.common.impl.STokenImpl;
-import org.corpus_tools.salt.util.SALT_TYPE;
 import org.junit.Before;
 import org.junit.Test;
 
