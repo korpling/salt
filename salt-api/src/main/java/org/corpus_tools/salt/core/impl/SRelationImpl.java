@@ -1,5 +1,6 @@
 package org.corpus_tools.salt.core.impl;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -272,7 +273,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 				}
 			}
 		}
-		return (layers);
+		return Collections.unmodifiableSet(layers);
 	}
 
 }
