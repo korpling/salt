@@ -851,10 +851,39 @@ public class Diff {
 			if (templateChildren.size() > 0) {
 				sharedParents = otherGraph.getSharedParent(templateChildren, nodeType);
 			}
-			if (sharedParents.size() > 0) {
+			if (sharedParents.size() ==  1) {
 				// an equivalent to current node in base document was found
-
 				templateNode = sharedParents.get(0);
+			} else if(sharedParents.size() > 1) {
+				// Several candidates have been found. First check if any of them
+				// has the same ID.
+				for(SNode candidate : sharedParents) {
+					if(candidate.getId().equals(otherNode.getId())) {
+						templateNode = candidate;
+						break;
+					}
+				}
+				if(templateNode == null) {
+					/* 
+					None of the candidates has the same ID so perform the comparision 
+					with the one which has the smallest number of diffs. We already 
+					know at this point that the graphs are not isomorphic, but
+					we might need to get the differences.
+					*/
+					if(!diffsRequested) {
+						return false;
+					}
+					int minNumberOfDiffs = Integer.MAX_VALUE;
+					for(SNode candidate : sharedParents) {
+						Set<Difference> subDiff = new HashSet<>();
+						compareIdentifiableElements(candidate, otherNode, subDiff);
+						if(subDiff.size() < minNumberOfDiffs) {
+							minNumberOfDiffs = subDiff.size();
+							// this is the node that will be checked again
+							templateNode = candidate;
+						}
+					}
+				}
 			}
 
 			if (templateNode == null) {

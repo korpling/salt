@@ -1,5 +1,6 @@
 package org.corpus_tools.salt.common.impl.tests;
 
+import com.google.common.base.Joiner;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -40,6 +41,18 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Set;
+import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.samples.SampleGenerator;
+import org.corpus_tools.salt.util.Difference;
+import org.corpus_tools.salt.util.internal.Diff;
+import org.junit.Assert;
 
 public class SDocumentGraphTest {
 
@@ -1934,4 +1947,33 @@ public class SDocumentGraphTest {
 		assertTrue(getFixture().getStructures().contains(struct3));
 		assertTrue(getFixture().getStructures().contains(struct3));
 	}
+	
+	
+	
+	@Test
+	public void testSerialize() throws IOException, ClassNotFoundException
+	{
+		SDocument doc = SaltFactory.createSDocument();
+		SampleGenerator.createSDocumentStructure(doc);
+		SDocumentGraph docGraph = doc.getDocumentGraph();
+		
+		File tmpFile = File.createTempFile("testSerializationOfSDocumentGraph", ".obj");
+		FileOutputStream fOut = new FileOutputStream(tmpFile);
+		try (ObjectOutputStream oOut = new ObjectOutputStream(fOut))
+		{
+			oOut.writeObject(docGraph);
+		}
+
+		FileInputStream fIn = new FileInputStream(tmpFile);
+		ObjectInputStream oIn = new ObjectInputStream(fIn);
+
+		SDocumentGraph restored = (SDocumentGraph) oIn.readObject();
+
+		// compare
+		Diff diffCreator = new Diff(docGraph, restored);
+		Set<Difference> diffs = diffCreator.findDiffs();
+		Assert.assertEquals("Serialization failed. Diff: " + Joiner.on("\n").join(
+				diffs), 0, diffs.size());
+	}
+  
 }
