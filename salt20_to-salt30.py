@@ -1,38 +1,29 @@
-import glob, os, fileinput, sys
+import glob, os, fileinput, sys, re
 import fnmatch
 os.chdir(".")
 
 def rename(file):
 	for line in fileinput.input(file, inplace = 1): 
-		
-		if re.search(r'package \w*([.]\w*)*;', 'import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.exceptions.PepperModuleException;') not None:
-			line= line +"\n\n"
-			line= line + "import org.corpus_tools.salt.SaltFactory;" + "\n"
-			line= line + "import org.corpus_tools.salt.common.SDominanceRelation;" + "\n"
-			line= line + "import org.corpus_tools.salt.common.SStructure;" + "\n"
-			line= line + "import org.corpus_tools.salt.common.SStructuredNode;" + "\n"
-			line= line + "import org.corpus_tools.salt.common.STextualDS;" + "\n"
-			line= line + "import org.corpus_tools.salt.common.SToken;" + "\n"
-			line= line + "import org.corpus_tools.salt.core.SAnnotation;" + "\n"
-			line= line + "import org.corpus_tools.salt.core.SLayer;" + "\n"
-			line= line + "import org.corpus_tools.salt.core.SNode;" + "\n"
-		
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;', 'import org.corpus_tools.salt.common.SCorpus;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;', 'import org.corpus_tools.salt.common.SDocument;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SALT_TYPE;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;', '')
-		line= line.replace('import org.eclipse.emf.common.util.BasicEList;', '')
-		line= line.replace('import org.eclipse.emf.common.util.EList;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;', '')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph;', 'import org.corpus_tools.salt.common.SDocumentGraph;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;', 'import org.corpus_tools.salt.common.SPointingRelation;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SALT_TYPE;', 'import org.corpus_tools.salt.SALT_TYPE')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;', 'import org.corpus_tools.salt.common.SToken;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;', 'import org.corpus_tools.salt.core.SAnnotation;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;', 'import org.corpus_tools.salt.core.SNode;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;', 'import org.corpus_tools.salt.core.SRelation;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;', 'import org.corpus_tools.salt.common.SSpan;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SWordAnnotation;', 'import org.corpus_tools.salt.semantics.SWordAnnotation')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;', 'import org.corpus_tools.salt.SaltFactory')
+		
+		line= line.replace('import org.eclipse.emf.common.util.BasicEList;', 'import java.util.ArrayList;')
+		line= line.replace('import org.eclipse.emf.common.util.EList;', 'import java.util.List;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;', 'import org.corpus_tools.salt.SaltFactory')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;', 'import org.corpus_tools.salt.common.SDominanceRelation')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;', 'import org.corpus_tools.salt.common.SStructure;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;', 'import org.corpus_tools.salt.common.STextualDS;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;', '')
 		
 		
