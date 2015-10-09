@@ -15,16 +15,18 @@ def rename(file):
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;', 'import org.corpus_tools.salt.core.SNode;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;', 'import org.corpus_tools.salt.core.SRelation;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;', 'import org.corpus_tools.salt.common.SSpan;')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SWordAnnotation;', 'import org.corpus_tools.salt.semantics.SWordAnnotation')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;', 'import org.corpus_tools.salt.SaltFactory')
-		
 		line= line.replace('import org.eclipse.emf.common.util.BasicEList;', 'import java.util.ArrayList;')
 		line= line.replace('import org.eclipse.emf.common.util.EList;', 'import java.util.List;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;', 'import org.corpus_tools.salt.SaltFactory')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;', 'import org.corpus_tools.salt.common.SDominanceRelation')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;', 'import org.corpus_tools.salt.common.SStructure;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualDS;', 'import org.corpus_tools.salt.common.STextualDS;')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;', '')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;', 'import org.corpus_tools.salt.common.SSpanningRelation;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STextualRelation;', 'import org.corpus_tools.salt.common.STextualRelation')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;', 'import org.corpus_tools.salt.semantics.SPOSAnnotation')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SWordAnnotation;', 'import org.corpus_tools.salt.semantics.SWordAnnotation')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;', 'import org.corpus_tools.salt.core.SLayer;')
 		
 		
 		#global 
@@ -150,6 +152,7 @@ def rename(file):
 		line= line.replace('getSMedialRelations()', 'getMedialRelations()')
 		line= line.replace('getDocumentGraph().createSToken(', 'getDocumentGraph().createToken(')
 		line= line.replace('getSAnnotation(', 'getAnnotation(')
+		line= line.replace('getSAnnotatableElement()', 'getContainer()')
 		
 		
 		

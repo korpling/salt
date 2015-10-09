@@ -142,13 +142,14 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	 * @return other enhanced for namespace, name and value
 	 */
 	@Override
-	public void copy(Label other) {
+	public Label copy(Label other) {
 		if (other == null) {
 			throw new SaltException("Cannot clone label '" + this + "', because the given object is null and its not possible to copy values into a null object.");
 		}
 		other.setNamespace(this.getNamespace());
 		other.setName(this.getName());
 		other.setValue(this.getValue());
+		return(other);
 	}
 
 	@Override

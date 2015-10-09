@@ -1,5 +1,7 @@
 package org.corpus_tools.salt.util;
 
+
+
 /**
  * An interface to ensure that an object is copyable. This is an alternative to
  * the {@link Cloneable} interface which seems to be very controversial.
@@ -14,6 +16,7 @@ public interface Copyable<T> {
 	 * 
 	 * @param surrogate
 	 *            empty object to be filled
+	 * @return returns surrogate
 	 */
-	public void copy(T surrogate);
+	public T copy(T other);
 }
