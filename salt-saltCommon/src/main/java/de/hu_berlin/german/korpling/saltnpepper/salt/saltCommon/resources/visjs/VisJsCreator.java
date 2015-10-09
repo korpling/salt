@@ -166,7 +166,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
     private static final String RESOURCE_FOLDER = System.getProperty("file.separator") + "visjs"; 
     
     private HashMap <String, Integer> spanClasses;
-    private int maxSpanOffset = 0;
+    private int maxSpanOffset = -1;
     													
     		 
 
@@ -804,7 +804,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 						   annClass = sAnnotations.get(0).getSName();					   
 					   }
 				 
-					  if (!spanClasses.containsKey(annClass)) spanClasses.put(annClass, 0);				  
+					  if (!spanClasses.containsKey(annClass)) spanClasses.put(annClass, -1);				  
 				  }
 			
 			}
@@ -837,9 +837,21 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 					  currHeightFromToken = 1;						  
 					  // write SSpan-Nodes					  
 					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode)))
-					  {				  
+					  {	
+						  String annotation = "";
+						  EList<SAnnotation>  annotations = fromNode.getSAnnotations();
+						  if (annotations.size() > 0){
+							  annotation = annotations.get(0).getSName();
+						  }						  
+						  
+						  int spanOffset = spanClasses.get(annotation);						  
+						  						  
+						  if(spanOffset == -1){
+							  maxSpanOffset = Math.max(spanOffset, maxSpanOffset) + 1;
+							  spanClasses.put(annotation, maxSpanOffset);
+						  }
 						  try {
-							writeJsonNode(fromNode, maxLevel - currHeightFromToken, exportFilter);
+							writeJsonNode(fromNode, maxLevel - currHeightFromToken - maxSpanOffset, exportFilter);
 						} catch (IOException e) {
 							throw new SaltException("A problem occurred while building JSON objects.");
 						}						
@@ -855,7 +867,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 					  if (currNode instanceof SStructure)
 					  {						 
 						  try {
-							writeJsonNode(currNode, maxLevel - currHeightFromToken, exportFilter);
+							writeJsonNode(currNode, maxLevel - currHeightFromToken - spanClasses.size(), exportFilter);
 						} catch (IOException e) {
 							throw new SaltException("A problem occurred while building JSON objects.");
 						}						 
@@ -863,7 +875,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 						 if (roots.contains(fromNode) && !readRoots.contains(fromNode))
 						 {
 							 try {
-								writeJsonNode(fromNode, maxLevel - currHeightFromToken - 1, exportFilter);
+								writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanClasses.size() - 1, exportFilter);
 							} catch (IOException e) {
 								throw new SaltException("A problem occurred while building JSON objects.");
 							}							 
