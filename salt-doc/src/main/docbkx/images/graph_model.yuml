@@ -1,8 +1,0 @@
-//yuml.me
-[SRelation]-target 1 >[SNode]
-[SRelation]-source 1 >[SNode]
-[SLayer]*-nodes *[SNode]
-[SLayer]*-edges *[SRelation]
-[SGraph]1<>-layers *[SLayer]
-[SGraph]1<>-edges *[SRelation]
-[SGraph]1<>-nodes *[SNode]

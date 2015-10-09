@@ -1,0 +1,11 @@
+Semantic changes in simple Salt
+* changes in Id
+	- ??? An id of Node, Layer, Edge cannot be set, it is only set when adding such an object to a graph
+	- an id does not end with /
+	- the pure id of nodes, edges and layers only contains their id not the entire path
+	- the id of nodes, edges and layers in a path is encoded as last segment instead of fragment
+	- the id of document and document graph are the same
+- the list of nodes, layers and edges returned by the graph is immutable
+- A layer has sets with preserved order instead of lists for nodes and relations
+- a layer provides addNode and addEdge method, it is recommended to use them and not to add things directlyx into the list
+- the type of an edge is only one value instead of a list

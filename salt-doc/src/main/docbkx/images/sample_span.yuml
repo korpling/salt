@@ -1,7 +1,0 @@
-//see yuml.me
-
-[text1|New York]
-[tok1|New]-> [text1]
-[tok1|York]-> [text1]
-[span1|entity=city]-> [tok1]
-[span1|entity=city]-> [tok1]
