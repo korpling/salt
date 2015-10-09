@@ -93,6 +93,10 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 *            graph which contains this node
 	 */
 	protected void basicSetGraph(Graph graph) {
+		// remove from old graph if it was changed
+		if(this.graph != graph && this.graph instanceof GraphImpl) {
+			((GraphImpl) this.graph).basicRemoveNode(this);
+		}
 		this.graph = graph;
 	}
 
