@@ -18,19 +18,25 @@ carefully, which should be located in the corresponding jar-files
 inside the folders plugins or lib.
 
 This project includes:
-  Apache Commons Lang under The Apache Software License, Version 2.0
+  Apache Commons Lang under Apache License, Version 2.0
+  Commons Math under The Apache Software License, Version 2.0
   de.hu_berlin.german.korpling.saltnpepper.salt under The Apache Software License, Version 2.0
   Guava: Google Core Libraries for Java under The Apache Software License, Version 2.0
   Hamcrest Core under New BSD License
+  Java Text Categorizing Library under GNU Lesser General Public License
+  JMH Core under GNU General Public License (GPL), version 2, with the Classpath exception
+  JMH Generators: Annotation Processors under GNU General Public License (GPL), version 2, with the Classpath exception
+  JOpt Simple under The MIT License
   JUnit under Common Public License Version 1.0
   Neo Visionaries Internationalization Package under The Apache Software License, Version 2.0
   org.eclipse.emf under The Eclipse Public License Version 1.0
   org.eclipse.emf.ecore under The Eclipse Public License Version 1.0
   org.eclipse.emf.ecore.xmi under The Eclipse Public License Version 1.0
-  salt-graph under The Apache Software License, Version 2.0
-  salt-saltCommon under The Apache Software License, Version 2.0
-  salt-saltCore under The Apache Software License, Version 2.0
+  salt-api under The Apache Software License, Version 2.0
+  salt-benchmark under The Apache Software License, Version 2.0
+  salt-doc under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
-  textcat under LGPL
+  Stax2 API under The BSD License
+  Woodstox under The Apache License, Version 2.0
   XMLUnit for Java under BSD License
 
