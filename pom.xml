@@ -34,6 +34,21 @@
 		<url>https://github.com/korpling/salt</url>
 		<tag>HEAD</tag>
 	</scm>
+	<distributionManagement>
+		<repository>
+			<id>korpling</id>
+			<name>korpling maven repo</name>
+			<url>file:///srv/www/maven2/</url>
+			<!-- <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url> -->
+		</repository>
+	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>korpling</id>
+			<name>korpling maven repo</name>
+			<url>http://korpling.german.hu-berlin.de/maven2</url>
+		</repository>
+	</repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<component.descriptor.name>serviceComponents.xml</component.descriptor.name>
