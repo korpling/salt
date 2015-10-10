@@ -39,7 +39,10 @@ import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.SAnnotation;
+import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
@@ -771,5 +774,61 @@ public class SaltUtil {
 			}
 		}
 		return(retVal);
+	}
+	
+	/**
+	 * Moves all {@link SAnnotation} objects from <code>from</code> to <code>to</code>.
+	 * @param from {@link SAnnotatableElement} object from which {@link SAnnotation} object should be moved
+	 * @param to {@link SAnnotatableElement} object to which {@link SAnnotation} object should be moved
+	 */
+	public static void moveAnnotations(SAnnotationContainer from, SAnnotationContainer to) {
+		if ((from != null) && (to != null)) {
+			for (SAnnotation fromSAnno : from.getAnnotations()) {
+				// if to contains an SAnnotation with the same namespace and
+				// name
+				String newSName = fromSAnno.getName();
+				if (to.getAnnotation(fromSAnno.getQName()) != null) {
+					int i = 1;
+					while (to.getAnnotation(fromSAnno.getQName() + "_" + i) != null) { 
+						// while there is an anno "annoQName_i",  increment i
+						i++;
+					} // while there is an anno "annoQName_i" , increment i
+					newSName = fromSAnno.getName() + "_" + i;
+					fromSAnno.setName(newSName);
+					to.addAnnotation(fromSAnno);
+				} else {
+					// move
+					to.addAnnotation(fromSAnno);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Moves all {@link SMetaAnnotation} objects from <code>from</code> to <code>to</code>.
+	 * @param from {@link SMetaAnnotatableElement} object from which {@link SMetaAnnotation} object should be moved
+	 * @param to {@link SMetaAnnotatableElement} object to which {@link SMetaAnnotation} object should be moved
+	 */
+	public static void moveMetaAnnotations(SAnnotationContainer from, SAnnotationContainer to) {
+		if ((from != null) && (to != null)) {
+			for (SMetaAnnotation fromSAnno : from.getMetaAnnotations()) {
+				String newSName = fromSAnno.getName();
+				if (to.getMetaAnnotation(fromSAnno.getQName()) != null) {
+					int i = 1;
+					while (to.getMetaAnnotation(fromSAnno.getQName() + "_" + i) != null) {
+						// while there is a meta anno "annoQName_i" , increment
+						// i
+						i++;
+					} // while there is a meta anno "annoQName_i" , increment i
+					newSName = fromSAnno.getName() + "_" + i;
+					fromSAnno.setName(newSName);
+					to.addMetaAnnotation(fromSAnno);
+
+				} else {
+					// move
+					to.addMetaAnnotation(fromSAnno);
+				}
+			}
+		}
 	}
 }
