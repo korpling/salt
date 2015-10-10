@@ -153,7 +153,9 @@ def rename(file):
 		line= line.replace('getDocumentGraph().createSToken(', 'getDocumentGraph().createToken(')
 		line= line.replace('getSAnnotation(', 'getAnnotation(')
 		line= line.replace('getSAnnotatableElement()', 'getContainer()')
-		
+		line= line.replace('addSMetaAnnotation(', 'addMetaAnnotation(')
+		line= line.replace('getLayers().add(', 'addLayer(')
+		line= line.replace('.getCorpusGraphs().add(', '.addCorpusGraph(')
 		
 		
 		#in tests
@@ -161,6 +163,12 @@ def rename(file):
 		
 		#exceptions
 		line= line.replace('SaltElementNotContainedInGraphException', 'SaltElementNotInGraphException')
+		
+		#repair 
+		line= line.replace('SaltFactory.createAnnotation();', 'SaltFactory.createSAnnotation();')
+		line= line.replace('SaltFactory.createMetaAnnotation();', 'SaltFactory.createSMetaAnnotation();')
+		
+		
 		sys.stdout.write(line)
 
 def recursive_glob(treeroot, pattern):
