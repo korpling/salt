@@ -264,7 +264,7 @@ public class SampleGenerator {
 	public static final String LANG_EN = "en";
 	/** iso 639-1 language code for german **/
 	public static final String LANG_DE = "de";
-	private static final String SYNTAX_LAYER = "syntax";
+	public static final String SYNTAX_LAYER = "syntax";
 
 	/**
 	 * Creates a {@link SDocumentGraph} containing to texts of two different
