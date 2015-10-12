@@ -577,6 +577,7 @@ public class SDocumentGraphTest {
 		assertNotNull(getFixture().getTimeline());
 		assertEquals(8, getFixture().getTimelineRelations().size());
 
+		assertEquals(Integer.valueOf(0), getFixture().getTimeline().getStart());
 		assertEquals(Integer.valueOf(8), getFixture().getTimeline().getEnd());
 	}
 

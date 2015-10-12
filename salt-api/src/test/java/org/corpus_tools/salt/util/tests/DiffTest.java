@@ -32,8 +32,10 @@ import org.corpus_tools.salt.common.SDominanceRelation;
 import org.corpus_tools.salt.common.SPointingRelation;
 import org.corpus_tools.salt.common.SStructure;
 import org.corpus_tools.salt.common.STextualDS;
+import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SLayer;
+import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
@@ -499,5 +501,52 @@ public class DiffTest {
 		
 		Set<Difference> diffs= dg1.findDiffs(dg2, (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true))
 		assertEquals(diffs.toString(), 0, diffs.size())
+	}
+
+	/**
+	 * Checks whether ids are ignored, when {@link DiffOptions#OPTION_IGNORE_ID}
+	 * option is set to true.
+	 */
+	@Test
+	public void test_Options() {
+		SDocumentGraph graph1= SaltFactory.createSDocumentGraph();
+		STextualDS text1= graph1.createTextualDS("This is a sample");
+		graph1.addNode(text1);
+		SToken tok1= SaltFactory.createSToken();
+		tok1.setName("tok");
+		graph1.addNode(tok1);
+		STextualRelation rel= SaltFactory.createSTextualRelation();
+		rel.setSource(tok1);
+		rel.setTarget(text1);
+		rel.setStart(0);
+		rel.setEnd(4);
+		graph1.addRelation(rel);
+		
+		
+		SDocumentGraph graph2= SaltFactory.createSDocumentGraph();
+		STextualDS text2= graph2.createTextualDS("This is a sample");
+		graph2.addNode(text2);
+		SToken tok2= SaltFactory.createSToken();
+		tok2.setName("other");
+		graph2.addNode(tok2);
+		rel= SaltFactory.createSTextualRelation();
+		rel.setSource(tok2);
+		rel.setTarget(text2);
+		rel.setStart(0);
+		rel.setEnd(4);
+		graph2.addRelation(rel);
+		
+		
+		//rename name, that the isomorphie check will not find a difference in name
+		tok2.setName("tok");
+		
+		DiffOptions options= new DiffOptions();
+		options.setOption(DiffOptions.OPTION_IGNORE_ID, true);
+		Set<Difference> diffs= graph1.findDiffs(graph2, options);
+		assertEquals(diffs+"", 0, diffs.size());
+		
+		options.setOption(DiffOptions.OPTION_IGNORE_ID, false);
+		diffs= graph1.findDiffs(graph2, options);
+		assertEquals(diffs+"", 1, diffs.size());
 	}
 }

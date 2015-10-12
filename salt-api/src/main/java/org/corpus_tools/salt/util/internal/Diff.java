@@ -604,11 +604,11 @@ public class Diff {
 	 * @param templateNode
 	 * @param otherNode
 	 * @param subDiffs
-	 * @return
+	 * @return true if elements have the same id, false otherwise
 	 */
 	public boolean compareIdentifiableElements(IdentifiableElement template, IdentifiableElement other, Set<Difference> subDiffs) {
 		boolean retVal = true;
-		if (!(boolean) options.get(OPTION_IGNORE_ID)) {
+		if (!options.get(OPTION_IGNORE_ID)) {
 			if (!template.getId().equals(other.getId())) {
 				retVal = false;
 				if (subDiffs != null) {
