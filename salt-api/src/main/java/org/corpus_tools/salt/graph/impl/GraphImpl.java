@@ -489,7 +489,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	protected void basicRemoveRelation(R rel) {
 		// remove relation from all indexes
 		getIndexMgr().removeValue(rel);
-		getIndexMgr().remove(SaltUtil.IDX_ID_RELATIONS_INVERSE, rel.getId());
+		getIndexMgr().remove(SaltUtil.IDX_ID_RELATIONS_INVERSE, rel);
 		// remove relation also from layers
 		for (Layer<N, R> layer : layers) {
 			layer.removeRelation(rel);
