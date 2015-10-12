@@ -57,6 +57,7 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.DataSourceSequence;
+import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.DataSourceAccessor;
@@ -901,10 +902,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(), (Integer) sData.getEnd());
 	}
 
-	/** {@inheritDoc SDocumentGraph#isIsomorph()} **/
+	/** {@inheritDoc SDocumentGraph#isIsomorph(SDocumentGraph)} **/
 	@Override
 	public boolean isIsomorph(SDocumentGraph other) {
 		Diff diff = new Diff(this, other);
+		return (diff.isIsomorph());
+	}
+	/** {@inheritDoc SDocumentGraph#isIsomorph(SDocumentGraph, DiffOptions)} **/
+	@Override
+	public boolean isIsomorph(SDocumentGraph other, DiffOptions options) {
+		Diff diff = new Diff(this, other, options);
 		return (diff.isIsomorph());
 	}
 
@@ -912,6 +919,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public Set<Difference> findDiffs(SDocumentGraph other) {
 		Diff diff = new Diff(this, other);
+		return (diff.findDiffs());
+	}
+	
+	/** {@inheritDoc SDocumentGraph#findDiffs(SDocumentGraph, DiffOptions)} **/
+	@Override
+	public Set<Difference> findDiffs(SDocumentGraph other, DiffOptions options) {
+		Diff diff = new Diff(this, other, options);
 		return (diff.findDiffs());
 	}
 

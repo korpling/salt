@@ -29,6 +29,7 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.util.DataSourceSequence;
+import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.knallgrau.utils.textcat.TextCategorizer;
@@ -883,7 +884,7 @@ public interface SDocumentGraph extends SGraph {
 	/**
 	 * Compares the passed graph with the current one and returns if they are
 	 * isomorph or not. In case of the graphs are not isomorph, this method does
-	 * not record all differences. TO speed up the computation. it just detects
+	 * not record all differences. To speed up the computation. it just detects
 	 * the first difference and returns false. To get a full list of all
 	 * differences, use method {@link #findDiffs()}.
 	 * 
@@ -892,6 +893,23 @@ public interface SDocumentGraph extends SGraph {
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
 	public boolean isIsomorph(SDocumentGraph other);
+
+	/**
+	 * Compares the passed graph with the current one and returns if they are
+	 * isomorph or not. In case of the graphs are not isomorph, this method does
+	 * not record all differences. To speed up the computation. it just detects
+	 * the first difference and returns false. To get a full list of all
+	 * differences, use method {@link #findDiffs()}.
+	 * 
+	 * @param other
+	 *            the graph to be compared with this one
+	 * @param options
+	 *            an option map to customize the isomorphie comparison, for more
+	 *            information about how to customize the comparison, please
+	 *            check the javadoc to {@link DiffOptions}
+	 * @return true, if graphs are isomorph, false otherwise.
+	 */
+	public boolean isIsomorph(SDocumentGraph other, DiffOptions options);
 
 	/**
 	 * Compares the passed graph with the current one and returns if they are
@@ -906,6 +924,23 @@ public interface SDocumentGraph extends SGraph {
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
 	public Set<Difference> findDiffs(SDocumentGraph other);
+	/**
+	 * Compares the passed graph with the current one and returns if they are
+	 * isomorph or not. If graphs are not isomporph, this method finds and
+	 * records all differences and lists them. That means the entire graphs have
+	 * to be compared and could slow down the computation. If you are only
+	 * interested in the result and not in the particular differences, use
+	 * method {@link #isIsomorph()}.
+	 * 
+	 * @param other
+	 *            the graph to be compared with this one
+	 * @param options
+	 *            an option map to customize the isomorphie comparison, for more
+	 *            information about how to customize the comparison, please
+	 *            check the javadoc to {@link DiffOptions}
+	 * @return true, if graphs are isomorph, false otherwise.
+	 */
+	public Set<Difference> findDiffs(SDocumentGraph other, DiffOptions options);
 
 	/**
 	 * Returns a list of nodes in base document. The returned nodes are

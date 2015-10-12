@@ -50,9 +50,9 @@ import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.graph.IdentifiableElement;
 import org.corpus_tools.salt.util.DIFF_TYPES;
+import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
-
 
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -85,7 +85,7 @@ import com.google.common.collect.Multimap;
  * <li>{@link #OPTION_CHECK_ID} - When true identifiers needs to be the same in
  * isomorphie check and difference computation.</li>
  * </ul>
- * 
+ * @author florian
  * @author André Röhrig
  *
  */
@@ -148,31 +148,10 @@ public class Diff {
 		this.templateGraph = template;
 		this.otherGraph = other;
 
-		options = optionMap;
-		if (options == null) {
-			options = new Hashtable<>();
+		if (optionMap== null){
+			optionMap = new DiffOptions();
 		}
-		if (!options.containsKey(OPTION_IGNORE_ANNOTATIONS)) {
-			options.put(OPTION_IGNORE_ANNOTATIONS, false);
-		}
-		if (!options.containsKey(OPTION_IGNORE_META_ANNOTATIONS)) {
-			options.put(OPTION_IGNORE_META_ANNOTATIONS, false);
-		}
-		if (!options.containsKey(OPTION_IGNORE_PROCESSING_ANNOTATIONS)) {
-			options.put(OPTION_IGNORE_PROCESSING_ANNOTATIONS, true);
-		}
-		if (!options.containsKey(OPTION_IGNORE_FEATURES)) {
-			options.put(OPTION_IGNORE_FEATURES, false);
-		}
-		if (!options.containsKey(OPTION_IGNORE_ID)) {
-			options.put(OPTION_IGNORE_ID, true);
-		}
-		if (!options.containsKey(OPTION_IGNORE_NAME)) {
-			options.put(OPTION_IGNORE_NAME, true);
-		}
-		if (!options.containsKey(OPTION_IGNORE_LAYER)) {
-			options.put(OPTION_IGNORE_LAYER, false);
-		}
+		options= optionMap;
 	}
 
 	private Set<Difference> differences = null;
