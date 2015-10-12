@@ -550,7 +550,7 @@ public class SampleGenerator {
 		SToken sToken = SaltFactory.createSToken();
 		document.getDocumentGraph().addNode(sToken);
 		if (layer != null) {
-			layer.getNodes().add(sToken);
+			layer.addNode(sToken);
 		}
 		STextualRelation sTextRel = SaltFactory.createSTextualRelation();
 		sTextRel.setSource(sToken);
@@ -940,18 +940,18 @@ public class SampleGenerator {
 		docGraph.addLayer(syntaxLayer);
 
 		// adding the constituents to the syntax layer
-		syntaxLayer.getNodes().add(root);
-		syntaxLayer.getNodes().add(sq);
-		syntaxLayer.getNodes().add(np1);
-		syntaxLayer.getNodes().add(adjp1);
-		syntaxLayer.getNodes().add(adjp2);
-		syntaxLayer.getNodes().add(sbar);
-		syntaxLayer.getNodes().add(s1);
-		syntaxLayer.getNodes().add(np2);
-		syntaxLayer.getNodes().add(vp1);
-		syntaxLayer.getNodes().add(s2);
-		syntaxLayer.getNodes().add(vp2);
-		syntaxLayer.getNodes().add(vp3);
+		syntaxLayer.addNode(root);
+		syntaxLayer.addNode(sq);
+		syntaxLayer.addNode(np1);
+		syntaxLayer.addNode(adjp1);
+		syntaxLayer.addNode(adjp2);
+		syntaxLayer.addNode(sbar);
+		syntaxLayer.addNode(s1);
+		syntaxLayer.addNode(np2);
+		syntaxLayer.addNode(vp1);
+		syntaxLayer.addNode(s2);
+		syntaxLayer.addNode(vp2);
+		syntaxLayer.addNode(vp3);
 	}
 
 	/**

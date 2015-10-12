@@ -680,7 +680,7 @@ public class GraphTest {
 			relation.setSource(node1);
 			relation.setTarget(node2);
 			getFixture().addRelation(relation);
-			layer1.getRelations().add(relation);
+			layer1.addRelation(relation);
 			relations.add(relation);
 		}
 		assertEquals(5, getFixture().getRelations().size());

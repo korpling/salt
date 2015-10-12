@@ -17,6 +17,7 @@
  */
 package org.corpus_tools.salt.graph.impl;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -91,7 +92,7 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Layer#getNodes()} **/
 	@Override
 	public Set<N> getNodes() {
-		return (nodes);
+		return (Collections.unmodifiableSet(nodes));
 	}
 
 	/** {@inheritDoc Layer#addNode(Node)} **/
@@ -114,7 +115,7 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	/** {@inheritDoc Layer#getRelations()} **/
 	@Override
 	public Set<R> getRelations() {
-		return (relations);
+		return (Collections.unmodifiableSet(relations));
 	}
 
 	/** {@inheritDoc Layer#addRelation(Relation)} **/

@@ -25,6 +25,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.GraphFactory;
@@ -102,7 +103,6 @@ public class LayerTest {
 	 */
 	public void testGetNodes() {
 		List<Node> nodes = new ArrayList<>();
-
 		for (int i = 0; i < 50; i++) {
 			Node node = GraphFactory.createNode();
 			nodes.add(node);
@@ -111,6 +111,30 @@ public class LayerTest {
 		assertEquals(nodes.size(), getFixture().getNodes().size());
 		for (Node node : nodes) {
 			assertTrue(getFixture().getNodes().contains(node));
+		}
+	}
+
+	/**
+	 * Checks that nodes can not be added to layer's node list directly.
+	 */
+	@Test
+	public void testAddNode() {
+		try {
+			getFixture().getNodes().add(GraphFactory.createNode());
+			fail("Should not add a node in layer's node list directly.");
+		} catch (UnsupportedOperationException e) {
+		}
+	}
+
+	/**
+	 * Checks that relations can not be added to layer's relation list directly.
+	 */
+	@Test
+	public void testAddRelation() {
+		try {
+			getFixture().getRelations().add(GraphFactory.createRelation());
+			fail("Should not add a node in layer's node list directly.");
+		} catch (UnsupportedOperationException e) {
 		}
 	}
 
