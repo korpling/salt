@@ -25,8 +25,6 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.corpus_tools.salt.SaltFactory;
-import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Layer;
