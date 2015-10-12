@@ -35,10 +35,13 @@ import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.samples.SampleGenerator;
+import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.internal.Diff;
 import org.junit.Before;
 import org.junit.Test;
+
+import sun.security.krb5.internal.PAData.SaltAndParams;
 
 /**
  * This class tests the isomorphy check of the {@link SDocumentGraph}.
@@ -471,5 +474,30 @@ public class DiffTest {
 
 		Set<Difference> diffs = getFixture().findDiffs();
 		assertEquals("" + diffs, 0, diffs.size());
+	}
+	
+	@Test
+	public void test_fails(){
+		SDocument doc1 = SaltFactory.createSDocument();
+		doc1.setId(null);
+		SDocument doc2 = SaltFactory.createSDocument();
+		doc2.setId("doc");
+		
+		SDocumentGraph dg1 = SaltFactory.createSDocumentGraph();
+		SDocumentGraph dg2 = SaltFactory.createSDocumentGraph();
+		
+		doc1.setDocumentGraph(dg1);
+		doc2.setDocumentGraph(dg2);
+		
+		dg1.createTextualDS("hallo");
+		dg1.tokenize();
+		dg1.createSpan(dg1.getTokens()).createAnnotation(null, "function", "being nice");
+		
+		dg2.createTextualDS("hallo");
+		dg2.tokenize();
+		dg2.createSpan(dg2.getTokens()).createAnnotation(null, "function", "being nice");
+		
+		Set<Difference> diffs= dg1.findDiffs(dg2, (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true))
+		assertEquals(diffs.toString(), 0, diffs.size())
 	}
 }
