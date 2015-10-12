@@ -111,7 +111,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 */
 	protected void basicSetGraph(Graph graph) {
 		// remove from old graph if it was changed
-		if(this.graph != graph && this.graph instanceof GraphImpl) {
+		if (this.graph != graph && this.graph instanceof GraphImpl) {
 			((GraphImpl) this.graph).basicRemoveNode(this);
 		}
 		this.graph = graph;
@@ -134,7 +134,12 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 		return (Collections.unmodifiableSet(layers));
 	}
 
-	/** {@inheritDoc} **/
+	/**
+	 * {@inheritDoc} <br/>
+	 * Since the method {@link #getLayers()} retrieves all layers by accessing
+	 * the layers in graph, this class does not contain an own collection of
+	 * layers.
+	 **/
 	@Override
 	public void addLayer(Layer layer) {
 		if (layer != null) {
@@ -142,7 +147,12 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 		}
 	}
 
-	/** {@inheritDoc} **/
+	/** 
+	 * {@inheritDoc}<br/>
+	 * Since the method {@link #getLayers()} retrieves all layers by accessing
+	 * the layers in graph, this class does not contain an own collection of
+	 * layers. 
+	 **/
 	@Override
 	public void removeLayer(Layer layer) {
 		if (layer != null) {

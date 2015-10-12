@@ -172,15 +172,26 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		return (layers);
 	}
 
-	/** {@inheritDoc} **/
+	/**
+	 * {@inheritDoc}<br/>
+	 * Since the method {@link #getLayers()} retrieves all layers by accessing
+	 * the layers in graph, this class does not contain an own collection of
+	 * layers.
+	 **/
 	@Override
 	public void addLayer(Layer layer) {
 		if (layer != null) {
+
 			layer.addRelation(this);
 		}
 	}
 
-	/** {@inheritDoc} **/
+	/**
+	 * {@inheritDoc} <br/>
+	 * Since the method {@link #getLayers()} retrieves all layers by accessing
+	 * the layers in graph, this class does not contain an own collection of
+	 * layers.
+	 **/
 	@Override
 	public void removeLayer(Layer layer) {
 		if (layer != null) {
