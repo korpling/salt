@@ -27,14 +27,13 @@ import org.corpus_tools.salt.core.SProcessingAnnotation;
 /**
  * This class defines an option map to customize the isomorphie check of two
  * graphs. For instance you can suppress the check for ids of nodes, relations
- * etc. during the isomorphie comparison. 
- * To supress the id check set {@link DiffOptions#OPTION_IGNORE_ID} to true:
- * <code>
+ * etc. during the isomorphie comparison. To supress the id check set
+ * {@link DiffOptions#OPTION_IGNORE_ID} to true: <code>
  * <pre>
  * put(OPTION_IGNORE_ID, true);
  * </pre>
- * </code>
- * The default settings are specified in {@link DiffOptions#Diff_Options()}.
+ * </code> The default settings are specified in
+ * {@link DiffOptions#Diff_Options()}.
  * 
  * 
  * @author florian
@@ -103,5 +102,16 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 		put(OPTION_IGNORE_ID, true);
 		put(OPTION_IGNORE_NAME, true);
 		put(OPTION_IGNORE_LAYER, false);
+	}
+
+	/**
+	 * Adds an option and returns this option object. If the key or value is
+	 * null, nothing will be done.
+	 */
+	public DiffOptions setOption(String key, Boolean value) {
+		if (key!= null && value!= null){
+			put(key, value);
+		}
+		return(this);
 	}
 }
