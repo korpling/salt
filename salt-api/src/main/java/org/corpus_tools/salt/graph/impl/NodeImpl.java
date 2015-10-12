@@ -77,7 +77,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
-		Graph oldGraph = graph;
+		Graph oldGraph = getGraph();
 		if (graph != null) {
 			graph.addNode(this);
 		}

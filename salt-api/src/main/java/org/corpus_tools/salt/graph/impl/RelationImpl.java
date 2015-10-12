@@ -118,7 +118,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
-		Graph oldGraph = graph;
+		Graph oldGraph = getGraph();
 		if (graph != null) {
 			graph.addRelation(this);
 		}
