@@ -20,6 +20,7 @@ package org.corpus_tools.salt.graph.impl.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.corpus_tools.salt.graph.Graph;
@@ -51,7 +52,7 @@ public class RelationTest {
 	 * Tests the double chaining with Graph.
 	 */
 	@Test
-	public void testDoubleChaining() {
+	public void testDoubleChaining_SetGraph() {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
 		Node source = GraphFactory.createNode();
 		Node target = GraphFactory.createNode();
@@ -62,6 +63,40 @@ public class RelationTest {
 
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getRelations(), graph.getRelations().contains(getFixture()));
+	}
+
+	/**
+	 * Tests whether a relation is removed correctly form graph, when the graph
+	 * is set to null or to a new graph.
+	 */
+	@Test
+	public void testDoubleChaining_SetGraph_remove() {
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
+		Node source = GraphFactory.createNode();
+		Node target = GraphFactory.createNode();
+		graph.addNode(source);
+		graph.addNode(target);
+		getFixture().setSource(source);
+		getFixture().setTarget(target);
+
+		getFixture().setGraph(graph);
+		assertEquals(graph, getFixture().getGraph());
+		getFixture().setGraph(null);
+		assertNull(getFixture().getGraph());
+		
+		getFixture().setGraph(graph);
+		assertEquals(graph, getFixture().getGraph());
+		
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = GraphFactory.createGraph();
+		Node source2 = GraphFactory.createNode();
+		Node target2 = GraphFactory.createNode();
+		graph2.addNode(source2);
+		graph2.addNode(target2);
+		getFixture().setSource(source2);
+		getFixture().setTarget(target2);
+		
+		getFixture().setGraph(graph2);
+		assertEquals(graph2, getFixture().getGraph());
 	}
 
 	/**

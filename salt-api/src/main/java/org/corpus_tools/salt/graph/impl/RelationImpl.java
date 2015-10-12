@@ -118,12 +118,15 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
-		basicSetGraph(graph);
+		Graph oldGraph = graph;
 		if (graph != null) {
 			graph.addRelation(this);
-		} else {
-			// TODO: remove relation from graph
 		}
+		if (oldGraph!= null && oldGraph!= graph && oldGraph instanceof GraphImpl) {
+			// remove relation from old graph
+			((GraphImpl)oldGraph).basicRemoveRelation(this);
+		}
+		basicSetGraph(graph);
 	}
 
 	/**

@@ -20,6 +20,7 @@ package org.corpus_tools.salt.graph.impl.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.corpus_tools.salt.graph.Graph;
@@ -54,6 +55,28 @@ public class NodeTest {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getNodes(), graph.getNodes().contains(getFixture()));
+	}
+	
+	/**
+	 * Tests whether a relation is removed correctly form graph, when the graph
+	 * is set to null or to a new graph.
+	 */
+	@Test
+	public void testDoubleChaining_SetGraph_remove() {
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
+		
+		getFixture().setGraph(graph);
+		assertEquals(graph, getFixture().getGraph());
+		getFixture().setGraph(null);
+		assertNull(getFixture().getGraph());
+		
+		getFixture().setGraph(graph);
+		assertEquals(graph, getFixture().getGraph());
+		
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = GraphFactory.createGraph();
+		
+		getFixture().setGraph(graph2);
+		assertEquals(graph2, getFixture().getGraph());
 	}
 
 	/**
