@@ -49,6 +49,7 @@ import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.TokenStartComparator;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 /**
@@ -470,7 +471,7 @@ public class DataSourceAccessor {
 		}
 		Class<? extends SRelation> currRelationType = null;
 		currRelationType = clazz;
-		Multimap<String, SNode> retVal = HashMultimap.create();
+		Multimap<String, SNode> retVal = LinkedHashMultimap.create();
 		List<SRelation> relations = documentGraph.getRelations(clazz);
 		for (SRelation<? extends SNode, ? extends SNode> currentRel : relations) {
 
