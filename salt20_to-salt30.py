@@ -27,6 +27,10 @@ def rename(file):
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SPOSAnnotation;', 'import org.corpus_tools.salt.semantics.SPOSAnnotation;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SWordAnnotation;', 'import org.corpus_tools.salt.semantics.SWordAnnotation;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;', 'import org.corpus_tools.salt.core.SLayer;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SLayer;', 'import org.corpus_tools.salt.core.SLayer;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline;', 'import org.corpus_tools.salt.common.STimeline;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation;', 'import org.corpus_tools.salt.common.STimelineRelation;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructuredNode;', 'import org.corpus_tools.salt.common.SStructuredNode;')
 		
 		
 		#global 
