@@ -97,25 +97,15 @@ public interface SDocumentGraph extends SGraph {
 	public List<SToken> getTokens();
 
 	/**
-	 * Returns the value of the '<em><b>STimeline</b></em>' reference. It is
-	 * bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>STimeline</em>' reference isn't clear, there
-	 * really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+	 * Returns the timeline of this document graph. A timeline is a specific
+	 * datasource and acts as an anchor for {@link STimelineRelation}s. A
+	 * timeline is necessary to set tokens in correspondance when they belong to
+	 * different {@link STextualDS}s. For instance a timeline is necessary to
+	 * model dialogue data.
 	 * 
-	 * @return the value of the '<em>STimeline</em>' reference.
-	 * @see #setTimeline(STimeline)
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_STimeline()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimeline#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" transient="true" volatile="true"
-	 *        derived="true"
-	 * @generated
+	 * @return timeline
 	 */
-	STimeline getTimeline();
+	public STimeline getTimeline();
 
 	/**
 	 * Sets the value of the '
@@ -166,215 +156,23 @@ public interface SDocumentGraph extends SGraph {
 	 */
 	public List<SNode> getNodes(Class<?> clazz);
 
-	/**
-	 * Returns the value of the '<em><b>STimeline Relations</b></em>'
-	 * containment reference list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>STimeline Relations</em>' containment
-	 * reference isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>STimeline Relations</em>' containment
-	 *         reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_STimelineRelations()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.STimelineRelation#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true" derived="true"
-	 * @generated
-	 */
-	List<STimelineRelation> getTimelineRelations();
+	public List<STimelineRelation> getTimelineRelations();
 
-	/**
-	 * Returns the value of the '<em><b>SSpanning Relations</b></em>'
-	 * containment reference list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SSpanning Relations</em>' containment
-	 * reference list isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>SSpanning Relations</em>' containment
-	 *         reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SSpanningRelations()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true" derived="true"
-	 * @generated
-	 */
-	List<SSpanningRelation> getSpanningRelations();
+	public List<SSpanningRelation> getSpanningRelations();
 
-	/**
-	 * Returns the value of the '<em><b>SSpans</b></em>' containment reference
-	 * list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SSpans</em>' containment reference list isn't
-	 * clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>SSpans</em>' containment reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SSpans()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true" derived="true"
-	 * @generated
-	 */
-	List<SSpan> getSpans();
+	public List<SSpan> getSpans();
 
-	/**
-	 * Returns the value of the '<em><b>SStructures</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SStructures</em>' containment reference list
-	 * isn't clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>SStructures</em>' containment reference
-	 *         list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SStructures()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true" derived="true"
-	 * @generated
-	 */
-	List<SStructure> getStructures();
+	public List<SStructure> getStructures();
 
-	/**
-	 * Returns the value of the '<em><b>SDominance Relations</b></em>'
-	 * containment reference list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SDominance Relations</em>' containment
-	 * reference list isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>SDominance Relations</em>' containment
-	 *         reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SDominanceRelations()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true" derived="true"
-	 * @generated
-	 */
-	List<SDominanceRelation> getDominanceRelations();
+	public List<SDominanceRelation> getDominanceRelations();
 
-	/**
-	 * Returns the value of the '<em><b>SPointing Relations</b></em>'
-	 * containment reference list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SPointing Relations</em>' containment
-	 * reference list isn't clear, there really should be more of a description
-	 * here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>SPointing Relations</em>' containment
-	 *         reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SPointingRelations()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true"
-	 * @generated
-	 */
-	List<SPointingRelation> getPointingRelations();
+	public List<SPointingRelation> getPointingRelations();
 
-	/**
-	 * Returns the value of the '<em><b>SAudio DS Relations</b></em>'
-	 * containment reference list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SAudio DS Relations</em>' reference list isn't
-	 * clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>SAudio DS Relations</em>' containment
-	 *         reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SAudioDSRelations()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDSRelation#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true" derived="true"
-	 * @generated
-	 */
-	List<SMedialRelation> getMedialRelations();
+	public List<SMedialRelation> getMedialRelations();
 
-	/**
-	 * Returns the value of the '<em><b>SAudio Data Sources</b></em>'
-	 * containment reference list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SAudio Data Sources</em>' reference list isn't
-	 * clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>SAudio Data Sources</em>' containment
-	 *         reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SAudioDataSources()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SAudioDataSource#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true" derived="true"
-	 * @generated
-	 */
-	List<SMedialDS> getMedialDSs();
+	public List<SMedialDS> getMedialDSs();
 
-	/**
-	 * Returns the value of the '<em><b>SOrder Relations</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation}
-	 * . It is bidirectional and its opposite is '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation#getSDocumentGraph
-	 * <em>SDocument Graph</em>}'. <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>SOrder Relations</em>' containment reference
-	 * list isn't clear, there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>SOrder Relations</em>' containment
-	 *         reference list.
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentStructurePackage#getSDocumentGraph_SOrderRelations()
-	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SOrderRelation#getSDocumentGraph
-	 * @model opposite="sDocumentGraph" containment="true" transient="true"
-	 *        volatile="true" derived="true"
-	 * @generated
-	 */
-	List<SOrderRelation> getOrderRelations();
+	public List<SOrderRelation> getOrderRelations();
 
 	/**
 	 * Creates and returns a '<em><b>SRelation</b></em>' of the type given by
@@ -924,6 +722,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
 	public Set<Difference> findDiffs(SDocumentGraph other);
+
 	/**
 	 * Compares the passed graph with the current one and returns if they are
 	 * isomorph or not. If graphs are not isomporph, this method finds and
