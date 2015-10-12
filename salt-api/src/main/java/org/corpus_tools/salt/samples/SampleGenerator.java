@@ -264,6 +264,7 @@ public class SampleGenerator {
 	public static final String LANG_EN = "en";
 	/** iso 639-1 language code for german **/
 	public static final String LANG_DE = "de";
+	private static final String SYNTAX_LAYER = "syntax";
 
 	/**
 	 * Creates a {@link SDocumentGraph} containing to texts of two different
@@ -936,7 +937,7 @@ public class SampleGenerator {
 
 		// creating a layer named "syntax" for the constituents of the tree
 		SLayer syntaxLayer = SaltFactory.createSLayer();
-		syntaxLayer.setName("syntax");
+		syntaxLayer.setName(SYNTAX_LAYER);
 		docGraph.addLayer(syntaxLayer);
 
 		// adding the constituents to the syntax layer
