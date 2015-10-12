@@ -23,10 +23,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SDominanceRelation;
 import org.corpus_tools.salt.common.SPointingRelation;
@@ -35,15 +38,12 @@ import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SLayer;
-import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.internal.Diff;
 import org.junit.Before;
 import org.junit.Test;
-
-import sun.security.krb5.internal.PAData.SaltAndParams;
 
 /**
  * This class tests the isomorphy check of the {@link SDocumentGraph}.
@@ -478,10 +478,20 @@ public class DiffTest {
 		assertEquals("" + diffs, 0, diffs.size());
 	}
 	
+	/**
+	 * this test reveals faulty diff testing AND output, when the document's id is not set
+	 * the two graphs are identical (except of the document's id). They look like this:
+	 * 
+	 * 	SPAN4---SPAN4---SPAN4 <--LABEL[ns::function="all"]
+	 * 					SPAN3 <--LABEL[ns::function="tail"]
+	 * 			SPAN2---SPAN2 <--LABEL[ns::function="none"]
+	 * 	SPAN1 <------------------LABEL[ns::function="being nice"]
+	 *  TOK-0	TOK-1	TOK-2
+	 */
 	@Test
 	public void test_fails(){
-		SDocument doc1 = SaltFactory.createSDocument();
-		doc1.setId(null);
+		SDocument doc1 = SaltFactory.createSDocument();System.out.println("5");
+//		doc1.setId(null);
 		SDocument doc2 = SaltFactory.createSDocument();
 		doc2.setId("doc");
 		
@@ -491,16 +501,28 @@ public class DiffTest {
 		doc1.setDocumentGraph(dg1);
 		doc2.setDocumentGraph(dg2);
 		
-		dg1.createTextualDS("hallo");
+		dg1.createTextualDS("hallo hallo hallo");
 		dg1.tokenize();
-		dg1.createSpan(dg1.getTokens()).createAnnotation(null, "function", "being nice");
+		dg1.createSpan(dg1.getTokens().get(0)).createAnnotation("ns", "function", "being nice");
+		List<SToken> tokens = new ArrayList<SToken>();
+		tokens.add(dg1.getTokens().get(1));
+		tokens.add(dg1.getTokens().get(2));
+		dg1.createSpan(tokens).createAnnotation("ns", "function", "none");
+		dg1.createSpan(dg1.getTokens().get(2)).createAnnotation("ns", "function", "tail");
+		dg1.createSpan(dg1.getTokens()).createAnnotation("ns", "function", "all");
 		
-		dg2.createTextualDS("hallo");
+		dg2.createTextualDS("hallo hallo hallo");
 		dg2.tokenize();
-		dg2.createSpan(dg2.getTokens()).createAnnotation(null, "function", "being nice");
+		dg2.createSpan(dg2.getTokens().get(0)).createAnnotation("ns", "function", "being nice");
+		tokens.clear();
+		tokens.add(dg2.getTokens().get(1));
+		tokens.add(dg2.getTokens().get(2));
+		dg2.createSpan(tokens).createAnnotation("ns", "function", "none");
+		dg2.createSpan(dg2.getTokens().get(2)).createAnnotation("ns", "function", "tail");
+		dg2.createSpan(dg2.getTokens()).createAnnotation("ns", "function", "all");
 		
-		Set<Difference> diffs= dg1.findDiffs(dg2, (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true))
-		assertEquals(diffs.toString(), 0, diffs.size())
+		Set<Difference> diffs= dg1.findDiffs(dg2, (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
+		assertEquals(diffs.toString(), 0, diffs.size());
 	}
 
 	/**
