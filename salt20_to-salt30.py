@@ -4,6 +4,13 @@ os.chdir(".")
 
 def rename(file):
 	for line in fileinput.input(file, inplace = 1): 
+		
+		#change imports for pepper modules
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.pepper.common.DOCUMENT_STATUS;', 'import org.corpus_tools.pepper.common.DOCUMENT_STATUS;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.PepperMapper;', 'import org.corpus_tools.pepper.modules.PepperMapper;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.exceptions.PepperModuleDataException;', 'import org.corpus_tools.pepper.modules.exceptions.PepperModuleDataException;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.impl.PepperMapperImpl;', 'import org.corpus_tools.pepper.modules.PepperMapper;')
+		
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;', 'import org.corpus_tools.salt.common.SCorpus;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;', 'import org.corpus_tools.salt.common.SDocument;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;', '')
@@ -15,7 +22,7 @@ def rename(file):
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;', 'import org.corpus_tools.salt.core.SNode;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;', 'import org.corpus_tools.salt.core.SRelation;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;', 'import org.corpus_tools.salt.common.SSpan;')
-		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;', 'import org.corpus_tools.salt.SaltFactory')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltSemantics.SaltSemanticsFactory;', 'import org.corpus_tools.salt.SaltFactory;')
 		line= line.replace('import org.eclipse.emf.common.util.BasicEList;', 'import java.util.ArrayList;')
 		line= line.replace('import org.eclipse.emf.common.util.EList;', 'import java.util.List;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;', 'import org.corpus_tools.salt.SaltFactory;')
@@ -53,7 +60,7 @@ def rename(file):
 		line= line.replace('getSRelations', 'getRelations')
 		line= line.replace('getSRelation', 'getRelation')
 		line= line.replace('Edge', 'Relation')
-		line= line.replace('edge', 'relation')
+		#line= line.replace('edge', 'relation')
 		line= line.replace('createSAnnotation(', 'createAnnotation(')
 		line= line.replace('createSMetaAnnotation(', 'createMetaAnnotation(')
 		line= line.replace('createSProcessingAnnotation(', 'createProcessingAnnotation(')
