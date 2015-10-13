@@ -10,6 +10,9 @@ def rename(file):
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.PepperMapper;', 'import org.corpus_tools.pepper.modules.PepperMapper;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.exceptions.PepperModuleDataException;', 'import org.corpus_tools.pepper.modules.exceptions.PepperModuleDataException;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.impl.PepperMapperImpl;', 'import org.corpus_tools.pepper.modules.PepperMapper;')
+		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.pepper.modules.impl.PepperManipulatorImpl;', 'import org.corpus_tools.pepper.modules.PepperManipulatorImpl;')
+		
+
 		
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SCorpus;', 'import org.corpus_tools.salt.common.SCorpus;')
 		line= line.replace('import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;', 'import org.corpus_tools.salt.common.SDocument;')
