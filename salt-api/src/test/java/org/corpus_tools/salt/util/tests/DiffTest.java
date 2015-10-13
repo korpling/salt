@@ -33,11 +33,13 @@ import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SDominanceRelation;
 import org.corpus_tools.salt.common.SPointingRelation;
+import org.corpus_tools.salt.common.SSpan;
 import org.corpus_tools.salt.common.SStructure;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SLayer;
+import org.corpus_tools.salt.core.SPathElement;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
@@ -477,51 +479,56 @@ public class DiffTest {
 		Set<Difference> diffs = getFixture().findDiffs();
 		assertEquals("" + diffs, 0, diffs.size());
 	}
-	
+
 	/**
-	 * this test reveals faulty diff testing AND output, when the document's id is not set
-	 * the two graphs are identical (except of the document's id). They look like this:
-	 * 
-	 * 	SPAN4---SPAN4---SPAN4 <--LABEL[ns::function="all"]
+	 * this test reveals faulty diff testing AND output, when the document's id
+	 * is not set the two graphs are identical (except of the document's id).
+	 * They look like this:
+	 * <pre>
+	 * SPAN4---SPAN4---SPAN4 <--LABEL[ns::function="all"]
 	 * 					SPAN3 <--LABEL[ns::function="tail"]
 	 * 			SPAN2---SPAN2 <--LABEL[ns::function="none"]
 	 * 	SPAN1 <------------------LABEL[ns::function="being nice"]
 	 *  TOK-0	TOK-1	TOK-2
+	 * </pre>
 	 */
 	@Test
-	public void test_fails(){
-		SDocument doc1 = SaltFactory.createSDocument();System.out.println("5");
-//		doc1.setId(null);
+	public void testMultipleChildsMultipleParents() {
+		SDocument doc1 = SaltFactory.createSDocument();
 		SDocument doc2 = SaltFactory.createSDocument();
 		doc2.setId("doc");
+
+		SDocumentGraph dg1 = null;
+		{// create document graph 1
+			dg1 = SaltFactory.createSDocumentGraph();
+			doc1.setDocumentGraph(dg1);
+			dg1.createTextualDS("hallo hallo hallo");
+			dg1.tokenize();
+			dg1.createSpan(dg1.getTokens().get(0)).createAnnotation("ns", "function", "being nice");
+			List<SToken> tokens = new ArrayList<SToken>();
+			tokens.add(dg1.getTokens().get(1));
+			tokens.add(dg1.getTokens().get(2));
+			dg1.createSpan(tokens).createAnnotation("ns", "function", "none");
+			dg1.createSpan(dg1.getTokens().get(2)).createAnnotation("ns", "function", "tail");
+			dg1.createSpan(dg1.getTokens()).createAnnotation("ns", "function", "all");
+		}
 		
-		SDocumentGraph dg1 = SaltFactory.createSDocumentGraph();
-		SDocumentGraph dg2 = SaltFactory.createSDocumentGraph();
-		
-		doc1.setDocumentGraph(dg1);
-		doc2.setDocumentGraph(dg2);
-		
-		dg1.createTextualDS("hallo hallo hallo");
-		dg1.tokenize();
-		dg1.createSpan(dg1.getTokens().get(0)).createAnnotation("ns", "function", "being nice");
-		List<SToken> tokens = new ArrayList<SToken>();
-		tokens.add(dg1.getTokens().get(1));
-		tokens.add(dg1.getTokens().get(2));
-		dg1.createSpan(tokens).createAnnotation("ns", "function", "none");
-		dg1.createSpan(dg1.getTokens().get(2)).createAnnotation("ns", "function", "tail");
-		dg1.createSpan(dg1.getTokens()).createAnnotation("ns", "function", "all");
-		
-		dg2.createTextualDS("hallo hallo hallo");
-		dg2.tokenize();
-		dg2.createSpan(dg2.getTokens().get(0)).createAnnotation("ns", "function", "being nice");
-		tokens.clear();
-		tokens.add(dg2.getTokens().get(1));
-		tokens.add(dg2.getTokens().get(2));
-		dg2.createSpan(tokens).createAnnotation("ns", "function", "none");
-		dg2.createSpan(dg2.getTokens().get(2)).createAnnotation("ns", "function", "tail");
-		dg2.createSpan(dg2.getTokens()).createAnnotation("ns", "function", "all");
-		
-		Set<Difference> diffs= dg1.findDiffs(dg2, (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
+		SDocumentGraph dg2 = null;
+		{// create document graph 2
+			dg2 = SaltFactory.createSDocumentGraph();
+			doc2.setDocumentGraph(dg2);
+			dg2.createTextualDS("hallo hallo hallo");
+			dg2.tokenize();
+			dg2.createSpan(dg2.getTokens().get(0)).createAnnotation("ns", "function", "being nice");
+			List<SToken> tokens = new ArrayList<SToken>();
+			tokens.add(dg2.getTokens().get(1));
+			tokens.add(dg2.getTokens().get(2));
+			dg2.createSpan(tokens).createAnnotation("ns", "function", "none");
+			dg2.createSpan(dg2.getTokens().get(2)).createAnnotation("ns", "function", "tail");
+			dg2.createSpan(dg2.getTokens()).createAnnotation("ns", "function", "all");
+		}
+
+		Set<Difference> diffs = dg1.findDiffs(dg2, (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
 		assertEquals(diffs.toString(), 0, diffs.size());
 	}
 
@@ -531,44 +538,43 @@ public class DiffTest {
 	 */
 	@Test
 	public void test_Options() {
-		SDocumentGraph graph1= SaltFactory.createSDocumentGraph();
-		STextualDS text1= graph1.createTextualDS("This is a sample");
+		SDocumentGraph graph1 = SaltFactory.createSDocumentGraph();
+		STextualDS text1 = graph1.createTextualDS("This is a sample");
 		graph1.addNode(text1);
-		SToken tok1= SaltFactory.createSToken();
+		SToken tok1 = SaltFactory.createSToken();
 		tok1.setName("tok");
 		graph1.addNode(tok1);
-		STextualRelation rel= SaltFactory.createSTextualRelation();
+		STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setSource(tok1);
 		rel.setTarget(text1);
 		rel.setStart(0);
 		rel.setEnd(4);
 		graph1.addRelation(rel);
-		
-		
-		SDocumentGraph graph2= SaltFactory.createSDocumentGraph();
-		STextualDS text2= graph2.createTextualDS("This is a sample");
+
+		SDocumentGraph graph2 = SaltFactory.createSDocumentGraph();
+		STextualDS text2 = graph2.createTextualDS("This is a sample");
 		graph2.addNode(text2);
-		SToken tok2= SaltFactory.createSToken();
+		SToken tok2 = SaltFactory.createSToken();
 		tok2.setName("other");
 		graph2.addNode(tok2);
-		rel= SaltFactory.createSTextualRelation();
+		rel = SaltFactory.createSTextualRelation();
 		rel.setSource(tok2);
 		rel.setTarget(text2);
 		rel.setStart(0);
 		rel.setEnd(4);
 		graph2.addRelation(rel);
-		
-		
-		//rename name, that the isomorphie check will not find a difference in name
+
+		// rename name, that the isomorphie check will not find a difference in
+		// name
 		tok2.setName("tok");
-		
-		DiffOptions options= new DiffOptions();
+
+		DiffOptions options = new DiffOptions();
 		options.setOption(DiffOptions.OPTION_IGNORE_ID, true);
-		Set<Difference> diffs= graph1.findDiffs(graph2, options);
-		assertEquals(diffs+"", 0, diffs.size());
-		
+		Set<Difference> diffs = graph1.findDiffs(graph2, options);
+		assertEquals(diffs + "", 0, diffs.size());
+
 		options.setOption(DiffOptions.OPTION_IGNORE_ID, false);
-		diffs= graph1.findDiffs(graph2, options);
-		assertEquals(diffs+"", 1, diffs.size());
+		diffs = graph1.findDiffs(graph2, options);
+		assertEquals(diffs + "", 1, diffs.size());
 	}
 }

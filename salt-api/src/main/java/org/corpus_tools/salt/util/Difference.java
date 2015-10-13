@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.graph.IdentifiableElement;
+import org.corpus_tools.salt.graph.Label;
 
 /**
  * Objects of this class are produces by
@@ -60,38 +61,33 @@ public class Difference implements Serializable {
 		StringBuilder str = new StringBuilder();
 		str.append(diffType.toString());
 
+		str.append(" compared <");
 		if (templateObject != null) {
-			str.append("	Graph1_Object:");
-			str.append(" salt-type:");
-			str.append((String) templateObject.getClass().getSimpleName());
-			str.append(" id:");
 			if (templateObject instanceof IdentifiableElement) {
 				str.append(((IdentifiableElement) templateObject).getId());
+			}else if (templateObject instanceof Label){
+				Label label= (Label)templateObject;
+				str.append(label.toString());
 			}
 		}
+		str.append("> with <");
 
 		if (otherObject != null) {
-			str.append(" Graph2_Object:");
-			str.append(" salt-type:");
-
-			str.append((String) otherObject.getClass().getSimpleName());
-
-			str.append(" id:");
 			if (otherObject instanceof IdentifiableElement) {
 				str.append(((IdentifiableElement) otherObject).getId());
+			}else if (otherObject instanceof Label){
+				Label label= (Label)otherObject;
+				str.append(label.toString());
 			}
 		}
-
-		if (container != null) {
-			str.append(" Container:" + container.toString());
-		}
+		str.append(">");
 
 		if (subDiffs != null) {
+			str.append(" because of:");
 			Iterator<Difference> iterator = subDiffs.iterator();
 			while (iterator.hasNext()) {
 				str.append("\n	" + iterator.next().toString());
 			}
-
 		}
 
 		return str.toString();

@@ -85,6 +85,7 @@ import com.google.common.collect.Multimap;
  * <li>{@link #OPTION_CHECK_ID} - When true identifiers needs to be the same in
  * isomorphie check and difference computation.</li>
  * </ul>
+ * 
  * @author florian
  * @author André Röhrig
  *
@@ -148,10 +149,10 @@ public class Diff {
 		this.templateGraph = template;
 		this.otherGraph = other;
 
-		if (optionMap== null){
+		if (optionMap == null) {
 			optionMap = new DiffOptions();
 		}
-		options= optionMap;
+		options = optionMap;
 	}
 
 	private Set<Difference> differences = null;
@@ -710,6 +711,7 @@ public class Diff {
 		// a isomorph annotation
 		while (templateIterator.hasNext()) {
 			SAbstractAnnotation templateAnno = templateIterator.next();
+		
 			if (templateAnno instanceof SFeature) {
 				if (options.get(OPTION_IGNORE_NAME)) {
 					if (SaltUtil.FEAT_NAME_QNAME.equals(templateAnno.getQName())) {
@@ -823,6 +825,20 @@ public class Diff {
 		}
 
 		/**
+		 * To check if two nodes A, A' are equal, the following algorithm is
+		 * used. We illustrate that algorithm along this sample:
+		 * 
+		 * G | G' | A | A' D' / \ | | X | \ B C | B' C' E'
+		 * 
+		 * <ol>
+		 * <li>find all children of other node: otherChilds --> (B, C)</li>
+		 * <li>for each node in otherChilds find isomorphic nodes:
+		 * templateChilds--> (B', C')</li>
+		 * <li>for each node in templateChild find shared parents: candidates
+		 * --> (A', D')</li>
+		 * <li>for each node in candidates compare its children to otherChilds
+		 * --> A:(B,C) <=> A':(B', C'), A:(B,C) <=> (C', E')</li>
+		 * </ol>
 		 * 
 		 * @param otherNode
 		 * @param sTypeRelations
@@ -845,43 +861,45 @@ public class Diff {
 			// list all parents in base document sharing the children
 			List<SNode> sharedParents = new ArrayList<>();
 			if (templateChildren.size() > 0) {
-				sharedParents = otherGraph.getSharedParent(templateChildren, nodeType);
+				sharedParents = templateGraph.getSharedParent(templateChildren, nodeType);
 			}
-			if (sharedParents.size() ==  1) {
+			if (sharedParents.size() == 1) {
 				// an equivalent to current node in base document was found
 				templateNode = sharedParents.get(0);
-			} else if(sharedParents.size() > 1) {
-				// Several candidates have been found. First check if any of them
-				// has the same ID.
-				for(SNode candidate : sharedParents) {
-					if(candidate.getId().equals(otherNode.getId())) {
-						templateNode = candidate;
-						break;
-					}
-				}
-				if(templateNode == null) {
-					/* 
-					None of the candidates has the same ID so perform the comparision 
-					with the one which has the smallest number of diffs. We already 
-					know at this point that the graphs are not isomorphic, but
-					we might need to get the differences.
-					*/
-					if(!diffsRequested) {
-						return false;
-					}
-					int minNumberOfDiffs = Integer.MAX_VALUE;
-					for(SNode candidate : sharedParents) {
-						Set<Difference> subDiff = new HashSet<>();
-						compareIdentifiableElements(candidate, otherNode, subDiff);
-						if(subDiff.size() < minNumberOfDiffs) {
-							minNumberOfDiffs = subDiff.size();
-							// this is the node that will be checked again
-							templateNode = candidate;
+			} else if (sharedParents.size() > 1) {
+				// Several candidates have been found. Check which shared parent
+				// node has the same children as other node
+				List<SRelation> otherOutRels = otherNode.getOutRelations();
+				for (SNode templateCandidate : sharedParents) {
+					List<SRelation> templateOutRels = templateCandidate.getOutRelations();
+					// check if node degree is the same
+					if (otherOutRels.size() == templateOutRels.size()) {
+						// check if each child of other node has a partner in
+						// the children of template candidate
+
+						// create a set of of otherChildren
+						Set<SNode> otherChldren = new HashSet<>();
+						Iterator<SRelation> it = otherOutRels.iterator();
+						while (it.hasNext()) {
+							otherChldren.add((SNode) it.next().getTarget());
+						}
+
+						//ckeck if all children of other node and candidate are isomorph
+						boolean trueCandidate= true;
+						Iterator<SRelation> it_template = templateOutRels.iterator();
+						while (it_template.hasNext()) {
+							SNode templateChild = (SNode) it_template.next().getTarget();
+							if (!otherChldren.contains(getIsoNodes().get(templateChild))){
+								trueCandidate= false;
+								break;
+							}
+						}
+						if (trueCandidate){
+							templateNode= templateCandidate;
 						}
 					}
 				}
 			}
-
 			if (templateNode == null) {
 				// no equivalent to currNode in base document was found
 

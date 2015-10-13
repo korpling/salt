@@ -587,35 +587,35 @@ public class SampleGenerator {
 
 		SPointingRelation pointRel = null;
 
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(0), germanToks.get(0), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(0), germanToks.get(0), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(1), germanToks.get(1), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(1), germanToks.get(1), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(2), germanToks.get(2), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(2), germanToks.get(2), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(5), germanToks.get(4), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(5), germanToks.get(4), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(6), germanToks.get(5), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(6), germanToks.get(5), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(7), germanToks.get(6), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(7), germanToks.get(6), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(8), germanToks.get(7), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(8), germanToks.get(7), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(englishToks.get(9), germanToks.get(8), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(9), germanToks.get(8), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
 		List<SToken> sTokens = new ArrayList<>();
 		sTokens.add(englishToks.get(3));
 		sTokens.add(englishToks.get(4));
 		SSpan sSpan = document.getDocumentGraph().createSpan(sTokens);
-		pointRel = (SPointingRelation) document.getDocumentGraph().createSRelation(sSpan, germanToks.get(3), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(sSpan, germanToks.get(3), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel)
 			pointRel.setType("align");
 	}
