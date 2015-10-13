@@ -645,7 +645,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+
 	 * @return the created relation
 	 */
-	public SRelation createSRelation(SNode source, SNode target, SALT_TYPE relationType, String annotations);
+	public SRelation createRelation(SNode source, SNode target, SALT_TYPE relationType, String annotations);
 
 	/**
 	 * Returns all tokens in the graph, which are overlapped by the passed node
@@ -757,7 +757,7 @@ public interface SDocumentGraph extends SGraph {
 
 	/**
 	 * Returns a list of nodes that are the parents of every node in the given
-	 * base list. Only relations with the given {@link SALT_TYPE} will be
+	 * base list. Only nodes with the given {@link SALT_TYPE} will be
 	 * considered.
 	 * 
 	 * @param children

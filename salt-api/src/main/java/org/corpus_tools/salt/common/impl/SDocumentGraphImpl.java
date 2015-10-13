@@ -20,6 +20,7 @@ package org.corpus_tools.salt.common.impl;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -843,7 +844,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SRelation createSRelation(SNode sSource, SNode sTarget, SALT_TYPE sRelationType, String sAnnotations) {
+	public SRelation createRelation(SNode sSource, SNode sTarget, SALT_TYPE sRelationType, String sAnnotations) {
 		if (sSource == null) {
 			throw new SaltParameterException("Cannot create an Srelation, because the passed source node is null.");
 		}
@@ -908,6 +909,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		Diff diff = new Diff(this, other);
 		return (diff.isIsomorph());
 	}
+
 	/** {@inheritDoc SDocumentGraph#isIsomorph(SDocumentGraph, DiffOptions)} **/
 	@Override
 	public boolean isIsomorph(SDocumentGraph other, DiffOptions options) {
@@ -921,7 +923,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		Diff diff = new Diff(this, other);
 		return (diff.findDiffs());
 	}
-	
+
 	/** {@inheritDoc SDocumentGraph#findDiffs(SDocumentGraph, DiffOptions)} **/
 	@Override
 	public Set<Difference> findDiffs(SDocumentGraph other, DiffOptions options) {
@@ -936,11 +938,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		List<SRelation> relations = parent.getOutRelations();
 		if (relations != null) {
 			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
-				if (SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
+				if (relation== null || SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
 					SNode child = relation.getTarget();
-					if (child == null) {
-						throw new SaltException("Cannot merge data, because otherBase was null for relation '" + relation + "'. ");
-					}
 					children.add(child);
 				}
 			}
@@ -948,20 +947,36 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		return children;
 	}
 
-	/** {@inheritDoc} **/
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * <pre>
+	 * for all incoming relations of first child node
+	 * 		add targets to sharedparents
+	 * for each child in children
+	 * 		for each incomming relation of child
+	 * 			add source node of incomming relation to parent
+	 * 		sharedparents= sharedparents ⋂ parents
+	 * </pre>
+	 **/
 	@Override
 	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType) {
 		ArrayList<SNode> sharedParents = new ArrayList<>();
 		if ((children.size() > 0) && (children.get(0) != null)) {
 			List<SRelation> rels = children.get(0).getInRelations();
 			if ((rels != null) && (rels.size() > 0)) {
-				// A merge candidate has to be connected to every base node
+				// a shared parent has to be connected to every child node
 				for (SRelation<? extends SNode, ? extends SNode> baseRelation : rels) {
-					sharedParents.add(baseRelation.getSource());
+					if (SALT_TYPE.class2SaltType(baseRelation.getSource().getClass()).contains(nodeType)) {
+						sharedParents.add(baseRelation.getSource());
+					}
 				}
-				for (SNode baseNode : children) {
+				Iterator<SNode> it= children.iterator();
+				it.next(); //skip first child
+				while (it.hasNext()){
+					SNode child= it.next();
 					ArrayList<SNode> parents = new ArrayList<>();
-					for (SRelation<? extends SNode, ? extends SNode> sRelation : baseNode.getInRelations()) {
+					for (SRelation<? extends SNode, ? extends SNode> sRelation : child.getInRelations()) {
 						SNode parent = sRelation.getSource();
 						if (SALT_TYPE.class2SaltType(parent.getClass()).contains(nodeType)) {
 							parents.add(parent);
