@@ -938,7 +938,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		List<SRelation> relations = parent.getOutRelations();
 		if (relations != null) {
 			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
-				if (relation== null || SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
+				if (relationType== null || SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
 					SNode child = relation.getTarget();
 					children.add(child);
 				}
