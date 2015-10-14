@@ -666,8 +666,28 @@ public void writeHTML(URI outputFolderUri) throws SaltParameterException,  SaltR
 			  jsonWriterEdges.value(fromNode.getPath().fragment());
 			  jsonWriterEdges.key("to");
 			  jsonWriterEdges.value(toNode.getPath().fragment());
-			  jsonWriterEdges.key("label");
-			  jsonWriterEdges.value(relation.getPath().fragment());
+			
+			//  jsonWriterEdges.value(relation.getPath().fragment());
+			  Set<SAnnotation> sAnnotations = relation.getAnnotations();
+			  if (sAnnotations.size() > 0)
+			   {		
+				   String allLabels = "";
+				   
+				   int i= 1;
+				   for (SAnnotation annotation : sAnnotations) 
+				   {
+					   allLabels += (annotation.getName() + "=" + annotation.getValue().toString());
+					   i++;
+					   
+					   if (i < sAnnotations.size()-1){
+						   allLabels+= NEWLINE;
+					   }
+				   }
+				   
+				   jsonWriterEdges.key("label");
+				   jsonWriterEdges.value(allLabels);
+			   }
+			 
 			  jsonWriterEdges.endObject();
 			  
 			  
