@@ -1,4 +1,4 @@
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.visjs;
+package org.corpus_tools.salt.util.internal;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,30 +12,30 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Edge;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.GRAPH_TRAVERSE_TYPE;
-import de.hu_berlin.german.korpling.saltnpepper.salt.graph.Node;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDominanceRelation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SPointingRelation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpan;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SSpanningRelation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SStructure;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SToken;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SAnnotation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SGraphTraverseHandler;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltEmptyParameterException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
+import javax.xml.stream.XMLStreamException;
 
-import org.json.*;
+import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SDocument;
+import org.corpus_tools.salt.common.SDominanceRelation;
+import org.corpus_tools.salt.common.SPointingRelation;
+import org.corpus_tools.salt.common.SSpan;
+import org.corpus_tools.salt.common.SSpanningRelation;
+import org.corpus_tools.salt.common.SStructure;
+import org.corpus_tools.salt.common.SToken;
+import org.corpus_tools.salt.core.GraphTraverseHandler;
+import org.corpus_tools.salt.core.SAnnotation;
+import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
+import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.core.SRelation;
+import org.corpus_tools.salt.exceptions.SaltException;
+import org.corpus_tools.salt.exceptions.SaltParameterException;
+import org.corpus_tools.salt.exceptions.SaltResourceException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.EList;
+import org.json.JSONException;
+import org.json.JSONWriter;
 
 /**
  * <p>
@@ -102,7 +102,7 @@ import org.eclipse.emf.common.util.EList;
  *@author irina
  */
 
-public class VisJsCreator implements SGraphTraverseHandler{
+public class VisJsCreator implements GraphTraverseHandler{
 		
 	private  long maxHeight;
 	private  int currHeight;
@@ -129,7 +129,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	
 	private final HashSet <SNode> readRoots;
 	private final HashSet <SRelation> readRelations;
-	private final EList<SNode> roots;
+	private final List<SNode> roots;
 	private int nGroupsId = 0;
 	
 	
@@ -176,7 +176,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
    * 
    * @param doc an {@link SDocument}, which have to be visualized
    * 
-   * @throws SaltEmptyParameterException if the doc is null 
+   * @throws SaltParameterException if the doc is null 
    */
     public VisJsCreator(SDocument doc){
   	  this(doc, null);
@@ -188,21 +188,21 @@ public class VisJsCreator implements SGraphTraverseHandler{
      * @param doc an SDocument, which have to be visualized
      * @param exportFilter an ExportFilter to exclude selected nodes and/or relations from the visualizing 
      * 
-     * @throws SaltEmptyParameterException if the doc is null 
+     * @throws SaltParameterException if the doc is null 
      */
     
     public VisJsCreator (SDocument doc, ExportFilter exportFilter){  
     	
-    	if(doc == null) throw new SaltEmptyParameterException("doc", "VisJsCreator", this.getClass());
+    	if(doc == null) throw new SaltParameterException("doc", "VisJsCreator", this.getClass());
     
     	this.doc = doc;    	
-    	roots = doc.getSDocumentGraph().getSRoots();	
-    	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
+    	roots = doc.getDocumentGraph().getRoots();	
+    	List<SSpan>  sSpans = doc.getDocumentGraph().getSpans();	
     	if (sSpans != null && (sSpans.size() > 0))
     	{
     		nGroupsId += 1;
     	}	
-    	EList<SStructure>  sStructures = doc.getSDocumentGraph().getSStructures();
+    	List<SStructure>  sStructures = doc.getDocumentGraph().getStructures();
     	
     	if (sStructures != null && (sStructures.size() > 0))
     	{
@@ -212,7 +212,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
     	readRoots = new HashSet <SNode>();
     	readRelations = new HashSet <SRelation>();       	
     	
-    	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
+    	long nEdges = doc.getDocumentGraph().getRelations().size();
     	if (nEdges > Math.floor(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
     	{
     		throw new SaltException("The specified document cannot be visualized. It contains too many edges.");    		
@@ -234,7 +234,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
      * @param inputFileUri a hierarchical URI of a salt file, which have to be visualized. 
      * 		The constructor will create a new {@link SDocument} from this.
      * 
-     * @throws SaltEmptyParameterException - if the inputFileUri is null 
+     * @throws SaltParameterException - if the inputFileUri is null 
      */
       public VisJsCreator(URI inputFileUri){
     	  this(inputFileUri, null);
@@ -247,30 +247,27 @@ public class VisJsCreator implements SGraphTraverseHandler{
       * 			The constructor will create a new  {@link SDocument} from this.
       * @param exportFilter an ExportFilter to exclude selected nodes and/or relations from the visualizing
       * 
-      * @throws SaltEmptyParameterException if the inputFileUri is null 
-      * @throws SaltResourceNotFoundException if a problem occurred while loading salt project from the inputFileUri
+      * @throws SaltParameterException if the inputFileUri is null 
+      * @throws SaltResourceException if a problem occurred while loading salt project from the inputFileUri
       */
       
       public VisJsCreator (URI inputFileUri, ExportFilter exportFilter){  
-      	if(inputFileUri == null) throw new SaltEmptyParameterException("inputUri", "VisJsCreator", this.getClass());
+      	if(inputFileUri == null) throw new SaltParameterException("inputUri", "VisJsCreator", this.getClass());
        	
       	try{
-      		this.doc= SaltFactory.eINSTANCE.createSDocument();	
-          	doc.loadSDocumentGraph(inputFileUri);
-      	}catch (SaltResourceNotFoundException e){
-      		throw new SaltResourceNotFoundException("A problem occurred while loading salt project from '" + inputFileUri + "'.", e);
+      		this.doc= SaltFactory.createSDocument();	
+          	doc.loadDocumentGraph(inputFileUri);
+      	}catch (SaltResourceException e){
+      		throw new SaltResourceException("A problem occurred while loading salt project from '" + inputFileUri + "'.", e);
       	}
-      	catch (SaltResourceException e){
-  			throw new SaltResourceException("A problem occurred while loading salt project from '" + inputFileUri + "'.", e);
-  		}
       	
-      	roots = doc.getSDocumentGraph().getSRoots();	
-      	EList<SSpan>  sSpans = doc.getSDocumentGraph().getSSpans();	
+      	roots = doc.getDocumentGraph().getRoots();	
+      	List<SSpan>  sSpans = doc.getDocumentGraph().getSpans();	
       	if (sSpans != null && (sSpans.size() > 0))
       	{
       		nGroupsId += 1;
       	}	
-      	EList<SStructure>  sStructures = doc.getSDocumentGraph().getSStructures();
+      	List<SStructure>  sStructures = doc.getDocumentGraph().getStructures();
       	
       	if (sStructures != null && (sStructures.size() > 0))
       	{
@@ -280,7 +277,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
       	readRoots = new HashSet <SNode>();
       	readRelations = new HashSet <SRelation>();       	
       	
-      	long nEdges = doc.getSDocumentGraph().getNumOfEdges();
+      	long nEdges = doc.getDocumentGraph().getRelations().size();
       	if (nEdges > Math.floor(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
       	{
       		throw new SaltException("The specified document cannot be visualized. It contains too many edges.");    		
@@ -314,8 +311,8 @@ public class VisJsCreator implements SGraphTraverseHandler{
      * 
      * @param outputFolderUri - a hierarchical URI that specifies the output folder path. Note, that the output folder have not necessarily to be existing.
      * 
-     * @throws SaltEmptyParameterException if the outputFolderUri is null
-     * @throws SaltResourceNotFoundException if the output auxiliary files cannot have been created
+     * @throws SaltParameterException if the outputFolderUri is null
+     * @throws SaltResourceException if the output auxiliary files cannot have been created
      * @throws SaltException if the output folders cannot have been created or permission denied 
      * @throws SaltResourceException if a problem occurred while copying the auxiliary files  
      * @throws XMLStreamException if a problem occurred while writing the output html file
@@ -323,7 +320,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
      */
 
 
-public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  SaltResourceNotFoundException, SaltException,
+public void writeHTML(URI outputFolderUri) throws SaltParameterException,  SaltResourceException, SaltException,
 															SaltResourceException, IOException{
 			
 		try {
@@ -335,11 +332,11 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 			 this.jsonOutputStream =new FileOutputStream(new File(jsonOutputFolder, NODES_AND_EDGES_FILE));			 
 		
 			}
-			catch (SaltEmptyParameterException e){
-				throw new SaltEmptyParameterException("outputFileUri", "writeHTML", this.getClass());
+			catch (SaltParameterException e){
+				throw new SaltParameterException("outputFileUri", "writeHTML", this.getClass());
 			}
 			catch (FileNotFoundException e) {
-				throw new SaltResourceNotFoundException("The output auxiliary files cannot be created.");
+				throw new SaltResourceException("The output auxiliary files cannot be created.");
 			}	
 			catch (SecurityException e) {
 			 throw new SaltException("Either the output folder cannot be created or permission denied.");
@@ -371,20 +368,30 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
  */
   
 	private File createOutputResources(URI outputFileUri) 
-			throws SaltEmptyParameterException, SecurityException, FileNotFoundException, IOException{
+			throws SaltParameterException, SecurityException, FileNotFoundException, IOException{
 		  File outputFolder = null;
-		  if (outputFileUri == null) throw new SaltEmptyParameterException();			
+		  if (outputFileUri == null){
+			  throw new SaltParameterException("Cannot store salt-vis, because the passed output uri is empty. ");			
+		  }
 		  outputFolder = new File (outputFileUri.path());
-		 if(!outputFolder.exists()) outputFolder.mkdirs();
+		 if(!outputFolder.exists()){
+			 outputFolder.mkdirs();
+		 }
 		 
 		  File cssFolderOut = new File(outputFolder, CSS_FOLDER_OUT);
-		  if(!cssFolderOut.exists()) cssFolderOut.mkdir();
+		  if(!cssFolderOut.exists()){
+			  cssFolderOut.mkdir();
+		  }
 		  
 		  File jsFolderOut = new File(outputFolder, JS_FOLDER_OUT);
-		  if(!jsFolderOut.exists()) jsFolderOut.mkdir();
+		  if(!jsFolderOut.exists()){
+			  jsFolderOut.mkdir();
+		  }
 		  
 		  File jsonFolderOut = new File(outputFolder, JSON_FOLDER_OUT);
-		  if(!jsonFolderOut.exists()) jsonFolderOut.mkdir();
+		  if(!jsonFolderOut.exists()){
+			  jsonFolderOut.mkdir();
+		  }
 		  
 		  copyResourceFile(CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
 		  copyResourceFile(JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
@@ -517,19 +524,19 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	 * of this graph respective to the associated output streams.
 	 * 
 	 * @throws SaltException if a problem occurred while building JSON objects
-	 * @throws SaltEmptyParameterException if the node writer and/or the edge writer not set
+	 * @throws SaltParameterException if the node writer and/or the edge writer not set
 	 */
-	public void buildJSON () throws SaltException, SaltEmptyParameterException{		
+	public void buildJSON () throws SaltException, SaltParameterException{		
 	maxLevel = getMaxLevel(doc);
 
-	doc.getSDocumentGraph().sortSTokenByText();	  		 
-	 EList <SToken> sTokens = doc.getSDocumentGraph().getSTokens();
+	doc.getDocumentGraph().sortTokenByText();	  		 
+	 List <SToken> sTokens = doc.getDocumentGraph().getTokens();
 	
 	 if(nodeWriter == null || jsonWriterNodes == null){
-		 throw new SaltEmptyParameterException("A problem occurred while building JSON objects. Probably the node writer is not set.");
+		 throw new SaltParameterException("A problem occurred while building JSON objects. Probably the node writer is not set.");
 	 }
 	 if(edgeWriter == null || jsonWriterEdges == null){
-		 throw new SaltEmptyParameterException("A problem occurred while building JSON objects. Probably the edge writer is not set.");
+		 throw new SaltParameterException("A problem occurred while building JSON objects. Probably the edge writer is not set.");
 	 }
 	 
 	 try{
@@ -545,7 +552,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	 jsonWriterEdges.array();
 	 
 	 // traverse the document tree in order to write remained nodes and edges
-	 doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, 
+	 doc.getDocumentGraph().traverse(doc.getDocumentGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, 
 			 												TRAV_MODE_READ_NODES, this);		
 	 //close node array		 
 	 jsonWriterNodes.endArray();			   
@@ -567,7 +574,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	{
 		if (filter == null || !filter.excludeNode(node))	
 		{
-		 String idValue = node.getSElementPath().fragment();
+		 String idValue = node.getPath().fragment();
 		 String idLabel = "id=" + idValue;	
 		 String allLabels = idLabel;
 			 
@@ -577,26 +584,30 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 		 jsonWriterNodes.key(JSON_LABEL);
 		 
 	
-		   EList<SAnnotation> sAnnotations = node.getSAnnotations();
+		   Set<SAnnotation> sAnnotations = node.getAnnotations();
 		   if (sAnnotations.size() > 0)
 		   {		
 			   allLabels += "" + NEWLINE;
 			   
+			   int i= 1;
 			   for (SAnnotation annotation : sAnnotations) 
 			   {
-				   allLabels += (annotation.getSName() + "=" + annotation.getSValue().toString());
-				
-				   if (sAnnotations.indexOf(annotation) < sAnnotations.size()-1)  allLabels+= NEWLINE;								   
+				   allLabels += (annotation.getName() + "=" + annotation.getValue().toString());
+				   i++;
+				   
+				   if (i < sAnnotations.size()-1){
+					   allLabels+= NEWLINE;
+				   }
 			   }
 		   }
 		   
 		   if (node instanceof SToken)
 		   {
-			   String text = doc.getSDocumentGraph().getSText(node);
+			   String text = doc.getDocumentGraph().getText(node);
 				  if (text != null && !text.isEmpty())
 				  {
 					  allLabels+= NEWLINE;			
-					  allLabels += doc.getSDocumentGraph().getSText(node);
+					  allLabels += doc.getDocumentGraph().getText(node);
 				  }
 		   } 
 		  
@@ -652,11 +663,11 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 			  {
 			  jsonWriterEdges.object();
 			  jsonWriterEdges.key("from");
-			  jsonWriterEdges.value(fromNode.getSElementPath().fragment());
+			  jsonWriterEdges.value(fromNode.getPath().fragment());
 			  jsonWriterEdges.key("to");
-			  jsonWriterEdges.value(toNode.getSElementPath().fragment());
+			  jsonWriterEdges.value(toNode.getPath().fragment());
 			  jsonWriterEdges.key("label");
-			  jsonWriterEdges.value(relation.getSElementPath().fragment());
+			  jsonWriterEdges.value(relation.getPath().fragment());
 			  jsonWriterEdges.endObject();
 			  
 			  
@@ -667,9 +678,9 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	/**
 	 * The invoking of this method induces the optionsWriter to write the options for the vis.js to the associated output stream. 
 	 */
-	public void buildOptions() throws IOException, SaltEmptyParameterException{
+	public void buildOptions() throws IOException, SaltParameterException{
 		if (optionsWriter == null){
-			throw new SaltEmptyParameterException("A problem occurred while building options. Probably the option writer is not set.");
+			throw new SaltParameterException("A problem occurred while building options. Probably the option writer is not set.");
 		}
 		
 			optionsWriter.write("{" + NEWLINE
@@ -749,7 +760,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 		int nSpanClasses = spanClasses.size();
 		
 	//	System.out.println("spanClasses: " + spanClasses);
-	/*	EList <SSpan> sSpans = doc.getSDocumentGraph().getSSpans();
+	/*	List <SSpan> sSpans = doc.getDocumentGraph().getSpans();
 		 if (sSpans != null && sSpans.size() != 0) 
 		 {
 			 maxLevel++;			 
@@ -763,7 +774,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 	 //traverse the graph in depth first top down mode beginning with its roots and calculate the max. height of the salt graph
 	private  int  getMaxHeightOfSDocGraph(SDocument doc)
 	{
-		doc.getSDocumentGraph().traverse(doc.getSDocumentGraph().getSRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAV_MODE_CALC_LEVEL, this);		
+		doc.getDocumentGraph().traverse(doc.getDocumentGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAV_MODE_CALC_LEVEL, this);		
 		if (maxHeight > (Integer.MAX_VALUE - 100)) throw new SaltException("The specified document cannot be visualized. It is too complex.");    
 		else return (int) maxHeight;
 		
@@ -797,11 +808,11 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 				  {
 					  String annClass = "";
 					  
-					  EList<SAnnotation> sAnnotations = currNode.getSAnnotations();
+					  Set<SAnnotation> sAnnotations = currNode.getAnnotations();
 					   if (sAnnotations.size() > 0)
 					   {	
 						   // use the first annotation
-						   annClass = sAnnotations.get(0).getSName();					   
+						   annClass = sAnnotations.iterator().next().getName();					   
 					   }
 				 
 					  if (!spanClasses.containsKey(annClass)) spanClasses.put(annClass, -1);				  
@@ -839,9 +850,9 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode)))
 					  {	
 						  String annotation = "";
-						  EList<SAnnotation>  annotations = fromNode.getSAnnotations();
+						  Set<SAnnotation>  annotations = fromNode.getAnnotations();
 						  if (annotations.size() > 0){
-							  annotation = annotations.get(0).getSName();
+							  annotation = annotations.iterator().next().getName();
 						  }						  
 						  
 						  int spanOffset = spanClasses.get(annotation);						  

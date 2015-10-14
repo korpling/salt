@@ -1,7 +1,7 @@
-package de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.visjs;
+package org.corpus_tools.salt.util.internal;
 
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SRelation;
+import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.core.SRelation;
 
 
 /**

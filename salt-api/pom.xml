@@ -63,6 +63,17 @@
 			<artifactId>woodstox-core</artifactId>
 			<version>5.0.1</version>
 		</dependency>
+		<!-- JSON libraries for creating VisJs output -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.0.4</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -1,32 +1,17 @@
-package de.hu_berlin.german.korpling.saltnpepper.salt.visjs;
-
-import static org.junit.Assert.*;
-
-import  org.junit.Assert.*;
-
-//import junit.framework.Assert;
-import junit.framework.TestCase;
+package org.corpus_tools.salt.util.tests;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 
-import javax.xml.stream.XMLStreamException;
-
+import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SDocument;
+import org.corpus_tools.salt.exceptions.SaltParameterException;
+import org.corpus_tools.salt.exceptions.SaltResourceException;
+import org.corpus_tools.salt.samples.SampleGenerator;
+import org.corpus_tools.salt.util.internal.VisJsCreator;
 import org.eclipse.emf.common.util.URI;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.Assert;
-
-import de.hu_berlin.german.korpling.saltnpepper.salt.SaltFactory;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltEmptyParameterException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.exceptions.SaltResourceNotFoundException;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.resources.visjs.VisJsCreator;
-import de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sCorpusStructure.SDocument;
-import de.hu_berlin.german.korpling.saltnpepper.salt.samples.SampleGenerator;
+//import junit.framework.Assert;
 
 public class VisJsCreatorTest {
 	private final static String FSEP = System.getProperty("file.separator");
@@ -55,7 +40,7 @@ public class VisJsCreatorTest {
 		try {
 			 URI outputFolderUri = URI.createFileURI(OUTPUT_FOLDER_MAIN_TEST);	
 			 visJsCreator.writeHTML(outputFolderUri);
-		} catch (IOException | XMLStreamException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
@@ -73,7 +58,7 @@ public class VisJsCreatorTest {
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 visJsCreator.writeHTML(outputFolderUri);
-		} catch (IOException | XMLStreamException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
@@ -156,14 +141,14 @@ public class VisJsCreatorTest {
 	
 	@Test
 	public void testHtmlWriterSample() {
-		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createSDocumentStructure(doc);	
 		VisJsCreator visJsCreator = new VisJsCreator(doc);
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc";	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 visJsCreator.writeHTML(outputFolderUri);
-		} catch (IOException | XMLStreamException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
@@ -172,14 +157,14 @@ public class VisJsCreatorTest {
 	
 	@Test
 	public void testHtmlWriterSampleAnaphoricAnn() {
-		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createAnaphoricAnnotations(doc);
 		VisJsCreator visJsCreator = new VisJsCreator(doc);
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_anaphoric_ann";	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 visJsCreator.writeHTML(outputFolderUri);
-		} catch (IOException | XMLStreamException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
@@ -187,14 +172,14 @@ public class VisJsCreatorTest {
 	
 	@Test
 	public void testHtmlWriterSampleDependencies() {
-		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createDependencies(doc);
 		VisJsCreator visJsCreator = new VisJsCreator(doc);
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_dependencies";	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 visJsCreator.writeHTML(outputFolderUri);
-		} catch (IOException | XMLStreamException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
@@ -204,14 +189,14 @@ public class VisJsCreatorTest {
 	
 	@Test
 	public void testHtmlWriterSampleSyntaxStructure() {
-		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createSyntaxStructure(doc);
 		VisJsCreator visJsCreator = new VisJsCreator(doc);
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_syntax_structure";	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 visJsCreator.writeHTML(outputFolderUri);
-		} catch (IOException | XMLStreamException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
@@ -219,14 +204,14 @@ public class VisJsCreatorTest {
 	
 	@Test
 	public void testHtmlWriterSampleTokens() {
-		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createTokens(doc);
 		VisJsCreator visJsCreator = new VisJsCreator(doc);
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_tokens";	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 visJsCreator.writeHTML(outputFolderUri);
-		} catch (IOException | XMLStreamException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
@@ -234,14 +219,14 @@ public class VisJsCreatorTest {
 	
 	@Test
 	public void testHtmlWriterSampleMorphologyAnn() {
-		SDocument doc = SaltFactory.eINSTANCE.createSDocument();
+		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createMorphologyAnnotations(doc);
 		VisJsCreator visJsCreator = new VisJsCreator(doc);
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_morphology_ann";	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 visJsCreator.writeHTML(outputFolderUri);
-		} catch (IOException | XMLStreamException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
@@ -249,7 +234,7 @@ public class VisJsCreatorTest {
 	
 	
 	
-	@Test(expected = SaltEmptyParameterException.class)
+	@Test(expected = SaltParameterException.class)
 	public void testInputUrlIsNull(){
 		URI uri = null;
 		VisJsCreator visJsCreator = new VisJsCreator(uri);
@@ -262,7 +247,7 @@ public class VisJsCreatorTest {
 		VisJsCreator visJsCreator = new VisJsCreator(uri);
 	}
 	
-	@Test(expected = SaltResourceNotFoundException.class)
+	@Test(expected = SaltResourceException.class)
 	public void testAbsentSaltResource(){
 		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_random_sentence_absent_resource" + FSEP + "pcc2" + FSEP + "match_0.salt";
 		URI uri = URI.createFileURI(inputFilePath);	
@@ -270,7 +255,7 @@ public class VisJsCreatorTest {
 	}
 	
 
-	@Test(expected = SaltEmptyParameterException.class)
+	@Test(expected = SaltParameterException.class)
 	public void testNodeWriterIsNull(){
 		URI uri = URI.createFileURI(INPUT_FILE_MAIN_TEST);	
 		VisJsCreator visJsCreator = new VisJsCreator(uri);		
@@ -278,13 +263,11 @@ public class VisJsCreatorTest {
 		visJsCreator.buildJSON();
 	}
 	
-	@Test(expected = SaltEmptyParameterException.class)
+	@Test(expected = SaltParameterException.class)
 	public void testEdgeWriterIsNull(){
 		URI uri = URI.createFileURI(INPUT_FILE_MAIN_TEST);	
 		VisJsCreator visJsCreator = new VisJsCreator(uri);		
 		visJsCreator.setNodeWriter(System.out);
 		visJsCreator.buildJSON();
 	}	
-	
-
 }
