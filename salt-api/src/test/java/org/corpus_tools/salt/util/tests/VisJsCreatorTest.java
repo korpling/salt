@@ -1,6 +1,7 @@
 package org.corpus_tools.salt.util.tests;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 
 import org.corpus_tools.salt.SaltFactory;
@@ -19,7 +20,7 @@ public class VisJsCreatorTest {
 	private final static String OUTPUT_FOLDER = TEMP_FOLDER + FSEP + "salt-test-visjs";
 	private final static String OUTPUT_FOLDER_MAIN_TEST = OUTPUT_FOLDER + FSEP + "pcc2_random_sentences";	
 	
-	private final static String INPUT_FOLDER =  "test"	+ FSEP+ "resources" + FSEP + "VisJsTest" + FSEP + "sources";
+	private final static String INPUT_FOLDER =  "src"	+ FSEP+"test"	+ FSEP+ "resources" + FSEP + "VisJsTest" + FSEP + "sources";
 	private final static String INPUT_FILE_MAIN_TEST = INPUT_FOLDER + FSEP + "pcc2_salt_random_sentence" + FSEP + "pcc2" + FSEP  + "match_0.salt";
 	
 	  
@@ -34,6 +35,7 @@ public class VisJsCreatorTest {
 	@Test
 	public void testHtmlWriter() {		
 		URI uri = URI.createFileURI(INPUT_FILE_MAIN_TEST);	
+		System.out.println("current folder: "+ new File(".").getAbsolutePath());
 		VisJsCreator visJsCreator = new VisJsCreator(uri);
 		
 		try {
