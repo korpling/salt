@@ -141,7 +141,7 @@ public class VisJsCreator implements SGraphTraverseHandler{
 	private static final String JSON_LEVEL = "level";
 	private static final String JSON_GROUP = "group";
 	
-	private  int xValue = 0;	
+	private  int xPosition = 0;	
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
  
    
@@ -607,7 +607,7 @@ public void writeHTML(URI outputFolderUri) throws SaltEmptyParameterException,  
 			 jsonWriterNodes.key(JSON_COLOR);
 			 jsonWriterNodes.value(TOK_COLOR_VALUE);
 			 jsonWriterNodes.key(JSON_X);
-			 jsonWriterNodes.value(++xValue);
+			 jsonWriterNodes.value(++xPosition*100);
 		 }
 		 
 		 	 jsonWriterNodes.key(JSON_LEVEL);

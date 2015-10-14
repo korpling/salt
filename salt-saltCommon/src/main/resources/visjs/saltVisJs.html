@@ -62,6 +62,9 @@ $.ajaxSetup({
 	}
 });
 $.getJSON(file, function(json) {
+	var nNodes = json.nodes.length;
+	var nEdges = json.edges.length;
+	
  	if (typeof json.nodes!== "undefined"){
 		for (var i = 0; i < json.nodes.length; i++) {
 		  if (json.nodes[i].color != undefined) {
@@ -84,7 +87,7 @@ $.getJSON(file, function(json) {
 		    edgesJson[i] = new Edge(json.edges[i].from, json.edges[i].to, json.edges[i].label);
 		}
         }        
-      draw(nodesJson, edgesJson);	
+      draw(nodesJson, edgesJson, nNodes, nEdges);	
 });
 }
 </script>
@@ -100,11 +103,23 @@ network = null;
 }
 }
 
-function draw(nodesJson, edgesJson) {
+function draw(nodesJson, edgesJson, nNodes,nEdges) {
 destroy();
 var connectionCount = [];
 var nodes = [];
 var edges = [];
+
+var nodeDist;
+if (nNodes < 20){
+	nodeDist = 100;
+} else if (nNodes >=20 && nNodes < 100){
+	nodeDist = 150
+} else if (nNodes >= 100 && nNodes < 400) {
+	nodeDist = 200
+} else {
+	nodeDist = 400
+};
+
 nodes = new vis.DataSet(nodesJson);
 edges = new vis.DataSet(edgesJson);
 var container = document.getElementById('mynetwork');
@@ -114,7 +129,6 @@ edges: edges
 };
 var options = {
 nodes:{
-shadow: true,
 shape: "box"
 },
 edges: {
@@ -133,9 +147,9 @@ direction: directionInput.value
 physics: {
 hierarchicalRepulsion: {
 centralGravity: 0.05,
-springLength: 0,
+springLength: 100,
 springConstant: 0.0007,
-nodeDistance: 200,
+nodeDistance: nodeDist,
 damping: 0.04
 },
 maxVelocity: 27,
