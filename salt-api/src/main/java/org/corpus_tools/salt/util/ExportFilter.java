@@ -5,7 +5,7 @@ import org.corpus_tools.salt.core.SRelation;
 
 
 /**
- * This interface can be used if an excluding of certain nodes and/or relations while working with {@link VisJsCreator} 
+ * This interface can be used if an excluding of certain nodes and/or relations while working with {@link VisJsVisualizer} 
  * is necessary.
  * If the method {@link #excludeNode(SNode)} returns true, then the passed node will not be inserted to the node set 
  * and therefore it will be excluded from the visualization. 

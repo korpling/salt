@@ -102,7 +102,7 @@ import org.json.JSONWriter;
  *@author irina
  */
 
-public class VisJsCreator implements GraphTraverseHandler{
+public class VisJsVisualizer implements GraphTraverseHandler{
 		
 	private  long maxHeight;
 	private  int currHeight;
@@ -178,7 +178,7 @@ public class VisJsCreator implements GraphTraverseHandler{
    * 
    * @throws SaltParameterException if the doc is null 
    */
-    public VisJsCreator(SDocument doc){
+    public VisJsVisualizer(SDocument doc){
   	  this(doc, null);
     }
     
@@ -191,7 +191,7 @@ public class VisJsCreator implements GraphTraverseHandler{
      * @throws SaltParameterException if the doc is null 
      */
     
-    public VisJsCreator (SDocument doc, ExportFilter exportFilter){  
+    public VisJsVisualizer (SDocument doc, ExportFilter exportFilter){  
     	
     	if(doc == null) throw new SaltParameterException("doc", "VisJsCreator", this.getClass());
     
@@ -236,7 +236,7 @@ public class VisJsCreator implements GraphTraverseHandler{
      * 
      * @throws SaltParameterException - if the inputFileUri is null 
      */
-      public VisJsCreator(URI inputFileUri){
+      public VisJsVisualizer(URI inputFileUri){
     	  this(inputFileUri, null);
       }
   	
@@ -251,7 +251,7 @@ public class VisJsCreator implements GraphTraverseHandler{
       * @throws SaltResourceException if a problem occurred while loading salt project from the inputFileUri
       */
       
-      public VisJsCreator (URI inputFileUri, ExportFilter exportFilter){  
+      public VisJsVisualizer (URI inputFileUri, ExportFilter exportFilter){  
       	if(inputFileUri == null) throw new SaltParameterException("inputUri", "VisJsCreator", this.getClass());
        	
       	try{
