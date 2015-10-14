@@ -19,8 +19,9 @@ public class VisJsCreatorTest {
 	private final static String OUTPUT_FOLDER = TEMP_FOLDER + FSEP + "salt-test-visjs";
 	private final static String OUTPUT_FOLDER_MAIN_TEST = OUTPUT_FOLDER + FSEP + "pcc2_random_sentences";	
 	
-	private final static String INPUT_FOLDER = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
-			+ "resources" + FSEP + "VisJsTest" + FSEP + "sources";
+//	private final static String INPUT_FOLDER = ".." + FSEP	+ "salt-saltCommon" + FSEP + "src"	+ FSEP + "test"	+ FSEP 
+//			+ "resources" + FSEP + "VisJsTest" + FSEP + "sources";
+	private final static String INPUT_FOLDER = "."+ FSEP + "src"	+ FSEP + "test"	+ FSEP+ "resources" + FSEP + "VisJsTest" + FSEP + "sources";
 	private final static String INPUT_FILE_MAIN_TEST = INPUT_FOLDER + FSEP + "pcc2_salt_random_sentence" + FSEP + "pcc2" + FSEP  + "match_0.salt";
 	
 	  
