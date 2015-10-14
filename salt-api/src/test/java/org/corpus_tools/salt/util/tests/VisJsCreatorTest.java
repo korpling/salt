@@ -10,7 +10,7 @@ import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.exceptions.SaltResourceException;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.tests.SaltTestsUtil;
-import org.corpus_tools.salt.util.internal.VisJsCreator;
+import org.corpus_tools.salt.util.VisJsCreator;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
 //import junit.framework.Assert;

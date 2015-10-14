@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal;
+package org.corpus_tools.salt.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,7 +33,6 @@ import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.exceptions.SaltResourceException;
-import org.corpus_tools.salt.util.ExportFilter;
 import org.eclipse.emf.common.util.URI;
 import org.json.JSONException;
 import org.json.JSONWriter;
