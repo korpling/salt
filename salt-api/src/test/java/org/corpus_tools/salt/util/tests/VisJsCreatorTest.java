@@ -9,6 +9,7 @@ import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.exceptions.SaltResourceException;
 import org.corpus_tools.salt.samples.SampleGenerator;
+import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.corpus_tools.salt.util.internal.VisJsCreator;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
@@ -16,8 +17,7 @@ import org.junit.Test;
 
 public class VisJsCreatorTest {
 	private final static String FSEP = System.getProperty("file.separator");
-	private final static String TEMP_FOLDER = System.getProperty("java.io.tmpdir");
-	private final static String OUTPUT_FOLDER = TEMP_FOLDER + FSEP + "salt-test-visjs";
+	private final static String OUTPUT_FOLDER = SaltTestsUtil.getTempTestFolder().getAbsolutePath();
 	private final static String OUTPUT_FOLDER_MAIN_TEST = OUTPUT_FOLDER + FSEP + "pcc2_random_sentences";	
 	
 	private final static String INPUT_FOLDER =  "src"	+ FSEP+"test"	+ FSEP+ "resources" + FSEP + "VisJsTest" + FSEP + "sources";
@@ -35,7 +35,6 @@ public class VisJsCreatorTest {
 	@Test
 	public void testHtmlWriter() {		
 		URI uri = URI.createFileURI(INPUT_FILE_MAIN_TEST);	
-		System.out.println("current folder: "+ new File(".").getAbsolutePath());
 		VisJsCreator visJsCreator = new VisJsCreator(uri);
 		
 		try {
@@ -52,6 +51,8 @@ public class VisJsCreatorTest {
 		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
 		
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "pcc_whole_doc_11299";	   
+		
+		System.out.println("------------_> "+ outputFolderPath);
 		
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsCreator visJsCreator = new VisJsCreator(uri);
