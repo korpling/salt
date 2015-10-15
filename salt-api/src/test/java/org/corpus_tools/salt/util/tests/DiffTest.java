@@ -667,18 +667,6 @@ public class DiffTest {
 		sSpan.createAnnotation(layerTextStructure, type, "paragraph");
 		sSpan.addLayer(docTextLayer);
 		
-		//line3:
-		spanTokens.clear();
-		spanTokens.add(docTokens.get(5));
-		spanTokens.add(docTokens.get(6));
-		spanTokens.add(docTokens.get(7));
-		spanTokens.add(docTokens.get(8));
-		spanTokens.add(docTokens.get(9));
-		spanTokens.add(docTokens.get(10));
-		sSpan = docGraph.createSpan(spanTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "line");
-		sSpan.addLayer(docTextLayer);
-		
 		//page1:
 		spanTokens = new ArrayList<SToken>();
 		spanTokens.add(docTokens.get(0));
@@ -689,7 +677,19 @@ public class DiffTest {
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "page");
 		sSpan.addLayer(docTextLayer);
-					
+		
+		//page2:
+		spanTokens.clear();
+		spanTokens.add(docTokens.get(5));
+		spanTokens.add(docTokens.get(6));
+		spanTokens.add(docTokens.get(7));
+		spanTokens.add(docTokens.get(8));
+		spanTokens.add(docTokens.get(9));
+		spanTokens.add(docTokens.get(10));
+		sSpan = docGraph.createSpan(spanTokens);
+		sSpan.createAnnotation(layerTextStructure, type, "page");
+		sSpan.addLayer(docTextLayer);
+		
 		//line1:
 		sSpan = docGraph.createSpan(docTokens.get(0));
 		sSpan.createAnnotation(layerTextStructure, type, "line");
@@ -705,8 +705,7 @@ public class DiffTest {
 		sSpan.createAnnotation(layerTextStructure, type, "line");
 		sSpan.addLayer(docTextLayer);
 		
-		
-		//page2:
+		//line3:
 		spanTokens.clear();
 		spanTokens.add(docTokens.get(5));
 		spanTokens.add(docTokens.get(6));
@@ -715,10 +714,17 @@ public class DiffTest {
 		spanTokens.add(docTokens.get(9));
 		spanTokens.add(docTokens.get(10));
 		sSpan = docGraph.createSpan(spanTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "page");
+		sSpan.createAnnotation(layerTextStructure, type, "line");
 		sSpan.addLayer(docTextLayer);
 		
 		/*== tests ==*/
+		
+//		for (int i=0; i<docGraph.getSpans().size(); i++){
+//			SSpan spA = doc1.getDocumentGraph().getSpans().get(i);
+//			SSpan spB = doc2.getDocumentGraph().getSpans().get(i);
+//			System.out.println("A:\t"+spA.getAnnotations()+"\t"+docGraph.getText(spA));
+//			System.out.println("B:\t"+spB.getAnnotations()+"\t"+docGraph.getText(spB));
+//		}
 		
 		Set<Difference> diffs = doc1.getDocumentGraph().findDiffs(doc2.getDocumentGraph(), (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
 		assertEquals(diffs.toString(), 0, diffs.size());
