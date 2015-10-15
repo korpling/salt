@@ -577,8 +577,19 @@ public class DiffTest {
 		assertEquals(diffs + "", 1, diffs.size());
 	}
 	
-	@Test
-	public void testEqualGraphs(){
+//	/**
+//	 * Tests the comparison of two equal graphs, which are created in {@link #createSampleGraph()}. 
+//	 */
+//	@Test
+//	public void testEqualGraphs(){
+//		SDocument doc1= createSampleGraph();
+//		SDocument doc2= createSampleGraph();
+//		
+//		Set<Difference> diffs = doc1.getDocumentGraph().findDiffs(doc2.getDocumentGraph(), (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
+//		assertEquals(diffs.toString(), 0, diffs.size());
+//	}
+	
+	public SDocument createSampleGraph(){
 		String exampleText = "Is this example more complicated than it appears to be?";
 		String layerTextStructure = "textstructure";
 		String type = "type";
@@ -648,86 +659,7 @@ public class DiffTest {
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "line");
 		sSpan.addLayer(docTextLayer);
-
-		/*== no 2 ==*/
 		
-		SDocument doc2 = SaltFactory.createSDocument();
-		doc2.setId("doc");
-		docGraph = SaltFactory.createSDocumentGraph();
-		doc2.setDocumentGraph(docGraph);
-		docGraph.createTextualDS(exampleText);
-		docGraph.tokenize();
-		docTokens = docGraph.getTokens();
-		docTextLayer = SaltFactory.createSLayer();
-		docTextLayer.setName(layerTextStructure);
-		docGraph.addLayer(docTextLayer);
-		
-		//paragraph:
-		sSpan = docGraph.createSpan(docTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "paragraph");
-		sSpan.addLayer(docTextLayer);
-		
-		//page1:
-		spanTokens = new ArrayList<SToken>();
-		spanTokens.add(docTokens.get(0));
-		spanTokens.add(docTokens.get(1));
-		spanTokens.add(docTokens.get(2));
-		spanTokens.add(docTokens.get(3));
-		spanTokens.add(docTokens.get(4));
-		sSpan = docGraph.createSpan(spanTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "page");
-		sSpan.addLayer(docTextLayer);
-		
-		//page2:
-		spanTokens.clear();
-		spanTokens.add(docTokens.get(5));
-		spanTokens.add(docTokens.get(6));
-		spanTokens.add(docTokens.get(7));
-		spanTokens.add(docTokens.get(8));
-		spanTokens.add(docTokens.get(9));
-		spanTokens.add(docTokens.get(10));
-		sSpan = docGraph.createSpan(spanTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "page");
-		sSpan.addLayer(docTextLayer);
-		
-		//line1:
-		sSpan = docGraph.createSpan(docTokens.get(0));
-		sSpan.createAnnotation(layerTextStructure, type, "line");
-		sSpan.addLayer(docTextLayer);
-		
-		//line2:
-		spanTokens.clear();
-		spanTokens.add(docTokens.get(1));
-		spanTokens.add(docTokens.get(2));
-		spanTokens.add(docTokens.get(3));
-		spanTokens.add(docTokens.get(4));
-		sSpan = docGraph.createSpan(spanTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "line");
-		sSpan.addLayer(docTextLayer);
-		
-		//line3:
-		spanTokens.clear();
-		spanTokens.add(docTokens.get(5));
-		spanTokens.add(docTokens.get(6));
-		spanTokens.add(docTokens.get(7));
-		spanTokens.add(docTokens.get(8));
-		spanTokens.add(docTokens.get(9));
-		spanTokens.add(docTokens.get(10));
-		sSpan = docGraph.createSpan(spanTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "line");
-		sSpan.addLayer(docTextLayer);
-		
-		/*== tests ==*/
-		
-//		for (int i=0; i<docGraph.getSpans().size(); i++){
-//			SSpan spA = doc1.getDocumentGraph().getSpans().get(i);
-//			SSpan spB = doc2.getDocumentGraph().getSpans().get(i);
-//			System.out.println("A:\t"+spA.getAnnotations()+"\t"+docGraph.getText(spA));
-//			System.out.println("B:\t"+spB.getAnnotations()+"\t"+docGraph.getText(spB));
-//		}
-		
-		Set<Difference> diffs = doc1.getDocumentGraph().findDiffs(doc2.getDocumentGraph(), (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
-		assertEquals(diffs.toString(), 0, diffs.size());
-	}
-	
+		return(doc1);
+	}	
 }
