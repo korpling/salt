@@ -577,18 +577,37 @@ public class DiffTest {
 		assertEquals(diffs + "", 1, diffs.size());
 	}
 	
-//	/**
-//	 * Tests the comparison of two equal graphs, which are created in {@link #createSampleGraph()}. 
-//	 */
-//	@Test
-//	public void testEqualGraphs(){
-//		SDocument doc1= createSampleGraph();
-//		SDocument doc2= createSampleGraph();
-//		
-//		Set<Difference> diffs = doc1.getDocumentGraph().findDiffs(doc2.getDocumentGraph(), (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
-//		assertEquals(diffs.toString(), 0, diffs.size());
-//	}
-	
+	/**
+	 * Tests the comparison of two equal graphs, which are created in {@link #createSampleGraph()}. 
+	 */
+	@Test
+	public void testTwoIdenticalGraphs(){
+		SDocument doc1= createSampleGraph();
+		SDocument doc2= createSampleGraph();
+		
+		Set<Difference> diffs = doc1.getDocumentGraph().findDiffs(doc2.getDocumentGraph(), (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
+		assertEquals(diffs.toString(), 0, diffs.size());
+	}
+	/**
+	 * 
+	 * 
+	 * 
+	 * <table border="1">
+	 * <tr>
+	 * <td colspan="4"></td><td colspan="6">line</td><td></td>
+	 * </tr>
+	 * <tr>
+	 * <td colspan="4"></td><td colspan="6">page</td><td></td>
+	 * </tr>
+	 * <tr>
+	 * <td>t1</td><td>t2</td><td>t3</td><td>t4</td><td>t5</td><td>t6</td><td>t7</td><td>t8</td><td>t9</td><td>t10</td><td>t11</td>
+	 * </tr>
+	 * <tr>
+	 * </td><td>Is</td><td>this</td><td>example</td><td>more</td><td>complicated</td><td>than</td><td>it</td><td>appears</td><td>to</td><td>be</td><td>?</td>
+	 * </tr>
+	 * </table>
+	 * @return
+	 */
 	public SDocument createSampleGraph(){
 		String exampleText = "Is this example more complicated than it appears to be?";
 		String layerTextStructure = "textstructure";
@@ -604,23 +623,9 @@ public class DiffTest {
 		SLayer docTextLayer = SaltFactory.createSLayer();
 		docTextLayer.setName(layerTextStructure);
 		docGraph.addLayer(docTextLayer);
-		
-		//paragraph:
-		SSpan sSpan = docGraph.createSpan(docTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "paragraph");
-		sSpan.addLayer(docTextLayer);
-		
-		//page1:
+		SSpan sSpan = null;
 		List<SToken> spanTokens = new ArrayList<SToken>();
-		spanTokens.add(docTokens.get(0));
-		spanTokens.add(docTokens.get(1));
-		spanTokens.add(docTokens.get(2));
-		spanTokens.add(docTokens.get(3));
-		spanTokens.add(docTokens.get(4));
-		sSpan = docGraph.createSpan(spanTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "page");
-		sSpan.addLayer(docTextLayer);
-		
+
 		//page2:
 		spanTokens.clear();
 		spanTokens.add(docTokens.get(5));
@@ -631,21 +636,6 @@ public class DiffTest {
 		spanTokens.add(docTokens.get(10));
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "page");
-		sSpan.addLayer(docTextLayer);
-		
-		//line1:
-		sSpan = docGraph.createSpan(docTokens.get(0));
-		sSpan.createAnnotation(layerTextStructure, type, "line");
-		sSpan.addLayer(docTextLayer);
-		
-		//line2:
-		spanTokens.clear();
-		spanTokens.add(docTokens.get(1));
-		spanTokens.add(docTokens.get(2));
-		spanTokens.add(docTokens.get(3));
-		spanTokens.add(docTokens.get(4));
-		sSpan = docGraph.createSpan(spanTokens);
-		sSpan.createAnnotation(layerTextStructure, type, "line");
 		sSpan.addLayer(docTextLayer);
 		
 		//line3:
@@ -662,4 +652,20 @@ public class DiffTest {
 		
 		return(doc1);
 	}	
+	
+	/**
+	 * Tests the comparison of a graph with itself. 
+	 */
+	@Test
+	public void testSameGraph(){
+		SDocument doc= SaltFactory.createSDocument();
+		SampleGenerator.createSyntaxAnnotations(doc);
+		SampleGenerator.createAnaphoricAnnotations(doc);
+		SampleGenerator.createInformationStructureAnnotations(doc);
+		SampleGenerator.createDependencies(doc);
+
+		
+		Set<Difference> diffs = doc.getDocumentGraph().findDiffs(doc.getDocumentGraph());
+		assertEquals(diffs.toString(), 0, diffs.size());
+	}
 }

@@ -71,7 +71,7 @@ import com.google.common.collect.Multimap;
  * look for SNodes that are the source of a incoming relations of a SToken. Of
  * these only those are picked, that have SNodes on their SOutgoingrelations,
  * that already have been checked (at this point: only STokens). These SNodes
- * are then compared with eachother. Whenever a relation is used in the way
+ * are then compared with each other. Whenever a relation is used in the way
  * described above, the SRelation is checked for SFeatures and SRelations.
  * 
  * To adapt the isomorphie check and the computation of differences you can pass
@@ -711,7 +711,7 @@ public class Diff {
 		// a isomorph annotation
 		while (templateIterator.hasNext()) {
 			SAbstractAnnotation templateAnno = templateIterator.next();
-		
+
 			if (templateAnno instanceof SFeature) {
 				if (options.get(OPTION_IGNORE_NAME)) {
 					if (SaltUtil.FEAT_NAME_QNAME.equals(templateAnno.getQName())) {
@@ -828,8 +828,14 @@ public class Diff {
 		 * To check if two nodes A, A' are equal, the following algorithm is
 		 * used. We illustrate that algorithm along this sample:
 		 * 
-		 * G | G' | A | A' D' / \ | | X | \ B C | B' C' E'
+		 * <pre>
+		 * G            | G' 
+		 *              | 
+		 *      A       |     A'    D' 
+		 *    /   \     |     |  X  |  \ 
+		 *   B     C    |     B'    C'  E'
 		 * 
+		 * </pre>
 		 * <ol>
 		 * <li>find all children of other node: otherChilds --> (B, C)</li>
 		 * <li>for each node in otherChilds find isomorphic nodes:
@@ -870,6 +876,8 @@ public class Diff {
 				// Several candidates have been found. Check which shared parent
 				// node has the same children as other node
 				List<SRelation> otherOutRels = otherNode.getOutRelations();
+				Set<SNode> trueCandidates = new HashSet<>();
+
 				for (SNode templateCandidate : sharedParents) {
 					List<SRelation> templateOutRels = templateCandidate.getOutRelations();
 					// check if node degree is the same
@@ -884,20 +892,40 @@ public class Diff {
 							otherChldren.add((SNode) it.next().getTarget());
 						}
 
-						//ckeck if all children of other node and candidate are isomorph
-						boolean trueCandidate= true;
+						// ckeck if all children of other node and candidate are
+						// isomorph
+						boolean trueCandidate = true;
 						Iterator<SRelation> it_template = templateOutRels.iterator();
 						while (it_template.hasNext()) {
 							SNode templateChild = (SNode) it_template.next().getTarget();
-							if (!otherChldren.contains(getIsoNodes().get(templateChild))){
-								trueCandidate= false;
+							if (!otherChldren.contains(getIsoNodes().get(templateChild))) {
+								trueCandidate = false;
 								break;
 							}
 						}
-						if (trueCandidate){
-							templateNode= templateCandidate;
+						if (trueCandidate) {
+							// templateNode= templateCandidate;
+							trueCandidates.add(templateCandidate);
 						}
 					}
+				}
+				// there are multiple true candidates (candidates which have the
+				// same position in graph (same children)), to decide which one
+				// is to take, check which one has the minimum of differences in
+				// annotations
+				if (trueCandidates.size() > 1) {
+					int minNumberOfDiffs = Integer.MAX_VALUE;
+					for (SNode trueCandidate : trueCandidates) {
+						Set<Difference> subDiff = new HashSet<>();
+						compareAnnotationContainers(trueCandidate, otherNode, subDiff);
+						if (subDiff.size() < minNumberOfDiffs) {
+							minNumberOfDiffs = subDiff.size();
+							// this is the node that will be checked again
+							templateNode = trueCandidate;
+						}
+					}
+				} else {
+					templateNode = trueCandidates.iterator().next();
 				}
 			}
 			if (templateNode == null) {
