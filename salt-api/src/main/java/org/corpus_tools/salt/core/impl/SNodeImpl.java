@@ -159,17 +159,17 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public Set<SMetaAnnotation> createMetaAnnotations(String annotationString) {
 		return (SAnnotationContainerHelper.createMetaAnnotations(this, annotationString));
 	}
-
+	/** {@inheritDoc} **/
 	@Override
 	public <A extends SMetaAnnotation> Set<A> getMetaAnnotations() {
 		return (SAnnotationContainerHelper.getMetaAnnotations(this));
 	}
-
+	/** {@inheritDoc} **/
 	@Override
 	public SMetaAnnotation getMetaAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getMetaAnnotation(this, qName));
 	}
-
+	/** {@inheritDoc} **/
 	@Override
 	public Iterator<SMetaAnnotation> iterator_SMetaAnnotation() {
 		return (SAnnotationContainerHelper.iterator_SMetaAnnotation(this));
@@ -305,7 +305,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	}
 
 	// =======================================< SPathElement
-
+	/** {@inheritDoc} **/
 	@Override
 	public SGraph getGraph() {
 		Graph superGraph = super.getGraph();
