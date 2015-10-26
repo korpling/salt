@@ -80,9 +80,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	}
 
 	/** Number of expected nodes to initialize indexes **/
-	protected int expectedNodes = 1000;
+//	protected int expectedNodes = 1000;
+	protected int expectedNodes = 16;
 	/** Number of expected relations to initialize indexes **/
-	protected int expectedRelations = 5000;
+//	protected int expectedRelations = 5000;
+	protected int expectedRelations = 16;
 	/**
 	 * Approximated node degree, which is {@link #expectedRelations} /
 	 * {@link #expectedNodes}
