@@ -340,7 +340,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				retVal = Long.parseLong(value.substring(3));
 			}
 		} else if (value.startsWith("F")) {
-			retVal = Float.parseFloat(value.substring(3));
+			retVal = Double.parseDouble(value.substring(3));
 		} else if (value.startsWith("U")) {
 			retVal = URI.createURI(value.substring(3));
 		}else if (value.startsWith("O")) {

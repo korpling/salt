@@ -26,6 +26,7 @@ import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.corpus_tools.salt.util.SaltUtil;
@@ -235,4 +236,33 @@ public class Persist_SaltXML10_Test {
 		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(), loaded.getCorpusGraphs().get(1).getNodes().size());
 		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(), loaded.getCorpusGraphs().get(1).getRelations().size());
 	}
+	
+	/**
+	 * Tests the loading and storing different data types.
+	 */
+	@Test
+	public void testLoadStore_DocumentGraph_DataTypes() {
+		// create template
+		SDocument template = SaltFactory.createSDocument();
+		template.setDocumentGraph(SaltFactory.createSDocumentGraph());
+		
+		template.getDocumentGraph().createFeature("test", "double", 1.2345);
+		template.getDocumentGraph().createFeature("test", "float", 1.2345f);
+		
+		// store other document
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_DataTypes.salt");
+		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
+		SaltUtil.saveDocumentGraph(template.getDocumentGraph(), path);
+
+		// retrieve features
+		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
+		
+		Double d = graph.getFeature("test", "double").getValue_SFLOAT();
+		assertEquals(1.2345d, d, 0.0d);
+		
+		Float f = graph.getFeature("test", "float").getValue_SFLOAT().floatValue();
+		assertEquals(1.2345f, f, 0.0f);
+		
+	}
+	
 }
