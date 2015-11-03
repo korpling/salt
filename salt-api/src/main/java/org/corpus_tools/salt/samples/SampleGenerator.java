@@ -1133,7 +1133,15 @@ public class SampleGenerator {
 	}
 
 	/**
-	 * 
+	 * Creates a document structure containing:
+	 * <ul>
+	 * <li>primary text</li>
+	 * <li>tokenization</li>
+	 * <li>morphological annotations</li>
+	 * <li>information structure annotation</li>
+	 * <li>syntactical annotation</li>
+	 * <li>anaphoric annotation</li>
+	 * </ul>
 	 * @param document
 	 */
 	public static void createSDocumentStructure(SDocument document) {

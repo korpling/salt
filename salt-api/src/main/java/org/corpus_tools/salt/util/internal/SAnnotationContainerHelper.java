@@ -37,6 +37,7 @@ import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.graph.Label;
+import org.corpus_tools.salt.util.SaltUtil;
 
 /**
  * This class is a helper class for internal use. It is used by {@link SNode},
@@ -125,7 +126,7 @@ public class SAnnotationContainerHelper {
 
 	public static Set<SAnnotation> createAnnotations(SAnnotationContainer container, String annotationString) {
 		Set<SAnnotation> retVal = new HashSet<>();
-		for (Triple<String, String, String> triple : unmarshalString(annotationString)) {
+		for (Triple<String, String, String> triple : SaltUtil.unmarshalAnnotation(annotationString)) {
 			retVal.add(container.createAnnotation(triple.getLeft(), triple.getMiddle(), triple.getRight()));
 		}
 		return (retVal);
@@ -199,45 +200,9 @@ public class SAnnotationContainerHelper {
 		return retVal;
 	}
 
-	public static Collection<Triple<String, String, String>> unmarshalString(String marshalledString) {
-		Collection<Triple<String, String, String>> retVal = new ArrayList<>();
-		String left = null;
-		String middle = null;
-		String right = null;
-		if ((marshalledString != null) && (!marshalledString.isEmpty())) {
-			String[] annotations = marshalledString.split(";");
-			for (String annotation : annotations) {
-				left = null;
-				middle = null;
-				right = null;
-				String[] nsParts = annotation.split(Label.NS_SEPERATOR);
-				String rest;
-				if (nsParts.length > 2) {
-					throw new SaltException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
-				} else if (nsParts.length == 2) {
-					left = nsParts[0];
-					rest = nsParts[1];
-				} else {
-					rest = nsParts[0];
-				}
-				String[] nameParts = rest.split("=");
-				if (nameParts.length > 2) {
-					throw new SaltException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
-				} else if (nameParts.length == 2) {
-					middle = nameParts[0];
-					right = nameParts[1];
-				} else {
-					middle = nameParts[0];
-				}
-				retVal.add(new ImmutableTriple<String, String, String>(left, middle, right));
-			}
-		}
-		return (retVal);
-	}
-
 	public static Set<SMetaAnnotation> createMetaAnnotations(SAnnotationContainer container, String metaAnnotationString) {
 		Set<SMetaAnnotation> retVal = new HashSet<>();
-		for (Triple<String, String, String> triple : unmarshalString(metaAnnotationString)) {
+		for (Triple<String, String, String> triple : SaltUtil.unmarshalAnnotation(metaAnnotationString)) {
 			retVal.add(container.createMetaAnnotation(triple.getLeft(), triple.getMiddle(), triple.getRight()));
 		}
 		return (retVal);
@@ -312,7 +277,7 @@ public class SAnnotationContainerHelper {
 
 	public static Set<SProcessingAnnotation> createProcessingAnnotations(SAnnotationContainer container, String annotationString) {
 		Set<SProcessingAnnotation> retVal = new HashSet<>();
-		for (Triple<String, String, String> triple : unmarshalString(annotationString)) {
+		for (Triple<String, String, String> triple : SaltUtil.unmarshalAnnotation(annotationString)) {
 			retVal.add(container.createProcessingAnnotation(triple.getLeft(), triple.getMiddle(), triple.getRight()));
 		}
 		return (retVal);
@@ -388,7 +353,7 @@ public class SAnnotationContainerHelper {
 	
 	public static Set<SFeature> createFeatures(SAnnotationContainer container, String annotationString) {
 		Set<SFeature> retVal = new HashSet<>();
-		for (Triple<String, String, String> triple : unmarshalString(annotationString)) {
+		for (Triple<String, String, String> triple : SaltUtil.unmarshalAnnotation(annotationString)) {
 			retVal.add(container.createFeature(triple.getLeft(), triple.getMiddle(), triple.getRight()));
 		}
 		return (retVal);

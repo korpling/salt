@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -33,7 +34,9 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
@@ -830,5 +833,58 @@ public class SaltUtil {
 				}
 			}
 		}
+	}
+	/**
+	 * Splits an annotation string of the form 'namespace::name=value (,namespace::name=value)* into a collection of
+	 * (namespace, name, value). 
+	 * @param marshalledString the annotation string to be unmarschalled
+	 * @return a collection of (namespace, name, value). 
+	 */
+	public static Collection<Triple<String, String, String>> unmarshalAnnotation(String marshalledString) {
+		Collection<Triple<String, String, String>> retVal = new ArrayList<>();
+		String left = null;
+		String middle = null;
+		String right = null;
+		if ((marshalledString != null) && (!marshalledString.isEmpty())) {
+			String[] annotations = marshalledString.split(";");
+			for (String annotation : annotations) {
+				left = null;
+				middle = null;
+				right = null;
+				String[] nsParts = annotation.split(Label.NS_SEPERATOR);
+				String rest;
+				if (nsParts.length > 2) {
+					throw new SaltException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
+				} else if (nsParts.length == 2) {
+					left = nsParts[0].trim();
+					if (left.isEmpty()){
+						left=null;
+					}
+					rest = nsParts[1].trim();
+				} else {
+					rest = nsParts[0].trim();
+				}
+				String[] nameParts = rest.split("=");
+				if (nameParts.length > 2) {
+					throw new SaltException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
+				} else if (nameParts.length == 2) {
+					middle = nameParts[0].trim();
+					if (middle.isEmpty()){
+						middle=null;
+					}
+					right = nameParts[1].trim();
+					if (right.isEmpty()){
+						right=null;
+					}
+				} else {
+					middle = nameParts[0].trim();
+					if (middle.isEmpty()){
+						middle=null;
+					}
+				}
+				retVal.add(new ImmutableTriple<String, String, String>(left, middle, right));
+			}
+		}
+		return (retVal);
 	}
 }

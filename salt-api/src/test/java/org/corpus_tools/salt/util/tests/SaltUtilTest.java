@@ -17,16 +17,24 @@
  */
 package org.corpus_tools.salt.util.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Collection;
+
+import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.apache.commons.lang3.tuple.Triple;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.SAnnotation;
+import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
-import org.junit.Before;
 import org.junit.Test;
 
 public class SaltUtilTest {
@@ -144,5 +152,46 @@ public class SaltUtilTest {
 		path= SaltUtil.createSaltURI(doc1.getId());
 		assertEquals(URI.createURI("salt:/corp1/corp2/doc1"), path);
 		
+	}
+	
+	/**
+	 * Tests whether the unmarahalling of annotations works correctly.
+	 */
+	@Test
+	public void testUnmarshalAnnotation(){
+		Collection<Triple<String, String, String>> triples= SaltUtil.unmarshalAnnotation("salt::pos=NN");
+		assertEquals(1, triples.size());
+		assertEquals("salt", triples.iterator().next().getLeft());
+		assertEquals("pos", triples.iterator().next().getMiddle());
+		assertEquals("NN", triples.iterator().next().getRight());
+		
+		triples= SaltUtil.unmarshalAnnotation(" salt  ::  pos  =  NN ");
+		assertEquals(1, triples.size());
+		assertEquals("salt", triples.iterator().next().getLeft());
+		assertEquals("pos", triples.iterator().next().getMiddle());
+		assertEquals("NN", triples.iterator().next().getRight());
+		
+		triples= SaltUtil.unmarshalAnnotation(" pos  =  NN ");
+		assertEquals(1, triples.size());
+		assertNull(triples.iterator().next().getLeft());
+		assertEquals("pos", triples.iterator().next().getMiddle());
+		assertEquals("NN", triples.iterator().next().getRight());
+		
+		triples= SaltUtil.unmarshalAnnotation(" pos");
+		assertEquals(1, triples.size());
+		assertNull(triples.iterator().next().getLeft());
+		assertEquals("pos", triples.iterator().next().getMiddle());
+		assertNull(triples.iterator().next().getRight());
+		
+		triples= SaltUtil.unmarshalAnnotation(" salt :: ");
+		assertEquals(1, triples.size());
+		assertEquals("salt", triples.iterator().next().getLeft());
+		assertNull(triples.iterator().next().getMiddle());
+		assertNull(triples.iterator().next().getRight());
+		
+		triples= SaltUtil.unmarshalAnnotation(" salt  ::  pos  =  NN ; other  ::  lemma  =  I");
+		assertEquals(2, triples.size());
+		assertTrue(triples.contains(new ImmutableTriple<String, String, String>("salt", "pos","NN")));
+		assertTrue(triples.contains(new ImmutableTriple<String, String, String>("other", "lemma","I")));
 	}
 }
