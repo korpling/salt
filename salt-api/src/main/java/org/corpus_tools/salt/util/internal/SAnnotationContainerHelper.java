@@ -126,8 +126,8 @@ public class SAnnotationContainerHelper {
 
 	public static Set<SAnnotation> createAnnotations(SAnnotationContainer container, String annotationString) {
 		Set<SAnnotation> retVal = new HashSet<>();
-		for (Triple<String, String, String> triple : SaltUtil.unmarshalAnnotation(annotationString)) {
-			retVal.add(container.createAnnotation(triple.getLeft(), triple.getMiddle(), triple.getRight()));
+		for (String[] triple : SaltUtil.unmarshalAnnotation(annotationString)) {
+			retVal.add(container.createAnnotation(triple[0], triple[1], triple[2]));
 		}
 		return (retVal);
 	}
@@ -202,9 +202,8 @@ public class SAnnotationContainerHelper {
 
 	public static Set<SMetaAnnotation> createMetaAnnotations(SAnnotationContainer container, String metaAnnotationString) {
 		Set<SMetaAnnotation> retVal = new HashSet<>();
-		for (Triple<String, String, String> triple : SaltUtil.unmarshalAnnotation(metaAnnotationString)) {
-			retVal.add(container.createMetaAnnotation(triple.getLeft(), triple.getMiddle(), triple.getRight()));
-		}
+		for (String[] triple : SaltUtil.unmarshalAnnotation(metaAnnotationString)) {
+			retVal.add(container.createMetaAnnotation(triple[0], triple[1], triple[2]));		}
 		return (retVal);
 	}
 
@@ -277,8 +276,8 @@ public class SAnnotationContainerHelper {
 
 	public static Set<SProcessingAnnotation> createProcessingAnnotations(SAnnotationContainer container, String annotationString) {
 		Set<SProcessingAnnotation> retVal = new HashSet<>();
-		for (Triple<String, String, String> triple : SaltUtil.unmarshalAnnotation(annotationString)) {
-			retVal.add(container.createProcessingAnnotation(triple.getLeft(), triple.getMiddle(), triple.getRight()));
+		for (String[] triple : SaltUtil.unmarshalAnnotation(annotationString)) {
+			retVal.add(container.createProcessingAnnotation(triple[0], triple[1], triple[2]));
 		}
 		return (retVal);
 	}
@@ -353,8 +352,8 @@ public class SAnnotationContainerHelper {
 	
 	public static Set<SFeature> createFeatures(SAnnotationContainer container, String annotationString) {
 		Set<SFeature> retVal = new HashSet<>();
-		for (Triple<String, String, String> triple : SaltUtil.unmarshalAnnotation(annotationString)) {
-			retVal.add(container.createFeature(triple.getLeft(), triple.getMiddle(), triple.getRight()));
+		for (String[] triple : SaltUtil.unmarshalAnnotation(annotationString)) {
+			retVal.add(container.createFeature(triple[0], triple[1], triple[2]));
 		}
 		return (retVal);
 	}

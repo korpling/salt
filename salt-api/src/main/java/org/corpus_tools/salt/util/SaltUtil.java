@@ -840,8 +840,8 @@ public class SaltUtil {
 	 * @param marshalledString the annotation string to be unmarschalled
 	 * @return a collection of (namespace, name, value). 
 	 */
-	public static Collection<Triple<String, String, String>> unmarshalAnnotation(String marshalledString) {
-		Collection<Triple<String, String, String>> retVal = new ArrayList<>();
+	public static Collection<String[]> unmarshalAnnotation(String marshalledString) {
+		Collection<String[]> retVal = new ArrayList<>();
 		String left = null;
 		String middle = null;
 		String right = null;
@@ -882,7 +882,8 @@ public class SaltUtil {
 						middle=null;
 					}
 				}
-				retVal.add(new ImmutableTriple<String, String, String>(left, middle, right));
+				String[] triple= {left, middle, right};
+				retVal.add(triple);
 			}
 		}
 		return (retVal);
