@@ -19,12 +19,17 @@ package org.corpus_tools.salt.common.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.corpus_tools.salt.common.SCorpusGraph;
+import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.exceptions.SaltResourceException;
 import org.corpus_tools.salt.graph.Identifier;
+import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
 public class SaltProjectImpl implements SaltProject {
@@ -104,26 +109,60 @@ public class SaltProjectImpl implements SaltProject {
 
 	@Override
 	public void saveSaltProject(URI saltProjectURI) {
-		// TODO Auto-generated method stub
-
+		SaltUtil.saveSaltProject(this, saltProjectURI);
 	}
 
 	@Override
 	public void loadSaltProject(URI saltProjectURI) {
-		// TODO Auto-generated method stub
+		if (saltProjectURI== null)
+			throw new SaltResourceException("Cannot load salt project, because the paassed uri is null.");
+		this.loadCorpusStructure(saltProjectURI);
+		for (SCorpusGraph sCorpusGraph: this.getCorpusGraphs())
+		{
+			for (SDocument sDoc: sCorpusGraph.getDocuments())
+			{
+				try{
+					sDoc.loadDocumentGraph();
+				}catch (SaltResourceException e){
+					throw new SaltResourceException("A problem occured when loading salt project from '"+saltProjectURI+"', because one of its documents could not have been load '"+sDoc.getId()+"'.", e);
+				}catch (Exception e) {
+					throw new SaltResourceException("A problem occured when loading salt project from '"+saltProjectURI+"', because of a nested exception during loading one of its documents '"+sDoc.getId()+"'.", e);
+				}
+			}
+		}
 
 	}
 
 	@Override
 	public void loadCorpusStructure(URI saltProjectURI) {
-		// TODO Auto-generated method stub
+		SaltProject loadedProject = SaltUtil.loadSaltProject(saltProjectURI);
+		for(SCorpusGraph corpusGraph : new LinkedList<>(loadedProject.getCorpusGraphs())) {
+			addCorpusGraph(corpusGraph);
+		}
 
 	}
 
 	@Override
-	public Map<Identifier, URI> getDocumentGraphLocations() {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<Identifier, URI> getDocumentGraphLocations()
+	{
+		Map<Identifier, URI> retVal = new HashMap<>();
+		if (this.getCorpusGraphs() != null)
+		{
+			for (SCorpusGraph sCorpusGraph : this.getCorpusGraphs())
+			{
+				if (sCorpusGraph != null)
+				{
+					for (SDocument sDocument : sCorpusGraph.getDocuments())
+					{
+						if (sDocument != null && sDocument.getDocumentGraph() == null)
+						{
+							retVal.put(sDocument.getIdentifier(), sDocument.getDocumentGraphLocation());
+						}
+					}
+				}
+			}
+		}
+		return (retVal);
 	}
 
 	@Override

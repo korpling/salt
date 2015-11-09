@@ -86,7 +86,7 @@ public interface SDocument extends SNode {
 	 * 
 	 * @param documentGraphLocation
 	 *            location of where to persist object as SaltXML file (must have
-	 *            the ending {@value SaltFactory#FILE_ENDING_SALT}) in
+	 *            the ending {@value SaltUtil#FILE_ENDING_SALT}) in
 	 *            {@link URI} syntax
 	 * @model sDocumentGraphLocationDataType=
 	 *        "de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
