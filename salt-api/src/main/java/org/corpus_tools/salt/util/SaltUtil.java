@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -42,9 +43,11 @@ import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
@@ -436,6 +439,9 @@ public class SaltUtil {
 
 	/**
 	 * Loads a SaltProject from given uri and returns it as object structure.
+	 * This does not load the document graphs which are belong to the SaltProject from the disk.
+	 * You have to call {@link SDocument#loadDocumentGraph() } on each document to load
+	 * the actual document graph.
 	 * 
 	 * @param location
 	 *            location to the Salt project file
@@ -467,7 +473,61 @@ public class SaltUtil {
 		} else {
 			throw new SaltResourceException("Can not load SaltProject, because the file at '" + saltProjectFile + "' does not contain a Salt project. ");
 		}
+		
+		for(SCorpusGraph corpusGraph : saltProject.getCorpusGraphs()) {
+			findDocumentGraphLocations(corpusGraph, location);
+		}
 		return (saltProject);
+	}
+	
+	/**
+	 * Traverses through a corpus graph and sets the correct document graph locations.
+	 * 
+	 * @see SDocument#getDocumentGraphLocation()
+	 * @param corpusGraph
+	 * @param root 
+	 */
+	private static void findDocumentGraphLocations(SCorpusGraph corpusGraph, final URI root) {
+		if(corpusGraph == null || root == null) {
+			return;
+		}
+		
+		final Stack<URI> pathStack = new Stack<>();
+		
+		corpusGraph.traverse(corpusGraph.getRoots(), SGraph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "findDocumentGraphLocations", 
+				new GraphTraverseHandler() {
+
+			@Override
+			public void nodeReached(SGraph.GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
+				if(pathStack.isEmpty()) {
+					pathStack.push(root);
+				}
+				
+				if(currNode instanceof SCorpus) {
+					pathStack.push(pathStack.peek().appendSegment(currNode.getName()));
+				} else if(currNode instanceof SDocument) {
+					URI docURI = pathStack.peek().appendSegment(currNode.getName() + "." + SaltUtil.FILE_ENDING_SALT_XML);
+					File docPath = new File(docURI.toFileString());
+					if(docPath.exists()) {
+						((SDocument) docURI).setDocumentGraphLocation(docURI);
+					}
+				}
+			}
+
+			@Override
+			public void nodeLeft(SGraph.GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
+				if(currNode instanceof SCorpus) {
+					if(!pathStack.isEmpty()) {
+						pathStack.pop();
+					}
+				}
+			}
+
+			@Override
+			public boolean checkConstraint(SGraph.GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<SNode, SNode> relation, SNode currNode, long order) {
+				return true;
+			}
+		});
 	}
 
 	/**
@@ -538,6 +598,10 @@ public class SaltUtil {
 					&& (((SaltProject) obj).getCorpusGraphs().size() >= idxOfSCorpusGraph)) {
 				retVal = ((SaltProject) obj).getCorpusGraphs().get(idxOfSCorpusGraph);
 			}
+		}
+		
+		if(retVal != null) {
+			findDocumentGraphLocations(retVal, sCorpusGraphUri);
 		}
 		
 		return (retVal);
