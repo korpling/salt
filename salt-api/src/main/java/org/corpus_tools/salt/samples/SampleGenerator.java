@@ -61,11 +61,12 @@ public class SampleGenerator {
 	 * project.
 	 * 
 	 * <pre>
-	 *      rootCorpus 
-	 *       /      \ 
-	 * subCorp1      subCorp2 
-	 *    / \          / \ 
-	 * doc1 doc2    doc3 doc4
+	 * 
+	 *            rootCorpus
+	 *           /         \
+	 * 	subCorpus1           subCorpus2
+	 * 	/      \            /       \
+	 * doc1   doc2         doc3     doc4
 	 * </pre>
 	 * 
 	 * @throws IOException
@@ -82,34 +83,34 @@ public class SampleGenerator {
 
 		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
 		saltProject.addCorpusGraph(corpGraph);
-		SCorpus corpus1 = SaltFactory.createSCorpus();
-		corpus1.setName("rootCorpus");
-		corpGraph.addNode(corpus1);
-		SCorpus corpus2 = SaltFactory.createSCorpus();
-		corpus2.setName("subCorpus1");
-		SCorpus corpus3 = SaltFactory.createSCorpus();
-		corpus3.setName("subCorpus2");
+		SCorpus rootCorpus = SaltFactory.createSCorpus();
+		rootCorpus.setName("rootCorpus");
+		corpGraph.addNode(rootCorpus);
+		SCorpus subCorpus1 = SaltFactory.createSCorpus();
+		subCorpus1.setName("subCorpus1");
+		SCorpus subCorpus2 = SaltFactory.createSCorpus();
+		subCorpus2.setName("subCorpus2");
 
-		corpGraph.addSubCorpus(corpus1, corpus2);
-		corpGraph.addSubCorpus(corpus1, corpus3);
+		corpGraph.addSubCorpus(rootCorpus, subCorpus1);
+		corpGraph.addSubCorpus(rootCorpus, subCorpus2);
 
 		SDocument doc = null;
 
 		doc = SaltFactory.createSDocument();
 		doc.setName("doc1");
-		corpGraph.addDocument(corpus1, doc);
+		corpGraph.addDocument(subCorpus1, doc);
 
 		doc = SaltFactory.createSDocument();
 		doc.setName("doc2");
-		corpGraph.addDocument(corpus1, doc);
+		corpGraph.addDocument(subCorpus1, doc);
 
 		doc = SaltFactory.createSDocument();
 		doc.setName("doc3");
-		corpGraph.addDocument(corpus2, doc);
+		corpGraph.addDocument(subCorpus1, doc);
 
 		doc = SaltFactory.createSDocument();
 		doc.setName("doc4");
-		corpGraph.addDocument(corpus2, doc);
+		corpGraph.addDocument(subCorpus1, doc);
 
 		return (corpGraph);
 	}
@@ -123,7 +124,7 @@ public class SampleGenerator {
 	 * 
 	 *            rootCorpus
 	 *           /         \
-	 * 	subCorp1           subCorp2
+	 * 	subCorpus1          subCorpus2
 	 * 	/      \            /       \
 	 * doc1   doc2         doc3     doc4
 	 * </pre>
@@ -154,7 +155,7 @@ public class SampleGenerator {
 	 * <pre>
 	 *            rootCorpus
 	 *       /                    \
-	 *   subCorp1               subCorp2
+	 *  subCorpus1              subCorpus2
 	 *  /       \              /        \
 	 * doc1     doc2         doc3      doc4
 	 * </pre>
@@ -174,7 +175,7 @@ public class SampleGenerator {
 	 * <pre>
 	 *             rootCorpus
 	 *       /                     \
-	 *   subCorp1               subCorp2
+	 *  subCorpus1             subCorpus2
 	 *  /       \             /         \
 	 * doc1    doc2         doc3       doc4
 	 * </pre>
