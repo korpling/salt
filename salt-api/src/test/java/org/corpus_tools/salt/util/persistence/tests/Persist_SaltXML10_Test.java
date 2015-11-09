@@ -26,11 +26,11 @@ import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
-import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -206,17 +206,18 @@ public class Persist_SaltXML10_Test {
 	}
 
 	/**
-	 * 
+	 * Tests persisting a SaltProject structure (without storing the SDocumentGraphs)
 	 */
 	@Test
-	public void testLoadStore_SaltProject() {
+	public void testLoadStore_SaltProjectOnlyStructure() {
 		SaltProject project = SaltFactory.createSaltProject();
 
 		// create two corpus structures
 		SampleGenerator.createCorpusStructure(project);
 		SampleGenerator.createCorpusStructure(project);
 
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/saltProject/" + SaltUtil.FILE_SALT_PROJECT);
+		String outFolder = SaltTestsUtil.getTempTestFolder("/testLoadStore_SaltProjectOnlyStructure") + "/saltProject";
+		File tmpFile = new File(outFolder + "/" + SaltUtil.FILE_SALT_PROJECT);
 		SaltUtil.saveSaltProject(project, URI.createFileURI(tmpFile.getAbsolutePath()));
 		SaltProject loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
 
@@ -225,8 +226,10 @@ public class Persist_SaltXML10_Test {
 		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
 		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(), loaded.getCorpusGraphs().get(1).getNodes().size());
 		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(), loaded.getCorpusGraphs().get(1).getRelations().size());
-
-		tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/saltProject2/");
+		
+		// make sure it's also working when storing it a second time to some other location
+		outFolder = SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/saltProject2";
+		tmpFile = new File(outFolder);
 		SaltUtil.saveSaltProject(project, URI.createFileURI(tmpFile.getAbsolutePath()));
 		loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
 
@@ -235,6 +238,40 @@ public class Persist_SaltXML10_Test {
 		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
 		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(), loaded.getCorpusGraphs().get(1).getNodes().size());
 		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(), loaded.getCorpusGraphs().get(1).getRelations().size());
+	}
+	
+	/**
+	 * Tests persisting a SaltProject structure (without storing the SDocumentGraphs)
+	 */
+	@Test
+	public void testLoadStore_SaltProjectWithStructure() {
+		
+		SaltProject project = SampleGenerator.createSaltProject();
+
+		String outFolder = SaltTestsUtil.getTempTestFolder("/testLoadStore_SaltProjectWithStructure") + "/saltProject";
+		File tmpFile = new File(outFolder + "/" + SaltUtil.FILE_SALT_PROJECT);
+		SaltUtil.saveSaltProject(project, URI.createFileURI(tmpFile.getAbsolutePath()));
+		SaltProject loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
+
+		assertEquals(project.getCorpusGraphs().size(), loaded.getCorpusGraphs().size());
+		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(), loaded.getCorpusGraphs().get(0).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
+		
+		Assert.assertNotNull(loaded.getCorpusGraphs().get(0).getDocuments().get(0).getDocumentGraphLocation());
+		Assert.assertNotNull(loaded.getCorpusGraphs().get(0).getDocuments().get(1).getDocumentGraphLocation());
+		Assert.assertNotNull(loaded.getCorpusGraphs().get(0).getDocuments().get(2).getDocumentGraphLocation());
+		Assert.assertNotNull(loaded.getCorpusGraphs().get(0).getDocuments().get(3).getDocumentGraphLocation());
+		
+		assertEquals(outFolder + "/rootCorpus/subCorpus1/doc1.salt", 
+				loaded.getCorpusGraphs().get(0).getDocuments().get(0).getDocumentGraphLocation().toFileString());
+		assertEquals(outFolder + "/rootCorpus/subCorpus1/doc2.salt", 
+				loaded.getCorpusGraphs().get(0).getDocuments().get(1).getDocumentGraphLocation().toFileString());
+		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc3.salt", 
+				loaded.getCorpusGraphs().get(0).getDocuments().get(2).getDocumentGraphLocation().toFileString());
+		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc4.salt", 
+				loaded.getCorpusGraphs().get(0).getDocuments().get(3).getDocumentGraphLocation().toFileString());
+		
+
 	}
 	
 	/**

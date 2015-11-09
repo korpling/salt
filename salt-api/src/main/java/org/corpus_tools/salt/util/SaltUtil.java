@@ -485,13 +485,18 @@ public class SaltUtil {
 	 * 
 	 * @see SDocument#getDocumentGraphLocation()
 	 * @param corpusGraph
-	 * @param root 
+	 * @param root The root folder or the salt project file.
 	 */
-	private static void insertDocumentGraphLocations(SCorpusGraph corpusGraph, final URI root) {
+	private static void insertDocumentGraphLocations(SCorpusGraph corpusGraph, URI root) {
 		if(corpusGraph == null || root == null) {
 			return;
 		}
 		
+		File rootFile = new File(root.toFileString());
+		if(rootFile.isFile()) {
+			rootFile = rootFile.getParentFile();
+			root = URI.createFileURI(rootFile.getAbsolutePath());
+		}
 		for(SDocument doc : corpusGraph.getDocuments()) {
 			URI location = root;
 			location = location.appendSegments(doc.getPath().segments());
