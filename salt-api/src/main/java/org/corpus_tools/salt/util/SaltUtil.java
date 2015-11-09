@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -34,9 +35,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
+import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
@@ -45,8 +45,10 @@ import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.exceptions.SaltResourceException;
@@ -489,6 +491,107 @@ public class SaltUtil {
 		return (retVal);
 
 	}
+	
+	/**
+	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT}) into this object. If the 
+	 * given SaltXML file does not contain a {@link SCorpusGraph} object persisting, an exception
+	 * will be thrown. If the SaltXML file contains persistings for more than one {@link SCorpusGraph}
+	 * object, the first one will be loaded.
+	 * @param sCorpusGraphURI the {@link URI} to locate the SaltXML file  
+	 * @return 
+	 */
+	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphURI) {
+		return loadCorpusGraph(sCorpusGraphURI, 0);
+	}
+	
+	/**
+	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT}) into this object. If the 
+	 * given SaltXML file does not contain a {@link SCorpusGraph} object persisting, an exception
+	 * will be thrown. The parameter <code>idxOfSCorpusGraph</code> determines which object shall
+	 * be load, in case of the given SaltXML file contains more than one persisting of
+	 * {@link SCorpusGraph} objects.
+	 * @param sCorpusGraphUri the {@link URI} to locate the SaltXML file
+	 * @param idxOfSCorpusGraph number of graph to be load, note that the list of graphs starts with 0
+	 * @return
+	 */
+	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph) {
+		if (sCorpusGraphUri == null)
+			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName()
+					+ "' object, because the passed uri is empty. ");
+
+		SCorpusGraph retVal = null;
+
+		if (!sCorpusGraphUri.toFileString().endsWith("." + SaltUtil.FILE_ENDING_SALT_XML)) {
+			// looks weird, but is necessary in case of uri ends with /
+			if (sCorpusGraphUri.toString().endsWith("/")) {
+				sCorpusGraphUri = sCorpusGraphUri.trimSegments(1);
+			}
+			sCorpusGraphUri = sCorpusGraphUri.appendSegment(SaltUtil.FILE_SALT_PROJECT);
+		}
+
+		Object obj = load(sCorpusGraphUri);
+		if (obj instanceof SCorpusGraph) {
+			retVal = (SCorpusGraph) obj;
+		}
+		else if (obj instanceof SaltProject) {
+			if ((((SaltProject) obj).getCorpusGraphs() != null)
+					&& (((SaltProject) obj).getCorpusGraphs().size() >= idxOfSCorpusGraph)) {
+				retVal = ((SaltProject) obj).getCorpusGraphs().get(idxOfSCorpusGraph);
+			}
+		}
+		
+		return (retVal);
+	}
+	
+	/**
+	 * moves the content of <code>source</code> to <code>target</code>. 
+	 * Caution: Object contained in <code>source</code> will be moved, which from <code>target</code>
+	 * to <code>source</code>, which will mean, that object are not content of <code>source</code>
+	 * any more after using {@link #moveSCorpusGraph(SCorpusGraph, SCorpusGraph)}.   
+	 * @param source {@link SCorpusGraph} delivering the content to moveSCorpusGraph
+	 * @param target {@link SCorpusGraph} object to where the content will be moved
+	 */
+	public static void moveSCorpusGraph(SCorpusGraph source, SCorpusGraph target) {
+		// copy all sRelations and source and target SNode as well from loaded
+		// graph into existing one
+		for (SRelation<SNode, SNode> sRelation : new LinkedList<>(source.getRelations())) {
+			if (target.getNode(sRelation.getSource().getId()) == null)
+				target.addNode(sRelation.getSource());
+			if (target.getNode(sRelation.getTarget().getId()) == null)
+				target.addNode(sRelation.getTarget());
+			target.addRelation(sRelation);
+		}
+
+		// copy all sNodes from loaded graph into existing one
+		for (SNode sNode : new LinkedList<>(source.getNodes())) {
+			if (target.getNode(sNode.getId()) == null)
+				target.addNode(sNode);
+			target.addNode(sNode);
+		}
+
+		// copy all sAnnotation from loaded graph into existing one
+		for (SAnnotation sAnno : source.getAnnotations())
+			target.addAnnotation(sAnno);
+
+		// copy all sMetaAnnotation from loaded graph into existing one
+		for (SMetaAnnotation sMetaAnno : source.getMetaAnnotations())
+			target.addMetaAnnotation(sMetaAnno);
+		// copy all sProcessingAnnotation from loaded graph into existing one
+		for (SProcessingAnnotation sProcAnno : source.getProcessingAnnotations())
+			target.addProcessingAnnotation(sProcAnno);
+
+		// copy all SFeature from loaded graph into existing one
+		for (SFeature sfeature : source.getFeatures()) {
+			target.addFeature(sfeature);
+		}
+
+		// copy identifier
+		target.setIdentifier(source.getIdentifier());
+		
+		// copy all sLayer from loaded graph into existing one
+		for (SLayer sLayer : new LinkedList<>(source.getLayers()))
+			target.addLayer(sLayer);
+	}
 
 	/**
 	 * Persists the passed {@link SDocumentGraph} object in a SaltXML file at
@@ -800,7 +903,7 @@ public class SaltUtil {
 					fromSAnno.setName(newSName);
 					to.addAnnotation(fromSAnno);
 				} else {
-					// move
+					// moveSCorpusGraph
 					to.addAnnotation(fromSAnno);
 				}
 			}
@@ -828,7 +931,7 @@ public class SaltUtil {
 					to.addMetaAnnotation(fromSAnno);
 
 				} else {
-					// move
+					// moveSCorpusGraph
 					to.addMetaAnnotation(fromSAnno);
 				}
 			}
