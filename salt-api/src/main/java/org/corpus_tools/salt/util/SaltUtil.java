@@ -475,59 +475,32 @@ public class SaltUtil {
 		}
 		
 		for(SCorpusGraph corpusGraph : saltProject.getCorpusGraphs()) {
-			findDocumentGraphLocations(corpusGraph, location);
+			insertDocumentGraphLocations(corpusGraph, location);
 		}
 		return (saltProject);
 	}
 	
 	/**
-	 * Traverses through a corpus graph and sets the correct document graph locations.
+	 * Iterates through the documents of a corpus graph and sets the correct document graph locations.
 	 * 
 	 * @see SDocument#getDocumentGraphLocation()
 	 * @param corpusGraph
 	 * @param root 
 	 */
-	private static void findDocumentGraphLocations(SCorpusGraph corpusGraph, final URI root) {
+	private static void insertDocumentGraphLocations(SCorpusGraph corpusGraph, final URI root) {
 		if(corpusGraph == null || root == null) {
 			return;
 		}
 		
-		final Stack<URI> pathStack = new Stack<>();
-		
-		corpusGraph.traverse(corpusGraph.getRoots(), SGraph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "findDocumentGraphLocations", 
-				new GraphTraverseHandler() {
-
-			@Override
-			public void nodeReached(SGraph.GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
-				if(pathStack.isEmpty()) {
-					pathStack.push(root);
-				}
-				
-				if(currNode instanceof SCorpus) {
-					pathStack.push(pathStack.peek().appendSegment(currNode.getName()));
-				} else if(currNode instanceof SDocument) {
-					URI docURI = pathStack.peek().appendSegment(currNode.getName() + "." + SaltUtil.FILE_ENDING_SALT_XML);
-					File docPath = new File(docURI.toFileString());
-					if(docPath.exists()) {
-						((SDocument) docURI).setDocumentGraphLocation(docURI);
-					}
-				}
+		for(SDocument doc : corpusGraph.getDocuments()) {
+			URI location = root;
+			location = location.appendSegments(doc.getPath().segments());
+			location = location.appendFileExtension(SaltUtil.FILE_ENDING_SALT_XML);
+			File f = new File(location.toFileString());
+			if(f.exists()) {
+				doc.setDocumentGraphLocation(location);
 			}
-
-			@Override
-			public void nodeLeft(SGraph.GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
-				if(currNode instanceof SCorpus) {
-					if(!pathStack.isEmpty()) {
-						pathStack.pop();
-					}
-				}
-			}
-
-			@Override
-			public boolean checkConstraint(SGraph.GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<SNode, SNode> relation, SNode currNode, long order) {
-				return true;
-			}
-		});
+		}
 	}
 
 	/**
@@ -601,7 +574,7 @@ public class SaltUtil {
 		}
 		
 		if(retVal != null) {
-			findDocumentGraphLocations(retVal, sCorpusGraphUri);
+			insertDocumentGraphLocations(retVal, sCorpusGraphUri);
 		}
 		
 		return (retVal);
