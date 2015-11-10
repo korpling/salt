@@ -157,7 +157,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 
 	/** {@inheritDoc} */
 	@Override
-	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
+	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
 		GraphTraverserModule traverserModule = new GraphTraverserModule();
 		traverserModule.setGraph(this);
 		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);

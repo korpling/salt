@@ -126,7 +126,7 @@ public class GraphTraverserModule {
 	 *            if this value is false, this method does not take care about
 	 *            cycles. This can invoke endless loops.
 	 */
-	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
+	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
 		if (getGraph() == null) {
 			throw new SaltTraverserException("Cannot start traversing graph, because the graph is null.");
 		}
@@ -156,7 +156,7 @@ public class GraphTraverserModule {
 			}
 		}
 		Traverser traverser = new Traverser();
-		traverser.startNodes = startNodes;
+		traverser.startNodes = (List<SNode>)startNodes;
 		traverser.traverseType = traverseType;
 		traverser.traverseId = traverseId;
 		traverser.traverseHandler = traverseHandler;
