@@ -45,7 +45,7 @@ public class DOTStoringTest {
 		String docName = "doc1";
 		SDocument sDocument = SaltFactory.createSDocument();
 		sDocument.setName(docName);
-		SampleGenerator.createSDocumentStructure(sDocument);
+		SampleGenerator.createDocumentStructure(sDocument);
 
 		SaltUtil.save_DOT(sDocument, uri);
 		assertTrue(new File(uri.toFileString()).exists());

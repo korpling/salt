@@ -1982,7 +1982,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testStoreLoadIsomorph() throws IOException, ClassNotFoundException {
 		SDocument doc = SaltFactory.createSDocument();
-		SampleGenerator.createSDocumentStructure(doc);
+		SampleGenerator.createDocumentStructure(doc);
 		SDocumentGraph docGraph = doc.getDocumentGraph();
 
 		File tmpFile = File.createTempFile("testSerializationOfSDocumentGraph", ".obj");

@@ -226,7 +226,7 @@ public class SampleGeneratorTest {
 		SDocument fixture = SaltFactory.createSDocument();
 
 		try {
-			SampleGenerator.createSDocumentStructure(fixture);
+			SampleGenerator.createDocumentStructure(fixture);
 		} catch (Exception e) {
 			fail(e.getMessage() + "\n" + e.getCause());
 		}
