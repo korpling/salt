@@ -24,6 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
@@ -141,7 +142,7 @@ public class SaltProjectImpl implements SaltProject {
 		}
 
 	}
-
+	/** {@inheritDoc} **/
 	@Override
 	public Map<Identifier, URI> getDocumentGraphLocations()
 	{
@@ -175,5 +176,13 @@ public class SaltProjectImpl implements SaltProject {
 		retStr.append(getCorpusGraphs().size());
 		retStr.append("corpus graphs");
 		return (retStr.toString());
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public SCorpusGraph createCorpusGraph() {
+		SCorpusGraph corpGraph= SaltFactory.createSCorpusGraph();
+		addCorpusGraph(corpGraph);
+		return(corpGraph);
 	}
 }

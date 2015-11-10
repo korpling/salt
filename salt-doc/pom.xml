@@ -21,9 +21,7 @@
 
 	<build>
 		<pluginManagement>
-
 			<plugins>
-
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>2.7</version>
@@ -36,9 +34,7 @@
 							</resource>
 						</resources>
 					</configuration>
-
 				</plugin>
-
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-scm-publish-plugin</artifactId>
@@ -59,7 +55,6 @@
 						<checkoutDirectory>${scmPubCheckoutDirectory}</checkoutDirectory>
 						<checkinComment>update documentation for version
 							${project.version} (${site.path})
-
 							Original revision is
 							${buildNumber}.</checkinComment>
 					</configuration>

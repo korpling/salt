@@ -165,5 +165,11 @@ public interface SaltProject {
 	 *         no {@link SDocumentGraph} object is persisted
 	 */
 	public Map<Identifier, URI> getDocumentGraphLocations();
+	
+	/**
+	 * Creates a new corpus graph and adds it to the Salt project.
+	 * @return the new created Salt project
+	 */
+	public SCorpusGraph createCorpusGraph();
 
 } // SaltProject
