@@ -438,50 +438,6 @@ public class SaltUtil {
 	}
 
 	/**
-	 * Loads a SaltProject from given uri and returns it as object structure.
-	 * This does not load the document graphs which are belong to the
-	 * SaltProject from the disk. You have to call
-	 * {@link SDocument#loadDocumentGraph() } on each document to load the actual
-	 * document graph.
-	 * 
-	 * @param location
-	 *            location to the Salt project file
-	 * @return returns a saltProject, which is filled with data coming from
-	 *         corpus in uri
-	 */
-	public static SaltProject loadSaltProject(URI location) {
-		if (!FILE_ENDING_SALT_XML.equals(location.fileExtension())) {
-			location = location.appendSegment(FILE_SALT_PROJECT);
-		}
-
-		SaltProject saltProject = null;
-		if (location == null) {
-			throw new SaltResourceException("Can not load SaltProject, because the given uri is null. ");
-		}
-		File saltProjectFile = null;
-		try {
-			saltProjectFile = new File(location.toFileString());
-		} catch (Exception e) {
-			throw new SaltResourceException("Can not load SaltProject. ", e);
-		}
-		if (!saltProjectFile.exists()) {
-			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectFile + "' does not exist. ");
-		}
-
-		Object project = load(location);
-		if (project instanceof SaltProject) {
-			saltProject = (SaltProject) project;
-		} else {
-			throw new SaltResourceException("Can not load SaltProject, because the file at '" + saltProjectFile + "' does not contain a Salt project. ");
-		}
-
-		for (SCorpusGraph corpusGraph : saltProject.getCorpusGraphs()) {
-			insertDocumentGraphLocations(corpusGraph, location);
-		}
-		return (saltProject);
-	}
-
-	/**
 	 * Iterates through the documents of a corpus graph and sets the correct
 	 * document graph locations.
 	 * 
@@ -512,93 +468,11 @@ public class SaltUtil {
 	}
 
 	/**
-	 * Loads a {@link SDocumentGraph} object and returns it. The location of
-	 * where to find the SaltXML containing the {@link SDocumentGraph} object is
-	 * given by the passed {@link URI} object.
-	 * 
-	 * @param location
-	 *            location of SaltXML to load {@link SDocumentGraph} object.
-	 */
-	public static SDocumentGraph loadDocumentGraph(URI location) {
-		SDocumentGraph retVal = null;
-		Object obj = load(location);
-		if (obj == null) {
-			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName() + ", because file located at contains no such object, the returned object was null.");
-		} else if (obj instanceof SDocumentGraph) {
-			retVal = (SDocumentGraph) obj;
-		} else {
-			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName() + ", because file located at contains no such object. It contains: " + obj.getClass());
-		}
-		return (retVal);
-
-	}
-
-	/**
-	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT})
-	 * into this object. If the given SaltXML file does not contain a
-	 * {@link SCorpusGraph} object persisting, an exception will be thrown. If
-	 * the SaltXML file contains persistings for more than one
-	 * {@link SCorpusGraph} object, the first one will be loaded.
-	 * 
-	 * @param sCorpusGraphURI
-	 *            the {@link URI} to locate the SaltXML file
-	 * @return
-	 */
-	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphURI) {
-		return loadCorpusGraph(sCorpusGraphURI, 0);
-	}
-
-	/**
-	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT})
-	 * into this object. If the given SaltXML file does not contain a
-	 * {@link SCorpusGraph} object persisting, an exception will be thrown. The
-	 * parameter <code>idxOfSCorpusGraph</code> determines which object shall be
-	 * load, in case of the given SaltXML file contains more than one persisting
-	 * of {@link SCorpusGraph} objects.
-	 * 
-	 * @param sCorpusGraphUri
-	 *            the {@link URI} to locate the SaltXML file
-	 * @param idxOfSCorpusGraph
-	 *            number of graph to be load, note that the list of graphs
-	 *            starts with 0
-	 * @return
-	 */
-	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph) {
-		if (sCorpusGraphUri == null)
-			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName() + "' object, because the passed uri is empty. ");
-
-		SCorpusGraph retVal = null;
-
-		if (!sCorpusGraphUri.toFileString().endsWith("." + SaltUtil.FILE_ENDING_SALT_XML)) {
-			// looks weird, but is necessary in case of uri ends with /
-			if (sCorpusGraphUri.toString().endsWith("/")) {
-				sCorpusGraphUri = sCorpusGraphUri.trimSegments(1);
-			}
-			sCorpusGraphUri = sCorpusGraphUri.appendSegment(SaltUtil.FILE_SALT_PROJECT);
-		}
-
-		Object obj = load(sCorpusGraphUri);
-		if (obj instanceof SCorpusGraph) {
-			retVal = (SCorpusGraph) obj;
-		} else if (obj instanceof SaltProject) {
-			if ((((SaltProject) obj).getCorpusGraphs() != null) && (((SaltProject) obj).getCorpusGraphs().size() >= idxOfSCorpusGraph)) {
-				retVal = ((SaltProject) obj).getCorpusGraphs().get(idxOfSCorpusGraph);
-			}
-		}
-
-		if (retVal != null) {
-			insertDocumentGraphLocations(retVal, sCorpusGraphUri);
-		}
-
-		return (retVal);
-	}
-
-	/**
-	 * moves the content of <code>source</code> to <code>target</code>. Caution:
+	 * Moves the content of <code>source</code> to <code>target</code>. Caution:
 	 * Object contained in <code>source</code> will be moved, which from
 	 * <code>target</code> to <code>source</code>, which will mean, that object
 	 * are not content of <code>source</code> any more after using
-	 * {@link #moveSCorpusGraph(SCorpusGraph, SCorpusGraph)}.
+	 * {@link #moveCorpusGraph(SCorpusGraph, SCorpusGraph)}.
 	 * 
 	 * @param source
 	 *            {@link SCorpusGraph} delivering the content to
@@ -606,7 +480,7 @@ public class SaltUtil {
 	 * @param target
 	 *            {@link SCorpusGraph} object to where the content will be moved
 	 */
-	public static void moveSCorpusGraph(SCorpusGraph source, SCorpusGraph target) {
+	public static void moveCorpusGraph(SCorpusGraph source, SCorpusGraph target) {
 		// copy all sRelations and source and target SNode as well from loaded
 		// graph into existing one
 		for (SRelation<SNode, SNode> sRelation : new LinkedList<>(source.getRelations())) {
@@ -670,6 +544,28 @@ public class SaltUtil {
 			writer.writeDocumentGraph(documentGraph);
 		}
 	}
+	
+	/**
+	 * Loads a {@link SDocumentGraph} object and returns it. The location of
+	 * where to find the SaltXML containing the {@link SDocumentGraph} object is
+	 * given by the passed {@link URI} object.
+	 * 
+	 * @param location
+	 *            location of SaltXML to load {@link SDocumentGraph} object.
+	 */
+	public static SDocumentGraph loadDocumentGraph(URI location) {
+		SDocumentGraph retVal = null;
+		Object obj = load(location);
+		if (obj == null) {
+			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName() + ", because file located at contains no such object, the returned object was null.");
+		} else if (obj instanceof SDocumentGraph) {
+			retVal = (SDocumentGraph) obj;
+		} else {
+			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName() + ", because file located at contains no such object. It contains: " + obj.getClass());
+		}
+		return (retVal);
+
+	}
 
 	/**
 	 * Persists the passed {@link SCorpusGraph} object in a
@@ -707,6 +603,67 @@ public class SaltUtil {
 				}
 			}
 		}
+	}
+	
+
+	/**
+	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT})
+	 * into this object. If the given SaltXML file does not contain a
+	 * {@link SCorpusGraph} object persisting, an exception will be thrown. If
+	 * the SaltXML file contains persistings for more than one
+	 * {@link SCorpusGraph} object, the first one will be loaded.
+	 * 
+	 * @param sCorpusGraphURI
+	 *            the {@link URI} to locate the SaltXML file
+	 * @return
+	 */
+	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphURI) {
+		return loadCorpusGraph(sCorpusGraphURI, 0);
+	}
+	
+	/**
+	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT})
+	 * into this object. If the given SaltXML file does not contain a
+	 * {@link SCorpusGraph} object persisting, an exception will be thrown. The
+	 * parameter <code>idxOfSCorpusGraph</code> determines which object shall be
+	 * load, in case of the given SaltXML file contains more than one persisting
+	 * of {@link SCorpusGraph} objects.
+	 * 
+	 * @param sCorpusGraphUri
+	 *            the {@link URI} to locate the SaltXML file
+	 * @param idxOfSCorpusGraph
+	 *            number of graph to be load, note that the list of graphs
+	 *            starts with 0
+	 * @return
+	 */
+	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph) {
+		if (sCorpusGraphUri == null)
+			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName() + "' object, because the passed uri is empty. ");
+
+		SCorpusGraph retVal = null;
+
+		if (!sCorpusGraphUri.toFileString().endsWith("." + SaltUtil.FILE_ENDING_SALT_XML)) {
+			// looks weird, but is necessary in case of uri ends with /
+			if (sCorpusGraphUri.toString().endsWith("/")) {
+				sCorpusGraphUri = sCorpusGraphUri.trimSegments(1);
+			}
+			sCorpusGraphUri = sCorpusGraphUri.appendSegment(SaltUtil.FILE_SALT_PROJECT);
+		}
+
+		Object obj = load(sCorpusGraphUri);
+		if (obj instanceof SCorpusGraph) {
+			retVal = (SCorpusGraph) obj;
+		} else if (obj instanceof SaltProject) {
+			if ((((SaltProject) obj).getCorpusGraphs() != null) && (((SaltProject) obj).getCorpusGraphs().size() >= idxOfSCorpusGraph)) {
+				retVal = ((SaltProject) obj).getCorpusGraphs().get(idxOfSCorpusGraph);
+			}
+		}
+
+		if (retVal != null) {
+			insertDocumentGraphLocations(retVal, sCorpusGraphUri);
+		}
+
+		return (retVal);
 	}
 
 	/**
@@ -755,6 +712,50 @@ public class SaltUtil {
 				saveCorpusGraph(cGraph, saltProjectFolder);
 			}
 		}
+	}
+	
+	/**
+	 * Loads a SaltProject from given uri and returns it as object structure.
+	 * This does not load the document graphs which are belong to the
+	 * SaltProject from the disk. You have to call
+	 * {@link SDocument#loadDocumentGraph() } on each document to load the actual
+	 * document graph.
+	 * 
+	 * @param location
+	 *            location to the Salt project file
+	 * @return returns a saltProject, which is filled with data coming from
+	 *         corpus in uri
+	 */
+	public static SaltProject loadSaltProject(URI location) {
+		if (!FILE_ENDING_SALT_XML.equals(location.fileExtension())) {
+			location = location.appendSegment(FILE_SALT_PROJECT);
+		}
+
+		SaltProject saltProject = null;
+		if (location == null) {
+			throw new SaltResourceException("Can not load SaltProject, because the given uri is null. ");
+		}
+		File saltProjectFile = null;
+		try {
+			saltProjectFile = new File(location.toFileString());
+		} catch (Exception e) {
+			throw new SaltResourceException("Can not load SaltProject. ", e);
+		}
+		if (!saltProjectFile.exists()) {
+			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectFile + "' does not exist. ");
+		}
+
+		Object project = load(location);
+		if (project instanceof SaltProject) {
+			saltProject = (SaltProject) project;
+		} else {
+			throw new SaltResourceException("Can not load SaltProject, because the file at '" + saltProjectFile + "' does not contain a Salt project. ");
+		}
+
+		for (SCorpusGraph corpusGraph : saltProject.getCorpusGraphs()) {
+			insertDocumentGraphLocations(corpusGraph, location);
+		}
+		return (saltProject);
 	}
 
 	// ==================================================< Persistence SaltXML

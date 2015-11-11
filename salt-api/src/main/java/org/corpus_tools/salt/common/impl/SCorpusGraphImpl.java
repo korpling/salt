@@ -327,7 +327,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public void load(URI corpusGraphUri) {
 		SCorpusGraph loaded = SaltUtil.loadCorpusGraph(corpusGraphUri);
-		SaltUtil.moveSCorpusGraph(loaded, this);
+		SaltUtil.moveCorpusGraph(loaded, this);
 	}
 
 	/** {@inheritDoc} **/
