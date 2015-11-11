@@ -144,29 +144,6 @@ public class SaltProjectImpl implements SaltProject {
 	}
 	/** {@inheritDoc} **/
 	@Override
-	public Map<Identifier, URI> getDocumentGraphLocations()
-	{
-		Map<Identifier, URI> retVal = new HashMap<>();
-		if (this.getCorpusGraphs() != null)
-		{
-			for (SCorpusGraph sCorpusGraph : this.getCorpusGraphs())
-			{
-				if (sCorpusGraph != null)
-				{
-					for (SDocument sDocument : sCorpusGraph.getDocuments())
-					{
-						if (sDocument != null && sDocument.getDocumentGraph() == null)
-						{
-							retVal.put(sDocument.getIdentifier(), sDocument.getDocumentGraphLocation());
-						}
-					}
-				}
-			}
-		}
-		return (retVal);
-	}
-
-	@Override
 	public String toString() {
 		StringBuilder retStr = new StringBuilder();
 		retStr.append("SaltProject(");

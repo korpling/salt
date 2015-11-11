@@ -150,23 +150,6 @@ public interface SaltProject {
 	public void loadCorpusStructure(URI saltProjectURI);
 
 	/**
-	 * This method extracts the location of all {@link SDocumentGraph} objects,
-	 * which are persist in a file and are currently not loaded as model into
-	 * main memory. The returned value is a map, containing the
-	 * {@link SElementId} as an identifier and the location of the
-	 * {@link SDocumentGraph} object as an {@link URI}. To extract the
-	 * locations, the method runs through all {@link SDocument} objects (being
-	 * contained in the current {@link SaltProject}) containing the
-	 * {@link SDocumentGraph} objects and checks if the {@link SDocumentGraph}
-	 * object is loaded or peristed.
-	 * 
-	 * @return a map of {@link SElementId} of {@link SDocument} objects and the
-	 *         corresponding location as {@link URI}, an empty {@link Map}, if
-	 *         no {@link SDocumentGraph} object is persisted
-	 */
-	public Map<Identifier, URI> getDocumentGraphLocations();
-	
-	/**
 	 * Creates a new corpus graph and adds it to the Salt project.
 	 * @return the new created Salt project
 	 */
