@@ -48,7 +48,6 @@ import org.corpus_tools.salt.util.STextualRelationSStartComparator;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.TokenStartComparator;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 

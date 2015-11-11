@@ -18,9 +18,7 @@
 package org.corpus_tools.salt.common;
 
 import java.util.List;
-import java.util.Map;
 
-import org.corpus_tools.salt.graph.Identifier;
 import org.eclipse.emf.common.util.URI;
 
 /**

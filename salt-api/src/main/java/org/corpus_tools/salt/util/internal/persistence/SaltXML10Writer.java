@@ -17,7 +17,6 @@
  */
 package org.corpus_tools.salt.util.internal.persistence;
 
-import com.ctc.wstx.stax.WstxOutputFactory;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -68,6 +67,7 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
+import com.ctc.wstx.stax.WstxOutputFactory;
 import com.google.common.io.BaseEncoding;
 
 public class SaltXML10Writer implements SaltXML10Dictionary {

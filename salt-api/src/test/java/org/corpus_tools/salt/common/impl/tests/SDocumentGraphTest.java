@@ -17,8 +17,6 @@
  */
 package org.corpus_tools.salt.common.impl.tests;
 
-import com.google.common.base.Joiner;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -26,8 +24,15 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.SaltFactory;
@@ -51,28 +56,18 @@ import org.corpus_tools.salt.common.tokenizer.Tokenizer;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltElementNotInGraphException;
-import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.util.DataSourceSequence;
+import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
+import org.corpus_tools.salt.util.internal.Diff;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Set;
-
-import org.corpus_tools.salt.common.SaltProject;
-import org.corpus_tools.salt.samples.SampleGenerator;
-import org.corpus_tools.salt.util.Difference;
-import org.corpus_tools.salt.util.internal.Diff;
-import org.junit.Assert;
 
 public class SDocumentGraphTest {
 
