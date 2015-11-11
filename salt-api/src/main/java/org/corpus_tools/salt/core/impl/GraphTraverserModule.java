@@ -156,7 +156,7 @@ public class GraphTraverserModule {
 			}
 		}
 		Traverser traverser = new Traverser();
-		traverser.startNodes = (List<SNode>)startNodes;
+		traverser.startNodes = (List<SNode>) startNodes;
 		traverser.traverseType = traverseType;
 		traverser.traverseId = traverseId;
 		traverser.traverseHandler = traverseHandler;
@@ -459,7 +459,7 @@ public class GraphTraverserModule {
 			} catch (SaltException e) {
 				setException(e);
 			} catch (Exception e2) {
-				SaltException e = new SaltException("An exception occured while traversing the graph '" + graph.getId() + "' with path '" + currentNodePath + "'. because of "+e2.getMessage()+". ", e2);
+				SaltException e = new SaltException("An exception occured while traversing the graph '" + graph.getId() + "' with path '" + currentNodePath + "'. because of " + e2.getMessage() + ". ", e2);
 				setException(e);
 			}
 		}

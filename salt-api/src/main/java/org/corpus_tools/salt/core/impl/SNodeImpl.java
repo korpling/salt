@@ -126,7 +126,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public SAnnotation getAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getAnnotation(this, qName));
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SAnnotation getAnnotation(String namespace, String name) {
@@ -159,16 +159,19 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public Set<SMetaAnnotation> createMetaAnnotations(String annotationString) {
 		return (SAnnotationContainerHelper.createMetaAnnotations(this, annotationString));
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public <A extends SMetaAnnotation> Set<A> getMetaAnnotations() {
 		return (SAnnotationContainerHelper.getMetaAnnotations(this));
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public SMetaAnnotation getMetaAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getMetaAnnotation(this, qName));
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public Iterator<SMetaAnnotation> iterator_SMetaAnnotation() {
@@ -244,7 +247,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public SFeature getFeature(String qName) {
 		return (SAnnotationContainerHelper.getFeature(this, qName));
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SFeature getFeature(String namespace, String name) {

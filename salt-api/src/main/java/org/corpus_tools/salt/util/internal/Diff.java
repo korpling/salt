@@ -924,7 +924,7 @@ public class Diff {
 							templateNode = trueCandidate;
 						}
 					}
-				} else if (!trueCandidates.isEmpty()){
+				} else if (!trueCandidates.isEmpty()) {
 					templateNode = trueCandidates.iterator().next();
 				}
 			}

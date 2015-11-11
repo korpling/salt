@@ -334,16 +334,16 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 		} else if (value.startsWith("B")) {
 			retVal = Boolean.parseBoolean(value.substring(3));
 		} else if (value.startsWith("N")) {
-			try{
+			try {
 				retVal = Integer.parseInt(value.substring(3));
-			}catch (NumberFormatException e){
+			} catch (NumberFormatException e) {
 				retVal = Long.parseLong(value.substring(3));
 			}
 		} else if (value.startsWith("F")) {
 			retVal = Double.parseDouble(value.substring(3));
 		} else if (value.startsWith("U")) {
 			retVal = URI.createURI(value.substring(3));
-		}else if (value.startsWith("O")) {
+		} else if (value.startsWith("O")) {
 			byte[] rawBytes = BaseEncoding.base64().decode(value.substring(3));
 			retVal = SerializationUtils.deserialize(rawBytes);
 		}

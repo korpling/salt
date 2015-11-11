@@ -112,19 +112,17 @@ public class SaltProjectImpl implements SaltProject {
 
 	@Override
 	public void loadSaltProject(URI saltProjectURI) {
-		if (saltProjectURI== null)
+		if (saltProjectURI == null)
 			throw new SaltResourceException("Cannot load salt project, because the paassed uri is null.");
 		this.loadCorpusStructure(saltProjectURI);
-		for (SCorpusGraph sCorpusGraph: this.getCorpusGraphs())
-		{
-			for (SDocument sDoc: sCorpusGraph.getDocuments())
-			{
-				try{
+		for (SCorpusGraph sCorpusGraph : this.getCorpusGraphs()) {
+			for (SDocument sDoc : sCorpusGraph.getDocuments()) {
+				try {
 					sDoc.loadDocumentGraph();
-				}catch (SaltResourceException e){
-					throw new SaltResourceException("A problem occured when loading salt project from '"+saltProjectURI+"', because one of its documents could not have been load '"+sDoc.getId()+"'.", e);
-				}catch (Exception e) {
-					throw new SaltResourceException("A problem occured when loading salt project from '"+saltProjectURI+"', because of a nested exception during loading one of its documents '"+sDoc.getId()+"'.", e);
+				} catch (SaltResourceException e) {
+					throw new SaltResourceException("A problem occured when loading salt project from '" + saltProjectURI + "', because one of its documents could not have been load '" + sDoc.getId() + "'.", e);
+				} catch (Exception e) {
+					throw new SaltResourceException("A problem occured when loading salt project from '" + saltProjectURI + "', because of a nested exception during loading one of its documents '" + sDoc.getId() + "'.", e);
 				}
 			}
 		}
@@ -135,23 +133,24 @@ public class SaltProjectImpl implements SaltProject {
 	public void loadCorpusStructure(URI saltProjectURI) {
 		// remove the old ones if they exist
 		List<SCorpusGraph> corpusGraphList = getCorpusGraphs();
-		if(corpusGraphList != null) {
-			for(SCorpusGraph corpusGraph : new LinkedList<>(corpusGraphList)) {
+		if (corpusGraphList != null) {
+			for (SCorpusGraph corpusGraph : new LinkedList<>(corpusGraphList)) {
 				removeCorpusGraph(corpusGraph);
-			}	
+			}
 		}
 		// do the actual work with the SaltUtil
 		SaltProject loadedProject = SaltUtil.loadSaltProject(saltProjectURI);
-		
+
 		// copy name
 		setName(loadedProject.getName());
-		
+
 		// copy the loaded corpus graphs
-		for(SCorpusGraph corpusGraph : new LinkedList<>(loadedProject.getCorpusGraphs())) {
+		for (SCorpusGraph corpusGraph : new LinkedList<>(loadedProject.getCorpusGraphs())) {
 			addCorpusGraph(corpusGraph);
 		}
 
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public String toString() {
@@ -168,8 +167,8 @@ public class SaltProjectImpl implements SaltProject {
 	/** {@inheritDoc} **/
 	@Override
 	public SCorpusGraph createCorpusGraph() {
-		SCorpusGraph corpGraph= SaltFactory.createSCorpusGraph();
+		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
 		addCorpusGraph(corpGraph);
-		return(corpGraph);
+		return (corpGraph);
 	}
 }

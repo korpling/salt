@@ -86,9 +86,10 @@ public interface SDocument extends SNode {
 	 * {@link SDocument} and given {@link SDocumentGraph} will be removed.
 	 * 
 	 * @param documentGraphLocation
-	 *            location of where to persist object as {@value SaltUtil#FILE_ENDING_SALT_XML} file (must have
-	 *            the ending {@value SaltUtil#FILE_ENDING_SALT}) in
-	 *            {@link URI} syntax
+	 *            location of where to persist object as
+	 *            {@value SaltUtil#FILE_ENDING_SALT_XML} file (must have the
+	 *            ending {@value SaltUtil#FILE_ENDING_SALT}) in {@link URI}
+	 *            syntax
 	 * @generated
 	 */
 	public void saveDocumentGraph(URI documentGraphLocation);

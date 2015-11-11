@@ -126,73 +126,72 @@ public class SaltUtilTest {
 	 * Tests whether the path is created correctly
 	 */
 	@Test
-	public void testCreateSaltURI(){
-		SaltProject project= SaltFactory.createSaltProject();
-		SCorpusGraph graph= SaltFactory.createSCorpusGraph();
+	public void testCreateSaltURI() {
+		SaltProject project = SaltFactory.createSaltProject();
+		SCorpusGraph graph = SaltFactory.createSCorpusGraph();
 		project.addCorpusGraph(graph);
-		
-		//test path of corp1
-		SCorpus corp1= SaltFactory.createSCorpus();
+
+		// test path of corp1
+		SCorpus corp1 = SaltFactory.createSCorpus();
 		corp1.setName("corp1");
 		graph.addNode(corp1);
-		URI path= SaltUtil.createSaltURI(corp1.getId());
+		URI path = SaltUtil.createSaltURI(corp1.getId());
 		assertEquals(URI.createURI("salt:/corp1"), path);
-		
-		//test path of corp2
-		SCorpus corp2= graph.createCorpus(corp1, "corp2");
-		path= SaltUtil.createSaltURI(corp2.getId());
+
+		// test path of corp2
+		SCorpus corp2 = graph.createCorpus(corp1, "corp2");
+		path = SaltUtil.createSaltURI(corp2.getId());
 		assertEquals(URI.createURI("salt:/corp1/corp2"), path);
-		
-		
-		//test path of doc1
-		SDocument doc1= graph.createDocument(corp2, "doc1");
-		path= SaltUtil.createSaltURI(doc1.getId());
+
+		// test path of doc1
+		SDocument doc1 = graph.createDocument(corp2, "doc1");
+		path = SaltUtil.createSaltURI(doc1.getId());
 		assertEquals(URI.createURI("salt:/corp1/corp2/doc1"), path);
-		
+
 	}
-	
+
 	/**
 	 * Tests whether the unmarahalling of annotations works correctly.
 	 */
 	@Test
-	public void testUnmarshalAnnotation(){
-		Collection<String[]> triples= SaltUtil.unmarshalAnnotation("salt::pos=NN");
+	public void testUnmarshalAnnotation() {
+		Collection<String[]> triples = SaltUtil.unmarshalAnnotation("salt::pos=NN");
 		assertEquals(1, triples.size());
 		assertEquals("salt", triples.iterator().next()[0]);
 		assertEquals("pos", triples.iterator().next()[1]);
 		assertEquals("NN", triples.iterator().next()[2]);
-		
-		triples= SaltUtil.unmarshalAnnotation(" salt  ::  pos  =  NN ");
+
+		triples = SaltUtil.unmarshalAnnotation(" salt  ::  pos  =  NN ");
 		assertEquals(1, triples.size());
 		assertEquals("salt", triples.iterator().next()[0]);
 		assertEquals("pos", triples.iterator().next()[1]);
 		assertEquals("NN", triples.iterator().next()[2]);
-		
-		triples= SaltUtil.unmarshalAnnotation(" pos  =  NN ");
+
+		triples = SaltUtil.unmarshalAnnotation(" pos  =  NN ");
 		assertEquals(1, triples.size());
 		assertNull(triples.iterator().next()[0]);
 		assertEquals("pos", triples.iterator().next()[1]);
 		assertEquals("NN", triples.iterator().next()[2]);
-		
-		triples= SaltUtil.unmarshalAnnotation(" pos");
+
+		triples = SaltUtil.unmarshalAnnotation(" pos");
 		assertEquals(1, triples.size());
 		assertNull(triples.iterator().next()[0]);
 		assertEquals("pos", triples.iterator().next()[1]);
 		assertNull(triples.iterator().next()[2]);
-		
-		triples= SaltUtil.unmarshalAnnotation(" salt :: ");
+
+		triples = SaltUtil.unmarshalAnnotation(" salt :: ");
 		assertEquals(1, triples.size());
 		assertEquals("salt", triples.iterator().next()[0]);
 		assertNull(triples.iterator().next()[1]);
 		assertNull(triples.iterator().next()[2]);
-		
-		triples= SaltUtil.unmarshalAnnotation(" salt  ::  pos  =  NN ; other  ::  lemma  =  I");
+
+		triples = SaltUtil.unmarshalAnnotation(" salt  ::  pos  =  NN ; other  ::  lemma  =  I");
 		assertEquals(2, triples.size());
-		for (String[] triple: triples){
-			if ("salt".equals(triple[0])){
+		for (String[] triple : triples) {
+			if ("salt".equals(triple[0])) {
 				assertEquals("pos", triple[1]);
 				assertEquals("NN", triple[2]);
-			}else if("other".equals(triple[0])){
+			} else if ("other".equals(triple[0])) {
 				assertEquals("lemma", triple[1]);
 				assertEquals("I", triple[2]);
 			}

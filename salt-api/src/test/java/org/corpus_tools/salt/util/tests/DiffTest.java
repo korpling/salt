@@ -483,6 +483,7 @@ public class DiffTest {
 	 * this test reveals faulty diff testing AND output, when the document's id
 	 * is not set the two graphs are identical (except of the document's id).
 	 * They look like this:
+	 * 
 	 * <pre>
 	 * SPAN4---SPAN4---SPAN4 <--LABEL[ns::function="all"]
 	 * 					SPAN3 <--LABEL[ns::function="tail"]
@@ -511,7 +512,7 @@ public class DiffTest {
 			dg1.createSpan(dg1.getTokens().get(2)).createAnnotation("ns", "function", "tail");
 			dg1.createSpan(dg1.getTokens()).createAnnotation("ns", "function", "all");
 		}
-		
+
 		SDocumentGraph dg2 = null;
 		{// create document graph 2
 			dg2 = SaltFactory.createSDocumentGraph();
@@ -576,43 +577,71 @@ public class DiffTest {
 		diffs = graph1.findDiffs(graph2, options);
 		assertEquals(diffs + "", 1, diffs.size());
 	}
-	
+
 	/**
-	 * Tests the comparison of two equal graphs, which are created in {@link #createSampleGraph()}. 
+	 * Tests the comparison of two equal graphs, which are created in
+	 * {@link #createSampleGraph()}.
 	 */
 	@Test
-	public void testTwoIdenticalGraphs(){
-		SDocument doc1= createSampleGraph();
-		SDocument doc2= createSampleGraph();
-		
+	public void testTwoIdenticalGraphs() {
+		SDocument doc1 = createSampleGraph();
+		SDocument doc2 = createSampleGraph();
+
 		Set<Difference> diffs = doc1.getDocumentGraph().findDiffs(doc2.getDocumentGraph(), (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
 		assertEquals(diffs.toString(), 0, diffs.size());
 	}
+
 	/**
 	 * 
 	 * 
 	 * 
 	 * <table border="1">
 	 * <tr>
-	 * <td colspan="4"></td><td colspan="6">line</td><td></td>
+	 * <td colspan="4"></td>
+	 * <td colspan="6">line</td>
+	 * <td></td>
 	 * </tr>
 	 * <tr>
-	 * <td colspan="4"></td><td colspan="6">page</td><td></td>
+	 * <td colspan="4"></td>
+	 * <td colspan="6">page</td>
+	 * <td></td>
 	 * </tr>
 	 * <tr>
-	 * <td>t1</td><td>t2</td><td>t3</td><td>t4</td><td>t5</td><td>t6</td><td>t7</td><td>t8</td><td>t9</td><td>t10</td><td>t11</td>
+	 * <td>t1</td>
+	 * <td>t2</td>
+	 * <td>t3</td>
+	 * <td>t4</td>
+	 * <td>t5</td>
+	 * <td>t6</td>
+	 * <td>t7</td>
+	 * <td>t8</td>
+	 * <td>t9</td>
+	 * <td>t10</td>
+	 * <td>t11</td>
 	 * </tr>
 	 * <tr>
-	 * </td><td>Is</td><td>this</td><td>example</td><td>more</td><td>complicated</td><td>than</td><td>it</td><td>appears</td><td>to</td><td>be</td><td>?</td>
+	 * </td>
+	 * <td>Is</td>
+	 * <td>this</td>
+	 * <td>example</td>
+	 * <td>more</td>
+	 * <td>complicated</td>
+	 * <td>than</td>
+	 * <td>it</td>
+	 * <td>appears</td>
+	 * <td>to</td>
+	 * <td>be</td>
+	 * <td>?</td>
 	 * </tr>
 	 * </table>
+	 * 
 	 * @return
 	 */
-	public SDocument createSampleGraph(){
+	public SDocument createSampleGraph() {
 		String exampleText = "Is this example more complicated than it appears to be?";
 		String layerTextStructure = "textstructure";
 		String type = "type";
-		
+
 		SDocument doc1 = SaltFactory.createSDocument();
 		doc1.setId("doc");
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
@@ -626,7 +655,7 @@ public class DiffTest {
 		SSpan sSpan = null;
 		List<SToken> spanTokens = new ArrayList<SToken>();
 
-		//page2:
+		// page2:
 		spanTokens.clear();
 		spanTokens.add(docTokens.get(5));
 		spanTokens.add(docTokens.get(6));
@@ -637,8 +666,8 @@ public class DiffTest {
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "page");
 		sSpan.addLayer(docTextLayer);
-		
-		//line3:
+
+		// line3:
 		spanTokens.clear();
 		spanTokens.add(docTokens.get(5));
 		spanTokens.add(docTokens.get(6));
@@ -649,22 +678,21 @@ public class DiffTest {
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "line");
 		sSpan.addLayer(docTextLayer);
-		
-		return(doc1);
-	}	
-	
+
+		return (doc1);
+	}
+
 	/**
-	 * Tests the comparison of a graph with itself. 
+	 * Tests the comparison of a graph with itself.
 	 */
 	@Test
-	public void testSameGraph(){
-		SDocument doc= SaltFactory.createSDocument();
+	public void testSameGraph() {
+		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createSyntaxAnnotations(doc);
 		SampleGenerator.createAnaphoricAnnotations(doc);
 		SampleGenerator.createInformationStructureAnnotations(doc);
 		SampleGenerator.createDependencies(doc);
 
-		
 		Set<Difference> diffs = doc.getDocumentGraph().findDiffs(doc.getDocumentGraph());
 		assertEquals(diffs.toString(), 0, diffs.size());
 	}

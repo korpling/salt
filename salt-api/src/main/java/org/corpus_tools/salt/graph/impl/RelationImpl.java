@@ -122,9 +122,9 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		if (graph != null) {
 			graph.addRelation(this);
 		}
-		if (oldGraph!= null && oldGraph!= graph && oldGraph instanceof GraphImpl) {
+		if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
 			// remove relation from old graph
-			((GraphImpl)oldGraph).basicRemoveRelation(this);
+			((GraphImpl) oldGraph).basicRemoveRelation(this);
 		}
 		basicSetGraph(graph);
 	}

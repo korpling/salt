@@ -116,11 +116,12 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 
 	private File path = null;
 	private final XMLOutputFactory xmlFactory = new WstxOutputFactory();
-	
+
 	/**
 	 * Writes a Salt project to the file given by {@link #getPath()}.
 	 * 
-	 * @param project the Salt project to be written
+	 * @param project
+	 *            the Salt project to be written
 	 */
 	public void writeSaltProject(SaltProject project) {
 		XMLStreamWriter xml = null;

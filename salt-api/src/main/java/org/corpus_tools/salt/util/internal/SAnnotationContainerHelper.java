@@ -198,7 +198,8 @@ public class SAnnotationContainerHelper {
 	public static Set<SMetaAnnotation> createMetaAnnotations(SAnnotationContainer container, String metaAnnotationString) {
 		Set<SMetaAnnotation> retVal = new HashSet<>();
 		for (String[] triple : SaltUtil.unmarshalAnnotation(metaAnnotationString)) {
-			retVal.add(container.createMetaAnnotation(triple[0], triple[1], triple[2]));		}
+			retVal.add(container.createMetaAnnotation(triple[0], triple[1], triple[2]));
+		}
 		return (retVal);
 	}
 
@@ -344,7 +345,7 @@ public class SAnnotationContainerHelper {
 		}
 		return (anno);
 	}
-	
+
 	public static Set<SFeature> createFeatures(SAnnotationContainer container, String annotationString) {
 		Set<SFeature> retVal = new HashSet<>();
 		for (String[] triple : SaltUtil.unmarshalAnnotation(annotationString)) {

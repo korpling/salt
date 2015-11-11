@@ -212,7 +212,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public SAnnotation getAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getAnnotation(this, qName));
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SAnnotation getAnnotation(String namespace, String name) {
@@ -330,7 +330,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public SFeature getFeature(String qName) {
 		return (SAnnotationContainerHelper.getFeature(this, qName));
 	}
-	
+
 	@Override
 	public SFeature getFeature(String namespace, String name) {
 		return (SAnnotationContainerHelper.getFeature(this, SaltUtil.createQName(namespace, name)));

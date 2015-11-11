@@ -56,7 +56,7 @@ public class NodeTest {
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getNodes(), graph.getNodes().contains(getFixture()));
 	}
-	
+
 	/**
 	 * Tests whether a relation is removed correctly form graph, when the graph
 	 * is set to null or to a new graph.
@@ -64,17 +64,17 @@ public class NodeTest {
 	@Test
 	public void testDoubleChaining_SetGraph_remove() {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
-		
+
 		getFixture().setGraph(graph);
 		assertEquals(graph, getFixture().getGraph());
 		getFixture().setGraph(null);
 		assertNull(getFixture().getGraph());
-		
+
 		getFixture().setGraph(graph);
 		assertEquals(graph, getFixture().getGraph());
-		
+
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = GraphFactory.createGraph();
-		
+
 		getFixture().setGraph(graph2);
 		assertEquals(graph2, getFixture().getGraph());
 	}

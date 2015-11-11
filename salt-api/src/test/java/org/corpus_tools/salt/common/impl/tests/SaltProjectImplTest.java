@@ -114,10 +114,10 @@ public class SaltProjectImplTest {
 		getFixture().removeCorpusGraph(graph2);
 		assertNull(graph2.getSaltProject());
 	}
-	
+
 	/** Testst the creation of a corpus graph. **/
 	@Test
-	public void testCreateCorpusGraph(){
+	public void testCreateCorpusGraph() {
 		assertEquals(0, getFixture().getCorpusGraphs().size());
 		assertNotNull(getFixture().createCorpusGraph());
 		assertEquals(1, getFixture().getCorpusGraphs().size());

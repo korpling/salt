@@ -65,8 +65,8 @@ public class Difference implements Serializable {
 		if (templateObject != null) {
 			if (templateObject instanceof IdentifiableElement) {
 				str.append(((IdentifiableElement) templateObject).getId());
-			}else if (templateObject instanceof Label){
-				Label label= (Label)templateObject;
+			} else if (templateObject instanceof Label) {
+				Label label = (Label) templateObject;
 				str.append(label.toString());
 			}
 		}
@@ -75,8 +75,8 @@ public class Difference implements Serializable {
 		if (otherObject != null) {
 			if (otherObject instanceof IdentifiableElement) {
 				str.append(((IdentifiableElement) otherObject).getId());
-			}else if (otherObject instanceof Label){
-				Label label= (Label)otherObject;
+			} else if (otherObject instanceof Label) {
+				Label label = (Label) otherObject;
 				str.append(label.toString());
 			}
 		}

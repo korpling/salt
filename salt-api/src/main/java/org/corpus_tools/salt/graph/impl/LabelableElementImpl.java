@@ -41,8 +41,8 @@ import org.corpus_tools.salt.util.SaltUtil;
 @SuppressWarnings("serial")
 public abstract class LabelableElementImpl implements LabelableElement, Serializable {
 	/** Determines the expected number of labels. **/
-	public static final int EXPECTED_NUMBER_OF_LABELS=5;
-	
+	public static final int EXPECTED_NUMBER_OF_LABELS = 5;
+
 	/** internal set of all labels **/
 	private Map<String, Label> labels = null;
 
@@ -96,8 +96,9 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	public void addLabel(Label label) {
 		if (label != null) {
 			if (label instanceof LabelImpl) {
-				if (label.getContainer()!= null){
-					//removes the label from old container, if an old container exists
+				if (label.getContainer() != null) {
+					// removes the label from old container, if an old container
+					// exists
 					label.getContainer().removeLabel(label.getQName());
 				}
 				((LabelImpl) label).basicSetLabelableElement(this);

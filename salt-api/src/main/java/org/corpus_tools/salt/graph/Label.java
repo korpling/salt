@@ -28,7 +28,8 @@ import org.corpus_tools.salt.util.Copyable;
  * must be unique. The namespace is an optional value, to distinguish in case of
  * there are two labels having the same name.
  * <p>
- * When a label is added to another container, it is removed from it's former container.
+ * When a label is added to another container, it is removed from it's former
+ * container.
  * </p>
  * 
  * @author florian

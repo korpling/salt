@@ -81,9 +81,9 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 		if (graph != null) {
 			graph.addNode(this);
 		}
-		if (oldGraph!= null && oldGraph!= graph && oldGraph instanceof GraphImpl) {
+		if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
 			// remove relation from old graph
-			((GraphImpl)oldGraph).basicRemoveNode(this);
+			((GraphImpl) oldGraph).basicRemoveNode(this);
 		}
 		basicSetGraph(graph);
 	}
@@ -150,11 +150,11 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 		}
 	}
 
-	/** 
+	/**
 	 * {@inheritDoc}<br/>
 	 * Since the method {@link #getLayers()} retrieves all layers by accessing
 	 * the layers in graph, this class does not contain an own collection of
-	 * layers. 
+	 * layers.
 	 **/
 	@Override
 	public void removeLayer(Layer layer) {

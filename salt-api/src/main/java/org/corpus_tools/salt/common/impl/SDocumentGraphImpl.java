@@ -937,7 +937,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		List<SRelation> relations = parent.getOutRelations();
 		if (relations != null) {
 			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
-				if (relationType== null || SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
+				if (relationType == null || SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
 					SNode child = relation.getTarget();
 					children.add(child);
 				}
@@ -970,10 +970,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 						sharedParents.add(baseRelation.getSource());
 					}
 				}
-				Iterator<SNode> it= children.iterator();
-				it.next(); //skip first child
-				while (it.hasNext()){
-					SNode child= it.next();
+				Iterator<SNode> it = children.iterator();
+				it.next(); // skip first child
+				while (it.hasNext()) {
+					SNode child = it.next();
 					ArrayList<SNode> parents = new ArrayList<>();
 					for (SRelation<? extends SNode, ? extends SNode> sRelation : child.getInRelations()) {
 						SNode parent = sRelation.getSource();

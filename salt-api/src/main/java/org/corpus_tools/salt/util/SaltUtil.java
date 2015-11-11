@@ -541,7 +541,7 @@ public class SaltUtil {
 			writer.writeDocumentGraph(documentGraph);
 		}
 	}
-	
+
 	/**
 	 * Loads a {@link SDocumentGraph} object and returns it. The location of
 	 * where to find the SaltXML containing the {@link SDocumentGraph} object is
@@ -601,7 +601,6 @@ public class SaltUtil {
 			}
 		}
 	}
-	
 
 	/**
 	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT})
@@ -617,7 +616,7 @@ public class SaltUtil {
 	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphURI) {
 		return loadCorpusGraph(sCorpusGraphURI, 0);
 	}
-	
+
 	/**
 	 * Loads the given SaltXML file (.{@value SaltFactory#FILE_ENDING_SALT})
 	 * into this object. If the given SaltXML file does not contain a
@@ -710,7 +709,7 @@ public class SaltUtil {
 			}
 		}
 	}
-	
+
 	/**
 	 * Loads a SaltProject from given uri and returns it as object structure.
 	 * This does not load the document graphs which are belong to the

@@ -84,10 +84,12 @@ public interface SaltProject {
 	 * saltProjectURI must be conform to SaltXML format.
 	 * <p>
 	 * This will load all document graphs into memory as well. If you only
-	 * intend to load the corpus structure call {@link #loadCorpusStructure(org.eclipse.emf.common.util.URI) }
-	 * instead. Then you can load the single document graphs you are interested in
-	 * with {@link SDocument#loadDocumentGraph() }.
+	 * intend to load the corpus structure call
+	 * {@link #loadCorpusStructure(org.eclipse.emf.common.util.URI) } instead.
+	 * Then you can load the single document graphs you are interested in with
+	 * {@link SDocument#loadDocumentGraph() }.
 	 * </p>
+	 * 
 	 * @param saltProjectURI
 	 *            the {@link URI} to the location to load the project
 	 */
@@ -149,6 +151,7 @@ public interface SaltProject {
 
 	/**
 	 * Creates a new corpus graph and adds it to the Salt project.
+	 * 
 	 * @return the new created Salt project
 	 */
 	public SCorpusGraph createCorpusGraph();

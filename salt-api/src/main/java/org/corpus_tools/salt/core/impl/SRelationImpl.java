@@ -66,7 +66,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	public SAnnotation getAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getAnnotation(this, qName));
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SAnnotation getAnnotation(String namespace, String name) {
@@ -184,7 +184,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	public SFeature getFeature(String qName) {
 		return (SAnnotationContainerHelper.getFeature(this, qName));
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SFeature getFeature(String namespace, String name) {

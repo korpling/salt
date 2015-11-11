@@ -91,7 +91,7 @@ public interface SAnnotationContainer extends LabelableElement {
 	 *         exists, null otherwise
 	 */
 	public SAnnotation getAnnotation(String qName);
-	
+
 	/**
 	 * Returns an annotation having the passed qualified name, if this container
 	 * contains such an annotation.
@@ -318,7 +318,7 @@ public interface SAnnotationContainer extends LabelableElement {
 	 *         null otherwise
 	 */
 	public SFeature getFeature(String qName);
-	
+
 	/**
 	 * Returns an feature having the passed qualified name, if this container
 	 * contains such an feature.

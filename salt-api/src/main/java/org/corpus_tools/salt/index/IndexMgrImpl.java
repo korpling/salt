@@ -189,7 +189,7 @@ public class IndexMgrImpl implements IndexMgr {
 				Index idx = indexes.get(indexId);
 				if (idx != null) {
 					Collection<V> col = idx.map.get(key);
-					if(!col.isEmpty()) {
+					if (!col.isEmpty()) {
 						result = col.iterator().next();
 					}
 				}
