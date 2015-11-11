@@ -136,7 +136,20 @@ public class SaltProjectImpl implements SaltProject {
 
 	@Override
 	public void loadCorpusStructure(URI saltProjectURI) {
+		// remove the old ones if they exist
+		List<SCorpusGraph> corpusGraphList = getCorpusGraphs();
+		if(corpusGraphList != null) {
+			for(SCorpusGraph corpusGraph : new LinkedList<>(corpusGraphList)) {
+				removeCorpusGraph(corpusGraph);
+			}	
+		}
+		// do the actual work with the SaltUtil
 		SaltProject loadedProject = SaltUtil.loadSaltProject(saltProjectURI);
+		
+		// copy name
+		setName(loadedProject.getName());
+		
+		// copy the loaded corpus graphs
 		for(SCorpusGraph corpusGraph : new LinkedList<>(loadedProject.getCorpusGraphs())) {
 			addCorpusGraph(corpusGraph);
 		}
