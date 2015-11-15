@@ -313,7 +313,7 @@ public class DataSourceAccessor {
 	/**
 	 * {@inheritDoc SDocumentGraph#getOverlappedDSSequences(SNode, List)}
 	 */
-	public static List<DataSourceSequence> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, SNode sNode, List<SALT_TYPE> relationTypes) {
+	public static List<DataSourceSequence> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, SNode sNode, SALT_TYPE... relationTypes) {
 		List<SNode> rootSNodes = new ArrayList<>();
 		rootSNodes.add(sNode);
 		return (getOverlappedDataSourceSequence(documentGraph, rootSNodes, relationTypes));
@@ -325,11 +325,16 @@ public class DataSourceAccessor {
 	// TODO this method can be fasten up, by remembering the overlapped
 	// sequences for each node and not traverse deeper, when the sequence is
 	// already computed for a node
-	public static List<DataSourceSequence> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, List<SNode> nodes, List<SALT_TYPE> relationTypes) {
+	public static List<DataSourceSequence> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, List<SNode> nodes, SALT_TYPE... relationTypes) {
 		Traverser traverser = new Traverser();
-		traverser.relationTypes2Traverse = relationTypes;
-		documentGraph.traverse(nodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.toString(), traverser);
-		return (traverser.dataSourceSequences);
+		if (relationTypes != null && relationTypes.length != 0) {
+			traverser.relationTypes2Traverse= new HashSet<SALT_TYPE>();
+			Collections.addAll(traverser.relationTypes2Traverse, relationTypes);
+			documentGraph.traverse(nodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.toString(), traverser);
+			return (traverser.dataSourceSequences);
+		} else{
+			return (new ArrayList<DataSourceSequence>());
+		}
 	}
 
 	/**
@@ -350,12 +355,13 @@ public class DataSourceAccessor {
 	 * @return a list of {@link SToken} which are overlapped by the
 	 *         overlappingNode.
 	 */
-	public static List<SToken> getOverlappedSTokens(SDocumentGraph documentGraph, SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes) {
+	public static List<SToken> getOverlappedSTokens(SDocumentGraph documentGraph, SNode overlappingNode, SALT_TYPE... relationTypes) {
 		Traverser traverser = new Traverser();
 		// initialise the overlappedSToken List
 		traverser.overlappedSToken = new HashSet<SToken>();
 		// initialise the relationTypes2Traverse List
-		traverser.relationTypes2Traverse = overlappingRelationTypes;
+		traverser.relationTypes2Traverse= new HashSet<SALT_TYPE>();
+		Collections.addAll(traverser.relationTypes2Traverse, relationTypes);
 		List<SNode> rootNodes = new ArrayList<>();
 		rootNodes.add(overlappingNode);
 		documentGraph.traverse(rootNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAVERSION_TYPE.OVERLAPPED_STOKEN.toString(), traverser);
@@ -533,7 +539,7 @@ public class DataSourceAccessor {
 		 * {@link TRAVERSION_TYPE#OVERLAPPED_STOKEN}, here are the relation
 		 * types, which shall be used for traversion
 		 */
-		private List<SALT_TYPE> relationTypes2Traverse = null;
+		private Set<SALT_TYPE> relationTypes2Traverse = null;
 
 		/**
 		 * in case of traversion type is

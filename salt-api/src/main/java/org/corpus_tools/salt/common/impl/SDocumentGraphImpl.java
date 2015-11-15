@@ -703,13 +703,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, List<SALT_TYPE> relationTypes) {
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes) {
 		return (DataSourceAccessor.getOverlappedDataSourceSequence(this, node, relationTypes));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, List<SALT_TYPE> relationTypes) {
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes) {
 		return (DataSourceAccessor.getOverlappedDataSourceSequence(this, nodes, relationTypes));
 	}
 
@@ -883,8 +883,15 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> getOverlappedTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes) {
-		return (DataSourceAccessor.getOverlappedSTokens(this, overlappingNode, overlappingRelationTypes));
+	public List<SToken> getOverlappedTokens(SNode overlappingNode){
+		return (DataSourceAccessor.getOverlappedSTokens(this, overlappingNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION));
+	}
+	
+	
+	/** {@inheritDoc} **/
+	@Override
+	public List<SToken> getOverlappedTokens(SNode overlappingNode, SALT_TYPE... relationTypes){
+		return (DataSourceAccessor.getOverlappedSTokens(this, overlappingNode, relationTypes));
 	}
 
 	/** {@inheritDoc} **/
@@ -893,12 +900,10 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (sNode == null) {
 			return null;
 		}
-		List<SALT_TYPE> relTypes = new ArrayList<>();
-		relTypes.add(SALT_TYPE.STEXT_OVERLAPPING_RELATION);
-		if (this.getOverlappedDataSourceSequence(sNode, relTypes) == null) {
+		if (this.getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION) == null) {
 			return null;
 		}
-		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, relTypes).get(0);
+		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(), (Integer) sData.getEnd());
 	}
 

@@ -17,6 +17,7 @@
  */
 package org.corpus_tools.salt.common;
 
+import java.nio.channels.SeekableByteChannel;
 import java.util.List;
 import java.util.Set;
 
@@ -367,7 +368,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, List<SALT_TYPE> relationTypes);
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
@@ -382,7 +383,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, List<SALT_TYPE> relationTypes);
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is
@@ -655,8 +656,17 @@ public interface SDocumentGraph extends SGraph {
 	 *            anchor node, which overlaps the returned tokens
 	 * @param overlappingRelationTypes
 	 *            relation types
+	 */	
+	public List<SToken> getOverlappedTokens(SNode overlappingNode, SALT_TYPE... overlappingRelationTypes);
+		
+	/**
+	 * Returns all tokens in the graph, which are overlapped by the passed node
+	 * and are reachable via {@link SALT_TYPE#STEXT_OVERLAPPING_RELATION} having at least one of the passed types.
+	 * 
+	 * @param overlappingNode
+	 *            anchor node, which overlaps the returned tokens
 	 */
-	public List<SToken> getOverlappedTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes);
+	public List<SToken> getOverlappedTokens(SNode overlappingNode);
 
 	/**
 	 * This method returns the exact text overlapped in the {@link STextualDS}
