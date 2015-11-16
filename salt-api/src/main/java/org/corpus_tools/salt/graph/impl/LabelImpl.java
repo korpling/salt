@@ -42,7 +42,7 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 		if (namespace != null) {
 			this.namespace = namespace.intern();
 		} else {
-			this.namespace = namespace;
+			this.namespace = null;
 		}
 	}
 
