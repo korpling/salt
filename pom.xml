@@ -179,7 +179,7 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<version>${maven-site-plugin.version}</version>
 				<configuration>
-					<outputDirectory>${basedir}/docs/site</outputDirectory>
+					<outputDirectory>${project.build.directory}/javadoc/</outputDirectory>
 				</configuration>
 			</plugin>
 			<!-- end: site plugin -->
