@@ -74,6 +74,7 @@
 		<maven-license-plugin.version>1.4.0</maven-license-plugin.version>
 		<maven-notice-plugin.version>1.0.4</maven-notice-plugin.version>
 		<maven-clean-plugin.version>2.6.1</maven-clean-plugin.version>
+		<maven-project-info-reports-plugin.version>2.4</maven-project-info-reports-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
