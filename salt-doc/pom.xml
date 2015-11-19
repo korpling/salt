@@ -23,13 +23,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.4</version>
+				<version>${maven-site-plugin.version}</version>
 				<configuration>
 					<reportPlugins>
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-project-info-reports-plugin</artifactId>
-							<version>2.4</version>
+							<version>${maven-project-info-reports-plugin.version}</version>
 							<configuration>
 								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 							</configuration>
@@ -47,7 +47,7 @@
 			<plugin>
 				<groupId>com.agilejava.docbkx</groupId>
 				<artifactId>docbkx-maven-plugin</artifactId>
-				<version>2.0.14</version>
+				<version>${docbkx-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>pdf</id>
@@ -160,7 +160,7 @@
 			<plugin>
 				<groupId>com.agilejava.docbkx</groupId>
 				<artifactId>docbkx-fop-support</artifactId>
-				<version>2.0.14</version>
+				<version>${docbkx-fop-support.version}</version>
 				<executions>
 					<execution>
 						<phase>pre-site</phase>
@@ -205,7 +205,7 @@
 			<plugins>
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>2.7</version>
+					<version>${maven-resources-plugin}</version>
 					<configuration>
 						<outputDirectory>${basedir}/target/doxygen-generated</outputDirectory>
 						<resources>
@@ -219,7 +219,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-scm-publish-plugin</artifactId>
-					<version>1.1</version>
+					<version>${maven-scm-publish-plugin.version}</version>
 					<extensions>true</extensions>
 					<configuration>
 						<pubScmUrl>scm:git:ssh://git@github.com:korpling/salt.git</pubScmUrl>
@@ -284,7 +284,7 @@
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.4.0</version>
+						<version>${exec-maven-plugin.version}</version>
 						<executions>
 							<execution>
 								<phase>compile</phase>
