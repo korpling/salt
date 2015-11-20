@@ -1,87 +1,23 @@
-![SaltNPepper project](./gh-site/img/SaltNPepper_logo2010.png)
+![](http://korpling.github.io/pepper/images/SaltNPepper_logo2010.png)
 
-#Salt
+# About Salt
+ A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data. 
 
-With Salt we provide an easily understandable meta model for linguistic data and an open source api to store, manipulate and represent data. Salt is an abstract model, poor of linguistic semantics. As a result, it is free of any linguistic schools or theories. The core model is graph-based and therefore keeps the structural restrictions very low and allows for a wide range of possible linguistic annotations like syntactic, morphological, coreferential annotations and many more. You can even model your own very personal annotation as long as it fits into a graph structure (and so far we have not seen a linguistic annotation which does not). Furthermore, Salt does not depend on a specific linguistic tagset which allows you to use every tagset you like.
+* **language-independent** - Salt supports a huge set of languages and typesets. Each language which can be expressed in UTF-8 is supported by Salt.
+* **theory-neutral** - Salt is open to any linguistic school or theory, not limited to a specific one.
+* **tagset independent** - Salt is not bound to a tagset. Annotations are represented as attribute-value pairs and can be chosen freely.
+* **multimedia support** - Salt is a text-based model, but also supports the modeling of audio and video corpora.
+* **multi-laye**r - Salt is not limited to a specific set of annotation layers. Since Salt is a graph-based model, you can model many different structures, such as tree structures, span annotations, coreference chains and so on.
+* **open source** - Salt is licensed under the Apache License, Version 2.0 and published on Github.
 
-## Documentation
-* [Salt quick user guide](./gh-site/quickUserGuide.md) - a short quide to introduce the Salt API
-* [Salt model guide](./gh-site/doc/salt_modelGuide.pdf) - a guide describing the model of Salt (Click on 'View Raw')
+<p align="center">
+<img width="50%" alt="Pepper is your weapon to fight the format monster" src="./gh-site/img/pepper_weapon.jpg"/>
+</p>
 
-##Maven
+# Want to know more?
 
-You can also plug-in this api into your code via maven. 
-
-```xml
-<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
-<artifactId>salt</artifactId>
-<version>VERSION</version>
-```
-
-To access the maven coordinates, you need to include our maven repository:
-
-```xml
-<repositories>
-  <repository>
-    <id>korpling</id>
-    <name>korpling maven repo</name>
-    <url>http://korpling.german.hu-berlin.de/maven2</url>
-  </repository>
-</repositories>
-```
-##Coorperations
-
-Known projects using Salt:<br/>
-[ANNIS](http://www.sfb632.uni-potsdam.de/annis/index.html) - ANNIS: Search and Visualization in Multilayer Linguistic Corpora<br/>
-[ATOMIC](http://linktype.iaa.uni-jena.de/atomic/) - Atomic: A tool for multilevel corpus annotation <br/>
-[Pepper](http://u.hu-berlin.de/saltnpepper) - Pepper: A multi converter framework for linguistic data
-
-
-##Contribute
-
-Please help us, to make the api better and give us feedback and send a bug report or a feature request. You can also write a mail to saltnpepper@lists.hu-berlin.de
-
-
-##Funders
-
-This project has been funded by several institutions:
-
-<table>
-  <tr>
-    <td><a href="https://www.linguistik.hu-berlin.de/institut/professuren/korpuslinguistik/standardseite-en?set_language=en&cl=en"><img width="100" src="https://www.linguistik.hu-berlin.de/institut/professuren/korpuslinguistik/forschung/whig/Inhalte/609px-Huberlin-logo.svg.jpg"/></a></td> 
-    <td><a href="https://www.linguistik.hu-berlin.de/institut/professuren/korpuslinguistik/standardseite-en?set_language=en&cl=en">Humboldt-Universität zu Berlin, department of corpus linguistics and morphology</a></td>
-  </tr>
-  <tr>
-    <td><a href="http://www.inria.fr/en"><img width="150" src="http://www.inria.fr/extension/site_inria/design/site_inria/images/logos/logo_INRIA_en.png"/></a></td> 
-    <td><a href="http://www.inria.fr/en">Institut national de recherche en informatique et en automatique (INRIA)</a></td>
-  </tr>
-  <tr>
-    <td><a href="https://www.sfb632.uni-potsdam.de/en/"><img width="100" src="https://www.sfb632.uni-potsdam.de/images/SFB-Bilder/bridge_big.jpg"/></a></td> 
-    <td><a href="https://www.sfb632.uni-potsdam.de/en/">Sonderforschungsbereich 632, Information structure: The linguistic means for structuring utterances, sentences and texts </a></td>
-  </tr>
-  <tr>
-    <td><a href="http://www.dfg.de/en/"><img src="http://www.dfg.de/includes/images/dfg_logo.gif"/></a></td> 
-    <td><a href="http://www.dfg.de/en/">Deutsche Forschungsgemeinschaft</a></td>
-  </tr>
-  <tr>
-    <td><a href="http://de.clarin.eu/en/"><img width="100" src="http://www.bbaw.de/forschung/clarin/uebersicht/bild"/></a></td> 
-    <td><a href="http://de.clarin.eu/en/">CLARIN-D</a></td>
-  </tr>
-</table>
-
-
-##License
-
-  Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
- 
-  http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
+* Homepage: http://corpus-tools.org/salt
+* Code: https://github.com/korpling/salt
+* Bug and issue tracking: https://github.com/korpling/salt/issues
+* Code documentation (stable version) https://korpling.github.io/salt/doc/
+* Code documentation (snapshot version) https://korpling.github.io/salt/doc-snapshot/
