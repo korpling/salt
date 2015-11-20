@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.corpus_tools.salt.util.persistence.tests.Persist_SaltXML10_Test
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.073 sec - in org.corpus_tools.salt.util.persistence.tests.Persist_SaltXML10_Test

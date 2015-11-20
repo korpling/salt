@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['end',['end',['../classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1salt_1_1util_1_1_data_source_sequence.html#adb85740823c4537dee77bc82363d037e',1,'de::hu_berlin::u::saltnpepper::salt::util::DataSourceSequence']]],
-  ['expectednodes',['expectedNodes',['../classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1graph_1_1impl_1_1_graph_impl.html#ac0b2ce52b28932b45b1ddff3ac24c4d2',1,'de::hu_berlin::u::saltnpepper::graph::impl::GraphImpl']]],
-  ['expectedrelations',['expectedRelations',['../classde_1_1hu__berlin_1_1u_1_1saltnpepper_1_1graph_1_1impl_1_1_graph_impl.html#aba1da74da4616d638eda8ad415043b20',1,'de::hu_berlin::u::saltnpepper::graph::impl::GraphImpl']]]
+  ['end',['end',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_data_source_sequence_3_01_p_01extends_01_number_01_4.html#a79780dfb4b0b90bc07e3b519196e7afa',1,'org::corpus_tools::salt::util::DataSourceSequence&lt; P extends Number &gt;']]],
+  ['expected_5fnumber_5fof_5flabels',['EXPECTED_NUMBER_OF_LABELS',['../classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_labelable_element_impl.html#aeda48bb691c1c6ef8f5243f43d34866b',1,'org::corpus_tools::salt::graph::impl::LabelableElementImpl']]],
+  ['expectednodes',['expectedNodes',['../classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a8d4c58886d5496421275e7d742f078a6',1,'org::corpus_tools::salt::graph::impl::GraphImpl&lt; N extends Node, R extends Relation&lt; N, N &gt;, L extends Layer&lt; N, R &gt; &gt;']]],
+  ['expectedrelations',['expectedRelations',['../classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a73d43ea88ba702da5f67913e5f0cdb74',1,'org::corpus_tools::salt::graph::impl::GraphImpl&lt; N extends Node, R extends Relation&lt; N, N &gt;, L extends Layer&lt; N, R &gt; &gt;']]]
 ];
