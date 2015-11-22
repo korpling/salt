@@ -1,4 +1,4 @@
-### Traversing graphs
+### Traversing graphs {#traverse}
 
 When working with Salt, it is often necessary 
 
@@ -11,13 +11,13 @@ For all of these purposes, we offer the generic possibility to traverse a graph 
 A traversal can be done in two directions: __top-down__ and __bottom-up__. When using the top-down method, the traversal will follow the relation direction (e.g. _a_ -> _b>_: node _a_ will be visited first, followed by node _b_). When using the bottom-up method, the traversal will follow the inverse of the relation direction (e.g. _a_ -> _b_: node _b_ will be visited before node _a_).
 
 Additionally, you can choose the order in which nodes will be traversed. For this, we provide two modes: __depth-first__ and __breadth-first__. In depth-first mode, the sub-graph of node _b_ will be traversed, before its siblings will be visited. Imagine the following tree structure: 
-<pre>
+~~~
    a
  /   \
  b   d
  |
  c
-</pre>
+~~~
 
 In this case, node _d_ will be visited after _a,b,c_ have been visited. In  breadth-first mode, the order of the traversal is the other way around, i.e.  the nodes _a,b,d_ will be visited before node _c_.
 
@@ -147,3 +147,5 @@ docGraph.traverse(docGraph.getSTokens(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_F
 	
 }
 ~~~
+
+To learn how to persist and load a Salt model, please read the article @ref persist.
