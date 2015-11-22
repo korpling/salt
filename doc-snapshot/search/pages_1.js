@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['persist_20and_20load',['Persist and Load',['../md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_persistence.html',1,'']]]
+  ['create_20a_20salt_20model',['Create a Salt model',['../create.html',1,'']]],
+  ['comparing_20salt_20models',['Comparing Salt models',['../isomorphie.html',1,'']]]
 ];

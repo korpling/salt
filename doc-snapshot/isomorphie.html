@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Salt: Persist and Load</title>
+<title>Salt: Comparing Salt models</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,7 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_persistence.html','');});
+$(document).ready(function(){initNavTree('isomorphie.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -98,26 +98,73 @@ $(document).ready(function(){initNavTree('md__var_lib_jenkins_jobs_salt__s_n_a_p
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Persist and Load </div>  </div>
+<div class="title">Comparing Salt models </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Persisting a model is very easy: Only a nonempty <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_salt_project.html">SaltProject</a> object and a valid local URI are needed. The following snippet shows how to persist an entire model.</p>
-<div class="fragment"><div class="line">saltProject.saveSaltProject(URI);</div>
-</div><!-- fragment --><p>Please note, that the URI used as parameter is <b>not</b> a URI of type <em>java.net.URI</em> - it is of type <em>org.eclipse.emf.common.util.URI</em>.</p>
-<p>To load a valid SaltXML document, create an empty <em>SaltProject</em> object and call the load method as shown in the following snippet.</p>
-<div class="fragment"><div class="line">saltProject = SaltFactory.createSaltProject();</div>
-<div class="line">saltProject.loadSaltProject(URI);</div>
-</div><!-- fragment --><p> Salt document structrues can get very large, and maintaining a bunch od them in main memory can get problematical. Therefore Salt contains a mechanism to persist single document structures. The following snippet shows how to store a single document. </p>
-<div class="fragment"><div class="line"><span class="comment">// storing</span></div>
-<div class="line">sampleDocument.saveDocumentGraph(URI);</div>
-<div class="line"><span class="comment">// loading</span></div>
-<div class="line">sampleDocument.loadDocumentGraph(URI);</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<div class="textblock"><p>The comparison of models is a main feature in Salt.</p>
+<ul>
+<li>allows you to compare two models and check whether they are identical or not</li>
+<li>further it generates a diff between models, to check where are the differences</li>
+<li>since Salt is a graph model, comparison is reducable to an isomorphie check, that means to check all nodes, relations and layers and the labels above them</li>
+<li>compare to document structures, <div class="fragment"><div class="line">SDocument doc1 = createSampleGraph();</div>
+<div class="line">SDocument doc2 = createSampleGraph();</div>
+<div class="line">SampleGenerator.createDocumentStructure(doc1);</div>
+<div class="line">SampleGenerator.createDocumentStructure(doc2);</div>
+<div class="line"></div>
+<div class="line">doc1.getDocumentGraph().isIsomorph(other);</div>
+</div><!-- fragment --></li>
+<li>the method doc1.getDocumentGraph().isIsomorph(doc1); returns true, if and only if the entire document structure of doc1 is equal to doc2</li>
+<li>in this case the returned value is true</li>
+<li>to check where are the differences in two models use findDiffs <div class="fragment"><div class="line">SDocument doc1 = createSampleGraph();</div>
+<div class="line">SDocument doc2 = createSampleGraph();</div>
+<div class="line">SampleGenerator.createPrimaryData(doc1);</div>
+<div class="line">SampleGenerator.createTokens(doc2);</div>
+<div class="line"></div>
+<div class="line">doc1.getDocumentGraph().isIsomorph(other);</div>
+</div><!-- fragment --></li>
+<li>sometimes models are not only equal when everything is equal, sometimes specific elements do not need to be equal</li>
+<li>for instance the ids of elements in Salt are arbritrary, which means two models can be equal along their primary data, their tokenization and along their annoattions but have different ids</li>
+<li>in that case the difference and isomorphie mechanism of Salt allows to exclude specific elements from the comparison</li>
+<li>see the exclude options</li>
+<li>sample how t use options</li>
+</ul>
+<p>public static final String OPTION_IGNORE_FEATURES = "ignoreFeatures"; /**</p>
+<ul>
+<li>When true, differences in <a class="el" href="">SAnnotation</a> have no influence on</li>
+<li>isomorphie and will not produce any differences.</li>
+</ul>
+<p>public static final String OPTION_IGNORE_ANNOTATIONS = "ignoreAnnotations"; /**</p>
+<ul>
+<li>When true, differences in <a class="el" href="">SMetaAnnotation</a> have no influence on</li>
+<li>isomorphie and will not produce any differences.</li>
+</ul>
+<p>public static final String OPTION_IGNORE_META_ANNOTATIONS = "ignoreMetaAnnotstaions"; /**</p>
+<ul>
+<li>When true, differences in <a class="el" href="">SProcessingAnnotation</a> have no influence</li>
+<li>on isomorphie and will not produce any differences.</li>
+</ul>
+<p>public static final String OPTION_IGNORE_PROCESSING_ANNOTATIONS = "ignoreProcessingAnnotations"; /**</p>
+<ul>
+<li>When true, differences in id have no influence on isomorphie and will not</li>
+<li>produce any differences.</li>
+</ul>
+<p>public static final String OPTION_IGNORE_ID = "ignoreId"; /**</p>
+<ul>
+<li>When true, differences in name have no influence on isomorphie and will</li>
+<li>not produce any differences.</li>
+</ul>
+<p>public static final String OPTION_IGNORE_NAME = "ignoreName"; /**</p>
+<ul>
+<li>When true, layers will not be checked when computing isomorphie and</li>
+<li>differences.</li>
+</ul>
+<p>public static final String OPTION_IGNORE_LAYER = "ignoreLayer"; </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 20 2015 01:32:14 for Salt by
+    <li class="footer">Generated on Sun Nov 22 2015 23:08:06 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

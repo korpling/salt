@@ -1,9 +1,12 @@
 var NAVTREE =
 [
   [ "Salt", "index.html", [
+    [ "Access a Salt model", "access.html", null ],
+    [ "Create a Salt model", "create.html", null ],
     [ "Identifiers in Salt", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_identifier.html", null ],
-    [ "Persist and Load", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_persistence.html", null ],
-    [ "# Quick User Guide", "sample.html", null ],
+    [ "Comparing Salt models", "isomorphie.html", null ],
+    [ "Persist and Load", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_persist.html", null ],
+    [ "Generating sample models", "sample.html", null ],
     [ "Traversing graphs", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_traverse.html", null ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
@@ -20,10 +23,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a1775f28cf7a905c531774000df7c4627",
-"classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#a7c10429d1fbb62fc6907f1345cd0d230",
-"functions_func_p.html",
-"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html"
+"classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a175e5f683e8e9e88d850714692539831",
+"classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#a708b8318b860f261aa71f58cf8215ca8",
+"functions_func_m.html",
+"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_named_element.html#ad26122edb7bd058171ec3cc1bd365ed1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

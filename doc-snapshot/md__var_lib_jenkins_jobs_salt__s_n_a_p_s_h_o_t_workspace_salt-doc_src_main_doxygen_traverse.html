@@ -110,13 +110,12 @@ $(document).ready(function(){initNavTree('md__var_lib_jenkins_jobs_salt__s_n_a_p
 <p>For all of these purposes, we offer the generic possibility to traverse a graph object (e.g. a <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html">SCorpusGraph</a> or a <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html">SDocumentGraph</a> object).</p>
 <p>A traversal can be done in two directions: <b>top-down</b> and <b>bottom-up</b>. When using the top-down method, the traversal will follow the relation direction (e.g. <em>a</em> -&gt; <em>b&gt;</em>: node <em>a</em> will be visited first, followed by node <em>b</em>). When using the bottom-up method, the traversal will follow the inverse of the relation direction (e.g. <em>a</em> -&gt; <em>b</em>: node <em>b</em> will be visited before node <em>a</em>).</p>
 <p>Additionally, you can choose the order in which nodes will be traversed. For this, we provide two modes: <b>depth-first</b> and <b>breadth-first</b>. In depth-first mode, the sub-graph of node <em>b</em> will be traversed, before its siblings will be visited. Imagine the following tree structure: </p>
-<pre>
-   a
- /   \
- b   d
- |
- c
-</pre><p>In this case, node <em>d</em> will be visited after <em>a,b,c</em> have been visited. In breadth-first mode, the order of the traversal is the other way around, i.e. the nodes <em>a,b,d</em> will be visited before node <em>c</em>.</p>
+<div class="fragment"><div class="line">  a</div>
+<div class="line">/   \</div>
+<div class="line">b   d</div>
+<div class="line">|</div>
+<div class="line">c</div>
+</div><!-- fragment --><p>In this case, node <em>d</em> will be visited after <em>a,b,c</em> have been visited. In breadth-first mode, the order of the traversal is the other way around, i.e. the nodes <em>a,b,d</em> will be visited before node <em>c</em>.</p>
 <p>To define the behavior of a traversal, we provide these types, which are combinations of the direction and the order of a traversal:</p>
 <ul>
 <li>org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST</li>
@@ -226,12 +225,13 @@ $(document).ready(function(){initNavTree('md__var_lib_jenkins_jobs_salt__s_n_a_p
 <div class="line">}, <span class="keyword">false</span>);</div>
 <div class="line"></div>
 <div class="line">}</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><p>To learn how to persist and load a Salt model, please read the article persist. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Fri Nov 20 2015 01:32:14 for Salt by
+    <li class="footer">Generated on Sun Nov 22 2015 23:08:06 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
