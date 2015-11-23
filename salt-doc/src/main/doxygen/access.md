@@ -60,9 +60,9 @@ docGraph.getNodes();
 docGraph.getRelations();
 		
 //access all outgoing relations of a node (the first structure node)
-List&lt;SRelation&lt;SNode, SNode>> out= docGraph.getOutRelations(docGraph.getStructures().get(0).getId());
+List<SRelation<SNode, SNode>> out= docGraph.getOutRelations(docGraph.getStructures().get(0).getId());
 //access all incoming relations of a node (the first structure node)
-List&lt;SRelation&lt;SNode, SNode>> in= docGraph.getInRelations(docGraph.getStructures().get(0).getId());
+List<SRelation<SNode, SNode>> in= docGraph.getInRelations(docGraph.getStructures().get(0).getId());
 ~~~
 
-Another and very powerful mechanism to access a Salt model is the traversal of a Salt graph. Traversing in Salt means, that along a traversing order each node and relation in the Salt graph is visited. Via a callback the traversal give you the chance to react on the current node and relation. For more information, please read article @ref traverse.  
+Another and very powerful mechanism to access a Salt model is the traversal of a Salt graph. Traversing in Salt means, that along a traversing order each node and relation in the Salt graph is visited. Via a callback the traversal give you the chance to react on the current node and relation. For more information, please read the article @ref traverse.  
