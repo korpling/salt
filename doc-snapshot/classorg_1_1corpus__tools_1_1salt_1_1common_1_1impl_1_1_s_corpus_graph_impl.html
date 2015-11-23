@@ -521,7 +521,7 @@ Iterator&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1
 <tr class="separator:a773041f8f4b3a1bbec02257c0fa995db inherit pub_methods_classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a103b14d2b40477413d14f8f9f92e24cb inherit pub_methods_classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a103b14d2b40477413d14f8f9f92e24cb"></a>
 Set&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_feature.html">SFeature</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a103b14d2b40477413d14f8f9f92e24cb">createFeatures</a> (String featureString)</td></tr>
-<tr class="memdesc:a103b14d2b40477413d14f8f9f92e24cb inherit pub_methods_classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method parses the given feature String and adds an <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_feature.html">SFeature</a> object for each feature being contained in that string to the given <a class="el" href="">SFeatureContainer</a> object.The syntax for Features is:<br/>
+<tr class="memdesc:a103b14d2b40477413d14f8f9f92e24cb inherit pub_methods_classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method parses the given feature String and adds an <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_feature.html">SFeature</a> object for each feature being contained in that string to the given <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_annotation_container.html">SAnnotationContainer</a> object.The syntax for Features is:<br/>
  (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+ <br/>
  where SNS is the namespace of the feature, SNAME is its name and SVALUE is the value of the feature<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -644,16 +644,10 @@ transient <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_
 </div><div class="memdoc">
 
 <p>This is an internally used method. </p>
-<p>To implement a double chaining of <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html">SCorpusGraph</a> and <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_salt_project.html">SaltProject</a> object when an node is inserted into this graph and to avoid an endless invocation the insertion of an node is splited into the two methods <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a8a0a125c8a7aca631b0c695a4b47db10">setSaltProject(SaltProject)</a> and <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a5c59dbc4ca3fbc881fa60798f0fe6f51">basic_setSaltProject(SaltProject)</a>. The invocation of methods is implement as follows:</p>
-<pre>
-<a class="el" href="">SaltProject#</a>                      <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_node.html#aa5a647948360abea92aac32dd251ad03">Node#setGraph(Graph)</a>
-        ||             \ /                   ||
-        ||              X                    ||
-        \/             / \                   \/
-<a class="el" href="">Graph#basicAddNode(Node)</a>            <a class="el" href="">Node#basicSetGraph(Graph)</a>
-</pre><dl class="params"><dt>Parameters</dt><dd>
+<p>To implement a double chaining of <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html">SCorpusGraph</a> and <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_salt_project.html">SaltProject</a> object when an node is inserted into this graph and to avoid an endless invocation the insertion of an node is splited into the two methods <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a8a0a125c8a7aca631b0c695a4b47db10">setSaltProject(SaltProject)</a> and <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a5c59dbc4ca3fbc881fa60798f0fe6f51">basic_setSaltProject(SaltProject)</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">graph</td><td>graph which contains this node </td></tr>
+    <tr><td class="paramname">saltProject</td><td>the Salt project containing the corpus structure </td></tr>
   </table>
   </dd>
 </dl>
@@ -763,7 +757,7 @@ Initializes index <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>org</b></li><li class="navelem"><b>corpus_tools</b></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt.html">salt</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1common.html">common</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1common_1_1impl.html">impl</a></li><li class="navelem"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html">SCorpusGraphImpl</a></li>
-    <li class="footer">Generated on Mon Nov 23 2015 22:26:37 for Salt by
+    <li class="footer">Generated on Mon Nov 23 2015 22:53:13 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
