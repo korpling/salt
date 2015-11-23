@@ -17,7 +17,6 @@
  */
 package org.corpus_tools.salt.common;
 
-import java.nio.channels.SeekableByteChannel;
 import java.util.List;
 import java.util.Set;
 
