@@ -242,11 +242,11 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * implement as follows:
 	 * 
 	 * <pre>
-	 * {@link #setSDocument(SDocument)}                      {@link SDocument#setDocumentGraph(Graph)}
+	 * {@link #setDocument(SDocument)}                      {@link SDocument#setDocumentGraph(Graph)}
 	 *         ||             \ /                   ||
 	 *         ||              X                    ||
 	 *         \/             / \                   \/
-	 * {@link #basicSDocument(SDocument)}            {@link SDocument#basicSetSDocumentGraph(Graph)}
+	 * {@link #basicDocument(SDocument)}            {@link SDocument#basicSetDocumentGraph(Graph)}
 	 * </pre>
 	 * 
 	 * @param document

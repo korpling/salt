@@ -106,7 +106,7 @@ public enum SALT_TYPE {
 	/**
 	 * Returns map of {@link SALT_TYPE} and {@link Class}.
 	 * 
-	 * @return
+	 * @return a map of {@link SALT_TYPE} and the corresponding class in Salt
 	 */
 	protected static Map<SALT_TYPE, Class<? extends Object>> getSType2clazz() {
 		if (sType2clazzMap == null) {
@@ -126,7 +126,7 @@ public enum SALT_TYPE {
 	 * Converts the given class, if it is a class of the Salt model into its
 	 * corresponding {@link SALT_TYPE}.
 	 * 
-	 * @param class
+	 * @param classes
 	 *            to convert
 	 * @return {@link SALT_TYPE} of passed class
 	 */

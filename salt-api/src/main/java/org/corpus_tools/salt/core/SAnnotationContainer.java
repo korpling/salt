@@ -277,7 +277,7 @@ public interface SAnnotationContainer extends LabelableElement {
 	/**
 	 * This method parses the given feature String and adds an {@link SFeature}
 	 * object for each feature being contained in that string to the given
-	 * {@link SFeatureContainer} object. The syntax for Features is:<br/>
+	 * {@link SAnnotationContainer} object. The syntax for Features is:<br/>
 	 * (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+ <br/>
 	 * where SNS is the namespace of the feature, SNAME is its name and SVALUE
 	 * is the value of the feature
