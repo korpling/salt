@@ -126,7 +126,8 @@ public enum SALT_TYPE {
 	 * Converts the given class, if it is a class of the Salt model into its
 	 * corresponding {@link SALT_TYPE}.
 	 * 
-	 * @param class to convert
+	 * @param class
+	 *            to convert
 	 * @return {@link SALT_TYPE} of passed class
 	 */
 	public static Set<SALT_TYPE> class2SaltType(Class<? extends Object>... classes) {

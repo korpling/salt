@@ -714,8 +714,8 @@ public class SaltUtil {
 	 * Loads a SaltProject from given uri and returns it as object structure.
 	 * This does not load the document graphs which are belong to the
 	 * SaltProject from the disk. You have to call
-	 * {@link SDocument#loadDocumentGraph() } on each document to load the actual
-	 * document graph.
+	 * {@link SDocument#loadDocumentGraph() } on each document to load the
+	 * actual document graph.
 	 * 
 	 * @param location
 	 *            location to the Salt project file

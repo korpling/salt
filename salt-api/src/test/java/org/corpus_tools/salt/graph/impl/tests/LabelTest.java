@@ -108,7 +108,8 @@ public class LabelTest {
 	 * Checks if qname is returned correctly, if name or namespace is missing.
 	 * <ol>
 	 * <li>qName= name if namespace is missing</li>
-	 * <li>qName= namespace + {@value Label#NS_SEPERATOR}, if name is missing</li>
+	 * <li>qName= namespace + {@value Label#NS_SEPERATOR}, if name is missing
+	 * </li>
 	 * <li>qName= namespace + {@value Label#NS_SEPERATOR} + name, if both is
 	 * given</li>
 	 * </ol>

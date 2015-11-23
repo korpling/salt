@@ -188,8 +188,8 @@ public class DataSourceAccessor {
 						nodes.add(sSeqRel.getSource());
 					}
 				}
-			}// sequential relation is in the interval
-		}// walk through all sequential relations
+			} // sequential relation is in the interval
+		} // walk through all sequential relations
 		return (nodes);
 	}
 
@@ -222,7 +222,7 @@ public class DataSourceAccessor {
 				// tokens at same position relative to their list are not equal
 				retVal = false;
 				break;
-			}// tokens at same position relative to their list are not equal
+			} // tokens at same position relative to their list are not equal
 			ctr++;
 		}
 		return (retVal);
@@ -328,11 +328,11 @@ public class DataSourceAccessor {
 	public static List<DataSourceSequence> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, List<SNode> nodes, SALT_TYPE... relationTypes) {
 		Traverser traverser = new Traverser();
 		if (relationTypes != null && relationTypes.length != 0) {
-			traverser.relationTypes2Traverse= new HashSet<SALT_TYPE>();
+			traverser.relationTypes2Traverse = new HashSet<SALT_TYPE>();
 			Collections.addAll(traverser.relationTypes2Traverse, relationTypes);
 			documentGraph.traverse(nodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.toString(), traverser);
 			return (traverser.dataSourceSequences);
-		} else{
+		} else {
 			return (new ArrayList<DataSourceSequence>());
 		}
 	}
@@ -360,7 +360,7 @@ public class DataSourceAccessor {
 		// initialise the overlappedSToken List
 		traverser.overlappedSToken = new HashSet<SToken>();
 		// initialise the relationTypes2Traverse List
-		traverser.relationTypes2Traverse= new HashSet<SALT_TYPE>();
+		traverser.relationTypes2Traverse = new HashSet<SALT_TYPE>();
 		Collections.addAll(traverser.relationTypes2Traverse, relationTypes);
 		List<SNode> rootNodes = new ArrayList<>();
 		rootNodes.add(overlappingNode);
@@ -579,7 +579,7 @@ public class DataSourceAccessor {
 							lastSeenDSSequence = dsSequence;
 							break;
 						}
-					}// search for correct sequence, containing the datasource
+					} // search for correct sequence, containing the datasource
 						// if it was already found
 					if (sequence == null) {
 						// sequence haven't been visit -> create it
@@ -587,9 +587,9 @@ public class DataSourceAccessor {
 						sequence.setDataSource(dataSource);
 						lastSeenDSSequence = sequence;
 						dataSourceSequences.add(sequence);
-					}// sequence haven't been visit -> create it
+					} // sequence haven't been visit -> create it
 				}
-			}// TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
+			} // TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 			else {
 				if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))) {
 					// if a SToken was reached
@@ -653,7 +653,7 @@ public class DataSourceAccessor {
 				} else {
 					retVal = true;
 				}
-			}// TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
+			} // TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 			else {
 				if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))) {
 					// there is a relation

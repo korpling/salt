@@ -255,7 +255,8 @@ public class Diff {
 		}
 		List<SNode> roots = otherGraph.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
 		if ((roots == null) || (roots.size() == 0)) {
-			// logger.warn("Cannot start computing of differences, since no tokens exist for document '{}'.",
+			// logger.warn("Cannot start computing of differences, since no
+			// tokens exist for document '{}'.",
 			// templateGraph.getId());
 		} else {
 			List<SNode> remainingTemplateNodes = new ArrayList<>(templateGraph.getSpans().size() + templateGraph.getStructures().size());

@@ -143,7 +143,7 @@ public class GraphTraverserModuleTest {
 				}
 				if (numOfOccurences >= 2)
 					retVal = false;
-			}// checks if a path in currentPath is contained two times
+			} // checks if a path in currentPath is contained two times
 
 			return retVal;
 		}
@@ -199,7 +199,7 @@ public class GraphTraverserModuleTest {
 				fail("null parameters are not allowed");
 			} catch (Exception e) {
 			}
-		}// test 1
+		} // test 1
 
 		{// test 2
 			startNodes = new ArrayList<SNode>();
@@ -212,7 +212,7 @@ public class GraphTraverserModuleTest {
 				fail("null parameters are not allowed");
 			} catch (Exception e) {
 			}
-		}// test 2
+		} // test 2
 
 		{// test 3
 			startNodes = new ArrayList<>();
@@ -225,7 +225,7 @@ public class GraphTraverserModuleTest {
 				fail("null parameters are not allowed");
 			} catch (Exception e) {
 			}
-		}// test 3
+		} // test 3
 	}
 
 	/**
@@ -248,7 +248,7 @@ public class GraphTraverserModuleTest {
 			for (Node expectedRoot : expectedRoots) {
 				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
 			}
-		}// test 1
+		} // test 1
 
 		{// test 2
 			graph = TestHelper.createGraph_DAG();
@@ -261,7 +261,7 @@ public class GraphTraverserModuleTest {
 			for (Node expectedRoot : expectedRoots) {
 				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
 			}
-		}// test 2
+		} // test 2
 
 		{// test 3
 			graph = TestHelper.createGraph_Cycle();
@@ -274,7 +274,7 @@ public class GraphTraverserModuleTest {
 			for (Node expectedRoot : expectedRoots) {
 				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
 			}
-		}// test 3
+		} // test 3
 	}
 
 	/**
@@ -300,7 +300,7 @@ public class GraphTraverserModuleTest {
 			for (Node expectedLeaf : expectedLeafs) {
 				assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 			}
-		}// test 1
+		} // test 1
 
 		{// test 2
 			graph = TestHelper.createGraph_DAG();
@@ -313,7 +313,7 @@ public class GraphTraverserModuleTest {
 			for (Node expectedLeaf : expectedLeafs) {
 				assertTrue("The list of returned leafs does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 			}
-		}// test 2
+		} // test 2
 
 		{// test 3
 			graph = TestHelper.createGraph_Cycle();
@@ -325,7 +325,7 @@ public class GraphTraverserModuleTest {
 			for (Node expectedLeaf : expectedLeafs) {
 				assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 			}
-		}// test 3
+		} // test 3
 	}
 
 	// /**
@@ -359,7 +359,8 @@ public class GraphTraverserModuleTest {
 	// if ((checker.exception != null) && (!(checker.exception instanceof
 	// SaltTraverserException))) {
 	// checker.exception.printStackTrace();
-	// fail("A GraphTaverserException should have been thrown, because the same id was used twice with the same callback handler");
+	// fail("A GraphTaverserException should have been thrown, because the same
+	// id was used twice with the same callback handler");
 	// }
 	// }
 
@@ -396,7 +397,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker1.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker1.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker1.start(startNodes, traverseType, traverseId);
-		}// thread 1
+		} // thread 1
 
 		{// thread 2
 			traverseId = "testThreading_2";
@@ -404,7 +405,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker2.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker2.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker2.start(startNodes, traverseType, traverseId);
-		}// thread 2
+		} // thread 2
 
 		{// thread 3
 			traverseId = "testThreading_3";
@@ -412,7 +413,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker3.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker3.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker3.start(startNodes, traverseType, traverseId);
-		}// thread 3
+		} // thread 3
 
 		while ((traverseChecker1.runs < 1) || (traverseChecker2.runs < 1) || (traverseChecker3.runs < 1)) {
 			Thread.sleep(100);
@@ -464,7 +465,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker1.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker1.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker1.start(startNodes, traverseType, traverseId);
-		}// thread 1
+		} // thread 1
 
 		{// thread 2
 			traverseId = "testThreading_2";
@@ -473,7 +474,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker2.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker2.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker2.start(startNodes, traverseType, traverseId);
-		}// thread 2
+		} // thread 2
 
 		{// thread 3
 			traverseId = "testThreading_3";
@@ -482,7 +483,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker3.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker3.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker3.start(startNodes, traverseType, traverseId);
-		}// thread 3
+		} // thread 3
 
 		// while ( (traverseChecker1.runs< 1 )||
 		// (traverseChecker2.runs< 1 ) ||
@@ -662,7 +663,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker1.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker1.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker1.start(startNodes, traverseType, traverseId);
-		}// thread 1
+		} // thread 1
 
 		{// thread 2
 			traverseId = "testThreading_2";
@@ -670,7 +671,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker2.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker2.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker2.start(startNodes, traverseType, traverseId);
-		}// thread 2
+		} // thread 2
 
 		{// thread 3
 			traverseId = "testThreading_3";
@@ -678,7 +679,7 @@ public class GraphTraverserModuleTest {
 			traverseChecker3.nodeOrderWayThere = nodeOrderWayThere;
 			traverseChecker3.nodeOrderWayBack = nodeOrderWayBack;
 			traverseChecker3.start(startNodes, traverseType, traverseId);
-		}// thread 3
+		} // thread 3
 
 		while ((traverseChecker1.runs < 1) || (traverseChecker2.runs < 1) || (traverseChecker3.runs < 1)) {
 			Thread.sleep(100);

@@ -50,7 +50,9 @@ public interface SaltXML10Dictionary {
 	public static final String TAG_EDGES = "edges";
 	/** constant to address the xml-element 'nodes'. **/
 	public static final String TAG_NODES = "nodes";
-	/** constant to address the xml-element 'sDocumentStructure:SDocumentGraph'. **/
+	/**
+	 * constant to address the xml-element 'sDocumentStructure:SDocumentGraph'.
+	 **/
 	public static final String TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH = "SDocumentGraph";
 	/** constant to address the xml-element 'sCorpusGraphs'. **/
 	public static final String TAG_SCORPUSGRAPH = "sCorpusGraphs";

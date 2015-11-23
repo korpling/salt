@@ -516,8 +516,8 @@ public interface SDocumentGraph extends SGraph {
 	 * tokenization made by the TreeTagger tokenizer. This method calls the
 	 * method {@link #createTokenizer()} and initializes with automatic detected
 	 * values. The language will be detected automatically for each
-	 * {@link STextualDS} object by use of the {@link TextCategorizer} (see: <a
-	 * href=
+	 * {@link STextualDS} object by use of the {@link TextCategorizer} (see:
+	 * <a href=
 	 * "http://textcat.sourceforge.net/doc/org/knallgrau/utils/textcat/TextCategorizer.html"
 	 * >http://textcat.sourceforge.net/doc/org/knallgrau/utils/textcat/
 	 * TextCategorizer.html</a>). If the language is one of the given ones:
@@ -526,9 +526,9 @@ public interface SDocumentGraph extends SGraph {
 	 * {@link #createTokenizer()}.
 	 * 
 	 * The used Treetagger is a reimplementation in Java with permission from
-	 * the original TreeTagger tokenizer in Perl by Helmut Schmid (see: <a
-	 * href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/"
-	 * >http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>). For
+	 * the original TreeTagger tokenizer in Perl by Helmut Schmid (see:
+	 * <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/" >
+	 * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>). For
 	 * each token detected in the text given by
 	 * <code>sTextualDS.getSText()</code> an {@link SToken} object is created
 	 * and linked with the {@link STextualDS} object via a new
@@ -545,9 +545,9 @@ public interface SDocumentGraph extends SGraph {
 	 * of the returned {@link Tokenizer} object. This method is used by the
 	 * method {@link #tokenize()}. The used Treetagger is a reimplementation in
 	 * Java with permission from the original TreeTagger tokenizer in Perl by
-	 * Helmut Schmid (see: <a
-	 * href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/"
-	 * >http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>). For
+	 * Helmut Schmid (see:
+	 * <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/" >
+	 * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>). For
 	 * each token detected in the text given by
 	 * <code>sTextualDS.getSText()</code> an {@link SToken} object is created
 	 * and linked with the {@link STextualDS} object via a new
@@ -604,7 +604,8 @@ public interface SDocumentGraph extends SGraph {
 	 * This  is    a     text.
 	 * </pre>
 	 * 
-	 * the call insertSTokensAt(sTextualDS, 5, {"additional" "text"}, true);<br/>
+	 * the call insertSTokensAt(sTextualDS, 5, {"additional" "text"}, true);
+	 * <br/>
 	 * results in <br/>
 	 * 
 	 * <pre>
@@ -655,12 +656,13 @@ public interface SDocumentGraph extends SGraph {
 	 *            anchor node, which overlaps the returned tokens
 	 * @param overlappingRelationTypes
 	 *            relation types
-	 */	
+	 */
 	public List<SToken> getOverlappedTokens(SNode overlappingNode, SALT_TYPE... overlappingRelationTypes);
-		
+
 	/**
 	 * Returns all tokens in the graph, which are overlapped by the passed node
-	 * and are reachable via {@link SALT_TYPE#STEXT_OVERLAPPING_RELATION} having at least one of the passed types.
+	 * and are reachable via {@link SALT_TYPE#STEXT_OVERLAPPING_RELATION} having
+	 * at least one of the passed types.
 	 * 
 	 * @param overlappingNode
 	 *            anchor node, which overlaps the returned tokens

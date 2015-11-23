@@ -1369,7 +1369,7 @@ public class SDocumentGraphTest {
 			tok5.setName("tok5");
 			getFixture().addNode(tok5);
 			assertEquals(tok5, getFixture().getNode(tok5.getId()));
-		}// SToken
+		} // SToken
 		{// SSpan
 			span1 = SaltFactory.createSSpan();
 			span1.setName("span1");
@@ -1380,7 +1380,7 @@ public class SDocumentGraphTest {
 			span2.setName("span2");
 			getFixture().addNode(span2);
 			assertEquals(span2, getFixture().getNode(span2.getId()));
-		}// SSpan
+		} // SSpan
 
 		{// SStructure
 			struct1 = SaltFactory.createSStructure();
@@ -1392,7 +1392,7 @@ public class SDocumentGraphTest {
 			struct2.setName("struct2");
 			getFixture().addNode(struct2);
 			assertEquals(struct2, getFixture().getNode(struct2.getId()));
-		}// SStructure
+		} // SStructure
 
 		{// SSpanningRelation
 			SSpanningRelation sSpanRel = null;
@@ -1419,7 +1419,7 @@ public class SDocumentGraphTest {
 			sSpanRel.setSource(span2);
 			getFixture().addRelation(sSpanRel);
 			assertEquals(sSpanRel, getFixture().getRelation(sSpanRel.getId()));
-		}// SSpanningRelation
+		} // SSpanningRelation
 
 		{// SDominanceRelation
 			SDominanceRelation sDomRel = null;
@@ -1452,7 +1452,7 @@ public class SDocumentGraphTest {
 			sDomRel.setTarget(span2);
 			getFixture().addRelation(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
-		}// SDominanceRelation
+		} // SDominanceRelation
 
 		{// SPointingRelation
 			SPointingRelation sPRel = null;
@@ -1473,7 +1473,7 @@ public class SDocumentGraphTest {
 			sPRel.setTarget(tok2);
 			getFixture().addRelation(sPRel);
 			assertEquals(sPRel, getFixture().getRelation(sPRel.getId()));
-		}// SPointingRelation
+		} // SPointingRelation
 
 		List<SNode> roots = null;
 		{// check SSpanningRelation
@@ -1482,14 +1482,14 @@ public class SDocumentGraphTest {
 			roots.add(span2);
 			assertTrue(roots.containsAll(getFixture().getRootsByRelation(SALT_TYPE.SSPANNING_RELATION)));
 			assertTrue(getFixture().getRootsByRelation(SALT_TYPE.SSPANNING_RELATION).containsAll(roots));
-		}// check SSpanningRelation
+		} // check SSpanningRelation
 
 		{// check SDominanceRelation
 			roots = new ArrayList<>();
 			roots.add(struct2);
 			assertTrue(roots.containsAll(getFixture().getRootsByRelation(SALT_TYPE.SDOMINANCE_RELATION)));
 			assertTrue(getFixture().getRootsByRelation(SALT_TYPE.SDOMINANCE_RELATION).containsAll(roots));
-		}// check SDominanceRelation
+		} // check SDominanceRelation
 
 		{// check SPointingRelation
 			roots = new ArrayList<>();
@@ -1497,7 +1497,7 @@ public class SDocumentGraphTest {
 			roots.add(tok3);
 			assertTrue(roots.containsAll(getFixture().getRootsByRelation(SALT_TYPE.SPOINTING_RELATION)));
 			assertTrue(getFixture().getRootsByRelation(SALT_TYPE.SPOINTING_RELATION).containsAll(roots));
-		}// check SPointingRelation
+		} // check SPointingRelation
 	}
 
 	/**

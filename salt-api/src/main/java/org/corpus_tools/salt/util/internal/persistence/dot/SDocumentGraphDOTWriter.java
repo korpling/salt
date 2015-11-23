@@ -199,9 +199,9 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 						throw new SaltResourceException("There are some nodes, which hasn' t been printed because of an unknown reason.");
 					} else {// traverse again
 						docGraph.traverse(forgottenNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "dot_forgotten_nodes", this);
-					}// traverse again
-				}// if both lists doesn't have the same size create difference
-			}// some nodes have no roots for example if they are part of a
+					} // traverse again
+				} // if both lists doesn't have the same size create difference
+			} // some nodes have no roots for example if they are part of a
 				// cycle, they have to be still stored
 		} else {
 			currOutputStream.println("<empty>[color= red, style = filled]");
@@ -286,7 +286,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 			// replace " with \n"
 			text = text.replace("\n", "");
 			text = text.replace("\r", "");
-		}// preparing text for dot
+		} // preparing text for dot
 		dotNode.labels.add("text=" + text);
 		printDOTNode(dotNode);
 	}

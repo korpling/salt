@@ -120,7 +120,8 @@ public class Persist_SaltXML10_Test {
 	 * <li>{@link SampleGenerator#createAnaphoricAnnotations(SDocument)}</li>
 	 * <li>{@link SampleGenerator#createDependencies(SDocument)}</li>
 	 * <li>
-	 * {@link SampleGenerator#createInformationStructureAnnotations(SDocument)}</li>
+	 * {@link SampleGenerator#createInformationStructureAnnotations(SDocument)}
+	 * </li>
 	 * <li>{@link SampleGenerator#createSyntaxAnnotations(SDocument)}</li>
 	 * </ul>
 	 */

@@ -36,7 +36,9 @@ public class SaltProjectImpl implements SaltProject {
 		corpusGraphs = new ArrayList<SCorpusGraph>();
 	}
 
-	/** list of all {@link SCorpusGraph} objects contained in this Salt project **/
+	/**
+	 * list of all {@link SCorpusGraph} objects contained in this Salt project
+	 **/
 	private List<SCorpusGraph> corpusGraphs = null;
 
 	/** {@inheritDoc} **/

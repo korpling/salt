@@ -657,7 +657,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				// textual position
 				sTimeRelTable.get(sTextRel.getTarget()).add(sTimeRel);
 				// end: put STimelineRelation into sTimeRelTable
-			}// for each token create a STimeline object
+			} // for each token create a STimeline object
 			for (STextualDS sTextualDS : getTextualDSs()) {
 				sTimeRelList.addAll(sTimeRelTable.get(sTextualDS));
 			}
@@ -883,14 +883,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> getOverlappedTokens(SNode overlappingNode){
+	public List<SToken> getOverlappedTokens(SNode overlappingNode) {
 		return (DataSourceAccessor.getOverlappedSTokens(this, overlappingNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION));
 	}
-	
-	
+
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> getOverlappedTokens(SNode overlappingNode, SALT_TYPE... relationTypes){
+	public List<SToken> getOverlappedTokens(SNode overlappingNode, SALT_TYPE... relationTypes) {
 		return (DataSourceAccessor.getOverlappedSTokens(this, overlappingNode, relationTypes));
 	}
 

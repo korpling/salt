@@ -73,7 +73,8 @@ public class SampleGenerator {
 	 * @throws SAXException
 	 */
 	public static SCorpusGraph createCorpusStructure(SaltProject saltProject) {
-		// TODO replace code with call of createCorpusStructure(SCorpusGraphsCorpGraph1)
+		// TODO replace code with call of
+		// createCorpusStructure(SCorpusGraphsCorpGraph1)
 		if (saltProject == null) {
 			throw new SaltSampleException("Cannot create example, because the given saltProjects is empty.");
 		}
@@ -731,7 +732,7 @@ public class SampleGenerator {
 				posAnno.setValue(posAnnotations[i]);
 				tokens.get(i).addAnnotation(posAnno);
 			}
-		}// adding part-of speech annotations
+		} // adding part-of speech annotations
 
 		{// adding lemma annotations
 			SLemmaAnnotation lemmaAnno = null;
@@ -744,7 +745,7 @@ public class SampleGenerator {
 				lemmaAnno.setValue(posAnnotations[i]);
 				tokens.get(i).addAnnotation(lemmaAnno);
 			}
-		}// adding lemma annotations
+		} // adding lemma annotations
 
 	}
 

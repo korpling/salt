@@ -33,12 +33,14 @@ import org.eclipse.emf.common.util.URI;
  * label pos:VV to annotate it with two part-of-speech annotations from
  * different tagsets.
  * </p>
- * </p> SFeature objects are used to store structural information of Salt, which
- * are necessary to map a linguistic model to a graph. For instance
- * {@link SFeature} added to the relation between a token and a primary text
- * contain the start and end position of the token in the primary text. In the
- * very most cases a user of the Salt api will never need to use a
- * {@link SFeature} object.</p> For further information on labels,
+ * </p>
+ * SFeature objects are used to store structural information of Salt, which are
+ * necessary to map a linguistic model to a graph. For instance {@link SFeature}
+ * added to the relation between a token and a primary text contain the start
+ * and end position of the token in the primary text. In the very most cases a
+ * user of the Salt api will never need to use a {@link SFeature} object.
+ * </p>
+ * For further information on labels,
  * 
  * @see Label
  * 

@@ -75,7 +75,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 		} else {// compute value type
 			retVal = computeSValueType();
 
-		}// compute value type
+		} // compute value type
 		return (retVal);
 	}
 
