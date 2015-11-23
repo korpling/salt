@@ -619,10 +619,8 @@ public class SampleGenerator {
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		List<SToken> tokens = new ArrayList<>();
-		tokens.add(englishToks.get(3));
-		tokens.add(englishToks.get(4));
-		SSpan sSpan = document.getDocumentGraph().createSpan(tokens);
+		
+		SSpan sSpan = document.getDocumentGraph().createSpan(englishToks.get(3), englishToks.get(4));
 		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(sSpan, germanToks.get(3), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");

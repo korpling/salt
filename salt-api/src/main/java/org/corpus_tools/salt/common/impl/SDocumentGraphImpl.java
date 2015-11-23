@@ -564,25 +564,20 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SSpan createSpan(SToken token) {
-		if (token == null) {
-			throw new SaltParameterException("addSSpan", "sourceSToken", this.getClass());
+	public SSpan createSpan(List<SToken> tokens) {
+		if (tokens != null && !tokens.isEmpty()) {
+			return (createSpan(tokens.toArray(new SToken[tokens.size()])));
+		} else {
+			return (null);
 		}
-		SSpan sSpan = SaltFactory.createSSpan();
-		addNode(sSpan);
-		SSpanningRelation rel = SaltFactory.createSSpanningRelation();
-		rel.setSource(sSpan);
-		rel.setTarget(token);
-		this.addRelation(rel);
-		return (sSpan);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SSpan createSpan(List<SToken> sTokens) {
+	public SSpan createSpan(SToken... tokens) {
 		SSpan retVal = null;
-		if (sTokens != null) {
-			for (SToken sToken : sTokens) {
+		if (tokens != null) {
+			for (SToken sToken : tokens) {
 				if (sToken != null) {
 					if (retVal == null) {
 						retVal = SaltFactory.createSSpan();
@@ -600,22 +595,17 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SStructure createSStructure(SStructuredNode sourceSNode) {
-		if (sourceSNode == null) {
-			throw new SaltParameterException("addSStructure", "sourceSNode", this.getClass());
+	public SStructure createStructure(List<SStructuredNode> sourceNodes) {
+		if (sourceNodes != null && !sourceNodes.isEmpty()) {
+			return (createStructure(sourceNodes.toArray(new SStructuredNode[sourceNodes.size()])));
+		} else {
+			return (null);
 		}
-		SStructure sStruct = SaltFactory.createSStructure();
-		addNode(sStruct);
-		SDominanceRelation sDomRel = SaltFactory.createSDominanceRelation();
-		sDomRel.setSource(sStruct);
-		sDomRel.setTarget(sourceSNode);
-		addRelation(sDomRel);
-		return (sStruct);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SStructure createStructure(List<SStructuredNode> structures) {
+	public SStructure createStructure(SStructuredNode... structures) {
 		SStructure retVal = null;
 		if (structures != null) {
 			for (SStructuredNode sStructuredNode : structures) {

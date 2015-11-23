@@ -242,7 +242,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            {@link SSpanningRelation} relation points to
 	 * @return the created {@link SSpan} node
 	 */
-	public SSpan createSpan(SToken sourceToken);
+	public SSpan createSpan(SToken... sourceToken);
 
 	/**
 	 * Creates a {@link SSpan} object, adds it to the graph and returns the new
@@ -268,7 +268,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            {@link SDominanceRelation} relation points to
 	 * @return {@link SStructure} node
 	 */
-	public SStructure createSStructure(SStructuredNode structure);
+	public SStructure createStructure(SStructuredNode... structure);
 
 	/**
 	 * Creates a new {@link SStructure} object, adds it to the graph and returns

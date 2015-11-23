@@ -738,7 +738,7 @@ public class SDocumentGraphTest {
 		List<SStructuredNode> overlappedNodes = null;
 		List<SToken> overlappedTokens = null;
 
-		SStructure struct2 = getFixture().createSStructure(tok1);
+		SStructure struct2 = getFixture().createStructure(tok1);
 		struct2.setName("struct2");
 
 		overlappedTokens = new ArrayList<>();
