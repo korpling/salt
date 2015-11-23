@@ -9,3 +9,5 @@ When you are new to Salt, we recommend to read this documentation in the followi
 - \ref access
 - \ref traverse
 - \ref persist
+
+There are more articles than listed here. These articles are listed in the navigation bar on the left.

@@ -234,7 +234,7 @@ sampleDocument.getDocumentGraph().addRelation(domRel);
 
 If a whole (possibly discontinuous) set of nodes has to be annotated with the very same annotation, a span can be used to aggregate the nodes. Instead of an annotation for each node, a single annotation for the span can be created then. This annotation belongs to the set of nodes (the span), but not to any of the single nodes. In our example we show the use of spans building an information structure analysis. Spans in Salt are realized by nodes of the type _SSpan_, they are connected to _SToken_ nodes via relations of type _SSpanningRelation_. The following figure shows the information structure analysis to be modeled.
 
-![](./images/userGuide/sample_span.png)
+![](./images/sample_span.png)
 
 The following snippet shows the code used to create the analysis shown in the figure.
 
