@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('create.html','');});
 <h3><a class="anchor" id="corpusStructure"></a>Corpus Structure</h3>
 <p>Due to its graph-based structure, even sub- and super-corpora are modeled as nodes having relations connecting them and creating a containment relationship. The only element not following the graph approach is the element <em>SaltProject</em>. This element serves as container for a set of corpus structures represented via the model element <em>SCorpusGraph</em>. Such a corpus structure is organized as a graph and contains corpora and documents. Salt distinguishes between a corpus (which can contain other corpora and documents) and documents (which only contain the document structure). The document structure itself is organized as a graph called <em>SDocumentGraph</em>. The <em>SDocumentGraph</em> is the element containing the primary data and the linguistic analysis. The corpus structure is just for organizing a complex linguistic project. A corpus in Salt is represented by the element <em>SCorpus</em> and a document is represented by the element <em>SDocument</em>. In this section, we create a simple corpus structure having one corpus and one document. Since corpora and documents are nodes, they can be labeled. To show this mechanism, we create a meta annotation, defining the annotator of that corpus. A meta annotation is represented via the element <em>SMetaAnnotation</em>. The corpus structure created here is shown in the figure below.</p>
 <div class="image">
-<img src="./images/corpusStructure.png" />
+<img src="corpusStructure.png" alt="corpusStructure.png"/>
 </div>
 <p>The following snippet shows the creation of the container object <em>SaltProject</em>, which shall contain our corpus model.</p>
 <div class="fragment"><div class="line">SaltProject saltProject= SaltFactory.createSaltProject();</div>
@@ -143,7 +143,7 @@ $(document).ready(function(){initNavTree('create.html','');});
 <p>Sometimes it might be necessary to manually tokenize a text yourself. For instance if you don't want to have a word tokenization, or for historical text, where separators are missing.</p>
 <p>A token in Salt is not bound to a linguistic unit - in this example we show how to tokenize words, although tokenizations by characters, syllables or sentences and so on are possible, too. The following figure shows an excerpt of the document graph we want to model in Salt. The figure only shows the tokens overlapping the words 'Is', 'this', 'example' and '.'.</p>
 <div class="image">
-<img src="./images/sample_tokenization.png" />
+<img src="sample_tokenization.png" alt="sample_tokenization.png"/>
 </div>
 <p>For tokenizing a primary text, we need the character offset of the start and the end position for each token in the text. The word "Is" in the sample text, for instance, has the start position 0 and the end position 1. Note that the positions are counted <b>between</b> two characters.</p>
 <table class="doxtable">
@@ -249,7 +249,7 @@ sampleDocument.getDocumentGraph().getRelations(np_1.getId(), tok_is.getId()).get
 </div><!-- fragment --><h3><a class="anchor" id="spans"></a>Spans</h3>
 <p>If a whole (possibly discontinuous) set of nodes has to be annotated with the very same annotation, a span can be used to aggregate the nodes. Instead of an annotation for each node, a single annotation for the span can be created then. This annotation belongs to the set of nodes (the span), but not to any of the single nodes. In our example we show the use of spans building an information structure analysis. Spans in Salt are realized by nodes of the type <em>SSpan</em>, they are connected to <em>SToken</em> nodes via relations of type <em>SSpanningRelation</em>. The following figure shows the information structure analysis to be modeled.</p>
 <div class="image">
-<img src="./images/userGuide/sample_span.png" />
+<img src="./images/sample_span.png" />
 </div>
 <p>The following snippet shows the code used to create the analysis shown in the figure.</p>
 <div class="fragment"><div class="line"><span class="comment">//create span overlaping only one token</span></div>
@@ -308,7 +308,7 @@ sampleDocument.getDocumentGraph().getRelations(np_1.getId(), tok_is.getId()).get
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Mon Nov 23 2015 11:44:29 for Salt by
+    <li class="footer">Generated on Mon Nov 23 2015 22:19:22 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
