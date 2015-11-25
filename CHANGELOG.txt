@@ -11,6 +11,25 @@
 *	artifactId:		salt-saltCommon												  *
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
+Version 3.0.0
+=============
+* increased perfromance time and decreased memeory usage
+* removed EMF from Salt
+* changed method and attribute names by removing the additional S (for instance getSId() -> getId())
+* changed project structure (moved subprojects salt-graph, salt-saltCore and salt-saltCommon into salt-api), the package structure represents the old project structure more or less
+* renamed artifact id to salt-api
+* renamed group id from de.hu_berlin.german.korpling to org.corpus_tools
+* renamed class Edge in salt-graph to Relation in org.corpus_tools.salt.graph
+* replaced string 'edge' in all methods with string 'relation'
+* added a generic mechanism in org.corpus_tools.salt.graph Relation, Layer and Graph
+* removed SElementId, which is now just getI()d or getIdentifier(), the ElementPath can be accessed via getElementPath()
+* added an isomorphie check for document-structures
+* unified SAnnotatableElement, SMetaAnnotatableElement, SProcessingAnnotatableElement,SFeaturableElement in SAnnotationContainer
+* added a doxygen documentation
+* used woodstock library for XML writing!!! this causes the overwriting of default XMLWriter in vm instance
+* added experimental GraphML exporter
+* removed points of time in timeline
+
 Version 2.1.2
 =============
 * only changes in pom.xml to make Salt compatible for maven central

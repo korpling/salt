@@ -1,4 +1,4 @@
-![SaltNPepper project](./gh-site/img/SaltNPepper_logo2010.png)
+![](http://korpling.github.io/pepper/images/SaltNPepper_logo2010.png)
 
 #Salt
 

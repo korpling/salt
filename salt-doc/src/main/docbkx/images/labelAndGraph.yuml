@@ -1,5 +1,5 @@
 //yuml.me
-[SNode]<>-*>[Label|namespace:String;name:String;value:Object]
-[SRelation]<>-*>[Label]
-[SLayer]<>-*>[Label]
-[SGraph]<>-*>[Label]
+[Node]-*>[Label|namespace:String;name:String;value:Object]
+[Edge]-*>[Label]
+[Layer]-*>[Label]
+[Graph]-*>[Label]

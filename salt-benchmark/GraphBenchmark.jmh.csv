@@ -1,0 +1,6 @@
+"Benchmark","Mode","Threads","Samples","Score","Score Error (99,9%)","Unit"
+"de.hu_berlin.german.korpling.saltnpepper.GraphBenchmark.access","thrpt",1,5,"32,788319","1,114825","ops/s"
+"de.hu_berlin.german.korpling.saltnpepper.GraphBenchmark.delete","thrpt",1,5,"14,820823","1,225053","ops/s"
+"de.hu_berlin.german.korpling.saltnpepper.GraphBenchmark.insert","thrpt",1,5,"40,899793","1,444252","ops/s"
+"de.hu_berlin.german.korpling.saltnpepper.GraphBenchmark.iterator","thrpt",1,5,"662,586717","29,448537","ops/s"
+"de.hu_berlin.german.korpling.saltnpepper.GraphBenchmark.list","thrpt",1,5,"523,926007","17,007850","ops/s"

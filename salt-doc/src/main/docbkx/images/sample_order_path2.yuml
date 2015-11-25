@@ -1,5 +1,5 @@
 //see yuml.me
-[t1|'The']-w_order>[t2|'streets']
-[tA|'T']-c_order>[tB|'h']
-[tB]-c_order>[tC|'e']
-[tC]-c_order>[tD|'s']
+
+[t1|'T']->[t2|'h']
+[t2]->[t3|'e']
+[t4|'The']->[t5|'streets']
