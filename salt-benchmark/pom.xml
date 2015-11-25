@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>salt</artifactId>
 		<groupId>org.corpus-tools</groupId>
-		<version>3.0.0</version>
+		<version>3.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>salt-benchmark</artifactId>
 	<name>salt-benchmark</name>
