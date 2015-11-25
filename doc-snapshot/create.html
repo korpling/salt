@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.0.0-SNAPSHOT</span>
+   &#160;<span id="projectnumber">3.0.1-SNAPSHOT</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -249,7 +249,7 @@ sampleDocument.getDocumentGraph().getRelations(np_1.getId(), tok_is.getId()).get
 </div><!-- fragment --><h3><a class="anchor" id="spans"></a>Spans</h3>
 <p>If a whole (possibly discontinuous) set of nodes has to be annotated with the very same annotation, a span can be used to aggregate the nodes. Instead of an annotation for each node, a single annotation for the span can be created then. This annotation belongs to the set of nodes (the span), but not to any of the single nodes. In our example we show the use of spans building an information structure analysis. Spans in Salt are realized by nodes of the type <em>SSpan</em>, they are connected to <em>SToken</em> nodes via relations of type <em>SSpanningRelation</em>. The following figure shows the information structure analysis to be modeled.</p>
 <div class="image">
-<img src="./images/sample_span.png" />
+<img src="sample_span.png" alt="sample_span.png"/>
 </div>
 <p>The following snippet shows the code used to create the analysis shown in the figure.</p>
 <div class="fragment"><div class="line"><span class="comment">//create span overlaping only one token</span></div>
@@ -308,7 +308,7 @@ sampleDocument.getDocumentGraph().getRelations(np_1.getId(), tok_is.getId()).get
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Nov 25 2015 13:27:02 for Salt by
+    <li class="footer">Generated on Wed Nov 25 2015 16:37:23 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
