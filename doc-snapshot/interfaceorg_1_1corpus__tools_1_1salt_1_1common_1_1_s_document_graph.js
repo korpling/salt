@@ -2,9 +2,9 @@ var interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph =
 [
     [ "addNode", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a1f948b3628b546510f976cdb4b679c8b", null ],
     [ "createRelation", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a08dfb21637264cea6aad687cba9d45f9", null ],
-    [ "createSpan", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a66b35f9cfa02b48fba8f1a86688a96a4", null ],
+    [ "createSpan", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a55719e977a56d7652719ab5aefde364a", null ],
     [ "createSpan", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a58dd38752fd784e3a0063447dff3c6e5", null ],
-    [ "createSStructure", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a1aa747e2e0c9fab7c88c64675ab89d7e", null ],
+    [ "createStructure", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a4b11de22d5a8b27a0a4b3fb20c1c97e0", null ],
     [ "createStructure", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a48f7e6b060a417bc734b419032978251", null ],
     [ "createTextualDS", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a25b17007f2f87752243cf36a53cee4d7", null ],
     [ "createTimeline", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a6fe06324d83c209a11dd7137bea6b43c", null ],
