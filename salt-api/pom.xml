@@ -17,7 +17,6 @@
 		<commons-lang3.version>3.4</commons-lang3.version>
 		<findbugs-maven-plugin.version>3.0.2</findbugs-maven-plugin.version>
 		<maven-surefire-plugin.version>2.15</maven-surefire-plugin.version>
-		<maven-site-plugin.version>3.1</maven-site-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
