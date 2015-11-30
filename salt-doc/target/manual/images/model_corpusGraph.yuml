@@ -1,0 +1,10 @@
+//http://yuml.me/
+
+[SCorpusGraph]<>-sCorpora*>[SCorpus]
+[SCorpusGraph]<>->[SCorpusRelation]
+[SCorpusRelation]-sSubCorpus>[SCorpus]
+[SCorpusRelation]-sSuperCorpus>[SCorpus]
+[SCorpusGraph]<>-sDocuments*>[SDocument]
+[SCorpusGraph]<>->[SCorpusDocumentRelation]
+[SCorpusDocumentRelation]-sDocument>[SDocument]
+[SCorpusDocumentRelation]-sCorpus>[SCorpus]

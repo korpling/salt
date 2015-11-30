@@ -1,0 +1,13 @@
+//see yuml.me
+[text1|Is this example more complicated than it appears to be?]
+[t11|?;.]->[text1]
+[t10|be;VB]->[text1]
+[t9|to;TO]->[text1]
+[t8|appears;VBZ]->[text1]
+[t7|it;PRP]->[text1]
+[t6|than;IN]->[text1]
+[t5|complicated;JJ]->[text1]
+[t4|more;RBR]->[text1]
+[t3|example;NN]->[text1]
+[t2|this;DT]->[text1]
+[t1|Is;VBZ]->[text1]

@@ -1,0 +1,5 @@
+//see yuml.me
+
+[SSpanningRelation]-sSource>[SToken]
+[SSpanningRelation]-sTarget>[SSpan]
+

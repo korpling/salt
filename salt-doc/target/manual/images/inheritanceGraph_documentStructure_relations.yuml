@@ -1,0 +1,17 @@
+// see: http://yuml.me
+[SRelation]^-[STimeOverlappingRelation]
+[SRelation]^-[SSequentialRelation]
+[SSequentialRelation]^-[STimelineRelation]
+[SSequentialRelation]^-[STextualRelation]
+
+[SRelation]^-[STextOverlappingRelation]
+
+[STextOverlappingRelation]^-[SDominanceRelation]
+[STimeOverlappingRelation]^-[SDominanceRelation]
+
+[STextOverlappingRelation]^-[SSpanningRelation]
+[STimeOverlappingRelation]^-[SSpanningRelation]
+
+[SRelation]^-[SAudioDSRelation]
+[SRelation]^-[SOrderRelation]
+[SRelation]^-[SPointingRelation]
