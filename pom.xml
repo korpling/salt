@@ -4,10 +4,9 @@
 	<groupId>org.corpus-tools</groupId>
 	<artifactId>salt</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.1-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<modules>
 		<module>salt-api</module>
-		<module>salt-benchmark</module>
 		<module>salt-doc</module>
 	</modules>
 		<developers>
