@@ -1,4 +1,5 @@
-### Traversing graphs {#traverse}
+Traversing graphs {#traverse}
+======
 
 When working with Salt, it is often necessary 
 
@@ -23,10 +24,10 @@ In this case, node _d_ will be visited after _a,b,c_ have been visited. In  brea
 
 To define the behavior of a traversal, we provide these types, which are combinations of the direction and the order of a traversal:
 
-* @ref org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST
-* @ref org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST
-* @ref org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST
-* @ref org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST
+* @ref org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE#TOP_DOWN_DEPTH_FIRST
+* @ref org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE#TOP_DOWN_BREADTH_FIRST
+* @ref org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE#BOTTOM_UP_DEPTH_FIRST
+* @ref org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE#BOTTOM_UP_BREADTH_FIRST
 
 
 The traversal mechanism uses a callback, therefore you need a class implementing the interface [GraphTraverseHandler](@ref org.corpus_tools.salt.core.GraphTraverseHandler). This interface declares the following three methods, which need to be implemented:
