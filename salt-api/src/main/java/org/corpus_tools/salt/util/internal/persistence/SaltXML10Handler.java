@@ -45,6 +45,8 @@ import org.xml.sax.ext.DefaultHandler2;
 import com.google.common.io.BaseEncoding;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class reads the XMI structure of SaltXML and creates the corresponding
@@ -65,7 +67,8 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	}
 
 	private final List<Object> rootObjects = new LinkedList<>();
-
+	
+	private static final Pattern RELATION_REF = Pattern.compile("/[0-9]*/@((sCorpusGraphs)|(nodes))\\.(?<nr>[0-9]+)"); 
 	/**
 	 * Adds an object to the list of root objects if the current container stack is empty.
 	 * 
@@ -202,8 +205,19 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				sRel = SaltFactory.createSCorpusDocumentRelation();
 			}
 			if ((sRel != null) && (target != null) && (source != null)) {
-				Integer sourceIdx = Integer.parseInt(source.replaceAll("((//@sCorpusGraphs[.]0)|/)/@nodes.", ""));
-				Integer targetIdx = Integer.parseInt(target.replaceAll("((//@sCorpusGraphs[.]0)|/)/@nodes.", ""));
+				Matcher matcherSource = RELATION_REF.matcher(source);
+				if(!matcherSource.matches()) {
+					throw new SaltResourceException("Invalid source reference \"" 
+							+ source +"\" for relation");
+				}
+				Matcher matcherTarget = RELATION_REF.matcher(target);
+				if(!matcherTarget.matches()) {
+					throw new SaltResourceException("Invalid target reference \"" 
+							+ target +"\" for relation");
+				}
+				
+				Integer sourceIdx = Integer.parseInt(matcherSource.group("nr"));
+				Integer targetIdx = Integer.parseInt(matcherTarget.group("nr"));
 				if (sourceIdx >= nodes.size()) {
 					throw new SaltResourceException("Cannot find a source node '" + source + "' for relation. ");
 				}
