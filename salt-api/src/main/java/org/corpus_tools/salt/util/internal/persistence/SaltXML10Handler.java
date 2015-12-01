@@ -82,6 +82,12 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 		// object is a root.
 		if(currentContainer.isEmpty()) {
 			rootObjects.add(object);
+			
+			// if there is a new root object all the indexes must be reset
+			nodes.clear();
+			relations.clear();
+			layers.clear();
+			saltProject = null;
 		}
 		currentContainer.push(object);
 	}
