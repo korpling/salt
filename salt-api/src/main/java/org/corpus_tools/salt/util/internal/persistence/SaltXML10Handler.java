@@ -87,6 +87,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			nodes.clear();
 			relations.clear();
 			layers.clear();
+			layerIdx = 0;
 			saltProject = null;
 		}
 		currentContainer.push(object);
