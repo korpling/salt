@@ -234,7 +234,6 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			if (graph.getNodes() != null) {
 				Iterator<SNode> nodeIt = graph.getNodes().iterator();
 				Integer position = 0;
-				position = 0;
 				while (nodeIt.hasNext()) {
 					SNode node = nodeIt.next();
 					writeNode(xml, node, null);
@@ -443,6 +442,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 * <li>{@link Float} - it is prefixed with "F::"</li>
 	 * <li>{@link URI} - it is prefixed with "U::"</li>
 	 * </ul>
+	 * @param value
+	 * @return 
 	 */
 	public String marshallValue(Object value) {
 		String retVal = null;
@@ -475,9 +476,10 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            to be persist
 	 * @param xml
 	 *            stream to write data to
+	 * @param layerPositions
 	 * @throws XMLStreamException
 	 */
-	public void writeNode(XMLStreamWriter xml, Node node, Map<SLayer, Integer> layerPositions) throws XMLStreamException {
+	public void writeNode(XMLStreamWriter xml, Node node, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -546,9 +548,10 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            stream to write data to
 	 * @param nodePositions
 	 *            a map containing all positions of nodes in the list of nodes
+	 * @param layerPositions
 	 * @throws XMLStreamException
 	 */
-	public void writeRelation(XMLStreamWriter xml, Relation relation, Map<SNode, Integer> nodePositions, Map<SLayer, Integer> layerPositions) throws XMLStreamException {
+	public void writeRelation(XMLStreamWriter xml, Relation relation, Map<? extends Node, Integer> nodePositions, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -617,9 +620,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 
 	/**
 	 * Writes the passed relation object to the passed {@link XMLStreamWriter}.
-	 * 
-	 * @param relation
-	 *            to be persist
+
+	 * @param layer
 	 * @param xml
 	 *            stream to write data to
 	 * @param nodePositions
