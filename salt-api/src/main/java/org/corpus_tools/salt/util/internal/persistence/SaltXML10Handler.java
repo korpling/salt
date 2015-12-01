@@ -70,7 +70,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	
 	private static final Pattern RELATION_REF = Pattern.compile("/[0-9]*/@((sCorpusGraphs)|(nodes))\\.(?<nr>[0-9]+)"); 
 	
-	private static final Pattern LAYER_REF = Pattern.compile("/[0-9]*/@layers.");
+	private static final Pattern LAYER_REF = Pattern.compile("/[0-9]*/@layers\\.");
 	
 	/**
 	 * Adds an object to the list of root objects if the current container stack is empty.

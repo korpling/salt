@@ -21,21 +21,25 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SCorpus;
+import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.tests.SaltTestsUtil;
+import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
+import org.corpus_tools.salt.util.internal.Diff;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Assert;
@@ -319,18 +323,22 @@ public class Persist_SaltXML10_Test {
 	{
 
 		SaltProject proj = SaltFactory.createSaltProject();
-		SDocument doc1 = SaltFactory.createSDocument();
-		SDocument doc2 = SaltFactory.createSDocument();
+		proj.setName("Test");
+		SCorpusGraph cg = proj.createCorpusGraph();
+		
+		SCorpus rootCorpus = cg.createCorpus(null, "root");
+		
+		SDocument doc1 = cg.createDocument(rootCorpus, "doc1");
+		SDocument doc2 = cg.createDocument(rootCorpus, "doc2");
 
 		SampleGenerator.createDocumentStructure(doc1);
 		SampleGenerator.createDocumentStructure(doc2);
+		
 
 		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore_MultipleContentRoots") + "/MultipleContentRoots.salt");
 
 		XMLOutputFactory outFactory = XMLOutputFactory.newFactory();
 		try (FileOutputStream fos = new FileOutputStream(tmpFile)) {
-			
-			
 			
 			XMLStreamWriter xml = outFactory.createXMLStreamWriter(fos, "UTF-8");
 			SaltXML10Writer writer = new SaltXML10Writer();
@@ -356,8 +364,14 @@ public class Persist_SaltXML10_Test {
 			SDocumentGraph loadedDoc1 = (SDocumentGraph) roots.get(1);
 			SDocumentGraph loadedDoc2 = (SDocumentGraph) roots.get(2);
 
-			assertTrue(doc1.getDocumentGraph().isIsomorph(loadedDoc1));
-			assertTrue(doc2.getDocumentGraph().isIsomorph(loadedDoc2));
+			Diff diff1 = new Diff(doc1.getDocumentGraph(), loadedDoc1);
+			Set<Difference> differencesForDoc1 = diff1.findDiffs();
+			assertEquals(0, differencesForDoc1.size());
+			
+			Diff diff2 = new Diff(doc2.getDocumentGraph(), loadedDoc2);
+			Set<Difference> differencesForDoc2 = diff2.findDiffs();
+			assertEquals(0, differencesForDoc2.size());
+			
 		} catch (IOException | XMLStreamException ex) {
 			Assert.assertNull(ex);
 		}
