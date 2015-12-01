@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.util.List;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
@@ -29,6 +30,7 @@ import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.corpus_tools.salt.util.SaltUtil;
+import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Assert;
 import org.junit.Before;
@@ -244,7 +246,7 @@ public class Persist_SaltXML10_Test {
 	}
 
 	/**
-	 * Tests persisting a SaltProject structure (without storing the
+	 * Tests persisting a SaltProject structure (with storing the
 	 * SDocumentGraphs)
 	 */
 	@Test
@@ -270,7 +272,6 @@ public class Persist_SaltXML10_Test {
 		assertEquals(outFolder + "/rootCorpus/subCorpus1/doc2.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(1).getDocumentGraphLocation().toFileString());
 		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc3.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(2).getDocumentGraphLocation().toFileString());
 		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc4.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(3).getDocumentGraphLocation().toFileString());
-
 	}
 
 	/**
@@ -300,5 +301,46 @@ public class Persist_SaltXML10_Test {
 		assertEquals(1.2345f, f, 0.0f);
 
 	}
-
+	
+	/**
+	 * Test reference generation when there is more than one content root.
+	 * EMF reference paths are relative to the index of the root content object.
+	 * If only one is included in an XML file "//" is used as a shortcut, but when
+	 * having more than one content objects the references must look like "/0/", "/1/" etc.
+	 */
+	@Test
+	public void testLoadStore_MultipleContentRoots() {
+		
+		SaltProject proj = SaltFactory.createSaltProject();
+		SDocument doc1 = SaltFactory.createSDocument();
+		SDocument doc2 = SaltFactory.createSDocument();
+		
+		SampleGenerator.createDocumentStructure(doc1);
+		SampleGenerator.createDocumentStructure(doc2);
+		
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/MultipleContentRoots.salt");
+		
+		
+		// store all objects in one single file
+		SaltXML10Writer writer = new SaltXML10Writer(tmpFile);
+		writer.writeSaltProject(proj);
+		writer.writeDocumentGraph(doc1.getDocumentGraph());
+		writer.writeDocumentGraph(doc2.getDocumentGraph());
+		
+		// restore the objects
+		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
+		List<Object> roots = SaltUtil.loadObjects(path);
+		
+		assertEquals(3, roots.size());
+		assertTrue(roots.get(0) instanceof SaltProject);
+		assertTrue(roots.get(1) instanceof SDocumentGraph);
+		assertTrue(roots.get(2) instanceof SDocumentGraph);
+		
+		SDocumentGraph loadedDoc1 = (SDocumentGraph) roots.get(1);
+		SDocumentGraph loadedDoc2 = (SDocumentGraph) roots.get(2);
+		
+		assertTrue(doc1.getDocumentGraph().isIsomorph(loadedDoc1));
+		assertTrue(doc2.getDocumentGraph().isIsomorph(loadedDoc2));
+	}
+	
 }
