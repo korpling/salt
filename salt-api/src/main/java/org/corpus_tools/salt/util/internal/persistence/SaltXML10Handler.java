@@ -43,6 +43,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
 import com.google.common.io.BaseEncoding;
+import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  * This class reads the XMI structure of SaltXML and creates the corresponding
@@ -62,28 +64,43 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 		currentContainer = new Stack<Object>();
 	}
 
-	private Object saltObject = null;
+	private final List<Object> rootObjects = new LinkedList<>();
 
 	/**
-	 * Sets the Salt object to be returned. This should be the root container
-	 * object of the passed file. This object is only set once.
+	 * Adds an object to the list of root objects if the current container stack is empty.
 	 * 
 	 **/
-	private void setSaltObject(Object saltObject) {
-		if (this.saltObject == null) {
-			this.saltObject = saltObject;
+	private void addRootObject(Object rootObject) {
+		
+		// Only add the object if the current container stack is empty, thus this
+		// object is a root.
+		if(currentContainer.isEmpty()) {
+			rootObjects.add(rootObject);
 		}
 	}
 
 	/**
 	 * Returns the object, which has been loaded.
+	 * If there are multiple root objects the first one is returned.
 	 * 
 	 * @return
 	 */
 	public Object getSaltObject() {
-		return saltObject;
+		if(rootObjects.isEmpty()) {
+			return null;
+		} else {
+			return rootObjects.get(0);
+		}
 	}
 
+	/**
+	 * Get an unmodifiable list of all root objects.
+	 * @return 
+	 */
+	public List<Object> getRootObjects() {
+		return Collections.unmodifiableList(rootObjects);
+	}
+	
 	/** This is a container object mostly used for labels. **/
 	private Stack<Object> currentContainer = null;
 	/** current salt project if file is a corpus structure **/
@@ -102,7 +119,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if (TAG_SALT_PROJECT_FULL.equals(qName)) {
 			SaltProject project = SaltFactory.createSaltProject();
-			setSaltObject(project);
+			addRootObject(project);
 			saltProject = project;
 			String sName = attributes.getValue(ATT_SNAME);
 			if (sName != null) {
@@ -111,14 +128,14 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			currentContainer.push(project);
 		} else if (TAG_SCORPUS_GRAPH.equals(qName)) {
 			SCorpusGraph graph = SaltFactory.createSCorpusGraph();
-			setSaltObject(graph);
+			addRootObject(graph);
 			if (saltProject != null) {
 				saltProject.addCorpusGraph(graph);
 			}
 			currentContainer.push(graph);
 		} else if (TAG_SDOCUMENT_GRAPH.equals(qName)) {
 			SDocumentGraph graph = SaltFactory.createSDocumentGraph();
-			setSaltObject(graph);
+			addRootObject(graph);
 			currentContainer.push(graph);
 		} else if (TAG_NODES.equals(qName)) {
 			SNode sNode = null;
@@ -141,7 +158,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				sNode = SaltFactory.createSDocument();
 			}
 			if (sNode != null) {
-				setSaltObject(sNode);
+				addRootObject(sNode);
 				currentContainer.push(sNode);
 				nodes.add(sNode);
 			}
@@ -200,7 +217,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				} else if (targetNode == null) {
 					throw new SaltResourceException("Cannot find a target node '" + target + "' for relation. ");
 				} else {
-					setSaltObject(sRel);
+					addRootObject(sRel);
 					sRel.setSource(sourceNode);
 					sRel.setTarget(targetNode);
 					relations.add(sRel);
@@ -282,7 +299,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 						// "' and could not be added twice.");
 					}
 				}
-				setSaltObject(label);
+				addRootObject(label);
 				currentContainer.push(label);
 			}
 		} else if (TAG_LAYERS.equals(qName)) {
