@@ -73,16 +73,17 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	private static final Pattern LAYER_REF = Pattern.compile("/[0-9]*/@layers\\.");
 	
 	/**
-	 * Adds an object to the list of root objects if the current container stack is empty.
+	 * Adds an object. Also adds it to the list of root objects if the current container stack is empty.
 	 * 
 	 **/
-	private void addRootObject(Object rootObject) {
+	private void addObject(Object object) {
 		
 		// Only add the object if the current container stack is empty, thus this
 		// object is a root.
 		if(currentContainer.isEmpty()) {
-			rootObjects.add(rootObject);
+			rootObjects.add(object);
 		}
+		currentContainer.push(object);
 	}
 
 	/**
@@ -125,24 +126,21 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if (TAG_SALT_PROJECT_FULL.equals(qName)) {
 			SaltProject project = SaltFactory.createSaltProject();
-			addRootObject(project);
-			saltProject = project;
 			String sName = attributes.getValue(ATT_SNAME);
 			if (sName != null) {
 				project.setName(sName);
 			}
-			currentContainer.push(project);
+			addObject(project);
+			saltProject = project;
 		} else if (TAG_SCORPUS_GRAPH.equals(qName)) {
 			SCorpusGraph graph = SaltFactory.createSCorpusGraph();
-			addRootObject(graph);
+			addObject(graph);
 			if (saltProject != null) {
 				saltProject.addCorpusGraph(graph);
 			}
-			currentContainer.push(graph);
 		} else if (TAG_SDOCUMENT_GRAPH.equals(qName)) {
 			SDocumentGraph graph = SaltFactory.createSDocumentGraph();
-			addRootObject(graph);
-			currentContainer.push(graph);
+			addObject(graph);
 		} else if (TAG_NODES.equals(qName)) {
 			SNode sNode = null;
 			String type = attributes.getValue(ATT_TYPE);
@@ -164,8 +162,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				sNode = SaltFactory.createSDocument();
 			}
 			if (sNode != null) {
-				addRootObject(sNode);
-				currentContainer.push(sNode);
+				addObject(sNode);
 				nodes.add(sNode);
 			}
 			String layersStr = attributes.getValue(ATT_LAYERS);
@@ -234,11 +231,10 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				} else if (targetNode == null) {
 					throw new SaltResourceException("Cannot find a target node '" + target + "' for relation. ");
 				} else {
-					addRootObject(sRel);
+					addObject(sRel);
 					sRel.setSource(sourceNode);
 					sRel.setTarget(targetNode);
 					relations.add(sRel);
-					currentContainer.push(sRel);
 				}
 			}
 			String layersStr = attributes.getValue(ATT_LAYERS);
@@ -316,8 +312,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 						// "' and could not be added twice.");
 					}
 				}
-				addRootObject(label);
-				currentContainer.push(label);
+				addObject(label);
 			}
 		} else if (TAG_LAYERS.equals(qName)) {
 			SLayer layer = layers.get(layerIdx.toString());
