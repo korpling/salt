@@ -4,7 +4,7 @@
 	<groupId>org.corpus-tools</groupId>
 	<artifactId>salt</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.0</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<modules>
 		<module>salt-api</module>
 		<module>salt-doc</module>
@@ -91,6 +91,7 @@
 		<docbkx-fop-support.version>2.0.16</docbkx-fop-support.version>
 		<maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
 		<exec-maven-plugin.version>1.4.0</exec-maven-plugin.version>
+		<maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
