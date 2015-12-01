@@ -687,4 +687,16 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		xml.writeEndElement();
 	}
+	
+	public static void writeXMIRootElement(XMLStreamWriter xml)
+			throws XMLStreamException
+	{
+		xml.writeStartElement(NS_XMI, "XMI", NS_VALUE_XMI);
+		xml.writeNamespace(NS_SDOCUMENTSTRUCTURE, NS_VALUE_SDOCUMENTSTRUCTURE);
+		xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
+		xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
+		xml.writeNamespace(NS_SALTCORE, NS_VALUE_SALTCORE);
+		xml.writeAttribute(NS_VALUE_XMI, ATT_XMI_VERSION, "2.0");
+		xml.writeCharacters("\n");
+	}
 }

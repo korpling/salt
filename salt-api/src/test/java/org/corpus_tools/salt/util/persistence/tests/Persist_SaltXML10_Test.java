@@ -21,7 +21,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
@@ -309,38 +315,52 @@ public class Persist_SaltXML10_Test {
 	 * having more than one content objects the references must look like "/0/", "/1/" etc.
 	 */
 	@Test
-	public void testLoadStore_MultipleContentRoots() {
-		
+	public void testLoadStore_MultipleContentRoots()
+	{
+
 		SaltProject proj = SaltFactory.createSaltProject();
 		SDocument doc1 = SaltFactory.createSDocument();
 		SDocument doc2 = SaltFactory.createSDocument();
-		
+
 		SampleGenerator.createDocumentStructure(doc1);
 		SampleGenerator.createDocumentStructure(doc2);
-		
+
 		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/MultipleContentRoots.salt");
-		
-		
-		// store all objects in one single file
-		SaltXML10Writer writer = new SaltXML10Writer(tmpFile);
-		writer.writeSaltProject(proj);
-		writer.writeDocumentGraph(doc1.getDocumentGraph());
-		writer.writeDocumentGraph(doc2.getDocumentGraph());
-		
-		// restore the objects
-		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
-		List<Object> roots = SaltUtil.loadObjects(path);
-		
-		assertEquals(3, roots.size());
-		assertTrue(roots.get(0) instanceof SaltProject);
-		assertTrue(roots.get(1) instanceof SDocumentGraph);
-		assertTrue(roots.get(2) instanceof SDocumentGraph);
-		
-		SDocumentGraph loadedDoc1 = (SDocumentGraph) roots.get(1);
-		SDocumentGraph loadedDoc2 = (SDocumentGraph) roots.get(2);
-		
-		assertTrue(doc1.getDocumentGraph().isIsomorph(loadedDoc1));
-		assertTrue(doc2.getDocumentGraph().isIsomorph(loadedDoc2));
-	}
+
+		XMLOutputFactory outFactory = XMLOutputFactory.newFactory();
+		try (FileOutputStream fos = new FileOutputStream(tmpFile)) {
+			
+			XMLStreamWriter xml = outFactory.createXMLStreamWriter(fos, "UTF-8");
+			
+			xml.writeStartDocument("1.0");
+			xml.writeCharacters("\n");
+			SaltXML10Writer.writeXMIRootElement(xml);
+
+			// store all objects in one single file
+			SaltXML10Writer writer = new SaltXML10Writer(tmpFile);
+			writer.writeSaltProject(xml, proj);
+			writer.writeDocumentGraph(xml, doc1.getDocumentGraph());
+			writer.writeDocumentGraph(xml, doc2.getDocumentGraph());
+			
+			xml.writeEndDocument();
+
+			// restore the objects
+			URI path = URI.createFileURI(tmpFile.getAbsolutePath());
+			List<Object> roots = SaltUtil.loadObjects(path);
+
+			assertEquals(3, roots.size());
+			assertTrue(roots.get(0) instanceof SaltProject);
+			assertTrue(roots.get(1) instanceof SDocumentGraph);
+			assertTrue(roots.get(2) instanceof SDocumentGraph);
+
+			SDocumentGraph loadedDoc1 = (SDocumentGraph) roots.get(1);
+			SDocumentGraph loadedDoc2 = (SDocumentGraph) roots.get(2);
+
+			assertTrue(doc1.getDocumentGraph().isIsomorph(loadedDoc1));
+			assertTrue(doc2.getDocumentGraph().isIsomorph(loadedDoc2));
+		} catch (IOException | XMLStreamException ex) {
+			Assert.assertNull(ex);
+		}
+}
 	
 }
