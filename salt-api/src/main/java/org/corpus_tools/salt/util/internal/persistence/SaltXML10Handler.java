@@ -69,6 +69,9 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	private final List<Object> rootObjects = new LinkedList<>();
 	
 	private static final Pattern RELATION_REF = Pattern.compile("/[0-9]*/@((sCorpusGraphs)|(nodes))\\.(?<nr>[0-9]+)"); 
+	
+	private static final Pattern LAYER_REF = Pattern.compile("/[0-9]*/@layers.");
+	
 	/**
 	 * Adds an object to the list of root objects if the current container stack is empty.
 	 * 
@@ -167,7 +170,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			}
 			String layersStr = attributes.getValue(ATT_LAYERS);
 			if (layersStr != null) {
-				layersStr = layersStr.replace("//@layers.", "");
+				layersStr = LAYER_REF.matcher(layersStr).replaceAll("");
 				String[] layerNums = layersStr.split(" ");
 				if (layerNums.length > 0) {
 					for (String layerNum : layerNums) {
@@ -240,7 +243,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			}
 			String layersStr = attributes.getValue(ATT_LAYERS);
 			if (layersStr != null) {
-				layersStr = layersStr.replace("//@layers.", "");
+				layersStr = LAYER_REF.matcher(layersStr).replaceAll("");
 				String[] layerNums = layersStr.split(" ");
 				if (layerNums.length > 0) {
 					for (String layerNum : layerNums) {
