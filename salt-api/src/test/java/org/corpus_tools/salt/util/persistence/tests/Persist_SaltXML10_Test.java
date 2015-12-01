@@ -325,22 +325,22 @@ public class Persist_SaltXML10_Test {
 		SampleGenerator.createDocumentStructure(doc1);
 		SampleGenerator.createDocumentStructure(doc2);
 
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/MultipleContentRoots.salt");
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore_MultipleContentRoots") + "/MultipleContentRoots.salt");
 
 		XMLOutputFactory outFactory = XMLOutputFactory.newFactory();
 		try (FileOutputStream fos = new FileOutputStream(tmpFile)) {
 			
+			
+			
 			XMLStreamWriter xml = outFactory.createXMLStreamWriter(fos, "UTF-8");
+			SaltXML10Writer writer = new SaltXML10Writer();
 			
 			xml.writeStartDocument("1.0");
 			xml.writeCharacters("\n");
-			SaltXML10Writer.writeXMIRootElement(xml);
+			writer.writeXMIRootElement(xml);
 
 			// store all objects in one single file
-			SaltXML10Writer writer = new SaltXML10Writer(tmpFile);
-			writer.writeSaltProject(xml, proj);
-			writer.writeDocumentGraph(xml, doc1.getDocumentGraph());
-			writer.writeDocumentGraph(xml, doc2.getDocumentGraph());
+			writer.writeObjects(xml, proj, doc1.getDocumentGraph(), doc2.getDocumentGraph());
 			
 			xml.writeEndDocument();
 
