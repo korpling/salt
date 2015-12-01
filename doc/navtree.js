@@ -5,9 +5,9 @@ var NAVTREE =
     [ "Create a Salt model", "create.html", null ],
     [ "Identifiers in Salt", "md__var_lib_jenkins_jobs_salt__r_e_l_e_a_s_e_workspace_salt-doc_src_main_doxygen_identifier.html", null ],
     [ "Comparing Salt models", "isomorphie.html", null ],
-    [ "Persist and Load", "md__var_lib_jenkins_jobs_salt__r_e_l_e_a_s_e_workspace_salt-doc_src_main_doxygen_persist.html", null ],
+    [ "Persist and Load", "persist.html", null ],
     [ "Generating sample models", "sample.html", null ],
-    [ "Traversing graphs", "md__var_lib_jenkins_jobs_salt__r_e_l_e_a_s_e_workspace_salt-doc_src_main_doxygen_traverse.html", null ],
+    [ "Traversing graphs", "traverse.html", null ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],

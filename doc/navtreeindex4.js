@@ -141,8 +141,6 @@ var NAVTREEINDEX4 =
 "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_dictionary.html":[7,0,0,0,0,8,0,0,2],
 "isomorphie.html":[3],
 "md__var_lib_jenkins_jobs_salt__r_e_l_e_a_s_e_workspace_salt-doc_src_main_doxygen_identifier.html":[2],
-"md__var_lib_jenkins_jobs_salt__r_e_l_e_a_s_e_workspace_salt-doc_src_main_doxygen_persist.html":[4],
-"md__var_lib_jenkins_jobs_salt__r_e_l_e_a_s_e_workspace_salt-doc_src_main_doxygen_traverse.html":[6],
 "namespaceorg_1_1corpus__tools_1_1salt.html":[7,0,0,0,0],
 "namespaceorg_1_1corpus__tools_1_1salt.html#a1893b9a8e235653e2882f77a702cb072":[7,0,0,0,0,12,0],
 "namespaceorg_1_1corpus__tools_1_1salt.html#a4646b74e853456f3b2e8bd7b7fc58fd9":[7,0,0,0,0,12,5],
@@ -184,5 +182,7 @@ var NAVTREEINDEX4 =
 "namespaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence.html":[7,0,0,0,0,8,0,0],
 "namespaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot.html":[7,0,0,0,0,8,0,0,0],
 "pages.html":[],
-"sample.html":[5]
+"persist.html":[4],
+"sample.html":[5],
+"traverse.html":[6]
 };

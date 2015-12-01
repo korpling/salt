@@ -79,7 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('md__var_lib_jenkins_jobs_salt__r_e_l_e_a_s_e_workspace_salt-doc_src_main_doxygen_traverse.html','');});
+$(document).ready(function(){initNavTree('traverse.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -118,10 +118,10 @@ $(document).ready(function(){initNavTree('md__var_lib_jenkins_jobs_salt__r_e_l_e
 </div><!-- fragment --><p>In this case, node <em>d</em> will be visited after <em>a,b,c</em> have been visited. In breadth-first mode, the order of the traversal is the other way around, i.e. the nodes <em>a,b,d</em> will be visited before node <em>c</em>.</p>
 <p>To define the behavior of a traversal, we provide these types, which are combinations of the direction and the order of a traversal:</p>
 <ul>
-<li>org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST</li>
-<li>org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST</li>
-<li>org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST</li>
-<li>org.corpus_tools.salt.core.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST</li>
+<li>org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE::TOP_DOWN_DEPTH_FIRST</li>
+<li>org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE::TOP_DOWN_BREADTH_FIRST</li>
+<li>org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE::BOTTOM_UP_DEPTH_FIRST</li>
+<li>org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE::BOTTOM_UP_BREADTH_FIRST</li>
 </ul>
 <p>The traversal mechanism uses a callback, therefore you need a class implementing the interface <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_graph_traverse_handler.html">GraphTraverseHandler</a>. This interface declares the following three methods, which need to be implemented:</p>
 <div class="fragment"><div class="line"><span class="keyword">public</span> <span class="keywordtype">boolean</span> checkConstraint( GRAPH_TRAVERSE_TYPE traversalType, </div>
@@ -225,13 +225,13 @@ $(document).ready(function(){initNavTree('md__var_lib_jenkins_jobs_salt__r_e_l_e
 <div class="line">}, <span class="keyword">false</span>);</div>
 <div class="line"></div>
 <div class="line">}</div>
-</div><!-- fragment --><p>To learn how to persist and load a Salt model, please read the article persist. </p>
+</div><!-- fragment --><p>To learn how to persist and load a Salt model, please read the article <a class="el" href="persist.html">Persist and Load</a>. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Nov 25 2015 18:00:07 for Salt by
+    <li class="footer">Generated on Tue Dec 1 2015 15:37:32 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
