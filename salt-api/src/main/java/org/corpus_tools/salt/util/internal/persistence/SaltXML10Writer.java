@@ -147,7 +147,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 		}
 		
-		writtenRootObjects = new ArrayList<>(filteredObjects.size());
+		if(writtenRootObjects == null) {
+			writtenRootObjects = new ArrayList<>(filteredObjects.size());
+		}
 		
 		for(Object o : filteredObjects) {
 			if(o instanceof SaltProject) {
