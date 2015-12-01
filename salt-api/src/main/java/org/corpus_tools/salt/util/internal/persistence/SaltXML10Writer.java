@@ -468,7 +468,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		return (retVal);
 	}
-
+	
 	/**
 	 * Writes the passed node object to the passed {@link XMLStreamWriter}.
 	 * 
@@ -480,6 +480,22 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 * @throws XMLStreamException
 	 */
 	public void writeNode(XMLStreamWriter xml, Node node, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
+		writeNode(xml, null, node, layerPositions);
+	}
+
+	/**
+	 * Writes the passed node object to the passed {@link XMLStreamWriter}.
+	 * 
+	 * @param node
+	 *            to be persist
+	 * @param rootIndex The index of the root object in the XML document.
+	 *					If there is only one root object in the XML file this can be null.
+	 * @param xml
+	 *            stream to write data to
+	 * @param layerPositions
+	 * @throws XMLStreamException
+	 */
+	public void writeNode(XMLStreamWriter xml, Integer rootIndex, Node node, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -516,7 +532,11 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					layerAtt.append(" ");
 				}
 				isFirst = false;
-				layerAtt.append("//@layers.");
+				layerAtt.append("/");
+				if(rootIndex != null) {
+					layerAtt.append(rootIndex);
+				}
+				layerAtt.append("/@layers.");
 				layerAtt.append(layerPositions.get(layerIt.next()));
 			}
 			xml.writeAttribute(ATT_LAYERS, layerAtt.toString());
@@ -538,7 +558,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		xml.writeEndElement();
 	}
-
+	
 	/**
 	 * Writes the passed relation object to the passed {@link XMLStreamWriter}.
 	 * 
@@ -552,6 +572,24 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 * @throws XMLStreamException
 	 */
 	public void writeRelation(XMLStreamWriter xml, Relation relation, Map<? extends Node, Integer> nodePositions, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
+		writeRelation(xml, null, relation, nodePositions, layerPositions);
+	}
+
+	/**
+	 * Writes the passed relation object to the passed {@link XMLStreamWriter}.
+	 * 
+	 * @param relation
+	 *            to be persist
+	 * @param xml
+	 *            stream to write data to
+	 * @param rootIndex The index of the root object in the XML document. 
+	 *					If there is only one root object in the XML file this can be null.
+	 * @param nodePositions
+	 *            a map containing all positions of nodes in the list of nodes
+	 * @param layerPositions
+	 * @throws XMLStreamException
+	 */
+	public void writeRelation(XMLStreamWriter xml, Integer rootIndex, Relation relation, Map<? extends Node, Integer> nodePositions, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -582,9 +620,14 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
 		int sourcePos = nodePositions.get(relation.getSource());
 		int targetPos = nodePositions.get(relation.getTarget());
-		xml.writeAttribute(ATT_SOURCE, "//@nodes." + sourcePos);
-		xml.writeAttribute(ATT_TARGET, "//@nodes." + targetPos);
-
+		if(rootIndex == null) {
+			xml.writeAttribute(ATT_SOURCE, "//@nodes." + sourcePos);
+			xml.writeAttribute(ATT_TARGET, "//@nodes." + targetPos);
+		} else {
+			xml.writeAttribute(ATT_SOURCE, "/" + rootIndex + "/@nodes." + sourcePos);
+			xml.writeAttribute(ATT_TARGET, "/" + rootIndex + "/@nodes." + targetPos);
+		}
+		
 		// write layers
 		if (relation.getLayers().size() > 0) {
 			StringBuilder layerAtt = new StringBuilder();
@@ -595,7 +638,11 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					layerAtt.append(" ");
 				}
 				isFirst = false;
-				layerAtt.append("//@layers.");
+				layerAtt.append("/");
+				if(rootIndex != null) {
+					layerAtt.append(rootIndex);
+				}
+				layerAtt.append("/@layers.");
 				layerAtt.append(layerPositions.get(layerIt.next()));
 			}
 			xml.writeAttribute(ATT_LAYERS, layerAtt.toString());
@@ -617,7 +664,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		xml.writeEndElement();
 	}
-
+	
 	/**
 	 * Writes the passed relation object to the passed {@link XMLStreamWriter}.
 
@@ -632,7 +679,31 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            list of relations
 	 * @throws XMLStreamException
 	 */
-	public void writeLayer(XMLStreamWriter xml, Layer layer, Map<SNode, Integer> nodePositions, Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
+	public void writeLayer(XMLStreamWriter xml, 
+			Layer layer, Map<SNode, Integer> nodePositions, 
+			Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
+		writeLayer(xml, null, layer, nodePositions, relPositions);
+	}
+
+	/**
+	 * Writes the passed relation object to the passed {@link XMLStreamWriter}.
+
+	 * @param layer
+	 * @param xml
+	 *            stream to write data to
+	 * @param rootIndex The index of the root object in the XML document. 
+	 *					If there is only one root object in the XML file this can be null.
+	 * @param nodePositions
+	 *            a map containing all positions of a single node in the list of
+	 *            nodes
+	 * @param relPositions
+	 *            a map containing all positions of a single relation in the
+	 *            list of relations
+	 * @throws XMLStreamException
+	 */
+	public void writeLayer(XMLStreamWriter xml, Integer rootIndex, 
+			Layer layer, Map<SNode, Integer> nodePositions, 
+			Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -651,7 +722,11 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					nodeAtt.append(" ");
 				}
 				isFirst = false;
-				nodeAtt.append("//@nodes.");
+				nodeAtt.append("/");
+				if(rootIndex != null) {
+					nodeAtt.append(rootIndex);
+				}
+				nodeAtt.append("/@nodes.");
 				nodeAtt.append(nodePositions.get(nodeIt.next()));
 			}
 			xml.writeAttribute(ATT_NODES, nodeAtt.toString());
