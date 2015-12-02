@@ -25,4 +25,5 @@ Salt is not limited to a specific set of annotation layers. Since Salt is a grap
 * Homepage: http://corpus-tools.org/salt
 * Code: https://github.com/korpling/salt
 * Bug and issue tracking: https://github.com/korpling/salt/issues
-* Snaphot documentation https://korpling.github.io/salt/doc-snapshot/
+* User guide and Javadoc https://korpling.github.io/salt/doc/
+* User guide and Javadoc (Snaphot) documentation https://korpling.github.io/salt/doc-snapshot/
