@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.corpus-tools</groupId>
 	<artifactId>salt</artifactId>
@@ -9,7 +10,7 @@
 		<module>salt-api</module>
 		<module>salt-doc</module>
 	</modules>
-		<developers>
+	<developers>
 		<developer>
 			<name>Florian Zipser</name>
 			<email>saltnpepper@lists.hu-berlin.de</email>
@@ -44,8 +45,8 @@
 		<connection>scm:git:git://github.com/korpling/salt.git</connection>
 		<developerConnection>scm:git:git@github.com:korpling/salt.git</developerConnection>
 		<url>https://github.com/korpling/salt</url>
-	  <tag>salt-3.0.0</tag>
-  </scm>
+		<tag>salt-3.0.0</tag>
+	</scm>
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
@@ -222,7 +223,7 @@
 							<goal>perform</goal>
 						</goals>
 						<configuration>
-<!--							<pomFileName>salt/pom.xml</pomFileName> -->
+							<!-- <pomFileName>salt/pom.xml</pomFileName> -->
 						</configuration>
 					</execution>
 				</executions>
@@ -286,7 +287,7 @@
 		</plugins>
 		<finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName>
 	</build>
-		<profiles>
+	<profiles>
 		<profile>
 			<id>release</id>
 			<build>
