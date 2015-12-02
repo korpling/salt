@@ -149,11 +149,6 @@
 		<name>Humboldt-Universität zu Berlin, INRIA</name>
 	</organization>
 	<build>
-		<extensions>
-			<!-- Enabling the use of FTP -->
-			<!-- <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ssh-external</artifactId> 
-				<version>1.0</version> </extension> -->
-		</extensions>
 		<plugins>
 			<!-- a plugin to clean the project when calling mvn clean (removes META-INF 
 				and OSGI-INF) -->
