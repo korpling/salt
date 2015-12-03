@@ -396,8 +396,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 * @throws XMLStreamException
 	 */
 	public void writeLabel(XMLStreamWriter xml, Label label) throws XMLStreamException {
-		// ignore when label is reference to SDocument
-		if (label != null && label.getValue() instanceof SDocument) {
+		// ignore when label is reference to SDocument or SDocumentGraph
+		if (label != null && (label.getValue() instanceof SDocument 
+				|| label.getValue() instanceof SDocumentGraph)) {
 			return;
 		}
 
