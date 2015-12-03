@@ -214,9 +214,6 @@
 						<goals>
 							<goal>perform</goal>
 						</goals>
-						<configuration>
-							<!-- <pomFileName>salt/pom.xml</pomFileName> -->
-						</configuration>
 					</execution>
 				</executions>
 				<configuration>
