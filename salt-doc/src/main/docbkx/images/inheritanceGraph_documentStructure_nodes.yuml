@@ -5,5 +5,5 @@
 [SStructuredNode]^-[SToken]
 [SNode]^-[SSequentialDS]
 [SSequentialDS]^-[STextualDS]
-[SSequentialDS]^-[SAudioDataSource]
+[SSequentialDS]^-[SMedialDS]
 [SSequentialDS]^-[STimeline]

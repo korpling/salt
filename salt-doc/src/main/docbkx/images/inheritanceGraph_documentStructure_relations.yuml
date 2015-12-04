@@ -3,7 +3,7 @@
 [SRelation]^-[SSequentialRelation]
 [SSequentialRelation]^-[STimelineRelation]
 [SSequentialRelation]^-[STextualRelation]
-
+[SSequentialRelation]^-[SMedialRelation]
 [SRelation]^-[STextOverlappingRelation]
 
 [STextOverlappingRelation]^-[SDominanceRelation]
@@ -12,6 +12,5 @@
 [STextOverlappingRelation]^-[SSpanningRelation]
 [STimeOverlappingRelation]^-[SSpanningRelation]
 
-[SRelation]^-[SAudioDSRelation]
 [SRelation]^-[SOrderRelation]
 [SRelation]^-[SPointingRelation]

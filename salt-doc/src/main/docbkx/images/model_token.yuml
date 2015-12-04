@@ -1,4 +1,4 @@
 //see yuml.me
-[STextualRelation|sStart : String;sEnd : String]-sToken>[SToken]
-[STextualRelation]-sTextualDS>[STextualDS]
+[STextualRelation|start : Integer;end : Integer]-token>[SToken]
+[STextualRelation]-textualDS>[STextualDS]
 
