@@ -43,6 +43,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
 import com.google.common.io.BaseEncoding;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class reads the XMI structure of SaltXML and creates the corresponding
@@ -62,28 +66,55 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 		currentContainer = new Stack<Object>();
 	}
 
-	private Object saltObject = null;
-
+	private final List<Object> rootObjects = new LinkedList<>();
+	
+	private static final Pattern RELATION_REF = Pattern.compile("/[0-9]*/@((sCorpusGraphs)|(nodes))\\.(?<nr>[0-9]+)"); 
+	
+	private static final Pattern LAYER_REF = Pattern.compile("/[0-9]*/@layers\\.");
+	
 	/**
-	 * Sets the Salt object to be returned. This should be the root container
-	 * object of the passed file. This object is only set once.
+	 * Adds an object. Also adds it to the list of root objects if the current container stack is empty.
 	 * 
 	 **/
-	private void setSaltObject(Object saltObject) {
-		if (this.saltObject == null) {
-			this.saltObject = saltObject;
+	private void addObject(Object object) {
+		
+		// Only add the object if the current container stack is empty, thus this
+		// object is a root.
+		if(currentContainer.isEmpty()) {
+			rootObjects.add(object);
+			
+			// if there is a new root object all the indexes must be reset
+			nodes.clear();
+			relations.clear();
+			layers.clear();
+			layerIdx = 0;
+			saltProject = null;
 		}
+		currentContainer.push(object);
 	}
 
 	/**
 	 * Returns the object, which has been loaded.
+	 * If there are multiple root objects the first one is returned.
 	 * 
 	 * @return
 	 */
 	public Object getSaltObject() {
-		return saltObject;
+		if(rootObjects.isEmpty()) {
+			return null;
+		} else {
+			return rootObjects.get(0);
+		}
 	}
 
+	/**
+	 * Get an unmodifiable list of all root objects.
+	 * @return 
+	 */
+	public List<Object> getRootObjects() {
+		return Collections.unmodifiableList(rootObjects);
+	}
+	
 	/** This is a container object mostly used for labels. **/
 	private Stack<Object> currentContainer = null;
 	/** current salt project if file is a corpus structure **/
@@ -102,24 +133,21 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if (TAG_SALT_PROJECT_FULL.equals(qName)) {
 			SaltProject project = SaltFactory.createSaltProject();
-			setSaltObject(project);
-			saltProject = project;
 			String sName = attributes.getValue(ATT_SNAME);
 			if (sName != null) {
 				project.setName(sName);
 			}
-			currentContainer.push(project);
+			addObject(project);
+			saltProject = project;
 		} else if (TAG_SCORPUS_GRAPH.equals(qName)) {
 			SCorpusGraph graph = SaltFactory.createSCorpusGraph();
-			setSaltObject(graph);
+			addObject(graph);
 			if (saltProject != null) {
 				saltProject.addCorpusGraph(graph);
 			}
-			currentContainer.push(graph);
 		} else if (TAG_SDOCUMENT_GRAPH.equals(qName)) {
 			SDocumentGraph graph = SaltFactory.createSDocumentGraph();
-			setSaltObject(graph);
-			currentContainer.push(graph);
+			addObject(graph);
 		} else if (TAG_NODES.equals(qName)) {
 			SNode sNode = null;
 			String type = attributes.getValue(ATT_TYPE);
@@ -141,13 +169,12 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				sNode = SaltFactory.createSDocument();
 			}
 			if (sNode != null) {
-				setSaltObject(sNode);
-				currentContainer.push(sNode);
+				addObject(sNode);
 				nodes.add(sNode);
 			}
 			String layersStr = attributes.getValue(ATT_LAYERS);
 			if (layersStr != null) {
-				layersStr = layersStr.replace("//@layers.", "");
+				layersStr = LAYER_REF.matcher(layersStr).replaceAll("");
 				String[] layerNums = layersStr.split(" ");
 				if (layerNums.length > 0) {
 					for (String layerNum : layerNums) {
@@ -185,8 +212,19 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				sRel = SaltFactory.createSCorpusDocumentRelation();
 			}
 			if ((sRel != null) && (target != null) && (source != null)) {
-				Integer sourceIdx = Integer.parseInt(source.replaceAll("((//@sCorpusGraphs[.]0)|/)/@nodes.", ""));
-				Integer targetIdx = Integer.parseInt(target.replaceAll("((//@sCorpusGraphs[.]0)|/)/@nodes.", ""));
+				Matcher matcherSource = RELATION_REF.matcher(source);
+				if(!matcherSource.matches()) {
+					throw new SaltResourceException("Invalid source reference \"" 
+							+ source +"\" for relation");
+				}
+				Matcher matcherTarget = RELATION_REF.matcher(target);
+				if(!matcherTarget.matches()) {
+					throw new SaltResourceException("Invalid target reference \"" 
+							+ target +"\" for relation");
+				}
+				
+				Integer sourceIdx = Integer.parseInt(matcherSource.group("nr"));
+				Integer targetIdx = Integer.parseInt(matcherTarget.group("nr"));
 				if (sourceIdx >= nodes.size()) {
 					throw new SaltResourceException("Cannot find a source node '" + source + "' for relation. ");
 				}
@@ -200,16 +238,15 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				} else if (targetNode == null) {
 					throw new SaltResourceException("Cannot find a target node '" + target + "' for relation. ");
 				} else {
-					setSaltObject(sRel);
+					addObject(sRel);
 					sRel.setSource(sourceNode);
 					sRel.setTarget(targetNode);
 					relations.add(sRel);
-					currentContainer.push(sRel);
 				}
 			}
 			String layersStr = attributes.getValue(ATT_LAYERS);
 			if (layersStr != null) {
-				layersStr = layersStr.replace("//@layers.", "");
+				layersStr = LAYER_REF.matcher(layersStr).replaceAll("");
 				String[] layerNums = layersStr.split(" ");
 				if (layerNums.length > 0) {
 					for (String layerNum : layerNums) {
@@ -282,8 +319,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 						// "' and could not be added twice.");
 					}
 				}
-				setSaltObject(label);
-				currentContainer.push(label);
+				addObject(label);
 			}
 		} else if (TAG_LAYERS.equals(qName)) {
 			SLayer layer = layers.get(layerIdx.toString());

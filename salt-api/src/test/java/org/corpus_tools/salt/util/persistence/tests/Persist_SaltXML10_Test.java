@@ -21,14 +21,26 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Set;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SCorpus;
+import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.tests.SaltTestsUtil;
+import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
+import org.corpus_tools.salt.util.internal.Diff;
+import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Assert;
 import org.junit.Before;
@@ -244,7 +256,7 @@ public class Persist_SaltXML10_Test {
 	}
 
 	/**
-	 * Tests persisting a SaltProject structure (without storing the
+	 * Tests persisting a SaltProject structure (with storing the
 	 * SDocumentGraphs)
 	 */
 	@Test
@@ -270,7 +282,6 @@ public class Persist_SaltXML10_Test {
 		assertEquals(outFolder + "/rootCorpus/subCorpus1/doc2.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(1).getDocumentGraphLocation().toFileString());
 		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc3.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(2).getDocumentGraphLocation().toFileString());
 		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc4.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(3).getDocumentGraphLocation().toFileString());
-
 	}
 
 	/**
@@ -300,5 +311,70 @@ public class Persist_SaltXML10_Test {
 		assertEquals(1.2345f, f, 0.0f);
 
 	}
+	
+	/**
+	 * Test reference generation when there is more than one content root.
+	 * EMF reference paths are relative to the index of the root content object.
+	 * If only one is included in an XML file "//" is used as a shortcut, but when
+	 * having more than one content objects the references must look like "/0/", "/1/" etc.
+	 */
+	@Test
+	public void testLoadStore_MultipleContentRoots()
+	{
 
+		SaltProject proj = SaltFactory.createSaltProject();
+		proj.setName("Test");
+		SCorpusGraph cg = proj.createCorpusGraph();
+		
+		SCorpus rootCorpus = cg.createCorpus(null, "root");
+		
+		SDocument doc1 = cg.createDocument(rootCorpus, "doc1");
+		SDocument doc2 = cg.createDocument(rootCorpus, "doc2");
+
+		SampleGenerator.createDocumentStructure(doc1);
+		SampleGenerator.createDocumentStructure(doc2);
+		
+
+		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore_MultipleContentRoots") + "/MultipleContentRoots.salt");
+
+		XMLOutputFactory outFactory = XMLOutputFactory.newFactory();
+		try (FileOutputStream fos = new FileOutputStream(tmpFile)) {
+			
+			XMLStreamWriter xml = outFactory.createXMLStreamWriter(fos, "UTF-8");
+			SaltXML10Writer writer = new SaltXML10Writer();
+			
+			xml.writeStartDocument("1.0");
+			xml.writeCharacters("\n");
+			writer.writeXMIRootElement(xml);
+
+			// store all objects in one single file
+			writer.writeObjects(xml, proj, doc1.getDocumentGraph(), doc2.getDocumentGraph());
+			
+			xml.writeEndDocument();
+
+			// restore the objects
+			URI path = URI.createFileURI(tmpFile.getAbsolutePath());
+			List<Object> roots = SaltUtil.loadObjects(path);
+
+			assertEquals(3, roots.size());
+			assertTrue(roots.get(0) instanceof SaltProject);
+			assertTrue(roots.get(1) instanceof SDocumentGraph);
+			assertTrue(roots.get(2) instanceof SDocumentGraph);
+
+			SDocumentGraph loadedDoc1 = (SDocumentGraph) roots.get(1);
+			SDocumentGraph loadedDoc2 = (SDocumentGraph) roots.get(2);
+
+			Diff diff1 = new Diff(doc1.getDocumentGraph(), loadedDoc1);
+			Set<Difference> differencesForDoc1 = diff1.findDiffs();
+			assertEquals(0, differencesForDoc1.size());
+			
+			Diff diff2 = new Diff(doc2.getDocumentGraph(), loadedDoc2);
+			Set<Difference> differencesForDoc2 = diff2.findDiffs();
+			assertEquals(0, differencesForDoc2.size());
+			
+		} catch (IOException | XMLStreamException ex) {
+			Assert.assertNull(ex);
+		}
+}
+	
 }

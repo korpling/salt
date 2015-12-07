@@ -376,7 +376,7 @@ public class SaltUtil {
 		}
 		return (globalId.toString());
 	}
-
+	
 	// ================================================> Persistence SaltXML
 	/**
 	 * Loads an object coming from a SaltXML (.{@link #FILE_ENDING_SALT_XML})
@@ -387,6 +387,24 @@ public class SaltUtil {
 	 * @return loaded object
 	 */
 	public static Object load(URI location) {
+		List<Object> objects = loadObjects(location);
+		if(objects == null || objects.isEmpty()) {
+			return null;
+		} else {
+			return objects.get(0);
+		}
+	}
+
+	// ================================================> Persistence SaltXML
+	/**
+	 * Loads a list of root objects coming from a SaltXML (.{@link #FILE_ENDING_SALT_XML})
+	 * and returns it.
+	 * 
+	 * @param objectURI
+	 *            {@link URI} to SaltXML file containing the object
+	 * @return loaded objects
+	 */
+	public static List<Object> loadObjects(URI location) {
 		if (location == null) {
 			throw new SaltResourceException("Cannot load Salt object, because the given uri is null.");
 		}
@@ -431,7 +449,7 @@ public class SaltUtil {
 				throw new SaltResourceException("Cannot load Salt object from file'" + objectFile + "', because of a nested exception. ", e);
 			}
 		}
-		return ((Object) contentHandler.getSaltObject());
+		return contentHandler.getRootObjects();
 	}
 
 	/**

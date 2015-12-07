@@ -69,6 +69,9 @@ import org.eclipse.emf.common.util.URI;
 
 import com.ctc.wstx.stax.WstxOutputFactory;
 import com.google.common.io.BaseEncoding;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 public class SaltXML10Writer implements SaltXML10Dictionary {
 
@@ -116,7 +119,52 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 
 	private File path = null;
 	private final XMLOutputFactory xmlFactory = new WstxOutputFactory();
+	
+	/**
+	 * List of already written root objects or null if there is only one root object.
+	 */
+	private List<Object> writtenRootObjects = null;
 
+	/**
+	 * Write a number of root objects (objects without a container) to XML.
+	 * @param xml
+	 * @param objects List of objects of type {@link SaltProject}, {@link SDocumentGraph} or {@link SCorpusGraph}
+	 */
+	public void writeObjects(XMLStreamWriter xml, Object... objects) {
+		
+		List<Object> filteredObjects = new ArrayList<>(objects.length);
+		
+		// get the valid objects that we can save
+		for (Object o : objects) {
+			if (o instanceof SaltProject
+					|| o instanceof SDocumentGraph
+					|| o instanceof SCorpusGraph) {
+				filteredObjects.add(o);
+			} else {
+				throw new SaltResourceException("Invalid type \"" 
+						+ o.getClass().getSimpleName() + "\". Root objects "
+						+ "must be either of type SaltProject, SDocumentGraph of SCorpusGraph");
+			}
+		}
+		
+		if(writtenRootObjects == null) {
+			writtenRootObjects = new ArrayList<>(filteredObjects.size());
+		}
+		
+		for(Object o : filteredObjects) {
+			if(o instanceof SaltProject) {
+				writeSaltProject(xml, (SaltProject) o);
+			} else if(o instanceof SDocumentGraph) {
+				writeDocumentGraph(xml, (SDocumentGraph) o);
+			} else if(o instanceof SCorpusGraph) {
+				writeCorpusGraph(xml, (SCorpusGraph) o, true);
+			}
+			// add it to the list of already written objects
+			writtenRootObjects.add(o);
+		}
+		
+	}
+	
 	/**
 	 * Writes a Salt project to the file given by {@link #getPath()}.
 	 * 
@@ -234,7 +282,6 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			if (graph.getNodes() != null) {
 				Iterator<SNode> nodeIt = graph.getNodes().iterator();
 				Integer position = 0;
-				position = 0;
 				while (nodeIt.hasNext()) {
 					SNode node = nodeIt.next();
 					writeNode(xml, node, null);
@@ -444,6 +491,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 * <li>{@link Float} - it is prefixed with "F::"</li>
 	 * <li>{@link URI} - it is prefixed with "U::"</li>
 	 * </ul>
+	 * @param value
+	 * @return 
 	 */
 	public String marshallValue(Object value) {
 		String retVal = null;
@@ -468,6 +517,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		return (retVal);
 	}
+	
 
 	/**
 	 * Writes the passed node object to the passed {@link XMLStreamWriter}.
@@ -476,9 +526,10 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            to be persist
 	 * @param xml
 	 *            stream to write data to
+	 * @param layerPositions
 	 * @throws XMLStreamException
 	 */
-	public void writeNode(XMLStreamWriter xml, Node node, Map<SLayer, Integer> layerPositions) throws XMLStreamException {
+	public void writeNode(XMLStreamWriter xml, Node node, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -515,7 +566,11 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					layerAtt.append(" ");
 				}
 				isFirst = false;
-				layerAtt.append("//@layers.");
+				layerAtt.append("/");
+				if(writtenRootObjects != null) {
+					layerAtt.append(writtenRootObjects.size());
+				}
+				layerAtt.append("/@layers.");
 				layerAtt.append(layerPositions.get(layerIt.next()));
 			}
 			xml.writeAttribute(ATT_LAYERS, layerAtt.toString());
@@ -547,9 +602,10 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            stream to write data to
 	 * @param nodePositions
 	 *            a map containing all positions of nodes in the list of nodes
+	 * @param layerPositions
 	 * @throws XMLStreamException
 	 */
-	public void writeRelation(XMLStreamWriter xml, Relation relation, Map<SNode, Integer> nodePositions, Map<SLayer, Integer> layerPositions) throws XMLStreamException {
+	public void writeRelation(XMLStreamWriter xml, Relation relation, Map<? extends Node, Integer> nodePositions, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -580,9 +636,15 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
 		int sourcePos = nodePositions.get(relation.getSource());
 		int targetPos = nodePositions.get(relation.getTarget());
-		xml.writeAttribute(ATT_SOURCE, "//@nodes." + sourcePos);
-		xml.writeAttribute(ATT_TARGET, "//@nodes." + targetPos);
-
+		if(writtenRootObjects == null) {
+			xml.writeAttribute(ATT_SOURCE, "//@nodes." + sourcePos);
+			xml.writeAttribute(ATT_TARGET, "//@nodes." + targetPos);
+		} else {
+			int rootIndex = writtenRootObjects.size();
+			xml.writeAttribute(ATT_SOURCE, "/" + rootIndex + "/@nodes." + sourcePos);
+			xml.writeAttribute(ATT_TARGET, "/" + rootIndex + "/@nodes." + targetPos);
+		}
+		
 		// write layers
 		if (relation.getLayers().size() > 0) {
 			StringBuilder layerAtt = new StringBuilder();
@@ -593,7 +655,11 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					layerAtt.append(" ");
 				}
 				isFirst = false;
-				layerAtt.append("//@layers.");
+				layerAtt.append("/");
+				if(writtenRootObjects != null) {
+					layerAtt.append(writtenRootObjects.size());
+				}
+				layerAtt.append("/@layers.");
 				layerAtt.append(layerPositions.get(layerIt.next()));
 			}
 			xml.writeAttribute(ATT_LAYERS, layerAtt.toString());
@@ -615,12 +681,12 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		xml.writeEndElement();
 	}
+	
 
 	/**
 	 * Writes the passed relation object to the passed {@link XMLStreamWriter}.
-	 * 
-	 * @param relation
-	 *            to be persist
+
+	 * @param layer
 	 * @param xml
 	 *            stream to write data to
 	 * @param nodePositions
@@ -631,7 +697,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            list of relations
 	 * @throws XMLStreamException
 	 */
-	public void writeLayer(XMLStreamWriter xml, Layer layer, Map<SNode, Integer> nodePositions, Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
+	public void writeLayer(XMLStreamWriter xml, 
+			Layer layer, Map<SNode, Integer> nodePositions, 
+			Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -650,7 +718,11 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					nodeAtt.append(" ");
 				}
 				isFirst = false;
-				nodeAtt.append("//@nodes.");
+				nodeAtt.append("/");
+				if(writtenRootObjects != null) {
+					nodeAtt.append(writtenRootObjects.size());
+				}
+				nodeAtt.append("/@nodes.");
 				nodeAtt.append(nodePositions.get(nodeIt.next()));
 			}
 			xml.writeAttribute(ATT_NODES, nodeAtt.toString());
@@ -687,5 +759,19 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			xml.writeCharacters("\t");
 		}
 		xml.writeEndElement();
+	}
+	
+	public void writeXMIRootElement(XMLStreamWriter xml)
+			throws XMLStreamException
+	{
+		xml.writeStartElement(NS_XMI, "XMI", NS_VALUE_XMI);
+		xml.writeNamespace(NS_SDOCUMENTSTRUCTURE, NS_VALUE_SDOCUMENTSTRUCTURE);
+		xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
+		xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
+		xml.writeNamespace(NS_SALTCORE, NS_VALUE_SALTCORE);
+		xml.writeAttribute(NS_VALUE_XMI, ATT_XMI_VERSION, "2.0");
+		if(isPrettyPrint) {
+			xml.writeCharacters("\n");
+		}
 	}
 }
