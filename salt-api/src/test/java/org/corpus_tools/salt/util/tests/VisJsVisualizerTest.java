@@ -21,39 +21,16 @@ import org.junit.Test;
 public class VisJsVisualizerTest {
 	private final static String FSEP = System.getProperty("file.separator");
 	private final static String OUTPUT_FOLDER = SaltTestsUtil.getTempTestFolder().getAbsolutePath();
-	private final static String OUTPUT_FOLDER_MAIN_TEST = OUTPUT_FOLDER + FSEP + "pcc2_random_sentences";	
 	
 	private final static String INPUT_FOLDER =  "src"	+ FSEP+"test"	+ FSEP+ "resources" + FSEP + "VisJsTest" + FSEP + "sources";
-	private final static String INPUT_FILE_MAIN_TEST = INPUT_FOLDER + FSEP + "pcc2_salt_random_sentence" + FSEP + "pcc2" + FSEP  + "match_0.salt";
+	private final static String INPUT_FILE_MAIN_TEST = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
 	
 	  
 	
-	
-	
-
-	//@Test
-	public void testHtmlWriter() {		
-		URI uri = URI.createFileURI(INPUT_FILE_MAIN_TEST);	
-		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
-		
-		try {
-			 URI outputFolderUri = URI.createFileURI(OUTPUT_FOLDER_MAIN_TEST);	
-			 try {
-				visJsVisualizer.visualize(outputFolderUri, true);
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
-	
 	@Test
 	public void testHtmlWriterWholeDocLoadJson() {
-		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
-		
+	//	String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
+		String inputFilePath = INPUT_FILE_MAIN_TEST;		
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "pcc_whole_doc_11299_load_json";	   
 		
 		URI uri = URI.createFileURI(inputFilePath);	
@@ -75,8 +52,8 @@ public class VisJsVisualizerTest {
 	
 	@Test
 	public void testHtmlWriterWholeDoc() {
-		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
-		
+	//	String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
+		String inputFilePath = INPUT_FILE_MAIN_TEST;		
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "pcc_whole_doc_11299";	   
 		
 		URI uri = URI.createFileURI(inputFilePath);	
@@ -96,46 +73,11 @@ public class VisJsVisualizerTest {
 		}	
 	}
 	
-	//@Test
-	public void testJson(){	
-		URI uri = URI.createFileURI(INPUT_FILE_MAIN_TEST);	
-		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
-		
-		visJsVisualizer.setNodeWriter(System.out);
-		visJsVisualizer.setEdgeWriter(System.out);
-		visJsVisualizer.setOptionsWriter(System.out);
-		visJsVisualizer.buildJSON();
-		try {
-			visJsVisualizer.buildOptions();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		BufferedWriter bw;
-				
-		try {
-			bw = visJsVisualizer.getNodeWriter();
-			bw.newLine();
-			bw.flush();	
-			
-			bw = visJsVisualizer.getEdgeWriter();		
-			bw.newLine();
-			bw.flush();	
-	
-			bw = visJsVisualizer.getOptionsWriter();
-			bw.flush();
-			bw.close();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	}
 	
 	//@Test
 	public void testJsonWholeCorpus(){
-		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP	+ "pcc2" + FSEP  + "11299.salt";
+	//	String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP	+ "pcc2" + FSEP  + "11299.salt";
+		String inputFilePath = INPUT_FILE_MAIN_TEST;		
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 		
@@ -174,7 +116,7 @@ public class VisJsVisualizerTest {
 	@Test
 	public void testHtmlWriterSampleLoadJson() {
 		SDocument doc = SaltFactory.createSDocument();
-		SampleGenerator.createSDocumentStructure(doc);	
+		SampleGenerator.createDocumentStructure(doc);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_load_json";	  
 		try {
@@ -195,7 +137,7 @@ public class VisJsVisualizerTest {
 	@Test
 	public void testHtmlWriterSample() {
 		SDocument doc = SaltFactory.createSDocument();
-		SampleGenerator.createSDocumentStructure(doc);	
+		SampleGenerator.createDocumentStructure(doc);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc";	  
 		try {
@@ -323,16 +265,16 @@ public class VisJsVisualizerTest {
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 	}
 	
-	//@Test(expected = SaltResourceException.class)
+	@Test(expected = SaltResourceException.class)
 	public void testInvalideSaltFormat(){
-		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_random_sentence_invalid_format" + FSEP + "pcc2" + FSEP + "match_0.salt";
+		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_invalid_format" + FSEP + "pcc2" + FSEP + "11299.salt";
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 	}
 	
-	//@Test(expected = SaltResourceException.class)
+	@Test(expected = SaltResourceException.class)
 	public void testAbsentSaltResource(){
-		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_random_sentence_absent_resource" + FSEP + "pcc2" + FSEP + "match_0.salt";
+		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_absent_resource" + FSEP + "pcc2" + FSEP + "11299.salt";
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 	}

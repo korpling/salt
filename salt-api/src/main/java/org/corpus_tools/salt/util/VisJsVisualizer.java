@@ -393,11 +393,21 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		        	}
 		        	catch(IOException e){
 		        		throw new SaltException("A problem occurred while writing JSON resources.");
-		        	}    	
-			 }
-			 else{		    		
-						writeHTML(outputFolder);		    		
-		    	}		    	
+		        	}catch(SaltParameterException e){
+						 throw new 	SaltParameterException(e.getMessage());
+					}catch(SaltException e){
+					 throw new 	SaltException(e.getMessage());
+					}    	
+				 }
+				 else{		
+					 try{
+						 writeHTML(outputFolder);		    
+					 }catch(SaltParameterException e){
+						 throw new 	SaltParameterException(e.getMessage());
+					}catch(SaltException e){
+					 throw new 	SaltException(e.getMessage());
+					}    										
+				 }		    	
 				
 				writeNodeImmediately = false;					 
 		
@@ -483,8 +493,15 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					+ "var nodesJson = " + NEWLINE);
 			xmlWriter.flush();
 			
-			buildJSON();	
-			
+				try{
+					buildJSON();	
+				}catch(SaltParameterException e){
+				 throw new 	SaltParameterException(e.getMessage());
+				}catch(SaltException e){
+				 throw new 	SaltException(e.getMessage());
+				}
+
+					
 				
 			if (nNodes < 20){
 			nodeDist = 100;
@@ -820,14 +837,20 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		
 	}
 	   
-	private void writeJSON () throws IOException {	
+	private void writeJSON () throws IOException, SaltParameterException, SaltException {	
 			jsonWriter.write("{");
 			jsonWriter.newLine();
 			jsonWriter.write("\"nodes\":");
 			jsonWriter.newLine();
 			jsonWriter.flush();
 			
-			buildJSON();
+			try{
+				buildJSON();	
+			}catch(SaltParameterException e){
+			 throw new 	SaltParameterException(e.getMessage());
+			}catch(SaltException e){
+			 throw new 	SaltException(e.getMessage());
+			}
 			
 			nodeWriter.flush();		
 			
