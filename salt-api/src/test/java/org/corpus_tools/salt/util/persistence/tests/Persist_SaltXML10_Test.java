@@ -348,7 +348,9 @@ public class Persist_SaltXML10_Test {
 			writer.writeXMIRootElement(xml);
 
 			// store all objects in one single file
-			writer.writeObjects(xml, proj, doc1.getDocumentGraph(), doc2.getDocumentGraph());
+			writer.writeObjects(xml, proj, doc1.getDocumentGraph()); 
+			// call writeObjects twice, the file should still contain the objects which where added before
+			writer.writeObjects(xml, doc2.getDocumentGraph());
 			
 			xml.writeEndDocument();
 
@@ -356,11 +358,13 @@ public class Persist_SaltXML10_Test {
 			URI path = URI.createFileURI(tmpFile.getAbsolutePath());
 			List<Object> roots = SaltUtil.loadObjects(path);
 
+			// we added 3 objects to the project, one salt project and two document graphs
 			assertEquals(3, roots.size());
 			assertTrue(roots.get(0) instanceof SaltProject);
 			assertTrue(roots.get(1) instanceof SDocumentGraph);
 			assertTrue(roots.get(2) instanceof SDocumentGraph);
 
+			// make sure the loaded document graphs are isomorph the ones we saved
 			SDocumentGraph loadedDoc1 = (SDocumentGraph) roots.get(1);
 			SDocumentGraph loadedDoc2 = (SDocumentGraph) roots.get(2);
 
