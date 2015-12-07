@@ -382,15 +382,21 @@ public class SaltUtil {
 	 * Loads an object coming from a SaltXML (.{@link #FILE_ENDING_SALT_XML})
 	 * and returns it.
 	 * 
-	 * @param objectURI
-	 *            {@link URI} to SaltXML file containing the object
+	 * If multiple objects are contained in the file it will only load the first one.
+	 * 
+	 * @param location
+	 *            {@link URI} to SaltXML file containing the object or {@code null} if the fule does not contain any objects.
 	 * @return loaded object
+	 * 
+	 * @see #loadObjects(org.eclipse.emf.common.util.URI) loadObjects(...): similar function that returns all the objects of a file.
 	 */
 	public static Object load(URI location) {
+		// actially get all the objects that are included in the file
 		List<Object> objects = loadObjects(location);
 		if(objects == null || objects.isEmpty()) {
 			return null;
 		} else {
+			// only return the first one.s
 			return objects.get(0);
 		}
 	}

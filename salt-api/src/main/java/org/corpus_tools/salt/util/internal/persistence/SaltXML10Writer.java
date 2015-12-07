@@ -134,7 +134,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		
 		List<Object> filteredObjects = new ArrayList<>(objects.length);
 		
-		// get the valid objects that we can save
+		// add the valid objects that we can save to a list, throw an error if an invalid object type is dectected
 		for (Object o : objects) {
 			if (o instanceof SaltProject
 					|| o instanceof SDocumentGraph
@@ -151,6 +151,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			writtenRootObjects = new ArrayList<>(filteredObjects.size());
 		}
 		
+		// decide which specialized serializatio function to call depending on the type of the object
 		for(Object o : filteredObjects) {
 			if(o instanceof SaltProject) {
 				writeSaltProject(xml, (SaltProject) o);
@@ -536,7 +537,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		xml.writeStartElement(TAG_NODES);
 		String type = "";
-		// write type
+		// write type as attribute
 		if (node instanceof STextualDS) {
 			type = TYPE_STEXTUALDS;
 		} else if (node instanceof STimeline) {
@@ -637,9 +638,11 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		int sourcePos = nodePositions.get(relation.getSource());
 		int targetPos = nodePositions.get(relation.getTarget());
 		if(writtenRootObjects == null) {
+			// write shorcut notation if there is only one root object in the file
 			xml.writeAttribute(ATT_SOURCE, "//@nodes." + sourcePos);
 			xml.writeAttribute(ATT_TARGET, "//@nodes." + targetPos);
 		} else {
+			// write full notation when there are multiple root objects in the file
 			int rootIndex = writtenRootObjects.size();
 			xml.writeAttribute(ATT_SOURCE, "/" + rootIndex + "/@nodes." + sourcePos);
 			xml.writeAttribute(ATT_TARGET, "/" + rootIndex + "/@nodes." + targetPos);
@@ -657,6 +660,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				isFirst = false;
 				layerAtt.append("/");
 				if(writtenRootObjects != null) {
+					// write full notation when there are multiple root objects in the file
 					layerAtt.append(writtenRootObjects.size());
 				}
 				layerAtt.append("/@layers.");
@@ -720,6 +724,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				isFirst = false;
 				nodeAtt.append("/");
 				if(writtenRootObjects != null) {
+					// write full notation when there are multiple root objects in the file
 					nodeAtt.append(writtenRootObjects.size());
 				}
 				nodeAtt.append("/@nodes.");
@@ -761,6 +766,14 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		xml.writeEndElement();
 	}
 	
+	/**
+	 * Writes an Salt XMI header to the {@link XMLStreamWriter}.
+	 * Salt XMI has a certain header structure (including the namespaces).
+	 * This helper function writes this header to an existing 
+	 * {@link XMLStreamWriter}.
+	 * @param xml
+	 * @throws XMLStreamException 
+	 */
 	public void writeXMIRootElement(XMLStreamWriter xml)
 			throws XMLStreamException
 	{

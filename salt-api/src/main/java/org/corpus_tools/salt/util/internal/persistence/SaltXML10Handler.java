@@ -68,8 +68,15 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 
 	private final List<Object> rootObjects = new LinkedList<>();
 	
+	/**
+	 * Pattern that matches the reference attributes of XMI for edges. 
+	 * The named matchgroup "nr" contains the index of the object which is references.
+	 */
 	private static final Pattern RELATION_REF = Pattern.compile("/[0-9]*/@((sCorpusGraphs)|(nodes))\\.(?<nr>[0-9]+)"); 
 	
+	/**
+	 * Patter that matches a layer reference.
+	 */
 	private static final Pattern LAYER_REF = Pattern.compile("/[0-9]*/@layers\\.");
 	
 	/**
@@ -212,6 +219,8 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				sRel = SaltFactory.createSCorpusDocumentRelation();
 			}
 			if ((sRel != null) && (target != null) && (source != null)) {
+				
+				// match both the source an target string if they are valid structured references
 				Matcher matcherSource = RELATION_REF.matcher(source);
 				if(!matcherSource.matches()) {
 					throw new SaltResourceException("Invalid source reference \"" 
@@ -223,15 +232,20 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 							+ target +"\" for relation");
 				}
 				
+				// get the match group containing the actual index number
 				Integer sourceIdx = Integer.parseInt(matcherSource.group("nr"));
 				Integer targetIdx = Integer.parseInt(matcherTarget.group("nr"));
+				
+				// check if the indexes are known
 				if (sourceIdx >= nodes.size()) {
 					throw new SaltResourceException("Cannot find a source node '" + source + "' for relation. ");
 				}
-				SNode sourceNode = nodes.get(sourceIdx);
 				if (targetIdx >= nodes.size()) {
 					throw new SaltResourceException("Cannot find a target node '" + target + "' for relation. ");
 				}
+				
+				// get the actual objects for the index
+				SNode sourceNode = nodes.get(sourceIdx);
 				SNode targetNode = nodes.get(targetIdx);
 				if (sourceNode == null) {
 					throw new SaltResourceException("Cannot find a source node '" + source + "' for relation. ");
