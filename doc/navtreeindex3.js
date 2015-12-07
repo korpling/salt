@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"functions_func_g.html":[7,2,1,5],
+"functions_func_i.html":[7,2,1,6],
+"functions_func_l.html":[7,2,1,7],
 "functions_func_m.html":[7,2,1,8],
 "functions_func_n.html":[7,2,1,9],
 "functions_func_p.html":[7,2,1,10],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#aca8b37ffa4f0a7d9c0883215d3d45a34":[7,0,0,0,0,1,6,7],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#ad4b3828e4df3610623e6c418199efec5":[7,0,0,0,0,1,6,0,1],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#af8de33e659f8858c75896f1b363812a8":[7,0,0,0,0,1,6,4],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#enumorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph_1_1_g_r_a_p_h___t_r_a_v_e_r_s_e___t_y_p_e":[7,0,0,0,0,1,6,0],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_layer.html":[7,0,0,0,0,1,7],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_meta_annotation.html":[7,0,0,0,0,1,8],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_named_element.html":[7,0,0,0,0,1,9]
+"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#enumorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph_1_1_g_r_a_p_h___t_r_a_v_e_r_s_e___t_y_p_e":[7,0,0,0,0,1,6,0]
 };

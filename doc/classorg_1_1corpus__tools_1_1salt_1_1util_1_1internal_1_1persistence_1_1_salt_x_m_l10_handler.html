@@ -122,6 +122,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae65b2e6b685aa91110cbd422e5b68d4e"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_handler.html#ae65b2e6b685aa91110cbd422e5b68d4e">getSaltObject</a> ()</td></tr>
 <tr class="memdesc:ae65b2e6b685aa91110cbd422e5b68d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the object, which has been loaded.  <a href="#ae65b2e6b685aa91110cbd422e5b68d4e">More...</a><br/></td></tr>
 <tr class="separator:ae65b2e6b685aa91110cbd422e5b68d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abea462b6c48a582904de601f5cdbd5b4"><td class="memItemLeft" align="right" valign="top">List&lt; Object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_handler.html#abea462b6c48a582904de601f5cdbd5b4">getRootObjects</a> ()</td></tr>
+<tr class="memdesc:abea462b6c48a582904de601f5cdbd5b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an unmodifiable list of all root objects.  <a href="#abea462b6c48a582904de601f5cdbd5b4">More...</a><br/></td></tr>
+<tr class="separator:abea462b6c48a582904de601f5cdbd5b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af31b277ca68aaf3d97fdf3181eb2929b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af31b277ca68aaf3d97fdf3181eb2929b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>startElement</b> (String uri, String localName, String qName, Attributes attributes)  throws SAXException </td></tr>
 <tr class="separator:af31b277ca68aaf3d97fdf3181eb2929b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -337,6 +340,24 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>TYPE_S
 <div class="textblock"><p>This class reads the XMI structure of SaltXML and creates the corresponding Salt object. </p>
 <dl class="section author"><dt>Author</dt><dd>florian </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="abea462b6c48a582904de601f5cdbd5b4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;Object&gt; org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler.getRootObjects </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get an unmodifiable list of all root objects. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ae65b2e6b685aa91110cbd422e5b68d4e"></a>
 <div class="memitem">
 <div class="memproto">
@@ -351,6 +372,7 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>TYPE_S
 </div><div class="memdoc">
 
 <p>Returns the object, which has been loaded. </p>
+<p>If there are multiple root objects the first one is returned.</p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
@@ -361,7 +383,7 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><b>TYPE_S
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>org</b></li><li class="navelem"><b>corpus_tools</b></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt.html">salt</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1util.html">util</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal.html">internal</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence.html">persistence</a></li><li class="navelem"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_handler.html">SaltXML10Handler</a></li>
-    <li class="footer">Generated on Thu Dec 3 2015 21:15:41 for Salt by
+    <li class="footer">Generated on Mon Dec 7 2015 13:38:01 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>
