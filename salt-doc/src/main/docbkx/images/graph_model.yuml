@@ -1,0 +1,8 @@
+//yuml.me
+[Relation]-target 1 >[Node]
+[Relation]-source 1 >[Node]
+[Layer]*-nodes *[Node]
+[Layer]*-relations *[Relation]
+[Graph]1 -layers *[Layer]
+[Graph]1-relations *[Relation]
+[Graph]1-nodes *[Relation]

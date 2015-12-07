@@ -1,0 +1,8 @@
+//see yuml.me
+
+[SStructuredNode]^-[SStructure]
+[SStructuredNode]^-[SToken]
+[SStructuredNode]^-[SSpan]
+[SDominanceRelation]-sSource>[SStructure]
+[SDominanceRelation]-sTarget>[SStructuredNode]
+

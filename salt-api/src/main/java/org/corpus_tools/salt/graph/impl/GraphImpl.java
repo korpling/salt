@@ -80,9 +80,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	}
 
 	/** Number of expected nodes to initialize indexes **/
-	protected int expectedNodes = 1000;
+	// protected int expectedNodes = 1000;
+	protected int expectedNodes = 16;
 	/** Number of expected relations to initialize indexes **/
-	protected int expectedRelations = 5000;
+	// protected int expectedRelations = 5000;
+	protected int expectedRelations = 16;
 	/**
 	 * Approximated node degree, which is {@link #expectedRelations} /
 	 * {@link #expectedNodes}
@@ -195,7 +197,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 			// if node already exists, create new Id
 			node.setId(idBase + "_" + (getNodes().size() + i));
 			i++;
-		}// if node Id already exists, create new Id
+		} // if node Id already exists, create new Id
 
 		// add node to internal list
 		nodes.add(node);
@@ -299,7 +301,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 					// adding relation to list of matching relations
 					retList.add(relation);
 				}
-			}// searching if relation goes to nodeId2
+			} // searching if relation goes to nodeId2
 		}
 		return (retList);
 	}

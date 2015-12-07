@@ -18,9 +18,7 @@
 package org.corpus_tools.salt.common;
 
 import java.util.List;
-import java.util.Map;
 
-import org.corpus_tools.salt.graph.Identifier;
 import org.eclipse.emf.common.util.URI;
 
 /**
@@ -84,6 +82,13 @@ public interface SaltProject {
 	/**
 	 * Loads data from URI into this SaltProject object. Data in location
 	 * saltProjectURI must be conform to SaltXML format.
+	 * <p>
+	 * This will load all document graphs into memory as well. If you only
+	 * intend to load the corpus structure call
+	 * {@link #loadCorpusStructure(org.eclipse.emf.common.util.URI) } instead.
+	 * Then you can load the single document graphs you are interested in with
+	 * {@link SDocument#loadDocumentGraph() }.
+	 * </p>
 	 * 
 	 * @param saltProjectURI
 	 *            the {@link URI} to the location to load the project
@@ -145,20 +150,10 @@ public interface SaltProject {
 	public void loadCorpusStructure(URI saltProjectURI);
 
 	/**
-	 * This method extracts the location of all {@link SDocumentGraph} objects,
-	 * which are persist in a file and are currently not loaded as model into
-	 * main memory. The returned value is a map, containing the
-	 * {@link SElementId} as an identifier and the location of the
-	 * {@link SDocumentGraph} object as an {@link URI}. To extract the
-	 * locations, the method runs through all {@link SDocument} objects (being
-	 * contained in the current {@link SaltProject}) containing the
-	 * {@link SDocumentGraph} objects and checks if the {@link SDocumentGraph}
-	 * object is loaded or peristed.
+	 * Creates a new corpus graph and adds it to the Salt project.
 	 * 
-	 * @return a map of {@link SElementId} of {@link SDocument} objects and the
-	 *         corresponding location as {@link URI}, an empty {@link Map}, if
-	 *         no {@link SDocumentGraph} object is persisted
+	 * @return the new created Salt project
 	 */
-	public Map<Identifier, URI> getDocumentGraphLocations();
+	public SCorpusGraph createCorpusGraph();
 
 } // SaltProject

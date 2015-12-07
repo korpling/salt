@@ -1,0 +1,3 @@
+//yuml.me
+[timeRel|start='0';end='1']->[tok1|Is]
+[timeRel]->[timeline|data='0 1 2 3 4 ...']

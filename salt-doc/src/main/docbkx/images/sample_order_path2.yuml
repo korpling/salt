@@ -1,0 +1,5 @@
+//see yuml.me
+
+[t1|'T']->[t2|'h']
+[t2]->[t3|'e']
+[t4|'The']->[t5|'streets']

@@ -1,0 +1,14 @@
+//see yuml.me
+
+[text1|Is this example more complicated than it appears to be?]
+[t11|?]->[text1]
+[t10|be]->[text1]
+[t9|to]->[text1]
+[t8|appears]->[text1]
+[t7|it]->[text1]
+[t6|than]->[text1]
+[t5|complicated]->[text1]
+[t4|more]->[text1]
+[t3|example]->[text1]
+[t2|this]->[text1]
+[t1|Is]->[text1]

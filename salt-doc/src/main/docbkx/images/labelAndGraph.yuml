@@ -1,0 +1,5 @@
+//yuml.me
+[Node]-*>[Label|namespace:String;name:String;value:Object]
+[Relation]-*>[Label]
+[Layer]-*>[Label]
+[Graph]-*>[Label]

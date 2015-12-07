@@ -242,7 +242,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            {@link SSpanningRelation} relation points to
 	 * @return the created {@link SSpan} node
 	 */
-	public SSpan createSpan(SToken sourceToken);
+	public SSpan createSpan(SToken... sourceToken);
 
 	/**
 	 * Creates a {@link SSpan} object, adds it to the graph and returns the new
@@ -268,7 +268,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            {@link SDominanceRelation} relation points to
 	 * @return {@link SStructure} node
 	 */
-	public SStructure createSStructure(SStructuredNode structure);
+	public SStructure createStructure(SStructuredNode... structure);
 
 	/**
 	 * Creates a new {@link SStructure} object, adds it to the graph and returns
@@ -367,7 +367,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, List<SALT_TYPE> relationTypes);
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
@@ -382,7 +382,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, List<SALT_TYPE> relationTypes);
+	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is
@@ -516,8 +516,8 @@ public interface SDocumentGraph extends SGraph {
 	 * tokenization made by the TreeTagger tokenizer. This method calls the
 	 * method {@link #createTokenizer()} and initializes with automatic detected
 	 * values. The language will be detected automatically for each
-	 * {@link STextualDS} object by use of the {@link TextCategorizer} (see: <a
-	 * href=
+	 * {@link STextualDS} object by use of the {@link TextCategorizer} (see:
+	 * <a href=
 	 * "http://textcat.sourceforge.net/doc/org/knallgrau/utils/textcat/TextCategorizer.html"
 	 * >http://textcat.sourceforge.net/doc/org/knallgrau/utils/textcat/
 	 * TextCategorizer.html</a>). If the language is one of the given ones:
@@ -526,9 +526,9 @@ public interface SDocumentGraph extends SGraph {
 	 * {@link #createTokenizer()}.
 	 * 
 	 * The used Treetagger is a reimplementation in Java with permission from
-	 * the original TreeTagger tokenizer in Perl by Helmut Schmid (see: <a
-	 * href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/"
-	 * >http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>). For
+	 * the original TreeTagger tokenizer in Perl by Helmut Schmid (see:
+	 * <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/" >
+	 * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>). For
 	 * each token detected in the text given by
 	 * <code>sTextualDS.getSText()</code> an {@link SToken} object is created
 	 * and linked with the {@link STextualDS} object via a new
@@ -545,9 +545,9 @@ public interface SDocumentGraph extends SGraph {
 	 * of the returned {@link Tokenizer} object. This method is used by the
 	 * method {@link #tokenize()}. The used Treetagger is a reimplementation in
 	 * Java with permission from the original TreeTagger tokenizer in Perl by
-	 * Helmut Schmid (see: <a
-	 * href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/"
-	 * >http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>). For
+	 * Helmut Schmid (see:
+	 * <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/" >
+	 * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/</a>). For
 	 * each token detected in the text given by
 	 * <code>sTextualDS.getSText()</code> an {@link SToken} object is created
 	 * and linked with the {@link STextualDS} object via a new
@@ -604,7 +604,8 @@ public interface SDocumentGraph extends SGraph {
 	 * This  is    a     text.
 	 * </pre>
 	 * 
-	 * the call insertSTokensAt(sTextualDS, 5, {"additional" "text"}, true);<br/>
+	 * the call insertSTokensAt(sTextualDS, 5, {"additional" "text"}, true);
+	 * <br/>
 	 * results in <br/>
 	 * 
 	 * <pre>
@@ -656,7 +657,17 @@ public interface SDocumentGraph extends SGraph {
 	 * @param overlappingRelationTypes
 	 *            relation types
 	 */
-	public List<SToken> getOverlappedTokens(SNode overlappingNode, List<SALT_TYPE> overlappingRelationTypes);
+	public List<SToken> getOverlappedTokens(SNode overlappingNode, SALT_TYPE... overlappingRelationTypes);
+
+	/**
+	 * Returns all tokens in the graph, which are overlapped by the passed node
+	 * and are reachable via {@link SALT_TYPE#STEXT_OVERLAPPING_RELATION} having
+	 * at least one of the passed types.
+	 * 
+	 * @param overlappingNode
+	 *            anchor node, which overlaps the returned tokens
+	 */
+	public List<SToken> getOverlappedTokens(SNode overlappingNode);
 
 	/**
 	 * This method returns the exact text overlapped in the {@link STextualDS}

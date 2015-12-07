@@ -144,6 +144,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			sFeature = SaltFactory.createSFeature();
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			sFeature.setName(SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION);
+			sFeature.setValue(location);
 			addFeature(sFeature);
 		}
 		sFeature.setValue(location.toString());

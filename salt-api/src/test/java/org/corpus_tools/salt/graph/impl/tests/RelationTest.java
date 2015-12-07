@@ -83,10 +83,10 @@ public class RelationTest {
 		assertEquals(graph, getFixture().getGraph());
 		getFixture().setGraph(null);
 		assertNull(getFixture().getGraph());
-		
+
 		getFixture().setGraph(graph);
 		assertEquals(graph, getFixture().getGraph());
-		
+
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = GraphFactory.createGraph();
 		Node source2 = GraphFactory.createNode();
 		Node target2 = GraphFactory.createNode();
@@ -94,7 +94,7 @@ public class RelationTest {
 		graph2.addNode(target2);
 		getFixture().setSource(source2);
 		getFixture().setTarget(target2);
-		
+
 		getFixture().setGraph(graph2);
 		assertEquals(graph2, getFixture().getGraph());
 	}

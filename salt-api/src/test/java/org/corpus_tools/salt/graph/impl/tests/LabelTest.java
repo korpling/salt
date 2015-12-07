@@ -108,7 +108,8 @@ public class LabelTest {
 	 * Checks if qname is returned correctly, if name or namespace is missing.
 	 * <ol>
 	 * <li>qName= name if namespace is missing</li>
-	 * <li>qName= namespace + {@value Label#NS_SEPERATOR}, if name is missing</li>
+	 * <li>qName= namespace + {@value Label#NS_SEPERATOR}, if name is missing
+	 * </li>
 	 * <li>qName= namespace + {@value Label#NS_SEPERATOR} + name, if both is
 	 * given</li>
 	 * </ol>
@@ -266,12 +267,12 @@ public class LabelTest {
 		container1.addLabel(getFixture());
 		assertTrue(container1.containsLabel(getFixture().getQName()));
 		assertEquals(container1, getFixture().getContainer());
-		
+
 		// move label
 		container2.addLabel(getFixture());
 		assertTrue(container2.containsLabel(getFixture().getQName()));
 		assertEquals(Integer.valueOf(0), container1.sizeLabels());
 		assertEquals(container2, getFixture().getContainer());
-		
+
 	}
 } // LabelTest

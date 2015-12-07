@@ -1,0 +1,8 @@
+//yuml.me
+[audio1:SMedialDS|sMediaReference='...']
+[text1:STextualDS|text='Is this ...']
+[textRel1:STextualRelation|start='0';end='2']-> [text1:STextualDS]
+[textRel1:STextualRelation]->[t1:SToken]
+[audioRel:SMedialRelation|start='0.0';end='0.002']-> [audio1:SMedialDS]
+[audioRel:SMedialRelation]->[t1:SToken]
+

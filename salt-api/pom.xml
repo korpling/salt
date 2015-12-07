@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>salt-api</artifactId>
 	<packaging>bundle</packaging>
 	<parent>
-		<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
+		<groupId>org.corpus-tools</groupId>
 		<artifactId>salt</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>3.0.2-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<properties>
@@ -18,8 +17,6 @@
 		<commons-lang3.version>3.4</commons-lang3.version>
 		<findbugs-maven-plugin.version>3.0.2</findbugs-maven-plugin.version>
 		<maven-surefire-plugin.version>2.15</maven-surefire-plugin.version>
-		<maven-site-plugin.version>3.1</maven-site-plugin.version>
-		<maven-project-info-reports-plugin.version>2.4</maven-project-info-reports-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -101,8 +98,7 @@
 						<Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
 						<Export-Package>
 							org.corpus_tools.salt.*,
-							com.neovisionaries.i18n, !org.knallgrau.utils.textcat,
-							org.apache.commons.lang3;version="${commons.lang3.version}"
+							com.neovisionaries.i18n, !org.knallgrau.utils.textcat
 						</Export-Package>
 						<Bundle-ClassPath>.,{maven-dependencies},
 							lib/nv-i18n-${nv-i18n.version}.jar,
@@ -110,8 +106,7 @@
 							lib/commons-lang3-${commons-lang3.version}.jar</Bundle-ClassPath>
 						<Include-Resource>{maven-resources}, LICENSE, NOTICE,
 							lib/nv-i18n-${nv-i18n.version}.jar=lib/nv-i18n-${nv-i18n.version}.jar,
-							lib/textcat-${textcat.version}.jar=lib/textcat-${textcat.version}.jar,
-							lib/commons-lang3-${commons-lang3.version}.jar=lib/commons-lang3-${commons-lang3.version}.jar</Include-Resource>
+							lib/textcat-${textcat.version}.jar=lib/textcat-${textcat.version}.jar</Include-Resource>
 					</instructions>
 				</configuration>
 			</plugin>

@@ -157,7 +157,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 
 	/** {@inheritDoc} */
 	@Override
-	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
+	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
 		GraphTraverserModule traverserModule = new GraphTraverserModule();
 		traverserModule.setGraph(this);
 		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);
@@ -231,7 +231,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	public SAnnotation getAnnotation(String qName) {
 		return (SAnnotationContainerHelper.getAnnotation(this, qName));
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SAnnotation getAnnotation(String namespace, String name) {
@@ -349,7 +349,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	public SFeature getFeature(String qName) {
 		return (SAnnotationContainerHelper.getFeature(this, qName));
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SFeature getFeature(String namespace, String name) {

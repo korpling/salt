@@ -1,0 +1,4 @@
+//see yuml.me
+
+[SSequentialDS|data : Object]^-[STextualDS|text : String]
+[SSequentialDS]<>-[:SFeature|namespace='salt';name='SDATA']

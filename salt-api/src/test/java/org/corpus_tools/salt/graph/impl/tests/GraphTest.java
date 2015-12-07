@@ -419,23 +419,22 @@ public class GraphTest {
 		getFixture().addNode(n);
 		assertEquals(1, getFixture().getNodes().size());
 	}
-	
+
 	/**
-	 * Checks that if a node which belongs to another graph is added to a new 
+	 * Checks that if a node which belongs to another graph is added to a new
 	 * graph it is removed from the old graph.
 	 */
 	@Test
 	public void testAddNodeMoveGraph() {
 		assertEquals(0, getFixture().getNodes().size());
-		
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>
-				oldGraph = new GraphImpl<>();
-		
+
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> oldGraph = new GraphImpl<>();
+
 		Node node = GraphFactory.createNode();
 		oldGraph.addNode(node);
 		assertEquals(1, oldGraph.getNodes().size());
 		assertEquals(node, oldGraph.getNodes().get(0));
-		
+
 		// now moving the node to another graph
 		getFixture().addNode(node);
 		assertEquals(1, getFixture().getNodes().size());

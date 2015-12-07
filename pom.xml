@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
+	<groupId>org.corpus-tools</groupId>
 	<artifactId>salt</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.0-SNAPSHOT</version>
+	<version>3.0.2-SNAPSHOT</version>
 	<modules>
 		<module>salt-api</module>
-		<module>salt-benchmark</module>
 		<module>salt-doc</module>
 	</modules>
+	<developers>
+		<developer>
+			<name>Florian Zipser</name>
+			<email>saltnpepper@lists.hu-berlin.de</email>
+			<organization>Humboldt-Universität zu Berlin</organization>
+			<organizationUrl>https://www.hu-berlin.de</organizationUrl>
+		</developer>
+		<developer>
+			<name>Thomas Krause</name>
+			<email>saltnpepper@lists.hu-berlin.de</email>
+			<organization>Humboldt-Universität zu Berlin</organization>
+			<organizationUrl>https://www.hu-berlin.de</organizationUrl>
+		</developer>
+	</developers>
 	<description>A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</description>
 	<url>http://corpus-tools.org/salt/</url>
 	<issueManagement>
@@ -32,23 +44,18 @@
 		<connection>scm:git:git://github.com/korpling/salt.git</connection>
 		<developerConnection>scm:git:git@github.com:korpling/salt.git</developerConnection>
 		<url>https://github.com/korpling/salt</url>
-		<tag>HEAD</tag>
+		<tag>salt-3.0.0</tag>
 	</scm>
 	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
 		<repository>
-			<id>korpling</id>
-			<name>korpling maven repo</name>
-			<url>file:///srv/www/maven2/</url>
-			<!-- <url>scpexe://korpling.german.hu-berlin.de/srv/www/maven2/</url> -->
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
-	<repositories>
-		<repository>
-			<id>korpling</id>
-			<name>korpling maven repo</name>
-			<url>http://korpling.german.hu-berlin.de/maven2</url>
-		</repository>
-	</repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<component.descriptor.name>serviceComponents.xml</component.descriptor.name>
@@ -69,13 +76,19 @@
 		<maven-source-plugin.version>2.4</maven-source-plugin.version>
 		<maven-site-plugin.version>3.4</maven-site-plugin.version>
 		<maven-assembly-plugin.version>2.5.1</maven-assembly-plugin.version>
-		<maven-release-plugin.version>2.5.1</maven-release-plugin.version>
+		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
 		<maven-javadoc-plugin.version>2.10.1</maven-javadoc-plugin.version>
 		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
 		<maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
 		<maven-license-plugin.version>1.4.0</maven-license-plugin.version>
 		<maven-notice-plugin.version>1.0.4</maven-notice-plugin.version>
 		<maven-clean-plugin.version>2.6.1</maven-clean-plugin.version>
+		<maven-project-info-reports-plugin.version>2.8</maven-project-info-reports-plugin.version>
+		<docbkx-maven-plugin.version>2.0.16</docbkx-maven-plugin.version>
+		<docbkx-fop-support.version>2.0.16</docbkx-fop-support.version>
+		<maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
+		<exec-maven-plugin.version>1.4.0</exec-maven-plugin.version>
+		<maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -135,11 +148,6 @@
 		<name>Humboldt-Universität zu Berlin, INRIA</name>
 	</organization>
 	<build>
-		<extensions>
-			<!-- Enabling the use of FTP -->
-			<!-- <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-ssh-external</artifactId> 
-				<version>1.0</version> </extension> -->
-		</extensions>
 		<plugins>
 			<!-- a plugin to clean the project when calling mvn clean (removes META-INF 
 				and OSGI-INF) -->
@@ -176,7 +184,7 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<version>${maven-site-plugin.version}</version>
 				<configuration>
-					<outputDirectory>${basedir}/docs/site</outputDirectory>
+					<outputDirectory>${project.build.directory}/javadoc/</outputDirectory>
 				</configuration>
 			</plugin>
 			<!-- end: site plugin -->
@@ -205,9 +213,6 @@
 						<goals>
 							<goal>perform</goal>
 						</goals>
-						<configuration>
-							<pomFileName>salt/pom.xml</pomFileName>
-						</configuration>
 					</execution>
 				</executions>
 				<configuration>
@@ -270,5 +275,58 @@
 		</plugins>
 		<finalName>${project.groupId}.${project.artifactId}_${project.version}</finalName>
 	</build>
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<!-- generate a jar for sources -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven-source-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- Generates a Javadoc -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven-javadoc-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- The Maven GPG plugin is used to sign the components -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<name>${project.groupId}.${project.artifactId}</name>
 </project>

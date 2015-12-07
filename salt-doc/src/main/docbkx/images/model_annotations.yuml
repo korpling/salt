@@ -1,0 +1,3 @@
+//see http://yuml.me/
+[Label|namespace : String;name : String;value : Object]^-[SAnnotation]
+[Label]^-[SMetaAnnotation]

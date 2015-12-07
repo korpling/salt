@@ -1,0 +1,5 @@
+//see yuml.me
+
+[:STimelineRelation|start='0';end='1']-source>[:SToken]
+[:STimelineRelation]-target>[:STimeline|data='0 1 2 3 4 ...']
+[:SToken]-[note: 'Is'{bg:cornsilk}]

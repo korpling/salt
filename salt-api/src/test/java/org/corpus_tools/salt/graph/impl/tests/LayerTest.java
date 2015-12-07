@@ -84,12 +84,12 @@ public class LayerTest {
 	public void testGetId() {
 		String id = null;
 
-//		// shall not add an empty id
-//		try {
-//			getFixture().setId(id);
-//			fail("Shall not set the id to null.");
-//		} catch (SaltException e) {
-//		}
+		// // shall not add an empty id
+		// try {
+		// getFixture().setId(id);
+		// fail("Shall not set the id to null.");
+		// } catch (SaltException e) {
+		// }
 
 		// add correct id
 		id = "id";
@@ -146,7 +146,7 @@ public class LayerTest {
 		// prerequirements
 		Graph graph = GraphFactory.createGraph();
 		graph.addLayer(getFixture());
-		
+
 		List<Node> nodes = new ArrayList<>();
 
 		for (int i = 0; i < 50; i++) {

@@ -179,12 +179,27 @@ public class IndexMgrImpl implements IndexMgr {
 	/** {@inheritDoc} **/
 	@Override
 	public <K, V> V get(String indexId, K key) {
-		List<V> result = getAll(indexId, key);
-		if (result.isEmpty()) {
-			return null;
-		} else {
-			return result.iterator().next();
+		V result = null;
+		if (indexId != null && key != null) {
+			if (threadSafe) {
+				lock.readLock().lock();
+			}
+
+			try {
+				Index idx = indexes.get(indexId);
+				if (idx != null) {
+					Collection<V> col = idx.map.get(key);
+					if (!col.isEmpty()) {
+						result = col.iterator().next();
+					}
+				}
+			} finally {
+				if (threadSafe) {
+					lock.readLock().unlock();
+				}
+			}
 		}
+		return result;
 	}
 
 	/** {@inheritDoc} **/
@@ -217,7 +232,24 @@ public class IndexMgrImpl implements IndexMgr {
 	/** {@inheritDoc} **/
 	@Override
 	public <K> boolean containsKey(String indexId, K key) {
-		return !getAll(indexId, key).isEmpty();
+		boolean result = false;
+		if (indexId != null && key != null) {
+			if (threadSafe) {
+				lock.readLock().lock();
+			}
+
+			try {
+				Index idx = indexes.get(indexId);
+				if (idx != null) {
+					result = idx.map.containsKey(key);
+				}
+			} finally {
+				if (threadSafe) {
+					lock.readLock().unlock();
+				}
+			}
+		}
+		return result;
 	}
 
 	/** {@inheritDoc} **/

@@ -39,6 +39,7 @@ import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.NodeImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
@@ -91,19 +92,10 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 * inserted into this graph and to avoid an endless invocation the insertion
 	 * of an node is splited into the two methods
 	 * {@link #setSaltProject(SaltProject)} and
-	 * {@link #basic_setSaltProject(SaltProject)}. The invocation of methods is
-	 * implement as follows:
+	 * {@link #basic_setSaltProject(SaltProject)}.
 	 * 
-	 * <pre>
-	 * {@link SaltProject#}                      {@link Node#setGraph(Graph)}
-	 *         ||             \ /                   ||
-	 *         ||              X                    ||
-	 *         \/             / \                   \/
-	 * {@link Graph#basicAddNode(Node)}            {@link Node#basicSetGraph(Graph)}
-	 * </pre>
-	 * 
-	 * @param graph
-	 *            graph which contains this node
+	 * @param saltProject
+	 *            the Salt project containing the corpus structure
 	 */
 	public void basic_setSaltProject(SaltProject saltProject) {
 		this.saltProject = saltProject;
@@ -326,8 +318,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public void load(URI corpusGraphUri) {
-		// TODO Auto-generated method stub
-
+		SCorpusGraph loaded = SaltUtil.loadCorpusGraph(corpusGraphUri);
+		SaltUtil.moveCorpusGraph(loaded, this);
 	}
 
 	/** {@inheritDoc} **/

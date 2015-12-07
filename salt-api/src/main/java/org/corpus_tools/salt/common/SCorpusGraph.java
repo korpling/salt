@@ -53,24 +53,24 @@ import org.eclipse.emf.common.util.URI;
  * second way contains more handwork and second it is recommended to use the
  * first appoach, because the {@link SElementId} object belonging to the sub
  * corpus can only represent the hierarchy, when the {@link SCorpusGraph} knows
- * about it, when adding the sub corpus. </br> The 'real' linguistic data
- * containing primary data, tokens, structures, annotations and so on are
- * contained in lets say a container-object called document. Such a document is
- * represented by the type {@link SDocument}. A document always belongs to a
- * corpus (if this corpus is a super or a sub corpus makes no difference).
- * Parallel to a corpus, a document is a specialization of a node (in Salt of
- * type {@link SNode}) as well. Such a containment between a corpus and a
- * document is represented by the type {@link SCorpusDocumentRelation}, where
- * the source of this relation is the corpus and the target of this relation is
- * the document. To add such a {@link SDocument} object to the
- * {@link SCorpusGraph} use the method
+ * about it, when adding the sub corpus. </br>
+ * The 'real' linguistic data containing primary data, tokens, structures,
+ * annotations and so on are contained in lets say a container-object called
+ * document. Such a document is represented by the type {@link SDocument}. A
+ * document always belongs to a corpus (if this corpus is a super or a sub
+ * corpus makes no difference). Parallel to a corpus, a document is a
+ * specialization of a node (in Salt of type {@link SNode}) as well. Such a
+ * containment between a corpus and a document is represented by the type
+ * {@link SCorpusDocumentRelation}, where the source of this relation is the
+ * corpus and the target of this relation is the document. To add such a
+ * {@link SDocument} object to the {@link SCorpusGraph} use the method
  * {@link SCorpusGraph#addDocument(SCorpus, SDocument)}. This method will
  * automatically create the relation between them. Like with adding a sub
  * corpus, here you can also do this by hand hand, but note that even here it is
  * recommended using the method
  * {@link SCorpusGraph#addDocument(SCorpus, SDocument)} because of the
- * {@link SElementId} object belonging to the {@link SDocument} object.</br> In
- * Salt the 'real' linguistic data are also stored in a graph called
+ * {@link SElementId} object belonging to the {@link SDocument} object.</br>
+ * In Salt the 'real' linguistic data are also stored in a graph called
  * document-graph which is represented by the type {@link SDocumentGraph}. An
  * object of this type is contained in a {@link SDocument} object and can be set
  * and get by calling {@link SDocument#setDocumentGraph(SDocumentGraph)} and

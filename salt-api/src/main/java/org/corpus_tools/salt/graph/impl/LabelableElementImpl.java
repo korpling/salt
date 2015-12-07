@@ -40,6 +40,9 @@ import org.corpus_tools.salt.util.SaltUtil;
  */
 @SuppressWarnings("serial")
 public abstract class LabelableElementImpl implements LabelableElement, Serializable {
+	/** Determines the expected number of labels. **/
+	public static final int EXPECTED_NUMBER_OF_LABELS = 5;
+
 	/** internal set of all labels **/
 	private Map<String, Label> labels = null;
 
@@ -73,7 +76,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritDoc LabelableElement#getLabelsByNamespace(String)} **/
 	@Override
 	public Set<Label> getLabelsByNamespace(String ns) {
-		Set<Label> retVal = new HashSet<Label>();
+		Set<Label> retVal = new HashSet<>(EXPECTED_NUMBER_OF_LABELS);
 		if (labels != null) {
 			for (Label label : labels.values()) {
 				if (ns == null) {
@@ -93,8 +96,9 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	public void addLabel(Label label) {
 		if (label != null) {
 			if (label instanceof LabelImpl) {
-				if (label.getContainer()!= null){
-					//removes the label from old container, if an old container exists
+				if (label.getContainer() != null) {
+					// removes the label from old container, if an old container
+					// exists
 					label.getContainer().removeLabel(label.getQName());
 				}
 				((LabelImpl) label).basicSetLabelableElement(this);
@@ -134,7 +138,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 				throw new SaltInsertionException(this, label, "Cannot add a label object without a name.");
 			}
 			if (labels == null) {
-				labels = new HashMap<String, Label>();
+				labels = new HashMap<>(EXPECTED_NUMBER_OF_LABELS);
 			}
 			String qName = SaltUtil.createQName(label.getNamespace(), label.getName());
 			if (labels.containsKey(qName)) {
@@ -200,7 +204,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** {@inheritDoc LabelableElement#removeAll()} **/
 	@Override
 	public void removeAll() {
-		labels = new HashMap<String, Label>();
+		labels = new HashMap<>(EXPECTED_NUMBER_OF_LABELS);
 	}
 
 	/** {@inheritDoc LabelableElement#containsLabel(String)} **/

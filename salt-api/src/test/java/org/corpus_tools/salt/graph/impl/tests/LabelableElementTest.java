@@ -21,8 +21,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.Vector;
 
-import junit.framework.TestCase;
-
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
@@ -30,6 +28,8 @@ import org.corpus_tools.salt.graph.impl.LabelableElementImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 public class LabelableElementTest extends TestCase {
 

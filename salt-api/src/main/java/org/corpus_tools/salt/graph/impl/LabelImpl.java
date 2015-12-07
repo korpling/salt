@@ -39,7 +39,11 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	/** {@inheritDoc Label#setNamespace(String)} */
 	@Override
 	public void setNamespace(String namespace) {
-		this.namespace = namespace;
+		if (namespace != null) {
+			this.namespace = namespace.intern();
+		} else {
+			this.namespace = null;
+		}
 	}
 
 	protected String name = null;
@@ -56,10 +60,10 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 		if ((name == null) || (name.isEmpty())) {
 			throw new SaltException("Cannot set the name of this label object, because it is empty.");
 		}
-		if (name.contains(NS_SEPERATOR)){
+		if (name.contains(NS_SEPERATOR)) {
 			throw new SaltException("Cannot set the name to the given, because a namespace with namespace seperaor is illegal.");
 		}
-		this.name = name;
+		this.name = name.intern();
 	}
 
 	/** {@inheritDoc Label#getQName()} */
@@ -166,7 +170,7 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 		other.setNamespace(this.getNamespace());
 		other.setName(this.getName());
 		other.setValue(this.getValue());
-		return(other);
+		return (other);
 	}
 
 	@Override

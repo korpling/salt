@@ -1,0 +1,2 @@
+//see yuml.me
+[t1:SToken]->[pos1:SAnnotation|name='pos';value='VBZ']

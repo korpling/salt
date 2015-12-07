@@ -20,6 +20,7 @@ package org.corpus_tools.salt.common;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
 /**
@@ -81,15 +82,14 @@ public interface SDocument extends SNode {
 	 * Persists the {@link SDocumentGraph} object contained by this object as
 	 * SaltXML file at the location given by the passed {@link URI} object. The
 	 * {@link URI} is stored as {@link SFeature} by calling
-	 * {@link #setSDocumentGraphLocation(URI)}. The containment relation of
+	 * {@link #setSDocumentGraphLocation(URI)}. The relation between
 	 * {@link SDocument} and given {@link SDocumentGraph} will be removed.
 	 * 
 	 * @param documentGraphLocation
-	 *            location of where to persist object as SaltXML file (must have
-	 *            the ending {@value SaltFactory#FILE_ENDING_SALT}) in
-	 *            {@link URI} syntax
-	 * @model sDocumentGraphLocationDataType=
-	 *        "de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
+	 *            location of where to persist object as
+	 *            {@value SaltUtil#FILE_ENDING_SALT_XML} file (must have the
+	 *            ending {@value SaltUtil#FILE_ENDING_SALT}) in {@link URI}
+	 *            syntax
 	 * @generated
 	 */
 	public void saveDocumentGraph(URI documentGraphLocation);

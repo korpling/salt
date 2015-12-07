@@ -109,9 +109,9 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 	 * null, nothing will be done.
 	 */
 	public DiffOptions setOption(String key, Boolean value) {
-		if (key!= null && value!= null){
+		if (key != null && value != null) {
 			put(key, value);
 		}
-		return(this);
+		return (this);
 	}
 }

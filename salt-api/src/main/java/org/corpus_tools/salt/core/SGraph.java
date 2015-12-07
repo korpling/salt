@@ -91,7 +91,7 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	 *        "de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"
 	 * @generated
 	 */
-	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
+	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 
 	/**
 	 * Searches for a node or a set of nodes having the given node name.

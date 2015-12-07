@@ -169,7 +169,7 @@ public class Tokenizer {
 						this.addAbbreviation(LanguageCode.it, AbbreviationIT.createAbbriviations());
 					}
 				}
-			}// set abbreviations
+			} // set abbreviations
 
 			this.setClitics(language);
 
@@ -190,7 +190,7 @@ public class Tokenizer {
 			TextCategorizer textCategorizer = new TextCategorizer();
 			String lang = textCategorizer.categorize(text);
 			return (mapISOLanguageCode(lang));
-		}// detect language
+		} // detect language
 		return (retVal);
 	}
 
@@ -395,7 +395,7 @@ public class Tokenizer {
 					for (int y = 0; y < strTokens.get(tokenCntr).length(); y++) {
 						// compute pattern in text
 						pattern.append(chrText[i + y]);
-					}// compute pattern in text
+					} // compute pattern in text
 					if (strTokens.get(tokenCntr).hashCode() == pattern.toString().hashCode()) {
 						// pattern found
 						int start = i + startPos;
@@ -429,8 +429,8 @@ public class Tokenizer {
 							}
 						}
 
-					}// pattern found
-				}// first letter matches
+					} // pattern found
+				} // first letter matches
 			}
 
 			if (old2newToken != null) {

@@ -19,12 +19,15 @@ package org.corpus_tools.salt.common.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
+import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpusGraph;
+import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
-import org.corpus_tools.salt.graph.Identifier;
+import org.corpus_tools.salt.exceptions.SaltResourceException;
+import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
 public class SaltProjectImpl implements SaltProject {
@@ -33,7 +36,9 @@ public class SaltProjectImpl implements SaltProject {
 		corpusGraphs = new ArrayList<SCorpusGraph>();
 	}
 
-	/** list of all {@link SCorpusGraph} objects contained in this Salt project **/
+	/**
+	 * list of all {@link SCorpusGraph} objects contained in this Salt project
+	 **/
 	private List<SCorpusGraph> corpusGraphs = null;
 
 	/** {@inheritDoc} **/
@@ -104,28 +109,51 @@ public class SaltProjectImpl implements SaltProject {
 
 	@Override
 	public void saveSaltProject(URI saltProjectURI) {
-		// TODO Auto-generated method stub
-
+		SaltUtil.saveSaltProject(this, saltProjectURI);
 	}
 
 	@Override
 	public void loadSaltProject(URI saltProjectURI) {
-		// TODO Auto-generated method stub
+		if (saltProjectURI == null)
+			throw new SaltResourceException("Cannot load salt project, because the paassed uri is null.");
+		this.loadCorpusStructure(saltProjectURI);
+		for (SCorpusGraph sCorpusGraph : this.getCorpusGraphs()) {
+			for (SDocument sDoc : sCorpusGraph.getDocuments()) {
+				try {
+					sDoc.loadDocumentGraph();
+				} catch (SaltResourceException e) {
+					throw new SaltResourceException("A problem occured when loading salt project from '" + saltProjectURI + "', because one of its documents could not have been load '" + sDoc.getId() + "'.", e);
+				} catch (Exception e) {
+					throw new SaltResourceException("A problem occured when loading salt project from '" + saltProjectURI + "', because of a nested exception during loading one of its documents '" + sDoc.getId() + "'.", e);
+				}
+			}
+		}
 
 	}
 
 	@Override
 	public void loadCorpusStructure(URI saltProjectURI) {
-		// TODO Auto-generated method stub
+		// remove the old ones if they exist
+		List<SCorpusGraph> corpusGraphList = getCorpusGraphs();
+		if (corpusGraphList != null) {
+			for (SCorpusGraph corpusGraph : new LinkedList<>(corpusGraphList)) {
+				removeCorpusGraph(corpusGraph);
+			}
+		}
+		// do the actual work with the SaltUtil
+		SaltProject loadedProject = SaltUtil.loadSaltProject(saltProjectURI);
+
+		// copy name
+		setName(loadedProject.getName());
+
+		// copy the loaded corpus graphs
+		for (SCorpusGraph corpusGraph : new LinkedList<>(loadedProject.getCorpusGraphs())) {
+			addCorpusGraph(corpusGraph);
+		}
 
 	}
 
-	@Override
-	public Map<Identifier, URI> getDocumentGraphLocations() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/** {@inheritDoc} **/
 	@Override
 	public String toString() {
 		StringBuilder retStr = new StringBuilder();
@@ -136,5 +164,13 @@ public class SaltProjectImpl implements SaltProject {
 		retStr.append(getCorpusGraphs().size());
 		retStr.append("corpus graphs");
 		return (retStr.toString());
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public SCorpusGraph createCorpusGraph() {
+		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
+		addCorpusGraph(corpGraph);
+		return (corpGraph);
 	}
 }

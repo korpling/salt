@@ -20,8 +20,6 @@ package org.corpus_tools.salt.common.impl.tests;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusDocumentRelation;
@@ -40,6 +38,8 @@ import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
+
+import junit.framework.TestCase;
 
 public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 

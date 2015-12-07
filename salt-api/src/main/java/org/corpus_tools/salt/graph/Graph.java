@@ -26,7 +26,8 @@ import org.corpus_tools.salt.util.SaltUtil;
 /**
  * The here defined graph is given by G=(V, E, L, {label a , ...label b }) with:
  * <ul>
- * <li>V being a set of {@link Node}s with v= ({label c , ... label d }) ∊ V</li>
+ * <li>V being a set of {@link Node}s with v= ({label c , ... label d }) ∊ V
+ * </li>
  * <li>E being a set of directed {@link Relation}s with e= (v 1 ∊ V, v 2 ∊ V,
  * {label e , ... label f }) ∊ E</li>
  * <li>L being a set of {@link Layer}s with l= (V 1 ⊆ V, E 1 ⊆ E, L 1 ⊆ L,
