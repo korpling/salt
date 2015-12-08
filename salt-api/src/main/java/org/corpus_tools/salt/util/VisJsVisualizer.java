@@ -163,9 +163,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	
 	private static final String TEXT_STYLE = "width:700px; font-size:14px; text-align: justify;";
 	
-	private final static String JQUERY_SRC = "js/jquery.js";
-	private final static String VIS_JS_SRC = "js/vis.min.js";
-	private final static String VIS_CSS_SRC = "css/vis.min.css";
+	
 	
 		
 	private  int bufferSizeEdges;
@@ -203,15 +201,24 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     private boolean writeNodeImmediately = false;
     
    // private static final String OUTPUT_FILE = "saltVisJs.html";	
-    private static final String NODES_AND_EDGES_FILE = "saltNodesAndEdges.json";
-    private static final String CSS_FOLDER_OUT = "css";
-    private static final String JS_FOLDER_OUT = "js";
-    private static final String JSON_FOLDER_OUT = "json";
+    public static final String NODES_AND_EDGES_FILE = "saltNodesAndEdges.json";
+    public static final String CSS_FOLDER_OUT = "css";
+    public static final String JS_FOLDER_OUT = "js";
+    public static final String JSON_FOLDER_OUT = "json";
     
-    private static final String CSS_FILE = "vis.min.css";
-    private static final String JS_FILE = "vis.min.js";
-    private static final String JQUERY_FILE = "jquery.js";
-    private static final String HTML_FILE = "saltVisJs.html";
+    public static final String CSS_FILE = "vis.min.css";
+    public static final String JS_FILE = "vis.min.js";
+    public static final String JQUERY_FILE = "jquery.js";
+    public static final String HTML_FILE = "saltVisJs.html";
+    
+	
+	
+	private final static String JQUERY_SRC = JS_FOLDER_OUT + System.getProperty("file.separator") + JQUERY_FILE;
+			//"js/jquery.js";
+	private final static String VIS_JS_SRC = JS_FOLDER_OUT + System.getProperty("file.separator") + JS_FILE;
+	//"js/vis.min.js";
+	private final static String VIS_CSS_SRC = CSS_FOLDER_OUT + System.getProperty("file.separator") + CSS_FILE;
+			//"css/vis.min.css";
     
         
     private static final String RESOURCE_FOLDER = System.getProperty("file.separator") + "visjs"; 
@@ -692,7 +699,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			+ ";" + NEWLINE
 			+ "network = new vis.Network(container, data, options);" + NEWLINE
 			+ "network.on(\"stabilizationProgress\", function(params) {" + NEWLINE
-			+ "var maxWidth = 400;" + NEWLINE
+			+ "var maxWidth = 496;" + NEWLINE
 			+ "var minWidth = 20;" + NEWLINE
             + "var widthFactor = params.iterations/params.total;" + NEWLINE
             + "var width = Math.max(minWidth,maxWidth * widthFactor);" + NEWLINE			
@@ -701,6 +708,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
             + "document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';" + NEWLINE             
             + "});" + NEWLINE
             + "network.on(\"stabilizationIterationsDone\", function() {" + NEWLINE	
+            + "document.getElementById('text').innerHTML = '100%';" + NEWLINE	
+            + "document.getElementById('bar').style.width = '496px';" + NEWLINE	
             + "document.getElementById('loadingBar').style.opacity = 0;" + NEWLINE
             + "});" + NEWLINE
 			+ "}" + NEWLINE);
@@ -842,6 +851,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			
 			//div
 			xmlWriter.writeEndElement();
+			xmlWriter.writeCharacters(NEWLINE);		
 			
 			//body
 			xmlWriter.writeEndElement();

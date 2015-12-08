@@ -2,6 +2,8 @@ package org.corpus_tools.salt.util.tests;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 
 import javax.xml.stream.XMLStreamException;
@@ -16,6 +18,8 @@ import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.corpus_tools.salt.util.VisJsVisualizer;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
+
+import com.google.common.io.Files;
 //import junit.framework.Assert;
 
 public class VisJsVisualizerTest {
@@ -25,13 +29,28 @@ public class VisJsVisualizerTest {
 	private final static String INPUT_FOLDER =  "src"	+ FSEP+"test"	+ FSEP+ "resources" + FSEP + "VisJsTest" + FSEP + "sources";
 	private final static String INPUT_FILE_MAIN_TEST = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
 	
-	  
+	private final static String TEST_RESULT_FOLDER =  "src"	+ FSEP+"test"	+ FSEP+ "resources" + FSEP + "VisJsTest" + FSEP + "results";
+	
+	
+		
+	
+	private String [] getAllFileNames (){
+		String []  allFileNames = new String [5];
+		allFileNames[0] = VisJsVisualizer.HTML_FILE;
+		allFileNames[1] = VisJsVisualizer.JS_FOLDER_OUT + FSEP + VisJsVisualizer.JQUERY_FILE;
+		allFileNames[2] = VisJsVisualizer.JS_FOLDER_OUT + FSEP + VisJsVisualizer.JS_FILE;
+		allFileNames[3] = VisJsVisualizer.CSS_FOLDER_OUT + FSEP + VisJsVisualizer.CSS_FILE;
+		allFileNames[4] = VisJsVisualizer.JSON_FOLDER_OUT + FSEP + VisJsVisualizer.NODES_AND_EDGES_FILE;		
+		return allFileNames;
+	}
+	
 	
 	@Test
 	public void testHtmlWriterWholeDocLoadJson() {
 	//	String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
 		String inputFilePath = INPUT_FILE_MAIN_TEST;		
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "pcc_whole_doc_11299_load_json";	   
+		String outputFolderName =  "pcc_whole_doc_11299_load_json";
+		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFolderName;	   
 		
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
@@ -40,6 +59,23 @@ public class VisJsVisualizerTest {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 try {
 				visJsVisualizer.visualize(outputFolderUri, true);
+				File testFolder = new File(outputFolderPath);
+				File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);
+				
+				if(folderStructureOk(testFolder, true) && folderStructureOk(resultFolder, true)){
+					String [] allFileNames = getAllFileNames();
+					boolean equals = true;
+					for (int i=0; i<allFileNames.length; i++){
+						equals = equals && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
+					//	System.out.println("eq: " + equals);
+					}
+					
+					
+				}
+				
+			//	Files.equals(file1, resultFile);
+				
+				
 			} catch (SaltException | XMLStreamException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -50,11 +86,43 @@ public class VisJsVisualizerTest {
 		}	
 	}
 	
+	
+	private static boolean folderStructureOk (File folder, boolean loadJson){
+		int nFiles;
+		
+		if (loadJson) 
+		{
+			nFiles = 4;
+		}
+		else
+		{
+			nFiles = 3;
+		}
+		
+		if (folder.exists() && folder.isDirectory() && folder.canRead()){
+			
+			if(folder.listFiles().length == nFiles){
+				// TODO more differentiable test
+				return true;
+				}
+			else {
+				System.out.println("folderlistsize: " +folder.listFiles().length);
+			}
+			}		
+		return false;
+	}
+	
+	private static boolean filesAreEqual (File testFile, File resultFile) throws IOException{				
+			return Files.equal(testFile, resultFile);		
+	}
+	
+	
 	@Test
 	public void testHtmlWriterWholeDoc() {
 	//	String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP + "pcc2" + FSEP  + "11299.salt";
-		String inputFilePath = INPUT_FILE_MAIN_TEST;		
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "pcc_whole_doc_11299";	   
+		String inputFilePath = INPUT_FILE_MAIN_TEST;	
+		String outputFileName = "pcc_whole_doc_11299";	   
+		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFileName;	   
 		
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
@@ -75,32 +143,12 @@ public class VisJsVisualizerTest {
 	
 	
 	@Test
-	public void testHtmlWriterSampleLoadJson() {
-		SDocument doc = SaltFactory.createSDocument();
-		SampleGenerator.createDocumentStructure(doc);	
-		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_load_json";	  
-		try {
-			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try {
-				visJsVisualizer.visualize(outputFolderUri, true);
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	
-	}
-	
-	@Test
 	public void testHtmlWriterSample() {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createDocumentStructure(doc);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc";	  
+		String outputFileName = "sample_doc";
+		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFileName;	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 try {
@@ -121,7 +169,8 @@ public class VisJsVisualizerTest {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createAnaphoricAnnotations(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_anaphoric_ann_load_json";	  
+		String outputFileName =  "sample_doc_anaphoric_ann_load_json";	 
+		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFileName;	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 try {
@@ -141,7 +190,8 @@ public class VisJsVisualizerTest {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createDependencies(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_dependencies";	  
+		String outputFileName =  "sample_doc_dependencies";
+		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFileName;	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 try {
@@ -163,7 +213,8 @@ public class VisJsVisualizerTest {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createSyntaxStructure(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_syntax_structure";	  
+		String outputFileName = "sample_doc_syntax_structure";
+		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFileName;	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 try {
@@ -183,7 +234,8 @@ public class VisJsVisualizerTest {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createTokens(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_tokens";	  
+		String outputFileName = "sample_doc_tokens";
+		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFileName;	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 try {
@@ -203,7 +255,8 @@ public class VisJsVisualizerTest {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createMorphologyAnnotations(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
-		String outputFolderPath = OUTPUT_FOLDER + FSEP + "sample_doc_morphology_ann";	  
+		String outputFileName = "sample_doc_morphology_ann";	
+		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFileName;	  
 		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
 			 try {

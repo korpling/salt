@@ -262,7 +262,7 @@ iterations: 800
 network = new vis.Network(container, data, options);
 
 network.on("stabilizationProgress", function(params) {
-                var maxWidth = 400;
+                var maxWidth = 496;
                 var minWidth = 20;
                 var widthFactor = params.iterations/params.total;
                 var width = Math.max(minWidth,maxWidth * widthFactor);
@@ -273,7 +273,8 @@ network.on("stabilizationProgress", function(params) {
                 
             });
 network.on("stabilizationIterationsDone", function() {
-	
+	document.getElementById('text').innerHTML = '100%';
+    document.getElementById('bar').style.width = '496px';	
 	document.getElementById('loadingBar').style.opacity = 0;
 });
 }
