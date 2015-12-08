@@ -2,18 +2,115 @@
 <html>
 <head>
 <title>Salt Document Tree</title>
-<style type="text/css">body {
-font: 10pt sans;
-}
-#mynetwork {
-width: 1200px;
-height: 900px;
-border: 1px solid lightgray;
-}</style>
+
+<style type="text/css">
+	 	body {
+		font: 10pt sans;
+		}
+        #mynetwork {            
+			height: 90%;
+			width: 90%;
+			border: 1px solid lightgray;
+			text-align: center;
+        }
+        #loadingBar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 0px;
+            height: 0px;
+            background-color:rgba(200,200,200,0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+          #wrapper {
+            position:absolute;
+            width: 1200px;
+			height: 90%;          
+        }
+        
+        #text {
+            position:absolute;
+            top:8px;
+            left:530px;
+            width:30px;
+            height:50px;
+            margin:auto auto auto auto;
+            font-size:16px;
+            color: #000000;
+        }
+
+
+        div.outerBorder {
+            position:relative;
+            top:400px;
+            width:600px;
+            height:44px;
+            margin:auto auto auto auto;
+            border:8px solid rgba(0,0,0,0.1);
+            background: rgb(252,252,252); /* Old browsers */
+            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+            border-radius:72px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+
+        #border {
+            position:absolute;
+            top:10px;
+            left:10px;
+            width:500px;
+            height:23px;
+            margin:auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+            border-radius:10px;
+        }
+
+        #bar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:20px;
+            height:20px;
+            margin:auto auto auto auto;
+            border-radius:6px;
+            border:1px solid rgba(30,30,30,0.05);
+            background: rgb(0, 173, 246); /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+        }
+</style>
 
 <script src="js/vis.min.js" type="text/javascript"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
 <link href="css/vis.min.css" rel="stylesheet" type="text/css"/>
+
+
+<script type="text/javascript">
+function frameSize() {
+  $(document).ready(function() {
+    function elementResize() {
+        var browserWidth = $(window).width()*0.98;
+		document.getElementById('mynetwork').style.width = browserWidth;
+    }
+
+    elementResize();
+
+    $(window).bind("resize", function(){
+        elementResize();
+    });
+});
+ 
+}
+</script>
 
 
 
@@ -21,6 +118,7 @@ border: 1px solid lightgray;
 var FILE_SALT_OBJECTS = "json/saltNodesAndEdges.json";
 function start(){
 loadSaltObjectAndDraw(FILE_SALT_OBJECTS);
+frameSize();
 }
 </script>
 
@@ -162,13 +260,36 @@ iterations: 800
 }
 ;
 network = new vis.Network(container, data, options);
-network.on('select', function(params) {
-document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;
+
+network.on("stabilizationProgress", function(params) {
+                var maxWidth = 400;
+                var minWidth = 20;
+                var widthFactor = params.iterations/params.total;
+                var width = Math.max(minWidth,maxWidth * widthFactor);
+				
+				document.getElementById('loadingBar').style.opacity = 1;
+                document.getElementById('bar').style.width = width + 'px';
+                document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                
+            });
+network.on("stabilizationIterationsDone", function() {
+	
+	document.getElementById('loadingBar').style.opacity = 0;
 });
 }
 </script>
 </head>
 <body onload="start();">
+<div id="wrapper">
+	<div id="loadingBar">
+        <div class="outerBorder">
+            <div id="text">0%</div>
+            <div id="border">
+                <div id="bar"></div>
+            </div>
+        </div>
+    </div>
+    
 <h2>Salt Document Tree</h2>
 <div style="width:700px; font-size:14px; text-align: justify;"></div>
 <p><input type="button" id="btn-UD" value="Up-Down"/>
@@ -202,5 +323,6 @@ directionInput.value = "RL";
 start();
 };
 </script>
+</div>
 </body>
 </html>

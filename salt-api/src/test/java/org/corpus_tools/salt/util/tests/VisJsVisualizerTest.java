@@ -74,45 +74,6 @@ public class VisJsVisualizerTest {
 	}
 	
 	
-	//@Test
-	public void testJsonWholeCorpus(){
-	//	String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_salt" + FSEP	+ "pcc2" + FSEP  + "11299.salt";
-		String inputFilePath = INPUT_FILE_MAIN_TEST;		
-		URI uri = URI.createFileURI(inputFilePath);	
-		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
-		
-		visJsVisualizer.setNodeWriter(System.out);
-		visJsVisualizer.setEdgeWriter(System.out);
-		visJsVisualizer.setOptionsWriter(System.out);
-		visJsVisualizer.buildJSON();
-		try {
-			visJsVisualizer.buildOptions();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		BufferedWriter ow;
-				
-		try {
-			ow = visJsVisualizer.getNodeWriter();
-			ow.newLine();
-			ow.flush();	
-			
-			//ow = visJsVisualizer.getEdgeWriter();		
-		//	ow.newLine();
-		//	ow.flush();	
-	
-			ow = visJsVisualizer.getOptionsWriter();
-			ow.flush();
-			ow.close();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	}
-	
 	@Test
 	public void testHtmlWriterSampleLoadJson() {
 		SDocument doc = SaltFactory.createSDocument();

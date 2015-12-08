@@ -120,6 +120,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 
 	
 	public  SDocument doc;
+	public String docId;
 	private OutputStream jsonOutputStream;
 	public  BufferedWriter jsonWriter;
 	public  BufferedWriter nodeWriter;
@@ -156,12 +157,13 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     private static final String ATT_REL = "rel";
     private static final String ATT_STYLE = "style";
     private static final String ATT_LANG = "language";
+    private static final String ATT_CLASS = "class";
     
-    private static final String VISJS_WIDTH = "1200px";
-	private static final String VISJS_HEIGHT = "900px";
+  
 	
 	private static final String TEXT_STYLE = "width:700px; font-size:14px; text-align: justify;";
 	
+	private final static String JQUERY_SRC = "js/jquery.js";
 	private final static String VIS_JS_SRC = "js/vis.min.js";
 	private final static String VIS_CSS_SRC = "css/vis.min.css";
 	
@@ -188,6 +190,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	
 	private  int xPosition = 0;	
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
+	private static final String SPAN_COLOR_VALUE = "#A9D0F5";
+	private static final String STRUCTURE_COLOR_VALUE = "#FFCC00";
 	
 	
  
@@ -244,7 +248,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     	
     	if(doc == null) throw new SaltParameterException("doc", "VisJsVisualizer", this.getClass());
     
-    	this.doc = doc;    	
+    	this.doc = doc;  
+    	docId = doc.getId();
     	roots = doc.getDocumentGraph().getRoots();	
     	List<SSpan>  sSpans = doc.getDocumentGraph().getSpans();	
     	if (sSpans != null && (sSpans.size() > 0))
@@ -306,6 +311,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       	try{
       		this.doc= SaltFactory.createSDocument();	
           	doc.loadDocumentGraph(inputFileUri);
+          	docId = doc.getId();
       	}catch (SaltResourceException e){
       		throw new SaltResourceException("A problem occurred while loading salt project from '" + inputFileUri + "'.", e);
       	}
@@ -453,19 +459,97 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			
 			xmlWriter.writeStartElement(TAG_STYLE);
 			xmlWriter.writeAttribute(ATT_TYPE, "text/css");
+			xmlWriter.writeCharacters(NEWLINE);
 			xmlWriter.writeCharacters("body {" + NEWLINE 
-					+ "font: 10pt sans;" + NEWLINE 
-					+ "}" + NEWLINE 
-					+ "#mynetwork {" + NEWLINE 
-					+ "width: " + VISJS_WIDTH +";" + NEWLINE 
-					+ "height: " + VISJS_HEIGHT + ";" + NEWLINE 
-					+ "border: 1px solid lightgray;" + NEWLINE 
-					+ "}");
+					+ "font: 10pt sans;" + NEWLINE
+					+ "}" + NEWLINE
+					+ "#mynetwork {" + NEWLINE
+					+ "height: 90%;" + NEWLINE
+					+ "width: 90%;" + NEWLINE
+					+ "border: 1px solid lightgray; " + NEWLINE
+					+ "text-align: center;" + NEWLINE
+   					+ "}" + NEWLINE
+   					+ "#loadingBar {" + NEWLINE
+   					+ "position:absolute;" + NEWLINE
+   					+ "top:0px;" + NEWLINE
+		            + "left:0px;" + NEWLINE
+		            + "width: 0px;" + NEWLINE
+		            + "height: 0px;" + NEWLINE
+		            + "background-color:rgba(200,200,200,0.8);" + NEWLINE
+		            + "-webkit-transition: all 0.5s ease;" + NEWLINE
+		            + "-moz-transition: all 0.5s ease;" + NEWLINE
+		            + "-ms-transition: all 0.5s ease;" + NEWLINE
+		            + "-o-transition: all 0.5s ease;" + NEWLINE
+		            + "transition: all 0.5s ease;" + NEWLINE
+		            + "opacity:1;" + NEWLINE
+		        	+ "}" + NEWLINE
+			        + "#wrapper {" + NEWLINE
+			        + "position:absolute;" + NEWLINE    
+			        + "width: 1200px;"  + NEWLINE 
+					+ "height: 90%;"  + NEWLINE 
+			        + "}" + NEWLINE	        
+			        + "#text {" + NEWLINE
+			        + "position:absolute;" + NEWLINE
+		            + "top:8px;" + NEWLINE
+		            + "left:530px;" + NEWLINE
+		            + "width:30px;" + NEWLINE
+		            + "height:50px;" + NEWLINE
+		            + "margin:auto auto auto auto;" + NEWLINE
+		            + "font-size:16px;" + NEWLINE
+		            + "color: #000000;" + NEWLINE
+			        + "}" + NEWLINE
+			        + "div.outerBorder {" + NEWLINE
+		            + "position:relative;" + NEWLINE
+		            + "top:400px;" + NEWLINE
+		            + "width:600px;" + NEWLINE
+		            + "height:44px;" + NEWLINE
+		            + "margin:auto auto auto auto;" + NEWLINE
+		            + "border:8px solid rgba(0,0,0,0.1);" + NEWLINE
+		            + "background: rgb(252,252,252); /* Old browsers */" + NEWLINE
+		            + "background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */" + NEWLINE
+		            + "background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */" + NEWLINE
+		            + "background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */" + NEWLINE
+		            + "background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */" + NEWLINE
+		            + "background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */" + NEWLINE
+		            + "background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */" + NEWLINE
+		            + "filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */" + NEWLINE
+		            + "border-radius:72px;" + NEWLINE
+		            + "box-shadow: 0px 0px 10px rgba(0,0,0,0.2);" + NEWLINE
+		            + "}" + NEWLINE
+		            + "#border {" + NEWLINE
+		             + "position:absolute;" + NEWLINE
+		             + "top:10px;" + NEWLINE
+		             + "left:10px;" + NEWLINE
+		             + "width:500px;" + NEWLINE
+		             + "height:23px;" + NEWLINE
+		             + "margin:auto auto auto auto;" + NEWLINE
+		             + "box-shadow: 0px 0px 4px rgba(0,0,0,0.2);" + NEWLINE
+		             + "border-radius:10px;" + NEWLINE
+		             + "}" + NEWLINE
+			         + "#bar {" + NEWLINE
+			         + "position:absolute;" + NEWLINE
+		            + "top:0px;" + NEWLINE
+		            + "left:0px;" + NEWLINE
+		            + "width:20px;" + NEWLINE
+		            + "height:20px;" + NEWLINE
+		            + "margin:auto auto auto auto;" + NEWLINE
+		            + "border-radius:6px;" + NEWLINE
+		            + "border:1px solid rgba(30,30,30,0.05);" + NEWLINE
+		            + "background: rgb(0, 173, 246); /* Old browsers */" + NEWLINE
+		            + "box-shadow: 2px 0px 4px rgba(0,0,0,0.4);" + NEWLINE
+		            + "}" + NEWLINE);
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);
 			
 			xmlWriter.writeStartElement(TAG_SCRIPT);
 			xmlWriter.writeAttribute(ATT_SRC,VIS_JS_SRC);
+			xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
+			xmlWriter.writeCharacters(NEWLINE);
+			xmlWriter.writeEndElement();
+			xmlWriter.writeCharacters(NEWLINE);
+			
+			xmlWriter.writeStartElement(TAG_SCRIPT);
+			xmlWriter.writeAttribute(ATT_SRC,JQUERY_SRC);
 			xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
 			xmlWriter.writeCharacters(NEWLINE);
 			xmlWriter.writeEndElement();
@@ -479,12 +563,32 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			
 			xmlWriter.writeStartElement(TAG_SCRIPT);
 			xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");
-			
+			xmlWriter.writeCharacters(NEWLINE 
+					+ "function frameSize() {" + NEWLINE
+					+ "$(document).ready(function() {" + NEWLINE
+					+ "function elementResize() {" + NEWLINE
+			        + "var browserWidth = $(window).width()*0.98;" + NEWLINE
+					+ "document.getElementById('mynetwork').style.width = browserWidth;" + NEWLINE
+					+ "}" + NEWLINE
+					+ "elementResize();" + NEWLINE
+					+ "$(window).bind(\"resize\", function(){" + NEWLINE
+					+ "elementResize();" + NEWLINE
+					+ "});" + NEWLINE
+					+ "});" + NEWLINE
+					+ "}" + NEWLINE);
+					xmlWriter.writeEndElement();
+					xmlWriter.writeCharacters(NEWLINE);
 
 			
+			
+			
+			
+			xmlWriter.writeStartElement(TAG_SCRIPT);
+			xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
 			xmlWriter.writeCharacters(NEWLINE 
 					+ "function start(){" + NEWLINE
 					+ "loadSaltObjectAndDraw();" + NEWLINE
+					+ "frameSize();" + NEWLINE
 					+ "}" + NEWLINE
 					+ "var nodesJson = [];" + NEWLINE
 					+ "var edgesJson = [];" + NEWLINE
@@ -587,9 +691,18 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			+ "}" + NEWLINE
 			+ ";" + NEWLINE
 			+ "network = new vis.Network(container, data, options);" + NEWLINE
-			+ "network.on('select', function(params) {" + NEWLINE
-			+ "document.getElementById('selection').innerHTML = 'Selection: ' + params.nodes;" + NEWLINE
-			+ "});" + NEWLINE
+			+ "network.on(\"stabilizationProgress\", function(params) {" + NEWLINE
+			+ "var maxWidth = 400;" + NEWLINE
+			+ "var minWidth = 20;" + NEWLINE
+            + "var widthFactor = params.iterations/params.total;" + NEWLINE
+            + "var width = Math.max(minWidth,maxWidth * widthFactor);" + NEWLINE			
+			+ "document.getElementById('loadingBar').style.opacity = 1;" + NEWLINE
+            + "document.getElementById('bar').style.width = width + 'px';" + NEWLINE
+            + "document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';" + NEWLINE             
+            + "});" + NEWLINE
+            + "network.on(\"stabilizationIterationsDone\", function() {" + NEWLINE	
+            + "document.getElementById('loadingBar').style.opacity = 0;" + NEWLINE
+            + "});" + NEWLINE
 			+ "}" + NEWLINE);
 			//script
 			xmlWriter.writeEndElement();
@@ -602,9 +715,45 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			xmlWriter.writeStartElement(TAG_BODY);
 			xmlWriter.writeAttribute("onload", "start();");
 			xmlWriter.writeCharacters(NEWLINE);
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_ID, "wrapper");
+			xmlWriter.writeCharacters(NEWLINE);
+			
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_ID, "loadingBar");
+			xmlWriter.writeCharacters(NEWLINE);
+			
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_CLASS, "outerBorder");
+			xmlWriter.writeCharacters(NEWLINE);
+			
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_ID, "text");
+			xmlWriter.writeCharacters("0%");
+			xmlWriter.writeEndElement();
+			xmlWriter.writeCharacters(NEWLINE);
+			
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_ID, "border");
+			xmlWriter.writeCharacters(NEWLINE);
+			
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_ID, "bar");
+			xmlWriter.writeCharacters(NEWLINE);
+			xmlWriter.writeEndElement();
+			xmlWriter.writeCharacters(NEWLINE);
+			
+			
+			xmlWriter.writeEndElement();
+			xmlWriter.writeCharacters(NEWLINE);
+			xmlWriter.writeEndElement();
+			xmlWriter.writeCharacters(NEWLINE);
+			xmlWriter.writeEndElement();
+			xmlWriter.writeCharacters(NEWLINE);
+						
 			
 			xmlWriter.writeStartElement(TAG_H2);
-			xmlWriter.writeCharacters("Salt Document Tree");
+			xmlWriter.writeCharacters("Dokument-Id: " + docId);
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);
 			
@@ -689,7 +838,10 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					+ "start();" + NEWLINE
 					+ "};" + NEWLINE);
 			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);			
+			xmlWriter.writeCharacters(NEWLINE);		
+			
+			//div
+			xmlWriter.writeEndElement();
 			
 			//body
 			xmlWriter.writeEndElement();
@@ -744,12 +896,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		  
 		  copyResourceFile(CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
 		  copyResourceFile(JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
-		  if(loadJSON){
-			  copyResourceFile(JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
-			  copyResourceFile(HTML_FILE, outputFolder.getPath(), null, HTML_FILE);	     
-		  }
-		  
-		 
+		  copyResourceFile(JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
+		  copyResourceFile(HTML_FILE, outputFolder.getPath(), null, HTML_FILE);	  	 
 		  return outputFolder;
 	}
 	
@@ -826,16 +974,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		this.jsonWriterEdges = new JSONWriter(edgeWriter);
 	}
 
-	/**
-	 *  Creates a new buffered writer with specified output stream. 
-	 *  It will contain the options after invoking of the {@link #buildOptions()} method.
-	 * 
-	 * @param os OutputStream associated to the options writer
-	 */
-	public void setOptionsWriter (OutputStream os){
-		this.optionsWriter = new BufferedWriter(new OutputStreamWriter(os));		
-		
-	}
+	
 	   
 	private void writeJSON () throws IOException, SaltParameterException, SaltException {	
 			jsonWriter.write("{");
@@ -988,6 +1127,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			{
 				 jsonWriterNodes.key(JSON_GROUP);
 				 jsonWriterNodes.value("1");
+				 jsonWriterNodes.key(JSON_COLOR);
+				 jsonWriterNodes.value(SPAN_COLOR_VALUE);
 			}
 			else if (nGroupsId == 1)
 			{
@@ -1003,6 +1144,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			{
 				jsonWriterNodes.key(JSON_GROUP);
 				jsonWriterNodes.value("0");
+				jsonWriterNodes.key(JSON_COLOR);
+				jsonWriterNodes.value(STRUCTURE_COLOR_VALUE);
 			}
 	
 		}		 
@@ -1053,49 +1196,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  }
 	}
 	
-	/**
-	 * The invoking of this method induces the optionsWriter to write the options for the vis.js to the associated output stream. 
-	 */
-	public void buildOptions() throws IOException, SaltParameterException{
-		if (optionsWriter == null){
-			throw new SaltParameterException("A problem occurred while building options. Probably the option writer is not set.");
-		}
-		
-			optionsWriter.write("{" + NEWLINE
-					+ "nodes:{" + NEWLINE
-					+ "shadow: true," + NEWLINE
-					+ "shape: \"box\"" + NEWLINE
-					+"}," + NEWLINE
-					+"edges: {" + NEWLINE
-					+"smooth: true," + NEWLINE
-					+"arrows: {" + NEWLINE
-					+"to: {" + NEWLINE
-					+"enabled: true" + NEWLINE
-					+"}" + NEWLINE
-					+"}" + NEWLINE
-					+"}," + NEWLINE
-					+"layout: {" + NEWLINE
-					+"hierarchical:{" + NEWLINE
-					+"direction: directionInput.value" + NEWLINE
-					+"}" + NEWLINE
-					+"}," + NEWLINE
-					+"physics: {" + NEWLINE
-					+"hierarchicalRepulsion: {" + NEWLINE
-					+"centralGravity: 0.05," + NEWLINE
-					+"springLength: 0," + NEWLINE
-					+"springConstant: 0.0007," + NEWLINE
-					+"nodeDistance: 200," + NEWLINE
-					+"damping: 0.04" + NEWLINE
-					+"}," + NEWLINE
-					+"maxVelocity: 27," + NEWLINE
-					+"solver: 'hierarchicalRepulsion'," + NEWLINE
-					+"timestep: 0.5," + NEWLINE
-					+"stabilization: {" + NEWLINE
-					+"iterations: 800" + NEWLINE
-					+"}" + NEWLINE
-					+"}" + NEWLINE
-					+"}" + NEWLINE);
-	}
+	
 	
 	/**
 	 * Returns the nodeWriter.
@@ -1117,14 +1218,6 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		return edgeWriter;
 	}
 	
-	/**
-	 * Returns the optionsWriter.
-	 * 
-	 * @return
-	 */
-	public BufferedWriter getOptionsWriter(){
-		return optionsWriter;
-	}
 		
 		
 	
