@@ -17,6 +17,7 @@
  */
 package org.corpus_tools.salt.common;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -30,7 +31,7 @@ import org.eclipse.emf.common.util.URI;
  * 
  * @author florian
  */
-public interface SaltProject {
+public interface SaltProject extends Serializable {
 	/**
 	 * Returns all corpus structures contained in this project.
 	 * 
