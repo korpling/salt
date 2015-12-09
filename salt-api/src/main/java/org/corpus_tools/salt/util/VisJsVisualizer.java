@@ -10,9 +10,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.xml.stream.XMLStreamException;
@@ -50,8 +54,7 @@ import org.eclipse.emf.common.util.EList;
  * created from an {@link SDocument} or from an {@link org.eclipse.emf.common.util.URI} of a salt file, using the vis.js library.
  *
  * 
- * Also it can be used to get both nodes and relations of a salt document in JSON format 
- * as well as vis.js-options. 
+ * Also it can be used to get both nodes and relations of a salt document in JSON format.
  * Note, if no export filter used, all nodes and all relations but textual relations will be visualized.
  * </p>
  * 
@@ -79,13 +82,7 @@ import org.eclipse.emf.common.util.EList;
 *	 	
 *	VisJsVisualizer.setNodeWriter(System.out);
 *	VisJsVisualizer.setEdgeWriter(System.out);
-*	VisJsVisualizer.setOptionsWriter(System.out);
 *	VisJsVisualizer.buildJSON();
-*	try {
-*		VisJsVisualizer.buildOptions();
-*	} catch (IOException e1) {
-*		e1.printStackTrace();
-*	}
 *		
 *	BufferedWriter bw;
 *				
@@ -97,10 +94,6 @@ import org.eclipse.emf.common.util.EList;
 *		bw = VisJsVisualizer.getEdgeWriter();		
 *		bw.newLine();
 *		bw.flush();	
-*	
-*		bw = VisJsVisualizer.getOptionsWriter();
-*		bw.flush();
-*		bw.close();
 *			
 *	} catch (IOException e) {
 *		e.printStackTrace();
@@ -200,7 +193,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     
     private boolean writeNodeImmediately = false;
     
-   // private static final String OUTPUT_FILE = "saltVisJs.html";	
     public static final String NODES_AND_EDGES_FILE = "saltNodesAndEdges.json";
     public static final String CSS_FOLDER_OUT = "css";
     public static final String JS_FOLDER_OUT = "js";
@@ -214,12 +206,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	
 	
 	private final static String JQUERY_SRC = JS_FOLDER_OUT + System.getProperty("file.separator") + JQUERY_FILE;
-			//"js/jquery.js";
 	private final static String VIS_JS_SRC = JS_FOLDER_OUT + System.getProperty("file.separator") + JS_FILE;
-	//"js/vis.min.js";
-	private final static String VIS_CSS_SRC = CSS_FOLDER_OUT + System.getProperty("file.separator") + CSS_FILE;
-			//"css/vis.min.css";
-    
+	private final static String VIS_CSS_SRC = CSS_FOLDER_OUT + System.getProperty("file.separator") + CSS_FILE;    
         
     private static final String RESOURCE_FOLDER = System.getProperty("file.separator") + "visjs"; 
     
@@ -306,7 +294,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       * 
       * @param inputFileUri a hierarchical URI of a salt file, which have to be visualized. 
       * 			The constructor will create a new  {@link SDocument} from this.
-      * @param exportFilter an ExportFilter to exclude selected nodes and/or relations from the visualizing
+      * @param exportFilter an ExportFilter to exclude selected nodes and/or relations from the visualization
       * 
       * @throws SaltParameterException if the inputFileUri is null 
       * @throws SaltResourceException if a problem occurred while loading salt project from the inputFileUri
@@ -357,17 +345,18 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     /**
      * <p>
      * This method writes the html document, which visualizes the Salt document, specified by constructor.
-     * The output folder structure will be created, if not yet exists and the output html file as well as the 
+     * The output folder structure will be created, if not yet exists. The output html file as well as the 
      * auxiliary files will be written.
      * </p>
      * 
-     * The whole output structure will looks like following: </br>
+     * The whole output structure will look like following: </br>
      * <pre>
      * outputFolder </br>
      *  --> css </br>
      * 		-->vis.min.css </br>
      *  --> js </br>
      * 		-->vis.min.js </br> 
+     * 		-->jquery.js  </br>
      *  --> saltVisJs.html </br> 
      * </pre>
      * 
@@ -1077,6 +1066,39 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	}
 	
 	
+	private static List<Map.Entry<String, String>> sortAnnotations(Set<SAnnotation> sAnnotations)
+	{
+		Map<String, String> annotationMap = new HashMap<String, String>();
+		
+		for(SAnnotation sAnnotation: sAnnotations) {
+			annotationMap.put(sAnnotation.getName(), sAnnotation.getValue().toString());
+		}	
+		
+		List<Map.Entry<String, String>>  sortedAnnotations = sortByKey(annotationMap);
+		
+		return sortedAnnotations;		
+	}
+	
+		
+	private static <K, V> List<Map.Entry<K, V>> sortByKey(Map<K, V> map) {
+		List<Map.Entry<K, V>> entries = new ArrayList<Map.Entry<K, V>>(map.size());
+		entries.addAll(map.entrySet());
+		
+		Comparator<Map.Entry<K, V>> comparator = new Comparator<Map.Entry<K, V>>() {
+			public int compare(Map.Entry<K, V> e1, Map.Entry<K, V> e2) {
+				return e1.getKey().toString().compareToIgnoreCase(e2.getKey().toString());
+						
+			}
+		};
+		// sort  key values lexicographically
+		Collections.sort(entries, comparator);
+
+		return entries;
+	}
+
+	
+	
+	
 	private void writeJsonNode (SNode node, long levelValue, ExportFilter filter) throws IOException
 	{
 		if (filter == null || !filter.excludeNode(node))	
@@ -1092,19 +1114,24 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		 
 	
 		   Set<SAnnotation> sAnnotations = node.getAnnotations();
+		  
+		   
+		   
 		   if (sAnnotations.size() > 0)
-		   {		
+		   {    
 			   allLabels += "" + NEWLINE;
+			   List<Map.Entry<String, String>>  sortedAnnotations = sortAnnotations(sAnnotations);		   	   
+			  
 			   
-			   int i= 1;
-			   for (SAnnotation annotation : sAnnotations) 
+			   int i=0;
+			   for (Map.Entry<String, String> annotation : sortedAnnotations) 
 			   {
-				   allLabels += (annotation.getName() + "=" + annotation.getValue().toString());
-				   i++;
+				   allLabels += (annotation.getKey() + "=" + annotation.getValue());
 				   
-				   if (i < sAnnotations.size()-1){
+				   if (i < sortedAnnotations.size()){
 					   allLabels+= NEWLINE;
 				   }
+				   i++;
 			   }
 		   }
 		   
@@ -1183,16 +1210,17 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  if (sAnnotations.size() > 0)
 			   {		
 				   String allLabels = "";
+				   List<Map.Entry<String, String>>  sortedAnnotations = sortAnnotations(sAnnotations);		
 				   
-				   int i= 1;
-				   for (SAnnotation annotation : sAnnotations) 
+				   int i= 0;
+				   for (Map.Entry<String, String> annotation : sortedAnnotations) 
 				   {
-					   allLabels += (annotation.getName() + "=" + annotation.getValue().toString());
-					   i++;
+					   allLabels += (annotation.getKey() + "=" + annotation.getValue());					
 					   
-					   if (i < sAnnotations.size()-1){
+					   if (i < sAnnotations.size()){
 						   allLabels+= NEWLINE;
 					   }
+					   i++;
 				   }
 				   
 				   jsonWriterEdges.key("label");
@@ -1237,8 +1265,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	private int getMaxLevel(SDocument doc)
 	{
 		maxLevel = getMaxHeightOfSDocGraph(doc) + 1;
-		int nSpanClasses = spanClasses.size();
-		
+		int nSpanClasses = spanClasses.size();		
 		 maxLevel += nSpanClasses;
 		 return maxLevel;
 	}
@@ -1279,8 +1306,10 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					  Set<SAnnotation> sAnnotations = currNode.getAnnotations();
 					   if (sAnnotations.size() > 0)
 					   {	
-						   // use the first annotation
-						   annClass = sAnnotations.iterator().next().getName();					   
+							   List<Map.Entry<String, String>> sortedAnnotations = sortAnnotations(sAnnotations);
+							   // use the first annotation
+									   annClass = sortedAnnotations.iterator().next().getKey();
+								  					    
 					   }
 				 
 					  if (!spanClasses.containsKey(annClass)) spanClasses.put(annClass, -1);				  
@@ -1318,9 +1347,12 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode)))
 					  {	
 						  String annotation = "";
-						  Set<SAnnotation>  annotations = fromNode.getAnnotations();
-						  if (annotations.size() > 0){
-							  annotation = annotations.iterator().next().getName();
+						  Set<SAnnotation>  sAnnotations = fromNode.getAnnotations();
+						  
+						  if (sAnnotations.size() > 0){
+							  List<Map.Entry<String, String>> sortedAnnotations = sortAnnotations(sAnnotations);
+							  // use first annotation
+							  annotation = sortedAnnotations.iterator().next().getKey();
 						  }						  
 						  
 						  int spanOffset = spanClasses.get(annotation);						  
