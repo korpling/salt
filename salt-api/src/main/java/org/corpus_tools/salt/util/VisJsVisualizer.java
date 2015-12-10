@@ -42,11 +42,8 @@ import org.json.JSONException;
 import org.json.JSONWriter;
 
 import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import org.json.*;
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <p>
@@ -75,7 +72,7 @@ import org.eclipse.emf.common.util.EList;
  *</pre> 
  *
  *<p>The next listing shows how to get the nodes and the relations of an input salt file in JSON format by use of this class. 
- * For simplicity, the created JSON objects and the options for vis.js-visualization will be written to the standard output.
+ * For simplicity, the created JSON objects will be written to the standard output.
  *<pre>
  * URI uri = URI.createFileURI("path_to_the_input_salt_file");	
 *	VisJsVisualizer VisJsVisualizer = new VisJsVisualizer(uri);
@@ -118,11 +115,11 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	public  BufferedWriter jsonWriter;
 	public  BufferedWriter nodeWriter;
 	public  BufferedWriter edgeWriter;
-	public  BufferedWriter optionsWriter;
+
 	
 	private  JSONWriter jsonWriterNodes;
 	private  JSONWriter jsonWriterEdges;
-	//private  JSONWriter jsonWriterCommon;
+
 	
 	private  XMLOutputFactory outputFactory;
 	private  OutputStream os;
@@ -941,7 +938,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		    writer.close();     
 	}
 	
-	public void setJsonWriter (OutputStream os)
+	private void setJsonWriter (OutputStream os)
 	{
 		this.jsonWriter = new BufferedWriter(new OutputStreamWriter(os));		
 

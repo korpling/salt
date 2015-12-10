@@ -1,6 +1,6 @@
 package org.corpus_tools.salt.util.tests;
 
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -16,6 +16,7 @@ import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.corpus_tools.salt.util.VisJsVisualizer;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.io.Files;
@@ -32,19 +33,21 @@ public class VisJsVisualizerTest {
 	
 	private  String [] allFileNames;
 
-	public VisJsVisualizerTest()
-	{
+	
+	
+	@Before
+	  public void setUp() {
 		this.allFileNames = new String [5];
 		allFileNames[0] = VisJsVisualizer.HTML_FILE;
 		allFileNames[1] = VisJsVisualizer.JS_FOLDER_OUT + FSEP + VisJsVisualizer.JQUERY_FILE;
 		allFileNames[2] = VisJsVisualizer.JS_FOLDER_OUT + FSEP + VisJsVisualizer.JS_FILE;
 		allFileNames[3] = VisJsVisualizer.CSS_FOLDER_OUT + FSEP + VisJsVisualizer.CSS_FILE;
-		allFileNames[4] = VisJsVisualizer.JSON_FOLDER_OUT + FSEP + VisJsVisualizer.NODES_AND_EDGES_FILE;		
-	}
+		allFileNames[4] = VisJsVisualizer.JSON_FOLDER_OUT + FSEP + VisJsVisualizer.NODES_AND_EDGES_FILE;	
+	  }
 		
 	
 	@Test
-	public void testHtmlWriterWholeDocLoadJson() {
+	public void testHtmlWriterWholeDocLoadJson() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		String inputFilePath = INPUT_FILE_MAIN_TEST;		
 		String outputFolderName =  "pcc_whole_doc_11299_load_json";
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFolderName;	   
@@ -55,11 +58,9 @@ public class VisJsVisualizerTest {
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 		
-		try 
-		{
+		
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try 
-			 {
+			
 				boolean equalFiles = false;
 				visJsVisualizer.visualize(outputFolderUri, true);
 				
@@ -70,29 +71,20 @@ public class VisJsVisualizerTest {
 					
 					for (int i=0; i<allFileNames.length; i++)
 					{
-						equalFiles = equalFiles && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
+						equalFiles = equalFiles && filesAreEqual(new File(resultFolder, allFileNames[i]), new File(testFolder, allFileNames[i]));
 				
 					}					
 				}
 				
 				Assert.assertTrue(equalFiles);
 				
-				
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
 	}
 	
 		
 	
 	
 	@Test
-	public void testHtmlWriterWholeDoc() {
+	public void testHtmlWriterWholeDoc() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		String inputFilePath = INPUT_FILE_MAIN_TEST;	
 		String outputFolderName = "pcc_whole_doc_11299";	   
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFolderName;	   
@@ -100,42 +92,32 @@ public class VisJsVisualizerTest {
 		URI uri = URI.createFileURI(inputFilePath);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 		File testFolder = new File(outputFolderPath);
-		File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);
+		File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);		
 		
-		try {
-			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try {
-				boolean equalFiles = false;
-				visJsVisualizer.visualize(outputFolderUri, false);
+		 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
+		
+			boolean equalFiles = false;
+			visJsVisualizer.visualize(outputFolderUri, false);
+			
+			if(folderStructureOk(testFolder, false) && folderStructureOk(resultFolder, false))
+			{
+				equalFiles = true;
 				
-				if(folderStructureOk(testFolder, false) && folderStructureOk(resultFolder, false))
+				for (int i=0; i<(allFileNames.length - 1); i++)
 				{
-					equalFiles = true;
-					
-					for (int i=0; i<(allFileNames.length - 1); i++)
-					{
-						equalFiles = equalFiles && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
-					
-					}					
-				}
+					equalFiles = equalFiles && filesAreEqual(new File(resultFolder, allFileNames[i]), new File(testFolder, allFileNames[i]));
 				
-				Assert.assertTrue(equalFiles);
-				
-				
-				
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				}					
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+			
+			Assert.assertTrue(equalFiles);			
 	}
 	
 	
+	
+	
 	@Test
-	public void testHtmlWriterSample() {
+	public void testHtmlWriterSample() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createDocumentStructure(doc);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
@@ -145,9 +127,9 @@ public class VisJsVisualizerTest {
 		File testFolder = new File(outputFolderPath);
 		File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);
 		
-		try {
+
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try {
+	
 				 boolean equalFiles = false;
 					visJsVisualizer.visualize(outputFolderUri, false);
 					
@@ -157,26 +139,17 @@ public class VisJsVisualizerTest {
 						
 						for (int i=0; i<(allFileNames.length - 1); i++)
 						{
-							equalFiles = equalFiles && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
+							equalFiles = equalFiles && filesAreEqual(new File(resultFolder, allFileNames[i]), new File(testFolder, allFileNames[i]));
 							
 						}					
 					}
 					
-					Assert.assertTrue(equalFiles);				
-				
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+				Assert.assertTrue(equalFiles);				
 	
 	}
 	
 	@Test
-	public void testHtmlWriterSampleAnaphoricAnnLoadJson() {
+	public void testHtmlWriterSampleAnaphoricAnnLoadJson() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createAnaphoricAnnotations(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
@@ -186,9 +159,9 @@ public class VisJsVisualizerTest {
 		File testFolder = new File(outputFolderPath);
 		File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);
 		
-		try {
+		
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try {				 
+						 
 				 boolean equalFiles = false;
 					visJsVisualizer.visualize(outputFolderUri, true);
 					
@@ -198,24 +171,18 @@ public class VisJsVisualizerTest {
 						
 						for (int i=0; i<allFileNames.length; i++)
 						{
-							equalFiles = equalFiles && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
+							equalFiles = equalFiles && filesAreEqual(new File(resultFolder, allFileNames[i]), new File(testFolder, allFileNames[i]));
 							
 						}					
 					}
 					
 					Assert.assertTrue(equalFiles);
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
 	}
 	
+	
+	
 	@Test
-	public void testHtmlWriterSampleDependencies() {
+	public void testHtmlWriterSampleDependencies() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createDependencies(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
@@ -224,9 +191,9 @@ public class VisJsVisualizerTest {
 		
 		File testFolder = new File(outputFolderPath);
 		File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);
-		try {
+	
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try {
+	
 				 boolean equalFiles = false;
 					visJsVisualizer.visualize(outputFolderUri, false);
 					
@@ -236,26 +203,19 @@ public class VisJsVisualizerTest {
 						
 						for (int i=0; i<(allFileNames.length - 1); i++)
 						{
-							equalFiles = equalFiles && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
+							equalFiles = equalFiles && filesAreEqual(new File(resultFolder, allFileNames[i]), new File(testFolder, allFileNames[i]));
 							
 						}					
 					}
 					
 					Assert.assertTrue(equalFiles);		
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		
 	}
 	
 	
 	
 	@Test
-	public void testHtmlWriterSampleSyntaxStructure() {
+	public void testHtmlWriterSampleSyntaxStructure() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createSyntaxStructure(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
@@ -265,9 +225,8 @@ public class VisJsVisualizerTest {
 		File testFolder = new File(outputFolderPath);
 		File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);
 		
-		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try {
+	
 				 boolean equalFiles = false;
 					visJsVisualizer.visualize(outputFolderUri, false);
 					
@@ -277,24 +236,17 @@ public class VisJsVisualizerTest {
 						
 						for (int i=0; i<(allFileNames.length - 1); i++)
 						{
-							equalFiles = equalFiles && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
+							equalFiles = equalFiles && filesAreEqual(new File(resultFolder, allFileNames[i]), new File(testFolder, allFileNames[i]));
 							
 						}					
 					}
 					
 					Assert.assertTrue(equalFiles);	
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+			
 	}
 	
 	@Test
-	public void testHtmlWriterSampleTokens() {
+	public void testHtmlWriterSampleTokens() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createTokens(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
@@ -304,9 +256,9 @@ public class VisJsVisualizerTest {
 		File testFolder = new File(outputFolderPath);
 		File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);
 		
-		try {
+
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try {
+
 				 boolean equalFiles = false;
 					visJsVisualizer.visualize(outputFolderUri, false);
 					
@@ -316,24 +268,19 @@ public class VisJsVisualizerTest {
 						
 						for (int i=0; i<(allFileNames.length - 1); i++)
 						{
-							equalFiles = equalFiles && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
+							equalFiles = equalFiles && filesAreEqual(new File(resultFolder, allFileNames[i]), new File(testFolder, allFileNames[i]));
 							
 						}					
 					}
 					
 					Assert.assertTrue(equalFiles);
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+
 	}
 	
+	
+	
 	@Test
-	public void testHtmlWriterSampleMorphologyAnn() {
+	public void testHtmlWriterSampleMorphologyAnn() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createMorphologyAnnotations(doc);
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
@@ -343,9 +290,8 @@ public class VisJsVisualizerTest {
 		File testFolder = new File(outputFolderPath);
 		File resultFolder = new File (TEST_RESULT_FOLDER, outputFolderName);
 		
-		try {
 			 URI outputFolderUri = URI.createFileURI(outputFolderPath);	
-			 try {
+		
 				 boolean equalFiles = false;
 					visJsVisualizer.visualize(outputFolderUri, false);
 					
@@ -355,21 +301,13 @@ public class VisJsVisualizerTest {
 						
 						for (int i=0; i<(allFileNames.length - 1); i++)
 						{
-							equalFiles = equalFiles && filesAreEqual(new File(testFolder, allFileNames[i]), new File(resultFolder, allFileNames[i]));
+							equalFiles = equalFiles && filesAreEqual(new File(resultFolder, allFileNames[i]), new File(testFolder, allFileNames[i]));
 							
 						}					
 					}
 					
 					Assert.assertTrue(equalFiles);
 					
-			} catch (SaltException | XMLStreamException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
 	}
 	
 	
@@ -377,6 +315,7 @@ public class VisJsVisualizerTest {
 	@Test(expected = SaltParameterException.class)
 	public void testInputUrlIsNull(){
 		URI uri = null;
+		@SuppressWarnings("unused")
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 	}
 	
@@ -384,6 +323,7 @@ public class VisJsVisualizerTest {
 	public void testInvalideSaltFormat(){
 		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_invalid_format" + FSEP + "pcc2" + FSEP + "11299.salt";
 		URI uri = URI.createFileURI(inputFilePath);	
+		@SuppressWarnings("unused")
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 	}
 	
@@ -391,6 +331,7 @@ public class VisJsVisualizerTest {
 	public void testAbsentSaltResource(){
 		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_absent_resource" + FSEP + "pcc2" + FSEP + "11299.salt";
 		URI uri = URI.createFileURI(inputFilePath);	
+		@SuppressWarnings("unused")
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 	}
 	
@@ -429,7 +370,6 @@ public class VisJsVisualizerTest {
 			
 			if(folder.listFiles().length == nFiles)
 			{
-				// TODO more differentiable test
 				return true;
 			}
 		}		
