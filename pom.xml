@@ -4,7 +4,7 @@
 	<groupId>org.corpus-tools</groupId>
 	<artifactId>salt</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.2</version>
+	<version>3.0.3-SNAPSHOT</version>
 	<modules>
 		<module>salt-api</module>
 		<module>salt-doc</module>
@@ -44,7 +44,7 @@
 		<connection>scm:git:git://github.com/korpling/salt.git</connection>
 		<developerConnection>scm:git:git@github.com:korpling/salt.git</developerConnection>
 		<url>https://github.com/korpling/salt</url>
-		<tag>salt-3.0.2</tag>
+		<tag>salt-3.0.0</tag>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
