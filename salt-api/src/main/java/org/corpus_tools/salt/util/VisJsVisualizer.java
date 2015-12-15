@@ -1187,9 +1187,12 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		jsonWriterNodes.endObject();	
 		nodeWriter.newLine();	
 		
-		if(writeNodeImmediately) nodeWriter.flush();
-		
+		if(writeNodeImmediately) 
+		{
+			nodeWriter.flush();
 		}
+		
+	}
 }
 		 
 	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation, ExportFilter filter) throws IOException
@@ -1272,8 +1275,14 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	private  int  getMaxHeightOfSDocGraph(SDocument doc)
 	{
 		doc.getDocumentGraph().traverse(doc.getDocumentGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAV_MODE_CALC_LEVEL, this);		
-		if (maxHeight > (Integer.MAX_VALUE - 100)) throw new SaltException("The specified document cannot be visualized. It is too complex.");    
-		else return (int) maxHeight;
+		if (maxHeight > (Integer.MAX_VALUE - 100)) 
+		{
+			throw new SaltException("The specified document cannot be visualized. It is too complex.");    
+		}
+		else 
+		{
+			return (int) maxHeight;
+		}
 		
 	}
 	
@@ -1292,7 +1301,10 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 				if (sRelation!= null)
 				{			
 						currHeight++;
-						if (maxHeight < currHeight) maxHeight = currHeight;
+						if (maxHeight < currHeight)
+						{
+							maxHeight = currHeight;
+						}
 
 				}	
 			
@@ -1309,7 +1321,10 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 								  					    
 					   }
 				 
-					  if (!spanClasses.containsKey(annClass)) spanClasses.put(annClass, -1);				  
+					  if (!spanClasses.containsKey(annClass)) 
+					  {
+						  spanClasses.put(annClass, -1);				  
+					  }
 				  }
 			
 			}
@@ -1346,7 +1361,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 						  String annotation = "";
 						  Set<SAnnotation>  sAnnotations = fromNode.getAnnotations();
 						  
-						  if (sAnnotations.size() > 0){
+						  if (sAnnotations.size() > 0)
+						  {
 							  List<Map.Entry<String, String>> sortedAnnotations = sortAnnotations(sAnnotations);
 							  // use first annotation
 							  annotation = sortedAnnotations.iterator().next().getKey();
@@ -1354,7 +1370,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 						  
 						  int spanOffset = spanClasses.get(annotation);						  
 						  						  
-						  if(spanOffset == -1){
+						  if(spanOffset == -1)
+						  {
 							  maxSpanOffset = Math.max(spanOffset, maxSpanOffset) + 1;
 							  spanClasses.put(annotation, maxSpanOffset);
 						  }
@@ -1419,8 +1436,15 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation edge,
 			SNode currNode, long order) 
 	{
-		if(edge instanceof SDominanceRelation || edge instanceof SSpanningRelation || edge instanceof SPointingRelation || edge == null)  return true;
-		else return false;
+		if(edge instanceof SDominanceRelation || edge instanceof SSpanningRelation || 
+				edge instanceof SPointingRelation || edge == null)  
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
 		
 	}
 	
