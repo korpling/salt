@@ -17,6 +17,7 @@
  */
 package org.corpus_tools.salt.graph;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
@@ -31,7 +32,7 @@ import java.util.Set;
  * @author florian
  *
  */
-public interface LabelableElement {
+public interface LabelableElement extends Serializable {
 	/**
 	 * Returns all labels being contained by this object.
 	 * 
