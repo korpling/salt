@@ -320,7 +320,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 
 	/** {@inheritDoc Graph#addRelation(Relation)} **/
 	@Override
-	public void addRelation(Relation<? extends Node, ? extends Node> relation) {
+	public void addRelation(Relation<? extends N, ? extends N> relation) {
 		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
 			return;
 		}
@@ -452,7 +452,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 
 	/** {@inheritDoc} **/
 	@Override
-	public void removeRelation(R rel) {
+	public void removeRelation(Relation<? extends N, ? extends N> rel) {
 		if (rel != null) {
 			if (rel instanceof RelationImpl) {
 				((RelationImpl<N, N>) rel).basicSetGraph(null);
@@ -488,7 +488,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 * @param relation
 	 *            the relation to be removed
 	 */
-	protected void basicRemoveRelation(R rel) {
+	protected void basicRemoveRelation(Relation<? extends N, ? extends N> rel) {
 		// remove relation from all indexes
 		getIndexMgr().removeValue(rel);
 		getIndexMgr().remove(SaltUtil.IDX_ID_RELATIONS_INVERSE, rel);
