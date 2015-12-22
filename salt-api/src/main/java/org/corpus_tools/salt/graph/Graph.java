@@ -120,7 +120,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer
 	 * @param relation
 	 *            relation to be inserted
 	 */
-	public void addRelation(Relation<? extends Node, ? extends Node> relation);
+	public void addRelation(Relation<? extends N, ? extends N> relation);
 
 	/**
 	 * Removes the passed relation from this graph. If a relation is removed, it
@@ -130,7 +130,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer
 	 * @param relation
 	 *            relation to be removed
 	 */
-	public void removeRelation(R relation);
+	public void removeRelation(Relation<? extends N, ? extends N> relation);
 
 	/**
 	 * Removes all relations from this graph and cleans all indexes.

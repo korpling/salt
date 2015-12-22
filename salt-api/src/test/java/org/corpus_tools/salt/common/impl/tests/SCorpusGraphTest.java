@@ -94,18 +94,6 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		assertEquals(0, project.getCorpusGraphs().size());
 	}
 
-	/**
-	 * Tries to add a relation which is not of type {@link SRelation}
-	 */
-	@Test
-	public void testAddUnsupportedRelation() {
-		try {
-			getFixture().addRelation(GraphFactory.createRelation());
-			fail("Should not add this type of relation");
-		} catch (SaltInsertionException e) {
-		}
-	}
-
 	@Test
 	public void testGetDocuments() {
 		String[] ids = { "salt:/graph1#doc1", "salt:/graph1#doc2", "salt:/graph1#doc3", "salt:/graph1#doc4" };

@@ -83,7 +83,7 @@ public interface Layer<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param relation
 	 *            relation to be inserted into this layer
 	 */
-	public void addRelation(Relation<? extends Node, ? extends Node> relation);
+	public void addRelation(Relation<? extends N, ? extends N> relation);
 
 	/**
 	 * Removes the passed relation from this layer. If the passed relation is
@@ -92,7 +92,7 @@ public interface Layer<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param relation
 	 *            to be removed
 	 */
-	public void removeRelation(R relation);
+	public void removeRelation(Relation<? extends N, ? extends N> relation);
 
 	/**
 	 * Returns a set of all contained relations, in the order how the relations
