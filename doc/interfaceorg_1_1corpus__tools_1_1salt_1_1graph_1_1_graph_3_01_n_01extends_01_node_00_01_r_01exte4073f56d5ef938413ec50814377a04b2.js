@@ -2,7 +2,7 @@ var interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01
 [
     [ "addLayer", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#ad6fd17362c67c2e6e66c776334b3215d", null ],
     [ "addNode", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#af7b8e93827ebba58fbaef8ae668e70fe", null ],
-    [ "addRelation", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#ae464da7961926ebe27a981d7a7c5182b", null ],
+    [ "addRelation", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#a83a1fbba82064fe53568c520e3f1410f", null ],
     [ "containsLayer", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#a544009a4be3b8b2f8280dfecf2e0a830", null ],
     [ "containsNode", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#a4151306a5f12c5aba1ec2c498a634ee4", null ],
     [ "containsRelation", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#ae1a89f5c8bbacfa835f5c6e3ca7c8d9d", null ],
@@ -18,6 +18,6 @@ var interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01
     [ "getRelations", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#a0b137aa96f588e89975b1d35c79228d4", null ],
     [ "removeLayer", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#a2d137f3b12443aed3810df158f523398", null ],
     [ "removeNode", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#abad6c8b209eff9b5b4837c41d00b1240", null ],
-    [ "removeRelation", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#ad09d01ff8c46cd70571f1beb98ed03c2", null ],
+    [ "removeRelation", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#a0192631b10492dee11cc22690d6ff4d4", null ],
     [ "removeRelations", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#a8a77dca418f14264101bd7349e47ef5b", null ]
 ];
