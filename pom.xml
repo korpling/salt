@@ -8,6 +8,7 @@
 	<modules>
 		<module>salt-api</module>
 		<module>salt-doc</module>
+		<module>salt-extensions</module>
 	</modules>
 	<developers>
 		<developer>

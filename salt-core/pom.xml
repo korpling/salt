@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>salt-core</artifactId>
+	<packaging>bundle</packaging>
+	<parent>
+		<groupId>de.hu_berlin.german.korpling.saltnpepper</groupId>
+		<artifactId>saltSimple</artifactId>
+		<version>3.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<properties>
+		<nv-i18n.version>1.1</nv-i18n.version>
+		<textcat.version>1.0.1</textcat.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<guava.version>14.0.1</guava.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		<!-- iso language codes -->
+		<dependency>
+			<groupId>com.neovisionaries</groupId>
+			<artifactId>nv-i18n</artifactId>
+			<version>${nv-i18n.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<!-- automatic language detection -->
+		<dependency>
+			<groupId>org.knallgrau</groupId>
+			<artifactId>textcat</artifactId>
+			<version>${textcat.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<!-- Logging framework -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>${maven-bundle-plugin.version}</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<manifestLocation>${basedir}/META-INF</manifestLocation>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<instructions>
+						<Bundle-Name>${project.artifactId}</Bundle-Name>
+						<Bundle-SymbolicName>${project.groupId}.${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-RequiredExecutionEnvironment>JavaSE-${java.version}</Bundle-RequiredExecutionEnvironment>
+						<!-- <Import-Package> !de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.*,* 
+							</Import-Package> <Export-Package> de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.* 
+							</Export-Package> <Include-Resource>{maven-resources}, LICENSE, NOTICE</Include-Resource> -->
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<reportPlugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-project-info-reports-plugin</artifactId>
+							<version>2.4</version>
+							<configuration>
+								<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+							</configuration>
+							<reports>
+								<report>index</report>
+								<report>summary</report>
+								<report>license</report>
+							</reports>
+						</plugin>
+
+						<plugin>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>findbugs-maven-plugin</artifactId>
+							<version>3.0.2</version>
+							<configuration>
+								<excludeFilterFile>${basedir}/src/findbugs/excludeFilter.xml</excludeFilterFile>
+							</configuration>
+						</plugin>
+
+
+					</reportPlugins>
+				</configuration>
+			</plugin>
+		 <plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-surefire-plugin</artifactId>
+		  <version>2.15</version>
+		 </plugin>
+		</plugins>
+	</build>
+</project>

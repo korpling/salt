@@ -1,0 +1,51 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1452172366408
+Build-Jdk: 1.8.0_66-internal
+Built-By: florian
+Bundle-Description: Salt is an abstract and graph based meta model for d
+ ealing with linguistic annotated data. Salt describes a minimum of sema
+ ntic and only handles the structure of linguistic data.
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: salt-core
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-SymbolicName: de.hu_berlin.german.korpling.saltnpepper.salt-core;
+ singleton:=true
+Bundle-Vendor: Humboldt-Universität zu Berlin, INRIA
+Bundle-Version: 3.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: de.hu_berlin.u.saltnpepper.graph;uses:="de.hu_berlin.u.s
+ altnpepper.salt.index,de.hu_berlin.u.saltnpepper.salt.util";version="3.
+ 0.0.SNAPSHOT",de.hu_berlin.u.saltnpepper.salt.exceptions;uses:="de.hu_b
+ erlin.u.saltnpepper.graph,de.hu_berlin.u.saltnpepper.salt.core";version
+ ="3.0.0.SNAPSHOT",de.hu_berlin.u.saltnpepper.salt.index;version="3.0.0.
+ SNAPSHOT",de.hu_berlin.u.saltnpepper.salt;uses:="de.hu_berlin.u.saltnpe
+ pper.graph,de.hu_berlin.u.saltnpepper.salt.common,de.hu_berlin.u.saltnp
+ epper.salt.core,de.hu_berlin.u.saltnpepper.salt.semantics";version="3.0
+ .0.SNAPSHOT",de.hu_berlin.u.saltnpepper.salt.samples;uses:="de.hu_berli
+ n.u.saltnpepper.salt.common,de.hu_berlin.u.saltnpepper.salt.core";versi
+ on="3.0.0.SNAPSHOT",de.hu_berlin.u.saltnpepper.salt.common;uses:="com.g
+ oogle.common.collect,de.hu_berlin.u.saltnpepper.graph,de.hu_berlin.u.sa
+ ltnpepper.salt.common.tokenizer,de.hu_berlin.u.saltnpepper.salt.core,de
+ .hu_berlin.u.saltnpepper.salt.util,org.eclipse.emf.common.util";version
+ ="3.0.0.SNAPSHOT",de.hu_berlin.u.saltnpepper.salt.common.tokenizer;uses
+ :="com.neovisionaries.i18n,de.hu_berlin.u.saltnpepper.salt.common";vers
+ ion="3.0.0.SNAPSHOT",de.hu_berlin.u.saltnpepper.salt.semantics;uses:="d
+ e.hu_berlin.u.saltnpepper.salt.core";version="3.0.0.SNAPSHOT",de.hu_ber
+ lin.u.saltnpepper.salt.util;uses:="de.hu_berlin.u.saltnpepper.salt.comm
+ on,org.apache.commons.lang3.tuple,org.eclipse.emf.common.util";version=
+ "3.0.0.SNAPSHOT",de.hu_berlin.u.saltnpepper.salt.core;uses:="de.hu_berl
+ in.u.saltnpepper.graph,de.hu_berlin.u.saltnpepper.salt,org.eclipse.emf.
+ common.util";version="3.0.0.SNAPSHOT"
+Import-Package: com.google.common.base;version="[14.0,15)",com.google.co
+ mmon.collect;version="[14.0,15)",com.google.common.io;version="[14.0,15
+ )",com.neovisionaries.i18n,de.hu_berlin.u.saltnpepper.salt.common,de.hu
+ _berlin.u.saltnpepper.salt.common.tokenizer,de.hu_berlin.u.saltnpepper.
+ salt.core,de.hu_berlin.u.saltnpepper.salt.exceptions,de.hu_berlin.u.sal
+ tnpepper.salt.index,de.hu_berlin.u.saltnpepper.salt.semantics,javax.xml
+ .parsers,javax.xml.stream,org.apache.commons.lang3;version="[3.4,4)",or
+ g.apache.commons.lang3.tuple;version="[3.4,4)",org.eclipse.emf.common.u
+ til,org.knallgrau.utils.textcat,org.slf4j;version="[1.7,2)",org.xml.sax
+ ,org.xml.sax.ext
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Tool: Bnd-2.3.0.201405100607
