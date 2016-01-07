@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1452172366408
+Bnd-LastModified: 1452174710177
 Build-Jdk: 1.8.0_66-internal
 Built-By: florian
 Bundle-Description: Salt is an abstract and graph based meta model for d

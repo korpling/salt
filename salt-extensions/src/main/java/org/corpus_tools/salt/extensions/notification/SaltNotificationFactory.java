@@ -3,19 +3,6 @@ package org.corpus_tools.salt.extensions.notification;
 import java.util.Collection;
 import java.util.List;
 
-import org.corpus_tools.salt.extensions.notification.graph.Notifier;
-import org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl;
-import org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl;
-import org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl;
-import org.corpus_tools.salt.extensions.notification.graph.impl.NodeNotifierImpl;
-import org.corpus_tools.salt.extensions.notification.graph.impl.NotifierHelper;
-import org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl;
-
-import org.corpus_tools.salt.graph.Graph;
-import org.corpus_tools.salt.graph.Label;
-import org.corpus_tools.salt.graph.Layer;
-import org.corpus_tools.salt.graph.Node;
-import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.ISaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusDocumentRelation;
@@ -71,6 +58,18 @@ import org.corpus_tools.salt.core.impl.SMetaAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
+import org.corpus_tools.salt.extensions.notification.graph.Notifier;
+import org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl;
+import org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl;
+import org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl;
+import org.corpus_tools.salt.extensions.notification.graph.impl.NodeNotifierImpl;
+import org.corpus_tools.salt.extensions.notification.graph.impl.NotifierHelper;
+import org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl;
+import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Label;
+import org.corpus_tools.salt.graph.Layer;
+import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.impl.SaltFactoryImpl;
 import org.corpus_tools.salt.semantics.SCatAnnotation;
 import org.corpus_tools.salt.semantics.SLemmaAnnotation;
@@ -280,8 +279,8 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	@Override
 	public STextualDS createSTextualDS() {
 		System.out.println("--> create StextualDS");
-		System.out.println("type: "+ new STextualDSImpl(createNode()));
-		System.out.println("type: "+ new STextualDSImpl(createNode()).getClass());
+		System.out.println("type: " + new STextualDSImpl(createNode()));
+		System.out.println("type: " + new STextualDSImpl(createNode()).getClass());
 		return (new STextualDSImpl(createNode()));
 	}
 

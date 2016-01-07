@@ -1,20 +1,3 @@
-/**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- *
- */
 package org.corpus_tools.salt.graph.impl;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -28,21 +11,49 @@ import org.corpus_tools.salt.util.SaltUtil;
 @SuppressWarnings("serial")
 public class LabelImpl extends LabelableElementImpl implements Label, Copyable<Label> {
 
+	public LabelImpl() {
+		super();
+	}
+
+	/**
+	 * Initializes a new object and sets an internal delegatee. This means, all
+	 * method invocations are passed to the delegatee.
+	 * 
+	 * @param delegatee
+	 *            object to pass method invocations to.
+	 */
+	public LabelImpl(Label delegatee) {
+		super(delegatee);
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	protected Label getDelegate() {
+		return ((Label) delegate);
+	}
+
 	protected String namespace = null;
 
 	/** {@inheritDoc Label#getNamespace()} */
 	@Override
 	public String getNamespace() {
+		if (getDelegate() != null) {
+			return (getDelegate().getNamespace());
+		}
 		return namespace;
 	}
 
 	/** {@inheritDoc Label#setNamespace(String)} */
 	@Override
 	public void setNamespace(String namespace) {
-		if (namespace != null) {
-			this.namespace = namespace.intern();
+		if (getDelegate() != null) {
+			getDelegate().setNamespace(namespace);
 		} else {
-			this.namespace = null;
+			if (namespace != null) {
+				this.namespace = namespace.intern();
+			} else {
+				this.namespace = null;
+			}
 		}
 	}
 
@@ -51,32 +62,47 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	/** {@inheritDoc Label#getName()} */
 	@Override
 	public String getName() {
+		if (getDelegate() != null) {
+			return (getDelegate().getName());
+		}
 		return name;
 	}
 
 	/** {@inheritDoc Label#setName(String)} */
 	@Override
 	public void setName(String name) {
-		if ((name == null) || (name.isEmpty())) {
-			throw new SaltException("Cannot set the name of this label object, because it is empty.");
+		if (getDelegate() != null) {
+			getDelegate().setName(name);
+		} else {
+
+			if ((name == null) || (name.isEmpty())) {
+				throw new SaltException("Cannot set the name of this label object, because it is empty.");
+			}
+			if (name.contains(NS_SEPERATOR)) {
+				throw new SaltException("Cannot set the name to the given, because a namespace with namespace seperaor is illegal.");
+			}
+			this.name = name.intern();
 		}
-		if (name.contains(NS_SEPERATOR)) {
-			throw new SaltException("Cannot set the name to the given, because a namespace with namespace seperaor is illegal.");
-		}
-		this.name = name.intern();
 	}
 
 	/** {@inheritDoc Label#getQName()} */
 	@Override
 	public String getQName() {
+		if (getDelegate() != null) {
+			return (getDelegate().getQName());
+		}
 		return SaltUtil.createQName(getNamespace(), getName());
 	}
 
 	/** {@inheritDoc Label#setQName(String)} */
 	public void setQName(String newQName) {
-		Pair<String, String> pair = SaltUtil.splitQName(newQName);
-		setNamespace(pair.getLeft());
-		setName(pair.getRight());
+		if (getDelegate() != null) {
+			getDelegate().setQName(newQName);
+		} else {
+			Pair<String, String> pair = SaltUtil.splitQName(newQName);
+			setNamespace(pair.getLeft());
+			setName(pair.getRight());
+		}
 	}
 
 	/** The generic value field. **/
@@ -85,13 +111,20 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	/** {@inheritDoc Label#getValue()} */
 	@Override
 	public Object getValue() {
+		if (getDelegate() != null) {
+			return (getDelegate().getValue());
+		}
 		return value;
 	}
 
 	/** {@inheritDoc Label#setValue(Object)} */
 	@Override
 	public void setValue(Object value) {
-		this.value = value;
+		if (getDelegate() != null) {
+			getDelegate().setValue(value);
+		} else {
+			this.value = value;
+		}
 	}
 
 	// ==========================================> container
@@ -101,18 +134,22 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	/** {@inheritDoc} */
 	@Override
 	public void setContainer(LabelableElement container) {
-		LabelableElement oldContainer = this.container;
-		if (container != null) {
-			// add label to container
-			if (container instanceof LabelableElementImpl) {
-				container.addLabel(this);
-			}
+		if (getDelegate() != null) {
+			getDelegate().setContainer(container);
+		} else {
+			LabelableElement oldContainer = this.container;
+			if (container != null) {
+				// add label to container
+				if (container instanceof LabelableElementImpl) {
+					container.addLabel(this);
+				}
 
-		}
-		if (oldContainer != null) {
-			// remove label from old container
-			if (oldContainer instanceof LabelableElementImpl) {
-				((LabelableElementImpl) oldContainer).basicRemoveLabel(this.getQName());
+			}
+			if (oldContainer != null) {
+				// remove label from old container
+				if (oldContainer instanceof LabelableElementImpl) {
+					((LabelableElementImpl) oldContainer).basicRemoveLabel(this.getQName());
+				}
 			}
 		}
 	}
@@ -120,6 +157,9 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	/** {@inheritDoc} */
 	@Override
 	public LabelableElement getContainer() {
+		if (getDelegate() != null) {
+			return (getDelegate().getContainer());
+		}
 		return (container);
 	}
 
@@ -149,7 +189,11 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	 *            label to be inserted
 	 */
 	public void basicSetLabelableElement(LabelableElement container) {
-		this.container = container;
+		if (getDelegate() != null && getDelegate() instanceof LabelImpl) {
+			((LabelImpl) getDelegate()).basicSetLabelableElement(container);
+		} else {
+			this.container = container;
+		}
 	}
 
 	// ==========================================< container
@@ -164,17 +208,26 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	 */
 	@Override
 	public Label copy(Label other) {
-		if (other == null) {
-			throw new SaltException("Cannot clone label '" + this + "', because the given object is null and its not possible to copy values into a null object.");
+		if (getDelegate() != null) {
+			return (getDelegate().copy(other));
+		} else {
+
+			if (other == null) {
+				throw new SaltException("Cannot clone label '" + this + "', because the given object is null and its not possible to copy values into a null object.");
+			}
+			other.setNamespace(this.getNamespace());
+			other.setName(this.getName());
+			other.setValue(this.getValue());
+			return (other);
 		}
-		other.setNamespace(this.getNamespace());
-		other.setName(this.getName());
-		other.setValue(this.getValue());
-		return (other);
 	}
 
 	@Override
 	public String toString() {
+		if (getDelegate() != null) {
+			return (getDelegate().toString());
+		}
+
 		StringBuilder str = new StringBuilder();
 		str.append(SaltUtil.createQName(getNamespace(), getName()));
 		str.append("=");

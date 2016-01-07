@@ -43,7 +43,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 *            delegate object of the same type.
 	 */
 	public RelationImpl(Relation<S, T> delegate) {
-		this.delegate = delegate;
+		super(delegate);
 	}
 
 	/**
@@ -67,6 +67,9 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * {@inheritDoc Relation#getSource()}
 	 */
 	public S getSource() {
+		if (getDelegate() != null) {
+			return (getDelegate().getSource());
+		}
 		return source;
 	}
 
@@ -75,11 +78,15 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * change of the source.
 	 */
 	public void setSource(S source) {
-		S oldValue = getSource();
-		this.source = source;
-		// notify graph about change of target
-		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
+		if (getDelegate() != null) {
+			getDelegate().setSource(source);
+		} else {
+			S oldValue = getSource();
+			this.source = source;
+			// notify graph about change of target
+			if (getGraph() != null && getGraph() instanceof GraphImpl) {
+				((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
+			}
 		}
 	}
 
@@ -90,6 +97,9 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * {@inheritDoc Relation#getTarget()}
 	 */
 	public T getTarget() {
+		if (getDelegate() != null) {
+			return (getDelegate().getTarget());
+		}
 		return target;
 	}
 
@@ -98,11 +108,15 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * change of the target.
 	 */
 	public void setTarget(T target) {
-		T oldValue = this.getTarget();
-		this.target = target;
-		// notify graph about change of target
-		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
+		if (getDelegate() != null) {
+			getDelegate().setSource(source);
+		} else {
+			T oldValue = this.getTarget();
+			this.target = target;
+			// notify graph about change of target
+			if (getGraph() != null && getGraph() instanceof GraphImpl) {
+				((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
+			}
 		}
 	}
 
@@ -112,21 +126,28 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
 	public Graph getGraph() {
+		if (getDelegate() != null) {
+			getDelegate().getGraph();
+		}
 		return (graph);
 	}
 
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
-		Graph oldGraph = getGraph();
-		if (graph != null) {
-			graph.addRelation(this);
+		if (getDelegate() != null) {
+			getDelegate().setGraph(graph);
+		} else {
+			Graph oldGraph = getGraph();
+			if (graph != null) {
+				graph.addRelation(this);
+			}
+			if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
+				// remove relation from old graph
+				((GraphImpl) oldGraph).basicRemoveRelation(this);
+			}
+			basicSetGraph(graph);
 		}
-		if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
-			// remove relation from old graph
-			((GraphImpl) oldGraph).basicRemoveRelation(this);
-		}
-		basicSetGraph(graph);
 	}
 
 	/**
@@ -155,12 +176,19 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 *            graph which contains this relation
 	 */
 	protected void basicSetGraph(Graph graph) {
-		this.graph = graph;
+		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
+			((RelationImpl) getDelegate()).basicSetGraph(graph);
+		} else {
+			this.graph = graph;
+		}
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public Set<? extends Layer> getLayers() {
+		if (getDelegate() != null) {
+			return (getDelegate().getLayers());
+		}
 		Set<Layer> layers = new HashSet<>();
 		if (getGraph() != null) {
 			Set<Layer> allLayers = getGraph().getLayers();
@@ -183,9 +211,12 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 **/
 	@Override
 	public void addLayer(Layer layer) {
-		if (layer != null) {
-
-			layer.addRelation(this);
+		if (getDelegate() != null) {
+			getDelegate().addLayer(layer);
+		} else {
+			if (layer != null) {
+				layer.addRelation(this);
+			}
 		}
 	}
 
@@ -197,8 +228,12 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 **/
 	@Override
 	public void removeLayer(Layer layer) {
-		if (layer != null) {
-			layer.removeRelation(this);
+		if (getDelegate() != null) {
+			getDelegate().removeLayer(layer);
+		} else {
+			if (layer != null) {
+				layer.removeRelation(this);
+			}
 		}
 	}
 }

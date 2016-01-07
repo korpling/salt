@@ -18,8 +18,23 @@
 package org.corpus_tools.salt.core.impl;
 
 import org.corpus_tools.salt.core.SAnnotation;
+import org.corpus_tools.salt.graph.Label;
 
 @SuppressWarnings("serial")
 public class SAnnotationImpl extends SAbstractAnnotationImpl implements SAnnotation {
+	/** Initializes an object of type {@link SAnnotationImpl}. **/
+	public SAnnotationImpl() {
+	}
 
+	/**
+	 * Initializes an object of type {@link SAnnotationImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SAnnotationImpl(Label delegate) {
+		super(delegate);
+	}
 } // SAnnotationImpl

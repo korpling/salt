@@ -21,12 +21,30 @@ import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SSpan;
 import org.corpus_tools.salt.common.SSpanningRelation;
 import org.corpus_tools.salt.common.SToken;
+import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
 public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implements SSpanningRelation {
+	/** Initializes an object of type {@link SLayerImpl}. **/
+	public SSpanningRelationImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SLayerImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SSpanningRelationImpl(Relation delegate) {
+		super(delegate);
+	}
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

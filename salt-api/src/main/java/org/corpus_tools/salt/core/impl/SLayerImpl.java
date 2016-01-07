@@ -35,6 +35,22 @@ import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
 public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implements SLayer {
+	/** Initializes an object of type {@link SLayerImpl}. **/
+	public SLayerImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SLayerImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SLayerImpl(Layer delegate) {
+		super(delegate);
+	}
+	
 	// =======================================> SAnnotation
 	/** {@inheritDoc} **/
 	@Override

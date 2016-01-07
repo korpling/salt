@@ -26,10 +26,11 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	public LabelImpl(Label delegatee) {
 		super(delegatee);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	protected Label getDelegate() {
-		return ((Label)delegate);
+		return ((Label) delegate);
 	}
 
 	protected String namespace = null;
