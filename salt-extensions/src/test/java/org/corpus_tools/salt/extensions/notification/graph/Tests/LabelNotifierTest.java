@@ -5,10 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl;
+import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.junit.Before;
 import org.junit.Test;
-
-import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 
 public class LabelNotifierTest {
 

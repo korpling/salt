@@ -29,9 +29,10 @@ public interface Notifier {
 	 *            to be notified
 	 */
 	public void addListener(Listener listener);
+
 	/**
-	 * Adds a set of new listener, which then will be notified about a change in this
-	 * object.
+	 * Adds a set of new listener, which then will be notified about a change in
+	 * this object.
 	 * 
 	 * @param listener
 	 *            to be notified

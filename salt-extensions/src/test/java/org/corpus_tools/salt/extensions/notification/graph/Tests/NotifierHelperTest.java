@@ -7,9 +7,8 @@ import java.util.ArrayList;
 
 import org.corpus_tools.salt.extensions.notification.Listener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.NotifierHelper;
-import org.junit.Test;
-
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
+import org.junit.Test;
 
 public class NotifierHelperTest {
 
@@ -32,7 +31,7 @@ public class NotifierHelperTest {
 		ArrayList<Listener> listenerList = new ArrayList<>();
 		assertEquals(0, NotifierHelper.getListener(listenerList).size());
 
-		NotifierHelper.addListener(listenerList, (Listener)null);
+		NotifierHelper.addListener(listenerList, (Listener) null);
 		assertEquals(0, NotifierHelper.getListener(listenerList).size());
 
 		NotifierHelper.addListener(listenerList, listener1);

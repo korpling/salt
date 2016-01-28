@@ -2,14 +2,10 @@ package org.corpus_tools.salt.extensions.notification.graph.impl;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.corpus_tools.salt.extensions.notification.Listener;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
-
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
-import org.corpus_tools.salt.graph.Graph;
-import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
@@ -32,7 +28,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 	public synchronized void addListener(Listener listener) {
 		listenerList = NotifierHelper.addListener(listenerList, listener);
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public void addListener(Collection<Listener> listener) {
@@ -45,7 +41,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 		listenerList = NotifierHelper.removeListener(listenerList, listener);
 	}
 	// ==========================================< listener list
-	
+
 	// ==========================================> label handling
 	/**
 	 * {@inheritDoc} Notifies all registered listeners.
@@ -69,7 +65,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LAYER_LABELS, oldValue, null, this);
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc} Notifies all registered listeners.
 	 **/
@@ -98,15 +94,15 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LAYER_NODES, node, null, this);
 		}
 	}
-	
+
 	@Override
 	public void addRelation(Relation<? extends N, ? extends N> relation) {
-//		super.removeAll();
+		// super.removeAll();
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LAYER_RELATIONS, null, relation, this);
 		}
 	}
-	
+
 	@Override
 	public void removeRelation(Relation<? extends N, ? extends N> relation) {
 		super.removeAll();

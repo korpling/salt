@@ -42,6 +42,7 @@ import org.eclipse.emf.common.util.URI;
 public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
 	/** Initializes an object of type {@link SGraphImpl}. **/
 	public SGraphImpl() {
+		super();
 	}
 
 	/**

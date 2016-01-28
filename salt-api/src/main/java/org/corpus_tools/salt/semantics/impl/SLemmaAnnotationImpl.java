@@ -18,12 +18,28 @@
 package org.corpus_tools.salt.semantics.impl;
 
 import org.corpus_tools.salt.core.impl.SAnnotationImpl;
+import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.SLemmaAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class SLemmaAnnotationImpl extends SAnnotationImpl implements SLemmaAnnotation {
+	/** Initializes an object of type {@link SPOSAnnotationImpl}. **/
 	public SLemmaAnnotationImpl() {
+		super.setNamespace(SaltUtil.SALT_NAMESPACE);
+		super.setName(SaltUtil.SEMANTICS_LEMMA);
+	}
+
+	/**
+	 * Initializes an object of type {@link SPOSAnnotationImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SLemmaAnnotationImpl(Label delegate) {
+		super(delegate);
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_LEMMA);
 	}

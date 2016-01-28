@@ -18,12 +18,28 @@
 package org.corpus_tools.salt.semantics.impl;
 
 import org.corpus_tools.salt.core.impl.SAnnotationImpl;
+import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.SPOSAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class SPOSAnnotationImpl extends SAnnotationImpl implements SPOSAnnotation {
+	/** Initializes an object of type {@link SPOSAnnotationImpl}. **/
 	public SPOSAnnotationImpl() {
+		super.setNamespace(SaltUtil.SALT_NAMESPACE);
+		super.setName(SaltUtil.SEMANTICS_POS);
+	}
+
+	/**
+	 * Initializes an object of type {@link SPOSAnnotationImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SPOSAnnotationImpl(Label delegate) {
+		super(delegate);
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_POS);
 	}

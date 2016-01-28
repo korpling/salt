@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.corpus_tools.salt.extensions.notification.Listener;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
-
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Label;
@@ -86,6 +85,7 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 
 	@Override
 	public void addNode(N node) {
+		System.out.println("------------------------------------> called addNode() in GraphNotifier " + getClass());
 		super.addNode(node);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, node, this);
@@ -101,7 +101,7 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	}
 
 	@Override
-	public void addRelation(Relation<? extends Node, ? extends Node> relation) {
+	public void addRelation(Relation<? extends N, ? extends N> relation) {
 		super.addRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, null, relation, this);
@@ -109,7 +109,7 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	}
 
 	@Override
-	public void removeRelation(R relation) {
+	public void removeRelation(Relation<? extends N, ? extends N> relation) {
 		super.removeRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, relation, null, this);

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.corpus_tools.salt.extensions.notification.Listener;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
-
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.Node;

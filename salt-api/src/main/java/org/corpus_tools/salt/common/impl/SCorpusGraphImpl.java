@@ -34,6 +34,7 @@ import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.core.impl.SGraphImpl;
 import org.corpus_tools.salt.exceptions.SaltInsertionException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
+import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.graph.Node;
@@ -43,7 +44,21 @@ import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
+	/** Initializes an object of type {@link SGraphImpl}. **/
+	public SCorpusGraphImpl() {
+	}
 
+	/**
+	 * Initializes an object of type {@link SGraphImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SCorpusGraphImpl(Graph delegate) {
+		super(delegate);
+	}
 	/**
 	 * Calls the init of super class and expands its initialization for adding
 	 * {@link SaltUtil#IDX_NODETYPE} of indexes:

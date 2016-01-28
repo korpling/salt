@@ -23,9 +23,26 @@ import org.corpus_tools.salt.common.SStructuredNode;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
 public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode> implements SPointingRelation {
+	/** Initializes an object of type {@link SPointingRelationImpl}. **/
+	public SPointingRelationImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SPointingRelationImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SPointingRelationImpl(Relation delegate) {
+		super(delegate);
+	}
+	
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.corpus_tools.salt.extensions.notification.Listener;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
-
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.impl.LabelImpl;
@@ -27,7 +26,7 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 	public synchronized void addListener(Listener listener) {
 		listenerList = NotifierHelper.addListener(listenerList, listener);
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public void addListener(Collection<Listener> listener) {
@@ -40,7 +39,7 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 		listenerList = NotifierHelper.removeListener(listenerList, listener);
 	}
 	// ==========================================< listener list
-	
+
 	// ==========================================> handling contained label
 	/**
 	 * {@inheritDoc} Notifies all registered listeners.

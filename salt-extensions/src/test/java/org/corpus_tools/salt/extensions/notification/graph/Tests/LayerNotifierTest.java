@@ -1,10 +1,9 @@
 package org.corpus_tools.salt.extensions.notification.graph.Tests;
 
 import org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl;
+import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.junit.Before;
 import org.junit.Test;
-
-import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 
 public class LayerNotifierTest {
 

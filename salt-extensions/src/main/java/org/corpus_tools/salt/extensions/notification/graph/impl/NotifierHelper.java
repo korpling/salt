@@ -11,7 +11,6 @@ import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 
-
 public class NotifierHelper {
 
 	/** @see Notifier#getListener() */
