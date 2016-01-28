@@ -168,11 +168,13 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#addNode(Node)} **/
 	@Override
 	public void addNode(N node) {
+		System.out.println("------> Called addNode() in "+ this +" adding: "+ node);
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addNode(node);
-			if (node instanceof NodeImpl){
-				((NodeImpl)node).basicSetGraph(this);
+			System.out.println("------------------> HERE I HAVE CONTROL");
+			if (node instanceof NodeImpl) {
+				((NodeImpl) node).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}
@@ -215,12 +217,17 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 *            node to be inserted
 	 */
 	protected void basicAddNode(N node) {
-//		// delegate method to delegate if set
-//		if (getDelegate() != null) {
-//			getDelegate().addNode(node);
-//			return;
-//		}
+		System.out.println("---------> Called basicAddNode in "+ this);
 		
+		// delegate method to delegate if set
+		//TODO this seems to be never called
+		if (getDelegate() instanceof GraphImpl) {
+			if (getDelegate() instanceof GraphImpl) {
+				((GraphImpl) getDelegate()).basicAddNode(node);
+			}
+			return;
+		}
+
 		if (node == null) {
 			throw new SaltParameterException("node", "basicAddNode", GraphImpl.class, "A null value is not allowed. ");
 		}
@@ -399,14 +406,14 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addRelation(relation);
-			
-			//FIXME check that for delegation
-			if (relation instanceof RelationImpl){
-				((RelationImpl)relation).basicSetGraph(this);
+
+			// FIXME check that for delegation
+			if (relation instanceof RelationImpl) {
+				((RelationImpl) relation).basicSetGraph(this);
 			}
 			return;
 		}
-		
+
 		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
 			return;
 		}
@@ -447,13 +454,14 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 */
 	@SuppressWarnings("unchecked")
 	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
-//		// delegate method to delegate if set
-//		if (getDelegate() != null) {
-//			getDelegate().addRelation(relation);
-//			return;
-//		}
-		
-		
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			if (getDelegate() instanceof GraphImpl) {
+				((GraphImpl) getDelegate()).basicAddRelation(relation);
+			}
+			return;
+		}
+
 		if (relation == null) {
 			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class, "A null value is not allowed. ");
 		}

@@ -80,7 +80,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
-		if (getDelegate()!= null){
+		if (getDelegate() != null) {
 			delegate.setGraph(graph);
 			return;
 		}
@@ -99,7 +99,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
 	 * graph and to avoid an endless invocation the insertion of an node is
-	 * splited into the two methods {@link #setGraph(Graph)} and
+	 * split into the two methods {@link #setGraph(Graph)} and
 	 * {@link #basicSetGraph(Graph)}. The invocation of methods is implement as
 	 * follows:
 	 * 
@@ -120,6 +120,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 *            graph which contains this node
 	 */
 	protected void basicSetGraph(Graph graph) {
+		System.out.println("---------------_> basicSetGraph in " + this + " for graph: " + graph);
 		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
 			((NodeImpl) getDelegate()).basicSetGraph(graph);
 			return;
@@ -128,6 +129,16 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 		if (this.graph != graph && this.graph instanceof GraphImpl) {
 			((GraphImpl) this.graph).basicRemoveNode(this);
 		}
+		this.graph = graph;
+	}
+
+	/**
+	 * Same as {@link #basicSetGraph(Graph)} but does not remove this node from
+	 * old graph, if it was not equal to the passed graph.
+	 * 
+	 * @param graph
+	 */
+	protected void basicSetGraph_WithoutRemoving(Graph graph) {
 		this.graph = graph;
 	}
 
@@ -176,7 +187,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 **/
 	@Override
 	public void removeLayer(Layer layer) {
-		if (getDelegate()!= null){
+		if (getDelegate() != null) {
 			delegate.removeLayer(layer);
 			return;
 		}

@@ -39,7 +39,9 @@ public class SampleGraphTest implements Listener {
 		System.out.println("text Rels: "+ doc.getDocumentGraph().getTextualRelations().size());
 		System.out.println("dominance Rels: "+ doc.getDocumentGraph().getDominanceRelations().size());
 		
+		System.out.println("text: " + doc.getDocumentGraph().getNodes().get(0));
 		
+		System.out.println("-----> Index: "+ doc.getDocumentGraph().getIndexMgr());
 		System.out.println("graph opposite: " + doc.getDocumentGraph().getNodes().get(0).getGraph());
 	}
 

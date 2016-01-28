@@ -292,7 +292,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 		// super.addNode(node);
 	}
-
+	
 	// /**
 	// * Calls the super method an puts the given node into a node type index.
 	// an
