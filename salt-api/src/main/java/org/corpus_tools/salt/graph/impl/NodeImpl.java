@@ -120,7 +120,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 *            graph which contains this node
 	 */
 	protected void basicSetGraph(Graph graph) {
-		System.out.println("---------------_> basicSetGraph in " + this + " for graph: " + graph);
 		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
 			((NodeImpl) getDelegate()).basicSetGraph(graph);
 			return;

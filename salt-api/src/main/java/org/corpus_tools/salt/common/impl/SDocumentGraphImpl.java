@@ -159,78 +159,6 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}
 	}
 
-	// /**
-	// * Calls the super method an puts the given relation into a relation type
-	// * index. an exception will be thrown.
-	// *
-	// * @param relation
-	// * to add
-	// */
-	// @Override
-	// protected void basicAddRelation(Relation<? extends Node, ? extends Node>
-	// relation) {
-	// if (relation != null) {
-	// if (!(relation instanceof SRelation)) {
-	// throw new SaltInsertionException(this, relation, "Cannot insert an
-	// relation, which is not a SRelation object.");
-	// }
-	// // start: create a name if none exists
-	// if ((((SRelation) relation).getName() == null) || (((SRelation)
-	// relation).getName().isEmpty())) {
-	// if (relation instanceof STextualRelation) {
-	// ((SRelation) relation).setName("sTextRel" + (getTextualRelations().size()
-	// + 1));
-	// } else if (relation instanceof STimelineRelation) {
-	// ((SRelation) relation).setName("sTimeRel" +
-	// (getTimelineRelations().size() + 1));
-	// } else if (relation instanceof SSpanningRelation) {
-	// ((SRelation) relation).setName("sSpanRel" +
-	// (getSpanningRelations().size() + 1));
-	// } else if (relation instanceof SPointingRelation) {
-	// ((SRelation) relation).setName("sPointingRel" +
-	// (getPointingRelations().size() + 1));
-	// } else if (relation instanceof SDominanceRelation) {
-	// ((SRelation) relation).setName("sDomRel" +
-	// (getDominanceRelations().size() + 1));
-	// } else if (relation instanceof SMedialRelation) {
-	// ((SRelation) relation).setName("sAudioRel" + (getMedialRelations().size()
-	// + 1));
-	// } else if (relation instanceof SOrderRelation) {
-	// ((SRelation) relation).setName("sOrderRel" + (getOrderRelations().size()
-	// + 1));
-	// } else {
-	// ((SRelation) relation).setName("sRel" + (getRelations().size() + 1));
-	// }
-	// }
-	// // end: create a name if none exists
-	// ((SRelation) relation).setId(getId() + "#" + ((SRelation)
-	// relation).getName());
-	// super.basicAddRelation(relation);
-	//
-	// Class<?> key;
-	// // map some implementation types to the matching interfaces
-	// if (relation instanceof STextualRelation) {
-	// key = STextualRelation.class;
-	// } else if (relation instanceof STimelineRelation) {
-	// key = STimelineRelation.class;
-	// } else if (relation instanceof SSpanningRelation) {
-	// key = SSpanningRelation.class;
-	// } else if (relation instanceof SPointingRelation) {
-	// key = SPointingRelation.class;
-	// } else if (relation instanceof SDominanceRelation) {
-	// key = SDominanceRelation.class;
-	// } else if (relation instanceof SMedialRelation) {
-	// key = SMedialRelation.class;
-	// } else if (relation instanceof SOrderRelation) {
-	// key = SOrderRelation.class;
-	// } else {
-	// key = relation.getClass();
-	// }
-	//
-	// getIndexMgr().put(SaltUtil.IDX_RELATIONTYPE, key, relation);
-	// }
-	// }
-
 	// ============================ end: handling relations
 	// ============================ start: handling nodes
 	@Override
@@ -284,76 +212,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				key = node.getClass();
 			}
 			getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
-			// System.out.println("---------------------> put node in index: "+
-			// key+ " = "+node+ ", all "+ getIndexMgr());
-			// System.out.println("---------------------> text in index: "+
-			// getIndexMgr().get(SaltUtil.IDX_NODETYPE, key));
 		}
-
-		// super.addNode(node);
 	}
 	
-	// /**
-	// * Calls the super method an puts the given node into a node type index.
-	// an
-	// * exception will be thrown.
-	// *
-	// * @param node
-	// * to add
-	// */
-	// @Override
-	// protected void basicAddNode(SNode node) {
-	// System.out.println("----------------------------------> CALLED
-	// basicAddNode() in SDocumentGraph");
-	//
-	// if (node != null) {
-	// // start: create a name if none exists
-	// if ((node.getName() == null) || (node.getName().isEmpty())) {
-	// if (node instanceof STextualDS) {
-	// node.setName("sText" + (getTextualDSs().size() + 1));
-	// } else if (node instanceof SToken) {
-	// node.setName("sTok" + (getTokens().size() + 1));
-	// } else if (node instanceof STimeline) {
-	// node.setName("sTimeline" + (getTokens().size() + 1));
-	// } else if (node instanceof SSpan) {
-	// node.setName("sSpan" + (getSpans().size() + 1));
-	// } else if (node instanceof SStructure) {
-	// node.setName("structure" + (getStructures().size() + 1));
-	// } else if (node instanceof SMedialDS) {
-	// node.setName("audio" + (getMedialDSs().size() + 1));
-	// } else {
-	// node.setName("sNode" + (getNodes().size() + 1));
-	// }
-	// }
-	// // end: create a name if none exists
-	//
-	// if ((node.getId() == null) || (node.getId().isEmpty())) {
-	// node.setId(getId() + "#" + node.getName());
-	// }
-	// super.basicAddNode(node);
-	//
-	// // map some implementation types to the matching interfaces
-	// Class<?> key;
-	// if (node instanceof SToken) {
-	// key = SToken.class;
-	// } else if (node instanceof STextualDS) {
-	// key = STextualDS.class;
-	// } else if (node instanceof STimeline) {
-	// key = STimeline.class;
-	// } else if (node instanceof SSpan) {
-	// key = SSpan.class;
-	// } else if (node instanceof SStructure) {
-	// key = SStructure.class;
-	// } else if (node instanceof SMedialDS) {
-	// key = SMedialDS.class;
-	// } else {
-	// key = node.getClass();
-	// }
-	//
-	// getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
-	// }
-	// }
-
 	/** {@inheritDoc} **/
 	@Override
 	public SDocument getDocument() {

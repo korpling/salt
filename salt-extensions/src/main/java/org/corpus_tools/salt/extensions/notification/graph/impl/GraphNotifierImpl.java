@@ -85,7 +85,6 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 
 	@Override
 	public void addNode(N node) {
-		System.out.println("------------------------------------> called addNode() in GraphNotifier " + getClass());
 		super.addNode(node);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, node, this);

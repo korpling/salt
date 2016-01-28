@@ -278,9 +278,6 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public STextualDS createSTextualDS() {
-		System.out.println("--> create StextualDS");
-		System.out.println("type: " + new STextualDSImpl(createNode()));
-		System.out.println("type: " + new STextualDSImpl(createNode()).getClass());
 		return (new STextualDSImpl(createNode()));
 	}
 

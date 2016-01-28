@@ -168,11 +168,9 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#addNode(Node)} **/
 	@Override
 	public void addNode(N node) {
-		System.out.println("------> Called addNode() in "+ this +" adding: "+ node);
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addNode(node);
-			System.out.println("------------------> HERE I HAVE CONTROL");
 			if (node instanceof NodeImpl) {
 				((NodeImpl) node).basicSetGraph_WithoutRemoving(this);
 			}
@@ -217,17 +215,6 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 *            node to be inserted
 	 */
 	protected void basicAddNode(N node) {
-		System.out.println("---------> Called basicAddNode in "+ this);
-		
-		// delegate method to delegate if set
-		//TODO this seems to be never called
-		if (getDelegate() instanceof GraphImpl) {
-			if (getDelegate() instanceof GraphImpl) {
-				((GraphImpl) getDelegate()).basicAddNode(node);
-			}
-			return;
-		}
-
 		if (node == null) {
 			throw new SaltParameterException("node", "basicAddNode", GraphImpl.class, "A null value is not allowed. ");
 		}
