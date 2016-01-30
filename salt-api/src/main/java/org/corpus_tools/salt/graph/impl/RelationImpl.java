@@ -47,17 +47,10 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	}
 
 	/**
-	 * A delegate object of the same type. If {@link #delegate} is not null, all
-	 * functions of this method are delegated to the delegate object. Setting
-	 * {@link #delegate} makes this object to a container.
-	 **/
-	protected Relation<S, T> delegate = null;
-
-	/**
 	 * {@inheritDoc Relation#getDelegate()}
 	 */
 	public Relation<S, T> getDelegate() {
-		return (delegate);
+		return ((Relation<S, T>)super.getDelegate());
 	}
 
 	/** source node of this relation. **/

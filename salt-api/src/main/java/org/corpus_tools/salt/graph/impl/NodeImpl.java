@@ -48,13 +48,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	}
 
 	/**
-	 * A delegate object of the same type. If {@link #delegate} is not null, all
-	 * functions of this method are delegated to the delegate object. Setting
-	 * {@link #delegate} makes this object to a container.
-	 **/
-	protected Node delegate = null;
-
-	/**
 	 * Returns the delegate object. If {@link #delegate} is not null, all
 	 * functions of this method are delegated to the delegate object. Setting
 	 * {@link #delegate} makes this object to a container.
@@ -62,7 +55,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 * @return the delegate object
 	 */
 	protected Node getDelegate() {
-		return ((Node) delegate);
+		return ((Node) super.getDelegate());
 	}
 
 	/** container graph **/
@@ -81,7 +74,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	@Override
 	public void setGraph(Graph graph) {
 		if (getDelegate() != null) {
-			delegate.setGraph(graph);
+			getDelegate().setGraph(graph);
 			return;
 		}
 		Graph oldGraph = getGraph();
@@ -187,7 +180,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	@Override
 	public void removeLayer(Layer layer) {
 		if (getDelegate() != null) {
-			delegate.removeLayer(layer);
+			getDelegate().removeLayer(layer);
 			return;
 		}
 		if (layer != null) {

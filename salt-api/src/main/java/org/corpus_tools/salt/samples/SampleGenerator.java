@@ -558,6 +558,8 @@ public class SampleGenerator {
 		textRel.setTarget(textualDS);
 		textRel.setStart(start);
 		textRel.setEnd(end);
+		System.out.println("token: "+ token);
+		System.out.println("source: "+textRel.getSource());
 		document.getDocumentGraph().addRelation(textRel);
 		return (token);
 	}
