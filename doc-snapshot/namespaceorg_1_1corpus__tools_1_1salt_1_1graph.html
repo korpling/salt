@@ -119,6 +119,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html">Graph&lt; N extends Node, R extends Relation&lt; N, N &gt;, L extends Layer&lt; N, R &gt; &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The here defined graph is given by G=(V, E, L, {label a , ...label b }) with:  <a href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_3_01_n_01extends_01_node_00_01_r_01exte4073f56d5ef938413ec50814377a04b2.html#details">More...</a><br/></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s">GRAPH_ATTRIBUTES</a></td></tr>
+<tr class="memdesc:enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enumeration contains all attributes which are used in several classes in Salt's graph model.  <a href="namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s">More...</a><br/></td></tr>
+<tr class="separator:enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_factory.html">GraphFactory</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_identifiable_element.html">IdentifiableElement</a></td></tr>
@@ -149,13 +152,121 @@ Classes</h2></td></tr>
 <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at </p>
 <pre class="fragment">  http://www.apache.org/licenses/LICENSE-2.0
 </pre><p>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. </p>
-</div></div><!-- contents -->
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s" id="enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum org::corpus_tools::salt::graph::GRAPH_ATTRIBUTES</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>This enumeration contains all attributes which are used in several classes in Salt's graph model. </p>
+<dl class="section author"><dt>Author</dt><dd>florian </dd></dl>
+</div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="aeda04c66b1946b5edeb58b2636d1331e"></a></td>
+<td class="fieldname">
+GRAPH_LABELS</td>
+<td class="fielddoc">
+Names list of labels of a graph, attribute <a class="el" href="">Graph#getLabels()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a0deed8355d6278225959a76191abcf46"></a></td>
+<td class="fieldname">
+GRAPH_LAYERS</td>
+<td class="fielddoc">
+Names list of layers of graph attribute <a class="el" href="">Graph#getLayers()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a4e8f72cc2eb36c16a189d695f9c00589"></a></td>
+<td class="fieldname">
+GRAPH_NODES</td>
+<td class="fielddoc">
+Names list of nodes of a graph, attribute <a class="el" href="">Graph#getNodes()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a3cde60908fc8121f08c92effeae7724d"></a></td>
+<td class="fieldname">
+GRAPH_RELATIONS</td>
+<td class="fielddoc">
+Names list of relations of a graph, attribute <a class="el" href="">Graph#getRelations()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a0010d9eb2f03cbcce5406ccacadaab8b"></a></td>
+<td class="fieldname">
+LABEL_LABELS</td>
+<td class="fielddoc">
+Names list of labels of a label, attribute <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_labelable_element.html#ae46ed295bdcb2eb358f0616a19fe1803">Label#getLabels()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="ac0e4060f4505f03869479b5f4f571409"></a></td>
+<td class="fieldname">
+LABEL_NAME</td>
+<td class="fielddoc">
+Names the name of a label, attribute <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_label.html#ae93cd4bc839e676ca89dfba1f53d5199">Label#getName()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a6e4d35484ac0d58e87882d535f81cacd"></a></td>
+<td class="fieldname">
+LABEL_NAMESPACE</td>
+<td class="fielddoc">
+Names the namespace of a label, attribute <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_label.html#aede7b4110e040b14b68cd18c408bf650">Label#getNamespace()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="abf99f36729b2768351227c362839c228"></a></td>
+<td class="fieldname">
+LABEL_VALUE</td>
+<td class="fielddoc">
+Names the value of a label, attribute <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_label.html#ad08213dabbcb7b9af6bba39f672dea02">Label#getValue()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a66e416de87b2fd093e8efdc6d3257860"></a></td>
+<td class="fieldname">
+LAYER_LABELS</td>
+<td class="fielddoc">
+Names list of labels of a layer, attribute <a class="el" href="">Graph#getLabels()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a3bb3588c021ca3c1cbdd7320e818ef01"></a></td>
+<td class="fieldname">
+LAYER_NODES</td>
+<td class="fielddoc">
+Names list of nodes of a layer, attribute <a class="el" href="">Graph#getNodes()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="aee28afef667ff052f47295c987581dbd"></a></td>
+<td class="fieldname">
+LAYER_RELATIONS</td>
+<td class="fielddoc">
+Names list of relations of a layer, attribute <a class="el" href="">Graph#getRelations()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a5db9bfce7f59ae286a3b89460b0d44ed"></a></td>
+<td class="fieldname">
+NODE_LABELS</td>
+<td class="fielddoc">
+Names list of labels of a node, attribute <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_labelable_element.html#ae46ed295bdcb2eb358f0616a19fe1803">Node#getLabels()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a418ee5450d8675887525ebee400279e6"></a></td>
+<td class="fieldname">
+RELATION_LABELS</td>
+<td class="fielddoc">
+Names list of labels of a relation, attribute <a class="el" href="">Relation#getLabels()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="a16632c7be303431c8c26420a5599aa01"></a></td>
+<td class="fieldname">
+RELATION_SOURCE</td>
+<td class="fielddoc">
+Names the source of a relation, attribute <a class="el" href="">Relation#getSource()</a>. </td></tr>
+<tr><td class="fieldtype">
+<a class="anchor" id="ad65e18f0dadf42ebfe2a901d86778ed7"></a></td>
+<td class="fieldname">
+RELATION_TARGET</td>
+<td class="fielddoc">
+Names the target of a relation, attribute <a class="el" href="">Relation#getTarget()</a>. </td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>org</b></li><li class="navelem"><b>corpus_tools</b></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt.html">salt</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html">graph</a></li>
-    <li class="footer">Generated on Sat Jan 30 2016 18:50:00 for Salt by
+    <li class="footer">Generated on Sat Jan 30 2016 23:23:50 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

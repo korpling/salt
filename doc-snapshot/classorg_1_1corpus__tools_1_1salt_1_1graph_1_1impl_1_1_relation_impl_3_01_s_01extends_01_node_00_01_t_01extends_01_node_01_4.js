@@ -4,6 +4,7 @@ var classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_
     [ "RelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html#a2d0a7f265257119b966e244e703c74af", null ],
     [ "addLayer", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html#a935ec71e250ec69c76f3fc445d976652", null ],
     [ "basicSetGraph", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html#a319bfd4d419decfb793323aa97d9062b", null ],
+    [ "basicSetGraph_WithoutRemoving", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html#a5b2c8d11f103899f93729d8fc08046c6", null ],
     [ "getDelegate", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html#a68ee65ccb3aeb2aa462670dee6f2e72d", null ],
     [ "getGraph", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html#a99bab2f145d3513365cef08c8f4de51d", null ],
     [ "getLayers", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html#a6407a0907c97015a3709079920c6b791", null ],

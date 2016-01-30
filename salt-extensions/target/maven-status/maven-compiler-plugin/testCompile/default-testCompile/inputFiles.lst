@@ -1,0 +1,8 @@
+/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/test/java/org/corpus_tools/salt/extensions/notification/graph/Tests/CreateGraphNotificationTest.java
+/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/test/java/org/corpus_tools/salt/extensions/notification/graph/Tests/LayerNotifierTest.java
+/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/test/java/org/corpus_tools/salt/extensions/notification/graph/Tests/LabelNotifierTest.java
+/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/test/java/org/corpus_tools/salt/extensions/notification/graph/Tests/GraphNotifierTest.java
+/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/test/java/org/corpus_tools/salt/extensions/notification/graph/Tests/NodeNotifierTest.java
+/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/test/java/org/corpus_tools/salt/extensions/notification/graph/Tests/Helper.java
+/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/test/java/org/corpus_tools/salt/extensions/notification/graph/Tests/NotifierHelperTest.java
+/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/test/java/org/corpus_tools/salt/extensions/notification/graph/Tests/RelationNotifierTest.java

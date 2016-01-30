@@ -11,6 +11,7 @@ var hierarchy =
     [ "org.corpus_tools.salt.util.DIFF_TYPES", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#enumorg_1_1corpus__tools_1_1salt_1_1util_1_1_d_i_f_f___t_y_p_e_s", null ],
     [ "org.corpus_tools.salt.util.internal.persistence.dot.DOTEdge", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_edge.html", null ],
     [ "org.corpus_tools.salt.util.internal.persistence.dot.DOTNode", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_node.html", null ],
+    [ "org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES", "namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s", null ],
     [ "org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#enumorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph_1_1_g_r_a_p_h___t_r_a_v_e_r_s_e___t_y_p_e", null ],
     [ "org.corpus_tools.salt.graph.GraphFactory", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph_factory.html", null ],
     [ "org.corpus_tools.salt.util.internal.persistence.GraphMLWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_graph_m_l_writer.html", null ],
@@ -21,12 +22,26 @@ var hierarchy =
     [ "org.corpus_tools.salt.core.impl.GraphTraverserModule", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html", null ],
     [ "org.corpus_tools.salt.graph.IGraphFactory", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html", [
       [ "org.corpus_tools.salt.graph.impl.GraphFactoryImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_factory_impl.html", [
-        [ "org.corpus_tools.salt.impl.SaltFactoryImpl", "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html", null ]
+        [ "org.corpus_tools.salt.impl.SaltFactoryImpl", "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html", [
+          [ "org.corpus_tools.salt.extensions.notification.SaltNotificationFactory", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html", null ]
+        ] ]
       ] ],
       [ "org.corpus_tools.salt.ISaltFactory", "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html", [
+        [ "org.corpus_tools.salt.extensions.notification.SaltNotificationFactory", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html", null ],
         [ "org.corpus_tools.salt.impl.SaltFactoryImpl", "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html", null ]
       ] ]
     ] ],
+    [ "org.corpus_tools.salt.extensions.notification.Listener", "interfaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_listener.html", null ],
+    [ "org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE", "interfaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_listener.html#enumorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_listener_1_1_n_o_t_i_f_i_c_a_t_i_o_n___t_y_p_e", null ],
+    [ "org.corpus_tools.salt.extensions.notification.graph.Notifier", "interfaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1_notifier.html", [
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl< N extends Node, R extends Relation< N, N >, L extends Layer< N, R > >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notif807855f8f199d8836e84068b1ed6ecb1.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_label_notifier_impl.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl< N extends Node, R extends Relation< N, N > >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_layer_notifbff953857b997355d8662947bc1cc68d.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.NodeNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_node_notifier_impl.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl< S extends Node, T extends Node >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_relation_nob216be348cbe372a7734a86cfab5be7c.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.SaltNotificationFactory", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html", null ]
+    ] ],
+    [ "org.corpus_tools.salt.extensions.notification.graph.impl.NotifierHelper", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_notifier_helper.html", null ],
     [ "RuntimeException", null, [
       [ "org.corpus_tools.salt.exceptions.SaltException", "classorg_1_1corpus__tools_1_1salt_1_1exceptions_1_1_salt_exception.html", [
         [ "org.corpus_tools.salt.exceptions.SaltElementNotInGraphException", "classorg_1_1corpus__tools_1_1salt_1_1exceptions_1_1_salt_element_not_in_graph_exception.html", null ],
@@ -174,6 +189,7 @@ var hierarchy =
           [ "org.corpus_tools.salt.core.impl.SMetaAnnotationImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_meta_annotation_impl.html", null ],
           [ "org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_processing_annotation_impl.html", null ]
         ] ],
+        [ "org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_label_notifier_impl.html", null ],
         [ "org.corpus_tools.salt.graph.impl.IdentifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_identifier_impl.html", null ]
       ] ],
       [ "org.corpus_tools.salt.graph.Label", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_label.html", [
@@ -210,6 +226,7 @@ var hierarchy =
             [ "org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_processing_annotation_impl.html", null ]
           ] ]
         ] ],
+        [ "org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_label_notifier_impl.html", null ],
         [ "org.corpus_tools.salt.graph.Identifier", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_identifier.html", [
           [ "org.corpus_tools.salt.graph.impl.IdentifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_identifier_impl.html", null ]
         ] ],
@@ -221,27 +238,33 @@ var hierarchy =
     ] ],
     [ "Graph", null, [
       [ "org.corpus_tools.salt.core.SGraph", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl< N extends Node, R extends Relation< N, N >, L extends Layer< N, R > >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notif807855f8f199d8836e84068b1ed6ecb1.html", null ],
       [ "org.corpus_tools.salt.graph.impl.GraphImpl< N extends Node, R extends Relation< N, N >, L extends Layer< N, R > >", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html", null ]
     ] ],
     [ "GraphImpl", null, [
-      [ "org.corpus_tools.salt.core.impl.SGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html", null ]
+      [ "org.corpus_tools.salt.core.impl.SGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl< N extends Node, R extends Relation< N, N >, L extends Layer< N, R > >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notif807855f8f199d8836e84068b1ed6ecb1.html", null ]
     ] ],
     [ "Hashtable", null, [
       [ "org.corpus_tools.salt.util.DiffOptions", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_diff_options.html", null ]
     ] ],
     [ "Layer", null, [
       [ "org.corpus_tools.salt.core.SLayer", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_layer.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl< N extends Node, R extends Relation< N, N > >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_layer_notifbff953857b997355d8662947bc1cc68d.html", null ],
       [ "org.corpus_tools.salt.graph.impl.LayerImpl< N extends Node, R extends Relation< N, N > >", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html", null ]
     ] ],
     [ "LayerImpl", null, [
-      [ "org.corpus_tools.salt.core.impl.SLayerImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl.html", null ]
+      [ "org.corpus_tools.salt.core.impl.SLayerImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl< N extends Node, R extends Relation< N, N > >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_layer_notifbff953857b997355d8662947bc1cc68d.html", null ]
     ] ],
     [ "Relation", null, [
       [ "org.corpus_tools.salt.core.SRelation< S extends SNode, T extends SNode >", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_relation_3_01_s_01extends_01_s_node_00_01_t_01extends_01_s_node_01_4.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl< S extends Node, T extends Node >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_relation_nob216be348cbe372a7734a86cfab5be7c.html", null ],
       [ "org.corpus_tools.salt.graph.impl.RelationImpl< S extends Node, T extends Node >", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html", null ]
     ] ],
     [ "RelationImpl", null, [
-      [ "org.corpus_tools.salt.core.impl.SRelationImpl< S extends SNode, T extends SNode >", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_relation_impl_3_01_s_01extends_01_s_node16133a2d865b0b9ee3bc85bee027693d.html", null ]
+      [ "org.corpus_tools.salt.core.impl.SRelationImpl< S extends SNode, T extends SNode >", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_relation_impl_3_01_s_01extends_01_s_node16133a2d865b0b9ee3bc85bee027693d.html", null ],
+      [ "org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl< S extends Node, T extends Node >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_relation_nob216be348cbe372a7734a86cfab5be7c.html", null ]
     ] ],
     [ "Serializable", null, [
       [ "org.corpus_tools.salt.common.SaltProject", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_salt_project.html", [
@@ -252,7 +275,8 @@ var hierarchy =
           [ "org.corpus_tools.salt.graph.impl.GraphImpl< N extends Node, R extends Relation< N, N >, L extends Layer< N, R > >", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html", null ],
           [ "org.corpus_tools.salt.graph.impl.LayerImpl< N extends Node, R extends Relation< N, N > >", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html", null ],
           [ "org.corpus_tools.salt.graph.impl.NodeImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_node_impl.html", [
-            [ "org.corpus_tools.salt.core.impl.SNodeImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl.html", null ]
+            [ "org.corpus_tools.salt.core.impl.SNodeImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl.html", null ],
+            [ "org.corpus_tools.salt.extensions.notification.graph.impl.NodeNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_node_notifier_impl.html", null ]
           ] ],
           [ "org.corpus_tools.salt.graph.impl.RelationImpl< S extends Node, T extends Node >", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html", null ]
         ] ],
@@ -273,6 +297,7 @@ var hierarchy =
           [ "org.corpus_tools.salt.graph.Layer< N extends Node, R extends Relation< N, N > >", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_layer_3_01_n_01extends_01_node_00_01_r_01exte43a6ff87e9bec142331ca00a6f929424.html", null ],
           [ "org.corpus_tools.salt.graph.Node", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_node.html", [
             [ "org.corpus_tools.salt.core.SNode", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html", null ],
+            [ "org.corpus_tools.salt.extensions.notification.graph.impl.NodeNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_node_notifier_impl.html", null ],
             [ "org.corpus_tools.salt.graph.impl.NodeImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_node_impl.html", null ]
           ] ],
           [ "org.corpus_tools.salt.graph.Relation< S extends Node, T extends Node >", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_relation_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html", null ]
