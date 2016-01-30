@@ -209,7 +209,7 @@ $(document).ready(function(){initNavTree('create.html','');});
 <div class="line">Is <span class="keyword">this</span> example more complicated than it appears to be  ?</div>
 </div><!-- fragment --><p>The following snippet gives an impression of how to create that hierarchy. We just show the creation of the left NP node and the SQ node.</p>
 <div class="fragment"><div class="line"><span class="comment">//create a list of nodes, which shall be overlapped by the NP-node</span></div>
-<div class="line">List&amp;lt;SStructuredNode&gt; overlappingNodes= <span class="keyword">new</span> ArrayList&amp;lt;&gt;();</div>
+<div class="line">List&lt;SStructuredNode&gt; overlappingNodes= <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
 <div class="line">overlappingNodes.add(tok_this);</div>
 <div class="line">overlappingNodes.add(tok_example);</div>
 <div class="line"><span class="comment">//adding NP-Node to graph and automatically creating relations to overlapping nodes</span></div>
@@ -218,7 +218,7 @@ $(document).ready(function(){initNavTree('create.html','');});
 <div class="line"><span class="comment">//...</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">//create a list of nodes, which shall be overlapping by SQ-node</span></div>
-<div class="line">overlappingNodes= <span class="keyword">new</span> ArrayList&amp;lt;&gt;();</div>
+<div class="line">overlappingNodes= <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
 <div class="line">overlappingNodes.add(tok_is);</div>
 <div class="line">overlappingNodes.add(np_1);</div>
 <div class="line">SStructure sq= sampleDocument.getDocumentGraph().createStructure(overlappingNodes);</div>
@@ -257,7 +257,7 @@ sampleDocument.getDocumentGraph().getRelations(np_1.getId(), tok_is.getId()).get
 <div class="line">contrast_focus.createAnnotation(null, <span class="stringliteral">&quot;inf-struct&quot;</span>, <span class="stringliteral">&quot;contrast-focus&quot;</span>);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">//create a list of tokens taking part in the set to be annotated as a bundle</span></div>
-<div class="line">List&amp;lt;SToken&gt; overlappingTokens= <span class="keyword">new</span> ArrayList&amp;lt;&gt;();</div>
+<div class="line">List&lt;SToken&gt; overlappingTokens= <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
 <div class="line">overlappingTokens.add(tok_this);</div>
 <div class="line">overlappingTokens.add(tok_example);</div>
 <div class="line">overlappingTokens.add(tok_more);</div>
@@ -282,11 +282,11 @@ sampleDocument.getDocumentGraph().getRelations(np_1.getId(), tok_is.getId()).get
 </div><!-- fragment --><h3><a class="anchor" id="pointingRelations"></a>Pointing Relations</h3>
 <p>Now we will show another type of relation, which renders a more loose relation between nodes. In contrast to <em>SSpanningRelations</em> and <em>SDominanceRelations</em>, which can only connect specific kinds of nodes, the type <em>SPointingRelation</em> can connect <em>SToken</em>, <em>SSpan</em> and <em>SStructure</em> nodes with each other and vice versa. These relations for instance can be used to model anaphoric relations between words, phrases, sentences and so on. Relations in general can be typed with a linguistic meaning by setting their attribute <em>SType</em>. We illustrate that by connecting the token covering the word "it" to the set of tokens "the" and "example". To bundle the words "the" and "example", we first have to create a span covering both tokens "the" and "example" following the same mechanism as shown in section <a href="#spans">Spans</a>.</p>
 <div class="image">
-<img src="./images/salt_pointRel.svg"  style="width:30%" alt="Salt graph pointing relations"/>
+<img src="sample_pointingRel.png" alt="sample_pointingRel.png"/>
 </div>
 <p>The following snippet shows the creation of the model shown in the figure.</p>
 <div class="fragment"><div class="line"><span class="comment">//create a span covering the words &quot;the&quot; and &quot;example&quot;</span></div>
-<div class="line">overlappingTokens= <span class="keyword">new</span> ArrayList&amp;lt;&gt;();</div>
+<div class="line">overlappingTokens= <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
 <div class="line">overlappingTokens.add(tok_this);</div>
 <div class="line">overlappingTokens.add(tok_example);</div>
 <div class="line">SSpan span= sampleDocument.getDocumentGraph().createSpan(overlappingTokens);</div>
@@ -308,7 +308,7 @@ sampleDocument.getDocumentGraph().getRelations(np_1.getId(), tok_is.getId()).get
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Dec 22 2015 15:06:51 for Salt by
+    <li class="footer">Generated on Sat Jan 30 2016 18:49:59 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

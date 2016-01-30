@@ -2,7 +2,10 @@ var NAVTREE =
 [
   [ "Salt", "index.html", [
     [ "Access a Salt model", "access.html", null ],
+    [ "Bidirectional references", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_bidirectional_references.html", null ],
     [ "Create a Salt model", "create.html", null ],
+    [ "Bidirectional references", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_developer_bidirectional_references.html", null ],
+    [ "Developers section", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_developer.html", null ],
     [ "Identifiers in Salt", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_identifier.html", null ],
     [ "Comparing Salt models", "isomorphie.html", null ],
     [ "Persist and Load", "persist.html", null ],

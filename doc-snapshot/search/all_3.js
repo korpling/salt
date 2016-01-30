@@ -12,5 +12,6 @@ var searchData=
   ['diffoptions',['DiffOptions',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_diff_options.html',1,'org::corpus_tools::salt::util']]],
   ['difftype',['diffType',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_difference.html#a90f8e95fd01e8e9970c8f95849fb716d',1,'org::corpus_tools::salt::util::Difference']]],
   ['dotedge',['DOTEdge',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_edge.html',1,'org::corpus_tools::salt::util::internal::persistence::dot']]],
-  ['dotnode',['DOTNode',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_node.html',1,'org::corpus_tools::salt::util::internal::persistence::dot']]]
+  ['dotnode',['DOTNode',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_node.html',1,'org::corpus_tools::salt::util::internal::persistence::dot']]],
+  ['developers_20section',['Developers section',['../md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_developer.html',1,'']]]
 ];
