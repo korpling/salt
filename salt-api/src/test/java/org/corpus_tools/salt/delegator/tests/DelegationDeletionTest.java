@@ -7,8 +7,10 @@ import java.util.Set;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
+import org.corpus_tools.salt.impl.SaltFactoryImpl;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.util.Difference;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +20,12 @@ public class DelegationDeletionTest {
 	public void setUp() throws Exception {
 		SaltFactory.setFactory(new DelegatorTestFactory());
 		assertTrue(SaltFactory.getFactory() instanceof DelegatorTestFactory);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		SaltFactory.setFactory(new SaltFactoryImpl());
+		assertTrue(SaltFactory.getFactory() instanceof SaltFactoryImpl);
 	}
 
 	/**
