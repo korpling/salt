@@ -982,6 +982,9 @@ public class SampleGenerator {
 		String[] annotations = { "ROOT", "SQ", "NP", "ADJP", "ADJP", "SBar", "S", "NP", "VP", "S", "VP", "VP" };
 		int i = 0;
 		for (SStructure structure : structures) {
+			if (i >= annotations.length){
+				throw new SaltSampleException("Cannot create syntax annotations for structures, since there are more strucctures than expected. Expected "+annotations.length+", Actual: "+structures.size()+". ");	
+			}
 			structure.createAnnotation(null, "const", annotations[i]);
 			i++;
 		}
