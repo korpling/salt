@@ -975,6 +975,9 @@ public class SampleGenerator {
 		if (document == null) {
 			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
+		
+		System.out.println("layers: "+document.getDocumentGraph().getLayers());
+		
 		if (document.getDocumentGraph() == null || document.getDocumentGraph().getLayerByName("syntax").isEmpty()) {
 			createSyntaxStructure(document);
 		}
@@ -988,7 +991,6 @@ public class SampleGenerator {
 			structure.createAnnotation(null, "const", annotations[i]);
 			i++;
 		}
-
 	}
 
 	/**
