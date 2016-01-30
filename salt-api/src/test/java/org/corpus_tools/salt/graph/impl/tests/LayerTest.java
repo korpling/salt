@@ -61,11 +61,9 @@ public class LayerTest {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
 		getFixture().setGraph(graph);
 		assertEquals(getFixture().getGraph(), graph);
-		System.out.println("this: "+this.getFixture());
 		
 		getFixture().setGraph(null);
 		assertNull(getFixture().getGraph());
-		System.out.println("layers: "+graph.getLayers());
 		assertEquals(0, graph.getLayers().size());
 		
 		

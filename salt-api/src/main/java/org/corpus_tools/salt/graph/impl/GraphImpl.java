@@ -664,8 +664,17 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addLayer(layer);
+			if (layer instanceof LayerImpl) {
+				((LayerImpl) layer).basicSetGraph_WithoutRemoving(this);
+			}
 			return;
 		}
+
+//		// delegate method to delegate if set
+//		if (getDelegate() != null) {
+//			getDelegate().addLayer(layer);
+//			return;
+//		}
 
 		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);

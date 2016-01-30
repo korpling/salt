@@ -114,11 +114,24 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 *            graph which contains this layer
 	 */
 	protected void basicSetGraph(Graph graph) {
-		// delegate method to delegate if set
 		if (getDelegate() != null && getDelegate() instanceof LayerImpl) {
-			((LayerImpl<N, R>) getDelegate()).basicSetGraph(graph);
+			((LayerImpl) getDelegate()).basicSetGraph(graph);
+			return;
 		}
+		// remove from old graph if it was changed
+		if (this.graph != graph && this.graph instanceof GraphImpl) {
+			((GraphImpl) this.graph).basicRemoveLayer(this);
+		}
+		this.graph = graph;
+	}
 
+	/**
+	 * Same as {@link #basicSetGraph(Graph)} but does not remove this layer from
+	 * old graph, if it was not equal to the passed graph.
+	 * 
+	 * @param graph
+	 */
+	protected void basicSetGraph_WithoutRemoving(Graph graph) {
 		this.graph = graph;
 	}
 
