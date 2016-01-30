@@ -302,5 +302,4 @@ pointingRelation.setType("anaphoric");
 
 You can download the demonstrated code via github under https://github.com/korpling/saltDemo. More code samples can be found in Salt's sample package.
 
-To learn how to access the elements of a Salt model, please read the article @ref access.
- 
+To learn how to access the elements of a Salt model, please read the article @ref access. 
