@@ -393,10 +393,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addRelation(relation);
-
-			// FIXME check that for delegation
 			if (relation instanceof RelationImpl) {
-				((RelationImpl) relation).basicSetGraph(this);
+				((RelationImpl) relation).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}

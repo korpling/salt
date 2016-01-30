@@ -178,9 +178,23 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	protected void basicSetGraph(Graph graph) {
 		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
 			((RelationImpl) getDelegate()).basicSetGraph(graph);
-		} else {
-			this.graph = graph;
+			return;
 		}
+		// remove from old graph if it was changed
+		if (this.graph != graph && this.graph instanceof GraphImpl) {
+			((GraphImpl) this.graph).basicRemoveRelation(this);
+		}
+		this.graph = graph;
+	}
+
+	/**
+	 * Same as {@link #basicSetGraph(Graph)} but does not remove this relation
+	 * from old graph, if it was not equal to the passed graph.
+	 * 
+	 * @param graph
+	 */
+	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+		this.graph = graph;
 	}
 
 	/** {@inheritDoc} **/
