@@ -549,6 +549,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public void removeRelation(Relation<? extends N, ? extends N> rel) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().removeRelation(rel);
+			return;
+		}
 		if (rel != null) {
 			if (rel instanceof RelationImpl) {
 				((RelationImpl<N, N>) rel).basicSetGraph(null);
@@ -560,6 +565,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public void removeRelations() {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().removeRelations();
+			return;
+		}
 		relations.clear();
 		getIndexMgr().clearIndex(SaltUtil.IDX_ID_RELATIONS);
 		getIndexMgr().clearIndex(SaltUtil.IDX_ID_RELATIONS_INVERSE);
@@ -599,6 +609,10 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#containsRelation(String)} **/
 	@Override
 	public boolean containsRelation(String relationId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return (getDelegate().containsRelation(relationId));
+		}
 		if (relationId == null) {
 			return (false);
 		}
@@ -649,6 +663,12 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public void addLayer(L layer) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().addLayer(layer);
+			return;
+		}
+
 		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);
 			if (layer instanceof LayerImpl) {
@@ -719,6 +739,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public void removeLayer(L layer) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().removeLayer(layer);
+			return;
+		}
 		if (layer instanceof LayerImpl) {
 			((LayerImpl<N, R>) layer).basicSetGraph(null);
 		}
