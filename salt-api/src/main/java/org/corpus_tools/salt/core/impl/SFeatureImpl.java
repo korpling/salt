@@ -27,8 +27,8 @@ public class SFeatureImpl extends SAbstractAnnotationImpl implements SFeature {
 	}
 
 	/**
-	 * Initializes an object of type {@link SFeatureImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
+	 * Initializes an object of type {@link SFeatureImpl}. If {@link #delegate}
+	 * is not null, all functions of this method are delegated to the delegate
 	 * object. Setting {@link #delegate} makes this object to a container.
 	 * 
 	 * @param a

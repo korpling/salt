@@ -59,6 +59,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	public SCorpusGraphImpl(Graph delegate) {
 		super(delegate);
 	}
+
 	/**
 	 * Calls the init of super class and expands its initialization for adding
 	 * {@link SaltUtil#IDX_NODETYPE} of indexes:

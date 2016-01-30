@@ -23,7 +23,6 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
-import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 
 @SuppressWarnings("serial")
@@ -43,7 +42,7 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 	public SCorpusImpl(Node delegate) {
 		super(delegate);
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SCorpusGraph getGraph() {

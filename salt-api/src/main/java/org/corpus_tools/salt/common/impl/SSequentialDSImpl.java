@@ -45,6 +45,7 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 	public SSequentialDSImpl(Node delegate) {
 		super(delegate);
 	}
+
 	/** {@inheritDoc} */
 	@Override
 	public D getData() {

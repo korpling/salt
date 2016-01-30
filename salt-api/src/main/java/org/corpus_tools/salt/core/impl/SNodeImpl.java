@@ -57,7 +57,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public SNodeImpl(Node delegate) {
 		super(delegate);
 	}
-	
+
 	/**
 	 * {@inheritDoc SNode#getOutgoingSRelations()}
 	 */

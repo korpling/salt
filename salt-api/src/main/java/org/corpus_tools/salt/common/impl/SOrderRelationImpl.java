@@ -41,9 +41,10 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	}
 
 	/**
-	 * Initializes an object of type {@link SOrderRelationImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
-	 * object. Setting {@link #delegate} makes this object to a container.
+	 * Initializes an object of type {@link SOrderRelationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
 	 * 
 	 * @param a
 	 *            delegate object of the same type.
@@ -51,7 +52,7 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	public SOrderRelationImpl(Relation delegate) {
 		super(delegate);
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

@@ -49,6 +49,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	public SDocumentImpl(Node delegate) {
 		super(delegate);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getDocumentGraph() {

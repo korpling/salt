@@ -670,12 +670,6 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 			return;
 		}
 
-//		// delegate method to delegate if set
-//		if (getDelegate() != null) {
-//			getDelegate().addLayer(layer);
-//			return;
-//		}
-
 		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);
 			if (layer instanceof LayerImpl) {

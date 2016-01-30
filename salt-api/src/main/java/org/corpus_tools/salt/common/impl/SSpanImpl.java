@@ -43,6 +43,7 @@ public class SSpanImpl extends SNodeImpl implements SSpan, SStructuredNode {
 	public SSpanImpl(Node delegate) {
 		super(delegate);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

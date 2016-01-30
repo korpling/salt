@@ -25,7 +25,6 @@ import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
-import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
@@ -45,6 +44,7 @@ public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implemen
 	public SSpanningRelationImpl(Relation delegate) {
 		super(delegate);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

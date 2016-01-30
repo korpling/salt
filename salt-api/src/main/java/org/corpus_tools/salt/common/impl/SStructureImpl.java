@@ -43,7 +43,7 @@ public class SStructureImpl extends SNodeImpl implements SStructure, SStructured
 	public SStructureImpl(Node delegate) {
 		super(delegate);
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

@@ -32,9 +32,10 @@ public class SCatAnnotationImpl extends SAnnotationImpl implements SCatAnnotatio
 	}
 
 	/**
-	 * Initializes an object of type {@link SDocumentGraphImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
-	 * object. Setting {@link #delegate} makes this object to a container.
+	 * Initializes an object of type {@link SDocumentGraphImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
 	 * 
 	 * @param a
 	 *            delegate object of the same type.

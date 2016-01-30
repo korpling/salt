@@ -42,9 +42,10 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	}
 
 	/**
-	 * Initializes an object of type {@link SAbstractAnnotationImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
-	 * object. Setting {@link #delegate} makes this object to a container.
+	 * Initializes an object of type {@link SAbstractAnnotationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
 	 * 
 	 * @param a
 	 *            delegate object of the same type.
@@ -52,6 +53,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public SAbstractAnnotationImpl(Label delegate) {
 		super(delegate);
 	}
+
 	// ============================= start: SValueType
 	protected SDATATYPE computeSValueType() {
 		if (this.getValue() == null)

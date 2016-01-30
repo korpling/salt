@@ -29,7 +29,6 @@ import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
-import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.corpus_tools.salt.util.SaltUtil;
@@ -43,8 +42,8 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	}
 
 	/**
-	 * Initializes an object of type {@link SRelationImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
+	 * Initializes an object of type {@link SRelationImpl}. If {@link #delegate}
+	 * is not null, all functions of this method are delegated to the delegate
 	 * object. Setting {@link #delegate} makes this object to a container.
 	 * 
 	 * @param a
@@ -53,7 +52,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	public SRelationImpl(Relation delegate) {
 		super(delegate);
 	}
-	
+
 	// =======================================> SAnnotation
 	/** {@inheritDoc} **/
 	@Override

@@ -69,176 +69,176 @@ import org.corpus_tools.salt.semantics.impl.SSentenceAnnotationImpl;
 import org.corpus_tools.salt.semantics.impl.STypeAnnotationImpl;
 import org.corpus_tools.salt.semantics.impl.SWordAnnotationImpl;
 
-public class DelegatorTestFactory  extends SaltFactoryImpl implements ISaltFactory{
-		// ==========================================> salt core
-		@Override
-		public SGraph createSGraph() {
-			return (new SGraphImpl(createGraph()));
-		}
+public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactory {
+	// ==========================================> salt core
+	@Override
+	public SGraph createSGraph() {
+		return (new SGraphImpl(createGraph()));
+	}
 
-		@Override
-		public SNode createSNode() {
-			return (new SNodeImpl(createNode()));
-		}
+	@Override
+	public SNode createSNode() {
+		return (new SNodeImpl(createNode()));
+	}
 
-		@Override
-		public SRelation<SNode, SNode> createSRelation() {
-			return (new SRelationImpl<SNode, SNode>(createRelation()));
-		}
+	@Override
+	public SRelation<SNode, SNode> createSRelation() {
+		return (new SRelationImpl<SNode, SNode>(createRelation()));
+	}
 
-		@Override
-		public SAnnotation createSAnnotation() {
-			return (new SAnnotationImpl(createLabel()));
-		}
+	@Override
+	public SAnnotation createSAnnotation() {
+		return (new SAnnotationImpl(createLabel()));
+	}
 
-		@Override
-		public SMetaAnnotation createSMetaAnnotation() {
-			return (new SMetaAnnotationImpl(createLabel()));
-		}
+	@Override
+	public SMetaAnnotation createSMetaAnnotation() {
+		return (new SMetaAnnotationImpl(createLabel()));
+	}
 
-		@Override
-		public SProcessingAnnotation createSProcessingAnnotation() {
-			return (new SProcessingAnnotationImpl(createLabel()));
-		}
+	@Override
+	public SProcessingAnnotation createSProcessingAnnotation() {
+		return (new SProcessingAnnotationImpl(createLabel()));
+	}
 
-		@Override
-		public SFeature createSFeature() {
-			return (new SFeatureImpl(createLabel()));
-		}
+	@Override
+	public SFeature createSFeature() {
+		return (new SFeatureImpl(createLabel()));
+	}
 
-		@Override
-		public SLayer createSLayer() {
-			return (new SLayerImpl(createLayer()));
-		}
+	@Override
+	public SLayer createSLayer() {
+		return (new SLayerImpl(createLayer()));
+	}
 
-		// ==========================================< salt core
-		// ==========================================> salt common
-		@Override
-		public SCorpus createSCorpus() {
-			return (new SCorpusImpl(createNode()));
-		}
+	// ==========================================< salt core
+	// ==========================================> salt common
+	@Override
+	public SCorpus createSCorpus() {
+		return (new SCorpusImpl(createNode()));
+	}
 
-		@Override
-		public SCorpusRelation createSCorpusRelation() {
-			return (new SCorpusRelationImpl(createRelation()));
-		}
+	@Override
+	public SCorpusRelation createSCorpusRelation() {
+		return (new SCorpusRelationImpl(createRelation()));
+	}
 
-		@Override
-		public SCorpusDocumentRelation createSCorpusDocumentRelation() {
-			return (new SCorpusDocumentRelationImpl(createRelation()));
-		}
+	@Override
+	public SCorpusDocumentRelation createSCorpusDocumentRelation() {
+		return (new SCorpusDocumentRelationImpl(createRelation()));
+	}
 
-		@Override
-		public SCorpusGraph createSCorpusGraph() {
-			return (new SCorpusGraphImpl(createGraph()));
-		}
+	@Override
+	public SCorpusGraph createSCorpusGraph() {
+		return (new SCorpusGraphImpl(createGraph()));
+	}
 
-		@Override
-		public SDocumentGraph createSDocumentGraph() {
-			return (new SDocumentGraphImpl(createGraph()));
-		}
+	@Override
+	public SDocumentGraph createSDocumentGraph() {
+		return (new SDocumentGraphImpl(createGraph()));
+	}
 
-		@Override
-		public SDocument createSDocument() {
-			return (new SDocumentImpl(createNode()));
-		}
+	@Override
+	public SDocument createSDocument() {
+		return (new SDocumentImpl(createNode()));
+	}
 
-		@Override
-		public SToken createSToken() {
-			return (new STokenImpl(createNode()));
-		}
+	@Override
+	public SToken createSToken() {
+		return (new STokenImpl(createNode()));
+	}
 
-		@Override
-		public SSpanningRelation createSSpanningRelation() {
-			return (new SSpanningRelationImpl(createRelation()));
-		}
+	@Override
+	public SSpanningRelation createSSpanningRelation() {
+		return (new SSpanningRelationImpl(createRelation()));
+	}
 
-		@Override
-		public SDominanceRelation createSDominanceRelation() {
-			return (new SDominanceRelationImpl(createRelation()));
-		}
+	@Override
+	public SDominanceRelation createSDominanceRelation() {
+		return (new SDominanceRelationImpl(createRelation()));
+	}
 
-		@Override
-		public SPointingRelation createSPointingRelation() {
-			return (new SPointingRelationImpl(createRelation()));
-		}
+	@Override
+	public SPointingRelation createSPointingRelation() {
+		return (new SPointingRelationImpl(createRelation()));
+	}
 
-		@Override
-		public SOrderRelation createSOrderRelation() {
-			return (new SOrderRelationImpl(createRelation()));
-		}
+	@Override
+	public SOrderRelation createSOrderRelation() {
+		return (new SOrderRelationImpl(createRelation()));
+	}
 
-		@Override
-		public STextualRelation createSTextualRelation() {
-			return (new STextualRelationImpl(createRelation()));
-		}
+	@Override
+	public STextualRelation createSTextualRelation() {
+		return (new STextualRelationImpl(createRelation()));
+	}
 
-		@Override
-		public STimelineRelation createSTimelineRelation() {
-			return (new STimelineRelationImpl(createRelation()));
-		}
+	@Override
+	public STimelineRelation createSTimelineRelation() {
+		return (new STimelineRelationImpl(createRelation()));
+	}
 
-		@Override
-		public SMedialRelation createSMedialRelation() {
-			return (new SMedialRelationImpl(createRelation()));
-		}
+	@Override
+	public SMedialRelation createSMedialRelation() {
+		return (new SMedialRelationImpl(createRelation()));
+	}
 
-		@Override
-		public SSpan createSSpan() {
-			return (new SSpanImpl(createNode()));
-		}
+	@Override
+	public SSpan createSSpan() {
+		return (new SSpanImpl(createNode()));
+	}
 
-		@Override
-		public SStructure createSStructure() {
-			return (new SStructureImpl(createNode()));
-		}
+	@Override
+	public SStructure createSStructure() {
+		return (new SStructureImpl(createNode()));
+	}
 
-		@Override
-		public STextualDS createSTextualDS() {
-			return (new STextualDSImpl(createNode()));
-		}
+	@Override
+	public STextualDS createSTextualDS() {
+		return (new STextualDSImpl(createNode()));
+	}
 
-		@Override
-		public SMedialDS createSMedialDS() {
-			return (new SMedialDSImpl(createNode()));
-		}
+	@Override
+	public SMedialDS createSMedialDS() {
+		return (new SMedialDSImpl(createNode()));
+	}
 
-		@Override
-		public STimeline createSTimeline() {
-			return (new STimelineImpl(createNode()));
-		}
+	@Override
+	public STimeline createSTimeline() {
+		return (new STimelineImpl(createNode()));
+	}
 
-		// ==========================================< salt common
-		// ==========================================> salt semantics
+	// ==========================================< salt common
+	// ==========================================> salt semantics
 
-		@Override
-		public SCatAnnotation createSCatAnnotation() {
-			return (new SCatAnnotationImpl(createLabel()));
-		}
+	@Override
+	public SCatAnnotation createSCatAnnotation() {
+		return (new SCatAnnotationImpl(createLabel()));
+	}
 
-		@Override
-		public SPOSAnnotation createSPOSAnnotation() {
-			return (new SPOSAnnotationImpl(createLabel()));
-		}
+	@Override
+	public SPOSAnnotation createSPOSAnnotation() {
+		return (new SPOSAnnotationImpl(createLabel()));
+	}
 
-		@Override
-		public SLemmaAnnotation createSLemmaAnnotation() {
-			return (new SLemmaAnnotationImpl(createLabel()));
-		}
+	@Override
+	public SLemmaAnnotation createSLemmaAnnotation() {
+		return (new SLemmaAnnotationImpl(createLabel()));
+	}
 
-		@Override
-		public STypeAnnotation createSTypeAnnotation() {
-			return (new STypeAnnotationImpl(createLabel()));
-		}
+	@Override
+	public STypeAnnotation createSTypeAnnotation() {
+		return (new STypeAnnotationImpl(createLabel()));
+	}
 
-		@Override
-		public SWordAnnotation createSWordAnnotation() {
-			return (new SWordAnnotationImpl(createLabel()));
-		}
+	@Override
+	public SWordAnnotation createSWordAnnotation() {
+		return (new SWordAnnotationImpl(createLabel()));
+	}
 
-		@Override
-		public SSentenceAnnotation createSSentenceAnnotation() {
-			return (new SSentenceAnnotationImpl(createLabel()));
-		}
-		// ==========================================< salt semantics
+	@Override
+	public SSentenceAnnotation createSSentenceAnnotation() {
+		return (new SSentenceAnnotationImpl(createLabel()));
+	}
+	// ==========================================< salt semantics
 }

@@ -3,15 +3,12 @@ package org.corpus_tools.salt.delegator.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
-import org.corpus_tools.salt.common.SPointingRelation;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.impl.SaltFactoryImpl;
@@ -20,8 +17,6 @@ import org.corpus_tools.salt.util.Difference;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.google.common.collect.Collections2;
 
 public class DelegationDeletionTest {
 
@@ -118,10 +113,10 @@ public class DelegationDeletionTest {
 		diffs = template_doc.getDocumentGraph().findDiffs(fixture_doc.getDocumentGraph());
 		assertEquals("" + diffs, 0, diffs.size());
 	}
-	
+
 	/**
-	 * Removes all spans and spanning relations and compares two graphs
-	 * created 1) with default factory and 2) with {@link DelegatorTestFactory}.
+	 * Removes all spans and spanning relations and compares two graphs created
+	 * 1) with default factory and 2) with {@link DelegatorTestFactory}.
 	 */
 	@Test
 	public void testDelegated_DeleteInformationStructure() {

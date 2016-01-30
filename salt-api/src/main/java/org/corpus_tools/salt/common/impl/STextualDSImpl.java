@@ -41,6 +41,7 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	public STextualDSImpl(Node delegate) {
 		super(delegate);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public String getText() {

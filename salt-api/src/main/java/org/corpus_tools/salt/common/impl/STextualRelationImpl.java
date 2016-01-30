@@ -32,9 +32,10 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 	}
 
 	/**
-	 * Initializes an object of type {@link STextualRelationImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
-	 * object. Setting {@link #delegate} makes this object to a container.
+	 * Initializes an object of type {@link STextualRelationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
 	 * 
 	 * @param a
 	 *            delegate object of the same type.
@@ -42,7 +43,7 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 	public STextualRelationImpl(Relation delegate) {
 		super(delegate);
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

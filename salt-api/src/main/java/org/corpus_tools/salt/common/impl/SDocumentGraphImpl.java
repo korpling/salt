@@ -214,7 +214,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
 		}
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocument getDocument() {

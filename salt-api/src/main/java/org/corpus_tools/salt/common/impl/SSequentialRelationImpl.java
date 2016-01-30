@@ -32,9 +32,10 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 	}
 
 	/**
-	 * Initializes an object of type {@link SSequentialRelationImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
-	 * object. Setting {@link #delegate} makes this object to a container.
+	 * Initializes an object of type {@link SSequentialRelationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
 	 * 
 	 * @param a
 	 *            delegate object of the same type.
@@ -42,6 +43,7 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 	public SSequentialRelationImpl(Relation delegate) {
 		super(delegate);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public P getStart() {

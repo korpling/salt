@@ -43,6 +43,7 @@ public class STokenImpl extends SNodeImpl implements SToken, SStructuredNode {
 	public STokenImpl(Node delegate) {
 		super(delegate);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

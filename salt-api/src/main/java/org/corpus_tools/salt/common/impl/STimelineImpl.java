@@ -41,6 +41,7 @@ public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implement
 	public STimelineImpl(Node delegate) {
 		super(delegate);
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

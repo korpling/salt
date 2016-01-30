@@ -42,7 +42,7 @@ public class SMedialDSImpl extends SSequentialDSImpl<URI, Double> implements SMe
 	public SMedialDSImpl(Node delegate) {
 		super(delegate);
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public URI getMediaReference() {

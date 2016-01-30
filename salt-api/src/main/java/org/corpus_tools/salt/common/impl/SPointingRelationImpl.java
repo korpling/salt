@@ -32,9 +32,10 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 	}
 
 	/**
-	 * Initializes an object of type {@link SPointingRelationImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
-	 * object. Setting {@link #delegate} makes this object to a container.
+	 * Initializes an object of type {@link SPointingRelationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
 	 * 
 	 * @param a
 	 *            delegate object of the same type.
@@ -42,7 +43,7 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 	public SPointingRelationImpl(Relation delegate) {
 		super(delegate);
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {
