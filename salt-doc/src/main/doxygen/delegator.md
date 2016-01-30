@@ -9,7 +9,7 @@ In Salt, the delegate is injected into the delegator on its creation time. There
 
 ~~~{.java}
 SaltNotificationFactory factory = new SaltNotificationFactory();
-SaltFactory.setFactory(new SaltNotificationFactory());
+SaltFactory.setFactory(factory);
 ~~~
 
 Now Salt's factory does not use the default factory org.corpus_tools.salt.impl.SaltFactoryImpl anymore, it uses the set factory instead. Each factory must implement the interface org.corpus_tools.salt.ISaltFactory. This enables, that every object which is created is created by the new factory and therefore code parts do not need to be changed and adapted to the extension. In our case, when using the org.corpus_tools.salt.extensions.notification.SaltNotificationFactory each created object will create a notification about a change in the object and will notify a registered listener.
