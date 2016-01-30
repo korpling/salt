@@ -40,7 +40,7 @@ public class CreateGraphNotificationTest implements Listener {
 	@Test
 	public void test_createPrimaryData() {
 		SaltNotificationFactory factory = new SaltNotificationFactory();
-		SaltFactory.setFactory(new SaltNotificationFactory());
+		SaltFactory.setFactory(factory);
 		final List<Event> eventList = new ArrayList<>(2);
 		eventList.add(new Event(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null, SaltUtil.SALT_NAMESPACE, null));
 		eventList.add(new Event(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, null, SaltUtil.FEAT_SDOCUMENT, null));
