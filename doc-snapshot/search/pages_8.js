@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['persist_20and_20load',['Persist and Load',['../persist.html',1,'']]]
+  ['traversing_20graphs',['Traversing graphs',['../traverse.html',1,'']]]
 ];

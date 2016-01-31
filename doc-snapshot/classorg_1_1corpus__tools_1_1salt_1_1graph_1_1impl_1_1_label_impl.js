@@ -1,11 +1,8 @@
 var classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl =
 [
-    [ "LabelImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#a097ad36294f6f671257a4f3e979338ed", null ],
-    [ "LabelImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#a92be6fbac8fd5065d42befeac07d9073", null ],
     [ "basicSetLabelableElement", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#ab21ae08e44e44816195c29c9b553e1db", null ],
     [ "copy", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#aa917048b2e454897c7b35c58858822a5", null ],
     [ "getContainer", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#aadac72d42f0b3d480debfe5e216bf4cc", null ],
-    [ "getDelegate", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#a1b20cdab279169c131d07d9c830ca732", null ],
     [ "getName", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#a21c370b7aefe48acc2396418c91dbf22", null ],
     [ "getNamespace", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#afba8d0ecfa6a24b17ff7689efb1c377e", null ],
     [ "getQName", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#a0842845cc08b8b3414bd3057e2269ed2", null ],

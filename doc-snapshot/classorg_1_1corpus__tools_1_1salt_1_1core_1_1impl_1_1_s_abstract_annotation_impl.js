@@ -1,7 +1,5 @@
 var classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl =
 [
-    [ "SAbstractAnnotationImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl.html#a4168eb8f5426dfac47dd4cc99793e178", null ],
-    [ "SAbstractAnnotationImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl.html#a4b41e87c52097f8f0b0505f95c751de7", null ],
     [ "addAnnotation", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl.html#a0f6a1be9568f29b3f342242ba31faf56", null ],
     [ "addFeature", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl.html#a7e50cc6cb5550cdbe6602f791d80a75c", null ],
     [ "addMetaAnnotation", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl.html#a7db93c11be14684a4fc69d7b65efff3f", null ],

@@ -1,6 +1,5 @@
 var classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94 =
 [
-    [ "GraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a3e8642884a63a8e998c09fbff7df39f8", null ],
     [ "GraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a62137dab4f1cb769b06156e9d49833f1", null ],
     [ "GraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a65d6a443ed300e89b3614beaa491cb1d", null ],
     [ "addLayer", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#ad9ec341473031efd01cfe444b05b65b4", null ],
@@ -15,7 +14,6 @@ var classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01e
     [ "containsLayer", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a07bd9907e6aa1b8a7dda2dfbb306fbd9", null ],
     [ "containsNode", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a8452ea229ac1fa970a2ff6ec0823bd1e", null ],
     [ "containsRelation", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#adc24f3a4c15ae88643c9af797ab7bfa9", null ],
-    [ "getDelegate", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a0327f6365e0d3c9fd7f9ac63ef8db38f", null ],
     [ "getIndexMgr", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a280bd16efeaab77311a5844076c3a0c1", null ],
     [ "getInRelations", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a3d4767239ac8c3c46c297c8a260977b5", null ],
     [ "getLayer", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a42336002db8b1e2d104b3ccfb29e165e", null ],
@@ -25,7 +23,7 @@ var classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01e
     [ "getOutRelations", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#abcbd569c4c0d2617f7d8ca3a3300fa13", null ],
     [ "getRelation", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#abc3158c8ea55c7b29ed5489043735ec3", null ],
     [ "getRelations", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#af868d6df5c1944d9a1563a42155ca5c4", null ],
-    [ "getRelations", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#abd549fcf0942301512620aaedf3ebbc2", null ],
+    [ "getRelations", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a93dd47ea8ad1d9f5d6a997dc27ad4b27", null ],
     [ "init", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a211c6c82ec237d158988edefd3b85f47", null ],
     [ "removeLayer", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a77b1331bf0a0acde3d8dc88a5843fa6a", null ],
     [ "removeNode", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl_3_01_n_01extends_01_node_00_01a1753b073e644f4e9516496b26b1fc94.html#a92b6e216715aac07d36fc5218d0df489", null ],

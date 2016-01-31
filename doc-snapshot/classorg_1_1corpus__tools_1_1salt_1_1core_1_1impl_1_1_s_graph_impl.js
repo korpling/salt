@@ -1,7 +1,5 @@
 var classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl =
 [
-    [ "SGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a4f039e6eee41504bf1b45601fd803eb5", null ],
-    [ "SGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#ae5c247158f67d6f23abdb4251fe3b41e", null ],
     [ "addAnnotation", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a175e5f683e8e9e88d850714692539831", null ],
     [ "addFeature", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a8475cb9e77686730e0c129fcd29682ba", null ],
     [ "addLayer", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a5498e7e969156ac9f2691756955f400f", null ],

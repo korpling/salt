@@ -1,7 +1,5 @@
 var classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl =
 [
-    [ "SNodeImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl.html#ac8ecc4db71448d004e29e36fbd2ac851", null ],
-    [ "SNodeImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl.html#ae38576597ad2005203ea74efc9ab2b53", null ],
     [ "addAnnotation", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl.html#a559e5a79bedb84d95a85bde70ff5adad", null ],
     [ "addFeature", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl.html#a5222b92134fbc0c703afda615666a2f1", null ],
     [ "addMetaAnnotation", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl.html#ac37a6974e2c7fc911e3f8cc49e9ec31d", null ],

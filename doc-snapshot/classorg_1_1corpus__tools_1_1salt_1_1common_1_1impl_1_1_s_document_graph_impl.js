@@ -1,11 +1,9 @@
 var classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl =
 [
-    [ "SDocumentGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#aa908d02d9a761ff845a3daeb0a48d5e7", null ],
-    [ "SDocumentGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a23d35d50c1812d433d305a5baea23730", null ],
-    [ "addNode", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a42d6466d1045e8681727da5e0517e26b", null ],
     [ "addNode", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a44be7675837d78a5846e2d59c92d7457", null ],
-    [ "addRelation", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a4c08e2d542fafa222ff537d5e7115866", null ],
     [ "basic_setDocument", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a4ea8a2c972715041908b4720d65148ae", null ],
+    [ "basicAddNode", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a024431f8a67128548cfa3fee1008ad7d", null ],
+    [ "basicAddRelation", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#ab38996b3a023a0c39d144165f8d959e2", null ],
     [ "createRelation", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a9451d349d3dc2801f883151ad2c7926e", null ],
     [ "createSpan", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a15f4a45a4464ca473ca19a1a3571891e", null ],
     [ "createSpan", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#af9a51cf4bfc903a270328856025e2ea9", null ],

@@ -2,19 +2,12 @@ var searchData=
 [
   ['label_5fid',['LABEL_ID',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a199536b267c1f6424b3c96cdd18c8c5e',1,'org::corpus_tools::salt::util::SaltUtil']]],
   ['label_5fid_5fqname',['LABEL_ID_QNAME',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a0cf4954104c5674c7de828af73e87942',1,'org::corpus_tools::salt::util::SaltUtil']]],
-  ['label_5flabels',['LABEL_LABELS',['../namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#a0010d9eb2f03cbcce5406ccacadaab8b',1,'org::corpus_tools::salt::graph::GRAPH_ATTRIBUTES']]],
   ['label_5fmissing',['LABEL_MISSING',['../namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#ae3a80c73c5a1db48382ecde4c540ba37',1,'org::corpus_tools::salt::util::DIFF_TYPES']]],
-  ['label_5fname',['LABEL_NAME',['../namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#ac0e4060f4505f03869479b5f4f571409',1,'org::corpus_tools::salt::graph::GRAPH_ATTRIBUTES']]],
   ['label_5fname_5fdiffering',['LABEL_NAME_DIFFERING',['../namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#ae4ea8e059c40ee7ec587b3a3131f2877',1,'org::corpus_tools::salt::util::DIFF_TYPES']]],
-  ['label_5fnamespace',['LABEL_NAMESPACE',['../namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#a6e4d35484ac0d58e87882d535f81cacd',1,'org::corpus_tools::salt::graph::GRAPH_ATTRIBUTES']]],
   ['label_5fnamespaces_5fdiffering',['LABEL_NAMESPACES_DIFFERING',['../namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a3e6d3f5a7af88e76e624c4372fc5c50e',1,'org::corpus_tools::salt::util::DIFF_TYPES']]],
-  ['label_5fvalue',['LABEL_VALUE',['../namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#abf99f36729b2768351227c362839c228',1,'org::corpus_tools::salt::graph::GRAPH_ATTRIBUTES']]],
   ['label_5fvalue_5fdiffering',['LABEL_VALUE_DIFFERING',['../namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#afb0e59fa7fd3b22eed6859c08d17503e',1,'org::corpus_tools::salt::util::DIFF_TYPES']]],
   ['lang_5fde',['LANG_DE',['../classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#a198625f2bd22139b9afee7a4270bb2d5',1,'org::corpus_tools::salt::samples::SampleGenerator']]],
   ['lang_5fen',['LANG_EN',['../classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#a7404a25a640038d415924613c4be4d1e',1,'org::corpus_tools::salt::samples::SampleGenerator']]],
   ['layer_5fdiffering',['LAYER_DIFFERING',['../namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#aa81e2eb8a69076df4817f8b417970278',1,'org::corpus_tools::salt::util::DIFF_TYPES']]],
-  ['layer_5flabels',['LAYER_LABELS',['../namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#a66e416de87b2fd093e8efdc6d3257860',1,'org::corpus_tools::salt::graph::GRAPH_ATTRIBUTES']]],
-  ['layer_5fmissing',['LAYER_MISSING',['../namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#ad11a07f8b245ea58141c3752027d3bfd',1,'org::corpus_tools::salt::util::DIFF_TYPES']]],
-  ['layer_5fnodes',['LAYER_NODES',['../namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#a3bb3588c021ca3c1cbdd7320e818ef01',1,'org::corpus_tools::salt::graph::GRAPH_ATTRIBUTES']]],
-  ['layer_5frelations',['LAYER_RELATIONS',['../namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#aee28afef667ff052f47295c987581dbd',1,'org::corpus_tools::salt::graph::GRAPH_ATTRIBUTES']]]
+  ['layer_5fmissing',['LAYER_MISSING',['../namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#ad11a07f8b245ea58141c3752027d3bfd',1,'org::corpus_tools::salt::util::DIFF_TYPES']]]
 ];

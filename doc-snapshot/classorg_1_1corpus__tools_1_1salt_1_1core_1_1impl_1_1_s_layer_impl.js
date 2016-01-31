@@ -1,7 +1,5 @@
 var classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl =
 [
-    [ "SLayerImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl.html#a3e095ede55c0ec899afa23d18c6cb635", null ],
-    [ "SLayerImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl.html#ab8223a1d6e1a994f074aecacbd51c153", null ],
     [ "addAnnotation", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl.html#a11da6700f05fe156bdfa4c3d94af7102", null ],
     [ "addFeature", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl.html#ac220dbdb5c861e88939e2457464e5688", null ],
     [ "addLabel", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl.html#a2cf286739d21d0386fb07834e7cc42d0", null ],

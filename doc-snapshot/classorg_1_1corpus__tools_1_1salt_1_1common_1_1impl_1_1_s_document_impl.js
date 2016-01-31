@@ -1,7 +1,5 @@
 var classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl =
 [
-    [ "SDocumentImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html#a35c81ec70ad7d2b5091fa374605bc08c", null ],
-    [ "SDocumentImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html#a65726af025851dc60906d3540d53aa57", null ],
     [ "basic_setDocumentGraph", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html#af4fef92240b2d9b7511c919e0d8418ad", null ],
     [ "getDocumentGraph", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html#ae77bff59744f73230d4b7e35b4153ff6", null ],
     [ "getDocumentGraphLocation", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html#a4244ef8c3b99a524b2dbe4af2f1be666", null ],

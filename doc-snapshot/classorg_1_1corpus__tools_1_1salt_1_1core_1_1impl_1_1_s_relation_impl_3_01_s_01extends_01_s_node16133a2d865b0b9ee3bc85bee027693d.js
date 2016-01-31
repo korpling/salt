@@ -1,7 +1,5 @@
 var classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_relation_impl_3_01_s_01extends_01_s_node16133a2d865b0b9ee3bc85bee027693d =
 [
-    [ "SRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_relation_impl_3_01_s_01extends_01_s_node16133a2d865b0b9ee3bc85bee027693d.html#a167fa13f43129fa6bb50ab35a38e9fc7", null ],
-    [ "SRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_relation_impl_3_01_s_01extends_01_s_node16133a2d865b0b9ee3bc85bee027693d.html#ac1f255a07be2f62767d8839fbcd93b01", null ],
     [ "addAnnotation", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_relation_impl_3_01_s_01extends_01_s_node16133a2d865b0b9ee3bc85bee027693d.html#a0ebc180cbd95196ac00979a81cc22512", null ],
     [ "addFeature", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_relation_impl_3_01_s_01extends_01_s_node16133a2d865b0b9ee3bc85bee027693d.html#a13409e7114061125bad1fc56356eb8d6", null ],
     [ "addMetaAnnotation", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_relation_impl_3_01_s_01extends_01_s_node16133a2d865b0b9ee3bc85bee027693d.html#a5024c15a426138c35bb01c29c82219ec", null ],

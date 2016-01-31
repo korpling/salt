@@ -10,7 +10,6 @@ var searchData=
   ['semantics_5ftype',['SEMANTICS_TYPE',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#ac9492f6e38d6e50163b4d3e814434640',1,'org::corpus_tools::salt::util::SaltUtil']]],
   ['semantics_5funit',['SEMANTICS_UNIT',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a17cb767fdc5339ada61f3ad808a00877',1,'org::corpus_tools::salt::util::SaltUtil']]],
   ['semantics_5fword',['SEMANTICS_WORD',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#af0acd9185fcc5fe27406ce8beac1256d',1,'org::corpus_tools::salt::util::SaltUtil']]],
-  ['set',['SET',['../interfaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_listener.html#a02e3570264adb8167a9d574691308635',1,'org::corpus_tools::salt::extensions::notification::Listener::NOTIFICATION_TYPE']]],
   ['source',['source',['../classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl_3_01_s_01extends_01_node_00_01_t_01extends_01_node_01_4.html#aa3beab4141cb446bc84208540c37b46b',1,'org::corpus_tools::salt::graph::impl::RelationImpl&lt; S extends Node, T extends Node &gt;']]],
   ['start',['start',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_data_source_sequence_3_01_p_01extends_01_number_01_4.html#a7cd53020b4ebf3e45bfe1b8b7c94f8ec',1,'org::corpus_tools::salt::util::DataSourceSequence&lt; P extends Number &gt;']]]
 ];

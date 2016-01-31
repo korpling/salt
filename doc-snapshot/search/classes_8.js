@@ -9,7 +9,6 @@ var searchData=
   ['saltfactoryimpl',['SaltFactoryImpl',['../classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html',1,'org::corpus_tools::salt::impl']]],
   ['saltinsertionexception',['SaltInsertionException',['../classorg_1_1corpus__tools_1_1salt_1_1exceptions_1_1_salt_insertion_exception.html',1,'org::corpus_tools::salt::exceptions']]],
   ['saltinvalidmodelexception',['SaltInvalidModelException',['../classorg_1_1corpus__tools_1_1salt_1_1exceptions_1_1_salt_invalid_model_exception.html',1,'org::corpus_tools::salt::exceptions']]],
-  ['saltnotificationfactory',['SaltNotificationFactory',['../classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html',1,'org::corpus_tools::salt::extensions::notification']]],
   ['saltparameterexception',['SaltParameterException',['../classorg_1_1corpus__tools_1_1salt_1_1exceptions_1_1_salt_parameter_exception.html',1,'org::corpus_tools::salt::exceptions']]],
   ['saltproject',['SaltProject',['../interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_salt_project.html',1,'org::corpus_tools::salt::common']]],
   ['saltprojectimpl',['SaltProjectImpl',['../classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_salt_project_impl.html',1,'org::corpus_tools::salt::common::impl']]],
