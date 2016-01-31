@@ -172,7 +172,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		if (getDelegate() != null) {
 			getDelegate().addNode(node);
 			if (node instanceof NodeImpl) {
+				
 				((NodeImpl) node).basicSetGraph_WithoutRemoving(this);
+				System.out.println("---------------> GRAPH: "+this);
+				System.out.println("---------------> "+node);
+				System.out.println("---------------> after setting: "+ node.getGraph());
 			}
 			return;
 		}

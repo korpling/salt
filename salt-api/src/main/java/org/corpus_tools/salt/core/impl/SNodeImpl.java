@@ -328,7 +328,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	@Override
 	public SGraph getGraph() {
 		Graph superGraph = super.getGraph();
-
+		System.out.println("----------- getGraph(): "+ superGraph);
 		if (superGraph == null) {
 			return null;
 		}
