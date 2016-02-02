@@ -1,10 +1,10 @@
 var namespaceorg_1_1corpus__tools_1_1salt_1_1common_1_1impl =
 [
     [ "SaltProjectImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_salt_project_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_salt_project_impl" ],
-    [ "SCorpusDocumentRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html", null ],
+    [ "SCorpusDocumentRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl" ],
     [ "SCorpusGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl" ],
     [ "SCorpusImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_impl" ],
-    [ "SCorpusRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_relation_impl.html", null ],
+    [ "SCorpusRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_relation_impl" ],
     [ "SDocumentGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl" ],
     [ "SDocumentImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl" ],
     [ "SDominanceRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_dominance_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_dominance_relation_impl" ],

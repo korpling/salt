@@ -1,9 +1,12 @@
 var classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf =
 [
     [ "LayerImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#aa6d947b32e8bb77d4f7d660f3b1fe65f", null ],
+    [ "LayerImpl", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#ab18e34b1772b41bd08daa2bf582f95c5", null ],
     [ "addNode", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#aa2a65f886be4522a27373cac2b821f35", null ],
     [ "addRelation", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#a2cb1b6157a771aec95ab3b9870f4b044", null ],
     [ "basicSetGraph", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#affd77d49336d6f1875037b41245c513c", null ],
+    [ "basicSetGraph_WithoutRemoving", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#a0ed768f45763ead446f5af3b1d015de2", null ],
+    [ "getDelegate", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#ac5fb68c8dd426e9f6c48ace859692acf", null ],
     [ "getGraph", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#a3179e5cde705900d0019da0efcbfb629", null ],
     [ "getNodes", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#a708b8318b860f261aa71f58cf8215ca8", null ],
     [ "getRelations", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl_3_01_n_01extends_01_node_00_0117aecea8516b44c61331908525477caf.html#aee925f01552fb1e0fd864550123557ca", null ],

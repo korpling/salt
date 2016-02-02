@@ -3,6 +3,9 @@ var namespaceorg_1_1corpus__tools_1_1salt =
     [ "common", "namespaceorg_1_1corpus__tools_1_1salt_1_1common.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1common" ],
     [ "core", "namespaceorg_1_1corpus__tools_1_1salt_1_1core.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1core" ],
     [ "exceptions", "namespaceorg_1_1corpus__tools_1_1salt_1_1exceptions.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1exceptions" ],
+    [ "extensions", null, [
+      [ "notification", "namespaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification" ]
+    ] ],
     [ "graph", "namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1graph" ],
     [ "impl", "namespaceorg_1_1corpus__tools_1_1salt_1_1impl.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1impl" ],
     [ "index", "namespaceorg_1_1corpus__tools_1_1salt_1_1index.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1index" ],
