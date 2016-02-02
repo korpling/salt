@@ -1,4 +1,5 @@
-# Expanding Salt {#dev_delegator}
+Expanding Salt {#dev_delegator}
+==========
 
 Salt offers the possibility via the use of the [delegator pattern](https://en.wikipedia.org/wiki/Delegation_pattern), to extend the behavior of its base types: org.corpus_tools.salt.graph.Graph, org.corpus_tools.salt.graph.Node, org.corpus_tools.salt.graph.Relation, org.corpus_tools.salt.graph.Layer and org.corpus_tools.salt.graph.Label. 
 

@@ -1,4 +1,5 @@
-## Bidirectional references {#dev_bidirectionalReferences}
+Bidirectional references {#dev_bidirectionalReferences}
+==========
 
 In Salt a lot of references between two objects are bidirectional. Bidirectional means, that object A refers to object B and object B refers to object A. 
 
