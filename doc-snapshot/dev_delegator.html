@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('dev_delegator.html','');});
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Salt offers the possibility via the use of the <a href="https://en.wikipedia.org/wiki/Delegation_pattern">delegator pattern</a>, to extend the behavior of its base types: org.corpus_tools.salt.graph.Graph, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_node.html" title="In graph theory a node is a placeholder, which can be related with other nodes via an relation...">org.corpus_tools.salt.graph.Node</a>, org.corpus_tools.salt.graph.Relation, org.corpus_tools.salt.graph.Layer and <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_label.html" title="A label is an attribute-value-pair and can belong to either a Node, an Relation, a Graph...">org.corpus_tools.salt.graph.Label</a>.</p>
-<p>How to use the extension mechanism see delegator.</p>
+<p>How to use the extension mechanism see <a class="el" href="delegator.html">Expanding Salt</a>.</p>
 <p>To realize this mechanism, each class contains a constructor consuming one of Salt's base types. This is always the same type the class is derived from. For instance all types which are derived from Node consumes an object of type Node e.g. SToken, SSpan, SStructure, ... . To delegate the behavior from the delegator to the delegate each public method needs to check whether the internal variable <em>delegate</em> is set. If true, the delegate's implementation needs to be called. For instance the methods setGraph() and getGraph() in class Node:</p>
 <div class="fragment"><div class="line"></div>
 </div><!-- fragment --><p>Take care, that in case of bidirectional references it is to check, which object (delegator/ delegate) has to point to which other object (delegator/ delegate). Let us take the reference between Graph and Node for instance, than the bidirectional reference should look like this:</p>
@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('dev_delegator.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="developers.html">Developers section</a></li>
-    <li class="footer">Generated on Tue Feb 2 2016 22:59:36 for Salt by
+    <li class="footer">Generated on Tue Feb 2 2016 23:11:19 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.6 </li>
   </ul>

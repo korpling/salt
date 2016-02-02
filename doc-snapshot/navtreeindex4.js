@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#ae0a4f5303607bdc7687a8d323d93ddc3":[11,0,0,0,0,10,32],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#ae7e2b0081902398bf90640bc977f1e21":[11,0,0,0,0,10,16],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#af4d004c96de51a0285ce9f508d3f2a70":[11,0,0,0,0,10,11],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#af877095a226e3d54e5fe86e12ad74119":[11,0,0,0,0,10,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html#a0ac1fcb0d3699e40b70963e185d1fb51":[11,0,0,0,0,4,6,3],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html#a3c249fc956da2d11aad597ef57fc6a61":[11,0,0,0,0,4,6,1],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html#a58632dc498fb83418b6e33bca8c44b6a":[11,0,0,0,0,4,6,2],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html#a729db15f3857703ad76f02c8942d8602":[11,0,0,0,0,4,6,0],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html#ab82976a9bc155e4b5ffb860ffe79b887":[11,0,0,0,0,4,6,4]
+"interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html#a729db15f3857703ad76f02c8942d8602":[11,0,0,0,0,4,6,0]
 };

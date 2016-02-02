@@ -157,6 +157,7 @@ var NAVTREEINDEX3 =
 "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer.html#aa9e9e2b5fbb42f45a18f2dff38699689":[11,0,0,0,0,9,0,0,0,3,1],
 "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer.html#ac0b6844b796bc7711daf2861f2fdbe66":[11,0,0,0,0,9,0,0,0,3,5],
 "create.html":[2],
+"delegator.html":[3],
 "dev_bidirectional_references.html":[4,0],
 "dev_delegator.html":[4,1],
 "developers.html":[4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#ac871db4ec4a7fec55497fae7f9b1b390":[11,0,0,0,0,10,12],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#accd5733192a54a217ead0f72ddc10ca7":[11,0,0,0,0,10,26],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#addaf5f94f826195ce078792ea91fc472":[11,0,0,0,0,10,9],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#addf94c33818ee16462655b679ed9923c":[11,0,0,0,0,10,8],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#ae0a4f5303607bdc7687a8d323d93ddc3":[11,0,0,0,0,10,32]
+"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#addf94c33818ee16462655b679ed9923c":[11,0,0,0,0,10,8]
 };

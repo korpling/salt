@@ -6,7 +6,7 @@ var NAVTREE =
       [ "Bidirectional references", "api_concepts.html#bidirectionalReferences", null ]
     ] ],
     [ "Create a Salt model", "create.html", null ],
-    [ "Expanding Salt", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_delegator.html", null ],
+    [ "Expanding Salt", "delegator.html", null ],
     [ "Developers section", "developers.html", "developers" ],
     [ "Identifiers in Salt", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_identifier.html", null ],
     [ "Comparing Salt models", "isomorphie.html", null ],
@@ -32,8 +32,8 @@ var NAVTREEINDEX =
 "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html#a8f4ec734190cc0821ddaba14742e1907",
 "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a89560469b819413d092e212d63843b40",
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#acfb60f084d62645b32fb528411ae2115",
-"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#ae7e2b0081902398bf90640bc977f1e21",
-"interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html#aea52d3f5037a22e67993c739d384b615"
+"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#ae0a4f5303607bdc7687a8d323d93ddc3",
+"interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html#ab82976a9bc155e4b5ffb860ffe79b887"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>Salt: Generating sample models</title>
+<title>Salt: Expanding Salt</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,7 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('sample.html','');});
+$(document).ready(function(){initNavTree('delegator.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -98,45 +98,33 @@ $(document).ready(function(){initNavTree('sample.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Generating sample models </div>  </div>
+<div class="title">Expanding Salt </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>With Salt's <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html">SampleGenerator</a> we provide a mechanism to easily create a simple sample in Salt. Next to other use cases, this could be very useful for instance to create tests for Pepper modules. Before we dig into the detail, we want to start with a short sample:</p>
-<div class="fragment"><div class="line"><span class="comment">// create the primary text</span></div>
-<div class="line">SampleGenerator.createPrimaryData(document);</div>
-<div class="line"><span class="comment">// create tokenization</span></div>
-<div class="line">SampleGenerator.createTokens(document);</div>
-<div class="line"><span class="comment">// create token Annotations</span></div>
-<div class="line">SampleGenerator.createMorphologyAnnotations(document);</div>
-<div class="line"><span class="comment">// create spans</span></div>
-<div class="line">SampleGenerator.createInformationStructureSpan(document);</div>
-<div class="line"><span class="comment">// create span annotations</span></div>
-<div class="line">SampleGenerator.createInformationStructureAnnotations(document);</div>
-<div class="line"><span class="comment">// create Structures</span></div>
-<div class="line">SampleGenerator.createSyntaxStructure(document);</div>
-<div class="line"><span class="comment">// create Structure annotations</span></div>
-<div class="line">SampleGenerator.createSyntaxAnnotations(document);</div>
-<div class="line"><span class="comment">// create pointing relations</span></div>
-<div class="line">SampleGenerator.createAnaphoricAnnotations(document);</div>
-</div><!-- fragment --><p>In this snippet we generate a sample document structure step by step. Our sample model has a single primary text "Is this sample more complicated than it appears to be?". The text is tokenized and annotated with part-of-speech and lemma annotations. Further the tokens are grouped into spans and annotated with information structure, before a constituent tree is created. Last but not least a simple anaphoric reference is created to relate "this sample" and "it".</p>
-<p>We started with this sample to demonstrate that step can be done separately. In case you need all of the named annotations, you can also generate it at once with the following snippet: </p>
-<div class="fragment"><div class="line">SampleGenerator.createDocumentStructure(SaltFactory.createSDocument());</div>
-</div><!-- fragment --><p>Additionally to the described sample document structure, with the SampleGenerator you can generate much more sample data like dialogue data, dependency annotations and more. To get a closer look of what is possible with the sample Generator, at this stage to point to it's <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html">java documentation</a>.</p>
-<p>You can also generate a corpus structure having 1 root corpus and two sub corpora with 2 documents each: </p>
-<div class="fragment"><div class="line">          rootCorpus</div>
-<div class="line">         /         \</div>
-<div class="line">   subCorpus1     subCorpus2</div>
-<div class="line">   /      \       /       \</div>
-<div class="line">doc1   doc2     doc3     doc4</div>
-</div><!-- fragment --><p>To create a corpus structure, you can use one of the following methods depending on the return type you need:</p>
+<div class="textblock"><p>Salt offers the possibility via the use of the <a href="https://en.wikipedia.org/wiki/Delegation_pattern">delegator pattern</a>, to extend the behavior of its base types: org.corpus_tools.salt.graph.Graph, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_node.html" title="In graph theory a node is a placeholder, which can be related with other nodes via an relation...">org.corpus_tools.salt.graph.Node</a>, org.corpus_tools.salt.graph.Relation, org.corpus_tools.salt.graph.Layer and <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_label.html" title="A label is an attribute-value-pair and can belong to either a Node, an Relation, a Graph...">org.corpus_tools.salt.graph.Label</a>. In short words:</p>
+<p><em>the delegation pattern is a design pattern in object-oriented programming where an object, instead of performing one of its stated tasks, delegates that task to an associated helper object. (see: <a href="https://en.wikipedia.org/wiki/Delegation_pattern">https://en.wikipedia.org/wiki/Delegation_pattern</a>)</em></p>
+<p>The object which delegates its tasks is called the <em>delegator</em> and the object which performs the task is called the <em>delegate</em>. In Salt, the delegate is injected into the delegator on its creation time. Therefore all objects provide a constructor, which consumes the delegate as a parameter. You can use one of the extensions provided in the <em>salt-extensions</em> project or create your own extensions. Usually an extension comes with a specific factory which injects the delegate into the delegator. For instance to use the notification mechanism of Salt (see notification) you need to exchange Salt's factory implementation:</p>
+<div class="fragment"><div class="line">SaltNotificationFactory factory = <span class="keyword">new</span> SaltNotificationFactory();</div>
+<div class="line">SaltFactory.setFactory(factory);</div>
+</div><!-- fragment --><p>Now Salt's factory does not use the default factory <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html">org.corpus_tools.salt.impl.SaltFactoryImpl</a> anymore, it uses the set factory instead. Each factory must implement the interface <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html">org.corpus_tools.salt.ISaltFactory</a>. This enables, that every object which is created is created by the new factory and therefore code parts do not need to be changed and adapted to the extension. In our case, when using the <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html">org.corpus_tools.salt.extensions.notification.SaltNotificationFactory</a> each created object will create a notification about a change in the object and will notify a registered listener. The extension of Salt via the delegator pattern is a very powerful mechanism, further extensions will be developed to change the behavior of Salt. You can also create your own extensions to do so.</p>
+<p>You just need to create an implementation of Salt's base types:</p>
 <ul>
-<li>(<a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#a1382773ab21b6842d146e7c1d9902c46">org.corpus_tools.salt.samples.SampleGenerator.createCorpusStructure(SaltProject)</a>)</li>
-<li>(<a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#a8d21f0ab0ae7e58c1a2205b16ee1e3cd">org.corpus_tools.salt.samples.SampleGenerator.createSaltProject()</a>)</li>
-<li>(<a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#ac2edd8893cf0e42c9cdfe0645a5d2a85">org.corpus_tools.salt.samples.SampleGenerator.createCorpusStructure()</a>)</li>
-<li>(<a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#a359cdfc455f81dea6cd4a2b7074b9bef">org.corpus_tools.salt.samples.SampleGenerator.createCorpusStructure(SCorpusGraph)</a>)</li>
-<li>(<a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#ae6f890a7665bab868653ba13fbf85a23">org.corpus_tools.salt.samples.SampleGenerator.createCorpusStructure_simple()</a>) </li>
+<li>org.corpus_tools.salt.graph.Graph,</li>
+<li><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_node.html" title="In graph theory a node is a placeholder, which can be related with other nodes via an relation...">org.corpus_tools.salt.graph.Node</a>,</li>
+<li>org.corpus_tools.salt.graph.Relation,</li>
+<li>org.corpus_tools.salt.graph.Layer and</li>
+<li><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_label.html" title="A label is an attribute-value-pair and can belong to either a Node, an Relation, a Graph...">org.corpus_tools.salt.graph.Label</a>.</li>
 </ul>
-</div></div><!-- contents -->
+<p>And adapt their behavior as needed. For instance if you need an extended behavior of the type <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_token.html" title="In general, it is not totally clear in linguistics what a token is. ">org.corpus_tools.salt.common.SToken</a> you can create the following class and overwrite the interesting methods:</p>
+<div class="fragment"><div class="line">...</div>
+<div class="line">public <span class="keyword">class </span>MyNode <span class="keyword">extends</span> NodeImpl implements Node{</div>
+<div class="line"></div>
+</div><!-- fragment --><p>When this was done, you need to create a new factory which creates all types in Salt and inject your delegate into the delegator. Therefore delegate needs to be derived from the same super class as the delegator:</p>
+<div class="fragment"><div class="line"><span class="keyword">public</span> <span class="keyword">class </span>SaltNotificationFactory <span class="keyword">extends</span> SaltFactoryImpl implements ISaltFactory{</div>
+<div class="line"></div>
+<div class="line">        ...</div>
+<div class="line"></div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
