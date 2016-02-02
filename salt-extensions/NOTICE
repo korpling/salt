@@ -1,4 +1,4 @@
-Copyright 2010, Humboldt-Universität zu Berlin, INRIA
+Copyright 2010, Humboldt-Universität zu Berlin
 
 Licensed under the Apache License, Version 2.0 (the
 "License"); you may not use this file except in compliance
@@ -18,7 +18,7 @@ carefully, which should be located in the corresponding jar-files
 inside the folders plugins or lib.
 
 This project includes:
-  Apache Commons Lang under Apache License, Version 2.0
+  Apache Commons Lang under The Apache Software License, Version 2.0
   Guava: Google Core Libraries for Java under The Apache Software License, Version 2.0
   Hamcrest Core under New BSD License
   Java Text Categorizing Library under GNU Lesser General Public License
@@ -28,6 +28,7 @@ This project includes:
   org.eclipse.emf.ecore under The Eclipse Public License Version 1.0
   org.eclipse.emf.ecore.xmi under The Eclipse Public License Version 1.0
   salt-api under The Apache Software License, Version 2.0
+  salt-extensions under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
   Stax2 API under The BSD License
   Woodstox under The Apache License, Version 2.0
