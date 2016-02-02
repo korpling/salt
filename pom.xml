@@ -45,7 +45,6 @@
 		<connection>scm:git:git://github.com/korpling/salt.git</connection>
 		<developerConnection>scm:git:git@github.com:korpling/salt.git</developerConnection>
 		<url>https://github.com/korpling/salt</url>
-		<tag>salt-3.0.0</tag>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
