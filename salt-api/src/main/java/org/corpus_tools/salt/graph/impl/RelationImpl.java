@@ -129,7 +129,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	public Graph getGraph() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
-			getDelegate().getGraph();
+			return getDelegate().getGraph();
 		}
 
 		return (graph);
@@ -201,6 +201,10 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param graph
 	 */
 	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
+			((RelationImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
+			return;
+		}
 		this.graph = graph;
 	}
 
