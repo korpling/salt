@@ -65,6 +65,7 @@ public class LayerTest {
 		getFixture().setGraph(null);
 		assertNull(getFixture().getGraph());
 		assertEquals(0, graph.getLayers().size());
+
 	}
 
 	/**

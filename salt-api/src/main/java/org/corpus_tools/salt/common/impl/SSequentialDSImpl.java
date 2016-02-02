@@ -21,13 +21,30 @@ import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SSequentialDS;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl implements SSequentialDS<D, P> {
+	/** Initializes an object of type {@link SLayerImpl}. **/
+	public SSequentialDSImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SLayerImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SSequentialDSImpl(Node delegate) {
+		super(delegate);
+	}
 
 	/** {@inheritDoc} */
 	@Override

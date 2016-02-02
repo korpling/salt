@@ -4,3 +4,4 @@ All articles in this section addresses developers of Salt. Some articles might b
 
 
 - \subpage dev_bidirectionalReferences
+- \subpage dev_delegator

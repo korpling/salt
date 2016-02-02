@@ -37,6 +37,24 @@ import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends IdentifiableElementImpl implements Graph<N, R, L> {
+	/**
+	 * Initializes an object of type {@link Graph}. If {@link #delegate} is not
+	 * null, all functions of this method are delegated to the delegate object.
+	 * Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public GraphImpl(Graph<N, R, L> delegate) {
+		super(delegate);
+		init();
+	}
+
+	@Override
+	protected Graph<N, R, L> getDelegate() {
+		return (Graph<N, R, L>) super.getDelegate();
+	}
+
 	public GraphImpl() {
 		init();
 	}
@@ -58,6 +76,10 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 * @return the index manager
 	 */
 	public IndexMgr getIndexMgr() {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getIndexMgr();
+		}
 		return indexMgr;
 	}
 
@@ -122,12 +144,21 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#getNodes()} **/
 	@Override
 	public List<N> getNodes() {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getNodes();
+		}
 		return (Collections.unmodifiableList(nodes));
 	}
 
 	/** {@inheritDoc Graph#getNode(String)} **/
 	@Override
 	public N getNode(String nodeId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getNode(nodeId);
+		}
+
 		if (nodeId == null) {
 			return (null);
 		}
@@ -137,6 +168,15 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#addNode(Node)} **/
 	@Override
 	public void addNode(N node) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().addNode(node);
+			if (node instanceof NodeImpl) {
+				((NodeImpl) node).basicSetGraph_WithoutRemoving(this);
+			}
+			return;
+		}
+
 		// check if node already exists
 		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES_INVERSE, node)) {
 			// do nothing, node is already added
@@ -260,6 +300,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#containsNode(String)} **/
 	@Override
 	public boolean containsNode(String nodeId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().containsNode(nodeId);
+		}
+
 		if (nodeId == null) {
 			return (false);
 		}
@@ -276,12 +321,21 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#getRelations()} **/
 	@Override
 	public List<R> getRelations() {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getRelations();
+		}
 		return (Collections.unmodifiableList(relations));
 	}
 
 	/** {@inheritDoc Graph#getRelation(String)} **/
 	@Override
 	public R getRelation(String relationId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getRelation(relationId);
+		}
+
 		if (relationId == null) {
 			return (null);
 		}
@@ -289,15 +343,20 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	}
 
 	/** {@inheritDoc} **/
-	public List<R> getRelations(String nodeId1, String nodeId2) {
+	public List<R> getRelations(String sourceNodeId, String targetNodeId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getRelations(sourceNodeId, targetNodeId);
+		}
+
 		List<R> retList = new ArrayList<>();
 		// searching for all relations going out from nodeId1
-		List<R> outRelations = getOutRelations(nodeId1);
+		List<R> outRelations = getOutRelations(sourceNodeId);
 
 		if (outRelations != null) {
 			for (R relation : outRelations) {// searching if relation goes to
 												// nodeId2
-				if (relation.getTarget().getId().equals(nodeId2)) {
+				if (relation.getTarget().getId().equals(targetNodeId)) {
 					// adding relation to list of matching relations
 					retList.add(relation);
 				}
@@ -309,18 +368,37 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public List<R> getInRelations(String nodeId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getInRelations(nodeId);
+		}
+
 		return (getIndexMgr().getAll(SaltUtil.IDX_IN_RELATIONS, nodeId));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<R> getOutRelations(String nodeId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getOutRelations(nodeId);
+		}
+
 		return (getIndexMgr().getAll(SaltUtil.IDX_OUT_RELATIONS, nodeId));
 	}
 
 	/** {@inheritDoc Graph#addRelation(Relation)} **/
 	@Override
 	public void addRelation(Relation<? extends N, ? extends N> relation) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().addRelation(relation);
+			if (relation instanceof RelationImpl) {
+				((RelationImpl) relation).basicSetGraph_WithoutRemoving(this);
+			}
+			return;
+		}
+
 		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
 			return;
 		}
@@ -361,6 +439,14 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 */
 	@SuppressWarnings("unchecked")
 	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			if (getDelegate() instanceof GraphImpl) {
+				((GraphImpl) getDelegate()).basicAddRelation(relation);
+			}
+			return;
+		}
+
 		if (relation == null) {
 			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class, "A null value is not allowed. ");
 		}
@@ -422,6 +508,14 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 *             in case the update could not be performed
 	 */
 	protected void update(Object oldValue, Object container, UPDATE_TYPE updateType) throws SaltException {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			if (getDelegate() instanceof GraphImpl) {
+				((GraphImpl) getDelegate()).update(oldValue, container, updateType);
+				return;
+			}
+		}
+
 		if (UPDATE_TYPE.RELATION_SOURCE.equals(updateType)) {
 			// as long as R extends Relation, this check is valid
 			if (container instanceof Relation) {
@@ -453,6 +547,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public void removeRelation(Relation<? extends N, ? extends N> rel) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().removeRelation(rel);
+			return;
+		}
 		if (rel != null) {
 			if (rel instanceof RelationImpl) {
 				((RelationImpl<N, N>) rel).basicSetGraph(null);
@@ -464,6 +563,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public void removeRelations() {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().removeRelations();
+			return;
+		}
 		relations.clear();
 		getIndexMgr().clearIndex(SaltUtil.IDX_ID_RELATIONS);
 		getIndexMgr().clearIndex(SaltUtil.IDX_ID_RELATIONS_INVERSE);
@@ -503,6 +607,10 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#containsRelation(String)} **/
 	@Override
 	public boolean containsRelation(String relationId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return (getDelegate().containsRelation(relationId));
+		}
 		if (relationId == null) {
 			return (false);
 		}
@@ -517,12 +625,22 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public Set<L> getLayers() {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getLayers();
+		}
+
 		return (Collections.unmodifiableSet(layers));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public L getLayer(String layerId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getLayer(layerId);
+		}
+
 		if (layerId == null) {
 			return (null);
 		}
@@ -532,12 +650,26 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#containsLayer(String)} **/
 	@Override
 	public boolean containsLayer(String layerId) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().containsLayer(layerId);
+		}
+
 		return (getIndexMgr().containsKey(SaltUtil.IDX_ID_LAYER, layerId));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public void addLayer(L layer) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().addLayer(layer);
+			if (layer instanceof LayerImpl) {
+				((LayerImpl) layer).basicSetGraph_WithoutRemoving(this);
+			}
+			return;
+		}
+
 		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);
 			if (layer instanceof LayerImpl) {
@@ -608,6 +740,11 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc} **/
 	@Override
 	public void removeLayer(L layer) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().removeLayer(layer);
+			return;
+		}
 		if (layer instanceof LayerImpl) {
 			((LayerImpl<N, R>) layer).basicSetGraph(null);
 		}

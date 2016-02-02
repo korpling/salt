@@ -69,6 +69,23 @@ import com.google.common.collect.Multimap;
 
 @SuppressWarnings("serial")
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
+	/** Initializes an object of type {@link SDocumentGraphImpl}. **/
+	public SDocumentGraphImpl() {
+		super();
+	}
+
+	/**
+	 * Initializes an object of type {@link SDocumentGraphImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SDocumentGraphImpl(Graph delegate) {
+		super(delegate);
+	}
 
 	/**
 	 * Calls the init of super class and expands its initialization for adding
@@ -82,20 +99,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	protected void init() {
 		super.init();
 
-		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2, expectedRelations);
+		getIndexMgr().createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
+		getIndexMgr().createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2, expectedRelations);
 	}
 
 	// ============================ start: handling relations
-	/**
-	 * Calls the super method an puts the given relation into a relation type
-	 * index. an exception will be thrown.
-	 * 
-	 * @param relation
-	 *            to add
-	 */
+
 	@Override
-	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
+	public void addRelation(Relation<? extends SNode, ? extends SNode> relation) {
 		if (relation != null) {
 			if (!(relation instanceof SRelation)) {
 				throw new SaltInsertionException(this, relation, "Cannot insert an relation, which is not a SRelation object.");
@@ -122,7 +133,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			}
 			// end: create a name if none exists
 			((SRelation) relation).setId(getId() + "#" + ((SRelation) relation).getName());
-			super.basicAddRelation(relation);
+			super.addRelation(relation);
 
 			Class<?> key;
 			// map some implementation types to the matching interfaces
@@ -150,15 +161,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	// ============================ end: handling relations
 	// ============================ start: handling nodes
-	/**
-	 * Calls the super method an puts the given node into a node type index. an
-	 * exception will be thrown.
-	 * 
-	 * @param node
-	 *            to add
-	 */
 	@Override
-	protected void basicAddNode(SNode node) {
+	public void addNode(SNode node) {
+		// check if node already exists
+		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES_INVERSE, node)) {
+			// do nothing, node is already added
+			return;
+		}
 		if (node != null) {
 			// start: create a name if none exists
 			if ((node.getName() == null) || (node.getName().isEmpty())) {
@@ -183,7 +192,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			if ((node.getId() == null) || (node.getId().isEmpty())) {
 				node.setId(getId() + "#" + node.getName());
 			}
-			super.basicAddNode(node);
+			super.addNode(node);
 
 			// map some implementation types to the matching interfaces
 			Class<?> key;
@@ -202,7 +211,6 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			} else {
 				key = node.getClass();
 			}
-
 			getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
 		}
 	}
