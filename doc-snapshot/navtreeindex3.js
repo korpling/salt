@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#acfb60f084d62645b32fb528411ae2115":[13,0,0,0,0,5,0,18],
+"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#ae300e935f21d65b3e944bd6188983744":[13,0,0,0,0,5,0,15],
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#ae330f87d86c354bf982e518a25f29700":[13,0,0,0,0,5,0,30],
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#aea6e0fd85d3e992498e9aeaaede17de6":[13,0,0,0,0,5,0,1],
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#af088b65240bb994cf1361947fdf069ad":[13,0,0,0,0,5,0,2],
@@ -155,6 +157,7 @@ var NAVTREEINDEX3 =
 "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer.html#aa9e9e2b5fbb42f45a18f2dff38699689":[13,0,0,0,0,9,0,0,0,3,1],
 "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer.html#ac0b6844b796bc7711daf2861f2fdbe66":[13,0,0,0,0,9,0,0,0,3,5],
 "create.html":[2],
+"developers.html":[6],
 "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html":[13,0,0,0,0,11],
 "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a04f562c78be39d3e3209d9c6b2c6c56a":[13,0,0,0,0,11,3],
 "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a0616b2d0d275a2cf72a484ea48f980ee":[13,0,0,0,0,11,12],
@@ -175,8 +178,8 @@ var NAVTREEINDEX3 =
 "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#ae2d1bf0a36b04c00e8c3ad866caed1df":[13,0,0,0,0,11,8],
 "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#aea165b9151062566e945081f694a3db6":[13,0,0,0,0,11,9],
 "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#afc615042e1a81ad98d7d16b6bffea26e":[13,0,0,0,0,11,10],
-"functions.html":[13,2,0,0],
 "functions.html":[13,2,0],
+"functions.html":[13,2,0,0],
 "functions_b.html":[13,2,0,1],
 "functions_c.html":[13,2,0,2],
 "functions_d.html":[13,2,0,3],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#addf94c33818ee16462655b679ed9923c":[13,0,0,0,0,10,8],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#ae0a4f5303607bdc7687a8d323d93ddc3":[13,0,0,0,0,10,32],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#ae7e2b0081902398bf90640bc977f1e21":[13,0,0,0,0,10,16],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#af4d004c96de51a0285ce9f508d3f2a70":[13,0,0,0,0,10,11],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#af877095a226e3d54e5fe86e12ad74119":[13,0,0,0,0,10,1],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#afd321f33521e590f1aac4a11a011a51a":[13,0,0,0,0,10,2],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#afde0a10cbe25f8bca6515863dc8b0ae4":[13,0,0,0,0,10,7]
+"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#af4d004c96de51a0285ce9f508d3f2a70":[13,0,0,0,0,10,11]
 };

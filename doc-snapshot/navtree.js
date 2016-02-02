@@ -2,12 +2,14 @@ var NAVTREE =
 [
   [ "Salt", "index.html", [
     [ "Access a Salt model", "access.html", null ],
-    [ "Bidirectional references", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_bidirectional_references.html", null ],
+    [ "Salt api concepts", "api_concepts.html", [
+      [ "Bidirectional references", "api_concepts.html#bidirectionalReferences", null ]
+    ] ],
     [ "Create a Salt model", "create.html", null ],
     [ "Expanding Salt", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_delegator.html", null ],
     [ "Bidirectional references", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_developer_bidirectional_references.html", null ],
     [ "Expanding Salt", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_developer_delegator.html", null ],
-    [ "Developers section", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_developer.html", null ],
+    [ "Developers section", "developers.html", null ],
     [ "Identifiers in Salt", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_identifier.html", null ],
     [ "Comparing Salt models", "isomorphie.html", null ],
     [ "Notification", "md__var_lib_jenkins_jobs_salt__s_n_a_p_s_h_o_t_workspace_salt-doc_src_main_doxygen_notification.html", null ],
@@ -29,11 +31,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 ".html",
-"classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html#abab9fcd5e5403975c2b7634ef452098f",
-"classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a93b4e8d084b7a1538fca5a5549c69f36",
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#ae330f87d86c354bf982e518a25f29700",
-"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#aff529fdae48a085590756b33bcc0b52c",
-"interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_identifiable_element.html#a908563d42fd35aee3bd693896b4d045f"
+"classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html#a8f4ec734190cc0821ddaba14742e1907",
+"classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a89560469b819413d092e212d63843b40",
+"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#acfb60f084d62645b32fb528411ae2115",
+"interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html#af877095a226e3d54e5fe86e12ad74119",
+"interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_identifiable_element.html#a14a2ffc7591a4ba08dd32de40d287229"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

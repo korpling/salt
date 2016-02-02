@@ -5,6 +5,8 @@ var NAVTREEINDEX0 =
 ".html":[13,0,0,0,0,3],
 "access.html":[0],
 "annotated.html":[13,0],
+"api_concepts.html":[1],
+"api_concepts.html#bidirectionalReferences":[1,0],
 "classorg_1_1corpus__tools_1_1salt_1_1_salt_factory.html":[13,0,0,0,0,12],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html":[13,0,0,0,0,0,0,1],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html#a445ca895634b90bc5de3a751f70f5dbc":[13,0,0,0,0,0,0,1,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#aaea5ea455c132b3af62c03fa2e5cdef9":[13,0,0,0,0,0,1,5,6],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#ada60e3a8d5c290716bb5e0792096a3d9":[13,0,0,0,0,0,1,5,3],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#ae72f4fd4c059e704541e57048bd73aaa":[13,0,0,0,0,0,1,5,7],
-"classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html":[13,0,0,0,0,1,0,0],
-"classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html#a8f4ec734190cc0821ddaba14742e1907":[13,0,0,0,0,1,0,0,4],
-"classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html#a957149261a0be3990cc5b98f63eb149b":[13,0,0,0,0,1,0,0,3]
+"classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html":[13,0,0,0,0,1,0,0]
 };

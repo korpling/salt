@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['salt_20api_20concepts',['Salt api concepts',['../api_concepts.html',1,'']]],
   ['salt',['Salt',['../index.html',1,'']]],
   ['sabstractannotation',['SAbstractAnnotation',['../interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_abstract_annotation.html',1,'org::corpus_tools::salt::core']]],
   ['sabstractannotationimpl',['SAbstractAnnotationImpl',['../classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl.html',1,'org::corpus_tools::salt::core::impl']]],
