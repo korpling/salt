@@ -65,11 +65,8 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	@Override
 	public Graph getGraph() {
 		if (getDelegate() != null) {
-			System.out.println("----------- dreturn this graph ("+this+"): "+ graph);
-			System.out.println("----------- dreturn delegate graph ("+this+"): "+ getDelegate().getGraph());
 			return (getDelegate().getGraph());
 		}
-		System.out.println("----------- return: "+ graph);
 		return (graph);
 	}
 
@@ -116,7 +113,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 *            graph which contains this node
 	 */
 	protected void basicSetGraph(Graph graph) {
-		System.out.println("-----> basicSetGraph: "+graph +",    "+ this);
 		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
 			((NodeImpl) getDelegate()).basicSetGraph(graph);
 			return;
@@ -135,7 +131,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 * @param graph
 	 */
 	protected void basicSetGraph_WithoutRemoving(Graph graph) {
-		System.out.println("-----> basicSetGraph_WithoutRemoving: "+graph +",    "+ this);
 		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
 			((NodeImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
