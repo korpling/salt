@@ -22,10 +22,27 @@ import org.corpus_tools.salt.common.SSequentialRelation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
+import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number> extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
+	/** Initializes an object of type {@link SSequentialRelationImpl}. **/
+	public SSequentialRelationImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SSequentialRelationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SSequentialRelationImpl(Relation delegate) {
+		super(delegate);
+	}
 
 	/** {@inheritDoc} **/
 	@Override

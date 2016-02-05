@@ -21,8 +21,24 @@ import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusDocumentRelation;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
+import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
 public class SCorpusDocumentRelationImpl extends SRelationImpl<SCorpus, SDocument> implements SCorpusDocumentRelation {
+	/** Initializes an object of type {@link SCorpusDocumentRelationImpl}. **/
+	public SCorpusDocumentRelationImpl() {
+	}
 
+	/**
+	 * Initializes an object of type {@link SCorpusDocumentRelationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SCorpusDocumentRelationImpl(Relation delegate) {
+		super(delegate);
+	}
 } // SCorpusDocumentRelationImpl

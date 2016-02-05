@@ -26,18 +26,41 @@ import org.corpus_tools.salt.util.SaltUtil;
 @SuppressWarnings("serial")
 public abstract class IdentifiableElementImpl extends LabelableElementImpl implements IdentifiableElement {
 
+	public IdentifiableElementImpl() {
+		super();
+	}
+
+	public IdentifiableElementImpl(IdentifiableElement delegate) {
+		super(delegate);
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	protected IdentifiableElement getDelegate() {
+		return ((IdentifiableElement) delegate);
+	}
+
 	/** internal ref to the {@link Identifier} label **/
 	private Identifier identifier = null;
 
 	/** {@inheritDoc IdentifiableElement#getIdentifier()} **/
 	@Override
 	public Identifier getIdentifier() {
+		if (getDelegate() != null) {
+			return (getDelegate().getIdentifier());
+		}
 		return (identifier);
 	}
 
 	/** {@inheritDoc IdentifiableElement#setIdentifier(Identifier)} **/
 	@Override
 	public void setIdentifier(Identifier identifier) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().setIdentifier(identifier);
+			return;
+		}
+
 		if (identifier != null) {
 			if (getIdentifier() != null) {
 				removeLabel(SaltUtil.SALT_NAMESPACE, SaltUtil.LABEL_ID);
@@ -54,6 +77,12 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 	 **/
 	@Override
 	public void removeLabel(String qName) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().removeLabel(qName);
+			return;
+		}
+
 		if (SaltUtil.LABEL_ID_QNAME.equals(qName)) {
 			identifier = null;
 		}
@@ -63,6 +92,11 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 	/** {@inheritDoc IdentifiableElement#getId()} **/
 	@Override
 	public String getId() {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().getId();
+		}
+
 		if (getIdentifier() != null) {
 			return (getIdentifier().getId());
 		} else {
@@ -73,6 +107,12 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 	/** {@inheritDoc IdentifiableElement#setId(String)} **/
 	@Override
 	public void setId(String id) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().setId(id);
+			return;
+		}
+
 		if ((id != null) && (!id.isEmpty())) {
 			GraphFactory.createIdentifier(this, id);
 		}
@@ -80,6 +120,11 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 
 	@Override
 	public String toString() {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			return getDelegate().toString();
+		}
+
 		StringBuilder str = new StringBuilder();
 		str.append(getClass().getSimpleName());
 		str.append("(");

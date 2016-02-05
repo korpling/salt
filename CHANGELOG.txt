@@ -11,6 +11,18 @@
 *	artifactId:		salt-saltCommon												  *
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
+Version 3.0.3
+=============
+* fixed signature of addRelation and removeRelation
+
+Version 3.0.2
+=============
+* added Serializable to all interfaces
+
+Version 3.0.1
+=============
+* expand SaltXML serialization for multiple objects
+ 
 Version 3.0.0
 =============
 * increased perfromance time and decreased memeory usage

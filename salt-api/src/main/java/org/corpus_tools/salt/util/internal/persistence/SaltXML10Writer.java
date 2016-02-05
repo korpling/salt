@@ -22,8 +22,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.stream.XMLOutputFactory;
@@ -69,9 +71,6 @@ import org.eclipse.emf.common.util.URI;
 
 import com.ctc.wstx.stax.WstxOutputFactory;
 import com.google.common.io.BaseEncoding;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
 public class SaltXML10Writer implements SaltXML10Dictionary {
 
@@ -119,53 +118,55 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 
 	private File path = null;
 	private final XMLOutputFactory xmlFactory = new WstxOutputFactory();
-	
+
 	/**
-	 * List of already written root objects or null if there is only one root object.
+	 * List of already written root objects or null if there is only one root
+	 * object.
 	 */
 	private List<Object> writtenRootObjects = null;
 
 	/**
 	 * Write a number of root objects (objects without a container) to XML.
+	 * 
 	 * @param xml
-	 * @param objects List of objects of type {@link SaltProject}, {@link SDocumentGraph} or {@link SCorpusGraph}
+	 * @param objects
+	 *            List of objects of type {@link SaltProject},
+	 *            {@link SDocumentGraph} or {@link SCorpusGraph}
 	 */
 	public void writeObjects(XMLStreamWriter xml, Object... objects) {
-		
+
 		List<Object> filteredObjects = new ArrayList<>(objects.length);
-		
-		// add the valid objects that we can save to a list, throw an error if an invalid object type is dectected
+
+		// add the valid objects that we can save to a list, throw an error if
+		// an invalid object type is dectected
 		for (Object o : objects) {
-			if (o instanceof SaltProject
-					|| o instanceof SDocumentGraph
-					|| o instanceof SCorpusGraph) {
+			if (o instanceof SaltProject || o instanceof SDocumentGraph || o instanceof SCorpusGraph) {
 				filteredObjects.add(o);
 			} else {
-				throw new SaltResourceException("Invalid type \"" 
-						+ o.getClass().getSimpleName() + "\". Root objects "
-						+ "must be either of type SaltProject, SDocumentGraph of SCorpusGraph");
+				throw new SaltResourceException("Invalid type \"" + o.getClass().getSimpleName() + "\". Root objects " + "must be either of type SaltProject, SDocumentGraph of SCorpusGraph");
 			}
 		}
-		
-		if(writtenRootObjects == null) {
+
+		if (writtenRootObjects == null) {
 			writtenRootObjects = new ArrayList<>(filteredObjects.size());
 		}
-		
-		// decide which specialized serializatio function to call depending on the type of the object
-		for(Object o : filteredObjects) {
-			if(o instanceof SaltProject) {
+
+		// decide which specialized serializatio function to call depending on
+		// the type of the object
+		for (Object o : filteredObjects) {
+			if (o instanceof SaltProject) {
 				writeSaltProject(xml, (SaltProject) o);
-			} else if(o instanceof SDocumentGraph) {
+			} else if (o instanceof SDocumentGraph) {
 				writeDocumentGraph(xml, (SDocumentGraph) o);
-			} else if(o instanceof SCorpusGraph) {
+			} else if (o instanceof SCorpusGraph) {
 				writeCorpusGraph(xml, (SCorpusGraph) o, true);
 			}
 			// add it to the list of already written objects
 			writtenRootObjects.add(o);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Writes a Salt project to the file given by {@link #getPath()}.
 	 * 
@@ -445,8 +446,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 */
 	public void writeLabel(XMLStreamWriter xml, Label label) throws XMLStreamException {
 		// ignore when label is reference to SDocument or SDocumentGraph
-		if (label != null && (label.getValue() instanceof SDocument 
-				|| label.getValue() instanceof SDocumentGraph)) {
+		if (label != null && (label.getValue() instanceof SDocument || label.getValue() instanceof SDocumentGraph)) {
 			return;
 		}
 
@@ -492,8 +492,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 * <li>{@link Float} - it is prefixed with "F::"</li>
 	 * <li>{@link URI} - it is prefixed with "U::"</li>
 	 * </ul>
+	 * 
 	 * @param value
-	 * @return 
+	 * @return
 	 */
 	public String marshallValue(Object value) {
 		String retVal = null;
@@ -518,7 +519,6 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		return (retVal);
 	}
-	
 
 	/**
 	 * Writes the passed node object to the passed {@link XMLStreamWriter}.
@@ -568,7 +568,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				}
 				isFirst = false;
 				layerAtt.append("/");
-				if(writtenRootObjects != null) {
+				if (writtenRootObjects != null) {
 					layerAtt.append(writtenRootObjects.size());
 				}
 				layerAtt.append("/@layers.");
@@ -637,17 +637,19 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		xml.writeAttribute(NS_VALUE_XSI, ATT_XSI_TYPE, type);
 		int sourcePos = nodePositions.get(relation.getSource());
 		int targetPos = nodePositions.get(relation.getTarget());
-		if(writtenRootObjects == null) {
-			// write shorcut notation if there is only one root object in the file
+		if (writtenRootObjects == null) {
+			// write shorcut notation if there is only one root object in the
+			// file
 			xml.writeAttribute(ATT_SOURCE, "//@nodes." + sourcePos);
 			xml.writeAttribute(ATT_TARGET, "//@nodes." + targetPos);
 		} else {
-			// write full notation when there are multiple root objects in the file
+			// write full notation when there are multiple root objects in the
+			// file
 			int rootIndex = writtenRootObjects.size();
 			xml.writeAttribute(ATT_SOURCE, "/" + rootIndex + "/@nodes." + sourcePos);
 			xml.writeAttribute(ATT_TARGET, "/" + rootIndex + "/@nodes." + targetPos);
 		}
-		
+
 		// write layers
 		if (relation.getLayers().size() > 0) {
 			StringBuilder layerAtt = new StringBuilder();
@@ -659,8 +661,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				}
 				isFirst = false;
 				layerAtt.append("/");
-				if(writtenRootObjects != null) {
-					// write full notation when there are multiple root objects in the file
+				if (writtenRootObjects != null) {
+					// write full notation when there are multiple root objects
+					// in the file
 					layerAtt.append(writtenRootObjects.size());
 				}
 				layerAtt.append("/@layers.");
@@ -685,11 +688,10 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		xml.writeEndElement();
 	}
-	
 
 	/**
 	 * Writes the passed relation object to the passed {@link XMLStreamWriter}.
-
+	 * 
 	 * @param layer
 	 * @param xml
 	 *            stream to write data to
@@ -701,9 +703,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            list of relations
 	 * @throws XMLStreamException
 	 */
-	public void writeLayer(XMLStreamWriter xml, 
-			Layer layer, Map<SNode, Integer> nodePositions, 
-			Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
+	public void writeLayer(XMLStreamWriter xml, Layer layer, Map<SNode, Integer> nodePositions, Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -723,8 +723,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				}
 				isFirst = false;
 				nodeAtt.append("/");
-				if(writtenRootObjects != null) {
-					// write full notation when there are multiple root objects in the file
+				if (writtenRootObjects != null) {
+					// write full notation when there are multiple root objects
+					// in the file
 					nodeAtt.append(writtenRootObjects.size());
 				}
 				nodeAtt.append("/@nodes.");
@@ -765,25 +766,23 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		}
 		xml.writeEndElement();
 	}
-	
+
 	/**
-	 * Writes an Salt XMI header to the {@link XMLStreamWriter}.
-	 * Salt XMI has a certain header structure (including the namespaces).
-	 * This helper function writes this header to an existing 
-	 * {@link XMLStreamWriter}.
+	 * Writes an Salt XMI header to the {@link XMLStreamWriter}. Salt XMI has a
+	 * certain header structure (including the namespaces). This helper function
+	 * writes this header to an existing {@link XMLStreamWriter}.
+	 * 
 	 * @param xml
-	 * @throws XMLStreamException 
+	 * @throws XMLStreamException
 	 */
-	public void writeXMIRootElement(XMLStreamWriter xml)
-			throws XMLStreamException
-	{
+	public void writeXMIRootElement(XMLStreamWriter xml) throws XMLStreamException {
 		xml.writeStartElement(NS_XMI, "XMI", NS_VALUE_XMI);
 		xml.writeNamespace(NS_SDOCUMENTSTRUCTURE, NS_VALUE_SDOCUMENTSTRUCTURE);
 		xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
 		xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
 		xml.writeNamespace(NS_SALTCORE, NS_VALUE_SALTCORE);
 		xml.writeAttribute(NS_VALUE_XMI, ATT_XMI_VERSION, "2.0");
-		if(isPrettyPrint) {
+		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 		}
 	}

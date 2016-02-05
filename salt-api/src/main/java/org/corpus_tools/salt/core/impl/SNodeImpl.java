@@ -34,6 +34,7 @@ import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.impl.NodeImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
@@ -41,6 +42,21 @@ import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
 public class SNodeImpl extends NodeImpl implements SNode {
+	/** Initializes an object of type {@link SNodeImpl}. **/
+	public SNodeImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SNodeImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SNodeImpl(Node delegate) {
+		super(delegate);
+	}
 
 	/**
 	 * {@inheritDoc SNode#getOutgoingSRelations()}
@@ -312,7 +328,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	@Override
 	public SGraph getGraph() {
 		Graph superGraph = super.getGraph();
-
 		if (superGraph == null) {
 			return null;
 		}

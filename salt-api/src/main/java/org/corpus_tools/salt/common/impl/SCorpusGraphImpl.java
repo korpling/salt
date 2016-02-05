@@ -39,12 +39,26 @@ import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.NodeImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
+	/** Initializes an object of type {@link SGraphImpl}. **/
+	public SCorpusGraphImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SGraphImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SCorpusGraphImpl(Graph delegate) {
+		super(delegate);
+	}
 
 	/**
 	 * Calls the init of super class and expands its initialization for adding

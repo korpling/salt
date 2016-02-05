@@ -29,6 +29,7 @@ import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
+import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.impl.LabelImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
@@ -36,6 +37,22 @@ import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
 public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbstractAnnotation, SAnnotationContainer {
+	/** Initializes an object of type {@link SAbstractAnnotationImpl}. **/
+	public SAbstractAnnotationImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SAbstractAnnotationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SAbstractAnnotationImpl(Label delegate) {
+		super(delegate);
+	}
 
 	// ============================= start: SValueType
 	protected SDATATYPE computeSValueType() {

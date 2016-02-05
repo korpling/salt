@@ -30,6 +30,7 @@ This project includes:
   org.eclipse.emf.ecore.xmi under The Eclipse Public License Version 1.0
   salt-api under The Apache Software License, Version 2.0
   salt-doc under The Apache Software License, Version 2.0
+  salt-extensions under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
   Stax2 API under The BSD License
   Woodstox under The Apache License, Version 2.0

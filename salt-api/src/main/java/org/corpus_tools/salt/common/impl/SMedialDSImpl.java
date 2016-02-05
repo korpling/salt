@@ -20,11 +20,29 @@ package org.corpus_tools.salt.common.impl;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SMedialDS;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.impl.SLayerImpl;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
 public class SMedialDSImpl extends SSequentialDSImpl<URI, Double> implements SMedialDS {
+	/** Initializes an object of type {@link SLayerImpl}. **/
+	public SMedialDSImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SLayerImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SMedialDSImpl(Node delegate) {
+		super(delegate);
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public URI getMediaReference() {

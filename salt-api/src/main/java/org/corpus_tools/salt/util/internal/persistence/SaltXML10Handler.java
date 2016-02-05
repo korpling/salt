@@ -18,10 +18,14 @@
 package org.corpus_tools.salt.util.internal.persistence;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.corpus_tools.salt.SaltFactory;
@@ -43,10 +47,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.DefaultHandler2;
 
 import com.google.common.io.BaseEncoding;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * This class reads the XMI structure of SaltXML and creates the corresponding
@@ -67,29 +67,31 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	}
 
 	private final List<Object> rootObjects = new LinkedList<>();
-	
+
 	/**
-	 * Pattern that matches the reference attributes of XMI for edges. 
-	 * The named matchgroup "nr" contains the index of the object which is references.
+	 * Pattern that matches the reference attributes of XMI for edges. The named
+	 * matchgroup "nr" contains the index of the object which is references.
 	 */
-	private static final Pattern RELATION_REF = Pattern.compile("/[0-9]*/@((sCorpusGraphs)|(nodes))\\.(?<nr>[0-9]+)"); 
-	
+	private static final Pattern RELATION_REF = Pattern.compile("/[0-9]*/@((sCorpusGraphs)|(nodes))\\.(?<nr>[0-9]+)");
+
 	/**
 	 * Patter that matches a layer reference.
 	 */
 	private static final Pattern LAYER_REF = Pattern.compile("/[0-9]*/@layers\\.");
-	
+
 	/**
-	 * Adds an object. Also adds it to the list of root objects if the current container stack is empty.
+	 * Adds an object. Also adds it to the list of root objects if the current
+	 * container stack is empty.
 	 * 
 	 **/
 	private void addObject(Object object) {
-		
-		// Only add the object if the current container stack is empty, thus this
+
+		// Only add the object if the current container stack is empty, thus
+		// this
 		// object is a root.
-		if(currentContainer.isEmpty()) {
+		if (currentContainer.isEmpty()) {
 			rootObjects.add(object);
-			
+
 			// if there is a new root object all the indexes must be reset
 			nodes.clear();
 			relations.clear();
@@ -101,13 +103,13 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	}
 
 	/**
-	 * Returns the object, which has been loaded.
-	 * If there are multiple root objects the first one is returned.
+	 * Returns the object, which has been loaded. If there are multiple root
+	 * objects the first one is returned.
 	 * 
 	 * @return
 	 */
 	public Object getSaltObject() {
-		if(rootObjects.isEmpty()) {
+		if (rootObjects.isEmpty()) {
 			return null;
 		} else {
 			return rootObjects.get(0);
@@ -116,12 +118,13 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 
 	/**
 	 * Get an unmodifiable list of all root objects.
-	 * @return 
+	 * 
+	 * @return
 	 */
 	public List<Object> getRootObjects() {
 		return Collections.unmodifiableList(rootObjects);
 	}
-	
+
 	/** This is a container object mostly used for labels. **/
 	private Stack<Object> currentContainer = null;
 	/** current salt project if file is a corpus structure **/
@@ -219,23 +222,22 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				sRel = SaltFactory.createSCorpusDocumentRelation();
 			}
 			if ((sRel != null) && (target != null) && (source != null)) {
-				
-				// match both the source an target string if they are valid structured references
+
+				// match both the source an target string if they are valid
+				// structured references
 				Matcher matcherSource = RELATION_REF.matcher(source);
-				if(!matcherSource.matches()) {
-					throw new SaltResourceException("Invalid source reference \"" 
-							+ source +"\" for relation");
+				if (!matcherSource.matches()) {
+					throw new SaltResourceException("Invalid source reference \"" + source + "\" for relation");
 				}
 				Matcher matcherTarget = RELATION_REF.matcher(target);
-				if(!matcherTarget.matches()) {
-					throw new SaltResourceException("Invalid target reference \"" 
-							+ target +"\" for relation");
+				if (!matcherTarget.matches()) {
+					throw new SaltResourceException("Invalid target reference \"" + target + "\" for relation");
 				}
-				
+
 				// get the match group containing the actual index number
 				Integer sourceIdx = Integer.parseInt(matcherSource.group("nr"));
 				Integer targetIdx = Integer.parseInt(matcherTarget.group("nr"));
-				
+
 				// check if the indexes are known
 				if (sourceIdx >= nodes.size()) {
 					throw new SaltResourceException("Cannot find a source node '" + source + "' for relation. ");
@@ -243,7 +245,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				if (targetIdx >= nodes.size()) {
 					throw new SaltResourceException("Cannot find a target node '" + target + "' for relation. ");
 				}
-				
+
 				// get the actual objects for the index
 				SNode sourceNode = nodes.get(sourceIdx);
 				SNode targetNode = nodes.get(targetIdx);
