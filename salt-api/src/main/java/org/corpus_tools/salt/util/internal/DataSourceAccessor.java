@@ -257,7 +257,7 @@ public class DataSourceAccessor {
 			comparatortextrels.setDocumentGraph(documentGraph);
 
 			// sort textual relations
-			List<STextualRelation> textualRelations = documentGraph.getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, STextualRelation.class);
+			List<STextualRelation> textualRelations = documentGraph.getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, STextualRelation.class);
 			List<STextualRelation> mutableTextualRelations = new LinkedList<STextualRelation>(textualRelations);
 			Collections.sort(mutableTextualRelations, comparatortextrels);
 			documentGraph.getIndexMgr().remove(SaltUtil.IDX_RELATIONTYPE, STextualRelation.class);
