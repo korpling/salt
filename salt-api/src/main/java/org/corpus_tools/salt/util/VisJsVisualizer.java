@@ -115,6 +115,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	public  BufferedWriter jsonWriter;
 	public  BufferedWriter nodeWriter;
 	public  BufferedWriter edgeWriter;
+	public  BufferedWriter optionWriter;
 
 	
 	private  JSONWriter jsonWriterNodes;
@@ -162,7 +163,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String TRAV_MODE_READ_NODES = "readNodes";
 	
 	
-	private final HashSet <SNode> readRoots;
+	private final HashSet <SNode> readSpanNodes;
+	private final HashSet <SNode> readStructNodes;
 	private final HashSet <SRelation> readRelations;
 	private final List<SNode> roots;
 	private int nGroupsId = 0;
@@ -211,6 +213,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     private HashMap <String, Integer> spanClasses;
     private int maxSpanOffset = -1;
     private int nNodes = 0;
+    
+   // private final static String ID_PREFIX = "myVisJs_";
   
     													
     		 
@@ -255,7 +259,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     		nGroupsId += 2;
     	}
     	
-    	readRoots = new HashSet <SNode>();
+    	readSpanNodes = new HashSet <SNode>();
+    	readStructNodes = new HashSet <SNode>();
     	readRelations = new HashSet <SRelation>();       	
     	
     	long nEdges = doc.getDocumentGraph().getRelations().size();
@@ -321,7 +326,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       		nGroupsId += 2;
       	}
       	
-      	readRoots = new HashSet <SNode>();
+      	readSpanNodes = new HashSet <SNode>();
+      	readStructNodes = new HashSet <SNode>();
       	readRelations = new HashSet <SRelation>();       	
       	
       	long nEdges = doc.getDocumentGraph().getRelations().size();
@@ -1356,7 +1362,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 				  {
 					  currHeightFromToken = 1;						  
 					  // write SSpan-Nodes					  
-					  if ((fromNode instanceof SSpan) && (!readRoots.contains(fromNode)))
+					  if ((fromNode instanceof SSpan) && (!readSpanNodes.contains(fromNode)))
 					  {	
 						  String annotation = "";
 						  Set<SAnnotation>  sAnnotations = fromNode.getAnnotations();
@@ -1381,7 +1387,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 						} catch (IOException e) {
 							throw new SaltException("A problem occurred while building JSON objects.");
 						}						
-					      readRoots.add(fromNode);					
+					      readSpanNodes.add(fromNode);					
 						  	
 					  }
 					
@@ -1391,24 +1397,30 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					  currHeightFromToken++;				  
 					  
 					  if (currNode instanceof SStructure)
-					  {						 
-						  try {
-							writeJsonNode(currNode, maxLevel - currHeightFromToken - spanClasses.size(), exportFilter);
-							nNodes++;
-						} catch (IOException e) {
-							throw new SaltException("A problem occurred while building JSON objects.");
-						}						 
-						 
-						 if (roots.contains(fromNode) && !readRoots.contains(fromNode))
-						 {
-							 try {
-								writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanClasses.size() - 1, exportFilter);
+					  {	
+						  if (!readStructNodes.contains(currNode))
+						  {
+							try 
+							{
+								writeJsonNode(currNode, maxLevel - currHeightFromToken - spanClasses.size(), exportFilter);
 								nNodes++;
 							} catch (IOException e) {
 								throw new SaltException("A problem occurred while building JSON objects.");
-							}							 
-							 readRoots.add(fromNode);
-						 }						  	
+							}	
+							  readStructNodes.add(currNode);
+						  }	
+							 
+							 if (roots.contains(fromNode) && !readStructNodes.contains(fromNode))
+							 {
+								 try 
+								 {
+									writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanClasses.size() - 1, exportFilter);
+									nNodes++;
+								} catch (IOException e) {
+									throw new SaltException("A problem occurred while building JSON objects.");
+								}							 
+								 readStructNodes.add(fromNode);
+							 }						  	
 					  }				  
 					  
 					}
@@ -1416,8 +1428,9 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			
 				  if (!readRelations.contains(edge))
 				  {					  
-					  try {
-						writeJsonEdge(fromNode, currNode, edge,exportFilter );
+					try 
+					{
+					  writeJsonEdge(fromNode, currNode, edge,exportFilter );
 					} catch (IOException e) {
 						throw new SaltException("A problem occurred while building JSON objects.");
 					}					  
