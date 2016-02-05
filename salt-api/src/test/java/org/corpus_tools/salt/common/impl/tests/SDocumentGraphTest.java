@@ -988,9 +988,19 @@ public class SDocumentGraphTest {
 
 		for (int i = 0; i < 6; i++) {
 			assertEquals("tokens of index '" + i + "' aren't equal", sTokens.get(i), controllSTokens.get(i));
+			boolean hasTextualRelation = false;
+			for(SRelation rel : controllSTokens.get(i).getOutRelations()) {
+				if(rel instanceof STextualRelation) {
+					hasTextualRelation = true;
+					break;
+				}
+			}
+			assertTrue("token of inde " + i + " does not have a textual relation", hasTextualRelation);
 		}
 
 		int prevStart = -1;
+		List<STextualRelation> textRels = getFixture().getTextualRelations();
+		assertEquals("there must be a textual relation for each token", sTokens.size(), textRels.size());
 		for (STextualRelation curSTextRel : getFixture().getTextualRelations()) {
 			assertTrue("this textrel does not follow previous texrel: " + getFixture().getTextualRelations(), curSTextRel.getStart() > prevStart);
 			prevStart = curSTextRel.getStart();
