@@ -11,6 +11,11 @@
 *	artifactId:		salt-saltCommon												  *
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
+
+Version 3.0.4
+=============
+* fix #81: sortTokenByText() will delete all textual relations
+
 Version 3.0.3
 =============
 * fixed signature of addRelation and removeRelation
