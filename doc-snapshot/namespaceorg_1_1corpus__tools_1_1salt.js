@@ -12,6 +12,7 @@ var namespaceorg_1_1corpus__tools_1_1salt =
     [ "samples", "namespaceorg_1_1corpus__tools_1_1salt_1_1samples.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1samples" ],
     [ "semantics", "namespaceorg_1_1corpus__tools_1_1salt_1_1semantics.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1semantics" ],
     [ "util", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1util" ],
+    [ "Beta", "namespaceorg_1_1corpus__tools_1_1salt.html#interfaceorg_1_1corpus__tools_1_1salt_1_1_beta", null ],
     [ "ISaltFactory", "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory.html", "interfaceorg_1_1corpus__tools_1_1salt_1_1_i_salt_factory" ],
     [ "SALT_TYPE", "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html", "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e" ],
     [ "SaltFactory", "classorg_1_1corpus__tools_1_1salt_1_1_salt_factory.html", null ],

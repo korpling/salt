@@ -7,7 +7,7 @@ var NAVTREEINDEX0 =
 "annotated.html":[11,0],
 "api_concepts.html":[1],
 "api_concepts.html#bidirectionalReferences":[1,0],
-"classorg_1_1corpus__tools_1_1salt_1_1_salt_factory.html":[11,0,0,0,0,12],
+"classorg_1_1corpus__tools_1_1salt_1_1_salt_factory.html":[11,0,0,0,0,13],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html":[11,0,0,0,0,0,0,1],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html#a445ca895634b90bc5de3a751f70f5dbc":[11,0,0,0,0,0,0,1,0],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html#a97db4ef138d1cf1a258f897e909a76c5":[11,0,0,0,0,0,0,1,1],

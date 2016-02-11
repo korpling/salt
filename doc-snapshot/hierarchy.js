@@ -4,6 +4,7 @@ var hierarchy =
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationEN", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_e_n.html", null ],
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationFR", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_f_r.html", null ],
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationIT", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_i_t.html", null ],
+    [ "org.corpus_tools.salt.Beta", "namespaceorg_1_1corpus__tools_1_1salt.html#interfaceorg_1_1corpus__tools_1_1salt_1_1_beta", null ],
     [ "org.corpus_tools.salt.util.Copyable< T >", "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_copyable_3_01_t_01_4.html", null ],
     [ "org.corpus_tools.salt.util.internal.DataSourceAccessor", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html", null ],
     [ "org.corpus_tools.salt.util.DataSourceSequence< P extends Number >", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_data_source_sequence_3_01_p_01extends_01_number_01_4.html", null ],
