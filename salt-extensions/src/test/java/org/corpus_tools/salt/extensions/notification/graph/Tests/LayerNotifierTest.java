@@ -19,10 +19,15 @@ package org.corpus_tools.salt.extensions.notification.graph.Tests;
 
 import org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
+import org.corpus_tools.salt.graph.Layer;
+import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.tests.LayerTest;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LayerNotifierTest {
+public class LayerNotifierTest extends LayerTest {
 
 	private LayerNotifierImpl fixture = null;
 
@@ -30,9 +35,18 @@ public class LayerNotifierTest {
 		return fixture;
 	}
 
-	public void setFixture(LayerNotifierImpl fixture) {
+	public void setNotifyingFixture(LayerNotifierImpl fixture) {
 		this.fixture = fixture;
 	}
+
+	@Override
+	public void setFixture(Layer<Node, Relation<Node, Node>> fixture) {
+		Assert.assertTrue("Layer in test must be of instance LayerNotifierImpl", fixture instanceof LayerNotifierImpl);
+		this.fixture = (LayerNotifierImpl) fixture;
+		super.setFixture(fixture);
+	}
+	
+	
 
 	@Before
 	public void setUp() throws Exception {

@@ -49,6 +49,18 @@ public class LayerTest {
 	public void setFixture(Layer<Node, Relation<Node, Node>> fixture) {
 		this.fixture = fixture;
 	}
+	
+	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
+		return GraphFactory.createGraph();
+	}
+	
+	protected Node createNode() {
+		return GraphFactory.createNode();
+	}
+	
+	protected Relation createRelation() {
+		return GraphFactory.createRelation();
+	}
 
 	/**
 	 * Tests the double chaining between graph and layer, the methods
@@ -58,7 +70,7 @@ public class LayerTest {
 	public void testSetGetGraph() {
 		assertNull(getFixture().getGraph());
 
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 		getFixture().setGraph(graph);
 		assertEquals(getFixture().getGraph(), graph);
 
@@ -73,7 +85,7 @@ public class LayerTest {
 	 */
 	@Test
 	public void testDoubleChaining() {
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getLayers(), graph.getLayers().contains(getFixture()));
 	}
@@ -105,7 +117,7 @@ public class LayerTest {
 	public void testGetNodes() {
 		List<Node> nodes = new ArrayList<>();
 		for (int i = 0; i < 50; i++) {
-			Node node = GraphFactory.createNode();
+			Node node = createNode();
 			nodes.add(node);
 			getFixture().addNode(node);
 		}
@@ -121,7 +133,7 @@ public class LayerTest {
 	@Test
 	public void testAddNode() {
 		try {
-			getFixture().getNodes().add(GraphFactory.createNode());
+			getFixture().getNodes().add(createNode());
 			fail("Should not add a node in layer's node list directly.");
 		} catch (UnsupportedOperationException e) {
 		}
@@ -133,7 +145,7 @@ public class LayerTest {
 	@Test
 	public void testAddRelation() {
 		try {
-			getFixture().getRelations().add(GraphFactory.createRelation());
+			getFixture().getRelations().add(createRelation());
 			fail("Should not add a node in layer's node list directly.");
 		} catch (UnsupportedOperationException e) {
 		}
@@ -145,13 +157,13 @@ public class LayerTest {
 	@Test
 	public void testDoubleChainingAddNode() {
 		// prerequirements
-		Graph graph = GraphFactory.createGraph();
+		Graph graph = createGraph();
 		graph.addLayer(getFixture());
 
 		List<Node> nodes = new ArrayList<>();
 
 		for (int i = 0; i < 50; i++) {
-			Node node = GraphFactory.createNode();
+			Node node = createNode();
 			nodes.add(node);
 			graph.addNode(node);
 			getFixture().addNode(node);
@@ -170,7 +182,7 @@ public class LayerTest {
 		List<Node> nodes = new ArrayList<>();
 
 		for (int i = 0; i < 50; i++) {
-			Node node = GraphFactory.createNode();
+			Node node = createNode();
 			nodes.add(node);
 			getFixture().addNode(node);
 		}
@@ -187,10 +199,10 @@ public class LayerTest {
 	@Test
 	public void testGetRelations() {
 		List<Relation<Node, Node>> relations = new ArrayList<>();
-		Node node = GraphFactory.createNode();
+		Node node = createNode();
 
 		for (int i = 0; i < 50; i++) {
-			Relation<Node, Node> relation = GraphFactory.createRelation();
+			Relation<Node, Node> relation = createRelation();
 			relation.setSource(node);
 			relation.setTarget(node);
 			relations.add(relation);
