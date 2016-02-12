@@ -20,13 +20,18 @@ package org.corpus_tools.salt.extensions.notification.graph.Tests;
 import static org.junit.Assert.assertEquals;
 
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
+import org.corpus_tools.salt.extensions.notification.SaltNotificationFactory;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
+import org.corpus_tools.salt.graph.Label;
+import org.corpus_tools.salt.graph.impl.tests.LabelTest;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-public class LabelNotifierTest {
+public class LabelNotifierTest extends LabelTest {
 
 	private LabelNotifierImpl fixture = null;
 
@@ -34,16 +39,27 @@ public class LabelNotifierTest {
 		return fixture;
 	}
 
-	public void setFixture(LabelNotifierImpl fixture) {
+	public void setNotifyingFixture(LabelNotifierImpl fixture) {
 		this.fixture = fixture;
 	}
 
 	@Before
+	@Override
 	public void setUp() throws Exception {
-		setFixture(new LabelNotifierImpl());
+		setNotifyingFixture(new LabelNotifierImpl());
+		super.setFixture(fixture);
 	}
 
-	/** Checks whether the notification about name change is correct. **/
+	@Override
+	public void setFixture(Label fixture) {
+		Assert.assertTrue("Label in test must be of instance LabelNotifierImpl", fixture instanceof LabelNotifierImpl);
+		this.fixture = (LabelNotifierImpl) fixture;
+		super.setFixture(fixture);
+	}
+
+	/**
+	 * Checks whether the notification about name change is correct. *
+	 */
 	@Test
 	public void testNotificationNamespace() {
 		MyListener listener = new MyListener();
@@ -56,7 +72,9 @@ public class LabelNotifierTest {
 		assertEquals(getFixture(), listener.lastEvent.container);
 	}
 
-	/** Checks whether the notification about name change is correct. **/
+	/**
+	 * Checks whether the notification about name change is correct. *
+	 */
 	@Test
 	public void testNotificationName() {
 		MyListener listener = new MyListener();
@@ -70,7 +88,9 @@ public class LabelNotifierTest {
 		assertEquals(getFixture(), listener.lastEvent.container);
 	}
 
-	/** Checks whether the notification about name change is correct. **/
+	/**
+	 * Checks whether the notification about name change is correct. *
+	 */
 	@Test
 	public void testNotificationValue() {
 		MyListener listener = new MyListener();
@@ -83,9 +103,17 @@ public class LabelNotifierTest {
 		assertEquals(getFixture(), listener.lastEvent.container);
 	}
 
-	/** Checks whether the notification about name change is correct. **/
+	/**
+	 * Checks whether the notification about name change is correct. *
+	 */
 	@Test
 	public void testNotificationAddRemoveValue() {
 		Helper.testNotificationAddRemoveValue(fixture, GRAPH_ATTRIBUTES.LABEL_LABELS);
 	}
+
+	@Override
+	protected Label createLabel() {
+		return new LabelNotifierImpl();
+	}
+
 }
