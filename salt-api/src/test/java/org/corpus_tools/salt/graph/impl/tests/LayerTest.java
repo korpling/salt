@@ -39,7 +39,7 @@ public class LayerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(GraphFactory.createLayer());
+		setFixture(createLayer());
 	}
 
 	public Layer<Node, Relation<Node, Node>> getFixture() {
@@ -48,6 +48,10 @@ public class LayerTest {
 
 	public void setFixture(Layer<Node, Relation<Node, Node>> fixture) {
 		this.fixture = fixture;
+	}
+	
+	protected Layer<Node, Relation<Node, Node>> createLayer() {
+		return GraphFactory.createLayer();
 	}
 	
 	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {

@@ -17,7 +17,6 @@
  */
 package org.corpus_tools.salt.extensions.notification.graph.Tests;
 
-import static org.junit.Assert.assertEquals;
 
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
@@ -25,10 +24,14 @@ import org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifier
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.tests.RelationTest;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-public class RelationNotifierTest {
+public class RelationNotifierTest extends RelationTest {
 
 	private RelationNotifierImpl fixture = null;
 
@@ -36,9 +39,18 @@ public class RelationNotifierTest {
 		return fixture;
 	}
 
-	public void setFixture(RelationNotifierImpl fixture) {
+	public void setNotifyingFixture(RelationNotifierImpl fixture) {
 		this.fixture = fixture;
 	}
+
+	@Override
+	public void setFixture(Relation<Node, Node> fixture) {
+		Assert.assertTrue("Relation in test must be of instance RelationNotifierImpl", fixture instanceof RelationNotifierImpl);
+		this.fixture = (RelationNotifierImpl) fixture;
+		super.setFixture(fixture);
+	}
+	
+	
 
 	@Before
 	public void setUp() throws Exception {

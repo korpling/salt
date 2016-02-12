@@ -59,7 +59,7 @@ public class GraphNotifierTest extends GraphTest {
 	@Override
 	public void setUp() throws Exception {
 		setNotifyingFixture(new GraphNotifierImpl());
-    super.setFixture(fixture);
+		super.setFixture(fixture);
 	}
 
 	/** Checks whether the notification about name change is correct. **/

@@ -71,6 +71,12 @@ public class LayerNotifierTest extends LayerTest {
 	protected Relation createRelation() {
 		return new RelationNotifierImpl();
 	}
+
+	@Override
+	protected Layer<Node, Relation<Node, Node>> createLayer() {
+		return new LayerNotifierImpl<>();
+	}
+	
 	
 	
 
