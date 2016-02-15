@@ -77,6 +77,7 @@ public class GraphMLWriter {
 			// we always use the "salt::type" label
 			w.writeStartElement(NS, "key");
 			w.writeAttribute("id", "salt::type");
+			w.writeAttribute("attr.name", "salt::type");
 			w.writeAttribute("for", "all");
 			w.writeAttribute("attr.type", "string");
 			w.writeEndElement();
@@ -135,6 +136,7 @@ public class GraphMLWriter {
 							if (type != null) {
 								w.writeStartElement(NS, "key");
 								w.writeAttribute("id", l.getQName());
+								w.writeAttribute("attr.name", l.getQName());
 								w.writeAttribute("for", "all");
 								w.writeAttribute("attr.type", type);
 
