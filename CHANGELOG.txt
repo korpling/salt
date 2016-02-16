@@ -12,6 +12,10 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 3.0.5
+=============
+* fix #82: GraphML serialization was invalid
+
 Version 3.0.4
 =============
 * fix #81: sortTokenByText() will delete all textual relations
