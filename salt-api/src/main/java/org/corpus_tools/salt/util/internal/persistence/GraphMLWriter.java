@@ -172,12 +172,32 @@ public class GraphMLWriter {
 	 * @throws XMLStreamException
 	 */
 	private static void writeType(XMLStreamWriter w, Object o) throws XMLStreamException {
-		Set<SALT_TYPE> types = SALT_TYPE.class2SaltType(o.getClass());
-		if (!types.isEmpty()) {
-			w.writeStartElement(NS, "data");
-			w.writeAttribute("key", "salt::type");
-			w.writeCharacters(types.iterator().next().name());
-			w.writeEndElement();
+		Set<SALT_TYPE> saltTypes = SALT_TYPE.class2SaltType(o.getClass());
+		
+		if(!saltTypes.isEmpty()) {
+			// find the most specific type
+			SALT_TYPE mostSpecificType = null;
+			for(SALT_TYPE type : saltTypes) {
+				if(mostSpecificType == null) {
+					mostSpecificType = type;
+				} else {
+					final Class<?> A = mostSpecificType.getJavaType();
+					final Class<?> B = type.getJavaType();
+					
+					// Check if this type (B) is more specific as the current most specific type (A).
+					// Thus "B superclass of A" is ok, but not "A superclass of B".
+					if(A.isAssignableFrom(B)) {
+						mostSpecificType = type;
+					}
+				}
+			}
+			
+			if (mostSpecificType != null) {
+				w.writeStartElement(NS, "data");
+				w.writeAttribute("key", "salt::type");
+				w.writeCharacters(mostSpecificType.name());
+				w.writeEndElement();
+			}
 		}
 	}
 
