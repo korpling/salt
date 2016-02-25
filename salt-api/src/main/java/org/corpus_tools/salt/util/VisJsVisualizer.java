@@ -1040,9 +1040,9 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	
 	//create node array
 	jsonWriterNodes.array();
-	// write tokens
+	//  token must always be outputted
 	 for (SToken token : sTokens){			
-			writeJsonNode(token, maxLevel, exportFilter);
+			writeJsonNode(token, maxLevel);
 			nNodes++;
 
 	 }
@@ -1102,10 +1102,9 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	
 	
 	
-	private void writeJsonNode (SNode node, long levelValue, ExportFilter filter) throws IOException
+	private void writeJsonNode (SNode node, long levelValue) throws IOException
 	{
-		if (filter == null || !filter.excludeNode(node))	
-		{
+		
 		 String idValue = node.getPath().fragment();
 		 String idLabel = "id=" + idValue;	
 		 String allLabels = idLabel;
@@ -1198,7 +1197,6 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			nodeWriter.flush();
 		}
 		
-	}
 }
 		 
 	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation, ExportFilter filter) throws IOException
@@ -1272,6 +1270,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	{
 		maxLevel = getMaxHeightOfSDocGraph(doc) + 1;
 		int nSpanClasses = spanClasses.size();		
+		System.out.println("maxLevel: " + maxLevel + "\tnSpans: " + nSpanClasses);
 		 maxLevel += nSpanClasses;
 		 return maxLevel;
 	}
@@ -1301,7 +1300,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	{
 		if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
 		{				
-			if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
+			if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && (exportFilter == null || !exportFilter.excludeNode(currNode)))
 			{
 			
 				if (sRelation!= null)
@@ -1311,6 +1310,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 						{
 							maxHeight = currHeight;
 						}
+						
+						System.out.println("node reached :: currNode: " + currNode.getName() + "\t currHeight: " + currHeight + "\t maxHeight: " +maxHeight);
 
 				}	
 			
@@ -1346,24 +1347,28 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
 			SNode fromNode, long order) 
 	{		
-		//TODO calculate new level, depending on amount of different span classes
+		
 		if (edge!= null)
 		{		
 			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
 			{				
-				if (traversalId.equals(TRAV_MODE_CALC_LEVEL))
+				if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && (exportFilter == null  || !exportFilter.excludeNode(currNode)))
 				{
-				currHeight--;		
+				currHeight--;	
+				System.out.println("node left :: currNode: " + currNode.getName() + "\t currHeight: " + currHeight + "\t maxHeight: " +maxHeight);
 				}
 			
 				else if (traversalId.equals(TRAV_MODE_READ_NODES))
-				{
+				{ 
 				  if (currNode instanceof SToken) 
 				  {
-					  currHeightFromToken = 1;						  
+					  currHeightFromToken = 1;				  
 					  // write SSpan-Nodes					  
-					  if ((fromNode instanceof SSpan) && (!readSpanNodes.contains(fromNode)))
-					  {	
+					  if ((fromNode instanceof SSpan) && (!readSpanNodes.contains(fromNode)) && 
+							  (exportFilter == null  || !exportFilter.excludeNode(fromNode)))
+					  { 
+						
+						  
 						  String annotation = "";
 						  Set<SAnnotation>  sAnnotations = fromNode.getAnnotations();
 						  
@@ -1382,7 +1387,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 							  spanClasses.put(annotation, maxSpanOffset);
 						  }
 						  try {
-							writeJsonNode(fromNode, maxLevel - currHeightFromToken - maxSpanOffset, exportFilter);
+							writeJsonNode(fromNode, maxLevel - currHeightFromToken - maxSpanOffset);
 							nNodes++;
 						} catch (IOException e) {
 							throw new SaltException("A problem occurred while building JSON objects.");
@@ -1393,16 +1398,20 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					
 				  }
 				  else 
-				  {					  
-					  currHeightFromToken++;				  
+				  {	
+					  if (exportFilter == null  || !exportFilter.excludeNode(currNode) || !exportFilter.excludeNode(fromNode))
+					  {
+						  currHeightFromToken++;		 
+					  }
+					  		  
 					  
-					  if (currNode instanceof SStructure)
+					  if (currNode instanceof SStructure && (exportFilter == null  || !exportFilter.excludeNode(currNode)))
 					  {	
 						  if (!readStructNodes.contains(currNode))
 						  {
 							try 
 							{
-								writeJsonNode(currNode, maxLevel - currHeightFromToken - spanClasses.size(), exportFilter);
+								writeJsonNode(currNode, maxLevel - currHeightFromToken - spanClasses.size());
 								nNodes++;
 							} catch (IOException e) {
 								throw new SaltException("A problem occurred while building JSON objects.");
@@ -1410,11 +1419,12 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 							  readStructNodes.add(currNode);
 						  }	
 							 
-							 if (roots.contains(fromNode) && !readStructNodes.contains(fromNode))
+							 if (roots.contains(fromNode) && !readStructNodes.contains(fromNode) && 
+									 (exportFilter == null  || !exportFilter.excludeNode(fromNode)))
 							 {
 								 try 
 								 {
-									writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanClasses.size() - 1, exportFilter);
+									writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanClasses.size() - 1);
 									nNodes++;
 								} catch (IOException e) {
 									throw new SaltException("A problem occurred while building JSON objects.");
@@ -1426,7 +1436,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					}
 					 
 			
-				  if (!readRelations.contains(edge))
+				  if (!readRelations.contains(edge) && (exportFilter == null  || !exportFilter.excludeRelation(edge)))
 				  {					  
 					try 
 					{
