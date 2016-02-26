@@ -1043,6 +1043,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	//  token must always be outputted
 	 for (SToken token : sTokens){			
 			writeJsonNode(token, maxLevel);
+			
 			nNodes++;
 
 	 }
@@ -1108,6 +1109,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		 String idValue = node.getPath().fragment();
 		 String idLabel = "id=" + idValue;	
 		 String allLabels = idLabel;
+		 
 			 
 		 jsonWriterNodes.object();
 		 jsonWriterNodes.key(JSON_ID);		 
@@ -1268,9 +1270,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	 */
 	private int getMaxLevel(SDocument doc)
 	{
-		maxLevel = getMaxHeightOfSDocGraph(doc) + 1;
+		maxLevel = getMaxHeightOfSDocGraph(doc);
 		int nSpanClasses = spanClasses.size();		
-		System.out.println("maxLevel: " + maxLevel + "\tnSpans: " + nSpanClasses);
 		 maxLevel += nSpanClasses;
 		 return maxLevel;
 	}
@@ -1303,15 +1304,13 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && (exportFilter == null || !exportFilter.excludeNode(currNode)))
 			{
 			
-				if (sRelation!= null)
+				if (sRelation!= null && !(sRelation instanceof SPointingRelation) && !(fromNode instanceof SToken))
 				{			
 						currHeight++;
 						if (maxHeight < currHeight)
 						{
 							maxHeight = currHeight;
 						}
-						
-						System.out.println("node reached :: currNode: " + currNode.getName() + "\t currHeight: " + currHeight + "\t maxHeight: " +maxHeight);
 
 				}	
 			
@@ -1324,7 +1323,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					   {	
 							   List<Map.Entry<String, String>> sortedAnnotations = sortAnnotations(sAnnotations);
 							   // use the first annotation
-									   annClass = sortedAnnotations.iterator().next().getKey();
+							   annClass = sortedAnnotations.iterator().next().getKey();
 								  					    
 					   }
 				 
@@ -1348,14 +1347,14 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			SNode fromNode, long order) 
 	{		
 		
-		if (edge!= null)
+		if (edge!= null )
 		{		
 			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
 			{				
-				if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && (exportFilter == null  || !exportFilter.excludeNode(currNode)))
+				if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && !(edge instanceof SPointingRelation) && !(fromNode instanceof SToken) &&
+						(exportFilter == null  || !exportFilter.excludeNode(currNode)))
 				{
 				currHeight--;	
-				System.out.println("node left :: currNode: " + currNode.getName() + "\t currHeight: " + currHeight + "\t maxHeight: " +maxHeight);
 				}
 			
 				else if (traversalId.equals(TRAV_MODE_READ_NODES))
@@ -1397,41 +1396,39 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					  }
 					
 				  }
-				  else 
-				  {	
-					  if (exportFilter == null  || !exportFilter.excludeNode(currNode) || !exportFilter.excludeNode(fromNode))
-					  {
-						  currHeightFromToken++;		 
-					  }
-					  		  
+				  else if (currNode instanceof SStructure)
+				  {	 
 					  
-					  if (currNode instanceof SStructure && (exportFilter == null  || !exportFilter.excludeNode(currNode)))
-					  {	
+					  if (exportFilter == null  || !exportFilter.excludeNode(currNode))
+					  {		
+						  currHeightFromToken++;		 
 						  if (!readStructNodes.contains(currNode))
 						  {
 							try 
 							{
-								writeJsonNode(currNode, maxLevel - currHeightFromToken - spanClasses.size());
+								writeJsonNode(currNode, maxLevel - currHeightFromToken - spanClasses.size() + 1);
 								nNodes++;
 							} catch (IOException e) {
 								throw new SaltException("A problem occurred while building JSON objects.");
 							}	
 							  readStructNodes.add(currNode);
-						  }	
+						  }
+					  }
+					  
 							 
-							 if (roots.contains(fromNode) && !readStructNodes.contains(fromNode) && 
-									 (exportFilter == null  || !exportFilter.excludeNode(fromNode)))
-							 {
-								 try 
-								 {
-									writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanClasses.size() - 1);
-									nNodes++;
-								} catch (IOException e) {
-									throw new SaltException("A problem occurred while building JSON objects.");
-								}							 
-								 readStructNodes.add(fromNode);
-							 }						  	
-					  }				  
+					 if (fromNode instanceof SStructure && roots.contains(fromNode) && !readStructNodes.contains(fromNode) && 
+							 (exportFilter == null  || !exportFilter.excludeNode(fromNode)))
+					 { 
+						 currHeightFromToken++;		 
+						 try 
+						 {
+							writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanClasses.size() + 1);
+							nNodes++;
+						} catch (IOException e) {
+							throw new SaltException("A problem occurred while building JSON objects.");
+						}							 
+						 readStructNodes.add(fromNode);
+					 }						  				  
 					  
 					}
 					 
