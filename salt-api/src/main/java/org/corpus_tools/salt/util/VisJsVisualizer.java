@@ -1254,7 +1254,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	{
 		maxLevel = getMaxHeightOfSDocGraph(doc);
 		int nSpanClasses = spanClasses.size();		
-				
+		
+		// set nGroupsId
 		if (readSpanNodes != null && (readSpanNodes.size() > 0))
     	{
     		nGroupsId += 1;
@@ -1266,6 +1267,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
     		nGroupsId += 2;
     	}
     	
+    	
+    	// maxLevel depends on node groups
     	if (nGroupsId == 3) {
 			maxLevel += nSpanClasses;
 		}
