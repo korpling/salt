@@ -167,6 +167,14 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private final HashSet <SNode> readStructNodes;
 	private final HashSet <SRelation> readRelations;
 	private final List<SNode> roots;
+	
+	/*
+	 * identifies, which kinds of nodes (unless token nodes) possesses the graph
+	 * 3 = spanning nodes and structure nodes
+	 * 2 = structure nodes
+	 * 1 = spanning nodes
+	 * 0 = neither spanning nodes nor structure nodes
+	 */
 	private int nGroupsId = 0;
 	
 	
@@ -214,8 +222,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     private int maxSpanOffset = -1;
     private int nNodes = 0;
     
-   // private final static String ID_PREFIX = "myVisJs_";
-  
     													
     		 
 
@@ -246,19 +252,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     
     	this.doc = doc;  
     	docId = doc.getId();
-    	roots = doc.getDocumentGraph().getRoots();	
-    	List<SSpan>  sSpans = doc.getDocumentGraph().getSpans();	
-    	if (sSpans != null && (sSpans.size() > 0))
-    	{
-    		nGroupsId += 1;
-    	}	
-    	List<SStructure>  sStructures = doc.getDocumentGraph().getStructures();
-    	
-    	if (sStructures != null && (sStructures.size() > 0))
-    	{
-    		nGroupsId += 2;
-    	}
-    	
+    	roots = doc.getDocumentGraph().getRoots();	    	
     	readSpanNodes = new HashSet <SNode>();
     	readStructNodes = new HashSet <SNode>();
     	readRelations = new HashSet <SRelation>();       	
@@ -313,19 +307,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       		throw new SaltResourceException("A problem occurred while loading salt project from '" + inputFileUri + "'.", e);
       	}
       	
-      	roots = doc.getDocumentGraph().getRoots();	
-      	List<SSpan>  sSpans = doc.getDocumentGraph().getSpans();	
-      	if (sSpans != null && (sSpans.size() > 0))
-      	{
-      		nGroupsId += 1;
-      	}	
-      	List<SStructure>  sStructures = doc.getDocumentGraph().getStructures();
-      	
-      	if (sStructures != null && (sStructures.size() > 0))
-      	{
-      		nGroupsId += 2;
-      	}
-      	
+      	roots = doc.getDocumentGraph().getRoots();	      	
       	readSpanNodes = new HashSet <SNode>();
       	readStructNodes = new HashSet <SNode>();
       	readRelations = new HashSet <SRelation>();       	
@@ -1272,8 +1254,23 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	{
 		maxLevel = getMaxHeightOfSDocGraph(doc);
 		int nSpanClasses = spanClasses.size();		
-		if (readStructNodes != null && !readStructNodes.isEmpty()) {
+				
+		if (readSpanNodes != null && (readSpanNodes.size() > 0))
+    	{
+    		nGroupsId += 1;
+    	}	
+    	
+    	
+    	if (readStructNodes != null && (readStructNodes.size() > 0))
+    	{
+    		nGroupsId += 2;
+    	}
+    	
+    	if (nGroupsId == 3) {
 			maxLevel += nSpanClasses;
+		}
+		else if (nGroupsId == 1){
+			maxLevel += (nSpanClasses - 1);
 		}
 		
 		readSpanNodes.clear();
