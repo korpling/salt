@@ -1123,11 +1123,11 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		   
 		   if (sAnnotations.size() > 0)
 		   {    
-			   allLabels += "" + NEWLINE;
+			   allLabels += NEWLINE;
 			   List<Map.Entry<String, String>>  sortedAnnotations = sortAnnotations(sAnnotations);		   	   
 			  
 			   
-			   int i=0;
+			   int i=1;
 			   for (Map.Entry<String, String> annotation : sortedAnnotations) 
 			   {
 				   allLabels += (annotation.getKey() + "=" + annotation.getValue());
@@ -1272,8 +1272,14 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	{
 		maxLevel = getMaxHeightOfSDocGraph(doc);
 		int nSpanClasses = spanClasses.size();		
-		 maxLevel += nSpanClasses;
-		 return maxLevel;
+		if (readStructNodes != null && !readStructNodes.isEmpty()) {
+			maxLevel += nSpanClasses;
+		}
+		
+		readSpanNodes.clear();
+		readStructNodes.clear();
+		
+		return maxLevel;
 	}
 	
 	
@@ -1331,6 +1337,15 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					  {
 						  spanClasses.put(annClass, -1);				  
 					  }
+					  
+					  readSpanNodes.add(currNode);
+				  }
+				  
+				  
+				  
+				  if ((currNode instanceof SStructure))
+				  {
+					readStructNodes.add(currNode);  
 				  }
 			
 			}
@@ -1379,14 +1394,16 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 						  }						  
 						  
 						  int spanOffset = spanClasses.get(annotation);						  
-						  						  
+						  											  
 						  if(spanOffset == -1)
 						  {
 							  maxSpanOffset = Math.max(spanOffset, maxSpanOffset) + 1;
 							  spanClasses.put(annotation, maxSpanOffset);
 						  }
+						  spanOffset = spanClasses.get(annotation);	
+						  
 						  try {
-							writeJsonNode(fromNode, maxLevel - currHeightFromToken - maxSpanOffset);
+							writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanOffset);
 							nNodes++;
 						} catch (IOException e) {
 							throw new SaltException("A problem occurred while building JSON objects.");
