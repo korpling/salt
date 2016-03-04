@@ -1183,10 +1183,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		
 }
 		 
-	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation, ExportFilter filter) throws IOException
+	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation) throws IOException
 	{
-			  if(filter == null || !filter.excludeRelation(relation))
-			  {
 			  jsonWriterEdges.object();
 			  jsonWriterEdges.key("from");
 			  jsonWriterEdges.value(fromNode.getPath().fragment());
@@ -1219,7 +1217,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  
 			  
 			  edgeWriter.newLine();
-			  }
+			 
 	}
 	
 	
@@ -1454,7 +1452,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 				  {					  
 					try 
 					{
-					  writeJsonEdge(fromNode, currNode, edge,exportFilter );
+					  writeJsonEdge(fromNode, currNode, edge);
 					} catch (IOException e) {
 						throw new SaltException("A problem occurred while building JSON objects.");
 					}					  
