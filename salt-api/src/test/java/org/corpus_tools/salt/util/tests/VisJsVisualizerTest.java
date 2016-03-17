@@ -1,8 +1,11 @@
 package org.corpus_tools.salt.util.tests;
 
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -15,6 +18,8 @@ import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.corpus_tools.salt.util.VisJsVisualizer;
 import org.eclipse.emf.common.util.URI;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -120,6 +125,7 @@ public class VisJsVisualizerTest {
 	public void testHtmlWriterSample() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createDocumentStructure(doc);	
+		doc.setName("Sample");
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
 		String outputFolderName = "sample_doc";
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFolderName;	
@@ -152,6 +158,7 @@ public class VisJsVisualizerTest {
 	public void testHtmlWriterSampleAnaphoricAnnLoadJson() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createAnaphoricAnnotations(doc);
+		//doc.setName("AnaphoricAnnotation");
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
 		String outputFolderName =  "sample_doc_anaphoric_ann_load_json";	 
 		String outputFolderPath = OUTPUT_FOLDER + FSEP + outputFolderName;	
@@ -310,6 +317,43 @@ public class VisJsVisualizerTest {
 					
 	}
 	
+	@Test
+	public void testWriterOutput() throws SaltParameterException, SaltResourceException, SaltException, IOException, XMLStreamException {
+		SDocument doc = SaltFactory.createSDocument();
+		SampleGenerator.createMorphologyAnnotations(doc);
+	
+	//SDocument doc =  visInput.getDocument();
+	VisJsVisualizer VisJsVisualizer = new VisJsVisualizer(doc);
+	 
+	OutputStream osNodes = new ByteArrayOutputStream();
+	OutputStream osEdges = new ByteArrayOutputStream();
+	
+	
+	VisJsVisualizer.setNodeWriter(osNodes);
+	VisJsVisualizer.setEdgeWriter(osEdges);
+	VisJsVisualizer.buildJSON();				
+	BufferedWriter bw;	
+	bw = VisJsVisualizer.getNodeWriter();
+	bw.flush();	
+	
+	bw = VisJsVisualizer.getEdgeWriter();	
+	bw.flush();	
+	
+	String strNodes = osNodes.toString();
+	String strEdges = osEdges.toString();
+	
+	System.out.println(strNodes);
+	System.out.println(strEdges);
+	
+	JSONArray jsonNodes = new JSONArray(strNodes);
+	JSONArray jsonEdges = new JSONArray(strEdges);
+	
+	System.out.println(jsonNodes.toString());
+	System.out.println(jsonEdges.toString());
+	
+	
+	
+	}
 	
 	
 	@Test(expected = SaltParameterException.class)
