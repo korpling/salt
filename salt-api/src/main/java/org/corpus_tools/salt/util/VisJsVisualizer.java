@@ -167,9 +167,10 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private final HashSet <SNode> readStructNodes;
 	private final HashSet <SRelation> readRelations;
 	private final List<SNode> roots;
+	private Map<SNode, Integer> rootToMinLevel;
 	
 	/*
-	 * identifies, which kinds of nodes (unless token nodes) possesses the graph
+	 * identifies, which kinds of nodes (unless token nodes) the graph possesses
 	 * 3 = spanning nodes and structure nodes
 	 * 2 = structure nodes
 	 * 1 = spanning nodes
@@ -252,7 +253,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     
     	this.doc = doc;  
     	docId = doc.getId();
-    	roots = doc.getDocumentGraph().getRoots();	    	
+    	roots = doc.getDocumentGraph().getRoots();	    
+    	rootToMinLevel = new HashMap<SNode, Integer>();
     	readSpanNodes = new HashSet <SNode>();
     	readStructNodes = new HashSet <SNode>();
     	readRelations = new HashSet <SRelation>();       	
@@ -307,7 +309,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       		throw new SaltResourceException("A problem occurred while loading salt project from '" + inputFileUri + "'.", e);
       	}
       	
-      	roots = doc.getDocumentGraph().getRoots();	      	
+      	roots = doc.getDocumentGraph().getRoots();	  
+      	rootToMinLevel = new HashMap<SNode, Integer>();
       	readSpanNodes = new HashSet <SNode>();
       	readStructNodes = new HashSet <SNode>();
       	readRelations = new HashSet <SRelation>();       	
@@ -1275,8 +1278,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		}
 		
 		readSpanNodes.clear();
-		readStructNodes.clear();
-		
+		readStructNodes.clear();		
 		return maxLevel;
 	}
 	
@@ -1359,13 +1361,10 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
 			SNode fromNode, long order) 
 	{		
-		
-		if (edge!= null )
-		{		
 			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
 			{				
 				if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && !(edge instanceof SPointingRelation) && !(fromNode instanceof SToken) &&
-						(exportFilter == null  || !exportFilter.excludeNode(currNode)))
+						(exportFilter == null  || !exportFilter.excludeNode(currNode)) && (edge!= null))
 				{
 				currHeight--;	
 				}
@@ -1414,40 +1413,61 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 				  else if (currNode instanceof SStructure)
 				  {	 
 					  
-					  if (exportFilter == null  || !exportFilter.excludeNode(currNode))
+					  if ((exportFilter == null  || !exportFilter.excludeNode(currNode)) && !readStructNodes.contains(currNode))
 					  {		
-						  currHeightFromToken++;		 
-						  if (!readStructNodes.contains(currNode))
-						  {
+						  currHeightFromToken++;
+						  int currLevel = maxLevel - currHeightFromToken - spanClasses.size() + 1;
 							try 
-							{
-								writeJsonNode(currNode, maxLevel - currHeightFromToken - spanClasses.size() + 1);
-								nNodes++;
+							{ 								
+								//if currNode is a root
+								if(roots.contains(currNode))
+								{
+									int minRootLevel;								 
+								 
+									 if (rootToMinLevel.containsKey(currNode))
+									 {
+										 minRootLevel = Math.min(rootToMinLevel.get(currNode), currLevel);
+				
+									 }
+									 else{
+										 minRootLevel = currLevel;
+									 }
+									 // write root node with min level
+									writeJsonNode(currNode, minRootLevel);
+								}
+								else
+								{
+									writeJsonNode(currNode, currLevel);
+									
+								}
+							
+								
 							} catch (IOException e) {
 								throw new SaltException("A problem occurred while building JSON objects.");
 							}	
+							  nNodes++;
 							  readStructNodes.add(currNode);
-						  }
 					  }
 					  
-							 
+					// if fromNode is a root, store its min level
 					 if (fromNode instanceof SStructure && roots.contains(fromNode) && !readStructNodes.contains(fromNode) && 
 							 (exportFilter == null  || !exportFilter.excludeNode(fromNode)))
 					 { 
-						 currHeightFromToken++;		 
-						 try 
+						 int thisRootLevel =  maxLevel - currHeightFromToken - spanClasses.size();
+						 if (rootToMinLevel.containsKey(fromNode))
 						 {
-							writeJsonNode(fromNode, maxLevel - currHeightFromToken - spanClasses.size() + 1);
-							nNodes++;
-						} catch (IOException e) {
-							throw new SaltException("A problem occurred while building JSON objects.");
-						}							 
-						 readStructNodes.add(fromNode);
-					 }						  				  
+							 int oldLevel = rootToMinLevel.get(fromNode);
+							 rootToMinLevel.put(fromNode, Math.min(oldLevel, thisRootLevel)) ;
+						 }
+						 else{
+							 rootToMinLevel.put(fromNode, thisRootLevel) ;
+						 }
+					 }					  				  
 					  
 					}
 					 
-			
+		  if (edge!= null )
+				{
 				  if (!readRelations.contains(edge) && (exportFilter == null  || !exportFilter.excludeRelation(edge)))
 				  {					  
 					try 
