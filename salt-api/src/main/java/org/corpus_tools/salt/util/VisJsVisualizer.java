@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -186,6 +187,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_X = "x";
 	private static final String JSON_LEVEL = "level";
 	private static final String JSON_GROUP = "group";
+	private static final String JSON_FIXED_X = "fixed.x";
 	
 	private  int xPosition = 0;	
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
@@ -1030,11 +1032,29 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			writeJsonNode(token, maxLevel);
 			
 			nNodes++;
-
 	 }
+	 
+	
+	 
 	
 	 //create edge array
 	 jsonWriterEdges.array();
+	 
+	 Iterator<SToken> it = sTokens.iterator();
+	 SToken fromTok;
+	 SToken toTok;
+	 
+	 if(it.hasNext()){
+		 fromTok = (SToken) it.next(); 
+		 
+		 while(it.hasNext()){
+			 toTok = (SToken) it.next();
+			 writeJsonEdge(fromTok, toTok, null); 
+			 fromTok = toTok;
+		 }
+	 }
+	  
+	
 	 
 	 // traverse the document tree in order to write remained nodes and edges
 	 doc.getDocumentGraph().traverse(doc.getDocumentGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, 
@@ -1142,6 +1162,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			 jsonWriterNodes.value(TOK_COLOR_VALUE);
 			 jsonWriterNodes.key(JSON_X);
 			 jsonWriterNodes.value(++xPosition*100);
+			 jsonWriterNodes.key(JSON_FIXED_X);
+			 jsonWriterNodes.value("true");
 		 }
 		 
 		 	 jsonWriterNodes.key(JSON_LEVEL);
@@ -1195,27 +1217,30 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  jsonWriterEdges.value(toNode.getPath().fragment());
 			
 			//  jsonWriterEdges.value(relation.getPath().fragment());
-			  Set<SAnnotation> sAnnotations = relation.getAnnotations();
-			  if (sAnnotations.size() > 0)
-			   {		
-				   String allLabels = "";
-				   List<Map.Entry<String, String>>  sortedAnnotations = sortAnnotations(sAnnotations);		
-				   
-				   int i= 0;
-				   for (Map.Entry<String, String> annotation : sortedAnnotations) 
-				   {
-					   allLabels += (annotation.getKey() + "=" + annotation.getValue());					
+			  if (relation != null){			  
+			  
+				  Set<SAnnotation> sAnnotations = relation.getAnnotations();
+				  if (sAnnotations.size() > 0)
+				   {		
+					   String allLabels = "";
+					   List<Map.Entry<String, String>>  sortedAnnotations = sortAnnotations(sAnnotations);		
 					   
-					   if (i < sAnnotations.size()){
-						   allLabels+= NEWLINE;
+					   int i= 0;
+					   for (Map.Entry<String, String> annotation : sortedAnnotations) 
+					   {
+						   allLabels += (annotation.getKey() + "=" + annotation.getValue());					
+						   
+						   if (i < sAnnotations.size()){
+							   allLabels+= NEWLINE;
+						   }
+						   i++;
 					   }
-					   i++;
+					   
+					   jsonWriterEdges.key("label");
+					   jsonWriterEdges.value(allLabels);
 				   }
-				   
-				   jsonWriterEdges.key("label");
-				   jsonWriterEdges.value(allLabels);
-			   }
-			 
+			  }
+			  
 			  jsonWriterEdges.endObject();
 			  
 			  
