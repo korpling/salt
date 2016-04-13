@@ -152,7 +152,7 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
-		GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = new GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>();
+		GraphNotifierImpl graph = new GraphNotifierImpl();
 		graph.addListener(getListener());
 		return (graph);
 	}

@@ -33,13 +33,16 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.AbstractGraphImpl;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
-public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
+public class SGraphImpl extends AbstractGraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
 	/** Initializes an object of type {@link SGraphImpl}. **/
 	public SGraphImpl() {
 		super();
@@ -55,6 +58,16 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	 */
 	public SGraphImpl(Graph delegate) {
 		super(delegate);
+	}
+	
+	@Override
+	protected SRelation<SNode, SNode> cast(Relation<? extends Node, ? extends Node> relation) {
+	  if(relation instanceof SRelation<?,?>) {
+	    @SuppressWarnings("unchecked")
+      SRelation<SNode, SNode> retVal = (SRelation<SNode, SNode>) relation;
+	    return retVal;
+	  }
+	  return null;
 	}
 
 	/** {@inheritDoc} **/

@@ -32,6 +32,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.exceptions.SaltInsertionException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
@@ -57,7 +58,7 @@ public class GraphTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new GraphImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>());
+	  setFixture(GraphFactory.createGraph());
 	}
 
 	/**
@@ -428,7 +429,7 @@ public class GraphTest {
 	public void testAddNodeMoveGraph() {
 		assertEquals(0, getFixture().getNodes().size());
 
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> oldGraph = new GraphImpl<>();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> oldGraph = GraphFactory.createGraph();
 
 		Node node = GraphFactory.createNode();
 		oldGraph.addNode(node);

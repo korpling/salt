@@ -24,7 +24,7 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.GraphImpl.UPDATE_TYPE;
+import org.corpus_tools.salt.graph.impl.AbstractGraphImpl.UPDATE_TYPE;
 
 @SuppressWarnings("serial")
 public class RelationImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Relation<S, T> {
@@ -82,8 +82,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		S oldValue = getSource();
 		this.source = source;
 		// notify graph about change of target
-		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
+		if (getGraph() != null && getGraph() instanceof AbstractGraphImpl) {
+			((AbstractGraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
 		}
 	}
 
@@ -116,8 +116,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		T oldValue = this.getTarget();
 		this.target = target;
 		// notify graph about change of target
-		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
+		if (getGraph() != null && getGraph() instanceof AbstractGraphImpl) {
+			((AbstractGraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
 		}
 	}
 

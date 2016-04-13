@@ -114,6 +114,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	public void basic_setSaltProject(SaltProject saltProject) {
 		this.saltProject = saltProject;
 	}
+	
 
 	// ============================ start: handling relations
 	/**

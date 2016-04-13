@@ -78,12 +78,12 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 			return;
 		}
 		if (graph != null) {
-			if (graph instanceof GraphImpl) {
-				((GraphImpl) graph).basicAddLayer(this);
+			if (graph instanceof AbstractGraphImpl) {
+				((AbstractGraphImpl) graph).basicAddLayer(this);
 			}
 		} else {
-			if (getGraph() instanceof GraphImpl) {
-				((GraphImpl) getGraph()).basicRemoveLayer(this);
+			if (getGraph() instanceof AbstractGraphImpl) {
+				((AbstractGraphImpl) getGraph()).basicRemoveLayer(this);
 			}
 		}
 		basicSetGraph(graph);
@@ -119,8 +119,8 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 			return;
 		}
 		// remove from old graph if it was changed
-		if (this.graph != graph && this.graph instanceof GraphImpl) {
-			((GraphImpl) this.graph).basicRemoveLayer(this);
+		if (this.graph != graph && this.graph instanceof AbstractGraphImpl) {
+			((AbstractGraphImpl) this.graph).basicRemoveLayer(this);
 		}
 		this.graph = graph;
 	}
