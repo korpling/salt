@@ -393,8 +393,8 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addRelation(relation);
-			if (relation instanceof RelationImpl) {
-				((RelationImpl) relation).basicSetGraph_WithoutRemoving(this);
+			if (relation instanceof RelationImpl<?,?>) {
+				((RelationImpl<?,?>) relation).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}
@@ -405,8 +405,8 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 
 		basicAddRelation(relation);
 		if (relation != null) {
-			if (relation instanceof RelationImpl) {
-				((RelationImpl<N, N>) relation).basicSetGraph(this);
+			if (relation instanceof RelationImpl<?,?>) {
+				((RelationImpl<?, ?>) relation).basicSetGraph(this);
 			}
 		}
 	}
@@ -564,8 +564,8 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 			return;
 		}
 		if (rel != null) {
-			if (rel instanceof RelationImpl) {
-				((RelationImpl<N, N>) rel).basicSetGraph(null);
+			if (rel instanceof RelationImpl<?,?>) {
+				((RelationImpl<?, ?>) rel).basicSetGraph(null);
 			}
 			basicRemoveRelation(rel);
 		}
@@ -675,8 +675,8 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addLayer(layer);
-			if (layer instanceof AbstractLayerImpl) {
-				((AbstractLayerImpl) layer).basicSetGraph_WithoutRemoving(this);
+			if (layer instanceof AbstractLayerImpl<?,?>) {
+				((AbstractLayerImpl<?,?>) layer).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}
