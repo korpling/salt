@@ -677,25 +677,25 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> getTokensBySequence(DataSourceSequence sequence) {
+	public List<SToken> getTokensBySequence(DataSourceSequence<?> sequence) {
 		return (DataSourceAccessor.getTokensBySequence(this, sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SSpan> getSpansBySequence(DataSourceSequence sequence) {
+	public List<SSpan> getSpansBySequence(DataSourceSequence<?> sequence) {
 		return (DataSourceAccessor.getSpanBySequence(this, sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SStructure> getStructuresBySequence(DataSourceSequence sequence) {
+	public List<SStructure> getStructuresBySequence(DataSourceSequence<?> sequence) {
 		return (DataSourceAccessor.getStructureBySequence(this, sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SNode> getNodesBySequence(DataSourceSequence sequence) {
+	public List<SNode> getNodesBySequence(DataSourceSequence<?> sequence) {
 		return (DataSourceAccessor.getNodeBySequence(this, sequence));
 	}
 

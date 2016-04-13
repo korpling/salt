@@ -310,7 +310,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SToken} objects which refer or overlap the
 	 *         passed sequence
 	 */
-	public List<SToken> getTokensBySequence(DataSourceSequence sequence);
+	public List<SToken> getTokensBySequence(DataSourceSequence<?> sequence);
 
 	/**
 	 * Returns all {@link SSpan} objects which refer to the passed
@@ -324,7 +324,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SSpan} objects which refer or overlap the passed
 	 *         sequence
 	 */
-	public List<SSpan> getSpansBySequence(DataSourceSequence sequence);
+	public List<SSpan> getSpansBySequence(DataSourceSequence<?> sequence);
 
 	/**
 	 * Returns all {@link SStructure} objects which refer to the passed
@@ -338,7 +338,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SStructure} objects which refer or overlap the
 	 *         passed sequence
 	 */
-	public List<SStructure> getStructuresBySequence(DataSourceSequence sequence);
+	public List<SStructure> getStructuresBySequence(DataSourceSequence<?> sequence);
 
 	/**
 	 * Returns all {@link SNode} objects which refer to the passed
@@ -352,7 +352,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SNode} objects which refer or overlap the passed
 	 *         sequence
 	 */
-	public List<SNode> getNodesBySequence(DataSourceSequence sequence);
+	public List<SNode> getNodesBySequence(DataSourceSequence<?> sequence);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
