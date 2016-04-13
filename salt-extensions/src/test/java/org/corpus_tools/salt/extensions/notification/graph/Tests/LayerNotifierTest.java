@@ -59,7 +59,7 @@ public class LayerNotifierTest extends LayerTest {
 
 	@Override
 	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
-		return new GraphNotifierImpl<>();
+		return new GraphNotifierImpl();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class LayerNotifierTest extends LayerTest {
 
 	@Override
 	protected Layer<Node, Relation<Node, Node>> createLayer() {
-		return new LayerNotifierImpl<>();
+		return new LayerNotifierImpl();
 	}
 	
 	

@@ -166,7 +166,7 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public Layer<Node, Relation<Node, Node>> createLayer() {
-		LayerNotifierImpl<Node, Relation<Node, Node>> node = new LayerNotifierImpl<Node, Relation<Node, Node>>();
+		LayerNotifierImpl node = new LayerNotifierImpl();
 		node.addListener(getListener());
 		return (node);
 	}
