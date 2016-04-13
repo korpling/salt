@@ -72,7 +72,7 @@ public class DataSourceAccessor {
 	 * @return a list of {@link SToken} objects which refer or overlap the
 	 *         passed sequence
 	 */
-	public static List<SToken> getTokensBySequence(SDocumentGraph documentGraph, DataSourceSequence DataSourceSequence) {
+	public static List<SToken> getTokensBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> DataSourceSequence) {
 		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
 		classes.add(SToken.class);
 		@SuppressWarnings("unchecked")
@@ -93,7 +93,7 @@ public class DataSourceAccessor {
 	 * @return a list of {@link SSpan} objects which refer or overlap the passed
 	 *         sequence
 	 */
-	public static List<SSpan> getSpanBySequence(SDocumentGraph documentGraph, DataSourceSequence DataSourceSequence) {
+	public static List<SSpan> getSpanBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> DataSourceSequence) {
 		List<Class<? extends SNode>> classes = new ArrayList<>();
 		classes.add(SSpan.class);
 		@SuppressWarnings("unchecked")
@@ -114,7 +114,7 @@ public class DataSourceAccessor {
 	 * @return a list of {@link SStructure} objects which refer or overlap the
 	 *         passed sequence
 	 */
-	public static List<SStructure> getStructureBySequence(SDocumentGraph documentGraph, DataSourceSequence DataSourceSequence) {
+	public static List<SStructure> getStructureBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> DataSourceSequence) {
 		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
 		classes.add(SStructure.class);
 		@SuppressWarnings("unchecked")
@@ -135,7 +135,7 @@ public class DataSourceAccessor {
 	 * @return a list of {@link SNode} objects which refer or overlap the passed
 	 *         sequence
 	 */
-	public static List<SNode> getNodeBySequence(SDocumentGraph documentGraph, DataSourceSequence DataSourceSequence) {
+	public static List<SNode> getNodeBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> DataSourceSequence) {
 		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
 		classes.add(SNode.class);
 		List<SNode> sNodes = getSNodesBySequence(documentGraph, DataSourceSequence, classes);
@@ -153,7 +153,7 @@ public class DataSourceAccessor {
 	 *            type of nodes to be returned
 	 * @return nodes, which overlaps the given sequence
 	 */
-	private static List<SNode> getSNodesBySequence(SDocumentGraph documentGraph, DataSourceSequence sequence, List<Class<? extends SNode>> nodeClasses) {
+	private static List<SNode> getSNodesBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> sequence, List<Class<? extends SNode>> nodeClasses) {
 		if (sequence == null) {
 			throw new SaltParameterException("Cannot start returning nodes overlapping a data source, because the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
 		}
@@ -168,7 +168,7 @@ public class DataSourceAccessor {
 		}
 
 		List<SNode> nodes = null;
-		List<? extends SSequentialRelation> sSeqRels = null;
+		List<? extends SSequentialRelation<SToken, ?, Integer>> sSeqRels = null;
 		if (sequence.getDataSource() instanceof STextualDS) {
 			sSeqRels = documentGraph.getTextualRelations();
 		} else if (sequence.getDataSource() instanceof STimeline) {
@@ -176,7 +176,7 @@ public class DataSourceAccessor {
 		} else {
 			throw new SaltParameterException("Cannot compute overlaped nodes, because the given dataSource is not supported by this method.");
 		}
-		for (SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> sSeqRel : sSeqRels) {
+		for (SSequentialRelation<SToken, ?, Integer> sSeqRel : sSeqRels) {
 			// walk through all sequential relations
 			if ((sequence.getDataSource().equals(sSeqRel.getTarget())) && (sSeqRel.getStart().doubleValue() >= sequence.getStart().doubleValue()) && (sSeqRel.getEnd().doubleValue() <= sequence.getEnd().doubleValue())) {
 				// sequential relation is in the interval
@@ -297,7 +297,7 @@ public class DataSourceAccessor {
 		if ((documentGraph.getTextualDSs() != null) && (documentGraph.getTextualDSs().size() > 0)) {
 			retVal = new ArrayList<>();
 			for (STextualDS sTextualDS : documentGraph.getTextualDSs()) {
-				DataSourceSequence sequence = new DataSourceSequence();
+				DataSourceSequence<Integer> sequence = new DataSourceSequence<Integer>();
 				sequence.setDataSource(sTextualDS);
 				sequence.setStart(0);
 				sequence.setEnd((sTextualDS.getText() != null) ? sTextualDS.getText().length() : 0);
@@ -313,7 +313,7 @@ public class DataSourceAccessor {
 	/**
 	 * {@inheritDoc SDocumentGraph#getOverlappedDSSequences(SNode, List)}
 	 */
-	public static List<DataSourceSequence> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, SNode sNode, SALT_TYPE... relationTypes) {
+	public static List<? extends DataSourceSequence<?>> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, SNode sNode, SALT_TYPE... relationTypes) {
 		List<SNode> rootSNodes = new ArrayList<>();
 		rootSNodes.add(sNode);
 		return (getOverlappedDataSourceSequence(documentGraph, rootSNodes, relationTypes));
@@ -325,7 +325,7 @@ public class DataSourceAccessor {
 	// TODO this method can be fasten up, by remembering the overlapped
 	// sequences for each node and not traverse deeper, when the sequence is
 	// already computed for a node
-	public static List<DataSourceSequence> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, List<SNode> nodes, SALT_TYPE... relationTypes) {
+	public static List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(SDocumentGraph documentGraph, List<SNode> nodes, SALT_TYPE... relationTypes) {
 		Traverser traverser = new Traverser();
 		if (relationTypes != null && relationTypes.length != 0) {
 			traverser.relationTypes2Traverse = new HashSet<SALT_TYPE>();
@@ -333,7 +333,7 @@ public class DataSourceAccessor {
 			documentGraph.traverse(nodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.toString(), traverser);
 			return (traverser.dataSourceSequences);
 		} else {
-			return (new ArrayList<DataSourceSequence>());
+			return (new ArrayList<DataSourceSequence<Number>>());
 		}
 	}
 
@@ -398,22 +398,22 @@ public class DataSourceAccessor {
 	 */
 	public static List<SNode> getRootsByRelation(SDocumentGraph documentGraph, SALT_TYPE... saltTypes) {
 		HashSet<SNode> retSet = new LinkedHashSet<>();
-		List<SRelation> relations = new ArrayList<>();
+		List<SRelation<?,?>> relations = new ArrayList<>();
 		for (SALT_TYPE saltType : saltTypes) {
 			if (SALT_TYPE.SSPANNING_RELATION.equals(saltType)) {
-				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getSpanningRelations());
+				relations.addAll(documentGraph.getSpanningRelations());
 			} else if (SALT_TYPE.SDOMINANCE_RELATION.equals(saltType)) {
-				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getDominanceRelations());
+				relations.addAll(documentGraph.getDominanceRelations());
 			} else if (SALT_TYPE.SPOINTING_RELATION.equals(saltType)) {
-				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getPointingRelations());
+				relations.addAll(documentGraph.getPointingRelations());
 			} else if (SALT_TYPE.SORDER_RELATION.equals(saltType)) {
-				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getOrderRelations());
+				relations.addAll(documentGraph.getOrderRelations());
 			} else if (SALT_TYPE.STEXTUAL_RELATION.equals(saltType)) {
-				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getTextualRelations());
+				relations.addAll(documentGraph.getTextualRelations());
 			} else if (SALT_TYPE.STIMELINE_RELATION.equals(saltType)) {
-				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getTimelineRelations());
+				relations.addAll(documentGraph.getTimelineRelations());
 			} else if (SALT_TYPE.SMEDIAL_RELATION.equals(saltType)) {
-				relations.addAll((List<SRelation>) (List<? extends SRelation>) documentGraph.getMedialRelations());
+				relations.addAll(documentGraph.getMedialRelations());
 			}
 		}
 		HashSet<SNode> notRootElements = new HashSet<>();
@@ -451,8 +451,8 @@ public class DataSourceAccessor {
 	 * @return a map of types, with corresponding lists of root nodes
 	 */
 	@SuppressWarnings("unchecked")
-	public static Multimap<String, SNode> getRootsByRelationType(SDocumentGraph documentGraph, SALT_TYPE sType) {
-		return (getRootsByRelationType(documentGraph, (Class<? extends SRelation>) sType.getJavaType()));
+	public static<R extends SRelation<SNode, SNode>> Multimap<String, SNode> getRootsByRelationType(SDocumentGraph documentGraph, SALT_TYPE sType) {
+		return (getRootsByRelationType(documentGraph, (Class<R>) sType.getJavaType()));
 	}
 
 	/**
@@ -466,18 +466,17 @@ public class DataSourceAccessor {
 	 * </pre>
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
-	public static Multimap<String, SNode> getRootsByRelationType(SDocumentGraph documentGraph, Class<? extends SRelation> clazz) {
+	public static<R extends SRelation<SNode, SNode>> Multimap<String, SNode> getRootsByRelationType(SDocumentGraph documentGraph, Class<R> clazz) {
 		if (clazz == null) {
 			throw new SaltParameterException("clazz", "getRootsBySRelationSType", null);
 		}
 		if (documentGraph == null) {
 			throw new SaltParameterException("Cannot compute roots, because there is no SDocumentGraph set to traverse.");
 		}
-		Class<? extends SRelation> currRelationType = null;
+		Class<? extends SRelation<?,?>> currRelationType = null;
 		currRelationType = clazz;
 		Multimap<String, SNode> retVal = LinkedHashMultimap.create();
-		List<SRelation> relations = documentGraph.getRelations(clazz);
+		List<? extends SRelation<?,?>> relations = documentGraph.getRelations(clazz);
 		for (SRelation<? extends SNode, ? extends SNode> currentRel : relations) {
 
 			if (currentRel.getSource() == null) {
@@ -546,7 +545,7 @@ public class DataSourceAccessor {
 		 * {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES}, the results are
 		 * stored here
 		 */
-		private List<DataSourceSequence> dataSourceSequences = null;
+		private List<DataSourceSequence<Number>> dataSourceSequences = null;
 
 		/**
 		 * in case of traversion type is
@@ -560,18 +559,18 @@ public class DataSourceAccessor {
 		 * {@link TRAVERSION_TYPE#OVERLAPPED_DS_SEQUENCES}, stores the last seen
 		 * data source
 		 */
-		private DataSourceSequence lastSeenDSSequence = null;
+		private DataSourceSequence<Number> lastSeenDSSequence = null;
 
 		@Override
 		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
 			if (TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.equals(TRAVERSION_TYPE.valueOf(traversalId))) {// TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
 				if (currNode instanceof SSequentialDS) {
-					SSequentialDS dataSource = (SSequentialDS) currNode;
-					DataSourceSequence sequence = null;
+					SSequentialDS<?, ?> dataSource = (SSequentialDS<?, ?>) currNode;
+					DataSourceSequence<Number> sequence = null;
 					if (dataSourceSequences == null) {
-						dataSourceSequences = new ArrayList<DataSourceSequence>();
+						dataSourceSequences = new ArrayList<DataSourceSequence<Number>>();
 					}
-					for (DataSourceSequence dsSequence : this.dataSourceSequences) {
+					for (DataSourceSequence<Number> dsSequence : this.dataSourceSequences) {
 						// search for correct sequence, containing the
 						// datasource if it was already found
 						if (dsSequence.getDataSource().equals(dataSource)) {
@@ -583,7 +582,7 @@ public class DataSourceAccessor {
 						// if it was already found
 					if (sequence == null) {
 						// sequence haven't been visit -> create it
-						sequence = new DataSourceSequence();
+						sequence = new DataSourceSequence<Number>();
 						sequence.setDataSource(dataSource);
 						lastSeenDSSequence = sequence;
 						dataSourceSequences.add(sequence);
@@ -608,16 +607,17 @@ public class DataSourceAccessor {
 		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
 			if (TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES.equals(TRAVERSION_TYPE.valueOf(traversalId))) {
 				// TRAVERSION_TYPE.OVERLAPPED_DS_SEQUENCES
-				if (currNode instanceof SSequentialDS) {
+				if (currNode instanceof SSequentialDS<?,?>) {
+					SSequentialDS<?, ? extends Number> currSeqDS = (SSequentialDS<?, ?>) currNode;
 					// check if current start and end value is smaller or
 					// bigger, than reset
 					if (relation == null) {
-						lastSeenDSSequence.setDataSource((SSequentialDS) currNode);
-						lastSeenDSSequence.setStart(((SSequentialDS) currNode).getStart());
-						lastSeenDSSequence.setEnd(((SSequentialDS) currNode).getEnd());
+						lastSeenDSSequence.setDataSource(currSeqDS);
+						lastSeenDSSequence.setStart(currSeqDS.getStart());
+						lastSeenDSSequence.setEnd(currSeqDS.getEnd());
 					} else {
 						if (relation instanceof SSequentialRelation) {
-							SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> seqRel = (SSequentialRelation) relation;
+							SSequentialRelation<?, ?, ?> seqRel = (SSequentialRelation<?,?,?>) relation;
 							if (seqRel.getStart() == null) {
 								throw new SaltInvalidModelException("Cannot return overlapped DataSourceSequences, because the graph is inconsistent. The sStart value the SSequentialRelation '" + seqRel + "' is not set. ");
 							} else if (seqRel.getEnd() == null) {
@@ -658,7 +658,7 @@ public class DataSourceAccessor {
 				if (TRAVERSION_TYPE.OVERLAPPED_STOKEN.equals(TRAVERSION_TYPE.valueOf(traversalId))) {
 					// there is a relation
 					if (relation != null) {
-						// get the typename for the sRelation class
+						// get the type name for the sRelation class
 						Set<SALT_TYPE> typeName = SALT_TYPE.class2SaltType(relation.getClass());
 						// found matching SType for an implemented interface
 						for (SALT_TYPE name : typeName) {
