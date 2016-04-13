@@ -60,7 +60,7 @@ public abstract class AbstractLayerImpl<N extends Node, R extends Relation<N, N>
 	}
 
 	/** container graph **/
-	protected Graph graph = null;
+	protected Graph<?,?,?> graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
@@ -81,12 +81,12 @@ public abstract class AbstractLayerImpl<N extends Node, R extends Relation<N, N>
 			return;
 		}
 		if (graph != null) {
-			if (graph instanceof AbstractGraphImpl) {
-				((AbstractGraphImpl) graph).basicAddLayer(this);
+			if (graph instanceof AbstractGraphImpl<?,?,?>) {
+				((AbstractGraphImpl<?,?,?>) graph).basicAddLayer(this);
 			}
 		} else {
-			if (getGraph() instanceof AbstractGraphImpl) {
-				((AbstractGraphImpl) getGraph()).basicRemoveLayer(this);
+			if (getGraph() instanceof AbstractGraphImpl<?,?,?>) {
+				((AbstractGraphImpl<?,?,?>) getGraph()).basicRemoveLayer(this);
 			}
 		}
 		basicSetGraph(graph);
@@ -117,13 +117,13 @@ public abstract class AbstractLayerImpl<N extends Node, R extends Relation<N, N>
 	 *            graph which contains this layer
 	 */
 	protected void basicSetGraph(Graph graph) {
-		if (getDelegate() != null && getDelegate() instanceof AbstractLayerImpl) {
-			((AbstractLayerImpl) getDelegate()).basicSetGraph(graph);
+		if (getDelegate() != null && getDelegate() instanceof AbstractLayerImpl<?,?>) {
+			((AbstractLayerImpl<?,?>) getDelegate()).basicSetGraph(graph);
 			return;
 		}
 		// remove from old graph if it was changed
-		if (this.graph != graph && this.graph instanceof AbstractGraphImpl) {
-			((AbstractGraphImpl) this.graph).basicRemoveLayer(this);
+		if (this.graph != graph && this.graph instanceof AbstractGraphImpl<?,?,?>) {
+			((AbstractGraphImpl<?,?,?>) this.graph).basicRemoveLayer(this);
 		}
 		this.graph = graph;
 	}

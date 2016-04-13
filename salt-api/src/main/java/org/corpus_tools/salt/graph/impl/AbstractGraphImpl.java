@@ -418,6 +418,13 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 	 * @return Either the casted original value or {@code null} if not valid.
 	 */
 	protected abstract R cast(Relation<? extends Node, ? extends Node> relation);
+	
+	/**
+	 * Makes sure that the argument has the correct sub-type or return {@code null} if not.
+	 * @param relation Either the casted original value
+	 * @return Either the casted original value or {@code null} if not valid.
+	 */
+	protected abstract L cast(Layer<? extends Node, ? extends Relation<?,?>> layer);
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
@@ -727,8 +734,15 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 	 * @param node
 	 *            node to be inserted
 	 */
-	protected void basicAddLayer(L layer) {
-		if (layer != null) {
+	protected void basicAddLayer(Layer<? extends Node, ? extends Relation<?,?>> layerRaw) {
+				
+		if (layerRaw != null) {
+			
+			L layer = cast(layerRaw);
+			if (layer == null) {
+				throw new SaltInsertionException(this, layer, "Cannot add an layer which is does not have expected type.");
+			}
+			
 			if (!layers.contains(layer)) {
 				// if layers has no id a new id will be given to layer
 				if (layer.getId() == null) {
@@ -743,7 +757,7 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 					layer.setId(idBase + "_" + (getLayers().size() + i));
 					i++;
 				}
-				layers.add(layer);
+				layers.add((L) layer);
 				getIndexMgr().put(SaltUtil.IDX_ID_LAYER, layer.getId(), layer);
 			}
 		}
@@ -779,7 +793,7 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 	 * @param node
 	 *            the node to be removed
 	 */
-	protected void basicRemoveLayer(L layer) {
+	protected void basicRemoveLayer(Layer<? extends Node, ? extends Relation<?,?>> layer) {
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);
