@@ -50,6 +50,7 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 		init();
 	}
 
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	@Override
 	protected Graph<N, R, L> getDelegate() {
 		return (Graph<N, R, L>) super.getDelegate();

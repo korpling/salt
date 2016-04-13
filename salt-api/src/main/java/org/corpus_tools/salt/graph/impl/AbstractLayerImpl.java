@@ -53,9 +53,10 @@ public abstract class AbstractLayerImpl<N extends Node, R extends Relation<N, N>
 		relations = new HashSet<R>();
 	}
 
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	@Override
 	protected Layer<N, R> getDelegate() {
-		return (Layer) super.getDelegate();
+		return (Layer<N,R>) super.getDelegate();
 	}
 
 	/** container graph **/

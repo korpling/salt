@@ -49,6 +49,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	/**
 	 * {@inheritDoc Relation#getDelegate()}
 	 */
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
+	@Override
 	public Relation<S, T> getDelegate() {
 		return ((Relation<S, T>) super.getDelegate());
 	}
