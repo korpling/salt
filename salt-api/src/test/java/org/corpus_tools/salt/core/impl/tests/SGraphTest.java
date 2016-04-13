@@ -29,6 +29,9 @@ import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SNamedElement;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
+import org.corpus_tools.salt.exceptions.SaltInsertionException;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -225,5 +228,24 @@ public class SGraphTest extends SAnnotationContainerTest {
 		assertEquals(2, getFixture().getRelationsByName("one").size());
 		assertEquals(1, getFixture().getRelationsByName("two").size());
 		assertEquals(1, getFixture().getRelationsByName("three").size());
+	}
+	
+	/**
+	 * The API allows us to compile code that adds relations which have the wrong type.
+	 * This is done to make the generic types work but should be catched at runtime.
+	 */
+	@Test(expected=SaltInsertionException.class)
+	public void testIncorrectRelationType() {
+	  
+	  class InvalidRelation extends RelationImpl<SNode, SNode> {
+	    
+	  }
+	  
+	  Relation<SNode, SNode> rel = new InvalidRelation();
+	  rel.setSource(SaltFactory.createSNode());
+	  rel.setTarget(SaltFactory.createSNode());
+	  
+	  // this compiles but should throw an exception
+	  getFixture().addRelation(rel);
 	}
 }
