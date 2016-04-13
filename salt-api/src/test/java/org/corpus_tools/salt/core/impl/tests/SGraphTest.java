@@ -251,8 +251,8 @@ public class SGraphTest extends SAnnotationContainerTest {
 	}
 	
 	/**
-	 * The API allows us to compile code that adds layers which have the wrong type.
-	 * This is done to make the generic types work but should be catched at runtime.
+	 * The API allows us to compile code to set a graph of wrong type for a layer.
+	 * This is done to make the linking work but should be catched at runtime.
 	 */
 	@Test(expected=SaltInsertionException.class)
 	public void testIncorrectLayerType() {
