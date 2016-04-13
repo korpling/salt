@@ -444,18 +444,23 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 	 * @param relation
 	 *            relation to be inserted
 	 */
-	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
+	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relationRaw) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			if (getDelegate() instanceof GraphImpl) {
-				((GraphImpl) getDelegate()).basicAddRelation(relation);
+				((GraphImpl) getDelegate()).basicAddRelation(relationRaw);
 			}
 			return;
 		}
 
-		if (relation == null) {
+		if (relationRaw == null) {
 			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class, "A null value is not allowed. ");
 		}
+		R relation = cast(relationRaw);
+		if (relation == null) {
+		  throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is does not have expected type. ");
+		}
+		
 		if (relation.getSource() == null) {
 			throw new SaltInsertionException(this, relation, "The source node is empty. ");
 		}
