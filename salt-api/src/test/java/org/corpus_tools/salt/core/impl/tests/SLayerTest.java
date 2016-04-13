@@ -20,6 +20,10 @@ package org.corpus_tools.salt.core.impl.tests;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SNamedElement;
+import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.exceptions.SaltInsertionException;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,5 +48,18 @@ public class SLayerTest extends SAnnotationContainerTest {
 	@Test
 	public void testGetName() {
 		TestHelper.testGetName(getFixture());
+	}
+	
+	@Test(expected=SaltInsertionException.class)
+	public void testInvalidRelationType() {
+		class InvalidRelation extends RelationImpl<SNode, SNode> {
+
+		}
+		Relation<SNode, SNode> rel = new InvalidRelation();
+		rel.setSource(SaltFactory.createSNode());
+		rel.setTarget(SaltFactory.createSNode());
+
+		// this compiles but should throw an exception
+		getFixture().addRelation(rel);
 	}
 }

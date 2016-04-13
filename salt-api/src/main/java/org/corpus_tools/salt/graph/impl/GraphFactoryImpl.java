@@ -87,6 +87,6 @@ public class GraphFactoryImpl implements IGraphFactory {
 	 */
 	@Override
 	public Layer<Node, Relation<Node, Node>> createLayer() {
-		return (new LayerImpl<Node, Relation<Node, Node>>());
+		return (new LayerImpl());
 	}
 }

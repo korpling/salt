@@ -62,12 +62,12 @@ public class SGraphImpl extends AbstractGraphImpl<SNode, SRelation<SNode, SNode>
 	
 	@Override
 	protected SRelation<SNode, SNode> cast(Relation<? extends Node, ? extends Node> relation) {
-	  if(relation instanceof SRelation<?,?>) {
-	    @SuppressWarnings("unchecked")
-      SRelation<SNode, SNode> retVal = (SRelation<SNode, SNode>) relation;
-	    return retVal;
-	  }
-	  return null;
+		if (relation instanceof SRelation<?, ?>) {
+			@SuppressWarnings("unchecked")
+			SRelation<SNode, SNode> retVal = (SRelation<SNode, SNode>) relation;
+			return retVal;
+		}
+		return null;
 	}
 
 	/** {@inheritDoc} **/

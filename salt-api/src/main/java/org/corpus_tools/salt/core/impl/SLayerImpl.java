@@ -29,12 +29,14 @@ import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.Layer;
-import org.corpus_tools.salt.graph.impl.LayerImpl;
+import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.AbstractLayerImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
-public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implements SLayer {
+public class SLayerImpl extends AbstractLayerImpl<SNode, SRelation<SNode, SNode>> implements SLayer {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SLayerImpl() {
 	}
@@ -49,6 +51,16 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 	 */
 	public SLayerImpl(Layer delegate) {
 		super(delegate);
+	}
+	
+	@Override
+	protected SRelation<SNode, SNode> cast(Relation<? extends Node, ? extends Node> relation) {
+		if (relation instanceof SRelation<?, ?>) {
+			@SuppressWarnings("unchecked")
+			SRelation<SNode, SNode> retVal = (SRelation<SNode, SNode>) relation;
+			return retVal;
+		}
+		return null;
 	}
 
 	// =======================================> SAnnotation
@@ -263,6 +275,8 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 	}
 
 	// =======================================< SNamedElement
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

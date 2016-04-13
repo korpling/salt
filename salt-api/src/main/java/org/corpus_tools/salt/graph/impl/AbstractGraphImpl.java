@@ -675,16 +675,16 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addLayer(layer);
-			if (layer instanceof LayerImpl) {
-				((LayerImpl) layer).basicSetGraph_WithoutRemoving(this);
+			if (layer instanceof AbstractLayerImpl) {
+				((AbstractLayerImpl) layer).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}
 
 		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);
-			if (layer instanceof LayerImpl) {
-				((LayerImpl<N, R>) layer).basicSetGraph(this);
+			if (layer instanceof AbstractLayerImpl) {
+				((AbstractLayerImpl<N, R>) layer).basicSetGraph(this);
 			}
 			// check whether graph contains nodes in layer, if not, add them
 			for (N node : layer.getNodes()) {
@@ -756,8 +756,8 @@ public abstract class AbstractGraphImpl<N extends Node, R extends Relation<N, N>
 			getDelegate().removeLayer(layer);
 			return;
 		}
-		if (layer instanceof LayerImpl) {
-			((LayerImpl<N, R>) layer).basicSetGraph(null);
+		if (layer instanceof AbstractLayerImpl) {
+			((AbstractLayerImpl<N, R>) layer).basicSetGraph(null);
 		}
 		basicRemoveLayer(layer);
 	}
