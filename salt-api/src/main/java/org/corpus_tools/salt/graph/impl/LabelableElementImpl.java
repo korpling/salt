@@ -43,15 +43,17 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/** Determines the expected number of labels. **/
 	public static final int EXPECTED_NUMBER_OF_LABELS = 5;
 
-	public LabelableElementImpl() {
-	}
 
 	/**
 	 * A delegate object of the same type. If {@link #delegate} is not null, all
 	 * functions of this method are delegated to the delegate object. Setting
 	 * {@link #delegate} makes this object to a container.
 	 **/
-	protected LabelableElement delegate = null;
+	private final LabelableElement delegate;
+	
+	public LabelableElementImpl() {
+		this.delegate = null;
+	}
 
 	/**
 	 * Returns the delegate object. If {@link #delegate} is not null, all
