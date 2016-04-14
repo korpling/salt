@@ -188,6 +188,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_LEVEL = "level";
 	private static final String JSON_GROUP = "group";
 	private static final String JSON_FIXED_X = "fixed.x";
+	private static final String JSON_HIDDEN = "hidden";
+	
 	
 	private  int xPosition = 0;	
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
@@ -1215,8 +1217,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  jsonWriterEdges.value(fromNode.getPath().fragment());
 			  jsonWriterEdges.key("to");
 			  jsonWriterEdges.value(toNode.getPath().fragment());
-			
-			//  jsonWriterEdges.value(relation.getPath().fragment());
+			 //no pseudo edge
 			  if (relation != null){			  
 			  
 				  Set<SAnnotation> sAnnotations = relation.getAnnotations();
@@ -1239,6 +1240,11 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					   jsonWriterEdges.key("label");
 					   jsonWriterEdges.value(allLabels);
 				   }
+			  }
+			  else{
+		
+				  jsonWriterEdges.key(JSON_HIDDEN); 
+				  jsonWriterEdges.value("true");
 			  }
 			  
 			  jsonWriterEdges.endObject();
