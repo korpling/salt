@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SDocumentGraph;
+import org.corpus_tools.salt.common.SSpan;
+import org.corpus_tools.salt.common.SSpanningRelation;
+import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SNamedElement;
@@ -261,4 +265,5 @@ public class SGraphTest extends SAnnotationContainerTest {
 	  layer.setGraph(getFixture());
 
 	}
+
 }

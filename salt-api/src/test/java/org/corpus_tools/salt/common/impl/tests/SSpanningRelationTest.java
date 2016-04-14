@@ -18,13 +18,45 @@
 package org.corpus_tools.salt.common.impl.tests;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SDocumentGraph;
+import org.corpus_tools.salt.common.SSpan;
+import org.corpus_tools.salt.common.SSpanningRelation;
+import org.corpus_tools.salt.common.SToken;
+import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.core.SRelation;
+import org.corpus_tools.salt.exceptions.SaltInsertionException;
 import org.junit.Before;
+import org.junit.Test;
 
 public class SSpanningRelationTest extends SRelationAbstractTest {
 
 	@Before
 	public void setUp() throws Exception {
 		setFixture(SaltFactory.createSSpanningRelation());
+	}
+	
+	@Test(expected=SaltInsertionException.class)
+	public void testTypeCheckTarget() {
+		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
+		SSpan spanNode = SaltFactory.createSSpan();
+		SToken tokNode = SaltFactory.createSToken();
+		docGraph.addNode(spanNode);
+		docGraph.addNode(tokNode);
+		
+		SSpanningRelation spanRel = SaltFactory.createSSpanningRelation();
+		spanRel.setTarget(tokNode);
+		spanRel.setSource(spanNode);
+		
+		docGraph.addRelation(spanRel);
+		
+		SNode anyNode = SaltFactory.createSNode();
+		
+		SRelation<SNode, SNode> retrievedRel =  docGraph.getRelation(spanRel.getId());
+		// this should work
+		SToken secondToken = SaltFactory.createSToken();
+		retrievedRel.setTarget(secondToken);
+		// this should fail
+		retrievedRel.setTarget(anyNode);
 	}
 
 }
