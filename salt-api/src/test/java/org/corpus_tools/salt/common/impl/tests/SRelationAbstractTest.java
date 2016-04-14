@@ -66,7 +66,6 @@ public abstract class SRelationAbstractTest<R extends SRelation<? extends SNode,
 		setValidSourceAndTarget(validRel);
 		
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
-		// these have to be set in the fixture in setUp()
 		docGraph.addNode(validRel.getSource());
 		docGraph.addNode(validRel.getTarget());
 		
@@ -86,7 +85,6 @@ public abstract class SRelationAbstractTest<R extends SRelation<? extends SNode,
 		setValidSourceAndTarget(validRel);
 		
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
-		// these have to be set in the fixture in setUp()
 		docGraph.addNode(validRel.getSource());
 		docGraph.addNode(validRel.getTarget());
 		
