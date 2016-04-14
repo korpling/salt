@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SSequentialRelation;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.SToken;
@@ -37,6 +38,12 @@ public class STextualRelationTest extends SSequentialRelationTest<SToken, STextu
 	@Before
 	public void setUp() {
 		setFixture(SaltFactory.createSTextualRelation());
+	}
+	
+	@Override
+	protected void setValidSourceAndTarget(SSequentialRelation<SToken, STextualDS, Integer> rel) {
+		getFixture().setSource(SaltFactory.createSToken());
+		getFixture().setTarget(SaltFactory.createSTextualDS());
 	}
 
 	@Override

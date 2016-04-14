@@ -57,4 +57,14 @@ public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedial
 		}
 		super.setGraph(graph);
 	}
+	
+	@Override
+	public void setSource(SToken source) {
+		super.setSource(source);
+	}
+
+	@Override
+	public void setTarget(SMedialDS target) {
+		super.setTarget(target);
+	}
 } // SAudioDSRelationImpl

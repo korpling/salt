@@ -18,13 +18,20 @@
 package org.corpus_tools.salt.common.impl.tests;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SDominanceRelation;
 import org.junit.Before;
 
-public class SDominanceRelationTest extends SRelationAbstractTest {
+public class SDominanceRelationTest extends SRelationAbstractTest<SDominanceRelation> {
 
 	@Before
 	public void setUp() throws Exception {
 		setFixture(SaltFactory.createSDominanceRelation());
+	}
+	
+	@Override
+	protected void setValidSourceAndTarget(SDominanceRelation rel) {
+		getFixture().setSource(SaltFactory.createSStructure());
+		getFixture().setTarget(SaltFactory.createSToken());
 	}
 
 }

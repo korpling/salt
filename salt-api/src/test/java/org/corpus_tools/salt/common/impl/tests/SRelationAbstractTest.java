@@ -24,8 +24,10 @@ import org.corpus_tools.salt.common.SMedialRelation;
 import org.corpus_tools.salt.common.SOrderRelation;
 import org.corpus_tools.salt.common.SPointingRelation;
 import org.corpus_tools.salt.common.SSpanningRelation;
+import org.corpus_tools.salt.common.SStructure;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.STimelineRelation;
+import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.junit.Test;
@@ -36,43 +38,64 @@ import org.junit.Test;
  * @author florian
  *
  */
-public abstract class SRelationAbstractTest {
+public abstract class SRelationAbstractTest<R extends SRelation<? extends SNode, ? extends SNode>> {
 
-	protected SRelation<? extends SNode, ? extends SNode> fixture = null;
+	protected R fixture = null;
 
-	protected void setFixture(SRelation<? extends SNode, ? extends SNode> fixture) {
+	protected void setFixture(R fixture) {
 		this.fixture = fixture;
 	}
 
-	protected SRelation<? extends SNode, ? extends SNode> getFixture() {
+	protected R getFixture() {
 		return fixture;
 	}
+	
+	protected abstract void setValidSourceAndTarget(R rel);
 
 	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
 	@Test
 	public void testGetGraph() {
-		if (getFixture() instanceof SSpanningRelation) {
-			((SSpanningRelation) getFixture()).setSource(SaltFactory.createSSpan());
-			((SSpanningRelation) getFixture()).setTarget(SaltFactory.createSToken());
-		} else if (getFixture() instanceof SDominanceRelation) {
-			((SDominanceRelation) getFixture()).setSource(SaltFactory.createSStructure());
-			((SDominanceRelation) getFixture()).setTarget(SaltFactory.createSToken());
-		} else if (getFixture() instanceof SPointingRelation) {
-			((SPointingRelation) getFixture()).setSource(SaltFactory.createSStructure());
-			((SPointingRelation) getFixture()).setTarget(SaltFactory.createSToken());
-		} else if (getFixture() instanceof SOrderRelation) {
-			((SOrderRelation) getFixture()).setSource(SaltFactory.createSToken());
-			((SOrderRelation) getFixture()).setTarget(SaltFactory.createSToken());
-		} else if (getFixture() instanceof STextualRelation) {
-			((STextualRelation) getFixture()).setSource(SaltFactory.createSToken());
-			((STextualRelation) getFixture()).setTarget(SaltFactory.createSTextualDS());
-		} else if (getFixture() instanceof STimelineRelation) {
-			((STimelineRelation) getFixture()).setSource(SaltFactory.createSToken());
-			((STimelineRelation) getFixture()).setTarget(SaltFactory.createSTimeline());
-		} else if (getFixture() instanceof SMedialRelation) {
-			((SMedialRelation) getFixture()).setSource(SaltFactory.createSToken());
-			((SMedialRelation) getFixture()).setTarget(SaltFactory.createSMedialDS());
-		}
+		setValidSourceAndTarget(getFixture());
 		TestUtils.testSetGetGraph(getFixture());
+	}
+	
+	@Test(expected=ClassCastException.class)
+	public void testTypeCheckTarget() {
+		
+		R validRel = getFixture();
+		setValidSourceAndTarget(validRel);
+		
+		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
+		// these have to be set in the fixture in setUp()
+		docGraph.addNode(validRel.getSource());
+		docGraph.addNode(validRel.getTarget());
+		
+		docGraph.addRelation(validRel);
+		
+		SNode anyNode = SaltFactory.createSNode();
+		
+		SRelation<SNode, SNode> retrievedRel =  docGraph.getRelation(validRel.getId());
+		// this should fail
+		retrievedRel.setTarget(anyNode);
+	}
+	
+	@Test(expected=ClassCastException.class)
+	public void testTypeCheckSource() {
+		
+		R validRel = getFixture();
+		setValidSourceAndTarget(validRel);
+		
+		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
+		// these have to be set in the fixture in setUp()
+		docGraph.addNode(validRel.getSource());
+		docGraph.addNode(validRel.getTarget());
+		
+		docGraph.addRelation(validRel);
+		
+		SNode anyNode = SaltFactory.createSNode();
+		
+		SRelation<SNode, SNode> retrievedRel =  docGraph.getRelation(validRel.getId());
+		// this should fail
+		retrievedRel.setSource(anyNode);
 	}
 }

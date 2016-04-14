@@ -58,4 +58,15 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 		}
 		super.setGraph(graph);
 	}
+	
+	@Override
+	public void setSource(SStructuredNode source) {
+		super.setSource(source);
+	}
+	
+	@Override
+	public void setTarget(SStructuredNode target) {
+		super.setTarget(target);
+	}
+	
 } // SPointingRelationImpl

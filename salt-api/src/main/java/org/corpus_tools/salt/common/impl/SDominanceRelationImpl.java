@@ -59,4 +59,15 @@ public class SDominanceRelationImpl extends SRelationImpl<SStructure, SStructure
 		}
 		super.setGraph(graph);
 	}
+	
+	@Override
+	public void setSource(SStructure source) {
+		super.setSource(source);
+	}
+	
+	@Override
+	public void setTarget(SStructuredNode target) {
+		super.setTarget(target);
+	}
+	
 } // SDominanceRelationImpl

@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SSequentialRelation;
 import org.corpus_tools.salt.common.STimeline;
 import org.corpus_tools.salt.common.STimelineRelation;
 import org.corpus_tools.salt.common.SToken;
@@ -37,6 +38,12 @@ public class STimelineRelationTest extends SSequentialRelationTest<SToken, STime
 	@Before
 	public void setUp() {
 		setFixture(SaltFactory.createSTimelineRelation());
+	}
+	
+	@Override
+	protected void setValidSourceAndTarget(SSequentialRelation<SToken, STimeline, Integer> rel) {
+		getFixture().setSource(SaltFactory.createSToken());
+		getFixture().setTarget(SaltFactory.createSTimeline());
 	}
 
 	@Override

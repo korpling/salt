@@ -58,4 +58,15 @@ public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STime
 		}
 		super.setGraph(graph);
 	}
+	
+	@Override
+	public void setSource(SToken source) {
+		super.setSource(source);
+	}
+	
+	@Override
+	public void setTarget(STimeline target) {
+		super.setTarget(target);
+	}
+	
 } // STimelineRelationImpl

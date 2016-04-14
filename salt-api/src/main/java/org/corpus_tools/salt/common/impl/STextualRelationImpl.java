@@ -58,4 +58,15 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 		}
 		super.setGraph(graph);
 	}
+	
+	@Override
+	public void setSource(SToken source) {
+		super.setSource(source);
+	}
+	
+	@Override
+	public void setTarget(STextualDS target) {
+		super.setTarget(target);
+	}
+	
 } // STextualRelationImpl

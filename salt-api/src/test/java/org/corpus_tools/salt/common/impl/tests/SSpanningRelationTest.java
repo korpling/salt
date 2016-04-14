@@ -27,59 +27,17 @@ import org.corpus_tools.salt.core.SRelation;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SSpanningRelationTest extends SRelationAbstractTest {
+public class SSpanningRelationTest extends SRelationAbstractTest<SSpanningRelation> {
 
 	@Before
 	public void setUp() throws Exception {
 		setFixture(SaltFactory.createSSpanningRelation());
 	}
 	
-	@Test(expected=ClassCastException.class)
-	public void testTypeCheckTarget() {
-		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
-		SSpan spanNode = SaltFactory.createSSpan();
-		SToken tokNode = SaltFactory.createSToken();
-		docGraph.addNode(spanNode);
-		docGraph.addNode(tokNode);
-		
-		SSpanningRelation spanRel = SaltFactory.createSSpanningRelation();
-		spanRel.setTarget(tokNode);
-		spanRel.setSource(spanNode);
-		
-		docGraph.addRelation(spanRel);
-		
-		SNode anyNode = SaltFactory.createSNode();
-		
-		SRelation<SNode, SNode> retrievedRel =  docGraph.getRelation(spanRel.getId());
-		// this should work
-		SToken secondToken = SaltFactory.createSToken();
-		retrievedRel.setTarget(secondToken);
-		// this should fail
-		retrievedRel.setTarget(anyNode);
+	@Override
+	protected void setValidSourceAndTarget(SSpanningRelation rel) {
+		getFixture().setSource(SaltFactory.createSSpan());
+		getFixture().setTarget(SaltFactory.createSToken());
 	}
 	
-	@Test(expected=ClassCastException.class)
-	public void testTypeCheckSource() {
-		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
-		SSpan spanNode = SaltFactory.createSSpan();
-		SToken tokNode = SaltFactory.createSToken();
-		docGraph.addNode(spanNode);
-		docGraph.addNode(tokNode);
-		
-		SSpanningRelation spanRel = SaltFactory.createSSpanningRelation();
-		spanRel.setTarget(tokNode);
-		spanRel.setSource(spanNode);
-		
-		docGraph.addRelation(spanRel);
-		
-		SNode anyNode = SaltFactory.createSNode();
-		
-		SRelation<SNode, SNode> retrievedRel =  docGraph.getRelation(spanRel.getId());
-		// this should work
-		SSpan secondSpan = SaltFactory.createSSpan();
-		retrievedRel.setSource(secondSpan);
-		// this should fail
-		retrievedRel.setSource(anyNode);
-	}
-
 }

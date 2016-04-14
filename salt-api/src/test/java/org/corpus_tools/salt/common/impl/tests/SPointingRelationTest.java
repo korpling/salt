@@ -18,13 +18,20 @@
 package org.corpus_tools.salt.common.impl.tests;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SPointingRelation;
 import org.junit.Before;
 
-public class SPointingRelationTest extends SRelationAbstractTest {
+public class SPointingRelationTest extends SRelationAbstractTest<SPointingRelation> {
 
 	@Before
 	public void setUp() throws Exception {
 		setFixture(SaltFactory.createSPointingRelation());
+	}
+	
+	@Override
+	protected void setValidSourceAndTarget(SPointingRelation rel) {
+		getFixture().setSource(SaltFactory.createSStructure());
+		getFixture().setTarget(SaltFactory.createSToken());
 	}
 
 }

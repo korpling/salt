@@ -23,6 +23,7 @@ import static org.junit.Assert.assertNull;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SMedialDS;
 import org.corpus_tools.salt.common.SMedialRelation;
+import org.corpus_tools.salt.common.SSequentialRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,6 +38,12 @@ public class SMediaRelationTest extends SSequentialRelationTest<SToken, SMedialD
 	@Before
 	public void setUp() {
 		setFixture(SaltFactory.createSMedialRelation());
+	}
+	
+	@Override
+	protected void setValidSourceAndTarget(SSequentialRelation<SToken, SMedialDS, Double> rel) {
+		getFixture().setSource(SaltFactory.createSToken());
+		getFixture().setTarget(SaltFactory.createSMedialDS());
 	}
 
 	@Override
