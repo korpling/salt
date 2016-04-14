@@ -37,7 +37,12 @@ import java.util.Set;
  * @param <T>
  *            target node of the relation
  */
-public interface Relation<S extends Node, T extends Node> extends IdentifiableElement {
+public interface Relation
+	<
+	S extends Node, 
+	T extends Node,
+	L
+	> extends IdentifiableElement {
 
 	/**
 	 * Returns the delegate object. If {@link #delegate} is not null, all
@@ -46,7 +51,7 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	 * 
 	 * @return the delegate object
 	 */
-	public Relation<S, T> getDelegate();
+	public Relation<S, T, L> getDelegate();
 
 	/**
 	 * Returns the source node of this relation object.
@@ -110,7 +115,7 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	 * 
 	 * @return a set of layers containing this relation
 	 */
-	public Set<? extends Layer> getLayers();
+	public Set<L> getLayers();
 
 	/**
 	 * Adds this relation to the passed layer. If this relation is not already
@@ -119,7 +124,7 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param layer
 	 *            to which this node should be added
 	 */
-	public void addLayer(Layer layer);
+	public void addLayer(L layer);
 
 	/**
 	 * Removes this relation from the passed layer.
@@ -127,5 +132,5 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param layer
 	 *            from which this node should be removed
 	 */
-	public void removeLayer(Layer layer);
+	public void removeLayer(L layer);
 }

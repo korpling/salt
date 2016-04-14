@@ -24,10 +24,16 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.AbstractGraphImpl.UPDATE_TYPE;
+import org.corpus_tools.salt.graph.impl.GraphImpl.UPDATE_TYPE;
 
 @SuppressWarnings("serial")
-public class RelationImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Relation<S, T> {
+public class RelationImpl
+	<
+	S extends Node, T extends Node, 
+	L
+	> 
+	extends IdentifiableElementImpl 
+	implements Relation<S, T, L> {
 	/**
 	 * Initializes an object of type {@link Relation}.
 	 */
@@ -42,7 +48,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public RelationImpl(Relation<S, T> delegate) {
+	public RelationImpl(Relation<S, T, L> delegate) {
 		super(delegate);
 	}
 
@@ -51,8 +57,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 */
 	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	@Override
-	public Relation<S, T> getDelegate() {
-		return ((Relation<S, T>) super.getDelegate());
+	public Relation<S, T, L> getDelegate() {
+		return ((Relation<S, T, L>) super.getDelegate());
 	}
 
 	/** source node of this relation. **/
@@ -84,8 +90,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		S oldValue = getSource();
 		this.source = source;
 		// notify graph about change of target
-		if (getGraph() != null && getGraph() instanceof AbstractGraphImpl) {
-			((AbstractGraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
+		if (getGraph() != null && getGraph() instanceof GraphImpl) {
+			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
 		}
 	}
 
@@ -118,8 +124,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		T oldValue = this.getTarget();
 		this.target = target;
 		// notify graph about change of target
-		if (getGraph() != null && getGraph() instanceof AbstractGraphImpl) {
-			((AbstractGraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
+		if (getGraph() != null && getGraph() instanceof GraphImpl) {
+			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
 		}
 	}
 
@@ -212,15 +218,15 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 
 	/** {@inheritDoc} **/
 	@Override
-	public Set<? extends Layer> getLayers() {
+	public Set<L> getLayers() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return (getDelegate().getLayers());
 		}
 
-		Set<Layer> layers = new HashSet<>();
+		Set<L> layers = new HashSet<>();
 		if (getGraph() != null) {
-			Set<Layer> allLayers = getGraph().getLayers();
+			Set<L> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
 				for (Layer layer : allLayers) {
 					if (layer.getRelations().contains(this)) {
@@ -239,7 +245,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * layers.
 	 **/
 	@Override
-	public void addLayer(Layer layer) {
+	public void addLayer(L layer) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addLayer(layer);
@@ -257,14 +263,14 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * layers.
 	 **/
 	@Override
-	public void removeLayer(Layer layer) {
+	public void removeLayer(L layer) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().removeLayer(layer);
 		}
 		
-		if (layer != null) {
-			layer.removeRelation(this);
+		if (layer != null && layer instanceof LayerImpl) {
+			((LayerImpl) layer).removeRelation(this);
 		}
 	}
 }

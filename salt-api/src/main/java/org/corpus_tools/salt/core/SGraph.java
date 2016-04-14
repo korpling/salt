@@ -18,11 +18,16 @@
 package org.corpus_tools.salt.core;
 
 import java.util.List;
+import java.util.Set;
 
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.index.IndexMgr;
+import org.corpus_tools.salt.util.SaltUtil;
 
-public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, SAnnotationContainer, SNamedElement, SPathElement {
+public interface SGraph extends SAnnotationContainer, SNamedElement, SPathElement {
 
 	/**
 	 * The {@link GRAPH_TRAVERSE_TYPE} determines the the traversal order. In
@@ -120,4 +125,113 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	 * @return A complete list of all matching layers. Is never null.
 	 */
 	public List<SLayer> getLayerByName(String layerName);
+
+	/**
+	 * Returns whether this graph contains an {@link Relation} corresponding to
+	 * the passed id.
+	 * 
+	 * @param relationId
+	 *            id of the node to be checked
+	 * @return true if the relation is contained, false otherwise
+	 */
+	public boolean containsRelation(String relationId);
+
+	/**
+	 * Returns a list of all relations contained in this graph.
+	 * 
+	 * @return a list of all contained relations.
+	 */
+	public List<SNode> getNodes();
+
+	/**
+	 * Returns a node corresponding to the passed id, if such a node is
+	 * contained in the graph.
+	 * 
+	 * @param nodeId
+	 *            id of the node to be searched for
+	 */
+	public SNode getNode(String nodeId);
+
+	/**
+	 * Adds the passed node to this graph and updates indexes. If node is null
+	 * or node is already contained nothing is inserted. The passed node and
+	 * this graph will be double chained, which means the method
+	 * {@link Node#getGraph()} will return this graph.
+	 * 
+	 * @param node
+	 *            node to be inserted
+	 */
+	public void addNode(SNode node);
+
+	/**
+	 * Removes the passed node from this graph and cleans all indexes. It also
+	 * ensures, that the graph is removed from the node, thus invoking
+	 * {@link Node#getGraph()} will return null. The double chaining between
+	 * this graph and the passed node will be cut off. If the passed node is
+	 * null nothing is done.
+	 * 
+	 * @param node
+	 *            the node to be removed
+	 */
+	public void removeNode(SNode node);
+
+	/**
+	 * Returns whether this graph contains a {@link Node} corresponding to the
+	 * passed id.
+	 * 
+	 * @param nodeId
+	 *            id of the node to be checked
+	 * @return true if the node is contained, false otherwise
+	 */
+	public boolean containsNode(String nodeId);
+
+	/**
+	 * Returns a layer corresponding to the passed id, if such a layer is
+	 * contained in the graph.
+	 * 
+	 * @param layerId
+	 *            id of the layer to be searched for
+	 */
+	public SLayer getLayer(String layerId);
+
+	/**
+	 * Returns a set of layers contained by this graph.
+	 * 
+	 * @return all contained layers
+	 */
+	public Set<SLayer> getLayers();
+
+	/**
+	 * Adds the passed layer to this graph. If layer is null or layer is already
+	 * contained nothing is inserted. The passed layer and this graph will be
+	 * double chained, which means the method {@link Layer#getGraph()} will
+	 * return this graph. If the passed layer contains nodes or relations, which
+	 * are not already contained by the graph, they will be added.
+	 * 
+	 * @param layer
+	 *            layer to be inserted
+	 */
+	public void addLayer(SLayer layer);
+
+	/**
+	 * Returns whether this graph contains a {@link Layer} corresponding to the
+	 * passed id.
+	 * 
+	 * @param layerId
+	 *            id of the node to be checked
+	 * @return true if the node is contained, false otherwise
+	 */
+	public boolean containsLayer(String layerId);
+
+	/**
+	 * Removes the passed layer from this graph and cleans all indexes. It also
+	 * ensures, that the graph is removed from the layer, thus invoking
+	 * {@link Layer#getGraph()} will return null. The double chaining between
+	 * this graph and the passed layer will be cut off. If the passed layer is
+	 * null nothing happens.
+	 * 
+	 * @param layer
+	 *            the layer to be removed
+	 */
+	public void removeLayer(SLayer layer);
 }

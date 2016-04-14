@@ -24,6 +24,7 @@ import java.util.Set;
 
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
@@ -36,7 +37,8 @@ import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
-public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImpl<S, T> implements SRelation<S, T> {
+public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImpl<S, T, SLayer> 
+	implements SRelation<S, T> {
 	/** Initializes an object of type {@link SRelationImpl}. **/
 	public SRelationImpl() {
 	}
@@ -52,7 +54,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	public SRelationImpl(Relation delegate) {
 		super(delegate);
 	}
-
+	
 	// =======================================> SAnnotation
 	/** {@inheritDoc} **/
 	@Override
@@ -308,6 +310,16 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 			}
 		}
 		return Collections.unmodifiableSet(layers);
+	}
+	
+	@Override
+	public SGraph getGraph() {
+		return (SGraph) super.getGraph();
+	}
+	
+	@Override
+	public void setGraph(SGraph graph) {
+		super.setGraph(graph);
 	}
 
 }

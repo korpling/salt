@@ -30,7 +30,12 @@ public interface IGraphFactory {
 	 * 
 	 * @return new {@link Graph} object
 	 */
-	public abstract Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph();
+	public abstract
+	<
+	N extends Node,
+	R extends Relation<N,N,L>,
+	L extends Layer<N, R, L>
+	> Graph<N,R,L> createGraph();
 
 	/**
 	 * Creates a new {@link Node} object of type {@link NodeImpl}.
@@ -44,7 +49,12 @@ public interface IGraphFactory {
 	 * 
 	 * @return new {@link Relation} object
 	 */
-	public abstract Relation<Node, Node> createRelation();
+	public abstract
+		<
+		S extends Node, 
+		T extends Node,
+		L
+		> Relation<S, T, L> createRelation();
 
 	/**
 	 * Creates a new {@link Label} object of type {@link LabelImpl}. The value
@@ -76,6 +86,11 @@ public interface IGraphFactory {
 	 * 
 	 * @return new layer object
 	 */
-	public abstract Layer<Node, Relation<Node, Node>> createLayer();
+	public abstract
+		<
+		N extends Node, 
+		R extends Relation<N, N, L>,
+		L
+		> Layer<N,R,L> createLayer();
 
 }

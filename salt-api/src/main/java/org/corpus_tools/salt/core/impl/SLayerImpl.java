@@ -31,12 +31,12 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.AbstractLayerImpl;
+import org.corpus_tools.salt.graph.impl.LayerImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
-public class SLayerImpl extends AbstractLayerImpl<SNode, SRelation<SNode, SNode>> implements SLayer {
+public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implements SLayer {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SLayerImpl() {
 	}

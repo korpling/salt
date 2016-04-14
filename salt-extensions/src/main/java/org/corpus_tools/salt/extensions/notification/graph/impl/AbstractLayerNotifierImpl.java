@@ -27,10 +27,10 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.AbstractLayerImpl;
+import org.corpus_tools.salt.graph.impl.LayerImpl;
 
 @SuppressWarnings("serial")
-public abstract class AbstractLayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends AbstractLayerImpl<N, R> implements Layer<N, R>, Notifier {
+public abstract class AbstractLayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends LayerImpl<N, R> implements Layer<N, R>, Notifier {
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 

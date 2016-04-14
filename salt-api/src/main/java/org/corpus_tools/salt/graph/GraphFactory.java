@@ -33,7 +33,12 @@ public class GraphFactory {
 	 * 
 	 * @return new {@link Graph} object
 	 */
-	public static Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
+	public static
+		<
+		N extends Node,
+		R extends Relation<N,N,L>,
+		L extends Layer<N, R, L>
+		> Graph<N, R, L> createGraph() {
 		return (factory.createGraph());
 	}
 
@@ -51,7 +56,12 @@ public class GraphFactory {
 	 * 
 	 * @return new {@link Relation} object
 	 */
-	public static Relation<Node, Node> createRelation() {
+	public static 
+	<
+	S extends Node, 
+	T extends Node,
+	L
+	> Relation<S,T,L> createRelation() {
 		return (factory.createRelation());
 	}
 
@@ -89,7 +99,12 @@ public class GraphFactory {
 	 * 
 	 * @return new layer object
 	 */
-	public static Layer<Node, Relation<Node, Node>> createLayer() {
-		return (factory.createLayer());
+	public static
+	<
+	N extends Node, 
+	R extends Relation<N, N, L>,
+	L
+	> Layer<N,R,L> createLayer() {
+		return factory.createLayer();
 	}
 }

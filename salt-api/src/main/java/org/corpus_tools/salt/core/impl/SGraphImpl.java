@@ -36,14 +36,14 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.AbstractGraphImpl;
+import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
-public class SGraphImpl extends AbstractGraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
+public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
 	/** Initializes an object of type {@link SGraphImpl}. **/
 	public SGraphImpl() {
 		super();
