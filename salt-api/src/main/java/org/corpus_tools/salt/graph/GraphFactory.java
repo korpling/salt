@@ -36,8 +36,8 @@ public class GraphFactory {
 	public static
 		<
 		N extends Node,
-		R extends Relation<N,N,L>,
-		L extends Layer<N, R, L>
+		R extends Relation<?,?>,
+		L extends Layer<N, R>
 		> Graph<N, R, L> createGraph() {
 		return (factory.createGraph());
 	}
@@ -59,9 +59,8 @@ public class GraphFactory {
 	public static 
 	<
 	S extends Node, 
-	T extends Node,
-	L
-	> Relation<S,T,L> createRelation() {
+	T extends Node
+	> Relation<S,T> createRelation() {
 		return (factory.createRelation());
 	}
 
@@ -102,9 +101,9 @@ public class GraphFactory {
 	public static
 	<
 	N extends Node, 
-	R extends Relation<N, N, L>,
+	R extends Relation<N, N>,
 	L
-	> Layer<N,R,L> createLayer() {
+	> Layer<N,R> createLayer() {
 		return factory.createLayer();
 	}
 }

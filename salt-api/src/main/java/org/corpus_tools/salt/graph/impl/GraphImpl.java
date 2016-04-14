@@ -39,8 +39,8 @@ import org.corpus_tools.salt.util.SaltUtil;
 public class GraphImpl
 	<
 	N extends Node, 
-	R extends Relation<N, N, L>, 
-	L extends Layer<N, R, L>
+	R extends Relation<?, ?>, 
+	L extends Layer<N, R>
 	> 
 	extends IdentifiableElementImpl implements Graph<N, R, L> {
 	/**
@@ -671,8 +671,8 @@ public class GraphImpl
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addLayer(layer);
-			if (layer instanceof LayerImpl<?,?,?>) {
-				((LayerImpl<?,?,?>) layer).basicSetGraph_WithoutRemoving(this);
+			if (layer instanceof LayerImpl<?,?>) {
+				((LayerImpl<?,?>) layer).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}
@@ -680,7 +680,7 @@ public class GraphImpl
 		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);
 			if (layer instanceof LayerImpl) {
-				((LayerImpl<N, R,L>) layer).basicSetGraph(this);
+				((LayerImpl<N,R>) layer).basicSetGraph(this);
 			}
 			// check whether graph contains nodes in layer, if not, add them
 			for (N node : layer.getNodes()) {
@@ -756,7 +756,7 @@ public class GraphImpl
 			return;
 		}
 		if (layer instanceof LayerImpl) {
-			((LayerImpl<N, R, L>) layer).basicSetGraph(null);
+			((LayerImpl<N, R>) layer).basicSetGraph(null);
 		}
 		basicRemoveLayer(layer);
 	}

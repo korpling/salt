@@ -40,8 +40,7 @@ import java.util.Set;
 public interface Relation
 	<
 	S extends Node, 
-	T extends Node,
-	L
+	T extends Node
 	> extends IdentifiableElement {
 
 	/**
@@ -51,7 +50,7 @@ public interface Relation
 	 * 
 	 * @return the delegate object
 	 */
-	public Relation<S, T, L> getDelegate();
+	public Relation<S, T> getDelegate();
 
 	/**
 	 * Returns the source node of this relation object.
@@ -92,21 +91,6 @@ public interface Relation
 	 */
 	public Graph getGraph();
 
-	/**
-	 * Sets the container graph of this relation.
-	 * 
-	 * @param graph
-	 *            object which contains this relation.
-	 */
-	/**
-	 * Sets the container graph of this relation. The passed graph and this
-	 * relation will be double chained, which means the method
-	 * {@link Graph#getRelations()} will return a list containing this relation.
-	 * 
-	 * @param graph
-	 *            graph which contains this relation
-	 */
-	public void setGraph(Graph graph);
 
 	/**
 	 * Returns all layers containing this relation. This is a computed set and
@@ -115,22 +99,7 @@ public interface Relation
 	 * 
 	 * @return a set of layers containing this relation
 	 */
-	public Set<L> getLayers();
+	public Set<? extends Layer<?,?>> getLayers();
 
-	/**
-	 * Adds this relation to the passed layer. If this relation is not already
-	 * contained in the layer's graph, it will be added to the graph.
-	 * 
-	 * @param layer
-	 *            to which this node should be added
-	 */
-	public void addLayer(L layer);
 
-	/**
-	 * Removes this relation from the passed layer.
-	 * 
-	 * @param layer
-	 *            from which this node should be removed
-	 */
-	public void removeLayer(L layer);
 }

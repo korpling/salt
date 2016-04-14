@@ -29,11 +29,11 @@ import org.corpus_tools.salt.graph.impl.GraphImpl.UPDATE_TYPE;
 @SuppressWarnings("serial")
 public class RelationImpl
 	<
-	S extends Node, T extends Node, 
-	L
+	S extends Node, T extends Node,
+	R extends Relation<S,T>
 	> 
 	extends IdentifiableElementImpl 
-	implements Relation<S, T, L> {
+	implements Relation<S, T> {
 	/**
 	 * Initializes an object of type {@link Relation}.
 	 */
@@ -48,7 +48,7 @@ public class RelationImpl
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public RelationImpl(Relation<S, T, L> delegate) {
+	public RelationImpl(Relation<S, T> delegate) {
 		super(delegate);
 	}
 
@@ -57,8 +57,8 @@ public class RelationImpl
 	 */
 	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	@Override
-	public Relation<S, T, L> getDelegate() {
-		return ((Relation<S, T, L>) super.getDelegate());
+	public Relation<S, T> getDelegate() {
+		return ((Relation<S, T>) super.getDelegate());
 	}
 
 	/** source node of this relation. **/
@@ -143,26 +143,6 @@ public class RelationImpl
 		return (graph);
 	}
 
-	/** {@inheritDoc Relation#setGraph(Graph)} **/
-	@Override
-	public void setGraph(Graph graph) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().setGraph(graph);
-			return;
-		}
-
-		Graph oldGraph = getGraph();
-		if (graph != null) {
-			graph.addRelation(this);
-		}
-		if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
-			// remove relation from old graph
-			((GraphImpl) oldGraph).basicRemoveRelation(this);
-		}
-		basicSetGraph(graph);
-	}
-
 	/**
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Relation} object when an relation is inserted
@@ -218,17 +198,17 @@ public class RelationImpl
 
 	/** {@inheritDoc} **/
 	@Override
-	public Set<L> getLayers() {
+	public Set<? extends Layer<?,?>> getLayers() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return (getDelegate().getLayers());
 		}
 
-		Set<L> layers = new HashSet<>();
+		Set<Layer<?,?>> layers = new HashSet<>();
 		if (getGraph() != null) {
-			Set<L> allLayers = getGraph().getLayers();
+			Set<Layer<?,?>> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
-				for (Layer layer : allLayers) {
+				for (Layer<?,?> layer : allLayers) {
 					if (layer.getRelations().contains(this)) {
 						layers.add(layer);
 					}
@@ -238,39 +218,5 @@ public class RelationImpl
 		return (layers);
 	}
 
-	/**
-	 * {@inheritDoc}<br/>
-	 * Since the method {@link #getLayers()} retrieves all layers by accessing
-	 * the layers in graph, this class does not contain an own collection of
-	 * layers.
-	 **/
-	@Override
-	public void addLayer(L layer) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().addLayer(layer);
-		}
 
-		if (layer != null) {
-			layer.addRelation(this);
-		}
-	}
-
-	/**
-	 * {@inheritDoc} <br/>
-	 * Since the method {@link #getLayers()} retrieves all layers by accessing
-	 * the layers in graph, this class does not contain an own collection of
-	 * layers.
-	 **/
-	@Override
-	public void removeLayer(L layer) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().removeLayer(layer);
-		}
-		
-		if (layer != null && layer instanceof LayerImpl) {
-			((LayerImpl) layer).removeRelation(this);
-		}
-	}
 }

@@ -32,8 +32,7 @@ import java.util.Set;
 public interface Layer
 	<
 	N extends Node, 
-	R extends Relation<N, N, L>,
-	L
+	R extends Relation<?, ?>
 	> 
 	extends IdentifiableElement {
 

@@ -98,11 +98,11 @@
     <end type="TARGET" refId="8"/>  
   </dependency>  
   <dependency id="15">    
-    <end type="SOURCE" refId="5"/>    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
   <dependency id="16">    
-    <end type="SOURCE" refId="7"/>    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
   <dependency id="17">    

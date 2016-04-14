@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.corpus_tools.salt.exceptions.SaltInsertionException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
@@ -32,9 +31,8 @@ import org.corpus_tools.salt.graph.Relation;
 public class LayerImpl
 	<
 	N extends Node, 
-	R extends Relation<N, N, L>,
-	L
-	> extends IdentifiableElementImpl implements Layer<N, R, L> {
+	R extends Relation<?, ?>
+	> extends IdentifiableElementImpl implements Layer<N, R> {
 
 	private Set<N> nodes = null;
 	private Set<R> relations = null;
@@ -52,7 +50,7 @@ public class LayerImpl
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public LayerImpl(Layer<N, R, L> delegate) {
+	public LayerImpl(Layer<N, R> delegate) {
 		super(delegate);
 		nodes = new HashSet<N>();
 		relations = new HashSet<R>();
@@ -60,8 +58,8 @@ public class LayerImpl
 
 	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	@Override
-	protected Layer<N, R, L> getDelegate() {
-		return (Layer<N,R, L>) super.getDelegate();
+	protected Layer<N, R> getDelegate() {
+		return (Layer<N,R>) super.getDelegate();
 	}
 
 	/** container graph **/
@@ -87,11 +85,11 @@ public class LayerImpl
 		}
 		if (graph != null) {
 			if (graph instanceof GraphImpl<?,?,?>) {
-				((GraphImpl<?,?,?>) graph).basicAddLayer(this);
+				((GraphImpl<?,?,Layer<N,R>>) graph).basicAddLayer(this);
 			}
 		} else {
 			if (getGraph() instanceof GraphImpl<?,?,?>) {
-				((GraphImpl<?,?,?>) getGraph()).basicRemoveLayer(this);
+				((GraphImpl<?,?,Layer<N,R>>) getGraph()).basicRemoveLayer(this);
 			}
 		}
 		basicSetGraph(graph);
@@ -128,7 +126,7 @@ public class LayerImpl
 		}
 		// remove from old graph if it was changed
 		if (this.graph != graph && this.graph instanceof GraphImpl<?,?,?>) {
-			((GraphImpl<?,?,?>) this.graph).basicRemoveLayer(this);
+			((GraphImpl<?,?,Layer<N,R>>) this.graph).basicRemoveLayer(this);
 		}
 		this.graph = graph;
 	}
@@ -195,21 +193,17 @@ public class LayerImpl
 
 	/** {@inheritDoc Layer#addRelation(Relation)} **/
 	@Override
-	public void addRelation(R relationRaw) {
+	public void addRelation(R relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
-			getDelegate().addRelation(relationRaw);
+			getDelegate().addRelation(relation);
 			return;
 		}
 		
-		if (relationRaw == null) {
+		if (relation == null) {
 			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class, "A null value is not allowed. ");
 		}
-		R relation = cast(relationRaw);
-		if (relation == null) {
-		  throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is does not have expected type. ");
-		}
-
+		
 		if ((getGraph() != null) && (!getGraph().containsRelation(relation.getId()))) {
 			getGraph().addRelation(relation);
 		}
