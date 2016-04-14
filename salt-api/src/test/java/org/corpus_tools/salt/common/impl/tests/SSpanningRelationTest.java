@@ -24,7 +24,6 @@ import org.corpus_tools.salt.common.SSpanningRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
-import org.corpus_tools.salt.exceptions.SaltInsertionException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +34,7 @@ public class SSpanningRelationTest extends SRelationAbstractTest {
 		setFixture(SaltFactory.createSSpanningRelation());
 	}
 	
-	@Test(expected=SaltInsertionException.class)
+	@Test(expected=ClassCastException.class)
 	public void testTypeCheckTarget() {
 		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
 		SSpan spanNode = SaltFactory.createSSpan();
@@ -57,6 +56,30 @@ public class SSpanningRelationTest extends SRelationAbstractTest {
 		retrievedRel.setTarget(secondToken);
 		// this should fail
 		retrievedRel.setTarget(anyNode);
+	}
+	
+	@Test(expected=ClassCastException.class)
+	public void testTypeCheckSource() {
+		SDocumentGraph docGraph = SaltFactory.createSDocumentGraph();
+		SSpan spanNode = SaltFactory.createSSpan();
+		SToken tokNode = SaltFactory.createSToken();
+		docGraph.addNode(spanNode);
+		docGraph.addNode(tokNode);
+		
+		SSpanningRelation spanRel = SaltFactory.createSSpanningRelation();
+		spanRel.setTarget(tokNode);
+		spanRel.setSource(spanNode);
+		
+		docGraph.addRelation(spanRel);
+		
+		SNode anyNode = SaltFactory.createSNode();
+		
+		SRelation<SNode, SNode> retrievedRel =  docGraph.getRelation(spanRel.getId());
+		// this should work
+		SSpan secondSpan = SaltFactory.createSSpan();
+		retrievedRel.setSource(secondSpan);
+		// this should fail
+		retrievedRel.setSource(anyNode);
 	}
 
 }
