@@ -36,7 +36,7 @@ public interface Layer<N, R> extends IdentifiableElement {
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph<?,?,?> getGraph();
+	public Graph<N,R, ?> getGraph();
 
 	/**
 	 * Sets the container graph of this node. For double chaining between this
@@ -46,7 +46,7 @@ public interface Layer<N, R> extends IdentifiableElement {
 	 * @param graph
 	 *            graph which contains this layer
 	 */
-	public void setGraph(Graph graph);
+	public void setGraph(Graph<N,R,?> graph);
 
 	/**
 	 * Adds the passed node to this layer. The insertion order is preserved. If

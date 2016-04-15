@@ -672,15 +672,15 @@ public class GraphImpl
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addLayer(layer);
-			if (layer instanceof LayerImpl) {
-				((LayerImpl) layer).basicSetGraph_WithoutRemoving(this);
+			if (layer instanceof LayerImpl<?,?>) {
+				((LayerImpl<N,R>) layer).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}
 
 		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);
-			if (layer instanceof LayerImpl) {
+			if (layer instanceof LayerImpl<?,?>) {
 				((LayerImpl<N, R>) layer).basicSetGraph(this);
 			}
 			// check whether graph contains nodes in layer, if not, add them
@@ -775,7 +775,7 @@ public class GraphImpl
 	 * @param node
 	 *            the node to be removed
 	 */
-	protected void basicRemoveLayer(L layer) {
+	protected void basicRemoveLayer(Object layer) {
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);

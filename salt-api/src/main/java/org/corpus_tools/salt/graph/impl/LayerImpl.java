@@ -63,11 +63,11 @@ public class LayerImpl
 	}
 
 	/** container graph **/
-	protected Graph graph = null;
+	protected Graph<N,R, ?> graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph getGraph() {
+	public Graph<N,R,?> getGraph() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return (getDelegate().getGraph());
@@ -77,7 +77,7 @@ public class LayerImpl
 
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
-	public void setGraph(Graph graph) {
+	public void setGraph(Graph<N,R,?> graph) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().setGraph(graph);
@@ -119,14 +119,14 @@ public class LayerImpl
 	 * @param graph
 	 *            graph which contains this layer
 	 */
-	protected void basicSetGraph(Graph graph) {
+	protected void basicSetGraph(Graph<N,R,?> graph) {
 		if (getDelegate() != null && getDelegate() instanceof LayerImpl) {
-			((LayerImpl) getDelegate()).basicSetGraph(graph);
+			((LayerImpl<N,R>) getDelegate()).basicSetGraph(graph);
 			return;
 		}
 		// remove from old graph if it was changed
-		if (this.graph != graph && this.graph instanceof GraphImpl) {
-			((GraphImpl) this.graph).basicRemoveLayer(this);
+		if (this.graph != graph && this.graph instanceof GraphImpl<?,?,?>) {
+			((GraphImpl<?,?,?>) this.graph).basicRemoveLayer(this);
 		}
 		this.graph = graph;
 	}
@@ -137,7 +137,7 @@ public class LayerImpl
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+	protected void basicSetGraph_WithoutRemoving(Graph<N,R,?> graph) {
 		this.graph = graph;
 	}
 
