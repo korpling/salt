@@ -210,7 +210,7 @@ public class GraphMLWriter {
 		w.writeEndElement();
 	}
 
-	private static void writeEdge(XMLStreamWriter w, Relation r, IDManager ids, Set<String> existingKeys) throws XMLStreamException {
+	private static void writeEdge(XMLStreamWriter w, Relation<? extends IdentifiableElement, ? extends IdentifiableElement> r, IDManager ids, Set<String> existingKeys) throws XMLStreamException {
 		w.writeStartElement(NS, "edge");
 		w.writeAttribute("id", ids.getID(r));
 		w.writeAttribute("source", ids.getID(r.getSource()));
