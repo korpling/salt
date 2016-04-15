@@ -130,6 +130,7 @@ public enum SALT_TYPE {
 	 *            to convert
 	 * @return {@link SALT_TYPE} of passed class
 	 */
+	@SafeVarargs
 	public static Set<SALT_TYPE> class2SaltType(Class<? extends Object>... classes) {
 		HashSet<SALT_TYPE> retVal = new HashSet<SALT_TYPE>();
 

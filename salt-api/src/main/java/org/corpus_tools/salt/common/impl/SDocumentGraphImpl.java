@@ -284,16 +284,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SRelation> getRelations(SALT_TYPE type) {
-		List<SRelation> relations = null;
+	public List<? extends SRelation<?, ?>> getRelations(SALT_TYPE type) {
+		List<? extends SRelation<?,?>> relations = null;
 		relations = getRelations(type.getJavaType());
 		return (relations);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SRelation> getRelations(Class<?> clazz) {
-		List<SRelation> relations = null;
+	public List<? extends SRelation<?, ?>> getRelations(Class<?> clazz) {
+		List<? extends SRelation<?, ?>> relations = null;
 		relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, clazz);
 		return (relations);
 	}
@@ -701,13 +701,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes) {
+	public List<? extends DataSourceSequence<?>> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes) {
 		return (DataSourceAccessor.getOverlappedDataSourceSequence(this, node, relationTypes));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes) {
+	public List<? extends DataSourceSequence<?>> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes) {
 		return (DataSourceAccessor.getOverlappedDataSourceSequence(this, nodes, relationTypes));
 	}
 

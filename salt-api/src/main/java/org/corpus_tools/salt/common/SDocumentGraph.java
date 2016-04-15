@@ -127,7 +127,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            type of relations
 	 * @return a list of relations matching passed type
 	 */
-	public List<SRelation> getRelations(SALT_TYPE type);
+	public List<? extends SRelation<?, ?>> getRelations(SALT_TYPE type);
 
 	/**
 	 * Returns all relations of the passed class.
@@ -136,7 +136,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            class of relations
 	 * @return a list of relations matching passed class
 	 */
-	public List<SRelation> getRelations(Class<?> clazz);
+	public List<? extends SRelation<?, ?>> getRelations(Class<?> clazz);
 
 	/**
 	 * Returns all nodes of the passed type.
@@ -367,7 +367,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
+	public List<? extends DataSourceSequence<?>> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
@@ -382,7 +382,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
+	public List<? extends DataSourceSequence<?>> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is
