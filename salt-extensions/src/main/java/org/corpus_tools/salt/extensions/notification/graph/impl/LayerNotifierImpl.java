@@ -113,7 +113,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 	}
 
 	@Override
-	public void addRelation(Relation<? extends N, ? extends N> relation) {
+	public void addRelation(R relation) {
 		super.addRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LAYER_RELATIONS, null, relation, this);
@@ -121,7 +121,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 	}
 
 	@Override
-	public void removeRelation(Relation<? extends N, ? extends N> relation) {
+	public void removeRelation(R relation) {
 		super.removeRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LAYER_RELATIONS, relation, null, this);

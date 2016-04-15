@@ -192,7 +192,7 @@ public class LayerImpl
 
 	/** {@inheritDoc Layer#addRelation(Relation)} **/
 	@Override
-	public void addRelation(Relation<? extends N, ? extends N> relation) {
+	public void addRelation(R relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addRelation(relation);
@@ -207,7 +207,7 @@ public class LayerImpl
 
 	/** {@inheritDoc Layer#removeRelation(Relation)} **/
 	@Override
-	public void removeRelation(Relation<? extends N, ? extends N> relation) {
+	public void removeRelation(R relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().removeRelation(relation);
