@@ -34,11 +34,8 @@ public class GraphFactory {
 	 * @return new {@link Graph} object
 	 */
 	public static
-		<
-		N extends Node,
-		R extends Relation<?,?>,
-		L extends Layer<N, R>
-		> Graph<N, R, L> createGraph() {
+		<N extends Node, R extends Relation<? extends Node, ? extends Node>, L extends Layer<N, R>> 
+			Graph<N, R, L> createGraph() {
 		return (factory.createGraph());
 	}
 

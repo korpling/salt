@@ -39,7 +39,7 @@ import org.corpus_tools.salt.util.SaltUtil;
 public class GraphImpl
 	<
 	N extends Node, 
-	R extends Relation<?, ?>, 
+	R extends Relation<? extends Node, ? extends Node>, 
 	L extends Layer<N, R>
 	> 
 	extends IdentifiableElementImpl implements Graph<N, R, L> {

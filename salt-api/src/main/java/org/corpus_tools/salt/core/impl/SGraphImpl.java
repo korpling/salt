@@ -33,20 +33,21 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
-public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
+public class SGraphImpl implements SGraph {
+	
 	/** Initializes an object of type {@link SGraphImpl}. **/
 	public SGraphImpl() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -57,28 +58,16 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SGraphImpl(Graph delegate) {
-		super(delegate);
+	public SGraphImpl(Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> delegate) {
+		if(delegate == null) {
+			this.delegate = GraphFactory.createGraph();
+		} else {
+			this.delegate = delegate;
+		}
 	}
 	
-	@Override
-	protected SRelation<SNode, SNode> cast(Relation<? extends Node, ? extends Node> relation) {
-		if (relation instanceof SRelation<?, ?>) {
-			@SuppressWarnings("unchecked")
-			SRelation<SNode, SNode> retVal = (SRelation<SNode, SNode>) relation;
-			return retVal;
-		}
-		return null;
-	}
+	private final Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> delegate;
 	
-	@Override
-	protected SLayer cast(Layer<? extends Node, ? extends Relation<?, ?>> layer) {
-		if (layer instanceof SLayer) {
-			SLayer retVal = (SLayer) layer;
-			return retVal;
-		}
-		return null;
-	}
 
 	/** {@inheritDoc} **/
 	@Override

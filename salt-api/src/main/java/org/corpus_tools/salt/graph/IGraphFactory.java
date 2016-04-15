@@ -30,12 +30,9 @@ public interface IGraphFactory {
 	 * 
 	 * @return new {@link Graph} object
 	 */
-	public abstract
-	<
-	N extends Node,
-	R extends Relation<?,?>,
-	L extends Layer<N, R>
-	> Graph<N,R,L> createGraph();
+	public abstract 
+	<N extends Node, R extends Relation<? extends Node, ? extends Node>, L extends Layer<N, R>>  
+	Graph<N,R,L> createGraph();
 
 	/**
 	 * Creates a new {@link Node} object of type {@link NodeImpl}.

@@ -29,11 +29,7 @@ import java.util.Set;
  * @author florian
  *
  */
-public interface Layer
-	<
-	N extends Node, 
-	R extends Relation<?, ?>
-	> 
+public interface Layer <N,R> 
 	extends IdentifiableElement {
 
 	/**

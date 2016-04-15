@@ -20,12 +20,9 @@ package org.corpus_tools.salt.core;
 import java.util.List;
 import java.util.Set;
 
-import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.index.IndexMgr;
-import org.corpus_tools.salt.util.SaltUtil;
 
 public interface SGraph extends SAnnotationContainer, SNamedElement, SPathElement {
 
@@ -115,7 +112,7 @@ public interface SGraph extends SAnnotationContainer, SNamedElement, SPathElemen
 	 *            Name of the relation to search for
 	 * @return A complete list of all matching relations. Is never null.
 	 */
-	public List<SRelation> getRelationsByName(String relationName);
+	public List<SRelation<?,?>> getRelationsByName(String relationName);
 
 	/**
 	 * Searches for a layer or a set of layers having the given layer name.
@@ -234,4 +231,80 @@ public interface SGraph extends SAnnotationContainer, SNamedElement, SPathElemen
 	 *            the layer to be removed
 	 */
 	public void removeLayer(SLayer layer);
+	
+	/**
+	 * Returns a list of all relations contained in this graph.
+	 * 
+	 * @return a list of all contained relations.
+	 */
+	public List<SRelation<?, ?>> getRelations();
+
+	/**
+	 * Returns an relation corresponding to the passed id, if such an relation
+	 * is contained in the graph.
+	 * 
+	 * @param relationId
+	 *            id of the relation to be searched for
+	 */
+	public SRelation<?, ?> getRelation(String relationId);
+
+	/**
+	 * Returns all relations,which connects the two passed nodes.
+	 * 
+	 * @param sourceNodeId
+	 *            the id of the source node
+	 * @param targetNodeId
+	 *            the id of the target node
+	 * @return returns all nodes between source node and target node
+	 */
+	public List<SRelation<?, ?>> getRelations(String sourceNodeId, String targetNodeId);
+
+	/**
+	 * Returns all relations, which have the node corresponding to the passed id
+	 * as their target node.
+	 * 
+	 * @param nodeId
+	 *            id corresponding to the node, for which all incoming relations
+	 *            should be searched
+	 * @return a list of all incoming relations
+	 */
+	public List<SRelation<?, ?>> getInRelations(String nodeId);
+
+	/**
+	 * Returns all relations, which have the node corresponding to the passed id
+	 * as their source node.
+	 * 
+	 * @param nodeId
+	 *            id corresponding to the node, for which all outgoing relations
+	 *            should be searched
+	 * @return a list of all outgoing relations
+	 */
+	public List<SRelation<?, ?>> getOutRelations(String nodeId);
+
+	/**
+	 * Adds the passed relation to this graph and updates indexes. If relation
+	 * is null or relation is already contained nothing is inserted. The passed
+	 * relation and this graph will be double chained, which means the method
+	 * {@link Relation#getGraph()} will return this graph.
+	 * 
+	 * @param relation
+	 *            relation to be inserted
+	 */
+	public void addRelation(SRelation<?, ?> relation);
+
+	/**
+	 * Removes the passed relation from this graph. If a relation is removed, it
+	 * will be deleted from all indexes. If the passed relation is null, nothing
+	 * is removed.
+	 * 
+	 * @param relation
+	 *            relation to be removed
+	 */
+	public void removeRelation(SRelation<?, ?> relation);
+
+	/**
+	 * Removes all relations from this graph and cleans all indexes.
+	 */
+	public void removeRelations();
+
 }

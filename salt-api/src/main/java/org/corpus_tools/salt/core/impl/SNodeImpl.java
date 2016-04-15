@@ -18,6 +18,7 @@
 package org.corpus_tools.salt.core.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -34,6 +35,10 @@ import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.GraphFactory;
+import org.corpus_tools.salt.graph.Identifier;
+import org.corpus_tools.salt.graph.Label;
+import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.impl.NodeImpl;
 import org.corpus_tools.salt.util.SaltUtil;
@@ -41,9 +46,11 @@ import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
-public class SNodeImpl extends NodeImpl implements SNode {
+public class SNodeImpl implements SNode {
+	
 	/** Initializes an object of type {@link SNodeImpl}. **/
 	public SNodeImpl() {
+		this(null);
 	}
 
 	/**
@@ -55,22 +62,85 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 *            delegate object of the same type.
 	 */
 	public SNodeImpl(Node delegate) {
-		super(delegate);
+		if(delegate == null) {
+			this.delegate = GraphFactory.createNode();
+		} else {
+			this.delegate = delegate;
+		}
 	}
+
+	private final Node delegate;
+	// =======================================> Graph delegates
+	
+	/** {@inheritDoc} **/
+	@Override
+	public SGraph getGraph() {
+		Graph<?,?,?> superGraph = delegate.getGraph();
+		if (superGraph == null) {
+			return null;
+		}
+
+		if (superGraph instanceof SGraph) {
+			return (SGraph) superGraph;
+		}
+		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
+	}
+
+	public void addLabel(Label label) {
+		delegate.addLabel(label);
+	}
+
+	public Label getLabel(String namespace, String name) {
+		return delegate.getLabel(namespace, name);
+	}
+
+	public Label getLabel(String qName) {
+		return delegate.getLabel(qName);
+	}
+
+	public void addLayer(SLayer layer) {
+		delegate.addLayer(layer);
+	}
+
+	public void removeLayer(Layer layer) {
+		delegate.removeLayer(layer);
+	}
+
+	public void removeLabel(String namespace, String name) {
+		delegate.removeLabel(namespace, name);
+	}
+
+	public void removeAll() {
+		delegate.removeAll();
+	}
+
+	public Set<Label> getLabelsByNamespace(String namespace) {
+		return delegate.getLabelsByNamespace(namespace);
+	}
+
+	public boolean containsLabel(String qName) {
+		return delegate.containsLabel(qName);
+	}
+
+	public Integer sizeLabels() {
+		return delegate.sizeLabels();
+	}
+		
+	// =======================================< Graph delegates
 
 	/**
 	 * {@inheritDoc SNode#getOutgoingSRelations()}
 	 */
 	@Override
-	public List<SRelation> getOutRelations() {
+	public List<SRelation<?,?>> getOutRelations() {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation<SNode, SNode>> outRelations = getGraph().getOutRelations(getId());
+		List<SRelation<?, ?>> outRelations = getGraph().getOutRelations(getId());
 		if (outRelations != null) {
-			List<SRelation> sOutRelList = new ArrayList<>();
-			for (SRelation rel : outRelations) {
-				sOutRelList.add((SRelation) rel);
+			List<SRelation<?,?>> sOutRelList = new ArrayList<>();
+			for (SRelation<?,?> rel : outRelations) {
+				sOutRelList.add(rel);
 			}
 			return sOutRelList;
 		}
@@ -81,15 +151,15 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * {@inheritDoc SNode#getIncomingSRelations()}
 	 */
 	@Override
-	public List<SRelation> getInRelations() {
+	public List<SRelation<?,?>> getInRelations() {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation<SNode, SNode>> inRelations = getGraph().getInRelations(getId());
+		List<SRelation<?, ?>> inRelations = getGraph().getInRelations(getId());
 		if (inRelations != null) {
-			List<SRelation> sInRelList = new ArrayList<>();
-			for (SRelation rel : inRelations) {
-				sInRelList.add((SRelation) rel);
+			List<SRelation<?,?>> sInRelList = new ArrayList<>();
+			for (SRelation<?,?> rel : inRelations) {
+				sInRelList.add((SRelation<?,?>) rel);
 			}
 			return sInRelList;
 		}
@@ -111,8 +181,38 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		}
 		return (Collections.unmodifiableSet(layers));
 	}
+	
+	// =======================================> IdentifiableElement
+	@Override
+	public Collection<Label> getLabels() {
+		return delegate.getLabels();
+	}
+	// =======================================< IdentifiableElement
+	
+	// =======================================> IdentifiableElement
+	@Override
+	public String getId() {
+		return delegate.getId();
+	}
+	
+	@Override
+	public void setId(String id) {
+		delegate.setId(id);
+	}
+	
+	@Override
+	public Identifier getIdentifier() {
+		return delegate.getIdentifier();
+	}
+	
+	@Override
+	public void setIdentifier(Identifier identifier) {
+		delegate.setIdentifier(identifier);
+	}
+	// =======================================> IdentifiableElement
+	
 
-	// =======================================> SAnnotation
+	// =======================================> SAnnotationContainer
 	/** {@inheritDoc} **/
 	@Override
 	public SAnnotation createAnnotation(String namespace, String name, Object value) {
@@ -155,7 +255,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		return (SAnnotationContainerHelper.iterator_SAnnotation(this));
 	}
 
-	// =======================================< SAnnotation
+	// =======================================< SAnnotationContainer
 
 	// =======================================> SMetaAnnotation
 	/** {@inheritDoc} **/
@@ -284,7 +384,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (SaltUtil.FEAT_NAME_QNAME.equals(qName)) {
 			name = null;
 		}
-		super.removeLabel(qName);
+		delegate.removeLabel(qName);
 	}
 
 	/** The feature object containing the name of the node **/
@@ -324,18 +424,5 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	}
 
 	// =======================================< SPathElement
-	/** {@inheritDoc} **/
-	@Override
-	public SGraph getGraph() {
-		Graph superGraph = super.getGraph();
-		if (superGraph == null) {
-			return null;
-		}
-
-		if (superGraph instanceof SGraph) {
-			return (SGraph) superGraph;
-		}
-		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
-	}
 
 }

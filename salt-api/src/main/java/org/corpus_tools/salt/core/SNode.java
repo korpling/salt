@@ -21,8 +21,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.IdentifiableElement;
 
-public interface SNode extends SAnnotationContainer, SNamedElement, SPathElement {
+public interface SNode extends SAnnotationContainer, SNamedElement, SPathElement, IdentifiableElement {
 	/**
 	 * When this node belongs to a {@link SGraph}, a list of outgoing relations
 	 * of this node are returned.
@@ -55,17 +56,6 @@ public interface SNode extends SAnnotationContainer, SNamedElement, SPathElement
 	 * @return graph object which contains this node.
 	 */
 	public SGraph getGraph();
-
-	/**
-	 * Sets the container graph of this node. The passed graph and this node
-	 * will be double chained, which means the method {@link Graph#getNodes()}
-	 * will return a list containing this node.
-	 * 
-	 * @param graph
-	 *            graph which contains this node
-	 */
-	public void setGraph(SGraph graph);
-
 
 	/**
 	 * Adds this node to the passed layer. If this node is not already contained
