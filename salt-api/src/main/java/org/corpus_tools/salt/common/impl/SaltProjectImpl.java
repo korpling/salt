@@ -30,6 +30,7 @@ import org.corpus_tools.salt.exceptions.SaltResourceException;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
+@SuppressWarnings("serial")
 public class SaltProjectImpl implements SaltProject {
 
 	public SaltProjectImpl() {

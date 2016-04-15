@@ -22,6 +22,7 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.STypeAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
+@SuppressWarnings("serial")
 public class STypeAnnotationImpl extends SAnnotationImpl implements STypeAnnotation {
 	/** Initializes an object of type {@link STypeAnnotationImpl}. **/
 	public STypeAnnotationImpl() {

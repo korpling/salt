@@ -22,6 +22,7 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.SWordAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
+@SuppressWarnings("serial")
 public class SWordAnnotationImpl extends SAnnotationImpl implements SWordAnnotation {
 	/** Initializes an object of type {@link SWordAnnotationImpl}. **/
 	public SWordAnnotationImpl() {

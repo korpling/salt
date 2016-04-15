@@ -25,6 +25,7 @@ import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 
+@SuppressWarnings("serial")
 public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedialDS, Double> implements SMedialRelation {
 	/** Initializes an object of type {@link SMedialRelationImpl}. **/
 	public SMedialRelationImpl() {
