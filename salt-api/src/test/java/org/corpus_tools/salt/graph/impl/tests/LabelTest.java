@@ -257,6 +257,7 @@ public class LabelTest {
 	 * removed correctly from the old container and whether the container
 	 * references the new one.
 	 */
+	@SuppressWarnings("serial")
 	@Test
 	public void testMoveLabel() {
 		getFixture().setName("myLabel");
