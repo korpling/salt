@@ -31,6 +31,7 @@ import java.util.Set;
  *
  */
 public interface Node extends IdentifiableElement {
+	
 	/**
 	 * Returns the container graph of this node.
 	 * 
