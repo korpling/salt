@@ -1985,14 +1985,15 @@ public class SDocumentGraphTest {
 		}
 
 		FileInputStream fIn = new FileInputStream(tmpFile);
-		ObjectInputStream oIn = new ObjectInputStream(fIn);
-
-		SDocumentGraph restored = (SDocumentGraph) oIn.readObject();
-
-		// compare
-		Diff diffCreator = new Diff(docGraph, restored);
-		Set<Difference> diffs = diffCreator.findDiffs();
-		Assert.assertEquals("Serialization failed. Diff: " + Joiner.on("\n").join(diffs), 0, diffs.size());
+		
+		try(ObjectInputStream oIn = new ObjectInputStream(fIn)) {
+			SDocumentGraph restored = (SDocumentGraph) oIn.readObject();
+	
+			// compare
+			Diff diffCreator = new Diff(docGraph, restored);
+			Set<Difference> diffs = diffCreator.findDiffs();
+			Assert.assertEquals("Serialization failed. Diff: " + Joiner.on("\n").join(diffs), 0, diffs.size());
+		}
 	}
 
 	/**
