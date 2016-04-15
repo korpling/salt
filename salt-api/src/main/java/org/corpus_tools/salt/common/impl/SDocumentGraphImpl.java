@@ -106,7 +106,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	// ============================ start: handling relations
 
 	@Override
-	public void addRelation(Relation<? extends SNode, ? extends SNode> relation) {
+	public void addRelation(SRelation<? extends SNode, ? extends SNode> relation) {
 		if (relation != null) {
 			if (!(relation instanceof SRelation)) {
 				throw new SaltInsertionException(this, relation, "Cannot insert an relation, which is not a SRelation object.");

@@ -997,13 +997,13 @@ public class Diff {
 
 			// iterate over all relations between other source and other target
 			if (otherSource != null && otherTarget != null) {
-				Iterator<SRelation<SNode, SNode>> inBetweenIterator = other.getInRelations(otherTarget.getId()).iterator();
+				Iterator<SRelation<? extends SNode, ? extends SNode>> inBetweenIterator = other.getInRelations(otherTarget.getId()).iterator();
 				boolean isRelIso = true;
 				while (inBetweenIterator.hasNext()) {
 					// determines whether the current pair of template relation
 					// and other relation are isomorph
 					isRelIso = true;
-					SRelation<SNode, SNode> otherRel = inBetweenIterator.next();
+					SRelation<? extends SNode, ? extends SNode> otherRel = inBetweenIterator.next();
 
 					// check whether both relations are isomorph
 					if (otherRel.getSource().equals(otherSource) && tempRel.getClass().equals(otherRel.getClass())) {

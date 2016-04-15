@@ -507,7 +507,7 @@ public class SaltUtil {
 	public static void moveCorpusGraph(SCorpusGraph source, SCorpusGraph target) {
 		// copy all sRelations and source and target SNode as well from loaded
 		// graph into existing one
-		for (SRelation<SNode, SNode> sRelation : new LinkedList<>(source.getRelations())) {
+		for (SRelation<? extends SNode, ? extends SNode> sRelation : new LinkedList<>(source.getRelations())) {
 			if (target.getNode(sRelation.getSource().getId()) == null)
 				target.addNode(sRelation.getSource());
 			if (target.getNode(sRelation.getTarget().getId()) == null)

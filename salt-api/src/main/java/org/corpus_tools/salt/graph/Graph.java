@@ -120,7 +120,7 @@ public interface Graph<N, R, L> extends IdentifiableElement {
 	 * @param relation
 	 *            relation to be inserted
 	 */
-	public void addRelation(Relation<? extends N, ? extends N> relation);
+	public void addRelation(R relation);
 
 	/**
 	 * Removes the passed relation from this graph. If a relation is removed, it
@@ -130,7 +130,7 @@ public interface Graph<N, R, L> extends IdentifiableElement {
 	 * @param relation
 	 *            relation to be removed
 	 */
-	public void removeRelation(Relation<? extends N, ? extends N> relation);
+	public void removeRelation(R relation);
 
 	/**
 	 * Removes all relations from this graph and cleans all indexes.

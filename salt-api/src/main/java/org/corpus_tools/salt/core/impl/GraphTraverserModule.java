@@ -262,8 +262,8 @@ public class GraphTraverserModule {
 		private static class NodeEntry {
 			private final SNode node;
 			private int order;
-			private Iterator<SRelation<SNode, SNode>> iterator;
-			private SRelation<SNode, SNode> rel;
+			private Iterator<SRelation<? extends SNode, ? extends SNode>> iterator;
+			private SRelation<? extends SNode, ? extends SNode> rel;
 
 			public NodeEntry(SNode node, int order) {
 				this.node = node;
@@ -290,7 +290,7 @@ public class GraphTraverserModule {
 
 			if (entry.order == 0) {
 				// set the iterator
-				List<SRelation<SNode, SNode>> outRels = getGraph().getOutRelations(entry.node.getId());
+				List<SRelation<?, ?>> outRels = getGraph().getOutRelations(entry.node.getId());
 				if ((outRels != null) && (!outRels.isEmpty())) {
 					entry.iterator = outRels.iterator();
 				}
@@ -312,7 +312,7 @@ public class GraphTraverserModule {
 			// even if something went wrong with the iterator we should be still
 			// able to execute the code (just with less performance)
 			if (entry.iterator == null) {
-				List<SRelation<SNode, SNode>> outRels = getGraph().getOutRelations(entry.node.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> outRels = getGraph().getOutRelations(entry.node.getId());
 				if ((outRels != null) && (!outRels.isEmpty())) {
 					if (entry.order < outRels.size()) {
 						entry.rel = outRels.get(entry.order);
@@ -489,11 +489,11 @@ public class GraphTraverserModule {
 			}
 			final boolean isTopDown = traverseType != GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
 			SNode fromNode = null;
-			SRelation<SNode, SNode> fromRel = null;
+			SRelation<? extends SNode, ? extends SNode> fromRel = null;
 			// TODO replace EList with HashEList
 			List<SNode> queuedNodes = new ArrayList<>();
 			List<SNode> queueReachedFrom = new ArrayList<>();
-			List<SRelation<SNode, SNode>> queueReachedFromRel = new ArrayList<>();
+			List<SRelation<? extends SNode, ? extends SNode>> queueReachedFromRel = new ArrayList<>();
 			List<Integer> queueReachedOrder = new ArrayList<>();
 
 			queuedNodes.addAll(startNodes);
@@ -509,9 +509,9 @@ public class GraphTraverserModule {
 				fromRel = queueReachedFromRel.remove(0);
 				Integer order = queueReachedOrder.remove(0);
 
-				List<SRelation<SNode, SNode>> edgesIn = getGraph().getInRelations(tNode.getId());
-				List<SRelation<SNode, SNode>> edgesOut = getGraph().getOutRelations(tNode.getId());
-				List<SRelation<SNode, SNode>> edges = null;
+				List<SRelation<? extends SNode, ? extends SNode>> edgesIn = getGraph().getInRelations(tNode.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> edgesOut = getGraph().getOutRelations(tNode.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> edges = null;
 				currentNodePath.add(tNode);
 				traverseHandler.nodeReached(traverseType, traverseId, tNode, fromRel, fromNode, order);
 				if (isTopDown) {
@@ -525,7 +525,7 @@ public class GraphTraverserModule {
 				if (edges != null) {
 					// in case of node has childs
 					int orderCount = 0;
-					for (SRelation<SNode, SNode> e : edges) {
+					for (SRelation<? extends SNode, ? extends SNode> e : edges) {
 						SNode n = null;
 						n = (isTopDown) ? e.getTarget() : e.getSource();
 
@@ -562,7 +562,7 @@ public class GraphTraverserModule {
 		 *            number of current edge in list of all outgoing edges of
 		 *            the parent node
 		 */
-		private void topDownDepthFirstRec(SRelation<SNode, SNode> rel, long order) {
+		private void topDownDepthFirstRec(SRelation<? extends SNode, ? extends SNode> rel, long order) {
 			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
 				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 			}
@@ -575,11 +575,11 @@ public class GraphTraverserModule {
 			}
 			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent, order);
 			// walk through all childs of this node
-			List<SRelation<SNode, SNode>> childEdges = getGraph().getOutRelations(currNode.getId());
+			List<SRelation<? extends SNode, ? extends SNode>> childEdges = getGraph().getOutRelations(currNode.getId());
 			if (childEdges != null) {
 				// in case of node has childs
 				int i = 0;
-				for (SRelation<SNode, SNode> childRel : childEdges) {
+				for (SRelation<? extends SNode, ? extends SNode> childRel : childEdges) {
 					SNode childNode = childRel.getTarget();
 
 					if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, childRel, childNode, order)) {
@@ -621,7 +621,7 @@ public class GraphTraverserModule {
 		 *            number of current edge in list of all outgoing edges of
 		 *            the child node
 		 */
-		private void bottomUpDepthFirstRec(SRelation<SNode, SNode> edge, long order) {
+		private void bottomUpDepthFirstRec(SRelation<? extends SNode, ? extends SNode> edge, long order) {
 			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
 				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 			}
@@ -636,11 +636,11 @@ public class GraphTraverserModule {
 			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, currNode, edge, child, order);
 
 			// walk through all childs of this node
-			List<SRelation<SNode, SNode>> parentEdges = getGraph().getInRelations(currNode.getId());
+			List<SRelation<? extends SNode, ? extends SNode>> parentEdges = getGraph().getInRelations(currNode.getId());
 			if (parentEdges != null) {
 				// in case of node has parents
 				int i = 0;
-				for (SRelation<SNode, SNode> parentEdge : parentEdges) {
+				for (SRelation<? extends SNode, ? extends SNode> parentEdge : parentEdges) {
 					SNode parentNode = parentEdge.getSource();
 					if ((isCycleSafe) && (currentNodePath.contains(parentNode)))
 						throw new SaltInvalidModelException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + parentNode + "' while current path was '" + currentNodePath + "'.");

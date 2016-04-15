@@ -317,8 +317,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	public SCorpus getCorpus(SDocument document) {
 		SCorpus retVal = null;
 		if (document != null) {
-			List<SRelation<SNode, SNode>> inRels = getInRelations(document.getId());
-			for (SRelation inEdge : Collections.synchronizedCollection(inRels)) {
+			List<SRelation<? extends SNode, ? extends SNode>> inRels = getInRelations(document.getId());
+			for (SRelation<? extends SNode, ? extends SNode> inEdge : Collections.synchronizedCollection(inRels)) {
 				if (inEdge instanceof SCorpusDocumentRelation) {
 
 					retVal = ((SCorpusDocumentRelation) inEdge).getSource();

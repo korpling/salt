@@ -22,7 +22,9 @@ import java.util.List;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
-public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, SAnnotationContainer, SNamedElement, SPathElement {
+public interface SGraph extends 
+	Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer>, 
+	SAnnotationContainer, SNamedElement, SPathElement {
 
 	/**
 	 * The {@link GRAPH_TRAVERSE_TYPE} determines the the traversal order. In

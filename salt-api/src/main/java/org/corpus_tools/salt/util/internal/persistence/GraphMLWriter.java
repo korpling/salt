@@ -228,7 +228,7 @@ public class GraphMLWriter {
 
 		}
 		List<SNode> nodes = g.getNodes();
-		List<SRelation<SNode, SNode>> relations = g.getRelations();
+		List<SRelation<? extends SNode, ? extends SNode>> relations = g.getRelations();
 		// graphs without nodes are not allowed
 		if (nodes != null && !nodes.isEmpty()) {
 			w.writeStartElement(NS, "graph");

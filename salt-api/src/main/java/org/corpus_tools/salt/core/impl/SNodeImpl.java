@@ -66,7 +66,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation<SNode, SNode>> outRelations = getGraph().getOutRelations(getId());
+		List<SRelation<? extends SNode, ? extends SNode>> outRelations = getGraph().getOutRelations(getId());
 		if (outRelations != null) {
 			List<SRelation> sOutRelList = new ArrayList<>();
 			for (SRelation rel : outRelations) {
@@ -85,7 +85,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation<SNode, SNode>> inRelations = getGraph().getInRelations(getId());
+		List<SRelation<? extends SNode, ? extends SNode>> inRelations = getGraph().getInRelations(getId());
 		if (inRelations != null) {
 			List<SRelation> sInRelList = new ArrayList<>();
 			for (SRelation rel : inRelations) {

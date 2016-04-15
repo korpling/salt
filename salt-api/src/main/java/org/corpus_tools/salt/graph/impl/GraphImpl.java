@@ -36,7 +36,14 @@ import org.corpus_tools.salt.index.IndexMgrImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends IdentifiableElementImpl implements Graph<N, R, L> {
+public class GraphImpl
+	<
+	N extends Node, 
+	R extends Relation<? extends N, ? extends N>, 
+	L extends Layer<N, R>
+	> 
+	extends IdentifiableElementImpl implements Graph<N, R, L> {
+	
 	/**
 	 * Initializes an object of type {@link Graph}. If {@link #delegate} is not
 	 * null, all functions of this method are delegated to the delegate object.
@@ -390,7 +397,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 
 	/** {@inheritDoc Graph#addRelation(Relation)} **/
 	@Override
-	public void addRelation(Relation<? extends N, ? extends N> relation) {
+	public void addRelation(R relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addRelation(relation);
@@ -547,7 +554,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 
 	/** {@inheritDoc} **/
 	@Override
-	public void removeRelation(Relation<? extends N, ? extends N> rel) {
+	public void removeRelation(R rel) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().removeRelation(rel);

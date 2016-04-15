@@ -39,7 +39,8 @@ import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
-public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer> implements SGraph {
+public class SGraphImpl extends 
+	GraphImpl<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> implements SGraph {
 	/** Initializes an object of type {@link SGraphImpl}. **/
 	public SGraphImpl() {
 		super();
@@ -133,7 +134,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 		} else {
 			for (SNode node : Collections.synchronizedCollection(this.getNodes())) {
 				// checking if node has incoming edges
-				List<SRelation<SNode, SNode>> inEdges = getInRelations(node.getId());
+				List<SRelation<?, ?>> inEdges = getInRelations(node.getId());
 				if ((inEdges == null) || (inEdges.size() == 0)) {
 					retList.add(node);
 				}
@@ -155,7 +156,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 		} else {
 			for (SNode node : Collections.synchronizedCollection(this.getNodes())) {
 				// checking if node has outgoing edges
-				List<SRelation<SNode, SNode>> outEdges = getOutRelations(node.getId());
+				List<SRelation<?, ?>> outEdges = getOutRelations(node.getId());
 				if ((outEdges == null) || (outEdges.size() == 0)) {
 					retList.add(node);
 				}

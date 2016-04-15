@@ -244,7 +244,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		getFixture().addNode(superCorpus);
 		assertNotNull(getFixture().addSubCorpus(superCorpus, subCorpus));
 
-		List<SRelation<SNode, SNode>> relations = getFixture().getOutRelations(superCorpus.getId());
+		List<SRelation<? extends SNode, ? extends SNode>> relations = getFixture().getOutRelations(superCorpus.getId());
 		assertNotNull(relations);
 		assertTrue(relations.size() == 1);
 		assertEquals(subCorpus, relations.get(0).getTarget());
@@ -312,7 +312,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		getFixture().addNode(corpus);
 		assertNotNull(getFixture().addDocument(corpus, document));
 
-		List<SRelation<SNode, SNode>> relations = getFixture().getOutRelations(corpus.getId());
+		List<SRelation<? extends SNode, ? extends SNode>> relations = getFixture().getOutRelations(corpus.getId());
 		assertNotNull(relations);
 		assertTrue(relations.size() == 1);
 		assertEquals(document, relations.get(0).getTarget());
@@ -534,7 +534,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order) {
 
 		this.traversedNodes.add(fromNode);
 		this.traversedNodes.add(currNode);

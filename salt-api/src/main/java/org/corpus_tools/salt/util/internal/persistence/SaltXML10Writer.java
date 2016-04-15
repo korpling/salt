@@ -294,9 +294,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 
 			// write all relations
 			if (graph.getRelations() != null) {
-				Iterator<SRelation<SNode, SNode>> relIt = graph.getRelations().iterator();
+				Iterator<SRelation<? extends SNode, ? extends SNode>> relIt = graph.getRelations().iterator();
 				while (relIt.hasNext()) {
-					SRelation<SNode, SNode> rel = relIt.next();
+					SRelation<? extends SNode, ? extends SNode> rel = relIt.next();
 					writeRelation(xml, rel, nodePositions, null);
 				}
 			}
@@ -406,14 +406,14 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 
 			// stores the position of a single relation in the list of relations
 			// to refer them later
-			Map<SRelation<SNode, SNode>, Integer> relPositions = new HashMap<>();
+			Map<SRelation<? extends SNode, ? extends SNode>, Integer> relPositions = new HashMap<>();
 
 			{
 				// write all relations
-				Iterator<SRelation<SNode, SNode>> relIt = graph.getRelations().iterator();
+				Iterator<SRelation<? extends SNode, ? extends SNode>> relIt = graph.getRelations().iterator();
 				position = 0;
 				while (relIt.hasNext()) {
-					SRelation<SNode, SNode> rel = relIt.next();
+					SRelation<? extends SNode, ? extends SNode> rel = relIt.next();
 					writeRelation(xml, rel, nodePositions, layerPositions);
 					relPositions.put(rel, position);
 					position++;
@@ -703,7 +703,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            list of relations
 	 * @throws XMLStreamException
 	 */
-	public void writeLayer(XMLStreamWriter xml, Layer layer, Map<SNode, Integer> nodePositions, Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
+	public void writeLayer(XMLStreamWriter xml, Layer layer, Map<SNode, Integer> nodePositions, Map<SRelation<?, ?>, Integer> relPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -737,7 +737,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 		// write relations
 		if (layer.getRelations().size() > 0) {
 			StringBuilder relAtt = new StringBuilder();
-			Iterator<SRelation<SNode, SNode>> relIt = layer.getRelations().iterator();
+			Iterator<SRelation<?, ?>> relIt = layer.getRelations().iterator();
 			boolean isFirst = true;
 			while (relIt.hasNext()) {
 				if (!isFirst) {
