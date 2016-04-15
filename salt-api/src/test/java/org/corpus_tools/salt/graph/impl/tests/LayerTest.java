@@ -182,7 +182,7 @@ public class LayerTest {
 		}
 		assertEquals(nodes.size(), getFixture().getNodes().size());
 		for (Node node : nodes) {
-			node.removeLayer(getFixture());
+			getFixture().removeNode(node);
 		}
 		assertEquals(0, getFixture().getNodes().size());
 	}

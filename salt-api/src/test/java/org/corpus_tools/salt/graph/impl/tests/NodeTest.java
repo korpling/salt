@@ -65,7 +65,7 @@ public class NodeTest {
 	@Test
 	public void testDoubleChaining() {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		getFixture().setGraph(graph);
+		graph.addNode(getFixture());
 		assertTrue("only contains " + graph.getNodes(), graph.getNodes().contains(getFixture()));
 	}
 
@@ -77,17 +77,17 @@ public class NodeTest {
 	public void testDoubleChaining_SetGraph_remove() {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 
-		getFixture().setGraph(graph);
+		graph.addNode(getFixture());
 		assertEquals(graph, getFixture().getGraph());
-		getFixture().setGraph(null);
+		graph.removeNode(getFixture());
 		assertNull(getFixture().getGraph());
 
-		getFixture().setGraph(graph);
+		graph.addNode(getFixture());
 		assertEquals(graph, getFixture().getGraph());
 
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = createGraph();
 
-		getFixture().setGraph(graph2);
+		graph2.addNode(getFixture());
 		assertEquals(graph2, getFixture().getGraph());
 	}
 
@@ -103,7 +103,7 @@ public class NodeTest {
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
 
-		getFixture().addLayer(layer);
+		layer.addNode(getFixture());
 		assertEquals(1, getFixture().getLayers().size());
 		assertTrue(getFixture().getLayers().contains(layer));
 	}
@@ -121,9 +121,9 @@ public class NodeTest {
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
 
-		getFixture().addLayer(layer);
+		layer.addNode(getFixture());
 		assertTrue(getFixture().getLayers().contains(layer));
-		getFixture().removeLayer(layer);
+		layer.removeNode(getFixture());
 		assertEquals(0, getFixture().getLayers().size());
 	}
 
@@ -140,9 +140,9 @@ public class NodeTest {
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
 
-		getFixture().addLayer(layer);
+		layer.addNode(getFixture());
 		assertTrue(layer.getNodes().contains(getFixture()));
-		getFixture().removeLayer(layer);
+		layer.removeNode(getFixture());
 		assertFalse(layer.getNodes().contains(getFixture()));
 	}
 }

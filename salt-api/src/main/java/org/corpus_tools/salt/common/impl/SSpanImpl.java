@@ -22,8 +22,6 @@ import org.corpus_tools.salt.common.SSpan;
 import org.corpus_tools.salt.common.SStructuredNode;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
-import org.corpus_tools.salt.exceptions.SaltParameterException;
-import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
 @SuppressWarnings("serial")
@@ -50,12 +48,4 @@ public class SSpanImpl extends SNodeImpl implements SSpan, SStructuredNode {
 		return ((SDocumentGraph) super.getGraph());
 	}
 
-	/** {@inheritDoc} **/
-	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
-		}
-		super.setGraph(graph);
-	}
 } // SSpanImpl

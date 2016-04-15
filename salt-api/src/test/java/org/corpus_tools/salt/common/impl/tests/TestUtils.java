@@ -25,18 +25,17 @@ import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInsertionException;
-import org.corpus_tools.salt.exceptions.SaltParameterException;
 
 public class TestUtils {
 
 	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
 	public static void testSetGetGraph(SNode fixture) {
 		try {
-			fixture.setGraph(SaltFactory.createSCorpusGraph());
+			SaltFactory.createSCorpusGraph().addNode(fixture);
 			fail();
-		} catch (SaltParameterException e) {
+		} catch (SaltInsertionException e) {
 		}
-		fixture.setGraph(SaltFactory.createSDocumentGraph());
+		SaltFactory.createSDocumentGraph().addNode(fixture);
 		assertTrue(fixture.getGraph() instanceof SDocumentGraph);
 	}
 

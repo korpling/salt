@@ -23,8 +23,6 @@ import org.corpus_tools.salt.common.SSequentialDS;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
-import org.corpus_tools.salt.exceptions.SaltParameterException;
-import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.util.SaltUtil;
 
@@ -74,15 +72,6 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 	@Override
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
-		}
-		super.setGraph(graph);
 	}
 
 	/** {@inheritDoc SSequentialDS#getSStart()} */

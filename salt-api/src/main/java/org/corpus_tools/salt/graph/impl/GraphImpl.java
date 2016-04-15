@@ -281,7 +281,7 @@ public class GraphImpl
 	 * @param node
 	 *            the node to be removed
 	 */
-	protected void basicRemoveNode(N node) {
+	protected void basicRemoveNode(Node node) {
 		// remove node from internal list
 		nodes.remove(node);
 		// remove the node object from the inverse index

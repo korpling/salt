@@ -387,11 +387,11 @@ public class DiffTest {
 		SLayer otherLayer = SaltFactory.createSLayer();
 		other.addLayer(otherLayer);
 
-		template.getTokens().get(0).addLayer(tempLayer);
-		other.getTokens().get(0).addLayer(otherLayer);
+		tempLayer.addNode(template.getTokens().get(0));
+		otherLayer.addNode(other.getTokens().get(0));
 
 		assertTrue(getFixture().isIsomorph());
-		template.getTokens().get(1).addLayer(tempLayer);
+		tempLayer.addNode(template.getTokens().get(1));
 		assertFalse(getFixture().isIsomorph());
 	}
 
@@ -665,7 +665,7 @@ public class DiffTest {
 		spanTokens.add(docTokens.get(10));
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "page");
-		sSpan.addLayer(docTextLayer);
+		docTextLayer.addNode(sSpan);
 
 		// line3:
 		spanTokens.clear();
@@ -677,7 +677,7 @@ public class DiffTest {
 		spanTokens.add(docTokens.get(10));
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "line");
-		sSpan.addLayer(docTextLayer);
+		docTextLayer.addNode(sSpan);
 
 		return (doc1);
 	}

@@ -148,7 +148,7 @@ public class LayerImpl
 
 	/** {@inheritDoc Layer#removeNode(Node)} **/
 	@Override
-	public void removeNode(N node) {
+	public void removeNode(Node node) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().removeNode(node);

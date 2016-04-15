@@ -60,7 +60,7 @@ public interface Layer
 	 * @param node
 	 *            to be removed
 	 */
-	public void removeNode(N node);
+	public void removeNode(Node node);
 
 	/**
 	 * Returns a set of all contained nodes, in the order how the nodes were

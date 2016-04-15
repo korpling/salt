@@ -20,8 +20,6 @@ package org.corpus_tools.salt.common.impl;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
-import org.corpus_tools.salt.exceptions.SaltParameterException;
-import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
 @SuppressWarnings("serial")
@@ -62,15 +60,6 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	@Override
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
-		}
-		super.setGraph(graph);
 	}
 
 	/**
