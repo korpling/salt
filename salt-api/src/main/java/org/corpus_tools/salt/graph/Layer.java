@@ -36,7 +36,7 @@ public interface Layer<N, R> extends IdentifiableElement {
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph getGraph();
+	public Graph<?,?,?> getGraph();
 
 
 	/**

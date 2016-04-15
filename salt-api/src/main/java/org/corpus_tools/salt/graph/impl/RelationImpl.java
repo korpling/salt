@@ -192,13 +192,13 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 
 	/** {@inheritDoc} **/
 	@Override
-	public Set<? extends Layer> getLayers() {
+	public Set<? extends Layer<?,?>> getLayers() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return (getDelegate().getLayers());
 		}
 
-		Set<Layer> layers = new HashSet<>();
+		Set<Layer<?,?>> layers = new HashSet<>();
 		if (getGraph() != null) {
 			Set<Layer> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {

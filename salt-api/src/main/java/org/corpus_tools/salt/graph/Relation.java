@@ -85,7 +85,7 @@ public interface Relation<S,T> extends IdentifiableElement {
 	 * 
 	 * @return graph object which contains this relation.
 	 */
-	public Graph getGraph();
+	public Graph<?,?,?> getGraph();
 
 
 	/**
@@ -95,6 +95,6 @@ public interface Relation<S,T> extends IdentifiableElement {
 	 * 
 	 * @return a set of layers containing this relation
 	 */
-	public Set<? extends Layer> getLayers();
+	public Set<? extends Layer<?,?>> getLayers();
 
 }

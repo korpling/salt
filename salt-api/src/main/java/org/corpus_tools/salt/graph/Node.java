@@ -36,7 +36,7 @@ public interface Node extends IdentifiableElement {
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph getGraph();
+	public Graph<?,?,?> getGraph();
 
 	/**
 	 * Returns all layers containing this node. This is a computed set and only
