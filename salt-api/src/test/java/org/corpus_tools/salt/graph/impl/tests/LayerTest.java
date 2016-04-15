@@ -75,23 +75,13 @@ public class LayerTest {
 		assertNull(getFixture().getGraph());
 
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		getFixture().setGraph(graph);
+		graph.addLayer(getFixture());
 		assertEquals(getFixture().getGraph(), graph);
 
-		getFixture().setGraph(null);
+		graph.removeLayer(getFixture());
 		assertNull(getFixture().getGraph());
 		assertEquals(0, graph.getLayers().size());
 
-	}
-
-	/**
-	 * Tests the double chaining with Graph.
-	 */
-	@Test
-	public void testDoubleChaining() {
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		getFixture().setGraph(graph);
-		assertTrue("only contains " + graph.getLayers(), graph.getLayers().contains(getFixture()));
 	}
 
 	/**

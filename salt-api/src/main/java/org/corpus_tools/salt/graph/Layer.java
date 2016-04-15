@@ -42,15 +42,6 @@ public interface Layer
 	 */
 	public Graph<N,R,?> getGraph();
 
-	/**
-	 * Sets the container graph of this node. For double chaining between this
-	 * {@link Layer} and the passed {@link Graph} object, the real insertion is
-	 * done by method {@link #basicSetGraph(Graph)}.
-	 * 
-	 * @param graph
-	 *            graph which contains this layer
-	 */
-	public void setGraph(Graph<N,R,?> graph);
 
 	/**
 	 * Adds the passed node to this layer. The insertion order is preserved. If
