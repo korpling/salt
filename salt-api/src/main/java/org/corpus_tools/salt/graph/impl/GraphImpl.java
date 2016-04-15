@@ -51,6 +51,7 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	}
 
 	@Override
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	protected Graph<N, R, L> getDelegate() {
 		return (Graph<N, R, L>) super.getDelegate();
 	}

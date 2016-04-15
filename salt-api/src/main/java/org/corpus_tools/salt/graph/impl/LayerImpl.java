@@ -52,8 +52,9 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	}
 
 	@Override
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	protected Layer<N, R> getDelegate() {
-		return (Layer) super.getDelegate();
+		return (Layer<N, R>) super.getDelegate();
 	}
 
 	/** container graph **/
