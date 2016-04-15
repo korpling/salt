@@ -193,7 +193,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 							layer = SaltFactory.createSLayer();
 							layers.put(layerNum, layer);
 						}
-						sNode.addLayer(layer);
+						layer.addNode(sNode);
 					}
 				}
 			}
@@ -271,7 +271,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 							layer = SaltFactory.createSLayer();
 							layers.put(layerNum, layer);
 						}
-						sRel.addLayer(layer);
+						layer.addRelation(sRel);
 					}
 				}
 			}

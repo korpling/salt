@@ -76,14 +76,6 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 		return ((SDocumentGraph) super.getGraph());
 	}
 
-	/** {@inheritDoc} **/
-	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
-		}
-		super.setGraph(graph);
-	}
 
 	/** {@inheritDoc SSequentialDS#getSStart()} */
 	@Override

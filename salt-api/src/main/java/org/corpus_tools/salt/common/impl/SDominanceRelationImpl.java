@@ -51,12 +51,4 @@ public class SDominanceRelationImpl extends SRelationImpl<SStructure, SStructure
 		return ((SDocumentGraph) super.getGraph());
 	}
 
-	/** {@inheritDoc} **/
-	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
-		}
-		super.setGraph(graph);
-	}
 } // SDominanceRelationImpl

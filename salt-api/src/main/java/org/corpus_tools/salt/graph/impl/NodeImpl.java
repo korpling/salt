@@ -70,24 +70,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 		return (graph);
 	}
 
-	/** {@inheritDoc Relation#setGraph(Graph)} **/
-	@Override
-	public void setGraph(Graph graph) {
-		if (getDelegate() != null) {
-			getDelegate().setGraph(graph);
-			return;
-		}
-		Graph oldGraph = getGraph();
-		if (graph != null) {
-			graph.addNode(this);
-		}
-		if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
-			// remove relation from old graph
-			((GraphImpl) oldGraph).basicRemoveNode(this);
-		}
-		basicSetGraph(graph);
-	}
-
 	/**
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
@@ -157,39 +139,5 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 			}
 		}
 		return (Collections.unmodifiableSet(layers));
-	}
-
-	/**
-	 * {@inheritDoc} <br/>
-	 * Since the method {@link #getLayers()} retrieves all layers by accessing
-	 * the layers in graph, this class does not contain an own collection of
-	 * layers.
-	 **/
-	@Override
-	public void addLayer(Layer layer) {
-		if (getDelegate() != null) {
-			getDelegate().addLayer(layer);
-			return;
-		}
-		if (layer != null) {
-			layer.addNode(this);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}<br/>
-	 * Since the method {@link #getLayers()} retrieves all layers by accessing
-	 * the layers in graph, this class does not contain an own collection of
-	 * layers.
-	 **/
-	@Override
-	public void removeLayer(Layer layer) {
-		if (getDelegate() != null) {
-			getDelegate().removeLayer(layer);
-			return;
-		}
-		if (layer != null) {
-			layer.removeNode(this);
-		}
 	}
 }

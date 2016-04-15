@@ -38,15 +38,6 @@ public interface Layer<N extends Node, R extends Relation<N, N>> extends Identif
 	 */
 	public Graph getGraph();
 
-	/**
-	 * Sets the container graph of this node. For double chaining between this
-	 * {@link Layer} and the passed {@link Graph} object, the real insertion is
-	 * done by method {@link #basicSetGraph(Graph)}.
-	 * 
-	 * @param graph
-	 *            graph which contains this layer
-	 */
-	public void setGraph(Graph graph);
 
 	/**
 	 * Adds the passed node to this layer. The insertion order is preserved. If
