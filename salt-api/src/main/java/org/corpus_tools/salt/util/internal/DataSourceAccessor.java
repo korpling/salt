@@ -73,10 +73,8 @@ public class DataSourceAccessor {
 	 *         passed sequence
 	 */
 	public static List<SToken> getTokensBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> DataSourceSequence) {
-		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
-		classes.add(SToken.class);
-		@SuppressWarnings("unchecked")
-		List<SToken> sTokens = ((List<SToken>) (List<? extends SNode>) getSNodesBySequence(documentGraph, DataSourceSequence, classes));
+		
+		List<SToken> sTokens =  getSNodesBySequence(documentGraph, DataSourceSequence, SToken.class);
 
 		return (sTokens);
 	}
@@ -94,10 +92,8 @@ public class DataSourceAccessor {
 	 *         sequence
 	 */
 	public static List<SSpan> getSpanBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> DataSourceSequence) {
-		List<Class<? extends SNode>> classes = new ArrayList<>();
-		classes.add(SSpan.class);
-		@SuppressWarnings("unchecked")
-		List<SSpan> sSpans = ((List<SSpan>) (List<? extends SNode>) getSNodesBySequence(documentGraph, DataSourceSequence, classes));
+		
+		List<SSpan> sSpans = getSNodesBySequence(documentGraph, DataSourceSequence, SSpan.class);
 
 		return (sSpans);
 	}
@@ -115,10 +111,7 @@ public class DataSourceAccessor {
 	 *         passed sequence
 	 */
 	public static List<SStructure> getStructureBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> DataSourceSequence) {
-		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
-		classes.add(SStructure.class);
-		@SuppressWarnings("unchecked")
-		List<SStructure> sStructs = ((List<SStructure>) (List<? extends SNode>) getSNodesBySequence(documentGraph, DataSourceSequence, classes));
+		List<SStructure> sStructs =  getSNodesBySequence(documentGraph, DataSourceSequence, SStructure.class);
 
 		return (sStructs);
 	}
@@ -136,9 +129,7 @@ public class DataSourceAccessor {
 	 *         sequence
 	 */
 	public static List<SNode> getNodeBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> DataSourceSequence) {
-		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
-		classes.add(SNode.class);
-		List<SNode> sNodes = getSNodesBySequence(documentGraph, DataSourceSequence, classes);
+		List<SNode> sNodes = getSNodesBySequence(documentGraph, DataSourceSequence, SNode.class);
 
 		return (sNodes);
 	}
@@ -149,11 +140,11 @@ public class DataSourceAccessor {
 	 * 
 	 * @param sequence
 	 *            sequence, which is overlapped
-	 * @param nodeClasses
+	 * @param nodeClass
 	 *            type of nodes to be returned
 	 * @return nodes, which overlaps the given sequence
 	 */
-	private static List<SNode> getSNodesBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> sequence, List<Class<? extends SNode>> nodeClasses) {
+	private static<T extends SNode> List<T> getSNodesBySequence(SDocumentGraph documentGraph, DataSourceSequence<?> sequence, Class<T> nodeClass) {
 		if (sequence == null) {
 			throw new SaltParameterException("Cannot start returning nodes overlapping a data source, because the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
 		}
@@ -167,8 +158,8 @@ public class DataSourceAccessor {
 			throw new SaltParameterException("Cannot start method please set the document graph first.");
 		}
 
-		List<SNode> nodes = null;
-		List<? extends SSequentialRelation<SToken, ?, Integer>> sSeqRels = null;
+		List<T> nodes = null;
+		List<? extends SSequentialRelation<?, ?, Integer>> sSeqRels = null;
 		if (sequence.getDataSource() instanceof STextualDS) {
 			sSeqRels = documentGraph.getTextualRelations();
 		} else if (sequence.getDataSource() instanceof STimeline) {
@@ -176,18 +167,19 @@ public class DataSourceAccessor {
 		} else {
 			throw new SaltParameterException("Cannot compute overlaped nodes, because the given dataSource is not supported by this method.");
 		}
-		for (SSequentialRelation<SToken, ?, Integer> sSeqRel : sSeqRels) {
+		for (SSequentialRelation<?, ?, Integer> sSeqRel : sSeqRels) {
 			// walk through all sequential relations
 			if ((sequence.getDataSource().equals(sSeqRel.getTarget())) && (sSeqRel.getStart().doubleValue() >= sequence.getStart().doubleValue()) && (sSeqRel.getEnd().doubleValue() <= sequence.getEnd().doubleValue())) {
 				// sequential relation is in the interval
-				for (Class<? extends SNode> nodeClass : nodeClasses) {
-					if (nodes == null)
-						nodes = new ArrayList<SNode>();
-					if (nodeClass.isInstance(sSeqRel.getSource())) {
-						// source is of correct type
-						nodes.add(sSeqRel.getSource());
-					}
+				if (nodes == null)
+					nodes = new ArrayList<T>();
+				if (nodeClass.isInstance(sSeqRel.getSource())) {
+					// source is of correct type
+					@SuppressWarnings("unchecked") // nodeClass is of Class<T> and we checked if source is instance of T
+					T source = (T) sSeqRel.getSource();
+					nodes.add(source);
 				}
+			
 			} // sequential relation is in the interval
 		} // walk through all sequential relations
 		return (nodes);
