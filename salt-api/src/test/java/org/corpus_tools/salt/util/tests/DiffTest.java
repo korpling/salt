@@ -366,7 +366,7 @@ public class DiffTest {
 		SPointingRelation pr1 = SaltFactory.createSPointingRelation();
 		pr1.setSource((SToken) template.getNodes().get(1));
 		pr1.setTarget((SToken) template.getNodes().get(2));
-		pr1.setGraph(template);
+		template.addRelation(pr1);
 
 		assertFalse(getFixture().isIsomorph());
 

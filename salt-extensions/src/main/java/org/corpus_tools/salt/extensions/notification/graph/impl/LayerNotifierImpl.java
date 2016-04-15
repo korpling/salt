@@ -33,7 +33,7 @@ import org.corpus_tools.salt.graph.impl.LayerImpl;
 public class LayerNotifierImpl
 	<
 	N extends Node, 
-	R extends Relation<N, N>
+	R extends Relation<? extends N, ? extends N>
 	> extends LayerImpl<N, R> implements Layer<N, R>, Notifier {
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
@@ -125,7 +125,7 @@ public class LayerNotifierImpl
 	}
 
 	@Override
-	public void removeRelation(R relation) {
+	public void removeRelation(Relation<?,?> relation) {
 		super.removeRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LAYER_RELATIONS, relation, null, this);

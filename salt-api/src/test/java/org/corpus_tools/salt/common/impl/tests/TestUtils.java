@@ -42,7 +42,7 @@ public class TestUtils {
 	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
 	public static void testSetGetGraph(SRelation<? extends SNode, ? extends SNode> fixture) {
 		try {
-			fixture.setGraph(SaltFactory.createSCorpusGraph());
+			SaltFactory.createSCorpusGraph().addRelation(fixture);
 			fail();
 		} catch (SaltParameterException e) {
 		}
@@ -53,7 +53,7 @@ public class TestUtils {
 		if (fixture.getTarget() != null) {
 			graph.addNode(fixture.getTarget());
 		}
-		fixture.setGraph(graph);
+		graph.addRelation(fixture);
 		assertTrue(fixture.getGraph() instanceof SDocumentGraph);
 	}
 }

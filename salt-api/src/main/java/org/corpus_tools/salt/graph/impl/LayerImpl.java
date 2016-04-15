@@ -188,7 +188,7 @@ public class LayerImpl
 
 	/** {@inheritDoc Layer#removeRelation(Relation)} **/
 	@Override
-	public void removeRelation(R relation) {
+	public void removeRelation(Relation<?,?> relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().removeRelation(relation);

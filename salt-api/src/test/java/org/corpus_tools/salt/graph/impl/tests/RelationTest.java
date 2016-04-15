@@ -77,7 +77,7 @@ public class RelationTest {
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
 
-		getFixture().setGraph(graph);
+		graph.addRelation(getFixture());
 		assertTrue("only contains " + graph.getRelations(), graph.getRelations().contains(getFixture()));
 	}
 
@@ -95,12 +95,12 @@ public class RelationTest {
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
 
-		getFixture().setGraph(graph);
+		graph.addRelation(getFixture());
 		assertEquals(graph, getFixture().getGraph());
-		getFixture().setGraph(null);
+		graph.removeRelation(getFixture());
 		assertNull(getFixture().getGraph());
 
-		getFixture().setGraph(graph);
+		graph.addRelation(getFixture());
 		assertEquals(graph, getFixture().getGraph());
 
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = createGraph();
@@ -111,7 +111,7 @@ public class RelationTest {
 		getFixture().setSource(source2);
 		getFixture().setTarget(target2);
 
-		getFixture().setGraph(graph2);
+		graph2.addRelation(getFixture());
 		assertEquals(graph2, getFixture().getGraph());
 	}
 
@@ -133,7 +133,7 @@ public class RelationTest {
 		graph.addNode(target);
 		graph.addRelation(getFixture());
 
-		getFixture().addLayer(layer);
+		layer.addRelation(getFixture());
 		assertEquals(1, getFixture().getLayers().size());
 		assertTrue(getFixture().getLayers().contains(layer));
 	}
@@ -157,9 +157,9 @@ public class RelationTest {
 		graph.addNode(target);
 		graph.addRelation(getFixture());
 
-		getFixture().addLayer(layer);
+		layer.addRelation(getFixture());
 		assertTrue(getFixture().getLayers().contains(layer));
-		getFixture().removeLayer(layer);
+		layer.removeRelation(getFixture());
 		assertEquals(0, getFixture().getLayers().size());
 	}
 
@@ -182,9 +182,9 @@ public class RelationTest {
 		graph.addNode(target);
 		graph.addRelation(getFixture());
 
-		getFixture().addLayer(layer);
+		layer.addRelation(getFixture());
 		assertTrue(layer.getRelations().contains(getFixture()));
-		getFixture().removeLayer(layer);
+		layer.removeRelation(getFixture());
 		assertFalse(layer.getRelations().contains(getFixture()));
 	}
 }

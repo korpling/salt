@@ -87,7 +87,7 @@ public interface Layer
 	 * @param relation
 	 *            to be removed
 	 */
-	public void removeRelation(R relation);
+	public void removeRelation(Relation<?,?> relation);
 
 	/**
 	 * Returns a set of all contained relations, in the order how the relations

@@ -595,7 +595,7 @@ public class GraphImpl
 	 * @param relation
 	 *            the relation to be removed
 	 */
-	protected void basicRemoveRelation(R rel) {
+	protected void basicRemoveRelation(Relation<?, ?> rel) {
 		// remove relation from all indexes
 		getIndexMgr().removeValue(rel);
 		getIndexMgr().remove(SaltUtil.IDX_ID_RELATIONS_INVERSE, rel);

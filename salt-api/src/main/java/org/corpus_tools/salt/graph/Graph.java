@@ -43,7 +43,11 @@ import org.corpus_tools.salt.util.SaltUtil;
  * @param <E>
  *            type of contained {@link Relation}s
  */
-public interface Graph<N, R, L> extends IdentifiableElement {
+public interface Graph
+	<
+	N extends Node, 
+	R extends Relation<? extends N, ? extends N>, 
+	L extends Layer<N,R>> extends IdentifiableElement {
 	/**
 	 * Returns the index manager. The index manager is used to register indexes
 	 * for sets of nodes, relations, layers etc. or single values. The manager

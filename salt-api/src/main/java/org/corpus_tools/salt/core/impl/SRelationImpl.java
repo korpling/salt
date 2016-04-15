@@ -24,11 +24,14 @@ import java.util.Set;
 
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
+import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
+import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.corpus_tools.salt.util.SaltUtil;
@@ -294,6 +297,19 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 
 	// =======================================< SPathElement
 
+	@Override
+	public SGraph getGraph() {
+		Graph superGraph = super.getGraph();
+		if (superGraph == null) {
+			return null;
+		}
+
+		if (superGraph instanceof SGraph) {
+			return (SGraph) superGraph;
+		}
+		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
+	}
+	
 	@Override
 	public Set<SLayer> getLayers() {
 		Set<SLayer> layers = new HashSet<>();

@@ -85,7 +85,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		this.source = source;
 		// notify graph about change of target
 		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
+			((GraphImpl<?,?,?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
 		}
 	}
 
@@ -119,16 +119,16 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		this.target = target;
 		// notify graph about change of target
 		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
+			((GraphImpl<?,?,?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
 		}
 	}
 
 	/** container graph **/
-	protected Graph graph = null;
+	protected Graph<?,?,?> graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph getGraph() {
+	public Graph<?,?,?> getGraph() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return getDelegate().getGraph();
@@ -137,25 +137,6 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		return (graph);
 	}
 
-	/** {@inheritDoc Relation#setGraph(Graph)} **/
-	@Override
-	public void setGraph(Graph graph) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().setGraph(graph);
-			return;
-		}
-
-		Graph oldGraph = getGraph();
-		if (graph != null) {
-			graph.addRelation(this);
-		}
-		if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
-			// remove relation from old graph
-			((GraphImpl) oldGraph).basicRemoveRelation(this);
-		}
-		basicSetGraph(graph);
-	}
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
@@ -182,16 +163,16 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param graph
 	 *            graph which contains this relation
 	 */
-	protected void basicSetGraph(Graph graph) {
+	protected void basicSetGraph(Graph<?,?,?> graph) {
 		// delegate method to delegate if set
 		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
-			((RelationImpl) getDelegate()).basicSetGraph(graph);
+			((RelationImpl<?,?>) getDelegate()).basicSetGraph(graph);
 			return;
 		}
 
 		// remove from old graph if it was changed
 		if (this.graph != graph && this.graph instanceof GraphImpl) {
-			((GraphImpl) this.graph).basicRemoveRelation(this);
+			((GraphImpl<?,?,?>) this.graph).basicRemoveRelation(this);
 		}
 		this.graph = graph;
 	}
@@ -202,9 +183,9 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+	protected void basicSetGraph_WithoutRemoving(Graph<?,?,?> graph) {
 		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
-			((RelationImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
+			((RelationImpl<?,?>) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
 		}
 		this.graph = graph;
@@ -220,9 +201,9 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 
 		Set<Layer<?,?>> layers = new HashSet<>();
 		if (getGraph() != null) {
-			Set<Layer> allLayers = getGraph().getLayers();
+			Set<? extends Layer<?,?>> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
-				for (Layer layer : allLayers) {
+				for (Layer<?,?> layer : allLayers) {
 					if (layer.getRelations().contains(this)) {
 						layers.add(layer);
 					}
@@ -232,39 +213,4 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		return (layers);
 	}
 
-	/**
-	 * {@inheritDoc}<br/>
-	 * Since the method {@link #getLayers()} retrieves all layers by accessing
-	 * the layers in graph, this class does not contain an own collection of
-	 * layers.
-	 **/
-	@Override
-	public void addLayer(Layer layer) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().addLayer(layer);
-		}
-
-		if (layer != null) {
-			layer.addRelation(this);
-		}
-	}
-
-	/**
-	 * {@inheritDoc} <br/>
-	 * Since the method {@link #getLayers()} retrieves all layers by accessing
-	 * the layers in graph, this class does not contain an own collection of
-	 * layers.
-	 **/
-	@Override
-	public void removeLayer(Layer layer) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().removeLayer(layer);
-		}
-		
-		if (layer != null) {
-			layer.removeRelation(this);
-		}
-	}
 }
