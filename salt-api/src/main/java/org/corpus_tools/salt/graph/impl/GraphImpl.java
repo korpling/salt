@@ -526,25 +526,21 @@ public class GraphImpl
 		if (UPDATE_TYPE.RELATION_SOURCE.equals(updateType)) {
 			// as long as R extends Relation, this check is valid
 			if (container instanceof Relation) {
-				@SuppressWarnings("unchecked")
-				R relation = (R) container;
+				Relation<?,?> relation = (Relation<?, ?>) container;
 				getIndexMgr().put(SaltUtil.IDX_OUT_RELATIONS, relation.getSource().getId(), relation);
 				// as long as N extends Node, this check is valid
 				if (oldValue != null && oldValue instanceof Node) {
-					@SuppressWarnings("unchecked")
-					N node = (N) oldValue;
+					Node node = (Node) oldValue;
 					getIndexMgr().remove(SaltUtil.IDX_OUT_RELATIONS, node.getId(), relation);
 				}
 			}
 		} else if (UPDATE_TYPE.RELATION_TARGET.equals(updateType)) {
 			// as long as R extends Relation, this check is valid
 			if (container instanceof Relation) {
-				@SuppressWarnings("unchecked")
-				R relation = (R) container;
+				Relation<?,?> relation = (Relation<?,?>) container;
 				getIndexMgr().put(SaltUtil.IDX_IN_RELATIONS, relation.getTarget().getId(), relation);
 				if (oldValue != null && oldValue instanceof Node) {
-					@SuppressWarnings("unchecked")
-					N node = (N) oldValue;
+					Node node = (Node) oldValue;
 					getIndexMgr().remove(SaltUtil.IDX_IN_RELATIONS, node.getId(), relation);
 				}
 			}

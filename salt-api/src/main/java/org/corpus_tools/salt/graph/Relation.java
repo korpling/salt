@@ -37,7 +37,7 @@ import java.util.Set;
  * @param <T>
  *            target node of the relation
  */
-public interface Relation<S,T> extends IdentifiableElement {
+public interface Relation<S extends Node ,T extends Node> extends IdentifiableElement {
 
 	/**
 	 * Returns the delegate object. If {@link #delegate} is not null, all

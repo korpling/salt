@@ -29,7 +29,11 @@ import java.util.Set;
  * @author florian
  *
  */
-public interface Layer<N, R> extends IdentifiableElement {
+public interface Layer
+	<
+	N extends Node,
+	R extends Relation<? extends N, ? extends N>
+	> extends IdentifiableElement {
 
 	/**
 	 * Returns the container graph of this node.
