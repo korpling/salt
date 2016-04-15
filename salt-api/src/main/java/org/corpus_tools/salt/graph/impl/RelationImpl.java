@@ -136,7 +136,27 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 
 		return (graph);
 	}
-	
+
+	/** {@inheritDoc Relation#setGraph(Graph)} **/
+	@Override
+	public void setGraph(Graph graph) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().setGraph(graph);
+			return;
+		}
+
+		Graph oldGraph = getGraph();
+		if (graph != null) {
+			graph.addRelation(this);
+		}
+		if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
+			// remove relation from old graph
+			((GraphImpl) oldGraph).basicRemoveRelation(this);
+		}
+		basicSetGraph(graph);
+	}
+
 	/**
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Relation} object when an relation is inserted
@@ -210,5 +230,41 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 			}
 		}
 		return (layers);
+	}
+
+	/**
+	 * {@inheritDoc}<br/>
+	 * Since the method {@link #getLayers()} retrieves all layers by accessing
+	 * the layers in graph, this class does not contain an own collection of
+	 * layers.
+	 **/
+	@Override
+	public void addLayer(Layer layer) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().addLayer(layer);
+		}
+
+		if (layer != null) {
+			layer.addRelation(this);
+		}
+	}
+
+	/**
+	 * {@inheritDoc} <br/>
+	 * Since the method {@link #getLayers()} retrieves all layers by accessing
+	 * the layers in graph, this class does not contain an own collection of
+	 * layers.
+	 **/
+	@Override
+	public void removeLayer(Layer layer) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().removeLayer(layer);
+		}
+		
+		if (layer != null) {
+			layer.removeRelation(this);
+		}
 	}
 }

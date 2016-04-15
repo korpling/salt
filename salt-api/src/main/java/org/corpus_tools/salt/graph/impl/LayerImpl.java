@@ -75,6 +75,26 @@ public class LayerImpl
 		return (graph);
 	}
 
+	/** {@inheritDoc Relation#setGraph(Graph)} **/
+	@Override
+	public void setGraph(Graph graph) {
+		// delegate method to delegate if set
+		if (getDelegate() != null) {
+			getDelegate().setGraph(graph);
+			return;
+		}
+		if (graph != null) {
+			if (graph instanceof GraphImpl) {
+				((GraphImpl) graph).basicAddLayer(this);
+			}
+		} else {
+			if (getGraph() instanceof GraphImpl) {
+				((GraphImpl) getGraph()).basicRemoveLayer(this);
+			}
+		}
+		basicSetGraph(graph);
+	}
+
 	/**
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Layer} object when an layer is inserted into
