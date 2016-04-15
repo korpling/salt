@@ -109,7 +109,7 @@ public class LayerNotifierImpl
 	}
 
 	@Override
-	public void removeNode(N node) {
+	public void removeNode(Node node) {
 		super.removeNode(node);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LAYER_NODES, node, null, this);
