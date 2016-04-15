@@ -30,7 +30,11 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.LayerImpl;
 
 @SuppressWarnings("serial")
-public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends LayerImpl<N, R> implements Layer<N, R>, Notifier {
+public class LayerNotifierImpl
+	<
+	N extends Node, 
+	R extends Relation<N, N>
+	> extends LayerImpl<N, R> implements Layer<N, R>, Notifier {
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 

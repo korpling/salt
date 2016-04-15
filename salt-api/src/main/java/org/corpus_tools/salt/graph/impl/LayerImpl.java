@@ -63,11 +63,11 @@ public class LayerImpl
 	}
 
 	/** container graph **/
-	protected Graph<N,R, ?> graph = null;
+	protected Graph<N, R, ?> graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph<N,R,?> getGraph() {
+	public Graph<N, R, ?> getGraph() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return (getDelegate().getGraph());
@@ -88,8 +88,8 @@ public class LayerImpl
 				((GraphImpl) graph).basicAddLayer(this);
 			}
 		} else {
-			if (getGraph() instanceof GraphImpl) {
-				((GraphImpl) getGraph()).basicRemoveLayer(this);
+			if (getGraph() instanceof GraphImpl<?,?,?>) {
+				((GraphImpl<?,?,?>) getGraph()).basicRemoveLayer(this);
 			}
 		}
 		basicSetGraph(graph);
@@ -120,7 +120,7 @@ public class LayerImpl
 	 *            graph which contains this layer
 	 */
 	protected void basicSetGraph(Graph<N,R,?> graph) {
-		if (getDelegate() != null && getDelegate() instanceof LayerImpl) {
+		if (getDelegate() != null && getDelegate() instanceof LayerImpl<?,?>) {
 			((LayerImpl<N,R>) getDelegate()).basicSetGraph(graph);
 			return;
 		}

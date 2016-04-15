@@ -300,7 +300,7 @@ public class GraphImpl
 		}
 
 		// remove node also from layers
-		for (Layer<N, R> layer : layers) {
+		for (L layer : layers) {
 			layer.removeNode(node);
 		}
 	}
@@ -402,7 +402,7 @@ public class GraphImpl
 		if (getDelegate() != null) {
 			getDelegate().addRelation(relation);
 			if (relation instanceof RelationImpl) {
-				((RelationImpl) relation).basicSetGraph_WithoutRemoving(this);
+				((RelationImpl<? extends N, ? extends N>) relation).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}
@@ -414,7 +414,7 @@ public class GraphImpl
 		basicAddRelation(relation);
 		if (relation != null) {
 			if (relation instanceof RelationImpl) {
-				((RelationImpl<N, N>) relation).basicSetGraph(this);
+				((RelationImpl<? extends N, ? extends N>) relation).basicSetGraph(this);
 			}
 		}
 	}
@@ -445,12 +445,11 @@ public class GraphImpl
 	 * @param relation
 	 *            relation to be inserted
 	 */
-	@SuppressWarnings("unchecked")
-	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
+	protected void basicAddRelation(R relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			if (getDelegate() instanceof GraphImpl) {
-				((GraphImpl) getDelegate()).basicAddRelation(relation);
+				((GraphImpl<N,R,L>) getDelegate()).basicAddRelation(relation);
 			}
 			return;
 		}
@@ -519,7 +518,7 @@ public class GraphImpl
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			if (getDelegate() instanceof GraphImpl) {
-				((GraphImpl) getDelegate()).update(oldValue, container, updateType);
+				((GraphImpl<N,R,L>) getDelegate()).update(oldValue, container, updateType);
 				return;
 			}
 		}
@@ -562,7 +561,7 @@ public class GraphImpl
 		}
 		if (rel != null) {
 			if (rel instanceof RelationImpl) {
-				((RelationImpl<N, N>) rel).basicSetGraph(null);
+				((RelationImpl<? extends N, ? extends N>) rel).basicSetGraph(null);
 			}
 			basicRemoveRelation(rel);
 		}
@@ -605,7 +604,7 @@ public class GraphImpl
 		getIndexMgr().removeValue(rel);
 		getIndexMgr().remove(SaltUtil.IDX_ID_RELATIONS_INVERSE, rel);
 		// remove relation also from layers
-		for (Layer<N, R> layer : layers) {
+		for (L layer : layers) {
 			layer.removeRelation(rel);
 		}
 		// remove relation from internal list
@@ -753,7 +752,7 @@ public class GraphImpl
 			getDelegate().removeLayer(layer);
 			return;
 		}
-		if (layer instanceof LayerImpl) {
+		if (layer instanceof LayerImpl<?,?>) {
 			((LayerImpl<N, R>) layer).basicSetGraph(null);
 		}
 		basicRemoveLayer(layer);

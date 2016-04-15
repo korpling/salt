@@ -36,7 +36,7 @@ public interface Layer<N, R> extends IdentifiableElement {
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph<N,R, ?> getGraph();
+	public Graph<N,R,?> getGraph();
 
 	/**
 	 * Sets the container graph of this node. For double chaining between this

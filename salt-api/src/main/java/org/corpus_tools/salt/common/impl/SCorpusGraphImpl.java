@@ -124,7 +124,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 *            to add
 	 */
 	@Override
-	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
+	protected void basicAddRelation(SRelation<? extends SNode, ? extends SNode> relation) {
 		if (!(relation instanceof SRelation)) {
 			throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is not a SRelation object. ");
 		}
