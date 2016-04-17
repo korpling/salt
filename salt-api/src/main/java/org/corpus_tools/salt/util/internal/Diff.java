@@ -404,13 +404,13 @@ public class Diff {
 	 */
 	private boolean compareDataSources(SDocumentGraph template, SDocumentGraph other, boolean diff) {
 		// compare textual data sources
-		boolean retVal1 = compareDataSources((List<SSequentialDS>) (List<? extends SSequentialDS>) template.getTextualDSs(), (List<SSequentialDS>) (List<? extends SSequentialDS>) other.getTextualDSs(), diff);
+		boolean retVal1 = compareDataSources(template.getTextualDSs(), other.getTextualDSs(), diff);
 		// speed up
 		if (!diff && !retVal1) {
 			return (retVal1);
 		}
 		// compare medial data sources
-		boolean retVal2 = compareDataSources((List<SSequentialDS>) (List<? extends SSequentialDS>) template.getMedialDSs(), (List<SSequentialDS>) (List<? extends SSequentialDS>) other.getMedialDSs(), diff);
+		boolean retVal2 = compareDataSources(template.getMedialDSs(), other.getMedialDSs(), diff);
 		return (retVal1 && retVal2);
 	}
 
@@ -428,16 +428,17 @@ public class Diff {
 	 * @param diff
 	 *            if true, diffs are checked as well
 	 **/
-	private boolean compareDataSources(List<SSequentialDS> template, List<SSequentialDS> other, boolean diff) {
+	private boolean compareDataSources(List<? extends SSequentialDS<?,?>> template, 
+			List<? extends SSequentialDS<?,?>> other, boolean diff) {
 		boolean iso = true;
-		Map<Object, SSequentialDS> dataToDS = new Hashtable<>();
+		Map<Object, SSequentialDS<?,?>> dataToDS = new Hashtable<>();
 		// data sources from template which have no partner in other
-		Set<SSequentialDS> remainingTemplates = new HashSet<>();
+		Set<SSequentialDS<?,?>> remainingTemplates = new HashSet<>();
 
 		// put all template data source to map
-		Iterator<SSequentialDS> iterator = template.iterator();
+		Iterator<? extends SSequentialDS<?,?>> iterator = template.iterator();
 		while (iterator.hasNext()) {
-			SSequentialDS templateDS = iterator.next();
+			SSequentialDS<?,?> templateDS = iterator.next();
 			dataToDS.put(templateDS.getData(), templateDS);
 			remainingTemplates.add(templateDS);
 		}
@@ -445,8 +446,8 @@ public class Diff {
 		// check all other data source with map
 		iterator = other.iterator();
 		while (iterator.hasNext()) {
-			SSequentialDS otherDS = iterator.next();
-			SSequentialDS templateDS = dataToDS.get(otherDS.getData());
+			SSequentialDS<?,?> otherDS = iterator.next();
+			SSequentialDS<?,?> templateDS = dataToDS.get(otherDS.getData());
 			if (templateDS == null) {
 				if (!diff) {
 					return false;
@@ -483,7 +484,7 @@ public class Diff {
 		if (remainingTemplates.size() > 0) {
 			iterator = remainingTemplates.iterator();
 			while (iterator.hasNext()) {
-				SSequentialDS templateDS = iterator.next();
+				SSequentialDS<?,?> templateDS = iterator.next();
 				if (!diff) {
 					return false;
 				}
@@ -645,32 +646,32 @@ public class Diff {
 		boolean retVal4 = true;
 
 		if (!(boolean) options.get(OPTION_IGNORE_ANNOTATIONS)) {
-			Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SAnnotation();
-			Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SAnnotation();
+			Iterator<? extends SAbstractAnnotation> otherIterator = other.iterator_SAnnotation();
+			Iterator<? extends SAbstractAnnotation> templateIterator = template.iterator_SAnnotation();
 			retVal1 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(OPTION_IGNORE_META_ANNOTATIONS)) {
-			Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SMetaAnnotation();
-			Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SMetaAnnotation();
+			Iterator<? extends SAbstractAnnotation> otherIterator = other.iterator_SMetaAnnotation();
+			Iterator<? extends SAbstractAnnotation> templateIterator = template.iterator_SMetaAnnotation();
 			retVal2 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(OPTION_IGNORE_PROCESSING_ANNOTATIONS)) {
-			Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SProcessingAnnotation();
-			Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SProcessingAnnotation();
+			Iterator<? extends SAbstractAnnotation> otherIterator = other.iterator_SProcessingAnnotation();
+			Iterator<? extends SAbstractAnnotation> templateIterator = template.iterator_SProcessingAnnotation();
 			retVal3 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(OPTION_IGNORE_FEATURES)) {
-			Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SFeature();
-			Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SFeature();
+			Iterator<? extends SAbstractAnnotation> otherIterator = other.iterator_SFeature();
+			Iterator<? extends SAbstractAnnotation> templateIterator = template.iterator_SFeature();
 			retVal4 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
@@ -691,7 +692,10 @@ public class Diff {
 	 * @param subDiffs
 	 * @return
 	 */
-	private boolean compareAnnotationContainers(SAnnotationContainer template, Iterator<SAbstractAnnotation> templateIterator, SAnnotationContainer other, Iterator<SAbstractAnnotation> otherIterator, Set<Difference> subDiffs) {
+	private boolean compareAnnotationContainers(SAnnotationContainer template, 
+			Iterator<? extends SAbstractAnnotation> templateIterator, 
+			SAnnotationContainer other, 
+			Iterator<? extends SAbstractAnnotation> otherIterator, Set<Difference> subDiffs) {
 		boolean retVal = true;
 
 		// create remaining list, which contains all annos from other
@@ -763,14 +767,15 @@ public class Diff {
 		 * set of already visited {@link SRelation}s while traversing, this is
 		 * necessary to avoid cycles
 		 **/
-		private Set<SRelation> visitedRelations = new HashSet<>();
+		private Set<SRelation<? extends SNode,? extends SNode>> 
+			visitedRelations = new HashSet<>();
 
 		/**
 		 * Called by Pepper as callback, when otherGraph is traversed. Currently
 		 * only returns <code>true</code> to traverse the entire graph.
 		 */
 		@Override
-		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation sRelation, SNode currNode, long order) {
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<? extends SNode, ? extends SNode> sRelation, SNode currNode, long order) {
 			if (abort) {
 				return (false);
 			}
@@ -802,14 +807,14 @@ public class Diff {
 		 * is empty.
 		 */
 		@Override
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation, SNode otherNode, long order) {
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> sRelation, SNode otherNode, long order) {
 		}
 
 		/**
 		 * Called by Pepper as callback, when otherGraph is traversed.
 		 */
 		@Override
-		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge, SNode otherNode, long order) {
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> edge, SNode otherNode, long order) {
 			if (currNode instanceof SSpan) {
 				if (!findIsomorphicNode(currNode, SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SSPAN)) {
 					abort = true;
@@ -977,11 +982,16 @@ public class Diff {
 	 * @param diff
 	 * @return
 	 */
-	public boolean compareRelations(SDocumentGraph template, List<? extends SRelation> templateRels, SDocumentGraph other, List<? extends SRelation> otherRels, Boolean diff) {
+	public boolean compareRelations(SDocumentGraph template, 
+			List<? extends SRelation<? extends SNode,? extends SNode>> templateRels, 
+			SDocumentGraph other, 
+			List<? extends SRelation<? extends SNode,? extends SNode>> otherRels, 
+			Boolean diff) {
 		boolean iso = true;
 
-		Set<SRelation> otherRelSet = new HashSet<SRelation>();
-		Iterator<? extends SRelation> iterator = otherRels.iterator();
+		Set<SRelation<? extends SNode,? extends SNode>> otherRelSet = new HashSet<>();
+		Iterator<? extends SRelation<? extends SNode,? extends SNode>> iterator = 
+				otherRels.iterator();
 		while (iterator.hasNext()) {
 			otherRelSet.add(iterator.next());
 		}
@@ -989,7 +999,7 @@ public class Diff {
 		// iterate over all pointing relations in template
 		iterator = templateRels.iterator();
 		while (iterator.hasNext()) {
-			SRelation<SNode, SNode> tempRel = iterator.next();
+			SRelation<? extends SNode,? extends SNode> tempRel = iterator.next();
 			SNode tempSource = tempRel.getSource();
 			SNode tempTarget = tempRel.getTarget();
 			SNode otherSource = getIsoNodes().get(tempSource);
