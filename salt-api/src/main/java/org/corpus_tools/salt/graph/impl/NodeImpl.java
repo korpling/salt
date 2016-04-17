@@ -101,8 +101,8 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 			return;
 		}
 		// remove from old graph if it was changed
-		if (this.graph != graph && this.graph instanceof GraphImpl) {
-			((GraphImpl<?,?,?>) this.graph).basicRemoveNode(this);
+		if (getGraph() != graph && getGraph() instanceof GraphImpl) {
+			((GraphImpl<?,?,?>) getGraph()).basicRemoveNode(this);
 		}
 		this.graph = graph;
 	}

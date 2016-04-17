@@ -22,6 +22,8 @@ import org.corpus_tools.salt.common.SStructuredNode;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
+import org.corpus_tools.salt.exceptions.SaltParameterException;
+import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
 @SuppressWarnings("serial")
@@ -46,6 +48,14 @@ public class STokenImpl extends SNodeImpl implements SToken, SStructuredNode {
 	@Override
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
+	}
+	
+	@Override
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
+		}
+		super.basicSetGraph(graph);
 	}
 
 }

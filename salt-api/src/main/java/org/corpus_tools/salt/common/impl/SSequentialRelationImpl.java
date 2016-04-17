@@ -18,10 +18,14 @@
 package org.corpus_tools.salt.common.impl;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SSequentialRelation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
+import org.corpus_tools.salt.exceptions.SaltParameterException;
+import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 
@@ -91,4 +95,20 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 		}
 		sFeature.setValue(newSEnd);
 	}
+	
+
+	/** {@inheritDoc} **/
+	@Override
+	public SDocumentGraph getGraph() {
+		return ((SDocumentGraph) super.getGraph());
+	}
+	
+	@Override
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
+		}
+		super.basicSetGraph(graph);
+	}
+	
 } // SSequentialRelationImpl

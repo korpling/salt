@@ -24,6 +24,7 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 /**
@@ -57,6 +58,14 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	@Override
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
+	}
+	
+	@Override
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
+		}
+		super.basicSetGraph(graph);
 	}
 
 } // SOrderRelationImpl

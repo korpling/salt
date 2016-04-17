@@ -171,8 +171,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		}
 
 		// remove from old graph if it was changed
-		if (this.graph != graph && this.graph instanceof GraphImpl) {
-			((GraphImpl<?,?,?>) this.graph).basicRemoveRelation(this);
+		if (getGraph() != graph && getGraph() instanceof GraphImpl) {
+			((GraphImpl<?,?,?>) getGraph()).basicRemoveRelation(this);
 		}
 		this.graph = graph;
 	}

@@ -23,6 +23,7 @@ import org.corpus_tools.salt.common.SStructuredNode;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
@@ -48,6 +49,14 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 	@Override
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
+	}
+	
+	@Override
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
+		}
+		super.basicSetGraph(graph);
 	}
 
 } // SPointingRelationImpl

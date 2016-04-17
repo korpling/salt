@@ -17,12 +17,9 @@
  */
 package org.corpus_tools.salt.common.impl;
 
-import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STimeline;
 import org.corpus_tools.salt.common.STimelineRelation;
 import org.corpus_tools.salt.common.SToken;
-import org.corpus_tools.salt.exceptions.SaltParameterException;
-import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
@@ -44,10 +41,5 @@ public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STime
 		super(delegate);
 	}
 
-	/** {@inheritDoc} **/
-	@Override
-	public SDocumentGraph getGraph() {
-		return ((SDocumentGraph) super.getGraph());
-	}
 
 } // STimelineRelationImpl

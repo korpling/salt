@@ -17,7 +17,6 @@
  */
 package org.corpus_tools.salt.common.impl;
 
-import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STimeline;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.graph.Node;
@@ -38,12 +37,6 @@ public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implement
 	 */
 	public STimelineImpl(Node delegate) {
 		super(delegate);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public SDocumentGraph getGraph() {
-		return ((SDocumentGraph) super.getGraph());
 	}
 
 	/** {@inheritDoc} **/

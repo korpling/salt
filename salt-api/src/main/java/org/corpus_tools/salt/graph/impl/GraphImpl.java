@@ -190,12 +190,11 @@ public class GraphImpl
 			// do nothing, node is already added
 			return;
 		}
-		basicAddNode(node);
-		if (node != null) {
-			if (node instanceof NodeImpl) {
-				((NodeImpl) node).basicSetGraph(this);
-			}
+		
+		if (node instanceof NodeImpl) {
+			((NodeImpl) node).basicSetGraph(this);
 		}
+		basicAddNode(node);
 	}
 
 	/**
@@ -411,12 +410,10 @@ public class GraphImpl
 			return;
 		}
 
-		basicAddRelation(relation);
-		if (relation != null) {
-			if (relation instanceof RelationImpl) {
-				((RelationImpl<? extends N, ? extends N>) relation).basicSetGraph(this);
-			}
+		if (relation instanceof RelationImpl) {
+			((RelationImpl<? extends N, ? extends N>) relation).basicSetGraph(this);
 		}
+		basicAddRelation(relation);
 	}
 
 	/**
