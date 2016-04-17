@@ -54,7 +54,7 @@ public class SGraphImpl extends
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SGraphImpl(Graph delegate) {
+	public SGraphImpl(Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> delegate) {
 		super(delegate);
 	}
 

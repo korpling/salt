@@ -32,7 +32,7 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 
 @SuppressWarnings("serial")
-public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
+public class GraphNotifierImpl<N extends Node, R extends Relation<? extends N, ? extends N>, L extends Layer<N, R>> extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 

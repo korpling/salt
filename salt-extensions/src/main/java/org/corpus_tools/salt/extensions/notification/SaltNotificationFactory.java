@@ -175,7 +175,9 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	// ==========================================> salt core
 	@Override
 	public SGraph createSGraph() {
-		return (new SGraphImpl(createGraph()));
+		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph =
+				new GraphNotifierImpl<>();
+		return (new SGraphImpl(graph));
 	}
 
 	@Override
@@ -237,7 +239,9 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public SDocumentGraph createSDocumentGraph() {
-		return (new SDocumentGraphImpl(createGraph()));
+		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph = 
+				new GraphNotifierImpl<>();
+		return (new SDocumentGraphImpl(graph));
 	}
 
 	@Override
