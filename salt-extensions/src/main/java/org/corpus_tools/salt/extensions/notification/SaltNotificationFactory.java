@@ -213,7 +213,9 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public SLayer createSLayer() {
-		return (new SLayerImpl(createLayer()));
+		Layer<SNode, SRelation<? extends SNode, ? extends SNode>> layer = 
+				new LayerNotifierImpl<>();
+		return (new SLayerImpl(layer));
 	}
 
 	// ==========================================< salt core

@@ -47,7 +47,7 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? ex
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SLayerImpl(Layer delegate) {
+	public SLayerImpl(Layer<SNode, SRelation<? extends SNode, ? extends SNode>> delegate) {
 		super(delegate);
 	}
 

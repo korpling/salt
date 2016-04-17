@@ -73,8 +73,10 @@ import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
+import org.corpus_tools.salt.graph.impl.LayerImpl;
 import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.corpus_tools.salt.impl.SaltFactoryImpl;
 import org.corpus_tools.salt.semantics.SCatAnnotation;
@@ -131,7 +133,9 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SLayer createSLayer() {
-		return (new SLayerImpl(createLayer()));
+		Layer<SNode, SRelation<? extends SNode, ? extends SNode>> layer = 
+				new LayerImpl<>();
+		return (new SLayerImpl(layer));
 	}
 
 	// ==========================================< salt core
