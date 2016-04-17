@@ -112,7 +112,7 @@ public interface SGraph extends
 	 *            Name of the relation to search for
 	 * @return A complete list of all matching relations. Is never null.
 	 */
-	public List<SRelation> getRelationsByName(String relationName);
+	public List<SRelation<? extends SNode, ? extends SNode>> getRelationsByName(String relationName);
 
 	/**
 	 * Searches for a layer or a set of layers having the given layer name.

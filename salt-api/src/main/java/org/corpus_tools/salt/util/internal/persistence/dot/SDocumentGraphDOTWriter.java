@@ -338,7 +338,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation relation, SNode fromNode, long order) {
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<?,?> relation, SNode fromNode, long order) {
 		SNode currSNode = (SNode) currNode;
 		SNode fromSNode = null;
 		if (fromNode != null) {

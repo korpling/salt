@@ -244,7 +244,7 @@ public class GraphMLWriter {
 			}
 
 			if (relations != null) {
-				for (SRelation e : relations) {
+				for (SRelation<?,?> e : relations) {
 					writeEdge(w, e, ids, existingKeys);
 				}
 			}

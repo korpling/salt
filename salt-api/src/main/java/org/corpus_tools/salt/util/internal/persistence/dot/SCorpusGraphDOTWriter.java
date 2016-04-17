@@ -132,16 +132,16 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 	}
 
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation edge, SNode currNode, long order) {
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<?,?> edge, SNode currNode, long order) {
 		return true;
 	}
 
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge, SNode fromNode, long order) {
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<?,?> edge, SNode fromNode, long order) {
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currSNode, SRelation relation, SNode fromSNode, long order) {
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currSNode, SRelation<?,?> relation, SNode fromSNode, long order) {
 		DOTNode dotNode = new DOTNode();
 		dotNode.id = currSNode.getId();
 

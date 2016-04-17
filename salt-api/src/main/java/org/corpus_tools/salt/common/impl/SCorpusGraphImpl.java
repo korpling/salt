@@ -130,18 +130,18 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is not a SRelation object. ");
 		}
 		// start: create a name if none exists
-		if ((((SRelation) relation).getName() == null) || (((SRelation) relation).getName().isEmpty())) {
+		if ((relation.getName() == null) || (relation.getName().isEmpty())) {
 			if (relation instanceof SCorpusRelation) {
-				((SRelation) relation).setName("corpRel" + (getCorpusRelations().size() + 1));
+				relation.setName("corpRel" + (getCorpusRelations().size() + 1));
 			} else if (relation instanceof SCorpusDocumentRelation) {
-				((SRelation) relation).setName("corpDocRel" + (getCorpusDocumentRelations().size() + 1));
+				relation.setName("corpDocRel" + (getCorpusDocumentRelations().size() + 1));
 			} else {
-				((SRelation) relation).setName("rel" + (getRelations().size() + 1));
+				relation.setName("rel" + (getRelations().size() + 1));
 			}
 		}
 		// end: create a name if none exists
-		if ((((SRelation) relation).getId() == null) || (((SRelation) relation).getId().isEmpty())) {
-			((SRelation) relation).setId("salt:/" + ((SRelation) relation).getName());
+		if ((relation.getId() == null) || (relation.getId().isEmpty())) {
+			relation.setId("salt:/" + relation.getName());
 		}
 		super.basicAddRelation(relation);
 

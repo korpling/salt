@@ -87,13 +87,13 @@ public class SGraphImpl extends
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SRelation> getRelationsByName(String relationName) {
+	public List<SRelation<? extends SNode, ? extends SNode>> getRelationsByName(String relationName) {
 		if ((relationName == null) || (relationName.isEmpty())) {
 			return (null);
 		}
 
-		List<SRelation> result = new ArrayList<>();
-		for (SRelation r : getRelations()) {
+		List<SRelation<? extends SNode, ? extends SNode>> result = new ArrayList<>();
+		for (SRelation<?,?> r : getRelations()) {
 			if ((r.getName() == null) || (r.getName().isEmpty())) {
 				break;
 			}
