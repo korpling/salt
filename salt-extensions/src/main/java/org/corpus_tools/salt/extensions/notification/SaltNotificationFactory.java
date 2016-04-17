@@ -234,7 +234,9 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public SCorpusGraph createSCorpusGraph() {
-		return (new SCorpusGraphImpl(createGraph()));
+		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph =
+				new GraphNotifierImpl<>();
+		return (new SCorpusGraphImpl(graph));
 	}
 
 	@Override

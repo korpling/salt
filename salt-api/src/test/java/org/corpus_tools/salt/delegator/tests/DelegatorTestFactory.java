@@ -150,7 +150,9 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SCorpusGraph createSCorpusGraph() {
-		return (new SCorpusGraphImpl(createGraph()));
+		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph =
+				new GraphImpl<>();
+		return (new SCorpusGraphImpl(graph));
 	}
 
 	@Override
