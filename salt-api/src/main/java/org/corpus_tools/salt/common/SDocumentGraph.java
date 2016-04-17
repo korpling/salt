@@ -216,7 +216,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            token
 	 * @return returns the created token
 	 */
-	public SToken createToken(List<DataSourceSequence> sequences);
+	public SToken createToken(List<DataSourceSequence<Integer>> sequences);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
@@ -229,7 +229,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            the sequence which shall be overlapped by the created token
 	 * @return returns the created token
 	 */
-	public SToken createToken(DataSourceSequence sequence);
+	public SToken createToken(DataSourceSequence<Integer> sequence);
 
 	/**
 	 * Creates a new {@link SSpan} object, adds it to the graph and returns the
@@ -508,7 +508,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            the offset in the data source where the created token ends
 	 * @return the created token
 	 */
-	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end);
+	public SToken createToken(SSequentialDS<?,Integer> sequentialDS, Integer start, Integer end);
 
 	/**
 	 * Tokenizes all {@link STextualDS} object being contained in this

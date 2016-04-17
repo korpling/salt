@@ -83,7 +83,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SDocumentGraphImpl(Graph delegate) {
+	public SDocumentGraphImpl(Graph<?,?,?> delegate) {
 		super(delegate);
 	}
 
@@ -482,14 +482,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SToken createToken(List<DataSourceSequence> sequences) {
+	public SToken createToken(List<DataSourceSequence<Integer>> sequences) {
 		if (sequences == null) {
 			throw new SaltParameterException("sDSSequences", "addSToken", this.getClass());
 		}
 		if (sequences.size() > 0) {
 			SToken sToken = SaltFactory.createSToken();
 			this.addNode(sToken);
-			for (DataSourceSequence sequence : sequences) {
+			for (DataSourceSequence<Integer> sequence : sequences) {
 				addToken(sToken, sequence);
 			}
 			return (sToken);
@@ -500,7 +500,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end) {
+	public SToken createToken(SSequentialDS<?,Integer> sequentialDS, Integer start, Integer end) {
 		if (sequentialDS == null) {
 			throw new SaltParameterException("sequentialDS", "createToken", this.getClass(), "The passed sequentialDS is empty. ");
 		}
@@ -508,7 +508,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			throw new SaltInsertionException(this, sequentialDS, "The passed sequentialDS does not belong to this document graph. ");
 		}
 		SToken sTok = SaltFactory.createSToken();
-		DataSourceSequence sequence = new DataSourceSequence<Number>();
+		DataSourceSequence<Integer> sequence = new DataSourceSequence<>();
 		sequence.setStart(start);
 		sequence.setEnd(end);
 		sequence.setDataSource(sequentialDS);
@@ -527,7 +527,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 *            object containing the {@link SSequentialDS} object and the
 	 *            borders, to which the token points to
 	 */
-	private void addToken(SToken token, DataSourceSequence sequence) {
+	private void addToken(SToken token, DataSourceSequence<Integer> sequence) {
 		if (sequence == null) {
 			throw new SaltParameterException("sDSSequence", "addSToken", this.getClass());
 		}
@@ -544,7 +544,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			addNode(token);
 		}
 
-		SSequentialRelation seqRel = null;
+		SSequentialRelation<SToken,?,Integer> seqRel = null;
 
 		if (sequence.getDataSource() instanceof STextualDS) {
 			seqRel = SaltFactory.createSTextualRelation();
@@ -563,7 +563,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SToken createToken(DataSourceSequence sDSSequence) {
+	public SToken createToken(DataSourceSequence<Integer> sDSSequence) {
 		SToken sToken = SaltFactory.createSToken();
 		addNode(sToken);
 		addToken(sToken, sDSSequence);

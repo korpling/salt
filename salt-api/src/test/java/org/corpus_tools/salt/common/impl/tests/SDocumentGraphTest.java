@@ -406,7 +406,7 @@ public class SDocumentGraphTest {
 		String text = "This is a sample text.";
 		STextualDS stext = getFixture().createTextualDS(text);
 
-		List<DataSourceSequence> sequences = null;
+		List<DataSourceSequence<Integer>> sequences = null;
 
 		try {
 			getFixture().createToken(sequences);
@@ -415,7 +415,7 @@ public class SDocumentGraphTest {
 		}
 
 		sequences = new ArrayList<>();
-		DataSourceSequence sequence = null;
+		DataSourceSequence<Integer> sequence = null;
 
 		sequences.add(sequence);
 		try {
@@ -424,7 +424,7 @@ public class SDocumentGraphTest {
 		} catch (Exception e) {
 		}
 		sequences = new ArrayList<>();
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequences.add(sequence);
 		sequence.setDataSource(stext);
 
