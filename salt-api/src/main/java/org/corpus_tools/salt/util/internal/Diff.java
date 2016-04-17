@@ -876,11 +876,11 @@ public class Diff {
 			} else if (sharedParents.size() > 1) {
 				// Several candidates have been found. Check which shared parent
 				// node has the same children as other node
-				List<SRelation> otherOutRels = otherNode.getOutRelations();
+				List<SRelation<?,?>> otherOutRels = otherNode.getOutRelations();
 				Set<SNode> trueCandidates = new HashSet<>();
 
 				for (SNode templateCandidate : sharedParents) {
-					List<SRelation> templateOutRels = templateCandidate.getOutRelations();
+					List<SRelation<?,?>> templateOutRels = templateCandidate.getOutRelations();
 					// check if node degree is the same
 					if (otherOutRels.size() == templateOutRels.size()) {
 						// check if each child of other node has a partner in
@@ -888,7 +888,7 @@ public class Diff {
 
 						// create a set of of otherChildren
 						Set<SNode> otherChldren = new HashSet<>();
-						Iterator<SRelation> it = otherOutRels.iterator();
+						Iterator<SRelation<?,?>> it = otherOutRels.iterator();
 						while (it.hasNext()) {
 							otherChldren.add((SNode) it.next().getTarget());
 						}
@@ -896,7 +896,7 @@ public class Diff {
 						// ckeck if all children of other node and candidate are
 						// isomorph
 						boolean trueCandidate = true;
-						Iterator<SRelation> it_template = templateOutRels.iterator();
+						Iterator<SRelation<?,?>> it_template = templateOutRels.iterator();
 						while (it_template.hasNext()) {
 							SNode templateChild = (SNode) it_template.next().getTarget();
 							if (!otherChldren.contains(getIsoNodes().get(templateChild))) {

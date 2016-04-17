@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SGraph;
@@ -72,15 +71,16 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * {@inheritDoc SNode#getOutgoingSRelations()}
 	 */
 	@Override
-	public List<SRelation> getOutRelations() {
+	public List<SRelation<?,?>> getOutRelations() {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation<? extends SNode, ? extends SNode>> outRelations = getGraph().getOutRelations(getId());
+		List<SRelation<?, ?>> outRelations = getGraph().getOutRelations(getId());
 		if (outRelations != null) {
-			List<SRelation> sOutRelList = new ArrayList<>();
-			for (SRelation rel : outRelations) {
-				sOutRelList.add((SRelation) rel);
+			// TODO: do we really have to do a copy here any longer?
+			List<SRelation<?,?>> sOutRelList = new ArrayList<>();
+			for (SRelation<?,?> rel : outRelations) {
+				sOutRelList.add(rel);
 			}
 			return sOutRelList;
 		}
@@ -91,15 +91,16 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * {@inheritDoc SNode#getIncomingSRelations()}
 	 */
 	@Override
-	public List<SRelation> getInRelations() {
+	public List<SRelation<?,?>> getInRelations() {
 		if (getGraph() == null) {
 			return null;
 		}
-		List<SRelation<? extends SNode, ? extends SNode>> inRelations = getGraph().getInRelations(getId());
+		List<SRelation<?, ?>> inRelations = getGraph().getInRelations(getId());
 		if (inRelations != null) {
-			List<SRelation> sInRelList = new ArrayList<>();
-			for (SRelation rel : inRelations) {
-				sInRelList.add((SRelation) rel);
+			// TODO: do we really have to do a copy here any longer?
+			List<SRelation<?,?>> sInRelList = new ArrayList<>();
+			for (SRelation<?,?> rel : inRelations) {
+				sInRelList.add(rel);
 			}
 			return sInRelList;
 		}
@@ -337,7 +338,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	/** {@inheritDoc} **/
 	@Override
 	public SGraph getGraph() {
-		Graph superGraph = super.getGraph();
+		Graph<?,?,?> superGraph = super.getGraph();
 		if (superGraph == null) {
 			return null;
 		}
