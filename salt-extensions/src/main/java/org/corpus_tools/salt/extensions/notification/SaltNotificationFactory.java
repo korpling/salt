@@ -187,7 +187,8 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public SRelation<SNode, SNode> createSRelation() {
-		return (new SRelationImpl<SNode, SNode>(createRelation()));
+		Relation<SNode, SNode> rel = new RelationNotifierImpl<>();
+		return (new SRelationImpl<SNode, SNode>(rel));
 	}
 
 	@Override

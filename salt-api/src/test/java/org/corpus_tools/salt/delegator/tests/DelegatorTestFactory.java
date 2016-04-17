@@ -73,7 +73,9 @@ import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
+import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.corpus_tools.salt.impl.SaltFactoryImpl;
 import org.corpus_tools.salt.semantics.SCatAnnotation;
 import org.corpus_tools.salt.semantics.SLemmaAnnotation;
@@ -103,7 +105,8 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SRelation<SNode, SNode> createSRelation() {
-		return (new SRelationImpl<SNode, SNode>(createRelation()));
+		Relation<SNode,SNode> rel = new RelationImpl<>();
+		return (new SRelationImpl<SNode, SNode>(rel));
 	}
 
 	@Override

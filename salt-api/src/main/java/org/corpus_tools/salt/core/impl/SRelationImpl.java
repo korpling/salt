@@ -22,7 +22,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SGraph;
@@ -55,7 +54,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SRelationImpl(Relation delegate) {
+	public SRelationImpl(Relation<S,T> delegate) {
 		super(delegate);
 	}
 
@@ -302,7 +301,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 
 	@Override
 	public SGraph getGraph() {
-		Graph superGraph = super.getGraph();
+		Graph<?,?,?> superGraph = super.getGraph();
 		if (superGraph == null) {
 			return null;
 		}
@@ -328,7 +327,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 			Set<SLayer> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
 				for (SLayer layer : allLayers) {
-					if (layer.getRelations().contains((SRelation) this)) {
+					if (layer.getRelations().contains((SRelation<?,?>) this)) {
 						layers.add(layer);
 					}
 				}
