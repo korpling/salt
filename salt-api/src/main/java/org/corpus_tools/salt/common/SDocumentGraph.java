@@ -367,7 +367,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<? extends DataSourceSequence<?>> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
+	public List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
@@ -382,7 +382,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<? extends DataSourceSequence<?>> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
+	public List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is

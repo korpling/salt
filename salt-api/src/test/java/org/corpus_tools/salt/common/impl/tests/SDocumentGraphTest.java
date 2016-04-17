@@ -450,7 +450,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testcreateToken__DataSourceSequence() {
 		String text = "This is a sample text.";
-		DataSourceSequence sequence = null;
+		DataSourceSequence<Integer> sequence = null;
 		STextualDS stext = getFixture().createTextualDS(text);
 
 		try {
@@ -458,7 +458,7 @@ public class SDocumentGraphTest {
 			fail("empty data-source value");
 		} catch (Exception e) {
 		}
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(stext);
 
 		try {
@@ -628,11 +628,11 @@ public class SDocumentGraphTest {
 		// end: sTokens for sText1
 		// end: create sample graph
 
-		DataSourceSequence sequence = null;
+		DataSourceSequence<Integer> sequence = null;
 		List<SNode> coveredSTokens = null;
 
 		// start: test1
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(sText1);
 		sequence.setStart(0);
 		sequence.setEnd(4);
@@ -644,7 +644,7 @@ public class SDocumentGraphTest {
 		// end: test 1
 
 		// start: test2
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(sText1);
 		sequence.setStart(5);
 		sequence.setEnd(16);
@@ -658,7 +658,7 @@ public class SDocumentGraphTest {
 		// end: test 2
 
 		// start: test3
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(sText1);
 		sequence.setStart(0);
 		sequence.setEnd(sText1.getText().length());
@@ -675,7 +675,7 @@ public class SDocumentGraphTest {
 		// end: test 3
 
 		// start: test3
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(sText2);
 		sequence.setStart(0);
 		sequence.setEnd(sText2.getText().length());
@@ -700,7 +700,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetOverlappedDSSequences__SNode_EList() {
 		String text = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
+		DataSourceSequence<Integer> dsSequence = new DataSourceSequence<>();
 		// start: create sample graph
 		STextualDS sText = getFixture().createTextualDS(text);
 		dsSequence.setDataSource(sText);
@@ -760,7 +760,7 @@ public class SDocumentGraphTest {
 		struct3.setName("struct3");
 		// end: create sample graph
 
-		DataSourceSequence sequence = null;
+		DataSourceSequence<?> sequence = null;
 		sequence = getFixture().getOverlappedDataSourceSequence(struct2, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		assertNotNull(sequence);
 		assertEquals(0, sequence.getStart());
@@ -790,7 +790,7 @@ public class SDocumentGraphTest {
 	public void testGetOverlappedDSSequences__STextualDS_EList() {
 		STextualDS sTextualDs = SaltFactory.createSTextualDS();
 		getFixture().addNode(sTextualDs);
-		DataSourceSequence sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
+		DataSourceSequence<? extends Number> sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		assertEquals(sTextualDs, sequence.getDataSource());
 
 		sTextualDs.setText("This is a sample text.");
@@ -813,7 +813,7 @@ public class SDocumentGraphTest {
 	@SuppressWarnings("unchecked")
 	public void testIsContinuousByText__EList() {
 		String text = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
+		DataSourceSequence<Integer> dsSequence = new DataSourceSequence<>();
 
 		// start: create sample graph
 		STextualDS sText = getFixture().createTextualDS(text);
@@ -884,7 +884,7 @@ public class SDocumentGraphTest {
 	@SuppressWarnings("unchecked")
 	public void testIsContinuousByText__EList_EList() {
 		String text = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
+		DataSourceSequence<Integer> dsSequence = new DataSourceSequence<>();
 
 		// start: create sample graph
 		STextualDS sText = getFixture().createTextualDS(text);
@@ -1558,7 +1558,7 @@ public class SDocumentGraphTest {
 		SToken tok4 = getFixture().createToken(primaryText, 10, 16);
 		SToken tok5 = getFixture().createToken(primaryText, 16, 17);
 
-		DataSourceSequence sequence = null;
+		DataSourceSequence<? extends Number> sequence = null;
 
 		sequence = getFixture().getOverlappedDataSourceSequence(tok1, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		assertEquals(0, sequence.getStart());

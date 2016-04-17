@@ -363,7 +363,7 @@ public class Tokenizer {
 			// check if tokens exist for passed span
 			List<SToken> tokens = null;
 			if ((startPos != 0) || (endPos != sTextualDS.getText().length()) || (getDocumentGraph().getTextualDSs().size() > 1)) {
-				DataSourceSequence sequence = new DataSourceSequence();
+				DataSourceSequence<Integer> sequence = new DataSourceSequence<>();
 				sequence.setDataSource(sTextualDS);
 				sequence.setStart(startPos);
 				sequence.setEnd(endPos);

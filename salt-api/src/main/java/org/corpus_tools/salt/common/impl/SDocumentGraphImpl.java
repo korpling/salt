@@ -900,7 +900,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (this.getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION) == null) {
 			return null;
 		}
-		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
+		DataSourceSequence<?> sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(), (Integer) sData.getEnd());
 	}
 
