@@ -109,31 +109,29 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public void addRelation(SRelation<? extends SNode, ? extends SNode> relation) {
 		if (relation != null) {
-			if (!(relation instanceof SRelation)) {
-				throw new SaltInsertionException(this, relation, "Cannot insert an relation, which is not a SRelation object.");
-			}
+			
 			// start: create a name if none exists
-			if ((((SRelation) relation).getName() == null) || (((SRelation) relation).getName().isEmpty())) {
+			if ((relation.getName() == null) || (relation.getName().isEmpty())) {
 				if (relation instanceof STextualRelation) {
-					((SRelation) relation).setName("sTextRel" + (getTextualRelations().size() + 1));
+					relation.setName("sTextRel" + (getTextualRelations().size() + 1));
 				} else if (relation instanceof STimelineRelation) {
-					((SRelation) relation).setName("sTimeRel" + (getTimelineRelations().size() + 1));
+					relation.setName("sTimeRel" + (getTimelineRelations().size() + 1));
 				} else if (relation instanceof SSpanningRelation) {
-					((SRelation) relation).setName("sSpanRel" + (getSpanningRelations().size() + 1));
+					relation.setName("sSpanRel" + (getSpanningRelations().size() + 1));
 				} else if (relation instanceof SPointingRelation) {
-					((SRelation) relation).setName("sPointingRel" + (getPointingRelations().size() + 1));
+					relation.setName("sPointingRel" + (getPointingRelations().size() + 1));
 				} else if (relation instanceof SDominanceRelation) {
-					((SRelation) relation).setName("sDomRel" + (getDominanceRelations().size() + 1));
+					relation.setName("sDomRel" + (getDominanceRelations().size() + 1));
 				} else if (relation instanceof SMedialRelation) {
-					((SRelation) relation).setName("sAudioRel" + (getMedialRelations().size() + 1));
+					relation.setName("sAudioRel" + (getMedialRelations().size() + 1));
 				} else if (relation instanceof SOrderRelation) {
-					((SRelation) relation).setName("sOrderRel" + (getOrderRelations().size() + 1));
+					relation.setName("sOrderRel" + (getOrderRelations().size() + 1));
 				} else {
-					((SRelation) relation).setName("sRel" + (getRelations().size() + 1));
+					relation.setName("sRel" + (getRelations().size() + 1));
 				}
 			}
 			// end: create a name if none exists
-			((SRelation) relation).setId(getId() + "#" + ((SRelation) relation).getName());
+			relation.setId(getId() + "#" + relation.getName());
 			super.addRelation(relation);
 
 			Class<?> key;
@@ -439,23 +437,67 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SRelation addNode(SNode source, SNode target, SALT_TYPE sRelationType) {
+	public SRelation<? extends SNode, ? extends SNode> addNode(SNode source, SNode target, SALT_TYPE sRelationType) {
 		if (!getNodes().contains(source)) {
 			throw new SaltElementNotInGraphException(this, source, "Given SNode cannot be used as source node, because it is not contained in the SDocumentGraph");
 		}
-		SRelation retVal = null;
+		SRelation<? extends SNode, ? extends SNode> retVal = null;
 		switch (sRelationType) {
 		case STEXTUAL_RELATION:
-			retVal = SaltFactory.createSTextualRelation();
+			STextualRelation textRel = SaltFactory.createSTextualRelation();
+			
+			if(!(source instanceof SToken)) {
+				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SToken");
+			}
+			if(!(target instanceof STextualDS)) {
+				throw new SaltParameterException("target", "addNode", getClass(), "Type must be STextualDS");
+			}
+			textRel.setSource((SToken) source);
+			textRel.setTarget((STextualDS) target);
+			
+			retVal = textRel;
 			break;
 		case SPOINTING_RELATION:
-			retVal = SaltFactory.createSPointingRelation();
+			SPointingRelation pointingRel = SaltFactory.createSPointingRelation();
+			
+			if(!(source instanceof SStructuredNode)) {
+				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructuredNode");
+			}
+			if(!(target instanceof SStructuredNode)) {
+				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
+			}
+			pointingRel.setSource((SStructuredNode) source);
+			pointingRel.setTarget((SStructuredNode) target);
+			
+			retVal = pointingRel;
 			break;
 		case SSPANNING_RELATION:
-			retVal = SaltFactory.createSSpanningRelation();
+			SSpanningRelation spanRel = SaltFactory.createSSpanningRelation();
+			
+			if(!(source instanceof SSpan)) {
+				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SSpan");
+			}
+			if(!(target instanceof SToken)) {
+				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SToken");
+			}
+			spanRel.setSource((SSpan) source);
+			spanRel.setTarget((SToken) target);
+			
+			retVal = spanRel;
 			break;
 		case SDOMINANCE_RELATION:
-			retVal = SaltFactory.createSDominanceRelation();
+			SDominanceRelation domRel = SaltFactory.createSDominanceRelation();
+			
+			if(!(source instanceof SStructure)) {
+				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructure");
+			}
+			if(!(target instanceof SStructuredNode)) {
+				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
+			}
+			domRel.setSource((SStructure) source);
+			domRel.setTarget((SStructuredNode) target);
+			
+			retVal = domRel;
 			break;
 		default:
 			break;
@@ -463,8 +505,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (retVal == null) {
 			throw new SaltParameterException("Improper STYPE_NAME for this method; must be one of STEXTUAL_RELATION, SPOINTING_RELATION, SSPANNING_RELATION and SDOMINANCE_RELATION.");
 		}
-		retVal.setSource(source);
-		retVal.setTarget(target);
+
 		if (!getNodes().contains(target)) {
 			addNode(target);
 		}
@@ -842,39 +883,81 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SRelation createRelation(SNode sSource, SNode sTarget, SALT_TYPE sRelationType, String sAnnotations) {
-		if (sSource == null) {
+	public SRelation<? extends SNode, ? extends SNode> createRelation(SNode source, SNode target, SALT_TYPE relationType, String sAnnotations) {
+		if (source == null) {
 			throw new SaltParameterException("Cannot create an Srelation, because the passed source node is null.");
 		}
-		if (sTarget == null) {
+		if (target == null) {
 			throw new SaltParameterException("Cannot create an Srelation, because the passed target node is null.");
 		}
-		if (sRelationType == null) {
+		if (relationType == null) {
 			throw new SaltParameterException("Cannot create an Srelation, because the type of relation is null.");
 		}
-		SRelation sRel = null;
-		switch (sRelationType) {
+		SRelation<? extends SNode, ? extends SNode> sRel = null;
+		
+		
+		switch (relationType) {
+		
 		case SPOINTING_RELATION:
-			sRel = SaltFactory.createSPointingRelation();
+			SPointingRelation pointingRel = SaltFactory.createSPointingRelation();
+			
+			if(!(source instanceof SStructuredNode)) {
+				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructuredNode");
+			}
+			if(!(target instanceof SStructuredNode)) {
+				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
+			}
+			pointingRel.setSource((SStructuredNode) source);
+			pointingRel.setTarget((SStructuredNode) target);
+			
+			sRel = pointingRel;
 			break;
 		case SSPANNING_RELATION:
-			sRel = SaltFactory.createSSpanningRelation();
+			SSpanningRelation spanRel = SaltFactory.createSSpanningRelation();
+			
+			if(!(source instanceof SSpan)) {
+				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SSpan");
+			}
+			if(!(target instanceof SToken)) {
+				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SToken");
+			}
+			spanRel.setSource((SSpan) source);
+			spanRel.setTarget((SToken) target);
+			
+			sRel = spanRel;
 			break;
 		case SDOMINANCE_RELATION:
-			sRel = SaltFactory.createSDominanceRelation();
+			SDominanceRelation domRel = SaltFactory.createSDominanceRelation();
+			
+			if(!(source instanceof SStructure)) {
+				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructure");
+			}
+			if(!(target instanceof SStructuredNode)) {
+				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
+			}
+			domRel.setSource((SStructure) source);
+			domRel.setTarget((SStructuredNode) target);
+			
+			sRel = domRel;
 			break;
 		case SORDER_RELATION:
-			sRel = SaltFactory.createSOrderRelation();
+			SOrderRelation orderRel = SaltFactory.createSOrderRelation();
+			
+			if(!(source instanceof SStructuredNode)) {
+				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructuredNode");
+			}
+			if(!(target instanceof SStructuredNode)) {
+				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
+			}
+			orderRel.setSource((SStructuredNode) source);
+			orderRel.setTarget((SStructuredNode) target);
+			
+			sRel = orderRel;
 			break;
 		default:
-			throw new SaltParameterException("Cannot create an SRelation, because the passed type '" + sRelationType + "' is not supported for this method.");
+			throw new SaltParameterException("Cannot create an SRelation, because the passed type '" + relationType + "' is not supported for this method.");
 		}
-		try {
-			sRel.setSource(sSource);
-			sRel.setTarget(sTarget);
-		} catch (Exception e) {
-			throw new SaltParameterException("Cannot create an SRelation for the passed type '" + sRelationType + "', because of a nested exception. It might be, that the passed type is not compatible to the types of passed sSource '" + sSource.getClass() + "' or sTarget node '" + sTarget.getClass() + "'.");
-		}
+		
 		addRelation(sRel);
 		sRel.createAnnotations(sAnnotations);
 		return (sRel);

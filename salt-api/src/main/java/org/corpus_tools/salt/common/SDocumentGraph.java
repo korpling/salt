@@ -177,7 +177,7 @@ public interface SDocumentGraph extends SGraph {
 	/**
 	 * Creates and returns a '<em><b>SRelation</b></em>' of the type given by
 	 * sRelationType between source and target. Note that the source is required
-	 * to be in the SDocumentGraph already and that the elationType may only be
+	 * to be in the SDocumentGraph already and that the relationType may only be
 	 * one of {@link SALT_TYPE#STEXTUAL_RELATION},
 	 * {@link SALT_TYPE#SSPANNING_RELATION},
 	 * {@link SALT_TYPE#SDOMINANCE_RELATION} and
@@ -191,7 +191,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            type of the relation to be created between source and target
 	 * @return created relation
 	 */
-	public SRelation addNode(SNode source, SNode target, SALT_TYPE relationType);
+	public SRelation<? extends SNode, ? extends SNode> addNode(SNode source, SNode target, SALT_TYPE relationType);
 
 	/**
 	 * Creates and adds a new {@link STextualDS} node object and sets its text
@@ -646,7 +646,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+
 	 * @return the created relation
 	 */
-	public SRelation createRelation(SNode source, SNode target, SALT_TYPE relationType, String annotations);
+	public SRelation<? extends SNode, ? extends SNode> createRelation(SNode source, SNode target, SALT_TYPE relationType, String annotations);
 
 	/**
 	 * Returns all tokens in the graph, which are overlapped by the passed node
