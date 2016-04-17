@@ -20,6 +20,7 @@ package org.corpus_tools.salt.common.impl;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusDocumentRelation;
 import org.corpus_tools.salt.common.SDocument;
+import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.graph.Relation;
 
@@ -38,7 +39,7 @@ public class SCorpusDocumentRelationImpl extends SRelationImpl<SCorpus, SDocumen
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SCorpusDocumentRelationImpl(Relation delegate) {
+	public SCorpusDocumentRelationImpl(Relation<SCorpus, SDocument> delegate) {
 		super(delegate);
 	}
 } // SCorpusDocumentRelationImpl

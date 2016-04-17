@@ -37,7 +37,7 @@ public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedial
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SMedialRelationImpl(Relation delegate) {
+	public SMedialRelationImpl(Relation<SToken, SMedialDS> delegate) {
 		super(delegate);
 	}
 

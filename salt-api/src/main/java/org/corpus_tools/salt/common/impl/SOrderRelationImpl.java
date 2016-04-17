@@ -50,7 +50,7 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SOrderRelationImpl(Relation delegate) {
+	public SOrderRelationImpl(Relation<SStructuredNode, SStructuredNode> delegate) {
 		super(delegate);
 	}
 

@@ -36,6 +36,7 @@ import org.corpus_tools.salt.common.SPointingRelation;
 import org.corpus_tools.salt.common.SSpan;
 import org.corpus_tools.salt.common.SSpanningRelation;
 import org.corpus_tools.salt.common.SStructure;
+import org.corpus_tools.salt.common.SStructuredNode;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.STimeline;
@@ -144,15 +145,16 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	}
 
 	@Override
-	public Relation<Node, Node> createRelation() {
-		RelationNotifierImpl<Node, Node> relation = new RelationNotifierImpl<Node, Node>();
+	public <S extends Node, T extends Node> Relation<S,T> createRelation() {
+		RelationNotifierImpl<S, T> relation = new RelationNotifierImpl<>();
 		relation.addListener(relation.getListener());
 		return (relation);
 	}
 
 	@Override
-	public Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
-		GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = new GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>();
+	public<N extends Node,R extends Relation<? extends N, ? extends N>, L extends Layer<N,R>> 
+			Graph<N,R,L> createGraph() {
+		GraphNotifierImpl<N, R,L> graph = new GraphNotifierImpl<>();
 		graph.addListener(getListener());
 		return (graph);
 	}
@@ -227,12 +229,14 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public SCorpusRelation createSCorpusRelation() {
-		return (new SCorpusRelationImpl(createRelation()));
+		Relation<SCorpus, SCorpus> rel = createRelation();
+		return (new SCorpusRelationImpl(rel));
 	}
 
 	@Override
 	public SCorpusDocumentRelation createSCorpusDocumentRelation() {
-		return (new SCorpusDocumentRelationImpl(createRelation()));
+		Relation<SCorpus, SDocument> rel = createRelation();
+		return (new SCorpusDocumentRelationImpl(rel));
 	}
 
 	@Override
@@ -260,38 +264,39 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	}
 
 	@Override
-	public SSpanningRelation createSSpanningRelation() {
-		return (new SSpanningRelationImpl(createRelation()));
-	}
-
-	@Override
 	public SDominanceRelation createSDominanceRelation() {
-		return (new SDominanceRelationImpl(createRelation()));
+		Relation<SStructure, SStructuredNode> rel = createRelation();
+		return (new SDominanceRelationImpl(rel));
 	}
 
 	@Override
 	public SPointingRelation createSPointingRelation() {
-		return (new SPointingRelationImpl(createRelation()));
+		Relation<SStructuredNode, SStructuredNode> rel = createRelation();
+		return (new SPointingRelationImpl(rel));
 	}
 
 	@Override
 	public SOrderRelation createSOrderRelation() {
-		return (new SOrderRelationImpl(createRelation()));
+		Relation<SStructuredNode, SStructuredNode> rel = createRelation();
+		return (new SOrderRelationImpl(rel));
 	}
 
 	@Override
 	public STextualRelation createSTextualRelation() {
-		return (new STextualRelationImpl(createRelation()));
+		Relation<SToken, STextualDS> rel = createRelation();
+		return (new STextualRelationImpl(rel));
 	}
 
 	@Override
 	public STimelineRelation createSTimelineRelation() {
-		return (new STimelineRelationImpl(createRelation()));
+		Relation<SToken, STimeline> rel = createRelation();
+		return (new STimelineRelationImpl(rel));
 	}
 
 	@Override
 	public SMedialRelation createSMedialRelation() {
-		return (new SMedialRelationImpl(createRelation()));
+		Relation<SToken, SMedialDS> rel = createRelation();
+		return (new SMedialRelationImpl(rel));
 	}
 
 	@Override

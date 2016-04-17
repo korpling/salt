@@ -41,7 +41,7 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SPointingRelationImpl(Relation delegate) {
+	public SPointingRelationImpl(Relation<SStructuredNode, SStructuredNode> delegate) {
 		super(delegate);
 	}
 

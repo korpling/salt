@@ -34,8 +34,9 @@ public class GraphFactoryImpl implements IGraphFactory {
 	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createGraph()
 	 */
 	@Override
-	public Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
-		return (new GraphImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>());
+	public<N extends Node,R extends Relation<? extends N, ? extends N>, L extends Layer<N,R>> 
+		Graph<N,R,L> createGraph() {
+		return (new GraphImpl<N,R,L>());
 	}
 
 	/*
@@ -54,8 +55,8 @@ public class GraphFactoryImpl implements IGraphFactory {
 	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createRelation()
 	 */
 	@Override
-	public Relation<Node, Node> createRelation() {
-		return (new RelationImpl<Node, Node>());
+	public <S extends Node, T extends Node> Relation<S,T> createRelation() {
+		return (new RelationImpl<S, T>());
 	}
 
 	/*

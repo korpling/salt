@@ -44,7 +44,7 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SSequentialRelationImpl(Relation delegate) {
+	public SSequentialRelationImpl(Relation<S, T> delegate) {
 		super(delegate);
 	}
 
