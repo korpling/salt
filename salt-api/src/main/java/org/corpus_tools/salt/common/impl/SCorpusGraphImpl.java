@@ -39,7 +39,6 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.graph.Node;
-import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
@@ -73,8 +72,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	protected void init() {
 		super.init();
 
-		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, expectedNodes / 2, expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, expectedRelations / 2, expectedRelations);
 	}
 
 	/** Salt-project containing this corpus structure **/
@@ -207,13 +206,27 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpus> getCorpora() {
-		return (getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SCorpus.class));
+		List<SNode> nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SCorpus.class);
+		List<SCorpus> result = new ArrayList<>(nodes.size());
+		for(Node n : nodes) {
+			if(n instanceof SCorpus) {
+				result.add((SCorpus) n);
+			}
+		}
+		return result;
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SDocument> getDocuments() {
-		return (getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SDocument.class));
+		List<SNode> nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SDocument.class);
+		List<SDocument> result = new ArrayList<>(nodes.size());
+		for(Node n : nodes) {
+			if(n instanceof SDocument) {
+				result.add((SDocument) n);
+			}
+		}
+		return result;
 	}
 
 	// ============================ end: handling specific nodes
@@ -221,13 +234,27 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusRelation> getCorpusRelations() {
-		return (getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusRelation.class));
+		List<SRelation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusRelation.class);
+		List<SCorpusRelation> result = new ArrayList<>(relations.size());
+		for(SRelation<?,?> e : relations) {
+			if(e instanceof SCorpusRelation) {
+				result.add((SCorpusRelation) e);
+			}
+		}
+		return result;
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusDocumentRelation> getCorpusDocumentRelations() {
-		return (getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusDocumentRelation.class));
+		List<SRelation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusDocumentRelation.class);
+		List<SCorpusDocumentRelation> result = new ArrayList<>(relations.size());
+		for(SRelation<?,?> e : relations) {
+			if(e instanceof SCorpusDocumentRelation) {
+				result.add((SCorpusDocumentRelation) e);
+			}
+		}
+		return result;
 	}
 
 	// ============================ end: handling specific relations

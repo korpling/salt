@@ -20,8 +20,8 @@ package org.corpus_tools.salt.index.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
+import org.corpus_tools.salt.index.IndexID;
 import org.corpus_tools.salt.index.IndexMgr;
 import org.corpus_tools.salt.index.IndexMgrImpl;
 import org.junit.Before;
@@ -49,12 +49,12 @@ public class IndexMgrTest {
 	 */
 	@Test
 	public void testCreateIndex() {
-		String index1 = "index01";
-		String index2 = "index02";
-
-		getFixture().createIndex(index1, String.class, String.class);
+		IndexID<String, String> index1 = new IndexID<>("index01", String.class, String.class);
+		IndexID<Object, Object> index2 = new IndexID<>("index02", Object.class, Object.class);
+	
+		getFixture().createIndex(index1);
 		assertTrue(getFixture().containsIndex(index1));
-		getFixture().createIndex(index2, Object.class, Object.class);
+		getFixture().createIndex(index2);
 		assertTrue(getFixture().containsIndex(index1));
 		assertTrue(getFixture().containsIndex(index2));
 	}
@@ -64,14 +64,8 @@ public class IndexMgrTest {
 	 */
 	@Test
 	public void testAddValues() {
-		String indexId = "index";
-		getFixture().createIndex(indexId, String.class, String.class);
-
-		try {
-			getFixture().put(indexId, "wrongObject", Integer.valueOf(4));
-			fail();
-		} catch (ClassCastException e) {
-		}
+		IndexID<String, String> indexId = new IndexID<>("index", String.class, String.class);
+		getFixture().createIndex(indexId);
 
 		getFixture().put(indexId, "key", "val1");
 		assertEquals("val1", getFixture().get(indexId, "key"));
@@ -86,15 +80,16 @@ public class IndexMgrTest {
 	 */
 	@Test
 	public void testRemoveValue() {
-		String index1 = "index1";
-		String index2 = "index2";
-		String index3 = "index3";
+		IndexID<String, Object> index1 = new IndexID<>("index1", String.class, Object.class);
+		IndexID<String, Object> index2 = new IndexID<>("index2", String.class, Object.class);
+		IndexID<String, Object> index3 = new IndexID<>("index3", String.class, Object.class);
+
 		String key = "key";
 		Object value = new Object();
 
-		getFixture().createIndex(index1, String.class, Object.class);
-		getFixture().createIndex(index2, String.class, Object.class);
-		getFixture().createIndex(index3, String.class, Object.class);
+		getFixture().createIndex(index1);
+		getFixture().createIndex(index2);
+		getFixture().createIndex(index3);
 
 		getFixture().put(index1, "key1", "val1");
 		getFixture().put(index1, key, value);
@@ -112,7 +107,7 @@ public class IndexMgrTest {
 		assertTrue(getFixture().getAll(index2, key).contains(value));
 		assertTrue(getFixture().getAll(index3, key).contains(value));
 
-		getFixture().removeValue(value);
+		getFixture().removeValue(value, Object.class);
 
 		assertFalse(getFixture().getAll(index1, key).contains(value));
 		assertFalse(getFixture().getAll(index2, key).contains(value));

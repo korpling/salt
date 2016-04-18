@@ -28,13 +28,21 @@ public class GraphFactory {
 	/** Internal factory which is used to create objects. **/
 	private static IGraphFactory factory = new GraphFactoryImpl();
 
+	@SuppressWarnings("unchecked")
+	public static final Class<Relation<Node, Node>> RELATION_CLASS = 
+			(Class<Relation<Node, Node>>) (Class<?>) Relation.class;
+	
+	@SuppressWarnings("unchecked")
+	public static final Class<Layer<Node, Relation<Node, Node>>> LAYER_CLASS =
+			(Class<Layer<Node, Relation<Node, Node>>>) (Class<?>) Layer.class;
+	
 	/**
 	 * Creates a new {@link Graph} object of type {@link GraphImpl}.
 	 * 
 	 * @return new {@link Graph} object
 	 */
 	public static Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
-		return (factory.createGraph());
+		return (factory.createGraph(Node.class, RELATION_CLASS, LAYER_CLASS ));
 	}
 
 	/**

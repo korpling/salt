@@ -239,7 +239,7 @@ public class DataSourceAccessor {
 			comparator.setDocumentGraph(documentGraph);
 
 			// sort tokens
-			List<SToken> tokens = documentGraph.getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SToken.class);
+			List<SToken> tokens = documentGraph.getTokens();
 			List<SToken> mutableTokens = new LinkedList<SToken>(tokens);
 			Collections.sort(mutableTokens, comparator);
 			documentGraph.getIndexMgr().remove(SaltUtil.IDX_NODETYPE, SToken.class);
@@ -249,7 +249,7 @@ public class DataSourceAccessor {
 			comparatortextrels.setDocumentGraph(documentGraph);
 
 			// sort textual relations
-			List<STextualRelation> textualRelations = documentGraph.getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, STextualRelation.class);
+			List<STextualRelation> textualRelations = documentGraph.getTextualRelations();
 			List<STextualRelation> mutableTextualRelations = new LinkedList<STextualRelation>(textualRelations);
 			Collections.sort(mutableTextualRelations, comparatortextrels);
 			documentGraph.getIndexMgr().remove(SaltUtil.IDX_RELATIONTYPE, STextualRelation.class);

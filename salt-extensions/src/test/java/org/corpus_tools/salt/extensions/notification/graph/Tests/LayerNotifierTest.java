@@ -23,6 +23,7 @@ import org.corpus_tools.salt.extensions.notification.graph.impl.NodeNotifierImpl
 import org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
@@ -59,7 +60,7 @@ public class LayerNotifierTest extends LayerTest {
 
 	@Override
 	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
-		return new GraphNotifierImpl<>();
+		return new GraphNotifierImpl<>(Node.class, GraphFactory.RELATION_CLASS, GraphFactory.LAYER_CLASS);
 	}
 
 	@Override

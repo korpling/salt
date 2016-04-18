@@ -31,7 +31,7 @@ public interface IGraphFactory {
 	 * @return new {@link Graph} object
 	 */
 	public<N extends Node,R extends Relation<? extends N, ? extends N>, L extends Layer<N,R>> 
-		Graph<N,R,L> createGraph();
+		Graph<N,R,L> createGraph(Class<N> nodeClass, Class<R> relationClass, Class<L> layerClass);
 
 	/**
 	 * Creates a new {@link Node} object of type {@link NodeImpl}.
@@ -45,7 +45,8 @@ public interface IGraphFactory {
 	 * 
 	 * @return new {@link Relation} object
 	 */
-	public <S extends Node, T extends Node> Relation<S,T> createRelation(Class<S> sourceClass, Class<T> targetClass);
+	public <S extends Node, T extends Node> Relation<S,T> 
+		createRelation(Class<S> sourceClass, Class<T> targetClass);
 	
 
 	/**

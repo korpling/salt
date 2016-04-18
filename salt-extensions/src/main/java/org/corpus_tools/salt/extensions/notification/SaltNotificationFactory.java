@@ -19,8 +19,8 @@ package org.corpus_tools.salt.extensions.notification;
 
 import java.util.Collection;
 import java.util.List;
-import org.corpus_tools.salt.Beta;
 
+import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.ISaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusDocumentRelation;
@@ -34,7 +34,6 @@ import org.corpus_tools.salt.common.SMedialRelation;
 import org.corpus_tools.salt.common.SOrderRelation;
 import org.corpus_tools.salt.common.SPointingRelation;
 import org.corpus_tools.salt.common.SSpan;
-import org.corpus_tools.salt.common.SSpanningRelation;
 import org.corpus_tools.salt.common.SStructure;
 import org.corpus_tools.salt.common.SStructuredNode;
 import org.corpus_tools.salt.common.STextualDS;
@@ -54,7 +53,6 @@ import org.corpus_tools.salt.common.impl.SMedialRelationImpl;
 import org.corpus_tools.salt.common.impl.SOrderRelationImpl;
 import org.corpus_tools.salt.common.impl.SPointingRelationImpl;
 import org.corpus_tools.salt.common.impl.SSpanImpl;
-import org.corpus_tools.salt.common.impl.SSpanningRelationImpl;
 import org.corpus_tools.salt.common.impl.SStructureImpl;
 import org.corpus_tools.salt.common.impl.STextualDSImpl;
 import org.corpus_tools.salt.common.impl.STextualRelationImpl;
@@ -153,8 +151,8 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public<N extends Node,R extends Relation<? extends N, ? extends N>, L extends Layer<N,R>> 
-			Graph<N,R,L> createGraph() {
-		GraphNotifierImpl<N, R,L> graph = new GraphNotifierImpl<>();
+			Graph<N,R,L> createGraph(Class<N> nodeClass, Class<R> relationClass, Class<L> layerClass) {
+		GraphNotifierImpl<N, R,L> graph = new GraphNotifierImpl<>(nodeClass, relationClass, layerClass);
 		graph.addListener(getListener());
 		return (graph);
 	}
@@ -178,7 +176,7 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	@Override
 	public SGraph createSGraph() {
 		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph =
-				new GraphNotifierImpl<>();
+				new GraphNotifierImpl<>(SNode.class, SGraphImpl.GENERIC_SRELATION_CLASS, SLayer.class);
 		return (new SGraphImpl(graph));
 	}
 
@@ -242,14 +240,14 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	@Override
 	public SCorpusGraph createSCorpusGraph() {
 		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph =
-				new GraphNotifierImpl<>();
+				new GraphNotifierImpl<>(SNode.class, SGraphImpl.GENERIC_SRELATION_CLASS, SLayer.class);
 		return (new SCorpusGraphImpl(graph));
 	}
 
 	@Override
 	public SDocumentGraph createSDocumentGraph() {
 		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph = 
-				new GraphNotifierImpl<>();
+				new GraphNotifierImpl<>(SNode.class, SGraphImpl.GENERIC_SRELATION_CLASS, SLayer.class);
 		return (new SDocumentGraphImpl(graph));
 	}
 

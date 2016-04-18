@@ -41,9 +41,14 @@ import org.eclipse.emf.common.util.URI;
 @SuppressWarnings("serial")
 public class SGraphImpl extends 
 	GraphImpl<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> implements SGraph {
+	
+	@SuppressWarnings("unchecked")
+	public static final Class<SRelation<? extends SNode, ? extends SNode>> GENERIC_SRELATION_CLASS = 
+			(Class<SRelation<? extends SNode, ? extends SNode>>) (Class<?>) SRelation.class;
+	
 	/** Initializes an object of type {@link SGraphImpl}. **/
 	public SGraphImpl() {
-		super();
+		this(null);
 	}
 
 	/**
@@ -55,7 +60,7 @@ public class SGraphImpl extends
 	 *            delegate object of the same type.
 	 */
 	public SGraphImpl(Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> delegate) {
-		super(delegate);
+		super(delegate, SNode.class, GENERIC_SRELATION_CLASS, SLayer.class);
 	}
 
 	/** {@inheritDoc} **/

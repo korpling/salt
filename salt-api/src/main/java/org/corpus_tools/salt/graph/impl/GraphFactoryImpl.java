@@ -35,8 +35,8 @@ public class GraphFactoryImpl implements IGraphFactory {
 	 */
 	@Override
 	public<N extends Node,R extends Relation<? extends N, ? extends N>, L extends Layer<N,R>> 
-		Graph<N,R,L> createGraph() {
-		return (new GraphImpl<N,R,L>());
+		Graph<N,R,L> createGraph(Class<N> nodeClass, Class<R> relationClass, Class<L> layerClass) {
+		return (new GraphImpl<N,R,L>(nodeClass, relationClass, layerClass));
 	}
 
 	/*

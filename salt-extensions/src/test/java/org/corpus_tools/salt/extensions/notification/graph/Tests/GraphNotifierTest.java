@@ -19,7 +19,9 @@ package org.corpus_tools.salt.extensions.notification.graph.Tests;
 
 import static org.junit.Assert.assertEquals;
 
+import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
+import org.corpus_tools.salt.extensions.notification.SaltNotificationFactory;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl;
 import org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl;
@@ -58,7 +60,8 @@ public class GraphNotifierTest extends GraphTest {
 	@Before
 	@Override
 	public void setUp() throws Exception {
-		setNotifyingFixture(new GraphNotifierImpl());
+		
+		setNotifyingFixture(new GraphNotifierImpl(Node.class, GraphFactory.RELATION_CLASS, GraphFactory.LAYER_CLASS));
 		super.setFixture(fixture);
 	}
 

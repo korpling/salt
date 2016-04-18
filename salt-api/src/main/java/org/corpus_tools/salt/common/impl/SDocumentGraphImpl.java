@@ -57,6 +57,7 @@ import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.index.IndexID;
 import org.corpus_tools.salt.util.DataSourceSequence;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
@@ -100,8 +101,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	protected void init() {
 		super.init();
 
-		getIndexMgr().createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
-		getIndexMgr().createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, expectedNodes / 2, expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, expectedRelations / 2, expectedRelations);
 	}
 
 	// ============================ start: handling relations
@@ -274,11 +275,14 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<STextualDS> getTextualDSs() {
-		List<STextualDS> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, STextualDS.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
+		List<SNode> nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, STextualDS.class);
+		List<STextualDS> result = new ArrayList<>(nodes.size());
+		for(SNode n : nodes) {
+			if(n instanceof STextualDS) {
+				result.add((STextualDS) n);
+			}
 		}
-		return (retVal);
+		return result;
 	}
 
 	/** {@inheritDoc} **/
@@ -292,8 +296,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<? extends SRelation<?, ?>> getRelations(Class<?> clazz) {
-		List<? extends SRelation<?, ?>> relations = null;
-		relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, clazz);
+		List<SRelation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, clazz);
 		return (relations);
 	}
 
@@ -312,31 +315,50 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, clazz);
 		return (nodes);
 	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public List<STextualRelation> getTextualRelations() {
-		List<STextualRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, STextualRelation.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
+	
+	private<N extends SNode> List<N> filterNodesByType(Class<N> filter) {
+		List<SNode> nodesByIdx = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, filter);
+		List<N> result = new ArrayList<>(nodesByIdx.size());
+		for(SNode n : nodesByIdx) {
+			if(filter.isInstance(n)) {
+				result.add(filter.cast(n));
+			}
 		}
-		return (retVal);
+		return result;
+	}
+	
+	public<R extends SRelation<?, ?>> List<R> filterRelationsByType(Class<R> filter) {
+		List<SRelation<?,?>> relationsByIdx = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, filter);
+		List<R> result = new ArrayList<>(relationsByIdx.size());
+		for(SRelation<?, ?> e : relationsByIdx) {
+			if(filter.isInstance(e)) {
+				result.add(filter.cast(e));
+			}
+		}
+		return (result);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> getTokens() {
-		List<SToken> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SToken.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+	public List<STextualRelation> getTextualRelations() {
+		return filterRelationsByType(STextualRelation.class);
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SToken> getTokens() {		
+		return filterNodesByType(SToken.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public STimeline getTimeline() {
-		return (getIndexMgr().get(SaltUtil.IDX_NODETYPE, STimeline.class));
+		SNode n = (getIndexMgr().get(SaltUtil.IDX_NODETYPE, STimeline.class));
+		if(n instanceof STimeline) {
+			return (STimeline) n;
+		} else {
+			return null;
+		}
 	}
 
 	/** {@inheritDoc} **/
@@ -348,91 +370,55 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<STimelineRelation> getTimelineRelations() {
-		List<STimelineRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, STimelineRelation.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterRelationsByType(STimelineRelation.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SSpanningRelation> getSpanningRelations() {
-		List<SSpanningRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SSpanningRelation.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterRelationsByType(SSpanningRelation.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SSpan> getSpans() {
-		List<SSpan> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SSpan.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterNodesByType(SSpan.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SStructure> getStructures() {
-		List<SStructure> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SStructure.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterNodesByType(SStructure.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SDominanceRelation> getDominanceRelations() {
-		List<SDominanceRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SDominanceRelation.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterRelationsByType(SDominanceRelation.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SPointingRelation> getPointingRelations() {
-		List<SPointingRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SPointingRelation.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterRelationsByType(SPointingRelation.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SMedialRelation> getMedialRelations() {
-		List<SMedialRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SMedialRelation.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterRelationsByType(SMedialRelation.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SMedialDS> getMedialDSs() {
-		List<SMedialDS> retVal = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SMedialDS.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterNodesByType(SMedialDS.class);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SOrderRelation> getOrderRelations() {
-		List<SOrderRelation> retVal = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SOrderRelation.class);
-		if (retVal == null) {
-			retVal = new ArrayList<>();
-		}
-		return (retVal);
+		return filterRelationsByType(SOrderRelation.class);
 	}
 
 	/** {@inheritDoc} **/

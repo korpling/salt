@@ -75,6 +75,7 @@ import org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.graph.impl.LayerImpl;
@@ -94,10 +95,13 @@ import org.corpus_tools.salt.semantics.impl.STypeAnnotationImpl;
 import org.corpus_tools.salt.semantics.impl.SWordAnnotationImpl;
 
 public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactory {
+	
+	
 	// ==========================================> salt core
 	@Override
 	public SGraph createSGraph() {
-		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph = new GraphImpl<>();
+		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph = 
+				new GraphImpl<>(SNode.class, SGraphImpl.GENERIC_SRELATION_CLASS, SLayer.class);
 		return (new SGraphImpl(graph));
 	}
 
@@ -168,7 +172,7 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 	@Override
 	public SDocumentGraph createSDocumentGraph() {
 		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph = 
-				createGraph();
+				createGraph(SNode.class, SGraphImpl.GENERIC_SRELATION_CLASS, SLayer.class);
 		return (new SDocumentGraphImpl(graph));
 	}
 

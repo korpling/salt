@@ -57,7 +57,7 @@ public class GraphTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new GraphImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>());
+		setFixture(GraphFactory.createGraph());
 	}
 
 	/**
@@ -428,7 +428,7 @@ public class GraphTest {
 	public void testAddNodeMoveGraph() {
 		assertEquals(0, getFixture().getNodes().size());
 
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> oldGraph = new GraphImpl<>();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> oldGraph = GraphFactory.createGraph();
 
 		Node node = GraphFactory.createNode();
 		oldGraph.addNode(node);

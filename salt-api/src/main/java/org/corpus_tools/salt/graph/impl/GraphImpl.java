@@ -44,6 +44,10 @@ public class GraphImpl
 	> 
 	extends IdentifiableElementImpl implements Graph<N, R, L> {
 	
+	private final Class<N> nodeClass;
+	private final Class<R> relationClass;
+	private final Class<L> layerClass;
+	
 	/**
 	 * Initializes an object of type {@link Graph}. If {@link #delegate} is not
 	 * null, all functions of this method are delegated to the delegate object.
@@ -52,8 +56,12 @@ public class GraphImpl
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public GraphImpl(Graph<N, R, L> delegate) {
+	public GraphImpl(Graph<N, R, L> delegate, Class<N> nodeClass, 
+			Class<R> relationClass, Class<L> layerClass) {
 		super(delegate);
+		this.nodeClass = nodeClass;
+		this.relationClass = relationClass;
+		this.layerClass = layerClass;
 		init();
 	}
 
@@ -63,7 +71,8 @@ public class GraphImpl
 		return (Graph<N, R, L>) super.getDelegate();
 	}
 
-	public GraphImpl() {
+	public GraphImpl(Class<N> nodeClass, Class<R> relationClass, Class<L> layerClass) {
+		this(null, nodeClass, relationClass, layerClass);
 		init();
 	}
 
@@ -102,7 +111,9 @@ public class GraphImpl
 	 *            expected upper bound of relations in the graph, used for
 	 *            optimization
 	 */
-	public GraphImpl(int expectedNodes, int expectedRelations) {
+	public GraphImpl(int expectedNodes, int expectedRelations, Class<N> nodeClass, 
+			Class<R> relationClass, Class<L> layerClass) {
+		this(null, nodeClass, relationClass, layerClass);
 		init();
 		this.expectedNodes = expectedNodes;
 		this.expectedRelations = expectedRelations;
@@ -136,13 +147,13 @@ public class GraphImpl
 		nodes = Collections.synchronizedList(new ArrayList<N>(expectedNodes));
 		relations = Collections.synchronizedList(new ArrayList<R>(expectedNodes));
 		indexMgr = new IndexMgrImpl();
-		indexMgr.createIndex(SaltUtil.IDX_ID_NODES, String.class, Node.class, expectedNodes, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_ID_NODES_INVERSE, Node.class, String.class, expectedNodes, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS, String.class, Relation.class, expectedRelations, expectedRelations);
-		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS_INVERSE, Relation.class, String.class, expectedRelations, expectedRelations);
-		indexMgr.createIndex(SaltUtil.IDX_ID_LAYER, String.class, Layer.class);
-		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
-		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
+		indexMgr.createIndex(SaltUtil.IDX_ID_NODES, expectedNodes, expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_ID_NODES_INVERSE, expectedNodes, expectedNodes);
+		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS, expectedRelations, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS_INVERSE, expectedRelations, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_ID_LAYER);
+		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, expectedNodes, approximatedNodeDegree);
+		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, expectedNodes, approximatedNodeDegree);
 	}
 
 	// =========================================================== > Nodes
@@ -170,7 +181,12 @@ public class GraphImpl
 		if (nodeId == null) {
 			return (null);
 		}
-		return (getIndexMgr().get(SaltUtil.IDX_ID_NODES, nodeId));
+		Node n = getIndexMgr().get(SaltUtil.IDX_ID_NODES, nodeId);
+		if(nodeClass.isInstance(n)) {
+			return nodeClass.cast(n);
+		} else {
+			return null;
+		}
 	}
 
 	/** {@inheritDoc Graph#addNode(Node)} **/
@@ -286,7 +302,7 @@ public class GraphImpl
 		// remove the node object from the inverse index
 		getIndexMgr().remove(SaltUtil.IDX_ID_NODES_INVERSE, node);
 		// remove node from all internal indexes
-		getIndexMgr().removeValue(node);
+		getIndexMgr().removeValue(node, Node.class);
 		// remove all relations having the removed node as source or target and
 		// update index outgoing and incoming indexes
 		Collection<R> rels = new ArrayList<>(getInRelations(node.getId()));
@@ -346,7 +362,12 @@ public class GraphImpl
 		if (relationId == null) {
 			return (null);
 		}
-		return (getIndexMgr().get(SaltUtil.IDX_ID_RELATIONS, relationId));
+		Relation<?,?> rel = getIndexMgr().get(SaltUtil.IDX_ID_RELATIONS, relationId);
+		if(relationClass.isInstance(rel)) {
+			return relationClass.cast(rel);
+		} else {
+			return null;
+		}
 	}
 
 	/** {@inheritDoc} **/
@@ -379,8 +400,15 @@ public class GraphImpl
 		if (getDelegate() != null) {
 			return getDelegate().getInRelations(nodeId);
 		}
-
-		return (getIndexMgr().getAll(SaltUtil.IDX_IN_RELATIONS, nodeId));
+		
+		List<Relation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_IN_RELATIONS, nodeId);
+		List<R> result = new ArrayList<>(relations.size());
+		for(Relation<?,?> rel : relations) {
+			if(relationClass.isInstance(rel)) {
+				result.add(relationClass.cast(rel));
+			}
+		}
+		return result;
 	}
 
 	/** {@inheritDoc} **/
@@ -391,7 +419,14 @@ public class GraphImpl
 			return getDelegate().getOutRelations(nodeId);
 		}
 
-		return (getIndexMgr().getAll(SaltUtil.IDX_OUT_RELATIONS, nodeId));
+		List<Relation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_OUT_RELATIONS, nodeId);
+		List<R> result = new ArrayList<>(relations.size());
+		for(Relation<?,?> rel : relations) {
+			if(relationClass.isInstance(rel)) {
+				result.add(relationClass.cast(rel));
+			}
+		}
+		return result;
 	}
 
 	/** {@inheritDoc Graph#addRelation(Relation)} **/
@@ -594,7 +629,7 @@ public class GraphImpl
 	 */
 	protected void basicRemoveRelation(Relation<?, ?> rel) {
 		// remove relation from all indexes
-		getIndexMgr().removeValue(rel);
+		getIndexMgr().removeValue(rel, Relation.class);
 		getIndexMgr().remove(SaltUtil.IDX_ID_RELATIONS_INVERSE, rel);
 		// remove relation also from layers
 		for (L layer : layers) {
@@ -644,7 +679,12 @@ public class GraphImpl
 		if (layerId == null) {
 			return (null);
 		}
-		return (getIndexMgr().get(SaltUtil.IDX_ID_LAYER, layerId));
+		Layer<?,?> layer = getIndexMgr().get(SaltUtil.IDX_ID_LAYER, layerId);
+		if(layerClass.isInstance(layer)) {
+			return layerClass.cast(layer);
+		} else {
+			return null;
+		}
 	}
 
 	/** {@inheritDoc Graph#containsLayer(String)} **/
@@ -767,11 +807,11 @@ public class GraphImpl
 	 * @param node
 	 *            the node to be removed
 	 */
-	protected void basicRemoveLayer(Object layer) {
+	protected void basicRemoveLayer(Layer<?,?> layer) {
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);
-				getIndexMgr().removeValue(layer);
+				getIndexMgr().removeValue(layer, Layer.class);
 			}
 		}
 	}
