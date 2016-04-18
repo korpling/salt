@@ -63,7 +63,7 @@ public abstract class IndexMgrBase {
 		List<Multimap<?, V>> result = new ArrayList<>();
 		
 		for(IndexHolder<?, ?> indexHolder : indexes.values()) {
-			if (indexHolder.indexId.getValueClass().isAssignableFrom(valueClass)) {
+			if (valueClass.isAssignableFrom(indexHolder.indexId.getValueClass())) {
 				@SuppressWarnings("unchecked")
 				Multimap<?, V> typedMap = (Multimap<?, V>) indexHolder.map;
 				result.add(typedMap);
