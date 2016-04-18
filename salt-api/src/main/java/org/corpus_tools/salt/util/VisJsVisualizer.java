@@ -1044,7 +1044,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	 //create edge array
 	 jsonWriterEdges.array();
 	 
-	 Iterator<SToken> it = sTokens.iterator();
+	/* Iterator<SToken> it = sTokens.iterator();
 	 SToken fromTok;
 	 SToken toTok;
 	 
@@ -1056,7 +1056,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			 writeJsonEdge(fromTok, toTok, null); 
 			 fromTok = toTok;
 		 }
-	 }
+	 }*/
 	  
 	
 	 
@@ -1226,7 +1226,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  jsonWriterEdges.key("to");
 			  jsonWriterEdges.value(toNode.getPath().fragment());
 			 //not a pseudo edge
-			  if (relation != null){			  
+			//  if (relation != null){			  
 			  
 				  Set<SAnnotation> sAnnotations = relation.getAnnotations();
 				  if (sAnnotations.size() > 0)
@@ -1248,12 +1248,12 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					   jsonWriterEdges.key("label");
 					   jsonWriterEdges.value(allLabels);
 				   }
-			  }
-			  else{
+			 // }
+			  /*else{
 		
 				  jsonWriterEdges.key(JSON_HIDDEN); 
 				  jsonWriterEdges.value("true");
-			  }
+			  }*/
 			  
 			  jsonWriterEdges.endObject();
 			  
