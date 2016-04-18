@@ -187,11 +187,13 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_X = "x";
 	private static final String JSON_LEVEL = "level";
 	private static final String JSON_GROUP = "group";
-	private static final String JSON_FIXED_X = "fixed.x";
+	//private static final String JSON_FIXED_X = "fixed.x";
 	private static final String JSON_HIDDEN = "hidden";
+	private static final String JSON_PHYSICS = "physics";
 	
 	
 	private  int xPosition = 0;	
+	private  int nTokens = 0;	
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
 	private static final String SPAN_COLOR_VALUE = "#A9D0F5";
 	private static final String STRUCTURE_COLOR_VALUE = "#FFCC00";
@@ -1036,7 +1038,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			nNodes++;
 	 }
 	 
-	
+	nTokens = sTokens.size();
 	 
 	
 	 //create edge array
@@ -1163,9 +1165,9 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			 jsonWriterNodes.key(JSON_COLOR);
 			 jsonWriterNodes.value(TOK_COLOR_VALUE);
 			 jsonWriterNodes.key(JSON_X);
-			 jsonWriterNodes.value(++xPosition*100);
-			 jsonWriterNodes.key(JSON_FIXED_X);
-			 jsonWriterNodes.value("true");
+			 jsonWriterNodes.value((xPosition++)*100);
+			 jsonWriterNodes.key(JSON_PHYSICS);
+			 jsonWriterNodes.value("false");
 		 }
 		 
 		 	 jsonWriterNodes.key(JSON_LEVEL);
@@ -1185,6 +1187,9 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 				jsonWriterNodes.key(JSON_GROUP);
 				jsonWriterNodes.value("0");
 			}
+			//initial x-value in center
+			jsonWriterNodes.key(JSON_X);
+			jsonWriterNodes.value((nTokens/2)*100);
 	
 		}
 		
@@ -1197,6 +1202,9 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 				jsonWriterNodes.key(JSON_COLOR);
 				jsonWriterNodes.value(STRUCTURE_COLOR_VALUE);
 			}
+			//initial x-value in center
+			 jsonWriterNodes.key(JSON_X);
+			 jsonWriterNodes.value((nTokens/2)*100);
 	
 		}		 
 		 
@@ -1217,7 +1225,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  jsonWriterEdges.value(fromNode.getPath().fragment());
 			  jsonWriterEdges.key("to");
 			  jsonWriterEdges.value(toNode.getPath().fragment());
-			 //no pseudo edge
+			 //not a pseudo edge
 			  if (relation != null){			  
 			  
 				  Set<SAnnotation> sAnnotations = relation.getAnnotations();
