@@ -39,7 +39,7 @@ public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedial
 	 *            delegate object of the same type.
 	 */
 	public SMedialRelationImpl(Relation<SToken, SMedialDS> delegate) {
-		super(delegate, SToken.class, SMedialDS.class);
+		super(delegate, SToken.class, SMedialDS.class, Double.class);
 	}
 
 } // SAudioDSRelationImpl

@@ -39,7 +39,7 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 	 *            delegate object of the same type.
 	 */
 	public STextualRelationImpl(Relation<SToken, STextualDS> delegate) {
-		super(delegate, SToken.class, STextualDS.class);
+		super(delegate, SToken.class, STextualDS.class, Integer.class);
 	}
 
 

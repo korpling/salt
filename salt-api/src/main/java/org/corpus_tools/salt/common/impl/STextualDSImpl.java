@@ -26,6 +26,7 @@ import org.corpus_tools.salt.graph.Node;
 public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implements STextualDS {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public STextualDSImpl() {
+		this(null);
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	 *            delegate object of the same type.
 	 */
 	public STextualDSImpl(Node delegate) {
-		super(delegate);
+		super(delegate, String.class);
 	}
 
 	/** {@inheritDoc} **/

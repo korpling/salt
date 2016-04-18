@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.URI;
 public class SMedialDSImpl extends SSequentialDSImpl<URI, Double> implements SMedialDS {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SMedialDSImpl() {
+		this(null);
 	}
 
 	/**
@@ -40,7 +41,7 @@ public class SMedialDSImpl extends SSequentialDSImpl<URI, Double> implements SMe
 	 *            delegate object of the same type.
 	 */
 	public SMedialDSImpl(Node delegate) {
-		super(delegate);
+		super(delegate, URI.class);
 	}
 
 	/** {@inheritDoc} */

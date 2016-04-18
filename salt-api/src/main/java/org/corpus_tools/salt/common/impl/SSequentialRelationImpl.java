@@ -31,9 +31,12 @@ import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number> extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
+	
+	private final Class<P> pointClass;
+	
 	/** Initializes an object of type {@link SSequentialRelationImpl}. **/
-	public SSequentialRelationImpl(Class<S> sourceClass, Class<T> targetClass) {
-		this(null, sourceClass, targetClass);
+	public SSequentialRelationImpl(Class<S> sourceClass, Class<T> targetClass, Class<P> pointClass) {
+		this(null, sourceClass, targetClass, pointClass);
 	}
 
 	/**
@@ -45,8 +48,10 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SSequentialRelationImpl(Relation<S, T> delegate, Class<S> sourceClass, Class<T> targetClass) {
+	public SSequentialRelationImpl(Relation<S, T> delegate, Class<S> sourceClass, Class<T> targetClass,
+			Class<P> pointClass) {
 		super(delegate, sourceClass, targetClass);
+		this.pointClass = pointClass;
 	}
 
 	/** {@inheritDoc} **/
@@ -55,7 +60,10 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 		P retVal = null;
 		SFeature sFeature = getFeature(SaltUtil.FEAT_SSTART_QNAME);
 		if (sFeature != null) {
-			retVal = (P) sFeature.getValue();
+			Object val = sFeature.getValue();
+			if(pointClass.isInstance(val)) {
+				retVal = pointClass.cast(sFeature.getValue());
+			}
 		}
 		return (retVal);
 	}
@@ -78,8 +86,11 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 	public P getEnd() {
 		P retVal = null;
 		SFeature sFeature = this.getFeature(SaltUtil.FEAT_SEND_QNAME);
-		if ((sFeature != null) && (sFeature.getValue() != null)) {
-			retVal = (P) sFeature.getValue();
+		if (sFeature != null) {
+			Object val = sFeature.getValue();
+			if(pointClass.isInstance(val)) {
+				retVal = pointClass.cast(sFeature.getValue());
+			}
 		}
 		return (retVal);
 	}

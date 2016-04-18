@@ -25,6 +25,7 @@ import org.corpus_tools.salt.graph.Node;
 public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implements STimeline {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public STimelineImpl() {
+		this(null);
 	}
 
 	/**
@@ -36,7 +37,7 @@ public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implement
 	 *            delegate object of the same type.
 	 */
 	public STimelineImpl(Node delegate) {
-		super(delegate);
+		super(delegate, Integer.class);
 	}
 
 	/** {@inheritDoc} **/
