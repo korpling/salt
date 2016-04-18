@@ -60,6 +60,7 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.DataSourceSequence;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
+import org.corpus_tools.salt.util.SRelationHelper;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.DataSourceAccessor;
 import org.corpus_tools.salt.util.internal.Diff;
@@ -444,60 +445,19 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		SRelation<? extends SNode, ? extends SNode> retVal = null;
 		switch (sRelationType) {
 		case STEXTUAL_RELATION:
-			STextualRelation textRel = SaltFactory.createSTextualRelation();
-			
-			if(!(source instanceof SToken)) {
-				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SToken");
-			}
-			if(!(target instanceof STextualDS)) {
-				throw new SaltParameterException("target", "addNode", getClass(), "Type must be STextualDS");
-			}
-			textRel.setSource((SToken) source);
-			textRel.setTarget((STextualDS) target);
-			
-			retVal = textRel;
+			retVal = SRelationHelper.TEXTUAL.set(SaltFactory.createSTextualRelation(), source, target);
 			break;
 		case SPOINTING_RELATION:
-			SPointingRelation pointingRel = SaltFactory.createSPointingRelation();
-			
-			if(!(source instanceof SStructuredNode)) {
-				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructuredNode");
-			}
-			if(!(target instanceof SStructuredNode)) {
-				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
-			}
-			pointingRel.setSource((SStructuredNode) source);
-			pointingRel.setTarget((SStructuredNode) target);
-			
-			retVal = pointingRel;
+			retVal = SRelationHelper.POINTING.set(SaltFactory.createSPointingRelation(), source, target);
 			break;
 		case SSPANNING_RELATION:
-			SSpanningRelation spanRel = SaltFactory.createSSpanningRelation();
-			
-			if(!(source instanceof SSpan)) {
-				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SSpan");
-			}
-			if(!(target instanceof SToken)) {
-				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SToken");
-			}
-			spanRel.setSource((SSpan) source);
-			spanRel.setTarget((SToken) target);
-			
-			retVal = spanRel;
+			retVal = SRelationHelper.SPANNING.set(SaltFactory.createSSpanningRelation(), source, target);
 			break;
 		case SDOMINANCE_RELATION:
-			SDominanceRelation domRel = SaltFactory.createSDominanceRelation();
-			
-			if(!(source instanceof SStructure)) {
-				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructure");
-			}
-			if(!(target instanceof SStructuredNode)) {
-				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
-			}
-			domRel.setSource((SStructure) source);
-			domRel.setTarget((SStructuredNode) target);
-			
-			retVal = domRel;
+			retVal = SRelationHelper.DOMINANCE.set(SaltFactory.createSDominanceRelation(), source, target);
+			break;
+		case SORDER_RELATION:
+			retVal = SRelationHelper.ORDER.set(SaltFactory.createSOrderRelation(), source, target);
 			break;
 		default:
 			break;
@@ -899,60 +859,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		switch (relationType) {
 		
 		case SPOINTING_RELATION:
-			SPointingRelation pointingRel = SaltFactory.createSPointingRelation();
-			
-			if(!(source instanceof SStructuredNode)) {
-				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructuredNode");
-			}
-			if(!(target instanceof SStructuredNode)) {
-				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
-			}
-			pointingRel.setSource((SStructuredNode) source);
-			pointingRel.setTarget((SStructuredNode) target);
-			
-			sRel = pointingRel;
+			sRel = SRelationHelper.POINTING.set(SaltFactory.createSPointingRelation(), source, target);
 			break;
 		case SSPANNING_RELATION:
-			SSpanningRelation spanRel = SaltFactory.createSSpanningRelation();
-			
-			if(!(source instanceof SSpan)) {
-				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SSpan");
-			}
-			if(!(target instanceof SToken)) {
-				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SToken");
-			}
-			spanRel.setSource((SSpan) source);
-			spanRel.setTarget((SToken) target);
-			
-			sRel = spanRel;
+			sRel = SRelationHelper.SPANNING.set(SaltFactory.createSSpanningRelation(), source, target);
 			break;
 		case SDOMINANCE_RELATION:
-			SDominanceRelation domRel = SaltFactory.createSDominanceRelation();
-			
-			if(!(source instanceof SStructure)) {
-				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructure");
-			}
-			if(!(target instanceof SStructuredNode)) {
-				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
-			}
-			domRel.setSource((SStructure) source);
-			domRel.setTarget((SStructuredNode) target);
-			
-			sRel = domRel;
+			sRel = SRelationHelper.DOMINANCE.set(SaltFactory.createSDominanceRelation(), source, target);
 			break;
 		case SORDER_RELATION:
-			SOrderRelation orderRel = SaltFactory.createSOrderRelation();
-			
-			if(!(source instanceof SStructuredNode)) {
-				throw new SaltParameterException("source", "addNode", getClass(), "Type must be SStructuredNode");
-			}
-			if(!(target instanceof SStructuredNode)) {
-				throw new SaltParameterException("target", "addNode", getClass(), "Type must be SStructuredNode");
-			}
-			orderRel.setSource((SStructuredNode) source);
-			orderRel.setTarget((SStructuredNode) target);
-			
-			sRel = orderRel;
+			sRel = SRelationHelper.ORDER.set(SaltFactory.createSOrderRelation(), source, target);
 			break;
 		default:
 			throw new SaltParameterException("Cannot create an SRelation, because the passed type '" + relationType + "' is not supported for this method.");
