@@ -344,7 +344,7 @@ public class SaltUtil {
 					}
 				}
 			} else if (id.getIdentifiableElement() instanceof SRelation) {
-				SRelation<SNode, SNode> sRel = (SRelation<SNode, SNode>) id.getIdentifiableElement();
+				SRelation<?, ?> sRel = (SRelation<?, ?>) id.getIdentifiableElement();
 				if ((sRel.getGraph() != null)) {
 					if (sRel.getGraph() instanceof SCorpusGraph) {
 						graph = (SCorpusGraph) sRel.getGraph();

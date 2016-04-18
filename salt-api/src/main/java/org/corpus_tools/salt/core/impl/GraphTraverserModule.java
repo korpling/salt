@@ -156,7 +156,7 @@ public class GraphTraverserModule {
 			}
 		}
 		Traverser traverser = new Traverser();
-		traverser.startNodes = (List<SNode>) startNodes;
+		traverser.startNodes = (List<? extends SNode>) startNodes;
 		traverser.traverseType = traverseType;
 		traverser.traverseId = traverseId;
 		traverser.traverseHandler = traverseHandler;
@@ -193,7 +193,7 @@ public class GraphTraverserModule {
 		/**
 		 * list of nodes where traversal starts
 		 */
-		List<SNode> startNodes = null;
+		List<? extends SNode> startNodes = null;
 		/**
 		 * kind of traversal
 		 */
