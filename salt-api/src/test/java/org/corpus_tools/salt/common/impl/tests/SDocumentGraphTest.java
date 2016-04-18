@@ -338,7 +338,7 @@ public class SDocumentGraphTest {
 			} catch (SaltElementNotInGraphException e) {
 			}
 			getFixture().addNode(source);
-			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
+			SRelation<?,?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
 			assertTrue(sRelation instanceof SPointingRelation);
 		}
 
@@ -354,7 +354,7 @@ public class SDocumentGraphTest {
 			} catch (SaltElementNotInGraphException e) {
 			}
 			getFixture().addNode(source);
-			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
+			SRelation<?,?> sRelation = getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
 			assertTrue(sRelation instanceof STextualRelation);
 		}
 
@@ -370,7 +370,7 @@ public class SDocumentGraphTest {
 			} catch (SaltElementNotInGraphException e) {
 			}
 			getFixture().addNode(source);
-			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
+			SRelation<?,?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
 			assertTrue(sRelation instanceof SDominanceRelation);
 		}
 
@@ -386,7 +386,7 @@ public class SDocumentGraphTest {
 			} catch (SaltElementNotInGraphException e) {
 			}
 			getFixture().addNode(source);
-			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
+			SRelation<?,?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
 			assertTrue(sRelation instanceof SSpanningRelation);
 		}
 
@@ -989,7 +989,7 @@ public class SDocumentGraphTest {
 		for (int i = 0; i < 6; i++) {
 			assertEquals("tokens of index '" + i + "' aren't equal", sTokens.get(i), controllSTokens.get(i));
 			boolean hasTextualRelation = false;
-			for(SRelation rel : controllSTokens.get(i).getOutRelations()) {
+			for(SRelation<?,?> rel : controllSTokens.get(i).getOutRelations()) {
 				if(rel instanceof STextualRelation) {
 					hasTextualRelation = true;
 					break;
@@ -1772,7 +1772,7 @@ public class SDocumentGraphTest {
 		getFixture().addNode(sSpan);
 		SStructure sStruct = SaltFactory.createSStructure();
 		getFixture().addNode(sStruct);
-		SRelation sRel = null;
+		SRelation<?,?> sRel = null;
 
 		assertEquals(2, getFixture().getRelations().size());
 
@@ -1965,7 +1965,7 @@ public class SDocumentGraphTest {
 	}
 
 	/**
-	 * Toring and loading of document graph. Both graphs are compared with
+	 * Storing and loading of document graph. Both graphs are compared with
 	 * isIsomorph(). This test checks whether isIsomorph finds the correct
 	 * matching candidates for nodes.
 	 * 
@@ -2009,7 +2009,7 @@ public class SDocumentGraphTest {
 	 */
 	@Test
 	public void testGetSharedParent() {
-		SDocument doc1 = SaltFactory.createSDocument();
+//		SDocument doc1 = SaltFactory.createSDocument();
 		SDocument doc2 = SaltFactory.createSDocument();
 		doc2.setId("doc");
 
@@ -2023,7 +2023,7 @@ public class SDocumentGraphTest {
 		tokens.add(tok2);
 		tokens.add(tok3);
 		SSpan span2 = getFixture().createSpan(tokens);
-		SSpan span3 = getFixture().createSpan(tok3);
+//		SSpan span3 = getFixture().createSpan(tok3);
 		SSpan span4 = getFixture().createSpan(getFixture().getTokens());
 
 		List<SNode> children = new ArrayList<SNode>();
@@ -2070,7 +2070,7 @@ public class SDocumentGraphTest {
 	 */
 	@Test
 	public void testGetChildren() {
-		SDocument doc1 = SaltFactory.createSDocument();
+//		SDocument doc1 = SaltFactory.createSDocument();
 		SDocument doc2 = SaltFactory.createSDocument();
 		doc2.setId("doc");
 

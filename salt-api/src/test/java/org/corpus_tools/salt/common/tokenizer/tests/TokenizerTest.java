@@ -66,10 +66,10 @@ public class TokenizerTest {
 
 	@Test
 	public void testLANGUAGE_DESCRIPTION() {
-		assertEquals(LanguageCode.de, getFixture().mapISOLanguageCode("german"));
-		assertEquals(LanguageCode.en, getFixture().mapISOLanguageCode("english"));
-		assertEquals(LanguageCode.fr, getFixture().mapISOLanguageCode("french"));
-		assertEquals(LanguageCode.it, getFixture().mapISOLanguageCode("italian"));
+		assertEquals(LanguageCode.de, Tokenizer.mapISOLanguageCode("german"));
+		assertEquals(LanguageCode.en, Tokenizer.mapISOLanguageCode("english"));
+		assertEquals(LanguageCode.fr, Tokenizer.mapISOLanguageCode("french"));
+		assertEquals(LanguageCode.it, Tokenizer.mapISOLanguageCode("italian"));
 	}
 
 	@Test
@@ -77,16 +77,16 @@ public class TokenizerTest {
 		String text = null;
 
 		text = "The Java Text Categorizing Library (JTCL) is a pure java 1.5 implementation of libTextCat which in turn is \"a library that was primarily developed for language guessing, a task on which it is known to perform with near-perfect accuracy\".";
-		assertEquals(LanguageCode.en, getFixture().checkLanguage(text));
+		assertEquals(LanguageCode.en, Tokenizer.checkLanguage(text));
 
 		text = "Die Java-Text Kategorisierung Library (JTCL) ist eine reine Java 1.5 Implementierung von libtextcat die wiederum \"eine Bibliothek, die vor allem für die Sprache zu raten, eine Aufgabe, auf denen bekannt ist, mit nahezu perfekter Genauigkeit durchzuführen ist, wurde entwickelt.\"";
-		assertEquals(LanguageCode.de, getFixture().checkLanguage(text));
+		assertEquals(LanguageCode.de, Tokenizer.checkLanguage(text));
 
 		text = "La bibliothèque Java Catégorisation Texte (JTCL) est un pur Java 1.5 mise en œuvre de libtextcat qui à son tour \"une bibliothèque qui a été développé pour la langue deviner Primar, une tâche sur laquelle il est connu de réaliser avec une précision quasi-parfaite.\"";
-		assertEquals(LanguageCode.fr, getFixture().checkLanguage(text));
+		assertEquals(LanguageCode.fr, Tokenizer.checkLanguage(text));
 
 		text = "Text Library Java Categorizzare (JTCL) è un puro Java 1.5 realizzazione di libtextcat che a sua volta è \"una libreria che è stato sviluppato per la lingua indovinare Primar, un compito su cui è conosciuto per eseguire con precisione quasi perfetta.\"";
-		assertEquals(LanguageCode.it, getFixture().checkLanguage(text));
+		assertEquals(LanguageCode.it, Tokenizer.checkLanguage(text));
 	}
 
 	// TODO test the detection of abbreviations, by 1) giving a specific file,
