@@ -445,19 +445,19 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		SRelation<? extends SNode, ? extends SNode> retVal = null;
 		switch (sRelationType) {
 		case STEXTUAL_RELATION:
-			retVal = SRelationHelper.TEXTUAL.set(SaltFactory.createSTextualRelation(), source, target);
+			retVal = SRelationHelper.TEXTUAL.setArgs(SaltFactory.createSTextualRelation(), source, target);
 			break;
 		case SPOINTING_RELATION:
-			retVal = SRelationHelper.POINTING.set(SaltFactory.createSPointingRelation(), source, target);
+			retVal = SRelationHelper.POINTING.setArgs(SaltFactory.createSPointingRelation(), source, target);
 			break;
 		case SSPANNING_RELATION:
-			retVal = SRelationHelper.SPANNING.set(SaltFactory.createSSpanningRelation(), source, target);
+			retVal = SRelationHelper.SPANNING.setArgs(SaltFactory.createSSpanningRelation(), source, target);
 			break;
 		case SDOMINANCE_RELATION:
-			retVal = SRelationHelper.DOMINANCE.set(SaltFactory.createSDominanceRelation(), source, target);
+			retVal = SRelationHelper.DOMINANCE.setArgs(SaltFactory.createSDominanceRelation(), source, target);
 			break;
 		case SORDER_RELATION:
-			retVal = SRelationHelper.ORDER.set(SaltFactory.createSOrderRelation(), source, target);
+			retVal = SRelationHelper.ORDER.setArgs(SaltFactory.createSOrderRelation(), source, target);
 			break;
 		default:
 			break;
@@ -859,16 +859,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		switch (relationType) {
 		
 		case SPOINTING_RELATION:
-			sRel = SRelationHelper.POINTING.set(SaltFactory.createSPointingRelation(), source, target);
+			sRel = SRelationHelper.POINTING.setArgs(SaltFactory.createSPointingRelation(), source, target);
 			break;
 		case SSPANNING_RELATION:
-			sRel = SRelationHelper.SPANNING.set(SaltFactory.createSSpanningRelation(), source, target);
+			sRel = SRelationHelper.SPANNING.setArgs(SaltFactory.createSSpanningRelation(), source, target);
 			break;
 		case SDOMINANCE_RELATION:
-			sRel = SRelationHelper.DOMINANCE.set(SaltFactory.createSDominanceRelation(), source, target);
+			sRel = SRelationHelper.DOMINANCE.setArgs(SaltFactory.createSDominanceRelation(), source, target);
 			break;
 		case SORDER_RELATION:
-			sRel = SRelationHelper.ORDER.set(SaltFactory.createSOrderRelation(), source, target);
+			sRel = SRelationHelper.ORDER.setArgs(SaltFactory.createSOrderRelation(), source, target);
 			break;
 		default:
 			throw new SaltParameterException("Cannot create an SRelation, because the passed type '" + relationType + "' is not supported for this method.");

@@ -40,6 +40,7 @@ import org.corpus_tools.salt.exceptions.SaltResourceException;
 import org.corpus_tools.salt.graph.IdentifiableElement;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
+import org.corpus_tools.salt.util.SRelationHelper;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 import org.xml.sax.Attributes;
@@ -133,7 +134,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 	/** a list of all read nodes **/
 	private List<SNode> nodes = null;
 	/** a list of all read edges **/
-	private List<SRelation<SNode, SNode>> relations = null;
+	private List<SRelation<? extends SNode, ? extends SNode>> relations = null;
 	/** a list of all read layers **/
 	private Map<String, SLayer> layers = null;
 	/** stores the position of the current read layer **/
@@ -198,30 +199,41 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				}
 			}
 		} else if (TAG_EDGES.equals(qName)) {
-			SRelation sRel = null;
+			SRelation<? extends SNode,? extends SNode> sRel = null;
+			SRelationHelper<?,?,?> relHelper = null;
+			
 			String type = attributes.getValue(ATT_TYPE);
 			String source = attributes.getValue(ATT_SOURCE);
 			String target = attributes.getValue(ATT_TARGET);
 			if (SaltXML10Handler.TYPE_STEXTUAL_RELATION.equals(type)) {
 				sRel = SaltFactory.createSTextualRelation();
+				relHelper = SRelationHelper.TEXTUAL;
 			} else if (SaltXML10Handler.TYPE_SAUDIO_RELATION.equals(type)) {
 				sRel = SaltFactory.createSMedialRelation();
+				relHelper = SRelationHelper.MEDIAL;
 			} else if (SaltXML10Handler.TYPE_STIMELINE_RELATION.equals(type)) {
 				sRel = SaltFactory.createSTimelineRelation();
+				relHelper = SRelationHelper.TIMELINE;
 			} else if (SaltXML10Handler.TYPE_SSPANNING_RELATION.equals(type)) {
 				sRel = SaltFactory.createSSpanningRelation();
+				relHelper = SRelationHelper.SPANNING;
 			} else if (SaltXML10Handler.TYPE_SORDER_RELATION.equals(type)) {
 				sRel = SaltFactory.createSOrderRelation();
+				relHelper = SRelationHelper.ORDER;
 			} else if (SaltXML10Handler.TYPE_SDOMINANCE_RELATION.equals(type)) {
 				sRel = SaltFactory.createSDominanceRelation();
+				relHelper = SRelationHelper.DOMINANCE;
 			} else if (SaltXML10Handler.TYPE_SPOINTING_RELATION.equals(type)) {
 				sRel = SaltFactory.createSPointingRelation();
+				relHelper = SRelationHelper.POINTING;
 			} else if (SaltXML10Handler.TYPE_SCORPUS_RELATION.equals(type)) {
 				sRel = SaltFactory.createSCorpusRelation();
+				relHelper = SRelationHelper.CORPUS;
 			} else if (SaltXML10Handler.TYPE_SCORPUS_DOCUMENT_RELATION.equals(type)) {
 				sRel = SaltFactory.createSCorpusDocumentRelation();
+				relHelper = SRelationHelper.CORPUSDOCUMENT;
 			}
-			if ((sRel != null) && (target != null) && (source != null)) {
+			if ((sRel != null) && (relHelper != null) && (target != null) && (source != null)) {
 
 				// match both the source an target string if they are valid
 				// structured references
@@ -255,8 +267,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 					throw new SaltResourceException("Cannot find a target node '" + target + "' for relation. ");
 				} else {
 					addObject(sRel);
-					sRel.setSource(sourceNode);
-					sRel.setTarget(targetNode);
+					relHelper.setArgs(sRel, sourceNode, targetNode);
 					relations.add(sRel);
 				}
 			}
@@ -360,18 +371,18 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			}
 			if (TAG_NODES.equals(qName)) {
 				if (parent != null) {
-					if (parent instanceof SDocumentGraph) {
+					if (parent instanceof SDocumentGraph && obj instanceof SNode) {
 						((SDocumentGraph) currentContainer.peek()).addNode((SNode) obj);
-					} else if (parent instanceof SCorpusGraph) {
+					} else if (parent instanceof SCorpusGraph && obj instanceof SNode) {
 						((SCorpusGraph) currentContainer.peek()).addNode((SNode) obj);
 					}
 				}
 			} else if (TAG_EDGES.equals(qName)) {
 				if (parent != null) {
-					if (parent instanceof SDocumentGraph) {
-						((SDocumentGraph) currentContainer.peek()).addRelation((SRelation) obj);
-					} else if (parent instanceof SCorpusGraph) {
-						((SCorpusGraph) currentContainer.peek()).addRelation((SRelation) obj);
+					if (parent instanceof SDocumentGraph && obj instanceof SRelation) {
+						((SDocumentGraph) currentContainer.peek()).addRelation((SRelation<?,?>) obj);
+					} else if (parent instanceof SCorpusGraph && obj instanceof SRelation) {
+						((SCorpusGraph) currentContainer.peek()).addRelation((SRelation<?,?>) obj);
 					}
 				}
 			}
