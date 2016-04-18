@@ -45,7 +45,7 @@ public interface IGraphFactory {
 	 * 
 	 * @return new {@link Relation} object
 	 */
-	public <S extends Node, T extends Node> Relation<S,T> createRelation();
+	public <S extends Node, T extends Node> Relation<S,T> createRelation(Class<S> sourceClass, Class<T> targetClass);
 	
 
 	/**

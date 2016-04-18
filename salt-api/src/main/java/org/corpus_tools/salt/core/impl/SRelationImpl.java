@@ -42,8 +42,10 @@ import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
 public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImpl<S, T> implements SRelation<S, T> {
+	
 	/** Initializes an object of type {@link SRelationImpl}. **/
-	public SRelationImpl() {
+	public SRelationImpl(Class<S> sourceClass, Class<T> targetClass) {
+		super(sourceClass, targetClass);
 	}
 
 	/**
@@ -54,8 +56,8 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SRelationImpl(Relation<S,T> delegate) {
-		super(delegate);
+	public SRelationImpl(Relation<S,T> delegate, Class<S> sourceClass, Class<T> targetClass) {
+		super(delegate, sourceClass, targetClass);
 	}
 
 	// =======================================> SAnnotation

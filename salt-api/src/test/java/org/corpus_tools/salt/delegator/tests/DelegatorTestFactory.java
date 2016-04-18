@@ -108,8 +108,8 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SRelation<SNode, SNode> createSRelation() {
-		Relation<SNode,SNode> rel = new RelationImpl<>();
-		return (new SRelationImpl<SNode, SNode>(rel));
+		Relation<SNode,SNode> rel = new RelationImpl<>(SNode.class, SNode.class);
+		return (new SRelationImpl<SNode, SNode>(rel, SNode.class, SNode.class));
 	}
 
 	@Override
@@ -148,13 +148,13 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SCorpusRelation createSCorpusRelation() {
-		Relation<SCorpus, SCorpus> rel = createRelation();
+		Relation<SCorpus, SCorpus> rel = createRelation(SCorpus.class, SCorpus.class);
 		return (new SCorpusRelationImpl(rel));
 	}
 
 	@Override
 	public SCorpusDocumentRelation createSCorpusDocumentRelation() {
-		Relation<SCorpus, SDocument> rel = createRelation();
+		Relation<SCorpus, SDocument> rel = createRelation(SCorpus.class, SDocument.class);
 		return (new SCorpusDocumentRelationImpl(rel));
 	}
 
@@ -184,43 +184,43 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SSpanningRelation createSSpanningRelation() {
-		Relation<SSpan, SToken> rel = createRelation();
+		Relation<SSpan, SToken> rel = createRelation(SSpan.class, SToken.class);
 		return (new SSpanningRelationImpl(rel));
 	}
 
 	@Override
 	public SDominanceRelation createSDominanceRelation() {
-		Relation<SStructure, SStructuredNode> rel = createRelation();
+		Relation<SStructure, SStructuredNode> rel = createRelation(SStructure.class, SStructuredNode.class);
 		return (new SDominanceRelationImpl(rel));
 	}
 
 	@Override
 	public SPointingRelation createSPointingRelation() {
-		Relation<SStructuredNode, SStructuredNode> rel = createRelation();
+		Relation<SStructuredNode, SStructuredNode> rel = createRelation(SStructuredNode.class, SStructuredNode.class);
 		return (new SPointingRelationImpl(rel));
 	}
 
 	@Override
 	public SOrderRelation createSOrderRelation() {
-		Relation<SStructuredNode, SStructuredNode> rel = createRelation();
+		Relation<SStructuredNode, SStructuredNode> rel = createRelation(SStructuredNode.class, SStructuredNode.class);
 		return (new SOrderRelationImpl(rel));
 	}
 
 	@Override
 	public STextualRelation createSTextualRelation() {
-		Relation<SToken, STextualDS> rel = createRelation();
+		Relation<SToken, STextualDS> rel = createRelation(SToken.class, STextualDS.class);
 		return (new STextualRelationImpl(rel));
 	}
 
 	@Override
 	public STimelineRelation createSTimelineRelation() {
-		Relation<SToken, STimeline> rel = createRelation();
+		Relation<SToken, STimeline> rel = createRelation(SToken.class, STimeline.class);
 		return (new STimelineRelationImpl(rel));
 	}
 
 	@Override
 	public SMedialRelation createSMedialRelation() {
-		Relation<SToken, SMedialDS> rel = createRelation();
+		Relation<SToken, SMedialDS> rel = createRelation(SToken.class, SMedialDS.class);
 		return (new SMedialRelationImpl(rel));
 	}
 

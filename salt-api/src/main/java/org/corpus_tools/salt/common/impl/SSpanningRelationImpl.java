@@ -32,6 +32,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implements SSpanningRelation {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SSpanningRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implemen
 	 *            delegate object of the same type.
 	 */
 	public SSpanningRelationImpl(Relation<SSpan, SToken> delegate) {
-		super(delegate);
+		super(delegate, SSpan.class, SToken.class);
 	}
 
 	/** {@inheritDoc} **/

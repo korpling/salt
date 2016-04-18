@@ -55,8 +55,8 @@ public class GraphFactoryImpl implements IGraphFactory {
 	 * @see de.hu_berlin.u.saltnpepper.graph.impl.IGraphFactory#createRelation()
 	 */
 	@Override
-	public <S extends Node, T extends Node> Relation<S,T> createRelation() {
-		return (new RelationImpl<S, T>());
+	public <S extends Node, T extends Node> Relation<S,T> createRelation(Class<S> sourceClass, Class<T> targetClass) {
+		return (new RelationImpl<S, T>(sourceClass, targetClass));
 	}
 
 	/*

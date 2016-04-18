@@ -39,6 +39,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode> implements SOrderRelation {
 	/** Initializes an object of type {@link SOrderRelationImpl}. **/
 	public SOrderRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	 *            delegate object of the same type.
 	 */
 	public SOrderRelationImpl(Relation<SStructuredNode, SStructuredNode> delegate) {
-		super(delegate);
+		super(delegate, SStructuredNode.class, SStructuredNode.class);
 	}
 
 	/** {@inheritDoc} **/

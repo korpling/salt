@@ -32,7 +32,8 @@ import org.corpus_tools.salt.util.SaltUtil;
 @SuppressWarnings("serial")
 public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number> extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
 	/** Initializes an object of type {@link SSequentialRelationImpl}. **/
-	public SSequentialRelationImpl() {
+	public SSequentialRelationImpl(Class<S> sourceClass, Class<T> targetClass) {
+		this(null, sourceClass, targetClass);
 	}
 
 	/**
@@ -44,8 +45,8 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SSequentialRelationImpl(Relation<S, T> delegate) {
-		super(delegate);
+	public SSequentialRelationImpl(Relation<S, T> delegate, Class<S> sourceClass, Class<T> targetClass) {
+		super(delegate, sourceClass, targetClass);
 	}
 
 	/** {@inheritDoc} **/

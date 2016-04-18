@@ -26,6 +26,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedialDS, Double> implements SMedialRelation {
 	/** Initializes an object of type {@link SMedialRelationImpl}. **/
 	public SMedialRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedial
 	 *            delegate object of the same type.
 	 */
 	public SMedialRelationImpl(Relation<SToken, SMedialDS> delegate) {
-		super(delegate);
+		super(delegate, SToken.class, SMedialDS.class);
 	}
 
 } // SAudioDSRelationImpl

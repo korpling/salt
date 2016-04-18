@@ -30,6 +30,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode> implements SPointingRelation {
 	/** Initializes an object of type {@link SPointingRelationImpl}. **/
 	public SPointingRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -42,7 +43,7 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 	 *            delegate object of the same type.
 	 */
 	public SPointingRelationImpl(Relation<SStructuredNode, SStructuredNode> delegate) {
-		super(delegate);
+		super(delegate, SStructuredNode.class, SStructuredNode.class);
 	}
 
 	/** {@inheritDoc} **/

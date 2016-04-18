@@ -19,6 +19,8 @@ package org.corpus_tools.salt.graph;
 
 import java.util.Set;
 
+import org.corpus_tools.salt.exceptions.SaltParameterException;
+
 /**
  * In graph theory an relation is a relation between two nodes, often an
  * relation is realized as a pair of nodes.
@@ -63,6 +65,17 @@ public interface Relation<S extends Node ,T extends Node> extends IdentifiableEl
 	 *            source node
 	 */
 	public void setSource(S source);
+	
+	/**
+	 * Same as {@link #setSource(Node)} but allows any instance of {@link Node} as
+	 * argument. If the argument has an invalid type an {@link SaltParameterException}
+	 * is thrown.
+	 * 
+	 * @param source
+	 * @throws SaltParameterException
+	 */
+	public void setSourceUnsafe(Node source) throws SaltParameterException;
+	
 
 	/**
 	 * Returns the target node of this relation object.
@@ -79,6 +92,16 @@ public interface Relation<S extends Node ,T extends Node> extends IdentifiableEl
 	 *            target node
 	 */
 	public void setTarget(T target);
+	
+	/**
+	 * Same as {@link #setTarget(Node)} but allows any instance of {@link Node} as
+	 * argument. If the argument has an invalid type an {@link SaltParameterException}
+	 * is thrown.
+	 * 
+	 * @param source
+	 * @throws SaltParameterException
+	 */
+	public void setTargetUnsafe(Node source) throws SaltParameterException;
 
 	/**
 	 * Returns the container graph of this relation.
@@ -96,5 +119,17 @@ public interface Relation<S extends Node ,T extends Node> extends IdentifiableEl
 	 * @return a set of layers containing this relation
 	 */
 	public Set<? extends Layer<?,?>> getLayers();
+
+	/**
+	 * Return the {@link Class} object for the source node type.
+	 * @return
+	 */
+	public Class<S> getSourceClass();
+	
+	/**
+	 * Return the {@link Class} object for the target node type.
+	 * @return
+	 */
+	public Class<T> getTargetClass();
 
 }

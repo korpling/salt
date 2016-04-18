@@ -32,6 +32,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class SDominanceRelationImpl extends SRelationImpl<SStructure, SStructuredNode> implements SDominanceRelation {
 	/** Initializes an object of type {@link SDominanceRelationImpl}. **/
 	public SDominanceRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -44,7 +45,7 @@ public class SDominanceRelationImpl extends SRelationImpl<SStructure, SStructure
 	 *            delegate object of the same type.
 	 */
 	public SDominanceRelationImpl(Relation<SStructure, SStructuredNode> delegate) {
-		super(delegate);
+		super(delegate, SStructure.class, SStructuredNode.class);
 	}
 
 	/** {@inheritDoc} **/

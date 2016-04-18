@@ -26,6 +26,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class SCorpusRelationImpl extends SRelationImpl<SCorpus, SCorpus> implements SCorpusRelation {
 	/** Initializes an object of type {@link SCorpusRelationImpl}. **/
 	public SCorpusRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -38,6 +39,6 @@ public class SCorpusRelationImpl extends SRelationImpl<SCorpus, SCorpus> impleme
 	 *            delegate object of the same type.
 	 */
 	public SCorpusRelationImpl(Relation<SCorpus, SCorpus> delegate) {
-		super(delegate);
+		super(delegate, SCorpus.class, SCorpus.class);
 	}
 } // SCorpusRelationImpl

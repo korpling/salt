@@ -26,6 +26,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextualDS, Integer> implements STextualRelation {
 	/** Initializes an object of type {@link STextualRelationImpl}. **/
 	public STextualRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 	 *            delegate object of the same type.
 	 */
 	public STextualRelationImpl(Relation<SToken, STextualDS> delegate) {
-		super(delegate);
+		super(delegate, SToken.class, STextualDS.class);
 	}
 
 

@@ -116,7 +116,7 @@ public class SaltFactoryImpl extends GraphFactoryImpl implements ISaltFactory {
 	 */
 	@Override
 	public SRelation<SNode, SNode> createSRelation() {
-		return (new SRelationImpl<SNode, SNode>());
+		return (new SRelationImpl<SNode, SNode>(SNode.class, SNode.class));
 	}
 
 	/**

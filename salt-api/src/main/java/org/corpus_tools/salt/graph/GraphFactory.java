@@ -52,7 +52,7 @@ public class GraphFactory {
 	 * @return new {@link Relation} object
 	 */
 	public static Relation<Node, Node> createRelation() {
-		return (factory.createRelation());
+		return (factory.createRelation(Node.class, Node.class));
 	}
 
 	/**

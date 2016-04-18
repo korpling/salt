@@ -449,11 +449,11 @@ public class Tokenizer {
 						}
 
 						// redirect all relations to span
-						List<SRelation<SNode, SNode>> inRels = new ArrayList<>();
-						for (SRelation rel : getDocumentGraph().getInRelations(oldToken.getId())) {
+						List<SRelation<?, ? extends SNode>> inRels = new ArrayList<>();
+						for (SRelation<?,? extends SNode> rel : getDocumentGraph().getInRelations(oldToken.getId())) {
 							inRels.add(rel);
 						}
-						for (SRelation inRel : inRels) {
+						for (SRelation<?,?> inRel : inRels) {
 							if (inRel instanceof SSpanningRelation) {
 								// in case of edge is a SSpanningRelation remove
 								// it and create new ones for each token under
@@ -469,17 +469,17 @@ public class Tokenizer {
 									}
 								}
 							} else {
-								inRel.setTarget(span);
+								inRel.setTargetUnsafe(span);
 							}
 						}
-						List<SRelation<SNode, SNode>> outRels = new ArrayList<>();
-						for (SRelation outRel : getDocumentGraph().getOutRelations(oldToken.getId())) {
+						List<SRelation<? extends SNode, ?>> outRels = new ArrayList<>();
+						for (SRelation<?,?> outRel : getDocumentGraph().getOutRelations(oldToken.getId())) {
 							if (!(outRel instanceof STextualRelation)) {
 								outRels.add(outRel);
 							}
 						}
-						for (SRelation outRel : outRels) {
-							outRel.setSource(span);
+						for (SRelation<?,?> outRel : outRels) {
+							outRel.setSourceUnsafe(span);
 						}
 						getDocumentGraph().removeNode(oldToken);
 					}

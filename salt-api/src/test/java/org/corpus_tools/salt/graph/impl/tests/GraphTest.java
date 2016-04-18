@@ -462,7 +462,7 @@ public class GraphTest {
 		} catch (SaltParameterException e) {
 		}
 
-		Relation<Node, Node> relation = new RelationImpl<Node, Node>();
+		Relation<Node, Node> relation = new RelationImpl<Node, Node>(Node.class, Node.class);
 		Node source = null;
 		Node target = null;
 		try {

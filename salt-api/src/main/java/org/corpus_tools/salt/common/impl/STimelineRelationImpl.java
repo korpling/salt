@@ -26,6 +26,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STimeline, Integer> implements STimelineRelation {
 	/** Initializes an object of type {@link STimelineRelationImpl}. **/
 	public STimelineRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -38,7 +39,7 @@ public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STime
 	 *            delegate object of the same type.
 	 */
 	public STimelineRelationImpl(Relation<SToken, STimeline> delegate) {
-		super(delegate);
+		super(delegate, SToken.class, STimeline.class);
 	}
 
 

@@ -20,6 +20,7 @@ package org.corpus_tools.salt.graph.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
@@ -28,10 +29,15 @@ import org.corpus_tools.salt.graph.impl.GraphImpl.UPDATE_TYPE;
 
 @SuppressWarnings("serial")
 public class RelationImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Relation<S, T> {
+	
+	private final Class<S> sourceClass;
+	private final Class<T> targetClass;
+	
 	/**
 	 * Initializes an object of type {@link Relation}.
 	 */
-	public RelationImpl() {
+	public RelationImpl(Class<S> sourceClass, Class<T> targetClass) {
+		this(null, sourceClass, targetClass);
 	}
 
 	/**
@@ -42,8 +48,10 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public RelationImpl(Relation<S, T> delegate) {
+	public RelationImpl(Relation<S, T> delegate, Class<S> sourceClass, Class<T> targetClass) {
 		super(delegate);
+		this.sourceClass = sourceClass;
+		this.targetClass = targetClass;
 	}
 
 	/**
@@ -88,6 +96,17 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 			((GraphImpl<?,?,?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
 		}
 	}
+	
+	@Override
+	public void setSourceUnsafe(Node source) throws SaltParameterException {
+		if(getSourceClass().isInstance(source)) {
+			setSource(getSourceClass().cast(source));
+		} else {
+			throw new SaltParameterException("source", "setSourceUnsafe", getClass(), 
+					"Must be of type " + getSourceClass().getSimpleName());
+		}
+	}
+	
 
 	/** target node of this relation. **/
 	private T target = null;
@@ -122,6 +141,17 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 			((GraphImpl<?,?,?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
 		}
 	}
+	
+	@Override
+	public void setTargetUnsafe(Node source) throws SaltParameterException {
+		if(getTargetClass().isInstance(source)) {
+			setTarget(getTargetClass().cast(source));
+		} else {
+			throw new SaltParameterException("source", "setTargetUnsafe", getClass(), 
+					"Must be of type " + getTargetClass().getSimpleName());
+		}
+	}
+	
 
 	/** container graph **/
 	protected Graph<?,?,?> graph = null;
@@ -212,5 +242,14 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		}
 		return (layers);
 	}
+	
+	@Override
+	public Class<S> getSourceClass() {
+		return sourceClass;
+	}
 
+	@Override
+	public Class<T> getTargetClass() {
+		return targetClass;
+	}
 }

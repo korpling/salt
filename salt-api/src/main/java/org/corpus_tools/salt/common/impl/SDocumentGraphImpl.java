@@ -60,7 +60,6 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.DataSourceSequence;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
-import org.corpus_tools.salt.util.SRelationHelper;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.DataSourceAccessor;
 import org.corpus_tools.salt.util.internal.Diff;
@@ -445,19 +444,19 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		SRelation<? extends SNode, ? extends SNode> retVal = null;
 		switch (sRelationType) {
 		case STEXTUAL_RELATION:
-			retVal = SRelationHelper.TEXTUAL.setArgs(SaltFactory.createSTextualRelation(), source, target);
+			retVal = SaltFactory.createSTextualRelation();
 			break;
 		case SPOINTING_RELATION:
-			retVal = SRelationHelper.POINTING.setArgs(SaltFactory.createSPointingRelation(), source, target);
+			retVal = SaltFactory.createSPointingRelation();
 			break;
 		case SSPANNING_RELATION:
-			retVal = SRelationHelper.SPANNING.setArgs(SaltFactory.createSSpanningRelation(), source, target);
+			retVal = SaltFactory.createSSpanningRelation();
 			break;
 		case SDOMINANCE_RELATION:
-			retVal = SRelationHelper.DOMINANCE.setArgs(SaltFactory.createSDominanceRelation(), source, target);
+			retVal = SaltFactory.createSDominanceRelation();
 			break;
 		case SORDER_RELATION:
-			retVal = SRelationHelper.ORDER.setArgs(SaltFactory.createSOrderRelation(), source, target);
+			retVal = SaltFactory.createSOrderRelation();
 			break;
 		default:
 			break;
@@ -465,6 +464,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (retVal == null) {
 			throw new SaltParameterException("Improper STYPE_NAME for this method; must be one of STEXTUAL_RELATION, SPOINTING_RELATION, SSPANNING_RELATION and SDOMINANCE_RELATION.");
 		}
+		
+		if(!retVal.getSourceClass().isInstance(source)) {
+			throw new SaltParameterException("source", "addNode", getClass(), "Type must be " + retVal.getSourceClass().getSimpleName());
+		}
+		if(!retVal.getTargetClass().isInstance(target)) {
+			throw new SaltParameterException("target", "addNode", getClass(), "Type must be " + retVal.getTargetClass().getSimpleName());
+		}
+		
+		retVal.setSourceUnsafe(source);
+		retVal.setTargetUnsafe(target);
 
 		if (!getNodes().contains(target)) {
 			addNode(target);
@@ -859,20 +868,23 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		switch (relationType) {
 		
 		case SPOINTING_RELATION:
-			sRel = SRelationHelper.POINTING.setArgs(SaltFactory.createSPointingRelation(), source, target);
+			sRel = SaltFactory.createSPointingRelation();
 			break;
 		case SSPANNING_RELATION:
-			sRel = SRelationHelper.SPANNING.setArgs(SaltFactory.createSSpanningRelation(), source, target);
+			sRel = SaltFactory.createSSpanningRelation();
 			break;
 		case SDOMINANCE_RELATION:
-			sRel = SRelationHelper.DOMINANCE.setArgs(SaltFactory.createSDominanceRelation(), source, target);
+			sRel = SaltFactory.createSDominanceRelation();
 			break;
 		case SORDER_RELATION:
-			sRel = SRelationHelper.ORDER.setArgs(SaltFactory.createSOrderRelation(), source, target);
+			sRel = SaltFactory.createSOrderRelation();
 			break;
 		default:
 			throw new SaltParameterException("Cannot create an SRelation, because the passed type '" + relationType + "' is not supported for this method.");
 		}
+		
+		sRel.setSourceUnsafe(source);
+		sRel.setTargetUnsafe(target);
 		
 		addRelation(sRel);
 		sRel.createAnnotations(sAnnotations);
