@@ -54,7 +54,7 @@ public class RelationNotifierTest extends RelationTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new RelationNotifierImpl());
+		setFixture(new RelationNotifierImpl(Node.class, Node.class));
 	}
 
 	/** Checks whether the notification about name change is correct. **/
