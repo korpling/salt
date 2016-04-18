@@ -548,65 +548,7 @@ public class GraphTraverserModule {
 		 */
 		private List<SNode> currentNodePath = null;
 
-		/**
-		 * A recursive method, which traverses through the graph in top down and
-		 * depth first order. That means, it follows the direction of the edges
-		 * and always expands the node i first, before a node i+1 will be
-		 * expanded. This method is cyclesafe, therefore the variable
-		 * currentNodePath is used.
-		 * 
-		 * @param rel
-		 *            is the edge, via which the current node (last one in
-		 *            currentPath) was reached
-		 * @param order
-		 *            number of current edge in list of all outgoing edges of
-		 *            the parent node
-		 */
-		private void topDownDepthFirstRec(SRelation<? extends SNode, ? extends SNode> rel, long order) {
-			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
-				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
-			}
-			// current node is last element in currentPath
-			SNode currNode = currentNodePath.get(currentNodePath.size() - 1);
-			SNode parent = null;
-			if (currentNodePath.size() > 1) {
-				// if current path is larger then 1, than a parent node exists
-				parent = currentNodePath.get(currentNodePath.size() - 2);
-			}
-			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent, order);
-			// walk through all childs of this node
-			List<SRelation<? extends SNode, ? extends SNode>> childEdges = getGraph().getOutRelations(currNode.getId());
-			if (childEdges != null) {
-				// in case of node has childs
-				int i = 0;
-				for (SRelation<? extends SNode, ? extends SNode> childRel : childEdges) {
-					SNode childNode = childRel.getTarget();
-
-					if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, childRel, childNode, order)) {
-						if ((isCycleSafe) && (currentNodePath.contains(childNode))) {
-
-							StringBuffer text = new StringBuffer();
-							for (SNode node : currentNodePath) {
-								text.append(node.getId());
-								text.append(" --> ");
-							}
-							text.append(childNode.getId());
-
-							throw new SaltInvalidModelException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + childNode + "' while current path was '" + text.toString() + "'.");
-						}
-
-						currentNodePath.add(childNode);
-						topDownDepthFirstRec(childRel, i);
-						currentNodePath.remove(currentNodePath.size() - 1);
-
-						i++;
-					}
-				}
-			}
-
-			traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent, order);
-		}
-
+		
 		/**
 		 * A recursive method, which traverses through the graph in bottom-up
 		 * and depth-first order. That means, it walk through the graph in
