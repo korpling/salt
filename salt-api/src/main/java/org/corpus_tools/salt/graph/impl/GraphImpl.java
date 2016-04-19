@@ -182,7 +182,7 @@ public class GraphImpl
 			return (null);
 		}
 		Node n = getIndexMgr().get(SaltUtil.IDX_ID_NODES, nodeId);
-		if(nodeClass.isInstance(n)) {
+		if(nodeClass != null && nodeClass.isInstance(n)) {
 			return nodeClass.cast(n);
 		} else {
 			return null;
@@ -363,7 +363,7 @@ public class GraphImpl
 			return (null);
 		}
 		Relation<?,?> rel = getIndexMgr().get(SaltUtil.IDX_ID_RELATIONS, relationId);
-		if(relationClass.isInstance(rel)) {
+		if(relationClass != null && relationClass.isInstance(rel)) {
 			return relationClass.cast(rel);
 		} else {
 			return null;
@@ -403,9 +403,11 @@ public class GraphImpl
 		
 		List<Relation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_IN_RELATIONS, nodeId);
 		List<R> result = new ArrayList<>(relations.size());
-		for(Relation<?,?> rel : relations) {
-			if(relationClass.isInstance(rel)) {
-				result.add(relationClass.cast(rel));
+		if(relationClass != null) {
+			for(Relation<?,?> rel : relations) {
+				if(relationClass.isInstance(rel)) {
+					result.add(relationClass.cast(rel));
+				}
 			}
 		}
 		return result;
@@ -421,9 +423,11 @@ public class GraphImpl
 
 		List<Relation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_OUT_RELATIONS, nodeId);
 		List<R> result = new ArrayList<>(relations.size());
-		for(Relation<?,?> rel : relations) {
-			if(relationClass.isInstance(rel)) {
-				result.add(relationClass.cast(rel));
+		if(relationClass != null) {
+			for(Relation<?,?> rel : relations) {
+				if(relationClass.isInstance(rel)) {
+					result.add(relationClass.cast(rel));
+				}
 			}
 		}
 		return result;
@@ -680,7 +684,7 @@ public class GraphImpl
 			return (null);
 		}
 		Layer<?,?> layer = getIndexMgr().get(SaltUtil.IDX_ID_LAYER, layerId);
-		if(layerClass.isInstance(layer)) {
+		if(layerClass != null && layerClass.isInstance(layer)) {
 			return layerClass.cast(layer);
 		} else {
 			return null;
