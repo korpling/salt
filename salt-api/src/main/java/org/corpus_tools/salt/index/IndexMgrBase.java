@@ -11,7 +11,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 @SuppressWarnings("serial")
-public abstract class IndexMgrBase {
+public abstract class IndexMgrBase implements Serializable {
 	
 	
 	private static class IndexHolder<K, V> implements Serializable {
