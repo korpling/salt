@@ -93,44 +93,56 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 	/** {@inheritDoc} **/
 	@Override
 	public <K, V> boolean put(IndexID<K,V> indexId, K key, V value) {
-		if (threadSafe) {
-			lock.writeLock().lock();
-		}
-
-		try {
-			if (indexId != null && key != null && value != null) {
-				Multimap<K,V> idx = getIdx(indexId);
-				if(idx != null) {
-					return idx.put(key, value);
-				}
-			}
-			return false;
-		} finally {
+		
+		if (indexId != null && key != null && value != null) {
 			if (threadSafe) {
-				lock.writeLock().unlock();
+				lock.writeLock().lock();
+				try {
+					return put_internal(indexId, key, value);
+				} finally {
+					lock.writeLock().unlock();
+				}
+			} else {
+				return put_internal(indexId, key, value);
 			}
+		}
+		return false;
+	}
+	
+	private <K, V> boolean put_internal(IndexID<K,V> indexId, K key, V value) {
+		Multimap<K,V> idx = getIdx(indexId);
+		if(idx != null) {
+			return idx.put(key, value);
+		} else {
+			return false;
 		}
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public <K, V> boolean putAll(IndexID<K,V> indexId, K key, Collection<? extends V> values) {
-		if (threadSafe) {
-			lock.writeLock().lock();
-		}
-
-		try {
-			if (indexId != null && key != null && values != null && !values.isEmpty()) {
-				Multimap<K,V> idx = getIdx(indexId);
-				if(idx != null) {
-					return idx.putAll(key, values);
-				}
-			}
-			return false;
-		} finally {
+		
+		if (indexId != null && key != null && values != null && !values.isEmpty()) {
 			if (threadSafe) {
-				lock.writeLock().unlock();
+				lock.writeLock().lock();
+				try {
+					return putAll_internal(indexId, key, values);
+				} finally {
+					lock.writeLock().unlock();
+				}
+			} else {
+				return putAll_internal(indexId, key, values);
 			}
+		}
+		return false;
+	}
+	
+	private <K, V> boolean putAll_internal(IndexID<K,V> indexId, K key, Collection<? extends V> values) {
+		Multimap<K,V> idx = getIdx(indexId);
+		if(idx != null) {
+			return idx.putAll(key, values);
+		} else {
+			return false;
 		}
 	}
 
@@ -194,21 +206,26 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 		if (indexId != null && key != null) {
 			if (threadSafe) {
 				lock.readLock().lock();
-			}
-
-			try {
-				Multimap<K,V> idx = getIdx(indexId);
-				
-				if (idx != null) {
-					result = idx.containsKey(key);
-				}
-			} finally {
-				if (threadSafe) {
+				try {
+					result = containsKey_internal(indexId, key);
+				} finally {
 					lock.readLock().unlock();
 				}
+			} else {
+				result = containsKey_internal(indexId, key);
 			}
 		}
 		return result;
+	}
+	
+	private <K,V> boolean containsKey_internal(IndexID<K, V> indexId, K key) {
+		Multimap<K,V> idx = getIdx(indexId);
+		
+		if (idx != null) {
+			return idx.containsKey(key);
+		} else {
+			return false;
+		}
 	}
 
 	/** {@inheritDoc} **/
@@ -217,44 +234,53 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 		if (indexId != null && key != null) {
 			if (threadSafe) {
 				lock.writeLock().lock();
-			}
-
-			try {
-				Multimap<K,?> idx = getIdx(indexId);
-				if (idx != null) {
-					return !idx.removeAll(key).isEmpty();
-				}
-			} finally {
-				if (threadSafe) {
+				try {
+					return remove_internal(indexId, key);
+				} finally {
 					lock.writeLock().unlock();
 				}
-			}
+			} else {
+				return remove_internal(indexId, key);
+			}			
 		}
 		return false;
 	}
-
+	
+	private <K> boolean remove_internal(IndexID<K, ?> indexId, K key) {
+		Multimap<K,?> idx = getIdx(indexId);
+		if (idx != null) {
+			return !idx.removeAll(key).isEmpty();
+		} else {
+			return false;
+		}
+	}
+	
 	/** {@inheritDoc} **/
 	@Override
 	public <K,V> boolean remove(IndexID<K, V> indexId, K key, V value) {
 		if (indexId != null && key != null && value != null) {
 			if (threadSafe) {
 				lock.writeLock().lock();
-			}
-
-			try {
-				Multimap<K,V> idx = getIdx(indexId);
-
-				if (idx != null) {
-					return idx.remove(key, value);
-				}
-
-			} finally {
-				if (threadSafe) {
+				try {
+					return remove_internal(indexId, key, value);
+				} finally {
 					lock.writeLock().unlock();
 				}
+			} else {
+				return remove_internal(indexId, key, value);
 			}
 		}
 		return false;
+	}
+	
+	public <K,V> boolean remove_internal(IndexID<K, V> indexId, K key, V value) {
+		Multimap<K,V> idx = getIdx(indexId);
+
+		if (idx != null) {
+			return idx.remove(key, value);
+		} else {
+			return false;
+		}
 	}
 
 	/** {@inheritDoc} **/
@@ -275,22 +301,25 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 	/** {@inheritDoc} **/
 	@Override
 	public void clearIndex(IndexID<?, ?> indexId) {
+		
 		if (threadSafe) {
 			lock.writeLock().lock();
-		}
-
-		try {
-			Multimap<?,?> idx = getIdx(indexId);
-			if (idx != null) {
-				idx.clear();
-			}
-		} finally {
-			if (threadSafe) {
+			try {
+				clearIndex_internal(indexId);
+			} finally {
 				lock.writeLock().unlock();
 			}
+		} else {
+			clearIndex_internal(indexId);
+		}		
+	}
+	
+	private void clearIndex_internal(IndexID<?, ?> indexId) {
+		Multimap<?,?> idx = getIdx(indexId);
+		if (idx != null) {
+			idx.clear();
 		}
 	}
-
 	/** {@inheritDoc} **/
 	@Override
 	public void removeAll() {
@@ -345,21 +374,28 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 		if (indexId != null && element != null) {
 			if (threadSafe) {
 				lock.writeLock().lock();
-			}
-
-			try {
-				Multimap<?,V> idx = getIdx(indexId);
-
-				if (idx != null) {
-					result = idx.values().remove(element);
-				}
-			} finally {
-				if (threadSafe) {
+				try {
+					result = removeValue_internal(indexId, element);
+				} finally {
 					lock.writeLock().unlock();
+					
 				}
-			}
+			} else {
+				result = removeValue_internal(indexId, element);
+			}			
 		}
 
 		return result;
 	}
+	
+	private <V> boolean removeValue_internal(IndexID<?, V> indexId, V element) {
+		Multimap<?,V> idx = getIdx(indexId);
+
+		if (idx != null) {
+			return idx.values().remove(element);
+		} else {
+			return false;
+		}
+	}
+	
 }
