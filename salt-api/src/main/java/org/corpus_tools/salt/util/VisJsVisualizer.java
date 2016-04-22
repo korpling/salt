@@ -187,13 +187,17 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_X = "x";
 	private static final String JSON_LEVEL = "level";
 	private static final String JSON_GROUP = "group";
-	//private static final String JSON_FIXED_X = "fixed.x";
-	private static final String JSON_HIDDEN = "hidden";
+	//private static final String JSON_HIDDEN = "hidden";
 	private static final String JSON_PHYSICS = "physics";
+	private static final String JSON_SMOOTH  = "smooth";
+	private static final String JSON_TYPE  = "type";
+	private static final String JSON_ROUNDNESS = "roundness";
+	private static final String JSON_WIDTH  = "width";
 	
 	
 	private  int xPosition = 0;	
 	private  int nTokens = 0;	
+	private  static final int NODE_DIST = 150; 
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
 	private static final String SPAN_COLOR_VALUE = "#A9D0F5";
 	private static final String STRUCTURE_COLOR_VALUE = "#FFCC00";
@@ -1165,7 +1169,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			 jsonWriterNodes.key(JSON_COLOR);
 			 jsonWriterNodes.value(TOK_COLOR_VALUE);
 			 jsonWriterNodes.key(JSON_X);
-			 jsonWriterNodes.value((xPosition++)*100);
+			 jsonWriterNodes.value((xPosition++)*NODE_DIST);
 			 jsonWriterNodes.key(JSON_PHYSICS);
 			 jsonWriterNodes.value("false");
 		 }
@@ -1189,7 +1193,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			}
 			//initial x-value in center
 			jsonWriterNodes.key(JSON_X);
-			jsonWriterNodes.value((nTokens/2)*100);
+			jsonWriterNodes.value((nTokens/2)*NODE_DIST);
 	
 		}
 		
@@ -1204,7 +1208,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			}
 			//initial x-value in center
 			 jsonWriterNodes.key(JSON_X);
-			 jsonWriterNodes.value((nTokens/2)*100);
+			 jsonWriterNodes.value((nTokens/2)*NODE_DIST);
 	
 		}		 
 		 
@@ -1225,8 +1229,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  jsonWriterEdges.value(fromNode.getPath().fragment());
 			  jsonWriterEdges.key("to");
 			  jsonWriterEdges.value(toNode.getPath().fragment());
-			 //not a pseudo edge
-			//  if (relation != null){			  
+
+				  
 			  
 				  Set<SAnnotation> sAnnotations = relation.getAnnotations();
 				  if (sAnnotations.size() > 0)
@@ -1248,12 +1252,18 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					   jsonWriterEdges.key("label");
 					   jsonWriterEdges.value(allLabels);
 				   }
-			 // }
-			  /*else{
-		
-				  jsonWriterEdges.key(JSON_HIDDEN); 
-				  jsonWriterEdges.value("true");
-			  }*/
+			 
+			if (relation instanceof SPointingRelation){			  
+				 jsonWriterEdges.key(JSON_WIDTH); 
+				 jsonWriterEdges.value("2");
+				 jsonWriterEdges.key(JSON_SMOOTH); 
+				  	jsonWriterEdges.object();
+				    jsonWriterEdges.key(JSON_TYPE); 
+				  	jsonWriterEdges.value("curvedCW");
+				  	jsonWriterEdges.key(JSON_ROUNDNESS); 
+				  	jsonWriterEdges.value("0.5");
+				    jsonWriterEdges.endObject();
+			  }
 			  
 			  jsonWriterEdges.endObject();
 			  
