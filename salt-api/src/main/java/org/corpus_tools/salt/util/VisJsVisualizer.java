@@ -2,6 +2,7 @@ package org.corpus_tools.salt.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -10,15 +11,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -187,7 +196,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_X = "x";
 	private static final String JSON_LEVEL = "level";
 	private static final String JSON_GROUP = "group";
-	//private static final String JSON_HIDDEN = "hidden";
 	private static final String JSON_PHYSICS = "physics";
 	private static final String JSON_SMOOTH  = "smooth";
 	private static final String JSON_TYPE  = "type";
@@ -213,6 +221,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     
     public static final String NODES_AND_EDGES_FILE = "saltNodesAndEdges.json";
     public static final String CSS_FOLDER_OUT = "css";
+    public static final String IMG_FOLDER_OUT = CSS_FOLDER_OUT + System.getProperty("file.separator") + "img" + System.getProperty("file.separator") + "network";
     public static final String JS_FOLDER_OUT = "js";
     public static final String JSON_FOLDER_OUT = "json";
     
@@ -228,6 +237,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private final static String VIS_CSS_SRC = CSS_FOLDER_OUT + System.getProperty("file.separator") + CSS_FILE;    
         
     private static final String RESOURCE_FOLDER = System.getProperty("file.separator") + "visjs"; 
+    private static final String RESOURCE_FOLDER_IMG_NETWORK = "visjs"  + System.getProperty("file.separator")+ "img" + System.getProperty("file.separator")  + "network";
     
     private HashMap <String, Integer> spanClasses;
     private int maxSpanOffset = -1;
@@ -431,6 +441,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
    private void writeHTML(File outputFolder) throws XMLStreamException, IOException{
 	 
 			 int nodeDist = 0;
+			 int sprLength = 100;
+			 double sprConstant = 0.0;
 			
 			this.os = new FileOutputStream(new File(outputFolder, HTML_FILE));
 			this.outputFactory = XMLOutputFactory.newInstance();			
@@ -603,12 +615,16 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 				
 			if (nNodes < 20){
 			nodeDist = 100;
+			sprConstant = 1.2;
 			} else if (nNodes >=20 && nNodes < 100){
-			nodeDist = 150;
+			nodeDist = 120;
+			sprConstant = 1.0;
 			} else if (nNodes >= 100 && nNodes < 400) {
-			nodeDist = 200;
+			nodeDist = 150;
+			sprConstant = 0.8;
 			} else {
-				nodeDist = 400;
+				nodeDist = 180;
+				sprConstant = 0.6;
 			};
 			
 			// write nodes as array	
@@ -662,6 +678,10 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			+ "}" + NEWLINE
 			+ "}" + NEWLINE
 			+ "}," + NEWLINE
+			+ "interaction: {" + NEWLINE
+			+ "navigationButtons: true," + NEWLINE
+			+ "keyboard: true" + NEWLINE
+			+ "}," + NEWLINE
 			+ "layout: {" + NEWLINE
 			+ "hierarchical:{" + NEWLINE
 			+ "direction: directionInput.value" + NEWLINE
@@ -669,17 +689,18 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			+ "}," + NEWLINE
 			+ "physics: {" + NEWLINE
 			+ "hierarchicalRepulsion: {" + NEWLINE
-			+ "centralGravity: 0.05," + NEWLINE
-			+ "springLength: 100," + NEWLINE
-			+ "springConstant: 0.0007," + NEWLINE
+			+ "centralGravity: 0.8," + NEWLINE
+			+ "springLength: " + sprLength + "," + NEWLINE
+			+ "springConstant: " + sprConstant + "," + NEWLINE
 			+ "nodeDistance: nodeDist," + NEWLINE
 			+ "damping: 0.04" + NEWLINE
 			+ "}," + NEWLINE
-			+ "maxVelocity: 27," + NEWLINE
+			+ "maxVelocity: 50," + NEWLINE
+			+ "minVelocity: 1," + NEWLINE
 			+ "solver: 'hierarchicalRepulsion'," + NEWLINE
 			+ "timestep: 0.5," + NEWLINE
 			+ "stabilization: {" + NEWLINE
-			+ "iterations: 800" + NEWLINE
+			+ "iterations: 1000" + NEWLINE
 			+ "}" + NEWLINE
 			+ "}" + NEWLINE
 			+ "}" + NEWLINE
@@ -772,7 +793,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			xmlWriter.writeAttribute(ATT_VALUE, "Down-Up");
 			xmlWriter.writeCharacters(NEWLINE);
 			
-			xmlWriter.writeEmptyElement(TAG_INPUT);
+			/*xmlWriter.writeEmptyElement(TAG_INPUT);
 			xmlWriter.writeAttribute(ATT_TYPE,"button");
 			xmlWriter.writeAttribute(ATT_ID, "btn-LR");
 			xmlWriter.writeAttribute("value", "Left-Right");
@@ -782,7 +803,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			xmlWriter.writeAttribute(ATT_TYPE,"button");
 			xmlWriter.writeAttribute(ATT_ID, "btn-RL");
 			xmlWriter.writeAttribute(ATT_VALUE, "Right-Left");
-			xmlWriter.writeCharacters(NEWLINE);
+			xmlWriter.writeCharacters(NEWLINE); */
 			
 			xmlWriter.writeEmptyElement(TAG_INPUT);
 			xmlWriter.writeAttribute(ATT_TYPE,"hidden");
@@ -823,16 +844,17 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					+ "directionInput.value = \"DU\";" + NEWLINE
 					+ "start();" + NEWLINE
 					+ "};" + NEWLINE
-					+ "var btnLR = document.getElementById(\"btn-LR\");" + NEWLINE
+					/*+ "var btnLR = document.getElementById(\"btn-LR\");" + NEWLINE
 					+ "btnLR.onclick = function() {" + NEWLINE
 					+ "directionInput.value = \"LR\";" + NEWLINE
 					+ "start();" + NEWLINE
 					+ "};" + NEWLINE
 					+ "var btnRL = document.getElementById(\"btn-RL\");" + NEWLINE
 					+ "btnRL.onclick = function() {" + NEWLINE
-					+ "directionInput.value = \"RL\";" + NEWLINE
+					+ "directionInput.value = \"RL\";" + NEWLINE 
 					+ "start();" + NEWLINE
-					+ "};" + NEWLINE);
+					+ "};" + NEWLINE */
+					);
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);		
 			
@@ -883,6 +905,11 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  jsFolderOut.mkdir();
 		  }
 		  
+		/*  File imgFolderOut = new File(outputFolder, IMG_FOLDER_OUT);
+		  if(!imgFolderOut.exists()){
+			  imgFolderOut.mkdirs();
+		  }*/
+		  
 		  if(loadJSON){
 			  File jsonFolderOut = new File(outputFolder, JSON_FOLDER_OUT);
 			  if(!jsonFolderOut.exists()){
@@ -891,10 +918,59 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		  }
 		 
 		  
-		  copyResourceFile(CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
-		  copyResourceFile(JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
-		  copyResourceFile(JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
-		  copyResourceFile(HTML_FILE, outputFolder.getPath(), null, HTML_FILE);	  	 
+		  copyResourceFile(RESOURCE_FOLDER, CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
+		  copyResourceFile(RESOURCE_FOLDER, JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
+		  copyResourceFile(RESOURCE_FOLDER, JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
+		  copyResourceFile(RESOURCE_FOLDER, HTML_FILE, outputFolder.getPath(), null, HTML_FILE);	
+		  
+		
+		/*  ClassLoader classLoader = getClass().getClassLoader();
+		  File imgFolder = new File(classLoader.getResource(RESOURCE_FOLDER_IMG_NETWORK).getFile());*/
+		  
+		  
+		//  System.out.println(imgFolder.getAbsolutePath());
+		  
+		 /* final String path = "visjs/img/network";
+		  final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+		  System.out.println("jarFile: " +jarFile);
+		  
+		  if(jarFile.isDirectory())
+		  {  
+			  System.out.println("is dir");
+		      final JarFile jar = new JarFile(jarFile);
+		      final Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
+		      while(entries.hasMoreElements()) {
+		          final String name = entries.nextElement().getName();
+		          if (name.startsWith(path + "/")) { //filter according to the path
+		              System.out.println(name);
+		          }
+		      }
+		      jar.close();
+		  }*/
+		
+		  
+		  
+		  
+		/* File resourceFolderImgNetwork = new File(RESOURCE_FOLDER);
+		 System.out.println(resourceFolderImgNetwork.getPath()); */
+		
+		/*  if (!imgFolder.exists()){
+			 throw new SaltResourceException("visjs image resources does not exist!");
+		  }
+		  
+		  if (!imgFolder.canRead()){
+			  throw new SaltResourceException("No read permit for visjs image folder!");
+		  }*/
+		  
+		/* File[] imgFiles = imgFolder.listFiles();
+		// System.out.println(imgFiles.length);
+		 
+		 for(File imgFile : imgFiles){			 
+			 System.out.println(imgFile.getName());
+			 copyResourceImage(System.getProperty("file.separator") + RESOURCE_FOLDER_IMG_NETWORK, imgFile.getName(), outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
+		 }*/
+		  
+		  
 		  return outputFolder;
 	}
 	
@@ -902,10 +978,10 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 /*
  * Copies the specified auxiliary file to the according output subfolder.
  */
-	private void copyResourceFile (String inFile, String outputFolder, String outSubFolder, String outFile) 
+	private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
 					throws FileNotFoundException, IOException{
 	
-		InputStream inputStream = getClass( ).getResourceAsStream(RESOURCE_FOLDER 
+		InputStream inputStream = getClass().getResourceAsStream(resourceFolder 
 				  + System.getProperty("file.separator") 
 				  + inFile);		  
 		  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -938,6 +1014,21 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		    writer.flush();
 		    writer.close();     
 	}
+	
+	/*private void copyResourceImage(String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile)
+			throws IOException{
+		 
+		Path inPath = Paths.get(this.getClass().getResource(resourceFolder +"/" +inFile).toString());
+		Path outPath = new File(outputFolder + "/" +outSubFolder, outFile).toPath();
+		
+		System.out.println(inPath+ "  >>>>>>>>>>>>>>>>>>>>>  " + outPath);
+		
+		//Files.copy(inPath, outPath, StandardCopyOption.COPY_ATTRIBUTES);
+		
+		System.out.println("filesize: " + Files.size(inPath));
+	}*/
+	
+	
 	
 	private void setJsonWriter (OutputStream os)
 	{
@@ -1048,22 +1139,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	 //create edge array
 	 jsonWriterEdges.array();
 	 
-	/* Iterator<SToken> it = sTokens.iterator();
-	 SToken fromTok;
-	 SToken toTok;
-	 
-	 if(it.hasNext()){
-		 fromTok = (SToken) it.next(); 
 		 
-		 while(it.hasNext()){
-			 toTok = (SToken) it.next();
-			 writeJsonEdge(fromTok, toTok, null); 
-			 fromTok = toTok;
-		 }
-	 }*/
-	  
-	
-	 
 	 // traverse the document tree in order to write remained nodes and edges
 	 doc.getDocumentGraph().traverse(doc.getDocumentGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, 
 			 												TRAV_MODE_READ_NODES, this);		

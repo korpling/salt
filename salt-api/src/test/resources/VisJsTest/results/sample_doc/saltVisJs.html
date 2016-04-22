@@ -111,32 +111,32 @@ var edgesJson = [];
 var network = null;
 function loadSaltObjectAndDraw() {
 var nodesJson = 
-[{"id":"sTok1","label":"id=sTok1\nlemma=be\npos=VBZ\nIs","color":"#CCFF99","x":100,"level":11}
-,{"id":"sTok2","label":"id=sTok2\nlemma=this\npos=DT\nthis","color":"#CCFF99","x":200,"level":11}
-,{"id":"sTok3","label":"id=sTok3\nlemma=example\npos=NN\nexample","color":"#CCFF99","x":300,"level":11}
-,{"id":"sTok4","label":"id=sTok4\nlemma=more\npos=RBR\nmore","color":"#CCFF99","x":400,"level":11}
-,{"id":"sTok5","label":"id=sTok5\nlemma=complicated\npos=JJ\ncomplicated","color":"#CCFF99","x":500,"level":11}
-,{"id":"sTok6","label":"id=sTok6\nlemma=than\npos=IN\nthan","color":"#CCFF99","x":600,"level":11}
-,{"id":"sTok7","label":"id=sTok7\nlemma=it\npos=PRP\nit","color":"#CCFF99","x":700,"level":11}
-,{"id":"sTok8","label":"id=sTok8\nlemma=appear\npos=VBZ\nappears","color":"#CCFF99","x":800,"level":11}
-,{"id":"sTok9","label":"id=sTok9\nlemma=to\npos=TO\nto","color":"#CCFF99","x":900,"level":11}
-,{"id":"sTok10","label":"id=sTok10\nlemma=be\npos=VB\nbe","color":"#CCFF99","x":1000,"level":11}
-,{"id":"sTok11","label":"id=sTok11\nlemma=?\npos=.\n?","color":"#CCFF99","x":1100,"level":11}
-,{"id":"IS_span1","label":"id=IS_span1\nInf-Struct=contrast-focus","level":10,"group":"1","color":"#A9D0F5"}
-,{"id":"IS_span2","label":"id=IS_span2\nInf-Struct=topic","level":10,"group":"1","color":"#A9D0F5"}
-,{"id":"sSpan3","label":"id=sSpan3","level":9,"group":"1","color":"#A9D0F5"}
-,{"id":"structure3","label":"id=structure3\nconst=NP","level":8,"group":"0","color":"#FFCC00"}
-,{"id":"structure5","label":"id=structure5\nconst=ADJP","level":8,"group":"0","color":"#FFCC00"}
-,{"id":"structure8","label":"id=structure8\nconst=NP","level":8,"group":"0","color":"#FFCC00"}
-,{"id":"structure12","label":"id=structure12\nconst=VP","level":8,"group":"0","color":"#FFCC00"}
-,{"id":"structure11","label":"id=structure11\nconst=VP","level":7,"group":"0","color":"#FFCC00"}
-,{"id":"structure10","label":"id=structure10\nconst=S","level":6,"group":"0","color":"#FFCC00"}
-,{"id":"structure9","label":"id=structure9\nconst=VP","level":5,"group":"0","color":"#FFCC00"}
-,{"id":"structure7","label":"id=structure7\nconst=S","level":4,"group":"0","color":"#FFCC00"}
-,{"id":"structure6","label":"id=structure6\nconst=SBar","level":3,"group":"0","color":"#FFCC00"}
-,{"id":"structure4","label":"id=structure4\nconst=ADJP","level":2,"group":"0","color":"#FFCC00"}
-,{"id":"structure2","label":"id=structure2\nconst=SQ","level":1,"group":"0","color":"#FFCC00"}
-,{"id":"structure1","label":"id=structure1\nconst=ROOT","level":0,"group":"0","color":"#FFCC00"}
+[{"id":"sTok1","label":"id=sTok1\nlemma=be\npos=VBZ\nIs","color":"#CCFF99","x":0,"physics":"false","level":11}
+,{"id":"sTok2","label":"id=sTok2\nlemma=this\npos=DT\nthis","color":"#CCFF99","x":150,"physics":"false","level":11}
+,{"id":"sTok3","label":"id=sTok3\nlemma=example\npos=NN\nexample","color":"#CCFF99","x":300,"physics":"false","level":11}
+,{"id":"sTok4","label":"id=sTok4\nlemma=more\npos=RBR\nmore","color":"#CCFF99","x":450,"physics":"false","level":11}
+,{"id":"sTok5","label":"id=sTok5\nlemma=complicated\npos=JJ\ncomplicated","color":"#CCFF99","x":600,"physics":"false","level":11}
+,{"id":"sTok6","label":"id=sTok6\nlemma=than\npos=IN\nthan","color":"#CCFF99","x":750,"physics":"false","level":11}
+,{"id":"sTok7","label":"id=sTok7\nlemma=it\npos=PRP\nit","color":"#CCFF99","x":900,"physics":"false","level":11}
+,{"id":"sTok8","label":"id=sTok8\nlemma=appear\npos=VBZ\nappears","color":"#CCFF99","x":1050,"physics":"false","level":11}
+,{"id":"sTok9","label":"id=sTok9\nlemma=to\npos=TO\nto","color":"#CCFF99","x":1200,"physics":"false","level":11}
+,{"id":"sTok10","label":"id=sTok10\nlemma=be\npos=VB\nbe","color":"#CCFF99","x":1350,"physics":"false","level":11}
+,{"id":"sTok11","label":"id=sTok11\nlemma=?\npos=.\n?","color":"#CCFF99","x":1500,"physics":"false","level":11}
+,{"id":"IS_span1","label":"id=IS_span1\nInf-Struct=contrast-focus","level":10,"group":"1","color":"#A9D0F5","x":750}
+,{"id":"IS_span2","label":"id=IS_span2\nInf-Struct=topic","level":10,"group":"1","color":"#A9D0F5","x":750}
+,{"id":"sSpan3","label":"id=sSpan3","level":9,"group":"1","color":"#A9D0F5","x":750}
+,{"id":"structure3","label":"id=structure3\nconst=NP","level":8,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure5","label":"id=structure5\nconst=ADJP","level":8,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure8","label":"id=structure8\nconst=NP","level":8,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure12","label":"id=structure12\nconst=VP","level":8,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure11","label":"id=structure11\nconst=VP","level":7,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure10","label":"id=structure10\nconst=S","level":6,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure9","label":"id=structure9\nconst=VP","level":5,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure7","label":"id=structure7\nconst=S","level":4,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure6","label":"id=structure6\nconst=SBar","level":3,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure4","label":"id=structure4\nconst=ADJP","level":2,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure2","label":"id=structure2\nconst=SQ","level":1,"group":"0","color":"#FFCC00","x":750}
+,{"id":"structure1","label":"id=structure1\nconst=ROOT","level":0,"group":"0","color":"#FFCC00","x":750}
 ];
 var edgesJson = 
 [{"from":"IS_span1","to":"sTok1"}
@@ -147,7 +147,7 @@ var edgesJson =
 ,{"from":"IS_span2","to":"sTok6"}
 ,{"from":"sSpan3","to":"sTok2"}
 ,{"from":"sSpan3","to":"sTok3"}
-,{"from":"sTok7","to":"sSpan3"}
+,{"from":"sTok7","to":"sSpan3","width":"2","smooth":{"type":"curvedCW","roundness":"0.5"}}
 ,{"from":"IS_span2","to":"sTok7"}
 ,{"from":"IS_span2","to":"sTok8"}
 ,{"from":"IS_span2","to":"sTok9"}
@@ -176,7 +176,7 @@ var edgesJson =
 ,{"from":"structure1","to":"structure2"}
 ,{"from":"structure1","to":"sTok11"}
 ];
-var nodeDist =150;
+var nodeDist =120;
 draw(nodesJson, edgesJson, nodeDist);
 }
 var directionInput = document.getElementById("direction");
@@ -212,6 +212,10 @@ enabled: true
 }
 }
 },
+interaction: {
+navigationButtons: true,
+keyboard: true
+},
 layout: {
 hierarchical:{
 direction: directionInput.value
@@ -219,17 +223,18 @@ direction: directionInput.value
 },
 physics: {
 hierarchicalRepulsion: {
-centralGravity: 0.05,
+centralGravity: 0.8,
 springLength: 100,
-springConstant: 0.0007,
+springConstant: 1.0,
 nodeDistance: nodeDist,
 damping: 0.04
 },
-maxVelocity: 27,
+maxVelocity: 50,
+minVelocity: 1,
 solver: 'hierarchicalRepulsion',
 timestep: 0.5,
 stabilization: {
-iterations: 800
+iterations: 1000
 }
 }
 }
@@ -267,8 +272,6 @@ document.getElementById('loadingBar').style.opacity = 0;
 <div style="width:700px; font-size:14px; text-align: justify;"/>
 <p><input type="button" id="btn-UD" value="Up-Down"/>
 <input type="button" id="btn-DU" value="Down-Up"/>
-<input type="button" id="btn-LR" value="Left-Right"/>
-<input type="button" id="btn-RL" value="Right-Left"/>
 <input type="hidden" id="direction" value="UD"/>
 </p>
 <div id="mynetwork">
@@ -285,16 +288,6 @@ start();
 var btnDU = document.getElementById("btn-DU");
 btnDU.onclick = function() {
 directionInput.value = "DU";
-start();
-};
-var btnLR = document.getElementById("btn-LR");
-btnLR.onclick = function() {
-directionInput.value = "LR";
-start();
-};
-var btnRL = document.getElementById("btn-RL");
-btnRL.onclick = function() {
-directionInput.value = "RL";
 start();
 };
 </script>

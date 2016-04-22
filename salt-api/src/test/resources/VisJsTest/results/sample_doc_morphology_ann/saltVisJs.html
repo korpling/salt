@@ -111,17 +111,17 @@ var edgesJson = [];
 var network = null;
 function loadSaltObjectAndDraw() {
 var nodesJson = 
-[{"id":"sTok1","label":"id=sTok1\nlemma=be\npos=VBZ\nIs","color":"#CCFF99","x":100,"level":0}
-,{"id":"sTok2","label":"id=sTok2\nlemma=this\npos=DT\nthis","color":"#CCFF99","x":200,"level":0}
-,{"id":"sTok3","label":"id=sTok3\nlemma=example\npos=NN\nexample","color":"#CCFF99","x":300,"level":0}
-,{"id":"sTok4","label":"id=sTok4\nlemma=more\npos=RBR\nmore","color":"#CCFF99","x":400,"level":0}
-,{"id":"sTok5","label":"id=sTok5\nlemma=complicated\npos=JJ\ncomplicated","color":"#CCFF99","x":500,"level":0}
-,{"id":"sTok6","label":"id=sTok6\nlemma=than\npos=IN\nthan","color":"#CCFF99","x":600,"level":0}
-,{"id":"sTok7","label":"id=sTok7\nlemma=it\npos=PRP\nit","color":"#CCFF99","x":700,"level":0}
-,{"id":"sTok8","label":"id=sTok8\nlemma=appear\npos=VBZ\nappears","color":"#CCFF99","x":800,"level":0}
-,{"id":"sTok9","label":"id=sTok9\nlemma=to\npos=TO\nto","color":"#CCFF99","x":900,"level":0}
-,{"id":"sTok10","label":"id=sTok10\nlemma=be\npos=VB\nbe","color":"#CCFF99","x":1000,"level":0}
-,{"id":"sTok11","label":"id=sTok11\nlemma=?\npos=.\n?","color":"#CCFF99","x":1100,"level":0}
+[{"id":"sTok1","label":"id=sTok1\nlemma=be\npos=VBZ\nIs","color":"#CCFF99","x":0,"physics":"false","level":0}
+,{"id":"sTok2","label":"id=sTok2\nlemma=this\npos=DT\nthis","color":"#CCFF99","x":150,"physics":"false","level":0}
+,{"id":"sTok3","label":"id=sTok3\nlemma=example\npos=NN\nexample","color":"#CCFF99","x":300,"physics":"false","level":0}
+,{"id":"sTok4","label":"id=sTok4\nlemma=more\npos=RBR\nmore","color":"#CCFF99","x":450,"physics":"false","level":0}
+,{"id":"sTok5","label":"id=sTok5\nlemma=complicated\npos=JJ\ncomplicated","color":"#CCFF99","x":600,"physics":"false","level":0}
+,{"id":"sTok6","label":"id=sTok6\nlemma=than\npos=IN\nthan","color":"#CCFF99","x":750,"physics":"false","level":0}
+,{"id":"sTok7","label":"id=sTok7\nlemma=it\npos=PRP\nit","color":"#CCFF99","x":900,"physics":"false","level":0}
+,{"id":"sTok8","label":"id=sTok8\nlemma=appear\npos=VBZ\nappears","color":"#CCFF99","x":1050,"physics":"false","level":0}
+,{"id":"sTok9","label":"id=sTok9\nlemma=to\npos=TO\nto","color":"#CCFF99","x":1200,"physics":"false","level":0}
+,{"id":"sTok10","label":"id=sTok10\nlemma=be\npos=VB\nbe","color":"#CCFF99","x":1350,"physics":"false","level":0}
+,{"id":"sTok11","label":"id=sTok11\nlemma=?\npos=.\n?","color":"#CCFF99","x":1500,"physics":"false","level":0}
 ];
 var edgesJson = 
 [];
@@ -161,6 +161,10 @@ enabled: true
 }
 }
 },
+interaction: {
+navigationButtons: true,
+keyboard: true
+},
 layout: {
 hierarchical:{
 direction: directionInput.value
@@ -168,17 +172,18 @@ direction: directionInput.value
 },
 physics: {
 hierarchicalRepulsion: {
-centralGravity: 0.05,
+centralGravity: 0.8,
 springLength: 100,
-springConstant: 0.0007,
+springConstant: 1.2,
 nodeDistance: nodeDist,
 damping: 0.04
 },
-maxVelocity: 27,
+maxVelocity: 50,
+minVelocity: 1,
 solver: 'hierarchicalRepulsion',
 timestep: 0.5,
 stabilization: {
-iterations: 800
+iterations: 1000
 }
 }
 }
@@ -216,8 +221,6 @@ document.getElementById('loadingBar').style.opacity = 0;
 <div style="width:700px; font-size:14px; text-align: justify;"/>
 <p><input type="button" id="btn-UD" value="Up-Down"/>
 <input type="button" id="btn-DU" value="Down-Up"/>
-<input type="button" id="btn-LR" value="Left-Right"/>
-<input type="button" id="btn-RL" value="Right-Left"/>
 <input type="hidden" id="direction" value="UD"/>
 </p>
 <div id="mynetwork">
@@ -234,16 +237,6 @@ start();
 var btnDU = document.getElementById("btn-DU");
 btnDU.onclick = function() {
 directionInput.value = "DU";
-start();
-};
-var btnLR = document.getElementById("btn-LR");
-btnLR.onclick = function() {
-directionInput.value = "LR";
-start();
-};
-var btnRL = document.getElementById("btn-RL");
-btnRL.onclick = function() {
-directionInput.value = "RL";
 start();
 };
 </script>
