@@ -17,8 +17,12 @@
  */
 package org.corpus_tools.salt.common.impl;
 
+import java.util.List;
+
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STextualDS;
+import org.corpus_tools.salt.common.SToken;
+import org.corpus_tools.salt.common.tokenizer.Tokenizer;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
 
@@ -82,4 +86,17 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 			return (null);
 		}
 	}
+	
+	/**
+	 * Bug fix 69.
+	 * Implements fast access to tokenization of a {@link STextualDS}.
+	 * Simply duplicates the functionality of {@link SDocumentGraphImpl#tokenize()},
+	 * but only with respect to this object.
+	 */
+	public List<SToken> tokenize() {
+		Tokenizer tokenizer = new Tokenizer();
+		tokenizer.setsDocumentGraph(getGraph());
+		return tokenizer.tokenize(this);
+	}
+
 } // STextualDSImpl

@@ -17,10 +17,14 @@
  */
 package org.corpus_tools.salt.common.impl.tests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STextualDS;
+import org.corpus_tools.salt.common.SToken;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -83,5 +87,23 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 		assertEquals(null, getFixture().getEnd());
 		getFixture().setData("Test");
 		assertEquals(Integer.valueOf(4), getFixture().getEnd());
+	}
+	
+	@Test
+	public void testTokenize() {
+		SDocumentGraph graph = SaltFactory.createSDocumentGraph();
+		getFixture().setText("This is a birthday pony!");
+		getFixture().setGraph(graph);
+		List<SToken> tokens = getFixture().tokenize();
+		graph = getFixture().getGraph();
+		assertNotNull(graph);
+		assertTrue(graph instanceof SDocumentGraph);
+		tokens = graph.getSortedTokenByText();
+		assertNotNull(tokens);
+		assertTrue(tokens.size() == 6);
+		String[] tokenArray = new String[]{"This", "is", "a", "birthday", "pony", "!"};
+		for (int i = 0; i < graph.getTokens().size(); i++) {
+			assertEquals(tokenArray[i], graph.getText(tokens.get(i)));
+		}
 	}
 } // STextualDSTest
