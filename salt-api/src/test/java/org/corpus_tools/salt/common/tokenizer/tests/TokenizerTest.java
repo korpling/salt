@@ -346,7 +346,7 @@ public class TokenizerTest {
 		getFixture().tokenize(sTextualDS, LanguageCode.en);
 
 		assertEquals(expectedToken.size(), sDocGraph.getTokens().size());
-
+		
 		int i = 0;
 		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
 			assertTrue(expectedToken.size() >= i);
@@ -358,5 +358,51 @@ public class TokenizerTest {
 			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
+	}
+	
+	@Test
+	public void testDefaultCliticsWithExplicitLanguage() {
+		String text = "ou ceux-là mêmes qu'il s'affirmaient";
+//		String text = "Riuscire all'università spesso significa riuscire il primo anno, quando intorno ai giovani studenti regna incontrastato l'anonimato e l'incertezza. È per questo che l'Unione degli Universitari organizza ogni anno per tutti i nuovi studenti dei banchetti di informazione e di accoglienza, in cui viene distribuito del materiale informativo. Lo scopo? Permettere ai nuovi arrivati di capire il funzionamento dell'università, l'organizzazione degli studi, il metodo di lavoro migliore e soprattutto come evitare scogli noti ormai so lo ai veterani. La prima cosa da capire è che gli studi all'università sono completamente differenti da quelli liceali e che necessitano, per questo, di un diverso approccio e in particolare, di una grande capacità di autogestirsi. Non avrete più infatti il professore che sceglierà per voi le tematiche da affrontare nè le interrogazioni giornaliere a scandire i tempi dei vostri studi. Dovrete fare tutto da soli. Per questo è importante seguire, almeno per i primi mesi, i corsi dei professori. Sappiamo che questo potrebbe risultare stressante soprattutto per quanti credevano di aver finalmente chiuso con levatacce di primo mattino e con ore passate immobili nei banchi. È bene sapere infatti che in tutte le università le lezio ni del primo anno risultano sempre piuttosto affollate";
+		List<Token> expectedToken = new Vector<Token>();
+//		expectedToken.add(new Token("Riuscire", 0, 8));
+//		expectedToken.add(new Token("all'", 9, 13));
+//		expectedToken.add(new Token("università", 13, 23));
+
+		expectedToken.add(new Token("ou", 0, 2));
+		expectedToken.add(new Token("ceux", 3, 7));
+		expectedToken.add(new Token("-là", 7, 10));
+		expectedToken.add(new Token("mêmes", 11, 16));
+		expectedToken.add(new Token("qu'", 17, 20));
+		expectedToken.add(new Token("il", 20, 22));
+		expectedToken.add(new Token("s-", 23, 25));
+		expectedToken.add(new Token("affirmaient", 25, 36));
+
+		
+		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createTextualDS(text);
+		getFixture().setsDocumentGraph(sDocGraph);
+//		getFixture().tokenize(sTextualDS, LanguageCode.it);
+		getFixture().tokenize(sTextualDS, LanguageCode.fr);
+		
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
+			assertTrue(expectedToken.size() >= i);
+			assertNotNull(expectedToken.get(i));
+			assertNotNull(sTextRel.getSource());
+			assertNotNull(sTextRel.getTarget());
+			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
+			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
+			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			i++;
+		}
+		
+		System.out.println("FINAL TOKENS:\n");
+		int y = 1;
+		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
+			System.out.println(y + ": " + sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			y++;
+		}
+
 	}
 }
