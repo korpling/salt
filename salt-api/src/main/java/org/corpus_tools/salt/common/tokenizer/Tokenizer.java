@@ -178,11 +178,6 @@ public class Tokenizer {
 				}
 			} // set abbreviations
 
-//			if (getClitics(language) != null) {
-//				
-//			}
-//			this.setClitics(language); // FIXME
-
 			retVal = tokenizeToToken(sTextualDS, language, startPos, endPos);
 		}
 		return (retVal);
@@ -643,40 +638,32 @@ public class Tokenizer {
 			}
 
 			// attempt to separate proclitics
-				p = Pattern.compile("^(" + getClitics(language).getProclitic() + ")(.+)$");
-//				p = Pattern.compile("^(" + getClitics(language).getProclitic() + ")(.+)(?=\\s)");
-				m = p.matcher(lstTokens.get(i));
-				System.err.println("CHECKING PROCLITIC --- " + i + ": " + lstTokens.get(i));
+			if (getClitics(language)!= null && getClitics(language).getProclitic() != null) {
+			p = Pattern.compile("^" + getClitics(language).getProclitic() + "(.+)$");
+			String token = lstTokens.get(i);
+				m = p.matcher(token);
 				if (m.find() && (!getClitics(language).getProclitic().isEmpty())) {
-					for (int g = 0 ; g < m.groupCount(); g++) {
-						System.err.println(m.group(g));
-					}
 					lstTokens.remove(i);
-					System.err.println("MGROUP(2) " + m.group(2));
-					System.err.println("adding at " + i + " the above mgroup2");
 					lstTokens.add(i, m.group(2));
-					System.err.println("MGROUP(1) " + m.group(1));
-					System.err.println("adding at " + i + " the above mgroup1\n\n+++++++++++++++++++++\n\n");
 					lstTokens.add(i, m.group(1));
-//					continue; // proclitic has been removed, but next token must
+					continue; // proclitic has been removed, but next token must
 					// still be checked
 				}
+			}
 
 			// attempt to separate enclitics
-				System.err.println("     CHECKING ENCLITIC +++ " + i + ": " + lstTokens.get(i));
-				p = Pattern.compile("(.+)(" + getClitics(language).getEnclitic() + ")$");
+				if (getClitics(language) != null && getClitics(language).getEnclitic() != null) {
+				p = Pattern.compile("(.+)" + getClitics(language).getEnclitic() + "$");
 				m = p.matcher(lstTokens.get(i));
 				if (m.find() && (!getClitics(language).getEnclitic().isEmpty())) {
 					lstTokens.remove(i);
-					System.err.println("     MGROUP(2) " + m.group(2));
-					System.err.println("     adding at " + i + " the above mgroup2");
 					lstTokens.add(i, m.group(2));
-					System.err.println("     MGROUP(1) " + m.group(1));
-					System.err.println("     adding at " + i + " the above mgroup1\n\n+++++++++++++++++++++\n\n");
 					lstTokens.add(i, m.group(1));
 					i++; // next token is a known enclitic, skip it
 					continue; // advance to get past the enclitic
 				}
+				}
+
 		}
 		return lstTokens;
 	}
