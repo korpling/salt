@@ -44,7 +44,7 @@ public class LabelTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(GraphFactory.createLabel());
+		setFixture(createLabel());
 	}
 
 	@Test
@@ -73,13 +73,13 @@ public class LabelTest {
 		}
 
 		// should be ok
-		label = GraphFactory.createLabel();
+		label = createLabel();
 		qName = "any name";
 		label.setQName(qName);
 		assertEquals(qName, label.getQName());
 
 		// should be ok
-		this.setFixture(GraphFactory.createLabel());
+		this.setFixture(createLabel());
 		label = this.getFixture();
 		qName = "label1";
 		label.setQName(qName);
@@ -123,7 +123,7 @@ public class LabelTest {
 		this.getFixture().setName(name);
 		assertEquals(name, this.getFixture().getQName());
 
-		this.setFixture(GraphFactory.createLabel());
+		this.setFixture(createLabel());
 		this.getFixture().setNamespace(namespace);
 		assertEquals(namespace + Label.NS_SEPERATOR, this.getFixture().getQName());
 
@@ -229,7 +229,7 @@ public class LabelTest {
 		getFixture().setName("name1");
 		getFixture().setValue("value1");
 
-		Label other = GraphFactory.createLabel();
+		Label other = createLabel();
 		getFixture().copy(other);
 
 		assertEquals(getFixture().getNamespace(), other.getNamespace());
@@ -274,5 +274,9 @@ public class LabelTest {
 		assertEquals(Integer.valueOf(0), container1.sizeLabels());
 		assertEquals(container2, getFixture().getContainer());
 
+	}
+
+	protected Label createLabel() {
+		return GraphFactory.createLabel();
 	}
 } // LabelTest

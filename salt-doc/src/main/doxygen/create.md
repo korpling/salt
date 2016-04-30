@@ -183,7 +183,7 @@ The following snippet gives an impression of how to create that hierarchy. We ju
 
 ~~~{.java}
 //create a list of nodes, which shall be overlapped by the NP-node
-List&lt;SStructuredNode> overlappingNodes= new ArrayList&lt;>();
+List<SStructuredNode> overlappingNodes= new ArrayList<>();
 overlappingNodes.add(tok_this);
 overlappingNodes.add(tok_example);
 //adding NP-Node to graph and automatically creating relations to overlapping nodes
@@ -192,7 +192,7 @@ np_1.createAnnotation(null, "cat", "NP");
 //...
 
 //create a list of nodes, which shall be overlapping by SQ-node
-overlappingNodes= new ArrayList&lt;>();
+overlappingNodes= new ArrayList<>();
 overlappingNodes.add(tok_is);
 overlappingNodes.add(np_1);
 SStructure sq= sampleDocument.getDocumentGraph().createStructure(overlappingNodes);
@@ -245,7 +245,7 @@ SSpan contrast_focus= sampleDocument.getDocumentGraph().createSpan(tok_is);
 contrast_focus.createAnnotation(null, "inf-struct", "contrast-focus");
 		
 //create a list of tokens taking part in the set to be annotated as a bundle
-List&lt;SToken> overlappingTokens= new ArrayList&lt;>();
+List<SToken> overlappingTokens= new ArrayList<>();
 overlappingTokens.add(tok_this);
 overlappingTokens.add(tok_example);
 overlappingTokens.add(tok_more);
@@ -277,13 +277,13 @@ spanRel.setTarget(tok_is);
 
 Now we will show another type of relation, which renders a more loose relation between nodes. In contrast to _SSpanningRelations_ and _SDominanceRelations_, which can only connect specific kinds of nodes, the type _SPointingRelation_ can connect _SToken_, _SSpan_ and _SStructure_ nodes with each other and vice versa. These relations for instance can be used to model anaphoric relations between words, phrases, sentences and so on. Relations in general can be typed with a linguistic meaning by setting their attribute _SType_. We illustrate that by connecting the token covering the word "it" to the set of tokens "the" and "example". To bundle the words "the" and "example", we first have to create a span covering both tokens "the" and "example" following the same mechanism as shown in section [Spans](#spans).
 
-<img src="./images/salt_pointRel.svg" style="width:30%" alt="Salt graph pointing relations">
+![](./images/sample_pointingRel.png)
 
 The following snippet shows the creation of the model shown in the figure.
 
 ~~~{.java}
 //create a span covering the words "the" and "example"
-overlappingTokens= new ArrayList&lt;>();
+overlappingTokens= new ArrayList<>();
 overlappingTokens.add(tok_this);
 overlappingTokens.add(tok_example);
 SSpan span= sampleDocument.getDocumentGraph().createSpan(overlappingTokens);
@@ -302,5 +302,4 @@ pointingRelation.setType("anaphoric");
 
 You can download the demonstrated code via github under https://github.com/korpling/saltDemo. More code samples can be found in Salt's sample package.
 
-To learn how to access the elements of a Salt model, please read the article @ref access.
- 
+To learn how to access the elements of a Salt model, please read the article @ref access. 

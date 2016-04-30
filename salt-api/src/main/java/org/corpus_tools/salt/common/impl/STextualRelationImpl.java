@@ -23,9 +23,27 @@ import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
 public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextualDS, Integer> implements STextualRelation {
+	/** Initializes an object of type {@link STextualRelationImpl}. **/
+	public STextualRelationImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link STextualRelationImpl}. If
+	 * {@link #delegate} is not null, all functions of this method are delegated
+	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public STextualRelationImpl(Relation delegate) {
+		super(delegate);
+	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {

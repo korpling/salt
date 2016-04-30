@@ -45,7 +45,23 @@ public class RelationTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(GraphFactory.createRelation());
+		setFixture(createRelation());
+	}
+	
+	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
+		return GraphFactory.createGraph();
+	}
+	
+	protected Node createNode() {
+		return GraphFactory.createNode();
+	}
+	
+	protected Relation createRelation() {
+		return GraphFactory.createRelation();
+	}
+	
+	protected Layer<Node, Relation<Node, Node>> createLayer() {
+		return GraphFactory.createLayer();
 	}
 
 	/**
@@ -53,9 +69,9 @@ public class RelationTest {
 	 */
 	@Test
 	public void testDoubleChaining_SetGraph() {
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
-		Node source = GraphFactory.createNode();
-		Node target = GraphFactory.createNode();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
+		Node source = createNode();
+		Node target = createNode();
 		graph.addNode(source);
 		graph.addNode(target);
 		getFixture().setSource(source);
@@ -71,9 +87,9 @@ public class RelationTest {
 	 */
 	@Test
 	public void testDoubleChaining_SetGraph_remove() {
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
-		Node source = GraphFactory.createNode();
-		Node target = GraphFactory.createNode();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
+		Node source = createNode();
+		Node target = createNode();
 		graph.addNode(source);
 		graph.addNode(target);
 		getFixture().setSource(source);
@@ -87,9 +103,9 @@ public class RelationTest {
 		getFixture().setGraph(graph);
 		assertEquals(graph, getFixture().getGraph());
 
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = GraphFactory.createGraph();
-		Node source2 = GraphFactory.createNode();
-		Node target2 = GraphFactory.createNode();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = createGraph();
+		Node source2 = createNode();
+		Node target2 = createNode();
 		graph2.addNode(source2);
 		graph2.addNode(target2);
 		getFixture().setSource(source2);
@@ -104,14 +120,14 @@ public class RelationTest {
 	 */
 	@Test
 	public void testAddGetLayers() {
-		Layer layer = GraphFactory.createLayer();
-		Node source = GraphFactory.createNode();
-		Node target = GraphFactory.createNode();
+		Layer layer = createLayer();
+		Node source = createNode();
+		Node target = createNode();
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
 
 		// prerequirements
-		Graph graph = GraphFactory.createGraph();
+		Graph graph = createGraph();
 		graph.addLayer(layer);
 		graph.addNode(source);
 		graph.addNode(target);
@@ -128,14 +144,14 @@ public class RelationTest {
 	@Test
 	public void testRemoveLayers() {
 		assertNotNull(getFixture().getLayers());
-		Layer layer = GraphFactory.createLayer();
-		Node source = GraphFactory.createNode();
-		Node target = GraphFactory.createNode();
+		Layer layer = createLayer();
+		Node source = createNode();
+		Node target = createNode();
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
 
 		// prerequirements
-		Graph graph = GraphFactory.createGraph();
+		Graph graph = createGraph();
 		graph.addLayer(layer);
 		graph.addNode(source);
 		graph.addNode(target);
@@ -153,14 +169,14 @@ public class RelationTest {
 	 */
 	@Test
 	public void testDoubleChainingLayer() {
-		Layer layer = GraphFactory.createLayer();
-		Node source = GraphFactory.createNode();
-		Node target = GraphFactory.createNode();
+		Layer layer = createLayer();
+		Node source = createNode();
+		Node target = createNode();
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
 
 		// prerequirements
-		Graph graph = GraphFactory.createGraph();
+		Graph graph = createGraph();
 		graph.addLayer(layer);
 		graph.addNode(source);
 		graph.addNode(target);

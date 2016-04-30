@@ -20,11 +20,29 @@ package org.corpus_tools.salt.common.impl;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.core.SGraph;
+import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
+import org.corpus_tools.salt.graph.Node;
 
 @SuppressWarnings("serial")
 public class SCorpusImpl extends SNodeImpl implements SCorpus {
+	/** Initializes an object of type {@link SLayerImpl}. **/
+	public SCorpusImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SLayerImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public SCorpusImpl(Node delegate) {
+		super(delegate);
+	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public SCorpusGraph getGraph() {

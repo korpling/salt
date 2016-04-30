@@ -619,7 +619,7 @@ public class SampleGenerator {
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		
+
 		SSpan sSpan = document.getDocumentGraph().createSpan(englishToks.get(3), englishToks.get(4));
 		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(sSpan, germanToks.get(3), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
@@ -975,6 +975,7 @@ public class SampleGenerator {
 		if (document == null) {
 			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
+
 		if (document.getDocumentGraph() == null || document.getDocumentGraph().getLayerByName("syntax").isEmpty()) {
 			createSyntaxStructure(document);
 		}
@@ -982,10 +983,12 @@ public class SampleGenerator {
 		String[] annotations = { "ROOT", "SQ", "NP", "ADJP", "ADJP", "SBar", "S", "NP", "VP", "S", "VP", "VP" };
 		int i = 0;
 		for (SStructure structure : structures) {
+			if (i >= annotations.length) {
+				throw new SaltSampleException("Cannot create syntax annotations for structures, since there are more strucctures than expected. Expected " + annotations.length + ", Actual: " + structures.size() + ". ");
+			}
 			structure.createAnnotation(null, "const", annotations[i]);
 			i++;
 		}
-
 	}
 
 	/**

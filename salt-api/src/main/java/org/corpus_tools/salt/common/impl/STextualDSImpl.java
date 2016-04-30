@@ -17,13 +17,34 @@
  */
 package org.corpus_tools.salt.common.impl;
 
+import java.util.List;
+
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STextualDS;
+import org.corpus_tools.salt.common.SToken;
+import org.corpus_tools.salt.common.tokenizer.Tokenizer;
+import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 
 @SuppressWarnings("serial")
 public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implements STextualDS {
+	/** Initializes an object of type {@link SLayerImpl}. **/
+	public STextualDSImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SLayerImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public STextualDSImpl(Node delegate) {
+		super(delegate);
+	}
 
 	/** {@inheritDoc} **/
 	@Override
@@ -81,5 +102,18 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 		} else {
 			return (null);
 		}
+	}
+
+	/**
+	* Bug fix 69.
+	* Implements fast access to tokenization of a {@link STextualDS}.
+	* Simply duplicates the functionality of {@link SDocumentGraphImpl#tokenize()},
+	* but only with respect to this object.
+	*/
+	@Override
+	public List<SToken> tokenize() {
+		Tokenizer tokenizer = new Tokenizer();
+		tokenizer.setsDocumentGraph(getGraph());
+		return tokenizer.tokenize(this);
 	}
 } // STextualDSImpl

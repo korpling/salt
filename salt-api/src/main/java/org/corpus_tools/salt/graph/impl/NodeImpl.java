@@ -44,15 +44,8 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 *            delegate object of the same type.
 	 */
 	public NodeImpl(Node delegate) {
-		this.delegate = delegate;
+		super(delegate);
 	}
-
-	/**
-	 * A delegate object of the same type. If {@link #delegate} is not null, all
-	 * functions of this method are delegated to the delegate object. Setting
-	 * {@link #delegate} makes this object to a container.
-	 **/
-	protected Node delegate = null;
 
 	/**
 	 * Returns the delegate object. If {@link #delegate} is not null, all
@@ -61,8 +54,8 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 * 
 	 * @return the delegate object
 	 */
-	public Node getDelegate() {
-		return (delegate);
+	protected Node getDelegate() {
+		return ((Node) super.getDelegate());
 	}
 
 	/** container graph **/
@@ -71,12 +64,19 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
 	public Graph getGraph() {
+		if (getDelegate() != null) {
+			return (getDelegate().getGraph());
+		}
 		return (graph);
 	}
 
 	/** {@inheritDoc Relation#setGraph(Graph)} **/
 	@Override
 	public void setGraph(Graph graph) {
+		if (getDelegate() != null) {
+			getDelegate().setGraph(graph);
+			return;
+		}
 		Graph oldGraph = getGraph();
 		if (graph != null) {
 			graph.addNode(this);
@@ -92,7 +92,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
 	 * graph and to avoid an endless invocation the insertion of an node is
-	 * splited into the two methods {@link #setGraph(Graph)} and
+	 * split into the two methods {@link #setGraph(Graph)} and
 	 * {@link #basicSetGraph(Graph)}. The invocation of methods is implement as
 	 * follows:
 	 * 
@@ -113,6 +113,10 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 *            graph which contains this node
 	 */
 	protected void basicSetGraph(Graph graph) {
+		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
+			((NodeImpl) getDelegate()).basicSetGraph(graph);
+			return;
+		}
 		// remove from old graph if it was changed
 		if (this.graph != graph && this.graph instanceof GraphImpl) {
 			((GraphImpl) this.graph).basicRemoveNode(this);
@@ -120,9 +124,27 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 		this.graph = graph;
 	}
 
+	/**
+	 * Same as {@link #basicSetGraph(Graph)} but does not remove this node from
+	 * old graph, if it was not equal to the passed graph.
+	 * 
+	 * @param graph
+	 */
+	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
+			((NodeImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
+			return;
+		}
+		
+		this.graph = graph;
+	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public Set<? extends Layer> getLayers() {
+		if (getDelegate() != null) {
+			return (getDelegate().getLayers());
+		}
 		Set<Layer> layers = new HashSet<>();
 		if (getGraph() != null) {
 			Set<Layer> allLayers = getGraph().getLayers();
@@ -145,6 +167,10 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 **/
 	@Override
 	public void addLayer(Layer layer) {
+		if (getDelegate() != null) {
+			getDelegate().addLayer(layer);
+			return;
+		}
 		if (layer != null) {
 			layer.addNode(this);
 		}
@@ -158,6 +184,10 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 **/
 	@Override
 	public void removeLayer(Layer layer) {
+		if (getDelegate() != null) {
+			getDelegate().removeLayer(layer);
+			return;
+		}
 		if (layer != null) {
 			layer.removeNode(this);
 		}

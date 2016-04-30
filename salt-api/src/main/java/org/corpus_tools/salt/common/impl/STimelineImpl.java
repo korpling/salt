@@ -19,11 +19,28 @@ package org.corpus_tools.salt.common.impl;
 
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STimeline;
+import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 
 @SuppressWarnings("serial")
 public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implements STimeline {
+	/** Initializes an object of type {@link SLayerImpl}. **/
+	public STimelineImpl() {
+	}
+
+	/**
+	 * Initializes an object of type {@link SLayerImpl}. If {@link #delegate} is
+	 * not null, all functions of this method are delegated to the delegate
+	 * object. Setting {@link #delegate} makes this object to a container.
+	 * 
+	 * @param a
+	 *            delegate object of the same type.
+	 */
+	public STimelineImpl(Node delegate) {
+		super(delegate);
+	}
 
 	/** {@inheritDoc} **/
 	@Override
