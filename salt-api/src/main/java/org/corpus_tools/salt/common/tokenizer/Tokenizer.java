@@ -153,7 +153,7 @@ public class Tokenizer {
 				// if text was to short to emit language try entire text (and
 				// hope, that no language mixes are contained :-})
 				if (language == null) {
-					language = checkLanguage(sTextualDS.getText().substring(startPos, endPos));
+					language = checkLanguage(sTextualDS.getText());
 				}
 			}
 
