@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -746,7 +747,6 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			xmlWriter.writeAttribute("onload", "start();");
 			xmlWriter.writeCharacters(NEWLINE);
 			
-			System.out.println("physics: " +withPhysics);
 			
 			if(withPhysics == true){			
 				xmlWriter.writeStartElement(TAG_DIV);
@@ -853,7 +853,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);		
 			
-			//div
+			//div wrapper
 			if(withPhysics == true){			
 				xmlWriter.writeEndElement();
 				xmlWriter.writeCharacters(NEWLINE);		
@@ -903,10 +903,10 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  jsFolderOut.mkdir();
 		  }
 		  
-		/*  File imgFolderOut = new File(outputFolder, IMG_FOLDER_OUT);
+		  File imgFolderOut = new File(outputFolder, IMG_FOLDER_OUT);
 		  if(!imgFolderOut.exists()){
 			  imgFolderOut.mkdirs();
-		  }*/
+		  }
 		  
 		  if(loadJSON){
 			  File jsonFolderOut = new File(outputFolder, JSON_FOLDER_OUT);
@@ -919,55 +919,18 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		  copyResourceFile(RESOURCE_FOLDER, CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
 		  copyResourceFile(RESOURCE_FOLDER, JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
 		  copyResourceFile(RESOURCE_FOLDER, JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
-		  copyResourceFile(RESOURCE_FOLDER, HTML_FILE, outputFolder.getPath(), null, HTML_FILE);	
-			
+		  copyResourceFile(RESOURCE_FOLDER, HTML_FILE, outputFolder.getPath(), null, HTML_FILE);				
 		  
 		
-		/*  ClassLoader classLoader = getClass().getClassLoader();
-		  File imgFolder = new File(classLoader.getResource(RESOURCE_FOLDER_IMG_NETWORK).getFile());*/
-		  
-		  
-		//  System.out.println(imgFolder.getAbsolutePath());
-		  
-		 /* final String path = "visjs/img/network";
-		  final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-		  System.out.println("jarFile: " +jarFile);
-		  
-		  if(jarFile.isDirectory())
-		  {  
-			  System.out.println("is dir");
-		      final JarFile jar = new JarFile(jarFile);
-		      final Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
-		      while(entries.hasMoreElements()) {
-		          final String name = entries.nextElement().getName();
-		          if (name.startsWith(path + "/")) { //filter according to the path
-		              System.out.println(name);
-		          }
-		      }
-		      jar.close();
-		  }*/
+		  ClassLoader classLoader = getClass().getClassLoader();
+		  File imgFolder = new File(classLoader.getResource(RESOURCE_FOLDER_IMG_NETWORK).getFile());  
+				  
 		
 		  
-		  
-		  
-		/* File resourceFolderImgNetwork = new File(RESOURCE_FOLDER);
-		 System.out.println(resourceFolderImgNetwork.getPath()); */
-		
-		/*  if (!imgFolder.exists()){
-			 throw new SaltResourceException("visjs image resources does not exist!");
-		  }
-		  
-		  if (!imgFolder.canRead()){
-			  throw new SaltResourceException("No read permit for visjs image folder!");
-		  }*/
-		  
-		/* File[] imgFiles = imgFolder.listFiles();
-		// System.out.println(imgFiles.length);
-		 
+		 File[] imgFiles = imgFolder.listFiles();		 
 		 for(File imgFile : imgFiles){			 
-			 System.out.println(imgFile.getName());
-			 copyResourceImage(System.getProperty("file.separator") + RESOURCE_FOLDER_IMG_NETWORK, imgFile.getName(), outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
-		 }*/
+			 copyResourceFile(System.getProperty("file.separator") + RESOURCE_FOLDER_IMG_NETWORK, imgFile.getName(), outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
+		 }
 		  
 		  
 		  return outputFolder;
@@ -978,7 +941,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
  * Copies the specified auxiliary file to the according output subfolder.
  */
 	
-	private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
+	/*private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
 			throws FileNotFoundException, IOException{
 
 InputStream inputStream = getClass().getResourceAsStream(resourceFolder 
@@ -1013,9 +976,52 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
     reader.close();
     writer.flush();
     writer.close();     
+}*/
+	
+	
+private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
+		throws IOException 
+			{
+InputStream inputStream = getClass().getResourceAsStream(resourceFolder 
+		  + System.getProperty("file.separator") 
+		  + inFile);		  
+ 
+ FileOutputStream fileOutStream = null;
+  
+  if (outSubFolder != null){
+	
+		fileOutStream =  new FileOutputStream(new File (outputFolder
+				  + System.getProperty("file.separator")
+				  + outSubFolder 
+				  + System.getProperty("file.separator")
+				  + outFile));
+	
+	  }
+  else{	
+		fileOutStream = new FileOutputStream(new File (outputFolder
+				  + System.getProperty("file.separator")
+				  + outFile));	
+  }	
+  
+	int bufferSize = 512*1024;		  
+	byte [] bytes = new byte[bufferSize];
+	int readBytes = 0;
+	
+	while ((readBytes = inputStream.read(bytes)) != -1) 
+	{		
+	fileOutStream.write(bytes, 0, readBytes);
+	 }
+	  
+	fileOutStream.flush(); 
+	fileOutStream.close();
+	inputStream.close();
+	
 }
 	
+	
 
+
+	
 
 	
 	
