@@ -12,6 +12,13 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 3.0.6
+=============
+* fix #69: create StextualDS.tokenize()
+* fix #86: Tokenizer sets Italian (?) clitics to LanguageCode for Spanish
+* fix #87: Proclitics regex for French doesn't work as expected
+* Support dynamic handling of clitics in Tokenizer (set directly, read from file)
+
 Version 3.0.5
 =============
 * fix #82: GraphML serialization was invalid
