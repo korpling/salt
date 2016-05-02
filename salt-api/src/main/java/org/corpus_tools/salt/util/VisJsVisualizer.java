@@ -205,8 +205,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_TYPE  = "type";
 	private static final String JSON_ROUNDNESS = "roundness";
 	private static final String JSON_WIDTH  = "width";
-	private static final String JSON_FONT  = "font";
-	private static final String JSON_ALIGN  = "align";
+	//private static final String JSON_FONT  = "font";
+	//private static final String JSON_ALIGN  = "align";
 	
 	
 	
@@ -216,7 +216,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
 	private static final String SPAN_COLOR_VALUE = "#A9D0F5";
 	private static final String STRUCTURE_COLOR_VALUE = "#FFCC00";
-	private static final String ALIGN = "left";	
+	//private static final String ALIGN = "left";	
 	
  
    
@@ -249,6 +249,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     private HashMap <String, Integer> spanClasses;
     private int maxSpanOffset = -1;
     private int nNodes = 0;
+    
+    private boolean withPhysics = false;
     
     													
     		 
@@ -712,22 +714,26 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			+ "}" + NEWLINE
 			+ "}" + NEWLINE
 			+ ";" + NEWLINE
-			+ "network = new vis.Network(container, data, options);" + NEWLINE
-			+ "network.on(\"stabilizationProgress\", function(params) {" + NEWLINE
-			+ "var maxWidth = 496;" + NEWLINE
-			+ "var minWidth = 20;" + NEWLINE
-            + "var widthFactor = params.iterations/params.total;" + NEWLINE
-            + "var width = Math.max(minWidth,maxWidth * widthFactor);" + NEWLINE			
-			+ "document.getElementById('loadingBar').style.opacity = 1;" + NEWLINE
-            + "document.getElementById('bar').style.width = width + 'px';" + NEWLINE
-            + "document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';" + NEWLINE             
-            + "});" + NEWLINE
-            + "network.on(\"stabilizationIterationsDone\", function() {" + NEWLINE	
-            + "document.getElementById('text').innerHTML = '100%';" + NEWLINE	
-            + "document.getElementById('bar').style.width = '496px';" + NEWLINE	
-            + "document.getElementById('loadingBar').style.opacity = 0;" + NEWLINE
-            + "});" + NEWLINE
-			+ "}" + NEWLINE);
+			+"network = new vis.Network(container, data, options);" + NEWLINE);
+			
+			if(withPhysics == true){
+				xmlWriter.writeCharacters("network.on(\"stabilizationProgress\", function(params) {" + NEWLINE
+				+ "var maxWidth = 496;" + NEWLINE
+				+ "var minWidth = 20;" + NEWLINE
+	            + "var widthFactor = params.iterations/params.total;" + NEWLINE
+	            + "var width = Math.max(minWidth,maxWidth * widthFactor);" + NEWLINE			
+				+ "document.getElementById('loadingBar').style.opacity = 1;" + NEWLINE
+	            + "document.getElementById('bar').style.width = width + 'px';" + NEWLINE
+	            + "document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';" + NEWLINE             
+	            + "});" + NEWLINE
+	            + "network.on(\"stabilizationIterationsDone\", function() {" + NEWLINE	
+	            + "document.getElementById('text').innerHTML = '100%';" + NEWLINE	
+	            + "document.getElementById('bar').style.width = '496px';" + NEWLINE	
+	            + "document.getElementById('loadingBar').style.opacity = 0;" + NEWLINE
+	            + "});" + NEWLINE);
+			}
+			
+			xmlWriter.writeCharacters("}" + NEWLINE);
 			//script
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);
@@ -739,42 +745,46 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			xmlWriter.writeStartElement(TAG_BODY);
 			xmlWriter.writeAttribute("onload", "start();");
 			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeStartElement(TAG_DIV);
-			xmlWriter.writeAttribute(ATT_ID, "wrapper");
-			xmlWriter.writeCharacters(NEWLINE);
 			
-			xmlWriter.writeStartElement(TAG_DIV);
-			xmlWriter.writeAttribute(ATT_ID, "loadingBar");
-			xmlWriter.writeCharacters(NEWLINE);
+			System.out.println("physics: " +withPhysics);
 			
-			xmlWriter.writeStartElement(TAG_DIV);
-			xmlWriter.writeAttribute(ATT_CLASS, "outerBorder");
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_DIV);
-			xmlWriter.writeAttribute(ATT_ID, "text");
-			xmlWriter.writeCharacters("0%");
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_DIV);
-			xmlWriter.writeAttribute(ATT_ID, "border");
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_DIV);
-			xmlWriter.writeAttribute(ATT_ID, "bar");
-			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-						
+			if(withPhysics == true){			
+				xmlWriter.writeStartElement(TAG_DIV);
+				xmlWriter.writeAttribute(ATT_ID, "wrapper");
+				xmlWriter.writeCharacters(NEWLINE);
+				
+				xmlWriter.writeStartElement(TAG_DIV);
+				xmlWriter.writeAttribute(ATT_ID, "loadingBar");
+				xmlWriter.writeCharacters(NEWLINE);
+				
+				xmlWriter.writeStartElement(TAG_DIV);
+				xmlWriter.writeAttribute(ATT_CLASS, "outerBorder");
+				xmlWriter.writeCharacters(NEWLINE);
+				
+				xmlWriter.writeStartElement(TAG_DIV);
+				xmlWriter.writeAttribute(ATT_ID, "text");
+				xmlWriter.writeCharacters("0%");
+				xmlWriter.writeEndElement();
+				xmlWriter.writeCharacters(NEWLINE);
+				
+				xmlWriter.writeStartElement(TAG_DIV);
+				xmlWriter.writeAttribute(ATT_ID, "border");
+				xmlWriter.writeCharacters(NEWLINE);
+				
+				xmlWriter.writeStartElement(TAG_DIV);
+				xmlWriter.writeAttribute(ATT_ID, "bar");
+				xmlWriter.writeCharacters(NEWLINE);
+				xmlWriter.writeEndElement();
+				xmlWriter.writeCharacters(NEWLINE);
+				
+				
+				xmlWriter.writeEndElement();
+				xmlWriter.writeCharacters(NEWLINE);
+				xmlWriter.writeEndElement();
+				xmlWriter.writeCharacters(NEWLINE);
+				xmlWriter.writeEndElement();
+				xmlWriter.writeCharacters(NEWLINE);
+			}		
 			
 			xmlWriter.writeStartElement(TAG_H2);
 			xmlWriter.writeCharacters("Dokument-Id: " + docId);
@@ -844,8 +854,11 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			xmlWriter.writeCharacters(NEWLINE);		
 			
 			//div
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);		
+			if(withPhysics == true){			
+				xmlWriter.writeEndElement();
+				xmlWriter.writeCharacters(NEWLINE);		
+			}
+			
 			
 			//body
 			xmlWriter.writeEndElement();
@@ -1383,7 +1396,13 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 		}
 		
 		readSpanNodes.clear();
-		readStructNodes.clear();		
+		readStructNodes.clear();	
+		// If maxLevel > 0, there are further nodes beside token nodes, since token nodes are mandatory.
+		//Thus, graph will be rendered with physics.
+		if (maxLevel > 0)
+		{
+			withPhysics = true;
+		}
 		return maxLevel;
 	}
 	
@@ -1468,11 +1487,14 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	{		
 			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
 			{				
-				if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && !(edge instanceof SPointingRelation) && !(fromNode instanceof SToken) &&
+				if (traversalId.equals(TRAV_MODE_CALC_LEVEL)) {
+					if (!(edge instanceof SPointingRelation) && !(fromNode instanceof SToken) &&
 						(exportFilter == null  || !exportFilter.excludeNode(currNode)) && (edge!= null))
-				{
-				currHeight--;	
-				}
+						{
+						currHeight--;	
+						
+						}
+					}
 			
 				else if (traversalId.equals(TRAV_MODE_READ_NODES))
 				{ 
