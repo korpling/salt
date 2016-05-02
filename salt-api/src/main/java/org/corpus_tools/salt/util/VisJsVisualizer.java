@@ -1,5 +1,6 @@
 package org.corpus_tools.salt.util;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -29,6 +30,9 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import javax.xml.stream.XMLStreamException;
 
 import org.corpus_tools.salt.SaltFactory;
@@ -201,6 +205,9 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_TYPE  = "type";
 	private static final String JSON_ROUNDNESS = "roundness";
 	private static final String JSON_WIDTH  = "width";
+	private static final String JSON_FONT  = "font";
+	private static final String JSON_ALIGN  = "align";
+	
 	
 	
 	private  int xPosition = 0;	
@@ -209,7 +216,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String TOK_COLOR_VALUE = "#CCFF99";
 	private static final String SPAN_COLOR_VALUE = "#A9D0F5";
 	private static final String STRUCTURE_COLOR_VALUE = "#FFCC00";
-	
+	private static final String ALIGN = "left";	
 	
  
    
@@ -793,18 +800,6 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			xmlWriter.writeAttribute(ATT_VALUE, "Down-Up");
 			xmlWriter.writeCharacters(NEWLINE);
 			
-			/*xmlWriter.writeEmptyElement(TAG_INPUT);
-			xmlWriter.writeAttribute(ATT_TYPE,"button");
-			xmlWriter.writeAttribute(ATT_ID, "btn-LR");
-			xmlWriter.writeAttribute("value", "Left-Right");
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeEmptyElement(TAG_INPUT);
-			xmlWriter.writeAttribute(ATT_TYPE,"button");
-			xmlWriter.writeAttribute(ATT_ID, "btn-RL");
-			xmlWriter.writeAttribute(ATT_VALUE, "Right-Left");
-			xmlWriter.writeCharacters(NEWLINE); */
-			
 			xmlWriter.writeEmptyElement(TAG_INPUT);
 			xmlWriter.writeAttribute(ATT_TYPE,"hidden");
 			//TODO check the apostrophes
@@ -844,16 +839,6 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 					+ "directionInput.value = \"DU\";" + NEWLINE
 					+ "start();" + NEWLINE
 					+ "};" + NEWLINE
-					/*+ "var btnLR = document.getElementById(\"btn-LR\");" + NEWLINE
-					+ "btnLR.onclick = function() {" + NEWLINE
-					+ "directionInput.value = \"LR\";" + NEWLINE
-					+ "start();" + NEWLINE
-					+ "};" + NEWLINE
-					+ "var btnRL = document.getElementById(\"btn-RL\");" + NEWLINE
-					+ "btnRL.onclick = function() {" + NEWLINE
-					+ "directionInput.value = \"RL\";" + NEWLINE 
-					+ "start();" + NEWLINE
-					+ "};" + NEWLINE */
 					);
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);		
@@ -922,6 +907,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		  copyResourceFile(RESOURCE_FOLDER, JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
 		  copyResourceFile(RESOURCE_FOLDER, JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
 		  copyResourceFile(RESOURCE_FOLDER, HTML_FILE, outputFolder.getPath(), null, HTML_FILE);	
+			
 		  
 		
 		/*  ClassLoader classLoader = getClass().getClassLoader();
@@ -978,55 +964,47 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 /*
  * Copies the specified auxiliary file to the according output subfolder.
  */
+	
 	private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
-					throws FileNotFoundException, IOException{
-	
-		InputStream inputStream = getClass().getResourceAsStream(resourceFolder 
-				  + System.getProperty("file.separator") 
-				  + inFile);		  
-		  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-		  BufferedWriter writer;
-		  
-		  if (outSubFolder != null){
-			  writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
-					  + System.getProperty("file.separator")
-					  + outSubFolder 
-					  + System.getProperty("file.separator")
-					  + outFile))));
-			  }
-		  else{
-			  writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
-					  + System.getProperty("file.separator")
-					  + outFile))));
-		  }	
-		  
-		  int bufferSize = 512*1024;		  
-		  char [] buffer = new char [bufferSize];
-		  int readChars = 0;		  		  
+			throws FileNotFoundException, IOException{
 
-			while ((readChars=reader.read(buffer, 0, bufferSize)) != -1) 
-			  {		
-						writer.write(buffer, 0, readChars);
-			  }	
-			    
-		  	inputStream.close();
-		    reader.close();
-		    writer.flush();
-		    writer.close();     
-	}
+InputStream inputStream = getClass().getResourceAsStream(resourceFolder 
+		  + System.getProperty("file.separator") 
+		  + inFile);		  
+  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+  BufferedWriter writer;
+  
+  if (outSubFolder != null){
+	  writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
+			  + System.getProperty("file.separator")
+			  + outSubFolder 
+			  + System.getProperty("file.separator")
+			  + outFile))));
+	  }
+  else{
+	  writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
+			  + System.getProperty("file.separator")
+			  + outFile))));
+  }	
+  
+  int bufferSize = 512*1024;		  
+  char [] buffer = new char [bufferSize];
+  int readChars = 0;		  		  
+
+	while ((readChars=reader.read(buffer, 0, bufferSize)) != -1) 
+	  {		
+				writer.write(buffer, 0, readChars);
+	  }	
+	    
+  	inputStream.close();
+    reader.close();
+    writer.flush();
+    writer.close();     
+}
 	
-	/*private void copyResourceImage(String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile)
-			throws IOException{
-		 
-		Path inPath = Paths.get(this.getClass().getResource(resourceFolder +"/" +inFile).toString());
-		Path outPath = new File(outputFolder + "/" +outSubFolder, outFile).toPath();
-		
-		System.out.println(inPath+ "  >>>>>>>>>>>>>>>>>>>>>  " + outPath);
-		
-		//Files.copy(inPath, outPath, StandardCopyOption.COPY_ATTRIBUTES);
-		
-		System.out.println("filesize: " + Files.size(inPath));
-	}*/
+
+
+	
 	
 	
 	
@@ -1232,14 +1210,15 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		   {
 			   String text = doc.getDocumentGraph().getText(node);
 				  if (text != null && !text.isEmpty())
-				  {
-					  allLabels+= NEWLINE;			
+				  {	
+					  allLabels+= (NEWLINE + NEWLINE);			
 					  allLabels += doc.getDocumentGraph().getText(node);
 				  }
 		   } 
 		  
 		   				
 		 jsonWriterNodes.value(allLabels);	
+		 
 		 if (node instanceof SToken)
 		 {
 			 jsonWriterNodes.key(JSON_COLOR);
@@ -1247,7 +1226,8 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			 jsonWriterNodes.key(JSON_X);
 			 jsonWriterNodes.value((xPosition++)*NODE_DIST);
 			 jsonWriterNodes.key(JSON_PHYSICS);
-			 jsonWriterNodes.value("false");
+			 jsonWriterNodes.value("false");			 
+			 
 		 }
 		 
 		 	 jsonWriterNodes.key(JSON_LEVEL);
