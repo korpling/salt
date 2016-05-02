@@ -23,7 +23,7 @@ import org.corpus_tools.salt.common.STextualDS;
 
 /**
  * Models clitics for a given language, with support for 
- * proclitics (({@link #proclitic}) and enclitics ({@link #enclitic})
+ * proclitics (({@link #proclitics}) and enclitics ({@link #enclitics})
  * in this version. Meso- and endoclitics are not yet supported.
  * <p>
  * The {@link String} representation of the respective clitics
@@ -48,24 +48,22 @@ import org.corpus_tools.salt.common.STextualDS;
 public class Clitics {
 
 	// character sequences which have to be cut off at the beginning of a word
-	private String proclitic = "";
+	private final String proclitics;
 
 	// character sequences which have to be cut off at the end of a word
-	private String enclitic = "";
+	private final String enclitics;
+	
+	public Clitics(String proclitics, String enclitics) {
+		this.proclitics = proclitics;
+		this.enclitics = enclitics;
+	}
 
-	public String getProclitic() {
-		return proclitic;
+	public String getProclitics() {
+		return proclitics;
 	}
-	public Clitics setProclitic(String pClitic) {
-		proclitic = pClitic;
-		return this;
-	}
-	public String getEnclitic() {
-		return enclitic;
-	}
-	public Clitics setEnclitic(String fClitic) {
-		enclitic = fClitic;
-		return this;
+
+	public String getEnclitics() {
+		return enclitics;
 	}
 
 }

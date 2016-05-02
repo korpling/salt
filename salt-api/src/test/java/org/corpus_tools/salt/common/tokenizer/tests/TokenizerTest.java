@@ -40,6 +40,7 @@ import com.neovisionaries.i18n.LanguageCode;
  * Tests the class TTTokenizer.
  * 
  * @author Florian Zipser
+ * @author Stephan Druskat (Clitics tests)
  *
  */
 public class TokenizerTest {
@@ -471,7 +472,7 @@ public class TokenizerTest {
 		
 		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
 		STextualDS sTextualDS = sDocGraph.createTextualDS(fantasy);
-		getFixture().addClitics(LanguageCode.aa, new Clitics().setProclitic(fantasyProclitics).setEnclitic(fantasyEnclitics));
+		getFixture().addClitics(LanguageCode.aa, new Clitics(fantasyProclitics, fantasyEnclitics));
 		getFixture().tokenize(sTextualDS, LanguageCode.aa); // Borrowed language code
 
 		int i = 0;
