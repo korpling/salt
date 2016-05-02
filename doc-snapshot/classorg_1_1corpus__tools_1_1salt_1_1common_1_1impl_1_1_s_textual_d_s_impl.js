@@ -7,5 +7,6 @@ var classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl =
     [ "getStart", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl.html#aef881484d7f68fcf4d335c238e3e684d", null ],
     [ "getText", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl.html#a3824cf5e45a574341e4de3bc7c93cfb7", null ],
     [ "setGraph", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl.html#a0689fe179f452b5405fa6411f83da180", null ],
-    [ "setText", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl.html#ad42be3e50027169e3698876de2d7591a", null ]
+    [ "setText", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl.html#ad42be3e50027169e3698876de2d7591a", null ],
+    [ "tokenize", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_textual_d_s_impl.html#ab566f8d41845e973a4cb0425b0d53837", null ]
 ];

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['datasource',['dataSource',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_data_source_sequence_3_01_p_01extends_01_number_01_4.html#a609950b581b8646b4d498089eabfe995',1,'org::corpus_tools::salt::util::DataSourceSequence&lt; P extends Number &gt;']]],
+  ['datasource',['dataSource',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_data_source_sequence.html#a609950b581b8646b4d498089eabfe995',1,'org::corpus_tools::salt::util::DataSourceSequence']]],
   ['datasourceaccessor',['DataSourceAccessor',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html',1,'org::corpus_tools::salt::util::internal']]],
-  ['datasourcesequence_3c_20p_20extends_20number_20_3e',['DataSourceSequence&lt; P extends Number &gt;',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_data_source_sequence_3_01_p_01extends_01_number_01_4.html',1,'org::corpus_tools::salt::util']]],
+  ['datasourcesequence',['DataSourceSequence',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_data_source_sequence.html',1,'org::corpus_tools::salt::util']]],
   ['delegate',['delegate',['../classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_labelable_element_impl.html#a965dc0369b8383c3ce9bb012dbec3e3f',1,'org::corpus_tools::salt::graph::impl::LabelableElementImpl']]],
   ['developers_20section',['Developers section',['../developers.html',1,'']]],
   ['diff',['Diff',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#a7eadf13a133e9ef8400ceffdca15ebd3',1,'org::corpus_tools::salt::util::internal::Diff']]],
