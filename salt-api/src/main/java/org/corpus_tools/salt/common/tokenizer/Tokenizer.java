@@ -172,10 +172,9 @@ public class Tokenizer {
 								"(-t-elles?|-t-ils?|-t-on|-ce|-elles?|-ils?|-je|-la|-les?|-leur|-lui|-mêmes?|-m'|-moi|-nous|-on|-toi|-tu|-t'|-vous|-en|-y|-ci|-là)"));
 					} else if (LanguageCode.it.equals(language)) {
 						this.addAbbreviation(LanguageCode.it, AbbreviationIT.createAbbriviations());
-						this.addClitics(LanguageCode.it,
-								new Clitics(
-										"([dD][ae]ll'|[nN]ell'|[Aa]ll'|[lLDd]'|[Ss]ull'|[Qq]uest'|[Uu]n'|[Ss]enz'|[Tt]utt')",
-										null));
+						this.addClitics(LanguageCode.it, new Clitics(
+								"([dD][ae]ll'|[nN]ell'|[Aa]ll'|[lLDd]'|[Ss]ull'|[Qq]uest'|[Uu]n'|[Ss]enz'|[Tt]utt')",
+								null));
 					}
 				}
 			} // set abbreviations
