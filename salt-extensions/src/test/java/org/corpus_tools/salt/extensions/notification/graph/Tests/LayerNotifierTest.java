@@ -34,20 +34,20 @@ import org.junit.Test;
 
 public class LayerNotifierTest extends LayerTest {
 
-	private LayerNotifierImpl fixture = null;
+	private LayerNotifierImpl<Node, Relation<Node, Node>> fixture = null;
 
-	public LayerNotifierImpl getFixture() {
+	public LayerNotifierImpl<Node, Relation<Node, Node>> getFixture() {
 		return fixture;
 	}
 
-	public void setNotifyingFixture(LayerNotifierImpl fixture) {
+	public void setNotifyingFixture(LayerNotifierImpl<Node, Relation<Node, Node>> fixture) {
 		this.fixture = fixture;
 	}
 
 	@Override
 	public void setFixture(Layer<Node, Relation<Node, Node>> fixture) {
 		Assert.assertTrue("Layer in test must be of instance LayerNotifierImpl", fixture instanceof LayerNotifierImpl);
-		this.fixture = (LayerNotifierImpl) fixture;
+		this.fixture = (LayerNotifierImpl<Node, Relation<Node, Node>>) fixture;
 		super.setFixture(fixture);
 	}
 	
@@ -55,7 +55,7 @@ public class LayerNotifierTest extends LayerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new LayerNotifierImpl());
+		setFixture(new LayerNotifierImpl<Node, Relation<Node, Node>>());
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class LayerNotifierTest extends LayerTest {
 
 	@Override
 	protected Relation<Node, Node> createRelation() {
-		return new RelationNotifierImpl(Node.class, Node.class);
+		return new RelationNotifierImpl<>(Node.class, Node.class);
 	}
 
 	@Override
