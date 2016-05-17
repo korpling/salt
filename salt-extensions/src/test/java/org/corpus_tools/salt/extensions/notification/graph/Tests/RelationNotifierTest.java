@@ -33,20 +33,20 @@ import static org.junit.Assert.assertEquals;
 
 public class RelationNotifierTest extends RelationTest {
 
-	private RelationNotifierImpl fixture = null;
+	private RelationNotifierImpl<Node, Node> fixture = null;
 
-	public RelationNotifierImpl getFixture() {
+	public RelationNotifierImpl<Node, Node> getFixture() {
 		return fixture;
 	}
 
-	public void setNotifyingFixture(RelationNotifierImpl fixture) {
+	public void setNotifyingFixture(RelationNotifierImpl<Node, Node> fixture) {
 		this.fixture = fixture;
 	}
 
 	@Override
 	public void setFixture(Relation<Node, Node> fixture) {
 		Assert.assertTrue("Relation in test must be of instance RelationNotifierImpl", fixture instanceof RelationNotifierImpl);
-		this.fixture = (RelationNotifierImpl) fixture;
+		this.fixture = (RelationNotifierImpl<Node, Node>) fixture;
 		super.setFixture(fixture);
 	}
 	
@@ -54,7 +54,7 @@ public class RelationNotifierTest extends RelationTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new RelationNotifierImpl(Node.class, Node.class));
+		setFixture(new RelationNotifierImpl<>(Node.class, Node.class));
 	}
 
 	/** Checks whether the notification about name change is correct. **/
