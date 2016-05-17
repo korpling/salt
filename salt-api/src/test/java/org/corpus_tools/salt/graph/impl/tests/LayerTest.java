@@ -62,7 +62,7 @@ public class LayerTest {
 		return GraphFactory.createNode();
 	}
 	
-	protected Relation createRelation() {
+	protected Relation<Node,Node> createRelation() {
 		return GraphFactory.createRelation();
 	}
 
@@ -151,7 +151,7 @@ public class LayerTest {
 	@Test
 	public void testDoubleChainingAddNode() {
 		// prerequirements
-		Graph graph = createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 		graph.addLayer(getFixture());
 
 		List<Node> nodes = new ArrayList<>();
