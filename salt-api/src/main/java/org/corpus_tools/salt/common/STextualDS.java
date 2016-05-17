@@ -17,9 +17,13 @@
  */
 package org.corpus_tools.salt.common;
 
+import java.util.List;
+
 public interface STextualDS extends SSequentialDS<String, Integer>, SDocumentGraphObject {
 	public String getText();
 
 	public void setText(String text);
+	
+	public List<SToken> tokenize();
 
 } // STextualDS

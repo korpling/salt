@@ -134,7 +134,8 @@ public class Tokenizer {
 		}
 		if (this.getDocumentGraph() == null) {
 			if (sTextualDS.getGraph() == null) {
-				throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
+				throw new SaltTokenizerException(
+						"Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
 			} else {
 				this.setsDocumentGraph(sTextualDS.getGraph());
 			}
@@ -153,7 +154,7 @@ public class Tokenizer {
 				// if text was to short to emit language try entire text (and
 				// hope, that no language mixes are contained :-})
 				if (language == null) {
-					language = checkLanguage(sTextualDS.getText().substring(startPos, endPos));
+					language = checkLanguage(sTextualDS.getText());
 				}
 			}
 
@@ -163,15 +164,20 @@ public class Tokenizer {
 						this.addAbbreviation(LanguageCode.de, AbbreviationDE.createAbbriviations());
 					} else if (LanguageCode.en.equals(language)) {
 						this.addAbbreviation(LanguageCode.en, AbbreviationEN.createAbbriviations());
+						this.addClitics(LanguageCode.en, new Clitics(null, "('(s|re|ve|d|m|em|ll)|n't)"));
 					} else if (LanguageCode.fr.equals(language)) {
 						this.addAbbreviation(LanguageCode.fr, AbbreviationFR.createAbbriviations());
+						this.addClitics(LanguageCode.fr, new Clitics(
+								"([dcjlmnstDCJLNMST]'|[Qq]u'|[Jj]usqu'|[Ll]orsqu')",
+								"(-t-elles?|-t-ils?|-t-on|-ce|-elles?|-ils?|-je|-la|-les?|-leur|-lui|-mêmes?|-m'|-moi|-nous|-on|-toi|-tu|-t'|-vous|-en|-y|-ci|-là)"));
 					} else if (LanguageCode.it.equals(language)) {
 						this.addAbbreviation(LanguageCode.it, AbbreviationIT.createAbbriviations());
+						this.addClitics(LanguageCode.it, new Clitics(
+								"([dD][ae]ll'|[nN]ell'|[Aa]ll'|[lLDd]'|[Ss]ull'|[Qq]uest'|[Uu]n'|[Ss]enz'|[Tt]utt')",
+								null));
 					}
 				}
 			} // set abbreviations
-
-			this.setClitics(language);
 
 			retVal = tokenizeToToken(sTextualDS, language, startPos, endPos);
 		}
@@ -272,7 +278,8 @@ public class Tokenizer {
 	 */
 	public void addAbbreviation(LanguageCode language, File abbreviationFile) {
 		HashSet<String> abbreviations = null;
-		try (BufferedReader inReader = new BufferedReader(new InputStreamReader(new FileInputStream(abbreviationFile), "UTF8"))) {
+		try (BufferedReader inReader = new BufferedReader(
+				new InputStreamReader(new FileInputStream(abbreviationFile), "UTF8"))) {
 			abbreviations = new HashSet<String>();
 
 			String input = "";
@@ -284,9 +291,11 @@ public class Tokenizer {
 			inReader.close();
 
 		} catch (FileNotFoundException e) {
-			throw new SaltTokenizerException("Cannot tokenize the given text, because the file for abbreviation '" + abbreviationFile.getAbsolutePath() + "' was not found.");
+			throw new SaltTokenizerException("Cannot tokenize the given text, because the file for abbreviation '"
+					+ abbreviationFile.getAbsolutePath() + "' was not found.");
 		} catch (IOException e) {
-			throw new SaltTokenizerException("Cannot tokenize the given text, because can not read file '" + abbreviationFile.getAbsolutePath() + "'.");
+			throw new SaltTokenizerException("Cannot tokenize the given text, because can not read file '"
+					+ abbreviationFile.getAbsolutePath() + "'.");
 		}
 		this.addAbbreviation(language, abbreviations);
 	}
@@ -313,26 +322,80 @@ public class Tokenizer {
 	// characters which have to be cut off at the end of a word
 	protected final static String F_CHAR = "\\]\\}'`\"\\),;:!\\?%»«‚„…†‡‰‹‘’“”•–—›";
 
-	// character sequences which have to be cut off at the beginning of a word
-	private String PClitic = "";
-	// character sequences which have to be cut off at the end of a word
-	private String FClitic = "";
+	private Map<LanguageCode, Clitics> clitics = new ConcurrentHashMap<>();
 
 	/**
-	 * Sets clitics corresponding to the given language.
+	 * Adds the given clitics to the internal map corresponding to given
+	 * language.
 	 * 
-	 * @param lngLang
-	 *            language
+	 * @param language
+	 * @param clitics
 	 */
-	private void setClitics(LanguageCode language) {
-		if (LanguageCode.en.equals(language)) {
-			this.FClitic = "('(s|re|ve|d|m|em|ll)|n't)";
-		} else if (LanguageCode.fr.equals(language)) {
-			this.PClitic = "([dcjlmnstDCJLNMST]'|[Qq]u'|[Jj]usqu'|[Ll]orsqu')";
-			this.FClitic = "(-t-elles?|-t-ils?|-t-on|-ce|-elles?|-ils?|-je|-la|-les?|-leur|-lui|-mêmes?|-m'|-moi|-nous|-on|-toi|-tu|-t'|-vous|-en|-y|-ci|-là)";
-		} else if (LanguageCode.es.equals(language)) {
-			this.PClitic = "([dD][ae]ll'|[nN]ell'|[Aa]ll'|[lLDd]'|[Ss]ull'|[Qq]uest'|[Uu]n'|[Ss]enz'|[Tt]utt')";
+	public void addClitics(LanguageCode language, Clitics clitics) {
+		if ((language != null) && (clitics != null)) {
+			if (!this.clitics.containsKey(language)) {
+				this.clitics.put(language, clitics);
+			}
 		}
+	}
+
+	/**
+	 * Adds the content of given file as a set of clitics to the internal map
+	 * corresponding to given language. Form of the file: Adm.<br/>
+	 * <p>
+	 * The file must be structured so that the first line contains the regex for
+	 * <b>proclitics</b>, and the second line the regex for <b>enclitics</b>,
+	 * e.g.:
+	 * <p>
+	 * <code>
+	 * ([dcjlmnstDCJLNMST]'|[Qq]u'|[Jj]usqu'|[Ll]orsqu')
+	 * (-t-elles?|-t-ils?|-t-on|-ce|-elles?|-ils?|-je|-la|-les?|-leur|-lui|-mêmes?|-m'|-moi|-nous|-on|-toi|-tu|-t'|-vous|-en|-y|-ci|-là)
+	 * </code>
+	 * 
+	 * @param language
+	 * @param cliticsFile
+	 */
+	public void addClitics(LanguageCode language, File cliticsFile) {
+		Clitics clitics = null;
+		try (BufferedReader inReader = new BufferedReader(
+				new InputStreamReader(new FileInputStream(cliticsFile), "UTF8"))) {
+			String proclicits = null;
+			String enclitics = null;
+			String input = "";
+			int lineNumber = 0;
+			while ((input = inReader.readLine()) != null) {
+				lineNumber++;
+				if (lineNumber == 1) {
+					proclicits = input;
+				} else if (lineNumber == 2) {
+					enclitics = input;
+				}
+			}
+			clitics = new Clitics(proclicits, enclitics);
+			inReader.close();
+
+		} catch (FileNotFoundException e) {
+			throw new SaltTokenizerException("Cannot tokenize the given text, because the file for clitics '"
+					+ cliticsFile.getAbsolutePath() + "' was not found.");
+		} catch (IOException e) {
+			throw new SaltTokenizerException("Cannot tokenize the given text, because the clitics file '"
+					+ cliticsFile.getAbsolutePath() + "' cannot be read.");
+		}
+		this.addClitics(language, clitics);
+	}
+
+	/**
+	 * Returns a list of abbreviations corresponding to the given language.
+	 * 
+	 * @param language
+	 * @return
+	 */
+	public Clitics getClitics(LanguageCode language) {
+		Clitics retVal = null;
+		if (language != null) {
+			retVal = clitics.get(language);
+		}
+		return (retVal);
 	}
 
 	/**
@@ -350,7 +413,8 @@ public class Tokenizer {
 	 *            original text
 	 * @return tokenized text fragments and their position in the original text
 	 */
-	public List<SToken> tokenizeToToken(STextualDS sTextualDS, LanguageCode language, Integer startPos, Integer endPos) {
+	public List<SToken> tokenizeToToken(STextualDS sTextualDS, LanguageCode language, Integer startPos,
+			Integer endPos) {
 		List<SToken> retVal = null;
 		List<String> strTokens = null;
 		String strInput = sTextualDS.getText().substring(startPos, endPos);
@@ -362,7 +426,8 @@ public class Tokenizer {
 
 			// check if tokens exist for passed span
 			List<SToken> tokens = null;
-			if ((startPos != 0) || (endPos != sTextualDS.getText().length()) || (getDocumentGraph().getTextualDSs().size() > 1)) {
+			if ((startPos != 0) || (endPos != sTextualDS.getText().length())
+					|| (getDocumentGraph().getTextualDSs().size() > 1)) {
 				DataSourceSequence<Integer> sequence = new DataSourceSequence<>();
 				sequence.setDataSource(sTextualDS);
 				sequence.setStart(startPos);
@@ -376,7 +441,8 @@ public class Tokenizer {
 			// create an organization structure for a tokens interval which
 			// corresponds to a token
 			if ((tokens != null) && (tokens.size() != 0)) {
-				if ((getDocumentGraph().getTextualRelations() != null) && (getDocumentGraph().getTextualRelations().size() > 0)) {
+				if ((getDocumentGraph().getTextualRelations() != null)
+						&& (getDocumentGraph().getTextualRelations().size() > 0)) {
 					oldTokens = TreeRangeMap.create();
 					for (STextualRelation rel : getDocumentGraph().getTextualRelations()) {
 						oldTokens.put(Range.closed(rel.getStart(), rel.getEnd()), rel.getSource());
@@ -389,7 +455,8 @@ public class Tokenizer {
 			Multimap<SToken, SToken> old2newToken = ArrayListMultimap.create();
 
 			for (int i = 0; i < chrText.length; i++) {
-				if ((strTokens.get(tokenCntr).length() < 1) || (strTokens.get(tokenCntr).substring(0, 1).equals(String.valueOf(chrText[i])))) {
+				if ((strTokens.get(tokenCntr).length() < 1)
+						|| (strTokens.get(tokenCntr).substring(0, 1).equals(String.valueOf(chrText[i])))) {
 					// first letter matches
 					StringBuffer pattern = new StringBuffer();
 					for (int y = 0; y < strTokens.get(tokenCntr).length(); y++) {
@@ -584,26 +651,36 @@ public class Tokenizer {
 			}
 
 			// attempt to separate proclitics
-			p = Pattern.compile("^(" + PClitic + ")(.+)$");
-			m = p.matcher(lstTokens.get(i));
-			if (m.find() && !PClitic.isEmpty()) {
-				lstTokens.remove(i);
-				lstTokens.add(i, m.group(2));
-				lstTokens.add(i, m.group(1));
-				continue; // proclitic has been removed, but next token must
-				// still be checked
+			
+			Clitics languageClitics;
+			String proclitics;
+			if ((languageClitics = getClitics(language)) != null && (proclitics = languageClitics.getProclitics()) != null) {
+				p = Pattern.compile("^" + proclitics + "(.+)$");
+				String token = lstTokens.get(i);
+				m = p.matcher(token);
+				if (m.find() && (!proclitics.isEmpty())) {
+					lstTokens.remove(i);
+					lstTokens.add(i, m.group(2));
+					lstTokens.add(i, m.group(1));
+					continue; // proclitic has been removed, but next token must
+					// still be checked
+				}
 			}
 
+			String enclitics;
 			// attempt to separate enclitics
-			p = Pattern.compile("(.+)(" + FClitic + ")$");
-			m = p.matcher(lstTokens.get(i));
-			if (m.find() && !FClitic.isEmpty()) {
-				lstTokens.remove(i);
-				lstTokens.add(i, m.group(2));
-				lstTokens.add(i, m.group(1));
-				i++; // next token is a known enclitic, skip it
-				continue; // advance to get past the enclitic
+			if (languageClitics != null && (enclitics = languageClitics.getEnclitics()) != null) {
+				p = Pattern.compile("(.+)" + enclitics + "$");
+				m = p.matcher(lstTokens.get(i));
+				if (m.find() && (!enclitics.isEmpty())) {
+					lstTokens.remove(i);
+					lstTokens.add(i, m.group(2));
+					lstTokens.add(i, m.group(1));
+					i++; // next token is a known enclitic, skip it
+					continue; // advance to get past the enclitic
+				}
 			}
+
 		}
 		return lstTokens;
 	}
