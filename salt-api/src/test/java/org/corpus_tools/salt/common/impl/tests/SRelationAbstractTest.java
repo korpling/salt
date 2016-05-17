@@ -36,15 +36,15 @@ import org.junit.Test;
  * @author florian
  *
  */
-public abstract class SRelationAbstractTest {
+public abstract class SRelationAbstractTest<S extends SNode, T extends SNode> {
 
-	protected SRelation<? extends SNode, ? extends SNode> fixture = null;
+	protected SRelation<S, T> fixture = null;
 
-	protected void setFixture(SRelation<? extends SNode, ? extends SNode> fixture) {
+	protected void setFixture(SRelation<S, T> fixture) {
 		this.fixture = fixture;
 	}
 
-	protected SRelation<? extends SNode, ? extends SNode> getFixture() {
+	protected SRelation<S,T> getFixture() {
 		return fixture;
 	}
 

@@ -18,9 +18,11 @@
 package org.corpus_tools.salt.common.impl.tests;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SStructure;
+import org.corpus_tools.salt.common.SStructuredNode;
 import org.junit.Before;
 
-public class SDominanceRelationTest extends SRelationAbstractTest {
+public class SDominanceRelationTest extends SRelationAbstractTest<SStructure,SStructuredNode> {
 
 	@Before
 	public void setUp() throws Exception {
