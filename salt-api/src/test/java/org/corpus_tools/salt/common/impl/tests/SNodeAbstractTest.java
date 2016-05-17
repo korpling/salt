@@ -27,15 +27,15 @@ import org.junit.Test;
  * @author florian
  *
  */
-public abstract class SNodeAbstractTest {
+public abstract class SNodeAbstractTest<N extends SNode> {
 
-	protected SNode fixture = null;
+	protected N fixture = null;
 
-	protected void setFixture(SNode fixture) {
+	protected void setFixture(N fixture) {
 		this.fixture = fixture;
 	}
 
-	protected SNode getFixture() {
+	protected N getFixture() {
 		return fixture;
 	}
 

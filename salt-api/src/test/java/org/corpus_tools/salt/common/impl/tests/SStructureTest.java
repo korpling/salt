@@ -18,9 +18,10 @@
 package org.corpus_tools.salt.common.impl.tests;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SStructure;
 import org.junit.Before;
 
-public class SStructureTest extends SNodeAbstractTest {
+public class SStructureTest extends SNodeAbstractTest<SStructure> {
 
 	@Before
 	public void setUp() throws Exception {
