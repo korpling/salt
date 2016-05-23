@@ -1275,12 +1275,13 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	
 		}	
 		//font highlighting
-		if (styleImporter != null)
+		String fontColor;
+		if (styleImporter != null && (fontColor = styleImporter.getFontColor(node))!= null)
 		{
 			jsonWriterNodes.key(JSON_FONT);
 				 jsonWriterNodes.object();
 				 jsonWriterNodes.key(JSON_FONT_COLOR);		 
-				 jsonWriterNodes.value(styleImporter.getFontColor(node));
+				 jsonWriterNodes.value(fontColor);
 				 jsonWriterNodes.endObject();
 		};
 		
