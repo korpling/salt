@@ -21,6 +21,8 @@ public interface ExportFilter {
 	public boolean excludeNode (SNode node);
 	
 	public boolean excludeRelation (SRelation relation);
+	
+	
 		
 
 }

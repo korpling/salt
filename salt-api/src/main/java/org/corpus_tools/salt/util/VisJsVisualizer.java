@@ -190,8 +190,9 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_TYPE  = "type";
 	private static final String JSON_ROUNDNESS = "roundness";
 	private static final String JSON_WIDTH  = "width";
-	//private static final String JSON_FONT  = "font";
-	//private static final String JSON_ALIGN  = "align";
+	private static final String JSON_FONT  = "font";
+	//private static final String JSON_FONT_ALIGN  = "align";
+	private static final String JSON_FONT_COLOR  = "color";
 	
 	
 	
@@ -207,7 +208,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
    
     private static final int JSON_EDGE_LINE_LENGTH = 60;    
     private static final String NEWLINE = System.lineSeparator();    
-    private final ExportFilter exportFilter;
+    private  final ExportFilter exportFilter;
+    private  final StyleImporter styleImporter;
     
     private boolean writeNodeImmediately = false;
     
@@ -249,7 +251,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
    * @throws SaltParameterException if the doc is null 
    */
     public VisJsVisualizer(SDocument doc){
-  	  this(doc, null);
+  	  this(doc, null, null);
     }
     
     /**
@@ -261,7 +263,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      * @throws SaltParameterException if the doc is null 
      */
     
-    public VisJsVisualizer (SDocument doc, ExportFilter exportFilter){  
+    public VisJsVisualizer (SDocument doc, ExportFilter exportFilter, StyleImporter styleImporter){  
     	
     	if(doc == null) throw new SaltParameterException("doc", "VisJsVisualizer", this.getClass());
     
@@ -284,6 +286,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     	}
     	
     	this.exportFilter = exportFilter;
+    	this.styleImporter = styleImporter;
     	spanClasses =new HashMap<String, Integer>();
     	
     }
@@ -298,7 +301,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      * @throws SaltParameterException - if the inputFileUri is null 
      */
       public VisJsVisualizer(URI inputFileUri){
-    	  this(inputFileUri, null);
+    	  this(inputFileUri, null, null);
       }
   	
      /**
@@ -312,7 +315,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       * @throws SaltResourceException if a problem occurred while loading salt project from the inputFileUri
       */
       
-      public VisJsVisualizer (URI inputFileUri, ExportFilter exportFilter){  
+      public VisJsVisualizer (URI inputFileUri, ExportFilter exportFilter, StyleImporter styleImporter){  
       	if(inputFileUri == null) throw new SaltParameterException("inputUri", "VisJsVisualizer", this.getClass());
        	
       	try{
@@ -340,6 +343,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       	}
       	
       	this.exportFilter = exportFilter;
+      	this.styleImporter = styleImporter;
       	spanClasses =new HashMap<String, Integer>();
       	
       }
@@ -1269,7 +1273,17 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 			 jsonWriterNodes.key(JSON_X);
 			 jsonWriterNodes.value((nTokens/2)*NODE_DIST);
 	
-		}		 
+		}	
+		//font highlighting
+		if (styleImporter != null)
+		{
+			jsonWriterNodes.key(JSON_FONT);
+				 jsonWriterNodes.object();
+				 jsonWriterNodes.key(JSON_FONT_COLOR);		 
+				 jsonWriterNodes.value(styleImporter.getFontColor(node));
+				 jsonWriterNodes.endObject();
+		};
+		
 		 
 		jsonWriterNodes.endObject();	
 		nodeWriter.newLine();	
