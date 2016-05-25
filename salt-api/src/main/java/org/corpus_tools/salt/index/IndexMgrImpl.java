@@ -29,7 +29,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.corpus_tools.salt.exceptions.SaltException;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -45,9 +44,15 @@ public class IndexMgrImpl implements IndexMgr {
 		final Class<V> valueClass;
 
 		public Index(Multimap<K, V> map, Class<K> keyClass, Class<V> valueClass) {
-			Preconditions.checkNotNull(map);
-			Preconditions.checkNotNull(keyClass);
-			Preconditions.checkNotNull(valueClass);
+			if (map== null){
+				throw new IllegalArgumentException("Cannot create Index with empty map parameter. ");
+			}
+			if (keyClass== null){
+				throw new IllegalArgumentException("Cannot create Index with empty keyClass parameter. ");
+			}
+			if (valueClass== null){
+				throw new IllegalArgumentException("Cannot create Index with empty valueClass parameter. ");
+			}
 
 			this.map = map;
 			this.keyClass = keyClass;
