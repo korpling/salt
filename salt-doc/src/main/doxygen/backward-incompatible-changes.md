@@ -42,7 +42,14 @@ myRelation.setGraph(myGraph);
 // new
 myGraph.addNode(myRelation);
 ~~~
-
+- The function `SRelation.addLayer(...)` was removed. Use [SLayer.addRelation(...)](@ref org.corpus_tools.salt.core.SLayer#addRelation) instead.
+~~~{.java}
+// old
+myRelation.addLayer(myLayer);
+  
+// new
+myLayer.addRelation(myRelation);
+~~~
 
 
 
