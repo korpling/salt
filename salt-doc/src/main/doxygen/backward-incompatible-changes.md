@@ -21,6 +21,7 @@ myNode.setGraph(myGraph);
 // new
 myGraph.addNode(myNode);
 ~~~
+If the `SNode` is a `SDocument` use the already existing [setDocumentGraph(...)](@ref org.corpus_tools.salt.common.SDocument#setDocumentGraph) function instead.
 - The function `SNode.addLayer(...)` was removed. Use [SLayer.addNode(...)](@ref org.corpus_tools.salt.core.SLayer#addNode) instead.
 ~~~{.java}
 // old
