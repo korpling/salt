@@ -9,6 +9,31 @@ for each major version update.
 From Salt 3 to 4 {#changes-salt-3-to-4}
 ================
 
+SNode
+-----
+
+
+- The function SNode.setGraph(...) was removed. Use [SGraph.addNode(...)](@ref org.corpus_tools.salt.common.SGraph#addNode) instead.
+~~~{.java}
+// old
+myNode.setGraph(getDocument().getDocumentGraph());
+  
+// new
+getDocument().getDocumentGraph().addNode(myNode);
+~~~
+
+SRelation
+-----
+
+
+- The function SRelation.setGraph(...) was removed. Use [SGraph.addRelation(...)](@ref org.corpus_tools.salt.common.SGraph#addRelation) instead.
+~~~{.java}
+// old
+myRelation.setGraph(getDocument().getDocumentGraph());
+  
+// new
+getDocument().getDocumentGraph().addNode(myRelation);
+~~~
 
 GraphTraverseHandler
 -------------------
@@ -46,16 +71,5 @@ List<SRelation<?,?>>
 ~~~
 if you are not interested in the specific type of the source and target nodes.
 
-SNode
------
 
-
-- The function SNode.setGraph(...) was removed. Use [SGraph.addNode(...)](@ref org.corpus_tools.salt.common.SGraph#addNode) instead.
-~~~{.java}
-// old
-myNode.setGraph(getDocument().getDocumentGraph());
-  
-// new
-getDocument().getDocumentGraph().addNode(myNode);
-~~~
     
