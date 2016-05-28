@@ -83,4 +83,19 @@ List<SRelation<?,?>>
 if you are not interested in the specific type of the source and target nodes.
 
 
-    
+SDocumentGraph
+-------------------
+
+- [getOverlappedDataSourceSequence(...)](@ref org.corpus_tools.salt.common.SDocumentGraph#getOverlappedDataSourceSequence)  now uses
+~~~{.java}
+List<? extends DataSourceSequence<? extends Number>>
+~~~
+instead of 
+~~~{.java}
+List<DataSourceSequence>
+~~~
+as return type. In a lot of cases you can just use
+~~~{.java}
+List<? extends DataSourceSequence<?>>
+~~~
+if you are not interested in the specific type of the data source sequence.
