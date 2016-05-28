@@ -17,11 +17,13 @@ GraphTraverseHandler
 - Relation arguments in the callback functions [nodeReached(...)](@ref org.corpus_tools.salt.core.GraphTraverseHandler#nodeReached),
 [nodeLeft(...)](@ref org.corpus_tools.salt.core.GraphTraverseHandler#nodeLeft) and
 [checkConstraint(...)](@ref org.corpus_tools.salt.core.GraphTraverseHandler#checkConstraint) now use 
-
-    SRelation<? extends SNode, ? extends SNode>
+~~~{.java}
+SRelation<? extends SNode, ? extends SNode>
+~~~
 instead of 
-
-    SRelation<SNode, SNode>
+~~~{.java}
+SRelation<SNode, SNode>
+~~~
 as type definition.
 
 
@@ -31,12 +33,29 @@ SGraph
 - [getInRelations(String id)](@ref org.corpus_tools.salt.common.SGraph#getInRelations) and
 [getOutRelations(String id)](@ref org.corpus_tools.salt.common.SGraph#getOutRelations)  
 now use 
-
-    List<SRelation<? extends SNode, ? extends SNode>>
+~~~{.java}
+List<SRelation<? extends SNode, ? extends SNode>>
+~~~
 instead of 
-
-    List<SRelation<SNode, SNode>>
+~~~{.java}
+List<SRelation<SNode, SNode>>
+~~~
 as return type. In a lot of cases you can just use
-
-    List<SRelation<?,?>> 
+~~~{.java}
+List<SRelation<?,?>> 
+~~~
 if you are not interested in the specific type of the source and target nodes.
+
+SNode
+-----
+
+
+- The function SNode.setGraph(...) was removed. Use [SGraph.addNode(...)](@ref org.corpus_tools.salt.common.SGraph#addNode) instead.
+~~~{.java}
+// old
+myNode.setGraph(getDocument().getDocumentGraph());
+  
+// new
+getDocument().getDocumentGraph().addNode(myNode);
+~~~
+    
