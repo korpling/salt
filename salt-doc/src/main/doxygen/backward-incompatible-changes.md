@@ -13,27 +13,38 @@ SNode
 -----
 
 
-- The function SNode.setGraph(...) was removed. Use [SGraph.addNode(...)](@ref org.corpus_tools.salt.common.SGraph#addNode) instead.
+- The function `SNode.setGraph(...)` was removed. Use [SGraph.addNode(...)](@ref org.corpus_tools.salt.common.SGraph#addNode) instead.
 ~~~{.java}
 // old
-myNode.setGraph(getDocument().getDocumentGraph());
+myNode.setGraph(myGraph);
   
 // new
-getDocument().getDocumentGraph().addNode(myNode);
+myGraph.addNode(myNode);
+~~~
+- The function `SNode.addLayer(...)` was removed. Use [SLayer.addNode(...)](@ref org.corpus_tools.salt.core.SLayer#addNode) instead.
+~~~{.java}
+// old
+myNode.addLayer(myLayer);
+  
+// new
+myLayer.addNode(myNode);
 ~~~
 
 SRelation
 -----
 
 
-- The function SRelation.setGraph(...) was removed. Use [SGraph.addRelation(...)](@ref org.corpus_tools.salt.common.SGraph#addRelation) instead.
+- The function `SRelation.setGraph(...)` was removed. Use [SGraph.addRelation(...)](@ref org.corpus_tools.salt.common.SGraph#addRelation) instead.
 ~~~{.java}
 // old
-myRelation.setGraph(getDocument().getDocumentGraph());
+myRelation.setGraph(myGraph);
   
 // new
-getDocument().getDocumentGraph().addNode(myRelation);
+myGraph.addNode(myRelation);
 ~~~
+
+
+
 
 GraphTraverseHandler
 -------------------
