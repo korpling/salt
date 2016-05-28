@@ -25,15 +25,18 @@ instead of
 as type definition.
 
 
-SDocumentGraph
+SGraph
 -------------------
 
-- [getInRelations](@ref org.corpus_tools.salt.common.SDocumentGraph#getInRelations) and
-[getOutRelations](@ref org.corpus_tools.salt.common.SDocumentGraph#getOutRelations) org.corpus_tools.salt.common.SDocumentGraph#getInRelations(String) 
+- [getInRelations(String id)](@ref org.corpus_tools.salt.common.SGraph#getInRelations) and
+[getOutRelations(String id)](@ref org.corpus_tools.salt.common.SGraph#getOutRelations)  
 now use 
 
-    SRelation<? extends SNode, ? extends SNode>
+    List<SRelation<? extends SNode, ? extends SNode>>
 instead of 
 
-    SRelation<SNode, SNode>
-as result type.
+    List<SRelation<SNode, SNode>>
+as return type. In a lot of cases you can just use
+
+    List<SRelation<?,?>> 
+if you are not interested in the specific type of the source and target nodes.
