@@ -12,7 +12,6 @@ From Salt 3 to 4 {#changes-salt-3-to-4}
 SNode
 -----
 
-
 - The function `SNode.setGraph(...)` was removed. Use [SGraph.addNode(...)](@ref org.corpus_tools.salt.common.SGraph#addNode) instead.
 ~~~{.java}
 // old
@@ -30,6 +29,21 @@ myNode.addLayer(myLayer);
 // new
 myLayer.addNode(myNode);
 ~~~
+- [getInRelations](@ref org.corpus_tools.salt.common.SNode#getInRelations) and
+[getOutRelations()](@ref org.corpus_tools.salt.common.SNode#getOutRelations)  
+now use 
+~~~{.java}
+List<SRelation<? extends SNode, ? extends SNode>>
+~~~
+instead of 
+~~~{.java}
+List<SRelation>
+~~~
+as return type. In a lot of cases you can just use
+~~~{.java}
+List<SRelation<?,?>
+~~~
+if you are not interested in the specific type of the source and target nodes.
 
 SRelation
 -----

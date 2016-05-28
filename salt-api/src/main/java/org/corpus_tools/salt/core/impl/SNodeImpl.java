@@ -71,7 +71,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * {@inheritDoc SNode#getOutgoingSRelations()}
 	 */
 	@Override
-	public List<SRelation<?,?>> getOutRelations() {
+	public List<SRelation<? extends SNode, ? extends SNode>> getOutRelations() {
 		if (getGraph() == null) {
 			return null;
 		}
@@ -91,7 +91,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * {@inheritDoc SNode#getIncomingSRelations()}
 	 */
 	@Override
-	public List<SRelation<?,?>> getInRelations() {
+	public List<SRelation<? extends SNode,? extends SNode>> getInRelations() {
 		if (getGraph() == null) {
 			return null;
 		}
