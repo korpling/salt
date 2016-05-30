@@ -616,13 +616,13 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			sprConstant = 1.2;
 			} else if (nNodes >=20 && nNodes < 100){
 			nodeDist = 120;
-			sprConstant = 1.0;
+			sprConstant = 1.1;
 			} else if (nNodes >= 100 && nNodes < 400) {
 			nodeDist = 150;
-			sprConstant = 0.8;
+			sprConstant = 0.9;
 			} else {
 				nodeDist = 180;
-				sprConstant = 0.6;
+				sprConstant = 0.7;
 			};
 			
 			// write nodes as array	
@@ -1335,7 +1335,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 				    jsonWriterEdges.key(JSON_TYPE); 
 				  	jsonWriterEdges.value("curvedCW");
 				  	jsonWriterEdges.key(JSON_ROUNDNESS); 
-				  	jsonWriterEdges.value("0.5");
+				  	jsonWriterEdges.value("0.95");
 				    jsonWriterEdges.endObject();
 			  }
 			  
