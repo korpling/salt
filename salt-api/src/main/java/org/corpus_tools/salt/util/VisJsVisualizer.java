@@ -1600,7 +1600,8 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 					 
 		  if (edge!= null )
 				{
-				  if (!readRelations.contains(edge) && (exportFilter == null  || !exportFilter.excludeRelation(edge)))
+				  if (!readRelations.contains(edge) && (exportFilter == null  || (!exportFilter.excludeRelation(edge) && 
+						  !exportFilter.excludeNode(fromNode) && !exportFilter.excludeNode(currNode))))
 				  {					  
 					try 
 					{
