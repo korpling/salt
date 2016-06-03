@@ -1436,7 +1436,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	{
 		if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
 		{				
-			if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && (exportFilter == null || !exportFilter.excludeNode(currNode)))
+			if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && (exportFilter == null || exportFilter.includeNode(currNode)))
 			{
 			
 				if (sRelation!= null && !(sRelation instanceof SPointingRelation) && !(fromNode instanceof SToken))
@@ -1494,7 +1494,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 			{				
 				if (traversalId.equals(TRAV_MODE_CALC_LEVEL)) {
 					if (!(edge instanceof SPointingRelation) && !(fromNode instanceof SToken) &&
-						(exportFilter == null  || !exportFilter.excludeNode(currNode)) && (edge!= null))
+						(exportFilter == null  || exportFilter.includeNode(currNode)) && (edge!= null))
 						{
 						currHeight--;	
 						
@@ -1508,7 +1508,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 					  currHeightFromToken = 1;				  
 					  // write SSpan-Nodes					  
 					  if ((fromNode instanceof SSpan) && (!readSpanNodes.contains(fromNode)) && 
-							  (exportFilter == null  || !exportFilter.excludeNode(fromNode)))
+							  (exportFilter == null  || exportFilter.includeNode(fromNode)))
 					  { 
 						
 						  
@@ -1545,7 +1545,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 				  else if (currNode instanceof SStructure)
 				  {	 
 					  
-					  if ((exportFilter == null  || !exportFilter.excludeNode(currNode)) && !readStructNodes.contains(currNode))
+					  if ((exportFilter == null  || exportFilter.includeNode(currNode)) && !readStructNodes.contains(currNode))
 					  {		
 						  currHeightFromToken++;
 						  int currLevel = maxLevel - currHeightFromToken - spanClasses.size() + 1;
@@ -1583,7 +1583,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 					  
 					// if fromNode is a root, store its min level
 					 if (fromNode instanceof SStructure && roots.contains(fromNode) && !readStructNodes.contains(fromNode) && 
-							 (exportFilter == null  || !exportFilter.excludeNode(fromNode)))
+							 (exportFilter == null  || exportFilter.includeNode(fromNode)))
 					 { 
 						 int thisRootLevel =  maxLevel - currHeightFromToken - spanClasses.size();
 						 if (rootToMinLevel.containsKey(fromNode))
@@ -1600,8 +1600,8 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 					 
 		  if (edge!= null )
 				{
-				  if (!readRelations.contains(edge) && (exportFilter == null  || (!exportFilter.excludeRelation(edge) && 
-						  !exportFilter.excludeNode(fromNode) && !exportFilter.excludeNode(currNode))))
+				  if (!readRelations.contains(edge) && (exportFilter == null  || (exportFilter.includeRelation(edge) && 
+						  exportFilter.includeNode(fromNode) && exportFilter.includeNode(currNode))))
 				  {					  
 					try 
 					{

@@ -18,11 +18,9 @@ import org.corpus_tools.salt.core.SRelation;
 
 public interface ExportFilter {
 	
-	public boolean excludeNode (SNode node);
+	public boolean includeNode (SNode node);
 	
-	public boolean excludeRelation (SRelation relation);
-	
-	
-		
+	public boolean includeRelation (SRelation relation);
+			
 
 }
