@@ -1111,7 +1111,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	
 	//create node array
 	jsonWriterNodes.array();
-	//  token must always be outputted
+	//  token must always be output
 	 for (SToken token : sTokens){			
 			writeJsonNode(token, maxLevel);
 			
@@ -1431,7 +1431,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	 * Implements the nodeReached method of the {@link SGraphTraverseHandler} interface.
 	 */
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation,
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation relation,
 														SNode fromNode, long order) 
 	{
 		if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
@@ -1439,7 +1439,7 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 			if (traversalId.equals(TRAV_MODE_CALC_LEVEL) && (exportFilter == null || exportFilter.includeNode(currNode)))
 			{
 			
-				if (sRelation!= null && !(sRelation instanceof SPointingRelation) && !(fromNode instanceof SToken))
+				if (relation!= null && !(relation instanceof SPointingRelation) && !(fromNode instanceof SToken))
 				{			
 						currHeight++;
 						if (maxHeight < currHeight)
@@ -1487,14 +1487,14 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	 * Implements the nodeLeft method of the {@link SGraphTraverseHandler} interface.
 	 */
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation relation,
 			SNode fromNode, long order) 
 	{		
 			if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST)
 			{				
 				if (traversalId.equals(TRAV_MODE_CALC_LEVEL)) {
-					if (!(edge instanceof SPointingRelation) && !(fromNode instanceof SToken) &&
-						(exportFilter == null  || exportFilter.includeNode(currNode)) && (edge!= null))
+					if (!(relation instanceof SPointingRelation) && !(fromNode instanceof SToken) &&
+						(exportFilter == null  || exportFilter.includeNode(currNode)) && (relation != null))
 						{
 						currHeight--;	
 						
@@ -1598,18 +1598,18 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 					  
 					}
 					 
-		  if (edge!= null )
+		  if (relation!= null )
 				{
-				  if (!readRelations.contains(edge) && (exportFilter == null  || (exportFilter.includeRelation(edge) && 
+				  if (!readRelations.contains(relation) && (exportFilter == null  || (exportFilter.includeRelation(relation) && 
 						  exportFilter.includeNode(fromNode) && exportFilter.includeNode(currNode))))
 				  {					  
 					try 
 					{
-					  writeJsonEdge(fromNode, currNode, edge);
+					  writeJsonEdge(fromNode, currNode, relation);
 					} catch (IOException e) {
 						throw new SaltException("A problem occurred while building JSON objects.");
 					}					  
-					  readRelations.add(edge);
+					  readRelations.add(relation);
 				  }			
 				  
 				}
@@ -1621,11 +1621,11 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	 * Implements the checkConstraint method of the {@link SGraphTraverseHandler} interface.
 	 */
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation edge,
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation relation,
 			SNode currNode, long order) 
 	{
-		if(edge instanceof SDominanceRelation || edge instanceof SSpanningRelation || 
-				edge instanceof SPointingRelation || edge == null)  
+		if(relation instanceof SDominanceRelation || relation instanceof SSpanningRelation || 
+				relation instanceof SPointingRelation || relation == null)  
 		{
 			return true;
 		}
