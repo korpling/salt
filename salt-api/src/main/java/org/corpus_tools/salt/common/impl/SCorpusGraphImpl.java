@@ -42,6 +42,8 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
+import com.google.common.base.Strings;
+
 @SuppressWarnings("serial")
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** Initializes an object of type {@link SGraphImpl}. **/
@@ -129,7 +131,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is not a SRelation object. ");
 		}
 		// start: create a name if none exists
-		if ((((SRelation) relation).getName() == null) || (((SRelation) relation).getName().isEmpty())) {
+		if (Strings.isNullOrEmpty(((SRelation) relation).getName())) {
 			if (relation instanceof SCorpusRelation) {
 				((SRelation) relation).setName("corpRel" + (getCorpusRelations().size() + 1));
 			} else if (relation instanceof SCorpusDocumentRelation) {
@@ -139,7 +141,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			}
 		}
 		// end: create a name if none exists
-		if ((((SRelation) relation).getId() == null) || (((SRelation) relation).getId().isEmpty())) {
+		if (Strings.isNullOrEmpty(relation.getId())) {
 			((SRelation) relation).setId("salt:/" + ((SRelation) relation).getName());
 		}
 		super.basicAddRelation(relation);
@@ -169,7 +171,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	protected void basicAddNode(SNode node) {
 		// start: create a name if none exists
-		if ((((SNode) node).getName() == null) || (((SNode) node).getName().isEmpty())) {
+		if (Strings.isNullOrEmpty(((SNode) node).getName())){
 			if (node instanceof SCorpus) {
 				((SNode) node).setName("corp" + (getCorpora().size() + 1));
 			} else if (node instanceof SDocument) {
@@ -179,7 +181,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			}
 		}
 		// end: create a name if none exists
-		if ((((SNode) node).getId() == null) || (((SNode) node).getId().isEmpty())) {
+		if (Strings.isNullOrEmpty(node.getId())){
 			// id a name if none exists
 			((SNode) node).setId("salt:/" + ((SNode) node).getName());
 		}
@@ -268,7 +270,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 		String namePart = null;
 		namePart = subCorpus.getName();
-		if ((namePart == null) || (namePart.isEmpty())) {
+		if (Strings.isNullOrEmpty(namePart)){
 			namePart = "corp_" + getCorpora().size();
 		}
 
@@ -298,7 +300,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 		String namePart = null;
 		namePart = document.getName();
-		if ((namePart == null) || (namePart.isEmpty())) {
+		if (Strings.isNullOrEmpty(namePart)){
 			namePart = "doc_" + getCorpora().size();
 		}
 		GraphFactory.createIdentifier(document, URI.createURI(corpus.getId() + "/" + namePart).toString());

@@ -65,6 +65,7 @@ import org.corpus_tools.salt.util.internal.Diff;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 
 @SuppressWarnings("serial")
@@ -112,7 +113,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				throw new SaltInsertionException(this, relation, "Cannot insert an relation, which is not a SRelation object.");
 			}
 			// start: create a name if none exists
-			if ((((SRelation) relation).getName() == null) || (((SRelation) relation).getName().isEmpty())) {
+			if (Strings.isNullOrEmpty(((SRelation) relation).getName())){
 				if (relation instanceof STextualRelation) {
 					((SRelation) relation).setName("sTextRel" + (getTextualRelations().size() + 1));
 				} else if (relation instanceof STimelineRelation) {
@@ -170,7 +171,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}
 		if (node != null) {
 			// start: create a name if none exists
-			if ((node.getName() == null) || (node.getName().isEmpty())) {
+			if (Strings.isNullOrEmpty(node.getName())){
 				if (node instanceof STextualDS) {
 					node.setName("sText" + (getTextualDSs().size() + 1));
 				} else if (node instanceof SToken) {
@@ -188,8 +189,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				}
 			}
 			// end: create a name if none exists
-
-			if ((node.getId() == null) || (node.getId().isEmpty())) {
+			if (Strings.isNullOrEmpty(node.getId())){
 				node.setId(getId() + "#" + node.getName());
 			}
 			super.addNode(node);
@@ -573,7 +573,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SSpan createSpan(List<SToken> tokens) {
-		if (tokens != null && !tokens.isEmpty()) {
+		if (SaltUtil.isNotNullOrEmpty(tokens)){
 			return (createSpan(tokens.toArray(new SToken[tokens.size()])));
 		} else {
 			return (null);
@@ -604,7 +604,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SStructure createStructure(List<SStructuredNode> sourceNodes) {
-		if (sourceNodes != null && !sourceNodes.isEmpty()) {
+		if (SaltUtil.isNotNullOrEmpty(sourceNodes)){
 			return (createStructure(sourceNodes.toArray(new SStructuredNode[sourceNodes.size()])));
 		} else {
 			return (null);
