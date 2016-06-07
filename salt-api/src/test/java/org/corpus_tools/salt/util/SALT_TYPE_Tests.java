@@ -15,7 +15,7 @@
  *
  *
  */
-package org.corpus_tools.salt.util.tests;
+package org.corpus_tools.salt.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

@@ -45,6 +45,7 @@ import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
@@ -60,6 +61,7 @@ import org.corpus_tools.salt.semantics.SPOSAnnotation;
 import org.corpus_tools.salt.semantics.SSentenceAnnotation;
 import org.corpus_tools.salt.semantics.STypeAnnotation;
 import org.corpus_tools.salt.semantics.SWordAnnotation;
+import org.corpus_tools.salt.util.internal.Diff.Builder;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.corpus_tools.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter;
@@ -1091,5 +1093,18 @@ public class SaltUtil {
 			}
 		}
 		return (retVal);
+	}
+
+	/**
+	 * Creates a builder to have a fluent api for comparing two
+	 * {@link SDocumentGraph}s or {@link SCorpusGraph}s.
+	 * <pre>
+	 * compare(graph1).with(graph2).useOption(key, value).andCheckIsomorphie().
+	 * or
+	 * compare(graph1).with(graph2).useOption(key, value).andFindDiffs().
+	 * </pre>
+	 */
+	public static <G extends SGraph> Builder<G> compare(G templateGraph) {
+		return new Builder<G>(templateGraph);
 	}
 }
