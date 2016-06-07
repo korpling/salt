@@ -19,6 +19,7 @@ package org.corpus_tools.salt.core;
 
 import java.util.List;
 
+import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
@@ -51,6 +52,34 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	 * @return list of nodes being leafs in the given graph.
 	 */
 	public List<SNode> getLeafs();
+
+	/**
+	 * Returns a list of nodes in base document. The returned nodes are
+	 * equivalents to the direct children of the passed parent node. The
+	 * children are retrieved via traversing of relations of the passed
+	 * {@link SALT_TYPE}.
+	 * 
+	 * @param parent
+	 *            node to who the children are retrieved
+	 * @param relationType
+	 *            type of relations to be traversed, if relationType is null,
+	 *            all relations are used
+	 * @return a list of children nodes, or an empty list
+	 */
+	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType);
+
+	/**
+	 * Returns a list of nodes that are the parents of every node in the given
+	 * base list. Only nodes with the given {@link SALT_TYPE} will be
+	 * considered.
+	 * 
+	 * @param children
+	 *            list of nodes whose parents are looked for
+	 * @param nodeType
+	 *            regarded types of relations
+	 * @return a list of parents
+	 */
+	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType);
 
 	/**
 	 * Traverses a graph in the given order traverseType and starts traversing

@@ -1107,4 +1107,21 @@ public class SaltUtil {
 	public static <G extends SGraph> Builder<G> compare(G templateGraph) {
 		return new Builder<G>(templateGraph);
 	}
+	
+	/**
+	 * Checks whether a collection is null or empty
+	 * @param list
+	 * @return
+	 */
+	public static <T> boolean isNullOrEmpty(Collection<T> collection) {
+	    return collection == null || collection.isEmpty();
+	}
+	/**
+	 * Checks whether a collection is null or empty
+	 * @param list
+	 * @return
+	 */
+	public static <T> boolean isNotNullOrEmpty(Collection<T> collection) {
+	    return collection != null && !collection.isEmpty();
+	}
 }

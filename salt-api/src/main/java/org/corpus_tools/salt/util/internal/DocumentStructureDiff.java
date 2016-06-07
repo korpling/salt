@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,13 +38,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-public class DocumentStructureDiff {
-	private SDocumentGraph templateGraph = null;
-	private SDocumentGraph otherGraph = null;
-
-	private Map<String, Boolean> options = null;
-
-	private Set<Difference> differences = null;
+public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 
 	/**
 	 * Initializes Diff object with the two graphs <code>template</code> and
@@ -59,82 +52,8 @@ public class DocumentStructureDiff {
 	}
 
 	public DocumentStructureDiff(SDocumentGraph template, SDocumentGraph other, Map<String, Boolean> optionMap) {
-		this.templateGraph = template;
-		this.otherGraph = other;
-
-		if (optionMap == null) {
-			optionMap = new DiffOptions();
-		}
-		options = optionMap;
+		super(template, other, optionMap);
 	}
-
-	/**
-	 * Returns a list containing all computed differences.
-	 * 
-	 * @return returns differences Set
-	 **/
-	private Set<Difference> getDifferences() {
-		if (differences == null) {
-			differences = new LinkedHashSet<>();
-		}
-		return differences;
-	}
-
-	/**
-	 * Adds a difference to the differences set
-	 * 
-	 * @param templateObject
-	 *            first Salt object
-	 * @param otherObject
-	 *            second Salt object
-	 * @param container
-	 *            Object containing the given object, e.g. used for layers
-	 * @param diffType
-	 *            type of the difference
-	 * @return returns whether sizes are the same
-	 **/
-	private void addDifference(Object templateObject, Object otherObject, Object container, DIFF_TYPES diffType, Set<Difference> subDiffs) {
-		Difference tempDiff = new Difference(templateObject, otherObject, container, diffType);
-		if (subDiffs != null) {
-			tempDiff.addSubDiffs(subDiffs);
-		}
-		getDifferences().add(tempDiff);
-	}
-
-	/**
-	 * Compares the set graphs and returns if they are isomorphic or not. In
-	 * case of the graphs are not isomorphic, this method does not record all
-	 * differences. TO speed up the computation. it just detects the first
-	 * difference and returns false. To get a full list of all differences, use
-	 * method {@link #findDiffs()}.
-	 * 
-	 * @return true, if graphs are isomorphic, false otherwise.
-	 */
-	public boolean isIsomorph() {
-		diffsRequested = false;
-		return (findDiffs(false));
-	}
-
-	/**
-	 * Compares the set graphs and returns if they are isomorphic or not. If
-	 * graphs are not isomporphic, this method finds and records all differences
-	 * and lists them. This means the entire graphs have to be compared and
-	 * could slow down the computation. If you are only interested in the result
-	 * and not in the particular differences, use method {@link #isIsomorph()}.
-	 * 
-	 * @return true, if graphs are isomorphic, false otherwise.
-	 */
-	public Set<Difference> findDiffs() {
-		diffsRequested = true;
-		findDiffs(true);
-		return (getDifferences());
-	}
-
-	/**
-	 * if false, only isomorphie is computed, which makes the process faster but
-	 * does not collect all differences
-	 **/
-	private boolean diffsRequested = false;
 
 	/**
 	 * Compares the set graphs and returns if they are isomorphic or not. If
@@ -148,7 +67,8 @@ public class DocumentStructureDiff {
 	 *            faster but does not collect all differences
 	 * @return true, if graphs are isomorphic, false otherwise.
 	 */
-	private boolean findDiffs(boolean diffsRequested) {
+	@Override
+	protected boolean findDiffs(boolean diffsRequested) {
 		if (!compareSize(templateGraph, otherGraph)) {
 			if (!diffsRequested) {
 				return false;
@@ -164,16 +84,16 @@ public class DocumentStructureDiff {
 				return false;
 			}
 		}
-		List<SNode> roots = otherGraph.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
-		if ((roots == null) || (roots.size() == 0)) {
+		final List<SNode> roots = otherGraph.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
+		if ((SaltUtil.isNullOrEmpty(roots))) {
 			// logger.warn("Cannot start computing of differences, since no
 			// tokens exist for document '{}'.",
 			// templateGraph.getId());
 		} else {
-			List<SNode> remainingTemplateNodes = new ArrayList<>(templateGraph.getSpans().size() + templateGraph.getStructures().size());
+			final List<SNode> remainingTemplateNodes = new ArrayList<>(templateGraph.getSpans().size() + templateGraph.getStructures().size());
 			remainingTemplateNodes.addAll(templateGraph.getSpans());
 			remainingTemplateNodes.addAll(templateGraph.getStructures());
-			DifferenceHandler handler = new DifferenceHandler();
+			final DifferenceHandler handler = new DifferenceHandler();
 			handler.remainingTemplateNodes = remainingTemplateNodes;
 			otherGraph.traverse(roots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateGraph.getId(), handler, false);
 			if (getDifferences().size() > 0) {
@@ -287,21 +207,6 @@ public class DocumentStructureDiff {
 			}
 		}
 		return true;
-	}
-
-	/** isomorphic {@link SNode}s key= template, value= other **/
-	private BiMap<SNode, SNode> isoNodes = null;
-
-	/**
-	 * Return BiMap with isomorphic {@link SNode}s key= template, value= other
-	 * 
-	 * @return BiMap with isomorphic {@link SNode}s
-	 **/
-	protected BiMap<SNode, SNode> getIsoNodes() {
-		if (isoNodes == null) {
-			isoNodes = HashBiMap.create();
-		}
-		return isoNodes;
 	}
 
 	/**
@@ -507,166 +412,6 @@ public class DocumentStructureDiff {
 		return (iso);
 	}
 
-	/**
-	 * Checks whether two {@link IdentifiableElement} objects are isomorph. If
-	 * option {@link #OPTION_IGNORE_ID} is false, this method returns true, if
-	 * the id values of both are equal, false otherwise.If subdiffs is not null,
-	 * the differences will be added to that list, if that list is empty the
-	 * method returns false when the first difference was found.
-	 * 
-	 * @param templateNode
-	 * @param otherNode
-	 * @param subDiffs
-	 * @return true if elements have the same id, false otherwise
-	 */
-	protected boolean compareIdentifiableElements(IdentifiableElement template, IdentifiableElement other, Set<Difference> subDiffs) {
-		boolean retVal = true;
-		if (!options.get(DiffOptions.OPTION_IGNORE_ID)) {
-			if (!template.getId().equals(other.getId())) {
-				retVal = false;
-				if (subDiffs != null) {
-					subDiffs.add(new Difference(template, other, null, DIFF_TYPES.ID_DIFFERING));
-				}
-			}
-		}
-		return (retVal);
-	}
-
-	/**
-	 * Checks whether two {@link SAnnotationContainer} objects are isomorph and
-	 * returns true if this is the case, false otherwise. If subdiffs is not
-	 * null, the differences will be added to that list, if that list is empty
-	 * the method returns false when the first difference was found. <br/>
-	 * The behavior of this method depends on options:
-	 * {@link #OPTION_IGNORE_META_ANNOTATIONS},
-	 * {@link #OPTION_IGNORE_PROCESSING_ANNOTATIONS},
-	 * {@link #OPTION_IGNORE_ANNOTATIONS} and {@link #OPTION_IGNORE_FEATURES}
-	 * 
-	 * @param templateNode
-	 * @param otherNode
-	 * @param subDiffs
-	 *            if differences shall be computed, this list must not have to
-	 *            be empty
-	 * @return
-	 */
-	protected boolean compareAnnotationContainers(SAnnotationContainer template, SAnnotationContainer other, Set<Difference> subDiffs) {
-		boolean retVal1 = true;
-		boolean retVal2 = true;
-		boolean retVal3 = true;
-		boolean retVal4 = true;
-
-		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_ANNOTATIONS)) {
-			Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SAnnotation();
-			Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SAnnotation();
-			retVal1 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
-			if (!retVal1 && subDiffs != null) {
-				return (false);
-			}
-		}
-		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_META_ANNOTATIONS)) {
-			Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SMetaAnnotation();
-			Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SMetaAnnotation();
-			retVal2 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
-			if (!retVal1 && subDiffs != null) {
-				return (false);
-			}
-		}
-		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_PROCESSING_ANNOTATIONS)) {
-			Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SProcessingAnnotation();
-			Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SProcessingAnnotation();
-			retVal3 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
-			if (!retVal1 && subDiffs != null) {
-				return (false);
-			}
-		}
-		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_FEATURES)) {
-			Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SFeature();
-			Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SFeature();
-			retVal4 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
-			if (!retVal1 && subDiffs != null) {
-				return (false);
-			}
-		}
-
-		return (retVal1 && retVal2 && retVal3 && retVal4);
-	}
-
-	/**
-	 * Checks all {@link SAbstractAnnotation}s in both iterators, whether each
-	 * one has a potential matching partner in the other iterator.
-	 * 
-	 * @param template
-	 * @param templateIterator
-	 * @param other
-	 * @param otherIterator
-	 * @param subDiffs
-	 * @return
-	 */
-	private boolean compareAnnotationContainers(SAnnotationContainer template, Iterator<SAbstractAnnotation> templateIterator, SAnnotationContainer other, Iterator<SAbstractAnnotation> otherIterator, Set<Difference> subDiffs) {
-		boolean retVal = true;
-
-		// create remaining list, which contains all annos from other
-		Set<SAbstractAnnotation> remainingLabels = new HashSet<>();
-		while (otherIterator.hasNext()) {
-			SAbstractAnnotation anno = otherIterator.next();
-			if (anno instanceof SFeature) {
-				if (options.get(DiffOptions.OPTION_IGNORE_NAME)) {
-					if (SaltUtil.FEAT_NAME_QNAME.equals(anno.getQName())) {
-						continue;
-					}
-				}
-			}
-			remainingLabels.add(anno);
-		}
-
-		// for each annotation from template, check whether other also contains
-		// a isomorph annotation
-		while (templateIterator.hasNext()) {
-			SAbstractAnnotation templateAnno = templateIterator.next();
-
-			if (templateAnno instanceof SFeature) {
-				if (options.get(DiffOptions.OPTION_IGNORE_NAME)) {
-					if (SaltUtil.FEAT_NAME_QNAME.equals(templateAnno.getQName())) {
-						continue;
-					}
-				}
-			}
-			SAbstractAnnotation otherAnno = (SAbstractAnnotation) other.getLabel(templateAnno.getQName());
-			if (otherAnno == null) {
-				if (subDiffs != null) {
-					subDiffs.add(new Difference(templateAnno, null, template, DIFF_TYPES.LABEL_MISSING));
-					retVal = false;
-				} else {
-					return (false);
-				}
-			} else if (!otherAnno.getValue().equals(templateAnno.getValue())) {
-				if (subDiffs != null) {
-					subDiffs.add(new Difference(templateAnno, otherAnno, null, DIFF_TYPES.LABEL_VALUE_DIFFERING));
-					retVal = false;
-				} else {
-					return (false);
-				}
-			} else {
-				remainingLabels.remove(otherAnno);
-			}
-		}
-
-		// create a difference for each annotation in list of remaining
-		// annotations
-		if (remainingLabels.size() > 0) {
-			if (subDiffs != null) {
-				retVal = false;
-				for (SAbstractAnnotation otherAnno : remainingLabels) {
-					subDiffs.add(new Difference(null, otherAnno, other, DIFF_TYPES.LABEL_MISSING));
-				}
-			} else {
-				return (false);
-			}
-
-		}
-		return (retVal);
-	}
-
 	private class DifferenceHandler implements GraphTraverseHandler {
 		List<SNode> remainingTemplateNodes = null;
 		private boolean abort = false;
@@ -755,7 +500,7 @@ public class DocumentStructureDiff {
 		 * <li>for each node in templateChild find shared parents: candidates
 		 * --> (A', D')</li>
 		 * <li>for each node in candidates compare its children to otherChilds
-		 * --> A:(B,C) <=> A':(B', C'), A:(B,C) <=> (C', E')</li>
+		 * --> A:(B,C) <=> A':(B', C'), A:(B,C) <=> D':(B', C', E')</li>
 		 * </ol>
 		 * 
 		 * @param otherNode
