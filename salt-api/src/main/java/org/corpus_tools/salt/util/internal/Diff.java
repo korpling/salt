@@ -80,7 +80,7 @@ public class Diff {
 		public static class Builder2<G> {
 			private final G templateGraph;
 			private final G otherGraph;
-			final private DiffOptions options= new DiffOptions();
+			private DiffOptions options = new DiffOptions();
 
 			public Builder2(final G templateGraph, final G otherGraph) {
 				this.templateGraph = templateGraph;
@@ -90,7 +90,7 @@ public class Diff {
 			public boolean andCheckIsomorphie() {
 				if (templateGraph instanceof SDocumentGraph && otherGraph instanceof SDocumentGraph) {
 					return new Diff((SDocumentGraph) templateGraph, (SDocumentGraph) otherGraph, options).isIsomorph();
-				}else if (templateGraph instanceof SCorpusGraph && otherGraph instanceof SCorpusGraph) {
+				} else if (templateGraph instanceof SCorpusGraph && otherGraph instanceof SCorpusGraph) {
 					return new Diff((SCorpusGraph) templateGraph, (SCorpusGraph) otherGraph, options).isIsomorph();
 				}
 				throw new SaltException("Cannot compare peaches with appels. ");
@@ -99,7 +99,7 @@ public class Diff {
 			public Set<Difference> andFindDiffs() {
 				if (templateGraph instanceof SDocumentGraph && otherGraph instanceof SDocumentGraph) {
 					return new Diff((SDocumentGraph) templateGraph, (SDocumentGraph) otherGraph, options).findDiffs();
-				}else if (templateGraph instanceof SCorpusGraph && otherGraph instanceof SCorpusGraph) {
+				} else if (templateGraph instanceof SCorpusGraph && otherGraph instanceof SCorpusGraph) {
 					return new Diff((SCorpusGraph) templateGraph, (SCorpusGraph) otherGraph, options).findDiffs();
 				}
 				throw new SaltException("Cannot compare peaches with appels. ");
@@ -112,6 +112,11 @@ public class Diff {
 
 			public Builder2<G> useOption(String option, boolean value) {
 				options.put(option, value);
+				return this;
+			}
+
+			public Builder2<G> useOptions(DiffOptions options) {
+				this.options = options;
 				return this;
 			}
 		}
@@ -131,8 +136,22 @@ public class Diff {
 		this(template, other, null);
 	}
 
-	public Diff(SDocumentGraph template, SDocumentGraph other, Map<String, Boolean> optionMap) {
+	public Diff(SDocumentGraph template, SDocumentGraph other, DiffOptions optionMap) {
 		documentStructureDiff = new DocumentStructureDiff(template, other, optionMap);
+	}
+
+	/**
+	 * 
+	 * @param template
+	 * @param other
+	 * @param optionMap
+	 * @deprecated use {@link #Diff(SDocumentGraph, SDocumentGraph, DiffOptions) instead
+	 */
+	@Deprecated
+	public Diff(SDocumentGraph template, SDocumentGraph other, Map<String, Boolean> optionMap) {
+		DiffOptions options = new DiffOptions();
+		options.putAll(optionMap);
+		documentStructureDiff = new DocumentStructureDiff(template, other, options);
 	}
 
 	/**
@@ -146,10 +165,24 @@ public class Diff {
 		this(template, other, null);
 	}
 
-	public Diff(SCorpusGraph template, SCorpusGraph other, Map<String, Boolean> optionMap) {
+	public Diff(SCorpusGraph template, SCorpusGraph other, DiffOptions optionMap) {
 		corpusStructureDiff = new CorpusStructureDiff(template, other, optionMap);
 	}
-	
+
+	/**
+	 * 
+	 * @param template
+	 * @param other
+	 * @param optionMap
+	 * @deprecated use {@link #Diff(SCorpusGraph, SCorpusGraph, DiffOptions)} instead
+	 */
+	@Deprecated
+	public Diff(SCorpusGraph template, SCorpusGraph other, Map<String, Boolean> optionMap) {
+		DiffOptions options = new DiffOptions();
+		options.putAll(optionMap);
+		corpusStructureDiff = new CorpusStructureDiff(template, other, options);
+	}
+
 	/**
 	 * Compares the set graphs and returns if they are isomorphic or not. In
 	 * case of the graphs are not isomorphic, this method does not record all
@@ -162,7 +195,7 @@ public class Diff {
 	public boolean isIsomorph() {
 		if (documentStructureDiff != null) {
 			return documentStructureDiff.isIsomorph();
-		}else{
+		} else {
 			return corpusStructureDiff.isIsomorph();
 		}
 	}
@@ -179,7 +212,7 @@ public class Diff {
 	public Set<Difference> findDiffs() {
 		if (documentStructureDiff != null) {
 			return documentStructureDiff.findDiffs();
-		}else{
+		} else {
 			return corpusStructureDiff.findDiffs();
 		}
 	}

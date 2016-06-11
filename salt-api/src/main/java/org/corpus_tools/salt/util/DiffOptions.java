@@ -43,6 +43,11 @@ import com.google.common.base.Strings;
  */
 @SuppressWarnings("serial")
 public class DiffOptions extends Hashtable<String, Boolean> {
+	
+	/**
+	 * When true, documents won't be compared when comparing corpus structures.
+	 */
+	public static final String OPTION_IGNORE_DOCUMENTS = "ignoreDocuments";
 	/**
 	 * When true, differences in {@link SFeature} have no influence on
 	 * isomorphie and will not produce any differences.
@@ -96,6 +101,7 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 	 * </p>
 	 */
 	public DiffOptions() {
+		put(OPTION_IGNORE_DOCUMENTS, false);
 		put(OPTION_IGNORE_ANNOTATIONS, false);
 		put(OPTION_IGNORE_META_ANNOTATIONS, false);
 		put(OPTION_IGNORE_PROCESSING_ANNOTATIONS, true);

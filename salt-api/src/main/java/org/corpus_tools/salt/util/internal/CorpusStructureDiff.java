@@ -3,28 +3,25 @@ package org.corpus_tools.salt.util.internal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.corpus_tools.salt.common.SCorpusGraph;
+import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.util.DIFF_TYPES;
+import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
-	private static final Logger logger = LoggerFactory.getLogger(CorpusStructureDiff.class);
-
 	public CorpusStructureDiff(SCorpusGraph template, SCorpusGraph other) {
 		super(template, other);
 	}
 
-	public CorpusStructureDiff(SCorpusGraph template, SCorpusGraph other, Map<String, Boolean> options) {
+	public CorpusStructureDiff(SCorpusGraph template, SCorpusGraph other, DiffOptions options) {
 		super(template, other, options);
 	}
 
@@ -53,7 +50,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 			final List<SNode> remainingOtherNodes = new ArrayList<>(templateGraph.getCorpora().size() + templateGraph.getDocuments().size());
 			remainingOtherNodes.addAll(otherGraph.getCorpora());
 			remainingOtherNodes.addAll(otherGraph.getDocuments());
-			
+
 			for (SNode templateRoot : templateRoots) {
 				for (SNode otherRoot : otherRoots) {
 					boolean isIsomorph = true;
@@ -98,8 +95,50 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 					addDifference(null, remainingNode, null, DIFF_TYPES.NODE_MISSING, null);
 				}
 			}
+			if (!compareDocumentStructures()) {
+				return false;
+			}
 		}
 		return true;
+	}
+
+	/**
+	 * Compares all matching document structures.
+	 */
+	private boolean compareDocumentStructures() {
+		boolean retVal = true;
+		if (!options.get(DiffOptions.OPTION_IGNORE_DOCUMENTS)) {
+			for (SDocument templateDoc : templateGraph.getDocuments()) {
+				final SDocument otherDoc = (SDocument) getIsoNodes().get(templateDoc);
+				if (otherDoc != null) {
+					if (templateDoc.getDocumentGraph() == null && templateDoc.getDocumentGraphLocation() != null) {
+						templateDoc.loadDocumentGraph();
+					}
+					if (otherDoc.getDocumentGraph() == null && otherDoc.getDocumentGraphLocation() != null) {
+						otherDoc.loadDocumentGraph();
+					}
+					if (templateDoc.getDocumentGraph() != null && otherDoc.getDocumentGraph() != null) {
+						boolean isIsomorph = false;
+						if (diffsRequested) {
+							isIsomorph = SaltUtil.compare(templateDoc.getDocumentGraph()).with(otherDoc.getDocumentGraph()).useOptions(options).andCheckIsomorphie();
+							if (!isIsomorph) {
+								return false;
+							}
+						} else {
+							final Set<Difference> subDiffs = SaltUtil.compare(templateDoc.getDocumentGraph()).with(otherDoc.getDocumentGraph()).useOptions(options).andFindDiffs();
+							if (subDiffs.size() > 0) {
+								addDifference(templateDoc, otherDoc, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
+								isIsomorph = false;
+							} else {
+								isIsomorph = true;
+							}
+						}
+						retVal = retVal && isIsomorph;
+					}
+				}
+			}
+		}
+		return retVal;
 	}
 
 	private class DifferenceHandler implements GraphTraverseHandler {

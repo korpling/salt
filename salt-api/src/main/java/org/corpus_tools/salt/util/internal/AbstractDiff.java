@@ -3,7 +3,6 @@ package org.corpus_tools.salt.util.internal;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.corpus_tools.salt.core.SAbstractAnnotation;
@@ -24,7 +23,7 @@ public abstract class AbstractDiff<G extends SGraph> {
 	protected final G templateGraph;
 	protected final G otherGraph;
 
-	protected final Map<String, Boolean> options;
+	protected final DiffOptions options;
 
 	protected Set<Difference> differences = null;
 	/** isomorphic {@link SNode}s key= template, value= other **/
@@ -53,7 +52,7 @@ public abstract class AbstractDiff<G extends SGraph> {
 		this(template, other, null);
 	}
 
-	public AbstractDiff(final G template, final G other, final Map<String, Boolean> optionMap) {
+	public AbstractDiff(final G template, final G other, DiffOptions optionMap) {
 		this.templateGraph = template;
 		this.otherGraph = other;
 
