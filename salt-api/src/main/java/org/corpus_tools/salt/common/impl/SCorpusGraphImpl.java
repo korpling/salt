@@ -29,6 +29,7 @@ import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SCorpusRelation;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.core.impl.SGraphImpl;
@@ -421,5 +422,49 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 		retVal = createDocument(corpora.get(corpora.size() - 1), dPath.lastSegment());
 		return (retVal);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toTreeString() {
+		final List<SNode> roots = getRoots();
+		final StringBuilder str= new StringBuilder();
+		if (SaltUtil.isNotNullOrEmpty(roots)) {
+			for (SNode root : roots) {
+				str.append(reportCorpusStructure(this, root, "", true));
+			}
+		}
+		return str.toString();
+	}
+
+	/**
+	 * Returns the corpus structure as an ascii tree.
+	 * 
+	 * @param sGraph
+	 *            the corpus structure to be printed
+	 * @param node
+	 *            root node to start from
+	 * @param prefix
+	 * @param isTail
+	 * @return
+	 */
+	private String reportCorpusStructure(final SGraph sGraph, final SNode node, final String prefix, final boolean isTail) {
+		final StringBuilder retStr = new StringBuilder();
+		retStr.append(prefix);
+		retStr.append(((isTail ? "└── " : "├── ") + node.getName()));
+		retStr.append("\n");
+		final List<SRelation<SNode, SNode>> outRelations = sGraph.getOutRelations(node.getId());
+		int i = 0;
+		for (SRelation<SNode, SNode> out : outRelations) {
+			boolean newTail= true;
+			if (i < outRelations.size() - 1) {
+				newTail= false;
+			}
+			retStr.append(reportCorpusStructure(sGraph, (SNode) out.getTarget(), prefix + (isTail ? "    " : "│   "), newTail));
+			i++;
+		}
+		return (retStr.toString());
 	}
 } // SCorpusGraphImpl

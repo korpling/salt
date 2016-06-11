@@ -38,6 +38,7 @@ import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import junit.framework.TestCase;
 
@@ -549,6 +550,16 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 			corpGraph.addRelation(corpDocRel1);
 			return (doc1);
 		}
+	}
+	
+	@Test
+	public void testwhenPrintingCorpusGraphToTreeString_thenTreeStringShouldBeReturned(){
+		getFixture().createDocument(URI.createURI("/corpus1/corpus2/document1"));
+		getFixture().createDocument(URI.createURI("/corpus1/corpus2/document2"));
+		getFixture().createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3"));
+		getFixture().createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4"));
+		
+		assertThat(fixture.toTreeString()).isEqualTo("└── corpus1\n    ├── corpus2\n    │   ├── document1\n    │   └── document2\n    └── corpus3\n        └── corpus4\n            ├── document3\n            └── document4\n");
 	}
 
 	@Override
