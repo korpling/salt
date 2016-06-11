@@ -81,6 +81,9 @@ import org.xml.sax.XMLReader;
 public class SaltUtil {
 
 	// ===================================> common Salt stuff
+	/** The URI scheme for corpus pathes. **/
+	public static final String SALT_SCHEME = "salt";
+	
 	/** The ending of a Salt XML file. **/
 	public static final String FILE_ENDING_SALT_XML = "salt";
 	/** The ending of a dot file. **/
@@ -1117,11 +1120,11 @@ public class SaltUtil {
 	    return collection == null || collection.isEmpty();
 	}
 	/**
-	 * Checks whether a collection is null or empty
+	 * Checks whether a collection is not null nor empty
 	 * @param list
 	 * @return
 	 */
 	public static <T> boolean isNotNullOrEmpty(Collection<T> collection) {
-	    return collection != null && !collection.isEmpty();
+	    return !isNullOrEmpty(collection);
 	}
 }

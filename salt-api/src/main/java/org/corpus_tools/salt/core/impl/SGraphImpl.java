@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.corpus_tools.salt.SALT_TYPE;
+import org.corpus_tools.salt.common.SCorpus;
+import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
@@ -34,8 +36,10 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.util.SaltUtil;
+import org.corpus_tools.salt.util.TraverseFluent;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
@@ -224,7 +228,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 		}
 		return sharedParents;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler) {
@@ -237,6 +241,10 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 		GraphTraverserModule traverserModule = new GraphTraverserModule();
 		traverserModule.setGraph(this);
 		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);
+	}
+
+	public TraverseFluent traverse() {
+		return new TraverseFluent(this);
 	}
 
 	// =======================================> SNamedElement

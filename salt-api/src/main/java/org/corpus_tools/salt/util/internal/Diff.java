@@ -24,6 +24,7 @@ import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.exceptions.SaltException;
+import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 
 /**
@@ -79,6 +80,7 @@ public class Diff {
 		public static class Builder2<G> {
 			private final G templateGraph;
 			private final G otherGraph;
+			final private DiffOptions options= new DiffOptions();
 
 			public Builder2(final G templateGraph, final G otherGraph) {
 				this.templateGraph = templateGraph;
@@ -87,23 +89,29 @@ public class Diff {
 
 			public boolean andCheckIsomorphie() {
 				if (templateGraph instanceof SDocumentGraph && otherGraph instanceof SDocumentGraph) {
-					return new Diff((SDocumentGraph) templateGraph, (SDocumentGraph) otherGraph).isIsomorph();
+					return new Diff((SDocumentGraph) templateGraph, (SDocumentGraph) otherGraph, options).isIsomorph();
+				}else if (templateGraph instanceof SCorpusGraph && otherGraph instanceof SCorpusGraph) {
+					return new Diff((SCorpusGraph) templateGraph, (SCorpusGraph) otherGraph, options).isIsomorph();
 				}
 				throw new SaltException("Cannot compare peaches with appels. ");
 			}
 
 			public Set<Difference> andFindDiffs() {
 				if (templateGraph instanceof SDocumentGraph && otherGraph instanceof SDocumentGraph) {
-					return new Diff((SDocumentGraph) templateGraph, (SDocumentGraph) otherGraph).findDiffs();
+					return new Diff((SDocumentGraph) templateGraph, (SDocumentGraph) otherGraph, options).findDiffs();
+				}else if (templateGraph instanceof SCorpusGraph && otherGraph instanceof SCorpusGraph) {
+					return new Diff((SCorpusGraph) templateGraph, (SCorpusGraph) otherGraph, options).findDiffs();
 				}
 				throw new SaltException("Cannot compare peaches with appels. ");
 			}
 
 			public Builder2<G> useOption(String option) {
+				options.put(option, true);
 				return this;
 			}
 
 			public Builder2<G> useOption(String option, boolean value) {
+				options.put(option, value);
 				return this;
 			}
 		}

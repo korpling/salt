@@ -24,8 +24,8 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		super(template, other);
 	}
 
-	public CorpusStructureDiff(SCorpusGraph template, SCorpusGraph other, Map<String, Boolean> optionMap) {
-		super(template, other, optionMap);
+	public CorpusStructureDiff(SCorpusGraph template, SCorpusGraph other, Map<String, Boolean> options) {
+		super(template, other, options);
 	}
 
 	/**
@@ -50,6 +50,10 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		final List<SNode> templateRoots = templateGraph.getRoots();
 		final List<SNode> otherRoots = otherGraph.getRoots();
 		if (SaltUtil.isNotNullOrEmpty(otherRoots) && SaltUtil.isNotNullOrEmpty(templateRoots)) {
+			final List<SNode> remainingOtherNodes = new ArrayList<>(templateGraph.getCorpora().size() + templateGraph.getDocuments().size());
+			remainingOtherNodes.addAll(otherGraph.getCorpora());
+			remainingOtherNodes.addAll(otherGraph.getDocuments());
+			
 			for (SNode templateRoot : templateRoots) {
 				for (SNode otherRoot : otherRoots) {
 					boolean isIsomorph = true;
@@ -58,7 +62,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 					compareIdentifiableElements(templateRoot, otherRoot, subDiffs);
 					if (subDiffs.size() > 0) {
 						if (!diffsRequested) {
-							return false;
+							break;
 						}
 						isIsomorph = false;
 						addDifference(templateRoot, otherRoot, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
@@ -68,22 +72,20 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 					compareAnnotationContainers(templateRoot, otherRoot, subDiffs);
 					if (subDiffs.size() > 0) {
 						if (!diffsRequested) {
-							return false;
+							break;
 						}
 						isIsomorph = false;
 						addDifference(templateRoot, otherRoot, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
 					}
 					if (isIsomorph) {
 						getIsoNodes().put(templateRoot, otherRoot);
+						remainingOtherNodes.remove(otherRoot);
 					}
 				}
 			}
 
-			final List<SNode> remainingOtherNodes = new ArrayList<>(templateGraph.getCorpora().size() + templateGraph.getDocuments().size());
-			remainingOtherNodes.addAll(otherGraph.getCorpora());
-			remainingOtherNodes.addAll(otherGraph.getDocuments());
 			final DifferenceHandler handler = new DifferenceHandler();
-			handler.remainingTemplateNodes = remainingOtherNodes;
+			handler.remainingOtherNodes = remainingOtherNodes;
 			templateGraph.traverse(templateRoots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateGraph.getId(), handler, false);
 			if (getDifferences().size() > 0) {
 				return (false);
@@ -101,8 +103,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 	}
 
 	private class DifferenceHandler implements GraphTraverseHandler {
-		List<SNode> remainingTemplateNodes = null;
-		private boolean abort = false;
+		List<SNode> remainingOtherNodes = null;
 		/**
 		 * set of already visited {@link SRelation}s while traversing, this is
 		 * necessary to avoid cycles
@@ -131,24 +132,25 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		 * is empty.
 		 */
 		@Override
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation, SNode fromNode, long order) {
-			if (fromNode != null && currNode != null) {
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode templateNode, SRelation sRelation, SNode fromNode, long order) {
+			if (fromNode != null && templateNode != null) {
 				final SNode otherParent = getIsoNodes().get(fromNode);
 				final List<SNode> otherChilds = otherGraph.getChildren(otherParent, null);
 				boolean hasFoundNode = false;
 				for (SNode otherChild : otherChilds) {
-					if (currNode.getClass().equals(otherChild.getClass()))
-						if (compareIdentifiableElements(currNode, otherChild, null)) {
-							if (compareAnnotationContainers(currNode, otherChild, null)) {
+					if (templateNode.getClass().equals(otherChild.getClass()))
+						if (compareIdentifiableElements(templateNode, otherChild, null)) {
+							if (compareAnnotationContainers(templateNode, otherChild, null)) {
 								// found matching child
-								getIsoNodes().put(currNode, otherChild);
+								getIsoNodes().put(templateNode, otherChild);
+								remainingOtherNodes.remove(otherChild);
 								hasFoundNode = true;
 								break;
 							}
 						}
 				}
 				if (!hasFoundNode) {
-					addDifference(currNode, null, null, DIFF_TYPES.NODE_MISSING, null);
+					addDifference(templateNode, null, null, DIFF_TYPES.NODE_MISSING, null);
 				}
 			}
 		}
