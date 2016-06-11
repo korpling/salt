@@ -171,7 +171,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	protected void basicAddNode(SNode node) {
 		// start: create a name if none exists
-		if (Strings.isNullOrEmpty(((SNode) node).getName())){
+		if (Strings.isNullOrEmpty(((SNode) node).getName())) {
 			if (node instanceof SCorpus) {
 				((SNode) node).setName("corp" + (getCorpora().size() + 1));
 			} else if (node instanceof SDocument) {
@@ -181,7 +181,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			}
 		}
 		// end: create a name if none exists
-		if (Strings.isNullOrEmpty(node.getId())){
+		if (Strings.isNullOrEmpty(node.getId())) {
 			// id a name if none exists
 			((SNode) node).setId("salt:/" + ((SNode) node).getName());
 		}
@@ -270,7 +270,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 		String namePart = null;
 		namePart = subCorpus.getName();
-		if (Strings.isNullOrEmpty(namePart)){
+		if (Strings.isNullOrEmpty(namePart)) {
 			namePart = "corp_" + getCorpora().size();
 		}
 
@@ -300,7 +300,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 		String namePart = null;
 		namePart = document.getName();
-		if (Strings.isNullOrEmpty(namePart)){
+		if (Strings.isNullOrEmpty(namePart)) {
 			namePart = "doc_" + getCorpora().size();
 		}
 		GraphFactory.createIdentifier(document, URI.createURI(corpus.getId() + "/" + namePart).toString());
@@ -360,19 +360,45 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		return (document);
 	}
 
+	/**
+	 * When specified corpus path already contains salt schema, then specified
+	 * corpus path is returned. Otherwise a absolute new corpus path which is
+	 * equal to specified corpus path is returned, which is augmented for salt
+	 * scheme. When specified corpusPath is null, null is returned.
+	 * 
+	 * @param corpusPath
+	 * @return
+	 */
+	private URI augementCorpusPathForSchema(URI corpusPath) {
+		if (corpusPath == null) {
+			return null;
+		}
+		if (!Strings.isNullOrEmpty(corpusPath.scheme())) {
+			return corpusPath;
+		}
+		String scheme = SaltUtil.SALT_SCHEME + ":";
+		if (!corpusPath.isRelative()) {
+			scheme = scheme + "/";
+		}
+		return URI.createURI(SaltUtil.SALT_SCHEME + ":" + corpusPath.toString());
+	}
+
 	/** {@inheritDoc} **/
 	@Override
-	public List<SCorpus> createCorpus(URI corpusPath) {
+	public List<SCorpus> createCorpus(final URI corpusPath) {
+		final URI cPath= augementCorpusPathForSchema(corpusPath); 
 		List<SCorpus> retVal = null;
-		if (corpusPath != null) {
+		if (cPath != null) {
 			SCorpus parentCorpus = null;
-			for (int i = corpusPath.segments().length - 1; i >= 0; i--) {
-				URI currPath = corpusPath.trimSegments(i);
-				SNode node = getNode(currPath.toString());
+			for (int i = cPath.segments().length - 1; i >= 0; i--) {
+				final URI currPath = cPath.trimSegments(i);
+				String id = currPath.toString();
+				final SNode node = getNode(id);
 				if (node == null) {
 					parentCorpus = createCorpus(parentCorpus, currPath.lastSegment());
-					if (retVal == null)
+					if (retVal == null) {
 						retVal = new ArrayList<SCorpus>();
+					}
 					retVal.add(parentCorpus);
 				} else {
 					parentCorpus = (SCorpus) node;
@@ -380,19 +406,20 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			}
 		}
 		return (retVal);
-
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SDocument createDocument(URI documentPath) {
+	public SDocument createDocument(final URI documentPath) {
+		final URI dPath= augementCorpusPathForSchema(documentPath);
 		SDocument retVal = null;
-		List<SCorpus> corpora = createCorpus(documentPath.trimSegments(1));
+		List<SCorpus> corpora = createCorpus(dPath.trimSegments(1));
 		if ((corpora == null) || (corpora.size() == 0)) {
-			corpora = new Vector<SCorpus>();
-			corpora.add((SCorpus) getNode(documentPath.trimSegments(1).toString()));
+			corpora = new ArrayList<SCorpus>();
+			String id = dPath.trimSegments(1).toString();
+			corpora.add((SCorpus) getNode(id));
 		}
-		retVal = createDocument(corpora.get(corpora.size() - 1), documentPath.lastSegment());
+		retVal = createDocument(corpora.get(corpora.size() - 1), dPath.lastSegment());
 		return (retVal);
 	}
 } // SCorpusGraphImpl

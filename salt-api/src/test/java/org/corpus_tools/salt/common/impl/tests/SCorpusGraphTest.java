@@ -423,12 +423,30 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		assertEquals(1, getFixture().getRelations().size());
 	}
 
+	@Test
+	public void testwhenCreatingCorporaViaURIWithoutScheme_thenShouldBeEqualToWithScheme() {
+		URI path = URI.createURI("/c1/c2/c3");
+		List<SCorpus> corpora = getFixture().createCorpus(path);
+
+		assertNotNull(corpora);
+		assertEquals(3, corpora.size());
+		assertEquals(3, getFixture().getNodes().size());
+		assertEquals(2, getFixture().getRelations().size());
+
+		path = URI.createURI("/c1/c2/c4");
+		corpora = getFixture().createCorpus(path);
+		assertNotNull(corpora);
+		assertEquals(1, corpora.size());
+		assertEquals(4, getFixture().getNodes().size());
+		assertEquals(3, getFixture().getRelations().size());
+	}
+	
 	/**
 	 * Tests the creation of {@link SCorpus} objects via a URI. The URI is
 	 * c1/c2/c3 and c1/c2/c4
 	 */
 	@Test
-	public void testCreateSCorpus__URI() {
+	public void testwhenCreatingTwoCorporaViaCorpusPathes_thenFourCorporaShouldExist() {
 		URI path = URI.createURI("salt:/c1/c2/c3");
 		List<SCorpus> corpora = getFixture().createCorpus(path);
 
