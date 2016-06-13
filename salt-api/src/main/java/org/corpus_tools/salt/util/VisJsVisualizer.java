@@ -182,6 +182,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_ID = "id";
 	private static final String JSON_LABEL = "label";
 	private static final String JSON_COLOR = "color";
+	private static final String JSON_COLOR_BACKGROUND  = "background";
+	private static final String JSON_COLOR_BORDER  = "border";
 	private static final String JSON_X = "x";
 	private static final String JSON_LEVEL = "level";
 	private static final String JSON_GROUP = "group";
@@ -190,23 +192,38 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_TYPE  = "type";
 	private static final String JSON_ROUNDNESS = "roundness";
 	private static final String JSON_WIDTH  = "width";
-	private static final String JSON_FONT  = "font";
-	//private static final String JSON_FONT_ALIGN  = "align";
-	private static final String JSON_FONT_COLOR  = "color";
+	private static final String JSON_EDGE_FROM = "from";
+	private static final String JSON_EDGE_TO  = "to";
+	private static final String JSON_BORDER_WIDTH  = "borderWidth";
 	
 	
 	
 	private  int xPosition = 0;	
 	private  int nTokens = 0;	
 	private  static final int NODE_DIST = 150; 
-	private static final String TOK_COLOR_VALUE = "#CCFF99";
+	/*private static final String TOK_COLOR_VALUE = "#CCFF99";
 	private static final String SPAN_COLOR_VALUE = "#A9D0F5";
-	private static final String STRUCTURE_COLOR_VALUE = "#FFCC00";
+	private static final String STRUCTURE_COLOR_VALUE = "#FFCC00";*/
+	
+	private static final String TOK_COLOR_VALUE = "#ccff99";
+	private static final String SPAN_COLOR_VALUE = "#dbdcff";
+	private static final String STRUCTURE_COLOR_VALUE = "#ffff7d";
+	
+	private static final String TOK_BORDER_COLOR_VALUE = "#b7e589";
+	private static final String SPAN_BORDER_COLOR_VALUE = "#c5c6e5";
+	private static final String STRUCTURE_BORDER_COLOR_VALUE = "#e5e570";
+	
+	private static final String HIGHLIGHTING_BORDER_WIDTH = "5";
+	private static final String EDGE_WIDTH = "2";
+	
+	private static final String JSON_EDGE_TYPE_VALUE  = "curvedCW";
+	private static final String JSON_ROUNDNESS_VALUE = "0.95";
+	
 	//private static final String ALIGN = "left";	
 	
  
    
-    private static final int JSON_EDGE_LINE_LENGTH = 60;    
+    private static final int JSON_EDGE_LINE_LENGTH = 70;    
     private static final String NEWLINE = System.lineSeparator();    
     private  final ExportFilter exportFilter;
     private  final StyleImporter styleImporter;
@@ -1179,6 +1196,11 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	
 	private void writeJsonNode (SNode node, long levelValue) throws IOException
 	{
+		String highlightingColor =  null;
+		if (styleImporter != null)
+		{
+			highlightingColor = styleImporter.getFontColor(node);
+		}
 		
 		 String idValue = node.getPath().fragment();
 		 String idLabel = "id=" + idValue;	
@@ -1229,7 +1251,25 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 		 if (node instanceof SToken)
 		 {
 			 jsonWriterNodes.key(JSON_COLOR);
-			 jsonWriterNodes.value(TOK_COLOR_VALUE);
+			 	jsonWriterNodes.object();
+			 	jsonWriterNodes.key(JSON_COLOR_BACKGROUND);
+			 	jsonWriterNodes.value(TOK_COLOR_VALUE);
+			 	if (highlightingColor != null){
+			 		jsonWriterNodes.key(JSON_COLOR_BORDER);
+				 	jsonWriterNodes.value(highlightingColor);
+			 		
+			 	}
+			 	else{
+			 		jsonWriterNodes.key(JSON_COLOR_BORDER);
+				 	jsonWriterNodes.value(TOK_BORDER_COLOR_VALUE);
+			 	}
+			 	jsonWriterNodes.endObject();
+			 	
+			 if (highlightingColor != null){
+				 jsonWriterNodes.key(JSON_BORDER_WIDTH);
+				 jsonWriterNodes.value(HIGHLIGHTING_BORDER_WIDTH);
+			 }
+			 	
 			 jsonWriterNodes.key(JSON_X);
 			 jsonWriterNodes.value((xPosition++)*NODE_DIST);
 			 jsonWriterNodes.key(JSON_PHYSICS);
@@ -1246,11 +1286,30 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 			{
 				 jsonWriterNodes.key(JSON_GROUP);
 				 jsonWriterNodes.value("1");
+				 
 				 jsonWriterNodes.key(JSON_COLOR);
-				 jsonWriterNodes.value(SPAN_COLOR_VALUE);
+					 jsonWriterNodes.object();
+					 	jsonWriterNodes.key(JSON_COLOR_BACKGROUND);
+					 	jsonWriterNodes.value(SPAN_COLOR_VALUE);
+					 	if (highlightingColor != null){
+					 		jsonWriterNodes.key(JSON_COLOR_BORDER);
+						 	jsonWriterNodes.value(highlightingColor);
+					 		
+					 	}
+					 	else{
+					 		jsonWriterNodes.key(JSON_COLOR_BORDER);
+						 	jsonWriterNodes.value(SPAN_BORDER_COLOR_VALUE);
+					 	}
+					 	jsonWriterNodes.endObject();
+					 	
+					 if (highlightingColor != null){
+						 jsonWriterNodes.key(JSON_BORDER_WIDTH);
+						 jsonWriterNodes.value(HIGHLIGHTING_BORDER_WIDTH);
+					 }
+					// jsonWriterNodes.value(SPAN_COLOR_VALUE);
 			}
 			else if (nGroupsId == 1)
-			{
+			{ //TODO why only this attribute?
 				jsonWriterNodes.key(JSON_GROUP);
 				jsonWriterNodes.value("0");
 			}
@@ -1267,23 +1326,31 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 				jsonWriterNodes.key(JSON_GROUP);
 				jsonWriterNodes.value("0");
 				jsonWriterNodes.key(JSON_COLOR);
-				jsonWriterNodes.value(STRUCTURE_COLOR_VALUE);
+				 jsonWriterNodes.object();
+				 	jsonWriterNodes.key(JSON_COLOR_BACKGROUND);
+				 	jsonWriterNodes.value(STRUCTURE_COLOR_VALUE);
+				 	if (highlightingColor != null){
+				 		jsonWriterNodes.key(JSON_COLOR_BORDER);
+					 	jsonWriterNodes.value(highlightingColor);
+				 		
+				 	}
+				 	else{
+				 		jsonWriterNodes.key(JSON_COLOR_BORDER);
+					 	jsonWriterNodes.value(STRUCTURE_BORDER_COLOR_VALUE);
+				 	}
+				 	jsonWriterNodes.endObject();
+				 	
+				 if (highlightingColor != null){
+					 jsonWriterNodes.key(JSON_BORDER_WIDTH);
+					 jsonWriterNodes.value(HIGHLIGHTING_BORDER_WIDTH);
+				 }
+				//jsonWriterNodes.value(STRUCTURE_COLOR_VALUE);
 			}
 			//initial x-value in center
 			 jsonWriterNodes.key(JSON_X);
 			 jsonWriterNodes.value((nTokens/2)*NODE_DIST);
 	
 		}	
-		//font highlighting
-		String fontColor;
-		if (styleImporter != null && (fontColor = styleImporter.getFontColor(node))!= null)
-		{
-			jsonWriterNodes.key(JSON_FONT);
-				 jsonWriterNodes.object();
-				 jsonWriterNodes.key(JSON_FONT_COLOR);		 
-				 jsonWriterNodes.value(fontColor);
-				 jsonWriterNodes.endObject();
-		};
 		
 		 
 		jsonWriterNodes.endObject();	
@@ -1298,10 +1365,23 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 		 
 	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation) throws IOException
 	{
+			  // get class of fromNode
+			String edgeColor  = null;
+			 if (fromNode instanceof SToken){
+				 edgeColor = TOK_BORDER_COLOR_VALUE;
+			 }
+			 else if (fromNode instanceof SSpan){
+				 edgeColor = SPAN_BORDER_COLOR_VALUE;
+			 }
+			 else if (fromNode instanceof SStructure){
+				 edgeColor = STRUCTURE_BORDER_COLOR_VALUE;
+			 }
+			 
+			 
 			  jsonWriterEdges.object();
-			  jsonWriterEdges.key("from");
+			  jsonWriterEdges.key(JSON_EDGE_FROM);
 			  jsonWriterEdges.value(fromNode.getPath().fragment());
-			  jsonWriterEdges.key("to");
+			  jsonWriterEdges.key(JSON_EDGE_TO);
 			  jsonWriterEdges.value(toNode.getPath().fragment());
 
 				  
@@ -1323,19 +1403,26 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 						   i++;
 					   }
 					   
-					   jsonWriterEdges.key("label");
+					   jsonWriterEdges.key(JSON_LABEL);
 					   jsonWriterEdges.value(allLabels);
+					  
 				   }
+				  
+		    jsonWriterEdges.key(JSON_WIDTH);
+		    jsonWriterEdges.value(EDGE_WIDTH);	  
+		    if (edgeColor != null){
+		    	jsonWriterEdges.key(JSON_COLOR);
+		    	jsonWriterEdges.value(edgeColor);
+		    }
+		   
 			 
 			if (relation instanceof SPointingRelation){			  
-				 jsonWriterEdges.key(JSON_WIDTH); 
-				 jsonWriterEdges.value("2");
 				 jsonWriterEdges.key(JSON_SMOOTH); 
 				  	jsonWriterEdges.object();
 				    jsonWriterEdges.key(JSON_TYPE); 
-				  	jsonWriterEdges.value("curvedCW");
+				  	jsonWriterEdges.value(JSON_EDGE_TYPE_VALUE);
 				  	jsonWriterEdges.key(JSON_ROUNDNESS); 
-				  	jsonWriterEdges.value("0.95");
+				  	jsonWriterEdges.value(JSON_ROUNDNESS_VALUE);
 				    jsonWriterEdges.endObject();
 			  }
 			  
