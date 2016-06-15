@@ -46,38 +46,33 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		}
 		final List<SNode> templateRoots = templateGraph.getRoots();
 		final List<SNode> otherRoots = otherGraph.getRoots();
+		boolean isIsomorph = true;
 		if (SaltUtil.isNotNullOrEmpty(otherRoots) && SaltUtil.isNotNullOrEmpty(templateRoots)) {
 			final List<SNode> remainingOtherNodes = new ArrayList<>(templateGraph.getCorpora().size() + templateGraph.getDocuments().size());
 			remainingOtherNodes.addAll(otherGraph.getCorpora());
 			remainingOtherNodes.addAll(otherGraph.getDocuments());
 
 			for (SNode templateRoot : templateRoots) {
+				boolean hasPartner = false;
 				for (SNode otherRoot : otherRoots) {
-					boolean isIsomorph = true;
 					// check whether both data sources have the same id
 					Set<Difference> subDiffs = new HashSet<Difference>();
 					compareIdentifiableElements(templateRoot, otherRoot, subDiffs);
-					if (subDiffs.size() > 0) {
-						if (!diffsRequested) {
-							break;
-						}
-						isIsomorph = false;
-						addDifference(templateRoot, otherRoot, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
-					}
 					// check whether both data sources have the same labels
-					subDiffs = new HashSet<Difference>();
 					compareAnnotationContainers(templateRoot, otherRoot, subDiffs);
-					if (subDiffs.size() > 0) {
-						if (!diffsRequested) {
-							break;
-						}
-						isIsomorph = false;
-						addDifference(templateRoot, otherRoot, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
-					}
-					if (isIsomorph) {
+					if (subDiffs.isEmpty()) {
 						getIsoNodes().put(templateRoot, otherRoot);
 						remainingOtherNodes.remove(otherRoot);
+						hasPartner = true;
+						break;
 					}
+				}
+				if (!hasPartner) {
+					if (!diffsRequested) {
+						return false;
+					}
+					addDifference(templateRoot, null, null, DIFF_TYPES.NODE_MISSING, null);
+					isIsomorph = false;
 				}
 			}
 
@@ -99,7 +94,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 				return false;
 			}
 		}
-		return true;
+		return isIsomorph;
 	}
 
 	/**
@@ -174,19 +169,21 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode templateNode, SRelation sRelation, SNode fromNode, long order) {
 			if (fromNode != null && templateNode != null) {
 				final SNode otherParent = getIsoNodes().get(fromNode);
-				final List<SNode> otherChilds = otherGraph.getChildren(otherParent, null);
 				boolean hasFoundNode = false;
-				for (SNode otherChild : otherChilds) {
-					if (templateNode.getClass().equals(otherChild.getClass()))
-						if (compareIdentifiableElements(templateNode, otherChild, null)) {
-							if (compareAnnotationContainers(templateNode, otherChild, null)) {
-								// found matching child
-								getIsoNodes().put(templateNode, otherChild);
-								remainingOtherNodes.remove(otherChild);
-								hasFoundNode = true;
-								break;
+				if (otherParent != null) {
+					final List<SNode> otherChilds = otherGraph.getChildren(otherParent, null);
+					for (SNode otherChild : otherChilds) {
+						if (templateNode.getClass().equals(otherChild.getClass()))
+							if (compareIdentifiableElements(templateNode, otherChild, null)) {
+								if (compareAnnotationContainers(templateNode, otherChild, null)) {
+									// found matching child
+									getIsoNodes().put(templateNode, otherChild);
+									remainingOtherNodes.remove(otherChild);
+									hasFoundNode = true;
+									break;
+								}
 							}
-						}
+					}
 				}
 				if (!hasFoundNode) {
 					addDifference(templateNode, null, null, DIFF_TYPES.NODE_MISSING, null);

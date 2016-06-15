@@ -122,6 +122,6 @@ public class CorpusStructureDiffTest {
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4"));
 		
 		assertThat(SaltUtil.compare(template).with(other).andCheckIsomorphie()).isFalse();
-		assertThat(SaltUtil.compare(template).with(other).andFindDiffs()).hasSize(1);
+		assertThat(SaltUtil.compare(template).with(other).andFindDiffs()).hasSize(3);
 	}
 }
