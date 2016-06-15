@@ -38,8 +38,8 @@ public class CorpusStructureDiffTest {
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3"));
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4"));
 		
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isTrue();
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).isEmpty();
+		assertThat(SaltUtil.compare(template).with(other).andCheckIsomorphie()).isTrue();
+		assertThat(SaltUtil.compare(template).with(other).andFindDiffs()).isEmpty();
 	}
 	
 	@Test
@@ -54,8 +54,8 @@ public class CorpusStructureDiffTest {
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3")).createDocumentGraph();
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4")).createDocumentGraph().createTextualDS("sample text");
 		
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isTrue();
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).isEmpty();
+		assertThat(SaltUtil.compare(template).with(other).andCheckIsomorphie()).isTrue();
+		assertThat(SaltUtil.compare(template).with(other).andFindDiffs()).isEmpty();
 	}
 	
 	@Test
@@ -70,8 +70,8 @@ public class CorpusStructureDiffTest {
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3")).createDocumentGraph().createTextualDS("sample text");
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4")).createDocumentGraph();
 		
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isFalse();
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).hasSize(4);
+		assertThat(SaltUtil.compare(template).with(other).andCheckIsomorphie()).isFalse();
+		assertThat(SaltUtil.compare(template).with(other).andFindDiffs()).hasSize(4);
 	}
 	
 	@Test
@@ -86,8 +86,8 @@ public class CorpusStructureDiffTest {
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3"));
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4"));
 		
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isFalse();
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).hasSize(1);
+		assertThat(SaltUtil.compare(template).with(other).andCheckIsomorphie()).isFalse();
+		assertThat(SaltUtil.compare(template).with(other).andFindDiffs()).hasSize(1);
 	}
 
 	@Test
@@ -104,8 +104,8 @@ public class CorpusStructureDiffTest {
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4"));
 		other.createDocument(URI.createURI("/corpus4/corpus5/document5"));
 		
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isTrue();
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).isEmpty();
+		assertThat(SaltUtil.compare(template).with(other).andCheckIsomorphie()).isTrue();
+		assertThat(SaltUtil.compare(template).with(other).andFindDiffs()).isEmpty();
 	}
 	
 	@Test
@@ -121,7 +121,7 @@ public class CorpusStructureDiffTest {
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3"));
 		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4"));
 		
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isFalse();
-		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).hasSize(1);
+		assertThat(SaltUtil.compare(template).with(other).andCheckIsomorphie()).isFalse();
+		assertThat(SaltUtil.compare(template).with(other).andFindDiffs()).hasSize(1);
 	}
 }

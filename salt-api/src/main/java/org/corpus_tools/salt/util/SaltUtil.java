@@ -1142,7 +1142,7 @@ public class SaltUtil {
 	 * @param list
 	 * @return
 	 */
-	public static <T> boolean isNullOrEmpty(Collection<T> collection) {
+	public static <T> boolean isNullOrEmpty(final Collection<T> collection) {
 	    return collection == null || collection.isEmpty();
 	}
 	/**
@@ -1150,7 +1150,7 @@ public class SaltUtil {
 	 * @param list
 	 * @return
 	 */
-	public static <T> boolean isNotNullOrEmpty(Collection<T> collection) {
+	public static <T> boolean isNotNullOrEmpty(final Collection<T> collection) {
 	    return !isNullOrEmpty(collection);
 	}
 	
@@ -1159,7 +1159,7 @@ public class SaltUtil {
 	 * @param element Salt element
 	 * @return true, when Salt element is a part of the corpus structure, false otherwise
 	 */
-	public static boolean belongsToCorpusStructure(Object element) {
+	public static boolean belongsToCorpusStructure(final Object element) {
 		if (element == null) {
 			return false;
 		} else if (element instanceof SCorpusGraph) {

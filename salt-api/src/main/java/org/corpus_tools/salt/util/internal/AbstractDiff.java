@@ -228,10 +228,16 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 * @param anno
 	 * @return
 	 */
-	private boolean ignoreWhenNameAndNameShouldBeIgnored(SAbstractAnnotation anno) {
+	private boolean ignoreWhenNameAndNameShouldBeIgnored(final SAbstractAnnotation anno) {
+		if (anno == null) {
+			return true;
+		}
 		if (anno instanceof SFeature) {
-			if (options.get(DiffOptions.OPTION_IGNORE_NAME)) {
-				if (SaltUtil.FEAT_NAME_QNAME.equals(anno.getQName())) {
+			if (SaltUtil.FEAT_NAME_QNAME.equals(anno.getQName())) {
+				final boolean belongsToCorpusStructure = SaltUtil.belongsToCorpusStructure(anno.getContainer());
+				if (belongsToCorpusStructure && options.get(DiffOptions.OPTION_IGNORE_CORPUS_STRUCTURE_NAME)) {
+					return true;
+				} else if (!belongsToCorpusStructure && options.get(DiffOptions.OPTION_IGNORE_NAME)) {
 					return true;
 				}
 			}

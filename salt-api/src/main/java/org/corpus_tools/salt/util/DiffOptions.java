@@ -113,7 +113,7 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 		put(OPTION_IGNORE_FEATURES, false);
 		put(OPTION_IGNORE_ID, true);
 		put(OPTION_IGNORE_NAME, true);
-		put(OPTION_IGNORE_CORPUS_STRUCTURE_NAME, true);
+		put(OPTION_IGNORE_CORPUS_STRUCTURE_NAME, false);
 		put(OPTION_IGNORE_LAYER, false);
 	}
 
