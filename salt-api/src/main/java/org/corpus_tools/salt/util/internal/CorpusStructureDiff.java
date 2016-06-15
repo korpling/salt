@@ -119,7 +119,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 					}
 					if (templateDoc.getDocumentGraph() != null && otherDoc.getDocumentGraph() != null) {
 						boolean isIsomorph = false;
-						if (diffsRequested) {
+						if (!diffsRequested) {
 							isIsomorph = SaltUtil.compare(templateDoc.getDocumentGraph()).with(otherDoc.getDocumentGraph()).useOptions(options).andCheckIsomorphie();
 							if (!isIsomorph) {
 								return false;

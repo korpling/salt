@@ -228,7 +228,7 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 * @param anno
 	 * @return
 	 */
-	private boolean ignoreWhenNameAndNameShouldBeIgnored(final SAbstractAnnotation anno) {
+	private boolean ignoreAbstractAnnotation(final SAbstractAnnotation anno) {
 		if (anno == null) {
 			return true;
 		}
@@ -240,6 +240,9 @@ public abstract class AbstractDiff<G extends SGraph> {
 				} else if (!belongsToCorpusStructure && options.get(DiffOptions.OPTION_IGNORE_NAME)) {
 					return true;
 				}
+			}
+			else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
+				return true;
 			}
 		}
 		return false;
@@ -263,7 +266,7 @@ public abstract class AbstractDiff<G extends SGraph> {
 		final Set<SAbstractAnnotation> remainingLabels = new HashSet<>();
 		while (otherIterator.hasNext()) {
 			final SAbstractAnnotation anno = otherIterator.next();
-			if (ignoreWhenNameAndNameShouldBeIgnored(anno)) {
+			if (ignoreAbstractAnnotation(anno)) {
 				continue;
 			}
 			remainingLabels.add(anno);
@@ -274,7 +277,7 @@ public abstract class AbstractDiff<G extends SGraph> {
 		while (templateIterator.hasNext()) {
 			final SAbstractAnnotation templateAnno = templateIterator.next();
 
-			if (ignoreWhenNameAndNameShouldBeIgnored(templateAnno)) {
+			if (ignoreAbstractAnnotation(templateAnno)) {
 				continue;
 			}
 			final SAbstractAnnotation otherAnno = (SAbstractAnnotation) other.getLabel(templateAnno.getQName());
@@ -290,7 +293,7 @@ public abstract class AbstractDiff<G extends SGraph> {
 					subDiffs.add(new Difference(templateAnno, otherAnno, null, DIFF_TYPES.LABEL_VALUE_DIFFERING));
 					retVal = false;
 				} else {
-					return (false);
+					return false;
 				}
 			} else {
 				remainingLabels.remove(otherAnno);
