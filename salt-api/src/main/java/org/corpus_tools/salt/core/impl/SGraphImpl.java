@@ -39,7 +39,6 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.util.SaltUtil;
-import org.corpus_tools.salt.util.TraverseFluent;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 

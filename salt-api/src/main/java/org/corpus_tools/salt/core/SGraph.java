@@ -22,7 +22,6 @@ import java.util.List;
 import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
-import org.corpus_tools.salt.util.TraverseFluent;
 
 public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, SAnnotationContainer, SNamedElement, SPathElement {
 
