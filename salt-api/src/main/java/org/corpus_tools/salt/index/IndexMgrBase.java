@@ -21,7 +21,10 @@ public abstract class IndexMgrBase implements Serializable {
 		
 		public IndexHolder(IndexID<K,V> indexId,
 				int expectedKeys, int expectedValuesPerKey) {
-			Preconditions.checkNotNull(indexId);
+			
+			if (indexId== null){
+				throw new IllegalArgumentException("Cannot create Index with empty index ID. ");
+			}
 
 			this.indexId = indexId;
 			

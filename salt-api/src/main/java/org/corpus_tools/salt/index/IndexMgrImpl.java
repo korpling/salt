@@ -31,7 +31,7 @@ import com.google.common.collect.Multimap;
 @SuppressWarnings("serial")
 public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 	private final ReadWriteLock lock = new ReentrantReadWriteLock();
-	
+
 	private final boolean threadSafe;
 
 	public IndexMgrImpl() {
