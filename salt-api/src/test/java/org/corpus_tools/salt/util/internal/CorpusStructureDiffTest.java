@@ -2,6 +2,7 @@ package org.corpus_tools.salt.util.internal;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpusGraph;
+import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
@@ -39,6 +40,38 @@ public class CorpusStructureDiffTest {
 		
 		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isTrue();
 		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).isEmpty();
+	}
+	
+	@Test
+	public void whenTwoCorpusStructuresWithDocumentsAreIdentical_thenTheyAreIsomorphAndHaveNoDifferences(){
+		template.createDocument(URI.createURI("/corpus1/corpus2/document1")).createDocumentGraph();
+		template.createDocument(URI.createURI("/corpus1/corpus2/document2")).createDocumentGraph().createTextualDS("sample text");
+		template.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3")).createDocumentGraph();
+		template.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4")).createDocumentGraph().createTextualDS("sample text");
+		
+		other.createDocument(URI.createURI("/corpus1/corpus2/document1")).createDocumentGraph();
+		other.createDocument(URI.createURI("/corpus1/corpus2/document2")).createDocumentGraph().createTextualDS("sample text");
+		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3")).createDocumentGraph();
+		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4")).createDocumentGraph().createTextualDS("sample text");
+		
+		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isTrue();
+		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).isEmpty();
+	}
+	
+	@Test
+	public void whenTwoCorpusStructuresAreIdenticalButDocumentStructuresDont_thenTheyAreNotIsomorphAndHaveDifferences(){
+		template.createDocument(URI.createURI("/corpus1/corpus2/document1")).createDocumentGraph();
+		template.createDocument(URI.createURI("/corpus1/corpus2/document2")).createDocumentGraph().createTextualDS("sample text");
+		template.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3")).createDocumentGraph();
+		template.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4")).createDocumentGraph().createTextualDS("sample text");
+		
+		other.createDocument(URI.createURI("/corpus1/corpus2/document1")).createDocumentGraph().createTextualDS("sample text");
+		other.createDocument(URI.createURI("/corpus1/corpus2/document2")).createDocumentGraph();
+		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3")).createDocumentGraph().createTextualDS("sample text");
+		other.createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4")).createDocumentGraph();
+		
+		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andCheckIsomorphie()).isFalse();
+		assertThat(SaltUtil.compare(template).with(other).useOption(DiffOptions.OPTION_IGNORE_NAME, false).andFindDiffs()).hasSize(4);
 	}
 	
 	@Test

@@ -5,6 +5,11 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.corpus_tools.salt.common.SCorpus;
+import org.corpus_tools.salt.common.SCorpusDocumentRelation;
+import org.corpus_tools.salt.common.SCorpusGraph;
+import org.corpus_tools.salt.common.SCorpusRelation;
+import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
@@ -217,6 +222,24 @@ public abstract class AbstractDiff<G extends SGraph> {
 	}
 
 	/**
+	 * Returns true, when anno is a name feature and if the name feature should
+	 * be ignored.
+	 * 
+	 * @param anno
+	 * @return
+	 */
+	private boolean ignoreWhenNameAndNameShouldBeIgnored(SAbstractAnnotation anno) {
+		if (anno instanceof SFeature) {
+			if (options.get(DiffOptions.OPTION_IGNORE_NAME)) {
+				if (SaltUtil.FEAT_NAME_QNAME.equals(anno.getQName())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Checks all {@link SAbstractAnnotation}s in both iterators, whether each
 	 * one has a potential matching partner in the other iterator.
 	 * 
@@ -234,12 +257,8 @@ public abstract class AbstractDiff<G extends SGraph> {
 		final Set<SAbstractAnnotation> remainingLabels = new HashSet<>();
 		while (otherIterator.hasNext()) {
 			final SAbstractAnnotation anno = otherIterator.next();
-			if (anno instanceof SFeature) {
-				if (options.get(DiffOptions.OPTION_IGNORE_NAME)) {
-					if (SaltUtil.FEAT_NAME_QNAME.equals(anno.getQName())) {
-						continue;
-					}
-				}
+			if (ignoreWhenNameAndNameShouldBeIgnored(anno)) {
+				continue;
 			}
 			remainingLabels.add(anno);
 		}
@@ -249,12 +268,8 @@ public abstract class AbstractDiff<G extends SGraph> {
 		while (templateIterator.hasNext()) {
 			final SAbstractAnnotation templateAnno = templateIterator.next();
 
-			if (templateAnno instanceof SFeature) {
-				if (options.get(DiffOptions.OPTION_IGNORE_NAME)) {
-					if (SaltUtil.FEAT_NAME_QNAME.equals(templateAnno.getQName())) {
-						continue;
-					}
-				}
+			if (ignoreWhenNameAndNameShouldBeIgnored(templateAnno)) {
+				continue;
 			}
 			final SAbstractAnnotation otherAnno = (SAbstractAnnotation) other.getLabel(templateAnno.getQName());
 			if (otherAnno == null) {

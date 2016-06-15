@@ -78,6 +78,11 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 	 * not produce any differences.
 	 */
 	public static final String OPTION_IGNORE_NAME = "ignoreName";
+	
+	/**
+	 * When true, differences in names of elements in corpus structure are ignored.
+	 */
+	public static final String OPTION_IGNORE_CORPUS_STRUCTURE_NAME = "ignoreCorpusStructureName";
 	/**
 	 * When true, layers will not be checked when computing isomorphie and
 	 * differences.
@@ -108,6 +113,7 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 		put(OPTION_IGNORE_FEATURES, false);
 		put(OPTION_IGNORE_ID, true);
 		put(OPTION_IGNORE_NAME, true);
+		put(OPTION_IGNORE_CORPUS_STRUCTURE_NAME, true);
 		put(OPTION_IGNORE_LAYER, false);
 	}
 
