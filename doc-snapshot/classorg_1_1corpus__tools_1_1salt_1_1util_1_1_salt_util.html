@@ -33,7 +33,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.1.0-SNAPSHOT</span>
+   &#160;<span id="projectnumber">3.2.0-SNAPSHOT</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -126,8 +126,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:abfb432604abfa915b80392b10f68b249"><td class="memItemLeft" align="right" valign="top">static Pair&lt; String, String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#abfb432604abfa915b80392b10f68b249">splitQName</a> (String qName)</td></tr>
 <tr class="memdesc:abfb432604abfa915b80392b10f68b249"><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits the passed qName into a namespace and a name.  <a href="#abfb432604abfa915b80392b10f68b249">More...</a><br /></td></tr>
 <tr class="separator:abfb432604abfa915b80392b10f68b249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0db3f30cd17f9fa3d64b79198004279"><td class="memItemLeft" align="right" valign="top">static URI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#ac0db3f30cd17f9fa3d64b79198004279">createSaltURI</a> (URI path)</td></tr>
+<tr class="memdesc:ac0db3f30cd17f9fa3d64b79198004279"><td class="mdescLeft">&#160;</td><td class="mdescRight">When specified corpus path already contains salt schema, then specified corpus path is returned.  <a href="#ac0db3f30cd17f9fa3d64b79198004279">More...</a><br /></td></tr>
+<tr class="separator:ac0db3f30cd17f9fa3d64b79198004279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4685549cc758a9c00ba11b2bc4323ed2"><td class="memItemLeft" align="right" valign="top">static URI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a4685549cc758a9c00ba11b2bc4323ed2">createSaltURI</a> (String path)</td></tr>
-<tr class="memdesc:a4685549cc758a9c00ba11b2bc4323ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a Salt URI from the passed path.  <a href="#a4685549cc758a9c00ba11b2bc4323ed2">More...</a><br /></td></tr>
+<tr class="memdesc:a4685549cc758a9c00ba11b2bc4323ed2"><td class="mdescLeft">&#160;</td><td class="mdescRight">When specified corpus path already contains salt schema, then specified corpus path is returned.  <a href="#a4685549cc758a9c00ba11b2bc4323ed2">More...</a><br /></td></tr>
 <tr class="separator:a4685549cc758a9c00ba11b2bc4323ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1ced28e88cefd160078fdc64ad17eb9"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#ab1ced28e88cefd160078fdc64ad17eb9">getGlobalId</a> (<a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_identifier.html">Identifier</a> id)</td></tr>
 <tr class="memdesc:ab1ced28e88cefd160078fdc64ad17eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a global ID for the passed object (either if <a class="el" href="">Identifier</a> belongs to <a class="el" href="">SDocument</a> or <a class="el" href="">SCorpus</a> object).  <a href="#ab1ced28e88cefd160078fdc64ad17eb9">More...</a><br /></td></tr>
@@ -183,9 +186,24 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a1a1bbe01dbc605a0a5512eba359e9474"><td class="memItemLeft" align="right" valign="top">static Collection&lt; String[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a1a1bbe01dbc605a0a5512eba359e9474">unmarshalAnnotation</a> (String marshalledString)</td></tr>
 <tr class="memdesc:a1a1bbe01dbc605a0a5512eba359e9474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits an annotation string of the form 'namespace::name=value (,namespace::name=value)* into a collection of (namespace, name, value).  <a href="#a1a1bbe01dbc605a0a5512eba359e9474">More...</a><br /></td></tr>
 <tr class="separator:a1a1bbe01dbc605a0a5512eba359e9474"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a567ed33f2842df1aaf49c6133b5c62d7"><td class="memItemLeft" align="right" valign="top">static&lt; G extends <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html">SGraph</a> &gt; Builder&lt; G &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a567ed33f2842df1aaf49c6133b5c62d7">compare</a> (G templateGraph)</td></tr>
+<tr class="memdesc:a567ed33f2842df1aaf49c6133b5c62d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a builder to have a fluent api for comparing two <a class="el" href="">SDocumentGraph</a>s or <a class="el" href="">SCorpusGraph</a>s.  <a href="#a567ed33f2842df1aaf49c6133b5c62d7">More...</a><br /></td></tr>
+<tr class="separator:a567ed33f2842df1aaf49c6133b5c62d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4501cf23e1c0285181ed172e94e896d5"><td class="memItemLeft" align="right" valign="top">static&lt; T &gt; boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a4501cf23e1c0285181ed172e94e896d5">isNullOrEmpty</a> (final Collection&lt; T &gt; collection)</td></tr>
+<tr class="memdesc:a4501cf23e1c0285181ed172e94e896d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a collection is null or empty.  <a href="#a4501cf23e1c0285181ed172e94e896d5">More...</a><br /></td></tr>
+<tr class="separator:a4501cf23e1c0285181ed172e94e896d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82bc17a6593d515b760ebf0859d5e5c7"><td class="memItemLeft" align="right" valign="top">static&lt; T &gt; boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a82bc17a6593d515b760ebf0859d5e5c7">isNotNullOrEmpty</a> (final Collection&lt; T &gt; collection)</td></tr>
+<tr class="memdesc:a82bc17a6593d515b760ebf0859d5e5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a collection is not null nor empty.  <a href="#a82bc17a6593d515b760ebf0859d5e5c7">More...</a><br /></td></tr>
+<tr class="separator:a82bc17a6593d515b760ebf0859d5e5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad467aff79a955f32bb04c4f47463e3e5"><td class="memItemLeft" align="right" valign="top">static boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#ad467aff79a955f32bb04c4f47463e3e5">belongsToCorpusStructure</a> (final Object element)</td></tr>
+<tr class="memdesc:ad467aff79a955f32bb04c4f47463e3e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether specified Salt element is part of the corpus structure.  <a href="#ad467aff79a955f32bb04c4f47463e3e5">More...</a><br /></td></tr>
+<tr class="separator:ad467aff79a955f32bb04c4f47463e3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
+<tr class="memitem:a31f55c195a6d3495c7ef802263778d75"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a31f55c195a6d3495c7ef802263778d75">SALT_SCHEME</a> = &quot;salt&quot;</td></tr>
+<tr class="memdesc:a31f55c195a6d3495c7ef802263778d75"><td class="mdescLeft">&#160;</td><td class="mdescRight">The URI scheme for corpus pathes.  <a href="#a31f55c195a6d3495c7ef802263778d75">More...</a><br /></td></tr>
+<tr class="separator:a31f55c195a6d3495c7ef802263778d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07e77eb0f85b6a80dd501590d66e7834"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a07e77eb0f85b6a80dd501590d66e7834">FILE_ENDING_SALT_XML</a> = &quot;salt&quot;</td></tr>
 <tr class="memdesc:a07e77eb0f85b6a80dd501590d66e7834"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ending of a Salt XML file.  <a href="#a07e77eb0f85b6a80dd501590d66e7834">More...</a><br /></td></tr>
 <tr class="separator:a07e77eb0f85b6a80dd501590d66e7834"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -357,6 +375,69 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><a class=
 <div class="textblock"><p>This class contains a set of helpful methods. </p>
 <dl class="section author"><dt>Author</dt><dd>florian </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="ad467aff79a955f32bb04c4f47463e3e5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static boolean org.corpus_tools.salt.util.SaltUtil.belongsToCorpusStructure </td>
+          <td>(</td>
+          <td class="paramtype">final Object&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether specified Salt element is part of the corpus structure. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>Salt element </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true, when Salt element is a part of the corpus structure, false otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a567ed33f2842df1aaf49c6133b5c62d7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static &lt;G extends <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html">SGraph</a>&gt; Builder&lt;G&gt; org.corpus_tools.salt.util.SaltUtil.compare </td>
+          <td>(</td>
+          <td class="paramtype">G&#160;</td>
+          <td class="paramname"><em>templateGraph</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a builder to have a fluent api for comparing two <a class="el" href="">SDocumentGraph</a>s or <a class="el" href="">SCorpusGraph</a>s. </p>
+<pre>
+compare(graph1).with(graph2).useOption(key, value).andCheckIsomorphie().
+or
+compare(graph1).with(graph2).useOption(key, value).andFindDiffs().
+</pre> 
+</div>
+</div>
 <a class="anchor" id="acd607d2423147ce732876ce11ed5b922"></a>
 <div class="memitem">
 <div class="memproto">
@@ -400,6 +481,40 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><a class=
 
 </div>
 </div>
+<a class="anchor" id="ac0db3f30cd17f9fa3d64b79198004279"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static URI org.corpus_tools.salt.util.SaltUtil.createSaltURI </td>
+          <td>(</td>
+          <td class="paramtype">URI&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>When specified corpus path already contains salt schema, then specified corpus path is returned. </p>
+<p>Otherwise a absolute new corpus path which is equal to specified corpus path is returned, which is augmented for salt scheme. When specified corpusPath is null, null is returned.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a4685549cc758a9c00ba11b2bc4323ed2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -422,7 +537,8 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><a class=
 </table>
 </div><div class="memdoc">
 
-<p>Creates a Salt URI from the passed path. </p>
+<p>When specified corpus path already contains salt schema, then specified corpus path is returned. </p>
+<p>Otherwise a absolute new corpus path which is equal to specified corpus path is returned, which is augmented for salt scheme. When specified corpusPath is null, null is returned.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>path to an element </td></tr>
@@ -508,6 +624,72 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><a class=
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String value for global id, if one is given. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a82bc17a6593d515b760ebf0859d5e5c7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static &lt;T&gt; boolean org.corpus_tools.salt.util.SaltUtil.isNotNullOrEmpty </td>
+          <td>(</td>
+          <td class="paramtype">final Collection&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>collection</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether a collection is not null nor empty. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4501cf23e1c0285181ed172e94e896d5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static &lt;T&gt; boolean org.corpus_tools.salt.util.SaltUtil.isNullOrEmpty </td>
+          <td>(</td>
+          <td class="paramtype">final Collection&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>collection</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks whether a collection is null or empty. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -1332,13 +1514,35 @@ static final String&#160;</td><td class="memItemRight" valign="bottom"><a class=
 
 </div>
 </div>
+<a class="anchor" id="a31f55c195a6d3495c7ef802263778d75"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String org.corpus_tools.salt.util.SaltUtil.SALT_SCHEME = &quot;salt&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The URI scheme for corpus pathes. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>org</b></li><li class="navelem"><b>corpus_tools</b></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt.html">salt</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1util.html">util</a></li><li class="navelem"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html">SaltUtil</a></li>
-    <li class="footer">Generated on Wed Jun 15 2016 15:41:50 for Salt by
+    <li class="footer">Generated on Thu Jun 16 2016 00:07:53 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

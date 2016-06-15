@@ -33,7 +33,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.1.0-SNAPSHOT</span>
+   &#160;<span id="projectnumber">3.2.0-SNAPSHOT</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -173,6 +173,29 @@ List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s
 <tr class="memdesc:a1775f28cf7a905c531774000df7c4627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns all leaf nodes, if exist.A leaf node is a node, which has no outgoing relations.<dl class="section return"><dt>Returns</dt><dd>list of nodes being leafs in the given graph.</dd></dl>
  <br /></td></tr>
 <tr class="separator:a1775f28cf7a905c531774000df7c4627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6281edac016d2ba8de1b650955ca5d4b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6281edac016d2ba8de1b650955ca5d4b"></a>
+List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html">SNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a6281edac016d2ba8de1b650955ca5d4b">getChildren</a> (<a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html">SNode</a> parent, <a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html">SALT_TYPE</a> relationType)</td></tr>
+<tr class="memdesc:a6281edac016d2ba8de1b650955ca5d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of nodes in base document.The returned nodes are equivalents to the direct children of the passed parent node. The children are retrieved via traversing of relations of the passed <a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html">SALT_TYPE</a>.<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>node to who the children are retrieved </td></tr>
+    <tr><td class="paramname">relationType</td><td>type of relations to be traversed, if relationType is null, all relations are used </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a list of children nodes, or an empty list</dd></dl>
+ <br /></td></tr>
+<tr class="separator:a6281edac016d2ba8de1b650955ca5d4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a775989a795177b6657939ba6a57b05be"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html">SNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a775989a795177b6657939ba6a57b05be">getSharedParent</a> (List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html">SNode</a> &gt; children, <a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html">SALT_TYPE</a> nodeType)</td></tr>
+<tr class="memdesc:a775989a795177b6657939ba6a57b05be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of nodes that are the parents of every node in the given base list.Only nodes with the given <a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html">SALT_TYPE</a> will be considered.<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">children</td><td>list of nodes whose parents are looked for </td></tr>
+    <tr><td class="paramname">nodeType</td><td>regarded types of relations </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a list of parents</dd></dl>
+  <a href="#a775989a795177b6657939ba6a57b05be">More...</a><br /></td></tr>
+<tr class="separator:a775989a795177b6657939ba6a57b05be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f9ac9fb3a7b72348225776801655210"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f9ac9fb3a7b72348225776801655210"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a7f9ac9fb3a7b72348225776801655210">traverse</a> (List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html">SNode</a> &gt; startNodes, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#enumorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph_1_1_g_r_a_p_h___t_r_a_v_e_r_s_e___t_y_p_e">GRAPH_TRAVERSE_TYPE</a> traverseType, String traverseId, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_graph_traverse_handler.html">GraphTraverseHandler</a> traverseHandler)</td></tr>
 <tr class="memdesc:a7f9ac9fb3a7b72348225776801655210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverses a graph in the given order traverseType and starts traversing with the given startNodes.When a node is reached, first this method will invoke the method <a class="el" href="">GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_MODE, String, Edge, Node, long)</a> of the given callback handler traverseHandler, second the method <a class="el" href="">GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)</a> is invoked. When a node was left, the method <a class="el" href="">GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)</a> is invoked. When calling these methods, the traverseId will be passed, so that the callback handler knows which traversal is meant. This is helpful, in case of a single callback handler is used for more than one traversal at the same time. This method throws a <a class="el" href="">GraphTraverserException</a> in case of the graph contains a cycle. A cycle means a path containing the same node twice.<dl class="params"><dt>Parameters</dt><dd>
@@ -188,7 +211,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a7f9ac9fb3a7b72348225776801655210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c736ce8c2fb46a24b58cc0a8668f46c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c736ce8c2fb46a24b58cc0a8668f46c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a1c736ce8c2fb46a24b58cc0a8668f46c">traverse</a> (List&lt;?extends <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html">SNode</a> &gt; startNodes, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#enumorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph_1_1_g_r_a_p_h___t_r_a_v_e_r_s_e___t_y_p_e">GRAPH_TRAVERSE_TYPE</a> traverseType, String traverseId, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_graph_traverse_handler.html">GraphTraverseHandler</a> traverseHandler, boolean isCycleSafe)</td></tr>
-<tr class="memdesc:a1c736ce8c2fb46a24b58cc0a8668f46c"><td class="mdescLeft">&#160;</td><td class="mdescRight">{ <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#a902584f83690c2e22131aabeb1f9ded8" title="Traverses a graph in the given order traverseType and starts traversing with the given startNodes...">traverse</a>(EList, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#enumorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph_1_1_g_r_a_p_h___t_r_a_v_e_r_s_e___t_y_p_e" title="The GRAPH_TRAVERSE_TYPE determines the the traversal order. ">GRAPH_TRAVERSE_TYPE</a>, String, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_graph_traverse_handler.html" title="The interface of a callback handler for traversing a Graph object. ">GraphTraverseHandler</a>)} Attention: When isCycleSafe is set to false, this method does not take care about cycles, and it eventually runs into endless loops.startNodesMany="true" traverseHandlerDataType= "de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"  <br /></td></tr>
+<tr class="memdesc:a1c736ce8c2fb46a24b58cc0a8668f46c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverses a graph in the given order traverseType and starts traversing with the given startNodes.When a node is reached, first this method will invoke the method <a class="el" href="">GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_MODE, String, Edge, Node, long)</a> of the given callback handler traverseHandler, second the method <a class="el" href="">GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)</a> is invoked. When a node was left, the method <a class="el" href="">GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)</a> is invoked. When calling these methods, the traverseId will be passed, so that the callback handler knows which traversal is meant. This is helpful, in case of a single callback handler is used for more than one traversal at the same time. This method throws a <a class="el" href="">GraphTraverserException</a> in case of the graph contains a cycle. A cycle means a path containing the same node twice.<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">startNodes</td><td>list of nodes at which the traversal shall start </td></tr>
+    <tr><td class="paramname">traverseType</td><td>type of traversing </td></tr>
+    <tr><td class="paramname">traverseId</td><td>identification for callback handler, in case of more than one traversal is running at the same time with the same callback handler </td></tr>
+    <tr><td class="paramname">traverseHandler</td><td>callback handler, on which the three methods will be invoked </td></tr>
+    <tr><td class="paramname">isCycleSafe</td><td>determines whether cycle safeness chould be checked</td></tr>
+  </table>
+  </dd>
+</dl>
+ <br /></td></tr>
 <tr class="separator:a1c736ce8c2fb46a24b58cc0a8668f46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1ca8ac2d77021432cf8e58921a49639"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#ad1ca8ac2d77021432cf8e58921a49639">removeLabel</a> (String qName)</td></tr>
 <tr class="memdesc:ad1ca8ac2d77021432cf8e58921a49639"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the label having the passed qName.  <a href="#ad1ca8ac2d77021432cf8e58921a49639">More...</a><br /></td></tr>
@@ -796,6 +829,51 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a775989a795177b6657939ba6a57b05be"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html">SNode</a>&gt; org.corpus_tools.salt.core.impl.SGraphImpl.getSharedParent </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html">SNode</a> &gt;&#160;</td>
+          <td class="paramname"><em>children</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html">SALT_TYPE</a>&#160;</td>
+          <td class="paramname"><em>nodeType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a list of nodes that are the parents of every node in the given base list.Only nodes with the given <a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html">SALT_TYPE</a> will be considered.<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">children</td><td>list of nodes whose parents are looked for </td></tr>
+    <tr><td class="paramname">nodeType</td><td>regarded types of relations </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a list of parents</dd></dl>
+ </p>
+<pre>
+for all incoming relations of first child node
+                add targets to sharedparents
+for each child in children
+                for each incomming relation of child
+                        add source node of incomming relation to parent
+                sharedparents= sharedparents ⋂ parents
+</pre> 
+<p>Implements <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#a29c1c5ea572f80e9f7ac36c50a188703">org.corpus_tools.salt.core.SGraph</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a5d888021bb4921027eca91a93fd4c64d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -849,7 +927,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>org</b></li><li class="navelem"><b>corpus_tools</b></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt.html">salt</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1core.html">core</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1core_1_1impl.html">impl</a></li><li class="navelem"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html">SGraphImpl</a></li>
-    <li class="footer">Generated on Wed Jun 15 2016 15:41:49 for Salt by
+    <li class="footer">Generated on Thu Jun 16 2016 00:07:53 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

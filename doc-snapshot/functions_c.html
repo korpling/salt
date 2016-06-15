@@ -33,7 +33,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.1.0-SNAPSHOT</span>
+   &#160;<span id="projectnumber">3.2.0-SNAPSHOT</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -155,20 +155,21 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr_impl.html#a8fab191b88ed08018d71c83825f57e5e">org.corpus_tools.salt.index.IndexMgrImpl</a>
 </li>
 <li>compare()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_s_textual_relation_s_start_comparator.html#a3f65b94b86d38389616dcfc980f48eb7">org.corpus_tools.salt.util.STextualRelationSStartComparator</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a567ed33f2842df1aaf49c6133b5c62d7">org.corpus_tools.salt.util.SaltUtil</a>
+, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_s_textual_relation_s_start_comparator.html#a3f65b94b86d38389616dcfc980f48eb7">org.corpus_tools.salt.util.STextualRelationSStartComparator</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_token_start_comparator.html#a013ab415ec0bbae99e7bfd2b55a474af">org.corpus_tools.salt.util.TokenStartComparator</a>
 </li>
 <li>compareAnnotationContainers()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#a4fec943045368560d281c4486b813c0b">org.corpus_tools.salt.util.internal.Diff</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#a8c505ea34c79793818c1f984e54f942a">org.corpus_tools.salt.util.internal.AbstractDiff&lt; G extends SGraph &gt;</a>
 </li>
 <li>compareIdentifiableElements()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#ade2fb79423c43025cc34fa63c95c8b07">org.corpus_tools.salt.util.internal.Diff</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#ac6011653d47473ab0472c27b1157a69f">org.corpus_tools.salt.util.internal.AbstractDiff&lt; G extends SGraph &gt;</a>
 </li>
 <li>compareLayers()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#a34347da33531758f9a720851ef1c08f2">org.corpus_tools.salt.util.internal.Diff</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_document_structure_diff.html#ad9e2239be228f937a4dd28c808bd5c89">org.corpus_tools.salt.util.internal.DocumentStructureDiff</a>
 </li>
 <li>compareRelations()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#af1c08038872fccba85a5c4731d39f6fd">org.corpus_tools.salt.util.internal.Diff</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_document_structure_diff.html#ae9035644abe3a0cec4f5b43444797521">org.corpus_tools.salt.util.internal.DocumentStructureDiff</a>
 </li>
 <li>container
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#a6cd7337622c8cacd129f2e77cdbf0b1f">org.corpus_tools.salt.graph.impl.LabelImpl</a>
@@ -243,6 +244,10 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <li>createDocument()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a8a3309fd2a769665b17420129202f4e5">org.corpus_tools.salt.common.impl.SCorpusGraphImpl</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html#a4bae5bc1c0ab60990c46f0abc6e34781">org.corpus_tools.salt.common.SCorpusGraph</a>
+</li>
+<li>createDocumentGraph()
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html#aca07536108761bc67cf8956b20bfee33">org.corpus_tools.salt.common.impl.SDocumentImpl</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document.html#a856adf7148e0bfc1794c142d159fae34">org.corpus_tools.salt.common.SDocument</a>
 </li>
 <li>createDocumentStructure()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#a58f8ab369aed86452976e76002f26c3f">org.corpus_tools.salt.samples.SampleGenerator</a>
@@ -361,7 +366,7 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#a8d21f0ab0ae7e58c1a2205b16ee1e3cd">org.corpus_tools.salt.samples.SampleGenerator</a>
 </li>
 <li>createSaltURI()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a4685549cc758a9c00ba11b2bc4323ed2">org.corpus_tools.salt.util.SaltUtil</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#ac0db3f30cd17f9fa3d64b79198004279">org.corpus_tools.salt.util.SaltUtil</a>
 </li>
 <li>createSAnnotation()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#ae09580c0d5eb132370eb050e6ba171fe">org.corpus_tools.salt.extensions.notification.SaltNotificationFactory</a>
@@ -555,7 +560,7 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 </li>
 <li>createStructure()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a92fb8796d083fdda8e8a530c6b54094c">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a4b11de22d5a8b27a0a4b3fb20c1c97e0">org.corpus_tools.salt.common.SDocumentGraph</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a48f7e6b060a417bc734b419032978251">org.corpus_tools.salt.common.SDocumentGraph</a>
 </li>
 <li>createSTypeAnnotation()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a17c5aa4c1b931d8a4eea8d9aad56972a">org.corpus_tools.salt.extensions.notification.SaltNotificationFactory</a>
@@ -584,8 +589,8 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a6fe06324d83c209a11dd7137bea6b43c">org.corpus_tools.salt.common.SDocumentGraph</a>
 </li>
 <li>createToken()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#ab65e2ff48d3ce65061d3d669217996be">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#ae51a37e45eca162813450708037d17ce">org.corpus_tools.salt.common.SDocumentGraph</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a4a75c1cc29aba53bb9d3ecab14feeb8b">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a560d068c81f8dbc03b4b5d2c8f6fcde4">org.corpus_tools.salt.common.SDocumentGraph</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#af346e1ecfa791967ce4b7e20d58438aa">org.corpus_tools.salt.samples.SampleGenerator</a>
 </li>
 <li>createTokenizer()
@@ -593,7 +598,7 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#adc988385c0c54d0e5d6b9df91f54bc35">org.corpus_tools.salt.common.SDocumentGraph</a>
 </li>
 <li>createTokens()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#a81759ba97adc2ccde11ecd0cb1b41834">org.corpus_tools.salt.samples.SampleGenerator</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#abd3b93505ce986069f4cab5f660e6a5a">org.corpus_tools.salt.samples.SampleGenerator</a>
 </li>
 <li>createUntypedParallelData()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1samples_1_1_sample_generator.html#acf87cfb912213e3939925aa6961d0564">org.corpus_tools.salt.samples.SampleGenerator</a>
@@ -604,7 +609,7 @@ $(document).ready(function(){initNavTree('functions_c.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 15 2016 15:41:50 for Salt by
+    <li class="footer">Generated on Thu Jun 16 2016 00:07:53 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

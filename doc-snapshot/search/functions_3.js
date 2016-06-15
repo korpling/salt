@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['diff',['Diff',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#a7eadf13a133e9ef8400ceffdca15ebd3',1,'org::corpus_tools::salt::util::internal::Diff']]],
-  ['diffoptions',['DiffOptions',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_diff_options.html#a19b42f565b9c2c23a80c2ab0c9f709db',1,'org::corpus_tools::salt::util::DiffOptions']]]
+  ['diff',['Diff',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#a7eadf13a133e9ef8400ceffdca15ebd3',1,'org.corpus_tools.salt.util.internal.Diff.Diff(SDocumentGraph template, SDocumentGraph other)'],['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#a5d94c8ea4c34d2cbb7ae62a3e4cf1d5b',1,'org.corpus_tools.salt.util.internal.Diff.Diff(SDocumentGraph template, SDocumentGraph other, Map&lt; String, Boolean &gt; optionMap)'],['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#acd3d05266fce9458645669a4022b058d',1,'org.corpus_tools.salt.util.internal.Diff.Diff(SCorpusGraph template, SCorpusGraph other)'],['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#abbc47cd1010f133420ca992293b618df',1,'org.corpus_tools.salt.util.internal.Diff.Diff(SCorpusGraph template, SCorpusGraph other, Map&lt; String, Boolean &gt; optionMap)']]],
+  ['diffoptions',['DiffOptions',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_diff_options.html#a19b42f565b9c2c23a80c2ab0c9f709db',1,'org::corpus_tools::salt::util::DiffOptions']]],
+  ['documentstructurediff',['DocumentStructureDiff',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_document_structure_diff.html#a5c36abc9e1602389933ca6b4de328230',1,'org::corpus_tools::salt::util::internal::DocumentStructureDiff']]]
 ];

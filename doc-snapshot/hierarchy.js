@@ -4,6 +4,13 @@ var hierarchy =
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationEN", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_e_n.html", null ],
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationFR", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_f_r.html", null ],
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationIT", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_i_t.html", null ],
+    [ "org.corpus_tools.salt.util.internal.AbstractDiff< G extends SGraph >", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html", null ],
+    [ "org.corpus_tools.salt.util.internal.AbstractDiff< SCorpusGraph >", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html", [
+      [ "org.corpus_tools.salt.util.internal.CorpusStructureDiff", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_corpus_structure_diff.html", null ]
+    ] ],
+    [ "org.corpus_tools.salt.util.internal.AbstractDiff< SDocumentGraph >", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html", [
+      [ "org.corpus_tools.salt.util.internal.DocumentStructureDiff", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_document_structure_diff.html", null ]
+    ] ],
     [ "org.corpus_tools.salt.Beta", "namespaceorg_1_1corpus__tools_1_1salt.html#interfaceorg_1_1corpus__tools_1_1salt_1_1_beta", null ],
     [ "org.corpus_tools.salt.common.tokenizer.Clitics", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_clitics.html", null ],
     [ "org.corpus_tools.salt.util.Copyable< T >", "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_copyable.html", [

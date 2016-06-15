@@ -33,7 +33,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.1.0-SNAPSHOT</span>
+   &#160;<span id="projectnumber">3.2.0-SNAPSHOT</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -163,8 +163,8 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_s_annotation_container_helper.html#a0de36705df85531f520e2fa971bdd57f">org.corpus_tools.salt.util.internal.SAnnotationContainerHelper</a>
 </li>
 <li>getChildren()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a67c081c27388851c96b2340155162729">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#ad4bc1f8ea606f51c2d9e41142d5a1c84">org.corpus_tools.salt.common.SDocumentGraph</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a6281edac016d2ba8de1b650955ca5d4b">org.corpus_tools.salt.core.impl.SGraphImpl</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#a6e0fcae344ad38b02e0bd199a44fe88d">org.corpus_tools.salt.core.SGraph</a>
 </li>
 <li>getClitics()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a161d65f6b45b0960163bddb3f66e665d">org.corpus_tools.salt.common.tokenizer.Tokenizer</a>
@@ -207,6 +207,9 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl.html#a68ee65ccb3aeb2aa462670dee6f2e72d">org.corpus_tools.salt.graph.impl.RelationImpl&lt; S extends Node, T extends Node &gt;</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_relation.html#a9122557c541f642dc02c9390b0281c0c">org.corpus_tools.salt.graph.Relation&lt; S extends Node, T extends Node &gt;</a>
 </li>
+<li>getDifferences()
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#a53a13a435bca6a0ba6229a61a0dc37bf">org.corpus_tools.salt.util.internal.AbstractDiff&lt; G extends SGraph &gt;</a>
+</li>
 <li>getDocument()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a9d10adfb2f90757f1b3ddc6b226d6542">org.corpus_tools.salt.common.impl.SCorpusGraphImpl</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a58cfd5b548d41c80dab5edccba18c7b5">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
@@ -241,7 +244,7 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1_salt_factory.html#abdafb57f5f05e860d4ed69165f51d2c0">org.corpus_tools.salt.SaltFactory</a>
 </li>
 <li>getFeature()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl.html#a17ad2da8cc69fdf2855f1ca939e61887">org.corpus_tools.salt.core.impl.SAbstractAnnotationImpl</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_abstract_annotation_impl.html#a937402ef6df1311eb743772c86585810">org.corpus_tools.salt.core.impl.SAbstractAnnotationImpl</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a1bf471f9d1c5ed8f9f55aecab32a7904">org.corpus_tools.salt.core.impl.SGraphImpl</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_layer_impl.html#af4dcfc91d33c8c761dde95c0eb5f57e6">org.corpus_tools.salt.core.impl.SLayerImpl</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_node_impl.html#ae1756325e320d13e5a1eae2f528c30eb">org.corpus_tools.salt.core.impl.SNodeImpl</a>
@@ -308,7 +311,7 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#a9b24e639036bd4a793e120b4f83e35ec">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 </li>
 <li>getIsoNodes()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#a9009c18af821e4cb91a4d1c800bb2395">org.corpus_tools.salt.util.internal.Diff</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#aa46bee1e2548b4611624872987600995">org.corpus_tools.salt.util.internal.AbstractDiff&lt; G extends SGraph &gt;</a>
 </li>
 <li>getJavaType()
 : <a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#ac727297ac15e0ad4af4e986b3a2b9a6e">org.corpus_tools.salt.SALT_TYPE</a>
@@ -431,13 +434,13 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <li>getOverlappedDataSourceSequence()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a244913416c1e385e14b133ef3349000a">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a5c3def3ed6f454babf48dc87ed7599a8">org.corpus_tools.salt.common.SDocumentGraph</a>
-, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#a06f3566332834e748a42bb1bcb515a4f">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
+, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#a10cbff8e846653284880523b87e3341b">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
 </li>
 <li>getOverlappedSTokens()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#a7ffd938db82773d91364b51773907720">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
 </li>
 <li>getOverlappedTokens()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a3f17e12d31fa2f4c9177462409e68c0c">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#af75e3aad36b860fe2dee664a7fb46166">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a16c4c19a5a632005095e46161ea7d52a">org.corpus_tools.salt.common.SDocumentGraph</a>
 </li>
 <li>getPath()
@@ -472,8 +475,8 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <li>getRelations()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a363242aa359de66266f9bb4a0d99e2ca">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a80183b9469016a33fb7d70d548f9d74b">org.corpus_tools.salt.common.SDocumentGraph</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html#a502e758150685570b13ddcef422571cb">org.corpus_tools.salt.graph.Graph&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
-, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#ad549603d79b56beab83b93aab9bbe824">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html#a96a0d198e45eb90291eeeaf524d48a71">org.corpus_tools.salt.graph.Graph&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
+, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#ae3571fcf7aad1b751fe1d6b57b62f3b8">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl.html#a259e64a1be9e5af2d469a0e89258eec5">org.corpus_tools.salt.graph.impl.LayerImpl&lt; N extends Node, R extends Relation&lt; N, N &gt;</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_layer.html#a7c531a50219d6c88cdc1c72fa65c17ab">org.corpus_tools.salt.graph.Layer&lt; N extends Node, R extends Relation&lt; N, N &gt;</a>
 </li>
@@ -496,7 +499,7 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <li>getRootsByRelationType()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a397cf620fe28acdb7127531dae5d8064">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a69c77e3f3369b295c586ac30c04e0c1a">org.corpus_tools.salt.common.SDocumentGraph</a>
-, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#a90374af54f79cd442e0ea6b2ce367ff8">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
+, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#aabd56ca8553a20d9f7ae43ec3beaf7b2">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
 </li>
 <li>getSaltObject()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_handler.html#ae65b2e6b685aa91110cbd422e5b68d4e">org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler</a>
@@ -506,15 +509,15 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html#a6f6381e0cc53f090ea661390f8164f57">org.corpus_tools.salt.common.SCorpusGraph</a>
 </li>
 <li>getSharedParent()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a09051b8b7b80c40f4b6bea4e787f4450">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a23ff3acfbd110495d2c2ecf3d6f5e6ed">org.corpus_tools.salt.common.SDocumentGraph</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a775989a795177b6657939ba6a57b05be">org.corpus_tools.salt.core.impl.SGraphImpl</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_graph.html#a29c1c5ea572f80e9f7ac36c50a188703">org.corpus_tools.salt.core.SGraph</a>
 </li>
 <li>getSortedSTokenByText()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#aca1b39eac278fbfce54553912cac4f53">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#ad9abd631ec051274dcd8c8bdc14c8f1e">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
 </li>
 <li>getSortedTokenByText()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#adbff3575da9ae12811cf76e2151f2834">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#aeadf820ecfc95c77db8b13fd86f0bc16">org.corpus_tools.salt.common.SDocumentGraph</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a7a4eb7b8fc3d9e298b0dd3eaaf8718d2">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#af88f9fd0998b863f89b41c04fab047ae">org.corpus_tools.salt.common.SDocumentGraph</a>
 </li>
 <li>getSource()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl.html#af598e04ee289575f4592dec78f908104">org.corpus_tools.salt.graph.impl.RelationImpl&lt; S extends Node, T extends Node &gt;</a>
@@ -641,7 +644,7 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 : <a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#a3cde60908fc8121f08c92effeae7724d">org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES</a>
 </li>
 <li>GraphImpl()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#ab97cb5c4f680b31392f8c9e45cb8899e">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#a35b451567ecdec308facf11a436e6662">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -649,7 +652,7 @@ $(document).ready(function(){initNavTree('functions_g.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jun 15 2016 15:41:50 for Salt by
+    <li class="footer">Generated on Thu Jun 16 2016 00:07:53 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

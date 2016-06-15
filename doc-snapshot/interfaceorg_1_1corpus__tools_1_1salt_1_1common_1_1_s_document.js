@@ -1,5 +1,6 @@
 var interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document =
 [
+    [ "createDocumentGraph", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document.html#a856adf7148e0bfc1794c142d159fae34", null ],
     [ "getDocumentGraph", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document.html#ac034a2d95779fb49177efa6c350715fd", null ],
     [ "getDocumentGraphLocation", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document.html#ad98e7264a4d48ebbb7823ca7a51af938", null ],
     [ "getGraph", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document.html#af7eaec5f69592875735bcddee864020e", null ],

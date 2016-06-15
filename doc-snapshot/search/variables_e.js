@@ -2,6 +2,7 @@ var searchData=
 [
   ['salt_5fnamespace',['SALT_NAMESPACE',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a680ede559cb5cdb816e863385f3ce4ce',1,'org::corpus_tools::salt::util::SaltUtil']]],
   ['salt_5fnull_5fvalue',['SALT_NULL_VALUE',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a1a7dbc6943def2e709d7d19aa7c19708',1,'org::corpus_tools::salt::util::SaltUtil']]],
+  ['salt_5fscheme',['SALT_SCHEME',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#a31f55c195a6d3495c7ef802263778d75',1,'org::corpus_tools::salt::util::SaltUtil']]],
   ['saltproject',['saltProject',['../classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a86425edfac0a188617829720e30aae9e',1,'org::corpus_tools::salt::common::impl::SCorpusGraphImpl']]],
   ['semantics_5fcat',['SEMANTICS_CAT',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#aa515a7c9d73016923b122dd4b2a19885',1,'org::corpus_tools::salt::util::SaltUtil']]],
   ['semantics_5flemma',['SEMANTICS_LEMMA',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#af7f8df6c136728025022946b3573e6f9',1,'org::corpus_tools::salt::util::SaltUtil']]],
