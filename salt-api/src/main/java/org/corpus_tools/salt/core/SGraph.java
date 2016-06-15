@@ -143,12 +143,6 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 
 	/**
-	 * A fluent api to traverse a graph.
-	 * @return
-	 */
-	public TraverseFluent traverse();
-
-	/**
 	 * Searches for a node or a set of nodes having the given node name.
 	 * 
 	 * @param nodeName

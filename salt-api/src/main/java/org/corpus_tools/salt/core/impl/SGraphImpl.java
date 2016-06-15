@@ -243,10 +243,6 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);
 	}
 
-	public TraverseFluent traverse() {
-		return new TraverseFluent(this);
-	}
-
 	// =======================================> SNamedElement
 	@Override
 	public void removeLabel(String qName) {
