@@ -38,7 +38,9 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
+import org.corpus_tools.salt.common.SCorpusDocumentRelation;
 import org.corpus_tools.salt.common.SCorpusGraph;
+import org.corpus_tools.salt.common.SCorpusRelation;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
@@ -71,6 +73,8 @@ import org.omg.PortableInterceptor.ServerIdHelper;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+
+import com.google.common.base.Strings;
 
 /**
  * This class contains a set of helpful methods.
@@ -303,7 +307,29 @@ public class SaltUtil {
 	}
 
 	/**
-	 * Creates a Salt URI from the passed path.
+	 * When specified corpus path already contains salt schema, then specified
+	 * corpus path is returned. Otherwise a absolute new corpus path which is
+	 * equal to specified corpus path is returned, which is augmented for salt
+	 * scheme. When specified corpusPath is null, null is returned.
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static URI createSaltURI(URI path) {
+		if (path == null) {
+			return null;
+		}
+		if (!Strings.isNullOrEmpty(path.scheme())) {
+			return path;
+		}
+		return createSaltURI(path.toString());
+	}
+	
+	/**
+	 * When specified corpus path already contains salt schema, then specified
+	 * corpus path is returned. Otherwise a absolute new corpus path which is
+	 * equal to specified corpus path is returned, which is augmented for salt
+	 * scheme. When specified corpusPath is null, null is returned.
 	 * 
 	 * @param path
 	 *            path to an element
@@ -312,10 +338,10 @@ public class SaltUtil {
 	public static URI createSaltURI(String path) {
 		URI uri = null;
 		if (path != null && !path.isEmpty()) {
-			if (path.startsWith(SALT_NAMESPACE + ":")) {
+			if (path.startsWith(SALT_SCHEME + ":")) {
 				uri = URI.createURI(path);
 			} else {
-				uri = URI.createURI(SALT_NAMESPACE + ":" + path);
+				uri = URI.createURI(SALT_SCHEME + ":" + path);
 			}
 		}
 		return (uri);
@@ -1126,5 +1152,27 @@ public class SaltUtil {
 	 */
 	public static <T> boolean isNotNullOrEmpty(Collection<T> collection) {
 	    return !isNullOrEmpty(collection);
+	}
+	
+	/**
+	 * Returns whether specified Salt element is part of the corpus structure.
+	 * @param element Salt element
+	 * @return true, when Salt element is a part of the corpus structure, false otherwise
+	 */
+	public static boolean belongsToCorpusStructure(Object element) {
+		if (element == null) {
+			return false;
+		} else if (element instanceof SCorpusGraph) {
+			return true;
+		} else if (element instanceof SCorpus) {
+			return true;
+		} else if (element instanceof SDocument) {
+			return true;
+		} else if (element instanceof SCorpusRelation) {
+			return true;
+		} else if (element instanceof SCorpusDocumentRelation) {
+			return true;
+		}
+		return false;
 	}
 }

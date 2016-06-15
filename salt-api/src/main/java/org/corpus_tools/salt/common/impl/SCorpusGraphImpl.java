@@ -361,33 +361,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		return (document);
 	}
 
-	/**
-	 * When specified corpus path already contains salt schema, then specified
-	 * corpus path is returned. Otherwise a absolute new corpus path which is
-	 * equal to specified corpus path is returned, which is augmented for salt
-	 * scheme. When specified corpusPath is null, null is returned.
-	 * 
-	 * @param corpusPath
-	 * @return
-	 */
-	private URI augementCorpusPathForSchema(URI corpusPath) {
-		if (corpusPath == null) {
-			return null;
-		}
-		if (!Strings.isNullOrEmpty(corpusPath.scheme())) {
-			return corpusPath;
-		}
-		String scheme = SaltUtil.SALT_SCHEME + ":";
-		if (!corpusPath.isRelative()) {
-			scheme = scheme + "/";
-		}
-		return URI.createURI(SaltUtil.SALT_SCHEME + ":" + corpusPath.toString());
-	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpus> createCorpus(final URI corpusPath) {
-		final URI cPath= augementCorpusPathForSchema(corpusPath); 
+		final URI cPath= SaltUtil.createSaltURI(corpusPath); 
 		List<SCorpus> retVal = null;
 		if (cPath != null) {
 			SCorpus parentCorpus = null;
@@ -412,7 +390,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SDocument createDocument(final URI documentPath) {
-		final URI dPath= augementCorpusPathForSchema(documentPath);
+		final URI dPath= SaltUtil.createSaltURI(documentPath);
 		SDocument retVal = null;
 		List<SCorpus> corpora = createCorpus(dPath.trimSegments(1));
 		if ((corpora == null) || (corpora.size() == 0)) {
