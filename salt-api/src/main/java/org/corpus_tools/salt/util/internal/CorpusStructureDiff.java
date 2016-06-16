@@ -159,14 +159,15 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		 * set of already visited {@link SRelation}s while traversing, this is
 		 * necessary to avoid cycles
 		 **/
-		private Set<SRelation> visitedRelations = new HashSet<>();
+		private Set<SRelation<?,?>> visitedRelations = new HashSet<>();
 
 		/**
 		 * Called by Pepper as callback, when otherGraph is traversed. Currently
 		 * only returns <code>true</code> to traverse the entire graph.
 		 */
 		@Override
-		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation sRelation, SNode currNode, long order) {
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, 
+				SRelation<? extends SNode, ? extends SNode> sRelation, SNode currNode, long order) {
 			boolean retVal = true;
 			if (sRelation != null) {
 				if (visitedRelations.contains(sRelation)) {
@@ -183,7 +184,8 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		 * is empty.
 		 */
 		@Override
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode templateNode, SRelation sRelation, SNode fromNode, long order) {
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode templateNode, 
+				SRelation<? extends SNode, ? extends SNode> sRelation, SNode fromNode, long order) {
 			if (fromNode != null && templateNode != null) {
 				final SNode otherParent = getIsoNodes().get(fromNode);
 				boolean hasFoundNode = false;
@@ -212,7 +214,8 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		 * Called by Pepper as callback, when otherGraph is traversed.
 		 */
 		@Override
-		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge, SNode otherNode, long order) {
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, 
+				SRelation<? extends SNode, ? extends SNode> edge, SNode otherNode, long order) {
 		}
 
 	}

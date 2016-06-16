@@ -20,7 +20,6 @@ package org.corpus_tools.salt.common.impl;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -110,7 +109,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (relation != null) {
 			
 			// start: create a name if none exists
-			if (Strings.isNullOrEmpty(((SRelation) relation).getName())){
+			if (Strings.isNullOrEmpty(relation.getName())){
 				if (relation instanceof STextualRelation) {
 					relation.setName("sTextRel" + (getTextualRelations().size() + 1));
 				} else if (relation instanceof STimelineRelation) {
@@ -895,7 +894,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (this.getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION) == null) {
 			return null;
 		}
-		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
+		DataSourceSequence<?> sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(), (Integer) sData.getEnd());
 	}
 

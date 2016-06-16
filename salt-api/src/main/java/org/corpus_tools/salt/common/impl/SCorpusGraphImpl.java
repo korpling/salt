@@ -20,7 +20,6 @@ package org.corpus_tools.salt.common.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
@@ -29,8 +28,8 @@ import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SCorpusRelation;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
-import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SGraph;
+import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.core.impl.SGraphImpl;
@@ -132,7 +131,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is not a SRelation object. ");
 		}
 		// start: create a name if none exists
-		if (Strings.isNullOrEmpty(((SRelation) relation).getName())) {
+		if (Strings.isNullOrEmpty(relation.getName())) {
 			if (relation instanceof SCorpusRelation) {
 				relation.setName("corpRel" + (getCorpusRelations().size() + 1));
 			} else if (relation instanceof SCorpusDocumentRelation) {
@@ -143,7 +142,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 		// end: create a name if none exists
 		if (Strings.isNullOrEmpty(relation.getId())) {
-			((SRelation) relation).setId("salt:/" + ((SRelation) relation).getName());
+			relation.setId("salt:/" + relation.getName());
 		}
 		super.basicAddRelation(relation);
 

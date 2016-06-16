@@ -17,30 +17,24 @@
  */
 package org.corpus_tools.salt.util.internal;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpusGraph;
-import org.corpus_tools.salt.common.SDocument;
-import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.*;
 
 public class CorpusStructureDiffTest {
 
-	private CorpusStructureDiff fixture;
 	private SCorpusGraph template;
 	private SCorpusGraph other;
-	private DiffOptions options;
 	
 	@Before
 	public void beforeEach(){
 		template= SaltFactory.createSCorpusGraph();
 		other= SaltFactory.createSCorpusGraph();
-		options= new DiffOptions();
-		
-		fixture= new CorpusStructureDiff(template, other, options);
 	}
 	
 	@Test

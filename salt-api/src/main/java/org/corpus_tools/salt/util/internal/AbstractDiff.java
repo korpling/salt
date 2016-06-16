@@ -22,16 +22,14 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.corpus_tools.salt.common.SCorpus;
-import org.corpus_tools.salt.common.SCorpusDocumentRelation;
-import org.corpus_tools.salt.common.SCorpusGraph;
-import org.corpus_tools.salt.common.SCorpusRelation;
-import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.core.SAbstractAnnotation;
+import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SGraph;
+import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.graph.IdentifiableElement;
 import org.corpus_tools.salt.util.DIFF_TYPES;
 import org.corpus_tools.salt.util.DiffOptions;
@@ -203,32 +201,32 @@ public abstract class AbstractDiff<G extends SGraph> {
 		boolean retVal4 = true;
 
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_ANNOTATIONS)) {
-			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SAnnotation();
-			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SAnnotation();
+			final Iterator<SAnnotation> otherIterator =  other.iterator_SAnnotation();
+			final Iterator<SAnnotation> templateIterator = template.iterator_SAnnotation();
 			retVal1 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_META_ANNOTATIONS)) {
-			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SMetaAnnotation();
-			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SMetaAnnotation();
+			final Iterator<SMetaAnnotation> otherIterator = other.iterator_SMetaAnnotation();
+			final Iterator<SMetaAnnotation> templateIterator = template.iterator_SMetaAnnotation();
 			retVal2 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_PROCESSING_ANNOTATIONS)) {
-			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SProcessingAnnotation();
-			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SProcessingAnnotation();
+			final Iterator<SProcessingAnnotation> otherIterator = other.iterator_SProcessingAnnotation();
+			final Iterator<SProcessingAnnotation> templateIterator = template.iterator_SProcessingAnnotation();
 			retVal3 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_FEATURES)) {
-			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SFeature();
-			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SFeature();
+			final Iterator<SFeature> otherIterator = other.iterator_SFeature();
+			final Iterator<SFeature> templateIterator = template.iterator_SFeature();
 			retVal4 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
@@ -276,7 +274,10 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 * @param subDiffs
 	 * @return
 	 */
-	private boolean compareAnnotationContainers(final SAnnotationContainer template, final Iterator<SAbstractAnnotation> templateIterator, final SAnnotationContainer other, final Iterator<SAbstractAnnotation> otherIterator, final Set<Difference> subDiffs) {
+	private boolean compareAnnotationContainers(final SAnnotationContainer template, 
+			final Iterator<? extends SAbstractAnnotation> templateIterator, 
+			final SAnnotationContainer other, final Iterator<? extends SAbstractAnnotation> otherIterator, 
+			final Set<Difference> subDiffs) {
 		boolean retVal = true;
 
 		// create remaining list, which contains all annos from other

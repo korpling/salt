@@ -231,13 +231,13 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 	 */
 	private boolean compareDataSources(SDocumentGraph template, SDocumentGraph other, boolean diff) {
 		// compare textual data sources
-		boolean retVal1 = compareDataSources((List<SSequentialDS>) (List<? extends SSequentialDS>) template.getTextualDSs(), (List<SSequentialDS>) (List<? extends SSequentialDS>) other.getTextualDSs(), diff);
+		boolean retVal1 = compareDataSources(template.getTextualDSs(), other.getTextualDSs(), diff);
 		// speed up
 		if (!diff && !retVal1) {
 			return (retVal1);
 		}
 		// compare medial data sources
-		boolean retVal2 = compareDataSources((List<SSequentialDS>) (List<? extends SSequentialDS>) template.getMedialDSs(), (List<SSequentialDS>) (List<? extends SSequentialDS>) other.getMedialDSs(), diff);
+		boolean retVal2 = compareDataSources(template.getMedialDSs(), other.getMedialDSs(), diff);
 		return (retVal1 && retVal2);
 	}
 
@@ -255,16 +255,17 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 	 * @param diff
 	 *            if true, diffs are checked as well
 	 **/
-	private boolean compareDataSources(List<SSequentialDS> template, List<SSequentialDS> other, boolean diff) {
+	private boolean compareDataSources(List<? extends SSequentialDS<?,?>> template, 
+			List<? extends SSequentialDS<?,?>> other, boolean diff) {
 		boolean iso = true;
-		Map<Object, SSequentialDS> dataToDS = new Hashtable<>();
+		Map<Object, SSequentialDS<?,?>> dataToDS = new Hashtable<>();
 		// data sources from template which have no partner in other
-		Set<SSequentialDS> remainingTemplates = new HashSet<>();
+		Set<SSequentialDS<?,?>> remainingTemplates = new HashSet<>();
 
 		// put all template data source to map
-		Iterator<SSequentialDS> iterator = template.iterator();
+		Iterator<? extends SSequentialDS<?,?>> iterator = template.iterator();
 		while (iterator.hasNext()) {
-			SSequentialDS templateDS = iterator.next();
+			SSequentialDS<?,?> templateDS = iterator.next();
 			dataToDS.put(templateDS.getData(), templateDS);
 			remainingTemplates.add(templateDS);
 		}
@@ -272,8 +273,8 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		// check all other data source with map
 		iterator = other.iterator();
 		while (iterator.hasNext()) {
-			SSequentialDS otherDS = iterator.next();
-			SSequentialDS templateDS = dataToDS.get(otherDS.getData());
+			SSequentialDS<?,?> otherDS = iterator.next();
+			SSequentialDS<?,?> templateDS = dataToDS.get(otherDS.getData());
 			if (templateDS == null) {
 				if (!diff) {
 					return false;
@@ -310,7 +311,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		if (remainingTemplates.size() > 0) {
 			iterator = remainingTemplates.iterator();
 			while (iterator.hasNext()) {
-				SSequentialDS templateDS = iterator.next();
+				SSequentialDS<?,?> templateDS = iterator.next();
 				if (!diff) {
 					return false;
 				}
@@ -430,14 +431,15 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		 * set of already visited {@link SRelation}s while traversing, this is
 		 * necessary to avoid cycles
 		 **/
-		private Set<SRelation> visitedRelations = new HashSet<>();
+		private Set<SRelation<?,?>> visitedRelations = new HashSet<>();
 
 		/**
 		 * Called by Pepper as callback, when otherGraph is traversed. Currently
 		 * only returns <code>true</code> to traverse the entire graph.
 		 */
 		@Override
-		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation sRelation, SNode currNode, long order) {
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, 
+				SRelation<? extends SNode, ? extends SNode> sRelation, SNode currNode, long order) {
 			if (abort) {
 				return (false);
 			}
@@ -469,14 +471,16 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		 * is empty.
 		 */
 		@Override
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation sRelation, SNode otherNode, long order) {
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, 
+				SRelation<? extends SNode, ? extends SNode> sRelation, SNode otherNode, long order) {
 		}
 
 		/**
 		 * Called by Pepper as callback, when otherGraph is traversed.
 		 */
 		@Override
-		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge, SNode otherNode, long order) {
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, 
+				SRelation<? extends SNode, ? extends SNode> edge, SNode otherNode, long order) {
 			if (currNode instanceof SSpan) {
 				if (!findIsomorphicNode(currNode, SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SSPAN)) {
 					abort = true;
@@ -644,11 +648,13 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 	 * @param diff
 	 * @return
 	 */
-	protected boolean compareRelations(SDocumentGraph template, List<? extends SRelation> templateRels, SDocumentGraph other, List<? extends SRelation> otherRels, Boolean diff) {
+	protected boolean compareRelations(SDocumentGraph template, 
+			List<? extends SRelation<?,?>> templateRels, SDocumentGraph other, 
+			List<? extends SRelation<?,?>> otherRels, Boolean diff) {
 		boolean iso = true;
 
-		Set<SRelation> otherRelSet = new HashSet<SRelation>();
-		Iterator<? extends SRelation> iterator = otherRels.iterator();
+		Set<SRelation<?,?>> otherRelSet = new HashSet<SRelation<?,?>>();
+		Iterator<? extends SRelation<?,?>> iterator = otherRels.iterator();
 		while (iterator.hasNext()) {
 			otherRelSet.add(iterator.next());
 		}
@@ -656,7 +662,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		// iterate over all pointing relations in template
 		iterator = templateRels.iterator();
 		while (iterator.hasNext()) {
-			SRelation<SNode, SNode> tempRel = iterator.next();
+			SRelation<? extends SNode, ? extends SNode> tempRel = iterator.next();
 			SNode tempSource = tempRel.getSource();
 			SNode tempTarget = tempRel.getTarget();
 			SNode otherSource = getIsoNodes().get(tempSource);
