@@ -23,6 +23,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.corpus_tools.salt.SALT_TYPE;
+import org.corpus_tools.salt.common.SCorpus;
+import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
@@ -33,6 +36,7 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
@@ -170,6 +174,64 @@ public class SGraphImpl extends
 		if (retList.size() == 0)
 			retList = null;
 		return (retList);
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType) {
+		List<SNode> children = new ArrayList<>();
+		List<SRelation<?,?>> relations = parent.getOutRelations();
+		if (relations != null) {
+			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
+				if (relationType == null || SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
+					SNode child = relation.getTarget();
+					children.add(child);
+				}
+			}
+		}
+		return children;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * <pre>
+	 * for all incoming relations of first child node
+	 * 		add targets to sharedparents
+	 * for each child in children
+	 * 		for each incomming relation of child
+	 * 			add source node of incomming relation to parent
+	 * 		sharedparents= sharedparents ⋂ parents
+	 * </pre>
+	 **/
+	@Override
+	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType) {
+		ArrayList<SNode> sharedParents = new ArrayList<>();
+		if ((children.size() > 0) && (children.get(0) != null)) {
+			List<SRelation<?,?>> rels = children.get(0).getInRelations();
+			if ((rels != null) && (rels.size() > 0)) {
+				// a shared parent has to be connected to every child node
+				for (SRelation<? extends SNode, ? extends SNode> baseRelation : rels) {
+					if (SALT_TYPE.class2SaltType(baseRelation.getSource().getClass()).contains(nodeType)) {
+						sharedParents.add(baseRelation.getSource());
+					}
+				}
+				Iterator<SNode> it = children.iterator();
+				it.next(); // skip first child
+				while (it.hasNext()) {
+					SNode child = it.next();
+					ArrayList<SNode> parents = new ArrayList<>();
+					for (SRelation<? extends SNode, ? extends SNode> sRelation : child.getInRelations()) {
+						SNode parent = sRelation.getSource();
+						if (SALT_TYPE.class2SaltType(parent.getClass()).contains(nodeType)) {
+							parents.add(parent);
+						}
+					}
+					sharedParents.retainAll(parents);
+				}
+			}
+		}
+		return sharedParents;
 	}
 
 	/** {@inheritDoc} */

@@ -64,6 +64,7 @@ import org.corpus_tools.salt.util.internal.Diff;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 
 @SuppressWarnings("serial")
@@ -109,7 +110,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (relation != null) {
 			
 			// start: create a name if none exists
-			if ((relation.getName() == null) || (relation.getName().isEmpty())) {
+			if (Strings.isNullOrEmpty(((SRelation) relation).getName())){
 				if (relation instanceof STextualRelation) {
 					relation.setName("sTextRel" + (getTextualRelations().size() + 1));
 				} else if (relation instanceof STimelineRelation) {
@@ -167,7 +168,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}
 		if (node != null) {
 			// start: create a name if none exists
-			if ((node.getName() == null) || (node.getName().isEmpty())) {
+			if (Strings.isNullOrEmpty(node.getName())){
 				if (node instanceof STextualDS) {
 					node.setName("sText" + (getTextualDSs().size() + 1));
 				} else if (node instanceof SToken) {
@@ -185,8 +186,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				}
 			}
 			// end: create a name if none exists
-
-			if ((node.getId() == null) || (node.getId().isEmpty())) {
+			if (Strings.isNullOrEmpty(node.getId())){
 				node.setId(getId() + "#" + node.getName());
 			}
 			super.addNode(node);
@@ -567,7 +567,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SSpan createSpan(List<SToken> tokens) {
-		if (tokens != null && !tokens.isEmpty()) {
+		if (SaltUtil.isNotNullOrEmpty(tokens)){
 			return (createSpan(tokens.toArray(new SToken[tokens.size()])));
 		} else {
 			return (null);
@@ -598,7 +598,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SStructure createStructure(List<SStructuredNode> sourceNodes) {
-		if (sourceNodes != null && !sourceNodes.isEmpty()) {
+		if (SaltUtil.isNotNullOrEmpty(sourceNodes)){
 			return (createStructure(sourceNodes.toArray(new SStructuredNode[sourceNodes.size()])));
 		} else {
 			return (null);
@@ -895,7 +895,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (this.getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION) == null) {
 			return null;
 		}
-		DataSourceSequence<?> sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
+		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(), (Integer) sData.getEnd());
 	}
 
@@ -925,64 +925,6 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public Set<Difference> findDiffs(SDocumentGraph other, DiffOptions options) {
 		Diff diff = new Diff(this, other, options);
 		return (diff.findDiffs());
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType) {
-		List<SNode> children = new ArrayList<>();
-		List<SRelation<?,?>> relations = parent.getOutRelations();
-		if (relations != null) {
-			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
-				if (relationType == null || SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
-					SNode child = relation.getTarget();
-					children.add(child);
-				}
-			}
-		}
-		return children;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * <pre>
-	 * for all incoming relations of first child node
-	 * 		add targets to sharedparents
-	 * for each child in children
-	 * 		for each incomming relation of child
-	 * 			add source node of incomming relation to parent
-	 * 		sharedparents= sharedparents ⋂ parents
-	 * </pre>
-	 **/
-	@Override
-	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType) {
-		ArrayList<SNode> sharedParents = new ArrayList<>();
-		if ((children.size() > 0) && (children.get(0) != null)) {
-			List<SRelation<?,?>> rels = children.get(0).getInRelations();
-			if ((rels != null) && (rels.size() > 0)) {
-				// a shared parent has to be connected to every child node
-				for (SRelation<? extends SNode, ? extends SNode> baseRelation : rels) {
-					if (SALT_TYPE.class2SaltType(baseRelation.getSource().getClass()).contains(nodeType)) {
-						sharedParents.add(baseRelation.getSource());
-					}
-				}
-				Iterator<SNode> it = children.iterator();
-				it.next(); // skip first child
-				while (it.hasNext()) {
-					SNode child = it.next();
-					ArrayList<SNode> parents = new ArrayList<>();
-					for (SRelation<? extends SNode, ? extends SNode> sRelation : child.getInRelations()) {
-						SNode parent = sRelation.getSource();
-						if (SALT_TYPE.class2SaltType(parent.getClass()).contains(nodeType)) {
-							parents.add(parent);
-						}
-					}
-					sharedParents.retainAll(parents);
-				}
-			}
-		}
-		return sharedParents;
 	}
 
 	@Override

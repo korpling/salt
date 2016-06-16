@@ -15,7 +15,7 @@
  *
  *
  */
-package org.corpus_tools.salt.util.tests;
+package org.corpus_tools.salt.util.internal;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -43,6 +43,7 @@ import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.internal.Diff;
+import org.corpus_tools.salt.util.internal.DocumentStructureDiff;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,15 +52,15 @@ import org.junit.Test;
  * 
  * @author André Röhrig
  */
-public class DiffTest {
+public class DocumentStructureDiffTest {
 
-	protected Diff fixture = null;
+	protected DocumentStructureDiff fixture = null;
 
-	protected void setFixture(Diff fixture) {
+	protected void setFixture(DocumentStructureDiff fixture) {
 		this.fixture = fixture;
 	}
 
-	protected Diff getFixture() {
+	protected DocumentStructureDiff getFixture() {
 		return fixture;
 	}
 
@@ -78,7 +79,7 @@ public class DiffTest {
 		other.getDocument().setId("doc2");
 		other.getDocument().getDocumentGraph().setId("doc2");
 
-		setFixture(new Diff(template, other));
+		setFixture(new DocumentStructureDiff(template, other));
 	}
 
 	/**

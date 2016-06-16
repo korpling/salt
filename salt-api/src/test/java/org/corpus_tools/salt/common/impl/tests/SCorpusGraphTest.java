@@ -38,6 +38,7 @@ import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import junit.framework.TestCase;
 
@@ -423,12 +424,30 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		assertEquals(1, getFixture().getRelations().size());
 	}
 
+	@Test
+	public void testwhenCreatingCorporaViaURIWithoutScheme_thenShouldBeEqualToWithScheme() {
+		URI path = URI.createURI("/c1/c2/c3");
+		List<SCorpus> corpora = getFixture().createCorpus(path);
+
+		assertNotNull(corpora);
+		assertEquals(3, corpora.size());
+		assertEquals(3, getFixture().getNodes().size());
+		assertEquals(2, getFixture().getRelations().size());
+
+		path = URI.createURI("/c1/c2/c4");
+		corpora = getFixture().createCorpus(path);
+		assertNotNull(corpora);
+		assertEquals(1, corpora.size());
+		assertEquals(4, getFixture().getNodes().size());
+		assertEquals(3, getFixture().getRelations().size());
+	}
+	
 	/**
 	 * Tests the creation of {@link SCorpus} objects via a URI. The URI is
 	 * c1/c2/c3 and c1/c2/c4
 	 */
 	@Test
-	public void testCreateSCorpus__URI() {
+	public void testwhenCreatingTwoCorporaViaCorpusPathes_thenFourCorporaShouldExist() {
 		URI path = URI.createURI("salt:/c1/c2/c3");
 		List<SCorpus> corpora = getFixture().createCorpus(path);
 
@@ -531,6 +550,16 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 			corpGraph.addRelation(corpDocRel1);
 			return (doc1);
 		}
+	}
+	
+	@Test
+	public void testwhenPrintingCorpusGraphToTreeString_thenTreeStringShouldBeReturned(){
+		getFixture().createDocument(URI.createURI("/corpus1/corpus2/document1"));
+		getFixture().createDocument(URI.createURI("/corpus1/corpus2/document2"));
+		getFixture().createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3"));
+		getFixture().createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4"));
+		
+		assertThat(fixture.toTreeString()).isEqualTo("└── corpus1\n    ├── corpus2\n    │   ├── document1\n    │   └── document2\n    └── corpus3\n        └── corpus4\n            ├── document3\n            └── document4\n");
 	}
 
 	@Override

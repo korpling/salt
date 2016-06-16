@@ -49,6 +49,15 @@ public interface SDocument extends SNode {
 	public SDocumentGraph getDocumentGraph();
 
 	/**
+	 * Returns the document structure which belongs to this document. If no
+	 * document structure was created so far, a new one is created and returned
+	 * .
+	 * 
+	 * @return document structure
+	 */
+	public SDocumentGraph createDocumentGraph();
+
+	/**
 	 * Sets the document structure which belongs to this document.
 	 * 
 	 * @param documentGraph
