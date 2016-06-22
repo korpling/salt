@@ -142,7 +142,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aac41778b9ad7266a43b229c7a91fc16f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the timeline of this document graph.  <a href="#aac41778b9ad7266a43b229c7a91fc16f">More...</a><br /></td></tr>
 <tr class="separator:aac41778b9ad7266a43b229c7a91fc16f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1aaa573f4452193a49304506f70816b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#af1aaa573f4452193a49304506f70816b">setTimeline</a> (<a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline.html">STimeline</a> value)</td></tr>
-<tr class="memdesc:af1aaa573f4452193a49304506f70816b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of the ' <a class="el" href=""><em>STimeline</em></a>' reference.  <a href="#af1aaa573f4452193a49304506f70816b">More...</a><br /></td></tr>
+<tr class="memdesc:af1aaa573f4452193a49304506f70816b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a new timeline- A timeline is a specific datasource and acts as an anchor for <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline_relation.html">STimelineRelation</a>s.  <a href="#af1aaa573f4452193a49304506f70816b">More...</a><br /></td></tr>
 <tr class="separator:af1aaa573f4452193a49304506f70816b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3aac897549da11ad4c58ada98b172f5"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_relation.html">SRelation</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#af3aac897549da11ad4c58ada98b172f5">getRelations</a> (<a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html">SALT_TYPE</a> type)</td></tr>
 <tr class="memdesc:af3aac897549da11ad4c58ada98b172f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns all relations of the passed type.  <a href="#af3aac897549da11ad4c58ada98b172f5">More...</a><br /></td></tr>
@@ -1888,14 +1888,13 @@ This  additional  text  is    a     text.
       </table>
 </div><div class="memdoc">
 
-<p>Sets the value of the ' <a class="el" href=""><em>STimeline</em></a>' reference. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Sets a new timeline- A timeline is a specific datasource and acts as an anchor for <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline_relation.html">STimelineRelation</a>s. </p>
+<p>A timeline is necessary to set tokens in correspondance when they belong to different <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_textual_d_s.html">STextualDS</a>s. For instance a timeline is necessary to model dialogue data. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>the new value of the '<em><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline.html">STimeline</a></em>' reference. </td></tr>
+    <tr><td class="paramname">value</td><td>new timeline, which replaces the old one </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#aac41778b9ad7266a43b229c7a91fc16f" title="Returns the timeline of this document graph. ">getTimeline()</a>  </dd></dl>
 
 <p>Implemented in <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a507de2fbdcbb14d61c8374be992a95d8">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>.</p>
 
@@ -1929,7 +1928,7 @@ This  additional  text  is    a     text.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>org</b></li><li class="navelem"><b>corpus_tools</b></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt.html">salt</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1common.html">common</a></li><li class="navelem"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html">SDocumentGraph</a></li>
-    <li class="footer">Generated on Wed Jun 22 2016 22:53:12 for Salt by
+    <li class="footer">Generated on Wed Jun 22 2016 23:08:41 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
