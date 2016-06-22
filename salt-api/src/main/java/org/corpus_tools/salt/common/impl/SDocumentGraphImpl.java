@@ -62,8 +62,6 @@ import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.DataSourceAccessor;
 import org.corpus_tools.salt.util.internal.Diff;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
@@ -790,8 +788,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> insertTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace) {
-		EList<SToken> sTokens = new BasicEList<SToken>();
-		HashSet<STextualRelation> newSTextualRelations = new HashSet<STextualRelation>();
+		List<SToken> sTokens = new ArrayList<>();
+		Set<STextualRelation> newSTextualRelations = new HashSet<STextualRelation>();
 
 		StringBuilder newSTextualDSvalueBuilder = new StringBuilder(sTextualDS.getText().substring(0, posInText));
 
