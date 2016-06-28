@@ -64,6 +64,7 @@ import org.corpus_tools.salt.semantics.SSentenceAnnotation;
 import org.corpus_tools.salt.semantics.STypeAnnotation;
 import org.corpus_tools.salt.semantics.SWordAnnotation;
 import org.corpus_tools.salt.util.internal.Diff.Builder;
+import org.corpus_tools.salt.util.internal.Validator;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.corpus_tools.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter;
@@ -87,7 +88,7 @@ public class SaltUtil {
 	// ===================================> common Salt stuff
 	/** The URI scheme for corpus pathes. **/
 	public static final String SALT_SCHEME = "salt";
-	
+
 	/** The ending of a Salt XML file. **/
 	public static final String FILE_ENDING_SALT_XML = "salt";
 	/** The ending of a dot file. **/
@@ -324,7 +325,7 @@ public class SaltUtil {
 		}
 		return createSaltURI(path.toString());
 	}
-	
+
 	/**
 	 * When specified corpus path already contains salt schema, then specified
 	 * corpus path is returned. Otherwise a absolute new corpus path which is
@@ -667,12 +668,12 @@ public class SaltUtil {
 	 * the SaltXML file contains persistings for more than one
 	 * {@link SCorpusGraph} object, the first one will be loaded.
 	 * 
-	 * @param sCorpusGraphURI
+	 * @param corpusPath
 	 *            the {@link URI} to locate the SaltXML file
 	 * @return
 	 */
-	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphURI) {
-		return loadCorpusGraph(sCorpusGraphURI, 0);
+	public static SCorpusGraph loadCorpusGraph(URI corpusPath) {
+		return loadCorpusGraph(corpusPath, 0);
 	}
 
 	/**
@@ -683,28 +684,28 @@ public class SaltUtil {
 	 * load, in case of the given SaltXML file contains more than one persisting
 	 * of {@link SCorpusGraph} objects.
 	 * 
-	 * @param sCorpusGraphUri
+	 * @param corpusPath
 	 *            the {@link URI} to locate the SaltXML file
 	 * @param idxOfSCorpusGraph
 	 *            number of graph to be load, note that the list of graphs
 	 *            starts with 0
 	 * @return
 	 */
-	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph) {
-		if (sCorpusGraphUri == null)
+	public static SCorpusGraph loadCorpusGraph(URI corpusPath, Integer idxOfSCorpusGraph) {
+		if (corpusPath == null)
 			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName() + "' object, because the passed uri is empty. ");
 
 		SCorpusGraph retVal = null;
 
-		if (!sCorpusGraphUri.toFileString().endsWith("." + SaltUtil.FILE_ENDING_SALT_XML)) {
+		if (!corpusPath.toFileString().endsWith("." + SaltUtil.FILE_ENDING_SALT_XML)) {
 			// looks weird, but is necessary in case of uri ends with /
-			if (sCorpusGraphUri.toString().endsWith("/")) {
-				sCorpusGraphUri = sCorpusGraphUri.trimSegments(1);
+			if (corpusPath.toString().endsWith("/")) {
+				corpusPath = corpusPath.trimSegments(1);
 			}
-			sCorpusGraphUri = sCorpusGraphUri.appendSegment(SaltUtil.FILE_SALT_PROJECT);
+			corpusPath = corpusPath.appendSegment(SaltUtil.FILE_SALT_PROJECT);
 		}
 
-		Object obj = load(sCorpusGraphUri);
+		Object obj = load(corpusPath);
 		if (obj instanceof SCorpusGraph) {
 			retVal = (SCorpusGraph) obj;
 		} else if (obj instanceof SaltProject) {
@@ -714,7 +715,7 @@ public class SaltUtil {
 		}
 
 		if (retVal != null) {
-			insertDocumentGraphLocations(retVal, sCorpusGraphUri);
+			insertDocumentGraphLocations(retVal, corpusPath);
 		}
 
 		return (retVal);
@@ -1127,6 +1128,7 @@ public class SaltUtil {
 	/**
 	 * Creates a builder to have a fluent api for comparing two
 	 * {@link SDocumentGraph}s or {@link SCorpusGraph}s.
+	 * 
 	 * <pre>
 	 * compare(graph1).with(graph2).useOption(key, value).andCheckIsomorphie().
 	 * or
@@ -1136,28 +1138,34 @@ public class SaltUtil {
 	public static <G extends SGraph> Builder<G> compare(G templateGraph) {
 		return new Builder<G>(templateGraph);
 	}
-	
+
 	/**
 	 * Checks whether a collection is null or empty
+	 * 
 	 * @param list
 	 * @return
 	 */
 	public static <T> boolean isNullOrEmpty(final Collection<T> collection) {
-	    return collection == null || collection.isEmpty();
+		return collection == null || collection.isEmpty();
 	}
+
 	/**
 	 * Checks whether a collection is not null nor empty
+	 * 
 	 * @param list
 	 * @return
 	 */
 	public static <T> boolean isNotNullOrEmpty(final Collection<T> collection) {
-	    return !isNullOrEmpty(collection);
+		return !isNullOrEmpty(collection);
 	}
-	
+
 	/**
 	 * Returns whether specified Salt element is part of the corpus structure.
-	 * @param element Salt element
-	 * @return true, when Salt element is a part of the corpus structure, false otherwise
+	 * 
+	 * @param element
+	 *            Salt element
+	 * @return true, when Salt element is a part of the corpus structure, false
+	 *         otherwise
 	 */
 	public static boolean belongsToCorpusStructure(final Object element) {
 		if (element == null) {
@@ -1174,5 +1182,14 @@ public class SaltUtil {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Validates a salt project, a document structure or a corpus structure.
+	 * @param saltObject Salt object to be validated
+	 * @return 
+	 */
+	public static <T extends Object> Validator.Builder<T> validate(T saltObject) {
+		return new Validator.Builder<T>(saltObject);
 	}
 }
