@@ -223,7 +223,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	
  
    
-    private static final int JSON_EDGE_LINE_LENGTH = 150;    
+    private static final int JSON_EDGE_LINE_LENGTH = 160;    
     private static final String NEWLINE = System.lineSeparator();    
     private  final ExportFilter exportFilter;
     private  final StyleImporter styleImporter;
