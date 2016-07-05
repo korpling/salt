@@ -4,6 +4,6 @@ import org.corpus_tools.salt.core.SNode;
 
 public interface StyleImporter {
 	
-	public String getFontColor (SNode node);
+	public String getHighlightingColor (SNode node);
 
 }
