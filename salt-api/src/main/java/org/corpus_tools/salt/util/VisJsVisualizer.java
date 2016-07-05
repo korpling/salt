@@ -223,7 +223,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	
  
    
-    private static final int JSON_EDGE_LINE_LENGTH = 70;    
+    private static final int JSON_EDGE_LINE_LENGTH = 150;    
     private static final String NEWLINE = System.lineSeparator();    
     private  final ExportFilter exportFilter;
     private  final StyleImporter styleImporter;
@@ -300,6 +300,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     	else
     	{
     		bufferSizeEdges = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
+    		
     	}
     	
     	this.exportFilter = exportFilter;
@@ -397,7 +398,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 
 public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParameterException,  SaltResourceException, SaltException,
 															SaltResourceException, IOException, XMLStreamException{
-			
+		
 		try {
 			 File outputFolder = createOutputResources(outputFolderUri, loadJSON);	
 			 writeNodeImmediately = true;
@@ -454,7 +455,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 
 
    private void writeHTML(File outputFolder) throws XMLStreamException, IOException{
-	 
+	   	   		
 			 int nodeDist = 0;
 			 int sprLength = 100;
 			 double sprConstant = 0.0;
@@ -941,48 +942,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		  return outputFolder;
 	}
 	
-	
-/*
- * Copies the specified auxiliary file to the according output subfolder.
- */
-	
-	/*private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
-			throws FileNotFoundException, IOException{
-
-InputStream inputStream = getClass().getResourceAsStream(resourceFolder 
-		  + System.getProperty("file.separator") 
-		  + inFile);		  
-  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-  BufferedWriter writer;
-  
-  if (outSubFolder != null){
-	  writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
-			  + System.getProperty("file.separator")
-			  + outSubFolder 
-			  + System.getProperty("file.separator")
-			  + outFile))));
-	  }
-  else{
-	  writer = new BufferedWriter ( new OutputStreamWriter(new FileOutputStream(new File (outputFolder
-			  + System.getProperty("file.separator")
-			  + outFile))));
-  }	
-  
-  int bufferSize = 512*1024;		  
-  char [] buffer = new char [bufferSize];
-  int readChars = 0;		  		  
-
-	while ((readChars=reader.read(buffer, 0, bufferSize)) != -1) 
-	  {		
-				writer.write(buffer, 0, readChars);
-	  }	
-	    
-  	inputStream.close();
-    reader.close();
-    writer.flush();
-    writer.close();     
-}*/
-	
+		
 	
 private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
 		throws IOException 
@@ -1022,14 +982,6 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	inputStream.close();
 	
 }
-	
-	
-
-
-	
-
-	
-	
 	
 	
 	private void setJsonWriter (OutputStream os)
@@ -1194,19 +1146,19 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	
 	
 	
-	private void writeJsonNode (SNode node, long levelValue) throws IOException
+	private void writeJsonNode (SNode node, long levelValue) throws SaltParameterException, IOException
 	{
 		String highlightingColor =  null;
 		if (styleImporter != null)
 		{
-			highlightingColor = styleImporter.getFontColor(node);
+			highlightingColor = styleImporter.getHighlightingColor(node);
 		}
 		
 		 String idValue = node.getPath().fragment();
 		 String idLabel = "id=" + idValue;	
 		 String allLabels = idLabel;
 		 
-			 
+		// node object	 
 		 jsonWriterNodes.object();
 		 jsonWriterNodes.key(JSON_ID);		 
 		 jsonWriterNodes.value(idValue);
@@ -1214,102 +1166,64 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 		 
 	
 		   Set<SAnnotation> sAnnotations = node.getAnnotations();
-		  
+		   // sort annotation keys lexicographically
+		   List<Map.Entry<String, String>>  sortedAnnotations = sortAnnotations(sAnnotations);	
 		   
-		   
-		   if (sAnnotations.size() > 0)
-		   {    
+		   // add all annotation key-value-pairs
+		   for (Map.Entry<String, String> annotation : sortedAnnotations) 
+		   {
 			   allLabels += NEWLINE;
-			   List<Map.Entry<String, String>>  sortedAnnotations = sortAnnotations(sAnnotations);		   	   
-			  
-			   
-			   int i=1;
-			   for (Map.Entry<String, String> annotation : sortedAnnotations) 
-			   {
-				   allLabels += (annotation.getKey() + "=" + annotation.getValue());
-				   
-				   if (i < sortedAnnotations.size()){
-					   allLabels+= NEWLINE;
-				   }
-				   i++;
-			   }
+			   allLabels += (annotation.getKey() + "=" + annotation.getValue());
+			   			  
 		   }
+		  		   
+
 		   
+		   // add token text
 		   if (node instanceof SToken)
 		   {
 			   String text = doc.getDocumentGraph().getText(node);
 				  if (text != null && !text.isEmpty())
 				  {	
-					  allLabels+= (NEWLINE + NEWLINE);			
-					  allLabels += doc.getDocumentGraph().getText(node);
+					  allLabels+= (NEWLINE + NEWLINE + text);
 				  }
 		   } 
 		  
 		   				
 		 jsonWriterNodes.value(allLabels);	
 		 
+		 
+		 String nodeColorValue;
+		 String nodeColorBorder;
+	
+		 
 		 if (node instanceof SToken)
 		 {
-			 jsonWriterNodes.key(JSON_COLOR);
-			 	jsonWriterNodes.object();
-			 	jsonWriterNodes.key(JSON_COLOR_BACKGROUND);
-			 	jsonWriterNodes.value(TOK_COLOR_VALUE);
-			 	if (highlightingColor != null){
-			 		jsonWriterNodes.key(JSON_COLOR_BORDER);
-				 	jsonWriterNodes.value(highlightingColor);
-			 		
-			 	}
-			 	else{
-			 		jsonWriterNodes.key(JSON_COLOR_BORDER);
-				 	jsonWriterNodes.value(TOK_BORDER_COLOR_VALUE);
-			 	}
-			 	jsonWriterNodes.endObject();
-			 	
-			 if (highlightingColor != null){
-				 jsonWriterNodes.key(JSON_BORDER_WIDTH);
-				 jsonWriterNodes.value(HIGHLIGHTING_BORDER_WIDTH);
-			 }
-			 	
+			 nodeColorValue = TOK_COLOR_VALUE;
+			 nodeColorBorder = TOK_BORDER_COLOR_VALUE;
+			 
 			 jsonWriterNodes.key(JSON_X);
 			 jsonWriterNodes.value((xPosition++)*NODE_DIST);
+			 
+			 // in order to keep the relative order to each other, tokens are not part of physics
 			 jsonWriterNodes.key(JSON_PHYSICS);
 			 jsonWriterNodes.value("false");			 
 			 
-		 }
-		 
-		 	 jsonWriterNodes.key(JSON_LEVEL);
-			 jsonWriterNodes.value(levelValue);
+		 }	 	
 			 
-		if (node instanceof SSpan)
-		{
+		 else if (node instanceof SSpan)
+		{  	
+			nodeColorValue = SPAN_COLOR_VALUE;
+		 	nodeColorBorder = SPAN_BORDER_COLOR_VALUE;
+		 	
 			if (nGroupsId == 3)
-			{
+			{				 
 				 jsonWriterNodes.key(JSON_GROUP);
 				 jsonWriterNodes.value("1");
 				 
-				 jsonWriterNodes.key(JSON_COLOR);
-					 jsonWriterNodes.object();
-					 	jsonWriterNodes.key(JSON_COLOR_BACKGROUND);
-					 	jsonWriterNodes.value(SPAN_COLOR_VALUE);
-					 	if (highlightingColor != null){
-					 		jsonWriterNodes.key(JSON_COLOR_BORDER);
-						 	jsonWriterNodes.value(highlightingColor);
-					 		
-					 	}
-					 	else{
-					 		jsonWriterNodes.key(JSON_COLOR_BORDER);
-						 	jsonWriterNodes.value(SPAN_BORDER_COLOR_VALUE);
-					 	}
-					 	jsonWriterNodes.endObject();
-					 	
-					 if (highlightingColor != null){
-						 jsonWriterNodes.key(JSON_BORDER_WIDTH);
-						 jsonWriterNodes.value(HIGHLIGHTING_BORDER_WIDTH);
-					 }
-					// jsonWriterNodes.value(SPAN_COLOR_VALUE);
 			}
-			else if (nGroupsId == 1)
-			{ //TODO why only this attribute?
+			else
+			{
 				jsonWriterNodes.key(JSON_GROUP);
 				jsonWriterNodes.value("0");
 			}
@@ -1320,40 +1234,48 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 		}
 		
 		else if (node instanceof SStructure)
-		{
-			if (nGroupsId == 3 || nGroupsId == 2)
-			{
-				jsonWriterNodes.key(JSON_GROUP);
-				jsonWriterNodes.value("0");
-				jsonWriterNodes.key(JSON_COLOR);
-				 jsonWriterNodes.object();
-				 	jsonWriterNodes.key(JSON_COLOR_BACKGROUND);
-				 	jsonWriterNodes.value(STRUCTURE_COLOR_VALUE);
-				 	if (highlightingColor != null){
-				 		jsonWriterNodes.key(JSON_COLOR_BORDER);
-					 	jsonWriterNodes.value(highlightingColor);
-				 		
-				 	}
-				 	else{
-				 		jsonWriterNodes.key(JSON_COLOR_BORDER);
-					 	jsonWriterNodes.value(STRUCTURE_BORDER_COLOR_VALUE);
-				 	}
-				 	jsonWriterNodes.endObject();
-				 	
-				 if (highlightingColor != null){
-					 jsonWriterNodes.key(JSON_BORDER_WIDTH);
-					 jsonWriterNodes.value(HIGHLIGHTING_BORDER_WIDTH);
-				 }
-				//jsonWriterNodes.value(STRUCTURE_COLOR_VALUE);
-			}
+		{	
+			nodeColorValue = STRUCTURE_COLOR_VALUE;
+		 	nodeColorBorder = STRUCTURE_BORDER_COLOR_VALUE;
+			
+			jsonWriterNodes.key(JSON_GROUP);
+			jsonWriterNodes.value("0");
+			
 			//initial x-value in center
 			 jsonWriterNodes.key(JSON_X);
 			 jsonWriterNodes.value((nTokens/2)*NODE_DIST);
 	
-		}	
+		}
+		else
+		{
+			throw new SaltParameterException(node.getId(), "writeJsonNode", this.getClass());
+		}
 		
 		 
-		jsonWriterNodes.endObject();	
+		 jsonWriterNodes.key(JSON_COLOR);
+		 	jsonWriterNodes.object();
+		 	jsonWriterNodes.key(JSON_COLOR_BACKGROUND);
+		 	jsonWriterNodes.value(nodeColorValue);
+		 	if (highlightingColor != null){
+		 		jsonWriterNodes.key(JSON_COLOR_BORDER);
+			 	jsonWriterNodes.value(highlightingColor);
+			 	jsonWriterNodes.endObject(); //end color
+			 	jsonWriterNodes.key(JSON_BORDER_WIDTH);
+				jsonWriterNodes.value(HIGHLIGHTING_BORDER_WIDTH);
+		 		
+		 	}
+		 	else{
+		 		jsonWriterNodes.key(JSON_COLOR_BORDER);
+			 	jsonWriterNodes.value(nodeColorBorder);
+			 	jsonWriterNodes.endObject(); //end color
+		 	}
+		 	 
+		 	jsonWriterNodes.key(JSON_LEVEL);
+			jsonWriterNodes.value(levelValue);	
+		 	
+		
+		
+		jsonWriterNodes.endObject(); //end node object
 		nodeWriter.newLine();	
 		
 		if(writeNodeImmediately) 
@@ -1363,10 +1285,10 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 		
 }
 		 
-	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation) throws IOException
+	private void writeJsonEdge (SNode fromNode, SNode toNode, SRelation relation) throws IOException, SaltParameterException
 	{
 			  // get class of fromNode
-			String edgeColor  = null;
+			String edgeColor;
 			 if (fromNode instanceof SToken){
 				 edgeColor = TOK_BORDER_COLOR_VALUE;
 			 }
@@ -1375,6 +1297,9 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 			 }
 			 else if (fromNode instanceof SStructure){
 				 edgeColor = STRUCTURE_BORDER_COLOR_VALUE;
+			 }
+			 else{
+				 throw new SaltParameterException(fromNode.getId(), "writeJsonEdge", this.getClass());
 			 }
 			 
 			 
@@ -1410,10 +1335,9 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 				  
 		    jsonWriterEdges.key(JSON_WIDTH);
 		    jsonWriterEdges.value(EDGE_WIDTH);	  
-		    if (edgeColor != null){
-		    	jsonWriterEdges.key(JSON_COLOR);
-		    	jsonWriterEdges.value(edgeColor);
-		    }
+		   
+	    	jsonWriterEdges.key(JSON_COLOR);
+	    	jsonWriterEdges.value(edgeColor);		    
 		   
 			 
 			if (relation instanceof SPointingRelation){			  
