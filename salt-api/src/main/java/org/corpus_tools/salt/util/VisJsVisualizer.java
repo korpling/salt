@@ -394,7 +394,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      * </pre>
      * 
      * @param outputFolderUri - a hierarchical URI that specifies the output folder path. Note, that the output folder have not necessarily to be existing.
-     * @param loadJSON - a flag to predefine, whether the JSON-Objects must be load from a separate JSON-file (false recommended)  
      * 
      * @throws SaltParameterException if the outputFolderUri is null
      * @throws SaltResourceException if the output auxiliary files cannot have been created
@@ -405,44 +404,20 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      */
 
 
-public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParameterException,  SaltResourceException, SaltException,
+public void visualize(URI outputFolderUri) throws SaltParameterException,  SaltResourceException, SaltException,
 															SaltResourceException, IOException, XMLStreamException{
 		
 		try {
-			 File outputFolder = createOutputResources(outputFolderUri, loadJSON);	
+			 File outputFolder = createOutputResources(outputFolderUri);	
 			 writeNodeImmediately = true;
 			 
-			 if (loadJSON){
-				 File jsonOutputFolder = new File(outputFolder+ System.getProperty("file.separator") + JSON_FOLDER_OUT);
-				 if(!jsonOutputFolder.exists() || !jsonOutputFolder.isDirectory()) 
-				 	{
-					 throw new SaltException("Either the output folder cannot be created or permission denied.");
-				 	}
-				 
-				 this.jsonOutputStream =new FileOutputStream(new File(jsonOutputFolder, NODES_AND_EDGES_FILE));	 
-				 setJsonWriter(jsonOutputStream);
-				 setNodeWriter(jsonOutputStream);
-				 setEdgeWriter(jsonOutputStream);
-				 try{
-		        		writeJSON();
-		        	}
-		        	catch(IOException e){
-		        		throw new SaltException("A problem occurred while writing JSON resources.");
-		        	}catch(SaltParameterException e){
-						 throw new 	SaltParameterException(e.getMessage());
-					}catch(SaltException e){
-					 throw new 	SaltException(e.getMessage());
-					}    	
-				 }
-				 else{		
 					 try{
 						 writeHTML(outputFolder);		    
 					 }catch(SaltParameterException e){
 						 throw new 	SaltParameterException(e.getMessage());
 					}catch(SaltException e){
 					 throw new 	SaltException(e.getMessage());
-					}    										
-				 }		    	
+					}    											    	
 				
 				writeNodeImmediately = false;					 
 		
@@ -897,7 +872,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
  * Organizes the output folder structure and invokes the method for copying of auxiliary files. 
  */
   
-	private File createOutputResources(URI outputFileUri, boolean loadJSON) 
+	private File createOutputResources(URI outputFileUri) 
 			throws SaltParameterException, SecurityException, FileNotFoundException, IOException{
 		  File outputFolder = null;
 		  if (outputFileUri == null){
@@ -922,14 +897,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		  if(!imgFolderOut.exists()){
 			  imgFolderOut.mkdirs();
 		  }
-		  
-		  if(loadJSON){
-			  File jsonFolderOut = new File(outputFolder, JSON_FOLDER_OUT);
-			  if(!jsonFolderOut.exists()){
-				  jsonFolderOut.mkdir();
-			  }
-		  }
-		 
+		   
 		  
 		  copyResourceFile(getClass().getResourceAsStream(RESOURCE_FOLDER + System.getProperty("file.separator") + CSS_FILE), 
 				  outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
@@ -1019,12 +987,12 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 }
 	
 	
-	private void setJsonWriter (OutputStream os)
+	/*private void setJsonWriter (OutputStream os)
 	{
 		this.jsonWriter = new BufferedWriter(new OutputStreamWriter(os));		
 
 
-	}
+	}*/
 	
 	/**
 	 * Creates a new buffered writer with specified output stream. 
@@ -1053,42 +1021,6 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 
 	
 	   
-	private void writeJSON () throws IOException, SaltParameterException, SaltException {	
-			jsonWriter.write("{");
-			jsonWriter.newLine();
-			jsonWriter.write("\"nodes\":");
-			jsonWriter.newLine();
-			jsonWriter.flush();
-			
-			try{
-				buildJSON();	
-			}catch(SaltParameterException e){
-			 throw new 	SaltParameterException(e.getMessage());
-			}catch(SaltException e){
-			 throw new 	SaltException(e.getMessage());
-			}
-			
-			nodeWriter.flush();		
-			
-			jsonWriter.write(",");
-			jsonWriter.newLine();
-			jsonWriter.write("\"edges\":");
-			jsonWriter.newLine();
-			jsonWriter.flush();
-			
-			edgeWriter.flush();		
-			
-			jsonWriter.newLine();
-			jsonWriter.write("}");
-			jsonWriter.flush();
-			jsonWriter.close();
-			
-			nodeWriter.close();
-			edgeWriter.close();
-		
-	}
-	
-	
 	/**
 	 * 
 	 * By invoking of this method the graph of the salt document specified by the constructor will be traversed. 
