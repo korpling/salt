@@ -210,9 +210,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private  int xPosition = 0;	
 	private  int nTokens = 0;	
 	private  static final int NODE_DIST = 150; 
-	/*private static final String TOK_COLOR_VALUE = "#CCFF99";
-	private static final String SPAN_COLOR_VALUE = "#A9D0F5";
-	private static final String STRUCTURE_COLOR_VALUE = "#FFCC00";*/
 	
 	private static final String TOK_COLOR_VALUE = "#ccff99";
 	private static final String SPAN_COLOR_VALUE = "#dbdcff";
@@ -227,11 +224,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	
 	private static final String JSON_EDGE_TYPE_VALUE  = "curvedCW";
 	private static final String JSON_ROUNDNESS_VALUE = "0.95";
-	
-	//private static final String ALIGN = "left";	
-	
- 
-   
+	   
     private static final int JSON_EDGE_LINE_LENGTH = 160;    
     private static final String NEWLINE = System.lineSeparator();    
     private  final ExportFilter exportFilter;
@@ -243,7 +236,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     public static final String CSS_FOLDER_OUT = "css";
     public static final String IMG_FOLDER_OUT = CSS_FOLDER_OUT + System.getProperty("file.separator") + "img" + System.getProperty("file.separator") + "network";
     public static final String JS_FOLDER_OUT = "js";
-    public static final String JSON_FOLDER_OUT = "json";
     
     public static final String CSS_FILE = "vis.min.css";
     public static final String JS_FILE = "vis.min.js";
