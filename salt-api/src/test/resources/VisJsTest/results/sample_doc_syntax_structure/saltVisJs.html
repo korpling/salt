@@ -111,53 +111,53 @@ var edgesJson = [];
 var network = null;
 function loadSaltObjectAndDraw() {
 var nodesJson = 
-[{"id":"sTok1","label":"id=sTok1\nIs","color":"#CCFF99","x":0,"physics":"false","level":9}
-,{"id":"sTok2","label":"id=sTok2\nthis","color":"#CCFF99","x":150,"physics":"false","level":9}
-,{"id":"sTok3","label":"id=sTok3\nexample","color":"#CCFF99","x":300,"physics":"false","level":9}
-,{"id":"sTok4","label":"id=sTok4\nmore","color":"#CCFF99","x":450,"physics":"false","level":9}
-,{"id":"sTok5","label":"id=sTok5\ncomplicated","color":"#CCFF99","x":600,"physics":"false","level":9}
-,{"id":"sTok6","label":"id=sTok6\nthan","color":"#CCFF99","x":750,"physics":"false","level":9}
-,{"id":"sTok7","label":"id=sTok7\nit","color":"#CCFF99","x":900,"physics":"false","level":9}
-,{"id":"sTok8","label":"id=sTok8\nappears","color":"#CCFF99","x":1050,"physics":"false","level":9}
-,{"id":"sTok9","label":"id=sTok9\nto","color":"#CCFF99","x":1200,"physics":"false","level":9}
-,{"id":"sTok10","label":"id=sTok10\nbe","color":"#CCFF99","x":1350,"physics":"false","level":9}
-,{"id":"sTok11","label":"id=sTok11\n?","color":"#CCFF99","x":1500,"physics":"false","level":9}
-,{"id":"structure3","label":"id=structure3","level":8,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure5","label":"id=structure5","level":8,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure8","label":"id=structure8","level":8,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure12","label":"id=structure12","level":8,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure11","label":"id=structure11","level":7,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure10","label":"id=structure10","level":6,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure9","label":"id=structure9","level":5,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure7","label":"id=structure7","level":4,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure6","label":"id=structure6","level":3,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure4","label":"id=structure4","level":2,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure2","label":"id=structure2","level":1,"group":"0","color":"#FFCC00","x":750}
-,{"id":"structure1","label":"id=structure1","level":0,"group":"0","color":"#FFCC00","x":750}
+[{"id":"sTok1","label":"id=sTok1\n\nIs","x":0,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok2","label":"id=sTok2\n\nthis","x":150,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok3","label":"id=sTok3\n\nexample","x":300,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok4","label":"id=sTok4\n\nmore","x":450,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok5","label":"id=sTok5\n\ncomplicated","x":600,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok6","label":"id=sTok6\n\nthan","x":750,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok7","label":"id=sTok7\n\nit","x":900,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok8","label":"id=sTok8\n\nappears","x":1050,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok9","label":"id=sTok9\n\nto","x":1200,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok10","label":"id=sTok10\n\nbe","x":1350,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"sTok11","label":"id=sTok11\n\n?","x":1500,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":9}
+,{"id":"structure3","label":"id=structure3","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":8}
+,{"id":"structure5","label":"id=structure5","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":8}
+,{"id":"structure8","label":"id=structure8","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":8}
+,{"id":"structure12","label":"id=structure12","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":8}
+,{"id":"structure11","label":"id=structure11","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":7}
+,{"id":"structure10","label":"id=structure10","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":6}
+,{"id":"structure9","label":"id=structure9","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":5}
+,{"id":"structure7","label":"id=structure7","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":4}
+,{"id":"structure6","label":"id=structure6","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":3}
+,{"id":"structure4","label":"id=structure4","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":2}
+,{"id":"structure2","label":"id=structure2","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":1}
+,{"id":"structure1","label":"id=structure1","group":"0","x":750,"color":{"background":"#ffff7d","border":"#e5e570"},"level":0}
 ];
 var edgesJson = 
-[{"from":"structure2","to":"sTok1"}
-,{"from":"structure3","to":"sTok2"}
-,{"from":"structure3","to":"sTok3"}
-,{"from":"structure2","to":"structure3"}
-,{"from":"structure5","to":"sTok4"}
-,{"from":"structure5","to":"sTok5"}
-,{"from":"structure4","to":"structure5"}
-,{"from":"structure6","to":"sTok6"}
-,{"from":"structure8","to":"sTok7"}
-,{"from":"structure7","to":"structure8"}
-,{"from":"structure9","to":"sTok8"}
-,{"from":"structure11","to":"sTok9"}
-,{"from":"structure12","to":"sTok10"}
-,{"from":"structure11","to":"structure12"}
-,{"from":"structure10","to":"structure11"}
-,{"from":"structure9","to":"structure10"}
-,{"from":"structure7","to":"structure9"}
-,{"from":"structure6","to":"structure7"}
-,{"from":"structure4","to":"structure6"}
-,{"from":"structure2","to":"structure4"}
-,{"from":"structure1","to":"structure2"}
-,{"from":"structure1","to":"sTok11"}
+[{"from":"structure2","to":"sTok1","width":"2","color":"#e5e570"}
+,{"from":"structure3","to":"sTok2","width":"2","color":"#e5e570"}
+,{"from":"structure3","to":"sTok3","width":"2","color":"#e5e570"}
+,{"from":"structure2","to":"structure3","width":"2","color":"#e5e570"}
+,{"from":"structure5","to":"sTok4","width":"2","color":"#e5e570"}
+,{"from":"structure5","to":"sTok5","width":"2","color":"#e5e570"}
+,{"from":"structure4","to":"structure5","width":"2","color":"#e5e570"}
+,{"from":"structure6","to":"sTok6","width":"2","color":"#e5e570"}
+,{"from":"structure8","to":"sTok7","width":"2","color":"#e5e570"}
+,{"from":"structure7","to":"structure8","width":"2","color":"#e5e570"}
+,{"from":"structure9","to":"sTok8","width":"2","color":"#e5e570"}
+,{"from":"structure11","to":"sTok9","width":"2","color":"#e5e570"}
+,{"from":"structure12","to":"sTok10","width":"2","color":"#e5e570"}
+,{"from":"structure11","to":"structure12","width":"2","color":"#e5e570"}
+,{"from":"structure10","to":"structure11","width":"2","color":"#e5e570"}
+,{"from":"structure9","to":"structure10","width":"2","color":"#e5e570"}
+,{"from":"structure7","to":"structure9","width":"2","color":"#e5e570"}
+,{"from":"structure6","to":"structure7","width":"2","color":"#e5e570"}
+,{"from":"structure4","to":"structure6","width":"2","color":"#e5e570"}
+,{"from":"structure2","to":"structure4","width":"2","color":"#e5e570"}
+,{"from":"structure1","to":"structure2","width":"2","color":"#e5e570"}
+,{"from":"structure1","to":"sTok11","width":"2","color":"#e5e570"}
 ];
 var nodeDist =120;
 draw(nodesJson, edgesJson, nodeDist);
@@ -208,7 +208,7 @@ physics: {
 hierarchicalRepulsion: {
 centralGravity: 0.8,
 springLength: 100,
-springConstant: 1.0,
+springConstant: 1.1,
 nodeDistance: nodeDist,
 damping: 0.04
 },

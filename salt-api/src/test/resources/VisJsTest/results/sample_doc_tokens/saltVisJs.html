@@ -111,17 +111,17 @@ var edgesJson = [];
 var network = null;
 function loadSaltObjectAndDraw() {
 var nodesJson = 
-[{"id":"sTok1","label":"id=sTok1\nIs","color":"#CCFF99","x":0,"physics":"false","level":0}
-,{"id":"sTok2","label":"id=sTok2\nthis","color":"#CCFF99","x":150,"physics":"false","level":0}
-,{"id":"sTok3","label":"id=sTok3\nexample","color":"#CCFF99","x":300,"physics":"false","level":0}
-,{"id":"sTok4","label":"id=sTok4\nmore","color":"#CCFF99","x":450,"physics":"false","level":0}
-,{"id":"sTok5","label":"id=sTok5\ncomplicated","color":"#CCFF99","x":600,"physics":"false","level":0}
-,{"id":"sTok6","label":"id=sTok6\nthan","color":"#CCFF99","x":750,"physics":"false","level":0}
-,{"id":"sTok7","label":"id=sTok7\nit","color":"#CCFF99","x":900,"physics":"false","level":0}
-,{"id":"sTok8","label":"id=sTok8\nappears","color":"#CCFF99","x":1050,"physics":"false","level":0}
-,{"id":"sTok9","label":"id=sTok9\nto","color":"#CCFF99","x":1200,"physics":"false","level":0}
-,{"id":"sTok10","label":"id=sTok10\nbe","color":"#CCFF99","x":1350,"physics":"false","level":0}
-,{"id":"sTok11","label":"id=sTok11\n?","color":"#CCFF99","x":1500,"physics":"false","level":0}
+[{"id":"sTok1","label":"id=sTok1\n\nIs","x":0,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok2","label":"id=sTok2\n\nthis","x":150,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok3","label":"id=sTok3\n\nexample","x":300,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok4","label":"id=sTok4\n\nmore","x":450,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok5","label":"id=sTok5\n\ncomplicated","x":600,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok6","label":"id=sTok6\n\nthan","x":750,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok7","label":"id=sTok7\n\nit","x":900,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok8","label":"id=sTok8\n\nappears","x":1050,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok9","label":"id=sTok9\n\nto","x":1200,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok10","label":"id=sTok10\n\nbe","x":1350,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+,{"id":"sTok11","label":"id=sTok11\n\n?","x":1500,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
 ];
 var edgesJson = 
 [];
@@ -189,34 +189,10 @@ iterations: 1000
 }
 ;
 network = new vis.Network(container, data, options);
-network.on("stabilizationProgress", function(params) {
-var maxWidth = 496;
-var minWidth = 20;
-var widthFactor = params.iterations/params.total;
-var width = Math.max(minWidth,maxWidth * widthFactor);
-document.getElementById('loadingBar').style.opacity = 1;
-document.getElementById('bar').style.width = width + 'px';
-document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
-});
-network.on("stabilizationIterationsDone", function() {
-document.getElementById('text').innerHTML = '100%';
-document.getElementById('bar').style.width = '496px';
-document.getElementById('loadingBar').style.opacity = 0;
-});
 }
 </script>
 </head>
 <body onload="start();">
-<div id="wrapper">
-<div id="loadingBar">
-<div class="outerBorder">
-<div id="text">0%</div>
-<div id="border">
-<div id="bar">
-</div>
-</div>
-</div>
-</div>
 <h2>Dokument-Id: null</h2>
 <div style="width:700px; font-size:14px; text-align: justify;"/>
 <p><input type="button" id="btn-UD" value="Up-Down"/>
@@ -240,6 +216,5 @@ directionInput.value = "DU";
 start();
 };
 </script>
-</div>
 </body>
 </html>
