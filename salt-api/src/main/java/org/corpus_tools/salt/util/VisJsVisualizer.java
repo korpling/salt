@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.security.CodeSource;
-import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,10 +22,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.jar.JarInputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
 import javax.xml.stream.XMLStreamException;
 
 import org.corpus_tools.salt.SaltFactory;
@@ -72,7 +67,7 @@ import javax.xml.stream.XMLStreamWriter;
  *	VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri); </br>
  *	try { </br>
  *		 URI outputFileUri = URI.createFileURI(outputFolder);</br>
- *		 visJsVisualizer.visualize(outputFileUri, false); </br>
+ *		 visJsVisualizer.visualize(outputFileUri); </br>
  *	} catch (IOException | XMLStreamException e) { </br>
  *		e.printStackTrace(); </br>
  *	}</br>
@@ -119,7 +114,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	
 	public  SDocument doc;
 	public String docId;
-	private OutputStream jsonOutputStream;
 	public  BufferedWriter jsonWriter;
 	public  BufferedWriter nodeWriter;
 	public  BufferedWriter edgeWriter;
@@ -257,7 +251,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     
     private boolean withPhysics = false;
     
-    													
+    
     		 
 
     
@@ -978,13 +972,6 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 	
 }
 	
-	
-	/*private void setJsonWriter (OutputStream os)
-	{
-		this.jsonWriter = new BufferedWriter(new OutputStreamWriter(os));		
-
-
-	}*/
 	
 	/**
 	 * Creates a new buffered writer with specified output stream. 
