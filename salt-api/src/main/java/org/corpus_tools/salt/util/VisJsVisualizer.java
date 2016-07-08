@@ -931,10 +931,23 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		  }
 		 
 		  
-		  copyResourceFile(RESOURCE_FOLDER, CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
+		  copyResourceFile(getClass().getResourceAsStream(RESOURCE_FOLDER + System.getProperty("file.separator") + CSS_FILE), 
+				  outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
+		  
+		  copyResourceFile(getClass().getResourceAsStream(RESOURCE_FOLDER + System.getProperty("file.separator") + JS_FILE), 
+				  outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
+		  
+		  copyResourceFile(getClass().getResourceAsStream(RESOURCE_FOLDER + System.getProperty("file.separator") + JQUERY_FILE), 
+				  outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
+		  
+		  copyResourceFile(getClass().getResourceAsStream(RESOURCE_FOLDER + System.getProperty("file.separator") + HTML_FILE), 
+				  outputFolder.getPath(), null, HTML_FILE);	
+		  
+		  
+		 /* copyResourceFile(RESOURCE_FOLDER, CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
 		  copyResourceFile(RESOURCE_FOLDER, JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
 		  copyResourceFile(RESOURCE_FOLDER, JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
-		  copyResourceFile(RESOURCE_FOLDER, HTML_FILE, outputFolder.getPath(), null, HTML_FILE);				
+		  copyResourceFile(RESOURCE_FOLDER, HTML_FILE, outputFolder.getPath(), null, HTML_FILE);*/				
 		  
 		
 		  ClassLoader classLoader = getClass().getClassLoader();
@@ -947,8 +960,12 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 			  File[] imgFiles = imgFolder.listFiles();		 
 				 for(File imgFile : imgFiles)
 				 {	
+					 InputStream inputStream = getClass().getResourceAsStream(System.getProperty("file.separator") + RESOURCE_FOLDER_IMG_NETWORK 
+							  + System.getProperty("file.separator") 
+							  + imgFile.getName());
+					 copyResourceFile(inputStream,  outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
 				
-					 copyResourceFile(System.getProperty("file.separator") + RESOURCE_FOLDER_IMG_NETWORK, imgFile.getName(), outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
+					 //copyResourceFile(System.getProperty("file.separator") + RESOURCE_FOLDER_IMG_NETWORK, imgFile.getName(), outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
 				 }
 		  }
 		  else if (codeSourseFile.getName().endsWith("jar")){
@@ -959,7 +976,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 				  JarEntry entry = entries.nextElement();
 				  if (entry.getName().startsWith(RESOURCE_FOLDER_IMG_NETWORK) && !entry.isDirectory()) {
 	
-				  copyResourceFileFromJar(jarFile.getInputStream(entry), entry.getSize(), 
+				  copyResourceFile(jarFile.getInputStream(entry),  
 		    			  outputFolder.getPath(), IMG_FOLDER_OUT, entry.getName().replaceFirst(RESOURCE_FOLDER_IMG_NETWORK, ""));
 				  }
 				  
@@ -974,7 +991,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	
 		
 	
-private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
+/*private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
 		throws IOException 
 			{
 InputStream inputStream = getClass().getResourceAsStream(resourceFolder 
@@ -1013,9 +1030,9 @@ InputStream inputStream = getClass().getResourceAsStream(resourceFolder
 	fileOutStream.close();
 	inputStream.close();
 	
-}
+}*/
 
-private void copyResourceFileFromJar (InputStream inputStream,  long size, String outputFolder, String outSubFolder, String outFile) 
+private void copyResourceFile (InputStream inputStream,  String outputFolder, String outSubFolder, String outFile) 
 																					throws IOException 
 			{
   FileOutputStream fileOutStream = null;
@@ -1038,13 +1055,12 @@ private void copyResourceFileFromJar (InputStream inputStream,  long size, Strin
 	int bufferSize = 32*1024;		  
 	byte [] bytes = new byte[bufferSize];
 	int readBytes = 0;
-	long readBytesTotal = 0;
-		
-	while (((readBytes = inputStream.read(bytes)) != -1) && readBytesTotal <= size) 
+	
+	while ((readBytes = inputStream.read(bytes)) != -1) 
 	{		
 	fileOutStream.write(bytes, 0, readBytes);
-	readBytesTotal+=readBytes;	
 	 }
+	
 	
 	fileOutStream.flush();	
 	fileOutStream.close();
