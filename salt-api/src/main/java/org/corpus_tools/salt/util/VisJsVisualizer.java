@@ -226,7 +226,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     
     private boolean writeNodeImmediately = false;
     
-    public static final String NODES_AND_EDGES_FILE = "saltNodesAndEdges.json";
     public static final String CSS_FOLDER_OUT = "css";
     public static final String IMG_FOLDER_OUT = CSS_FOLDER_OUT + System.getProperty("file.separator") + "img" + System.getProperty("file.separator") + "network";
     public static final String JS_FOLDER_OUT = "js";

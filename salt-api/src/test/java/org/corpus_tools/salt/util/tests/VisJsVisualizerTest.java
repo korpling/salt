@@ -46,7 +46,6 @@ public class VisJsVisualizerTest {
 		allFileNames[1] = VisJsVisualizer.JS_FOLDER_OUT + FSEP + VisJsVisualizer.JQUERY_FILE;
 		allFileNames[2] = VisJsVisualizer.JS_FOLDER_OUT + FSEP + VisJsVisualizer.JS_FILE;
 		allFileNames[3] = VisJsVisualizer.CSS_FOLDER_OUT + FSEP + VisJsVisualizer.CSS_FILE;
-		allFileNames[4] = VisJsVisualizer.JSON_FOLDER_OUT + FSEP + VisJsVisualizer.NODES_AND_EDGES_FILE;	
 	  }
 		
 	
