@@ -943,13 +943,7 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 		  copyResourceFile(getClass().getResourceAsStream(RESOURCE_FOLDER + System.getProperty("file.separator") + HTML_FILE), 
 				  outputFolder.getPath(), null, HTML_FILE);	
 		  
-		  
-		 /* copyResourceFile(RESOURCE_FOLDER, CSS_FILE, outputFolder.getPath(), CSS_FOLDER_OUT, CSS_FILE);
-		  copyResourceFile(RESOURCE_FOLDER, JS_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JS_FILE);
-		  copyResourceFile(RESOURCE_FOLDER, JQUERY_FILE, outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
-		  copyResourceFile(RESOURCE_FOLDER, HTML_FILE, outputFolder.getPath(), null, HTML_FILE);*/				
-		  
-		
+		 	
 		  ClassLoader classLoader = getClass().getClassLoader();
 		  CodeSource srcCode = VisJsVisualizer.class.getProtectionDomain().getCodeSource();
 		  URL codeSourceUrl = srcCode.getLocation();		  
@@ -964,8 +958,6 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 							  + System.getProperty("file.separator") 
 							  + imgFile.getName());
 					 copyResourceFile(inputStream,  outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
-				
-					 //copyResourceFile(System.getProperty("file.separator") + RESOURCE_FOLDER_IMG_NETWORK, imgFile.getName(), outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
 				 }
 		  }
 		  else if (codeSourseFile.getName().endsWith("jar")){
@@ -990,48 +982,6 @@ public void visualize(URI outputFolderUri, boolean loadJSON) throws SaltParamete
 	}
 	
 		
-	
-/*private void copyResourceFile (String resourceFolder, String inFile, String outputFolder, String outSubFolder, String outFile) 
-		throws IOException 
-			{
-InputStream inputStream = getClass().getResourceAsStream(resourceFolder 
-		  + System.getProperty("file.separator") 
-		  + inFile);		  
- 
- FileOutputStream fileOutStream = null;
-  
-  if (outSubFolder != null)
-  {
-	
-		fileOutStream =  new FileOutputStream(new File (outputFolder
-				  + System.getProperty("file.separator")
-				  + outSubFolder 
-				  + System.getProperty("file.separator")
-				  + outFile));
-	
-	  }
-  else
-  {	
-		fileOutStream = new FileOutputStream(new File (outputFolder
-				  + System.getProperty("file.separator")
-				  + outFile));	
-  }	
-  
-	int bufferSize = 32*1024;		  
-	byte [] bytes = new byte[bufferSize];
-	int readBytes = 0;
-	
-	while ((readBytes = inputStream.read(bytes)) != -1) 
-	{		
-	fileOutStream.write(bytes, 0, readBytes);
-	 }
-	  
-	fileOutStream.flush(); 
-	fileOutStream.close();
-	inputStream.close();
-	
-}*/
-
 private void copyResourceFile (InputStream inputStream,  String outputFolder, String outSubFolder, String outFile) 
 																					throws IOException 
 			{
