@@ -11,6 +11,22 @@
 *	artifactId:		salt-saltCommon												  *
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
+
+Version 3.0.6
+=============
+* fix #69: create StextualDS.tokenize()
+* fix #86: Tokenizer sets Italian (?) clitics to LanguageCode for Spanish
+* fix #87: Proclitics regex for French doesn't work as expected
+* Support dynamic handling of clitics in Tokenizer (set directly, read from file)
+
+Version 3.0.5
+=============
+* fix #82: GraphML serialization was invalid
+
+Version 3.0.4
+=============
+* fix #81: sortTokenByText() will delete all textual relations
+
 Version 3.0.3
 =============
 * fixed signature of addRelation and removeRelation

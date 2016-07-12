@@ -29,6 +29,7 @@ import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SCorpusRelation;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.core.impl.SGraphImpl;
@@ -41,6 +42,8 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
+
+import com.google.common.base.Strings;
 
 @SuppressWarnings("serial")
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
@@ -129,7 +132,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is not a SRelation object. ");
 		}
 		// start: create a name if none exists
-		if ((((SRelation) relation).getName() == null) || (((SRelation) relation).getName().isEmpty())) {
+		if (Strings.isNullOrEmpty(((SRelation) relation).getName())) {
 			if (relation instanceof SCorpusRelation) {
 				((SRelation) relation).setName("corpRel" + (getCorpusRelations().size() + 1));
 			} else if (relation instanceof SCorpusDocumentRelation) {
@@ -139,7 +142,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			}
 		}
 		// end: create a name if none exists
-		if ((((SRelation) relation).getId() == null) || (((SRelation) relation).getId().isEmpty())) {
+		if (Strings.isNullOrEmpty(relation.getId())) {
 			((SRelation) relation).setId("salt:/" + ((SRelation) relation).getName());
 		}
 		super.basicAddRelation(relation);
@@ -169,7 +172,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	protected void basicAddNode(SNode node) {
 		// start: create a name if none exists
-		if ((((SNode) node).getName() == null) || (((SNode) node).getName().isEmpty())) {
+		if (Strings.isNullOrEmpty(((SNode) node).getName())) {
 			if (node instanceof SCorpus) {
 				((SNode) node).setName("corp" + (getCorpora().size() + 1));
 			} else if (node instanceof SDocument) {
@@ -179,7 +182,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			}
 		}
 		// end: create a name if none exists
-		if ((((SNode) node).getId() == null) || (((SNode) node).getId().isEmpty())) {
+		if (Strings.isNullOrEmpty(node.getId())) {
 			// id a name if none exists
 			((SNode) node).setId("salt:/" + ((SNode) node).getName());
 		}
@@ -268,7 +271,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 		String namePart = null;
 		namePart = subCorpus.getName();
-		if ((namePart == null) || (namePart.isEmpty())) {
+		if (Strings.isNullOrEmpty(namePart)) {
 			namePart = "corp_" + getCorpora().size();
 		}
 
@@ -298,7 +301,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 		String namePart = null;
 		namePart = document.getName();
-		if ((namePart == null) || (namePart.isEmpty())) {
+		if (Strings.isNullOrEmpty(namePart)) {
 			namePart = "doc_" + getCorpora().size();
 		}
 		GraphFactory.createIdentifier(document, URI.createURI(corpus.getId() + "/" + namePart).toString());
@@ -358,19 +361,23 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		return (document);
 	}
 
+
 	/** {@inheritDoc} **/
 	@Override
-	public List<SCorpus> createCorpus(URI corpusPath) {
+	public List<SCorpus> createCorpus(final URI corpusPath) {
+		final URI cPath= SaltUtil.createSaltURI(corpusPath); 
 		List<SCorpus> retVal = null;
-		if (corpusPath != null) {
+		if (cPath != null) {
 			SCorpus parentCorpus = null;
-			for (int i = corpusPath.segments().length - 1; i >= 0; i--) {
-				URI currPath = corpusPath.trimSegments(i);
-				SNode node = getNode(currPath.toString());
+			for (int i = cPath.segments().length - 1; i >= 0; i--) {
+				final URI currPath = cPath.trimSegments(i);
+				String id = currPath.toString();
+				final SNode node = getNode(id);
 				if (node == null) {
 					parentCorpus = createCorpus(parentCorpus, currPath.lastSegment());
-					if (retVal == null)
+					if (retVal == null) {
 						retVal = new ArrayList<SCorpus>();
+					}
 					retVal.add(parentCorpus);
 				} else {
 					parentCorpus = (SCorpus) node;
@@ -378,19 +385,64 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			}
 		}
 		return (retVal);
-
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public SDocument createDocument(URI documentPath) {
+	public SDocument createDocument(final URI documentPath) {
+		final URI dPath= SaltUtil.createSaltURI(documentPath);
 		SDocument retVal = null;
-		List<SCorpus> corpora = createCorpus(documentPath.trimSegments(1));
+		List<SCorpus> corpora = createCorpus(dPath.trimSegments(1));
 		if ((corpora == null) || (corpora.size() == 0)) {
-			corpora = new Vector<SCorpus>();
-			corpora.add((SCorpus) getNode(documentPath.trimSegments(1).toString()));
+			corpora = new ArrayList<SCorpus>();
+			String id = dPath.trimSegments(1).toString();
+			corpora.add((SCorpus) getNode(id));
 		}
-		retVal = createDocument(corpora.get(corpora.size() - 1), documentPath.lastSegment());
+		retVal = createDocument(corpora.get(corpora.size() - 1), dPath.lastSegment());
 		return (retVal);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toTreeString() {
+		final List<SNode> roots = getRoots();
+		final StringBuilder str= new StringBuilder();
+		if (SaltUtil.isNotNullOrEmpty(roots)) {
+			for (SNode root : roots) {
+				str.append(reportCorpusStructure(this, root, "", true));
+			}
+		}
+		return str.toString();
+	}
+
+	/**
+	 * Returns the corpus structure as an ascii tree.
+	 * 
+	 * @param sGraph
+	 *            the corpus structure to be printed
+	 * @param node
+	 *            root node to start from
+	 * @param prefix
+	 * @param isTail
+	 * @return
+	 */
+	private String reportCorpusStructure(final SGraph sGraph, final SNode node, final String prefix, final boolean isTail) {
+		final StringBuilder retStr = new StringBuilder();
+		retStr.append(prefix);
+		retStr.append(((isTail ? "└── " : "├── ") + node.getName()));
+		retStr.append("\n");
+		final List<SRelation<SNode, SNode>> outRelations = sGraph.getOutRelations(node.getId());
+		int i = 0;
+		for (SRelation<SNode, SNode> out : outRelations) {
+			boolean newTail= true;
+			if (i < outRelations.size() - 1) {
+				newTail= false;
+			}
+			retStr.append(reportCorpusStructure(sGraph, (SNode) out.getTarget(), prefix + (isTail ? "    " : "│   "), newTail));
+			i++;
+		}
+		return (retStr.toString());
 	}
 } // SCorpusGraphImpl

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/korpling/salt.svg?branch=develop)](https://travis-ci.org/korpling/salt)
+
 ![](http://korpling.github.io/pepper/images/SaltNPepper_logo2010.png)
 
 #Salt

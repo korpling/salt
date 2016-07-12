@@ -17,6 +17,7 @@
  */
 package org.corpus_tools.salt.extensions.notification;
 
+import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 
@@ -26,8 +27,8 @@ import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
  * the {@link org.eclipse.emf.common.notify.Notifier} object.
  * 
  * @author florian
- *
  */
+@Beta
 public interface Listener {
 	/**
 	 * An enumeration containing all possible types of a notification.
@@ -35,6 +36,7 @@ public interface Listener {
 	 * @author florian
 	 *
 	 */
+  @Beta
 	public enum NOTIFICATION_TYPE {
 		/** An object or value has been added **/
 		ADD,
@@ -60,8 +62,10 @@ public interface Listener {
 	 * @param container
 	 *            the object, which contains the changed object
 	 */
+  @Beta
 	public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue, Object container);
 
+  @Beta
 	public static class Event {
 		public NOTIFICATION_TYPE type = null;
 		public GRAPH_ATTRIBUTES attribute = null;
