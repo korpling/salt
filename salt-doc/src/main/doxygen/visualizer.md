@@ -43,7 +43,7 @@ try {
 
 After execution the visualizer organizes a file structure as shown below.
 
-|![](./images/file_tree.png)| |
+![](./images/file_tree.png)
 
 The following image demonstrate a fragment from saltVisJs.html file.
 
