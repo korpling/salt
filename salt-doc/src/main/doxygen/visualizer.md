@@ -2,7 +2,7 @@ Visualize salt model {#visualizer}
 ====
 
 
-Salt's [VisJsVisualizer](\ref org.corpus_tools.salt.util.VisJsVisualizer) provides a possibility to create a html file, which visualizes a salt graph, created from an [SDocument]\link org.corpus_tools.salt.common.SDocument \endlink or from an [URI](\ref org.eclipse.emf.common.util.URI) of a salt file, using the vis.js library. Furthermore it allows to filter nodes and/or relations of salt document. Therefore you have to implement the [ExportFilter](@ref org.corpus_tools.salt.util.ExportFilter). If no export filter used, all nodes and all relations but textual relations will be visualized.
+Salt's [VisJsVisualizer](\ref org.corpus_tools.salt.util.VisJsVisualizer) provides a possibility to create a html file, which visualizes a salt graph, created from an [SDocument](\ref org.corpus_tools.salt.common.SDocument) or from an [URI](\ref org.eclipse.emf.common.util.URI) of a salt file, using the vis.js library. Furthermore it allows to filter nodes and/or relations of salt document. Therefore you have to implement the [ExportFilter](\ref org.corpus_tools.salt.util.ExportFilter). If no export filter used, all nodes and all relations but textual relations will be visualized.
 
 A simple way to use VisJsVisualizer for writing the html file is shown in the following example code.
  ~~~{.java} 
@@ -42,8 +42,8 @@ try {
 ~~~
 
 After execution the visualizer organizes a file structure as shown below.
-![](./images/file_tree.png)
+![l](./images/file_tree.png)
 
 The following image demonstrate a fragment from saltVisJs.html file.
-![](./images/sample_doc_view.png)
+![l](./images/sample_doc_view.png)
 
