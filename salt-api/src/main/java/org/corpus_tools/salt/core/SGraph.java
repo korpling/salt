@@ -19,6 +19,7 @@ package org.corpus_tools.salt.core;
 
 import java.util.List;
 
+import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
@@ -53,6 +54,34 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	public List<SNode> getLeafs();
 
 	/**
+	 * Returns a list of nodes in base document. The returned nodes are
+	 * equivalents to the direct children of the passed parent node. The
+	 * children are retrieved via traversing of relations of the passed
+	 * {@link SALT_TYPE}.
+	 * 
+	 * @param parent
+	 *            node to who the children are retrieved
+	 * @param relationType
+	 *            type of relations to be traversed, if relationType is null,
+	 *            all relations are used
+	 * @return a list of children nodes, or an empty list
+	 */
+	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType);
+
+	/**
+	 * Returns a list of nodes that are the parents of every node in the given
+	 * base list. Only nodes with the given {@link SALT_TYPE} will be
+	 * considered.
+	 * 
+	 * @param children
+	 *            list of nodes whose parents are looked for
+	 * @param nodeType
+	 *            regarded types of relations
+	 * @return a list of parents
+	 */
+	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType);
+
+	/**
 	 * Traverses a graph in the given order traverseType and starts traversing
 	 * with the given startNodes. When a node is reached, first this method will
 	 * invoke the method
@@ -82,14 +111,33 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler);
 
 	/**
-	 * {@inheritDoc #traverse(EList, GRAPH_TRAVERSE_TYPE, String,
-	 * GraphTraverseHandler)} Attention: When isCycleSafe is set to false, this
-	 * method does not take care about cycles, and it eventually runs into
-	 * endless loops.
+	 * Traverses a graph in the given order traverseType and starts traversing
+	 * with the given startNodes. When a node is reached, first this method will
+	 * invoke the method
+	 * {@link GraphTraverseHandler#checkConstraint(GRAPH_TRAVERSE_MODE, String, Edge, Node, long)}
+	 * of the given callback handler traverseHandler, second the method
+	 * {@link GraphTraverseHandler#nodeReached(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)}
+	 * is invoked. When a node was left, the method
+	 * {@link GraphTraverseHandler#nodeLeft(GRAPH_TRAVERSE_MODE, String, Node, Edge, Node, long)}
+	 * is invoked. When calling these methods, the traverseId will be passed, so
+	 * that the callback handler knows which traversal is meant. This is
+	 * helpful, in case of a single callback handler is used for more than one
+	 * traversal at the same time. This method throws a
+	 * {@link GraphTraverserException} in case of the graph contains a cycle. A
+	 * cycle means a path containing the same node twice.
 	 * 
-	 * @model startNodesMany="true" traverseHandlerDataType=
-	 *        "de.hu_berlin.german.korpling.saltnpepper.salt.graph.GraphTraverseHandler"
-	 * @generated
+	 * @param startNodes
+	 *            list of nodes at which the traversal shall start
+	 * @param traverseType
+	 *            type of traversing
+	 * @param traverseId
+	 *            identification for callback handler, in case of more than one
+	 *            traversal is running at the same time with the same callback
+	 *            handler
+	 * @param traverseHandler
+	 *            callback handler, on which the three methods will be invoked
+	 * @param isCycleSafe
+	 *            determines whether cycle safeness chould be checked
 	 */
 	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 

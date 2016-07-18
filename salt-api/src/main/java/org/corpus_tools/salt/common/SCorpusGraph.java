@@ -254,4 +254,9 @@ public interface SCorpusGraph extends SGraph {
 	 */
 	public SDocument createDocument(URI documentPath);
 
+	/**
+	 * Creates an ascii tree of the corpus structure and returns it.
+	 * @return corpus structure as ascii tree
+	 */
+	public String toTreeString();
 } // SCorpusGraph

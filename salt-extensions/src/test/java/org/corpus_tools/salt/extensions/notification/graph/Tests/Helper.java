@@ -41,7 +41,6 @@ public class Helper {
 	}
 
 	/** Checks whether the notification about name change is correct. **/
-	@Test
 	public static void testNotificationAddRemoveValue(LabelableElement fixture, GRAPH_ATTRIBUTES attribute) {
 		MyListener listener = new MyListener();
 		if (fixture instanceof Notifier) {

@@ -70,15 +70,16 @@ public class GraphMLWriter {
 			w.writeDefaultNamespace(NS);
 			w.writeNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			w.writeAttribute("http://www.w3.org/2001/XMLSchema-instance", "schemaLocation", NS + " http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
-
+			
 			Set<String> existingKeys = new HashSet<>();
 			IDManager ids = new IDManager();
 
 			// we always use the "salt::type" label
 			w.writeStartElement(NS, "key");
-			w.writeAttribute(NS, "id", "salt::type");
-			w.writeAttribute(NS, "for", "all");
-			w.writeAttribute(NS, "attr.type", "string");
+			w.writeAttribute("id", "salt::type");
+			w.writeAttribute("attr.name", "salt::type");
+			w.writeAttribute("for", "all");
+			w.writeAttribute("attr.type", "string");
 			w.writeEndElement();
 			existingKeys.add("salt::type");
 
@@ -134,9 +135,10 @@ public class GraphMLWriter {
 							}
 							if (type != null) {
 								w.writeStartElement(NS, "key");
-								w.writeAttribute(NS, "id", l.getQName());
-								w.writeAttribute(NS, "for", "all");
-								w.writeAttribute(NS, "attr.type", type);
+								w.writeAttribute("id", l.getQName());
+								w.writeAttribute("attr.name", l.getQName());
+								w.writeAttribute("for", "all");
+								w.writeAttribute("attr.type", type);
 
 								w.writeEndElement();
 								existing.add(id);
@@ -154,7 +156,7 @@ public class GraphMLWriter {
 				String key = l.getQName();
 				if (existingKeys.contains(key)) {
 					w.writeStartElement(NS, "data");
-					w.writeAttribute(NS, "key", key);
+					w.writeAttribute("key", key);
 					w.writeCharacters("" + l.getValue());
 					w.writeEndElement();
 				}
@@ -170,18 +172,38 @@ public class GraphMLWriter {
 	 * @throws XMLStreamException
 	 */
 	private static void writeType(XMLStreamWriter w, Object o) throws XMLStreamException {
-		Set<SALT_TYPE> types = SALT_TYPE.class2SaltType(o.getClass());
-		if (!types.isEmpty()) {
-			w.writeStartElement(NS, "data");
-			w.writeAttribute(NS, "key", "salt::type");
-			w.writeCharacters(types.iterator().next().name());
-			w.writeEndElement();
+		Set<SALT_TYPE> saltTypes = SALT_TYPE.class2SaltType(o.getClass());
+		
+		if(!saltTypes.isEmpty()) {
+			// find the most specific type
+			SALT_TYPE mostSpecificType = null;
+			for(SALT_TYPE type : saltTypes) {
+				if(mostSpecificType == null) {
+					mostSpecificType = type;
+				} else {
+					final Class<?> A = mostSpecificType.getJavaType();
+					final Class<?> B = type.getJavaType();
+					
+					// Check if this type (B) is more specific as the current most specific type (A).
+					// Thus "B superclass of A" is ok, but not "A superclass of B".
+					if(A.isAssignableFrom(B)) {
+						mostSpecificType = type;
+					}
+				}
+			}
+			
+			if (mostSpecificType != null) {
+				w.writeStartElement(NS, "data");
+				w.writeAttribute("key", "salt::type");
+				w.writeCharacters(mostSpecificType.name());
+				w.writeEndElement();
+			}
 		}
 	}
 
 	private static void writeNode(XMLStreamWriter w, Node c, IDManager ids, Set<String> existingKeys) throws XMLStreamException {
 		w.writeStartElement(NS, "node");
-		w.writeAttribute(NS, "id", ids.getID(c));
+		w.writeAttribute("id", ids.getID(c));
 
 		writeType(w, c);
 		writeLabels(w, c.getLabels(), existingKeys);
@@ -190,9 +212,9 @@ public class GraphMLWriter {
 
 	private static void writeEdge(XMLStreamWriter w, Relation r, IDManager ids, Set<String> existingKeys) throws XMLStreamException {
 		w.writeStartElement(NS, "edge");
-		w.writeAttribute(NS, "id", ids.getID(r));
-		w.writeAttribute(NS, "source", ids.getID(r.getSource()));
-		w.writeAttribute(NS, "target", ids.getID(r.getTarget()));
+		w.writeAttribute("id", ids.getID(r));
+		w.writeAttribute("source", ids.getID(r.getSource()));
+		w.writeAttribute("target", ids.getID(r.getTarget()));
 
 		writeType(w, r);
 		writeLabels(w, r.getLabels(), existingKeys);
@@ -210,8 +232,8 @@ public class GraphMLWriter {
 		// graphs without nodes are not allowed
 		if (nodes != null && !nodes.isEmpty()) {
 			w.writeStartElement(NS, "graph");
-			w.writeAttribute(NS, "id", ids.getID(g));
-			w.writeAttribute(NS, "edgedefault", "directed");
+			w.writeAttribute("id", ids.getID(g));
+			w.writeAttribute("edgedefault", "directed");
 
 			if (includeDocLabels && g.getDocument() != null) {
 				writeLabels(w, g.getDocument().getLabels(), existingKeys);

@@ -41,10 +41,22 @@ public class NodeTest {
 	public void setFixture(Node fixture) {
 		this.fixture = fixture;
 	}
+	
+	public Graph createGraph() {
+		return GraphFactory.createGraph();
+	}
+	
+	public Layer createLayer() {
+		return GraphFactory.createLayer();
+	}
+	
+	public Node createNode() {
+		return GraphFactory.createNode();
+	}
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(GraphFactory.createNode());
+		setFixture(createNode());
 	}
 
 	/**
@@ -52,7 +64,7 @@ public class NodeTest {
 	 */
 	@Test
 	public void testDoubleChaining() {
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 		getFixture().setGraph(graph);
 		assertTrue("only contains " + graph.getNodes(), graph.getNodes().contains(getFixture()));
 	}
@@ -63,7 +75,7 @@ public class NodeTest {
 	 */
 	@Test
 	public void testDoubleChaining_SetGraph_remove() {
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 
 		getFixture().setGraph(graph);
 		assertEquals(graph, getFixture().getGraph());
@@ -73,7 +85,7 @@ public class NodeTest {
 		getFixture().setGraph(graph);
 		assertEquals(graph, getFixture().getGraph());
 
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = GraphFactory.createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = createGraph();
 
 		getFixture().setGraph(graph2);
 		assertEquals(graph2, getFixture().getGraph());
@@ -84,10 +96,10 @@ public class NodeTest {
 	 */
 	@Test
 	public void testAddGetLayers() {
-		Layer layer = GraphFactory.createLayer();
+		Layer layer = createLayer();
 
 		// prerequirements
-		Graph graph = GraphFactory.createGraph();
+		Graph graph = createGraph();
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
 
@@ -102,10 +114,10 @@ public class NodeTest {
 	@Test
 	public void testRemoveLayers() {
 		assertNotNull(getFixture().getLayers());
-		Layer layer = GraphFactory.createLayer();
+		Layer layer = createLayer();
 
 		// prerequirements
-		Graph graph = GraphFactory.createGraph();
+		Graph graph = createGraph();
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
 
@@ -121,10 +133,10 @@ public class NodeTest {
 	 */
 	@Test
 	public void testDoubleChainingLayer() {
-		Layer layer = GraphFactory.createLayer();
+		Layer layer = createLayer();
 
 		// prerequirements
-		Graph graph = GraphFactory.createGraph();
+		Graph graph = createGraph();
 		graph.addNode(getFixture());
 		graph.addLayer(layer);
 

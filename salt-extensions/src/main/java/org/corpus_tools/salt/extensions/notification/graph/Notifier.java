@@ -19,6 +19,7 @@ package org.corpus_tools.salt.extensions.notification.graph;
 
 import java.util.Collection;
 import java.util.List;
+import org.corpus_tools.salt.Beta;
 
 import org.corpus_tools.salt.extensions.notification.Listener;
 
@@ -29,6 +30,7 @@ import org.corpus_tools.salt.extensions.notification.Listener;
  * @author florian
  *
  */
+@Beta
 public interface Notifier {
 	/**
 	 * Returns an unmodifiable list of all listeners. If no listener is
@@ -36,6 +38,7 @@ public interface Notifier {
 	 * 
 	 * @return all registered listeners
 	 **/
+  @Beta
 	public List<Listener> getListener();
 
 	/**
@@ -45,6 +48,7 @@ public interface Notifier {
 	 * @param listener
 	 *            to be notified
 	 */
+  @Beta
 	public void addListener(Listener listener);
 
 	/**
@@ -54,6 +58,7 @@ public interface Notifier {
 	 * @param listener
 	 *            to be notified
 	 */
+  @Beta
 	public void addListener(Collection<Listener> listener);
 
 	/**
@@ -63,5 +68,6 @@ public interface Notifier {
 	 * @param listener
 	 *            to be notified
 	 */
+  @Beta
 	public void removeListener(Listener listener);
 }

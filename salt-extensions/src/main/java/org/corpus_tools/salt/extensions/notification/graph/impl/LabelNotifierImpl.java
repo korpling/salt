@@ -125,7 +125,7 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 	public void setQName(String qName) {
 		String oldNamespace = getNamespace();
 		String oldName = getName();
-		super.setNamespace(namespace);
+		super.setQName(qName);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, oldNamespace, getNamespace(), this);
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, oldName, getName(), this);

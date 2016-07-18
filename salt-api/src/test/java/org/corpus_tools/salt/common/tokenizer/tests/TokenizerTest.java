@@ -28,6 +28,7 @@ import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.STextualRelation;
+import org.corpus_tools.salt.common.tokenizer.Clitics;
 import org.corpus_tools.salt.common.tokenizer.Tokenizer;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,7 @@ import com.neovisionaries.i18n.LanguageCode;
  * Tests the class TTTokenizer.
  * 
  * @author Florian Zipser
+ * @author Stephan Druskat (Clitics tests)
  *
  */
 public class TokenizerTest {
@@ -346,6 +348,132 @@ public class TokenizerTest {
 		getFixture().tokenize(sTextualDS, LanguageCode.en);
 
 		assertEquals(expectedToken.size(), sDocGraph.getTokens().size());
+		
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
+			assertTrue(expectedToken.size() >= i);
+			assertNotNull(expectedToken.get(i));
+			assertNotNull(sTextRel.getSource());
+			assertNotNull(sTextRel.getTarget());
+			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
+			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
+			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			i++;
+		}
+		
+	}
+	
+	@Test
+	public void testDefaultClitics() {
+		String francais = "ou ceux-là mêmes qu'il s'affirmaient";
+		String italiano = "Riuscire all'università";
+		List<Token> expectedItalianoToken = new Vector<Token>();
+		List<Token> expectedFrancaisToken = new Vector<Token>();
+		expectedItalianoToken.add(new Token("Riuscire", 0, 8));
+		expectedItalianoToken.add(new Token("all'", 9, 13));
+		expectedItalianoToken.add(new Token("università", 13, 23));
+
+		expectedFrancaisToken.add(new Token("ou", 0, 2));
+		expectedFrancaisToken.add(new Token("ceux", 3, 7));
+		expectedFrancaisToken.add(new Token("-là", 7, 10));
+		expectedFrancaisToken.add(new Token("mêmes", 11, 16));
+		expectedFrancaisToken.add(new Token("qu'", 17, 20));
+		expectedFrancaisToken.add(new Token("il", 20, 22));
+		expectedFrancaisToken.add(new Token("s'", 23, 25));
+		expectedFrancaisToken.add(new Token("affirmaient", 25, 36));
+
+		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createTextualDS(francais);
+		getFixture().setsDocumentGraph(sDocGraph);
+		getFixture().tokenize(sTextualDS, LanguageCode.fr);
+		
+		int i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
+			assertTrue(expectedFrancaisToken.size() >= i);
+			assertNotNull(expectedFrancaisToken.get(i));
+			assertNotNull(sTextRel.getSource());
+			assertNotNull(sTextRel.getTarget());
+			assertEquals(expectedFrancaisToken.get(i).startPos, sTextRel.getStart());
+			assertEquals(expectedFrancaisToken.get(i).endPos, sTextRel.getEnd());
+			assertEquals(expectedFrancaisToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			i++;
+		}
+
+		sDocGraph = SaltFactory.createSDocumentGraph();
+		sTextualDS = sDocGraph.createTextualDS(italiano);
+		getFixture().setsDocumentGraph(sDocGraph);
+		getFixture().tokenize(sTextualDS, LanguageCode.it);
+		
+		i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
+			assertTrue(expectedItalianoToken.size() >= i);
+			assertNotNull(expectedItalianoToken.get(i));
+			assertNotNull(sTextRel.getSource());
+			assertNotNull(sTextRel.getTarget());
+			assertEquals(expectedItalianoToken.get(i).startPos, sTextRel.getStart());
+			assertEquals(expectedItalianoToken.get(i).endPos, sTextRel.getEnd());
+			assertEquals(expectedItalianoToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			i++;
+		}
+		
+		sDocGraph = SaltFactory.createSDocumentGraph();
+		sTextualDS = sDocGraph.createTextualDS(francais);
+		getFixture().setsDocumentGraph(sDocGraph);
+		getFixture().tokenize(sTextualDS); // No language code
+		
+		i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
+			assertTrue(expectedFrancaisToken.size() >= i);
+			assertNotNull(expectedFrancaisToken.get(i));
+			assertNotNull(sTextRel.getSource());
+			assertNotNull(sTextRel.getTarget());
+			assertEquals(expectedFrancaisToken.get(i).startPos, sTextRel.getStart());
+			assertEquals(expectedFrancaisToken.get(i).endPos, sTextRel.getEnd());
+			assertEquals(expectedFrancaisToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			i++;
+		}
+
+		sDocGraph = SaltFactory.createSDocumentGraph();
+		sTextualDS = sDocGraph.createTextualDS(italiano);
+		getFixture().setsDocumentGraph(sDocGraph);
+		getFixture().tokenize(sTextualDS); // No language code
+		
+		i = 0;
+		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
+			assertTrue(expectedItalianoToken.size() >= i);
+			assertNotNull(expectedItalianoToken.get(i));
+			assertNotNull(sTextRel.getSource());
+			assertNotNull(sTextRel.getTarget());
+			assertEquals(expectedItalianoToken.get(i).startPos, sTextRel.getStart());
+			assertEquals(expectedItalianoToken.get(i).endPos, sTextRel.getEnd());
+			assertEquals(expectedItalianoToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			i++;
+		}
+	}
+	
+	@Test
+	public void testFantasyClitics() {
+		String fantasy = "S Z-S-z X-S-x Y^S^y Z.S.z x^S.Y";
+		String fantasyProclitics = "([Xx]-|[Yy]\\^|[Zz]\\.)";
+		String fantasyEnclitics = "(-[Xx]|\\^[Yy]|\\.[Zz])";
+		List<Token> expectedToken = new Vector<Token>();
+		expectedToken.add(new Token("S", 0, 1));
+		expectedToken.add(new Token("Z-S-z", 2, 7));
+		expectedToken.add(new Token("X-", 8, 10));
+		expectedToken.add(new Token("S", 10, 11));
+		expectedToken.add(new Token("-x", 11, 13));
+		expectedToken.add(new Token("Y^", 14, 16));
+		expectedToken.add(new Token("S", 16, 17));
+		expectedToken.add(new Token("^y", 17, 19));
+		expectedToken.add(new Token("Z.", 20, 22));
+		expectedToken.add(new Token("S", 22, 23));
+		expectedToken.add(new Token(".z", 23, 25));
+		expectedToken.add(new Token("x^S.Y", 26, 31));
+		
+		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
+		STextualDS sTextualDS = sDocGraph.createTextualDS(fantasy);
+		getFixture().addClitics(LanguageCode.aa, new Clitics(fantasyProclitics, fantasyEnclitics));
+		getFixture().tokenize(sTextualDS, LanguageCode.aa); // Borrowed language code
 
 		int i = 0;
 		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
@@ -358,5 +486,6 @@ public class TokenizerTest {
 			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
+
 	}
 }

@@ -22,29 +22,44 @@ import static org.junit.Assert.assertEquals;
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl;
+import org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
+import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.tests.GraphTest;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GraphNotifierTest {
+public class GraphNotifierTest extends GraphTest {
 
 	private GraphNotifierImpl fixture = null;
 
+  @Override
 	public GraphNotifierImpl getFixture() {
 		return fixture;
 	}
 
-	public void setFixture(GraphNotifierImpl fixture) {
+	public void setNotifyingFixture(GraphNotifierImpl fixture) {
 		this.fixture = fixture;
 	}
 
+	@Override
+	public void setFixture(Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture) {
+		Assert.assertTrue("Graph in test must be of instance GraphNotifierImpl", fixture instanceof GraphNotifierImpl);
+		this.fixture = (GraphNotifierImpl) fixture;
+		super.setFixture(fixture);
+	}
+	
+
 	@Before
+	@Override
 	public void setUp() throws Exception {
-		setFixture(new GraphNotifierImpl());
+		setNotifyingFixture(new GraphNotifierImpl());
+		super.setFixture(fixture);
 	}
 
 	/** Checks whether the notification about name change is correct. **/
