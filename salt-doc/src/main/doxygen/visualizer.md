@@ -56,7 +56,7 @@ In contrast you can see a cutout of the salt graph of the sample document in the
 Note, spanning nodes will be divided into classes according to their annotation keys. All spanning nodes belonging to the same class appear in the same level.
 
 
-###### Export Filter
+##### Export Filter
 
 In order to filter nodes and/or relations you need to implement the Interface [ExportFilter](\ref org.corpus_tools.salt.util.ExportFilter). This provide two methods:
 
@@ -67,8 +67,11 @@ public boolean includeNode (SNode node);
 //returns a boolean to indicate, whether the specified relation must be included
 public boolean includeRelation (SRelation relation);
 ~~~
+
+Please note, token nodes will always been visualized, so that export filter has no impact on them.
  
-######  Style Importer
+##### Style Importer
+
 The Interface [StyleImporter](\ref org.corpus_tools.salt.util.StyleImporter) allows to highlight the nodes. Therefore you have to implement the sole method of the interface:
 
  ~~~{.java} 
@@ -81,7 +84,7 @@ The Interface [StyleImporter](\ref org.corpus_tools.salt.util.StyleImporter) all
 public String getHighlightingColor (SNode node);
 ~~~
 
-The border of the highlighted node will be colored according to returned color. The next image demonstrates using of the [StyleImporter](\ref org.corpus_tools.salt.util.StyleImporter).
+The border of the highlighted node will be colored according to returned color. The next image demonstrates a salt graph with a highlighted node.
 
 ![](./images/highlighted_node.png)
 
