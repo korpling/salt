@@ -198,6 +198,9 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_EDGE_FROM = "from";
 	private static final String JSON_EDGE_TO  = "to";
 	private static final String JSON_BORDER_WIDTH  = "borderWidth";
+	private static final String JSON_FONT  = "font";
+	private static final String JSON_FONT_SIZE  = "size";
+	
 	
 	
 	
@@ -218,6 +221,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	
 	private static final String JSON_EDGE_TYPE_VALUE  = "curvedCW";
 	private static final String JSON_ROUNDNESS_VALUE = "0.95";
+	
+	private static final String JSON_FONT_SIZE_VALUE = "18";
 	   
     private static final int JSON_EDGE_LINE_LENGTH = 160;    
     private static final String NEWLINE = System.lineSeparator();    
@@ -599,17 +604,20 @@ public void visualize(URI outputFolderUri) throws SaltParameterException,  SaltR
 					
 				
 			if (nNodes < 20){
-			nodeDist = 100;
+			nodeDist = 120;
 			sprConstant = 1.2;
 			} else if (nNodes >=20 && nNodes < 100){
-			nodeDist = 120;
+			nodeDist = 150;
 			sprConstant = 1.1;
 			} else if (nNodes >= 100 && nNodes < 400) {
-			nodeDist = 150;
+			nodeDist = 180;
 			sprConstant = 0.9;
+			} else if (nNodes >= 400 && nNodes < 800) {
+				nodeDist = 200;
+				sprConstant = 0.6;
 			} else {
-				nodeDist = 180;
-				sprConstant = 0.7;
+				nodeDist = 250;
+				sprConstant = 0.3;
 			};
 			
 			// write nodes as array	
@@ -1217,6 +1225,13 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 		 	 
 		 	jsonWriterNodes.key(JSON_LEVEL);
 			jsonWriterNodes.value(levelValue);	
+			
+			//a bigger font
+			jsonWriterNodes.key(JSON_FONT);
+		 	jsonWriterNodes.object();
+		 	jsonWriterNodes.key(JSON_FONT_SIZE);
+		 	jsonWriterNodes.value(JSON_FONT_SIZE_VALUE);
+		 	jsonWriterNodes.endObject();
 		 	
 		
 		
