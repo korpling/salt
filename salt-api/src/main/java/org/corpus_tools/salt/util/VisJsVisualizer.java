@@ -71,7 +71,6 @@ import javax.xml.stream.XMLStreamWriter;
  *	} catch (IOException | XMLStreamException e) { </br>
  *		e.printStackTrace(); </br>
  *	}</br>
- *
  *</pre> 
  *
  *<p>The next listing shows how to get the nodes and the relations of an input salt file in JSON format by use of this class. 
@@ -98,11 +97,9 @@ import javax.xml.stream.XMLStreamWriter;
 *	} catch (IOException e) {
 *		e.printStackTrace();
 *	}		
- *</pre>
- *
- *
- *@author irina
- */
+*</pre>
+*@author irina
+*/
 
 public class VisJsVisualizer implements GraphTraverseHandler{
 		
@@ -262,7 +259,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
   /**
    * Creates a new VisJsVisualizer instance for specified salt document.
    * 
-   * @param doc an {@link SDocument}, which have to be visualized
+   * @param doc an {@link SDocument} to be visualized
    * 
    * @throws SaltParameterException if the doc is null 
    */
@@ -273,10 +270,12 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     /**
      * Creates a new VisJsVisualizer instance with specified export filter for specified salt document.
      * 
-     * @param doc an SDocument, which have to be visualized
-     * @param exportFilter an ExportFilter to exclude selected nodes and/or relations from the visualizing 
+     * @param doc an {@link SDocument} to be visualized
+     * @param exportFilter an {@link ExportFilter} to include or exclude nodes and/or relations explicitly. If null, all nodes and relations will be 
+     * visualized.
+     * @param styleImporter a {@link StyleImporter} to highlight nodes. If null, no nodes will be highlighted.
      * 
-     * @throws SaltParameterException if the doc is null 
+     * @throws SaltParameterException if doc is null 
      */
     
     public VisJsVisualizer (SDocument doc, ExportFilter exportFilter, StyleImporter styleImporter){  
@@ -312,7 +311,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     /**
      * Creates a new VisJsVisualizer instance for a salt file specified by the uri.
      * 
-     * @param inputFileUri a hierarchical URI of a salt file, which have to be visualized. 
+     * @param inputFileUri a hierarchical {@link org.eclipse.emf.common.util.URI} of a salt file to be visualized. 
      * 		The constructor will create a new {@link SDocument} from this.
      * 
      * @throws SaltParameterException - if the inputFileUri is null 
@@ -324,9 +323,11 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      /**
       * Creates a new VisJsVisualizer instance with specified export filter for a salt file specified by the uri.
       * 
-      * @param inputFileUri a hierarchical URI of a salt file, which have to be visualized. 
+      * @param inputFileUri a hierarchical {@link org.eclipse.emf.common.util.URI} of a salt file, which has to be visualized. 
       * 			The constructor will create a new  {@link SDocument} from this.
-      * @param exportFilter an ExportFilter to exclude selected nodes and/or relations from the visualization
+      * @param exportFilter an {@link ExportFilter} to include or exclude nodes and/or relations explicitly. If null, all nodes and relations will be 
+      * visualized.
+      * @param styleImporter a {@link StyleImporter} to highlight nodes. If null, no nodes will be highlighted.
       * 
       * @throws SaltParameterException if the inputFileUri is null 
       * @throws SaltResourceException if a problem occurred while loading salt project from the inputFileUri
@@ -373,17 +374,11 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      * </p>
      * 
      * The whole output structure will look like following: </br>
-     * <pre>
-     * outputFolder </br>
-     *  --> css </br>
-     * 		-->vis.min.css </br>
-     *  --> js </br>
-     * 		-->vis.min.js </br> 
-     * 		-->jquery.js  </br>
-     *  --> saltVisJs.html </br> 
-     * </pre>
      * 
-     * @param outputFolderUri - a hierarchical URI that specifies the output folder path. Note, that the output folder have not necessarily to be existing.
+     * 
+     * ![](./images/file_tree.png)
+     * 
+     * @param outputFolderUri a hierarchical {@link org.eclipse.emf.common.util.URI} that specifies the output folder path. Note, that the output folder have not necessarily to be existing.
      * 
      * @throws SaltParameterException if the outputFolderUri is null
      * @throws SaltResourceException if the output auxiliary files cannot have been created
