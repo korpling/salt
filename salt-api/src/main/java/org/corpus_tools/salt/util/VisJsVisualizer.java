@@ -431,7 +431,7 @@ public void visualize(URI outputFolderUri) throws SaltParameterException,  SaltR
    private void writeHTML(File outputFolder) throws XMLStreamException, IOException{
 	   	   		
 			 int nodeDist = 0;
-			 int sprLength = 100;
+			 int sprLength = 0;
 			 double sprConstant = 0.0;
 			
 			this.os = new FileOutputStream(new File(outputFolder, HTML_FILE));
@@ -606,18 +606,23 @@ public void visualize(URI outputFolderUri) throws SaltParameterException,  SaltR
 			if (nNodes < 20){
 			nodeDist = 120;
 			sprConstant = 1.2;
+			sprLength = 120;
 			} else if (nNodes >=20 && nNodes < 100){
 			nodeDist = 150;
 			sprConstant = 1.1;
+			sprLength = 160;
 			} else if (nNodes >= 100 && nNodes < 400) {
 			nodeDist = 180;
 			sprConstant = 0.9;
+			sprLength = 180;
 			} else if (nNodes >= 400 && nNodes < 800) {
 				nodeDist = 200;
 				sprConstant = 0.6;
+				sprLength = 200;
 			} else {
 				nodeDist = 250;
 				sprConstant = 0.3;
+				sprLength = 230;
 			};
 			
 			// write nodes as array	
