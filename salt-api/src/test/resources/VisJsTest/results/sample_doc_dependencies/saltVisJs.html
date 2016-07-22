@@ -111,17 +111,17 @@ var edgesJson = [];
 var network = null;
 function loadSaltObjectAndDraw() {
 var nodesJson = 
-[{"id":"sTok1","label":"id=sTok1\n\nIs","x":0,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok2","label":"id=sTok2\n\nthis","x":150,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok3","label":"id=sTok3\n\nexample","x":300,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok4","label":"id=sTok4\n\nmore","x":450,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok5","label":"id=sTok5\n\ncomplicated","x":600,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok6","label":"id=sTok6\n\nthan","x":750,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok7","label":"id=sTok7\n\nit","x":900,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok8","label":"id=sTok8\n\nappears","x":1050,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok9","label":"id=sTok9\n\nto","x":1200,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok10","label":"id=sTok10\n\nbe","x":1350,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok11","label":"id=sTok11\n\n?","x":1500,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+[{"id":"sTok1","label":"id=sTok1\n\nIs","x":0,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok2","label":"id=sTok2\n\nthis","x":150,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok3","label":"id=sTok3\n\nexample","x":300,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok4","label":"id=sTok4\n\nmore","x":450,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok5","label":"id=sTok5\n\ncomplicated","x":600,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok6","label":"id=sTok6\n\nthan","x":750,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok7","label":"id=sTok7\n\nit","x":900,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok8","label":"id=sTok8\n\nappears","x":1050,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok9","label":"id=sTok9\n\nto","x":1200,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok10","label":"id=sTok10\n\nbe","x":1350,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok11","label":"id=sTok11\n\n?","x":1500,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
 ];
 var edgesJson = 
 [{"from":"sTok5","to":"sTok1","label":"dependency=cop\n","width":"2","color":"#b7e589","smooth":{"type":"curvedCW","roundness":"0.95"}}
@@ -134,7 +134,7 @@ var edgesJson =
 ,{"from":"sTok8","to":"sTok10","label":"dependency=xcomp\n","width":"2","color":"#b7e589","smooth":{"type":"curvedCW","roundness":"0.95"}}
 ,{"from":"sTok5","to":"sTok8","label":"dependency=advcl\n","width":"2","color":"#b7e589","smooth":{"type":"curvedCW","roundness":"0.95"}}
 ];
-var nodeDist =100;
+var nodeDist =120;
 draw(nodesJson, edgesJson, nodeDist);
 }
 var directionInput = document.getElementById("direction");
@@ -182,7 +182,7 @@ direction: directionInput.value
 physics: {
 hierarchicalRepulsion: {
 centralGravity: 0.8,
-springLength: 100,
+springLength: 120,
 springConstant: 1.2,
 nodeDistance: nodeDist,
 damping: 0.04

@@ -111,21 +111,21 @@ var edgesJson = [];
 var network = null;
 function loadSaltObjectAndDraw() {
 var nodesJson = 
-[{"id":"sTok1","label":"id=sTok1\nlemma=be\npos=VBZ\n\nIs","x":0,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok2","label":"id=sTok2\nlemma=this\npos=DT\n\nthis","x":150,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok3","label":"id=sTok3\nlemma=example\npos=NN\n\nexample","x":300,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok4","label":"id=sTok4\nlemma=more\npos=RBR\n\nmore","x":450,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok5","label":"id=sTok5\nlemma=complicated\npos=JJ\n\ncomplicated","x":600,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok6","label":"id=sTok6\nlemma=than\npos=IN\n\nthan","x":750,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok7","label":"id=sTok7\nlemma=it\npos=PRP\n\nit","x":900,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok8","label":"id=sTok8\nlemma=appear\npos=VBZ\n\nappears","x":1050,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok9","label":"id=sTok9\nlemma=to\npos=TO\n\nto","x":1200,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok10","label":"id=sTok10\nlemma=be\npos=VB\n\nbe","x":1350,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
-,{"id":"sTok11","label":"id=sTok11\nlemma=?\npos=.\n\n?","x":1500,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0}
+[{"id":"sTok1","label":"id=sTok1\nlemma=be\npos=VBZ\n\nIs","x":0,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok2","label":"id=sTok2\nlemma=this\npos=DT\n\nthis","x":150,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok3","label":"id=sTok3\nlemma=example\npos=NN\n\nexample","x":300,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok4","label":"id=sTok4\nlemma=more\npos=RBR\n\nmore","x":450,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok5","label":"id=sTok5\nlemma=complicated\npos=JJ\n\ncomplicated","x":600,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok6","label":"id=sTok6\nlemma=than\npos=IN\n\nthan","x":750,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok7","label":"id=sTok7\nlemma=it\npos=PRP\n\nit","x":900,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok8","label":"id=sTok8\nlemma=appear\npos=VBZ\n\nappears","x":1050,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok9","label":"id=sTok9\nlemma=to\npos=TO\n\nto","x":1200,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok10","label":"id=sTok10\nlemma=be\npos=VB\n\nbe","x":1350,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
+,{"id":"sTok11","label":"id=sTok11\nlemma=?\npos=.\n\n?","x":1500,"physics":"false","color":{"background":"#ccff99","border":"#b7e589"},"level":0,"font":{"size":"18"}}
 ];
 var edgesJson = 
 [];
-var nodeDist =100;
+var nodeDist =120;
 draw(nodesJson, edgesJson, nodeDist);
 }
 var directionInput = document.getElementById("direction");
@@ -173,7 +173,7 @@ direction: directionInput.value
 physics: {
 hierarchicalRepulsion: {
 centralGravity: 0.8,
-springLength: 100,
+springLength: 120,
 springConstant: 1.2,
 nodeDistance: nodeDist,
 damping: 0.04
