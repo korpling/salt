@@ -108,15 +108,12 @@ public interface SDocumentGraph extends SGraph {
 	public STimeline getTimeline();
 
 	/**
-	 * Sets the value of the '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline
-	 * <em>STimeline</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>STimeline</em>' reference.
-	 * @see #getTimeline()
-	 * @generated
+	 * Sets a new timeline- A timeline is a specific
+	 * datasource and acts as an anchor for {@link STimelineRelation}s. A
+	 * timeline is necessary to set tokens in correspondance when they belong to
+	 * different {@link STextualDS}s. For instance a timeline is necessary to
+	 * model dialogue data.
+	 * @param value new timeline, which replaces the old one
 	 */
 	void setTimeline(STimeline value);
 

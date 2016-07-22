@@ -156,7 +156,7 @@ public class GraphTraverserModule {
 			}
 		}
 		Traverser traverser = new Traverser();
-		traverser.startNodes = (List<? extends SNode>) startNodes;
+		traverser.startNodes = startNodes;
 		traverser.traverseType = traverseType;
 		traverser.traverseId = traverseId;
 		traverser.traverseHandler = traverseHandler;
@@ -427,7 +427,6 @@ public class GraphTraverserModule {
 				} else if (GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST.equals(traverseType)) {
 					// BOTTOM_UP_DEPTH_FIRST traversal
 					for (SNode startNode : startNodes) {
-						// TODO replace EList with HashEList
 						currentNodePath = new ArrayList<>();
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, null, startNode, 0l)) {
 							currentNodePath.add(startNode);
@@ -437,7 +436,6 @@ public class GraphTraverserModule {
 				} else if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST.equals(traverseType)) {
 					// TOP_DOWN_BREADTH_FIRST traversal
 					for (SNode startNode : startNodes) {
-						// TODO replace EList with HashEList
 						currentNodePath = new ArrayList<>();
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST, traverseId, null, startNode, 0l)) {
 							currentNodePath.add(startNode);
@@ -447,7 +445,6 @@ public class GraphTraverserModule {
 				} else if (GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST.equals(traverseType)) {
 					// BOTTOM_UP_BREADTH_FIRST traversal
 					for (SNode startNode : startNodes) {
-						// TODO replace EList with HashEList
 						currentNodePath = new ArrayList<SNode>();
 						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, traverseId, null, startNode, 0l)) {
 							currentNodePath.add(startNode);
@@ -489,8 +486,7 @@ public class GraphTraverserModule {
 			}
 			final boolean isTopDown = traverseType != GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
 			SNode fromNode = null;
-			SRelation<? extends SNode, ? extends SNode> fromRel = null;
-			// TODO replace EList with HashEList
+			SRelation<?, ?> fromRel = null;
 			List<SNode> queuedNodes = new ArrayList<>();
 			List<SNode> queueReachedFrom = new ArrayList<>();
 			List<SRelation<? extends SNode, ? extends SNode>> queueReachedFromRel = new ArrayList<>();
