@@ -17,10 +17,19 @@ import org.corpus_tools.salt.core.SRelation;
  */
 
 public interface ExportFilter {
-	
-	public boolean includeNode (SNode node);
-	
-	public boolean includeRelation (SRelation relation);
-			
+/**
+ * Returns a boolean to indicate, whether the specified node must be included.
+ * 
+ * @param node specified SNode
+ */
+public boolean includeNode (SNode node);
+
+/**
+ * Returns a boolean to indicate, whether the specified relation must be included.
+ * 
+ * @param relation specified SRelation
+ */	
+public boolean includeRelation (SRelation relation);
+		
 
 }
