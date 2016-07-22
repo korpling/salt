@@ -41,7 +41,7 @@ public class VisJsVisualizerTest {
 	
 	@Before
 	  public void setUp() {
-		this.allFileNames = new String [5];
+		this.allFileNames = new String [4];
 		allFileNames[0] = VisJsVisualizer.HTML_FILE;
 		allFileNames[1] = VisJsVisualizer.JS_FOLDER_OUT + FSEP + VisJsVisualizer.JQUERY_FILE;
 		allFileNames[2] = VisJsVisualizer.JS_FOLDER_OUT + FSEP + VisJsVisualizer.JS_FILE;
