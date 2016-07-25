@@ -29,14 +29,14 @@ public class ValidatorTest {
 		graph.createCorpus(URI.createURI("/corpus1/corpus2"));
 		graph.createDocument(URI.createURI("/corpus1/doc1"));
 
-		assertThat(SaltUtil.validate(graph).andFindInvalidities()).hasSize(1);
-		
-		//checking the way around (same logical test)
+		assertThat(SaltUtil.validate(graph).andFindInvalidities().getInvalidities()).hasSize(1);
+
+		// checking the way around (same logical test)
 		final SCorpusGraph graph1 = SaltFactory.createSCorpusGraph();
 		graph1.createDocument(URI.createURI("/corpus1/doc1"));
 		graph1.createCorpus(URI.createURI("/corpus1/corpus2"));
 
-		assertThat(SaltUtil.validate(graph1).andFindInvalidities()).hasSize(1);
+		assertThat(SaltUtil.validate(graph1).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class ValidatorTest {
 
 		fixture.addNode(tok);
 		fixture.addRelation(rel);
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(1);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText(null);
 		fixture.addNode(text);
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(1);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
 
 	@Test
@@ -72,7 +72,7 @@ public class ValidatorTest {
 		rel.setTarget(text);
 		fixture.addRelation(rel);
 
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(2);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(2);
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class ValidatorTest {
 		rel.setTarget(text);
 		fixture.addRelation(rel);
 
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(2);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(2);
 	}
 
 	@Test
@@ -107,8 +107,8 @@ public class ValidatorTest {
 		rel.setTarget(text);
 		fixture.addRelation(rel);
 
-		assertThat(SaltUtil.validate(fixture).andRepairInvalidities()).hasSize(1);
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(0);
+		assertThat(SaltUtil.validate(fixture).andRepairInvalidities().getInvalidities()).hasSize(1);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(0);
 	}
 
 	@Test
@@ -126,7 +126,7 @@ public class ValidatorTest {
 		rel.setTarget(text);
 		fixture.addRelation(rel);
 
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(2);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(2);
 	}
 
 	@Test
@@ -144,7 +144,7 @@ public class ValidatorTest {
 		rel.setTarget(text);
 		fixture.addRelation(rel);
 
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(1);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
 
 	@Test
@@ -162,7 +162,7 @@ public class ValidatorTest {
 		rel.setTarget(text);
 		fixture.addRelation(rel);
 
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(1);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
 
 	@Test
@@ -180,7 +180,7 @@ public class ValidatorTest {
 		rel.setTarget(text);
 		fixture.addRelation(rel);
 
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(2);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(2);
 	}
 
 	@Test
@@ -198,7 +198,7 @@ public class ValidatorTest {
 		rel.setTarget(text);
 		fixture.addRelation(rel);
 
-		assertThat(SaltUtil.validate(fixture).andRepairInvalidities()).hasSize(1);
-		assertThat(SaltUtil.validate(fixture).andFindInvalidities()).hasSize(0);
+		assertThat(SaltUtil.validate(fixture).andRepairInvalidities().getInvalidities()).hasSize(1);
+		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(0);
 	}
 }
