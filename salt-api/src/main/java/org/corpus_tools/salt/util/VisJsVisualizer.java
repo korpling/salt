@@ -3,6 +3,7 @@ package org.corpus_tools.salt.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
 import javax.xml.stream.XMLStreamException;
 
 import org.corpus_tools.salt.SaltFactory;
@@ -43,6 +45,8 @@ import org.corpus_tools.salt.exceptions.SaltResourceException;
 import org.eclipse.emf.common.util.URI;
 import org.json.JSONException;
 import org.json.JSONWriter;
+
+import com.google.common.io.ByteStreams;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
@@ -174,10 +178,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String TEXT_STYLE = "width:700px; font-size:14px; text-align: justify;";
 	
 	
-	
-		
-	private  int bufferSizeEdges;
-
 	private static final String TRAV_MODE_CALC_LEVEL = "calcLevel";
 	private static final String TRAV_MODE_READ_NODES = "readNodes";
 	
@@ -240,8 +240,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private static final String JSON_ROUNDNESS_VALUE = "0.95";
 	
 	private static final String JSON_FONT_SIZE_VALUE = "18";
-	   
-    private static final int JSON_EDGE_LINE_LENGTH = 160;    
+	     
     private static final String NEWLINE = System.lineSeparator();    
     private  final ExportFilter exportFilter;
     private  final StyleImporter styleImporter;
@@ -256,12 +255,14 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     public static final String JS_FILE = "vis.min.js";
     public static final String JQUERY_FILE = "jquery.js";
     public static final String HTML_FILE = "saltVisJs.html";
+	private final File tmpFile;
     
 	
 	
 	private final static String JQUERY_SRC = JS_FOLDER_OUT + System.getProperty("file.separator") + JQUERY_FILE;
 	private final static String VIS_JS_SRC = JS_FOLDER_OUT + System.getProperty("file.separator") + JS_FILE;
-	private final static String VIS_CSS_SRC = CSS_FOLDER_OUT + System.getProperty("file.separator") + CSS_FILE;    
+	private final static String VIS_CSS_SRC = CSS_FOLDER_OUT + System.getProperty("file.separator") + CSS_FILE;
+
         
     private static final String RESOURCE_FOLDER = System.getProperty("file.separator") + "visjs"; 
     private static final String RESOURCE_FOLDER_IMG_NETWORK = "visjs"  + System.getProperty("file.separator")+ "img" + System.getProperty("file.separator")  + "network";
@@ -281,9 +282,10 @@ public class VisJsVisualizer implements GraphTraverseHandler{
    * 
    * @param doc an [SDocument](\ref org.corpus_tools.salt.common.SDocument) to be visualized
    * 
+   * @throws IOException if creation of tmp file failed   * 
    * @throws SaltParameterException if the doc is null 
    */
-    public VisJsVisualizer(SDocument doc){
+    public VisJsVisualizer(SDocument doc) throws IOException{
   	  this(doc, null, null);
     }
     
@@ -295,10 +297,11 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      * visualized.
      * @param styleImporter a {@link StyleImporter} to highlight nodes. If null, no nodes will be highlighted.
      * 
+     * @throws IOException if creation of tmp file failed
      * @throws SaltParameterException if doc is null 
      */
     
-    public VisJsVisualizer (SDocument doc, ExportFilter exportFilter, StyleImporter styleImporter){  
+    public VisJsVisualizer (SDocument doc, ExportFilter exportFilter, StyleImporter styleImporter) throws IOException{  
     	
     	if(doc == null) throw new SaltParameterException("doc", "VisJsVisualizer", this.getClass());
     
@@ -308,22 +311,14 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     	rootToMinLevel = new HashMap<SNode, Integer>();
     	readSpanNodes = new HashSet <SNode>();
     	readStructNodes = new HashSet <SNode>();
-    	readRelations = new HashSet <SRelation>();       	
-    	
-    	long nEdges = doc.getDocumentGraph().getRelations().size();
-    	if (nEdges > Math.floor(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
-    	{
-    		throw new SaltException("The specified document cannot be visualized. It contains too many edges.");    		
-    	}
-    	else
-    	{
-    		bufferSizeEdges = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
-    		
-    	}
-    	
+    	readRelations = new HashSet <SRelation>();   
+    	tmpFile = File.createTempFile("tmp_salt", "vis");    	
     	this.exportFilter = exportFilter;
     	this.styleImporter = styleImporter;
     	spanClasses =new HashMap<String, Integer>();
+    	
+    	//delete tmp file
+		tmpFile.deleteOnExit();	
     	
     }
     
@@ -334,9 +329,10 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      * @param inputFileUri a hierarchical <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.4.3/org/eclipse/emf/common/util/URI.html"> org.eclipse.emf.common.util.URI</a> of a salt file to be visualized. 
      * 		The constructor will create a new  [SDocument](\ref org.corpus_tools.salt.common.SDocument) of this.
      * 
+     * @throws IOException if creation of tmp file failed 
      * @throws SaltParameterException - if the inputFileUri is null 
      */
-      public VisJsVisualizer(URI inputFileUri){
+      public VisJsVisualizer(URI inputFileUri) throws IOException{
     	  this(inputFileUri, null, null);
       }
   	
@@ -348,12 +344,13 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       * @param exportFilter an {@link ExportFilter} to include or exclude nodes and/or relations explicitly. If null, all nodes and relations will be 
       * visualized.
       * @param styleImporter a {@link StyleImporter} to highlight nodes. If null, no nodes will be highlighted.
+     * @throws IOException if creation of tmp file failed
       * 
       * @throws SaltParameterException if the inputFileUri is null 
       * @throws SaltResourceException if a problem occurred while loading salt project from the inputFileUri
       */
       
-      public VisJsVisualizer (URI inputFileUri, ExportFilter exportFilter, StyleImporter styleImporter){  
+      public VisJsVisualizer (URI inputFileUri, ExportFilter exportFilter, StyleImporter styleImporter) throws IOException{  
       	if(inputFileUri == null) throw new SaltParameterException("inputUri", "VisJsVisualizer", this.getClass());
        	
       	try{
@@ -369,20 +366,13 @@ public class VisJsVisualizer implements GraphTraverseHandler{
       	readSpanNodes = new HashSet <SNode>();
       	readStructNodes = new HashSet <SNode>();
       	readRelations = new HashSet <SRelation>();       	
-      	
-      	long nEdges = doc.getDocumentGraph().getRelations().size();
-      	if (nEdges > Math.floor(((double)Integer.MAX_VALUE/(double)JSON_EDGE_LINE_LENGTH)))
-      	{
-      		throw new SaltException("The specified document cannot be visualized. It contains too many edges.");    		
-      	}
-      	else
-      	{
-      		bufferSizeEdges = (int) (nEdges) * JSON_EDGE_LINE_LENGTH;	
-      	}
-      	
+      	tmpFile = File.createTempFile("tmp_salt", "vis");      	
       	this.exportFilter = exportFilter;
       	this.styleImporter = styleImporter;
       	spanClasses =new HashMap<String, Integer>();
+      	
+      //delete tmp file
+		tmpFile.deleteOnExit();	
       	
       }
      
@@ -452,9 +442,12 @@ public void visualize(URI outputFolderUri) throws SaltParameterException,  SaltR
 			
 			this.os = new FileOutputStream(new File(outputFolder, HTML_FILE));
 			this.outputFactory = XMLOutputFactory.newInstance();			
-			this.xmlWriter = outputFactory.createXMLStreamWriter(os, "UTF-8");			
+			this.xmlWriter = outputFactory.createXMLStreamWriter(os, "UTF-8");	
+			FileOutputStream fos = new FileOutputStream(tmpFile);
 			setNodeWriter(os);
-			setEdgeWriter(os);			
+			setEdgeWriter(fos);
+			
+			
 			
 			xmlWriter.writeStartDocument("UTF-8", "1.0");
 			xmlWriter.writeCharacters(NEWLINE);
@@ -649,8 +642,14 @@ public void visualize(URI outputFolderUri) throws SaltParameterException,  SaltR
 			xmlWriter.writeCharacters("var edgesJson = " + NEWLINE);
 			xmlWriter.flush();
 			
-			// write edges as array
+			
+			
+			// write edges as array to tmp file
 			edgeWriter.flush();
+			
+			//copy edges from tmp file
+			ByteStreams.copy(new FileInputStream(tmpFile), os);
+					
 		
 			xmlWriter.writeCharacters(";" + NEWLINE);
 			
@@ -922,9 +921,6 @@ public void visualize(URI outputFolderUri) throws SaltParameterException,  SaltR
 		  copyResourceFile(getClass().getResourceAsStream(RESOURCE_FOLDER + System.getProperty("file.separator") + JQUERY_FILE), 
 				  outputFolder.getPath(), JS_FOLDER_OUT, JQUERY_FILE); 
 		  
-		  copyResourceFile(getClass().getResourceAsStream(RESOURCE_FOLDER + System.getProperty("file.separator") + HTML_FILE), 
-				  outputFolder.getPath(), null, HTML_FILE);	
-		  
 		 	
 		  ClassLoader classLoader = getClass().getClassLoader();
 		  CodeSource srcCode = VisJsVisualizer.class.getProtectionDomain().getCodeSource();
@@ -1022,10 +1018,9 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 
 	public void setEdgeWriter (OutputStream os)
 	{
-		this.edgeWriter = new BufferedWriter (new OutputStreamWriter(os), bufferSizeEdges);	
+		this.edgeWriter = new BufferedWriter (new OutputStreamWriter(os));	
 		this.jsonWriterEdges = new JSONWriter(edgeWriter);
 	}
-
 	
 	   
 	/**

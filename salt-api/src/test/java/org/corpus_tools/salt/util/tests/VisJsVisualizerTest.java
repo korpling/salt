@@ -287,14 +287,14 @@ public class VisJsVisualizerTest {
 	
 	
 	@Test(expected = SaltParameterException.class)
-	public void testInputUrlIsNull(){
+	public void testInputUrlIsNull() throws IOException{
 		URI uri = null;
 		@SuppressWarnings("unused")
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
 	}
 	
 	@Test(expected = SaltResourceException.class)
-	public void testInvalideSaltFormat(){
+	public void testInvalideSaltFormat() throws IOException{
 		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_invalid_format" + FSEP + "pcc2" + FSEP + "11299.salt";
 		URI uri = URI.createFileURI(inputFilePath);	
 		@SuppressWarnings("unused")
@@ -302,7 +302,7 @@ public class VisJsVisualizerTest {
 	}
 	
 	@Test(expected = SaltResourceException.class)
-	public void testAbsentSaltResource(){
+	public void testAbsentSaltResource() throws IOException{
 		String inputFilePath = INPUT_FOLDER + FSEP + "pcc2_absent_resource" + FSEP + "pcc2" + FSEP + "11299.salt";
 		URI uri = URI.createFileURI(inputFilePath);	
 		@SuppressWarnings("unused")
@@ -311,7 +311,7 @@ public class VisJsVisualizerTest {
 	
 
 	@Test(expected = SaltParameterException.class)
-	public void testNodeWriterIsNull(){
+	public void testNodeWriterIsNull() throws IOException{
 		URI uri = URI.createFileURI(INPUT_FILE_MAIN_TEST);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);		
 		visJsVisualizer.setEdgeWriter(System.out);
@@ -319,7 +319,7 @@ public class VisJsVisualizerTest {
 	}
 	
 	@Test(expected = SaltParameterException.class)
-	public void testEdgeWriterIsNull(){
+	public void testEdgeWriterIsNull() throws IOException{
 		URI uri = URI.createFileURI(INPUT_FILE_MAIN_TEST);	
 		VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);		
 		visJsVisualizer.setNodeWriter(System.out);
