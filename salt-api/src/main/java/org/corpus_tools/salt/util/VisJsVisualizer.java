@@ -114,7 +114,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	public  BufferedWriter jsonWriter;
 	public  BufferedWriter nodeWriter;
 	public  BufferedWriter edgeWriter;
-	public  BufferedWriter optionWriter;
 
 	
 	private  JSONWriter jsonWriterNodes;
