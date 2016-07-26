@@ -51,7 +51,9 @@ import javax.xml.stream.XMLStreamWriter;
 /**
  * <p>
  * This class provides a possibility to create a html file, which visualizes a salt graph,
- * created from an {@link SDocument} or from an {@link org.eclipse.emf.common.util.URI} of a salt file, using the vis.js library.
+ * created from an [SDocument](\ref org.corpus_tools.salt.common.SDocument) or from an 
+ * <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.4.3/org/eclipse/emf/common/util/URI.html"> org.eclipse.emf.common.util.URI</a> 
+ * of a salt file, using the vis.js library from <a href="http://visjs.org"> visjs.org</a>.
  *
  * 
  * Also it can be used to get both nodes and relations of a salt document in JSON format.
@@ -59,33 +61,49 @@ import javax.xml.stream.XMLStreamWriter;
  * </p>
  * 
  * <p>A simple way to use this class for writing the html file is shown in the following example code.</p>
+ *
+ * {@code
  * 
- * <pre>
- * String inputSaltFile = "path_to_your_salt_file";  </br>
- * String outputFolder = "path_to_your_output_folder"; </br>
- * URI uri = URI.createFileURI(inputSaltFile);</br>
- *	VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri); </br>
- *	try { </br>
- *		 URI outputFileUri = URI.createFileURI(outputFolder);</br>
- *		 visJsVisualizer.visualize(outputFileUri); </br>
- *	} catch (IOException | XMLStreamException e) { </br>
- *		e.printStackTrace(); </br>
- *	}</br>
- *</pre> 
+ * String inputSaltFile = "path_to_your_salt_file";  
+ * 
+ * String outputFolder = "path_to_your_output_folder";  
+ * 
+ * URI uri = URI.createFileURI(inputSaltFile);
+ * 
+ * VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri); 
+ * 
+ * try { 
+ * 
+ *	 URI outputFileUri = URI.createFileURI(outputFolder);
+ *
+ *	 visJsVisualizer.visualize(outputFileUri); 
+ *
+ * } catch (IOException | XMLStreamException e) { 
+ * 
+ *		e.printStackTrace(); 
+ *
+ *	 }
+ *
+ *}
  *
  *<p>The next listing shows how to get the nodes and the relations of an input salt file in JSON format by use of this class. 
  * For simplicity, the created JSON objects will be written to the standard output.
- *<pre>
- * URI uri = URI.createFileURI("path_to_the_input_salt_file");	
+ *{@code
+ *
+ * 	URI uri = URI.createFileURI("path_to_the_input_salt_file");	
+ * 
 *	VisJsVisualizer VisJsVisualizer = new VisJsVisualizer(uri);
 *	 	
 *	VisJsVisualizer.setNodeWriter(System.out);
+*
 *	VisJsVisualizer.setEdgeWriter(System.out);
+*
 *	VisJsVisualizer.buildJSON();
 *		
 *	BufferedWriter bw;
 *				
 *	try {
+*
 *		bw = VisJsVisualizer.getNodeWriter();
 *		bw.newLine();
 *		bw.flush();	
@@ -95,9 +113,12 @@ import javax.xml.stream.XMLStreamWriter;
 *		bw.flush();	
 *			
 *	} catch (IOException e) {
+*
 *		e.printStackTrace();
-*	}		
-*</pre>
+*
+*	}	
+*}	
+
 *@author irina
 */
 
@@ -258,7 +279,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
   /**
    * Creates a new VisJsVisualizer instance for specified salt document.
    * 
-   * @param doc an {@link SDocument} to be visualized
+   * @param doc an [SDocument](\ref org.corpus_tools.salt.common.SDocument) to be visualized
    * 
    * @throws SaltParameterException if the doc is null 
    */
@@ -269,7 +290,7 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     /**
      * Creates a new VisJsVisualizer instance with specified export filter for specified salt document.
      * 
-     * @param doc an {@link SDocument} to be visualized
+     * @param doc an [SDocument](\ref org.corpus_tools.salt.common.SDocument) to be visualized
      * @param exportFilter an {@link ExportFilter} to include or exclude nodes and/or relations explicitly. If null, all nodes and relations will be 
      * visualized.
      * @param styleImporter a {@link StyleImporter} to highlight nodes. If null, no nodes will be highlighted.
@@ -310,8 +331,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
     /**
      * Creates a new VisJsVisualizer instance for a salt file specified by the uri.
      * 
-     * @param inputFileUri a hierarchical {@link org.eclipse.emf.common.util.URI} of a salt file to be visualized. 
-     * 		The constructor will create a new {@link SDocument} from this.
+     * @param inputFileUri a hierarchical <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.4.3/org/eclipse/emf/common/util/URI.html"> org.eclipse.emf.common.util.URI</a> of a salt file to be visualized. 
+     * 		The constructor will create a new  [SDocument](\ref org.corpus_tools.salt.common.SDocument) of this.
      * 
      * @throws SaltParameterException - if the inputFileUri is null 
      */
@@ -322,8 +343,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      /**
       * Creates a new VisJsVisualizer instance with specified export filter for a salt file specified by the uri.
       * 
-      * @param inputFileUri a hierarchical {@link org.eclipse.emf.common.util.URI} of a salt file, which has to be visualized. 
-      * 			The constructor will create a new  {@link SDocument} from this.
+      * @param inputFileUri a hierarchical  <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.4.3/org/eclipse/emf/common/util/URI.html"> org.eclipse.emf.common.util.URI</a> of a salt file, which has to be visualized. 
+      * 			The constructor will create a new  [SDocument](\ref org.corpus_tools.salt.common.SDocument) of this.
       * @param exportFilter an {@link ExportFilter} to include or exclude nodes and/or relations explicitly. If null, all nodes and relations will be 
       * visualized.
       * @param styleImporter a {@link StyleImporter} to highlight nodes. If null, no nodes will be highlighted.
@@ -377,7 +398,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
      * 
      * ![](./images/file_tree.png)
      * 
-     * @param outputFolderUri a hierarchical {@link org.eclipse.emf.common.util.URI} that specifies the output folder path. Note, that the output folder have not necessarily to be existing.
+     * @param outputFolderUri a hierarchical <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.4.3/org/eclipse/emf/common/util/URI.html"> org.eclipse.emf.common.util.URI</a> 
+     * 			that specifies the output folder path. Note, that the output folder have not necessarily to be existing.
      * 
      * @throws SaltParameterException if the outputFolderUri is null
      * @throws SaltResourceException if the output auxiliary files cannot have been created
@@ -1009,7 +1031,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 	/**
 	 * 
 	 * By invoking of this method the graph of the salt document specified by the constructor will be traversed. 
-	 * Both the nodeWriter and the edgeWriter write nodes and relations 
+	 * Both the {@link #nodeWriter} and the {@link #edgeWriter} write nodes and relations 
 	 * of this graph respective to the associated output streams.
 	 * 
 	 * @throws SaltException if a problem occurred while building JSON objects
@@ -1319,9 +1341,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 	
 	
 	/**
-	 * Returns the nodeWriter.
-	 * 
-	 * @return
+	 * @return {@link #nodeWriter}
 	 */
 	public BufferedWriter getNodeWriter ()
 	{
@@ -1329,9 +1349,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 	}
 	
 	/**
-	 * Returns the edgeWriter.
-	 * 
-	 * @return
+	 * @return {@link #edgeWriter}
 	 */
 	public BufferedWriter getEdgeWriter()
 	{
@@ -1398,7 +1416,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 	}
 	
 	/**
-	 * Implements the nodeReached method of the {@link SGraphTraverseHandler} interface.
+	 * Implements the nodeReached method of the {@link org.corpus_tools.salt.core.GraphTraverseHandler} interface.
 	 */
 	@Override
 	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation relation,
@@ -1454,7 +1472,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 
 	
 	/**
-	 * Implements the nodeLeft method of the {@link SGraphTraverseHandler} interface.
+	 * Implements the nodeLeft method of the {@link org.corpus_tools.salt.core.GraphTraverseHandler} interface.
 	 */
 	@Override
 	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation relation,
@@ -1588,7 +1606,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 	}
 
 	/**
-	 * Implements the checkConstraint method of the {@link SGraphTraverseHandler} interface.
+	 * Implements the checkConstraint method of the {@link org.corpus_tools.salt.core.GraphTraverseHandler} interface.
 	 */
 	@Override
 	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation relation,

@@ -7,14 +7,22 @@ Salt's [VisJsVisualizer](\ref org.corpus_tools.salt.util.VisJsVisualizer) provid
 A simple way to use VisJsVisualizer for writing the html file is shown in the following example code.
  ~~~{.java} 
   String inputSaltFile = "path_to_your_salt_file"; 
+  
   String outputFolder = "path_to_your_output_folder";
+  
   URI uri = URI.createFileURI(inputSaltFile);
+  
  	VisJsVisualizer visJsVisualizer = new VisJsVisualizer(uri);
+ 	
  	try {
  		 URI outputFileUri = URI.createFileURI(outputFolder);
+ 		 
  		 visJsVisualizer.visualize(outputFileUri);
+ 		 
  	} catch (IOException | XMLStreamException e) { 
+ 	
  		e.printStackTrace();
+ 		
  	}
  
 ~~~
@@ -23,37 +31,45 @@ How already mentioned, we also can instantiate the visualizer from an SDocument.
 
  ~~~{.java} 
 //generate sample salt document
+
 SDocument doc = SaltFactory.createSDocument();
+
 SampleGenerator.createDocumentStructure(doc);
 	
 //instantiate a visualizer
+
 VisJsVisualizer visJsVisualizer = new VisJsVisualizer(doc);
 
 try { 
+
 	//define output path and instantiate an output uri
+	
 	String outputFolderPath = "tmp/my_salt_test/sample_doc";
+	
 	File testFolder = new File(outputFolderPath);
+	
 	URI outputFolderUri = URI.createFileURI(outputFolderPath);		
+	
 	//visualize sample doc
+	
 	visJsVisualizer.visualize(outputFolderUri);
+	
 } catch (IOException | XMLStreamException e) { 
+
  		e.printStackTrace();
+ 		
 }
 ~~~
 
-After execution the visualizer organizes a file structure as shown below.
+
+After execution of above code the visualizer organizes a file structure as shown below. 
 
 ![](./images/file_tree.png)
 
-The following image demonstrate the entire salt graph of the sample document from saltVisJs.html file.
+
+The following image demonstrate the entire salt graph of the sample document from generated saltVisJs.html file. The background colors green, blue and yellow are always associated with tokens, spanning nodes and structure nodes respective. Note, spanning nodes will be divided into classes according to their annotation keys. All spanning nodes belonging to the same class appear in the same level.
 
 ![](./images/sample_doc_view.png)
-
-In contrast you can see a cutout of the salt graph of the sample document in the next image.
-
-![](./images/sample_doc_view_cutout.png)
-
-Note, spanning nodes will be divided into classes according to their annotation keys. All spanning nodes belonging to the same class appear in the same level.
 
 
 ##### Export Filter
