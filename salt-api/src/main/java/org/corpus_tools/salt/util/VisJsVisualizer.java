@@ -1149,7 +1149,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 		
 		 String idValue = node.getPath().fragment();
 		 String idLabel = "id=" + idValue;	
-		 String allLabels = idLabel;
+		 StringBuilder allLabels = new StringBuilder(idLabel);
 		 
 		// node object	 
 		 jsonWriterNodes.object();
@@ -1165,8 +1165,8 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 		   // add all annotation key-value-pairs
 		   for (Map.Entry<String, String> annotation : sortedAnnotations) 
 		   {
-			   allLabels += NEWLINE;
-			   allLabels += (annotation.getKey() + "=" + annotation.getValue());
+			   allLabels.append(NEWLINE);
+			   allLabels.append(annotation.getKey()).append("=").append(annotation.getValue());
 			   			  
 		   }
 		  		   
@@ -1178,12 +1178,12 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 			   String text = doc.getDocumentGraph().getText(node);
 				  if (text != null && !text.isEmpty())
 				  {	
-					  allLabels+= (NEWLINE + NEWLINE + text);
+					  allLabels.append(NEWLINE).append(NEWLINE).append(text);
 				  }
 		   } 
 		  
 		   				
-		 jsonWriterNodes.value(allLabels);	
+		 jsonWriterNodes.value(allLabels.toString());	
 		 
 		 
 		 String nodeColorValue;
@@ -1313,23 +1313,23 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 			  
 				  Set<SAnnotation> sAnnotations = relation.getAnnotations();
 				  if (sAnnotations.size() > 0)
-				   {		
-					   String allLabels = "";
+				   {	
+					   StringBuilder allLabels = new StringBuilder();
 					   List<Map.Entry<String, String>>  sortedAnnotations = sortAnnotations(sAnnotations);		
 					   
 					   int i= 0;
 					   for (Map.Entry<String, String> annotation : sortedAnnotations) 
 					   {
-						   allLabels += (annotation.getKey() + "=" + annotation.getValue());					
+						   allLabels.append(annotation.getKey()).append("=").append(annotation.getValue());					
 						   
 						   if (i < sAnnotations.size()){
-							   allLabels+= NEWLINE;
+							   allLabels.append(NEWLINE);
 						   }
 						   i++;
 					   }
 					   
 					   jsonWriterEdges.key(JSON_LABEL);
-					   jsonWriterEdges.value(allLabels);
+					   jsonWriterEdges.value(allLabels.toString());
 					  
 				   }
 				  
