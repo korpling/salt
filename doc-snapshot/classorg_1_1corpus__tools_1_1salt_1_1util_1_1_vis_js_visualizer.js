@@ -6,8 +6,6 @@ var classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer =
     [ "VisJsVisualizer", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#a5a2117b10b9862910837e75405b2e830", null ],
     [ "buildJSON", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#ae3d3cfd2860fe56f338c120efad2aa03", null ],
     [ "checkConstraint", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#a2d334c3fdb97fe756893400ecc0886c2", null ],
-    [ "getEdgeWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#a0f9d8b52eaa1fa390b17e0c05f363be1", null ],
-    [ "getNodeWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#a7dc7a44c792fc1eb657beee65730aa71", null ],
     [ "nodeLeft", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#a9a6ef77437d4d7700f1b4a8e164041fc", null ],
     [ "nodeReached", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#a1ac08f66f5df79059c9b70130cb9a1e1", null ],
     [ "setEdgeWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#a344cb4a16ef90dc88e87be141b0e3945", null ],

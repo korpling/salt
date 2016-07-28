@@ -1,7 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_meta_annotation.html":[12,0,0,0,0,1,8],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_named_element.html":[12,0,0,0,0,1,9],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_named_element.html#ad26122edb7bd058171ec3cc1bd365ed1":[12,0,0,0,0,1,9,1],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_named_element.html#ae246ed445ab608f4c4fb9de2ed757998":[12,0,0,0,0,1,9,0],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html":[12,0,0,0,0,1,10],
@@ -156,7 +154,7 @@ var NAVTREEINDEX5 =
 "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_export_filter.html#a3cbe388c238f24a494f5505f58acf3a0":[12,0,0,0,0,9,6,1],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_export_filter.html#ac10e8adb4f83515ce45f9686281e1fc9":[12,0,0,0,0,9,6,0],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_style_importer.html":[12,0,0,0,0,9,9],
-"interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_style_importer.html#a55f164b79240fcf7d3810bceaeeb6f95":[12,0,0,0,0,9,9,0],
+"interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_style_importer.html#a3eb0f652a68b35461bda276f672f7871":[12,0,0,0,0,9,9,0],
 "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_dictionary.html":[12,0,0,0,0,9,0,0,2],
 "isomorphie.html":[6],
 "md__var_lib_jenkins_jobs_salt_SNAPSHOT_workspace_salt-doc_src_main_doxygen_identifier.html":[5],
