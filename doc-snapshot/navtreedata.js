@@ -14,6 +14,7 @@ var NAVTREE =
     [ "Persist and Load", "persist.html", null ],
     [ "Generating sample models", "sample.html", null ],
     [ "Traversing graphs", "traverse.html", null ],
+    [ "Visualization of salt model", "visualizer.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
@@ -32,8 +33,8 @@ var NAVTREEINDEX =
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a7a69bc103395e50c7f18a1dcba8954de",
 "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a4b612522abf997af157633750462cce6",
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a72c0eb982f85ce1c873e482cb4729ef9",
-"functions_t.html",
-"interfaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_listener.html"
+"functions_func_p.html",
+"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_meta_annotation.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

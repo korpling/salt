@@ -79,6 +79,7 @@ var hierarchy =
     [ "org.corpus_tools.salt.util.DIFF_TYPES", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#enumorg_1_1corpus__tools_1_1salt_1_1util_1_1_d_i_f_f___t_y_p_e_s", null ],
     [ "org.corpus_tools.salt.util.internal.persistence.dot.DOTEdge", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_edge.html", null ],
     [ "org.corpus_tools.salt.util.internal.persistence.dot.DOTNode", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_node.html", null ],
+    [ "org.corpus_tools.salt.util.ExportFilter", "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_export_filter.html", null ],
     [ "org.corpus_tools.salt.graph.Graph< N, R, L >", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html", null ],
     [ "org.corpus_tools.salt.graph.Graph< SNode, SRelation< SNode, SNode >, SLayer >", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html", null ],
     [ "org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES", "namespaceorg_1_1corpus__tools_1_1salt_1_1graph.html#enumorg_1_1corpus__tools_1_1salt_1_1graph_1_1_g_r_a_p_h___a_t_t_r_i_b_u_t_e_s", null ],
@@ -89,7 +90,8 @@ var hierarchy =
     [ "org.corpus_tools.salt.util.internal.persistence.GraphMLWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_graph_m_l_writer.html", null ],
     [ "org.corpus_tools.salt.core.GraphTraverseHandler", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_graph_traverse_handler.html", [
       [ "org.corpus_tools.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_corpus_graph_d_o_t_writer.html", null ],
-      [ "org.corpus_tools.salt.util.internal.persistence.dot.SDocumentGraphDOTWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer.html", null ]
+      [ "org.corpus_tools.salt.util.internal.persistence.dot.SDocumentGraphDOTWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer.html", null ],
+      [ "org.corpus_tools.salt.util.VisJsVisualizer", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html", null ]
     ] ],
     [ "org.corpus_tools.salt.core.impl.GraphTraverserModule", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_graph_traverser_module.html", null ],
     [ "org.corpus_tools.salt.graph.IGraphFactory", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_i_graph_factory.html", [
@@ -327,6 +329,7 @@ var hierarchy =
     [ "org.corpus_tools.salt.common.STimeOverlappingRelation< SToken, STimeline >", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_time_overlapping_relation.html", [
       [ "org.corpus_tools.salt.common.STimelineRelation", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline_relation.html", null ]
     ] ],
+    [ "org.corpus_tools.salt.util.StyleImporter", "interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1_style_importer.html", null ],
     [ "org.corpus_tools.salt.core.STypedElement", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_typed_element.html", [
       [ "org.corpus_tools.salt.core.SRelation< S extends SNode, T extends SNode >", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_relation.html", null ]
     ] ],

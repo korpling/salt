@@ -18,5 +18,6 @@ var searchData=
   ['basicsetlabelableelement',['basicSetLabelableElement',['../classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#ab21ae08e44e44816195c29c9b553e1db',1,'org::corpus_tools::salt::graph::impl::LabelImpl']]],
   ['belongstocorpusstructure',['belongsToCorpusStructure',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_salt_util.html#ad467aff79a955f32bb04c4f47463e3e5',1,'org::corpus_tools::salt::util::SaltUtil']]],
   ['beta',['Beta',['../namespaceorg_1_1corpus__tools_1_1salt.html#interfaceorg_1_1corpus__tools_1_1salt_1_1_beta',1,'org::corpus_tools::salt']]],
+  ['buildjson',['buildJSON',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_vis_js_visualizer.html#ae3d3cfd2860fe56f338c120efad2aa03',1,'org::corpus_tools::salt::util::VisJsVisualizer']]],
   ['bidirectional_20references',['Bidirectional references',['../dev_bidirectionalReferences.html',1,'developers']]]
 ];
