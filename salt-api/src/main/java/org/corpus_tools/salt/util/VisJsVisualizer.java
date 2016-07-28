@@ -813,22 +813,30 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 		}
 		outputFolder = new File(outputFileUri.path());
 		if (!outputFolder.exists()) {
-			outputFolder.mkdirs();
+			if(!outputFolder.mkdirs()) {
+				throw new SaltException("Can't create folder " + outputFolder.getAbsolutePath());
+			}
 		}
 
 		File cssFolderOut = new File(outputFolder, CSS_FOLDER_OUT);
 		if (!cssFolderOut.exists()) {
-			cssFolderOut.mkdir();
+			if(!cssFolderOut.mkdir()) {
+				throw new SaltException("Can't create folder " + cssFolderOut.getAbsolutePath());
+			}
 		}
 
 		File jsFolderOut = new File(outputFolder, JS_FOLDER_OUT);
 		if (!jsFolderOut.exists()) {
-			jsFolderOut.mkdir();
+			if(!jsFolderOut.mkdir()) {
+				throw new SaltException("Can't create folder " + jsFolderOut.getAbsolutePath());
+			}
 		}
 
 		File imgFolderOut = new File(outputFolder, IMG_FOLDER_OUT);
 		if (!imgFolderOut.exists()) {
-			imgFolderOut.mkdirs();
+			if(!imgFolderOut.mkdirs()) {
+				throw new SaltException("Can't create folder " + imgFolderOut.getAbsolutePath());
+			}
 		}
 
 		copyResourceFile(
