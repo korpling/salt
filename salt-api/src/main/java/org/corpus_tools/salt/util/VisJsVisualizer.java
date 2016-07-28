@@ -880,27 +880,29 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 
 	private void copyResourceFile(InputStream inputStream, String outputFolder, String outSubFolder, String outFile)
 			throws IOException {
-		FileOutputStream fileOutStream = null;
-
-		if (outSubFolder != null) {
-			fileOutStream = new FileOutputStream(new File(outputFolder + System.getProperty("file.separator")
-					+ outSubFolder + System.getProperty("file.separator") + outFile));
+		
+		File outFileObject;
+		if(outSubFolder != null) {
+			outFileObject = new File(outputFolder + System.getProperty("file.separator")
+			+ outSubFolder + System.getProperty("file.separator") + outFile);
 		} else {
-			fileOutStream = new FileOutputStream(
-					new File(outputFolder + System.getProperty("file.separator") + outFile));
+			outFileObject = new File(outputFolder + System.getProperty("file.separator") + outFile);
 		}
-
-		int bufferSize = 32 * 1024;
-		byte[] bytes = new byte[bufferSize];
-		int readBytes = 0;
-
-		while ((readBytes = inputStream.read(bytes)) != -1) {
-			fileOutStream.write(bytes, 0, readBytes);
+		
+		try(FileOutputStream fileOutStream = new FileOutputStream(outFileObject)) {
+	
+			int bufferSize = 32 * 1024;
+			byte[] bytes = new byte[bufferSize];
+			int readBytes = 0;
+	
+			while ((readBytes = inputStream.read(bytes)) != -1) {
+				fileOutStream.write(bytes, 0, readBytes);
+			}
+	
+			fileOutStream.flush();
+			fileOutStream.close();
+			inputStream.close();
 		}
-
-		fileOutStream.flush();
-		fileOutStream.close();
-		inputStream.close();
 
 	}
 
