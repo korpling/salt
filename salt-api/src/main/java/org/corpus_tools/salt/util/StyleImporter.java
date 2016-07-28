@@ -37,6 +37,6 @@ public interface StyleImporter {
 	 * @return the color in the format "#rrggbb"
 	 */
 	
-	public String getHighlightingColor (SNode node);
+	public String setHighlightingColor (SNode node);
 
 }

@@ -279,12 +279,6 @@ public class VisJsVisualizerTest {
 	VisJsVisualizer.setNodeWriter(osNodes);
 	VisJsVisualizer.setEdgeWriter(osEdges);
 	VisJsVisualizer.buildJSON();				
-	BufferedWriter bw;	
-	bw = VisJsVisualizer.getNodeWriter();
-	bw.flush();	
-	
-	bw = VisJsVisualizer.getEdgeWriter();	
-	bw.flush();	
 	
 	String strNodes = osNodes.toString();
 	String strEdges = osEdges.toString();
