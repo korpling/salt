@@ -1406,8 +1406,12 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 			maxLevel += (nSpanClasses - 1);
 		}
 		
-		readSpanNodes.clear();
-		readStructNodes.clear();	
+    	if(readSpanNodes != null) {
+    		readSpanNodes.clear();
+    	}
+    	if(readStructNodes != null) {
+    		readStructNodes.clear();	
+    	}
 		// If maxLevel > 0, there are further nodes beside token nodes, since token nodes are mandatory.
 		//Thus, graph will be rendered with physics.
 		if (maxLevel > 0)
