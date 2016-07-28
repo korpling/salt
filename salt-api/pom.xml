@@ -60,6 +60,12 @@
 			<artifactId>woodstox-core</artifactId>
 			<version>5.0.1</version>
 		</dependency>
+		<!-- JSON libraries for creating VisJs output -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
