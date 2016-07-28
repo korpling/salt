@@ -115,25 +115,24 @@ import javax.xml.stream.XMLStreamWriter;
  *
  * 	URI uri = URI.createFileURI("path_to_the_input_salt_file");	
  * 
+ *  OutputStream nodeStream = Sytem.out;
+ *  OutputStream edgeStream = System.out;
+ *  
 *	VisJsVisualizer VisJsVisualizer = new VisJsVisualizer(uri);
 *	 	
-*	VisJsVisualizer.setNodeWriter(System.out);
+*	VisJsVisualizer.setNodeWriter(nodeStream);
 *
-*	VisJsVisualizer.setEdgeWriter(System.out);
+*	VisJsVisualizer.setEdgeWriter(edgeStream);
 *
 *	VisJsVisualizer.buildJSON();
 *		
-*	BufferedWriter bw;
 *				
 *	try {
 *
-*		bw = VisJsVisualizer.getNodeWriter();
-*		bw.newLine();
-*		bw.flush();	
+*		nodeStream.write('\n');
+*		nodeStream.flush();	
 *		
-*		bw = VisJsVisualizer.getEdgeWriter();		
-*		bw.newLine();
-*		bw.flush();	
+*		edgeStream.flush();	
 *			
 *	} catch (IOException e) {
 *
@@ -162,10 +161,6 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private  JSONWriter jsonWriterNodes;
 	private  JSONWriter jsonWriterEdges;
 
-	
-	private  XMLOutputFactory outputFactory;
-	private  OutputStream os;
-	private  XMLStreamWriter xmlWriter;
 	
 	 //HTML tags
     private static final String TAG_HTML = "html";
@@ -452,452 +447,455 @@ public void visualize(URI outputFolderUri) throws SaltParameterException,  SaltR
 	}
 
 
-   private void writeHTML(File outputFolder) throws XMLStreamException, IOException{
-	   	   		
-			 int nodeDist = 0;
-			 int sprLength = 0;
-			 double sprConstant = 0.0;
-			
-			this.os = new FileOutputStream(new File(outputFolder, HTML_FILE));
-			this.outputFactory = XMLOutputFactory.newInstance();			
-			this.xmlWriter = outputFactory.createXMLStreamWriter(os, "UTF-8");	
-			FileOutputStream fos = new FileOutputStream(tmpFile);
-			setNodeWriter(os);
-			setEdgeWriter(fos);
-			
-			
-			
-			xmlWriter.writeStartDocument("UTF-8", "1.0");
-			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeStartElement(TAG_HTML);
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_HEAD);
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_TITLE);
-			xmlWriter.writeCharacters("Salt Document Tree");
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_STYLE);
-			xmlWriter.writeAttribute(ATT_TYPE, "text/css");
-			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeCharacters("body {" + NEWLINE 
-					+ "font: 10pt sans;" + NEWLINE
-					+ "}" + NEWLINE
-					+ "#mynetwork {" + NEWLINE
-					+ "height: 90%;" + NEWLINE
-					+ "width: 90%;" + NEWLINE
-					+ "border: 1px solid lightgray; " + NEWLINE
-					+ "text-align: center;" + NEWLINE
-   					+ "}" + NEWLINE
-   					+ "#loadingBar {" + NEWLINE
-   					+ "position:absolute;" + NEWLINE
-   					+ "top:0px;" + NEWLINE
-		            + "left:0px;" + NEWLINE
-		            + "width: 0px;" + NEWLINE
-		            + "height: 0px;" + NEWLINE
-		            + "background-color:rgba(200,200,200,0.8);" + NEWLINE
-		            + "-webkit-transition: all 0.5s ease;" + NEWLINE
-		            + "-moz-transition: all 0.5s ease;" + NEWLINE
-		            + "-ms-transition: all 0.5s ease;" + NEWLINE
-		            + "-o-transition: all 0.5s ease;" + NEWLINE
-		            + "transition: all 0.5s ease;" + NEWLINE
-		            + "opacity:1;" + NEWLINE
-		        	+ "}" + NEWLINE
-			        + "#wrapper {" + NEWLINE
-			        + "position:absolute;" + NEWLINE    
-			        + "width: 1200px;"  + NEWLINE 
-					+ "height: 90%;"  + NEWLINE 
-			        + "}" + NEWLINE	        
-			        + "#text {" + NEWLINE
-			        + "position:absolute;" + NEWLINE
-		            + "top:8px;" + NEWLINE
-		            + "left:530px;" + NEWLINE
-		            + "width:30px;" + NEWLINE
-		            + "height:50px;" + NEWLINE
-		            + "margin:auto auto auto auto;" + NEWLINE
-		            + "font-size:16px;" + NEWLINE
-		            + "color: #000000;" + NEWLINE
-			        + "}" + NEWLINE
-			        + "div.outerBorder {" + NEWLINE
-		            + "position:relative;" + NEWLINE
-		            + "top:400px;" + NEWLINE
-		            + "width:600px;" + NEWLINE
-		            + "height:44px;" + NEWLINE
-		            + "margin:auto auto auto auto;" + NEWLINE
-		            + "border:8px solid rgba(0,0,0,0.1);" + NEWLINE
-		            + "background: rgb(252,252,252); /* Old browsers */" + NEWLINE
-		            + "background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */" + NEWLINE
-		            + "background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */" + NEWLINE
-		            + "background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */" + NEWLINE
-		            + "background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */" + NEWLINE
-		            + "background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */" + NEWLINE
-		            + "background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */" + NEWLINE
-		            + "filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */" + NEWLINE
-		            + "border-radius:72px;" + NEWLINE
-		            + "box-shadow: 0px 0px 10px rgba(0,0,0,0.2);" + NEWLINE
-		            + "}" + NEWLINE
-		            + "#border {" + NEWLINE
-		             + "position:absolute;" + NEWLINE
-		             + "top:10px;" + NEWLINE
-		             + "left:10px;" + NEWLINE
-		             + "width:500px;" + NEWLINE
-		             + "height:23px;" + NEWLINE
-		             + "margin:auto auto auto auto;" + NEWLINE
-		             + "box-shadow: 0px 0px 4px rgba(0,0,0,0.2);" + NEWLINE
-		             + "border-radius:10px;" + NEWLINE
-		             + "}" + NEWLINE
-			         + "#bar {" + NEWLINE
-			         + "position:absolute;" + NEWLINE
-		            + "top:0px;" + NEWLINE
-		            + "left:0px;" + NEWLINE
-		            + "width:20px;" + NEWLINE
-		            + "height:20px;" + NEWLINE
-		            + "margin:auto auto auto auto;" + NEWLINE
-		            + "border-radius:6px;" + NEWLINE
-		            + "border:1px solid rgba(30,30,30,0.05);" + NEWLINE
-		            + "background: rgb(0, 173, 246); /* Old browsers */" + NEWLINE
-		            + "box-shadow: 2px 0px 4px rgba(0,0,0,0.4);" + NEWLINE
-		            + "}" + NEWLINE);
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_SCRIPT);
-			xmlWriter.writeAttribute(ATT_SRC,VIS_JS_SRC);
-			xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
-			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_SCRIPT);
-			xmlWriter.writeAttribute(ATT_SRC,JQUERY_SRC);
-			xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
-			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeEmptyElement(TAG_LINK);
-			xmlWriter.writeAttribute(ATT_HREF, VIS_CSS_SRC);
-			xmlWriter.writeAttribute(ATT_REL,"stylesheet");
-			xmlWriter.writeAttribute(ATT_TYPE, "text/css");
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_SCRIPT);
-			xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");
-			xmlWriter.writeCharacters(NEWLINE 
-					+ "function frameSize() {" + NEWLINE
-					+ "$(document).ready(function() {" + NEWLINE
-					+ "function elementResize() {" + NEWLINE
-			        + "var browserWidth = $(window).width()*0.98;" + NEWLINE
-					+ "document.getElementById('mynetwork').style.width = browserWidth;" + NEWLINE
-					+ "}" + NEWLINE
-					+ "elementResize();" + NEWLINE
-					+ "$(window).bind(\"resize\", function(){" + NEWLINE
-					+ "elementResize();" + NEWLINE
-					+ "});" + NEWLINE
-					+ "});" + NEWLINE
-					+ "}" + NEWLINE);
-					xmlWriter.writeEndElement();
-					xmlWriter.writeCharacters(NEWLINE);
+private void writeHTML(File outputFolder) throws XMLStreamException, IOException{
 
-			
-			
-			
-			
-			xmlWriter.writeStartElement(TAG_SCRIPT);
-			xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
-			xmlWriter.writeCharacters(NEWLINE 
-					+ "function start(){" + NEWLINE
-					+ "loadSaltObjectAndDraw();" + NEWLINE
-					+ "frameSize();" + NEWLINE
-					+ "}" + NEWLINE
-					+ "var nodesJson = [];" + NEWLINE
-					+ "var edgesJson = [];" + NEWLINE
-					+ "var network = null;" + NEWLINE					
-					+ "function loadSaltObjectAndDraw() {" + NEWLINE
-					+ "var nodesJson = " + NEWLINE);
-			xmlWriter.flush();
-			
-				try{
-					buildJSON();	
-				}catch(SaltParameterException e){
-				 throw new 	SaltParameterException(e.getMessage());
-				}catch(SaltException e){
-				 throw new 	SaltException(e.getMessage());
-				}
+	int nodeDist = 0;
+	int sprLength = 0;
+	double sprConstant = 0.0;
 
-					
-				
-			if (nNodes < 20){
+	try(OutputStream os = new FileOutputStream(new File(outputFolder, HTML_FILE));
+			FileOutputStream fos = new FileOutputStream(tmpFile))
+	{
+		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();			
+		XMLStreamWriter xmlWriter = outputFactory.createXMLStreamWriter(os, "UTF-8");	
+
+		setNodeWriter(os);
+		setEdgeWriter(fos);
+
+
+
+		xmlWriter.writeStartDocument("UTF-8", "1.0");
+		xmlWriter.writeCharacters(NEWLINE);
+		xmlWriter.writeStartElement(TAG_HTML);
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_HEAD);
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_TITLE);
+		xmlWriter.writeCharacters("Salt Document Tree");
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_STYLE);
+		xmlWriter.writeAttribute(ATT_TYPE, "text/css");
+		xmlWriter.writeCharacters(NEWLINE);
+		xmlWriter.writeCharacters("body {" + NEWLINE 
+				+ "font: 10pt sans;" + NEWLINE
+				+ "}" + NEWLINE
+				+ "#mynetwork {" + NEWLINE
+				+ "height: 90%;" + NEWLINE
+				+ "width: 90%;" + NEWLINE
+				+ "border: 1px solid lightgray; " + NEWLINE
+				+ "text-align: center;" + NEWLINE
+				+ "}" + NEWLINE
+				+ "#loadingBar {" + NEWLINE
+				+ "position:absolute;" + NEWLINE
+				+ "top:0px;" + NEWLINE
+				+ "left:0px;" + NEWLINE
+				+ "width: 0px;" + NEWLINE
+				+ "height: 0px;" + NEWLINE
+				+ "background-color:rgba(200,200,200,0.8);" + NEWLINE
+				+ "-webkit-transition: all 0.5s ease;" + NEWLINE
+				+ "-moz-transition: all 0.5s ease;" + NEWLINE
+				+ "-ms-transition: all 0.5s ease;" + NEWLINE
+				+ "-o-transition: all 0.5s ease;" + NEWLINE
+				+ "transition: all 0.5s ease;" + NEWLINE
+				+ "opacity:1;" + NEWLINE
+				+ "}" + NEWLINE
+				+ "#wrapper {" + NEWLINE
+				+ "position:absolute;" + NEWLINE    
+				+ "width: 1200px;"  + NEWLINE 
+				+ "height: 90%;"  + NEWLINE 
+				+ "}" + NEWLINE	        
+				+ "#text {" + NEWLINE
+				+ "position:absolute;" + NEWLINE
+				+ "top:8px;" + NEWLINE
+				+ "left:530px;" + NEWLINE
+				+ "width:30px;" + NEWLINE
+				+ "height:50px;" + NEWLINE
+				+ "margin:auto auto auto auto;" + NEWLINE
+				+ "font-size:16px;" + NEWLINE
+				+ "color: #000000;" + NEWLINE
+				+ "}" + NEWLINE
+				+ "div.outerBorder {" + NEWLINE
+				+ "position:relative;" + NEWLINE
+				+ "top:400px;" + NEWLINE
+				+ "width:600px;" + NEWLINE
+				+ "height:44px;" + NEWLINE
+				+ "margin:auto auto auto auto;" + NEWLINE
+				+ "border:8px solid rgba(0,0,0,0.1);" + NEWLINE
+				+ "background: rgb(252,252,252); /* Old browsers */" + NEWLINE
+				+ "background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */" + NEWLINE
+				+ "background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */" + NEWLINE
+				+ "background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */" + NEWLINE
+				+ "background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */" + NEWLINE
+				+ "background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */" + NEWLINE
+				+ "background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */" + NEWLINE
+				+ "filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */" + NEWLINE
+				+ "border-radius:72px;" + NEWLINE
+				+ "box-shadow: 0px 0px 10px rgba(0,0,0,0.2);" + NEWLINE
+				+ "}" + NEWLINE
+				+ "#border {" + NEWLINE
+				+ "position:absolute;" + NEWLINE
+				+ "top:10px;" + NEWLINE
+				+ "left:10px;" + NEWLINE
+				+ "width:500px;" + NEWLINE
+				+ "height:23px;" + NEWLINE
+				+ "margin:auto auto auto auto;" + NEWLINE
+				+ "box-shadow: 0px 0px 4px rgba(0,0,0,0.2);" + NEWLINE
+				+ "border-radius:10px;" + NEWLINE
+				+ "}" + NEWLINE
+				+ "#bar {" + NEWLINE
+				+ "position:absolute;" + NEWLINE
+				+ "top:0px;" + NEWLINE
+				+ "left:0px;" + NEWLINE
+				+ "width:20px;" + NEWLINE
+				+ "height:20px;" + NEWLINE
+				+ "margin:auto auto auto auto;" + NEWLINE
+				+ "border-radius:6px;" + NEWLINE
+				+ "border:1px solid rgba(30,30,30,0.05);" + NEWLINE
+				+ "background: rgb(0, 173, 246); /* Old browsers */" + NEWLINE
+				+ "box-shadow: 2px 0px 4px rgba(0,0,0,0.4);" + NEWLINE
+				+ "}" + NEWLINE);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_SCRIPT);
+		xmlWriter.writeAttribute(ATT_SRC,VIS_JS_SRC);
+		xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
+		xmlWriter.writeCharacters(NEWLINE);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_SCRIPT);
+		xmlWriter.writeAttribute(ATT_SRC,JQUERY_SRC);
+		xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
+		xmlWriter.writeCharacters(NEWLINE);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeEmptyElement(TAG_LINK);
+		xmlWriter.writeAttribute(ATT_HREF, VIS_CSS_SRC);
+		xmlWriter.writeAttribute(ATT_REL,"stylesheet");
+		xmlWriter.writeAttribute(ATT_TYPE, "text/css");
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_SCRIPT);
+		xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");
+		xmlWriter.writeCharacters(NEWLINE 
+				+ "function frameSize() {" + NEWLINE
+				+ "$(document).ready(function() {" + NEWLINE
+				+ "function elementResize() {" + NEWLINE
+				+ "var browserWidth = $(window).width()*0.98;" + NEWLINE
+				+ "document.getElementById('mynetwork').style.width = browserWidth;" + NEWLINE
+				+ "}" + NEWLINE
+				+ "elementResize();" + NEWLINE
+				+ "$(window).bind(\"resize\", function(){" + NEWLINE
+				+ "elementResize();" + NEWLINE
+				+ "});" + NEWLINE
+				+ "});" + NEWLINE
+				+ "}" + NEWLINE);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+
+
+
+
+		xmlWriter.writeStartElement(TAG_SCRIPT);
+		xmlWriter.writeAttribute(ATT_TYPE, "text/javascript");			
+		xmlWriter.writeCharacters(NEWLINE 
+				+ "function start(){" + NEWLINE
+				+ "loadSaltObjectAndDraw();" + NEWLINE
+				+ "frameSize();" + NEWLINE
+				+ "}" + NEWLINE
+				+ "var nodesJson = [];" + NEWLINE
+				+ "var edgesJson = [];" + NEWLINE
+				+ "var network = null;" + NEWLINE					
+				+ "function loadSaltObjectAndDraw() {" + NEWLINE
+				+ "var nodesJson = " + NEWLINE);
+		xmlWriter.flush();
+
+		try{
+			buildJSON();	
+		}catch(SaltParameterException e){
+			throw new 	SaltParameterException(e.getMessage());
+		}catch(SaltException e){
+			throw new 	SaltException(e.getMessage());
+		}
+
+
+
+		if (nNodes < 20){
 			nodeDist = 120;
 			sprConstant = 1.2;
 			sprLength = 120;
-			} else if (nNodes >=20 && nNodes < 100){
+		} else if (nNodes >=20 && nNodes < 100){
 			nodeDist = 150;
 			sprConstant = 1.1;
 			sprLength = 160;
-			} else if (nNodes >= 100 && nNodes < 400) {
+		} else if (nNodes >= 100 && nNodes < 400) {
 			nodeDist = 180;
 			sprConstant = 0.9;
 			sprLength = 180;
-			} else if (nNodes >= 400 && nNodes < 800) {
-				nodeDist = 200;
-				sprConstant = 0.6;
-				sprLength = 200;
-			} else {
-				nodeDist = 250;
-				sprConstant = 0.3;
-				sprLength = 230;
-			};
-			
-			// write nodes as array	
-			nodeWriter.flush();
-		
-		
-			xmlWriter.writeCharacters(";" + NEWLINE);
-			xmlWriter.writeCharacters("var edgesJson = " + NEWLINE);
-			xmlWriter.flush();
-			
-			
-			
-			// write edges as array to tmp file
-			edgeWriter.flush();
-			
-			//copy edges from tmp file
-			ByteStreams.copy(new FileInputStream(tmpFile), os);
-					
-		
-			xmlWriter.writeCharacters(";" + NEWLINE);
-			
-			xmlWriter.writeCharacters("var nodeDist =" +  nodeDist + ";" + NEWLINE);
-			
-			
-			xmlWriter.writeCharacters("draw(nodesJson, edgesJson, nodeDist);" + NEWLINE
-			+ "}" + NEWLINE
-			+ "var directionInput = document.getElementById(\"direction\");" + NEWLINE
-			+ "function destroy() {" + NEWLINE
-			+ "if (network !== null) {" + NEWLINE
-			+ "network.destroy();" + NEWLINE
-			+ "network = null;" + NEWLINE
-			+ "}" + NEWLINE
-			+ "}" + NEWLINE
-			+ NEWLINE
-			+ "function draw(nodesJson, edgesJson, nodeDist) {" + NEWLINE
-			+ "destroy();" + NEWLINE
-			+ "var connectionCount = [];" + NEWLINE
-			+ "var nodes = [];" + NEWLINE
-			+ "var edges = [];" + NEWLINE
-			+ NEWLINE
-			+ "nodes = new vis.DataSet(nodesJson);" + NEWLINE
-			+ "edges = new vis.DataSet(edgesJson);" + NEWLINE
-			+ "var container = document.getElementById('mynetwork');" + NEWLINE
-			+ "var data = {" + NEWLINE
-			+ "nodes: nodes," + NEWLINE
-			+ "edges: edges" + NEWLINE
-			+ "};" + NEWLINE
-			+ "var options = {" + NEWLINE
-			+ "nodes:{" + NEWLINE
-			+ "shape: \"box\"" + NEWLINE
-			+ "}," + NEWLINE
-			+ "edges: {" + NEWLINE
-			+ "smooth: true," + NEWLINE
-			+ "arrows: {" + NEWLINE
-			+ "to: {" + NEWLINE
-			+ "enabled: true" + NEWLINE
-			+ "}" + NEWLINE
-			+ "}" + NEWLINE
-			+ "}," + NEWLINE
-			+ "interaction: {" + NEWLINE
-			+ "navigationButtons: true," + NEWLINE
-			+ "keyboard: true" + NEWLINE
-			+ "}," + NEWLINE
-			+ "layout: {" + NEWLINE
-			+ "hierarchical:{" + NEWLINE
-			+ "direction: directionInput.value" + NEWLINE
-			+ "}" + NEWLINE
-			+ "}," + NEWLINE
-			+ "physics: {" + NEWLINE
-			+ "hierarchicalRepulsion: {" + NEWLINE
-			+ "centralGravity: 0.8," + NEWLINE
-			+ "springLength: " + sprLength + "," + NEWLINE
-			+ "springConstant: " + sprConstant + "," + NEWLINE
-			+ "nodeDistance: nodeDist," + NEWLINE
-			+ "damping: 0.04" + NEWLINE
-			+ "}," + NEWLINE
-			+ "maxVelocity: 50," + NEWLINE
-			+ "minVelocity: 1," + NEWLINE
-			+ "solver: 'hierarchicalRepulsion'," + NEWLINE
-			+ "timestep: 0.5," + NEWLINE
-			+ "stabilization: {" + NEWLINE
-			+ "iterations: 1000" + NEWLINE
-			+ "}" + NEWLINE
-			+ "}" + NEWLINE
-			+ "}" + NEWLINE
-			+ ";" + NEWLINE
-			+"network = new vis.Network(container, data, options);" + NEWLINE);
-			
-			if(withPhysics == true){
-				xmlWriter.writeCharacters("network.on(\"stabilizationProgress\", function(params) {" + NEWLINE
-				+ "var maxWidth = 496;" + NEWLINE
-				+ "var minWidth = 20;" + NEWLINE
-	            + "var widthFactor = params.iterations/params.total;" + NEWLINE
-	            + "var width = Math.max(minWidth,maxWidth * widthFactor);" + NEWLINE			
-				+ "document.getElementById('loadingBar').style.opacity = 1;" + NEWLINE
-	            + "document.getElementById('bar').style.width = width + 'px';" + NEWLINE
-	            + "document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';" + NEWLINE             
-	            + "});" + NEWLINE
-	            + "network.on(\"stabilizationIterationsDone\", function() {" + NEWLINE	
-	            + "document.getElementById('text').innerHTML = '100%';" + NEWLINE	
-	            + "document.getElementById('bar').style.width = '496px';" + NEWLINE	
-	            + "document.getElementById('loadingBar').style.opacity = 0;" + NEWLINE
-	            + "});" + NEWLINE);
-			}
-			
-			xmlWriter.writeCharacters("}" + NEWLINE);
-			//script
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			//head
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_BODY);
-			xmlWriter.writeAttribute("onload", "start();");
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			
-			if(withPhysics == true){			
-				xmlWriter.writeStartElement(TAG_DIV);
-				xmlWriter.writeAttribute(ATT_ID, "wrapper");
-				xmlWriter.writeCharacters(NEWLINE);
-				
-				xmlWriter.writeStartElement(TAG_DIV);
-				xmlWriter.writeAttribute(ATT_ID, "loadingBar");
-				xmlWriter.writeCharacters(NEWLINE);
-				
-				xmlWriter.writeStartElement(TAG_DIV);
-				xmlWriter.writeAttribute(ATT_CLASS, "outerBorder");
-				xmlWriter.writeCharacters(NEWLINE);
-				
-				xmlWriter.writeStartElement(TAG_DIV);
-				xmlWriter.writeAttribute(ATT_ID, "text");
-				xmlWriter.writeCharacters("0%");
-				xmlWriter.writeEndElement();
-				xmlWriter.writeCharacters(NEWLINE);
-				
-				xmlWriter.writeStartElement(TAG_DIV);
-				xmlWriter.writeAttribute(ATT_ID, "border");
-				xmlWriter.writeCharacters(NEWLINE);
-				
-				xmlWriter.writeStartElement(TAG_DIV);
-				xmlWriter.writeAttribute(ATT_ID, "bar");
-				xmlWriter.writeCharacters(NEWLINE);
-				xmlWriter.writeEndElement();
-				xmlWriter.writeCharacters(NEWLINE);
-				
-				
-				xmlWriter.writeEndElement();
-				xmlWriter.writeCharacters(NEWLINE);
-				xmlWriter.writeEndElement();
-				xmlWriter.writeCharacters(NEWLINE);
-				xmlWriter.writeEndElement();
-				xmlWriter.writeCharacters(NEWLINE);
-			}		
-			
-			xmlWriter.writeStartElement(TAG_H2);
-			xmlWriter.writeCharacters("Dokument-Id: " + docId);
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
+		} else if (nNodes >= 400 && nNodes < 800) {
+			nodeDist = 200;
+			sprConstant = 0.6;
+			sprLength = 200;
+		} else {
+			nodeDist = 250;
+			sprConstant = 0.3;
+			sprLength = 230;
+		};
+
+		// write nodes as array	
+		nodeWriter.flush();
+
+
+		xmlWriter.writeCharacters(";" + NEWLINE);
+		xmlWriter.writeCharacters("var edgesJson = " + NEWLINE);
+		xmlWriter.flush();
+
+
+
+		// write edges as array to tmp file
+		edgeWriter.flush();
+
+		//copy edges from tmp file
+		ByteStreams.copy(new FileInputStream(tmpFile), os);
+
+
+		xmlWriter.writeCharacters(";" + NEWLINE);
+
+		xmlWriter.writeCharacters("var nodeDist =" +  nodeDist + ";" + NEWLINE);
+
+
+		xmlWriter.writeCharacters("draw(nodesJson, edgesJson, nodeDist);" + NEWLINE
+				+ "}" + NEWLINE
+				+ "var directionInput = document.getElementById(\"direction\");" + NEWLINE
+				+ "function destroy() {" + NEWLINE
+				+ "if (network !== null) {" + NEWLINE
+				+ "network.destroy();" + NEWLINE
+				+ "network = null;" + NEWLINE
+				+ "}" + NEWLINE
+				+ "}" + NEWLINE
+				+ NEWLINE
+				+ "function draw(nodesJson, edgesJson, nodeDist) {" + NEWLINE
+				+ "destroy();" + NEWLINE
+				+ "var connectionCount = [];" + NEWLINE
+				+ "var nodes = [];" + NEWLINE
+				+ "var edges = [];" + NEWLINE
+				+ NEWLINE
+				+ "nodes = new vis.DataSet(nodesJson);" + NEWLINE
+				+ "edges = new vis.DataSet(edgesJson);" + NEWLINE
+				+ "var container = document.getElementById('mynetwork');" + NEWLINE
+				+ "var data = {" + NEWLINE
+				+ "nodes: nodes," + NEWLINE
+				+ "edges: edges" + NEWLINE
+				+ "};" + NEWLINE
+				+ "var options = {" + NEWLINE
+				+ "nodes:{" + NEWLINE
+				+ "shape: \"box\"" + NEWLINE
+				+ "}," + NEWLINE
+				+ "edges: {" + NEWLINE
+				+ "smooth: true," + NEWLINE
+				+ "arrows: {" + NEWLINE
+				+ "to: {" + NEWLINE
+				+ "enabled: true" + NEWLINE
+				+ "}" + NEWLINE
+				+ "}" + NEWLINE
+				+ "}," + NEWLINE
+				+ "interaction: {" + NEWLINE
+				+ "navigationButtons: true," + NEWLINE
+				+ "keyboard: true" + NEWLINE
+				+ "}," + NEWLINE
+				+ "layout: {" + NEWLINE
+				+ "hierarchical:{" + NEWLINE
+				+ "direction: directionInput.value" + NEWLINE
+				+ "}" + NEWLINE
+				+ "}," + NEWLINE
+				+ "physics: {" + NEWLINE
+				+ "hierarchicalRepulsion: {" + NEWLINE
+				+ "centralGravity: 0.8," + NEWLINE
+				+ "springLength: " + sprLength + "," + NEWLINE
+				+ "springConstant: " + sprConstant + "," + NEWLINE
+				+ "nodeDistance: nodeDist," + NEWLINE
+				+ "damping: 0.04" + NEWLINE
+				+ "}," + NEWLINE
+				+ "maxVelocity: 50," + NEWLINE
+				+ "minVelocity: 1," + NEWLINE
+				+ "solver: 'hierarchicalRepulsion'," + NEWLINE
+				+ "timestep: 0.5," + NEWLINE
+				+ "stabilization: {" + NEWLINE
+				+ "iterations: 1000" + NEWLINE
+				+ "}" + NEWLINE
+				+ "}" + NEWLINE
+				+ "}" + NEWLINE
+				+ ";" + NEWLINE
+				+"network = new vis.Network(container, data, options);" + NEWLINE);
+
+		if(withPhysics == true){
+			xmlWriter.writeCharacters("network.on(\"stabilizationProgress\", function(params) {" + NEWLINE
+					+ "var maxWidth = 496;" + NEWLINE
+					+ "var minWidth = 20;" + NEWLINE
+					+ "var widthFactor = params.iterations/params.total;" + NEWLINE
+					+ "var width = Math.max(minWidth,maxWidth * widthFactor);" + NEWLINE			
+					+ "document.getElementById('loadingBar').style.opacity = 1;" + NEWLINE
+					+ "document.getElementById('bar').style.width = width + 'px';" + NEWLINE
+					+ "document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';" + NEWLINE             
+					+ "});" + NEWLINE
+					+ "network.on(\"stabilizationIterationsDone\", function() {" + NEWLINE	
+					+ "document.getElementById('text').innerHTML = '100%';" + NEWLINE	
+					+ "document.getElementById('bar').style.width = '496px';" + NEWLINE	
+					+ "document.getElementById('loadingBar').style.opacity = 0;" + NEWLINE
+					+ "});" + NEWLINE);
+		}
+
+		xmlWriter.writeCharacters("}" + NEWLINE);
+		//script
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		//head
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_BODY);
+		xmlWriter.writeAttribute("onload", "start();");
+		xmlWriter.writeCharacters(NEWLINE);
+
+
+		if(withPhysics == true){			
 			xmlWriter.writeStartElement(TAG_DIV);
-			xmlWriter.writeAttribute(ATT_STYLE,TEXT_STYLE);
-			xmlWriter.writeEndElement();
+			xmlWriter.writeAttribute(ATT_ID, "wrapper");
 			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement("p");
-			
-			xmlWriter.writeEmptyElement(TAG_INPUT);
-			xmlWriter.writeAttribute(ATT_TYPE,"button");
-			xmlWriter.writeAttribute(ATT_ID, "btn-UD");
-			xmlWriter.writeAttribute(ATT_VALUE, "Up-Down");
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeEmptyElement(TAG_INPUT);
-			xmlWriter.writeAttribute(ATT_TYPE,"button");
-			xmlWriter.writeAttribute(ATT_ID, "btn-DU");
-			xmlWriter.writeAttribute(ATT_VALUE, "Down-Up");
-			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeEmptyElement(TAG_INPUT);
-			xmlWriter.writeAttribute(ATT_TYPE,"hidden");
-			//TODO check the apostrophes
-			xmlWriter.writeAttribute(ATT_ID, "direction");
-			xmlWriter.writeAttribute(ATT_VALUE, "UD");
-			xmlWriter.writeCharacters(NEWLINE);
-		
-			
-			//p
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);
-			
+
 			xmlWriter.writeStartElement(TAG_DIV);
-			xmlWriter.writeAttribute(ATT_ID, "mynetwork");
+			xmlWriter.writeAttribute(ATT_ID, "loadingBar");
+			xmlWriter.writeCharacters(NEWLINE);
+
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_CLASS, "outerBorder");
+			xmlWriter.writeCharacters(NEWLINE);
+
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_ID, "text");
+			xmlWriter.writeCharacters("0%");
+			xmlWriter.writeEndElement();
+			xmlWriter.writeCharacters(NEWLINE);
+
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_ID, "border");
+			xmlWriter.writeCharacters(NEWLINE);
+
+			xmlWriter.writeStartElement(TAG_DIV);
+			xmlWriter.writeAttribute(ATT_ID, "bar");
 			xmlWriter.writeCharacters(NEWLINE);
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);
-			
-			xmlWriter.writeStartElement(TAG_P);
-			xmlWriter.writeAttribute(ATT_ID, "selection");
+
+
+			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);
-			
-			
-			xmlWriter.writeStartElement(TAG_SCRIPT);
-			xmlWriter.writeAttribute(ATT_LANG, "JavaScript");
+			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);
-			xmlWriter.writeCharacters("var directionInput = document.getElementById(\"direction\");" + NEWLINE
-					+ "var btnUD = document.getElementById(\"btn-UD\");" + NEWLINE
-					+ "btnUD.onclick = function() {" + NEWLINE
-					+ "directionInput.value = \"UD\";" + NEWLINE
-					+ "start();" + NEWLINE
-					+ "};" + NEWLINE
-					+ "var btnDU = document.getElementById(\"btn-DU\");" + NEWLINE
-					+ "btnDU.onclick = function() {" + NEWLINE
-					+ "directionInput.value = \"DU\";" + NEWLINE
-					+ "start();" + NEWLINE
-					+ "};" + NEWLINE
-					);
+		}		
+
+		xmlWriter.writeStartElement(TAG_H2);
+		xmlWriter.writeCharacters("Dokument-Id: " + docId);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_DIV);
+		xmlWriter.writeAttribute(ATT_STYLE,TEXT_STYLE);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement("p");
+
+		xmlWriter.writeEmptyElement(TAG_INPUT);
+		xmlWriter.writeAttribute(ATT_TYPE,"button");
+		xmlWriter.writeAttribute(ATT_ID, "btn-UD");
+		xmlWriter.writeAttribute(ATT_VALUE, "Up-Down");
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeEmptyElement(TAG_INPUT);
+		xmlWriter.writeAttribute(ATT_TYPE,"button");
+		xmlWriter.writeAttribute(ATT_ID, "btn-DU");
+		xmlWriter.writeAttribute(ATT_VALUE, "Down-Up");
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeEmptyElement(TAG_INPUT);
+		xmlWriter.writeAttribute(ATT_TYPE,"hidden");
+		//TODO check the apostrophes
+		xmlWriter.writeAttribute(ATT_ID, "direction");
+		xmlWriter.writeAttribute(ATT_VALUE, "UD");
+		xmlWriter.writeCharacters(NEWLINE);
+
+
+		//p
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_DIV);
+		xmlWriter.writeAttribute(ATT_ID, "mynetwork");
+		xmlWriter.writeCharacters(NEWLINE);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+		xmlWriter.writeStartElement(TAG_P);
+		xmlWriter.writeAttribute(ATT_ID, "selection");
+		xmlWriter.writeCharacters(NEWLINE);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);
+
+
+		xmlWriter.writeStartElement(TAG_SCRIPT);
+		xmlWriter.writeAttribute(ATT_LANG, "JavaScript");
+		xmlWriter.writeCharacters(NEWLINE);
+		xmlWriter.writeCharacters("var directionInput = document.getElementById(\"direction\");" + NEWLINE
+				+ "var btnUD = document.getElementById(\"btn-UD\");" + NEWLINE
+				+ "btnUD.onclick = function() {" + NEWLINE
+				+ "directionInput.value = \"UD\";" + NEWLINE
+				+ "start();" + NEWLINE
+				+ "};" + NEWLINE
+				+ "var btnDU = document.getElementById(\"btn-DU\");" + NEWLINE
+				+ "btnDU.onclick = function() {" + NEWLINE
+				+ "directionInput.value = \"DU\";" + NEWLINE
+				+ "start();" + NEWLINE
+				+ "};" + NEWLINE
+				);
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);		
+
+		//div wrapper
+		if(withPhysics == true){			
 			xmlWriter.writeEndElement();
 			xmlWriter.writeCharacters(NEWLINE);		
-			
-			//div wrapper
-			if(withPhysics == true){			
-				xmlWriter.writeEndElement();
-				xmlWriter.writeCharacters(NEWLINE);		
-			}
-			
-			
-			//body
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);	
-			
-			
-			//html
-			xmlWriter.writeEndElement();
-			xmlWriter.writeCharacters(NEWLINE);	
-				
-		   
-			xmlWriter.writeEndDocument();
-			xmlWriter.flush();
-			xmlWriter.close();		
-			nodeWriter.close();
-			edgeWriter.close();			
-	   
-   }
+		}
+
+
+		//body
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);	
+
+
+		//html
+		xmlWriter.writeEndElement();
+		xmlWriter.writeCharacters(NEWLINE);	
+
+
+		xmlWriter.writeEndDocument();
+		xmlWriter.flush();
+		xmlWriter.close();		
+		nodeWriter.close();
+		edgeWriter.close();
+	}
+
+}
 
 /*
  * Organizes the output folder structure and invokes the method for copying of auxiliary files. 
@@ -1089,6 +1087,9 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 		
 	//close edge array
 	 jsonWriterEdges.endArray();	
+	 
+	 nodeWriter.flush();
+	 edgeWriter.flush();
 	 
 	}catch(JSONException e){
 		 throw new SaltException("A problem occurred while building JSON objects.");
@@ -1356,26 +1357,6 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 			 
 	}
 	
-	
-	
-	/**
-	 * @return {@link #nodeWriter}
-	 */
-	public BufferedWriter getNodeWriter ()
-	{
-		return nodeWriter;
-	}
-	
-	/**
-	 * @return {@link #edgeWriter}
-	 */
-	public BufferedWriter getEdgeWriter()
-	{
-		return edgeWriter;
-	}
-	
-		
-		
 	
 	/*
 	 *  Determine the max. level for JSON node objects.
