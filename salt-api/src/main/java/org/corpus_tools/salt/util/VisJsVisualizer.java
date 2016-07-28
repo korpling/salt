@@ -1143,7 +1143,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 		String highlightingColor =  null;
 		if (styleImporter != null)
 		{
-			highlightingColor = styleImporter.getHighlightingColor(node);
+			highlightingColor = styleImporter.setHighlightingColor(node);
 		}
 		
 		 String idValue = node.getPath().fragment();
