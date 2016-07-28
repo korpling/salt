@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,6 +64,7 @@ import org.eclipse.emf.common.util.URI;
 import org.json.JSONException;
 import org.json.JSONWriter;
 
+import com.google.common.base.Charsets;
 import com.google.common.io.ByteStreams;
 
 import javax.xml.stream.XMLOutputFactory;
@@ -1021,7 +1023,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 	 */
 	public void setNodeWriter (OutputStream os)
 	{
-		this.nodeWriter = new BufferedWriter(new OutputStreamWriter(os));		
+		this.nodeWriter = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));		
 		this.jsonWriterNodes = new JSONWriter(nodeWriter);
 	}
 	
@@ -1034,7 +1036,7 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 
 	public void setEdgeWriter (OutputStream os)
 	{
-		this.edgeWriter = new BufferedWriter (new OutputStreamWriter(os));	
+		this.edgeWriter = new BufferedWriter (new OutputStreamWriter(os, StandardCharsets.UTF_8));	
 		this.jsonWriterEdges = new JSONWriter(edgeWriter);
 	}
 	
