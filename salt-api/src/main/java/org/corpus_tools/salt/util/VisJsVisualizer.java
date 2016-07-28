@@ -945,7 +945,9 @@ private void writeHTML(File outputFolder) throws XMLStreamException, IOException
 		 
 		  if (codeSourseFile.isDirectory()){
 			  File imgFolder = new File(classLoader.getResource(RESOURCE_FOLDER_IMG_NETWORK).getFile());  
-			  File[] imgFiles = imgFolder.listFiles();		 
+			  File[] imgFiles = imgFolder.listFiles();
+			  if(imgFiles != null)
+			  {
 				 for(File imgFile : imgFiles)
 				 {	
 					 InputStream inputStream = getClass().getResourceAsStream(System.getProperty("file.separator") + RESOURCE_FOLDER_IMG_NETWORK 
@@ -953,6 +955,7 @@ private void writeHTML(File outputFolder) throws XMLStreamException, IOException
 							  + imgFile.getName());
 					 copyResourceFile(inputStream,  outputFolder.getPath(), IMG_FOLDER_OUT, imgFile.getName());
 				 }
+			  }
 		  }
 		  else if (codeSourseFile.getName().endsWith("jar")){
 			  JarFile jarFile = new JarFile(codeSourseFile);
