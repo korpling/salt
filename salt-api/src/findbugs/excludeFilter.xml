@@ -11,4 +11,8 @@
     <Class name="org.corpus_tools.salt.extensions.notification.Listener$Event"/>
     <Bug pattern="URF_UNREAD_PUBLIC_OR_PROTECTED_FIELD"/>
   </Match>
+  <Match>
+    <Class name="org.corpus_tools.salt.extensions.notification.SaltNotificationFactory"/>
+    <Bug pattern="ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD"/>
+  </Match>
 </FindBugsFilter>
