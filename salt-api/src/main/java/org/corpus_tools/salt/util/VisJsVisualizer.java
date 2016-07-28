@@ -134,9 +134,8 @@ public class VisJsVisualizer implements GraphTraverseHandler{
 	private  int currHeightFromToken;
 
 	
-	public  SDocument doc;
-	public String docId;
-	public  BufferedWriter jsonWriter;
+	private SDocument doc;
+	private String docId;
 	public  BufferedWriter nodeWriter;
 	public  BufferedWriter edgeWriter;
 
