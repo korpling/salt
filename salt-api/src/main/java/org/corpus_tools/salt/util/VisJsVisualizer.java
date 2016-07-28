@@ -1116,7 +1116,12 @@ private void copyResourceFile (InputStream inputStream,  String outputFolder, St
 		
 	private static <K, V> List<Map.Entry<K, V>> sortByKey(Map<K, V> map) {
 		List<Map.Entry<K, V>> entries = new ArrayList<Map.Entry<K, V>>(map.size());
-		entries.addAll(map.entrySet());
+		
+		// don't use addAll with a view of the entries:
+		// http://findbugs.sourceforge.net/bugDescriptions.html#DMI_ENTRY_SETS_MAY_REUSE_ENTRY_OBJECTS
+		for(Map.Entry<K, V> e : map.entrySet()) {
+			entries.add(e);
+		}
 		
 		Comparator<Map.Entry<K, V>> comparator = new Comparator<Map.Entry<K, V>>() {
 			public int compare(Map.Entry<K, V> e1, Map.Entry<K, V> e2) {
