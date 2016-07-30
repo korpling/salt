@@ -32,7 +32,12 @@ import org.corpus_tools.salt.util.DIFF_TYPES;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
-
+/**
+ * This class compares two corpus structures.
+ * 
+ * @author florian
+ *
+ */
 public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 	public CorpusStructureDiff(SCorpusGraph template, SCorpusGraph other) {
 		super(template, other);

@@ -22,7 +22,12 @@ import java.util.Set;
 
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocumentGraph;
+import org.corpus_tools.salt.common.SToken;
+import org.corpus_tools.salt.core.SAnnotation;
+import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SGraph;
+import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
@@ -33,12 +38,14 @@ import org.corpus_tools.salt.util.Difference;
  * checking whether a graph is isomorphic. At first tokens are compared. Both
  * graphs are compared starting with offset "0". Two tokens are the same, when
  * their textual offset and the overlapped text is the same. As with all
- * following SNodes, SAnnotations and SFeatures are checked. The next step is to
- * look for SNodes that are the source of a incoming relations of a SToken. Of
- * these only those are picked, that have SNodes on their SOutgoingrelations,
- * that already have been checked (at this point: only STokens). These SNodes
- * are then compared with each other. Whenever a relation is used in the way
- * described above, the SRelation is checked for SFeatures and SRelations.
+ * following {@link SNode}s, {@link SAnnotation}s and {@link SFeature}s are
+ * checked. The next step is to look for {@link SNode}s that are the source of a
+ * incoming relations of a {@link SToken}. Of these only those are picked, that
+ * have {@link SNode}s on their outgoing relations, that already have been
+ * checked (at this point: only {@link SToken}s). These {@link SNode}s are then
+ * compared with each other. Whenever a relation is used in the way described
+ * above, the {@link SRelation} is checked for {@link SFeature}s and
+ * {@link SRelation}s.
  * 
  * To adapt the isomorphie check and the computation of differences you can pass
  * an option map via {@link #Diff(SDocumentGraph, SDocumentGraph, Map)}.
@@ -145,7 +152,8 @@ public class Diff {
 	 * @param template
 	 * @param other
 	 * @param optionMap
-	 * @deprecated use {@link #Diff(SDocumentGraph, SDocumentGraph, DiffOptions) instead
+	 * @deprecated use {@link #Diff(SDocumentGraph, SDocumentGraph, DiffOptions)
+	 *             instead
 	 */
 	@Deprecated
 	public Diff(SDocumentGraph template, SDocumentGraph other, Map<String, Boolean> optionMap) {
@@ -174,7 +182,8 @@ public class Diff {
 	 * @param template
 	 * @param other
 	 * @param optionMap
-	 * @deprecated use {@link #Diff(SCorpusGraph, SCorpusGraph, DiffOptions)} instead
+	 * @deprecated use {@link #Diff(SCorpusGraph, SCorpusGraph, DiffOptions)}
+	 *             instead
 	 */
 	@Deprecated
 	public Diff(SCorpusGraph template, SCorpusGraph other, Map<String, Boolean> optionMap) {

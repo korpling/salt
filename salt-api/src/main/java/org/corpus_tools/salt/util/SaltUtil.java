@@ -797,7 +797,7 @@ public class SaltUtil {
 			throw new SaltResourceException("Can not load SaltProject. ", e);
 		}
 		if (!saltProjectFile.exists()) {
-			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectFile + "' does not exist. ");
+			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectFile.getAbsolutePath() + "' does not exist. ");
 		}
 
 		Object project = load(location);

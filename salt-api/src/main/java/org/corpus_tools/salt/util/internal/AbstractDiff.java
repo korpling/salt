@@ -257,8 +257,9 @@ public abstract class AbstractDiff<G extends SGraph> {
 				} else if (!belongsToCorpusStructure && options.get(DiffOptions.OPTION_IGNORE_NAME)) {
 					return true;
 				}
-			}
-			else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
+			}else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
+				return true;
+			}else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME.equals(anno.getQName())) {
 				return true;
 			}
 		}
