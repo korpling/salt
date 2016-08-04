@@ -61,18 +61,18 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 	 */
 	@Override
 	protected boolean findDiffs(boolean diffsRequested) {
-		if (!compareSize(templateGraph, otherGraph)) {
+		if (!compareSize(templateObject, otherObject)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		final List<SNode> templateRoots = templateGraph.getRoots();
-		final List<SNode> otherRoots = otherGraph.getRoots();
+		final List<SNode> templateRoots = templateObject.getRoots();
+		final List<SNode> otherRoots = otherObject.getRoots();
 		boolean isIsomorph = true;
 		if (SaltUtil.isNotNullOrEmpty(otherRoots) && SaltUtil.isNotNullOrEmpty(templateRoots)) {
-			final List<SNode> remainingOtherNodes = new ArrayList<>(templateGraph.getCorpora().size() + templateGraph.getDocuments().size());
-			remainingOtherNodes.addAll(otherGraph.getCorpora());
-			remainingOtherNodes.addAll(otherGraph.getDocuments());
+			final List<SNode> remainingOtherNodes = new ArrayList<>(templateObject.getCorpora().size() + templateObject.getDocuments().size());
+			remainingOtherNodes.addAll(otherObject.getCorpora());
+			remainingOtherNodes.addAll(otherObject.getDocuments());
 
 			for (SNode templateRoot : templateRoots) {
 				boolean hasPartner = false;
@@ -100,7 +100,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 
 			final DifferenceHandler handler = new DifferenceHandler();
 			handler.remainingOtherNodes = remainingOtherNodes;
-			templateGraph.traverse(templateRoots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateGraph.getId(), handler, false);
+			templateObject.traverse(templateRoots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateObject.getId(), handler, false);
 			if (getDifferences().size() > 0) {
 				return (false);
 			}
@@ -125,7 +125,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 	private boolean compareDocumentStructures() {
 		boolean retVal = true;
 		if (!options.get(DiffOptions.OPTION_IGNORE_DOCUMENTS)) {
-			for (SDocument templateDoc : templateGraph.getDocuments()) {
+			for (SDocument templateDoc : templateObject.getDocuments()) {
 				final SDocument otherDoc = (SDocument) getIsoNodes().get(templateDoc);
 				if (otherDoc != null) {
 					if (templateDoc.getDocumentGraph() == null && templateDoc.getDocumentGraphLocation() != null) {
@@ -193,7 +193,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 				final SNode otherParent = getIsoNodes().get(fromNode);
 				boolean hasFoundNode = false;
 				if (otherParent != null) {
-					final List<SNode> otherChilds = otherGraph.getChildren(otherParent, null);
+					final List<SNode> otherChilds = otherObject.getChildren(otherParent, null);
 					for (SNode otherChild : otherChilds) {
 						if (templateNode.getClass().equals(otherChild.getClass()))
 							if (compareIdentifiableElements(templateNode, otherChild, null)) {
