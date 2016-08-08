@@ -43,6 +43,7 @@ import java.util.jar.JarFile;
 
 import javax.xml.stream.XMLStreamException;
 
+import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDominanceRelation;
@@ -146,7 +147,7 @@ import javax.xml.stream.XMLStreamWriter;
  * 
  * @author irina
  */
-
+@Beta
 public class VisJsVisualizer implements GraphTraverseHandler {
 
 	private long maxHeight;
