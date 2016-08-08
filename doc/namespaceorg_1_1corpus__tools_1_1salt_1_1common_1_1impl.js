@@ -1,10 +1,10 @@
 var namespaceorg_1_1corpus__tools_1_1salt_1_1common_1_1impl =
 [
     [ "SaltProjectImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_salt_project_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_salt_project_impl" ],
-    [ "SCorpusDocumentRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html", null ],
+    [ "SCorpusDocumentRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_document_relation_impl" ],
     [ "SCorpusGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl" ],
     [ "SCorpusImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_impl" ],
-    [ "SCorpusRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_relation_impl.html", null ],
+    [ "SCorpusRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_relation_impl" ],
     [ "SDocumentGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl" ],
     [ "SDocumentImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_impl" ],
     [ "SDominanceRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_dominance_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_dominance_relation_impl" ],
@@ -12,8 +12,8 @@ var namespaceorg_1_1corpus__tools_1_1salt_1_1common_1_1impl =
     [ "SMedialRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_medial_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_medial_relation_impl" ],
     [ "SOrderRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_order_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_order_relation_impl" ],
     [ "SPointingRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_pointing_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_pointing_relation_impl" ],
-    [ "SSequentialDSImpl< D, P extends Number >", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_sequential_d_s_impl_3_01_d_00_01_p_01extends_01_number_01_4.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_sequential_d_s_impl_3_01_d_00_01_p_01extends_01_number_01_4" ],
-    [ "SSequentialRelationImpl< S extends SNode, T extends SNode, P extends Number >", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_sequential_relation_impl_3_01_s_01exte865a3a40b74af48fbd71092a417fe76e.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_sequential_relation_impl_3_01_s_01exte865a3a40b74af48fbd71092a417fe76e" ],
+    [ "SSequentialDSImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_sequential_d_s_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_sequential_d_s_impl" ],
+    [ "SSequentialRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_sequential_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_sequential_relation_impl" ],
     [ "SSpanImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_span_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_span_impl" ],
     [ "SSpanningRelationImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_spanning_relation_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_spanning_relation_impl" ],
     [ "SStructureImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_structure_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_structure_impl" ],

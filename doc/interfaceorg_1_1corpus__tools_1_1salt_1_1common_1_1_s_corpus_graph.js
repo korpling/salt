@@ -15,5 +15,6 @@ var interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph =
     [ "getDocuments", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html#a21f1c9350831866b8e2e950ed99d6ea2", null ],
     [ "getSaltProject", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html#a6f6381e0cc53f090ea661390f8164f57", null ],
     [ "load", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html#aa18a9df65772c35e3ebc0ba888e4ab33", null ],
-    [ "setSaltProject", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html#a367a203e2a4ce680c56674ccb1aba385", null ]
+    [ "setSaltProject", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html#a367a203e2a4ce680c56674ccb1aba385", null ],
+    [ "toTreeString", "interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html#a8fd134789a6322105a7cd15fed920d1d", null ]
 ];

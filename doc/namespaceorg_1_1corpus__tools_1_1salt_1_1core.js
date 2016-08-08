@@ -13,6 +13,6 @@ var namespaceorg_1_1corpus__tools_1_1salt_1_1core =
     [ "SNode", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node.html", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_node" ],
     [ "SPathElement", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_path_element.html", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_path_element" ],
     [ "SProcessingAnnotation", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_processing_annotation.html", null ],
-    [ "SRelation< S extends SNode, T extends SNode >", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_relation_3_01_s_01extends_01_s_node_00_01_t_01extends_01_s_node_01_4.html", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_relation_3_01_s_01extends_01_s_node_00_01_t_01extends_01_s_node_01_4" ],
+    [ "SRelation", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_relation.html", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_relation" ],
     [ "STypedElement", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_typed_element.html", "interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_typed_element" ]
 ];

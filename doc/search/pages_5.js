@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['salt',['Salt',['../index.html',1,'']]]
+  ['generating_20sample_20models',['Generating sample models',['../sample.html',1,'']]]
 ];
