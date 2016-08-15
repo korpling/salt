@@ -253,7 +253,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeStartDocument("1.0");
 				if (isPrettyPrint) {
 					xml.writeCharacters("\n");
-					xml.writeStartElement(NS_SALTCOMMON, TAG_SCORPUSGRAPH, NS_VALUE_SALTCOMMON);
+					xml.writeStartElement(NS_SALTCOMMON, TAG_SCORPUS_GRAPH, NS_VALUE_SALTCOMMON);
 					xml.writeNamespace(NS_SCORPUSSTRUCTURE, NS_VALUE_SCORPUSSTRUCTURE);
 					xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
 					xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
@@ -262,7 +262,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					xml.writeAttribute(NS_VALUE_XMI, ATT_XMI_VERSION, "2.0");
 				}
 			} else {
-				xml.writeStartElement(TAG_SCORPUSGRAPH);
+				xml.writeStartElement(TAG_SCORPUS_GRAPH);
 			}
 
 			// write all labels
