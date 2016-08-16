@@ -395,6 +395,18 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	// assertEquals("differences: "+ template.differences(getFixture()),
 	// template, getFixture());
 	// }
+	
+	/**
+	 * Creating a corpus from a relational URI without a root corpus should create
+	 * a new top-level corpus with the name of the first segment.
+	 */
+	@Test
+	public void testCreateSCorpus_NoRoot() {
+	  List<SCorpus> corpora = getFixture().createCorpus(URI.createURI("corp1"));
+	  assertNotNull(corpora);
+	  assertEquals(1, corpora.size());
+	  assertEquals("corp1" ,corpora.get(0).getName());
+	}
 
 	/**
 	 * Tests the creation of a {@link SCorpus} object via a super corpus.

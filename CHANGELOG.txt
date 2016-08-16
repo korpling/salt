@@ -12,6 +12,11 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 3.2.1
+=============
+Fixes:
+- SCorpusGraph#createCorpus(...) called with no parent corpus and with a relative path will not create any corpus #102
+
 Version 3.2.0
 =============
 Enhancements:
