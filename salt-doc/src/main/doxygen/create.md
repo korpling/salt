@@ -73,7 +73,7 @@ Even the primary text and in general the primary data in Salt are modeled as nod
 ~~~{.java}STextualDS primaryText = SaltFactory.createSTextualDS();
 // set the primary text to the sentence
 // "Is this example more complicated than it appears to be?"
-primaryText.setText("Is this example more complicated than it appears to?");
+primaryText.setText("Is this example more complicated than it appears to be?");
 // add the text to the document-graph
 sampleDocument.getDocumentGraph().addNode(primaryText);
 ~~~
