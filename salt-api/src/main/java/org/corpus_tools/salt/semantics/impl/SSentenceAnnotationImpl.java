@@ -28,7 +28,7 @@ public class SSentenceAnnotationImpl extends SAnnotationImpl implements SSentenc
 	public SSentenceAnnotationImpl() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_UNIT);
-		super.setValue(SaltUtil.SEMANTICS_WORD);
+		super.setValue(SaltUtil.SEMANTICS_SENTENCE);
 	}
 
 	/**
