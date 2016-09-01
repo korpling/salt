@@ -12,6 +12,11 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 3.2.2
+=============
+Fixes:
+- fix copy-paste error in SSentenceAnnotation  #104
+
 Version 3.2.1
 =============
 Fixes:
