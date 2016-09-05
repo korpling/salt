@@ -7,7 +7,7 @@ import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.junit.Test;
 
-public class SaltProjectDiffTestt {
+public class SaltProjectDiffTest {
 
 	@Test
 	public void whenComparingTwoNullModels_thenReturnFalse() {
@@ -17,12 +17,11 @@ public class SaltProjectDiffTestt {
 	@Test
 	public void whenComparingIdenticalModels_thenReturnTrue() {
 		assertThat(SaltUtil.compare(SampleGenerator.createSaltProject()).with(SampleGenerator.createSaltProject())
-				.andCheckIsomorphie()).isFalse();
+				.andCheckIsomorphie()).isTrue();
 	}
 
 	@Test
 	public void whenComparingDifferentModels_thenReturnFalse() {
-
 		final SaltProject actual = SampleGenerator.createSaltProject();
 		final SaltProject expected = SampleGenerator.createSaltProject();
 		expected.getCorpusGraphs().get(0).removeNode(expected.getCorpusGraphs().get(0).getCorpora().get(0));

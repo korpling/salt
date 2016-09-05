@@ -96,9 +96,9 @@ public class SaltProjectDiff extends AbstractDiff<SaltProject> {
 			}
 			final Set<Difference> diffs = SaltUtil.compare(templateObject.getCorpusGraphs().get(0))
 					.with(otherObject.getCorpusGraphs().get(0)).andFindDiffs();
-			addDifference(templateObject, otherObject, null, DIFF_TYPES.CORPUS_GRAPH_DIFFERING, diffs);
 			if (diffs.size() > 0) {
 				retVal = false;
+				addDifference(templateObject, otherObject, null, DIFF_TYPES.CORPUS_GRAPH_DIFFERING, diffs);
 			}
 		}
 		return retVal;
