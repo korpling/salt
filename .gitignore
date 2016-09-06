@@ -2,3 +2,5 @@
 /docs/
 rebel.xml
 /target/
+*.iml
+.idea

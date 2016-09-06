@@ -341,8 +341,11 @@ public class SaltUtil {
 		if (path != null && !path.isEmpty()) {
 			if (path.startsWith(SALT_SCHEME + ":")) {
 				uri = URI.createURI(path);
-			} else {
+			} else if(path.startsWith("/")) {
+			  // this is an already absolute path
 				uri = URI.createURI(SALT_SCHEME + ":" + path);
+			} else {
+			  uri = URI.createURI(SALT_SCHEME + ":/" + path);
 			}
 		}
 		return (uri);

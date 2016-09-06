@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.corpus-tools</groupId>
 		<artifactId>salt</artifactId>
-		<version>3.2.0-SNAPSHOT</version>
+		<version>3.2.3-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<properties>
@@ -15,7 +15,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<guava.version>18.0</guava.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
-		<findbugs-maven-plugin.version>3.0.2</findbugs-maven-plugin.version>
+		<findbugs-maven-plugin.version>3.0.4</findbugs-maven-plugin.version>
 		<maven-surefire-plugin.version>2.15</maven-surefire-plugin.version>
 	</properties>
 	<dependencies>
@@ -59,6 +59,12 @@
 			<groupId>com.fasterxml.woodstox</groupId>
 			<artifactId>woodstox-core</artifactId>
 			<version>5.0.1</version>
+		</dependency>
+		<!-- JSON libraries for creating VisJs output -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160212</version>
 		</dependency>
 	</dependencies>
 	<build>
