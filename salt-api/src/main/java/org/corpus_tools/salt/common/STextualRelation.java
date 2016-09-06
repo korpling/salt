@@ -28,5 +28,6 @@ import org.corpus_tools.salt.core.SFeature;
  * 
  * @author florian
  */
-public interface STextualRelation extends SSequentialRelation<SToken, STextualDS, Integer>, STextOverlappingRelation<SToken, STextualDS>, SDocumentGraphObject {
+public interface STextualRelation extends SSequentialRelation<SToken, STextualDS, Integer>,
+		STextOverlappingRelation<SToken, STextualDS>, SDocumentGraphObject {
 } // STextualRelation

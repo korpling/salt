@@ -44,13 +44,13 @@ public class IndexMgrImpl implements IndexMgr {
 		final Class<V> valueClass;
 
 		public Index(Multimap<K, V> map, Class<K> keyClass, Class<V> valueClass) {
-			if (map== null){
+			if (map == null) {
 				throw new IllegalArgumentException("Cannot create Index with empty map parameter. ");
 			}
-			if (keyClass== null){
+			if (keyClass == null) {
 				throw new IllegalArgumentException("Cannot create Index with empty keyClass parameter. ");
 			}
-			if (valueClass== null){
+			if (valueClass == null) {
 				throw new IllegalArgumentException("Cannot create Index with empty valueClass parameter. ");
 			}
 
@@ -86,7 +86,8 @@ public class IndexMgrImpl implements IndexMgr {
 	 * {@inheritDoc}
 	 **/
 	@Override
-	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey) {
+	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys,
+			int expectedValuesPerKey) {
 		if (threadSafe) {
 			lock.writeLock().lock();
 			try {
@@ -99,9 +100,11 @@ public class IndexMgrImpl implements IndexMgr {
 		}
 	}
 
-	private <K, V> void createIndex_intern(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey) {
+	private <K, V> void createIndex_intern(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys,
+			int expectedValuesPerKey) {
 		if (this.containsIndex(indexId)) {
-			throw new SaltException("Cannot add the given index, because an index with this id already exists: " + indexId);
+			throw new SaltException(
+					"Cannot add the given index, because an index with this id already exists: " + indexId);
 		}
 		Multimap<K, V> map;
 		if ((expectedKeys > 0) && (expectedValuesPerKey > 0)) {
@@ -138,14 +141,17 @@ public class IndexMgrImpl implements IndexMgr {
 			if (indexId != null && key != null && value != null) {
 				Index idx = indexes.get(indexId);
 				if (idx != null) {
-					if (idx.keyClass.isAssignableFrom(key.getClass()) && idx.valueClass.isAssignableFrom(value.getClass())) {
+					if (idx.keyClass.isAssignableFrom(key.getClass())
+							&& idx.valueClass.isAssignableFrom(value.getClass())) {
 						return idx.map.put(key, value);
 					} else {
 						if (!idx.keyClass.isAssignableFrom(key.getClass())) {
-							throw new ClassCastException("The type passed key '" + key.getClass() + "' is not assignable to '" + idx.keyClass + "'. ");
+							throw new ClassCastException("The type passed key '" + key.getClass()
+									+ "' is not assignable to '" + idx.keyClass + "'. ");
 						}
 						if (!idx.valueClass.isAssignableFrom(value.getClass())) {
-							throw new ClassCastException("The type passed value '" + value.getClass() + "' is not assignable to '" + idx.valueClass + "'. ");
+							throw new ClassCastException("The type passed value '" + value.getClass()
+									+ "' is not assignable to '" + idx.valueClass + "'. ");
 						}
 					}
 				}
@@ -169,7 +175,8 @@ public class IndexMgrImpl implements IndexMgr {
 			if (indexId != null && key != null && values != null && !values.isEmpty()) {
 				Index idx = indexes.get(indexId);
 
-				if (idx.keyClass.isAssignableFrom(key.getClass()) && idx.valueClass.isAssignableFrom(values.iterator().next().getClass())) {
+				if (idx.keyClass.isAssignableFrom(key.getClass())
+						&& idx.valueClass.isAssignableFrom(values.iterator().next().getClass())) {
 					return idx.map.putAll(key, values);
 				}
 			}
@@ -290,7 +297,8 @@ public class IndexMgrImpl implements IndexMgr {
 			try {
 				Index idx = indexes.get(indexId);
 
-				if (idx != null && idx.keyClass.isAssignableFrom(key.getClass()) && idx.valueClass.isAssignableFrom(value.getClass())) {
+				if (idx != null && idx.keyClass.isAssignableFrom(key.getClass())
+						&& idx.valueClass.isAssignableFrom(value.getClass())) {
 					return idx.map.remove(key, value);
 				}
 
