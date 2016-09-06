@@ -73,10 +73,10 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * change of the source.
 	 */
 	public void setSource(S source) {
-		if (source== null){
+		if (source == null) {
 			return;
 		}
-		
+
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().setSource(source);
@@ -264,7 +264,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		if (getDelegate() != null) {
 			getDelegate().removeLayer(layer);
 		}
-		
+
 		if (layer != null) {
 			layer.removeRelation(this);
 		}

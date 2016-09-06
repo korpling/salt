@@ -105,7 +105,8 @@ public abstract class AbstractDiff<S extends Object> {
 	 *            type of the difference
 	 * @return returns whether sizes are the same
 	 **/
-	protected void addDifference(final Object templateObject, final Object otherObject, final Object container, final DIFF_TYPES diffType, final Set<Difference> subDiffs) {
+	protected void addDifference(final Object templateObject, final Object otherObject, final Object container,
+			final DIFF_TYPES diffType, final Set<Difference> subDiffs) {
 		final Difference tempDiff = new Difference(templateObject, otherObject, container, diffType);
 		if (subDiffs != null) {
 			tempDiff.addSubDiffs(subDiffs);
@@ -160,7 +161,8 @@ public abstract class AbstractDiff<S extends Object> {
 	 * @param subDiffs
 	 * @return true if elements have the same id, false otherwise
 	 */
-	protected boolean compareIdentifiableElements(final IdentifiableElement template, final IdentifiableElement other, final Set<Difference> subDiffs) {
+	protected boolean compareIdentifiableElements(final IdentifiableElement template, final IdentifiableElement other,
+			final Set<Difference> subDiffs) {
 		boolean retVal = true;
 		if (!options.get(DiffOptions.OPTION_IGNORE_ID)) {
 			if (!template.getId().equals(other.getId())) {
@@ -190,39 +192,48 @@ public abstract class AbstractDiff<S extends Object> {
 	 *            be empty
 	 * @return
 	 */
-	protected boolean compareAnnotationContainers(final SAnnotationContainer template, final SAnnotationContainer other, final Set<Difference> subDiffs) {
+	protected boolean compareAnnotationContainers(final SAnnotationContainer template, final SAnnotationContainer other,
+			final Set<Difference> subDiffs) {
 		boolean retVal1 = true;
 		boolean retVal2 = true;
 		boolean retVal3 = true;
 		boolean retVal4 = true;
 
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_ANNOTATIONS)) {
-			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SAnnotation();
-			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SAnnotation();
+			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other
+					.iterator_SAnnotation();
+			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template
+					.iterator_SAnnotation();
 			retVal1 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_META_ANNOTATIONS)) {
-			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SMetaAnnotation();
-			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SMetaAnnotation();
+			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other
+					.iterator_SMetaAnnotation();
+			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template
+					.iterator_SMetaAnnotation();
 			retVal2 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_PROCESSING_ANNOTATIONS)) {
-			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SProcessingAnnotation();
-			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SProcessingAnnotation();
+			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other
+					.iterator_SProcessingAnnotation();
+			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template
+					.iterator_SProcessingAnnotation();
 			retVal3 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
 			}
 		}
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_FEATURES)) {
-			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other.iterator_SFeature();
-			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template.iterator_SFeature();
+			final Iterator<SAbstractAnnotation> otherIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) other
+					.iterator_SFeature();
+			final Iterator<SAbstractAnnotation> templateIterator = (Iterator<SAbstractAnnotation>) (Iterator<? extends SAbstractAnnotation>) template
+					.iterator_SFeature();
 			retVal4 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
 				return (false);
@@ -251,9 +262,9 @@ public abstract class AbstractDiff<S extends Object> {
 				} else if (!belongsToCorpusStructure && options.get(DiffOptions.OPTION_IGNORE_NAME)) {
 					return true;
 				}
-			}else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
+			} else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
 				return true;
-			}else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME.equals(anno.getQName())) {
+			} else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME.equals(anno.getQName())) {
 				return true;
 			}
 		}
@@ -271,7 +282,9 @@ public abstract class AbstractDiff<S extends Object> {
 	 * @param subDiffs
 	 * @return
 	 */
-	private boolean compareAnnotationContainers(final SAnnotationContainer template, final Iterator<SAbstractAnnotation> templateIterator, final SAnnotationContainer other, final Iterator<SAbstractAnnotation> otherIterator, final Set<Difference> subDiffs) {
+	private boolean compareAnnotationContainers(final SAnnotationContainer template,
+			final Iterator<SAbstractAnnotation> templateIterator, final SAnnotationContainer other,
+			final Iterator<SAbstractAnnotation> otherIterator, final Set<Difference> subDiffs) {
 		boolean retVal = true;
 
 		// create remaining list, which contains all annos from other

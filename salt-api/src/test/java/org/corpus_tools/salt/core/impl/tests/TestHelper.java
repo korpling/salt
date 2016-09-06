@@ -107,7 +107,9 @@ public class TestHelper {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_Tree");
 		String[] nodeNames = { "node1", "node2", "node3", "node4", "node5", "node6", "node7" };
-		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node1", "node4", "relation3" }, { "node4", "node5", "relation4" }, { "node2", "node6", "relation5" }, { "node1", "node7", "relation6" } };
+		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" },
+				{ "node1", "node4", "relation3" }, { "node4", "node5", "relation4" }, { "node2", "node6", "relation5" },
+				{ "node1", "node7", "relation6" } };
 
 		createGraph(graph, nodeNames, relationNames);
 		return (graph);
@@ -131,7 +133,8 @@ public class TestHelper {
 		graph.setId("createGraph_DAG");
 
 		String[] nodeNames = { "node1", "node2", "node3", "node4", "node6", };
-		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node2", "node6", "relation3" }, { "node4", "node2", "relation4" } };
+		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" },
+				{ "node2", "node6", "relation3" }, { "node4", "node2", "relation4" } };
 
 		createGraph(graph, nodeNames, relationNames);
 		return (graph);
@@ -158,7 +161,9 @@ public class TestHelper {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_Cycle");
 		String[] nodeNames = { "node1", "node2", "node3", "node4", "node6", "node7" };
-		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node2", "node6", "relation3" }, { "node4", "node2", "relation4" }, { "node6", "node7", "relation5" }, { "node7", "node2", "relation6" } };
+		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" },
+				{ "node2", "node6", "relation3" }, { "node4", "node2", "relation4" }, { "node6", "node7", "relation5" },
+				{ "node7", "node2", "relation6" } };
 
 		createGraph(graph, nodeNames, relationNames);
 		return (graph);
@@ -185,7 +190,9 @@ public class TestHelper {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_SimpleCycle");
 		String[] nodeNames = { "node1", "node2", "node3", "node6", "node7" };
-		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node2", "node6", "relation3" }, { "node6", "node7", "relation5" }, { "node7", "node2", "relation6" } };
+		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" },
+				{ "node2", "node6", "relation3" }, { "node6", "node7", "relation5" },
+				{ "node7", "node2", "relation6" } };
 
 		createGraph(graph, nodeNames, relationNames);
 		return (graph);
@@ -206,7 +213,8 @@ public class TestHelper {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_PureCycle");
 		String[] nodeNames = { "node1", "node2", "node3" };
-		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" }, { "node3", "node1", "relation3" } };
+		String[][] relationNames = { { "node1", "node2", "relation1" }, { "node2", "node3", "relation2" },
+				{ "node3", "node1", "relation3" } };
 
 		createGraph(graph, nodeNames, relationNames);
 		return (graph);

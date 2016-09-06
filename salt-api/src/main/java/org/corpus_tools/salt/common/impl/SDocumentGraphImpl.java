@@ -98,7 +98,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		super.init();
 
 		getIndexMgr().createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
-		getIndexMgr().createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2, expectedRelations);
+		getIndexMgr().createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2,
+				expectedRelations);
 	}
 
 	// ============================ start: handling relations
@@ -107,10 +108,11 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public void addRelation(Relation<? extends SNode, ? extends SNode> relation) {
 		if (relation != null) {
 			if (!(relation instanceof SRelation)) {
-				throw new SaltInsertionException(this, relation, "Cannot insert an relation, which is not a SRelation object.");
+				throw new SaltInsertionException(this, relation,
+						"Cannot insert an relation, which is not a SRelation object.");
 			}
 			// start: create a name if none exists
-			if (Strings.isNullOrEmpty(((SRelation) relation).getName())){
+			if (Strings.isNullOrEmpty(((SRelation) relation).getName())) {
 				if (relation instanceof STextualRelation) {
 					((SRelation) relation).setName("sTextRel" + (getTextualRelations().size() + 1));
 				} else if (relation instanceof STimelineRelation) {
@@ -168,7 +170,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}
 		if (node != null) {
 			// start: create a name if none exists
-			if (Strings.isNullOrEmpty(node.getName())){
+			if (Strings.isNullOrEmpty(node.getName())) {
 				if (node instanceof STextualDS) {
 					node.setName("sText" + (getTextualDSs().size() + 1));
 				} else if (node instanceof SToken) {
@@ -186,7 +188,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				}
 			}
 			// end: create a name if none exists
-			if (Strings.isNullOrEmpty(node.getId())){
+			if (Strings.isNullOrEmpty(node.getId())) {
 				node.setId(getId() + "#" + node.getName());
 			}
 			super.addNode(node);
@@ -437,7 +439,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public SRelation addNode(SNode source, SNode target, SALT_TYPE sRelationType) {
 		if (!getNodes().contains(source)) {
-			throw new SaltElementNotInGraphException(this, source, "Given SNode cannot be used as source node, because it is not contained in the SDocumentGraph");
+			throw new SaltElementNotInGraphException(this, source,
+					"Given SNode cannot be used as source node, because it is not contained in the SDocumentGraph");
 		}
 		SRelation retVal = null;
 		switch (sRelationType) {
@@ -457,7 +460,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			break;
 		}
 		if (retVal == null) {
-			throw new SaltParameterException("Improper STYPE_NAME for this method; must be one of STEXTUAL_RELATION, SPOINTING_RELATION, SSPANNING_RELATION and SDOMINANCE_RELATION.");
+			throw new SaltParameterException(
+					"Improper STYPE_NAME for this method; must be one of STEXTUAL_RELATION, SPOINTING_RELATION, SSPANNING_RELATION and SDOMINANCE_RELATION.");
 		}
 		retVal.setSource(source);
 		retVal.setTarget(target);
@@ -499,10 +503,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end) {
 		if (sequentialDS == null) {
-			throw new SaltParameterException("sequentialDS", "createToken", this.getClass(), "The passed sequentialDS is empty. ");
+			throw new SaltParameterException("sequentialDS", "createToken", this.getClass(),
+					"The passed sequentialDS is empty. ");
 		}
 		if (sequentialDS.getId() == null || !containsNode(sequentialDS.getId())) {
-			throw new SaltInsertionException(this, sequentialDS, "The passed sequentialDS does not belong to this document graph. ");
+			throw new SaltInsertionException(this, sequentialDS,
+					"The passed sequentialDS does not belong to this document graph. ");
 		}
 		SToken sTok = SaltFactory.createSToken();
 		DataSourceSequence sequence = new DataSourceSequence<Number>();
@@ -570,7 +576,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SSpan createSpan(List<SToken> tokens) {
-		if (SaltUtil.isNotNullOrEmpty(tokens)){
+		if (SaltUtil.isNotNullOrEmpty(tokens)) {
 			return (createSpan(tokens.toArray(new SToken[tokens.size()])));
 		} else {
 			return (null);
@@ -601,7 +607,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SStructure createStructure(List<SStructuredNode> sourceNodes) {
-		if (SaltUtil.isNotNullOrEmpty(sourceNodes)){
+		if (SaltUtil.isNotNullOrEmpty(sourceNodes)) {
 			return (createStructure(sourceNodes.toArray(new SStructuredNode[sourceNodes.size()])));
 		} else {
 			return (null);
@@ -786,7 +792,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> insertTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts, Boolean insertSpace) {
+	public List<SToken> insertTokensAt(STextualDS sTextualDS, Integer posInText, List<String> texts,
+			Boolean insertSpace) {
 		List<SToken> sTokens = new ArrayList<>();
 		Set<STextualRelation> newSTextualRelations = new HashSet<STextualRelation>();
 
@@ -863,13 +870,16 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			sRel = SaltFactory.createSOrderRelation();
 			break;
 		default:
-			throw new SaltParameterException("Cannot create an SRelation, because the passed type '" + sRelationType + "' is not supported for this method.");
+			throw new SaltParameterException("Cannot create an SRelation, because the passed type '" + sRelationType
+					+ "' is not supported for this method.");
 		}
 		try {
 			sRel.setSource(sSource);
 			sRel.setTarget(sTarget);
 		} catch (Exception e) {
-			throw new SaltParameterException("Cannot create an SRelation for the passed type '" + sRelationType + "', because of a nested exception. It might be, that the passed type is not compatible to the types of passed sSource '" + sSource.getClass() + "' or sTarget node '" + sTarget.getClass() + "'.");
+			throw new SaltParameterException("Cannot create an SRelation for the passed type '" + sRelationType
+					+ "', because of a nested exception. It might be, that the passed type is not compatible to the types of passed sSource '"
+					+ sSource.getClass() + "' or sTarget node '" + sTarget.getClass() + "'.");
 		}
 		addRelation(sRel);
 		sRel.createAnnotations(sAnnotations);
@@ -898,7 +908,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			return null;
 		}
 		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
-		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(), (Integer) sData.getEnd());
+		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(),
+				(Integer) sData.getEnd());
 	}
 
 	/** {@inheritDoc SDocumentGraph#isIsomorph(SDocumentGraph)} **/

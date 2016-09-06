@@ -170,8 +170,12 @@ public class TokenizerTest {
 	}
 
 	/**
-	 * checks the following text via TokenizeToToken:
-	 * "Die �lpest im Golf von Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\", erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten, begr�ndete er seinen R�ckzug zum 1. Oktober."
+	 * checks the following text via TokenizeToToken: "Die �lpest im Golf von
+	 * Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als
+	 * Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\",
+	 * erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den
+	 * Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten,
+	 * begr�ndete er seinen R�ckzug zum 1. Oktober."
 	 */
 	@Test
 	public void testCase1() {
@@ -193,14 +197,19 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 	}
 
 	/**
-	 * checks the following text via TokenizeToText:
-	 * "Die �lpest im Golf von Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\", erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten, begr�ndete er seinen R�ckzug zum 1. Oktober."
+	 * checks the following text via TokenizeToText: "Die �lpest im Golf von
+	 * Mexiko sei eine \"f�rchterliche Trag�die, f�r die ich als
+	 * Verantwortlicher bei BP immer eine gro�e Verantwortung f�hlen werde\",
+	 * erkl�rte der scheidende Konzernchef Hayward. BP werde sich durch den
+	 * Vorfall ver�ndern und solle unter neuer F�hrung in diese Phase starten,
+	 * begr�ndete er seinen R�ckzug zum 1. Oktober."
 	 */
 	@Test
 	public void testCase2() {
@@ -222,7 +231,8 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 	}
@@ -255,14 +265,15 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 	}
 
 	/**
 	 * checks the following text via TokenizeToToken, tests tokenizing with
-	 * ending blank "Feigenblatt  "
+	 * ending blank "Feigenblatt "
 	 */
 	@Test
 	public void testCase5() {
@@ -287,7 +298,8 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 	}
@@ -320,14 +332,15 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 	}
 
 	/**
-	 * checks the following text via TokenizeToToken:
-	 * "O.K., so the answer's obvious."
+	 * checks the following text via TokenizeToToken: "O.K., so the answer's
+	 * obvious."
 	 */
 	@Test
 	public void testCase7() {
@@ -348,7 +361,7 @@ public class TokenizerTest {
 		getFixture().tokenize(sTextualDS, LanguageCode.en);
 
 		assertEquals(expectedToken.size(), sDocGraph.getTokens().size());
-		
+
 		int i = 0;
 		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
 			assertTrue(expectedToken.size() >= i);
@@ -357,12 +370,13 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
-		
+
 	}
-	
+
 	@Test
 	public void testDefaultClitics() {
 		String francais = "ou ceux-là mêmes qu'il s'affirmaient";
@@ -386,7 +400,7 @@ public class TokenizerTest {
 		STextualDS sTextualDS = sDocGraph.createTextualDS(francais);
 		getFixture().setsDocumentGraph(sDocGraph);
 		getFixture().tokenize(sTextualDS, LanguageCode.fr);
-		
+
 		int i = 0;
 		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
 			assertTrue(expectedFrancaisToken.size() >= i);
@@ -395,7 +409,8 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedFrancaisToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedFrancaisToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedFrancaisToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedFrancaisToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 
@@ -403,7 +418,7 @@ public class TokenizerTest {
 		sTextualDS = sDocGraph.createTextualDS(italiano);
 		getFixture().setsDocumentGraph(sDocGraph);
 		getFixture().tokenize(sTextualDS, LanguageCode.it);
-		
+
 		i = 0;
 		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
 			assertTrue(expectedItalianoToken.size() >= i);
@@ -412,15 +427,16 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedItalianoToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedItalianoToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedItalianoToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedItalianoToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
-		
+
 		sDocGraph = SaltFactory.createSDocumentGraph();
 		sTextualDS = sDocGraph.createTextualDS(francais);
 		getFixture().setsDocumentGraph(sDocGraph);
 		getFixture().tokenize(sTextualDS); // No language code
-		
+
 		i = 0;
 		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
 			assertTrue(expectedFrancaisToken.size() >= i);
@@ -429,7 +445,8 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedFrancaisToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedFrancaisToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedFrancaisToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedFrancaisToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 
@@ -437,7 +454,7 @@ public class TokenizerTest {
 		sTextualDS = sDocGraph.createTextualDS(italiano);
 		getFixture().setsDocumentGraph(sDocGraph);
 		getFixture().tokenize(sTextualDS); // No language code
-		
+
 		i = 0;
 		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
 			assertTrue(expectedItalianoToken.size() >= i);
@@ -446,11 +463,12 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedItalianoToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedItalianoToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedItalianoToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedItalianoToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 	}
-	
+
 	@Test
 	public void testFantasyClitics() {
 		String fantasy = "S Z-S-z X-S-x Y^S^y Z.S.z x^S.Y";
@@ -469,11 +487,12 @@ public class TokenizerTest {
 		expectedToken.add(new Token("S", 22, 23));
 		expectedToken.add(new Token(".z", 23, 25));
 		expectedToken.add(new Token("x^S.Y", 26, 31));
-		
+
 		SDocumentGraph sDocGraph = SaltFactory.createSDocumentGraph();
 		STextualDS sTextualDS = sDocGraph.createTextualDS(fantasy);
 		getFixture().addClitics(LanguageCode.aa, new Clitics(fantasyProclitics, fantasyEnclitics));
-		getFixture().tokenize(sTextualDS, LanguageCode.aa); // Borrowed language code
+		getFixture().tokenize(sTextualDS, LanguageCode.aa); // Borrowed language
+															// code
 
 		int i = 0;
 		for (STextualRelation sTextRel : sDocGraph.getTextualRelations()) {
@@ -483,7 +502,8 @@ public class TokenizerTest {
 			assertNotNull(sTextRel.getTarget());
 			assertEquals(expectedToken.get(i).startPos, sTextRel.getStart());
 			assertEquals(expectedToken.get(i).endPos, sTextRel.getEnd());
-			assertEquals(expectedToken.get(i).text, sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
+			assertEquals(expectedToken.get(i).text,
+					sTextRel.getTarget().getText().substring(sTextRel.getStart(), sTextRel.getEnd()));
 			i++;
 		}
 
