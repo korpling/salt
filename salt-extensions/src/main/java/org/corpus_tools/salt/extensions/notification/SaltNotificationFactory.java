@@ -105,7 +105,7 @@ import org.corpus_tools.salt.semantics.impl.SWordAnnotationImpl;
 public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFactory, Notifier {
 
 	// ==========================================> listener list
-	protected static List<Listener> listenerList = null;
+	static List<Listener> listenerList = null;
 
 	/** {@inheritDoc} **/
 	@Override

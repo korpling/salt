@@ -22,12 +22,12 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.SLemmaAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class SLemmaAnnotationImpl extends SAnnotationImpl implements SLemmaAnnotation {
+	private static final long serialVersionUID = 3440371360156910913L;
+
 	/** Initializes an object of type {@link SPOSAnnotationImpl}. **/
 	public SLemmaAnnotationImpl() {
-		super.setNamespace(SaltUtil.SALT_NAMESPACE);
-		super.setName(SaltUtil.SEMANTICS_LEMMA);
+		init();
 	}
 
 	/**
@@ -41,6 +41,10 @@ public class SLemmaAnnotationImpl extends SAnnotationImpl implements SLemmaAnnot
 	 */
 	public SLemmaAnnotationImpl(Label delegate) {
 		super(delegate);
+		init();
+	}
+
+	private void init() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_LEMMA);
 	}

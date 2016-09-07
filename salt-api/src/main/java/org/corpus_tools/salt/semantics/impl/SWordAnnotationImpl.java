@@ -24,11 +24,11 @@ import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class SWordAnnotationImpl extends SAnnotationImpl implements SWordAnnotation {
+	private static final long serialVersionUID = 272719429224672396L;
+
 	/** Initializes an object of type {@link SWordAnnotationImpl}. **/
 	public SWordAnnotationImpl() {
-		super.setNamespace(SaltUtil.SALT_NAMESPACE);
-		super.setName(SaltUtil.SEMANTICS_UNIT);
-		super.setValue(SaltUtil.SEMANTICS_WORD);
+		init();
 	}
 
 	/**
@@ -42,6 +42,10 @@ public class SWordAnnotationImpl extends SAnnotationImpl implements SWordAnnotat
 	 */
 	public SWordAnnotationImpl(Label delegate) {
 		super(delegate);
+		init();
+	}
+
+	private void init() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_UNIT);
 		super.setValue(SaltUtil.SEMANTICS_WORD);

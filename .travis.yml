@@ -1,1 +1,2 @@
 language: java
+script: mvn -Dfindbugs.excludeFilterFile=salt-api/src/findbugs/excludeFilter.xml test findbugs:check

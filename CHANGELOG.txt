@@ -12,6 +12,28 @@
 *	artifactId:		salt-saltSample												  *
 ***********************************************************************************
 
+Version 3.2.2
+=============
+Fixes:
+- fix copy-paste error in SSentenceAnnotation  #104
+
+Version 3.2.1
+=============
+Fixes:
+- SCorpusGraph#createCorpus(...) called with no parent corpus and with a relative path will not create any corpus #102
+
+Version 3.2.0
+=============
+Enhancements:
+- Add notification support #100
+- Added VisJS based visualzation of the Salt graph (in addition to the DOT vis) #98
+- Comparison of corpus structures #101
+
+Fixes:
+- several smaller fixes and cleanups
+
+
+
 Version 3.0.6
 =============
 * fix #69: create StextualDS.tokenize()

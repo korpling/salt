@@ -24,10 +24,11 @@ import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class STypeAnnotationImpl extends SAnnotationImpl implements STypeAnnotation {
+	private static final long serialVersionUID = 2006584243934993420L;
+
 	/** Initializes an object of type {@link STypeAnnotationImpl}. **/
 	public STypeAnnotationImpl() {
-		super.setNamespace(SaltUtil.SALT_NAMESPACE);
-		super.setName(SaltUtil.SEMANTICS_TYPE);
+		init();
 	}
 
 	/**
@@ -41,6 +42,10 @@ public class STypeAnnotationImpl extends SAnnotationImpl implements STypeAnnotat
 	 */
 	public STypeAnnotationImpl(Label delegate) {
 		super(delegate);
+		init();
+	}
+
+	private void init() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_TYPE);
 	}
