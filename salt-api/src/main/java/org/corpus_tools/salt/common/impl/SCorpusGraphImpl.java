@@ -127,8 +127,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 */
 	@Override
 	protected void basicAddRelation(SRelation<? extends SNode, ? extends SNode> relation) {
-		if (!(relation instanceof SRelation)) {
-			throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is not a SRelation object. ");
+		if (relation == null) {
+			throw new SaltInsertionException(this, null, "Cannot insert an edge, which is not a SRelation object. ");
 		}
 		// start: create a name if none exists
 		if (Strings.isNullOrEmpty(relation.getName())) {
