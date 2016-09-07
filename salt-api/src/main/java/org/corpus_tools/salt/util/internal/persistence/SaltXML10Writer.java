@@ -143,7 +143,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			if (o instanceof SaltProject || o instanceof SDocumentGraph || o instanceof SCorpusGraph) {
 				filteredObjects.add(o);
 			} else {
-				throw new SaltResourceException("Invalid type \"" + o.getClass().getSimpleName() + "\". Root objects " + "must be either of type SaltProject, SDocumentGraph of SCorpusGraph");
+				throw new SaltResourceException("Invalid type \"" + o.getClass().getSimpleName() + "\". Root objects "
+						+ "must be either of type SaltProject, SDocumentGraph of SCorpusGraph");
 			}
 		}
 
@@ -193,7 +194,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					xml.flush();
 					xml.close();
 				} catch (XMLStreamException e) {
-					throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "', because the opened stream is not closable. ", e);
+					throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr()
+							+ "', because the opened stream is not closable. ", e);
 				}
 			}
 		}
@@ -253,7 +255,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 				xml.writeStartDocument("1.0");
 				if (isPrettyPrint) {
 					xml.writeCharacters("\n");
-					xml.writeStartElement(NS_SALTCOMMON, TAG_SCORPUSGRAPH, NS_VALUE_SALTCOMMON);
+					xml.writeStartElement(NS_SALTCOMMON, TAG_SCORPUS_GRAPH, NS_VALUE_SALTCOMMON);
 					xml.writeNamespace(NS_SCORPUSSTRUCTURE, NS_VALUE_SCORPUSSTRUCTURE);
 					xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
 					xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
@@ -262,7 +264,7 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					xml.writeAttribute(NS_VALUE_XMI, ATT_XMI_VERSION, "2.0");
 				}
 			} else {
-				xml.writeStartElement(TAG_SCORPUSGRAPH);
+				xml.writeStartElement(TAG_SCORPUS_GRAPH);
 			}
 
 			// write all labels
@@ -306,7 +308,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			}
 			xml.writeEndElement();
 		} catch (XMLStreamException e) {
-			throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "'. " + e.getMessage(), e);
+			throw new SaltResourceException(
+					"Cannot store salt project to file '" + getLocationStr() + "'. " + e.getMessage(), e);
 		} finally {
 			if (!embedded) {
 				if (xml != null) {
@@ -314,7 +317,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 						xml.flush();
 						xml.close();
 					} catch (XMLStreamException e) {
-						throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr() + "', because the opened stream is not closable. ", e);
+						throw new SaltResourceException("Cannot store salt project to file '" + getLocationStr()
+								+ "', because the opened stream is not closable. ", e);
 					}
 				}
 			}
@@ -347,7 +351,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					xml.flush();
 					xml.close();
 				} catch (XMLStreamException e) {
-					throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr() + "', because the opened stream is not closable. ", e);
+					throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr()
+							+ "', because the opened stream is not closable. ", e);
 				}
 			}
 		}
@@ -362,7 +367,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 */
 	public void writeDocumentGraph(XMLStreamWriter xml, SDocumentGraph graph) {
 		try {
-			xml.writeStartElement(NS_SDOCUMENTSTRUCTURE, TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH, NS_VALUE_SDOCUMENTSTRUCTURE);
+			xml.writeStartElement(NS_SDOCUMENTSTRUCTURE, TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH,
+					NS_VALUE_SDOCUMENTSTRUCTURE);
 			xml.writeNamespace(NS_SDOCUMENTSTRUCTURE, NS_VALUE_SDOCUMENTSTRUCTURE);
 			xml.writeNamespace(NS_XMI, NS_VALUE_XMI);
 			xml.writeNamespace(NS_XSI, NS_VALUE_XSI);
@@ -530,7 +536,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 * @param layerPositions
 	 * @throws XMLStreamException
 	 */
-	public void writeNode(XMLStreamWriter xml, Node node, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
+	public void writeNode(XMLStreamWriter xml, Node node, Map<? extends Layer, Integer> layerPositions)
+			throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -606,7 +613,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 * @param layerPositions
 	 * @throws XMLStreamException
 	 */
-	public void writeRelation(XMLStreamWriter xml, Relation relation, Map<? extends Node, Integer> nodePositions, Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
+	public void writeRelation(XMLStreamWriter xml, Relation relation, Map<? extends Node, Integer> nodePositions,
+			Map<? extends Layer, Integer> layerPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");
@@ -703,7 +711,8 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 *            list of relations
 	 * @throws XMLStreamException
 	 */
-	public void writeLayer(XMLStreamWriter xml, Layer layer, Map<SNode, Integer> nodePositions, Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
+	public void writeLayer(XMLStreamWriter xml, Layer layer, Map<SNode, Integer> nodePositions,
+			Map<SRelation<SNode, SNode>, Integer> relPositions) throws XMLStreamException {
 		if (isPrettyPrint) {
 			xml.writeCharacters("\n");
 			xml.writeCharacters("\t");

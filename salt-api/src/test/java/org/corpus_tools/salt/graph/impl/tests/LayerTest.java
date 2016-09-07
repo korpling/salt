@@ -49,19 +49,19 @@ public class LayerTest {
 	public void setFixture(Layer<Node, Relation<Node, Node>> fixture) {
 		this.fixture = fixture;
 	}
-	
+
 	protected Layer<Node, Relation<Node, Node>> createLayer() {
 		return GraphFactory.createLayer();
 	}
-	
+
 	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
 		return GraphFactory.createGraph();
 	}
-	
+
 	protected Node createNode() {
 		return GraphFactory.createNode();
 	}
-	
+
 	protected Relation createRelation() {
 		return GraphFactory.createRelation();
 	}

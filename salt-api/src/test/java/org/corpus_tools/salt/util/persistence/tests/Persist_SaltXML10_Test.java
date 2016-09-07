@@ -85,7 +85,8 @@ public class Persist_SaltXML10_Test {
 		template.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		template.getDocumentGraph().createTextualDS("This is a text with linebreaks\n and tabs\t.");
 		// test attributes
-		template.getDocumentGraph().createAnnotation("mnys", "myname", "This is a \"text\" with linebreaks\n and tabs\t.");
+		template.getDocumentGraph().createAnnotation("mnys", "myname",
+				"This is a \"text\" with linebreaks\n and tabs\t.");
 
 		// create other
 		SDocument other = SaltFactory.createSDocument();
@@ -94,7 +95,8 @@ public class Persist_SaltXML10_Test {
 		other.getDocumentGraph().createAnnotation("mnys", "myname", "This is a \"text\" with linebreaks\n and tabs\t.");
 
 		// store other document
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_text_specialCharacters.salt");
+		File tmpFile = new File(
+				SaltTestsUtil.getTempTestFolder("/testLoadStore") + "/DocumentGraph_text_specialCharacters.salt");
 		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
 		SaltUtil.saveDocumentGraph(other.getDocumentGraph(), path);
 
@@ -237,10 +239,14 @@ public class Persist_SaltXML10_Test {
 		SaltProject loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
 
 		assertEquals(project.getCorpusGraphs().size(), loaded.getCorpusGraphs().size());
-		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(), loaded.getCorpusGraphs().get(0).getNodes().size());
-		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
-		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(), loaded.getCorpusGraphs().get(1).getNodes().size());
-		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(), loaded.getCorpusGraphs().get(1).getRelations().size());
+		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(),
+				loaded.getCorpusGraphs().get(0).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(),
+				loaded.getCorpusGraphs().get(0).getRelations().size());
+		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(),
+				loaded.getCorpusGraphs().get(1).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(),
+				loaded.getCorpusGraphs().get(1).getRelations().size());
 
 		// make sure it's also working when storing it a second time to some
 		// other location
@@ -250,10 +256,14 @@ public class Persist_SaltXML10_Test {
 		loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
 
 		assertEquals(project.getCorpusGraphs().size(), loaded.getCorpusGraphs().size());
-		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(), loaded.getCorpusGraphs().get(0).getNodes().size());
-		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
-		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(), loaded.getCorpusGraphs().get(1).getNodes().size());
-		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(), loaded.getCorpusGraphs().get(1).getRelations().size());
+		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(),
+				loaded.getCorpusGraphs().get(0).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(),
+				loaded.getCorpusGraphs().get(0).getRelations().size());
+		assertEquals(project.getCorpusGraphs().get(1).getNodes().size(),
+				loaded.getCorpusGraphs().get(1).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(1).getRelations().size(),
+				loaded.getCorpusGraphs().get(1).getRelations().size());
 	}
 
 	/**
@@ -271,18 +281,24 @@ public class Persist_SaltXML10_Test {
 		SaltProject loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
 
 		assertEquals(project.getCorpusGraphs().size(), loaded.getCorpusGraphs().size());
-		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(), loaded.getCorpusGraphs().get(0).getNodes().size());
-		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(), loaded.getCorpusGraphs().get(0).getRelations().size());
+		assertEquals(project.getCorpusGraphs().get(0).getNodes().size(),
+				loaded.getCorpusGraphs().get(0).getNodes().size());
+		assertEquals(project.getCorpusGraphs().get(0).getRelations().size(),
+				loaded.getCorpusGraphs().get(0).getRelations().size());
 
 		Assert.assertNotNull(loaded.getCorpusGraphs().get(0).getDocuments().get(0).getDocumentGraphLocation());
 		Assert.assertNotNull(loaded.getCorpusGraphs().get(0).getDocuments().get(1).getDocumentGraphLocation());
 		Assert.assertNotNull(loaded.getCorpusGraphs().get(0).getDocuments().get(2).getDocumentGraphLocation());
 		Assert.assertNotNull(loaded.getCorpusGraphs().get(0).getDocuments().get(3).getDocumentGraphLocation());
 
-		assertEquals(outFolder + "/rootCorpus/subCorpus1/doc1.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(0).getDocumentGraphLocation().toFileString());
-		assertEquals(outFolder + "/rootCorpus/subCorpus1/doc2.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(1).getDocumentGraphLocation().toFileString());
-		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc3.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(2).getDocumentGraphLocation().toFileString());
-		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc4.salt", loaded.getCorpusGraphs().get(0).getDocuments().get(3).getDocumentGraphLocation().toFileString());
+		assertEquals(outFolder + "/rootCorpus/subCorpus1/doc1.salt",
+				loaded.getCorpusGraphs().get(0).getDocuments().get(0).getDocumentGraphLocation().toFileString());
+		assertEquals(outFolder + "/rootCorpus/subCorpus1/doc2.salt",
+				loaded.getCorpusGraphs().get(0).getDocuments().get(1).getDocumentGraphLocation().toFileString());
+		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc3.salt",
+				loaded.getCorpusGraphs().get(0).getDocuments().get(2).getDocumentGraphLocation().toFileString());
+		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc4.salt",
+				loaded.getCorpusGraphs().get(0).getDocuments().get(3).getDocumentGraphLocation().toFileString());
 	}
 
 	/**
@@ -335,7 +351,8 @@ public class Persist_SaltXML10_Test {
 		SampleGenerator.createDocumentStructure(doc1);
 		SampleGenerator.createDocumentStructure(doc2);
 
-		File tmpFile = new File(SaltTestsUtil.getTempTestFolder("/testLoadStore_MultipleContentRoots") + "/MultipleContentRoots.salt");
+		File tmpFile = new File(
+				SaltTestsUtil.getTempTestFolder("/testLoadStore_MultipleContentRoots") + "/MultipleContentRoots.salt");
 
 		XMLOutputFactory outFactory = XMLOutputFactory.newFactory();
 		try (FileOutputStream fos = new FileOutputStream(tmpFile)) {

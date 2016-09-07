@@ -47,19 +47,19 @@ public class RelationTest {
 	public void setUp() throws Exception {
 		setFixture(createRelation());
 	}
-	
+
 	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
 		return GraphFactory.createGraph();
 	}
-	
+
 	protected Node createNode() {
 		return GraphFactory.createNode();
 	}
-	
+
 	protected Relation createRelation() {
 		return GraphFactory.createRelation();
 	}
-	
+
 	protected Layer<Node, Relation<Node, Node>> createLayer() {
 		return GraphFactory.createLayer();
 	}
