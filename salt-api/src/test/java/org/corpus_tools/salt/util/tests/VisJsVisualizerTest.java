@@ -18,7 +18,6 @@
 package org.corpus_tools.salt.util.tests;
 
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;

@@ -22,7 +22,6 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.STypeAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class STypeAnnotationImpl extends SAnnotationImpl implements STypeAnnotation {
 	private static final long serialVersionUID = 2006584243934993420L;
 
