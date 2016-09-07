@@ -20,6 +20,7 @@ package org.corpus_tools.salt.graph.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
@@ -28,10 +29,15 @@ import org.corpus_tools.salt.graph.impl.GraphImpl.UPDATE_TYPE;
 
 @SuppressWarnings("serial")
 public class RelationImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Relation<S, T> {
+	
+	private final Class<S> sourceClass;
+	private final Class<T> targetClass;
+	
 	/**
 	 * Initializes an object of type {@link Relation}.
 	 */
-	public RelationImpl() {
+	public RelationImpl(Class<S> sourceClass, Class<T> targetClass) {
+		this(null, sourceClass, targetClass);
 	}
 
 	/**
@@ -42,13 +48,17 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public RelationImpl(Relation<S, T> delegate) {
+	public RelationImpl(Relation<S, T> delegate, Class<S> sourceClass, Class<T> targetClass) {
 		super(delegate);
+		this.sourceClass = sourceClass;
+		this.targetClass = targetClass;
 	}
 
 	/**
 	 * {@inheritDoc Relation#getDelegate()}
 	 */
+	@Override
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	public Relation<S, T> getDelegate() {
 		return ((Relation<S, T>) super.getDelegate());
 	}
@@ -83,9 +93,20 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		this.source = source;
 		// notify graph about change of target
 		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
+			((GraphImpl<?,?,?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
 		}
 	}
+	
+	@Override
+	public void setSourceUnsafe(Node source) throws SaltParameterException {
+		if(getSourceClass().isInstance(source)) {
+			setSource(getSourceClass().cast(source));
+		} else {
+			throw new SaltParameterException("source", "setSourceUnsafe", getClass(), 
+					"Must be of type " + getSourceClass().getSimpleName());
+		}
+	}
+	
 
 	/** target node of this relation. **/
 	private T target = null;
@@ -117,16 +138,27 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		this.target = target;
 		// notify graph about change of target
 		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
+			((GraphImpl<?,?,?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
 		}
 	}
+	
+	@Override
+	public void setTargetUnsafe(Node source) throws SaltParameterException {
+		if(getTargetClass().isInstance(source)) {
+			setTarget(getTargetClass().cast(source));
+		} else {
+			throw new SaltParameterException("source", "setTargetUnsafe", getClass(), 
+					"Must be of type " + getTargetClass().getSimpleName());
+		}
+	}
+	
 
 	/** container graph **/
-	protected Graph graph = null;
+	protected Graph<?,?,?> graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph getGraph() {
+	public Graph<?,?,?> getGraph() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return getDelegate().getGraph();
@@ -135,25 +167,6 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		return (graph);
 	}
 
-	/** {@inheritDoc Relation#setGraph(Graph)} **/
-	@Override
-	public void setGraph(Graph graph) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().setGraph(graph);
-			return;
-		}
-
-		Graph oldGraph = getGraph();
-		if (graph != null) {
-			graph.addRelation(this);
-		}
-		if (oldGraph != null && oldGraph != graph && oldGraph instanceof GraphImpl) {
-			// remove relation from old graph
-			((GraphImpl) oldGraph).basicRemoveRelation(this);
-		}
-		basicSetGraph(graph);
-	}
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
@@ -180,16 +193,16 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param graph
 	 *            graph which contains this relation
 	 */
-	protected void basicSetGraph(Graph graph) {
+	protected void basicSetGraph(Graph<?,?,?> graph) {
 		// delegate method to delegate if set
 		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
-			((RelationImpl) getDelegate()).basicSetGraph(graph);
+			((RelationImpl<?,?>) getDelegate()).basicSetGraph(graph);
 			return;
 		}
 
 		// remove from old graph if it was changed
-		if (this.graph != graph && this.graph instanceof GraphImpl) {
-			((GraphImpl) this.graph).basicRemoveRelation(this);
+		if (getGraph() != graph && getGraph() instanceof GraphImpl) {
+			((GraphImpl<?,?,?>) getGraph()).basicRemoveRelation(this);
 		}
 		this.graph = graph;
 	}
@@ -200,9 +213,9 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+	protected void basicSetGraph_WithoutRemoving(Graph<?,?,?> graph) {
 		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
-			((RelationImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
+			((RelationImpl<?,?>) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
 		}
 		this.graph = graph;
@@ -210,17 +223,17 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 
 	/** {@inheritDoc} **/
 	@Override
-	public Set<? extends Layer> getLayers() {
+	public Set<? extends Layer<?,?>> getLayers() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return (getDelegate().getLayers());
 		}
 
-		Set<Layer> layers = new HashSet<>();
+		Set<Layer<?,?>> layers = new HashSet<>();
 		if (getGraph() != null) {
-			Set<Layer> allLayers = getGraph().getLayers();
+			Set<? extends Layer<?,?>> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
-				for (Layer layer : allLayers) {
+				for (Layer<?,?> layer : allLayers) {
 					if (layer.getRelations().contains(this)) {
 						layers.add(layer);
 					}
@@ -229,40 +242,14 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		}
 		return (layers);
 	}
-
-	/**
-	 * {@inheritDoc}<br/>
-	 * Since the method {@link #getLayers()} retrieves all layers by accessing
-	 * the layers in graph, this class does not contain an own collection of
-	 * layers.
-	 **/
+	
 	@Override
-	public void addLayer(Layer layer) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().addLayer(layer);
-		}
-
-		if (layer != null) {
-			layer.addRelation(this);
-		}
+	public Class<S> getSourceClass() {
+		return sourceClass;
 	}
 
-	/**
-	 * {@inheritDoc} <br/>
-	 * Since the method {@link #getLayers()} retrieves all layers by accessing
-	 * the layers in graph, this class does not contain an own collection of
-	 * layers.
-	 **/
 	@Override
-	public void removeLayer(Layer layer) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().removeLayer(layer);
-		}
-		
-		if (layer != null) {
-			layer.removeRelation(this);
-		}
+	public Class<T> getTargetClass() {
+		return targetClass;
 	}
 }

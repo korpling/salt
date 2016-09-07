@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl;
-import org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.GraphFactory;
@@ -36,21 +35,21 @@ import org.junit.Test;
 
 public class GraphNotifierTest extends GraphTest {
 
-	private GraphNotifierImpl fixture = null;
+	private GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture = null;
 
   @Override
-	public GraphNotifierImpl getFixture() {
+	public GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> getFixture() {
 		return fixture;
 	}
 
-	public void setNotifyingFixture(GraphNotifierImpl fixture) {
+	public void setNotifyingFixture(GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture) {
 		this.fixture = fixture;
 	}
 
 	@Override
 	public void setFixture(Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture) {
 		Assert.assertTrue("Graph in test must be of instance GraphNotifierImpl", fixture instanceof GraphNotifierImpl);
-		this.fixture = (GraphNotifierImpl) fixture;
+		this.fixture = (GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>) fixture;
 		super.setFixture(fixture);
 	}
 	
@@ -58,7 +57,8 @@ public class GraphNotifierTest extends GraphTest {
 	@Before
 	@Override
 	public void setUp() throws Exception {
-		setNotifyingFixture(new GraphNotifierImpl());
+		
+		setNotifyingFixture(new GraphNotifierImpl<>(Node.class, GraphFactory.RELATION_CLASS, GraphFactory.LAYER_CLASS));
 		super.setFixture(fixture);
 	}
 
@@ -90,7 +90,7 @@ public class GraphNotifierTest extends GraphTest {
 	public void testNotificationRelationNode() {
 		MyListener listener = new MyListener();
 		fixture.addListener(listener);
-		Relation relation = GraphFactory.createRelation();
+		Relation<Node,Node> relation = GraphFactory.createRelation();
 		Node node = GraphFactory.createNode();
 		getFixture().addNode(node);
 		relation.setSource(node);
@@ -111,7 +111,7 @@ public class GraphNotifierTest extends GraphTest {
 	public void testNotificationAddLayer() {
 		MyListener listener = new MyListener();
 		fixture.addListener(listener);
-		Layer layer = GraphFactory.createLayer();
+		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
 
 		fixture.addLayer(layer);
 		assertEquals(NOTIFICATION_TYPE.ADD, listener.lastEvent.type);

@@ -17,17 +17,15 @@
  */
 package org.corpus_tools.salt.common.impl;
 
-import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STimeline;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
-import org.corpus_tools.salt.exceptions.SaltParameterException;
-import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
 @SuppressWarnings("serial")
 public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implements STimeline {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public STimelineImpl() {
+		this(null);
 	}
 
 	/**
@@ -39,22 +37,7 @@ public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implement
 	 *            delegate object of the same type.
 	 */
 	public STimelineImpl(Node delegate) {
-		super(delegate);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public SDocumentGraph getGraph() {
-		return ((SDocumentGraph) super.getGraph());
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
-		}
-		super.setGraph(graph);
+		super(delegate, Integer.class);
 	}
 
 	/** {@inheritDoc} **/

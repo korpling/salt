@@ -20,7 +20,6 @@ package org.corpus_tools.salt.common.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
@@ -30,6 +29,7 @@ import org.corpus_tools.salt.common.SCorpusRelation;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.core.SGraph;
+import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.core.impl.SGraphImpl;
@@ -39,7 +39,6 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.graph.Node;
-import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
@@ -59,7 +58,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SCorpusGraphImpl(Graph delegate) {
+	public SCorpusGraphImpl(Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> delegate) {
 		super(delegate);
 	}
 
@@ -75,8 +74,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	protected void init() {
 		super.init();
 
-		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2, expectedRelations);
+		getIndexMgr().createIndex(SaltUtil.IDX_NODETYPE, expectedNodes / 2, expectedNodes);
+		getIndexMgr().createIndex(SaltUtil.IDX_RELATIONTYPE, expectedRelations / 2, expectedRelations);
 	}
 
 	/** Salt-project containing this corpus structure **/
@@ -127,23 +126,23 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 *            to add
 	 */
 	@Override
-	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
-		if (!(relation instanceof SRelation)) {
-			throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is not a SRelation object. ");
+	protected void basicAddRelation(SRelation<? extends SNode, ? extends SNode> relation) {
+		if (relation == null) {
+			throw new SaltInsertionException(this, null, "Cannot insert an edge, which is not a SRelation object. ");
 		}
 		// start: create a name if none exists
-		if (Strings.isNullOrEmpty(((SRelation) relation).getName())) {
+		if (Strings.isNullOrEmpty(relation.getName())) {
 			if (relation instanceof SCorpusRelation) {
-				((SRelation) relation).setName("corpRel" + (getCorpusRelations().size() + 1));
+				relation.setName("corpRel" + (getCorpusRelations().size() + 1));
 			} else if (relation instanceof SCorpusDocumentRelation) {
-				((SRelation) relation).setName("corpDocRel" + (getCorpusDocumentRelations().size() + 1));
+				relation.setName("corpDocRel" + (getCorpusDocumentRelations().size() + 1));
 			} else {
-				((SRelation) relation).setName("rel" + (getRelations().size() + 1));
+				relation.setName("rel" + (getRelations().size() + 1));
 			}
 		}
 		// end: create a name if none exists
 		if (Strings.isNullOrEmpty(relation.getId())) {
-			((SRelation) relation).setId("salt:/" + ((SRelation) relation).getName());
+			relation.setId("salt:/" + relation.getName());
 		}
 		super.basicAddRelation(relation);
 
@@ -209,13 +208,27 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpus> getCorpora() {
-		return (getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SCorpus.class));
+		List<SNode> nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SCorpus.class);
+		List<SCorpus> result = new ArrayList<>(nodes.size());
+		for(Node n : nodes) {
+			if(n instanceof SCorpus) {
+				result.add((SCorpus) n);
+			}
+		}
+		return result;
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SDocument> getDocuments() {
-		return (getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SDocument.class));
+		List<SNode> nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SDocument.class);
+		List<SDocument> result = new ArrayList<>(nodes.size());
+		for(Node n : nodes) {
+			if(n instanceof SDocument) {
+				result.add((SDocument) n);
+			}
+		}
+		return result;
 	}
 
 	// ============================ end: handling specific nodes
@@ -223,13 +236,27 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusRelation> getCorpusRelations() {
-		return (getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusRelation.class));
+		List<SRelation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusRelation.class);
+		List<SCorpusRelation> result = new ArrayList<>(relations.size());
+		for(SRelation<?,?> e : relations) {
+			if(e instanceof SCorpusRelation) {
+				result.add((SCorpusRelation) e);
+			}
+		}
+		return result;
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusDocumentRelation> getCorpusDocumentRelations() {
-		return (getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusDocumentRelation.class));
+		List<SRelation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusDocumentRelation.class);
+		List<SCorpusDocumentRelation> result = new ArrayList<>(relations.size());
+		for(SRelation<?,?> e : relations) {
+			if(e instanceof SCorpusDocumentRelation) {
+				result.add((SCorpusDocumentRelation) e);
+			}
+		}
+		return result;
 	}
 
 	// ============================ end: handling specific relations
@@ -320,8 +347,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	public SCorpus getCorpus(SDocument document) {
 		SCorpus retVal = null;
 		if (document != null) {
-			List<SRelation<SNode, SNode>> inRels = getInRelations(document.getId());
-			for (SRelation inEdge : Collections.synchronizedCollection(inRels)) {
+			List<SRelation<? extends SNode, ? extends SNode>> inRels = getInRelations(document.getId());
+			for (SRelation<? extends SNode, ? extends SNode> inEdge : Collections.synchronizedCollection(inRels)) {
 				if (inEdge instanceof SCorpusDocumentRelation) {
 
 					retVal = ((SCorpusDocumentRelation) inEdge).getSource();
@@ -433,14 +460,15 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		retStr.append(prefix);
 		retStr.append(((isTail ? "└── " : "├── ") + node.getName()));
 		retStr.append("\n");
-		final List<SRelation<SNode, SNode>> outRelations = sGraph.getOutRelations(node.getId());
+		final List<SRelation<? extends SNode, ? extends SNode>> outRelations = 
+				sGraph.getOutRelations(node.getId());
 		int i = 0;
-		for (SRelation<SNode, SNode> out : outRelations) {
+		for (SRelation<? extends SNode, ? extends SNode> out : outRelations) {
 			boolean newTail= true;
 			if (i < outRelations.size() - 1) {
 				newTail= false;
 			}
-			retStr.append(reportCorpusStructure(sGraph, (SNode) out.getTarget(), prefix + (isTail ? "    " : "│   "), newTail));
+			retStr.append(reportCorpusStructure(sGraph, out.getTarget(), prefix + (isTail ? "    " : "│   "), newTail));
 			i++;
 		}
 		return (retStr.toString());

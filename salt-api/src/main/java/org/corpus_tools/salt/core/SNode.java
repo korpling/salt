@@ -29,7 +29,7 @@ public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathE
 	 * 
 	 * @return list of outgoing relations
 	 */
-	public List<SRelation> getOutRelations();
+	public List<SRelation<? extends SNode, ? extends SNode>> getOutRelations();
 
 	/**
 	 * When this node belongs to a {@link SGraph}, a list of incoming relations
@@ -37,7 +37,7 @@ public interface SNode extends Node, SAnnotationContainer, SNamedElement, SPathE
 	 * 
 	 * @return list of incoming relations
 	 */
-	public List<SRelation> getInRelations();
+	public List<SRelation<? extends SNode, ? extends SNode>> getInRelations();
 
 	/**
 	 * Returns all layers containing this node. This is a computed set and only

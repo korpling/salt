@@ -25,12 +25,14 @@ import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
 public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implements SSpanningRelation {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SSpanningRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -41,8 +43,8 @@ public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implemen
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SSpanningRelationImpl(Relation delegate) {
-		super(delegate);
+	public SSpanningRelationImpl(Relation<SSpan, SToken> delegate) {
+		super(delegate, SSpan.class, SToken.class);
 	}
 
 	/** {@inheritDoc} **/
@@ -50,13 +52,13 @@ public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implemen
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-
-	/** {@inheritDoc} **/
+	
 	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
-		super.setGraph(graph);
+		super.basicSetGraph(graph);
 	}
+
 }

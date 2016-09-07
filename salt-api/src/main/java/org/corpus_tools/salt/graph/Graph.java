@@ -43,7 +43,11 @@ import org.corpus_tools.salt.util.SaltUtil;
  * @param <E>
  *            type of contained {@link Relation}s
  */
-public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends IdentifiableElement {
+public interface Graph
+	<
+	N extends Node, 
+	R extends Relation<? extends N, ? extends N>, 
+	L extends Layer<N,R>> extends IdentifiableElement {
 	/**
 	 * Returns the index manager. The index manager is used to register indexes
 	 * for sets of nodes, relations, layers etc. or single values. The manager
@@ -120,7 +124,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer
 	 * @param relation
 	 *            relation to be inserted
 	 */
-	public void addRelation(Relation<? extends N, ? extends N> relation);
+	public void addRelation(R relation);
 
 	/**
 	 * Removes the passed relation from this graph. If a relation is removed, it
@@ -130,7 +134,7 @@ public interface Graph<N extends Node, R extends Relation<N, N>, L extends Layer
 	 * @param relation
 	 *            relation to be removed
 	 */
-	public void removeRelation(Relation<? extends N, ? extends N> relation);
+	public void removeRelation(R relation);
 
 	/**
 	 * Removes all relations from this graph and cleans all indexes.

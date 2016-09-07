@@ -30,8 +30,12 @@ import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl implements SSequentialDS<D, P> {
+	
+	private final Class<D> dataClass;
+	
 	/** Initializes an object of type {@link SLayerImpl}. **/
-	public SSequentialDSImpl() {
+	public SSequentialDSImpl(Class<D> dataClass) {
+		this(null, dataClass);
 	}
 
 	/**
@@ -42,8 +46,9 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SSequentialDSImpl(Node delegate) {
+	public SSequentialDSImpl(Node delegate, Class<D> dataClass) {
 		super(delegate);
+		this.dataClass = dataClass;
 	}
 
 	/** {@inheritDoc} */
@@ -52,7 +57,10 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 		D retVal = null;
 		SFeature feature = getFeature(SaltUtil.FEAT_SDATA_QNAME);
 		if (feature != null) {
-			retVal = (D) feature.getValue();
+			Object val = feature.getValue();
+			if(dataClass.isInstance(val)) {
+				retVal = dataClass.cast(val);
+			}
 		}
 		return (retVal);
 	}
@@ -75,14 +83,13 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-
-	/** {@inheritDoc} **/
+	
 	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
-		super.setGraph(graph);
+		super.basicSetGraph(graph);
 	}
 
 	/** {@inheritDoc SSequentialDS#getSStart()} */

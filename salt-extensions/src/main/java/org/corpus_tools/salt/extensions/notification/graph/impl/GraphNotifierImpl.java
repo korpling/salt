@@ -32,7 +32,12 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 
 @SuppressWarnings("serial")
-public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
+public class GraphNotifierImpl<N extends Node, R extends Relation<? extends N, ? extends N>, L extends Layer<N, R>> extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
+	
+	public GraphNotifierImpl(Class<N> nodeClass, Class<R> relationClass, Class<L> layerClass) {
+		super(nodeClass, relationClass, layerClass);
+	}
+	
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 
@@ -117,7 +122,7 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	}
 
 	@Override
-	public void addRelation(Relation<? extends N, ? extends N> relation) {
+	public void addRelation(R relation) {
 		super.addRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, null, relation, this);
@@ -125,7 +130,7 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	}
 
 	@Override
-	public void removeRelation(Relation<? extends N, ? extends N> relation) {
+	public void removeRelation(R relation) {
 		super.removeRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, relation, null, this);

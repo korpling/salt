@@ -338,7 +338,7 @@ public class SDocumentGraphTest {
 			} catch (SaltElementNotInGraphException e) {
 			}
 			getFixture().addNode(source);
-			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
+			SRelation<?,?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
 			assertTrue(sRelation instanceof SPointingRelation);
 		}
 
@@ -354,7 +354,7 @@ public class SDocumentGraphTest {
 			} catch (SaltElementNotInGraphException e) {
 			}
 			getFixture().addNode(source);
-			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
+			SRelation<?,?> sRelation = getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
 			assertTrue(sRelation instanceof STextualRelation);
 		}
 
@@ -370,7 +370,7 @@ public class SDocumentGraphTest {
 			} catch (SaltElementNotInGraphException e) {
 			}
 			getFixture().addNode(source);
-			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
+			SRelation<?,?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
 			assertTrue(sRelation instanceof SDominanceRelation);
 		}
 
@@ -386,7 +386,7 @@ public class SDocumentGraphTest {
 			} catch (SaltElementNotInGraphException e) {
 			}
 			getFixture().addNode(source);
-			SRelation sRelation = getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
+			SRelation<?,?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
 			assertTrue(sRelation instanceof SSpanningRelation);
 		}
 
@@ -406,7 +406,7 @@ public class SDocumentGraphTest {
 		String text = "This is a sample text.";
 		STextualDS stext = getFixture().createTextualDS(text);
 
-		List<DataSourceSequence> sequences = null;
+		List<DataSourceSequence<Integer>> sequences = null;
 
 		try {
 			getFixture().createToken(sequences);
@@ -415,7 +415,7 @@ public class SDocumentGraphTest {
 		}
 
 		sequences = new ArrayList<>();
-		DataSourceSequence sequence = null;
+		DataSourceSequence<Integer> sequence = null;
 
 		sequences.add(sequence);
 		try {
@@ -424,7 +424,7 @@ public class SDocumentGraphTest {
 		} catch (Exception e) {
 		}
 		sequences = new ArrayList<>();
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequences.add(sequence);
 		sequence.setDataSource(stext);
 
@@ -450,7 +450,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testcreateToken__DataSourceSequence() {
 		String text = "This is a sample text.";
-		DataSourceSequence sequence = null;
+		DataSourceSequence<Integer> sequence = null;
 		STextualDS stext = getFixture().createTextualDS(text);
 
 		try {
@@ -458,7 +458,7 @@ public class SDocumentGraphTest {
 			fail("empty data-source value");
 		} catch (Exception e) {
 		}
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(stext);
 
 		try {
@@ -628,11 +628,11 @@ public class SDocumentGraphTest {
 		// end: sTokens for sText1
 		// end: create sample graph
 
-		DataSourceSequence sequence = null;
+		DataSourceSequence<Integer> sequence = null;
 		List<SNode> coveredSTokens = null;
 
 		// start: test1
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(sText1);
 		sequence.setStart(0);
 		sequence.setEnd(4);
@@ -644,7 +644,7 @@ public class SDocumentGraphTest {
 		// end: test 1
 
 		// start: test2
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(sText1);
 		sequence.setStart(5);
 		sequence.setEnd(16);
@@ -658,7 +658,7 @@ public class SDocumentGraphTest {
 		// end: test 2
 
 		// start: test3
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(sText1);
 		sequence.setStart(0);
 		sequence.setEnd(sText1.getText().length());
@@ -675,7 +675,7 @@ public class SDocumentGraphTest {
 		// end: test 3
 
 		// start: test3
-		sequence = new DataSourceSequence();
+		sequence = new DataSourceSequence<>();
 		sequence.setDataSource(sText2);
 		sequence.setStart(0);
 		sequence.setEnd(sText2.getText().length());
@@ -700,7 +700,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetOverlappedDSSequences__SNode_EList() {
 		String text = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
+		DataSourceSequence<Integer> dsSequence = new DataSourceSequence<>();
 		// start: create sample graph
 		STextualDS sText = getFixture().createTextualDS(text);
 		dsSequence.setDataSource(sText);
@@ -760,7 +760,7 @@ public class SDocumentGraphTest {
 		struct3.setName("struct3");
 		// end: create sample graph
 
-		DataSourceSequence sequence = null;
+		DataSourceSequence<?> sequence = null;
 		sequence = getFixture().getOverlappedDataSourceSequence(struct2, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		assertNotNull(sequence);
 		assertEquals(0, sequence.getStart());
@@ -790,7 +790,7 @@ public class SDocumentGraphTest {
 	public void testGetOverlappedDSSequences__STextualDS_EList() {
 		STextualDS sTextualDs = SaltFactory.createSTextualDS();
 		getFixture().addNode(sTextualDs);
-		DataSourceSequence sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
+		DataSourceSequence<? extends Number> sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		assertEquals(sTextualDs, sequence.getDataSource());
 
 		sTextualDs.setText("This is a sample text.");
@@ -813,7 +813,7 @@ public class SDocumentGraphTest {
 	@SuppressWarnings("unchecked")
 	public void testIsContinuousByText__EList() {
 		String text = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
+		DataSourceSequence<Integer> dsSequence = new DataSourceSequence<>();
 
 		// start: create sample graph
 		STextualDS sText = getFixture().createTextualDS(text);
@@ -884,7 +884,7 @@ public class SDocumentGraphTest {
 	@SuppressWarnings("unchecked")
 	public void testIsContinuousByText__EList_EList() {
 		String text = "This is a sample text.";
-		DataSourceSequence dsSequence = new DataSourceSequence();
+		DataSourceSequence<Integer> dsSequence = new DataSourceSequence<>();
 
 		// start: create sample graph
 		STextualDS sText = getFixture().createTextualDS(text);
@@ -989,7 +989,7 @@ public class SDocumentGraphTest {
 		for (int i = 0; i < 6; i++) {
 			assertEquals("tokens of index '" + i + "' aren't equal", sTokens.get(i), controllSTokens.get(i));
 			boolean hasTextualRelation = false;
-			for(SRelation rel : controllSTokens.get(i).getOutRelations()) {
+			for(SRelation<?,?> rel : controllSTokens.get(i).getOutRelations()) {
 				if(rel instanceof STextualRelation) {
 					hasTextualRelation = true;
 					break;
@@ -1558,7 +1558,7 @@ public class SDocumentGraphTest {
 		SToken tok4 = getFixture().createToken(primaryText, 10, 16);
 		SToken tok5 = getFixture().createToken(primaryText, 16, 17);
 
-		DataSourceSequence sequence = null;
+		DataSourceSequence<? extends Number> sequence = null;
 
 		sequence = getFixture().getOverlappedDataSourceSequence(tok1, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		assertEquals(0, sequence.getStart());
@@ -1772,7 +1772,7 @@ public class SDocumentGraphTest {
 		getFixture().addNode(sSpan);
 		SStructure sStruct = SaltFactory.createSStructure();
 		getFixture().addNode(sStruct);
-		SRelation sRel = null;
+		SRelation<?,?> sRel = null;
 
 		assertEquals(2, getFixture().getRelations().size());
 
@@ -1965,7 +1965,7 @@ public class SDocumentGraphTest {
 	}
 
 	/**
-	 * Toring and loading of document graph. Both graphs are compared with
+	 * Storing and loading of document graph. Both graphs are compared with
 	 * isIsomorph(). This test checks whether isIsomorph finds the correct
 	 * matching candidates for nodes.
 	 * 
@@ -1985,14 +1985,15 @@ public class SDocumentGraphTest {
 		}
 
 		FileInputStream fIn = new FileInputStream(tmpFile);
-		ObjectInputStream oIn = new ObjectInputStream(fIn);
-
-		SDocumentGraph restored = (SDocumentGraph) oIn.readObject();
-
-		// compare
-		Diff diffCreator = new Diff(docGraph, restored);
-		Set<Difference> diffs = diffCreator.findDiffs();
-		Assert.assertEquals("Serialization failed. Diff: " + Joiner.on("\n").join(diffs), 0, diffs.size());
+		
+		try(ObjectInputStream oIn = new ObjectInputStream(fIn)) {
+			SDocumentGraph restored = (SDocumentGraph) oIn.readObject();
+	
+			// compare
+			Diff diffCreator = new Diff(docGraph, restored);
+			Set<Difference> diffs = diffCreator.findDiffs();
+			Assert.assertEquals("Serialization failed. Diff: " + Joiner.on("\n").join(diffs), 0, diffs.size());
+		}
 	}
 
 	/**
@@ -2008,7 +2009,7 @@ public class SDocumentGraphTest {
 	 */
 	@Test
 	public void testGetSharedParent() {
-		SDocument doc1 = SaltFactory.createSDocument();
+//		SDocument doc1 = SaltFactory.createSDocument();
 		SDocument doc2 = SaltFactory.createSDocument();
 		doc2.setId("doc");
 
@@ -2022,7 +2023,7 @@ public class SDocumentGraphTest {
 		tokens.add(tok2);
 		tokens.add(tok3);
 		SSpan span2 = getFixture().createSpan(tokens);
-		SSpan span3 = getFixture().createSpan(tok3);
+//		SSpan span3 = getFixture().createSpan(tok3);
 		SSpan span4 = getFixture().createSpan(getFixture().getTokens());
 
 		List<SNode> children = new ArrayList<SNode>();
@@ -2069,7 +2070,7 @@ public class SDocumentGraphTest {
 	 */
 	@Test
 	public void testGetChildren() {
-		SDocument doc1 = SaltFactory.createSDocument();
+//		SDocument doc1 = SaltFactory.createSDocument();
 		SDocument doc2 = SaltFactory.createSDocument();
 		doc2.setId("doc");
 

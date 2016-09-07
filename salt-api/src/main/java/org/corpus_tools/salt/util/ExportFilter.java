@@ -44,7 +44,7 @@ public boolean includeNode (SNode node);
  * 
  * @param relation specified SRelation
  */	
-public boolean includeRelation (SRelation relation);
+public boolean includeRelation (SRelation<? extends SNode, ? extends SNode> relation);
 		
 
 }

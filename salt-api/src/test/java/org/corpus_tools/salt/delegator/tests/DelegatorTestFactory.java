@@ -32,6 +32,7 @@ import org.corpus_tools.salt.common.SPointingRelation;
 import org.corpus_tools.salt.common.SSpan;
 import org.corpus_tools.salt.common.SSpanningRelation;
 import org.corpus_tools.salt.common.SStructure;
+import org.corpus_tools.salt.common.SStructuredNode;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.STimeline;
@@ -72,6 +73,12 @@ import org.corpus_tools.salt.core.impl.SMetaAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
+import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Layer;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.graph.impl.GraphImpl;
+import org.corpus_tools.salt.graph.impl.LayerImpl;
+import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.corpus_tools.salt.impl.SaltFactoryImpl;
 import org.corpus_tools.salt.semantics.SCatAnnotation;
 import org.corpus_tools.salt.semantics.SLemmaAnnotation;
@@ -87,10 +94,14 @@ import org.corpus_tools.salt.semantics.impl.STypeAnnotationImpl;
 import org.corpus_tools.salt.semantics.impl.SWordAnnotationImpl;
 
 public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactory {
+	
+	
 	// ==========================================> salt core
 	@Override
 	public SGraph createSGraph() {
-		return (new SGraphImpl(createGraph()));
+		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph = 
+				new GraphImpl<>(SNode.class, SGraphImpl.GENERIC_SRELATION_CLASS, SLayer.class);
+		return (new SGraphImpl(graph));
 	}
 
 	@Override
@@ -100,7 +111,8 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SRelation<SNode, SNode> createSRelation() {
-		return (new SRelationImpl<SNode, SNode>(createRelation()));
+		Relation<SNode,SNode> rel = new RelationImpl<>(SNode.class, SNode.class);
+		return (new SRelationImpl<SNode, SNode>(rel, SNode.class, SNode.class));
 	}
 
 	@Override
@@ -125,7 +137,9 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SLayer createSLayer() {
-		return (new SLayerImpl(createLayer()));
+		Layer<SNode, SRelation<? extends SNode, ? extends SNode>> layer = 
+				new LayerImpl<>();
+		return (new SLayerImpl(layer));
 	}
 
 	// ==========================================< salt core
@@ -137,22 +151,28 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SCorpusRelation createSCorpusRelation() {
-		return (new SCorpusRelationImpl(createRelation()));
+		Relation<SCorpus, SCorpus> rel = createRelation(SCorpus.class, SCorpus.class);
+		return (new SCorpusRelationImpl(rel));
 	}
 
 	@Override
 	public SCorpusDocumentRelation createSCorpusDocumentRelation() {
-		return (new SCorpusDocumentRelationImpl(createRelation()));
+		Relation<SCorpus, SDocument> rel = createRelation(SCorpus.class, SDocument.class);
+		return (new SCorpusDocumentRelationImpl(rel));
 	}
 
 	@Override
 	public SCorpusGraph createSCorpusGraph() {
-		return (new SCorpusGraphImpl(createGraph()));
+		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph =
+				createSGraph();
+		return (new SCorpusGraphImpl(graph));
 	}
 
 	@Override
 	public SDocumentGraph createSDocumentGraph() {
-		return (new SDocumentGraphImpl(createGraph()));
+		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph = 
+				createGraph(SNode.class, SGraphImpl.GENERIC_SRELATION_CLASS, SLayer.class);
+		return (new SDocumentGraphImpl(graph));
 	}
 
 	@Override
@@ -167,37 +187,44 @@ public class DelegatorTestFactory extends SaltFactoryImpl implements ISaltFactor
 
 	@Override
 	public SSpanningRelation createSSpanningRelation() {
-		return (new SSpanningRelationImpl(createRelation()));
+		Relation<SSpan, SToken> rel = createRelation(SSpan.class, SToken.class);
+		return (new SSpanningRelationImpl(rel));
 	}
 
 	@Override
 	public SDominanceRelation createSDominanceRelation() {
-		return (new SDominanceRelationImpl(createRelation()));
+		Relation<SStructure, SStructuredNode> rel = createRelation(SStructure.class, SStructuredNode.class);
+		return (new SDominanceRelationImpl(rel));
 	}
 
 	@Override
 	public SPointingRelation createSPointingRelation() {
-		return (new SPointingRelationImpl(createRelation()));
+		Relation<SStructuredNode, SStructuredNode> rel = createRelation(SStructuredNode.class, SStructuredNode.class);
+		return (new SPointingRelationImpl(rel));
 	}
 
 	@Override
 	public SOrderRelation createSOrderRelation() {
-		return (new SOrderRelationImpl(createRelation()));
+		Relation<SStructuredNode, SStructuredNode> rel = createRelation(SStructuredNode.class, SStructuredNode.class);
+		return (new SOrderRelationImpl(rel));
 	}
 
 	@Override
 	public STextualRelation createSTextualRelation() {
-		return (new STextualRelationImpl(createRelation()));
+		Relation<SToken, STextualDS> rel = createRelation(SToken.class, STextualDS.class);
+		return (new STextualRelationImpl(rel));
 	}
 
 	@Override
 	public STimelineRelation createSTimelineRelation() {
-		return (new STimelineRelationImpl(createRelation()));
+		Relation<SToken, STimeline> rel = createRelation(SToken.class, STimeline.class);
+		return (new STimelineRelationImpl(rel));
 	}
 
 	@Override
 	public SMedialRelation createSMedialRelation() {
-		return (new SMedialRelationImpl(createRelation()));
+		Relation<SToken, SMedialDS> rel = createRelation(SToken.class, SMedialDS.class);
+		return (new SMedialRelationImpl(rel));
 	}
 
 	@Override

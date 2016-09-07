@@ -17,15 +17,12 @@
  */
 package org.corpus_tools.salt.common.impl.tests;
 
-import org.corpus_tools.salt.common.SSequentialRelation;
 import org.corpus_tools.salt.core.SNode;
 import org.junit.Test;
 
-public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number> extends SRelationAbstractTest {
+public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number> 
+	extends SRelationAbstractTest<S,T> {
 
-	protected SSequentialRelation<S, T, P> getFixture() {
-		return (SSequentialRelation<S, T, P>) fixture;
-	}
 
 	/** Tests whether the start value is set and returned correct. **/
 	@Test

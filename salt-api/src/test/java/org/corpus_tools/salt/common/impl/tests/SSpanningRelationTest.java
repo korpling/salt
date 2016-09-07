@@ -18,9 +18,11 @@
 package org.corpus_tools.salt.common.impl.tests;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SSpan;
+import org.corpus_tools.salt.common.SToken;
 import org.junit.Before;
 
-public class SSpanningRelationTest extends SRelationAbstractTest {
+public class SSpanningRelationTest extends SRelationAbstractTest<SSpan, SToken> {
 
 	@Before
 	public void setUp() throws Exception {

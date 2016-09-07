@@ -23,7 +23,9 @@ import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
-public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, SAnnotationContainer, SNamedElement, SPathElement {
+public interface SGraph extends 
+	Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer>, 
+	SAnnotationContainer, SNamedElement, SPathElement {
 
 	/**
 	 * The {@link GRAPH_TRAVERSE_TYPE} determines the the traversal order. In
@@ -158,7 +160,7 @@ public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, S
 	 *            Name of the relation to search for
 	 * @return A complete list of all matching relations. Is never null.
 	 */
-	public List<SRelation> getRelationsByName(String relationName);
+	public List<SRelation<? extends SNode, ? extends SNode>> getRelationsByName(String relationName);
 
 	/**
 	 * Searches for a layer or a set of layers having the given layer name.

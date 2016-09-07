@@ -46,7 +46,7 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 	/** {@inheritDoc} **/
 	@Override
 	protected Label getDelegate() {
-		return ((Label) delegate);
+		return ((Label) super.getDelegate());
 	}
 
 	protected String namespace = null;

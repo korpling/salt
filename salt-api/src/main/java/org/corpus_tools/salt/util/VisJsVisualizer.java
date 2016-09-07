@@ -41,7 +41,9 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 
 import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.SaltFactory;
@@ -64,11 +66,7 @@ import org.eclipse.emf.common.util.URI;
 import org.json.JSONException;
 import org.json.JSONWriter;
 
-import com.google.common.base.Charsets;
 import com.google.common.io.ByteStreams;
-
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamWriter;
 
 /**
  * <p>
@@ -194,7 +192,7 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 
 	private final HashSet<SNode> readSpanNodes;
 	private final HashSet<SNode> readStructNodes;
-	private final HashSet<SRelation> readRelations;
+	private final HashSet<SRelation<?,?>> readRelations;
 	private final List<SNode> roots;
 	private Map<SNode, Integer> rootToMinLevel;
 
@@ -324,7 +322,7 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 		rootToMinLevel = new HashMap<SNode, Integer>();
 		readSpanNodes = new HashSet<SNode>();
 		readStructNodes = new HashSet<SNode>();
-		readRelations = new HashSet<SRelation>();
+		readRelations = new HashSet<SRelation<?,?>>();
 		tmpFile = File.createTempFile("tmp_salt", "vis");
 		this.exportFilter = exportFilter;
 		this.styleImporter = styleImporter;
@@ -401,7 +399,7 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 		rootToMinLevel = new HashMap<SNode, Integer>();
 		readSpanNodes = new HashSet<SNode>();
 		readStructNodes = new HashSet<SNode>();
-		readRelations = new HashSet<SRelation>();
+		readRelations = new HashSet<>();
 		tmpFile = File.createTempFile("tmp_salt", "vis");
 		this.exportFilter = exportFilter;
 		this.styleImporter = styleImporter;
@@ -1162,7 +1160,7 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 
 	}
 
-	private void writeJsonEdge(SNode fromNode, SNode toNode, SRelation relation)
+	private void writeJsonEdge(SNode fromNode, SNode toNode, SRelation<?,?> relation)
 			throws IOException, SaltParameterException {
 		// get class of fromNode
 		String edgeColor;
@@ -1280,7 +1278,8 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 	 * {@link org.corpus_tools.salt.core.GraphTraverseHandler} interface.
 	 */
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation relation,
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, 
+			SRelation<?,?> relation,
 			SNode fromNode, long order) {
 		if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST) {
 			if (traversalId.equals(TRAV_MODE_CALC_LEVEL)
@@ -1326,7 +1325,8 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 	 * {@link org.corpus_tools.salt.core.GraphTraverseHandler} interface.
 	 */
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation relation,
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, 
+			SRelation<?,?> relation,
 			SNode fromNode, long order) {
 		if (traversalType == GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST) {
 			if (traversalId.equals(TRAV_MODE_CALC_LEVEL)) {
@@ -1439,7 +1439,8 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 	 * {@link org.corpus_tools.salt.core.GraphTraverseHandler} interface.
 	 */
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation relation,
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, 
+			SRelation<?,?> relation,
 			SNode currNode, long order) {
 		if (relation instanceof SDominanceRelation || relation instanceof SSpanningRelation
 				|| relation instanceof SPointingRelation || relation == null) {

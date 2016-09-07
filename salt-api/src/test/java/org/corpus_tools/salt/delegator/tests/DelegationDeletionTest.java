@@ -69,15 +69,15 @@ public class DelegationDeletionTest {
 
 		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
 
-		List<SRelation> rels = new Vector<>();
+		List<SRelation<?,?>> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getPointingRelations());
-		for (SRelation rel : rels) {
+		for (SRelation<?,?> rel : rels) {
 			template_doc.getDocumentGraph().removeRelation(rel);
 		}
 
 		rels = new Vector<>();
 		rels.addAll(fixture_doc.getDocumentGraph().getPointingRelations());
-		for (SRelation rel : rels) {
+		for (SRelation<?,?> rel : rels) {
 			fixture_doc.getDocumentGraph().removeRelation(rel);
 		}
 
@@ -105,9 +105,9 @@ public class DelegationDeletionTest {
 
 		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
 
-		List<SRelation> rels = new Vector<>();
+		List<SRelation<?,?>> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getDominanceRelations());
-		for (SRelation rel : rels) {
+		for (SRelation<?,?> rel : rels) {
 			template_doc.getDocumentGraph().removeRelation(rel);
 		}
 		List<SNode> nodes = new Vector<>();
@@ -118,7 +118,7 @@ public class DelegationDeletionTest {
 
 		rels = new Vector<>();
 		rels.addAll(fixture_doc.getDocumentGraph().getDominanceRelations());
-		for (SRelation rel : rels) {
+		for (SRelation<?,?> rel : rels) {
 			fixture_doc.getDocumentGraph().removeRelation(rel);
 		}
 		nodes = new Vector<>();
@@ -151,9 +151,9 @@ public class DelegationDeletionTest {
 
 		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
 
-		List<SRelation> rels = new Vector<>();
+		List<SRelation<?,?>> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getSpanningRelations());
-		for (SRelation rel : rels) {
+		for (SRelation<?,?> rel : rels) {
 			template_doc.getDocumentGraph().removeRelation(rel);
 		}
 		List<SNode> nodes = new Vector<>();
@@ -164,7 +164,7 @@ public class DelegationDeletionTest {
 
 		rels = new Vector<>();
 		rels.addAll(fixture_doc.getDocumentGraph().getSpanningRelations());
-		for (SRelation rel : rels) {
+		for (SRelation<?,?> rel : rels) {
 			fixture_doc.getDocumentGraph().removeRelation(rel);
 		}
 		nodes = new Vector<>();

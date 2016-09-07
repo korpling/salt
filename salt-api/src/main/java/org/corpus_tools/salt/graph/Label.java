@@ -119,7 +119,7 @@ public interface Label extends LabelableElement, Copyable<Label> {
 	 * 
 	 * @return container of this label
 	 */
-	public <C extends LabelableElement> C getContainer();
+	public LabelableElement getContainer();
 
 	/**
 	 * Sets the container element, which contains this label. The label and the
@@ -131,5 +131,5 @@ public interface Label extends LabelableElement, Copyable<Label> {
 	 * @param value
 	 *            container of this label
 	 */
-	public <C extends LabelableElement> void setContainer(C container);
+	public void setContainer(LabelableElement container);
 }

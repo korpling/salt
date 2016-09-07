@@ -93,7 +93,7 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 	public void testTokenize() {
 		SDocumentGraph graph = SaltFactory.createSDocumentGraph();
 		getFixture().setText("This is a birthday pony!");
-		getFixture().setGraph(graph);
+		graph.addNode(getFixture());
 		List<SToken> tokens = getFixture().tokenize();
 		graph = getFixture().getGraph();
 		assertNotNull(graph);

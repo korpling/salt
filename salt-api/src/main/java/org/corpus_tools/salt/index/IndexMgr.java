@@ -38,14 +38,11 @@ public interface IndexMgr extends Serializable {
 	 * 
 	 * @param indexId
 	 *            identifier to access the index or its elements
-	 * @param keyType
-	 *            type of the keys in the index
-	 * @param valueType
 	 *            type of the values in the index
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType);
+	public <K, V> void createIndex(IndexID<K,V> indexId);
 
 	/**
 	 * Creates a new index which could be accessed via the passed identifier.
@@ -53,10 +50,6 @@ public interface IndexMgr extends Serializable {
 	 * 
 	 * @param indexId
 	 *            identifier to access the index or its elements
-	 * @param keyType
-	 *            type of the keys in the index
-	 * @param valueType
-	 *            type of the values in the index
 	 * @param expectedKeys
 	 *            number of expected keys of the index, this parameter is used
 	 *            for initialization optimization. -1 means no expected size
@@ -66,7 +59,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey);
+	public <K, V> void createIndex(IndexID<K,V> indexId, int expectedKeys, int expectedValuesPerKey);
 
 	/**
 	 * Checks if an index with the passed identifier is registered.
@@ -76,7 +69,7 @@ public interface IndexMgr extends Serializable {
 	 * @return true if an index with the passed identifier exists, false
 	 *         otherwise
 	 */
-	public boolean containsIndex(String indexId);
+	public boolean containsIndex(IndexID<?,?> indexId);
 
 	/**
 	 * Removes the index with the passed identifier.
@@ -86,7 +79,7 @@ public interface IndexMgr extends Serializable {
 	 * @return true if the identifier could be removed successfully, false
 	 *         otherwise
 	 */
-	public boolean removeIndex(String indexId);
+	public boolean removeIndex(IndexID<?,?> indexId);
 
 	/**
 	 * Removes all entries contained in the index with the passed identifier
@@ -94,7 +87,7 @@ public interface IndexMgr extends Serializable {
 	 * @param indexId
 	 *            identifier of the index
 	 */
-	public void clearIndex(String indexId);
+	public void clearIndex(IndexID<?,?> indexId);
 
 	/**
 	 * Removes all index from the index manager.
@@ -115,7 +108,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> boolean put(String indexId, K key, V value);
+	public <K, V> boolean put(IndexID<K,V> indexId, K key, V value);
 
 	/**
 	 * Adds a collection of values to the index having the passed identifier
@@ -132,7 +125,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <V>
 	 */
 
-	public <K, V> boolean putAll(String indexId, K key, Collection<V> values);
+	public <K, V> boolean putAll(IndexID<K,V> indexId, K key, Collection<? extends V> values);
 
 	/**
 	 * Returns the value corresponding to the passed key, which is contained in
@@ -146,7 +139,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> V get(String indexId, K key);
+	public <K, V> V get(IndexID<K,V> indexId, K key);
 
 	/**
 	 * Returns the set of values corresponding to the passed key, which is
@@ -160,7 +153,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> List<V> getAll(String indexId, K key);
+	public <K, V> List<V> getAll(IndexID<K,V> indexId, K key);
 
 	/**
 	 * Removes the value or collection of values corresponding to the passed key
@@ -176,7 +169,7 @@ public interface IndexMgr extends Serializable {
 	 *         false otherwise
 	 * @param <K>
 	 */
-	public <K> boolean remove(String indexId, K key);
+	public <K> boolean remove(IndexID<K, ?> indexId, K key);
 
 	/**
 	 * Removes the passed value corresponding to the passed key contained in the
@@ -191,7 +184,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> boolean remove(String indexId, K key, V value);
+	public <K, V> boolean remove(IndexID<K,V> indexId, K key, V value);
 
 	/**
 	 * Returns whether the index having the passed identifier contains the
@@ -204,7 +197,7 @@ public interface IndexMgr extends Serializable {
 	 * @return true when the index contains such a key
 	 * @param <K>
 	 */
-	public <K> boolean containsKey(String indexId, K key);
+	public <K,V> boolean containsKey(IndexID<K,V> indexId, K key);
 
 	/**
 	 * Removes the passed value from all registered indexes.
@@ -214,7 +207,7 @@ public interface IndexMgr extends Serializable {
 	 * @return true, if the value was removed successfully
 	 * @param <V>
 	 */
-	public <V> boolean removeValue(V value);
+	public <V> boolean removeValue(V value, Class<V> valueClass);
 
 	/**
 	 * Removes the passed value from the indexes having the passed identifier.
@@ -225,5 +218,5 @@ public interface IndexMgr extends Serializable {
 	 * @return true, if the value was removed successfully
 	 * @param <V>
 	 */
-	public <V> boolean removeValue(String indexId, V value);
+	public <V> boolean removeValue(IndexID<?,V> indexId, V value);
 }

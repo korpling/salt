@@ -39,7 +39,6 @@ import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +56,7 @@ public class GraphTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new GraphImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>());
+		setFixture(GraphFactory.createGraph());
 	}
 
 	/**
@@ -428,7 +427,7 @@ public class GraphTest {
 	public void testAddNodeMoveGraph() {
 		assertEquals(0, getFixture().getNodes().size());
 
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> oldGraph = new GraphImpl<>();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> oldGraph = GraphFactory.createGraph();
 
 		Node node = GraphFactory.createNode();
 		oldGraph.addNode(node);
@@ -462,7 +461,7 @@ public class GraphTest {
 		} catch (SaltParameterException e) {
 		}
 
-		Relation<Node, Node> relation = new RelationImpl<Node, Node>();
+		Relation<Node, Node> relation = new RelationImpl<Node, Node>(Node.class, Node.class);
 		Node source = null;
 		Node target = null;
 		try {

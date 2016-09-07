@@ -34,7 +34,7 @@ import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 
 @SuppressWarnings("serial")
-public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implements SLayer {
+public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? extends SNode>> implements SLayer {
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SLayerImpl() {
 	}
@@ -47,7 +47,7 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SLayerImpl(Layer delegate) {
+	public SLayerImpl(Layer<SNode, SRelation<? extends SNode, ? extends SNode>> delegate) {
 		super(delegate);
 	}
 

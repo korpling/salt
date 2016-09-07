@@ -24,11 +24,16 @@ import java.util.Set;
 
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.core.SRelation;
+import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
+import org.corpus_tools.salt.exceptions.SaltParameterException;
+import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.corpus_tools.salt.util.SaltUtil;
@@ -37,8 +42,10 @@ import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
 public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImpl<S, T> implements SRelation<S, T> {
+	
 	/** Initializes an object of type {@link SRelationImpl}. **/
-	public SRelationImpl() {
+	public SRelationImpl(Class<S> sourceClass, Class<T> targetClass) {
+		super(sourceClass, targetClass);
 	}
 
 	/**
@@ -49,8 +56,8 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SRelationImpl(Relation delegate) {
-		super(delegate);
+	public SRelationImpl(Relation<S,T> delegate, Class<S> sourceClass, Class<T> targetClass) {
+		super(delegate, sourceClass, targetClass);
 	}
 
 	// =======================================> SAnnotation
@@ -295,13 +302,34 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	// =======================================< SPathElement
 
 	@Override
+	public SGraph getGraph() {
+		Graph<?,?,?> superGraph = super.getGraph();
+		if (superGraph == null) {
+			return null;
+		}
+
+		if (superGraph instanceof SGraph) {
+			return (SGraph) superGraph;
+		}
+		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
+	}
+	
+	@Override
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null  && getDelegate() == null && !(graph instanceof SGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SGraph.");
+		}
+		super.basicSetGraph(graph);
+	}
+	
+	@Override
 	public Set<SLayer> getLayers() {
 		Set<SLayer> layers = new HashSet<>();
 		if (getGraph() != null) {
 			Set<SLayer> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
 				for (SLayer layer : allLayers) {
-					if (layer.getRelations().contains((SRelation) this)) {
+					if (layer.getRelations().contains((SRelation<?,?>) this)) {
 						layers.add(layer);
 					}
 				}

@@ -23,6 +23,7 @@ import org.corpus_tools.salt.extensions.notification.graph.impl.NodeNotifierImpl
 import org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
@@ -33,20 +34,20 @@ import org.junit.Test;
 
 public class LayerNotifierTest extends LayerTest {
 
-	private LayerNotifierImpl fixture = null;
+	private LayerNotifierImpl<Node, Relation<Node, Node>> fixture = null;
 
-	public LayerNotifierImpl getFixture() {
+	public LayerNotifierImpl<Node, Relation<Node, Node>> getFixture() {
 		return fixture;
 	}
 
-	public void setNotifyingFixture(LayerNotifierImpl fixture) {
+	public void setNotifyingFixture(LayerNotifierImpl<Node, Relation<Node, Node>> fixture) {
 		this.fixture = fixture;
 	}
 
 	@Override
 	public void setFixture(Layer<Node, Relation<Node, Node>> fixture) {
 		Assert.assertTrue("Layer in test must be of instance LayerNotifierImpl", fixture instanceof LayerNotifierImpl);
-		this.fixture = (LayerNotifierImpl) fixture;
+		this.fixture = (LayerNotifierImpl<Node, Relation<Node, Node>>) fixture;
 		super.setFixture(fixture);
 	}
 	
@@ -54,12 +55,12 @@ public class LayerNotifierTest extends LayerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setFixture(new LayerNotifierImpl());
+		setFixture(new LayerNotifierImpl<Node, Relation<Node, Node>>());
 	}
 
 	@Override
 	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
-		return new GraphNotifierImpl<>();
+		return new GraphNotifierImpl<>(Node.class, GraphFactory.RELATION_CLASS, GraphFactory.LAYER_CLASS);
 	}
 
 	@Override
@@ -68,8 +69,8 @@ public class LayerNotifierTest extends LayerTest {
 	}
 
 	@Override
-	protected Relation createRelation() {
-		return new RelationNotifierImpl();
+	protected Relation<Node, Node> createRelation() {
+		return new RelationNotifierImpl<>(Node.class, Node.class);
 	}
 
 	@Override

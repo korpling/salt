@@ -24,6 +24,7 @@ package org.corpus_tools.salt.exceptions;
  * @author Florian Zipser
  *
  */
+@SuppressWarnings("serial")
 public class SaltResourceException extends SaltException {
 
 	public SaltResourceException(String msg) {

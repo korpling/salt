@@ -31,6 +31,10 @@ import org.corpus_tools.salt.graph.impl.RelationImpl;
 @SuppressWarnings("serial")
 public class RelationNotifierImpl<S extends Node, T extends Node> extends RelationImpl<S, T> implements Relation<S, T>, Notifier {
 
+	public RelationNotifierImpl(Class<S> sourceClass, Class<T> targetClass) {
+		super(sourceClass, targetClass);
+	}
+	
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 

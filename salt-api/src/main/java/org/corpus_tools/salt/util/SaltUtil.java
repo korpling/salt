@@ -57,6 +57,10 @@ import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.exceptions.SaltResourceException;
 import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.graph.Label;
+import org.corpus_tools.salt.graph.Layer;
+import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.index.IndexID;
 import org.corpus_tools.salt.semantics.SCatAnnotation;
 import org.corpus_tools.salt.semantics.SLemmaAnnotation;
 import org.corpus_tools.salt.semantics.SPOSAnnotation;
@@ -114,23 +118,40 @@ public class SaltUtil {
 
 	// ======================================> index names
 	/** name of index for node-types */
-	public static final String IDX_NODETYPE = "idx_sNodeType";
+	@SuppressWarnings("rawtypes")
+	public static final IndexID<Class, SNode> IDX_NODETYPE = new IndexID<>("idx_sNodeType",  
+			Class.class, SNode.class);
 	/** name of index for relation-types */
-	public static final String IDX_RELATIONTYPE = "idx_sRelationType";
+	@SuppressWarnings({"unchecked","rawtypes"})
+	public static final IndexID<Class, SRelation<?,?>> IDX_RELATIONTYPE = new IndexID<>(
+			"idx_sRelationType", Class.class, 
+			(Class<SRelation<?,?>>) (Class<?>) SRelation.class);
 	/** name of index for relating ids and nodes */
-	public static final String IDX_ID_NODES = "idx_id_nodes";
+	public static final IndexID<String, Node> IDX_ID_NODES = new IndexID<>(
+			"idx_id_nodes", String.class, Node.class);
 	/** name of index for relating ids and nodes (inverse) */
-	public static final String IDX_ID_NODES_INVERSE = "idx_id_nodes_inverse";
+	public static final IndexID<Node, String> IDX_ID_NODES_INVERSE = new IndexID<>(
+			"idx_id_nodes_inverse", Node.class, String.class);
 	/** name of index for relating ids and relations */
-	public static final String IDX_ID_RELATIONS = "idx_id_relation";
+	@SuppressWarnings("unchecked")
+	public static final IndexID<String, Relation<?,?>> IDX_ID_RELATIONS = new IndexID<>(
+			"idx_id_relation", String.class, (Class<Relation<?,?>>) (Class<?>) Relation.class);
 	/** name of index for relating ids and relations (inverse) */
-	public static final String IDX_ID_RELATIONS_INVERSE = "idx_id_relation_inverse";
+	@SuppressWarnings("unchecked")
+	public static final IndexID<Relation<?,?>, String> IDX_ID_RELATIONS_INVERSE = new IndexID<>( 
+			"idx_id_relation_inverse", (Class<Relation<?,?>>) (Class<?>) Relation.class, String.class);
 	/** name of index for relating ids and layers */
-	public static final String IDX_ID_LAYER = "idx_id_layer";
+	@SuppressWarnings("unchecked")
+	public static final IndexID<String, Layer<?,?>> IDX_ID_LAYER = new IndexID<>(
+			"idx_id_layer", String.class, (Class<Layer<?,?>>) (Class<?>) Layer.class);
 	/** name of index for relating node ids and outgoing relations */
-	public static final String IDX_OUT_RELATIONS = "idx_out_relations";
+	@SuppressWarnings("unchecked")
+	public static final IndexID<String, Relation<?,?>> IDX_OUT_RELATIONS = new IndexID<>( 
+			"idx_out_relations", String.class, (Class<Relation<?,?>>) (Class<?>) Relation.class);
 	/** name of index for relating node ids and incoming relations */
-	public static final String IDX_IN_RELATIONS = "idx_in_relations";
+	@SuppressWarnings("unchecked")
+	public static final IndexID<String, Relation<?,?>> IDX_IN_RELATIONS = new IndexID<>(
+			"idx_in_relations", String.class, (Class<Relation<?,?>>) (Class<?>) Relation.class);
 	// ======================================< index names
 
 	// ======================================> keywords for features
@@ -250,7 +271,7 @@ public class SaltUtil {
 	public static final String SEMANTICS_UNIT = "unit";
 
 	// ======================================< keywords for semantics
-
+	
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
 	 * qualified name: qname= NAMESPACE {@value #NAMESPACE_SEPERATOR} NAME.
@@ -378,7 +399,7 @@ public class SaltUtil {
 					}
 				}
 			} else if (id.getIdentifiableElement() instanceof SRelation) {
-				SRelation<SNode, SNode> sRel = (SRelation<SNode, SNode>) id.getIdentifiableElement();
+				SRelation<?, ?> sRel = (SRelation<?, ?>) id.getIdentifiableElement();
 				if ((sRel.getGraph() != null)) {
 					if (sRel.getGraph() instanceof SCorpusGraph) {
 						graph = (SCorpusGraph) sRel.getGraph();
@@ -541,7 +562,7 @@ public class SaltUtil {
 	public static void moveCorpusGraph(SCorpusGraph source, SCorpusGraph target) {
 		// copy all sRelations and source and target SNode as well from loaded
 		// graph into existing one
-		for (SRelation<SNode, SNode> sRelation : new LinkedList<>(source.getRelations())) {
+		for (SRelation<? extends SNode, ? extends SNode> sRelation : new LinkedList<>(source.getRelations())) {
 			if (target.getNode(sRelation.getSource().getId()) == null)
 				target.addNode(sRelation.getSource());
 			if (target.getNode(sRelation.getTarget().getId()) == null)

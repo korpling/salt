@@ -367,7 +367,7 @@ public class DocumentStructureDiffTest {
 		SPointingRelation pr1 = SaltFactory.createSPointingRelation();
 		pr1.setSource((SToken) template.getNodes().get(1));
 		pr1.setTarget((SToken) template.getNodes().get(2));
-		pr1.setGraph(template);
+		template.addRelation(pr1);
 
 		assertFalse(getFixture().isIsomorph());
 
@@ -388,11 +388,11 @@ public class DocumentStructureDiffTest {
 		SLayer otherLayer = SaltFactory.createSLayer();
 		other.addLayer(otherLayer);
 
-		template.getTokens().get(0).addLayer(tempLayer);
-		other.getTokens().get(0).addLayer(otherLayer);
+		tempLayer.addNode(template.getTokens().get(0));
+		otherLayer.addNode(other.getTokens().get(0));
 
 		assertTrue(getFixture().isIsomorph());
-		template.getTokens().get(1).addLayer(tempLayer);
+		tempLayer.addNode(template.getTokens().get(1));
 		assertFalse(getFixture().isIsomorph());
 	}
 
@@ -666,7 +666,7 @@ public class DocumentStructureDiffTest {
 		spanTokens.add(docTokens.get(10));
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "page");
-		sSpan.addLayer(docTextLayer);
+		docTextLayer.addNode(sSpan);
 
 		// line3:
 		spanTokens.clear();
@@ -678,7 +678,7 @@ public class DocumentStructureDiffTest {
 		spanTokens.add(docTokens.get(10));
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "line");
-		sSpan.addLayer(docTextLayer);
+		docTextLayer.addNode(sSpan);
 
 		return (doc1);
 	}

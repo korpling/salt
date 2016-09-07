@@ -36,17 +36,7 @@ public interface Node extends IdentifiableElement {
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph getGraph();
-
-	/**
-	 * Sets the container graph of this node. The passed graph and this node
-	 * will be double chained, which means the method {@link Graph#getNodes()}
-	 * will return a list containing this node.
-	 * 
-	 * @param graph
-	 *            graph which contains this node
-	 */
-	public void setGraph(Graph graph);
+	public Graph<?,?,?> getGraph();
 
 	/**
 	 * Returns all layers containing this node. This is a computed set and only
@@ -55,22 +45,6 @@ public interface Node extends IdentifiableElement {
 	 * 
 	 * @return a set of layers containing this node
 	 */
-	public Set<? extends Layer> getLayers();
+	public Set<? extends Layer<?,?>> getLayers();
 
-	/**
-	 * Adds this node to the passed layer. If this node is not already contained
-	 * in the layer's graph, it will be added to the graph.
-	 * 
-	 * @param layer
-	 *            to which this node should be added
-	 */
-	public void addLayer(Layer layer);
-
-	/**
-	 * Removes this node from the passed layer.
-	 * 
-	 * @param layer
-	 *            from which this node should be removed
-	 */
-	public void removeLayer(Layer layer);
 }

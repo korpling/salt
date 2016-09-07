@@ -210,7 +210,7 @@ public class GraphMLWriter {
 		w.writeEndElement();
 	}
 
-	private static void writeEdge(XMLStreamWriter w, Relation r, IDManager ids, Set<String> existingKeys) throws XMLStreamException {
+	private static void writeEdge(XMLStreamWriter w, Relation<? extends IdentifiableElement, ? extends IdentifiableElement> r, IDManager ids, Set<String> existingKeys) throws XMLStreamException {
 		w.writeStartElement(NS, "edge");
 		w.writeAttribute("id", ids.getID(r));
 		w.writeAttribute("source", ids.getID(r.getSource()));
@@ -228,7 +228,7 @@ public class GraphMLWriter {
 
 		}
 		List<SNode> nodes = g.getNodes();
-		List<SRelation<SNode, SNode>> relations = g.getRelations();
+		List<SRelation<? extends SNode, ? extends SNode>> relations = g.getRelations();
 		// graphs without nodes are not allowed
 		if (nodes != null && !nodes.isEmpty()) {
 			w.writeStartElement(NS, "graph");
@@ -244,7 +244,7 @@ public class GraphMLWriter {
 			}
 
 			if (relations != null) {
-				for (SRelation e : relations) {
+				for (SRelation<?,?> e : relations) {
 					writeEdge(w, e, ids, existingKeys);
 				}
 			}

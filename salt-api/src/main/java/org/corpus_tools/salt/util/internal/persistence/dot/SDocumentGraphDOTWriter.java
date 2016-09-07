@@ -244,11 +244,11 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 	protected static final String KW_DOT_STORED = KW_DOT_NS + "stored";
 
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order) {
 	}
 
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<SNode, SNode> relation, SNode currNode, long order) {
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<? extends SNode, ? extends  SNode> relation, SNode currNode, long order) {
 		return (true);
 	}
 
@@ -338,7 +338,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation relation, SNode fromNode, long order) {
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<?,?> relation, SNode fromNode, long order) {
 		SNode currSNode = (SNode) currNode;
 		SNode fromSNode = null;
 		if (fromNode != null) {

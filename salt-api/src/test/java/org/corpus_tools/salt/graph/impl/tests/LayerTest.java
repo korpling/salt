@@ -62,7 +62,7 @@ public class LayerTest {
 		return GraphFactory.createNode();
 	}
 	
-	protected Relation createRelation() {
+	protected Relation<Node,Node> createRelation() {
 		return GraphFactory.createRelation();
 	}
 
@@ -75,23 +75,13 @@ public class LayerTest {
 		assertNull(getFixture().getGraph());
 
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		getFixture().setGraph(graph);
+		graph.addLayer(getFixture());
 		assertEquals(getFixture().getGraph(), graph);
 
-		getFixture().setGraph(null);
+		graph.removeLayer(getFixture());
 		assertNull(getFixture().getGraph());
 		assertEquals(0, graph.getLayers().size());
 
-	}
-
-	/**
-	 * Tests the double chaining with Graph.
-	 */
-	@Test
-	public void testDoubleChaining() {
-		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		getFixture().setGraph(graph);
-		assertTrue("only contains " + graph.getLayers(), graph.getLayers().contains(getFixture()));
 	}
 
 	/**
@@ -161,7 +151,7 @@ public class LayerTest {
 	@Test
 	public void testDoubleChainingAddNode() {
 		// prerequirements
-		Graph graph = createGraph();
+		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 		graph.addLayer(getFixture());
 
 		List<Node> nodes = new ArrayList<>();
@@ -192,7 +182,7 @@ public class LayerTest {
 		}
 		assertEquals(nodes.size(), getFixture().getNodes().size());
 		for (Node node : nodes) {
-			node.removeLayer(getFixture());
+			getFixture().removeNode(node);
 		}
 		assertEquals(0, getFixture().getNodes().size());
 	}

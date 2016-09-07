@@ -17,51 +17,21 @@
  */
 package org.corpus_tools.salt.index;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.corpus_tools.salt.exceptions.SaltException;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
 @SuppressWarnings("serial")
-public class IndexMgrImpl implements IndexMgr {
+public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 	private final ReadWriteLock lock = new ReentrantReadWriteLock();
 
-	private static class Index<K, V> implements Serializable {
-
-		final Multimap<K, V> map;
-		final Class<K> keyClass;
-		final Class<V> valueClass;
-
-		public Index(Multimap<K, V> map, Class<K> keyClass, Class<V> valueClass) {
-			if (map== null){
-				throw new IllegalArgumentException("Cannot create Index with empty map parameter. ");
-			}
-			if (keyClass== null){
-				throw new IllegalArgumentException("Cannot create Index with empty keyClass parameter. ");
-			}
-			if (valueClass== null){
-				throw new IllegalArgumentException("Cannot create Index with empty valueClass parameter. ");
-			}
-
-			this.map = map;
-			this.keyClass = keyClass;
-			this.valueClass = valueClass;
-		}
-
-	}
-
-	private Map<String, Index> indexes;
 	private final boolean threadSafe;
 
 	public IndexMgrImpl() {
@@ -70,120 +40,115 @@ public class IndexMgrImpl implements IndexMgr {
 
 	public IndexMgrImpl(boolean threadSafe) {
 		this.threadSafe = threadSafe;
-
-		indexes = Maps.newHashMap();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 **/
 	@Override
-	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType) {
-		createIndex(indexId, keyType, valueType, -1, -1);
+	public <K, V> void createIndex(IndexID<K,V> indexId) {
+		createIdx(indexId, -1, -1);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 **/
 	@Override
-	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey) {
+	public <K, V> void createIndex(IndexID<K,V> indexId, int expectedKeys, int expectedValuesPerKey) {
 		if (threadSafe) {
 			lock.writeLock().lock();
 			try {
-				createIndex_intern(indexId, keyType, valueType, expectedKeys, expectedValuesPerKey);
+				createIndex_intern(indexId, expectedKeys, expectedValuesPerKey);
 			} finally {
 				lock.writeLock().unlock();
 			}
 		} else {
-			createIndex_intern(indexId, keyType, valueType, expectedKeys, expectedValuesPerKey);
+			createIndex_intern(indexId, expectedKeys, expectedValuesPerKey);
 		}
 	}
 
-	private <K, V> void createIndex_intern(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey) {
-		if (this.containsIndex(indexId)) {
+	private <K, V> void createIndex_intern(IndexID<K,V> indexId, int expectedKeys, int expectedValuesPerKey) {
+		if (this.containsIdx(indexId)) {
 			throw new SaltException("Cannot add the given index, because an index with this id already exists: " + indexId);
 		}
-		Multimap<K, V> map;
-		if ((expectedKeys > 0) && (expectedValuesPerKey > 0)) {
-			map = ArrayListMultimap.create(expectedKeys, expectedValuesPerKey);
-		} else {
-			map = ArrayListMultimap.create();
-		}
-		indexes.put(indexId, new Index<>(map, keyType, valueType));
+		
+		createIdx(indexId, expectedKeys, expectedValuesPerKey);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public boolean containsIndex(String indexId) {
+	public boolean containsIndex(IndexID<?,?> indexId) {
 		if (threadSafe) {
 			lock.readLock().lock();
 			try {
-				return indexes.containsKey(indexId);
+				return containsIdx(indexId);
 			} finally {
 				lock.readLock().unlock();
 			}
 		} else {
-			return indexes.containsKey(indexId);
+			return containsIdx(indexId);
 		}
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K, V> boolean put(String indexId, K key, V value) {
-		if (threadSafe) {
-			lock.writeLock().lock();
-		}
-
-		try {
-			if (indexId != null && key != null && value != null) {
-				Index idx = indexes.get(indexId);
-				if (idx != null) {
-					if (idx.keyClass.isAssignableFrom(key.getClass()) && idx.valueClass.isAssignableFrom(value.getClass())) {
-						return idx.map.put(key, value);
-					} else {
-						if (!idx.keyClass.isAssignableFrom(key.getClass())) {
-							throw new ClassCastException("The type passed key '" + key.getClass() + "' is not assignable to '" + idx.keyClass + "'. ");
-						}
-						if (!idx.valueClass.isAssignableFrom(value.getClass())) {
-							throw new ClassCastException("The type passed value '" + value.getClass() + "' is not assignable to '" + idx.valueClass + "'. ");
-						}
-					}
-				}
-			}
-			return false;
-		} finally {
+	public <K, V> boolean put(IndexID<K,V> indexId, K key, V value) {
+		
+		if (indexId != null && key != null && value != null) {
 			if (threadSafe) {
-				lock.writeLock().unlock();
-			}
-		}
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public <K, V> boolean putAll(String indexId, K key, Collection<V> values) {
-		if (threadSafe) {
-			lock.writeLock().lock();
-		}
-
-		try {
-			if (indexId != null && key != null && values != null && !values.isEmpty()) {
-				Index idx = indexes.get(indexId);
-
-				if (idx.keyClass.isAssignableFrom(key.getClass()) && idx.valueClass.isAssignableFrom(values.iterator().next().getClass())) {
-					return idx.map.putAll(key, values);
+				lock.writeLock().lock();
+				try {
+					return put_internal(indexId, key, value);
+				} finally {
+					lock.writeLock().unlock();
 				}
+			} else {
+				return put_internal(indexId, key, value);
 			}
+		}
+		return false;
+	}
+	
+	private <K, V> boolean put_internal(IndexID<K,V> indexId, K key, V value) {
+		Multimap<K,V> idx = getIdx(indexId);
+		if(idx != null) {
+			return idx.put(key, value);
+		} else {
 			return false;
-		} finally {
-			if (threadSafe) {
-				lock.writeLock().unlock();
-			}
 		}
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K, V> V get(String indexId, K key) {
+	public <K, V> boolean putAll(IndexID<K,V> indexId, K key, Collection<? extends V> values) {
+		
+		if (indexId != null && key != null && values != null && !values.isEmpty()) {
+			if (threadSafe) {
+				lock.writeLock().lock();
+				try {
+					return putAll_internal(indexId, key, values);
+				} finally {
+					lock.writeLock().unlock();
+				}
+			} else {
+				return putAll_internal(indexId, key, values);
+			}
+		}
+		return false;
+	}
+	
+	private <K, V> boolean putAll_internal(IndexID<K,V> indexId, K key, Collection<? extends V> values) {
+		Multimap<K,V> idx = getIdx(indexId);
+		if(idx != null) {
+			return idx.putAll(key, values);
+		} else {
+			return false;
+		}
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public <K, V> V get(IndexID<K,V> indexId, K key) {
 		V result = null;
 		if (indexId != null && key != null) {
 			if (threadSafe) {
@@ -191,11 +156,11 @@ public class IndexMgrImpl implements IndexMgr {
 			}
 
 			try {
-				Index idx = indexes.get(indexId);
-				if (idx != null) {
-					Collection<V> col = idx.map.get(key);
-					if (!col.isEmpty()) {
-						result = col.iterator().next();
+				Multimap<K,V> idx = getIdx(indexId);
+				if(idx != null) {
+					Collection<V> values = idx.get(key);
+					if(!values.isEmpty()) {
+						result = values.iterator().next();
 					}
 				}
 			} finally {
@@ -209,20 +174,20 @@ public class IndexMgrImpl implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K, V> List<V> getAll(String indexId, K key) {
+	public <K, V> List<V> getAll(IndexID<K,V> indexId, K key) {
 		if (indexId != null && key != null) {
 			if (threadSafe) {
 				lock.readLock().lock();
 			}
 
 			try {
-				Index idx = indexes.get(indexId);
-				if (idx != null) {
-					Collection<V> col = idx.map.get(key);
-					if (col instanceof List) {
-						return (Collections.unmodifiableList((List<V>) col));
+				Multimap<K,V> idx = getIdx(indexId);
+				if(idx != null) {
+					Collection<V> values = idx.get(key);
+					if(values instanceof List) {
+						return Collections.unmodifiableList((List<V>) values);
 					} else {
-						return Collections.unmodifiableList(new ArrayList<>(col));
+						return new ArrayList<>(values);
 					}
 				}
 			} finally {
@@ -236,125 +201,137 @@ public class IndexMgrImpl implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K> boolean containsKey(String indexId, K key) {
+	public <K,V> boolean containsKey(IndexID<K, V> indexId, K key) {
 		boolean result = false;
 		if (indexId != null && key != null) {
 			if (threadSafe) {
 				lock.readLock().lock();
-			}
-
-			try {
-				Index idx = indexes.get(indexId);
-				if (idx != null) {
-					result = idx.map.containsKey(key);
-				}
-			} finally {
-				if (threadSafe) {
+				try {
+					result = containsKey_internal(indexId, key);
+				} finally {
 					lock.readLock().unlock();
 				}
+			} else {
+				result = containsKey_internal(indexId, key);
 			}
 		}
 		return result;
 	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public <K> boolean remove(String indexId, K key) {
-		if (indexId != null && key != null) {
-			if (threadSafe) {
-				lock.writeLock().lock();
-			}
-
-			try {
-				Index idx = indexes.get(indexId);
-				if (idx != null && idx.keyClass.isAssignableFrom(key.getClass())) {
-					return !idx.map.removeAll(key).isEmpty();
-				}
-			} finally {
-				if (threadSafe) {
-					lock.writeLock().unlock();
-				}
-			}
-		}
-		return false;
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public <K, V> boolean remove(String indexId, K key, V value) {
-		if (indexId != null && key != null && value != null) {
-			if (threadSafe) {
-				lock.writeLock().lock();
-			}
-
-			try {
-				Index idx = indexes.get(indexId);
-
-				if (idx != null && idx.keyClass.isAssignableFrom(key.getClass()) && idx.valueClass.isAssignableFrom(value.getClass())) {
-					return idx.map.remove(key, value);
-				}
-
-			} finally {
-				if (threadSafe) {
-					lock.writeLock().unlock();
-				}
-			}
-		}
-		return false;
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public boolean removeIndex(String indexId) {
-		if (threadSafe) {
-			lock.writeLock().lock();
-			try {
-				if (indexes.remove(indexId) == null) {
-					return true;
-				}
-				return false;
-			} finally {
-				lock.writeLock().unlock();
-			}
+	
+	private <K,V> boolean containsKey_internal(IndexID<K, V> indexId, K key) {
+		Multimap<K,V> idx = getIdx(indexId);
+		
+		if (idx != null) {
+			return idx.containsKey(key);
 		} else {
-			if (indexes.remove(indexId) == null) {
-				return true;
-			}
 			return false;
 		}
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public void clearIndex(String indexId) {
-		if (threadSafe) {
-			lock.writeLock().lock();
-		}
-
-		try {
-			Index idx = indexes.get(indexId);
-			if (idx != null) {
-				idx.map.clear();
-			}
-		} finally {
+	public <K> boolean remove(IndexID<K, ?> indexId, K key) {
+		if (indexId != null && key != null) {
 			if (threadSafe) {
-				lock.writeLock().unlock();
+				lock.writeLock().lock();
+				try {
+					return remove_internal(indexId, key);
+				} finally {
+					lock.writeLock().unlock();
+				}
+			} else {
+				return remove_internal(indexId, key);
+			}			
+		}
+		return false;
+	}
+	
+	private <K> boolean remove_internal(IndexID<K, ?> indexId, K key) {
+		Multimap<K,?> idx = getIdx(indexId);
+		if (idx != null) {
+			return !idx.removeAll(key).isEmpty();
+		} else {
+			return false;
+		}
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public <K,V> boolean remove(IndexID<K, V> indexId, K key, V value) {
+		if (indexId != null && key != null && value != null) {
+			if (threadSafe) {
+				lock.writeLock().lock();
+				try {
+					return remove_internal(indexId, key, value);
+				} finally {
+					lock.writeLock().unlock();
+				}
+			} else {
+				return remove_internal(indexId, key, value);
 			}
+		}
+		return false;
+	}
+	
+	public <K,V> boolean remove_internal(IndexID<K, V> indexId, K key, V value) {
+		Multimap<K,V> idx = getIdx(indexId);
+
+		if (idx != null) {
+			return idx.remove(key, value);
+		} else {
+			return false;
 		}
 	}
 
+	/** {@inheritDoc} **/
+	@Override
+	public boolean removeIndex(IndexID<?, ?> indexId) {
+		if (threadSafe) {
+			lock.writeLock().lock();
+			try {
+				return removeIdx(indexId);
+			} finally {
+				lock.writeLock().unlock();
+			}
+		} else {
+			return removeIdx(indexId);
+		}
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public void clearIndex(IndexID<?, ?> indexId) {
+		
+		if (threadSafe) {
+			lock.writeLock().lock();
+			try {
+				clearIndex_internal(indexId);
+			} finally {
+				lock.writeLock().unlock();
+			}
+		} else {
+			clearIndex_internal(indexId);
+		}		
+	}
+	
+	private void clearIndex_internal(IndexID<?, ?> indexId) {
+		Multimap<?,?> idx = getIdx(indexId);
+		if (idx != null) {
+			idx.clear();
+		}
+	}
 	/** {@inheritDoc} **/
 	@Override
 	public void removeAll() {
 		if (threadSafe) {
 			lock.writeLock().lock();
 			try {
-				indexes.clear();
+				super.clear();
 			} finally {
 				lock.writeLock().unlock();
 			}
 		} else {
-			indexes.clear();
+			super.clear();
 		}
 	}
 
@@ -366,21 +343,19 @@ public class IndexMgrImpl implements IndexMgr {
 	 * @return true, if removing was successful
 	 */
 	@Override
-	public <V> boolean removeValue(V element) {
+	public <V> boolean removeValue(V element, Class<V> valueClass) {
 		boolean result = false;
 
-		if (element != null) {
+		if (element != null && valueClass != null) {
 			if (threadSafe) {
 				lock.writeLock().lock();
 			}
 
 			try {
-				for (Entry<String, Index> e : indexes.entrySet()) {
-					// only search for the value if it is possible to store this
-					// type of data in the index
-					if (e.getValue().valueClass.isAssignableFrom(element.getClass())) {
-						result = e.getValue().map.values().remove(element) || result;
-					}
+				// only search for the value if it is possible to store this
+				// type of data in the index
+				for(Multimap<?, V> map : getIdxForValueType(valueClass)) {
+					result = map.values().remove(element) || result;
 				}
 			} finally {
 				if (threadSafe) {
@@ -393,43 +368,34 @@ public class IndexMgrImpl implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public <V> boolean removeValue(String indexId, V element) {
+	public <V> boolean removeValue(IndexID<?, V> indexId, V element) {
 		boolean result = false;
 
 		if (indexId != null && element != null) {
 			if (threadSafe) {
 				lock.writeLock().lock();
-			}
-
-			try {
-				Index idx = indexes.get(indexId);
-
-				if (idx != null && idx.valueClass.isAssignableFrom(element.getClass())) {
-					result = idx.map.values().remove(element);
-				}
-			} finally {
-				if (threadSafe) {
+				try {
+					result = removeValue_internal(indexId, element);
+				} finally {
 					lock.writeLock().unlock();
+					
 				}
-			}
+			} else {
+				result = removeValue_internal(indexId, element);
+			}			
 		}
 
 		return result;
 	}
+	
+	private <V> boolean removeValue_internal(IndexID<?, V> indexId, V element) {
+		Multimap<?,V> idx = getIdx(indexId);
 
-	/**
-	 * 
-	 */
-	@Override
-	public String toString() {
-		StringBuilder str = new StringBuilder();
-		for (Map.Entry<String, Index> indexEntry : indexes.entrySet()) {
-			str.append(indexEntry.getKey());
-			str.append(": ");
-			str.append(indexEntry.getValue().map);
-			str.append(",\n");
+		if (idx != null) {
+			return idx.values().remove(element);
+		} else {
+			return false;
 		}
-
-		return (str.toString());
 	}
+	
 }

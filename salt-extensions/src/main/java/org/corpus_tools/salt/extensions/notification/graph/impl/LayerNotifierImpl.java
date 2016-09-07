@@ -30,7 +30,11 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.LayerImpl;
 
 @SuppressWarnings("serial")
-public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends LayerImpl<N, R> implements Layer<N, R>, Notifier {
+public class LayerNotifierImpl
+	<
+	N extends Node, 
+	R extends Relation<? extends N, ? extends N>
+	> extends LayerImpl<N, R> implements Layer<N, R>, Notifier {
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 
@@ -105,7 +109,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 	}
 
 	@Override
-	public void removeNode(N node) {
+	public void removeNode(Node node) {
 		super.removeNode(node);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LAYER_NODES, node, null, this);
@@ -113,7 +117,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 	}
 
 	@Override
-	public void addRelation(Relation<? extends N, ? extends N> relation) {
+	public void addRelation(R relation) {
 		super.addRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LAYER_RELATIONS, null, relation, this);
@@ -121,7 +125,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<N, N>> extends
 	}
 
 	@Override
-	public void removeRelation(Relation<? extends N, ? extends N> relation) {
+	public void removeRelation(Relation<?,?> relation) {
 		super.removeRelation(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LAYER_RELATIONS, relation, null, this);

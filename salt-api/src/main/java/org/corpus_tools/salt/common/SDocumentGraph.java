@@ -124,7 +124,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            type of relations
 	 * @return a list of relations matching passed type
 	 */
-	public List<SRelation> getRelations(SALT_TYPE type);
+	public List<? extends SRelation<?, ?>> getRelations(SALT_TYPE type);
 
 	/**
 	 * Returns all relations of the passed class.
@@ -133,7 +133,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            class of relations
 	 * @return a list of relations matching passed class
 	 */
-	public List<SRelation> getRelations(Class<?> clazz);
+	public List<? extends SRelation<?, ?>> getRelations(Class<?> clazz);
 
 	/**
 	 * Returns all nodes of the passed type.
@@ -174,7 +174,7 @@ public interface SDocumentGraph extends SGraph {
 	/**
 	 * Creates and returns a '<em><b>SRelation</b></em>' of the type given by
 	 * sRelationType between source and target. Note that the source is required
-	 * to be in the SDocumentGraph already and that the elationType may only be
+	 * to be in the SDocumentGraph already and that the relationType may only be
 	 * one of {@link SALT_TYPE#STEXTUAL_RELATION},
 	 * {@link SALT_TYPE#SSPANNING_RELATION},
 	 * {@link SALT_TYPE#SDOMINANCE_RELATION} and
@@ -188,7 +188,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            type of the relation to be created between source and target
 	 * @return created relation
 	 */
-	public SRelation addNode(SNode source, SNode target, SALT_TYPE relationType);
+	public SRelation<? extends SNode, ? extends SNode> addNode(SNode source, SNode target, SALT_TYPE relationType);
 
 	/**
 	 * Creates and adds a new {@link STextualDS} node object and sets its text
@@ -213,7 +213,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            token
 	 * @return returns the created token
 	 */
-	public SToken createToken(List<DataSourceSequence> sequences);
+	public SToken createToken(List<DataSourceSequence<Integer>> sequences);
 
 	/**
 	 * Creates a new {@link SToken} object and adds it to the graph. The
@@ -226,7 +226,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            the sequence which shall be overlapped by the created token
 	 * @return returns the created token
 	 */
-	public SToken createToken(DataSourceSequence sequence);
+	public SToken createToken(DataSourceSequence<Integer> sequence);
 
 	/**
 	 * Creates a new {@link SSpan} object, adds it to the graph and returns the
@@ -307,7 +307,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SToken} objects which refer or overlap the
 	 *         passed sequence
 	 */
-	public List<SToken> getTokensBySequence(DataSourceSequence sequence);
+	public List<SToken> getTokensBySequence(DataSourceSequence<?> sequence);
 
 	/**
 	 * Returns all {@link SSpan} objects which refer to the passed
@@ -321,7 +321,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SSpan} objects which refer or overlap the passed
 	 *         sequence
 	 */
-	public List<SSpan> getSpansBySequence(DataSourceSequence sequence);
+	public List<SSpan> getSpansBySequence(DataSourceSequence<?> sequence);
 
 	/**
 	 * Returns all {@link SStructure} objects which refer to the passed
@@ -335,7 +335,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SStructure} objects which refer or overlap the
 	 *         passed sequence
 	 */
-	public List<SStructure> getStructuresBySequence(DataSourceSequence sequence);
+	public List<SStructure> getStructuresBySequence(DataSourceSequence<?> sequence);
 
 	/**
 	 * Returns all {@link SNode} objects which refer to the passed
@@ -349,7 +349,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return a list of {@link SNode} objects which refer or overlap the passed
 	 *         sequence
 	 */
-	public List<SNode> getNodesBySequence(DataSourceSequence sequence);
+	public List<SNode> getNodesBySequence(DataSourceSequence<?> sequence);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
@@ -364,7 +364,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
+	public List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
@@ -379,7 +379,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<DataSourceSequence> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
+	public List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is
@@ -505,7 +505,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            the offset in the data source where the created token ends
 	 * @return the created token
 	 */
-	public SToken createToken(SSequentialDS sequentialDS, Integer start, Integer end);
+	public SToken createToken(SSequentialDS<?,Integer> sequentialDS, Integer start, Integer end);
 
 	/**
 	 * Tokenizes all {@link STextualDS} object being contained in this
@@ -643,7 +643,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+
 	 * @return the created relation
 	 */
-	public SRelation createRelation(SNode source, SNode target, SALT_TYPE relationType, String annotations);
+	public SRelation<? extends SNode, ? extends SNode> createRelation(SNode source, SNode target, SALT_TYPE relationType, String annotations);
 
 	/**
 	 * Returns all tokens in the graph, which are overlapped by the passed node

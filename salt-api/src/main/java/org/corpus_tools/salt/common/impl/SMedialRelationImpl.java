@@ -17,17 +17,16 @@
  */
 package org.corpus_tools.salt.common.impl;
 
-import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SMedialDS;
 import org.corpus_tools.salt.common.SMedialRelation;
 import org.corpus_tools.salt.common.SToken;
-import org.corpus_tools.salt.exceptions.SaltParameterException;
-import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 
+@SuppressWarnings("serial")
 public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedialDS, Double> implements SMedialRelation {
 	/** Initializes an object of type {@link SMedialRelationImpl}. **/
 	public SMedialRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -39,22 +38,8 @@ public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedial
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SMedialRelationImpl(Relation delegate) {
-		super(delegate);
+	public SMedialRelationImpl(Relation<SToken, SMedialDS> delegate) {
+		super(delegate, SToken.class, SMedialDS.class, Double.class);
 	}
 
-	/** {@inheritDoc} **/
-	@Override
-	public SDocumentGraph getGraph() {
-		return ((SDocumentGraph) super.getGraph());
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
-		}
-		super.setGraph(graph);
-	}
 } // SAudioDSRelationImpl

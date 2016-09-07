@@ -156,7 +156,7 @@ public class GraphTraverserModule {
 			}
 		}
 		Traverser traverser = new Traverser();
-		traverser.startNodes = (List<SNode>) startNodes;
+		traverser.startNodes = startNodes;
 		traverser.traverseType = traverseType;
 		traverser.traverseId = traverseId;
 		traverser.traverseHandler = traverseHandler;
@@ -193,7 +193,7 @@ public class GraphTraverserModule {
 		/**
 		 * list of nodes where traversal starts
 		 */
-		List<SNode> startNodes = null;
+		List<? extends SNode> startNodes = null;
 		/**
 		 * kind of traversal
 		 */
@@ -262,8 +262,8 @@ public class GraphTraverserModule {
 		private static class NodeEntry {
 			private final SNode node;
 			private int order;
-			private Iterator<SRelation<SNode, SNode>> iterator;
-			private SRelation<SNode, SNode> rel;
+			private Iterator<SRelation<? extends SNode, ? extends SNode>> iterator;
+			private SRelation<? extends SNode, ? extends SNode> rel;
 
 			public NodeEntry(SNode node, int order) {
 				this.node = node;
@@ -290,7 +290,7 @@ public class GraphTraverserModule {
 
 			if (entry.order == 0) {
 				// set the iterator
-				List<SRelation<SNode, SNode>> outRels = getGraph().getOutRelations(entry.node.getId());
+				List<SRelation<?, ?>> outRels = getGraph().getOutRelations(entry.node.getId());
 				if ((outRels != null) && (!outRels.isEmpty())) {
 					entry.iterator = outRels.iterator();
 				}
@@ -312,7 +312,7 @@ public class GraphTraverserModule {
 			// even if something went wrong with the iterator we should be still
 			// able to execute the code (just with less performance)
 			if (entry.iterator == null) {
-				List<SRelation<SNode, SNode>> outRels = getGraph().getOutRelations(entry.node.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> outRels = getGraph().getOutRelations(entry.node.getId());
 				if ((outRels != null) && (!outRels.isEmpty())) {
 					if (entry.order < outRels.size()) {
 						entry.rel = outRels.get(entry.order);
@@ -486,10 +486,10 @@ public class GraphTraverserModule {
 			}
 			final boolean isTopDown = traverseType != GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
 			SNode fromNode = null;
-			SRelation<SNode, SNode> fromRel = null;
+			SRelation<?, ?> fromRel = null;
 			List<SNode> queuedNodes = new ArrayList<>();
 			List<SNode> queueReachedFrom = new ArrayList<>();
-			List<SRelation<SNode, SNode>> queueReachedFromRel = new ArrayList<>();
+			List<SRelation<? extends SNode, ? extends SNode>> queueReachedFromRel = new ArrayList<>();
 			List<Integer> queueReachedOrder = new ArrayList<>();
 
 			queuedNodes.addAll(startNodes);
@@ -505,9 +505,9 @@ public class GraphTraverserModule {
 				fromRel = queueReachedFromRel.remove(0);
 				Integer order = queueReachedOrder.remove(0);
 
-				List<SRelation<SNode, SNode>> edgesIn = getGraph().getInRelations(tNode.getId());
-				List<SRelation<SNode, SNode>> edgesOut = getGraph().getOutRelations(tNode.getId());
-				List<SRelation<SNode, SNode>> edges = null;
+				List<SRelation<? extends SNode, ? extends SNode>> edgesIn = getGraph().getInRelations(tNode.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> edgesOut = getGraph().getOutRelations(tNode.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> edges = null;
 				currentNodePath.add(tNode);
 				traverseHandler.nodeReached(traverseType, traverseId, tNode, fromRel, fromNode, order);
 				if (isTopDown) {
@@ -521,7 +521,7 @@ public class GraphTraverserModule {
 				if (edges != null) {
 					// in case of node has childs
 					int orderCount = 0;
-					for (SRelation<SNode, SNode> e : edges) {
+					for (SRelation<? extends SNode, ? extends SNode> e : edges) {
 						SNode n = null;
 						n = (isTopDown) ? e.getTarget() : e.getSource();
 
@@ -544,65 +544,7 @@ public class GraphTraverserModule {
 		 */
 		private List<SNode> currentNodePath = null;
 
-		/**
-		 * A recursive method, which traverses through the graph in top down and
-		 * depth first order. That means, it follows the direction of the edges
-		 * and always expands the node i first, before a node i+1 will be
-		 * expanded. This method is cyclesafe, therefore the variable
-		 * currentNodePath is used.
-		 * 
-		 * @param rel
-		 *            is the edge, via which the current node (last one in
-		 *            currentPath) was reached
-		 * @param order
-		 *            number of current edge in list of all outgoing edges of
-		 *            the parent node
-		 */
-		private void topDownDepthFirstRec(SRelation<SNode, SNode> rel, long order) {
-			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
-				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
-			}
-			// current node is last element in currentPath
-			SNode currNode = currentNodePath.get(currentNodePath.size() - 1);
-			SNode parent = null;
-			if (currentNodePath.size() > 1) {
-				// if current path is larger then 1, than a parent node exists
-				parent = currentNodePath.get(currentNodePath.size() - 2);
-			}
-			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent, order);
-			// walk through all childs of this node
-			List<SRelation<SNode, SNode>> childEdges = getGraph().getOutRelations(currNode.getId());
-			if (childEdges != null) {
-				// in case of node has childs
-				int i = 0;
-				for (SRelation<SNode, SNode> childRel : childEdges) {
-					SNode childNode = childRel.getTarget();
-
-					if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, childRel, childNode, order)) {
-						if ((isCycleSafe) && (currentNodePath.contains(childNode))) {
-
-							StringBuffer text = new StringBuffer();
-							for (SNode node : currentNodePath) {
-								text.append(node.getId());
-								text.append(" --> ");
-							}
-							text.append(childNode.getId());
-
-							throw new SaltInvalidModelException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + childNode + "' while current path was '" + text.toString() + "'.");
-						}
-
-						currentNodePath.add(childNode);
-						topDownDepthFirstRec(childRel, i);
-						currentNodePath.remove(currentNodePath.size() - 1);
-
-						i++;
-					}
-				}
-			}
-
-			traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent, order);
-		}
-
+		
 		/**
 		 * A recursive method, which traverses through the graph in bottom-up
 		 * and depth-first order. That means, it walk through the graph in
@@ -617,7 +559,7 @@ public class GraphTraverserModule {
 		 *            number of current edge in list of all outgoing edges of
 		 *            the child node
 		 */
-		private void bottomUpDepthFirstRec(SRelation<SNode, SNode> edge, long order) {
+		private void bottomUpDepthFirstRec(SRelation<? extends SNode, ? extends SNode> edge, long order) {
 			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
 				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 			}
@@ -632,11 +574,11 @@ public class GraphTraverserModule {
 			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, currNode, edge, child, order);
 
 			// walk through all childs of this node
-			List<SRelation<SNode, SNode>> parentEdges = getGraph().getInRelations(currNode.getId());
+			List<SRelation<? extends SNode, ? extends SNode>> parentEdges = getGraph().getInRelations(currNode.getId());
 			if (parentEdges != null) {
 				// in case of node has parents
 				int i = 0;
-				for (SRelation<SNode, SNode> parentEdge : parentEdges) {
+				for (SRelation<? extends SNode, ? extends SNode> parentEdge : parentEdges) {
 					SNode parentNode = parentEdge.getSource();
 					if ((isCycleSafe) && (currentNodePath.contains(parentNode)))
 						throw new SaltInvalidModelException("A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '" + traverseType + "'. The cycle has been detected when visiting node '" + parentNode + "' while current path was '" + currentNodePath + "'.");

@@ -37,7 +37,7 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 	/** {@inheritDoc} **/
 	@Override
 	protected IdentifiableElement getDelegate() {
-		return ((IdentifiableElement) delegate);
+		return ((IdentifiableElement) super.getDelegate());
 	}
 
 	/** internal ref to the {@link Identifier} label **/

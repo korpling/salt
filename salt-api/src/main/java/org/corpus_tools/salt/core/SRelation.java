@@ -32,4 +32,7 @@ public interface SRelation<S extends SNode, T extends SNode> extends Relation<S,
 	 */
 	@Override
 	public Set<SLayer> getLayers();
+	
+	@Override
+	SGraph getGraph();
 }

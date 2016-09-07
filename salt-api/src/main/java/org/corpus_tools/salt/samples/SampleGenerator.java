@@ -284,12 +284,12 @@ public class SampleGenerator {
 		document.getDocumentGraph().createTextualDS(PRIMARY_TEXT_EN_SPK1);
 		createTokens(document);
 		document.getDocumentGraph().createTimeline();
-		List<SRelation> timelineRelationsToDelete = new ArrayList<>();
+		List<SRelation<?,?>> timelineRelationsToDelete = new ArrayList<>();
 		for (STimelineRelation timelineRelation : document.getDocumentGraph().getTimelineRelations()) {
 			timelineRelationsToDelete.add(timelineRelation);
 		}
 
-		for (SRelation rel : timelineRelationsToDelete) {
+		for (SRelation<?,?> rel : timelineRelationsToDelete) {
 			document.getDocumentGraph().removeRelation(rel);
 		}
 

@@ -18,9 +18,10 @@
 package org.corpus_tools.salt.common.impl.tests;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SStructuredNode;
 import org.junit.Before;
 
-public class SPointingRelationTest extends SRelationAbstractTest {
+public class SPointingRelationTest extends SRelationAbstractTest<SStructuredNode, SStructuredNode> {
 
 	@Before
 	public void setUp() throws Exception {

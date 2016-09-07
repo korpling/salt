@@ -19,6 +19,8 @@ package org.corpus_tools.salt.graph;
 
 import java.util.Set;
 
+import org.corpus_tools.salt.exceptions.SaltParameterException;
+
 /**
  * In graph theory an relation is a relation between two nodes, often an
  * relation is realized as a pair of nodes.
@@ -37,7 +39,7 @@ import java.util.Set;
  * @param <T>
  *            target node of the relation
  */
-public interface Relation<S extends Node, T extends Node> extends IdentifiableElement {
+public interface Relation<S extends Node ,T extends Node> extends IdentifiableElement {
 
 	/**
 	 * Returns the delegate object. If {@link #delegate} is not null, all
@@ -63,6 +65,17 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	 *            source node
 	 */
 	public void setSource(S source);
+	
+	/**
+	 * Same as {@link #setSource(Node)} but allows any instance of {@link Node} as
+	 * argument. If the argument has an invalid type an {@link SaltParameterException}
+	 * is thrown.
+	 * 
+	 * @param source
+	 * @throws SaltParameterException
+	 */
+	public void setSourceUnsafe(Node source) throws SaltParameterException;
+	
 
 	/**
 	 * Returns the target node of this relation object.
@@ -79,29 +92,24 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	 *            target node
 	 */
 	public void setTarget(T target);
+	
+	/**
+	 * Same as {@link #setTarget(Node)} but allows any instance of {@link Node} as
+	 * argument. If the argument has an invalid type an {@link SaltParameterException}
+	 * is thrown.
+	 * 
+	 * @param source
+	 * @throws SaltParameterException
+	 */
+	public void setTargetUnsafe(Node source) throws SaltParameterException;
 
 	/**
 	 * Returns the container graph of this relation.
 	 * 
 	 * @return graph object which contains this relation.
 	 */
-	public Graph getGraph();
+	public Graph<?,?,?> getGraph();
 
-	/**
-	 * Sets the container graph of this relation.
-	 * 
-	 * @param graph
-	 *            object which contains this relation.
-	 */
-	/**
-	 * Sets the container graph of this relation. The passed graph and this
-	 * relation will be double chained, which means the method
-	 * {@link Graph#getRelations()} will return a list containing this relation.
-	 * 
-	 * @param graph
-	 *            graph which contains this relation
-	 */
-	public void setGraph(Graph graph);
 
 	/**
 	 * Returns all layers containing this relation. This is a computed set and
@@ -110,22 +118,18 @@ public interface Relation<S extends Node, T extends Node> extends IdentifiableEl
 	 * 
 	 * @return a set of layers containing this relation
 	 */
-	public Set<? extends Layer> getLayers();
+	public Set<? extends Layer<?,?>> getLayers();
 
 	/**
-	 * Adds this relation to the passed layer. If this relation is not already
-	 * contained in the layer's graph, it will be added to the graph.
-	 * 
-	 * @param layer
-	 *            to which this node should be added
+	 * Return the {@link Class} object for the source node type.
+	 * @return
 	 */
-	public void addLayer(Layer layer);
-
+	public Class<S> getSourceClass();
+	
 	/**
-	 * Removes this relation from the passed layer.
-	 * 
-	 * @param layer
-	 *            from which this node should be removed
+	 * Return the {@link Class} object for the target node type.
+	 * @return
 	 */
-	public void removeLayer(Layer layer);
+	public Class<T> getTargetClass();
+
 }

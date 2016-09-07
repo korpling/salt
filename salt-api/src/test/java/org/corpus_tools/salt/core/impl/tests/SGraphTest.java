@@ -198,7 +198,7 @@ public class SGraphTest extends SAnnotationContainerTest {
 		SNode node = SaltFactory.createSNode();
 		getFixture().addNode(node);
 
-		SRelation rel = SaltFactory.createSRelation();
+		SRelation<SNode, SNode> rel = SaltFactory.createSRelation();
 		rel.setSource(node);
 		rel.setTarget(node);
 		rel.setName("one");

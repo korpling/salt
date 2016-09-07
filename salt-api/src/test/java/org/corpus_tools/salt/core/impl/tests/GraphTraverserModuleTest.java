@@ -93,7 +93,7 @@ public class GraphTraverserModuleTest {
 		 */
 		private int posInWayBack = 0;
 
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> rel, SNode fromNode, long order) {
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> rel, SNode fromNode, long order) {
 			currentPath.add(currNode);
 			if (!currNode.getId().equalsIgnoreCase(nodeOrderWayThere[posInWayThere])) {
 				String path = null;
@@ -108,7 +108,7 @@ public class GraphTraverserModuleTest {
 			posInWayThere++;
 		}
 
-		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> rel, SNode fromNode, long order) {
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends  SNode> rel, SNode fromNode, long order) {
 			if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST == traversalType || GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST == traversalType) {
 				currentPath.remove(currentPath.size() - 1);
 			}
@@ -130,7 +130,7 @@ public class GraphTraverserModuleTest {
 		 */
 		private List<SNode> currentPath = new ArrayList<>();
 
-		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<SNode, SNode> rel, SNode currNode, long order) {
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<? extends SNode, ? extends SNode> rel, SNode currNode, long order) {
 			boolean retVal = true;
 
 			if (isCycleSafe == false) {// checks if a path in currentPath is
@@ -814,15 +814,15 @@ public class GraphTraverserModuleTest {
 
 		GraphTraverseHandler graphTraverseHandler = new GraphTraverseHandler() {
 			@Override
-			public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
+			public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends  SNode> relation, SNode fromNode, long order) {
 			}
 
 			@Override
-			public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
+			public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order) {
 			}
 
 			@Override
-			public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<SNode, SNode> relation, SNode currNode, long order) {
+			public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<? extends SNode, ? extends SNode> relation, SNode currNode, long order) {
 				if ((relation != null) && (relation.getLabel("name") != null) && (relation.getLabel("name").getValue().equals("notCheck")))
 					return false;
 				else

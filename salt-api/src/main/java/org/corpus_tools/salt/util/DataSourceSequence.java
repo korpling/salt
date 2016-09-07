@@ -35,7 +35,7 @@ public class DataSourceSequence<P extends Number> {
 	public DataSourceSequence() {
 	}
 
-	public DataSourceSequence(SSequentialDS dataSource, P start, P end) {
+	public DataSourceSequence(SSequentialDS<?,?> dataSource, P start, P end) {
 		this.dataSource = dataSource;
 		this.start = start;
 		this.end = end;
@@ -93,12 +93,12 @@ public class DataSourceSequence<P extends Number> {
 	}
 
 	/** data source which is addressed by this sequence **/
-	protected SSequentialDS dataSource;
+	protected SSequentialDS<?,?> dataSource;
 
 	/**
 	 * @return data source which is addressed by this sequence
 	 */
-	public SSequentialDS getDataSource() {
+	public SSequentialDS<?,?> getDataSource() {
 		return dataSource;
 	}
 
@@ -106,7 +106,7 @@ public class DataSourceSequence<P extends Number> {
 	 * @param dataSource
 	 *            data source which is addressed by this sequence
 	 */
-	public void setDataSource(SSequentialDS dataSource) {
+	public void setDataSource(SSequentialDS<?,?> dataSource) {
 		this.dataSource = dataSource;
 	}
 

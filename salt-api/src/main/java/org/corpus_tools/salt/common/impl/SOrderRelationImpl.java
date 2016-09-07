@@ -24,6 +24,7 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
+import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 /**
@@ -38,6 +39,7 @@ import org.corpus_tools.salt.graph.Relation;
 public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode> implements SOrderRelation {
 	/** Initializes an object of type {@link SOrderRelationImpl}. **/
 	public SOrderRelationImpl() {
+		this(null);
 	}
 
 	/**
@@ -49,8 +51,8 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SOrderRelationImpl(Relation delegate) {
-		super(delegate);
+	public SOrderRelationImpl(Relation<SStructuredNode, SStructuredNode> delegate) {
+		super(delegate, SStructuredNode.class, SStructuredNode.class);
 	}
 
 	/** {@inheritDoc} **/
@@ -58,13 +60,13 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-
-	/** {@inheritDoc} **/
+	
 	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
-		super.setGraph(graph);
+		super.basicSetGraph(graph);
 	}
+
 } // SOrderRelationImpl

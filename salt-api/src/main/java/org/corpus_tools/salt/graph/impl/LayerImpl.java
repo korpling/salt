@@ -27,7 +27,12 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class LayerImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Layer<N, R> {
+public class LayerImpl
+	<
+	N extends Node, 
+	R extends Relation<? extends N, ? extends N>
+	> 
+	extends IdentifiableElementImpl implements Layer<N, R> {
 
 	private Set<N> nodes = null;
 	private Set<R> relations = null;
@@ -52,16 +57,17 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	}
 
 	@Override
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
 	protected Layer<N, R> getDelegate() {
-		return (Layer) super.getDelegate();
+		return (Layer<N, R>) super.getDelegate();
 	}
 
 	/** container graph **/
-	protected Graph graph = null;
+	protected Graph<N, R, ?> graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph getGraph() {
+	public Graph<N, R, ?> getGraph() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return (getDelegate().getGraph());
@@ -69,25 +75,6 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 		return (graph);
 	}
 
-	/** {@inheritDoc Relation#setGraph(Graph)} **/
-	@Override
-	public void setGraph(Graph graph) {
-		// delegate method to delegate if set
-		if (getDelegate() != null) {
-			getDelegate().setGraph(graph);
-			return;
-		}
-		if (graph != null) {
-			if (graph instanceof GraphImpl) {
-				((GraphImpl) graph).basicAddLayer(this);
-			}
-		} else {
-			if (getGraph() instanceof GraphImpl) {
-				((GraphImpl) getGraph()).basicRemoveLayer(this);
-			}
-		}
-		basicSetGraph(graph);
-	}
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
@@ -113,14 +100,14 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * @param graph
 	 *            graph which contains this layer
 	 */
-	protected void basicSetGraph(Graph graph) {
-		if (getDelegate() != null && getDelegate() instanceof LayerImpl) {
-			((LayerImpl) getDelegate()).basicSetGraph(graph);
+	protected void basicSetGraph(Graph<N,R,?> graph) {
+		if (getDelegate() != null && getDelegate() instanceof LayerImpl<?,?>) {
+			((LayerImpl<N,R>) getDelegate()).basicSetGraph(graph);
 			return;
 		}
 		// remove from old graph if it was changed
-		if (this.graph != graph && this.graph instanceof GraphImpl) {
-			((GraphImpl) this.graph).basicRemoveLayer(this);
+		if (this.graph != graph && this.graph instanceof GraphImpl<?,?,?>) {
+			((GraphImpl<?,?,?>) this.graph).basicRemoveLayer(this);
 		}
 		this.graph = graph;
 	}
@@ -131,7 +118,7 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+	protected void basicSetGraph_WithoutRemoving(Graph<N,R,?> graph) {
 		this.graph = graph;
 	}
 
@@ -161,7 +148,7 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/** {@inheritDoc Layer#removeNode(Node)} **/
 	@Override
-	public void removeNode(N node) {
+	public void removeNode(Node node) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().removeNode(node);
@@ -186,7 +173,7 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/** {@inheritDoc Layer#addRelation(Relation)} **/
 	@Override
-	public void addRelation(Relation<? extends N, ? extends N> relation) {
+	public void addRelation(R relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addRelation(relation);
@@ -201,7 +188,7 @@ public class LayerImpl<N extends Node, R extends Relation<N, N>> extends Identif
 
 	/** {@inheritDoc Layer#removeRelation(Relation)} **/
 	@Override
-	public void removeRelation(Relation<? extends N, ? extends N> relation) {
+	public void removeRelation(Relation<?,?> relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().removeRelation(relation);

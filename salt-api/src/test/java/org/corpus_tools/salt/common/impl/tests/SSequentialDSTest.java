@@ -20,11 +20,8 @@ package org.corpus_tools.salt.common.impl.tests;
 import org.corpus_tools.salt.common.SSequentialDS;
 import org.junit.Test;
 
-public abstract class SSequentialDSTest<D, P extends Number> extends SNodeAbstractTest {
+public abstract class SSequentialDSTest<D, P extends Number> extends SNodeAbstractTest<SSequentialDS<D, P>> {
 
-	protected SSequentialDS<D, P> getFixture() {
-		return (SSequentialDS<D, P>) fixture;
-	}
 
 	/**
 	 * This method tests whether the set data value is also returned again.

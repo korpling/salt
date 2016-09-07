@@ -49,13 +49,13 @@ public class STokenImpl extends SNodeImpl implements SToken, SStructuredNode {
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-
-	/** {@inheritDoc} **/
+	
 	@Override
-	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
-		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
+		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
-		super.setGraph(graph);
+		super.basicSetGraph(graph);
 	}
+
 }
