@@ -41,9 +41,7 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 
 import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.SaltFactory;
@@ -66,7 +64,11 @@ import org.eclipse.emf.common.util.URI;
 import org.json.JSONException;
 import org.json.JSONWriter;
 
+import com.google.common.base.Charsets;
 import com.google.common.io.ByteStreams;
+
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamWriter;
 
 /**
  * <p>

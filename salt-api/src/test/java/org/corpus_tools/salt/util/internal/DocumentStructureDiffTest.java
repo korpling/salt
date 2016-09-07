@@ -42,6 +42,8 @@ import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
+import org.corpus_tools.salt.util.internal.Diff;
+import org.corpus_tools.salt.util.internal.DocumentStructureDiff;
 import org.junit.Before;
 import org.junit.Test;
 
