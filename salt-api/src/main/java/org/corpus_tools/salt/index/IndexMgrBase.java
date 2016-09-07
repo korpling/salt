@@ -52,7 +52,7 @@ public abstract class IndexMgrBase implements Serializable {
 		if(untypedIdx.indexId.getKeyClass().isAssignableFrom(indexId.getKeyClass()) 
 				&& untypedIdx.indexId.getValueClass().isAssignableFrom(indexId.getValueClass())) {
 			// We can safely cast this since we checked both classes are compatible
-			// and he putIdx(...) function makes sure that the key and value types are synchronized.
+			// and the createIdx(...) function makes sure that the key and value types are synchronized.
 			@SuppressWarnings("unchecked")
 			IndexHolder<K,V> typedIdx = (IndexHolder<K,V>) untypedIdx;
 			return typedIdx.map;
