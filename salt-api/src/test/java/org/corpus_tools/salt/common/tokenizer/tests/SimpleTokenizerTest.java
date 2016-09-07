@@ -83,8 +83,8 @@ public class SimpleTokenizerTest {
 	}
 
 	/**
-	 * Tests the text " This is a test text.", which has to be tokenized into 5
-	 * tokens:
+	 * Tests the text "    This   is   a test  text.", which has to be tokenized
+	 * into 5 tokens:
 	 * <ul>
 	 * <li>This</li>
 	 * <li>is</li>
@@ -109,8 +109,8 @@ public class SimpleTokenizerTest {
 	}
 
 	/**
-	 * Tests the text " This is a test text.", which has to be tokenized into 5
-	 * tokens:
+	 * Tests the text "    This   is   a test  text.", which has to be tokenized
+	 * into 5 tokens:
 	 * <ul>
 	 * <li>This</li>
 	 * <li>is</li>

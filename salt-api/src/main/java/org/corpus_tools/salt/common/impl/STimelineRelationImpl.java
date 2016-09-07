@@ -26,8 +26,7 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STimeline, Integer>
-		implements STimelineRelation {
+public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STimeline, Integer> implements STimelineRelation {
 	/** Initializes an object of type {@link STimelineRelationImpl}. **/
 	public STimelineRelationImpl() {
 	}
@@ -55,8 +54,7 @@ public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STime
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(),
-					"The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}

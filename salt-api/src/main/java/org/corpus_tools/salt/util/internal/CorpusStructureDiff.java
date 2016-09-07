@@ -32,7 +32,6 @@ import org.corpus_tools.salt.util.DIFF_TYPES;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
-
 /**
  * This class compares two corpus structures.
  * 
@@ -71,8 +70,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		final List<SNode> otherRoots = otherObject.getRoots();
 		boolean isIsomorph = true;
 		if (SaltUtil.isNotNullOrEmpty(otherRoots) && SaltUtil.isNotNullOrEmpty(templateRoots)) {
-			final List<SNode> remainingOtherNodes = new ArrayList<>(
-					templateObject.getCorpora().size() + templateObject.getDocuments().size());
+			final List<SNode> remainingOtherNodes = new ArrayList<>(templateObject.getCorpora().size() + templateObject.getDocuments().size());
 			remainingOtherNodes.addAll(otherObject.getCorpora());
 			remainingOtherNodes.addAll(otherObject.getDocuments());
 
@@ -102,8 +100,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 
 			final DifferenceHandler handler = new DifferenceHandler();
 			handler.remainingOtherNodes = remainingOtherNodes;
-			templateObject.traverse(templateRoots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-					"diff_" + templateObject.getId(), handler, false);
+			templateObject.traverse(templateRoots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateObject.getId(), handler, false);
 			if (getDifferences().size() > 0) {
 				return (false);
 			}
@@ -140,14 +137,12 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 					if (templateDoc.getDocumentGraph() != null && otherDoc.getDocumentGraph() != null) {
 						boolean isIsomorph = false;
 						if (!diffsRequested) {
-							isIsomorph = SaltUtil.compare(templateDoc.getDocumentGraph())
-									.with(otherDoc.getDocumentGraph()).useOptions(options).andCheckIsomorphie();
+							isIsomorph = SaltUtil.compare(templateDoc.getDocumentGraph()).with(otherDoc.getDocumentGraph()).useOptions(options).andCheckIsomorphie();
 							if (!isIsomorph) {
 								return false;
 							}
 						} else {
-							final Set<Difference> subDiffs = SaltUtil.compare(templateDoc.getDocumentGraph())
-									.with(otherDoc.getDocumentGraph()).useOptions(options).andFindDiffs();
+							final Set<Difference> subDiffs = SaltUtil.compare(templateDoc.getDocumentGraph()).with(otherDoc.getDocumentGraph()).useOptions(options).andFindDiffs();
 							if (subDiffs.size() > 0) {
 								addDifference(templateDoc, otherDoc, null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
 								isIsomorph = false;
@@ -176,8 +171,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		 * only returns <code>true</code> to traverse the entire graph.
 		 */
 		@Override
-		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation sRelation,
-				SNode currNode, long order) {
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation sRelation, SNode currNode, long order) {
 			boolean retVal = true;
 			if (sRelation != null) {
 				if (visitedRelations.contains(sRelation)) {
@@ -194,8 +188,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		 * is empty.
 		 */
 		@Override
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode templateNode,
-				SRelation sRelation, SNode fromNode, long order) {
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode templateNode, SRelation sRelation, SNode fromNode, long order) {
 			if (fromNode != null && templateNode != null) {
 				final SNode otherParent = getIsoNodes().get(fromNode);
 				boolean hasFoundNode = false;
@@ -224,8 +217,7 @@ public class CorpusStructureDiff extends AbstractDiff<SCorpusGraph> {
 		 * Called by Pepper as callback, when otherGraph is traversed.
 		 */
 		@Override
-		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge,
-				SNode otherNode, long order) {
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation edge, SNode otherNode, long order) {
 		}
 
 	}

@@ -17,6 +17,5 @@
  */
 package org.corpus_tools.salt.common;
 
-public interface STimelineRelation extends SSequentialRelation<SToken, STimeline, Integer>,
-		STimeOverlappingRelation<SToken, STimeline>, SDocumentGraphObject {
+public interface STimelineRelation extends SSequentialRelation<SToken, STimeline, Integer>, STimeOverlappingRelation<SToken, STimeline>, SDocumentGraphObject {
 } // STimelineRelation

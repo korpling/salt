@@ -135,7 +135,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 			((NodeImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
 		}
-
+		
 		this.graph = graph;
 	}
 

@@ -26,8 +26,7 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextualDS, Integer>
-		implements STextualRelation {
+public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextualDS, Integer> implements STextualRelation {
 	/** Initializes an object of type {@link STextualRelationImpl}. **/
 	public STextualRelationImpl() {
 	}
@@ -55,8 +54,7 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(),
-					"The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}

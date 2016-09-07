@@ -41,15 +41,15 @@ public class NodeTest {
 	public void setFixture(Node fixture) {
 		this.fixture = fixture;
 	}
-
+	
 	public Graph createGraph() {
 		return GraphFactory.createGraph();
 	}
-
+	
 	public Layer createLayer() {
 		return GraphFactory.createLayer();
 	}
-
+	
 	public Node createNode() {
 		return GraphFactory.createNode();
 	}

@@ -96,8 +96,7 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 				throw new SaltException("Cannot set the name of this label object, because it is empty.");
 			}
 			if (name.contains(NS_SEPERATOR)) {
-				throw new SaltException(
-						"Cannot set the name to the given, because a namespace with namespace seperaor is illegal.");
+				throw new SaltException("Cannot set the name to the given, because a namespace with namespace seperaor is illegal.");
 			}
 			this.name = name.intern();
 		}
@@ -231,8 +230,7 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 		} else {
 
 			if (other == null) {
-				throw new SaltException("Cannot clone label '" + this
-						+ "', because the given object is null and its not possible to copy values into a null object.");
+				throw new SaltException("Cannot clone label '" + this + "', because the given object is null and its not possible to copy values into a null object.");
 			}
 			other.setNamespace(this.getNamespace());
 			other.setName(this.getName());

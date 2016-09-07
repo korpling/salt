@@ -93,8 +93,7 @@ public class GraphTraverserModuleTest {
 		 */
 		private int posInWayBack = 0;
 
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
-				SRelation<SNode, SNode> rel, SNode fromNode, long order) {
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> rel, SNode fromNode, long order) {
 			currentPath.add(currNode);
 			if (!currNode.getId().equalsIgnoreCase(nodeOrderWayThere[posInWayThere])) {
 				String path = null;
@@ -104,18 +103,13 @@ public class GraphTraverserModuleTest {
 					else
 						path = path + "->" + nodeName;
 				}
-				throw new RuntimeException(
-						"Test fails, another way than expected has been traversed on way there. Expected way was '"
-								+ path + "', but instead of node '" + nodeOrderWayThere[posInWayThere]
-								+ "' at position '" + posInWayThere + "', node '" + currNode.getId() + "' was found.");
+				throw new RuntimeException("Test fails, another way than expected has been traversed on way there. Expected way was '" + path + "', but instead of node '" + nodeOrderWayThere[posInWayThere] + "' at position '" + posInWayThere + "', node '" + currNode.getId() + "' was found.");
 			}
 			posInWayThere++;
 		}
 
-		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
-				SRelation<SNode, SNode> rel, SNode fromNode, long order) {
-			if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST == traversalType
-					|| GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST == traversalType) {
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> rel, SNode fromNode, long order) {
+			if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST == traversalType || GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST == traversalType) {
 				currentPath.remove(currentPath.size() - 1);
 			}
 			if (!currNode.getId().equalsIgnoreCase(nodeOrderWayBack[posInWayBack])) {
@@ -126,10 +120,7 @@ public class GraphTraverserModuleTest {
 					else
 						path = path + "->" + nodeName;
 				}
-				throw new RuntimeException(
-						"Test fails, another way than expected has been traversed on way back. Expected way was '"
-								+ path + "', but instead of node '" + nodeOrderWayBack[posInWayBack] + "' at position '"
-								+ (posInWayBack + 1) + "', node '" + currNode.getId() + "' was found.");
+				throw new RuntimeException("Test fails, another way than expected has been traversed on way back. Expected way was '" + path + "', but instead of node '" + nodeOrderWayBack[posInWayBack] + "' at position '" + (posInWayBack + 1) + "', node '" + currNode.getId() + "' was found.");
 			}
 			posInWayBack++;
 		}
@@ -139,8 +130,7 @@ public class GraphTraverserModuleTest {
 		 */
 		private List<SNode> currentPath = new ArrayList<>();
 
-		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
-				SRelation<SNode, SNode> rel, SNode currNode, long order) {
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<SNode, SNode> rel, SNode currNode, long order) {
 			boolean retVal = true;
 
 			if (isCycleSafe == false) {// checks if a path in currentPath is
@@ -254,11 +244,9 @@ public class GraphTraverserModuleTest {
 			expectedRoots = new ArrayList<>();
 			expectedRoots.add(graph.getNode("node1"));
 			roots = getFixture().getGraph().getRoots();
-			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(),
-					roots.size());
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
 			for (Node expectedRoot : expectedRoots) {
-				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.",
-						roots.contains(expectedRoot));
+				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
 			}
 		} // test 1
 
@@ -269,11 +257,9 @@ public class GraphTraverserModuleTest {
 			expectedRoots.add(graph.getNode("node1"));
 			expectedRoots.add(graph.getNode("node4"));
 			roots = getFixture().getGraph().getRoots();
-			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(),
-					roots.size());
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
 			for (Node expectedRoot : expectedRoots) {
-				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.",
-						roots.contains(expectedRoot));
+				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
 			}
 		} // test 2
 
@@ -284,11 +270,9 @@ public class GraphTraverserModuleTest {
 			expectedRoots.add(graph.getNode("node1"));
 			expectedRoots.add(graph.getNode("node4"));
 			roots = getFixture().getGraph().getRoots();
-			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(),
-					roots.size());
+			assertEquals("The expected number of roots are not the same, as the returned number", expectedRoots.size(), roots.size());
 			for (Node expectedRoot : expectedRoots) {
-				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.",
-						roots.contains(expectedRoot));
+				assertTrue("The list of returned roots does not contain expected root '" + expectedRoot.getId() + "'.", roots.contains(expectedRoot));
 			}
 		} // test 3
 	}
@@ -312,11 +296,9 @@ public class GraphTraverserModuleTest {
 			expectedLeafs.add(graph.getNode("node5"));
 			expectedLeafs.add(graph.getNode("node7"));
 			leafs = getFixture().getGraph().getLeafs();
-			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(),
-					leafs.size());
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
 			for (Node expectedLeaf : expectedLeafs) {
-				assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.",
-						leafs.contains(expectedLeaf));
+				assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 			}
 		} // test 1
 
@@ -327,11 +309,9 @@ public class GraphTraverserModuleTest {
 			expectedLeafs.add(graph.getNode("node3"));
 			expectedLeafs.add(graph.getNode("node6"));
 			leafs = getFixture().getGraph().getLeafs();
-			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(),
-					leafs.size());
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
 			for (Node expectedLeaf : expectedLeafs) {
-				assertTrue("The list of returned leafs does not contain expected leaf '" + expectedLeaf.getId() + "'.",
-						leafs.contains(expectedLeaf));
+				assertTrue("The list of returned leafs does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 			}
 		} // test 2
 
@@ -341,11 +321,9 @@ public class GraphTraverserModuleTest {
 			expectedLeafs = new ArrayList<SNode>();
 			expectedLeafs.add(graph.getNode("node3"));
 			leafs = getFixture().getGraph().getLeafs();
-			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(),
-					leafs.size());
+			assertEquals("The expected number of leafs are not the same, as the returned number", expectedLeafs.size(), leafs.size());
 			for (Node expectedLeaf : expectedLeafs) {
-				assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.",
-						leafs.contains(expectedLeaf));
+				assertTrue("The list of returned roots does not contain expected leaf '" + expectedLeaf.getId() + "'.", leafs.contains(expectedLeaf));
 			}
 		} // test 3
 	}
@@ -541,8 +519,7 @@ public class GraphTraverserModuleTest {
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-				"test_TOP_DOWN_DEPTH_FIRST_Tree", checker);
+		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_Tree", checker);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -558,8 +535,7 @@ public class GraphTraverserModuleTest {
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-				"test_TOP_DOWN_DEPTH_FIRST_DAG", checker);
+		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_DAG", checker);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -571,16 +547,14 @@ public class GraphTraverserModuleTest {
 	@Test
 	public void testTraverse_TOP_DOWN_DEPTH_FIRST_Cycle() throws Exception {
 		SGraph graph = TestHelper.createGraph_Cycle();
-		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node6", "node7",
-				"node2" };
+		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node6", "node7", "node2" };
 		String[] nodeOrderWayBack = { "node3", "node6", "node2", "node1", "node3", "node6", "node2", "node4" };
 		TraverserChecker checker = new TraverserChecker();
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
 		try {
-			getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-					"test_TOP_DOWN_DEPTH_FIRST_Cycle", checker);
+			getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_Cycle", checker);
 			assertTrue(checker.checkNumberOfTraversedNodes());
 			fail("The graph contains a cycle, that shall invoke an exception.");
 		} catch (Exception e) {
@@ -593,16 +567,14 @@ public class GraphTraverserModuleTest {
 	@Test
 	public void testTraverse_TOP_DOWN_DEPTH_FIRST_CycleUnsafe() {
 		SGraph graph = TestHelper.createGraph_SimpleCycle();
-		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node3", "node6",
-				"node7" };
+		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node3", "node6", "node7" };
 		String[] nodeOrderWayBack = { "node3", "node3", "node7", "node6", "node2", "node7", "node6", "node2", "node1" };
 		TraverserChecker checker = new TraverserChecker();
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		checker.isCycleSafe = false;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-				"test_TOP_DOWN_DEPTH_FIRST_Cycle", checker, false);
+		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_Cycle", checker, false);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -612,16 +584,13 @@ public class GraphTraverserModuleTest {
 	@Test
 	public void testTraverse_BOTTOM_UP_DEPTH_FIRST_Tree() {
 		SGraph graph = TestHelper.createGraph_Tree();
-		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node5", "node4", "node1", "node6", "node2", "node1",
-				"node7", "node1" };
-		String[] nodeOrderWayBack = { "node1", "node2", "node3", "node1", "node4", "node5", "node1", "node2", "node6",
-				"node1", "node7" };
+		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node5", "node4", "node1", "node6", "node2", "node1", "node7", "node1" };
+		String[] nodeOrderWayBack = { "node1", "node2", "node3", "node1", "node4", "node5", "node1", "node2", "node6", "node1", "node7" };
 		TraverserChecker checker = new TraverserChecker();
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST,
-				"test_BOTTOM_UP_DEPTH_FIRST_Tree", checker);
+		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, "test_BOTTOM_UP_DEPTH_FIRST_Tree", checker);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -637,8 +606,7 @@ public class GraphTraverserModuleTest {
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST,
-				"test_BOTTOM_UP_DEPTH_FIRST_DAG", checker);
+		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, "test_BOTTOM_UP_DEPTH_FIRST_DAG", checker);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -648,16 +616,14 @@ public class GraphTraverserModuleTest {
 	@Test
 	public void testTraverse_BOTTOM_UP_DEPTH_FIRST_Cycle() {
 		SGraph graph = TestHelper.createGraph_Cycle();
-		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node4", "node7", "node6", "node2", "node1",
-				"node4" };
+		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node4", "node7", "node6", "node2", "node1", "node4" };
 		String[] nodeOrderWayBack = { "node1", "node4", "node2", "node3", "node1", "node4", "node2", "node6" };
 		TraverserChecker checker = new TraverserChecker();
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
 		try {
-			getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST,
-					"test_BOTTOM_UP_DEPTH_FIRST_Cycle", checker);
+			getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, "test_BOTTOM_UP_DEPTH_FIRST_Cycle", checker);
 			assertTrue(checker.checkNumberOfTraversedNodes());
 			fail("The graph contains a cycle, that shall invoke an exception.");
 		} catch (Exception e) {
@@ -688,10 +654,8 @@ public class GraphTraverserModuleTest {
 		TraverserChecker traverseChecker1 = null;
 		TraverserChecker traverseChecker2 = null;
 		TraverserChecker traverseChecker3 = null;
-		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node5", "node4", "node1", "node6", "node2", "node1",
-				"node7", "node1" };
-		String[] nodeOrderWayBack = { "node1", "node2", "node3", "node1", "node4", "node5", "node1", "node2", "node6",
-				"node1", "node7" };
+		String[] nodeOrderWayThere = { "node3", "node2", "node1", "node5", "node4", "node1", "node6", "node2", "node1", "node7", "node1" };
+		String[] nodeOrderWayBack = { "node1", "node2", "node3", "node1", "node4", "node5", "node1", "node2", "node6", "node1", "node7" };
 
 		{// thread 1
 			traverseId = "testThreading_1";
@@ -750,8 +714,7 @@ public class GraphTraverserModuleTest {
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST,
-				"test_TOP_DOWN_BREADTH_FIRST_Tree", checker, false);
+		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST, "test_TOP_DOWN_BREADTH_FIRST_Tree", checker, false);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -769,8 +732,7 @@ public class GraphTraverserModuleTest {
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST,
-				"test_TOP_DOWN_BREADTH_FIRST_DAG", checker, false);
+		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST, "test_TOP_DOWN_BREADTH_FIRST_DAG", checker, false);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -791,8 +753,7 @@ public class GraphTraverserModuleTest {
 		getFixture().setGraph(graph);
 		List<SNode> startNodes = (new ArrayList<>());
 		startNodes.add(getFixture().getGraph().getNode("node2"));
-		getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST, "test_TOP_DOWN_BREADTH_FIRST_DAG",
-				checker, false);
+		getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST, "test_TOP_DOWN_BREADTH_FIRST_DAG", checker, false);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -813,8 +774,7 @@ public class GraphTraverserModuleTest {
 		getFixture().setGraph(graph);
 		List<SNode> startNode = (new ArrayList<>());
 		startNode.add(getFixture().getGraph().getNode("node2"));
-		getFixture().traverse(startNode, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-				"test_TOP_DOWN_DEPTH_FIRST_DAG_NON_ROOT_START", checker);
+		getFixture().traverse(startNode, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_DAG_NON_ROOT_START", checker);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -854,20 +814,16 @@ public class GraphTraverserModuleTest {
 
 		GraphTraverseHandler graphTraverseHandler = new GraphTraverseHandler() {
 			@Override
-			public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
-					SRelation<SNode, SNode> relation, SNode fromNode, long order) {
+			public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
 			}
 
 			@Override
-			public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
-					SRelation<SNode, SNode> relation, SNode fromNode, long order) {
+			public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<SNode, SNode> relation, SNode fromNode, long order) {
 			}
 
 			@Override
-			public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
-					SRelation<SNode, SNode> relation, SNode currNode, long order) {
-				if ((relation != null) && (relation.getLabel("name") != null)
-						&& (relation.getLabel("name").getValue().equals("notCheck")))
+			public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<SNode, SNode> relation, SNode currNode, long order) {
+				if ((relation != null) && (relation.getLabel("name") != null) && (relation.getLabel("name").getValue().equals("notCheck")))
 					return false;
 				else
 					return true;
@@ -878,8 +834,7 @@ public class GraphTraverserModuleTest {
 
 		List<SNode> startNode = (new ArrayList<>());
 		startNode.add(node1);
-		getFixture().traverse(startNode, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-				"test_TOP_DOWN_DEPTH_FIRST_NO_REAL_CYCLES", graphTraverseHandler);
+		getFixture().traverse(startNode, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "test_TOP_DOWN_DEPTH_FIRST_NO_REAL_CYCLES", graphTraverseHandler);
 	}
 
 	/**
@@ -890,16 +845,14 @@ public class GraphTraverserModuleTest {
 	@Test
 	public void testTraverse_TOP_DOWN_BREADTH_FIRST_CycleUnsafe() {
 		SGraph graph = TestHelper.createGraph_SimpleCycle();
-		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node3", "node6",
-				"node7" };
+		String[] nodeOrderWayThere = { "node1", "node2", "node3", "node6", "node7", "node2", "node3", "node6", "node7" };
 		String[] nodeOrderWayBack = nodeOrderWayThere.clone();
 		TraverserChecker checker = new TraverserChecker();
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		checker.isCycleSafe = false;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST,
-				"test_TOP_DOWN_BREADTH_FIRST_Cycle", checker, false);
+		getFixture().traverse(getFixture().getGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST, "test_TOP_DOWN_BREADTH_FIRST_Cycle", checker, false);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -913,16 +866,14 @@ public class GraphTraverserModuleTest {
 		SGraph graph = TestHelper.createGraph_Tree();
 		// String[] nodeOrderWayThere= {"node3", "node6", "node5", "node7",
 		// "node2", "node2", "node4", "node1", "node1", "node1", "node1"};
-		String[] nodeOrderWayThere = { "node3", "node5", "node6", "node7", "node2", "node4", "node2", "node1", "node1",
-				"node1", "node1" };
+		String[] nodeOrderWayThere = { "node3", "node5", "node6", "node7", "node2", "node4", "node2", "node1", "node1", "node1", "node1" };
 		String[] nodeOrderWayBack = nodeOrderWayThere.clone();
 
 		TraverserChecker checker = new TraverserChecker();
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-				"test_BOTTOM_UP_BREADTH_FIRST_Tree", checker, false);
+		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, "test_BOTTOM_UP_BREADTH_FIRST_Tree", checker, false);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -940,8 +891,7 @@ public class GraphTraverserModuleTest {
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-				"test_BOTTOM_UP_BREADTH_FIRST_DAG", checker, false);
+		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, "test_BOTTOM_UP_BREADTH_FIRST_DAG", checker, false);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 
@@ -961,8 +911,7 @@ public class GraphTraverserModuleTest {
 			checker.nodeOrderWayBack = nodeOrderWayBack;
 			getFixture().setGraph(graph);
 			try {
-				getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-						"test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker);
+				getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, "test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker);
 				assertTrue(checker.checkNumberOfTraversedNodes());
 				fail("The graph contains a cycle, that shall invoke an exception.");
 			} catch (SaltException e) {
@@ -980,8 +929,7 @@ public class GraphTraverserModuleTest {
 			getFixture().setGraph(graph);
 			getFixture().setGraph(graph);
 			try {
-				getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-						"test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker);
+				getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, "test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker);
 				assertTrue(checker.checkNumberOfTraversedNodes());
 				fail("The graph contains a cycle, that shall invoke an exception.");
 			} catch (SaltException e) {
@@ -1000,16 +948,14 @@ public class GraphTraverserModuleTest {
 		List<SNode> startNodes = new ArrayList<>();
 		startNodes.add(graph.getNode("node3"));
 		startNodes.add(graph.getNode("node7"));
-		String[] nodeOrderWayThere = { "node3", "node7", "node2", "node6", "node1", "node7", "node2", "node6",
-				"node1" };
+		String[] nodeOrderWayThere = { "node3", "node7", "node2", "node6", "node1", "node7", "node2", "node6", "node1" };
 		String[] nodeOrderWayBack = nodeOrderWayThere.clone();
 		TraverserChecker checker = new TraverserChecker();
 		checker.nodeOrderWayThere = nodeOrderWayThere;
 		checker.nodeOrderWayBack = nodeOrderWayBack;
 		checker.isCycleSafe = false;
 		getFixture().setGraph(graph);
-		getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-				"test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker, false);
+		getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, "test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker, false);
 		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 }

@@ -75,8 +75,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		super.init();
 
 		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2,
-				expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2, expectedRelations);
 	}
 
 	/** Salt-project containing this corpus structure **/
@@ -129,8 +128,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
 		if (!(relation instanceof SRelation)) {
-			throw new SaltInsertionException(this, relation,
-					"Cannot insert an edge, which is not a SRelation object. ");
+			throw new SaltInsertionException(this, relation, "Cannot insert an edge, which is not a SRelation object. ");
 		}
 		// start: create a name if none exists
 		if (Strings.isNullOrEmpty(((SRelation) relation).getName())) {
@@ -258,20 +256,16 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public Identifier addSubCorpus(SCorpus superCorpus, SCorpus subCorpus) {
 		if (superCorpus == null) {
-			throw new SaltParameterException("superCorpus", "addSubCorpus", this.getClass(),
-					"Cannot add the given subCorpus, because the given superCorpus is null.");
+			throw new SaltParameterException("superCorpus", "addSubCorpus", this.getClass(), "Cannot add the given subCorpus, because the given superCorpus is null.");
 		}
 		if (subCorpus == null) {
-			throw new SaltParameterException("subCorpus", "addSubCorpus", this.getClass(),
-					"Cannot add the given subCorpus, because it is null.");
+			throw new SaltParameterException("subCorpus", "addSubCorpus", this.getClass(), "Cannot add the given subCorpus, because it is null.");
 		}
 		if (superCorpus.getId() == null) {
-			throw new SaltInsertionException(this, subCorpus,
-					"Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
 		}
 		if (getNode(superCorpus.getId()) == null) {
-			throw new SaltInsertionException(this, subCorpus,
-					"Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
 		}
 
 		String namePart = null;
@@ -296,16 +290,13 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public Identifier addDocument(SCorpus corpus, SDocument document) {
 		if (corpus == null) {
-			throw new SaltParameterException("corpus", "addDocument", this.getClass(),
-					"Cannot add the given sDocument, because the given sCorpus is null.");
+			throw new SaltParameterException("corpus", "addDocument", this.getClass(), "Cannot add the given sDocument, because the given sCorpus is null.");
 		}
 		if (document == null) {
-			throw new SaltParameterException("document", "addDocument", this.getClass(),
-					"Cannot add the given sDocument, because it is null.");
+			throw new SaltParameterException("document", "addDocument", this.getClass(), "Cannot add the given sDocument, because it is null.");
 		}
 		if (getNode(corpus.getId()) == null) {
-			throw new SaltInsertionException(this, document,
-					"Cannot add the given sDocument, because the given sCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because the given sCorpus is not already contained in corpus graph.");
 		}
 		String namePart = null;
 		namePart = document.getName();
@@ -435,8 +426,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 * @param isTail
 	 * @return
 	 */
-	private String reportCorpusStructure(final SGraph sGraph, final SNode node, final String prefix,
-			final boolean isTail) {
+	private String reportCorpusStructure(final SGraph sGraph, final SNode node, final String prefix, final boolean isTail) {
 		final StringBuilder retStr = new StringBuilder();
 		retStr.append(prefix);
 		retStr.append(((isTail ? "└── " : "├── ") + node.getName()));
@@ -448,8 +438,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			if (i < outRelations.size() - 1) {
 				newTail = false;
 			}
-			retStr.append(reportCorpusStructure(sGraph, (SNode) out.getTarget(), prefix + (isTail ? "    " : "│   "),
-					newTail));
+			retStr.append(reportCorpusStructure(sGraph, (SNode) out.getTarget(), prefix + (isTail ? "    " : "│   "), newTail));
 			i++;
 		}
 		return (retStr.toString());

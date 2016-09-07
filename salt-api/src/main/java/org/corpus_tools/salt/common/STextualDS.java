@@ -23,7 +23,7 @@ public interface STextualDS extends SSequentialDS<String, Integer>, SDocumentGra
 	public String getText();
 
 	public void setText(String text);
-
+	
 	public List<SToken> tokenize();
 
 } // STextualDS

@@ -588,8 +588,7 @@ public class DocumentStructureDiffTest {
 		SDocument doc1 = createSampleGraph();
 		SDocument doc2 = createSampleGraph();
 
-		Set<Difference> diffs = doc1.getDocumentGraph().findDiffs(doc2.getDocumentGraph(),
-				(new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
+		Set<Difference> diffs = doc1.getDocumentGraph().findDiffs(doc2.getDocumentGraph(), (new DiffOptions()).setOption(DiffOptions.OPTION_IGNORE_ID, true));
 		assertEquals(diffs.toString(), 0, diffs.size());
 	}
 

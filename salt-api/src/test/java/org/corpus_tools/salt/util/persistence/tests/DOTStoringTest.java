@@ -50,11 +50,9 @@ public class DOTStoringTest {
 		SaltUtil.save_DOT(sDocument, uri);
 		assertTrue(new File(uri.toFileString()).exists());
 		assertTrue(new File(uri.toFileString()).isDirectory());
-		assertTrue(new File(uri.appendSegment(docName).appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString())
-				.exists());
+		assertTrue(new File(uri.appendSegment(docName).appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
 
-		uri = URI.createFileURI(SaltTestsUtil.getTempTestFolder().getAbsolutePath()).appendSegment(docName)
-				.appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+		uri = URI.createFileURI(SaltTestsUtil.getTempTestFolder().getAbsolutePath()).appendSegment(docName).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 		SaltUtil.save_DOT(sDocument, uri);
 		assertTrue(new File(uri.toFileString()).exists());
 	}
@@ -70,9 +68,7 @@ public class DOTStoringTest {
 		SCorpusGraph sCorpGraph = SampleGenerator.createCorpusStructure();
 
 		SaltUtil.save_DOT(sCorpGraph, uri);
-		assertTrue(
-				new File(uri.appendSegment("rootCorpus").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString())
-						.exists());
+		assertTrue(new File(uri.appendSegment("rootCorpus").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
 	}
 
 	/**
@@ -86,17 +82,11 @@ public class DOTStoringTest {
 		SaltProject saltProject = SampleGenerator.createSaltProject();
 
 		SaltUtil.save_DOT(saltProject, uri);
-		assertTrue(
-				new File(uri.appendSegment("rootCorpus").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString())
-						.exists());
-		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc1")
-				.appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc2")
-				.appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc3")
-				.appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc4")
-				.appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("rootCorpus").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc1").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc2").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc3").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc4").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
 	}
 
 	/**
@@ -110,15 +100,10 @@ public class DOTStoringTest {
 		SaltProject saltProject = SampleGenerator.createSaltProject();
 		saltProject.addCorpusGraph(SampleGenerator.createCorpusStructure());
 		SaltUtil.save_DOT(saltProject, uri);
-		assertTrue(
-				new File(uri.appendSegment("0").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus1")
-				.appendSegment("doc1").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus1")
-				.appendSegment("doc2").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus2")
-				.appendSegment("doc3").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
-		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus2")
-				.appendSegment("doc4").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("0").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc1").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus1").appendSegment("doc2").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc3").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
+		assertTrue(new File(uri.appendSegment("0").appendSegment("rootCorpus").appendSegment("subCorpus2").appendSegment("doc4").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());
 	}
 }

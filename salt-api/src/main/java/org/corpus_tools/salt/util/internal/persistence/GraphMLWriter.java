@@ -69,9 +69,8 @@ public class GraphMLWriter {
 			w.writeStartElement(NS, "graphml");
 			w.writeDefaultNamespace(NS);
 			w.writeNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-			w.writeAttribute("http://www.w3.org/2001/XMLSchema-instance", "schemaLocation",
-					NS + " http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
-
+			w.writeAttribute("http://www.w3.org/2001/XMLSchema-instance", "schemaLocation", NS + " http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
+			
 			Set<String> existingKeys = new HashSet<>();
 			IDManager ids = new IDManager();
 
@@ -111,8 +110,7 @@ public class GraphMLWriter {
 
 	}
 
-	private static void writeKeys(XMLStreamWriter w, Collection<? extends LabelableElement> elements,
-			Set<String> existing) throws XMLStreamException {
+	private static void writeKeys(XMLStreamWriter w, Collection<? extends LabelableElement> elements, Set<String> existing) throws XMLStreamException {
 		if (elements != null && !elements.isEmpty()) {
 			for (LabelableElement e : elements) {
 				Collection<Label> labels = e.getLabels();
@@ -152,8 +150,7 @@ public class GraphMLWriter {
 		}
 	}
 
-	private static void writeLabels(XMLStreamWriter w, Collection<Label> labels, Set<String> existingKeys)
-			throws XMLStreamException {
+	private static void writeLabels(XMLStreamWriter w, Collection<Label> labels, Set<String> existingKeys) throws XMLStreamException {
 		if (labels != null && !labels.isEmpty()) {
 			for (Label l : labels) {
 				String key = l.getQName();
@@ -176,27 +173,25 @@ public class GraphMLWriter {
 	 */
 	private static void writeType(XMLStreamWriter w, Object o) throws XMLStreamException {
 		Set<SALT_TYPE> saltTypes = SALT_TYPE.class2SaltType(o.getClass());
-
-		if (!saltTypes.isEmpty()) {
+		
+		if(!saltTypes.isEmpty()) {
 			// find the most specific type
 			SALT_TYPE mostSpecificType = null;
-			for (SALT_TYPE type : saltTypes) {
-				if (mostSpecificType == null) {
+			for(SALT_TYPE type : saltTypes) {
+				if(mostSpecificType == null) {
 					mostSpecificType = type;
 				} else {
 					final Class<?> A = mostSpecificType.getJavaType();
 					final Class<?> B = type.getJavaType();
-
-					// Check if this type (B) is more specific as the current
-					// most specific type (A).
-					// Thus "B superclass of A" is ok, but not "A superclass of
-					// B".
-					if (A.isAssignableFrom(B)) {
+					
+					// Check if this type (B) is more specific as the current most specific type (A).
+					// Thus "B superclass of A" is ok, but not "A superclass of B".
+					if(A.isAssignableFrom(B)) {
 						mostSpecificType = type;
 					}
 				}
 			}
-
+			
 			if (mostSpecificType != null) {
 				w.writeStartElement(NS, "data");
 				w.writeAttribute("key", "salt::type");
@@ -206,8 +201,7 @@ public class GraphMLWriter {
 		}
 	}
 
-	private static void writeNode(XMLStreamWriter w, Node c, IDManager ids, Set<String> existingKeys)
-			throws XMLStreamException {
+	private static void writeNode(XMLStreamWriter w, Node c, IDManager ids, Set<String> existingKeys) throws XMLStreamException {
 		w.writeStartElement(NS, "node");
 		w.writeAttribute("id", ids.getID(c));
 
@@ -216,8 +210,7 @@ public class GraphMLWriter {
 		w.writeEndElement();
 	}
 
-	private static void writeEdge(XMLStreamWriter w, Relation r, IDManager ids, Set<String> existingKeys)
-			throws XMLStreamException {
+	private static void writeEdge(XMLStreamWriter w, Relation r, IDManager ids, Set<String> existingKeys) throws XMLStreamException {
 		w.writeStartElement(NS, "edge");
 		w.writeAttribute("id", ids.getID(r));
 		w.writeAttribute("source", ids.getID(r.getSource()));
@@ -229,8 +222,7 @@ public class GraphMLWriter {
 		w.writeEndElement();
 	}
 
-	private static void writeSDocumentGraph(XMLStreamWriter w, SDocumentGraph g, IDManager ids,
-			Set<String> existingKeys, boolean includeDocLabels) throws XMLStreamException {
+	private static void writeSDocumentGraph(XMLStreamWriter w, SDocumentGraph g, IDManager ids, Set<String> existingKeys, boolean includeDocLabels) throws XMLStreamException {
 		if (g == null) {
 			return;
 

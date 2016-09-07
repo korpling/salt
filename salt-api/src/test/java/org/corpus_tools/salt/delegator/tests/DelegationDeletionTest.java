@@ -67,8 +67,7 @@ public class DelegationDeletionTest {
 		Set<Difference> diffs = template_doc.getDocumentGraph().findDiffs(fixture_doc.getDocumentGraph());
 		assertEquals("" + diffs, 0, diffs.size());
 
-		assertEquals(template_doc.getDocumentGraph().getRelations().size(),
-				fixture_doc.getDocumentGraph().getRelations().size());
+		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
 
 		List<SRelation> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getPointingRelations());
@@ -104,8 +103,7 @@ public class DelegationDeletionTest {
 		Set<Difference> diffs = template_doc.getDocumentGraph().findDiffs(fixture_doc.getDocumentGraph());
 		assertEquals("" + diffs, 0, diffs.size());
 
-		assertEquals(template_doc.getDocumentGraph().getRelations().size(),
-				fixture_doc.getDocumentGraph().getRelations().size());
+		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
 
 		List<SRelation> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getDominanceRelations());
@@ -151,8 +149,7 @@ public class DelegationDeletionTest {
 		Set<Difference> diffs = template_doc.getDocumentGraph().findDiffs(fixture_doc.getDocumentGraph());
 		assertEquals("" + diffs, 0, diffs.size());
 
-		assertEquals(template_doc.getDocumentGraph().getRelations().size(),
-				fixture_doc.getDocumentGraph().getRelations().size());
+		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
 
 		List<SRelation> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getSpanningRelations());

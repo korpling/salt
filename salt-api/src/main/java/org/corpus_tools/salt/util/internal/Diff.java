@@ -119,7 +119,7 @@ public class Diff {
 					return new Diff((SDocumentGraph) templateObject, (SDocumentGraph) otherObject, options).findDiffs();
 				} else if (templateObject instanceof SCorpusGraph && otherObject instanceof SCorpusGraph) {
 					return new Diff((SCorpusGraph) templateObject, (SCorpusGraph) otherObject, options).findDiffs();
-				} else if (templateObject instanceof SaltProject && otherObject instanceof SaltProject) {
+				}else if (templateObject instanceof SaltProject && otherObject instanceof SaltProject) {
 					return new Diff((SaltProject) templateObject, (SaltProject) otherObject, options).findDiffs();
 				}
 				throw new SaltException("Cannot compare peaches with appels. ");

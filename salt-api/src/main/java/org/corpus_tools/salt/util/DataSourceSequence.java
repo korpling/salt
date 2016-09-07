@@ -22,8 +22,8 @@ import org.corpus_tools.salt.common.STextualDS;
 
 /**
  * This class is a helper class to address a sequence inside a data source. For
- * instance to address the text "sample" in a {@link STextualDS#getText()} "This
- * is a sample text.", a {@link DataSourceSequence} object needs to be
+ * instance to address the text "sample" in a {@link STextualDS#getText()}
+ * "This is a sample text.", a {@link DataSourceSequence} object needs to be
  * initialized like this: {@link #getStart()} =10, {@link #getEnd()} = 16 and
  * {@link #getDataSource()} = the data source containing the entire text. <br/>
  * 

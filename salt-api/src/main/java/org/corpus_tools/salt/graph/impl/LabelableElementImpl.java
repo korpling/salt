@@ -195,12 +195,9 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 				String qName = SaltUtil.createQName(label.getNamespace(), label.getName());
 				if (labels.containsKey(qName)) {
 					if (this instanceof IdentifiableElement) {
-						throw new SaltInsertionException(this, label,
-								" Because an id already exists: " + labels.get(qName) + ".");
+						throw new SaltInsertionException(this, label, " Because an id already exists: " + labels.get(qName) + ".");
 					} else {
-						throw new SaltInsertionException(this, label,
-								"Cannot add the given label object, because a label with this QName already exists: "
-										+ label.getQName());
+						throw new SaltInsertionException(this, label, "Cannot add the given label object, because a label with this QName already exists: " + label.getQName());
 					}
 				}
 				labels.put(qName, label);

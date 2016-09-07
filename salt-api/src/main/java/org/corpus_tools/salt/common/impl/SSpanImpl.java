@@ -54,8 +54,7 @@ public class SSpanImpl extends SNodeImpl implements SSpan, SStructuredNode {
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(),
-					"The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}

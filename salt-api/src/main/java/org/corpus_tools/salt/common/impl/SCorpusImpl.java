@@ -56,7 +56,6 @@ public class SCorpusImpl extends SNodeImpl implements SCorpus {
 			return (SCorpusGraph) superGraph;
 		}
 
-		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is "
-				+ superGraph.getClass().getName() + ")");
+		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " + superGraph.getClass().getName() + ")");
 	}
 }

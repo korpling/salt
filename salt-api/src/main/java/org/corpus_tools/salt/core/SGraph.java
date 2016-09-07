@@ -23,8 +23,7 @@ import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
-public interface SGraph
-		extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, SAnnotationContainer, SNamedElement, SPathElement {
+public interface SGraph extends Graph<SNode, SRelation<SNode, SNode>, SLayer>, SAnnotationContainer, SNamedElement, SPathElement {
 
 	/**
 	 * The {@link GRAPH_TRAVERSE_TYPE} determines the the traversal order. In
@@ -109,8 +108,7 @@ public interface SGraph
 	 * @param traverseHandler
 	 *            callback handler, on which the three methods will be invoked
 	 */
-	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
-			GraphTraverseHandler traverseHandler);
+	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler);
 
 	/**
 	 * Traverses a graph in the given order traverseType and starts traversing
@@ -141,8 +139,7 @@ public interface SGraph
 	 * @param isCycleSafe
 	 *            determines whether cycle safeness chould be checked
 	 */
-	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
-			GraphTraverseHandler traverseHandler, boolean isCycleSafe);
+	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 
 	/**
 	 * Searches for a node or a set of nodes having the given node name.

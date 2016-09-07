@@ -62,12 +62,10 @@ public class STextualRelationSStartComparator implements Comparator<STextualRela
 	public int compare(STextualRelation o1, STextualRelation o2) {
 		int retVal = 0;
 		if (o1 == null) {
-			throw new SaltParameterException(
-					"Cannot compare the given STextualRelation-objects, because first one is null.");
+			throw new SaltParameterException("Cannot compare the given STextualRelation-objects, because first one is null.");
 		}
 		if (o2 == null) {
-			throw new SaltParameterException(
-					"Cannot compare the given STextualRelation-objects, because second one is null.");
+			throw new SaltParameterException("Cannot compare the given STextualRelation-objects, because second one is null.");
 		}
 
 		// both textual relations are equal

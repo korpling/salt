@@ -31,9 +31,7 @@ public class SaltParameterException extends SaltException {
 	}
 
 	public SaltParameterException(String parameterName, String methodName, Class<? extends Object> clazz, String msg) {
-		super("The method '" + methodName + "' of class '" + (clazz != null ? clazz.getSimpleName() : "")
-				+ "' invokes an exception, because the specified parameter '" + parameterName + "' was not correct. "
-				+ (msg != null ? msg : ""));
+		super("The method '" + methodName + "' of class '" + (clazz != null ? clazz.getSimpleName() : "") + "' invokes an exception, because the specified parameter '" + parameterName + "' was not correct. " + (msg != null ? msg : ""));
 	}
 
 	public SaltParameterException(String s) {
