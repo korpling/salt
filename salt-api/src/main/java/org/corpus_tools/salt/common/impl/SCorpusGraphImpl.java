@@ -20,7 +20,6 @@ package org.corpus_tools.salt.common.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
@@ -361,11 +360,10 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		return (document);
 	}
 
-
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpus> createCorpus(final URI corpusPath) {
-		final URI cPath= SaltUtil.createSaltURI(corpusPath); 
+		final URI cPath = SaltUtil.createSaltURI(corpusPath);
 		List<SCorpus> retVal = null;
 		if (cPath != null) {
 			SCorpus parentCorpus = null;
@@ -390,7 +388,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SDocument createDocument(final URI documentPath) {
-		final URI dPath= SaltUtil.createSaltURI(documentPath);
+		final URI dPath = SaltUtil.createSaltURI(documentPath);
 		SDocument retVal = null;
 		List<SCorpus> corpora = createCorpus(dPath.trimSegments(1));
 		if ((corpora == null) || (corpora.size() == 0)) {
@@ -401,14 +399,14 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		retVal = createDocument(corpora.get(corpora.size() - 1), dPath.lastSegment());
 		return (retVal);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toTreeString() {
 		final List<SNode> roots = getRoots();
-		final StringBuilder str= new StringBuilder();
+		final StringBuilder str = new StringBuilder();
 		if (SaltUtil.isNotNullOrEmpty(roots)) {
 			for (SNode root : roots) {
 				str.append(reportCorpusStructure(this, root, "", true));
@@ -436,9 +434,9 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		final List<SRelation<SNode, SNode>> outRelations = sGraph.getOutRelations(node.getId());
 		int i = 0;
 		for (SRelation<SNode, SNode> out : outRelations) {
-			boolean newTail= true;
+			boolean newTail = true;
 			if (i < outRelations.size() - 1) {
-				newTail= false;
+				newTail = false;
 			}
 			retStr.append(reportCorpusStructure(sGraph, (SNode) out.getTarget(), prefix + (isTail ? "    " : "│   "), newTail));
 			i++;

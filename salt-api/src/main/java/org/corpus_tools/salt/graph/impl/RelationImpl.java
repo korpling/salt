@@ -73,6 +73,10 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * change of the source.
 	 */
 	public void setSource(S source) {
+		if (source== null){
+			return;
+		}
+		
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().setSource(source);

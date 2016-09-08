@@ -47,7 +47,6 @@ import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
-import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
@@ -64,6 +63,7 @@ import org.corpus_tools.salt.semantics.SSentenceAnnotation;
 import org.corpus_tools.salt.semantics.STypeAnnotation;
 import org.corpus_tools.salt.semantics.SWordAnnotation;
 import org.corpus_tools.salt.util.internal.Diff.Builder;
+import org.corpus_tools.salt.util.internal.Validator;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.corpus_tools.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter;
@@ -87,7 +87,7 @@ public class SaltUtil {
 	// ===================================> common Salt stuff
 	/** The URI scheme for corpus pathes. **/
 	public static final String SALT_SCHEME = "salt";
-	
+
 	/** The ending of a Salt XML file. **/
 	public static final String FILE_ENDING_SALT_XML = "salt";
 	/** The ending of a dot file. **/
@@ -196,7 +196,8 @@ public class SaltUtil {
 	 * Qualified name name for {@link SFeature} to store the uri reference of a
 	 * {@link SDocumentGraph} in a {@link SDocument}
 	 */
-	public static final String FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR + FEAT_SDOCUMENT_GRAPH_LOCATION;
+	public static final String FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME = SALT_NAMESPACE + NAMESPACE_SEPERATOR
+			+ FEAT_SDOCUMENT_GRAPH_LOCATION;
 	/**
 	 * The name of the {@link SFeature} for the reference to an audio file.
 	 */
@@ -324,7 +325,7 @@ public class SaltUtil {
 		}
 		return createSaltURI(path.toString());
 	}
-	
+
 	/**
 	 * When specified corpus path already contains salt schema, then specified
 	 * corpus path is returned. Otherwise a absolute new corpus path which is
@@ -364,9 +365,11 @@ public class SaltUtil {
 		StringBuffer globalId = new StringBuffer();
 		if ((id != null) && (id.getIdentifiableElement() != null)) {
 			SCorpusGraph graph = null;
-			if ((id.getIdentifiableElement() instanceof SDocument) && (((SDocument) id.getIdentifiableElement()).getGraph() != null)) {
+			if ((id.getIdentifiableElement() instanceof SDocument)
+					&& (((SDocument) id.getIdentifiableElement()).getGraph() != null)) {
 				graph = ((SDocument) id.getIdentifiableElement()).getGraph();
-			} else if ((id.getIdentifiableElement() instanceof SCorpus) && (((SCorpus) id.getIdentifiableElement()).getGraph() != null)) {
+			} else if ((id.getIdentifiableElement() instanceof SCorpus)
+					&& (((SCorpus) id.getIdentifiableElement()).getGraph() != null)) {
 				graph = ((SCorpus) id.getIdentifiableElement()).getGraph();
 			} else if (id.getIdentifiableElement() instanceof SNode) {
 				SNode sNode = (SNode) id.getIdentifiableElement();
@@ -453,7 +456,8 @@ public class SaltUtil {
 		}
 		File objectFile = new File((location.toFileString() == null) ? location.toString() : location.toFileString());
 		if (!objectFile.exists()) {
-			throw new SaltResourceException("Cannot load Salt object, because the file '" + objectFile.getAbsolutePath() + "' does not exist.");
+			throw new SaltResourceException(
+					"Cannot load Salt object, because the file '" + objectFile.getAbsolutePath() + "' does not exist.");
 		}
 
 		SAXParser parser;
@@ -466,9 +470,11 @@ public class SaltUtil {
 			xmlReader = parser.getXMLReader();
 			xmlReader.setContentHandler(contentHandler);
 		} catch (ParserConfigurationException e) {
-			throw new SaltResourceException("Cannot load Salt object from file '" + objectFile.getAbsolutePath() + "'.", e);
+			throw new SaltResourceException("Cannot load Salt object from file '" + objectFile.getAbsolutePath() + "'.",
+					e);
 		} catch (Exception e) {
-			throw new SaltResourceException("Cannot load Salt object from file '" + objectFile.getAbsolutePath() + "'.", e);
+			throw new SaltResourceException("Cannot load Salt object from file '" + objectFile.getAbsolutePath() + "'.",
+					e);
 		}
 		try {
 			InputStream inputStream = new FileInputStream(objectFile);
@@ -483,13 +489,15 @@ public class SaltUtil {
 				xmlReader.setContentHandler(contentHandler);
 				xmlReader.parse(objectFile.getAbsolutePath());
 			} catch (Exception e1) {
-				throw new SaltResourceException("Cannot load Salt object from file '" + objectFile.getAbsolutePath() + "'.", e1);
+				throw new SaltResourceException(
+						"Cannot load Salt object from file '" + objectFile.getAbsolutePath() + "'.", e1);
 			}
 		} catch (Exception e) {
 			if (e instanceof SaltException) {
 				throw (SaltException) e;
 			} else {
-				throw new SaltResourceException("Cannot load Salt object from file'" + objectFile + "', because of a nested exception. ", e);
+				throw new SaltResourceException(
+						"Cannot load Salt object from file'" + objectFile + "', because of a nested exception. ", e);
 			}
 		}
 		return contentHandler.getRootObjects();
@@ -615,11 +623,13 @@ public class SaltUtil {
 		SDocumentGraph retVal = null;
 		Object obj = load(location);
 		if (obj == null) {
-			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName() + ", because file located at contains no such object, the returned object was null.");
+			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName()
+					+ ", because file located at contains no such object, the returned object was null.");
 		} else if (obj instanceof SDocumentGraph) {
 			retVal = (SDocumentGraph) obj;
 		} else {
-			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName() + ", because file located at contains no such object. It contains: " + obj.getClass());
+			throw new SaltResourceException("Cannot load the requested " + SDocumentGraph.class.getName()
+					+ ", because file located at contains no such object. It contains: " + obj.getClass());
 		}
 		return (retVal);
 
@@ -670,12 +680,12 @@ public class SaltUtil {
 	 * the SaltXML file contains persistings for more than one
 	 * {@link SCorpusGraph} object, the first one will be loaded.
 	 * 
-	 * @param sCorpusGraphURI
+	 * @param corpusPath
 	 *            the {@link URI} to locate the SaltXML file
 	 * @return
 	 */
-	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphURI) {
-		return loadCorpusGraph(sCorpusGraphURI, 0);
+	public static SCorpusGraph loadCorpusGraph(URI corpusPath) {
+		return loadCorpusGraph(corpusPath, 0);
 	}
 
 	/**
@@ -686,38 +696,40 @@ public class SaltUtil {
 	 * load, in case of the given SaltXML file contains more than one persisting
 	 * of {@link SCorpusGraph} objects.
 	 * 
-	 * @param sCorpusGraphUri
+	 * @param corpusPath
 	 *            the {@link URI} to locate the SaltXML file
 	 * @param idxOfSCorpusGraph
 	 *            number of graph to be load, note that the list of graphs
 	 *            starts with 0
 	 * @return
 	 */
-	public static SCorpusGraph loadCorpusGraph(URI sCorpusGraphUri, Integer idxOfSCorpusGraph) {
-		if (sCorpusGraphUri == null)
-			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName() + "' object, because the passed uri is empty. ");
+	public static SCorpusGraph loadCorpusGraph(URI corpusPath, Integer idxOfSCorpusGraph) {
+		if (corpusPath == null)
+			throw new SaltResourceException("Cannot load '" + SCorpusGraph.class.getSimpleName()
+					+ "' object, because the passed uri is empty. ");
 
 		SCorpusGraph retVal = null;
 
-		if (!sCorpusGraphUri.toFileString().endsWith("." + SaltUtil.FILE_ENDING_SALT_XML)) {
+		if (!corpusPath.toFileString().endsWith("." + SaltUtil.FILE_ENDING_SALT_XML)) {
 			// looks weird, but is necessary in case of uri ends with /
-			if (sCorpusGraphUri.toString().endsWith("/")) {
-				sCorpusGraphUri = sCorpusGraphUri.trimSegments(1);
+			if (corpusPath.toString().endsWith("/")) {
+				corpusPath = corpusPath.trimSegments(1);
 			}
-			sCorpusGraphUri = sCorpusGraphUri.appendSegment(SaltUtil.FILE_SALT_PROJECT);
+			corpusPath = corpusPath.appendSegment(SaltUtil.FILE_SALT_PROJECT);
 		}
 
-		Object obj = load(sCorpusGraphUri);
+		Object obj = load(corpusPath);
 		if (obj instanceof SCorpusGraph) {
 			retVal = (SCorpusGraph) obj;
 		} else if (obj instanceof SaltProject) {
-			if ((((SaltProject) obj).getCorpusGraphs() != null) && (((SaltProject) obj).getCorpusGraphs().size() >= idxOfSCorpusGraph)) {
+			if ((((SaltProject) obj).getCorpusGraphs() != null)
+					&& (((SaltProject) obj).getCorpusGraphs().size() >= idxOfSCorpusGraph)) {
 				retVal = ((SaltProject) obj).getCorpusGraphs().get(idxOfSCorpusGraph);
 			}
 		}
 
 		if (retVal != null) {
-			insertDocumentGraphLocations(retVal, sCorpusGraphUri);
+			insertDocumentGraphLocations(retVal, corpusPath);
 		}
 
 		return (retVal);
@@ -773,8 +785,29 @@ public class SaltUtil {
 
 	/**
 	 * Loads a SaltProject from given uri and returns it as object structure.
-	 * This does not load the document graphs which are belong to the
-	 * SaltProject from the disk. You have to call
+	 * 
+	 * @param location
+	 *            location to the Salt project file
+	 * @return returns a saltProject, which is filled with data coming from
+	 *         corpus in uri
+	 */
+	public static SaltProject loadCompleteSaltProject(URI location) {
+		final SaltProject project = loadSaltProject(location);
+		if (project != null) {
+			for (SCorpusGraph cGraph : project.getCorpusGraphs()) {
+				for (SDocument document : cGraph.getDocuments()) {
+					document.loadDocumentGraph();
+				}
+			}
+		}
+		return project;
+	}
+
+	/**
+	 * Loads a SaltProject from given uri and returns it as object structure.
+	 * This does not load the document graphs which are to the
+	 * {@link SaltProject} from the disk. To load the entire project use
+	 * {@link #loadCompleteSaltProject(URI)} or call
 	 * {@link SDocument#loadDocumentGraph() } on each document to load the
 	 * actual document graph.
 	 * 
@@ -799,14 +832,16 @@ public class SaltUtil {
 			throw new SaltResourceException("Can not load SaltProject. ", e);
 		}
 		if (!saltProjectFile.exists()) {
-			throw new SaltResourceException("Can not load SaltProject, because path '" + saltProjectFile + "' does not exist. ");
+			throw new SaltResourceException("Can not load SaltProject, because path '"
+					+ saltProjectFile.getAbsolutePath() + "' does not exist. ");
 		}
 
 		Object project = load(location);
 		if (project instanceof SaltProject) {
 			saltProject = (SaltProject) project;
 		} else {
-			throw new SaltResourceException("Can not load SaltProject, because the file at '" + saltProjectFile + "' does not contain a Salt project. ");
+			throw new SaltResourceException("Can not load SaltProject, because the file at '" + saltProjectFile
+					+ "' does not contain a Salt project. ");
 		}
 
 		for (SCorpusGraph corpusGraph : saltProject.getCorpusGraphs()) {
@@ -834,9 +869,11 @@ public class SaltUtil {
 			} else {
 				List<SNode> roots = corpusGraph.getRoots();
 				if ((roots != null) && (!roots.isEmpty())) {
-					targetUri = location.appendSegment(((SCorpus) roots.get(0)).getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+					targetUri = location.appendSegment(((SCorpus) roots.get(0)).getName())
+							.appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 				} else {
-					targetUri = location.appendSegment(corpusGraph.getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+					targetUri = location.appendSegment(corpusGraph.getName())
+							.appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 				}
 			}
 		} else {
@@ -860,9 +897,11 @@ public class SaltUtil {
 		URI targetUri = null;
 		if (location.fileExtension() == null) {
 			if (documentGraph.getDocument() != null) {
-				targetUri = location.appendSegment(documentGraph.getDocument().getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+				targetUri = location.appendSegment(documentGraph.getDocument().getName())
+						.appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 			} else {
-				targetUri = location.appendSegment(documentGraph.getName()).appendFileExtension(SaltUtil.FILE_ENDING_DOT);
+				targetUri = location.appendSegment(documentGraph.getName())
+						.appendFileExtension(SaltUtil.FILE_ENDING_DOT);
 			}
 		} else {
 			targetUri = location;
@@ -919,7 +958,8 @@ public class SaltUtil {
 			throw new SaltResourceException("Exception in storing Salt model to dot file, because no uri was given.");
 		}
 		if (saltObject == null) {
-			throw new SaltResourceException("Exception in storing Salt model to dot file. Cannot write more than one content per file.");
+			throw new SaltResourceException(
+					"Exception in storing Salt model to dot file. Cannot write more than one content per file.");
 		}
 
 		if (saltObject instanceof SCorpus) {
@@ -927,14 +967,18 @@ public class SaltUtil {
 			if (sCorpus.getGraph() != null) {
 				saltObject = sCorpus.getGraph();
 			} else {
-				throw new SaltResourceException("Cannot save Salt model to DOT format, because the given " + SCorpus.class.getSimpleName() + " is not part of a " + SCorpusGraph.class.getSimpleName() + " container");
+				throw new SaltResourceException(
+						"Cannot save Salt model to DOT format, because the given " + SCorpus.class.getSimpleName()
+								+ " is not part of a " + SCorpusGraph.class.getSimpleName() + " container");
 			}
 		} else if (saltObject instanceof SDocument) {
 			SDocument sDocument = (SDocument) saltObject;
 			if (sDocument.getDocumentGraph() != null) {
 				saltObject = sDocument.getDocumentGraph();
 			} else {
-				throw new SaltResourceException("Cannot save Salt model to DOT format, because the given " + SDocument.class.getSimpleName() + " does not contain a " + SDocumentGraph.class.getSimpleName() + " content");
+				throw new SaltResourceException(
+						"Cannot save Salt model to DOT format, because the given " + SDocument.class.getSimpleName()
+								+ " does not contain a " + SDocumentGraph.class.getSimpleName() + " content");
 			}
 		}
 
@@ -948,7 +992,8 @@ public class SaltUtil {
 		// if it is a SaltProject, different URIs for the different components
 		// of the project are needed
 		else if (saltObject instanceof SaltProject) {
-			Collection<SCorpusGraph> corpGraphs = Collections.synchronizedCollection(((SaltProject) saltObject).getCorpusGraphs());
+			Collection<SCorpusGraph> corpGraphs = Collections
+					.synchronizedCollection(((SaltProject) saltObject).getCorpusGraphs());
 			Integer corpIndex = 0;
 			for (SCorpusGraph sCorpusGraph : corpGraphs) {
 				URI corpUri = location;
@@ -976,7 +1021,10 @@ public class SaltUtil {
 				corpIndex++;
 			}
 		} else {
-			throw new SaltResourceException("Cannot save Salt model to DOT format, because content is neither " + SCorpusGraph.class.getSimpleName() + ", " + SDocumentGraph.class.getSimpleName() + " nor " + SaltProject.class.getSimpleName() + " content. The given content is of type: '" + saltObject.getClass() + "'.");
+			throw new SaltResourceException("Cannot save Salt model to DOT format, because content is neither "
+					+ SCorpusGraph.class.getSimpleName() + ", " + SDocumentGraph.class.getSimpleName() + " nor "
+					+ SaltProject.class.getSimpleName() + " content. The given content is of type: '"
+					+ saltObject.getClass() + "'.");
 		}
 	}
 
@@ -1092,7 +1140,8 @@ public class SaltUtil {
 				String[] nsParts = annotation.split(Label.NS_SEPERATOR);
 				String rest;
 				if (nsParts.length > 2) {
-					throw new SaltException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
+					throw new SaltException("The given annotation String '" + annotation
+							+ "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
 				} else if (nsParts.length == 2) {
 					left = nsParts[0].trim();
 					if (left.isEmpty()) {
@@ -1104,7 +1153,8 @@ public class SaltUtil {
 				}
 				String[] nameParts = rest.split("=");
 				if (nameParts.length > 2) {
-					throw new SaltException("The given annotation String '" + annotation + "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
+					throw new SaltException("The given annotation String '" + annotation
+							+ "' is not conform to language: (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)++");
 				} else if (nameParts.length == 2) {
 					middle = nameParts[0].trim();
 					if (middle.isEmpty()) {
@@ -1130,37 +1180,44 @@ public class SaltUtil {
 	/**
 	 * Creates a builder to have a fluent api for comparing two
 	 * {@link SDocumentGraph}s or {@link SCorpusGraph}s.
+	 * 
 	 * <pre>
 	 * compare(graph1).with(graph2).useOption(key, value).andCheckIsomorphie().
 	 * or
 	 * compare(graph1).with(graph2).useOption(key, value).andFindDiffs().
 	 * </pre>
 	 */
-	public static <G extends SGraph> Builder<G> compare(G templateGraph) {
-		return new Builder<G>(templateGraph);
+	public static <S extends Object> Builder<S> compare(S saltElement) {
+		return new Builder<S>(saltElement);
 	}
-	
+
 	/**
 	 * Checks whether a collection is null or empty
+	 * 
 	 * @param list
 	 * @return
 	 */
 	public static <T> boolean isNullOrEmpty(final Collection<T> collection) {
-	    return collection == null || collection.isEmpty();
+		return collection == null || collection.isEmpty();
 	}
+
 	/**
 	 * Checks whether a collection is not null nor empty
+	 * 
 	 * @param list
 	 * @return
 	 */
 	public static <T> boolean isNotNullOrEmpty(final Collection<T> collection) {
-	    return !isNullOrEmpty(collection);
+		return !isNullOrEmpty(collection);
 	}
-	
+
 	/**
 	 * Returns whether specified Salt element is part of the corpus structure.
-	 * @param element Salt element
-	 * @return true, when Salt element is a part of the corpus structure, false otherwise
+	 * 
+	 * @param element
+	 *            Salt element
+	 * @return true, when Salt element is a part of the corpus structure, false
+	 *         otherwise
 	 */
 	public static boolean belongsToCorpusStructure(final Object element) {
 		if (element == null) {
@@ -1177,5 +1234,16 @@ public class SaltUtil {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Validates a salt project, a document structure or a corpus structure.
+	 * 
+	 * @param saltObject
+	 *            Salt object to be validated
+	 * @return
+	 */
+	public static <T extends Object> Validator.Builder<T> validate(T saltObject) {
+		return new Validator.Builder<T>(saltObject);
 	}
 }

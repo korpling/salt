@@ -54,8 +54,6 @@ public interface SaltXML10Dictionary {
 	 * constant to address the xml-element 'sDocumentStructure:SDocumentGraph'.
 	 **/
 	public static final String TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH = "SDocumentGraph";
-	/** constant to address the xml-element 'sCorpusGraphs'. **/
-	public static final String TAG_SCORPUSGRAPH = "sCorpusGraphs";
 	/** constant to address the xml-element 'layers'. **/
 	public static final String TAG_LAYERS = "layers";
 	/** constant to address the xml-element 'labels'. **/

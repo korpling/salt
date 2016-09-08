@@ -22,15 +22,9 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.corpus_tools.salt.common.SCorpus;
-import org.corpus_tools.salt.common.SCorpusDocumentRelation;
-import org.corpus_tools.salt.common.SCorpusGraph;
-import org.corpus_tools.salt.common.SCorpusRelation;
-import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
-import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.graph.IdentifiableElement;
 import org.corpus_tools.salt.util.DIFF_TYPES;
@@ -41,9 +35,9 @@ import org.corpus_tools.salt.util.SaltUtil;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-public abstract class AbstractDiff<G extends SGraph> {
-	protected final G templateGraph;
-	protected final G otherGraph;
+public abstract class AbstractDiff<S extends Object> {
+	protected final S templateObject;
+	protected final S otherObject;
 
 	protected final DiffOptions options;
 
@@ -70,13 +64,13 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 * @param template
 	 * @param other
 	 */
-	public AbstractDiff(final G template, final G other) {
+	public AbstractDiff(final S template, final S other) {
 		this(template, other, null);
 	}
 
-	public AbstractDiff(final G template, final G other, DiffOptions optionMap) {
-		this.templateGraph = template;
-		this.otherGraph = other;
+	public AbstractDiff(final S template, final S other, DiffOptions optionMap) {
+		this.templateObject = template;
+		this.otherObject = other;
 
 		if (optionMap != null) {
 			options = optionMap;
@@ -257,8 +251,9 @@ public abstract class AbstractDiff<G extends SGraph> {
 				} else if (!belongsToCorpusStructure && options.get(DiffOptions.OPTION_IGNORE_NAME)) {
 					return true;
 				}
-			}
-			else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
+			}else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
+				return true;
+			}else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME.equals(anno.getQName())) {
 				return true;
 			}
 		}

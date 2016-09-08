@@ -17,7 +17,9 @@
  */
 package org.corpus_tools.salt.util;
 
+import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocumentGraph;
+import org.corpus_tools.salt.common.SaltProject;
 
 /**
  * Defines types of differences between two {@link SDocumentGraph} objects.
@@ -26,6 +28,19 @@ import org.corpus_tools.salt.common.SDocumentGraph;
  *
  */
 public enum DIFF_TYPES {
+	/**
+	 * one of the objects to be compared (e.g. {@link SaltProject},
+	 * {@link SCorpusGraph} or {@link SDocumentGraph}) is null
+	 **/
+	NULL_OBJECT,
+	/** one of the compared Salt projects is missing. **/
+	PROJECT_MISSING,
+	/** the names of Salt projects are different **/
+	PROJECT_NAME_DIFFERING,
+	/** the number of corpus graphs in Salt projects are different **/
+	PROJECT_NUMBER_CORPUS_GRAPH_DIFFERING,
+	/** the corpus graphs in Salt project are different **/
+	CORPUS_GRAPH_DIFFERING,
 	/**
 	 * one of the compared objects contains a label, which is missing for the
 	 * other one
