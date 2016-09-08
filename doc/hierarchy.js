@@ -4,7 +4,10 @@ var hierarchy =
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationEN", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_e_n.html", null ],
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationFR", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_f_r.html", null ],
     [ "org.corpus_tools.salt.common.tokenizer.AbbreviationIT", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_abbreviation_i_t.html", null ],
-    [ "org.corpus_tools.salt.util.internal.AbstractDiff< G extends SGraph >", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html", null ],
+    [ "org.corpus_tools.salt.util.internal.AbstractDiff< S extends Object >", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html", null ],
+    [ "org.corpus_tools.salt.util.internal.AbstractDiff< SaltProject >", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html", [
+      [ "org.corpus_tools.salt.util.internal.SaltProjectDiff", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_salt_project_diff.html", null ]
+    ] ],
     [ "org.corpus_tools.salt.util.internal.AbstractDiff< SCorpusGraph >", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html", [
       [ "org.corpus_tools.salt.util.internal.CorpusStructureDiff", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_corpus_structure_diff.html", null ]
     ] ],
@@ -105,6 +108,7 @@ var hierarchy =
         [ "org.corpus_tools.salt.impl.SaltFactoryImpl", "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html", null ]
       ] ]
     ] ],
+    [ "org.corpus_tools.salt.util.internal.Invalidity", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_invalidity.html", null ],
     [ "org.corpus_tools.salt.graph.Layer< N, R >", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_layer.html", null ],
     [ "org.corpus_tools.salt.graph.Layer< SNode, SRelation< SNode, SNode > >", "interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_layer.html", null ],
     [ "org.corpus_tools.salt.graph.impl.LayerImpl< N, R >", "classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl.html", null ],
@@ -335,6 +339,8 @@ var hierarchy =
     ] ],
     [ "org.corpus_tools.salt.common.tokenizer.Tokenizer", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html", null ],
     [ "org.corpus_tools.salt.util.internal.DataSourceAccessor.TRAVERSION_TYPE", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#enumorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor_1_1_t_r_a_v_e_r_s_i_o_n___t_y_p_e", null ],
+    [ "org.corpus_tools.salt.util.internal.ValidationResult", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_validation_result.html", null ],
+    [ "org.corpus_tools.salt.util.internal.Validator", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_validator.html", null ],
     [ "Comparator", null, [
       [ "org.corpus_tools.salt.util.STextualRelationSStartComparator", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_s_textual_relation_s_start_comparator.html", null ],
       [ "org.corpus_tools.salt.util.TokenStartComparator", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1_token_start_comparator.html", null ]

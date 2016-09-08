@@ -33,7 +33,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.2.2</span>
+   &#160;<span id="projectnumber">3.3.0</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('create.html','');});
 <p>We now show how to add a primary text like "Is this example more complicated than it appears to?" to the document graph. We first show the easy way of creating primary data and than we show the more explicit way.</p>
 <div class="fragment"><div class="line">STextualDS primaryText = sampleDocument.getDocumentGraph().createTextualDS(<span class="stringliteral">&quot;Is this example more complicated than it appears to be?&quot;</span>);</div></div><!-- fragment --><p>Even the primary text and in general the primary data in Salt are modeled as nodes with labels. The specific node, which is the container for the primary text is the node <em>STextualDS</em>, which is a subclass of <em>SSequentialDS</em>. The <em>String</em> representing the text is stored in a label of that node, which can be accessed via <em>STextualDS.getSText()</em> or <em>STextualDS.setSText(text)</em>.</p>
 <h4>Alternative</h4>
-<div class="fragment"><div class="line"><span class="comment">// set the primary text to the sentence</span></div><div class="line"><span class="comment">// &quot;Is this example more complicated than it appears to be?&quot;</span></div><div class="line">primaryText.setText(<span class="stringliteral">&quot;Is this example more complicated than it appears to?&quot;</span>);</div><div class="line"><span class="comment">// add the text to the document-graph</span></div><div class="line">sampleDocument.getDocumentGraph().addNode(primaryText);</div></div><!-- fragment --><h3><a class="anchor" id="tokenization"></a>Tokenization</h3>
+<div class="fragment"><div class="line"><span class="comment">// set the primary text to the sentence</span></div><div class="line"><span class="comment">// &quot;Is this example more complicated than it appears to be?&quot;</span></div><div class="line">primaryText.setText(<span class="stringliteral">&quot;Is this example more complicated than it appears to be?&quot;</span>);</div><div class="line"><span class="comment">// add the text to the document-graph</span></div><div class="line">sampleDocument.getDocumentGraph().addNode(primaryText);</div></div><!-- fragment --><h3><a class="anchor" id="tokenization"></a>Tokenization</h3>
 <p>Sometimes it might be necessary to manually tokenize a text yourself. For instance if you don't want to have a word tokenization, or for historical text, where separators are missing.</p>
 <p>A token in Salt is not bound to a linguistic unit - in this example we show how to tokenize words, although tokenizations by characters, syllables or sentences and so on are possible, too. The following figure shows an excerpt of the document graph we want to model in Salt. The figure only shows the tokens overlapping the words 'Is', 'this', 'example' and '.'.</p>
 <div class="image">
@@ -169,7 +169,7 @@ sampleDocument.getDocumentGraph().getRelations(np_1.getId(), tok_is.getId()).get
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Sep 1 2016 10:38:13 for Salt by
+    <li class="footer">Generated on Thu Sep 8 2016 10:59:55 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -29,5 +29,6 @@ var searchData=
   ['ns_5fvalue_5fxmi',['NS_VALUE_XMI',['../interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_dictionary.html#ad28a59dd9e25dd79d255fb7949d8c06a',1,'org::corpus_tools::salt::util::internal::persistence::SaltXML10Dictionary']]],
   ['ns_5fvalue_5fxsi',['NS_VALUE_XSI',['../interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_dictionary.html#a93a8e00034f7a66679b84e623b3878a1',1,'org::corpus_tools::salt::util::internal::persistence::SaltXML10Dictionary']]],
   ['ns_5fxmi',['NS_XMI',['../interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_dictionary.html#af16c0e76b403995e22246c4a277b7c76',1,'org::corpus_tools::salt::util::internal::persistence::SaltXML10Dictionary']]],
-  ['ns_5fxsi',['NS_XSI',['../interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_dictionary.html#ab0dbf612c1e822edc2b3ce74bfe8e370',1,'org::corpus_tools::salt::util::internal::persistence::SaltXML10Dictionary']]]
+  ['ns_5fxsi',['NS_XSI',['../interfaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_dictionary.html#ab0dbf612c1e822edc2b3ce74bfe8e370',1,'org::corpus_tools::salt::util::internal::persistence::SaltXML10Dictionary']]],
+  ['null_5fobject',['NULL_OBJECT',['../namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#ac6eb5d012f4536cb7cdceb51208b9c08',1,'org::corpus_tools::salt::util::DIFF_TYPES']]]
 ];
