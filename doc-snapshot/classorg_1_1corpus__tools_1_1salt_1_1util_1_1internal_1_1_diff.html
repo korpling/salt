@@ -33,7 +33,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.2.3-SNAPSHOT</span>
+   &#160;<span id="projectnumber">3.3.0-SNAPSHOT</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -140,6 +140,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0640ba4417b39f4d0fe7a951ed64a40e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0640ba4417b39f4d0fe7a951ed64a40e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Diff</b> (<a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html">SCorpusGraph</a> template, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html">SCorpusGraph</a> other, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_diff_options.html">DiffOptions</a> optionMap)</td></tr>
 <tr class="separator:a0640ba4417b39f4d0fe7a951ed64a40e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e7f164896de6f751ac547fe55d984ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e7f164896de6f751ac547fe55d984ec"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Diff</b> (<a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_salt_project.html">SaltProject</a> template, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_salt_project.html">SaltProject</a> other, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_diff_options.html">DiffOptions</a> optionMap)</td></tr>
+<tr class="separator:a9e7f164896de6f751ac547fe55d984ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbc47cd1010f133420ca992293b618df"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#abbc47cd1010f133420ca992293b618df">Diff</a> (<a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html">SCorpusGraph</a> template, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_corpus_graph.html">SCorpusGraph</a> other, Map&lt; String, Boolean &gt; optionMap)</td></tr>
 <tr class="separator:abbc47cd1010f133420ca992293b618df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a305fdc910f3aae6e8fc0859b5d6b5705"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html#a305fdc910f3aae6e8fc0859b5d6b5705">isIsomorph</a> ()</td></tr>
@@ -151,7 +154,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class compares two <a class="el" href="">SDocumentGraph</a> objects for isomorphie. </p>
-<p>It uses characteristics of document graphs to use a more specific algorithm for checking whether a graph is isomorphic. At first tokens are compared. Both graphs are compared starting with offset "0". Two tokens are the same, when their textual offset and the overlapped text is the same. As with all following SNodes, SAnnotations and SFeatures are checked. The next step is to look for SNodes that are the source of a incoming relations of a SToken. Of these only those are picked, that have SNodes on their SOutgoingrelations, that already have been checked (at this point: only STokens). These SNodes are then compared with each other. Whenever a relation is used in the way described above, the SRelation is checked for SFeatures and SRelations.</p>
+<p>It uses characteristics of document graphs to use a more specific algorithm for checking whether a graph is isomorphic. At first tokens are compared. Both graphs are compared starting with offset "0". Two tokens are the same, when their textual offset and the overlapped text is the same. As with all following <a class="el" href="">SNode</a>s, <a class="el" href="">SAnnotation</a>s and <a class="el" href="">SFeature</a>s are checked. The next step is to look for <a class="el" href="">SNode</a>s that are the source of a incoming relations of a <a class="el" href="">SToken</a>. Of these only those are picked, that have <a class="el" href="">SNode</a>s on their outgoing relations, that already have been checked (at this point: only <a class="el" href="">SToken</a>s). These <a class="el" href="">SNode</a>s are then compared with each other. Whenever a relation is used in the way described above, the <a class="el" href="">SRelation</a> is checked for <a class="el" href="">SFeature</a>s and <a class="el" href="">SRelation</a>s.</p>
 <p>To adapt the isomorphie check and the computation of differences you can pass an option map via <a class="el" href="">Diff(SDocumentGraph, SDocumentGraph, Map)</a>. Possible options are: </p><ul>
 <li>
 <a class="el" href="">OPTION_CHECK_ANNOTATION</a> - When true, even all annotations of nodes and relations are used for isomorphie check and difference computation.  </li>
@@ -359,7 +362,7 @@ André Röhrig </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>org</b></li><li class="navelem"><b>corpus_tools</b></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt.html">salt</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1util.html">util</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal.html">internal</a></li><li class="navelem"><a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_diff.html">Diff</a></li>
-    <li class="footer">Generated on Wed Sep 7 2016 10:52:38 for Salt by
+    <li class="footer">Generated on Thu Sep 8 2016 10:09:26 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

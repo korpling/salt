@@ -12,6 +12,7 @@ var searchData=
   ['saltnotificationfactory',['SaltNotificationFactory',['../classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html',1,'org::corpus_tools::salt::extensions::notification']]],
   ['saltparameterexception',['SaltParameterException',['../classorg_1_1corpus__tools_1_1salt_1_1exceptions_1_1_salt_parameter_exception.html',1,'org::corpus_tools::salt::exceptions']]],
   ['saltproject',['SaltProject',['../interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_salt_project.html',1,'org::corpus_tools::salt::common']]],
+  ['saltprojectdiff',['SaltProjectDiff',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_salt_project_diff.html',1,'org::corpus_tools::salt::util::internal']]],
   ['saltprojectimpl',['SaltProjectImpl',['../classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_salt_project_impl.html',1,'org::corpus_tools::salt::common::impl']]],
   ['saltresourceexception',['SaltResourceException',['../classorg_1_1corpus__tools_1_1salt_1_1exceptions_1_1_salt_resource_exception.html',1,'org::corpus_tools::salt::exceptions']]],
   ['saltsampleexception',['SaltSampleException',['../classorg_1_1corpus__tools_1_1salt_1_1exceptions_1_1_salt_sample_exception.html',1,'org::corpus_tools::salt::exceptions']]],

@@ -1,5 +1,6 @@
 var namespaceorg_1_1corpus__tools_1_1salt_1_1util_enumorg_1_1corpus__tools_1_1salt_1_1util_1_1_d_i_f_f___t_y_p_e_s_dup =
 [
+    [ "CORPUS_GRAPH_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#aefdabe047ee5f1acc824dc8b113c9e92", null ],
     [ "ID_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a30eb60436e54fb1e70dd84675e7f7cb2", null ],
     [ "LABEL_MISSING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#ae3a80c73c5a1db48382ecde4c540ba37", null ],
     [ "LABEL_NAME_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#ae4ea8e059c40ee7ec587b3a3131f2877", null ],
@@ -10,6 +11,10 @@ var namespaceorg_1_1corpus__tools_1_1salt_1_1util_enumorg_1_1corpus__tools_1_1sa
     [ "NODE_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a799f160d1847ba48b2d19c51b36e75c8", null ],
     [ "NODE_MISSING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a7fa8e372cad6eed1efa672e61a5d06a8", null ],
     [ "NODE_NAME_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a3cb7e77c74e2f0e35c97888597017aba", null ],
+    [ "NULL_OBJECT", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#ac6eb5d012f4536cb7cdceb51208b9c08", null ],
+    [ "PROJECT_MISSING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a38515fad976d3639f92c7357db0ff758", null ],
+    [ "PROJECT_NAME_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a35de5c161bc2bbf9382ec91188a93db3", null ],
+    [ "PROJECT_NUMBER_CORPUS_GRAPH_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a06a79785fabb2fb269ba5f91e5c3485f", null ],
     [ "RELATION_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a60dd3358fe519da6e22564cec06490b1", null ],
     [ "RELATION_MISSING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#aad6bff1d6a4e46c01eee6be768af59d5", null ],
     [ "RELATION_NAME_DIFFERING", "namespaceorg_1_1corpus__tools_1_1salt_1_1util.html#a149be99495ec507e238b62547b6a922b", null ],

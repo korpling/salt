@@ -33,7 +33,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.2.3-SNAPSHOT</span>
+   &#160;<span id="projectnumber">3.3.0-SNAPSHOT</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -205,7 +205,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_relation.html#a9122557c541f642dc02c9390b0281c0c">org.corpus_tools.salt.graph.Relation&lt; S extends Node, T extends Node &gt;</a>
 </li>
 <li>getDifferences()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#a53a13a435bca6a0ba6229a61a0dc37bf">org.corpus_tools.salt.util.internal.AbstractDiff&lt; G extends SGraph &gt;</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#a5247e17ffbba067653d622babd91b875">org.corpus_tools.salt.util.internal.AbstractDiff&lt; S extends Object &gt;</a>
 </li>
 <li>getDocument()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a9d10adfb2f90757f1b3ddc6b226d6542">org.corpus_tools.salt.common.impl.SCorpusGraphImpl</a>
@@ -307,8 +307,14 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html#acecbece0c7f955aca18811b96cbcebe5">org.corpus_tools.salt.graph.Graph&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#a9b24e639036bd4a793e120b4f83e35ec">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 </li>
+<li>getInvalidities()
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_validation_result.html#a3697ce6060de58b0e779ca46b7d598cb">org.corpus_tools.salt.util.internal.ValidationResult</a>
+</li>
+<li>getInvalidObject()
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_invalidity.html#a52edbf1d1d61dbdbd683ef1c9e18dbaa">org.corpus_tools.salt.util.internal.Invalidity</a>
+</li>
 <li>getIsoNodes()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#aa46bee1e2548b4611624872987600995">org.corpus_tools.salt.util.internal.AbstractDiff&lt; G extends SGraph &gt;</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#a47ae27c32bbff3fadda9c96e7c375cf7">org.corpus_tools.salt.util.internal.AbstractDiff&lt; S extends Object &gt;</a>
 </li>
 <li>getJavaType()
 : <a class="el" href="enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#ac727297ac15e0ad4af4e986b3a2b9a6e">org.corpus_tools.salt.SALT_TYPE</a>
@@ -465,15 +471,18 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_label_impl.html#a0842845cc08b8b3414bd3057e2269ed2">org.corpus_tools.salt.graph.impl.LabelImpl</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_label.html#aa955df57c87e3b1bb9da501ef65f9366">org.corpus_tools.salt.graph.Label</a>
 </li>
+<li>getReason()
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_invalidity.html#a0cd3eb7ba0cf1e0610fa2eb666dd1bb7">org.corpus_tools.salt.util.internal.Invalidity</a>
+</li>
 <li>getRelation()
 : <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html#a429df1abfe14e80c4401e5c9e869e9dd">org.corpus_tools.salt.graph.Graph&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#afb28dca3cdc00bf084f04089e0494741">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 </li>
 <li>getRelations()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a363242aa359de66266f9bb4a0d99e2ca">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a80183b9469016a33fb7d70d548f9d74b">org.corpus_tools.salt.common.SDocumentGraph</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html#a96a0d198e45eb90291eeeaf524d48a71">org.corpus_tools.salt.graph.Graph&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
-, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#ae3571fcf7aad1b751fe1d6b57b62f3b8">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#af3aac897549da11ad4c58ada98b172f5">org.corpus_tools.salt.common.SDocumentGraph</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html#a502e758150685570b13ddcef422571cb">org.corpus_tools.salt.graph.Graph&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
+, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#ad549603d79b56beab83b93aab9bbe824">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 , <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_layer_impl.html#a259e64a1be9e5af2d469a0e89258eec5">org.corpus_tools.salt.graph.impl.LayerImpl&lt; N extends Node, R extends Relation&lt; N, N &gt;</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_layer.html#a7c531a50219d6c88cdc1c72fa65c17ab">org.corpus_tools.salt.graph.Layer&lt; N extends Node, R extends Relation&lt; N, N &gt;</a>
 </li>
@@ -496,7 +505,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <li>getRootsByRelationType()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a397cf620fe28acdb7127531dae5d8064">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a69c77e3f3369b295c586ac30c04e0c1a">org.corpus_tools.salt.common.SDocumentGraph</a>
-, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#aabd56ca8553a20d9f7ae43ec3beaf7b2">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
+, <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_data_source_accessor.html#a90374af54f79cd442e0ea6b2ce367ff8">org.corpus_tools.salt.util.internal.DataSourceAccessor</a>
 </li>
 <li>getSaltObject()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1_salt_x_m_l10_handler.html#ae65b2e6b685aa91110cbd422e5b68d4e">org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler</a>
@@ -514,7 +523,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 </li>
 <li>getSortedTokenByText()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#adbff3575da9ae12811cf76e2151f2834">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>
-, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#af88f9fd0998b863f89b41c04fab047ae">org.corpus_tools.salt.common.SDocumentGraph</a>
+, <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#aeadf820ecfc95c77db8b13fd86f0bc16">org.corpus_tools.salt.common.SDocumentGraph</a>
 </li>
 <li>getSource()
 : <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_relation_impl.html#af598e04ee289575f4592dec78f908104">org.corpus_tools.salt.graph.impl.RelationImpl&lt; S extends Node, T extends Node &gt;</a>
@@ -624,7 +633,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 , <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_abstract_annotation.html#a4e46b32366a9f00ca3d8e9f6d196ffcd">org.corpus_tools.salt.core.SAbstractAnnotation</a>
 </li>
 <li>GraphImpl()
-: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#a35b451567ecdec308facf11a436e6662">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
+: <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1graph_1_1impl_1_1_graph_impl.html#ab97cb5c4f680b31392f8c9e45cb8899e">org.corpus_tools.salt.graph.impl.GraphImpl&lt; N extends Node, R extends Relation&lt; N, N, L extends Layer&lt; N, R &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -632,7 +641,7 @@ $(document).ready(function(){initNavTree('functions_func_g.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Sep 7 2016 10:52:38 for Salt by
+    <li class="footer">Generated on Thu Sep 8 2016 10:09:26 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

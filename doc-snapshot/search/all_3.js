@@ -11,7 +11,7 @@ var searchData=
   ['difference',['Difference',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_difference.html',1,'org::corpus_tools::salt::util']]],
   ['diffoptions',['DiffOptions',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_diff_options.html',1,'org::corpus_tools::salt::util']]],
   ['diffoptions',['DiffOptions',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_diff_options.html#a19b42f565b9c2c23a80c2ab0c9f709db',1,'org::corpus_tools::salt::util::DiffOptions']]],
-  ['diffsrequested',['diffsRequested',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#a40f2676a9db9047e6431946ad5b4d52f',1,'org::corpus_tools::salt::util::internal::AbstractDiff']]],
+  ['diffsrequested',['diffsRequested',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_abstract_diff.html#a46adb62cfff51cc65aa218a75399245d',1,'org::corpus_tools::salt::util::internal::AbstractDiff']]],
   ['difftype',['diffType',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1_difference.html#a90f8e95fd01e8e9970c8f95849fb716d',1,'org::corpus_tools::salt::util::Difference']]],
   ['documentstructurediff',['DocumentStructureDiff',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_document_structure_diff.html#a5c36abc9e1602389933ca6b4de328230',1,'org::corpus_tools::salt::util::internal::DocumentStructureDiff']]],
   ['documentstructurediff',['DocumentStructureDiff',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_document_structure_diff.html',1,'org::corpus_tools::salt::util::internal']]],
