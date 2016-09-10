@@ -122,9 +122,13 @@ public class SaltProjectImpl implements SaltProject {
 				try {
 					sDoc.loadDocumentGraph();
 				} catch (SaltResourceException e) {
-					throw new SaltResourceException("A problem occured when loading salt project from '" + saltProjectURI + "', because one of its documents could not have been load '" + sDoc.getId() + "'.", e);
+					throw new SaltResourceException("A problem occured when loading salt project from '"
+							+ saltProjectURI + "', because one of its documents could not have been load '"
+							+ sDoc.getId() + "'.", e);
 				} catch (Exception e) {
-					throw new SaltResourceException("A problem occured when loading salt project from '" + saltProjectURI + "', because of a nested exception during loading one of its documents '" + sDoc.getId() + "'.", e);
+					throw new SaltResourceException("A problem occured when loading salt project from '"
+							+ saltProjectURI + "', because of a nested exception during loading one of its documents '"
+							+ sDoc.getId() + "'.", e);
 				}
 			}
 		}

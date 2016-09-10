@@ -33,12 +33,14 @@ public class NotifierHelperTest {
 	public void testAddRemoveGetListener() {
 		Listener listener1 = new Listener() {
 			@Override
-			public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue, Object container) {
+			public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue,
+					Object container) {
 			}
 		};
 		Listener listener2 = new Listener() {
 			@Override
-			public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue, Object container) {
+			public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue,
+					Object container) {
 			}
 		};
 

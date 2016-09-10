@@ -53,7 +53,8 @@ public class SaltTestsUtil {
 		if (segments == null) {
 			file = getTempTestFolder();
 		} else {
-			file = new File(getTempTestFolder().getAbsolutePath() + (segments.startsWith("/") ? segments : "/" + segments));
+			file = new File(
+					getTempTestFolder().getAbsolutePath() + (segments.startsWith("/") ? segments : "/" + segments));
 		}
 		if (!file.exists()) {
 			file.mkdirs();
@@ -88,7 +89,8 @@ public class SaltTestsUtil {
 					path = path + "/";
 				}
 			} catch (IOException e) {
-				throw new SaltResourceException("Cannot create temporary folder at " + System.getProperty("java.io.tmpdir") + ". ");
+				throw new SaltResourceException(
+						"Cannot create temporary folder at " + System.getProperty("java.io.tmpdir") + ". ");
 			}
 		}
 

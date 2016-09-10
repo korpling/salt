@@ -38,7 +38,7 @@ public interface Notifier {
 	 * 
 	 * @return all registered listeners
 	 **/
-  @Beta
+	@Beta
 	public List<Listener> getListener();
 
 	/**
@@ -48,7 +48,7 @@ public interface Notifier {
 	 * @param listener
 	 *            to be notified
 	 */
-  @Beta
+	@Beta
 	public void addListener(Listener listener);
 
 	/**
@@ -58,7 +58,7 @@ public interface Notifier {
 	 * @param listener
 	 *            to be notified
 	 */
-  @Beta
+	@Beta
 	public void addListener(Collection<Listener> listener);
 
 	/**
@@ -68,6 +68,6 @@ public interface Notifier {
 	 * @param listener
 	 *            to be notified
 	 */
-  @Beta
+	@Beta
 	public void removeListener(Listener listener);
 }

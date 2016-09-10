@@ -17,7 +17,6 @@
  */
 package org.corpus_tools.salt.extensions.notification.graph.Tests;
 
-
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl;
@@ -45,12 +44,11 @@ public class RelationNotifierTest extends RelationTest {
 
 	@Override
 	public void setFixture(Relation<Node, Node> fixture) {
-		Assert.assertTrue("Relation in test must be of instance RelationNotifierImpl", fixture instanceof RelationNotifierImpl);
+		Assert.assertTrue("Relation in test must be of instance RelationNotifierImpl",
+				fixture instanceof RelationNotifierImpl);
 		this.fixture = (RelationNotifierImpl) fixture;
 		super.setFixture(fixture);
 	}
-	
-	
 
 	@Before
 	public void setUp() throws Exception {

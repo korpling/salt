@@ -27,7 +27,8 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class LayerImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl implements Layer<N, R> {
+public class LayerImpl<N extends Node, R extends Relation<N, N>> extends IdentifiableElementImpl
+		implements Layer<N, R> {
 
 	private Set<N> nodes = null;
 	private Set<R> relations = null;

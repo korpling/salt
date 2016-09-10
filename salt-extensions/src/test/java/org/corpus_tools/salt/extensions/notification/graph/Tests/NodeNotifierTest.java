@@ -60,7 +60,7 @@ public class NodeNotifierTest extends NodeTest {
 	public Node createNode() {
 		return new NodeNotifierImpl();
 	}
-	
+
 	/** Checks whether the notification about name change is correct. **/
 	@Test
 	public void testNotificationAddRemoveValue() {

@@ -48,5 +48,6 @@ import org.corpus_tools.salt.core.SRelation;
  * in a graph.
  * </p>
  */
-public interface SSpanningRelation extends SRelation<SSpan, SToken>, STextOverlappingRelation<SSpan, SToken>, STimeOverlappingRelation<SSpan, SToken>, SDocumentGraphObject {
+public interface SSpanningRelation extends SRelation<SSpan, SToken>, STextOverlappingRelation<SSpan, SToken>,
+		STimeOverlappingRelation<SSpan, SToken>, SDocumentGraphObject {
 } // SSpanningRelation

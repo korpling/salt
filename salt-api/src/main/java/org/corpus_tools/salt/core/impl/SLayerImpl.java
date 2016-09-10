@@ -255,7 +255,8 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 	 */
 	@Override
 	public void addLabel(Label label) {
-		if (label != null && label.getValue() != null && label instanceof SFeature && SaltUtil.FEAT_NAME_QNAME.equals(label.getQName())) {
+		if (label != null && label.getValue() != null && label instanceof SFeature
+				&& SaltUtil.FEAT_NAME_QNAME.equals(label.getQName())) {
 			setName(label.getValue().toString());
 		} else {
 			super.addLabel(label);

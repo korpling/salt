@@ -81,7 +81,8 @@ public class SimpleTokenizer {
 		}
 		if (getDocumentGraph() == null) {
 			if (textualDS.getGraph() == null) {
-				throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
+				throw new SaltTokenizerException(
+						"Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
 			} else {
 				setDocumentGraph(textualDS.getGraph());
 			}

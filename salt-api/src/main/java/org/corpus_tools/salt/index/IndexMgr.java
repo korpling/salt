@@ -66,7 +66,8 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys, int expectedValuesPerKey);
+	public <K, V> void createIndex(String indexId, Class<K> keyType, Class<V> valueType, int expectedKeys,
+			int expectedValuesPerKey);
 
 	/**
 	 * Checks if an index with the passed identifier is registered.

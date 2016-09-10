@@ -83,8 +83,8 @@ public class SimpleTokenizerTest {
 	}
 
 	/**
-	 * Tests the text "    This   is   a test  text.", which has to be tokenized
-	 * into 5 tokens:
+	 * Tests the text " This is a test text.", which has to be tokenized into 5
+	 * tokens:
 	 * <ul>
 	 * <li>This</li>
 	 * <li>is</li>
@@ -109,8 +109,8 @@ public class SimpleTokenizerTest {
 	}
 
 	/**
-	 * Tests the text "    This   is   a test  text.", which has to be tokenized
-	 * into 5 tokens:
+	 * Tests the text " This is a test text.", which has to be tokenized into 5
+	 * tokens:
 	 * <ul>
 	 * <li>This</li>
 	 * <li>is</li>
@@ -133,11 +133,9 @@ public class SimpleTokenizerTest {
 		assertEquals("test", docGraph.getText(docGraph.getTokens().get(3)));
 		assertEquals("text", docGraph.getText(docGraph.getTokens().get(4)));
 	}
-	
+
 	/**
-	 * Tests the text 
-	 * "This is a test text." on the substring 
-	 *     " is a test" 
+	 * Tests the text "This is a test text." on the substring " is a test"
 	 * (offset 4 to 14) which should generate 3 token.
 	 * <ul>
 	 * <li>is</li>
@@ -157,11 +155,9 @@ public class SimpleTokenizerTest {
 		assertEquals("a", docGraph.getText(docGraph.getTokens().get(1)));
 		assertEquals("test", docGraph.getText(docGraph.getTokens().get(2)));
 	}
-	
+
 	/**
-	 * Tests the text 
-	 * "This is a test text." on the substring 
-	 * "This is a test" 
+	 * Tests the text "This is a test text." on the substring "This is a test"
 	 * (offset 0 to 14) which should generate 4 token.
 	 * <ul>
 	 * <li>This</li>
@@ -183,11 +179,9 @@ public class SimpleTokenizerTest {
 		assertEquals("a", docGraph.getText(docGraph.getTokens().get(2)));
 		assertEquals("test", docGraph.getText(docGraph.getTokens().get(3)));
 	}
-	
+
 	/**
-	 * Tests the text 
-	 * "This is a test text." on the substring 
-	 *     " is a test text." 
+	 * Tests the text "This is a test text." on the substring " is a test text."
 	 * (offset 4 to 20) which should generate 4 token.
 	 * <ul>
 	 * <li>is</li>
@@ -209,5 +203,5 @@ public class SimpleTokenizerTest {
 		assertEquals("test", docGraph.getText(docGraph.getTokens().get(2)));
 		assertEquals("text", docGraph.getText(docGraph.getTokens().get(3)));
 	}
-	
+
 }

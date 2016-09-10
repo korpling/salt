@@ -88,7 +88,7 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 		getFixture().setData("Test");
 		assertEquals(Integer.valueOf(4), getFixture().getEnd());
 	}
-	
+
 	@Test
 	public void testTokenize() {
 		SDocumentGraph graph = SaltFactory.createSDocumentGraph();
@@ -101,9 +101,9 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 		tokens = graph.getSortedTokenByText();
 		assertNotNull(tokens);
 		assertTrue(tokens.size() == 6);
-		String[] tokenArray = new String[]{"This", "is", "a", "birthday", "pony", "!"};
+		String[] tokenArray = new String[] { "This", "is", "a", "birthday", "pony", "!" };
 		for (int i = 0; i < graph.getTokens().size(); i++) {
-		assertEquals(tokenArray[i], graph.getText(tokens.get(i)));
+			assertEquals(tokenArray[i], graph.getText(tokens.get(i)));
 		}
 	}
 } // STextualDSTest

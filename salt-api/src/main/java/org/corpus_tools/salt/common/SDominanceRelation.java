@@ -29,5 +29,6 @@ package org.corpus_tools.salt.common;
  * 
  * @author florian
  */
-public interface SDominanceRelation extends STextOverlappingRelation<SStructure, SStructuredNode>, STimeOverlappingRelation<SStructure, SStructuredNode>, SDocumentGraphObject {
+public interface SDominanceRelation extends STextOverlappingRelation<SStructure, SStructuredNode>,
+		STimeOverlappingRelation<SStructure, SStructuredNode>, SDocumentGraphObject {
 } // SDominanceRelation

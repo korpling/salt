@@ -38,7 +38,7 @@ public class GraphNotifierTest extends GraphTest {
 
 	private GraphNotifierImpl fixture = null;
 
-  @Override
+	@Override
 	public GraphNotifierImpl getFixture() {
 		return fixture;
 	}
@@ -53,7 +53,6 @@ public class GraphNotifierTest extends GraphTest {
 		this.fixture = (GraphNotifierImpl) fixture;
 		super.setFixture(fixture);
 	}
-	
 
 	@Before
 	@Override

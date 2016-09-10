@@ -20,5 +20,6 @@ package org.corpus_tools.salt.common;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 
-public interface STextOverlappingRelation<S extends SNode, T extends SNode> extends SRelation<S, T>, SDocumentGraphObject {
+public interface STextOverlappingRelation<S extends SNode, T extends SNode>
+		extends SRelation<S, T>, SDocumentGraphObject {
 } // STextOverlappingRelation

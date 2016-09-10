@@ -21,7 +21,8 @@ import java.util.Set;
 
 import org.corpus_tools.salt.graph.Relation;
 
-public interface SRelation<S extends SNode, T extends SNode> extends Relation<S, T>, SAnnotationContainer, SNamedElement, STypedElement, SPathElement {
+public interface SRelation<S extends SNode, T extends SNode>
+		extends Relation<S, T>, SAnnotationContainer, SNamedElement, STypedElement, SPathElement {
 
 	/**
 	 * Returns all layers containing this relation. This is a computed set and

@@ -36,7 +36,7 @@ public interface Listener {
 	 * @author florian
 	 *
 	 */
-  @Beta
+	@Beta
 	public enum NOTIFICATION_TYPE {
 		/** An object or value has been added **/
 		ADD,
@@ -62,10 +62,11 @@ public interface Listener {
 	 * @param container
 	 *            the object, which contains the changed object
 	 */
-  @Beta
-	public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue, Object container);
+	@Beta
+	public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue,
+			Object container);
 
-  @Beta
+	@Beta
 	public static class Event {
 		public NOTIFICATION_TYPE type = null;
 		public GRAPH_ATTRIBUTES attribute = null;
@@ -73,7 +74,8 @@ public interface Listener {
 		public Object newValue = null;
 		public Object container = null;
 
-		public Event(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue, Object container) {
+		public Event(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue,
+				Object container) {
 			this.type = type;
 			this.attribute = attribute;
 			this.oldValue = oldValue;
