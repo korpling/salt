@@ -22,7 +22,6 @@ import static org.junit.Assert.assertEquals;
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl;
-import org.corpus_tools.salt.extensions.notification.graph.impl.LayerNotifierImpl;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.GraphFactory;

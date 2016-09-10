@@ -19,8 +19,8 @@ package org.corpus_tools.salt.extensions.notification.graph;
 
 import java.util.Collection;
 import java.util.List;
-import org.corpus_tools.salt.Beta;
 
+import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.extensions.notification.Listener;
 
 /**

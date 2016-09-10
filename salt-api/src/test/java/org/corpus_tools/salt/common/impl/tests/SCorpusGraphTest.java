@@ -17,6 +17,8 @@
  */
 package org.corpus_tools.salt.common.impl.tests;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,6 @@ import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.*;
 
 import junit.framework.TestCase;
 

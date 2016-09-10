@@ -17,6 +17,8 @@
  */
 package org.corpus_tools.salt.extensions.notification.graph.Tests;
 
+import static org.junit.Assert.assertEquals;
+
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListener;
 import org.corpus_tools.salt.extensions.notification.graph.impl.RelationNotifierImpl;
@@ -28,7 +30,6 @@ import org.corpus_tools.salt.graph.impl.tests.RelationTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 public class RelationNotifierTest extends RelationTest {
 
