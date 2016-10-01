@@ -89,8 +89,7 @@
 						</Export-Package>
 						<Bundle-ClassPath>.,{maven-dependencies},
 							lib/nv-i18n-${nv-i18n.version}.jar,
-							lib/textcat-${textcat.version}.jar,
-							lib/commons-lang3-${commons-lang3.version}.jar</Bundle-ClassPath>
+							lib/textcat-${textcat.version}.jar</Bundle-ClassPath>
 						<Include-Resource>{maven-resources}, LICENSE, NOTICE,
 							lib/nv-i18n-${nv-i18n.version}.jar=lib/nv-i18n-${nv-i18n.version}.jar,
 							lib/textcat-${textcat.version}.jar=lib/textcat-${textcat.version}.jar</Include-Resource>
