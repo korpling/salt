@@ -81,13 +81,13 @@
 		<license.file>${basedir}/LICENSE</license.file>
 		<notice.file>${basedir}/NOTICE</notice.file>
 		<java.version>1.7</java.version>
-		<xmlunit.version>1.3</xmlunit.version>
-		<junit.version>4.11</junit.version>
+		<xmlunit.version>1.6</xmlunit.version>
+		<junit.version>4.12</junit.version>
 		<emf.version>2.9.1-v20130827-0309</emf.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<commons.lang3.version>3.3.2</commons.lang3.version>
 		<maven-bundle-plugin.version>2.5.3</maven-bundle-plugin.version>
-		<assertj.version>2.4.1</assertj.version>
+		<assertj.version>3.5.2</assertj.version>
 		<nv-i18n.version>1.1</nv-i18n.version>
 		<textcat.version>1.0.1</textcat.version>
 		<slf4j.version>1.7.5</slf4j.version>
