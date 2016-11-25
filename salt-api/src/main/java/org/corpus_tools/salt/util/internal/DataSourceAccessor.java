@@ -259,7 +259,7 @@ public class DataSourceAccessor {
 						if (relation == null) {
 							return true;
 						}
-						if (relation != null && relationClazz != null) {
+						if (relationClazz != null) {
 							if (relationClazz.isAssignableFrom(relation.getClass())) {
 								return true;
 							}
