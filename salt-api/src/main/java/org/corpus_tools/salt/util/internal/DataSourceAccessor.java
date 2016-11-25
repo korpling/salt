@@ -176,33 +176,39 @@ public class DataSourceAccessor {
 			throw new SaltParameterException("Cannot start method please set the document graph first.");
 		}
 
-		List<SNode> nodes = null;
-		List<? extends SSequentialRelation> sSeqRels = null;
+		final List<? extends SSequentialRelation> relations = findRelationsToDataSourceType(documentGraph, sequence);
+		final List<SToken> tokens = findTokensReferedByRelationsInSequence(relations, sequence);
+		final List<SNode> nodes = new ArrayList<SNode>(tokens);
+		return (nodes);
+	}
+
+	private static List<? extends SSequentialRelation> findRelationsToDataSourceType(SDocumentGraph documentGraph,
+			DataSourceSequence<Number> sequence) {
+		List<? extends SSequentialRelation> relations = null;
 		if (sequence.getDataSource() instanceof STextualDS) {
-			sSeqRels = documentGraph.getTextualRelations();
+			relations = documentGraph.getTextualRelations();
 		} else if (sequence.getDataSource() instanceof STimeline) {
-			sSeqRels = documentGraph.getTimelineRelations();
+			relations = documentGraph.getTimelineRelations();
 		} else {
 			throw new SaltParameterException(
 					"Cannot compute overlaped nodes, because the given dataSource is not supported by this method.");
 		}
-		for (SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> sSeqRel : sSeqRels) {
+		return relations;
+	}
+
+	private static List<SToken> findTokensReferedByRelationsInSequence(List<? extends SSequentialRelation> relations,
+			DataSourceSequence sequence) {
+		final List<SToken> tokens = new ArrayList<>();
+		for (SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> seqRel : relations) {
 			// walk through all sequential relations
-			if ((sequence.getDataSource().equals(sSeqRel.getTarget()))
-					&& (sSeqRel.getStart().doubleValue() >= sequence.getStart().doubleValue())
-					&& (sSeqRel.getEnd().doubleValue() <= sequence.getEnd().doubleValue())) {
+			if ((sequence.getDataSource().equals(seqRel.getTarget()))
+					&& (seqRel.getStart().doubleValue() >= sequence.getStart().doubleValue())
+					&& (seqRel.getEnd().doubleValue() <= sequence.getEnd().doubleValue())) {
 				// sequential relation is in the interval
-				for (Class<? extends SNode> nodeClass : nodeClasses) {
-					if (nodes == null)
-						nodes = new ArrayList<SNode>();
-					if (nodeClass.isInstance(sSeqRel.getSource())) {
-						// source is of correct type
-						nodes.add(sSeqRel.getSource());
-					}
-				}
-			} // sequential relation is in the interval
-		} // walk through all sequential relations
-		return (nodes);
+				tokens.add(seqRel.getSource());
+			}
+		}
+		return tokens;
 	}
 
 	/**

@@ -126,4 +126,35 @@ public class DataSourceSequence<P extends Number> {
 		result.append(')');
 		return result.toString();
 	}
+
+	public static class Builder {
+
+		public <P extends Number> Builder2<P> on(SSequentialDS<?, P> dataSource) {
+			final DataSourceSequence<P> sequence = new DataSourceSequence<>();
+			sequence.setDataSource(dataSource);
+			return new Builder2<P>(sequence);
+		}
+
+		public static class Builder2<P extends Number> {
+			private final DataSourceSequence<P> sequence;
+
+			public Builder2(DataSourceSequence<P> sequence) {
+				this.sequence = sequence;
+			}
+
+			public Builder2<P> from(P start) {
+				sequence.setStart(start);
+				return this;
+			}
+
+			public Builder2<P> to(P end) {
+				sequence.setEnd(end);
+				return this;
+			}
+
+			public DataSourceSequence<P> build() {
+				return sequence;
+			}
+		}
+	}
 }
