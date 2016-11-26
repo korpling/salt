@@ -36,88 +36,30 @@ public class GetXBySequence {
 		this.documentGraph = documentGraph;
 	}
 
-	/**
-	 * Returns all {@link SToken} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
-	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SToken} objects refer to.
-	 * @return a list of {@link SToken} objects which refer or overlap the
-	 *         passed sequence
-	 */
 	public List<SToken> getTokensBySequence(DataSourceSequence DataSourceSequence) {
 		final List<SToken> tokens = ((List<SToken>) (List<? extends SNode>) getSNodesBySequence(DataSourceSequence,
 				Arrays.<Class<? extends SNode>>asList(SToken.class)));
 		return (tokens);
 	}
 
-	/**
-	 * Returns all {@link SSpan} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
-	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SSpan} objects refer to.
-	 * @return a list of {@link SSpan} objects which refer or overlap the passed
-	 *         sequence
-	 */
 	public List<SSpan> getSpanBySequence(DataSourceSequence DataSourceSequence) {
 		final List<SSpan> spans = ((List<SSpan>) (List<? extends SNode>) getSNodesBySequence(DataSourceSequence,
 				Arrays.<Class<? extends SNode>>asList(SSpan.class)));
 		return (spans);
 	}
 
-	/**
-	 * Returns all {@link SStructure} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
-	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SStructure} objects refer to.
-	 * @return a list of {@link SStructure} objects which refer or overlap the
-	 *         passed sequence
-	 */
 	public List<SStructure> getStructureBySequence(DataSourceSequence DataSourceSequence) {
 		final List<SStructure> structs = ((List<SStructure>) (List<? extends SNode>) getSNodesBySequence(
 				DataSourceSequence, Arrays.<Class<? extends SNode>>asList(SStructure.class)));
 		return (structs);
 	}
 
-	/**
-	 * Returns all {@link SNode} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
-	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SNode} objects refer to.
-	 * @return a list of {@link SNode} objects which refer or overlap the passed
-	 *         sequence
-	 */
 	public List<SNode> getNodeBySequence(DataSourceSequence DataSourceSequence) {
 		final List<SNode> nodes = getSNodesBySequence(DataSourceSequence,
 				Arrays.<Class<? extends SNode>>asList(SNode.class));
 		return (nodes);
 	}
 
-	/**
-	 * Searches for all {@link SNode} objects of the given node type, which
-	 * cover the given sequence.
-	 * 
-	 * @param sequence
-	 *            sequence, which is overlapped
-	 * @param nodeClasses
-	 *            type of nodes to be returned
-	 * @return nodes, which overlaps the given sequence
-	 */
 	private List<SNode> getSNodesBySequence(DataSourceSequence sequence, List<Class<? extends SNode>> nodeClasses) {
 		if (sequence == null) {
 			throw new SaltParameterException(
