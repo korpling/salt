@@ -10,7 +10,9 @@ import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SSpan;
 import org.corpus_tools.salt.common.SStructure;
+import org.corpus_tools.salt.common.STextOverlappingRelation;
 import org.corpus_tools.salt.common.STextualDS;
+import org.corpus_tools.salt.common.STimeOverlappingRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.samples.SampleGenerator;
@@ -79,5 +81,25 @@ public class GetXBySequenceTest {
 
 		assertThat(actualNodes)
 				.containsExactlyInAnyOrder(expectedStructures.toArray(new SStructure[expectedStructures.size()]));
+	}
+
+	@Test
+	public void whenFindingRelationTypeForSTextualDS_thenReturnSTextOverlappingRelation() {
+		final DataSourceSequence<?> sequence = new DataSourceSequence.Builder().on(SaltFactory.createSTextualDS())
+				.build();
+		assertThat(fixture.findRelationTypeToDataSourceSequence(sequence)).isEqualTo(STextOverlappingRelation.class);
+	}
+
+	@Test
+	public void whenFindingRelationTypeForSTimeline_thenReturnSTimeOverlappingRelation() {
+		final DataSourceSequence<?> sequence = new DataSourceSequence.Builder().on(SaltFactory.createSTimeline())
+				.build();
+		assertThat(fixture.findRelationTypeToDataSourceSequence(sequence)).isEqualTo(STimeOverlappingRelation.class);
+	}
+
+	@Test
+	public void whenFindingRelationTypeForEmptyDataSource_thenReturnNull() {
+		final DataSourceSequence<?> sequence = new DataSourceSequence.Builder().on(null).build();
+		assertThat(fixture.findRelationTypeToDataSourceSequence(sequence)).isNull();
 	}
 }

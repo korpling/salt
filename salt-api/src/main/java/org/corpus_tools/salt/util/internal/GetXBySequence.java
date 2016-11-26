@@ -140,7 +140,7 @@ public class GetXBySequence {
 		return (nodes);
 	}
 
-	private Class<? extends Relation> findRelationTypeToDataSourceSequence(DataSourceSequence<?> sequence) {
+	Class<? extends Relation> findRelationTypeToDataSourceSequence(DataSourceSequence<?> sequence) {
 		if (sequence == null || sequence.getDataSource() == null) {
 			return null;
 		}
