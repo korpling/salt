@@ -61,6 +61,7 @@ import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.DataSourceAccessor;
 import org.corpus_tools.salt.util.internal.Diff;
+import org.corpus_tools.salt.util.internal.GetXBySequence;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
@@ -681,25 +682,25 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SToken> getTokensBySequence(DataSourceSequence sequence) {
-		return (DataSourceAccessor.getTokensBySequence(this, sequence));
+		return (new GetXBySequence(this).getTokensBySequence(sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SSpan> getSpansBySequence(DataSourceSequence sequence) {
-		return (DataSourceAccessor.getSpanBySequence(this, sequence));
+		return (new GetXBySequence(this).getSpanBySequence(sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SStructure> getStructuresBySequence(DataSourceSequence sequence) {
-		return (DataSourceAccessor.getStructureBySequence(this, sequence));
+		return (new GetXBySequence(this).getStructureBySequence(sequence));
 	}
 
 	/** {@inheritDoc} **/
 	@Override
 	public List<SNode> getNodesBySequence(DataSourceSequence sequence) {
-		return (DataSourceAccessor.getNodeBySequence(this, sequence));
+		return (new GetXBySequence(this).getNodeBySequence(sequence));
 	}
 
 	/** {@inheritDoc} **/
