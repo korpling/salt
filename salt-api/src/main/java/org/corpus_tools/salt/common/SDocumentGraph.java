@@ -299,6 +299,23 @@ public interface SDocumentGraph extends SGraph {
 	public STimeline createTimeline();
 
 	/**
+	 * Creates a {@link STimelineRelation} object being contained in this
+	 * {@link SDocumentGraph} object, and attaches the {@link SToken} parameter
+	 * to the document graph's timeline at the end, its start being the
+	 * current end of the timeline, its end being the current end of the
+	 * timeline + the time steps passed in as the second parameter.
+	 * 
+	 * @param token
+	 *            The token to attach the timeline relation to
+	 * @param timeSteps
+	 *            The number of time steps on the timeline the
+	 *            token covers.				
+	 * @return returns the newly created {@link STimelineRelation}
+	 *         object
+	 */
+	public STimeline createTimelineRelation();
+
+	/**
 	 * Returns all {@link SToken} objects which refer to the passed
 	 * {@link DataSourceSequence} object. The passed object determines the
 	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
