@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,8 @@ package org.corpus_tools.salt.common.impl.tests;
 import org.corpus_tools.salt.core.SNode;
 import org.junit.Test;
 
-public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number> 
-	extends SRelationAbstractTest<S,T> {
-
+public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number>
+		extends SRelationAbstractTest<S, T> {
 
 	/** Tests whether the start value is set and returned correct. **/
 	@Test

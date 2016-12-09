@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ import com.google.common.base.Strings;
  */
 @SuppressWarnings("serial")
 public class DiffOptions extends Hashtable<String, Boolean> {
-	
+
 	/**
 	 * When true, documents won't be compared when comparing corpus structures.
 	 */
@@ -78,9 +78,10 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 	 * not produce any differences.
 	 */
 	public static final String OPTION_IGNORE_NAME = "ignoreName";
-	
+
 	/**
-	 * When true, differences in names of elements in corpus structure are ignored.
+	 * When true, differences in names of elements in corpus structure are
+	 * ignored.
 	 */
 	public static final String OPTION_IGNORE_CORPUS_STRUCTURE_NAME = "ignoreCorpusStructureName";
 	/**

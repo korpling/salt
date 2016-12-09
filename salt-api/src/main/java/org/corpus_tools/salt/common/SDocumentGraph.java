@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,12 +108,14 @@ public interface SDocumentGraph extends SGraph {
 	public STimeline getTimeline();
 
 	/**
-	 * Sets a new timeline- A timeline is a specific
-	 * datasource and acts as an anchor for {@link STimelineRelation}s. A
-	 * timeline is necessary to set tokens in correspondance when they belong to
-	 * different {@link STextualDS}s. For instance a timeline is necessary to
-	 * model dialogue data.
-	 * @param value new timeline, which replaces the old one
+	 * Sets a new timeline- A timeline is a specific datasource and acts as an
+	 * anchor for {@link STimelineRelation}s. A timeline is necessary to set
+	 * tokens in correspondance when they belong to different
+	 * {@link STextualDS}s. For instance a timeline is necessary to model
+	 * dialogue data.
+	 * 
+	 * @param value
+	 *            new timeline, which replaces the old one
 	 */
 	void setTimeline(STimeline value);
 
@@ -621,7 +623,8 @@ public interface SDocumentGraph extends SGraph {
 	 * @param insertSpace
 	 *            if true, a blank after each new text is inserted
 	 */
-	public List<SToken> insertTokensAt(STextualDS textualDS, Integer posInText, List<String> texts, Boolean insertSpace);
+	public List<SToken> insertTokensAt(STextualDS textualDS, Integer posInText, List<String> texts,
+			Boolean insertSpace);
 
 	/**
 	 * Creates a {@link SRelation} object, and sets its sSource and sTarget to

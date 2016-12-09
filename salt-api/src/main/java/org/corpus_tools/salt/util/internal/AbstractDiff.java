@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.core.SFeature;
-import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
@@ -39,9 +38,9 @@ import org.corpus_tools.salt.util.SaltUtil;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-public abstract class AbstractDiff<G extends SGraph> {
-	protected final G templateGraph;
-	protected final G otherGraph;
+public abstract class AbstractDiff<S extends Object> {
+	protected final S templateObject;
+	protected final S otherObject;
 
 	protected final DiffOptions options;
 
@@ -68,13 +67,13 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 * @param template
 	 * @param other
 	 */
-	public AbstractDiff(final G template, final G other) {
+	public AbstractDiff(final S template, final S other) {
 		this(template, other, null);
 	}
 
-	public AbstractDiff(final G template, final G other, DiffOptions optionMap) {
-		this.templateGraph = template;
-		this.otherGraph = other;
+	public AbstractDiff(final S template, final S other, DiffOptions optionMap) {
+		this.templateObject = template;
+		this.otherObject = other;
 
 		if (optionMap != null) {
 			options = optionMap;
@@ -109,7 +108,8 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 *            type of the difference
 	 * @return returns whether sizes are the same
 	 **/
-	protected void addDifference(final Object templateObject, final Object otherObject, final Object container, final DIFF_TYPES diffType, final Set<Difference> subDiffs) {
+	protected void addDifference(final Object templateObject, final Object otherObject, final Object container,
+			final DIFF_TYPES diffType, final Set<Difference> subDiffs) {
 		final Difference tempDiff = new Difference(templateObject, otherObject, container, diffType);
 		if (subDiffs != null) {
 			tempDiff.addSubDiffs(subDiffs);
@@ -164,7 +164,8 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 * @param subDiffs
 	 * @return true if elements have the same id, false otherwise
 	 */
-	protected boolean compareIdentifiableElements(final IdentifiableElement template, final IdentifiableElement other, final Set<Difference> subDiffs) {
+	protected boolean compareIdentifiableElements(final IdentifiableElement template, final IdentifiableElement other,
+			final Set<Difference> subDiffs) {
 		boolean retVal = true;
 		if (!options.get(DiffOptions.OPTION_IGNORE_ID)) {
 			if (!template.getId().equals(other.getId())) {
@@ -194,14 +195,15 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 *            be empty
 	 * @return
 	 */
-	protected boolean compareAnnotationContainers(final SAnnotationContainer template, final SAnnotationContainer other, final Set<Difference> subDiffs) {
+	protected boolean compareAnnotationContainers(final SAnnotationContainer template, final SAnnotationContainer other,
+			final Set<Difference> subDiffs) {
 		boolean retVal1 = true;
 		boolean retVal2 = true;
 		boolean retVal3 = true;
 		boolean retVal4 = true;
 
 		if (!(boolean) options.get(DiffOptions.OPTION_IGNORE_ANNOTATIONS)) {
-			final Iterator<SAnnotation> otherIterator =  other.iterator_SAnnotation();
+			final Iterator<SAnnotation> otherIterator = other.iterator_SAnnotation();
 			final Iterator<SAnnotation> templateIterator = template.iterator_SAnnotation();
 			retVal1 = compareAnnotationContainers(template, templateIterator, other, otherIterator, subDiffs);
 			if (!retVal1 && subDiffs != null) {
@@ -255,8 +257,9 @@ public abstract class AbstractDiff<G extends SGraph> {
 				} else if (!belongsToCorpusStructure && options.get(DiffOptions.OPTION_IGNORE_NAME)) {
 					return true;
 				}
-			}
-			else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
+			} else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME.equals(anno.getQName())) {
+				return true;
+			} else if (SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION_QNAME.equals(anno.getQName())) {
 				return true;
 			}
 		}
@@ -274,10 +277,9 @@ public abstract class AbstractDiff<G extends SGraph> {
 	 * @param subDiffs
 	 * @return
 	 */
-	private boolean compareAnnotationContainers(final SAnnotationContainer template, 
-			final Iterator<? extends SAbstractAnnotation> templateIterator, 
-			final SAnnotationContainer other, final Iterator<? extends SAbstractAnnotation> otherIterator, 
-			final Set<Difference> subDiffs) {
+	private boolean compareAnnotationContainers(final SAnnotationContainer template,
+			final Iterator<? extends SAbstractAnnotation> templateIterator, final SAnnotationContainer other,
+			final Iterator<? extends SAbstractAnnotation> otherIterator, final Set<Difference> subDiffs) {
 		boolean retVal = true;
 
 		// create remaining list, which contains all annos from other

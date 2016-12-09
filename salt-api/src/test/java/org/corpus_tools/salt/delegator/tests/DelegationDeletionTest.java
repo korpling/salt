@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,8 @@ public class DelegationDeletionTest {
 		Set<Difference> diffs = template_doc.getDocumentGraph().findDiffs(fixture_doc.getDocumentGraph());
 		assertEquals("" + diffs, 0, diffs.size());
 
-		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
+		assertEquals(template_doc.getDocumentGraph().getRelations().size(),
+				fixture_doc.getDocumentGraph().getRelations().size());
 
 		List<SRelation<?,?>> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getPointingRelations());
@@ -103,7 +104,8 @@ public class DelegationDeletionTest {
 		Set<Difference> diffs = template_doc.getDocumentGraph().findDiffs(fixture_doc.getDocumentGraph());
 		assertEquals("" + diffs, 0, diffs.size());
 
-		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
+		assertEquals(template_doc.getDocumentGraph().getRelations().size(),
+				fixture_doc.getDocumentGraph().getRelations().size());
 
 		List<SRelation<?,?>> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getDominanceRelations());
@@ -149,7 +151,8 @@ public class DelegationDeletionTest {
 		Set<Difference> diffs = template_doc.getDocumentGraph().findDiffs(fixture_doc.getDocumentGraph());
 		assertEquals("" + diffs, 0, diffs.size());
 
-		assertEquals(template_doc.getDocumentGraph().getRelations().size(), fixture_doc.getDocumentGraph().getRelations().size());
+		assertEquals(template_doc.getDocumentGraph().getRelations().size(),
+				fixture_doc.getDocumentGraph().getRelations().size());
 
 		List<SRelation<?,?>> rels = new Vector<>();
 		rels.addAll(template_doc.getDocumentGraph().getSpanningRelations());

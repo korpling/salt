@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,19 +47,19 @@ public class RelationTest {
 	public void setUp() throws Exception {
 		setFixture(createRelation());
 	}
-	
+
 	protected Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
 		return GraphFactory.createGraph();
 	}
-	
+
 	protected Node createNode() {
 		return GraphFactory.createNode();
 	}
-	
-	protected Relation<Node,Node> createRelation() {
+
+	protected Relation<Node, Node> createRelation() {
 		return GraphFactory.createRelation();
 	}
-	
+
 	protected Layer<Node, Relation<Node, Node>> createLayer() {
 		return GraphFactory.createLayer();
 	}

@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 		}
 		return (retVal);
 	}
-	
+
 	/**
 	 * Returns the document structure which belongs to this document. If no
 	 * document structure was created so far, a new one is created and returned
@@ -68,10 +68,10 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	 * 
 	 * @return document structure
 	 */
-	public SDocumentGraph createDocumentGraph(){
-		SDocumentGraph retVal= getDocumentGraph();
-		if (retVal == null){
-			retVal= SaltFactory.createSDocumentGraph();
+	public SDocumentGraph createDocumentGraph() {
+		SDocumentGraph retVal = getDocumentGraph();
+		if (retVal == null) {
+			retVal = SaltFactory.createSDocumentGraph();
 			setDocumentGraph(retVal);
 		}
 		return retVal;
@@ -226,7 +226,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			return (SCorpusGraph) superGraph;
 		}
 
-		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " + superGraph.getClass().getName() + ")");
+		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is "
+				+ superGraph.getClass().getName() + ")");
 	}
 
 } // SDocumentImpl

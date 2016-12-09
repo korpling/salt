@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -210,8 +210,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	public List<SCorpus> getCorpora() {
 		List<SNode> nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SCorpus.class);
 		List<SCorpus> result = new ArrayList<>(nodes.size());
-		for(Node n : nodes) {
-			if(n instanceof SCorpus) {
+		for (Node n : nodes) {
+			if (n instanceof SCorpus) {
 				result.add((SCorpus) n);
 			}
 		}
@@ -223,8 +223,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	public List<SDocument> getDocuments() {
 		List<SNode> nodes = getIndexMgr().getAll(SaltUtil.IDX_NODETYPE, SDocument.class);
 		List<SDocument> result = new ArrayList<>(nodes.size());
-		for(Node n : nodes) {
-			if(n instanceof SDocument) {
+		for (Node n : nodes) {
+			if (n instanceof SDocument) {
 				result.add((SDocument) n);
 			}
 		}
@@ -236,10 +236,10 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusRelation> getCorpusRelations() {
-		List<SRelation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusRelation.class);
+		List<SRelation<?, ?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusRelation.class);
 		List<SCorpusRelation> result = new ArrayList<>(relations.size());
-		for(SRelation<?,?> e : relations) {
-			if(e instanceof SCorpusRelation) {
+		for (SRelation<?, ?> e : relations) {
+			if (e instanceof SCorpusRelation) {
 				result.add((SCorpusRelation) e);
 			}
 		}
@@ -249,10 +249,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpusDocumentRelation> getCorpusDocumentRelations() {
-		List<SRelation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE, SCorpusDocumentRelation.class);
+		List<SRelation<?, ?>> relations = getIndexMgr().getAll(SaltUtil.IDX_RELATIONTYPE,
+				SCorpusDocumentRelation.class);
 		List<SCorpusDocumentRelation> result = new ArrayList<>(relations.size());
-		for(SRelation<?,?> e : relations) {
-			if(e instanceof SCorpusDocumentRelation) {
+		for (SRelation<?, ?> e : relations) {
+			if (e instanceof SCorpusDocumentRelation) {
 				result.add((SCorpusDocumentRelation) e);
 			}
 		}
@@ -284,16 +285,20 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public Identifier addSubCorpus(SCorpus superCorpus, SCorpus subCorpus) {
 		if (superCorpus == null) {
-			throw new SaltParameterException("superCorpus", "addSubCorpus", this.getClass(), "Cannot add the given subCorpus, because the given superCorpus is null.");
+			throw new SaltParameterException("superCorpus", "addSubCorpus", this.getClass(),
+					"Cannot add the given subCorpus, because the given superCorpus is null.");
 		}
 		if (subCorpus == null) {
-			throw new SaltParameterException("subCorpus", "addSubCorpus", this.getClass(), "Cannot add the given subCorpus, because it is null.");
+			throw new SaltParameterException("subCorpus", "addSubCorpus", this.getClass(),
+					"Cannot add the given subCorpus, because it is null.");
 		}
 		if (superCorpus.getId() == null) {
-			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, subCorpus,
+					"Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
 		}
 		if (getNode(superCorpus.getId()) == null) {
-			throw new SaltInsertionException(this, subCorpus, "Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, subCorpus,
+					"Cannot add the given subCorpus, because the given superCorpus is not already contained in corpus graph.");
 		}
 
 		String namePart = null;
@@ -318,13 +323,16 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	@Override
 	public Identifier addDocument(SCorpus corpus, SDocument document) {
 		if (corpus == null) {
-			throw new SaltParameterException("corpus", "addDocument", this.getClass(), "Cannot add the given sDocument, because the given sCorpus is null.");
+			throw new SaltParameterException("corpus", "addDocument", this.getClass(),
+					"Cannot add the given sDocument, because the given sCorpus is null.");
 		}
 		if (document == null) {
-			throw new SaltParameterException("document", "addDocument", this.getClass(), "Cannot add the given sDocument, because it is null.");
+			throw new SaltParameterException("document", "addDocument", this.getClass(),
+					"Cannot add the given sDocument, because it is null.");
 		}
 		if (getNode(corpus.getId()) == null) {
-			throw new SaltInsertionException(this, document, "Cannot add the given sDocument, because the given sCorpus is not already contained in corpus graph.");
+			throw new SaltInsertionException(this, document,
+					"Cannot add the given sDocument, because the given sCorpus is not already contained in corpus graph.");
 		}
 		String namePart = null;
 		namePart = document.getName();
@@ -388,11 +396,10 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		return (document);
 	}
 
-
 	/** {@inheritDoc} **/
 	@Override
 	public List<SCorpus> createCorpus(final URI corpusPath) {
-		final URI cPath= SaltUtil.createSaltURI(corpusPath); 
+		final URI cPath = SaltUtil.createSaltURI(corpusPath);
 		List<SCorpus> retVal = null;
 		if (cPath != null) {
 			SCorpus parentCorpus = null;
@@ -417,7 +424,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public SDocument createDocument(final URI documentPath) {
-		final URI dPath= SaltUtil.createSaltURI(documentPath);
+		final URI dPath = SaltUtil.createSaltURI(documentPath);
 		SDocument retVal = null;
 		List<SCorpus> corpora = createCorpus(dPath.trimSegments(1));
 		if ((corpora == null) || (corpora.size() == 0)) {
@@ -428,14 +435,14 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		retVal = createDocument(corpora.get(corpora.size() - 1), dPath.lastSegment());
 		return (retVal);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public String toTreeString() {
 		final List<SNode> roots = getRoots();
-		final StringBuilder str= new StringBuilder();
+		final StringBuilder str = new StringBuilder();
 		if (SaltUtil.isNotNullOrEmpty(roots)) {
 			for (SNode root : roots) {
 				str.append(reportCorpusStructure(this, root, "", true));
@@ -455,18 +462,18 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 * @param isTail
 	 * @return
 	 */
-	private String reportCorpusStructure(final SGraph sGraph, final SNode node, final String prefix, final boolean isTail) {
+	private String reportCorpusStructure(final SGraph sGraph, final SNode node, final String prefix,
+			final boolean isTail) {
 		final StringBuilder retStr = new StringBuilder();
 		retStr.append(prefix);
 		retStr.append(((isTail ? "└── " : "├── ") + node.getName()));
 		retStr.append("\n");
-		final List<SRelation<? extends SNode, ? extends SNode>> outRelations = 
-				sGraph.getOutRelations(node.getId());
+		final List<SRelation<? extends SNode, ? extends SNode>> outRelations = sGraph.getOutRelations(node.getId());
 		int i = 0;
 		for (SRelation<? extends SNode, ? extends SNode> out : outRelations) {
-			boolean newTail= true;
+			boolean newTail = true;
 			if (i < outRelations.size() - 1) {
-				newTail= false;
+				newTail = false;
 			}
 			retStr.append(reportCorpusStructure(sGraph, out.getTarget(), prefix + (isTail ? "    " : "│   "), newTail));
 			i++;

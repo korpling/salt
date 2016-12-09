@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -123,9 +123,13 @@ public class SaltProjectImpl implements SaltProject {
 				try {
 					sDoc.loadDocumentGraph();
 				} catch (SaltResourceException e) {
-					throw new SaltResourceException("A problem occured when loading salt project from '" + saltProjectURI + "', because one of its documents could not have been load '" + sDoc.getId() + "'.", e);
+					throw new SaltResourceException("A problem occured when loading salt project from '"
+							+ saltProjectURI + "', because one of its documents could not have been load '"
+							+ sDoc.getId() + "'.", e);
 				} catch (Exception e) {
-					throw new SaltResourceException("A problem occured when loading salt project from '" + saltProjectURI + "', because of a nested exception during loading one of its documents '" + sDoc.getId() + "'.", e);
+					throw new SaltResourceException("A problem occured when loading salt project from '"
+							+ saltProjectURI + "', because of a nested exception during loading one of its documents '"
+							+ sDoc.getId() + "'.", e);
 				}
 			}
 		}

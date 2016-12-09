@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl implements SSequentialDS<D, P> {
-	
+
 	private final Class<D> dataClass;
-	
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SSequentialDSImpl(Class<D> dataClass) {
 		this(null, dataClass);
@@ -58,7 +58,7 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 		SFeature feature = getFeature(SaltUtil.FEAT_SDATA_QNAME);
 		if (feature != null) {
 			Object val = feature.getValue();
-			if(dataClass.isInstance(val)) {
+			if (dataClass.isInstance(val)) {
 				retVal = dataClass.cast(val);
 			}
 		}
@@ -83,10 +83,10 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-	
+
 	@Override
 	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
-		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+		if (graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
 			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
 		super.basicSetGraph(graph);

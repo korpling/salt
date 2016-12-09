@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
  */
 package org.corpus_tools.salt.common.impl.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -88,7 +90,7 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 		getFixture().setData("Test");
 		assertEquals(Integer.valueOf(4), getFixture().getEnd());
 	}
-	
+
 	@Test
 	public void testTokenize() {
 		SDocumentGraph graph = SaltFactory.createSDocumentGraph();
@@ -101,9 +103,9 @@ public class STextualDSTest extends SSequentialDSTest<String, Integer> {
 		tokens = graph.getSortedTokenByText();
 		assertNotNull(tokens);
 		assertTrue(tokens.size() == 6);
-		String[] tokenArray = new String[]{"This", "is", "a", "birthday", "pony", "!"};
+		String[] tokenArray = new String[] { "This", "is", "a", "birthday", "pony", "!" };
 		for (int i = 0; i < graph.getTokens().size(); i++) {
-		assertEquals(tokenArray[i], graph.getText(tokens.get(i)));
+			assertEquals(tokenArray[i], graph.getText(tokens.get(i)));
 		}
 	}
 } // STextualDSTest

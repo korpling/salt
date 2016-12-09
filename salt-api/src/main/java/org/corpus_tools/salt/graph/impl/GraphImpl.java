@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,18 +36,13 @@ import org.corpus_tools.salt.index.IndexMgrImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public class GraphImpl
-	<
-	N extends Node, 
-	R extends Relation<? extends N, ? extends N>, 
-	L extends Layer<N, R>
-	> 
-	extends IdentifiableElementImpl implements Graph<N, R, L> {
-	
+public class GraphImpl<N extends Node, R extends Relation<? extends N, ? extends N>, L extends Layer<N, R>>
+		extends IdentifiableElementImpl implements Graph<N, R, L> {
+
 	private final Class<N> nodeClass;
 	private final Class<R> relationClass;
 	private final Class<L> layerClass;
-	
+
 	/**
 	 * Initializes an object of type {@link Graph}. If {@link #delegate} is not
 	 * null, all functions of this method are delegated to the delegate object.
@@ -56,8 +51,7 @@ public class GraphImpl
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public GraphImpl(Graph<N, R, L> delegate, Class<N> nodeClass, 
-			Class<R> relationClass, Class<L> layerClass) {
+	public GraphImpl(Graph<N, R, L> delegate, Class<N> nodeClass, Class<R> relationClass, Class<L> layerClass) {
 		super(delegate);
 		this.nodeClass = nodeClass;
 		this.relationClass = relationClass;
@@ -66,7 +60,8 @@ public class GraphImpl
 	}
 
 	@Override
-	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is
+									// final)
 	protected Graph<N, R, L> getDelegate() {
 		return (Graph<N, R, L>) super.getDelegate();
 	}
@@ -111,8 +106,8 @@ public class GraphImpl
 	 *            expected upper bound of relations in the graph, used for
 	 *            optimization
 	 */
-	public GraphImpl(int expectedNodes, int expectedRelations, Class<N> nodeClass, 
-			Class<R> relationClass, Class<L> layerClass) {
+	public GraphImpl(int expectedNodes, int expectedRelations, Class<N> nodeClass, Class<R> relationClass,
+			Class<L> layerClass) {
 		this(null, nodeClass, relationClass, layerClass);
 		init();
 		this.expectedNodes = expectedNodes;
@@ -182,7 +177,7 @@ public class GraphImpl
 			return (null);
 		}
 		Node n = getIndexMgr().get(SaltUtil.IDX_ID_NODES, nodeId);
-		if(nodeClass != null && nodeClass.isInstance(n)) {
+		if (nodeClass != null && nodeClass.isInstance(n)) {
 			return nodeClass.cast(n);
 		} else {
 			return null;
@@ -206,7 +201,7 @@ public class GraphImpl
 			// do nothing, node is already added
 			return;
 		}
-		
+
 		if (node instanceof NodeImpl) {
 			((NodeImpl) node).basicSetGraph(this);
 		}
@@ -362,8 +357,8 @@ public class GraphImpl
 		if (relationId == null) {
 			return (null);
 		}
-		Relation<?,?> rel = getIndexMgr().get(SaltUtil.IDX_ID_RELATIONS, relationId);
-		if(relationClass != null && relationClass.isInstance(rel)) {
+		Relation<?, ?> rel = getIndexMgr().get(SaltUtil.IDX_ID_RELATIONS, relationId);
+		if (relationClass != null && relationClass.isInstance(rel)) {
 			return relationClass.cast(rel);
 		} else {
 			return null;
@@ -400,12 +395,12 @@ public class GraphImpl
 		if (getDelegate() != null) {
 			return getDelegate().getInRelations(nodeId);
 		}
-		
-		List<Relation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_IN_RELATIONS, nodeId);
+
+		List<Relation<?, ?>> relations = getIndexMgr().getAll(SaltUtil.IDX_IN_RELATIONS, nodeId);
 		List<R> result = new ArrayList<>(relations.size());
-		if(relationClass != null) {
-			for(Relation<?,?> rel : relations) {
-				if(relationClass.isInstance(rel)) {
+		if (relationClass != null) {
+			for (Relation<?, ?> rel : relations) {
+				if (relationClass.isInstance(rel)) {
 					result.add(relationClass.cast(rel));
 				}
 			}
@@ -421,11 +416,11 @@ public class GraphImpl
 			return getDelegate().getOutRelations(nodeId);
 		}
 
-		List<Relation<?,?>> relations = getIndexMgr().getAll(SaltUtil.IDX_OUT_RELATIONS, nodeId);
+		List<Relation<?, ?>> relations = getIndexMgr().getAll(SaltUtil.IDX_OUT_RELATIONS, nodeId);
 		List<R> result = new ArrayList<>(relations.size());
-		if(relationClass != null) {
-			for(Relation<?,?> rel : relations) {
-				if(relationClass.isInstance(rel)) {
+		if (relationClass != null) {
+			for (Relation<?, ?> rel : relations) {
+				if (relationClass.isInstance(rel)) {
 					result.add(relationClass.cast(rel));
 				}
 			}
@@ -485,13 +480,14 @@ public class GraphImpl
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			if (getDelegate() instanceof GraphImpl) {
-				((GraphImpl<N,R,L>) getDelegate()).basicAddRelation(relation);
+				((GraphImpl<N, R, L>) getDelegate()).basicAddRelation(relation);
 			}
 			return;
 		}
 
 		if (relation == null) {
-			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class, "A null value is not allowed. ");
+			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class,
+					"A null value is not allowed. ");
 		}
 		if (relation.getSource() == null) {
 			throw new SaltInsertionException(this, relation, "The source node is empty. ");
@@ -500,10 +496,12 @@ public class GraphImpl
 			throw new SaltInsertionException(this, relation, "The target node is empty. ");
 		}
 		if ((relation.getSource().getId() == null) || (!containsNode(relation.getSource().getId()))) {
-			throw new SaltInsertionException(this, relation, "The source node of the passed relation does not belong to this graph. ");
+			throw new SaltInsertionException(this, relation,
+					"The source node of the passed relation does not belong to this graph. ");
 		}
 		if ((relation.getTarget().getId() == null) || (!containsNode(relation.getTarget().getId()))) {
-			throw new SaltInsertionException(this, relation, "The target node of the passed relation does not belong to this graph. ");
+			throw new SaltInsertionException(this, relation,
+					"The target node of the passed relation does not belong to this graph. ");
 		}
 
 		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
@@ -554,7 +552,7 @@ public class GraphImpl
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			if (getDelegate() instanceof GraphImpl) {
-				((GraphImpl<N,R,L>) getDelegate()).update(oldValue, container, updateType);
+				((GraphImpl<N, R, L>) getDelegate()).update(oldValue, container, updateType);
 				return;
 			}
 		}
@@ -562,7 +560,7 @@ public class GraphImpl
 		if (UPDATE_TYPE.RELATION_SOURCE.equals(updateType)) {
 			// as long as R extends Relation, this check is valid
 			if (container instanceof Relation) {
-				Relation<?,?> relation = (Relation<?, ?>) container;
+				Relation<?, ?> relation = (Relation<?, ?>) container;
 				getIndexMgr().put(SaltUtil.IDX_OUT_RELATIONS, relation.getSource().getId(), relation);
 				// as long as N extends Node, this check is valid
 				if (oldValue != null && oldValue instanceof Node) {
@@ -573,7 +571,7 @@ public class GraphImpl
 		} else if (UPDATE_TYPE.RELATION_TARGET.equals(updateType)) {
 			// as long as R extends Relation, this check is valid
 			if (container instanceof Relation) {
-				Relation<?,?> relation = (Relation<?,?>) container;
+				Relation<?, ?> relation = (Relation<?, ?>) container;
 				getIndexMgr().put(SaltUtil.IDX_IN_RELATIONS, relation.getTarget().getId(), relation);
 				if (oldValue != null && oldValue instanceof Node) {
 					Node node = (Node) oldValue;
@@ -683,8 +681,8 @@ public class GraphImpl
 		if (layerId == null) {
 			return (null);
 		}
-		Layer<?,?> layer = getIndexMgr().get(SaltUtil.IDX_ID_LAYER, layerId);
-		if(layerClass != null && layerClass.isInstance(layer)) {
+		Layer<?, ?> layer = getIndexMgr().get(SaltUtil.IDX_ID_LAYER, layerId);
+		if (layerClass != null && layerClass.isInstance(layer)) {
 			return layerClass.cast(layer);
 		} else {
 			return null;
@@ -708,15 +706,15 @@ public class GraphImpl
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().addLayer(layer);
-			if (layer instanceof LayerImpl<?,?>) {
-				((LayerImpl<N,R>) layer).basicSetGraph_WithoutRemoving(this);
+			if (layer instanceof LayerImpl<?, ?>) {
+				((LayerImpl<N, R>) layer).basicSetGraph_WithoutRemoving(this);
 			}
 			return;
 		}
 
 		if (layer != null && !layers.contains(layer)) {
 			basicAddLayer(layer);
-			if (layer instanceof LayerImpl<?,?>) {
+			if (layer instanceof LayerImpl<?, ?>) {
 				((LayerImpl<N, R>) layer).basicSetGraph(this);
 			}
 			// check whether graph contains nodes in layer, if not, add them
@@ -789,7 +787,7 @@ public class GraphImpl
 			getDelegate().removeLayer(layer);
 			return;
 		}
-		if (layer instanceof LayerImpl<?,?>) {
+		if (layer instanceof LayerImpl<?, ?>) {
 			((LayerImpl<N, R>) layer).basicSetGraph(null);
 		}
 		basicRemoveLayer(layer);
@@ -811,7 +809,7 @@ public class GraphImpl
 	 * @param node
 	 *            the node to be removed
 	 */
-	protected void basicRemoveLayer(Layer<?,?> layer) {
+	protected void basicRemoveLayer(Layer<?, ?> layer) {
 		if (layer != null) {
 			if (layers.contains(layer)) {
 				layers.remove(layer);

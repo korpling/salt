@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,10 @@ import org.corpus_tools.salt.graph.impl.GraphImpl.UPDATE_TYPE;
 
 @SuppressWarnings("serial")
 public class RelationImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Relation<S, T> {
-	
+
 	private final Class<S> sourceClass;
 	private final Class<T> targetClass;
-	
+
 	/**
 	 * Initializes an object of type {@link Relation}.
 	 */
@@ -58,7 +58,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * {@inheritDoc Relation#getDelegate()}
 	 */
 	@Override
-	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is
+									// final)
 	public Relation<S, T> getDelegate() {
 		return ((Relation<S, T>) super.getDelegate());
 	}
@@ -83,6 +84,10 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * change of the source.
 	 */
 	public void setSource(S source) {
+		if (source == null) {
+			return;
+		}
+
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().setSource(source);
@@ -93,20 +98,19 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		this.source = source;
 		// notify graph about change of target
 		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl<?,?,?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
+			((GraphImpl<?, ?, ?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_SOURCE);
 		}
 	}
-	
+
 	@Override
 	public void setSourceUnsafe(Node source) throws SaltParameterException {
-		if(getSourceClass().isInstance(source)) {
+		if (getSourceClass().isInstance(source)) {
 			setSource(getSourceClass().cast(source));
 		} else {
-			throw new SaltParameterException("source", "setSourceUnsafe", getClass(), 
+			throw new SaltParameterException("source", "setSourceUnsafe", getClass(),
 					"Must be of type " + getSourceClass().getSimpleName());
 		}
 	}
-	
 
 	/** target node of this relation. **/
 	private T target = null;
@@ -138,27 +142,26 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		this.target = target;
 		// notify graph about change of target
 		if (getGraph() != null && getGraph() instanceof GraphImpl) {
-			((GraphImpl<?,?,?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
+			((GraphImpl<?, ?, ?>) getGraph()).update(oldValue, this, UPDATE_TYPE.RELATION_TARGET);
 		}
 	}
-	
+
 	@Override
 	public void setTargetUnsafe(Node source) throws SaltParameterException {
-		if(getTargetClass().isInstance(source)) {
+		if (getTargetClass().isInstance(source)) {
 			setTarget(getTargetClass().cast(source));
 		} else {
-			throw new SaltParameterException("source", "setTargetUnsafe", getClass(), 
+			throw new SaltParameterException("source", "setTargetUnsafe", getClass(),
 					"Must be of type " + getTargetClass().getSimpleName());
 		}
 	}
-	
 
 	/** container graph **/
-	protected Graph<?,?,?> graph = null;
+	protected Graph<?, ?, ?> graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph<?,?,?> getGraph() {
+	public Graph<?, ?, ?> getGraph() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return getDelegate().getGraph();
@@ -166,7 +169,6 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 
 		return (graph);
 	}
-
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
@@ -193,16 +195,16 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * @param graph
 	 *            graph which contains this relation
 	 */
-	protected void basicSetGraph(Graph<?,?,?> graph) {
+	protected void basicSetGraph(Graph<?, ?, ?> graph) {
 		// delegate method to delegate if set
 		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
-			((RelationImpl<?,?>) getDelegate()).basicSetGraph(graph);
+			((RelationImpl<?, ?>) getDelegate()).basicSetGraph(graph);
 			return;
 		}
 
 		// remove from old graph if it was changed
 		if (getGraph() != graph && getGraph() instanceof GraphImpl) {
-			((GraphImpl<?,?,?>) getGraph()).basicRemoveRelation(this);
+			((GraphImpl<?, ?, ?>) getGraph()).basicRemoveRelation(this);
 		}
 		this.graph = graph;
 	}
@@ -213,9 +215,9 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph<?,?,?> graph) {
+	protected void basicSetGraph_WithoutRemoving(Graph<?, ?, ?> graph) {
 		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
-			((RelationImpl<?,?>) getDelegate()).basicSetGraph_WithoutRemoving(graph);
+			((RelationImpl<?, ?>) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
 		}
 		this.graph = graph;
@@ -223,17 +225,17 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 
 	/** {@inheritDoc} **/
 	@Override
-	public Set<? extends Layer<?,?>> getLayers() {
+	public Set<? extends Layer<?, ?>> getLayers() {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			return (getDelegate().getLayers());
 		}
 
-		Set<Layer<?,?>> layers = new HashSet<>();
+		Set<Layer<?, ?>> layers = new HashSet<>();
 		if (getGraph() != null) {
-			Set<? extends Layer<?,?>> allLayers = getGraph().getLayers();
+			Set<? extends Layer<?, ?>> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
-				for (Layer<?,?> layer : allLayers) {
+				for (Layer<?, ?> layer : allLayers) {
 					if (layer.getRelations().contains(this)) {
 						layers.add(layer);
 					}
@@ -242,7 +244,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		}
 		return (layers);
 	}
-	
+
 	@Override
 	public Class<S> getSourceClass() {
 		return sourceClass;

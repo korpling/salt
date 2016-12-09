@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,33 +80,36 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 	 */
 	@Override
 	protected boolean findDiffs(boolean diffsRequested) {
-		if (!compareSize(templateGraph, otherGraph)) {
+		if (!compareSize(templateObject, otherObject)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!compareDataSources(templateGraph, otherGraph, diffsRequested)) {
+		if (!compareDataSources(templateObject, otherObject, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		if (!compareTokens(templateGraph, otherGraph, diffsRequested)) {
+		if (!compareTokens(templateObject, otherObject, diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
-		final List<SNode> roots = otherGraph.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
+		final List<SNode> roots = otherObject.getRootsByRelation(SALT_TYPE.SSPANNING_RELATION,
+				SALT_TYPE.SDOMINANCE_RELATION);
 		if ((SaltUtil.isNullOrEmpty(roots))) {
 			// logger.warn("Cannot start computing of differences, since no
 			// tokens exist for document '{}'.",
 			// templateGraph.getId());
 		} else {
-			final List<SNode> remainingTemplateNodes = new ArrayList<>(templateGraph.getSpans().size() + templateGraph.getStructures().size());
-			remainingTemplateNodes.addAll(templateGraph.getSpans());
-			remainingTemplateNodes.addAll(templateGraph.getStructures());
+			final List<SNode> remainingTemplateNodes = new ArrayList<>(
+					templateObject.getSpans().size() + templateObject.getStructures().size());
+			remainingTemplateNodes.addAll(templateObject.getSpans());
+			remainingTemplateNodes.addAll(templateObject.getStructures());
 			final DifferenceHandler handler = new DifferenceHandler();
 			handler.remainingTemplateNodes = remainingTemplateNodes;
-			otherGraph.traverse(roots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateGraph.getId(), handler, false);
+			otherObject.traverse(roots, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "diff_" + templateObject.getId(),
+					handler, false);
 			if (getDifferences().size() > 0) {
 				return (false);
 			}
@@ -120,20 +123,22 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 			}
 		}
 		// compare pointing relations
-		if (!compareRelations(templateGraph, templateGraph.getPointingRelations(), otherGraph, otherGraph.getPointingRelations(), diffsRequested)) {
+		if (!compareRelations(templateObject, templateObject.getPointingRelations(), otherObject,
+				otherObject.getPointingRelations(), diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
 		// compare order relations
-		if (!compareRelations(templateGraph, templateGraph.getOrderRelations(), otherGraph, otherGraph.getOrderRelations(), diffsRequested)) {
+		if (!compareRelations(templateObject, templateObject.getOrderRelations(), otherObject,
+				otherObject.getOrderRelations(), diffsRequested)) {
 			if (!diffsRequested) {
 				return false;
 			}
 		}
 		// compare layers
 		if (!options.get(DiffOptions.OPTION_IGNORE_LAYER)) {
-			if (!compareLayers(templateGraph, otherGraph, diffsRequested)) {
+			if (!compareLayers(templateObject, otherObject, diffsRequested)) {
 				if (!diffsRequested) {
 					return false;
 				}
@@ -255,17 +260,17 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 	 * @param diff
 	 *            if true, diffs are checked as well
 	 **/
-	private boolean compareDataSources(List<? extends SSequentialDS<?,?>> template, 
-			List<? extends SSequentialDS<?,?>> other, boolean diff) {
+	private boolean compareDataSources(List<? extends SSequentialDS<?, ?>> template,
+			List<? extends SSequentialDS<?, ?>> other, boolean diff) {
 		boolean iso = true;
-		Map<Object, SSequentialDS<?,?>> dataToDS = new Hashtable<>();
+		Map<Object, SSequentialDS<?, ?>> dataToDS = new Hashtable<>();
 		// data sources from template which have no partner in other
-		Set<SSequentialDS<?,?>> remainingTemplates = new HashSet<>();
+		Set<SSequentialDS<?, ?>> remainingTemplates = new HashSet<>();
 
 		// put all template data source to map
-		Iterator<? extends SSequentialDS<?,?>> iterator = template.iterator();
+		Iterator<? extends SSequentialDS<?, ?>> iterator = template.iterator();
 		while (iterator.hasNext()) {
-			SSequentialDS<?,?> templateDS = iterator.next();
+			SSequentialDS<?, ?> templateDS = iterator.next();
 			dataToDS.put(templateDS.getData(), templateDS);
 			remainingTemplates.add(templateDS);
 		}
@@ -273,8 +278,8 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		// check all other data source with map
 		iterator = other.iterator();
 		while (iterator.hasNext()) {
-			SSequentialDS<?,?> otherDS = iterator.next();
-			SSequentialDS<?,?> templateDS = dataToDS.get(otherDS.getData());
+			SSequentialDS<?, ?> otherDS = iterator.next();
+			SSequentialDS<?, ?> templateDS = dataToDS.get(otherDS.getData());
 			if (templateDS == null) {
 				if (!diff) {
 					return false;
@@ -311,7 +316,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		if (remainingTemplates.size() > 0) {
 			iterator = remainingTemplates.iterator();
 			while (iterator.hasNext()) {
-				SSequentialDS<?,?> templateDS = iterator.next();
+				SSequentialDS<?, ?> templateDS = iterator.next();
 				if (!diff) {
 					return false;
 				}
@@ -384,7 +389,8 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 							return false;
 						}
 						iso = false;
-						addDifference(templateRel.getSource(), otherRel.getSource(), null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
+						addDifference(templateRel.getSource(), otherRel.getSource(), null, DIFF_TYPES.NODE_DIFFERING,
+								subDiffs);
 					}
 					// check whether both data sources have the same labels
 					subDiffs = new HashSet<Difference>();
@@ -394,7 +400,8 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 							return false;
 						}
 						iso = false;
-						addDifference(templateRel.getSource(), otherRel.getSource(), null, DIFF_TYPES.NODE_DIFFERING, subDiffs);
+						addDifference(templateRel.getSource(), otherRel.getSource(), null, DIFF_TYPES.NODE_DIFFERING,
+								subDiffs);
 					}
 					remainingTemplates.remove(templateRel);
 				}
@@ -431,14 +438,14 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		 * set of already visited {@link SRelation}s while traversing, this is
 		 * necessary to avoid cycles
 		 **/
-		private Set<SRelation<?,?>> visitedRelations = new HashSet<>();
+		private Set<SRelation<?, ?>> visitedRelations = new HashSet<>();
 
 		/**
 		 * Called by Pepper as callback, when otherGraph is traversed. Currently
 		 * only returns <code>true</code> to traverse the entire graph.
 		 */
 		@Override
-		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, 
+		public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
 				SRelation<? extends SNode, ? extends SNode> sRelation, SNode currNode, long order) {
 			if (abort) {
 				return (false);
@@ -471,7 +478,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		 * is empty.
 		 */
 		@Override
-		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, 
+		public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
 				SRelation<? extends SNode, ? extends SNode> sRelation, SNode otherNode, long order) {
 		}
 
@@ -479,7 +486,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 		 * Called by Pepper as callback, when otherGraph is traversed.
 		 */
 		@Override
-		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, 
+		public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
 				SRelation<? extends SNode, ? extends SNode> edge, SNode otherNode, long order) {
 			if (currNode instanceof SSpan) {
 				if (!findIsomorphicNode(currNode, SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SSPAN)) {
@@ -527,7 +534,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 			SNode templateNode = null;
 			// list of all equivalents to children of current node in other
 			// graph
-			List<SNode> children = otherGraph.getChildren(otherNode, sTypeRelations);
+			List<SNode> children = otherObject.getChildren(otherNode, sTypeRelations);
 
 			List<SNode> templateChildren = new ArrayList<SNode>();
 			for (SNode child : children) {
@@ -539,7 +546,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 			// list all parents in base document sharing the children
 			List<SNode> sharedParents = new ArrayList<>();
 			if (templateChildren.size() > 0) {
-				sharedParents = templateGraph.getSharedParent(templateChildren, nodeType);
+				sharedParents = templateObject.getSharedParent(templateChildren, nodeType);
 			}
 			if (sharedParents.size() == 1) {
 				// an equivalent to current node in base document was found
@@ -547,11 +554,11 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 			} else if (sharedParents.size() > 1) {
 				// Several candidates have been found. Check which shared parent
 				// node has the same children as other node
-				List<SRelation<?,?>> otherOutRels = otherNode.getOutRelations();
+				List<SRelation<?, ?>> otherOutRels = otherNode.getOutRelations();
 				Set<SNode> trueCandidates = new HashSet<>();
 
 				for (SNode templateCandidate : sharedParents) {
-					List<SRelation<?,?>> templateOutRels = templateCandidate.getOutRelations();
+					List<SRelation<?, ?>> templateOutRels = templateCandidate.getOutRelations();
 					// check if node degree is the same
 					if (otherOutRels.size() == templateOutRels.size()) {
 						// check if each child of other node has a partner in
@@ -559,7 +566,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 
 						// create a set of of otherChildren
 						Set<SNode> otherChldren = new HashSet<>();
-						Iterator<SRelation<?,?>> it = otherOutRels.iterator();
+						Iterator<SRelation<?, ?>> it = otherOutRels.iterator();
 						while (it.hasNext()) {
 							otherChldren.add((SNode) it.next().getTarget());
 						}
@@ -567,7 +574,7 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 						// ckeck if all children of other node and candidate are
 						// isomorph
 						boolean trueCandidate = true;
-						Iterator<SRelation<?,?>> it_template = templateOutRels.iterator();
+						Iterator<SRelation<?, ?>> it_template = templateOutRels.iterator();
 						while (it_template.hasNext()) {
 							SNode templateChild = (SNode) it_template.next().getTarget();
 							if (!otherChldren.contains(getIsoNodes().get(templateChild))) {
@@ -648,13 +655,12 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 	 * @param diff
 	 * @return
 	 */
-	protected boolean compareRelations(SDocumentGraph template, 
-			List<? extends SRelation<?,?>> templateRels, SDocumentGraph other, 
-			List<? extends SRelation<?,?>> otherRels, Boolean diff) {
+	protected boolean compareRelations(SDocumentGraph template, List<? extends SRelation<?, ?>> templateRels,
+			SDocumentGraph other, List<? extends SRelation<?, ?>> otherRels, Boolean diff) {
 		boolean iso = true;
 
-		Set<SRelation<?,?>> otherRelSet = new HashSet<SRelation<?,?>>();
-		Iterator<? extends SRelation<?,?>> iterator = otherRels.iterator();
+		Set<SRelation<?, ?>> otherRelSet = new HashSet<SRelation<?, ?>>();
+		Iterator<? extends SRelation<?, ?>> iterator = otherRels.iterator();
 		while (iterator.hasNext()) {
 			otherRelSet.add(iterator.next());
 		}
@@ -670,7 +676,8 @@ public class DocumentStructureDiff extends AbstractDiff<SDocumentGraph> {
 
 			// iterate over all relations between other source and other target
 			if (otherSource != null && otherTarget != null) {
-				Iterator<SRelation<? extends SNode, ? extends SNode>> inBetweenIterator = other.getInRelations(otherTarget.getId()).iterator();
+				Iterator<SRelation<? extends SNode, ? extends SNode>> inBetweenIterator = other
+						.getInRelations(otherTarget.getId()).iterator();
 				boolean isRelIso = true;
 				while (inBetweenIterator.hasNext()) {
 					// determines whether the current pair of template relation

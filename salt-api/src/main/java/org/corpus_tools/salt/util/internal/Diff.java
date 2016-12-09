@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,10 +22,18 @@ import java.util.Set;
 
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocumentGraph;
-import org.corpus_tools.salt.core.SGraph;
+import org.corpus_tools.salt.common.SToken;
+import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.SAnnotation;
+import org.corpus_tools.salt.core.SFeature;
+import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
+import org.corpus_tools.salt.util.DIFF_TYPES;
 import org.corpus_tools.salt.util.DiffOptions;
 import org.corpus_tools.salt.util.Difference;
+
+import com.google.common.collect.Sets;
 
 /**
  * This class compares two {@link SDocumentGraph} objects for isomorphie. It
@@ -33,12 +41,14 @@ import org.corpus_tools.salt.util.Difference;
  * checking whether a graph is isomorphic. At first tokens are compared. Both
  * graphs are compared starting with offset "0". Two tokens are the same, when
  * their textual offset and the overlapped text is the same. As with all
- * following SNodes, SAnnotations and SFeatures are checked. The next step is to
- * look for SNodes that are the source of a incoming relations of a SToken. Of
- * these only those are picked, that have SNodes on their SOutgoingrelations,
- * that already have been checked (at this point: only STokens). These SNodes
- * are then compared with each other. Whenever a relation is used in the way
- * described above, the SRelation is checked for SFeatures and SRelations.
+ * following {@link SNode}s, {@link SAnnotation}s and {@link SFeature}s are
+ * checked. The next step is to look for {@link SNode}s that are the source of a
+ * incoming relations of a {@link SToken}. Of these only those are picked, that
+ * have {@link SNode}s on their outgoing relations, that already have been
+ * checked (at this point: only {@link SToken}s). These {@link SNode}s are then
+ * compared with each other. Whenever a relation is used in the way described
+ * above, the {@link SRelation} is checked for {@link SFeature}s and
+ * {@link SRelation}s.
  * 
  * To adapt the isomorphie check and the computation of differences you can pass
  * an option map via {@link #Diff(SDocumentGraph, SDocumentGraph, Map)}.
@@ -64,58 +74,68 @@ public class Diff {
 	 * 
 	 * @author florian
 	 *
-	 * @param <G>
+	 * @param <S>
+	 *            type of Salt element to be compared
 	 */
-	public static class Builder<G extends SGraph> {
-		private final G templateGraph;
+	public static class Builder<S extends Object> {
+		private final S saltElement;
 
-		public Builder(G templateGraph) {
-			this.templateGraph = templateGraph;
+		public Builder(S templateGraph) {
+			this.saltElement = templateGraph;
 		}
 
-		public Builder2<G> with(G otherGraph) {
-			return new Builder2<G>(templateGraph, otherGraph);
+		public Builder2<S> with(S otherGraph) {
+			return new Builder2<S>(saltElement, otherGraph);
 		}
 
-		public static class Builder2<G> {
-			private final G templateGraph;
-			private final G otherGraph;
+		public static class Builder2<S> {
+			private final S templateObject;
+			private final S otherObject;
 			private DiffOptions options = new DiffOptions();
 
-			public Builder2(final G templateGraph, final G otherGraph) {
-				this.templateGraph = templateGraph;
-				this.otherGraph = otherGraph;
+			public Builder2(final S templateGraph, final S otherGraph) {
+				this.templateObject = templateGraph;
+				this.otherObject = otherGraph;
 			}
 
 			public boolean andCheckIsomorphie() {
-				if (templateGraph instanceof SDocumentGraph && otherGraph instanceof SDocumentGraph) {
-					return new Diff((SDocumentGraph) templateGraph, (SDocumentGraph) otherGraph, options).isIsomorph();
-				} else if (templateGraph instanceof SCorpusGraph && otherGraph instanceof SCorpusGraph) {
-					return new Diff((SCorpusGraph) templateGraph, (SCorpusGraph) otherGraph, options).isIsomorph();
+				if (templateObject == null || otherObject == null) {
+					return false;
+				} else if (templateObject instanceof SDocumentGraph && otherObject instanceof SDocumentGraph) {
+					return new Diff((SDocumentGraph) templateObject, (SDocumentGraph) otherObject, options)
+							.isIsomorph();
+				} else if (templateObject instanceof SCorpusGraph && otherObject instanceof SCorpusGraph) {
+					return new Diff((SCorpusGraph) templateObject, (SCorpusGraph) otherObject, options).isIsomorph();
+				} else if (templateObject instanceof SaltProject && otherObject instanceof SaltProject) {
+					return new Diff((SaltProject) templateObject, (SaltProject) otherObject, options).isIsomorph();
 				}
 				throw new SaltException("Cannot compare peaches with appels. ");
 			}
 
 			public Set<Difference> andFindDiffs() {
-				if (templateGraph instanceof SDocumentGraph && otherGraph instanceof SDocumentGraph) {
-					return new Diff((SDocumentGraph) templateGraph, (SDocumentGraph) otherGraph, options).findDiffs();
-				} else if (templateGraph instanceof SCorpusGraph && otherGraph instanceof SCorpusGraph) {
-					return new Diff((SCorpusGraph) templateGraph, (SCorpusGraph) otherGraph, options).findDiffs();
+				if (templateObject == null || otherObject == null) {
+					return Sets.newHashSet(new Difference(null, null, null, DIFF_TYPES.NULL_OBJECT));
+				} else if (templateObject instanceof SDocumentGraph && otherObject instanceof SDocumentGraph) {
+					return new Diff((SDocumentGraph) templateObject, (SDocumentGraph) otherObject, options).findDiffs();
+				} else if (templateObject instanceof SCorpusGraph && otherObject instanceof SCorpusGraph) {
+					return new Diff((SCorpusGraph) templateObject, (SCorpusGraph) otherObject, options).findDiffs();
+				} else if (templateObject instanceof SaltProject && otherObject instanceof SaltProject) {
+					return new Diff((SaltProject) templateObject, (SaltProject) otherObject, options).findDiffs();
 				}
 				throw new SaltException("Cannot compare peaches with appels. ");
 			}
 
-			public Builder2<G> useOption(String option) {
+			public Builder2<S> useOption(String option) {
 				options.put(option, true);
 				return this;
 			}
 
-			public Builder2<G> useOption(String option, boolean value) {
+			public Builder2<S> useOption(String option, boolean value) {
 				options.put(option, value);
 				return this;
 			}
 
-			public Builder2<G> useOptions(DiffOptions options) {
+			public Builder2<S> useOptions(DiffOptions options) {
 				this.options = options;
 				return this;
 			}
@@ -124,6 +144,7 @@ public class Diff {
 
 	private DocumentStructureDiff documentStructureDiff = null;
 	private CorpusStructureDiff corpusStructureDiff = null;
+	private SaltProjectDiff saltProjectDiff = null;
 
 	/**
 	 * Initializes Diff object with the two graphs <code>template</code> and
@@ -145,7 +166,8 @@ public class Diff {
 	 * @param template
 	 * @param other
 	 * @param optionMap
-	 * @deprecated use {@link #Diff(SDocumentGraph, SDocumentGraph, DiffOptions) instead
+	 * @deprecated use {@link #Diff(SDocumentGraph, SDocumentGraph, DiffOptions)
+	 *             instead
 	 */
 	@Deprecated
 	public Diff(SDocumentGraph template, SDocumentGraph other, Map<String, Boolean> optionMap) {
@@ -169,12 +191,17 @@ public class Diff {
 		corpusStructureDiff = new CorpusStructureDiff(template, other, optionMap);
 	}
 
+	public Diff(SaltProject template, SaltProject other, DiffOptions optionMap) {
+		saltProjectDiff = new SaltProjectDiff(template, other, optionMap);
+	}
+
 	/**
 	 * 
 	 * @param template
 	 * @param other
 	 * @param optionMap
-	 * @deprecated use {@link #Diff(SCorpusGraph, SCorpusGraph, DiffOptions)} instead
+	 * @deprecated use {@link #Diff(SCorpusGraph, SCorpusGraph, DiffOptions)}
+	 *             instead
 	 */
 	@Deprecated
 	public Diff(SCorpusGraph template, SCorpusGraph other, Map<String, Boolean> optionMap) {
@@ -195,8 +222,10 @@ public class Diff {
 	public boolean isIsomorph() {
 		if (documentStructureDiff != null) {
 			return documentStructureDiff.isIsomorph();
-		} else {
+		} else if (corpusStructureDiff != null) {
 			return corpusStructureDiff.isIsomorph();
+		} else {
+			return saltProjectDiff.isIsomorph();
 		}
 	}
 
@@ -212,8 +241,10 @@ public class Diff {
 	public Set<Difference> findDiffs() {
 		if (documentStructureDiff != null) {
 			return documentStructureDiff.findDiffs();
-		} else {
+		} else if (corpusStructureDiff != null) {
 			return corpusStructureDiff.findDiffs();
+		} else {
+			return saltProjectDiff.findDiffs();
 		}
 	}
 }

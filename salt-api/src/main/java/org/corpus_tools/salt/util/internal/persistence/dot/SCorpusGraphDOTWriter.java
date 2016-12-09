@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,9 +88,11 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 		try {
 			currOutputStream = new PrintStream(outputFile, "UTF-8");
 		} catch (FileNotFoundException e) {
-			throw new SaltResourceException("Cannot save " + SCorpusGraph.class.getSimpleName() + " object to uri '" + outputURI + "'", e);
+			throw new SaltResourceException(
+					"Cannot save " + SCorpusGraph.class.getSimpleName() + " object to uri '" + outputURI + "'", e);
 		} catch (UnsupportedEncodingException e) {
-			throw new SaltResourceException("Cannot save " + SCorpusGraph.class.getSimpleName() + " object to uri '" + outputURI + "'", e);
+			throw new SaltResourceException(
+					"Cannot save " + SCorpusGraph.class.getSimpleName() + " object to uri '" + outputURI + "'", e);
 		}
 		currOutputStream.println("digraph G {");
 		currOutputStream.println("ordering=out;");
@@ -98,9 +100,11 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 		// if documentgraph isn't null print it
 		if (getSCorpusGraph() != null) {
 			try {
-				getSCorpusGraph().traverse(getSCorpusGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "", this);
+				getSCorpusGraph().traverse(getSCorpusGraph().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "",
+						this);
 			} catch (Exception e) {
-				throw new SaltException("Cannot print SCorpusGraph as dot serialization, because of nested exception. ", e);
+				throw new SaltException("Cannot print SCorpusGraph as dot serialization, because of nested exception. ",
+						e);
 			}
 
 		} else {
@@ -132,16 +136,19 @@ public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 	}
 
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<?,?> edge, SNode currNode, long order) {
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<?, ?> edge,
+			SNode currNode, long order) {
 		return true;
 	}
 
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<?,?> edge, SNode fromNode, long order) {
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<?, ?> edge,
+			SNode fromNode, long order) {
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currSNode, SRelation<?,?> relation, SNode fromSNode, long order) {
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currSNode,
+			SRelation<?, ?> relation, SNode fromSNode, long order) {
 		DOTNode dotNode = new DOTNode();
 		dotNode.id = currSNode.getId();
 

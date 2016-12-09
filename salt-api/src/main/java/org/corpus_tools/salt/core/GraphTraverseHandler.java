@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,8 @@ public interface GraphTraverseHandler {
 	 * @param order
 	 *            the number of the relation in the parent node
 	 */
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order);
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
+			SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order);
 
 	/**
 	 * This method will be invoked, when a node is left, after the method
@@ -89,7 +90,8 @@ public interface GraphTraverseHandler {
 	 * @param order
 	 *            the number of the relation in the parent node
 	 */
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order);
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
+			SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order);
 
 	/**
 	 * This method is called during a traversal to check if the current node and
@@ -116,5 +118,6 @@ public interface GraphTraverseHandler {
 	 * @param order
 	 *            the number of the relation in the parent node
 	 */
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<? extends SNode, ? extends SNode> relation, SNode currNode, long order);
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
+			SRelation<? extends SNode, ? extends SNode> relation, SNode currNode, long order);
 }

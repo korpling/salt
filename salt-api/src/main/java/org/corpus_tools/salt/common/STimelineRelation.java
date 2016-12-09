@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,5 +17,6 @@
  */
 package org.corpus_tools.salt.common;
 
-public interface STimelineRelation extends SSequentialRelation<SToken, STimeline, Integer>, STimeOverlappingRelation<SToken, STimeline>, SDocumentGraphObject {
+public interface STimelineRelation extends SSequentialRelation<SToken, STimeline, Integer>,
+		STimeOverlappingRelation<SToken, STimeline>, SDocumentGraphObject {
 } // STimelineRelation

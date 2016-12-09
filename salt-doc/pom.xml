@@ -10,7 +10,6 @@
 		<version>4.0.0-SNAPSHOT</version>
 	</parent>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<site.path>doc-snapshot</site.path>
 		<!-- override in your settings -->
 		<siteMainDirectory>${user.home}</siteMainDirectory>

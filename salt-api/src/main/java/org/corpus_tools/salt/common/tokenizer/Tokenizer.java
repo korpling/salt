@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -172,9 +172,10 @@ public class Tokenizer {
 								"(-t-elles?|-t-ils?|-t-on|-ce|-elles?|-ils?|-je|-la|-les?|-leur|-lui|-mêmes?|-m'|-moi|-nous|-on|-toi|-tu|-t'|-vous|-en|-y|-ci|-là)"));
 					} else if (LanguageCode.it.equals(language)) {
 						this.addAbbreviation(LanguageCode.it, AbbreviationIT.createAbbriviations());
-						this.addClitics(LanguageCode.it, new Clitics(
-								"([dD][ae]ll'|[nN]ell'|[Aa]ll'|[lLDd]'|[Ss]ull'|[Qq]uest'|[Uu]n'|[Ss]enz'|[Tt]utt')",
-								null));
+						this.addClitics(LanguageCode.it,
+								new Clitics(
+										"([dD][ae]ll'|[nN]ell'|[Aa]ll'|[lLDd]'|[Ss]ull'|[Qq]uest'|[Uu]n'|[Ss]enz'|[Tt]utt')",
+										null));
 					}
 				}
 			} // set abbreviations
@@ -651,10 +652,11 @@ public class Tokenizer {
 			}
 
 			// attempt to separate proclitics
-			
+
 			Clitics languageClitics;
 			String proclitics;
-			if ((languageClitics = getClitics(language)) != null && (proclitics = languageClitics.getProclitics()) != null) {
+			if ((languageClitics = getClitics(language)) != null
+					&& (proclitics = languageClitics.getProclitics()) != null) {
 				p = Pattern.compile("^" + proclitics + "(.+)$");
 				String token = lstTokens.get(i);
 				m = p.matcher(token);

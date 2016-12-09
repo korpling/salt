@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,12 +37,12 @@ public interface IndexMgr extends Serializable {
 	 * The index can handle keys and values of the passed types.
 	 * 
 	 * @param indexId
-	 *            identifier to access the index or its elements
-	 *            type of the values in the index
+	 *            identifier to access the index or its elements type of the
+	 *            values in the index
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> void createIndex(IndexID<K,V> indexId);
+	public <K, V> void createIndex(IndexID<K, V> indexId);
 
 	/**
 	 * Creates a new index which could be accessed via the passed identifier.
@@ -59,7 +59,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> void createIndex(IndexID<K,V> indexId, int expectedKeys, int expectedValuesPerKey);
+	public <K, V> void createIndex(IndexID<K, V> indexId, int expectedKeys, int expectedValuesPerKey);
 
 	/**
 	 * Checks if an index with the passed identifier is registered.
@@ -69,7 +69,7 @@ public interface IndexMgr extends Serializable {
 	 * @return true if an index with the passed identifier exists, false
 	 *         otherwise
 	 */
-	public boolean containsIndex(IndexID<?,?> indexId);
+	public boolean containsIndex(IndexID<?, ?> indexId);
 
 	/**
 	 * Removes the index with the passed identifier.
@@ -79,7 +79,7 @@ public interface IndexMgr extends Serializable {
 	 * @return true if the identifier could be removed successfully, false
 	 *         otherwise
 	 */
-	public boolean removeIndex(IndexID<?,?> indexId);
+	public boolean removeIndex(IndexID<?, ?> indexId);
 
 	/**
 	 * Removes all entries contained in the index with the passed identifier
@@ -87,7 +87,7 @@ public interface IndexMgr extends Serializable {
 	 * @param indexId
 	 *            identifier of the index
 	 */
-	public void clearIndex(IndexID<?,?> indexId);
+	public void clearIndex(IndexID<?, ?> indexId);
 
 	/**
 	 * Removes all index from the index manager.
@@ -108,7 +108,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> boolean put(IndexID<K,V> indexId, K key, V value);
+	public <K, V> boolean put(IndexID<K, V> indexId, K key, V value);
 
 	/**
 	 * Adds a collection of values to the index having the passed identifier
@@ -125,7 +125,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <V>
 	 */
 
-	public <K, V> boolean putAll(IndexID<K,V> indexId, K key, Collection<? extends V> values);
+	public <K, V> boolean putAll(IndexID<K, V> indexId, K key, Collection<? extends V> values);
 
 	/**
 	 * Returns the value corresponding to the passed key, which is contained in
@@ -139,7 +139,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> V get(IndexID<K,V> indexId, K key);
+	public <K, V> V get(IndexID<K, V> indexId, K key);
 
 	/**
 	 * Returns the set of values corresponding to the passed key, which is
@@ -153,7 +153,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> List<V> getAll(IndexID<K,V> indexId, K key);
+	public <K, V> List<V> getAll(IndexID<K, V> indexId, K key);
 
 	/**
 	 * Removes the value or collection of values corresponding to the passed key
@@ -184,7 +184,7 @@ public interface IndexMgr extends Serializable {
 	 * @param <K>
 	 * @param <V>
 	 */
-	public <K, V> boolean remove(IndexID<K,V> indexId, K key, V value);
+	public <K, V> boolean remove(IndexID<K, V> indexId, K key, V value);
 
 	/**
 	 * Returns whether the index having the passed identifier contains the
@@ -197,7 +197,7 @@ public interface IndexMgr extends Serializable {
 	 * @return true when the index contains such a key
 	 * @param <K>
 	 */
-	public <K,V> boolean containsKey(IndexID<K,V> indexId, K key);
+	public <K, V> boolean containsKey(IndexID<K, V> indexId, K key);
 
 	/**
 	 * Removes the passed value from all registered indexes.
@@ -218,5 +218,5 @@ public interface IndexMgr extends Serializable {
 	 * @return true, if the value was removed successfully
 	 * @param <V>
 	 */
-	public <V> boolean removeValue(IndexID<?,V> indexId, V value);
+	public <V> boolean removeValue(IndexID<?, V> indexId, V value);
 }

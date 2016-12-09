@@ -60,10 +60,10 @@ public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructur
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-	
+
 	@Override
 	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
-		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+		if (graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
 			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
 		super.basicSetGraph(graph);

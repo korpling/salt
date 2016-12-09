@@ -1,16 +1,11 @@
-***********************************************************************************
-***								CHANGELOG for Salt								***
-***********************************************************************************
-*	groupId:		de.hu_berlin.german.korpling.saltnpepper					  *
-*	artifactId:		salt												          *
-*													                              *
-*	sub-projects:												                  *
-*	-------------                                                                 *
-*	artifactId:		salt-graph                                                    *
-*	artifactId:		salt-saltCore												  *
-*	artifactId:		salt-saltCommon												  *
-*	artifactId:		salt-saltSample												  *
-***********************************************************************************
+Version 3.3.0
+=============
+Enhancements:
+- wider possibilities to compare and validate (new) two different Salt projects, corpus structures 
+  and document structures: see SaltUtil.compare(....) and  SaltUtil.validate(...) #109
+
+Fixes:
+- SimpleTokenize startPos and endPos are not used correctly #108
 
 Version 3.2.2
 =============

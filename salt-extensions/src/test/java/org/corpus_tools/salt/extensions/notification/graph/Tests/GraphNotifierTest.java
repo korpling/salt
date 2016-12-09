@@ -37,12 +37,13 @@ public class GraphNotifierTest extends GraphTest {
 
 	private GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture = null;
 
-  @Override
+	@Override
 	public GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> getFixture() {
 		return fixture;
 	}
 
-	public void setNotifyingFixture(GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture) {
+	public void setNotifyingFixture(
+			GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> fixture) {
 		this.fixture = fixture;
 	}
 
@@ -52,12 +53,11 @@ public class GraphNotifierTest extends GraphTest {
 		this.fixture = (GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>) fixture;
 		super.setFixture(fixture);
 	}
-	
 
 	@Before
 	@Override
 	public void setUp() throws Exception {
-		
+
 		setNotifyingFixture(new GraphNotifierImpl<>(Node.class, GraphFactory.RELATION_CLASS, GraphFactory.LAYER_CLASS));
 		super.setFixture(fixture);
 	}
@@ -90,7 +90,7 @@ public class GraphNotifierTest extends GraphTest {
 	public void testNotificationRelationNode() {
 		MyListener listener = new MyListener();
 		fixture.addListener(listener);
-		Relation<Node,Node> relation = GraphFactory.createRelation();
+		Relation<Node, Node> relation = GraphFactory.createRelation();
 		Node node = GraphFactory.createNode();
 		getFixture().addNode(node);
 		relation.setSource(node);

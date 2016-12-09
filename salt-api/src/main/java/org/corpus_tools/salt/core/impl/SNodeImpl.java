@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -346,7 +346,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		if (superGraph instanceof SGraph) {
 			return (SGraph) superGraph;
 		}
-		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
+		throw new SaltInvalidModelException(
+				"Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
 	}
 
 }

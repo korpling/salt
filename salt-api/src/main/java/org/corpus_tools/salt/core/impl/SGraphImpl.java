@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -233,13 +233,15 @@ public class SGraphImpl extends
 
 	/** {@inheritDoc} */
 	@Override
-	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler) {
+	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
+			GraphTraverseHandler traverseHandler) {
 		this.traverse(startNodes, traverseType, traverseId, traverseHandler, true);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
+	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
+			GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
 		GraphTraverserModule traverserModule = new GraphTraverserModule();
 		traverserModule.setGraph(this);
 		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);

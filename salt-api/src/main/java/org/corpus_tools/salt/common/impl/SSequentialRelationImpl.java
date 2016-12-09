@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number> extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
-	
+public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number>
+		extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
 	private final Class<P> pointClass;
-	
+
 	/** Initializes an object of type {@link SSequentialRelationImpl}. **/
 	public SSequentialRelationImpl(Class<S> sourceClass, Class<T> targetClass, Class<P> pointClass) {
 		this(null, sourceClass, targetClass, pointClass);
@@ -61,7 +61,7 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 		SFeature sFeature = getFeature(SaltUtil.FEAT_SSTART_QNAME);
 		if (sFeature != null) {
 			Object val = sFeature.getValue();
-			if(pointClass.isInstance(val)) {
+			if (pointClass.isInstance(val)) {
 				retVal = pointClass.cast(sFeature.getValue());
 			}
 		}
@@ -88,7 +88,7 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 		SFeature sFeature = this.getFeature(SaltUtil.FEAT_SEND_QNAME);
 		if (sFeature != null) {
 			Object val = sFeature.getValue();
-			if(pointClass.isInstance(val)) {
+			if (pointClass.isInstance(val)) {
 				retVal = pointClass.cast(sFeature.getValue());
 			}
 		}
@@ -107,20 +107,19 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 		}
 		sFeature.setValue(newSEnd);
 	}
-	
 
 	/** {@inheritDoc} **/
 	@Override
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-	
+
 	@Override
 	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
-		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+		if (graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
 			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
 		super.basicSetGraph(graph);
 	}
-	
+
 } // SSequentialRelationImpl

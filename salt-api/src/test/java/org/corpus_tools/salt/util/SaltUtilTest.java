@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
  */
 package org.corpus_tools.salt.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.assertj.core.api.Assertions.*;
 
 import java.util.Collection;
 
@@ -31,7 +31,6 @@ import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SMetaAnnotation;
-import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
 
@@ -198,18 +197,18 @@ public class SaltUtilTest {
 			}
 		}
 	}
-	
+
 	@Test
-	public void testwhenElementBelongsToCorpusStructure_thenReturnTrue(){
+	public void whenElementBelongsToCorpusStructure_thenReturnTrue() {
 		assertThat(SaltUtil.belongsToCorpusStructure(SaltFactory.createSCorpusGraph())).isTrue();
 		assertThat(SaltUtil.belongsToCorpusStructure(SaltFactory.createSCorpus())).isTrue();
 		assertThat(SaltUtil.belongsToCorpusStructure(SaltFactory.createSDocument())).isTrue();
 		assertThat(SaltUtil.belongsToCorpusStructure(SaltFactory.createSCorpusRelation())).isTrue();
 		assertThat(SaltUtil.belongsToCorpusStructure(SaltFactory.createSCorpusDocumentRelation())).isTrue();
 	}
-	
+
 	@Test
-	public void testwhenElementDoesNotBelongToCorpusStructure_thenReturnFalse(){
+	public void whenElementDoesNotBelongToCorpusStructure_thenReturnFalse() {
 		assertThat(SaltUtil.belongsToCorpusStructure(new Object())).isFalse();
 		assertThat(SaltUtil.belongsToCorpusStructure(SaltFactory.createSToken())).isFalse();
 	}

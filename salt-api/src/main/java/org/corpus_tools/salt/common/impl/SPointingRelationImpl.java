@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,8 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode> implements SPointingRelation {
+public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode>
+		implements SPointingRelation {
 	/** Initializes an object of type {@link SPointingRelationImpl}. **/
 	public SPointingRelationImpl() {
 		this(null);
@@ -51,13 +52,12 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-	
+
 	@Override
 	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
-		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+		if (graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
 			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
 		super.basicSetGraph(graph);
 	}
-
 } // SPointingRelationImpl

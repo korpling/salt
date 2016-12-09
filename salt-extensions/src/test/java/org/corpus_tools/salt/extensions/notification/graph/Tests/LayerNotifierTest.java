@@ -50,8 +50,6 @@ public class LayerNotifierTest extends LayerTest {
 		this.fixture = (LayerNotifierImpl<Node, Relation<Node, Node>>) fixture;
 		super.setFixture(fixture);
 	}
-	
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -77,9 +75,6 @@ public class LayerNotifierTest extends LayerTest {
 	protected Layer<Node, Relation<Node, Node>> createLayer() {
 		return new LayerNotifierImpl<>();
 	}
-	
-	
-	
 
 	/** Checks whether the notification about name change is correct. **/
 	@Test

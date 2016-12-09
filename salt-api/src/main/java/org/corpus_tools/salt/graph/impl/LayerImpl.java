@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,12 +27,8 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class LayerImpl
-	<
-	N extends Node, 
-	R extends Relation<? extends N, ? extends N>
-	> 
-	extends IdentifiableElementImpl implements Layer<N, R> {
+public class LayerImpl<N extends Node, R extends Relation<? extends N, ? extends N>> extends IdentifiableElementImpl
+		implements Layer<N, R> {
 
 	private Set<N> nodes = null;
 	private Set<R> relations = null;
@@ -57,7 +53,8 @@ public class LayerImpl
 	}
 
 	@Override
-	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is final)
+	@SuppressWarnings("unchecked") // in sync with constructor (and delegate is
+									// final)
 	protected Layer<N, R> getDelegate() {
 		return (Layer<N, R>) super.getDelegate();
 	}
@@ -74,7 +71,6 @@ public class LayerImpl
 		}
 		return (graph);
 	}
-
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
@@ -100,14 +96,14 @@ public class LayerImpl
 	 * @param graph
 	 *            graph which contains this layer
 	 */
-	protected void basicSetGraph(Graph<N,R,?> graph) {
-		if (getDelegate() != null && getDelegate() instanceof LayerImpl<?,?>) {
-			((LayerImpl<N,R>) getDelegate()).basicSetGraph(graph);
+	protected void basicSetGraph(Graph<N, R, ?> graph) {
+		if (getDelegate() != null && getDelegate() instanceof LayerImpl<?, ?>) {
+			((LayerImpl<N, R>) getDelegate()).basicSetGraph(graph);
 			return;
 		}
 		// remove from old graph if it was changed
-		if (this.graph != graph && this.graph instanceof GraphImpl<?,?,?>) {
-			((GraphImpl<?,?,?>) this.graph).basicRemoveLayer(this);
+		if (this.graph != graph && this.graph instanceof GraphImpl<?, ?, ?>) {
+			((GraphImpl<?, ?, ?>) this.graph).basicRemoveLayer(this);
 		}
 		this.graph = graph;
 	}
@@ -118,7 +114,7 @@ public class LayerImpl
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph<N,R,?> graph) {
+	protected void basicSetGraph_WithoutRemoving(Graph<N, R, ?> graph) {
 		this.graph = graph;
 	}
 
@@ -188,7 +184,7 @@ public class LayerImpl
 
 	/** {@inheritDoc Layer#removeRelation(Relation)} **/
 	@Override
-	public void removeRelation(Relation<?,?> relation) {
+	public void removeRelation(Relation<?, ?> relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().removeRelation(relation);

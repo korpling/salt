@@ -104,7 +104,6 @@ public class CreateGraphNotificationTest {
 			return true;
 		}
 
-		
 	}
 
 	@Test
@@ -113,28 +112,30 @@ public class CreateGraphNotificationTest {
 		SaltFactory.setFactory(factory);
 		final List<TestEvent> eventList = new ArrayList<>();
 
-		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null, SaltUtil.SALT_NAMESPACE,
-				null));
+		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null,
+				SaltUtil.SALT_NAMESPACE, null));
 		eventList.add(
 				new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, null, SaltUtil.FEAT_SDOCUMENT, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_LABELS, null, null, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_VALUE, null, null, null));
-		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null, SaltUtil.SALT_NAMESPACE,
-				null));
-		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, null, SaltUtil.FEAT_SDOCUMENT_GRAPH,
-				null));
+		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null,
+				SaltUtil.SALT_NAMESPACE, null));
+		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, null,
+				SaltUtil.FEAT_SDOCUMENT_GRAPH, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.NODE_LABELS, null, null, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_VALUE, null, null, null));
 
-		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null, SaltUtil.SALT_NAMESPACE,
-				null));
-		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, null, SaltUtil.FEAT_SDATA, null));
+		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null,
+				SaltUtil.SALT_NAMESPACE, null));
+		eventList.add(
+				new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, null, SaltUtil.FEAT_SDATA, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.NODE_LABELS, null, null, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_VALUE, null,
 				SampleGenerator.PRIMARY_TEXT_EN, null));
-		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null, SaltUtil.SALT_NAMESPACE,
-				null));
-		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, null, SaltUtil.FEAT_NAME, null));
+		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, null,
+				SaltUtil.SALT_NAMESPACE, null));
+		eventList
+				.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, null, SaltUtil.FEAT_NAME, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_VALUE, null, null, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.NODE_LABELS, null, null, null));
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_VALUE, null, null, null));
@@ -152,9 +153,9 @@ public class CreateGraphNotificationTest {
 		});
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createPrimaryData(doc);
-		
+
 		assertEquals(eventList.size(), actualEvents.size());
-		for(int i=0; i < eventList.size(); i++) {
+		for (int i = 0; i < eventList.size(); i++) {
 			assertEquals("error at index " + i, eventList.get(i).type, actualEvents.get(i).type);
 			assertEquals("error at index " + i, eventList.get(i).attribute, actualEvents.get(i).attribute);
 			if (eventList.get(i).oldValue != null) {

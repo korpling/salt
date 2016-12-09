@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,9 @@ public class SaltParameterException extends SaltException {
 	}
 
 	public SaltParameterException(String parameterName, String methodName, Class<? extends Object> clazz, String msg) {
-		super("The method '" + methodName + "' of class '" + (clazz != null ? clazz.getSimpleName() : "") + "' invokes an exception, because the specified parameter '" + parameterName + "' was not correct. " + (msg != null ? msg : ""));
+		super("The method '" + methodName + "' of class '" + (clazz != null ? clazz.getSimpleName() : "")
+				+ "' invokes an exception, because the specified parameter '" + parameterName + "' was not correct. "
+				+ (msg != null ? msg : ""));
 	}
 
 	public SaltParameterException(String s) {

@@ -34,7 +34,8 @@ public class Helper {
 		Event lastEvent = null;
 
 		@Override
-		public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue, Object container) {
+		public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue,
+				Object container) {
 			lastEvent = new Event(type, attribute, oldValue, newValue, container);
 		}
 	}

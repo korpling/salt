@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -335,12 +335,14 @@ public class GraphTest {
 
 		for (Node node : pair.getLeft()) {
 			if (getFixture().getNode(node.getId()) != null) {
-				assertEquals("this node '" + node.getId() + "' should be there", node, getFixture().getNode(node.getId()));
+				assertEquals("this node '" + node.getId() + "' should be there", node,
+						getFixture().getNode(node.getId()));
 				try {
 					getFixture().getNodes().remove(node);
 				} catch (Exception e) {
 				}
-				assertNotNull("this node '" + node.getId() + "' should still be there", getFixture().getNode(node.getId()));
+				assertNotNull("this node '" + node.getId() + "' should still be there",
+						getFixture().getNode(node.getId()));
 			}
 		}
 	}
@@ -602,7 +604,10 @@ public class GraphTest {
 	public void testGetInRelations() {
 		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
 		for (Relation<Node, Node> relation : pair.getRight()) {
-			assertTrue("this inserted relation '" + relation.getId() + "' should be in getInRelations: " + getFixture().getInRelations(relation.getTarget().getId()), getFixture().getInRelations(relation.getTarget().getId()).contains(relation));
+			assertTrue(
+					"this inserted relation '" + relation.getId() + "' should be in getInRelations: "
+							+ getFixture().getInRelations(relation.getTarget().getId()),
+					getFixture().getInRelations(relation.getTarget().getId()).contains(relation));
 		}
 	}
 
@@ -613,7 +618,10 @@ public class GraphTest {
 	public void testGetOutRelations() {
 		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
 		for (Relation<Node, Node> relation : pair.getRight()) {
-			assertTrue("this inserted relation '" + relation.getId() + "' should be in getOutRelations: " + getFixture().getOutRelations(relation.getSource().getId()), getFixture().getOutRelations(relation.getSource().getId()).contains(relation));
+			assertTrue(
+					"this inserted relation '" + relation.getId() + "' should be in getOutRelations: "
+							+ getFixture().getOutRelations(relation.getSource().getId()),
+					getFixture().getOutRelations(relation.getSource().getId()).contains(relation));
 		}
 	}
 
@@ -629,7 +637,8 @@ public class GraphTest {
 		}
 		for (Relation<Node, Node> rel : pair.getRight()) {
 			if (getFixture().getRelation(rel.getId()) != null) {
-				assertEquals("this edge '" + rel.getId() + "' should be there", rel, getFixture().getRelation(rel.getId()));
+				assertEquals("this edge '" + rel.getId() + "' should be there", rel,
+						getFixture().getRelation(rel.getId()));
 				getFixture().removeRelation(rel);
 				assertNull("this edge '" + rel.getId() + "' shouldn't be there", getFixture().getRelation(rel.getId()));
 			}
@@ -649,7 +658,8 @@ public class GraphTest {
 		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
 		// check if relation was inserted
 		for (Relation<Node, Node> rel : pair.getRight()) {
-			assertEquals("this relation '" + rel.getId() + "' should be there", rel, getFixture().getRelation(rel.getId()));
+			assertEquals("this relation '" + rel.getId() + "' should be there", rel,
+					getFixture().getRelation(rel.getId()));
 		}
 		// remove relation
 		getFixture().removeRelations();
@@ -703,12 +713,14 @@ public class GraphTest {
 
 		for (Relation<Node, Node> relation : pair.getRight()) {
 			if (getFixture().getRelation(relation.getId()) != null) {
-				assertEquals("this relation '" + relation.getId() + "' should be there", relation, getFixture().getRelation(relation.getId()));
+				assertEquals("this relation '" + relation.getId() + "' should be there", relation,
+						getFixture().getRelation(relation.getId()));
 				try {
 					getFixture().getRelations().remove(relation);
 				} catch (UnsupportedOperationException e) {
 				}
-				assertNotNull("this relation '" + relation.getId() + "' should still be there", getFixture().getRelation(relation.getId()));
+				assertNotNull("this relation '" + relation.getId() + "' should still be there",
+						getFixture().getRelation(relation.getId()));
 			}
 		}
 	}
@@ -721,7 +733,8 @@ public class GraphTest {
 		Pair<List<Node>, List<Relation<Node, Node>>> pair = createSampleGraph();
 		// check if relations have been added
 		for (Relation<Node, Node> relation : pair.getRight()) {
-			assertEquals("this relation '" + relation.getId() + "' should be there", relation, getFixture().getRelation(relation.getId()));
+			assertEquals("this relation '" + relation.getId() + "' should be there", relation,
+					getFixture().getRelation(relation.getId()));
 		}
 		// remove old relation
 		getFixture().removeRelations();
@@ -759,7 +772,8 @@ public class GraphTest {
 
 		// redirect source
 		relation.setSource(node3);
-		assertTrue("all relations: " + getFixture().getOutRelations(node3.getId()), getFixture().getOutRelations(node3.getId()).contains(relation));
+		assertTrue("all relations: " + getFixture().getOutRelations(node3.getId()),
+				getFixture().getOutRelations(node3.getId()).contains(relation));
 		assertTrue(getFixture().getOutRelations(node1.getId()).isEmpty());
 	}
 

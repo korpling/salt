@@ -29,7 +29,8 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.RelationImpl;
 
 @SuppressWarnings("serial")
-public class RelationNotifierImpl<S extends Node, T extends Node> extends RelationImpl<S, T> implements Relation<S, T>, Notifier {
+public class RelationNotifierImpl<S extends Node, T extends Node> extends RelationImpl<S, T>
+		implements Relation<S, T>, Notifier {
 
 	public RelationNotifierImpl(Class<S> sourceClass, Class<T> targetClass) {
 		super(sourceClass, targetClass);
@@ -72,7 +73,8 @@ public class RelationNotifierImpl<S extends Node, T extends Node> extends Relati
 	public void addLabel(Label label) {
 		super.addLabel(label);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.RELATION_LABELS, null, label, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.RELATION_LABELS, null,
+					label, this);
 		}
 	}
 
@@ -84,7 +86,8 @@ public class RelationNotifierImpl<S extends Node, T extends Node> extends Relati
 		Label oldValue = getLabel(qName);
 		super.removeLabel(qName);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.RELATION_LABELS, oldValue, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.RELATION_LABELS,
+					oldValue, null, this);
 		}
 	}
 
@@ -96,7 +99,8 @@ public class RelationNotifierImpl<S extends Node, T extends Node> extends Relati
 		Collection<Label> oldValue = getLabels();
 		super.removeAll();
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE_ALL, GRAPH_ATTRIBUTES.RELATION_LABELS, oldValue, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE_ALL, GRAPH_ATTRIBUTES.RELATION_LABELS,
+					oldValue, null, this);
 		}
 	}
 
@@ -108,7 +112,8 @@ public class RelationNotifierImpl<S extends Node, T extends Node> extends Relati
 		S oldValue = getSource();
 		super.setSource(source);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.RELATION_SOURCE, oldValue, getSource(), this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.RELATION_SOURCE,
+					oldValue, getSource(), this);
 		}
 	}
 
@@ -117,7 +122,8 @@ public class RelationNotifierImpl<S extends Node, T extends Node> extends Relati
 		T oldValue = getTarget();
 		super.setTarget(target);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.RELATION_TARGET, oldValue, getTarget(), this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.RELATION_TARGET,
+					oldValue, getTarget(), this);
 		}
 	}
 	// ==========================================< relation handling

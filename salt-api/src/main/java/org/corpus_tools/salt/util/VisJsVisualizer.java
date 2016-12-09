@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -812,28 +812,28 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 		}
 		outputFolder = new File(outputFileUri.path());
 		if (!outputFolder.exists()) {
-			if(!outputFolder.mkdirs()) {
+			if (!outputFolder.mkdirs()) {
 				throw new SaltException("Can't create folder " + outputFolder.getAbsolutePath());
 			}
 		}
 
 		File cssFolderOut = new File(outputFolder, CSS_FOLDER_OUT);
 		if (!cssFolderOut.exists()) {
-			if(!cssFolderOut.mkdir()) {
+			if (!cssFolderOut.mkdir()) {
 				throw new SaltException("Can't create folder " + cssFolderOut.getAbsolutePath());
 			}
 		}
 
 		File jsFolderOut = new File(outputFolder, JS_FOLDER_OUT);
 		if (!jsFolderOut.exists()) {
-			if(!jsFolderOut.mkdir()) {
+			if (!jsFolderOut.mkdir()) {
 				throw new SaltException("Can't create folder " + jsFolderOut.getAbsolutePath());
 			}
 		}
 
 		File imgFolderOut = new File(outputFolder, IMG_FOLDER_OUT);
 		if (!imgFolderOut.exists()) {
-			if(!imgFolderOut.mkdirs()) {
+			if (!imgFolderOut.mkdirs()) {
 				throw new SaltException("Can't create folder " + imgFolderOut.getAbsolutePath());
 			}
 		}
@@ -887,25 +887,25 @@ public class VisJsVisualizer implements GraphTraverseHandler {
 
 	private void copyResourceFile(InputStream inputStream, String outputFolder, String outSubFolder, String outFile)
 			throws IOException {
-		
+
 		File outFileObject;
-		if(outSubFolder != null) {
-			outFileObject = new File(outputFolder + System.getProperty("file.separator")
-			+ outSubFolder + System.getProperty("file.separator") + outFile);
+		if (outSubFolder != null) {
+			outFileObject = new File(outputFolder + System.getProperty("file.separator") + outSubFolder
+					+ System.getProperty("file.separator") + outFile);
 		} else {
 			outFileObject = new File(outputFolder + System.getProperty("file.separator") + outFile);
 		}
-		
-		try(FileOutputStream fileOutStream = new FileOutputStream(outFileObject)) {
-	
+
+		try (FileOutputStream fileOutStream = new FileOutputStream(outFileObject)) {
+
 			int bufferSize = 32 * 1024;
 			byte[] bytes = new byte[bufferSize];
 			int readBytes = 0;
-	
+
 			while ((readBytes = inputStream.read(bytes)) != -1) {
 				fileOutStream.write(bytes, 0, readBytes);
 			}
-	
+
 			fileOutStream.flush();
 			fileOutStream.close();
 			inputStream.close();

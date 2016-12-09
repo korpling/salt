@@ -1,4 +1,4 @@
-Copyright 2010, Humboldt-Universität zu Berlin, INRIA
+Copyright 2016, Humboldt-Universität zu Berlin
 
 Licensed under the Apache License, Version 2.0 (the
 "License"); you may not use this file except in compliance
@@ -24,7 +24,7 @@ This project includes:
   Hamcrest Core under New BSD License
   Java Text Categorizing Library under GNU Lesser General Public License
   JSON in Java under The JSON License
-  JUnit under Common Public License Version 1.0
+  JUnit under Eclipse Public License 1.0
   Neo Visionaries Internationalization Package under The Apache Software License, Version 2.0
   org.eclipse.emf under The Eclipse Public License Version 1.0
   org.eclipse.emf.ecore under The Eclipse Public License Version 1.0

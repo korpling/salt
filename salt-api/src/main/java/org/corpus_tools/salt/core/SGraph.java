@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,8 @@ import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
-public interface SGraph extends 
-	Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer>, 
-	SAnnotationContainer, SNamedElement, SPathElement {
+public interface SGraph extends Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer>, SAnnotationContainer,
+		SNamedElement, SPathElement {
 
 	/**
 	 * The {@link GRAPH_TRAVERSE_TYPE} determines the the traversal order. In
@@ -110,7 +109,8 @@ public interface SGraph extends
 	 * @param traverseHandler
 	 *            callback handler, on which the three methods will be invoked
 	 */
-	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler);
+	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
+			GraphTraverseHandler traverseHandler);
 
 	/**
 	 * Traverses a graph in the given order traverseType and starts traversing
@@ -141,7 +141,8 @@ public interface SGraph extends
 	 * @param isCycleSafe
 	 *            determines whether cycle safeness chould be checked
 	 */
-	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe);
+	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
+			GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 
 	/**
 	 * Searches for a node or a set of nodes having the given node name.

@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ import com.google.common.collect.Multimap;
 @SuppressWarnings("serial")
 public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 	private final ReadWriteLock lock = new ReentrantReadWriteLock();
-
 	private final boolean threadSafe;
 
 	public IndexMgrImpl() {
@@ -46,7 +45,7 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 	 * {@inheritDoc}
 	 **/
 	@Override
-	public <K, V> void createIndex(IndexID<K,V> indexId) {
+	public <K, V> void createIndex(IndexID<K, V> indexId) {
 		createIdx(indexId, -1, -1);
 	}
 
@@ -54,7 +53,7 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 	 * {@inheritDoc}
 	 **/
 	@Override
-	public <K, V> void createIndex(IndexID<K,V> indexId, int expectedKeys, int expectedValuesPerKey) {
+	public <K, V> void createIndex(IndexID<K, V> indexId, int expectedKeys, int expectedValuesPerKey) {
 		if (threadSafe) {
 			lock.writeLock().lock();
 			try {
@@ -67,17 +66,17 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 		}
 	}
 
-	private <K, V> void createIndex_intern(IndexID<K,V> indexId, int expectedKeys, int expectedValuesPerKey) {
+	private <K, V> void createIndex_intern(IndexID<K, V> indexId, int expectedKeys, int expectedValuesPerKey) {
 		if (this.containsIdx(indexId)) {
-			throw new SaltException("Cannot add the given index, because an index with this id already exists: " + indexId);
+			throw new SaltException(
+					"Cannot add the given index, because an index with this id already exists: " + indexId);
 		}
-		
 		createIdx(indexId, expectedKeys, expectedValuesPerKey);
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public boolean containsIndex(IndexID<?,?> indexId) {
+	public boolean containsIndex(IndexID<?, ?> indexId) {
 		if (threadSafe) {
 			lock.readLock().lock();
 			try {
@@ -92,8 +91,8 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K, V> boolean put(IndexID<K,V> indexId, K key, V value) {
-		
+	public <K, V> boolean put(IndexID<K, V> indexId, K key, V value) {
+
 		if (indexId != null && key != null && value != null) {
 			if (threadSafe) {
 				lock.writeLock().lock();
@@ -108,10 +107,10 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 		}
 		return false;
 	}
-	
-	private <K, V> boolean put_internal(IndexID<K,V> indexId, K key, V value) {
-		Multimap<K,V> idx = getIdx(indexId);
-		if(idx != null) {
+
+	private <K, V> boolean put_internal(IndexID<K, V> indexId, K key, V value) {
+		Multimap<K, V> idx = getIdx(indexId);
+		if (idx != null) {
 			return idx.put(key, value);
 		} else {
 			return false;
@@ -120,8 +119,8 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K, V> boolean putAll(IndexID<K,V> indexId, K key, Collection<? extends V> values) {
-		
+	public <K, V> boolean putAll(IndexID<K, V> indexId, K key, Collection<? extends V> values) {
+
 		if (indexId != null && key != null && values != null && !values.isEmpty()) {
 			if (threadSafe) {
 				lock.writeLock().lock();
@@ -136,10 +135,10 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 		}
 		return false;
 	}
-	
-	private <K, V> boolean putAll_internal(IndexID<K,V> indexId, K key, Collection<? extends V> values) {
-		Multimap<K,V> idx = getIdx(indexId);
-		if(idx != null) {
+
+	private <K, V> boolean putAll_internal(IndexID<K, V> indexId, K key, Collection<? extends V> values) {
+		Multimap<K, V> idx = getIdx(indexId);
+		if (idx != null) {
 			return idx.putAll(key, values);
 		} else {
 			return false;
@@ -148,7 +147,7 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K, V> V get(IndexID<K,V> indexId, K key) {
+	public <K, V> V get(IndexID<K, V> indexId, K key) {
 		V result = null;
 		if (indexId != null && key != null) {
 			if (threadSafe) {
@@ -156,10 +155,10 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 			}
 
 			try {
-				Multimap<K,V> idx = getIdx(indexId);
-				if(idx != null) {
+				Multimap<K, V> idx = getIdx(indexId);
+				if (idx != null) {
 					Collection<V> values = idx.get(key);
-					if(!values.isEmpty()) {
+					if (!values.isEmpty()) {
 						result = values.iterator().next();
 					}
 				}
@@ -174,17 +173,17 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K, V> List<V> getAll(IndexID<K,V> indexId, K key) {
+	public <K, V> List<V> getAll(IndexID<K, V> indexId, K key) {
 		if (indexId != null && key != null) {
 			if (threadSafe) {
 				lock.readLock().lock();
 			}
 
 			try {
-				Multimap<K,V> idx = getIdx(indexId);
-				if(idx != null) {
+				Multimap<K, V> idx = getIdx(indexId);
+				if (idx != null) {
 					Collection<V> values = idx.get(key);
-					if(values instanceof List) {
+					if (values instanceof List) {
 						return Collections.unmodifiableList((List<V>) values);
 					} else {
 						return new ArrayList<>(values);
@@ -201,7 +200,7 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 
 	/** {@inheritDoc} **/
 	@Override
-	public <K,V> boolean containsKey(IndexID<K, V> indexId, K key) {
+	public <K, V> boolean containsKey(IndexID<K, V> indexId, K key) {
 		boolean result = false;
 		if (indexId != null && key != null) {
 			if (threadSafe) {
@@ -217,10 +216,10 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 		}
 		return result;
 	}
-	
-	private <K,V> boolean containsKey_internal(IndexID<K, V> indexId, K key) {
-		Multimap<K,V> idx = getIdx(indexId);
-		
+
+	private <K, V> boolean containsKey_internal(IndexID<K, V> indexId, K key) {
+		Multimap<K, V> idx = getIdx(indexId);
+
 		if (idx != null) {
 			return idx.containsKey(key);
 		} else {
@@ -241,23 +240,23 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 				}
 			} else {
 				return remove_internal(indexId, key);
-			}			
+			}
 		}
 		return false;
 	}
-	
+
 	private <K> boolean remove_internal(IndexID<K, ?> indexId, K key) {
-		Multimap<K,?> idx = getIdx(indexId);
+		Multimap<K, ?> idx = getIdx(indexId);
 		if (idx != null) {
 			return !idx.removeAll(key).isEmpty();
 		} else {
 			return false;
 		}
 	}
-	
+
 	/** {@inheritDoc} **/
 	@Override
-	public <K,V> boolean remove(IndexID<K, V> indexId, K key, V value) {
+	public <K, V> boolean remove(IndexID<K, V> indexId, K key, V value) {
 		if (indexId != null && key != null && value != null) {
 			if (threadSafe) {
 				lock.writeLock().lock();
@@ -272,9 +271,9 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 		}
 		return false;
 	}
-	
-	public <K,V> boolean remove_internal(IndexID<K, V> indexId, K key, V value) {
-		Multimap<K,V> idx = getIdx(indexId);
+
+	public <K, V> boolean remove_internal(IndexID<K, V> indexId, K key, V value) {
+		Multimap<K, V> idx = getIdx(indexId);
 
 		if (idx != null) {
 			return idx.remove(key, value);
@@ -301,7 +300,7 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 	/** {@inheritDoc} **/
 	@Override
 	public void clearIndex(IndexID<?, ?> indexId) {
-		
+
 		if (threadSafe) {
 			lock.writeLock().lock();
 			try {
@@ -311,15 +310,16 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 			}
 		} else {
 			clearIndex_internal(indexId);
-		}		
+		}
 	}
-	
+
 	private void clearIndex_internal(IndexID<?, ?> indexId) {
-		Multimap<?,?> idx = getIdx(indexId);
+		Multimap<?, ?> idx = getIdx(indexId);
 		if (idx != null) {
 			idx.clear();
 		}
 	}
+
 	/** {@inheritDoc} **/
 	@Override
 	public void removeAll() {
@@ -350,11 +350,10 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 			if (threadSafe) {
 				lock.writeLock().lock();
 			}
-
 			try {
 				// only search for the value if it is possible to store this
 				// type of data in the index
-				for(Multimap<?, V> map : getIdxForValueType(valueClass)) {
+				for (Multimap<?, V> map : getIdxForValueType(valueClass)) {
 					result = map.values().remove(element) || result;
 				}
 			} finally {
@@ -378,18 +377,16 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 					result = removeValue_internal(indexId, element);
 				} finally {
 					lock.writeLock().unlock();
-					
 				}
 			} else {
 				result = removeValue_internal(indexId, element);
-			}			
+			}
 		}
-
 		return result;
 	}
-	
+
 	private <V> boolean removeValue_internal(IndexID<?, V> indexId, V element) {
-		Multimap<?,V> idx = getIdx(indexId);
+		Multimap<?, V> idx = getIdx(indexId);
 
 		if (idx != null) {
 			return idx.values().remove(element);
@@ -397,5 +394,4 @@ public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
 			return false;
 		}
 	}
-	
 }

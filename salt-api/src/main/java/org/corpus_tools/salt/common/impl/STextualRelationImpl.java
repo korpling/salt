@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,8 @@ import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextualDS, Integer> implements STextualRelation {
+public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextualDS, Integer>
+		implements STextualRelation {
 	/** Initializes an object of type {@link STextualRelationImpl}. **/
 	public STextualRelationImpl() {
 		this(null);
@@ -41,6 +42,5 @@ public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextu
 	public STextualRelationImpl(Relation<SToken, STextualDS> delegate) {
 		super(delegate, SToken.class, STextualDS.class, Integer.class);
 	}
-
 
 } // STextualRelationImpl

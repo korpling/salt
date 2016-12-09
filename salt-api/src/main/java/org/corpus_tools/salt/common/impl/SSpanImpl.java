@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,10 +49,10 @@ public class SSpanImpl extends SNodeImpl implements SSpan, SStructuredNode {
 	public SDocumentGraph getGraph() {
 		return ((SDocumentGraph) super.getGraph());
 	}
-	
+
 	@Override
 	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
-		if(graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
+		if (graph != null && getDelegate() == null && !(graph instanceof SDocumentGraph)) {
 			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SDocumentGraph.");
 		}
 		super.basicSetGraph(graph);

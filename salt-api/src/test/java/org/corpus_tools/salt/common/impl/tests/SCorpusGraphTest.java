@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
  *
  */
 package org.corpus_tools.salt.common.impl.tests;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,6 @@ import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Before;
 import org.junit.Test;
-import static org.assertj.core.api.Assertions.*;
 
 import junit.framework.TestCase;
 
@@ -127,7 +128,8 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 
 	@Test
 	public void testGetSCorpusRelations() {
-		String[] ids = { "salt:/graph1#corpRel1", "salt:/graph1#corpRel2", "salt:/graph1#corpRel3", "salt:/graph1#corpRel4" };
+		String[] ids = { "salt:/graph1#corpRel1", "salt:/graph1#corpRel2", "salt:/graph1#corpRel3",
+				"salt:/graph1#corpRel4" };
 		List<SCorpusRelation> corpRelDSs = new ArrayList<SCorpusRelation>();
 		getFixture().addNode(alibiCorpus);
 		for (String id : ids) {
@@ -145,7 +147,8 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 
 	@Test
 	public void testGetCorpusDocumentRelations() {
-		String[] ids = { "salt:/graph1#corpRel1", "salt:/graph1#corpRel2", "salt:/graph1#corpRel3", "salt:/graph1#corpRel4" };
+		String[] ids = { "salt:/graph1#corpRel1", "salt:/graph1#corpRel2", "salt:/graph1#corpRel3",
+				"salt:/graph1#corpRel4" };
 		List<SCorpusDocumentRelation> corpRelDSs = new ArrayList<SCorpusDocumentRelation>();
 		getFixture().addNode(alibiCorpus);
 		getFixture().addNode(alibiDocument);
@@ -395,17 +398,17 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	// assertEquals("differences: "+ template.differences(getFixture()),
 	// template, getFixture());
 	// }
-	
+
 	/**
-	 * Creating a corpus from a relational URI without a root corpus should create
-	 * a new top-level corpus with the name of the first segment.
+	 * Creating a corpus from a relational URI without a root corpus should
+	 * create a new top-level corpus with the name of the first segment.
 	 */
 	@Test
 	public void testCreateSCorpus_NoRoot() {
-	  List<SCorpus> corpora = getFixture().createCorpus(URI.createURI("corp1"));
-	  assertNotNull(corpora);
-	  assertEquals(1, corpora.size());
-	  assertEquals("corp1" ,corpora.get(0).getName());
+		List<SCorpus> corpora = getFixture().createCorpus(URI.createURI("corp1"));
+		assertNotNull(corpora);
+		assertEquals(1, corpora.size());
+		assertEquals("corp1", corpora.get(0).getName());
 	}
 
 	/**
@@ -453,7 +456,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		assertEquals(4, getFixture().getNodes().size());
 		assertEquals(3, getFixture().getRelations().size());
 	}
-	
+
 	/**
 	 * Tests the creation of {@link SCorpus} objects via a URI. The URI is
 	 * c1/c2/c3 and c1/c2/c4
@@ -516,10 +519,14 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		this.createCorpusStructure(getFixture());
 		getFixture().traverse(getFixture().getRoots(), GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "", this);
 
-		assertTrue("GraphTraversionTest: First traversed object is not null, but " + this.traversedNodes.get(0) + "!", this.traversedNodes.get(0) == null);
-		assertTrue("GraphTraversionTest: Second traversed object is not the corpus, but " + this.traversedNodes.get(1) + "!", this.traversedNodes.get(1) instanceof SCorpus);
-		assertTrue("GraphTraversionTest: Third traversed object is not the corpus, but " + this.traversedNodes.get(2) + "!", this.traversedNodes.get(2) instanceof SCorpus);
-		assertTrue("GraphTraversionTest: Fourth traversed object is not the document, but " + this.traversedNodes.get(3) + "!", this.traversedNodes.get(3) instanceof SDocument);
+		assertTrue("GraphTraversionTest: First traversed object is not null, but " + this.traversedNodes.get(0) + "!",
+				this.traversedNodes.get(0) == null);
+		assertTrue("GraphTraversionTest: Second traversed object is not the corpus, but " + this.traversedNodes.get(1)
+				+ "!", this.traversedNodes.get(1) instanceof SCorpus);
+		assertTrue("GraphTraversionTest: Third traversed object is not the corpus, but " + this.traversedNodes.get(2)
+				+ "!", this.traversedNodes.get(2) instanceof SCorpus);
+		assertTrue("GraphTraversionTest: Fourth traversed object is not the document, but " + this.traversedNodes.get(3)
+				+ "!", this.traversedNodes.get(3) instanceof SDocument);
 
 	}
 
@@ -563,34 +570,34 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 			return (doc1);
 		}
 	}
-	
+
 	@Test
-	public void testwhenPrintingCorpusGraphToTreeString_thenTreeStringShouldBeReturned(){
+	public void testwhenPrintingCorpusGraphToTreeString_thenTreeStringShouldBeReturned() {
 		getFixture().createDocument(URI.createURI("/corpus1/corpus2/document1"));
 		getFixture().createDocument(URI.createURI("/corpus1/corpus2/document2"));
 		getFixture().createDocument(URI.createURI("/corpus1/corpus3/corpus4/document3"));
 		getFixture().createDocument(URI.createURI("/corpus1/corpus3/corpus4/document4"));
-		
-		assertThat(fixture.toTreeString()).isEqualTo("└── corpus1\n    ├── corpus2\n    │   ├── document1\n    │   └── document2\n    └── corpus3\n        └── corpus4\n            ├── document3\n            └── document4\n");
+
+		assertThat(fixture.toTreeString()).isEqualTo(
+				"└── corpus1\n    ├── corpus2\n    │   ├── document1\n    │   └── document2\n    └── corpus3\n        └── corpus4\n            ├── document3\n            └── document4\n");
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order) {
-
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
+			SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order) {
 		this.traversedNodes.add(fromNode);
 		this.traversedNodes.add(currNode);
 
 	}
 
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<?,?> relation, SNode fromNode, long order) {
-		// TODO Auto-generated method stub
-
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
+			SRelation<?, ?> relation, SNode fromNode, long order) {
 	}
 
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<?,?> relation, SNode currNode, long order) {
-		// TODO Auto-generated method stub
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<?, ?> relation,
+			SNode currNode, long order) {
 		return true;
 	}
 } // SCorpusGraphTest

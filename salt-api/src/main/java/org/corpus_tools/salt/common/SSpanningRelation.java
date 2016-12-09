@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,5 +48,6 @@ import org.corpus_tools.salt.core.SRelation;
  * in a graph.
  * </p>
  */
-public interface SSpanningRelation extends SRelation<SSpan, SToken>, STextOverlappingRelation<SSpan, SToken>, STimeOverlappingRelation<SSpan, SToken>, SDocumentGraphObject {
+public interface SSpanningRelation extends SRelation<SSpan, SToken>, STextOverlappingRelation<SSpan, SToken>,
+		STimeOverlappingRelation<SSpan, SToken>, SDocumentGraphObject {
 } // SSpanningRelation

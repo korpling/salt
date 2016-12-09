@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -196,9 +196,11 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 							forgottenNodes.add(node);
 					}
 					if (forgottenNodes.size() == 0) {
-						throw new SaltResourceException("There are some nodes, which hasn' t been printed because of an unknown reason.");
+						throw new SaltResourceException(
+								"There are some nodes, which hasn' t been printed because of an unknown reason.");
 					} else {// traverse again
-						docGraph.traverse(forgottenNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, "dot_forgotten_nodes", this);
+						docGraph.traverse(forgottenNodes, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
+								"dot_forgotten_nodes", this);
 					} // traverse again
 				} // if both lists doesn't have the same size create difference
 			} // some nodes have no roots for example if they are part of a
@@ -244,11 +246,13 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 	protected static final String KW_DOT_STORED = KW_DOT_NS + "stored";
 
 	@Override
-	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order) {
+	public void nodeLeft(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
+			SRelation<? extends SNode, ? extends SNode> relation, SNode fromNode, long order) {
 	}
 
 	@Override
-	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SRelation<? extends SNode, ? extends  SNode> relation, SNode currNode, long order) {
+	public boolean checkConstraint(GRAPH_TRAVERSE_TYPE traversalType, String traversalId,
+			SRelation<? extends SNode, ? extends SNode> relation, SNode currNode, long order) {
 		return (true);
 	}
 
@@ -338,7 +342,8 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 	}
 
 	@Override
-	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode, SRelation<?,?> relation, SNode fromNode, long order) {
+	public void nodeReached(GRAPH_TRAVERSE_TYPE traversalType, String traversalId, SNode currNode,
+			SRelation<?, ?> relation, SNode fromNode, long order) {
 		SNode currSNode = (SNode) currNode;
 		SNode fromSNode = null;
 		if (fromNode != null) {
