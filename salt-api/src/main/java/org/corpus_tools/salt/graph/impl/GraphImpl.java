@@ -195,17 +195,10 @@ public class GraphImpl<N extends Node, R extends Relation<? extends N, ? extends
 			}
 			return;
 		}
-
-		// check if node already exists
-		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES_INVERSE, node)) {
-			// do nothing, node is already added
-			return;
-		}
-
+		basicAddNode(node);
 		if (node instanceof NodeImpl) {
 			((NodeImpl) node).basicSetGraph(this);
 		}
-		basicAddNode(node);
 	}
 
 	/**
@@ -439,11 +432,6 @@ public class GraphImpl<N extends Node, R extends Relation<? extends N, ? extends
 			}
 			return;
 		}
-
-		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {
-			return;
-		}
-
 		if (relation instanceof RelationImpl) {
 			((RelationImpl<? extends N, ? extends N>) relation).basicSetGraph(this);
 		}
