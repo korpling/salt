@@ -29,13 +29,11 @@ import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SSequentialDS;
 import org.corpus_tools.salt.common.SSequentialRelation;
-import org.corpus_tools.salt.common.SSpan;
 import org.corpus_tools.salt.common.SStructure;
 import org.corpus_tools.salt.common.STextOverlappingRelation;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.STimeOverlappingRelation;
-import org.corpus_tools.salt.common.STimeline;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
@@ -59,152 +57,6 @@ import com.google.common.collect.Multimap;
  *
  */
 public class DataSourceAccessor {
-	// ==================================== start: accessing concerning timeline
-	/**
-	 * Returns all {@link SToken} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
-	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SToken} objects refer to.
-	 * @return a list of {@link SToken} objects which refer or overlap the
-	 *         passed sequence
-	 */
-	public static List<SToken> getTokensBySequence(SDocumentGraph documentGraph,
-			DataSourceSequence DataSourceSequence) {
-		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
-		classes.add(SToken.class);
-		@SuppressWarnings("unchecked")
-		List<SToken> sTokens = ((List<SToken>) (List<? extends SNode>) getSNodesBySequence(documentGraph,
-				DataSourceSequence, classes));
-
-		return (sTokens);
-	}
-
-	/**
-	 * Returns all {@link SSpan} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
-	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SSpan} objects refer to.
-	 * @return a list of {@link SSpan} objects which refer or overlap the passed
-	 *         sequence
-	 */
-	public static List<SSpan> getSpanBySequence(SDocumentGraph documentGraph, DataSourceSequence DataSourceSequence) {
-		List<Class<? extends SNode>> classes = new ArrayList<>();
-		classes.add(SSpan.class);
-		@SuppressWarnings("unchecked")
-		List<SSpan> sSpans = ((List<SSpan>) (List<? extends SNode>) getSNodesBySequence(documentGraph,
-				DataSourceSequence, classes));
-
-		return (sSpans);
-	}
-
-	/**
-	 * Returns all {@link SStructure} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
-	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SStructure} objects refer to.
-	 * @return a list of {@link SStructure} objects which refer or overlap the
-	 *         passed sequence
-	 */
-	public static List<SStructure> getStructureBySequence(SDocumentGraph documentGraph,
-			DataSourceSequence DataSourceSequence) {
-		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
-		classes.add(SStructure.class);
-		@SuppressWarnings("unchecked")
-		List<SStructure> sStructs = ((List<SStructure>) (List<? extends SNode>) getSNodesBySequence(documentGraph,
-				DataSourceSequence, classes));
-
-		return (sStructs);
-	}
-
-	/**
-	 * Returns all {@link SNode} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
-	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SNode} objects refer to.
-	 * @return a list of {@link SNode} objects which refer or overlap the passed
-	 *         sequence
-	 */
-	public static List<SNode> getNodeBySequence(SDocumentGraph documentGraph, DataSourceSequence DataSourceSequence) {
-		List<Class<? extends SNode>> classes = new ArrayList<Class<? extends SNode>>();
-		classes.add(SNode.class);
-		List<SNode> sNodes = getSNodesBySequence(documentGraph, DataSourceSequence, classes);
-
-		return (sNodes);
-	}
-
-	/**
-	 * Searches for all {@link SNode} objects of the given node type, which
-	 * cover the given sequence.
-	 * 
-	 * @param sequence
-	 *            sequence, which is overlapped
-	 * @param nodeClasses
-	 *            type of nodes to be returned
-	 * @return nodes, which overlaps the given sequence
-	 */
-	private static List<SNode> getSNodesBySequence(SDocumentGraph documentGraph, DataSourceSequence sequence,
-			List<Class<? extends SNode>> nodeClasses) {
-		if (sequence == null) {
-			throw new SaltParameterException(
-					"Cannot start returning nodes overlapping a data source, because the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
-		}
-		if (sequence.getStart() == null) {
-			throw new SaltParameterException(
-					"Cannot start returning nodes overlapping a data source, because the 'sStart' value of the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
-		}
-		if (sequence.getEnd() == null) {
-			throw new SaltParameterException(
-					"Cannot start returning nodes overlapping a data source, because the 'sEnd' value of the 'DataSourceSequence' object, determining the sequence which shall be overlapped is empty.");
-		}
-		if (documentGraph == null) {
-			throw new SaltParameterException("Cannot start method please set the document graph first.");
-		}
-
-		List<SNode> nodes = null;
-		List<? extends SSequentialRelation> sSeqRels = null;
-		if (sequence.getDataSource() instanceof STextualDS) {
-			sSeqRels = documentGraph.getTextualRelations();
-		} else if (sequence.getDataSource() instanceof STimeline) {
-			sSeqRels = documentGraph.getTimelineRelations();
-		} else {
-			throw new SaltParameterException(
-					"Cannot compute overlaped nodes, because the given dataSource is not supported by this method.");
-		}
-		for (SSequentialRelation<SToken, ? extends SSequentialDS, ? extends Number> sSeqRel : sSeqRels) {
-			// walk through all sequential relations
-			if ((sequence.getDataSource().equals(sSeqRel.getTarget()))
-					&& (sSeqRel.getStart().doubleValue() >= sequence.getStart().doubleValue())
-					&& (sSeqRel.getEnd().doubleValue() <= sequence.getEnd().doubleValue())) {
-				// sequential relation is in the interval
-				for (Class<? extends SNode> nodeClass : nodeClasses) {
-					if (nodes == null)
-						nodes = new ArrayList<SNode>();
-					if (nodeClass.isInstance(sSeqRel.getSource())) {
-						// source is of correct type
-						nodes.add(sSeqRel.getSource());
-					}
-				}
-			} // sequential relation is in the interval
-		} // walk through all sequential relations
-		return (nodes);
-	}
-
 	/**
 	 * {@inheritDoc SDocumentGraph#isContinuousByText(List)} First sorts the
 	 * given lists, than searches first occurance of first node in subSNodList
@@ -317,7 +169,7 @@ public class DataSourceAccessor {
 				sequence.setDataSource(sTextualDS);
 				sequence.setStart(0);
 				sequence.setEnd((sTextualDS.getText() != null) ? sTextualDS.getText().length() : 0);
-				List<SToken> sTokens = getTokensBySequence(documentGraph, sequence);
+				List<SToken> sTokens = new GetXBySequence(documentGraph).getTokensBySequence(sequence);
 				if (sTokens != null) {
 					retVal.addAll(getSortedSTokenByText(documentGraph, sTokens));
 				}
