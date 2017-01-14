@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['getxbysequence',['GetXBySequence',['../classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1_get_x_by_sequence.html',1,'org::corpus_tools::salt::util::internal']]],
   ['graph',['Graph',['../interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html',1,'org::corpus_tools::salt::graph']]],
   ['graph_3c_20n_2c_20r_2c_20l_20_3e',['Graph&lt; N, R, L &gt;',['../interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html',1,'org::corpus_tools::salt::graph']]],
   ['graph_3c_20snode_2c_20srelation_3c_20snode_2c_20snode_20_3e_2c_20slayer_20_3e',['Graph&lt; SNode, SRelation&lt; SNode, SNode &gt;, SLayer &gt;',['../interfaceorg_1_1corpus__tools_1_1salt_1_1graph_1_1_graph.html',1,'org::corpus_tools::salt::graph']]],
