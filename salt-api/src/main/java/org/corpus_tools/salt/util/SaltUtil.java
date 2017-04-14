@@ -68,6 +68,7 @@ import org.corpus_tools.salt.semantics.STypeAnnotation;
 import org.corpus_tools.salt.semantics.SWordAnnotation;
 import org.corpus_tools.salt.util.internal.Diff.Builder;
 import org.corpus_tools.salt.util.internal.Validator;
+import org.corpus_tools.salt.util.internal.persistence.IsSaltXmlFile;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.corpus_tools.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter;
@@ -119,39 +120,36 @@ public class SaltUtil {
 	// ======================================> index names
 	/** name of index for node-types */
 	@SuppressWarnings("rawtypes")
-	public static final IndexID<Class, SNode> IDX_NODETYPE = new IndexID<>("idx_sNodeType",  
-			Class.class, SNode.class);
+	public static final IndexID<Class, SNode> IDX_NODETYPE = new IndexID<>("idx_sNodeType", Class.class, SNode.class);
 	/** name of index for relation-types */
-	@SuppressWarnings({"unchecked","rawtypes"})
-	public static final IndexID<Class, SRelation<?,?>> IDX_RELATIONTYPE = new IndexID<>(
-			"idx_sRelationType", Class.class, 
-			(Class<SRelation<?,?>>) (Class<?>) SRelation.class);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static final IndexID<Class, SRelation<?, ?>> IDX_RELATIONTYPE = new IndexID<>("idx_sRelationType",
+			Class.class, (Class<SRelation<?, ?>>) (Class<?>) SRelation.class);
 	/** name of index for relating ids and nodes */
-	public static final IndexID<String, Node> IDX_ID_NODES = new IndexID<>(
-			"idx_id_nodes", String.class, Node.class);
+	public static final IndexID<String, Node> IDX_ID_NODES = new IndexID<>("idx_id_nodes", String.class, Node.class);
 	/** name of index for relating ids and nodes (inverse) */
-	public static final IndexID<Node, String> IDX_ID_NODES_INVERSE = new IndexID<>(
-			"idx_id_nodes_inverse", Node.class, String.class);
+	public static final IndexID<Node, String> IDX_ID_NODES_INVERSE = new IndexID<>("idx_id_nodes_inverse", Node.class,
+			String.class);
 	/** name of index for relating ids and relations */
 	@SuppressWarnings("unchecked")
-	public static final IndexID<String, Relation<?,?>> IDX_ID_RELATIONS = new IndexID<>(
-			"idx_id_relation", String.class, (Class<Relation<?,?>>) (Class<?>) Relation.class);
+	public static final IndexID<String, Relation<?, ?>> IDX_ID_RELATIONS = new IndexID<>("idx_id_relation",
+			String.class, (Class<Relation<?, ?>>) (Class<?>) Relation.class);
 	/** name of index for relating ids and relations (inverse) */
 	@SuppressWarnings("unchecked")
-	public static final IndexID<Relation<?,?>, String> IDX_ID_RELATIONS_INVERSE = new IndexID<>( 
-			"idx_id_relation_inverse", (Class<Relation<?,?>>) (Class<?>) Relation.class, String.class);
+	public static final IndexID<Relation<?, ?>, String> IDX_ID_RELATIONS_INVERSE = new IndexID<>(
+			"idx_id_relation_inverse", (Class<Relation<?, ?>>) (Class<?>) Relation.class, String.class);
 	/** name of index for relating ids and layers */
 	@SuppressWarnings("unchecked")
-	public static final IndexID<String, Layer<?,?>> IDX_ID_LAYER = new IndexID<>(
-			"idx_id_layer", String.class, (Class<Layer<?,?>>) (Class<?>) Layer.class);
+	public static final IndexID<String, Layer<?, ?>> IDX_ID_LAYER = new IndexID<>("idx_id_layer", String.class,
+			(Class<Layer<?, ?>>) (Class<?>) Layer.class);
 	/** name of index for relating node ids and outgoing relations */
 	@SuppressWarnings("unchecked")
-	public static final IndexID<String, Relation<?,?>> IDX_OUT_RELATIONS = new IndexID<>( 
-			"idx_out_relations", String.class, (Class<Relation<?,?>>) (Class<?>) Relation.class);
+	public static final IndexID<String, Relation<?, ?>> IDX_OUT_RELATIONS = new IndexID<>("idx_out_relations",
+			String.class, (Class<Relation<?, ?>>) (Class<?>) Relation.class);
 	/** name of index for relating node ids and incoming relations */
 	@SuppressWarnings("unchecked")
-	public static final IndexID<String, Relation<?,?>> IDX_IN_RELATIONS = new IndexID<>(
-			"idx_in_relations", String.class, (Class<Relation<?,?>>) (Class<?>) Relation.class);
+	public static final IndexID<String, Relation<?, ?>> IDX_IN_RELATIONS = new IndexID<>("idx_in_relations",
+			String.class, (Class<Relation<?, ?>>) (Class<?>) Relation.class);
 	// ======================================< index names
 
 	// ======================================> keywords for features
@@ -272,7 +270,7 @@ public class SaltUtil {
 	public static final String SEMANTICS_UNIT = "unit";
 
 	// ======================================< keywords for semantics
-	
+
 	/**
 	 * Returns the concatenation of a labels namespace and a labels name as a
 	 * qualified name: qname= NAMESPACE {@value #NAMESPACE_SEPERATOR} NAME.
@@ -1266,5 +1264,9 @@ public class SaltUtil {
 	 */
 	public static <T extends Object> Validator.Builder<T> validate(T saltObject) {
 		return new Validator.Builder<T>(saltObject);
+	}
+
+	public static boolean isSaltXmlFile(File supposedlyXmlFile) {
+		return new IsSaltXmlFile(supposedlyXmlFile).isSaltXmlFile();
 	}
 }

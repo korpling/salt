@@ -92,6 +92,7 @@
 		<textcat.version>1.0.1</textcat.version>
 		<guava.version>19.0</guava.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-io.version>2.5</commons-io.version>
 		<json.version>20160810</json.version>
 		<woodstox-core.verion>5.0.3</woodstox-core.verion>
 		<findbugs-maven-plugin.version>3.0.4</findbugs-maven-plugin.version>
@@ -145,6 +146,11 @@
 				<version>${emf.version}</version>
 				<type>jar</type>
 				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
 			</dependency>
 
 			<!-- iso language codes -->
