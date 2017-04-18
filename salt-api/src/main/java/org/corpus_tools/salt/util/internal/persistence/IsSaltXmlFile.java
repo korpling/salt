@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
+import org.corpus_tools.salt.util.SaltUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +52,9 @@ public class IsSaltXmlFile {
 	}
 
 	private boolean isCorpusStructure() {
+		if (!SaltUtil.FILE_SALT_PROJECT.equalsIgnoreCase(supposedlyXmlFile.getName())) {
+			return false;
+		}
 		if (firstXLines.contains(CORPUS_STRUCTURE_MARKER)) {
 			return true;
 		}
@@ -58,6 +62,9 @@ public class IsSaltXmlFile {
 	}
 
 	private boolean isDocumentStructure() {
+		if (!supposedlyXmlFile.getName().endsWith(SaltUtil.FILE_ENDING_SALT_XML)) {
+			return false;
+		}
 		if (firstXLines.contains(DOCUMENT_STRUCTURE_MARKER)) {
 			return true;
 		}
