@@ -19,12 +19,17 @@ package org.corpus_tools.salt.util.internal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Set;
+
 import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.samples.SampleGenerator;
+import org.corpus_tools.salt.util.Difference;
 import org.corpus_tools.salt.util.SaltUtil;
+import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
 
 public class SaltProjectDiffTest {
+	private static final URI TEST_RESOURCE = URI.createFileURI("./src/test/resources/compare/");
 
 	@Test
 	public void whenComparingTwoNullModels_thenReturnFalse() {
@@ -44,5 +49,13 @@ public class SaltProjectDiffTest {
 		expected.getCorpusGraphs().get(0).removeNode(expected.getCorpusGraphs().get(0).getCorpora().get(0));
 
 		assertThat(SaltUtil.compare(actual).with(expected).andCheckIsomorphie()).isFalse();
+	}
+
+	@Test
+	public void whenComparingEqualSaltProjects_thenDifferencesMustBeEmpty() {
+		final SaltProject actual = SaltUtil.loadSaltProject(TEST_RESOURCE.appendSegment("equal").appendSegment("1"));
+		final SaltProject expected = SaltUtil.loadSaltProject(TEST_RESOURCE.appendSegment("equal").appendSegment("2"));
+		final Set<Difference> differences = SaltUtil.compare(actual).with(expected).andFindDiffs();
+		assertThat(differences).as("There are differences: " + differences).isEmpty();
 	}
 }
