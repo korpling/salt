@@ -43,9 +43,6 @@ import org.corpus_tools.salt.core.SRelation;
  * should use the type attribute which is available for every {@link SRelation}.
  * Like all the other relations, {@link SPointingRelation} can be annotated to
  * express some linguistic semantics.
- * 
- * @author florian
- *
  */
 public interface SPointingRelation extends SRelation<SStructuredNode, SStructuredNode>, SDocumentGraphObject {
-} // SPointingRelation
+}

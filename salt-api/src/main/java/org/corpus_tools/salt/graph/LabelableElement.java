@@ -28,8 +28,6 @@ import java.util.Set;
  * When a label is added to another container, it is removed from it's former
  * container.
  * </p>
- * 
- * @author florian
  *
  */
 public interface LabelableElement extends Serializable {

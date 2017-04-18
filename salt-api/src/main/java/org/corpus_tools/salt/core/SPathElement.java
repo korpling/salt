@@ -22,9 +22,6 @@ import org.eclipse.emf.common.util.URI;
 /**
  * Each object implementing this interface is able to return a {@link URI} for
  * the id of this object.
- * 
- * @author florian
- *
  */
 public interface SPathElement {
 	/**

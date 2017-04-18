@@ -23,24 +23,6 @@ import org.corpus_tools.salt.core.SRelation;
  * This type represents a hierarchical relation between two corpora (two objects
  * of type {@link SCorpus}). The source of this relation determines the super
  * corpus and the target determines the sub corpus in the hierarchical relation.
- * 
- * @author florian
  */
 public interface SCorpusRelation extends SRelation<SCorpus, SCorpus> {
-	// /**
-	// * Returns the corpus structure container, which contains this corpus
-	// * relation.
-	// *
-	// * @return corpus structure container
-	// */
-	// public SCorpusGraph getSCorpusGraph();
-	//
-	// /**
-	// * Sets the corpus structure container, which contains this corpus
-	// * relation.
-	// *
-	// * @return corpus structure container
-	// */
-	// public void setSCorpusGraph(SCorpusGraph value);
-
-} // SCorpusRelation
+}

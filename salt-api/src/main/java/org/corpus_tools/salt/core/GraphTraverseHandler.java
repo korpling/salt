@@ -42,9 +42,6 @@ import org.corpus_tools.salt.graph.Relation;
  * will be invoked, when reaching the node and
  * {@link #nodeLeft(GRAPH_TRAVERSE_TYPE, String, Node, Relation, Node, long)}
  * when leaving the node.
- * 
- * @author Florian Zipser
- *
  */
 public interface GraphTraverseHandler {
 	/**

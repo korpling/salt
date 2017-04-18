@@ -21,9 +21,6 @@ import org.corpus_tools.salt.samples.SampleGenerator;
 
 /**
  * An Exception class used by the {@link SampleGenerator}.
- * 
- * @author florian
- *
  */
 @SuppressWarnings("serial")
 public class SaltSampleException extends SaltException {

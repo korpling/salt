@@ -29,8 +29,6 @@ import org.corpus_tools.salt.graph.Label;
  * Objects of this class are produces by
  * {@link SDocumentGraph#findDiffs(SDocumentGraph)} to determine differences
  * between two {@link SDocumentGraph} objects.
- * 
- * @author florian
  */
 @SuppressWarnings("serial")
 public class Difference implements Serializable {

@@ -24,10 +24,6 @@ import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 
-/**
- * 
- * @author Florian Zipser
- */
 @SuppressWarnings("serial")
 public class STextualRelationSStartComparator implements Comparator<STextualRelation>, Serializable {
 

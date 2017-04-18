@@ -27,9 +27,6 @@ import org.corpus_tools.salt.exceptions.SaltTokenizerException;
 /**
  * This class is a very simple implementation of a tokenizer, which just splits
  * a primary text by a given list of characters. e.g. a blank.
- * 
- * @author Florian Zipser
- *
  */
 public class SimpleTokenizer {
 	/**

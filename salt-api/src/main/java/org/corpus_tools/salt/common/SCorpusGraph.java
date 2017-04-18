@@ -76,8 +76,6 @@ import org.eclipse.emf.common.util.URI;
  * and get by calling {@link SDocument#setDocumentGraph(SDocumentGraph)} and
  * {@link SDocument#getDocumentGraph()}. A closer documentation of a document
  * graph, you can find in {@link SDocumentGraph}.
- * 
- * @author florian
  */
 public interface SCorpusGraph extends SGraph {
 	/**

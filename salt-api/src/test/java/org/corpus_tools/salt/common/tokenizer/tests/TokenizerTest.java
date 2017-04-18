@@ -38,9 +38,6 @@ import com.neovisionaries.i18n.LanguageCode;
 /**
  * 
  * Tests the class TTTokenizer.
- * 
- * @author Florian Zipser
- * @author Stephan Druskat (Clitics tests)
  *
  */
 public class TokenizerTest {

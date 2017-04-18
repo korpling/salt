@@ -22,8 +22,6 @@ import org.corpus_tools.salt.core.SNode;
 /**
  * This class bundles the node types {@link SToken}, {@link SSpan} and
  * {@link SStructure} to be used as target in a {@link SDominanceRelation}.
- * 
- * @author florian
  */
 public interface SStructuredNode extends SNode {
-} // SStructuredNode
+}

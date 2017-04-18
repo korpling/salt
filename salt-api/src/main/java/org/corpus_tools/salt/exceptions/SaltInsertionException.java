@@ -27,9 +27,6 @@ import org.corpus_tools.salt.graph.Relation;
  * object. For instance if a {@link Node} can not be set to an {@link Relation}s
  * source or target, a {@link Relation} cannot be added to a {@link Graph} or a
  * {@link Label} cannot be added to a {@link Node} etc. .
- * 
- * @author Florian Zipser
- *
  */
 @SuppressWarnings("serial")
 public class SaltInsertionException extends java.lang.RuntimeException {

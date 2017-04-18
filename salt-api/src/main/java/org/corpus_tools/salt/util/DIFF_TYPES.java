@@ -23,9 +23,6 @@ import org.corpus_tools.salt.common.SaltProject;
 
 /**
  * Defines types of differences between two {@link SDocumentGraph} objects.
- * 
- * @author florian
- *
  */
 public enum DIFF_TYPES {
 	/**

@@ -32,8 +32,6 @@ import org.corpus_tools.salt.util.Copyable;
  * container.
  * </p>
  * 
- * @author florian
- *
  * @param <V>
  *            this parameter determines the type of the value of this label.
  */

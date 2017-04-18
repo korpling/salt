@@ -21,9 +21,6 @@ package org.corpus_tools.salt.core;
  * Each implementing subclass provides a name. The name is stored as label and
  * can be accessed with the namespace {@link #NAMESPACE} and the name
  * {@link #NAME}.
- * 
- * @author florian
- *
  */
 public interface SNamedElement {
 	/**

@@ -32,8 +32,6 @@ import org.corpus_tools.salt.graph.Relation;
  * {@link SNode}s. Means creating a path through nodes on "same level", to
  * identify, that one nodes comes before another one, when it is not computable
  * from the datasources.
- * 
- * @author florian
  */
 @SuppressWarnings("serial")
 public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode> implements SOrderRelation {

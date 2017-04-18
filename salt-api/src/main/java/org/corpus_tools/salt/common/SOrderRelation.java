@@ -23,8 +23,6 @@ import org.corpus_tools.salt.core.SRelation;
  * This class provides SOrderRelation, to determine the order of SNodes. Means
  * creating a path through nodes on "same level", to identify, that one nodes
  * comes before another one, when it is not computable from the datasources.
- * 
- * @author florian
  */
 public interface SOrderRelation extends SRelation<SStructuredNode, SStructuredNode>, SDocumentGraphObject {
-} // SOrderRelation
+}

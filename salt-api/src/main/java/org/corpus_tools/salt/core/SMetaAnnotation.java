@@ -49,9 +49,6 @@ import org.corpus_tools.salt.graph.Label;
  * For further information on labels,
  * 
  * @see Label
- * 
- * @author florian
- *
  */
 public interface SMetaAnnotation extends SAbstractAnnotation {
 } // SMetaAnnotation

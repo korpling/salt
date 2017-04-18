@@ -20,9 +20,6 @@ package org.corpus_tools.salt.exceptions;
 /**
  * This exception class is thrown, when a wrong parameter was passed to a method
  * in the Salt api.
- * 
- * @author Florian Zipser
- *
  */
 @SuppressWarnings("serial")
 public class SaltParameterException extends SaltException {

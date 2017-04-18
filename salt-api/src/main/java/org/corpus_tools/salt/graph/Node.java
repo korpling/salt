@@ -26,9 +26,6 @@ import java.util.Set;
  * The here defined node, is a labeled node, which means, it can contain a set
  * of {@link Label}s. Am node always belong to 0..1 {@link Graph}s and can also
  * be contained in one or more {@link Layer}s.
- * 
- * @author florian
- *
  */
 public interface Node extends IdentifiableElement {
 	/**
@@ -36,7 +33,7 @@ public interface Node extends IdentifiableElement {
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph<?,?,?> getGraph();
+	public Graph<?, ?, ?> getGraph();
 
 	/**
 	 * Returns all layers containing this node. This is a computed set and only
@@ -45,6 +42,6 @@ public interface Node extends IdentifiableElement {
 	 * 
 	 * @return a set of layers containing this node
 	 */
-	public Set<? extends Layer<?,?>> getLayers();
+	public Set<? extends Layer<?, ?>> getLayers();
 
 }

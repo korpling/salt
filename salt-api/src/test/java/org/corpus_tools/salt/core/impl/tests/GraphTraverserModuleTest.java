@@ -59,9 +59,6 @@ public class GraphTraverserModuleTest {
 	 * way can be set via the variables nodeOrderWayThere and nodeOrderWayBack.
 	 * This class implements the interface {@link GraphTraverseHandler} and
 	 * therefore listens for callbacks of the graph traversal.
-	 * 
-	 * @author Florian Zipser
-	 *
 	 */
 	class TraverserChecker implements GraphTraverseHandler, Runnable {
 		// class TraverserChecker

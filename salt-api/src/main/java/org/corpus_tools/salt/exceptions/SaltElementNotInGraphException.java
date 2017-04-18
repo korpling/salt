@@ -27,8 +27,6 @@ import org.corpus_tools.salt.graph.IdentifiableElement;
  * This Exception is thrown when an element ({@link SNode}, {@link SRelation} or
  * {@link SLayer}) is not contained in a graph, but a method which is called
  * needs that element to be in the graph.
- * 
- * @author florian
  */
 @SuppressWarnings("serial")
 public class SaltElementNotInGraphException extends SaltException {

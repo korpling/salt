@@ -83,9 +83,6 @@ import com.google.common.base.Strings;
 
 /**
  * This class contains a set of helpful methods.
- * 
- * @author florian
- *
  */
 public class SaltUtil {
 

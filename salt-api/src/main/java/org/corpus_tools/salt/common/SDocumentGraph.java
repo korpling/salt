@@ -47,8 +47,6 @@ import com.google.common.collect.Multimap;
  * the following. All these nodes and relations are contained in a graph, the
  * {@link SDocumentGraph}, which is the model element representing the
  * document-structure.
- * 
- * @author florian
  */
 public interface SDocumentGraph extends SGraph {
 	/**
@@ -366,7 +364,8 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(SNode node, SALT_TYPE... relationTypes);
+	public List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(SNode node,
+			SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns the sequences as {@link DataSourceSequence} which are overlapped
@@ -381,7 +380,8 @@ public interface SDocumentGraph extends SGraph {
 	 *            a list of relation types, which are traversed
 	 * @return the overlapped {@link DataSourceSequence} objects
 	 */
-	public List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(List<SNode> nodes, SALT_TYPE... relationTypes);
+	public List<? extends DataSourceSequence<? extends Number>> getOverlappedDataSourceSequence(List<SNode> nodes,
+			SALT_TYPE... relationTypes);
 
 	/**
 	 * Returns true, if the given list of nodes <em>subNodeList</em> is
@@ -507,7 +507,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            the offset in the data source where the created token ends
 	 * @return the created token
 	 */
-	public SToken createToken(SSequentialDS<?,Integer> sequentialDS, Integer start, Integer end);
+	public SToken createToken(SSequentialDS<?, Integer> sequentialDS, Integer start, Integer end);
 
 	/**
 	 * Tokenizes all {@link STextualDS} object being contained in this
@@ -646,7 +646,8 @@ public interface SDocumentGraph extends SGraph {
 	 *            (SNS::)?SNAME(=SVALUE)?(;SNS::SNAME=SVALUE)+
 	 * @return the created relation
 	 */
-	public SRelation<? extends SNode, ? extends SNode> createRelation(SNode source, SNode target, SALT_TYPE relationType, String annotations);
+	public SRelation<? extends SNode, ? extends SNode> createRelation(SNode source, SNode target,
+			SALT_TYPE relationType, String annotations);
 
 	/**
 	 * Returns all tokens in the graph, which are overlapped by the passed node

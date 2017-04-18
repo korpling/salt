@@ -22,9 +22,6 @@ import org.corpus_tools.salt.core.SNode;
 /**
  * This interface provides the possibility to highlight nodes while working with
  * {@link VisJsVisualizer}.
- * 
- * @author irina
- *
  */
 
 public interface StyleImporter {

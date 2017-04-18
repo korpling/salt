@@ -34,15 +34,11 @@ import org.corpus_tools.salt.util.SaltUtil;
 /**
  * This class is an abstract container containing a set of {@link Label}
  * objects.
- * 
- * @author florian
- *
  */
 @SuppressWarnings("serial")
 public abstract class LabelableElementImpl implements LabelableElement, Serializable {
 	/** Determines the expected number of labels. **/
 	public static final int EXPECTED_NUMBER_OF_LABELS = 5;
-
 
 	/**
 	 * A delegate object of the same type. If {@link #delegate} is not null, all
@@ -50,7 +46,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	 * {@link #delegate} makes this object to a container.
 	 **/
 	private final LabelableElement delegate;
-	
+
 	public LabelableElementImpl() {
 		this.delegate = null;
 	}

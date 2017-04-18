@@ -25,23 +25,15 @@ import java.util.Set;
  * recursive structure for layers, to build hierarchies. In general this
  * mechanism enables the creation of sub graphs. But note that a layer cannot be
  * contained by itself, so cycles of layers are not possible.
- * 
- * @author florian
- *
  */
-public interface Layer
-	<
-	N extends Node,
-	R extends Relation<? extends N, ? extends N>
-	> extends IdentifiableElement {
+public interface Layer<N extends Node, R extends Relation<? extends N, ? extends N>> extends IdentifiableElement {
 
 	/**
 	 * Returns the container graph of this node.
 	 * 
 	 * @return graph object which contains this node.
 	 */
-	public Graph<N,R,?> getGraph();
-
+	public Graph<N, R, ?> getGraph();
 
 	/**
 	 * Adds the passed node to this layer. The insertion order is preserved. If
@@ -87,7 +79,7 @@ public interface Layer
 	 * @param relation
 	 *            to be removed
 	 */
-	public void removeRelation(Relation<?,?> relation);
+	public void removeRelation(Relation<?, ?> relation);
 
 	/**
 	 * Returns a set of all contained relations, in the order how the relations

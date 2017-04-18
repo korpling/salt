@@ -25,9 +25,7 @@ import org.corpus_tools.salt.core.SFeature;
  * precisely {@link SFeature} objects) representing the start and the end
  * position determining the interval of the primary text overlapped by the
  * token.
- * 
- * @author florian
  */
 public interface STextualRelation extends SSequentialRelation<SToken, STextualDS, Integer>,
 		STextOverlappingRelation<SToken, STextualDS>, SDocumentGraphObject {
-} // STextualRelation
+}

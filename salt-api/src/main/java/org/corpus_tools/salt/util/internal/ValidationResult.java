@@ -23,9 +23,6 @@ import java.util.LinkedList;
 
 /**
  * A result object which is returned when a Salt model is checked for validity.
- * 
- * @author florian
- *
  */
 public class ValidationResult {
 	final private Collection<Invalidity> invalidities = new LinkedList<>();

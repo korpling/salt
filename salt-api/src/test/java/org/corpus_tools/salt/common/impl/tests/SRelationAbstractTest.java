@@ -32,9 +32,6 @@ import org.junit.Test;
 
 /**
  * This is an abstract test class for testing {@link SRelation} types.
- * 
- * @author florian
- *
  */
 public abstract class SRelationAbstractTest<S extends SNode, T extends SNode> {
 
@@ -44,7 +41,7 @@ public abstract class SRelationAbstractTest<S extends SNode, T extends SNode> {
 		this.fixture = fixture;
 	}
 
-	protected SRelation<S,T> getFixture() {
+	protected SRelation<S, T> getFixture() {
 		return fixture;
 	}
 

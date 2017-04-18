@@ -41,9 +41,6 @@ import org.eclipse.emf.common.util.URI;
 
 /**
  * This class writes the corpus structure in dot format to file.
- * 
- * @author Florian Zipser
- * 
  */
 public class SCorpusGraphDOTWriter implements GraphTraverseHandler {
 	private URI outputURI = null;

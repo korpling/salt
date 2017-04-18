@@ -61,10 +61,6 @@ import com.google.common.collect.Sets;
  * <li>{@link #OPTION_CHECK_ID} - When true identifiers needs to be the same in
  * isomorphie check and difference computation.</li>
  * </ul>
- * 
- * @author florian
- * @author André Röhrig
- *
  */
 public class Diff {
 
@@ -72,8 +68,6 @@ public class Diff {
 	 * A fluent builder for comparing two {@link SDocumentGraph} or
 	 * {@link SCorpusGraph} objects.
 	 * 
-	 * @author florian
-	 *
 	 * @param <S>
 	 *            type of Salt element to be compared
 	 */

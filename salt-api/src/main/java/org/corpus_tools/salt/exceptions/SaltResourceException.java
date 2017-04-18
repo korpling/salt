@@ -20,9 +20,6 @@ package org.corpus_tools.salt.exceptions;
 /**
  * This exception is used for exceptions occuring while loading or storing Salt
  * data from or to disk.
- * 
- * @author Florian Zipser
- *
  */
 @SuppressWarnings("serial")
 public class SaltResourceException extends SaltException {

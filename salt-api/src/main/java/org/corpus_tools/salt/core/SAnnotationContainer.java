@@ -26,9 +26,6 @@ import org.corpus_tools.salt.graph.LabelableElement;
  * This interface defines a container to hold annotations ({@link SAnnotation}),
  * meta-annotations ({@link SMetaAnnotation}), processing annotations (
  * {@link SProcessingAnnotation}) and features ({@link SFeature}).
- * 
- * @author florian
- *
  */
 public interface SAnnotationContainer extends LabelableElement {
 	// =======================================> SAnnotation

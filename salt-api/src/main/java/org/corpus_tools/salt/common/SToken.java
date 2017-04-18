@@ -36,8 +36,6 @@ import org.corpus_tools.salt.core.SNode;
  * realized with a specific type of SRelation, the {@link STextualRelation}. A
  * {@link STextualRelation} links a primary text (as source) with a token (as
  * target)
- * 
- * @author florian
  */
 public interface SToken extends SStructuredNode, SDocumentGraphObject {
-} // SToken
+}

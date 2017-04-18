@@ -26,9 +26,7 @@ package org.corpus_tools.salt.common;
  * linguistic difference whether tokens t1 , t2 and t3 are directly dominated by
  * a structure s1 or whether t1 and t2 are dominated by a structure s2 which is,
  * together with t3 , dominated by structure s2.
- * 
- * @author florian
  */
 public interface SDominanceRelation extends STextOverlappingRelation<SStructure, SStructuredNode>,
 		STimeOverlappingRelation<SStructure, SStructuredNode>, SDocumentGraphObject {
-} // SDominanceRelation
+}

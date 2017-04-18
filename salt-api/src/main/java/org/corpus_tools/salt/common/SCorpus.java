@@ -26,8 +26,6 @@ import org.corpus_tools.salt.core.SNode;
  * an object of type {@link SCorpusGraph}. To know how to create a hierarchical
  * relation between several {@link SCorpus} objects please read the
  * documentation in {@link SCorpusGraph} .
- * 
- * @author florian
  */
 public interface SCorpus extends SNode {
 	/** {@inheritDoc} **/

@@ -24,8 +24,6 @@ import org.corpus_tools.salt.core.SRelation;
  * type {@link SCorpus}) and a document (objects of type {@link SDocument}). The
  * source of this relation determines the corpus and the target determines the
  * document in the hierarchical relation.
- * 
- * @author florian
  */
 public interface SCorpusDocumentRelation extends SRelation<SCorpus, SDocument> {
 } // SCorpusDocumentRelation

@@ -51,13 +51,8 @@ import com.google.common.io.BaseEncoding;
 /**
  * This class reads the XMI structure of SaltXML and creates the corresponding
  * Salt object.
- * 
- * @author florian
- *
  */
 public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictionary {
-	// private static final Logger logger =
-	// LoggerFactory.getLogger(SaltXMLHandler.class);
 
 	public SaltXML10Handler() {
 		nodes = new ArrayList<SNode>();
@@ -198,8 +193,8 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				}
 			}
 		} else if (TAG_EDGES.equals(qName)) {
-			SRelation<? extends SNode,? extends SNode> sRel = null;
-			
+			SRelation<? extends SNode, ? extends SNode> sRel = null;
+
 			String type = attributes.getValue(ATT_TYPE);
 			String source = attributes.getValue(ATT_SOURCE);
 			String target = attributes.getValue(ATT_TARGET);
@@ -370,9 +365,9 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			} else if (TAG_EDGES.equals(qName)) {
 				if (parent != null) {
 					if (parent instanceof SDocumentGraph && obj instanceof SRelation) {
-						((SDocumentGraph) currentContainer.peek()).addRelation((SRelation<?,?>) obj);
+						((SDocumentGraph) currentContainer.peek()).addRelation((SRelation<?, ?>) obj);
 					} else if (parent instanceof SCorpusGraph && obj instanceof SRelation) {
-						((SCorpusGraph) currentContainer.peek()).addRelation((SRelation<?,?>) obj);
+						((SCorpusGraph) currentContainer.peek()).addRelation((SRelation<?, ?>) obj);
 					}
 				}
 			}

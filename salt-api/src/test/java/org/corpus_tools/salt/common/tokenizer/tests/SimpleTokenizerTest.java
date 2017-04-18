@@ -29,9 +29,6 @@ import org.junit.Test;
 /**
  * 
  * Tests the class TTTokenizer.
- * 
- * @author Florian Zipser
- *
  */
 public class SimpleTokenizerTest {
 	private SimpleTokenizer fixture = null;

@@ -27,8 +27,6 @@ package org.corpus_tools.salt.common;
  * other nodes. To mark a token as being part of the set, a
  * {@link SSpanningRelation} object connects each token with the span. A
  * {@link SSpanningRelation} always has a span as source and a token as target.
- * 
- * @author florian
  */
 public interface SSpan extends SStructuredNode, SDocumentGraphObject {
-} // SSpan
+}

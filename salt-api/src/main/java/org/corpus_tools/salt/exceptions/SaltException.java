@@ -21,9 +21,6 @@ package org.corpus_tools.salt.exceptions;
  * This class is highest exception. All {@link SaltException} classes are
  * derived from this class. It can be instantiated, if no other Exception
  * matches to the problem.
- * 
- * @author Florian Zipser
- *
  */
 @SuppressWarnings("serial")
 public class SaltException extends java.lang.RuntimeException {

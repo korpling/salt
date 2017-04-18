@@ -54,9 +54,6 @@ import com.google.common.collect.Multimap;
 /**
  * Provides some methods for an easier access to objects being contained by a
  * given {@link SDocumentGraph} object.
- * 
- * @author Florian Zipser
- *
  */
 public class DataSourceAccessor {
 	// ==================================== start: accessing concerning timeline

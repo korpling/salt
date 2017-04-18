@@ -23,9 +23,6 @@ import org.junit.Test;
 
 /**
  * This is an abstract test class for testing {@link SNode} types.
- * 
- * @author florian
- *
  */
 public abstract class SNodeAbstractTest<N extends SNode> {
 

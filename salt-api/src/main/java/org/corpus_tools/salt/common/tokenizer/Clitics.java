@@ -41,9 +41,6 @@ import org.corpus_tools.salt.common.STextualDS;
  * <code>"([dcjlmnstDCJLNMST]'|[Qq]u'|[Jj]usqu'|[Ll]orsqu')"</code></li>
  * </ul>
  * From {@link Tokenizer}.
- * 
- * @author Stephan Druskat
- *
  */
 public class Clitics {
 

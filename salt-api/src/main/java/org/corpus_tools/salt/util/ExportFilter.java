@@ -27,9 +27,6 @@ import org.corpus_tools.salt.core.SRelation;
  * of the visualization. Otherwise it will be omitted. The method
  * {@link #excludeRelation(SRelation)} has a similar meaning. If it returns
  * true, then the passed relation will also be included in the visualization.
- * 
- * @author irina
- *
  */
 
 public interface ExportFilter {

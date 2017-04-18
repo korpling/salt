@@ -32,14 +32,12 @@ import org.corpus_tools.salt.exceptions.SaltParameterException;
  * {@link Label}. An relation always belong to 0..1 {@link Graph}s and can also
  * be contained in one or more {@link Layer} s.
  * 
- * @author florian
- *
  * @param <S>
  *            source node of the relation
  * @param <T>
  *            target node of the relation
  */
-public interface Relation<S extends Node ,T extends Node> extends IdentifiableElement {
+public interface Relation<S extends Node, T extends Node> extends IdentifiableElement {
 
 	/**
 	 * Returns the delegate object. If {@link #delegate} is not null, all
@@ -65,17 +63,16 @@ public interface Relation<S extends Node ,T extends Node> extends IdentifiableEl
 	 *            source node
 	 */
 	public void setSource(S source);
-	
+
 	/**
-	 * Same as {@link #setSource(Node)} but allows any instance of {@link Node} as
-	 * argument. If the argument has an invalid type an {@link SaltParameterException}
-	 * is thrown.
+	 * Same as {@link #setSource(Node)} but allows any instance of {@link Node}
+	 * as argument. If the argument has an invalid type an
+	 * {@link SaltParameterException} is thrown.
 	 * 
 	 * @param source
 	 * @throws SaltParameterException
 	 */
 	public void setSourceUnsafe(Node source) throws SaltParameterException;
-	
 
 	/**
 	 * Returns the target node of this relation object.
@@ -92,11 +89,11 @@ public interface Relation<S extends Node ,T extends Node> extends IdentifiableEl
 	 *            target node
 	 */
 	public void setTarget(T target);
-	
+
 	/**
-	 * Same as {@link #setTarget(Node)} but allows any instance of {@link Node} as
-	 * argument. If the argument has an invalid type an {@link SaltParameterException}
-	 * is thrown.
+	 * Same as {@link #setTarget(Node)} but allows any instance of {@link Node}
+	 * as argument. If the argument has an invalid type an
+	 * {@link SaltParameterException} is thrown.
 	 * 
 	 * @param source
 	 * @throws SaltParameterException
@@ -108,8 +105,7 @@ public interface Relation<S extends Node ,T extends Node> extends IdentifiableEl
 	 * 
 	 * @return graph object which contains this relation.
 	 */
-	public Graph<?,?,?> getGraph();
-
+	public Graph<?, ?, ?> getGraph();
 
 	/**
 	 * Returns all layers containing this relation. This is a computed set and
@@ -118,16 +114,18 @@ public interface Relation<S extends Node ,T extends Node> extends IdentifiableEl
 	 * 
 	 * @return a set of layers containing this relation
 	 */
-	public Set<? extends Layer<?,?>> getLayers();
+	public Set<? extends Layer<?, ?>> getLayers();
 
 	/**
 	 * Return the {@link Class} object for the source node type.
+	 * 
 	 * @return
 	 */
 	public Class<S> getSourceClass();
-	
+
 	/**
 	 * Return the {@link Class} object for the target node type.
+	 * 
 	 * @return
 	 */
 	public Class<T> getTargetClass();

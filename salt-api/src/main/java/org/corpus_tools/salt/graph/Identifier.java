@@ -25,8 +25,6 @@ import org.corpus_tools.salt.util.SaltUtil;
  * {@link Layer} objects. The namespace of an {@link Identifier} objectis fixed
  * to {@link SaltUtil#SALT_NAMESPACE} and its name is fixed to
  * {@link SaltUtil#LABEL_ID}.
- * 
- * @author florian
  */
 public interface Identifier extends Label {
 	/**

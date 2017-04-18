@@ -26,16 +26,13 @@ import org.corpus_tools.salt.common.STextualDS;
  * is a sample text.", a {@link DataSourceSequence} object needs to be
  * initialized like this: {@link #getStart()} =10, {@link #getEnd()} = 16 and
  * {@link #getDataSource()} = the data source containing the entire text. <br/>
- * 
- * @author florian
- *
  */
 public class DataSourceSequence<P extends Number> {
 
 	public DataSourceSequence() {
 	}
 
-	public DataSourceSequence(SSequentialDS<?,?> dataSource, P start, P end) {
+	public DataSourceSequence(SSequentialDS<?, ?> dataSource, P start, P end) {
 		this.dataSource = dataSource;
 		this.start = start;
 		this.end = end;
@@ -93,12 +90,12 @@ public class DataSourceSequence<P extends Number> {
 	}
 
 	/** data source which is addressed by this sequence **/
-	protected SSequentialDS<?,?> dataSource;
+	protected SSequentialDS<?, ?> dataSource;
 
 	/**
 	 * @return data source which is addressed by this sequence
 	 */
-	public SSequentialDS<?,?> getDataSource() {
+	public SSequentialDS<?, ?> getDataSource() {
 		return dataSource;
 	}
 
@@ -106,7 +103,7 @@ public class DataSourceSequence<P extends Number> {
 	 * @param dataSource
 	 *            data source which is addressed by this sequence
 	 */
-	public void setDataSource(SSequentialDS<?,?> dataSource) {
+	public void setDataSource(SSequentialDS<?, ?> dataSource) {
 		this.dataSource = dataSource;
 	}
 

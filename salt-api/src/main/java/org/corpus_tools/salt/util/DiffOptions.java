@@ -36,10 +36,6 @@ import com.google.common.base.Strings;
  * </pre>
  * </code> The default settings are specified in
  * {@link DiffOptions#Diff_Options()}.
- * 
- * 
- * @author florian
- *
  */
 @SuppressWarnings("serial")
 public class DiffOptions extends Hashtable<String, Boolean> {

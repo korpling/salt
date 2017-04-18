@@ -27,9 +27,6 @@ import java.util.HashSet;
  * Java with permission from the original abbreviation sets used by the
  * TreeTagger by Helmut Schmid (see
  * http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/).
- * 
- * @author Florian Zipser
- *
  */
 public class AbbreviationIT {
 	/**

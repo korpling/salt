@@ -45,10 +45,6 @@ import org.corpus_tools.salt.graph.Relation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author Thomas Krause <krauseto@hu-berlin.de>
- */
 public class GraphMLWriter {
 	private final static Logger log = LoggerFactory.getLogger(GraphMLWriter.class);
 

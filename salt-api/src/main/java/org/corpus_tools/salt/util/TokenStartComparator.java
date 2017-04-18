@@ -26,10 +26,6 @@ import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 
-/**
- * 
- * @author Florian Zipser
- */
 @SuppressWarnings("serial")
 public class TokenStartComparator implements Comparator<SToken>, Serializable {
 	private SDocumentGraph documentGraph = null;
@@ -69,7 +65,7 @@ public class TokenStartComparator implements Comparator<SToken>, Serializable {
 			throw new SaltParameterException("Cannot compare the given SToken-objects, bacause second one is null.");
 		}
 		STextualRelation sTextRelO1 = null;
-		for (SRelation<?,?> rel : getDocumentGraph().getOutRelations(o1.getId())) {
+		for (SRelation<?, ?> rel : getDocumentGraph().getOutRelations(o1.getId())) {
 			if (rel instanceof STextualRelation) {
 				sTextRelO1 = (STextualRelation) rel;
 				break;
@@ -77,7 +73,7 @@ public class TokenStartComparator implements Comparator<SToken>, Serializable {
 		}
 
 		STextualRelation sTextRelO2 = null;
-		for (SRelation<?,?> rel : getDocumentGraph().getOutRelations(o2.getId())) {
+		for (SRelation<?, ?> rel : getDocumentGraph().getOutRelations(o2.getId())) {
 			if (rel instanceof STextualRelation) {
 				sTextRelO2 = (STextualRelation) rel;
 				break;

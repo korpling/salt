@@ -39,9 +39,6 @@ import org.corpus_tools.salt.util.SaltUtil;
  * {@link SRelation}, {@link SGraph} etc. . It provides methods to access all
  * {@link SAnnotation}, {@link SMetaAnnotation}, {@link SProcessingAnnotation}
  * and {@link SFeature} objects.
- * 
- * @author florian
- *
  */
 public class SAnnotationContainerHelper {
 

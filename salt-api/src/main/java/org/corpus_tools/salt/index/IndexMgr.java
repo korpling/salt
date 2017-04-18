@@ -26,9 +26,6 @@ import java.util.List;
  * a set of nodes, relations or layers with an identifier. Each index is also
  * identified by an identifier, which is also used to access its elements. <br/>
  * A new index could be created via {@link #addIndex(String, Class, Class)}.
- * 
- * @author florian
- *
  */
 public interface IndexMgr extends Serializable {
 

@@ -66,10 +66,6 @@ import com.neovisionaries.i18n.LanguageCode;
  * abbreviations. The current version of the {@link Tokenizer} supports
  * abbreviations for english, french, italian and german language. If no
  * language is set, all available abbreviations will be used.
- * 
- * @author Amir Zeldes
- * @author Florian Zipser
- * 
  */
 public class Tokenizer {
 	/**
@@ -518,10 +514,10 @@ public class Tokenizer {
 
 						// redirect all relations to span
 						List<SRelation<?, ? extends SNode>> inRels = new ArrayList<>();
-						for (SRelation<?,? extends SNode> rel : getDocumentGraph().getInRelations(oldToken.getId())) {
+						for (SRelation<?, ? extends SNode> rel : getDocumentGraph().getInRelations(oldToken.getId())) {
 							inRels.add(rel);
 						}
-						for (SRelation<?,?> inRel : inRels) {
+						for (SRelation<?, ?> inRel : inRels) {
 							if (inRel instanceof SSpanningRelation) {
 								// in case of edge is a SSpanningRelation remove
 								// it and create new ones for each token under
@@ -541,12 +537,12 @@ public class Tokenizer {
 							}
 						}
 						List<SRelation<? extends SNode, ?>> outRels = new ArrayList<>();
-						for (SRelation<?,?> outRel : getDocumentGraph().getOutRelations(oldToken.getId())) {
+						for (SRelation<?, ?> outRel : getDocumentGraph().getOutRelations(oldToken.getId())) {
 							if (!(outRel instanceof STextualRelation)) {
 								outRels.add(outRel);
 							}
 						}
-						for (SRelation<?,?> outRel : outRels) {
+						for (SRelation<?, ?> outRel : outRels) {
 							outRel.setSourceUnsafe(span);
 						}
 						getDocumentGraph().removeNode(oldToken);

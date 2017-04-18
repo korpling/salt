@@ -40,9 +40,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Handles the traversal of a graph.
- * 
- * @author Florian Zipser
- * 
  */
 public class GraphTraverserModule {
 	/**
@@ -192,9 +189,6 @@ public class GraphTraverserModule {
 	/**
 	 * A threadable class, which traverses the graph and invokes methods of the
 	 * given callback handler during the traversal.
-	 * 
-	 * @author Florian Zipser
-	 * 
 	 */
 	static class Traverser implements Runnable {
 		/**
@@ -262,9 +256,6 @@ public class GraphTraverserModule {
 		 * a stack to stores the path, which has been used in traversal.
 		 * Contains a node, a counter for the relation and order, in which child
 		 * node the traversal currently is.
-		 * 
-		 * @author florian
-		 * 
 		 */
 		private static class NodeEntry {
 			private final SNode node;

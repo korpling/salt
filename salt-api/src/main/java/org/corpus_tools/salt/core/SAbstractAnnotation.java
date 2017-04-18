@@ -43,9 +43,6 @@ import org.eclipse.emf.common.util.URI;
  * For further information on labels,
  * 
  * @see Label
- * 
- * @author florian
- *
  */
 public interface SAbstractAnnotation extends Label, SAnnotationContainer {
 	/**

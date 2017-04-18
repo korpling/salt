@@ -37,9 +37,6 @@ import org.corpus_tools.salt.graph.Label;
  * </p>
  * 
  * @see Label
- * 
- * @author florian
- *
  */
 public interface SProcessingAnnotation extends SAbstractAnnotation {
-} // SProcessingAnnotation
+}

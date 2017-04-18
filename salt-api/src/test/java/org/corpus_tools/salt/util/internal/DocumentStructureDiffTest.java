@@ -47,8 +47,6 @@ import org.junit.Test;
 
 /**
  * This class tests the isomorphy check of the {@link SDocumentGraph}.
- * 
- * @author André Röhrig
  */
 public class DocumentStructureDiffTest {
 

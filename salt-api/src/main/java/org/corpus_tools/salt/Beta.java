@@ -31,8 +31,6 @@ package org.corpus_tools.salt;
  * marked with {@code @Beta} as well. Implementations of interfaces with a
  * {@code @Beta} annnotation will inherit the beta status as well.
  * </p>
- * 
- * @author Thomas Krause <krauseto@hu-berlin.de>
  */
 public @interface Beta {
 

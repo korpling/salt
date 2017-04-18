@@ -20,9 +20,6 @@ package org.corpus_tools.salt.graph;
 /**
  * This enumeration contains all attributes which are used in several classes in
  * Salt's graph model.
- * 
- * @author florian
- *
  */
 public enum GRAPH_ATTRIBUTES {
 	/**

@@ -37,8 +37,6 @@ import org.eclipse.emf.common.util.URI;
  * <p>
  * A document passes it's id to a document graph, when one is set.
  * </p>
- * 
- * @author florian
  */
 public interface SDocument extends SNode {
 	/**

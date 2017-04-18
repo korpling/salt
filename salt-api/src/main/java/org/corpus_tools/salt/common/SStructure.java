@@ -28,8 +28,6 @@ package org.corpus_tools.salt.common;
  * {@link SDominanceRelation} could be a {@link SToken}, {@link SSpan} or even a
  * {@link SStructure}. The unit of both elements enables to create unbound
  * hierarchies above a tokenization.
- * 
- * @author florian
  */
 public interface SStructure extends SStructuredNode, SDocumentGraphObject {
-} // SStructure
+}

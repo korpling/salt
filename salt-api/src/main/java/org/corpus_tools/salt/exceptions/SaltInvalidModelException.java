@@ -20,9 +20,6 @@ package org.corpus_tools.salt.exceptions;
 /**
  * This exception class is used, in case of a Salt model is not valid respecting
  * the constraints of Salt.
- * 
- * @author Florian Zipser
- *
  */
 @SuppressWarnings("serial")
 public class SaltInvalidModelException extends SaltException {

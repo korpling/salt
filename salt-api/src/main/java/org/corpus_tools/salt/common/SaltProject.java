@@ -28,8 +28,6 @@ import org.eclipse.emf.common.util.URI;
  * each. This makes the {@link SaltProject} object the entry point for a salt
  * model. In case you have more than one salt project, you can name it by
  * {@link #setName(String)}
- * 
- * @author florian
  */
 public interface SaltProject extends Serializable {
 	/**
