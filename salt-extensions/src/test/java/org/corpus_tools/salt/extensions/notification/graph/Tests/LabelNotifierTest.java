@@ -24,7 +24,7 @@ import org.corpus_tools.salt.extensions.notification.graph.Tests.Helper.MyListen
 import org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Label;
-import org.corpus_tools.salt.graph.impl.tests.LabelTest;
+import org.corpus_tools.salt.graph.impl.LabelTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

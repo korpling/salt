@@ -26,7 +26,7 @@ import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.tests.RelationTest;
+import org.corpus_tools.salt.graph.impl.RelationTest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
