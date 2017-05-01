@@ -17,6 +17,7 @@
  */
 package org.corpus_tools.salt.graph.impl;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +26,7 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
+import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
 public class LayerImpl<N extends Node, R extends Relation<? extends N, ? extends N>> extends IdentifiableElementImpl
@@ -140,6 +142,22 @@ public class LayerImpl<N extends Node, R extends Relation<? extends N, ? extends
 			getGraph().addNode(node);
 		}
 		nodes.add(node);
+	}
+
+	/**
+	 * Adds the passed nodes to this layer. The insertion order is preserved. If
+	 * this layer is contained by a graph, the passed node is also added to the
+	 * graph in case it was not already contained in the graph.
+	 * 
+	 * @param node
+	 *            node to be inserted into this layer
+	 */
+	public void addNodes(Collection<? extends N> nodes) {
+		if (SaltUtil.isNotNullOrEmpty(nodes)) {
+			for (N node : nodes) {
+				addNode(node);
+			}
+		}
 	}
 
 	/** {@inheritDoc Layer#removeNode(Node)} **/

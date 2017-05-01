@@ -17,6 +17,7 @@
  */
 package org.corpus_tools.salt.util.persistence;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -218,7 +219,7 @@ public class Persist_SaltXML10_Test {
 
 		// compare both document graphs
 		SDocumentGraph graph = SaltUtil.loadDocumentGraph(path);
-		assertTrue(template.getDocumentGraph().isIsomorph(graph));
+		assertThat(template.getDocumentGraph().findDiffs(graph)).isEmpty();
 	}
 
 	/**

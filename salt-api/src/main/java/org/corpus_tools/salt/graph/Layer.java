@@ -17,6 +17,7 @@
  */
 package org.corpus_tools.salt.graph;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -44,6 +45,16 @@ public interface Layer<N extends Node, R extends Relation<? extends N, ? extends
 	 *            node to be inserted into this layer
 	 */
 	public void addNode(N node);
+
+	/**
+	 * Adds the passed nodes to this layer. The insertion order is preserved. If
+	 * this layer is contained by a graph, the passed node is also added to the
+	 * graph in case it was not already contained in the graph.
+	 * 
+	 * @param node
+	 *            node to be inserted into this layer
+	 */
+	public void addNodes(Collection<? extends N> nodes);
 
 	/**
 	 * Removes the passed node from this layer. If the passed relation is null,

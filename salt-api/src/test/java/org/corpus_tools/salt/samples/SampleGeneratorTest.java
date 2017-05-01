@@ -17,13 +17,10 @@
  */
 package org.corpus_tools.salt.samples;
 
-import static org.junit.Assert.fail;
-
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SaltProject;
-import org.corpus_tools.salt.samples.SampleGenerator;
 import org.junit.Test;
 
 public class SampleGeneratorTest {
@@ -37,21 +34,12 @@ public class SampleGeneratorTest {
 	@Test
 	public void testCreateCorpusStructure_SCorpusGraph() {
 		SCorpusGraph fixture = SaltFactory.createSCorpusGraph();
-
-		try {
-			SampleGenerator.createCorpusStructure(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createCorpusStructure(fixture);
 	}
 
 	@Test
 	public void testCreateCorpusStructure() {
-		try {
-			SampleGenerator.createCorpusStructure();
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createCorpusStructure();
 	}
 
 	@Test
@@ -61,57 +49,33 @@ public class SampleGeneratorTest {
 
 	@Test
 	public void testCreateCorpusStructure_simple() {
-		try {
-			SampleGenerator.createCorpusStructure_simple();
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createCorpusStructure_simple();
 	}
 
 	@Test
 	public void testCreateDialogue_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createDialogue(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createDialogue(fixture);
 	}
 
 	@Test
 	public void testCreatePrimaryData_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createPrimaryData(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createPrimaryData(fixture);
 	}
 
 	@Test
 	public void testCreatePrimaryData__SDocument_String() {
 		SDocument fixtureEN = SaltFactory.createSDocument();
 		SDocument fixtureDE = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createPrimaryData(fixtureEN, "en");
-			SampleGenerator.createPrimaryData(fixtureDE, "de");
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createPrimaryData(fixtureEN, "en");
+		SampleGenerator.createPrimaryData(fixtureDE, "de");
 	}
 
 	@Test
 	public void testCreateTokens_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createTokens(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createTokens(fixture);
 	}
 
 	@Test
@@ -121,114 +85,56 @@ public class SampleGeneratorTest {
 	}
 
 	@Test
-	public void testCreateToken__int_int_STextualDS_SDocument_SLayer() {
-		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createToken(0, 4, SaltFactory.createSTextualDS(), fixture, null);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
-	}
-
-	@Test
 	public void testCreateParallelData__SDocument_boolean() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createParallelData(fixture, true);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createParallelData(fixture, true);
 	}
 
 	@Test
 	public void testCreateMorphologyAnnotations_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createMorphologyAnnotations(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createMorphologyAnnotations(fixture);
 	}
 
 	@Test
 	public void testCreateInformationStructureSpan_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createInformationStructureSpan(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createInformationStructureSpan(fixture);
 	}
 
 	@Test
 	public void testCreateInformationStructureAnnotations_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createInformationStructureAnnotations(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createInformationStructureAnnotations(fixture);
 	}
 
 	@Test
 	public void testCreateSyntaxStructure_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createSyntaxStructure(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createSyntaxStructure(fixture);
 	}
 
 	@Test
 	public void testCreateSyntaxAnnotations_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createSyntaxAnnotations(fixture);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
-
+		SampleGenerator.createSyntaxAnnotations(fixture);
 	}
 
 	@Test
 	public void testCreateDependencies_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createDependencies(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createDependencies(fixture);
 	}
 
 	@Test
 	public void testCreateAnaphoricAnnotations_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createAnaphoricAnnotations(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createAnaphoricAnnotations(fixture);
 	}
 
 	@Test
 	public void testCreateSDocumentStructure_SDocument() {
 		SDocument fixture = SaltFactory.createSDocument();
-
-		try {
-			SampleGenerator.createDocumentStructure(fixture);
-		} catch (Exception e) {
-			fail(e.getMessage() + "\n" + e.getCause());
-		}
+		SampleGenerator.createDocumentStructure(fixture);
 	}
 }

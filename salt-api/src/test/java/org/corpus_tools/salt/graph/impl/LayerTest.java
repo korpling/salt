@@ -17,12 +17,14 @@
  */
 package org.corpus_tools.salt.graph.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.corpus_tools.salt.graph.Graph;
@@ -131,6 +133,14 @@ public class LayerTest {
 			fail("Should not add a node in layer's node list directly.");
 		} catch (UnsupportedOperationException e) {
 		}
+	}
+
+	@Test
+	public void whenAddingMultipleNodesAtOnce_AllNodesMustBePartOfLayer() {
+		List<Node> nodes = Arrays.asList(GraphFactory.createNode(), GraphFactory.createNode(),
+				GraphFactory.createNode(), GraphFactory.createNode(), GraphFactory.createNode());
+		getFixture().addNodes(nodes);
+		assertThat(getFixture().getNodes()).containsAll(nodes);
 	}
 
 	/**

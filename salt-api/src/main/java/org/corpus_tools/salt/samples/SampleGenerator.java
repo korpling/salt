@@ -17,7 +17,6 @@
  */
 package org.corpus_tools.salt.samples;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +24,6 @@ import java.util.Vector;
 
 import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.SaltFactory;
-import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
@@ -46,69 +44,33 @@ import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltSampleException;
 import org.corpus_tools.salt.semantics.SLemmaAnnotation;
 import org.corpus_tools.salt.semantics.SPOSAnnotation;
-import org.xml.sax.SAXException;
+import org.eclipse.emf.common.util.URI;
 
 /**
  * Creates samples of {@link SDocumentGraph} and {@link SCorpusGraph} instances.
  */
 public class SampleGenerator {
-
-	/**
-	 * Creates the following corpus structure and adds it to the given salt
-	 * project.
-	 * 
-	 * <pre>
-	 * 
-	 *            rootCorpus
-	 *           /         \
-	 * 	subCorpus1           subCorpus2
-	 * 	/      \            /       \
-	 * doc1   doc2         doc3     doc4
-	 * </pre>
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
-	 */
-	public static SCorpusGraph createCorpusStructure(SaltProject saltProject) {
-		// TODO replace code with call of
-		// createCorpusStructure(SCorpusGraphsCorpGraph1)
-		if (saltProject == null) {
-			throw new SaltSampleException("Cannot create example, because the given saltProjects is empty.");
-		}
-
-		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
-		saltProject.addCorpusGraph(corpGraph);
-		SCorpus rootCorpus = SaltFactory.createSCorpus();
-		rootCorpus.setName("rootCorpus");
-		corpGraph.addNode(rootCorpus);
-		SCorpus subCorpus1 = SaltFactory.createSCorpus();
-		subCorpus1.setName("subCorpus1");
-		SCorpus subCorpus2 = SaltFactory.createSCorpus();
-		subCorpus2.setName("subCorpus2");
-
-		corpGraph.addSubCorpus(rootCorpus, subCorpus1);
-		corpGraph.addSubCorpus(rootCorpus, subCorpus2);
-
-		SDocument doc = null;
-
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc1");
-		corpGraph.addDocument(subCorpus1, doc);
-
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc2");
-		corpGraph.addDocument(subCorpus1, doc);
-
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc3");
-		corpGraph.addDocument(subCorpus1, doc);
-
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc4");
-		corpGraph.addDocument(subCorpus1, doc);
-
-		return (corpGraph);
-	}
+	/** The primary text, which is used for the samples. */
+	public static final String PRIMARY_TEXT_EN = "Is this example more complicated than it appears to be?";
+	/** Primary text of speaker1 **/
+	public static final String PRIMARY_TEXT_EN_SPK1 = PRIMARY_TEXT_EN;
+	/** Primary text of speaker2 **/
+	public static final String PRIMARY_TEXT_EN_SPK2 = "Uhm oh yes!";
+	/** The primary text, which is used for the samples. */
+	public static final String PRIMARY_TEXT_DE = "Ist dieses Beispiel komplizierter als es zu sein scheint?";
+	/** iso 639-1 language code for english **/
+	public static final String LANG_EN = "en";
+	/** iso 639-1 language code for german **/
+	public static final String LANG_DE = "de";
+	public static final String MORPHOLOGY_LAYER = "morphology";
+	public static final String SYNTAX_LAYER = "syntax";
+	private static final URI rootCorpus = URI.createURI("rootCorpus");
+	private static final URI subCorpus1 = rootCorpus.appendSegment("subCorpus1");
+	private static final URI doc1 = subCorpus1.appendSegment("doc1");
+	private static final URI doc2 = subCorpus1.appendSegment("doc2");
+	private static final URI subCorpus2 = rootCorpus.appendSegment("subCorpus2");
+	private static final URI doc3 = subCorpus2.appendSegment("doc3");
+	private static final URI doc4 = subCorpus2.appendSegment("doc4");
 
 	/**
 	 * 
@@ -154,14 +116,31 @@ public class SampleGenerator {
 	 *  /       \              /        \
 	 * doc1     doc2         doc3      doc4
 	 * </pre>
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
 	 */
 	public static SCorpusGraph createCorpusStructure() {
 		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
 		createCorpusStructure(corpGraph);
 		return (corpGraph);
+	}
+
+	/**
+	 * Creates the following corpus structure and adds it to the given salt
+	 * project.
+	 * 
+	 * <pre>
+	 * 
+	 *            rootCorpus
+	 *           /         \
+	 * 	subCorpus1           subCorpus2
+	 * 	/      \            /       \
+	 * doc1   doc2         doc3     doc4
+	 * </pre>
+	 */
+	public static SCorpusGraph createCorpusStructure(SaltProject saltProject) {
+		if (saltProject == null) {
+			throw new SaltSampleException("Cannot create example, because the given saltProjects is empty.");
+		}
+		return createCorpusStructure(saltProject.createCorpusGraph());
 	}
 
 	/**
@@ -174,45 +153,19 @@ public class SampleGenerator {
 	 *  /       \             /         \
 	 * doc1    doc2         doc3       doc4
 	 * </pre>
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
 	 */
-	public static SCorpusGraph createCorpusStructure(SCorpusGraph corpGraph1) {
-		if (corpGraph1 == null) {
+	public static SCorpusGraph createCorpusStructure(SCorpusGraph corpusStructure) {
+		if (corpusStructure == null) {
 			throw new SaltSampleException("Cannot create example, because the given sCorpusGraph is empty.");
 		}
-		corpGraph1.setId("corpusGraph1");
-		SCorpus corpusRoot = SaltFactory.createSCorpus();
-		corpusRoot.setName("rootCorpus");
-		corpGraph1.addNode(corpusRoot);
-		SCorpus corpusSub1 = SaltFactory.createSCorpus();
-		corpusSub1.setName("subCorpus1");
-		SCorpus corpusSub2 = SaltFactory.createSCorpus();
-		corpusSub2.setName("subCorpus2");
-
-		corpGraph1.addSubCorpus(corpusRoot, corpusSub1);
-		corpGraph1.addSubCorpus(corpusRoot, corpusSub2);
-
-		SDocument doc = null;
-
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc1");
-		corpGraph1.addDocument(corpusSub1, doc);
-
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc2");
-		corpGraph1.addDocument(corpusSub1, doc);
-
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc3");
-		corpGraph1.addDocument(corpusSub2, doc);
-
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc4");
-		corpGraph1.addDocument(corpusSub2, doc);
-
-		return (corpGraph1);
+		corpusStructure.createCorpus(rootCorpus);
+		corpusStructure.createCorpus(subCorpus1);
+		corpusStructure.createCorpus(subCorpus2);
+		corpusStructure.createDocument(doc1);
+		corpusStructure.createDocument(doc2);
+		corpusStructure.createDocument(doc3);
+		corpusStructure.createDocument(doc4);
+		return (corpusStructure);
 	}
 
 	/**
@@ -221,46 +174,13 @@ public class SampleGenerator {
 	 * <pre>
 	 * rootCorpus | doc1
 	 * </pre>
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
 	 */
 	public static SCorpusGraph createCorpusStructure_simple() {
 		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
-		corpGraph.setId("corpusGraph1");
-		SCorpus corpus = SaltFactory.createSCorpus();
-		corpus.setName("rootCorpus");
-		corpGraph.addNode(corpus);
-
-		SDocument doc = null;
-		doc = SaltFactory.createSDocument();
-		doc.setName("doc1");
-		corpGraph.addDocument(corpus, doc);
-
+		corpGraph.createCorpus(rootCorpus).get(0);
+		corpGraph.createDocument(doc1);
 		return (corpGraph);
 	}
-
-	/**
-	 * The primary text, which is used for the samples.
-	 */
-	public static final String PRIMARY_TEXT_EN = "Is this example more complicated than it appears to be?";
-	/** Primary text of speaker1 **/
-	public static final String PRIMARY_TEXT_EN_SPK1 = PRIMARY_TEXT_EN;
-	/** Primary text of speaker2 **/
-	public static final String PRIMARY_TEXT_EN_SPK2 = "Uhm oh yes!";
-	/**
-	 * The primary text, which is used for the samples.
-	 */
-	public static final String PRIMARY_TEXT_DE = "Ist dieses Beispiel komplizierter als es zu sein scheint?";
-	/**
-	 * The name of the morphologic layer containing the tokens.
-	 */
-	public static final String MORPHOLOGY_LAYER = "morphology";
-	/** iso 639-1 language code for english **/
-	public static final String LANG_EN = "en";
-	/** iso 639-1 language code for german **/
-	public static final String LANG_DE = "de";
-	public static final String SYNTAX_LAYER = "syntax";
 
 	/**
 	 * Creates a {@link SDocumentGraph} containing to texts of two different
@@ -278,81 +198,83 @@ public class SampleGenerator {
 			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
 		document.setDocumentGraph(SaltFactory.createSDocumentGraph());
-		document.getDocumentGraph().createTextualDS(PRIMARY_TEXT_EN_SPK1);
+		SDocumentGraph documentStructure = document.getDocumentGraph();
+		documentStructure.createTextualDS(PRIMARY_TEXT_EN_SPK1);
 		createTokens(document);
-		document.getDocumentGraph().createTimeline();
+		documentStructure.createTimeline();
 		List<SRelation<?, ?>> timelineRelationsToDelete = new ArrayList<>();
-		for (STimelineRelation timelineRelation : document.getDocumentGraph().getTimelineRelations()) {
+		for (STimelineRelation timelineRelation : documentStructure.getTimelineRelations()) {
 			timelineRelationsToDelete.add(timelineRelation);
 		}
 
 		for (SRelation<?, ?> rel : timelineRelationsToDelete) {
-			document.getDocumentGraph().removeRelation(rel);
+			documentStructure.removeRelation(rel);
 		}
 
 		// add SOrderRelations for speaker 1
 		SToken lastSTok = null;
 		int lastPointOfTime = 0;
-		for (SToken tok : document.getDocumentGraph().getTokens()) {
+		for (SToken tok : documentStructure.getTokens()) {
 			if (lastSTok != null) {
 				SOrderRelation rel = SaltFactory.createSOrderRelation();
 				rel.setSource(lastSTok);
 				rel.setTarget(tok);
-				document.getDocumentGraph().addRelation(rel);
+				documentStructure.addRelation(rel);
 			}
 
 			// set timeline
 			STimelineRelation timeRel = SaltFactory.createSTimelineRelation();
 			timeRel.setSource(tok);
-			timeRel.setTarget(document.getDocumentGraph().getTimeline());
+			timeRel.setTarget(documentStructure.getTimeline());
 			timeRel.setStart(lastPointOfTime);
 			lastPointOfTime += 1;
 			if (lastPointOfTime == 10) {
 				lastPointOfTime += 1;
 			}
 			timeRel.setEnd(lastPointOfTime);
-			document.getDocumentGraph().addRelation(timeRel);
+			documentStructure.addRelation(timeRel);
 
 			lastSTok = tok;
 		}
 
 		// create text of speaker2
-		STextualDS text2 = document.getDocumentGraph().createTextualDS(PRIMARY_TEXT_EN_SPK2);
+		STextualDS text2 = documentStructure.createTextualDS(PRIMARY_TEXT_EN_SPK2);
 
-		SToken spk2_tok0 = createToken(0, 3, text2, document, null);
+		SToken spk2_tok0 = documentStructure.createToken(text2, 0, 3);
+
 		STimelineRelation timeRel0 = SaltFactory.createSTimelineRelation();
 		timeRel0.setSource(spk2_tok0);
-		timeRel0.setTarget(document.getDocumentGraph().getTimeline());
+		timeRel0.setTarget(documentStructure.getTimeline());
 		timeRel0.setStart(7);
 		timeRel0.setEnd(9);
-		document.getDocumentGraph().addRelation(timeRel0);
+		documentStructure.addRelation(timeRel0);
 
-		SToken spk2_tok1 = createToken(4, 6, text2, document, null);
+		SToken spk2_tok1 = documentStructure.createToken(text2, 4, 6);
 		STimelineRelation sTimeRel1 = SaltFactory.createSTimelineRelation();
 		sTimeRel1.setSource(spk2_tok1);
-		sTimeRel1.setTarget(document.getDocumentGraph().getTimeline());
+		sTimeRel1.setTarget(documentStructure.getTimeline());
 		sTimeRel1.setStart(9);
 		sTimeRel1.setEnd(10);
-		document.getDocumentGraph().addRelation(sTimeRel1);
+		documentStructure.addRelation(sTimeRel1);
 
-		SToken spk2_tok2 = createToken(7, 11, text2, document, null);
+		SToken spk2_tok2 = documentStructure.createToken(text2, 7, 11);
 		STimelineRelation timeRel2 = SaltFactory.createSTimelineRelation();
 		timeRel2.setSource(spk2_tok2);
-		timeRel2.setTarget(document.getDocumentGraph().getTimeline());
+		timeRel2.setTarget(documentStructure.getTimeline());
 		timeRel2.setStart(10);
 		timeRel2.setEnd(11);
-		document.getDocumentGraph().addRelation(timeRel2);
+		documentStructure.addRelation(timeRel2);
 
 		// add SOrderRelations for speaker 2
 		SOrderRelation ord1 = SaltFactory.createSOrderRelation();
 		ord1.setSource(spk2_tok0);
 		ord1.setTarget(spk2_tok1);
-		document.getDocumentGraph().addRelation(ord1);
+		documentStructure.addRelation(ord1);
 
 		SOrderRelation ord2 = SaltFactory.createSOrderRelation();
 		ord2.setSource(spk2_tok1);
 		ord2.setTarget(spk2_tok2);
-		document.getDocumentGraph().addRelation(ord2);
+		documentStructure.addRelation(ord2);
 	}
 
 	/**
@@ -488,75 +410,42 @@ public class SampleGenerator {
 		if (document == null) {
 			throw new SaltSampleException("Cannot create example, because the given document is empty.");
 		}
+		SDocumentGraph documentStructure = document.getDocumentGraph();
 		// as a means to group elements, layers (SLayer) can be used. here, a
 		// layer
 		// named "morphology" is created and the tokens will be added to it
 		SLayer morphLayer = SaltFactory.createSLayer();
 		morphLayer.setName(MORPHOLOGY_LAYER);
-		document.getDocumentGraph().addLayer(morphLayer);
+		documentStructure.addLayer(morphLayer);
 
 		List<SToken> retVal = new Vector<SToken>();
 
-		if (textualDS.getText().equals(PRIMARY_TEXT_EN)) {
-			retVal.add(createToken(0, 2, textualDS, document, morphLayer)); // Is
-			retVal.add(createToken(3, 7, textualDS, document, morphLayer)); // this
-			retVal.add(createToken(8, 15, textualDS, document, morphLayer)); // example
-			retVal.add(createToken(16, 20, textualDS, document, morphLayer)); // more
-			retVal.add(createToken(21, 32, textualDS, document, morphLayer)); // complicated
-			retVal.add(createToken(33, 37, textualDS, document, morphLayer)); // than
-			retVal.add(createToken(38, 40, textualDS, document, morphLayer)); // it
-			retVal.add(createToken(41, 48, textualDS, document, morphLayer)); // supposed
-			retVal.add(createToken(49, 51, textualDS, document, morphLayer)); // to
-			retVal.add(createToken(52, 54, textualDS, document, morphLayer)); // be
-			retVal.add(createToken(54, 55, textualDS, document, morphLayer)); // ?
-		} else if (textualDS.getText().equals(PRIMARY_TEXT_DE)) {
-			retVal.add(createToken(0, 3, textualDS, document, morphLayer)); // Ist
-			retVal.add(createToken(4, 10, textualDS, document, morphLayer)); // dieses
-			retVal.add(createToken(11, 19, textualDS, document, morphLayer)); // Beipsiel
-			retVal.add(createToken(20, 33, textualDS, document, morphLayer)); // komplizierter
-			retVal.add(createToken(34, 37, textualDS, document, morphLayer)); // als
-			retVal.add(createToken(38, 40, textualDS, document, morphLayer)); // es
-			retVal.add(createToken(41, 43, textualDS, document, morphLayer)); // zu
-			retVal.add(createToken(44, 48, textualDS, document, morphLayer)); // sein
-			retVal.add(createToken(49, 56, textualDS, document, morphLayer)); // scheint
-			retVal.add(createToken(56, 57, textualDS, document, morphLayer)); // ?
+		if (PRIMARY_TEXT_EN.equals(textualDS.getText())) {
+			retVal.add(documentStructure.createToken(textualDS, 0, 2)); // Is
+			retVal.add(documentStructure.createToken(textualDS, 3, 7)); // this
+			retVal.add(documentStructure.createToken(textualDS, 8, 15));// example
+			retVal.add(documentStructure.createToken(textualDS, 16, 20));// more
+			retVal.add(documentStructure.createToken(textualDS, 21, 32));// complicated
+			retVal.add(documentStructure.createToken(textualDS, 33, 37));// than
+			retVal.add(documentStructure.createToken(textualDS, 38, 40));// it
+			retVal.add(documentStructure.createToken(textualDS, 41, 48));// supposed
+			retVal.add(documentStructure.createToken(textualDS, 49, 51));// to
+			retVal.add(documentStructure.createToken(textualDS, 52, 54));// be
+			retVal.add(documentStructure.createToken(textualDS, 54, 55));// ?
+		} else if (PRIMARY_TEXT_DE.equals(textualDS.getText())) {
+			retVal.add(documentStructure.createToken(textualDS, 0, 3));// Ist
+			retVal.add(documentStructure.createToken(textualDS, 4, 10));// dieses
+			retVal.add(documentStructure.createToken(textualDS, 11, 19));// Beipsiel
+			retVal.add(documentStructure.createToken(textualDS, 20, 33));// komplizierter
+			retVal.add(documentStructure.createToken(textualDS, 34, 37));// als
+			retVal.add(documentStructure.createToken(textualDS, 38, 40));// es
+			retVal.add(documentStructure.createToken(textualDS, 41, 43));// zu
+			retVal.add(documentStructure.createToken(textualDS, 44, 48));// sein
+			retVal.add(documentStructure.createToken(textualDS, 49, 56));// scheint
+			retVal.add(documentStructure.createToken(textualDS, 56, 57));// ?
 		}
+		morphLayer.addNodes(retVal);
 		return (retVal);
-	}
-
-	/**
-	 * Creates a {@link SToken} covering the passed position and returns it.
-	 * 
-	 * @param start
-	 * @param end
-	 * @param textualDS
-	 * @param document
-	 * @param layer
-	 * @return created {@link SToken} object
-	 */
-	public static SToken createToken(int start, int end, STextualDS textualDS, SDocument document, SLayer layer) {
-		if (document == null) {
-			throw new SaltSampleException("Cannot create example, because the given document is empty.");
-		}
-		if (document.getDocumentGraph() == null) {
-			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
-		}
-		if (document.getDocumentGraph().getTextualDSs().isEmpty()) {
-			createPrimaryData(document);
-			textualDS = document.getDocumentGraph().getTextualDSs().get(0);
-		}
-		SToken token = SaltFactory.createSToken();
-		document.getDocumentGraph().addNode(token);
-		if (layer != null) {
-			layer.addNode(token);
-		}
-		STextualRelation textRel = SaltFactory.createSTextualRelation();
-		textRel.setSource(token);
-		textRel.setTarget(textualDS);
-		textRel.setStart(start);
-		textRel.setEnd(end);
-		document.getDocumentGraph().addRelation(textRel);
-		return (token);
 	}
 
 	// TODO Documentation
@@ -1123,24 +1012,12 @@ public class SampleGenerator {
 			createPrimaryData(document);
 			createTokens(document);
 		}
-		List<SToken> sTokens = Collections.synchronizedList(document.getDocumentGraph().getTokens());
+		SDocumentGraph documentStructure = document.getDocumentGraph();
+		List<SToken> sTokens = Collections.synchronizedList(documentStructure.getTokens());
 
 		// creating a span as placeholder, which contains the tokens for "this"
 		// and "example"
-		SSpan span = SaltFactory.createSSpan();
-		// adding the created span to the document-graph
-		document.getDocumentGraph().addNode(span);
-
-		// creating a relation between the span and the tokens
-		SSpanningRelation spanRel = null;
-		spanRel = SaltFactory.createSSpanningRelation();
-		spanRel.setSource(span);
-		spanRel.setTarget(sTokens.get(1));
-		document.getDocumentGraph().addRelation(spanRel);
-		spanRel = SaltFactory.createSSpanningRelation();
-		spanRel.setSource(span);
-		spanRel.setTarget(sTokens.get(2));
-		document.getDocumentGraph().addRelation(spanRel);
+		SSpan span = documentStructure.createSpan(sTokens.get(1), sTokens.get(2));
 
 		// creating a pointing relations
 		SPointingRelation pointingRelation = SaltFactory.createSPointingRelation();
