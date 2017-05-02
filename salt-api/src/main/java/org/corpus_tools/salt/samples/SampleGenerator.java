@@ -18,6 +18,7 @@
 package org.corpus_tools.salt.samples;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -850,18 +851,7 @@ public class SampleGenerator {
 		docGraph.addLayer(syntaxLayer);
 
 		// adding the constituents to the syntax layer
-		syntaxLayer.addNode(root);
-		syntaxLayer.addNode(sq);
-		syntaxLayer.addNode(np1);
-		syntaxLayer.addNode(adjp1);
-		syntaxLayer.addNode(adjp2);
-		syntaxLayer.addNode(sbar);
-		syntaxLayer.addNode(s1);
-		syntaxLayer.addNode(np2);
-		syntaxLayer.addNode(vp1);
-		syntaxLayer.addNode(s2);
-		syntaxLayer.addNode(vp2);
-		syntaxLayer.addNode(vp3);
+		syntaxLayer.addNodes(Arrays.asList(root, sq, np1, adjp1, adjp2, sbar, s1, np2, vp1, s2, vp2, vp3));
 	}
 
 	/**
@@ -909,11 +899,11 @@ public class SampleGenerator {
 		SDocumentGraph docGraph = document.getDocumentGraph();
 		/* is there primary data? */
 		if ((docGraph.getTextualDSs() == null) || (docGraph.getTextualDSs().size() == 0)) {
-			SampleGenerator.createPrimaryData(document);
+			createPrimaryData(document);
 		}
 		/* is there a tokenization of the primary data? */
 		if ((docGraph.getTokens() == null) || (docGraph.getTokens().size() == 0)) {
-			SampleGenerator.createTokens(document);
+			createTokens(document);
 		}
 
 		List<SToken> tokens = docGraph.getSortedTokenByText();
@@ -1044,8 +1034,6 @@ public class SampleGenerator {
 	 * <li>syntactical annotation</li>
 	 * <li>anaphoric annotation</li>
 	 * </ul>
-	 * 
-	 * @param document
 	 */
 	public static void createDocumentStructure(SDocument document) {
 		if (document == null) {
