@@ -325,7 +325,6 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		boolean hasNamespace = !Strings.isNullOrEmpty(namespace);
 		boolean hasName = !Strings.isNullOrEmpty(name);
 		if (hasName && hasNamespace) {
-			// TODO remove casting
 			Label label = labels.get(SaltUtil.createQName(namespace, name));
 			if (resultType.isInstance(label)) {
 				foundLabels.add((T) label);
@@ -334,7 +333,6 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 			for (Label label : getLabels()) {
 				if ((hasName && name.equals(label.getName()))
 						|| (hasNamespace && namespace.equals(label.getNamespace()))) {
-					// TODO remove casting
 					if (resultType.isInstance(label)) {
 						foundLabels.add((T) label);
 					}
