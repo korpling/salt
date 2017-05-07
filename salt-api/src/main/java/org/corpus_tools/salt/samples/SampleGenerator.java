@@ -171,7 +171,6 @@ public class SampleGenerator {
 	 */
 	public static SCorpusGraph createCorpusStructure_simple() {
 		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
-		corpGraph.createCorpus(rootCorpus).get(0);
 		corpGraph.createDocument(doc1);
 		return corpGraph;
 	}
