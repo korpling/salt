@@ -94,13 +94,8 @@ public class SampleGenerator {
 		// the others.
 		SaltProject saltProject = SaltFactory.createSaltProject();
 		saltProject.setName("sampleSaltProject");
-		// this works, because after createCorpusStructure() was called, only
-		// one graph exists in salt project
-		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
-
+		SCorpusGraph corpGraph = saltProject.createCorpusGraph();
 		corpGraph = createCorpusStructure(corpGraph);
-
-		saltProject.addCorpusGraph(corpGraph);
 		for (SDocument document : corpGraph.getDocuments()) {
 			createDocumentStructure(document);
 		}
@@ -119,9 +114,7 @@ public class SampleGenerator {
 	 * </pre>
 	 */
 	public static SCorpusGraph createCorpusStructure() {
-		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
-		createCorpusStructure(corpGraph);
-		return (corpGraph);
+		return createCorpusStructure(SaltFactory.createSCorpusGraph());
 	}
 
 	/**
@@ -180,7 +173,7 @@ public class SampleGenerator {
 		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
 		corpGraph.createCorpus(rootCorpus).get(0);
 		corpGraph.createDocument(doc1);
-		return (corpGraph);
+		return corpGraph;
 	}
 
 	/**
