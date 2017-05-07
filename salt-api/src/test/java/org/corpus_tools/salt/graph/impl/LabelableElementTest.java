@@ -17,6 +17,13 @@
  */
 package org.corpus_tools.salt.graph.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.Vector;
@@ -24,14 +31,10 @@ import java.util.Vector;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
-import org.corpus_tools.salt.graph.impl.LabelableElementImpl;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class LabelableElementTest extends TestCase {
+public class LabelableElementTest {
 
 	protected LabelableElement fixture = null;
 
@@ -50,11 +53,6 @@ public class LabelableElementTest extends TestCase {
 
 	static class MyLabelableElement extends LabelableElementImpl {
 		private static final long serialVersionUID = 1L;
-	}
-
-	@After
-	protected void tearDown() throws Exception {
-		setFixture(null);
 	}
 
 	/**
@@ -284,5 +282,75 @@ public class LabelableElementTest extends TestCase {
 		assertTrue(getFixture().containsLabel(label.getQName()));
 		label.setContainer(null);
 		assertFalse(getFixture().containsLabel(label.getQName()));
+	}
+
+	private static class Colour extends LabelImpl {
+		private static final long serialVersionUID = 907666241544786170L;
+
+		public Colour(String namespace, String name) {
+			setName(name);
+			setNamespace(namespace);
+		}
+
+		public Colour(String name) {
+			setName(name);
+		}
+	}
+
+	private static class PastelPen extends LabelImpl {
+		private static final long serialVersionUID = 6111118769873347129L;
+
+		public PastelPen(String name) {
+			setNamespace(PASTEL);
+			setName(name);
+		}
+	}
+
+	private static final Colour RED = new Colour("red");
+	private static final Colour GREEN = new Colour("green");
+	private static final Colour BLUE = new Colour("blue");
+	private static final String PASTEL = "pastel";
+	private static final Colour PASTEL_RED = new Colour(PASTEL, "red");
+	private static final Colour PASTEL_GREEN = new Colour(PASTEL, "green");
+	private static final Colour PASTEL_BLUE = new Colour(PASTEL, "blue");
+	private static final Label PASTEL_PEN = new PastelPen("gray");
+
+	private void given() {
+		getFixture().addLabel(RED);
+		getFixture().addLabel(PASTEL_GREEN);
+		getFixture().addLabel(BLUE);
+		getFixture().addLabel(PASTEL_BLUE);
+		getFixture().addLabel(GREEN);
+		getFixture().addLabel(PASTEL_RED);
+		getFixture().addLabel(PASTEL_PEN);
+	}
+
+	@Test
+	public void whenFindRedGreenBlue_returnEach() {
+		// given
+		given();
+		// when and then
+		assertThat(getFixture().find(Colour.class).withNamespace(PASTEL).withName("blue").go())
+				.containsOnly(PASTEL_BLUE);
+		assertThat(getFixture().find(Colour.class).withNamespace(PASTEL).withName("green").go())
+				.containsOnly(PASTEL_GREEN);
+		assertThat(getFixture().find(Colour.class).withNamespace(PASTEL).withName("red").go()).containsOnly(PASTEL_RED);
+	}
+
+	@Test
+	public void whenFindAllBlues_returnBlueAndPastelBlue() {
+		// given
+		given();
+		// when and then
+		assertThat(getFixture().find(Colour.class).withName("blue").go()).containsOnly(BLUE, PASTEL_BLUE);
+	}
+
+	@Test
+	public void whenFindAllPastelColors_returnRedGreenBlue() {
+		// given
+		given();
+		// when and then
+		assertThat(getFixture().find(Colour.class).withNamespace(PASTEL).go()).containsOnly(PASTEL_BLUE, PASTEL_GREEN,
+				PASTEL_RED);
 	}
 } // LabelableElementTest

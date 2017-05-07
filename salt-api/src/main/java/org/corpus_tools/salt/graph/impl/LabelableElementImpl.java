@@ -18,9 +18,12 @@
 package org.corpus_tools.salt.graph.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,6 +33,8 @@ import org.corpus_tools.salt.graph.IdentifiableElement;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
 import org.corpus_tools.salt.util.SaltUtil;
+
+import com.google.common.base.Strings;
 
 /**
  * This class is an abstract container containing a set of {@link Label}
@@ -299,5 +304,43 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 			}
 			return (0);
 		}
+	}
+
+	@Override
+	public <T extends Label> LabelFinder<T> find(Class<T> resultType) {
+		return new LabelFinder<>(resultType, this);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T extends Label> List<T> find(Class<T> resultType, String namespace, String name) {
+		if (getDelegate() != null) {
+			return getDelegate().find(resultType, namespace, name);
+		}
+		if (resultType == null) {
+			return Collections.emptyList();
+		}
+
+		List<T> foundLabels = new ArrayList<>();
+		boolean hasNamespace = !Strings.isNullOrEmpty(namespace);
+		boolean hasName = !Strings.isNullOrEmpty(name);
+		if (hasName && hasNamespace) {
+			// TODO remove casting
+			Label label = labels.get(SaltUtil.createQName(namespace, name));
+			if (resultType.isInstance(label)) {
+				foundLabels.add((T) label);
+			}
+		} else {
+			for (Label label : getLabels()) {
+				if ((hasName && name.equals(label.getName()))
+						|| (hasNamespace && namespace.equals(label.getNamespace()))) {
+					// TODO remove casting
+					if (resultType.isInstance(label)) {
+						foundLabels.add((T) label);
+					}
+				}
+			}
+		}
+		return foundLabels;
 	}
 }

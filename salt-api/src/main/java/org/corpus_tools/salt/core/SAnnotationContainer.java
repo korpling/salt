@@ -339,4 +339,5 @@ public interface SAnnotationContainer extends LabelableElement {
 	 */
 	public Iterator<SFeature> iterator_SFeature();
 	// =======================================< SFeature
+
 }

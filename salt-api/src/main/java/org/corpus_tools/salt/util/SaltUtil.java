@@ -277,6 +277,7 @@ public class SaltUtil {
 	 * @param name
 	 *            the name of a label
 	 */
+	// TODO Java 8: use Joiner instead
 	public static String createQName(String namespace, String name) {
 		if (namespace == null || namespace.isEmpty()) {
 			return name;

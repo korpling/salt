@@ -19,7 +19,10 @@ package org.corpus_tools.salt.graph;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+
+import org.corpus_tools.salt.graph.impl.LabelFinder;
 
 /**
  * This interface defines a container to hold {@link Label} objects and makes
@@ -122,4 +125,8 @@ public interface LabelableElement extends Serializable {
 	 * @return number of {@link Label} objects
 	 */
 	public Integer sizeLabels();
+
+	public <T extends Label> LabelFinder<T> find(Class<T> resultType);
+
+	public <T extends Label> List<T> find(Class<T> resultType, String namespace, String name);
 }
