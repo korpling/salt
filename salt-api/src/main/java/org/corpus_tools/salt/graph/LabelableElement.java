@@ -58,7 +58,10 @@ public interface LabelableElement extends Serializable {
 	 * @param name
 	 *            name of the {@link Label} to be searched for
 	 * @return {@link Label} object
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public Label getLabel(String namespace, String name);
 
 	/**
@@ -68,8 +71,26 @@ public interface LabelableElement extends Serializable {
 	 * @param qName
 	 *            the qualified name to be splitted
 	 * @return {@link Label} object
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public Label getLabel(String qName);
+
+	/**
+	 * Returns a set containing all Label objects having the given namespace. If
+	 * no such {@link Label} was found or the passed namespace was empty, an
+	 * empty list is returned.
+	 * 
+	 * @param ns
+	 *            the namespace of Label objects to be looked for.
+	 * @return a list of Label objects if this object contains Label objects
+	 *         having the given namespace, null otherwise.
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
+	 */
+	@Deprecated
+	public Set<Label> getLabelsByNamespace(String namespace);
 
 	/**
 	 * Removes the label having the passed qName.
@@ -97,18 +118,6 @@ public interface LabelableElement extends Serializable {
 	public void removeAll();
 
 	/**
-	 * Returns a set containing all Label objects having the given namespace. If
-	 * no such {@link Label} was found or the passed namespace was empty, an
-	 * empty list is returned.
-	 * 
-	 * @param ns
-	 *            the namespace of Label objects to be looked for.
-	 * @return a list of Label objects if this object contains Label objects
-	 *         having the given namespace, null otherwise.
-	 */
-	public Set<Label> getLabelsByNamespace(String namespace);
-
-	/**
 	 * Checks if this object has a Label object in its list having the given
 	 * qualified name.
 	 * 
@@ -126,7 +135,32 @@ public interface LabelableElement extends Serializable {
 	 */
 	public Integer sizeLabels();
 
+	/**
+	 * A fluent way to find different labels contained by this object. The
+	 * fluent api offers to filter for types, namespaces and names.
+	 * 
+	 * @param resultType
+	 *            type of label to be found
+	 * @return a label having specified name and namesapce. If no namespace is
+	 *         given, will return all labels matching the resultType and name.
+	 *         If no name is given will return all labels matching the
+	 *         resultType and namespace.
+	 */
 	public <T extends Label> LabelFinder<T> find(Class<T> resultType);
 
+	/**
+	 * Returns all labels matching passed resultType, namespace and name.
+	 * 
+	 * @param resultType
+	 *            cannot be null
+	 * @param namespace
+	 *            can be null
+	 * @param name
+	 *            can be null
+	 * @return a label having specified name and namesapce. If no namespace is
+	 *         given, will return all labels matching the resultType and name.
+	 *         If no name is given will return all labels matching the
+	 *         resultType and namespace.
+	 */
 	public <T extends Label> List<T> find(Class<T> resultType, String namespace, String name);
 }

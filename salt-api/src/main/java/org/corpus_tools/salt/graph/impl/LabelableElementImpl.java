@@ -94,7 +94,13 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		return (retVal);
 	}
 
-	/** {@inheritDoc LabelableElement#getLabel(String)} **/
+	/**
+	 * {@inheritDoc LabelableElement#getLabel(String)}
+	 * 
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
+	 **/
+	@Deprecated
 	@Override
 	public Label getLabel(String qName) {
 		if (getDelegate() != null) {
@@ -107,8 +113,14 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		}
 	}
 
-	/** {@inheritedDoc LabelableElement#getLabel(String, String)} **/
+	/**
+	 * {@inheritedDoc LabelableElement#getLabel(String, String)}
+	 * 
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
+	 **/
 	@Override
+	@Deprecated
 	public Label getLabel(String namespace, String name) {
 		if (getDelegate() != null) {
 			return (getDelegate().getLabel(namespace, name));
@@ -117,8 +129,14 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		return (getLabel(qName));
 	}
 
-	/** {@inheritDoc LabelableElement#getLabelsByNamespace(String)} **/
+	/**
+	 * {@inheritDoc LabelableElement#getLabelsByNamespace(String)}
+	 * 
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
+	 **/
 	@Override
+	@Deprecated
 	public Set<Label> getLabelsByNamespace(String namespace) {
 		if (getDelegate() != null) {
 			return (getDelegate().getLabelsByNamespace(namespace));
