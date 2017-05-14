@@ -20,6 +20,7 @@ package org.corpus_tools.salt.core;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.corpus_tools.salt.core.impl.AnnotationFinder;
 import org.corpus_tools.salt.graph.LabelableElement;
 
 /**
@@ -338,6 +339,18 @@ public interface SAnnotationContainer extends LabelableElement {
 	 * @return an iterator of {@link SFeature} objects
 	 */
 	public Iterator<SFeature> iterator_SFeature();
-	// =======================================< SFeature
 
+	// =======================================< SFeature
+	/**
+	 * A fluent way to find different annotations contained by this object. The
+	 * fluent api offers to filter for types, namespaces and names.
+	 * 
+	 * @param resultType
+	 *            type of annotation to be found
+	 * @return a label having specified name and namesapce. If no namespace is
+	 *         given, will return all labels matching the resultType and name.
+	 *         If no name is given will return all labels matching the
+	 *         resultType and namespace.
+	 */
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType);
 }

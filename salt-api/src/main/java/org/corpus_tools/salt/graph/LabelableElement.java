@@ -19,10 +19,7 @@ package org.corpus_tools.salt.graph;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
-
-import org.corpus_tools.salt.graph.impl.LabelFinder;
 
 /**
  * This interface defines a container to hold {@link Label} objects and makes
@@ -71,10 +68,7 @@ public interface LabelableElement extends Serializable {
 	 * @param qName
 	 *            the qualified name to be splitted
 	 * @return {@link Label} object
-	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
-	 *             instead
 	 */
-	@Deprecated
 	public Label getLabel(String qName);
 
 	/**
@@ -134,33 +128,4 @@ public interface LabelableElement extends Serializable {
 	 * @return number of {@link Label} objects
 	 */
 	public Integer sizeLabels();
-
-	/**
-	 * A fluent way to find different labels contained by this object. The
-	 * fluent api offers to filter for types, namespaces and names.
-	 * 
-	 * @param resultType
-	 *            type of label to be found
-	 * @return a label having specified name and namesapce. If no namespace is
-	 *         given, will return all labels matching the resultType and name.
-	 *         If no name is given will return all labels matching the
-	 *         resultType and namespace.
-	 */
-	public <T extends Label> LabelFinder<T> find(Class<T> resultType);
-
-	/**
-	 * Returns all labels matching passed resultType, namespace and name.
-	 * 
-	 * @param resultType
-	 *            cannot be null
-	 * @param namespace
-	 *            can be null
-	 * @param name
-	 *            can be null
-	 * @return a label having specified name and namesapce. If no namespace is
-	 *         given, will return all labels matching the resultType and name.
-	 *         If no name is given will return all labels matching the
-	 *         resultType and namespace.
-	 */
-	public <T extends Label> List<T> find(Class<T> resultType, String namespace, String name);
 }

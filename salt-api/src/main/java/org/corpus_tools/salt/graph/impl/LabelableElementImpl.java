@@ -18,12 +18,9 @@
 package org.corpus_tools.salt.graph.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,8 +30,6 @@ import org.corpus_tools.salt.graph.IdentifiableElement;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
 import org.corpus_tools.salt.util.SaltUtil;
-
-import com.google.common.base.Strings;
 
 /**
  * This class is an abstract container containing a set of {@link Label}
@@ -79,7 +74,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	}
 
 	/** internal set of all labels **/
-	private Map<String, Label> labels = null;
+	private Map<String, Label> annotations = null;
 
 	/** {@inheritDoc LabelableElement#getLabels()} **/
 	@Override
@@ -88,8 +83,8 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 			return (getDelegate().getLabels());
 		}
 		Collection<Label> retVal = null;
-		if (labels != null) {
-			retVal = labels.values();
+		if (annotations != null) {
+			retVal = annotations.values();
 		}
 		return (retVal);
 	}
@@ -97,17 +92,13 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 	/**
 	 * {@inheritDoc LabelableElement#getLabel(String)}
 	 * 
-	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
-	 *             instead
 	 **/
-	@Deprecated
-	@Override
 	public Label getLabel(String qName) {
 		if (getDelegate() != null) {
 			return (getDelegate().getLabel(qName));
 		}
-		if (labels != null) {
-			return (labels.get(qName));
+		if (annotations != null) {
+			return (annotations.get(qName));
 		} else {
 			return (null);
 		}
@@ -142,8 +133,8 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 			return (getDelegate().getLabelsByNamespace(namespace));
 		}
 		Set<Label> retVal = new HashSet<>(EXPECTED_NUMBER_OF_LABELS);
-		if (labels != null) {
-			for (Label label : labels.values()) {
+		if (annotations != null) {
+			for (Label label : annotations.values()) {
 				if (namespace == null) {
 					if (label.getNamespace() == null) {
 						retVal.add(label);
@@ -210,21 +201,21 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 				if ((label.getName() == null) || (label.getName().isEmpty())) {
 					throw new SaltInsertionException(this, label, "Cannot add a label object without a name.");
 				}
-				if (labels == null) {
-					labels = new HashMap<>(EXPECTED_NUMBER_OF_LABELS);
+				if (annotations == null) {
+					annotations = new HashMap<>(EXPECTED_NUMBER_OF_LABELS);
 				}
 				String qName = SaltUtil.createQName(label.getNamespace(), label.getName());
-				if (labels.containsKey(qName)) {
+				if (annotations.containsKey(qName)) {
 					if (this instanceof IdentifiableElement) {
 						throw new SaltInsertionException(this, label,
-								" Because an id already exists: " + labels.get(qName) + ".");
+								" Because an id already exists: " + annotations.get(qName) + ".");
 					} else {
 						throw new SaltInsertionException(this, label,
 								"Cannot add the given label object, because a label with this QName already exists: "
 										+ label.getQName());
 					}
 				}
-				labels.put(qName, label);
+				annotations.put(qName, label);
 			}
 		}
 	}
@@ -276,7 +267,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 			((LabelableElementImpl) getDelegate()).basicRemoveLabel(qName);
 		} else {
 			if (qName != null) {
-				labels.remove(qName);
+				annotations.remove(qName);
 			}
 		}
 	}
@@ -297,7 +288,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		if (getDelegate() != null) {
 			getDelegate().removeAll();
 		} else {
-			labels = new HashMap<String, Label>(EXPECTED_NUMBER_OF_LABELS);
+			annotations = new HashMap<String, Label>(EXPECTED_NUMBER_OF_LABELS);
 		}
 	}
 
@@ -307,7 +298,7 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 		if (getDelegate() != null) {
 			return (getDelegate().containsLabel(qName));
 		}
-		return (labels.containsKey(qName));
+		return (annotations.containsKey(qName));
 	}
 
 	/** {@inheritDoc LabelableElement#sizeLabels()} **/
@@ -317,46 +308,10 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 			return (getDelegate().sizeLabels());
 		} else {
 
-			if (labels != null) {
-				return (labels.values().size());
+			if (annotations != null) {
+				return (annotations.values().size());
 			}
 			return (0);
 		}
-	}
-
-	@Override
-	public <T extends Label> LabelFinder<T> find(Class<T> resultType) {
-		return new LabelFinder<>(resultType, this);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Label> List<T> find(Class<T> resultType, String namespace, String name) {
-		if (getDelegate() != null) {
-			return getDelegate().find(resultType, namespace, name);
-		}
-		if (resultType == null) {
-			return Collections.emptyList();
-		}
-
-		List<T> foundLabels = new ArrayList<>();
-		boolean hasNamespace = !Strings.isNullOrEmpty(namespace);
-		boolean hasName = !Strings.isNullOrEmpty(name);
-		if (hasName && hasNamespace) {
-			Label label = labels.get(SaltUtil.createQName(namespace, name));
-			if (resultType.isInstance(label)) {
-				foundLabels.add((T) label);
-			}
-		} else {
-			for (Label label : getLabels()) {
-				if ((hasName && name.equals(label.getName()))
-						|| (hasNamespace && namespace.equals(label.getNamespace()))) {
-					if (resultType.isInstance(label)) {
-						foundLabels.add((T) label);
-					}
-				}
-			}
-		}
-		return foundLabels;
 	}
 }

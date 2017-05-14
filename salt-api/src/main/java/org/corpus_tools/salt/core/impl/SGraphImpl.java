@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
+import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SGraph;
@@ -40,13 +41,12 @@ import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
-public class SGraphImpl extends 
-	GraphImpl<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> implements SGraph {
-	
+public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer>
+		implements SGraph {
+
 	@SuppressWarnings("unchecked")
-	public static final Class<SRelation<? extends SNode, ? extends SNode>> GENERIC_SRELATION_CLASS = 
-			(Class<SRelation<? extends SNode, ? extends SNode>>) (Class<?>) SRelation.class;
-	
+	public static final Class<SRelation<? extends SNode, ? extends SNode>> GENERIC_SRELATION_CLASS = (Class<SRelation<? extends SNode, ? extends SNode>>) (Class<?>) SRelation.class;
+
 	/** Initializes an object of type {@link SGraphImpl}. **/
 	public SGraphImpl() {
 		this(null);
@@ -99,7 +99,7 @@ public class SGraphImpl extends
 		}
 
 		List<SRelation<? extends SNode, ? extends SNode>> result = new ArrayList<>();
-		for (SRelation<?,?> r : getRelations()) {
+		for (SRelation<?, ?> r : getRelations()) {
 			if ((r.getName() == null) || (r.getName().isEmpty())) {
 				break;
 			}
@@ -177,7 +177,7 @@ public class SGraphImpl extends
 	@Override
 	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType) {
 		List<SNode> children = new ArrayList<>();
-		List<SRelation<?,?>> relations = parent.getOutRelations();
+		List<SRelation<?, ?>> relations = parent.getOutRelations();
 		if (relations != null) {
 			for (SRelation<? extends SNode, ? extends SNode> relation : relations) {
 				if (relationType == null || SALT_TYPE.class2SaltType(relation.getClass()).contains(relationType)) {
@@ -205,7 +205,7 @@ public class SGraphImpl extends
 	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType) {
 		ArrayList<SNode> sharedParents = new ArrayList<>();
 		if ((children.size() > 0) && (children.get(0) != null)) {
-			List<SRelation<?,?>> rels = children.get(0).getInRelations();
+			List<SRelation<?, ?>> rels = children.get(0).getInRelations();
 			if ((rels != null) && (rels.size() > 0)) {
 				// a shared parent has to be connected to every child node
 				for (SRelation<? extends SNode, ? extends SNode> baseRelation : rels) {
@@ -453,5 +453,10 @@ public class SGraphImpl extends
 	public URI getPath() {
 		return (SaltUtil.createSaltURI(getId()));
 	}
+
 	// =======================================< SPathElement
+	@Override
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
+		return new AnnotationFinder<>(resultType, this);
+	}
 }

@@ -358,5 +358,10 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public Iterator<SFeature> iterator_SFeature() {
 		return (SAnnotationContainerHelper.iterator_SFeature(this));
 	}
+
 	// =======================================< SFeature
+	@Override
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
+		return new AnnotationFinder<>(resultType, this);
+	}
 }
