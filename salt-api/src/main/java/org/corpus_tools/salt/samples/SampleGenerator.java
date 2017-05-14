@@ -65,13 +65,13 @@ public class SampleGenerator {
 	public static final String LANG_DE = "de";
 	public static final String MORPHOLOGY_LAYER = "morphology";
 	public static final String SYNTAX_LAYER = "syntax";
-	private static final URI rootCorpus = URI.createURI("rootCorpus");
-	private static final URI subCorpus1 = rootCorpus.appendSegment("subCorpus1");
-	private static final URI doc1 = subCorpus1.appendSegment("doc1");
-	private static final URI doc2 = subCorpus1.appendSegment("doc2");
-	private static final URI subCorpus2 = rootCorpus.appendSegment("subCorpus2");
-	private static final URI doc3 = subCorpus2.appendSegment("doc3");
-	private static final URI doc4 = subCorpus2.appendSegment("doc4");
+	private static final URI ROOT_CORPUS = URI.createURI("rootCorpus");
+	private static final URI SUB_CORPUS1 = ROOT_CORPUS.appendSegment("subCorpus1");
+	private static final URI DOC1 = SUB_CORPUS1.appendSegment("doc1");
+	private static final URI DOC2 = SUB_CORPUS1.appendSegment("doc2");
+	private static final URI SUB_CORPUS2 = ROOT_CORPUS.appendSegment("subCorpus2");
+	private static final URI DOC3 = SUB_CORPUS2.appendSegment("doc3");
+	private static final URI DOC4 = SUB_CORPUS2.appendSegment("doc4");
 
 	/**
 	 * 
@@ -152,13 +152,13 @@ public class SampleGenerator {
 		if (corpusStructure == null) {
 			throw new SaltSampleException("Cannot create example, because the given sCorpusGraph is empty.");
 		}
-		corpusStructure.createCorpus(rootCorpus);
-		corpusStructure.createCorpus(subCorpus1);
-		corpusStructure.createCorpus(subCorpus2);
-		corpusStructure.createDocument(doc1);
-		corpusStructure.createDocument(doc2);
-		corpusStructure.createDocument(doc3);
-		corpusStructure.createDocument(doc4);
+		corpusStructure.createCorpus(ROOT_CORPUS);
+		corpusStructure.createCorpus(SUB_CORPUS1);
+		corpusStructure.createCorpus(SUB_CORPUS2);
+		corpusStructure.createDocument(DOC1);
+		corpusStructure.createDocument(DOC2);
+		corpusStructure.createDocument(DOC3);
+		corpusStructure.createDocument(DOC4);
 		return (corpusStructure);
 	}
 
@@ -171,8 +171,8 @@ public class SampleGenerator {
 	 */
 	public static SCorpusGraph createCorpusStructure_simple() {
 		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
-		corpGraph.createCorpus(rootCorpus).get(0);
-		corpGraph.createDocument(doc1);
+		corpGraph.createCorpus(ROOT_CORPUS);
+		corpGraph.createDocument(DOC1);
 		return corpGraph;
 	}
 
