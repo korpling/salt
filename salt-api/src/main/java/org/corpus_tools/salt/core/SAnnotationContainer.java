@@ -75,7 +75,10 @@ public interface SAnnotationContainer extends LabelableElement {
 	 * 
 	 * @param annotation
 	 *            annotation to be added
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public void addAnnotation(SAnnotation annotation);
 
 	/**
@@ -160,7 +163,10 @@ public interface SAnnotationContainer extends LabelableElement {
 	 * 
 	 * @param metaAnnotation
 	 *            meta annotation to be added
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public void addMetaAnnotation(SMetaAnnotation metaAnnotation);
 
 	/**
@@ -172,7 +178,10 @@ public interface SAnnotationContainer extends LabelableElement {
 	 *            consists of: namespace+'::'+name
 	 * @return a meta annotation having the qualified name, if such a meta
 	 *         annotation exists, null otherwise
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public SMetaAnnotation getMetaAnnotation(String qName);
 
 	/**
@@ -232,7 +241,10 @@ public interface SAnnotationContainer extends LabelableElement {
 	 * 
 	 * @param processingAnnotation
 	 *            annotation to be added
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public void addProcessingAnnotation(SProcessingAnnotation processingAnnotation);
 
 	/**
@@ -244,7 +256,10 @@ public interface SAnnotationContainer extends LabelableElement {
 	 *            consists of: namespace+'::'+name
 	 * @return an processing-annotation having the qualified name, if such an
 	 *         processing-annotation exists, null otherwise
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public SProcessingAnnotation getProcessingAnnotation(String qName);
 
 	/**
@@ -302,7 +317,10 @@ public interface SAnnotationContainer extends LabelableElement {
 	 * 
 	 * @param feature
 	 *            feature to be added
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public void addFeature(SFeature feature);
 
 	/**
@@ -314,7 +332,10 @@ public interface SAnnotationContainer extends LabelableElement {
 	 *            namespace+'::'+name
 	 * @return an feature having the qualified name, if such an feature exists,
 	 *         null otherwise
+	 * @deprecated will be removed with Salt 5.0. Use {@link #find(Class)}
+	 *             instead
 	 */
+	@Deprecated
 	public SFeature getFeature(String qName);
 
 	/**
@@ -341,6 +362,15 @@ public interface SAnnotationContainer extends LabelableElement {
 	public Iterator<SFeature> iterator_SFeature();
 
 	// =======================================< SFeature
+	/**
+	 * Adds the passed {@link SAnnotation}, {@link SMetaAnnotation},
+	 * {@link SProcessingAnnotation} or {@link SFeature} to this container.
+	 * 
+	 * @param annotation
+	 *            annotation to be added
+	 */
+	public void add(SAbstractAnnotation annotation);
+
 	/**
 	 * A fluent way to find different annotations contained by this object. The
 	 * fluent api offers to filter for types, namespaces and names.

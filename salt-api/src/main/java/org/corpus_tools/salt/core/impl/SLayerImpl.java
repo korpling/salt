@@ -269,6 +269,11 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? ex
 		return new AnnotationFinder<>(resultType, this);
 	}
 
+	@Override
+	public void add(SAbstractAnnotation annotation) {
+		addLabel(annotation);
+	}
+
 	// =======================================< SNamedElement
 	@Override
 	public String toString() {

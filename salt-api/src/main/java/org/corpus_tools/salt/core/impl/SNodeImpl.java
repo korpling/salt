@@ -355,4 +355,9 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
 		return new AnnotationFinder<>(resultType, this);
 	}
+
+	@Override
+	public void add(SAbstractAnnotation annotation) {
+		addLabel(annotation);
+	}
 }

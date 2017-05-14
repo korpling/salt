@@ -300,6 +300,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public void addAnnotation(SAnnotation annotation) {
 		SAnnotationContainerHelper.addAnnotation(this, annotation);
 	}
@@ -333,6 +334,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 	// =======================================> SMetaAnnotation
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public void addMetaAnnotation(SMetaAnnotation metaAnnotation) {
 		SAnnotationContainerHelper.addMetaAnnotation(this, metaAnnotation);
 	}
@@ -380,6 +382,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public void addProcessingAnnotation(SProcessingAnnotation annotation) {
 		SAnnotationContainerHelper.addProcessingAnnotation(this, annotation);
 	}
@@ -418,6 +421,7 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public void addFeature(SFeature feature) {
 		SAnnotationContainerHelper.addFeature(this, feature);
 	}
@@ -458,5 +462,10 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 	@Override
 	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
 		return new AnnotationFinder<>(resultType, this);
+	}
+
+	@Override
+	public void add(SAbstractAnnotation annotation) {
+		addLabel(annotation);
 	}
 }
