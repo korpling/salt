@@ -188,7 +188,7 @@ public interface SDocumentGraph extends SGraph {
 	 *            type of the relation to be created between source and target
 	 * @return created relation
 	 */
-	public SRelation<? extends SNode, ? extends SNode> addNode(SNode source, SNode target, SALT_TYPE relationType);
+	public SRelation<? extends SNode, ? extends SNode> add(SNode source, SNode target, SALT_TYPE relationType);
 
 	/**
 	 * Creates and adds a new {@link STextualDS} node object and sets its text

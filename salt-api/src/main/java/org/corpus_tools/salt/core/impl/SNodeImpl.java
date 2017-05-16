@@ -140,12 +140,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addAnnotation(SAnnotation annotation) {
-		SAnnotationContainerHelper.addAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SAnnotation> Set<A> getAnnotations() {
 		return (SAnnotationContainerHelper.getAnnotations(this));
 	}
@@ -171,12 +165,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	// =======================================< SAnnotation
 
 	// =======================================> SMetaAnnotation
-	/** {@inheritDoc} **/
-	@Override
-	public void addMetaAnnotation(SMetaAnnotation metaAnnotation) {
-		SAnnotationContainerHelper.addMetaAnnotation(this, metaAnnotation);
-	}
-
 	/** {@inheritDoc} **/
 	@Override
 	public SMetaAnnotation createMetaAnnotation(String namespace, String name, Object value) {
@@ -223,12 +211,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addProcessingAnnotation(SProcessingAnnotation annotation) {
-		SAnnotationContainerHelper.addProcessingAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SProcessingAnnotation> Set<A> getProcessingAnnotations() {
 		return (SAnnotationContainerHelper.getProcessingAnnotations(this));
 	}
@@ -257,12 +239,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	@Override
 	public Set<SFeature> createFeatures(String featureString) {
 		return (SAnnotationContainerHelper.createFeatures(this, featureString));
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public void addFeature(SFeature feature) {
-		SAnnotationContainerHelper.addFeature(this, feature);
 	}
 
 	/** {@inheritDoc} **/

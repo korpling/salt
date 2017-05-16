@@ -62,8 +62,8 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 	 * {@inheritDoc} Notifies all registered listeners.
 	 **/
 	@Override
-	public void addLabel(Label label) {
-		super.addLabel(label);
+	public void add(Label label) {
+		super.add(label);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LABEL_LABELS, null,
 					label, this);

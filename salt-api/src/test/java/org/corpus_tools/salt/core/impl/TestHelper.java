@@ -67,7 +67,7 @@ public class TestHelper {
 			SNode node = SaltFactory.createSNode();
 			node.setId(nodeName);
 			nodes.add((node));
-			graph.addNode(node);
+			graph.add(node);
 		}
 
 		SRelation<SNode, SNode> relation = null;
@@ -80,7 +80,7 @@ public class TestHelper {
 							relation.setId(relationNames[i][2]);
 							relation.setSource(srcNode);
 							relation.setTarget(dstNode);
-							graph.addRelation(relation);
+							graph.add(relation);
 							break;
 						}
 					}

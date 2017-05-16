@@ -44,7 +44,7 @@ public interface LabelableElement extends Serializable {
 	 * @param label
 	 *            the Label object to be added
 	 */
-	public void addLabel(Label label);
+	public void add(Label label);
 
 	/**
 	 * Returns a label having the passed namespace and name, if such a label is

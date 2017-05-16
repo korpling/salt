@@ -76,7 +76,7 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 			sFeature = SaltFactory.createSFeature();
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			sFeature.setName(SaltUtil.FEAT_SSTART);
-			this.addFeature(sFeature);
+			add(sFeature);
 		}
 		sFeature.setValue(newSStart);
 	}
@@ -103,7 +103,7 @@ public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, 
 			sFeature = SaltFactory.createSFeature();
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			sFeature.setName(SaltUtil.FEAT_SEND);
-			this.addFeature(sFeature);
+			add(sFeature);
 		}
 		sFeature.setValue(newSEnd);
 	}

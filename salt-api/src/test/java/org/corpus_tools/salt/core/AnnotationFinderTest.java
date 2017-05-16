@@ -3,9 +3,6 @@ package org.corpus_tools.salt.core;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.corpus_tools.salt.SaltFactory;
-import org.corpus_tools.salt.core.SAnnotation;
-import org.corpus_tools.salt.core.SAnnotationContainer;
-import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,13 +40,13 @@ public class AnnotationFinderTest {
 	}
 
 	private void given() {
-		container.addLabel(RED);
-		container.addLabel(PASTEL_GREEN);
-		container.addLabel(BLUE);
-		container.addLabel(PASTEL_BLUE);
-		container.addLabel(GREEN);
-		container.addLabel(PASTEL_RED);
-		container.addLabel(PASTEL_PEN);
+		container.add(RED);
+		container.add(PASTEL_GREEN);
+		container.add(BLUE);
+		container.add(PASTEL_BLUE);
+		container.add(GREEN);
+		container.add(PASTEL_RED);
+		container.add(PASTEL_PEN);
 	}
 
 	@Test

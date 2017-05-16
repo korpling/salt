@@ -108,7 +108,7 @@ public class DOTStoringTest {
 		URI uri = URI.createFileURI(SaltTestsUtil.getTempTestFolder("salt_project2").getAbsolutePath());
 
 		SaltProject saltProject = SampleGenerator.createSaltProject();
-		saltProject.addCorpusGraph(SampleGenerator.createCorpusStructure());
+		saltProject.add(SampleGenerator.createCorpusStructure());
 		SaltUtil.save_DOT(saltProject, uri);
 		assertTrue(
 				new File(uri.appendSegment("0").appendFileExtension(SaltUtil.FILE_ENDING_DOT).toFileString()).exists());

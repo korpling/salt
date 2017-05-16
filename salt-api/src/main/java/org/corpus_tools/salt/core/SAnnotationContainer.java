@@ -70,14 +70,6 @@ public interface SAnnotationContainer extends LabelableElement {
 	public <A extends SAnnotation> Set<A> getAnnotations();
 
 	/**
-	 * Adds the passed annotation to this container.
-	 * 
-	 * @param annotation
-	 *            annotation to be added
-	 */
-	public void addAnnotation(SAnnotation annotation);
-
-	/**
 	 * Returns an annotation having the passed qualified name, if this container
 	 * contains such an annotation.
 	 * 
@@ -155,14 +147,6 @@ public interface SAnnotationContainer extends LabelableElement {
 	public <A extends SMetaAnnotation> Set<A> getMetaAnnotations();
 
 	/**
-	 * Adds the passed meta annotation to this container.
-	 * 
-	 * @param metaAnnotation
-	 *            meta annotation to be added
-	 */
-	public void addMetaAnnotation(SMetaAnnotation metaAnnotation);
-
-	/**
 	 * Returns a meta annotation having the passed qualified name, if this
 	 * container contains such a meta annotation.
 	 * 
@@ -227,14 +211,6 @@ public interface SAnnotationContainer extends LabelableElement {
 	public <A extends SProcessingAnnotation> Set<A> getProcessingAnnotations();
 
 	/**
-	 * Adds the passed processing-annotation to this container.
-	 * 
-	 * @param processingAnnotation
-	 *            annotation to be added
-	 */
-	public void addProcessingAnnotation(SProcessingAnnotation processingAnnotation);
-
-	/**
 	 * Returns a processing-annotation having the passed qualified name, if this
 	 * container contains such a processing-annotation.
 	 * 
@@ -295,14 +271,6 @@ public interface SAnnotationContainer extends LabelableElement {
 	 * @return a list of all features
 	 */
 	public <A extends SFeature> Set<A> getFeatures();
-
-	/**
-	 * Adds the passed feature to this container.
-	 * 
-	 * @param feature
-	 *            feature to be added
-	 */
-	public void addFeature(SFeature feature);
 
 	/**
 	 * Returns an feature having the passed qualified name, if this container

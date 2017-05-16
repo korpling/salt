@@ -75,7 +75,7 @@ public class GraphNotifierTest extends GraphTest {
 		fixture.addListener(listener);
 		Node node = GraphFactory.createNode();
 
-		fixture.addNode(node);
+		fixture.add(node);
 		assertEquals(NOTIFICATION_TYPE.ADD, listener.lastEvent.type);
 		assertEquals(GRAPH_ATTRIBUTES.GRAPH_NODES, listener.lastEvent.attribute);
 		assertEquals(null, listener.lastEvent.oldValue);
@@ -92,11 +92,11 @@ public class GraphNotifierTest extends GraphTest {
 		fixture.addListener(listener);
 		Relation<Node, Node> relation = GraphFactory.createRelation();
 		Node node = GraphFactory.createNode();
-		getFixture().addNode(node);
+		getFixture().add(node);
 		relation.setSource(node);
 		relation.setTarget(node);
 
-		fixture.addRelation(relation);
+		fixture.add(relation);
 		assertEquals(NOTIFICATION_TYPE.ADD, listener.lastEvent.type);
 		assertEquals(GRAPH_ATTRIBUTES.GRAPH_RELATIONS, listener.lastEvent.attribute);
 		assertEquals(null, listener.lastEvent.oldValue);
@@ -113,7 +113,7 @@ public class GraphNotifierTest extends GraphTest {
 		fixture.addListener(listener);
 		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
 
-		fixture.addLayer(layer);
+		fixture.add(layer);
 		assertEquals(NOTIFICATION_TYPE.ADD, listener.lastEvent.type);
 		assertEquals(GRAPH_ATTRIBUTES.GRAPH_LAYERS, listener.lastEvent.attribute);
 		assertEquals(null, listener.lastEvent.oldValue);

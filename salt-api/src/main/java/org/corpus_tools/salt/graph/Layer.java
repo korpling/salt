@@ -44,7 +44,7 @@ public interface Layer<N extends Node, R extends Relation<? extends N, ? extends
 	 * @param node
 	 *            node to be inserted into this layer
 	 */
-	public void addNode(N node);
+	public void add(N node);
 
 	/**
 	 * Adds the passed nodes to this layer. The insertion order is preserved. If
@@ -54,7 +54,7 @@ public interface Layer<N extends Node, R extends Relation<? extends N, ? extends
 	 * @param node
 	 *            node to be inserted into this layer
 	 */
-	public void addNodes(Collection<? extends N> nodes);
+	public void add(Collection<? extends N> nodes);
 
 	/**
 	 * Removes the passed node from this layer. If the passed relation is null,
@@ -81,7 +81,7 @@ public interface Layer<N extends Node, R extends Relation<? extends N, ? extends
 	 * @param relation
 	 *            relation to be inserted into this layer
 	 */
-	public void addRelation(R relation);
+	public void add(R relation);
 
 	/**
 	 * Removes the passed relation from this layer. If the passed relation is

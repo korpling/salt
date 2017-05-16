@@ -310,11 +310,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		// creates and sets identifier
 		GraphFactory.createIdentifier(subCorpus, URI.createURI(superCorpus.getId() + "/" + namePart).toString());
 
-		addNode(subCorpus);
+		add(subCorpus);
 		SCorpusRelation corpRel = SaltFactory.createSCorpusRelation();
 		corpRel.setSource(superCorpus);
 		corpRel.setTarget(subCorpus);
-		addRelation(corpRel);
+		add(corpRel);
 
 		return (corpRel.getIdentifier());
 	}
@@ -341,11 +341,11 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 		GraphFactory.createIdentifier(document, URI.createURI(corpus.getId() + "/" + namePart).toString());
 
-		addNode(document);
+		add(document);
 		SCorpusDocumentRelation corpDocRel = SaltFactory.createSCorpusDocumentRelation();
 		corpDocRel.setSource(corpus);
 		corpDocRel.setTarget(document);
-		addRelation(corpDocRel);
+		add(corpDocRel);
 
 		return (corpDocRel.getIdentifier());
 	}
@@ -382,7 +382,7 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		if (superCorpus != null) {
 			addSubCorpus(superCorpus, corpus);
 		} else {
-			addNode(corpus);
+			add(corpus);
 		}
 		return (corpus);
 	}

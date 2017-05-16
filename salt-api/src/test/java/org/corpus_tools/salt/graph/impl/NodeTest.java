@@ -65,7 +65,7 @@ public class NodeTest {
 	@Test
 	public void testDoubleChaining() {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addNode(getFixture());
+		graph.add(getFixture());
 		assertTrue("only contains " + graph.getNodes(), graph.getNodes().contains(getFixture()));
 	}
 
@@ -77,17 +77,17 @@ public class NodeTest {
 	public void testDoubleChaining_SetGraph_remove() {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 
-		graph.addNode(getFixture());
+		graph.add(getFixture());
 		assertEquals(graph, getFixture().getGraph());
 		graph.removeNode(getFixture());
 		assertNull(getFixture().getGraph());
 
-		graph.addNode(getFixture());
+		graph.add(getFixture());
 		assertEquals(graph, getFixture().getGraph());
 
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = createGraph();
 
-		graph2.addNode(getFixture());
+		graph2.add(getFixture());
 		assertEquals(graph2, getFixture().getGraph());
 	}
 
@@ -100,10 +100,10 @@ public class NodeTest {
 
 		// prerequirements
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addNode(getFixture());
-		graph.addLayer(layer);
+		graph.add(getFixture());
+		graph.add(layer);
 
-		layer.addNode(getFixture());
+		layer.add(getFixture());
 		assertEquals(1, getFixture().getLayers().size());
 		assertTrue(getFixture().getLayers().contains(layer));
 	}
@@ -118,10 +118,10 @@ public class NodeTest {
 
 		// prerequirements
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addNode(getFixture());
-		graph.addLayer(layer);
+		graph.add(getFixture());
+		graph.add(layer);
 
-		layer.addNode(getFixture());
+		layer.add(getFixture());
 		assertTrue(getFixture().getLayers().contains(layer));
 		layer.removeNode(getFixture());
 		assertEquals(0, getFixture().getLayers().size());
@@ -137,10 +137,10 @@ public class NodeTest {
 
 		// prerequirements
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addNode(getFixture());
-		graph.addLayer(layer);
+		graph.add(getFixture());
+		graph.add(layer);
 
-		layer.addNode(getFixture());
+		layer.add(getFixture());
 		assertTrue(layer.getNodes().contains(getFixture()));
 		layer.removeNode(getFixture());
 		assertFalse(layer.getNodes().contains(getFixture()));

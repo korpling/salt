@@ -68,12 +68,6 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? ex
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addAnnotation(SAnnotation annotation) {
-		SAnnotationContainerHelper.addAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SAnnotation> Set<A> getAnnotations() {
 		return (SAnnotationContainerHelper.getAnnotations(this));
 	}
@@ -99,11 +93,6 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? ex
 	// =======================================< SAnnotation
 
 	// =======================================> SMetaAnnotation
-	/** {@inheritDoc} **/
-	@Override
-	public void addMetaAnnotation(SMetaAnnotation metaAnnotation) {
-		SAnnotationContainerHelper.addMetaAnnotation(this, metaAnnotation);
-	}
 
 	/** {@inheritDoc} **/
 	@Override
@@ -148,12 +137,6 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? ex
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addProcessingAnnotation(SProcessingAnnotation annotation) {
-		SAnnotationContainerHelper.addProcessingAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SProcessingAnnotation> Set<A> getProcessingAnnotations() {
 		return (SAnnotationContainerHelper.getProcessingAnnotations(this));
 	}
@@ -182,12 +165,6 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? ex
 	@Override
 	public Set<SFeature> createFeatures(String featureString) {
 		return (SAnnotationContainerHelper.createFeatures(this, featureString));
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public void addFeature(SFeature feature) {
-		SAnnotationContainerHelper.addFeature(this, feature);
 	}
 
 	/** {@inheritDoc} **/
@@ -256,12 +233,12 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? ex
 	 * Filters adding of name {@link SFeature} for name
 	 */
 	@Override
-	public void addLabel(Label label) {
+	public void add(Label label) {
 		if (label != null && label.getValue() != null && label instanceof SFeature
 				&& SaltUtil.FEAT_NAME_QNAME.equals(label.getQName())) {
 			setName(label.getValue().toString());
 		} else {
-			super.addLabel(label);
+			super.add(label);
 		}
 	}
 

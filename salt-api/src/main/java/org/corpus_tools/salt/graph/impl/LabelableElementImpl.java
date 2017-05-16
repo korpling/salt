@@ -149,9 +149,9 @@ public abstract class LabelableElementImpl implements LabelableElement, Serializ
 
 	/** {@inheritDoc} */
 	@Override
-	public void addLabel(Label label) {
+	public void add(Label label) {
 		if (getDelegate() != null) {
-			getDelegate().addLabel(label);
+			getDelegate().add(label);
 		} else {
 			if (label != null) {
 				if (label instanceof LabelImpl) {

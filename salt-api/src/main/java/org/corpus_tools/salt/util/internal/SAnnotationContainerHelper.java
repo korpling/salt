@@ -104,10 +104,6 @@ public class SAnnotationContainerHelper {
 			.unmodifiableSet(new HashSet<SAnnotation>());
 
 	// =======================================> SAnnotation
-	public static void addAnnotation(SAnnotationContainer container, SAnnotation annotation) {
-		container.addLabel(annotation);
-	}
-
 	public static SAnnotation getAnnotation(SAnnotationContainer container, String qName) {
 		SAnnotation anno = null;
 		Label label = container.getLabel(qName);
@@ -174,24 +170,20 @@ public class SAnnotationContainerHelper {
 		retVal.setNamespace(namespace);
 		retVal.setName(name);
 		retVal.setValue(value);
-		container.addAnnotation(retVal);
+		container.add(retVal);
 		return retVal;
 	}
 
 	// =======================================< SAnnotation
 
 	// =======================================> SMetaAnnotation
-	public static void addMetaAnnotation(SAnnotationContainer container, SMetaAnnotation metaAnnotation) {
-		container.addLabel(metaAnnotation);
-	}
-
 	public static SMetaAnnotation createMetaAnnotation(SAnnotationContainer container, String namespace, String name,
 			Object value) {
 		SMetaAnnotation retVal = SaltFactory.createSMetaAnnotation();
 		retVal.setNamespace(namespace);
 		retVal.setName(name);
 		retVal.setValue(value);
-		container.addMetaAnnotation(retVal);
+		container.add(retVal);
 		return retVal;
 	}
 
@@ -258,10 +250,6 @@ public class SAnnotationContainerHelper {
 
 	// =======================================< SMetaAnnotation
 	// =======================================> SProcessingAnnotation
-	public static void addProcessingAnnotation(SAnnotationContainer container, SProcessingAnnotation annotation) {
-		container.addLabel(annotation);
-	}
-
 	public static SProcessingAnnotation getProcessingAnnotation(SAnnotationContainer container, String qName) {
 		SProcessingAnnotation anno = null;
 		Label label = container.getLabel(qName);
@@ -331,15 +319,16 @@ public class SAnnotationContainerHelper {
 		retVal.setNamespace(namespace);
 		retVal.setName(name);
 		retVal.setValue(value);
-		container.addProcessingAnnotation(retVal);
+		container.add(retVal);
 		return retVal;
 	}
 
 	// =======================================< SProcessingAnnotation
 	// =======================================> SFeature
-	public static void addFeature(SAnnotationContainer container, SFeature annotation) {
-		container.addLabel(annotation);
-	}
+	// public static void addFeature(SAnnotationContainer container, SFeature
+	// annotation) {
+	// container.addLabel(annotation);
+	// }
 
 	public static SFeature getFeature(SAnnotationContainer container, String qName) {
 		SFeature anno = null;
@@ -405,7 +394,7 @@ public class SAnnotationContainerHelper {
 		retVal.setNamespace(namespace);
 		retVal.setName(name);
 		retVal.setValue(value);
-		container.addFeature(retVal);
+		container.add(retVal);
 		return retVal;
 	}
 	// =======================================< SFeature

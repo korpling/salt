@@ -77,7 +77,7 @@ public class LayerTest {
 		assertNull(getFixture().getGraph());
 
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addLayer(getFixture());
+		graph.add(getFixture());
 		assertEquals(getFixture().getGraph(), graph);
 
 		graph.removeLayer(getFixture());
@@ -115,7 +115,7 @@ public class LayerTest {
 		for (int i = 0; i < 50; i++) {
 			Node node = createNode();
 			nodes.add(node);
-			getFixture().addNode(node);
+			getFixture().add(node);
 		}
 		assertEquals(nodes.size(), getFixture().getNodes().size());
 		for (Node node : nodes) {
@@ -139,7 +139,7 @@ public class LayerTest {
 	public void whenAddingMultipleNodesAtOnce_AllNodesMustBePartOfLayer() {
 		List<Node> nodes = Arrays.asList(GraphFactory.createNode(), GraphFactory.createNode(),
 				GraphFactory.createNode(), GraphFactory.createNode(), GraphFactory.createNode());
-		getFixture().addNodes(nodes);
+		getFixture().add(nodes);
 		assertThat(getFixture().getNodes()).containsAll(nodes);
 	}
 
@@ -162,15 +162,15 @@ public class LayerTest {
 	public void testDoubleChainingAddNode() {
 		// prerequirements
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addLayer(getFixture());
+		graph.add(getFixture());
 
 		List<Node> nodes = new ArrayList<>();
 
 		for (int i = 0; i < 50; i++) {
 			Node node = createNode();
 			nodes.add(node);
-			graph.addNode(node);
-			getFixture().addNode(node);
+			graph.add(node);
+			getFixture().add(node);
 		}
 		assertEquals(nodes.size(), getFixture().getNodes().size());
 		for (Node node : nodes) {
@@ -188,7 +188,7 @@ public class LayerTest {
 		for (int i = 0; i < 50; i++) {
 			Node node = createNode();
 			nodes.add(node);
-			getFixture().addNode(node);
+			getFixture().add(node);
 		}
 		assertEquals(nodes.size(), getFixture().getNodes().size());
 		for (Node node : nodes) {
@@ -210,7 +210,7 @@ public class LayerTest {
 			relation.setSource(node);
 			relation.setTarget(node);
 			relations.add(relation);
-			getFixture().addRelation(relation);
+			getFixture().add(relation);
 		}
 		assertEquals(relations.size(), getFixture().getRelations().size());
 		for (Relation<Node, Node> relation : relations) {

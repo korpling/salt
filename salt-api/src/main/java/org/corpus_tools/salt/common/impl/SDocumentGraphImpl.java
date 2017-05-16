@@ -103,7 +103,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	// ============================ start: handling relations
 
 	@Override
-	public void addRelation(SRelation<? extends SNode, ? extends SNode> relation) {
+	public void add(SRelation<? extends SNode, ? extends SNode> relation) {
 		if (relation != null) {
 			// start: create a name if none exists
 			if (Strings.isNullOrEmpty(relation.getName())) {
@@ -127,7 +127,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			}
 			// end: create a name if none exists
 			relation.setId(getId() + "#" + relation.getName());
-			super.addRelation(relation);
+			super.add(relation);
 
 			Class<?> key;
 			// map some implementation types to the matching interfaces
@@ -156,7 +156,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	// ============================ end: handling relations
 	// ============================ start: handling nodes
 	@Override
-	public void addNode(SNode node) {
+	public void add(SNode node) {
 		// check if node already exists
 		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_NODES_INVERSE, node)) {
 			// do nothing, node is already added
@@ -185,7 +185,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			if (Strings.isNullOrEmpty(node.getId())) {
 				node.setId(getId() + "#" + node.getName());
 			}
-			super.addNode(node);
+			super.add(node);
 
 			// map some implementation types to the matching interfaces
 			Class<?> key;
@@ -260,7 +260,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			sFeature = SaltFactory.createSFeature();
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			sFeature.setName(SaltUtil.FEAT_SDOCUMENT);
-			addFeature(sFeature);
+			add(sFeature);
 		}
 		sFeature.setValue(document);
 	}
@@ -357,7 +357,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	/** {@inheritDoc} **/
 	@Override
 	public void setTimeline(STimeline value) {
-		addNode(value);
+		add(value);
 	}
 
 	/** {@inheritDoc} **/
@@ -416,7 +416,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public SRelation<? extends SNode, ? extends SNode> addNode(SNode source, SNode target, SALT_TYPE sRelationType) {
+	public SRelation<? extends SNode, ? extends SNode> add(SNode source, SNode target, SALT_TYPE sRelationType) {
 		if (!getNodes().contains(source)) {
 			throw new SaltElementNotInGraphException(this, source,
 					"Given SNode cannot be used as source node, because it is not contained in the SDocumentGraph");
@@ -459,9 +459,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		retVal.setTargetUnsafe(target);
 
 		if (!getNodes().contains(target)) {
-			addNode(target);
+			add(target);
 		}
-		addRelation(retVal);
+		add(retVal);
 		return retVal;
 	}
 
@@ -470,7 +470,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	public STextualDS createTextualDS(String text) {
 		STextualDS sTextualDS = SaltFactory.createSTextualDS();
 		sTextualDS.setText(text);
-		addNode(sTextualDS);
+		add(sTextualDS);
 		return (sTextualDS);
 	}
 
@@ -482,7 +482,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}
 		if (sequences.size() > 0) {
 			SToken sToken = SaltFactory.createSToken();
-			this.addNode(sToken);
+			this.add(sToken);
 			for (DataSourceSequence<Integer> sequence : sequences) {
 				addToken(sToken, sequence);
 			}
@@ -537,7 +537,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			throw new SaltParameterException("sDSSequences.getSEnd()", "addSToken", this.getClass());
 		}
 		if ((token.getId() == null) || (getNode(token.getId()) == null)) {
-			addNode(token);
+			add(token);
 		}
 
 		SSequentialRelation<SToken, ?, Integer> seqRel = null;
@@ -553,7 +553,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			seqRel.setSource(token);
 			seqRel.setStart(sequence.getStart());
 			seqRel.setEnd(sequence.getEnd());
-			addRelation(seqRel);
+			add(seqRel);
 		}
 	}
 
@@ -561,7 +561,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public SToken createToken(DataSourceSequence<Integer> sDSSequence) {
 		SToken sToken = SaltFactory.createSToken();
-		addNode(sToken);
+		add(sToken);
 		addToken(sToken, sDSSequence);
 		return (sToken);
 	}
@@ -585,12 +585,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				if (sToken != null) {
 					if (retVal == null) {
 						retVal = SaltFactory.createSSpan();
-						addNode(retVal);
+						add(retVal);
 					}
 					SSpanningRelation sSpanRel = SaltFactory.createSSpanningRelation();
 					sSpanRel.setSource(retVal);
 					sSpanRel.setTarget(sToken);
-					addRelation(sSpanRel);
+					add(sSpanRel);
 				}
 			}
 		}
@@ -616,12 +616,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				if (sStructuredNode != null) {
 					if (retVal == null) {
 						retVal = SaltFactory.createSStructure();
-						addNode(retVal);
+						add(retVal);
 					}
 					SDominanceRelation sDomRel = SaltFactory.createSDominanceRelation();
 					sDomRel.setSource(retVal);
 					sDomRel.setTarget(sStructuredNode);
-					addRelation(sDomRel);
+					add(sDomRel);
 				}
 			}
 		}
@@ -634,7 +634,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		STimeline retVal = null;
 		if ((getTimeline() == null) || (getTimeline().getEnd() == 0)) {
 			STimeline sTimeline = SaltFactory.createSTimeline();
-			addNode(sTimeline);
+			add(sTimeline);
 			List<STimelineRelation> sTimeRelList = new ArrayList<>();
 			Map<STextualDS, List<STimelineRelation>> sTimeRelTable = new Hashtable<>();
 			for (STextualRelation sTextRel : getTextualRelations()) {
@@ -661,7 +661,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 				pot++;
 				sTimeline.increasePointOfTime();
 				sTimeRelation.setEnd(pot);
-				addRelation(sTimeRelation);
+				add(sTimeRelation);
 			}
 			retVal = sTimeline;
 		} else {
@@ -801,7 +801,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			newSTextualDSvalueBuilder.append(text);
 			Integer end = newSTextualDSvalueBuilder.length();
 			SToken sTok = SaltFactory.createSToken();
-			addNode(sTok);
+			add(sTok);
 			sTokens.add(sTok);
 
 			STextualRelation sTextRel = SaltFactory.createSTextualRelation();
@@ -809,7 +809,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 			sTextRel.setEnd(end);
 			sTextRel.setSource(sTok);
 			sTextRel.setTarget(sTextualDS);
-			addRelation(sTextRel);
+			add(sTextRel);
 
 			newSTextualRelations.add(sTextRel);
 
@@ -873,7 +873,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		}
 		sRel.setSourceUnsafe(source);
 		sRel.setTargetUnsafe(target);
-		addRelation(sRel);
+		add(sRel);
 		sRel.createAnnotations(sAnnotations);
 		return (sRel);
 	}

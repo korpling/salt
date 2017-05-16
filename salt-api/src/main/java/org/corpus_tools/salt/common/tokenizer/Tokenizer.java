@@ -509,7 +509,7 @@ public class Tokenizer {
 
 						// move all annotations from old token to span
 						for (SAnnotation sAnno : oldToken.getAnnotations()) {
-							span.addAnnotation(sAnno);
+							span.add(sAnno);
 						}
 
 						// redirect all relations to span
@@ -529,7 +529,7 @@ public class Tokenizer {
 										SSpanningRelation rel = SaltFactory.createSSpanningRelation();
 										rel.setSource(parentSpan);
 										rel.setTarget(overlappedToken);
-										getDocumentGraph().addRelation(rel);
+										getDocumentGraph().add(rel);
 									}
 								}
 							} else {

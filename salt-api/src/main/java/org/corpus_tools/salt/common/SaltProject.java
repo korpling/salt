@@ -43,7 +43,7 @@ public interface SaltProject extends Serializable {
 	 * @param corpusGraph
 	 *            new corpus graph object
 	 */
-	public void addCorpusGraph(SCorpusGraph corpusGraph);
+	public void add(SCorpusGraph corpusGraph);
 
 	/**
 	 * Removes the passed {@link SCorpusGraph} object to the list of corpus

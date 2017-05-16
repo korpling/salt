@@ -50,7 +50,7 @@ public class Helper {
 		label.setNamespace("myNamespace");
 		label.setName("myName");
 
-		fixture.addLabel(label);
+		fixture.add(label);
 		assertEquals(NOTIFICATION_TYPE.ADD, listener.lastEvent.type);
 		assertEquals(attribute, listener.lastEvent.attribute);
 		assertEquals(null, listener.lastEvent.oldValue);

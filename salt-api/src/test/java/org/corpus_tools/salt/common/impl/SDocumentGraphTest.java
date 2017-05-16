@@ -108,7 +108,7 @@ public class SDocumentGraphTest {
 		for (String id : ids) {
 			STextualDS textDs = SaltFactory.createSTextualDS();
 			textDs.setId(id);
-			getFixture().addNode(textDs);
+			getFixture().add(textDs);
 			textDSs.add(textDs);
 		}
 
@@ -121,16 +121,16 @@ public class SDocumentGraphTest {
 		String[] ids = { "salt:/graph1#textRel1", "salt:/graph1#textRel2", "salt:/graph1#textRel3",
 				"salt:/graph1#textRel4" };
 		SToken source = SaltFactory.createSToken();
-		getFixture().addNode(source);
+		getFixture().add(source);
 		STextualDS target = SaltFactory.createSTextualDS();
-		getFixture().addNode(target);
+		getFixture().add(target);
 		List<STextualRelation> rels = new ArrayList<>();
 		for (String id : ids) {
 			STextualRelation rel = SaltFactory.createSTextualRelation();
 			rel.setSource(source);
 			rel.setTarget(target);
 			rel.setId(id);
-			getFixture().addRelation(rel);
+			getFixture().add(rel);
 			rels.add(rel);
 		}
 		assertTrue(rels.containsAll(getFixture().getTextualRelations()));
@@ -144,7 +144,7 @@ public class SDocumentGraphTest {
 		for (String id : ids) {
 			SToken tok = SaltFactory.createSToken();
 			tok.setId(id);
-			getFixture().addNode(tok);
+			getFixture().add(tok);
 			toks.add(tok);
 		}
 
@@ -183,15 +183,15 @@ public class SDocumentGraphTest {
 	public void testGetSTimelineRelations() {
 		List<STimelineRelation> timeRels = new ArrayList<>();
 		SToken source = SaltFactory.createSToken();
-		getFixture().addNode(source);
+		getFixture().add(source);
 		STimeline target = SaltFactory.createSTimeline();
-		getFixture().addNode(target);
+		getFixture().add(target);
 		for (int i = 0; i < 10; i++) {
 			STimelineRelation rel = SaltFactory.createSTimelineRelation();
 			rel.setSource(source);
 			rel.setTarget(target);
 			timeRels.add(rel);
-			getFixture().addRelation(rel);
+			getFixture().add(rel);
 		}
 		assertTrue(timeRels.containsAll(getFixture().getTimelineRelations()));
 		assertTrue(getFixture().getTimelineRelations().containsAll(timeRels));
@@ -201,15 +201,15 @@ public class SDocumentGraphTest {
 	public void testGetSSpanningRelations() {
 		List<SSpanningRelation> spanRels = new ArrayList<>();
 		SSpan source = SaltFactory.createSSpan();
-		getFixture().addNode(source);
+		getFixture().add(source);
 		SToken target = SaltFactory.createSToken();
-		getFixture().addNode(target);
+		getFixture().add(target);
 		for (int i = 0; i < 10; i++) {
 			SSpanningRelation rel = SaltFactory.createSSpanningRelation();
 			rel.setSource(source);
 			rel.setTarget(target);
 			spanRels.add(rel);
-			getFixture().addRelation(rel);
+			getFixture().add(rel);
 		}
 		assertTrue(spanRels.containsAll(getFixture().getSpanningRelations()));
 		assertTrue(getFixture().getSpanningRelations().containsAll(spanRels));
@@ -222,7 +222,7 @@ public class SDocumentGraphTest {
 		for (String name : names) {
 			SSpan span = SaltFactory.createSSpan();
 			span.setName(name);
-			getFixture().addNode(span);
+			getFixture().add(span);
 			spans.add(span);
 		}
 
@@ -238,7 +238,7 @@ public class SDocumentGraphTest {
 		for (String name : names) {
 			SStructure structure = SaltFactory.createSStructure();
 			structure.setName(name);
-			getFixture().addNode(structure);
+			getFixture().add(structure);
 			structures.add(structure);
 		}
 
@@ -249,16 +249,16 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSDominanceRelations() {
 		SStructure source = SaltFactory.createSStructure();
-		getFixture().addNode(source);
+		getFixture().add(source);
 		SStructure target = SaltFactory.createSStructure();
-		getFixture().addNode(target);
+		getFixture().add(target);
 		List<SDominanceRelation> rels = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			SDominanceRelation rel = SaltFactory.createSDominanceRelation();
 			rel.setSource(source);
 			rel.setTarget(target);
 			rels.add(rel);
-			getFixture().addRelation(rel);
+			getFixture().add(rel);
 		}
 		assertTrue(rels.containsAll(getFixture().getDominanceRelations()));
 		assertTrue(getFixture().getDominanceRelations().containsAll(rels));
@@ -267,16 +267,16 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSPointingRelations() {
 		SStructure source = SaltFactory.createSStructure();
-		getFixture().addNode(source);
+		getFixture().add(source);
 		SStructure target = SaltFactory.createSStructure();
-		getFixture().addNode(target);
+		getFixture().add(target);
 		List<SPointingRelation> rels = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			SPointingRelation rel = SaltFactory.createSPointingRelation();
 			rel.setSource(source);
 			rel.setTarget(target);
 			rels.add(rel);
-			getFixture().addRelation(rel);
+			getFixture().add(rel);
 		}
 		assertTrue(rels.containsAll(getFixture().getPointingRelations()));
 		assertTrue(getFixture().getPointingRelations().containsAll(rels));
@@ -286,15 +286,15 @@ public class SDocumentGraphTest {
 	public void testGetSMedialRelations() {
 		List<SMedialRelation> sAudioRels = new ArrayList<>();
 		SToken source = SaltFactory.createSToken();
-		getFixture().addNode(source);
+		getFixture().add(source);
 		SMedialDS target = SaltFactory.createSMedialDS();
-		getFixture().addNode(target);
+		getFixture().add(target);
 		for (int i = 0; i < 10; i++) {
 			SMedialRelation rel = SaltFactory.createSMedialRelation();
 			rel.setSource(source);
 			rel.setTarget(target);
 			sAudioRels.add(rel);
-			getFixture().addRelation(rel);
+			getFixture().add(rel);
 		}
 		assertTrue(sAudioRels.containsAll(getFixture().getMedialRelations()));
 		assertTrue(getFixture().getMedialRelations().containsAll(sAudioRels));
@@ -303,7 +303,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetSMediaDSs() {
 		SMedialDS sAudioDS = SaltFactory.createSMedialDS();
-		getFixture().addNode(sAudioDS);
+		getFixture().add(sAudioDS);
 		assertTrue(getFixture().getMedialDSs().contains(sAudioDS));
 	}
 
@@ -311,15 +311,15 @@ public class SDocumentGraphTest {
 	public void testGetSOrderRelations() {
 		List<SOrderRelation> orderRels = new ArrayList<>();
 		SToken source = SaltFactory.createSToken();
-		getFixture().addNode(source);
+		getFixture().add(source);
 		SToken target = SaltFactory.createSToken();
-		getFixture().addNode(target);
+		getFixture().add(target);
 		for (int i = 0; i < 10; i++) {
 			SOrderRelation rel = SaltFactory.createSOrderRelation();
 			rel.setSource(source);
 			rel.setTarget(target);
 			orderRels.add(rel);
-			getFixture().addRelation(rel);
+			getFixture().add(rel);
 		}
 		assertTrue(orderRels.containsAll(getFixture().getOrderRelations()));
 		assertTrue(getFixture().getOrderRelations().containsAll(orderRels));
@@ -335,12 +335,12 @@ public class SDocumentGraphTest {
 			// calling addNode now should throw an
 			// SaltElementNotInGraphException
 			try {
-				getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
+				getFixture().add(source, target, SALT_TYPE.SPOINTING_RELATION);
 				fail();
 			} catch (SaltElementNotInGraphException e) {
 			}
-			getFixture().addNode(source);
-			SRelation<?, ?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SPOINTING_RELATION);
+			getFixture().add(source);
+			SRelation<?, ?> sRelation = getFixture().add(source, target, SALT_TYPE.SPOINTING_RELATION);
 			assertTrue(sRelation instanceof SPointingRelation);
 		}
 
@@ -351,12 +351,12 @@ public class SDocumentGraphTest {
 			// calling addNode now should throw an
 			// SaltElementNotInGraphException
 			try {
-				getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
+				getFixture().add(source, target, SALT_TYPE.STEXTUAL_RELATION);
 				fail();
 			} catch (SaltElementNotInGraphException e) {
 			}
-			getFixture().addNode(source);
-			SRelation<?, ?> sRelation = getFixture().addNode(source, target, SALT_TYPE.STEXTUAL_RELATION);
+			getFixture().add(source);
+			SRelation<?, ?> sRelation = getFixture().add(source, target, SALT_TYPE.STEXTUAL_RELATION);
 			assertTrue(sRelation instanceof STextualRelation);
 		}
 
@@ -367,12 +367,12 @@ public class SDocumentGraphTest {
 			// calling addNode now should throw an
 			// SaltElementNotInGraphException
 			try {
-				getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
+				getFixture().add(source, target, SALT_TYPE.SDOMINANCE_RELATION);
 				fail();
 			} catch (SaltElementNotInGraphException e) {
 			}
-			getFixture().addNode(source);
-			SRelation<?, ?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SDOMINANCE_RELATION);
+			getFixture().add(source);
+			SRelation<?, ?> sRelation = getFixture().add(source, target, SALT_TYPE.SDOMINANCE_RELATION);
 			assertTrue(sRelation instanceof SDominanceRelation);
 		}
 
@@ -383,12 +383,12 @@ public class SDocumentGraphTest {
 			// calling addNode now should throw an
 			// SaltElementNotInGraphException
 			try {
-				getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
+				getFixture().add(source, target, SALT_TYPE.SSPANNING_RELATION);
 				fail();
 			} catch (SaltElementNotInGraphException e) {
 			}
-			getFixture().addNode(source);
-			SRelation<?, ?> sRelation = getFixture().addNode(source, target, SALT_TYPE.SSPANNING_RELATION);
+			getFixture().add(source);
+			SRelation<?, ?> sRelation = getFixture().add(source, target, SALT_TYPE.SSPANNING_RELATION);
 			assertTrue(sRelation instanceof SSpanningRelation);
 		}
 
@@ -487,90 +487,90 @@ public class SDocumentGraphTest {
 		{// text 1
 			STextualDS sText1 = SaltFactory.createSTextualDS();
 			sText1.setText("Hello, text1.");
-			getFixture().addNode(sText1);
+			getFixture().add(sText1);
 			SToken sToken = null;
 			STextualRelation sTextRel = null;
 
 			sToken = SaltFactory.createSToken();
-			getFixture().addNode(sToken);
+			getFixture().add(sToken);
 			sTextRel = SaltFactory.createSTextualRelation();
 			sTextRel.setTarget(sText1);
 			sTextRel.setSource(sToken);
 			sTextRel.setStart(0);
 			sTextRel.setEnd(5);
-			getFixture().addRelation(sTextRel);
+			getFixture().add(sTextRel);
 
 			sToken = SaltFactory.createSToken();
-			getFixture().addNode(sToken);
+			getFixture().add(sToken);
 			sTextRel = SaltFactory.createSTextualRelation();
 			sTextRel.setTarget(sText1);
 			sTextRel.setSource(sToken);
 			sTextRel.setStart(5);
 			sTextRel.setEnd(6);
-			getFixture().addRelation(sTextRel);
+			getFixture().add(sTextRel);
 
 			sToken = SaltFactory.createSToken();
-			getFixture().addNode(sToken);
+			getFixture().add(sToken);
 			sTextRel = SaltFactory.createSTextualRelation();
 			sTextRel.setTarget(sText1);
 			sTextRel.setSource(sToken);
 			sTextRel.setStart(7);
 			sTextRel.setEnd(12);
-			getFixture().addRelation(sTextRel);
+			getFixture().add(sTextRel);
 
 			sToken = SaltFactory.createSToken();
-			getFixture().addNode(sToken);
+			getFixture().add(sToken);
 			sTextRel = SaltFactory.createSTextualRelation();
 			sTextRel.setTarget(sText1);
 			sTextRel.setSource(sToken);
 			sTextRel.setStart(12);
 			sTextRel.setEnd(13);
-			getFixture().addRelation(sTextRel);
+			getFixture().add(sTextRel);
 
 		}
 
 		{// text 1
 			STextualDS sText2 = SaltFactory.createSTextualDS();
 			sText2.setText("Hello, Text2.");
-			getFixture().addNode(sText2);
+			getFixture().add(sText2);
 			SToken sToken = null;
 			STextualRelation sTextRel = null;
 
 			sToken = SaltFactory.createSToken();
-			getFixture().addNode(sToken);
+			getFixture().add(sToken);
 			sTextRel = SaltFactory.createSTextualRelation();
 			sTextRel.setTarget(sText2);
 			sTextRel.setSource(sToken);
 			sTextRel.setStart(0);
 			sTextRel.setEnd(5);
-			getFixture().addRelation(sTextRel);
+			getFixture().add(sTextRel);
 
 			sToken = SaltFactory.createSToken();
-			getFixture().addNode(sToken);
+			getFixture().add(sToken);
 			sTextRel = SaltFactory.createSTextualRelation();
 			sTextRel.setTarget(sText2);
 			sTextRel.setSource(sToken);
 			sTextRel.setStart(5);
 			sTextRel.setEnd(6);
-			getFixture().addRelation(sTextRel);
+			getFixture().add(sTextRel);
 
 			sToken = SaltFactory.createSToken();
-			getFixture().addNode(sToken);
+			getFixture().add(sToken);
 			sTextRel = SaltFactory.createSTextualRelation();
 			sTextRel.setTarget(sText2);
 			sTextRel.setSource(sToken);
 			sTextRel.setStart(7);
 			sTextRel.setEnd(12);
-			getFixture().addRelation(sTextRel);
+			getFixture().add(sTextRel);
 
 			sToken = SaltFactory.createSToken();
-			getFixture().addNode(sToken);
+			getFixture().add(sToken);
 			sTextRel = SaltFactory.createSTextualRelation();
 			sTextRel.setTarget(sText2);
 			sTextRel.setSource(sToken);
 			sTextRel.setStart(12);
 			sTextRel.setEnd(13);
-			getFixture().addRelation(sTextRel);
+			getFixture().add(sTextRel);
 		}
 
 		getFixture().createTimeline();
@@ -791,7 +791,7 @@ public class SDocumentGraphTest {
 	@Test
 	public void testGetOverlappedDSSequences__STextualDS_EList() {
 		STextualDS sTextualDs = SaltFactory.createSTextualDS();
-		getFixture().addNode(sTextualDs);
+		getFixture().add(sTextualDs);
 		DataSourceSequence<? extends Number> sequence = getFixture()
 				.getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		assertEquals(sTextualDs, sequence.getDataSource());
@@ -1362,50 +1362,50 @@ public class SDocumentGraphTest {
 		{// Token
 			tok1 = SaltFactory.createSToken();
 			tok1.setName("tok1");
-			getFixture().addNode(tok1);
+			getFixture().add(tok1);
 			assertEquals(tok1, getFixture().getNode(tok1.getId()));
 
 			tok2 = SaltFactory.createSToken();
 			tok2.setName("tok2");
-			getFixture().addNode(tok2);
+			getFixture().add(tok2);
 			assertEquals(tok2, getFixture().getNode(tok2.getId()));
 
 			tok3 = SaltFactory.createSToken();
 			tok3.setName("tok3");
-			getFixture().addNode(tok3);
+			getFixture().add(tok3);
 			assertEquals(tok3, getFixture().getNode(tok3.getId()));
 
 			tok4 = SaltFactory.createSToken();
 			tok4.setName("tok4");
-			getFixture().addNode(tok4);
+			getFixture().add(tok4);
 			assertEquals(tok4, getFixture().getNode(tok4.getId()));
 
 			tok5 = SaltFactory.createSToken();
 			tok5.setName("tok5");
-			getFixture().addNode(tok5);
+			getFixture().add(tok5);
 			assertEquals(tok5, getFixture().getNode(tok5.getId()));
 		} // SToken
 		{// SSpan
 			span1 = SaltFactory.createSSpan();
 			span1.setName("span1");
-			getFixture().addNode(span1);
+			getFixture().add(span1);
 			assertEquals(span1, getFixture().getNode(span1.getId()));
 
 			span2 = SaltFactory.createSSpan();
 			span2.setName("span2");
-			getFixture().addNode(span2);
+			getFixture().add(span2);
 			assertEquals(span2, getFixture().getNode(span2.getId()));
 		} // SSpan
 
 		{// SStructure
 			struct1 = SaltFactory.createSStructure();
 			struct1.setName("struct1");
-			getFixture().addNode(struct1);
+			getFixture().add(struct1);
 			assertEquals(struct1, getFixture().getNode(struct1.getId()));
 
 			struct2 = SaltFactory.createSStructure();
 			struct2.setName("struct2");
-			getFixture().addNode(struct2);
+			getFixture().add(struct2);
 			assertEquals(struct2, getFixture().getNode(struct2.getId()));
 		} // SStructure
 
@@ -1414,25 +1414,25 @@ public class SDocumentGraphTest {
 			sSpanRel = SaltFactory.createSSpanningRelation();
 			sSpanRel.setTarget(tok1);
 			sSpanRel.setSource(span1);
-			getFixture().addRelation(sSpanRel);
+			getFixture().add(sSpanRel);
 			assertEquals(sSpanRel, getFixture().getRelation(sSpanRel.getId()));
 
 			sSpanRel = SaltFactory.createSSpanningRelation();
 			sSpanRel.setTarget(tok2);
 			sSpanRel.setSource(span1);
-			getFixture().addRelation(sSpanRel);
+			getFixture().add(sSpanRel);
 			assertEquals(sSpanRel, getFixture().getRelation(sSpanRel.getId()));
 
 			sSpanRel = SaltFactory.createSSpanningRelation();
 			sSpanRel.setTarget(tok2);
 			sSpanRel.setSource(span2);
-			getFixture().addRelation(sSpanRel);
+			getFixture().add(sSpanRel);
 			assertEquals(sSpanRel, getFixture().getRelation(sSpanRel.getId()));
 
 			sSpanRel = SaltFactory.createSSpanningRelation();
 			sSpanRel.setTarget(tok4);
 			sSpanRel.setSource(span2);
-			getFixture().addRelation(sSpanRel);
+			getFixture().add(sSpanRel);
 			assertEquals(sSpanRel, getFixture().getRelation(sSpanRel.getId()));
 		} // SSpanningRelation
 
@@ -1441,31 +1441,31 @@ public class SDocumentGraphTest {
 			sDomRel = SaltFactory.createSDominanceRelation();
 			sDomRel.setSource(struct1);
 			sDomRel.setTarget(tok1);
-			getFixture().addRelation(sDomRel);
+			getFixture().add(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
 			sDomRel.setSource(struct1);
 			sDomRel.setTarget(span1);
-			getFixture().addRelation(sDomRel);
+			getFixture().add(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
 			sDomRel.setSource(struct2);
 			sDomRel.setTarget(struct1);
-			getFixture().addRelation(sDomRel);
+			getFixture().add(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
 			sDomRel.setSource(struct1);
 			sDomRel.setTarget(span1);
-			getFixture().addRelation(sDomRel);
+			getFixture().add(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 
 			sDomRel = SaltFactory.createSDominanceRelation();
 			sDomRel.setSource(struct1);
 			sDomRel.setTarget(span2);
-			getFixture().addRelation(sDomRel);
+			getFixture().add(sDomRel);
 			assertEquals(sDomRel, getFixture().getRelation(sDomRel.getId()));
 		} // SDominanceRelation
 
@@ -1474,19 +1474,19 @@ public class SDocumentGraphTest {
 			sPRel = SaltFactory.createSPointingRelation();
 			sPRel.setSource(tok1);
 			sPRel.setTarget(tok2);
-			getFixture().addRelation(sPRel);
+			getFixture().add(sPRel);
 			assertEquals(sPRel, getFixture().getRelation(sPRel.getId()));
 
 			sPRel = SaltFactory.createSPointingRelation();
 			sPRel.setSource(tok3);
 			sPRel.setTarget(tok4);
-			getFixture().addRelation(sPRel);
+			getFixture().add(sPRel);
 			assertEquals(sPRel, getFixture().getRelation(sPRel.getId()));
 
 			sPRel = SaltFactory.createSPointingRelation();
 			sPRel.setSource(tok4);
 			sPRel.setTarget(tok2);
-			getFixture().addRelation(sPRel);
+			getFixture().add(sPRel);
 			assertEquals(sPRel, getFixture().getRelation(sPRel.getId()));
 		} // SPointingRelation
 
@@ -1522,11 +1522,11 @@ public class SDocumentGraphTest {
 	public void testGetRootsBySRelationSType__SALT_TYPE() {
 		// checking for SPointingRelation
 		SToken node1 = SaltFactory.createSToken();
-		getFixture().addNode(node1);
+		getFixture().add(node1);
 		SToken node2 = SaltFactory.createSToken();
-		getFixture().addNode(node2);
+		getFixture().add(node2);
 		SToken node3 = SaltFactory.createSToken();
-		getFixture().addNode(node3);
+		getFixture().add(node3);
 
 		String type1 = "type1";
 		String type2 = "type2";
@@ -1535,13 +1535,13 @@ public class SDocumentGraphTest {
 		rel1.setType(type1);
 		rel1.setSource(node1);
 		rel1.setTarget(node2);
-		getFixture().addRelation(rel1);
+		getFixture().add(rel1);
 
 		SPointingRelation rel2 = SaltFactory.createSPointingRelation();
 		rel2.setType(type2);
 		rel2.setSource(node2);
 		rel2.setTarget(node1);
-		getFixture().addRelation(rel2);
+		getFixture().add(rel2);
 
 		Multimap<String, SNode> roots = getFixture().getRootsByRelationType(SALT_TYPE.SPOINTING_RELATION);
 		assertTrue(roots.containsKey(type1));
@@ -1680,7 +1680,7 @@ public class SDocumentGraphTest {
 
 		StringBuilder str = new StringBuilder();
 		STextualDS sTextualDS = SaltFactory.createSTextualDS();
-		getFixture().addNode(sTextualDS);
+		getFixture().add(sTextualDS);
 		for (String text : origText) {
 			int start = str.length();
 			str.append(text);
@@ -1724,7 +1724,7 @@ public class SDocumentGraphTest {
 
 		StringBuilder str = new StringBuilder();
 		STextualDS sTextualDS = SaltFactory.createSTextualDS();
-		getFixture().addNode(sTextualDS);
+		getFixture().add(sTextualDS);
 		for (String text : origText) {
 			int start = str.length();
 			str.append(text);
@@ -1774,9 +1774,9 @@ public class SDocumentGraphTest {
 		SToken tok1 = getFixture().createToken(sText, 0, 4);
 		SToken tok2 = getFixture().createToken(sText, 5, 7);
 		SSpan sSpan = SaltFactory.createSSpan();
-		getFixture().addNode(sSpan);
+		getFixture().add(sSpan);
 		SStructure sStruct = SaltFactory.createSStructure();
-		getFixture().addNode(sStruct);
+		getFixture().add(sStruct);
 		SRelation<?, ?> sRel = null;
 
 		assertEquals(2, getFixture().getRelations().size());
@@ -1897,7 +1897,7 @@ public class SDocumentGraphTest {
 	public void testGetSText__SNode__SStructure() {
 		SDocumentGraph fixGraph = getFixture();
 		SStructure sStructure = SaltFactory.createSStructure();
-		fixGraph.addNode(sStructure);
+		fixGraph.add(sStructure);
 		assertNull(fixGraph.getText(sStructure));
 	}
 
@@ -1908,18 +1908,18 @@ public class SDocumentGraphTest {
 		assertEquals(0, getFixture().getTokens().size());
 
 		SToken tok1 = SaltFactory.createSToken();
-		getFixture().addNode(tok1);
+		getFixture().add(tok1);
 		assertEquals(1, getFixture().getTokens().size());
 		assertTrue(getFixture().getTokens().contains(tok1));
 
 		SToken tok2 = SaltFactory.createSToken();
-		getFixture().addNode(tok2);
+		getFixture().add(tok2);
 		assertEquals(2, getFixture().getTokens().size());
 		assertTrue(getFixture().getTokens().contains(tok1));
 		assertTrue(getFixture().getTokens().contains(tok2));
 
 		SToken tok3 = SaltFactory.createSToken();
-		getFixture().addNode(tok3);
+		getFixture().add(tok3);
 		assertEquals(3, getFixture().getTokens().size());
 		assertTrue(getFixture().getTokens().contains(tok3));
 		assertTrue(getFixture().getTokens().contains(tok3));
@@ -1932,18 +1932,18 @@ public class SDocumentGraphTest {
 		assertEquals(0, getFixture().getSpans().size());
 
 		SSpan span1 = SaltFactory.createSSpan();
-		getFixture().addNode(span1);
+		getFixture().add(span1);
 		assertEquals(1, getFixture().getSpans().size());
 		assertTrue(getFixture().getSpans().contains(span1));
 
 		SSpan span2 = SaltFactory.createSSpan();
-		getFixture().addNode(span2);
+		getFixture().add(span2);
 		assertEquals(2, getFixture().getSpans().size());
 		assertTrue(getFixture().getSpans().contains(span1));
 		assertTrue(getFixture().getSpans().contains(span2));
 
 		SSpan span3 = SaltFactory.createSSpan();
-		getFixture().addNode(span3);
+		getFixture().add(span3);
 		assertEquals(3, getFixture().getSpans().size());
 		assertTrue(getFixture().getSpans().contains(span3));
 		assertTrue(getFixture().getSpans().contains(span3));
@@ -1956,18 +1956,18 @@ public class SDocumentGraphTest {
 		assertEquals(0, getFixture().getStructures().size());
 
 		SStructure struct1 = SaltFactory.createSStructure();
-		getFixture().addNode(struct1);
+		getFixture().add(struct1);
 		assertEquals(1, getFixture().getStructures().size());
 		assertTrue(getFixture().getStructures().contains(struct1));
 
 		SStructure struct2 = SaltFactory.createSStructure();
-		getFixture().addNode(struct2);
+		getFixture().add(struct2);
 		assertEquals(2, getFixture().getStructures().size());
 		assertTrue(getFixture().getStructures().contains(struct1));
 		assertTrue(getFixture().getStructures().contains(struct2));
 
 		SStructure struct3 = SaltFactory.createSStructure();
-		getFixture().addNode(struct3);
+		getFixture().add(struct3);
 		assertEquals(3, getFixture().getStructures().size());
 		assertTrue(getFixture().getStructures().contains(struct3));
 		assertTrue(getFixture().getStructures().contains(struct3));

@@ -213,7 +213,7 @@ public class SampleGenerator {
 				SOrderRelation rel = SaltFactory.createSOrderRelation();
 				rel.setSource(lastSTok);
 				rel.setTarget(tok);
-				documentStructure.addRelation(rel);
+				documentStructure.add(rel);
 			}
 
 			// set timeline
@@ -226,7 +226,7 @@ public class SampleGenerator {
 				lastPointOfTime += 1;
 			}
 			timeRel.setEnd(lastPointOfTime);
-			documentStructure.addRelation(timeRel);
+			documentStructure.add(timeRel);
 
 			lastSTok = tok;
 		}
@@ -241,7 +241,7 @@ public class SampleGenerator {
 		timeRel0.setTarget(documentStructure.getTimeline());
 		timeRel0.setStart(7);
 		timeRel0.setEnd(9);
-		documentStructure.addRelation(timeRel0);
+		documentStructure.add(timeRel0);
 
 		SToken spk2_tok1 = documentStructure.createToken(text2, 4, 6);
 		STimelineRelation sTimeRel1 = SaltFactory.createSTimelineRelation();
@@ -249,7 +249,7 @@ public class SampleGenerator {
 		sTimeRel1.setTarget(documentStructure.getTimeline());
 		sTimeRel1.setStart(9);
 		sTimeRel1.setEnd(10);
-		documentStructure.addRelation(sTimeRel1);
+		documentStructure.add(sTimeRel1);
 
 		SToken spk2_tok2 = documentStructure.createToken(text2, 7, 11);
 		STimelineRelation timeRel2 = SaltFactory.createSTimelineRelation();
@@ -257,18 +257,18 @@ public class SampleGenerator {
 		timeRel2.setTarget(documentStructure.getTimeline());
 		timeRel2.setStart(10);
 		timeRel2.setEnd(11);
-		documentStructure.addRelation(timeRel2);
+		documentStructure.add(timeRel2);
 
 		// add SOrderRelations for speaker 2
 		SOrderRelation ord1 = SaltFactory.createSOrderRelation();
 		ord1.setSource(spk2_tok0);
 		ord1.setTarget(spk2_tok1);
-		documentStructure.addRelation(ord1);
+		documentStructure.add(ord1);
 
 		SOrderRelation ord2 = SaltFactory.createSOrderRelation();
 		ord2.setSource(spk2_tok1);
 		ord2.setTarget(spk2_tok2);
-		documentStructure.addRelation(ord2);
+		documentStructure.add(ord2);
 	}
 
 	/**
@@ -318,7 +318,7 @@ public class SampleGenerator {
 			textualDS.setText(PRIMARY_TEXT_DE);
 		}
 		// adding the text to the document-graph
-		document.getDocumentGraph().addNode(textualDS);
+		document.getDocumentGraph().add(textualDS);
 		// creating the primary text depending on the language
 		return (textualDS);
 	}
@@ -410,7 +410,7 @@ public class SampleGenerator {
 		// named "morphology" is created and the tokens will be added to it
 		SLayer morphLayer = SaltFactory.createSLayer();
 		morphLayer.setName(MORPHOLOGY_LAYER);
-		documentStructure.addLayer(morphLayer);
+		documentStructure.add(morphLayer);
 
 		List<SToken> retVal = new Vector<SToken>();
 
@@ -438,7 +438,7 @@ public class SampleGenerator {
 			retVal.add(documentStructure.createToken(textualDS, 49, 56));// scheint
 			retVal.add(documentStructure.createToken(textualDS, 56, 57));// ?
 		}
-		morphLayer.addNodes(retVal);
+		morphLayer.add(retVal);
 		return (retVal);
 	}
 
@@ -617,7 +617,7 @@ public class SampleGenerator {
 			for (int i = 0; i < tokens.size(); i++) {
 				posAnno = SaltFactory.createSPOSAnnotation();
 				posAnno.setValue(posAnnotations[i]);
-				tokens.get(i).addAnnotation(posAnno);
+				tokens.get(i).add(posAnno);
 			}
 		} // adding part-of speech annotations
 
@@ -631,7 +631,7 @@ public class SampleGenerator {
 			for (int i = 0; i < tokens.size(); i++) {
 				lemmaAnno = SaltFactory.createSLemmaAnnotation();
 				lemmaAnno.setValue(posAnnotations[i]);
-				tokens.get(i).addAnnotation(lemmaAnno);
+				tokens.get(i).add(lemmaAnno);
 			}
 		} // adding lemma annotations
 
@@ -685,7 +685,7 @@ public class SampleGenerator {
 		span = SaltFactory.createSSpan();
 		span.setName("IS_span1");
 		// adding the created span to the document-graph
-		document.getDocumentGraph().addNode(span);
+		document.getDocumentGraph().add(span);
 		// creating an annotation for information-structure
 		// creating a relation to connect a token with the span
 		spanRel = SaltFactory.createSSpanningRelation();
@@ -694,16 +694,16 @@ public class SampleGenerator {
 		// setting the first token as target of the relation
 		spanRel.setTarget(sTokens.get(0));
 		// adding the created relation to the document-graph
-		document.getDocumentGraph().addRelation(spanRel);
+		document.getDocumentGraph().add(spanRel);
 
 		span = SaltFactory.createSSpan();
 		span.setName("IS_span2");
-		document.getDocumentGraph().addNode(span);
+		document.getDocumentGraph().add(span);
 		for (int i = 1; i < sTokens.size(); i++) {
 			spanRel = SaltFactory.createSSpanningRelation();
 			spanRel.setSource(span);
 			spanRel.setTarget(sTokens.get(i));
-			document.getDocumentGraph().addRelation(spanRel);
+			document.getDocumentGraph().add(spanRel);
 		}
 	}
 
@@ -734,12 +734,12 @@ public class SampleGenerator {
 		// setting the value of the annotation
 		anno.setValue("contrast-focus");
 		// adding the annotation to the placeholder span
-		document.getDocumentGraph().getSpans().get(0).addAnnotation(anno);
+		document.getDocumentGraph().getSpans().get(0).add(anno);
 
 		anno = SaltFactory.createSAnnotation();
 		anno.setName("Inf-Struct");
 		anno.setValue("topic");
-		document.getDocumentGraph().getSpans().get(1).addAnnotation(anno);
+		document.getDocumentGraph().getSpans().get(1).add(anno);
 	}
 
 	/**
@@ -809,42 +809,42 @@ public class SampleGenerator {
 		SALT_TYPE domRel = SALT_TYPE.SDOMINANCE_RELATION;
 
 		// adding the root SNode to the SDocumentGraph
-		docGraph.addNode(root);
+		docGraph.add(root);
 
 		// adding the target nodes to the SDocumentGraph and creating
 		// SDominanceRelations between the respective nodes
 		// (addNode returns the created SDominanceRelation, but it it not used
 		// here)
-		docGraph.addNode(root, sq, domRel);
-		docGraph.addNode(sq, tokens.get(0), domRel); // "Is"
-		docGraph.addNode(sq, np1, domRel);
-		docGraph.addNode(np1, tokens.get(1), domRel); // "this"
-		docGraph.addNode(np1, tokens.get(2), domRel); // "example"
-		docGraph.addNode(sq, adjp1, domRel);
-		docGraph.addNode(adjp1, adjp2, domRel);
-		docGraph.addNode(adjp2, tokens.get(3), domRel); // "more"
-		docGraph.addNode(adjp2, tokens.get(4), domRel); // "complicated"
-		docGraph.addNode(adjp1, sbar, domRel);
-		docGraph.addNode(sbar, tokens.get(5), domRel); // "than"
-		docGraph.addNode(sbar, s1, domRel);
-		docGraph.addNode(s1, np2, domRel);
-		docGraph.addNode(np2, tokens.get(6), domRel); // "it"
-		docGraph.addNode(s1, vp1, domRel);
-		docGraph.addNode(vp1, tokens.get(7), domRel); // "appears"
-		docGraph.addNode(vp1, s2, domRel);
-		docGraph.addNode(s2, vp2, domRel);
-		docGraph.addNode(vp2, tokens.get(8), domRel); // "to"
-		docGraph.addNode(vp2, vp3, domRel);
-		docGraph.addNode(vp3, tokens.get(9), domRel); // "be"
-		docGraph.addNode(root, tokens.get(10), domRel); // "?"
+		docGraph.add(root, sq, domRel);
+		docGraph.add(sq, tokens.get(0), domRel); // "Is"
+		docGraph.add(sq, np1, domRel);
+		docGraph.add(np1, tokens.get(1), domRel); // "this"
+		docGraph.add(np1, tokens.get(2), domRel); // "example"
+		docGraph.add(sq, adjp1, domRel);
+		docGraph.add(adjp1, adjp2, domRel);
+		docGraph.add(adjp2, tokens.get(3), domRel); // "more"
+		docGraph.add(adjp2, tokens.get(4), domRel); // "complicated"
+		docGraph.add(adjp1, sbar, domRel);
+		docGraph.add(sbar, tokens.get(5), domRel); // "than"
+		docGraph.add(sbar, s1, domRel);
+		docGraph.add(s1, np2, domRel);
+		docGraph.add(np2, tokens.get(6), domRel); // "it"
+		docGraph.add(s1, vp1, domRel);
+		docGraph.add(vp1, tokens.get(7), domRel); // "appears"
+		docGraph.add(vp1, s2, domRel);
+		docGraph.add(s2, vp2, domRel);
+		docGraph.add(vp2, tokens.get(8), domRel); // "to"
+		docGraph.add(vp2, vp3, domRel);
+		docGraph.add(vp3, tokens.get(9), domRel); // "be"
+		docGraph.add(root, tokens.get(10), domRel); // "?"
 
 		// creating a layer named "syntax" for the constituents of the tree
 		SLayer syntaxLayer = SaltFactory.createSLayer();
 		syntaxLayer.setName(SYNTAX_LAYER);
-		docGraph.addLayer(syntaxLayer);
+		docGraph.add(syntaxLayer);
 
 		// adding the constituents to the syntax layer
-		syntaxLayer.addNodes(Arrays.asList(root, sq, np1, adjp1, adjp2, sbar, s1, np2, vp1, s2, vp2, vp3));
+		syntaxLayer.add(Arrays.asList(root, sq, np1, adjp1, adjp2, sbar, s1, np2, vp1, s2, vp2, vp3));
 	}
 
 	/**
@@ -903,7 +903,7 @@ public class SampleGenerator {
 		SLayer depLayer = SaltFactory.createSLayer();
 		depLayer.setName("dependencies");
 		depLayer.createMetaAnnotation(null, "tagset", "penn treebank");
-		document.getDocumentGraph().addLayer(depLayer);
+		document.getDocumentGraph().add(depLayer);
 
 		/*
 		 * -- create dependency annotation (PennTreebank scheme) for EXPECTED
@@ -915,72 +915,72 @@ public class SampleGenerator {
 		depRel.setSource(tokens.get(4));
 		depRel.setTarget(tokens.get(0));
 		depRel.createAnnotation(null, "dependency", "cop");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 
 		// det(example-3, this-2) "this"
 		depRel = SaltFactory.createSPointingRelation();
 		depRel.setSource(tokens.get(2));
 		depRel.setTarget(tokens.get(1));
 		depRel.createAnnotation(null, "dependency", "det");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 
 		// nsubj(complicated-5, example-3) "example"
 		depRel = SaltFactory.createSPointingRelation();
 		depRel.setSource(tokens.get(4));
 		depRel.setTarget(tokens.get(2));
 		depRel.createAnnotation(null, "dependency", "nsubj");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 
 		// advmod(complicated-5, more-4) "more"
 		depRel = SaltFactory.createSPointingRelation();
 		depRel.setSource(tokens.get(4));
 		depRel.setTarget(tokens.get(3));
 		depRel.createAnnotation(null, "dependency", "advmod");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 
 		// mark(appears-8, than-6) "than"
 		depRel = SaltFactory.createSPointingRelation();
 		depRel.setSource(tokens.get(7));
 		depRel.setTarget(tokens.get(5));
 		depRel.createAnnotation(null, "dependency", "mark");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 
 		// nsubj(appears-8, it-7) "it"
 		depRel = SaltFactory.createSPointingRelation();
 		depRel.setSource(tokens.get(7));
 		depRel.setTarget(tokens.get(6));
 		depRel.createAnnotation(null, "dependency", "nsubj");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 
 		// advcl(complicated-5, appears-8) "appears"
 		depRel = SaltFactory.createSPointingRelation();
 		depRel.setSource(tokens.get(4));
 		depRel.setTarget(tokens.get(7));
 		depRel.createAnnotation(null, "dependency", "advcl");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 
 		// aux(be-10, to-9) "to"
 		depRel = SaltFactory.createSPointingRelation();
 		depRel.setSource(tokens.get(9));
 		depRel.setTarget(tokens.get(8));
 		depRel.createAnnotation(null, "dependency", "aux");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 
 		// xcomp(appears-8, be-10) "be"
 		depRel = SaltFactory.createSPointingRelation();
 		depRel.setSource(tokens.get(7));
 		depRel.setTarget(tokens.get(9));
 		depRel.createAnnotation(null, "dependency", "xcomp");
-		docGraph.addRelation(depRel);
-		depLayer.addRelation(depRel);
+		docGraph.add(depRel);
+		depLayer.add(depRel);
 	}
 
 	/**
@@ -1009,7 +1009,7 @@ public class SampleGenerator {
 		// setting span "this example" as target of this relation
 		pointingRelation.setTarget(span);
 		// adding the created relation to the document-graph
-		document.getDocumentGraph().addRelation(pointingRelation);
+		document.getDocumentGraph().add(pointingRelation);
 		// adding the type to the relation
 		pointingRelation.setType("anaphoric");
 		// creating an anaphoric relation with the use of pointing relations

@@ -65,8 +65,8 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<? extends N, ?
 	 * {@inheritDoc} Notifies all registered listeners.
 	 **/
 	@Override
-	public void addLabel(Label label) {
-		super.addLabel(label);
+	public void add(Label label) {
+		super.add(label);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LAYER_LABELS, null,
 					label, this);
@@ -101,8 +101,8 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<? extends N, ?
 	// ==========================================< label handling
 
 	@Override
-	public void addNode(N node) {
-		super.addNode(node);
+	public void add(N node) {
+		super.add(node);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LAYER_NODES, null,
 					node, this);
@@ -119,8 +119,8 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<? extends N, ?
 	}
 
 	@Override
-	public void addRelation(R relation) {
-		super.addRelation(relation);
+	public void add(R relation) {
+		super.add(relation);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LAYER_RELATIONS, null,
 					relation, this);

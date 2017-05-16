@@ -30,7 +30,6 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
-import org.corpus_tools.salt.core.impl.GraphTraverserModule;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Label;
@@ -826,28 +825,28 @@ public class GraphTraverserModuleTest {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("graph1");
 		SNode node1 = SaltFactory.createSNode();
-		graph.addNode(node1);
+		graph.add(node1);
 		SNode node2 = SaltFactory.createSNode();
-		graph.addNode(node2);
+		graph.add(node2);
 		SNode node3 = SaltFactory.createSNode();
-		graph.addNode(node3);
+		graph.add(node3);
 
 		SRelation<SNode, SNode> edge1 = SaltFactory.createSRelation();
 		edge1.setSource(node1);
 		edge1.setTarget(node2);
-		graph.addRelation(edge1);
+		graph.add(edge1);
 		SRelation<SNode, SNode> edge2 = SaltFactory.createSRelation();
 		edge2.setSource(node2);
 		edge2.setTarget(node3);
-		graph.addRelation(edge2);
+		graph.add(edge2);
 		SRelation<SNode, SNode> edge3 = SaltFactory.createSRelation();
 		edge3.setSource(node3);
 		edge3.setTarget(node2);
 		Label label = GraphFactory.createLabel();
 		label.setName("name");
 		label.setValue("notCheck");
-		edge3.addLabel(label);
-		graph.addRelation(edge3);
+		edge3.add(label);
+		graph.add(edge3);
 
 		GraphTraverseHandler graphTraverseHandler = new GraphTraverseHandler() {
 			@Override

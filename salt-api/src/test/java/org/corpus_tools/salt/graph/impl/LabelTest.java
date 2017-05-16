@@ -25,7 +25,6 @@ import static org.junit.Assert.fail;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
-import org.corpus_tools.salt.graph.impl.LabelableElementImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -248,7 +247,7 @@ public class LabelTest {
 		};
 		getFixture().setQName("labelName");
 		assertNull(getFixture().getContainer());
-		container.addLabel(getFixture());
+		container.add(getFixture());
 		assertEquals(container, getFixture().getContainer());
 	}
 
@@ -265,12 +264,12 @@ public class LabelTest {
 		};
 		LabelableElement container2 = new LabelableElementImpl() {
 		};
-		container1.addLabel(getFixture());
+		container1.add(getFixture());
 		assertTrue(container1.containsLabel(getFixture().getQName()));
 		assertEquals(container1, getFixture().getContainer());
 
 		// move label
-		container2.addLabel(getFixture());
+		container2.add(getFixture());
 		assertTrue(container2.containsLabel(getFixture().getQName()));
 		assertEquals(Integer.valueOf(0), container1.sizeLabels());
 		assertEquals(container2, getFixture().getContainer());
