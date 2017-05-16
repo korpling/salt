@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.corpus_tools.salt.SDATATYPE;
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.core.AnnotationFinder;
 import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;

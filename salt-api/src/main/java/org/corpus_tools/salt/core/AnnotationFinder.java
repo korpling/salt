@@ -1,12 +1,10 @@
-package org.corpus_tools.salt.core.impl;
+package org.corpus_tools.salt.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.corpus_tools.salt.core.SAbstractAnnotation;
-import org.corpus_tools.salt.core.SAnnotationContainer;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.util.SaltUtil;
 

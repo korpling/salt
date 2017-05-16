@@ -20,6 +20,7 @@ package org.corpus_tools.salt.core.impl;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.corpus_tools.salt.core.AnnotationFinder;
 import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;

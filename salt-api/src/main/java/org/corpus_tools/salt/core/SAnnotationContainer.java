@@ -20,7 +20,6 @@ package org.corpus_tools.salt.core;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.corpus_tools.salt.core.impl.AnnotationFinder;
 import org.corpus_tools.salt.graph.LabelableElement;
 
 /**

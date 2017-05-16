@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.corpus_tools.salt.SALT_TYPE;
+import org.corpus_tools.salt.core.AnnotationFinder;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
