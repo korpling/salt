@@ -20,6 +20,7 @@ package org.corpus_tools.salt.core.impl;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SLayer;
@@ -261,6 +262,16 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? ex
 		} else {
 			super.addLabel(label);
 		}
+	}
+
+	@Override
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
+		return new AnnotationFinder<>(resultType, this);
+	}
+
+	@Override
+	public void add(SAbstractAnnotation annotation) {
+		addLabel(annotation);
 	}
 
 	// =======================================< SNamedElement

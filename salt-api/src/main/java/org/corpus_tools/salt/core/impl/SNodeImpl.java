@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SGraph;
@@ -58,10 +59,10 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public SNodeImpl(Node delegate) {
 		super(delegate);
 	}
-	
+
 	@Override
 	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
-		if(graph != null && getDelegate() == null && !(graph instanceof SGraph)) {
+		if (graph != null && getDelegate() == null && !(graph instanceof SGraph)) {
 			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SGraph.");
 		}
 		super.basicSetGraph(graph);
@@ -78,8 +79,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		List<SRelation<?, ?>> outRelations = getGraph().getOutRelations(getId());
 		if (outRelations != null) {
 			// TODO: do we really have to do a copy here any longer?
-			List<SRelation<?,?>> sOutRelList = new ArrayList<>();
-			for (SRelation<?,?> rel : outRelations) {
+			List<SRelation<?, ?>> sOutRelList = new ArrayList<>();
+			for (SRelation<?, ?> rel : outRelations) {
 				sOutRelList.add(rel);
 			}
 			return sOutRelList;
@@ -91,15 +92,15 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * {@inheritDoc SNode#getIncomingSRelations()}
 	 */
 	@Override
-	public List<SRelation<? extends SNode,? extends SNode>> getInRelations() {
+	public List<SRelation<? extends SNode, ? extends SNode>> getInRelations() {
 		if (getGraph() == null) {
 			return null;
 		}
 		List<SRelation<?, ?>> inRelations = getGraph().getInRelations(getId());
 		if (inRelations != null) {
 			// TODO: do we really have to do a copy here any longer?
-			List<SRelation<?,?>> sInRelList = new ArrayList<>();
-			for (SRelation<?,?> rel : inRelations) {
+			List<SRelation<?, ?>> sInRelList = new ArrayList<>();
+			for (SRelation<?, ?> rel : inRelations) {
 				sInRelList.add(rel);
 			}
 			return sInRelList;
@@ -338,7 +339,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	/** {@inheritDoc} **/
 	@Override
 	public SGraph getGraph() {
-		Graph<?,?,?> superGraph = super.getGraph();
+		Graph<?, ?, ?> superGraph = super.getGraph();
 		if (superGraph == null) {
 			return null;
 		}
@@ -350,4 +351,13 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				"Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
 	}
 
+	@Override
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
+		return new AnnotationFinder<>(resultType, this);
+	}
+
+	@Override
+	public void add(SAbstractAnnotation annotation) {
+		addLabel(annotation);
+	}
 }

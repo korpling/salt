@@ -55,7 +55,9 @@ public interface LabelableElement extends Serializable {
 	 * @param name
 	 *            name of the {@link Label} to be searched for
 	 * @return {@link Label} object
+	 * @deprecated will be removed with Salt 5.0.
 	 */
+	@Deprecated
 	public Label getLabel(String namespace, String name);
 
 	/**
@@ -67,6 +69,20 @@ public interface LabelableElement extends Serializable {
 	 * @return {@link Label} object
 	 */
 	public Label getLabel(String qName);
+
+	/**
+	 * Returns a set containing all Label objects having the given namespace. If
+	 * no such {@link Label} was found or the passed namespace was empty, an
+	 * empty list is returned.
+	 * 
+	 * @param ns
+	 *            the namespace of Label objects to be looked for.
+	 * @return a list of Label objects if this object contains Label objects
+	 *         having the given namespace, null otherwise.
+	 * @deprecated will be removed with Salt 5.0.
+	 */
+	@Deprecated
+	public Set<Label> getLabelsByNamespace(String namespace);
 
 	/**
 	 * Removes the label having the passed qName.
@@ -85,25 +101,15 @@ public interface LabelableElement extends Serializable {
 	 *            the namespace of the object to be removed
 	 * @param name
 	 *            the name of the object to be removed
+	 * @deprecated Will be removed with Salt 5.0.
 	 */
+	@Deprecated
 	public void removeLabel(String namespace, String name);
 
 	/**
 	 * Removes all {@link Label} objects.
 	 */
 	public void removeAll();
-
-	/**
-	 * Returns a set containing all Label objects having the given namespace. If
-	 * no such {@link Label} was found or the passed namespace was empty, an
-	 * empty list is returned.
-	 * 
-	 * @param ns
-	 *            the namespace of Label objects to be looked for.
-	 * @return a list of Label objects if this object contains Label objects
-	 *         having the given namespace, null otherwise.
-	 */
-	public Set<Label> getLabelsByNamespace(String namespace);
 
 	/**
 	 * Checks if this object has a Label object in its list having the given

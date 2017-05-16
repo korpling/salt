@@ -214,6 +214,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public void addAnnotation(SAnnotation annotation) {
 		SAnnotationContainerHelper.addAnnotation(this, annotation);
 	}
@@ -247,6 +248,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	// =======================================> SMetaAnnotation
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public void addMetaAnnotation(SMetaAnnotation metaAnnotation) {
 		SAnnotationContainerHelper.addMetaAnnotation(this, metaAnnotation);
 	}
@@ -294,6 +296,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public void addProcessingAnnotation(SProcessingAnnotation annotation) {
 		SAnnotationContainerHelper.addProcessingAnnotation(this, annotation);
 	}
@@ -332,6 +335,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public void addFeature(SFeature feature) {
 		SAnnotationContainerHelper.addFeature(this, feature);
 	}
@@ -358,5 +362,15 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public Iterator<SFeature> iterator_SFeature() {
 		return (SAnnotationContainerHelper.iterator_SFeature(this));
 	}
+
 	// =======================================< SFeature
+	@Override
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
+		return new AnnotationFinder<>(resultType, this);
+	}
+
+	@Override
+	public void add(SAbstractAnnotation annotation) {
+		super.addLabel(annotation);
+	}
 }

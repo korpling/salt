@@ -17,6 +17,12 @@
  */
 package org.corpus_tools.salt.graph.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.Vector;
@@ -24,14 +30,10 @@ import java.util.Vector;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
-import org.corpus_tools.salt.graph.impl.LabelableElementImpl;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class LabelableElementTest extends TestCase {
+public class LabelableElementTest {
 
 	protected LabelableElement fixture = null;
 
@@ -50,11 +52,6 @@ public class LabelableElementTest extends TestCase {
 
 	static class MyLabelableElement extends LabelableElementImpl {
 		private static final long serialVersionUID = 1L;
-	}
-
-	@After
-	protected void tearDown() throws Exception {
-		setFixture(null);
 	}
 
 	/**
