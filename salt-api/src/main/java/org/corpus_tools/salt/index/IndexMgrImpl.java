@@ -28,8 +28,8 @@ import org.corpus_tools.salt.exceptions.SaltException;
 
 import com.google.common.collect.Multimap;
 
-@SuppressWarnings("serial")
 public class IndexMgrImpl extends IndexMgrBase implements IndexMgr {
+	private static final long serialVersionUID = 4911375442102018598L;
 	private final ReadWriteLock lock = new ReentrantReadWriteLock();
 	private final boolean threadSafe;
 

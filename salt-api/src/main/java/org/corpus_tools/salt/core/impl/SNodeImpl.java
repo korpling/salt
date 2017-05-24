@@ -41,8 +41,9 @@ import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
-@SuppressWarnings("serial")
 public class SNodeImpl extends NodeImpl implements SNode {
+	private static final long serialVersionUID = 1629363989692575787L;
+
 	/** Initializes an object of type {@link SNodeImpl}. **/
 	public SNodeImpl() {
 	}
@@ -58,10 +59,10 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	public SNodeImpl(Node delegate) {
 		super(delegate);
 	}
-	
+
 	@Override
 	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
-		if(graph != null && getDelegate() == null && !(graph instanceof SGraph)) {
+		if (graph != null && getDelegate() == null && !(graph instanceof SGraph)) {
 			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SGraph.");
 		}
 		super.basicSetGraph(graph);
@@ -78,8 +79,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 		List<SRelation<?, ?>> outRelations = getGraph().getOutRelations(getId());
 		if (outRelations != null) {
 			// TODO: do we really have to do a copy here any longer?
-			List<SRelation<?,?>> sOutRelList = new ArrayList<>();
-			for (SRelation<?,?> rel : outRelations) {
+			List<SRelation<?, ?>> sOutRelList = new ArrayList<>();
+			for (SRelation<?, ?> rel : outRelations) {
 				sOutRelList.add(rel);
 			}
 			return sOutRelList;
@@ -91,15 +92,15 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	 * {@inheritDoc SNode#getIncomingSRelations()}
 	 */
 	@Override
-	public List<SRelation<? extends SNode,? extends SNode>> getInRelations() {
+	public List<SRelation<? extends SNode, ? extends SNode>> getInRelations() {
 		if (getGraph() == null) {
 			return null;
 		}
 		List<SRelation<?, ?>> inRelations = getGraph().getInRelations(getId());
 		if (inRelations != null) {
 			// TODO: do we really have to do a copy here any longer?
-			List<SRelation<?,?>> sInRelList = new ArrayList<>();
-			for (SRelation<?,?> rel : inRelations) {
+			List<SRelation<?, ?>> sInRelList = new ArrayList<>();
+			for (SRelation<?, ?> rel : inRelations) {
 				sInRelList.add(rel);
 			}
 			return sInRelList;
@@ -338,7 +339,7 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	/** {@inheritDoc} **/
 	@Override
 	public SGraph getGraph() {
-		Graph<?,?,?> superGraph = super.getGraph();
+		Graph<?, ?, ?> superGraph = super.getGraph();
 		if (superGraph == null) {
 			return null;
 		}

@@ -44,8 +44,9 @@ import org.eclipse.emf.common.util.URI;
 
 import com.google.common.base.Strings;
 
-@SuppressWarnings("serial")
 public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
+	private static final long serialVersionUID = -2328431914179798919L;
+
 	/** Initializes an object of type {@link SGraphImpl}. **/
 	public SCorpusGraphImpl() {
 	}

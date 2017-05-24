@@ -28,8 +28,8 @@ import org.corpus_tools.salt.graph.Relation;
  * source or target, a {@link Relation} cannot be added to a {@link Graph} or a
  * {@link Label} cannot be added to a {@link Node} etc. .
  */
-@SuppressWarnings("serial")
 public class SaltInsertionException extends java.lang.RuntimeException {
+	private static final long serialVersionUID = 4829415933931345770L;
 
 	/**
 	 * Initializes an object of this exception class.

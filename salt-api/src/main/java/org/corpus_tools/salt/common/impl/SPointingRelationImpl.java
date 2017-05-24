@@ -26,9 +26,10 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
-@SuppressWarnings("serial")
 public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode>
 		implements SPointingRelation {
+	private static final long serialVersionUID = -6830972137754063912L;
+
 	/** Initializes an object of type {@link SPointingRelationImpl}. **/
 	public SPointingRelationImpl() {
 		this(null);

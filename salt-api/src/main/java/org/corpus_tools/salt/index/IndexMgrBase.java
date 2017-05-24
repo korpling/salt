@@ -9,24 +9,22 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
-@SuppressWarnings("serial")
 public abstract class IndexMgrBase implements Serializable {
-	
-	
-	private static class IndexHolder<K, V> implements Serializable {
+	private static final long serialVersionUID = -2322083020020859992L;
 
+	private static class IndexHolder<K, V> implements Serializable {
+		private static final long serialVersionUID = -6885348578763471655L;
 		final Multimap<K, V> map;
-		final IndexID<K,V> indexId;
-		
-		public IndexHolder(IndexID<K,V> indexId,
-				int expectedKeys, int expectedValuesPerKey) {
-			
-			if (indexId== null){
+		final IndexID<K, V> indexId;
+
+		public IndexHolder(IndexID<K, V> indexId, int expectedKeys, int expectedValuesPerKey) {
+
+			if (indexId == null) {
 				throw new IllegalArgumentException("Cannot create Index with empty index ID. ");
 			}
 
 			this.indexId = indexId;
-			
+
 			if ((expectedKeys > 0) && (expectedValuesPerKey > 0)) {
 				this.map = ArrayListMultimap.create(expectedKeys, expectedValuesPerKey);
 			} else {
@@ -34,72 +32,74 @@ public abstract class IndexMgrBase implements Serializable {
 			}
 		}
 	}
-	
-	private final Map<IndexID<?,?>, IndexHolder<?,?>> indexes;
-	
+
+	private final Map<IndexID<?, ?>, IndexHolder<?, ?>> indexes;
+
 	public IndexMgrBase() {
 		this.indexes = Maps.newHashMap();
 	}
 
-	protected<K,V> Multimap<K,V >getIdx(IndexID<K,V> indexId) {
-		
-		IndexHolder<?,?> untypedIdx = indexes.get(indexId);
-		
-		if(untypedIdx == null) {
+	protected <K, V> Multimap<K, V> getIdx(IndexID<K, V> indexId) {
+
+		IndexHolder<?, ?> untypedIdx = indexes.get(indexId);
+
+		if (untypedIdx == null) {
 			return null;
 		}
-		
-		if(untypedIdx.indexId.getKeyClass().isAssignableFrom(indexId.getKeyClass()) 
+
+		if (untypedIdx.indexId.getKeyClass().isAssignableFrom(indexId.getKeyClass())
 				&& untypedIdx.indexId.getValueClass().isAssignableFrom(indexId.getValueClass())) {
-			// We can safely cast this since we checked both classes are compatible
-			// and the createIdx(...) function makes sure that the key and value types are synchronized.
+			// We can safely cast this since we checked both classes are
+			// compatible
+			// and the createIdx(...) function makes sure that the key and value
+			// types are synchronized.
 			@SuppressWarnings("unchecked")
-			IndexHolder<K,V> typedIdx = (IndexHolder<K,V>) untypedIdx;
+			IndexHolder<K, V> typedIdx = (IndexHolder<K, V>) untypedIdx;
 			return typedIdx.map;
-		} 
+		}
 		return null;
 	}
-	
-	protected<V> List<Multimap<?,V>> getIdxForValueType(Class<V> valueClass) {
-		
+
+	protected <V> List<Multimap<?, V>> getIdxForValueType(Class<V> valueClass) {
+
 		List<Multimap<?, V>> result = new ArrayList<>();
-		
-		for(IndexHolder<?, ?> indexHolder : indexes.values()) {
+
+		for (IndexHolder<?, ?> indexHolder : indexes.values()) {
 			if (valueClass.isAssignableFrom(indexHolder.indexId.getValueClass())) {
 				@SuppressWarnings("unchecked")
 				Multimap<?, V> typedMap = (Multimap<?, V>) indexHolder.map;
 				result.add(typedMap);
 			}
 		}
-		
+
 		return result;
 	}
-	
-	protected<K,V> boolean createIdx(IndexID<K,V> indexId, int expectedKeys, int expectedValuesPerKey) {
-		
+
+	protected <K, V> boolean createIdx(IndexID<K, V> indexId, int expectedKeys, int expectedValuesPerKey) {
+
 		IndexHolder<K, V> idx = new IndexHolder<>(indexId, expectedKeys, expectedValuesPerKey);
 		return indexes.put(indexId, idx) == null;
 	}
-	
-	protected boolean containsIdx(IndexID<?,?> indexId) {
+
+	protected boolean containsIdx(IndexID<?, ?> indexId) {
 		return indexes.containsKey(indexId);
 	}
-	
-	protected boolean removeIdx(IndexID<?,?> indexId) {
+
+	protected boolean removeIdx(IndexID<?, ?> indexId) {
 		return indexes.remove(indexId) == null;
 	}
-	
+
 	protected void clear() {
 		indexes.clear();
 	}
-	
+
 	/**
 	 * 
 	 */
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		for (Map.Entry<IndexID<?,?>, IndexHolder<?,?>> indexEntry : indexes.entrySet()) {
+		for (Map.Entry<IndexID<?, ?>, IndexHolder<?, ?>> indexEntry : indexes.entrySet()) {
 			str.append(indexEntry.getKey());
 			str.append(": ");
 			str.append(indexEntry.getValue().map);

@@ -23,8 +23,9 @@ import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
 import org.corpus_tools.salt.graph.Relation;
 
-@SuppressWarnings("serial")
 public class SCorpusDocumentRelationImpl extends SRelationImpl<SCorpus, SDocument> implements SCorpusDocumentRelation {
+	private static final long serialVersionUID = -5354464203265664210L;
+
 	/** Initializes an object of type {@link SCorpusDocumentRelationImpl}. **/
 	public SCorpusDocumentRelationImpl() {
 		this(null);

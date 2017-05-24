@@ -40,9 +40,9 @@ import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
-@SuppressWarnings("serial")
 public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImpl<S, T> implements SRelation<S, T> {
-	
+	private static final long serialVersionUID = 7909530141295800919L;
+
 	/** Initializes an object of type {@link SRelationImpl}. **/
 	public SRelationImpl(Class<S> sourceClass, Class<T> targetClass) {
 		super(sourceClass, targetClass);
@@ -56,7 +56,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SRelationImpl(Relation<S,T> delegate, Class<S> sourceClass, Class<T> targetClass) {
+	public SRelationImpl(Relation<S, T> delegate, Class<S> sourceClass, Class<T> targetClass) {
 		super(delegate, sourceClass, targetClass);
 	}
 
@@ -303,7 +303,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 
 	@Override
 	public SGraph getGraph() {
-		Graph<?,?,?> superGraph = super.getGraph();
+		Graph<?, ?, ?> superGraph = super.getGraph();
 		if (superGraph == null) {
 			return null;
 		}
@@ -311,17 +311,18 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 		if (superGraph instanceof SGraph) {
 			return (SGraph) superGraph;
 		}
-		throw new SaltInvalidModelException("Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
+		throw new SaltInvalidModelException(
+				"Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
 	}
-	
+
 	@Override
 	protected void basicSetGraph(Graph<? extends Node, ?, ?> graph) {
-		if(graph != null  && getDelegate() == null && !(graph instanceof SGraph)) {
+		if (graph != null && getDelegate() == null && !(graph instanceof SGraph)) {
 			throw new SaltParameterException("graph", "basicSetGraph", getClass(), "Must be of type SGraph.");
 		}
 		super.basicSetGraph(graph);
 	}
-	
+
 	@Override
 	public Set<SLayer> getLayers() {
 		Set<SLayer> layers = new HashSet<>();
@@ -329,7 +330,7 @@ public class SRelationImpl<S extends SNode, T extends SNode> extends RelationImp
 			Set<SLayer> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
 				for (SLayer layer : allLayers) {
-					if (layer.getRelations().contains((SRelation<?,?>) this)) {
+					if (layer.getRelations().contains((SRelation<?, ?>) this)) {
 						layers.add(layer);
 					}
 				}

@@ -28,10 +28,9 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class LayerImpl<N extends Node, R extends Relation<? extends N, ? extends N>> extends IdentifiableElementImpl
 		implements Layer<N, R> {
-
+	private static final long serialVersionUID = 6725386768493687687L;
 	private Set<N> nodes = null;
 	private Set<R> relations = null;
 

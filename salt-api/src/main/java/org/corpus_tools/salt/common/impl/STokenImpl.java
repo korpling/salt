@@ -26,8 +26,9 @@ import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
-@SuppressWarnings("serial")
 public class STokenImpl extends SNodeImpl implements SToken, SStructuredNode {
+	private static final long serialVersionUID = 221564335781420391L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public STokenImpl() {
 	}

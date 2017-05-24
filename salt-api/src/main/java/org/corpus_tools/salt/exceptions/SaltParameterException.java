@@ -21,8 +21,9 @@ package org.corpus_tools.salt.exceptions;
  * This exception class is thrown, when a wrong parameter was passed to a method
  * in the Salt api.
  */
-@SuppressWarnings("serial")
 public class SaltParameterException extends SaltException {
+	private static final long serialVersionUID = -7709429063615430790L;
+
 	public SaltParameterException(String parameterName, String methodName, Class<? extends Object> clazz) {
 		this(parameterName, methodName, clazz, null);
 	}

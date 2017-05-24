@@ -64,8 +64,9 @@ import org.corpus_tools.salt.util.internal.Diff;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 
-@SuppressWarnings("serial")
 public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
+	private static final long serialVersionUID = 4039963324991110610L;
+
 	/** Initializes an object of type {@link SDocumentGraphImpl}. **/
 	public SDocumentGraphImpl() {
 		super();

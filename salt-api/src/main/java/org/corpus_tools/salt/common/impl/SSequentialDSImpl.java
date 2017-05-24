@@ -28,9 +28,8 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl implements SSequentialDS<D, P> {
-
+	private static final long serialVersionUID = 3781203806307359L;
 	private final Class<D> dataClass;
 
 	/** Initializes an object of type {@link SLayerImpl}. **/

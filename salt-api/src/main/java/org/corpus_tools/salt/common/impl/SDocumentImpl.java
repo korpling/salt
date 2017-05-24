@@ -32,8 +32,9 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
-@SuppressWarnings("serial")
 public class SDocumentImpl extends SNodeImpl implements SDocument {
+	private static final long serialVersionUID = -3732018685592077571L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SDocumentImpl() {
 	}

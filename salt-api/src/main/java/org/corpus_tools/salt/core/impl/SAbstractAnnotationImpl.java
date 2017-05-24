@@ -35,8 +35,9 @@ import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
 
-@SuppressWarnings("serial")
 public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbstractAnnotation, SAnnotationContainer {
+	private static final long serialVersionUID = 3129332775619983959L;
+
 	/** Initializes an object of type {@link SAbstractAnnotationImpl}. **/
 	public SAbstractAnnotationImpl() {
 	}

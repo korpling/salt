@@ -28,8 +28,9 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
-@SuppressWarnings("serial")
 public class SSpanningRelationImpl extends SRelationImpl<SSpan, SToken> implements SSpanningRelation {
+	private static final long serialVersionUID = 6802540003634788662L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SSpanningRelationImpl() {
 		this(null);

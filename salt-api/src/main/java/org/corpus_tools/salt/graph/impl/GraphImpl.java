@@ -35,10 +35,9 @@ import org.corpus_tools.salt.index.IndexMgr;
 import org.corpus_tools.salt.index.IndexMgrImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class GraphImpl<N extends Node, R extends Relation<? extends N, ? extends N>, L extends Layer<N, R>>
 		extends IdentifiableElementImpl implements Graph<N, R, L> {
-
+	private static final long serialVersionUID = 523300417198828629L;
 	private final Class<N> nodeClass;
 	private final Class<R> relationClass;
 	private final Class<L> layerClass;

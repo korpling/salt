@@ -21,8 +21,8 @@ package org.corpus_tools.salt.exceptions;
  * This exception class is used, in case of a Salt model is not valid respecting
  * the constraints of Salt.
  */
-@SuppressWarnings("serial")
 public class SaltInvalidModelException extends SaltException {
+	private static final long serialVersionUID = -6738656427991313624L;
 
 	public SaltInvalidModelException() {
 		super();

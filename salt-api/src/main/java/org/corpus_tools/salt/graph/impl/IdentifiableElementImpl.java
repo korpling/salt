@@ -23,8 +23,9 @@ import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public abstract class IdentifiableElementImpl extends LabelableElementImpl implements IdentifiableElement {
+
+	private static final long serialVersionUID = -7291892373997605092L;
 
 	public IdentifiableElementImpl() {
 		super();

@@ -25,8 +25,9 @@ import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.graph.Node;
 
-@SuppressWarnings("serial")
 public class SCorpusImpl extends SNodeImpl implements SCorpus {
+	private static final long serialVersionUID = 2385042214483345604L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SCorpusImpl() {
 	}

@@ -31,9 +31,9 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 
-@SuppressWarnings("serial")
 public class GraphNotifierImpl<N extends Node, R extends Relation<? extends N, ? extends N>, L extends Layer<N, R>>
 		extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
+	private static final long serialVersionUID = -8376747949982437228L;
 
 	public GraphNotifierImpl(Class<N> nodeClass, Class<R> relationClass, Class<L> layerClass) {
 		super(nodeClass, relationClass, layerClass);

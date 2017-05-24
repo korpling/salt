@@ -28,14 +28,14 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.RelationImpl;
 
-@SuppressWarnings("serial")
 public class RelationNotifierImpl<S extends Node, T extends Node> extends RelationImpl<S, T>
 		implements Relation<S, T>, Notifier {
+	private static final long serialVersionUID = -4185214307864903437L;
 
 	public RelationNotifierImpl(Class<S> sourceClass, Class<T> targetClass) {
 		super(sourceClass, targetClass);
 	}
-	
+
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 

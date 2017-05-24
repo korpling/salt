@@ -26,9 +26,8 @@ import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.impl.LabelImpl;
 
-@SuppressWarnings("serial")
 public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
-
+	private static final long serialVersionUID = -6606622369563709034L;
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 

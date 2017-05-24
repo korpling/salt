@@ -20,8 +20,9 @@ package org.corpus_tools.salt.core.impl;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.graph.Label;
 
-@SuppressWarnings("serial")
 public class SMetaAnnotationImpl extends SAbstractAnnotationImpl implements SMetaAnnotation {
+	private static final long serialVersionUID = -5053827853250080682L;
+
 	/** Initializes an object of type {@link SMetaAnnotationImpl}. **/
 	public SMetaAnnotationImpl() {
 	}

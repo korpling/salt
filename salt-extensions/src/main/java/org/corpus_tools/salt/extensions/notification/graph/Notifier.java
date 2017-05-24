@@ -26,9 +26,6 @@ import org.corpus_tools.salt.extensions.notification.Listener;
 /**
  * To all classes implementing this interface a listener can be added. This
  * listener would then be notified about all changes in the object.
- * 
- * @author florian
- *
  */
 @Beta
 public interface Notifier {

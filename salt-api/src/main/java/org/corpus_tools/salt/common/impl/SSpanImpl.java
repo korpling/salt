@@ -26,8 +26,9 @@ import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 
-@SuppressWarnings("serial")
 public class SSpanImpl extends SNodeImpl implements SSpan, SStructuredNode {
+	private static final long serialVersionUID = 1725948965522001509L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SSpanImpl() {
 	}

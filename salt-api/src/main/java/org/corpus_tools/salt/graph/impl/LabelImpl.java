@@ -25,8 +25,8 @@ import org.corpus_tools.salt.graph.LabelableElement;
 import org.corpus_tools.salt.util.Copyable;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class LabelImpl extends LabelableElementImpl implements Label, Copyable<Label> {
+	private static final long serialVersionUID = -7459674334514386831L;
 
 	public LabelImpl() {
 		super();

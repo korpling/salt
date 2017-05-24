@@ -27,9 +27,8 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl.UPDATE_TYPE;
 
-@SuppressWarnings("serial")
 public class RelationImpl<S extends Node, T extends Node> extends IdentifiableElementImpl implements Relation<S, T> {
-
+	private static final long serialVersionUID = -6671362495354520589L;
 	private final Class<S> sourceClass;
 	private final Class<T> targetClass;
 

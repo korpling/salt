@@ -24,9 +24,8 @@ import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 
-@SuppressWarnings("serial")
 public class STextualRelationSStartComparator implements Comparator<STextualRelation>, Serializable {
-
+	private static final long serialVersionUID = 5833213581515490928L;
 	private SDocumentGraph documentGraph = null;
 
 	/**

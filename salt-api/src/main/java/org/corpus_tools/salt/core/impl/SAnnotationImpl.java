@@ -20,8 +20,9 @@ package org.corpus_tools.salt.core.impl;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.graph.Label;
 
-@SuppressWarnings("serial")
 public class SAnnotationImpl extends SAbstractAnnotationImpl implements SAnnotation {
+	private static final long serialVersionUID = -4555434150211247799L;
+
 	/** Initializes an object of type {@link SAnnotationImpl}. **/
 	public SAnnotationImpl() {
 	}

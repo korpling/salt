@@ -26,8 +26,9 @@ import org.corpus_tools.salt.common.tokenizer.Tokenizer;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.graph.Node;
 
-@SuppressWarnings("serial")
 public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implements STextualDS {
+	private static final long serialVersionUID = 7567818231368368807L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public STextualDSImpl() {
 		this(null);

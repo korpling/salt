@@ -21,8 +21,9 @@ import org.corpus_tools.salt.common.STimeline;
 import org.corpus_tools.salt.core.impl.SLayerImpl;
 import org.corpus_tools.salt.graph.Node;
 
-@SuppressWarnings("serial")
 public class STimelineImpl extends SSequentialDSImpl<Integer, Integer> implements STimeline {
+	private static final long serialVersionUID = -3323359309599746398L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public STimelineImpl() {
 		this(null);
