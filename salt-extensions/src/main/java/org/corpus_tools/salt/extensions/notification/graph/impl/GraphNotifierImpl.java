@@ -31,36 +31,32 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 
-@SuppressWarnings("serial")
 public class GraphNotifierImpl<N extends Node, R extends Relation<? extends N, ? extends N>, L extends Layer<N, R>>
 		extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
+	private static final long serialVersionUID = -8376747949982437228L;
 
 	public GraphNotifierImpl(Class<N> nodeClass, Class<R> relationClass, Class<L> layerClass) {
 		super(nodeClass, relationClass, layerClass);
 	}
 
 	// ==========================================> listener list
-	protected List<Listener> listenerList = null;
+	protected transient List<Listener> listenerList = null;
 
-	/** {@inheritDoc} **/
 	@Override
 	public List<Listener> getListener() {
 		return (NotifierHelper.getListener(listenerList));
 	}
 
-	/** {@inheritDoc} **/
 	@Override
 	public synchronized void addListener(Listener listener) {
 		listenerList = NotifierHelper.addListener(listenerList, listener);
 	}
 
-	/** {@inheritDoc} **/
 	@Override
 	public void addListener(Collection<Listener> listener) {
 		listenerList = NotifierHelper.addListener(listenerList, listener);
 	}
 
-	/** {@inheritDoc} **/
 	@Override
 	public synchronized void removeListener(Listener listener) {
 		listenerList = NotifierHelper.removeListener(listenerList, listener);

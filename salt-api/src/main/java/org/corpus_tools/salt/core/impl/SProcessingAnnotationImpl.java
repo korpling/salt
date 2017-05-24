@@ -20,8 +20,9 @@ package org.corpus_tools.salt.core.impl;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 import org.corpus_tools.salt.graph.Label;
 
-@SuppressWarnings("serial")
 public class SProcessingAnnotationImpl extends SAbstractAnnotationImpl implements SProcessingAnnotation {
+	private static final long serialVersionUID = -6685587443510583222L;
+
 	/** Initializes an object of type {@link SProcessingAnnotationImpl}. **/
 	public SProcessingAnnotationImpl() {
 	}

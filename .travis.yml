@@ -1,2 +1,4 @@
 language: java
+jdk:
+  - oraclejdk8
 script: mvn -Dfindbugs.excludeFilterFile=salt-api/src/findbugs/excludeFilter.xml test findbugs:check

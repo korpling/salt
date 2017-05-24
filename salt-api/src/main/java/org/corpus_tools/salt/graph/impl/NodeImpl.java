@@ -25,8 +25,8 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 
-@SuppressWarnings("serial")
 public class NodeImpl extends IdentifiableElementImpl implements Node {
+	private static final long serialVersionUID = -1957504021638096956L;
 
 	/**
 	 * Initializes an object of type {@link Node}.
@@ -59,17 +59,16 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	}
 
 	/** container graph **/
-	protected Graph<?,?,?> graph = null;
+	protected Graph<?, ?, ?> graph = null;
 
 	/** {@inheritDoc Relation#getGraph()} **/
 	@Override
-	public Graph<?,?,?> getGraph() {
+	public Graph<?, ?, ?> getGraph() {
 		if (getDelegate() != null) {
 			return (getDelegate().getGraph());
 		}
 		return (graph);
 	}
-
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
@@ -102,7 +101,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 		}
 		// remove from old graph if it was changed
 		if (getGraph() != graph && getGraph() instanceof GraphImpl) {
-			((GraphImpl<?,?,?>) getGraph()).basicRemoveNode(this);
+			((GraphImpl<?, ?, ?>) getGraph()).basicRemoveNode(this);
 		}
 		this.graph = graph;
 	}
@@ -113,7 +112,7 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph<?,?,?> graph) {
+	protected void basicSetGraph_WithoutRemoving(Graph<?, ?, ?> graph) {
 		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
 			((NodeImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
@@ -124,15 +123,15 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 
 	/** {@inheritDoc} **/
 	@Override
-	public Set<? extends Layer<?,?>> getLayers() {
+	public Set<? extends Layer<?, ?>> getLayers() {
 		if (getDelegate() != null) {
 			return (getDelegate().getLayers());
 		}
-		Set<Layer<?,?>> layers = new HashSet<>();
+		Set<Layer<?, ?>> layers = new HashSet<>();
 		if (getGraph() != null) {
-			Set<? extends Layer<?,?>> allLayers = getGraph().getLayers();
+			Set<? extends Layer<?, ?>> allLayers = getGraph().getLayers();
 			if ((allLayers != null) && (allLayers.size() > 0)) {
-				for (Layer<?,?> layer : allLayers) {
+				for (Layer<?, ?> layer : allLayers) {
 					if (layer.getNodes().contains(this)) {
 						layers.add(layer);
 					}

@@ -30,8 +30,8 @@ import org.corpus_tools.salt.graph.Label;
  * {@link SDocumentGraph#findDiffs(SDocumentGraph)} to determine differences
  * between two {@link SDocumentGraph} objects.
  */
-@SuppressWarnings("serial")
 public class Difference implements Serializable {
+	private static final long serialVersionUID = 1317255286503908399L;
 	/** Object of graph template, if this difference type has one **/
 	public Object templateObject;
 	/** Object of graph other, if this difference type has one **/

@@ -25,8 +25,9 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.eclipse.emf.common.util.URI;
 
-@SuppressWarnings("serial")
 public class SMedialDSImpl extends SSequentialDSImpl<URI, Double> implements SMedialDS {
+	private static final long serialVersionUID = -6161302704585805228L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SMedialDSImpl() {
 		this(null);

@@ -17,8 +17,8 @@
  */
 package org.corpus_tools.salt.exceptions;
 
-@SuppressWarnings("serial")
 public class SaltTraverserException extends SaltException {
+	private static final long serialVersionUID = -1144499127655828201L;
 
 	public SaltTraverserException() {
 		super();

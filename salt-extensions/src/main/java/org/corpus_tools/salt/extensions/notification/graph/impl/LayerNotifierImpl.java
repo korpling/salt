@@ -29,11 +29,11 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.LayerImpl;
 
-@SuppressWarnings("serial")
 public class LayerNotifierImpl<N extends Node, R extends Relation<? extends N, ? extends N>> extends LayerImpl<N, R>
 		implements Layer<N, R>, Notifier {
+	private static final long serialVersionUID = -5301435894593175513L;
 	// ==========================================> listener list
-	protected List<Listener> listenerList = null;
+	protected transient List<Listener> listenerList = null;
 
 	/** {@inheritDoc} **/
 	@Override

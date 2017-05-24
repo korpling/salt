@@ -35,8 +35,9 @@ import org.corpus_tools.salt.util.SaltUtil;
  * This class is an abstract container containing a set of {@link Label}
  * objects.
  */
-@SuppressWarnings("serial")
 public abstract class LabelableElementImpl implements LabelableElement, Serializable {
+	private static final long serialVersionUID = 847275570984282944L;
+
 	/** Determines the expected number of labels. **/
 	public static final int EXPECTED_NUMBER_OF_LABELS = 5;
 

@@ -25,16 +25,11 @@ import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
  * An object implementing this interface can be registered in a {@link Notifier}
  * object. If this listener is added, it will be notified about all changes in
  * the {@link org.eclipse.emf.common.notify.Notifier} object.
- * 
- * @author florian
  */
 @Beta
 public interface Listener {
 	/**
 	 * An enumeration containing all possible types of a notification.
-	 * 
-	 * @author florian
-	 *
 	 */
 	@Beta
 	public enum NOTIFICATION_TYPE {

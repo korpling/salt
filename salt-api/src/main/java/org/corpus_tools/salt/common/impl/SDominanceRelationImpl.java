@@ -27,8 +27,9 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 
-@SuppressWarnings("serial")
 public class SDominanceRelationImpl extends SRelationImpl<SStructure, SStructuredNode> implements SDominanceRelation {
+	private static final long serialVersionUID = 5469260279989235755L;
+
 	/** Initializes an object of type {@link SDominanceRelationImpl}. **/
 	public SDominanceRelationImpl() {
 		this(null);

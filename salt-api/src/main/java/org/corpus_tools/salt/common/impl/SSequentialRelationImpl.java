@@ -29,9 +29,9 @@ import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number>
 		extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
+	private static final long serialVersionUID = 7059547173883927142L;
 	private final Class<P> pointClass;
 
 	/** Initializes an object of type {@link SSequentialRelationImpl}. **/

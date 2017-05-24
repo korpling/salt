@@ -25,7 +25,6 @@ import static org.junit.Assert.fail;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
-import org.corpus_tools.salt.graph.impl.LabelableElementImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.junit.Before;
 import org.junit.Test;

@@ -26,8 +26,8 @@ import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 
-@SuppressWarnings("serial")
 public class TokenStartComparator implements Comparator<SToken>, Serializable {
+	private static final long serialVersionUID = 1961335654854719105L;
 	private SDocumentGraph documentGraph = null;
 
 	/**

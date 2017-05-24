@@ -21,8 +21,8 @@ import org.corpus_tools.salt.graph.IdentifiableElement;
 import org.corpus_tools.salt.graph.Identifier;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class IdentifierImpl extends LabelImpl implements Identifier {
+	private static final long serialVersionUID = -1485325369724844874L;
 
 	/**
 	 * Instantiates an {@link IdentifierImpl} object and sets its passed

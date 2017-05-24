@@ -22,8 +22,9 @@ import org.corpus_tools.salt.common.SMedialRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.graph.Relation;
 
-@SuppressWarnings("serial")
 public class SMedialRelationImpl extends SSequentialRelationImpl<SToken, SMedialDS, Double> implements SMedialRelation {
+	private static final long serialVersionUID = 5457664187658861760L;
+
 	/** Initializes an object of type {@link SMedialRelationImpl}. **/
 	public SMedialRelationImpl() {
 		this(null);

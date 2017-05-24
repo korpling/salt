@@ -22,9 +22,10 @@ import org.corpus_tools.salt.common.STimelineRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.graph.Relation;
 
-@SuppressWarnings("serial")
 public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STimeline, Integer>
 		implements STimelineRelation {
+	private static final long serialVersionUID = 2964002381925620637L;
+
 	/** Initializes an object of type {@link STimelineRelationImpl}. **/
 	public STimelineRelationImpl() {
 		this(null);

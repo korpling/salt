@@ -22,9 +22,10 @@ import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.graph.Relation;
 
-@SuppressWarnings("serial")
 public class STextualRelationImpl extends SSequentialRelationImpl<SToken, STextualDS, Integer>
 		implements STextualRelation {
+	private static final long serialVersionUID = 7027085471312285714L;
+
 	/** Initializes an object of type {@link STextualRelationImpl}. **/
 	public STextualRelationImpl() {
 		this(null);

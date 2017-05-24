@@ -20,8 +20,9 @@ package org.corpus_tools.salt.core.impl;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.graph.Label;
 
-@SuppressWarnings("serial")
 public class SFeatureImpl extends SAbstractAnnotationImpl implements SFeature {
+	private static final long serialVersionUID = 8542389713198469052L;
+
 	/** Initializes an object of type {@link SFeatureImpl}. **/
 	public SFeatureImpl() {
 	}

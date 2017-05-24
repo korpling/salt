@@ -28,8 +28,8 @@ import org.corpus_tools.salt.graph.IdentifiableElement;
  * {@link SLayer}) is not contained in a graph, but a method which is called
  * needs that element to be in the graph.
  */
-@SuppressWarnings("serial")
 public class SaltElementNotInGraphException extends SaltException {
+	private static final long serialVersionUID = 5798392917955443405L;
 
 	private static String createMsg(SGraph graph, IdentifiableElement element) {
 		return ("The passed element '" + element.getId() + "' is not contained in the graph '" + graph.getId() + "'. ");

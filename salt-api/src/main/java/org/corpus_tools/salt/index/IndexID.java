@@ -2,39 +2,30 @@ package org.corpus_tools.salt.index;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
-public class IndexID<K,V> implements Serializable {
-	
+public class IndexID<K, V> implements Serializable {
+	private static final long serialVersionUID = -4027959633961940459L;
 	private final String indexId;
 	private final Class<K> keyClass;
 	private final Class<V> valueClass;
-	
-	
+
 	public IndexID(String indexId, Class<K> keyClass, Class<V> valueClass) {
 		super();
 		this.indexId = indexId;
 		this.keyClass = keyClass;
 		this.valueClass = valueClass;
 	}
-	
-	
-
 
 	public String getIndexId() {
 		return indexId;
 	}
 
-
 	public Class<K> getKeyClass() {
 		return keyClass;
 	}
 
-
 	public Class<V> getValueClass() {
 		return valueClass;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -46,7 +37,6 @@ public class IndexID<K,V> implements Serializable {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,7 +45,7 @@ public class IndexID<K,V> implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		IndexID<?,?> other = (IndexID<?,?>) obj;
+		IndexID<?, ?> other = (IndexID<?, ?>) obj;
 		if (indexId == null) {
 			if (other.indexId != null)
 				return false;

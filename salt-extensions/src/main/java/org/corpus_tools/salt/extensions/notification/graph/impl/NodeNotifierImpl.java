@@ -29,15 +29,12 @@ import org.corpus_tools.salt.graph.impl.NodeImpl;
 
 /**
  * Notifies all listeners about adding or removing a label.
- * 
- * @author florian
  *
  */
-@SuppressWarnings("serial")
 public class NodeNotifierImpl extends NodeImpl implements Node, Notifier {
-
+	private static final long serialVersionUID = 6875727085314167491L;
 	// ==========================================> listener list
-	protected List<Listener> listenerList = null;
+	protected transient List<Listener> listenerList = null;
 
 	/** {@inheritDoc} **/
 	@Override

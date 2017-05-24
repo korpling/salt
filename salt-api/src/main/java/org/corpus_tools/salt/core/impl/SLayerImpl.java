@@ -33,8 +33,9 @@ import org.corpus_tools.salt.graph.impl.LayerImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 
-@SuppressWarnings("serial")
 public class SLayerImpl extends LayerImpl<SNode, SRelation<? extends SNode, ? extends SNode>> implements SLayer {
+	private static final long serialVersionUID = 3544169147851088782L;
+
 	/** Initializes an object of type {@link SLayerImpl}. **/
 	public SLayerImpl() {
 	}

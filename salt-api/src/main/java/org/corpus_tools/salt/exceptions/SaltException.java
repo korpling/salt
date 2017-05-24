@@ -22,8 +22,8 @@ package org.corpus_tools.salt.exceptions;
  * derived from this class. It can be instantiated, if no other Exception
  * matches to the problem.
  */
-@SuppressWarnings("serial")
 public class SaltException extends java.lang.RuntimeException {
+	private static final long serialVersionUID = -9096943445449424672L;
 
 	public SaltException() {
 		super();

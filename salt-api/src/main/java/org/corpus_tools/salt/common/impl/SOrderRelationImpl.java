@@ -33,8 +33,9 @@ import org.corpus_tools.salt.graph.Relation;
  * identify, that one nodes comes before another one, when it is not computable
  * from the datasources.
  */
-@SuppressWarnings("serial")
 public class SOrderRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode> implements SOrderRelation {
+	private static final long serialVersionUID = -400418912942234968L;
+
 	/** Initializes an object of type {@link SOrderRelationImpl}. **/
 	public SOrderRelationImpl() {
 		this(null);

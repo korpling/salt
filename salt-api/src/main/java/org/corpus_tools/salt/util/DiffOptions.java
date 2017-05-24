@@ -37,9 +37,8 @@ import com.google.common.base.Strings;
  * </code> The default settings are specified in
  * {@link DiffOptions#Diff_Options()}.
  */
-@SuppressWarnings("serial")
 public class DiffOptions extends Hashtable<String, Boolean> {
-
+	private static final long serialVersionUID = -3596336698798280251L;
 	/**
 	 * When true, documents won't be compared when comparing corpus structures.
 	 */

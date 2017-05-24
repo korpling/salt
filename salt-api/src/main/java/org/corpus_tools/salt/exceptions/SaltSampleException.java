@@ -22,8 +22,9 @@ import org.corpus_tools.salt.samples.SampleGenerator;
 /**
  * An Exception class used by the {@link SampleGenerator}.
  */
-@SuppressWarnings("serial")
 public class SaltSampleException extends SaltException {
+	private static final long serialVersionUID = 3289094618247117237L;
+
 	public SaltSampleException() {
 		super();
 	}
