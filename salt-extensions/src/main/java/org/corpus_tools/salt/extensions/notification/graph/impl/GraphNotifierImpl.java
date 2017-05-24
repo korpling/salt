@@ -40,27 +40,23 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<? extends N, ?
 	}
 
 	// ==========================================> listener list
-	protected List<Listener> listenerList = null;
+	protected transient List<Listener> listenerList = null;
 
-	/** {@inheritDoc} **/
 	@Override
 	public List<Listener> getListener() {
 		return (NotifierHelper.getListener(listenerList));
 	}
 
-	/** {@inheritDoc} **/
 	@Override
 	public synchronized void addListener(Listener listener) {
 		listenerList = NotifierHelper.addListener(listenerList, listener);
 	}
 
-	/** {@inheritDoc} **/
 	@Override
 	public void addListener(Collection<Listener> listener) {
 		listenerList = NotifierHelper.addListener(listenerList, listener);
 	}
 
-	/** {@inheritDoc} **/
 	@Override
 	public synchronized void removeListener(Listener listener) {
 		listenerList = NotifierHelper.removeListener(listenerList, listener);

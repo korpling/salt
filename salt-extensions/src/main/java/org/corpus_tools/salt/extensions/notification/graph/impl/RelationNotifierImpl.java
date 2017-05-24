@@ -37,7 +37,7 @@ public class RelationNotifierImpl<S extends Node, T extends Node> extends Relati
 	}
 
 	// ==========================================> listener list
-	protected List<Listener> listenerList = null;
+	protected transient List<Listener> listenerList = null;
 
 	/** {@inheritDoc} **/
 	@Override

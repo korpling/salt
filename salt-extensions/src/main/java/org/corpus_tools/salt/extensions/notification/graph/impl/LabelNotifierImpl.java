@@ -29,7 +29,7 @@ import org.corpus_tools.salt.graph.impl.LabelImpl;
 public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 	private static final long serialVersionUID = -6606622369563709034L;
 	// ==========================================> listener list
-	protected List<Listener> listenerList = null;
+	protected transient List<Listener> listenerList = null;
 
 	/** {@inheritDoc} **/
 	@Override

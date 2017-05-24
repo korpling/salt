@@ -34,7 +34,7 @@ import org.corpus_tools.salt.graph.impl.NodeImpl;
 public class NodeNotifierImpl extends NodeImpl implements Node, Notifier {
 	private static final long serialVersionUID = 6875727085314167491L;
 	// ==========================================> listener list
-	protected List<Listener> listenerList = null;
+	protected transient List<Listener> listenerList = null;
 
 	/** {@inheritDoc} **/
 	@Override

@@ -33,7 +33,7 @@ public class LayerNotifierImpl<N extends Node, R extends Relation<? extends N, ?
 		implements Layer<N, R>, Notifier {
 	private static final long serialVersionUID = -5301435894593175513L;
 	// ==========================================> listener list
-	protected List<Listener> listenerList = null;
+	protected transient List<Listener> listenerList = null;
 
 	/** {@inheritDoc} **/
 	@Override
