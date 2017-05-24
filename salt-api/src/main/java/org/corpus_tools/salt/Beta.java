@@ -33,5 +33,4 @@ package org.corpus_tools.salt;
  * </p>
  */
 public @interface Beta {
-
 }
