@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.corpus_tools.salt.SALT_TYPE;
@@ -90,6 +91,10 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 			}
 		}
 		return result;
+	}
+
+	public Optional<SNode> getNodeByName(String nodeName) {
+		return Optional.ofNullable(getNodesByName(nodeName).get(0));
 	}
 
 	/** {@inheritDoc} **/

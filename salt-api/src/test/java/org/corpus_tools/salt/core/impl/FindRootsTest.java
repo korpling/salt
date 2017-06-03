@@ -13,22 +13,20 @@ public class FindRootsTest {
 	public void whenGraphIsTree_rootIsN1() {
 		graph = SampleGraphs.createTree();
 
-		assertThat(graph.getRoots()).containsExactly(graph.getNodesByName("n1").get(0));
+		assertThat(graph.getRoots()).containsExactly(graph.getNodeByName("n1").get());
 	}
 
 	@Test
 	public void whenGraphIsDag_rootsAreN1N4() {
 		graph = SampleGraphs.createDag();
 
-		assertThat(graph.getRoots()).containsExactly(graph.getNodesByName("n1").get(0),
-				graph.getNodesByName("n4").get(0));
+		assertThat(graph.getRoots()).containsExactly(graph.getNodeByName("n1").get(), graph.getNodeByName("n4").get());
 	}
 
 	@Test
 	public void whenGraphIsCycledDag_rootsAreN1N4() {
 		graph = SampleGraphs.createCycledDag();
 
-		assertThat(graph.getRoots()).containsExactly(graph.getNodesByName("n1").get(0),
-				graph.getNodesByName("n4").get(0));
+		assertThat(graph.getRoots()).containsExactly(graph.getNodeByName("n1").get(), graph.getNodeByName("n4").get());
 	}
 }

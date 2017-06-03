@@ -13,23 +13,21 @@ public class FindLeafsTest {
 	public void whenGraphIsTree_leafsAreN3N4N6N7() {
 		graph = SampleGraphs.createTree();
 
-		assertThat(graph.getLeafs()).containsExactly(graph.getNodesByName("n3").get(0),
-				graph.getNodesByName("n4").get(0), graph.getNodesByName("n6").get(0),
-				graph.getNodesByName("n7").get(0));
+		assertThat(graph.getLeafs()).containsExactly(graph.getNodeByName("n3").get(), graph.getNodeByName("n4").get(),
+				graph.getNodeByName("n6").get(), graph.getNodeByName("n7").get());
 	}
 
 	@Test
 	public void whenGraphIsDag_leafsAreN3N6() {
 		graph = SampleGraphs.createDag();
 
-		assertThat(graph.getLeafs()).containsExactly(graph.getNodesByName("n3").get(0),
-				graph.getNodesByName("n6").get(0));
+		assertThat(graph.getLeafs()).containsExactly(graph.getNodeByName("n3").get(), graph.getNodeByName("n6").get());
 	}
 
 	@Test
 	public void whenGraphIsCycledDag_leafsAreN3() {
 		graph = SampleGraphs.createCycledDag();
 
-		assertThat(graph.getLeafs()).containsExactly(graph.getNodesByName("n3").get(0));
+		assertThat(graph.getLeafs()).containsExactly(graph.getNodeByName("n3").get());
 	}
 }

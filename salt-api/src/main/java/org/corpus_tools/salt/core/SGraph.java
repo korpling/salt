@@ -18,6 +18,7 @@
 package org.corpus_tools.salt.core;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.graph.Graph;
@@ -150,6 +151,16 @@ public interface SGraph extends Graph<SNode, SRelation<? extends SNode, ? extend
 	 * @return A complete list of all matching nodes. Is never null.
 	 */
 	public List<SNode> getNodesByName(String nodeName);
+
+	/**
+	 * Searches for a node which has the given node name. When multiple nodes
+	 * have such a name, only the first found is returned.
+	 * 
+	 * @param nodeName
+	 *            Name of the node to search for
+	 * @return found node
+	 */
+	public Optional<SNode> getNodeByName(String nodeName);
 
 	/**
 	 * Searches for a relation or a set of relations having the given relation
