@@ -254,4 +254,10 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	public Class<T> getTargetClass() {
 		return targetClass;
 	}
+
+	@Override
+	public String toString() {
+		return getId() + ":" + (getSource() != null ? getSource().getId() : "") + "->"
+				+ (getTarget() != null ? getTarget().getId() : "");
+	}
 }

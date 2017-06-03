@@ -61,7 +61,7 @@ public class SGraphTest extends SAnnotationContainerTest {
 		SGraph graph = null;
 
 		// test 1
-		graph = TestHelper.createGraph_Tree();
+		graph = TestHelper.createTree();
 		setFixture(graph);
 		expectedRoots = new ArrayList<>();
 		expectedRoots.add(graph.getNode("node1"));
@@ -74,7 +74,7 @@ public class SGraphTest extends SAnnotationContainerTest {
 		}
 
 		// test 2
-		graph = TestHelper.createGraph_DAG();
+		graph = TestHelper.createDag();
 		setFixture(graph);
 		expectedRoots = new ArrayList<>();
 		expectedRoots.add(graph.getNode("node1"));
@@ -88,7 +88,7 @@ public class SGraphTest extends SAnnotationContainerTest {
 		}
 
 		// test 3
-		graph = TestHelper.createGraph_Cycle();
+		graph = TestHelper.createCycledDag();
 		setFixture(graph);
 		expectedRoots = new ArrayList<>();
 		expectedRoots.add(graph.getNode("node1"));
@@ -112,7 +112,7 @@ public class SGraphTest extends SAnnotationContainerTest {
 		SGraph graph = null;
 
 		// test 1
-		graph = TestHelper.createGraph_Tree();
+		graph = TestHelper.createTree();
 		setFixture(graph);
 		expectedLeafs = new ArrayList<>();
 		expectedLeafs.add(graph.getNode("node3"));
@@ -128,7 +128,7 @@ public class SGraphTest extends SAnnotationContainerTest {
 		}
 
 		// test 2
-		graph = TestHelper.createGraph_DAG();
+		graph = TestHelper.createDag();
 		setFixture(graph);
 		expectedLeafs = new ArrayList<>();
 		expectedLeafs.add(graph.getNode("node3"));
@@ -142,7 +142,7 @@ public class SGraphTest extends SAnnotationContainerTest {
 		}
 
 		// test 3
-		graph = TestHelper.createGraph_Cycle();
+		graph = TestHelper.createCycledDag();
 		this.setFixture(graph);
 		expectedLeafs = new ArrayList<>();
 		expectedLeafs.add(graph.getNode("node3"));

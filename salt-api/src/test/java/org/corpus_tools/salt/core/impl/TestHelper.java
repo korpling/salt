@@ -103,7 +103,7 @@ public class TestHelper {
 	 *    node3    node6   node5
 	 * </pre>
 	 **/
-	public static SGraph createGraph_Tree() {
+	public static SGraph createTree() {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_Tree");
 		String[] nodeNames = { "node1", "node2", "node3", "node4", "node5", "node6", "node7" };
@@ -128,7 +128,7 @@ public class TestHelper {
 	 *    node3    node6
 	 * </pre>
 	 **/
-	public static SGraph createGraph_DAG() {
+	public static SGraph createDag() {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_DAG");
 
@@ -157,7 +157,7 @@ public class TestHelper {
 	 * node 7 -> node2
 	 * </pre>
 	 **/
-	public static SGraph createGraph_Cycle() {
+	public static SGraph createCycledDag() {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_Cycle");
 		String[] nodeNames = { "node1", "node2", "node3", "node4", "node6", "node7" };
@@ -186,7 +186,7 @@ public class TestHelper {
 	 * node 7 -> node2
 	 * </pre>
 	 **/
-	public static SGraph createGraph_SimpleCycle() {
+	public static SGraph createCycledTree() {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_SimpleCycle");
 		String[] nodeNames = { "node1", "node2", "node3", "node6", "node7" };
@@ -209,7 +209,7 @@ public class TestHelper {
 	 * 
 	 * </pre>
 	 **/
-	public static SGraph createGraph_PureCycle() {
+	public static SGraph createPureCycle() {
 		SGraph graph = SaltFactory.createSGraph();
 		graph.setId("createGraph_PureCycle");
 		String[] nodeNames = { "node1", "node2", "node3" };
