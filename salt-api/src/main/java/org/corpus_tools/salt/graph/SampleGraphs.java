@@ -78,16 +78,12 @@ public class SampleGraphs {
 	 *       / \    |         
 	 *    n3    n4  n6
 	 * </pre>
-	 * 
-	 * {
 	 **/
 	public static SGraph createTree() {
 		return create().withName("tree").fromPath("n1/n2/n3", "n2/n4", "n1/n5/n6", "n1/n7").build();
 	}
 
 	/**
-	 * Creates the following graph: <br/>
-	 * 
 	 * <pre>
 	 *    n1    n4
 	 *     \   /
@@ -101,8 +97,6 @@ public class SampleGraphs {
 	}
 
 	/**
-	 * Creates the following graph including a cycle: <br/>
-	 * 
 	 * <pre>
 	 *    n1    n4
 	 *     \   /
@@ -120,8 +114,6 @@ public class SampleGraphs {
 	}
 
 	/**
-	 * Creates the following graph including a cycle: <br/>
-	 * 
 	 * <pre>
 	 *       n1
 	 *       |
@@ -139,8 +131,6 @@ public class SampleGraphs {
 	}
 
 	/**
-	 * Creates the following graph including a cycle: <br/>
-	 * 
 	 * <pre>
 	 *        n1
 	 *        ^ \
