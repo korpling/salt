@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.core.impl;
+package org.corpus_tools.salt.util.internal.traversal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
