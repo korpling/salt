@@ -29,7 +29,6 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
-import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.Node;
@@ -510,113 +509,5 @@ public class GraphTraverserModuleTest {
 		startNode.add(node1);
 		getFixture().traverse(startNode, GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
 				"test_TOP_DOWN_DEPTH_FIRST_NO_REAL_CYCLES", graphTraverseHandler);
-	}
-
-	/**
-	 * Tests the traversing of
-	 * {@link GRAPH_TRAVERSE_TYPE#BOTTOM_UP_BREADTH_FIRST} of graph_Tree, with
-	 * tree {@inheritDoc SGraphTest#createGraph_Tree()}.
-	 */
-	@Test
-	public void testTraverse_BOTTOM_UP_BREADTH_FIRST_Tree() {
-		SGraph graph = TestHelper.createTree();
-		String[] nodeOrderWayThere = { "node3", "node5", "node6", "node7", "node2", "node4", "node2", "node1", "node1",
-				"node1", "node1" };
-		String[] nodeOrderWayBack = nodeOrderWayThere.clone();
-
-		TraverserChecker checker = new TraverserChecker();
-		checker.nodeOrderWayThere = nodeOrderWayThere;
-		checker.nodeOrderWayBack = nodeOrderWayBack;
-		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-				"test_BOTTOM_UP_BREADTH_FIRST_Tree", checker, false);
-		assertTrue(checker.checkNumberOfTraversedNodes());
-	}
-
-	/**
-	 * Tests the traversing of
-	 * {@link GRAPH_TRAVERSE_TYPE#BOTTOM_UP_BREADTH_FIRST} of graph_DAG, with
-	 * graph {@inheritDoc SGraphTest#createGraph_DAG()}.
-	 */
-	@Test
-	public void testTraverse_BOTTOM_UP_BREADTH_FIRST_DAG() {
-		SGraph graph = TestHelper.createDag();
-		String[] nodeOrderWayThere = { "node3", "node6", "node2", "node2", "node1", "node4", "node1", "node4" };
-		String[] nodeOrderWayBack = nodeOrderWayThere.clone();
-		TraverserChecker checker = new TraverserChecker();
-		checker.nodeOrderWayThere = nodeOrderWayThere;
-		checker.nodeOrderWayBack = nodeOrderWayBack;
-		getFixture().setGraph(graph);
-		getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-				"test_BOTTOM_UP_BREADTH_FIRST_DAG", checker, false);
-		assertTrue(checker.checkNumberOfTraversedNodes());
-	}
-
-	/**
-	 * Tests the traversing of
-	 * {@link GRAPH_TRAVERSE_TYPE#BOTTOM_UP_BREADTH_FIRST} of graph_Cycle, with
-	 * graph {@inheritDoc SGraphTest#createGraph_Cycle()}.
-	 */
-	@Test
-	public void testTraverse_BOTTOM_UP_BREADTH_FIRST_Cycle() {
-		SGraph graph = TestHelper.createCycledDag();
-		{
-			String[] nodeOrderWayThere = { "node3", "node2", "node1", "node4" };
-			String[] nodeOrderWayBack = { "node3", "node2", "node1", "node4" };
-			TraverserChecker checker = new TraverserChecker();
-			checker.nodeOrderWayThere = nodeOrderWayThere;
-			checker.nodeOrderWayBack = nodeOrderWayBack;
-			getFixture().setGraph(graph);
-			try {
-				getFixture().traverse(getFixture().getGraph().getLeafs(), GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-						"test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker);
-				assertTrue(checker.checkNumberOfTraversedNodes());
-				fail("The graph contains a cycle, that shall invoke an exception.");
-			} catch (SaltException e) {
-			}
-		}
-		{
-			List<SNode> startNodes = new ArrayList<>();
-			startNodes.add(graph.getNode("node3"));
-			startNodes.add(graph.getNode("node7"));
-			String[] nodeOrderWayThere = { "node3", "node7", "node2", "node6", "node1", "node4", "node7" };
-			String[] nodeOrderWayBack = { "node3", "node7", "node2", "node6", "node1", "node4", "node7" };
-			TraverserChecker checker = new TraverserChecker();
-			checker.nodeOrderWayThere = nodeOrderWayThere;
-			checker.nodeOrderWayBack = nodeOrderWayBack;
-			getFixture().setGraph(graph);
-			getFixture().setGraph(graph);
-			try {
-				getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-						"test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker);
-				assertTrue(checker.checkNumberOfTraversedNodes());
-				fail("The graph contains a cycle, that shall invoke an exception.");
-			} catch (SaltException e) {
-			}
-		}
-	}
-
-	/**
-	 * Tests the traversing of
-	 * {@link GRAPH_TRAVERSE_TYPE#BOTTOM_UP_BREADTH_FIRST} of graph_Tree, with
-	 * graph {@inheritDoc SGraphTest#createGraph_SimpleCycle()}.
-	 */
-	@Test
-	public void testTraverse_BOTTOM_UP_BREADTH_FIRST_CycleUnsafe() {
-		SGraph graph = TestHelper.createCycledTree();
-		List<SNode> startNodes = new ArrayList<>();
-		startNodes.add(graph.getNode("node3"));
-		startNodes.add(graph.getNode("node7"));
-		String[] nodeOrderWayThere = { "node3", "node7", "node2", "node6", "node1", "node7", "node2", "node6",
-				"node1" };
-		String[] nodeOrderWayBack = nodeOrderWayThere.clone();
-		TraverserChecker checker = new TraverserChecker();
-		checker.nodeOrderWayThere = nodeOrderWayThere;
-		checker.nodeOrderWayBack = nodeOrderWayBack;
-		checker.isCycleSafe = false;
-		getFixture().setGraph(graph);
-		getFixture().traverse(startNodes, GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST,
-				"test_BOTTOM_UP_BREADTH_FIRST_Cycle", checker, false);
-		assertTrue(checker.checkNumberOfTraversedNodes());
 	}
 }

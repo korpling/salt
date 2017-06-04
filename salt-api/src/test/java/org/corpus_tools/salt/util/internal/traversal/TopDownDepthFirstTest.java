@@ -46,9 +46,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 		isCycleSafe = true;
 		// WHEN
 		when();
-		// THEN
-		assertThat(nodeOrderWayThere).containsExactly("n1", "n2", "n3", "n6", "n7", "n2", "n6", "n7");
-		assertThat(nodeOrderWayBack).containsExactly("n3", "n6", "n2", "n1", "n3", "n6", "n2", "n4");
 	}
 
 	@Test
