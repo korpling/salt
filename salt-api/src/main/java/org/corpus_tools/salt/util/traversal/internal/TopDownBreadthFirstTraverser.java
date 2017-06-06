@@ -21,7 +21,6 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 	@Override
 	public void traverse() {
 		for (SNode startNode : startNodes) {
-			currentNodePath = new ArrayList<>();
 			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
 				currentNodePath.add(startNode);
 			}
@@ -29,7 +28,7 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 		if (isCycleSafe) {
 			throw new SaltException("Not able to detect cycles with breadth first search");
 		}
-		if ((currentNodePath == null) || (currentNodePath.isEmpty())) {
+		if (currentNodePath.isEmpty()) {
 			throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 		}
 		SNode fromNode = null;
