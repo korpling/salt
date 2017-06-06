@@ -17,6 +17,11 @@
  */
 package org.corpus_tools.salt.core.impl;
 
+import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
+import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST;
+import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST;
+import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
+
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.HashMap;
@@ -126,19 +131,19 @@ public class GraphTraverserModule {
 	 */
 	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
 			GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
-		if (getGraph() == null) {
+		if (graph == null) {
 			throw new SaltTraverserException("Cannot start traversing graph, because the graph is null.");
 		}
 		if ((startNodes == null) || (startNodes.size() == 0)) {
-			throw new SaltTraverserException("Cannot start traversing graph '" + getGraph().getId()
-					+ "', because the given start nodes are empty.");
+			throw new SaltTraverserException(
+					"Cannot start traversing graph '" + graph.getId() + "', because the given start nodes are empty.");
 		}
 		if (traverseType == null) {
-			throw new SaltTraverserException("Cannot start traversing graph '" + getGraph().getId()
-					+ "', because the given traverseType is empty.");
+			throw new SaltTraverserException(
+					"Cannot start traversing graph '" + graph.getId() + "', because the given traverseType is empty.");
 		}
 		if (traverseHandler == null) {
-			throw new SaltTraverserException("Cannot start traversing graph '" + getGraph().getId()
+			throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 					+ "', because the given callback handler 'traverseHandler' is empty.");
 		}
 
@@ -147,7 +152,7 @@ public class GraphTraverserModule {
 			if (traverseIdTable.containsKey(traverseHandler)) {
 				List<String> ids = traverseIdTable.get(traverseHandler);
 				if (ids.contains(traverseId)) {
-					throw new SaltTraverserException("Cannot start traversing graph '" + getGraph().getId()
+					throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 							+ "', because the traverse id '" + traverseId
 							+ "' is already registered for the given callback handler '" + traverseHandler + "'.");
 				} else
@@ -165,7 +170,7 @@ public class GraphTraverserModule {
 		traverser.traverseId = traverseId;
 		traverser.traverseHandler = traverseHandler;
 		traverser.isCycleSafe = isCycleSafe;
-		traverser.setGraph(getGraph());
+		traverser.graph = graph;
 
 		traverser.run();
 
@@ -191,42 +196,12 @@ public class GraphTraverserModule {
 	 * given callback handler during the traversal.
 	 */
 	static class Traverser implements Runnable {
-		/**
-		 * list of nodes where traversal starts
-		 */
 		List<? extends SNode> startNodes = null;
-		/**
-		 * kind of traversal
-		 */
 		GRAPH_TRAVERSE_TYPE traverseType = null;
-		/**
-		 * an identifier for identifying the current traversal process
-		 */
 		String traverseId = null;
-		/**
-		 * The callback handler on which the methods while traversal will be
-		 * invoked.
-		 */
 		GraphTraverseHandler traverseHandler = null;
-
-		/**
-		 * If value is false, this object does not take care about cycles in
-		 * traversion.
-		 */
 		boolean isCycleSafe = true;
-
-		/**
-		 * The graph to traverse.
-		 */
 		private SGraph graph = null;
-
-		public void setGraph(SGraph graph) {
-			this.graph = graph;
-		}
-
-		public SGraph getGraph() {
-			return graph;
-		}
 
 		/**
 		 * In Case of an exception occurs during traversal, it will be stored
@@ -288,7 +263,7 @@ public class GraphTraverserModule {
 
 			if (entry.order == 0) {
 				// set the iterator
-				List<SRelation<?, ?>> outRels = getGraph().getOutRelations(entry.node.getId());
+				List<SRelation<?, ?>> outRels = graph.getOutRelations(entry.node.getId());
 				if ((outRels != null) && (!outRels.isEmpty())) {
 					entry.iterator = outRels.iterator();
 				}
@@ -310,8 +285,7 @@ public class GraphTraverserModule {
 			// even if something went wrong with the iterator we should be still
 			// able to execute the code (just with less performance)
 			if (entry.iterator == null) {
-				List<SRelation<? extends SNode, ? extends SNode>> outRels = getGraph()
-						.getOutRelations(entry.node.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> outRels = graph.getOutRelations(entry.node.getId());
 				if ((outRels != null) && (!outRels.isEmpty())) {
 					if (entry.order < outRels.size()) {
 						entry.rel = outRels.get(entry.order);
@@ -328,143 +302,31 @@ public class GraphTraverserModule {
 		 */
 		public void run() {
 			try {
-				if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST.equals(traverseType)) {
-					// TOP_DOWN_DEPTH_FIRST traversal
-					for (SNode startNode : startNodes) {
-						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, null,
-								startNode, 0l)) {
-							Set<SNode> visitedNodes = null;
-							if (isCycleSafe) {
-								// if checking for cycles is enabled, initialize
-								// hashset
-								visitedNodes = new HashSet<>();
-							}
-							Stack<NodeEntry> parentStack = new Stack<>();
-							NodeEntry currentEntry = new NodeEntry(startNode, 0);
-							while ((!parentStack.isEmpty()) || (currentEntry != null)) {
-								if (currentEntry != null) {
-									// way down
-									if (isCycleSafe) {
-										// check if cycle exists
-										if (visitedNodes.contains(currentEntry.node)) {
-											StringBuffer text = new StringBuffer();
-											if (currentNodePath != null) {
-												for (SNode node : currentNodePath) {
-													if (node != null) {
-														text.append(node.getId());
-													} else {
-														text.append("null");
-													}
-													text.append(" --> ");
-												}
-											}
-											text.append(currentEntry.node.getId());
-											throw new SaltInvalidModelException("A cycle in graph '" + graph.getId()
-													+ "' has been detected, while traversing with type '" + traverseType
-													+ "'. The cycle has been detected when visiting node '"
-													+ currentEntry.node + "' while current path was '" + text.toString()
-													+ "'.");
-										}
-									}
-									NodeEntry peekEntry = null;
-									if (!parentStack.isEmpty())
-										peekEntry = parentStack.peek();
-									parentStack.push(currentEntry);
-									if (isCycleSafe) {
-										// if checking for cycles is enabled,
-										// add node to hashset
-										visitedNodes.add(currentEntry.node);
-									}
-									SNode nextChild = nextChild(currentEntry);
-									if (peekEntry == null) {
-										traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-												traverseId, currentEntry.node, null, null, 0);
-									} else {
-										traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-												traverseId, currentEntry.node, peekEntry.rel,
-												(peekEntry.rel != null) ? peekEntry.rel.getSource() : null,
-												peekEntry.order);
-									}
-									if (nextChild != null) {
-										if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-												traverseId, currentEntry.rel, nextChild, currentEntry.order)) {
-											currentEntry = new NodeEntry(nextChild, 0);
-										} else {
-											currentEntry = null;
-										}
-									} else {
-										currentEntry = null;
-									}
-								} else {
-									NodeEntry peekEntry = parentStack.peek();
-									if (peekEntry != null) {
-										SNode nextChild = nextChild(peekEntry);
-										if (nextChild != null) {
-											// way down, another branch was
-											// found
-											if (traverseHandler.checkConstraint(
-													GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, peekEntry.rel,
-													nextChild, peekEntry.order)) {
-												currentEntry = new NodeEntry(nextChild, 0);
-											} else {
-												currentEntry = null;
-											}
-										} else {// way up
-											parentStack.pop();
-											if (isCycleSafe) {
-												// if checking for cycles is
-												// enabled, remove node from
-												// hashset
-												visitedNodes.remove(peekEntry.node);
-											}
-											// collect stuff for notification
-											SNode peekNode = peekEntry.node;
-											peekEntry = null;
-											if (!parentStack.isEmpty()) {
-												peekEntry = parentStack.peek();
-											}
-											if (peekEntry == null) {
-												traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-														traverseId, peekNode, null, null, 0);
-											} else {
-												traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST,
-														traverseId, peekNode, peekEntry.rel,
-														(peekEntry.rel != null) ? peekEntry.rel.getSource() : null,
-														peekEntry.order);
-											}
-										}
-									}
-								}
-							}
-
-						}
-					}
-				} else if (GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST.equals(traverseType)) {
+				if (TOP_DOWN_DEPTH_FIRST.equals(traverseType)) {
+					topDownDepthFirst();
+				} else if (BOTTOM_UP_DEPTH_FIRST.equals(traverseType)) {
 					// BOTTOM_UP_DEPTH_FIRST traversal
 					for (SNode startNode : startNodes) {
 						currentNodePath = new ArrayList<>();
-						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, null,
-								startNode, 0l)) {
+						if (traverseHandler.checkConstraint(BOTTOM_UP_DEPTH_FIRST, traverseId, null, startNode, 0l)) {
 							currentNodePath.add(startNode);
 							bottomUpDepthFirstRec(null, 0);
 						}
 					}
-				} else if (GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST.equals(traverseType)) {
+				} else if (TOP_DOWN_BREADTH_FIRST.equals(traverseType)) {
 					// TOP_DOWN_BREADTH_FIRST traversal
 					for (SNode startNode : startNodes) {
 						currentNodePath = new ArrayList<>();
-						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST, traverseId,
-								null, startNode, 0l)) {
+						if (traverseHandler.checkConstraint(TOP_DOWN_BREADTH_FIRST, traverseId, null, startNode, 0l)) {
 							currentNodePath.add(startNode);
 						}
 					}
 					breadthFirst();
-				} else if (GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST.equals(traverseType)) {
+				} else if (BOTTOM_UP_BREADTH_FIRST.equals(traverseType)) {
 					// BOTTOM_UP_BREADTH_FIRST traversal
 					for (SNode startNode : startNodes) {
 						currentNodePath = new ArrayList<SNode>();
-						if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST, traverseId,
-								null, startNode, 0l)) {
+						if (traverseHandler.checkConstraint(BOTTOM_UP_BREADTH_FIRST, traverseId, null, startNode, 0l)) {
 							currentNodePath.add(startNode);
 						}
 					}
@@ -477,6 +339,114 @@ public class GraphTraverserModule {
 				SaltException e = new SaltException("An exception occured while traversing the graph '" + graph.getId()
 						+ "' with path '" + currentNodePath + "'. because of " + e2.getMessage() + ". ", e2);
 				setException(e);
+			}
+		}
+
+		private void topDownDepthFirst() {
+			// TOP_DOWN_DEPTH_FIRST traversal
+			for (SNode startNode : startNodes) {
+				if (traverseHandler.checkConstraint(TOP_DOWN_DEPTH_FIRST, traverseId, null, startNode, 0l)) {
+					Set<SNode> visitedNodes = null;
+					if (isCycleSafe) {
+						// if checking for cycles is enabled, initialize
+						// hashset
+						visitedNodes = new HashSet<>();
+					}
+					Stack<NodeEntry> parentStack = new Stack<>();
+					NodeEntry currentEntry = new NodeEntry(startNode, 0);
+					while ((!parentStack.isEmpty()) || (currentEntry != null)) {
+						if (currentEntry != null) {
+							// way down
+							if (isCycleSafe) {
+								// check if cycle exists
+								if (visitedNodes.contains(currentEntry.node)) {
+									StringBuffer text = new StringBuffer();
+									if (currentNodePath != null) {
+										for (SNode node : currentNodePath) {
+											if (node != null) {
+												text.append(node.getId());
+											} else {
+												text.append("null");
+											}
+											text.append(" --> ");
+										}
+									}
+									text.append(currentEntry.node.getId());
+									throw new SaltInvalidModelException("A cycle in graph '" + graph.getId()
+											+ "' has been detected, while traversing with type '" + traverseType
+											+ "'. The cycle has been detected when visiting node '" + currentEntry.node
+											+ "' while current path was '" + text.toString() + "'.");
+								}
+							}
+							NodeEntry peekEntry = null;
+							if (!parentStack.isEmpty())
+								peekEntry = parentStack.peek();
+							parentStack.push(currentEntry);
+							if (isCycleSafe) {
+								// if checking for cycles is enabled,
+								// add node to hashset
+								visitedNodes.add(currentEntry.node);
+							}
+							SNode nextChild = nextChild(currentEntry);
+							if (peekEntry == null) {
+								traverseHandler.nodeReached(TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.node, null,
+										null, 0);
+							} else {
+								traverseHandler.nodeReached(TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.node,
+										peekEntry.rel, (peekEntry.rel != null) ? peekEntry.rel.getSource() : null,
+										peekEntry.order);
+							}
+							if (nextChild != null) {
+								if (traverseHandler.checkConstraint(TOP_DOWN_DEPTH_FIRST, traverseId, currentEntry.rel,
+										nextChild, currentEntry.order)) {
+									currentEntry = new NodeEntry(nextChild, 0);
+								} else {
+									currentEntry = null;
+								}
+							} else {
+								currentEntry = null;
+							}
+						} else {
+							NodeEntry peekEntry = parentStack.peek();
+							if (peekEntry != null) {
+								SNode nextChild = nextChild(peekEntry);
+								if (nextChild != null) {
+									// way down, another branch was
+									// found
+									if (traverseHandler.checkConstraint(TOP_DOWN_DEPTH_FIRST, traverseId, peekEntry.rel,
+											nextChild, peekEntry.order)) {
+										currentEntry = new NodeEntry(nextChild, 0);
+									} else {
+										currentEntry = null;
+									}
+								} else {// way up
+									parentStack.pop();
+									if (isCycleSafe) {
+										// if checking for cycles is
+										// enabled, remove node from
+										// hashset
+										visitedNodes.remove(peekEntry.node);
+									}
+									// collect stuff for notification
+									SNode peekNode = peekEntry.node;
+									peekEntry = null;
+									if (!parentStack.isEmpty()) {
+										peekEntry = parentStack.peek();
+									}
+									if (peekEntry == null) {
+										traverseHandler.nodeLeft(TOP_DOWN_DEPTH_FIRST, traverseId, peekNode, null, null,
+												0);
+									} else {
+										traverseHandler.nodeLeft(TOP_DOWN_DEPTH_FIRST, traverseId, peekNode,
+												peekEntry.rel,
+												(peekEntry.rel != null) ? peekEntry.rel.getSource() : null,
+												peekEntry.order);
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 
@@ -524,8 +494,8 @@ public class GraphTraverserModule {
 				fromRel = queueReachedFromRel.remove(0);
 				Integer order = queueReachedOrder.remove(0);
 
-				List<SRelation<? extends SNode, ? extends SNode>> edgesIn = getGraph().getInRelations(tNode.getId());
-				List<SRelation<? extends SNode, ? extends SNode>> edgesOut = getGraph().getOutRelations(tNode.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> edgesIn = graph.getInRelations(tNode.getId());
+				List<SRelation<? extends SNode, ? extends SNode>> edgesOut = graph.getOutRelations(tNode.getId());
 				List<SRelation<? extends SNode, ? extends SNode>> edges = null;
 				currentNodePath.add(tNode);
 				traverseHandler.nodeReached(traverseType, traverseId, tNode, fromRel, fromNode, order);
@@ -588,18 +558,16 @@ public class GraphTraverserModule {
 				// if current path is larger then 1, than a parent node exists
 				parent = currentNodePath.get(currentNodePath.size() - 2);
 			}
-			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent,
-					order);
+			traverseHandler.nodeReached(TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent, order);
 			// walk through all childs of this node
-			List<SRelation<? extends SNode, ? extends SNode>> childEdges = getGraph().getOutRelations(currNode.getId());
+			List<SRelation<? extends SNode, ? extends SNode>> childEdges = graph.getOutRelations(currNode.getId());
 			if (childEdges != null) {
 				// in case of node has childs
 				int i = 0;
 				for (SRelation<? extends SNode, ? extends SNode> childRel : childEdges) {
 					SNode childNode = childRel.getTarget();
 
-					if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, childRel,
-							childNode, order)) {
+					if (traverseHandler.checkConstraint(TOP_DOWN_DEPTH_FIRST, traverseId, childRel, childNode, order)) {
 						if ((isCycleSafe) && (currentNodePath.contains(childNode))) {
 
 							StringBuffer text = new StringBuffer();
@@ -624,8 +592,7 @@ public class GraphTraverserModule {
 				}
 			}
 
-			traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent,
-					order);
+			traverseHandler.nodeLeft(TOP_DOWN_DEPTH_FIRST, traverseId, currNode, rel, parent, order);
 		}
 
 		/**
@@ -654,11 +621,10 @@ public class GraphTraverserModule {
 				child = currentNodePath.get(currentNodePath.size() - 1);
 			}
 
-			traverseHandler.nodeReached(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, currNode, edge, child,
-					order);
+			traverseHandler.nodeReached(BOTTOM_UP_DEPTH_FIRST, traverseId, currNode, edge, child, order);
 
 			// walk through all childs of this node
-			List<SRelation<? extends SNode, ? extends SNode>> parentEdges = getGraph().getInRelations(currNode.getId());
+			List<SRelation<? extends SNode, ? extends SNode>> parentEdges = graph.getInRelations(currNode.getId());
 			if (parentEdges != null) {
 				// in case of node has parents
 				int i = 0;
@@ -671,8 +637,8 @@ public class GraphTraverserModule {
 								+ "' while current path was '" + currentNodePath + "'.");
 
 					currentNodePath.add(parentNode);
-					if (traverseHandler.checkConstraint(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId,
-							parentEdge, parentNode, order)) {
+					if (traverseHandler.checkConstraint(BOTTOM_UP_DEPTH_FIRST, traverseId, parentEdge, parentNode,
+							order)) {
 						bottomUpDepthFirstRec(parentEdge, i);
 						i++;
 					}
@@ -682,8 +648,7 @@ public class GraphTraverserModule {
 
 			}
 
-			traverseHandler.nodeLeft(GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST, traverseId, currNode, edge, child,
-					order);
+			traverseHandler.nodeLeft(BOTTOM_UP_DEPTH_FIRST, traverseId, currNode, edge, child, order);
 		}
 	}
 }
