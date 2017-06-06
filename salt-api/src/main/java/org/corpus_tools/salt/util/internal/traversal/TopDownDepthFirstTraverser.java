@@ -1,6 +1,5 @@
-package org.corpus_tools.salt.core.impl;
+package org.corpus_tools.salt.util.internal.traversal;
 
-import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +12,6 @@ import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
-import org.slf4j.LoggerFactory;
 
 public class TopDownDepthFirstTraverser extends Traverser {
 
@@ -156,15 +154,9 @@ public class TopDownDepthFirstTraverser extends Traverser {
 
 		// if we already have an iterator use it
 		if (entry.iterator != null && entry.iterator.hasNext()) {
-			try {
-				entry.rel = entry.iterator.next();
-				retVal = entry.rel.getTarget();
-				entry.order++;
-			} catch (ConcurrentModificationException ex) {
-				LoggerFactory.getLogger(GraphTraverserModule.class).warn("Graph was changed during traversal", ex);
-				// use fallback
-				entry.iterator = null;
-			}
+			entry.rel = entry.iterator.next();
+			retVal = entry.rel.getTarget();
+			entry.order++;
 		}
 
 		// even if something went wrong with the iterator we should be still

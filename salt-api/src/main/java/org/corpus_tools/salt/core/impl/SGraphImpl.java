@@ -248,9 +248,8 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 	@Override
 	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
 			GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
-		GraphTraverserModule traverserModule = new GraphTraverserModule();
-		traverserModule.setGraph(this);
-		traverserModule.traverse(startNodes, traverseType, traverseId, traverseHandler, isCycleSafe);
+		SaltUtil.traverse(this).startFrom(startNodes.toArray(new SNode[startNodes.size()])).useStrategy(traverseType)
+				.cycleSafe(isCycleSafe).useId(traverseId).andCall(traverseHandler);
 	}
 
 	// =======================================> SNamedElement
