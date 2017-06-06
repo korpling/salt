@@ -160,22 +160,6 @@ public class GraphTraverserModule {
 		}
 		Traverser traverser = new Traverser(startNodes, strategy, traverseId, traverseHandler, isCycleSafe, graph);
 		traverser.run();
-
-		// clean up traverseIdTable
-		synchronized (traverseIdTable) {
-			if (traverseIdTable.get(traverseHandler).size() > 1) {
-				// only remove id
-				traverseIdTable.get(traverseHandler).remove(traverseId);
-			} else {
-				// remove whole entry
-				traverseIdTable.remove(traverseHandler);
-			}
-		}
-
-		if (traverser.getException() != null) {
-			// ckecks if an error occurs while traversal and throws it
-			throw traverser.getException();
-		}
 	}
 
 	static class Traverser {
@@ -197,64 +181,33 @@ public class GraphTraverserModule {
 		}
 
 		/**
-		 * In Case of an exception occurs during traversal, it will be stored
-		 * here, so that the calling method can check if the traversal finished
-		 * successfully or with an error.
-		 */
-		private SaltException exception = null;
-
-		private void setException(SaltException exception) {
-			this.exception = exception;
-		}
-
-		/**
-		 * In Case of an exception occurs during traversal, it will be stored
-		 * here, so that the calling method can check if the traversal finished
-		 * successfully or with an error.
-		 * 
-		 * @return
-		 */
-		public SaltException getException() {
-			return exception;
-		}
-
-		/**
 		 * Starts traversal, with set properties.
 		 */
 		public void run() {
-			try {
-				if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
-					new TopDownDepthFirstTraverser(startNodes, strategy, traverseId, traverseHandler, isCycleSafe,
-							graph).traverse();
-				} else if (TOP_DOWN_BREADTH_FIRST.equals(strategy)) {
-					// TOP_DOWN_BREADTH_FIRST traversal
-					for (SNode startNode : startNodes) {
-						currentNodePath = new ArrayList<>();
-						if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
-							currentNodePath.add(startNode);
-						}
+			if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
+				new TopDownDepthFirstTraverser(startNodes, strategy, traverseId, traverseHandler, isCycleSafe, graph)
+						.traverse();
+			} else if (TOP_DOWN_BREADTH_FIRST.equals(strategy)) {
+				// TOP_DOWN_BREADTH_FIRST traversal
+				for (SNode startNode : startNodes) {
+					currentNodePath = new ArrayList<>();
+					if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
+						currentNodePath.add(startNode);
 					}
-					breadthFirst();
-				} else if (BOTTOM_UP_DEPTH_FIRST.equals(strategy)) {
-					new BottomUpDepthFirstTraverser(startNodes, strategy, traverseId, traverseHandler, isCycleSafe,
-							graph).traverse();
-				} else if (BOTTOM_UP_BREADTH_FIRST.equals(strategy)) {
-					// BOTTOM_UP_BREADTH_FIRST traversal
-					for (SNode startNode : startNodes) {
-						currentNodePath = new ArrayList<SNode>();
-						if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
-							currentNodePath.add(startNode);
-						}
-					}
-					breadthFirst();
 				}
-
-			} catch (SaltException e) {
-				setException(e);
-			} catch (Exception e2) {
-				SaltException e = new SaltException("An exception occured while traversing the graph '" + graph.getId()
-						+ "' with path '" + currentNodePath + "'. because of " + e2.getMessage() + ". ", e2);
-				setException(e);
+				breadthFirst();
+			} else if (BOTTOM_UP_DEPTH_FIRST.equals(strategy)) {
+				new BottomUpDepthFirstTraverser(startNodes, strategy, traverseId, traverseHandler, isCycleSafe, graph)
+						.traverse();
+			} else if (BOTTOM_UP_BREADTH_FIRST.equals(strategy)) {
+				// BOTTOM_UP_BREADTH_FIRST traversal
+				for (SNode startNode : startNodes) {
+					currentNodePath = new ArrayList<SNode>();
+					if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
+						currentNodePath.add(startNode);
+					}
+				}
+				breadthFirst();
 			}
 		}
 
