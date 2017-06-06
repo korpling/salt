@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal.traversal;
+package org.corpus_tools.salt.util.traversal.internal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +11,18 @@ import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 
-public class TopDownBreadthFirstTraverser extends Traverser {
+public class BottomUpBreadthFirstTraverser extends Traverser {
 
-	public TopDownBreadthFirstTraverser(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE strategy,
+	public BottomUpBreadthFirstTraverser(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE strategy,
 			String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe, SGraph graph) {
 		super(startNodes, strategy, traverseId, traverseHandler, isCycleSafe, graph);
 	}
 
 	@Override
 	public void traverse() {
-		// TOP_DOWN_BREADTH_FIRST traversal
+		// BOTTOM_UP_BREADTH_FIRST traversal
 		for (SNode startNode : startNodes) {
-			currentNodePath = new ArrayList<>();
+			currentNodePath = new ArrayList<SNode>();
 			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
 				currentNodePath.add(startNode);
 			}

@@ -74,7 +74,7 @@ import org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.corpus_tools.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter;
 import org.corpus_tools.salt.util.internal.persistence.dot.SDocumentGraphDOTWriter;
-import org.corpus_tools.salt.util.internal.traversal.Traverser;
+import org.corpus_tools.salt.util.traversal.internal.Traverser;
 import org.eclipse.emf.common.util.URI;
 import org.omg.PortableInterceptor.ServerIdHelper;
 import org.xml.sax.InputSource;

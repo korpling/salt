@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal.traversal;
+package org.corpus_tools.salt.util.traversal.internal;
 
 import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
 import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST;

@@ -15,7 +15,9 @@
  *
  *
  */
-package org.corpus_tools.salt.util.internal.traversal;
+package org.corpus_tools.salt.util.traversal;
+
+import org.corpus_tools.salt.util.traversal.internal.TraversalLocation;
 
 public interface SimpleTraverseHandler {
 	/**

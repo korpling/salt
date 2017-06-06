@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal.traversal;
+package org.corpus_tools.salt.util.traversal;
 
 /**
  * Determines the strategy used by the traverser.
