@@ -22,7 +22,8 @@ public class TopDownDepthFirstTraverser extends Traverser {
 		super(startNodes, strategy, traverseId, traverseHandler, isCycleSafe, graph);
 	}
 
-	public void topDownDepthFirst() {
+	@Override
+	public void traverse() {
 		// TOP_DOWN_DEPTH_FIRST traversal
 		for (SNode startNode : startNodes) {
 			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {

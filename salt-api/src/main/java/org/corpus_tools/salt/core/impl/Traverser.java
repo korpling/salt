@@ -25,4 +25,6 @@ public abstract class Traverser {
 		this.isCycleSafe = isCycleSafe;
 		this.graph = graph;
 	}
+
+	public abstract void traverse();
 }

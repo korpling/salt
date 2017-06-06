@@ -225,7 +225,7 @@ public class GraphTraverserModule {
 			try {
 				if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
 					new TopDownDepthFirstTraverser(startNodes, strategy, traverseId, traverseHandler, isCycleSafe,
-							graph).topDownDepthFirst();
+							graph).traverse();
 				} else if (TOP_DOWN_BREADTH_FIRST.equals(strategy)) {
 					// TOP_DOWN_BREADTH_FIRST traversal
 					for (SNode startNode : startNodes) {
@@ -236,14 +236,8 @@ public class GraphTraverserModule {
 					}
 					breadthFirst();
 				} else if (BOTTOM_UP_DEPTH_FIRST.equals(strategy)) {
-					// BOTTOM_UP_DEPTH_FIRST traversal
-					for (SNode startNode : startNodes) {
-						currentNodePath = new ArrayList<>();
-						if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
-							currentNodePath.add(startNode);
-							bottomUpDepthFirstRec(null, 0);
-						}
-					}
+					new BottomUpDepthFirstTraverser(startNodes, strategy, traverseId, traverseHandler, isCycleSafe,
+							graph).traverse();
 				} else if (BOTTOM_UP_BREADTH_FIRST.equals(strategy)) {
 					// BOTTOM_UP_BREADTH_FIRST traversal
 					for (SNode startNode : startNodes) {
@@ -263,120 +257,6 @@ public class GraphTraverserModule {
 				setException(e);
 			}
 		}
-
-		// private void topDownDepthFirst() {
-		// // TOP_DOWN_DEPTH_FIRST traversal
-		// for (SNode startNode : startNodes) {
-		// if (traverseHandler.checkConstraint(strategy, traverseId, null,
-		// startNode, 0l)) {
-		// Set<SNode> visitedNodes = null;
-		// if (isCycleSafe) {
-		// // if checking for cycles is enabled, initialize
-		// // hashset
-		// visitedNodes = new HashSet<>();
-		// }
-		// Stack<NodeEntry> parentStack = new Stack<>();
-		// NodeEntry currentEntry = new NodeEntry(startNode, 0);
-		// while ((!parentStack.isEmpty()) || (currentEntry != null)) {
-		// if (currentEntry != null) {
-		// // way down
-		// if (isCycleSafe) {
-		// // check if cycle exists
-		// if (visitedNodes.contains(currentEntry.node)) {
-		// StringBuffer text = new StringBuffer();
-		// if (currentNodePath != null) {
-		// for (SNode node : currentNodePath) {
-		// if (node != null) {
-		// text.append(node.getId());
-		// } else {
-		// text.append("null");
-		// }
-		// text.append(" --> ");
-		// }
-		// }
-		// text.append(currentEntry.node.getId());
-		// throw new SaltInvalidModelException("A cycle in graph '" +
-		// graph.getId()
-		// + "' has been detected, while traversing with type '" + strategy
-		// + "'. The cycle has been detected when visiting node '" +
-		// currentEntry.node
-		// + "' while current path was '" + text.toString() + "'.");
-		// }
-		// }
-		// NodeEntry peekEntry = null;
-		// if (!parentStack.isEmpty())
-		// peekEntry = parentStack.peek();
-		// parentStack.push(currentEntry);
-		// if (isCycleSafe) {
-		// // if checking for cycles is enabled,
-		// // add node to hashset
-		// visitedNodes.add(currentEntry.node);
-		// }
-		// SNode nextChild = nextChild(currentEntry);
-		// if (peekEntry == null) {
-		// traverseHandler.nodeReached(strategy, traverseId, currentEntry.node,
-		// null, null, 0);
-		// } else {
-		// traverseHandler.nodeReached(strategy, traverseId, currentEntry.node,
-		// peekEntry.rel,
-		// (peekEntry.rel != null) ? peekEntry.rel.getSource() : null,
-		// peekEntry.order);
-		// }
-		// if (nextChild != null) {
-		// if (traverseHandler.checkConstraint(strategy, traverseId,
-		// currentEntry.rel, nextChild,
-		// currentEntry.order)) {
-		// currentEntry = new NodeEntry(nextChild, 0);
-		// } else {
-		// currentEntry = null;
-		// }
-		// } else {
-		// currentEntry = null;
-		// }
-		// } else {
-		// NodeEntry peekEntry = parentStack.peek();
-		// if (peekEntry != null) {
-		// SNode nextChild = nextChild(peekEntry);
-		// if (nextChild != null) {
-		// // way down, another branch was
-		// // found
-		// if (traverseHandler.checkConstraint(strategy, traverseId,
-		// peekEntry.rel, nextChild,
-		// peekEntry.order)) {
-		// currentEntry = new NodeEntry(nextChild, 0);
-		// } else {
-		// currentEntry = null;
-		// }
-		// } else {// way up
-		// parentStack.pop();
-		// if (isCycleSafe) {
-		// // if checking for cycles is
-		// // enabled, remove node from
-		// // hashset
-		// visitedNodes.remove(peekEntry.node);
-		// }
-		// // collect stuff for notification
-		// SNode peekNode = peekEntry.node;
-		// peekEntry = null;
-		// if (!parentStack.isEmpty()) {
-		// peekEntry = parentStack.peek();
-		// }
-		// if (peekEntry == null) {
-		// traverseHandler.nodeLeft(strategy, traverseId, peekNode, null, null,
-		// 0);
-		// } else {
-		// traverseHandler.nodeLeft(strategy, traverseId, peekNode,
-		// peekEntry.rel,
-		// (peekEntry.rel != null) ? peekEntry.rel.getSource() : null,
-		// peekEntry.order);
-		// }
-		// }
-		// }
-		// }
-		// }
-		// }
-		// }
-		// }
 
 		/**
 		 * Traverses the graph in breadth first order. Relations are followed
@@ -521,61 +401,6 @@ public class GraphTraverserModule {
 			}
 
 			traverseHandler.nodeLeft(strategy, traverseId, currNode, rel, parent, order);
-		}
-
-		/**
-		 * A recursive method, which traverses through the graph in bottom-up
-		 * and depth-first order. That means, it walk through the graph in
-		 * opposite direction of the edges and always expands the node i first,
-		 * before a node i+1 will be expanded. This method is cycle-safe,
-		 * therefore the variable currentNodePath is used.
-		 * 
-		 * @param edge
-		 *            is the edge, via which the current node (last one in
-		 *            currentPath) was reached
-		 * @param order
-		 *            number of current edge in list of all outgoing edges of
-		 *            the child node
-		 */
-		private void bottomUpDepthFirstRec(SRelation<? extends SNode, ? extends SNode> edge, long order) {
-			if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
-				throw new SaltParameterException("Cannot traverse node starting at empty start node.");
-			}
-			// current node is last element in currentPath
-			SNode currNode = currentNodePath.get(currentNodePath.size() - 1);
-			SNode child = null;
-			if (currentNodePath.size() > 1) {
-				// if current path is larger then 1, than a parent node exists
-				child = currentNodePath.get(currentNodePath.size() - 1);
-			}
-
-			traverseHandler.nodeReached(strategy, traverseId, currNode, edge, child, order);
-
-			// walk through all childs of this node
-			List<SRelation<? extends SNode, ? extends SNode>> parentEdges = graph.getInRelations(currNode.getId());
-			if (parentEdges != null) {
-				// in case of node has parents
-				int i = 0;
-				for (SRelation<? extends SNode, ? extends SNode> parentEdge : parentEdges) {
-					SNode parentNode = parentEdge.getSource();
-					if ((isCycleSafe) && (currentNodePath.contains(parentNode)))
-						throw new SaltInvalidModelException("A cycle in graph '" + graph.getId()
-								+ "' has been detected, while traversing with type '" + strategy
-								+ "'. The cycle has been detected when visiting node '" + parentNode
-								+ "' while current path was '" + currentNodePath + "'.");
-
-					currentNodePath.add(parentNode);
-					if (traverseHandler.checkConstraint(strategy, traverseId, parentEdge, parentNode, order)) {
-						bottomUpDepthFirstRec(parentEdge, i);
-						i++;
-					}
-					// remove last entry, to update current path
-					currentNodePath.remove(currentNodePath.size() - 1);
-				}
-
-			}
-
-			traverseHandler.nodeLeft(strategy, traverseId, currNode, edge, child, order);
 		}
 	}
 }
