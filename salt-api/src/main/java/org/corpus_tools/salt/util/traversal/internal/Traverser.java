@@ -5,6 +5,7 @@ import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DE
 import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST;
 import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public abstract class Traverser {
 	protected final GraphTraverseHandler traverseHandler;
 	protected final boolean isCycleSafe;
 	protected SGraph graph;
-	protected List<SNode> currentNodePath = null;
+	protected final List<SNode> currentNodePath = new ArrayList<>();
 
 	public Traverser(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE strategy, String traverseId,
 			GraphTraverseHandler traverseHandler, boolean isCycleSafe, SGraph graph) {

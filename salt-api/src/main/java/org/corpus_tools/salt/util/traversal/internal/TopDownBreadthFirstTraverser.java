@@ -21,7 +21,6 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 	@Override
 	public void traverse() {
 		for (SNode startNode : startNodes) {
-			currentNodePath = new ArrayList<>();
 			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
 				currentNodePath.add(startNode);
 			}
@@ -29,7 +28,7 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 		if (isCycleSafe) {
 			throw new SaltException("Not able to detect cycles with breadth first search");
 		}
-		if ((currentNodePath == null) || (currentNodePath.isEmpty())) {
+		if (currentNodePath.isEmpty()) {
 			throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 		}
 		SNode fromNode = null;
@@ -58,21 +57,19 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 			traverseHandler.nodeReached(strategy, traverseId, tNode, fromRel, fromNode, order);
 			// Switching in and out nodes list
 			edges = edgesOut;
-			if (edges != null) {
-				// in case of node has childs
-				int orderCount = 0;
-				for (SRelation<? extends SNode, ? extends SNode> e : edges) {
-					SNode n = null;
-					n = e.getTarget();
+			// in case of node has childs
+			int orderCount = 0;
+			for (SRelation<? extends SNode, ? extends SNode> e : edges) {
+				SNode n = null;
+				n = e.getTarget();
 
-					if (traverseHandler.checkConstraint(strategy, traverseId, e, n, order)) {
-						queuedNodes.add(n);
-						queueReachedFrom.add(fromNode);
-						queueReachedFromRel.add(e);
-						queueReachedOrder.add(orderCount);
-					}
-					++orderCount;
+				if (traverseHandler.checkConstraint(strategy, traverseId, e, n, order)) {
+					queuedNodes.add(n);
+					queueReachedFrom.add(fromNode);
+					queueReachedFromRel.add(e);
+					queueReachedOrder.add(orderCount);
 				}
+				++orderCount;
 			}
 			traverseHandler.nodeLeft(strategy, traverseId, tNode, fromRel, fromNode, order);
 			currentNodePath.remove(0);

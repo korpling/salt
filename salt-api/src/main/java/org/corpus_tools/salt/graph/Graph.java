@@ -95,7 +95,7 @@ public interface Graph<N extends Node, R extends Relation<? extends N, ? extends
 	 * @param nodeId
 	 *            id corresponding to the node, for which all incoming relations
 	 *            should be searched
-	 * @return a list of all incoming relations
+	 * @return a list of all incoming relations or an empty list
 	 */
 	public List<R> getInRelations(String nodeId);
 

@@ -1,6 +1,5 @@
 package org.corpus_tools.salt.util.traversal.internal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.corpus_tools.salt.core.GraphTraverseHandler;
@@ -20,9 +19,7 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 
 	@Override
 	public void traverse() {
-		// BOTTOM_UP_DEPTH_FIRST traversal
 		for (SNode startNode : startNodes) {
-			currentNodePath = new ArrayList<>();
 			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
 				currentNodePath.add(startNode);
 				bottomUpDepthFirstRec(null, 0);
@@ -31,7 +28,7 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 	}
 
 	private void bottomUpDepthFirstRec(SRelation<? extends SNode, ? extends SNode> edge, long order) {
-		if ((currentNodePath == null) || (currentNodePath.size() == 0)) {
+		if (currentNodePath.isEmpty()) {
 			throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 		}
 		// current node is last element in currentPath
@@ -46,26 +43,23 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 
 		// walk through all childs of this node
 		List<SRelation<? extends SNode, ? extends SNode>> parentEdges = graph.getInRelations(currNode.getId());
-		if (parentEdges != null) {
-			// in case of node has parents
-			int i = 0;
-			for (SRelation<? extends SNode, ? extends SNode> parentEdge : parentEdges) {
-				SNode parentNode = parentEdge.getSource();
-				if ((isCycleSafe) && (currentNodePath.contains(parentNode)))
-					throw new SaltInvalidModelException(
-							"A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '"
-									+ strategy + "'. The cycle has been detected when visiting node '" + parentNode
-									+ "' while current path was '" + currentNodePath + "'.");
-
-				currentNodePath.add(parentNode);
-				if (traverseHandler.checkConstraint(strategy, traverseId, parentEdge, parentNode, order)) {
-					bottomUpDepthFirstRec(parentEdge, i);
-					i++;
-				}
-				// remove last entry, to update current path
-				currentNodePath.remove(currentNodePath.size() - 1);
+		// in case of node has parents
+		int i = 0;
+		for (SRelation<? extends SNode, ? extends SNode> parentEdge : parentEdges) {
+			SNode parentNode = parentEdge.getSource();
+			if ((isCycleSafe) && (currentNodePath.contains(parentNode))) {
+				throw new SaltInvalidModelException(
+						"A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '"
+								+ strategy + "'. The cycle has been detected when visiting node '" + parentNode
+								+ "' while current path was '" + currentNodePath + "'.");
 			}
-
+			currentNodePath.add(parentNode);
+			if (traverseHandler.checkConstraint(strategy, traverseId, parentEdge, parentNode, order)) {
+				bottomUpDepthFirstRec(parentEdge, i);
+				i++;
+			}
+			// remove last entry, to update current path
+			currentNodePath.remove(currentNodePath.size() - 1);
 		}
 
 		traverseHandler.nodeLeft(strategy, traverseId, currNode, edge, child, order);
