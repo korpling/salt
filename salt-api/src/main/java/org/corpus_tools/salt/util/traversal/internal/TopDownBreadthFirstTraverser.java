@@ -9,7 +9,6 @@ import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
-import org.corpus_tools.salt.exceptions.SaltParameterException;
 
 public class TopDownBreadthFirstTraverser extends Traverser {
 
@@ -20,17 +19,11 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 
 	@Override
 	public void traverse() {
-		for (SNode startNode : startNodes) {
-			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
-				currentNodePath.add(startNode);
-			}
-		}
 		if (isCycleSafe) {
 			throw new SaltException("Not able to detect cycles with breadth first search");
 		}
-		if (currentNodePath.isEmpty()) {
-			throw new SaltParameterException("Cannot traverse node starting at empty start node.");
-		}
+		startNodes.stream()
+				.forEach(startNode -> traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l));
 		SNode fromNode = null;
 		SRelation<?, ?> fromRel = null;
 		List<SNode> queuedNodes = new ArrayList<>();
@@ -44,7 +37,6 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 			queueReachedFromRel.add(null);
 			queueReachedOrder.add(0);
 		}
-		currentNodePath.clear();
 		while (!queuedNodes.isEmpty()) {
 			SNode tNode = queuedNodes.remove(0);
 			fromNode = queueReachedFrom.remove(0);
@@ -53,7 +45,6 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 
 			List<SRelation<? extends SNode, ? extends SNode>> edgesOut = graph.getOutRelations(tNode.getId());
 			List<SRelation<? extends SNode, ? extends SNode>> edges = null;
-			currentNodePath.add(tNode);
 			traverseHandler.nodeReached(strategy, traverseId, tNode, fromRel, fromNode, order);
 			// Switching in and out nodes list
 			edges = edgesOut;
@@ -72,7 +63,6 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 				++orderCount;
 			}
 			traverseHandler.nodeLeft(strategy, traverseId, tNode, fromRel, fromNode, order);
-			currentNodePath.remove(0);
 		}
 	}
 }
