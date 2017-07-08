@@ -22,7 +22,10 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 		if (isCycleSafe) {
 			throw new SaltException("Not able to detect cycles with breadth first search");
 		}
-		startNodes.stream().forEach(startNode -> handler.checkConstraint(strategy, id, null, startNode, 0l));
+		// startNodes.stream().forEach(startNode ->
+		// handler.checkConstraint(strategy, id, null, startNode, 0l));
+		startNodes.stream().forEach(startNode -> handler.shouldTraversalGoOn(TraversalLocation
+				.createWithStrategy(strategy).withCurrentNode(startNode).withRelationOrder(0).withId(id).build()));
 		SNode fromNode = null;
 		SRelation<?, ?> fromRel = null;
 		List<SNode> queuedNodes = new ArrayList<>();
@@ -44,7 +47,14 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 
 			List<SRelation<? extends SNode, ? extends SNode>> edgesOut = graph.getOutRelations(tNode.getId());
 			List<SRelation<? extends SNode, ? extends SNode>> edges = null;
-			handler.nodeReached(strategy, id, tNode, fromRel, fromNode, order);
+			// handler.nodeReached(strategy, id, tNode, fromRel, fromNode,
+			// order);
+			handler.nodeReachedOnWayForth(TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(tNode)
+					.withFromRelation(fromRel)
+					.withFromNode(fromNode)
+					.withId(id)
+					.build());
 			// Switching in and out nodes list
 			edges = edgesOut;
 			// in case of node has childs
@@ -53,7 +63,13 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 				SNode n = null;
 				n = e.getTarget();
 
-				if (handler.checkConstraint(strategy, id, e, n, order)) {
+				// if (handler.checkConstraint(strategy, id, e, n, order)) {
+				if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+						.withCurrentNode(n)
+						.withFromRelation(e)
+						.withRelationOrder(order)
+						.withId(id)
+						.build())) {
 					queuedNodes.add(n);
 					queueReachedFrom.add(fromNode);
 					queueReachedFromRel.add(e);
@@ -61,7 +77,14 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 				}
 				++orderCount;
 			}
-			handler.nodeLeft(strategy, id, tNode, fromRel, fromNode, order);
+			// handler.nodeLeft(strategy, id, tNode, fromRel, fromNode, order);
+			handler.nodeReachedOnWayBack(TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(tNode)
+					.withFromRelation(fromRel)
+					.withFromNode(fromNode)
+					.withRelationOrder(order)
+					.withId(id)
+					.build());
 		}
 	}
 }
