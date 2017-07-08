@@ -24,7 +24,12 @@ public class TopDownDepthFirstTraverser extends Traverser {
 	public void traverse() {
 		// TOP_DOWN_DEPTH_FIRST traversal
 		for (SNode startNode : startNodes) {
-			if (handler.checkConstraint(strategy, id, null, startNode, 0l)) {
+			// if (handler.checkConstraint(strategy, id, null, startNode, 0l)) {
+			if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(startNode)
+					.withRelationOrder(0)
+					.withId(id)
+					.build())) {
 				Set<SNode> visitedNodes = null;
 				if (isCycleSafe) {
 					// if checking for cycles is enabled, initialize
@@ -68,14 +73,37 @@ public class TopDownDepthFirstTraverser extends Traverser {
 						}
 						SNode nextChild = nextChild(currentEntry);
 						if (peekEntry == null) {
-							handler.nodeReached(strategy, id, currentEntry.node, null, null, 0);
+							// handler.nodeReached(strategy, id,
+							// currentEntry.node, null, null, 0);
+							handler.nodeReachedOnWayForth(TraversalLocation.createWithStrategy(strategy)
+									.withCurrentNode(currentEntry.node)
+									.withRelationOrder(0)
+									.withId(id)
+									.build());
 						} else {
-							handler.nodeReached(strategy, id, currentEntry.node, peekEntry.rel,
-									(peekEntry.rel != null) ? peekEntry.rel.getSource() : null, peekEntry.order);
+							// handler.nodeReached(strategy, id,
+							// currentEntry.node, peekEntry.rel,
+							// (peekEntry.rel != null) ?
+							// peekEntry.rel.getSource() : null,
+							// peekEntry.order);
+							handler.nodeReachedOnWayForth(TraversalLocation.createWithStrategy(strategy)
+									.withCurrentNode(currentEntry.node)
+									.withFromRelation(peekEntry.rel)
+									.withFromNode(peekEntry.rel != null ? peekEntry.rel.getSource() : null)
+									.withRelationOrder(peekEntry.order)
+									.withId(id)
+									.build());
 						}
 						if (nextChild != null) {
-							if (handler.checkConstraint(strategy, id, currentEntry.rel, nextChild,
-									currentEntry.order)) {
+							// if (handler.checkConstraint(strategy, id,
+							// currentEntry.rel, nextChild,
+							// currentEntry.order)) {
+							if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+									.withCurrentNode(nextChild)
+									.withFromRelation(currentEntry.rel)
+									.withRelationOrder(currentEntry.order)
+									.withId(id)
+									.build())) {
 								currentEntry = new NodeEntry(nextChild, 0);
 							} else {
 								currentEntry = null;
@@ -90,8 +118,14 @@ public class TopDownDepthFirstTraverser extends Traverser {
 							if (nextChild != null) {
 								// way down, another branch was
 								// found
-								if (handler.checkConstraint(strategy, id, peekEntry.rel, nextChild,
-										peekEntry.order)) {
+								// if (handler.checkConstraint(strategy, id,
+								// peekEntry.rel, nextChild, peekEntry.order)) {
+								if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+										.withCurrentNode(nextChild)
+										.withFromRelation(peekEntry.rel)
+										.withRelationOrder(peekEntry.order)
+										.withId(id)
+										.build())) {
 									currentEntry = new NodeEntry(nextChild, 0);
 								} else {
 									currentEntry = null;
@@ -111,11 +145,25 @@ public class TopDownDepthFirstTraverser extends Traverser {
 									peekEntry = parentStack.peek();
 								}
 								if (peekEntry == null) {
-									handler.nodeLeft(strategy, id, peekNode, null, null, 0);
+									// handler.nodeLeft(strategy, id, peekNode,
+									// null, null, 0);
+									handler.nodeReachedOnWayBack(TraversalLocation.createWithStrategy(strategy)
+											.withCurrentNode(peekNode)
+											.withRelationOrder(0)
+											.withId(id)
+											.build());
 								} else {
-									handler.nodeLeft(strategy, id, peekNode, peekEntry.rel,
-											(peekEntry.rel != null) ? peekEntry.rel.getSource() : null,
-											peekEntry.order);
+									// handler.nodeLeft(strategy, id, peekNode,
+									// peekEntry.rel,
+									// (peekEntry.rel != null) ?
+									// peekEntry.rel.getSource() : null,
+									// peekEntry.order);
+									handler.nodeReachedOnWayBack(TraversalLocation.createWithStrategy(strategy)
+											.withCurrentNode(peekNode)
+											.withFromRelation(peekEntry.rel)
+											.withFromNode(peekEntry.rel != null ? peekEntry.rel.getSource() : null)
+											.withId(id)
+											.build());
 								}
 							}
 						}
