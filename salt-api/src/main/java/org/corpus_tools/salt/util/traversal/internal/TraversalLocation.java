@@ -48,38 +48,32 @@ public class TraversalLocation {
 		return Optional.ofNullable(fromNode);
 	}
 
-	public static StrategyBuilder create() {
-		return new StrategyBuilder();
-	}
-
-	public static class StrategyBuilder {
-		public CurrentNodeBuilder withStrategy(TraversalStrategy traversalStrategy) {
-			return new CurrentNodeBuilder(traversalStrategy);
-		}
+	public static CurrentNodeBuilder createWithStrategy(TraversalStrategy strategy) {
+		return new CurrentNodeBuilder(strategy);
 	}
 
 	public static class CurrentNodeBuilder {
-		private final TraversalStrategy traversalStrategy;
+		private final TraversalStrategy strategy;
 
-		public CurrentNodeBuilder(TraversalStrategy traversalStrategy) {
-			this.traversalStrategy = traversalStrategy;
+		public CurrentNodeBuilder(TraversalStrategy strategy) {
+			this.strategy = strategy;
 		}
 
 		public Builder withCurrentNode(SNode currentNode) {
-			return new Builder(traversalStrategy, currentNode);
+			return new Builder(strategy, currentNode);
 		}
 	}
 
 	public static class Builder {
-		private final TraversalStrategy traversalStrategy;
+		private final TraversalStrategy strategy;
 		private final SNode currentNode;
 		private SRelation<? extends SNode, ? extends SNode> fromRelation;
 		private int relationOrder;
 		private SNode fromNode;
-		private String traversalId;
+		private String id;
 
-		public Builder(TraversalStrategy traversalStrategy, SNode currentNode) {
-			this.traversalStrategy = traversalStrategy;
+		public Builder(TraversalStrategy strategy, SNode currentNode) {
+			this.strategy = strategy;
 			this.currentNode = currentNode;
 		}
 
@@ -98,14 +92,13 @@ public class TraversalLocation {
 			return this;
 		}
 
-		public Builder withId(String traversalId) {
-			this.traversalId = traversalId;
+		public Builder withId(String id) {
+			this.id = id;
 			return this;
 		}
 
 		public TraversalLocation build() {
-			return new TraversalLocation(traversalStrategy, traversalId, currentNode, fromRelation, fromNode,
-					relationOrder);
+			return new TraversalLocation(strategy, id, currentNode, fromRelation, fromNode, relationOrder);
 		}
 	}
 }

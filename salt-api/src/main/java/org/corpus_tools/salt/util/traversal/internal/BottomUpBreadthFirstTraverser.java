@@ -3,25 +3,29 @@ package org.corpus_tools.salt.util.traversal.internal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph;
-import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
+import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
 public class BottomUpBreadthFirstTraverser extends Traverser {
 
-	public BottomUpBreadthFirstTraverser(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE strategy,
-			String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe, SGraph graph) {
-		super(startNodes, strategy, traverseId, traverseHandler, isCycleSafe, graph);
+	public BottomUpBreadthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy,
+			String traverseId, BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph) {
+		super(startNodes, strategy, traverseId, handler, isCycleSafe, graph);
 	}
 
 	@Override
 	public void traverse() {
 		for (SNode startNode : startNodes) {
-			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
+			if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(startNode)
+					.withId(id)
+					.withRelationOrder(0)
+					.build())) {
 				currentNodePath.add(startNode);
 			}
 		}
@@ -54,7 +58,13 @@ public class BottomUpBreadthFirstTraverser extends Traverser {
 			List<SRelation<? extends SNode, ? extends SNode>> edgesIn = graph.getInRelations(tNode.getId());
 			List<SRelation<? extends SNode, ? extends SNode>> edges = null;
 			currentNodePath.add(tNode);
-			traverseHandler.nodeReached(strategy, traverseId, tNode, fromRel, fromNode, order);
+			handler.nodeReachedOnWayForth(TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(tNode)
+					.withId(id)
+					.withFromNode(fromNode)
+					.withFromRelation(fromRel)
+					.withRelationOrder(order)
+					.build());
 			edges = edgesIn;
 			if (edges != null) {
 				// in case of node has childs
@@ -62,8 +72,13 @@ public class BottomUpBreadthFirstTraverser extends Traverser {
 				for (SRelation<? extends SNode, ? extends SNode> e : edges) {
 					SNode n = null;
 					n = e.getSource();
-
-					if (traverseHandler.checkConstraint(strategy, traverseId, e, n, order)) {
+					if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+							.withCurrentNode(n)
+							.withId(id)
+							.withFromNode(e.getSource())
+							.withFromRelation(e)
+							.withRelationOrder(order)
+							.build())) {
 						queuedNodes.add(n);
 						queueReachedFrom.add(fromNode);
 						queueReachedFromRel.add(e);
@@ -72,7 +87,13 @@ public class BottomUpBreadthFirstTraverser extends Traverser {
 					++orderCount;
 				}
 			}
-			traverseHandler.nodeLeft(strategy, traverseId, tNode, fromRel, fromNode, order);
+			handler.nodeReachedOnWayBack(TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(tNode)
+					.withId(id)
+					.withFromNode(fromNode)
+					.withFromRelation(fromRel)
+					.withRelationOrder(order)
+					.build());
 			currentNodePath.remove(0);
 		}
 	}

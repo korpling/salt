@@ -40,6 +40,7 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
+import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.eclipse.emf.common.util.URI;
 
 @SuppressWarnings("serial")
@@ -237,19 +238,42 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 		return sharedParents;
 	}
 
-	/** {@inheritDoc} */
-	@Override
+	/** @deprecated use {@link SaltUtil#traverse(SGraph)} instead */
+	@Deprecated
 	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
 			GraphTraverseHandler traverseHandler) {
-		this.traverse(startNodes, traverseType, traverseId, traverseHandler, true);
+		traverse(startNodes, traverseType, traverseId, traverseHandler, true);
 	}
 
-	/** {@inheritDoc} */
+	/** @deprecated use {@link SaltUtil#traverse(SGraph)} instead */
 	@Override
+	@Deprecated
 	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
 			GraphTraverseHandler traverseHandler, boolean isCycleSafe) {
-		SaltUtil.traverse(this).startFrom(startNodes.toArray(new SNode[startNodes.size()])).useStrategy(traverseType)
-				.cycleSafe(isCycleSafe).useId(traverseId).andCall(traverseHandler);
+
+		TraversalStrategy traversalStrategy = null;
+		switch (traverseType) {
+		case TOP_DOWN_DEPTH_FIRST:
+			traversalStrategy = TraversalStrategy.TOP_DOWN_DEPTH_FIRST;
+			break;
+		case TOP_DOWN_BREADTH_FIRST:
+			traversalStrategy = TraversalStrategy.TOP_DOWN_BREADTH_FIRST;
+			break;
+		case BOTTOM_UP_DEPTH_FIRST:
+			traversalStrategy = TraversalStrategy.BOTTOM_UP_DEPTH_FIRST;
+			break;
+		case BOTTOM_UP_BREADTH_FIRST:
+			traversalStrategy = TraversalStrategy.BOTTOM_UP_BREADTH_FIRST;
+			break;
+		default:
+			break;
+		}
+		SaltUtil.traverse(this)
+				.startFrom(startNodes.toArray(new SNode[startNodes.size()]))
+				.useStrategy(traversalStrategy)
+				.cycleSafe(isCycleSafe)
+				.useId(traverseId)
+				.andCall(new OldToNewTraverseHandler(traverseHandler));
 	}
 
 	// =======================================> SNamedElement

@@ -23,6 +23,7 @@ import java.util.Optional;
 import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
+import org.corpus_tools.salt.util.SaltUtil;
 
 public interface SGraph extends Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer>, SAnnotationContainer,
 		SNamedElement, SPathElement {
@@ -107,7 +108,9 @@ public interface SGraph extends Graph<SNode, SRelation<? extends SNode, ? extend
 	 *            handler
 	 * @param traverseHandler
 	 *            callback handler, on which the three methods will be invoked
+	 * @deprecated use {@link SaltUtil#traverse(SGraph)} instead
 	 */
+	@Deprecated
 	public void traverse(List<SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
 			GraphTraverseHandler traverseHandler);
 
@@ -139,7 +142,9 @@ public interface SGraph extends Graph<SNode, SRelation<? extends SNode, ? extend
 	 *            callback handler, on which the three methods will be invoked
 	 * @param isCycleSafe
 	 *            determines whether cycle safeness chould be checked
+	 * @deprecated use {@link SaltUtil#traverse(SGraph)} instead
 	 */
+	@Deprecated
 	public void traverse(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE traverseType, String traverseId,
 			GraphTraverseHandler traverseHandler, boolean isCycleSafe);
 

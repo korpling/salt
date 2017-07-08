@@ -21,15 +21,15 @@ import org.corpus_tools.salt.util.traversal.internal.TraversalLocation;
 
 /**
  * Using this traverse handler offers the possibility to observe the traversal
- * of the way forth and back again via {@link #nodeReached(TraversalLocation)}
- * and {@link #nodeLeft(TraversalLocation)}. Further the method
- * {@link #checkConstraint(TraversalLocation)} offers to check whether a node
+ * of the way forth and back again via {@link #nodeReachedOnWayForth(TraversalLocation)}
+ * and {@link #nodeReachedOnWayBack(TraversalLocation)}. Further the method
+ * {@link #shouldTraversalGoOn(TraversalLocation)} offers to check whether a node
  * shall be visited or not in advance. <br/>
  * The traverser calls the call-back handler in the following order:
  * <ol>
- * <li>{@link #checkConstraint(TraversalLocation)}</li>
- * <li>{@link #nodeReached(TraversalLocation)}</li>
- * <li>{@link #nodeLeft(TraversalLocation)}</li>
+ * <li>{@link #shouldTraversalGoOn(TraversalLocation)}</li>
+ * <li>{@link #nodeReachedOnWayForth(TraversalLocation)}</li>
+ * <li>{@link #nodeReachedOnWayBack(TraversalLocation)}</li>
  * </ol>
  */
 public interface BackAndForthTraverseHandler {
@@ -37,36 +37,36 @@ public interface BackAndForthTraverseHandler {
 	 * This method is called during a traversal to check if the current node and
 	 * eventually its sub-graph shall be traversed or not. If the return value
 	 * is false, the traversal for the current path, will stop at the current
-	 * node. Otherwise the method {@link #nodeReached(TraversalLocation)} will
+	 * node. Otherwise the method {@link #nodeReachedOnWayForth(TraversalLocation)} will
 	 * be invoked, when a new node is reached and
-	 * {@link #nodeLeft(TraversalLocation)} will be invoked, when this node is
+	 * {@link #nodeReachedOnWayBack(TraversalLocation)} will be invoked, when this node is
 	 * left.
 	 * 
-	 * @param traversalLocation
+	 * @param location
 	 *            contains current node and the node which was reached before
 	 *            and other information.
 	 */
-	public boolean checkConstraint(TraversalLocation traversalLocation);
+	public boolean shouldTraversalGoOn(TraversalLocation location);
 
 	/**
 	 * This method will be invoked, when a node is reached, after the method
-	 * {@link #checkConstraint(TraversalLocation)} has returned true and before
-	 * the method {@link #nodeLeft(TraversalLocation)} is invoked.
+	 * {@link #shouldTraversalGoOn(TraversalLocation)} has returned true and before
+	 * the method {@link #nodeReachedOnWayBack(TraversalLocation)} is invoked.
 	 * 
-	 * @param traversalLocation
+	 * @param location
 	 *            contains current node and the node which was reached before
 	 *            and other information.
 	 */
-	public void nodeReached(TraversalLocation traversalLocation);
+	public void nodeReachedOnWayForth(TraversalLocation location);
 
 	/**
 	 * This method will be invoked, when a node is left, after the method
-	 * {@link #checkConstraint(TraversalLocation)} has returned true and the
-	 * method {@link #nodeLeft(TraversalLocation)} has been invoked.
+	 * {@link #shouldTraversalGoOn(TraversalLocation)} has returned true and the
+	 * method {@link #nodeReachedOnWayBack(TraversalLocation)} has been invoked.
 	 * 
-	 * @param traversalLocation
+	 * @param location
 	 *            contains current node and the node which was reached before
 	 *            and other information.
 	 */
-	public void nodeLeft(TraversalLocation traversalLocation);
+	public void nodeReachedOnWayBack(TraversalLocation location);
 }

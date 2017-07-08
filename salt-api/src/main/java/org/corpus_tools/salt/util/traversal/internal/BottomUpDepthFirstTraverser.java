@@ -2,25 +2,25 @@ package org.corpus_tools.salt.util.traversal.internal;
 
 import java.util.List;
 
-import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph;
-import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
+import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
 public class BottomUpDepthFirstTraverser extends Traverser {
 
-	public BottomUpDepthFirstTraverser(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE strategy,
-			String traverseId, GraphTraverseHandler traverseHandler, boolean isCycleSafe, SGraph graph) {
-		super(startNodes, strategy, traverseId, traverseHandler, isCycleSafe, graph);
+	public BottomUpDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String traverseId,
+			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph) {
+		super(startNodes, strategy, traverseId, handler, isCycleSafe, graph);
 	}
 
 	@Override
 	public void traverse() {
 		for (SNode startNode : startNodes) {
-			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
+			if (handler.checkConstraint(strategy, id, null, startNode, 0l)) {
 				currentNodePath.add(startNode);
 				bottomUpDepthFirstRec(null, 0);
 			}
@@ -39,7 +39,7 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 			child = currentNodePath.get(currentNodePath.size() - 1);
 		}
 
-		traverseHandler.nodeReached(strategy, traverseId, currNode, edge, child, order);
+		handler.nodeReached(strategy, id, currNode, edge, child, order);
 
 		// walk through all childs of this node
 		List<SRelation<? extends SNode, ? extends SNode>> parentEdges = graph.getInRelations(currNode.getId());
@@ -54,7 +54,7 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 								+ "' while current path was '" + currentNodePath + "'.");
 			}
 			currentNodePath.add(parentNode);
-			if (traverseHandler.checkConstraint(strategy, traverseId, parentEdge, parentNode, order)) {
+			if (handler.checkConstraint(strategy, id, parentEdge, parentNode, order)) {
 				bottomUpDepthFirstRec(parentEdge, i);
 				i++;
 			}
@@ -62,7 +62,7 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 			currentNodePath.remove(currentNodePath.size() - 1);
 		}
 
-		traverseHandler.nodeLeft(strategy, traverseId, currNode, edge, child, order);
+		handler.nodeLeft(strategy, id, currNode, edge, child, order);
 	}
 
 }

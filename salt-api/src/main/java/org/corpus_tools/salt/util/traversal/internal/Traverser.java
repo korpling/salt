@@ -1,35 +1,35 @@
 package org.corpus_tools.salt.util.traversal.internal;
 
-import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
-import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST;
-import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_BREADTH_FIRST;
-import static org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
+import static org.corpus_tools.salt.util.traversal.TraversalStrategy.BOTTOM_UP_BREADTH_FIRST;
+import static org.corpus_tools.salt.util.traversal.TraversalStrategy.BOTTOM_UP_DEPTH_FIRST;
+import static org.corpus_tools.salt.util.traversal.TraversalStrategy.TOP_DOWN_BREADTH_FIRST;
+import static org.corpus_tools.salt.util.traversal.TraversalStrategy.TOP_DOWN_DEPTH_FIRST;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph;
-import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.exceptions.SaltTraverserException;
+import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
 public abstract class Traverser {
 	protected final List<? extends SNode> startNodes;
-	protected final GRAPH_TRAVERSE_TYPE strategy;
-	protected final String traverseId;
-	protected final GraphTraverseHandler traverseHandler;
+	protected final TraversalStrategy strategy;
+	protected final String id;
+	protected final BackAndForthTraverseHandler handler;
 	protected final boolean isCycleSafe;
 	protected SGraph graph;
 	protected final List<SNode> currentNodePath = new ArrayList<>();
 
-	public Traverser(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE strategy, String traverseId,
-			GraphTraverseHandler traverseHandler, boolean isCycleSafe, SGraph graph) {
+	public Traverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
+			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph) {
 		this.startNodes = startNodes;
 		this.strategy = strategy;
-		this.traverseId = traverseId;
-		this.traverseHandler = traverseHandler;
+		this.id = id;
+		this.handler = handler;
 		this.isCycleSafe = isCycleSafe;
 		this.graph = graph;
 	}
@@ -68,7 +68,7 @@ public abstract class Traverser {
 			this.startNodes = startNodes;
 		}
 
-		public Builder3 useStrategy(GRAPH_TRAVERSE_TYPE strategy) {
+		public Builder3 useStrategy(TraversalStrategy strategy) {
 			if (strategy == null) {
 				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 						+ "', because the given traverseType is empty.");
@@ -80,11 +80,11 @@ public abstract class Traverser {
 	public static class Builder3 {
 		private final SGraph graph;
 		private final List<SNode> startNodes;
-		private final GRAPH_TRAVERSE_TYPE strategy;
+		private final TraversalStrategy strategy;
 		boolean isCycleSafe = true;
 		private String id = null;
 
-		public Builder3(SGraph graph, List<SNode> startNodes, GRAPH_TRAVERSE_TYPE strategy) {
+		public Builder3(SGraph graph, List<SNode> startNodes, TraversalStrategy strategy) {
 			this.graph = graph;
 			this.startNodes = startNodes;
 
@@ -101,23 +101,19 @@ public abstract class Traverser {
 			return this;
 		}
 
-		public void andCall(GraphTraverseHandler traverseHandler) {
-			if (traverseHandler == null) {
+		public void andCall(BackAndForthTraverseHandler handler) {
+			if (handler == null) {
 				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 						+ "', because the given callback handler 'traverseHandler' is empty.");
 			}
 			if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
-				new TopDownDepthFirstTraverser(startNodes, strategy, id, traverseHandler, isCycleSafe, graph)
-						.traverse();
+				new TopDownDepthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph).traverse();
 			} else if (TOP_DOWN_BREADTH_FIRST.equals(strategy)) {
-				new TopDownBreadthFirstTraverser(startNodes, strategy, id, traverseHandler, isCycleSafe, graph)
-						.traverse();
+				new TopDownBreadthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph).traverse();
 			} else if (BOTTOM_UP_DEPTH_FIRST.equals(strategy)) {
-				new BottomUpDepthFirstTraverser(startNodes, strategy, id, traverseHandler, isCycleSafe, graph)
-						.traverse();
+				new BottomUpDepthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph).traverse();
 			} else if (BOTTOM_UP_BREADTH_FIRST.equals(strategy)) {
-				new BottomUpBreadthFirstTraverser(startNodes, strategy, id, traverseHandler, isCycleSafe, graph)
-						.traverse();
+				new BottomUpBreadthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph).traverse();
 			}
 		}
 	}

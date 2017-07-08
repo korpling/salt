@@ -6,25 +6,25 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
-import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph;
-import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
+import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
 public class TopDownDepthFirstTraverser extends Traverser {
 
-	public TopDownDepthFirstTraverser(List<? extends SNode> startNodes, GRAPH_TRAVERSE_TYPE strategy, String traverseId,
-			GraphTraverseHandler traverseHandler, boolean isCycleSafe, SGraph graph) {
-		super(startNodes, strategy, traverseId, traverseHandler, isCycleSafe, graph);
+	public TopDownDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String traverseId,
+			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph) {
+		super(startNodes, strategy, traverseId, handler, isCycleSafe, graph);
 	}
 
 	@Override
 	public void traverse() {
 		// TOP_DOWN_DEPTH_FIRST traversal
 		for (SNode startNode : startNodes) {
-			if (traverseHandler.checkConstraint(strategy, traverseId, null, startNode, 0l)) {
+			if (handler.checkConstraint(strategy, id, null, startNode, 0l)) {
 				Set<SNode> visitedNodes = null;
 				if (isCycleSafe) {
 					// if checking for cycles is enabled, initialize
@@ -68,13 +68,13 @@ public class TopDownDepthFirstTraverser extends Traverser {
 						}
 						SNode nextChild = nextChild(currentEntry);
 						if (peekEntry == null) {
-							traverseHandler.nodeReached(strategy, traverseId, currentEntry.node, null, null, 0);
+							handler.nodeReached(strategy, id, currentEntry.node, null, null, 0);
 						} else {
-							traverseHandler.nodeReached(strategy, traverseId, currentEntry.node, peekEntry.rel,
+							handler.nodeReached(strategy, id, currentEntry.node, peekEntry.rel,
 									(peekEntry.rel != null) ? peekEntry.rel.getSource() : null, peekEntry.order);
 						}
 						if (nextChild != null) {
-							if (traverseHandler.checkConstraint(strategy, traverseId, currentEntry.rel, nextChild,
+							if (handler.checkConstraint(strategy, id, currentEntry.rel, nextChild,
 									currentEntry.order)) {
 								currentEntry = new NodeEntry(nextChild, 0);
 							} else {
@@ -90,7 +90,7 @@ public class TopDownDepthFirstTraverser extends Traverser {
 							if (nextChild != null) {
 								// way down, another branch was
 								// found
-								if (traverseHandler.checkConstraint(strategy, traverseId, peekEntry.rel, nextChild,
+								if (handler.checkConstraint(strategy, id, peekEntry.rel, nextChild,
 										peekEntry.order)) {
 									currentEntry = new NodeEntry(nextChild, 0);
 								} else {
@@ -111,9 +111,9 @@ public class TopDownDepthFirstTraverser extends Traverser {
 									peekEntry = parentStack.peek();
 								}
 								if (peekEntry == null) {
-									traverseHandler.nodeLeft(strategy, traverseId, peekNode, null, null, 0);
+									handler.nodeLeft(strategy, id, peekNode, null, null, 0);
 								} else {
-									traverseHandler.nodeLeft(strategy, traverseId, peekNode, peekEntry.rel,
+									handler.nodeLeft(strategy, id, peekNode, peekEntry.rel,
 											(peekEntry.rel != null) ? peekEntry.rel.getSource() : null,
 											peekEntry.order);
 								}
