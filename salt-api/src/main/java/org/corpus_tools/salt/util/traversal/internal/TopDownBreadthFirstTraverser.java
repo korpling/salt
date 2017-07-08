@@ -22,8 +22,6 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 		if (isCycleSafe) {
 			throw new SaltException("Not able to detect cycles with breadth first search");
 		}
-		// startNodes.stream().forEach(startNode ->
-		// handler.checkConstraint(strategy, id, null, startNode, 0l));
 		startNodes.stream().forEach(startNode -> handler.shouldTraversalGoOn(TraversalLocation
 				.createWithStrategy(strategy).withCurrentNode(startNode).withRelationOrder(0).withId(id).build()));
 		SNode fromNode = null;
@@ -47,8 +45,6 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 
 			List<SRelation<? extends SNode, ? extends SNode>> edgesOut = graph.getOutRelations(tNode.getId());
 			List<SRelation<? extends SNode, ? extends SNode>> edges = null;
-			// handler.nodeReached(strategy, id, tNode, fromRel, fromNode,
-			// order);
 			handler.nodeReachedOnWayForth(TraversalLocation.createWithStrategy(strategy)
 					.withCurrentNode(tNode)
 					.withFromRelation(fromRel)
@@ -59,25 +55,22 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 			edges = edgesOut;
 			// in case of node has childs
 			int orderCount = 0;
-			for (SRelation<? extends SNode, ? extends SNode> e : edges) {
-				SNode n = null;
-				n = e.getTarget();
-
-				// if (handler.checkConstraint(strategy, id, e, n, order)) {
+			for (SRelation<? extends SNode, ? extends SNode> fromRelation : edges) {
+				SNode currentNode = null;
+				currentNode = fromRelation.getTarget();
 				if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
-						.withCurrentNode(n)
-						.withFromRelation(e)
+						.withCurrentNode(currentNode)
+						.withFromRelation(fromRelation)
 						.withRelationOrder(order)
 						.withId(id)
 						.build())) {
-					queuedNodes.add(n);
+					queuedNodes.add(currentNode);
 					queueReachedFrom.add(fromNode);
-					queueReachedFromRel.add(e);
+					queueReachedFromRel.add(fromRelation);
 					queueReachedOrder.add(orderCount);
 				}
 				++orderCount;
 			}
-			// handler.nodeLeft(strategy, id, tNode, fromRel, fromNode, order);
 			handler.nodeReachedOnWayBack(TraversalLocation.createWithStrategy(strategy)
 					.withCurrentNode(tNode)
 					.withFromRelation(fromRel)
