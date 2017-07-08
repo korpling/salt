@@ -20,14 +20,18 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 	@Override
 	public void traverse() {
 		for (SNode startNode : startNodes) {
-			if (handler.checkConstraint(strategy, id, null, startNode, 0l)) {
+			if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(startNode)
+					.withId(id)
+					.withRelationOrder(0)
+					.build())) {
 				currentNodePath.add(startNode);
 				bottomUpDepthFirstRec(null, 0);
 			}
 		}
 	}
 
-	private void bottomUpDepthFirstRec(SRelation<? extends SNode, ? extends SNode> edge, long order) {
+	private void bottomUpDepthFirstRec(SRelation<? extends SNode, ? extends SNode> edge, int order) {
 		if (currentNodePath.isEmpty()) {
 			throw new SaltParameterException("Cannot traverse node starting at empty start node.");
 		}
@@ -39,7 +43,13 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 			child = currentNodePath.get(currentNodePath.size() - 1);
 		}
 
-		handler.nodeReached(strategy, id, currNode, edge, child, order);
+		handler.nodeReachedOnWayForth(TraversalLocation.createWithStrategy(strategy)
+				.withCurrentNode(currNode)
+				.withFromRelation(edge)
+				.withFromNode(child)
+				.withRelationOrder(order)
+				.withId(id)
+				.build());
 
 		// walk through all childs of this node
 		List<SRelation<? extends SNode, ? extends SNode>> parentEdges = graph.getInRelations(currNode.getId());
@@ -54,15 +64,24 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 								+ "' while current path was '" + currentNodePath + "'.");
 			}
 			currentNodePath.add(parentNode);
-			if (handler.checkConstraint(strategy, id, parentEdge, parentNode, order)) {
+			if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(parentNode)
+					.withFromRelation(parentEdge)
+					.withId(id)
+					.build())) {
 				bottomUpDepthFirstRec(parentEdge, i);
 				i++;
 			}
 			// remove last entry, to update current path
 			currentNodePath.remove(currentNodePath.size() - 1);
 		}
-
-		handler.nodeLeft(strategy, id, currNode, edge, child, order);
+		handler.nodeReachedOnWayBack(TraversalLocation.createWithStrategy(strategy)
+				.withCurrentNode(currNode)
+				.withFromRelation(edge)
+				.withFromNode(child)
+				.withRelationOrder(order)
+				.withId(id)
+				.build());
 	}
 
 }

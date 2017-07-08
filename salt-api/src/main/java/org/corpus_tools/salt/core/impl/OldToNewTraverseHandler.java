@@ -6,6 +6,20 @@ import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.corpus_tools.salt.util.traversal.internal.TraversalLocation;
 
+@Deprecated
+/**
+ * Attention: This class is deprecated This is a wrapper between the old and the
+ * new traverser. Use the following instead:
+ * 
+ * <pre>
+ * SaltUtil.traverse(GRAPH_TO_BE_TRAVERSED)
+ * 		.startFrom(NODES_TO_START_WITH)
+ * 		.useStrategy(STRATEGY)
+ * 		.cycleSafe(TRUE_OR_FALSE)
+ * 		.useId(IDENTIFIER_FOR_TRAVERSAL_PROCESS)
+ * 		.andCall(CALLBACK_HANDLER);
+ * </pre>
+ */
 public class OldToNewTraverseHandler implements BackAndForthTraverseHandler {
 	private final GraphTraverseHandler oldHandler;
 
