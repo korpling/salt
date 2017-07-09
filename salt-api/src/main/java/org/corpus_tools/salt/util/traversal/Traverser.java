@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.traversal.internal;
+package org.corpus_tools.salt.util.traversal;
 
 import static org.corpus_tools.salt.util.traversal.TraversalStrategy.BOTTOM_UP_BREADTH_FIRST;
 import static org.corpus_tools.salt.util.traversal.TraversalStrategy.BOTTOM_UP_DEPTH_FIRST;
@@ -12,8 +12,10 @@ import java.util.List;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.exceptions.SaltTraverserException;
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
-import org.corpus_tools.salt.util.traversal.TraversalStrategy;
+import org.corpus_tools.salt.util.traversal.internal.BottomUpBreadthFirstTraverser;
+import org.corpus_tools.salt.util.traversal.internal.BottomUpDepthFirstTraverser;
+import org.corpus_tools.salt.util.traversal.internal.TopDownBreadthFirstTraverser;
+import org.corpus_tools.salt.util.traversal.internal.TopDownDepthFirstTraverser;
 
 public abstract class Traverser {
 	protected final List<? extends SNode> startNodes;

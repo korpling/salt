@@ -17,8 +17,6 @@
  */
 package org.corpus_tools.salt.util.traversal;
 
-import org.corpus_tools.salt.util.traversal.internal.TraversalLocation;
-
 /**
  * Using this traverse handler offers the possibility to observe the traversal
  * of the way forth and back again via {@link #nodeReachedOnWayForth(TraversalLocation)}

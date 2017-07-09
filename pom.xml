@@ -95,6 +95,7 @@
 		<commons-io.version>2.5</commons-io.version>
 		<json.version>20160810</json.version>
 		<woodstox-core.verion>5.0.3</woodstox-core.verion>
+		<equalsverifier.version>2.3.1</equalsverifier.version>
 		<findbugs-maven-plugin.version>3.0.4</findbugs-maven-plugin.version>
 		<maven-surefire-plugin.version>2.15</maven-surefire-plugin.version>
 		<maven-jar-plugin.version>2.6</maven-jar-plugin.version>
@@ -218,6 +219,14 @@
 				<version>${assertj.version}</version>
 				<scope>test</scope>
 			</dependency>
+			<!-- https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier -->
+			<dependency>
+				<groupId>nl.jqno.equalsverifier</groupId>
+				<artifactId>equalsverifier</artifactId>
+				<version>${equalsverifier.version}</version>
+				<scope>test</scope>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 	<organization>

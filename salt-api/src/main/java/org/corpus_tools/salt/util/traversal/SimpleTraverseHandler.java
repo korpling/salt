@@ -17,8 +17,6 @@
  */
 package org.corpus_tools.salt.util.traversal;
 
-import org.corpus_tools.salt.util.traversal.internal.TraversalLocation;
-
 public interface SimpleTraverseHandler {
 	/**
 	 * This method is invoked, when a node is reached. When the graph should be

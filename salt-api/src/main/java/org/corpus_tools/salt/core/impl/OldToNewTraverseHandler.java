@@ -3,8 +3,8 @@ package org.corpus_tools.salt.core.impl;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
-import org.corpus_tools.salt.util.traversal.internal.TraversalLocation;
 
 @Deprecated
 /**

@@ -1,10 +1,9 @@
-package org.corpus_tools.salt.util.traversal.internal;
+package org.corpus_tools.salt.util.traversal;
 
 import java.util.Optional;
 
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
-import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
 public class TraversalLocation {
 	private final TraversalStrategy strategy;
@@ -46,6 +45,74 @@ public class TraversalLocation {
 
 	public Optional<SNode> getFromNode() {
 		return Optional.ofNullable(fromNode);
+	}
+
+	@Override
+	public String toString() {
+		return "TraversalLocation [strategy=" + strategy + ", currentNode=" + currentNode + ", fromRelation="
+				+ fromRelation + ", relationOrder=" + relationOrder + ", fromNode=" + fromNode + ", id=" + id + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((currentNode == null) ? 0 : currentNode.hashCode());
+		result = prime * result + ((fromNode == null) ? 0 : fromNode.hashCode());
+		result = prime * result + ((fromRelation == null) ? 0 : fromRelation.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + relationOrder;
+		result = prime * result + ((strategy == null) ? 0 : strategy.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof TraversalLocation)) {
+			return false;
+		}
+		TraversalLocation other = (TraversalLocation) obj;
+		if (currentNode == null) {
+			if (other.currentNode != null) {
+				return false;
+			}
+		} else if (!currentNode.equals(other.currentNode)) {
+			return false;
+		}
+		if (fromNode == null) {
+			if (other.fromNode != null) {
+				return false;
+			}
+		} else if (!fromNode.equals(other.fromNode)) {
+			return false;
+		}
+		if (fromRelation == null) {
+			if (other.fromRelation != null) {
+				return false;
+			}
+		} else if (!fromRelation.equals(other.fromRelation)) {
+			return false;
+		}
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		if (relationOrder != other.relationOrder) {
+			return false;
+		}
+		if (strategy != other.strategy) {
+			return false;
+		}
+		return true;
 	}
 
 	public static CurrentNodeBuilder createWithStrategy(TraversalStrategy strategy) {
