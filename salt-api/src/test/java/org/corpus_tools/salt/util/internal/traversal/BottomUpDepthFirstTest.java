@@ -2,16 +2,16 @@ package org.corpus_tools.salt.util.internal.traversal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.graph.SampleGraphs;
+import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BottomUpDepthFirstTest extends TraverserTest {
 	@Before
 	public void beforeEach() {
-		traverseType = GRAPH_TRAVERSE_TYPE.BOTTOM_UP_DEPTH_FIRST;
+		strategy = TraversalStrategy.BOTTOM_UP_DEPTH_FIRST;
 	}
 
 	@Test

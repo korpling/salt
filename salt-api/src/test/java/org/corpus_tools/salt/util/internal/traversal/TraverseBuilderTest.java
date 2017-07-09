@@ -1,62 +1,39 @@
 package org.corpus_tools.salt.util.internal.traversal;
 
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
 
 import org.corpus_tools.salt.SaltFactory;
-import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph;
-import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
-import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.exceptions.SaltException;
+import org.corpus_tools.salt.util.SaltUtil;
+import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Test;
 
 public class TraverseBuilderTest {
-	SGraph graph = SaltFactory.createSGraph();
+	private SGraph graph = SaltFactory.createSGraph();
 
-	@Test
-	public void testTraverseParameters() {
-		List<SNode> startNodes = null;
-		GRAPH_TRAVERSE_TYPE traverseType = null;
-		GraphTraverseHandler handler = null;
+	@Test(expected = SaltException.class)
+	public void whenStartNodesAreEmpty_throwException() {
+		SaltUtil.traverse(graph)
+				.startFrom(Collections.emptyList())
+				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
+				.andCall(new MyTraverseHandler());
+	}
 
-		{// test 1
-			startNodes = null;
-			traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
-			handler = new MyTraverseHandler();
+	@Test(expected = SaltException.class)
+	public void whenNoStrategyGiven_throwException() {
+		SaltUtil.traverse(graph)
+				.startFrom(Arrays.asList(SaltFactory.createSNode()))
+				.useStrategy(null)
+				.andCall(new MyTraverseHandler());
+	}
 
-			try {
-				graph.traverse(startNodes, traverseType, "test_TOP_DOWN_DEPTH_FIRST_Tree", handler);
-				fail("null parameters are not allowed");
-			} catch (Exception e) {
-			}
-		} // test 1
-
-		{// test 2
-			startNodes = new ArrayList<SNode>();
-			startNodes.add(SaltFactory.createSNode());
-			traverseType = null;
-			handler = new MyTraverseHandler();
-
-			try {
-				graph.traverse(startNodes, traverseType, "test_TOP_DOWN_DEPTH_FIRST_Tree", handler);
-				fail("null parameters are not allowed");
-			} catch (Exception e) {
-			}
-		} // test 2
-
-		{// test 3
-			startNodes = new ArrayList<>();
-			startNodes.add(SaltFactory.createSNode());
-			traverseType = GRAPH_TRAVERSE_TYPE.TOP_DOWN_DEPTH_FIRST;
-			handler = null;
-
-			try {
-				graph.traverse(startNodes, traverseType, "test_TOP_DOWN_DEPTH_FIRST_Tree", handler);
-				fail("null parameters are not allowed");
-			} catch (Exception e) {
-			}
-		} // test 3
+	@Test(expected = SaltException.class)
+	public void whenNoHandlerGiven_throwException() {
+		SaltUtil.traverse(graph)
+				.startFrom(Arrays.asList(SaltFactory.createSNode()))
+				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
+				.andCall(null);
 	}
 }

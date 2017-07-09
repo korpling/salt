@@ -57,7 +57,15 @@ public abstract class Traverser {
 				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 						+ "', because the given start nodes are empty.");
 			}
-			return new Builder2(graph, Arrays.asList(startNodes));
+			return startFrom(Arrays.asList(startNodes));
+		}
+
+		public Builder2 startFrom(List<SNode> startNodes) {
+			if ((startNodes == null) || (startNodes.isEmpty())) {
+				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
+						+ "', because the given start nodes are empty.");
+			}
+			return new Builder2(graph, startNodes);
 		}
 	}
 

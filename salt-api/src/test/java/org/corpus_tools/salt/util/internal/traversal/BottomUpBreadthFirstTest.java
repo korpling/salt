@@ -4,16 +4,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 
-import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.graph.SampleGraphs;
+import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BottomUpBreadthFirstTest extends TraverserTest {
 	@Before
 	public void beforeEach() {
-		traverseType = GRAPH_TRAVERSE_TYPE.BOTTOM_UP_BREADTH_FIRST;
+		strategy = TraversalStrategy.BOTTOM_UP_BREADTH_FIRST;
 	}
 
 	@Test
