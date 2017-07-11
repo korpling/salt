@@ -169,6 +169,17 @@ public interface SGraph
 	 * @param layerName
 	 *            Name of the layer to search for
 	 * @return A complete list of all matching layers. Is never null.
+	 * @deprecated Use {@link #getLayersByName(String)}.
 	 */
+	@Deprecated
 	public List<SLayer> getLayerByName(String layerName);
+	
+	/**
+	 * Searches for layers which have the given layer name.
+	 * 
+	 * @param layerName
+	 *            Name of the layer to search for
+	 * @return A complete list of all matching layers. Is never null.
+	 */
+	public List<SLayer> getLayersByName(String layerName);
 }
