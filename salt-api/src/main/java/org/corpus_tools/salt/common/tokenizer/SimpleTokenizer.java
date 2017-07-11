@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ public class SimpleTokenizer {
 	 * @param startPos
 	 *            start position, if text to be tokenized is subset (0 assumed
 	 *            if set to null)
-	 * @param startPos
+	 * @param endPos
 	 *            end position, if text to be tokenized is subset (length of
 	 *            text assumed if set to null)
 	 */
@@ -81,7 +81,8 @@ public class SimpleTokenizer {
 		}
 		if (getDocumentGraph() == null) {
 			if (textualDS.getGraph() == null) {
-				throw new SaltTokenizerException("Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
+				throw new SaltTokenizerException(
+						"Cannot add tokens to an empty SDocumentGraph object and can not estimate SDocumentGraph, because STextualDS does not belong to a SDocumentGraph object.");
 			} else {
 				setDocumentGraph(textualDS.getGraph());
 			}
@@ -112,7 +113,7 @@ public class SimpleTokenizer {
 					if (chr == sep) {
 						if (currStart != currEnd) {
 							// create token
-							getDocumentGraph().createToken(textualDS, currStart, currEnd);
+							getDocumentGraph().createToken(textualDS, startPos + currStart, startPos + currEnd);
 						}
 						isSep = true;
 					} else {
@@ -131,7 +132,7 @@ public class SimpleTokenizer {
 			if (!isSep) {
 				// create a token for the last part of text, if last character
 				// was not a separator
-				getDocumentGraph().createToken(textualDS, currStart, currEnd);
+				getDocumentGraph().createToken(textualDS, startPos + currStart, startPos + currEnd);
 			}
 		}
 		return (retVal);

@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,49 +95,6 @@ public interface SaltProject extends Serializable {
 	 *            the {@link URI} to the location to load the project
 	 */
 	public void loadSaltProject(URI saltProjectURI);
-
-	// /**
-	// * Computes differences between this object and the given one and returns
-	// * all differences in a list as textual descriptions. This method uses the
-	// * equals method, to check for differences and can be seen as an inverse
-	// * function to equals().
-	// *
-	// * @return a list of differences between this object and the given one, if
-	// * exist, null otherise
-	// * @model
-	// * @generated
-	// */
-	// EList<String> differences(Object obj);
-
-	// /**
-	// * <!-- begin-user-doc --> <!-- end-user-doc -->
-	// *
-	// * @model
-	// *
-	// uriDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
-	// * @generated
-	// */
-	// void saveSCorpusGraph_DOT(URI uri, SElementId sElementID);
-	//
-	// /**
-	// * <!-- begin-user-doc --> <!-- end-user-doc -->
-	// *
-	// * @model
-	// *
-	// uriDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
-	// * @generated
-	// */
-	// void saveSaltProject_DOT(URI uri);
-	//
-	// /**
-	// * <!-- begin-user-doc --> <!-- end-user-doc -->
-	// *
-	// * @model
-	// *
-	// uriDataType="de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.URI"
-	// * @generated
-	// */
-	// void saveSDocumentGraph_DOT(URI uri, SElementId sElementID);
 
 	/**
 	 * Reads a saltProject.salt file and imports the contained corpus structure,

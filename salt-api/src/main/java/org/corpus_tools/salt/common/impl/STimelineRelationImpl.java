@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STimeline, Integer> implements STimelineRelation {
+public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STimeline, Integer>
+		implements STimelineRelation {
 	/** Initializes an object of type {@link STimelineRelationImpl}. **/
 	public STimelineRelationImpl() {
 	}
@@ -54,7 +55,8 @@ public class STimelineRelationImpl extends SSequentialRelationImpl<SToken, STime
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(),
+					"The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}

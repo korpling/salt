@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +22,12 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.SSentenceAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class SSentenceAnnotationImpl extends SAnnotationImpl implements SSentenceAnnotation {
+	private static final long serialVersionUID = 6681977407048268511L;
+
 	/** Initializes an object of type {@link SSentenceAnnotationImpl}. **/
 	public SSentenceAnnotationImpl() {
-		super.setNamespace(SaltUtil.SALT_NAMESPACE);
-		super.setName(SaltUtil.SEMANTICS_UNIT);
-		super.setValue(SaltUtil.SEMANTICS_WORD);
+		init();
 	}
 
 	/**
@@ -42,9 +41,13 @@ public class SSentenceAnnotationImpl extends SAnnotationImpl implements SSentenc
 	 */
 	public SSentenceAnnotationImpl(Label delegate) {
 		super(delegate);
+		init();
+	}
+
+	private void init() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_UNIT);
-		super.setValue(SaltUtil.SEMANTICS_WORD);
+		super.setValue(SaltUtil.SEMANTICS_SENTENCE);
 	}
 
 	/** Calling this method has no effect. **/

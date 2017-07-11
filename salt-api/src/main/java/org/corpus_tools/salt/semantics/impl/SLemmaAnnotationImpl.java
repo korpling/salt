@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.SLemmaAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class SLemmaAnnotationImpl extends SAnnotationImpl implements SLemmaAnnotation {
+	private static final long serialVersionUID = 3440371360156910913L;
+
 	/** Initializes an object of type {@link SPOSAnnotationImpl}. **/
 	public SLemmaAnnotationImpl() {
-		super.setNamespace(SaltUtil.SALT_NAMESPACE);
-		super.setName(SaltUtil.SEMANTICS_LEMMA);
+		init();
 	}
 
 	/**
@@ -41,6 +41,10 @@ public class SLemmaAnnotationImpl extends SAnnotationImpl implements SLemmaAnnot
 	 */
 	public SLemmaAnnotationImpl(Label delegate) {
 		super(delegate);
+		init();
+	}
+
+	private void init() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_LEMMA);
 	}

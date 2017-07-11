@@ -85,7 +85,8 @@ public class NotifierHelper {
 	 * @param newValue
 	 * @param container
 	 */
-	public static void notify(List<Listener> listenerList, NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue, Object container) {
+	public static void notify(List<Listener> listenerList, NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute,
+			Object oldValue, Object newValue, Object container) {
 		if (listenerList != null && listenerList.size() > 0) {
 			Iterator<Listener> it = listenerList.iterator();
 			while (it.hasNext()) {

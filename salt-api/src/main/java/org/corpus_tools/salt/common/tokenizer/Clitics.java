@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,13 @@ import java.util.regex.Pattern;
 import org.corpus_tools.salt.common.STextualDS;
 
 /**
- * Models clitics for a given language, with support for 
- * proclitics (({@link #proclitics}) and enclitics ({@link #enclitics})
- * in this version. Meso- and endoclitics are not yet supported.
+ * Models clitics for a given language, with support for proclitics
+ * (({@link #proclitics}) and enclitics ({@link #enclitics}) in this version.
+ * Meso- and endoclitics are not yet supported.
  * <p>
- * The {@link String} representation of the respective clitics
- * needs to be a regular expression, as it will be used to 
- * {@link Pattern#compile(String)} a pattern to split the 
- * {@link STextualDS}'s text, i.e., as below.
+ * The {@link String} representation of the respective clitics needs to be a
+ * regular expression, as it will be used to {@link Pattern#compile(String)} a
+ * pattern to split the {@link STextualDS}'s text, i.e., as below.
  * <p>
  * <code>
  * Pattern.compile("^"  XClitic  "(.)$")
@@ -38,7 +37,8 @@ import org.corpus_tools.salt.common.STextualDS;
  * Two examples for such a regex string are (<b>note the main group!</b>):
  * <ul>
  * <li>Enclitics for English: <code>"('(s|re|ve|d|m|em|ll)|n't)"</code></li>
- * <li>Proclitics for French: <code>"([dcjlmnstDCJLNMST]'|[Qq]u'|[Jj]usqu'|[Ll]orsqu')"</code></li>
+ * <li>Proclitics for French:
+ * <code>"([dcjlmnstDCJLNMST]'|[Qq]u'|[Jj]usqu'|[Ll]orsqu')"</code></li>
  * </ul>
  * From {@link Tokenizer}.
  * 
@@ -52,7 +52,7 @@ public class Clitics {
 
 	// character sequences which have to be cut off at the end of a word
 	private final String enclitics;
-	
+
 	public Clitics(String proclitics, String enclitics) {
 		this.proclitics = proclitics;
 		this.enclitics = enclitics;

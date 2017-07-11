@@ -19,8 +19,8 @@ package org.corpus_tools.salt.extensions.notification;
 
 import java.util.Collection;
 import java.util.List;
-import org.corpus_tools.salt.Beta;
 
+import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.ISaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusDocumentRelation;
@@ -106,7 +106,7 @@ import org.corpus_tools.salt.semantics.impl.SWordAnnotationImpl;
 public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFactory, Notifier {
 
 	// ==========================================> listener list
-	protected static List<Listener> listenerList = null;
+	static List<Listener> listenerList = null;
 
 	/** {@inheritDoc} **/
 	@Override

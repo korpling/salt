@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number> extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
+public abstract class SSequentialRelationImpl<S extends SNode, T extends SNode, P extends Number>
+		extends SRelationImpl<S, T> implements SSequentialRelation<S, T, P> {
 	/** Initializes an object of type {@link SSequentialRelationImpl}. **/
 	public SSequentialRelationImpl() {
 	}

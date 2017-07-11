@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,8 @@ import org.corpus_tools.salt.common.SSequentialRelation;
 import org.corpus_tools.salt.core.SNode;
 import org.junit.Test;
 
-public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number> extends SRelationAbstractTest {
+public abstract class SSequentialRelationTest<S extends SNode, T extends SNode, P extends Number>
+		extends SRelationAbstractTest {
 
 	protected SSequentialRelation<S, T, P> getFixture() {
 		return (SSequentialRelation<S, T, P>) fixture;

@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@ import org.corpus_tools.salt.common.STextualDS;
 
 /**
  * This class is a helper class to address a sequence inside a data source. For
- * instance to address the text "sample" in a {@link STextualDS#getText()}
- * "This is a sample text.", a {@link DataSourceSequence} object needs to be
+ * instance to address the text "sample" in a {@link STextualDS#getText()} "This
+ * is a sample text.", a {@link DataSourceSequence} object needs to be
  * initialized like this: {@link #getStart()} =10, {@link #getEnd()} = 16 and
  * {@link #getDataSource()} = the data source containing the entire text. <br/>
  * 
@@ -125,5 +125,36 @@ public class DataSourceSequence<P extends Number> {
 		result.append(getEnd());
 		result.append(')');
 		return result.toString();
+	}
+
+	public static class Builder {
+
+		public <P extends Number> Builder2<P> on(SSequentialDS<?, P> dataSource) {
+			final DataSourceSequence<P> sequence = new DataSourceSequence<>();
+			sequence.setDataSource(dataSource);
+			return new Builder2<P>(sequence);
+		}
+
+		public static class Builder2<P extends Number> {
+			private final DataSourceSequence<P> sequence;
+
+			public Builder2(DataSourceSequence<P> sequence) {
+				this.sequence = sequence;
+			}
+
+			public Builder2<P> from(P start) {
+				sequence.setStart(start);
+				return this;
+			}
+
+			public Builder2<P> to(P end) {
+				sequence.setEnd(end);
+				return this;
+			}
+
+			public DataSourceSequence<P> build() {
+				return sequence;
+			}
+		}
 	}
 }

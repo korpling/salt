@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,6 +47,15 @@ public interface SDocument extends SNode {
 	 * @return document structure
 	 */
 	public SDocumentGraph getDocumentGraph();
+
+	/**
+	 * Returns the document structure which belongs to this document. If no
+	 * document structure was created so far, a new one is created and returned
+	 * .
+	 * 
+	 * @return document structure
+	 */
+	public SDocumentGraph createDocumentGraph();
 
 	/**
 	 * Sets the document structure which belongs to this document.

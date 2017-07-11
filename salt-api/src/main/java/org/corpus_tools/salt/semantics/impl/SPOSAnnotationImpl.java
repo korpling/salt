@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.semantics.SPOSAnnotation;
 import org.corpus_tools.salt.util.SaltUtil;
 
-@SuppressWarnings("serial")
 public class SPOSAnnotationImpl extends SAnnotationImpl implements SPOSAnnotation {
+	private static final long serialVersionUID = -4100202952379098509L;
+
 	/** Initializes an object of type {@link SPOSAnnotationImpl}. **/
 	public SPOSAnnotationImpl() {
-		super.setNamespace(SaltUtil.SALT_NAMESPACE);
-		super.setName(SaltUtil.SEMANTICS_POS);
+		init();
 	}
 
 	/**
@@ -41,6 +41,10 @@ public class SPOSAnnotationImpl extends SAnnotationImpl implements SPOSAnnotatio
 	 */
 	public SPOSAnnotationImpl(Label delegate) {
 		super(delegate);
+		init();
+	}
+
+	private void init() {
 		super.setNamespace(SaltUtil.SALT_NAMESPACE);
 		super.setName(SaltUtil.SEMANTICS_POS);
 	}

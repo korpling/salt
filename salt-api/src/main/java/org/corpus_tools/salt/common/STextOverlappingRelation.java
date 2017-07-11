@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,5 +20,6 @@ package org.corpus_tools.salt.common;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 
-public interface STextOverlappingRelation<S extends SNode, T extends SNode> extends SRelation<S, T>, SDocumentGraphObject {
+public interface STextOverlappingRelation<S extends SNode, T extends SNode>
+		extends SRelation<S, T>, SDocumentGraphObject {
 } // STextOverlappingRelation

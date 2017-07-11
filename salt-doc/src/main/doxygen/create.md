@@ -73,7 +73,7 @@ Even the primary text and in general the primary data in Salt are modeled as nod
 ~~~{.java}STextualDS primaryText = SaltFactory.createSTextualDS();
 // set the primary text to the sentence
 // "Is this example more complicated than it appears to be?"
-primaryText.setText("Is this example more complicated than it appears to?");
+primaryText.setText("Is this example more complicated than it appears to be?");
 // add the text to the document-graph
 sampleDocument.getDocumentGraph().addNode(primaryText);
 ~~~
@@ -86,7 +86,7 @@ A token in Salt is not bound to a linguistic unit - in this example we show how 
 
 ![](./images/sample_tokenization.png)
 
-For tokenizing a primary text, we need the character offset of the start and the end position for each token in the text. The word "Is" in the sample text, for instance, has the start position 0 and the end position 1. Note that the positions are counted **between** two characters.
+For tokenizing a primary text, we need the character offset of the start and the end position for each token in the text. The word "Is" in the sample text, for instance, has the start position 0 and the end position 2. Note that the positions are counted **between** two characters.
 
 <table>
 <tr>

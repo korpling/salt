@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Relation;
 
 @SuppressWarnings("serial")
-public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode> implements SPointingRelation {
+public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStructuredNode>
+		implements SPointingRelation {
 	/** Initializes an object of type {@link SPointingRelationImpl}. **/
 	public SPointingRelationImpl() {
 	}
@@ -54,7 +55,8 @@ public class SPointingRelationImpl extends SRelationImpl<SStructuredNode, SStruc
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(),
+					"The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}

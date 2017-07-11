@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,8 @@ import org.corpus_tools.salt.index.IndexMgrImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 
 @SuppressWarnings("serial")
-public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends IdentifiableElementImpl implements Graph<N, R, L> {
+public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends IdentifiableElementImpl
+		implements Graph<N, R, L> {
 	/**
 	 * Initializes an object of type {@link Graph}. If {@link #delegate} is not
 	 * null, all functions of this method are delegated to the delegate object.
@@ -130,11 +131,15 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		indexMgr = new IndexMgrImpl();
 		indexMgr.createIndex(SaltUtil.IDX_ID_NODES, String.class, Node.class, expectedNodes, expectedNodes);
 		indexMgr.createIndex(SaltUtil.IDX_ID_NODES_INVERSE, Node.class, String.class, expectedNodes, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS, String.class, Relation.class, expectedRelations, expectedRelations);
-		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS_INVERSE, Relation.class, String.class, expectedRelations, expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS, String.class, Relation.class, expectedRelations,
+				expectedRelations);
+		indexMgr.createIndex(SaltUtil.IDX_ID_RELATIONS_INVERSE, Relation.class, String.class, expectedRelations,
+				expectedRelations);
 		indexMgr.createIndex(SaltUtil.IDX_ID_LAYER, String.class, Layer.class);
-		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
-		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, String.class, Relation.class, expectedNodes, approximatedNodeDegree);
+		indexMgr.createIndex(SaltUtil.IDX_OUT_RELATIONS, String.class, Relation.class, expectedNodes,
+				approximatedNodeDegree);
+		indexMgr.createIndex(SaltUtil.IDX_IN_RELATIONS, String.class, Relation.class, expectedNodes,
+				approximatedNodeDegree);
 	}
 
 	// =========================================================== > Nodes
@@ -448,7 +453,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 		}
 
 		if (relation == null) {
-			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class, "A null value is not allowed. ");
+			throw new SaltParameterException("relation", "basicAddRelation", GraphImpl.class,
+					"A null value is not allowed. ");
 		}
 		if (relation.getSource() == null) {
 			throw new SaltInsertionException(this, relation, "The source node is empty. ");
@@ -457,10 +463,12 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 			throw new SaltInsertionException(this, relation, "The target node is empty. ");
 		}
 		if ((relation.getSource().getId() == null) || (!containsNode(relation.getSource().getId()))) {
-			throw new SaltInsertionException(this, relation, "The source node of the passed relation does not belong to this graph. ");
+			throw new SaltInsertionException(this, relation,
+					"The source node of the passed relation does not belong to this graph. ");
 		}
 		if ((relation.getTarget().getId() == null) || (!containsNode(relation.getTarget().getId()))) {
-			throw new SaltInsertionException(this, relation, "The target node of the passed relation does not belong to this graph. ");
+			throw new SaltInsertionException(this, relation,
+					"The target node of the passed relation does not belong to this graph. ");
 		}
 
 		if (getIndexMgr().containsKey(SaltUtil.IDX_ID_RELATIONS_INVERSE, relation)) {

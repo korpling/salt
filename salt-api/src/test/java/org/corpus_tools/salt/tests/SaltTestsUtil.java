@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,8 @@ public class SaltTestsUtil {
 		if (segments == null) {
 			file = getTempTestFolder();
 		} else {
-			file = new File(getTempTestFolder().getAbsolutePath() + (segments.startsWith("/") ? segments : "/" + segments));
+			file = new File(
+					getTempTestFolder().getAbsolutePath() + (segments.startsWith("/") ? segments : "/" + segments));
 		}
 		if (!file.exists()) {
 			file.mkdirs();
@@ -88,7 +89,8 @@ public class SaltTestsUtil {
 					path = path + "/";
 				}
 			} catch (IOException e) {
-				throw new SaltResourceException("Cannot create temporary folder at " + System.getProperty("java.io.tmpdir") + ". ");
+				throw new SaltResourceException(
+						"Cannot create temporary folder at " + System.getProperty("java.io.tmpdir") + ". ");
 			}
 		}
 

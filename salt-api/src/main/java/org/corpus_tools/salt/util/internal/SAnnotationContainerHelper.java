@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +103,8 @@ public class SAnnotationContainerHelper {
 	 * A default list, which could be returned by methods to not create an empty
 	 * list each time a method was invoked.
 	 */
-	private static final Set<? extends Label> DEFAULT_EMPTY_LIST = Collections.unmodifiableSet(new HashSet<SAnnotation>());
+	private static final Set<? extends Label> DEFAULT_EMPTY_LIST = Collections
+			.unmodifiableSet(new HashSet<SAnnotation>());
 
 	// =======================================> SAnnotation
 	public static void addAnnotation(SAnnotationContainer container, SAnnotation annotation) {
@@ -170,7 +171,8 @@ public class SAnnotationContainerHelper {
 		return (retVal);
 	}
 
-	public static SAnnotation createAnnotation(SAnnotationContainer container, String namespace, String name, Object value) {
+	public static SAnnotation createAnnotation(SAnnotationContainer container, String namespace, String name,
+			Object value) {
 		SAnnotation retVal = SaltFactory.createSAnnotation();
 		retVal.setNamespace(namespace);
 		retVal.setName(name);
@@ -186,7 +188,8 @@ public class SAnnotationContainerHelper {
 		container.addLabel(metaAnnotation);
 	}
 
-	public static SMetaAnnotation createMetaAnnotation(SAnnotationContainer container, String namespace, String name, Object value) {
+	public static SMetaAnnotation createMetaAnnotation(SAnnotationContainer container, String namespace, String name,
+			Object value) {
 		SMetaAnnotation retVal = SaltFactory.createSMetaAnnotation();
 		retVal.setNamespace(namespace);
 		retVal.setName(name);
@@ -195,7 +198,8 @@ public class SAnnotationContainerHelper {
 		return retVal;
 	}
 
-	public static Set<SMetaAnnotation> createMetaAnnotations(SAnnotationContainer container, String metaAnnotationString) {
+	public static Set<SMetaAnnotation> createMetaAnnotations(SAnnotationContainer container,
+			String metaAnnotationString) {
 		Set<SMetaAnnotation> retVal = new HashSet<>();
 		for (String[] triple : SaltUtil.unmarshalAnnotation(metaAnnotationString)) {
 			retVal.add(container.createMetaAnnotation(triple[0], triple[1], triple[2]));
@@ -270,7 +274,8 @@ public class SAnnotationContainerHelper {
 		return (anno);
 	}
 
-	public static Set<SProcessingAnnotation> createProcessingAnnotations(SAnnotationContainer container, String annotationString) {
+	public static Set<SProcessingAnnotation> createProcessingAnnotations(SAnnotationContainer container,
+			String annotationString) {
 		Set<SProcessingAnnotation> retVal = new HashSet<>();
 		for (String[] triple : SaltUtil.unmarshalAnnotation(annotationString)) {
 			retVal.add(container.createProcessingAnnotation(triple[0], triple[1], triple[2]));
@@ -317,12 +322,14 @@ public class SAnnotationContainerHelper {
 	public static Iterator<SProcessingAnnotation> iterator_SProcessingAnnotation(SAnnotationContainer container) {
 		Iterator<SProcessingAnnotation> retVal = null;
 		if (container != null) {
-			retVal = new MyIterator<SProcessingAnnotation>(container.getLabels().iterator(), SProcessingAnnotation.class);
+			retVal = new MyIterator<SProcessingAnnotation>(container.getLabels().iterator(),
+					SProcessingAnnotation.class);
 		}
 		return (retVal);
 	}
 
-	public static SProcessingAnnotation createProcessingAnnotation(SAnnotationContainer container, String namespace, String name, Object value) {
+	public static SProcessingAnnotation createProcessingAnnotation(SAnnotationContainer container, String namespace,
+			String name, Object value) {
 		SProcessingAnnotation retVal = SaltFactory.createSProcessingAnnotation();
 		retVal.setNamespace(namespace);
 		retVal.setName(name);

@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -255,7 +255,8 @@ public class SLayerImpl extends LayerImpl<SNode, SRelation<SNode, SNode>> implem
 	 */
 	@Override
 	public void addLabel(Label label) {
-		if (label != null && label.getValue() != null && label instanceof SFeature && SaltUtil.FEAT_NAME_QNAME.equals(label.getQName())) {
+		if (label != null && label.getValue() != null && label instanceof SFeature
+				&& SaltUtil.FEAT_NAME_QNAME.equals(label.getQName())) {
 			setName(label.getValue().toString());
 		} else {
 			super.addLabel(label);

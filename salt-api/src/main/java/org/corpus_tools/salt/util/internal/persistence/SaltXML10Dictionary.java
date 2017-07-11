@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,8 +54,6 @@ public interface SaltXML10Dictionary {
 	 * constant to address the xml-element 'sDocumentStructure:SDocumentGraph'.
 	 **/
 	public static final String TAG_SDOCUMENTSTRUCTURE_SDOCUMENTGRAPH = "SDocumentGraph";
-	/** constant to address the xml-element 'sCorpusGraphs'. **/
-	public static final String TAG_SCORPUSGRAPH = "sCorpusGraphs";
 	/** constant to address the xml-element 'layers'. **/
 	public static final String TAG_LAYERS = "layers";
 	/** constant to address the xml-element 'labels'. **/

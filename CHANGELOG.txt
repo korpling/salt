@@ -1,16 +1,33 @@
-***********************************************************************************
-***								CHANGELOG for Salt								***
-***********************************************************************************
-*	groupId:		de.hu_berlin.german.korpling.saltnpepper					  *
-*	artifactId:		salt												          *
-*													                              *
-*	sub-projects:												                  *
-*	-------------                                                                 *
-*	artifactId:		salt-graph                                                    *
-*	artifactId:		salt-saltCore												  *
-*	artifactId:		salt-saltCommon												  *
-*	artifactId:		salt-saltSample												  *
-***********************************************************************************
+Version 3.3.0
+=============
+Enhancements:
+- wider possibilities to compare and validate (new) two different Salt projects, corpus structures 
+  and document structures: see SaltUtil.compare(....) and  SaltUtil.validate(...) #109
+
+Fixes:
+- SimpleTokenize startPos and endPos are not used correctly #108
+
+Version 3.2.2
+=============
+Fixes:
+- fix copy-paste error in SSentenceAnnotation  #104
+
+Version 3.2.1
+=============
+Fixes:
+- SCorpusGraph#createCorpus(...) called with no parent corpus and with a relative path will not create any corpus #102
+
+Version 3.2.0
+=============
+Enhancements:
+- Add notification support #100
+- Added VisJS based visualzation of the Salt graph (in addition to the DOT vis) #98
+- Comparison of corpus structures #101
+
+Fixes:
+- several smaller fixes and cleanups
+
+
 
 Version 3.0.6
 =============

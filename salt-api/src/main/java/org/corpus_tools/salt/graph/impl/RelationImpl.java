@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,6 +73,10 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * change of the source.
 	 */
 	public void setSource(S source) {
+		if (source == null) {
+			return;
+		}
+
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
 			getDelegate().setSource(source);
@@ -260,7 +264,7 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 		if (getDelegate() != null) {
 			getDelegate().removeLayer(layer);
 		}
-		
+
 		if (layer != null) {
 			layer.removeRelation(this);
 		}

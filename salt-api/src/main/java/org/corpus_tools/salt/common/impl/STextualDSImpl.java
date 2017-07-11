@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,7 +72,8 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	@Override
 	public void setGraph(@SuppressWarnings("rawtypes") Graph graph) {
 		if (!(graph instanceof SDocumentGraph)) {
-			throw new SaltParameterException("graph", "setGrah", getClass(), "The parameter was not of type SDocumentGraph. ");
+			throw new SaltParameterException("graph", "setGrah", getClass(),
+					"The parameter was not of type SDocumentGraph. ");
 		}
 		super.setGraph(graph);
 	}
@@ -105,11 +106,11 @@ public class STextualDSImpl extends SSequentialDSImpl<String, Integer> implement
 	}
 
 	/**
-	* Bug fix 69.
-	* Implements fast access to tokenization of a {@link STextualDS}.
-	* Simply duplicates the functionality of {@link SDocumentGraphImpl#tokenize()},
-	* but only with respect to this object.
-	*/
+	 * Bug fix 69. Implements fast access to tokenization of a
+	 * {@link STextualDS}. Simply duplicates the functionality of
+	 * {@link SDocumentGraphImpl#tokenize()}, but only with respect to this
+	 * object.
+	 */
 	@Override
 	public List<SToken> tokenize() {
 		Tokenizer tokenizer = new Tokenizer();

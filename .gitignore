@@ -2,3 +2,8 @@
 /docs/
 rebel.xml
 /target/
+*.iml
+.idea
+.project
+.classpath
+.settings/

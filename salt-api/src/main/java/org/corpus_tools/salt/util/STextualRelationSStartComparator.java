@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,10 +62,12 @@ public class STextualRelationSStartComparator implements Comparator<STextualRela
 	public int compare(STextualRelation o1, STextualRelation o2) {
 		int retVal = 0;
 		if (o1 == null) {
-			throw new SaltParameterException("Cannot compare the given STextualRelation-objects, because first one is null.");
+			throw new SaltParameterException(
+					"Cannot compare the given STextualRelation-objects, because first one is null.");
 		}
 		if (o2 == null) {
-			throw new SaltParameterException("Cannot compare the given STextualRelation-objects, because second one is null.");
+			throw new SaltParameterException(
+					"Cannot compare the given STextualRelation-objects, because second one is null.");
 		}
 
 		// both textual relations are equal

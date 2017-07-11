@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,8 @@ import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SMetaAnnotation;
 import org.corpus_tools.salt.core.SProcessingAnnotation;
 
+import com.google.common.base.Strings;
+
 /**
  * This class defines an option map to customize the isomorphie check of two
  * graphs. For instance you can suppress the check for ids of nodes, relations
@@ -42,6 +44,10 @@ import org.corpus_tools.salt.core.SProcessingAnnotation;
 @SuppressWarnings("serial")
 public class DiffOptions extends Hashtable<String, Boolean> {
 
+	/**
+	 * When true, documents won't be compared when comparing corpus structures.
+	 */
+	public static final String OPTION_IGNORE_DOCUMENTS = "ignoreDocuments";
 	/**
 	 * When true, differences in {@link SFeature} have no influence on
 	 * isomorphie and will not produce any differences.
@@ -72,6 +78,12 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 	 * not produce any differences.
 	 */
 	public static final String OPTION_IGNORE_NAME = "ignoreName";
+
+	/**
+	 * When true, differences in names of elements in corpus structure are
+	 * ignored.
+	 */
+	public static final String OPTION_IGNORE_CORPUS_STRUCTURE_NAME = "ignoreCorpusStructureName";
 	/**
 	 * When true, layers will not be checked when computing isomorphie and
 	 * differences.
@@ -95,12 +107,14 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 	 * </p>
 	 */
 	public DiffOptions() {
+		put(OPTION_IGNORE_DOCUMENTS, false);
 		put(OPTION_IGNORE_ANNOTATIONS, false);
 		put(OPTION_IGNORE_META_ANNOTATIONS, false);
 		put(OPTION_IGNORE_PROCESSING_ANNOTATIONS, true);
 		put(OPTION_IGNORE_FEATURES, false);
 		put(OPTION_IGNORE_ID, true);
 		put(OPTION_IGNORE_NAME, true);
+		put(OPTION_IGNORE_CORPUS_STRUCTURE_NAME, false);
 		put(OPTION_IGNORE_LAYER, false);
 	}
 
@@ -113,5 +127,20 @@ public class DiffOptions extends Hashtable<String, Boolean> {
 			put(key, value);
 		}
 		return (this);
+	}
+
+	public static class Builder {
+		private DiffOptions diffOptions = new DiffOptions();
+
+		public Builder withOption(String option, boolean value) {
+			if (!Strings.isNullOrEmpty(option)) {
+				diffOptions.put(option, value);
+			}
+			return this;
+		}
+
+		public DiffOptions build() {
+			return diffOptions;
+		}
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -587,41 +587,50 @@ public class SampleGenerator {
 
 		SPointingRelation pointRel = null;
 
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(0), germanToks.get(0), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(0), germanToks.get(0),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(1), germanToks.get(1), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(1), germanToks.get(1),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(2), germanToks.get(2), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(2), germanToks.get(2),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(5), germanToks.get(4), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(5), germanToks.get(4),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(6), germanToks.get(5), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(6), germanToks.get(5),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(7), germanToks.get(6), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(7), germanToks.get(6),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(8), germanToks.get(7), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(8), germanToks.get(7),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(9), germanToks.get(8), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(englishToks.get(9), germanToks.get(8),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
 
 		SSpan sSpan = document.getDocumentGraph().createSpan(englishToks.get(3), englishToks.get(4));
-		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(sSpan, germanToks.get(3), SALT_TYPE.SPOINTING_RELATION, "align=en_de");
+		pointRel = (SPointingRelation) document.getDocumentGraph().createRelation(sSpan, germanToks.get(3),
+				SALT_TYPE.SPOINTING_RELATION, "align=en_de");
 		if (setTypeForPointRel) {
 			pointRel.setType("align");
 		}
@@ -737,7 +746,8 @@ public class SampleGenerator {
 
 			// a list of all lemma annotations for the words Is (be), this
 			// (this) ... be (be)
-			String[] posAnnotations = { "be", "this", "example", "more", "complicated", "than", "it", "appear", "to", "be", "?" };
+			String[] posAnnotations = { "be", "this", "example", "more", "complicated", "than", "it", "appear", "to",
+					"be", "?" };
 			for (int i = 0; i < tokens.size(); i++) {
 				lemmaAnno = SaltFactory.createSLemmaAnnotation();
 				lemmaAnno.setValue(posAnnotations[i]);
@@ -777,8 +787,10 @@ public class SampleGenerator {
 		if (document.getDocumentGraph() == null) {
 			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		}
-		if ((document.getDocumentGraph().getTokens() == null) || (document.getDocumentGraph().getTokens().size() == 0)) {
-			if ((document.getDocumentGraph().getTextualDSs() == null) || (document.getDocumentGraph().getTextualDSs().size() == 0)) {
+		if ((document.getDocumentGraph().getTokens() == null)
+				|| (document.getDocumentGraph().getTokens().size() == 0)) {
+			if ((document.getDocumentGraph().getTextualDSs() == null)
+					|| (document.getDocumentGraph().getTextualDSs().size() == 0)) {
 				SampleGenerator.createPrimaryData(document);
 			}
 			SampleGenerator.createTokens(document);
@@ -866,8 +878,10 @@ public class SampleGenerator {
 			document.setDocumentGraph(SaltFactory.createSDocumentGraph());
 		}
 
-		if ((document.getDocumentGraph().getTokens() == null) || (document.getDocumentGraph().getTokens().size() == 0)) {
-			if ((document.getDocumentGraph().getTextualDSs() == null) || (document.getDocumentGraph().getTextualDSs().size() == 0)) {
+		if ((document.getDocumentGraph().getTokens() == null)
+				|| (document.getDocumentGraph().getTokens().size() == 0)) {
+			if ((document.getDocumentGraph().getTextualDSs() == null)
+					|| (document.getDocumentGraph().getTextualDSs().size() == 0)) {
 				SampleGenerator.createPrimaryData(document);
 			}
 			SampleGenerator.createTokens(document);
@@ -984,7 +998,9 @@ public class SampleGenerator {
 		int i = 0;
 		for (SStructure structure : structures) {
 			if (i >= annotations.length) {
-				throw new SaltSampleException("Cannot create syntax annotations for structures, since there are more strucctures than expected. Expected " + annotations.length + ", Actual: " + structures.size() + ". ");
+				throw new SaltSampleException(
+						"Cannot create syntax annotations for structures, since there are more strucctures than expected. Expected "
+								+ annotations.length + ", Actual: " + structures.size() + ". ");
 			}
 			structure.createAnnotation(null, "const", annotations[i]);
 			i++;

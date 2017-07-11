@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,15 +108,14 @@ public interface SDocumentGraph extends SGraph {
 	public STimeline getTimeline();
 
 	/**
-	 * Sets the value of the '
-	 * {@link de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getSTimeline
-	 * <em>STimeline</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
+	 * Sets a new timeline- A timeline is a specific datasource and acts as an
+	 * anchor for {@link STimelineRelation}s. A timeline is necessary to set
+	 * tokens in correspondance when they belong to different
+	 * {@link STextualDS}s. For instance a timeline is necessary to model
+	 * dialogue data.
 	 * 
 	 * @param value
-	 *            the new value of the '<em>STimeline</em>' reference.
-	 * @see #getTimeline()
-	 * @generated
+	 *            new timeline, which replaces the old one
 	 */
 	void setTimeline(STimeline value);
 
@@ -641,7 +640,8 @@ public interface SDocumentGraph extends SGraph {
 	 * @param insertSpace
 	 *            if true, a blank after each new text is inserted
 	 */
-	public List<SToken> insertTokensAt(STextualDS textualDS, Integer posInText, List<String> texts, Boolean insertSpace);
+	public List<SToken> insertTokensAt(STextualDS textualDS, Integer posInText, List<String> texts,
+			Boolean insertSpace);
 
 	/**
 	 * Creates a {@link SRelation} object, and sets its sSource and sTarget to
@@ -768,31 +768,4 @@ public interface SDocumentGraph extends SGraph {
 	 * @return true, if graphs are isomorph, false otherwise.
 	 */
 	public Set<Difference> findDiffs(SDocumentGraph other, DiffOptions options);
-
-	/**
-	 * Returns a list of nodes in base document. The returned nodes are
-	 * equivalents to the direct children of the passed parent node. The
-	 * children are retrieved via traversing of relations of the passed
-	 * {@link SALT_TYPE}.
-	 * 
-	 * @param parent
-	 *            node to who the children are retrieved
-	 * @param relationType
-	 *            type of relations to be traversed
-	 * @return a list of children nodes
-	 */
-	public List<SNode> getChildren(SNode parent, SALT_TYPE relationType);
-
-	/**
-	 * Returns a list of nodes that are the parents of every node in the given
-	 * base list. Only nodes with the given {@link SALT_TYPE} will be
-	 * considered.
-	 * 
-	 * @param children
-	 *            list of nodes whose parents are looked for
-	 * @param nodeType
-	 *            regarded types of relations
-	 * @return a list of parents
-	 */
-	public List<SNode> getSharedParent(List<SNode> children, SALT_TYPE nodeType);
 } // SDocumentGraph

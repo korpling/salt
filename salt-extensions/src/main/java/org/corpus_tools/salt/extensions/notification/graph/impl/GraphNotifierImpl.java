@@ -32,7 +32,8 @@ import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
 
 @SuppressWarnings("serial")
-public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>> extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
+public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>>
+		extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
 
@@ -70,7 +71,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	public void addLabel(Label label) {
 		super.addLabel(label);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_LABELS, null, label, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_LABELS, null,
+					label, this);
 		}
 	}
 
@@ -82,7 +84,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 		Label oldValue = getLabel(qName);
 		super.removeLabel(qName);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_LABELS, oldValue, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_LABELS,
+					oldValue, null, this);
 		}
 	}
 
@@ -94,7 +97,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 		Collection<Label> oldValue = getLabels();
 		super.removeAll();
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE_ALL, GRAPH_ATTRIBUTES.GRAPH_LABELS, oldValue, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE_ALL, GRAPH_ATTRIBUTES.GRAPH_LABELS,
+					oldValue, null, this);
 		}
 	}
 
@@ -104,7 +108,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	public void addNode(N node) {
 		super.addNode(node);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, node, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null,
+					node, this);
 		}
 	}
 
@@ -112,7 +117,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	public void removeNode(N node) {
 		super.removeNode(node);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_NODES, node, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_NODES, node,
+					null, this);
 		}
 	}
 
@@ -120,7 +126,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	public void addRelation(Relation<? extends N, ? extends N> relation) {
 		super.addRelation(relation);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, null, relation, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, null,
+					relation, this);
 		}
 	}
 
@@ -128,7 +135,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	public void removeRelation(Relation<? extends N, ? extends N> relation) {
 		super.removeRelation(relation);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, relation, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_RELATIONS,
+					relation, null, this);
 		}
 	}
 
@@ -137,7 +145,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 		List<R> oldValue = getRelations();
 		super.removeRelations();
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE_ALL, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, oldValue, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE_ALL, GRAPH_ATTRIBUTES.GRAPH_RELATIONS,
+					oldValue, null, this);
 		}
 	}
 
@@ -145,7 +154,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	public void addLayer(L layer) {
 		super.addLayer(layer);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_LAYERS, null, layer, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_LAYERS, null,
+					layer, this);
 		}
 	}
 
@@ -154,7 +164,8 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 		Set<L> oldValue = getLayers();
 		super.removeLayer(layer);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_LAYERS, oldValue, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.GRAPH_LAYERS,
+					oldValue, null, this);
 		}
 	}
 }

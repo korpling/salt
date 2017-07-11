@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,17 +54,33 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 	@Override
 	public SDocumentGraph getDocumentGraph() {
 		SDocumentGraph retVal = null;
-		SFeature sFeature = getFeature(SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME);
+		final SFeature sFeature = getFeature(SaltUtil.FEAT_SDOCUMENT_GRAPH_QNAME);
 		if (sFeature != null) {
 			retVal = (SDocumentGraph) sFeature.getValue();
 		}
 		return (retVal);
 	}
 
+	/**
+	 * Returns the document structure which belongs to this document. If no
+	 * document structure was created so far, a new one is created and returned
+	 * .
+	 * 
+	 * @return document structure
+	 */
+	public SDocumentGraph createDocumentGraph() {
+		SDocumentGraph retVal = getDocumentGraph();
+		if (retVal == null) {
+			retVal = SaltFactory.createSDocumentGraph();
+			setDocumentGraph(retVal);
+		}
+		return retVal;
+	}
+
 	/** {@inheritDoc} **/
 	@Override
-	public void setDocumentGraph(SDocumentGraph documentGraph) {
-		SDocumentGraph oldDocumentGraph = getDocumentGraph();
+	public void setDocumentGraph(final SDocumentGraph documentGraph) {
+		final SDocumentGraph oldDocumentGraph = getDocumentGraph();
 		if ((oldDocumentGraph != null) && (oldDocumentGraph != documentGraph)) {
 			if (oldDocumentGraph instanceof SDocumentGraphImpl) {
 				((SDocumentGraphImpl) oldDocumentGraph).basic_setDocument(null);
@@ -210,7 +226,8 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			return (SCorpusGraph) superGraph;
 		}
 
-		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is " + superGraph.getClass().getName() + ")");
+		throw new SaltInvalidModelException("Graph implementation is not of type SCorpusGraph (actual type is "
+				+ superGraph.getClass().getName() + ")");
 	}
 
 } // SDocumentImpl

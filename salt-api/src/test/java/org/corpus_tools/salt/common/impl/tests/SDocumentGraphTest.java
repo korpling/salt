@@ -1,5 +1,5 @@
 /**
- * Copyright 2009 Humboldt-Universität zu Berlin, INRIA.
+ * Copyright 2009 Humboldt-Universität zu Berlin.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,7 +118,8 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testGetSTextualRelations() {
-		String[] ids = { "salt:/graph1#textRel1", "salt:/graph1#textRel2", "salt:/graph1#textRel3", "salt:/graph1#textRel4" };
+		String[] ids = { "salt:/graph1#textRel1", "salt:/graph1#textRel2", "salt:/graph1#textRel3",
+				"salt:/graph1#textRel4" };
 		SToken source = SaltFactory.createSToken();
 		getFixture().addNode(source);
 		STextualDS target = SaltFactory.createSTextualDS();
@@ -231,7 +232,8 @@ public class SDocumentGraphTest {
 
 	@Test
 	public void testGetSStructures() {
-		String[] names = { "salt:/graph1#structure1", "salt:/graph1#structure2", "salt:/graph1#structure3", "salt:/graph1#structure4" };
+		String[] names = { "salt:/graph1#structure1", "salt:/graph1#structure2", "salt:/graph1#structure3",
+				"salt:/graph1#structure4" };
 		List<SStructure> structures = new ArrayList<>();
 		for (String name : names) {
 			SStructure structure = SaltFactory.createSStructure();
@@ -790,12 +792,14 @@ public class SDocumentGraphTest {
 	public void testGetOverlappedDSSequences__STextualDS_EList() {
 		STextualDS sTextualDs = SaltFactory.createSTextualDS();
 		getFixture().addNode(sTextualDs);
-		DataSourceSequence sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
+		DataSourceSequence sequence = getFixture()
+				.getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
 		assertEquals(sTextualDs, sequence.getDataSource());
 
 		sTextualDs.setText("This is a sample text.");
 
-		sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
+		sequence = getFixture().getOverlappedDataSourceSequence(sTextualDs, SALT_TYPE.STEXT_OVERLAPPING_RELATION)
+				.get(0);
 		assertEquals(sTextualDs, sequence.getDataSource());
 		assertEquals(sTextualDs, sequence.getDataSource());
 		assertEquals(0, sequence.getStart());
@@ -989,8 +993,8 @@ public class SDocumentGraphTest {
 		for (int i = 0; i < 6; i++) {
 			assertEquals("tokens of index '" + i + "' aren't equal", sTokens.get(i), controllSTokens.get(i));
 			boolean hasTextualRelation = false;
-			for(SRelation rel : controllSTokens.get(i).getOutRelations()) {
-				if(rel instanceof STextualRelation) {
+			for (SRelation rel : controllSTokens.get(i).getOutRelations()) {
+				if (rel instanceof STextualRelation) {
 					hasTextualRelation = true;
 					break;
 				}
@@ -1002,7 +1006,8 @@ public class SDocumentGraphTest {
 		List<STextualRelation> textRels = getFixture().getTextualRelations();
 		assertEquals("there must be a textual relation for each token", sTokens.size(), textRels.size());
 		for (STextualRelation curSTextRel : getFixture().getTextualRelations()) {
-			assertTrue("this textrel does not follow previous texrel: " + getFixture().getTextualRelations(), curSTextRel.getStart() > prevStart);
+			assertTrue("this textrel does not follow previous texrel: " + getFixture().getTextualRelations(),
+					curSTextRel.getStart() > prevStart);
 			prevStart = curSTextRel.getStart();
 		}
 	}
@@ -1776,7 +1781,8 @@ public class SDocumentGraphTest {
 
 		assertEquals(2, getFixture().getRelations().size());
 
-		sRel = getFixture().createRelation(tok1, tok2, SALT_TYPE.SPOINTING_RELATION, "myNS::coref=anaphor;anotherNS::foo=bar");
+		sRel = getFixture().createRelation(tok1, tok2, SALT_TYPE.SPOINTING_RELATION,
+				"myNS::coref=anaphor;anotherNS::foo=bar");
 		assertEquals(3, getFixture().getRelations().size());
 		assertEquals(tok1, sRel.getSource());
 		assertEquals(tok2, sRel.getTarget());
@@ -1829,7 +1835,8 @@ public class SDocumentGraphTest {
 		assertFalse(overlappedTokenList1.contains(tok4));
 
 		tokenList.add(tok4);
-		List<SToken> overlappedTokenListWithPointing = fixture.getOverlappedTokens(sSpan, SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SPOINTING_RELATION);
+		List<SToken> overlappedTokenListWithPointing = fixture.getOverlappedTokens(sSpan, SALT_TYPE.SSPANNING_RELATION,
+				SALT_TYPE.SPOINTING_RELATION);
 		assertNotNull(overlappedTokenListWithPointing);
 		assertTrue(overlappedTokenListWithPointing.containsAll(tokenList));
 
@@ -1839,12 +1846,14 @@ public class SDocumentGraphTest {
 		allTokenList.add(tok3);
 		allTokenList.add(tok4);
 		allTokenList.add(tok5);
-		List<SToken> overlappedTokenList2 = fixture.getOverlappedTokens(sStructure, SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SPOINTING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
+		List<SToken> overlappedTokenList2 = fixture.getOverlappedTokens(sStructure, SALT_TYPE.SSPANNING_RELATION,
+				SALT_TYPE.SPOINTING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
 		assertNotNull(overlappedTokenList2);
 		assertTrue(overlappedTokenList2.containsAll(allTokenList));
 		nodeList.add(tok2);
 		SStructure sStructure2 = fixture.createStructure(nodeList);
-		List<SToken> overlappedTokenList3 = fixture.getOverlappedTokens(sStructure2, SALT_TYPE.SSPANNING_RELATION, SALT_TYPE.SPOINTING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
+		List<SToken> overlappedTokenList3 = fixture.getOverlappedTokens(sStructure2, SALT_TYPE.SSPANNING_RELATION,
+				SALT_TYPE.SPOINTING_RELATION, SALT_TYPE.SDOMINANCE_RELATION);
 		assertNotNull(overlappedTokenList3);
 		assertTrue(overlappedTokenList3.containsAll(allTokenList));
 		for (SToken token : allTokenList) {

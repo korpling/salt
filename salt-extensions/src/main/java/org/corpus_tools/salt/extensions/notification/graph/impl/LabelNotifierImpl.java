@@ -65,7 +65,8 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 	public void addLabel(Label label) {
 		super.addLabel(label);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LABEL_LABELS, null, label, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.LABEL_LABELS, null,
+					label, this);
 		}
 	}
 
@@ -77,7 +78,8 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 		Label oldValue = getLabel(qName);
 		super.removeLabel(qName);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LABEL_LABELS, oldValue, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE, GRAPH_ATTRIBUTES.LABEL_LABELS,
+					oldValue, null, this);
 		}
 	}
 
@@ -89,7 +91,8 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 		Collection<Label> oldValue = getLabels();
 		super.removeAll();
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE_ALL, GRAPH_ATTRIBUTES.LABEL_LABELS, oldValue, null, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.REMOVE_ALL, GRAPH_ATTRIBUTES.LABEL_LABELS,
+					oldValue, null, this);
 		}
 	}
 	// ==========================================< handling contained label
@@ -102,7 +105,8 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 		String oldValue = getNamespace();
 		super.setNamespace(namespace);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, oldValue, namespace, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE,
+					oldValue, namespace, this);
 		}
 	}
 
@@ -114,7 +118,8 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 		String oldValue = getName();
 		super.setName(name);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, oldValue, name, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, oldValue,
+					name, this);
 		}
 	}
 
@@ -127,8 +132,10 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 		String oldName = getName();
 		super.setQName(qName);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE, oldNamespace, getNamespace(), this);
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, oldName, getName(), this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAMESPACE,
+					oldNamespace, getNamespace(), this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_NAME, oldName,
+					getName(), this);
 		}
 	}
 
@@ -140,7 +147,8 @@ public class LabelNotifierImpl extends LabelImpl implements Label, Notifier {
 		Object oldValue = getValue();
 		super.setValue(value);
 		if (listenerList != null) {
-			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_VALUE, oldValue, value, this);
+			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.LABEL_VALUE, oldValue,
+					value, this);
 		}
 	}
 }
