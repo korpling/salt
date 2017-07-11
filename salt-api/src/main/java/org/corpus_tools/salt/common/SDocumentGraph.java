@@ -312,7 +312,7 @@ public interface SDocumentGraph extends SGraph {
 	 * @return returns the newly created {@link STimelineRelation}
 	 *         object
 	 */
-	public STimeline createTimelineRelation();
+	public STimelineRelation createTimelineRelation(SToken token, int timeSteps);
 
 	/**
 	 * Returns all {@link SToken} objects which refer to the passed
