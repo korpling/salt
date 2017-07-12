@@ -13,6 +13,7 @@ var classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_imp
     [ "createStructure", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a92fb8796d083fdda8e8a530c6b54094c", null ],
     [ "createTextualDS", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a3639b9308f10fdcf199af42aed409f46", null ],
     [ "createTimeline", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#aa49cd3da2b2e8f119157f0a7b00604d2", null ],
+    [ "createTimelineRelation", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a3836152c23974074ed47d97d090f97a4", null ],
     [ "createToken", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a22cb86d82d64117289b0c0dd7a05e222", null ],
     [ "createToken", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a4a75c1cc29aba53bb9d3ecab14feeb8b", null ],
     [ "createToken", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#ab65e2ff48d3ce65061d3d669217996be", null ],

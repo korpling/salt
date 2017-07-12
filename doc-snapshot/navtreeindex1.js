@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a701e4345fd6693b85631ed29ba80e0b8":[12,0,0,0,0,0,1,6,4],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a7a69bc103395e50c7f18a1dcba8954de":[12,0,0,0,0,0,1,6,11],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a91aff8d055842a6be4fbfcc75b829fb2":[12,0,0,0,0,0,1,6,0],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a9f2b47d678c14c92305c677deecd3ef7":[12,0,0,0,0,0,1,6,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a2d417d06b021cd10b831510cb1deee7d":[12,0,0,0,0,3,0,2,35],
 "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a30349f2abfa0069d23ec8d061ec58f65":[12,0,0,0,0,3,0,2,4],
 "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a372d9ba2eb0c0411f76e783d5336d366":[12,0,0,0,0,3,0,2,36],
-"classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a424c4914d1cd391f8157ad14f382250b":[12,0,0,0,0,3,0,2,34],
-"classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a49686ed91281fa1151a5feb641cfd325":[12,0,0,0,0,3,0,2,18]
+"classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a424c4914d1cd391f8157ad14f382250b":[12,0,0,0,0,3,0,2,34]
 };
