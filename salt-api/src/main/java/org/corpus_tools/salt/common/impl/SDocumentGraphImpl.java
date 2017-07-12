@@ -688,7 +688,8 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		timeLineRel.setSource(token);
 		timeLineRel.setTarget(timeline);
 		timeLineRel.setStart(timeline.getEnd());
-		timeLineRel.setEnd(timelineEnd += timeSteps);
+		timelineEnd += timeSteps;
+		timeLineRel.setEnd(timelineEnd);
 		addRelation(timeLineRel);
 		return timeLineRel;
 	}
