@@ -17,6 +17,12 @@
  */
 package org.corpus_tools.salt.graph.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.Vector;
@@ -24,14 +30,10 @@ import java.util.Vector;
 import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Label;
 import org.corpus_tools.salt.graph.LabelableElement;
-import org.corpus_tools.salt.graph.impl.LabelableElementImpl;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class LabelableElementTest extends TestCase {
+public class LabelableElementTest {
 
 	protected LabelableElement fixture = null;
 
@@ -52,11 +54,6 @@ public class LabelableElementTest extends TestCase {
 		private static final long serialVersionUID = 1L;
 	}
 
-	@After
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
-
 	/**
 	 * Tests adding of labels to a {@link LabelableElement}
 	 */
@@ -65,7 +62,7 @@ public class LabelableElementTest extends TestCase {
 		Label label = null;
 
 		// test 1 - empty label should not be added
-		getFixture().addLabel(null);
+		getFixture().add(null);
 		assertEquals(null, getFixture().getLabels());
 
 		// test 2 - add all
@@ -74,7 +71,7 @@ public class LabelableElementTest extends TestCase {
 		for (String labelName : labelNames) {
 			label = GraphFactory.createLabel();
 			label.setName(labelName);
-			getFixture().addLabel(label);
+			getFixture().add(label);
 			assertEquals(label, getFixture().getLabel(labelName));
 		}
 	}
@@ -92,14 +89,14 @@ public class LabelableElementTest extends TestCase {
 		for (String labelName : labelNames) {
 			label = GraphFactory.createLabel();
 			label.setName(labelName);
-			labelableElement.addLabel(label);
+			labelableElement.add(label);
 		}
 		assertEquals(numOfLabels, labelableElement.sizeLabels());
 		try {
 			for (String labelName : labelNames) {
 				label = GraphFactory.createLabel();
 				label.setName(labelName);
-				labelableElement.addLabel(label);
+				labelableElement.add(label);
 				fail("You should not add two labels with same name");
 			}
 
@@ -116,7 +113,7 @@ public class LabelableElementTest extends TestCase {
 		for (String labelName : labelNames) {
 			label = GraphFactory.createLabel();
 			label.setName(labelName);
-			labelableElement.addLabel(label);
+			labelableElement.add(label);
 		}
 		numOfLabels = labelNames.length;
 		assertEquals(numOfLabels, labelableElement.sizeLabels());
@@ -128,7 +125,7 @@ public class LabelableElementTest extends TestCase {
 		for (String labelName : labelNames) {
 			label = GraphFactory.createLabel();
 			label.setName(labelName);
-			labelableElement.addLabel(label);
+			labelableElement.add(label);
 		}
 		numOfLabels = labelNames.length;
 		assertEquals(numOfLabels, labelableElement.sizeLabels());
@@ -137,7 +134,7 @@ public class LabelableElementTest extends TestCase {
 		assertEquals(numOfLabels, labelableElement.sizeLabels());
 		label = GraphFactory.createLabel();
 		label.setName(label1);
-		labelableElement.addLabel(label);
+		labelableElement.add(label);
 		assertEquals(label, labelableElement.getLabel(label1));
 	}
 
@@ -152,7 +149,7 @@ public class LabelableElementTest extends TestCase {
 		for (String labelName : labelNames) {
 			label = GraphFactory.createLabel();
 			label.setName(labelName);
-			labelableElement.addLabel(label);
+			labelableElement.add(label);
 			assertEquals(label, labelableElement.getLabel(labelName));
 		}
 		assertEquals(numOfLabels, labelableElement.sizeLabels());
@@ -180,7 +177,7 @@ public class LabelableElementTest extends TestCase {
 		for (String labelName : labelNames) {
 			label = GraphFactory.createLabel();
 			label.setQName(labelName);
-			labelableElement.addLabel(label);
+			labelableElement.add(label);
 		}
 
 		// searching for ns1
@@ -234,7 +231,7 @@ public class LabelableElementTest extends TestCase {
 		for (String labelName : labelNamesOK) {
 			label = GraphFactory.createLabel();
 			label.setQName(labelName);
-			labelableElement.addLabel(label);
+			labelableElement.add(label);
 		}
 		// checking existing labels
 		for (String labelName : labelNamesOK) {
@@ -253,7 +250,7 @@ public class LabelableElementTest extends TestCase {
 		label.setNamespace("ns1");
 		label.setName("name1");
 
-		this.getFixture().addLabel(label);
+		this.getFixture().add(label);
 
 		assertTrue(this.getFixture().containsLabel(label.getQName()));
 		this.getFixture().removeLabel(label.getNamespace(), label.getName());
@@ -265,7 +262,7 @@ public class LabelableElementTest extends TestCase {
 		Label label = GraphFactory.createLabel();
 		label.setNamespace("sNS");
 		label.setName("name");
-		this.getFixture().addLabel(label);
+		this.getFixture().add(label);
 		assertEquals(label, this.getFixture().getLabel(label.getNamespace(), label.getName()));
 	}
 

@@ -72,7 +72,7 @@ public abstract class SSequentialDSImpl<D, P extends Number> extends SNodeImpl i
 			feature = SaltFactory.createSFeature();
 			feature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			feature.setName(SaltUtil.FEAT_SDATA);
-			this.addFeature(feature);
+			this.add(feature);
 		}
 		feature.setValue(newSData);
 	}

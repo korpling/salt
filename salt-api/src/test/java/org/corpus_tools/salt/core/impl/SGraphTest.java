@@ -163,16 +163,16 @@ public class SGraphTest extends SAnnotationContainerTest {
 	public void testGetLayersByName() {
 		SLayer layer = SaltFactory.createSLayer();
 		layer.setName("one");
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		layer = SaltFactory.createSLayer();
 		layer.setName("two");
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		layer = SaltFactory.createSLayer();
 		layer.setName("one");
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		layer = SaltFactory.createSLayer();
 		layer.setName("three");
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		assertEquals(2, getFixture().getLayerByName("one").size());
 		assertEquals(1, getFixture().getLayerByName("two").size());
 		assertEquals(1, getFixture().getLayerByName("three").size());
@@ -186,16 +186,16 @@ public class SGraphTest extends SAnnotationContainerTest {
 	public void testGetNodesByName() {
 		SNode node = SaltFactory.createSNode();
 		node.setName("one");
-		getFixture().addNode(node);
+		getFixture().add(node);
 		node = SaltFactory.createSNode();
 		node.setName("two");
-		getFixture().addNode(node);
+		getFixture().add(node);
 		node = SaltFactory.createSNode();
 		node.setName("one");
-		getFixture().addNode(node);
+		getFixture().add(node);
 		node = SaltFactory.createSNode();
 		node.setName("three");
-		getFixture().addNode(node);
+		getFixture().add(node);
 		assertEquals(2, getFixture().getNodesByName("one").size());
 		assertEquals(1, getFixture().getNodesByName("two").size());
 		assertEquals(1, getFixture().getNodesByName("three").size());
@@ -208,31 +208,31 @@ public class SGraphTest extends SAnnotationContainerTest {
 	@Test
 	public void testGetRelationsByName() {
 		SNode node = SaltFactory.createSNode();
-		getFixture().addNode(node);
+		getFixture().add(node);
 
 		SRelation<SNode, SNode> rel = SaltFactory.createSRelation();
 		rel.setSource(node);
 		rel.setTarget(node);
 		rel.setName("one");
-		getFixture().addRelation(rel);
+		getFixture().add(rel);
 
 		rel = SaltFactory.createSRelation();
 		rel.setName("two");
 		rel.setSource(node);
 		rel.setTarget(node);
-		getFixture().addRelation(rel);
+		getFixture().add(rel);
 
 		rel = SaltFactory.createSRelation();
 		rel.setSource(node);
 		rel.setTarget(node);
 		rel.setName("one");
-		getFixture().addRelation(rel);
+		getFixture().add(rel);
 
 		rel = SaltFactory.createSRelation();
 		rel.setSource(node);
 		rel.setTarget(node);
 		rel.setName("three");
-		getFixture().addRelation(rel);
+		getFixture().add(rel);
 
 		assertEquals(2, getFixture().getRelationsByName("one").size());
 		assertEquals(1, getFixture().getRelationsByName("two").size());

@@ -68,7 +68,7 @@ public abstract class SAnnotationContainerTest {
 		for (String qName : qNames) {
 			SAnnotation anno = SaltFactory.createSAnnotation();
 			anno.setQName(qName);
-			getFixture().addAnnotation(anno);
+			getFixture().add(anno);
 			annos.add(anno);
 		}
 		assertTrue(annos.containsAll(getFixture().getAnnotations()));
@@ -80,7 +80,7 @@ public abstract class SAnnotationContainerTest {
 		String QName = "ns::name";
 		SAnnotation anno = SaltFactory.createSAnnotation();
 		anno.setQName(QName);
-		getFixture().addAnnotation(anno);
+		getFixture().add(anno);
 		assertEquals(anno, getFixture().getAnnotation(QName));
 	}
 
@@ -125,7 +125,7 @@ public abstract class SAnnotationContainerTest {
 	public void testDoubleChaining_SAnnotation() {
 		SAnnotation anno = SaltFactory.createSAnnotation();
 		anno.setName("labelName");
-		getFixture().addLabel(anno);
+		getFixture().add(anno);
 
 		assertEquals(getFixture(), anno.getContainer());
 	}
@@ -166,7 +166,7 @@ public abstract class SAnnotationContainerTest {
 		for (String qName : qNames) {
 			SMetaAnnotation anno = SaltFactory.createSMetaAnnotation();
 			anno.setQName(qName);
-			getFixture().addMetaAnnotation(anno);
+			getFixture().add(anno);
 			annos.add(anno);
 		}
 		assertTrue(annos.containsAll(getFixture().getMetaAnnotations()));
@@ -178,7 +178,7 @@ public abstract class SAnnotationContainerTest {
 		String QName = "ns::name";
 		SMetaAnnotation anno = SaltFactory.createSMetaAnnotation();
 		anno.setQName(QName);
-		getFixture().addMetaAnnotation(anno);
+		getFixture().add(anno);
 		assertEquals(anno, getFixture().getMetaAnnotation(QName));
 	}
 
@@ -223,7 +223,7 @@ public abstract class SAnnotationContainerTest {
 	public void testDoubleChaining_SMetaAnnotation() {
 		SMetaAnnotation anno = SaltFactory.createSMetaAnnotation();
 		anno.setName("labelName");
-		getFixture().addLabel(anno);
+		getFixture().add(anno);
 
 		assertEquals(getFixture(), anno.getContainer());
 	}
@@ -263,7 +263,7 @@ public abstract class SAnnotationContainerTest {
 		for (String qName : qNames) {
 			SProcessingAnnotation anno = SaltFactory.createSProcessingAnnotation();
 			anno.setQName(qName);
-			getFixture().addProcessingAnnotation(anno);
+			getFixture().add(anno);
 			annos.add(anno);
 		}
 		assertTrue(annos.containsAll(getFixture().getProcessingAnnotations()));
@@ -275,7 +275,7 @@ public abstract class SAnnotationContainerTest {
 		String QName = "ns::name";
 		SProcessingAnnotation anno = SaltFactory.createSProcessingAnnotation();
 		anno.setQName(QName);
-		getFixture().addProcessingAnnotation(anno);
+		getFixture().add(anno);
 		assertEquals(anno, getFixture().getProcessingAnnotation(QName));
 	}
 
@@ -321,7 +321,7 @@ public abstract class SAnnotationContainerTest {
 	public void testDoubleChaining_SProcessingAnnotation() {
 		SProcessingAnnotation anno = SaltFactory.createSProcessingAnnotation();
 		anno.setName("labelName");
-		getFixture().addLabel(anno);
+		getFixture().add(anno);
 
 		assertEquals(getFixture(), anno.getContainer());
 	}
@@ -335,7 +335,7 @@ public abstract class SAnnotationContainerTest {
 		for (String qName : qNames) {
 			SFeature anno = SaltFactory.createSFeature();
 			anno.setQName(qName);
-			getFixture().addFeature(anno);
+			getFixture().add(anno);
 			annos.add(anno);
 		}
 		assertTrue(annos.containsAll(getFixture().getFeatures()));
@@ -347,7 +347,7 @@ public abstract class SAnnotationContainerTest {
 		String QName = "ns::name";
 		SFeature anno = SaltFactory.createSFeature();
 		anno.setQName(QName);
-		getFixture().addFeature(anno);
+		getFixture().add(anno);
 		assertEquals(anno, getFixture().getFeature(QName));
 	}
 
@@ -392,7 +392,7 @@ public abstract class SAnnotationContainerTest {
 	public void testDoubleChaining_SFeature() {
 		SFeature anno = SaltFactory.createSFeature();
 		anno.setName("labelName");
-		getFixture().addLabel(anno);
+		getFixture().add(anno);
 
 		assertEquals(getFixture(), anno.getContainer());
 	}

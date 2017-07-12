@@ -18,9 +18,6 @@
 package org.corpus_tools.salt.common;
 
 public interface STimeline extends SSequentialDS<Integer, Integer>, SDocumentGraphObject {
-	// public List<String> getPointsOfTime();
-	// public void addPointOfTime(String sPointOfTime);
-
 	/**
 	 * Increases the number of points of time by one. The points of time are
 	 * stored as a single number determining the number of points of time. The

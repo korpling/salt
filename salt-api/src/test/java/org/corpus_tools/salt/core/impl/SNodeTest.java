@@ -61,7 +61,7 @@ public class SNodeTest extends SAnnotationContainerTest {
 		assertEquals(SaltUtil.createSaltURI("node1"), getFixture().getPath());
 
 		SGraph graph = SaltFactory.createSGraph();
-		graph.addNode(getFixture());
+		graph.add(getFixture());
 		assertEquals(SaltUtil.createSaltURI(getFixture().getId()), getFixture().getPath());
 	}
 }

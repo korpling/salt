@@ -131,14 +131,14 @@ public class LayerImpl<N extends Node, R extends Relation<? extends N, ? extends
 
 	/** {@inheritDoc Layer#addNode(Node)} **/
 	@Override
-	public void addNode(N node) {
+	public void add(N node) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
-			getDelegate().addNode(node);
+			getDelegate().add(node);
 			return;
 		}
 		if ((getGraph() != null) && (!getGraph().containsNode(node.getId()))) {
-			getGraph().addNode(node);
+			getGraph().add(node);
 		}
 		nodes.add(node);
 	}
@@ -151,10 +151,10 @@ public class LayerImpl<N extends Node, R extends Relation<? extends N, ? extends
 	 * @param node
 	 *            node to be inserted into this layer
 	 */
-	public void addNodes(Collection<? extends N> nodes) {
+	public void add(Collection<? extends N> nodes) {
 		if (SaltUtil.isNotNullOrEmpty(nodes)) {
 			for (N node : nodes) {
-				addNode(node);
+				add(node);
 			}
 		}
 	}
@@ -186,15 +186,15 @@ public class LayerImpl<N extends Node, R extends Relation<? extends N, ? extends
 
 	/** {@inheritDoc Layer#addRelation(Relation)} **/
 	@Override
-	public void addRelation(R relation) {
+	public void add(R relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
-			getDelegate().addRelation(relation);
+			getDelegate().add(relation);
 			return;
 		}
 
 		if ((getGraph() != null) && (!getGraph().containsRelation(relation.getId()))) {
-			getGraph().addRelation(relation);
+			getGraph().add(relation);
 		}
 		relations.add((R) relation);
 	}

@@ -50,7 +50,7 @@ public class SaltProjectImpl implements SaltProject {
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addCorpusGraph(SCorpusGraph corpusGraph) {
+	public void add(SCorpusGraph corpusGraph) {
 		if (corpusGraph != null) {
 			if (corpusGraph instanceof SCorpusGraphImpl) {
 				((SCorpusGraphImpl) corpusGraph).basic_setSaltProject(this);
@@ -153,7 +153,7 @@ public class SaltProjectImpl implements SaltProject {
 
 		// copy the loaded corpus graphs
 		for (SCorpusGraph corpusGraph : new LinkedList<>(loadedProject.getCorpusGraphs())) {
-			addCorpusGraph(corpusGraph);
+			add(corpusGraph);
 		}
 
 	}
@@ -175,7 +175,7 @@ public class SaltProjectImpl implements SaltProject {
 	@Override
 	public SCorpusGraph createCorpusGraph() {
 		SCorpusGraph corpGraph = SaltFactory.createSCorpusGraph();
-		addCorpusGraph(corpGraph);
+		add(corpGraph);
 		return (corpGraph);
 	}
 }

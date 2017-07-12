@@ -63,8 +63,8 @@ public class ValidatorTest {
 		rel.setTarget(tok);
 		rel.setSource(tok);
 
-		fixture.addNode(tok);
-		fixture.addRelation(rel);
+		fixture.add(tok);
+		fixture.add(rel);
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
 
@@ -72,7 +72,7 @@ public class ValidatorTest {
 	public void whenValidatingAndSTextualDSHasNoText_thenInvalid() {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText(null);
-		fixture.addNode(text);
+		fixture.add(text);
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
 
@@ -81,13 +81,13 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText("");
 		final SToken tok = SaltFactory.createSToken();
-		fixture.addNode(text);
-		fixture.addNode(tok);
+		fixture.add(text);
+		fixture.add(tok);
 
 		final STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setSource(tok);
 		rel.setTarget(text);
-		fixture.addRelation(rel);
+		fixture.add(rel);
 
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(2);
 	}
@@ -97,14 +97,14 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText("");
 		final SToken tok = SaltFactory.createSToken();
-		fixture.addNode(text);
-		fixture.addNode(tok);
+		fixture.add(text);
+		fixture.add(tok);
 
 		final STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setStart(-1);
 		rel.setSource(tok);
 		rel.setTarget(text);
-		fixture.addRelation(rel);
+		fixture.add(rel);
 
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(2);
 	}
@@ -114,15 +114,15 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText("");
 		final SToken tok = SaltFactory.createSToken();
-		fixture.addNode(text);
-		fixture.addNode(tok);
+		fixture.add(text);
+		fixture.add(tok);
 
 		final STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setStart(-1);
 		rel.setEnd(0);
 		rel.setSource(tok);
 		rel.setTarget(text);
-		fixture.addRelation(rel);
+		fixture.add(rel);
 
 		assertThat(SaltUtil.validate(fixture).andRepairInvalidities().getInvalidities()).hasSize(1);
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(0);
@@ -133,15 +133,15 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText("");
 		final SToken tok = SaltFactory.createSToken();
-		fixture.addNode(text);
-		fixture.addNode(tok);
+		fixture.add(text);
+		fixture.add(tok);
 
 		final STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setStart(1);
 		rel.setEnd(1);
 		rel.setSource(tok);
 		rel.setTarget(text);
-		fixture.addRelation(rel);
+		fixture.add(rel);
 
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(2);
 	}
@@ -151,15 +151,15 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText("text");
 		final SToken tok = SaltFactory.createSToken();
-		fixture.addNode(text);
-		fixture.addNode(tok);
+		fixture.add(text);
+		fixture.add(tok);
 
 		final STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setStart(2);
 		rel.setEnd(1);
 		rel.setSource(tok);
 		rel.setTarget(text);
-		fixture.addRelation(rel);
+		fixture.add(rel);
 
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
@@ -169,15 +169,15 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText("");
 		final SToken tok = SaltFactory.createSToken();
-		fixture.addNode(text);
-		fixture.addNode(tok);
+		fixture.add(text);
+		fixture.add(tok);
 
 		final STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setStart(0);
 		rel.setEnd(2);
 		rel.setSource(tok);
 		rel.setTarget(text);
-		fixture.addRelation(rel);
+		fixture.add(rel);
 
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(1);
 	}
@@ -187,15 +187,15 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText("");
 		final SToken tok = SaltFactory.createSToken();
-		fixture.addNode(text);
-		fixture.addNode(tok);
+		fixture.add(text);
+		fixture.add(tok);
 
 		final STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setStart(0);
 		rel.setEnd(-1);
 		rel.setSource(tok);
 		rel.setTarget(text);
-		fixture.addRelation(rel);
+		fixture.add(rel);
 
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(2);
 	}
@@ -205,15 +205,15 @@ public class ValidatorTest {
 		final STextualDS text = SaltFactory.createSTextualDS();
 		text.setText("");
 		final SToken tok = SaltFactory.createSToken();
-		fixture.addNode(text);
-		fixture.addNode(tok);
+		fixture.add(text);
+		fixture.add(tok);
 
 		final STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setStart(0);
 		rel.setEnd(2);
 		rel.setSource(tok);
 		rel.setTarget(text);
-		fixture.addRelation(rel);
+		fixture.add(rel);
 
 		assertThat(SaltUtil.validate(fixture).andRepairInvalidities().getInvalidities()).hasSize(1);
 		assertThat(SaltUtil.validate(fixture).andFindInvalidities().getInvalidities()).hasSize(0);

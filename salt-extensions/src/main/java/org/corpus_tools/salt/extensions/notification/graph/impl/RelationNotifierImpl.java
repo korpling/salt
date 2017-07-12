@@ -70,8 +70,8 @@ public class RelationNotifierImpl<S extends Node, T extends Node> extends Relati
 	 * {@inheritDoc} Notifies all registered listeners.
 	 **/
 	@Override
-	public void addLabel(Label label) {
-		super.addLabel(label);
+	public void add(Label label) {
+		super.add(label);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.RELATION_LABELS, null,
 					label, this);

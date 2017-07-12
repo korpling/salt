@@ -129,12 +129,12 @@ public class SaltUtilTest {
 	public void testCreateSaltURI() {
 		SaltProject project = SaltFactory.createSaltProject();
 		SCorpusGraph graph = SaltFactory.createSCorpusGraph();
-		project.addCorpusGraph(graph);
+		project.add(graph);
 
 		// test path of corp1
 		SCorpus corp1 = SaltFactory.createSCorpus();
 		corp1.setName("corp1");
-		graph.addNode(corp1);
+		graph.add(corp1);
 		URI path = SaltUtil.createSaltURI(corp1.getId());
 		assertEquals(URI.createURI("salt:/corp1"), path);
 

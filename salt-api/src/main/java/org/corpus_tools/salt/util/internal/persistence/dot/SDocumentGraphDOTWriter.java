@@ -424,7 +424,7 @@ public class SDocumentGraphDOTWriter implements GraphTraverseHandler {
 				{
 					SProcessingAnnotation spAnno = SaltFactory.createSProcessingAnnotation();
 					spAnno.setQName(KW_DOT_STORED);
-					relation.addProcessingAnnotation(spAnno);
+					relation.add(spAnno);
 				}
 			}
 		}

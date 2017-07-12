@@ -103,7 +103,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		for (String id : ids) {
 			SDocument docDs = SaltFactory.createSDocument();
 			docDs.setId(id);
-			getFixture().addNode(docDs);
+			getFixture().add(docDs);
 			docDSs.add(docDs);
 		}
 
@@ -118,7 +118,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		for (String id : ids) {
 			SCorpus corpDs = SaltFactory.createSCorpus();
 			corpDs.setId(id);
-			getFixture().addNode(corpDs);
+			getFixture().add(corpDs);
 			corpDSs.add(corpDs);
 		}
 
@@ -131,13 +131,13 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		String[] ids = { "salt:/graph1#corpRel1", "salt:/graph1#corpRel2", "salt:/graph1#corpRel3",
 				"salt:/graph1#corpRel4" };
 		List<SCorpusRelation> corpRelDSs = new ArrayList<SCorpusRelation>();
-		getFixture().addNode(alibiCorpus);
+		getFixture().add(alibiCorpus);
 		for (String id : ids) {
 			SCorpusRelation corpRel = SaltFactory.createSCorpusRelation();
 			corpRel.setId(id);
 			corpRel.setSource(alibiCorpus);
 			corpRel.setTarget(alibiCorpus);
-			getFixture().addRelation(corpRel);
+			getFixture().add(corpRel);
 			corpRelDSs.add(corpRel);
 		}
 
@@ -150,14 +150,14 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		String[] ids = { "salt:/graph1#corpRel1", "salt:/graph1#corpRel2", "salt:/graph1#corpRel3",
 				"salt:/graph1#corpRel4" };
 		List<SCorpusDocumentRelation> corpRelDSs = new ArrayList<SCorpusDocumentRelation>();
-		getFixture().addNode(alibiCorpus);
-		getFixture().addNode(alibiDocument);
+		getFixture().add(alibiCorpus);
+		getFixture().add(alibiDocument);
 		for (String id : ids) {
 			SCorpusDocumentRelation corpDocRel = SaltFactory.createSCorpusDocumentRelation();
 			corpDocRel.setId(id);
 			corpDocRel.setSource(alibiCorpus);
 			corpDocRel.setTarget(alibiDocument);
-			getFixture().addRelation(corpDocRel);
+			getFixture().add(corpDocRel);
 			corpRelDSs.add(corpDocRel);
 		}
 
@@ -172,7 +172,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		for (String id : ids) {
 			SCorpus corpDs = SaltFactory.createSCorpus();
 			corpDs.setId(id);
-			getFixture().addNode(corpDs);
+			getFixture().add(corpDs);
 			corpDSs.add(corpDs);
 		}
 
@@ -188,7 +188,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		for (String id : ids) {
 			SDocument docDs = SaltFactory.createSDocument();
 			docDs.setId(id);
-			getFixture().addNode(docDs);
+			getFixture().add(docDs);
 			docDSs.add(docDs);
 		}
 
@@ -245,7 +245,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		} catch (SaltInsertionException e) {
 		}
 
-		getFixture().addNode(superCorpus);
+		getFixture().add(superCorpus);
 		assertNotNull(getFixture().addSubCorpus(superCorpus, subCorpus));
 
 		List<SRelation<? extends SNode, ? extends SNode>> relations = getFixture().getOutRelations(superCorpus.getId());
@@ -313,7 +313,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		} catch (Exception e) {
 		}
 
-		getFixture().addNode(corpus);
+		getFixture().add(corpus);
 		assertNotNull(getFixture().addDocument(corpus, document));
 
 		List<SRelation<? extends SNode, ? extends SNode>> relations = getFixture().getOutRelations(corpus.getId());
@@ -336,7 +336,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		SDocument sDocument = null;
 
 		sCorpus = SaltFactory.createSCorpus();
-		getFixture().addNode(sCorpus);
+		getFixture().add(sCorpus);
 
 		sDocument = SaltFactory.createSDocument();
 		getFixture().addDocument(sCorpus, sDocument);
@@ -356,7 +356,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 		SCorpus sCorp1 = SaltFactory.createSCorpus();
 		SCorpus sCorp2 = SaltFactory.createSCorpus();
 		SCorpus sCorp3 = SaltFactory.createSCorpus();
-		getFixture().addNode(sCorp1);
+		getFixture().add(sCorp1);
 		getFixture().addSubCorpus(sCorp1, sCorp2);
 		getFixture().addSubCorpus(sCorp1, sCorp3);
 
@@ -417,7 +417,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	@Test
 	public void testCreateSCorpus__SCorpus_String() {
 		SCorpus sCorpus = SaltFactory.createSCorpus();
-		getFixture().addNode(sCorpus);
+		getFixture().add(sCorpus);
 		SCorpus sCorp2 = getFixture().createCorpus(sCorpus, "corp2");
 
 		assertNotNull(getFixture().getNode(sCorp2.getId()));
@@ -431,7 +431,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	@Test
 	public void testCreateSDocument__SCorpus_String() {
 		SCorpus sCorpus = SaltFactory.createSCorpus();
-		getFixture().addNode(sCorpus);
+		getFixture().add(sCorpus);
 		SDocument sDoc = getFixture().createDocument(sCorpus, "doc1");
 
 		assertNotNull(getFixture().getNode(sDoc.getId()));
@@ -502,11 +502,11 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 	@Test
 	public void testCheckElementId() {
 		SCorpus sCorpus = SaltFactory.createSCorpus();
-		getFixture().addNode(sCorpus);
+		getFixture().add(sCorpus);
 		assertEquals("salt:/corp1", sCorpus.getId());
 
 		SDocument sDocument = SaltFactory.createSDocument();
-		getFixture().addNode(sDocument);
+		getFixture().add(sDocument);
 		assertEquals("salt:/doc1", sDocument.getId());
 
 		// TODO check, for corpora and documents with relations
@@ -552,13 +552,13 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 			corp1.setId("corp1");
 			GraphFactory.createIdentifier(corp1, "corp1");
 
-			corpGraph.addNode(corp1);
+			corpGraph.add(corp1);
 
 			// doc1
 			SDocument doc1 = SaltFactory.createSDocument();
 			GraphFactory.createIdentifier(doc1, "doc1");
 			doc1.setName("doc1");
-			corpGraph.addNode(doc1);
+			corpGraph.add(doc1);
 			doc1.setDocumentGraph(SaltFactory.createSDocumentGraph());
 			// CorpDocRel
 			SCorpusDocumentRelation corpDocRel1 = SaltFactory.createSCorpusDocumentRelation();
@@ -566,7 +566,7 @@ public class SCorpusGraphTest extends TestCase implements GraphTraverseHandler {
 			corpDocRel1.setName("rel1");
 			corpDocRel1.setSource(corp1);
 			corpDocRel1.setTarget(doc1);
-			corpGraph.addRelation(corpDocRel1);
+			corpGraph.add(corpDocRel1);
 			return (doc1);
 		}
 	}

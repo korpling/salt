@@ -24,6 +24,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.corpus_tools.salt.core.AnnotationFinder;
+import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SGraph;
@@ -139,12 +141,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addAnnotation(SAnnotation annotation) {
-		SAnnotationContainerHelper.addAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SAnnotation> Set<A> getAnnotations() {
 		return (SAnnotationContainerHelper.getAnnotations(this));
 	}
@@ -170,12 +166,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	// =======================================< SAnnotation
 
 	// =======================================> SMetaAnnotation
-	/** {@inheritDoc} **/
-	@Override
-	public void addMetaAnnotation(SMetaAnnotation metaAnnotation) {
-		SAnnotationContainerHelper.addMetaAnnotation(this, metaAnnotation);
-	}
-
 	/** {@inheritDoc} **/
 	@Override
 	public SMetaAnnotation createMetaAnnotation(String namespace, String name, Object value) {
@@ -222,12 +212,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addProcessingAnnotation(SProcessingAnnotation annotation) {
-		SAnnotationContainerHelper.addProcessingAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SProcessingAnnotation> Set<A> getProcessingAnnotations() {
 		return (SAnnotationContainerHelper.getProcessingAnnotations(this));
 	}
@@ -256,12 +240,6 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	@Override
 	public Set<SFeature> createFeatures(String featureString) {
 		return (SAnnotationContainerHelper.createFeatures(this, featureString));
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public void addFeature(SFeature feature) {
-		SAnnotationContainerHelper.addFeature(this, feature);
 	}
 
 	/** {@inheritDoc} **/
@@ -351,4 +329,8 @@ public class SNodeImpl extends NodeImpl implements SNode {
 				"Graph implementation is not of type SGraph (actual type is " + superGraph.getClass().getName() + ")");
 	}
 
+	@Override
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
+		return new AnnotationFinder<>(resultType, this);
+	}
 }

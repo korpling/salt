@@ -66,9 +66,9 @@ public class SaltProjectImplTest {
 		SCorpusGraph graph1 = SaltFactory.createSCorpusGraph();
 		SCorpusGraph graph2 = SaltFactory.createSCorpusGraph();
 
-		getFixture().addCorpusGraph(graph1);
+		getFixture().add(graph1);
 		assertEquals(1, getFixture().getCorpusGraphs().size());
-		getFixture().addCorpusGraph(graph2);
+		getFixture().add(graph2);
 		assertEquals(2, getFixture().getCorpusGraphs().size());
 	}
 
@@ -80,9 +80,9 @@ public class SaltProjectImplTest {
 		SCorpusGraph graph1 = SaltFactory.createSCorpusGraph();
 		SCorpusGraph graph2 = SaltFactory.createSCorpusGraph();
 
-		getFixture().addCorpusGraph(graph1);
+		getFixture().add(graph1);
 		assertEquals(1, getFixture().getCorpusGraphs().size());
-		getFixture().addCorpusGraph(graph2);
+		getFixture().add(graph2);
 		assertEquals(2, getFixture().getCorpusGraphs().size());
 		getFixture().removeCorpusGraph(graph1);
 		assertEquals(1, getFixture().getCorpusGraphs().size());
@@ -104,9 +104,9 @@ public class SaltProjectImplTest {
 		SCorpusGraph graph2 = SaltFactory.createSCorpusGraph();
 
 		assertNull(graph1.getSaltProject());
-		getFixture().addCorpusGraph(graph1);
+		getFixture().add(graph1);
 		assertEquals(getFixture(), graph1.getSaltProject());
-		getFixture().addCorpusGraph(graph2);
+		getFixture().add(graph2);
 		assertEquals(getFixture(), graph2.getSaltProject());
 		getFixture().removeCorpusGraph(graph1);
 		assertNull(graph1.getSaltProject());

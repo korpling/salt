@@ -39,7 +39,6 @@ import org.corpus_tools.salt.graph.GraphFactory;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.graph.impl.RelationImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -68,68 +67,68 @@ public class GraphTest {
 		List<Node> nodes = new ArrayList<Node>();
 
 		Node node1 = GraphFactory.createNode();
-		getFixture().addNode(node1);
+		getFixture().add(node1);
 		nodes.add(node1);
 
 		Node node2 = GraphFactory.createNode();
-		getFixture().addNode(node2);
+		getFixture().add(node2);
 		nodes.add(node2);
 
 		Node node3 = GraphFactory.createNode();
-		getFixture().addNode(node3);
+		getFixture().add(node3);
 		nodes.add(node3);
 
 		Node node4 = GraphFactory.createNode();
-		getFixture().addNode(node4);
+		getFixture().add(node4);
 		nodes.add(node4);
 
 		Node node5 = GraphFactory.createNode();
-		getFixture().addNode(node5);
+		getFixture().add(node5);
 		nodes.add(node5);
 
 		Node node6 = GraphFactory.createNode();
-		getFixture().addNode(node6);
+		getFixture().add(node6);
 		nodes.add(node6);
 
 		Node node7 = GraphFactory.createNode();
-		getFixture().addNode(node7);
+		getFixture().add(node7);
 		nodes.add(node7);
 
 		List<Relation<Node, Node>> relations = new ArrayList<>();
 		Relation<Node, Node> relation1 = GraphFactory.createRelation();
 		relation1.setSource(node1);
 		relation1.setTarget(node2);
-		getFixture().addRelation(relation1);
+		getFixture().add(relation1);
 		relations.add(relation1);
 
 		Relation<Node, Node> relation2 = GraphFactory.createRelation();
 		relation2.setSource(node2);
 		relation2.setTarget(node3);
-		getFixture().addRelation(relation2);
+		getFixture().add(relation2);
 		relations.add(relation2);
 
 		Relation<Node, Node> relation3 = GraphFactory.createRelation();
 		relation3.setSource(node1);
 		relation3.setTarget(node4);
-		getFixture().addRelation(relation3);
+		getFixture().add(relation3);
 		relations.add(relation3);
 
 		Relation<Node, Node> relation4 = GraphFactory.createRelation();
 		relation4.setSource(node4);
 		relation4.setTarget(node5);
-		getFixture().addRelation(relation4);
+		getFixture().add(relation4);
 		relations.add(relation4);
 
 		Relation<Node, Node> relation5 = GraphFactory.createRelation();
 		relation5.setSource(node2);
 		relation5.setTarget(node6);
-		getFixture().addRelation(relation5);
+		getFixture().add(relation5);
 		relations.add(relation5);
 
 		Relation<Node, Node> relation6 = GraphFactory.createRelation();
 		relation6.setSource(node1);
 		relation6.setTarget(node7);
-		getFixture().addRelation(relation6);
+		getFixture().add(relation6);
 		relations.add(relation6);
 
 		return (new ImmutablePair<>(nodes, relations));
@@ -149,7 +148,7 @@ public class GraphTest {
 	@Test
 	public void testDoubleChainingNode() {
 		Node node = GraphFactory.createNode();
-		getFixture().addNode(node);
+		getFixture().add(node);
 		assertEquals(getFixture(), node.getGraph());
 	}
 
@@ -161,11 +160,11 @@ public class GraphTest {
 		Relation<Node, Node> rel = GraphFactory.createRelation();
 		Node source = GraphFactory.createNode();
 		Node target = GraphFactory.createNode();
-		getFixture().addNode(source);
-		getFixture().addNode(target);
+		getFixture().add(source);
+		getFixture().add(target);
 		rel.setSource(source);
 		rel.setTarget(target);
-		getFixture().addRelation(rel);
+		getFixture().add(rel);
 		assertEquals(getFixture(), rel.getGraph());
 	}
 
@@ -175,7 +174,7 @@ public class GraphTest {
 	@Test
 	public void testDoubleChainingLayer() {
 		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		assertEquals(getFixture(), layer.getGraph());
 	}
 
@@ -189,18 +188,18 @@ public class GraphTest {
 	public void testAddNode() {
 		assertEquals(0, getFixture().getNodes().size());
 		try {
-			getFixture().addNode(null);
+			getFixture().add((Node) null);
 			fail("Null should not have been added as a node. ");
 		} catch (SaltParameterException e) {
 		}
 
 		Node node = GraphFactory.createNode();
-		getFixture().addNode(node);
+		getFixture().add(node);
 		assertEquals(1, getFixture().getNodes().size());
 		assertEquals(node, getFixture().getNodes().get(0));
 		for (int i = 0; i < 50; i++) {
 			node = GraphFactory.createNode();
-			getFixture().addNode(node);
+			getFixture().add(node);
 			assertTrue(getFixture().getNodes().contains(node));
 		}
 	}
@@ -217,13 +216,13 @@ public class GraphTest {
 	@Test
 	public void testAddNode_Id() {
 		Node node = GraphFactory.createNode();
-		getFixture().addNode(node);
+		getFixture().add(node);
 		assertEquals(1, getFixture().getNodes().size());
 		assertEquals(node, getFixture().getNodes().get(0));
 		Set<String> ids = new HashSet<String>();
 		for (int i = 0; i < 50; i++) {
 			node = GraphFactory.createNode();
-			getFixture().addNode(node);
+			getFixture().add(node);
 			assertNotNull(node.getId());
 			if (ids.contains(node.getId())) {
 				fail("An id was given twice");
@@ -233,10 +232,10 @@ public class GraphTest {
 		}
 		node = GraphFactory.createNode();
 		node.setId("hello");
-		getFixture().addNode(node);
+		getFixture().add(node);
 		node = GraphFactory.createNode();
 		node.setId("hello");
-		getFixture().addNode(node);
+		getFixture().add(node);
 		assertNotEquals("hello", node.getId());
 	}
 
@@ -279,7 +278,7 @@ public class GraphTest {
 		for (int i = 0; i < 50; i++) {
 			Node node = GraphFactory.createNode();
 			nodes.add(node);
-			getFixture().addNode(node);
+			getFixture().add(node);
 		}
 		assertEquals(nodes.size(), getFixture().getNodes().size());
 		for (Node node : nodes) {
@@ -298,7 +297,7 @@ public class GraphTest {
 		for (int i = 0; i < 50; i++) {
 			Node node = GraphFactory.createNode();
 			nodes.add(node);
-			getFixture().addNode(node);
+			getFixture().add(node);
 		}
 
 		for (Node node : nodes) {
@@ -315,7 +314,7 @@ public class GraphTest {
 		for (int i = 0; i < 50; i++) {
 			Node node = GraphFactory.createNode();
 			nodes.add(node);
-			getFixture().addNode(node);
+			getFixture().add(node);
 			assertEquals(node, getFixture().getNode(node.getId()));
 		}
 		for (Node node : nodes) {
@@ -354,14 +353,14 @@ public class GraphTest {
 	@Test
 	public void testRemoveNodeAlsoFromLayer() {
 		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 
 		List<Node> nodes = new ArrayList<>();
 		for (int i = 0; i < 50; i++) {
 			Node node = GraphFactory.createNode();
 			nodes.add(node);
-			getFixture().addNode(node);
-			layer.addNode(node);
+			getFixture().add(node);
+			layer.add(node);
 		}
 		assertEquals(nodes.size(), layer.getNodes().size());
 		for (Node node : nodes) {
@@ -378,19 +377,19 @@ public class GraphTest {
 	@Test
 	public void testRemoveNodeAndAlsoRelations() {
 		Node n1 = GraphFactory.createNode();
-		getFixture().addNode(n1);
+		getFixture().add(n1);
 		Node n2 = GraphFactory.createNode();
-		getFixture().addNode(n2);
+		getFixture().add(n2);
 
 		Relation<Node, Node> r1 = GraphFactory.createRelation();
 		r1.setSource(n1);
 		r1.setTarget(n2);
-		getFixture().addRelation(r1);
+		getFixture().add(r1);
 
 		Relation<Node, Node> r2 = GraphFactory.createRelation();
 		r2.setSource(n2);
 		r2.setTarget(n1);
-		getFixture().addRelation(r2);
+		getFixture().add(r2);
 
 		// check precondition
 		assertEquals(1, getFixture().getOutRelations(n1.getId()).size());
@@ -415,9 +414,9 @@ public class GraphTest {
 	public void testAddDuplicatedNode() {
 		Node n = GraphFactory.createNode();
 
-		getFixture().addNode(n);
+		getFixture().add(n);
 		assertEquals(1, getFixture().getNodes().size());
-		getFixture().addNode(n);
+		getFixture().add(n);
 		assertEquals(1, getFixture().getNodes().size());
 	}
 
@@ -432,12 +431,12 @@ public class GraphTest {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> oldGraph = GraphFactory.createGraph();
 
 		Node node = GraphFactory.createNode();
-		oldGraph.addNode(node);
+		oldGraph.add(node);
 		assertEquals(1, oldGraph.getNodes().size());
 		assertEquals(node, oldGraph.getNodes().get(0));
 
 		// now moving the node to another graph
-		getFixture().addNode(node);
+		getFixture().add(node);
 		assertEquals(1, getFixture().getNodes().size());
 		assertEquals(node, getFixture().getNodes().get(0));
 		assertEquals(0, oldGraph.getNodes().size());
@@ -458,7 +457,7 @@ public class GraphTest {
 	@Test
 	public void testAddRelation() {
 		try {
-			getFixture().addRelation(null);
+			getFixture().add((Relation<Node, Node>) null);
 			fail("Null should not have been added as a node. ");
 		} catch (SaltParameterException e) {
 		}
@@ -467,7 +466,7 @@ public class GraphTest {
 		Node source = null;
 		Node target = null;
 		try {
-			getFixture().addRelation(relation);
+			getFixture().add(relation);
 			// no source node is set
 			fail();
 		} catch (SaltInsertionException e) {
@@ -475,7 +474,7 @@ public class GraphTest {
 		source = GraphFactory.createNode();
 		relation.setSource(source);
 		try {
-			getFixture().addRelation(relation);
+			getFixture().add(relation);
 			// no target node is set
 			fail();
 		} catch (SaltInsertionException e) {
@@ -483,14 +482,14 @@ public class GraphTest {
 		target = GraphFactory.createNode();
 		relation.setTarget(target);
 		try {
-			getFixture().addRelation(relation);
+			getFixture().add(relation);
 			// target and source does not belong to graph
 			fail("Cannot add relation, whose source and target does not belong to graph");
 		} catch (SaltInsertionException e) {
 		}
-		getFixture().addNode(source);
-		getFixture().addNode(target);
-		getFixture().addRelation(relation);
+		getFixture().add(source);
+		getFixture().add(target);
+		getFixture().add(relation);
 		assertTrue(getFixture().getRelations().contains(relation));
 	}
 
@@ -506,13 +505,13 @@ public class GraphTest {
 	@Test
 	public void testAddRelation_Id() {
 		Node node = GraphFactory.createNode();
-		getFixture().addNode(node);
+		getFixture().add(node);
 		Relation<Node, Node> relation = GraphFactory.createRelation();
 		relation.setSource(node);
 		relation.setTarget(node);
 
 		assertEquals(0, getFixture().getRelations().size());
-		getFixture().addRelation(relation);
+		getFixture().add(relation);
 		assertEquals(1, getFixture().getRelations().size());
 		assertEquals(relation, getFixture().getRelations().get(0));
 
@@ -522,7 +521,7 @@ public class GraphTest {
 			relation.setSource(node);
 			relation.setTarget(node);
 
-			getFixture().addRelation(relation);
+			getFixture().add(relation);
 			assertNotNull(relation.getId());
 			if (ids.contains(relation.getId())) {
 				fail("An id was given twice");
@@ -534,12 +533,12 @@ public class GraphTest {
 		relation.setId("hello");
 		relation.setSource(node);
 		relation.setTarget(node);
-		getFixture().addRelation(relation);
+		getFixture().add(relation);
 		relation = GraphFactory.createRelation();
 		relation.setId("hello");
 		relation.setSource(node);
 		relation.setTarget(node);
-		getFixture().addRelation(relation);
+		getFixture().add(relation);
 		assertNotEquals("hello", relation.getId());
 	}
 
@@ -562,9 +561,9 @@ public class GraphTest {
 		relation1.setTarget(node2);
 
 		assertNull(getFixture().getRelation(relation1.getId()));
-		getFixture().addNode(node1);
-		getFixture().addNode(node2);
-		getFixture().addRelation(relation1);
+		getFixture().add(node1);
+		getFixture().add(node2);
+		getFixture().add(relation1);
 		assertEquals(relation1, getFixture().getRelation(relation1.getId()));
 	}
 
@@ -574,21 +573,21 @@ public class GraphTest {
 	@Test
 	public void testGetRelationsBetweenNodes() {
 		Node node1 = GraphFactory.createNode();
-		getFixture().addNode(node1);
+		getFixture().add(node1);
 		Node node2 = GraphFactory.createNode();
-		getFixture().addNode(node2);
+		getFixture().add(node2);
 		Node node3 = GraphFactory.createNode();
-		getFixture().addNode(node3);
+		getFixture().add(node3);
 
 		Relation<Node, Node> relation1 = GraphFactory.createRelation();
 		relation1.setSource(node2);
 		relation1.setTarget(node3);
-		getFixture().addRelation(relation1);
+		getFixture().add(relation1);
 
 		Relation<Node, Node> relation2 = GraphFactory.createRelation();
 		relation2.setSource(node2);
 		relation2.setTarget(node3);
-		getFixture().addRelation(relation2);
+		getFixture().add(relation2);
 
 		assertEquals(2, getFixture().getRelations(node2.getId(), node3.getId()).size());
 		assertEquals(relation1, getFixture().getRelations(node2.getId(), node3.getId()).get(0));
@@ -677,18 +676,18 @@ public class GraphTest {
 	public void testRemoveRelation2() {
 		Node node1 = GraphFactory.createNode();
 		Node node2 = GraphFactory.createNode();
-		getFixture().addNode(node1);
-		getFixture().addNode(node2);
+		getFixture().add(node1);
+		getFixture().add(node2);
 
 		Layer<Node, Relation<Node, Node>> layer1 = GraphFactory.createLayer();
-		getFixture().addLayer(layer1);
+		getFixture().add(layer1);
 		Collection<Relation<Node, Node>> relations = new ArrayList<>();
 		for (int i = 0; i < 5; i++) {
 			Relation<Node, Node> relation = GraphFactory.createRelation();
 			relation.setSource(node1);
 			relation.setTarget(node2);
-			getFixture().addRelation(relation);
-			layer1.addRelation(relation);
+			getFixture().add(relation);
+			layer1.add(relation);
 			relations.add(relation);
 		}
 		assertEquals(5, getFixture().getRelations().size());
@@ -741,7 +740,7 @@ public class GraphTest {
 		// add new relation
 		for (Relation<Node, Node> relation : pair.getRight()) {
 			// add relation
-			getFixture().addRelation(relation);
+			getFixture().add(relation);
 			// check if relation exists
 			assertEquals("created relation has to be there", getFixture().getRelation(relation.getId()), relation);
 		}
@@ -754,21 +753,21 @@ public class GraphTest {
 	@Test
 	public void testChangeRelationSource() {
 		Node node1 = GraphFactory.createNode();
-		getFixture().addNode(node1);
+		getFixture().add(node1);
 
 		Node node2 = GraphFactory.createNode();
-		getFixture().addNode(node2);
+		getFixture().add(node2);
 
 		Relation<Node, Node> relation = GraphFactory.createRelation();
 		relation.setSource(node1);
 		relation.setTarget(node2);
-		getFixture().addRelation(relation);
+		getFixture().add(relation);
 
 		assertTrue(getFixture().getOutRelations(node1.getId()).contains(relation));
 		assertTrue(getFixture().getInRelations(node2.getId()).contains(relation));
 
 		Node node3 = GraphFactory.createNode();
-		getFixture().addNode(node3);
+		getFixture().add(node3);
 
 		// redirect source
 		relation.setSource(node3);
@@ -785,24 +784,24 @@ public class GraphTest {
 	public void testChangeRelationTarget() {
 		Node node1 = GraphFactory.createNode();
 		node1.setId("node1");
-		getFixture().addNode(node1);
+		getFixture().add(node1);
 
 		Node node2 = GraphFactory.createNode();
 		node2.setId("node2");
-		getFixture().addNode(node2);
+		getFixture().add(node2);
 
 		Relation<Node, Node> relation = GraphFactory.createRelation();
 		relation.setId("relation1");
 		relation.setSource(node1);
 		relation.setTarget(node2);
-		getFixture().addRelation(relation);
+		getFixture().add(relation);
 
 		assertTrue(getFixture().getOutRelations(node1.getId()).contains(relation));
 		assertTrue(getFixture().getInRelations(node2.getId()).contains(relation));
 
 		Node node3 = GraphFactory.createNode();
 		node3.setId("node3");
-		getFixture().addNode(node3);
+		getFixture().add(node3);
 		// redirect source
 		relation.setTarget(node3);
 		assertTrue(getFixture().getInRelations(node3.getId()).contains(relation));
@@ -818,16 +817,16 @@ public class GraphTest {
 		Node n1 = GraphFactory.createNode();
 		Node n2 = GraphFactory.createNode();
 
-		getFixture().addNode(n1);
-		getFixture().addNode(n2);
+		getFixture().add(n1);
+		getFixture().add(n2);
 
 		Relation<Node, Node> rel = GraphFactory.createRelation();
 		rel.setSource(n1);
 		rel.setTarget(n2);
 
-		getFixture().addRelation(rel);
+		getFixture().add(rel);
 		assertEquals(1, getFixture().getRelations().size());
-		getFixture().addRelation(rel);
+		getFixture().add(rel);
 		assertEquals(1, getFixture().getRelations().size());
 	}
 
@@ -841,16 +840,16 @@ public class GraphTest {
 	public void testAddLayer() {
 		Layer<Node, Relation<Node, Node>> layer = null;
 		// adding null layer
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		assertEquals("shall not add a null layer", 0, getFixture().getLayers().size());
 
 		// adding layer
 		layer = GraphFactory.createLayer();
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		assertTrue(getFixture().getLayers().contains(layer));
 
 		// adding layer second time shall fail
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		assertTrue(getFixture().getLayers().contains(layer));
 		assertEquals("shall not add a layer two times", 1, getFixture().getLayers().size());
 	}
@@ -867,7 +866,7 @@ public class GraphTest {
 
 		layer = GraphFactory.createLayer();
 		// layer.setId(id);
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		assertEquals(layer, getFixture().getLayer(layer.getId()));
 	}
 
@@ -877,7 +876,7 @@ public class GraphTest {
 	@Test
 	public void testRemoveLayer() {
 		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		assertEquals(layer, getFixture().getLayer(layer.getId()));
 		getFixture().removeLayer(layer);
 		assertNull(getFixture().getLayer(layer.getId()));
@@ -890,7 +889,7 @@ public class GraphTest {
 	@Test
 	public void testRemoveLayerFromList() {
 		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 		assertEquals(layer, getFixture().getLayer(layer.getId()));
 		try {
 			getFixture().getLayers().remove(layer);
@@ -913,14 +912,14 @@ public class GraphTest {
 		relation.setSource(node);
 		relation.setTarget(node2);
 
-		layer.addNode(node);
-		layer.addNode(node2);
-		layer.addRelation(relation);
+		layer.add(node);
+		layer.add(node2);
+		layer.add(relation);
 
 		assertEquals(0, getFixture().getNodes().size());
 		assertEquals(0, getFixture().getRelations().size());
 
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 
 		assertEquals(2, getFixture().getNodes().size());
 		assertEquals(node, getFixture().getNode(node.getId()));
@@ -936,7 +935,7 @@ public class GraphTest {
 	@Test
 	public void testAddNodeAndRelationToLayer() {
 		Layer<Node, Relation<Node, Node>> layer = GraphFactory.createLayer();
-		getFixture().addLayer(layer);
+		getFixture().add(layer);
 
 		Node node = GraphFactory.createNode();
 		Node node2 = GraphFactory.createNode();
@@ -947,11 +946,11 @@ public class GraphTest {
 		assertEquals(0, getFixture().getNodes().size());
 		assertEquals(0, getFixture().getRelations().size());
 
-		layer.addNode(node);
+		layer.add(node);
 		assertEquals(node, getFixture().getNode(node.getId()));
-		layer.addNode(node2);
+		layer.add(node2);
 		assertEquals(node2, getFixture().getNode(node2.getId()));
-		layer.addRelation(relation);
+		layer.add(relation);
 		assertEquals(relation, getFixture().getRelation(relation.getId()));
 	}
 
@@ -963,9 +962,9 @@ public class GraphTest {
 	public void testAddDuplicatedLayer() {
 		Layer<Node, Relation<Node, Node>> l = GraphFactory.createLayer();
 
-		getFixture().addLayer(l);
+		getFixture().add(l);
 		assertEquals(1, getFixture().getLayers().size());
-		getFixture().addLayer(l);
+		getFixture().add(l);
 		assertEquals(1, getFixture().getLayers().size());
 	}
 

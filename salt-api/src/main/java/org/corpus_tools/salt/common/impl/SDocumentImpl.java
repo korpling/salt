@@ -119,7 +119,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			sFeature = SaltFactory.createSFeature();
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			sFeature.setName(SaltUtil.FEAT_SDOCUMENT_GRAPH);
-			addFeature(sFeature);
+			add(sFeature);
 		}
 		sFeature.setValue(documentGraph);
 		if (getId() != null && !getId().isEmpty()) {
@@ -179,7 +179,7 @@ public class SDocumentImpl extends SNodeImpl implements SDocument {
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			sFeature.setName(SaltUtil.FEAT_SDOCUMENT_GRAPH_LOCATION);
 			sFeature.setValue(location);
-			addFeature(sFeature);
+			add(sFeature);
 		}
 		sFeature.setValue(location.toString());
 	}

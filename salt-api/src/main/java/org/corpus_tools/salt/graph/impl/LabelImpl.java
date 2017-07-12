@@ -159,7 +159,7 @@ public class LabelImpl extends LabelableElementImpl implements Label, Copyable<L
 			if (container != null) {
 				// add label to container
 				if (container instanceof LabelableElementImpl) {
-					container.addLabel(this);
+					container.add(this);
 				}
 
 			}

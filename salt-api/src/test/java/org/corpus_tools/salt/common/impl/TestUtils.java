@@ -31,29 +31,29 @@ public class TestUtils {
 	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
 	public static void testSetGetGraph(SNode fixture) {
 		try {
-			SaltFactory.createSCorpusGraph().addNode(fixture);
+			SaltFactory.createSCorpusGraph().add(fixture);
 			fail();
 		} catch (SaltParameterException e) {
 		}
-		SaltFactory.createSDocumentGraph().addNode(fixture);
+		SaltFactory.createSDocumentGraph().add(fixture);
 		assertTrue(fixture.getGraph() instanceof SDocumentGraph);
 	}
 
 	/** Tests whether returned graph is of type {@link SDocumentGraph}. **/
 	public static void testSetGetGraph(SRelation<? extends SNode, ? extends SNode> fixture) {
 		try {
-			SaltFactory.createSCorpusGraph().addRelation(fixture);
+			SaltFactory.createSCorpusGraph().add(fixture);
 			fail();
 		} catch (SaltParameterException e) {
 		}
 		SDocumentGraph graph = SaltFactory.createSDocumentGraph();
 		if (fixture.getSource() != null) {
-			graph.addNode(fixture.getSource());
+			graph.add(fixture.getSource());
 		}
 		if (fixture.getTarget() != null) {
-			graph.addNode(fixture.getTarget());
+			graph.add(fixture.getTarget());
 		}
-		graph.addRelation(fixture);
+		graph.add(fixture);
 		assertTrue(fixture.getGraph() instanceof SDocumentGraph);
 	}
 }

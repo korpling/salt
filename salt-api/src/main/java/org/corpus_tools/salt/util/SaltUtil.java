@@ -277,6 +277,7 @@ public class SaltUtil {
 	 * @param name
 	 *            the name of a label
 	 */
+	// TODO Java 8: use Joiner instead
 	public static String createQName(String namespace, String name) {
 		if (namespace == null || namespace.isEmpty()) {
 			return name;
@@ -567,33 +568,33 @@ public class SaltUtil {
 		// graph into existing one
 		for (SRelation<? extends SNode, ? extends SNode> sRelation : new LinkedList<>(source.getRelations())) {
 			if (target.getNode(sRelation.getSource().getId()) == null)
-				target.addNode(sRelation.getSource());
+				target.add(sRelation.getSource());
 			if (target.getNode(sRelation.getTarget().getId()) == null)
-				target.addNode(sRelation.getTarget());
-			target.addRelation(sRelation);
+				target.add(sRelation.getTarget());
+			target.add(sRelation);
 		}
 
 		// copy all sNodes from loaded graph into existing one
 		for (SNode sNode : new LinkedList<>(source.getNodes())) {
 			if (target.getNode(sNode.getId()) == null)
-				target.addNode(sNode);
-			target.addNode(sNode);
+				target.add(sNode);
+			target.add(sNode);
 		}
 
 		// copy all sAnnotation from loaded graph into existing one
 		for (SAnnotation sAnno : source.getAnnotations())
-			target.addAnnotation(sAnno);
+			target.add(sAnno);
 
 		// copy all sMetaAnnotation from loaded graph into existing one
 		for (SMetaAnnotation sMetaAnno : source.getMetaAnnotations())
-			target.addMetaAnnotation(sMetaAnno);
+			target.add(sMetaAnno);
 		// copy all sProcessingAnnotation from loaded graph into existing one
 		for (SProcessingAnnotation sProcAnno : source.getProcessingAnnotations())
-			target.addProcessingAnnotation(sProcAnno);
+			target.add(sProcAnno);
 
 		// copy all SFeature from loaded graph into existing one
 		for (SFeature sfeature : source.getFeatures()) {
-			target.addFeature(sfeature);
+			target.add(sfeature);
 		}
 
 		// copy identifier
@@ -601,7 +602,7 @@ public class SaltUtil {
 
 		// copy all sLayer from loaded graph into existing one
 		for (SLayer sLayer : new LinkedList<>(source.getLayers()))
-			target.addLayer(sLayer);
+			target.add(sLayer);
 	}
 
 	/**
@@ -1091,10 +1092,10 @@ public class SaltUtil {
 					} // while there is an anno "annoQName_i" , increment i
 					newSName = fromSAnno.getName() + "_" + i;
 					fromSAnno.setName(newSName);
-					to.addAnnotation(fromSAnno);
+					to.add(fromSAnno);
 				} else {
 					// moveSCorpusGraph
-					to.addAnnotation(fromSAnno);
+					to.add(fromSAnno);
 				}
 			}
 		}
@@ -1124,11 +1125,11 @@ public class SaltUtil {
 					} // while there is a meta anno "annoQName_i" , increment i
 					newSName = fromSAnno.getName() + "_" + i;
 					fromSAnno.setName(newSName);
-					to.addMetaAnnotation(fromSAnno);
+					to.add(fromSAnno);
 
 				} else {
 					// moveSCorpusGraph
-					to.addMetaAnnotation(fromSAnno);
+					to.add(fromSAnno);
 				}
 			}
 		}

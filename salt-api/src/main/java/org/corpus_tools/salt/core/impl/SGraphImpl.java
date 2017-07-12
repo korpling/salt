@@ -24,7 +24,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.corpus_tools.salt.SALT_TYPE;
+import org.corpus_tools.salt.core.AnnotationFinder;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
+import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SFeature;
 import org.corpus_tools.salt.core.SGraph;
@@ -64,11 +66,11 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addLayer(SLayer layer) {
+	public void add(SLayer layer) {
 		if (layer.getName() == null) {
 			layer.setName("l" + getLayers().size());
 		}
-		super.addLayer(layer);
+		super.add(layer);
 	}
 
 	/** {@inheritDoc} **/
@@ -298,12 +300,6 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addAnnotation(SAnnotation annotation) {
-		SAnnotationContainerHelper.addAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SAnnotation> Set<A> getAnnotations() {
 		return (SAnnotationContainerHelper.getAnnotations(this));
 	}
@@ -329,11 +325,6 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 	// =======================================< SAnnotation
 
 	// =======================================> SMetaAnnotation
-	/** {@inheritDoc} **/
-	@Override
-	public void addMetaAnnotation(SMetaAnnotation metaAnnotation) {
-		SAnnotationContainerHelper.addMetaAnnotation(this, metaAnnotation);
-	}
 
 	/** {@inheritDoc} **/
 	@Override
@@ -378,12 +369,6 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addProcessingAnnotation(SProcessingAnnotation annotation) {
-		SAnnotationContainerHelper.addProcessingAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SProcessingAnnotation> Set<A> getProcessingAnnotations() {
 		return (SAnnotationContainerHelper.getProcessingAnnotations(this));
 	}
@@ -412,12 +397,6 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 	@Override
 	public Set<SFeature> createFeatures(String featureString) {
 		return (SAnnotationContainerHelper.createFeatures(this, featureString));
-	}
-
-	/** {@inheritDoc} **/
-	@Override
-	public void addFeature(SFeature feature) {
-		SAnnotationContainerHelper.addFeature(this, feature);
 	}
 
 	/** {@inheritDoc} **/
@@ -451,5 +430,10 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 	public URI getPath() {
 		return (SaltUtil.createSaltURI(getId()));
 	}
+
 	// =======================================< SPathElement
+	@Override
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
+		return new AnnotationFinder<>(resultType, this);
+	}
 }

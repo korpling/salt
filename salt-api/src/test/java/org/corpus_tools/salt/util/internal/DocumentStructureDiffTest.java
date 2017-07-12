@@ -218,27 +218,27 @@ public class DocumentStructureDiffTest {
 		SStructure templ_struc = SaltFactory.createSStructure();
 		sDominatingRelation.setSource(templ_struc);
 		sDominatingRelation.setTarget(template.getTokens().get(0));
-		template.addNode(templ_struc);
-		template.addRelation(sDominatingRelation);
+		template.add(templ_struc);
+		template.add(sDominatingRelation);
 
 		SDominanceRelation sDominatingRelation2 = SaltFactory.createSDominanceRelation();
 		SStructure other_struc = SaltFactory.createSStructure();
 		sDominatingRelation2.setSource(other_struc);
 		sDominatingRelation2.setTarget(other.getTokens().get(0));
-		other.addNode(other_struc);
-		other.addRelation(sDominatingRelation2);
+		other.add(other_struc);
+		other.add(sDominatingRelation2);
 
 		assertTrue(getFixture().isIsomorph());
 
 		SDominanceRelation sDominatingRelation3 = SaltFactory.createSDominanceRelation();
 		sDominatingRelation3.setSource(templ_struc);
 		sDominatingRelation3.setTarget(template.getTokens().get(1));
-		template.addRelation(sDominatingRelation3);
+		template.add(sDominatingRelation3);
 
 		SDominanceRelation sDominatingRelation4 = SaltFactory.createSDominanceRelation();
 		sDominatingRelation4.setSource(other_struc);
 		sDominatingRelation4.setTarget(other.getTokens().get(2));
-		other.addRelation(sDominatingRelation4);
+		other.add(sDominatingRelation4);
 
 		assertFalse(getFixture().isIsomorph());
 
@@ -363,7 +363,7 @@ public class DocumentStructureDiffTest {
 		SPointingRelation pr1 = SaltFactory.createSPointingRelation();
 		pr1.setSource((SToken) template.getNodes().get(1));
 		pr1.setTarget((SToken) template.getNodes().get(2));
-		template.addRelation(pr1);
+		template.add(pr1);
 
 		assertFalse(getFixture().isIsomorph());
 
@@ -380,15 +380,15 @@ public class DocumentStructureDiffTest {
 		other.createToken(other.getTextualDSs().get(0), 2, 11);
 
 		SLayer tempLayer = SaltFactory.createSLayer();
-		template.addLayer(tempLayer);
+		template.add(tempLayer);
 		SLayer otherLayer = SaltFactory.createSLayer();
-		other.addLayer(otherLayer);
+		other.add(otherLayer);
 
-		tempLayer.addNode(template.getTokens().get(0));
-		otherLayer.addNode(other.getTokens().get(0));
+		tempLayer.add(template.getTokens().get(0));
+		otherLayer.add(other.getTokens().get(0));
 
 		assertTrue(getFixture().isIsomorph());
-		tempLayer.addNode(template.getTokens().get(1));
+		tempLayer.add(template.getTokens().get(1));
 		assertFalse(getFixture().isIsomorph());
 	}
 
@@ -537,29 +537,29 @@ public class DocumentStructureDiffTest {
 	public void test_Options() {
 		SDocumentGraph graph1 = SaltFactory.createSDocumentGraph();
 		STextualDS text1 = graph1.createTextualDS("This is a sample");
-		graph1.addNode(text1);
+		graph1.add(text1);
 		SToken tok1 = SaltFactory.createSToken();
 		tok1.setName("tok");
-		graph1.addNode(tok1);
+		graph1.add(tok1);
 		STextualRelation rel = SaltFactory.createSTextualRelation();
 		rel.setSource(tok1);
 		rel.setTarget(text1);
 		rel.setStart(0);
 		rel.setEnd(4);
-		graph1.addRelation(rel);
+		graph1.add(rel);
 
 		SDocumentGraph graph2 = SaltFactory.createSDocumentGraph();
 		STextualDS text2 = graph2.createTextualDS("This is a sample");
-		graph2.addNode(text2);
+		graph2.add(text2);
 		SToken tok2 = SaltFactory.createSToken();
 		tok2.setName("other");
-		graph2.addNode(tok2);
+		graph2.add(tok2);
 		rel = SaltFactory.createSTextualRelation();
 		rel.setSource(tok2);
 		rel.setTarget(text2);
 		rel.setStart(0);
 		rel.setEnd(4);
-		graph2.addRelation(rel);
+		graph2.add(rel);
 
 		// rename name, that the isomorphie check will not find a difference in
 		// name
@@ -649,7 +649,7 @@ public class DocumentStructureDiffTest {
 		List<SToken> docTokens = docGraph.getTokens();
 		SLayer docTextLayer = SaltFactory.createSLayer();
 		docTextLayer.setName(layerTextStructure);
-		docGraph.addLayer(docTextLayer);
+		docGraph.add(docTextLayer);
 		SSpan sSpan = null;
 		List<SToken> spanTokens = new ArrayList<SToken>();
 
@@ -663,7 +663,7 @@ public class DocumentStructureDiffTest {
 		spanTokens.add(docTokens.get(10));
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "page");
-		docTextLayer.addNode(sSpan);
+		docTextLayer.add(sSpan);
 
 		// line3:
 		spanTokens.clear();
@@ -675,7 +675,7 @@ public class DocumentStructureDiffTest {
 		spanTokens.add(docTokens.get(10));
 		sSpan = docGraph.createSpan(spanTokens);
 		sSpan.createAnnotation(layerTextStructure, type, "line");
-		docTextLayer.addNode(sSpan);
+		docTextLayer.add(sSpan);
 
 		return (doc1);
 	}

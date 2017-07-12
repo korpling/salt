@@ -64,7 +64,7 @@ public class SMedialDSImpl extends SSequentialDSImpl<URI, Double> implements SMe
 			sFeature = SaltFactory.createSFeature();
 			sFeature.setNamespace(SaltUtil.SALT_NAMESPACE);
 			sFeature.setName(SaltUtil.FEAT_SMEDIA_REFERNCE);
-			addFeature(sFeature);
+			add(sFeature);
 		}
 		sFeature.setValue(mediaRef);
 	}

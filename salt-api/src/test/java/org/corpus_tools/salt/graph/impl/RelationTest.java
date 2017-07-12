@@ -72,12 +72,12 @@ public class RelationTest {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 		Node source = createNode();
 		Node target = createNode();
-		graph.addNode(source);
-		graph.addNode(target);
+		graph.add(source);
+		graph.add(target);
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
 
-		graph.addRelation(getFixture());
+		graph.add(getFixture());
 		assertTrue("only contains " + graph.getRelations(), graph.getRelations().contains(getFixture()));
 	}
 
@@ -90,28 +90,28 @@ public class RelationTest {
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
 		Node source = createNode();
 		Node target = createNode();
-		graph.addNode(source);
-		graph.addNode(target);
+		graph.add(source);
+		graph.add(target);
 		getFixture().setSource(source);
 		getFixture().setTarget(target);
 
-		graph.addRelation(getFixture());
+		graph.add(getFixture());
 		assertEquals(graph, getFixture().getGraph());
 		graph.removeRelation(getFixture());
 		assertNull(getFixture().getGraph());
 
-		graph.addRelation(getFixture());
+		graph.add(getFixture());
 		assertEquals(graph, getFixture().getGraph());
 
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph2 = createGraph();
 		Node source2 = createNode();
 		Node target2 = createNode();
-		graph2.addNode(source2);
-		graph2.addNode(target2);
+		graph2.add(source2);
+		graph2.add(target2);
 		getFixture().setSource(source2);
 		getFixture().setTarget(target2);
 
-		graph2.addRelation(getFixture());
+		graph2.add(getFixture());
 		assertEquals(graph2, getFixture().getGraph());
 	}
 
@@ -128,12 +128,12 @@ public class RelationTest {
 
 		// prerequirements
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addLayer(layer);
-		graph.addNode(source);
-		graph.addNode(target);
-		graph.addRelation(getFixture());
+		graph.add(layer);
+		graph.add(source);
+		graph.add(target);
+		graph.add(getFixture());
 
-		layer.addRelation(getFixture());
+		layer.add(getFixture());
 		assertEquals(1, getFixture().getLayers().size());
 		assertTrue(getFixture().getLayers().contains(layer));
 	}
@@ -152,12 +152,12 @@ public class RelationTest {
 
 		// prerequirements
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addLayer(layer);
-		graph.addNode(source);
-		graph.addNode(target);
-		graph.addRelation(getFixture());
+		graph.add(layer);
+		graph.add(source);
+		graph.add(target);
+		graph.add(getFixture());
 
-		layer.addRelation(getFixture());
+		layer.add(getFixture());
 		assertTrue(getFixture().getLayers().contains(layer));
 		layer.removeRelation(getFixture());
 		assertEquals(0, getFixture().getLayers().size());
@@ -177,12 +177,12 @@ public class RelationTest {
 
 		// prerequirements
 		Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = createGraph();
-		graph.addLayer(layer);
-		graph.addNode(source);
-		graph.addNode(target);
-		graph.addRelation(getFixture());
+		graph.add(layer);
+		graph.add(source);
+		graph.add(target);
+		graph.add(getFixture());
 
-		layer.addRelation(getFixture());
+		layer.add(getFixture());
 		assertTrue(layer.getRelations().contains(getFixture()));
 		layer.removeRelation(getFixture());
 		assertFalse(layer.getRelations().contains(getFixture()));

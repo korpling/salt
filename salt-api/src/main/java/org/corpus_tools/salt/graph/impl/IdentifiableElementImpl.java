@@ -67,7 +67,7 @@ public abstract class IdentifiableElementImpl extends LabelableElementImpl imple
 				removeLabel(SaltUtil.SALT_NAMESPACE, SaltUtil.LABEL_ID);
 			}
 			this.identifier = identifier;
-			addLabel(identifier);
+			add(identifier);
 		}
 	}
 

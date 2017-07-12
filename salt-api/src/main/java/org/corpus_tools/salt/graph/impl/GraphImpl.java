@@ -185,10 +185,10 @@ public class GraphImpl<N extends Node, R extends Relation<? extends N, ? extends
 
 	/** {@inheritDoc Graph#addNode(Node)} **/
 	@Override
-	public void addNode(N node) {
+	public void add(N node) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
-			getDelegate().addNode(node);
+			getDelegate().add(node);
 			if (node instanceof NodeImpl) {
 				((NodeImpl) node).basicSetGraph_WithoutRemoving(this);
 			}
@@ -422,10 +422,10 @@ public class GraphImpl<N extends Node, R extends Relation<? extends N, ? extends
 
 	/** {@inheritDoc Graph#addRelation(Relation)} **/
 	@Override
-	public void addRelation(R relation) {
+	public void add(R relation) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
-			getDelegate().addRelation(relation);
+			getDelegate().add(relation);
 			if (relation instanceof RelationImpl) {
 				((RelationImpl<? extends N, ? extends N>) relation).basicSetGraph_WithoutRemoving(this);
 			}
@@ -689,10 +689,10 @@ public class GraphImpl<N extends Node, R extends Relation<? extends N, ? extends
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addLayer(L layer) {
+	public void add(L layer) {
 		// delegate method to delegate if set
 		if (getDelegate() != null) {
-			getDelegate().addLayer(layer);
+			getDelegate().add(layer);
 			if (layer instanceof LayerImpl<?, ?>) {
 				((LayerImpl<N, R>) layer).basicSetGraph_WithoutRemoving(this);
 			}
@@ -707,14 +707,14 @@ public class GraphImpl<N extends Node, R extends Relation<? extends N, ? extends
 			// check whether graph contains nodes in layer, if not, add them
 			for (N node : layer.getNodes()) {
 				if (!containsNode(node.getId())) {
-					addNode(node);
+					add(node);
 				}
 			}
 
 			// check whether graph contains relations in layer, if not, add them
 			for (R rel : layer.getRelations()) {
 				if (!containsRelation(rel.getId())) {
-					addRelation(rel);
+					add(rel);
 				}
 			}
 		}

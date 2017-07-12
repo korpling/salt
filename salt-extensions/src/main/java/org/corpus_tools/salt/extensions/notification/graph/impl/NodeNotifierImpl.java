@@ -67,8 +67,8 @@ public class NodeNotifierImpl extends NodeImpl implements Node, Notifier {
 	 * {@inheritDoc} Notifies all registered listeners.
 	 **/
 	@Override
-	public void addLabel(Label label) {
-		super.addLabel(label);
+	public void add(Label label) {
+		super.add(label);
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.NODE_LABELS, null,
 					label, this);

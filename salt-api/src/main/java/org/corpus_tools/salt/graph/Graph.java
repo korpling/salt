@@ -119,7 +119,7 @@ public interface Graph<N extends Node, R extends Relation<? extends N, ? extends
 	 * @param relation
 	 *            relation to be inserted
 	 */
-	public void addRelation(R relation);
+	public void add(R relation);
 
 	/**
 	 * Removes the passed relation from this graph. If a relation is removed, it
@@ -171,7 +171,7 @@ public interface Graph<N extends Node, R extends Relation<? extends N, ? extends
 	 * @param node
 	 *            node to be inserted
 	 */
-	public void addNode(N node);
+	public void add(N node);
 
 	/**
 	 * Removes the passed node from this graph and cleans all indexes. It also
@@ -221,7 +221,7 @@ public interface Graph<N extends Node, R extends Relation<? extends N, ? extends
 	 * @param layer
 	 *            layer to be inserted
 	 */
-	public void addLayer(L layer);
+	public void add(L layer);
 
 	/**
 	 * Returns whether this graph contains a {@link Layer} corresponding to the

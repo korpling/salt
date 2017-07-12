@@ -148,7 +148,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			SCorpusGraph graph = SaltFactory.createSCorpusGraph();
 			addObject(graph);
 			if (saltProject != null) {
-				saltProject.addCorpusGraph(graph);
+				saltProject.add(graph);
 			}
 		} else if (TAG_SDOCUMENT_GRAPH.equals(qName)) {
 			SDocumentGraph graph = SaltFactory.createSDocumentGraph();
@@ -188,7 +188,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 							layer = SaltFactory.createSLayer();
 							layers.put(layerNum, layer);
 						}
-						layer.addNode(sNode);
+						layer.add(sNode);
 					}
 				}
 			}
@@ -267,7 +267,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 							layer = SaltFactory.createSLayer();
 							layers.put(layerNum, layer);
 						}
-						layer.addRelation(sRel);
+						layer.add(sRel);
 					}
 				}
 			}
@@ -321,7 +321,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 					try {
 						Object container = currentContainer.peek();
 						if (container instanceof LabelableElement) {
-							((LabelableElement) container).addLabel(label);
+							((LabelableElement) container).add(label);
 						}
 					} catch (SaltInsertionException e) {
 						// logger.warn("A label having the name '" +
@@ -339,7 +339,7 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 				layer = SaltFactory.createSLayer();
 			}
 			if (currentContainer.peek() instanceof SDocumentGraph) {
-				((SDocumentGraph) currentContainer.peek()).addLayer(layer);
+				((SDocumentGraph) currentContainer.peek()).add(layer);
 			}
 			currentContainer.push(layer);
 			layerIdx++;
@@ -357,17 +357,17 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			if (TAG_NODES.equals(qName)) {
 				if (parent != null) {
 					if (parent instanceof SDocumentGraph && obj instanceof SNode) {
-						((SDocumentGraph) currentContainer.peek()).addNode((SNode) obj);
+						((SDocumentGraph) currentContainer.peek()).add((SNode) obj);
 					} else if (parent instanceof SCorpusGraph && obj instanceof SNode) {
-						((SCorpusGraph) currentContainer.peek()).addNode((SNode) obj);
+						((SCorpusGraph) currentContainer.peek()).add((SNode) obj);
 					}
 				}
 			} else if (TAG_EDGES.equals(qName)) {
 				if (parent != null) {
 					if (parent instanceof SDocumentGraph && obj instanceof SRelation) {
-						((SDocumentGraph) currentContainer.peek()).addRelation((SRelation<?, ?>) obj);
+						((SDocumentGraph) currentContainer.peek()).add((SRelation<?, ?>) obj);
 					} else if (parent instanceof SCorpusGraph && obj instanceof SRelation) {
-						((SCorpusGraph) currentContainer.peek()).addRelation((SRelation<?, ?>) obj);
+						((SCorpusGraph) currentContainer.peek()).add((SRelation<?, ?>) obj);
 					}
 				}
 			}

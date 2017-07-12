@@ -23,6 +23,7 @@ import java.util.Set;
 
 import org.corpus_tools.salt.SDATATYPE;
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.core.AnnotationFinder;
 import org.corpus_tools.salt.core.SAbstractAnnotation;
 import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.core.SAnnotationContainer;
@@ -106,7 +107,7 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 		if (feature == null) {
 			feature = SaltFactory.createSFeature();
 			feature.setQName(SaltUtil.FEAT_VALUE_DATATYPE);
-			addFeature(feature);
+			add(feature);
 		}
 		if (newSValueType == null) {
 			feature.setValue(null);
@@ -215,12 +216,6 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addAnnotation(SAnnotation annotation) {
-		SAnnotationContainerHelper.addAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SAnnotation> Set<A> getAnnotations() {
 		return (SAnnotationContainerHelper.getAnnotations(this));
 	}
@@ -246,11 +241,6 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	// =======================================< SAnnotation
 
 	// =======================================> SMetaAnnotation
-	/** {@inheritDoc} **/
-	@Override
-	public void addMetaAnnotation(SMetaAnnotation metaAnnotation) {
-		SAnnotationContainerHelper.addMetaAnnotation(this, metaAnnotation);
-	}
 
 	/** {@inheritDoc} **/
 	@Override
@@ -295,12 +285,6 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addProcessingAnnotation(SProcessingAnnotation annotation) {
-		SAnnotationContainerHelper.addProcessingAnnotation(this, annotation);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SProcessingAnnotation> Set<A> getProcessingAnnotations() {
 		return (SAnnotationContainerHelper.getProcessingAnnotations(this));
 	}
@@ -333,12 +317,6 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 
 	/** {@inheritDoc} **/
 	@Override
-	public void addFeature(SFeature feature) {
-		SAnnotationContainerHelper.addFeature(this, feature);
-	}
-
-	/** {@inheritDoc} **/
-	@Override
 	public <A extends SFeature> Set<A> getFeatures() {
 		return (SAnnotationContainerHelper.getFeatures(this));
 	}
@@ -359,5 +337,10 @@ public abstract class SAbstractAnnotationImpl extends LabelImpl implements SAbst
 	public Iterator<SFeature> iterator_SFeature() {
 		return (SAnnotationContainerHelper.iterator_SFeature(this));
 	}
+
 	// =======================================< SFeature
+	@Override
+	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
+		return new AnnotationFinder<>(resultType, this);
+	}
 }
