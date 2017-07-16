@@ -21,7 +21,8 @@ public abstract class Traverser {
 	protected final List<? extends SNode> startNodes;
 	protected final TraversalStrategy strategy;
 	protected final String id;
-	protected final BackAndForthTraverseHandler handler;
+	protected BackAndForthTraverseHandler handler;
+	protected SimpleTraverseHandler simpleHandler;
 	protected final boolean isCycleSafe;
 	protected SGraph graph;
 	protected final List<SNode> currentNodePath = new ArrayList<>();
@@ -32,6 +33,16 @@ public abstract class Traverser {
 		this.strategy = strategy;
 		this.id = id;
 		this.handler = handler;
+		this.isCycleSafe = isCycleSafe;
+		this.graph = graph;
+	}
+
+	public Traverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
+			SimpleTraverseHandler simpleHandler, boolean isCycleSafe, SGraph graph) {
+		this.startNodes = startNodes;
+		this.strategy = strategy;
+		this.id = id;
+		this.simpleHandler = simpleHandler;
 		this.isCycleSafe = isCycleSafe;
 		this.graph = graph;
 	}
@@ -109,6 +120,26 @@ public abstract class Traverser {
 		public Builder3 useId(String id) {
 			this.id = id;
 			return this;
+		}
+
+		public void andCall(SimpleTraverseHandler handler) {
+			if (handler == null) {
+				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
+						+ "', because the given callback handler 'traverseHandler' is empty.");
+			}
+			if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
+				new TopDownDepthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph).traverse();
+			}
+			// else if (TOP_DOWN_BREADTH_FIRST.equals(strategy)) {
+			// new TopDownBreadthFirstTraverser(startNodes, strategy, id,
+			// handler, isCycleSafe, graph).traverse();
+			// } else if (BOTTOM_UP_DEPTH_FIRST.equals(strategy)) {
+			// new BottomUpDepthFirstTraverser(startNodes, strategy, id,
+			// handler, isCycleSafe, graph).traverse();
+			// } else if (BOTTOM_UP_BREADTH_FIRST.equals(strategy)) {
+			// new BottomUpBreadthFirstTraverser(startNodes, strategy, id,
+			// handler, isCycleSafe, graph).traverse();
+			// }
 		}
 
 		public void andCall(BackAndForthTraverseHandler handler) {

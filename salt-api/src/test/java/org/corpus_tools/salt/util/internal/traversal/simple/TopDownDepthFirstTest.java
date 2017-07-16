@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal.traversal;
+package org.corpus_tools.salt.util.internal.traversal.simple;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,7 +8,7 @@ import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TopDownDepthFirstTest extends TraverserTest {
+public class TopDownDepthFirstTest extends SimpleTraverserTest {
 	@Before
 	public void beforeEach() {
 		strategy = TraversalStrategy.TOP_DOWN_DEPTH_FIRST;
@@ -22,8 +22,7 @@ public class TopDownDepthFirstTest extends TraverserTest {
 		// WHEN
 		when();
 		// THEN
-		assertThat(nodeOrderWayThere).containsExactly("n1", "n2", "n3", "n4", "n5", "n6", "n7");
-		assertThat(nodeOrderWayBack).containsExactly("n3", "n4", "n2", "n6", "n5", "n7", "n1");
+		assertThat(visitedNodes).containsExactly("n1", "n2", "n3", "n4", "n5", "n6", "n7");
 	}
 
 	@Test
@@ -34,8 +33,7 @@ public class TopDownDepthFirstTest extends TraverserTest {
 		// WHEN
 		when();
 		// THEN
-		assertThat(nodeOrderWayThere).containsExactly("n1", "n2", "n3", "n6", "n4", "n2", "n3", "n6");
-		assertThat(nodeOrderWayBack).containsExactly("n3", "n6", "n2", "n1", "n3", "n6", "n2", "n4");
+		assertThat(visitedNodes).containsExactly("n1", "n2", "n3", "n6", "n4", "n2", "n3", "n6");
 	}
 
 	@Test(expected = SaltInvalidModelException.class)
@@ -57,7 +55,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 		// WHEN
 		when();
 		// THEN
-		assertThat(nodeOrderWayThere).containsExactly("n1", "n2", "n3", "n6", "n7");
-		assertThat(nodeOrderWayBack).containsExactly("n3", "n7", "n6", "n2", "n1");
+		assertThat(visitedNodes).containsExactly("n1", "n2", "n3", "n6", "n7");
 	}
 }

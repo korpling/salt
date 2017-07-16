@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal.traversal;
+package org.corpus_tools.salt.util.internal.traversal.backandforth;
 
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.junit.Test;

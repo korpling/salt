@@ -7,6 +7,9 @@ import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.util.SaltUtil;
+import org.corpus_tools.salt.util.internal.traversal.backandforth.MyBackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Test;
 
@@ -18,22 +21,28 @@ public class TraverseBuilderTest {
 		SaltUtil.traverse(graph)
 				.startFrom(Collections.emptyList())
 				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
-				.andCall(new MyTraverseHandler());
+				.andCall(new MyBackAndForthTraverseHandler());
 	}
 
 	@Test(expected = SaltException.class)
 	public void whenNoStrategyGiven_throwException() {
-		SaltUtil.traverse(graph)
-				.startFrom(Arrays.asList(SaltFactory.createSNode()))
-				.useStrategy(null)
-				.andCall(new MyTraverseHandler());
+		SaltUtil.traverse(graph).startFrom(Arrays.asList(SaltFactory.createSNode())).useStrategy(null).andCall(
+				new MyBackAndForthTraverseHandler());
 	}
 
 	@Test(expected = SaltException.class)
-	public void whenNoHandlerGiven_throwException() {
+	public void whenNullBackAndForthHandlerGiven_throwException() {
 		SaltUtil.traverse(graph)
 				.startFrom(Arrays.asList(SaltFactory.createSNode()))
 				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
-				.andCall(null);
+				.andCall((BackAndForthTraverseHandler) null);
+	}
+
+	@Test(expected = SaltException.class)
+	public void whenNullSimpleHandlerGiven_throwException() {
+		SaltUtil.traverse(graph)
+				.startFrom(Arrays.asList(SaltFactory.createSNode()))
+				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
+				.andCall((SimpleTraverseHandler) null);
 	}
 }

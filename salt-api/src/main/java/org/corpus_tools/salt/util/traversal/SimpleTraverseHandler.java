@@ -27,5 +27,5 @@ public interface SimpleTraverseHandler {
 	 *            and other information.
 	 * @return should be true as long as the traversal should go on
 	 */
-	public boolean nodeReached(TraversalLocation traversalLocation);
+	public boolean nodeReached(TraversalLocation location);
 }

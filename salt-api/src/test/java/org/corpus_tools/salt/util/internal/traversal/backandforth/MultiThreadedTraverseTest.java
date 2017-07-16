@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal.traversal;
+package org.corpus_tools.salt.util.internal.traversal.backandforth;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,11 +21,11 @@ public class MultiThreadedTraverseTest {
 	private List<String> expectedNodeOrderWayThere = new ArrayList<>();
 	private List<String> expectedNodeOrderWayBack = new ArrayList<>();
 	private static final int NUM_OF_THREADS = 20;
-	private final List<MyTraverseHandler> traverseHandlers = new ArrayList<>();
+	private final List<MyBackAndForthTraverseHandler> traverseHandlers = new ArrayList<>();
 
 	private void when() {
 		for (int i = 0; i < NUM_OF_THREADS; i++) {
-			traverseHandlers.add(new MyTraverseHandler());
+			traverseHandlers.add(new MyBackAndForthTraverseHandler());
 		}
 		traverseHandlers.parallelStream()
 				.forEach(handler -> SaltUtil.traverse(graph)

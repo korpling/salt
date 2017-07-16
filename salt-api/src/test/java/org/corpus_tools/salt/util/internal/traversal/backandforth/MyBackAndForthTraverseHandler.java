@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal.traversal;
+package org.corpus_tools.salt.util.internal.traversal.backandforth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 
-public class MyTraverseHandler implements BackAndForthTraverseHandler {
-	List<String> nodeOrderWayThere = new ArrayList<>();
-	List<String> nodeOrderWayBack = new ArrayList<>();
+public class MyBackAndForthTraverseHandler implements BackAndForthTraverseHandler {
+	protected List<String> nodeOrderWayThere = new ArrayList<>();
+	protected List<String> nodeOrderWayBack = new ArrayList<>();
 
 	@Override
 	public boolean shouldTraversalGoOn(TraversalLocation location) {

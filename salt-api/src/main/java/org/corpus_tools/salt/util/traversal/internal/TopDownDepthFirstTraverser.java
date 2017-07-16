@@ -11,6 +11,7 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.corpus_tools.salt.util.traversal.Traverser;
@@ -39,6 +40,11 @@ public class TopDownDepthFirstTraverser extends Traverser {
 	public TopDownDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String traverseId,
 			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph) {
 		super(startNodes, strategy, traverseId, handler, isCycleSafe, graph);
+	}
+
+	public TopDownDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String traverseId,
+			SimpleTraverseHandler simpleHandler, boolean isCycleSafe, SGraph graph) {
+		super(startNodes, strategy, traverseId, simpleHandler, isCycleSafe, graph);
 	}
 
 	@Override
