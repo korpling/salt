@@ -135,7 +135,7 @@ public class TraversalLocation {
 		private final TraversalStrategy strategy;
 		private final SNode currentNode;
 		private SRelation<? extends SNode, ? extends SNode> fromRelation;
-		private int relationOrder;
+		private int relationOrder = 0;
 		private SNode fromNode;
 		private String id;
 

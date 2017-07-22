@@ -2,7 +2,9 @@ package org.corpus_tools.salt.util.traversal.internal;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringJoiner;
@@ -19,15 +21,36 @@ import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.corpus_tools.salt.util.traversal.Traverser;
 
 public class TopDownDepthFirstTraverser extends Traverser {
-	protected static class NodeWithOrder {
+	class NodeWithOrder {
 		private final SNode node;
-		private int order;
+		private int order = 0;
+		// TODO remove this
 		private Iterator<SRelation<? extends SNode, ? extends SNode>> iterator;
+		// TODO better name nextRelation
 		private SRelation<? extends SNode, ? extends SNode> rel;
+		private final List<SRelation<? extends SNode, ? extends SNode>> outRels;
 
+		public NodeWithOrder(SNode node) {
+			this.node = node;
+			outRels = graph.getOutRelations(node.getId());
+		}
+
+		// TODO remove this
 		public NodeWithOrder(SNode node, int order) {
 			this.node = node;
 			this.order = order;
+			outRels = graph.getOutRelations(node.getId());
+		}
+
+		public Optional<SNode> nextChild() {
+			if (SaltUtil.isNotNullOrEmpty(outRels)) {
+				if (order < outRels.size()) {
+					rel = outRels.get(order);
+					order++;
+					return Optional.ofNullable(rel.getTarget());
+				}
+			}
+			return Optional.empty();
 		}
 
 		public String toString() {
@@ -51,7 +74,65 @@ public class TopDownDepthFirstTraverser extends Traverser {
 
 	@Override
 	public void traverse() {
-		startNodes.stream().forEach(this::traverseNode);
+		startNodes.stream().forEach(this::traverseNode2);
+	}
+
+	public void traverseNode2(SNode startNode) {
+		boolean wayForth = true;
+		final Set<SNode> visitedNodes = new LinkedHashSet<>();
+		final Stack<NodeWithOrder> nodePath = new Stack<>();
+		nodePath.push(new NodeWithOrder(startNode));
+		while (!nodePath.isEmpty()) {
+			NodeWithOrder currentNode = nodePath.peek();
+			Optional<SNode> nextChild = currentNode.nextChild();
+			if (!wayForth && nextChild.isPresent()) {
+				nodePath.push(new NodeWithOrder(nextChild.get()));
+				wayForth = true;
+				continue;
+			}
+			TraversalLocation location = TraversalLocation.createWithStrategy(strategy)
+					.withCurrentNode(currentNode.node)
+					.withFromRelation(currentNode.rel)
+					.withFromNode(currentNode.rel != null ? currentNode.rel.getSource() : null)
+					.withRelationOrder(currentNode.order)
+					.withId(id)
+					.build();
+
+			if (!handler.shouldTraversalGoOn(location)) {
+				nodePath.pop();
+				continue;
+			}
+
+			if (isCycleSafe) {
+				visitedNodes.add(currentNode.node);
+				whenGraphContainsCycleThrowExcpetion(currentNode.node, visitedNodes);
+			}
+
+			if (nextChild.isPresent()) {
+				handler.nodeReachedOnWayForth(location);
+				nodePath.push(new NodeWithOrder(nextChild.get()));
+				wayForth = true;
+			} else {
+				if (wayForth) {
+					handler.nodeReachedOnWayForth(location);
+				}
+				handler.nodeReachedOnWayBack(location);
+				nodePath.pop();
+				wayForth = false;
+			}
+		}
+	}
+
+	private void whenGraphContainsCycleThrowExcpetion(SNode currentNode, Set<SNode> visitedNodes) {
+		if (visitedNodes.contains(currentNode)) {
+			StringJoiner joiner = new StringJoiner(" -> ");
+			visitedNodes.stream().map(SNode::getId).forEach(joiner::add);
+			joiner.add(currentNode.getId());
+			throw new SaltInvalidModelException(
+					"A cycle in graph '" + graph.getId() + "' has been detected, while traversing with type '"
+							+ strategy + "'. The cycle has been detected when visiting node '" + currentNode
+							+ "' while current path was '" + joiner.toString() + "'.");
+		}
 	}
 
 	public void traverseNode(SNode startNode) {

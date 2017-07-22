@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.StringJoiner;
 
 import org.corpus_tools.salt.core.AnnotationFinder;
 import org.corpus_tools.salt.core.SAbstractAnnotation;
@@ -42,6 +43,8 @@ import org.corpus_tools.salt.graph.impl.NodeImpl;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.internal.SAnnotationContainerHelper;
 import org.eclipse.emf.common.util.URI;
+
+import com.google.common.base.Strings;
 
 @SuppressWarnings("serial")
 public class SNodeImpl extends NodeImpl implements SNode {
@@ -331,5 +334,14 @@ public class SNodeImpl extends NodeImpl implements SNode {
 	@Override
 	public <T extends SAbstractAnnotation> AnnotationFinder<T> find(Class<T> resultType) {
 		return new AnnotationFinder<>(resultType, this);
+	}
+
+	@Override
+	public String toString() {
+		StringJoiner joiner = new StringJoiner(", ");
+		joiner.add(Strings.isNullOrEmpty(getName()) ? "" : "name= " + getName());
+		getAnnotations().stream().map(SAnnotation::toString).forEach(joiner::add);
+		getMetaAnnotations().stream().map(SMetaAnnotation::toString).forEach(joiner::add);
+		return getId() + "(" + joiner.toString() + ")";
 	}
 }
