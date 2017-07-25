@@ -16,7 +16,6 @@ import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
 import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
-import org.corpus_tools.salt.util.traversal.Traverser;
 
 public class TopDownDepthFirstTraverser extends Traverser {
 	class NodeWithOrder {
@@ -79,6 +78,9 @@ public class TopDownDepthFirstTraverser extends Traverser {
 			NodeWithOrder currentNode = nodePath.peek();
 			Optional<NodeWithOrder> nextChild = currentNode.nextChild();
 			if (!wayForth && nextChild.isPresent()) {
+				// on way back and current node has a further child, than
+				// process the
+				// child first and skip current node
 				nodePath.push(nextChild.get());
 				wayForth = true;
 				continue;

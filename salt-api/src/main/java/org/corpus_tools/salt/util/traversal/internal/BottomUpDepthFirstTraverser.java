@@ -10,7 +10,6 @@ import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
-import org.corpus_tools.salt.util.traversal.Traverser;
 
 public class BottomUpDepthFirstTraverser extends Traverser {
 

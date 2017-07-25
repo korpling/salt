@@ -5,7 +5,6 @@ import static org.corpus_tools.salt.util.traversal.TraversalStrategy.BOTTOM_UP_D
 import static org.corpus_tools.salt.util.traversal.TraversalStrategy.TOP_DOWN_BREADTH_FIRST;
 import static org.corpus_tools.salt.util.traversal.TraversalStrategy.TOP_DOWN_DEPTH_FIRST;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,67 +16,30 @@ import org.corpus_tools.salt.util.traversal.internal.BottomUpDepthFirstTraverser
 import org.corpus_tools.salt.util.traversal.internal.TopDownBreadthFirstTraverser;
 import org.corpus_tools.salt.util.traversal.internal.TopDownDepthFirstTraverser;
 
-public abstract class Traverser {
-	protected final List<? extends SNode> startNodes;
-	protected final TraversalStrategy strategy;
-	protected final String id;
-	protected BackAndForthTraverseHandler handler;
-	protected SimpleTraverseHandler simpleHandler;
-	protected final boolean isCycleSafe;
-	protected SGraph graph;
-	protected final List<SNode> currentNodePath = new ArrayList<>();
+public class TraverserBuilder {
+	private final SGraph graph;
 
-	public Traverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
-			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph) {
-		this.startNodes = startNodes;
-		this.strategy = strategy;
-		this.id = id;
-		this.handler = handler;
-		this.isCycleSafe = isCycleSafe;
+	public TraverserBuilder(SGraph graph) {
+		if (graph == null) {
+			throw new SaltTraverserException("Cannot start traversing graph, because the graph is null.");
+		}
 		this.graph = graph;
 	}
 
-	public Traverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
-			SimpleTraverseHandler simpleHandler, boolean isCycleSafe, SGraph graph) {
-		this.startNodes = startNodes;
-		this.strategy = strategy;
-		this.id = id;
-		this.simpleHandler = simpleHandler;
-		this.isCycleSafe = isCycleSafe;
-		this.graph = graph;
+	public Builder2 startFrom(SNode... startNodes) {
+		if ((startNodes == null) || (startNodes.length == 0)) {
+			throw new SaltTraverserException(
+					"Cannot start traversing graph '" + graph.getId() + "', because the given start nodes are empty.");
+		}
+		return startFrom(Arrays.asList(startNodes));
 	}
 
-	public abstract void traverse();
-
-	public static Builder create(SGraph graph) {
-		return new Builder(graph);
-	}
-
-	public static class Builder {
-		private final SGraph graph;
-
-		public Builder(SGraph graph) {
-			if (graph == null) {
-				throw new SaltTraverserException("Cannot start traversing graph, because the graph is null.");
-			}
-			this.graph = graph;
+	public Builder2 startFrom(List<SNode> startNodes) {
+		if ((startNodes == null) || (startNodes.isEmpty())) {
+			throw new SaltTraverserException(
+					"Cannot start traversing graph '" + graph.getId() + "', because the given start nodes are empty.");
 		}
-
-		public Builder2 startFrom(SNode... startNodes) {
-			if ((startNodes == null) || (startNodes.length == 0)) {
-				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
-						+ "', because the given start nodes are empty.");
-			}
-			return startFrom(Arrays.asList(startNodes));
-		}
-
-		public Builder2 startFrom(List<SNode> startNodes) {
-			if ((startNodes == null) || (startNodes.isEmpty())) {
-				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
-						+ "', because the given start nodes are empty.");
-			}
-			return new Builder2(graph, startNodes);
-		}
+		return new Builder2(graph, startNodes);
 	}
 
 	public static class Builder2 {

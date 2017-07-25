@@ -74,7 +74,7 @@ import org.corpus_tools.salt.util.internal.persistence.SaltXML10Handler;
 import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.corpus_tools.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter;
 import org.corpus_tools.salt.util.internal.persistence.dot.SDocumentGraphDOTWriter;
-import org.corpus_tools.salt.util.traversal.Traverser;
+import org.corpus_tools.salt.util.traversal.TraverserBuilder;
 import org.eclipse.emf.common.util.URI;
 import org.omg.PortableInterceptor.ServerIdHelper;
 import org.xml.sax.InputSource;
@@ -1270,7 +1270,7 @@ public class SaltUtil {
 		return new IsSaltXmlFile(supposedlyXmlFile).isSaltXmlFile();
 	}
 
-	public static Traverser.Builder traverse(SGraph graph) {
-		return Traverser.create(graph);
+	public static TraverserBuilder traverse(SGraph graph) {
+		return new TraverserBuilder(graph);
 	}
 }
