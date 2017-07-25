@@ -23,15 +23,17 @@ public class TopDownDepthFirstTraverser extends Traverser {
 		private final SNode node;
 		private final SRelation<? extends SNode, ? extends SNode> fromRelation;
 		private final List<SRelation<? extends SNode, ? extends SNode>> outRels;
-		private int order = 0;
+		private final int order;
+		private int nextChildOrder = 0;
 
 		public NodeWithOrder(SNode node) {
-			this(node, null);
+			this(node, null, 0);
 		}
 
-		public NodeWithOrder(SNode node, SRelation<? extends SNode, ? extends SNode> fromRelation) {
+		public NodeWithOrder(SNode node, SRelation<? extends SNode, ? extends SNode> fromRelation, int order) {
 			this.node = node;
 			this.fromRelation = fromRelation;
+			this.order = order;
 			outRels = graph.getOutRelations(node.getId());
 		}
 
@@ -39,12 +41,12 @@ public class TopDownDepthFirstTraverser extends Traverser {
 			if (SaltUtil.isNullOrEmpty(outRels)) {
 				return Optional.empty();
 			}
-			if (outRels.size() <= order) {
+			if (outRels.size() <= nextChildOrder) {
 				return Optional.empty();
 			}
-			SRelation<? extends SNode, ? extends SNode> nextRelation = outRels.get(order);
-			order++;
-			return Optional.of(new NodeWithOrder(nextRelation.getTarget(), nextRelation));
+			SRelation<? extends SNode, ? extends SNode> nextRelation = outRels.get(nextChildOrder);
+			nextChildOrder++;
+			return Optional.of(new NodeWithOrder(nextRelation.getTarget(), nextRelation, nextChildOrder));
 		}
 
 		@Override
@@ -89,7 +91,8 @@ public class TopDownDepthFirstTraverser extends Traverser {
 					.withId(id)
 					.build();
 
-			if (!handler.shouldTraversalGoOn(location)) {
+			if (wayForth && !handler.shouldTraversalGoOn(location)) {
+				// if (!handler.shouldTraversalGoOn(location)) {
 				nodePath.pop();
 				visitedNodes.remove(currentNode.node);
 				wayForth = false;
@@ -107,6 +110,7 @@ public class TopDownDepthFirstTraverser extends Traverser {
 				wayForth = true;
 			} else {
 				if (wayForth) {
+					// node is a leaf node
 					handler.nodeReachedOnWayForth(location);
 				}
 				handler.nodeReachedOnWayBack(location);

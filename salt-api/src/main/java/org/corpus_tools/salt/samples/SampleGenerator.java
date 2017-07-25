@@ -852,6 +852,28 @@ public class SampleGenerator {
 	 * sample syntax tree created in
 	 * {@link SampleGenerator#createSyntaxStructure(SDocument)}.
 	 * 
+	 * <pre>
+	 *                      ROOT-----------------                  
+	 *                       |                   \
+	 *                -------SQ ---               \
+	 *               /    /        \               \
+	 *              /    /          ---ADJP--       \
+	 *             /    /          /         \       \
+	 *            /    /          /           SBar    \
+	 *           /    /          /           /    \    \
+	 *          /    /          /           /      S    \
+	 *         /    /          /           /      / \    \
+	 *        /    /          /           /      /   VP   \
+	 *       /    /          /           /      /  /   \   \
+	 *      /    /          /           /      /   |    S   \
+	 *     /    /           |           |     /    |     \   \
+	 *    /    /            |           |    /     |      VP  \
+	 *   /    NP           ADJP         |    NP    |     /  \  \
+	 *  /    /   \       /      \       |    |     |     |  VP |
+	 *  |    |   |       |      |       |    |     |     |  |  |
+	 * Is this example more complicated than it appears to be  ?
+	 * </pre>
+	 * 
 	 * @param document
 	 */
 	public static void createSyntaxAnnotations(SDocument document) {

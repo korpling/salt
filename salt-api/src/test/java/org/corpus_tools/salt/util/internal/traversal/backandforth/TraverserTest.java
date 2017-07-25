@@ -14,6 +14,7 @@ import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 public abstract class TraverserTest implements BackAndForthTraverseHandler {
 	protected SGraph graph;
 	protected List<SNode> startNodes;
+	protected final List<String> stopNodes = new ArrayList<>();
 	protected TraversalStrategy strategy;
 	protected boolean isCycleSafe = false;
 	protected List<String> nodeOrderWayThere = new ArrayList<>();
@@ -31,6 +32,9 @@ public abstract class TraverserTest implements BackAndForthTraverseHandler {
 
 	@Override
 	public boolean shouldTraversalGoOn(TraversalLocation location) {
+		if (stopNodes.contains(location.getCurrentNode().getName())) {
+			return false;
+		}
 		if (preventRunInCycle && whenNodeWasReachedTwice(location.getCurrentNode())) {
 			return false;
 		}
