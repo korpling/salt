@@ -132,6 +132,19 @@ public class SampleGraphs {
 
 	/**
 	 * <pre>
+	 *       n1      
+	 *     /   \
+	 *    n2    n4
+	 *     \    / 
+	 *       n3
+	 * </pre>
+	 **/
+	public static SGraph createDiamond() {
+		return create().withName("diamond").fromPath("n1/n2/n3", "n1/n4/n3").build();
+	}
+
+	/**
+	 * <pre>
 	 *        n1
 	 *        ^ \
 	 *       /   V

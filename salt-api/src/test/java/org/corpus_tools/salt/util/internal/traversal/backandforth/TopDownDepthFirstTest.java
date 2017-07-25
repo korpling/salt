@@ -27,6 +27,18 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	}
 
 	@Test
+	public void whenGraphIsDiamond() {
+		// GIVEN
+		graph = SampleGraphs.createDiamond();
+		startNodes = graph.getRoots();
+		// WHEN
+		when();
+		// THEN
+		assertThat(nodeOrderWayThere).containsExactly("n1", "n2", "n3", "n4", "n3");
+		assertThat(nodeOrderWayBack).containsExactly("n3", "n2", "n3", "n4", "n1");
+	}
+
+	@Test
 	public void whenGraphIsDag() {
 		// GIVEN
 		graph = SampleGraphs.createDag();
@@ -58,6 +70,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 		when();
 		// THEN
 		assertThat(nodeOrderWayThere).containsExactly("n1", "n2", "n3", "n6", "n7");
-		assertThat(nodeOrderWayBack).containsExactly("n3", "n7", "n6", "n2", "n1");
+		assertThat(nodeOrderWayBack).containsExactly("n3");
 	}
 }
