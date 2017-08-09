@@ -90,7 +90,7 @@ public class TopDownDepthFirstTraverser extends Traverser {
 					.withId(id)
 					.build();
 
-			if (wayForth && !handler.shouldTraversalGoOn(location)) {
+			if (wayForth && !filterAndCheckShouldGoOn(location)) {
 				nodePath.pop();
 				visitedNodes.remove(currentNode.node);
 				wayForth = false;

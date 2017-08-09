@@ -24,7 +24,7 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 	@Override
 	public void traverse() {
 		for (SNode startNode : startNodes) {
-			if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+			if (filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
 					.withCurrentNode(startNode)
 					.withId(id)
 					.withRelationOrder(0)
@@ -68,7 +68,7 @@ public class BottomUpDepthFirstTraverser extends Traverser {
 								+ "' while current path was '" + currentNodePath + "'.");
 			}
 			currentNodePath.add(parentNode);
-			if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+			if (filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
 					.withCurrentNode(parentNode)
 					.withFromRelation(parentEdge)
 					.withId(id)

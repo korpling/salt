@@ -8,6 +8,7 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
@@ -17,6 +18,7 @@ public abstract class TraverserTest implements BackAndForthTraverseHandler {
 	protected final List<String> stopNodes = new ArrayList<>();
 	protected TraversalStrategy strategy;
 	protected boolean isCycleSafe = false;
+	protected TraversalFilter traversalFilter = null;
 	protected List<String> nodeOrderWayThere = new ArrayList<>();
 	protected List<String> nodeOrderWayBack = new ArrayList<>();
 	protected boolean preventRunInCycle = false;
@@ -27,7 +29,12 @@ public abstract class TraverserTest implements BackAndForthTraverseHandler {
 	}
 
 	protected void when() {
-		SaltUtil.traverse(graph).startFrom(startNodes).useStrategy(strategy).cycleSafe(isCycleSafe).andCall(this);
+		SaltUtil.traverse(graph)
+				.startFrom(startNodes)
+				.useStrategy(strategy)
+				.filter(traversalFilter)
+				.cycleSafe(isCycleSafe)
+				.andCall(this);
 	}
 
 	@Override

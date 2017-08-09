@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.graph.SampleGraphs;
+import org.corpus_tools.salt.util.traversal.TraversalFilter;
+import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Before;
 import org.junit.Test;
@@ -112,5 +114,45 @@ public class TopDownDepthFirstTest extends TraverserTest {
 		// THEN
 		assertThat(nodeOrderWayThere).containsExactly("n1", "n2", "n3", "n6", "n7");
 		assertThat(nodeOrderWayBack).containsExactly("n3", "n7", "n6", "n2", "n1");
+	}
+
+	@Test
+	public void whenFilteringForNothing_allNodesMustBeVisited() {
+		// GIVEN
+		graph = SampleGraphs.createTree();
+		startNodes = graph.getRoots();
+		traversalFilter = new TraversalFilter() {
+			@Override
+			public boolean test(TraversalLocation location) {
+				return true;
+			}
+		};
+		// WHEN
+		when();
+		// THEN
+		assertThat(nodeOrderWayThere).containsExactly("n1", "n2", "n3", "n4", "n5", "n6", "n7");
+		assertThat(nodeOrderWayBack).containsExactly("n3", "n4", "n2", "n6", "n5", "n7", "n1");
+	}
+
+	@Test
+	public void whenFilteringForNodes_subgraphsMustNotBeVisited() {
+		// GIVEN
+		graph = SampleGraphs.createTree();
+		startNodes = graph.getRoots();
+		traversalFilter = new TraversalFilter() {
+			@Override
+			public boolean test(TraversalLocation location) {
+				String nodeName = location.getCurrentNode().getName();
+				if ("n2".equals(nodeName)) {
+					return false;
+				}
+				return true;
+			}
+		};
+		// WHEN
+		when();
+		// THEN
+		assertThat(nodeOrderWayThere).containsExactly("n1", "n5", "n6", "n7");
+		assertThat(nodeOrderWayBack).containsExactly("n6", "n5", "n7", "n1");
 	}
 }

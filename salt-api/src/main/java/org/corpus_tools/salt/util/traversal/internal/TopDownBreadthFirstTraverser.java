@@ -26,8 +26,11 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 		if (isCycleSafe) {
 			throw new SaltException("Not able to detect cycles with breadth first search");
 		}
-		startNodes.stream().forEach(startNode -> handler.shouldTraversalGoOn(TraversalLocation
-				.createWithStrategy(strategy).withCurrentNode(startNode).withRelationOrder(0).withId(id).build()));
+		startNodes.stream().forEach(startNode -> filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
+				.withCurrentNode(startNode)
+				.withRelationOrder(0)
+				.withId(id)
+				.build()));
 		SNode fromNode = null;
 		SRelation<?, ?> fromRel = null;
 		List<SNode> queuedNodes = new ArrayList<>();
@@ -62,7 +65,7 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 			for (SRelation<? extends SNode, ? extends SNode> fromRelation : edges) {
 				SNode currentNode = null;
 				currentNode = fromRelation.getTarget();
-				if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+				if (filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
 						.withCurrentNode(currentNode)
 						.withFromRelation(fromRelation)
 						.withRelationOrder(order)

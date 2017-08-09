@@ -51,6 +51,9 @@ public abstract class Traverser {
 	}
 
 	protected boolean filter(TraversalLocation location) {
+		if (filters.isEmpty()) {
+			return true;
+		}
 		return filters.stream().anyMatch(filter -> filter.test(location));
 	}
 

@@ -88,7 +88,9 @@ public class TraverserBuilder {
 		}
 
 		public Builder3 filter(TraversalFilter filter) {
-			filters.add(filter);
+			if (filter != null) {
+				filters.add(filter);
+			}
 			return this;
 		}
 

@@ -25,7 +25,7 @@ public class BottomUpBreadthFirstTraverser extends Traverser {
 	@Override
 	public void traverse() {
 		for (SNode startNode : startNodes) {
-			if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+			if (filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
 					.withCurrentNode(startNode)
 					.withId(id)
 					.withRelationOrder(0)
@@ -76,7 +76,7 @@ public class BottomUpBreadthFirstTraverser extends Traverser {
 				for (SRelation<? extends SNode, ? extends SNode> e : edges) {
 					SNode n = null;
 					n = e.getSource();
-					if (handler.shouldTraversalGoOn(TraversalLocation.createWithStrategy(strategy)
+					if (filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
 							.withCurrentNode(n)
 							.withId(id)
 							.withFromNode(e.getSource())
