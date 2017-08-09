@@ -46,8 +46,8 @@ public class BottomUpBreadthFirstTraverser extends Traverser {
 		List<SRelation<? extends SNode, ? extends SNode>> queueReachedFromRel = new ArrayList<>();
 		List<Integer> queueReachedOrder = new ArrayList<>();
 
-		queuedNodes.addAll(startNodes);
-		for (SNode startNode : startNodes) {
+		queuedNodes.addAll(currentNodePath);
+		for (SNode startNode : currentNodePath) {
 			queueReachedFrom.add(startNode);
 			queueReachedFromRel.add(null);
 			queueReachedOrder.add(0);
