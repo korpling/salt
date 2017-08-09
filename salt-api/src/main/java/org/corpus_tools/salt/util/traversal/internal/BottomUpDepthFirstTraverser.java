@@ -1,5 +1,6 @@
 package org.corpus_tools.salt.util.traversal.internal;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.corpus_tools.salt.core.SGraph;
@@ -8,14 +9,16 @@ import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
 import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
 public class BottomUpDepthFirstTraverser extends Traverser {
 
-	public BottomUpDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String traverseId,
-			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph) {
-		super(startNodes, strategy, traverseId, handler, isCycleSafe, graph);
+	public BottomUpDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
+			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph,
+			Collection<TraversalFilter> filters) {
+		super(startNodes, strategy, id, handler, isCycleSafe, graph, filters);
 	}
 
 	@Override

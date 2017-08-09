@@ -1,5 +1,6 @@
 package org.corpus_tools.salt.util.traversal.internal;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +14,7 @@ import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
-import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
@@ -54,14 +55,10 @@ public class TopDownDepthFirstTraverser extends Traverser {
 		}
 	}
 
-	public TopDownDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String traverseId,
-			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph) {
-		super(startNodes, strategy, traverseId, handler, isCycleSafe, graph);
-	}
-
-	public TopDownDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String traverseId,
-			SimpleTraverseHandler simpleHandler, boolean isCycleSafe, SGraph graph) {
-		super(startNodes, strategy, traverseId, simpleHandler, isCycleSafe, graph);
+	public TopDownDepthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
+			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph,
+			Collection<TraversalFilter> filters) {
+		super(startNodes, strategy, id, handler, isCycleSafe, graph, filters);
 	}
 
 	@Override
