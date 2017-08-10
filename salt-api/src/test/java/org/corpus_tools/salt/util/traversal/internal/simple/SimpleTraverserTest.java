@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.internal.traversal.simple;
+package org.corpus_tools.salt.util.traversal.internal.simple;
 
 import java.util.ArrayList;
 import java.util.List;

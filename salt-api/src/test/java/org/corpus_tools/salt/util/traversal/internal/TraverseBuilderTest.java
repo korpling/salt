@@ -7,10 +7,10 @@ import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.util.SaltUtil;
-import org.corpus_tools.salt.util.internal.traversal.backandforth.MyBackAndForthTraverseHandler;
 import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
 import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
+import org.corpus_tools.salt.util.traversal.internal.backandforth.MyBackAndForthTraverseHandler;
 import org.junit.Test;
 
 public class TraverseBuilderTest {
