@@ -1050,6 +1050,23 @@ public class SampleGenerator {
 	 * <li>anaphoric annotation</li>
 	 * </ul>
 	 */
+	public static SDocument createDocumentStructure() {
+		SDocument document = SaltFactory.createSDocument();
+		createDocumentStructure(document);
+		return document;
+	}
+
+	/**
+	 * Creates a document structure containing:
+	 * <ul>
+	 * <li>primary text</li>
+	 * <li>tokenization</li>
+	 * <li>morphological annotations</li>
+	 * <li>information structure annotation</li>
+	 * <li>syntactical annotation</li>
+	 * <li>anaphoric annotation</li>
+	 * </ul>
+	 */
 	public static void createDocumentStructure(SDocument document) {
 		if (document == null) {
 			throw new SaltSampleException("Cannot create example, because the given document is empty.");

@@ -1,4 +1,4 @@
-package org.corpus_tools.salt.util.traversal.internal;
+package org.corpus_tools.salt.util.traversal;
 
 import java.util.Arrays;
 import java.util.Collections;
