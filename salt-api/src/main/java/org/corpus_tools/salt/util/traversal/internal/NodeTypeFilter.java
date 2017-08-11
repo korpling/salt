@@ -1,16 +1,10 @@
-package org.corpus_tools.salt.util.traversal;
+package org.corpus_tools.salt.util.traversal.internal;
 
-import org.corpus_tools.salt.common.SSpan;
-import org.corpus_tools.salt.common.SStructure;
-import org.corpus_tools.salt.common.STextualDS;
-import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.util.traversal.TraversalFilter;
+import org.corpus_tools.salt.util.traversal.TraversalLocation;
 
 public class NodeTypeFilter implements TraversalFilter {
-	public static final NodeTypeFilter INCLUDE_TEXTUALDS = new NodeTypeFilter(STextualDS.class);
-	public static final NodeTypeFilter INCLUDE_TOKEN = new NodeTypeFilter(SToken.class);
-	public static final NodeTypeFilter INCLUDE_SPAN = new NodeTypeFilter(SSpan.class);
-	public static final NodeTypeFilter INCLUDE_STRUCTURE = new NodeTypeFilter(SStructure.class);
 	private final Class<? extends SNode> includedNodeClass;
 
 	public NodeTypeFilter(Class<? extends SNode> includedNodeClass) {

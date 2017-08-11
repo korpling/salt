@@ -1,10 +1,10 @@
 package org.corpus_tools.salt.util.traversal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.corpus_tools.salt.util.traversal.NodeTypeFilter.INCLUDE_SPAN;
-import static org.corpus_tools.salt.util.traversal.NodeTypeFilter.INCLUDE_STRUCTURE;
-import static org.corpus_tools.salt.util.traversal.NodeTypeFilter.INCLUDE_TEXTUALDS;
-import static org.corpus_tools.salt.util.traversal.NodeTypeFilter.INCLUDE_TOKEN;
+import static org.corpus_tools.salt.util.traversal.TraversalFilter.INCLUDE_SPAN;
+import static org.corpus_tools.salt.util.traversal.TraversalFilter.INCLUDE_STRUCTURE;
+import static org.corpus_tools.salt.util.traversal.TraversalFilter.INCLUDE_TEXTUALDS;
+import static org.corpus_tools.salt.util.traversal.TraversalFilter.INCLUDE_TOKEN;
 
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SSpan;
@@ -19,7 +19,7 @@ import org.junit.Test;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-public class NodeTypeFilterIncludeXTest {
+public class FilterIncludeXTest {
 	private Multimap<Class<? extends SNode>, SNode> visitedNodes = HashMultimap.create();
 	private SDocumentGraph documentStructure = SampleGenerator.createDocumentStructure().getDocumentGraph();
 	private final BackAndForthTraverseHandler traversalHandler = new BackAndForthTraverseHandler() {

@@ -1,13 +1,13 @@
-package org.corpus_tools.salt.util.traversal;
+package org.corpus_tools.salt.util.traversal.internal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SSpan;
 import org.corpus_tools.salt.common.SToken;
-import org.corpus_tools.salt.util.traversal.NodeTypeFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
+import org.corpus_tools.salt.util.traversal.internal.NodeTypeFilter;
 import org.junit.Test;
 
 public class NodeTypeFilterTest {
