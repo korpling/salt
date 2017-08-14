@@ -8,6 +8,7 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraversalFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
@@ -16,6 +17,7 @@ public abstract class SimpleTraverserTest implements SimpleTraverseHandler {
 	protected List<SNode> startNodes;
 	protected TraversalStrategy strategy;
 	protected boolean isCycleSafe = false;
+	protected TraversalFilter traversalFilter = null;
 	protected List<String> visitedNodes = new ArrayList<>();
 	protected boolean preventRunInCycle = false;
 	private final Stack<SNode> nodePath = new Stack<>();
@@ -25,7 +27,12 @@ public abstract class SimpleTraverserTest implements SimpleTraverseHandler {
 	}
 
 	protected void when() {
-		SaltUtil.traverse(graph).startFrom(startNodes).useStrategy(strategy).cycleSafe(isCycleSafe).andCall(this);
+		SaltUtil.traverse(graph)
+				.startFrom(startNodes)
+				.useStrategy(strategy)
+				.cycleSafe(isCycleSafe)
+				.filter(traversalFilter)
+				.andCall(this);
 	}
 
 	@Override

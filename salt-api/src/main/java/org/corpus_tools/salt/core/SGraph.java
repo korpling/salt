@@ -33,7 +33,10 @@ public interface SGraph extends Graph<SNode, SRelation<? extends SNode, ? extend
 	 * general top-down means a traversal along the direction of the relations,
 	 * whereas bottom-up means a traversal against the direction of the
 	 * relations.
+	 * 
+	 * @deprecated use {@link SaltUtil#traverse(SGraph)} instead
 	 */
+	@Deprecated
 	public enum GRAPH_TRAVERSE_TYPE {
 		TOP_DOWN_DEPTH_FIRST, TOP_DOWN_BREADTH_FIRST, BOTTOM_UP_DEPTH_FIRST, BOTTOM_UP_BREADTH_FIRST
 	};

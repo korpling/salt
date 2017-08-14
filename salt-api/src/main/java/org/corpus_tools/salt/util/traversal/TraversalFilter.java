@@ -13,4 +13,8 @@ public abstract interface TraversalFilter extends Predicate<TraversalLocation> {
 	public static final TraversalFilter INCLUDE_TOKEN = new NodeTypeFilter(SToken.class);
 	public static final TraversalFilter INCLUDE_SPAN = new NodeTypeFilter(SSpan.class);
 	public static final TraversalFilter INCLUDE_STRUCTURE = new NodeTypeFilter(SStructure.class);
+
+	// public static TraversalFilter includeToken() {
+	// return new NodeTypeFilter(SToken.class);
+	// }
 }
