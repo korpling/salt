@@ -1,10 +1,10 @@
 package org.corpus_tools.salt.util.traversal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.corpus_tools.salt.util.traversal.TraversalFilter.INCLUDE_SPAN;
-import static org.corpus_tools.salt.util.traversal.TraversalFilter.INCLUDE_STRUCTURE;
-import static org.corpus_tools.salt.util.traversal.TraversalFilter.INCLUDE_TEXTUALDS;
-import static org.corpus_tools.salt.util.traversal.TraversalFilter.INCLUDE_TOKEN;
+import static org.corpus_tools.salt.util.traversal.TraversalFilter.includeSpans;
+import static org.corpus_tools.salt.util.traversal.TraversalFilter.includeStructures;
+import static org.corpus_tools.salt.util.traversal.TraversalFilter.includeTextualDs;
+import static org.corpus_tools.salt.util.traversal.TraversalFilter.includeTokens;
 
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SSpan;
@@ -51,7 +51,7 @@ public class FilterIncludeXTest {
 		SaltUtil.traverse(documentStructure)
 				.startFrom(documentStructure.getRoots())
 				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
-				.filter(INCLUDE_STRUCTURE)
+				.filter(includeStructures())
 				.andCall(traversalHandler);
 		assertThat(visitedNodes.get(SStructure.class)).hasSize(12);
 		assertThat(visitedNodes.get(SSpan.class)).isEmpty();
@@ -64,7 +64,7 @@ public class FilterIncludeXTest {
 		SaltUtil.traverse(documentStructure)
 				.startFrom(documentStructure.getRoots())
 				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
-				.filter(INCLUDE_SPAN)
+				.filter(includeSpans())
 				.andCall(traversalHandler);
 		assertThat(visitedNodes.get(SStructure.class)).isEmpty();
 		assertThat(visitedNodes.get(SSpan.class)).hasSize(2);
@@ -77,7 +77,7 @@ public class FilterIncludeXTest {
 		SaltUtil.traverse(documentStructure)
 				.startFrom(documentStructure.getLeafs())
 				.useStrategy(TraversalStrategy.BOTTOM_UP_DEPTH_FIRST)
-				.filter(INCLUDE_TEXTUALDS)
+				.filter(includeTextualDs())
 				.andCall(traversalHandler);
 		assertThat(visitedNodes.get(SStructure.class)).isEmpty();
 		assertThat(visitedNodes.get(SSpan.class)).isEmpty();
@@ -90,8 +90,8 @@ public class FilterIncludeXTest {
 		SaltUtil.traverse(documentStructure)
 				.startFrom(documentStructure.getLeafs())
 				.useStrategy(TraversalStrategy.BOTTOM_UP_DEPTH_FIRST)
-				.filter(INCLUDE_TEXTUALDS)
-				.filter(INCLUDE_TOKEN)
+				.filter(includeTextualDs())
+				.filter(includeTokens())
 				.andCall(traversalHandler);
 		assertThat(visitedNodes.get(SStructure.class)).isEmpty();
 		assertThat(visitedNodes.get(SSpan.class)).isEmpty();
@@ -104,10 +104,10 @@ public class FilterIncludeXTest {
 		SaltUtil.traverse(documentStructure)
 				.startFrom(documentStructure.getLeafs())
 				.useStrategy(TraversalStrategy.BOTTOM_UP_DEPTH_FIRST)
-				.filter(INCLUDE_STRUCTURE)
-				.filter(INCLUDE_TEXTUALDS)
-				.filter(INCLUDE_TOKEN)
-				.filter(INCLUDE_SPAN)
+				.filter(includeStructures())
+				.filter(includeTextualDs())
+				.filter(includeTokens())
+				.filter(includeSpans())
 				.andCall(traversalHandler);
 		assertThat(visitedNodes.get(STextualDS.class)).hasSize(1);
 		assertThat(visitedNodes.get(SToken.class)).hasSize(11);
