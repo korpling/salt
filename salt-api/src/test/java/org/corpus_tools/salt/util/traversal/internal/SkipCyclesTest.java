@@ -50,4 +50,14 @@ public class SkipCyclesTest implements TraverseCallBackHandler {
 		// THEN
 		assertThat(visitedNodes).containsExactly("n1", "n2", "n3", "n4", "n3");
 	}
+
+	@Test
+	public void whenGraphIsDag_noNodesShouldBeSkipped() {
+		// GIVEN
+		graph = SampleGraphs.createDag();
+		// WHEN
+		when();
+		// THEN
+		assertThat(visitedNodes).containsExactly("n1", "n2", "n3", "n6", "n4", "n2", "n3", "n6");
+	}
 }

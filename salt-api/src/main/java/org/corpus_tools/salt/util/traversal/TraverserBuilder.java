@@ -68,6 +68,7 @@ public class TraverserBuilder {
 		private final TraversalStrategy strategy;
 		private final Collection<TraversalFilter> filters = new ArrayList<>();
 		private boolean isCycleSafe = true;
+		private boolean skipCycles = true;
 		private String id = null;
 
 		public Builder3(SGraph graph, List<SNode> startNodes, TraversalStrategy strategy) {
@@ -77,8 +78,18 @@ public class TraverserBuilder {
 			this.strategy = strategy;
 		}
 
+		/**
+		 * @deprecated skipping cycles is default now, to disable skipping
+		 *             cycles call {@link #dontSkipCycles()}
+		 */
+		@Deprecated
 		public Builder3 cycleSafe(boolean isCycleSafe) {
 			this.isCycleSafe = isCycleSafe;
+			return this;
+		}
+
+		public Builder3 dontSkipCycles() {
+			skipCycles = false;
 			return this;
 		}
 
@@ -98,6 +109,9 @@ public class TraverserBuilder {
 			if (handler == null) {
 				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 						+ "', because the given callback handler 'traverseHandler' is empty.");
+			}
+			if (skipCycles) {
+				filters.add(TraversalFilter.skipCycles());
 			}
 			if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
 				new TopDownDepthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph, filters)
