@@ -2,7 +2,7 @@ package org.corpus_tools.salt.core.impl;
 
 import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
@@ -20,7 +20,7 @@ import org.corpus_tools.salt.util.traversal.TraversalStrategy;
  * 		.andCall(CALLBACK_HANDLER);
  * </pre>
  */
-public class OldToNewTraverseHandler implements BackAndForthTraverseHandler {
+public class OldToNewTraverseHandler implements TraverseCallBackHandler {
 	private final GraphTraverseHandler oldHandler;
 
 	public OldToNewTraverseHandler(GraphTraverseHandler oldHandler) {

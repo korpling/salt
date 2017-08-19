@@ -7,12 +7,12 @@ import java.util.Stack;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.util.SaltUtil;
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.corpus_tools.salt.util.traversal.TraversalFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 
-public abstract class TraverserTest implements BackAndForthTraverseHandler {
+public abstract class TraverserTest implements TraverseCallBackHandler {
 	protected SGraph graph;
 	protected List<SNode> startNodes;
 	protected final List<String> stopNodes = new ArrayList<>();

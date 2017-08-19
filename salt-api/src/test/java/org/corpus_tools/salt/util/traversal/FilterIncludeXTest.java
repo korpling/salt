@@ -22,7 +22,7 @@ import com.google.common.collect.Multimap;
 public class FilterIncludeXTest {
 	private Multimap<Class<? extends SNode>, SNode> visitedNodes = HashMultimap.create();
 	private SDocumentGraph documentStructure = SampleGenerator.createDocumentStructure().getDocumentGraph();
-	private final BackAndForthTraverseHandler traversalHandler = new BackAndForthTraverseHandler() {
+	private final TraverseCallBackHandler traversalHandler = new TraverseCallBackHandler() {
 		@Override
 		public boolean shouldTraversalGoOn(TraversalLocation location) {
 			return true;

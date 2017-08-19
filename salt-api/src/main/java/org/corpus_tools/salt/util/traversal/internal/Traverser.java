@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.corpus_tools.salt.util.traversal.TraversalFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
@@ -15,14 +15,14 @@ public abstract class Traverser {
 	protected final List<? extends SNode> startNodes;
 	protected final TraversalStrategy strategy;
 	protected final String id;
-	protected final BackAndForthTraverseHandler handler;
+	protected final TraverseCallBackHandler handler;
 	protected final boolean isCycleSafe;
 	protected final SGraph graph;
 	protected final Collection<TraversalFilter> filters;
 	protected final List<SNode> currentNodePath = new ArrayList<>();
 
 	public Traverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
-			BackAndForthTraverseHandler handler, boolean isCycleSafe, SGraph graph,
+			TraverseCallBackHandler handler, boolean isCycleSafe, SGraph graph,
 			Collection<TraversalFilter> filters) {
 		this.startNodes = startNodes;
 		this.strategy = strategy;

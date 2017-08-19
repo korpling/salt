@@ -19,10 +19,11 @@ package org.corpus_tools.salt.util.traversal;
 
 /**
  * Using this traverse handler offers the possibility to observe the traversal
- * of the way forth and back again via {@link #nodeReachedOnWayForth(TraversalLocation)}
- * and {@link #nodeReachedOnWayBack(TraversalLocation)}. Further the method
- * {@link #shouldTraversalGoOn(TraversalLocation)} offers to check whether a node
- * shall be visited or not in advance. <br/>
+ * of the way forth and back again via
+ * {@link #nodeReachedOnWayForth(TraversalLocation)} and
+ * {@link #nodeReachedOnWayBack(TraversalLocation)}. Further the method
+ * {@link #shouldTraversalGoOn(TraversalLocation)} offers to check whether a
+ * node shall be visited or not in advance. <br/>
  * The traverser calls the call-back handler in the following order:
  * <ol>
  * <li>{@link #shouldTraversalGoOn(TraversalLocation)}</li>
@@ -30,41 +31,39 @@ package org.corpus_tools.salt.util.traversal;
  * <li>{@link #nodeReachedOnWayBack(TraversalLocation)}</li>
  * </ol>
  */
-public interface BackAndForthTraverseHandler {
+public interface TraverseCallBackHandler {
 	/**
 	 * This method is called during a traversal to check if the current node and
-	 * eventually its sub-graph shall be traversed or not. If the return value
-	 * is false, the traversal for the current path, will stop at the current
-	 * node. Otherwise the method {@link #nodeReachedOnWayForth(TraversalLocation)} will
-	 * be invoked, when a new node is reached and
-	 * {@link #nodeReachedOnWayBack(TraversalLocation)} will be invoked, when this node is
-	 * left.
+	 * eventually its sub-graph shall be visited or not. If the return value is
+	 * false, the traversal for the current path, will stop at the current node.
+	 * Otherwise the method {@link #nodeReachedOnWayForth(TraversalLocation)}
+	 * will be invoked.
 	 * 
 	 * @param location
 	 *            contains current node and the node which was reached before
 	 *            and other information.
 	 */
-	public boolean shouldTraversalGoOn(TraversalLocation location);
+	default boolean shouldTraversalGoOn(TraversalLocation location) {
+		return true;
+	}
 
 	/**
-	 * This method will be invoked, when a node is reached, after the method
-	 * {@link #shouldTraversalGoOn(TraversalLocation)} has returned true and before
-	 * the method {@link #nodeReachedOnWayBack(TraversalLocation)} is invoked.
+	 * This method will be invoked, when a node is reached.
 	 * 
 	 * @param location
 	 *            contains current node and the node which was reached before
 	 *            and other information.
 	 */
-	public void nodeReachedOnWayForth(TraversalLocation location);
+	default void nodeReachedOnWayForth(TraversalLocation location) {
+	}
 
 	/**
-	 * This method will be invoked, when a node is left, after the method
-	 * {@link #shouldTraversalGoOn(TraversalLocation)} has returned true and the
-	 * method {@link #nodeReachedOnWayBack(TraversalLocation)} has been invoked.
+	 * This method will be invoked, when a node is left.
 	 * 
 	 * @param location
 	 *            contains current node and the node which was reached before
 	 *            and other information.
 	 */
-	public void nodeReachedOnWayBack(TraversalLocation location);
+	default void nodeReachedOnWayBack(TraversalLocation location) {
+	}
 }

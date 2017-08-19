@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.corpus_tools.salt.SaltFactory;
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.corpus_tools.salt.util.traversal.TraversalFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
@@ -32,7 +32,7 @@ public class TraverserTest {
 
 	private final Collection<TraversalFilter> filters = new ArrayList<>();
 	private boolean result;
-	private BackAndForthTraverseHandler traversalHandler = null;
+	private TraverseCallBackHandler traversalHandler = null;
 
 	private void when(boolean isFilterTest) {
 		Traverser traverser = new Traverser(null, null, null, traversalHandler, false, null, filters) {
@@ -70,7 +70,7 @@ public class TraverserTest {
 	@Test
 	public void whenfilterAndCheckShouldGoOnAndFilterIsFalseAndShouldGoOnIsTrue_resultMustBeFalse() {
 		filters.add(FILTER_FALSE);
-		traversalHandler = new BackAndForthTraverseHandler() {
+		traversalHandler = new TraverseCallBackHandler() {
 			@Override
 			public boolean shouldTraversalGoOn(TraversalLocation location) {
 				return true;
@@ -91,7 +91,7 @@ public class TraverserTest {
 	@Test
 	public void whenfilterAndCheckShouldGoOnAndFilterIsTrueAndShouldGoOnIsFalse_resultMustBeFalse() {
 		filters.add(FILTER_TRUE);
-		traversalHandler = new BackAndForthTraverseHandler() {
+		traversalHandler = new TraverseCallBackHandler() {
 			@Override
 			public boolean shouldTraversalGoOn(TraversalLocation location) {
 				return false;
@@ -112,7 +112,7 @@ public class TraverserTest {
 	@Test
 	public void whenfilterAndCheckShouldGoOnAndFilterIsFalseAndShouldGoOnIsFalse_resultMustBeFalse() {
 		filters.add(FILTER_FALSE);
-		traversalHandler = new BackAndForthTraverseHandler() {
+		traversalHandler = new TraverseCallBackHandler() {
 			@Override
 			public boolean shouldTraversalGoOn(TraversalLocation location) {
 				return false;
@@ -133,7 +133,7 @@ public class TraverserTest {
 	@Test
 	public void whenfilterAndCheckShouldGoOnAndFilterIsTrueAndShouldGoOnIsTrue_resultMustBeTrue() {
 		filters.add(FILTER_TRUE);
-		traversalHandler = new BackAndForthTraverseHandler() {
+		traversalHandler = new TraverseCallBackHandler() {
 			@Override
 			public boolean shouldTraversalGoOn(TraversalLocation location) {
 				return true;

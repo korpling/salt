@@ -7,9 +7,6 @@ import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.util.SaltUtil;
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
-import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
-import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.corpus_tools.salt.util.traversal.internal.backandforth.MyBackAndForthTraverseHandler;
 import org.junit.Test;
 
@@ -35,7 +32,7 @@ public class TraverseBuilderTest {
 		SaltUtil.traverse(graph)
 				.startFrom(Arrays.asList(SaltFactory.createSNode()))
 				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
-				.andCall((BackAndForthTraverseHandler) null);
+				.andCall((TraverseCallBackHandler) null);
 	}
 
 	@Test(expected = SaltException.class)
@@ -43,6 +40,6 @@ public class TraverseBuilderTest {
 		SaltUtil.traverse(graph)
 				.startFrom(Arrays.asList(SaltFactory.createSNode()))
 				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
-				.andCall((SimpleTraverseHandler) null);
+				.andCall((TraverseCallBackHandler) null);
 	}
 }

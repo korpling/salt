@@ -21,8 +21,7 @@ import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
-import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 
 /**
  * The interface of a callback handler for traversing a {@link Graph} object.
@@ -45,7 +44,7 @@ import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
  * {@link #nodeLeft(GRAPH_TRAVERSE_TYPE, String, Node, Relation, Node, long)}
  * when leaving the node.
  * 
- * @deprecated use {@link BackAndForthTraverseHandler} or
+ * @deprecated use {@link TraverseCallBackHandler} or
  *             {@link SimpleTraverseHandler} instead.
  */
 @Deprecated

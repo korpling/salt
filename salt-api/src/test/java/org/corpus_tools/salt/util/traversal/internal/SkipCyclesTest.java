@@ -8,12 +8,12 @@ import java.util.List;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.graph.SampleGraphs;
 import org.corpus_tools.salt.util.SaltUtil;
-import org.corpus_tools.salt.util.traversal.SimpleTraverseHandler;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.junit.Test;
 
-public class SkipCyclesTest implements SimpleTraverseHandler {
+public class SkipCyclesTest implements TraverseCallBackHandler {
 	protected SGraph graph;
 	protected List<String> visitedNodes = new ArrayList<>();
 
@@ -27,9 +27,8 @@ public class SkipCyclesTest implements SimpleTraverseHandler {
 	}
 
 	@Override
-	public boolean nodeReached(TraversalLocation location) {
+	public void nodeReachedOnWayForth(TraversalLocation location) {
 		visitedNodes.add(location.getCurrentNode().getName());
-		return true;
 	}
 
 	@Test

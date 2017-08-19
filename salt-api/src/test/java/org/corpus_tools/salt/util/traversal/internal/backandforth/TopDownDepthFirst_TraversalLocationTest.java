@@ -9,7 +9,7 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.graph.SampleGraphs;
 import org.corpus_tools.salt.util.SaltUtil;
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Test;
@@ -173,7 +173,7 @@ public class TopDownDepthFirst_TraversalLocationTest {
 				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
 				.cycleSafe(false)
 				.useId("depth-first")
-				.andCall(new BackAndForthTraverseHandler() {
+				.andCall(new TraverseCallBackHandler() {
 					private int wayForthCounter = 0;
 					private int wayBackCounter = 0;
 					private int shouldGoOnCounter = 0;

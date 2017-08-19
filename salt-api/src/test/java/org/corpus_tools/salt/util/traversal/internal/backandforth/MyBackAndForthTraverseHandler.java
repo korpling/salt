@@ -3,10 +3,10 @@ package org.corpus_tools.salt.util.traversal.internal.backandforth;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.corpus_tools.salt.util.traversal.BackAndForthTraverseHandler;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 
-public class MyBackAndForthTraverseHandler implements BackAndForthTraverseHandler {
+public class MyBackAndForthTraverseHandler implements TraverseCallBackHandler {
 	protected List<String> nodeOrderWayThere = new ArrayList<>();
 	protected List<String> nodeOrderWayBack = new ArrayList<>();
 

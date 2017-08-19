@@ -15,7 +15,6 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.exceptions.SaltTraverserException;
 import org.corpus_tools.salt.util.traversal.internal.BottomUpBreadthFirstTraverser;
 import org.corpus_tools.salt.util.traversal.internal.BottomUpDepthFirstTraverser;
-import org.corpus_tools.salt.util.traversal.internal.SimpleTopDownDepthFirstTraverser;
 import org.corpus_tools.salt.util.traversal.internal.TopDownBreadthFirstTraverser;
 import org.corpus_tools.salt.util.traversal.internal.TopDownDepthFirstTraverser;
 
@@ -95,28 +94,7 @@ public class TraverserBuilder {
 			return this;
 		}
 
-		public void andCall(SimpleTraverseHandler handler) {
-			if (handler == null) {
-				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
-						+ "', because the given callback handler 'traverseHandler' is empty.");
-			}
-			if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
-				new SimpleTopDownDepthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph, filters)
-						.traverse();
-			}
-			// else if (TOP_DOWN_BREADTH_FIRST.equals(strategy)) {
-			// new TopDownBreadthFirstTraverser(startNodes, strategy, id,
-			// handler, isCycleSafe, graph).traverse();
-			// } else if (BOTTOM_UP_DEPTH_FIRST.equals(strategy)) {
-			// new BottomUpDepthFirstTraverser(startNodes, strategy, id,
-			// handler, isCycleSafe, graph).traverse();
-			// } else if (BOTTOM_UP_BREADTH_FIRST.equals(strategy)) {
-			// new BottomUpBreadthFirstTraverser(startNodes, strategy, id,
-			// handler, isCycleSafe, graph).traverse();
-			// }
-		}
-
-		public void andCall(BackAndForthTraverseHandler handler) {
+		public void andCall(TraverseCallBackHandler handler) {
 			if (handler == null) {
 				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 						+ "', because the given callback handler 'traverseHandler' is empty.");
