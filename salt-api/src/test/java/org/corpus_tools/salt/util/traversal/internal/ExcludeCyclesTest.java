@@ -13,16 +13,14 @@ import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.junit.Test;
 
-public class SkipCyclesTest implements TraverseCallBackHandler {
+public class ExcludeCyclesTest implements TraverseCallBackHandler {
 	protected SGraph graph;
 	protected List<String> visitedNodes = new ArrayList<>();
 
 	private void when() {
 		SaltUtil.traverse(graph)
-				.startFrom(graph.getRoots())
 				.useStrategy(TraversalStrategy.TOP_DOWN_DEPTH_FIRST)
-				.cycleSafe(false)
-				.filter(new SkipCycles())
+				.startFrom(graph.getRoots())
 				.andCall(this);
 	}
 

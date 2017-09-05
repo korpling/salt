@@ -9,23 +9,28 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
 import org.corpus_tools.salt.exceptions.SaltParameterException;
-import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
-import org.corpus_tools.salt.util.traversal.TraversalFilter;
+import org.corpus_tools.salt.util.traversal.ExcludeFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 
 public class BottomUpBreadthFirstTraverser extends Traverser {
 
+	@Deprecated
 	public BottomUpBreadthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
-			TraverseCallBackHandler handler, boolean isCycleSafe, SGraph graph,
-			Collection<TraversalFilter> filters) {
+			TraverseCallBackHandler handler, boolean isCycleSafe, SGraph graph, Collection<ExcludeFilter> filters) {
 		super(startNodes, strategy, id, handler, isCycleSafe, graph, filters);
+	}
+
+	public BottomUpBreadthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
+			TraverseCallBackHandler handler, SGraph graph, Collection<ExcludeFilter> filters) {
+		super(startNodes, strategy, id, handler, graph, filters);
 	}
 
 	@Override
 	public void traverse() {
 		for (SNode startNode : startNodes) {
-			if (filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
+			if (isIncludeNode(TraversalLocation.createWithStrategy(strategy)
 					.withCurrentNode(startNode)
 					.withId(id)
 					.withRelationOrder(0)
@@ -76,7 +81,7 @@ public class BottomUpBreadthFirstTraverser extends Traverser {
 				for (SRelation<? extends SNode, ? extends SNode> e : edges) {
 					SNode n = null;
 					n = e.getSource();
-					if (filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
+					if (isIncludeNode(TraversalLocation.createWithStrategy(strategy)
 							.withCurrentNode(n)
 							.withId(id)
 							.withFromNode(e.getSource())

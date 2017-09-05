@@ -4,9 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 
-import org.corpus_tools.salt.exceptions.SaltInvalidModelException;
 import org.corpus_tools.salt.graph.SampleGraphs;
-import org.corpus_tools.salt.util.traversal.TraversalFilter;
+import org.corpus_tools.salt.util.traversal.ExcludeFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Before;
@@ -22,7 +21,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	public void whenGraphIsTree() {
 		// GIVEN
 		graph = SampleGraphs.createTree();
-		startNodes = graph.getRoots();
 		// WHEN
 		when();
 		// THEN
@@ -34,7 +32,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	public void whenGraphIsTreeAndTraversalShouldNotGoOn() {
 		// GIVEN
 		graph = SampleGraphs.createTree();
-		startNodes = graph.getRoots();
 		stopNodes.addAll(Arrays.asList("n3", "n4", "n6", "n7"));
 		// WHEN
 		when();
@@ -47,7 +44,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	public void whenGraphIsDiamond() {
 		// GIVEN
 		graph = SampleGraphs.createDiamond();
-		startNodes = graph.getRoots();
 		// WHEN
 		when();
 		// THEN
@@ -59,7 +55,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	public void whenGraphIsDiamondAndTraversalShouldNotGoOn() {
 		// GIVEN
 		graph = SampleGraphs.createDiamond();
-		startNodes = graph.getRoots();
 		stopNodes.add("n3");
 		// WHEN
 		when();
@@ -72,7 +67,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	public void whenGraphIsDag() {
 		// GIVEN
 		graph = SampleGraphs.createDag();
-		startNodes = graph.getRoots();
 		// WHEN
 		when();
 		// THEN
@@ -84,7 +78,6 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	public void whenGraphIsDagAndTraversalShouldNotGoOn() {
 		// GIVEN
 		graph = SampleGraphs.createDag();
-		startNodes = graph.getRoots();
 		stopNodes.add("n2");
 		// WHEN
 		when();
@@ -93,21 +86,19 @@ public class TopDownDepthFirstTest extends TraverserTest {
 		assertThat(nodeOrderWayBack).containsExactly("n1", "n4");
 	}
 
-	@Test(expected = SaltInvalidModelException.class)
+	@Test
 	public void whenGraphIsCycledDagAndIsCycleSafe() {
 		// GIVEN
 		graph = SampleGraphs.createCycledDag();
-		startNodes = graph.getRoots();
-		isCycleSafe = true;
 		// WHEN
 		when();
+		// THEN no endless loop
 	}
 
 	@Test
 	public void whenGraphIsCycledTreeAndIsNotCycleSafe() {
 		// GIVEN
 		graph = SampleGraphs.createCycledTree();
-		startNodes = graph.getRoots();
 		preventRunInCycle = true;
 		// WHEN
 		when();
@@ -117,14 +108,13 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	}
 
 	@Test
-	public void whenFilteringForNothing_allNodesMustBeVisited() {
+	public void whenExcludingNothing_allNodesMustBeVisited() {
 		// GIVEN
 		graph = SampleGraphs.createTree();
-		startNodes = graph.getRoots();
-		traversalFilter = new TraversalFilter() {
+		traversalFilter = new ExcludeFilter() {
 			@Override
 			public boolean test(TraversalLocation location) {
-				return true;
+				return false;
 			}
 		};
 		// WHEN
@@ -135,18 +125,17 @@ public class TopDownDepthFirstTest extends TraverserTest {
 	}
 
 	@Test
-	public void whenFilteringForNodes_subgraphsMustNotBeVisited() {
+	public void whenExcludingNodeN2_subgraphsMustNotBeVisited() {
 		// GIVEN
 		graph = SampleGraphs.createTree();
-		startNodes = graph.getRoots();
-		traversalFilter = new TraversalFilter() {
+		traversalFilter = new ExcludeFilter() {
 			@Override
 			public boolean test(TraversalLocation location) {
 				String nodeName = location.getCurrentNode().getName();
 				if ("n2".equals(nodeName)) {
-					return false;
+					return true;
 				}
-				return true;
+				return false;
 			}
 		};
 		// WHEN

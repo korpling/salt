@@ -268,12 +268,20 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<? extends SNode, ? ex
 		default:
 			break;
 		}
-		SaltUtil.traverse(this)
-				.startFrom(startNodes.toArray(new SNode[startNodes.size()]))
-				.useStrategy(traversalStrategy)
-				.cycleSafe(isCycleSafe)
-				.useId(traverseId)
-				.andCall(new OldToNewTraverseHandler(traverseHandler));
+		if (!isCycleSafe) {
+			SaltUtil.traverse(this)
+					.useStrategy(traversalStrategy)
+					.startFrom(startNodes.toArray(new SNode[startNodes.size()]))
+					.dontExcludeCycles()
+					.useId(traverseId)
+					.andCall(new OldToNewTraverseHandler(traverseHandler));
+		} else {
+			SaltUtil.traverse(this)
+					.useStrategy(traversalStrategy)
+					.startFrom(startNodes.toArray(new SNode[startNodes.size()]))
+					.useId(traverseId)
+					.andCall(new OldToNewTraverseHandler(traverseHandler));
+		}
 	}
 
 	// =======================================> SNamedElement

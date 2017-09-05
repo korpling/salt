@@ -14,8 +14,10 @@ import java.util.List;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.exceptions.SaltTraverserException;
+import org.corpus_tools.salt.util.SaltUtil;
 import org.corpus_tools.salt.util.traversal.internal.BottomUpBreadthFirstTraverser;
 import org.corpus_tools.salt.util.traversal.internal.BottomUpDepthFirstTraverser;
+import org.corpus_tools.salt.util.traversal.internal.ExcludeCycles;
 import org.corpus_tools.salt.util.traversal.internal.TopDownBreadthFirstTraverser;
 import org.corpus_tools.salt.util.traversal.internal.TopDownDepthFirstTraverser;
 
@@ -40,9 +42,9 @@ public class TraverserBuilder_new {
 	public static class Builder2 {
 		private final TraversalStrategy strategy;
 		private final SGraph graph;
-		private final Collection<TraversalFilter> filters = new ArrayList<>();
-		private final List<SNode> startNodes = new ArrayList<>();
-		private boolean skipCycles = true;
+		private final Collection<ExcludeFilter> excludeFilters = new ArrayList<>();
+		private List<SNode> startNodes = new ArrayList<>();
+		private boolean excludeCycles = true;
 		private String id = null;
 
 		public Builder2(TraversalStrategy strategy, SGraph graph) {
@@ -51,24 +53,28 @@ public class TraverserBuilder_new {
 		}
 
 		public Builder2 startFrom(SNode... startNodes) {
-			if ((startNodes == null) || (startNodes.length == 0)) {
-				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
-						+ "', because the given start nodes are empty.");
-			}
+			// if ((startNodes == null) || (startNodes.length == 0)) {
+			// throw new SaltTraverserException("Cannot start traversing graph
+			// '" + graph.getId()
+			// + "', because the given start nodes are empty.");
+			// }
 			return startFrom(Arrays.asList(startNodes));
 		}
 
 		public Builder2 startFrom(List<SNode> startNodes) {
-			if ((startNodes == null) || (startNodes.isEmpty())) {
-				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
-						+ "', because the given start nodes are empty.");
+			// if ((startNodes == null) || (startNodes.isEmpty())) {
+			// throw new SaltTraverserException("Cannot start traversing graph
+			// '" + graph.getId()
+			// + "', because the given start nodes are empty.");
+			// }
+			if (SaltUtil.isNotNullOrEmpty(startNodes)) {
+				this.startNodes.addAll(startNodes);
 			}
-			startNodes.addAll(startNodes);
 			return this;
 		}
 
-		public Builder2 dontSkipCycles() {
-			skipCycles = false;
+		public Builder2 dontExcludeCycles() {
+			excludeCycles = false;
 			return this;
 		}
 
@@ -77,9 +83,9 @@ public class TraverserBuilder_new {
 			return this;
 		}
 
-		public Builder2 filter(TraversalFilter filter) {
+		public Builder2 exclude(ExcludeFilter filter) {
 			if (filter != null) {
-				filters.add(filter);
+				excludeFilters.add(filter);
 			}
 			return this;
 		}
@@ -89,21 +95,26 @@ public class TraverserBuilder_new {
 				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 						+ "', because the given callback handler 'traverseHandler' is empty.");
 			}
-			if (skipCycles) {
-				filters.add(TraversalFilter.skipCycles());
+			if (excludeCycles && !containsExcludeCycles()) {
+				excludeFilters.add(ExcludeFilter.skipCycles());
 			}
 			if (startNodes.isEmpty()) {
 				startNodes = emitStartNodes();
 			}
 
+			if (SaltUtil.isNullOrEmpty(startNodes)) {
+				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
+						+ "', because the given start nodes are empty.");
+			}
+
 			if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
-				new TopDownDepthFirstTraverser(startNodes, strategy, id, handler, graph, filters).traverse();
+				new TopDownDepthFirstTraverser(startNodes, strategy, id, handler, graph, excludeFilters).traverse();
 			} else if (TOP_DOWN_BREADTH_FIRST.equals(strategy)) {
-				new TopDownBreadthFirstTraverser(startNodes, strategy, id, handler, graph, filters).traverse();
+				new TopDownBreadthFirstTraverser(startNodes, strategy, id, handler, graph, excludeFilters).traverse();
 			} else if (BOTTOM_UP_DEPTH_FIRST.equals(strategy)) {
-				new BottomUpDepthFirstTraverser(startNodes, strategy, id, handler, graph, filters).traverse();
+				new BottomUpDepthFirstTraverser(startNodes, strategy, id, handler, graph, excludeFilters).traverse();
 			} else if (BOTTOM_UP_BREADTH_FIRST.equals(strategy)) {
-				new BottomUpBreadthFirstTraverser(startNodes, strategy, id, handler, graph, filters).traverse();
+				new BottomUpBreadthFirstTraverser(startNodes, strategy, id, handler, graph, excludeFilters).traverse();
 			}
 		}
 
@@ -118,6 +129,10 @@ public class TraverserBuilder_new {
 			default:
 				return Collections.emptyList();
 			}
+		}
+
+		private boolean containsExcludeCycles() {
+			return excludeFilters.stream().anyMatch(filter -> filter instanceof ExcludeCycles);
 		}
 	}
 }

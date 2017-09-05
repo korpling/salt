@@ -8,17 +8,22 @@ import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.exceptions.SaltException;
-import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
-import org.corpus_tools.salt.util.traversal.TraversalFilter;
+import org.corpus_tools.salt.util.traversal.ExcludeFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 
 public class TopDownBreadthFirstTraverser extends Traverser {
 
+	@Deprecated
 	public TopDownBreadthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
-			TraverseCallBackHandler handler, boolean isCycleSafe, SGraph graph,
-			Collection<TraversalFilter> filters) {
+			TraverseCallBackHandler handler, boolean isCycleSafe, SGraph graph, Collection<ExcludeFilter> filters) {
 		super(startNodes, strategy, id, handler, isCycleSafe, graph, filters);
+	}
+
+	public TopDownBreadthFirstTraverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
+			TraverseCallBackHandler handler, SGraph graph, Collection<ExcludeFilter> filters) {
+		super(startNodes, strategy, id, handler, graph, filters);
 	}
 
 	@Override
@@ -26,7 +31,7 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 		if (isCycleSafe) {
 			throw new SaltException("Not able to detect cycles with breadth first search");
 		}
-		startNodes.stream().forEach(startNode -> filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
+		startNodes.stream().forEach(startNode -> isIncludeNode(TraversalLocation.createWithStrategy(strategy)
 				.withCurrentNode(startNode)
 				.withRelationOrder(0)
 				.withId(id)
@@ -65,7 +70,7 @@ public class TopDownBreadthFirstTraverser extends Traverser {
 			for (SRelation<? extends SNode, ? extends SNode> fromRelation : edges) {
 				SNode currentNode = null;
 				currentNode = fromRelation.getTarget();
-				if (filterAndCheckShouldGoOn(TraversalLocation.createWithStrategy(strategy)
+				if (isIncludeNode(TraversalLocation.createWithStrategy(strategy)
 						.withCurrentNode(currentNode)
 						.withFromRelation(fromRelation)
 						.withRelationOrder(order)

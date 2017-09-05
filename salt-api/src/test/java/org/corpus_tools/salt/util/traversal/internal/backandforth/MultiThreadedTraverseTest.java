@@ -17,7 +17,6 @@ public class MultiThreadedTraverseTest {
 	private SGraph graph;
 	private List<SNode> startNodes;
 	private TraversalStrategy strategy;
-	private boolean isCycleSafe = false;
 	private List<String> expectedNodeOrderWayThere = new ArrayList<>();
 	private List<String> expectedNodeOrderWayBack = new ArrayList<>();
 	private static final int NUM_OF_THREADS = 20;
@@ -27,13 +26,11 @@ public class MultiThreadedTraverseTest {
 		for (int i = 0; i < NUM_OF_THREADS; i++) {
 			traverseHandlers.add(new MyBackAndForthTraverseHandler());
 		}
-		traverseHandlers.parallelStream()
-				.forEach(handler -> SaltUtil.traverse(graph)
-						.startFrom(startNodes)
-						.useStrategy(strategy)
-						.cycleSafe(isCycleSafe)
-						.useId("thred-test")
-						.andCall(handler));
+		traverseHandlers.parallelStream().forEach(handler -> SaltUtil.traverse(graph)
+				.useStrategy(strategy)
+				.startFrom(startNodes)
+				.useId("thred-test")
+				.andCall(handler));
 	}
 
 	private void then() {

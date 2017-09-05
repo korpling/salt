@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 
 import org.corpus_tools.salt.graph.SampleGraphs;
-import org.corpus_tools.salt.util.traversal.TraversalFilter;
+import org.corpus_tools.salt.util.traversal.ExcludeFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
 import org.junit.Before;
@@ -21,7 +21,6 @@ public class TopDownBreadthFirstTest extends TraverserTest {
 	public void whenGraphIsTree() {
 		// GIVEN
 		graph = SampleGraphs.createTree();
-		startNodes = graph.getRoots();
 		// WHEN
 		when();
 		// THEN
@@ -33,7 +32,6 @@ public class TopDownBreadthFirstTest extends TraverserTest {
 	public void whenGraphIsDag() {
 		// GIVEN
 		graph = SampleGraphs.createDag();
-		startNodes = graph.getRoots();
 		// WHEN
 		when();
 		// THEN
@@ -57,7 +55,6 @@ public class TopDownBreadthFirstTest extends TraverserTest {
 	public void testTraverse_TOP_DOWN_BREADTH_FIRST_CycleUnsafe() {
 		// GIVEN
 		graph = SampleGraphs.createCycledTree();
-		startNodes = graph.getRoots();
 		preventRunInCycle = true;
 		// WHEN
 		when();
@@ -67,14 +64,13 @@ public class TopDownBreadthFirstTest extends TraverserTest {
 	}
 
 	@Test
-	public void whenFilteringForNothing_allNodesMustBeVisited() {
+	public void whenExcludingForNothing_allNodesMustBeVisited() {
 		// GIVEN
 		graph = SampleGraphs.createTree();
-		startNodes = graph.getRoots();
-		traversalFilter = new TraversalFilter() {
+		traversalFilter = new ExcludeFilter() {
 			@Override
 			public boolean test(TraversalLocation location) {
-				return true;
+				return false;
 			}
 		};
 		// WHEN
@@ -85,18 +81,17 @@ public class TopDownBreadthFirstTest extends TraverserTest {
 	}
 
 	@Test
-	public void whenFilteringForNodes_subgraphsMustNotBeVisited() {
+	public void whenExcludingNodeN2_subgraphsMustNotBeVisited() {
 		// GIVEN
 		graph = SampleGraphs.createTree();
-		startNodes = graph.getRoots();
-		traversalFilter = new TraversalFilter() {
+		traversalFilter = new ExcludeFilter() {
 			@Override
 			public boolean test(TraversalLocation location) {
 				String nodeName = location.getCurrentNode().getName();
 				if ("n2".equals(nodeName)) {
-					return false;
+					return true;
 				}
-				return true;
+				return false;
 			}
 		};
 		// WHEN

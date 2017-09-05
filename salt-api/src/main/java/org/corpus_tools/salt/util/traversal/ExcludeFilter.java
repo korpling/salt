@@ -7,26 +7,26 @@ import org.corpus_tools.salt.common.SStructure;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.util.traversal.internal.NodeTypeFilter;
-import org.corpus_tools.salt.util.traversal.internal.SkipCycles;
+import org.corpus_tools.salt.util.traversal.internal.ExcludeCycles;
 
-public abstract interface TraversalFilter extends Predicate<TraversalLocation> {
-	public static TraversalFilter skipCycles() {
-		return new SkipCycles();
+public abstract interface ExcludeFilter extends Predicate<TraversalLocation> {
+	public static ExcludeFilter skipCycles() {
+		return new ExcludeCycles();
 	}
 
-	public static TraversalFilter includeTextualDs() {
+	public static ExcludeFilter textualDs() {
 		return new NodeTypeFilter(STextualDS.class);
 	}
 
-	public static TraversalFilter includeTokens() {
+	public static ExcludeFilter excludeTokens() {
 		return new NodeTypeFilter(SToken.class);
 	}
 
-	public static TraversalFilter includeSpans() {
+	public static ExcludeFilter excludeSpans() {
 		return new NodeTypeFilter(SSpan.class);
 	}
 
-	public static TraversalFilter includeStructures() {
+	public static ExcludeFilter structures() {
 		return new NodeTypeFilter(SStructure.class);
 	}
 }

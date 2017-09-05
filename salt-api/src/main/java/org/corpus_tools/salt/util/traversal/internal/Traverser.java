@@ -6,42 +6,53 @@ import java.util.List;
 
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
-import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
-import org.corpus_tools.salt.util.traversal.TraversalFilter;
+import org.corpus_tools.salt.util.traversal.ExcludeFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 
 public abstract class Traverser {
 	protected final List<? extends SNode> startNodes;
 	protected final TraversalStrategy strategy;
 	protected final String id;
 	protected final TraverseCallBackHandler handler;
-	protected final boolean isCycleSafe;
+	protected boolean isCycleSafe = false;
 	protected final SGraph graph;
-	protected final Collection<TraversalFilter> filters;
+	protected final Collection<ExcludeFilter> excludeFilters;
 	protected final List<SNode> currentNodePath = new ArrayList<>();
 
+	@Deprecated
 	public Traverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
 			TraverseCallBackHandler handler, boolean isCycleSafe, SGraph graph,
-			Collection<TraversalFilter> filters) {
+			Collection<ExcludeFilter> excludeFilters) {
 		this.startNodes = startNodes;
 		this.strategy = strategy;
 		this.id = id;
 		this.handler = handler;
 		this.isCycleSafe = isCycleSafe;
 		this.graph = graph;
-		this.filters = filters;
+		this.excludeFilters = excludeFilters;
 	}
 
-	protected boolean filterAndCheckShouldGoOn(TraversalLocation location) {
-		return filter(location) && handler.shouldTraversalGoOn(location);
+	public Traverser(List<? extends SNode> startNodes, TraversalStrategy strategy, String id,
+			TraverseCallBackHandler handler, SGraph graph, Collection<ExcludeFilter> excludeFilters) {
+		this.startNodes = startNodes;
+		this.strategy = strategy;
+		this.id = id;
+		this.handler = handler;
+		this.graph = graph;
+		this.excludeFilters = excludeFilters;
 	}
 
-	protected boolean filter(TraversalLocation location) {
-		if (filters.isEmpty()) {
-			return true;
+	protected boolean isIncludeNode(TraversalLocation location) {
+		return !isExclude(location) && handler.shouldTraversalGoOn(location);
+	}
+
+	protected boolean isExclude(TraversalLocation location) {
+		if (excludeFilters.isEmpty()) {
+			return false;
 		}
-		return filters.stream().anyMatch(filter -> filter.test(location));
+		return excludeFilters.stream().anyMatch(excludeFilter -> excludeFilter.test(location));
 	}
 
 	public abstract void traverse();

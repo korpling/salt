@@ -7,35 +7,34 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.corpus_tools.salt.SaltFactory;
-import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
-import org.corpus_tools.salt.util.traversal.TraversalFilter;
+import org.corpus_tools.salt.util.traversal.ExcludeFilter;
 import org.corpus_tools.salt.util.traversal.TraversalLocation;
 import org.corpus_tools.salt.util.traversal.TraversalStrategy;
-import org.corpus_tools.salt.util.traversal.internal.Traverser;
+import org.corpus_tools.salt.util.traversal.TraverseCallBackHandler;
 import org.junit.Test;
 
 public class TraverserTest {
 
-	private TraversalFilter FILTER_TRUE = new TraversalFilter() {
+	private ExcludeFilter FILTER_TRUE = new ExcludeFilter() {
 		@Override
 		public boolean test(TraversalLocation arg0) {
 			return true;
 		}
 	};
 
-	private TraversalFilter FILTER_FALSE = new TraversalFilter() {
+	private ExcludeFilter FILTER_FALSE = new ExcludeFilter() {
 		@Override
 		public boolean test(TraversalLocation arg0) {
 			return false;
 		}
 	};
 
-	private final Collection<TraversalFilter> filters = new ArrayList<>();
+	private final Collection<ExcludeFilter> filters = new ArrayList<>();
 	private boolean result;
 	private TraverseCallBackHandler traversalHandler = null;
 
 	private void when(boolean isFilterTest) {
-		Traverser traverser = new Traverser(null, null, null, traversalHandler, false, null, filters) {
+		Traverser traverser = new Traverser(null, null, null, traversalHandler, null, filters) {
 			@Override
 			public void traverse() {
 			}
@@ -43,7 +42,7 @@ public class TraverserTest {
 		TraversalLocation location = TraversalLocation.createWithStrategy(TraversalStrategy.BOTTOM_UP_BREADTH_FIRST)
 				.withCurrentNode(SaltFactory.createSNode())
 				.build();
-		result = isFilterTest ? traverser.filter(location) : traverser.filterAndCheckShouldGoOn(location);
+		result = isFilterTest ? traverser.isExclude(location) : traverser.isIncludeNode(location);
 	}
 
 	@Test
@@ -75,14 +74,6 @@ public class TraverserTest {
 			public boolean shouldTraversalGoOn(TraversalLocation location) {
 				return true;
 			}
-
-			@Override
-			public void nodeReachedOnWayForth(TraversalLocation location) {
-			}
-
-			@Override
-			public void nodeReachedOnWayBack(TraversalLocation location) {
-			}
 		};
 		when(false);
 		assertThat(result).isFalse();
@@ -97,13 +88,6 @@ public class TraverserTest {
 				return false;
 			}
 
-			@Override
-			public void nodeReachedOnWayForth(TraversalLocation location) {
-			}
-
-			@Override
-			public void nodeReachedOnWayBack(TraversalLocation location) {
-			}
 		};
 		when(false);
 		assertThat(result).isFalse();
@@ -137,14 +121,6 @@ public class TraverserTest {
 			@Override
 			public boolean shouldTraversalGoOn(TraversalLocation location) {
 				return true;
-			}
-
-			@Override
-			public void nodeReachedOnWayForth(TraversalLocation location) {
-			}
-
-			@Override
-			public void nodeReachedOnWayBack(TraversalLocation location) {
 			}
 		};
 		when(false);

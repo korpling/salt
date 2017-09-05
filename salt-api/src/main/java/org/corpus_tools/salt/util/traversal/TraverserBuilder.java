@@ -15,6 +15,7 @@ import org.corpus_tools.salt.core.SNode;
 import org.corpus_tools.salt.exceptions.SaltTraverserException;
 import org.corpus_tools.salt.util.traversal.internal.BottomUpBreadthFirstTraverser;
 import org.corpus_tools.salt.util.traversal.internal.BottomUpDepthFirstTraverser;
+import org.corpus_tools.salt.util.traversal.internal.ExcludeCycles;
 import org.corpus_tools.salt.util.traversal.internal.TopDownBreadthFirstTraverser;
 import org.corpus_tools.salt.util.traversal.internal.TopDownDepthFirstTraverser;
 
@@ -66,7 +67,7 @@ public class TraverserBuilder {
 		private final SGraph graph;
 		private final List<SNode> startNodes;
 		private final TraversalStrategy strategy;
-		private final Collection<TraversalFilter> filters = new ArrayList<>();
+		private final Collection<ExcludeFilter> filters = new ArrayList<>();
 		private boolean isCycleSafe = true;
 		private boolean skipCycles = true;
 		private String id = null;
@@ -80,7 +81,7 @@ public class TraverserBuilder {
 
 		/**
 		 * @deprecated skipping cycles is default now, to disable skipping
-		 *             cycles call {@link #dontSkipCycles()}
+		 *             cycles call {@link #dontExcludeCycles()}
 		 */
 		@Deprecated
 		public Builder3 cycleSafe(boolean isCycleSafe) {
@@ -88,7 +89,7 @@ public class TraverserBuilder {
 			return this;
 		}
 
-		public Builder3 dontSkipCycles() {
+		public Builder3 dontExcludeCycles() {
 			skipCycles = false;
 			return this;
 		}
@@ -98,7 +99,7 @@ public class TraverserBuilder {
 			return this;
 		}
 
-		public Builder3 filter(TraversalFilter filter) {
+		public Builder3 exclude(ExcludeFilter filter) {
 			if (filter != null) {
 				filters.add(filter);
 			}
@@ -110,8 +111,8 @@ public class TraverserBuilder {
 				throw new SaltTraverserException("Cannot start traversing graph '" + graph.getId()
 						+ "', because the given callback handler 'traverseHandler' is empty.");
 			}
-			if (skipCycles) {
-				filters.add(TraversalFilter.skipCycles());
+			if (skipCycles && !containsSkipCyclesFilter()) {
+				filters.add(ExcludeFilter.skipCycles());
 			}
 			if (TOP_DOWN_DEPTH_FIRST.equals(strategy)) {
 				new TopDownDepthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph, filters)
@@ -126,6 +127,12 @@ public class TraverserBuilder {
 				new BottomUpBreadthFirstTraverser(startNodes, strategy, id, handler, isCycleSafe, graph, filters)
 						.traverse();
 			}
+		}
+
+		private boolean containsSkipCyclesFilter() {
+			return filters.stream().anyMatch(filter -> {
+				return (filter instanceof ExcludeCycles) ? true : false;
+			});
 		}
 	}
 }

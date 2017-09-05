@@ -29,7 +29,6 @@ public class OldToNewTraverseHandler implements TraverseCallBackHandler {
 
 	@Override
 	public boolean shouldTraversalGoOn(TraversalLocation traversalLocation) {
-		System.out.println("go-on: " + traversalLocation);
 		return oldHandler.checkConstraint(strategyToType(traversalLocation.getStrategy()),
 				traversalLocation.getId().orElse(null), traversalLocation.getFromRelation().orElse(null),
 				traversalLocation.getCurrentNode(), traversalLocation.getRelationOrder());
@@ -37,7 +36,6 @@ public class OldToNewTraverseHandler implements TraverseCallBackHandler {
 
 	@Override
 	public void nodeReachedOnWayForth(TraversalLocation traversalLocation) {
-		System.out.println("forth: " + traversalLocation);
 		oldHandler.nodeReached(strategyToType(traversalLocation.getStrategy()), traversalLocation.getId().orElse(null),
 				traversalLocation.getCurrentNode(), traversalLocation.getFromRelation().orElse(null),
 				traversalLocation.getFromNode().orElse(null), traversalLocation.getRelationOrder());
@@ -45,7 +43,6 @@ public class OldToNewTraverseHandler implements TraverseCallBackHandler {
 
 	@Override
 	public void nodeReachedOnWayBack(TraversalLocation traversalLocation) {
-		System.out.println("back: " + traversalLocation);
 		oldHandler.nodeLeft(strategyToType(traversalLocation.getStrategy()), traversalLocation.getId().orElse(null),
 				traversalLocation.getCurrentNode(), traversalLocation.getFromRelation().orElse(null),
 				traversalLocation.getFromNode().orElse(null), traversalLocation.getRelationOrder());
