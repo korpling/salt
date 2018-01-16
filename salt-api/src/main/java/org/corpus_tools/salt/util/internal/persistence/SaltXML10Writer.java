@@ -332,7 +332,9 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 	 */
 	public void writeDocumentGraph(SDocumentGraph graph) {
 		XMLStreamWriter xml = null;
-		try (OutputStream output = new FileOutputStream(path)) {
+		OutputStream output = null;
+		try {
+			output = new FileOutputStream(path);
 			xml = xmlFactory.createXMLStreamWriter(output, "UTF-8");
 
 			xml.writeStartDocument("1.0");
@@ -343,16 +345,29 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 			writeDocumentGraph(xml, graph);
 
 			xml.writeEndDocument();
-		} catch (XMLStreamException | IOException e) {
+		}
+		catch (XMLStreamException | IOException e) {
 			throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr() + "'. ", e);
-		} finally {
+		}
+		finally {
 			if (xml != null) {
 				try {
 					xml.flush();
 					xml.close();
-				} catch (XMLStreamException e) {
+				}
+				catch (XMLStreamException e) {
 					throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr()
-							+ "', because the opened stream is not closable. ", e);
+							+ "', because the opened XML stream is not closable. ", e);
+				}
+				if (output != null) {
+					try {
+						output.flush();
+						output.close();
+					}
+					catch (IOException e) {
+						throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr()
+						+ "', because the opened OutputStream is not closable. ", e);
+					}
 				}
 			}
 		}
