@@ -359,15 +359,15 @@ public class SaltXML10Writer implements SaltXML10Dictionary {
 					throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr()
 							+ "', because the opened XML stream is not closable. ", e);
 				}
-				if (output != null) {
-					try {
-						output.flush();
-						output.close();
-					}
-					catch (IOException e) {
-						throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr()
-						+ "', because the opened OutputStream is not closable. ", e);
-					}
+			}
+			if (output != null) {
+				try {
+					output.flush();
+					output.close();
+				}
+				catch (IOException e) {
+					throw new SaltResourceException("Cannot store document graph to file '" + getLocationStr()
+					+ "', because the opened OutputStream is not closable. ", e);
 				}
 			}
 		}
