@@ -17,12 +17,17 @@
  */
 package org.corpus_tools.salt.util.persistence.tests;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +41,7 @@ import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.SAnnotation;
 import org.corpus_tools.salt.samples.SampleGenerator;
 import org.corpus_tools.salt.tests.SaltTestsUtil;
 import org.corpus_tools.salt.util.Difference;
@@ -299,6 +305,55 @@ public class Persist_SaltXML10_Test {
 				loaded.getCorpusGraphs().get(0).getDocuments().get(2).getDocumentGraphLocation().toFileString());
 		assertEquals(outFolder + "/rootCorpus/subCorpus2/doc4.salt",
 				loaded.getCorpusGraphs().get(0).getDocuments().get(3).getDocumentGraphLocation().toFileString());
+	}
+	
+	/**
+	 * Tests persisting a SaltProject structure with {@link SAnnotation}s
+	 * on {@link SDocument}s.
+	 * 
+	 * The expected behaviour is that annotations on documents are persisted
+	 * in the corpus graph file, i.e. SaltProject.salt.
+	 */
+	@Test
+	public void testLoadStore_SaltProjectWithDocumentAnnotations() {
+
+		SaltProject project = SampleGenerator.createSaltProject();
+		for (SCorpusGraph cg : project.getCorpusGraphs()) {
+			for (SDocument d : cg.getDocuments()) {
+				d.createAnnotation("TEST", "DOCUMENT-ANNOTATION", d.getName());
+			}
+		}
+		for (SCorpusGraph cg : project.getCorpusGraphs()) {
+			for (SDocument d : cg.getDocuments()) {
+				assertNotNull(d.getAnnotation("TEST", "DOCUMENT-ANNOTATION"));
+				assertEquals(d.getAnnotation("TEST", "DOCUMENT-ANNOTATION").getValue_STEXT(), d.getName());
+			}
+		}
+
+		String outFolder = SaltTestsUtil.getTempTestFolder("/testLoadStore_SaltProjectWithSocumentAnnotations") + "/saltProject";
+		File tmpFile = new File(outFolder + "/" + SaltUtil.FILE_SALT_PROJECT);
+		SaltUtil.saveSaltProject(project, URI.createFileURI(tmpFile.getAbsolutePath()));
+		SaltProject loaded = SaltUtil.loadSaltProject(URI.createFileURI(tmpFile.getAbsolutePath()));
+
+		for (SCorpusGraph cg : loaded.getCorpusGraphs()) {
+			for (SDocument d : cg.getDocuments()) {
+				assertNotNull(d.getAnnotation("TEST", "DOCUMENT-ANNOTATION"));
+				assertEquals(d.getAnnotation("TEST", "DOCUMENT-ANNOTATION").getValue_STEXT(), d.getName());
+			}
+		}
+		
+		// Also check XML
+		List<String> lines = null;
+		try {
+			lines = Files.readAllLines(Paths.get(tmpFile.getAbsolutePath()));
+		}
+		catch (IOException e) {
+			fail("IOException");
+		}
+		assertTrue(lines.contains("		<labels xsi:type=\"saltCore:SAnnotation\" namespace=\"TEST\" name=\"DOCUMENT-ANNOTATION\" value=\"T::doc1\"/>"));
+		assertTrue(lines.contains("		<labels xsi:type=\"saltCore:SAnnotation\" namespace=\"TEST\" name=\"DOCUMENT-ANNOTATION\" value=\"T::doc2\"/>"));
+		assertTrue(lines.contains("		<labels xsi:type=\"saltCore:SAnnotation\" namespace=\"TEST\" name=\"DOCUMENT-ANNOTATION\" value=\"T::doc3\"/>"));
+		assertTrue(lines.contains("		<labels xsi:type=\"saltCore:SAnnotation\" namespace=\"TEST\" name=\"DOCUMENT-ANNOTATION\" value=\"T::doc4\"/>"));
 	}
 
 	/**
