@@ -6,11 +6,19 @@ package org.corpus_tools.salt.extensions.notification.common.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusGraph;
+import org.corpus_tools.salt.common.SDocument;
+import org.corpus_tools.salt.common.SaltProject;
 import org.corpus_tools.salt.common.impl.SCorpusGraphImpl;
 import org.corpus_tools.salt.extensions.notification.Listener;
+import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
 import org.corpus_tools.salt.extensions.notification.graph.impl.NotifierHelper;
+import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
+import org.corpus_tools.salt.graph.Identifier;
+import org.eclipse.emf.common.util.URI;
 
 /**
  * // TODO Add description
@@ -47,4 +55,61 @@ public class CorpusGraphNotifierImpl extends SCorpusGraphImpl implements SCorpus
 		listenerList = NotifierHelper.removeListener(listenerList, listener);
 	}
 
+	/** {@inheritDoc} **/
+	@Override
+	public void setSaltProject(SaltProject saltProject) {
+		SaltProject oldSaltProject = getSaltProject();
+		super.setSaltProject(saltProject);
+		NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.SET, GRAPH_ATTRIBUTES.GRAPH_NODES, oldSaltProject,
+				saltProject, this);
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public Identifier addSubCorpus(SCorpus superCorpus, SCorpus subCorpus) {
+		Identifier newIdentifier = super.addSubCorpus(superCorpus, subCorpus);
+		NotifierHelper.notify(listenerList, NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, subCorpus, this);
+		return newIdentifier;
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public Identifier addDocument(SCorpus corpus, SDocument document) {
+		Identifier newIdentifier = super.addDocument(corpus, document);
+		NotifierHelper.notify(listenerList, NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, document, this);
+		return newIdentifier;
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public SCorpus createCorpus(SCorpus superCorpus, String corpusName) {
+		SCorpus newCorpus = super.createCorpus(superCorpus, corpusName);
+		NotifierHelper.notify(listenerList, NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, newCorpus, this);
+		return newCorpus;
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public SDocument createDocument(SCorpus parentCorpus, String documentName) {
+		SDocument newDocument = super.createDocument(parentCorpus, documentName);
+		NotifierHelper.notify(listenerList, NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, newDocument, this);
+		return newDocument;
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public List<SCorpus> createCorpus(final URI corpusPath) {
+		List<SCorpus> oldCorporaList = getCorpora();
+		List<SCorpus> corporaList = super.createCorpus(corpusPath);
+		NotifierHelper.notify(listenerList, NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, oldCorporaList, corporaList, this);
+		return corporaList;
+	}
+	
+	/** {@inheritDoc} **/
+	@Override
+	public SDocument createDocument(final URI documentPath) {
+		SDocument newDocument = super.createDocument(documentPath);
+		NotifierHelper.notify(listenerList, NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, newDocument, this);
+		return newDocument;
+	}
 }
