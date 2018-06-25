@@ -3,6 +3,7 @@ var NAVTREEINDEX0 =
 ".html":[12,0,0],
 ".html":[12,0,0,0],
 ".html":[12,0,0,0,0,3],
+".html":[12,0,0,0,0,3,0,0],
 "access.html":[0],
 "annotated.html":[12,0],
 "apiConcepts.html":[1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a1a47290e98c21ffdf9ab666cb0533af8":[12,0,0,0,0,0,1,6,13],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a22d94a6ab72f8255b67cd9b4fb88c8bc":[12,0,0,0,0,0,1,6,1],
 "classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a323198036fb334de35be7c322884a5c5":[12,0,0,0,0,0,1,6,8],
-"classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a39508c33cbca9249f9c8a42dc82aefd8":[12,0,0,0,0,0,1,6,7],
-"classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a44fee40779af7857e2a0bbf93e935c51":[12,0,0,0,0,0,1,6,12]
+"classorg_1_1corpus__tools_1_1salt_1_1common_1_1tokenizer_1_1_tokenizer.html#a39508c33cbca9249f9c8a42dc82aefd8":[12,0,0,0,0,0,1,6,7]
 };
