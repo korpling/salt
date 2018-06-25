@@ -90,7 +90,7 @@ public class CreateGraphNotificationTest {
 		eventList.add(new Event(NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.NODE_LABELS, null, null, null));
 		eventList.add(new Event(NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, null, null));
 
-		factory.addListener(new Listener() {
+		Listener listener = new Listener() {
 			private int eventCounter = 0;
 
 			@Override
@@ -106,9 +106,10 @@ public class CreateGraphNotificationTest {
 				}
 				eventCounter++;
 			}
-		});
+		};
+		factory.addListener(listener);
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createPrimaryData(doc);
-
+		factory.removeListener(listener);
 	}
 }

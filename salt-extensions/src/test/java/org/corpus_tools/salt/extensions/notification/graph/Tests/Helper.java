@@ -18,7 +18,6 @@
 package org.corpus_tools.salt.extensions.notification.graph.Tests;
 
 import static org.junit.Assert.assertEquals;
-
 import org.corpus_tools.salt.extensions.notification.Listener;
 import org.corpus_tools.salt.extensions.notification.Listener.NOTIFICATION_TYPE;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
