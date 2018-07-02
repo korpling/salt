@@ -1,0 +1,4 @@
+var namespaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1common_1_1impl =
+[
+    [ "CorpusGraphNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1common_1_1impl_1_1_corpus_graph_notifier_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1common_1_1impl_1_1_corpus_graph_notifier_impl" ]
+];

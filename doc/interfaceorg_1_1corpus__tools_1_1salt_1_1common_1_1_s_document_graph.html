@@ -33,7 +33,7 @@
   <td id="projectlogo"><img alt="Logo" src="salt.svg"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Salt
-   &#160;<span id="projectnumber">3.3.1</span>
+   &#160;<span id="projectnumber">3.3.4</span>
    </div>
    <div id="projectbrief">A powerful, tagset-independent and theory-neutral meta model and API for storing, manipulating, and representing nearly all types of linguistic data .</div>
   </td>
@@ -210,6 +210,9 @@ List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1
 <tr class="memitem:a6fe06324d83c209a11dd7137bea6b43c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline.html">STimeline</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#a6fe06324d83c209a11dd7137bea6b43c">createTimeline</a> ()</td></tr>
 <tr class="memdesc:a6fe06324d83c209a11dd7137bea6b43c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline.html">STimeline</a> object being contained in this <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html">SDocumentGraph</a> object.  <a href="#a6fe06324d83c209a11dd7137bea6b43c">More...</a><br /></td></tr>
 <tr class="separator:a6fe06324d83c209a11dd7137bea6b43c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5b1b456bcd5a16f40367c2498a348a0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline_relation.html">STimelineRelation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#ab5b1b456bcd5a16f40367c2498a348a0">createTimelineRelation</a> (<a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_token.html">SToken</a> token, int timeSteps)</td></tr>
+<tr class="memdesc:ab5b1b456bcd5a16f40367c2498a348a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline_relation.html">STimelineRelation</a> object being contained in this <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html">SDocumentGraph</a> object, and attaches the <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_token.html">SToken</a> parameter to the document graph's timeline at the end, its start being the current end of the timeline, its end being the current end of the timeline + the time steps passed in as the second parameter.  <a href="#ab5b1b456bcd5a16f40367c2498a348a0">More...</a><br /></td></tr>
+<tr class="separator:ab5b1b456bcd5a16f40367c2498a348a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa630aebbcd5040917662e4219a2fbd5e"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_token.html">SToken</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html#aa630aebbcd5040917662e4219a2fbd5e">getTokensBySequence</a> (<a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1util_1_1_data_source_sequence.html">DataSourceSequence</a> sequence)</td></tr>
 <tr class="memdesc:aa630aebbcd5040917662e4219a2fbd5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns all <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_token.html">SToken</a> objects which refer to the passed <a class="el" href="">DataSourceSequence</a> object.  <a href="#aa630aebbcd5040917662e4219a2fbd5e">More...</a><br /></td></tr>
 <tr class="separator:aa630aebbcd5040917662e4219a2fbd5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -778,6 +781,44 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="inte
 <dl class="section return"><dt>Returns</dt><dd>returns a new created and automatically filled <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline.html">STimeline</a> object if no one exists yet </dd></dl>
 
 <p>Implemented in <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#aa49cd3da2b2e8f119157f0a7b00604d2">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab5b1b456bcd5a16f40367c2498a348a0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline_relation.html">STimelineRelation</a> org.corpus_tools.salt.common.SDocumentGraph.createTimelineRelation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_token.html">SToken</a>&#160;</td>
+          <td class="paramname"><em>token</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeSteps</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline_relation.html">STimelineRelation</a> object being contained in this <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html">SDocumentGraph</a> object, and attaches the <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_token.html">SToken</a> parameter to the document graph's timeline at the end, its start being the current end of the timeline, its end being the current end of the timeline + the time steps passed in as the second parameter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>The token to attach the timeline relation to </td></tr>
+    <tr><td class="paramname">timeSteps</td><td>The number of time steps on the timeline the token covers. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>returns the newly created <a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_timeline_relation.html">STimelineRelation</a> object </dd></dl>
+
+<p>Implemented in <a class="el" href="classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_document_graph_impl.html#a3836152c23974074ed47d97d090f97a4">org.corpus_tools.salt.common.impl.SDocumentGraphImpl</a>.</p>
 
 </div>
 </div>
@@ -1929,7 +1970,7 @@ This  additional  text  is    a     text.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>org</b></li><li class="navelem"><b>corpus_tools</b></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt.html">salt</a></li><li class="navelem"><a class="el" href="namespaceorg_1_1corpus__tools_1_1salt_1_1common.html">common</a></li><li class="navelem"><a class="el" href="interfaceorg_1_1corpus__tools_1_1salt_1_1common_1_1_s_document_graph.html">SDocumentGraph</a></li>
-    <li class="footer">Generated on Sat Jan 14 2017 22:02:02 for Salt by
+    <li class="footer">Generated on Mon Jul 2 2018 11:44:32 for Salt by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
