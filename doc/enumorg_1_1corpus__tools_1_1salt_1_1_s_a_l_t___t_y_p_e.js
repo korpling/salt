@@ -17,6 +17,7 @@ var enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e =
     [ "STEXTUAL_DS", "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#ac42982bbb8eb1538fb0a676084dd3fb9", null ],
     [ "STEXTUAL_RELATION", "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a8ce85af44d6f3ed01f0eab9d9ef3cd33", null ],
     [ "STIME_OVERLAPPING_RELATION", "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a22a45e2bf94cadac53318c7367b9f51a", null ],
+    [ "STIMELINE", "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a9c3a3d21ccdd5dd372f3d3ec74768902", null ],
     [ "STIMELINE_RELATION", "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#ab8f08b71325728c53179752dc9762b53", null ],
     [ "STOKEN", "enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a87d613c60c287d29151c4e3fc4a1fe0a", null ]
 ];
