@@ -41,6 +41,7 @@ import org.corpus_tools.salt.common.STextOverlappingRelation;
 import org.corpus_tools.salt.common.STextualDS;
 import org.corpus_tools.salt.common.STextualRelation;
 import org.corpus_tools.salt.common.STimeOverlappingRelation;
+import org.corpus_tools.salt.common.STimeline;
 import org.corpus_tools.salt.common.STimelineRelation;
 import org.corpus_tools.salt.common.SToken;
 
@@ -51,6 +52,8 @@ public enum SALT_TYPE {
 	SSEQUENTIAL_DS(SSequentialDS.class),
 	//
 	SMEDIAL_DS(SMedialDS.class),
+	//
+	STIMELINE(STimeline.class),
 	//
 	STOKEN(SToken.class),
 	//
