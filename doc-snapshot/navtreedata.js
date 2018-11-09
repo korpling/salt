@@ -8,7 +8,7 @@ var NAVTREE =
     [ "Create a Salt model", "create.html", null ],
     [ "Expanding Salt", "delegator.html", null ],
     [ "Developers section", "developers.html", "developers" ],
-    [ "Identifiers in Salt", "md__var_lib_jenkins_jobs_salt_SNAPSHOT_workspace_salt-doc_src_main_doxygen_identifier.html", null ],
+    [ "Identifiers in Salt", "md__var_lib_jenkins_workspace_salt_SNAPSHOT_salt-doc_src_main_doxygen_identifier.html", null ],
     [ "Comparing Salt models", "isomorphie.html", null ],
     [ "Notification", "notification.html", null ],
     [ "Persist and Load", "persist.html", null ],
@@ -34,7 +34,7 @@ var NAVTREEINDEX =
 "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a424c4914d1cd391f8157ad14f382250b",
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a12a385a03d9d4b7dc6cefdfd7d0d969d",
 "dev_delegator.html",
-"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_annotation_container.html#a1ec07783f9a20f5da3bff53e9617071f"
+"interfaceorg_1_1corpus__tools_1_1salt_1_1core_1_1_s_annotation_container.html#a0b8126f7c8ee5acd622cc986a0010dab"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
