@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.corpus-tools</groupId>
 	<artifactId>salt</artifactId>
@@ -219,6 +221,28 @@
 	<build>
 		<defaultGoal>clean install</defaultGoal>
 		<plugins>
+			<plugin>
+				<groupId>com.amashchenko.maven.plugin</groupId>
+				<artifactId>gitflow-maven-plugin</artifactId>
+				<version>1.11.0</version>
+				<configuration>
+					<pushRemote>true</pushRemote>
+					<preReleaseGoals>license:format notice:generate</preReleaseGoals>
+					<postReleaseGoals>-Prelease,doxygen package assembly:single deploy</postReleaseGoals>
+					<postHotfixGoals>-Prelease,doxygen package assembly:single deploy</postHotfixGoals>
+					<verbose>true</verbose>
+					<gitFlowConfig>
+						<productionBranch>master</productionBranch>
+						<developmentBranch>develop</developmentBranch>
+						<featureBranchPrefix>feature/</featureBranchPrefix>
+						<releaseBranchPrefix>release/</releaseBranchPrefix>
+						<hotfixBranchPrefix>hotfix/</hotfixBranchPrefix>
+						<supportBranchPrefix>support/</supportBranchPrefix>
+						<versionTagPrefix>pepper-</versionTagPrefix>
+						<origin>origin</origin>
+					</gitFlowConfig>
+				</configuration>
+			</plugin>
 			<!-- a plugin to clean the project when calling mvn clean (removes META-INF 
 				and OSGI-INF) -->
 			<plugin>
