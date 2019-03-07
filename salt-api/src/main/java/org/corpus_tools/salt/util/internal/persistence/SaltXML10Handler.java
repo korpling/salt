@@ -27,6 +27,7 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.SerializationUtils;
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SCorpusGraph;
@@ -397,7 +398,17 @@ public class SaltXML10Handler extends DefaultHandler2 implements SaltXML10Dictio
 			retVal = URI.createURI(value.substring(3));
 		} else if (value.startsWith("O")) {
 			byte[] rawBytes = BaseEncoding.base64().decode(value.substring(3));
-			retVal = SerializationUtils.deserialize(rawBytes);
+			try {
+				retVal = SerializationUtils.deserialize(rawBytes);
+			} catch(SerializationException ex) {
+				if(ex.getCause() instanceof ClassNotFoundException) {
+					// ignore unknown classes
+					retVal = null;
+				} else {
+					// re-throw exception
+					throw ex;
+				}
+			}
 		}
 		return (retVal);
 	}
