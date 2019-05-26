@@ -1,7 +1,0 @@
-var namespaceorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot =
-[
-    [ "DOTEdge", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_edge.html", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_edge" ],
-    [ "DOTNode", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_node.html", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_d_o_t_node" ],
-    [ "SCorpusGraphDOTWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_corpus_graph_d_o_t_writer.html", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_corpus_graph_d_o_t_writer" ],
-    [ "SDocumentGraphDOTWriter", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer.html", "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer" ]
-];

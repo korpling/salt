@@ -1,9 +1,0 @@
-var namespaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl =
-[
-    [ "GraphNotifierImpl< N extends Node, R extends Relation< N, N >, L extends Layer< N, R > >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notif807855f8f199d8836e84068b1ed6ecb1.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notif807855f8f199d8836e84068b1ed6ecb1" ],
-    [ "LabelNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_label_notifier_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_label_notifier_impl" ],
-    [ "LayerNotifierImpl< N extends Node, R extends Relation< N, N > >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_layer_notifbff953857b997355d8662947bc1cc68d.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_layer_notifbff953857b997355d8662947bc1cc68d" ],
-    [ "NodeNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_node_notifier_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_node_notifier_impl" ],
-    [ "NotifierHelper", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_notifier_helper.html", null ],
-    [ "RelationNotifierImpl< S extends Node, T extends Node >", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_relation_nob216be348cbe372a7734a86cfab5be7c.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_relation_nob216be348cbe372a7734a86cfab5be7c" ]
-];

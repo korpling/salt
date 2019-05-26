@@ -1,5 +1,0 @@
-var namespaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph =
-[
-    [ "impl", "namespaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl.html", "namespaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl" ],
-    [ "Notifier", "interfaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1_notifier.html", "interfaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1_notifier" ]
-];

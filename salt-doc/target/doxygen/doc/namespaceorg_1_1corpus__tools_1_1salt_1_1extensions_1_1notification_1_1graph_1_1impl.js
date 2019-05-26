@@ -1,9 +1,0 @@
-var namespaceorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl =
-[
-    [ "GraphNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl" ],
-    [ "LabelNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_label_notifier_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_label_notifier_impl" ],
-    [ "LayerNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_layer_notifier_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_layer_notifier_impl" ],
-    [ "NodeNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_node_notifier_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_node_notifier_impl" ],
-    [ "NotifierHelper", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_notifier_helper.html", null ],
-    [ "RelationNotifierImpl", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_relation_notifier_impl.html", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_relation_notifier_impl" ]
-];

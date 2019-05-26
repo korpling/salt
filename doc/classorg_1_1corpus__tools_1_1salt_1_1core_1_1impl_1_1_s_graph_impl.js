@@ -37,6 +37,6 @@ var classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl =
     [ "removeLabel", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#ad1ca8ac2d77021432cf8e58921a49639", null ],
     [ "setName", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a6dbb1e79d2d9c1ff5377ef231809cbcf", null ],
     [ "traverse", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a7f9ac9fb3a7b72348225776801655210", null ],
-    [ "traverse", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a1c736ce8c2fb46a24b58cc0a8668f46c", null ],
+    [ "traverse", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#a9faccc35508c525e8c474290238b1b55", null ],
     [ "name", "classorg_1_1corpus__tools_1_1salt_1_1core_1_1impl_1_1_s_graph_impl.html#ae058e06bf1f638ee3fbbc32410e60264", null ]
 ];

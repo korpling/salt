@@ -1,7 +1,0 @@
-//see: yuml.me
-
-[t1|'The']->[t2|'streets']
-[t2]->[t3|'of']
-[t3]->[s1]
-[s1]->[t5|'York']
-[s1]->[t4|'New']

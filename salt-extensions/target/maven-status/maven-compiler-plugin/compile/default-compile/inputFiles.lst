@@ -1,9 +1,0 @@
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/graph/impl/RelationNotifierImpl.java
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/graph/impl/GraphNotifierImpl.java
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/graph/impl/LabelNotifierImpl.java
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/Listener.java
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/graph/Notifier.java
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/graph/impl/NotifierHelper.java
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/graph/impl/NodeNotifierImpl.java
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/SaltNotificationFactory.java
-/var/lib/jenkins/jobs/salt_SNAPSHOT/workspace/salt-extensions/src/main/java/org/corpus_tools/salt/extensions/notification/graph/impl/LayerNotifierImpl.java

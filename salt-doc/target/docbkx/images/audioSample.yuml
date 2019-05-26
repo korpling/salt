@@ -1,8 +1,0 @@
-//yuml.me
-[audio1:SAudioDataSource|sAudioReference='...']
-[text1:STextualDS|sText='Is this ...']
-[textRel1:STextualRelation|sStart='0';sEnd='2']-> [text1:STextualDS]
-[textRel1:STextualRelation]->[t1:SToken]
-[audioRel:SAudioRelation|sStart='0.0';sEnd='0.002']-> [audio1:SAudioDataSource]
-[audioRel:SAudioRelation]->[t1:SToken]
-
