@@ -215,7 +215,7 @@ machanism. Furthermore adding an `SAnnotation` is not bound to tokens.
 Also any `SNode`, `SRelation`, `SLayer`, `SGraph` and even `SAnnotation`
 can be annotated in this way.
 
-### Spans of tokens {#sec_spans}
+### Spans of tokens
 
 A span is used to group a couple of tokens together to give them exactly
 the same annotation or to connect them as a bunch with a 3rd node at
@@ -331,7 +331,7 @@ in the same way as nodes and relations can be.
 [figure\_title](#fig_sLayers) shows the relationship between layers
 nodes and relations in Salt.
 
-### Multiple primary texts {#sec_multipleTexts}
+### Multiple primary texts 
 
 On the example of parallel texts
 
@@ -398,7 +398,7 @@ tokenizations as you like. For a well-arranged model, you can group all
 tokens and the primary text belonging to one language into one layer.
 Then you can set `SLayer.setName()` to the name of the language.
 
-### Time management {#sec_time}
+### Time management
 
 On the example of dialogue data
 
@@ -445,7 +445,7 @@ points-of-time (like 1,2,3,4, \...), it is possible to set an unbound
 number of tokens in relation to the common timeline. But note, in each
 document-structure there can be only one `STimeline` object.
 
-### Ordering tokens {#sec_order}
+### Ordering tokens
 
 In this section we address the order of tokens in one or multiple texts.
 In a single ordinary primary text, the order might not be an issue,
@@ -497,7 +497,7 @@ tokenization of characters or letters and one by word forms. Here it may
 make sense, to create two pathes, one for the characters and one for the
 word forms as shown in [figure\_title](#fig_order_path2).
 
-### Audio data {#sec_audioData}
+### Audio data
 
 Next to pure textual data like news paper articles, essays, internet
 chats etc. linguistics is also interested in spoken data like dialogues
