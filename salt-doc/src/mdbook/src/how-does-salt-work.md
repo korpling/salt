@@ -2,11 +2,11 @@
 
 This section addresses the single components of Salt and the linguistic
 aspects they are covering. It is divided into two parts, the
-corpus-structure and the document-stcuture. The corpus-structure is a
+corpus-structure and the document-structure. The corpus-structure is a
 grouping mechanism, to organize a corpus, whereas the document-structure
 covers the \'real\' linguistic part.
 
-## Corpus-structure {#sec_corpusStructure}
+## Corpus-structure
 
 A corpus-structure structures an entire corpus into smaller logical
 units. Such units are a corpus, a subcorpus and a document. Often the
@@ -23,13 +23,11 @@ in parallel. Furthermore this will also speed up automatic processing,
 since data fits easier into main memory and indexes on them can be kept
 small.
 
-As a quick reference
-[figure\_title](#fig_inheritanceGraph_corpusStructure) and
-[table\_title](#tab_corpus_strcuture) in the appendix give a short
+As a quick reference, the [appendix](appendix.md#corpus-structure) gives a short
 description and an overview of the inheritance hierarchy of the elements
 being part of the corpus-structure.
 
-### Corpus {#sec_corpus}
+### Corpus
 
 As mentioned above, a corpus is an element to organize your data.
 Similar to a folder in a filesystem, it groups the underlying parts
@@ -46,7 +44,7 @@ and so on. In Salt, a corpus is represented by the `SCorpus` element.
 Two `SCorpus` objects can be set into a \"super corpus sub
 corpus\"-relation by connecting them with a `SCorpusRelation` object.
 
-### Document {#sec_document}
+### Document
 
 A document is a logical partition which represents the end point of the
 corpus-structure hierarchy. Partitioning data means that no relations
@@ -69,14 +67,18 @@ can be grouped to a corpus or subcorpus by attaching it to a `SCorpus`.
 To mark a `SDocument` as being part of a `SCorpus`, just connect them
 via a `SDocumentCorpusRelation`.
 
-### Corpus graph {#sec_corpusGraph}
+### Corpus graph
 
 Since Salt is graph based over and over, the corpus-structure is
 represented as a graph, called the `SCorpusGraph`. This graph realizes a
 directed tree structure, whose nodes are corpora (`SCorpus`) and
-documents (`SDocument`) as shown in
-[figure\_title](#fig_corpusStructure). For those who prefer samples over
-UML diagrams, [figure\_title](#fig_sample_corpusStructure) shows a
+documents (`SDocument`) as shown in the following figure.
+
+![Elements being part of the corpus-structure (class
+diagram)](images/model_corpusGraph.png)
+
+For those who prefer samples over
+UML diagrams, the following figure shows a
 corpus-structure containing three `SCorpus` objects *superCorpus*,
 *subCorpus1* and *subCorpus2* and four `SDocument` objects *doc1*,
 *doc2*, *doc3* and *doc4*. Two objects of type `SCorpusRelation` connect
@@ -85,7 +87,10 @@ type `SDocumentCorpusRelation` connect the sub corpus subCorpus1 with
 documents *doc1* and *doc2* and sub corpus *subCorpus2* with documents
 *doc3* and *doc4*.
 
-### Meta annotations {#sec_metaAnnotation}
+
+![corpus-structure sample (simplified object diagram)](images/sample_corpusStructure.png)
+
+### Meta annotations
 
 Meta annotations are very useful for corpora to document, for instance,
 the creation process or the aim of the corpus. These information are
@@ -105,7 +110,7 @@ annotation to a document or a corpus node. But since a meta annotation
 is just a label of a specific type, you are free to add it to each node
 or relation in the Salt model.
 
-## Document-structure {#sec_documentStructure}
+## Document-structure
 
 In contrast to the corpus-structure, the document-structure covers the
 \"real\" linguistic data, which means primary data, linguistic
@@ -118,10 +123,7 @@ following. All these nodes and relations are contained in a graph, the
 `SDocumentGraph`, which is the model element representing the
 document-structure.
 
-As a quick reference
-[figure\_title](#fig_inheritanceGraph_document_structure_nodes),
-[figure\_title](#fig_inheritanceGraph_document_structure_relations) and
-[table\_title](#tab_document_strcuture) in the appendix give a short
+As a quick reference in the [appendix](appendix.md#document-structure) gives a short
 description and an overview of the inheritance hierarchy of the elements
 being part of the document-structure.
 
@@ -142,16 +144,16 @@ used as a placeholder for a primary date. The real data itself is added
 to that node with a label having the name `data` and the namespace
 *salt*. The same goes for each subtype of `SSequentialDS`, so for
 instance for the type `STextualDS` which represents primary texts in
-Salt, see [figure\_title](#fig_primaryData).
+Salt, see the following figure.
 
 ![Primary data and primary text in Salt (class/object
-diagram)](images/model_primaryData.png){width="200"}
+diagram)](images/model_primaryData.png)
 
-Regarding [figure\_title](#fig_primaryData) the primary text like \'*Is
-this example more complicated than it appears to be?\'* is stored as the
+The actual primary text (like for example \'*Is
+this example more complicated than it appears to be?\'*) is stored as the
 value of the shown `SFeature`.
 
-### Tokenization {#sec_tokenization}
+### Tokenization
 
 In general, it is not totally clear in linguistics what a token is. In
 most interpretations the term is used synonymously with \'word\' (in the
@@ -170,15 +172,24 @@ object itself does not contain any information about the overlapped
 primary data. In case of the primary data being text, this is realized
 with a specific type of `SRelation`, the `STextualRelation`. A
 `STextualRelation` links a primary text (as source) with a token (as
-target), see [figure\_title](#fig_model_token). A `STextualRelation`
+target).
+
+![Representation of tokens in Salt via SToken and
+STextualRelation (class diagram)](images/model_token.png)
+
+A `STextualRelation`
 further contains two labels (or more precisely `SFeature` objects)
 representing the start and the end position determining the interval of
 the primary text overlapped by the token. These labels are of type
-`SFeature` as shown in [figure\_title](#fig_model_token_features).
+`SFeature`.
 
-Finally, [figure\_title](#fig_sample_tokenization) gives an example of a
-tokenization of the primary text \'*Is this example more complicated
-than it appears to be?*\' modeled in Salt.
+![Start and end position for text intervals realized with
+SFeature (f1 and f2) (object diagram)](images/model_token_features.png)
+ 
+E.g. a tokenization of the primary text \'*Is this example more complicated
+than it appears to be?*\' can be modeled in Salt as follows.
+
+![A sample tokenization (simplified object diagram)](images/sample_tokenization.png)
 
 ### Annotations
 
@@ -583,134 +594,6 @@ fragment for the unified `name` of that object. For instance token
 *salt:/corp1/doc1\#tok1*. A second token also having the name *tok1*
 gets the id: *salt:/corp1/doc1\#tok1\_1*.
 
-# Appendix
-
-# Corpus-structure {#app_corpusStructure}
-
-  -----------------------------------------------------------------------
-  element                   short description
-  ------------------------- ---------------------------------------------
-  SCorpusGraph              A graph representing the corpus-structure
-                            itself, see [Corpus graph](#sec_corpusGraph).
-
-  *SNode*                   An abstract node, from which all other nodes
-                            are derived from, see [What is
-                            Salt?](#sec_salt).
-
-  SCorpus                   A container for documents or other corpora,
-                            see [Corpus](#sec_corpus).
-
-  SDocument                 A container for primary data and annotations,
-                            see [Document](#sec_document).
-
-  *SRelation*               An abstract relation, from which all other
-                            relations are derived from, see [What is
-                            Salt?](#sec_salt).
-
-  SCorpusRelation           Connects a super corpus with a sub corpus,
-                            see [Corpus-structure](#sec_corpusStructure).
-
-  SCorpusDocumentRelation   Connects a corpus with a document, see
-                            [Corpus-structure](#sec_corpusStructure).
-  -----------------------------------------------------------------------
-
-  : Overview over all elements of corpus-structure
-
-# Document-structure
-
-  --------------------------------------------------------------------------
-  element                      short description
-  ---------------------------- ---------------------------------------------
-  SDocumentGraph               A graph representing the document-structure
-                               itself, see [Corpus graph](#sec_corpusGraph).
-
-  *SNode*                      An abstract node, from which all other nodes
-                               are derived from, see [What is
-                               Salt?](#sec_salt).
-
-  *SSequentialDS*              An abstract node used to model sequential
-                               datasources. Sequential here means, that you
-                               can address an interval of the datasource by
-                               determing a start and a end position.
-
-  *SStructuredNode*            An abstract node which is used for technical
-                               purposes, to constraint the kind of nodes
-                               being target of for instance
-                               SDominanceRelations, SPointingRelations.
-
-  STextualDS                   A node representing primary texts, see
-                               [Primary data](#sec_primData).
-
-  SMedialDS                    A node representing audio data, see [Audio
-                               data](#sec_audioData).
-
-  STimeline                    A common timeline for all objects in the
-                               document-structure, for instance to model
-                               time in dialogue data. There could be only
-                               one timeline object for one
-                               document-structure. See [Time
-                               management](#sec_time).
-
-  SToken                       Smallest annotatable unit of primary data,
-                               for instance a character, syllable, word
-                               etc., see [Tokenization](#sec_tokenization).
-
-  SSpan                        A node to model sets in a graph, to collect a
-                               number of tokens and to annotate them at
-                               once, see [Spans of tokens](#sec_spans).
-
-  SStructure                   A node to model hierarchies, for instance for
-                               syntax trees, see
-                               [Hierarchies](#sec_hierarchies).
-
-  *SRelation*                  An abstract relation, from which all other
-                               relations are derived from, see [What is
-                               Salt?](#sec_salt).
-
-  *SSequentialRelation*        An abstract relation which provides to
-                               address an interval (start and end value) in
-                               a data source, see [Time
-                               management](#sec_time).
-
-  *STimeOverlappingRelation*   An abstract relation marking the implementing
-                               relation to be a relation, giving the
-                               overlapped time interval from its target to
-                               its source (a kind of a contrary
-                               inheritance).
-
-  *STextOverlappingRelation*   An abstract relation marking the implementing
-                               relation to be a relation, giving the
-                               overlapped textual interval from its target
-                               to its source (a kind of a contrary
-                               inheritance).
-
-  STimelineRelation            A relation to connect a token with the common
-                               timeline, see [Time management](#sec_time).
-
-  STextualRelation             A relation to connect a token with the a
-                               primary text, see [Primary
-                               data](#sec_primData).
-
-  SMedialRelation              A relation to connect a token with the a
-                               audio data object, see [Audio
-                               data](#sec_audioData).
-
-  SSpanningRelation            A relation used to create a set in a graph,
-                               this is used to connect a token with a span
-                               object, see [Spans of tokens](#sec_spans).
-
-  SDominanceRelation           A relation to represent hierarchies, see
-                               [Hierarchies](#sec_hierarchies).
-
-  SPointingRelation            A loose relation to connect each kind of node
-                               with another one, see [Loose
-                               relation](#sec_pointingRelation).
-
-  SOrderRelation               A relation to create an explicit order of
-                               tokens, see [Ordering tokens](#sec_order).
-  --------------------------------------------------------------------------
-
-  : Overview over all elements of document-structure
 
 
 [^8]: Each primary text is is stored in the attribute `STextualDS.text`,
