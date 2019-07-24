@@ -58,15 +58,15 @@ Since relations do not always need an attribute-value pair, the `sType`
 attribute for relations is a very useful mechanism for linguistic data.
 Sometimes it is enough to flag a relation being a specific type. If this
 sounds too abstract for now don\'t worry we give detailed examples in
-[Loose relation](how-does-salt-work.md#loose-relation) and
-[Hierarchies](how-does-salt-work.md#hierarchies). 
+[Loose relation](how-does-salt-work/document-structure.md#loose-relation) and
+[Hierarchies](how-does-salt-work/document-structure.md#hierarchies). 
 The next section describes labels as model elements, which in Salt is called `SLabel`, and
 the connection between such a label and the other model elements.
 
 ## Annotations and label mechanism
 
 Generally spoken, an annotation is an interpretation of primary data
-(see [Primary data](how-does-salt-work.md#primary-data)). 
+(see [Primary data](how-does-salt-work/document-structure.md#primary-data)). 
 In Salt, we differentiate this
 abstract form of annotation into a \"structural\" and a \"semantic\"
 part. Imagine for instance a syntax tree. In Salt, the tree itself,
@@ -105,7 +105,7 @@ like \'having the color red\'[^6] to it. Unfortunately the label
 normally will not need to work with it, when using the Salt API. The
 `SFeature` is a mechanism to enhance our graph elements with class
 attributes[^7]. We will explain this in more detail in
-[Annotations](how-does-salt-work.md#annotations). We just mention it here since we have
+[Annotations](how-does-salt-work/document-structure.md#annotations). We just mention it here since we have
 used the `SFeature` mechanism to model the class attribute
 `SRelation.sType`.
 
