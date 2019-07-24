@@ -204,7 +204,7 @@ dependency, you should use the `sType` attribute which is available for
 every `SRelation`. Like all the other relations, `SPointingRelation` can
 be annotated to express some linguistic semantics.
 
-## Layer {#sec_layer}
+## Layer
 
 A layer is a simple grouping mechanism for bundling nodes and relations
 to a set. In graph theory, a layer is equivalent to a subgraph. Such a
@@ -226,8 +226,10 @@ instance a syntactic layer can contain a morphological layer. This makes
 all tokens being part of the syntactic layer as well. A layer is
 represented with the element `SLayer`, has a name and can be annotated
 in the same way as nodes and relations can be.
-[figure\_title](#fig_sLayers) shows the relationship between layers
+The next figure shows the relationship between layers
 nodes and relations in Salt.
+
+![SLayer as a subgraph (class diagram)](../images/sLayers.png)
 
 ## Multiple primary texts 
 
