@@ -461,12 +461,12 @@ common timeline, you just need a `STimeRelation` having the token as its
 source and the timeline as its target. For more information on that see
 [Time management](#time-management).
 
-## Names and Ids {#sec_id}
+## Names and Ids
 
 In Salt each node, relation or layer can have a name. Each of these
 objects contains a field `name` (which is a String value). The `name` is
 added using the `SFeature` mechanism (see
-[Annotations](#sec_annotation)). In Salt, there are no restrictions on
+[Annotations](#annotations)). In Salt, there are no restrictions on
 that name, it even does not have to be unique. Because of that, the
 `name` could not reliably be used to identify exact a single object in
 Salt.
@@ -480,28 +480,22 @@ using segments for single Salt objects. Such a segment is given by the
 `name` of an object, if that name is unique. If not it is extended by an
 artificial counter to make it unique. In the corpus-structure, the
 `Identifier` represents the path from the root corpus to a specific
-object (`SCorpus` or `SDocument`). For instance imagine the
-corpus-structure shown in [figure\_title](#fig_sample_selementId) This
-corpus-structure results in the following `Identifier` objects:
+object (`SCorpus` or `SDocument`). For instance imagine the following
+corpus-structure.
 
-  -----------------------------------------------------------------------
-  salt:/corp1
+![A sample corpus-structure containing 3 corpora and 4 documents (simplified object diagram)](../images/sample_corpusStructure_id.png)
 
-  salt:/corp1/corp2
+This corpus-structure results in the following `Identifier` objects:
 
-  salt:/corp1/corp2/doc1
-
-  salt:/corp1/corp2/doc2
-
-  salt:/corp1/corp3
-
-  salt:/corp1/corp3/doc3
-
-  salt:/corp1/corp3/doc4
-  -----------------------------------------------------------------------
-
-  : `Identifier`s corresponding to
-  [figure\_title](#fig_sample_selementId).
+| Identifier  |
+| ----------- |
+| salt:/corp1 |
+| salt:/corp1/corp2 |
+| salt:/corp1/corp2/doc1 |
+| salt:/corp1/corp2/doc2 |
+| salt:/corp1/corp3 |
+| salt:/corp1/corp3/doc3 |
+| salt:/corp1/corp3/doc4 |
 
 An `Identifier` corresponding to an object which is contained in a
 document-structure, is the `Identifier` object of the document plus a
