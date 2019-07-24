@@ -84,18 +84,27 @@ than it appears to be?*\' can be modeled in Salt as follows.
 In the last sections we showed how to model the \"structural\" part of
 annotations (we have often called it placeholder). Now we want to give
 an impression of how to do the \"semantic\" part. Therefore we pick up
-the sample used in [Tokenization](#sec_tokenization) and especially its
+the sample used in [Tokenization](#tokenization) and especially its
 tokenization. We want to enhance the tokenized words with part-of-speech
 annotations. We already introduced the labeling mechanism in
-[Annotations and label mechanism](#sec_labeling). Now we want to make
+[Annotations and label mechanism](../what-is-a-salt.html#annotations-and-label-mechanism). Now we want to make
 use of it by adding a `SAnnotation` object to each token having the
 `name` \'*pos*\' and the corresponding part-of-speech value as `value`.
-[figure\_title](#fig_sample_token_annotation) shows the annotation for
-the previous used tokenization sample.Each of these annotations are
-reducible to labels of type `SAnnotation` and
-[figure\_title](#fig_sample_token_annotation_pos) exemplifies the
-annotation of token t~1~ covering the text \'*is*\' with a
-part-of-speech annotation. We here exemplified the creation of
+The following figure shows the annotation for
+the previous used tokenization sample.
+
+![Part-of-speech annotations of sample tokenization
+(simplified object diagram)](../images/sample_tokenization_pos.png)
+
+Each of these annotations are
+reducible to labels of type `SAnnotation` and the next figure exemplifies the
+annotation of token \\( t_1 \\) covering the text \'*is*\' with a
+part-of-speech annotation.
+
+![Part-of-speech annotation 'VBZ' for token t1 (object
+diagram)](../images/sample_pos_annotation.png)
+
+We here exemplified the creation of
 annotations by annotating tokens with part-of-speech annotations. But
 remember, that Salt is not bound to a specific set of annotations or
 tagsets. This means, you can use any kind of annotations with the same
@@ -113,16 +122,21 @@ relations. Therefore Salt provides the node type `SSpan` and the
 relation type `SSpanningRelation`. A `SSpan` object represents the span
 itself and for instance could be annotated or linked with other nodes.
 To realize the containment of tokens in a span, each token is connected
-with the span with a separate `SSpanningRelation` object, see
-[figure\_title](#fig_model_span). A `SSpanningRelation` always has a
+with the span with a separate `SSpanningRelation` object, see the following figure. 
+A `SSpanningRelation` always has a
 span as source and a token as target.
 
+![Relation of spans SSpanningRelation (class diagram)](../images/model_span.png)
+
 Imagine a piece of a primary text like \'*New York*\' and two tokens
-*t~1~* (representing \'*New*\') and *t~2~* (representing \'*York*\').
-For annotating them as an entity, you can create a span *s~1~* and
-connect *t~1~* with *s~1~* via one `SSpanningRelation` *r~1~* and *t~2~*
-with *s~1~* via a second `SSpanningRelation` *r~2~* as shown in
-[figure\_title](#fig_sample_span). Since a `SSpan` is just a node, it
+\\( t_1 \\) (representing \'*New*\') and \\( t_2 \\) (representing \'*York*\').
+For annotating them as an entity, you can create a span \\( s_1 \\) and
+connect \\( t_1 \\)  with \\( s_1 \\)  via one `SSpanningRelation` \\( r_1 \\)  and \\( t_2 \\) 
+with \\( s_1 \\)  via a second `SSpanningRelation` \\( r_2 \\)  as shown in the following figure.
+
+![](../images/sample_span.png)
+
+Since a `SSpan` is just a node, it
 can be further annotated for instance with an annotation \'*entity=
 city*\'. Spans can even be very helpful to annotate bigger parts of the
 primary text, for instance to annotate information structure or foreign
