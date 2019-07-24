@@ -307,7 +307,7 @@ it mean, time management? Remember, Salt is poor in semantics, so time
 management does not address the chronological progression of a text like
 \"**Before** Bart went to school, he stood up.\"[^11] With time
 management we mean the fact of ordering tokens in a primary text along
-their temporal occurance. This often becomes necessary when dealing with
+their temporal occurrence. This often becomes necessary when dealing with
 multiple texts. In Salt this is handled by introducing a global[^12]
 unique timeline which is connected with each token.
 
@@ -318,29 +318,37 @@ spoken data is mostly an audio or video stream. Since Salt was developed
 for covering textual data, for now, we expect that there is also a
 textual representation of the audio or video data. But nevertheless Salt
 also allows to represent such data. This mechanism is addressed in
-detail in [Audio data](#sec_audioData). Second, in many cases we do not
+detail in [Audio data](#audio-data). Second, in many cases we do not
 have one continuous text, since there are multiple speakers, which might
 speak at the same time. We recommend modelling each text, belonging to
 one speaker, in a separate `STextualDS` object[^13]. To give a more
 concrete example, imagine the following two texts produced by speakers
-\'*spk1*\' and \'*spk2*\': This sample shows the tokenized two texts and
+\'*spk1*\' and \'*spk2*\' with the corresponding timeline '*tml*': 
+
+![Two speakers ('spk1' corresponding timeline (tml)](../images/sample_timeline_table.png)
+
+This sample shows the tokenized two texts and
 the correspondance of each token to an interval in the timeline. For
-instance the token \'*Is*\' (*t~1~*) of speaker \'*spk1*\' corresponds
+instance the token \'*Is*\' (\\( t_1 \\)) of speaker \'*spk1*\' corresponds
 to an interval starting at 0 and ending at 1[^14]. Since we are in a
 graph world, this needs to be modeled by nodes, relations and labels.
 Therefore, the `STimeline` is a subtype of `SNode` and the
 `STimelineRelation` is a subtype of `SRelation` having two attributes
 (`SFeature` objects) `start` and `end` determining the start and end of
-the time interval. This is shown in [figure\_title](#fig_time) This
-mechanism is quite simple, since it is the same mechanism that connects
+the time interval. 
+
+![Token 'Is' related to common timeline (object
+diagram)](../images/sample_timeline.png)
+
+This mechanism is quite simple, since it is the same mechanism that connects
 a token to a primary text. It might become more interesting in case of
 the time interval between 7 and 9. In that interval the text of *spk1*
-covers the two tokens *t~spk1\_8~* (\'*appears*\')and *t~spk1\_9~*
-(\'*to*\'), and the text of *spk2* just covers the token *t~spk2\_1~*
+covers the two tokens \\( t_{spk1\_8} \\) (\'*appears*\')and \\( t_{spk1\_9} \\)
+(\'*to*\'), and the text of *spk2* just covers the token \\( t_{spk2\_1} \\)
 (\'*Uhm*\'). But modelling this is also very straight forward, because
-you can connect them via three `STimeRelation` objects: 1) *t~spk1\_8~*
-with the interval \[7, 8\], 2) *t~spk1\_9~* with the interval \[8, 9\]
-and 3) *t~spk2\_1~* with the interval \[7, 9\]. With these abstract
+you can connect them via three `STimeRelation` objects: 1) \\( t_{spk1\_8} \\)
+with the interval \[7, 8\], 2) \\( t_{spk1\_9} \\) with the interval \[8, 9\]
+and 3) \\( t_{spk2\_1} \\) with the interval \[7, 9\]. With these abstract
 points-of-time (like 1,2,3,4, \...), it is possible to set an unbound
 number of tokens in relation to the common timeline. But note, in each
 document-structure there can be only one `STimeline` object.
