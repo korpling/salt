@@ -244,8 +244,8 @@ Salt the number of primary texts (element `STextualDS`) or primary data
 
 We want to demonstrate the use of multiple texts by creating a parallel
 corpus for the languages English and German. Demonstrations how to model
-dialogue data please find in [Time management](#sec_time) and [Ordering
-tokens](#sec_order). Imagine the primary text \'*Is this example more
+dialogue data please find in [Time management](#time-management) and [Ordering
+tokens](#ordering-tokens). Imagine the primary text \'*Is this example more
 complicated than it appears to be?\'* and its German counterpart \'*Ist
 dieses Beispiel komplizierter als es zu sein scheint?*\'. Creating two
 `STextualDs` objects \'*text1*\' and \'*text2*\' each containing one of
@@ -264,26 +264,26 @@ we also have one case, where the two English words \'*more
 complicated*\' are translated to a single German word
 \'*komplizierter*\'.
 
-To bring two tokens for instance *t~1e~* and *t~1g~*[^10] in relation to
-each other, you can create a `SPointingRelation` *r~1~* which\'s source
-is *t~1e~* and target is *t~1g~*. Now they are connected, but more in a
+To bring two tokens for instance \\( t_{1e} \\) and \\( t_{1g} \\)[^10] in relation to
+each other, you can create a `SPointingRelation` \\( r_1 \\) which\'s source
+is \\( t_{1e} \\) and target is \\( t_{1g} \\). Now they are connected, but more in a
 technical than in a semantic sense. To add the linguistic meaning to
 that relation, you can use the `sType` attribute and add for instance
 the type \'`translation`\'. For such a sample, our linguistic intention
-to determine that *t~1e~* is the translation of *t~1g~* and even the way
+to determine that \\( t_{1e} \\) is the translation of \\( t_{1g} \\) and even the way
 around, the graph structure differs in detail. As our graph is a
 directed graph, we do not really have such a bidirectional relation.
 Depending on the interpretation of the corpus, it might be useful to
-create a second relation having *t~1g~* as source and *t~1e~* as target
+create a second relation having \\( t_{1g} \\) as source and \\( t_{1e} \\) as target
 and to mark both relations as being either \'*trans\_en\_de*\' or
 \'*trans\_de\_en*\'.
 
-Now coming to the more complex case of aligning the tokens *t~4e~*
-(\'*more*\'), *t~5e~*(\'*complicated*\') with *t~4g~*
+Now coming to the more complex case of aligning the tokens \\( t_{4e} \\)
+(\'*more*\'), \\( t_{5e} \\)(\'*complicated*\') with \\( t_{4g} \\)
 (\'*komplizierter*\'). To realize such an 1:n translation, we recommend
-using a span. With a span *s~1e~* you can group the tokens *t~4e~* and
-*t~5e~*. This allows to use *s~1e~* as source of the `SPointingRelation`
-and the token *t~4g~* as its target.
+using a span. With a span \\( s_{1e} \\) you can group the tokens \\( t_{4e} \\) and
+\\( t_{5e} \\). This allows to use \\( s_{1e} \\) as source of the `SPointingRelation`
+and the token \\( t_{4g} \\) as its target.
 
 If your individual case is even more complicated and needs to realize a
 n:m translation, just use spans on both sides. Group the tokens of the
