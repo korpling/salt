@@ -11,7 +11,7 @@ following. All these nodes and relations are contained in a graph, the
 `SDocumentGraph`, which is the model element representing the
 document-structure.
 
-As a quick reference in the [appendix](appendix.md#document-structure) gives a short
+As a quick reference in the [appendix](../appendix.md#document-structure) gives a short
 description and an overview of the inheritance hierarchy of the elements
 being part of the document-structure.
 
@@ -35,7 +35,7 @@ instance for the type `STextualDS` which represents primary texts in
 Salt, see the following figure.
 
 ![Primary data and primary text in Salt (class/object
-diagram)](images/model_primaryData.png)
+diagram)](../images/model_primaryData.png)
 
 The actual primary text (like for example \'*Is
 this example more complicated than it appears to be?\'*) is stored as the
@@ -63,7 +63,7 @@ with a specific type of `SRelation`, the `STextualRelation`. A
 target).
 
 ![Representation of tokens in Salt via SToken and
-STextualRelation (class diagram)](images/model_token.png)
+STextualRelation (class diagram)](../images/model_token.png)
 
 A `STextualRelation`
 further contains two labels (or more precisely `SFeature` objects)
@@ -72,12 +72,12 @@ the primary text overlapped by the token. These labels are of type
 `SFeature`.
 
 ![Start and end position for text intervals realized with
-SFeature (f1 and f2) (object diagram)](images/model_token_features.png)
+SFeature (f1 and f2) (object diagram)](../images/model_token_features.png)
  
 E.g. a tokenization of the primary text \'*Is this example more complicated
 than it appears to be?*\' can be modeled in Salt as follows.
 
-![A sample tokenization (simplified object diagram)](images/sample_tokenization.png)
+![A sample tokenization (simplified object diagram)](../images/sample_tokenization.png)
 
 ## Annotations
 
@@ -147,7 +147,7 @@ tokenization.
 
 ![Hierarchies in Salt are modeled with the elements `SStructure` and
 `SDominanceRelation` (class
-diagram)](images/model_hierarchies.png){width="100"}
+diagram)](../images/model_hierarchies.png){width="100"}
 
 The meaning of the type `SDominanceRelation` is a part-of relation. In
 contrast to the `SSpan` and the `SSpanningRelation`, a `SStructure` is
@@ -161,10 +161,10 @@ is, together with *t~3~*, dominated by structure *s~2~*, see
 [figure\_title](#fig_sample_hierarchie2).
 
 ![Syntax tree (t~3~ directly dominated by
-s~1~)](images/sample_hierarchies1.png){width="100"}
+s~1~)](../images/sample_hierarchies1.png){width="100"}
 
 ![Syntax tree (t~3~ indirectly dominated by
-s~1~)](images/sample_hierarchies2.png){width="100"}
+s~1~)](../images/sample_hierarchies2.png){width="100"}
 
 ## Loose relation
 

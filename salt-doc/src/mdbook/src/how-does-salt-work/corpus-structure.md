@@ -15,7 +15,7 @@ in parallel. Furthermore this will also speed up automatic processing,
 since data fits easier into main memory and indexes on them can be kept
 small.
 
-As a quick reference, the [appendix](appendix.md#corpus-structure) gives a short
+As a quick reference, the [appendix](../appendix.md#corpus-structure) gives a short
 description and an overview of the inheritance hierarchy of the elements
 being part of the corpus-structure.
 
