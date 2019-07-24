@@ -155,30 +155,26 @@ sense. This means, they consist of nodes and relations and are therefore
 easy to model in Salt. Salt offers a specific type of node, the
 `SStructure`, and a specific type of relation, the `SDominanceRelation`.
 The source of an `SDominanceRelation` could be a `SToken`, `SSpan` or
-even a `SStructure` as shown in [figure\_title](#fig_model_hierarchie).
+even a `SStructure` as shown in the following figure.
 The unit of both elements enables to create unbound hierarchies above a
 tokenization.
 
 ![Hierarchies in Salt are modeled with the elements `SStructure` and
 `SDominanceRelation` (class
-diagram)](../images/model_hierarchies.png){width="100"}
+diagram)](../images/model_hierarchies.png)
 
 The meaning of the type `SDominanceRelation` is a part-of relation. In
 contrast to the `SSpan` and the `SSpanningRelation`, a `SStructure` is
 not just a placeholder for a bunch of `SToken` objects, it is a proper
 element itself. The same goes for `SDominanceRelation` objects. For
 instance, in many cases it makes a linguistic difference whether tokens
-*t~1~*, *t~2~* and *t~3~* are directly dominated by a structure *s~1~*
-or whether *t~1~* and *t~2~* are dominated by a structure *s~2~* which
-is, together with *t~3~*, dominated by structure *s~2~*, see
-[figure\_title](#fig_sample_hierarchie1) and
-[figure\_title](#fig_sample_hierarchie2).
+\\( t_1 \\), \\( t_2 \\) and \\( t_3 \\) are directly dominated by a structure \\( s_1 \\)
+or whether \\( t_1 \\) and \\( t_2 \\) are dominated by a structure \\( s_2 \\) which
+is, together with \\( t_3 \\), dominated by structure \\( s_2s \\)
 
-![Syntax tree (t~3~ directly dominated by
-s~1~)](../images/sample_hierarchies1.png){width="100"}
-
-![Syntax tree (t~3~ indirectly dominated by
-s~1~)](../images/sample_hierarchies2.png){width="100"}
+![Syntax tree (t3 directly dominated by
+s1)](../images/sample_hierarchies1.png) ![Syntax tree (t3 indirectly dominated by
+s1)](../images/sample_hierarchies2.png)
 
 ## Loose relation
 
