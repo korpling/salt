@@ -188,16 +188,16 @@ instance, this could be very helpful for a dependency analysis or
 coreferential chains etc. .
 
 To give an example, imagine the text \'*John was a big man \... he
-always had to move his head*\', where \'*John*\' (token *t~1~*) and
-\'*he*\' (token *t~i~*) refer to the same entity. To express that in
+always had to move his head*\', where \'*John*\' (token \\( t_1 \\)) and
+\'*he*\' (token \\( t_i \\)) refer to the same entity. To express that in
 Salt, you can create a `SPoiningRelation` object having the `sSource`
-*t~1~* and the `sTarget` *t~i~*, or the other way around. Now let\'s
+\\( t_1 \\) and the `sTarget` \\( t_i \\), or the other way around. Now let\'s
 extend this example and imagine the text \'*John Doe \... he*\', with
-the tokens *t~1~* (\'*John*\'), *t~2~* (\'*Doe*\') and *t~i~*
+the tokens \\( t_1 \\) (\'*John*\'), \\( t_2 \\) (\'*Doe*\') and \\( t_i \\)
 (\'*he*\'). In this case, we want to set \'*John Doe*\' as a whole in
 relation to \'*he*\'. This is possible by creating a `SSpan` object
-*s~1~* containing *t~1~* and *t~2~* and relating the token *t~i~* via a
-`SPointingRelation` object to *s~1~*.
+\\( s_1 \\) containing \\( t_1 \\) and \\( t_2 \\) and relating the token \\( t_i \\) via a
+`SPointingRelation` object to \\( s_1 \\).
 
 To determine a `SPointingRelation` being a coreferential relation or a
 dependency, you should use the `sType` attribute which is available for
