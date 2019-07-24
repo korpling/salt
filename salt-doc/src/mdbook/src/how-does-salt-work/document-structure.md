@@ -423,8 +423,11 @@ contains a URI referring to an audio file. With an object of type
 `SMedialRelation`, we now can connect such audio data with a token. To
 address a range in the entire audio stream, the element
 `SMedialRelation` contains the fields `start` and `end` to address the
-beginning and the end of that range as shown in
-[figure\_title](#fig_sAudioData). For instance to address a range
+beginning and the end of that range.
+
+![Audio data in Salt (class diagram)](../images/sAudioData.png)
+
+For instance to address a range
 beginning at 00:00:00 and ending 00:00:01. Since one second could be
 very long for spoken data, the start and end value is a very fine
 granular floating point number with a precision of 64-bit IEEE 754.[^16]
@@ -434,7 +437,10 @@ it is necessary to connect a token with first the audio data, second the
 primary text and eventually third the timeline. Imagine the primary text
 \'*Is this example more complicated than it appears to be?*\', which is
 tokenized by words and a corresponding audio file.
-[figure\_title](#fig_audioSample) shows the relation of the token *tok1*
+
+![A sample of audio data in combination with primary text (object diagram)](../images/audioSample.png)
+
+This figure shows the relation of the token *tok1*
 (just as a sample), the primary text *text1* and the audio date *audio1*
 via the `STextualRelation` object *textRel1* and the `SMedialRelation`
 *sAudioRel1*.
@@ -453,7 +459,7 @@ each speaker *audio1* and *audio2* and a corresponding transcription to
 each audio recording *text1* and *text2*. To connect the tokens with the
 common timeline, you just need a `STimeRelation` having the token as its
 source and the timeline as its target. For more information on that see
-[Time management](#sec_time).
+[Time management](#time-management).
 
 ## Names and Ids {#sec_id}
 
