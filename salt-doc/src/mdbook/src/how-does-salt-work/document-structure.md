@@ -507,7 +507,7 @@ gets the id: *salt:/corp1/doc1\#tok1\_1*.
 
 
 [^8]: Each primary text is is stored in the attribute `STextualDS.text`,
-    see [Primary data](#sec_primData)
+    see [Primary data](#primary-data)
 
 [^9]: By the way what is a pity.
 
@@ -518,7 +518,7 @@ gets the id: *salt:/corp1/doc1\#tok1\_1*.
 
 [^12]: Global here means global for one document-structure.
 
-[^13]: In section [Multiple primary texts](#sec_multipleTexts) we
+[^13]: In section [Multiple primary texts](#multiple-primary-texts) we
     discussed the mechanism to model multiple primary texts in Salt.
 
 [^14]: In Salt the interval borders are also known as point-of-time.
