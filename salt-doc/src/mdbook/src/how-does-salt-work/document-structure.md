@@ -337,8 +337,7 @@ Therefore, the `STimeline` is a subtype of `SNode` and the
 (`SFeature` objects) `start` and `end` determining the start and end of
 the time interval. 
 
-![Token 'Is' related to common timeline (object
-diagram)](../images/sample_timeline.png)
+![Token 'Is' related to common timeline (object diagram)](../images/sample_timeline.png)
 
 This mechanism is quite simple, since it is the same mechanism that connects
 a token to a primary text. It might become more interesting in case of
@@ -360,30 +359,28 @@ In a single ordinary primary text, the order might not be an issue,
 since the natural order of tokens is along their occurence in the
 primary text. In a Salt model all tokens are contained in a single list,
 which is sorted by their insertion. Imagine a primary text \'*This is a
-sample*\' tokenized in 4 tokens. If token *t~3~* (\'*a*\') was inserted
-into the list before token *t~2~* (\'*is*\') was inserted, the order of
-the list would be *t~1~*, *t~3~*, *t~2~*, *t~4~*. In that case, the list
+sample*\' tokenized in 4 tokens. If token \\( t_3 \\) (\'*a*\') was inserted
+into the list before token \\( t_2 \\) (\'*is*\') was inserted, the order of
+the list would be \\( t_1, t_3, t_2, t_4 \\). In that case, the list
 could be reordered in temporal order, which means along the offset in
 primary text (`STextualRelation.sLeft`). But what is with multiple
 texts? If we have multiple texts and order the corresponding tokens by
 their textual offset, we will end up with a mixed list of tokens of both
 texts. Imagine a second text \'*What a nice sample*\' also tokenized
-into 4 tokens *t~21~*, *t~22~*, *t~23~* and *t~24~*. The token list
-ordered by the textual offset would be the following useless list:
-*t~1~*, *t~21~*, *t~2~*, *t~22~*, *t~23~*, *t~3~*, *t~4~*, *t~24~*. A
+into 4 tokens \\( t_{21} \\), \\( t_{22} \\), \\( t_{23} \\) and \\( t_{24} \\). 
+The token list ordered by the textual offset would be the following useless list:
+\\( t_{1}, t_{21}, t_2, t_{22}, t_{23}, t_3, t_4, t_{24} \\). A
 second option is the ordering by the offset in the timeline. Imagine
 both primary texts as a dialogue between two persons, with the following
 temporal order.
 
-  ------- ------ ------ --- -------- --------
-  spk1:   This   is     a   sample   
-  spk2:          What   a   nice     sample
-  ------- ------ ------ --- -------- --------
+|       |      |     |      |        |      |        |
+| ----- | ---- | --- | ---- | ------ | ---- | ------ |
+| spk1: | This | is  | a    | sample |      |        |
+| spk2: |      |     | What | a      | nice | sample |
 
-  : Both texts as a dialogue.
 
-This could result in: *t~1~*, *t~2~*, *t~3~*, *t~21~*, *t~4~*, *t~22~*,
-*t~23~*, *t~24~*.[^15] This list now represents the temporal order, but
+This could result in: \\( t_1, t_2, t_3, t_{21}, t_4, t_{22}, t_{23}, t_{24} \\).[^15] This list now represents the temporal order, but
 the tokens are also mixed in sense of the correspondance to the primary
 texts. So it depends on what you want to do with the data, to know which
 order might be the best.
@@ -394,16 +391,21 @@ relation `SOrderRelation`. This relation allows to relate the node types
 path through the graph to represent any kind of order. But note, this
 path must be acyclic. When setting the `sType` of that relation, you can
 name the path. To give an example, imagine the text \'*The streets of
-New York*\' and a tokenization of t~1~ (\'*The*\'), t~2~
-(\'*streets*\'), t~3~ (\'*of*\'), t~4~ (\'*New*\') and t~5~
-(\'*York*\'). Since you may want to annotate t~4~ and t~5~ as one word,
-you can create a span s~1~ containing both tokens. A path of wordforms
-given by `SOrderRelation`s could now be: t~1~, t~2~, t~3~, s~1~ as shown
-in [figure\_title](#fig_order_path) Another use case for
+New York*\' and a tokenization of \\( t_1 \\) (\'*The*\'), \\( t_2 \\)
+(\'*streets*\'), \\( t_3 \\) (\'*of*\'), \\( t_4 \\) (\'*New*\') and \\( t_5 \\)
+(\'*York*\'). Since you may want to annotate \\( t_4 \\) and \\( t_5 \\) as one word,
+you can create a span \\( s_1 \\) containing both tokens. A path of wordforms
+given by `SOrderRelation`s could now be: \\( t_1, t_2, t_3, s_1 \\).
+
+![Path of word forms (simplified object diagram)](../images/order_sample.png)
+
+Another use case for
 `SOrderRelation` objects are parallel tokenizations. For instance a
 tokenization of characters or letters and one by word forms. Here it may
 make sense, to create two pathes, one for the characters and one for the
-word forms as shown in [figure\_title](#fig_order_path2).
+word forms.
+
+![Path of word forms (simplified object diagram)](../images/sample_order_path2.png)
 
 ## Audio data
 
