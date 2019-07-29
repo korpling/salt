@@ -59,15 +59,14 @@ public class DataSourceAccessor {
 	// ==================================== start: accessing concerning timeline
 	/**
 	 * Returns all {@link SToken} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
+	 * {@link DataSourceSequence} object. The passed object determines the borders
+	 * of the sequence by the values <em>sStart</em> and <em>sEnd</em> and the type
+	 * of datasource by the instance <em>sSequentialDS</em>.
 	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SToken} objects refer to.
-	 * @return a list of {@link SToken} objects which refer or overlap the
-	 *         passed sequence
+	 * @param DataSourceSequence an object determing the sequence to which the
+	 *                           returned {@link SToken} objects refer to.
+	 * @return a list of {@link SToken} objects which refer or overlap the passed
+	 *         sequence
 	 */
 	public static List<SToken> getTokensBySequence(SDocumentGraph documentGraph,
 			DataSourceSequence<?> DataSourceSequence) {
@@ -79,13 +78,12 @@ public class DataSourceAccessor {
 
 	/**
 	 * Returns all {@link SSpan} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
+	 * {@link DataSourceSequence} object. The passed object determines the borders
+	 * of the sequence by the values <em>sStart</em> and <em>sEnd</em> and the type
+	 * of datasource by the instance <em>sSequentialDS</em>.
 	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SSpan} objects refer to.
+	 * @param DataSourceSequence an object determing the sequence to which the
+	 *                           returned {@link SSpan} objects refer to.
 	 * @return a list of {@link SSpan} objects which refer or overlap the passed
 	 *         sequence
 	 */
@@ -99,13 +97,12 @@ public class DataSourceAccessor {
 
 	/**
 	 * Returns all {@link SStructure} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
+	 * {@link DataSourceSequence} object. The passed object determines the borders
+	 * of the sequence by the values <em>sStart</em> and <em>sEnd</em> and the type
+	 * of datasource by the instance <em>sSequentialDS</em>.
 	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SStructure} objects refer to.
+	 * @param DataSourceSequence an object determing the sequence to which the
+	 *                           returned {@link SStructure} objects refer to.
 	 * @return a list of {@link SStructure} objects which refer or overlap the
 	 *         passed sequence
 	 */
@@ -118,13 +115,12 @@ public class DataSourceAccessor {
 
 	/**
 	 * Returns all {@link SNode} objects which refer to the passed
-	 * {@link DataSourceSequence} object. The passed object determines the
-	 * borders of the sequence by the values <em>sStart</em> and <em>sEnd</em>
-	 * and the type of datasource by the instance <em>sSequentialDS</em>.
+	 * {@link DataSourceSequence} object. The passed object determines the borders
+	 * of the sequence by the values <em>sStart</em> and <em>sEnd</em> and the type
+	 * of datasource by the instance <em>sSequentialDS</em>.
 	 * 
-	 * @param DataSourceSequence
-	 *            an object determing the sequence to which the returned
-	 *            {@link SNode} objects refer to.
+	 * @param DataSourceSequence an object determing the sequence to which the
+	 *                           returned {@link SNode} objects refer to.
 	 * @return a list of {@link SNode} objects which refer or overlap the passed
 	 *         sequence
 	 */
@@ -136,13 +132,11 @@ public class DataSourceAccessor {
 	}
 
 	/**
-	 * Searches for all {@link SNode} objects of the given node type, which
-	 * cover the given sequence.
+	 * Searches for all {@link SNode} objects of the given node type, which cover
+	 * the given sequence.
 	 * 
-	 * @param sequence
-	 *            sequence, which is overlapped
-	 * @param nodeClass
-	 *            type of nodes to be returned
+	 * @param sequence  sequence, which is overlapped
+	 * @param nodeClass type of nodes to be returned
 	 * @return nodes, which overlaps the given sequence
 	 */
 	private static <T extends SNode> List<T> getSNodesBySequence(SDocumentGraph documentGraph,
@@ -196,11 +190,11 @@ public class DataSourceAccessor {
 	}
 
 	/**
-	 * {@inheritDoc SDocumentGraph#isContinuousByText(List)} First sorts the
-	 * given lists, than searches first occurance of first node in subSNodList
-	 * in fullSNodList. Starting from this index, the method compares each
-	 * element in subSNodList to element i in fullSNodList. If one is not equal
-	 * the method returns false.
+	 * {@inheritDoc SDocumentGraph#isContinuousByText(List)} First sorts the given
+	 * lists, than searches first occurance of first node in subSNodList in
+	 * fullSNodList. Starting from this index, the method compares each element in
+	 * subSNodList to element i in fullSNodList. If one is not equal the method
+	 * returns false.
 	 */
 	// TODO must be enabled for all SNode lists and not only SToken lists
 	public static boolean isContinuousByText(SDocumentGraph documentGraph, List<? extends SNode> subSNodList,
@@ -347,21 +341,19 @@ public class DataSourceAccessor {
 
 	/**
 	 * This method searches for every {@link SToken} which is (transitively)
-	 * overlapped by the given {@link SNode} by {@link SRelation} types which
-	 * have one of the types given in the overlappingRelationTypes list.
+	 * overlapped by the given {@link SNode} by {@link SRelation} types which have
+	 * one of the types given in the overlappingRelationTypes list.
 	 * 
-	 * @param overlappingNode
-	 *            the node for which the overlapped {@link SToken} objects are
-	 *            searched
-	 * @param overlappingRelationTypes
-	 *            the list of {@link SALT_TYPE}s which are used for traversion.
-	 *            If, for example, all {@link SToken} are searched which are
-	 *            overlapped by a {@link SStructure}, the
-	 *            {@link SALT_TYPE.SDOMINANCE_RELATION} and
-	 *            {@link SALT_TYPE.SPANNING_RELATION} should be contained in
-	 *            this parameter.
-	 * @return a list of {@link SToken} which are overlapped by the
-	 *         overlappingNode.
+	 * @param overlappingNode          the node for which the overlapped
+	 *                                 {@link SToken} objects are searched
+	 * @param overlappingRelationTypes the list of {@link SALT_TYPE}s which are used
+	 *                                 for traversion. If, for example, all
+	 *                                 {@link SToken} are searched which are
+	 *                                 overlapped by a {@link SStructure}, the
+	 *                                 {@link SALT_TYPE.SDOMINANCE_RELATION} and
+	 *                                 {@link SALT_TYPE.SPANNING_RELATION} should be
+	 *                                 contained in this parameter.
+	 * @return a list of {@link SToken} which are overlapped by the overlappingNode.
 	 */
 	public static List<SToken> getOverlappedSTokens(SDocumentGraph documentGraph, SNode overlappingNode,
 			SALT_TYPE... relationTypes) {
@@ -380,8 +372,8 @@ public class DataSourceAccessor {
 
 	/**
 	 * Returns all {@link SNode} objects which are roots for the given types of
-	 * {@link SRelation}. Means, that all {@link SNode}s will be returned as
-	 * roots, which have no incoming relations of the given type.
+	 * {@link SRelation}. Means, that all {@link SNode}s will be returned as roots,
+	 * which have no incoming relations of the given type.
 	 * <p>
 	 * For instance imagine the following structure and assume that the passed
 	 * {@link SALT_TYPE}s are {@link SALT_TYPE#SDOMINANCE_RELATION} and
@@ -397,12 +389,11 @@ public class DataSourceAccessor {
 	 * 
 	 * the nodes:
 	 * 
-	 * struct1 and span2 are returned, even if a pointing relation connects
-	 * struct1 and span2.
+	 * struct1 and span2 are returned, even if a pointing relation connects struct1
+	 * and span2.
 	 * </p>
 	 * 
-	 * @param saltTypes
-	 *            a set of types for which nodes have to be computed.
+	 * @param saltTypes a set of types for which nodes have to be computed.
 	 * @return a list of {@link SNode}s which are roots
 	 */
 	public static List<SNode> getRootsByRelation(SDocumentGraph documentGraph, SALT_TYPE... saltTypes) {
@@ -445,18 +436,17 @@ public class DataSourceAccessor {
 	}
 
 	/**
-	 * Returns all nodes, which are roots for the given relation-class respects
-	 * to the given SType of the traversed relation. The following example shows
-	 * the different to the method getRootsBySRelation(): Imagine the following
-	 * graphFor example: node1 ->t1 node2, node2 ->t2-> node3. Also imagine,
-	 * that -> is a relation of same class with sType=t1 respectivly sType=t2
-	 * The returned roots will be node1 and node 2, because of node1 is the root
-	 * of a subgraph for relation.sType=t1 and node2 is the root of the subgraph
-	 * for relation.sType=t2. Whereas the returned nodes of
-	 * getRootsBySRelation() is only node1.
+	 * Returns all nodes, which are roots for the given relation-class respects to
+	 * the given SType of the traversed relation. The following example shows the
+	 * different to the method getRootsBySRelation(): Imagine the following graphFor
+	 * example: node1 ->t1 node2, node2 ->t2-> node3. Also imagine, that -> is a
+	 * relation of same class with sType=t1 respectivly sType=t2 The returned roots
+	 * will be node1 and node 2, because of node1 is the root of a subgraph for
+	 * relation.sType=t1 and node2 is the root of the subgraph for
+	 * relation.sType=t2. Whereas the returned nodes of getRootsBySRelation() is
+	 * only node1.
 	 * 
-	 * @param clazz
-	 *            class of Relation to be traversed for searching roots
+	 * @param clazz class of Relation to be traversed for searching roots
 	 * @return a map of types, with corresponding lists of root nodes
 	 */
 	@SuppressWarnings("unchecked")

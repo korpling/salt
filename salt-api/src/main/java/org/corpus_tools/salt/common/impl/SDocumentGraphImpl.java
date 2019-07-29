@@ -674,7 +674,22 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/** {@inheritDoc} **/
 	@Override
-	public List<SToken> getTokensBySequence(DataSourceSequence<?> sequence) {
+	public STimelineRelation createTimelineRelation(SToken token, int timeSteps) {
+		STimeline timeline = getTimeline();
+		int timelineEnd = timeline.getEnd() == null ? 0 : timeline.getEnd(); 
+		STimelineRelation timeLineRel = SaltFactory.createSTimelineRelation();
+		timeLineRel.setSource(token);
+		timeLineRel.setTarget(timeline);
+		timeLineRel.setStart(timeline.getEnd());
+		timelineEnd += timeSteps;
+		timeLineRel.setEnd(timelineEnd);
+		add(timeLineRel);
+		return timeLineRel;
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SToken> getTokensBySequence(DataSourceSequence sequence) {
 		return (DataSourceAccessor.getTokensBySequence(this, sequence));
 	}
 

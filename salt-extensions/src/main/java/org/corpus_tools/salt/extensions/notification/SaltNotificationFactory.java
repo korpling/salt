@@ -75,6 +75,7 @@ import org.corpus_tools.salt.core.impl.SMetaAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
+import org.corpus_tools.salt.extensions.notification.common.impl.CorpusGraphNotifierImpl;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
 import org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl;
 import org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl;
@@ -239,9 +240,9 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public SCorpusGraph createSCorpusGraph() {
-		Graph<SNode, SRelation<? extends SNode, ? extends SNode>, SLayer> graph =
-				createGraph(SNode.class, SGraphImpl.GENERIC_SRELATION_CLASS, SLayer.class);
-		return (new SCorpusGraphImpl(graph));
+		CorpusGraphNotifierImpl graph = new CorpusGraphNotifierImpl();
+		graph.addListener(getListener());
+		return (graph);
 	}
 
 	@Override

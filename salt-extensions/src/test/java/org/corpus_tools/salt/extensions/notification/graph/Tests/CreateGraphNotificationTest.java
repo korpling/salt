@@ -143,27 +143,27 @@ public class CreateGraphNotificationTest {
 		eventList.add(new TestEvent(NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null, null, null));
 
 		final List<TestEvent> actualEvents = new ArrayList<>();
-		factory.addListener(new Listener() {
+		Listener listener = new Listener() {
+
+			private int eventCounter = 0;
 
 			@Override
 			public void notify(NOTIFICATION_TYPE type, GRAPH_ATTRIBUTES attribute, Object oldValue, Object newValue,
 					Object container) {
-				actualEvents.add(new TestEvent(type, attribute, oldValue, newValue, container));
+				assertEquals("error at index " + eventCounter, eventList.get(eventCounter).type, type);
+				assertEquals("error at index " + eventCounter, eventList.get(eventCounter).attribute, attribute);
+				if (eventList.get(eventCounter).oldValue != null) {
+					assertEquals("error at index " + eventCounter, eventList.get(eventCounter).oldValue, oldValue);
+				}
+				if (eventList.get(eventCounter).newValue != null) {
+					assertEquals("error at index " + eventCounter, eventList.get(eventCounter).newValue, newValue);
+				}
+				eventCounter++;
 			}
-		});
+		};
+		factory.addListener(listener);
 		SDocument doc = SaltFactory.createSDocument();
 		SampleGenerator.createPrimaryData(doc);
-
-		assertEquals(eventList.size(), actualEvents.size());
-		for (int i = 0; i < eventList.size(); i++) {
-			assertEquals("error at index " + i, eventList.get(i).type, actualEvents.get(i).type);
-			assertEquals("error at index " + i, eventList.get(i).attribute, actualEvents.get(i).attribute);
-			if (eventList.get(i).oldValue != null) {
-				assertEquals("error at index " + i, eventList.get(i).oldValue, actualEvents.get(i).oldValue);
-			}
-			if (eventList.get(i).newValue != null) {
-				assertEquals("error at index " + i, eventList.get(i).newValue, actualEvents.get(i).newValue);
-			}
-		}
+		factory.removeListener(listener);
 	}
 }

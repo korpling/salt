@@ -208,11 +208,12 @@
 					<version>${maven-scm-publish-plugin.version}</version>
 					<extensions>true</extensions>
 					<configuration>
-						<pubScmUrl>scm:git:ssh://git@github.com:korpling/salt.git</pubScmUrl>
+						<pubScmUrl>scm:git:ssh://git@github.com/korpling/salt.git</pubScmUrl>
 						<scmBranch>gh-pages</scmBranch>
 						<content>${project.build.directory}/doxygen/</content>
 						<ignorePathsToDelete>
 							<path>doc</path>
+							<path>doc-snapshot</path>
 							<path>${site.path}</path>
 							<path>index.html</path>
 							<path>doxygen_sqlite3.db</path>

@@ -1,3 +1,9 @@
+Version 3.3.5
+=============
+
+Fixes:
+- STimeline was missing in SALT_TYPE enum
+
 Version 3.3.0
 =============
 Enhancements:
