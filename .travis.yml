@@ -3,7 +3,7 @@ jdk:
   - openjdk8
   
 before_script:
-   - export SHORT_VERSION=`echo ${TRAVIS_TAG:-develop | sed -E 's/(\.[0-9]+)$//'` 
+   - export SHORT_VERSION=`echo ${TRAVIS_TAG:-develop} | sed -E 's/(\.[0-9]+)$//'` 
   
 script: mvn -Dfindbugs.excludeFilterFile=salt-api/src/findbugs/excludeFilter.xml test findbugs:check
 
@@ -14,7 +14,7 @@ deploy:
   - provider: script
     script: bash $TRAVIS_BUILD_DIR/misc/deploy-p2.sh
     on:
-      repo: korpling/graphANNIS-java
+      repo: korpling/salt
       branch: master
       tags: true
       condition: $TRAVIS_OS_NAME = linux
@@ -22,7 +22,7 @@ deploy:
   - provider: script
     script: bash $TRAVIS_BUILD_DIR/misc/deploy-p2.sh
     on:
-      repo: korpling/graphANNIS-java
+      repo: korpling/salt
       branch: feature/p2-site
       condition: $TRAVIS_OS_NAME = linux
     skip-cleanup: true
