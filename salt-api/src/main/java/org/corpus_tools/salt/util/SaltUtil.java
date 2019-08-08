@@ -69,7 +69,6 @@ import org.corpus_tools.salt.util.internal.persistence.SaltXML10Writer;
 import org.corpus_tools.salt.util.internal.persistence.dot.SCorpusGraphDOTWriter;
 import org.corpus_tools.salt.util.internal.persistence.dot.SDocumentGraphDOTWriter;
 import org.eclipse.emf.common.util.URI;
-import org.omg.PortableInterceptor.ServerIdHelper;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -355,7 +354,7 @@ public class SaltUtil {
 	 * Returns a global ID for the passed object (either if {@link Identifier}
 	 * belongs to {@link SDocument} or {@link SCorpus} object). A global id only
 	 * can be returned, if the element is contained in a {@link SCorpusGraph}
-	 * object. If this is not the case, the {@link ServerIdHelper} is returned.
+	 * object.
 	 * 
 	 * @param id
 	 *            Object to retrieve global id.
