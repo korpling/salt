@@ -378,6 +378,7 @@
 								<artifact>
 									<id>org.corpus-tools:salt-api:${project.version}</id>
 									<id>org.corpus-tools:salt-extensions:${project.version}</id>
+									<source>true</source>
 								</artifact>
 							</artifacts>
 						</configuration>
