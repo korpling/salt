@@ -1,3 +1,14 @@
+Version 3.3.8
+=============
+
+Added P2 repository with the Salt artifacts.
+
+Version 3.3.7
+============
+
+Fixes:
+- Ignore unknown classes in SaltXML files
+
 Version 3.3.5
 =============
 
