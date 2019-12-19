@@ -75,12 +75,11 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/**
 	 * Initializes an object of type {@link SDocumentGraphImpl}. If
-	 * {@link #delegate} is not null, all functions of this method are delegated
-	 * to the delegate object. Setting {@link #delegate} makes this object to a
+	 * {@link #delegate} is not null, all functions of this method are delegated to
+	 * the delegate object. Setting {@link #delegate} makes this object to a
 	 * container.
 	 * 
-	 * @param a
-	 *            delegate object of the same type.
+	 * @param a delegate object of the same type.
 	 */
 	public SDocumentGraphImpl(Graph delegate) {
 		super(delegate);
@@ -245,9 +244,9 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
-	 * {@link SDocument} and {@link SDocumentGraph} object when a document is
-	 * set to avoid an endless invocation. The invocation of methods is
-	 * implement as follows:
+	 * {@link SDocument} and {@link SDocumentGraph} object when a document is set to
+	 * avoid an endless invocation. The invocation of methods is implement as
+	 * follows:
 	 * 
 	 * <pre>
 	 * {@link #setDocument(SDocument)}                      {@link SDocument#setDocumentGraph(Graph)}
@@ -257,8 +256,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	 * {@link #basicDocument(SDocument)}            {@link SDocument#basicSetDocumentGraph(Graph)}
 	 * </pre>
 	 * 
-	 * @param document
-	 *            the container document of this document graph
+	 * @param document the container document of this document graph
 	 */
 	public void basic_setDocument(SDocument document) {
 		SFeature sFeature = getFeature(SaltUtil.FEAT_SDOCUMENT_QNAME);
@@ -521,15 +519,13 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	}
 
 	/**
-	 * Connects the given {@link SToken} object to the given
-	 * {@link SSequentialDS} object. If the given {@link SToken} object is not
-	 * already add to the graph, it will be added.
+	 * Connects the given {@link SToken} object to the given {@link SSequentialDS}
+	 * object. If the given {@link SToken} object is not already add to the graph,
+	 * it will be added.
 	 * 
-	 * @param token
-	 *            token to connect to the {@link SSequentialDS} object
-	 * @param sequence
-	 *            object containing the {@link SSequentialDS} object and the
-	 *            borders, to which the token points to
+	 * @param token    token to connect to the {@link SSequentialDS} object
+	 * @param sequence object containing the {@link SSequentialDS} object and the
+	 *                 borders, to which the token points to
 	 */
 	private void addToken(SToken token, DataSourceSequence sequence) {
 		if (sequence == null) {
@@ -683,7 +679,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 	@Override
 	public STimelineRelation createTimelineRelation(SToken token, int timeSteps) {
 		STimeline timeline = getTimeline();
-		int timelineEnd = timeline.getEnd() == null ? 0 : timeline.getEnd(); 
+		int timelineEnd = timeline.getEnd() == null ? 0 : timeline.getEnd();
 		STimelineRelation timeLineRel = SaltFactory.createSTimelineRelation();
 		timeLineRel.setSource(token);
 		timeLineRel.setTarget(timeline);
@@ -920,10 +916,12 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 		if (sNode == null) {
 			return null;
 		}
-		if (this.getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION) == null) {
+		List<DataSourceSequence> overlappedSequences = getOverlappedDataSourceSequence(sNode,
+				SALT_TYPE.STEXT_OVERLAPPING_RELATION);
+		if (overlappedSequences == null || overlappedSequences.isEmpty()) {
 			return null;
 		}
-		DataSourceSequence sData = getOverlappedDataSourceSequence(sNode, SALT_TYPE.STEXT_OVERLAPPING_RELATION).get(0);
+		DataSourceSequence sData = overlappedSequences.get(0);
 		return ((STextualDS) sData.getDataSource()).getText().substring((Integer) sData.getStart(),
 				(Integer) sData.getEnd());
 	}
