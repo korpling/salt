@@ -1,3 +1,11 @@
+Version 3.3.9
+=============
+
+Fixes:
+- Performance in SDocumentGraph#getText() improved (don't iterate twice)
+- Removing a node from a graph with a delegate
+
+
 Version 3.3.8
 =============
 

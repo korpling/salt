@@ -254,6 +254,15 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#removeNode(Node)} **/
 	@Override
 	public void removeNode(N node) {
+	  // delegate method to delegate if set
+      if (getDelegate() != null) {
+          getDelegate().removeNode(node);
+          if (node instanceof NodeImpl) {
+              ((NodeImpl) node).basicSetGraph_WithoutRemoving(null);
+          }
+          return;
+      }
+      
 		if (node != null) {
 			if (node instanceof NodeImpl) {
 				((NodeImpl) node).basicSetGraph(null);
