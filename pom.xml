@@ -6,7 +6,7 @@
 	<groupId>org.corpus-tools</groupId>
 	<artifactId>salt</artifactId>
 	<packaging>pom</packaging>
-	<version>3.3.9</version>
+	<version>3.3.10-SNAPSHOT</version>
 	<modules>
 		<module>salt-api</module>
 		<module>salt-doc</module>
