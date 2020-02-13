@@ -19,7 +19,6 @@ package org.corpus_tools.salt.extensions.notification;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.ISaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
@@ -42,7 +41,6 @@ import org.corpus_tools.salt.common.STimeline;
 import org.corpus_tools.salt.common.STimelineRelation;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.common.impl.SCorpusDocumentRelationImpl;
-import org.corpus_tools.salt.common.impl.SCorpusGraphImpl;
 import org.corpus_tools.salt.common.impl.SCorpusImpl;
 import org.corpus_tools.salt.common.impl.SCorpusRelationImpl;
 import org.corpus_tools.salt.common.impl.SDocumentGraphImpl;
@@ -147,7 +145,7 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	@Override
 	public Relation<Node, Node> createRelation() {
 		RelationNotifierImpl<Node, Node> relation = new RelationNotifierImpl<Node, Node>();
-		relation.addListener(relation.getListener());
+		relation.addListener(getListener());
 		return (relation);
 	}
 
