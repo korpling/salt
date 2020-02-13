@@ -7,7 +7,7 @@
 		<groupId>org.corpus-tools</groupId>
 		<artifactId>salt</artifactId>
 		<relativePath>../pom.xml</relativePath>
-		<version>3.3.9</version>
+		<version>3.3.10</version>
 	</parent>
 	<properties>
 		<site.path>doc-snapshot</site.path>
