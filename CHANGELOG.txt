@@ -1,3 +1,9 @@
+Version 3.3.10
+==============
+
+Fixes:
+- SaltNotificationFactory did not add any listeners for relations
+
 Version 3.3.9
 =============
 
