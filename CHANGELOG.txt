@@ -4,6 +4,7 @@ Version 3.3.11
 Fixes:
 - Setting options for comparision of two SaltProject objects did not use the same options when comparing their
   corpus graphs.
+- Don't add the delegate node implementations to the layer, but the original node
 
 Version 3.3.10
 ==============

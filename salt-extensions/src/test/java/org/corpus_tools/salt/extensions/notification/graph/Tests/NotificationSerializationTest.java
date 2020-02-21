@@ -21,13 +21,18 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.corpus_tools.salt.SaltFactory;
 import org.corpus_tools.salt.common.SDocument;
+import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SToken;
 import org.corpus_tools.salt.common.SaltProject;
+import org.corpus_tools.salt.core.SLayer;
 import org.corpus_tools.salt.extensions.notification.SaltNotificationFactory;
 import org.corpus_tools.salt.impl.SaltFactoryImpl;
 import org.corpus_tools.salt.samples.SampleGenerator;
@@ -44,6 +49,7 @@ public class NotificationSerializationTest {
 
 	@Before
 	public void setUp() throws Exception {
+		// make sure all calls in the functions under test are using notifications
 		SaltFactory.setFactory(new SaltNotificationFactory());
 	}
 
@@ -52,28 +58,24 @@ public class NotificationSerializationTest {
 		SaltFactory.setFactory(new SaltFactoryImpl());
 	}
 
-
 	@Test
 	public void testSerializeGraphWithDelegates() throws IOException {
+		File tmpFile = SaltTestsUtil.getTempTestFolder("/testLoadStoreExampleProject");
+		URI tmpPath = URI.createFileURI(tmpFile.getAbsolutePath());
 
-		// create template
+		// create an keep original template in memory
 		SaltProject template = SampleGenerator.createSaltProject();
 		template.setName(null);
+
+		// save -> load -> save -> load
+		template.saveSaltProject(tmpPath);
+		SaltProject loaded = SaltUtil.loadCompleteSaltProject(tmpPath);
+		loaded.saveSaltProject(tmpPath);
+		loaded = SaltUtil.loadCompleteSaltProject(tmpPath);
+
 		assertEquals(1, template.getCorpusGraphs().size());
 
-		SDocument doc1 = template.getCorpusGraphs().get(0).getDocuments().get(0);
-		List<SToken> tokens = doc1.getDocumentGraph().getSortedTokenByText();
-		doc1.getDocumentGraph().createSpan(tokens.get(0), tokens.get(1));
-
-		// store other document
-		File tmpFile = SaltTestsUtil.getTempTestFolder("/testLoadStoreExampleProject");
-		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
-		template.saveSaltProject(path);
-
-		// load project
-		SaltProject loaded = SaltUtil.loadCompleteSaltProject(path);
-
-		// compare document graphs
+		// compare corpus graphs
 		assertEquals(1, loaded.getCorpusGraphs().size());
 		Set<Difference> corpusGraphDiff = SaltUtil.compare(template).with(loaded)
 				.useOption(DiffOptions.OPTION_IGNORE_ID, false).andFindDiffs();
@@ -84,9 +86,22 @@ public class NotificationSerializationTest {
 		List<SDocument> loadedDocs = loaded.getCorpusGraphs().get(0).getDocuments();
 		assertEquals(templateDocs.size(), loadedDocs.size());
 		for (int i = 0; i < templateDocs.size(); i++) {
-			Set<Difference> docDiff = SaltUtil.compare(templateDocs.get(i).getDocumentGraph())
-					.with(loadedDocs.get(i).getDocumentGraph()).andFindDiffs();
+			SDocumentGraph templateDocGraph = templateDocs.get(i).getDocumentGraph();
+			SDocumentGraph loadedDocGraph = loadedDocs.get(i).getDocumentGraph();
+			Set<Difference> docDiff = SaltUtil.compare(templateDocGraph).with(loadedDocGraph).andFindDiffs();
 			assertEquals(0, docDiff.size());
+
+			// Check that layers have survived the saving and loading cycles
+			List<SLayer> loadedLayers = new ArrayList<>(loadedDocGraph.getLayers());
+			assertEquals(2, loadedLayers.size());
+			loadedLayers.sort(new Comparator<SLayer>() {
+				@Override
+				public int compare(SLayer o1, SLayer o2) {
+					return o1.getName().compareTo(o2.getName());
+				}
+			});
+			assertEquals(11, loadedLayers.get(0).getNodes().size());
+			assertEquals(12, loadedLayers.get(1).getNodes().size());
 		}
 	}
 

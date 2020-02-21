@@ -167,10 +167,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 **/
 	@Override
 	public void addLayer(Layer layer) {
-		if (getDelegate() != null) {
-			getDelegate().addLayer(layer);
-			return;
-		}
 		if (layer != null) {
 			layer.addNode(this);
 		}
@@ -184,10 +180,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 **/
 	@Override
 	public void removeLayer(Layer layer) {
-		if (getDelegate() != null) {
-			getDelegate().removeLayer(layer);
-			return;
-		}
 		if (layer != null) {
 			layer.removeNode(this);
 		}
