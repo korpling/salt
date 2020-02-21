@@ -134,44 +134,4 @@ public class GraphNotifierTest extends GraphTest {
 		assertEquals(layer, listener.lastEvent.newValue);
 		assertEquals(fixture, listener.lastEvent.container);
 	}
-
-	@Test
-	public void testSerializeGraphWithDelegates() throws IOException {
-
-		SaltFactory.setFactory(new SaltNotificationFactory());
-
-		// create template
-		SaltProject template = SampleGenerator.createSaltProject();
-		template.setName(null);
-		assertEquals(1, template.getCorpusGraphs().size());
-
-		SDocument doc1 = template.getCorpusGraphs().get(0).getDocuments().get(0);
-		List<SToken> tokens = doc1.getDocumentGraph().getSortedTokenByText();
-		doc1.getDocumentGraph().createSpan(tokens.get(0), tokens.get(1));
-
-		// store other document
-		File tmpFile = SaltTestsUtil.getTempTestFolder("/testLoadStoreExampleProject");
-		URI path = URI.createFileURI(tmpFile.getAbsolutePath());
-		template.saveSaltProject(path);
-
-		// load project
-		SaltProject loaded = SaltUtil.loadCompleteSaltProject(path);
-
-		// compare document graphs
-		assertEquals(1, loaded.getCorpusGraphs().size());
-		Set<Difference> corpusGraphDiff = SaltUtil.compare(template).with(loaded)
-				.useOption(DiffOptions.OPTION_IGNORE_ID, false).andFindDiffs();
-		assertEquals(0, corpusGraphDiff.size());
-
-		// compare documents
-		List<SDocument> templateDocs = template.getCorpusGraphs().get(0).getDocuments();
-		List<SDocument> loadedDocs = loaded.getCorpusGraphs().get(0).getDocuments();
-		assertEquals(templateDocs.size(), loadedDocs.size());
-		for (int i = 0; i < templateDocs.size(); i++) {
-			Set<Difference> docDiff = SaltUtil.compare(templateDocs.get(i).getDocumentGraph())
-					.with(loadedDocs.get(i).getDocumentGraph()).andFindDiffs();
-			assertEquals(0, docDiff.size());
-		}
-	}
-
 }
