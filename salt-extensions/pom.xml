@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.corpus-tools</groupId>
 		<artifactId>salt</artifactId>
-		<version>3.3.11</version>
+		<version>3.3.11-SNAPSHOT</version>
 	</parent>
 	<artifactId>salt-extensions</artifactId>
 	<dependencies>
