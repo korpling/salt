@@ -1,3 +1,10 @@
+Version 3.3.11
+==============
+
+Fixes:
+- Setting options for comparision of two SaltProject objects did not use the same options when comparing their
+  corpus graphs.
+
 Version 3.3.10
 ==============
 

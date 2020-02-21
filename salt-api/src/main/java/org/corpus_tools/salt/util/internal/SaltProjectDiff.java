@@ -92,10 +92,10 @@ public class SaltProjectDiff extends AbstractDiff<SaltProject> {
 		for (int i = 0; i < otherObject.getCorpusGraphs().size(); i++) {
 			if (!diffsRequested) {
 				return SaltUtil.compare(templateObject.getCorpusGraphs().get(0))
-						.with(otherObject.getCorpusGraphs().get(0)).andCheckIsomorphie();
+						.with(otherObject.getCorpusGraphs().get(0)).useOptions(this.options).andCheckIsomorphie();
 			}
 			final Set<Difference> diffs = SaltUtil.compare(templateObject.getCorpusGraphs().get(0))
-					.with(otherObject.getCorpusGraphs().get(0)).andFindDiffs();
+					.with(otherObject.getCorpusGraphs().get(0)).useOptions(this.options).andFindDiffs();
 			if (diffs.size() > 0) {
 				retVal = false;
 				addDifference(templateObject, otherObject, null, DIFF_TYPES.CORPUS_GRAPH_DIFFERING, diffs);
