@@ -712,8 +712,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
 	 * graph and to avoid an endless invocation the insertion of an relation is
-	 * split into the two methods {@link #addNode(node)} and
-	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
+	 * split into the two methods {@link #addLayer(Layer)} and
+	 * {@link #basicAddLayer(Layer)}. The invocation of methods is implement as
 	 * follows:
 	 * 
 	 * <pre>

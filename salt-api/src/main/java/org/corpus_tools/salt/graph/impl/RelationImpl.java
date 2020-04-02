@@ -20,6 +20,7 @@ package org.corpus_tools.salt.graph.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
@@ -204,7 +205,8 @@ public class RelationImpl<S extends Node, T extends Node> extends IdentifiableEl
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+	@Beta
+	public void basicSetGraph_WithoutRemoving(Graph graph) {
 		if (getDelegate() != null && getDelegate() instanceof RelationImpl) {
 			((RelationImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
