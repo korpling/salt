@@ -58,9 +58,9 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	 * @param a
 	 *            delegate object of the same type.
 	 */
-	public SCorpusGraphImpl(Graph delegate) {
-		super(delegate);
-	}
+    public SCorpusGraphImpl(Graph delegate) {
+      super(delegate);
+    }
 
 	/**
 	 * Calls the init of super class and expands its initialization for adding
@@ -74,8 +74,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	protected void init() {
 		super.init();
 
-		indexMgr.createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
-		indexMgr.createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2,
+		getIndexMgr().createIndex(SaltUtil.IDX_NODETYPE, Class.class, Node.class, expectedNodes / 2, expectedNodes);
+		getIndexMgr().createIndex(SaltUtil.IDX_RELATIONTYPE, Class.class, Relation.class, expectedRelations / 2,
 				expectedRelations);
 	}
 
@@ -147,18 +147,22 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			((SRelation) relation).setId("salt:/" + ((SRelation) relation).getName());
 		}
 		super.basicAddRelation(relation);
-
-		// map some implementation types to the matching interfaces
-		Class<?> key;
-		if (relation instanceof SCorpusRelation) {
-			key = SCorpusRelation.class;
-		} else if (relation instanceof SCorpusDocumentRelation) {
-			key = SCorpusDocumentRelation.class;
-		} else {
-			key = relation.getClass();
-		}
-		getIndexMgr().put(SaltUtil.IDX_RELATIONTYPE, key, relation);
 	}
+	
+    @Override
+    public void addRelation(Relation<? extends SNode, ? extends SNode> relation) {
+      super.addRelation(relation);
+      // map some implementation types to the matching interfaces
+      Class<?> key;
+      if (relation instanceof SCorpusRelation) {
+        key = SCorpusRelation.class;
+      } else if (relation instanceof SCorpusDocumentRelation) {
+        key = SCorpusDocumentRelation.class;
+      } else {
+        key = relation.getClass();
+      }
+      getIndexMgr().put(SaltUtil.IDX_RELATIONTYPE, key, relation);
+    }
 
 	// ============================ end: handling relations
 	// ============================ start: handling nodes
@@ -189,18 +193,23 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		}
 
 		super.basicAddNode(node);
+	}
+	
+	@Override
+	public void addNode(SNode node) {
+    	super.addNode(node);
 
-		// map some implementation types to the matching interfaces
-		Class<? extends SNode> key;
-		if (node instanceof SCorpus) {
-			key = SCorpus.class;
-		} else if (node instanceof SDocument) {
-			key = SDocument.class;
-		} else {
-			key = node.getClass();
-		}
-		// end: compute slot id
-		getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
+        // map some implementation types to the matching interfaces
+        Class<? extends SNode> key;
+        if (node instanceof SCorpus) {
+            key = SCorpus.class;
+        } else if (node instanceof SDocument) {
+            key = SDocument.class;
+        } else {
+            key = node.getClass();
+        }
+        // end: compute slot id
+        getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
 	}
 
 	// ============================ end: handling nodes
