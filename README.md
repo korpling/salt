@@ -2,7 +2,7 @@
 
 ![](http://korpling.github.io/pepper/images/SaltNPepper_logo2010.png)
 
-#Salt
+# Salt
 
 * **language-independent** <br/>
 Salt supports a huge set of languages and typesets. Each language which can be expressed in UTF-8 is supported by Salt.

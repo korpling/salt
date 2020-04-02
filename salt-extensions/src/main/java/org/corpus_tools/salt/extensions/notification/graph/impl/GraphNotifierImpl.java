@@ -30,12 +30,16 @@ import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
 import org.corpus_tools.salt.graph.Relation;
 import org.corpus_tools.salt.graph.impl.GraphImpl;
+import org.corpus_tools.salt.graph.impl.NodeImpl;
+import org.corpus_tools.salt.graph.impl.RelationImpl;
 
 @SuppressWarnings("serial")
 public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L extends Layer<N, R>>
 		extends GraphImpl<N, R, L> implements Graph<N, R, L>, Notifier {
 	// ==========================================> listener list
 	protected List<Listener> listenerList = null;
+
+	private Graph<?, ?, ?> owner;
 
 	/** {@inheritDoc} **/
 	@Override
@@ -59,6 +63,20 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	@Override
 	public synchronized void removeListener(Listener listener) {
 		listenerList = NotifierHelper.removeListener(listenerList, listener);
+	}
+
+	/**
+	 * @return the owner
+	 */
+	public Graph<?, ?, ?> getOwner() {
+		return owner;
+	}
+
+	/**
+	 * @param owner the owner to set
+	 */
+	public void setOwner(Graph<?, ?, ?> owner) {
+		this.owner = owner;
 	}
 
 	// ==========================================< listener list
@@ -107,6 +125,14 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	@Override
 	public void addNode(N node) {
 		super.addNode(node);
+		// HACK: Reset to the actual owning graph before notifying the listeners.
+		// It would be better if the super.addNode() would have an optional parameter for
+		// the real graph.
+		if (owner != null) {
+			if (node instanceof NodeImpl) {
+				((NodeImpl) node).basicSetGraph_WithoutRemoving(owner);
+			}
+		}
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_NODES, null,
 					node, this);
@@ -125,6 +151,14 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 	@Override
 	public void addRelation(Relation<? extends N, ? extends N> relation) {
 		super.addRelation(relation);
+		// HACK: Reset to the actual owning graph before notifying the listeners.
+		// It would be better if the super.addRelation() would have an optional parameter for
+		// the real graph.
+		if (owner != null) {
+			if (relation instanceof RelationImpl) {
+				((RelationImpl) relation).basicSetGraph_WithoutRemoving(owner);
+			}
+		}
 		if (listenerList != null) {
 			NotifierHelper.notify(listenerList, Listener.NOTIFICATION_TYPE.ADD, GRAPH_ATTRIBUTES.GRAPH_RELATIONS, null,
 					relation, this);
@@ -168,4 +202,5 @@ public class GraphNotifierImpl<N extends Node, R extends Relation<N, N>, L exten
 					oldValue, null, this);
 		}
 	}
+
 }

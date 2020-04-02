@@ -6,7 +6,7 @@
 	<groupId>org.corpus-tools</groupId>
 	<artifactId>salt</artifactId>
 	<packaging>pom</packaging>
-	<version>3.3.8-SNAPSHOT</version>
+	<version>3.4.0-SNAPSHOT</version>
 	<modules>
 		<module>salt-api</module>
 		<module>salt-doc</module>
@@ -378,6 +378,7 @@
 								<artifact>
 									<id>org.corpus-tools:salt-api:${project.version}</id>
 									<id>org.corpus-tools:salt-extensions:${project.version}</id>
+									<source>true</source>
 								</artifact>
 							</artifacts>
 						</configuration>

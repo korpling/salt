@@ -19,7 +19,6 @@ package org.corpus_tools.salt.extensions.notification;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.ISaltFactory;
 import org.corpus_tools.salt.common.SCorpus;
@@ -76,7 +75,6 @@ import org.corpus_tools.salt.core.impl.SMetaAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SNodeImpl;
 import org.corpus_tools.salt.core.impl.SProcessingAnnotationImpl;
 import org.corpus_tools.salt.core.impl.SRelationImpl;
-import org.corpus_tools.salt.extensions.notification.common.impl.CorpusGraphNotifierImpl;
 import org.corpus_tools.salt.extensions.notification.graph.Notifier;
 import org.corpus_tools.salt.extensions.notification.graph.impl.GraphNotifierImpl;
 import org.corpus_tools.salt.extensions.notification.graph.impl.LabelNotifierImpl;
@@ -147,15 +145,19 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	@Override
 	public Relation<Node, Node> createRelation() {
 		RelationNotifierImpl<Node, Node> relation = new RelationNotifierImpl<Node, Node>();
-		relation.addListener(relation.getListener());
+		relation.addListener(getListener());
 		return (relation);
 	}
 
 	@Override
 	public Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
+		return createNotifierGraph();
+	}
+
+	private GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createNotifierGraph() {
 		GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = new GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>();
 		graph.addListener(getListener());
-		return (graph);
+		return graph;
 	}
 
 	@Override
@@ -176,7 +178,10 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	// ==========================================> salt core
 	@Override
 	public SGraph createSGraph() {
-		return (new SGraphImpl(createGraph()));
+		GraphNotifierImpl<?,?,?> delegate = createNotifierGraph();
+		SGraph result = new SGraphImpl(delegate);
+		delegate.setOwner(result);
+		return result;
 	}
 
 	@Override
@@ -233,14 +238,18 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public SCorpusGraph createSCorpusGraph() {
-		CorpusGraphNotifierImpl graph = new CorpusGraphNotifierImpl();
-		graph.addListener(getListener());
-		return (graph);
+		GraphNotifierImpl<?,?,?> delegate = createNotifierGraph();
+		SCorpusGraphImpl result = new SCorpusGraphImpl(delegate);
+		delegate.setOwner(result);
+		return result;
 	}
 
 	@Override
 	public SDocumentGraph createSDocumentGraph() {
-		return (new SDocumentGraphImpl(createGraph()));
+		GraphNotifierImpl<?,?,?> delegate = createNotifierGraph();
+		SDocumentGraphImpl result = new SDocumentGraphImpl(delegate);
+		delegate.setOwner(result);
+		return result;
 	}
 
 	@Override

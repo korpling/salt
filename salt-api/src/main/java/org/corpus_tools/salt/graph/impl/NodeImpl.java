@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
@@ -130,7 +131,8 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+	@Beta
+	public void basicSetGraph_WithoutRemoving(Graph graph) {
 		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
 			((NodeImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
@@ -167,10 +169,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 **/
 	@Override
 	public void addLayer(Layer layer) {
-		if (getDelegate() != null) {
-			getDelegate().addLayer(layer);
-			return;
-		}
 		if (layer != null) {
 			layer.addNode(this);
 		}
@@ -184,10 +182,6 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 **/
 	@Override
 	public void removeLayer(Layer layer) {
-		if (getDelegate() != null) {
-			getDelegate().removeLayer(layer);
-			return;
-		}
 		if (layer != null) {
 			layer.removeNode(this);
 		}

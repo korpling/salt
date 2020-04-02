@@ -254,6 +254,15 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	/** {@inheritDoc Graph#removeNode(Node)} **/
 	@Override
 	public void removeNode(N node) {
+	  // delegate method to delegate if set
+      if (getDelegate() != null) {
+          getDelegate().removeNode(node);
+          if (node instanceof NodeImpl) {
+              ((NodeImpl) node).basicSetGraph_WithoutRemoving(null);
+          }
+          return;
+      }
+      
 		if (node != null) {
 			if (node instanceof NodeImpl) {
 				((NodeImpl) node).basicSetGraph(null);
@@ -703,8 +712,8 @@ public class GraphImpl<N extends Node, R extends Relation<N, N>, L extends Layer
 	 * This is an internally used method. To implement a double chaining of
 	 * {@link Graph} and {@link Node} object when an node is inserted into this
 	 * graph and to avoid an endless invocation the insertion of an relation is
-	 * split into the two methods {@link #addNode(node)} and
-	 * {@link #basicAddNode(Node)}. The invocation of methods is implement as
+	 * split into the two methods {@link #addLayer(Layer)} and
+	 * {@link #basicAddLayer(Layer)}. The invocation of methods is implement as
 	 * follows:
 	 * 
 	 * <pre>
