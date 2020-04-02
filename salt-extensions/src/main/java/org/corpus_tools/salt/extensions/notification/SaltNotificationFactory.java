@@ -151,9 +151,13 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public Graph<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createGraph() {
+		return createNotifierGraph();
+	}
+
+	private GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> createNotifierGraph() {
 		GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>> graph = new GraphNotifierImpl<Node, Relation<Node, Node>, Layer<Node, Relation<Node, Node>>>();
 		graph.addListener(getListener());
-		return (graph);
+		return graph;
 	}
 
 	@Override
@@ -174,7 +178,10 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 	// ==========================================> salt core
 	@Override
 	public SGraph createSGraph() {
-		return (new SGraphImpl(createGraph()));
+		GraphNotifierImpl<?,?,?> delegate = createNotifierGraph();
+		SGraph result = new SGraphImpl(delegate);
+		delegate.setOwner(result);
+		return result;
 	}
 
 	@Override
@@ -231,12 +238,18 @@ public class SaltNotificationFactory extends SaltFactoryImpl implements ISaltFac
 
 	@Override
 	public SCorpusGraph createSCorpusGraph() {
-	    return new SCorpusGraphImpl(createGraph());
+		GraphNotifierImpl<?,?,?> delegate = createNotifierGraph();
+		SCorpusGraphImpl result = new SCorpusGraphImpl(delegate);
+		delegate.setOwner(result);
+		return result;
 	}
 
 	@Override
 	public SDocumentGraph createSDocumentGraph() {
-		return (new SDocumentGraphImpl(createGraph()));
+		GraphNotifierImpl<?,?,?> delegate = createNotifierGraph();
+		SDocumentGraphImpl result = new SDocumentGraphImpl(delegate);
+		delegate.setOwner(result);
+		return result;
 	}
 
 	@Override
