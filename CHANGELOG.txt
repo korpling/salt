@@ -2,8 +2,11 @@ Version 3.4.0
 =============
 
 Fixes:
-- When adding nodes to notifying graphs (an beta extension) the node would be in an invalid state when the signal was send,
-  because the getGraph() function would return the notifying graph implementation and not the actual owner.
+- When adding nodes and relations to notifying graphs (an beta extension) 
+  the node would be in an invalid state when the signal was send,
+  because the getGraph() function would return the notifying graph implementation 
+  and not the actual owner. This changes a previous protected member function to public,
+  and thus changes the API.
 
 Version 3.3.11
 ==============

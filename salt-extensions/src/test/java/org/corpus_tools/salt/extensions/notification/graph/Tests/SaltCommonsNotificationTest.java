@@ -7,8 +7,8 @@ import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
 import org.corpus_tools.salt.common.SaltProject;
-import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SNode;
+import org.corpus_tools.salt.core.SRelation;
 import org.corpus_tools.salt.extensions.notification.Listener;
 import org.corpus_tools.salt.extensions.notification.SaltNotificationFactory;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
@@ -34,8 +34,8 @@ public class SaltCommonsNotificationTest {
     }
 
     /**
-     * When adding nodes to a document graph, the graph linked with the resulting
-     * nodes should be of type {@link SDocumentGraph} (and not of the delegates
+     * When adding nodes to a document graph/corpus graph, the graph linked with the resulting
+     * nodes should be of type {@link SDocumentGraph}/{@link SCorpusGraph} (and not of the delegates
      * type).
      */
     @Test
@@ -48,6 +48,10 @@ public class SaltCommonsNotificationTest {
                     // Check that we can get the graph of the value without errors in the
                     // notification callback
                     ((SNode) newValue).getGraph();
+                } else if (newValue instanceof SRelation) {
+                    // Check that we can get the graph of the value without errors in the
+                    // notification callback
+                    ((SRelation) newValue).getGraph();
                 }
             }
         });
