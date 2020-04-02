@@ -1,15 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a12a385a03d9d4b7dc6cefdfd7d0d969d":[12,0,0,0,0,5,0,19],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a27ac5c5eacb8dd7941d140ee8d14e514":[12,0,0,0,0,5,0,33],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a2ea2ae575c645798a3633f877e3509ad":[12,0,0,0,0,5,0,23],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a2ef7d2816337c92ef873dcff320a05f8":[12,0,0,0,0,5,0,32],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a314c6aeae8a8261ce404ad730e237f5a":[12,0,0,0,0,5,0,4],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a341f2889318ce599787823e5b99ec419":[12,0,0,0,0,5,0,3],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a3a5b2c903bf7fb758843a7971b005044":[12,0,0,0,0,5,0,24],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a3bff550a541ba2c93aa85b2d1bf4d307":[12,0,0,0,0,5,0,16],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a3c41387d6cb1810c25a1cda0d89b6153":[12,0,0,0,0,5,0,6],
-"classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a3dc99c2556d7f35966a675db13fc2b63":[12,0,0,0,0,5,0,0],
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a47877bbcc0d9f1d650389294c8b091c8":[12,0,0,0,0,5,0,27],
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a56075d370023eb4ad9195c4f484d5166":[12,0,0,0,0,5,0,29],
 "classorg_1_1corpus__tools_1_1salt_1_1impl_1_1_salt_factory_impl.html#a5ac80b39d916e5d01d02afe03599fca3":[12,0,0,0,0,5,0,13],
@@ -249,5 +239,15 @@ var NAVTREEINDEX3 =
 "classorg_1_1corpus__tools_1_1salt_1_1util_1_1internal_1_1persistence_1_1dot_1_1_s_document_graph_d_o_t_writer.html#ac0b6844b796bc7711daf2861f2fdbe66":[12,0,0,0,0,9,0,0,0,3,5],
 "create.html":[2],
 "delegator.html":[3],
-"dev_bidirectional_references.html":[4,0]
+"dev_bidirectional_references.html":[4,0],
+"dev_delegator.html":[4,1],
+"developers.html":[4],
+"enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html":[12,0,0,0,0,12],
+"enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a04f562c78be39d3e3209d9c6b2c6c56a":[12,0,0,0,0,12,3],
+"enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a0616b2d0d275a2cf72a484ea48f980ee":[12,0,0,0,0,12,12],
+"enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a095a314f77156ec11df5fa5a8943fd92":[12,0,0,0,0,12,7],
+"enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a22a45e2bf94cadac53318c7367b9f51a":[12,0,0,0,0,12,16],
+"enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a243798e394eeb59bc6e471395097315a":[12,0,0,0,0,12,11],
+"enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a29abbddd15e95a6a4822e6e21f655318":[12,0,0,0,0,12,1],
+"enumorg_1_1corpus__tools_1_1salt_1_1_s_a_l_t___t_y_p_e.html#a674c087ff5a7dd0256f78a99f3774636":[12,0,0,0,0,12,6]
 };

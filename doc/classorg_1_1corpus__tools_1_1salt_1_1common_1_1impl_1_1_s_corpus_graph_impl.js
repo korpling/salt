@@ -3,6 +3,8 @@ var classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl 
     [ "SCorpusGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a8a4714e815e2325c9c3966c83cb4eac1", null ],
     [ "SCorpusGraphImpl", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#ae0de23c42407606263af3545dd98daad", null ],
     [ "addDocument", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a45d32e97cb8986ac45a090f729ede818", null ],
+    [ "addNode", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#af0d8f595605861a492a8ec24eba5e734", null ],
+    [ "addRelation", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#ae51b1f82c2d778cb434996ae5aa24203", null ],
     [ "addSubCorpus", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a3d538b41bc6b668a71576681fd44183b", null ],
     [ "basic_setSaltProject", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a5c59dbc4ca3fbc881fa60798f0fe6f51", null ],
     [ "basicAddNode", "classorg_1_1corpus__tools_1_1salt_1_1common_1_1impl_1_1_s_corpus_graph_impl.html#a6d68327c11ba7358f30812a59b6a700a", null ],
