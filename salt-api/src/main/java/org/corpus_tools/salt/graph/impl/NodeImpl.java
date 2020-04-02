@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.corpus_tools.salt.Beta;
 import org.corpus_tools.salt.graph.Graph;
 import org.corpus_tools.salt.graph.Layer;
 import org.corpus_tools.salt.graph.Node;
@@ -130,7 +131,8 @@ public class NodeImpl extends IdentifiableElementImpl implements Node {
 	 * 
 	 * @param graph
 	 */
-	protected void basicSetGraph_WithoutRemoving(Graph graph) {
+	@Beta
+	public void basicSetGraph_WithoutRemoving(Graph graph) {
 		if (getDelegate() != null && getDelegate() instanceof NodeImpl) {
 			((NodeImpl) getDelegate()).basicSetGraph_WithoutRemoving(graph);
 			return;
