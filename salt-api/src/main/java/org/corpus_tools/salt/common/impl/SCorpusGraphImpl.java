@@ -51,16 +51,15 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	}
 
 	/**
-	 * Initializes an object of type {@link SGraphImpl}. If {@link #delegate} is
-	 * not null, all functions of this method are delegated to the delegate
-	 * object. Setting {@link #delegate} makes this object to a container.
+	 * Initializes an object of type {@link SGraphImpl}. If {@link #delegate} is not
+	 * null, all functions of this method are delegated to the delegate object.
+	 * Setting {@link #delegate} makes this object to a container.
 	 * 
-	 * @param a
-	 *            delegate object of the same type.
+	 * @param a delegate object of the same type.
 	 */
-    public SCorpusGraphImpl(Graph delegate) {
-      super(delegate);
-    }
+	public SCorpusGraphImpl(Graph delegate) {
+		super(delegate);
+	}
 
 	/**
 	 * Calls the init of super class and expands its initialization for adding
@@ -105,33 +104,18 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 
 	/**
 	 * This is an internally used method. To implement a double chaining of
-	 * {@link SCorpusGraph} and {@link SaltProject} object when an node is
-	 * inserted into this graph and to avoid an endless invocation the insertion
-	 * of an node is splited into the two methods
-	 * {@link #setSaltProject(SaltProject)} and
+	 * {@link SCorpusGraph} and {@link SaltProject} object when an node is inserted
+	 * into this graph and to avoid an endless invocation the insertion of an node
+	 * is splited into the two methods {@link #setSaltProject(SaltProject)} and
 	 * {@link #basic_setSaltProject(SaltProject)}.
 	 * 
-	 * @param saltProject
-	 *            the Salt project containing the corpus structure
+	 * @param saltProject the Salt project containing the corpus structure
 	 */
 	public void basic_setSaltProject(SaltProject saltProject) {
 		this.saltProject = saltProject;
 	}
 
-	// ============================ start: handling relations
-	/**
-	 * Calls the super method an puts the given relation into a relation type
-	 * index. an exception will be thrown.
-	 * 
-	 * @param relation
-	 *            to add
-	 */
-	@Override
-	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
-		if (!(relation instanceof SRelation)) {
-			throw new SaltInsertionException(this, relation,
-					"Cannot insert an edge, which is not a SRelation object. ");
-		}
+	private void setRelationIdIfNecessary(Relation<? extends Node, ? extends Node> relation) {
 		// start: create a name if none exists
 		if (Strings.isNullOrEmpty(((SRelation) relation).getName())) {
 			if (relation instanceof SCorpusRelation) {
@@ -146,36 +130,52 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 		if (Strings.isNullOrEmpty(relation.getId())) {
 			((SRelation) relation).setId("salt:/" + ((SRelation) relation).getName());
 		}
+	}
+
+	// ============================ start: handling relations
+	/**
+	 * Calls the super method an puts the given relation into a relation type index.
+	 * an exception will be thrown.
+	 * 
+	 * @param relation to add
+	 */
+	@Override
+	protected void basicAddRelation(Relation<? extends Node, ? extends Node> relation) {
+		if (!(relation instanceof SRelation)) {
+			throw new SaltInsertionException(this, relation,
+					"Cannot insert an edge, which is not a SRelation object. ");
+		}
+		setRelationIdIfNecessary(relation);
 		super.basicAddRelation(relation);
 	}
-	
-    @Override
-    public void addRelation(Relation<? extends SNode, ? extends SNode> relation) {
-      super.addRelation(relation);
-      // map some implementation types to the matching interfaces
-      Class<?> key;
-      if (relation instanceof SCorpusRelation) {
-        key = SCorpusRelation.class;
-      } else if (relation instanceof SCorpusDocumentRelation) {
-        key = SCorpusDocumentRelation.class;
-      } else {
-        key = relation.getClass();
-      }
-      getIndexMgr().put(SaltUtil.IDX_RELATIONTYPE, key, relation);
-    }
+
+	@Override
+	public void addRelation(Relation<? extends SNode, ? extends SNode> relation) {
+		
+		if (getDelegate() != null) {
+			// Normally, basicAddRelation() would set the ID, since the delegate does not
+			// call it, set the ID here
+			setRelationIdIfNecessary(relation);
+		}
+
+		super.addRelation(relation);
+
+		// map some implementation types to the matching interfaces
+		Class<?> key;
+		if (relation instanceof SCorpusRelation) {
+			key = SCorpusRelation.class;
+		} else if (relation instanceof SCorpusDocumentRelation) {
+			key = SCorpusDocumentRelation.class;
+		} else {
+			key = relation.getClass();
+		}
+		getIndexMgr().put(SaltUtil.IDX_RELATIONTYPE, key, relation);
+	}
 
 	// ============================ end: handling relations
 	// ============================ start: handling nodes
 
-	/**
-	 * Calls the super method an puts the given node into a node type index. an
-	 * exception will be thrown.
-	 * 
-	 * @param node
-	 *            to add
-	 */
-	@Override
-	protected void basicAddNode(SNode node) {
+	private void setNodeIdIfNecessary(SNode node) {
 		// start: create a name if none exists
 		if (Strings.isNullOrEmpty(((SNode) node).getName())) {
 			if (node instanceof SCorpus) {
@@ -191,25 +191,42 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 			// id a name if none exists
 			((SNode) node).setId("salt:/" + ((SNode) node).getName());
 		}
+	}
+
+	/**
+	 * Calls the super method an puts the given node into a node type index. an
+	 * exception will be thrown.
+	 * 
+	 * @param node to add
+	 */
+	@Override
+	protected void basicAddNode(SNode node) {
+		setNodeIdIfNecessary(node);
 
 		super.basicAddNode(node);
 	}
-	
+
 	@Override
 	public void addNode(SNode node) {
-    	super.addNode(node);
+		if (getDelegate() != null) {
+			// Normally, basicAddNode() would set the ID, since the delegate does not call
+			// it, set the ID here
+			setNodeIdIfNecessary(node);
+		}
+		
+		super.addNode(node);
 
-        // map some implementation types to the matching interfaces
-        Class<? extends SNode> key;
-        if (node instanceof SCorpus) {
-            key = SCorpus.class;
-        } else if (node instanceof SDocument) {
-            key = SDocument.class;
-        } else {
-            key = node.getClass();
-        }
-        // end: compute slot id
-        getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
+		// map some implementation types to the matching interfaces
+		Class<? extends SNode> key;
+		if (node instanceof SCorpus) {
+			key = SCorpus.class;
+		} else if (node instanceof SDocument) {
+			key = SDocument.class;
+		} else {
+			key = node.getClass();
+		}
+		// end: compute slot id
+		getIndexMgr().put(SaltUtil.IDX_NODETYPE, key, node);
 	}
 
 	// ============================ end: handling nodes
@@ -436,10 +453,8 @@ public class SCorpusGraphImpl extends SGraphImpl implements SCorpusGraph {
 	/**
 	 * Returns the corpus structure as an ascii tree.
 	 * 
-	 * @param sGraph
-	 *            the corpus structure to be printed
-	 * @param node
-	 *            root node to start from
+	 * @param sGraph the corpus structure to be printed
+	 * @param node   root node to start from
 	 * @param prefix
 	 * @param isTail
 	 * @return

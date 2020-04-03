@@ -17,9 +17,11 @@
  */
 package org.corpus_tools.salt.extensions.notification.graph.Tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.corpus_tools.salt.SaltFactory;
+import org.corpus_tools.salt.common.SCorpus;
 import org.corpus_tools.salt.common.SCorpusGraph;
 import org.corpus_tools.salt.common.SDocument;
 import org.corpus_tools.salt.common.SDocumentGraph;
@@ -31,6 +33,8 @@ import org.corpus_tools.salt.extensions.notification.SaltNotificationFactory;
 import org.corpus_tools.salt.graph.GRAPH_ATTRIBUTES;
 import org.corpus_tools.salt.impl.SaltFactoryImpl;
 import org.corpus_tools.salt.samples.SampleGenerator;
+import org.corpus_tools.salt.util.SaltUtil;
+import org.eclipse.emf.common.util.URI;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,9 +55,9 @@ public class SaltCommonsNotificationTest {
     }
 
     /**
-     * When adding nodes to a document graph/corpus graph, the graph linked with the resulting
-     * nodes should be of type {@link SDocumentGraph}/{@link SCorpusGraph} (and not of the delegates
-     * type).
+     * When adding nodes to a document graph/corpus graph, the graph linked with the
+     * resulting nodes should be of type {@link SDocumentGraph}/{@link SCorpusGraph}
+     * (and not of the delegates type).
      */
     @Test
     public void testLinkedGraph() {
@@ -83,6 +87,34 @@ public class SaltCommonsNotificationTest {
                 }
             }
         }
+
+    }
+
+    /**
+     * Tests whether the path is created correctly
+     */
+    @Test
+    public void testCreateSaltURI() {
+        SaltProject project = SaltFactory.createSaltProject();
+        SCorpusGraph graph = SaltFactory.createSCorpusGraph();
+        project.addCorpusGraph(graph);
+
+        // test path of corp1
+        SCorpus corp1 = SaltFactory.createSCorpus();
+        corp1.setName("corp1");
+        graph.addNode(corp1);
+        URI path = SaltUtil.createSaltURI(corp1.getId());
+        assertEquals(URI.createURI("salt:/corp1"), path);
+
+        // test path of corp2
+        SCorpus corp2 = graph.createCorpus(corp1, "corp2");
+        path = SaltUtil.createSaltURI(corp2.getId());
+        assertEquals(URI.createURI("salt:/corp1/corp2"), path);
+
+        // test path of doc1
+        SDocument doc1 = graph.createDocument(corp2, "doc1");
+        path = SaltUtil.createSaltURI(doc1.getId());
+        assertEquals(URI.createURI("salt:/corp1/corp2/doc1"), path);
 
     }
 
