@@ -1,3 +1,9 @@
+Version 3.4.1
+=============
+
+Fixes:
+- In notification graphs, the SCorpus and SDocument IDs where not set correctly
+
 Version 3.4.0
 =============
 
@@ -70,7 +76,7 @@ Version 3.2.0
 =============
 Enhancements:
 - Add notification support #100
-- Added VisJS based visualzation of the Salt graph (in addition to the DOT vis) #98
+- Added VisJS based visualization of the Salt graph (in addition to the DOT vis) #98
 - Comparison of corpus structures #101
 
 Fixes:
