@@ -843,7 +843,7 @@ public class SDocumentGraphImpl extends SGraphImpl implements SDocumentGraph {
 
 		for (STextualRelation sTextualRelation : getTextualRelations()) {
 
-			if (!newSTextualRelations.contains(sTextualRelation)) {
+			if (!newSTextualRelations.contains(sTextualRelation) && sTextualRelation.getTarget() == sTextualDS){
 				if (sTextualRelation.getStart() >= posInText) {
 					sTextualRelation.setStart(sTextualRelation.getStart() + sizeOfnewTexts);
 				}

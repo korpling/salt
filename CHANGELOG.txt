@@ -1,3 +1,9 @@
+Version 3.4.2
+=============
+
+Fixes:
+- Inserting tokens in documents with more than one text using `insertTokensAt(...)` modified the non-changed texts.
+
 Version 3.4.1
 =============
 
