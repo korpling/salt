@@ -583,8 +583,8 @@ public class SDocumentGraphTest {
 
 	/**
 	 * Tests if tokens are correctly returned to corresponding
-	 * {@link DataSourceSequence} objects. text1: tok2, tok6, tok1, tok4, tok5,
-	 * tok3 text2: tok3, tok2, tok1
+	 * {@link DataSourceSequence} objects. text1: tok2, tok6, tok1, tok4, tok5, tok3
+	 * text2: tok3, tok2, tok1
 	 * 
 	 * test11: covers tok1 of text 1 test12: covers tok2, tok3, tok4 of text 1
 	 * test13: covers all tokens of text 1 test14: covers all tokens of text 2
@@ -693,8 +693,8 @@ public class SDocumentGraphTest {
 
 	/**
 	 * Tests the following graph, and checks if the correct sequences are
-	 * overlapped: struct1 struct3 / \ / \ struct2 span1 \ | / \ \ tok1 tok2
-	 * tok3 tok4 tok5
+	 * overlapped: struct1 struct3 / \ / \ struct2 span1 \ | / \ \ tok1 tok2 tok3
+	 * tok4 tok5
 	 * 
 	 * 
 	 * @see de.hu_berlin.german.korpling.saltnpepper.salt.saltCommon.sDocumentStructure.SDocumentGraph#getOverlappedDSSequences(de.hu_berlin.german.korpling.saltnpepper.salt.saltCore.SNode)
@@ -1618,8 +1618,8 @@ public class SDocumentGraphTest {
 	}
 
 	/**
-	 * Tests the tokenization of a pre-tokenized text and checks if the old
-	 * tokens are removed correctly.
+	 * Tests the tokenization of a pre-tokenized text and checks if the old tokens
+	 * are removed correctly.
 	 */
 	@Test
 	public void testTokenize2() {
@@ -1637,9 +1637,9 @@ public class SDocumentGraphTest {
 	}
 
 	/**
-	 * Tests the tokenization of a pretokenized text and checks if the old
-	 * tokens are removed correctly. Further checks, that all annotations are
-	 * copied to the new created span node.
+	 * Tests the tokenization of a pretokenized text and checks if the old tokens
+	 * are removed correctly. Further checks, that all annotations are copied to the
+	 * new created span node.
 	 */
 	@Test
 	public void testTokenize3() {
@@ -1743,29 +1743,42 @@ public class SDocumentGraphTest {
 		text.add("be");
 		text.add("added");
 
+		STextualDS secondTextualDS = SaltFactory.createSTextualDS();
+		getFixture().addNode(secondTextualDS);
+		secondTextualDS.setText("Another text");
+		SToken secondTextTok1 = getFixture().createToken(secondTextualDS, 0, 7);
+		SToken secondTextTok2 = getFixture().createToken(secondTextualDS, 8, 12);
+		sTextualDS.setText(str.toString());
+
 		List<SToken> tokens = getFixture().insertTokensAt(sTextualDS, 5, text, true);
+
 		assertNotNull(tokens);
 		assertEquals(6, tokens.size());
 
-		assertEquals(11, getFixture().getTokens().size());
+		assertEquals(13, getFixture().getTokens().size());
 		assertEquals("This is the text to be added is the original Text ", sTextualDS.getText());
-		assertEquals(11, getFixture().getTextualRelations().size());
+		assertEquals(13, getFixture().getTextualRelations().size());
 
-		// This
-		assertEquals(Integer.valueOf(0), getFixture().getTextualRelations().get(0).getStart());
-		assertEquals(Integer.valueOf(4), getFixture().getTextualRelations().get(0).getEnd());
+		List<SToken> tokensForFirstText = getFixture().getSortedTokenByText(getFixture()
+				.getTokensBySequence(new DataSourceSequence<Number>(sTextualDS, 0, sTextualDS.getText().length())));
+		assertEquals(11, tokensForFirstText.size());
+		assertEquals("This", getFixture().getText(tokensForFirstText.get(0)));
+		assertEquals("is", getFixture().getText(tokensForFirstText.get(1)));
+		assertEquals("the", getFixture().getText(tokensForFirstText.get(2)));
+		assertEquals("text", getFixture().getText(tokensForFirstText.get(3)));
+		assertEquals("to", getFixture().getText(tokensForFirstText.get(4)));
+		assertEquals("be", getFixture().getText(tokensForFirstText.get(5)));
+		assertEquals("added", getFixture().getText(tokensForFirstText.get(6)));
+		assertEquals("is", getFixture().getText(tokensForFirstText.get(7)));
+		assertEquals("the", getFixture().getText(tokensForFirstText.get(8)));
+		assertEquals("original", getFixture().getText(tokensForFirstText.get(9)));
+		assertEquals("Text", getFixture().getText(tokensForFirstText.get(10)));
 
-		// is
-		assertEquals(Integer.valueOf(5), getFixture().getTextualRelations().get(5).getStart());
-		assertEquals(Integer.valueOf(7), getFixture().getTextualRelations().get(5).getEnd());
+		// check the tokens of the second text are not changed
+		assertEquals("Another text", secondTextualDS.getText());
+		assertEquals("Another", getFixture().getText(secondTextTok1));
+		assertEquals("text", getFixture().getText(secondTextTok2));
 
-		// added
-		assertEquals(Integer.valueOf(23), getFixture().getTextualRelations().get(10).getStart());
-		assertEquals(Integer.valueOf(28), getFixture().getTextualRelations().get(10).getEnd());
-
-		// second is
-		assertEquals(Integer.valueOf(29), getFixture().getTextualRelations().get(1).getStart());
-		assertEquals(Integer.valueOf(31), getFixture().getTextualRelations().get(1).getEnd());
 	}
 
 	@Test
@@ -1975,8 +1988,8 @@ public class SDocumentGraphTest {
 
 	/**
 	 * Toring and loading of document graph. Both graphs are compared with
-	 * isIsomorph(). This test checks whether isIsomorph finds the correct
-	 * matching candidates for nodes.
+	 * isIsomorph(). This test checks whether isIsomorph finds the correct matching
+	 * candidates for nodes.
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
