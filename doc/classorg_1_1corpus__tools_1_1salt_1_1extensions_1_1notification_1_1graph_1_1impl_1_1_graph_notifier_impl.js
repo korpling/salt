@@ -2,8 +2,8 @@ var classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1
 [
     [ "addLabel", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html#ac865846de9c9e849cf437a41431c8daf", null ],
     [ "addLayer", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html#affc54cf1f5f685c27eb826f27c9837ac", null ],
-    [ "addListener", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html#a0b0d06c52f1faa2ff788ced71f93baf8", null ],
     [ "addListener", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html#abb5d4bfa37d6c6fd518a27e9fb1fd53f", null ],
+    [ "addListener", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html#a0b0d06c52f1faa2ff788ced71f93baf8", null ],
     [ "addNode", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html#a95cf3d7209eda6b83f163e1afb8e7ac2", null ],
     [ "addRelation", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html#a8b43f30e7923aed9c1777f6e28d94284", null ],
     [ "getListener", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1graph_1_1impl_1_1_graph_notifier_impl.html#ab66c6dc069c9d08bb77a51723261c6f6", null ],

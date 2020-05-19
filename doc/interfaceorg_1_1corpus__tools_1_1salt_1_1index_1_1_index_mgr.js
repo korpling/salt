@@ -13,6 +13,6 @@ var interfaceorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr =
     [ "remove", "interfaceorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr.html#a68a1ec4156b64dde7d3dfe3171301660", null ],
     [ "removeAll", "interfaceorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr.html#a97a6f3d6ee2ec3a8227c599881306ac1", null ],
     [ "removeIndex", "interfaceorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr.html#aafca8b914beb5e665b0f84cf5aaeb051", null ],
-    [ "removeValue", "interfaceorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr.html#a5fa0783ff2f096caa810b2954ccfe198", null ],
-    [ "removeValue", "interfaceorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr.html#a5ebee58330357054c212f02d787188d0", null ]
+    [ "removeValue", "interfaceorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr.html#a5ebee58330357054c212f02d787188d0", null ],
+    [ "removeValue", "interfaceorg_1_1corpus__tools_1_1salt_1_1index_1_1_index_mgr.html#a5fa0783ff2f096caa810b2954ccfe198", null ]
 ];

@@ -1,7 +1,7 @@
 var classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory =
 [
-    [ "addListener", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#accb7ff2d576a6901b4c76dc288795440", null ],
     [ "addListener", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a6fa34df304f548e877ba3b575dbc6c9f", null ],
+    [ "addListener", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#accb7ff2d576a6901b4c76dc288795440", null ],
     [ "createGraph", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a11052e8e2308cbd50301527a95aece50", null ],
     [ "createLabel", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a7287ca50402596c2b69b4f86be68a16e", null ],
     [ "createLayer", "classorg_1_1corpus__tools_1_1salt_1_1extensions_1_1notification_1_1_salt_notification_factory.html#a30349f2abfa0069d23ec8d061ec58f65", null ],
