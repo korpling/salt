@@ -106,7 +106,27 @@ public class SGraphImpl extends GraphImpl<SNode, SRelation<SNode, SNode>, SLayer
 
 	/** {@inheritDoc} **/
 	@Override
+	@Deprecated
 	public List<SLayer> getLayerByName(String layerName) {
+		if ((layerName == null) || (layerName.isEmpty())) {
+			return (null);
+		}
+
+		List<SLayer> result = new ArrayList<>();
+		for (SLayer l : getLayers()) {
+			if ((l.getName() == null) || (l.getName().isEmpty())) {
+				break;
+			}
+			if (layerName.equals(l.getName())) {
+				result.add(l);
+			}
+		}
+		return result;
+	}
+
+	/** {@inheritDoc} **/
+	@Override
+	public List<SLayer> getLayersByName(String layerName) {
 		if ((layerName == null) || (layerName.isEmpty())) {
 			return (null);
 		}
