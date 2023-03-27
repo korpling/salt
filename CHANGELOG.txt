@@ -1,3 +1,11 @@
+Version 3.4.3
+=============
+
+Fixes:
+- The graph traversal module reported cycles in graphs even when the offending
+edges were excluded by 'checkConstraint' and when using the "bottom up depth
+first" traversal method.
+
 Version 3.4.2
 =============
 
