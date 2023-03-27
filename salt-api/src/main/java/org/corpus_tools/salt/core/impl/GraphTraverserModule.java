@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+import org.corpus_tools.salt.SALT_TYPE;
 import org.corpus_tools.salt.core.GraphTraverseHandler;
 import org.corpus_tools.salt.core.SGraph;
 import org.corpus_tools.salt.core.SGraph.GRAPH_TRAVERSE_TYPE;
@@ -331,16 +332,28 @@ public class GraphTraverserModule {
                     // check if cycle exists
                     if (visitedNodes.contains(currentEntry.node)) {
                       StringBuffer text = new StringBuffer();
-                      if (currentNodePath != null) {
-                        for (SNode node : currentNodePath) {
-                          if (node != null) {
-                            text.append(node.getId());
+                      for (NodeEntry node : parentStack) {
+                        if (node != null) {
+                          text.append(node.node.getId());
+                        } else {
+                          text.append("null");
+                        }
+                        if (node.rel == null) {
+                          text.append("-->");
+                        } else {
+                          // Get more specific debug information about the edge
+                          Set<SALT_TYPE> saltTypes = SALT_TYPE.class2SaltType(node.rel.getClass());
+                          saltTypes.remove(SALT_TYPE.STEXT_OVERLAPPING_RELATION);
+                          SALT_TYPE edgeClass = saltTypes.iterator().next();
+                          String edgeType = node.rel.getType();
+                          if (edgeType == null || edgeType.isEmpty()) {
+                            text.append(" --(" + edgeClass + ")--> ");
                           } else {
-                            text.append("null");
+                            text.append(" --(" + edgeClass + "/" + edgeType + ")--> ");
                           }
-                          text.append(" --> ");
                         }
                       }
+
                       text.append(currentEntry.node.getId());
                       throw new SaltInvalidModelException("A cycle in graph '" + graph.getId()
                           + "' has been detected, while traversing with type '" + traverseType
